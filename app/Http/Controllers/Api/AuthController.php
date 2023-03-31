@@ -44,14 +44,12 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = Auth::user();
             $success['token'] = $user->createToken('appToken')->accessToken;
-            //After successfull authentication, notice how I return json parameters
             return response()->json([
                 'success' => true,
                 'user' => $user,
                 'token' => $success
             ]);
         } else {
-            //if authentication is unsuccessfull, notice how I return json parameters
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid Email or Password',
@@ -106,4 +104,15 @@ class AuthController extends Controller
             ]);
         }
     }
+
+    public function verifyEmail(Request $request) {
+        $user = User::where('email', $request->email)->first();
+//        dd($user);
+
+        if (!$user) {
+            return response()->json(['message'=>'Email not found'], 404);
+        }
+        return response()->json(['message'=>'email verified'], 200);
+    }
+
 }

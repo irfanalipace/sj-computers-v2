@@ -27,6 +27,7 @@ Route::post('password/email', [AuthController::class, 'forget']);
 Route::post('password/reset', [AuthController::class, 'reset']);
 //Route::post('password/change', [AuthController::class, 'changePassword']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
+Route::post('email/verify', [AuthController::class, 'verifyEmail']);
 
 Route::middleware('auth:api')->group(function () {
     Route::resource('products', ProductController::class);
