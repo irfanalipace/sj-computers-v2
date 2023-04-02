@@ -1,23 +1,21 @@
 import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 
-import "./App.css";
+import store from "@core/store/store";
+import { Router } from "./routes";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
     return (
-        <div className="App">
-            <div className="row">
-                <div className="col-xl-2 col-lg-4 col-md-6 col-12">
-                    First coloumn
-                </div>
-                <div className="col-xl-2 col-lg-4 col-md-6 col-12">
-                    Second coloumn
-                </div>
+        <Provider store={store}>
+            <div>
+                <BrowserRouter>
+                    <Router />
+                </BrowserRouter>
             </div>
-            <h1>Hello Index</h1>
-
-            <p>What a REAVELation</p>
-        </div>
+        </Provider>
     );
 }
 
