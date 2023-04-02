@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import * as types from "@core/store/features/auth/authTypes";
+import * as types from "@store/features/auth/authTypes";
 import { loginApi, logoutApi } from "@api/auth/login";
 
 export const login = (credentials) => {

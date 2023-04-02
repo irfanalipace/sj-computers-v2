@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import * as types from "@core/store/features/auth/authTypes";
+import * as types from "@store/features/auth/authTypes";
 
 const initialState = {
     user: null,
