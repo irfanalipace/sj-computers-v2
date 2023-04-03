@@ -3,9 +3,8 @@ const webpack = require("webpack");
 
 module.exports = {
     entry: "./src/Index.js",
-
     mode: "development",
-
+    // target: "node",
     module: {
         rules: [
             {
