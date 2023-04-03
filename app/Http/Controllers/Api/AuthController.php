@@ -3,9 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ForgetRequest;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\LogoutRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ResetRequest;
+use App\Http\Requests\VerifyEmailRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+
 //use App\Providers\RouteServiceProvider;
 use App\Models\User;
+
 //use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -15,33 +24,31 @@ use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    /**
+     * @param RegisterRequest $request
+     * @return JsonResponse
+     */
+    public function register(RegisterRequest $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => ['required', 'string', 'max:255'],
-//            'c_password' => 'required|same:password',
-        ]);
-
-        if($validator->fails()){
-            return response()->json(["message"=>"validation error","success"=>false,'error'=>$validator->errors()]);
-        }
-//            return $this->sendError('Validation Error.', $validator->errors());
-
-        $input = $request->all();
+        $input = $request->validated();
         $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')->accessToken;
-        $success['name'] =  $user->name;
+        $user = User::query()->create($input);
+        $success['token'] = $user->createToken('MyApp')->accessToken;
+        $success['name'] = $user->name;
 
-//        return $this->sendResponse($success, 'User register successfully.');
-        return response()->json(["message"=>"succesfully registered","success"=>true,"data"=>$success], 200);
+        return response()->json([
+            "message" => "Successfully registered",
+            "success" => true,
+            "data" => $success
+        ]);
     }
 
-    public function login()
+    /**
+     * @return JsonResponse
+     */
+    public function login(LoginRequest $request): JsonResponse
     {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
+        if (Auth::attempt(['email' => $request->validated()['email'], 'password' => $request->validated()['password']])) {
             $user = Auth::user();
             $success['token'] = $user->createToken('appToken')->accessToken;
             return response()->json([
@@ -57,20 +64,25 @@ class AuthController extends Controller
         }
     }
 
-    public function forget() {
-        $credentials = request()->validate(['email' => 'required|email']);
-//        dd($credentials);
+    /**
+     * @return JsonResponse
+     */
+    public function forget(ForgetRequest $request): JsonResponse
+    {
+        $credentials = $request->validated()['email'];
         Password::sendResetLink($credentials);
 
-        return response()->json(["msg" => 'Reset password link sent on your email id.']);
+        return response()->json([
+            "msg" => 'Reset password link sent on your email id.'
+        ]);
     }
 
-    public function reset() {
-        $credentials = request()->validate([
-            'email' => 'required|email',
-            'token' => 'required|string',
-            'password' => 'required|string|confirmed'
-        ]);
+    /**
+     * @return JsonResponse
+     */
+    public function reset(ResetRequest $request): JsonResponse
+    {
+        $credentials = $request->validated();
 
         $reset_password_status = Password::reset($credentials, function ($user, $password) {
             $user->password = $password;
@@ -78,16 +90,21 @@ class AuthController extends Controller
         });
 
         if ($reset_password_status == Password::INVALID_TOKEN) {
-            return response()->json(["msg" => "Invalid token provided"], 400);
+            return response()->json([
+                "msg" => "Invalid token provided"
+            ], 400);
         }
 
-        return response()->json(["msg" => "Password has been successfully changed"]);
+        return response()->json([
+            "msg" => "Password has been successfully changed"
+        ]);
     }
 
 
-
-
-        public function logout(Request $request)
+    /**
+     * @return JsonResponse
+     */
+    public function logout(LogoutRequest $request): JsonResponse
     {
         if (Auth::user()) {
             $user = Auth::user()->token();
@@ -97,7 +114,7 @@ class AuthController extends Controller
                 'success' => true,
                 'message' => 'Logout successfully'
             ]);
-        }else {
+        } else {
             return response()->json([
                 'success' => false,
                 'message' => 'Unable to Logout'
@@ -105,14 +122,23 @@ class AuthController extends Controller
         }
     }
 
-    public function verifyEmail(Request $request) {
-        $user = User::where('email', $request->email)->first();
-//        dd($user);
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function verifyEmail(VerifyEmailRequest $request): JsonResponse
+    {
+        $user = User::query()
+            ->where('email', $request->validated()['email'])
+            ->first();
 
         if (!$user) {
-            return response()->json(['message'=>'Email not found'], 404);
+            return response()->json([
+                'message' => 'Email not found'
+            ], 404);
         }
-        return response()->json(['message'=>'email verified'], 200);
+        return response()->json([
+            'message' => 'email verified'
+        ]);
     }
-
 }
