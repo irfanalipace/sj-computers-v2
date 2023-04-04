@@ -22,7 +22,7 @@ const Login = () => {
 
     return (
         <div>
-        <div className='container'>
+        <div className='container form-container'>
           <div className='row'>
             <div className='header-logo'>
               <Header />
@@ -115,7 +115,7 @@ const Login = () => {
        <div className="container-fluid bg-light">
   <div className="row">
     <div className="col">
-      <div className="sticky-bottom py-3" style={{ backgroundColor: '#e9ecef'}}>
+      <div className="sticky-bottom py-3" >
       <Footer />
       </div>
     </div>
