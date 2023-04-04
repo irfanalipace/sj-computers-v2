@@ -2,6 +2,7 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Home from "@pages/Home/Home";
 import Login from "@pages/Auth/Login";
+import Register from "@pages/Auth/Register";
 import Profile from "@pages/User/Profile";
 
 export const Router = () => {
@@ -15,6 +16,14 @@ export const Router = () => {
             element: (
                 <AuthRoute>
                     <Login />
+                </AuthRoute>
+            ),
+        },
+        {
+            path: "/register",
+            element: (
+                <AuthRoute>
+                    <Register />
                 </AuthRoute>
             ),
         },
