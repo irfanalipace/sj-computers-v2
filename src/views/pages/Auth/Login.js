@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import { Link } from "react-router-dom";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
@@ -7,15 +9,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 
 import '../../../App.css'
+
 const Login = () => {
-    const dispatch = useDispatch();
-    const option = {
-        email: "haroon@gmail.com",
-        password: "12345678",
-    };
-    useEffect(() => {
-        dispatch(login(option));
-    }, []);
+    // const dispatch = useDispatch();
+    // const option = {
+    //     email: "haroon@gmail.com",
+    //     password: "12345678",
+    // };
+    // useEffect(() => {
+    //     dispatch(login(option));
+    // }, []);
 
     return (
         <div>
@@ -94,7 +97,7 @@ const Login = () => {
             </div>
   
             <div className='react-heading' >
-              <div class="rectangle">
+              <div className="rectangle">
                 Create your SJ Computer account
               </div>
             </div>
@@ -105,10 +108,19 @@ const Login = () => {
           </div>
   
         </div>
-        <div className='col-md-12' style={{ backgroundColor: '#e9ecef', height: '333px' }}>
+        {/* <div className='col-md-12' style={{ backgroundColor: '#e9ecef', height: '333px' }}>
           <Footer />
         </div>
-      
+       */}
+       <div className="container-fluid bg-light">
+  <div className="row">
+    <div className="col">
+      <div className="sticky-bottom py-3" style={{ backgroundColor: '#e9ecef'}}>
+      <Footer />
+      </div>
+    </div>
+  </div>
+</div>
       </div>
         //  <Link to={"/"}>Home</Link>
         //  <Link to={"/login"}>Login</Link>
