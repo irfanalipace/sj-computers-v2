@@ -1,30 +1,22 @@
-import React from "react";
-import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-import store from "@store/store";
 import { Router } from "./routes";
+import {alreadyLoggedIn} from '@store/auth/authSlice'
 import "@fortawesome/fontawesome-free/css/all.css";
-
 import "bootstrap/dist/css/bootstrap.min.css";
-import Profile from "./views/pages/User/Profile";
-import Register from "./views/pages/Auth/Register";
-import ResetPassWord from "./views/pages/Auth/ResetPassword";
-import VerifyOTP from "./views/pages/Auth/VerifyOTP";
 
 function App() {
+    const dispatch = useDispatch();
+    const token = getToken();
+    if (token) {
+        dispatch(alreadyLoggedIn());
+    }
+
     return (
-        <Provider store={store}>
-            <div>
-                <BrowserRouter>
-                    <Router />
-                </BrowserRouter>
-                {/* <Profile /> */}
-                {/* <Register /> */}
-                {/* <ResetPassWord /> */}
-               {/* <VerifyOTP /> */}
-            </div>
-        </Provider>
+        <BrowserRouter>
+            <Router />
+        </BrowserRouter>
     );
 }
 

@@ -47,7 +47,6 @@ const VerifyOTP = () => {
               <a href="/sign-in" className='text-decoration-none'>I need more help</a>
             </p>
 
-
           </form>
     
           <div >
