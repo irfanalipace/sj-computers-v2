@@ -1,5 +1,5 @@
-import * as types from "@store/features/auth/authTypes";
-import { loginApi, logoutApi } from "@api/auth/login";
+import * as types from "@store/auth/authTypes";
+import { loginApi, logoutApi } from "@api/auth";
 import { saveToken } from "@services/jwtService";
 
 export const login = (credentials) => {

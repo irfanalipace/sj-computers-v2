@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getToken, destroyToken } from "@services/jwt.service";
+import { getToken, destroyToken } from "@services/jwtService";
 
 /**
  * Service to call HTTP request via Axios
@@ -10,7 +10,8 @@ const ApiService = {
     init() {
         if (!this.instance) {
             this.instance = axios.create({ withCredentials: true });
-            this.instance.defaults.baseURL = process.env.API_BASE_URL;
+            this.instance.defaults.baseURL = "http://localhost:8000/api";
+            // this.instance.defaults.baseURL = process.env.API_BASE_URL;
             this.instance.defaults.headers["content-type"] = "Application/JSON";
             if (getToken()) {
                 this.setHeader("Authorization", `Bearer ${getToken()}`);
@@ -76,8 +77,6 @@ const ApiService = {
                     resolve(res);
                 })
                 .catch((error) => {
-                    // console.log(error.response.data);
-                    // console.log(error.response.headers);
                     const err = {
                         data: {
                             success: 0,
@@ -85,7 +84,7 @@ const ApiService = {
                             url: this.instance.defaults.baseURL + resource,
                         },
                     };
-                    if (error.response.status === 401) {
+                    if (error.status === 401) {
                         destroyToken();
                     }
                     reject(err);
@@ -124,7 +123,6 @@ const ApiService = {
 
     delete(resource) {
         return this.instance.delete(resource).catch((error) => {
-            // console.log(error);
             throw new Error(`ApiService ${error}`);
         });
     },

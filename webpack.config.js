@@ -3,9 +3,8 @@ const webpack = require("webpack");
 
 module.exports = {
     entry: "./src/Index.js",
-
     mode: "development",
-
+    // target: "node",
     module: {
         rules: [
             {
@@ -49,7 +48,7 @@ module.exports = {
         extensions: ["", ".js", ".jsx"],
         alias: {
             "@images": path.resolve(__dirname, "src/assets/images"),
-            "@components": path.resolve(__dirname, "src/components"),
+            "@components": path.resolve(__dirname, "src/views/components"),
             "@common": path.resolve(__dirname, "src/views/components/common"),
             "@pages": path.resolve(__dirname, "src/views/pages"),
             "@store": path.resolve(__dirname, "src/core/store"),

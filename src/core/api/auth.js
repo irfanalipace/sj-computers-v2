@@ -1,6 +1,6 @@
 import ApiService from "@services/apiService";
 
-export function loginApi(email, password) {
+export function loginApi({ email, password }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/login?email=${email}&password=${password}`)
             .then((response) => {
@@ -9,7 +9,7 @@ export function loginApi(email, password) {
                 resolve(data);
             })
             .catch(({ message }) => {
-                console.log("Console Log: : error", message);
+                console.log("Console Log: : error Login", message);
                 reject(message);
             });
     });

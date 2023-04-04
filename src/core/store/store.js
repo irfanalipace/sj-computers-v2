@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import thunkMiddleware from "redux-thunk";
-import authReducer from "@store/features/auth/authSlice";
+import authReducer from "@store/auth/authSlice";
 
 const store = configureStore({
     reducer: {

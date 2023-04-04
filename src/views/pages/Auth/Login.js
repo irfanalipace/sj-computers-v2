@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import logo from '@images/fa-icon.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
+=======
+import { useDispatch } from "react-redux";
+import { login } from "@store/auth/authThunks";
+>>>>>>> ec6df76d8b4de39dc9984ecaa98e8721028696b6
 
 import '../../../App.css'
 const Login = () => {
+    const dispatch = useDispatch();
+    const option = {
+        email: "haroon@gmail.com",
+        password: "12345678",
+    };
+    useEffect(() => {
+        // dispatch(login(option));
+    }, []);
+
     return (
         <div>
         <div className='container'>
