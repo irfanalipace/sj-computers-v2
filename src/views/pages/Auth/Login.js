@@ -10,7 +10,7 @@ const Login = () => {
         password: "12345678",
     };
     useEffect(() => {
-        // dispatch(login(option));
+        dispatch(login(option));
     }, []);
 
     return (

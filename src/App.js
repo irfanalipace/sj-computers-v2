@@ -1,21 +1,22 @@
-import React from "react";
-import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-import store from "@store/store";
 import { Router } from "./routes";
-
-import "bootstrap/dist/css/bootstrap.min.css";
+import { alreadyLoggedIn } from "@store/auth/authSlice";
+import { getToken } from "@services/jwtService";
 
 function App() {
+    const dispatch = useDispatch();
+    const token = getToken();
+    if (token) {
+        dispatch(alreadyLoggedIn());
+    }
+
     return (
-        <Provider store={store}>
-            <div>
-                <BrowserRouter>
-                    <Router />
-                </BrowserRouter>
-            </div>
-        </Provider>
+        <BrowserRouter>
+            <Router />
+        </BrowserRouter>
     );
 }
 

@@ -1,11 +1,8 @@
 import { Navigate, useRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 import Home from "@pages/Home/Home";
 import Login from "@pages/Auth/Login";
 import Profile from "@pages/User/Profile";
-
-import React from "react";
 
 export const Router = () => {
     const routes = [
@@ -15,7 +12,11 @@ export const Router = () => {
         },
         {
             path: "/login",
-            element: <Login />,
+            element: (
+                <AuthRoute>
+                    <Login />
+                </AuthRoute>
+            ),
         },
         {
             path: "/profile",
@@ -34,6 +35,10 @@ export const Router = () => {
 
 export function ProtectedRoute({ children }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
     return isAuthenticated ? children : <Navigate to="/login" replace />;
+}
+
+export function AuthRoute({ children }) {
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    return isAuthenticated ? <Navigate to="/" replace /> : children;
 }
