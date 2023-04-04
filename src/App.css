@@ -160,9 +160,9 @@ h5:after {
 }.h5-heading {
   padding-top: 29px !important;
   /* text-align: center; */
-  width: 864px;
-  font-size: 14px;
-  padding-left: 431px;
+  width: 864px !important;
+  font-size: 14px !important;
+  padding-left: 431px !important;
   color: #706e6e;
 }
 .footer-mute{
@@ -205,4 +205,25 @@ font-style: normal;
 .custom-control-input {
     width: 19px !important; /* Change this value to adjust the width */
     height: 15px !important;
+  }
+  .sticky-bottom {
+    position: sticky;
+    bottom: 0;
+  }
+  
+
+  @media screen and (max-width:425px) {
+    .auth-inner-body{
+      width: 100% !important;
+    }
+  }
+
+  @media screen and (max-width:425px) {
+  .h5-heading {
+    padding-top: 10px !important;
+    /* text-align: center; */
+    /* width: 864px; */
+    font-size: 10px !important;
+    color: #706e6e !important;
+}
   }
