@@ -20,16 +20,16 @@ use App\Http\Controllers\Api\AuthController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-//Route::middleware('auth:api')->post('/register', 'RegisterController@register');
+Route::get('test', [AuthController::class, 'test']);
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('password/email', [AuthController::class, 'forget']);
 Route::post('password/reset', [AuthController::class, 'reset']);
 //Route::post('password/change', [AuthController::class, 'changePassword']);
-Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
 Route::post('email/verify', [AuthController::class, 'verifyEmail']);
+Route::put('update/profile', [AuthController::class, 'updateProfile']);
+
 
 Route::middleware('auth:api')->group(function () {
-    Route::resource('products', ProductController::class);
+    Route::post('logout', [AuthController::class, 'logout']);
 });

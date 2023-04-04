@@ -1,46 +1,45 @@
 <?php
 
-namespace App\Http\Controllers\api;
-
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller as Controller;
+
 
 class BaseController extends Controller
 {
     /**
-     * success response method.
+     * Send a success response.
      *
-     * @return \Illuminate\Http\Response
+     * @param  string|array  $data
+     * @param  string  $message
+     * @param  int  $status
+     * @return \Illuminate\Http\JsonResponse
      */
-
-    public function sendResponse($result, $message)
+    public function sendResponse($data, $message = 'Success', $status = 200): JsonResponse
     {
-        $response = [
-            'success' => true,
-            'data' => $result,
+        return response()->json([
+            'status' => $status,
             'message' => $message,
-        ];
-        return response()->json($response, 200);
+            'data' => $data
+        ], $status);
     }
 
     /**
-     * return error response.
+     * Send an error response.
      *
-     * @return \Illuminate\Http\Response
+     * @param  string  $error
+     * @param  int  $code
+     * @param  int  $status
+     * @return \Illuminate\Http\JsonResponse
      */
-
-    public function sendError($error, $errorMessages = [], $code = 404)
+    public function sendError($error, $code = 400, $status = 400): JsonResponse
     {
-        $response = [
-            'success' => false,
-            'message' => $error,
-        ];
-
-        if (!empty($errorMessages)) {
-            $response['data'] = $errorMessages;
-        }
-        return response()->json($response, $code);
+        return response()->json([
+            'status' => $status,
+            'error' => $error,
+            'code' => $code
+        ], $status);
     }
 }
