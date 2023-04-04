@@ -1,16 +1,11 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
-import logo from '@images/fa-icon.png'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
-=======
 import { useDispatch } from "react-redux";
 import { login } from "@store/auth/authThunks";
->>>>>>> ec6df76d8b4de39dc9984ecaa98e8721028696b6
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 import '../../../App.css'
 const Login = () => {
     const dispatch = useDispatch();
@@ -110,10 +105,10 @@ const Login = () => {
           </div>
   
         </div>
-        <div className='col-md-12' style={{ backgroundColor: '#e9ecef', height: '290px' }}>
+        <div className='col-md-12' style={{ backgroundColor: '#e9ecef', height: '333px' }}>
           <Footer />
         </div>
-        <Link to={"/Profile"}>Profile</Link>
+      
       </div>
         //  <Link to={"/"}>Home</Link>
         //  <Link to={"/login"}>Login</Link>

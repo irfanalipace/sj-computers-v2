@@ -10,17 +10,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Profile from "./views/pages/User/Profile";
 import Register from "./views/pages/Auth/Register";
 import ResetPassWord from "./views/pages/Auth/ResetPassword";
+import VerifyOTP from "./views/pages/Auth/VerifyOTP";
 
 function App() {
     return (
         <Provider store={store}>
             <div>
-                {/* <BrowserRouter>
+                <BrowserRouter>
                     <Router />
-                </BrowserRouter> */}
+                </BrowserRouter>
                 {/* <Profile /> */}
                 {/* <Register /> */}
-                <ResetPassWord />
+                {/* <ResetPassWord /> */}
+               {/* <VerifyOTP /> */}
             </div>
         </Provider>
     );
