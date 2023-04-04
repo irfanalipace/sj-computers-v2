@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LogoutRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,9 @@ class LogoutRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=>'string|max:255',
+            'email'=>'string|email|unique:users,email',
+            'password'=>'string|min:8|confirmed'
         ];
     }
 }

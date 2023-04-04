@@ -17,6 +17,7 @@ use App\Http\Requests\LogoutRequest;
 use Illuminate\Auth\Notifications\ResetPassword;
 use App\Http\Requests\ForgetRequest;
 use App\Http\Requests\VerifyEmailRequest;
+use App\Http\Requests\UpdateProfileRequest;
 
 class AuthController extends BaseController
 {
@@ -60,7 +61,7 @@ class AuthController extends BaseController
     }
 
 
-    public function forget(ForgetRequest $request)
+    public function forgetPassword(ForgetRequest $request)
     {
         $validator = $request->all();
 
@@ -82,7 +83,7 @@ class AuthController extends BaseController
     }
 
 
-    public function reset(ResetPassword $request)
+    public function resetPassword(ResetPassword $request)
     {
         $validator = $request->all();
 
@@ -107,7 +108,7 @@ class AuthController extends BaseController
     }
 
 
-        public function logout(LogoutRequest $request)
+    public function logout(LogoutRequest $request)
     {
         if (Auth::user()) {
             $user = Auth::user()->token();
@@ -126,15 +127,11 @@ class AuthController extends BaseController
         return $this->sendResponse([], 'Email Verified.');
     }
 
-    public function updateProfile(Request $request) {
+    public function updateProfile(UpdateProfileRequest $request) {
 
+        $validator = $request->all();
+        dd($validator);
         $user = Auth::user();
-
-        $validator = $request->validate([
-           'name'=>'string|max:255',
-           'email'=>'string|email|unique:users,email,'.$user->id,
-           'password'=>'string|min:8|confirmed'
-        ]);
 
         if (isset($validator['password'])) {
             $validator['password'] = bcrypt($validator['password']);
