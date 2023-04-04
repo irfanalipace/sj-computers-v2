@@ -1,6 +1,6 @@
-import * as types from "@store/auth/authTypes";
+import { LOGIN, LOGOUT, REGISTER } from "@store/auth/authSlice";
 import { loginApi, logoutApi } from "@api/auth";
-import { saveToken } from "@services/jwtService";
+import { saveToken, destroyToken } from "@services/jwtService";
 
 export const login = (credentials) => {
     return async (dispatch) => {
@@ -12,10 +12,14 @@ export const login = (credentials) => {
             //     userEmail: "test@email.com",
             // };
             saveToken(token);
-            dispatch({ type: types.LOGIN_SUCCESS, payload: credentials });
+            // dispatch({ type: types.LOGIN, payload: credentials });
         } catch (error) {
             console.log("Something went wrong in login", error);
         }
+        saveToken(
+            "fdsfsafsafsaffsafsfsafashfjshfjksahfjk2374264g2jh4g2g42jh4gj2g"
+        );
+        dispatch({ type: LOGIN, payload: credentials });
     };
 };
 
@@ -29,7 +33,7 @@ export const register = (credentials) => {
             //     userEmail: "test@email.com",
             // };
             saveToken(token);
-            dispatch({ type: types.REGISTER_SUCCESS, payload: credentials });
+            dispatch({ type: REGISTER, payload: credentials });
         } catch (error) {
             console.log("Something went wrong in register", error);
         }
@@ -40,7 +44,8 @@ export const logout = () => {
     return async (dispatch) => {
         try {
             await logoutApi();
-            dispatch({ type: types.LOGOUT_SUCCESS });
+            destroyToken();
+            dispatch({ type: LOGOUT });
         } catch (error) {
             console.log("Something went wrong in logout", error);
         }

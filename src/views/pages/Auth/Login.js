@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { login } from "@store/auth/authThunks";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
+import logo from '@images/fa-icon.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
+
 import '../../../App.css'
 const Login = () => {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const Login = () => {
         password: "12345678",
     };
     useEffect(() => {
-        // dispatch(login(option));
+        dispatch(login(option));
     }, []);
 
     return (

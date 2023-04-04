@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import * as types from "@store/auth/authTypes";
 
 const initialState = {
     user: null,
@@ -10,24 +9,22 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        [types.LOGIN_SUCCESS]: (state, action) => {
+        LOGIN: (state, action) => {
             state.isAuthenticated = true;
             state.user = action.payload;
         },
-        [types.LOGOUT_SUCCESS]: (state) => {
+        LOGOUT: (state) => {
             state.isAuthenticated = false;
             state.user = null;
         },
-
-        [types.REGISTER_SUCCESS]: (state) => {
+        REGISTER: (state, action) => {
             state.isAuthenticated = true;
             state.user = action.payload;
         },
-        [types.REGISTER_SUCCESS]: (state) => {
-            state.isAuthenticated = false;
-            state.user = action.payload;
+        alreadyLoggedIn: (state) => {
+            state.isAuthenticated = true;
         },
     },
 });
-
+export const { LOGIN, LOGOUT, REGISTER, alreadyLoggedIn } = authSlice.actions;
 export default authSlice.reducer;
