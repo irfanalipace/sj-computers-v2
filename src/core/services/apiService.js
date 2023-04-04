@@ -1,4 +1,6 @@
 import axios from "axios";
+import { toast } from 'react-toastify';
+
 import { getToken, destroyToken } from "@services/jwtService";
 
 /**
@@ -29,6 +31,7 @@ const ApiService = {
 
     query(resource, params) {
         return this.instance.get(resource, params).catch((error) => {
+            toast.error('An error occurred');
             throw new Error(`ApiService ${error}`);
         });
     },
