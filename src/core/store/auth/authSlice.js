@@ -31,10 +31,10 @@ const authSlice = createSlice({
         },
         API_ERROR:  (state) => {
             state.apiError = true;
-            state.messageResponse = action.payload.message;
+            state.messageResponse = action.payload
         },
         
     },
-});R
-export const { LOGIN, LOGOUT, EGISTER, alreadyLoggedIn ,API_ERROR } = authSlice.actions;
+});
+export const { LOGIN, LOGOUT, REGISTER, alreadyLoggedIn ,API_ERROR } = authSlice.actions;
 export default authSlice.reducer;

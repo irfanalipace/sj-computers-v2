@@ -31,7 +31,7 @@ const ApiService = {
 
     query(resource, params) {
         return this.instance.get(resource, params).catch((error) => {
-            toast.error('An error occurred');
+            toast.error('An error occurred while fetching data from the API.');
             throw new Error(`ApiService ${error}`);
         });
     },
