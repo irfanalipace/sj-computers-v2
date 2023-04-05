@@ -25,6 +25,7 @@ class VerifyEmailRequest extends FormRequest
     {
         return [
             'email' => ['required', 'email:rfc,dns'],
+            'token' => ['required']
         ];
     }
 }
