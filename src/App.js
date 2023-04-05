@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import { getToken } from "@services/jwtService";
 import { Router } from "./routes";
 import { alreadyLoggedIn } from "@store/auth/authSlice";
+import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -14,7 +15,7 @@ function App() {
     if (token) dispatch(alreadyLoggedIn());
     return (
         <div>
-            <ToastContainer />
+            <ToastContainer className={"notification-toast"} />
             <BrowserRouter>
                 <Router />
             </BrowserRouter>

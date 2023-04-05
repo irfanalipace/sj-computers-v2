@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, REGISTER, API_ERROR } from "@store/auth/authSlice";
+import { LOGIN, LOGOUT, REGISTER } from "@store/auth/authSlice";
 import { loginApi, logoutApi } from "@api/auth";
 import { saveToken, destroyToken } from "@services/jwtService";
 
@@ -10,7 +10,6 @@ export const login = (credentials) => {
             dispatch({ type: LOGIN, payload: credentials });
         } catch (error) {
             console.log("Something went wrong in login", error);
-            dispatch({ type: API_ERROR, payload: {} });
         }
     };
 };
@@ -24,7 +23,6 @@ export const register = (credentials) => {
             dispatch({ type: REGISTER, payload: credentials });
         } catch (error) {
             console.log("Something went wrong in register", error);
-            dispatch({ type: API_ERROR, payload: {} });
         }
     };
 };
@@ -37,7 +35,6 @@ export const logout = () => {
             dispatch({ type: LOGOUT });
         } catch (error) {
             console.log("Something went wrong in logout", error);
-            dispatch({ type: API_ERROR, payload: {} });
         }
     };
 };

@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     user: null,
     isAuthenticated: false,
-    apiError:false,
-    messageResponse:''
+    apiError: false,
+    messageResponse: "",
 };
 
 const authSlice = createSlice({
@@ -29,12 +29,8 @@ const authSlice = createSlice({
         alreadyLoggedIn: (state) => {
             state.isAuthenticated = true;
         },
-        API_ERROR:  (state) => {
-            state.apiError = true;
-            state.messageResponse = action.payload
-        },
-        
     },
 });
-export const { LOGIN, LOGOUT, REGISTER, alreadyLoggedIn ,API_ERROR } = authSlice.actions;
+export const { LOGIN, LOGOUT, REGISTER, alreadyLoggedIn, API_ERROR } =
+    authSlice.actions;
 export default authSlice.reducer;

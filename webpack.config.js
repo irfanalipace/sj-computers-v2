@@ -24,23 +24,23 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif)$/i,
                 use: [
-                  {
-                    loader: 'file-loader',
-                    options: {
-                      name: '[name].[ext]',
-                      outputPath: 'images/',
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name: "[name].[ext]",
+                            outputPath: "images/",
+                        },
                     },
-                  },
-                  {
-                    loader: 'url-loader',
-                    options: {
-                      limit: 8192, // Convert images < 8kb to base64 strings
-                      name: '[name].[ext]',
-                      outputPath: 'images/',
+                    {
+                        loader: "url-loader",
+                        options: {
+                            limit: 8192, // Convert images < 8kb to base64 strings
+                            name: "[name].[ext]",
+                            outputPath: "images/",
+                        },
                     },
-                  },
                 ],
-              },
+            },
         ],
     },
 
@@ -71,7 +71,6 @@ module.exports = {
         },
         headers: { "Access-Control-Allow-Origin": "" },
         port: 3000,
-        hot: true,
         historyApiFallback: true,
     },
 
