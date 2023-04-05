@@ -27,12 +27,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('test', [AuthController::class, 'test']);
 Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('password/email', [AuthController::class, 'forget']);
 Route::post('password/reset', [AuthController::class, 'reset']);
 //Route::post('password/change', [AuthController::class, 'changePassword']);
-Route::post('send-mail', [VerificationController::class, 'emailVerificationLink'])->name('send-mail');
-Route::post('verify-email', [VerificationController::class, 'verifyEmail'])->name('verify-email');
 Route::put('update/profile', [AuthController::class, 'updateProfile']);
 
 Route::middleware('auth:api')->group(function () {
