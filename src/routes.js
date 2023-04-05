@@ -2,6 +2,8 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Home from "@pages/Home/Home";
 import Login from "@pages/Auth/Login";
+import VerifyOTP from "@pages/Auth/VerifyOTP";
+
 import Register from "@pages/Auth/Register";
 import Profile from "@pages/User/Profile";
 
@@ -32,19 +34,19 @@ export const Router = () => {
                 </AuthRoute>
             ),
         },
-        {
-            path: "/otp-option",
-            element: (
-                <AuthRoute>
-                    <Login />
-                </AuthRoute>
-            ),
-        },
+        // {
+        //     path: "/otp-option",
+        //     element: (
+        //         <AuthRoute>
+        //             <Login />
+        //         </AuthRoute>
+        //     ),
+        // },
         {
             path: "/verify-otp",
             element: (
                 <AuthRoute>
-                    <Login />
+                    <VerifyOTP />
                 </AuthRoute>
             ),
         },

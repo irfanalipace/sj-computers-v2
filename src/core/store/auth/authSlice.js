@@ -11,10 +11,10 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        LOADING:(state)=>{
+        LOADING: (state) => {
             state.isLoading = true;
         },
-        CLEAR_LOADING:(state)=>{
+        CLEAR_LOADING: (state) => {
             state.isLoading = false;
         },
         LOGIN: (state, action) => {
@@ -35,7 +35,18 @@ const authSlice = createSlice({
         alreadyLoggedIn: (state) => {
             state.isAuthenticated = true;
         },
+        VERIFY_EMAIL: (state, payload) => {
+            state.user.email = payload;
+        },
     },
 });
-export const { LOGIN, LOGOUT, REGISTER, alreadyLoggedIn, LOADING, CLEAR_LOADING } =  authSlice.actions;
+export const {
+    LOGIN,
+    LOGOUT,
+    REGISTER,
+    alreadyLoggedIn,
+    LOADING,
+    CLEAR_LOADING,
+    VERIFY_EMAIL
+} = authSlice.actions;
 export default authSlice.reducer;

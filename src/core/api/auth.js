@@ -7,9 +7,9 @@ export function loginApi({ email, password }) {
                 console.log("file: auth.module.js | login| response", response);
                 resolve(response);
             })
-            .catch(({ message }) => {
-                console.log("Console Log: : error Login", message);
-                reject(message);
+            .catch(e => {
+                console.log("Console Log: : error Login", e);
+                reject(e);
             });
     });
 }
@@ -28,9 +28,9 @@ export function registerApi(name, email, password) {
                 );
                 resolve(response);
             })
-            .catch(({ message }) => {
-                console.log("Console Log: : error", message);
-                reject(message);
+            .catch(e => {
+                console.log("Console Log: : error", e);
+                reject(e);
             });
     });
 }
@@ -48,9 +48,9 @@ export function logoutApi() {
                 );
                 resolve(response);
             })
-            .catch(({ message }) => {
-                console.log("Console Log: : error", message);
-                reject(message);
+            .catch(e => {
+                console.log("Console Log: : error", e);
+                reject(e);
             });
     });
 }
@@ -68,14 +68,14 @@ export function resetPasswordApi() {
                 );
                 resolve(response);
             })
-            .catch(({ message }) => {
-                console.log("Console Log: : error", message);
-                reject(message);
+            .catch(e => {
+                console.log("Console Log: : error", e);
+                reject(e);
             });
     });
 }
 
-export function verifyEmailAddress(email) {
+export function verifyEmailApi(email) {
     return new Promise((resolve, reject) => {
         ApiService.post(`email/verify?email=${email}`, {
             // userId: email,
@@ -88,9 +88,29 @@ export function verifyEmailAddress(email) {
                 );
                 resolve(response);
             })
-            .catch(({ message }) => {
-                console.log("Console Log: : error", message);
-                reject(message);
+            .catch(e => {
+                console.log("Console Log: : error", e);
+                reject(e);
+            });
+    });
+}
+
+export function verifyOtpApi(otp) {
+    return new Promise((resolve, reject) => {
+        ApiService.post(`email/verify?otp${otp}`, {
+            // userId: email,
+            // password,
+        })
+            .then((response) => {
+                console.log(
+                    "file: auth.module.js | verifyEmailAddress| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch(e => {
+                console.log("Console Log: : error", e);
+                reject(e);
             });
     });
 }

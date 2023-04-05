@@ -1,69 +1,99 @@
-import React from 'react'
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
-import { faInfo } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-// import vectoricon from '../image/vector.png'
-// import './style.css'
-import '../../../App.css'
+import Header from "@components/auth/Header";
+import Footer from "@components/auth/Footer";
+import { verifyOtpApi } from "@api/auth";
+import Loader from "@common/spinner/Spinner";
+import "./auth.css";
 
 const VerifyOTP = () => {
+    const userEmail = useSelector((state) => state.auth.user?.email);
+    const [otp, setOtp] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
-  return (
-    <div>
-      <div className='container form-container-verify'>
-        <div className='row'>
-          <div className='header-logo'>
-            <Header />
-          </div>
+    function verifyOtpFunction(e) {
+        e.preventDefault();
+        setIsLoading(true);
+        verifyOtpApi(otp)
+            .then(() => {
+                setIsLoading(false);
+                navigate("/home");
+            })
+            .catch((e) => {
+                setIsLoading(false);
+                navigate("/home");
+                setError(e);
+            });
+    }
 
-          <form className='auth-inner-body'>
-            <h3 className='login-h3-verify'>Verification required</h3>
-            One Time Password (OTP) sent to<br></br> +92********80. Please enter it below.
-            <br></br><br></br>
-            <div className="mb-3">
-              <label className='name-lable font-weight-bold'>Enter OTP</label>
-              <input
-                type="text"
-                className="form-control"
-               
-              />
+    return (
+        <div>
+            <div className="container form-container-verify">
+                <div className="row">
+                    <div className="header-logo">
+                        <Header />
+                    </div>
+
+                    <form className="auth-inner-body">
+                        <h3 className="login-h3-verify">
+                            Verification required
+                        </h3>
+                        One Time Password (OTP) sent to<br></br> {userEmail}.
+                        Please enter it below.
+                        <br></br>
+                        <br></br>
+                        <div className="mb-3">
+                            <label className="name-lable font-weight-bold">
+                                Enter OTP
+                            </label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={otp}
+                                onChange={(e) => setOtp(e.target.value)}
+                            />
+                            
+                            {error && <p className="text-danger">Invalid OTP</p>}
+                        </div>
+                        <div className="d-grid">
+                            <button
+                                type="submit"
+                                className="btn btn-primary login-button"
+                                onClick={verifyOtpFunction}
+                                disabled={isLoading}
+                            >
+                                {isLoading ? <Loader /> : "Verify OTP"}
+                            </button>
+                        </div>
+                        <p className="text-muted small">
+                            <a
+                                href="#"
+                                className="text-decoration-none "
+                                style={{ paddingLeft: "172px" }}
+                            >
+                                Resend OTP
+                            </a>
+                        </p>
+                        <p className="forgot-password text-left">
+                            <a href="/sign-in" className="text-decoration-none">
+                                I need more help
+                            </a>
+                        </p>
+                    </form>
+
+                    <div></div>
+                    <div></div>
+                </div>
             </div>
-          
-
-            <div className="d-grid">
-              <button type="submit" className="btn btn-primary login-button">
-                Send OTP
-              </button>
+            <br></br>
+            <div className="col-md-12 sticky-bottom py-3" style={{}}>
+                <Footer />
             </div>
-            <p className="text-muted small">
-            <a href="#" className='text-decoration-none ' style={{paddingLeft:'172px'}}>Resend OTP</a> 
-            </p>
-
-
-
-            <p className="forgot-password text-left">
-              <a href="/sign-in" className='text-decoration-none'>I need more help</a>
-            </p>
-
-          </form>
-    
-          <div >
-          </div>
-          <div>
-
-          </div>
         </div>
-
-      </div>
-      <br></br>
-      <div className='col-md-12 sticky-bottom py-3' style={{ }}>
-        <Footer />
-      </div>
-
-    </div>
-  )
-
-}
-export default VerifyOTP
+    );
+};
+export default VerifyOTP;

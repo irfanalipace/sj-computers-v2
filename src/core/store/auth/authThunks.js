@@ -4,16 +4,16 @@ import {
     REGISTER,
     LOADING,
     CLEAR_LOADING,
+    VERIFY_EMAIL
 } from "@store/auth/authSlice";
 import { loginApi, logoutApi } from "@api/auth";
+import { verifyEmailApi } from "@api/auth";
 import { saveToken, destroyToken } from "@services/jwtService";
 
 export const login = (credentials) => {
     return async (dispatch) => {
         try {
-            console.log('her e');
             dispatch({ type: LOADING, payload: {} });
-            console.log('here q');
             const response = await loginApi(credentials);
             let token = response.data.data.access_token;
             saveToken(token,'', credentials.email);
@@ -49,6 +49,21 @@ export const logout = () => {
             dispatch({ type: LOGOUT });
         } catch (error) {
             console.log("Something went wrong in logout", error);
+            dispatch({ type: CLEAR_LOADING, payload: {} });
+        }
+    };
+};
+
+export const verifyEmail = (email) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: LOADING, payload: {} });
+            const response = await verifyEmailApi(credentials);
+            // let token = response.data.data.access_token;
+            // saveToken(token,'', credentials.email);
+            dispatch({ type: VERIFY_EMAIL, payload: email });
+        } catch (error) {
+            console.log("Something went wrong in login", error);
             dispatch({ type: CLEAR_LOADING, payload: {} });
         }
     };
