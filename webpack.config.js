@@ -22,7 +22,7 @@ module.exports = {
                 use: ["style-loader", "css-loader", "sass-loader"],
             },
             {
-                test: /\.(png|jpe?g|gif)$/i,
+                test: /\.(png|jpe?g|gif|svg)$/i,
                 use: [
                     {
                         loader: "file-loader",
@@ -30,15 +30,7 @@ module.exports = {
                             name: "[name].[ext]",
                             outputPath: "images/",
                         },
-                    },
-                    {
-                        loader: "url-loader",
-                        options: {
-                            limit: 8192, // Convert images < 8kb to base64 strings
-                            name: "[name].[ext]",
-                            outputPath: "images/",
-                        },
-                    },
+                    }
                 ],
             },
         ],

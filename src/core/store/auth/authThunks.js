@@ -6,6 +6,7 @@ export const login = (credentials) => {
     return async (dispatch) => {
         try {
             const response = await loginApi(credentials);
+            let token = response.data.data.token;
             saveToken(token);
             dispatch({ type: LOGIN, payload: credentials });
         } catch (error) {

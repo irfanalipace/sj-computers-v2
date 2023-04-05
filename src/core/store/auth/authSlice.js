@@ -4,13 +4,16 @@ const initialState = {
     user: null,
     isAuthenticated: false,
     apiError: false,
-    messageResponse: "",
+    isLoading: true,
 };
 
 const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
+        IS_LOADING:(state, action)=>{
+            state.isLoading = true;
+        },
         LOGIN: (state, action) => {
             state.isAuthenticated = true;
             state.apiError = false;
@@ -31,6 +34,5 @@ const authSlice = createSlice({
         },
     },
 });
-export const { LOGIN, LOGOUT, REGISTER, alreadyLoggedIn, API_ERROR } =
-    authSlice.actions;
+export const { LOGIN, LOGOUT, REGISTER, alreadyLoggedIn, IS_LOADING } =  authSlice.actions;
 export default authSlice.reducer;
