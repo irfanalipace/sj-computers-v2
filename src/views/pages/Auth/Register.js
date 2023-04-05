@@ -1,13 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { faInfo } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import Header from "@components/auth/Header";
 import Footer from "@components/auth/Footer";
-// import vectoricon from '../image/vector.png'
-// import './style.css'
-import "../../../App.css";
+import { faInfo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
+
 const Register = () => {
     return (
         <div>
@@ -37,32 +34,6 @@ const Register = () => {
                                 type="email"
                                 className="form-control"
                                 placeholder="Enter your email"
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label className="font-weight-bold">Password</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                placeholder="Enter password"
-                            />
-                        </div>
-                        <p className="text-muted small">
-                            {/* <img src={vectoricon} alt='' style={{width:'7px'}}/> */}
-                            <FontAwesomeIcon
-                                icon={faInfo}
-                                style={{ color: "#52AC66" }}
-                            />{" "}
-                            Passwords must be at least 6 characters.
-                        </p>
-                        <div className="mb-3">
-                            <label className="font-weight-bold">
-                                Re-enter password
-                            </label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                placeholder="Re-enter password"
                             />
                         </div>
                         <div className="mb-3">
