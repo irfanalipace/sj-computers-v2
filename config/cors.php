@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*'],
 
     'allowed_methods' => ['*'],
 
@@ -27,8 +27,19 @@ return [
 
     'exposed_headers' => [],
 
-    'max_age' => 0,
+    /*
+   * Sets the Access-Control-Expose-Headers response header.
+   */
+    'exposed_headers' => false,
 
-    'supports_credentials' => false,
+    /*
+     * Sets the Access-Control-Max-Age response header.
+     */
+    'max_age' => false,
+
+    /*
+     * Sets the Access-Control-Allow-Credentials header.
+     */
+    'supports_credentials' => true,
 
 ];
