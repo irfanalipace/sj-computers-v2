@@ -4,115 +4,147 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-//use App\Providers\RouteServiceProvider;
 use App\Models\User;
-//use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Response;
+use App\Http\Controllers\API\BaseController;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\LogoutRequest;
+use Illuminate\Auth\Notifications\ResetPassword;
+use App\Http\Requests\ForgetRequest;
+use App\Http\Requests\VerifyEmailRequest;
+use App\Http\Requests\UpdateProfileRequest;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
-    public function register(Request $request)
+    public function register(RegisterRequest $request) :JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => ['required', 'string', 'max:255'],
-//            'c_password' => 'required|same:password',
+        $validator = $request->all();
+
+        if(empty($validator)){
+            return $this->sendError('Validation Error',$validator->errors(), 422);
+        }
+
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password'))
         ]);
 
-        if($validator->fails()){
-            return response()->json(["message"=>"validation error","success"=>false,'error'=>$validator->errors()]);
-        }
-//            return $this->sendError('Validation Error.', $validator->errors());
+        $token = $user->createToken('authToken')->accessToken;
 
-        $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')->accessToken;
-        $success['name'] =  $user->name;
-
-//        return $this->sendResponse($success, 'User register successfully.');
-        return response()->json(["message"=>"succesfully registered","success"=>true,"data"=>$success], 200);
+        return $this->sendResponse($token, 'User register successfully.');
     }
 
-    public function login()
+    public function login(LoginRequest $request) :JsonResponse
     {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
-            $user = Auth::user();
-            $success['token'] = $user->createToken('appToken')->accessToken;
-            return response()->json([
-                'success' => true,
-                'user' => $user,
-                'token' => $success
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Invalid Email or Password',
-            ], 401);
+        $validator = $request->all();
+
+        if (empty($validator)) {
+            return $this->sendError('Validation Error', $validator->errors(), 422);
         }
+
+        $credentials = $request->only(['email', 'password']);
+
+        if (!Auth::attempt($credentials)) {
+            return $this->sendError('Invalid credentials.', 401);
+        }
+
+        $user = Auth::user();
+        $token = $user->createToken('authToken')->accessToken;
+
+        return $this->sendResponse(['access_token' => $token], 'User logged in successfully.');
     }
 
-    public function forget() {
-        $credentials = request()->validate(['email' => 'required|email']);
-//        dd($credentials);
-        Password::sendResetLink($credentials);
 
-        return response()->json(["msg" => 'Reset password link sent on your email id.']);
+    public function forgetPassword(ForgetRequest $request)
+    {
+        $validator = $request->all();
+
+        if (empty($validator)) {
+            return $this->sendError('Validation Error', $validator->errors(), 422);
+        }
+
+        $email = $request->email;
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            return $this->sendError('User not found.', 404);
+        }
+
+        $token = app('auth.password.broker')->createToken($user);
+        $user->sendPasswordResetNotification($token);
+
+        return $this->sendResponse([], 'Password reset link sent to your email.');
     }
 
-    public function reset() {
-        $credentials = request()->validate([
-            'email' => 'required|email',
-            'token' => 'required|string',
-            'password' => 'required|string|confirmed'
-        ]);
 
-        $reset_password_status = Password::reset($credentials, function ($user, $password) {
-            $user->password = $password;
+    public function resetPassword(ResetPassword $request)
+    {
+        $validator = $request->all();
+
+        if (empty($validator)) {
+            return $this->sendError('Validation Error', $validator->errors(), 422);
+        }
+
+        $credentials = $request->only(
+            'email', 'password', 'password_confirmation', 'token'
+        );
+
+        $response = Password::reset($credentials, function ($user, $password) {
+            $user->password = Hash::make($password);
             $user->save();
         });
 
-        if ($reset_password_status == Password::INVALID_TOKEN) {
-            return response()->json(["msg" => "Invalid token provided"], 400);
+        if ($response == Password::INVALID_TOKEN) {
+            return $this->sendError('Invalid token.', 400);
         }
 
-        return response()->json(["msg" => "Password has been successfully changed"]);
+        return $this->sendResponse([], 'Password has been reset successfully.');
     }
 
 
-
-
-        public function logout(Request $request)
+    public function logout(LogoutRequest $request)
     {
         if (Auth::user()) {
             $user = Auth::user()->token();
             $user->revoke();
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Logout successfully'
-            ]);
-        }else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Unable to Logout'
-            ]);
+            return $this->sendResponse([], 'User logged out successfully.');
         }
     }
 
-    public function verifyEmail(Request $request) {
+    public function verifyEmail(VerifyEmailRequest $request) {
         $user = User::where('email', $request->email)->first();
-//        dd($user);
 
         if (!$user) {
-            return response()->json(['message'=>'Email not found'], 404);
+            return $this->sendError('User not found.', 404);
         }
-        return response()->json(['message'=>'email verified'], 200);
+        return $this->sendResponse([], 'Email Verified.');
+    }
+
+    public function updateProfile(UpdateProfileRequest $request) {
+
+        $validator = $request->all();
+        dd($validator);
+        $user = Auth::user();
+
+        if (isset($validator['password'])) {
+            $validator['password'] = bcrypt($validator['password']);
+        }
+
+        $user->update($validator);
+
+        return $this->sendResponse([], 'Profile Updated Successfully.');
+    }
+
+    public function test()
+    {
+        dd('test');
     }
 
 }
