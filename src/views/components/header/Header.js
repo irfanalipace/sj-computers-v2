@@ -10,7 +10,7 @@ const Header = () => {
         <div className='container'>
             <div className='row'>
                 <div className='col-12'>
-                    <img src={footerlogo} alt='' style={{ height: '64px' }} />
+                    <img src={footerlogo} alt='' style={{ height: '58px' }} />
                     <p className='img-logo'>S.J. Computers</p>
                     <p className='img-logo-head'>your tech store !</p>
                 </div>
