@@ -24,8 +24,9 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function otps(){
-        return $this->hasMany(Otp::class);
+    public function otps()
+    {
+        return $this->hasOne(Otp::class);
     }
 
     /**
