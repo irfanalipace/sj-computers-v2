@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logout from '@components/auth/Logout'
+
 
 const Profile = () => {
     return (
@@ -7,7 +9,9 @@ const Profile = () => {
             Profile
             <Link to={"/"}>Home</Link>
             <Link to={"/login"}>Login</Link>
+            <Link to={"/register"}>Register</Link>
             <Link to={"/profile"}>Profile</Link>
+            <Logout />
         </div>
     );
 };

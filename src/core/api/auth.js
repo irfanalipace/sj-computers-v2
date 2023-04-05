@@ -5,8 +5,7 @@ export function loginApi({ email, password }) {
         ApiService.post(`/login?email=${email}&password=${password}`)
             .then((response) => {
                 console.log("file: auth.module.js | login| response", response);
-                const { data } = response;
-                resolve(data);
+                resolve(response);
             })
             .catch(({ message }) => {
                 console.log("Console Log: : error Login", message);
@@ -27,8 +26,7 @@ export function registerApi(name, email, password) {
                     "file: auth.module.js | register| response",
                     response
                 );
-                const { data } = response;
-                resolve(data);
+                resolve(response);
             })
             .catch(({ message }) => {
                 console.log("Console Log: : error", message);
@@ -48,8 +46,7 @@ export function logoutApi() {
                     "file: auth.module.js | logout| response",
                     response
                 );
-                const { data } = response;
-                resolve(data);
+                resolve(response);
             })
             .catch(({ message }) => {
                 console.log("Console Log: : error", message);
@@ -69,8 +66,7 @@ export function resetPasswordApi() {
                     "file: auth.module.js | resetPasswordApi| response",
                     response
                 );
-                const { data } = response;
-                resolve(data);
+                resolve(response);
             })
             .catch(({ message }) => {
                 console.log("Console Log: : error", message);
@@ -90,8 +86,7 @@ export function verifyEmailAddress(email) {
                     "file: auth.module.js | verifyEmailAddress| response",
                     response
                 );
-                const { data } = response;
-                resolve(data);
+                resolve(response);
             })
             .catch(({ message }) => {
                 console.log("Console Log: : error", message);

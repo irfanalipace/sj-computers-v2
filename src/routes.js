@@ -2,13 +2,22 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Home from "@pages/Home/Home";
 import Login from "@pages/Auth/Login";
+import Register from "@pages/Auth/Register";
 import Profile from "@pages/User/Profile";
-import Register from "./views/pages/Auth/Register";
 
 export const Router = () => {
     const routes = [
         {
             path: "/",
+            element: <Home />,
+            // element: (
+            //     <AuthRoute>
+            //         <Login />
+            //     </AuthRoute>
+            // ),
+        },
+        {
+            path: "/login",
             element: (
                 <AuthRoute>
                     <Login />
@@ -16,9 +25,12 @@ export const Router = () => {
             ),
         },
         {
-            path: "/Register",
-            element: <Register />,
-          
+            path: "/register",
+            element: (
+                <AuthRoute>
+                    <Register />
+                </AuthRoute>
+            ),
         },
         {
             path: "/Home",

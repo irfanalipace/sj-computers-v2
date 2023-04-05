@@ -1,0 +1,28 @@
+.header-background{
+    padding-top: 0% !important;
+    background:#00305E !important;
+}.homepage-img{
+width: 185px !important;
+}.nav-text{
+    color: white;
+    padding-left: 23px;
+}.searchbar-form{
+   
+        width: 90%;
+        
+    
+}.search{
+    width: 61% !important;
+}
+.eng-dropdown{
+    padding-left: 12px;
+}.eng-button{
+  
+        background: #00305E;
+        border: 0px;
+        color: white;
+        padding-top: 12px;
+    
+}.input-form-control{
+    height: 60px;
+}
