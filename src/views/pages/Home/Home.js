@@ -8,7 +8,7 @@ import Logout from "@components/auth/Logout";
 import { login } from "@store/auth/authThunks";
 const Home = () => {
     const dispatch = useDispatch();
-    
+
     const option = {
         email: "user@gmail.com",
         password: "12345678",

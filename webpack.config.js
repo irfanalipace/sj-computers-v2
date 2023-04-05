@@ -62,7 +62,7 @@ module.exports = {
             directory: path.join(__dirname, "public"),
         },
         headers: { "Access-Control-Allow-Origin": "" },
-        port: 3000,
+        port: 3005,
         historyApiFallback: true,
     },
 
