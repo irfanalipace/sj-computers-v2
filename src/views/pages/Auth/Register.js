@@ -44,9 +44,9 @@ const Register = () => {
               />
             </div>
             <p className="text-muted small">
-             {/* <img src={vectoricon} alt='' style={{width:'7px'}}/> */}
-             <FontAwesomeIcon icon={faInfo} style={{color:'#52AC66'}}/>
-             {' '}Passwords must be at least 6 characters.
+              {/* <img src={vectoricon} alt='' style={{width:'7px'}}/> */}
+              <FontAwesomeIcon icon={faInfo} style={{ color: '#52AC66' }} />
+              {' '}Passwords must be at least 6 characters.
             </p>
             <div className="mb-3">
               <label className='font-weight-bold'>Re-enter password</label>
@@ -72,9 +72,9 @@ const Register = () => {
               Already have an account? {' '} {' '}<Link to="/" className='text-decoration-none'>Sign in?</Link>
             </p>
 
-          
+
           </form>
-    
+
           <div >
           </div>
           <div>

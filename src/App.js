@@ -24,6 +24,7 @@ function App() {
             {/* <ResetPassWord /> */}
             {/* <VerifyOTP /> */}
          {/* <Login /> */}
+         
         </BrowserRouter>
     );
 }

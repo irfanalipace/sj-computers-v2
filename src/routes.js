@@ -21,6 +21,11 @@ export const Router = () => {
           
         },
         {
+            path: "/Home",
+            element: <Home />,
+          
+        },
+        {
             path: "/profile",
             element: (
                 <ProtectedRoute>
