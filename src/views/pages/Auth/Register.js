@@ -3,7 +3,7 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import { faInfo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { Link } from 'react-router-dom';
 // import vectoricon from '../image/vector.png'
 // import './style.css'
 import '../../../App.css'
@@ -69,10 +69,10 @@ const Register = () => {
 
 
             <p className="forgot-password text-left">
-              Already have an account? {' '} {' '}<a href="/sign-in" className='text-decoration-none'>Sign in?</a>
+              Already have an account? {' '} {' '}<Link to="/" className='text-decoration-none'>Sign in?</Link>
             </p>
 
-
+          
           </form>
     
           <div >

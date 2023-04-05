@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 
 import '../../../App.css'
+import Register from "./Register";
 
 const Login = () => {
     // const dispatch = useDispatch();
@@ -98,7 +99,8 @@ const Login = () => {
   
             <div className='react-heading' >
               <div className="rectangle">
-                Create your SJ Computer account
+              <Link to='/Register' className="text-decoration-none" style={{color:'#333333'}}>Create your SJ Computer account</Link>
+                
               </div>
             </div>
   

@@ -19,11 +19,11 @@ function App() {
 
     return (
         <BrowserRouter>
-             {/* <Router />  */}
+             <Router /> 
             {/* <Register /> */}
             {/* <ResetPassWord /> */}
             {/* <VerifyOTP /> */}
-         <Login />
+         {/* <Login /> */}
         </BrowserRouter>
     );
 }

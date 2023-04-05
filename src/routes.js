@@ -3,20 +3,22 @@ import { useSelector } from "react-redux";
 import Home from "@pages/Home/Home";
 import Login from "@pages/Auth/Login";
 import Profile from "@pages/User/Profile";
+import Register from "./views/pages/Auth/Register";
 
 export const Router = () => {
     const routes = [
         {
             path: "/",
-            element: <Home />,
-        },
-        {
-            path: "/login",
             element: (
                 <AuthRoute>
                     <Login />
                 </AuthRoute>
             ),
+        },
+        {
+            path: "/Register",
+            element: <Register />,
+          
         },
         {
             path: "/profile",
