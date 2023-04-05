@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Otp;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\API\BaseController;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
@@ -16,28 +20,33 @@ use Illuminate\Auth\Notifications\ResetPassword;
 use App\Http\Requests\ForgetRequest;
 use App\Http\Requests\VerifyEmailRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LoginOtpMail;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 class AuthController extends BaseController
 {
-    /**
-     * @param RegisterRequest $request
-     * @return JsonResponse
-     */
-    public function register(RegisterRequest $request): JsonResponse
+    public function register(RegisterRequest $request) :JsonResponse
     {
-        $validatedData = $request->validated();
+        $validator = $request->all();
 
-        $user = User::query()
-            ->create(array_merge($validatedData,
-                ['password' => bcrypt($validatedData['password'])]));
+        if(empty($validator)){
+            return $this->sendError('Validation Error',$validator->errors(), 422);
+        }
+
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password'))
+        ]);
 
         $token = $user->createToken('authToken')->accessToken;
-        event(new Registered($user));
 
-        return $this->sendResponse($token, 'User registered successfully.');
+        return $this->sendResponse($token, 'User register successfully.');
     }
 
-    public function login(LoginRequest $request): JsonResponse
+    public function login(LoginRequest $request) :JsonResponse
     {
         $validator = $request->all();
 
@@ -52,9 +61,20 @@ class AuthController extends BaseController
         }
 
         $user = Auth::user();
+
+        $otp = rand(1000, 9999);
+
+        $otpModel = new Otp();
+        $otpModel->user_id = $user->id;
+        $otpModel->code = $otp;
+        $otpModel->save();
+
+        Cache::put('login_otp_'.$user->id, $otp, now()->addMinutes(5));
+        Mail::to($user->email)->send(new LoginOtpMail($otp));
+
         $token = $user->createToken('authToken')->accessToken;
 
-        return $this->sendResponse(['access_token' => $token], 'User logged in successfully.');
+        return $this->sendResponse(['access_token' => $token], 'OTP sent to your email address.');
     }
 
 
@@ -128,7 +148,7 @@ class AuthController extends BaseController
     public function updateProfile(UpdateProfileRequest $request) {
 
         $validator = $request->all();
-
+        dd($validator);
         $user = Auth::user();
 
         if (isset($validator['password'])) {
@@ -138,6 +158,18 @@ class AuthController extends BaseController
         $user->update($validator);
 
         return $this->sendResponse([], 'Profile Updated Successfully.');
+    }
+
+    public function verifyOtp(Request $request) {
+        $otp = $request->get('otp');
+
+        $data = Otp::where('user_id', '=', $request->user_id)
+            ->where('code',$otp)
+            ->exists();
+
+        if ($data) {
+            $user = User::where('id', '=', $request->user_id)->update(['otp_verified' => 1]);
+        }
     }
 
     public function test()

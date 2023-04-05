@@ -23,6 +23,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
     ];
 
+    public function otps()
+    {
+        return $this->hasOne(Otp::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
