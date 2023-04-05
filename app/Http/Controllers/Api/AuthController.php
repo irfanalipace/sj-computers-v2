@@ -25,11 +25,11 @@ class AuthController extends BaseController
      */
     public function register(RegisterRequest $request): JsonResponse
     {
-        $validatedData = $request->validated();
+        $data = $request->all();
 
         $user = User::query()
-            ->create(array_merge($validatedData,
-                ['password' => bcrypt($validatedData['password'])]));
+            ->create(array_merge($data,
+                ['password' => bcrypt($data['password'])]));
 
         $token = $user->createToken('authToken')->accessToken;
         event(new Registered($user));
@@ -125,7 +125,8 @@ class AuthController extends BaseController
         return $this->sendResponse([], 'Email Verified.');
     }
 
-    public function updateProfile(UpdateProfileRequest $request) {
+    public function updateProfile(UpdateProfileRequest $request)
+    {
 
         $validator = $request->all();
 
