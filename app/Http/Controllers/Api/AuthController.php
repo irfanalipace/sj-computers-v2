@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Otp;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\API\BaseController;
@@ -60,10 +62,15 @@ class AuthController extends BaseController
 
         $user = Auth::user();
 
-        $otp = rand(100000, 999999);
+        $otp = rand(1000, 9999);
+
+        $otpModel = new Otp();
+        $otpModel->user_id = $user->id;
+        $otpModel->code = $otp;
+        $otpModel->save();
+
         Cache::put('login_otp_'.$user->id, $otp, now()->addMinutes(5));
         Mail::to($user->email)->send(new LoginOtpMail($otp));
-
 
         $token = $user->createToken('authToken')->accessToken;
 
@@ -151,6 +158,18 @@ class AuthController extends BaseController
         $user->update($validator);
 
         return $this->sendResponse([], 'Profile Updated Successfully.');
+    }
+
+    public function verifyOtp(Request $request) {
+        $otp = $request->get('otp');
+
+        $data = Otp::where('user_id', '=', $request->user_id)
+            ->where('code',$otp)
+            ->exists();
+
+        if ($data) {
+            $user = User::where('id', '=', $request->user_id)->update(['otp_verified' => 1]);
+        }
     }
 
     public function test()
