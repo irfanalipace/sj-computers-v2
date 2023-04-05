@@ -24,13 +24,13 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
                 use: [
-                  {
-                    loader: 'file-loader',
-                    options: {
-                      name: '[name].[ext]',
-                      outputPath: 'images/',
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name: "[name].[ext]",
+                            outputPath: "images/",
+                        },
                     },
-                }
                 ],
             },
         ],
@@ -62,7 +62,7 @@ module.exports = {
             directory: path.join(__dirname, "public"),
         },
         headers: { "Access-Control-Allow-Origin": "" },
-        port: 3005,
+        port: 3000,
         historyApiFallback: true,
     },
 

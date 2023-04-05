@@ -1,33 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Header from "@components/auth/Header";
 import Footer from "@components/auth/Footer";
-import { verifyOtpApi } from "@api/auth";
+import { verifyOtp } from "@store/auth/authThunks";
 import Loader from "@common/spinner/Spinner";
-import "./auth.css";
+import { getUserEmail } from "@services/jwtService";
+
+import "../auth.css";
 
 const VerifyOTP = () => {
-    const userEmail = useSelector((state) => state.auth.user?.email);
+    const isLoading = useSelector((state) => state.auth.isLoading);
+    const email = getUserEmail();
     const [otp, setOtp] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
     function verifyOtpFunction(e) {
         e.preventDefault();
-        setIsLoading(true);
-        verifyOtpApi(otp)
-            .then(() => {
-                setIsLoading(false);
-                navigate("/home");
-            })
-            .catch((e) => {
-                setIsLoading(false);
-                navigate("/home");
-                setError(e);
-            });
+        dispatch(verifyOtp(), () => navigate("/home"));
     }
 
     return (
@@ -42,8 +34,8 @@ const VerifyOTP = () => {
                         <h3 className="login-h3-verify">
                             Verification required
                         </h3>
-                        One Time Password (OTP) sent to<br></br> {userEmail}.
-                        Please enter it below.
+                        One Time Password (OTP) sent to<br></br> {email}. Please
+                        enter it below.
                         <br></br>
                         <br></br>
                         <div className="mb-3">
@@ -56,8 +48,10 @@ const VerifyOTP = () => {
                                 value={otp}
                                 onChange={(e) => setOtp(e.target.value)}
                             />
-                            
-                            {error && <p className="text-danger">Invalid OTP</p>}
+
+                            {error && (
+                                <p className="text-danger">Invalid OTP</p>
+                            )}
                         </div>
                         <div className="d-grid">
                             <button

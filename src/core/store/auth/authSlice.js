@@ -18,9 +18,8 @@ const authSlice = createSlice({
             state.isLoading = false;
         },
         LOGIN: (state, action) => {
-            state.isAuthenticated = true;
             state.isLoading = false;
-            state.user = action.payload;
+            state.password = action.payload;
         },
         LOGOUT: (state) => {
             state.isAuthenticated = false;
@@ -34,9 +33,15 @@ const authSlice = createSlice({
         },
         alreadyLoggedIn: (state) => {
             state.isAuthenticated = true;
+            state.isLoading = false;
         },
-        VERIFY_EMAIL: (state, payload) => {
-            state.user.email = payload;
+        VERIFY_EMAIL: (state, action) => {
+            state.user.email = action.payload;
+        },
+        VERIFY_OTP: (state, action) => {
+            state.user.isAuthenticated = true;
+            state.user = action.payload;
+            state.isLoading = false;
         },
     },
 });
@@ -47,6 +52,7 @@ export const {
     alreadyLoggedIn,
     LOADING,
     CLEAR_LOADING,
-    VERIFY_EMAIL
+    VERIFY_EMAIL,
+    VERIFY_OTP,
 } = authSlice.actions;
 export default authSlice.reducer;

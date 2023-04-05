@@ -1,9 +1,9 @@
 import { Navigate, useRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Home from "@pages/Home/Home";
-import Login from "@pages/Auth/Login";
-import VerifyOTP from "@pages/Auth/VerifyOTP";
-
+import EmailForm from "@pages/Auth/LoginForms/EmailForm";
+import PasswordForm from "@pages/Auth/LoginForms/PasswordForm";
+import VerifyOTP from "@pages/Auth/LoginForms/VerifyOTP";
 import Register from "@pages/Auth/Register";
 import Profile from "@pages/User/Profile";
 
@@ -22,7 +22,23 @@ export const Router = () => {
             path: "/login",
             element: (
                 <AuthRoute>
-                    <Login />
+                    <EmailForm />
+                </AuthRoute>
+            ),
+        },
+        {
+            path: "/verify-password",
+            element: (
+                <AuthRoute>
+                    <PasswordForm />
+                </AuthRoute>
+            ),
+        },
+        {
+            path: "/verify-otp",
+            element: (
+                <AuthRoute>
+                    <VerifyOTP />
                 </AuthRoute>
             ),
         },
@@ -34,27 +50,11 @@ export const Router = () => {
                 </AuthRoute>
             ),
         },
-        // {
-        //     path: "/otp-option",
-        //     element: (
-        //         <AuthRoute>
-        //             <Login />
-        //         </AuthRoute>
-        //     ),
-        // },
-        {
-            path: "/verify-otp",
-            element: (
-                <AuthRoute>
-                    <VerifyOTP />
-                </AuthRoute>
-            ),
-        },
         {
             path: "/forget-password",
             element: (
                 <AuthRoute>
-                    <Login />
+                    <Register />
                 </AuthRoute>
             ),
         },

@@ -14,6 +14,8 @@ export const updateToken = (token, id, email) => {
     window.localStorage.setItem(TOKEN, token);
 };
 
+export const saveUserName = () => window.localStorage.setItem(USER_NAME);
+export const saveUserEmail = () => window.localStorage.setItem(USER_EMAIL);
 export const getUserName = () => window.localStorage.getItem(USER_NAME);
 export const getUserEmail = () => window.localStorage.getItem(USER_EMAIL);
 
@@ -28,6 +30,8 @@ export default {
     saveToken,
     updateToken,
     destroyToken,
+    saveUserEmail,
+    saveUserName,
     getUserName,
     getUserEmail,
 };
