@@ -16,10 +16,15 @@ const VerifyOTP = () => {
     const [otp, setOtp] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     function verifyOtpFunction(e) {
+        const credentials = {
+            email,
+            otp,
+        };
         e.preventDefault();
-        dispatch(verifyOtp(), () => navigate("/home"));
+        dispatch(verifyOtp(credentials, () => navigate("/")));
     }
 
     return (

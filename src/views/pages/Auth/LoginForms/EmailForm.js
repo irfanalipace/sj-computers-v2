@@ -22,7 +22,7 @@ const EmailForm = () => {
 
     function verifyEmailFunction(e) {
         e.preventDefault();
-        dispatch(verifyEmail(), () => navigate("/verify-password"));
+        dispatch(verifyEmail(email, () => navigate("/verify-password")));
     }
 
     return (

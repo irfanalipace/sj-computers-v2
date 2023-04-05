@@ -72,11 +72,11 @@ export const verifyEmail = (email, cb) => {
     };
 };
 
-export const verifyOtp = (email, otp, cb) => {
+export const verifyOtp = (credentials, cb) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            const response = await verifyEmailApi(email, otp);
+            const response = await verifyEmailApi(credentials);
             let token = response.data.data.access_token;
             saveToken(token, "", credentials.email);
             dispatch({ type: VERIFY_OTP, payload: {} });

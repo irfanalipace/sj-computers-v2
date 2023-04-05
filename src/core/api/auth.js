@@ -7,14 +7,14 @@ export function loginApi({ email, password }) {
                 console.log("file: auth.module.js | login| response", response);
                 resolve(response);
             })
-            .catch(e => {
+            .catch((e) => {
                 console.log("Console Log: : error Login", e);
                 reject(e);
             });
     });
 }
 
-export function registerApi(name, email, password) {
+export function registerApi({ name, email, password }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/register`, {
             name,
@@ -28,7 +28,7 @@ export function registerApi(name, email, password) {
                 );
                 resolve(response);
             })
-            .catch(e => {
+            .catch((e) => {
                 console.log("Console Log: : error", e);
                 reject(e);
             });
@@ -48,7 +48,7 @@ export function logoutApi() {
                 );
                 resolve(response);
             })
-            .catch(e => {
+            .catch((e) => {
                 console.log("Console Log: : error", e);
                 reject(e);
             });
@@ -68,7 +68,7 @@ export function resetPasswordApi() {
                 );
                 resolve(response);
             })
-            .catch(e => {
+            .catch((e) => {
                 console.log("Console Log: : error", e);
                 reject(e);
             });
@@ -88,14 +88,14 @@ export function verifyEmailApi(email) {
                 );
                 resolve(response);
             })
-            .catch(e => {
+            .catch((e) => {
                 console.log("Console Log: : error", e);
                 reject(e);
             });
     });
 }
 
-export function verifyOtpApi(otp) {
+export function verifyOtpApi({email, otp}) {
     return new Promise((resolve, reject) => {
         ApiService.post(`email/verify?otp${otp}`, {
             // userId: email,
@@ -108,7 +108,7 @@ export function verifyOtpApi(otp) {
                 );
                 resolve(response);
             })
-            .catch(e => {
+            .catch((e) => {
                 console.log("Console Log: : error", e);
                 reject(e);
             });

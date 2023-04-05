@@ -23,8 +23,12 @@ const Login = () => {
     const email = getUserEmail();
 
     function verifyPasswordFunction(e) {
+        const credentials = {
+            email,
+            password,
+        };
         e.preventDefault();
-        dispatch(login(email, password), () => navigate("/verify-otp"));
+        dispatch(login(credentials, () => navigate("/verify-otp")));
     }
 
     return (
