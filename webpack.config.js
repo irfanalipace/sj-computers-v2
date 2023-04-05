@@ -21,18 +21,18 @@ module.exports = {
                 test: /.scss$/,
                 use: ["style-loader", "css-loader", "sass-loader"],
             },
-           {
-                test: /\.(png|jpg)$/i,
-                type: 'asset',
-                parser: {
-                    dataUrlCondition: {
-                        maxSize: 10 * 1024 // Inline images under 10KB
-                    }
-                },
-                generator: {
-                    filename: 'images/[name]-[hash][ext]'
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                  {
+                    loader: 'file-loader',
+                    options: {
+                      name: '[name].[ext]',
+                      outputPath: 'images/',
+                    },
                 }
-            }
+                ],
+              },
         ],
     },
 
