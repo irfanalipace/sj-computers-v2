@@ -22,8 +22,8 @@ function App() {
              {/* <Router />  */}
             {/* <Register /> */}
             {/* <ResetPassWord /> */}
-            <VerifyOTP />
-         {/* <Login /> */}
+            {/* <VerifyOTP /> */}
+         <Login />
         </BrowserRouter>
     );
 }
