@@ -69,7 +69,7 @@ body, html .App, #root, .auth-wrapper {
 }
 .login-h3{
   text-align: left !important;
-  font-size: 33px;
+  font-size: 36px;
 }.email-lable{
   padding-bottom: 3px;
 }.login-button{
@@ -90,7 +90,10 @@ body, html .App, #root, .auth-wrapper {
 }.bg-light{
   background-image: rgb(248, 249, 250);
 }
-
+.form-container-verify{
+  padding-top: 79px ;
+  width: 26%;
+}
 .text-left{
   text-align: left;
   
@@ -171,7 +174,7 @@ padding-top: 40px !important;
 }
 .header-logo{
   text-align: center !important;
-  padding-bottom: 27px !important;
+  /* padding-bottom: 27px !important; */
   /* background-image: url('./image/header-logo.png'); */
 }
 .img-logo {
@@ -194,7 +197,13 @@ font-style: normal;
 }
 .font-weight-bold{
   font-weight: bold;
-}.reset-pass {
+  font-size: 17px !important;
+}
+.font-weight{
+  
+  font-size: 21px !important;
+}
+.reset-pass {
     width: 377px;
     font-size: 19px;
 }
@@ -207,7 +216,7 @@ font-style: normal;
     height: 15px !important;
   }
   .sticky-bottom {
-    position: fixed;
+     position: fixed; 
     bottom: 0;
     width: 100%;
     background-color: rgb(233, 236, 239);
@@ -216,18 +225,20 @@ font-style: normal;
     padding-top: 30px;
 width:33%
   }
-  /* media query */
-  /* @media screen and (max-width: 1024px) and (min-width: 600px) {
-    
-  .h5-heading {
-    padding-top: 29px ;
-  
-    width: 621px ;
-    font-size: 14px ;
-    padding-left: 307px ;
-    color: #706e6e;
+.login-h3-verify{
+  font-size: 26px;
 }
-  } */
+  .form-container-reset{
+    padding-top: 60px;
+    width: 28%
+  }
+  /* media query */
+  
+    
+    .login-h3-reset{
+    font-size: 24px;
+  }
+ 
   @media screen and (max-width:425px) {
     .auth-inner-body{
       width: 100% !important;
@@ -253,13 +264,32 @@ width:33%
 }.form-container {
   width: 100%;
 }
+.form-container-reset {
+  width: 100%;
+}
   }
-
-
+  @media only screen and (max-width:425px) {
+.form-container-verify{
+width:100%;
+}
+  }
   @media only screen and (max-width:425px) {
     .form-container {
       width: 100% !important;
       padding-top: 0px !important;
 
     }
+    .sticky-bottom {
+       position: fixed; 
+      bottom: 0;
+      width: 100%;
+      background-color: rgb(233, 236, 239);
   }
+  }
+
+  @media only screen and (max-width:425px) {
+  .login-h3-reset{
+    font-size: 29px !important;
+  }
+
+}

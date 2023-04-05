@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Register from "./views/pages/Auth/Register";
 import ResetPassWord from "./views/pages/Auth/ResetPassword";
 import VerifyOTP from "./views/pages/Auth/VerifyOTP";
-
+import Login from "./views/pages/Auth/Login";
 function App() {
     const dispatch = useDispatch();
     const token = getToken();
@@ -19,11 +19,11 @@ function App() {
 
     return (
         <BrowserRouter>
-             <Router /> 
+             {/* <Router />  */}
             {/* <Register /> */}
             {/* <ResetPassWord /> */}
-            {/* <VerifyOTP /> */}
-            
+            <VerifyOTP />
+         {/* <Login /> */}
         </BrowserRouter>
     );
 }

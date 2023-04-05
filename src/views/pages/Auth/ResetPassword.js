@@ -7,15 +7,19 @@ const ResetPassWord = () => {
 
   return (
     <div>
-      <div className='container'>
+      <div className='container form-container-reset'>
         <div className='row'>
           <div className='header-logo'>
             <Header />
           </div>
 
           <form className='auth-inner-body'>
-            <h2 className='login-h3'>Password reset required</h2>
-            <p className='reset-pass'>Please set a new password for your account that you have not used elsewhere. We'll send a One Time Password (OTP) to </p>
+          <h3 className='login-h3-reset'>Password reset required</h3>
+              <div className="mb-3">
+                <label className='email-lable font-weight'>Please set a new password for your account that you have not used elsewhere. We'll send a One Time Password (OTP) to </label>
+              
+              </div>
+           
            
             <div className="mb-3">
           <h6 className='text-left'>Send OTP to</h6>
@@ -61,22 +65,21 @@ const ResetPassWord = () => {
             </div> */}
           </form>
           <h3 className="text-muted small" style={ {
-    fontSize: '13px',
+    fontSize: '16px',
    
-    paddingLeft: '34%'
+   
 }}>
             Cannot access your email and mobile number?<br></br> 
-                Contact <a href="#" className='text-decoration-none' style={{paddingRight:'254px'}}>Customer Service</a>
+                Contact <a href="#" className='text-decoration-none ' >Customer Service</a>
             </h3>
           <div >
           </div>
         </div>
       </div>
-      <br></br>
-      <div className='col-md-12' style={{ backgroundColor: '#e9ecef', height: '360px' }}>
+    
+      <div className='col-md-12 sticky-bottom py-3' >
         <Footer />
       </div>
-
     </div>
   )
 

@@ -11,7 +11,7 @@ const Register = () => {
 
   return (
     <div>
-      <div className='container'>
+      <div className='container form-container'>
         <div className='row'>
           <div className='header-logo'>
             <Header />
@@ -84,7 +84,7 @@ const Register = () => {
 
       </div>
       <br></br>
-      <div className='col-md-12' style={{ backgroundColor: '#e9ecef', height: '140px' }}>
+      <div className='col-md-12 sticky-bottom py-3' >
         <Footer />
       </div>
 

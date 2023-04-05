@@ -12,14 +12,14 @@ const VerifyOTP = () => {
 
   return (
     <div>
-      <div className='container'>
+      <div className='container form-container-verify'>
         <div className='row'>
           <div className='header-logo'>
             <Header />
           </div>
 
           <form className='auth-inner-body'>
-            <h3 className='login-h3'>Verification required</h3>
+            <h3 className='login-h3-verify'>Verification required</h3>
             One Time Password (OTP) sent to<br></br> +92********80. Please enter it below.
             <br></br><br></br>
             <div className="mb-3">
@@ -58,7 +58,7 @@ const VerifyOTP = () => {
 
       </div>
       <br></br>
-      <div className='col-md-12' style={{ backgroundColor: '#e9ecef', height: '420px' }}>
+      <div className='col-md-12 sticky-bottom py-3' style={{ }}>
         <Footer />
       </div>
 
