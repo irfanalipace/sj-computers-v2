@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { toast } from "react-toastify";
-import Button from "@common/button/button";
+import Button from "@common/button/Button";
 import Logout from "@components/auth/Logout";
 import { login } from "@store/auth/authThunks";
 const Home = () => {
