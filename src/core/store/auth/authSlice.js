@@ -4,29 +4,32 @@ const initialState = {
     user: null,
     isAuthenticated: false,
     apiError: false,
-    isLoading: true,
+    isLoading: false,
 };
 
 const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        IS_LOADING:(state, action)=>{
+        LOADING:(state)=>{
             state.isLoading = true;
+        },
+        CLEAR_LOADING:(state)=>{
+            state.isLoading = false;
         },
         LOGIN: (state, action) => {
             state.isAuthenticated = true;
-            state.apiError = false;
+            state.isLoading = false;
             state.user = action.payload;
         },
         LOGOUT: (state) => {
             state.isAuthenticated = false;
-            state.apiError = false;
+            state.isLoading = false;
             state.user = null;
         },
         REGISTER: (state, action) => {
             state.isAuthenticated = true;
-            state.apiError = false;
+            state.isLoading = false;
             state.user = action.payload;
         },
         alreadyLoggedIn: (state) => {
@@ -34,5 +37,5 @@ const authSlice = createSlice({
         },
     },
 });
-export const { LOGIN, LOGOUT, REGISTER, alreadyLoggedIn, IS_LOADING } =  authSlice.actions;
+export const { LOGIN, LOGOUT, REGISTER, alreadyLoggedIn, LOADING, CLEAR_LOADING } =  authSlice.actions;
 export default authSlice.reducer;

@@ -4,9 +4,9 @@ const USER_EMAIL = "user_email";
 
 export const getToken = () => window.localStorage.getItem(TOKEN);
 
-export const saveToken = (token, id, email) => {
+export const saveToken = (token, name, email) => {
     window.localStorage.setItem(TOKEN, token);
-    window.localStorage.setItem(USER_NAME, id);
+    window.localStorage.setItem(USER_NAME, name);
     window.localStorage.setItem(USER_EMAIL, email);
 };
 

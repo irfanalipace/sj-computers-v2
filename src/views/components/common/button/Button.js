@@ -1,14 +1,11 @@
-import './Button.css'
+import Loader from "@common/spinner/Spinner";
+import "./Button.css";
 
-export default function Button({children,clickHandler}) {
+export default function Button({ children, clickHandler, isLoading }) {
 
-  useEffect(() => {
-    clickHandler()
-  }, []);
-
-  return (
-    <button className="button" onClick={clickHandler}>
-        {children}
-    </button>
-  )
+    return (
+        <button className="button" onClick={clickHandler} disabled={isLoading}>
+            {isLoading ? <Loader /> : children}
+        </button>
+    );
 }
