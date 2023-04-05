@@ -47,7 +47,6 @@ html .App,
     padding: 40px 55px 45px 55px;
     border-radius: 15px;
     transition: all 0.3s;
-    margin-bottom: 130px;
 }
 .auth-wrapper .form-control:focus {
     border-color: #167bff;
@@ -241,6 +240,7 @@ h5:after {
 .form-container {
     padding-top: 30px;
     width: 33%;
+    margin-bottom: 130px;
 }
 .login-h3-verify {
     font-size: 26px;

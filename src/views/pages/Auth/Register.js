@@ -4,6 +4,7 @@ import Footer from "@components/auth/Footer";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import './auth.css'
 
 const Register = () => {
     return (

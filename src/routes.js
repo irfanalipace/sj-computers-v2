@@ -33,6 +33,30 @@ export const Router = () => {
             ),
         },
         {
+            path: "/otp-option",
+            element: (
+                <AuthRoute>
+                    <Login />
+                </AuthRoute>
+            ),
+        },
+        {
+            path: "/verify-otp",
+            element: (
+                <AuthRoute>
+                    <Login />
+                </AuthRoute>
+            ),
+        },
+        {
+            path: "/forget-password",
+            element: (
+                <AuthRoute>
+                    <Login />
+                </AuthRoute>
+            ),
+        },
+        {
             path: "/profile",
             element: (
                 <ProtectedRoute>
