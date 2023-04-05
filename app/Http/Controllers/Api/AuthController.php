@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-//use App\Http\Controllers\Controller;
-//use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-//use App\Http\Controllers\API\BaseController;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\API\BaseController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
@@ -127,7 +128,8 @@ class AuthController extends BaseController
         }
     }
 
-    public function verifyEmail(VerifyEmailRequest $request) {
+    public function verifyEmail(VerifyEmailRequest $request)
+    {
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
@@ -139,6 +141,7 @@ class AuthController extends BaseController
     public function updateProfile(UpdateProfileRequest $request) {
 
         $validator = $request->all();
+        dd($validator);
         $user = Auth::user();
 
         if (isset($validator['password'])) {
