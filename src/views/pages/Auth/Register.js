@@ -1,17 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
-
+import Header from "@components/auth/Header";
+import Footer from "@components/auth/Footer";
 // import vectoricon from '../image/vector.png'
 // import './style.css'
 import "../../../App.css";
 const Register = () => {
     return (
         <div>
-            <div className="container">
+            <div className="container form-container">
                 <div className="row">
                     <div className="header-logo">
                         <Header />
@@ -65,6 +65,32 @@ const Register = () => {
                                 placeholder="Re-enter password"
                             />
                         </div>
+                        <div className="mb-3">
+                            <label className="font-weight-bold">Password</label>
+                            <input
+                                type="password"
+                                className="form-control"
+                                placeholder="Enter password"
+                            />
+                        </div>
+                        <p className="text-muted small">
+                            {/* <img src={vectoricon} alt='' style={{width:'7px'}}/> */}
+                            <FontAwesomeIcon
+                                icon={faInfo}
+                                style={{ color: "#52AC66" }}
+                            />{" "}
+                            Passwords must be at least 6 characters.
+                        </p>
+                        <div className="mb-3">
+                            <label className="font-weight-bold">
+                                Re-enter password
+                            </label>
+                            <input
+                                type="password"
+                                className="form-control"
+                                placeholder="Re-enter password"
+                            />
+                        </div>
 
                         <div className="d-grid">
                             <button
@@ -88,9 +114,9 @@ const Register = () => {
 
                         <p className="forgot-password text-left">
                             Already have an account?{" "}
-                            <a href="/sign-in" className="text-decoration-none">
+                            <Link to="/" className="text-decoration-none">
                                 Sign in?
-                            </a>
+                            </Link>
                         </p>
                     </form>
 
@@ -99,10 +125,7 @@ const Register = () => {
                 </div>
             </div>
             <br></br>
-            <div
-                className="col-md-12"
-                style={{ backgroundColor: "#e9ecef", height: "140px" }}
-            >
+            <div className="col-md-12 sticky-bottom py-3">
                 <Footer />
             </div>
         </div>

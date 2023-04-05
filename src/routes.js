@@ -9,7 +9,12 @@ export const Router = () => {
     const routes = [
         {
             path: "/",
-            element: <Home />,
+            // element: <Home />,
+            element: (
+                <AuthRoute>
+                    <Login />
+                </AuthRoute>
+            ),
         },
         {
             path: "/login",
