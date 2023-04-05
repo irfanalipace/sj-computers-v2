@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+//use App\Http\Controllers\Controller;
+//use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\API\BaseController;
+//use App\Http\Controllers\API\BaseController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
@@ -18,6 +17,10 @@ use Illuminate\Auth\Notifications\ResetPassword;
 use App\Http\Requests\ForgetRequest;
 use App\Http\Requests\VerifyEmailRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LoginOtpMail;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 class AuthController extends BaseController
 {
@@ -55,9 +58,15 @@ class AuthController extends BaseController
         }
 
         $user = Auth::user();
+
+        $otp = rand(100000, 999999);
+        Cache::put('login_otp_'.$user->id, $otp, now()->addMinutes(5));
+        Mail::to($user->email)->send(new LoginOtpMail($otp));
+
+
         $token = $user->createToken('authToken')->accessToken;
 
-        return $this->sendResponse(['access_token' => $token], 'User logged in successfully.');
+        return $this->sendResponse(['access_token' => $token], 'OTP sent to your email address.');
     }
 
 
@@ -130,7 +139,6 @@ class AuthController extends BaseController
     public function updateProfile(UpdateProfileRequest $request) {
 
         $validator = $request->all();
-        dd($validator);
         $user = Auth::user();
 
         if (isset($validator['password'])) {

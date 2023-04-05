@@ -24,6 +24,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function otps(){
+        return $this->hasMany(Otp::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
