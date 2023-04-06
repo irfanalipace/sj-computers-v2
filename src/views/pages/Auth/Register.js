@@ -1,12 +1,44 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
 import Header from "@components/auth/Header";
 import Footer from "@components/auth/Footer";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { useFormValidation } from "@hooks/useFormValidation";
+import Loader from "@common/spinner/Spinner";
+import { register } from "@store/auth/authThunks";
+
 import "./auth.css";
 
 const Register = () => {
+    const { values, handleChange, handleSubmit, errors } = useFormValidation(
+        {
+            name: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+        },
+        {
+            fieldLengths: {
+                name: { min: 3, max: 50 },
+                email: { min: 5, max: 100 },
+                password: { min: 6, max: 20 },
+                confirmPassword: { min: 6, max: 20 },
+            },
+        },
+        registerFunction
+    );
+
+    const isLoading = useSelector((state) => state.auth.isLoading);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    function registerFunction() {
+        dispatch(register(values, () => navigate("/")));
+    }
+
     return (
         <div>
             <div className="container form-container">
@@ -15,7 +47,7 @@ const Register = () => {
                         <Header />
                     </div>
 
-                    <form className="auth-inner-body">
+                    <form className="auth-inner-body" onSubmit={handleSubmit}>
                         <h3 className="login-h3">Create account</h3>
                         <div className="mb-3">
                             <label className="name-lable font-weight-bold">
@@ -23,6 +55,9 @@ const Register = () => {
                             </label>
                             <input
                                 type="text"
+                                name="name"
+                                value={values.name}
+                                onChange={handleChange}
                                 className="form-control"
                                 placeholder="Full name"
                             />
@@ -33,6 +68,9 @@ const Register = () => {
                             </label>
                             <input
                                 type="email"
+                                name="email"
+                                value={values.emal}
+                                onChange={handleChange}
                                 className="form-control"
                                 placeholder="Enter your email"
                             />
@@ -41,6 +79,9 @@ const Register = () => {
                             <label className="font-weight-bold">Password</label>
                             <input
                                 type="password"
+                                name="password"
+                                value={values.password}
+                                onChange={handleChange}
                                 className="form-control"
                                 placeholder="Enter password"
                             />
@@ -59,6 +100,9 @@ const Register = () => {
                             </label>
                             <input
                                 type="password"
+                                name="confirmPassword"
+                                value={values.confirmPassword}
+                                onChange={handleChange}
                                 className="form-control"
                                 placeholder="Re-enter password"
                             />
@@ -69,7 +113,7 @@ const Register = () => {
                                 type="submit"
                                 className="btn btn-primary login-button"
                             >
-                                Verify email
+                                {isLoading ? <Loader /> : "Verify Email"}
                             </button>
                         </div>
                         <p className="text-muted small">
