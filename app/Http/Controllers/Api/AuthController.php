@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ResetRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Otp;
@@ -79,44 +80,21 @@ class AuthController extends BaseController
 
     public function forgetPassword(ForgetRequest $request)
     {
-        $validator = $request->all();
 
-        if (empty($validator)) {
-            return $this->sendError('Validation Error', $validator->errors(), 422);
-        }
+        Password::sendResetLink($request->all());
 
-        $email = $request->email;
-        $user = User::where('email', $email)->first();
-
-        if (!$user) {
-            return $this->sendError('User not found.', 404);
-        }
-
-        $token = app('auth.password.broker')->createToken($user);
-        $user->sendPasswordResetNotification($token);
-
-        return $this->sendResponse([], 'Password reset link sent to your email.');
+        return $this->sendResponse([], 'Reset password link sent on your email id.');
     }
 
 
-    public function resetPassword(ResetPassword $request)
+    public function resetPassword(ResetRequest $request)
     {
-        $validator = $request->all();
-
-        if (empty($validator)) {
-            return $this->sendError('Validation Error', $validator->errors(), 422);
-        }
-
-        $credentials = $request->only(
-            'email', 'password', 'password_confirmation', 'token'
-        );
-
-        $response = Password::reset($credentials, function ($user, $password) {
+        $reset_password_status = Password::reset($request->all(), function ($user, $password) {
             $user->password = Hash::make($password);
             $user->save();
         });
 
-        if ($response == Password::INVALID_TOKEN) {
+        if ($reset_password_status == Password::INVALID_TOKEN) {
             return $this->sendError('Invalid token.', 400);
         }
 
