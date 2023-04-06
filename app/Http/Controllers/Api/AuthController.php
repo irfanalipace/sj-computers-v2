@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ResetRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Otp;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\Api\BaseController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
@@ -29,10 +27,10 @@ class AuthController extends BaseController
 {
     public function register(RegisterRequest $request) :JsonResponse
     {
-        $validator = $request->all();
+        $data = $request->all();
 
-        if(empty($validator)){
-            return $this->sendError('Validation Error',$validator->errors(), 422);
+        if(empty($data)){
+            return $this->sendError('Validation Error',$data->errors(), 422);
         }
 
         $user = User::create([
@@ -43,15 +41,15 @@ class AuthController extends BaseController
 
         $token = $user->createToken('authToken')->accessToken;
 
-        return $this->sendResponse($token, 'User register successfully.');
+        return $this->sendResponse(['token' => $token], 'User register successfully.');
     }
 
     public function login(LoginRequest $request) :JsonResponse
     {
-        $validator = $request->all();
+        $data = $request->all();
 
-        if (empty($validator)) {
-            return $this->sendError('Validation Error', $validator->errors(), 422);
+        if (empty($data)) {
+            return $this->sendError('Validation Error', $data->errors(), 422);
         }
 
         $credentials = $request->only(['email', 'password']);
@@ -64,17 +62,17 @@ class AuthController extends BaseController
 
         $otp = rand(1000, 9999);
 
-        $otpModel = new Otp();
-        $otpModel->user_id = $user->id;
-        $otpModel->code = $otp;
-        $otpModel->save();
+        $otpSave = new Otp();
+        $otpSave->user_id = $user->id;
+        $otpSave->code = $otp;
+        $otpSave->save();
 
         Cache::put('login_otp_'.$user->id, $otp, now()->addMinutes(5));
         Mail::to($user->email)->send(new LoginOtpMail($otp));
 
         $token = $user->createToken('authToken')->accessToken;
 
-        return $this->sendResponse(['access_token' => $token], 'OTP sent to your email address.');
+        return $this->sendResponse(['token' => $token], 'OTP sent to your email address.');
     }
 
 
@@ -124,15 +122,14 @@ class AuthController extends BaseController
 
     public function updateProfile(UpdateProfileRequest $request) {
 
-        $validator = $request->all();
-        dd($validator);
+        $data = $request->all();
         $user = Auth::user();
 
-        if (isset($validator['password'])) {
-            $validator['password'] = bcrypt($validator['password']);
+        if (isset($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
         }
 
-        $user->update($validator);
+        $user->update($data);
 
         return $this->sendResponse([], 'Profile Updated Successfully.');
     }
@@ -144,8 +141,24 @@ class AuthController extends BaseController
             ->where('code',$otp)
             ->exists();
 
-        if ($data) {
-            $user = User::where('id', '=', $request->user_id)->update(['otp_verified' => 1]);
+        $otpTried = Otp::where('user_id', $request->user_id);
+        if ($otp != $data) {
+            $otpTried->increment('tried');
+
+            if ($otpTried->value('tried') >= 3) {
+                $otpTried->update([
+                    'updated_at' => Carbon::now()->addMinutes(2),
+                    'tried' => 0,
+                    'resend_code_limit' => DB::raw('resend_code_limit + 1'),
+                ]);
+                return $this->sendError('Too many attempts. Please try again in 2 minutes.');
+            }
+            return $this->sendError('Invalid OTP', 422);
+        }
+
+        if ($data = true) {
+            User::where('id', '=', $request->user_id)->update(['otp_verified' => 1]);
+            $otpTried->update(['tried' => 0,'resend_code_limit' => 0]);
         }
     }
 
