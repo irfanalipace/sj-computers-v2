@@ -26,8 +26,11 @@ Route::post('password-forget', [AuthController::class, 'forgetPassword'])->name(
 Route::post('password-reset', [AuthController::class, 'resetPassword'])->name('password-reset');
 Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
 Route::put('profile-update', [AuthController::class, 'updateProfile'])->name('profile-update');
-Route::apiResource('category', CategoryController::class);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::group(['middleware' => ['auth', 'admin']], function () {
+        Route::apiResource('category', CategoryController::class);
+    });
+    Route::apiResource('category', CategoryController::class)->only(['index', 'show']);
 });

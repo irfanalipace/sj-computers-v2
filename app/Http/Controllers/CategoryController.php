@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends BaseController
 {
@@ -29,10 +30,14 @@ class CategoryController extends BaseController
      */
     public function store(StoreCategoryRequest $request)
     {
-        $data = $request->all();
-        $category = Category::query()->create($data);
-
-        return $this->sendResponse($category, 'Success creating category');
+        $user = Auth::user();
+        if ($user->can('create', Category::class)) {
+            $data = $request->all();
+            $category = Category::query()->create($data);
+            return $this->sendResponse($category, 'Success creating category');
+        } else {
+            return $this->sendError('Unauthorized action');
+        }
     }
 
     /**
