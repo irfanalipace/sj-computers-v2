@@ -33,7 +33,9 @@ const ApiService = {
 
     query(resource, params) {
         return this.instance.get(resource, params).catch((error) => {
-            toast.error("Something Went Wrong");
+            if (!ACCEPTED_ERROR_CODES.includes(error.response.status)) {
+                toast.error("Something Went Wrong");
+            }
             throw new Error(`ApiService ${error}`);
         });
     },
@@ -62,7 +64,7 @@ const ApiService = {
                     if (error.response.status === 401) {
                         destroyToken();
                     }
-                    if (ACCEPTED_ERROR_CODES.includes(error.response.status)) {
+                    if (!ACCEPTED_ERROR_CODES.includes(error.response.status)) {
                         toast.error("Something Went Wrong");
                     }
                     reject(err);
@@ -95,7 +97,9 @@ const ApiService = {
                     if (error.status === 401) {
                         destroyToken();
                     }
-                    toast.error("Something Went Wrong");
+                    if (ACCEPTED_ERROR_CODES.includes(error.response.status)) {
+                        toast.error("Something Went Wrong");
+                    }
                     reject(err);
                 });
         });
