@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormValidation } from "@hooks/useFormValidation";
 import Loader from "@common/spinner/Spinner";
 import { register } from "@store/auth/authThunks";
+import { ErrorMessages } from "@utils/formHelpers";
 
 import "./auth.css";
 
@@ -30,6 +31,8 @@ const Register = () => {
         },
         registerFunction
     );
+
+    const apiError = useSelector((state) => state.auth.apiError);
 
     const isLoading = useSelector((state) => state.auth.isLoading);
     const navigate = useNavigate();

@@ -43,6 +43,10 @@ const authSlice = createSlice({
             state.user = action.payload;
             state.isLoading = false;
         },
+        API_ERROR: (state, action) => {
+            state.apiError = action.payload;
+            state.isLoading = false;
+        },
     },
 });
 export const {
@@ -54,5 +58,6 @@ export const {
     CLEAR_LOADING,
     VERIFY_EMAIL,
     VERIFY_OTP,
+    API_ERROR,
 } = authSlice.actions;
 export default authSlice.reducer;

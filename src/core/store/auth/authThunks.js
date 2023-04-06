@@ -6,6 +6,7 @@ import {
     CLEAR_LOADING,
     VERIFY_EMAIL,
     VERIFY_OTP,
+    API_ERROR
 } from "@store/auth/authSlice";
 import { loginApi, logoutApi, registerApi } from "@api/auth";
 import { verifyEmailApi } from "@api/auth";
@@ -21,7 +22,7 @@ export const login = (credentials, cb) => {
             cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
-            dispatch({ type: CLEAR_LOADING, payload: {} });
+            dispatch({ type: API_ERROR, payload: {error} });
         }
     };
 };
@@ -37,7 +38,7 @@ export const register = (credentials, cb) => {
             cb();
         } catch (error) {
             console.log("Something went wrong in register", error);
-            dispatch({ type: CLEAR_LOADING, payload: {} });
+            dispatch({ type: API_ERROR, payload: { error } });
         }
     };
 };
@@ -52,7 +53,7 @@ export const logout = (cb) => {
             cb();
         } catch (error) {
             console.log("Something went wrong in logout", error);
-            dispatch({ type: CLEAR_LOADING, payload: {} });
+            dispatch({ type: API_ERROR, payload: { error } });
         }
     };
 };
@@ -67,7 +68,7 @@ export const verifyEmail = (email, cb) => {
             cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
-            dispatch({ type: CLEAR_LOADING, payload: {} });
+            dispatch({ type: API_ERROR, payload: { error } });
         }
     };
 };
@@ -83,7 +84,7 @@ export const verifyOtp = (credentials, cb) => {
             cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
-            dispatch({ type: CLEAR_LOADING, payload: {} });
+            dispatch({ type: API_ERROR, payload: { error } });
         }
     };
 };
