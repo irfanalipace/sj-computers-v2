@@ -1,5 +1,7 @@
 import ApiService from "@services/apiService";
 
+// ApiService.setHeader("content-type", "multipart/form-data");
+
 export function loginApi({ email, password }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/login?email=${email}&password=${password}`)
@@ -76,9 +78,14 @@ export function resetPasswordApi() {
 }
 
 export function verifyEmailApi(email) {
+    // console.log("email: ", email);
+    // let formData = new FormData();
+    // formData.append("email", "user@gmail.com");
+    // console.log("form data: ", formData);
     return new Promise((resolve, reject) => {
-        ApiService.post('verify-email', {
-            email
+        ApiService.post("verify-email", {
+            email,
+            // formData,
         })
             .then((response) => {
                 console.log(
@@ -94,11 +101,11 @@ export function verifyEmailApi(email) {
     });
 }
 
-export function verifyOtpApi({email, otp}) {
+export function verifyOtpApi({ email, otp }) {
     return new Promise((resolve, reject) => {
-        ApiService.post('verify-otp', {
+        ApiService.post("verify-otp", {
             email,
-            otp
+            otp,
         })
             .then((response) => {
                 console.log(
