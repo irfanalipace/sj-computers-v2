@@ -22,7 +22,7 @@ export const login = (credentials, cb) => {
             cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
-            dispatch({ type: API_ERROR, payload: { error } });
+            dispatch({ type: API_ERROR, payload: error.data.errors });
         }
     };
 };
@@ -33,12 +33,11 @@ export const register = (credentials, cb) => {
             dispatch({ type: LOADING, payload: {} });
             const response = await registerApi(credentials);
             let token = response.data.data.access_token;
-            saveToken(token, "", credentials.email);
             dispatch({ type: REGISTER, payload: credentials });
             cb();
         } catch (error) {
             console.log("Something went wrong in register", error);
-            dispatch({ type: API_ERROR, payload: { error } });
+            dispatch({ type: API_ERROR, payload: error.data.errors });
         }
     };
 };
@@ -53,7 +52,7 @@ export const logout = (cb) => {
             cb();
         } catch (error) {
             console.log("Something went wrong in logout", error);
-            dispatch({ type: API_ERROR, payload: { error } });
+            dispatch({ type: API_ERROR, payload: error.data.errors });
         }
     };
 };
@@ -68,7 +67,7 @@ export const verifyEmail = (email, cb) => {
             cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
-            dispatch({ type: API_ERROR, payload: { error } });
+            dispatch({ type: API_ERROR, payload: error.data.errors });
         }
     };
 };
@@ -84,7 +83,23 @@ export const verifyOtp = (credentials, cb) => {
             cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
-            dispatch({ type: API_ERROR, payload: { error } });
+            dispatch({ type: API_ERROR, payload: error.data.errors });
+        }
+    };
+};
+
+export const resetPassword = (credentials, cb) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: LOADING, payload: {} });
+            const response = await resetPasswordApi(credentials);
+            let token = response.data.data.access_token;
+            saveToken(token, "", credentials.email);
+            dispatch({ type: VERIFY_OTP, payload: {} });
+            cb();
+        } catch (error) {
+            console.log("Something went wrong in login", error);
+            dispatch({ type: API_ERROR, payload: error.data.errors });
         }
     };
 };

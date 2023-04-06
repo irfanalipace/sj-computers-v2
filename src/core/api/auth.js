@@ -4,7 +4,10 @@ import ApiService from "@services/apiService";
 
 export function loginApi({ email, password }) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/login?email=${email}&password=${password}`)
+        ApiService.post("/login", {
+            email,
+            password,
+        })
             .then((response) => {
                 console.log("file: auth.module.js | login| response", response);
                 resolve(response);
@@ -57,26 +60,6 @@ export function logoutApi() {
     });
 }
 
-export function resetPasswordApi() {
-    return new Promise((resolve, reject) => {
-        ApiService.post("/password/email", {
-            // userId: email,
-            // password,
-        })
-            .then((response) => {
-                console.log(
-                    "file: auth.module.js | resetPasswordApi| response",
-                    response
-                );
-                resolve(response);
-            })
-            .catch((e) => {
-                console.log("Console Log: : error", e);
-                reject(e);
-            });
-    });
-}
-
 export function verifyEmailApi(email) {
     // console.log("email: ", email);
     // let formData = new FormData();
@@ -106,6 +89,26 @@ export function verifyOtpApi({ email, otp }) {
         ApiService.post("verify-otp", {
             email,
             otp,
+        })
+            .then((response) => {
+                console.log(
+                    "file: auth.module.js | verifyEmailAddress| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error", e);
+                reject(e);
+            });
+    });
+}
+
+export function resetPasswordApi({ email, otp }) {
+    return new Promise((resolve, reject) => {
+        ApiService.post("password-reset", {
+            email,
+            password,
         })
             .then((response) => {
                 console.log(

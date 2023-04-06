@@ -17,7 +17,6 @@ const Home = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);
 
     const handleClick = function () {
-        console.log("btn clicked");
         dispatch(login(option));
     };
 
@@ -26,7 +25,9 @@ const Home = () => {
             Home
             <div>
                 <Link to={"/"}>Home</Link>
-                <Button clickHandler={handleClick} isLoading={isLoading}>Lick me</Button>
+                <Button clickHandler={handleClick} isLoading={isLoading}>
+                    CLick me
+                </Button>
                 <Link to={"/login"}>Login</Link>
                 <Link to={"/register"}>Register</Link>
                 <Link to={"/profile"}>Profile</Link>

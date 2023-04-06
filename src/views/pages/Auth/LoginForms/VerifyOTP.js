@@ -8,7 +8,7 @@ import { verifyOtp } from "@store/auth/authThunks";
 import Loader from "@common/spinner/Spinner";
 import { getUserEmail } from "@services/jwtService";
 
-import "../auth.css";
+import "@pages/Auth/auth.css";
 
 const VerifyOTP = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);

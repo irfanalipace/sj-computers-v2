@@ -11,7 +11,7 @@ import Loader from "@common/spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { verifyEmail } from "@store/auth/authThunks";
-import "../auth.css";
+import "@pages/Auth/auth.css";
 
 const EmailForm = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);
@@ -99,7 +99,7 @@ const EmailForm = () => {
                     <div className="react-heading">
                         <div className="rectangle">
                             <Link
-                                to="/Register"
+                                to="/register"
                                 className="text-decoration-none"
                                 style={{ color: "#333333" }}
                             >

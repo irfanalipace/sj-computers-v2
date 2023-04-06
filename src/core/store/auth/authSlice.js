@@ -27,7 +27,6 @@ const authSlice = createSlice({
             state.user = null;
         },
         REGISTER: (state, action) => {
-            state.isAuthenticated = true;
             state.isLoading = false;
             state.user = action.payload;
         },
@@ -36,10 +35,11 @@ const authSlice = createSlice({
             state.isLoading = false;
         },
         VERIFY_EMAIL: (state, action) => {
-            state.user.email = action.payload;
+            state.user = { email: action.payload };
+            state.isLoading = false;
         },
         VERIFY_OTP: (state, action) => {
-            state.user.isAuthenticated = true;
+            state.isAuthenticated = true;
             state.user = action.payload;
             state.isLoading = false;
         },

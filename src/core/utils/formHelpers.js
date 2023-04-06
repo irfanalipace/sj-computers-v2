@@ -8,6 +8,13 @@ export const ErrorMessages = {
     password_mismatch: "Password and Confirm Password fields are not same",
 };
 
+const FIELD_ENUMS = {
+    name: "Name",
+    email: "Email",
+    password: "Password",
+    confirmPassword: "Confirm Password",
+};
+
 export function validateForm(values, { fieldLengths }) {
     let errors = {};
     if (!values.name) {
@@ -30,7 +37,7 @@ export function validateForm(values, { fieldLengths }) {
         }
         if (errors[fieldName]) {
             errors[fieldName] = errors[fieldName]
-                .replace("{fieldName}", fieldName)
+                .replace("{fieldName}", FIELD_ENUMS[fieldName])
                 .replace("{minLength}", minLength)
                 .replace("{maxLength}", maxLength);
         }

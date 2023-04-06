@@ -10,13 +10,14 @@ import Loader from "@common/spinner/Spinner";
 // import logo from '@images/fa-icon.png'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import { login } from "@store/auth/authThunks";
+import { resetPassword } from "@store/auth/authThunks";
 import { getUserEmail } from "@services/jwtService";
 import "@pages/Auth/auth.css";
 
-const Login = () => {
+const ForgetPassword = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const Login = () => {
             password,
         };
         e.preventDefault();
-        dispatch(login(credentials, () => navigate("/verify-otp")));
+        dispatch(resetPassword(credentials, () => navigate("/login")));
     }
 
     return (
@@ -51,6 +52,26 @@ const Login = () => {
                                 placeholder="Enter your password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                            />
+                            {error && (
+                                <p className="text-danger">
+                                    Password Does Not Exist
+                                </p>
+                            )}
+                        </div>
+
+                        <div className="mb-3">
+                            <label className="password-lable font-weight-bold">
+                                Confirm Password
+                            </label>
+                            <input
+                                type="password"
+                                className="form-control"
+                                placeholder="Enter your password"
+                                value={confirmPassword}
+                                onChange={(e) =>
+                                    setConfirmPassword(e.target.value)
+                                }
                             />
                             {error && (
                                 <p className="text-danger">
@@ -130,4 +151,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default ForgetPassword;

@@ -9,9 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormValidation } from "@hooks/useFormValidation";
 import Loader from "@common/spinner/Spinner";
 import { register } from "@store/auth/authThunks";
-import { ErrorMessages } from "@utils/formHelpers";
 
-import "./auth.css";
+import "@pages/Auth/auth.css";
 
 const Register = () => {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
@@ -48,7 +47,7 @@ const Register = () => {
     const dispatch = useDispatch();
 
     function registerFunction() {
-        dispatch(register(values, () => navigate("/")));
+        dispatch(register(values, () => navigate("/verify-email")));
     }
 
     return (

@@ -4,8 +4,10 @@ import Home from "@pages/Home/Home";
 import EmailForm from "@pages/Auth/LoginForms/EmailForm";
 import PasswordForm from "@pages/Auth/LoginForms/PasswordForm";
 import VerifyOTP from "@pages/Auth/LoginForms/VerifyOTP";
-import Register from "@pages/Auth/Register";
+import Register from "@pages/Auth/RegisterForms/Register";
+import EmailVerify from "@pages/Auth/RegisterForms/EmailVerify";
 import Profile from "@pages/User/Profile";
+import ForgetPassword from "@pages/Auth/ForgetPassword/ForgetPassword";
 
 export const Router = () => {
     const routes = [
@@ -51,10 +53,18 @@ export const Router = () => {
             ),
         },
         {
+            path: "/verify-email",
+            element: (
+                <AuthRoute>
+                    <EmailVerify />
+                </AuthRoute>
+            ),
+        },
+        {
             path: "/forget-password",
             element: (
                 <AuthRoute>
-                    <Register />
+                    <ForgetPassword />
                 </AuthRoute>
             ),
         },
