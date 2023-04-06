@@ -23,10 +23,10 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('password-forget', [AuthController::class, 'forgetPassword'])->name('password-forgot');
 Route::post('password-reset', [AuthController::class, 'resetPassword'])->name('password-reset');
 Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
-Route::put('profile-update', [AuthController::class, 'updateProfile'])->name('profile-update');
 Route::post('verify-otp',[AuthController::class, 'verifyOtp'])->name('verify-otp')->middleware('verifyOtpAttempts');
 
 
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::put('profile-update', [AuthController::class, 'updateProfile'])->name('profile-update');
 });

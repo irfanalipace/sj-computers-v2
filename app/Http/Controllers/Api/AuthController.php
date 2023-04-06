@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Otp;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\Api\BaseController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
@@ -21,17 +20,16 @@ use App\Http\Requests\VerifyEmailRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\LoginOtpMail;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cache;
 
 class AuthController extends BaseController
 {
     public function register(RegisterRequest $request) :JsonResponse
     {
-        $validator = $request->all();
+        $data = $request->all();
 
-        if(empty($validator)){
-            return $this->sendError('Validation Error',$validator->errors(), 422);
+        if(empty($data)){
+            return $this->sendError('Validation Error',$data->errors(), 422);
         }
 
         $user = User::create([
@@ -42,15 +40,15 @@ class AuthController extends BaseController
 
         $token = $user->createToken('authToken')->accessToken;
 
-        return $this->sendResponse($token, 'User register successfully.');
+        return $this->sendResponse(['token' => $token], 'User register successfully.');
     }
 
     public function login(LoginRequest $request) :JsonResponse
     {
-        $validator = $request->all();
+        $data = $request->all();
 
-        if (empty($validator)) {
-            return $this->sendError('Validation Error', $validator->errors(), 422);
+        if (empty($data)) {
+            return $this->sendError('Validation Error', $data->errors(), 422);
         }
 
         $credentials = $request->only(['email', 'password']);
@@ -73,16 +71,16 @@ class AuthController extends BaseController
 
         $token = $user->createToken('authToken')->accessToken;
 
-        return $this->sendResponse(['access_token' => $token], 'OTP sent to your email address.');
+        return $this->sendResponse(['token' => $token], 'OTP sent to your email address.');
     }
 
 
     public function forgetPassword(ForgetRequest $request)
     {
-        $validator = $request->all();
+        $data = $request->all();
 
-        if (empty($validator)) {
-            return $this->sendError('Validation Error', $validator->errors(), 422);
+        if (empty($data)) {
+            return $this->sendError('Validation Error', $data->errors(), 422);
         }
 
         $email = $request->email;
@@ -101,10 +99,10 @@ class AuthController extends BaseController
 
     public function resetPassword(ResetPassword $request)
     {
-        $validator = $request->all();
+        $data = $request->all();
 
-        if (empty($validator)) {
-            return $this->sendError('Validation Error', $validator->errors(), 422);
+        if (empty($data)) {
+            return $this->sendError('Validation Error', $data->errors(), 422);
         }
 
         $credentials = $request->only(
@@ -134,6 +132,7 @@ class AuthController extends BaseController
         }
     }
 
+
     public function verifyEmail(VerifyEmailRequest $request)
     {
         $user = User::where('email', $request->email)->first();
@@ -144,17 +143,17 @@ class AuthController extends BaseController
         return $this->sendResponse([], 'Email Verified.');
     }
 
+
     public function updateProfile(UpdateProfileRequest $request) {
 
-        $validator = $request->all();
-        dd($validator);
+        $data = $request->all();
         $user = Auth::user();
 
-        if (isset($validator['password'])) {
-            $validator['password'] = bcrypt($validator['password']);
+        if (isset($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
         }
 
-        $user->update($validator);
+        $user->update($data);
 
         return $this->sendResponse([], 'Profile Updated Successfully.');
     }
@@ -167,27 +166,23 @@ class AuthController extends BaseController
             ->exists();
 
         $otpTried = Otp::where('user_id', $request->user_id);
-        $otpLimit = User::where('id', $request->user_id);
         if ($otp != $data) {
             $otpTried->increment('tried');
-            $otpLimit->increment('otp_limit');
 
             if ($otpTried->value('tried') >= 3) {
-                $otpLimit->update(['updated_at' => Carbon::now()->addMinutes(2), 'otp_limit' => 0]);
                 $otpTried->update([
+                    'updated_at' => Carbon::now()->addMinutes(2),
                     'tried' => 0,
                     'resend_code_limit' => DB::raw('resend_code_limit + 1'),
                 ]);
                 return $this->sendError('Too many attempts. Please try again in 2 minutes.');
             }
-            return $this->sendError([], 'Invalid OTP', 422);
+            return $this->sendError('Invalid OTP', 422);
         }
 
         if ($data = true) {
             User::where('id', '=', $request->user_id)->update(['otp_verified' => 1]);
-            $otpTried->update(['tried' => 0]);
-            $otpTried->update(['resend_code_limit' => 0]);
-            $otpLimit->update(['otp_limit' => 0]);
+            $otpTried->update(['tried' => 0,'resend_code_limit' => 0]);
         }
     }
 
