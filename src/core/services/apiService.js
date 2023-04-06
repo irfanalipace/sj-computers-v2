@@ -64,10 +64,12 @@ const ApiService = {
                     if (error.response.status === 401) {
                         destroyToken();
                     }
-                    if (!ACCEPTED_ERROR_CODES.includes(error.response.status)) {
+                    if (
+                        !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
+                    ) {
                         toast.error("Something Went Wrong");
                     }
-                    reject(err);
+                    reject(err.message);
                 });
         });
     },
@@ -97,10 +99,12 @@ const ApiService = {
                     if (error.status === 401) {
                         destroyToken();
                     }
-                    if (ACCEPTED_ERROR_CODES.includes(error.response.status)) {
+                    if (
+                        ACCEPTED_ERROR_CODES.includes(error?.response?.status)
+                    ) {
                         toast.error("Something Went Wrong");
                     }
-                    reject(err);
+                    reject(err.message);
                 });
         });
     },

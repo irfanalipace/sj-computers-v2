@@ -11,22 +11,22 @@ export const ErrorMessages = {
 export function validateForm(values, { fieldLengths }) {
     let errors = {};
     if (!values.name) {
-        errors.name = "name_required";
+        errors.name = ErrorMessages.name_required;
     }
     if (!values.email) {
-        errors.email = "email_required";
+        errors.email = ErrorMessages.email_required;
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-        errors.email = "email_invalid";
+        errors.email = ErrorMessages.email_invalid;
     }
     for (let fieldName in fieldLengths) {
         let minLength = fieldLengths[fieldName].min;
         let maxLength = fieldLengths[fieldName].max;
         if (!values[fieldName]) {
-            errors[fieldName] = "field_required";
+            errors[fieldName] = ErrorMessages.field_required;
         } else if (minLength && values[fieldName].length < minLength) {
-            errors[fieldName] = "field_too_short";
+            errors[fieldName] = ErrorMessages.field_too_short;
         } else if (maxLength && values[fieldName].length > maxLength) {
-            errors[fieldName] = "field_too_long";
+            errors[fieldName] = ErrorMessages.field_too_long;
         }
         if (errors[fieldName]) {
             errors[fieldName] = errors[fieldName]
@@ -37,7 +37,7 @@ export function validateForm(values, { fieldLengths }) {
     }
     if (values.password !== values.confirmPassword) {
         console.log(values.password + "  " + values.confirmPassword);
-        errors.confirmPassword = "password_mismatch";
+        errors.confirmPassword = ErrorMessages.password_mismatch;
     }
     return errors;
 }

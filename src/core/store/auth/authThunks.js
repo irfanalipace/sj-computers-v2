@@ -34,7 +34,7 @@ export const register = (credentials, cb) => {
             const response = await registerApi(credentials);
             let token = response.data.data.access_token;
             saveToken(token, "", credentials.email);
-            dispatch({ type: REGISTER, payload: credentials.email });
+            dispatch({ type: REGISTER, payload: credentials });
             cb();
         } catch (error) {
             console.log("Something went wrong in register", error);

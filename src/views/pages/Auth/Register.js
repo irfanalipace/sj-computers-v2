@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -33,6 +33,15 @@ const Register = () => {
     );
 
     const apiError = useSelector((state) => state.auth.apiError);
+    const [fieldErrors, setFieldErrors] = useState({});
+
+    useEffect(() => {
+        setFieldErrors(errors);
+    }, [errors]);
+
+    useEffect(() => {
+        setFieldErrors(apiError);
+    }, [apiError]);
 
     const isLoading = useSelector((state) => state.auth.isLoading);
     const navigate = useNavigate();
@@ -64,6 +73,11 @@ const Register = () => {
                                 className="form-control"
                                 placeholder="Full name"
                             />
+                            {fieldErrors.name && (
+                                <p className="text-danger">
+                                    {fieldErrors.name}
+                                </p>
+                            )}
                         </div>
                         <div className="mb-3">
                             <label className="email-lable font-weight-bold">
@@ -77,6 +91,11 @@ const Register = () => {
                                 className="form-control"
                                 placeholder="Enter your email"
                             />
+                            {fieldErrors.email && (
+                                <p className="text-danger">
+                                    {fieldErrors.email}
+                                </p>
+                            )}
                         </div>
                         <div className="mb-3">
                             <label className="font-weight-bold">Password</label>
@@ -88,6 +107,11 @@ const Register = () => {
                                 className="form-control"
                                 placeholder="Enter password"
                             />
+                            {fieldErrors.password && (
+                                <p className="text-danger">
+                                    {fieldErrors.password}
+                                </p>
+                            )}
                         </div>
                         <p className="text-muted small">
                             {/* <img src={vectoricon} alt='' style={{width:'7px'}}/> */}
@@ -109,6 +133,11 @@ const Register = () => {
                                 className="form-control"
                                 placeholder="Re-enter password"
                             />
+                            {fieldErrors.confirmPassword && (
+                                <p className="text-danger">
+                                    {fieldErrors.confirmPassword}
+                                </p>
+                            )}
                         </div>
 
                         <div className="d-grid">
