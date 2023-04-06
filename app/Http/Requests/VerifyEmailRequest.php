@@ -24,8 +24,7 @@ class VerifyEmailRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'email:rfc,dns'],
-            'token' => ['required']
+            'email' => ['required', 'email:rfc,dns']
         ];
     }
 }
