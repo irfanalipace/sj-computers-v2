@@ -166,8 +166,28 @@ class AuthController extends BaseController
             ->where('code',$otp)
             ->exists();
 
-        if ($data) {
-            $user = User::where('id', '=', $request->user_id)->update(['otp_verified' => 1]);
+        $otpTried = Otp::where('user_id', $request->user_id);
+        $otpLimit = User::where('id', $request->user_id);
+        if ($otp != $data) {
+            $otpTried->increment('tried');
+            $otpLimit->increment('otp_limit');
+
+            if ($otpTried->value('tried') >= 3) {
+                $otpLimit->update(['updated_at' => Carbon::now()->addMinutes(2), 'otp_limit' => 0]);
+                $otpTried->update([
+                    'tried' => 0,
+                    'resend_code_limit' => DB::raw('resend_code_limit + 1'),
+                ]);
+                return $this->sendError('Too many attempts. Please try again in 2 minutes.');
+            }
+            return $this->sendError([], 'Invalid OTP', 422);
+        }
+
+        if ($data = true) {
+            User::where('id', '=', $request->user_id)->update(['otp_verified' => 1]);
+            $otpTried->update(['tried' => 0]);
+            $otpTried->update(['resend_code_limit' => 0]);
+            $otpLimit->update(['otp_limit' => 0]);
         }
     }
 
