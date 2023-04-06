@@ -21,17 +21,16 @@ use App\Http\Requests\VerifyEmailRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\LoginOtpMail;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cache;
 
 class AuthController extends BaseController
 {
     public function register(RegisterRequest $request) :JsonResponse
     {
-        $validator = $request->all();
+        $data = $request->all();
 
-        if(empty($validator)){
-            return $this->sendError('Validation Error',$validator->errors(), 422);
+        if(empty($data)){
+            return $this->sendError('Validation Error',$data->errors(), 422);
         }
 
         $user = User::create([
@@ -47,10 +46,10 @@ class AuthController extends BaseController
 
     public function login(LoginRequest $request) :JsonResponse
     {
-        $validator = $request->all();
+        $data = $request->all();
 
-        if (empty($validator)) {
-            return $this->sendError('Validation Error', $validator->errors(), 422);
+        if (empty($data)) {
+            return $this->sendError('Validation Error', $data->errors(), 422);
         }
 
         $credentials = $request->only(['email', 'password']);
@@ -63,10 +62,10 @@ class AuthController extends BaseController
 
         $otp = rand(1000, 9999);
 
-        $otpModel = new Otp();
-        $otpModel->user_id = $user->id;
-        $otpModel->code = $otp;
-        $otpModel->save();
+        $otpSave = new Otp();
+        $otpSave->user_id = $user->id;
+        $otpSave->code = $otp;
+        $otpSave->save();
 
         Cache::put('login_otp_'.$user->id, $otp, now()->addMinutes(5));
         Mail::to($user->email)->send(new LoginOtpMail($otp));
@@ -79,10 +78,10 @@ class AuthController extends BaseController
 
     public function forgetPassword(ForgetRequest $request)
     {
-        $validator = $request->all();
+        $data = $request->all();
 
-        if (empty($validator)) {
-            return $this->sendError('Validation Error', $validator->errors(), 422);
+        if (empty($data)) {
+            return $this->sendError('Validation Error', $data->errors(), 422);
         }
 
         $email = $request->email;
@@ -101,10 +100,10 @@ class AuthController extends BaseController
 
     public function resetPassword(ResetPassword $request)
     {
-        $validator = $request->all();
+        $data = $request->all();
 
-        if (empty($validator)) {
-            return $this->sendError('Validation Error', $validator->errors(), 422);
+        if (empty($data)) {
+            return $this->sendError('Validation Error', $data->errors(), 422);
         }
 
         $credentials = $request->only(
@@ -146,15 +145,14 @@ class AuthController extends BaseController
 
     public function updateProfile(UpdateProfileRequest $request) {
 
-        $validator = $request->all();
-        dd($validator);
+        $data = $request->all();
         $user = Auth::user();
 
-        if (isset($validator['password'])) {
-            $validator['password'] = bcrypt($validator['password']);
+        if (isset($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
         }
 
-        $user->update($validator);
+        $user->update($data);
 
         return $this->sendResponse([], 'Profile Updated Successfully.');
     }
