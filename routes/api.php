@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+
 //use Illuminate\Support\Facades\Auth;
 
 /*
@@ -26,7 +28,10 @@ Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verif
 Route::put('profile-update', [AuthController::class, 'updateProfile'])->name('profile-update');
 Route::post('verify-otp',[AuthController::class, 'verifyOtp'])->name('verify-otp');
 
-
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::group(['middleware' => ['auth', 'admin']], function () {
+        Route::apiResource('category', CategoryController::class);
+    });
+    Route::apiResource('category', CategoryController::class)->only(['index', 'show']);
 });
