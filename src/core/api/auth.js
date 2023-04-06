@@ -77,9 +77,8 @@ export function resetPasswordApi() {
 
 export function verifyEmailApi(email) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`email/verify?email=${email}`, {
-            // userId: email,
-            // password,
+        ApiService.post('verify-email', {
+            email
         })
             .then((response) => {
                 console.log(
@@ -97,9 +96,9 @@ export function verifyEmailApi(email) {
 
 export function verifyOtpApi({email, otp}) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`email/verify?otp${otp}`, {
-            // userId: email,
-            // password,
+        ApiService.post('verify-otp', {
+            email,
+            otp
         })
             .then((response) => {
                 console.log(

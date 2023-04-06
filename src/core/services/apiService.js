@@ -7,6 +7,8 @@ import { getToken, destroyToken } from "@services/jwtService";
  * Service to call HTTP request via Axios
  */
 
+const ACCEPTED_ERROR_CODES = [401, 403, 422];
+
 const ApiService = {
     instance: null,
     init() {
@@ -60,7 +62,9 @@ const ApiService = {
                     if (error.response.status === 401) {
                         destroyToken();
                     }
-                    toast.error("Something Went Wrong");
+                    if (ACCEPTED_ERROR_CODES.includes(error.response.status)) {
+                        toast.error("Something Went Wrong");
+                    }
                     reject(err);
                 });
         });

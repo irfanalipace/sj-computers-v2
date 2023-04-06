@@ -6,9 +6,9 @@ import {
     CLEAR_LOADING,
     VERIFY_EMAIL,
     VERIFY_OTP,
-    API_ERROR
+    API_ERROR,
 } from "@store/auth/authSlice";
-import { loginApi, logoutApi, registerApi } from "@api/auth";
+import { loginApi, logoutApi, registerApi, verifyOtpApi } from "@api/auth";
 import { verifyEmailApi } from "@api/auth";
 import { saveToken, destroyToken, saveUserEmail } from "@services/jwtService";
 
@@ -22,7 +22,7 @@ export const login = (credentials, cb) => {
             cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
-            dispatch({ type: API_ERROR, payload: {error} });
+            dispatch({ type: API_ERROR, payload: { error } });
         }
     };
 };
@@ -77,7 +77,7 @@ export const verifyOtp = (credentials, cb) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            const response = await verifyEmailApi(credentials);
+            const response = await verifyOtpApi(credentials);
             let token = response.data.data.access_token;
             saveToken(token, "", credentials.email);
             dispatch({ type: VERIFY_OTP, payload: {} });
