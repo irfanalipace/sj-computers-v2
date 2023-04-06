@@ -11,7 +11,12 @@ class Otp extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $guarded;
+    protected $fillable = [
+        'user_id',
+        'code',
+        'tried',
+        'resend_code_limit',
+    ];
 
     public function user()
     {
