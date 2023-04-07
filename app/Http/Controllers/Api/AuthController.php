@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Otp;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\API\BaseController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
@@ -18,15 +18,19 @@ use Illuminate\Auth\Notifications\ResetPassword;
 use App\Http\Requests\ForgetRequest;
 use App\Http\Requests\VerifyEmailRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LoginOtpMail;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 class AuthController extends BaseController
 {
     public function register(RegisterRequest $request) :JsonResponse
     {
-        $validator = $request->all();
+        $data = $request->all();
 
-        if(empty($validator)){
-            return $this->sendError('Validation Error',$validator->errors(), 422);
+        if(empty($data)){
+            return $this->sendError('Validation Error',$data->errors(), 422);
         }
 
         $user = User::create([
@@ -37,15 +41,15 @@ class AuthController extends BaseController
 
         $token = $user->createToken('authToken')->accessToken;
 
-        return $this->sendResponse($token, 'User register successfully.');
+        return $this->sendResponse(['token' => $token], 'User register successfully.');
     }
 
     public function login(LoginRequest $request) :JsonResponse
     {
-        $validator = $request->all();
+        $data = $request->all();
 
-        if (empty($validator)) {
-            return $this->sendError('Validation Error', $validator->errors(), 422);
+        if (empty($data)) {
+            return $this->sendError('Validation Error', $data->errors(), 422);
         }
 
         $credentials = $request->only(['email', 'password']);
@@ -55,52 +59,40 @@ class AuthController extends BaseController
         }
 
         $user = Auth::user();
+
+        $otp = rand(1000, 9999);
+
+        $otpSave = new Otp();
+        $otpSave->user_id = $user->id;
+        $otpSave->code = $otp;
+        $otpSave->save();
+
+        Cache::put('login_otp_'.$user->id, $otp, now()->addMinutes(5));
+        Mail::to($user->email)->send(new LoginOtpMail($otp));
+
         $token = $user->createToken('authToken')->accessToken;
 
-        return $this->sendResponse(['access_token' => $token], 'User logged in successfully.');
+        return $this->sendResponse(['token' => $token], 'OTP sent to your email address.');
     }
 
 
     public function forgetPassword(ForgetRequest $request)
     {
-        $validator = $request->all();
 
-        if (empty($validator)) {
-            return $this->sendError('Validation Error', $validator->errors(), 422);
-        }
+        Password::sendResetLink($request->all());
 
-        $email = $request->email;
-        $user = User::where('email', $email)->first();
-
-        if (!$user) {
-            return $this->sendError('User not found.', 404);
-        }
-
-        $token = app('auth.password.broker')->createToken($user);
-        $user->sendPasswordResetNotification($token);
-
-        return $this->sendResponse([], 'Password reset link sent to your email.');
+        return $this->sendResponse([], 'Reset password link sent on your email id.');
     }
 
 
-    public function resetPassword(ResetPassword $request)
+    public function resetPassword(ResetRequest $request)
     {
-        $validator = $request->all();
-
-        if (empty($validator)) {
-            return $this->sendError('Validation Error', $validator->errors(), 422);
-        }
-
-        $credentials = $request->only(
-            'email', 'password', 'password_confirmation', 'token'
-        );
-
-        $response = Password::reset($credentials, function ($user, $password) {
+        $reset_password_status = Password::reset($request->all(), function ($user, $password) {
             $user->password = Hash::make($password);
             $user->save();
         });
 
-        if ($response == Password::INVALID_TOKEN) {
+        if ($reset_password_status == Password::INVALID_TOKEN) {
             return $this->sendError('Invalid token.', 400);
         }
 
@@ -118,7 +110,8 @@ class AuthController extends BaseController
         }
     }
 
-    public function verifyEmail(VerifyEmailRequest $request) {
+    public function verifyEmail(VerifyEmailRequest $request)
+    {
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
@@ -129,17 +122,44 @@ class AuthController extends BaseController
 
     public function updateProfile(UpdateProfileRequest $request) {
 
-        $validator = $request->all();
-        dd($validator);
+        $data = $request->all();
         $user = Auth::user();
 
-        if (isset($validator['password'])) {
-            $validator['password'] = bcrypt($validator['password']);
+        if (isset($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
         }
 
-        $user->update($validator);
+        $user->update($data);
 
         return $this->sendResponse([], 'Profile Updated Successfully.');
+    }
+
+    public function verifyOtp(Request $request) {
+        $otp = $request->get('otp');
+
+        $data = Otp::where('user_id', '=', $request->user_id)
+            ->where('code',$otp)
+            ->exists();
+
+        $otpTried = Otp::where('user_id', $request->user_id);
+        if ($otp != $data) {
+            $otpTried->increment('tried');
+
+            if ($otpTried->value('tried') >= 3) {
+                $otpTried->update([
+                    'updated_at' => Carbon::now()->addMinutes(2),
+                    'tried' => 0,
+                    'resend_code_limit' => DB::raw('resend_code_limit + 1'),
+                ]);
+                return $this->sendError('Too many attempts. Please try again in 2 minutes.');
+            }
+            return $this->sendError('Invalid OTP', 422);
+        }
+
+        if ($data = true) {
+            User::where('id', '=', $request->user_id)->update(['otp_verified' => 1]);
+            $otpTried->update(['tried' => 0,'resend_code_limit' => 0]);
+        }
     }
 
     public function test()

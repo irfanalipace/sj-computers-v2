@@ -24,6 +24,7 @@ Route::post('password-forget', [AuthController::class, 'forgetPassword'])->name(
 Route::post('password-reset', [AuthController::class, 'resetPassword'])->name('password-reset');
 Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
 Route::put('profile-update', [AuthController::class, 'updateProfile'])->name('profile-update');
+Route::post('verify-otp',[AuthController::class, 'verifyOtp'])->name('verify-otp');
 
 
 Route::middleware('auth:api')->group(function () {

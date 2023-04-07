@@ -3,13 +3,12 @@ import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 import { getToken } from "@services/jwtService";
-import { Router } from "./routes";
+import { Router } from "./Routes";
 import { alreadyLoggedIn } from "@store/auth/authSlice";
 import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import './App.css'
+import "./App.css";
 function App() {
     const dispatch = useDispatch();
     const token = getToken();

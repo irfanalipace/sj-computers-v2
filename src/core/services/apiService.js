@@ -7,6 +7,8 @@ import { getToken, destroyToken } from "@services/jwtService";
  * Service to call HTTP request via Axios
  */
 
+const ACCEPTED_ERROR_CODES = [400, 401, 403, 422];
+
 const ApiService = {
     instance: null,
     init() {
@@ -14,7 +16,7 @@ const ApiService = {
             this.instance = axios.create({ withCredentials: true });
             this.instance.defaults.baseURL = "http://localhost:8000/api";
             // this.instance.defaults.baseURL = process.env.API_BASE_URL;
-            this.instance.defaults.headers["content-type"] = "Application/JSON";
+            this.instance.defaults.headers["content-type"] = "application/json";
             if (getToken()) {
                 this.setHeader("Authorization", `Bearer ${getToken()}`);
             }
@@ -29,12 +31,6 @@ const ApiService = {
         this.instance.defaults.headers[header] = val;
     },
 
-    query(resource, params) {
-        return this.instance.get(resource, params).catch((error) => {
-            toast.error("Something Went Wrong");
-            throw new Error(`ApiService ${error}`);
-        });
-    },
     /**
      * Send the GET HTTP request
      * @param resource
@@ -50,18 +46,15 @@ const ApiService = {
                     resolve(res);
                 })
                 .catch((error) => {
-                    const err = {
-                        data: {
-                            success: 0,
-                            message: error.message,
-                            url: this.instance.defaults.baseURL + resource,
-                        },
-                    };
-                    if (error.response.status === 401) {
+                    if (error?.response?.status === 401) {
                         destroyToken();
                     }
-                    toast.error("Something Went Wrong");
-                    reject(err);
+                    if (
+                        !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
+                    ) {
+                        toast.error("Something Went Wrong");
+                    }
+                    reject(error.response);
                 });
         });
     },
@@ -80,33 +73,18 @@ const ApiService = {
                 .then((res) => {
                     resolve(res);
                 })
-                .catch((error) => {
-                    const err = {
-                        data: {
-                            success: 0,
-                            message: error.message,
-                            url: this.instance.defaults.baseURL + resource,
-                        },
-                    };
-                    if (error.status === 401) {
+                .catch((error, status) => {
+                    if (error?.response?.status === 401) {
                         destroyToken();
                     }
-                    toast.error("Something Went Wrong");
-                    reject(err);
+                    if (
+                        !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
+                    ) {
+                        toast.error("Something Went Wrong");
+                    }
+                    reject(error.response);
                 });
         });
-    },
-
-    /**
-     * Send the UPDATE HTTP request
-     * @param resource
-     * @param slug
-     * @param params
-     * @returns {IDBRequest<IDBValidKey> | Promise<void>}
-     */
-
-    update(resource, slug, params) {
-        return this.instance.put(`${resource}/${slug}`, params);
     },
 
     /**
@@ -117,7 +95,20 @@ const ApiService = {
      */
 
     put(resource, params) {
-        return this.instance.put(`${resource}`, params);
+        return this.instance
+            .put(`${resource}`, params)
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((error, status) => {
+                if (error?.response?.status === 401) {
+                    destroyToken();
+                }
+                if (ACCEPTED_ERROR_CODES.includes(error?.response?.status)) {
+                    toast.error("Something Went Wrong");
+                }
+                reject(error.response);
+            });
     },
 
     /**
@@ -127,9 +118,20 @@ const ApiService = {
      */
 
     delete(resource) {
-        return this.instance.delete(resource).catch((error) => {
-            throw new Error(`ApiService ${error}`);
-        });
+        return this.instance
+            .delete(resource)
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((error, status) => {
+                if (error?.response?.status === 401) {
+                    destroyToken();
+                }
+                if (ACCEPTED_ERROR_CODES.includes(error?.response?.status)) {
+                    toast.error("Something Went Wrong");
+                }
+                reject(error.response);
+            });
     },
 };
 

@@ -1,13 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 import Header from "@components/auth/Header";
 import Footer from "@components/auth/Footer";
+import Loader from "@common/spinner/Spinner";
+
+// import logo from '@images/fa-icon.png'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import './auth.css'
+import { resetPassword } from "@store/auth/authThunks";
+import { getUserEmail } from "@services/jwtService";
+import "@pages/Auth/auth.css";
 
-const Login = () => {
+const ForgetPassword = () => {
+    const isLoading = useSelector((state) => state.auth.isLoading);
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const email = getUserEmail();
+
+    function verifyPasswordFunction(e) {
+        const credentials = {
+            email,
+            password,
+        };
+        e.preventDefault();
+        dispatch(resetPassword(credentials, () => navigate("/login")));
+    }
+
     return (
         <div>
             <div className="container form-container">
@@ -19,22 +43,50 @@ const Login = () => {
                     <form className="auth-inner-body">
                         <h3 className="login-h3">Sign in</h3>
                         <div className="mb-3">
-                            <label className="email-lable font-weight-bold">
-                                Email or mobile phone number
+                            <label className="password-lable font-weight-bold">
+                                Enter your password
                             </label>
                             <input
-                                type="email"
+                                type="password"
                                 className="form-control"
-                                placeholder="Enter your email"
+                                placeholder="Enter your password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
+                            {error && (
+                                <p className="text-danger">
+                                    Password Does Not Exist
+                                </p>
+                            )}
                         </div>
 
+                        <div className="mb-3">
+                            <label className="password-lable font-weight-bold">
+                                Confirm Password
+                            </label>
+                            <input
+                                type="password"
+                                className="form-control"
+                                placeholder="Enter your password"
+                                value={confirmPassword}
+                                onChange={(e) =>
+                                    setConfirmPassword(e.target.value)
+                                }
+                            />
+                            {error && (
+                                <p className="text-danger">
+                                    Password Does Not Exist
+                                </p>
+                            )}
+                        </div>
                         <div className="d-grid">
                             <button
                                 type="submit"
                                 className="btn btn-primary login-button"
+                                onClick={verifyPasswordFunction}
+                                disabled={isLoading}
                             >
-                                Continue
+                                {isLoading ? <Loader /> : "Continue"}
                             </button>
                         </div>
                         <p className="text-muted small">
@@ -50,8 +102,6 @@ const Login = () => {
                         </p>
 
                         <div className="need-help">
-                            {/* <i className="fa fa-caret-right" aria-hidden="true"> </i> */}
-                            {/* <img src={logo} alt="" /> */}
                             <FontAwesomeIcon icon={faCaretRight} />{" "}
                             <a
                                 href="#"
@@ -76,7 +126,7 @@ const Login = () => {
                     <div className="react-heading">
                         <div className="rectangle">
                             <Link
-                                to="/Register"
+                                to="/register"
                                 className="text-decoration-none"
                                 style={{ color: "#333333" }}
                             >
@@ -88,7 +138,6 @@ const Login = () => {
                     <div></div>
                 </div>
             </div>
-
             <div className="container-fluid bg-light">
                 <div className="row">
                     <div className="col">
@@ -102,4 +151,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default ForgetPassword;

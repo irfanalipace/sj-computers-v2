@@ -4,7 +4,6 @@ const webpack = require("webpack");
 module.exports = {
     entry: "./src/Index.js",
     mode: "development",
-    // target: "node",
     module: {
         rules: [
             {
@@ -24,13 +23,13 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
                 use: [
-                  {
-                    loader: 'file-loader',
-                    options: {
-                      name: '[name].[ext]',
-                      outputPath: 'images/',
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name: "[name].[ext]",
+                            outputPath: "images/",
+                        },
                     },
-                }
                 ],
             },
         ],
@@ -46,6 +45,8 @@ module.exports = {
             "@store": path.resolve(__dirname, "src/core/store"),
             "@services": path.resolve(__dirname, "src/core/services"),
             "@api": path.resolve(__dirname, "src/core/api"),
+            "@hooks": path.resolve(__dirname, "src/core/hooks"),
+            "@utils": path.resolve(__dirname, "src/core/utils"),
         },
     },
 
@@ -67,11 +68,4 @@ module.exports = {
     },
 
     plugins: [new webpack.HotModuleReplacementPlugin()],
-
-    stats: {
-        colors: true,
-        modules: true,
-        reasons: true,
-        errorDetails: true,
-    },
 };

@@ -1,9 +1,13 @@
 import { Navigate, useRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Home from "@pages/Home/Home";
-import Login from "@pages/Auth/Login";
-import Register from "@pages/Auth/Register";
+import EmailForm from "@pages/Auth/LoginForms/EmailForm";
+import PasswordForm from "@pages/Auth/LoginForms/PasswordForm";
+import VerifyOTP from "@pages/Auth/LoginForms/VerifyOTP";
+import Register from "@pages/Auth/RegisterForms/Register";
+import EmailVerify from "@pages/Auth/RegisterForms/EmailVerify";
 import Profile from "@pages/User/Profile";
+import ForgetPassword from "@pages/Auth/ForgetPassword/ForgetPassword";
 
 export const Router = () => {
     const routes = [
@@ -20,7 +24,23 @@ export const Router = () => {
             path: "/login",
             element: (
                 <AuthRoute>
-                    <Login />
+                    <EmailForm />
+                </AuthRoute>
+            ),
+        },
+        {
+            path: "/verify-password",
+            element: (
+                <AuthRoute>
+                    <PasswordForm />
+                </AuthRoute>
+            ),
+        },
+        {
+            path: "/verify-otp",
+            element: (
+                <AuthRoute>
+                    <VerifyOTP />
                 </AuthRoute>
             ),
         },
@@ -33,9 +53,20 @@ export const Router = () => {
             ),
         },
         {
-            path: "/Home",
-            element: <Home />,
-          
+            path: "/verify-email",
+            element: (
+                <AuthRoute>
+                    <EmailVerify />
+                </AuthRoute>
+            ),
+        },
+        {
+            path: "/forget-password",
+            element: (
+                <AuthRoute>
+                    <ForgetPassword />
+                </AuthRoute>
+            ),
         },
         {
             path: "/profile",

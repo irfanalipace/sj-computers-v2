@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class VerifyEmailRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class VerifyEmailRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'email:rfc,dns']
+            'name' => ['required', 'string', 'max:255', 'unique:categories,name,' . $this->category->id],
+            'parent_id' => ['nullable', 'integer', 'max:2147483647']
         ];
     }
 }
