@@ -15,11 +15,6 @@ export const Router = () => {
         {
             path: "/",
             element: <Home />,
-            // element: (
-            //     <AuthRoute>
-            //         <Login />
-            //     </AuthRoute>
-            // ),
         },
         {
             path: "/login",
