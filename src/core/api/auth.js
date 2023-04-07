@@ -25,6 +25,7 @@ export function registerApi({ name, email, password }) {
             name,
             email,
             password,
+            confirm_password,
         })
             .then((response) => {
                 console.log(
@@ -84,10 +85,10 @@ export function verifyEmailApi(email) {
     });
 }
 
-export function verifyOtpApi({ email, otp }) {
+export function verifyOtpApi({ TOKEN, otp }) {
     return new Promise((resolve, reject) => {
         ApiService.post("verify-otp", {
-            email,
+            TOKEN,
             otp,
         })
             .then((response) => {

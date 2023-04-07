@@ -6,21 +6,23 @@ import Header from "@components/auth/Header";
 import Footer from "@components/auth/Footer";
 import { verifyOtp } from "@store/auth/authThunks";
 import Loader from "@common/spinner/Spinner";
-import { getUserEmail } from "@services/jwtService";
+// import { getUserEmail } from "@services/jwtService";
+import { getToken } from "@services/jwtService";
 
 import "@pages/Auth/auth.css";
 
 const VerifyOTP = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);
-    const email = getUserEmail();
+    // const email = getUserEmail();
     const [otp, setOtp] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const TOKEN = getToken();
 
     function verifyOtpFunction(e) {
         const credentials = {
-            email,
+            TOKEN,
             otp,
         };
         e.preventDefault();

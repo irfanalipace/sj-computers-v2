@@ -78,7 +78,7 @@ export const verifyOtp = (credentials, cb) => {
             dispatch({ type: LOADING, payload: {} });
             const response = await verifyOtpApi(credentials);
             let token = response.data.data.access_token;
-            saveToken(token, "", credentials.email);
+            // saveToken(token, "", credentials.email);
             dispatch({ type: VERIFY_OTP, payload: {} });
             cb();
         } catch (error) {
