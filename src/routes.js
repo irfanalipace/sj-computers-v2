@@ -29,6 +29,14 @@ export const Router = () => {
             ),
         },
         {
+            path: "/verify-email",
+            element: (
+                <AuthRoute>
+                    <EmailForm />
+                </AuthRoute>
+            ),
+        },
+        {
             path: "/verify-password",
             element: (
                 <AuthRoute>

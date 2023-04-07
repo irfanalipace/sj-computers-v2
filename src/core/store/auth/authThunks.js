@@ -8,7 +8,14 @@ import {
     VERIFY_OTP,
     API_ERROR,
 } from "@store/auth/authSlice";
-import { loginApi, logoutApi, registerApi, verifyOtpApi } from "@api/auth";
+import {
+    loginApi,
+    logoutApi,
+    registerApi,
+    verifyOtpApi,
+    resetPasswordApi,
+    forgetPasswordApi,
+} from "@api/auth";
 import { verifyEmailApi } from "@api/auth";
 import { saveToken, destroyToken, saveUserEmail } from "@services/jwtService";
 
@@ -17,7 +24,8 @@ export const login = (credentials, cb) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             const response = await loginApi(credentials);
-            // let token = response.data.data.access_token;
+            let token = response.data.data.access_token;
+            saveToken(token, "", credentials.email);
             dispatch({ type: LOGIN, payload: credentials.email });
             cb();
         } catch (error) {
@@ -31,8 +39,7 @@ export const register = (credentials, cb) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            const response = await registerApi(credentials);
-            let token = response.data.data.access_token;
+            await registerApi(credentials);
             dispatch({ type: REGISTER, payload: credentials });
             cb();
         } catch (error) {
@@ -76,9 +83,7 @@ export const verifyOtp = (credentials, cb) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            const response = await verifyOtpApi(credentials);
-            let token = response.data.data.access_token;
-            // saveToken(token, "", credentials.email);
+            await verifyOtpApi(credentials);
             dispatch({ type: VERIFY_OTP, payload: {} });
             cb();
         } catch (error) {
@@ -92,10 +97,20 @@ export const resetPassword = (credentials, cb) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            const response = await resetPasswordApi(credentials);
-            let token = response.data.data.access_token;
-            saveToken(token, "", credentials.email);
-            dispatch({ type: VERIFY_OTP, payload: {} });
+            await resetPasswordApi(credentials);
+            cb();
+        } catch (error) {
+            console.log("Something went wrong in login", error);
+            dispatch({ type: API_ERROR, payload: error.data.errors });
+        }
+    };
+};
+
+export const forgetPassword = (credentials, cb) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: LOADING, payload: {} });
+            await forgetPasswordApi(credentials);
             cb();
         } catch (error) {
             console.log("Something went wrong in login", error);

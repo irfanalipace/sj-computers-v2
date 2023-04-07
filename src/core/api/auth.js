@@ -1,7 +1,5 @@
 import ApiService from "@services/apiService";
 
-// ApiService.setHeader("content-type", "multipart/form-data");
-
 export function loginApi({ email, password }) {
     return new Promise((resolve, reject) => {
         ApiService.post("/login", {
@@ -19,13 +17,13 @@ export function loginApi({ email, password }) {
     });
 }
 
-export function registerApi({ name, email, password }) {
+export function registerApi({ name, email, password, confirmPassword }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/register`, {
-            name,
-            email,
-            password,
-            confirm_password,
+            name: name,
+            email: email,
+            password: password,
+            password_confirmation: confirmPassword,
         })
             .then((response) => {
                 console.log(
@@ -62,10 +60,6 @@ export function logoutApi() {
 }
 
 export function verifyEmailApi(email) {
-    // console.log("email: ", email);
-    // let formData = new FormData();
-    // formData.append("email", "user@gmail.com");
-    // console.log("form data: ", formData);
     return new Promise((resolve, reject) => {
         ApiService.post("verify-email", {
             email,
@@ -73,7 +67,7 @@ export function verifyEmailApi(email) {
         })
             .then((response) => {
                 console.log(
-                    "file: auth.module.js | verifyEmailAddress| response",
+                    "file: auth.module.js | verifyEmailApi| response",
                     response
                 );
                 resolve(response);
@@ -93,7 +87,7 @@ export function verifyOtpApi({ TOKEN, otp }) {
         })
             .then((response) => {
                 console.log(
-                    "file: auth.module.js | verifyEmailAddress| response",
+                    "file: auth.module.js | verifyOtpApi| response",
                     response
                 );
                 resolve(response);
@@ -105,15 +99,34 @@ export function verifyOtpApi({ TOKEN, otp }) {
     });
 }
 
-export function resetPasswordApi({ email, otp }) {
+export function forgetPasswordApi({ email }) {
     return new Promise((resolve, reject) => {
-        ApiService.post("password-reset", {
+        ApiService.post("forget-password", {
             email,
-            password,
         })
             .then((response) => {
                 console.log(
-                    "file: auth.module.js | verifyEmailAddress| response",
+                    "file: auth.module.js | forgetPasswordApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error", e);
+                reject(e);
+            });
+    });
+}
+
+export function resetPasswordApi({ password, confirm_password }) {
+    return new Promise((resolve, reject) => {
+        ApiService.post("password-reset", {
+            password,
+            confirm_password,
+        })
+            .then((response) => {
+                console.log(
+                    "file: auth.module.js | resetPasswordApi| response",
                     response
                 );
                 resolve(response);
