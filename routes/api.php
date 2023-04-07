@@ -23,9 +23,9 @@ Route::post('register', [AuthController::class, 'registerUser']);
 
 Route::post('login', [AuthController::class, 'login']);
 
-Route::post('password-forget', [AuthController::class, 'forgetPassword'])->name('password-forgot');
+Route::post('forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password');
 
-Route::post('password-reset', [AuthController::class, 'resetPassword'])->name('password-reset');
+Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
 
 Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
 
