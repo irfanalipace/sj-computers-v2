@@ -37,10 +37,10 @@ class AuthController extends BaseController
 
     public function registerUser(RegisterUserRequest $request): JsonResponse
     {
-        $user = User::create(
+        User::create(
             array_merge($request->only('name', 'email'),
                 ['role_id' => User::USER_ROLE_ID,'password' => bcrypt($request->password)]
-            ));
+            ))->sendEmailVerificationNotification();
 
         return $this->sendResponse([], 'User register successfully.');
     }
@@ -52,6 +52,10 @@ class AuthController extends BaseController
         }
 
         $user = Auth::user();
+
+        if(empty($user->email_verified_at)){
+            return $this->sendError('Verify the email for further process.', 401);
+        }
 
         $otpCode = rand(1000, 9999);
 
