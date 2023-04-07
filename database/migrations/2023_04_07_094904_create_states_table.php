@@ -18,7 +18,8 @@ class CreateStatesTable extends Migration
             $table->foreignId('country_id')->constrained()->restrictOnUpdate()->restrictOnDelete();
             $table->string('name');
             $table->string('abbreviation');
-            $table->string('zip_code');
+            $table->integer('zip_code_start')->nullable();
+            $table->integer('zip_code_end')->nullable();
             $table->timestamps();
         });
     }
