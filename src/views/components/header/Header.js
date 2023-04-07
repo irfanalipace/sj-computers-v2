@@ -4,6 +4,7 @@ import english from '@images/home/eng.png';
 import vectorcart from '@images/home/vector.png';
 import splice from '@images/home/ellipse.png';
 import './header.css'
+import Sidebar from "@components/sidebar/Sidebar";
 const Header = () => {
 
     return (
@@ -62,7 +63,8 @@ const Header = () => {
                     </div>
                 </div>
             </header>
-
+           
+           <Sidebar />
         </div>
     );
 };
