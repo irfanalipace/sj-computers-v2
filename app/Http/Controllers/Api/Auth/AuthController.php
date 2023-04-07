@@ -68,9 +68,8 @@ class AuthController extends BaseController
         return $this->sendResponse(['access_token' => $token], 'OTP sent to your email address.');
     }
 
-    public function forgetPassword(ForgetPasswordRequest $request)
+    public function forgotPassword(ForgetPasswordRequest $request)
     {
-
         Password::sendResetLink($request->all());
 
         return $this->sendResponse([], 'Reset password link sent on your email id.');
