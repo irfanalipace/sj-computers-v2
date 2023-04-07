@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProductController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AuthController;
+
 //use Illuminate\Support\Facades\Auth;
 
 /*
@@ -17,16 +16,29 @@ use App\Http\Controllers\Api\AuthController;
 |
 */
 
-Route::get('test', [AuthController::class, 'test']);
-Route::post('register', [AuthController::class, 'register']);
+/*
+ * Auth Apis
+ */
+Route::post('register', [AuthController::class, 'registerUser']);
+
 Route::post('login', [AuthController::class, 'login']);
+
 Route::post('password-forget', [AuthController::class, 'forgetPassword'])->name('password-forgot');
+
 Route::post('password-reset', [AuthController::class, 'resetPassword'])->name('password-reset');
+
 Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
-Route::put('profile-update', [AuthController::class, 'updateProfile'])->name('profile-update');
-Route::post('verify-otp',[AuthController::class, 'verifyOtp'])->name('verify-otp');
 
 
 Route::middleware('auth:api')->group(function () {
+    /*
+     * Auth Apis
+    */
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('verify-otp',[AuthController::class, 'verifyOtp'])->name('verify-otp');
+
+    /*
+     * profile apis
+     */
+    Route::put('profile-update', [AuthController::class, 'updateProfile'])->name('profile-update');
 });

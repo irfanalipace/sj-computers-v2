@@ -12,6 +12,11 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const ADMIN_ROLE_ID = 1;
+    const USER_ROLE_ID = 2;
+
+    const AUTH_TOKEN = 'SJAuthToken';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +27,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'status',
-        'is_admin'
+        'message',
+        'role_id',
+        'otp_verified'
     ];
 
     public function otps()
