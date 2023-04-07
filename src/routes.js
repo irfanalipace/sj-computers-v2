@@ -5,9 +5,10 @@ import EmailForm from "@pages/Auth/LoginForms/EmailForm";
 import PasswordForm from "@pages/Auth/LoginForms/PasswordForm";
 import VerifyOTP from "@pages/Auth/LoginForms/VerifyOTP";
 import Register from "@pages/Auth/RegisterForms/Register";
-import EmailVerify from "@pages/Auth/RegisterForms/EmailVerify";
+import EmailSent from "@pages/Auth/RegisterForms/EmailSent";
 import Profile from "@pages/User/Profile";
 import ForgetPassword from "@pages/Auth/ForgetPassword/ForgetPassword";
+import ResetPassword from "@pages/Auth/ForgetPassword/ResetPassword";
 
 export const Router = () => {
     const routes = [
@@ -61,10 +62,10 @@ export const Router = () => {
             ),
         },
         {
-            path: "/verify-email",
+            path: "/email-sent",
             element: (
                 <AuthRoute>
-                    <EmailVerify />
+                    <EmailSent />
                 </AuthRoute>
             ),
         },
@@ -73,6 +74,14 @@ export const Router = () => {
             element: (
                 <AuthRoute>
                     <ForgetPassword />
+                </AuthRoute>
+            ),
+        },
+        {
+            path: "/reset-password",
+            element: (
+                <AuthRoute>
+                    <ResetPassword />
                 </AuthRoute>
             ),
         },

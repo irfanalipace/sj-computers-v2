@@ -1,35 +1,21 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
+import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+
 import Header from "@components/auth/Header";
 import Footer from "@components/auth/Footer";
 import Loader from "@common/spinner/Spinner";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import { login } from "@store/auth/authThunks";
-import { resetPassword } from "@store/auth/authThunks";
-import { getUserEmail } from "@services/jwtService";
-
-import "@pages/Auth/auth.css";
-
-const PasswordForm = () => {
+export default function EmailForm({ onFormSubmit }) {
     const isLoading = useSelector((state) => state.auth.isLoading);
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
     const [error, setError] = useState("");
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const email = getUserEmail();
 
-    function verifyPasswordFunction(e) {
-        const credentials = {
-            email,
-            password,
-        };
-        e.preventDefault();
-        dispatch(login(credentials, () => navigate("/verify-otp")));
+    function verifyEmail(e) {
+        onFormSubmit(email);
     }
 
     return (
@@ -43,24 +29,19 @@ const PasswordForm = () => {
                     <form className="auth-inner-body">
                         <h3 className="login-h3">Sign in</h3>
                         <div className="mb-3">
-                            <label className="password-lable font-weight-bold">
-                                Enter your password
+                            <label className="email-lable font-weight-bold">
+                                Email or mobile phone number
                             </label>
                             <input
-                                type="password"
+                                type="email"
                                 className="form-control"
-                                placeholder="Enter your password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
-                            <div className="d-flex justify-content-end">
-                                <Link to={"/forget-password"}>
-                                    Forget Password?
-                                </Link>{" "}
-                            </div>
                             {error && (
                                 <p className="text-danger">
-                                    Password Does Not Exist
+                                    Email Does Not Exist
                                 </p>
                             )}
                         </div>
@@ -68,7 +49,7 @@ const PasswordForm = () => {
                             <button
                                 type="submit"
                                 className="btn btn-primary login-button"
-                                onClick={verifyPasswordFunction}
+                                onClick={verifyEmail}
                                 disabled={isLoading}
                             >
                                 {isLoading ? <Loader /> : "Continue"}
@@ -134,6 +115,4 @@ const PasswordForm = () => {
             </div>
         </div>
     );
-};
-
-export default PasswordForm;
+}
