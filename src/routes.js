@@ -8,6 +8,7 @@ import Register from "@pages/Auth/RegisterForms/Register";
 import EmailVerify from "@pages/Auth/RegisterForms/EmailVerify";
 import Profile from "@pages/User/Profile";
 import ForgetPassword from "@pages/Auth/ForgetPassword/ForgetPassword";
+import Emailsent from "@pages/Auth/LoginForms/Emailsent";
 
 export const Router = () => {
     const routes = [
@@ -16,7 +17,7 @@ export const Router = () => {
             element: <Home />,
             // element: (
             //     <AuthRoute>
-            //         <Login />
+            //         <Home />
             //     </AuthRoute>
             // ),
         },
@@ -65,6 +66,14 @@ export const Router = () => {
             element: (
                 <AuthRoute>
                     <ForgetPassword />
+                </AuthRoute>
+            ),
+        },
+        {
+            path: "/Emailsent",
+            element: (
+                <AuthRoute>
+                    <Emailsent />
                 </AuthRoute>
             ),
         },
