@@ -1,5 +1,5 @@
 .header-background{
-    padding-top: 0% !important;
+    
     background:#00305E !important;
 }.homepage-img{
 width: 185px !important;
@@ -8,14 +8,12 @@ width: 185px !important;
     padding-left: 23px;
 }.searchbar-form{
    
-        width: 90%;
-        
-    
+width: 90%;
 }.search{
-    width: 61% !important;
+    width: 90% !important;
 }
 .eng-dropdown{
-    padding-left: 12px;
+    padding-left: 27px;
 }.eng-button{
   
         background: #00305E;
@@ -26,3 +24,18 @@ width: 185px !important;
 }.input-form-control{
     height: 60px;
 }
+.vector-cart{
+    width: 30px;
+   
+}.ellipse{
+    color: white;
+    width: 20px;
+    height: 50;
+}.body{
+    padding-top: 0px !important;
+}
+.boll-img{
+ width: 25px;
+padding-left: 6px;
+}
+
