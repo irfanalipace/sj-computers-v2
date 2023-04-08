@@ -1,6 +1,5 @@
 export const ErrorMessages = {
-    name_required: "Name is required",
-    email_required: "Email is required",
+    otp_invalid: "OTP is invalid",
     email_invalid: "Email address is invalid",
     field_required: "{fieldName} is required",
     field_too_short: "{fieldName} must be at least {minLength} characters long",
@@ -13,18 +12,18 @@ const FIELD_ENUMS = {
     email: "Email",
     password: "Password",
     confirmPassword: "Confirm Password",
+    otp: "OTP",
 };
 
 export function validateForm(values, { fieldLengths }) {
     let errors = {};
-    if (!values.name) {
-        errors.name = ErrorMessages.name_required;
-    }
-    if (!values.email) {
-        errors.email = ErrorMessages.email_required;
-    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+    if (values.email && !/\S+@\S+\.\S+/.test(values.email)) {
         errors.email = ErrorMessages.email_invalid;
     }
+    if (values.otp && !/^\d{4}$/.test(values.otp)) {
+        errors.otp = ErrorMessages.otp_invalid;
+    }
+
     for (let fieldName in fieldLengths) {
         let minLength = fieldLengths[fieldName].min;
         let maxLength = fieldLengths[fieldName].max;
@@ -42,8 +41,7 @@ export function validateForm(values, { fieldLengths }) {
                 .replace("{maxLength}", maxLength);
         }
     }
-    if (values.password !== values.confirmPassword) {
-        console.log(values.password + "  " + values.confirmPassword);
+    if (values.confirmPassword && values.password !== values.confirmPassword) {
         errors.confirmPassword = ErrorMessages.password_mismatch;
     }
     return errors;

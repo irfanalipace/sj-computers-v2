@@ -19,7 +19,7 @@ import {
 import { verifyEmailApi } from "@api/auth";
 import { saveToken, destroyToken, saveUserEmail } from "@services/jwtService";
 
-export const login = (credentials, cb) => {
+export const login = (credentials) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
@@ -27,10 +27,9 @@ export const login = (credentials, cb) => {
             let token = response.data.data.access_token;
             saveToken(token, "", credentials.email);
             dispatch({ type: LOGIN, payload: credentials.email });
-            cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
-            dispatch({ type: API_ERROR, payload: error.data.errors });
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
 };
@@ -41,25 +40,24 @@ export const register = (credentials, cb) => {
             dispatch({ type: LOADING, payload: {} });
             await registerApi(credentials);
             dispatch({ type: REGISTER, payload: credentials });
-            cb();
+            if (typeof cb === "function") cb();
         } catch (error) {
             console.log("Something went wrong in register", error);
-            dispatch({ type: API_ERROR, payload: error.data.errors });
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
 };
 
-export const logout = (cb) => {
+export const logout = () => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             await logoutApi();
             destroyToken();
             dispatch({ type: LOGOUT });
-            cb();
         } catch (error) {
             console.log("Something went wrong in logout", error);
-            dispatch({ type: API_ERROR, payload: error.data.errors });
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
 };
@@ -71,24 +69,23 @@ export const verifyEmail = (email, cb) => {
             await verifyEmailApi(email);
             saveUserEmail(email);
             dispatch({ type: VERIFY_EMAIL, payload: email });
-            cb();
+            if (typeof cb === "function") cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
-            dispatch({ type: API_ERROR, payload: error.data.errors });
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
 };
 
-export const verifyOtp = (credentials, cb) => {
+export const verifyOtp = (credentials) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             await verifyOtpApi(credentials);
             dispatch({ type: VERIFY_OTP, payload: {} });
-            cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
-            dispatch({ type: API_ERROR, payload: error.data.errors });
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
 };
@@ -98,10 +95,10 @@ export const resetPassword = (credentials, cb) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             await resetPasswordApi(credentials);
-            cb();
+            if (typeof cb === "function") cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
-            dispatch({ type: API_ERROR, payload: error.data.errors });
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
 };
@@ -111,10 +108,10 @@ export const forgetPassword = (credentials, cb) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             await forgetPasswordApi(credentials);
-            cb();
+            if (typeof cb === "function") cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
-            dispatch({ type: API_ERROR, payload: error.data.errors });
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
 };

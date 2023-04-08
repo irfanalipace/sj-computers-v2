@@ -1,7 +1,7 @@
 import { Navigate, useRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Home from "@pages/Home/Home";
-import EmailForm from "@pages/Auth/LoginForms/EmailForm";
+import LoginForm from "@pages/Auth/LoginForms/LoginForm";
 import PasswordForm from "@pages/Auth/LoginForms/PasswordForm";
 import VerifyOTP from "@pages/Auth/LoginForms/VerifyOTP";
 import Register from "@pages/Auth/RegisterForms/Register";
@@ -20,34 +20,34 @@ export const Router = () => {
             path: "/login",
             element: (
                 <AuthRoute>
-                    <EmailForm />
+                    <LoginForm />
                 </AuthRoute>
             ),
         },
-        {
-            path: "/verify-email",
-            element: (
-                <AuthRoute>
-                    <EmailForm />
-                </AuthRoute>
-            ),
-        },
-        {
-            path: "/verify-password",
-            element: (
-                <AuthRoute>
-                    <PasswordForm />
-                </AuthRoute>
-            ),
-        },
-        {
-            path: "/verify-otp",
-            element: (
-                <AuthRoute>
-                    <VerifyOTP />
-                </AuthRoute>
-            ),
-        },
+        // {
+        //     path: "/verify-email",
+        //     element: (
+        //         <AuthRoute>
+        //             <EmailForm />
+        //         </AuthRoute>
+        //     ),
+        // },
+        // {
+        //     path: "/verify-password",
+        //     element: (
+        //         <AuthRoute>
+        //             <PasswordForm />
+        //         </AuthRoute>
+        //     ),
+        // },
+        // {
+        //     path: "/verify-otp",
+        //     element: (
+        //         <AuthRoute>
+        //             <VerifyOTP />
+        //         </AuthRoute>
+        //     ),
+        // },
         {
             path: "/register",
             element: (
@@ -72,14 +72,14 @@ export const Router = () => {
                 </AuthRoute>
             ),
         },
-        {
-            path: "/reset-password",
-            element: (
-                <AuthRoute>
-                    <ResetPassword />
-                </AuthRoute>
-            ),
-        },
+        // {
+        //     path: "/reset-password",
+        //     element: (
+        //         <AuthRoute>
+        //             <ResetPassword />
+        //         </AuthRoute>
+        //     ),
+        // },
         {
             path: "/profile",
             element: (

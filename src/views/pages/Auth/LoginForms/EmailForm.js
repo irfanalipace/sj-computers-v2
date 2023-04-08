@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { verifyEmail } from "@store/auth/authThunks";
 import Form from "@components/auth/EmailForm";
@@ -11,7 +11,7 @@ const EmailForm = () => {
     const navigate = useNavigate();
 
     function verifyEmailFunction(email) {
-        dispatch(verifyEmail(email, () => navigate("/verify-password")));
+        dispatch(verifyEmail(email));
     }
 
     return (

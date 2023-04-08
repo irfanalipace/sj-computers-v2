@@ -47,7 +47,7 @@ const Register = () => {
     const dispatch = useDispatch();
 
     function registerFunction() {
-        dispatch(register(values, () => navigate("/verify-email")));
+        dispatch(register(values, () => navigate("/email-sent")));
     }
 
     return (
@@ -72,7 +72,7 @@ const Register = () => {
                                 className="form-control"
                                 placeholder="Full name"
                             />
-                            {fieldErrors.name && (
+                            {fieldErrors && (
                                 <p className="text-danger">
                                     {fieldErrors.name}
                                 </p>
@@ -90,7 +90,7 @@ const Register = () => {
                                 className="form-control"
                                 placeholder="Enter your email"
                             />
-                            {fieldErrors.email && (
+                            {fieldErrors && (
                                 <p className="text-danger">
                                     {fieldErrors.email}
                                 </p>
@@ -106,7 +106,7 @@ const Register = () => {
                                 className="form-control"
                                 placeholder="Enter password"
                             />
-                            {fieldErrors.password && (
+                            {fieldErrors && (
                                 <p className="text-danger">
                                     {fieldErrors.password}
                                 </p>
@@ -132,7 +132,7 @@ const Register = () => {
                                 className="form-control"
                                 placeholder="Re-enter password"
                             />
-                            {fieldErrors.confirmPassword && (
+                            {fieldErrors && (
                                 <p className="text-danger">
                                     {fieldErrors.confirmPassword}
                                 </p>
@@ -143,6 +143,7 @@ const Register = () => {
                             <button
                                 type="submit"
                                 className="btn btn-primary login-button"
+                                disabled={isLoading}
                             >
                                 {isLoading ? <Loader /> : "Verify Email"}
                             </button>

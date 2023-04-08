@@ -79,11 +79,10 @@ export function verifyEmailApi(email) {
     });
 }
 
-export function verifyOtpApi({ TOKEN, otp }) {
+export function verifyOtpApi({ otp }) {
     return new Promise((resolve, reject) => {
         ApiService.post("verify-otp", {
-            TOKEN,
-            otp,
+            otp_code: otp,
         })
             .then((response) => {
                 console.log(
