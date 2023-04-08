@@ -2,13 +2,10 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Home from "@pages/Home/Home";
 import LoginForm from "@pages/Auth/LoginForms/LoginForm";
-import PasswordForm from "@pages/Auth/LoginForms/PasswordForm";
-import VerifyOTP from "@pages/Auth/LoginForms/VerifyOTP";
 import Register from "@pages/Auth/RegisterForms/Register";
-import EmailSent from "@pages/Auth/RegisterForms/EmailSent";
 import Profile from "@pages/User/Profile";
 import ForgetPassword from "@pages/Auth/ForgetPassword/ForgetPassword";
-import ResetPassword from "@pages/Auth/ForgetPassword/ResetPassword";
+import Emailsent from "@pages/Auth/LoginForms/Emailsent";
 
 export const Router = () => {
     const routes = [
@@ -24,30 +21,6 @@ export const Router = () => {
                 </AuthRoute>
             ),
         },
-        // {
-        //     path: "/verify-email",
-        //     element: (
-        //         <AuthRoute>
-        //             <EmailForm />
-        //         </AuthRoute>
-        //     ),
-        // },
-        // {
-        //     path: "/verify-password",
-        //     element: (
-        //         <AuthRoute>
-        //             <PasswordForm />
-        //         </AuthRoute>
-        //     ),
-        // },
-        // {
-        //     path: "/verify-otp",
-        //     element: (
-        //         <AuthRoute>
-        //             <VerifyOTP />
-        //         </AuthRoute>
-        //     ),
-        // },
         {
             path: "/register",
             element: (
@@ -60,7 +33,7 @@ export const Router = () => {
             path: "/email-sent",
             element: (
                 <AuthRoute>
-                    <EmailSent />
+                    <Emailsent />
                 </AuthRoute>
             ),
         },
@@ -72,20 +45,21 @@ export const Router = () => {
                 </AuthRoute>
             ),
         },
-        // {
-        //     path: "/reset-password",
-        //     element: (
-        //         <AuthRoute>
-        //             <ResetPassword />
-        //         </AuthRoute>
-        //     ),
-        // },
         {
             path: "/profile",
             element: (
                 <ProtectedRoute>
                     <Profile />
                 </ProtectedRoute>
+            ),
+        },
+        {
+            path: "*",
+            element: (
+                <div>
+                    <h1>404</h1>
+                    <h3>Page Not Found</h3>
+                </div>
             ),
         },
     ];

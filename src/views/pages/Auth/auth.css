@@ -208,7 +208,7 @@ h5:after {
     height: 15px !important;
 }
 .sticky-bottom {
-    position: fixed;
+    position: fixed ;
     bottom: 0;
     width: 100%;
     background-color: rgb(233, 236, 239);
