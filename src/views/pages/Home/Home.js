@@ -1,19 +1,24 @@
 import React from 'react'
 import Header from '@components/header/Header';
 import Footer from '@components/footer/footer';
-
+import Slider from '@components/slider/Slider';
+import { Product } from '@components/homeproduct/Product';
 
  const Home = () => {
   return (
 
    
        
-    <div className="col-12">
+    <div>
+      
+        <div className="col-md-12 mb-md-0 mb-3 ">
         <Header />
-        <br></br>
-        <br>
-        </br>
-       <Footer />
+      <Slider />
+      
+      <Footer />
+        </div>
+    
+ 
     </div>
    
    
