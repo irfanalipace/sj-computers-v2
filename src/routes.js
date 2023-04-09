@@ -1,11 +1,12 @@
 import { Navigate, useRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Home from "@pages/Home/Home";
-import LoginForm from "@pages/Auth/LoginForms/LoginForm";
-import Register from "@pages/Auth/RegisterForms/Register";
+import LoginForm from "@pages/Auth/LoginForm";
+import Register from "@pages/Auth/Register";
 import Profile from "@pages/User/Profile";
 import ForgetPassword from "@pages/Auth/ForgetPassword/ForgetPassword";
-import Emailsent from "@pages/Auth/LoginForms/Emailsent";
+import ResetPassword from "@pages/Auth/ForgetPassword/ResetPassword";
+import Emailsent from "@pages/Auth/EmailSent";
 
 export const Router = () => {
     const routes = [
@@ -42,6 +43,14 @@ export const Router = () => {
             element: (
                 <AuthRoute>
                     <ForgetPassword />
+                </AuthRoute>
+            ),
+        },
+        {
+            path: "/reset-password",
+            element: (
+                <AuthRoute>
+                    <ResetPassword />
                 </AuthRoute>
             ),
         },

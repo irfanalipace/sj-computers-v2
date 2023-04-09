@@ -1,24 +1,58 @@
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { forgetPassword } from "@store/auth/authThunks";
-import Form from "@components/auth/EmailForm";
+import EmailForm from "@components/auth/EmailFormWrapper";
+import Header from "@components/auth/Header";
+import Footer from "@components/auth/Footer";
 
-import "@pages/Auth/auth.css";
-
-const EmailForm = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    function verifyEmailFunction(email) {
-        dispatch(forgetPassword(email, () => navigate("/email-sent")));
-    }
-
+const LoginForm = () => {
     return (
         <div>
-            <Form onFormSubmit={verifyEmailFunction} />
+            <div className="container form-container">
+                <div className="row">
+                    <div className="header-logo">
+                        <Header />
+                    </div>
+
+                    <EmailForm form={"forgetPassword"} />
+
+                    <div className="container new-data">
+                        <div className="row">
+                            <div className="col-12">
+                                <h5 className="h5-heading">
+                                    New to SJ Computers?
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div></div>
+
+                    <div className="react-heading">
+                        <div className="rectangle">
+                            <Link
+                                to="/register"
+                                className="text-decoration-none"
+                                style={{ color: "#333333" }}
+                            >
+                                Create your SJ Computer account
+                            </Link>
+                        </div>
+                    </div>
+
+                    <div></div>
+                </div>
+            </div>
+            <div className="container-fluid bg-light">
+                <div className="row">
+                    <div className="col">
+                        <div className="sticky-bottom py-3">
+                            <Footer />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
 
-export default EmailForm;
+export default LoginForm;

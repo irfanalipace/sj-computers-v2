@@ -23,7 +23,7 @@ const EmailForm = ({ form }) => {
 
         case "forgetPassword":
             verifyEmailFunction = (email) => {
-                dispatch(forgetPassword(email), navigate("/email-sent"));
+                dispatch(forgetPassword(email, () => navigate("/email-sent")));
             };
             break;
 
@@ -33,7 +33,7 @@ const EmailForm = ({ form }) => {
 
     return (
         <div>
-            <Form onFormSubmit={verifyEmailFunction} />
+            <Form onFormSubmit={verifyEmailFunction} form={form} />
         </div>
     );
 };

@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 import {
     LOGIN,
     LOGOUT,
@@ -81,7 +83,9 @@ export const verifyOtp = (credentials) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            await verifyOtpApi(credentials);
+            const response = await verifyOtpApi(credentials);
+            let token = response.data.data.access_token;
+            saveToken(token, "", credentials.email);
             dispatch({ type: VERIFY_OTP, payload: {} });
         } catch (error) {
             console.log("Something went wrong in login", error);
@@ -95,6 +99,8 @@ export const resetPassword = (credentials, cb) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             await resetPasswordApi(credentials);
+            dispatch({ type: CLEAR_LOADING, payload: {} });
+            toast.success("Password reset successfully");
             if (typeof cb === "function") cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
@@ -103,14 +109,15 @@ export const resetPassword = (credentials, cb) => {
     };
 };
 
-export const forgetPassword = (credentials, cb) => {
+export const forgetPassword = (email, cb) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            await forgetPasswordApi(credentials);
+            await forgetPasswordApi({ email });
+            dispatch({ type: CLEAR_LOADING, payload: {} });
             if (typeof cb === "function") cb();
         } catch (error) {
-            console.log("Something went wrong in login", error);
+            console.log("Something went wrong in forgetPasswordApi", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };

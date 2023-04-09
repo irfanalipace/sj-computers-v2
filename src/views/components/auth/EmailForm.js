@@ -7,7 +7,7 @@ import { useFormValidation } from "@hooks/useFormValidation";
 
 import Loader from "@common/spinner/Spinner";
 
-export default function EmailForm({ onFormSubmit }) {
+export default function EmailForm({ onFormSubmit, form }) {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
             email: "",
@@ -39,7 +39,9 @@ export default function EmailForm({ onFormSubmit }) {
 
     return (
         <form className="auth-inner-body" onSubmit={handleSubmit}>
-            <h3 className="login-h3">Sign in</h3>
+            <h3 className="login-h3">
+                {form === "forgetPassword" ? "Forget Password" : "Sign In"}
+            </h3>
             <div className="mb-3">
                 <label className="email-lable font-weight-bold">
                     Email or mobile phone number

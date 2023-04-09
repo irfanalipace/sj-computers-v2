@@ -100,7 +100,7 @@ export function verifyOtpApi({ otp }) {
 
 export function forgetPasswordApi({ email }) {
     return new Promise((resolve, reject) => {
-        ApiService.post("forget-password", {
+        ApiService.post("forgot-password", {
             email,
         })
             .then((response) => {
@@ -117,9 +117,16 @@ export function forgetPasswordApi({ email }) {
     });
 }
 
-export function resetPasswordApi({ password, confirm_password }) {
+export function resetPasswordApi({
+    access_token,
+    email,
+    password,
+    confirm_password,
+}) {
+    ApiService.setHeader("Authorization", "Bearer " + access_token);
     return new Promise((resolve, reject) => {
-        ApiService.post("password-reset", {
+        ApiService.post("reset-password", {
+            email,
             password,
             confirm_password,
         })

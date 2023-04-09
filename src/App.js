@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 import { getToken } from "@services/jwtService";
-import { Router } from "@src/Routes";
+import { Router } from "@src/routes";
 import { ALREADY_LOGGED_IN } from "@store/auth/authSlice";
 import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-free/css/all.css";
