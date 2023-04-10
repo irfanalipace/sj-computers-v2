@@ -16,6 +16,7 @@ import "@pages/Auth/auth.css";
 const PasswordForm = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);
     const apiError = useSelector((state) => state.auth.apiError);
+    const [mounted, setMounted] = useState(false);
     const [fieldErrors, setFieldErrors] = useState({});
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -47,6 +48,13 @@ const PasswordForm = () => {
         setFieldErrors(apiError);
     }, [apiError]);
 
+    useEffect(() => {
+        setMounted(true);
+        return () => {
+            setMounted(false);
+        };
+    }, []);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -62,7 +70,10 @@ const PasswordForm = () => {
 
     return (
         <div>
-            <div className="container form-container" onSubmit={handleSubmit}>
+            <div
+                className={`auth-inner-body ${mounted && "slide"} `}
+                onSubmit={handleSubmit}
+            >
                 <div className="row">
                     <div className="header-logo">
                         <Header />

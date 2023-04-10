@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import Header from "@components/auth/Header";
@@ -7,6 +7,13 @@ import Footer from "@components/auth/Footer";
 import "@pages/Auth/auth.css";
 
 const Emailsent = () => {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+        setMounted(true);
+        return () => {
+            setMounted(false);
+        };
+    }, []);
     return (
         <div>
             <div className="container form-container">
@@ -15,7 +22,7 @@ const Emailsent = () => {
                         <Header />
                     </div>
 
-                    <form className="auth-inner-body">
+                    <form className={`auth-inner-body ${mounted && "slide"} `}>
                         <div className="mb-3" style={{ textAlign: "center" }}>
                             <h3>Email Sent</h3>
                         </div>
@@ -34,20 +41,23 @@ const Emailsent = () => {
                             className="mb-3"
                             style={{ textAlign: "center", paddingTop: "56px" }}
                         >
-                            <button
-                                type="submit"
-                                className="btn btn-primary sentmail"
-                                style={{
-                                    border: "1px solid #52AC66",
-                                    borderRadius: "5px",
-                                    background: "white",
-                                    color: "#52AC66",
-                                    width: "75px",
-                                    height: "45px",
-                                }}
-                            >
-                                <Link to={"/login"}>Back</Link>
-                            </button>
+                            <Link to={"/login"}>
+                                {" "}
+                                <button
+                                    type="submit"
+                                    className="btn btn-primary sentmail"
+                                    style={{
+                                        border: "1px solid #52AC66",
+                                        borderRadius: "5px",
+                                        background: "white",
+                                        color: "#52AC66",
+                                        width: "75px",
+                                        height: "45px",
+                                    }}
+                                >
+                                    Back
+                                </button>
+                            </Link>
                         </div>
                     </form>
                     <div className="container new-data">

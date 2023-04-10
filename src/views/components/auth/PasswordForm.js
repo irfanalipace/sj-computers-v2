@@ -59,7 +59,7 @@ const PasswordForm = () => {
 
     return (
         <form
-            className={mounted ? "auth-inner-body slide" : "auth-inner-body"}
+            className={`auth-inner-body ${mounted && "slide"} `}
             onSubmit={handleSubmit}
         >
             <h3 className="login-h3">Sign in</h3>
