@@ -1,3 +1,7 @@
+
+.first-section{
+  margin: 11px;
+}
 .div-section{
  
   
@@ -19,38 +23,53 @@ border: 1px solid black;
   object-fit: cover;
 }
 .product-section {
-    height: 391px;
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
-    text-align: center;
-    margin: 35px;
-    
-    top: 0;
-    left: 0;
+   height: 398px; 
+  background-color: white;
+  /* padding: 20px; */
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  text-align: center;
+  margin: 6px;
+  top: 2;
+  left: 2;
 }
-  .product-section-text{
-    height: 200px;
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
-    text-align: center;
-    margin: 35px;
+.product-section-text {
+  height: 177px;
+  background-color: white;
+  /* padding: 20px; */
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  text-align: center;
+  margin: 11px;
+  top: 0;
+  left: 0;
+  width: 439px;
+}.button-save {
+  height: 55px;
+  /* position: absolute; */
+  width: 401px;
+  /* left: 0%; */
+  /* right: 0%; */
+  /* top: 0%; */
+  /* bottom: 0%; */
+  background: #38C056;
+  border-radius: 10px 10px 0px 0px;
+  color: white;
+}
+
+.h2-cart{
+  text-align: initial;
+  padding-left: 23px;
+}
+
+.img-copy{
     
-    top: 0;
-    left: 0;
-  }.product-section-text1{
+ 
+    height: 215px;
+    width: 464px;
+    padding: 10px;
+
     
-    background: url('@images/product/side-img.png');
-    height: 200px;
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
-    text-align: center;
-    margin: 35px;
   }
   .product-section h3 {
     font-size: 24px;
