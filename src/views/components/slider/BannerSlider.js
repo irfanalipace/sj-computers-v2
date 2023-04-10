@@ -11,8 +11,9 @@ import "./slider.css";
 // import required modules
 import { Navigation } from "swiper";
 import sliderimg from '@images/slider-img/slider1.png';
-import { Product } from "../homeproduct/Product";
-const Slider = () => {
+// import { Product } from "../homeproduct/Product";
+
+const BannerSlider = () => {
   return (
     <>
     
@@ -24,11 +25,11 @@ const Slider = () => {
         <SwiperSlide><img src={sliderimg} /></SwiperSlide>
         <SwiperSlide><img src={sliderimg} /></SwiperSlide>
         <SwiperSlide><img src={sliderimg} /></SwiperSlide>
-            <Product />
+           
         
       </Swiper>
       </div>
     </>
   );
 }
-export default Slider
+export default BannerSlider

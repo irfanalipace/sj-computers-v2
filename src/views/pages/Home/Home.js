@@ -1,8 +1,8 @@
 import React from 'react'
 import Header from '@components/header/Header';
 import Footer from '@components/footer/footer';
-import Slider from '@components/slider/Slider';
-import { Product } from '@components/homeproduct/Product';
+import BannerSlider from '@components/slider/BannerSlider';
+import { ProductType } from '@components/homeproduct/ProductType';
 
  const Home = () => {
   return (
@@ -13,8 +13,8 @@ import { Product } from '@components/homeproduct/Product';
       
         <div className="col-md-12 mb-md-0 mb-3 ">
         <Header />
-      <Slider />
-      
+      <BannerSlider />
+      <ProductType />
       <Footer />
         </div>
     
