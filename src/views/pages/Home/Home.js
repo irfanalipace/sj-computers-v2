@@ -1,14 +1,14 @@
 import Header from "@components/header/Header";
-import Footer from "@components/footer/Footer";
-import Slider from "@components/slider/Slider";
-import { Product } from "@components/homeproduct/Product";
+import Footer from "@components/footer/footer";
+import BannerSlider from "@components/slider/BannerSlider";
+import { ProductType } from "@components/homeproduct/ProductType";
 
 const Home = () => {
     return (
         <div>
             <Header />
-            <Slider />
-            <Product />
+            <BannerSlider />
+            <ProductType />
             <Footer />
         </div>
     );

@@ -5,7 +5,7 @@ import img21 from '@images/product/image21.png';
 import img22 from '@images/product/image22.png';
 import img23 from '@images/product/image23.png';
 import img20 from '@images/product/image20.png';
-export const Product = () => {
+export const ProductType = () => {
     // const data = [
     //     { id: 1, name: 'Item 1' },
     //     { id: 2, name: 'Item 2' },

@@ -26,7 +26,6 @@ const Slider = () => {
                     <SwiperSlide>
                         <img src={sliderimg} />
                     </SwiperSlide>
-                    {/* <Product /> */}
                 </Swiper>
             </div>
         </>

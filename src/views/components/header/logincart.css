@@ -1,0 +1,27 @@
+.dropdown-payment{
+    position: absolute;
+    width: 354px;
+    height: 300px;
+    left: 0px;
+    padding: 2px;
+    margin: 3px; 
+
+}.product-section1 {
+    position: absolute;
+    z-index: 9;
+    width: 130%;
+    height: 133%;
+    background-color: #f7f7f7;
+    padding: 2px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    text-align: center;
+}.text-left{
+    text-align: center !important;
+    font-size: 21px !important;
+}.ul-list {
+    margin-left: -30px !important;
+    text-align: initial;
+}.login-button{
+   font-size :23px !important;
+}
