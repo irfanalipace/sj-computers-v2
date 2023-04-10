@@ -1,12 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
 import Header from "@components/auth/Header";
 import Footer from "@components/auth/Footer";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
-import './auth.css'
+import { useFormValidation } from "@hooks/useFormValidation";
+import Loader from "@common/spinner/Spinner";
+import { register } from "@store/auth/authThunks";
+
+import "@pages/Auth/auth.css";
 
 const Register = () => {
+    const { values, handleChange, handleSubmit, errors } = useFormValidation(
+        {
+            name: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+        },
+        {
+            fieldLengths: {
+                name: { min: 3, max: 50 },
+                email: { min: 5, max: 100 },
+                password: { min: 6, max: 20 },
+                confirmPassword: { min: 6, max: 20 },
+            },
+        },
+        registerFunction
+    );
+
+    const apiError = useSelector((state) => state.auth.apiError);
+    const [fieldErrors, setFieldErrors] = useState({});
+
+    useEffect(() => {
+        setFieldErrors(errors);
+    }, [errors]);
+
+    useEffect(() => {
+        setFieldErrors(apiError);
+    }, [apiError]);
+
+    const isLoading = useSelector((state) => state.auth.isLoading);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    function registerFunction() {
+        dispatch(register(values, () => navigate("/email-sent")));
+    }
+
     return (
         <div>
             <div className="container form-container">
@@ -15,7 +58,7 @@ const Register = () => {
                         <Header />
                     </div>
 
-                    <form className="auth-inner-body">
+                    <form className="auth-inner-body" onSubmit={handleSubmit}>
                         <h3 className="login-h3">Create account</h3>
                         <div className="mb-3">
                             <label className="name-lable font-weight-bold">
@@ -23,9 +66,17 @@ const Register = () => {
                             </label>
                             <input
                                 type="text"
+                                name="name"
+                                value={values.name}
+                                onChange={handleChange}
                                 className="form-control"
                                 placeholder="Full name"
                             />
+                            {fieldErrors && (
+                                <p className="text-danger">
+                                    {fieldErrors.name}
+                                </p>
+                            )}
                         </div>
                         <div className="mb-3">
                             <label className="email-lable font-weight-bold">
@@ -33,17 +84,33 @@ const Register = () => {
                             </label>
                             <input
                                 type="email"
+                                name="email"
+                                value={values.emal}
+                                onChange={handleChange}
                                 className="form-control"
                                 placeholder="Enter your email"
                             />
+                            {fieldErrors && (
+                                <p className="text-danger">
+                                    {fieldErrors.email}
+                                </p>
+                            )}
                         </div>
                         <div className="mb-3">
                             <label className="font-weight-bold">Password</label>
                             <input
                                 type="password"
+                                name="password"
+                                value={values.password}
+                                onChange={handleChange}
                                 className="form-control"
                                 placeholder="Enter password"
                             />
+                            {fieldErrors && (
+                                <p className="text-danger">
+                                    {fieldErrors.password}
+                                </p>
+                            )}
                         </div>
                         <p className="text-muted small">
                             {/* <img src={vectoricon} alt='' style={{width:'7px'}}/> */}
@@ -59,17 +126,26 @@ const Register = () => {
                             </label>
                             <input
                                 type="password"
+                                name="confirmPassword"
+                                value={values.confirmPassword}
+                                onChange={handleChange}
                                 className="form-control"
                                 placeholder="Re-enter password"
                             />
+                            {fieldErrors && (
+                                <p className="text-danger">
+                                    {fieldErrors.confirmPassword}
+                                </p>
+                            )}
                         </div>
 
                         <div className="d-grid">
                             <button
                                 type="submit"
                                 className="btn btn-primary login-button"
+                                disabled={isLoading}
                             >
-                                Verify email
+                                {isLoading ? <Loader /> : "Verify Email"}
                             </button>
                         </div>
                         <p className="text-muted small">

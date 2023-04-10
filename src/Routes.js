@@ -1,26 +1,24 @@
 import { Navigate, useRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Home from "@pages/Home/Home";
-import Login from "@pages/Auth/Login";
+import LoginForm from "@pages/Auth/LoginForm";
 import Register from "@pages/Auth/Register";
 import Profile from "@pages/User/Profile";
+import ForgetPassword from "@pages/Auth/ForgetPassword/ForgetPassword";
+import ResetPassword from "@pages/Auth/ForgetPassword/ResetPassword";
+import Emailsent from "@pages/Auth/EmailSent";
 
 export const Router = () => {
     const routes = [
         {
             path: "/",
             element: <Home />,
-            // element: (
-            //     <AuthRoute>
-            //         <Login />
-            //     </AuthRoute>
-            // ),
         },
         {
             path: "/login",
             element: (
                 <AuthRoute>
-                    <Login />
+                    <LoginForm />
                 </AuthRoute>
             ),
         },
@@ -33,18 +31,10 @@ export const Router = () => {
             ),
         },
         {
-            path: "/otp-option",
+            path: "/email-sent",
             element: (
                 <AuthRoute>
-                    <Login />
-                </AuthRoute>
-            ),
-        },
-        {
-            path: "/verify-otp",
-            element: (
-                <AuthRoute>
-                    <Login />
+                    <Emailsent />
                 </AuthRoute>
             ),
         },
@@ -52,7 +42,15 @@ export const Router = () => {
             path: "/forget-password",
             element: (
                 <AuthRoute>
-                    <Login />
+                    <ForgetPassword />
+                </AuthRoute>
+            ),
+        },
+        {
+            path: "/reset-password",
+            element: (
+                <AuthRoute>
+                    <ResetPassword />
                 </AuthRoute>
             ),
         },
@@ -62,6 +60,15 @@ export const Router = () => {
                 <ProtectedRoute>
                     <Profile />
                 </ProtectedRoute>
+            ),
+        },
+        {
+            path: "*",
+            element: (
+                <div>
+                    <h1>404</h1>
+                    <h3>Page Not Found</h3>
+                </div>
             ),
         },
     ];

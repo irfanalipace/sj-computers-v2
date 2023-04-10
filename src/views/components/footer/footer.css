@@ -1,0 +1,27 @@
+.footer-section{
+    background:#00305E !important;
+}.herf-link{
+    color: aliceblue;
+}.list-unstyled{
+    text-align: initial !important;
+    padding-left: 150px;
+}.list-unstyle1 {
+    /* text-align: justify; */
+    padding-left: 523px;
+    text-align: initial;
+}.list-unstyle4{
+    text-align: initial;
+    padding-top: 44px;
+}.list-unstyle2{
+    text-align: left;
+    padding-top: 50px;
+}
+.list-unstyle3{
+    text-align: left;
+}.footer-data{
+    padding: 23px;
+}.copywrite{
+    width: 361px;
+}.english-dropdown{
+    padding-right: 2px;
+}
