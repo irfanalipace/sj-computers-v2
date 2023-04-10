@@ -13,6 +13,7 @@ function App() {
     const dispatch = useDispatch();
     const token = getToken();
     if (token) dispatch(ALREADY_LOGGED_IN());
+
     return (
         <div>
             <ToastContainer className={"notification-toast"} />

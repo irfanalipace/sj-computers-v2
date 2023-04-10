@@ -79,7 +79,9 @@ const PasswordForm = () => {
                     <Link to={"/forget-password"}>Forget Password?</Link>{" "}
                 </div>
                 {fieldErrors && (
-                    <p className="text-danger">{fieldErrors.password}</p>
+                    <p className="text-danger">
+                        {fieldErrors.password || fieldErrors.credentials}
+                    </p>
                 )}
             </div>
             <div className="d-grid">
