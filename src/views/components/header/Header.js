@@ -6,17 +6,18 @@ import splice from '@images/home/ellipse.png';
 import './header.css'
 import Sidebar from "@components/sidebar/Sidebar";
 import { useState } from "react";
+import LoginCart from "./LoginCart";
 const Header = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
 
-    const handleButtonClick = () => {
-      setIsOpen(!isOpen);
-    };
-    const [isPaymentFrameVisible, setIsPaymentFrameVisible] = useState(false);
+    // const handleButtonClick = () => {
+    //   setIsOpen(!isOpen);
+    // };
+    // const [isPaymentFrameVisible, setIsPaymentFrameVisible] = useState(false);
     // ...
     return (
-        <div>
-             
+        <div className="row">
+
             <header className="navbar navbar-expand-lg navbar-light bg-light header-background">
                 <div className="container-fluid">
 
@@ -32,7 +33,7 @@ const Header = () => {
                         <div className="d-flex flex-row justify-content-between align-items-center w-100">
 
                             <ul className="ul-menu">
-                                <li className="text-color-heading" style={{color:'#B8B8B9'}}>Deilver to</li>
+                                <li className="text-color-heading" style={{ color: '#B8B8B9' }}>Deilver to</li>
                                 <li className="text-color-heading2">California</li>
 
                             </ul>
@@ -64,27 +65,16 @@ const Header = () => {
                                     <a className="dropdown-item" href="#">English</a>
                                     <a className="dropdown-item" href="#">Spanish</a>
                                 </div>
+
+                            </div>
+
+                            <div className="dropdown-cart">
+                                <LoginCart />
+
                             </div>
 
                             <div className="dropdown ">
-                            <div className="dropdown-payment">
-                            <div>
-      <button onClick={handleButtonClick} className="dropdown-toggle">Login <br></br>Register</button>
-      {isOpen ? (
-       
-        
-      <div className="product-section">
-        -- Content for Product Section 3 
-      </div>
-  
-      
-      ) : null}
-    </div>
-    </div>
-                            </div>
-
-                            <div className="dropdown ">
-                                <button className=" eng-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button className=" order-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Return<br />
                                     & Order
                                 </button>
@@ -94,14 +84,18 @@ const Header = () => {
                                 </div>
                             </div>
 
+                            <div className="icon-cart">
+
+
                                 <div className="product-boll">
-                                    
-                            <div className="dropdown dot" style={{textAlign:'center', color:'white'}}>                         
-                         0
-                                <img src={vectorcart} alt="" className="vector-cart" />
-                                   
-                            </div>
-                           <span className="text-color">Cart</span> 
+
+                                    <div className="dropdown dot" style={{ textAlign: 'center', color: 'white' }}>
+                                        0
+                                        <img src={vectorcart} alt="" className="vector-cart" />
+
+                                    </div>
+                                    <span className="text-color">Cart</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -115,6 +109,7 @@ const Header = () => {
 
 
             <Sidebar />
+
         </div>
     );
 };
