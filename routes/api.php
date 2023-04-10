@@ -38,9 +38,9 @@ Route::get('email/resend', [VerificationController::class,'resend'])->name('veri
 
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
 
-Route::post('user-details', UserDetailController::class)->name('user-details');
 
 Route::middleware(['auth:api','verified'])->group(function () {
+    Route::post('user-details', UserDetailController::class)->name('user-details');
 
     Route::post('verify-otp',[AuthController::class, 'verifyOtp'])->name('verify-otp');
 
