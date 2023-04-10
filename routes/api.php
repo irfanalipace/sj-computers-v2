@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\UserDetailController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\Auth\VerificationController;
@@ -36,6 +37,8 @@ Route::get('email/verify/{id}', [VerificationController::class,'verify'])->name(
 Route::get('email/resend', [VerificationController::class,'resend'])->name('verification.resend');
 
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
+
+Route::post('user-details', UserDetailController::class)->name('user-details');
 
 Route::middleware(['auth:api','verified'])->group(function () {
 
