@@ -19,8 +19,8 @@ border: 1px solid black;
   object-fit: cover;
 }
 .product-section {
-    height: 302px;
-    background-color: #f7f7f7;
+    height: 391px;
+    background-color: white;
     padding: 20px;
     border: 1px solid #ddd;
     margin-bottom: 20px;
@@ -30,7 +30,28 @@ border: 1px solid black;
     top: 0;
     left: 0;
 }
-  
+  .product-section-text{
+    height: 200px;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    text-align: center;
+    margin: 35px;
+    
+    top: 0;
+    left: 0;
+  }.product-section-text1{
+    
+    background: url('@images/product/side-img.png');
+    height: 200px;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    text-align: center;
+    margin: 35px;
+  }
   .product-section h3 {
     font-size: 24px;
     margin-bottom: 10px;

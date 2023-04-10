@@ -1,10 +1,14 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
-import './product.css'
+import './ProductType.css'
 import img21 from '@images/product/image21.png';
 import img22 from '@images/product/image22.png';
 import img23 from '@images/product/image23.png';
 import img20 from '@images/product/image20.png';
+import ProductItem1 from '@components/homeproduct/productcategory/ProductItem1';
+import ProductItem4 from '@components/homeproduct/productcategory/ProductItem4';
+
+import SingleLaptopComp from '@components/homeproduct/productcategory/SingleLaptopComp';
 export const ProductType = () => {
     // const data = [
     //     { id: 1, name: 'Item 1' },
@@ -55,25 +59,33 @@ dkada
   <div className="row">
     <div className="col-md-3">
       <div className="product-section">
-         Content for Product Section 1 
+      
+         <ProductItem4 />
       </div>
     </div>
    
     <div className="col-md-3">
       <div className="product-section">
-        -- Content for Product Section 3 
+     <ProductItem1 />
       </div>
     </div>
     <div className="col-md-3">
       <div className="product-section">
-        -- Content for Product Section 3 
+      <ProductItem1 />
       </div>
     </div>
     <div className="col-md-3">
-      <div className="product-section">
-        -- Content for Product Section 3 
+        <div>
+        <div className="product-section-text">
+       dhhsfh
       </div>
+      <div className="product-section-text1 ">
+          {/* <SingleLaptopComp /> */}
+      </div>
+        </div>
+     
     </div>
+   
   </div>
  
 </div>
