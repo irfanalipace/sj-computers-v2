@@ -30,11 +30,11 @@ class AuthController extends BaseController
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
-            return $this->sendError('Ivalid Email.', 404);
+            return $this->sendError(['email' => [ 'Invalid Email.']], 404);
         }
 
         if(empty($user->email_verified_at)){
-            return $this->sendError('Verify the email for further process.', 401);
+            return $this->sendError(['email_verification' => ['Verify the email for further process.']], 401);
         }
 
         return $this->sendResponse([], 'Email Verified.');
@@ -53,7 +53,7 @@ class AuthController extends BaseController
     public function login(LoginRequest $request): JsonResponse
     {
         if (!Auth::attempt($request->only(['email', 'password']))) {
-            return $this->sendError('Invalid credentials.', 401);
+            return $this->sendError(['credentials' => ['Invalid credentials.']], 401);
         }
 
         $user = Auth::user();
@@ -88,7 +88,7 @@ class AuthController extends BaseController
         });
 
         if ($reset_password_status == Password::INVALID_TOKEN) {
-            return $this->sendError('Invalid token.', 400);
+            return $this->sendError(['token' => ['Invalid token.']], 400);
         }
 
         return $this->sendResponse([], 'Password has been reset successfully.');
@@ -102,7 +102,7 @@ class AuthController extends BaseController
 
             return $this->sendResponse([], 'User logged out successfully.');
         }
-        return $this->sendError('Invalid operation.');
+        return $this->sendError(['error' => ['Invalid operation.']]);
 
     }
 
@@ -116,7 +116,7 @@ class AuthController extends BaseController
             ->exists();
 
         if (empty($data)) {
-            return $this->sendError('Invalid OTP Code,  Try again.');
+            return $this->sendError(['otp' => ['Invalid OTP Code,  Try again.']]);
         }
 
         return $this->sendResponse([], 'OTP Verified Successfully.');
