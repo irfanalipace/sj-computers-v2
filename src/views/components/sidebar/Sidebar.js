@@ -43,11 +43,20 @@ export default function Sidebar() {
                 <path d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" />
               )}
             </svg>
+            <small className='small-text-size'>All</small>
           </span>
-          <span> All</span>
-          <span> All</span>
-          <span> All</span>
+         
+          <ul className='menu-sidebar text-decoration-none ullist'>
+  <li className='listitem'><a href="default.asp" className='text-decoration-none text-color'>Today's Deal</a></li>
+  <li className='listitem'><a href="news.asp" className='text-decoration-none text-color'>Laptop</a></li>
+  <li className='listitem'><a href="contact.asp" className='text-decoration-none text-color'>Desktop</a></li>
+  <li className='listitem'><a href="about.asp" className='text-decoration-none text-color'>Monitors</a></li>
+  <li className='listitem'><a href="about.asp" className='text-decoration-none text-color'>BTO</a></li>
+</ul>
+     
         </div>
+     
+
         <div className="sideMenu" style={{ left: isSideMenu ? '0' : '-265px' }}>
           <a href="#">Menu 01</a>
           <a href="#">Menu 02</a>
@@ -59,7 +68,9 @@ export default function Sidebar() {
           <a href="#">Menu 08</a>
           <a href="#">Menu 09</a>
         </div>
+     
       </header>
+   
       </div>
     </>
   )

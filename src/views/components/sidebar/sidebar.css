@@ -57,3 +57,25 @@ body {
 .sideMenu a:hover {
   color: rgb(40, 0, 148);
 }
+  .ullist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  
+    
+
+  }
+  
+  .listitem {
+    padding-left: 0px !important;
+      
+    margin-bottom: 0px !important;
+    display: inline;
+    color:white;
+    padding-right:30px;
+  }.text-color{
+    color: white;
+  }.small-text-size{
+    padding-top: 8px;
+    font-size: 21px;
+  }
