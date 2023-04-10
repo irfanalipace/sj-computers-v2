@@ -26,3 +26,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //Route::get('email-success', function () {
 //    return view('email.success');
 //})->name('email-success');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

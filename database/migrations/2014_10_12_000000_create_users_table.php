@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->boolean('status')->default(0);
             $table->boolean('otp_verified')->default(0);
             $table->longText('message')->nullable();
-            $table->foreignId('role_id');
             $table->rememberToken();
             $table->timestamps();
         });
