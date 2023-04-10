@@ -21,6 +21,7 @@ export default function EmailForm({ onFormSubmit, form }) {
     );
 
     const apiError = useSelector((state) => state.auth.apiError);
+    const [mounted, setMounted] = useState(false);
     const [fieldErrors, setFieldErrors] = useState({});
 
     useEffect(() => {
@@ -31,6 +32,13 @@ export default function EmailForm({ onFormSubmit, form }) {
         setFieldErrors(apiError);
     }, [apiError]);
 
+    useEffect(() => {
+        setMounted(true);
+        return () => {
+            setMounted(false);
+        };
+    }, []);
+
     const isLoading = useSelector((state) => state.auth.isLoading);
 
     function verifyEmail() {
@@ -38,7 +46,10 @@ export default function EmailForm({ onFormSubmit, form }) {
     }
 
     return (
-        <form className="auth-inner-body" onSubmit={handleSubmit}>
+        <form
+            className={`auth-inner-body ${mounted && "slide"} `}
+            onSubmit={handleSubmit}
+        >
             <h3 className="login-h3">
                 {form === "forgetPassword" ? "Forget Password" : "Sign In"}
             </h3>

@@ -17,3 +17,8 @@ label,
 span {
     font-family: "Fira Sans", sans-serif;
 }
+
+.slide {
+    opacity: 1;
+    transform: translateX(0);
+}

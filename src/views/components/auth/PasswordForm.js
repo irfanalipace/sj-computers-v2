@@ -26,8 +26,8 @@ const PasswordForm = () => {
     );
 
     const apiError = useSelector((state) => state.auth.apiError);
+    const [mounted, setMounted] = useState(false);
     const [fieldErrors, setFieldErrors] = useState({});
-
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -37,6 +37,13 @@ const PasswordForm = () => {
     useEffect(() => {
         setFieldErrors(apiError);
     }, [apiError]);
+
+    useEffect(() => {
+        setMounted(true);
+        return () => {
+            setMounted(false);
+        };
+    }, []);
 
     const isLoading = useSelector((state) => state.auth.isLoading);
 
@@ -51,7 +58,10 @@ const PasswordForm = () => {
     }
 
     return (
-        <form className="auth-inner-body" onSubmit={handleSubmit}>
+        <form
+            className={mounted ? "auth-inner-body slide" : "auth-inner-body"}
+            onSubmit={handleSubmit}
+        >
             <h3 className="login-h3">Sign in</h3>
             <div className="mb-3">
                 <label className="password-lable font-weight-bold">

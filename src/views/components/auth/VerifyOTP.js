@@ -26,6 +26,7 @@ const VerifyOTP = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);
     const [fieldErrors, setFieldErrors] = useState({});
     const [email, setEmail] = useState("");
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setFieldErrors(errors);
@@ -37,6 +38,10 @@ const VerifyOTP = () => {
 
     useEffect(() => {
         setEmail(getUserEmail());
+        setMounted(true);
+        return () => {
+            setMounted(false);
+        };
     }, []);
 
     const navigate = useNavigate();
@@ -60,7 +65,10 @@ const VerifyOTP = () => {
     };
 
     return (
-        <form className="auth-inner-body" onSubmit={handleSubmit}>
+        <form
+            className={mounted ? "auth-inner-body slide" : "auth-inner-body"}
+            onSubmit={handleSubmit}
+        >
             <h3 className="login-h3-verify">Verification required</h3>
             One Time Password (OTP) sent to<br></br> {email}. Please enter it
             below.
@@ -91,12 +99,8 @@ const VerifyOTP = () => {
                     {isLoading ? <Loader /> : "Verify OTP"}
                 </button>
             </div>
-            <p className="text-muted small">
-                <a
-                    href="#"
-                    className="text-decoration-none "
-                    style={{ paddingLeft: "172px" }}
-                >
+            <p className="text-muted small d-flex justify-content-center">
+                <a href="#" className="text-decoration-none">
                     Resend OTP
                 </a>
             </p>
