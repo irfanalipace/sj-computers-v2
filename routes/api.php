@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\StateController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\Auth\VerificationController;
@@ -31,15 +32,17 @@ Route::post('forgot-password', [AuthController::class, 'forgotPassword'])->name(
 
 Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
 
-Route::get('email/verify/{id}', [VerificationController::class,'verify'])->name('verification.verify'); // Make sure to keep this as your route name
+Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify'); // Make sure to keep this as your route name
 
-Route::get('email/resend', [VerificationController::class,'resend'])->name('verification.resend');
+Route::get('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
 
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
 
-Route::middleware(['auth:api','verified'])->group(function () {
+Route::get('states', StateController::class)->name('states');
 
-    Route::post('verify-otp',[AuthController::class, 'verifyOtp'])->name('verify-otp');
+Route::middleware(['auth:api', 'verified'])->group(function () {
+
+    Route::post('verify-otp', [AuthController::class, 'verifyOtp'])->name('verify-otp');
 
     /*
      * profile apis

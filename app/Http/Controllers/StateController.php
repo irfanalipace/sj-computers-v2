@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\BaseController;
+use App\Models\Category;
+use Illuminate\Http\JsonResponse;
 
-class StateController extends Controller
+class StateController extends BaseController
 {
-    public function index()
+    /**
+     * @return JsonResponse
+     */
+    public function __invoke()
     {
-
+        $state = Category::query()->get();
+        return $this->sendResponse($state);
     }
 }
