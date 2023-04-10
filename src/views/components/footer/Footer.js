@@ -1,5 +1,5 @@
 import React from "react";
-import "./footer.css";
+import "./Footer.css";
 import footer from "@images/common/header-logo.png";
 import vectorimg from "@images/common/boll.png";
 import copyrightimg from "@images/common/copywrite.png";
