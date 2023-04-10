@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use App\Http\Controllers\API\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class VerificationController extends Controller
+class VerificationController extends BaseController
 {
     public function verify($user_id, Request $request) {
         if (!$request->hasValidSignature()) {
-            return response()->json(["msg" => "Invalid/Expired url provided."], 401);
+            return $this->sendError(["msg" => ["Invalid/Expired url provided."]], 401);
         }
 
         $user = User::findOrFail($user_id);
@@ -24,7 +25,7 @@ class VerificationController extends Controller
 
     public function resend() {
         if (auth()->user()->hasVerifiedEmail()) {
-            return response()->json(["msg" => "Email already verified."], 400);
+            return $this->sendError(["msg" => ["Email already verified."]], 400);
         }
 
         auth()->user()->sendEmailVerificationNotification();
