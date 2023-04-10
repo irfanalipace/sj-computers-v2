@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller as Controller;
+use function MongoDB\BSON\toJSON;
 
 
 class BaseController extends Controller
@@ -38,7 +39,7 @@ class BaseController extends Controller
     {
         return response()->json([
             'status' => $status,
-            'error' => $error,
+            'errors' => json_encode([$error]),
             'code' => $code
         ], $status);
     }
