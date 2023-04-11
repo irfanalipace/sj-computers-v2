@@ -7,6 +7,7 @@ import Profile from "@pages/User/Profile";
 import ForgetPassword from "@pages/Auth/ForgetPassword/ForgetPassword";
 import ResetPassword from "@pages/Auth/ForgetPassword/ResetPassword";
 import Emailsent from "@pages/Auth/EmailSent";
+import Product from "@pages/Product/Product";
 
 export const Router = () => {
     const routes = [
@@ -53,6 +54,10 @@ export const Router = () => {
                     <ResetPassword />
                 </AuthRoute>
             ),
+        },
+        {
+            path: "/product/:productId",
+            element: <Product />,
         },
         {
             path: "/profile",
