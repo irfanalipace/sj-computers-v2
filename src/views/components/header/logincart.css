@@ -25,3 +25,11 @@
 }.login-button{
    font-size :23px !important;
 }
+.dropdown-payment button {
+    background-color: #00305E;
+    color: white;
+    padding: 9px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}

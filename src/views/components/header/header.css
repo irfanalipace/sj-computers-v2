@@ -14,15 +14,16 @@ width: 90%;
 }
 .eng-dropdown{
     /* padding-left: 27px; */
-}.eng-button{
-  
-        background: #00305E;
-        border: 0px;
-        color: white;
-        padding-top: 12px;
-        margin-left: -160px;
-    
-}.input-form-control{
+}.eng-button {
+    margin-left: 24px;
+    background: #00305E;
+    border: 0px;
+    color: white;
+    padding-top: 31px;
+    /* margin-left: -160px; */
+    margin-right: 28px;
+}
+.input-form-control{
     height: 60px;
 }
 /* .vector-cart{
@@ -49,26 +50,23 @@ padding-left: 6px;
       max-height:320px;  /* Increase / Decrease value as per your need */
       overflow-x: hidden;
   }
-.search-inputgroup{
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    width: 61%;
-    height: 48px;
-}.all-button{
-    
-        position: absolute;
-        width: 60px;
-        height: 51px;
-        left: 0px;
-        top: 0px;
-        background: #ECE8E8 !important;
-        border-right: 1px solid #B8B8B9;
-        border-radius: 5px 0px 0px 5px;
-    
-}.search-logo{
-    height: 51px;
+  .search-inputgroup {
+ 
+    width: 62%;
+  
+}
+
+.all-button {
+    position: absolute;
+    width: 60px;
+    height: 62px;
+    background: #ECE8E8 !important;
+    border-right: 1px solid #B8B8B9;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.search-logo{
+    height: 62px;
 }.text-color-heading{
     padding-top: 14px !important;
 color: white;
@@ -107,18 +105,40 @@ font-size: 18px;
   .dropdown-paymenr button:hover {
     background-color: #3e8e41;
   }
-  .dropdown-cart {
+.dropdown-cart {
     padding: 2px;
     position: relative;
     /* width: 400px; */
     /* height: 200px; */
     /* border: 3px solid #73AD21; */
     margin-bottom: 80px;
-    margin-left: -266px !important;
-}.order-button{
+    margin-right: 125px;
+}
+.return-button{
+    padding: 2px;
+    position: relative;
+    /* width: 400px; */
+    /* height: 200px; */
+    /* border: 3px solid #73AD21; */
+    
+    margin-right: 58px;
+}
+
+
+.order-button{
     background: #00305E;
     border: 0px;
     color: white;
     padding-top: 12px;
-    margin-left: -78px;
+    /* margin-left: -78px; */
+}
+.icon-cart{
+    /* margin-left: -10px; */
+}
+.ul-menu{
+    margin: 18px;
+    padding-left: 2rem
+}
+.cart-text{
+    color: white;
 }
