@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
-use App\Http\Controllers\UserDetailController;
-use App\Http\Controllers\StateController;
+use App\Http\Controllers\Api\Dropdowns\StateController;
+use App\Http\Controllers\Api\UserDetail\UserDetailController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\Auth\VerificationController;
@@ -39,12 +39,10 @@ Route::get('email/resend', [VerificationController::class, 'resend'])->name('ver
 
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
 
-Route::get('states', StateController::class)->name('states');
 
 Route::middleware(['auth:api', 'verified'])->group(function () {
-
+    Route::get('states', StateController::class)->name('states');
     Route::post('user-details', UserDetailController::class)->name('user-details');
-
     Route::post('verify-otp', [AuthController::class, 'verifyOtp'])->name('verify-otp');
 
     /*

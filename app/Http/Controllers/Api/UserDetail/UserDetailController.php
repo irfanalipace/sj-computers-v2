@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\UserDetail;
 
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\UserDetailRequest;
 use App\Models\State;
-use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UserDetailController extends BaseController
 {

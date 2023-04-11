@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
+use TCG\Voyager\Facades\Voyager;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //Route::get('email-success', function () {
 //    return view('email.success');
 //})->name('email-success');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

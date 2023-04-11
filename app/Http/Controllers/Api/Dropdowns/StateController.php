@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Dropdowns;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Models\Category;
+use App\Models\State;
 use Illuminate\Http\JsonResponse;
 
 class StateController extends BaseController
@@ -13,7 +13,7 @@ class StateController extends BaseController
      */
     public function __invoke()
     {
-        $state = Category::query()->get();
+        $state = State::query()->get();
         return $this->sendResponse($state);
     }
 }
