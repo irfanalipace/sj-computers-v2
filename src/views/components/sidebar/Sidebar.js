@@ -52,8 +52,9 @@ export default function Sidebar() {
   <li className='listitem'><a href="contact.asp" className='text-decoration-none text-color'>Desktop</a></li>
   <li className='listitem'><a href="about.asp" className='text-decoration-none text-color'>Monitors</a></li>
   <li className='listitem'><a href="about.asp" className='text-decoration-none text-color'>BTO</a></li>
+
 </ul>
-     
+<span style={{textAlign:'end'}}>Get Top Deals Now</span>
         </div>
      
 
