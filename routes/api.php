@@ -1,16 +1,14 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
-use App\Http\Controllers\Api\UserStateController;
-use App\Http\Controllers\UserDetailController;
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Api\Auth\VerificationController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\UserStateController;
 
 //use Illuminate\Support\Facades\Auth;
 
