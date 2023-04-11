@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import footerlogo from '@images/header-logo.png';
-import english from '@images/home/eng.png';
-import vectorcart from '@images/home/vector.png';
-import splice from '@images/home/ellipse.png';
-import './header.css'
-import Sidebar from "@components/sidebar/Sidebar";
+import footerlogo from "@images/header-logo.png";
+import english from "@images/home/eng.png";
+import vectorcart from "@images/home/vector.png";
+import splice from "@images/home/ellipse.png";
+import "./header.css";
+import Sidebar from "@components/Sidebar/Sidebar";
 import { useState } from "react";
 import LoginCart from "./LoginCart";
 const Header = () => {
@@ -17,11 +17,11 @@ const Header = () => {
     // ...
     return (
         <div className="row">
-
             <header className="navbar navbar-expand-lg navbar-light bg-light header-background">
                 <div className="container-fluid">
-
-                    <a className="navbar-brand" href="#"><img src={footerlogo} alt='' className="homepage-img" /></a>
+                    <a className="navbar-brand" href="#">
+                        <img src={footerlogo} alt="" className="homepage-img" />
+                    </a>
 
                     {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon">
@@ -31,68 +31,134 @@ const Header = () => {
 
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <div className="d-flex flex-row justify-content-between align-items-center w-100">
-
                             <ul className="ul-menu">
-                                <li className="text-color-heading" style={{ color: '#B8B8B9' }}>Deilver to</li>
-                                <li className="text-color-heading2">California</li>
-
+                                <li
+                                    className="text-color-heading"
+                                    style={{ color: "#B8B8B9" }}
+                                >
+                                    Deilver to
+                                </li>
+                                <li className="text-color-heading2">
+                                    California
+                                </li>
                             </ul>
 
                             <div className="input-group search-inputgroup">
                                 <div className="input-group-btn search-panel">
-                                    <button type="button" className="btn btn-default dropdown-toggle all-button" data-toggle="dropdown">
-                                        <span id="search_concept">All</span> <span className="caret"></span>
+                                    <button
+                                        type="button"
+                                        className="btn btn-default dropdown-toggle all-button"
+                                        data-toggle="dropdown"
+                                    >
+                                        <span id="search_concept">All</span>{" "}
+                                        <span className="caret"></span>
                                     </button>
-                                    <ul className="dropdown-menu scrollable-dropdown" role="menu">
-                                        <li><a href="#">Automotive Accesories</a></li>
-                                        <li><a href="#">Cell Phone Accesories</a></li>
+                                    <ul
+                                        className="dropdown-menu scrollable-dropdown"
+                                        role="menu"
+                                    >
+                                        <li>
+                                            <a href="#">
+                                                Automotive Accesories
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                Cell Phone Accesories
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
-                                <input type="hidden" name="search_param" value="all" id="search_param" />
-                                <input type="text" className="form-control " name="x" id="search" placeholder="Search" />
+                                <input
+                                    type="hidden"
+                                    name="search_param"
+                                    value="all"
+                                    id="search_param"
+                                />
+                                <input
+                                    type="text"
+                                    className="form-control "
+                                    name="x"
+                                    id="search"
+                                    placeholder="Search"
+                                />
                                 <span className="input-group-btn">
-                                    <button type="button" className="btn btn-success search-logo">
+                                    <button
+                                        type="button"
+                                        className="btn btn-success search-logo"
+                                    >
                                         <i className="fas fa-search"></i>
                                     </button>
                                 </span>
                             </div>
 
                             <div className="dropdown ">
-                                <button className="dropdown-toggle eng-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button
+                                    className="dropdown-toggle eng-button"
+                                    type="button"
+                                    id="dropdownMenuButton"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
                                     <img src={english} alt="English Flag" /> EN
                                 </button>
-                                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a className="dropdown-item" href="#">English</a>
-                                    <a className="dropdown-item" href="#">Spanish</a>
+                                <div
+                                    className="dropdown-menu"
+                                    aria-labelledby="dropdownMenuButton"
+                                >
+                                    <a className="dropdown-item" href="#">
+                                        English
+                                    </a>
+                                    <a className="dropdown-item" href="#">
+                                        Spanish
+                                    </a>
                                 </div>
-
                             </div>
 
                             <div className="dropdown-cart">
                                 <LoginCart />
-
                             </div>
 
                             <div className="dropdown ">
-                                <button className=" order-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Return<br />
-                                    & Order
+                                <button
+                                    className=" order-button"
+                                    type="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    Return
+                                    <br />& Order
                                 </button>
-                                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a className="dropdown-item" href="#">Return</a>
-                                    <a className="dropdown-item" href="#">Order</a>
+                                <div
+                                    className="dropdown-menu"
+                                    aria-labelledby="dropdownMenuButton"
+                                >
+                                    <a className="dropdown-item" href="#">
+                                        Return
+                                    </a>
+                                    <a className="dropdown-item" href="#">
+                                        Order
+                                    </a>
                                 </div>
                             </div>
 
                             <div className="icon-cart">
-
-
                                 <div className="product-boll">
-
-                                    <div className="dropdown dot" style={{ textAlign: 'center', color: 'white' }}>
+                                    <div
+                                        className="dropdown dot"
+                                        style={{
+                                            textAlign: "center",
+                                            color: "white",
+                                        }}
+                                    >
                                         0
-                                        <img src={vectorcart} alt="" className="vector-cart" />
-
+                                        <img
+                                            src={vectorcart}
+                                            alt=""
+                                            className="vector-cart"
+                                        />
                                     </div>
                                     <span className="text-color">Cart</span>
                                 </div>
@@ -103,16 +169,12 @@ const Header = () => {
       <button className="dropbtn" onClick={() => setIsPaymentFrameVisible(!isPaymentFrameVisible)}>Payment Method</button>
       {isPaymentFrameVisible && <iframe src="https://your-payment-provider.com/payment-methods" id="payment-frame"></iframe>}
     </div> */}
-
                 </div>
             </header>
 
-
             <Sidebar />
-
         </div>
     );
 };
 
 export default Header;
-

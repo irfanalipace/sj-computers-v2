@@ -20,29 +20,7 @@
     margin-left: 1.5rem;
     cursor: pointer;
 }
-.sideMenu {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 260px;
-    position: fixed;
-    background: rgb(249, 249, 249);
-    transition: all 0.35s ease-out;
-    z-index: 2;
-}
-.sideMenu a {
-    display: flex;
-    align-content: flex-start;
-    text-decoration: none;
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.8);
-    padding: 1rem 1.6rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-.sideMenu a:hover {
-    color: rgb(40, 0, 148);
-}
+
 .ullist {
     list-style-type: none;
     margin: 0;

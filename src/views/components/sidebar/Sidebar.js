@@ -1,78 +1,34 @@
-
-import React, { useState, useEffect, useRef } from 'react'
-import './sidebar.css'
+import React, { useState, useEffect, useRef } from "react";
+import "./Sidebar.css";
 export default function Sidebar() {
-  const [isSideMenu, setSideMenu] = useState(false)
-  const open = (isSideMenu) => {
-    return setSideMenu(!isSideMenu)
-  }
-  const domeNode = useRef()
-  const updateState = (event) => {
-    if (domeNode.current.contains(event.target)) {
-      return
-    }
-    setSideMenu(false)
-  }
-  useEffect(() => {
-    document.addEventListener('mousedown', updateState)
-    return () => {
-      document.removeEventListener('mousedown', updateState)
-    }
-  }, [])
-  return (
-    <>
-    <div className='flex-container'>
-      <header className="topBar">
-        <div className="menuBar">
-          <span
-            ref={domeNode}
-            className="navIcon"
-            onClick={() => {
-              open(isSideMenu)
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              {isSideMenu ? (
-                <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" />
-              ) : (
-                <path d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" />
-              )}
-            </svg>
-            <small className='small-text-size'>All</small>
-          </span>
-         
-          <ul className='menu-sidebar text-decoration-none ullist'>
-  <li className='listitem'><a href="default.asp" className='text-decoration-none text-color'>Today's Deal</a></li>
-  <li className='listitem'><a href="news.asp" className='text-decoration-none text-color'>Laptop</a></li>
-  <li className='listitem'><a href="contact.asp" className='text-decoration-none text-color'>Desktop</a></li>
-  <li className='listitem'><a href="about.asp" className='text-decoration-none text-color'>Monitors</a></li>
-  <li className='listitem'><a href="about.asp" className='text-decoration-none text-color'>BTO</a></li>
-
-</ul>
-<span style={{textAlign:'end'}}>Get Top Deals Now</span>
+    const [isSideMenu, setSideMenu] = useState(false);
+    const open = (isSideMenu) => {
+        return setSideMenu(!isSideMenu);
+    };
+    const domeNode = useRef();
+    const updateState = (event) => {
+        if (domeNode.current.contains(event.target)) {
+            return;
+        }
+        setSideMenu(false);
+    };
+    // useEffect(() => {
+    //     document.addEventListener("mousedown", updateState);
+    //     return () => {
+    //         document.removeEventListener("mousedown", updateState);
+    //     };
+    // }, []);
+    return (
+        <div className="sideMenu" style={{ left: isSideMenu ? "0" : "-265px" }}>
+            <a href="#">Menu 01</a>
+            <a href="#">Menu 02</a>
+            <a href="#">Menu 03</a>
+            <a href="#">Menu 04</a>
+            <a href="#">Menu 05</a>
+            <a href="#">Menu 06</a>
+            <a href="#">Menu 07</a>
+            <a href="#">Menu 08</a>
+            <a href="#">Menu 09</a>
         </div>
-     
-
-        <div className="sideMenu" style={{ left: isSideMenu ? '0' : '-265px' }}>
-          <a href="#">Menu 01</a>
-          <a href="#">Menu 02</a>
-          <a href="#">Menu 03</a>
-          <a href="#">Menu 04</a>
-          <a href="#">Menu 05</a>
-          <a href="#">Menu 06</a>
-          <a href="#">Menu 07</a>
-          <a href="#">Menu 08</a>
-          <a href="#">Menu 09</a>
-        </div>
-     
-      </header>
-   
-      </div>
-    </>
-  )
+    );
 }

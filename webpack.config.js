@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+var CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 
 module.exports = {
     entry: "./src/Index.js",
@@ -68,5 +69,8 @@ module.exports = {
         historyApiFallback: true,
     },
 
-    plugins: [new webpack.HotModuleReplacementPlugin()],
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new CaseSensitivePathsPlugin({ debug: true }),
+    ],
 };
