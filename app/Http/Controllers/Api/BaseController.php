@@ -17,7 +17,7 @@ class BaseController extends Controller
      * @param  int  $status
      * @return \Illuminate\Http\JsonResponse
      */
-    public function sendResponse($data, $message = 'Success', $status = 200): JsonResponse
+    public function sendResponse($data=[], $message = 'Success', $status = 200): JsonResponse
     {
         return response()->json([
             'status' => $status,
