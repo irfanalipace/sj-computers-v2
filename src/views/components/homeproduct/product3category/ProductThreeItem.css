@@ -1,0 +1,11 @@
+.product-section {
+    height: 398px; 
+   background-color: white;
+   /* padding: 20px; */
+   border: 1px solid #ddd;
+   margin-bottom: 20px;
+   text-align: center;
+   margin: 6px;
+   top: 2;
+   left: 2;
+ }
