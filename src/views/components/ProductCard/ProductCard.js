@@ -1,8 +1,10 @@
 import StarRatings from "react-star-ratings";
+import { Link } from "react-router-dom";
 
 import "./ProductCard.css";
 
 const Product = ({
+    id,
     imageSrc,
     name,
     rating,
@@ -12,13 +14,16 @@ const Product = ({
     newPrice,
     deliveryCharges,
 }) => {
+    console.log("id:", id);
     return (
         <div className="product">
             <div className="product-image">
                 <img src={imageSrc} alt={name} />
             </div>
             <div className="product-details">
-                <div className="product-name">{name}</div>
+                <Link to={`/product/${id}`}>
+                    <div className="product-name">{name}</div>
+                </Link>
                 <div className="product-rating">
                     <StarRatings
                         rating={rating}
@@ -32,6 +37,9 @@ const Product = ({
                     <span className="product-num-reviews">{numReviews}</span>
                 </div>
                 <div className="product-badge">
+                    <div className="badge-text">Best Seller</div>
+                </div>
+                <div className="product-deal my-1">
                     <div className="product-off-percentage">
                         {offPercentage}% off
                     </div>
@@ -44,7 +52,7 @@ const Product = ({
                     <div className="product-new-price">{newPrice}</div>
                 </div>
                 <div className="product-delivery-charges">
-                    {deliveryCharges}
+                    <i className="fa fa-truck"></i> {deliveryCharges}
                 </div>
             </div>
         </div>

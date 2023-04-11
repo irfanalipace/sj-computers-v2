@@ -1,10 +1,12 @@
 import ProductSlider from "@components/Sliders/ProductSlider";
 
+import "./Recommdation.css";
+
 export default function Recommendation() {
     const products = [
         {
             id: 1,
-            imageSrc: "https://via.placeholder.com/300x300",
+            imageSrc: "https://via.placeholder.com/165x135",
             name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt.",
             rating: 4.5,
             numReviews: 100,
@@ -15,8 +17,8 @@ export default function Recommendation() {
         },
         {
             id: 2,
-            imageSrc: "https://via.placeholder.com/300x300",
-            name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt.",
+            imageSrc: "https://via.placeholder.com/165x135",
+            name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt.",
             rating: 3.5,
             numReviews: 50,
             offPercentage: 10,
@@ -26,7 +28,7 @@ export default function Recommendation() {
         },
         {
             id: 3,
-            imageSrc: "https://via.placeholder.com/300x300",
+            imageSrc: "https://via.placeholder.com/165x135",
             name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 3",
             rating: 4,
             numReviews: 75,
@@ -37,7 +39,7 @@ export default function Recommendation() {
         },
         {
             id: 4,
-            imageSrc: "https://via.placeholder.com/300x300",
+            imageSrc: "https://via.placeholder.com/165x135",
             name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 4",
             rating: 5,
             numReviews: 120,
@@ -48,7 +50,7 @@ export default function Recommendation() {
         },
         {
             id: 5,
-            imageSrc: "https://via.placeholder.com/300x300",
+            imageSrc: "https://via.placeholder.com/165x135",
             name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 5",
             rating: 4.5,
             numReviews: 90,
@@ -59,7 +61,7 @@ export default function Recommendation() {
         },
         {
             id: 6,
-            imageSrc: "https://via.placeholder.com/300x300",
+            imageSrc: "https://via.placeholder.com/165x135",
             name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 1",
             rating: 4.5,
             numReviews: 100,
@@ -70,7 +72,7 @@ export default function Recommendation() {
         },
         {
             id: 7,
-            imageSrc: "https://via.placeholder.com/300x300",
+            imageSrc: "https://via.placeholder.com/165x135",
             name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 2",
             rating: 3.5,
             numReviews: 50,
@@ -81,7 +83,7 @@ export default function Recommendation() {
         },
         {
             id: 8,
-            imageSrc: "https://via.placeholder.com/300x300",
+            imageSrc: "https://via.placeholder.com/165x135",
             name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 3",
             rating: 4,
             numReviews: 75,
@@ -92,7 +94,7 @@ export default function Recommendation() {
         },
         {
             id: 9,
-            imageSrc: "https://via.placeholder.com/300x300",
+            imageSrc: "https://via.placeholder.com/165x135",
             name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 4",
             rating: 5,
             numReviews: 120,
@@ -103,7 +105,7 @@ export default function Recommendation() {
         },
         {
             id: 10,
-            imageSrc: "https://via.placeholder.com/300x300",
+            imageSrc: "https://via.placeholder.com/165x135",
             name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 5",
             rating: 4.5,
             numReviews: 90,
@@ -115,7 +117,12 @@ export default function Recommendation() {
     ];
     return (
         <div className="recommendation-container">
-            <ProductSlider products={products} />
+            <div className="recommendation-inner">
+                <h3>Recommended Items</h3>
+                <div className="slider-wrapper">
+                    <ProductSlider products={products} />
+                </div>
+            </div>
         </div>
     );
 }

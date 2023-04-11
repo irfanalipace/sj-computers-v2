@@ -8,22 +8,33 @@
 
 .product-image {
     width: 100%;
+    height: 135px;
     text-align: center;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .product-image img {
     max-width: 100%;
-    height: auto;
 }
 
 .product-details {
     text-align: left;
 }
 
+.product-details a {
+    text-decoration: none;
+}
+
 .product-name {
     font-size: 14px;
     color: #1270c4;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space: normal;
 }
 
 .product-name:hover {
@@ -31,24 +42,43 @@
     cursor: pointer;
 }
 
-.product-badge {
+.product-deal {
     display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     flex-wrap: wrap;
 }
 
 .product-off-percentage {
+    background: #52ac66;
+    color: #ffffff;
+    width: 40%;
+    max-width: 100px;
+    font-size: 12px;
+    padding-left: 10px;
+    border-radius: 3px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.product-badge {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.badge-text {
     clip-path: polygon(100% 0, 76% 49%, 100% 100%, 0 100%, 0% 50%, 1% 0);
     background: #e87e24;
     color: #ffffff;
-    width: 83%;
+    width: 60%;
+    max-width: 200px;
     font-size: 12px;
     padding-left: 10px;
+    margin-right: 20px;
 }
 
-.product-badge span {
+.product-deal span {
     font-weight: 500;
     font-size: 12px;
     color: #6f6f6f;
@@ -91,4 +121,33 @@
     font-size: 12px;
     font-weight: 500;
     color: #6f6f6f;
+}
+
+/* For Mobile Devices  */
+@media (max-width: 575.98px) {
+}
+
+/* Small Tablets (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+}
+
+/* Large Tablets (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+}
+
+/* Laptops and Monitors (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+}
+
+/* X-Large devices (large desktops, less than 1400px) */
+@media (min-width: 576px) and (max-width: 1399.98px) {
+}
+
+@media (max-width: 1399.98px) {
+}
+/* X-Large devices (large desktops, less than 1400px) */
+@media (min-width: 1400px) {
+    .product-rating {
+        width: 70%;
+    }
 }
