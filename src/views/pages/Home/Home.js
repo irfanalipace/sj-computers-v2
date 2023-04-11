@@ -5,6 +5,7 @@ import BannerSlider from '@components/slider/BannerSlider';
 import { ProductType } from '@components/homeproduct/ProductType';
 // import ProductItem4 from '@components/homeproduct/productcategory/ProductItem4';
 import CarouselSlider from '@components/slider/CarouselSlider'
+import ProductThreeItem from '@components/homeproduct/product3category/ProductThreeItem';
  const Home = () => {
   return (
     
@@ -15,6 +16,7 @@ import CarouselSlider from '@components/slider/CarouselSlider'
       <BannerSlider />
       <ProductType />
       <CarouselSlider />
+      <ProductThreeItem />
       <Footer />
     
         </div>

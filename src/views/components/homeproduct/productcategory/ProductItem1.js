@@ -24,7 +24,7 @@ const ProductItem1 = () => {
       <p className="forgot-password text-left">
                         
                             <Link to="/" className="text-decoration-none">
-                           <h4 style={{textAlign:'left'}}>Start here</h4> 
+                           <h4 style={{textAlign:'left',  fontSize: '16px', marginTop: '60px'}}>Start here</h4> 
                             </Link>
                         </p>
     </Row>
