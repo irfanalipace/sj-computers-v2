@@ -1,11 +1,16 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\UserStateController;
 use App\Http\Controllers\UserDetailController;
-use App\Http\Controllers\StateController;
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\Auth\VerificationController;
+use App\Http\Controllers\Api\StateController;
+use App\Http\Controllers\Api\BrandController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProductController;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -39,11 +44,17 @@ Route::get('email/resend', [VerificationController::class, 'resend'])->name('ver
 
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
 
-Route::get('states', StateController::class)->name('states');
+Route::get('states',[StateController::class,'getList'])->name('states');
 
-Route::middleware(['auth:api', 'verified'])->group(function () {
+Route::get('categories',[CategoryController::class,'getList'])->name('categories');
 
-    Route::post('user-details', UserDetailController::class)->name('user-details');
+Route::get('brands',[BrandController::class,'getList'])->name('brands');
+
+Route::get('products',[ProductController::class,'getList'])->name('brands');
+
+Route::middleware(['auth:api'])->group(function () {
+
+//    Route::post('user-details', UserDetailController::class)->name('user-details');
 
     Route::post('verify-otp', [AuthController::class, 'verifyOtp'])->name('verify-otp');
 
@@ -51,4 +62,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      * profile apis
      */
     Route::put('profile-update', [AuthController::class, 'updateProfile'])->name('profile-update');
+
+    /*
+     * save user state
+     */
+    Route::post('update-state', [UserStateController::class, 'updateState'])->name('update-state');
+
 });
