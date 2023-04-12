@@ -1,25 +1,23 @@
-import React from 'react'
-import Header from '@components/header/Header';
-import Footer from '@components/footer/footer';
-import BannerSlider from '@components/slider/BannerSlider';
-import { ProductType } from '@components/homeproduct/ProductType';
+import React from "react";
+import Header from "@components/header/Header";
+import Footer from "@components/footer/footer";
+import BannerSlider from "@components/slider/BannerSlider";
+import { ProductType } from "@components/homeproduct/ProductType";
 // import ProductItem4 from '@components/homeproduct/productcategory/ProductItem4';
-import CarouselSlider from '@components/slider/CarouselSlider'
-import ProductThreeItem from '@components/homeproduct/product3category/ProductThreeItem';
-import Header2 from '@components/header/Header2';
+import CarouselSlider from "@components/slider/CarouselSlider";
+import ProductThreeItem from "@components/homeproduct/product3category/ProductThreeItem";
+import Header2 from "@components/header/Header2";
 const Home = () => {
-  return (
-
-    <div>
-
-      <div>
-        <Header />
-        <BannerSlider />
-        <ProductType />
-        <CarouselSlider />
-        <ProductThreeItem />
-        {/* <Header /> */}
-        {/* <div style={{position:'relative', background:'blue'}}>
+    return (
+        <div>
+            <div>
+                <Header />
+                <BannerSlider />
+                <ProductType />
+                <CarouselSlider />
+                <ProductThreeItem />
+                {/* <Header2 /> */}
+                {/* <div style={{position:'relative', background:'blue'}}>
     <div style={{position:'absolute', top:'0', left:'0', background:'green'}}>
         This div will be positioned in the top left corner of its nearest positioned ancestor.
     </div>
@@ -28,14 +26,9 @@ const Home = () => {
     </div>
 </div> */}
 
-        <Footer />
-
-      </div>
-
-
-    </div>
-
-
-  )
-}
+                <Footer />
+            </div>
+        </div>
+    );
+};
 export default Home;

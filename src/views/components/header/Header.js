@@ -16,9 +16,10 @@ const Header = () => {
     // const [isPaymentFrameVisible, setIsPaymentFrameVisible] = useState(false);
     // ...
     return (
-        <div className="row">
+        <div >
+             <div className="container-fluid">
         <header className="navbar navbar-expand-lg header-background">
-            <div className="container-fluid">
+           
                 <a className="navbar-brand" href="#"><img src={footerlogo} alt='' className="homepage-img" /></a>
                 <div className="d-flex flex-row align-items-center w-100">
                     <ul className="ul-menu">
@@ -74,8 +75,9 @@ const Header = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+          
         </header>
+        </div>
         <Sidebar />
     </div>
     
