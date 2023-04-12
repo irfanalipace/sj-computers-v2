@@ -17,35 +17,18 @@ import ProductThreeItem from "@components/homeproduct/product3category/ProductTh
 import Recommendation from "@components/Recommendation/Recommendation";
 
 const Home = () => {
-
-    return (
-
-        <div>
-
-            <Header />
-
-            <TopBar />
-
-            <BannerSlider />
-
-            <ProductType />
-
-            <CarouselSlider />
-
-            <ProductThreeItem />
-
-            <Recommendation />
-
-            <Footer />
-
-        </div>
-
-    );
-
+    return (
+        <div>
+                        <Header />
+                        <TopBar />
+                        <BannerSlider />
+                        <ProductType />
+                        <CarouselSlider />
+                        <ProductThreeItem />
+                        <Recommendation />
+                        <Footer />       
+        </div>
+    );
 };
 
-
-
-
 export default Home;
-
