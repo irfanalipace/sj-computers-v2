@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-import { getToken, destroyToken } from "@services/jwtService";
+import { destroyToken } from "@services/jwtService";
 
 /**
  * Service to call HTTP request via Axios
@@ -17,9 +17,6 @@ const ApiService = {
             this.instance.defaults.baseURL = "http://localhost:8000/api";
             // this.instance.defaults.baseURL = process.env.API_BASE_URL;
             this.instance.defaults.headers["content-type"] = "application/json";
-            if (getToken()) {
-                this.setHeader("Authorization", `Bearer ${getToken()}`);
-            }
         }
     },
 
@@ -73,7 +70,8 @@ const ApiService = {
                 .then((res) => {
                     resolve(res);
                 })
-                .catch((error, status) => {
+                .catch((error) => {
+                    console.log("error status: ", error.response.status);
                     if (error?.response?.status === 401) {
                         destroyToken();
                     }
