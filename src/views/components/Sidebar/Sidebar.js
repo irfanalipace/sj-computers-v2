@@ -3,6 +3,7 @@ import "./Sidebar.css";
 export default function Sidebar({ openState }) {
     return (
         <div className="sideMenu" style={{ left: openState ? "0" : "-265px" }}>
+            <div></div>
             <a href="#">Menu 01</a>
             <a href="#">Menu 02</a>
             <a href="#">Menu 03</a>

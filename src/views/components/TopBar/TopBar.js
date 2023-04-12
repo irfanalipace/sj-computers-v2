@@ -110,7 +110,7 @@ export default function TopBar() {
                 </div> */}
             </header>
 
-            {isSideMenu && <Sidebar />}
+            <Sidebar openState={isSideMenu} />
         </>
     );
 }
