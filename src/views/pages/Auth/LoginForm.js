@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import EmailForm from "@components/auth/EmailFormWrapper";
-import PasswordForm from "@components/auth/PasswordForm";
-import VerifyOTP from "@components/auth/VerifyOTP";
-import Header from "@components/auth/Header";
-import Footer from "@components/auth/Footer";
+import EmailForm from "@components/Auth/EmailFormWrapper";
+import PasswordForm from "@components/Auth/PasswordForm";
+import VerifyOTP from "@components/Auth/VerifyOTP";
+import Header from "@components/Auth/Header";
+import Footer from "@components/Auth/Footer";
 
 const LoginForm = () => {
     const currentPage = useSelector((state) => state.auth.currentPage);

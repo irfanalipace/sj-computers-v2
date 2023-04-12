@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { verifyOtp } from "@store/auth/authThunks";
-import Loader from "@common/spinner/Spinner";
+import Loader from "@common/Spinner/Spinner";
 import { useFormValidation } from "@hooks/useFormValidation";
 import { getUserEmail } from "@services/jwtService";
 

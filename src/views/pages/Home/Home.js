@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "@components/header/Header";
+import Header from "@components/Header/Header";
 import TopBar from "@components/TopBar/TopBar";
-import Footer from "@components/footer/Footer";
+import Footer from "@components/Footer/Footer";
 import BannerSlider from "@components/Sliders/BannerSlider";
 import { ProductType } from "@components/homeproduct/ProductType";
 import CarouselSlider from "@components/Sliders/CarouselSlider";

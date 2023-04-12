@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import Header from "@components/auth/Header";
-import Footer from "@components/auth/Footer";
+import Header from "@components/Auth/Header";
+import Footer from "@components/Auth/Footer";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormValidation } from "@hooks/useFormValidation";
-import Loader from "@common/spinner/Spinner";
+import Loader from "@common/Spinner/Spinner";
 import { register } from "@store/auth/authThunks";
 
 import "@pages/Auth/auth.css";

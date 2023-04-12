@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { useFormValidation } from "@hooks/useFormValidation";
 
-import Loader from "@common/spinner/Spinner";
+import Loader from "@common/Spinner/Spinner";
 
 export default function EmailForm({ onFormSubmit, form }) {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(

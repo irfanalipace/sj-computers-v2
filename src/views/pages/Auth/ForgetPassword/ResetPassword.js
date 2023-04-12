@@ -6,9 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 
 import { resetPassword } from "@store/auth/authThunks";
-import Header from "@components/auth/Header";
-import Footer from "@components/auth/Footer";
-import Loader from "@common/spinner/Spinner";
+import Header from "@components/Auth/Header";
+import Footer from "@components/Auth/Footer";
+import Loader from "@common/Spinner/Spinner";
 import { useFormValidation } from "@hooks/useFormValidation";
 
 import "@pages/Auth/auth.css";

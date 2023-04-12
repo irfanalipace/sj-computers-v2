@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
-import Header from "@components/auth/Header";
-import Footer from "@components/auth/Footer";
+import Header from "@components/Auth/Header";
+import Footer from "@components/Auth/Footer";
 
 import "@pages/Auth/auth.css";
 

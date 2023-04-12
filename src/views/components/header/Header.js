@@ -3,7 +3,7 @@ import footerlogo from "@images/header-logo.png";
 import english from "@images/home/eng.png";
 import vectorcart from "@images/home/vector.png";
 import splice from "@images/home/ellipse.png";
-import "./header.css";
+import "./Header.css";
 import Sidebar from "@components/Sidebar/Sidebar";
 import { useState } from "react";
 import LoginCart from "./LoginCart";

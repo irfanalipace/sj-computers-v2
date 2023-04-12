@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-import EmailForm from "@components/auth/EmailFormWrapper";
-import Header from "@components/auth/Header";
-import Footer from "@components/auth/Footer";
+import EmailForm from "@components/Auth/EmailFormWrapper";
+import Header from "@components/Auth/Header";
+import Footer from "@components/Auth/Footer";
 
 const LoginForm = () => {
     return (
