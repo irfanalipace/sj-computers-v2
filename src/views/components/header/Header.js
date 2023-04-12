@@ -5,7 +5,6 @@ import vectorcart from "@images/home/vector.png";
 import splice from "@images/home/ellipse.png";
 import "./Header.css";
 import Sidebar from "@components/Sidebar/Sidebar";
-import { useState } from "react";
 import LoginCart from "./LoginCart";
 const Header = () => {
     // const [isOpen, setIsOpen] = useState(false);
