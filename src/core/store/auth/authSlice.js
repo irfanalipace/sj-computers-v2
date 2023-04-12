@@ -20,7 +20,7 @@ const authSlice = createSlice({
         },
         LOGIN: (state, action) => {
             state.isLoading = false;
-            state.password = action.payload;
+            state.password = { ...action.payload };
             state.currentPage = state.currentPage + 1;
         },
         LOGOUT: (state) => {
@@ -30,7 +30,7 @@ const authSlice = createSlice({
         },
         REGISTER: (state, action) => {
             state.isLoading = false;
-            state.user = action.payload;
+            state.user = { ...action.payload };
         },
         ALREADY_LOGGED_IN: (state) => {
             state.isAuthenticated = true;
@@ -42,12 +42,12 @@ const authSlice = createSlice({
         },
         VERIFY_OTP: (state, action) => {
             state.isAuthenticated = true;
-            state.user = action.payload;
+            state.user = { ...action.payload };
             state.isLoading = false;
             state.currentPage = 1;
         },
         API_ERROR: (state, action) => {
-            state.apiError = action.payload;
+            state.apiError = { ...action.payload };
             state.isLoading = false;
         },
     },

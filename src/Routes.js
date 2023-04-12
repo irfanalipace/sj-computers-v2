@@ -8,6 +8,7 @@ import ForgetPassword from "@pages/Auth/ForgetPassword/ForgetPassword";
 import ResetPassword from "@pages/Auth/ForgetPassword/ResetPassword";
 import Emailsent from "@pages/Auth/EmailSent";
 import Product from "@pages/Product/Product";
+import Category from "@pages/Category/Category";
 
 export const Router = () => {
     const routes = [
@@ -58,6 +59,10 @@ export const Router = () => {
         {
             path: "/product/:productId",
             element: <Product />,
+        },
+        {
+            path: "/category/:categoryId",
+            element: <Category />,
         },
         {
             path: "/profile",

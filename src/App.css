@@ -6,7 +6,7 @@
 body {
     min-height: 100vh;
     font-weight: 400;
-    font-family: "Fira Sans", sans-serif;
+    font-family: "Inter", sans-serif;
 }
 h1,
 h2,
@@ -16,7 +16,7 @@ h5,
 h6,
 label,
 span {
-    font-family: "Fira Sans", sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 .slide {
