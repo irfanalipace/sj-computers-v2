@@ -6,7 +6,8 @@ import splice from "@images/home/ellipse.png";
 import "./Header.css";
 import Sidebar from "@components/Sidebar/Sidebar";
 import { useState } from "react";
-import LoginCart from "./LoginCart";
+import LoginCart from "@components/Header/LoginCart";
+
 const Header = () => {
     // const [isOpen, setIsOpen] = useState(false);
 
@@ -22,7 +23,7 @@ const Header = () => {
            
                 <a className="navbar-brand" href="#"><img src={footerlogo} alt='' className="homepage-img" /></a>
                 <div className="d-flex flex-row align-items-center w-100">
-                    <ul className="ul-menu">
+                    {/* <ul className="ul-menu">
                         <li className="text-color-heading" style={{color:'#B8B8B9'}}>Deilver to</li>
                         <li className="text-color-heading2">California</li>
                     </ul>
@@ -43,7 +44,7 @@ const Header = () => {
                                 <i className="fas fa-search"></i>
                             </button>
                         </span>
-                    </button> 
+                    </div>  */}
 
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <div className="d-flex flex-row justify-content-between align-items-center w-100">
