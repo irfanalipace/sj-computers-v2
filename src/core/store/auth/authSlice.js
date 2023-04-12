@@ -5,6 +5,7 @@ const initialState = {
     isAuthenticated: false,
     apiError: false,
     isLoading: false,
+    currentPage: 1,
 };
 
 const authSlice = createSlice({
@@ -20,6 +21,7 @@ const authSlice = createSlice({
         LOGIN: (state, action) => {
             state.isLoading = false;
             state.password = action.payload;
+            state.currentPage = state.currentPage + 1;
         },
         LOGOUT: (state) => {
             state.isAuthenticated = false;
@@ -30,18 +32,19 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.user = action.payload;
         },
-        alreadyLoggedIn: (state) => {
+        ALREADY_LOGGED_IN: (state) => {
             state.isAuthenticated = true;
             state.isLoading = false;
         },
-        VERIFY_EMAIL: (state, action) => {
-            state.user = { email: action.payload };
+        VERIFY_EMAIL: (state) => {
             state.isLoading = false;
+            state.currentPage = state.currentPage + 1;
         },
         VERIFY_OTP: (state, action) => {
             state.isAuthenticated = true;
             state.user = action.payload;
             state.isLoading = false;
+            state.currentPage = 1;
         },
         API_ERROR: (state, action) => {
             state.apiError = action.payload;
@@ -53,7 +56,7 @@ export const {
     LOGIN,
     LOGOUT,
     REGISTER,
-    alreadyLoggedIn,
+    ALREADY_LOGGED_IN,
     LOADING,
     CLEAR_LOADING,
     VERIFY_EMAIL,

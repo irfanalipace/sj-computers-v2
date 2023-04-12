@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Logout from '@components/auth/Logout'
-
+import Logout from "@components/Auth/Logout";
 
 const Profile = () => {
     return (

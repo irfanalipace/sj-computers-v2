@@ -35,12 +35,5 @@ class AuthServiceProvider extends ServiceProvider
         if (! $this->app->routesAreCached()) {
             Passport::routes();
         }
-        VerifyEmail::toMailUsing(function ($notifiable, $url) {
-            $url = url('/email-success');
-            return (new MailMessage)
-                ->subject('Verify Email Address')
-                ->line('Click the button below to verify your email address.')
-                ->action('Verify Email Address', $url);
-        });
     }
 }

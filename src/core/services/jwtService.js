@@ -1,3 +1,5 @@
+import ApiService from "@services/apiService";
+
 const TOKEN = "token";
 const USER_NAME = "user_name";
 const USER_EMAIL = "user_email";
@@ -8,6 +10,7 @@ export const saveToken = (token, name, email) => {
     window.localStorage.setItem(TOKEN, token);
     window.localStorage.setItem(USER_NAME, name);
     window.localStorage.setItem(USER_EMAIL, email);
+    ApiService.setHeader("Authorization", "Bearer " + token);
 };
 
 export const updateToken = (token, id, email) => {

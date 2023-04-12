@@ -4,13 +4,19 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    const ADMIN_ROLE_ID = 1;
+    const USER_ROLE_ID = 2;
+
+    const AUTH_TOKEN = 'SJAuthToken';
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +28,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'status',
-        'is_admin'
+        'message',
+        'role_id',
+        'otp_verified'
     ];
 
     public function otps()
@@ -48,4 +56,12 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return HasOne
+     */
+    public function userDetail(): HasOne
+    {
+        return $this->hasOne('UserDetail');
+    }
 }
