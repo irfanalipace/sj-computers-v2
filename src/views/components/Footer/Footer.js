@@ -3,8 +3,9 @@ import "./Footer.css";
 import footer from "@images/common/header-logo.png";
 import vectorimg from "@images/common/boll.png";
 import copyrightimg from "@images/common/copywrite.png";
-import arrowfun from "@images/common/arrow.png";
-
+import img1 from "@images/footer/setting.png";
+import BackToTopButton from './BackToTopButton'
+import { left } from "@popperjs/core";
 const Footer = () => {
     return (
         <div>
@@ -13,8 +14,9 @@ const Footer = () => {
                 style={{ backgroundColor: "#002549" }}
             >
                 <h4 style={{ color: "wheat" }}>
-                    Back to top{" "}
-                    <img src={arrowfun} alt="" style={{ width: "20px" }} />
+                    {/* Back to top{" "} */}
+                    <BackToTopButton />
+                   
                 </h4>
             </div>
             <footer className="page-footer font-small blue pt-4 footer-section">
@@ -164,8 +166,8 @@ const Footer = () => {
                                     Reach Us
                                 </h6>
                                 <p className="text-uppercase herf-link">
-                                    {" "}
-                                    2817 Eagandale Blvd Eagan, <br></br>MN
+                                  
+                                    2817 Eagandale Blvd Eagan, MN
                                     55121.
                                 </p>
                                 {/* <li><a href="#!" className='herf-link text-decoration-none'></a></li> */}
@@ -182,6 +184,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
+                <hr className="hr-line"></hr>
                 <div className="footer-copyright text-center py-3">
                     <img
                         src={footer}
@@ -190,7 +193,7 @@ const Footer = () => {
                     />
 
                     <button
-                        class="btn btn-secondary dropdown-toggle"
+                        class="btn btn-secondary dropdown-toggle language-dropdown"
                         style={{ background: "#00305E" }}
                         type="button"
                         id="dropdownMenuButton"
@@ -202,8 +205,9 @@ const Footer = () => {
                             src={vectorimg}
                             alt=""
                             className="english-dropdown"
-                        />{" "}
-                        English
+                        />
+                        English<img src={img1} style={{marginLeft:'10px'}}/>
+                        
                     </button>
                     <div
                         class="dropdown-menu"

@@ -16,12 +16,12 @@ export default function TopBar() {
         setSideMenu(false);
     };
 
-    // useEffect(() => {
-    //     document.addEventListener("mousedown", updateState);
-    //     return () => {
-    //         document.removeEventListener("mousedown", updateState);
-    //     };
-    // }, []);
+    useEffect(() => {
+        document.addEventListener("mousedown", updateState);
+        return () => {
+            document.removeEventListener("mousedown", updateState);
+        };
+    }, []);
 
     return (
         <>
@@ -94,7 +94,7 @@ export default function TopBar() {
                     <span style={{ textAlign: "end" }}>Get Top Deals Now</span>
                 </div>
 
-                <div
+                {/* <div
                     className="sideMenu"
                     style={{ left: isSideMenu ? "0" : "-265px" }}
                 >
@@ -107,8 +107,10 @@ export default function TopBar() {
                     <a href="#">Menu 07</a>
                     <a href="#">Menu 08</a>
                     <a href="#">Menu 09</a>
-                </div>
+                </div> */}
             </header>
+
+            {isSideMenu && <Sidebar />}
         </>
     );
 }

@@ -28,10 +28,14 @@
     text-align: center;
     margin: 6px;
 }
+
+.product-section img {
+    max-width: 100%;
+}
+
 .product-section-text {
-    height: 177px;
     background-color: white;
-    /* padding: 20px; */
+    padding: 20px 0;
     border: 1px solid #ddd;
     margin-bottom: 20px;
     text-align: center;
@@ -41,7 +45,8 @@
 
 .button-save {
     height: 55px;
-    width: 401px;
+    width: 90%;
+    margin: 0 auto;
     background: #38c056;
     border-radius: 10px 10px 0px 0px;
     color: white;
