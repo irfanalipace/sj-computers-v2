@@ -21,15 +21,22 @@
     object-fit: cover;
 }
 .product-section {
-    height: 100%;
+    height: 84%;
+    width: 100%;
     background-color: white;
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
-    text-align: center;
+    /* border: 1px solid #ddd; */
+    /* padding-bottom: 12px; */
+    /* text-align: center; */
+    margin: 19px;
 }
 
-.product-section .container {
-    height: 300px;
+/* .product-section .container {
+    height: 400px;
+} */
+.h4-heading{
+        padding-top: 6px;
+        /* margin-top: 23px !important; */
+  
 }
 
 .product-section h4 {
@@ -37,26 +44,28 @@
     padding-left: 20px;
     font-weight: 600;
     font-size: 18px;
-    margin: 20px 0 30px 0;
+  
 }
 
 .product-section img {
     max-width: 100%;
 }
-
 .product-section-advertisment {
-    height: 57%;
+    margin-left: 9px;
+    /* height: 57%; */
 }
 
 .advertisement-heading {
+    margin-left: 6px;
     background-color: white;
     padding-bottom: 20px;
     border: 1px solid #ddd;
     text-align: center;
-    width: 100%;
-    height: 40%;
+    width: 95%;
+    height: 58%;
+    margin-top: 18px;
+    margin-bottom: 14px;
 }
-
 .advertisement-heading h4 {
     text-align: left;
     margin: 20px 0 30px 0;
@@ -76,8 +85,8 @@
 }
 
 .advertisment-img {
-    height: 100%;
-    width: 100%;
+    height: 79%;
+    width: 95%;
 }
 .product-section h3 {
     font-size: 24px;
@@ -88,11 +97,39 @@
     font-weight: 400;
     font-size: 12px;
     padding-left: 18px;
+    /* margin-top: 19px; */
 }
 
-.product-section span {
+/* .product-section span {
     font-weight: 400;
     font-size: 12px;
     text-align: left;
     padding-left: 18px;
+} */
+.dynamic-image{
+
 }
+.section-text{
+    margin-top: 62px !important;
+}
+
+  .text-shop{
+    margin-top: 57px !important;
+  }
+  @media screen and (max-width: 1024px) {
+    .product-section {
+      height: 86%;
+      width: 100%;
+      background-color: white;
+      /* border: 1px solid #ddd; */
+      /* padding-bottom: 12px; */
+      /* text-align: center; */
+      margin: 19px;
+  }
+    }
+@media screen and (max-width: 425px) {
+    .product-section {
+        height: 91% !important;
+        
+    }
+  }

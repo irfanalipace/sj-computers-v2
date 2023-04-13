@@ -6,33 +6,33 @@ import ProductItem4 from "@components/homeproduct/productcategory/ProductItem4";
 import imgcard from "@images/product/side-img.png";
 export const ProductType = () => {
     return (
-        <div>
-            <div className="row first-section">
+        
+            <div className="row">
                 <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-section">
-                        <h4>Shop by Category</h4>
+                        <h4 className="h4-heading">Shop by Category</h4>
                         <ProductItem4 />
                         <Link to="/" className="text-decoration-none">
-                            <span>Start here</span>
+                        <p className="text-shop">Shop Now</p>
                         </Link>
                     </div>
                 </div>
 
                 <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-section">
-                        <h4>Laptops</h4>
+                        <h4 className="h4-heading">Laptops</h4>
                         <ProductItem1 />
                         <Link to="/" className="text-decoration-none">
-                            <p>Start here</p>
+                        <p className="section-text">Shop Now</p>
                         </Link>
                     </div>
                 </div>
                 <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-section">
-                        <h4>Laptops</h4>
+                        <h4 className="h4-heading">Laptops</h4>
                         <ProductItem1 />
                         <Link to="/" className="text-decoration-none">
-                            <p>Start here</p>
+                            <p className="section-text">Shop Now</p>
                         </Link>
                     </div>
                 </div>
@@ -50,7 +50,7 @@ export const ProductType = () => {
                         <img src={imgcard} className="advertisment-img" />
                     </div>
                 </div>
-                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                {/* <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-section">
                         <h4>Shop by Category</h4>
                         <ProductItem4 />
@@ -58,9 +58,9 @@ export const ProductType = () => {
                             <p>Start here</p>
                         </Link>
                     </div>
-                </div>
+                </div> */}
 
-                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                {/* <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-section">
                         <h4>Shop by Category</h4>
                         <ProductItem4 />
@@ -68,8 +68,8 @@ export const ProductType = () => {
                             <p>Start here</p>
                         </Link>
                     </div>
-                </div>
-                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                </div> */}
+                {/* <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-section">
                         <h4>Shop by Category</h4>
                         <ProductItem4 />
@@ -77,8 +77,8 @@ export const ProductType = () => {
                             <p>Start here</p>
                         </Link>
                     </div>
-                </div>
-                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                </div> */}
+                {/* <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-section">
                         <h4>Laptops</h4>
                         <ProductItem1 />
@@ -86,8 +86,8 @@ export const ProductType = () => {
                             <p>Start here</p>
                         </Link>
                     </div>
-                </div>
-            </div>
+                </div> */}
+        
         </div>
     );
 };

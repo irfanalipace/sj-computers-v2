@@ -14,8 +14,8 @@ const Home = () => {
             <TopBar />
             <BannerSlider />
             <ProductType />
-            <CarouselSlider />
-            <ProductThreeItem />
+            {/* <CarouselSlider /> */}
+            {/* <ProductThreeItem /> */}
             <Recommendation />
             <Footer />
         </div>
