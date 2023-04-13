@@ -1,11 +1,5 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./ProductType.css";
-import img21 from "@images/product/image21.png";
-import img22 from "@images/product/image22.png";
-import img23 from "@images/product/image23.png";
-import img20 from "@images/product/image20.png";
-// import ProductItem1 from './productcategory1/ProductItem1';
 import ProductItem1 from "@components/homeproduct/productcategory/ProductItem1";
 import ProductItem4 from "@components/homeproduct/productcategory/ProductItem4";
 
@@ -14,64 +8,86 @@ export const ProductType = () => {
     return (
         <div>
             <div className="row first-section">
-                <div className="col-md-3">
+                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-section">
+                        <h4>Shop by Category</h4>
                         <ProductItem4 />
+                        <Link to="/" className="text-decoration-none">
+                            <span>Start here</span>
+                        </Link>
                     </div>
                 </div>
 
-                <div className="col-md-3">
+                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-section">
+                        <h4>Laptops</h4>
                         <ProductItem1 />
+                        <Link to="/" className="text-decoration-none">
+                            <p>Start here</p>
+                        </Link>
                     </div>
                 </div>
-                <div className="col-md-3">
+                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-section">
+                        <h4>Laptops</h4>
                         <ProductItem1 />
+                        <Link to="/" className="text-decoration-none">
+                            <p>Start here</p>
+                        </Link>
                     </div>
                 </div>
-                <div className="col-md-3">
-                    <div>
-                        <div className="product-section-text">
-                            <h2 className="h2-cart">
-                                Sign up to get latest <br></br>update on sale
-                            </h2>
-                            <button type="button" className="button-save">
-                                Login Safely
-                            </button>
-                        </div>
+                <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex flex-column justify-content-between">
+                    <div className="advertisement-heading">
+                        <h4 className="h2-cart">
+                            Sign up to get latest <br></br>update on sale
+                        </h4>
+                        <button type="button" className="button-save">
+                            Login Safely
+                        </button>
+                    </div>
 
-                        <div className="product-section-text1">
-                            <img src={imgcard} className="img-copy" />
-                        </div>
+                    <div className="product-section-advertisment">
+                        <img src={imgcard} className="advertisment-img" />
                     </div>
                 </div>
-            </div>
-            <div className="row first-section">
-                <div className="col-md-3">
+                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-section">
+                        <h4>Shop by Category</h4>
                         <ProductItem4 />
+                        <Link to="/" className="text-decoration-none">
+                            <p>Start here</p>
+                        </Link>
                     </div>
                 </div>
 
-                <div className="col-md-3">
+                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-section">
+                        <h4>Shop by Category</h4>
                         <ProductItem4 />
+                        <Link to="/" className="text-decoration-none">
+                            <p>Start here</p>
+                        </Link>
                     </div>
                 </div>
-                <div className="col-md-3">
+                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-section">
+                        <h4>Shop by Category</h4>
                         <ProductItem4 />
+                        <Link to="/" className="text-decoration-none">
+                            <p>Start here</p>
+                        </Link>
                     </div>
                 </div>
-                <div className="col-md-3">
+                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-section">
+                        <h4>Laptops</h4>
                         <ProductItem1 />
+                        <Link to="/" className="text-decoration-none">
+                            <p>Start here</p>
+                        </Link>
                     </div>
                 </div>
             </div>
         </div>
-
-        // Rows 2 items code here
     );
 };

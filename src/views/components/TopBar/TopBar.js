@@ -5,33 +5,18 @@ import "./TopBar.css";
 
 export default function TopBar() {
     const [isSideMenu, setSideMenu] = useState(false);
-    const open = (isSideMenu) => {
-        return setSideMenu(!isSideMenu);
+    const toggleSidebar = () => {
+        return setSideMenu((state) => !state);
     };
-    const domeNode = useRef();
-    const updateState = (event) => {
-        if (domeNode.current.contains(event.target)) {
-            return;
-        }
-        setSideMenu(false);
-    };
-
-    useEffect(() => {
-        document.addEventListener("mousedown", updateState);
-        return () => {
-            document.removeEventListener("mousedown", updateState);
-        };
-    }, []);
 
     return (
         <>
             <header className="topBar">
                 <div className="menuBar">
                     <span
-                        ref={domeNode}
                         className="navIcon"
                         onClick={() => {
-                            open(isSideMenu);
+                            toggleSidebar();
                         }}
                     >
                         <svg
@@ -93,24 +78,9 @@ export default function TopBar() {
                     </ul>
                     <span style={{ textAlign: "end" }}>Get Top Deals Now</span>
                 </div>
-
-                {/* <div
-                    className="sideMenu"
-                    style={{ left: isSideMenu ? "0" : "-265px" }}
-                >
-                    <a href="#">Menu 01</a>
-                    <a href="#">Menu 02</a>
-                    <a href="#">Menu 03</a>
-                    <a href="#">Menu 04</a>
-                    <a href="#">Menu 05</a>
-                    <a href="#">Menu 06</a>
-                    <a href="#">Menu 07</a>
-                    <a href="#">Menu 08</a>
-                    <a href="#">Menu 09</a>
-                </div> */}
             </header>
 
-            {isSideMenu && <Sidebar />}
+            <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
         </>
     );
 }

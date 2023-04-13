@@ -1,68 +1,75 @@
-.topBar {
-    height: 5rem;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    background: #110135;
-}
-.menuBar {
-    display: flex;
-    align-items: center;
-    color: white;
-    justify-content: flex-start;
-    width: 100%;
-}
-
-.navIcon {
-    width: 55px;
-    display: flex;
-    margin-right: 4rem;
-    margin-left: 1.5rem;
-    cursor: pointer;
-}
-.sideMenu {
-    position: absolute;
-    left: 0;
+.sideMenu-container {
     top: 0;
     height: 100%;
-    width: 260px;
+    width: 350px;
     position: fixed;
-    background: rgb(249, 249, 249);
     transition: all 0.35s ease-out;
     z-index: 2;
 }
-.sideMenu a {
-    display: flex;
-    align-content: flex-start;
+
+.sideMenu-wrapper {
+    height: 100%;
+    position: relative;
+}
+
+.sideMenu-close-btn {
+    position: absolute;
+    right: -5px;
+    margin-top: 6px;
+    font-size: 30px;
+    border: 0;
+    background-color: transparent;
+}
+
+.sideMenu-close-btn i {
+    color: white;
+}
+
+.sideMenu-inner {
+    background-color: white;
+    width: 320px;
+    height: 100%;
+}
+
+.sideMenu-header {
+    background-color: #002549;
+    color: white;
+    padding: 25px 20px;
+    font-weight: 700;
+    font-size: 20px;
+    font-family: "Inter", "Sans-serif";
+}
+
+.sideMenu {
+    padding: 25px 0;
+}
+
+.sideMenu h4 {
+    font-weight: 700;
+    font-size: 18px;
+    font-family: "Inter", "Sans-serif";
+    padding: 0 20px;
+}
+
+.menu-list li {
+    padding: 5px 20px;
+}
+
+.menu-list li a {
+    font-weight: 500;
+    font-size: 16px;
     text-decoration: none;
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.8);
-    padding: 1rem 1.6rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-.sideMenu a:hover {
-    color: rgb(40, 0, 148);
-}
-.ullist {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+    color: black;
+    font-family: "Inter", "Sans-serif";
 }
 
-.listitem {
-    padding-left: 0px !important;
+ul.menu-list {
+    list-style: none;
+    padding-left: 0;
+}
 
-    margin-bottom: 0px !important;
-    display: inline;
-    color: white;
-    padding-right: 30px;
-}
-.text-color {
-    color: white;
-}
-.small-text-size {
-    padding-top: 8px;
-    font-size: 21px;
+.menu-list li:hover {
+    background-color: #d3d3d396;
 }
 .mySwiper {
     width: 100%;
