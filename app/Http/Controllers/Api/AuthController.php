@@ -127,24 +127,4 @@ class AuthController extends BaseController
         return $this->sendResponse([], 'Email Verified.');
     }
 
-    public function updateProfile(UpdateProfileRequest $request) {
-
-        $validator = $request->all();
-        dd($validator);
-        $user = Auth::user();
-
-        if (isset($validator['password'])) {
-            $validator['password'] = bcrypt($validator['password']);
-        }
-
-        $user->update($validator);
-
-        return $this->sendResponse([], 'Profile Updated Successfully.');
-    }
-
-    public function test()
-    {
-        dd('test');
-    }
-
 }
