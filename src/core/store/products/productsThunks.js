@@ -1,7 +1,11 @@
-import { LOADING, FETCH_PRODUCTS, API_ERROR } from "@store/auth/authSlice";
-import { productsApi } from "@api/auth";
+import {
+    LOADING,
+    FETCH_PRODUCTS,
+    API_ERROR,
+} from "@store/products/productsSlice";
+import { productsApi } from "@api/products";
 
-export const fetchProducts = (page) => {
+export const fetchProducts = (page = 1) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
@@ -10,6 +14,7 @@ export const fetchProducts = (page) => {
         } catch (error) {
             console.log("Something went wrong in login", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
+            dispatch({ type: FETCH_PRODUCTS, payload: { error } });
         }
     };
 };
