@@ -29,11 +29,11 @@ const VerifyOTP = () => {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setFieldErrors(errors);
+        setFieldErrors({ ...errors });
     }, [errors]);
 
     useEffect(() => {
-        setFieldErrors(apiError);
+        setFieldErrors({ ...apiError });
     }, [apiError]);
 
     useEffect(() => {

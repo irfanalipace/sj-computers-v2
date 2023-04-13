@@ -41,11 +41,11 @@ const PasswordForm = () => {
         resetPasswordFunction
     );
     useEffect(() => {
-        setFieldErrors(errors);
+        setFieldErrors({ ...errors });
     }, [errors]);
 
     useEffect(() => {
-        setFieldErrors(apiError);
+        setFieldErrors({ ...apiError });
     }, [apiError]);
 
     useEffect(() => {

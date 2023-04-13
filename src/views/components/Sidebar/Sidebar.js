@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import userImg from "@images/user.png";
+import { US } from "country-flag-icons/react/3x2";
 
 import "./Sidebar.css";
+
 export default function Sidebar({ openState, toggleSidebar }) {
     const user = useSelector((state) => state.auth.user);
     const categories = [
@@ -59,12 +61,37 @@ export default function Sidebar({ openState, toggleSidebar }) {
                         <h4>Shop By Category</h4>
                         <ul className="menu-list">
                             {categories.map((category) => (
-                                <li key={category}>
+                                <li key={category.id}>
                                     <Link to={`/category/${category.id}`}>
                                         {category.name}
                                     </Link>
+                                    <i className="fa fa-angle-right"></i>
                                 </li>
                             ))}
+                        </ul>
+
+                        <h4>Help & Settings</h4>
+                        <ul className="menu-list">
+                            <li>
+                                <Link to={`/profile`}>Your Account</Link>
+                            </li>
+                            <li className="d-block">
+                                <i className="fa fa-globe"></i>{" "}
+                                <Link>English</Link>
+                            </li>
+                            <li className="d-block">
+                                <US
+                                    title="United States"
+                                    className="country-flag"
+                                />
+                                <Link className="me-1">United States</Link>
+                            </li>
+                            <li>
+                                <Link>Customer Services</Link>
+                            </li>
+                            <li>
+                                <Link to={`/login`}>Sign In</Link>
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -25,11 +25,11 @@ export default function EmailForm({ onFormSubmit, form }) {
     const [fieldErrors, setFieldErrors] = useState({});
 
     useEffect(() => {
-        setFieldErrors(errors);
+        setFieldErrors({ ...errors });
     }, [errors]);
 
     useEffect(() => {
-        setFieldErrors(apiError);
+        setFieldErrors({ ...apiError });
     }, [apiError]);
 
     useEffect(() => {

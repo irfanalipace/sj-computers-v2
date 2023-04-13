@@ -41,18 +41,7 @@ const ProductSlider = ({ products }) => {
         >
             {products.map((product) => (
                 <SwiperSlide key={product.id}>
-                    <Product
-                        id={product.id}
-                        imageSrc={product.imageSrc}
-                        name={product.name}
-                        navigation
-                        rating={product.rating}
-                        numReviews={product.numReviews}
-                        offPercentage={product.offPercentage}
-                        originalPrice={product.originalPrice}
-                        newPrice={product.newPrice}
-                        deliveryCharges={product.deliveryCharges}
-                    />
+                    <Product product={product} />
                 </SwiperSlide>
             ))}
         </Swiper>

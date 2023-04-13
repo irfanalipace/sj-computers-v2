@@ -6,6 +6,7 @@ import { ProductType } from "@components/homeproduct/ProductType";
 import CarouselSlider from "@components/Sliders/CarouselSlider";
 import ProductThreeItem from "@components/homeproduct/product3category/ProductThreeItem";
 import Recommendation from "@components/Recommendation/Recommendation";
+import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
 
 const Home = () => {
     return (
@@ -16,7 +17,7 @@ const Home = () => {
             <ProductType />
             <CarouselSlider />
             <ProductThreeItem />
-            <Recommendation />
+            <ProductsGrid />
             <Footer />
         </div>
     );

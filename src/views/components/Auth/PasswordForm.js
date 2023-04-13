@@ -31,11 +31,11 @@ const PasswordForm = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setFieldErrors(errors);
+        setFieldErrors({ ...errors });
     }, [errors]);
 
     useEffect(() => {
-        setFieldErrors(apiError);
+        setFieldErrors({ ...apiError });
     }, [apiError]);
 
     useEffect(() => {

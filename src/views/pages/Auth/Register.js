@@ -35,11 +35,11 @@ const Register = () => {
     const [fieldErrors, setFieldErrors] = useState({});
 
     useEffect(() => {
-        setFieldErrors(errors);
+        setFieldErrors({ ...errors });
     }, [errors]);
 
     useEffect(() => {
-        setFieldErrors(apiError);
+        setFieldErrors({ ...apiError });
     }, [apiError]);
 
     const isLoading = useSelector((state) => state.auth.isLoading);

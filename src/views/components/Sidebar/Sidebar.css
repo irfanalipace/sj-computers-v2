@@ -53,6 +53,8 @@
 
 .menu-list li {
     padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .menu-list li a {
@@ -61,6 +63,10 @@
     text-decoration: none;
     color: black;
     font-family: "Inter", "Sans-serif";
+}
+
+.menu-list li .country-flag {
+    width: 20px;
 }
 
 ul.menu-list {
