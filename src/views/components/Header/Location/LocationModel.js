@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Modal, Button, Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,6 +9,7 @@ function UpdateStateModel({ isOpen, handleClose }) {
     const states = useSelector((state) => state.states.states);
     const [state, setState] = useState("Ship outside the US");
     const dispatch = useDispatch();
+    const zipCodeNode = useRef("");
 
     useEffect(() => {
         console.log("modal showing");
