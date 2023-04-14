@@ -55,7 +55,14 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                 user?.profileImage ? user.profileImage : userImg
                             }
                         />
-                        <span>Hello, {user ? user.name : "Sign In"}</span>
+                        <span>
+                            Hello,
+                            {user ? (
+                                user.name
+                            ) : (
+                                <Link to={"/login"}>Sign In</Link>
+                            )}
+                        </span>
                     </div>
                     <div className="sideMenu">
                         <h4>Shop By Category</h4>
@@ -84,7 +91,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                     title="United States"
                                     className="country-flag"
                                 />
-                                <Link className="me-1">United States</Link>
+                                <Link className="ms-1">United States</Link>
                             </li>
                             <li>
                                 <Link>Customer Services</Link>

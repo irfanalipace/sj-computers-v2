@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends BaseController
 {
     public function getList(request $request){
-        $data= Product::all();
+        $data= Product::where('status',true)->paginate(12);
         return $this->sendResponse($data);
     }
 

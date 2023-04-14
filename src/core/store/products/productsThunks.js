@@ -10,11 +10,13 @@ export const fetchProducts = (page = 1) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             const response = await productsApi(page);
-            dispatch({ type: FETCH_PRODUCTS, payload: response.data });
+            dispatch({
+                type: FETCH_PRODUCTS,
+                payload: response.data.data.data,
+            });
         } catch (error) {
-            console.log("Something went wrong in login", error);
+            console.log("Something went wrong in products", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
-            dispatch({ type: FETCH_PRODUCTS, payload: { error } });
         }
     };
 };

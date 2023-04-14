@@ -19,7 +19,7 @@ const Product = ({ product, inGrid }) => {
                     starDimension={"20px"}
                     starSpacing={"0"}
                 />
-                <span className="product-num-reviews">
+                <span className="product-num-reviews ms-2">
                     {product.numReviews}
                 </span>
             </div>
@@ -57,7 +57,9 @@ const Product = ({ product, inGrid }) => {
                         <div className="badge-text">Best Seller</div>
                     </div>
                 )}
-                <img src={product.imageSrc} alt={product.name} />
+                <div className="image-wrapper">
+                    <img src={product.image} alt={product.brand} />
+                </div>
             </div>
             <ProductDetails />
         </div>

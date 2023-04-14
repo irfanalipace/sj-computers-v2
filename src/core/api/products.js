@@ -2,12 +2,9 @@ import ApiService from "@services/apiService";
 
 export function productsApi(page = 1) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/products?page=${page}`)
+        ApiService.get(`/products?page=${page}`)
             .then((response) => {
-                console.log(
-                    "file: auth.module.js | products| response",
-                    response
-                );
+                console.log("file: products.js | products| response", response);
                 resolve(response);
             })
             .catch((e) => {

@@ -40,6 +40,12 @@
     font-family: "Inter", "Sans-serif";
 }
 
+.sideMenu-header a,
+.sideMenu-header a :hover {
+    color: white;
+    text-decoration: none;
+}
+
 .sideMenu {
     padding: 25px 0;
 }
