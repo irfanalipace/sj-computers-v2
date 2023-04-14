@@ -54,7 +54,7 @@ Route::get('categories',[CategoryController::class,'getList'])->name('categories
 
 Route::get('brands',[BrandController::class,'getList'])->name('brands');
 
-Route::get('products',[ProductController::class,'getList'])->name('brands');
+Route::get('products',[ProductController::class,'getList'])->name('products');
 
 
 /*
