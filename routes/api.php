@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserStateController;
+use App\Http\Controllers\Api\Order\OrderController;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +33,7 @@ use App\Http\Controllers\Api\UserStateController;
 /*
  * Auth Apis
  */
+
 Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
 
 Route::post('register', [AuthController::class, 'registerUser']);
@@ -54,7 +56,7 @@ Route::get('categories',[CategoryController::class,'getList'])->name('categories
 
 Route::get('brands',[BrandController::class,'getList'])->name('brands');
 
-Route::get('products',[ProductController::class,'getList'])->name('products');
+Route::get('products',[ProductController::class,'getList'])->name('brands');
 
 
 /*
@@ -84,4 +86,10 @@ Route::middleware(['auth:api'])->group(function () {
     //update profile
     Route::post('update-profile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
     Route::post('reset-password', [ProfileController::class, 'resetPassword'])->name('resetPassword');
+
+    /*
+    *Order shipping address
+    */
+    Route::get('get-shipping-address', [OrderController::class, 'getShippingAddress'])->name('getShippingAddress');
+    Route::post('order-shipping-address', [OrderController::class, 'shippingAddress'])->name('OrderShippingAddress');
 });
