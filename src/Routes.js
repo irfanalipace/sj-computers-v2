@@ -9,6 +9,7 @@ import ResetPassword from "@pages/Auth/ForgetPassword/ResetPassword";
 import Emailsent from "@pages/Auth/EmailSent";
 import Product from "@pages/Product/Product";
 import Category from "@pages/Category/Category";
+import Cart from "@components/ShoppingCart/Cart";
 
 export const Router = () => {
     const routes = [
@@ -64,6 +65,7 @@ export const Router = () => {
             path: "/category/:categoryId",
             element: <Category />,
         },
+      
         {
             path: "/profile",
             element: (
@@ -71,6 +73,10 @@ export const Router = () => {
                     <Profile />
                 </ProtectedRoute>
             ),
+        },
+        {
+            path: "/Cart",
+            element: <Cart />,
         },
         {
             path: "*",

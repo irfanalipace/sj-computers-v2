@@ -6,7 +6,7 @@ import splice from '@images/home/ellipse.png';
 import './Header.css'
 import Sidebar from "@components/Sidebar/Sidebar";
 
-import Popup from "./Popup";
+import LocationModel from "./Location/LocationModel";
 import LoginCart from "./LoginCart";
 import Search from "./Search";
 const Header = () => {
@@ -29,7 +29,7 @@ const Header = () => {
                         <li className="text-color-heading" style={{color:'#B8B8B9', listStyleType:'none'}}>Deilver to</li>
                         <li className="text-color-heading2">California</li>
                     </ul> */}
-                    <Popup />
+                    <LocationModel />
                     <div className="input-group search-inputgroup">
                         <div className="input-group-btn search-panel">
                         <Search />
