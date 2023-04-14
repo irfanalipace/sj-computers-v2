@@ -11,17 +11,17 @@ use App\Http\Controllers\API\BaseController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
-use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\LogoutRequest;
+use App\Http\Requests\Auth\RegisterUserRequest;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\LogoutRequest;
 use Illuminate\Auth\Notifications\ResetPassword;
 use App\Http\Requests\ForgetRequest;
-use App\Http\Requests\VerifyEmailRequest;
+use App\Http\Requests\Auth\VerifyEmailRequest;
 use App\Http\Requests\UpdateProfileRequest;
 
 class AuthController extends BaseController
 {
-    public function register(RegisterRequest $request) :JsonResponse
+    public function register(RegisterUserRequest $request) :JsonResponse
     {
         $validator = $request->all();
 

@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserStateController;
+use App\Http\Controllers\Api\Order\OrderController;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +33,7 @@ use App\Http\Controllers\Api\UserStateController;
 /*
  * Auth Apis
  */
+
 Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
 
 Route::post('register', [AuthController::class, 'registerUser']);
@@ -48,13 +50,13 @@ Route::get('email/resend', [VerificationController::class, 'resend'])->name('ver
 
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
 
-Route::get('states',[StateController::class,'getList'])->name('states');
+Route::get('states', [StateController::class, 'getList'])->name('states');
 
-Route::get('categories',[CategoryController::class,'getList'])->name('categories');
+Route::get('categories', [CategoryController::class, 'getList'])->name('categories');
 
-Route::get('brands',[BrandController::class,'getList'])->name('brands');
+Route::get('brands', [BrandController::class, 'getList'])->name('brands');
 
-Route::get('products',[ProductController::class,'getList'])->name('brands');
+Route::get('products', [ProductController::class, 'getList'])->name('brands');
 
 
 /*
@@ -65,7 +67,9 @@ Route::post('process-transaction', [PaypalController::class, 'processTransaction
 Route::get('success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 Route::post('cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
-//Add to Cart
+/*
+*Add to Cart
+*/
 Route::get('get-items', [CartController::class, 'getItems'])->name('getItems');
 Route::post('add-to-cart', [CartController::class, 'addCart'])->name('addCart');
 Route::post('delete-item', [CartController::class, 'delete'])->name('deleteItem');
@@ -73,15 +77,24 @@ Route::get('get-details', [CartController::class, 'details'])->name('getItems');
 Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clearCart');
 
 
-
 Route::middleware(['auth:api'])->group(function () {
 
-//    Route::post('user-details', UserDetailController::class)->name('user-details');
+    //    Route::post('user-details', UserDetailController::class)->name('user-details');
 
     Route::post('verify-otp', [AuthController::class, 'verifyOtp'])->name('verify-otp');
 
     Route::post('logout', [AuthController::class, 'logout']);
-    //update profile
+  
+    /*
+    *update profile
+    *update password as well
+    */
     Route::post('update-profile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
     Route::post('reset-password', [ProfileController::class, 'resetPassword'])->name('resetPassword');
+
+    /*
+    *Order shipping address
+    */
+    Route::get('get-shipping-address', [OrderController::class, 'getShippingAddress'])->name('getShippingAddress');
+    Route::post('order-shipping-address', [OrderController::class, 'shippingAddress'])->name('OrderShippingAddress');
 });
