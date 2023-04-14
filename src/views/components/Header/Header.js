@@ -3,7 +3,7 @@ import english from "@images/home/eng.png";
 import vectorcart from "@images/home/vector.png";
 import "./Header.css";
 
-import Popup from "./Popup";
+import LocationModel from "./Location/LocationModel";
 import LoginCart from "./LoginCart";
 import Search from "./Search";
 const Header = () => {
@@ -14,7 +14,11 @@ const Header = () => {
                     <img src={footerlogo} alt="" className="homepage-img" />
                 </a>
                 <div className="d-flex flex-row align-items-center w-100">
-                    <Popup />
+                    {/* <ul className="ul-menu">
+                        <li className="text-color-heading" style={{color:'#B8B8B9', listStyleType:'none'}}>Deilver to</li>
+                        <li className="text-color-heading2">California</li>
+                    </ul> */}
+                    <LocationModel />
                     <div className="input-group search-inputgroup">
                         <div className="input-group-btn search-panel">
                             <Search />

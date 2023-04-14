@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Button, Dropdown } from "react-bootstrap";
 import img1 from '@images/bottom-arrow.png'
-import "./Popup.css";
-function Popup() {
+import "./LocationModel.css";
+function UpdateStateModel() {
     const [showModal, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -123,4 +123,4 @@ function Popup() {
     );
 }
 
-export default Popup;
+export default UpdateStateModel;
