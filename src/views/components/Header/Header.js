@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import footerlogo from '@images/header-logo.png';
 import english from '@images/home/eng.png';
 import vectorcart from '@images/home/vector.png';
 import splice from '@images/home/ellipse.png';
 import './Header.css'
 import Sidebar from "@components/Sidebar/Sidebar";
-import { useState } from "react";
+
 import Popup from "./Popup";
 import LoginCart from "./LoginCart";
+import Search from "./Search";
 const Header = () => {
+  
+  
     // const [isOpen, setIsOpen] = useState(false);
 
     // const handleButtonClick = () => {
@@ -29,13 +32,8 @@ const Header = () => {
                     <Popup />
                     <div className="input-group search-inputgroup">
                         <div className="input-group-btn search-panel">
-                            <button type="button" className="btn btn-default dropdown-toggle all-button" data-toggle="dropdown">
-                                <span id="search_concept">All</span> <span className="caret"></span>
-                            </button>
-                            <ul className="dropdown-menu scrollable-dropdown" role="menu">
-                                <li><a href="#">Automotive Accesories</a></li>
-                                <li><a href="#">Cell Phone Accesories</a></li>
-                            </ul>
+                        <Search />
+                           
                         </div>
                         <input type="hidden" name="search_param" value="all" id="search_param" />
                         <input type="text" className="form-control " name="x" id="search" placeholder="Search" />
@@ -78,6 +76,8 @@ const Header = () => {
                 </div>
           
         </header>
+
+
         <Sidebar />
     </div>
     

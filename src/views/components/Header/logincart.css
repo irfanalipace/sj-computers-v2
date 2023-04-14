@@ -22,11 +22,37 @@
 .text-left{
     text-align: center !important;
     font-size: 21px !important;
-}.ul-list {
+}
+.ul-list {
+    font-size: 16px;
+    list-style: none;
     margin-left: -30px !important;
     text-align: initial;
-}.login-button{
-   font-size :23px !important;
+}
+.your-list{
+        margin-left: 16px;
+        text-align: left;
+        font-size: 21px;
+        margin-top: 4px;
+
+}
+.create-list {
+    text-align: left;
+    margin-left: 18px;
+    font-size: 16px;
+}
+
+.login-button{
+   
+        height: 56px;
+        width: 263px;
+        margin: 4px;
+    
+}
+.new-customer{
+   
+      font-size: 15px !important;
+ 
 }
 .dropdown-payment button {
     background-color: #00305E;
