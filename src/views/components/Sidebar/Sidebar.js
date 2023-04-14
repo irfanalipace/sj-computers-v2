@@ -91,7 +91,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                     title="United States"
                                     className="country-flag"
                                 />
-                                <Link className="me-1">United States</Link>
+                                <Link className="ms-1">United States</Link>
                             </li>
                             <li>
                                 <Link>Customer Services</Link>

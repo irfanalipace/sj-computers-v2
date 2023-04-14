@@ -111,10 +111,8 @@
 
 .product-rating {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin: 4px 0;
-    width: 70%;
 }
 
 .product-prices {

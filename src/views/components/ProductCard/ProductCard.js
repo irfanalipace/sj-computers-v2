@@ -19,7 +19,7 @@ const Product = ({ product, inGrid }) => {
                     starDimension={"20px"}
                     starSpacing={"0"}
                 />
-                <span className="product-num-reviews">
+                <span className="product-num-reviews ms-2">
                     {product.numReviews}
                 </span>
             </div>
