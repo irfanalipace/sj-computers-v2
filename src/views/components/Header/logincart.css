@@ -1,0 +1,38 @@
+.dropdown-payment{
+    position: absolute;
+    width: 354px;
+    height: 300px;
+    left: 0px;
+    padding: 2px;
+    margin: 3px; 
+    
+
+}.product-section1 {
+    margin-left: -166px;
+    position: absolute;
+    z-index: 9;
+    width: 500px;
+    height: 100%;
+    background-color: #f7f7f7;
+    padding: 2px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.text-left{
+    text-align: center !important;
+    font-size: 21px !important;
+}.ul-list {
+    margin-left: -30px !important;
+    text-align: initial;
+}.login-button{
+   font-size :23px !important;
+}
+.dropdown-payment button {
+    background-color: #00305E;
+    color: white;
+    padding: 9px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}

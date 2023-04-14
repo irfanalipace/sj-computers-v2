@@ -1,0 +1,89 @@
+.sideMenu-container {
+    top: 0;
+    height: 100%;
+    width: 350px;
+    position: fixed;
+    transition: all 0.35s ease-out;
+    z-index: 2;
+}
+
+.sideMenu-wrapper {
+    height: 100%;
+    position: relative;
+}
+
+.sideMenu-close-btn {
+    position: absolute;
+    right: -5px;
+    margin-top: 6px;
+    font-size: 30px;
+    border: 0;
+    background-color: transparent;
+}
+
+.sideMenu-close-btn i {
+    color: white;
+}
+
+.sideMenu-inner {
+    background-color: white;
+    width: 320px;
+    height: 100%;
+}
+
+.sideMenu-header {
+    background-color: #002549;
+    color: white;
+    padding: 25px 20px;
+    font-weight: 700;
+    font-size: 20px;
+    font-family: "Inter", "Sans-serif";
+}
+
+.sideMenu-header a,
+.sideMenu-header a :hover {
+    color: white;
+    text-decoration: none;
+}
+
+.sideMenu {
+    padding: 25px 0;
+}
+
+.sideMenu h4 {
+    font-weight: 700;
+    font-size: 18px;
+    font-family: "Inter", "Sans-serif";
+    padding: 0 20px;
+}
+
+.menu-list li {
+    padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu-list li a {
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+    font-family: "Inter", "Sans-serif";
+}
+
+.menu-list li .country-flag {
+    width: 20px;
+}
+
+ul.menu-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.menu-list li:hover {
+    background-color: #d3d3d396;
+}
+.mySwiper {
+    width: 100%;
+    height: 100%;
+}

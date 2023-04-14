@@ -1,10 +1,10 @@
 const path = require("path");
 const webpack = require("webpack");
+var CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 
 module.exports = {
     entry: "./src/Index.js",
     mode: "development",
-    // target: "node",
     module: {
         rules: [
             {
@@ -24,13 +24,13 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
                 use: [
-                  {
-                    loader: 'file-loader',
-                    options: {
-                      name: '[name].[ext]',
-                      outputPath: 'images/',
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name: "[name].[ext]",
+                            outputPath: "images/",
+                        },
                     },
-                }
                 ],
             },
         ],
@@ -39,6 +39,7 @@ module.exports = {
     resolve: {
         extensions: ["", ".js", ".jsx"],
         alias: {
+            "@src": path.resolve(__dirname, "src"),
             "@images": path.resolve(__dirname, "src/assets/images"),
             "@components": path.resolve(__dirname, "src/views/components"),
             "@common": path.resolve(__dirname, "src/views/components/common"),
@@ -46,6 +47,8 @@ module.exports = {
             "@store": path.resolve(__dirname, "src/core/store"),
             "@services": path.resolve(__dirname, "src/core/services"),
             "@api": path.resolve(__dirname, "src/core/api"),
+            "@hooks": path.resolve(__dirname, "src/core/hooks"),
+            "@utils": path.resolve(__dirname, "src/core/utils"),
         },
     },
 
@@ -62,16 +65,12 @@ module.exports = {
             directory: path.join(__dirname, "public"),
         },
         headers: { "Access-Control-Allow-Origin": "" },
-        port: 3005,
+        port: 3000,
         historyApiFallback: true,
     },
 
-    plugins: [new webpack.HotModuleReplacementPlugin()],
-
-    stats: {
-        colors: true,
-        modules: true,
-        reasons: true,
-        errorDetails: true,
-    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new CaseSensitivePathsPlugin({ debug: true }),
+    ],
 };
