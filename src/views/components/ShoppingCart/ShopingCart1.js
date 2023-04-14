@@ -49,6 +49,19 @@ export const ShopingCart1 = () => {
                                         </p>
                                     </div>
                                     <div>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary active">
+    <input type="radio" name="options" id="option1" autocomplete="off" checked /> Option 1
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" id="option2" autocomplete="off" /> Option 2
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" id="option3" autocomplete="off" /> Option 3
+  </label>
+</div>
+
+
                                     <button class="button-link">Delete</button>
                                     <button class="button-link">Save for later</button>
                                     <button class="button-link">Compare with similer item</button>
