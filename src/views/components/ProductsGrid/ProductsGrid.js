@@ -6,7 +6,7 @@ import LoadMore from "@common/Button/LoadMore";
 import Product from "@components/ProductCard/ProductCard";
 import { fetchProducts } from "@store/products/productsThunks";
 
-import "./ProductsGrid";
+import "./ProductsGrid.css";
 
 export default function ProductsGrid() {
     const products = useSelector((state) => state.products.products);
@@ -26,6 +26,7 @@ export default function ProductsGrid() {
 
     return (
         <div className="products-grid mb-3">
+            <h3>Products</h3>
             <Row className="mx-0 justify-content-center">
                 {products.map((product) => (
                     <Col xs={12} sm={6} md={4} lg={2} key={product.id}>
