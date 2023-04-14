@@ -16,8 +16,6 @@ export default function ProductsGrid() {
     const apiError = useSelector((state) => state.products.apiError);
     const dispatch = useDispatch();
 
-    console.log("currentPage", currentPage);
-
     const handleClick = () => {
         dispatch(fetchProducts(currentPage));
     };

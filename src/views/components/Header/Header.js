@@ -1,3 +1,7 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Button } from "react-bootstrap";
+
 import footerlogo from "@images/header-logo.png";
 import english from "@images/home/eng.png";
 import vectorcart from "@images/home/vector.png";
@@ -7,6 +11,10 @@ import LocationModel from "./Location/LocationModel";
 import LoginCart from "./LoginCart";
 import Search from "./Search";
 const Header = () => {
+    const currentState = useSelector((state) => state.states.currentState);
+    const [show, setShow] = useState(false);
+    const handleShow = () => setShow(!show);
+
     return (
         <div>
             <header className="navbar navbar-expand-lg header-background">
@@ -14,11 +22,25 @@ const Header = () => {
                     <img src={footerlogo} alt="" className="homepage-img" />
                 </a>
                 <div className="d-flex flex-row align-items-center w-100">
-                    {/* <ul className="ul-menu">
-                        <li className="text-color-heading" style={{color:'#B8B8B9', listStyleType:'none'}}>Deilver to</li>
-                        <li className="text-color-heading2">California</li>
-                    </ul> */}
-                    <LocationModel />
+                    <div className="d-flex align-items-center justify-content-center header-position">
+                        <Button
+                            variant="primary"
+                            onClick={handleShow}
+                            style={{
+                                background: "#00305E",
+                                border: "#00305E",
+                            }}
+                        >
+                            <p></p>Deliver to <br></br>
+                            {currentState ? currentState : "Select Location"}
+                        </Button>
+                    </div>
+                    {show && (
+                        <LocationModel
+                            isOpen={show}
+                            handleClose={() => setShow(false)}
+                        />
+                    )}
                     <div className="input-group search-inputgroup">
                         <div className="input-group-btn search-panel">
                             <Search />

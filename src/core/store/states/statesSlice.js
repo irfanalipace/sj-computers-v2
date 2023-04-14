@@ -19,6 +19,7 @@ const productSlice = createSlice({
             state.isLoading = false;
         },
         FETCH_STATES: (state, action) => {
+            console.log("state: ", action);
             state.states = [...action.payload];
             state.currentPage = state.currentPage + 1;
         },
@@ -34,6 +35,12 @@ const productSlice = createSlice({
         },
     },
 });
-export const { LOADING, CLEAR_LOADING, FETCH_STATES, CLEAR_STATES, API_ERROR } =
-    productSlice.actions;
+export const {
+    LOADING,
+    CLEAR_LOADING,
+    FETCH_STATES,
+    CLEAR_STATES,
+    UPDATE_STATE,
+    API_ERROR,
+} = productSlice.actions;
 export default productSlice.reducer;
