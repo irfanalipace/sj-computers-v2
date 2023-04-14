@@ -161,12 +161,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-<<<<<<< HEAD
-        Darryldecode\Cart\CartServiceProvider::class,
-=======
         \Laravel\Passport\PassportServiceProvider::class,
 
->>>>>>> laravel-development
         /*
          * Package Service Providers...
          */

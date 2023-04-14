@@ -108,6 +108,11 @@
     margin-bottom: 0;
 }
 
+.section-link:hover {
+    color: #e87e24;
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 1024px) {
     .product-section {
         height: 350px;

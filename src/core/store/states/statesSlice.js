@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     states: [],
+    currentState: null,
     apiError: false,
     isLoading: false,
     currentPage: 1,
@@ -20,6 +21,9 @@ const productSlice = createSlice({
         FETCH_STATES: (state, action) => {
             state.states = [...action.payload];
             state.currentPage = state.currentPage + 1;
+        },
+        UPDATE_STATE: (state, action) => {
+            state.currentState = action.payload;
         },
         CLEAR_STATES: (state) => {
             state.states = [];
