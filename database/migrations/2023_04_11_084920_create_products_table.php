@@ -15,16 +15,19 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->longText('name');
-            $table->longText('description');
-            $table->string('price');
-            $table->string('currency');
+            $table->longText('name')->nullable();
+            $table->longText('description')->nullable();
+            $table->double('price')->nullable();
 
-            $table->foreignId('category_id')->constrained();
+            $table->string('asin')->nullable();
+            $table->integer('quantity')->nullable();
+
+            $table->foreignId('category_id')->nullable()->constrained();
             $table->foreignId('brand_id')->nullable()->constrained();
 
             $table->longText('others')->nullable();
             $table->longText('image')->nullable();
+            $table->boolean('status')->default(false);
 
             $table->timestamps();
         });
