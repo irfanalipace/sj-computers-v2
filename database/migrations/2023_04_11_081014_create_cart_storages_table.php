@@ -4,21 +4,22 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSjAmazonIntegrationsTable extends Migration
+class CreateCartStoragesTable extends Migration
 {
     /**
      * Run the migrations.
      *
-     * @return
+     * @return void
      */
     public function up()
     {
-        Schema::create('sj_amazon_integrations', function (Blueprint $table) {
-            $table->id();
-            $table->string('access_token');
-            $table->string('refresh_token');
+        Schema::create('cart_storages', function (Blueprint $table) {
+            $table->string('id')->index();
+            $table->longText('wishlist_data');
             $table->timestamps();
+            $table->primary('id');
         });
+       
     }
 
     /**
@@ -28,6 +29,6 @@ class CreateSjAmazonIntegrationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sj_amazon_integrations');
+        Schema::dropIfExists('cart_storages');
     }
 }
