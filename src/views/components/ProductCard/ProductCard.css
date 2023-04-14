@@ -33,6 +33,18 @@
     padding-left: 0;
 }
 
+.image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-image-grid img {
+    width: 80%;
+    max-width: 300px;
+    max-height: 135px;
+}
+
 .product-image img {
     max-width: 100%;
 }

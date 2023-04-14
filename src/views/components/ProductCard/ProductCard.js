@@ -57,7 +57,9 @@ const Product = ({ product, inGrid }) => {
                         <div className="badge-text">Best Seller</div>
                     </div>
                 )}
-                <img src={product.imageSrc} alt={product.name} />
+                <div className="image-wrapper">
+                    <img src={product.image} alt={product.brand} />
+                </div>
             </div>
             <ProductDetails />
         </div>

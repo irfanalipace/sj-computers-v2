@@ -36,8 +36,9 @@ const ApiService = {
 
     get(resource, slug = "") {
         return new Promise((resolve, reject) => {
+            console.log("resource: " + resource, "slug: " + slug);
             this.instance
-                .get(`${resource}/${slug}`)
+                .get(`${resource}${slug && "/" + slug}`)
                 .then((res) => {
                     resolve(res);
                 })
