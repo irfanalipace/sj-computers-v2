@@ -1,14 +1,14 @@
 import ApiService from "@services/apiService";
 
-export function productsApi(page = 1) {
+export function brandsApi() {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/products?page=${page}`)
+        ApiService.get(`/brands`)
             .then((response) => {
-                console.log("file: products.js | products| response", response);
+                console.log("file: brands.js | brands| response", response);
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error products", e);
+                console.log("Console Log: : error brands", e);
                 reject(e);
             });
     });

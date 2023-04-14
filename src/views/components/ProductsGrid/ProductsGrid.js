@@ -5,6 +5,7 @@ import { Row, Col } from "react-bootstrap";
 import LoadMore from "@common/Button/LoadMore";
 import Product from "@components/ProductCard/ProductCard";
 import { fetchProducts } from "@store/products/productsThunks";
+import { CLEAR_PRODUCTS } from "@store/products/productsSlice";
 
 import "./ProductsGrid.css";
 
@@ -23,6 +24,9 @@ export default function ProductsGrid() {
 
     useEffect(() => {
         dispatch(fetchProducts());
+        return () => {
+            dispatch(CLEAR_PRODUCTS());
+        };
     }, []);
 
     return (

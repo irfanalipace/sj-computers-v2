@@ -56,7 +56,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                             }
                         />
                         <span>
-                            Hello,{" "}
+                            Hello,
                             {user ? (
                                 user.name
                             ) : (
