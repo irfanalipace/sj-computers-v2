@@ -130,7 +130,9 @@ class SjProduct extends Command
         $products = $response->results;
 
         foreach ($products as $key => $product){
-           Product::insert([
+           Product::updateOrCreate([
+               'asin' => $product->number
+           ],[
                'name' => $product->title ?? 'dummy',
                'image' => "https://erp.sjops.us/".$product->image_url,
                'asin' => $product->number,

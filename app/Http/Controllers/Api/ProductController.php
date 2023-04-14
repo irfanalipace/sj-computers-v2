@@ -9,7 +9,7 @@ class ProductController extends BaseController
 {
     public function getList(request $request){
         $data= Product::where('status',true)->paginate(12);
-        $this->sendResponse($data);
+        return $this->sendResponse($data);
     }
 
 }
