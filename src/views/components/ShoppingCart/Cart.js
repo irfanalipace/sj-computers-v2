@@ -8,7 +8,7 @@ const Cart = () => {
     <div>
   
       <ShopingCart1 />
-      <ShopingCart2 />
+      {/* <ShopingCart2 /> */}
     </div>
   )
 }
