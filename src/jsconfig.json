@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@images": ["./assets/images"],
+            "@components": ["./views/components"],
+            "@common": ["./views/components/common"],
+            "@pages": ["./views/pages"],
+            "@store": ["./core/store"],
+            "@services": ["./core/services"],
+            "@api": ["./core/api"],
+            "@hooks": ["./core/hooks"],
+            "@utils": ["./core/utils"]
+        }
+    }
+}

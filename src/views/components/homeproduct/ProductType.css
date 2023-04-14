@@ -1,0 +1,140 @@
+.first-section {
+    margin: 11px;
+}
+.div-section {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 33px;
+
+    left: 47px;
+    top: 415px;
+    height: 374px;
+    width: 600px !important;
+    background: #ffffff;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+.div-img-4 img {
+    height: 200%;
+    width: 20%;
+    object-fit: cover;
+}
+
+.product-type-container {
+    margin: 11px;
+}
+
+.product-section {
+    height: 340px;
+    width: 100%;
+    background-color: white;
+    margin: 8px 0;
+}
+
+.product-section .container {
+    height: 230px;
+}
+
+.h4-heading {
+    padding-top: 6px;
+}
+
+.product-section h4 {
+    text-align: left;
+    padding-left: 20px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.product-section img {
+    max-width: 100%;
+}
+
+.advertisement-section {
+    height: 340px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 8px 0;
+}
+
+.product-section-advertisment {
+    /* margin-left: 9px; */
+    height: 53%;
+}
+
+.advertisement-heading {
+    background-color: white;
+    border: 1px solid #ddd;
+    text-align: center;
+    height: 43%;
+}
+.advertisement-heading h4 {
+    text-align: left;
+    margin: 20px 0 30px 0;
+    padding-left: 20px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.button-save {
+    height: 40px;
+    width: 90%;
+    margin: 0 auto;
+    background: #38c056;
+    border-radius: 10px 10px 0px 0px;
+    color: white;
+    border: 0;
+}
+
+.advertisment-img {
+    height: 100%;
+    width: 100%;
+}
+.product-section h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-section p {
+    font-weight: 400;
+    font-size: 12px;
+    padding-left: 18px;
+}
+
+.section-link {
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+
+.section-link:hover {
+    color: #e87e24;
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 1024px) {
+    .product-section {
+        height: 350px;
+    }
+
+    .product-section .container {
+        height: 260px;
+    }
+
+    .product-section h4,
+    .advertisement-heading h4,
+    .advertisement-heading button {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+}
+@media screen and (max-width: 425px) {
+    .product-section h4,
+    .advertisement-heading h4,
+    .advertisement-heading button {
+        font-size: 12px;
+    }
+}

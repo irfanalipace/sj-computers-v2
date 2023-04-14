@@ -2,24 +2,28 @@ import ApiService from "@services/apiService";
 
 export function loginApi({ email, password }) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/login?email=${email}&password=${password}`)
+        ApiService.post("/login", {
+            email,
+            password,
+        })
             .then((response) => {
                 console.log("file: auth.module.js | login| response", response);
                 resolve(response);
             })
-            .catch(({ message }) => {
-                console.log("Console Log: : error Login", message);
-                reject(message);
+            .catch((e) => {
+                console.log("Console Log: : error Login", e);
+                reject(e);
             });
     });
 }
 
-export function registerApi(name, email, password) {
+export function registerApi({ name, email, password, confirmPassword }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/register`, {
-            name,
-            email,
-            password,
+            name: name,
+            email: email,
+            password: password,
+            password_confirmation: confirmPassword,
         })
             .then((response) => {
                 console.log(
@@ -28,9 +32,9 @@ export function registerApi(name, email, password) {
                 );
                 resolve(response);
             })
-            .catch(({ message }) => {
-                console.log("Console Log: : error", message);
-                reject(message);
+            .catch((e) => {
+                console.log("Console Log: : error", e);
+                reject(e);
             });
     });
 }
@@ -48,18 +52,83 @@ export function logoutApi() {
                 );
                 resolve(response);
             })
-            .catch(({ message }) => {
-                console.log("Console Log: : error", message);
-                reject(message);
+            .catch((e) => {
+                console.log("Console Log: : error", e);
+                reject(e);
             });
     });
 }
 
-export function resetPasswordApi() {
+export function verifyEmailApi(email) {
     return new Promise((resolve, reject) => {
-        ApiService.post("/password/email", {
-            // userId: email,
-            // password,
+        ApiService.post("verify-email", {
+            email,
+            // formData,
+        })
+            .then((response) => {
+                console.log(
+                    "file: auth.module.js | verifyEmailApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error", e);
+                reject(e);
+            });
+    });
+}
+
+export function verifyOtpApi({ otp }) {
+    return new Promise((resolve, reject) => {
+        ApiService.post("verify-otp", {
+            otp_code: otp,
+        })
+            .then((response) => {
+                console.log(
+                    "file: auth.module.js | verifyOtpApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error", e);
+                reject(e);
+            });
+    });
+}
+
+export function forgetPasswordApi({ email }) {
+    return new Promise((resolve, reject) => {
+        ApiService.post("forgot-password", {
+            email,
+        })
+            .then((response) => {
+                console.log(
+                    "file: auth.module.js | forgetPasswordApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error", e);
+                reject(e);
+            });
+    });
+}
+
+export function resetPasswordApi({
+    access_token,
+    email,
+    password,
+    confirm_password,
+}) {
+    ApiService.setHeader("Authorization", "Bearer " + access_token);
+    return new Promise((resolve, reject) => {
+        ApiService.post("reset-password", {
+            email,
+            password,
+            confirm_password,
         })
             .then((response) => {
                 console.log(
@@ -68,29 +137,9 @@ export function resetPasswordApi() {
                 );
                 resolve(response);
             })
-            .catch(({ message }) => {
-                console.log("Console Log: : error", message);
-                reject(message);
-            });
-    });
-}
-
-export function verifyEmailAddress(email) {
-    return new Promise((resolve, reject) => {
-        ApiService.post(`email/verify?email=${email}`, {
-            // userId: email,
-            // password,
-        })
-            .then((response) => {
-                console.log(
-                    "file: auth.module.js | verifyEmailAddress| response",
-                    response
-                );
-                resolve(response);
-            })
-            .catch(({ message }) => {
-                console.log("Console Log: : error", message);
-                reject(message);
+            .catch((e) => {
+                console.log("Console Log: : error", e);
+                reject(e);
             });
     });
 }

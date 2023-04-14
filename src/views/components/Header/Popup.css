@@ -1,0 +1,113 @@
+.header{
+    background: #EAEDED;
+}.text-p{
+    font-size: 15px;
+}.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 88%;
+    color: var(--bs-modal-color);
+    pointer-events: auto;
+    background-color: var(--bs-modal-bg);
+    background-clip: padding-box;
+    border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+    border-radius: var(--bs-modal-border-radius);
+    outline: 0;
+}
+.login-button{
+    font-size: "18px";
+    margin-top: "8px";
+    color: "#333333";
+    bottom: "8px";
+}
+
+.button-box {
+    box-sizing: border-box;
+    width: 109px;
+    height: 38px;
+    left: 770px;
+    top: 415px;
+    background: #EDFFF1;
+    border: 1px solid #52AC66;
+    border-radius: 7px;
+    margin-top: 4px;
+    font-size: 14px;
+}.button-input{
+    
+        box-sizing: border-box;
+        /* position: absolute; */
+        width: 258px;
+        height: 45px;
+        left: 579px;
+        top: 413px;
+        background: #EDFFF1;
+        border: 1px solid #52AC66;
+        border-radius: 5px;
+    
+}.img-arrow{
+    padding-left: 208px;
+}
+
+
+.dropdown-button-box{
+   text-align: left;
+        color: black;
+        box-sizing: border-box;
+       
+        width: 395px;
+        height: 42px;
+        left: 0px;
+        top: 0px;
+        border: 1px solid #000000;
+        border-radius: 10px;
+        background: white;
+    
+}.dropdown-button-box::after{
+   content: none;
+  
+ }
+ .modal-content{
+
+        position: absolute !important;
+        margin-top: 23 !important;
+        margin-top: 247px !important;
+        justify-content: center;
+    
+ }
+ .done-button{
+    
+        width: -13px ;
+        height: 40px;
+       
+        background: #52AC66;
+        border-radius: 8px;
+
+ }
+.done-button:hover{
+    content: none;
+}
+.done-button:active{
+    
+    background-color: transparent;
+}
+.done-button:focus{
+    
+    background-color: transparent;
+}
+
+.dropdown-button-box:hover{
+
+    background-color: transparent;
+    color: black;
+}
+.dropdown-button-box:active{
+    background-color: transparent !important;
+}.menus-sets{
+    
+        width: 100%;
+        position: absolute;
+        inset: auto auto 0px 0px;
+        /* transform: translate(0px, -43.5px); */
+    
+}
