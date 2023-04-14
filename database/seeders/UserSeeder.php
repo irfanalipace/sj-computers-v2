@@ -16,22 +16,22 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            [
-                'name' => 'Admin',
-                'email' => 'admin@admin.com',
-                'password' => bcrypt('password'),
-                'role_id' => User::ADMIN_ROLE_ID,
-                'email_verified_at' => Carbon::now()
-            ],
-            [
-                'name' => 'User',
-                'email' => 'user@user.com',
-                'password' => bcrypt('password'),
-                'role_id' => User::USER_ROLE_ID,
-                'email_verified_at' => Carbon::now()
-            ]
-                ]
-        );
+//        DB::table('users')->insert([
+//            [
+//                'name' => 'Admin',
+//                'email' => 'admin@admin.com',
+//                'password' => bcrypt('password'),
+//                'role_id' => User::ADMIN_ROLE_ID,
+//                'email_verified_at' => Carbon::now()
+//            ],
+//            [
+//                'name' => 'User',
+//                'email' => 'user@user.com',
+//                'password' => bcrypt('password'),
+//                'role_id' => User::USER_ROLE_ID,
+//                'email_verified_at' => Carbon::now()
+//            ]
+//                ]
+//        );
     }
 }
