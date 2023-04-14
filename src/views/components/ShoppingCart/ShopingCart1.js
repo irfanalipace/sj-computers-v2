@@ -40,6 +40,9 @@ export const ShopingCart1 = () => {
                                             <li><span className="item-capacity">Style:</span> <span clasName="item-style1">980 PRO</span></li>
                                          
                                         </ul>
+ 
+                                      
+                                       
                                     </div>
                                     <div className="col-md-2">
                                         <p>
@@ -49,18 +52,14 @@ export const ShopingCart1 = () => {
                                         </p>
                                     </div>
                                     <div>
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-  <label class="btn btn-secondary active">
-    <input type="radio" name="options" id="option1" autocomplete="off" checked /> Option 1
-  </label>
-  <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option2" autocomplete="off" /> Option 2
-  </label>
-  <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option3" autocomplete="off" /> Option 3
-  </label>
-</div>
+                
 
+                                   
+                                    <select className="selectpicker selectbutton-option">
+  <option>Mustard</option>
+  <option>Ketchup</option>
+  <option>Relish</option>
+</select>
 
                                     <button class="button-link">Delete</button>
                                     <button class="button-link">Save for later</button>
