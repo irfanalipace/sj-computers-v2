@@ -4,8 +4,6 @@ import img1 from "@images/product/item3/image1.png";
 import img2 from "@images/product/item3/image2.png";
 import img3 from "@images/product/item3/image3.png";
 
-import "./ProductItem3.css";
-
 const ProductItem3 = () => {
     const images = [img1, img2, img3];
 
