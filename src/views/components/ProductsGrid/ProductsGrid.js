@@ -12,6 +12,7 @@ export default function ProductsGrid() {
     const products = useSelector((state) => state.products.products);
     const isLoading = useSelector((state) => state.products.isLoading);
     const currentPage = useSelector((state) => state.products.currentPage);
+    const apiError = useSelector((state) => state.products.apiError);
     const dispatch = useDispatch();
 
     console.log("currentPage", currentPage);
@@ -38,6 +39,7 @@ export default function ProductsGrid() {
                 <LoadMore
                     handleClick={handleClick}
                     loading={isLoading}
+                    error={apiError}
                     small={true}
                 />
             </div>

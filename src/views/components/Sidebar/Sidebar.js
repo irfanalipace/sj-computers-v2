@@ -55,7 +55,14 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                 user?.profileImage ? user.profileImage : userImg
                             }
                         />
-                        <span>Hello, {user ? user.name : "Sign In"}</span>
+                        <span>
+                            Hello,{" "}
+                            {user ? (
+                                user.name
+                            ) : (
+                                <Link to={"/login"}>Sign In</Link>
+                            )}
+                        </span>
                     </div>
                     <div className="sideMenu">
                         <h4>Shop By Category</h4>
