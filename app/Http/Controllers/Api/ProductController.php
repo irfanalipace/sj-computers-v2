@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ProductController extends BaseController
 {
     public function getList(request $request){
-        $data= Product::paginate(12);
+        $data= Product::where('status',true)->paginate(12);
         $this->sendResponse($data);
     }
 
