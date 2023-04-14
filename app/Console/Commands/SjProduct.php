@@ -132,10 +132,11 @@ class SjProduct extends Command
         foreach ($products as $key => $product){
            Product::insert([
                'name' => $product->title ?? 'dummy',
-               'image' => $product->image_url,
+               'image' => "https://erp.sjops.us/".$product->image_url,
                'asin' => $product->number,
                'price' => $product->our_price,
-               'quantity' => $product->quantity
+               'quantity' => $product->quantity,
+               'status' => $product->active
            ]);
 
            $this->productCount = $this->productCount + 1;
