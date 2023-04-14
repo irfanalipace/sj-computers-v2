@@ -7,6 +7,7 @@ import img1 from "@images/bottom-arrow.png";
 import "./LocationModel.css";
 function UpdateStateModel({ isOpen, handleClose }) {
     const states = useSelector((state) => state.states.states);
+    const [state, setState] = useState("Ship outside the US");
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -25,7 +26,7 @@ function UpdateStateModel({ isOpen, handleClose }) {
                     locations.
                 </p>
 
-                <div className="d-grid justify-content-between">
+                <div className="d-grid justify-content-center">
                     <button
                         type="submit"
                         className="btn btn-primary login-button"
@@ -72,15 +73,18 @@ function UpdateStateModel({ isOpen, handleClose }) {
                 <Dropdown>
                     <Dropdown.Toggle
                         id="dropdown-basic"
-                        className="dropdown-button-box"
+                        className="dropdown-button-box d-flex justify-content-between align-items-center"
                     >
-                        Ship outside the US
+                        {state}
                         <img src={img1} className="img-arrow" />
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu className="menus-sets">
                         {states.map((state) => (
-                            <Dropdown.Item key={state.id}>
+                            <Dropdown.Item
+                                onClick={() => setState(state.name)}
+                                key={state.id}
+                            >
                                 <h6>{state.name}</h6>
                             </Dropdown.Item>
                         ))}
