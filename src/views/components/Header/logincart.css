@@ -1,13 +1,12 @@
-.dropdown-payment{
+.dropdown-payment {
     position: absolute;
     width: 354px;
     height: 300px;
     left: 0px;
     padding: 2px;
-    margin: 3px; 
-    
-
-}.product-section1 {
+    margin: 3px;
+}
+.product-section1 {
     margin-left: -166px;
     position: absolute;
     z-index: 9;
@@ -19,7 +18,7 @@
     margin-bottom: 20px;
     text-align: center;
 }
-.text-left{
+.text-left {
     text-align: center !important;
     font-size: 21px !important;
 }
@@ -29,12 +28,11 @@
     margin-left: -30px !important;
     text-align: initial;
 }
-.your-list{
-        margin-left: 16px;
-        text-align: left;
-        font-size: 21px;
-        margin-top: 4px;
-
+.your-list {
+    margin-left: 16px;
+    text-align: left;
+    font-size: 21px;
+    margin-top: 4px;
 }
 .create-list {
     text-align: left;
@@ -42,20 +40,16 @@
     font-size: 16px;
 }
 
-.login-button{
-   
-        height: 56px;
-        width: 263px;
-        margin: 4px;
-    
+.login-button {
+    height: 56px;
+    width: 263px;
+    margin: 4px;
 }
-.new-customer{
-   
-      font-size: 15px !important;
- 
+.new-customer {
+    font-size: 15px !important;
 }
 .dropdown-payment button {
-    background-color: #00305E;
+    background-color: #00305e;
     color: white;
     padding: 9px;
     font-size: 20px;

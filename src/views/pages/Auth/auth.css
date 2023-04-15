@@ -70,6 +70,8 @@
     border: 1px solid #6f6f6f !important;
     border-radius: 3px !important;
     border-color: #52ac66 !important;
+    max-width: 90%;
+    margin: 0 auto;
 }
 .small {
     margin-top: 21px !important;

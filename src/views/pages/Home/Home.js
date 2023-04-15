@@ -11,7 +11,6 @@ import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
 const Home = () => {
     return (
         <div>
-            <Header />
             <TopBar />
             <BannerSlider />
             <ProductType />
@@ -19,7 +18,6 @@ const Home = () => {
             {/* <ProductThreeItem /> */}
             {/* <Recommendation /> */}
             <ProductsGrid />
-            <Footer />
         </div>
     );
 };

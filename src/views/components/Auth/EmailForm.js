@@ -69,7 +69,7 @@ export default function EmailForm({ onFormSubmit, form }) {
                     <p className="text-danger">{fieldErrors.email}</p>
                 )}
             </div>
-            <div className="d-grid">
+            <div className="d-grid justify-content-center">
                 <button
                     type="submit"
                     className="btn btn-primary login-button"

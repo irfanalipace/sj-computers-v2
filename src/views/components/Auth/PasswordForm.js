@@ -84,7 +84,7 @@ const PasswordForm = () => {
                     </p>
                 )}
             </div>
-            <div className="d-grid">
+            <div className="d-grid justify-content-center">
                 <button
                     type="submit"
                     className="btn btn-primary login-button"

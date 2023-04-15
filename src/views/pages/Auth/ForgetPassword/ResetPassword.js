@@ -70,16 +70,13 @@ const PasswordForm = () => {
 
     return (
         <div>
-            <div
-                className={`auth-inner-body ${mounted && "slide"} `}
-                onSubmit={handleSubmit}
-            >
+            <div className={`container form-container`} onSubmit={handleSubmit}>
                 <div className="row">
                     <div className="header-logo">
                         <Header />
                     </div>
 
-                    <form className="auth-inner-body">
+                    <form className={`auth-inner-body ${mounted && "slide"} `}>
                         <h3 className="login-h3">Reset Password</h3>
                         <div className="mb-3">
                             <label className="password-lable font-weight-bold">
@@ -137,7 +134,7 @@ const PasswordForm = () => {
                             )}
                         </div>
 
-                        <div className="d-grid">
+                        <div className="d-grid justify-content-center">
                             <button
                                 type="submit"
                                 className="btn btn-primary login-button"
