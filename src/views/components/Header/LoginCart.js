@@ -16,7 +16,7 @@ const LoginCart = () => {
             {isOpen ? (
                 <div className="product-section1">
                     <div className="d-grid ">
-                        <div className="text-center">
+                        <div className="text-center mt-2">
                             <Link to={"/login"}>
                                 <button
                                     type="submit"

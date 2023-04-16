@@ -1,22 +1,23 @@
 .dropdown-payment {
-    position: absolute;
+    /* position: absolute;
     width: 354px;
     height: 300px;
-    left: 0px;
+    left: 0px; */
+    position: relative;
     padding: 2px;
     margin: 3px;
 }
 .product-section1 {
-    margin-left: -166px;
     position: absolute;
-    z-index: 9;
+    z-index: 2;
     width: 500px;
-    height: 100%;
+    height: 300px;
     background-color: #f7f7f7;
     padding: 2px;
     border: 1px solid #ddd;
     margin-bottom: 20px;
     text-align: center;
+    left: -187px;
 }
 .text-left {
     text-align: center !important;
@@ -55,4 +56,8 @@
     font-size: 20px;
     border: none;
     cursor: pointer;
+}
+
+.dropdown-paymenr button:hover {
+    background-color: #3e8e41;
 }

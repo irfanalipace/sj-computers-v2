@@ -13,6 +13,7 @@ import LoginCart from "./LoginCart";
 import Search from "./Search";
 const Header = () => {
     const currentState = useSelector((state) => state.states.currentState);
+    const user = useSelector((state) => state.auth.user);
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
     const location = useLocation();
@@ -104,7 +105,15 @@ const Header = () => {
                         </div>
 
                         <div className="dropdown-cart">
-                            <LoginCart className="card" />
+                            {user ? (
+                                <div>
+                                    <p className="mb-0 text-white">
+                                        Hello, {user.name}
+                                    </p>
+                                </div>
+                            ) : (
+                                <LoginCart className="card" />
+                            )}
                         </div>
                         <div className="return-button ">
                             <button
