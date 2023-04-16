@@ -17,7 +17,7 @@ function UpdateStateModel({ isOpen, handleClose }) {
     }, []);
 
     const handleZipCodeChange = (e) => {
-        if (/^[0-9\b]+$/.test(e.target.value)) setZipCode(e.target.value);
+        setZipCode(e.target.value.replace(/\D/g, ""));
     };
 
     const findZipCode = () => {
