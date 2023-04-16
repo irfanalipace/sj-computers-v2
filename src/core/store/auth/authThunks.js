@@ -28,7 +28,7 @@ export const login = (credentials) => {
             const response = await loginApi(credentials);
             let token = response.data.data.access_token;
             saveToken(token, "", credentials.email);
-            dispatch({ type: LOGIN, payload: credentials.email });
+            dispatch({ type: LOGIN, payload: credentials });
         } catch (error) {
             console.log("Something went wrong in login", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
