@@ -37,7 +37,7 @@ function UpdateStateModel({ isOpen, handleClose }) {
                     locations.
                 </p>
 
-                {isAuthenticated && (
+                {!isAuthenticated && (
                     <div className="d-grid justify-content-center">
                         <button
                             type="submit"
