@@ -20,7 +20,7 @@ const authSlice = createSlice({
         },
         LOGIN: (state, action) => {
             state.isLoading = false;
-            state.password = { ...action.payload };
+            state.user = { ...action.payload };
             state.currentPage = state.currentPage + 1;
         },
         LOGOUT: (state) => {
@@ -28,9 +28,8 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.user = null;
         },
-        REGISTER: (state, action) => {
+        REGISTER: (state) => {
             state.isLoading = false;
-            state.user = { ...action.payload };
         },
         ALREADY_LOGGED_IN: (state) => {
             state.isAuthenticated = true;

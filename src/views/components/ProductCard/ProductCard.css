@@ -16,10 +16,13 @@
     text-align: center;
     margin-bottom: 10px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .product-image-grid {
-    background-color: #f3f9ff;
+    /* background-color: #f3f9ff; */
     height: 190px;
 }
 
@@ -40,9 +43,9 @@
 }
 
 .product-image-grid img {
-    width: 80%;
+    width: 100%;
     max-width: 300px;
-    max-height: 135px;
+    max-height: 187px;
 }
 
 .product-image img {

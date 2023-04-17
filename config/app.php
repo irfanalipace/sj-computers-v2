@@ -163,7 +163,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
         \Laravel\Passport\PassportServiceProvider::class,
-
         /*
          * Package Service Providers...
          */

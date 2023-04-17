@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button, Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,13 +8,23 @@ import "./LocationModel.css";
 function UpdateStateModel({ isOpen, handleClose }) {
     const states = useSelector((state) => state.states.states);
     const [state, setState] = useState("Ship outside the US");
+    const [zipCode, setZipCode] = useState("");
     const dispatch = useDispatch();
-    const zipCodeNode = useRef("");
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     useEffect(() => {
-        console.log("modal showing");
         dispatch(fetchStates());
     }, []);
+
+    const handleZipCodeChange = (e) => {
+        setZipCode(e.target.value.replace(/\D/g, ""));
+    };
+
+    const findZipCode = () => {
+        setState(states.filter((state) => state.zip_code_start == zipCode)[0]);
+    };
+
+    console.log("state: ", state);
 
     return (
         <Modal show={isOpen} onHide={handleClose}>
@@ -27,14 +37,17 @@ function UpdateStateModel({ isOpen, handleClose }) {
                     locations.
                 </p>
 
-                <div className="d-grid justify-content-center">
-                    <button
-                        type="submit"
-                        className="btn btn-primary login-button"
-                    >
-                        Sign in to see your address
-                    </button>
-                </div>
+                {!isAuthenticated && (
+                    <div className="d-grid justify-content-center">
+                        <button
+                            type="submit"
+                            className="btn btn-primary login-button"
+                        >
+                            Sign in to see your address
+                        </button>
+                    </div>
+                )}
+
                 <h5
                     className="login-button-box"
                     style={{
@@ -44,18 +57,24 @@ function UpdateStateModel({ isOpen, handleClose }) {
                         bottom: "8px",
                     }}
                 >
-                    or enter a US zip code
+                    Enter a US zip code
                 </h5>
                 <div className="row">
                     <div className="col-md-8">
                         <input
                             type="text"
+                            onChange={handleZipCodeChange}
+                            value={zipCode}
                             placeholder=" Enter zip code"
                             className="button-input"
                         />
                     </div>
                     <div className="col-md-4">
-                        <button type="button" className="button-box">
+                        <button
+                            onClick={findZipCode}
+                            type="button"
+                            className="button-box"
+                        >
                             Apply
                         </button>
                     </div>
@@ -76,14 +95,14 @@ function UpdateStateModel({ isOpen, handleClose }) {
                         id="dropdown-basic"
                         className="dropdown-button-box d-flex justify-content-between align-items-center"
                     >
-                        {state}
+                        {state?.name || "Select State"}
                         <img src={img1} className="img-arrow" />
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu className="menus-sets">
                         {states.map((state) => (
                             <Dropdown.Item
-                                onClick={() => setState(state.name)}
+                                onClick={() => setState(state)}
                                 key={state.id}
                             >
                                 <h6>{state.name}</h6>

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { verifyOtp } from "@store/auth/authThunks";
 import Loader from "@common/Spinner/Spinner";
 import { useFormValidation } from "@hooks/useFormValidation";
-import { getUserEmail } from "@services/jwtService";
+import { loginApi } from "@api/auth";
 
 import "@pages/Auth/auth.css";
 
@@ -27,6 +27,8 @@ const VerifyOTP = () => {
     const [fieldErrors, setFieldErrors] = useState({});
     const [email, setEmail] = useState("");
     const [mounted, setMounted] = useState(false);
+    const [timer, setTimer] = useState(20);
+    const user = useSelector((state) => state.auth.user);
 
     useEffect(() => {
         setFieldErrors({ ...errors });
@@ -37,12 +39,21 @@ const VerifyOTP = () => {
     }, [apiError]);
 
     useEffect(() => {
-        setEmail(getUserEmail());
+        if (timer >= 1) setTimer((state) => state - 1);
+    }, [timer]);
+
+    useEffect(() => {
+        setEmail(user.email);
         setMounted(true);
         return () => {
             setMounted(false);
         };
     }, []);
+
+    const resendOTP = async () => {
+        if (timer === 0) await loginApi(user);
+        setTimer(20);
+    };
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -90,7 +101,7 @@ const VerifyOTP = () => {
                     <p className="text-danger">{fieldErrors.otp}</p>
                 )}
             </div>
-            <div className="d-grid">
+            <div className="d-grid justify-content-center">
                 <button
                     type="submit"
                     className="btn btn-primary login-button"
@@ -100,9 +111,15 @@ const VerifyOTP = () => {
                 </button>
             </div>
             <p className="text-muted small d-flex justify-content-center">
-                <a href="#" className="text-decoration-none">
+                <a
+                    onClick={resendOTP}
+                    href="#"
+                    disabled={!timer}
+                    className="text-decoration-none"
+                >
                     Resend OTP
                 </a>
+                <p>{timer}</p>
             </p>
             <p className="forgot-password text-left">
                 <a href="/sign-in" className="text-decoration-none">

@@ -5,6 +5,9 @@ import { ToastContainer } from "react-toastify";
 import { getToken } from "@services/jwtService";
 import { Router } from "@src/Routes";
 import { ALREADY_LOGGED_IN } from "@store/auth/authSlice";
+import Header from "@components/Header/Header";
+import Footer from "@components/Footer/Footer";
+
 import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,7 +22,9 @@ function App() {
         <div>
             <ToastContainer className={"notification-toast"} />
             <BrowserRouter>
+                <Header />
                 <Router />
+                <Footer />
             </BrowserRouter>
         </div>
     );

@@ -1,29 +1,32 @@
-.header-background{
-    
-    background:#00305E !important;
-}.homepage-img{
-width: 185px !important;
-}.nav-text{
+.header-background {
+    background: #00305e !important;
+}
+.homepage-img {
+    width: 185px !important;
+}
+.nav-text {
     color: white;
     padding-left: 23px;
-}.searchbar-form{
-   
-width: 90%;
-}.search{
+}
+.searchbar-form {
+    width: 90%;
+}
+.search {
     width: 90% !important;
 }
-.eng-dropdown{
+.eng-dropdown {
     /* padding-left: 27px; */
-}.eng-button {
+}
+.eng-button {
     margin-left: 24px;
-    background: #00305E;
+    background: #00305e;
     border: 0px;
     color: white;
     padding-top: 31px;
     /* margin-left: -160px; */
     margin-right: 28px;
 }
-.input-form-control{
+.input-form-control {
     height: 60px;
 }
 /* .vector-cart{
@@ -34,127 +37,109 @@ width: 90%;
     width: 20px;
     height: 50;
 }*/
-.body{ 
+.body {
     padding-top: 0px !important;
 }
-.boll-img{
- width: 25px;
-padding-left: 6px;
+.boll-img {
+    width: 25px;
+    padding-left: 6px;
 }
-.searchbar{
-    margin-top:5%;
-  }
-  /* Style to create scroll bar in dropdown */ 
-  .scrollable-dropdown{
-      height: auto;
-      max-height:320px;  /* Increase / Decrease value as per your need */
-      overflow-x: hidden;
-  }
-  .search-inputgroup {
- 
+.searchbar {
+    margin-top: 5%;
+}
+/* Style to create scroll bar in dropdown */
+.scrollable-dropdown {
+    height: auto;
+    max-height: 320px; /* Increase / Decrease value as per your need */
+    overflow-x: hidden;
+}
+.search-inputgroup {
     width: 62%;
-  
 }
 
 .all-button {
-   
-        color: #B8B8B9;
-        /* position: absolute; */
-        width: 60px;
-        height: 63px;
-        background: #ECE8E8 !important;
-        border-right: 1px solid #B8B8B9;
-        border-radius: 5px 0px 0px 5px;
-    
+    color: #b8b8b9;
+    /* position: absolute; */
+    width: 60px;
+    height: 63px;
+    background: #ece8e8 !important;
+    border-right: 1px solid #b8b8b9;
+    border-radius: 5px 0px 0px 5px;
 }
 
 .all-button :hover {
-   
-    color: #B8B8B9;
+    color: #b8b8b9;
     /* position: absolute; */
-   
 }
 .all-button ::after {
-   
-    color: #B8B8B9;
+    color: #b8b8b9;
     /* position: absolute; */
-   
 }
-.search-logo{
+.search-logo {
     height: 62px;
-}.text-color-heading{
+}
+.text-color-heading {
     padding-top: 14px !important;
-color: white;
-font-size: 12px;
-}.text-color-heading2{
+    color: white;
+    font-size: 12px;
+}
+.text-color-heading2 {
     list-style-type: none;
-color: white;
-font-size: 18px;
-}.dot {
+    color: white;
+    font-size: 18px;
+}
+.dot {
     height: 25px;
     width: 28px;
-    background-color: #EE9B38;
+    background-color: #ee9b38;
     border-radius: 50%;
     display: inline-block;
-  }
-  .dropdown {
+}
+.dropdown {
     position: relative;
     display: inline-block;
-  }
-  
-  .dropdown-payment iframe {
+}
+
+.dropdown-payment iframe {
     position: absolute;
     top: 100%;
     left: 0;
     z-index: 1;
-  }
-  
-  .dropdown-payment button {
-    background-color: #00305E;
-    color: white;
-    padding: 12px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .dropdown-paymenr button:hover {
-    background-color: #3e8e41;
-  }
+}
+
 .dropdown-cart {
     padding: 2px;
-    position: relative;
+    /* position: relative; */
     /* width: 400px; */
     /* height: 200px; */
     /* border: 3px solid #73AD21; */
-    margin-bottom: 80px;
-    margin-right: 125px;
+    /* margin-bottom: 80px;
+    margin-right: 125px; */
 }
-.return-button{
+.return-button {
     padding: 2px;
     position: relative;
     /* width: 400px; */
     /* height: 200px; */
     /* border: 3px solid #73AD21; */
-    
+
     margin-right: 58px;
 }
 
-
-.order-button{
-    background: #00305E;
+.order-button {
+    background: #00305e;
     border: 0px;
     color: white;
     padding-top: 12px;
     /* margin-left: -78px; */
 }
-.icon-cart{
+.icon-cart {
     /* margin-left: -10px; */
 }
-.ul-menu{
+.ul-menu {
     margin: 18px;
-    padding-left: 2rem
+    padding-left: 2rem;
 }
-.cart-text{
+.cart-text {
     color: white;
 }

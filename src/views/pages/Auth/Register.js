@@ -33,6 +33,7 @@ const Register = () => {
 
     const apiError = useSelector((state) => state.auth.apiError);
     const [fieldErrors, setFieldErrors] = useState({});
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setFieldErrors({ ...errors });
@@ -41,6 +42,13 @@ const Register = () => {
     useEffect(() => {
         setFieldErrors({ ...apiError });
     }, [apiError]);
+
+    useEffect(() => {
+        setMounted(true);
+        return () => {
+            setMounted(false);
+        };
+    }, []);
 
     const isLoading = useSelector((state) => state.auth.isLoading);
     const navigate = useNavigate();
@@ -58,7 +66,10 @@ const Register = () => {
                         <Header />
                     </div>
 
-                    <form className="auth-inner-body" onSubmit={handleSubmit}>
+                    <form
+                        className={`auth-inner-body ${mounted && "slide"} `}
+                        onSubmit={handleSubmit}
+                    >
                         <h3 className="login-h3">Create account</h3>
                         <div className="mb-3">
                             <label className="name-lable font-weight-bold">
@@ -139,7 +150,7 @@ const Register = () => {
                             )}
                         </div>
 
-                        <div className="d-grid">
+                        <div className="d-grid justify-content-center">
                             <button
                                 type="submit"
                                 className="btn btn-primary login-button"
@@ -149,11 +160,11 @@ const Register = () => {
                             </button>
                         </div>
                         <p className="text-muted small">
-                            By continuing, you agree to SJ Computer’s{" "}
+                            By continuing, you agree to SJ Computer’s
                             <a href="#" className="text-decoration-none">
                                 Conditions of Use
-                            </a>{" "}
-                            and{" "}
+                            </a>
+                            and
                             <a href="#" className="text-decoration-none">
                                 Privacy Notice
                             </a>
@@ -161,8 +172,8 @@ const Register = () => {
                         </p>
 
                         <p className="forgot-password text-left">
-                            Already have an account?{" "}
-                            <Link to="/" className="text-decoration-none">
+                            Already have an account?
+                            <Link to="/login" className="text-decoration-none">
                                 Sign in?
                             </Link>
                         </p>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "@store/auth/authThunks";
 
 import userImg from "@images/user.png";
 import { US } from "country-flag-icons/react/3x2";
@@ -8,6 +9,10 @@ import "./Sidebar.css";
 
 export default function Sidebar({ openState, toggleSidebar }) {
     const user = useSelector((state) => state.auth.user);
+    // const user = {
+    //     name: "haroon",
+    // };
+    const dispatch = useDispatch();
     const categories = [
         {
             id: 1,
@@ -79,9 +84,11 @@ export default function Sidebar({ openState, toggleSidebar }) {
 
                         <h4>Help & Settings</h4>
                         <ul className="menu-list">
-                            <li>
-                                <Link to={`/profile`}>Your Account</Link>
-                            </li>
+                            {user && (
+                                <li>
+                                    <Link to={`/profile`}>Your Account</Link>
+                                </li>
+                            )}
                             <li className="d-block">
                                 <i className="fa fa-globe"></i>{" "}
                                 <Link>English</Link>
@@ -97,7 +104,13 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                 <Link>Customer Services</Link>
                             </li>
                             <li>
-                                <Link to={`/login`}>Sign In</Link>
+                                {user ? (
+                                    <Link onClick={() => dispatch(logout())}>
+                                        Logout
+                                    </Link>
+                                ) : (
+                                    <Link to={"/login"}>Sign In</Link>
+                                )}
                             </li>
                         </ul>
                     </div>

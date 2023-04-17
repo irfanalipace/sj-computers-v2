@@ -19,8 +19,8 @@ const Product = ({ product, inGrid }) => {
                     starDimension={"20px"}
                     starSpacing={"0"}
                 />
-                <span className="product-num-reviews ms-2">
-                    {product.numReviews}
+                <span className="product-num-reviews ms-2 mt-1">
+                    {product.numReviews ? product.numReviews : 0}
                 </span>
             </div>
 
@@ -38,25 +38,29 @@ const Product = ({ product, inGrid }) => {
                 </>
             )}
             <div className="product-prices">
-                <div className="product-original-price">
-                    {product.originalPrice}
+                {product.originalPrice && (
+                    <div className="product-original-price">
+                        ${product.originalPrice}
+                    </div>
+                )}
+                <div className="product-new-price">${product.price}</div>
+            </div>
+            {product.deliveryCharges && (
+                <div className="product-delivery-charges">
+                    <i className="fa fa-truck"></i> {product.deliveryCharges}
                 </div>
-                <div className="product-new-price">{product.newPrice}</div>
-            </div>
-            <div className="product-delivery-charges">
-                <i className="fa fa-truck"></i> {product.deliveryCharges}
-            </div>
+            )}
         </div>
     );
 
     return (
         <div className={`product ${inGrid && "product-grid"}`}>
             <div className={`${inGrid && "product-image-grid"} product-image`}>
-                {inGrid && (
+                {/* {inGrid && (
                     <div className="product-badge">
                         <div className="badge-text">Best Seller</div>
                     </div>
-                )}
+                )} */}
                 <div className="image-wrapper">
                     <img src={product.image} alt={product.brand} />
                 </div>
