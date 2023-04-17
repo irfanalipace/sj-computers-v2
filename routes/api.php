@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\PayPal\PaypalController;
 use App\Http\Controllers\Api\PayPal\PaypalwebhookController;
 use App\Http\Controllers\Api\ShoppingCart\CartController;

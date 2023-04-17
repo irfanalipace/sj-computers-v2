@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('asin')->nullable();
             $table->integer('quantity')->nullable();
 
-            $table->foreignId('category_id')->nullable()->constrained();
+            $table->integer('category_id')->nullable();
             $table->foreignId('brand_id')->nullable()->constrained();
 
             $table->longText('others')->nullable();
