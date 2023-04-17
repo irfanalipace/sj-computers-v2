@@ -11,4 +11,4 @@ To run the project run following commands
 - Php artisan migrate:fresh --seed.
 - Php artisan passport:install.
 - php artisan voyager:admin admin@admin.com
-- php artisan sj-products
+- php artisan serve
