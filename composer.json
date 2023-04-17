@@ -15,8 +15,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
-        "tcg/voyager": "^1.6"
-        "laravel/ui": "^3.4",
+        "tcg/voyager": "^1.6",
         "srmklive/paypal": "~1.0"
     },
     "require-dev": {

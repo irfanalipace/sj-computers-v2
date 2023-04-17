@@ -76,15 +76,19 @@ Route::post('delete-item', [CartController::class, 'delete'])->name('deleteItem'
 Route::get('get-details', [CartController::class, 'details'])->name('getItems');
 Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clearCart');
 
+/*
+*Place Order
+*/
+Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
 
 Route::middleware(['auth:api'])->group(function () {
 
-    //    Route::post('user-details', UserDetailController::class)->name('user-details');
+    //Route::post('user-details', UserDetailController::class)->name('user-details');
 
     Route::post('verify-otp', [AuthController::class, 'verifyOtp'])->name('verify-otp');
 
     Route::post('logout', [AuthController::class, 'logout']);
-  
+
     /*
     *update profile
     *update password as well
@@ -97,4 +101,9 @@ Route::middleware(['auth:api'])->group(function () {
     */
     Route::get('get-shipping-address', [OrderController::class, 'getShippingAddress'])->name('getShippingAddress');
     Route::post('order-shipping-address', [OrderController::class, 'shippingAddress'])->name('OrderShippingAddress');
+
+    /*
+    *Add more quantity
+    */
+    Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('addQtyCart');
 });
