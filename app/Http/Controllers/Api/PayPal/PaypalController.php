@@ -12,6 +12,8 @@ use Srmklive\PayPal\Facades\Paypal as PayPalClient;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\GenerateInvoiceJob;
 
+use Illuminate\Support\Facades\DB;
+
 class PaypalController extends Controller
 {
     use PayPalTrait;
@@ -52,11 +54,12 @@ class PaypalController extends Controller
     {
         try{
            
+            // DB::beginTransaction();
+            $data = $request->all();
             $response = $this->provider->getExpressCheckoutDetails($request->token);
-            // dd($request,$response);
             //This code checks if the ACK code of a PayPal API response, is either "SUCCESS" or "SUCCESSWITHWARNING"
             if (in_array(strtoupper($response['ACK']), [StatusEnum::PAYPALSUCCESS,StatusEnum::PAYPALSUCCESSWITHWARNING])) {
-                GenerateInvoiceJob::dispatch();
+                GenerateInvoiceJob::dispatch($data,$response,$this->userId);
                 //return successfull message
                 return response()->json(['status' => 200, 'msg' => 'Payment Successfully completed']);
     
@@ -66,8 +69,9 @@ class PaypalController extends Controller
                     ['status' => 400,'msg'=>'Something went wrong while processing transaction.']
                 );
             } 
-
+            // DB::commit();
         } catch(Exception $e) {
+            // DB::rollBack();
             return response()->json(
                 ['status' => 400,'msg', 'Something went wrong.' .$e]
             );
