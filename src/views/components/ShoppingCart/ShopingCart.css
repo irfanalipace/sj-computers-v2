@@ -1,3 +1,8 @@
+/* .flex-container{
+    margin: 57px;
+} */
+
+
 .ssd-image{
     max-width: 100%;
     margin-left: 10px;
@@ -87,3 +92,14 @@
     border-radius: 10px;
     margin-right: 14px;
 }
+.shopping-heading {
+    margin-bottom: 0;
+  }
+  
+  .card p {
+    margin-bottom: 0;
+  }
+ head:nth-child(2){
+background-color: #000000;
+ }
+ 
