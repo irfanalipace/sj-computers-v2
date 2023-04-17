@@ -1,14 +1,14 @@
 import React from 'react'
 
-import { ShopingCart1 } from './ShopingCart1'
-import { ShopingCart2 } from './ShopingCart2'
+import { ShopingCart } from './ShopingCart'
+
 
 const Cart = () => {
   return (
     <div>
   
-      <ShopingCart1 />
-      {/* <ShopingCart2 /> */}
+      <ShopingCart />
+     
     </div>
   )
 }
