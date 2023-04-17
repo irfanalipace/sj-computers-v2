@@ -21,10 +21,14 @@ function UpdateStateModel({ isOpen, handleClose }) {
     };
 
     const findZipCode = () => {
-        setState(states.filter((state) => state.zip_code_start == zipCode)[0]);
+        setState(
+            states.filter(
+                (state) =>
+                    state.zip_code_start <= zipCode &&
+                    state.zip_code_end >= zipCode
+            )[0]
+        );
     };
-
-    console.log("state: ", state);
 
     return (
         <Modal show={isOpen} onHide={handleClose}>
