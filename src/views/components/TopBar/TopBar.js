@@ -34,7 +34,7 @@ export default function TopBar() {
                         <small className="small-text-size">All</small>
                     </span>
 
-                    <ul className="menu-sidebar text-decoration-none ullist">
+                    <ul className="text-decoration-none ullist">
                         <li className="listitem">
                             <a
                                 href="default.asp"

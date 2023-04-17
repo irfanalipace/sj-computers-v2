@@ -34,7 +34,7 @@ const Header = () => {
                         <img src={footerlogo} alt="" className="homepage-img" />
                     </a>
                     <div className="d-flex flex-row align-items-center main-nav">
-                        <div className="d-flex align-items-center justify-content-center header-position">
+                        <div className="d-flex align-items-center justify-content-center flex-wrap header-position">
                             <Button
                                 variant="primary"
                                 onClick={handleShow}
