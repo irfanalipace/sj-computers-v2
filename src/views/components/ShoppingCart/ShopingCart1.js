@@ -40,6 +40,9 @@ export const ShopingCart1 = () => {
                                             <li><span className="item-capacity">Style:</span> <span clasName="item-style1">980 PRO</span></li>
                                          
                                         </ul>
+ 
+                                      
+                                       
                                     </div>
                                     <div className="col-md-2">
                                         <p>
@@ -49,6 +52,15 @@ export const ShopingCart1 = () => {
                                         </p>
                                     </div>
                                     <div>
+                
+
+                                   
+                                    <select className="selectpicker selectbutton-option">
+  <option>Mustard</option>
+  <option>Ketchup</option>
+  <option>Relish</option>
+</select>
+
                                     <button class="button-link">Delete</button>
                                     <button class="button-link">Save for later</button>
                                     <button class="button-link">Compare with similer item</button>

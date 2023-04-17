@@ -76,3 +76,14 @@
     background: white;
     margin-right: 9px;
 }
+.selectbutton-option {
+    /* box-sizing: border-box; */
+    /* position: absolute; */
+    /* width: 77px; */
+    height: 37px;
+    left: 0px;
+    top: 0px;
+    border: 1px solid #EAEDED;
+    border-radius: 10px;
+    margin-right: 14px;
+}
