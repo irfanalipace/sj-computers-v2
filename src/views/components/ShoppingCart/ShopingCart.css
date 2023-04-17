@@ -1,3 +1,8 @@
+/* .flex-container{
+    margin: 57px;
+} */
+
+
 .ssd-image{
     max-width: 100%;
     margin-left: 10px;
@@ -76,3 +81,25 @@
     background: white;
     margin-right: 9px;
 }
+.selectbutton-option {
+    /* box-sizing: border-box; */
+    /* position: absolute; */
+    /* width: 77px; */
+    height: 37px;
+    left: 0px;
+    top: 0px;
+    border: 1px solid #EAEDED;
+    border-radius: 10px;
+    margin-right: 14px;
+}
+.shopping-heading {
+    margin-bottom: 0;
+  }
+  
+  .card p {
+    margin-bottom: 0;
+  }
+ head:nth-child(2){
+background-color: #000000;
+ }
+ 
