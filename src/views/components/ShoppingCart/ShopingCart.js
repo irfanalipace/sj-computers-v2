@@ -4,9 +4,13 @@ import ssd from "@images/shipping-cart/ssd-pannel.png";
 import "./ShopingCart.css";
 import { Link } from "react-router-dom";
 import { SubTotal } from "./CheckOut/SubTotal";
+import Header from "@components/Header/Header";
 export const ShopingCart = () => {
     return (
+        <div>
+         <Header />
         <div className="container-fluid">
+         
             <div className="row">
                 <div className="col-md-9">
                     <div class="card">
@@ -34,7 +38,7 @@ export const ShopingCart = () => {
                                         <p>
                                             <strong className="item-details">
                                                 SAMSUNG 980 PRO SSD 2TB PCIe
-                                                NVMe Gen 4 Gaming M.2 Internal<br></br>
+                                                NVMe Gen 4 Gaming M.2 Internal
                                                 Control, MZ-V8P2T0B
                                             </strong>
                                         </p>
@@ -99,6 +103,7 @@ export const ShopingCart = () => {
                <SubTotal />
                </div>
             </div>
+        </div>
         </div>
     );
 };
