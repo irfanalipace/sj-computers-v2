@@ -14,6 +14,7 @@ import Search from "./Search";
 const Header = () => {
     const currentState = useSelector((state) => state.states.currentState);
     const user = useSelector((state) => state.auth.user);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
     const location = useLocation();
@@ -28,11 +29,11 @@ const Header = () => {
     return (
         <>
             {!authRoutes.includes(location.pathname) && (
-                <header className="navbar navbar-expand-lg header-background">
+                <header className="navbar navbar-expand-lg header-background px-3">
                     <a className="navbar-brand" href="#">
                         <img src={footerlogo} alt="" className="homepage-img" />
                     </a>
-                    <div className="d-flex flex-row align-items-center w-100">
+                    <div className="d-flex flex-row align-items-center main-nav">
                         <div className="d-flex align-items-center justify-content-center header-position">
                             <Button
                                 variant="primary"
@@ -80,80 +81,82 @@ const Header = () => {
                                 </button>
                             </span>
                         </div>
-                        <div className="dropdown">
-                            <button
-                                className="dropdown-toggle eng-button"
-                                type="button"
-                                id="dropdownMenuButton"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
-                                <img src={english} alt="English Flag" /> EN
-                            </button>
-                            <div
-                                className="dropdown-menu"
-                                aria-labelledby="dropdownMenuButton"
-                            >
-                                <a className="dropdown-item" href="#">
-                                    English
-                                </a>
-                                <a className="dropdown-item" href="#">
-                                    Spanish
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="dropdown-cart">
-                            {user ? (
-                                <div>
-                                    <p className="mb-0 text-white">
-                                        Hello, {user.name}
-                                    </p>
-                                </div>
-                            ) : (
-                                <LoginCart className="card" />
-                            )}
-                        </div>
-                        <div className="return-button ">
-                            <button
-                                className="order-button dropdown-toggle"
-                                type="button"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
-                                Return <br></br>& Order
-                            </button>
-                            <div
-                                className="dropdown-menu"
-                                aria-labelledby="dropdownMenuButton"
-                            >
-                                <a className="dropdown-item" href="#">
-                                    Return
-                                </a>
-                                <a className="dropdown-item" href="#">
-                                    Order
-                                </a>
-                            </div>
-                        </div>
-                        <div className="icon-cart">
-                            <div className="product-boll">
-                                <div
-                                    className="dropdown dot"
-                                    style={{
-                                        textAlign: "center",
-                                        color: "white",
-                                    }}
+                        <div className="nav-right">
+                            <div className="dropdown">
+                                <button
+                                    className="dropdown-toggle eng-button"
+                                    type="button"
+                                    id="dropdownMenuButton"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="false"
+                                    aria-expanded="false"
                                 >
-                                    0
-                                    <img
-                                        src={vectorcart}
-                                        alt=""
-                                        className="vector-cart"
-                                    />
+                                    <img src={english} alt="English Flag" /> EN
+                                </button>
+                                <div
+                                    className="dropdown-menu"
+                                    aria-labelledby="dropdownMenuButton"
+                                >
+                                    <a className="dropdown-item" href="#">
+                                        English
+                                    </a>
+                                    <a className="dropdown-item" href="#">
+                                        Spanish
+                                    </a>
                                 </div>
-                                <span className="cart-text">Cart</span>
+                            </div>
+
+                            <div className="dropdown-cart">
+                                {isAuthenticated ? (
+                                    <div>
+                                        <p className="mb-0 text-white">
+                                            Hello, {user?.name}
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <LoginCart className="card" />
+                                )}
+                            </div>
+                            <div className="return-button ">
+                                <button
+                                    className="order-button dropdown-toggle"
+                                    type="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    Return <br></br>& Order
+                                </button>
+                                <div
+                                    className="dropdown-menu"
+                                    aria-labelledby="dropdownMenuButton"
+                                >
+                                    <a className="dropdown-item" href="#">
+                                        Return
+                                    </a>
+                                    <a className="dropdown-item" href="#">
+                                        Order
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="icon-cart">
+                                <div className="product-boll">
+                                    <div
+                                        className="dropdown dot"
+                                        style={{
+                                            textAlign: "center",
+                                            color: "white",
+                                        }}
+                                    >
+                                        0
+                                        <img
+                                            src={vectorcart}
+                                            alt=""
+                                            className="vector-cart"
+                                        />
+                                    </div>
+                                    <span className="cart-text">Cart</span>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -75,8 +75,13 @@ export const Router = () => {
             ),
         },
         {
-            path: "/Cart",
+            path: "/cart",
             element: <Cart />,
+        },
+
+        {
+            path: "/checkout",
+            element: <div>Checkout Page</div>,
         },
         {
             path: "*",

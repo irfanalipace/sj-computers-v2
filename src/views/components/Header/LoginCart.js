@@ -10,7 +10,10 @@ const LoginCart = () => {
     const [isPaymentFrameVisible, setIsPaymentFrameVisible] = useState(false);
     return (
         <div className="dropdown-payment">
-            <button onClick={handleButtonClick} className="dropdown-toggle">
+            <button
+                onClick={handleButtonClick}
+                className="dropdown-toggle pb-0"
+            >
                 Login <br></br>Register
             </button>
             {isOpen ? (

@@ -5,6 +5,7 @@ const initialState = {
     isAuthenticated: false,
     apiError: false,
     isLoading: false,
+    accessToken: "",
     currentPage: 1,
 };
 
@@ -20,7 +21,7 @@ const authSlice = createSlice({
         },
         LOGIN: (state, action) => {
             state.isLoading = false;
-            state.user = { ...action.payload };
+            state.accessToken = action.payload.token;
             state.currentPage = state.currentPage + 1;
         },
         LOGOUT: (state) => {

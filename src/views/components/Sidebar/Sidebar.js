@@ -9,6 +9,7 @@ import "./Sidebar.css";
 
 export default function Sidebar({ openState, toggleSidebar }) {
     const user = useSelector((state) => state.auth.user);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     // const user = {
     //     name: "haroon",
     // };
@@ -62,8 +63,8 @@ export default function Sidebar({ openState, toggleSidebar }) {
                         />
                         <span>
                             Hello,
-                            {user ? (
-                                user.name
+                            {isAuthenticated ? (
+                                user?.name
                             ) : (
                                 <Link to={"/login"}>Sign In</Link>
                             )}
@@ -84,7 +85,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
 
                         <h4>Help & Settings</h4>
                         <ul className="menu-list">
-                            {user && (
+                            {isAuthenticated && (
                                 <li>
                                     <Link to={`/profile`}>Your Account</Link>
                                 </li>
@@ -104,7 +105,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                 <Link>Customer Services</Link>
                             </li>
                             <li>
-                                {user ? (
+                                {isAuthenticated ? (
                                     <Link onClick={() => dispatch(logout())}>
                                         Logout
                                     </Link>

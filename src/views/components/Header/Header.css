@@ -3,10 +3,21 @@
 }
 .homepage-img {
     width: 185px !important;
+    max-width: 100%;
 }
 .nav-text {
     color: white;
     padding-left: 23px;
+}
+
+.navbar-brand {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.main-nav {
+    width: 90%;
 }
 .searchbar-form {
     width: 90%;
@@ -77,6 +88,8 @@
 }
 .search-logo {
     height: 62px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 .text-color-heading {
     padding-top: 14px !important;
@@ -89,7 +102,7 @@
     font-size: 18px;
 }
 .dot {
-    height: 25px;
+    height: 28px;
     width: 28px;
     background-color: #ee9b38;
     border-radius: 50%;
@@ -109,21 +122,11 @@
 
 .dropdown-cart {
     padding: 2px;
-    /* position: relative; */
-    /* width: 400px; */
-    /* height: 200px; */
-    /* border: 3px solid #73AD21; */
-    /* margin-bottom: 80px;
-    margin-right: 125px; */
 }
 .return-button {
     padding: 2px;
-    position: relative;
-    /* width: 400px; */
-    /* height: 200px; */
-    /* border: 3px solid #73AD21; */
 
-    margin-right: 58px;
+    position: relative;
 }
 
 .order-button {
@@ -131,15 +134,29 @@
     border: 0px;
     color: white;
     padding-top: 12px;
-    /* margin-left: -78px; */
 }
-.icon-cart {
-    /* margin-left: -10px; */
-}
+
 .ul-menu {
     margin: 18px;
     padding-left: 2rem;
 }
 .cart-text {
     color: white;
+}
+
+.nav-right {
+    display: flex;
+}
+
+.nav-right > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+}
+
+@media screen and (max-width: 991px) {
+    .main-nav {
+        width: 100%;
+    }
 }

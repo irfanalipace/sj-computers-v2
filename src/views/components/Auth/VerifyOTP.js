@@ -5,9 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { verifyOtp } from "@store/auth/authThunks";
 import Loader from "@common/Spinner/Spinner";
 import { useFormValidation } from "@hooks/useFormValidation";
+import ApiService from "@services/apiService";
 import { loginApi } from "@api/auth";
 
 import "@pages/Auth/auth.css";
+import { getUserEmail, getUserPassword } from "@services/jwtService";
 
 const VerifyOTP = () => {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
@@ -24,11 +26,11 @@ const VerifyOTP = () => {
 
     const apiError = useSelector((state) => state.auth.apiError);
     const isLoading = useSelector((state) => state.auth.isLoading);
+    const accessToken = useSelector((state) => state.auth.accessToken);
     const [fieldErrors, setFieldErrors] = useState({});
     const [email, setEmail] = useState("");
     const [mounted, setMounted] = useState(false);
     const [timer, setTimer] = useState(20);
-    const user = useSelector((state) => state.auth.user);
 
     useEffect(() => {
         setFieldErrors({ ...errors });
@@ -42,8 +44,11 @@ const VerifyOTP = () => {
         if (timer >= 1) setTimer((state) => state - 1);
     }, [timer]);
 
+    const password = getUserPassword();
+
     useEffect(() => {
-        setEmail(user.email);
+        setEmail(getUserEmail());
+        ApiService.setHeader("Authorization", "Bearer " + accessToken);
         setMounted(true);
         return () => {
             setMounted(false);
@@ -51,7 +56,11 @@ const VerifyOTP = () => {
     }, []);
 
     const resendOTP = async () => {
-        if (timer === 0) await loginApi(user);
+        if (timer === 0)
+            await loginApi({
+                email,
+                password,
+            });
         setTimer(20);
     };
 
@@ -60,7 +69,7 @@ const VerifyOTP = () => {
 
     function verifyOtpFunction() {
         const credentials = {
-            opt: values.otp,
+            otp: values.otp,
         };
         dispatch(verifyOtp(credentials, () => navigate("/")));
     }

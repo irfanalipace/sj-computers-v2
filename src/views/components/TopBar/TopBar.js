@@ -76,7 +76,7 @@ export default function TopBar() {
                             </a>
                         </li>
                     </ul>
-                    <span style={{ textAlign: "end" }}>Get Top Deals Now</span>
+                    {/* <span style={{ textAlign: "end" }}>Get Top Deals Now</span> */}
                 </div>
             </header>
 
