@@ -1,7 +1,24 @@
-/* .flex-container{
-    margin: 57px;
-} */
-
+.cart-mein-dev {
+    padding-top: 20px;
+    padding-left: 65px;
+    padding-right: 65px;
+    padding-bottom: 4px;
+}
+.shop-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+ 
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 28px;
+     
+        color: #000000;
+  }
+  
 
 .ssd-image{
     max-width: 100%;
@@ -22,19 +39,19 @@
         
         color: #000000;
     
-}.price-item{
+}
+
+.price-heading{
    
-        width: 64px;
-        height: 19px;
-        left: 950px;
-        top: 223px;
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 19px;
-        color: #000000;
-    
+   text-align: end;
+    top: 223px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+
 }
 .shopping-heading {
     margin-left: 10px;
@@ -54,7 +71,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
-    line-height: 17px;
+    line-height: 24px;
     margin-left: -29px;
     color: #333333;
     list-style: none;
@@ -102,4 +119,70 @@
  head:nth-child(2){
 background-color: #000000;
  }
+
+
+
+ .checkout-button-side {
+    background-color: none;
+    /* width: 391px; */
+    /* margin-top: 12px;
+    margin-left: 35px; */
+    background: #38C056;
+    border-radius: 10px;
+    border-color: #38C056;
+    height: 49px;
+}
+.card-checkout {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease-in-out;
+    
+  }
+  .sub-title{
+margin-right: 172px;
+margin-top: 10px;
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+
+color: #000000;
+  }
+  .checkbox-paragraph {
+    margin-right: 10px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    align-items: center;
+    color: #333333;
+}
+.checkout-button {
+    background-color: none;
+    margin-top: 12px;
+    /* margin-left: 35px; */
+    background: #38C056;
+    border-radius: 10px;
+    border-color: #38C056;
+    height: 49px;
+    width: 403px;
+    max-width: 99%;
+}
+.button-checkout-data {
+   text-align: center;
  
+}
+  .checkout-button:hover{
+    background: #38C056;
+      
+   }.checkout-button:active{
+    background: #38C056 !important;
+   }
+  .card-body-text {
+    text-align: center;
+    margin: 4px;
+}.card-box{
+    padding: 10px;
+}

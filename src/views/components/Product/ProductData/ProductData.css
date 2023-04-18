@@ -1,0 +1,98 @@
+.most-demandind{
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  /* identical to box height */
+  
+  
+  color: #318243;
+}
+.item-title{
+  
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 22px;
+
+/* Color Secondary */
+
+color: #000000;
+}
+.heading {
+  font-size: 25px;
+  margin-right: 25px;
+}
+
+.fa {
+  font-size: 25px;
+}
+
+.checked {
+  color: orange;
+  font-size: 12px;
+  
+}
+
+.chek {
+  
+  font-size: 12px;
+}
+.links-rting{
+text-decoration: none;
+font-size: 12px;
+}
+.review{
+  justify-content: space-between;
+  display: inline-flex;
+
+}
+.star{
+  margin-right: 19px;
+}
+.hr-rorate{
+  height: 0px;
+left: 781px;
+top: 239px;
+transform: rotate(45deg);
+  height: 2px;
+  background-color: black;
+  border: none;
+border: 1px solid #07631C;
+transform: rotate(90deg);
+}
+.selling-button{
+  
+    max-width: 100%;
+    /* width: 73px; */
+    /* height: 23px; */
+    left: 0px;
+    top: 0.01px;
+    background: #000000;
+    border-radius: 5px;
+    color: white;
+   
+    margin-right: 10px;
+}
+.moniter-links{
+  text-decoration: none;
+  font-size: 12px;
+  
+  }
+  .moniter-data{
+   margin-right: 80px;
+    
+    }
+  .item-data{
+    display: flex;
+  margin-top: 4px;
+      justify-content: space-between;
+  
+  }
+  .size-text{
+    font-size: 12px;
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+  }

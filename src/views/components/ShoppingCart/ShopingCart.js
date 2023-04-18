@@ -4,100 +4,63 @@ import ssd from "@images/shipping-cart/ssd-pannel.png";
 import "./ShopingCart.css";
 import { Link } from "react-router-dom";
 import { SubTotal } from "./CheckOut/SubTotal";
+import Header from "@components/Header/Header";
+import { CartItem } from "./CartItem/CartItem";
 export const ShopingCart = () => {
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-9">
-                    <div class="card">
-                        <div className="row">
-                            <div className="col-md-10">
-                                
-                                <h3 className="shopping-heading">
-                                    Shopping Cart
-                                </h3>
-                                 
-                            </div>
-                             <div className="col-md-2">
-                                <p className="text-left">Price</p>
-                                </div>
-                            
-                        </div>
-                        <hr></hr>
-                        <div className="row">
-                            <div className="col-md-2">
-                                <img src={ssd} alt="" className="ssd-image" />
-                            </div>
-                            <div className="col-md-10">
-                                <div className="row">
+        <div>
+            <div className=" cart-mein-dev">
+                <div className="row">
+                    <div className="col-md-9">
+                        <div class="card card-box">
+                            <div className="row mx-0">
+                                <div className="shop-heading">
                                     <div className="col-md-10">
-                                        <p>
-                                            <strong className="item-details">
-                                                SAMSUNG 980 PRO SSD 2TB PCIe
-                                                NVMe Gen 4 Gaming M.2 Internal<br></br>
-                                                Control, MZ-V8P2T0B
-                                            </strong>
-                                        </p>
-                                        <ul className="item-list">
-                                            <li>
-                                                <span className="item-stock">
-                                                    In Stock
-                                                </span>
-                                            </li>
-                                            <li>Discount Available</li>
-                                            <li>
-                                                <span className="item-capacity">
-                                                    Capacity:
-                                                </span>{" "}
-                                                <span clasName="item-capacity1">
-                                                    2TB
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span className="item-capacity">
-                                                    Style:
-                                                </span>{" "}
-                                                <span clasName="item-style1">
-                                                    980 PRO
-                                                </span>
-                                            </li>
-                                        </ul>
+                                        <h3 className="shop-heading">
+                                            Shopping Cart
+                                        </h3>
                                     </div>
                                     <div className="col-md-2">
-                                        <p>
-                                            <strong className="price-item">
-                                                $120.50
+                                        <p className="price-heading">Price</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr className="hrline"></hr>
+                            <div className="items">
+                                <CartItem />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <div className="card card-checkout">
+                            <div className="card-body">
+                                <div className="card-body-text">
+                                    <div className="text-body">
+                                        <span className="sub-title">
+                                            Subtotal( 2 items):
+                                            <strong className="price-items">
+                                                $120
                                             </strong>
-                                        </p>
+                                        </span>
+                                        <label>
+                                            <input
+                                                type="checkbox"
+                                                name="myCheckbox"
+                                                className="checkbox-paragraph"
+                                            />
+                                            This is a paragraph with a checkbox.
+                                        </label>
                                     </div>
-                                    <div>
-                                        <select className="selectpicker selectbutton-option">
-                                            <option>Qty: 1</option>
-                                            <option>Ketchup</option>
-                                            <option>Relish</option>
-                                        </select>
-
-                                        <button class="button-link">
-                                            Delete
-                                        </button>
-                                        <button class="button-link">
-                                            Save for later
-                                        </button>
-                                        <button class="button-link">
-                                            Compare with similer item
-                                        </button>
-                                        <button class="button-link">
-                                            Share
-                                        </button>
-                                    </div>
+                                </div>
+                                <div className="button-checkout-data">
+                                    <button className="btn btn-primary checkout-button">
+                                        Proceed to checkout
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="col-md-3">
-               <SubTotal />
-               </div>
             </div>
         </div>
     );
