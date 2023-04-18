@@ -110,5 +110,5 @@ Route::middleware(['auth:api'])->group(function () {
     /*
      * update state api
      */
-    Route::post('update-state', [CartController::class, 'updateState'])->name('update-state');
+    Route::post('update-state', [StateController::class, 'updateState'])->name('update-state');
 });
