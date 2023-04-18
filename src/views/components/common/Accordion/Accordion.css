@@ -63,3 +63,21 @@
     font-weight: 500;
     font-size: 12px;
 }
+
+.accordion-content {
+    padding: 0px 50px;
+    padding-bottom: 10px;
+}
+
+.accordion-body {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.accordion-content-heading {
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 18px;
+}

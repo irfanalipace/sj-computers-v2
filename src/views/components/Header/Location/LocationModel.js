@@ -25,7 +25,7 @@ function UpdateStateModel({ isOpen, handleClose }) {
     };
 
     const clickHandler = async () => {
-        dispatch(updateState(state), handleClose);
+        dispatch(updateState(state, handleClose));
     };
 
     const findZipCode = () => {

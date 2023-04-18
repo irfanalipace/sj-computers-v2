@@ -1,0 +1,65 @@
+.autofill-container {
+    background: linear-gradient(90deg, #e3ffea 0.7%, #a8f3b9 78.67%);
+    border: 1px solid #318243;
+    border-radius: 8px;
+    padding: 20px 50px;
+    margin: 15px 0;
+}
+
+.autofill-btn {
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 14px;
+    background: #ffffff;
+    border: none;
+    width: 84px;
+    height: 37px;
+    border-radius: 5px;
+}
+
+.autofill-container p {
+    font-family: "Inter";
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.shipping-form .field-section {
+    margin-bottom: 20px;
+}
+
+.shipping-form input {
+    height: 35px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.shipping-form select {
+    height: 37px;
+    border-radius: 7px;
+}
+
+.shipping-form label,
+.shipping-form .input-field,
+.shipping-form .input-field::placeholder {
+    font-family: "Inter";
+    font-weight: 500;
+    font-size: 14px;
+    display: block;
+    width: 100%;
+}
+
+shipping-form .input-field::placeholder {
+    padding-left: 20px;
+}
+
+.shipping-form .form-button {
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 12px;
+    width: 129px;
+    height: 36px;
+    background: #38c056;
+    color: white;
+    border: none;
+}

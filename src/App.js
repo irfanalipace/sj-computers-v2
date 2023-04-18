@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 
 import { getToken } from "@services/jwtService";
 import { Router } from "@src/Routes";
-import { ALREADY_LOGGED_IN } from "@store/auth/authSlice";
+import { alreadyLoggedIn } from "@store/auth/authThunks";
 import Header from "@components/Header/Header";
 import Footer from "@components/Footer/Footer";
 
@@ -16,7 +16,7 @@ import "./App.css";
 function App() {
     const dispatch = useDispatch();
     const token = getToken();
-    if (token) dispatch(ALREADY_LOGGED_IN());
+    if (token) dispatch(alreadyLoggedIn(token));
 
     return (
         <div>

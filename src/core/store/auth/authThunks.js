@@ -9,6 +9,7 @@ import {
     VERIFY_EMAIL,
     VERIFY_OTP,
     API_ERROR,
+    ALREADY_LOGGED_IN,
 } from "@store/auth/authSlice";
 import {
     loginApi,
@@ -29,6 +30,8 @@ import {
     getUserName,
     getUserEmail,
 } from "@services/jwtService";
+
+import ApiService from "@services/apiService";
 
 export const login = (credentials) => {
     return async (dispatch) => {
@@ -137,5 +140,16 @@ export const forgetPassword = (email, cb) => {
             console.log("Something went wrong in forgetPasswordApi", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
+    };
+};
+
+export const alreadyLoggedIn = (token) => {
+    return async (dispatch) => {
+        let user = {
+            name: getUserName(),
+            email: getUserEmail(),
+        };
+        ApiService.setHeader("Authorization", "Bearer " + token);
+        dispatch(ALREADY_LOGGED_IN(user));
     };
 };

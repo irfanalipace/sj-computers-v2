@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
@@ -13,8 +13,10 @@ import LoginCart from "./LoginCart";
 import Search from "./Search";
 const Header = () => {
     const currentState = useSelector((state) => state.states.currentState);
+    const states = useSelector((state) => state.states.states);
     const user = useSelector((state) => state.auth.user);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const [country, setCountry] = useState(false);
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
     const location = useLocation();
@@ -26,6 +28,15 @@ const Header = () => {
         "email-sent",
         "checkout",
     ];
+
+    useEffect(() => {
+        let countryName = states.filter(
+            (state) => state.id === currentState.id
+        );
+        console.log("countryName", countryName);
+
+        setCountry(countryName[0]?.name);
+    }, [currentState]);
 
     return (
         <>
@@ -45,9 +56,7 @@ const Header = () => {
                                 }}
                             >
                                 <p></p>Deliver to <br></br>
-                                {currentState
-                                    ? currentState
-                                    : "Select Location"}
+                                {country ? country : "Select Location"}
                             </Button>
                         </div>
                         {show && (
