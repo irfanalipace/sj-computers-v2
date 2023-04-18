@@ -106,4 +106,9 @@ Route::middleware(['auth:api'])->group(function () {
     *Add more quantity
     */
     Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('addQtyCart');
+
+    /*
+     * update state api
+     */
+    Route::post('update-state', [CartController::class, 'updateState'])->name('update-state');
 });
