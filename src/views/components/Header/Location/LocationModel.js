@@ -4,9 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { fetchStates } from "@store/states/statesThunks";
 import img1 from "@images/bottom-arrow.png";
+import { updateState } from "@store/states/statesThunks";
+import Loader from "@common/Spinner/Spinner";
+
 import "./LocationModel.css";
 function UpdateStateModel({ isOpen, handleClose }) {
     const states = useSelector((state) => state.states.states);
+    const isLoading = useSelector((state) => state.states.isLoading);
     const [state, setState] = useState("Ship outside the US");
     const [zipCode, setZipCode] = useState("");
     const dispatch = useDispatch();
@@ -20,6 +24,11 @@ function UpdateStateModel({ isOpen, handleClose }) {
         setZipCode(e.target.value.replace(/\D/g, ""));
     };
 
+    const clickHandler = async () => {
+        dispatch(updateState(state));
+        handleClose();
+    };
+
     const findZipCode = () => {
         setState(
             states.filter(
@@ -31,7 +40,7 @@ function UpdateStateModel({ isOpen, handleClose }) {
     };
 
     return (
-        <Modal show={isOpen} onHide={handleClose}>
+        <Modal show={isOpen} onHide={handleClose} centered>
             <Modal.Header className="header">
                 <Modal.Title>Choose to your location</Modal.Title>
             </Modal.Header>
@@ -116,8 +125,8 @@ function UpdateStateModel({ isOpen, handleClose }) {
                 </Dropdown>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={handleClose} className="done-button">
-                    Done
+                <Button onClick={clickHandler} className="done-button">
+                    {isLoading ? <Loader /> : "Submit"}
                 </Button>
             </Modal.Footer>
         </Modal>

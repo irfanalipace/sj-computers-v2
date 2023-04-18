@@ -31,6 +31,8 @@ const VerifyOTP = () => {
     const [email, setEmail] = useState("");
     const [mounted, setMounted] = useState(false);
     const [timer, setTimer] = useState(20);
+    const [isTimerFinished, setIsTimerFinished] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setFieldErrors({ ...errors });
@@ -40,27 +42,36 @@ const VerifyOTP = () => {
         setFieldErrors({ ...apiError });
     }, [apiError]);
 
-    useEffect(() => {
-        if (timer >= 1) setTimer((state) => state - 1);
-    }, [timer]);
-
     const password = getUserPassword();
 
     useEffect(() => {
+        const interval = setInterval(
+            () => setTimer((prevState) => prevState - 1),
+            1000
+        );
         setEmail(getUserEmail());
         ApiService.setHeader("Authorization", "Bearer " + accessToken);
         setMounted(true);
         return () => {
+            clearInterval(interval);
             setMounted(false);
         };
     }, []);
 
+    useEffect(() => {
+        if (timer === 0) setIsTimerFinished(true);
+    }, [timer]);
+
     const resendOTP = async () => {
-        if (timer === 0)
+        setLoading(true);
+        if (isTimerFinished)
             await loginApi({
                 email,
                 password,
             });
+        setLoading(false);
+        setIsTimerFinished(false);
+
         setTimer(20);
     };
 
@@ -119,17 +130,24 @@ const VerifyOTP = () => {
                     {isLoading ? <Loader /> : "Verify OTP"}
                 </button>
             </div>
-            <p className="text-muted small d-flex justify-content-center">
-                <a
-                    onClick={resendOTP}
-                    href="#"
-                    disabled={!timer}
-                    className="text-decoration-none"
-                >
-                    Resend OTP
-                </a>
-                <p>{timer}</p>
-            </p>
+            {isLoading ? (
+                <Loader />
+            ) : (
+                <div className="align-items-center d-flex flex-column justify-content-center">
+                    <p className="text-muted small d-flex justify-content-center">
+                        <button
+                            onClick={resendOTP}
+                            disabled={!isTimerFinished || isLoading || loading}
+                            className="bg-white border-0 text-primary"
+                        >
+                            Resend OTP
+                        </button>
+                    </p>
+                    <div className="border-primary text-primary timer">
+                        {isTimerFinished ? "0" : timer}
+                    </div>
+                </div>
+            )}
             <p className="forgot-password text-left">
                 <a href="/sign-in" className="text-decoration-none">
                     I need more help

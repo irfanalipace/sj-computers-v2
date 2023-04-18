@@ -21,9 +21,11 @@ const productSlice = createSlice({
         FETCH_STATES: (state, action) => {
             state.states = [...action.payload];
             state.currentPage = state.currentPage + 1;
+            state.isLoading = false;
         },
         UPDATE_STATE: (state, action) => {
             state.currentState = { ...action.payload };
+            state.isLoading = false;
         },
         CLEAR_STATES: (state) => {
             state.states = [];

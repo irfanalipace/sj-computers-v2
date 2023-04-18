@@ -173,6 +173,17 @@ h5:after {
     text-align: center !important;
     margin-bottom: 20px;
 }
+
+.timer {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid;
+    border-radius: 50%;
+}
+
 .img-logo {
     margin-top: -45px;
     font-size: 22px;
