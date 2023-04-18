@@ -10,6 +10,7 @@ import Emailsent from "@pages/Auth/EmailSent";
 import Product from "@pages/Product/Product";
 import Category from "@pages/Category/Category";
 import Cart from "@components/ShoppingCart/Cart";
+import Checkout from "@pages/Checkout/Checkout";
 
 export const Router = () => {
     const routes = [
@@ -75,8 +76,12 @@ export const Router = () => {
             ),
         },
         {
-            path: "/Cart",
+            path: "/cart",
             element: <Cart />,
+        },
+        {
+            path: "/checkout/:productId",
+            element: <Checkout />,
         },
         {
             path: "*",

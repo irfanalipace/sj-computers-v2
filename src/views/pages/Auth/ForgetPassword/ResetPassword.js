@@ -63,7 +63,7 @@ const PasswordForm = () => {
             access_token: token,
             email: values.email,
             password: values.password,
-            confirmPassword: values.confirmPassword,
+            confirm_password: values.confirmPassword,
         };
         dispatch(resetPassword(credentials, () => navigate("/login")));
     }

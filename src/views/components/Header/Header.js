@@ -18,17 +18,18 @@ const Header = () => {
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
     const location = useLocation();
-    const authRoutes = [
-        "/login",
-        "/register",
-        "/forgot_password",
-        "/forget-password",
-        "/email-sent",
+    const nonHeaderRoutes = [
+        "login",
+        "register",
+        "forgot_password",
+        "forget-password",
+        "email-sent",
+        "checkout",
     ];
 
     return (
         <>
-            {!authRoutes.includes(location.pathname) && (
+            {!nonHeaderRoutes.includes(location.pathname.split("/")[1]) && (
                 <header className="navbar navbar-expand-lg header-background px-3">
                     <a className="navbar-brand" href="#">
                         <img src={footerlogo} alt="" className="homepage-img" />

@@ -1,0 +1,65 @@
+.accordion {
+    border-bottom: 1px solid #ddd;
+}
+
+.accordion-header {
+    background-color: transparent;
+    cursor: pointer;
+    padding: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header h3 {
+    margin: 0;
+    color: #000;
+    transition: color 0.3s ease;
+}
+.accordion-header.active .change-btn,
+.accordion-header.active .summary {
+    display: none;
+}
+
+.accordion-header.active h3,
+.accordion-header.active h4 {
+    color: #318243;
+}
+
+.accordion-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.accordion-content.active {
+    max-height: 500px;
+    opacity: 1;
+}
+
+.accordion-header h4,
+.accordion-header h3 {
+    margin-bottom: 0;
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.accordion-header h3 {
+    margin-left: 20px;
+}
+
+.accordion-header .change-btn {
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 12px;
+    background: white;
+    border: none;
+    color: #1270c4;
+}
+
+.accordion-header p {
+    margin-bottom: 0;
+    font-family: "Inter";
+    font-weight: 500;
+    font-size: 12px;
+}

@@ -76,7 +76,12 @@ const PasswordForm = () => {
                     onChange={handleChange}
                 />
                 <div className="d-flex justify-content-end">
-                    <Link to={"/forget-password"}>Forget Password?</Link>{" "}
+                    <Link
+                        to={"/forget-password"}
+                        className="text-decoration-none mt-2"
+                    >
+                        Forget Password?
+                    </Link>
                 </div>
                 {fieldErrors && (
                     <p className="text-danger">

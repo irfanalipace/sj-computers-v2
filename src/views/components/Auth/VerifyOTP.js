@@ -124,21 +124,23 @@ const VerifyOTP = () => {
             <div className="d-grid justify-content-center">
                 <button
                     type="submit"
-                    className="btn btn-primary login-button"
+                    className="btn btn-primary login-button verify-otp-btn"
                     disabled={isLoading}
                 >
                     {isLoading ? <Loader /> : "Verify OTP"}
                 </button>
             </div>
-            {isLoading ? (
-                <Loader />
+            {loading ? (
+                <div className="d-flex justify-content-center mt-2">
+                    <Loader />
+                </div>
             ) : (
                 <div className="align-items-center d-flex flex-column justify-content-center">
                     <p className="text-muted small d-flex justify-content-center">
                         <button
                             onClick={resendOTP}
                             disabled={!isTimerFinished || isLoading || loading}
-                            className="bg-white border-0 text-primary"
+                            className="bg-white border-0 text-primary resend-otp-btn"
                         >
                             Resend OTP
                         </button>

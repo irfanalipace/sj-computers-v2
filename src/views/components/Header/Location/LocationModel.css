@@ -78,18 +78,18 @@
 .done-button {
     width: -13px;
     height: 40px;
-
     background: #52ac66;
     border-radius: 8px;
 }
 .done-button:hover {
-    content: none;
+    background-color: white;
+    color: #52ac66;
 }
-.done-button:active {
-    background-color: transparent;
-}
+.done-button:active,
 .done-button:focus {
-    background-color: transparent;
+    background: #52ac66;
+    color: white;
+    border: none;
 }
 
 .dropdown-button-box:hover {

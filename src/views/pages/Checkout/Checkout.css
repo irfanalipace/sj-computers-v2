@@ -1,0 +1,47 @@
+.checkout-page {
+    background-color: white;
+}
+
+.checkout-header {
+    width: 100%;
+    background-color: #00305e;
+    padding: 15px 50px;
+}
+
+.checkout-header-wrapper {
+    width: 50%;
+}
+
+.checkout-header .logo-wrapper {
+    width: 180px;
+    height: 62px;
+    max-width: 90%;
+}
+
+.checkout-header .logo-wrapper img {
+    width: 100%;
+}
+
+.checkout-header-wrapper .items-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkout-header-wrapper .items-number h3 {
+    font-family: "Inter";
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 0;
+    color: white;
+}
+
+.checkout-page-inner {
+    width: 75%;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+.checkout-page {
+    background-color: white;
+}
