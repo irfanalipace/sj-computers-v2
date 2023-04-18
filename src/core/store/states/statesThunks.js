@@ -19,11 +19,12 @@ export const fetchStates = () => {
     };
 };
 
-export const updateState = (data) => {
+export const updateState = (data, cb) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             await updateStateApi(data);
+            if (typeof cb === "function") cb();
             dispatch({ type: UPDATE_STATE, payload: data.state });
         } catch (error) {
             console.log("Something went wrong in states", error);

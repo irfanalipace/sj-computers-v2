@@ -8,16 +8,22 @@ import ProductThreeItem from "@components/homeproduct/product3category/ProductTh
 import Recommendation from "@components/Recommendation/Recommendation";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
 
+import "./Home.css";
+
 const Home = () => {
     return (
         <div>
             <TopBar />
-            <BannerSlider />
-            <ProductType />
+            <div className="banner-wrapper">
+                <BannerSlider />
+            </div>
+            <div className="catergory-grid-wrapper">
+                <ProductType />
+            </div>
+            <ProductsGrid />
             {/* <CarouselSlider /> */}
             {/* <ProductThreeItem /> */}
             {/* <Recommendation /> */}
-            <ProductsGrid />
         </div>
     );
 };

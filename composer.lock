@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3cdf3db48739435438671e784b9c09ea",
+    "content-hash": "cc9837d0d845854d28e1f0ba08957f5f",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -73,6 +73,62 @@
             "time": "2023-01-10T21:23:24+00:00"
         },
         {
+            "name": "asm89/stack-cors",
+            "version": "v2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/asm89/stack-cors.git",
+                "reference": "73e5b88775c64ccc0b84fb60836b30dc9d92ac4a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/asm89/stack-cors/zipball/73e5b88775c64ccc0b84fb60836b30dc9d92ac4a",
+                "reference": "73e5b88775c64ccc0b84fb60836b30dc9d92ac4a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2|^8.0",
+                "symfony/http-foundation": "^4|^5|^6",
+                "symfony/http-kernel": "^4|^5|^6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7|^9",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Asm89\\Stack\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander",
+                    "email": "iam.asm89@gmail.com"
+                }
+            ],
+            "description": "Cross-origin resource sharing library and stack middleware",
+            "homepage": "https://github.com/asm89/stack-cors",
+            "keywords": [
+                "cors",
+                "stack"
+            ],
+            "support": {
+                "issues": "https://github.com/asm89/stack-cors/issues",
+                "source": "https://github.com/asm89/stack-cors/tree/v2.1.1"
+            },
+            "time": "2022-01-18T09:12:03+00:00"
+        },
+        {
             "name": "bacon/bacon-qr-code",
             "version": "2.0.8",
             "source": {
@@ -128,26 +184,25 @@
         },
         {
             "name": "brick/math",
-            "version": "0.10.2",
+            "version": "0.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/math.git",
-                "reference": "459f2781e1a08d52ee56b0b1444086e038561e3f"
+                "reference": "0ad82ce168c82ba30d1c01ec86116ab52f589478"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/math/zipball/459f2781e1a08d52ee56b0b1444086e038561e3f",
-                "reference": "459f2781e1a08d52ee56b0b1444086e038561e3f",
+                "url": "https://api.github.com/repos/brick/math/zipball/0ad82ce168c82ba30d1c01ec86116ab52f589478",
+                "reference": "0ad82ce168c82ba30d1c01ec86116ab52f589478",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*",
-                "php": "^7.4 || ^8.0"
+                "php": "^8.0"
             },
             "require-dev": {
                 "php-coveralls/php-coveralls": "^2.2",
                 "phpunit/phpunit": "^9.0",
-                "vimeo/psalm": "4.25.0"
+                "vimeo/psalm": "5.0.0"
             },
             "type": "library",
             "autoload": {
@@ -172,7 +227,7 @@
             ],
             "support": {
                 "issues": "https://github.com/brick/math/issues",
-                "source": "https://github.com/brick/math/tree/0.10.2"
+                "source": "https://github.com/brick/math/tree/0.11.0"
             },
             "funding": [
                 {
@@ -180,7 +235,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-10T22:54:19+00:00"
+            "time": "2023-01-15T23:15:59+00:00"
         },
         {
             "name": "darryldecode/cart",
@@ -1134,34 +1189,34 @@
         },
         {
             "name": "fruitcake/laravel-cors",
-            "version": "v3.0.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruitcake/laravel-cors.git",
-                "reference": "7c036ec08972d8d5d9db637e772af6887828faf5"
+                "reference": "783a74f5e3431d7b9805be8afb60fd0a8f743534"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruitcake/laravel-cors/zipball/7c036ec08972d8d5d9db637e772af6887828faf5",
-                "reference": "7c036ec08972d8d5d9db637e772af6887828faf5",
+                "url": "https://api.github.com/repos/fruitcake/laravel-cors/zipball/783a74f5e3431d7b9805be8afb60fd0a8f743534",
+                "reference": "783a74f5e3431d7b9805be8afb60fd0a8f743534",
                 "shasum": ""
             },
             "require": {
-                "fruitcake/php-cors": "^1.2",
+                "asm89/stack-cors": "^2.0.1",
                 "illuminate/contracts": "^6|^7|^8|^9",
                 "illuminate/support": "^6|^7|^8|^9",
-                "php": "^7.4|^8.0"
+                "php": ">=7.2"
             },
             "require-dev": {
                 "laravel/framework": "^6|^7.24|^8",
                 "orchestra/testbench-dusk": "^4|^5|^6|^7",
-                "phpunit/phpunit": "^9",
+                "phpunit/phpunit": "^6|^7|^8|^9",
                 "squizlabs/php_codesniffer": "^3.5"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "2.1-dev"
                 },
                 "laravel": {
                     "providers": [
@@ -1197,7 +1252,7 @@
             ],
             "support": {
                 "issues": "https://github.com/fruitcake/laravel-cors/issues",
-                "source": "https://github.com/fruitcake/laravel-cors/tree/v3.0.0"
+                "source": "https://github.com/fruitcake/laravel-cors/tree/v2.2.0"
             },
             "funding": [
                 {
@@ -1210,78 +1265,7 @@
                 }
             ],
             "abandoned": true,
-            "time": "2022-02-23T14:53:22+00:00"
-        },
-        {
-            "name": "fruitcake/php-cors",
-            "version": "v1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fruitcake/php-cors.git",
-                "reference": "58571acbaa5f9f462c9c77e911700ac66f446d4e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fruitcake/php-cors/zipball/58571acbaa5f9f462c9c77e911700ac66f446d4e",
-                "reference": "58571acbaa5f9f462c9c77e911700ac66f446d4e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4|^8.0",
-                "symfony/http-foundation": "^4.4|^5.4|^6"
-            },
-            "require-dev": {
-                "phpstan/phpstan": "^1.4",
-                "phpunit/phpunit": "^9",
-                "squizlabs/php_codesniffer": "^3.5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Fruitcake\\Cors\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fruitcake",
-                    "homepage": "https://fruitcake.nl"
-                },
-                {
-                    "name": "Barryvdh",
-                    "email": "barryvdh@gmail.com"
-                }
-            ],
-            "description": "Cross-origin resource sharing library for the Symfony HttpFoundation",
-            "homepage": "https://github.com/fruitcake/php-cors",
-            "keywords": [
-                "cors",
-                "laravel",
-                "symfony"
-            ],
-            "support": {
-                "issues": "https://github.com/fruitcake/php-cors/issues",
-                "source": "https://github.com/fruitcake/php-cors/tree/v1.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://fruitcake.nl",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/barryvdh",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-02-20T15:07:15+00:00"
+            "time": "2022-02-23T14:25:13+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -1347,22 +1331,22 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.5.0",
+            "version": "7.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "b50a2a1251152e43f6a37f0fa053e730a67d25ba"
+                "reference": "b964ca597e86b752cd994f27293e9fa6b6a95ed9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b50a2a1251152e43f6a37f0fa053e730a67d25ba",
-                "reference": "b50a2a1251152e43f6a37f0fa053e730a67d25ba",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b964ca597e86b752cd994f27293e9fa6b6a95ed9",
+                "reference": "b964ca597e86b752cd994f27293e9fa6b6a95ed9",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "guzzlehttp/promises": "^1.5",
-                "guzzlehttp/psr7": "^1.9 || ^2.4",
+                "guzzlehttp/psr7": "^1.9.1 || ^2.4.5",
                 "php": "^7.2.5 || ^8.0",
                 "psr/http-client": "^1.0",
                 "symfony/deprecation-contracts": "^2.2 || ^3.0"
@@ -1455,7 +1439,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.5.0"
+                "source": "https://github.com/guzzle/guzzle/tree/7.5.1"
             },
             "funding": [
                 {
@@ -1471,7 +1455,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-08-28T15:39:27+00:00"
+            "time": "2023-04-17T16:30:08+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1559,22 +1543,22 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.4.4",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "3cf1b6d4f0c820a2cf8bcaec39fc698f3443b5cf"
+                "reference": "b635f279edd83fc275f822a1188157ffea568ff6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/3cf1b6d4f0c820a2cf8bcaec39fc698f3443b5cf",
-                "reference": "3cf1b6d4f0c820a2cf8bcaec39fc698f3443b5cf",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/b635f279edd83fc275f822a1188157ffea568ff6",
+                "reference": "b635f279edd83fc275f822a1188157ffea568ff6",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2.5 || ^8.0",
                 "psr/http-factory": "^1.0",
-                "psr/http-message": "^1.0",
+                "psr/http-message": "^1.1 || ^2.0",
                 "ralouphie/getallheaders": "^3.0"
             },
             "provide": {
@@ -1594,9 +1578,6 @@
                 "bamarni-bin": {
                     "bin-links": true,
                     "forward-command": false
-                },
-                "branch-alias": {
-                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -1658,7 +1639,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.4.4"
+                "source": "https://github.com/guzzle/psr7/tree/2.5.0"
             },
             "funding": [
                 {
@@ -1674,7 +1655,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-09T13:19:02+00:00"
+            "time": "2023-04-17T16:11:26+00:00"
         },
         {
             "name": "intervention/image",
@@ -3585,16 +3566,16 @@
         },
         {
             "name": "nyholm/psr7",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Nyholm/psr7.git",
-                "reference": "bf4aebd170fadf5fd808c70b90535de327e81a50"
+                "reference": "e874c8c4286a1e010fb4f385f3a55ac56a05cc93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Nyholm/psr7/zipball/bf4aebd170fadf5fd808c70b90535de327e81a50",
-                "reference": "bf4aebd170fadf5fd808c70b90535de327e81a50",
+                "url": "https://api.github.com/repos/Nyholm/psr7/zipball/e874c8c4286a1e010fb4f385f3a55ac56a05cc93",
+                "reference": "e874c8c4286a1e010fb4f385f3a55ac56a05cc93",
                 "shasum": ""
             },
             "require": {
@@ -3647,7 +3628,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Nyholm/psr7/issues",
-                "source": "https://github.com/Nyholm/psr7/tree/1.6.0"
+                "source": "https://github.com/Nyholm/psr7/tree/1.6.1"
             },
             "funding": [
                 {
@@ -3659,7 +3640,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-09T08:34:27+00:00"
+            "time": "2023-04-17T16:03:48+00:00"
         },
         {
             "name": "opis/closure",
@@ -4752,20 +4733,20 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "4.7.3",
+            "version": "4.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "433b2014e3979047db08a17a205f410ba3869cf2"
+                "reference": "60a4c63ab724854332900504274f6150ff26d286"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/433b2014e3979047db08a17a205f410ba3869cf2",
-                "reference": "433b2014e3979047db08a17a205f410ba3869cf2",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/60a4c63ab724854332900504274f6150ff26d286",
+                "reference": "60a4c63ab724854332900504274f6150ff26d286",
                 "shasum": ""
             },
             "require": {
-                "brick/math": "^0.8.8 || ^0.9 || ^0.10",
+                "brick/math": "^0.8.8 || ^0.9 || ^0.10 || ^0.11",
                 "ext-json": "*",
                 "php": "^8.0",
                 "ramsey/collection": "^1.2 || ^2.0"
@@ -4828,7 +4809,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
-                "source": "https://github.com/ramsey/uuid/tree/4.7.3"
+                "source": "https://github.com/ramsey/uuid/tree/4.7.4"
             },
             "funding": [
                 {
@@ -4840,7 +4821,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-12T18:13:24+00:00"
+            "time": "2023-04-15T23:01:58+00:00"
         },
         {
             "name": "srmklive/paypal",
