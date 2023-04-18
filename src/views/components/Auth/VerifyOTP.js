@@ -26,7 +26,7 @@ const VerifyOTP = () => {
 
     const apiError = useSelector((state) => state.auth.apiError);
     const isLoading = useSelector((state) => state.auth.isLoading);
-    const accessToken = useSelector((state) => state.auth.accessToken);
+    // const accessToken = useSelector((state) => state.auth.accessToken);
     const [fieldErrors, setFieldErrors] = useState({});
     const [email, setEmail] = useState("");
     const [mounted, setMounted] = useState(false);
@@ -50,7 +50,7 @@ const VerifyOTP = () => {
             1000
         );
         setEmail(getUserEmail());
-        ApiService.setHeader("Authorization", "Bearer " + accessToken);
+        // ApiService.setHeader("Authorization", "Bearer " + accessToken);
         setMounted(true);
         return () => {
             clearInterval(interval);

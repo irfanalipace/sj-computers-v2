@@ -12,19 +12,21 @@ export const saveToken = (token, name, email) => {
     window.localStorage.setItem(TOKEN, token);
     window.localStorage.setItem(USER_NAME, name);
     window.localStorage.setItem(USER_EMAIL, email);
-    ApiService.setHeader("Authorization", "Bearer " + token);
+    window.localStorage.removeItem(PASSWORD);
+    window.localStorage.removeItem(TEMP_TOKEN);
 };
 
-export const updateToken = (token, id, email) => {
+export const updateToken = (token) => {
     window.localStorage.setItem(TOKEN, token);
 };
 
-export const saveUserID = (UserID) =>
-    window.localStorage.setItem(USER_NAME, UserID);
+export const saveUserName = (userName) =>
+    window.localStorage.setItem(USER_NAME, userName);
 
-export const saveTempToken = (token) =>
+export const saveTempToken = (token) => {
+    ApiService.setHeader("Authorization", "Bearer " + token);
     window.localStorage.setItem(TEMP_TOKEN, token);
-
+};
 export const getTempToken = () => window.localStorage.getItem(TEMP_TOKEN);
 
 export const saveUserEmail = (userEmail) =>
@@ -38,7 +40,7 @@ export const getUserPassword = () => window.localStorage.getItem(PASSWORD);
 export const destroyUserPassword = () =>
     window.localStorage.removeItem(PASSWORD);
 
-export const getUserID = () => window.localStorage.getItem(USER_NAME);
+export const getUserName = () => window.localStorage.getItem(USER_NAME);
 export const getUserEmail = () => window.localStorage.getItem(USER_EMAIL);
 
 export const destroyToken = () => {
@@ -55,8 +57,8 @@ export default {
     updateToken,
     destroyToken,
     saveUserEmail,
-    saveUserID,
-    getUserID,
+    saveUserName,
+    getUserName,
     getUserEmail,
     saveUserPassword,
     getUserPassword,

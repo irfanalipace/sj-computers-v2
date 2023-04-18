@@ -24,9 +24,10 @@ import {
     destroyToken,
     saveUserEmail,
     saveUserPassword,
-    destroyUserPassword,
     saveTempToken,
     getTempToken,
+    getUserName,
+    getUserEmail,
 } from "@services/jwtService";
 
 export const login = (credentials) => {
@@ -35,12 +36,13 @@ export const login = (credentials) => {
             dispatch({ type: LOADING, payload: {} });
             const response = await loginApi(credentials);
             let token = response.data.data.access_token;
-            saveToken("", "", credentials.email);
+            let name = response.data.data.user;
+            saveToken("", name, credentials.email);
             saveTempToken(token);
             saveUserPassword(credentials.password);
             dispatch({
                 type: LOGIN,
-                payload: { user: { ...credentials }, token },
+                payload: response.data.data,
             });
         } catch (error) {
             console.log("Something went wrong in login", error);
@@ -96,12 +98,12 @@ export const verifyOtp = (credentials) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            const response = await verifyOtpApi(credentials);
-            // let token = response.data.data.access_token;
+            await verifyOtpApi(credentials);
             let temp_token = getTempToken();
-            console.log("temp_token: " + temp_token);
-            saveToken(temp_token, "", credentials.email);
-            dispatch({ type: VERIFY_OTP, payload: {} });
+            let name = getUserName();
+            let email = getUserEmail();
+            saveToken(temp_token, name, credentials.email);
+            dispatch({ type: VERIFY_OTP, payload: { name, email } });
         } catch (error) {
             console.log("Something went wrong in login", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
