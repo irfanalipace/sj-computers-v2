@@ -11,7 +11,7 @@ export default function Product() {
     <div className="container">
         <div className="row">
             <div className="col-md-4">
-               {/* <ProductImage /> */}
+               <ProductImage />
             </div>
             <div className="col-md-4">
             <ProductData />
