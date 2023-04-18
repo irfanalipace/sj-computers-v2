@@ -65,7 +65,7 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     {
         return $this->hasOne(UserDetail::class);
     }
-    
+
     public function userState(){
         return $this->hasOne(UserState::class);
     }
