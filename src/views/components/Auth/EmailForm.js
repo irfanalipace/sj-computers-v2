@@ -66,7 +66,7 @@ export default function EmailForm({ onFormSubmit, form }) {
                     onChange={handleChange}
                 />
                 {fieldErrors && (
-                    <p className="text-danger">{fieldErrors.email}</p>
+                    <p className="fs-6 mt-1 text-danger">{fieldErrors.email}</p>
                 )}
             </div>
             <div className="d-grid justify-content-center">

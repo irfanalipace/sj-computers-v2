@@ -72,8 +72,8 @@
 .accordion-body {
     border: 1px solid lightgray;
     border-radius: 10px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .accordion-content-heading {

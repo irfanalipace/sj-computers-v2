@@ -91,7 +91,7 @@ const PasswordForm = () => {
                                 readOnly
                             />
                             {fieldErrors && (
-                                <p className="text-danger">
+                                <p className="fs-6 mt-1 text-danger">
                                     {fieldErrors.email}
                                 </p>
                             )}
@@ -109,7 +109,7 @@ const PasswordForm = () => {
                                 onChange={handleChange}
                             />
                             {fieldErrors && (
-                                <p className="text-danger">
+                                <p className="fs-6 mt-1 text-danger">
                                     {fieldErrors.password}
                                 </p>
                             )}
@@ -128,7 +128,7 @@ const PasswordForm = () => {
                                 onChange={handleChange}
                             />
                             {fieldErrors && (
-                                <p className="text-danger">
+                                <p className="fs-6 mt-1 text-danger">
                                     {fieldErrors.confirmPassword}
                                 </p>
                             )}

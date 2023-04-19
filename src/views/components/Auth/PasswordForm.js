@@ -84,7 +84,7 @@ const PasswordForm = () => {
                     </Link>
                 </div>
                 {fieldErrors && (
-                    <p className="text-danger">
+                    <p className="fs-6 mt-1 text-danger">
                         {fieldErrors.password || fieldErrors.credentials}
                     </p>
                 )}

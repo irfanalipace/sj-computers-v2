@@ -62,4 +62,15 @@ shipping-form .input-field::placeholder {
     background: #38c056;
     color: white;
     border: none;
+    border-radius: 8px;
+}
+
+.field-section.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.field-section.checkbox-wrapper input[type="checkbox"] {
+    width: 12px;
+    margin-right: 5px;
 }

@@ -118,7 +118,7 @@ const VerifyOTP = () => {
                 />
 
                 {fieldErrors && (
-                    <p className="text-danger">{fieldErrors.otp}</p>
+                    <p className="fs-6 mt-1 text-danger">{fieldErrors.otp}</p>
                 )}
             </div>
             <div className="d-grid justify-content-center">
