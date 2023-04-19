@@ -1,7 +1,7 @@
 .image-container {
   margin-top: 20px;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
 }
 
@@ -9,9 +9,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
-  margin-left: -364px;
+  /* margin-bottom: 20px; */
+  /* margin-left: -364px; */
 }
+
 .horizontal-box img {
   margin-bottom: 10px;
 }
@@ -22,13 +23,12 @@
   height: 100%;
   /* margin-left: 208px; */
 }
-
 .selected-image {
   /* position: absolute; */
   max-width: 80%;
   max-height: 80%;
   width: 100%;
-  margin-top: -372px;
+  /* margin-top: -372px; */
   /* margin-left: -545px; */
   height: 100%;
   object-fit: contain;

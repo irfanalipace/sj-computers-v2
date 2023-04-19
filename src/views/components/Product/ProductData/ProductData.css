@@ -192,16 +192,17 @@ color: #333333;
   margin-bottom: 9px;
   border-color: red;
 }
-.card-title1{
-  
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 12px;
-line-height: 15px;
+.card-title1 {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 15px;
+  margin-top: 11px;
 }
 .card-text1{
   color: red;
+  font-size: 14px;
 }
 .product-details{
   list-style-type: none;
@@ -298,12 +299,13 @@ color: #333333;
   
 }
 .button-detail-item {
-  height: 77px;
+  height: 58px;
   color: #6f6f6f;
   border: 1px solid #6f6f6f;
-  padding: 10px;
+  /* padding: 2px; */
   display: inline-block;
-  width: 34%;
+  width: 26%;
+  line-height: 3px;
   text-align: center;
   margin-left: 11px;
   margin-right: 8px;

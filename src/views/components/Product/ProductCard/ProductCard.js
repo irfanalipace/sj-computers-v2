@@ -2,7 +2,18 @@ import React from "react";
 import "./ProductCard.css";
 import imges from "@images/bottom-arrow.png";
 import imges1 from "@images/cart-product/location.png";
+import LocationModel from '@components/Header/Location/LocationModel'
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Button } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 export const ProductCard = () => {
+    const currentState = useSelector((state) => state.states.currentState);
+    const user = useSelector((state) => state.auth.user);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const [show, setShow] = useState(false);
+    const handleShow = () => setShow(!show);
+    const location = useLocation();
     return (
         <div>
             <div class="card-section-left">
@@ -23,10 +34,24 @@ export const ProductCard = () => {
                     </div>
                 </div>
                 <div>
-                    <span className="color-card">
-                        <img src={imges1} /> Deliver to John - USA,12345
-                    </span>
-                </div>
+                            <button
+                            className="color-card"
+                            
+                                onClick={handleShow}
+                              
+                            >
+                               <img src={imges1} /> Deliver to John - USA,12345
+                                {currentState
+                                    ? currentState
+                                    : ""}
+                            </button>
+                        </div>
+                        {show && (
+                            <LocationModel
+                                isOpen={show}
+                                handleClose={() => setShow(false)}
+                            />
+                        )}
 
                 <span className="color-card">In Stoke</span>
                 <div>
