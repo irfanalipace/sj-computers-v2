@@ -1,0 +1,96 @@
+.review-card h4 {
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #1270c4;
+    margin-bottom: 3px;
+}
+
+.review-card p {
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.item-card {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.img-wrapper img {
+    max-width: 100%;
+}
+
+.item-detail {
+    padding-left: 10px;
+}
+
+.review-card h6 {
+    font-family: "Inter";
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.item-detail .price {
+    color: #1270c4;
+}
+
+.quantity-container input {
+    width: 30px;
+    font-size: 12px;
+    padding-left: 9px;
+}
+
+.quantity-container {
+    line-height: 0;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide the number input spinner arrows for Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.delivery-option {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.delivery-option label {
+    font-family: "Inter";
+    font-weight: 500;
+    font-size: 12px;
+    color: #318243;
+    margin-left: 10px;
+}
+
+.delivery-option label span {
+    color: black;
+}
+
+.delivery-option input {
+    margin-top: 4px;
+}
+
+.review-done-btn {
+    width: 240px;
+    height: 39px;
+    max-width: 95%;
+    background: #38c056;
+    border-radius: 8px;
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
