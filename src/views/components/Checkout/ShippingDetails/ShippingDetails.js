@@ -47,7 +47,7 @@ export default function ShippingDetails() {
             </div>
             <form className="shipping-form" onSubmit={handleSubmit}>
                 <div className="field-section">
-                    <label for={"state"}>
+                    <label htmlFor={"state"}>
                         Country/State <span className="text-danger">*</span>
                     </label>
                     <input
@@ -66,7 +66,7 @@ export default function ShippingDetails() {
                     )}
                 </div>
                 <div className="field-section">
-                    <label for={"name"}>
+                    <label htmlFor={"name"}>
                         Full Name (First & Last Name)
                         <span className="text-danger">*</span>
                     </label>
@@ -86,7 +86,7 @@ export default function ShippingDetails() {
                 </div>
 
                 <div className="field-section">
-                    <label for={"phoneNumber"}>
+                    <label htmlFor={"phoneNumber"}>
                         Phone Number
                         <span className="text-danger">*</span>
                     </label>
@@ -105,7 +105,7 @@ export default function ShippingDetails() {
                     )}
                 </div>
                 <div className="field-section">
-                    <label for={"streetAddress"}>
+                    <label htmlFor={"streetAddress"}>
                         Address
                         <span className="text-danger">*</span>
                     </label>
@@ -139,7 +139,7 @@ export default function ShippingDetails() {
                 <div className="row">
                     <div className="col-4">
                         <div className="field-section">
-                            <label for={"city"}>
+                            <label htmlFor={"city"}>
                                 City
                                 <span className="text-danger">*</span>
                             </label>
@@ -160,7 +160,7 @@ export default function ShippingDetails() {
                     </div>
                     <div className="col-4">
                         <div className="field-section">
-                            <label for={"state"}>
+                            <label htmlFor={"state"}>
                                 State
                                 <span className="text-danger">*</span>
                             </label>
@@ -182,7 +182,7 @@ export default function ShippingDetails() {
                     </div>
                     <div className="col-4">
                         <div className="field-section">
-                            <label for={"zipCode"}>
+                            <label htmlFor={"zipCode"}>
                                 ZipCode
                                 <span className="text-danger">*</span>
                             </label>
@@ -211,7 +211,7 @@ export default function ShippingDetails() {
                         placeholder=""
                         onChange={handleChange}
                     />
-                    <label for={"saveAddress"}>Make this my address</label>
+                    <label htmlFor={"saveAddress"}>Make this my address</label>
                 </div>
                 <button className="form-button">Use this address</button>
             </form>
