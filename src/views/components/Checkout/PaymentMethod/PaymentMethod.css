@@ -1,0 +1,36 @@
+.payment-method {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.payment-method input {
+    margin-top: 5px;
+}
+
+.payment-method label {
+    display: flex;
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.payment-method img {
+    margin-left: 5px;
+}
+
+.payment-btn {
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 38px;
+    width: 180px;
+    max-width: 95%;
+    background: #38c056;
+    border-radius: 8px;
+    color: white;
+}

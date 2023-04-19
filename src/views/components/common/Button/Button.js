@@ -6,10 +6,11 @@ export default function Button({
     clickHandler,
     isLoading,
     disabled,
+    className,
 }) {
     return (
         <button
-            className="button"
+            className={`button ${className}`}
             onClick={clickHandler}
             disabled={isLoading || disabled}
         >

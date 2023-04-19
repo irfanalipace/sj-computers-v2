@@ -1,4 +1,5 @@
 import laptop from "@images/common/laptop-img.png";
+import ReviewButton from "./ReviewButton";
 
 import "./ReviewCheckout.css";
 
@@ -66,12 +67,7 @@ export default function ReviewCheckout({ handleClick }) {
                 </div>
             </div>
 
-            <button
-                className="review-done-btn"
-                onClick={(e) => handleClick(e, true)}
-            >
-                Proceed
-            </button>
+            <ReviewButton handleClick={handleClick} />
         </div>
     );
 }

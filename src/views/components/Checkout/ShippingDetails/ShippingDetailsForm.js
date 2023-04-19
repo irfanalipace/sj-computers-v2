@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useFormValidation } from "@hooks/useFormValidation";
+import ShippingButton from "./ShippingButton";
 
 function ShippingDetailsForm({ handleClick }) {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
@@ -33,6 +34,9 @@ function ShippingDetailsForm({ handleClick }) {
     const submitShippingDetails = () => {
         const params = { ...values };
     };
+
+    const buttonClickHandler = (e) => handleClick(e, true);
+
     return (
         <div>
             <h3 className="accordion-content-heading">Add New Address</h3>
@@ -210,12 +214,7 @@ function ShippingDetailsForm({ handleClick }) {
                     />
                     <label htmlFor={"saveAddress"}>Make this my address</label>
                 </div>
-                <button
-                    className="form-button"
-                    onClick={(e) => handleClick(e, true)}
-                >
-                    Use this address
-                </button>
+                <ShippingButton handleClick={buttonClickHandler} />
             </form>
         </div>
     );

@@ -13,6 +13,7 @@ export default function Checkout() {
     const [accordionOne, setAccordionOne] = useState(false);
     const [accordionTwo, setAccordionTwo] = useState(false);
     const [accordionThree, setAccordionThree] = useState(false);
+    const [currentAccordionId, setCurrentAccordionId] = useState();
 
     const refAccordionOne = useRef(accordionOne);
 
@@ -23,16 +24,19 @@ export default function Checkout() {
                 refAccordionOne.current = !refAccordionOne.current;
                 setAccordionTwo(false);
                 setAccordionThree(false);
+                setCurrentAccordionId(1);
                 break;
             case 2:
                 setAccordionOne(false);
                 setAccordionTwo(!accordionTwo);
                 setAccordionThree(false);
+                setCurrentAccordionId(2);
                 break;
             case 3:
                 setAccordionOne(false);
                 setAccordionTwo(false);
                 setAccordionThree(!accordionThree);
+                setCurrentAccordionId(3);
                 break;
 
             default:
@@ -40,8 +44,12 @@ export default function Checkout() {
         }
     };
 
+    const handleClick = (e, next = false, id) => {
+        next ? toggleAccordion(id + 1) : toggleAccordion(id);
+    };
+
     useEffect(() => {
-        toggleAccordion(2);
+        toggleAccordion(1);
     }, []);
 
     const shippingSummary = (
@@ -98,7 +106,10 @@ export default function Checkout() {
                         </Accordion>
                     </div>
                     <div className="col-lg-3 col-6">
-                        <OrderSummary />
+                        <OrderSummary
+                            handleClick={handleClick}
+                            activeAccordion={currentAccordionId}
+                        />
                     </div>
                 </div>
                 <div></div>
