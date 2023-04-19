@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
-
+import {CartOverLay }from './CartOverLay/CartOverLay'
 import footerlogo from "@images/header-logo.png";
 import english from "@images/home/eng.png";
 import vectorcart from "@images/home/vector.png";
@@ -139,7 +139,10 @@ const Header = () => {
                                     </a>
                                 </div>
                             </div>
+                            
                             <div className="icon-cart">
+                              <CartOverLay />
+                                   
                                 <div className="product-boll">
                                     <div
                                         className="dropdown dot"
@@ -157,6 +160,7 @@ const Header = () => {
                                     </div>
                                     <span className="cart-text">Cart</span>
                                 </div>
+                               
                             </div>
                         </div>
                     </div>
