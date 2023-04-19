@@ -60,7 +60,7 @@ shipping-form .input-field::placeholder {
     font-family: "Inter";
     font-weight: 600;
     font-size: 12px;
-    width: 129px;
+    /* width: 129px; */
     height: 36px;
     max-width: 95%;
     background: #38c056;
