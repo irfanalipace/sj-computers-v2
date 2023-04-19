@@ -21,8 +21,9 @@ margin-top: 7px;
 
 color: #333333;
 }
-.head{
+.head {
     display: flex;
+    margin-bottom: -14px;
 }
 .buttion-details {
     border: 1px !important;
@@ -36,12 +37,14 @@ color: #333333;
     border-color: #318243;
 }
 .color-card {
+    margin-bottom: -7px;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 13px;
     color: #318243;
+    /* margin-top: -23px; */
 }
 .selectbutton-option-button{
     border: 1px solid #EAEDED;
@@ -53,7 +56,11 @@ border-radius: 10px;
     bottom: 0%;
     background: #318243;
     border-radius: 20.5px;
-    display: flex;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
     width: 318px;
     height: 54px;
 }
@@ -65,11 +72,13 @@ border-radius: 10px;
     display: flex;
     width: 318px;
     height: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .button-cart-sell {
     margin: 15px;
-    /* width: 200px; */
-    /* height: 100px; */
+  
     display: flex;
     justify-content: center;
     /* align-items: center; */
@@ -78,12 +87,16 @@ border-radius: 10px;
     /* width: 294px; */
 }
 .button-text-button {
-    padding-left: 84px;
- 
-    padding-top: 0px;
+    /* margin-left: 101px; */
+    /* padding-top: 7px; */
     border: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
 }
-
     .box-button1 {
         height: 77px;
         color: #6f6f6f;

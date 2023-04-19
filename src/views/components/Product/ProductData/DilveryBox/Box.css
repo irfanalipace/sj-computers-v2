@@ -1,0 +1,18 @@
+.modal-content {
+    position: absolute !important;
+    margin-top: 23 !important;
+    margin-top: 247px !important;
+    justify-content: center;
+    width: 410px;
+}
+.mein-text{
+  
+        display: flex;
+        justify-content: space-between;
+    
+}
+.mein-text-dilvery{
+    display: flex;
+    justify-content: space-between;
+
+}

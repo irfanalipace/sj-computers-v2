@@ -2,7 +2,10 @@ import "./ProductData.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import imges from "@images/bottom-arrow.png";
+import { DilveryBox } from "./DilveryBox/DilveryBox";
+
 const ProductData = () => {
+   
     return (
         <div>
             <div className="">
@@ -50,7 +53,9 @@ const ProductData = () => {
                 <div className="row">
                     <div className="col-md-12 shipping-button">
                         <p className="shipping-text">
-                            Shipping fee to Los Angeles $10 only<button className="img-text-color-details">Details<img src={imges} /></button> 
+                            Shipping fee to Los Angeles $10 only<button className="img-text-color-details">
+                            <DilveryBox /> </button> 
+                                
                         </p>
                     </div>
 
@@ -61,29 +66,28 @@ const ProductData = () => {
             <p className="more-styles">More Styles:</p>
 
             <div class="row">
-           
-                <div className="button-detail-item">
-                    <Link
-                        to="/Product"
-                        className="text-decoration-none"
-                        style={{ color: "#333333" }}
-                    >
-                        <h6 class="card-title1">24” Full HD IPS</h6>
-                        <p class="card-text1">US$ 159.97</p>
-                    </Link>
-                </div>
-                <div className="button-detail-item">
-                    <Link
-                        to="/Product"
-                        className="text-decoration-none"
-                        style={{ color: "#333333" }}
-                    >
-                        <h6 class="card-title1">27” Full HD IPS</h6>
-                        <p class="card-text1">US$ 149.97</p>
-                    </Link>
-              
-            </div>
-            </div>
+    <div className="button-detail-item">
+        <Link
+            to="/Product"
+            className="text-decoration-none"
+            style={{color:"#333333"}}
+        >
+            <h6 class="card-title1">24” Full HD IPS</h6>
+            <p class="card-text1">US$ 159.97</p>
+        </Link>
+    </div>
+    <div className="button-detail-item">
+        <Link
+            to="/Product"
+            className="text-decoration-none"
+            style={{color:"#333333"}}
+        >
+            <h6 class="card-title1">27” Full HD IPS</h6>
+            <p class="card-text1">US$ 149.97</p>
+        </Link>
+    </div>
+</div>
+
             <hr></hr>
             <div className="col-md-12 list-style-margin">
                 <ul className="product-details">
