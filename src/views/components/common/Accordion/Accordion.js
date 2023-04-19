@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import "./Accordion.css";
 
 const Accordion = ({
@@ -11,9 +11,14 @@ const Accordion = ({
 }) => {
     const contentRef = useRef(null);
 
-    const handleClick = () => {
-        toggleAccordion(id);
+    const handleClick = (e, next = false) => {
+        next ? toggleAccordion(id + 1) : toggleAccordion(id);
     };
+
+    const childrenWithProps = React.Children.map(children, (child) => {
+        // Clone the child element and add propToAdd to it
+        return React.cloneElement(child, { handleClick });
+    });
 
     return (
         <div className="accordion">
@@ -31,7 +36,7 @@ const Accordion = ({
                     <div className="col-6">
                         <div className="summary">{summary}</div>
                     </div>
-                    <div className="col-2">
+                    <div className="col-2 d-flex justify-content-end">
                         <button onClick={handleClick} className="change-btn">
                             Change
                         </button>
@@ -40,16 +45,16 @@ const Accordion = ({
             </div>
             <div
                 className={`accordion-content ${isOpen ? "active" : ""}`}
-                // style={{
-                //     maxHeight: isOpen
-                //         ? contentRef.current.scrollHeight + "px"
-                //         : "0px", // Set max-height dynamically
-                //     overflow: "hidden",
-                //     transition: "max-height 0.3s ease-in-out",
-                // }}
+                style={{
+                    maxHeight: isOpen
+                        ? contentRef?.current?.scrollHeight + "px"
+                        : "0px", // Set max-height dynamically
+                    overflow: "hidden",
+                    transition: "max-height 0.3s ease-in-out",
+                }}
                 ref={contentRef}
             >
-                <div className="accordion-body">{children}</div>
+                <div className="accordion-body">{childrenWithProps}</div>
             </div>
         </div>
     );

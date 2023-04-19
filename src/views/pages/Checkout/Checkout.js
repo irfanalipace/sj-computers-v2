@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import Accordion from "@common/Accordion/Accordion";
 import ShippingDetails from "@components/Checkout/ShippingDetails/ShippingDetails";
@@ -10,14 +10,17 @@ import footerlogo from "@images/header-logo.png";
 import "./Checkout.css";
 
 export default function Checkout() {
-    const [accordionOne, setAccordionOne] = useState(true);
+    const [accordionOne, setAccordionOne] = useState(false);
     const [accordionTwo, setAccordionTwo] = useState(false);
     const [accordionThree, setAccordionThree] = useState(false);
+
+    const refAccordionOne = useRef(accordionOne);
 
     const toggleAccordion = (id) => {
         switch (id) {
             case 1:
-                setAccordionOne(!accordionOne);
+                setAccordionOne(!refAccordionOne.current);
+                refAccordionOne.current = !refAccordionOne.current;
                 setAccordionTwo(false);
                 setAccordionThree(false);
                 break;
@@ -29,13 +32,17 @@ export default function Checkout() {
             case 3:
                 setAccordionOne(false);
                 setAccordionTwo(false);
-                setAccordionThree(!setAccordionThree);
+                setAccordionThree(!accordionThree);
                 break;
 
             default:
                 break;
         }
     };
+
+    useEffect(() => {
+        toggleAccordion(2);
+    }, []);
 
     const shippingSummary = (
         <div>
@@ -75,7 +82,7 @@ export default function Checkout() {
                         </Accordion>
                         <Accordion
                             id={2}
-                            title="Review Checkout"
+                            title="Review Items & Shipping"
                             toggleAccordion={toggleAccordion}
                             isOpen={accordionTwo}
                         >

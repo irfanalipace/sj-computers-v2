@@ -72,12 +72,13 @@
 .accordion-body {
     border: 1px solid lightgray;
     border-radius: 10px;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 4%;
+    padding-right: 4%;
 }
 
 .accordion-content-heading {
     font-family: "Inter";
     font-weight: 600;
     font-size: 18px;
+    margin-bottom: 20px;
 }
