@@ -2,10 +2,9 @@ import React from "react";
 import "./ProductCard.css";
 import imges from "@images/bottom-arrow.png";
 import imges1 from "@images/cart-product/location.png";
-import LocationModel from '@components/Header/Location/LocationModel'
+import LocationModel from "@components/Header/Location/LocationModel";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 export const ProductCard = () => {
     const currentState = useSelector((state) => state.states.currentState);
@@ -34,24 +33,17 @@ export const ProductCard = () => {
                     </div>
                 </div>
                 <div>
-                            <button
-                            className="color-card"
-                            
-                                onClick={handleShow}
-                              
-                            >
-                               <img src={imges1} /> Deliver to John - USA,12345
-                                {currentState
-                                    ? currentState
-                                    : ""}
-                            </button>
-                        </div>
-                        {show && (
-                            <LocationModel
-                                isOpen={show}
-                                handleClose={() => setShow(false)}
-                            />
-                        )}
+                    <button className="color-card" onClick={handleShow}>
+                        <img src={imges1} /> Deliver to John - USA,12345
+                        {currentState ? currentState : ""}
+                    </button>
+                </div>
+                {show && (
+                    <LocationModel
+                        isOpen={show}
+                        handleClose={() => setShow(false)}
+                    />
+                )}
 
                 <span className="color-card">In Stoke</span>
                 <div>
@@ -62,14 +54,16 @@ export const ProductCard = () => {
                     </select>
                 </div>
 
-
                 <div className="button-cart-sell">
-                <button className="button1"><span className="button-text-button">Add to Cart</span></button>  
+                    <button className="button1">
+                        <span className="button-text-button">Add to Cart</span>
+                    </button>
                 </div>
                 <div className="button-cart-sell">
-                <button className="button2"><span className="button-text-button">Buy Now</span></button>
+                    <button className="button2">
+                        <span className="button-text-button">Buy Now</span>
+                    </button>
                 </div>
-               
             </div>
         </div>
     );

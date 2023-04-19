@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 
 import ShippingDetailsForm from "./ShippingDetailsForm";
+import ShippingButton from "./ShippingButton";
 
 import "./ShippingDetails.css";
 
 export default function ShippingDetails({ handleClick }) {
     const [newAddress, setNewAddress] = useState(false);
+
+    const buttonClickHandler = (e) => handleClick(e, true);
 
     return (
         <div>
@@ -80,12 +83,7 @@ export default function ShippingDetails({ handleClick }) {
                         </button>
                     </div>
                     <div>
-                        <button
-                            className="form-button"
-                            onClick={(e) => handleClick(e, true)}
-                        >
-                            Use this address
-                        </button>
+                        <ShippingButton handleClick={buttonClickHandler} />
                     </div>
                 </div>
             )}
