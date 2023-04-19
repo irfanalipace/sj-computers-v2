@@ -1,23 +1,25 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import "./Accordion.css";
 
-const Accordion = ({ id, title, summary, children, openState = false }) => {
-    const [isOpen, setIsOpen] = useState(false);
+const Accordion = ({
+    id,
+    title,
+    summary,
+    children,
+    toggleAccordion,
+    isOpen,
+}) => {
     const contentRef = useRef(null);
 
-    const toggleAccordion = () => {
-        setIsOpen(!isOpen);
+    const handleClick = () => {
+        toggleAccordion(id);
     };
-
-    useEffect(() => {
-        setIsOpen(openState);
-    }, [openState]);
 
     return (
         <div className="accordion">
             <div
                 className={`accordion-header ${isOpen ? "active" : ""}`}
-                onClick={toggleAccordion}
+                onClick={handleClick}
             >
                 <div className="row mx-0">
                     <div className="col-4">
@@ -30,10 +32,7 @@ const Accordion = ({ id, title, summary, children, openState = false }) => {
                         <div className="summary">{summary}</div>
                     </div>
                     <div className="col-2">
-                        <button
-                            onClick={toggleAccordion}
-                            className="change-btn"
-                        >
+                        <button onClick={handleClick} className="change-btn">
                             Change
                         </button>
                     </div>
@@ -41,13 +40,13 @@ const Accordion = ({ id, title, summary, children, openState = false }) => {
             </div>
             <div
                 className={`accordion-content ${isOpen ? "active" : ""}`}
-                style={{
-                    maxHeight: isOpen
-                        ? contentRef.current.scrollHeight + "px"
-                        : "0px", // Set max-height dynamically
-                    overflow: "hidden",
-                    transition: "max-height 0.3s ease-in-out",
-                }}
+                // style={{
+                //     maxHeight: isOpen
+                //         ? contentRef.current.scrollHeight + "px"
+                //         : "0px", // Set max-height dynamically
+                //     overflow: "hidden",
+                //     transition: "max-height 0.3s ease-in-out",
+                // }}
                 ref={contentRef}
             >
                 <div className="accordion-body">{children}</div>

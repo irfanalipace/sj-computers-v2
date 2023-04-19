@@ -10,6 +10,33 @@ import footerlogo from "@images/header-logo.png";
 import "./Checkout.css";
 
 export default function Checkout() {
+    const [accordionOne, setAccordionOne] = useState(true);
+    const [accordionTwo, setAccordionTwo] = useState(false);
+    const [accordionThree, setAccordionThree] = useState(false);
+
+    const toggleAccordion = (id) => {
+        switch (id) {
+            case 1:
+                setAccordionOne(!accordionOne);
+                setAccordionTwo(false);
+                setAccordionThree(false);
+                break;
+            case 2:
+                setAccordionOne(false);
+                setAccordionTwo(!accordionTwo);
+                setAccordionThree(false);
+                break;
+            case 3:
+                setAccordionOne(false);
+                setAccordionTwo(false);
+                setAccordionThree(!setAccordionThree);
+                break;
+
+            default:
+                break;
+        }
+    };
+
     const shippingSummary = (
         <div>
             <p>
@@ -38,17 +65,28 @@ export default function Checkout() {
                 <div className="row mx-o">
                     <div className="col-md-9 col-6">
                         <Accordion
-                            id={"1"}
+                            id={1}
                             title="Shipping Details"
                             summary={shippingSummary}
-                            openState={true}
+                            toggleAccordion={toggleAccordion}
+                            isOpen={accordionOne}
                         >
                             <ShippingDetails />
                         </Accordion>
-                        <Accordion id={"2"} title="Review Checkout">
+                        <Accordion
+                            id={2}
+                            title="Review Checkout"
+                            toggleAccordion={toggleAccordion}
+                            isOpen={accordionTwo}
+                        >
                             <ReviewCheckout />
                         </Accordion>
-                        <Accordion id={"3"} title="Payment Method">
+                        <Accordion
+                            id={3}
+                            title="Payment Method"
+                            toggleAccordion={toggleAccordion}
+                            isOpen={accordionThree}
+                        >
                             <PaymentMethod />
                         </Accordion>
                     </div>

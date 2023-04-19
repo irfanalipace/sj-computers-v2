@@ -33,7 +33,6 @@ const Header = () => {
         let countryName = states.filter(
             (state) => state.id === currentState.id
         );
-        console.log("countryName", countryName);
 
         setCountry(countryName[0]?.name);
     }, [currentState]);
