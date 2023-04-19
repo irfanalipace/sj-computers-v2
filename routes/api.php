@@ -56,7 +56,9 @@ Route::get('categories', [CategoryController::class, 'getList'])->name('categori
 
 Route::get('brands', [BrandController::class, 'getList'])->name('brands');
 
-Route::get('products', [ProductController::class, 'getList'])->name('brands');
+Route::get('products', [ProductController::class, 'getList'])->name('products');
+
+Route::get('product-detail', [ProductController::class, 'getProductDetail'])->name('product-detail');
 
 
 /*
