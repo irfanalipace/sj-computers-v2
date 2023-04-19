@@ -1,7 +1,7 @@
 import React from "react"
 import { ProductImage } from "@components/Product/ProductImage/ProductImage";
-import ProductData from "@components/Product/ProductData/ProductData";
-import { ProductCard } from "@components/Product/ProductCard/ProductCard";
+import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
+import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
 
 import './Product.css'
 export default function Product() {
@@ -14,10 +14,10 @@ export default function Product() {
                <ProductImage />
             </div>
             <div className="col-md-4">
-            <ProductData />
+            <ProductDetails />
             </div>
             <div className="col-md-4">
-               <ProductCard />
+               <CheckOutCard />
             </div>
         </div>
     </div>

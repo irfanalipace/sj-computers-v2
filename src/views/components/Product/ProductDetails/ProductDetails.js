@@ -1,10 +1,10 @@
-import "./ProductData.css";
+import "./ProductDetail.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import imges from "@images/bottom-arrow.png";
 import { DilveryBox } from "./DilveryBox/DilveryBox";
 
-const ProductData = () => {
+const ProductDetails = () => {
    
     return (
         <div>
@@ -156,4 +156,4 @@ const ProductData = () => {
     );
 };
 
-export default ProductData;
+export default ProductDetails;

@@ -1,5 +1,5 @@
 import React from "react";
-import "./ProductCard.css";
+import "./CheckOutCard.css";
 import imges from "@images/bottom-arrow.png";
 import imges1 from "@images/cart-product/location.png";
 import LocationModel from '@components/Header/Location/LocationModel'
@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
-export const ProductCard = () => {
+export const CheckOutCard = () => {
     const currentState = useSelector((state) => state.states.currentState);
     const user = useSelector((state) => state.auth.user);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
