@@ -23,8 +23,8 @@ class CreateProductsTable extends Migration
             $table->string('sku')->nullable();
             $table->integer('quantity')->nullable();
 
-            $table->integer('category_id_1')->nullable();
-            $table->integer('category_id_2')->nullable();
+            $table->string('category_id_1')->nullable();
+            $table->string('category_id_2')->nullable();
             $table->foreignId('brand_id')->nullable()->constrained();
 
             $table->longText('others')->nullable();
