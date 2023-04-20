@@ -104,8 +104,7 @@ class SjProduct extends Command
 
 
             Product::updateOrCreate(['asin' => $product['ASIN']],$data);
-
-            dd('insert');
+            
 
             echo "product is added" . $key . "\n";
 
