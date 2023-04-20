@@ -1,17 +1,21 @@
 import ApiService from "@services/apiService";
 
-export function categoryApi() {
+export function addToCartApi({ name, quantity, price }) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/categories`)
+        ApiService.post(`/add-to-cart`, {
+            name,
+            qty: quantity,
+            price,
+        })
             .then((response) => {
                 console.log(
-                    "file: category.js | categoryApi| response",
+                    "file: states.js | addToCartApi| response",
                     response
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error category", e);
+                console.log("Console Log: : error cart", e);
                 reject(e);
             });
     });

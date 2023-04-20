@@ -201,7 +201,7 @@ const Footer = () => {
                             />
 
                             <button
-                                class="btn btn-secondary dropdown-toggle language-dropdown"
+                                className="btn btn-secondary dropdown-toggle language-dropdown"
                                 style={{ background: "#00305E" }}
                                 type="button"
                                 id="dropdownMenuButton"
@@ -221,13 +221,13 @@ const Footer = () => {
                                 />
                             </button>
                             <div
-                                class="dropdown-menu"
+                                className="dropdown-menu"
                                 aria-labelledby="dropdownMenuButton"
                             >
-                                <a class="dropdown-item" href="#">
+                                <a className="dropdown-item" href="#">
                                     span
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a className="dropdown-item" href="#">
                                     UK
                                 </a>
                             </div>

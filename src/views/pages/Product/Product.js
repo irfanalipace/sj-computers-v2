@@ -22,16 +22,18 @@ export default function Product() {
 
     const getProductDetails = async () => {
         setIsLoading(true);
-        if (products.length > 0) {
-            const filteredProducts = products.filter(
-                (product) => product.id === productId
-            )[0];
-            setProduct(filteredProducts);
-        } else {
-            const response = await productDetailsApi(productId);
-            setProduct(response.data.data);
-        }
 
+        const filteredProduct = products.filter(
+            (product) => product.id == productId
+        )[0];
+        if (filteredProduct) {
+            setProduct(filteredProduct);
+        } else {
+            try {
+                const response = await productDetailsApi(productId);
+                setProduct(response.data.data);
+            } catch (error) {}
+        }
         setIsLoading(false);
     };
 
@@ -47,7 +49,10 @@ export default function Product() {
                             <ProductDetails product={product} />
                         </div>
                         <div className="col-12 col-sm-6 col-md-3">
-                            <CheckOutCard />
+                            <CheckOutCard
+                                productId={product?.id}
+                                productPrice={product?.price}
+                            />
                         </div>
                     </div>
                 ) : (

@@ -37,16 +37,6 @@
     color: #1270c4;
 }
 
-.quantity-container input {
-    width: 30px;
-    font-size: 12px;
-    padding-left: 9px;
-}
-
-.quantity-container {
-    line-height: 0;
-}
-
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;

@@ -97,6 +97,7 @@
     color: #07631c;
     padding: 0 6px;
     line-height: 1;
+    border-left: 1px solid;
 }
 .moniter-links:hover {
     color: #07631c;

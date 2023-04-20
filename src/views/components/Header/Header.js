@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
-import {CartOverLay }from './CartOverLay/CartOverLay'
+import { Link, useLocation } from "react-router-dom";
+import { CartOverLay } from "./CartOverLay/CartOverLay";
 import footerlogo from "@images/header-logo.png";
 import english from "@images/home/eng.png";
 import vectorcart from "@images/home/vector.png";
@@ -41,9 +41,9 @@ const Header = () => {
         <>
             {!nonHeaderRoutes.includes(location.pathname.split("/")[1]) && (
                 <header className="navbar navbar-expand-lg header-background px-3">
-                    <a className="navbar-brand" href="#">
+                    <Link className="navbar-brand" to="/">
                         <img src={footerlogo} alt="" className="homepage-img" />
-                    </a>
+                    </Link>
                     <div className="d-flex flex-row align-items-center main-nav">
                         <div className="d-flex align-items-center justify-content-center flex-wrap header-position">
                             <Button
@@ -148,10 +148,10 @@ const Header = () => {
                                     </a>
                                 </div>
                             </div>
-                            
+
                             <div className="icon-cart">
-                              <CartOverLay />
-                                   
+                                <CartOverLay />
+
                                 <div className="product-boll">
                                     <div
                                         className="dropdown dot"
@@ -169,7 +169,6 @@ const Header = () => {
                                     </div>
                                     <span className="cart-text">Cart</span>
                                 </div>
-                               
                             </div>
                         </div>
                     </div>

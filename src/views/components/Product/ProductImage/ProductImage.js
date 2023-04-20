@@ -11,10 +11,12 @@ const SelectedImage = ({ image }) => {
 
 export const ProductImage = ({ ProductImages }) => {
     const [selectedImg, setSelectedImg] = useState(null);
+    const [images, setImages] = useState([]);
 
     const getImages = () => {
-        if (ProductImages?.length > 0) return ProductImages;
-        else
+        if (Array.isArray(ProductImages)) {
+            return ProductImages;
+        } else {
             return [
                 ProductImages,
                 ProductImages,
@@ -22,37 +24,28 @@ export const ProductImage = ({ ProductImages }) => {
                 ProductImages,
                 ProductImages,
             ];
+        }
     };
 
-    const images = getImages();
-
     useEffect(() => {
-        const savedImg = localStorage.getItem("selectedImg");
-        if (savedImg) {
-            setSelectedImg(savedImg);
-        } else {
-            setSelectedImg(images[0]); // set default image as selected image
-        }
+        setImages(getImages());
     }, []);
 
     useEffect(() => {
-        if (selectedImg) {
-            localStorage.setItem("selectedImg", selectedImg);
-        } else {
-            localStorage.removeItem("selectedImg");
-        }
-    }, [selectedImg]);
+        setSelectedImg(images[0]); // set default image as selected image
+    }, [images]);
 
     return (
         <div className="image-container">
             <div className="horizontal-box">
                 {images.map((image, index) => (
-                    <img
+                    <div
                         key={index}
-                        src={image}
-                        alt={`Image ${index}`}
+                        className="image-wrapper"
                         onClick={() => setSelectedImg(image)}
-                    />
+                    >
+                        <img src={image} alt={`Image ${index}`} />
+                    </div>
                 ))}
             </div>
             {selectedImg && <SelectedImage image={selectedImg} />}

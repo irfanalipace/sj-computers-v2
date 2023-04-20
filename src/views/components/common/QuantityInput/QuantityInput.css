@@ -1,0 +1,32 @@
+.quantity-container p {
+    font-family: "Inter";
+    font-size: 12px;
+    font-weight: 500;
+    margin: 5px 0;
+}
+
+.quantity-inner {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-button {
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    height: 25px;
+    border: 1px solid lightgray;
+    background-color: lightgray;
+    color: white;
+    padding-bottom: 3px;
+}
+
+.quantity-container input {
+    border: 1px solid lightgray;
+    height: 25px;
+    width: 30px;
+    padding-left: 11px;
+    font-size: 12px;
+}
