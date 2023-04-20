@@ -4,89 +4,90 @@ import { Link } from "react-router-dom";
 import imges from "@images/bottom-arrow.png";
 import { DilveryBox } from "./DilveryBox/DilveryBox";
 
-const ProductDetails = () => {
-   
+const ProductDetails = ({ product }) => {
     return (
         <div>
             <div className="">
-                <p className="item-title">
-                    LG 24ML600M-B 24” Full HD IPS con 3 <br></br>lados
-                    vitualmente sin bordes monitor <br></br>con doble HDMI -
-                    Negro
-                </p>
+                <p className="item-title">{product?.name}</p>
             </div>
             <div>
                 <p className="most-demandind">Most demanding </p>
             </div>
-    <div className="row px-0 res">
-  <div className="col-lg-4 col-md-6 col-sm-12 revie">
-    <div className="star">
-      <span className="fa fa-star checked"></span>
-      <span className="fa fa-star checked"></span>
-      <span className="fa fa-star checked"></span>
-      <span className="fa fa-star checked"></span>
-      <span className="fa fa-star chek"></span>
-    </div>
-    <button className="selling-button">
-      Top <span className="selling-color">Selling</span>
-    </button>
-  </div>
-  <div className="col-lg-8 col-md-6 col-sm-12">
-    <div>
-      <Link className="links-rting">66 ratings</Link>{" "}
-      <Link className="moniter-links vertical-line">
-        11 answered questions
-      </Link>
-    </div>
-    <span className="size-text">size <Link className="moniter-links">“lg 24 inch monitor”</Link></span>
-  </div>
-</div>
-
+            <div className="row mx-0 res">
+                <div className="col-md-3 col-sm-6 col-sm-12 px-0">
+                    <div className="star">
+                        <span className="fa fa-star checked"></span>
+                        <span className="fa fa-star checked"></span>
+                        <span className="fa fa-star checked"></span>
+                        <span className="fa fa-star checked"></span>
+                        <span className="fa fa-star chek"></span>
+                    </div>
+                    <button className="selling-button">
+                        Top <span className="selling-color">Selling</span>
+                    </button>
+                </div>
+                <div className="col-md-9 col-sm-6 col-sm-12 px-0">
+                    <div className="d-flex mt-4">
+                        <Link className="links-rting">66 ratings</Link>
+                        <Link className="moniter-links">
+                            11 answered questions
+                        </Link>
+                    </div>
+                    <span className="size-text">
+                        Size
+                        <Link className="moniter-links">
+                            “lg 24 inch monitor”
+                        </Link>
+                    </span>
+                </div>
+            </div>
 
             <hr></hr>
             <div className="row">
                 <div className="col-md-12 color-text">
-                    <sup className="$-color">$</sup> 550<sup>99</sup>
+                    <sup className="$-color">$</sup>{" "}
+                    {Math.floor(product?.price)}
+                    <sup>{product?.price % 1}</sup>
                 </div>
             </div>
             <div className="content">
                 <div className="row">
                     <div className="col-md-12 shipping-button">
                         <p className="shipping-text">
-                            Shipping fee to Los Angeles $10 only<button className="img-text-color-details">
-                            <DilveryBox /> </button> 
-                                
+                            Shipping fee to Los Angeles $10 only
+                            <button className="img-text-color-details">
+                                <DilveryBox />
+                            </button>
                         </p>
                     </div>
-
                 </div>
             </div>
             <hr></hr>
-           
+
             <p className="more-styles">More Styles:</p>
 
             <div class="row">
-    <div className="button-detail-item">
-        <Link
-            to="/Product"
-            className="text-decoration-none"
-            style={{color:"#333333"}}
-        >
-            <h6 class="card-title1">24” Full HD IPS</h6>
-            <p class="card-text1">US$ 159.97</p>
-        </Link>
-    </div>
-    <div className="button-detail-item">
-        <Link
-            to="/Product"
-            className="text-decoration-none"
-            style={{color:"#333333"}}
-        >
-            <h6 class="card-title1">27” Full HD IPS</h6>
-            <p class="card-text1">US$ 149.97</p>
-        </Link>
-    </div>
-</div>
+                <div className="button-detail-item">
+                    <Link
+                        to="/Product"
+                        className="text-decoration-none"
+                        style={{ color: "#333333" }}
+                    >
+                        <h6 class="card-title1">24” Full HD IPS</h6>
+                        <p class="card-text1">US$ 159.97</p>
+                    </Link>
+                </div>
+                <div className="button-detail-item">
+                    <Link
+                        to="/Product"
+                        className="text-decoration-none"
+                        style={{ color: "#333333" }}
+                    >
+                        <h6 class="card-title1">27” Full HD IPS</h6>
+                        <p class="card-text1">US$ 149.97</p>
+                    </Link>
+                </div>
+            </div>
 
             <hr></hr>
             <div className="col-md-12 list-style-margin">

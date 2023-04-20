@@ -42,6 +42,7 @@ export const ShopingCart = () => {
                                                 $120
                                             </strong>
                                         </span>
+                                        <br></br>
                                         <label>
                                             <input
                                                 type="checkbox"
