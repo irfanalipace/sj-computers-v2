@@ -6,12 +6,16 @@ import {CartOverLay }from './CartOverLay/CartOverLay'
 import footerlogo from "@images/header-logo.png";
 import english from "@images/home/eng.png";
 import vectorcart from "@images/home/vector.png";
+import reaxtimg from "@images/rext.png";
+import vectorimg from "@images/setr.png";
 import "./Header.css";
-
+import { Modal } from "react-bootstrap";
 import LocationModel from "./Location/LocationModel";
 import LoginCart from "./LoginCart";
 import Search from "./Search";
 const Header = () => {
+    const [smShow, setSmShow] = useState(false);
+    const [lgShow, setLgShow] = useState(false);
     const currentState = useSelector((state) => state.states.currentState);
     const states = useSelector((state) => state.states.states);
     const user = useSelector((state) => state.auth.user);
@@ -37,6 +41,7 @@ const Header = () => {
         setCountry(countryName[0]?.name);
     }, [currentState]);
 
+
     return (
         <>
             {!nonHeaderRoutes.includes(location.pathname.split("/")[1]) && (
@@ -54,8 +59,8 @@ const Header = () => {
                                     border: "#00305E",
                                 }}
                             >
-                                <p></p>Deliver to <br></br>
-                                {country ? country : "Select Location"}
+                                <span className="deliver-text">Deliver to</span>
+                             <span> {country ? country : "California"}</span>  
                             </Button>
                         </div>
                         {show && (
@@ -149,32 +154,89 @@ const Header = () => {
                                 </div>
                             </div>
                             
-                            <div className="icon-cart">
-                              <CartOverLay />
-                                   
+                            <button className="icon-cart me-2 " onClick={() => setSmShow(true)}>
+                           
+                                 
                                 <div className="product-boll">
+                            
                                     <div
                                         className="dropdown dot"
                                         style={{
                                             textAlign: "center",
                                             color: "white",
                                         }}
-                                    >
+                                    > 
+                                
                                         0
                                         <img
                                             src={vectorcart}
                                             alt=""
                                             className="vector-cart"
                                         />
+                                      
                                     </div>
+                                    
                                     <span className="cart-text">Cart</span>
                                 </div>
-                               
-                            </div>
+                                
+                            </button>
+                            
                         </div>
                     </div>
                 </header>
             )}
+
+           <div className="" >
+            <Modal 
+                size="sm"
+                show={smShow}
+                onHide={() => setSmShow(false)}
+                aria-labelledby="example-modal-sizes-title-sm"
+                className="box-cart box-overlay"
+               
+            >
+                <Modal.Header closeButton style={{borderBottom: 0}}>
+                </Modal.Header>
+              
+                <Modal.Body className="body-cart">
+                <div className="mein-cotain">
+                        <div className="row ">
+                        <div className="dev">
+                        <div className="not-add">
+                            <span><img src={vectorimg} />  Not Added</span>
+                        </div>
+                        <div className="cart-dev-section">
+                            <span className="cart-item">Cart Subtotal</span><span className="items-no"> ( 1 item ):</span>
+                        </div>
+                        </div>
+                        </div>
+                        <div className="row ">
+                        <div className="img-dev">
+                        <div className="">
+                        <img src={reaxtimg} alt=""/>
+                        </div>
+                        <div>
+                           <button className="cart-button">Cart</button>
+                        </div>
+                        <div>
+                        <button className="checkout-proced">Proceed to checkout (item)</button>
+                        </div>
+                      
+                        </div>
+                        </div>
+                    </div>
+                </Modal.Body>
+              
+            </Modal>
+            <Modal
+                size="lg"
+                show={lgShow}
+                onHide={() => setLgShow(false)}
+                aria-labelledby="example-modal-sizes-title-lg"
+            >
+                <Modal.Body><img src={reaxtimg}/></Modal.Body>
+            </Modal>
+            </div>
         </>
     );
 };
