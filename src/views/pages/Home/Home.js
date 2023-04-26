@@ -14,11 +14,13 @@ const Home = () => {
     return (
         <div>
             <TopBar />
-            <div className="banner-wrapper">
-                <BannerSlider />
-            </div>
-            <div className="catergory-grid-wrapper">
-                <ProductType />
+            <div className="banner-category-section">
+                <div className="banner-wrapper">
+                    <BannerSlider />
+                </div>
+                <div className="catergory-grid-wrapper">
+                    <ProductType />
+                </div>
             </div>
             <ProductsGrid />
             {/* <CarouselSlider /> */}

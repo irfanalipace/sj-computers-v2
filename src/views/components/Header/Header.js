@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
-import {CartOverLay }from './CartOverLay/CartOverLay'
+import { Link, useLocation } from "react-router-dom";
+import { CartOverLay } from "./CartOverLay/CartOverLay";
 import footerlogo from "@images/header-logo.png";
 import english from "@images/home/eng.png";
 import vectorcart from "@images/home/vector.png";
@@ -21,7 +21,6 @@ const Header = () => {
     const states = useSelector((state) => state.states.states);
     const user = useSelector((state) => state.auth.user);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const [country, setCountry] = useState(false);
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
     const location = useLocation();
@@ -81,9 +80,9 @@ const Header = () => {
     </div>
             {!nonHeaderRoutes.includes(location.pathname.split("/")[1]) && (
                 <header className="navbar navbar-expand-lg header-background px-3">
-                    <a className="navbar-brand" href="#">
+                    <Link className="navbar-brand" to="/">
                         <img src={footerlogo} alt="" className="homepage-img" />
-                    </a>
+                    </Link>
                     <div className="d-flex flex-row align-items-center main-nav">
                         <div className="d-flex align-items-center justify-content-center flex-wrap header-position">
                             <Button
@@ -94,8 +93,10 @@ const Header = () => {
                                     border: "#00305E",
                                 }}
                             >
-                                <span className="deliver-text">Deliver to</span>
-                             <span> {country ? country : "California"}</span>  
+                                <p></p>Deliver to <br></br>
+                                {currentState?.name
+                                    ? currentState?.name
+                                    : "Select Location"}
                             </Button>
                         </div>
                         {show && (
@@ -204,56 +205,69 @@ const Header = () => {
                 </header>
             )}
 
-           <div className="" >
-            <Modal 
-                size="sm"
-                show={smShow}
-                onHide={() => setSmShow(false)}
-                aria-labelledby="example-modal-sizes-title-sm"
-                className="box-cart box-overlay"
-               
-            >
-                <Modal.Header closeButton style={{borderBottom: 0}}>
-                </Modal.Header>
-              
-                <Modal.Body className="body-cart">
-                <div className="mein-cotain">
-                        <div className="row ">
-                        <div className="dev">
-                        <div className="not-add">
-                            <span><img src={vectorimg} />  Not Added</span>
+            <div className="">
+                <Modal
+                    size="sm"
+                    show={smShow}
+                    onHide={() => setSmShow(false)}
+                    aria-labelledby="example-modal-sizes-title-sm"
+                    className="box-cart box-overlay"
+                >
+                    <Modal.Header
+                        closeButton
+                        style={{ borderBottom: 0 }}
+                    ></Modal.Header>
+
+                    <Modal.Body className="body-cart">
+                        <div className="mein-cotain">
+                            <div className="row ">
+                                <div className="dev">
+                                    <div className="not-add">
+                                        <span>
+                                            <img src={vectorimg} /> Not Added
+                                        </span>
+                                    </div>
+                                    <div className="cart-dev-section">
+                                        <span className="cart-item">
+                                            Cart Subtotal
+                                        </span>
+                                        <span className="items-no">
+                                            {" "}
+                                            ( 1 item ):
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row ">
+                                <div className="img-dev">
+                                    <div className="">
+                                        <img src={reaxtimg} alt="" />
+                                    </div>
+                                    <div>
+                                        <button className="cart-button">
+                                            Cart
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button className="checkout-proced">
+                                            Proceed to checkout (item)
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="cart-dev-section">
-                            <span className="cart-item">Cart Subtotal</span><span className="items-no"> ( 1 item ):</span>
-                        </div>
-                        </div>
-                        </div>
-                        <div className="row ">
-                        <div className="img-dev">
-                        <div className="">
-                        <img src={reaxtimg} alt=""/>
-                        </div>
-                        <div>
-                           <button className="cart-button">Cart</button>
-                        </div>
-                        <div>
-                        <button className="checkout-proced">Proceed to checkout (item)</button>
-                        </div>
-                      
-                        </div>
-                        </div>
-                    </div>
-                </Modal.Body>
-              
-            </Modal>
-            <Modal
-                size="lg"
-                show={lgShow}
-                onHide={() => setLgShow(false)}
-                aria-labelledby="example-modal-sizes-title-lg"
-            >
-                <Modal.Body><img src={reaxtimg}/></Modal.Body>
-            </Modal>
+                    </Modal.Body>
+                </Modal>
+                <Modal
+                    size="lg"
+                    show={lgShow}
+                    onHide={() => setLgShow(false)}
+                    aria-labelledby="example-modal-sizes-title-lg"
+                >
+                    <Modal.Body>
+                        <img src={reaxtimg} />
+                    </Modal.Body>
+                </Modal>
             </div>
         </>
     );

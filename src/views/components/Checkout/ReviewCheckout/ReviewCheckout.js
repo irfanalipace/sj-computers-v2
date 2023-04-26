@@ -1,9 +1,13 @@
+import { useState } from "react";
+
 import laptop from "@images/common/laptop-img.png";
 import ReviewButton from "./ReviewButton";
+import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./ReviewCheckout.css";
 
 export default function ReviewCheckout({ handleClick }) {
+    const [quantity, setQuantity] = useState(1);
     return (
         <div className="review-card">
             <h4>Estimated delivery: 14 April 2023 - 02 May 2023</h4>
@@ -17,11 +21,7 @@ export default function ReviewCheckout({ handleClick }) {
                         <div className="item-detail">
                             <h6>HP Laptop Dual Sense Wireless Controller</h6>
                             <h6 className="price">$490.00</h6>
-                            <div className="quantity-container">
-                                <button className="quantity-button">+</button>
-                                <input type="number" value={1} />
-                                <button className="quantity-button">-</button>
-                            </div>
+                            <QuantityInput onChange={setQuantity} />
                         </div>
                     </div>
                 </div>

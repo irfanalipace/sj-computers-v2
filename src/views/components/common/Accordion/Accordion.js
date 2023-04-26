@@ -27,16 +27,20 @@ const Accordion = ({
                 onClick={handleClick}
             >
                 <div className="row mx-0">
-                    <div className="col-4">
+                    <div className={`${summary ? "col-lg-4 col-5" : "col-12"}`}>
                         <div className="d-flex align-items-center">
                             <h4>{id}</h4>
                             <h3>{title}</h3>
                         </div>
                     </div>
-                    <div className="col-6">
+                    <div className={`${summary && "col-6"}`}>
                         <div className="summary">{summary}</div>
                     </div>
-                    <div className="col-2 d-flex justify-content-end">
+                    <div
+                        className={`${
+                            summary && "col-lg-2 col-1"
+                        } d-flex justify-content-end`}
+                    >
                         <button onClick={handleClick} className="change-btn">
                             Change
                         </button>

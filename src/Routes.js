@@ -84,6 +84,10 @@ export const Router = () => {
             element: <Checkout />,
         },
         {
+            path: "/checkout",
+            element: <Checkout />,
+        },
+        {
             path: "*",
             element: (
                 <div>

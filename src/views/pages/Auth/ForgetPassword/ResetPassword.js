@@ -144,11 +144,11 @@ const PasswordForm = () => {
                             </button>
                         </div>
                         <p className="text-muted small">
-                            By continuing, you agree to SJ Computer’s{" "}
+                            By continuing, you agree to SJ Computer’s
                             <a href="#" className="text-decoration-none">
                                 Conditions of Use
-                            </a>{" "}
-                            and{" "}
+                            </a>
+                            and
                             <a href="#" className="text-decoration-none">
                                 Privacy Notice
                             </a>
@@ -156,7 +156,7 @@ const PasswordForm = () => {
                         </p>
 
                         <div className="need-help">
-                            <FontAwesomeIcon icon={faCaretRight} />{" "}
+                            <FontAwesomeIcon icon={faCaretRight} />
                             <a
                                 href="#"
                                 className="text-decoration-none need-help"

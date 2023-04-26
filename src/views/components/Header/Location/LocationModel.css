@@ -52,7 +52,7 @@
     text-align: left;
     color: black;
     box-sizing: border-box;
-
+    max-width: 95%;
     width: 395px;
     height: 42px;
     left: 0px;
@@ -76,7 +76,7 @@
     justify-content: center;
 }
 .done-button {
-    width: -13px;
+    min-width: 100px;
     height: 40px;
     background: #52ac66;
     border-radius: 8px;

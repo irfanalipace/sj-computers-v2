@@ -1,30 +1,58 @@
-import React from "react";
-import "./CheckOutCard.css";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { addToCart } from "@store/cart/cartThunks";
+import { addItemToLocalCart } from "@utils/helpers";
+import Button from "@common/Button/Button";
 import imges from "@images/bottom-arrow.png";
 import imges1 from "@images/cart-product/location.png";
 import LocationModel from "@components/Header/Location/LocationModel";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-export const CheckOutCard = () => {
+import { QuantityInput } from "@common/QuantityInput/QuantityInput";
+
+import "./CheckOutCard.css";
+
+export const CheckOutCard = ({ product }) => {
+    console.log("product", product);
     const currentState = useSelector((state) => state.states.currentState);
-    const user = useSelector((state) => state.auth.user);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const cart = useSelector((state) => state.cart.cart);
+    const isLoading = useSelector((state) => state.cart.isLoading);
+    const [quantity, setQuantity] = useState(1);
     const [show, setShow] = useState(false);
+    const [cartItem, setCartItem] = useState({});
     const handleShow = () => setShow(!show);
-    const location = useLocation();
+    const dispatch = useDispatch();
+
+    const cartClickHandler = () => {
+        addItemToLocalCart({ ...product, quantity });
+        if (isAuthenticated)
+            dispatch(
+                addToCart({
+                    ...product,
+                    quantity,
+                })
+            );
+    };
+
+    useEffect(() => {
+        let item = cart.filter((ci) => ci.id === product.id);
+        setCartItem(item);
+    }, [cart]);
+
     return (
         <div>
-            <div class="card-section-left">
+            <div className="card-section-left">
                 <div className="row">
                     <div className="col-md-12 color-text">
-                        <sup className="$-color">$</sup> 550<sup>99</sup>
+                        <sup className="$-color">$</sup>
+                        {product?.price?.toString().split(".")[0]}
+                        <sup>{product?.price?.toString().split(".")[1]}</sup>
                     </div>
                 </div>
                 <div className="head">
                     <div className="">
                         <p className="cart-text">
-                            Lorem Ipsum is simply dummy text of the printing.
+                            {product?.description}
                             <button className="buttion-details">
                                 Details
                                 <img src={imges} />
@@ -34,8 +62,10 @@ export const CheckOutCard = () => {
                 </div>
                 <div>
                     <button className="color-card" onClick={handleShow}>
-                        <img src={imges1} /> Deliver to John - USA,12345
-                        {currentState ? currentState : ""}
+                        <img src={imges1} /> Deliver to
+                        {currentState?.name
+                            ? " " + currentState?.name
+                            : " Location"}
                     </button>
                 </div>
                 {show && (
@@ -44,26 +74,33 @@ export const CheckOutCard = () => {
                         handleClose={() => setShow(false)}
                     />
                 )}
+                {cartItem ? (
+                    <p>Item Added in Cart</p>
+                ) : (
+                    <>
+                        <span className="color-card">In Stock</span>
+                        <QuantityInput onChange={setQuantity} />
 
-                <span className="color-card">In Stoke</span>
-                <div>
-                    <select className="selectpicker selectbutton-option-button">
-                        <option>Qty: 1</option>
-                        <option>Ketchup</option>
-                        <option>Relish</option>
-                    </select>
-                </div>
-
-                <div className="button-cart-sell">
-                    <button className="button1">
-                        <span className="button-text-button">Add to Cart</span>
-                    </button>
-                </div>
-                <div className="button-cart-sell">
-                    <button className="button2">
-                        <span className="button-text-button">Buy Now</span>
-                    </button>
-                </div>
+                        <div className="button-cart-sell">
+                            <Button
+                                className="button1 button-text-button"
+                                clickHandler={cartClickHandler}
+                                isLoading={isLoading}
+                            >
+                                Add to Cart
+                            </Button>
+                        </div>
+                        <div className="button-cart-sell">
+                            <Button
+                                className="button2 button-text-button"
+                                clickHandler={cartClickHandler}
+                                isLoading={isLoading}
+                            >
+                                Buy Now
+                            </Button>
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );

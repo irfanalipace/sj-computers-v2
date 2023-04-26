@@ -3,7 +3,7 @@ import {
     FETCH_PRODUCTS,
     API_ERROR,
 } from "@store/products/productsSlice";
-import { productsApi } from "@api/products";
+import { productsApi, productDetailsApi } from "@api/products";
 
 export const fetchProducts = (page = 1) => {
     return async (dispatch) => {
@@ -20,3 +20,19 @@ export const fetchProducts = (page = 1) => {
         }
     };
 };
+
+// export const fetchProductDetails = (id) => {
+//     return async (dispatch) => {
+//         try {
+//             dispatch({ type: LOADING, payload: {} });
+//             const response = await productDetailsApi(id);
+//             dispatch({
+//                 type: FETCH_PRODUCTS,
+//                 payload: response.data.data.data,
+//             });
+//         } catch (error) {
+//             console.log("Something went wrong in productDetails", error);
+//             dispatch({ type: API_ERROR, payload: error?.data?.errors });
+//         }
+//     };
+// };

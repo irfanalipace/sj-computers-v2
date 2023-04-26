@@ -5,6 +5,7 @@ import productsReducer from "@store/products/productsSlice";
 import categoryReducer from "@store/category/categorySlice";
 import statesReducer from "@store/states/statesSlice";
 import brandsReducer from "@store/brands/brandsSlice";
+import cartReducer from "@store/cart/cartSlice";
 
 const store = configureStore({
     reducer: {
@@ -12,7 +13,8 @@ const store = configureStore({
         products: productsReducer,
         category: categoryReducer,
         states: statesReducer,
-        brand: brandsReducer,
+        brands: brandsReducer,
+        cart: cartReducer,
         // Add additional reducers for other features here
     },
     middleware: [thunkMiddleware],
