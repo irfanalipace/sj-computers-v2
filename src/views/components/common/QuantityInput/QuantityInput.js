@@ -4,7 +4,7 @@ import "./QuantityInput.css";
 
 export const QuantityInput = ({
     onChange,
-    minQuantity = 0,
+    minQuantity = 1,
     maxQuantity = 100,
 }) => {
     const [quantity, setQuantity] = useState(1);

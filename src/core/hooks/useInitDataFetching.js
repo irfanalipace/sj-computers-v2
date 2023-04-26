@@ -1,17 +1,23 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { fetchBrands } from "@store/brands/brandsThunks";
 import { fetchCategory } from "@store/category/categoryThunks";
-import { createLocalCart } from "@store/cart/cartThunks";
+import { addToLocalCart, addToCart } from "@store/cart/cartThunks";
 import { getCartItems } from "@utils/helpers";
 
 export const useInitDataFetching = () => {
     const dispatch = useDispatch();
-    const cartItems = getCartItems();
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const cartItems = getCartItems() || [];
+
     useEffect(() => {
         dispatch(fetchCategory());
         dispatch(fetchBrands());
-        dispatch(createLocalCart(cartItems));
+        if (isAuthenticated) {
+            cartItems.forEach((item) => {
+                dispatch(addToCart(item));
+            });
+        } else dispatch(addToLocalCart(cartItems));
     }, []);
 };

@@ -9,7 +9,6 @@ import "./ShopingCart.css";
 
 export const ShopingCart = () => {
     const cartItems = useSelector((state) => state.cart.cart);
-    console.log("cartItems", cartItems);
     const isLoading = useSelector((state) => state.cart.isLoading);
     const dispatch = useDispatch();
 

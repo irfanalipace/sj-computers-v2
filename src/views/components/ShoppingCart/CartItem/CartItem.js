@@ -1,11 +1,20 @@
 import { useState } from "react";
-import ssd from "@images/shipping-cart/ssd-pannel.png";
+import { useDispatch, useSelector } from "react-redux";
+
+import Loader from "@common/Spinner/Spinner";
+import { deleteItem } from "@store/cart/cartThunks";
+import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./CartItem.css";
-import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 export const CartItem = ({ cartData }) => {
     const [quantity, setQuantity] = useState(1);
+    const updatingItem = useSelector((state) => state.cart.updatingItem);
+    const dispatch = useDispatch();
+
+    const deleteItemFunction = () => {
+        dispatch(deleteItem(cartData));
+    };
     return (
         <div>
             <div className="row">
@@ -68,7 +77,13 @@ export const CartItem = ({ cartData }) => {
                                 minQuantity={1}
                             />
 
-                            <button className="button-link ms-2">Delete</button>
+                            <button
+                                onClick={deleteItemFunction}
+                                className="button-link ms-2"
+                                disabled={updatingItem}
+                            >
+                                {updatingItem ? <Loader /> : "Delete"}
+                            </button>
                             {/* <button className="button-link">
                                 Save for later
                             </button>

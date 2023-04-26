@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { addToCart } from "@store/cart/cartThunks";
@@ -15,9 +15,11 @@ export const CheckOutCard = ({ product }) => {
     console.log("product", product);
     const currentState = useSelector((state) => state.states.currentState);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const cart = useSelector((state) => state.cart.cart);
     const isLoading = useSelector((state) => state.cart.isLoading);
     const [quantity, setQuantity] = useState(1);
     const [show, setShow] = useState(false);
+    const [cartItem, setCartItem] = useState({});
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
 
@@ -31,6 +33,11 @@ export const CheckOutCard = ({ product }) => {
                 })
             );
     };
+
+    useEffect(() => {
+        let item = cart.filter((ci) => ci.id === product.id);
+        setCartItem(item);
+    }, [cart]);
 
     return (
         <div>
@@ -67,28 +74,33 @@ export const CheckOutCard = ({ product }) => {
                         handleClose={() => setShow(false)}
                     />
                 )}
+                {cartItem ? (
+                    <p>Item Added in Cart</p>
+                ) : (
+                    <>
+                        <span className="color-card">In Stock</span>
+                        <QuantityInput onChange={setQuantity} />
 
-                <span className="color-card">In Stoke</span>
-                <QuantityInput onChange={setQuantity} />
-
-                <div className="button-cart-sell">
-                    <Button
-                        className="button1 button-text-button"
-                        clickHandler={cartClickHandler}
-                        isLoading={isLoading}
-                    >
-                        Add to Cart
-                    </Button>
-                </div>
-                <div className="button-cart-sell">
-                    <Button
-                        className="button2 button-text-button"
-                        clickHandler={cartClickHandler}
-                        isLoading={isLoading}
-                    >
-                        Buy Now
-                    </Button>
-                </div>
+                        <div className="button-cart-sell">
+                            <Button
+                                className="button1 button-text-button"
+                                clickHandler={cartClickHandler}
+                                isLoading={isLoading}
+                            >
+                                Add to Cart
+                            </Button>
+                        </div>
+                        <div className="button-cart-sell">
+                            <Button
+                                className="button2 button-text-button"
+                                clickHandler={cartClickHandler}
+                                isLoading={isLoading}
+                            >
+                                Buy Now
+                            </Button>
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );

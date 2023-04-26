@@ -3,7 +3,7 @@ import ApiService from "@services/apiService";
 export function addToCartApi({ id, quantity }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/add-to-cart`, {
-            id,
+            product_id: id,
             qty: quantity,
         })
             .then((response) => {
@@ -26,6 +26,25 @@ export function fetchCartApi() {
             .then((response) => {
                 console.log(
                     "file: states.js | fetchCartApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error cart", e);
+                reject(e);
+            });
+    });
+}
+
+export function deleteItemApi({ id }) {
+    return new Promise((resolve, reject) => {
+        ApiService.post(`/delete-item`, {
+            id,
+        })
+            .then((response) => {
+                console.log(
+                    "file: states.js | deleteItemApi| response",
                     response
                 );
                 resolve(response);
