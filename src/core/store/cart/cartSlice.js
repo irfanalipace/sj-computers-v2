@@ -14,8 +14,14 @@ const cartSlice = createSlice({
         LOADING: (state) => {
             state.isLoading = true;
         },
-        UPDATING: (state) => {
-            state.updatingItem = true;
+        UPDATING: (state, action) => {
+            let index = state.cart.findIndex(
+                (item) => item.id !== action.payload.id
+            );
+            if (index !== -1) {
+                // Use spread operator to create a new object with updated name
+                state.cart[index] = { ...state.cart[index], loading: true };
+            }
         },
         CLEAR_LOADING: (state) => {
             state.isLoading = false;
@@ -34,16 +40,23 @@ const cartSlice = createSlice({
             state.cart = [];
         },
         DELETE_ITEM: (state, action) => {
-            state.cart = state.cart.filter(
+            let index = state.cart.findIndex(
                 (item) => item.id !== action.payload.id
             );
-            state.updatingItem = false;
+            if (index !== -1) {
+                // Remove item from array
+                state.cart.splice(index, 1);
+                state.cart[index] = { ...state.cart[index], loading: false };
+            }
         },
         UPDATE_QUANTITY: (state, action) => {
-            state.cart = state.cart.findIndex(
+            let index = state.cart.findIndex(
                 (item) => item.id !== action.payload.id
             );
-            state.updatingItem = false;
+            if (index !== -1) {
+                // Use spread operator to create a new object with updated name
+                state.cart[index] = { ...state.cart[index], loading: false };
+            }
         },
         API_ERROR: (state, action) => {
             state.apiError = { ...action.payload };
