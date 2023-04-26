@@ -9,6 +9,7 @@ use Cart;
 use App\Http\Requests\AddToCartRequest;
 use App\Http\Requests\DeleteCartRequest;
 use App\Http\Requests\UpdateQuantityRequest;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends BaseController
@@ -25,6 +26,11 @@ class CartController extends BaseController
         $items = [];
 
         \Cart::session($this->userId)->getContent()->each(function ($item) use (&$items) {
+           
+            $product =  Product::where('id',$item->id)->first();
+
+            $item->attributes['product'] =  $product->toArray();
+           
             $items[] = $item;
         });
 
@@ -35,8 +41,9 @@ class CartController extends BaseController
     {
         try {
 
-            $id = rand(1, 9999);
-            $item = Cart::session($this->userId)->add($id, $request->name, $request->price, $request->qty, array());
+            $product = Product::find($request->product_id);
+
+            $item = Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $request->qty, array());
 
             return response(array('success' => true, 'data' => $item, 'message' => 'Item added.'), 200, []);
         } catch (Exception $e) {
