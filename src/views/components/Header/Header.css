@@ -36,7 +36,15 @@
     background: #00305e;
     border: 0px;
     color: white;
-    padding-top: 31px;
+ 
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 15px;
+line-height: 18px;
+
+color: #FFFEFE;
+
 }
 .input-form-control {
     height: 60px;
@@ -135,6 +143,12 @@
     border: 0px;
     color: white;
     padding-top: 12px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
 }
 
 .ul-menu {

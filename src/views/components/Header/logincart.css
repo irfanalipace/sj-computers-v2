@@ -7,6 +7,17 @@
     padding: 2px;
     margin: 3px;
 }
+ .login-cart-button{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+
+
+color: #FFFFFF;
+}
 .product-section1 {
     position: absolute;
     z-index: 2;
