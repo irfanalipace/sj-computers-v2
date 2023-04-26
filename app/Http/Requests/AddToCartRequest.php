@@ -24,9 +24,9 @@ class AddToCartRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'qty' => ['required',],
-            'price' => ['required',]
+          
+            'qty' => ['required'],
+            'product_id' => ['required']
         ];
     }
 }
