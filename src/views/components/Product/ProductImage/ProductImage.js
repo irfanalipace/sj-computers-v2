@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { toArray } from "@utils/helpers";
 import "./ProductImage.css";
 
 const SelectedImage = ({ image }) => {
@@ -13,22 +14,8 @@ export const ProductImage = ({ ProductImages }) => {
     const [selectedImg, setSelectedImg] = useState(null);
     const [images, setImages] = useState([]);
 
-    const getImages = () => {
-        if (Array.isArray(ProductImages)) {
-            return ProductImages;
-        } else {
-            return [
-                ProductImages,
-                ProductImages,
-                ProductImages,
-                ProductImages,
-                ProductImages,
-            ];
-        }
-    };
-
     useEffect(() => {
-        setImages(getImages());
+        setImages(toArray(ProductImages));
     }, []);
 
     useEffect(() => {

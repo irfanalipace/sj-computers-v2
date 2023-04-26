@@ -83,7 +83,7 @@ const ProductDetails = ({ product }) => {
             <div className="row">
                 <div className="button-detail-item">
                     <Link
-                        to="/Product"
+                        to="#"
                         className="text-decoration-none"
                         style={{ color: "#333333" }}
                     >
@@ -93,7 +93,7 @@ const ProductDetails = ({ product }) => {
                 </div>
                 <div className="button-detail-item">
                     <Link
-                        to="/Product"
+                        to="#"
                         className="text-decoration-none"
                         style={{ color: "#333333" }}
                     >

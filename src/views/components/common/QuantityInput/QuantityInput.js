@@ -26,7 +26,9 @@ export const QuantityInput = ({ onChange }) => {
                 />
                 <button
                     className="quantity-button"
-                    onClick={(e) => setQuantity(quantity - 1)}
+                    onClick={(e) =>
+                        setQuantity(quantity > 0 ? quantity - 1 : quantity)
+                    }
                 >
                     -
                 </button>

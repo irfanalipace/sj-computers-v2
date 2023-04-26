@@ -281,9 +281,9 @@
     border: 1px solid #6f6f6f;
     padding: 4px !important;
     display: inline-block;
-    width: 26%;
+    width: 120px;
     line-height: 3px;
-    text-align: center;
+    /* text-align: center; */
     margin-left: 11px;
     margin-right: 8px;
     min-width: 110px;

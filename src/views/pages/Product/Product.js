@@ -49,10 +49,7 @@ export default function Product() {
                             <ProductDetails product={product} />
                         </div>
                         <div className="col-12 col-sm-6 col-md-3">
-                            <CheckOutCard
-                                productId={product?.id}
-                                productPrice={product?.price}
-                            />
+                            <CheckOutCard product={product} />
                         </div>
                     </div>
                 ) : (

@@ -1,18 +1,25 @@
-import React from "react";
-import Cart from "./Cart";
-import ssd from "@images/shipping-cart/ssd-pannel.png";
-import "./ShopingCart.css";
-import { Link } from "react-router-dom";
-import { SubTotal } from "./CheckOut/SubTotal";
-import Header from "@components/Header/Header";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { fetchCartItems } from "@store/cart/cartThunks";
 import { CartItem } from "./CartItem/CartItem";
+
+import "./ShopingCart.css";
+
 export const ShopingCart = () => {
+    const cartItems = useSelector((state) => state.cart.cartItems);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (!cartItems) dispatch(fetchCartItems());
+    }, []);
+
     return (
         <div>
             <div className=" cart-mein-dev">
                 <div className="row">
                     <div className="col-md-9">
-                        <div class="card card-box">
+                        <div class="card cart-box">
                             <div className="row mx-0">
                                 <div className="shop-heading">
                                     <div className="col-md-10">
