@@ -33,9 +33,10 @@ class CartController extends BaseController
            
             $items[] = $item;
         });
-
+        $items['details'] = $this->cartDetails();
         return response(array('success' => true, 'data' => $items, 'message' => 'cart get items success'), 200, []);
     }
+    
     //adding item to cart
     public function addCart(AddToCartRequest $request)
     {
@@ -67,14 +68,7 @@ class CartController extends BaseController
     //show details of items
     public function details()
     {
-        $userId = $this->userId; // get this from session or wherever it came from
-
-        $details = [];
-        $details = [
-            'total_quantity' => \Cart::session($userId)->getTotalQuantity(),
-            'sub_total' => \Cart::session($userId)->getSubTotal(),
-            'total' => \Cart::session($userId)->getTotal(),
-        ];
+        $details = $this->cartDetails();      
 
         return response(array('success' => true, 'data' => $details, 'message' => "Get cart details success."), 200, []);
     }
@@ -103,5 +97,16 @@ class CartController extends BaseController
 
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
         }
+    }
+
+    //details of cart items
+    protected function cartDetails()
+    {
+        $details = [
+            'total_quantity' => \Cart::session( $this->userId)->getTotalQuantity(),
+            'sub_total' => \Cart::session( $this->userId)->getSubTotal(),
+            'total' => \Cart::session( $this->userId)->getTotal(),
+        ];
+        return $details;
     }
 }
