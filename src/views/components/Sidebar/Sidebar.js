@@ -91,7 +91,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                 </li>
                             )}
                             <li className="d-block">
-                                <i className="fa fa-globe"></i>{" "}
+                                <i className="fa fa-globe"></i>
                                 <Link>English</Link>
                             </li>
                             <li className="d-block">

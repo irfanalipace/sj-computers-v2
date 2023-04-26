@@ -1,11 +1,10 @@
 import ApiService from "@services/apiService";
 
-export function addToCartApi({ id, quantity, price }) {
+export function addToCartApi({ id, quantity }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/add-to-cart`, {
             id,
             qty: quantity,
-            price,
         })
             .then((response) => {
                 console.log(

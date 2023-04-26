@@ -18,7 +18,7 @@ const CarouselSlider = () => {
                     <div className="col-md-12">
                         <div className="product-section-add">
                             <div style={{ textAlign: "left" }}>
-                                Best Selling Products{" "}
+                                Best Selling Products
                                 <Link className="text-decoration-none">
                                     see more
                                 </Link>
@@ -45,7 +45,7 @@ const CarouselSlider = () => {
                 <div className="col-md-12">
                     <div className="product-section-add">
                         <div style={{ textAlign: "left" }}>
-                            Best Selling Products{" "}
+                            Best Selling Products
                             <Link className="text-decoration-none">
                                 see more
                             </Link>

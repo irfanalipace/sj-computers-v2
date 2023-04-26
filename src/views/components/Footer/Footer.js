@@ -105,7 +105,7 @@ const Footer = () => {
                                                 href="#!"
                                                 className="herf-link text-decoration-none"
                                             >
-                                                Instagram{" "}
+                                                Instagram
                                             </a>
                                         </li>
                                         <li>

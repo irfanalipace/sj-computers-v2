@@ -17,6 +17,7 @@ const cartSlice = createSlice({
             state.isLoading = false;
         },
         ADD_TO_CART: (state, action) => {
+            console.log("cart items: ", action.payload);
             state.cart = [...state.cart, ...action.payload];
             state.isLoading = false;
         },

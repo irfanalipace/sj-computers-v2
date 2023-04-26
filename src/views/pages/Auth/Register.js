@@ -128,7 +128,7 @@ const Register = () => {
                             <FontAwesomeIcon
                                 icon={faInfo}
                                 style={{ color: "#52AC66" }}
-                            />{" "}
+                            />
                             Passwords must be at least 6 characters.
                         </p>
                         <div className="mb-3">

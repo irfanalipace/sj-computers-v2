@@ -44,7 +44,7 @@ const ProductDetails = ({ product }) => {
                 </div>
                 <div className="col-lg-8 col-md-6 col-sm-12">
                     <div>
-                        <Link className="links-rting">66 ratings</Link>{" "}
+                        <Link className="links-rting">66 ratings</Link>
                         <Link className="moniter-links">
                             11 answered questions
                         </Link>
@@ -109,7 +109,7 @@ const ProductDetails = ({ product }) => {
                     <li>
                         <span className="item1">Brand</span>
                         <span className="items capitalize">
-                            {productBrand?.name}{" "}
+                            {productBrand?.name}
                         </span>
                     </li>
                     <span className="item11">Resolution</span>

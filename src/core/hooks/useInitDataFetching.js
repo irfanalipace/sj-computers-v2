@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { fetchBrands } from "@store/brands/brandsThunks";
 import { fetchCategory } from "@store/category/categoryThunks";
-import { addToCart } from "@store/cart/cartThunks";
+import { createLocalCart } from "@store/cart/cartThunks";
 import { getCartItems } from "@utils/helpers";
 
 export const useInitDataFetching = () => {
@@ -12,6 +12,6 @@ export const useInitDataFetching = () => {
     useEffect(() => {
         dispatch(fetchCategory());
         dispatch(fetchBrands());
-        dispatch(addToCart(cartItems));
+        dispatch(createLocalCart(cartItems));
     }, []);
 };

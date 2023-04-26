@@ -32,3 +32,12 @@ export const fetchCartItems = () => {
         }
     };
 };
+
+export const createLocalCart = (data) => {
+    return async (dispatch) => {
+        dispatch({
+            type: ADD_TO_CART,
+            payload: data,
+        });
+    };
+};

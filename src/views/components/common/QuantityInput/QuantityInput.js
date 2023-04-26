@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 
 import "./QuantityInput.css";
 
-export const QuantityInput = ({ onChange }) => {
+export const QuantityInput = ({
+    onChange,
+    minQuantity = 0,
+    maxQuantity = 100,
+}) => {
     const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
@@ -11,11 +15,15 @@ export const QuantityInput = ({ onChange }) => {
 
     return (
         <div className="quantity-container">
-            <p>Quantity</p>
+            <p className="mb-1">Quantity</p>
             <div className="quantity-inner">
                 <button
                     className="quantity-button"
-                    onClick={(e) => setQuantity(quantity + 1)}
+                    onClick={(e) =>
+                        setQuantity(
+                            quantity < maxQuantity ? quantity + 1 : quantity
+                        )
+                    }
                 >
                     +
                 </button>
@@ -27,7 +35,9 @@ export const QuantityInput = ({ onChange }) => {
                 <button
                     className="quantity-button"
                     onClick={(e) =>
-                        setQuantity(quantity > 0 ? quantity - 1 : quantity)
+                        setQuantity(
+                            quantity > minQuantity ? quantity - 1 : quantity
+                        )
                     }
                 >
                     -
