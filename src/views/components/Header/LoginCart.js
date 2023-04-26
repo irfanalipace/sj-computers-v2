@@ -12,7 +12,7 @@ const LoginCart = () => {
         <div className="dropdown-payment">
             <button
                 onClick={handleButtonClick}
-                className="dropdown-toggle pb-0"
+                className="dropdown-toggle pb-0 login-cart-button"
             >
                 Login <br></br>Register
             </button>

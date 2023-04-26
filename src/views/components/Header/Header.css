@@ -36,7 +36,15 @@
     background: #00305e;
     border: 0px;
     color: white;
-    padding-top: 31px;
+ 
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 15px;
+line-height: 18px;
+
+color: #FFFEFE;
+
 }
 .input-form-control {
     height: 60px;
@@ -135,6 +143,12 @@
     border: 0px;
     color: white;
     padding-top: 12px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
 }
 
 .ul-menu {
@@ -164,7 +178,94 @@
 .nav-right > div:last-child {
     justify-content: right;
 }
+.box-overlay {
+    /* position: fixed; */
+    top: -276px;
+    left: 150px;
+    display: flex;
+    max-width: 100%;
+}
 
+  .dev{
+display: flex;
+
+margin-bottom: 10px;
+
+  }
+  .not-add{
+    font-size: 16px;
+  }
+  .items-no{
+    font-size: 15px;
+  }
+ 
+.cart-item{
+    font-size: 16px;
+    margin-left: 80px;
+    margin-top: -34px;
+}
+.img-dev{
+
+        display: flex;
+     
+    
+}
+.deliver-text{
+    
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 13px;
+line-height: 16px;
+
+color: #B8B8B9;
+
+}
+.cart-button {
+    border: 1px solid #B8B8B9;
+    /* border-color: black; */
+    margin-left: 105px;
+    margin-right: 15px;
+    border-radius: 8px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #333333;
+   
+    background: #FFFFFF;
+  
+}
+
+    
+.cart-button:active{
+    color: white;
+    background: #52AC66;
+}
+.checkout-proced {
+    background: #52AC66;
+    border-radius: 8px;
+    width: 230px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+    height: 44px;
+    margin-top: -5px;
+}
+.body-cart{
+    margin-top: -40px;
+    margin-left: 42px;
+}
+.icon-cart{
+    background: #00305E;
+}
+.cart-dev-section{
+    margin-top: -6px;
+}
 @media screen and (max-width: 991px) {
     .main-nav {
         width: 100%;

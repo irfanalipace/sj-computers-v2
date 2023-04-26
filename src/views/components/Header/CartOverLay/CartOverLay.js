@@ -9,7 +9,7 @@ export const CartOverLay = () => {
     return (
         <div>
             <button onClick={() => setSmShow(true)} className="me-2">
-            onClick
+           
             </button>
 
             <Modal
