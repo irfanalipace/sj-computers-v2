@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Button } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { CartOverLay } from "./CartOverLay/CartOverLay";
 import footerlogo from "@images/header-logo.png";
@@ -9,10 +8,11 @@ import vectorcart from "@images/home/vector.png";
 import reaxtimg from "@images/rext.png";
 import vectorimg from "@images/setr.png";
 import "./Header.css";
-import { Modal } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import LocationModel from "./Location/LocationModel";
 import LoginCart from "./LoginCart";
 import Search from "./Search";
+import Sidebar from "../Sidebar/Sidebar";
 const Header = () => {
     const [smShow, setSmShow] = useState(false);
     const [lgShow, setLgShow] = useState(false);
@@ -31,9 +31,43 @@ const Header = () => {
         "email-sent",
         "checkout",
     ];
+    const toggleSidebar = () => {
+        setIsOpen(!isOpen);
+    };
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <>
+            <div className={`sidebar-cart ${isOpen ? 'open' : 'closed'}`}>
+                <button onClick={toggleSidebar} className="close-button">X</button>
+                {/* sidebar content */}
+                <div className="" style={{ background: "white" }}>
+                    <div className="row ">
+                        <div className="first-dev">
+                            <div className="not-add">
+                                <span><img src={vectorimg} />  Not Added</span>
+                            </div>
+                            <div className="sub-title-add">
+                                <span className="">Cart Subtotal</span><span className="item1"> ( 1 item ):</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row ">
+                        <div className="img-dev">
+                            <div className="img-sets">
+                                <img src={reaxtimg} alt="" />
+                            </div>
+                            <div className="cart-overlay-mein">
+                                <button className="cart-overlaybutton">Cart</button>
+                            </div>
+                            <div className="procesed-dev">
+                                <button className="processed-button">Proceed to checkout (item)</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             {!nonHeaderRoutes.includes(location.pathname.split("/")[1]) && (
                 <header className="navbar navbar-expand-lg header-background px-3">
                     <Link className="navbar-brand" to="/">
@@ -49,10 +83,10 @@ const Header = () => {
                                     border: "#00305E",
                                 }}
                             >
-                                <p></p>Deliver to <br></br>
+                                <span className="deliver-text">Deliver to</span> <br></br>
                                 {currentState?.name
                                     ? currentState?.name
-                                    : "Select Location"}
+                                    : "California"}
                             </Button>
                         </div>
                         {show && (
@@ -113,10 +147,10 @@ const Header = () => {
                             </div>
 
                             <div className="dropdown-cart">
-                                {isAuthenticated ? (
+                                {!isAuthenticated ? (
                                     <div>
-                                        <p className="mb-0 text-white">
-                                            Hello, {user?.name}
+                                        <p className="mb-0 text-white check-auth">
+                                            Hello {user?.name}
                                         </p>
                                     </div>
                                 ) : (
@@ -146,29 +180,16 @@ const Header = () => {
                                 </div>
                             </div>
 
-                            <button
-                                className="icon-cart me-2 "
-                                onClick={() => setSmShow(true)}
-                            >
+                            <button className="icon-cart me-2" onClick={toggleSidebar}>
                                 <div className="product-boll">
-                                    <div
-                                        className="dropdown dot"
-                                        style={{
-                                            textAlign: "center",
-                                            color: "white",
-                                        }}
-                                    >
+                                    <div className="dropdown dot" style={{ textAlign: "center", color: "white" }}>
                                         0
-                                        <img
-                                            src={vectorcart}
-                                            alt=""
-                                            className="vector-cart"
-                                        />
+                                        <img src={vectorcart} alt="" className="vector-cart" />
                                     </div>
-
                                     <span className="cart-text">Cart</span>
                                 </div>
                             </button>
+
                         </div>
                     </div>
                 </header>

@@ -2,9 +2,15 @@
     background: #eaeded;
 }
 .text-p {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
     font-size: 15px;
+    line-height: 6px;
+  
+    color: #333333;
 }
-.modal-content {
+/* .modal-content {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -16,20 +22,49 @@
     border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
     border-radius: var(--bs-modal-border-radius);
     outline: 0;
+} */
+
+.location-header-text{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+
+font-size: 20px;
+line-height: 15px;
+/* identical to box height */
+
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+
 }
-.login-button {
+.location-button {
+    /* padding-right: 4px; */
     font-size: "18px";
     margin-top: "8px";
     color: "#333333";
     bottom: "8px";
+    width: 474px;
+    height: 38px;
+    left: 579px;
+    top: 349px;
+    background: #38C056;
+    border-radius: 10px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FFFFFF;
 }
-
 .button-box {
     box-sizing: border-box;
-    width: 109px;
+    width: 139px;
     height: 38px;
-    left: 770px;
-    top: 415px;
+    /* left: 770px; */
+    /* top: 415px; */
     background: #edfff1;
     border: 1px solid #52ac66;
     border-radius: 7px;
@@ -39,21 +74,34 @@
 .button-input {
     box-sizing: border-box;
     /* position: absolute; */
-    width: 258px;
+    width: 310px;
     height: 45px;
-    left: 579px;
-    top: 413px;
+    /* left: 579px; */
+    /* top: 413px; */
     background: #edfff1;
     border: 1px solid #52ac66;
     border-radius: 5px;
 }
+.login-button-box{
+    
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 10px;
+line-height: 12px;
 
+color: #333333;
+font-size: 14px;
+margin-top: 8px;
+color: #333333;
+bottom: 8px;
+}
 .dropdown-button-box {
     text-align: left;
     color: black;
     box-sizing: border-box;
     max-width: 95%;
-    width: 395px;
+    width: 490px;
     height: 42px;
     left: 0px;
     top: 0px;

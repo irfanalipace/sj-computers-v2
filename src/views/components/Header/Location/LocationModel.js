@@ -39,21 +39,22 @@ function UpdateStateModel({ isOpen, handleClose }) {
     };
 
     return (
-        <Modal show={isOpen} onHide={handleClose} centered>
+        <Modal show={isOpen} onHide={handleClose} centered className="location-model">
             <Modal.Header className="header">
-                <Modal.Title>Choose to your location</Modal.Title>
+                <Modal.Title>
+               <span className="location-header-text"> Choose to your location</span>
+                </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p className="text-muted text-p">
-                    Delivery option and delivery location may vary for different
+                <span className="text-muted text-p">
+                Delivery option and delivery location may vary for different
                     locations.
-                </p>
+                </span>
 
                 {!isAuthenticated && (
                     <div className="d-grid justify-content-center">
                         <button
-                            type="submit"
-                            className="btn btn-primary login-button"
+                       className="location-button"
                         >
                             Sign in to see your address
                         </button>
@@ -62,12 +63,7 @@ function UpdateStateModel({ isOpen, handleClose }) {
 
                 <h5
                     className="login-button-box"
-                    style={{
-                        fontSize: "14px",
-                        marginTop: "8px",
-                        color: "#333333",
-                        bottom: "8px",
-                    }}
+                 
                 >
                     Enter a US zip code
                 </h5>
