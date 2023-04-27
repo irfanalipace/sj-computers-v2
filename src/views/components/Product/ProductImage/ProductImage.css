@@ -45,11 +45,3 @@
     object-fit: contain;
     margin-right: 20px;
 }
-
-button {
-    background-color: #fff;
-    color: #000;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-}

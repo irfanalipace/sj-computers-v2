@@ -8,15 +8,14 @@
     margin: 3px;
 }
  .login-cart-button{
-font-family: 'Inter';
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 17px;
-/* identical to box height */
+    
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: #FFFFFF;
 
-
-color: #FFFFFF;
 }
 .product-section1 {
     position: absolute;
@@ -62,13 +61,14 @@ color: #FFFFFF;
 }
 .dropdown-payment button {
     background-color: #00305e;
-    color: white;
-    padding: 9px;
-    font-size: 20px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
     border: none;
-    cursor: pointer;
 }
-
 .dropdown-paymenr button:hover {
     background-color: #3e8e41;
 }
