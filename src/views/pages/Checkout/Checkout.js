@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 
 import Accordion from "@common/Accordion/Accordion";
 import ShippingDetails from "@components/Checkout/ShippingDetails/ShippingDetails";
@@ -14,6 +15,8 @@ export default function Checkout() {
     const [accordionTwo, setAccordionTwo] = useState(false);
     const [accordionThree, setAccordionThree] = useState(false);
     const [currentAccordionId, setCurrentAccordionId] = useState();
+
+    const checkoutDetails = useSelector((state) => state.cart.details);
 
     const refAccordionOne = useRef(accordionOne);
 
@@ -70,7 +73,10 @@ export default function Checkout() {
                             <img src={footerlogo} />
                         </div>
                         <div className="items-number">
-                            <h3>Checkout (1 item)</h3>
+                            <h3>
+                                Checkout ({checkoutDetails.total_quantity}{" "}
+                                items)
+                            </h3>
                         </div>
                     </div>
                 </div>

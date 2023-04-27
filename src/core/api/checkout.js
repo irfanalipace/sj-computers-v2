@@ -1,0 +1,71 @@
+import ApiService from "@services/apiService";
+
+export function getShippingAddressApi() {
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/get-shipping-address`)
+            .then((response) => {
+                console.log(
+                    "file: checkout.js | getShippingAddressApi| response",
+                    response
+                );
+                resolve(response.data);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error checkout", e);
+                reject(e);
+            });
+    });
+}
+
+export function setShippingAddressApi({
+    country,
+    fullName,
+    phoneNumber,
+    address,
+    floorAddress,
+    city,
+    state,
+    zipCode,
+}) {
+    return new Promise((resolve, reject) => {
+        ApiService.post(`/order-shipping-address`, {
+            country,
+            full_name: fullName,
+            phone_number: phoneNumber,
+            address: address + floorAddress,
+            city,
+            state,
+            zip_code: zipCode,
+        })
+            .then((response) => {
+                console.log(
+                    "file: checkout.js | setShippingAddressApi| response",
+                    response
+                );
+                resolve(response.data);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error checkout", e);
+                reject(e);
+            });
+    });
+}
+
+export function placeOrderApi({ paymentType }) {
+    return new Promise((resolve, reject) => {
+        ApiService.post(`/order-shipping-address`, {
+            payment_type: paymentType,
+        })
+            .then((response) => {
+                console.log(
+                    "file: checkout.js | placeOrderApi| response",
+                    response
+                );
+                resolve(response.data);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error checkout", e);
+                reject(e);
+            });
+    });
+}

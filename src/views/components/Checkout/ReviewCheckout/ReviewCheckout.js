@@ -12,7 +12,7 @@ export default function ReviewCheckout({ handleClick }) {
         <div className="review-card">
             <h4>Estimated delivery: 14 April 2023 - 02 May 2023</h4>
             <p>Item Shippied from sjcomputer.us</p>
-            <div className="row mx-0">
+            <div className="row mx-0 mb-3">
                 <div className="col-7 ps-0">
                     <div className="item-card">
                         <div className="img-wrapper">
@@ -26,7 +26,7 @@ export default function ReviewCheckout({ handleClick }) {
                     </div>
                 </div>
                 <div className="col-5">
-                    <div>
+                    {/* <div>
                         <h6>Choose Delivery Options:</h6>
                         <div className="delivery-options">
                             <div className="delivery-option">
@@ -63,7 +63,7 @@ export default function ReviewCheckout({ handleClick }) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
