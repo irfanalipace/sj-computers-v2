@@ -8,12 +8,14 @@ import { CartItem } from "./CartItem/CartItem";
 import "./ShopingCart.css";
 
 export const ShopingCart = () => {
-    const cartItems = useSelector((state) => state.cart.cart);
+    const cartItems = useSelector((state) => state.cart.items);
     const isLoading = useSelector((state) => state.cart.isLoading);
     const dispatch = useDispatch();
 
+    console.log("cartItems: ", cartItems);
+
     useEffect(() => {
-        if (!cartItems) dispatch(fetchCartItems());
+        // if (!cartItems.length > 0) dispatch(fetchCartItems());
     }, []);
 
     return (
@@ -41,12 +43,12 @@ export const ShopingCart = () => {
                                         </div>
                                     </div>
                                     {cartItems?.map((item) => (
-                                        <>
+                                        <div key={item.id} id={item.id}>
                                             <hr className="hrline"></hr>
                                             <div className="items">
                                                 <CartItem cartData={item} />
                                             </div>
-                                        </>
+                                        </div>
                                     ))}
                                 </div>
                             </div>

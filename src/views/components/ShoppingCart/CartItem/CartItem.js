@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Loader from "@common/Spinner/Spinner";
@@ -7,14 +7,17 @@ import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./CartItem.css";
 
-export const CartItem = ({ cartData }) => {
+export const CartItem = memo(({ cartData }) => {
     const [quantity, setQuantity] = useState(1);
-    const updatingItem = useSelector((state) => state.cart.updatingItem);
+    const [updatingItem, setUpdatingItem] = useState(false);
+
     const dispatch = useDispatch();
 
     const deleteItemFunction = () => {
         dispatch(deleteItem(cartData));
     };
+    console.log("cartData", cartData);
+
     return (
         <div>
             <div className="row">
@@ -65,36 +68,41 @@ export const CartItem = ({ cartData }) => {
                                 </p>
                             </div>
                         </div>
+                        {cartData.loading ? (
+                            <Loader />
+                        ) : (
+                            <>
+                                <div
+                                    className="d-flex"
+                                    style={{
+                                        maxWidth: "700px",
+                                    }}
+                                >
+                                    <QuantityInput
+                                        onChange={setQuantity}
+                                        minQuantity={1}
+                                    />
 
-                        <div
-                            className="d-flex"
-                            style={{
-                                maxWidth: "700px",
-                            }}
-                        >
-                            <QuantityInput
-                                onChange={setQuantity}
-                                minQuantity={1}
-                            />
-
-                            <button
-                                onClick={deleteItemFunction}
-                                className="button-link ms-2"
-                                disabled={updatingItem}
-                            >
-                                {updatingItem ? <Loader /> : "Delete"}
-                            </button>
-                            {/* <button className="button-link">
+                                    <button
+                                        onClick={deleteItemFunction}
+                                        className="button-link ms-2"
+                                        disabled={updatingItem}
+                                    >
+                                        {updatingItem ? <Loader /> : "Delete"}
+                                    </button>
+                                    {/* <button className="button-link">
                                 Save for later
                             </button>
                             <button className="button-link">
                                 Compare with similer item
                             </button>
                             <button className="button-link">Share</button> */}
-                        </div>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
         </div>
     );
-};
+});

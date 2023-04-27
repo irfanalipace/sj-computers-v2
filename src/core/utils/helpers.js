@@ -18,5 +18,39 @@ export const addItemToLocalCart = (cartItem) => {
 };
 
 export const getCartItems = () => {
-    return JSON.parse(window.localStorage.getItem("cart"));
+    let cartItems = window.localStorage.getItem("cart");
+    if (cartItems) return JSON.parse(cartItems);
+    return [];
+};
+
+export const deleteCartItem = (cartItem) => {
+    let cartItems = JSON.parse(window.localStorage.getItem("cart"));
+    let index = cartItems?.findIndex((item) => item.id === cartItem.id);
+    if (index !== -1) {
+        cartItems.splice(index, 1);
+    }
+    window.localStorage.setItem("cart", JSON.stringify(cartItems));
+};
+
+export const findMissingObjects = (array_1, array_2) => {
+    const missingObjects1 = array_1?.filter(
+        (obj1) => !array_2?.some((obj2) => obj1.id === obj2.id)
+    );
+    const missingObjects2 = array_2?.filter(
+        (obj2) => !array_1?.some((obj1) => obj2.id === obj1.id)
+    );
+    return [missingObjects1, missingObjects2];
+};
+
+export const createCartObject = (object) => {
+    console.log("object", object);
+    const cart = {
+        id: object.id,
+        name: object.name,
+        quantity: object.quantity,
+        price: object.price,
+        product: object.attributes.product,
+    };
+
+    return cart;
 };

@@ -4,16 +4,21 @@ import {
     ADD_TO_LOCAL_CART,
     DELETE_ITEM,
     UPDATE_QUANTITY,
+    CREATE_LOCAL_CART,
     UPDATING,
     API_ERROR,
 } from "@store/cart/cartSlice";
 import { addToCartApi, fetchCartApi, deleteItemApi } from "@api/cart";
+import { deleteCartItem } from "@utils/helpers";
 
 export const addToCart = (data) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             await addToCartApi(data);
+            // let cart = {
+            //     data
+            // }
             dispatch({
                 type: ADD_TO_CART,
                 payload: data,
@@ -28,8 +33,9 @@ export const addToCart = (data) => {
 export const deleteItem = (data) => {
     return async (dispatch) => {
         try {
-            dispatch({ type: UPDATING, payload: {} });
+            dispatch({ type: UPDATING, payload: data });
             await deleteItemApi(data);
+            deleteCartItem(data);
             dispatch({
                 type: DELETE_ITEM,
                 payload: data,
@@ -44,10 +50,10 @@ export const deleteItem = (data) => {
 export const fetchCartItems = () => {
     return async (dispatch) => {
         try {
-            dispatch({ type: UPDATING, payload: {} });
+            dispatch({ type: LOADING, payload: {} });
             let response = await fetchCartApi();
             dispatch({
-                type: UPDATE_QUANTITY,
+                type: ADD_TO_CART,
                 payload: response.data,
             });
         } catch (error) {
@@ -61,6 +67,15 @@ export const addToLocalCart = (data) => {
     return async (dispatch) => {
         dispatch({
             type: ADD_TO_LOCAL_CART,
+            payload: data,
+        });
+    };
+};
+
+export const createLocalCart = (data) => {
+    return async (dispatch) => {
+        dispatch({
+            type: CREATE_LOCAL_CART,
             payload: data,
         });
     };

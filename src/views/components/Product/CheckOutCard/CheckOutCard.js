@@ -19,7 +19,7 @@ export const CheckOutCard = ({ product }) => {
     const isLoading = useSelector((state) => state.cart.isLoading);
     const [quantity, setQuantity] = useState(1);
     const [show, setShow] = useState(false);
-    const [cartItem, setCartItem] = useState({});
+    const [cartItem, setCartItem] = useState(null);
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
 
@@ -74,7 +74,7 @@ export const CheckOutCard = ({ product }) => {
                         handleClose={() => setShow(false)}
                     />
                 )}
-                {cartItem ? (
+                {cartItem?.length > 0 ? (
                     <p>Item Added in Cart</p>
                 ) : (
                     <>
