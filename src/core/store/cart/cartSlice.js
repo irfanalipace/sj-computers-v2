@@ -39,6 +39,16 @@ const cartSlice = createSlice({
             state.isLoading = false;
         },
 
+        ADD_LIST_TO_CART: (state, action) => {
+            let item = { ...action.payload.cartItem };
+            let details = { ...action.payload.details };
+            state.cart = [...state.cart, { ...item }];
+            if (details) {
+                state.details = { ...details };
+            }
+            state.isLoading = false;
+        },
+
         ADD_TO_LOCAL_CART: (state, action) => {
             let item = { ...action.payload.cartItem };
             let details = { ...action.payload.details };

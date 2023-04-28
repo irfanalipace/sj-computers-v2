@@ -25,10 +25,13 @@ class OrderController extends Controller
                     return $response;
                     break;
                 case StatusEnum::PAYMENTTYPESQUARE:
-
+                    $url = route('squreCharge');
+                    $response = new RedirectResponse($url, 307);
+                    return $response;
                     break;
                 default:
                     # code...
+                    return response()->json(['code' => 400 ,'msg' => "Please choose one option"]);
                     break;
             }
         } catch (Exception $e) {
@@ -46,40 +49,12 @@ class OrderController extends Controller
     {
         try {
 
-            ($row = OrderShippingAddress::whereUser_id(auth()->user()->id)->first()) ? $order = $this->updateShippingAddress($row, $request) : $order = $this->createShippingAddress($request);
+            $order = OrderShippingAddress::updateOrCreate(
+                ['user_id' => auth()->user()->id],
+                ['country' => $request['country'], 'full_name' => $request['full_name'], 'phone_number' => $request['phone_number'], 'address' => $request['address'], 'city' => $request['city'], 'state' => $request['state'], 'zip_code' => $request['zip_code'], 'user_id' => auth()->user()->id]
+            );
 
-            return response(array('success' => true, 'data' => true, 'message' => $order), 200, []);
-        } catch (Exception $e) {
-            return response()->json(['status' => 400, 'msg', 'Something went wrong.' . $e]);
-        }
-    }
-
-    //create shipping address
-    public function createShippingAddress($created)
-    {
-        try {
-            OrderShippingAddress::create(['country' => $created['country'], 'full_name' => $created['full_name'], 'phone_number' => $created['phone_number'], 'address' => $created['address'], 'city' => $created['city'], 'state' => $created['state'], 'zip_code' => $created['zip_code'], 'user_id' => auth()->user()->id]);
-            return StatusEnum::SHIPPINGADDRESSCREATED;
-        } catch (Exception $e) {
-            return response()->json(['status' => 400, 'msg', 'Something went wrong.' . $e]);
-        }
-    }
-
-    //update shipping address
-    public function updateShippingAddress($update, $request)
-    {
-        try {
-
-            $update->country = $request->country;
-            $update->full_name = $request->full_name;
-            $update->phone_number = $request->phone_number;
-            $update->address = $request->address;
-            $update->city = $request->city;
-            $update->state = $request->state;
-            $update->zip_code = $request->zip_code;
-            $update->save();
-
-            return StatusEnum::SHIPPINGADDRESSUPDATED;
+            return response(array('success' => true, 'data' => $order, 'message' => "Shipping address added."), 200, []);
         } catch (Exception $e) {
             return response()->json(['status' => 400, 'msg', 'Something went wrong.' . $e]);
         }
