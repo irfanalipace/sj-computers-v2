@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { getShippingAddressApi } from "@api/checkout";
 import { fetchStates } from "@store/states/statesThunks";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import ShippingDetailsForm from "./ShippingDetailsForm";
@@ -12,30 +11,28 @@ import "./ShippingDetails.css";
 export default function ShippingDetails({ handleClick }) {
     const [newAddress, setNewAddress] = useState(false);
     const [editAddress, setEditAddress] = useState(false);
-    const [shippingAddress, setShippingAddress] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const loading = useSelector((state) => state.orders.isLoading);
+    const shippingAddress = useSelector(
+        (state) => state.orders.shippingDetails
+    );
 
     const buttonClickHandler = (e) => handleClick(e, true);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getAdresses();
         dispatch(fetchStates());
     }, []);
 
-    const getAdresses = async () => {
-        setLoading(true);
-        try {
-            const response = await getShippingAddressApi();
-            const address = response.data;
-            if (address) setShippingAddress(address);
-            else {
-                toggleAccordion();
-                setNewAddress(true);
-            }
-        } catch (error) {}
-        setLoading(false);
-    };
+    useEffect(() => {
+        toggleAccordion();
+    }, [loading]);
+
+    useEffect(() => {
+        if (shippingAddress) {
+            setNewAddress(false);
+            setEditAddress(false);
+        }
+    }, [shippingAddress]);
 
     const toggleAccordion = () => {
         handleClick();
@@ -75,8 +72,11 @@ export default function ShippingDetails({ handleClick }) {
                                         type="radio"
                                         id="address2"
                                         name="selectedAddress"
-                                        value="Address 2"
-                                        defaultChecked
+                                        value="address2"
+                                        onChange={() =>
+                                            console.log(e.target.value)
+                                        }
+                                        checked={true}
                                     />
                                     <div>
                                         <label htmlFor="address2">

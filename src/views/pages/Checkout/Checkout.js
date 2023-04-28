@@ -14,6 +14,7 @@ export default function Checkout() {
     const [accordionOne, setAccordionOne] = useState(false);
     const [accordionTwo, setAccordionTwo] = useState(false);
     const [accordionThree, setAccordionThree] = useState(false);
+    const [paymentMethod, setPaymentMethod] = useState("");
     const [currentAccordionId, setCurrentAccordionId] = useState();
 
     const checkoutDetails = useSelector((state) => state.cart.details);
@@ -55,15 +56,6 @@ export default function Checkout() {
         toggleAccordion(1);
     }, []);
 
-    const shippingSummary = (
-        <div>
-            <p>
-                <strong>John Adam</strong>
-            </p>
-            <p>Eagan, MN 55121, USA.(complete address, Zip code etc)</p>
-        </div>
-    );
-
     return (
         <div className="checkout-page">
             <div className="checkout-header">
@@ -88,7 +80,7 @@ export default function Checkout() {
                         <Accordion
                             id={1}
                             title="Shipping Details"
-                            summary={shippingSummary}
+                            // summary={shippingSummary}
                             toggleAccordion={toggleAccordion}
                             isOpen={accordionOne}
                         >
@@ -108,13 +100,14 @@ export default function Checkout() {
                             toggleAccordion={toggleAccordion}
                             isOpen={accordionThree}
                         >
-                            <PaymentMethod />
+                            <PaymentMethod setPayment={setPaymentMethod} />
                         </Accordion>
                     </div>
                     <div className="col-lg-3 col-6">
                         <OrderSummary
                             handleClick={handleClick}
                             activeAccordion={currentAccordionId}
+                            paymentMethod={paymentMethod}
                         />
                     </div>
                 </div>
@@ -123,3 +116,18 @@ export default function Checkout() {
         </div>
     );
 }
+
+export const shippingSummary = () => {
+    const shippingDetails = useSelector(
+        (state) => state.orders.shippingDetails
+    );
+
+    return (
+        <div>
+            <p>
+                <strong>{shippingDetails?.full_name}</strong>
+            </p>
+            <p>{shippingDetails?.address}</p>
+        </div>
+    );
+};

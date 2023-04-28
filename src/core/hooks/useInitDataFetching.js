@@ -1,17 +1,20 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { getShippingDetails } from "@store/orders/ordersThunk";
 import { fetchBrands } from "@store/brands/brandsThunks";
 import { fetchCategory } from "@store/category/categoryThunks";
 import {
     addToLocalCart,
     addToCart,
     fetchCartItems,
+    setCartDetails,
 } from "@store/cart/cartThunks";
 import {
     getCartItems,
-    findMissingObjects,
+    getCartDetails,
     addItemToLocalCart,
+    findMissingObjects,
     createCartObject,
 } from "@utils/helpers";
 
@@ -19,16 +22,33 @@ export const useInitDataFetching = () => {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const storeCartItems = useSelector((state) => state.cart.cart);
-    // const cartItems = getCartItems() || [];
+    const cartItems = getCartItems() || [];
+    const cartDetails = getCartDetails();
     // if (!cartItems.length > 0) dispatch(fetchCartItems());
 
     useEffect(() => {
         dispatch(fetchCategory());
         dispatch(fetchBrands());
-        // if (isAuthenticated) {
-        //     dispatch(fetchCartItems());
-        // } else dispatch(addToLocalCart(cartItems));
+        dispatch(getShippingDetails());
+
+        if (isAuthenticated) {
+            // dispatch(fetchCartItems());
+            cartItems.forEach((cartItem) => {
+                console.log("cartItem", cartItem);
+                dispatch(addToLocalCart({ cartItem }));
+            });
+            dispatch(setCartDetails(cartDetails));
+        } else {
+            cartItems.forEach((cartItem) => {
+                dispatch(addToLocalCart({ cartItem }));
+            });
+            dispatch(setCartDetails(cartDetails));
+        }
     }, []);
+
+    useEffect(() => {
+        console.log("store cart items");
+    }, [storeCartItems]);
 
     // useEffect(() => {
     //     if (isAuthenticated) {

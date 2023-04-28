@@ -19,23 +19,23 @@ export function getShippingAddressApi() {
 
 export function setShippingAddressApi({
     country,
-    fullName,
-    phoneNumber,
+    full_name,
+    phone_number,
     address,
     floorAddress,
     city,
     state,
-    zipCode,
+    zip_code,
 }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/order-shipping-address`, {
             country,
-            full_name: fullName,
-            phone_number: phoneNumber,
+            full_name,
+            phone_number,
             address: address + floorAddress,
             city,
             state,
-            zip_code: zipCode,
+            zip_code,
         })
             .then((response) => {
                 console.log(
@@ -51,10 +51,10 @@ export function setShippingAddressApi({
     });
 }
 
-export function placeOrderApi({ paymentType }) {
+export function placeOrderApi({ paymentMethod }) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/order-shipping-address`, {
-            payment_type: paymentType,
+        ApiService.post(`/place-order`, {
+            payment_type: paymentMethod,
         })
             .then((response) => {
                 console.log(

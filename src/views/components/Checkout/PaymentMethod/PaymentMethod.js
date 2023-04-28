@@ -1,15 +1,36 @@
-import visa from "@images/common/visa.png";
-import mastercard from "@images/common/mastercard.png";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { placeOrder } from "@store/orders/ordersThunk";
 import paypal from "@images/common/paypal.png";
 import PaymentButton from "./PaymentButton";
 
 import "./PaymentMethod.css";
+import { useSelector } from "react-redux";
 
-export default function PaymentMethod({ handleClick }) {
+export default function PaymentMethod({ setPayment }) {
+    const [paymentMethod, setPaymentMethod] = useState("PAYPAL");
+    const [disabled, setDisabled] = useState(true);
+    const placingOrder = useSelector((state) => state.orders.placingOrder);
+
+    const dispatch = useDispatch();
+
+    const handleChange = (e) => {
+        setPayment(e.target.value);
+        setPaymentMethod(e.target.value);
+        setDisabled(false);
+    };
+
+    const clickHandler = () => {
+        dispatch(
+            placeOrder({ paymentMethod }, (link) => window.open(link, "_blank"))
+        );
+    };
+
     return (
         <div className="payment-card">
             <div className="payment-methods">
-                <div className="payment-method">
+                {/* <div className="payment-method">
                     <input
                         type="radio"
                         id="method1"
@@ -28,14 +49,15 @@ export default function PaymentMethod({ handleClick }) {
                             </div>
                         </label>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="payment-method">
                     <input
                         type="radio"
                         id="method2"
                         name="selectedAddress"
-                        value="paypal"
+                        value="PAYPAL"
+                        onChange={handleChange}
                     />
                     <div>
                         <label htmlFor="method2">
@@ -50,7 +72,12 @@ export default function PaymentMethod({ handleClick }) {
                     </div>
                 </div>
             </div>
-            <PaymentButton />
+            <PaymentButton
+                paymentMethod={paymentMethod}
+                isLoading={placingOrder}
+                disabled={disabled}
+                clickHandler={clickHandler}
+            />
         </div>
     );
 }
