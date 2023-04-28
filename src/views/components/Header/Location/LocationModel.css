@@ -58,6 +58,7 @@ color: #000000;
     font-size: 12px;
     line-height: 15px;
     color: #FFFFFF;
+    border: none;
 }
 .button-box {
     box-sizing: border-box;
@@ -107,7 +108,7 @@ bottom: 8px;
     top: 0px;
     border: 1px solid #000000;
     border-radius: 10px;
-    background: white;
+    background: white !important;
 }
 .dropdown-button-box::after {
     content: none;
@@ -128,28 +129,33 @@ bottom: 8px;
     height: 40px;
     background: #52ac66;
     border-radius: 8px;
+    color: white;
 }
 .done-button:hover {
-    background-color: white;
-    color: #52ac66;
+    background-color: #38C056;
 }
-.done-button:active,
+.done-button:active{
+    background-color: #38C056;
+}
 .done-button:focus {
     background: #52ac66;
-    color: white;
-    border: none;
+   
 }
 
 .dropdown-button-box:hover {
     background-color: transparent;
-    color: black;
+
 }
 .dropdown-button-box:active {
-    background-color: transparent !important;
+    background-color: transparent ;
 }
 .menus-sets {
     width: 100%;
     position: absolute;
     inset: auto auto 0px 0px;
-    /* transform: translate(0px, -43.5px); */
+ 
+        width: 465px;
+       
+        transform: translate(0px, 43.75px);
+    
 }

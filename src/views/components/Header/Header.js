@@ -215,10 +215,10 @@ const Header = () => {
                                 <img src={reaxtimg} alt="" />
                             </div>
                             <div className="cart-overlay-mein">
-                                <button className="cart-overlaybutton">Cart</button>
+                               <button className="cart-overlaybutton"><Link to="/cart" className="text-decoration-none cart-text-link">Cart</Link></button> 
                             </div>
                             <div className="procesed-dev">
-                                <button className="processed-button">Proceed to checkout (item)</button>
+                               <button className="processed-button"> <Link to="/procced-chekout" className="text-decoration-none processed-link">Proceed to checkout (item)</Link></button>
                             </div>
 
                         </div>
