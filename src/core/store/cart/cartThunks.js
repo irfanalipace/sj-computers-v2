@@ -19,7 +19,11 @@ export const addToCart = (data) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            await addToCartApi(data.cartItem);
+            let param = {
+                product_id: data.cartItem.id,
+                qty: data.cartItem.quantity,
+            };
+            await addToCartApi(param);
             dispatch({
                 type: ADD_TO_CART,
                 payload: data,
@@ -118,5 +122,21 @@ export const setCartDetails = (data) => {
             type: SET_CART_DETAILS,
             payload: data,
         });
+    };
+};
+
+export const addListToCart = (data) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: LOADING, payload: {} });
+            await addToCartApi(data);
+            dispatch({
+                type: ADD_TO_CART,
+                payload: data,
+            });
+        } catch (error) {
+            console.log("Something went wrong in carts", error);
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
+        }
     };
 };
