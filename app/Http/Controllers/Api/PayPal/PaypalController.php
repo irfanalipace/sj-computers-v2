@@ -24,7 +24,7 @@ class PaypalController extends Controller
     public function __construct()
     {
         $this->provider = new ExpressCheckout;
-        $this->userId = (Auth::check()) ? auth()->user()->id  : 'dummy';
+        $this->userId = (auth()->user()) ? auth()->user()->id  : 'dummy';
     }
     //
     public function processTransaction(Request $request)
@@ -58,10 +58,10 @@ class PaypalController extends Controller
             $data = $request->all();
             $response = $this->provider->getExpressCheckoutDetails($request->token);
             //This code checks if the ACK code of a PayPal API response, is either "SUCCESS" or "SUCCESSWITHWARNING"
-            if (in_array(strtoupper($response['ACK']), [StatusEnum::PAYPALSUCCESS,StatusEnum::PAYPALSUCCESSWITHWARNING])) {
-                GenerateInvoiceJob::dispatch($data,$response,$this->userId);
+            if (in_array(strtoupper($response['ACK']), [StatusEnum::SUCCESS,StatusEnum::PAYPALSUCCESSWITHWARNING])) {
+                GenerateInvoiceJob::dispatch($data,$response,$this->userId,StatusEnum::PAYMENTTYPEPAYPAL);
                 //return successfull message
-                return response()->json(['status' => 200, 'msg' => 'Payment Successfully completed']);
+                return response()->json(['status' => 200, 'msg' => StatusEnum::PAYMENTMESSAGE]);
     
             } else {
                  // return error if something went wrong.
