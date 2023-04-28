@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { getShippingDetails } from "@store/orders/ordersThunk";
 import { fetchBrands } from "@store/brands/brandsThunks";
 import { fetchCategory } from "@store/category/categoryThunks";
 import {
@@ -28,6 +29,8 @@ export const useInitDataFetching = () => {
     useEffect(() => {
         dispatch(fetchCategory());
         dispatch(fetchBrands());
+        dispatch(getShippingDetails());
+
         if (isAuthenticated) {
             // dispatch(fetchCartItems());
         } else {

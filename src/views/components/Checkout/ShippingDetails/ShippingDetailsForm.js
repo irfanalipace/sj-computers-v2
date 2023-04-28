@@ -1,46 +1,51 @@
-import { useEffect, useState, memo } from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
+import { setShippingDetails } from "@store/orders/ordersThunk";
 import { useFormValidation } from "@hooks/useFormValidation";
 import ShippingButton from "./ShippingButton";
-import { useSelector } from "react-redux";
 
 function ShippingDetailsForm({ address, handleClick }) {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
             country: address?.country,
-            name: address?.full_name,
-            phoneNumber: address?.phone_number,
-            streetAddress: address?.address,
+            full_name: address?.full_name,
+            phone_number: address?.phone_number,
+            address: address?.address,
             floorAddress: "",
             city: address?.city,
             state: address?.state,
-            zipCode: address?.zip_code,
+            zip_code: address?.zip_code,
             saveAddress: false,
         },
         {
             fieldLengths: {
                 country: { min: 3, max: 50 },
-                name: { min: 3, max: 100 },
+                full_name: { min: 3, max: 100 },
             },
-        },
-        submitShippingDetails
+        }
     );
 
     const states = useSelector((state) => state.states.states);
-    console.log("states", states);
+    const apiError = useSelector((state) => state.orders.apiError);
+    const loading = useSelector((state) => state.orders.isLoading);
 
     const [fieldErrors, setFieldErrors] = useState({});
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setFieldErrors({ ...errors });
     }, [errors]);
 
-    const submitShippingDetails = () => {
-        const params = { ...values };
-    };
+    useEffect(() => {
+        setFieldErrors({ ...apiError });
+    }, [apiError]);
 
-    const buttonClickHandler = (e) => {
-        handleClick(e, true);
+    const submitShippingDetails = (e) => {
+        e.preventDefault();
+        let params = { ...values };
+        console.log("params: ", params);
+        dispatch(setShippingDetails(params, (e) => handleClick(e, true)));
     };
 
     return (
@@ -52,7 +57,7 @@ function ShippingDetailsForm({ address, handleClick }) {
                     <button className="autofill-btn">Autofill</button>
                 </div>
             </div> */}
-            <form className="shipping-form" onSubmit={handleSubmit}>
+            <form className="shipping-form" onSubmit={submitShippingDetails}>
                 <div className="field-section">
                     <label htmlFor={"state"}>
                         Country/State <span className="text-danger">*</span>
@@ -79,17 +84,17 @@ function ShippingDetailsForm({ address, handleClick }) {
                         <span className="text-danger">*</span>
                     </label>
                     <input
-                        id="name"
-                        name="name"
+                        id="full_name"
+                        name="full_name"
                         className="input-field"
                         type="text"
                         placeholder="Full Name"
-                        value={values?.name}
+                        value={values?.full_name}
                         onChange={handleChange}
                     ></input>
-                    {fieldErrors.email && (
+                    {fieldErrors.full_name && (
                         <p className="fs-6 mt-1 text-danger">
-                            {fieldErrors.email}
+                            {fieldErrors.full_name}
                         </p>
                     )}
                 </div>
@@ -100,17 +105,17 @@ function ShippingDetailsForm({ address, handleClick }) {
                         <span className="text-danger">*</span>
                     </label>
                     <input
-                        id="phoneNumber"
-                        name="phoneNumber"
+                        id="phone_number"
+                        name="phone_number"
                         className="input-field"
                         type="text"
                         placeholder="Phone Number"
-                        value={values?.phoneNumber}
+                        value={values?.phone_number}
                         onChange={handleChange}
                     ></input>
-                    {fieldErrors.phoneNumber && (
+                    {fieldErrors.phone_number && (
                         <p className="fs-6 mt-1 text-danger">
-                            {fieldErrors.phoneNumber}
+                            {fieldErrors.phone_number}
                         </p>
                     )}
                 </div>
@@ -120,17 +125,17 @@ function ShippingDetailsForm({ address, handleClick }) {
                         <span className="text-danger">*</span>
                     </label>
                     <input
-                        id="streetAddress"
-                        name="streetAddress"
+                        id="address"
+                        name="address"
                         className="input-field"
                         type="text"
                         placeholder="Street address (P.O Box)"
                         value={values?.address}
                         onChange={handleChange}
                     ></input>
-                    {fieldErrors.streetAddress && (
+                    {fieldErrors.address && (
                         <p className="fs-6 mt-1 text-danger">
-                            {fieldErrors.streetAddress}
+                            {fieldErrors.address}
                         </p>
                     )}
                     <input
@@ -183,7 +188,7 @@ function ShippingDetailsForm({ address, handleClick }) {
                                 className="input-field"
                                 placeholder="Select Stte"
                                 onChange={handleChange}
-                                value={values?.name}
+                                value={values?.state}
                             >
                                 {states.map((state) => (
                                     <option value={state?.name} key={state?.id}>
@@ -205,17 +210,17 @@ function ShippingDetailsForm({ address, handleClick }) {
                                 <span className="text-danger">*</span>
                             </label>
                             <input
-                                id="zipCode"
-                                name="zipCode"
+                                id="zip_code"
+                                name="zip_code"
                                 className="input-field"
                                 type="text"
                                 placeholder="ZipCode"
-                                value={values?.zipCode}
+                                value={values?.zip_code}
                                 onChange={handleChange}
                             />
-                            {fieldErrors.zipCode && (
+                            {fieldErrors.zip_code && (
                                 <p className="fs-6 mt-1 text-danger">
-                                    {fieldErrors.zipCode}
+                                    {fieldErrors.zip_code}
                                 </p>
                             )}
                         </div>
@@ -232,7 +237,10 @@ function ShippingDetailsForm({ address, handleClick }) {
                     />
                     <label htmlFor={"saveAddress"}>Make this my address</label>
                 </div>
-                <ShippingButton handleClick={buttonClickHandler} />
+                <ShippingButton
+                    handleClick={submitShippingDetails}
+                    isLoading={loading}
+                />
             </form>
         </div>
     );

@@ -19,23 +19,23 @@ export function getShippingAddressApi() {
 
 export function setShippingAddressApi({
     country,
-    fullName,
-    phoneNumber,
+    full_name,
+    phone_number,
     address,
     floorAddress,
     city,
     state,
-    zipCode,
+    zip_code,
 }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/order-shipping-address`, {
             country,
-            full_name: fullName,
-            phone_number: phoneNumber,
+            full_name,
+            phone_number,
             address: address + floorAddress,
             city,
             state,
-            zip_code: zipCode,
+            zip_code,
         })
             .then((response) => {
                 console.log(

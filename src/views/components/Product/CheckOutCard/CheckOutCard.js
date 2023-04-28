@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
-import { addItemToLocalCart } from "@utils/helpers";
 import Button from "@common/Button/Button";
 import imges from "@images/bottom-arrow.png";
 import imges1 from "@images/cart-product/location.png";

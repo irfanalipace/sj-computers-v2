@@ -36,7 +36,7 @@ export function validateForm(values, { fieldLengths }) {
         }
         if (errors[fieldName]) {
             errors[fieldName] = errors[fieldName]
-                .replace("{fieldName}", FIELD_ENUMS[fieldName])
+                .replace("{fieldName}", FIELD_ENUMS[fieldName] || fieldName)
                 .replace("{minLength}", minLength)
                 .replace("{maxLength}", maxLength);
         }

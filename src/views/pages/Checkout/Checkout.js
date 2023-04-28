@@ -55,15 +55,6 @@ export default function Checkout() {
         toggleAccordion(1);
     }, []);
 
-    const shippingSummary = (
-        <div>
-            <p>
-                <strong>John Adam</strong>
-            </p>
-            <p>Eagan, MN 55121, USA.(complete address, Zip code etc)</p>
-        </div>
-    );
-
     return (
         <div className="checkout-page">
             <div className="checkout-header">
@@ -88,7 +79,7 @@ export default function Checkout() {
                         <Accordion
                             id={1}
                             title="Shipping Details"
-                            summary={shippingSummary}
+                            // summary={shippingSummary}
                             toggleAccordion={toggleAccordion}
                             isOpen={accordionOne}
                         >
@@ -123,3 +114,18 @@ export default function Checkout() {
         </div>
     );
 }
+
+export const shippingSummary = () => {
+    const shippingDetails = useSelector(
+        (state) => state.orders.shippingDetails
+    );
+
+    return (
+        <div>
+            <p>
+                <strong>{shippingDetails?.full_name}</strong>
+            </p>
+            <p>{shippingDetails?.address}</p>
+        </div>
+    );
+};
