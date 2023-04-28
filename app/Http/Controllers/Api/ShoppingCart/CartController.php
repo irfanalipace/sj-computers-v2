@@ -27,10 +27,6 @@ class CartController extends BaseController
 
         \Cart::session($this->userId)->getContent()->each(function ($item) use (&$items) {
            
-            $product =  Product::where('id',$item->id)->first();
-
-            $item->attributes['product'] =  $product->toArray();
-           
             $items[] = $item;
         });
         $items['details'] = $this->cartDetails();
@@ -41,17 +37,31 @@ class CartController extends BaseController
     public function addCart(AddToCartRequest $request)
     {
         try {
+            //check the local storage if items exist it will update the table
+            if(isset($request->cartItems) && !empty($request->cartItems)){
 
-            $product = Product::find($request->product_id);
+                $this->clearCart();
 
-            $item = Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $request->qty, array());
+                foreach ($request->cartItems as $value) {
+                    $product = Product::find($value->product_id);
 
+                    Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $value->qty, array(),array(), $product);
+                }
+            } else {
+                
+                $product = Product::find($request->product_id);
+
+                $item = Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $request->qty, array(),array(), $product);
+            }         
+           
             return response(array('success' => true, 'data' => $item, 'message' => 'Item added.'), 200, []);
         } catch (Exception $e) {
 
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
         }
     }
+
+
     //delete item from cart
     public function delete(DeleteCartRequest $request)
     {
