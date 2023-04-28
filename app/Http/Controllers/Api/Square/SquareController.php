@@ -34,6 +34,7 @@ class SquareController extends Controller
         ]);
         $this->userId = (auth()->user()) ? auth()->user()->id  : 'dummy';
     }
+    // charge process
     public function chargeCustomer(CardRequest $request)
     {
         try {
@@ -43,13 +44,13 @@ class SquareController extends Controller
             //create customer || retrieve customer if already added
             (auth()->user()->square_cus_id == null) ? $customer = $this->createCustomer() : $customer = $this->getCustomer();
 
-            // Create card details
+            // Get card Token
             $cardToken = $this->customerCardToken($request, $customer);
 
             $amount_money = new Money();
             $amount_money->setAmount(Cart::session($this->userId)->getSubTotal());
             $amount_money->setCurrency(StatusEnum::currency);
-
+            //create payment Request
             $body = new CreatePaymentRequest($cardToken, $idempotencyKey);
             $body->setAmountMoney($amount_money);
             $body->setAutocomplete(true);

@@ -40,8 +40,6 @@ class CartController extends BaseController
             //check the local storage if items exist it will update the table
             if(isset($request->cartItems) && !empty($request->cartItems)){
 
-                $this->clearCart();
-
                 foreach ($request->cartItems as $value) {
                     $product = Product::find($value->product_id);
 
