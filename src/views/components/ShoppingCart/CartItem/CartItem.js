@@ -13,7 +13,6 @@ import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 import "./CartItem.css";
 
 export const CartItem = memo(({ cartData }) => {
-    const [quantity, setQuantity] = useState(cartData?.quantity);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const details = useSelector((state) => state.cart.details);
     const [updatingItem, setUpdatingItem] = useState(false);

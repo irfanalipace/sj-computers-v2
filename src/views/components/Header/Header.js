@@ -146,7 +146,7 @@ const Header = () => {
                             </div>
 
                             <div className="dropdown-cart">
-                                {!isAuthenticated ? (
+                                {isAuthenticated ? (
                                     <div>
                                         <p className="mb-0 text-white check-auth">
                                             Hello {user?.name}
