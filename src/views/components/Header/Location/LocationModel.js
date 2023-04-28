@@ -121,7 +121,7 @@ function UpdateStateModel({ isOpen, handleClose }) {
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={clickHandler} className="done-button">
-                    {isLoading ? <Loader /> : "Submit"}
+                    {isLoading ? <Loader /> : "Done"}
                 </Button>
             </Modal.Footer>
         </Modal>
