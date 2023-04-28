@@ -26,6 +26,7 @@ const Home = () => {
             {/* <CarouselSlider /> */}
             {/* <ProductThreeItem /> */}
             {/* <Recommendation /> */}
+            
         </div>
     );
 };

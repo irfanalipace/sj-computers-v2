@@ -1,42 +1,51 @@
-import React from "react";
-import "./MobileSearch.css"
-import vectorcart from "@images/home/vector.png";
-import { Link } from 'react-router-dom';
-function MobileSearch() {
-  return (
-    <header className="mobile-header">
-      {/* <div className="mobile-header__logo">
-        <Link to="/">
-          <img src="Logo" alt="Logo" />
-        </Link>
-      </div> */}
-      <div className="mobile-header__menu">
-        {/* <button className="mobile-header__menu-button">
-        <img src="Logo" alt="Menu" />
-        <i className="fa fa-home" aria-hidden="true"></i>
-      </button> */}
-        <div className="mobile-header__menu-items">
-          <ul className="ul-item-list-header">
-            <li>
-              <Link to="/"><i className="fa fa-home" aria-hidden="true"></i></Link>
-            </li>
-            <li>
-              <Link to="/shop"><i className="fa fa-user" aria-hidden="true"></i></Link>
-            </li>
-            <li>
-              <Link to="/cart">
-              <i class="fa fa-cart-plus" aria-hidden="true"></i>
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import './MobileSearch.css'
+const MobileSearch = () => {
+  const [searchValue, setSearchValue] = useState('');
 
-              </Link>
-            </li>
-            <li>
-              <Link to="/account"><i class="fa fa-align-justify" aria-hidden="true"></i></Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </header>
+  const handleInputChange = (event) => {
+    setSearchValue(event.target.value);
+  }
+
+  return (
+    <div >
+ <Container className='search-dev'>
+      <Input
+      className='search-section'
+        type="text"
+        placeholder="Search..."
+        value={searchValue}
+        onChange={handleInputChange}
+      />
+      {/* <Button>Search</Button> */}
+    </Container>
+    </div>
+   
   );
-}
+};
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+`;
+
+const Button = styled.button`
+  padding: 10px 20px;
+  margin-left: 10px;
+  border-radius: 5px;
+  background-color: #0077c2;
+  color: #fff;
+  font-size: 16px;
+`;
 
 export default MobileSearch;
