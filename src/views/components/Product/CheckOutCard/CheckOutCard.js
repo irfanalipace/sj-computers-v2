@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { addToCart } from "@store/cart/cartThunks";
+import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
 import { addItemToLocalCart } from "@utils/helpers";
 import Button from "@common/Button/Button";
 import imges from "@images/bottom-arrow.png";
@@ -16,6 +16,7 @@ export const CheckOutCard = ({ product }) => {
     const currentState = useSelector((state) => state.states.currentState);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cart = useSelector((state) => state.cart.cart);
+    const details = useSelector((state) => state.cart.details);
     const isLoading = useSelector((state) => state.cart.isLoading);
     const [quantity, setQuantity] = useState(1);
     const [show, setShow] = useState(false);
@@ -24,14 +25,23 @@ export const CheckOutCard = ({ product }) => {
     const dispatch = useDispatch();
 
     const cartClickHandler = () => {
-        addItemToLocalCart({ ...product, quantity });
-        if (isAuthenticated)
-            dispatch(
-                addToCart({
-                    ...product,
-                    quantity,
-                })
-            );
+        let productPrice = product.price * quantity;
+        let cartQuantity = details.total_quantity + 1;
+        let cartTotal = details.total + productPrice;
+        const cartItem = {
+            id: product.id,
+            quantity: quantity,
+            price: productPrice,
+            product: { ...product },
+        };
+
+        const cartDetails = {
+            total_quantity: cartQuantity,
+            total: cartTotal,
+        };
+
+        if (isAuthenticated) dispatch(addToCart({ cartItem, cartDetails }));
+        else dispatch(addToLocalCart({ cartItem, cartDetails }));
     };
 
     useEffect(() => {

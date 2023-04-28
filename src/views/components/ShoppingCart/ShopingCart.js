@@ -8,11 +8,10 @@ import { CartItem } from "./CartItem/CartItem";
 import "./ShopingCart.css";
 
 export const ShopingCart = () => {
-    const cartItems = useSelector((state) => state.cart.items);
+    const cartItems = useSelector((state) => state.cart.cart);
+    const cartDetails = useSelector((state) => state.cart.details);
     const isLoading = useSelector((state) => state.cart.isLoading);
     const dispatch = useDispatch();
-
-    console.log("cartItems: ", cartItems);
 
     useEffect(() => {
         // if (!cartItems.length > 0) dispatch(fetchCartItems());
@@ -60,16 +59,11 @@ export const ShopingCart = () => {
                                                 <span className="sub-title">
                                                     Subtotal(
                                                     {
-                                                        cartItems?.details
-                                                            ?.total_quantity
+                                                        cartDetails?.total_quantity
                                                     }
                                                     items):
                                                     <strong className="price-items">
-                                                        $
-                                                        {
-                                                            cartItems?.details
-                                                                ?.sub_total
-                                                        }
+                                                        ${cartDetails?.total}
                                                     </strong>
                                                 </span>
                                                 <br></br>

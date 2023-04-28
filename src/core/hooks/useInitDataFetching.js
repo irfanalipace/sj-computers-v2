@@ -7,9 +7,11 @@ import {
     addToLocalCart,
     addToCart,
     fetchCartItems,
+    setCartDetails,
 } from "@store/cart/cartThunks";
 import {
     getCartItems,
+    getCartDetails,
     findMissingObjects,
     addItemToLocalCart,
     createCartObject,
@@ -19,15 +21,21 @@ export const useInitDataFetching = () => {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const storeCartItems = useSelector((state) => state.cart.cart);
-    // const cartItems = getCartItems() || [];
+    const cartItems = getCartItems() || [];
+    const cartDetails = getCartDetails();
     // if (!cartItems.length > 0) dispatch(fetchCartItems());
 
     useEffect(() => {
         dispatch(fetchCategory());
         dispatch(fetchBrands());
-        // if (isAuthenticated) {
-        //     dispatch(fetchCartItems());
-        // } else dispatch(addToLocalCart(cartItems));
+        if (isAuthenticated) {
+            // dispatch(fetchCartItems());
+        } else {
+            cartItems.forEach((cartItem) => {
+                dispatch(addToLocalCart({ cartItem }));
+            });
+            dispatch(setCartDetails(cartDetails));
+        }
     }, []);
 
     // useEffect(() => {
