@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { fetchCartItems } from "@store/cart/cartThunks";
@@ -78,9 +79,11 @@ export const ShopingCart = () => {
                                             </div>
                                         </div>
                                         <div className="button-checkout-data">
-                                            <button className="btn btn-primary checkout-button">
-                                                Proceed to checkout
-                                            </button>
+                                            <Link to={"/checkout"}>
+                                                <button className="btn btn-primary checkout-button">
+                                                    Proceed to checkout
+                                                </button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

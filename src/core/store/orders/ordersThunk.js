@@ -1,9 +1,16 @@
 import {
     LOADING,
+    CLEAR_LOADING,
     SET_SHIPPING_DETAILS,
+    PLACING_ORDER,
+    ORDER_PLACED,
     API_ERROR,
 } from "@store/orders/ordersSlice";
-import { getShippingAddressApi, setShippingAddressApi } from "@api/checkout";
+import {
+    getShippingAddressApi,
+    setShippingAddressApi,
+    placeOrderApi,
+} from "@api/checkout";
 
 export const getShippingDetails = () => {
     return async (dispatch) => {
@@ -21,16 +28,30 @@ export const getShippingDetails = () => {
     };
 };
 
-export const setShippingDetails = (data, cb) => {
+export const setShippingDetails = (data) => {
     return async (dispatch) => {
         try {
-            if (typeof cb === "function") cb();
             dispatch({ type: LOADING, payload: {} });
             await setShippingAddressApi(data);
             dispatch({
                 type: SET_SHIPPING_DETAILS,
                 payload: data,
             });
+        } catch (error) {
+            console.log("Something went wrong in orders", error);
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
+        }
+    };
+};
+
+export const placeOrder = (data, cb) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: PLACING_ORDER, payload: {} });
+            let response = await placeOrderApi(data);
+
+            if (typeof cb === "function") cb(response.data);
+            dispatch({ type: ORDER_PLACED, payload: {} });
         } catch (error) {
             console.log("Something went wrong in orders", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

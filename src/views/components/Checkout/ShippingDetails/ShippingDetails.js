@@ -72,8 +72,11 @@ export default function ShippingDetails({ handleClick }) {
                                         type="radio"
                                         id="address2"
                                         name="selectedAddress"
-                                        value="Address 2"
-                                        defaultChecked
+                                        value="address2"
+                                        onChange={() =>
+                                            console.log(e.target.value)
+                                        }
+                                        checked={true}
                                     />
                                     <div>
                                         <label htmlFor="address2">

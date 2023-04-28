@@ -13,8 +13,8 @@ import {
 import {
     getCartItems,
     getCartDetails,
-    findMissingObjects,
     addItemToLocalCart,
+    findMissingObjects,
     createCartObject,
 } from "@utils/helpers";
 
@@ -33,6 +33,11 @@ export const useInitDataFetching = () => {
 
         if (isAuthenticated) {
             // dispatch(fetchCartItems());
+            cartItems.forEach((cartItem) => {
+                console.log("cartItem", cartItem);
+                dispatch(addToLocalCart({ cartItem }));
+            });
+            dispatch(setCartDetails(cartDetails));
         } else {
             cartItems.forEach((cartItem) => {
                 dispatch(addToLocalCart({ cartItem }));
@@ -40,6 +45,10 @@ export const useInitDataFetching = () => {
             dispatch(setCartDetails(cartDetails));
         }
     }, []);
+
+    useEffect(() => {
+        console.log("store cart items");
+    }, [storeCartItems]);
 
     // useEffect(() => {
     //     if (isAuthenticated) {

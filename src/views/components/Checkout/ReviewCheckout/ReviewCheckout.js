@@ -19,17 +19,17 @@ export default function ReviewCheckout({ handleClick }) {
             <div className="row mx-0 mb-3">
                 <div className="col-7 ps-0">
                     {cartItems.map((item) => (
-                        <div className="item-card">
+                        <div className="item-card" key={item?.id}>
                             <div className="img-wrapper">
                                 <img src={item.product.image} alt="laptop" />
                             </div>
                             <div className="item-detail">
                                 <h6>{item.product.name}</h6>
                                 <h6 className="price">${item.price}</h6>
-                                <QuantityInput
+                                {/* <QuantityInput
                                     value={item.quantity}
                                     onChange={setQuantity}
-                                />
+                                /> */}
                             </div>
                         </div>
                     ))}

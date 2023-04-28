@@ -19,11 +19,12 @@ export const addToCart = (data) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            await addToCartApi(data);
+            await addToCartApi(data.cartItem);
             dispatch({
                 type: ADD_TO_CART,
                 payload: data,
             });
+            addItemToLocalCart(data);
         } catch (error) {
             console.log("Something went wrong in carts", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
@@ -35,7 +36,7 @@ export const deleteItem = (data) => {
     return async (dispatch) => {
         try {
             dispatch({ type: UPDATING, payload: data });
-            await deleteItemApi(data);
+            await deleteItemApi(data.cartItem);
             deleteCartItem(data);
             dispatch({
                 type: DELETE_ITEM,

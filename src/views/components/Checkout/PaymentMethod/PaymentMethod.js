@@ -1,19 +1,30 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
-import visa from "@images/common/visa.png";
-import mastercard from "@images/common/mastercard.png";
+import { placeOrder } from "@store/orders/ordersThunk";
 import paypal from "@images/common/paypal.png";
 import PaymentButton from "./PaymentButton";
 
 import "./PaymentMethod.css";
 import { useSelector } from "react-redux";
 
-export default function PaymentMethod({ handleClick }) {
+export default function PaymentMethod({ setPayment }) {
     const [paymentMethod, setPaymentMethod] = useState("PAYPAL");
-    const loading = useSelector((state) => state.orders.isLoading);
+    const [disabled, setDisabled] = useState(true);
+    const placingOrder = useSelector((state) => state.orders.placingOrder);
+
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
+        setPayment(e.target.value);
         setPaymentMethod(e.target.value);
+        setDisabled(false);
+    };
+
+    const clickHandler = () => {
+        dispatch(
+            placeOrder({ paymentMethod }, (link) => window.open(link, "_blank"))
+        );
     };
 
     return (
@@ -46,7 +57,6 @@ export default function PaymentMethod({ handleClick }) {
                         id="method2"
                         name="selectedAddress"
                         value="PAYPAL"
-                        checked={true}
                         onChange={handleChange}
                     />
                     <div>
@@ -62,7 +72,12 @@ export default function PaymentMethod({ handleClick }) {
                     </div>
                 </div>
             </div>
-            <PaymentButton paymentMethod={paymentMethod} isLoading={loading} />
+            <PaymentButton
+                paymentMethod={paymentMethod}
+                isLoading={placingOrder}
+                disabled={disabled}
+                clickHandler={clickHandler}
+            />
         </div>
     );
 }

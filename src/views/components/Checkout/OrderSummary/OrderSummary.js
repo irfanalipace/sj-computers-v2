@@ -1,12 +1,23 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
+import { placeOrder } from "@store/orders/ordersThunk";
 import ShippingButton from "@components/Checkout/ShippingDetails/ShippingButton";
 import PaymentButton from "@components/Checkout/PaymentMethod/PaymentButton";
 import ReviewCheckout from "@components/Checkout/ReviewCheckout/ReviewButton";
 
 import "./OrderSummary.css";
 
-function OrderSummary({ handleClick, activeAccordion }) {
+function OrderSummary({ handleClick, activeAccordion, paymentMethod }) {
+    const dispatch = useDispatch();
+    const [disabled, setDisabled] = useState(true);
+    const placingOrder = useSelector((state) => state.orders.placingOrder);
+
+    useEffect(() => {
+        if (paymentMethod) setDisabled(false);
+    }, [paymentMethod]);
+
     const Button = () => {
         if (activeAccordion === 1) {
             return (
@@ -23,8 +34,21 @@ function OrderSummary({ handleClick, activeAccordion }) {
                 />
             );
         } else {
+            const placeOrderFunc = () => {
+                dispatch(
+                    placeOrder({ paymentMethod }, (link) =>
+                        window.open(link, "_blank")
+                    )
+                );
+            };
+
             return (
-                <PaymentButton handleClick={handleClick} id={activeAccordion} />
+                <PaymentButton
+                    clickHandler={placeOrderFunc}
+                    id={activeAccordion}
+                    disabled={disabled}
+                    isLoading={placingOrder}
+                />
             );
         }
     };

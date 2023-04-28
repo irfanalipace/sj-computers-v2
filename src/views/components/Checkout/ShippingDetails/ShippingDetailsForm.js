@@ -44,8 +44,7 @@ function ShippingDetailsForm({ address, handleClick }) {
     const submitShippingDetails = (e) => {
         e.preventDefault();
         let params = { ...values };
-        console.log("params: ", params);
-        dispatch(setShippingDetails(params, (e) => handleClick(e, true)));
+        dispatch(setShippingDetails(params));
     };
 
     return (
