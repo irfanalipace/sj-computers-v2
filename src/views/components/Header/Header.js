@@ -23,7 +23,7 @@ const Header = () => {
     const states = useSelector((state) => state.states.states);
     const user = useSelector((state) => state.auth.user);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    
+
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
     const location = useLocation();
@@ -42,201 +42,252 @@ const Header = () => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     useEffect(() => {
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
-  
+
     const handleResize = () => {
-      setScreenWidth(window.innerWidth);
+        setScreenWidth(window.innerWidth);
     };
     return (
         <>
-            
             {screenWidth <= 750 ? (
-        <div>
-       
-       
-        <MobileHeader />
-      
-        <MobileSearch />
-       
-       
-          {/* components to render when screen width is less than or equal to 750px */}
-          
-        </div>
-      ) : (
-        <div>
-        {!nonHeaderRoutes.includes(location.pathname.split("/")[1]) && (
-                <header className="navbar navbar-expand-lg header-background px-3">
-                
-                    <Link className="navbar-brand" to="/">
-                        <img src={footerlogo} alt="" className="homepage-img" />
-                    </Link>
-                    <div className="d-flex flex-row align-items-center main-nav">
-                        <div className="d-flex align-items-center justify-content-center flex-wrap header-position">
-                            <Button
-                                variant="primary"
-                                onClick={handleShow}
-                                style={{
-                                    background: "#00305E",
-                                    border: "#00305E",
-                                }}
-                            >
-                                <span className="deliver-text">Deliver to</span> <br></br>
-                                {currentState?.name
-                                    ? currentState?.name
-                                    : "California"}
-                            </Button>
-                        </div>
-                        {show && (
-                            <LocationModel
-                                isOpen={show}
-                                handleClose={() => setShow(false)}
-                            />
-                        )}
-                        <div className="input-group search-inputgroup">
-                            <div className="input-group-btn search-panel">
-                                <Search />
-                            </div>
-                            <input
-                                type="hidden"
-                                name="search_param"
-                                value="all"
-                                id="search_param"
-                            />
-                            <input
-                                type="text"
-                                className="form-control "
-                                name="x"
-                                id="search"
-                                placeholder="Search"
-                            />
-                            <span className="input-group-btn">
-                                <button
-                                    type="button"
-                                    className="btn btn-success search-logo"
-                                >
-                                    <i className="fas fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                        <div className="nav-right">
-                            <div className="dropdown">
-                                <button
-                                    className="dropdown-toggle eng-button"
-                                    type="button"
-                                    id="dropdownMenuButton"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="false"
-                                    aria-expanded="false"
-                                >
-                                    <img src={english} alt="English Flag" /> EN
-                                </button>
-                                <div
-                                    className="dropdown-menu"
-                                    aria-labelledby="dropdownMenuButton"
-                                >
-                                    <a className="dropdown-item" href="#">
-                                        English
-                                    </a>
-                                    <a className="dropdown-item" href="#">
-                                        Spanish
-                                    </a>
-                                </div>
-                            </div>
+                <div>
+                    <MobileHeader />
 
-                            <div className="dropdown-cart">
-                                {isAuthenticated ? (
-                                    <div>
-                                        <p className="mb-0 text-white check-auth">
-                                            Hello {user?.name}
-                                        </p>
-                                    </div>
-                                ) : (
-                                    <LoginCart className="card" />
-                                )}
-                            </div>
-                            <div className="return-button ">
-                                <button
-                                    className="order-button dropdown-toggle"
-                                    type="button"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                >
-                                    Return <br></br>& Order
-                                </button>
-                                <div
-                                    className="dropdown-menu"
-                                    aria-labelledby="dropdownMenuButton"
-                                >
-                                    <a className="dropdown-item" href="#">
-                                        Return
-                                    </a>
-                                    <a className="dropdown-item" href="#">
-                                        Order
-                                    </a>
-                                </div>
-                            </div>
+                    <MobileSearch />
 
-                            <button className="icon-cart me-2" onClick={toggleSidebar}>
-                                <div className="product-boll">
-                                    <div className="dropdown dot" style={{ textAlign: "center", color: "white" }}>
-                                        0
-                                        <img src={vectorcart} alt="" className="vector-cart" />
-                                    </div>
-                                    <span className="cart-text">Cart</span>
-                                </div>
-                            </button>
-
-                        </div>
-                    </div>
-                </header>
-            )}
-
-          {/* CartOverLay code */}
-          <div className={`sidebar-cart ${isOpen ? 'open' : 'closed'}`}>
-                <button onClick={toggleSidebar} className="close-button">X</button>
-                {/* sidebar content */}
-                <div className="" style={{ background: "white" }}>
-                    <div className="row ">
-                        <div className="first-dev">
-                            <div className="not-add">
-                                <span><img src={vectorimg} />  Not Added</span>
-                            </div>
-                            <div className="sub-title-add">
-                                <span className="">Cart Subtotal</span><span className="item1"> ( 1 item ):</span>
-                            </div>
-                        </div>
-                    </div>
-                   
-                        <div className="img-dev">
-                            <div className="img-sets">
-                                <img src={reaxtimg} alt="" />
-                            </div>
-                            <div className="cart-overlay-mein">
-                               <button className="cart-overlaybutton"><Link to="/cart" className="text-decoration-none cart-text-link">Cart</Link></button> 
-                            </div>
-                            <div className="procesed-dev">
-                               <button className="processed-button"> <Link to="/procced-chekout" className="text-decoration-none processed-link">Proceed to checkout (item)</Link></button>
-                            </div>
-
-                        </div>
-                  
+                    {/* components to render when screen width is less than or equal to 750px */}
                 </div>
-            </div>
-         
-               
-          {/* components to render when screen width is greater than 750px */}
-        </div>
-      )}
+            ) : (
+                <div>
+                    {!nonHeaderRoutes.includes(
+                        location.pathname.split("/")[1]
+                    ) && (
+                        <header className="navbar navbar-expand-lg header-background px-3">
+                            <Link className="navbar-brand" to="/">
+                                <img
+                                    src={footerlogo}
+                                    alt=""
+                                    className="homepage-img"
+                                />
+                            </Link>
+                            <div className="d-flex flex-row align-items-center main-nav">
+                                <div className="d-flex align-items-center justify-content-center flex-wrap header-position">
+                                    <Button
+                                        variant="primary"
+                                        onClick={handleShow}
+                                        style={{
+                                            background: "#00305E",
+                                            border: "#00305E",
+                                        }}
+                                    >
+                                        <span className="deliver-text">
+                                            Deliver to
+                                        </span>{" "}
+                                        <br></br>
+                                        {currentState?.name
+                                            ? currentState?.name
+                                            : "California"}
+                                    </Button>
+                                </div>
+                                {show && (
+                                    <LocationModel
+                                        isOpen={show}
+                                        handleClose={() => setShow(false)}
+                                    />
+                                )}
+                                <div className="input-group search-inputgroup">
+                                    <div className="input-group-btn search-panel">
+                                        <Search />
+                                    </div>
+                                    <input
+                                        type="hidden"
+                                        name="search_param"
+                                        value="all"
+                                        id="search_param"
+                                    />
+                                    <input
+                                        type="text"
+                                        className="form-control "
+                                        name="x"
+                                        id="search"
+                                        placeholder="Search"
+                                    />
+                                    <span className="input-group-btn">
+                                        <button
+                                            type="button"
+                                            className="btn btn-success search-logo"
+                                        >
+                                            <i className="fas fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <div className="nav-right">
+                                    <div className="dropdown">
+                                        <button
+                                            className="dropdown-toggle eng-button"
+                                            type="button"
+                                            id="dropdownMenuButton"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="false"
+                                            aria-expanded="false"
+                                        >
+                                            <img
+                                                src={english}
+                                                alt="English Flag"
+                                            />{" "}
+                                            EN
+                                        </button>
+                                        <div
+                                            className="dropdown-menu"
+                                            aria-labelledby="dropdownMenuButton"
+                                        >
+                                            <a
+                                                className="dropdown-item"
+                                                href="#"
+                                            >
+                                                English
+                                            </a>
+                                            <a
+                                                className="dropdown-item"
+                                                href="#"
+                                            >
+                                                Spanish
+                                            </a>
+                                        </div>
+                                    </div>
 
+                                    <div className="dropdown-cart">
+                                        {isAuthenticated ? (
+                                            <div>
+                                                <p className="mb-0 text-white check-auth">
+                                                    Hello {user?.name}
+                                                </p>
+                                            </div>
+                                        ) : (
+                                            <LoginCart className="card" />
+                                        )}
+                                    </div>
+                                    <div className="return-button ">
+                                        <button
+                                            className="order-button dropdown-toggle"
+                                            type="button"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                        >
+                                            Return <br></br>& Order
+                                        </button>
+                                        <div
+                                            className="dropdown-menu"
+                                            aria-labelledby="dropdownMenuButton"
+                                        >
+                                            <a
+                                                className="dropdown-item"
+                                                href="#"
+                                            >
+                                                Return
+                                            </a>
+                                            <a
+                                                className="dropdown-item"
+                                                href="#"
+                                            >
+                                                Order
+                                            </a>
+                                        </div>
+                                    </div>
 
+                                    <button
+                                        className="icon-cart me-2"
+                                        onClick={toggleSidebar}
+                                    >
+                                        <div className="product-boll">
+                                            <div
+                                                className="dropdown dot"
+                                                style={{
+                                                    textAlign: "center",
+                                                    color: "white",
+                                                }}
+                                            >
+                                                0
+                                                <img
+                                                    src={vectorcart}
+                                                    alt=""
+                                                    className="vector-cart"
+                                                />
+                                            </div>
+                                            <span className="cart-text">
+                                                Cart
+                                            </span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </header>
+                    )}
 
+                    {/* CartOverLay code */}
+                    <div
+                        className={`sidebar-cart ${isOpen ? "open" : "closed"}`}
+                    >
+                        <button
+                            onClick={toggleSidebar}
+                            className="close-button"
+                        >
+                            X
+                        </button>
+                        {/* sidebar content */}
+                        <div className="" style={{ background: "white" }}>
+                            <div className="row ">
+                                <div className="first-dev">
+                                    <div className="not-add">
+                                        <span>
+                                            <img src={vectorimg} /> Not Added
+                                        </span>
+                                    </div>
+                                    <div className="sub-title-add">
+                                        <span className="">Cart Subtotal</span>
+                                        <span className="item1">
+                                            {" "}
+                                            ( 1 item ):
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div className="img-dev">
+                                <div className="img-sets">
+                                    <img src={reaxtimg} alt="" />
+                                </div>
+                                <div className="cart-overlay-mein">
+                                    <button className="cart-overlaybutton">
+                                        <Link
+                                            to="/cart"
+                                            className="text-decoration-none cart-text-link"
+                                        >
+                                            Cart
+                                        </Link>
+                                    </button>
+                                </div>
+                                <div className="procesed-dev">
+                                    <button className="processed-button">
+                                        {" "}
+                                        <Link
+                                            to="/checkout"
+                                            className="text-decoration-none processed-link"
+                                        >
+                                            Proceed to checkout (item)
+                                        </Link>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-       
-           
+                    {/* components to render when screen width is greater than 750px */}
+                </div>
+            )}
         </>
     );
 };
