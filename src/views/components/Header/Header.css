@@ -282,11 +282,7 @@ color: #B8B8B9;
 .cart-dev-section{
     margin-top: -6px;
 }
-@media screen and (max-width: 991px) {
-    .main-nav {
-        width: 100%;
-    }
-}
+
 .cart-overlaybutton{
     
         border: 1px solid #B8B8B9;
@@ -378,18 +374,7 @@ line-height: 18px;
     padding-right: 60px;
   }
   
+    
 
 
-  
-  @media (max-width: 768px) {
-    .box-overlay{
-      width: 90%;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .box-overlay {
-      width: 100%;
-    }
-  }
   

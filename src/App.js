@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import MobileHeader from "@components/Header/MobileHeader/MobileHeader";
 
 function App() {
     const dispatch = useDispatch();
@@ -24,9 +25,10 @@ function App() {
         <div>
             <ToastContainer className={"notification-toast"} />
             <BrowserRouter>
-                <Header />
+               <Header />
                 <Router />
                 <Footer />
+                <MobileHeader />
             </BrowserRouter>
         </div>
     );

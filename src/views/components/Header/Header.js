@@ -38,38 +38,11 @@ const Header = () => {
 
     return (
         <>
-            <div className={`sidebar-cart ${isOpen ? 'open' : 'closed'}`}>
-                <button onClick={toggleSidebar} className="close-button">X</button>
-                {/* sidebar content */}
-                <div className="" style={{ background: "white" }}>
-                    <div className="row ">
-                        <div className="first-dev">
-                            <div className="not-add">
-                                <span><img src={vectorimg} />  Not Added</span>
-                            </div>
-                            <div className="sub-title-add">
-                                <span className="">Cart Subtotal</span><span className="item1"> ( 1 item ):</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row ">
-                        <div className="img-dev">
-                            <div className="img-sets">
-                                <img src={reaxtimg} alt="" />
-                            </div>
-                            <div className="cart-overlay-mein">
-                                <button className="cart-overlaybutton">Cart</button>
-                            </div>
-                            <div className="procesed-dev">
-                                <button className="processed-button">Proceed to checkout (item)</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
+       
             {!nonHeaderRoutes.includes(location.pathname.split("/")[1]) && (
                 <header className="navbar navbar-expand-lg header-background px-3">
+                
                     <Link className="navbar-brand" to="/">
                         <img src={footerlogo} alt="" className="homepage-img" />
                     </Link>
@@ -195,69 +168,36 @@ const Header = () => {
                 </header>
             )}
 
-            <div className="">
-                <Modal
-                    size="sm"
-                    show={smShow}
-                    onHide={() => setSmShow(false)}
-                    aria-labelledby="example-modal-sizes-title-sm"
-                    className="box-cart box-overlay"
-                >
-                    <Modal.Header
-                        closeButton
-                        style={{ borderBottom: 0 }}
-                    ></Modal.Header>
-
-                    <Modal.Body className="body-cart">
-                        <div className="mein-cotain">
-                            <div className="row ">
-                                <div className="dev">
-                                    <div className="not-add">
-                                        <span>
-                                            <img src={vectorimg} /> Not Added
-                                        </span>
-                                    </div>
-                                    <div className="cart-dev-section">
-                                        <span className="cart-item">
-                                            Cart Subtotal
-                                        </span>
-                                        <span className="items-no">
-                                            {" "}
-                                            ( 1 item ):
-                                        </span>
-                                    </div>
-                                </div>
+          {/* CartOverLay code */}
+          <div className={`sidebar-cart ${isOpen ? 'open' : 'closed'}`}>
+                <button onClick={toggleSidebar} className="close-button">X</button>
+                {/* sidebar content */}
+                <div className="" style={{ background: "white" }}>
+                    <div className="row ">
+                        <div className="first-dev">
+                            <div className="not-add">
+                                <span><img src={vectorimg} />  Not Added</span>
                             </div>
-                            <div className="row ">
-                                <div className="img-dev">
-                                    <div className="">
-                                        <img src={reaxtimg} alt="" />
-                                    </div>
-                                    <div>
-                                        <button className="cart-button">
-                                            Cart
-                                        </button>
-                                    </div>
-                                    <div>
-                                        <button className="checkout-proced">
-                                            Proceed to checkout (item)
-                                        </button>
-                                    </div>
-                                </div>
+                            <div className="sub-title-add">
+                                <span className="">Cart Subtotal</span><span className="item1"> ( 1 item ):</span>
                             </div>
                         </div>
-                    </Modal.Body>
-                </Modal>
-                <Modal
-                    size="lg"
-                    show={lgShow}
-                    onHide={() => setLgShow(false)}
-                    aria-labelledby="example-modal-sizes-title-lg"
-                >
-                    <Modal.Body>
-                        <img src={reaxtimg} />
-                    </Modal.Body>
-                </Modal>
+                    </div>
+                   
+                        <div className="img-dev">
+                            <div className="img-sets">
+                                <img src={reaxtimg} alt="" />
+                            </div>
+                            <div className="cart-overlay-mein">
+                                <button className="cart-overlaybutton">Cart</button>
+                            </div>
+                            <div className="procesed-dev">
+                                <button className="processed-button">Proceed to checkout (item)</button>
+                            </div>
+
+                        </div>
+                  
+                </div>
             </div>
         </>
     );
