@@ -13,6 +13,9 @@ import LocationModel from "./Location/LocationModel";
 import LoginCart from "./LoginCart";
 import Search from "./Search";
 import Sidebar from "../Sidebar/Sidebar";
+import MobileHeader from "./MobileHeader/MobileHeader";
+import MobileSearch from "./MobileSearch/MobileSearch";
+import Home from "@pages/Home/Home";
 const Header = () => {
     const [smShow, setSmShow] = useState(false);
     const [lgShow, setLgShow] = useState(false);
@@ -20,6 +23,7 @@ const Header = () => {
     const states = useSelector((state) => state.states.states);
     const user = useSelector((state) => state.auth.user);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
     const location = useLocation();
@@ -35,12 +39,34 @@ const Header = () => {
         setIsOpen(!isOpen);
     };
     const [isOpen, setIsOpen] = useState(false);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
+    useEffect(() => {
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+  
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
     return (
         <>
             
+            {screenWidth <= 750 ? (
+        <div>
        
-            {!nonHeaderRoutes.includes(location.pathname.split("/")[1]) && (
+       
+        <MobileHeader />
+      
+        <MobileSearch />
+       
+       
+          {/* components to render when screen width is less than or equal to 750px */}
+          
+        </div>
+      ) : (
+        <div>
+        {!nonHeaderRoutes.includes(location.pathname.split("/")[1]) && (
                 <header className="navbar navbar-expand-lg header-background px-3">
                 
                     <Link className="navbar-brand" to="/">
@@ -199,6 +225,18 @@ const Header = () => {
                   
                 </div>
             </div>
+         
+               
+          {/* components to render when screen width is greater than 750px */}
+        </div>
+      )}
+
+
+
+
+
+       
+           
         </>
     );
 };
