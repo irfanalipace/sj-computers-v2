@@ -11,7 +11,6 @@ import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 import "./CheckOutCard.css";
 
 export const CheckOutCard = ({ product }) => {
-    console.log("product", product);
     const currentState = useSelector((state) => state.states.currentState);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cart = useSelector((state) => state.cart.cart);
@@ -26,7 +25,7 @@ export const CheckOutCard = ({ product }) => {
     const cartClickHandler = () => {
         let productPrice = product.price * quantity;
         let cartQuantity = details.total_quantity + 1;
-        let cartTotal = details.total + productPrice;
+        let cartTotal = parseFloat(details.total) + parseFloat(productPrice);
         const cartItem = {
             id: product.id,
             quantity: quantity,
@@ -36,7 +35,7 @@ export const CheckOutCard = ({ product }) => {
 
         const cartDetails = {
             total_quantity: cartQuantity,
-            total: cartTotal,
+            total: parseFloat(cartTotal).toFixed(2),
         };
 
         if (isAuthenticated) dispatch(addToCart({ cartItem, cartDetails }));
@@ -62,10 +61,10 @@ export const CheckOutCard = ({ product }) => {
                     <div className="">
                         <p className="cart-text">
                             {product?.description}
-                            <button className="buttion-details">
+                            {/* <button className="buttion-details">
                                 Details
                                 <img src={imges} />
-                            </button>
+                            </button> */}
                         </p>
                     </div>
                 </div>

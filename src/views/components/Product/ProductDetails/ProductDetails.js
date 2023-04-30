@@ -12,7 +12,6 @@ const ProductDetails = ({ product }) => {
     const [productBrand, setProductBrand] = useState(null);
     useEffect(() => {
         let brand = brands.filter((brand) => brand?.id == product?.id);
-        console.log("brand", brand[0]);
         setProductBrand(brand[0]);
     }, [brands]);
     return (
@@ -71,7 +70,7 @@ const ProductDetails = ({ product }) => {
                     <div className="col-md-12 shipping-button">
                         <p className="shipping-text">
                             Shipping fee to Los Angeles $10 only
-                            <DilveryBox />
+                            {/* <DilveryBox /> */}
                         </p>
                     </div>
                 </div>

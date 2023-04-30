@@ -52,3 +52,23 @@ export function deleteItemApi({ id }) {
             });
     });
 }
+
+export function updateQuantityApi({ id, difference }) {
+    return new Promise((resolve, reject) => {
+        ApiService.post(`/add-quantity-cart`, {
+            item_id: id,
+            qty: difference,
+        })
+            .then((response) => {
+                console.log(
+                    "file: states.js | updateQuantityApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error cart", e);
+                reject(e);
+            });
+    });
+}

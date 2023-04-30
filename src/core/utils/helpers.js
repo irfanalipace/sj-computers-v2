@@ -30,10 +30,14 @@ export const getCartDetails = () => {
     else return { total_quantity: 0, total: 0 };
 };
 
+export const setCartDetails = (cartDetails) => {
+    window.localStorage.setItem("cartDetails", JSON.stringify(cartDetails));
+};
+
 export const updateCartItem = ({ cartItem, cartDetails }) => {
     let cartItems = JSON.parse(window.localStorage.getItem("cart"));
     let index = cartItems?.findIndex((item) => item.id === cartItem.id);
-    if (index !== -1) {
+    if (index >= 0) {
         cartItems[index] = {
             ...cartItems[index],
             quantity: cartItem.quantity,
@@ -47,19 +51,64 @@ export const updateCartItem = ({ cartItem, cartDetails }) => {
 export const deleteCartItem = ({ cartItem, cartDetails }) => {
     let cartItems = JSON.parse(window.localStorage.getItem("cart"));
     let index = cartItems?.findIndex((item) => item.id === cartItem.id);
-    if (index !== -1) {
+    if (index >= 0) {
         cartItems.splice(index, 1);
     }
     window.localStorage.setItem("cart", JSON.stringify(cartItems));
     window.localStorage.setItem("cartDetails", JSON.stringify(cartDetails));
 };
 
-export const findMissingObjects = (array_1, array_2) => {
+export const deleteNotLocalCartItem = () => {
+    let cartDetails = getCartDetails();
+    let cartItems = getCartItems();
+    let index = cartItems?.findIndex((item) => item?.notLocal);
+    let cartTotalQuantity = cartDetails?.total_quantity - 1;
+
+    let cartTotal =
+        cartDetails?.total -
+        cartItems[index]?.price * cartItems[index]?.quantity;
+
+    cartDetails = {
+        total_quantity: cartTotalQuantity > 0 ? cartTotalQuantity : 0,
+        total: cartTotal > 0 ? cartTotal : 0,
+    };
+    if (index >= 0) {
+        cartItems.splice(index, 1);
+    }
+
+    window.localStorage.setItem("cart", JSON.stringify(cartItems));
+    window.localStorage.setItem("cartDetails", JSON.stringify(cartDetails));
+};
+
+export const updateItemLocalProperty = (cartItem) => {
+    let cartItems = JSON.parse(window.localStorage.getItem("cart"));
+    let index = cartItems?.findIndex((item) => item.id === cartItem.id);
+    if (index >= 0) {
+        cartItems[index] = {
+            notLocal: true,
+        };
+    }
+    window.localStorage.setItem("cart", JSON.stringify(cartItems));
+};
+
+export const compareLocalCartWithDBCart = (array_1, array_2) => {
     const missingObjects1 = array_1?.filter(
         (obj1) => !array_2?.some((obj2) => obj1.id === obj2.id)
     );
+    // missingObjects1 is an array of objects that are present in array_1 but not in array_2.
+
     const missingObjects2 = array_2?.filter(
         (obj2) => !array_1?.some((obj1) => obj2.id === obj1.id)
     );
+    // missingObjects2 is an array of objects that are present in array_2 but not in array_1.
+
     return [missingObjects1, missingObjects2];
+};
+
+export const objectToArray = (obj) => {
+    let items = [];
+    for (let key in obj) {
+        items.push(obj[key]);
+    }
+    return items;
 };

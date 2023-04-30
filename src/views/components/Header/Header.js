@@ -1,21 +1,20 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { CartOverLay } from "./CartOverLay/CartOverLay";
-import footerlogo from "@images/header-logo.png";
-import english from "@images/home/eng.png";
-import vectorcart from "@images/home/vector.png";
-import reaxtimg from "@images/rext.png";
-import vectorimg from "@images/setr.png";
-import "./Header.css";
-import { Modal, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+
+import CartOverlay from "./CartOverlay";
 import LocationModel from "./Location/LocationModel";
 import LoginCart from "./LoginCart";
 import Search from "./Search";
-import Sidebar from "../Sidebar/Sidebar";
 import MobileHeader from "./MobileHeader/MobileHeader";
 import MobileSearch from "./MobileSearch/MobileSearch";
-import Home from "@pages/Home/Home";
+
+import footerlogo from "@images/header-logo.png";
+import english from "@images/home/eng.png";
+import vectorcart from "@images/home/vector.png";
+import "./Header.css";
+
 const Header = () => {
     const [smShow, setSmShow] = useState(false);
     const [lgShow, setLgShow] = useState(false);
@@ -23,6 +22,7 @@ const Header = () => {
     const states = useSelector((state) => state.states.states);
     const user = useSelector((state) => state.auth.user);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const cartDetails = useSelector((state) => state.cart.details);
 
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
@@ -210,7 +210,7 @@ const Header = () => {
                                                     color: "white",
                                                 }}
                                             >
-                                                0
+                                                {cartDetails.total_quantity}
                                                 <img
                                                     src={vectorcart}
                                                     alt=""
@@ -228,63 +228,10 @@ const Header = () => {
                     )}
 
                     {/* CartOverLay code */}
-                    <div
-                        className={`sidebar-cart ${isOpen ? "open" : "closed"}`}
-                    >
-                        <button
-                            onClick={toggleSidebar}
-                            className="close-button"
-                        >
-                            X
-                        </button>
-                        {/* sidebar content */}
-                        <div className="" style={{ background: "white" }}>
-                            <div className="row ">
-                                <div className="first-dev">
-                                    <div className="not-add">
-                                        <span>
-                                            <img src={vectorimg} /> Not Added
-                                        </span>
-                                    </div>
-                                    <div className="sub-title-add">
-                                        <span className="">Cart Subtotal</span>
-                                        <span className="item1">
-                                            {" "}
-                                            ( 1 item ):
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="img-dev">
-                                <div className="img-sets">
-                                    <img src={reaxtimg} alt="" />
-                                </div>
-                                <div className="cart-overlay-mein">
-                                    <button className="cart-overlaybutton">
-                                        <Link
-                                            to="/cart"
-                                            className="text-decoration-none cart-text-link"
-                                        >
-                                            Cart
-                                        </Link>
-                                    </button>
-                                </div>
-                                <div className="procesed-dev">
-                                    <button className="processed-button">
-                                        {" "}
-                                        <Link
-                                            to="/checkout"
-                                            className="text-decoration-none processed-link"
-                                        >
-                                            Proceed to checkout (item)
-                                        </Link>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <CartOverlay
+                        isOpen={isOpen}
+                        toggleSidebar={toggleSidebar}
+                    />
                     {/* components to render when screen width is greater than 750px */}
                 </div>
             )}

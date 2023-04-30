@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { objectToArray } from "@utils/helpers";
 
 const initialState = {
     cart: [],
@@ -8,7 +9,6 @@ const initialState = {
     },
     apiError: false,
     isLoading: false,
-    updatingItem: false,
 };
 
 const cartSlice = createSlice({
@@ -20,9 +20,9 @@ const cartSlice = createSlice({
         },
         UPDATING: (state, action) => {
             let index = state.cart.findIndex(
-                (item) => item.id === action.payload.id
+                (item) => item.id === action.payload.cartItem.id
             );
-            if (index !== -1) {
+            if (index >= 0) {
                 state.cart[index] = { ...state.cart[index], loading: true };
             }
         },
@@ -31,7 +31,7 @@ const cartSlice = createSlice({
         },
         ADD_TO_CART: (state, action) => {
             let item = { ...action.payload.cartItem };
-            let details = { ...action.payload.details };
+            let details = { ...action.payload.cartDetails };
             state.cart = [...state.cart, { ...item }];
             if (details) {
                 state.details = { ...details };
@@ -40,9 +40,10 @@ const cartSlice = createSlice({
         },
 
         ADD_LIST_TO_CART: (state, action) => {
-            let item = { ...action.payload.cartItem };
-            let details = { ...action.payload.details };
-            state.cart = [...state.cart, { ...item }];
+            let items = { ...action.payload.cartItems };
+            let details = { ...action.payload.cartDetails };
+            items = objectToArray(items);
+            state.cart = [...state.cart, ...items];
             if (details) {
                 state.details = { ...details };
             }
@@ -50,9 +51,9 @@ const cartSlice = createSlice({
         },
 
         ADD_TO_LOCAL_CART: (state, action) => {
-            let item = { ...action.payload.cartItem };
-            let details = { ...action.payload.details };
-            state.cart = [...state.cart, { ...item }];
+            let items = { ...action.payload.cartItems };
+            let details = { ...action.payload.cartDetails };
+            state.cart = [...state.cart, [...items]];
             if (details) {
                 state.details = { ...details };
             }
@@ -66,7 +67,7 @@ const cartSlice = createSlice({
             let cartItem = { ...action.payload.cartItem };
             let details = { ...action.payload.cartDetails };
             let index = state.cart.findIndex((item) => item.id === cartItem.id);
-            if (index !== -1) {
+            if (index >= 0) {
                 state.cart.splice(index, 1);
                 if (details) {
                     state.details = { ...details };
@@ -77,16 +78,18 @@ const cartSlice = createSlice({
             let cartItem = { ...action.payload.cartItem };
             let details = { ...action.payload.cartDetails };
             let index = state.cart.findIndex((item) => item.id === cartItem.id);
-            if (index !== -1) {
+            if (index >= 0) {
                 state.cart[index] = {
                     ...state.cart[index],
                     quantity: cartItem.quantity,
                     price: cartItem.price,
+                    loading: false,
                 };
                 if (details) {
                     state.details = { ...details };
                 }
             }
+            state.updatingItem = false;
         },
         SET_CART_DETAILS: (state, action) => {
             state.details = { ...action.payload };
@@ -101,7 +104,7 @@ export const {
     LOADING,
     CLEAR_LOADING,
     ADD_TO_CART,
-    ADD_TO_LOCAL_CART,
+    ADD_LIST_TO_CART,
     SET_CART_DETAILS,
     CLEAR_CART,
     API_ERROR,

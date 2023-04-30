@@ -6,39 +6,26 @@ import { fetchBrands } from "@store/brands/brandsThunks";
 import { fetchCategory } from "@store/category/categoryThunks";
 import {
     addToLocalCart,
-    addToCart,
-    fetchCartItems,
+    syncCartItems,
     setCartDetails,
 } from "@store/cart/cartThunks";
 import {
     getCartItems,
     getCartDetails,
-    addItemToLocalCart,
-    findMissingObjects,
-    createCartObject,
+    deleteNotLocalCartItem,
 } from "@utils/helpers";
 
 export const useInitDataFetching = () => {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const storeCartItems = useSelector((state) => state.cart.cart);
     const cartItems = getCartItems() || [];
     const cartDetails = getCartDetails();
-    // if (!cartItems.length > 0) dispatch(fetchCartItems());
 
     useEffect(() => {
         dispatch(fetchCategory());
         dispatch(fetchBrands());
-        dispatch(getShippingDetails());
 
-        if (isAuthenticated) {
-            // dispatch(fetchCartItems());
-            cartItems.forEach((cartItem) => {
-                console.log("cartItem", cartItem);
-                dispatch(addToLocalCart({ cartItem }));
-            });
-            dispatch(setCartDetails(cartDetails));
-        } else {
+        if (!isAuthenticated) {
             cartItems.forEach((cartItem) => {
                 dispatch(addToLocalCart({ cartItem }));
             });
@@ -47,27 +34,10 @@ export const useInitDataFetching = () => {
     }, []);
 
     useEffect(() => {
-        console.log("store cart items");
-    }, [storeCartItems]);
-
-    // useEffect(() => {
-    //     if (isAuthenticated) {
-    //         console.log("storeCartItems: ", storeCartItems);
-    //         console.log("cartItems: ", cartItems);
-    //         const [missingObjects1, missingObjects2] = findMissingObjects(
-    //             storeCartItems,
-    //             cartItems
-    //         );
-    //         if (missingObjects1?.length > 0) {
-    //             missingObjects1?.forEach((object) => {
-    //                 addItemToLocalCart(createCartObject(object));
-    //             });
-    //         }
-    //         if (missingObjects2?.length > 0) {
-    //             missingObjects2?.forEach((object) => {
-    //                 // dispatch(addToCart(object));
-    //             });
-    //         }
-    //     }
-    // }, [storeCartItems]);
+        if (isAuthenticated) {
+            deleteNotLocalCartItem(); //deletes all the no local cart items from local storage so that if user deletes the  item from backend of from another browser then it should not be added in the cart again automatically
+            dispatch(getShippingDetails());
+            dispatch(syncCartItems()); //gets all the cart items stored in database and stores them in store and local storage similarly stores local cart items in database
+        }
+    }, [isAuthenticated]);
 };

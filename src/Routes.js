@@ -85,7 +85,11 @@ export const Router = () => {
         },
         {
             path: "/checkout",
-            element: <Checkout />,
+            element: (
+                <ProtectedRoute>
+                    <Checkout />
+                </ProtectedRoute>
+            ),
         },
         {
             path: "*",
