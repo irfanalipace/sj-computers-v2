@@ -1,7 +1,22 @@
-.container-dev {
-    max-width: 100%;
-    padding-left: 128px;
-    padding-right: 128px;
-    padding-top: 17px;
+.product-page {
     background-color: white;
+}
+
+.product-container {
+    max-width: 95%;
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 17px;
+}
+
+@media (max-width: 991px) {
+    .product-container {
+        width: 90%;
+    }
+}
+
+@media (max-width: 767px) {
+    .product-container {
+        width: 95%;
+    }
 }

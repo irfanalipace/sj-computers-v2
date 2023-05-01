@@ -42,7 +42,6 @@ const Emailsent = () => {
                             style={{ textAlign: "center", paddingTop: "56px" }}
                         >
                             <Link to={"/login"}>
-                                {" "}
                                 <button
                                     type="submit"
                                     className="btn btn-primary sentmail"

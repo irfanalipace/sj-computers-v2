@@ -19,7 +19,6 @@ class StateController extends BaseController
             [
                 'zip_code'=> $request->zip_code,
                 'state_id' => $request->state_id
-
             ]
         );
 

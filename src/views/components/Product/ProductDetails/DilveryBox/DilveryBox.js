@@ -8,7 +8,7 @@ export const DilveryBox = () => {
     const [lgShow, setLgShow] = useState(false);
     return (
         <div>
-            <button onClick={() => setSmShow(true)} className="me-2">
+            <button onClick={() => setSmShow(true)} className="me-2 ps-0">
                 Details
                 <img src={imges} />
             </button>
@@ -27,29 +27,17 @@ export const DilveryBox = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="mein-text">
-                    <div>
-                        Price
-                    </div>
-                    <div>
-                        $550
-                    </div>
+                        <div>Price</div>
+                        <div>$550</div>
                     </div>
                     <div className="mein-text-dilvery">
-                    <div>
-                      Delivery Tax
-                    </div>
-                    <div>
-                        $50
-                    </div>
+                        <div>Delivery Tax</div>
+                        <div>$50</div>
                     </div>
                     <hr></hr>
                     <div className="mein-text-dilvery">
-                    <div>
-                     Total
-                    </div>
-                    <div>
-                        $600
-                    </div>
+                        <div>Total</div>
+                        <div>$600</div>
                     </div>
                 </Modal.Body>
             </Modal>

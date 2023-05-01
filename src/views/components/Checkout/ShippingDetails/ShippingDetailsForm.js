@@ -1,52 +1,62 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
+import { setShippingDetails } from "@store/orders/ordersThunk";
 import { useFormValidation } from "@hooks/useFormValidation";
 import ShippingButton from "./ShippingButton";
 
-function ShippingDetailsForm({ handleClick }) {
+function ShippingDetailsForm({ address, handleClick }) {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
-            country: "",
-            name: "",
-            phoneNumber: "",
-            streetAddress: "",
+            country: address?.country,
+            full_name: address?.full_name,
+            phone_number: address?.phone_number,
+            address: address?.address,
             floorAddress: "",
-            city: "",
-            state: "",
-            zipCode: "",
+            city: address?.city,
+            state: address?.state,
+            zip_code: address?.zip_code,
             saveAddress: false,
         },
         {
             fieldLengths: {
                 country: { min: 3, max: 50 },
-                name: { min: 3, max: 100 },
+                full_name: { min: 3, max: 100 },
             },
-        },
-        submitShippingDetails
+        }
     );
 
+    const states = useSelector((state) => state.states.states);
+    const apiError = useSelector((state) => state.orders.apiError);
+    const loading = useSelector((state) => state.orders.isLoading);
+
     const [fieldErrors, setFieldErrors] = useState({});
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setFieldErrors({ ...errors });
     }, [errors]);
 
-    const submitShippingDetails = () => {
-        const params = { ...values };
-    };
+    useEffect(() => {
+        setFieldErrors({ ...apiError });
+    }, [apiError]);
 
-    const buttonClickHandler = (e) => handleClick(e, true);
+    const submitShippingDetails = (e) => {
+        e.preventDefault();
+        let params = { ...values };
+        dispatch(setShippingDetails(params));
+    };
 
     return (
         <div>
             <h3 className="accordion-content-heading">Add New Address</h3>
-            <div className="autofill-container">
+            {/* <div className="autofill-container">
                 <div className="d-flex justify-content-between align-items-center">
                     <p>Save time. Autofill your current location.</p>
                     <button className="autofill-btn">Autofill</button>
                 </div>
-            </div>
-            <form className="shipping-form" onSubmit={handleSubmit}>
+            </div> */}
+            <form className="shipping-form" onSubmit={submitShippingDetails}>
                 <div className="field-section">
                     <label htmlFor={"state"}>
                         Country/State <span className="text-danger">*</span>
@@ -57,6 +67,7 @@ function ShippingDetailsForm({ handleClick }) {
                         className="input-field"
                         type="text"
                         placeholder="Country/State"
+                        value={values?.country}
                         onChange={handleChange}
                     ></input>
 
@@ -72,16 +83,17 @@ function ShippingDetailsForm({ handleClick }) {
                         <span className="text-danger">*</span>
                     </label>
                     <input
-                        id="name"
-                        name="name"
+                        id="full_name"
+                        name="full_name"
                         className="input-field"
                         type="text"
                         placeholder="Full Name"
+                        value={values?.full_name}
                         onChange={handleChange}
                     ></input>
-                    {fieldErrors.email && (
+                    {fieldErrors.full_name && (
                         <p className="fs-6 mt-1 text-danger">
-                            {fieldErrors.email}
+                            {fieldErrors.full_name}
                         </p>
                     )}
                 </div>
@@ -92,16 +104,17 @@ function ShippingDetailsForm({ handleClick }) {
                         <span className="text-danger">*</span>
                     </label>
                     <input
-                        id="phoneNumber"
-                        name="phoneNumber"
+                        id="phone_number"
+                        name="phone_number"
                         className="input-field"
                         type="text"
                         placeholder="Phone Number"
+                        value={values?.phone_number}
                         onChange={handleChange}
                     ></input>
-                    {fieldErrors.phoneNumber && (
+                    {fieldErrors.phone_number && (
                         <p className="fs-6 mt-1 text-danger">
-                            {fieldErrors.phoneNumber}
+                            {fieldErrors.phone_number}
                         </p>
                     )}
                 </div>
@@ -111,16 +124,17 @@ function ShippingDetailsForm({ handleClick }) {
                         <span className="text-danger">*</span>
                     </label>
                     <input
-                        id="streetAddress"
-                        name="streetAddress"
+                        id="address"
+                        name="address"
                         className="input-field"
                         type="text"
                         placeholder="Street address (P.O Box)"
+                        value={values?.address}
                         onChange={handleChange}
                     ></input>
-                    {fieldErrors.streetAddress && (
+                    {fieldErrors.address && (
                         <p className="fs-6 mt-1 text-danger">
-                            {fieldErrors.streetAddress}
+                            {fieldErrors.address}
                         </p>
                     )}
                     <input
@@ -129,6 +143,7 @@ function ShippingDetailsForm({ handleClick }) {
                         className="input-field mt-1"
                         type="text"
                         placeholder="Unit, building, floor etc."
+                        value={values?.floorAddress}
                         onChange={handleChange}
                     ></input>
                     {fieldErrors.floorAddress && (
@@ -150,6 +165,7 @@ function ShippingDetailsForm({ handleClick }) {
                                 className="input-field"
                                 type="text"
                                 placeholder="City"
+                                value={values?.city}
                                 onChange={handleChange}
                             ></input>
                             {fieldErrors.city && (
@@ -171,8 +187,13 @@ function ShippingDetailsForm({ handleClick }) {
                                 className="input-field"
                                 placeholder="Select Stte"
                                 onChange={handleChange}
+                                value={values?.state}
                             >
-                                <option value="">fsafasfafa</option>
+                                {states.map((state) => (
+                                    <option value={state?.name} key={state?.id}>
+                                        {state?.name}
+                                    </option>
+                                ))}
                             </select>
                             {fieldErrors.state && (
                                 <p className="fs-6 mt-1 text-danger">
@@ -188,16 +209,17 @@ function ShippingDetailsForm({ handleClick }) {
                                 <span className="text-danger">*</span>
                             </label>
                             <input
-                                id="zipCode"
-                                name="zipCode"
+                                id="zip_code"
+                                name="zip_code"
                                 className="input-field"
                                 type="text"
                                 placeholder="ZipCode"
+                                value={values?.zip_code}
                                 onChange={handleChange}
                             />
-                            {fieldErrors.zipCode && (
+                            {fieldErrors.zip_code && (
                                 <p className="fs-6 mt-1 text-danger">
-                                    {fieldErrors.zipCode}
+                                    {fieldErrors.zip_code}
                                 </p>
                             )}
                         </div>
@@ -214,7 +236,10 @@ function ShippingDetailsForm({ handleClick }) {
                     />
                     <label htmlFor={"saveAddress"}>Make this my address</label>
                 </div>
-                <ShippingButton handleClick={buttonClickHandler} />
+                <ShippingButton
+                    handleClick={submitShippingDetails}
+                    isLoading={loading}
+                />
             </form>
         </div>
     );

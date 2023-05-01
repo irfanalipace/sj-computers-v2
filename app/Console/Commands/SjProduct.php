@@ -73,21 +73,11 @@ class SjProduct extends Command
 
         curl_close($curl);
 
-
         $products = json_decode($response, true);
 
         foreach ($products as $key => $product){
 
             $brand = $this->insertBrand($product['Brand']);
-
-            if(isset($product['Category1'])){
-                $category1 = $this->insertBrand($product['Category1']);
-            }
-
-            if(isset($product['Category2'])){
-                $category2 = $this->insertBrand($product['Category2']);
-            }
-
 
             $data = [
                 'name' => $product['Title'],
@@ -95,15 +85,26 @@ class SjProduct extends Command
                 'asin' => $product['ASIN'],
                 'sku' => $product['SKU'],
                 'image' => $product['URL'],
-                'brand_id' => $brand->id,
+                'brand_id' => $brand->id ?? '',
                 'quantity'  => $product['PackageQuantity'],
-                'category_id_1'  => $category1->name,
-                'category_id_2'  => $category2->name,
                 'status'  => $product['Status'],
 
             ];
 
-            Product::updateOrCreate(['asin' =>$product['ASIN']],[$data]);
+            if(isset($product['Category1'])){
+                $category1 = $this->insertBrand($product['Category1']);
+
+                $data['category_id_1']  = $category1->name;
+            }
+
+            if(isset($product['Category2'])){
+                $category2 = $this->insertBrand($product['Category2']);
+                $data['category_id_2']  = $category2->name;
+            }
+
+
+            Product::updateOrCreate(['asin' => $product['ASIN']],$data);
+            
 
             echo "product is added" . $key . "\n";
 

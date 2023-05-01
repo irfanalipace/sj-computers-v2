@@ -2,7 +2,7 @@ import ApiService from "@services/apiService";
 
 export function categoryApi() {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/category`)
+        ApiService.get(`/categories`)
             .then((response) => {
                 console.log(
                     "file: category.js | categoryApi| response",

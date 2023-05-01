@@ -9,6 +9,7 @@ use Cart;
 use App\Http\Requests\AddToCartRequest;
 use App\Http\Requests\DeleteCartRequest;
 use App\Http\Requests\UpdateQuantityRequest;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends BaseController
@@ -25,25 +26,42 @@ class CartController extends BaseController
         $items = [];
 
         \Cart::session($this->userId)->getContent()->each(function ($item) use (&$items) {
+           
             $items[] = $item;
         });
-
+        $items['details'] = $this->cartDetails();
         return response(array('success' => true, 'data' => $items, 'message' => 'cart get items success'), 200, []);
     }
+    
     //adding item to cart
     public function addCart(AddToCartRequest $request)
     {
         try {
+            //check the local storage if items exist it will update the table
+            if(isset($request->cartItems) && !empty($request->cartItems)){
 
-            $id = rand(1, 9999);
-            $item = Cart::session($this->userId)->add($id, $request->name, $request->price, $request->qty, array());
+                $this->clearCart();
 
+                foreach ($request->cartItems as $value) {
+                    $product = Product::find($value->product_id);
+
+                    Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $value->qty, array(),array(), $product);
+                }
+            } else {
+                
+                $product = Product::find($request->product_id);
+
+                $item = Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $request->qty, array(),array(), $product);
+            }         
+           
             return response(array('success' => true, 'data' => $item, 'message' => 'Item added.'), 200, []);
         } catch (Exception $e) {
 
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
         }
     }
+
+
     //delete item from cart
     public function delete(DeleteCartRequest $request)
     {
@@ -60,14 +78,7 @@ class CartController extends BaseController
     //show details of items
     public function details()
     {
-        $userId = $this->userId; // get this from session or wherever it came from
-
-        $details = [];
-        $details = [
-            'total_quantity' => \Cart::session($userId)->getTotalQuantity(),
-            'sub_total' => \Cart::session($userId)->getSubTotal(),
-            'total' => \Cart::session($userId)->getTotal(),
-        ];
+        $details = $this->cartDetails();      
 
         return response(array('success' => true, 'data' => $details, 'message' => "Get cart details success."), 200, []);
     }
@@ -96,5 +107,16 @@ class CartController extends BaseController
 
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
         }
+    }
+
+    //details of cart items
+    protected function cartDetails()
+    {
+        $details = [
+            'total_quantity' => \Cart::session( $this->userId)->getTotalQuantity(),
+            'sub_total' => \Cart::session( $this->userId)->getSubTotal(),
+            'total' => \Cart::session( $this->userId)->getTotal(),
+        ];
+        return $details;
     }
 }

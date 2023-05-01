@@ -1,32 +1,41 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
+
 import laptop from "@images/common/laptop-img.png";
 import ReviewButton from "./ReviewButton";
+import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./ReviewCheckout.css";
 
 export default function ReviewCheckout({ handleClick }) {
+    const cartItems = useSelector((state) => state.cart.cart);
+    const [quantity, setQuantity] = useState(1);
+
     return (
         <div className="review-card">
-            <h4>Estimated delivery: 14 April 2023 - 02 May 2023</h4>
-            <p>Item Shippied from sjcomputer.us</p>
-            <div className="row mx-0">
+            {/* <h4>Estimated delivery: 14 April 2023 - 02 May 2023</h4>
+            <p>Item Shippied from sjcomputer.us</p> */}
+
+            <div className="row mx-0 mb-3">
                 <div className="col-7 ps-0">
-                    <div className="item-card">
-                        <div className="img-wrapper">
-                            <img src={laptop} alt="laptop" />
-                        </div>
-                        <div className="item-detail">
-                            <h6>HP Laptop Dual Sense Wireless Controller</h6>
-                            <h6 className="price">$490.00</h6>
-                            <div className="quantity-container">
-                                <button className="quantity-button">+</button>
-                                <input type="number" value={1} />
-                                <button className="quantity-button">-</button>
+                    {cartItems.map((item) => (
+                        <div className="item-card" key={item?.id}>
+                            <div className="img-wrapper">
+                                <img src={item.product.image} alt="laptop" />
+                            </div>
+                            <div className="item-detail">
+                                <h6>{item.product.name}</h6>
+                                <h6 className="price">${item.price}</h6>
+                                {/* <QuantityInput
+                                    value={item.quantity}
+                                    onChange={setQuantity}
+                                /> */}
                             </div>
                         </div>
-                    </div>
+                    ))}
                 </div>
                 <div className="col-5">
-                    <div>
+                    {/* <div>
                         <h6>Choose Delivery Options:</h6>
                         <div className="delivery-options">
                             <div className="delivery-option">
@@ -63,7 +72,7 @@ export default function ReviewCheckout({ handleClick }) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
