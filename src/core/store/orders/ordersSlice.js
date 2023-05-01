@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     shippingDetails: {},
+    address: {},
     apiError: false,
     isLoading: false,
     placingOrder: false,

@@ -1,10 +1,10 @@
 import Button from "@common/Button/Button";
 
-function ReviewButton({ handleClick, id }) {
+function ReviewButton({ toggleAccordion, id }) {
     return (
         <Button
             className="review-done-btn"
-            clickHandler={(e) => handleClick(e, true, id)}
+            clickHandler={(e) => toggleAccordion(e, true, id)}
         >
             Proceed
         </Button>

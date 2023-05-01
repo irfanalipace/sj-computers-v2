@@ -11,20 +11,29 @@ const Accordion = ({
 }) => {
     const contentRef = useRef(null);
 
-    const handleClick = (e, next = false) => {
+    const handleToggle = (e, next = false) => {
         next ? toggleAccordion(id + 1) : toggleAccordion(id);
+    };
+
+    const handleHeight = () => {
+        contentRef.current.style.maxHeight = isOpen
+            ? contentRef?.current?.scrollHeight + "px"
+            : "0px";
     };
 
     const childrenWithProps = React.Children.map(children, (child) => {
         // Clone the child element and add propToAdd to it
-        return React.cloneElement(child, { handleClick });
+        return React.cloneElement(child, {
+            toggleAccordion: handleToggle,
+            handleHeight,
+        });
     });
 
     return (
         <div className="accordion">
             <div
                 className={`accordion-header ${isOpen ? "active" : ""}`}
-                onClick={handleClick}
+                onClick={handleToggle}
             >
                 <div className="row mx-0">
                     <div className={`${summary ? "col-lg-4 col-5" : "col-12"}`}>
@@ -41,7 +50,7 @@ const Accordion = ({
                             summary && "col-lg-2 col-1"
                         } d-flex justify-content-end`}
                     >
-                        <button onClick={handleClick} className="change-btn">
+                        <button onClick={handleToggle} className="change-btn">
                             Change
                         </button>
                     </div>

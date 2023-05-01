@@ -29,7 +29,7 @@ function OrderSummary({ handleClick, activeAccordion, paymentMethod }) {
         } else if (activeAccordion === 2) {
             return (
                 <ReviewCheckout
-                    handleClick={handleClick}
+                    toggleAccordion={handleClick}
                     id={activeAccordion}
                 />
             );

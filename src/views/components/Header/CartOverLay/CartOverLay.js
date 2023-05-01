@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
-import imges from "@images/bottom-arrow.png";
+import { useState } from "react";
+import { Modal } from "react-bootstrap";
 
 export const CartOverLay = () => {
     const [smShow, setSmShow] = useState(false);

@@ -5,7 +5,7 @@ import { setShippingDetails } from "@store/orders/ordersThunk";
 import { useFormValidation } from "@hooks/useFormValidation";
 import ShippingButton from "./ShippingButton";
 
-function ShippingDetailsForm({ address, handleClick }) {
+function ShippingDetailsForm({ address, handleHeight }) {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
             country: address?.country,
@@ -14,7 +14,7 @@ function ShippingDetailsForm({ address, handleClick }) {
             address: address?.address,
             floorAddress: "",
             city: address?.city,
-            state: address?.state,
+            state: address?.state || "Alabama",
             zip_code: address?.zip_code,
             saveAddress: false,
         },
@@ -35,10 +35,12 @@ function ShippingDetailsForm({ address, handleClick }) {
 
     useEffect(() => {
         setFieldErrors({ ...errors });
+        handleHeight();
     }, [errors]);
 
     useEffect(() => {
         setFieldErrors({ ...apiError });
+        handleHeight();
     }, [apiError]);
 
     const submitShippingDetails = (e) => {

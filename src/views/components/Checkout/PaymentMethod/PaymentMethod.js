@@ -1,18 +1,19 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { placeOrder } from "@store/orders/ordersThunk";
 import paypal from "@images/common/paypal.png";
 import PaymentButton from "./PaymentButton";
 
 import "./PaymentMethod.css";
-import { useSelector } from "react-redux";
 
 export default function PaymentMethod({ setPayment }) {
     const [paymentMethod, setPaymentMethod] = useState("PAYPAL");
     const [disabled, setDisabled] = useState(true);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
-
+    const shippingDetails = useSelector(
+        (state) => state.orders.shippingDetails
+    );
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
@@ -72,10 +73,13 @@ export default function PaymentMethod({ setPayment }) {
                     </div>
                 </div>
             </div>
+            {!shippingDetails && (
+                <p className="text-danger fs-6">*Add Shipping Details First</p>
+            )}
             <PaymentButton
                 paymentMethod={paymentMethod}
                 isLoading={placingOrder}
-                disabled={disabled}
+                disabled={disabled || !shippingDetails}
                 clickHandler={clickHandler}
             />
         </div>

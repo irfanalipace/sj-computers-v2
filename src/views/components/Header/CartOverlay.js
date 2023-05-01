@@ -121,6 +121,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                         <Link
                                             to="/cart"
                                             className="text-decoration-none cart-text-link"
+                                            onClick={toggleSidebar}
                                         >
                                             Cart
                                         </Link>
@@ -129,6 +130,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                         <Link
                                             to="/checkout"
                                             className="text-decoration-none processed-link"
+                                            onClick={toggleSidebar}
                                         >
                                             Proceed to checkout (
                                             {details?.total_quantity} item)
