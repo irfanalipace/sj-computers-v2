@@ -64,9 +64,15 @@ Route::get('product-detail', [ProductController::class, 'getProductDetail'])->na
 *Add to Cart
 */
 Route::get('get-items', [CartController::class, 'getItems'])->name('getItems');
+
 Route::post('add-to-cart', [CartController::class, 'addCart'])->name('addCart');
+
+Route::post('store-local-storage-items', [CartController::class, 'storelocalStorageItems'])->name('storelocalStorageItems');
+
 Route::post('delete-item', [CartController::class, 'delete'])->name('deleteItem');
+
 Route::get('get-details', [CartController::class, 'details'])->name('getItems');
+
 Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clearCart');
 
 Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('addQtyCart');
