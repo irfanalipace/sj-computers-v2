@@ -8,6 +8,7 @@ import {
     addToLocalCart,
     syncCartItems,
     setCartDetails,
+    clearCart,
 } from "@store/cart/cartThunks";
 import {
     getCartItems,
@@ -35,7 +36,7 @@ export const useInitDataFetching = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
-            deleteNotLocalCartItem(); //deletes all the no local cart items from local storage so that if user deletes the  item from backend of from another browser then it should not be added in the cart again automatically
+            dispatch(clearCart()); //clear store cart items because all cart items are again fetched from backend to sync with localCart
             dispatch(getShippingDetails());
             dispatch(syncCartItems()); //gets all the cart items stored in database and stores them in store and local storage similarly stores local cart items in database
         }

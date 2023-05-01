@@ -4,6 +4,7 @@ import {
     ADD_LIST_TO_CART,
     SET_CART_DETAILS,
     DELETE_ITEM,
+    CLEAR_CART,
     UPDATE_QUANTITY,
     UPDATING,
     API_ERROR,
@@ -100,7 +101,6 @@ export const syncCartItems = () => {
                 type: ADD_LIST_TO_CART,
                 payload: { cartItems: localCartItems, cartDetails },
             });
-
             const [missingLocalItems, missingDBItems] =
                 compareLocalCartWithDBCart(items, localCartItems); // compares items in local storage and DB
             if (missingLocalItems?.length > 0) {
@@ -133,12 +133,12 @@ export const syncCartItems = () => {
             if (missingDBItems?.length > 0) {
                 cartItems = missingDBItems?.map((item) => {
                     let cartItem = {
-                        id: cartItems.id,
+                        id: item.id,
                         product_id: item.id,
                         qty: item?.quantity,
                     };
 
-                    updateItemLocalProperty(cartItem); //this function adds no local property on cart item is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
+                    updateItemLocalProperty(cartItem); //this function adds no local property on cart item in localStorage because now it is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
                     return cartItem;
                 });
             }
@@ -186,6 +186,15 @@ export const setCartDetails = (data) => {
         dispatch({
             type: SET_CART_DETAILS,
             payload: data,
+        });
+    };
+};
+
+export const clearCart = () => {
+    return async (dispatch) => {
+        dispatch({
+            type: CLEAR_CART,
+            payload: {},
         });
     };
 };
