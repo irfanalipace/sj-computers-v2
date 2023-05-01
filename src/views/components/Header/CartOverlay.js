@@ -18,7 +18,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
 
         const cartDetails = {
             total_quantity: cartQuantity,
-            total: cartTotal,
+            total: parseFloat(cartTotal).toFixed(2),
         };
 
         isAuthenticated

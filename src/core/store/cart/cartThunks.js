@@ -132,6 +132,7 @@ export const syncCartItems = () => {
             if (missingDBItems?.length > 0) {
                 cartItems = missingDBItems?.map((item) => {
                     let cartItem = {
+                        id: cartItems.id,
                         product_id: item.id,
                         qty: item?.quantity,
                     };
