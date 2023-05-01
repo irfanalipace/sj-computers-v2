@@ -10,6 +10,7 @@ import {
 } from "@store/cart/cartSlice";
 import {
     addToCartApi,
+    addListToCartApi,
     fetchCartApi,
     deleteItemApi,
     updateQuantityApi,
@@ -142,7 +143,7 @@ export const syncCartItems = () => {
                 });
             }
 
-            await addToCartApi({ cartItems });
+            await addListToCartApi({ cartItems });
         } catch (error) {
             console.log("Something went wrong in carts", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

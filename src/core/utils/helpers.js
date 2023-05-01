@@ -70,7 +70,7 @@ export const deleteNotLocalCartItem = () => {
 
     cartDetails = {
         total_quantity: cartTotalQuantity > 0 ? cartTotalQuantity : 0,
-        total: cartTotal > 0 ? cartTotal : 0,
+        total: cartTotal > 0 ? cartTotal.toFixed(2) : 0,
     };
     if (index >= 0) {
         cartItems.splice(index, 1);

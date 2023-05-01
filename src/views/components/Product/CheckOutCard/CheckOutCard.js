@@ -34,7 +34,7 @@ export const CheckOutCard = ({ product }) => {
 
         const cartDetails = {
             total_quantity: cartQuantity,
-            total: parseFloat(cartTotal).toFixed(2),
+            total: cartTotal.toFixed(2),
         };
 
         if (isAuthenticated) dispatch(addToCart({ cartItem, cartDetails }));

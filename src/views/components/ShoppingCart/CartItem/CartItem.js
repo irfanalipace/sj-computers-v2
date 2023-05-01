@@ -41,7 +41,7 @@ export const CartItem = memo(({ cartData }) => {
         cartTotal = parseFloat(details?.total) + parseFloat(price);
         const cartDetails = {
             total_quantity: details?.total_quantity,
-            total: parseFloat(cartTotal).toFixed(2),
+            total: cartTotal.toFixed(2),
         };
 
         let itemPrice = cartData?.product?.price * quantity;
