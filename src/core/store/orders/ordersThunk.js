@@ -1,6 +1,6 @@
 import {
     LOADING,
-    CLEAR_LOADING,
+    SETTING_ADDRESS,
     SET_SHIPPING_DETAILS,
     PLACING_ORDER,
     ORDER_PLACED,
@@ -31,7 +31,7 @@ export const getShippingDetails = () => {
 export const setShippingDetails = (data) => {
     return async (dispatch) => {
         try {
-            dispatch({ type: LOADING, payload: {} });
+            dispatch({ type: SETTING_ADDRESS, payload: {} });
             await setShippingAddressApi(data);
             dispatch({
                 type: SET_SHIPPING_DETAILS,

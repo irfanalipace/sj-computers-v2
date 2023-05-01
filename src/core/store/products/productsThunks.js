@@ -20,19 +20,3 @@ export const fetchProducts = (page = 1) => {
         }
     };
 };
-
-// export const fetchProductDetails = (id) => {
-//     return async (dispatch) => {
-//         try {
-//             dispatch({ type: LOADING, payload: {} });
-//             const response = await productDetailsApi(id);
-//             dispatch({
-//                 type: FETCH_PRODUCTS,
-//                 payload: response.data.data.data,
-//             });
-//         } catch (error) {
-//             console.log("Something went wrong in productDetails", error);
-//             dispatch({ type: API_ERROR, payload: error?.data?.errors });
-//         }
-//     };
-// };

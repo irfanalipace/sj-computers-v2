@@ -8,12 +8,8 @@ const TEMP_TOKEN = "temp_token";
 
 export const getToken = () => window.localStorage.getItem(TOKEN);
 
-export const saveToken = (token, name, email) => {
+export const saveToken = (token) => {
     window.localStorage.setItem(TOKEN, token);
-    window.localStorage.setItem(USER_NAME, name);
-    window.localStorage.setItem(USER_EMAIL, email);
-    window.localStorage.removeItem(PASSWORD);
-    window.localStorage.removeItem(TEMP_TOKEN);
 };
 
 export const updateToken = (token) => {
@@ -43,6 +39,11 @@ export const destroyUserPassword = () =>
 export const getUserName = () => window.localStorage.getItem(USER_NAME);
 export const getUserEmail = () => window.localStorage.getItem(USER_EMAIL);
 
+export const destroyTempKeys = () => {
+    window.localStorage.removeItem(PASSWORD);
+    window.localStorage.removeItem(TEMP_TOKEN);
+};
+
 export const destroyToken = () => {
     window.localStorage.removeItem(TOKEN);
     window.localStorage.removeItem(USER_NAME);
@@ -65,4 +66,5 @@ export default {
     destroyUserPassword,
     saveTempToken,
     getTempToken,
+    destroyTempKeys,
 };

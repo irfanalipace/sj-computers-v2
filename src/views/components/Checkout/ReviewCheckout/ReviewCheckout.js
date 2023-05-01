@@ -7,7 +7,7 @@ import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./ReviewCheckout.css";
 
-export default function ReviewCheckout({ handleClick }) {
+export default function ReviewCheckout({ toggleAccordion }) {
     const cartItems = useSelector((state) => state.cart.cart);
     const [quantity, setQuantity] = useState(1);
 
@@ -76,7 +76,7 @@ export default function ReviewCheckout({ handleClick }) {
                 </div>
             </div>
 
-            <ReviewButton handleClick={handleClick} />
+            <ReviewButton toggleAccordion={toggleAccordion} />
         </div>
     );
 }

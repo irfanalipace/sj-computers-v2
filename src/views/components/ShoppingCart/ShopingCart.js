@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-import { fetchCartItems } from "@store/cart/cartThunks";
 import { CartItem } from "./CartItem/CartItem";
 
 import "./ShopingCart.css";
@@ -13,10 +12,6 @@ export const ShopingCart = () => {
     const cartDetails = useSelector((state) => state.cart.details);
     const isLoading = useSelector((state) => state.cart.isLoading);
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        // if (!cartItems.length > 0) dispatch(fetchCartItems());
-    }, []);
 
     return (
         <>

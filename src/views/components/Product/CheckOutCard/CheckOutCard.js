@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
 import Button from "@common/Button/Button";
-import imges from "@images/bottom-arrow.png";
 import imges1 from "@images/cart-product/location.png";
 import LocationModel from "@components/Header/Location/LocationModel";
 import { QuantityInput } from "@common/QuantityInput/QuantityInput";
@@ -11,7 +10,6 @@ import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 import "./CheckOutCard.css";
 
 export const CheckOutCard = ({ product }) => {
-    console.log("product", product);
     const currentState = useSelector((state) => state.states.currentState);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cart = useSelector((state) => state.cart.cart);
@@ -26,7 +24,7 @@ export const CheckOutCard = ({ product }) => {
     const cartClickHandler = () => {
         let productPrice = product.price * quantity;
         let cartQuantity = details.total_quantity + 1;
-        let cartTotal = details.total + productPrice;
+        let cartTotal = parseFloat(details.total) + parseFloat(productPrice);
         const cartItem = {
             id: product.id,
             quantity: quantity,
@@ -36,7 +34,7 @@ export const CheckOutCard = ({ product }) => {
 
         const cartDetails = {
             total_quantity: cartQuantity,
-            total: cartTotal,
+            total: parseFloat(cartTotal).toFixed(2),
         };
 
         if (isAuthenticated) dispatch(addToCart({ cartItem, cartDetails }));
@@ -53,7 +51,7 @@ export const CheckOutCard = ({ product }) => {
             <div className="card-section-left">
                 <div className="row">
                     <div className="col-md-12 color-text">
-                        <sup className="$-color">$</sup>
+                        <span className="$-color">$</span>
                         {product?.price?.toString().split(".")[0]}
                         <sup>{product?.price?.toString().split(".")[1]}</sup>
                     </div>
@@ -62,10 +60,10 @@ export const CheckOutCard = ({ product }) => {
                     <div className="">
                         <p className="cart-text">
                             {product?.description}
-                            <button className="buttion-details">
+                            {/* <button className="buttion-details">
                                 Details
                                 <img src={imges} />
-                            </button>
+                            </button> */}
                         </p>
                     </div>
                 </div>

@@ -22,9 +22,6 @@ const PasswordForm = () => {
     const urlParams = new URLSearchParams(queryString);
     const token = urlParams.get("token");
     const email = urlParams.get("email");
-
-    console.log(email, token);
-
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
             email: email,

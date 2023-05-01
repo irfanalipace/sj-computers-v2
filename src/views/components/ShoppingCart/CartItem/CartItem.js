@@ -21,7 +21,8 @@ export const CartItem = memo(({ cartData }) => {
 
     const deleteItemFunction = () => {
         let cartQuantity = details?.total_quantity - 1;
-        let cartTotal = details?.total - cartData?.price;
+        let cartTotal =
+            parseFloat(details?.total) - parseFloat(cartData?.price);
 
         const cartDetails = {
             total_quantity: cartQuantity,
@@ -37,16 +38,17 @@ export const CartItem = memo(({ cartData }) => {
         let cartTotal = 0;
         let difference = quantity - cartData?.quantity;
         let price = cartData?.product?.price * difference;
-        cartTotal = details?.total + price;
+        cartTotal = parseFloat(details?.total) + parseFloat(price);
         const cartDetails = {
             total_quantity: details?.total_quantity,
-            total: cartTotal,
+            total: parseFloat(cartTotal).toFixed(2),
         };
 
-        let itemPrice = cartData?.product?.price + price;
+        let itemPrice = cartData?.product?.price * quantity;
         const cartItem = {
-            ...cartData,
+            id: cartData.id,
             quantity,
+            difference,
             price: itemPrice,
         };
         isAuthenticated
@@ -103,7 +105,7 @@ export const CartItem = memo(({ cartData }) => {
                             <div className="col-md-2 price-item">
                                 <p>
                                     <strong className="">
-                                        {cartData?.price}
+                                        ${cartData?.price}
                                     </strong>
                                 </p>
                             </div>

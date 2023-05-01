@@ -1,25 +1,27 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { placeOrder } from "@store/orders/ordersThunk";
 import paypal from "@images/common/paypal.png";
 import PaymentButton from "./PaymentButton";
 
 import "./PaymentMethod.css";
-import { useSelector } from "react-redux";
 
 export default function PaymentMethod({ setPayment }) {
     const [paymentMethod, setPaymentMethod] = useState("PAYPAL");
-    const [disabled, setDisabled] = useState(true);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
-
+    const shippingDetails = useSelector(
+        (state) => state.orders.shippingDetails
+    );
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
-        setPayment(e.target.value);
         setPaymentMethod(e.target.value);
-        setDisabled(false);
     };
+
+    useEffect(() => {
+        setPayment(paymentMethod);
+    }, [paymentMethod]);
 
     const clickHandler = () => {
         dispatch(
@@ -35,7 +37,9 @@ export default function PaymentMethod({ setPayment }) {
                         type="radio"
                         id="method1"
                         name="selectedAddress"
-                        value="Debit/Credit Card"
+                        value="SQUARE"
+                        onChange={handleChange}
+                        checked={true}
                     />
                     <div>
                         <label htmlFor="method1">
@@ -58,6 +62,7 @@ export default function PaymentMethod({ setPayment }) {
                         name="selectedAddress"
                         value="PAYPAL"
                         onChange={handleChange}
+                        checked={true}
                     />
                     <div>
                         <label htmlFor="method2">
@@ -72,10 +77,13 @@ export default function PaymentMethod({ setPayment }) {
                     </div>
                 </div>
             </div>
+            {!shippingDetails && (
+                <p className="text-danger fs-6">*Add Shipping Details First</p>
+            )}
             <PaymentButton
                 paymentMethod={paymentMethod}
                 isLoading={placingOrder}
-                disabled={disabled}
+                disabled={!paymentMethod || !shippingDetails}
                 clickHandler={clickHandler}
             />
         </div>

@@ -8,7 +8,7 @@ import ShippingButton from "./ShippingButton";
 
 import "./ShippingDetails.css";
 
-export default function ShippingDetails({ handleClick }) {
+export default function ShippingDetails({ toggleAccordion, handleHeight }) {
     const [newAddress, setNewAddress] = useState(false);
     const [editAddress, setEditAddress] = useState(false);
     const loading = useSelector((state) => state.orders.isLoading);
@@ -16,7 +16,7 @@ export default function ShippingDetails({ handleClick }) {
         (state) => state.orders.shippingDetails
     );
 
-    const buttonClickHandler = (e) => handleClick(e, true);
+    const buttonClickHandler = (e) => toggleAccordion(e, true);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -24,43 +24,33 @@ export default function ShippingDetails({ handleClick }) {
     }, []);
 
     useEffect(() => {
-        toggleAccordion();
-    }, [loading]);
+        handleHeight();
+    });
 
-    useEffect(() => {
-        if (shippingAddress) {
-            setNewAddress(false);
-            setEditAddress(false);
-        }
-    }, [shippingAddress]);
-
-    const toggleAccordion = () => {
-        handleClick();
-        setTimeout(() => {
-            handleClick();
-        });
+    const handleChange = (e) => {
+        console.log(e.target.value);
     };
 
     const ShippingFormWrapper = () => {
         if (newAddress)
-            return <ShippingDetailsForm handleClick={handleClick} />;
+            return <ShippingDetailsForm handleHeight={handleHeight} />;
         else
             return (
                 <ShippingDetailsForm
                     address={shippingAddress}
-                    handleClick={handleClick}
+                    handleHeight={handleHeight}
                 />
             );
     };
 
     return (
         <div>
-            {newAddress || editAddress ? (
-                <ShippingFormWrapper />
+            {loading ? (
+                <Loader />
             ) : (
                 <>
-                    {loading ? (
-                        <Loader />
+                    {newAddress || editAddress || !shippingAddress.address ? (
+                        <ShippingFormWrapper />
                     ) : (
                         <div>
                             <h3 className="accordion-content-heading">
@@ -70,16 +60,14 @@ export default function ShippingDetails({ handleClick }) {
                                 <div className="address">
                                     <input
                                         type="radio"
-                                        id="address2"
+                                        id="address_id"
                                         name="selectedAddress"
-                                        value="address2"
-                                        onChange={() =>
-                                            console.log(e.target.value)
-                                        }
+                                        value="address_id"
+                                        onChange={handleChange}
                                         checked={true}
                                     />
                                     <div>
-                                        <label htmlFor="address2">
+                                        <label htmlFor="address_id">
                                             {shippingAddress?.full_name}{" "}
                                             {shippingAddress?.address}{" "}
                                             {shippingAddress?.city}{" "}
@@ -88,10 +76,7 @@ export default function ShippingDetails({ handleClick }) {
                                         <div className="address-container">
                                             <button
                                                 type="button"
-                                                onClick={() => {
-                                                    setEditAddress(true);
-                                                    toggleAccordion();
-                                                }}
+                                                onClick={() => true}
                                             >
                                                 Edit
                                             </button>
@@ -102,10 +87,7 @@ export default function ShippingDetails({ handleClick }) {
                             <div>
                                 <button
                                     className="new-address"
-                                    onClick={() => {
-                                        setNewAddress(true);
-                                        toggleAccordion();
-                                    }}
+                                    onClick={() => setNewAddress(true)}
                                 >
                                     <i className="fa fa-add"></i>Add a new
                                     address

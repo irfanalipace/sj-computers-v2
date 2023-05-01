@@ -45,3 +45,7 @@
 .checkout-page {
     background-color: white;
 }
+
+.checkout-page button:disabled {
+    opacity: 0.4;
+}

@@ -24,11 +24,13 @@ import {
     saveToken,
     destroyToken,
     saveUserEmail,
+    saveUserName,
     saveUserPassword,
     saveTempToken,
     getTempToken,
     getUserName,
     getUserEmail,
+    destroyTempKeys,
 } from "@services/jwtService";
 
 import ApiService from "@services/apiService";
@@ -40,9 +42,9 @@ export const login = (credentials) => {
             const response = await loginApi(credentials);
             let token = response.data.data.access_token;
             let name = response.data.data.user;
-            saveToken("", name, credentials.email);
-            saveTempToken(token);
-            saveUserPassword(credentials.password);
+            saveUserName(name);
+            saveTempToken(token); // saving token temporarily to only allow user to call the login api
+            saveUserPassword(credentials.password); // saving password temporarily to only allow user to re login to resend the otp
             dispatch({
                 type: LOGIN,
                 payload: response.data.data,
@@ -105,7 +107,8 @@ export const verifyOtp = (credentials) => {
             let temp_token = getTempToken();
             let name = getUserName();
             let email = getUserEmail();
-            saveToken(temp_token, name, credentials.email);
+            destroyTempKeys(); // destroy user password and temporary token after login success
+            saveToken(temp_token); // stores temporary token in right key to be used later for calling protected apis
             dispatch({ type: VERIFY_OTP, payload: { name, email } });
         } catch (error) {
             console.log("Something went wrong in login", error);
