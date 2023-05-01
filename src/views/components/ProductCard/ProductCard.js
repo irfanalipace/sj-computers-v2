@@ -43,7 +43,23 @@ const Product = ({ product, inGrid }) => {
                         ${product.originalPrice}
                     </div>
                 )}
-                <div className="product-new-price">${product.price}</div>
+                <div className="product-new-price">
+                    <span>$</span>
+                    {
+                        parseFloat(product?.price)
+                            .toFixed(2)
+                            ?.toString()
+                            .split(".")[0]
+                    }
+                    <sup>
+                        {
+                            parseFloat(product?.price)
+                                .toFixed(2)
+                                ?.toString()
+                                .split(".")[1]
+                        }
+                    </sup>
+                </div>
             </div>
             {product.deliveryCharges && (
                 <div className="product-delivery-charges">

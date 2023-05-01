@@ -139,13 +139,14 @@
     background: #00305e;
     border: 0px;
     color: white;
-    padding-top: 12px;
+    padding: 12px 0 0;
     font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
     color: #ffffff;
+    text-align: left;
 }
 
 .ul-menu {
@@ -310,6 +311,8 @@
     font-weight: 700;
     font-size: 15px;
     line-height: 18px;
+    padding-top: 12px;
+    text-align: center;
 }
 
 .sidebar-cart {

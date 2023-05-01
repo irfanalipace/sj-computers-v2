@@ -14,7 +14,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
 
     const deleteItemFunction = (item) => {
         let cartQuantity = details?.total_quantity - 1;
-        let cartTotal = details?.total - item?.price;
+        let cartTotal = parseFloat(details?.total) - parseFloat(item?.price);
 
         const cartDetails = {
             total_quantity: cartQuantity,

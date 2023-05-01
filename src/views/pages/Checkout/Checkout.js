@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Accordion from "@common/Accordion/Accordion";
+import Loader from "@common/LoaderComponent/LoaderComponent";
 import ShippingDetails from "@components/Checkout/ShippingDetails/ShippingDetails";
 import PaymentMethod from "@components/Checkout/PaymentMethod/PaymentMethod";
 import ReviewCheckout from "@components/Checkout/ReviewCheckout/ReviewCheckout";
@@ -19,6 +20,7 @@ export default function Checkout() {
     const [currentAccordionId, setCurrentAccordionId] = useState();
 
     const checkoutDetails = useSelector((state) => state.cart.details);
+    const loading = useSelector((state) => state.cart.isLoading);
 
     const ACCORDION_VARIABLES = {
         1: accordionOne,
@@ -48,70 +50,78 @@ export default function Checkout() {
     }, []);
 
     return (
-        <div className="checkout-page">
-            <div className="checkout-header">
-                <div className="checkout-header-wrapper">
-                    <div className="d-flex justify-content-between">
-                        <div className="logo-wrapper">
-                            <Link to={"/"}>
-                                <img src={footerlogo} />
-                            </Link>
+        <>
+            {loading ? (
+                <Loader />
+            ) : (
+                <div className="checkout-page">
+                    <div className="checkout-header">
+                        <div className="checkout-header-wrapper">
+                            <div className="d-flex justify-content-between">
+                                <div className="logo-wrapper">
+                                    <Link to={"/"}>
+                                        <img src={footerlogo} />
+                                    </Link>
+                                </div>
+                                <div className="items-number">
+                                    <h3>
+                                        Checkout (
+                                        {checkoutDetails.total_quantity} items)
+                                    </h3>
+                                </div>
+                            </div>
                         </div>
-                        <div className="items-number">
-                            <h3>
-                                Checkout ({checkoutDetails.total_quantity}{" "}
-                                items)
-                            </h3>
-                        </div>
+                    </div>
+                    <div className="checkout-page-inner">
+                        {checkoutDetails.total_quantity > 0 ? (
+                            <div className="row mx-o">
+                                <div className="col-md-9 col-6">
+                                    <Accordion
+                                        id={1}
+                                        title="Shipping Details"
+                                        summary={<ShippingSummary />}
+                                        toggleAccordion={toggleAccordion}
+                                        isOpen={ACCORDION_VARIABLES[1]}
+                                    >
+                                        <ShippingDetails />
+                                    </Accordion>
+                                    <Accordion
+                                        id={2}
+                                        title="Review Items & Shipping"
+                                        toggleAccordion={toggleAccordion}
+                                        isOpen={ACCORDION_VARIABLES[2]}
+                                    >
+                                        <ReviewCheckout />
+                                    </Accordion>
+                                    <Accordion
+                                        id={3}
+                                        title="Payment Method"
+                                        toggleAccordion={toggleAccordion}
+                                        isOpen={ACCORDION_VARIABLES[3]}
+                                    >
+                                        <PaymentMethod
+                                            setPayment={setPaymentMethod}
+                                        />
+                                    </Accordion>
+                                </div>
+                                <div className="col-lg-3 col-6">
+                                    <OrderSummary
+                                        handleClick={handleClick}
+                                        activeAccordion={currentAccordionId}
+                                        paymentMethod={paymentMethod}
+                                    />
+                                </div>
+                            </div>
+                        ) : (
+                            <>
+                                <p>No Items Present</p>
+                                <Link to={"/"}>Go Back to HomePage?</Link>
+                            </>
+                        )}
                     </div>
                 </div>
-            </div>
-            <div className="checkout-page-inner">
-                {checkoutDetails.total_quantity > 0 ? (
-                    <div className="row mx-o">
-                        <div className="col-md-9 col-6">
-                            <Accordion
-                                id={1}
-                                title="Shipping Details"
-                                summary={<ShippingSummary />}
-                                toggleAccordion={toggleAccordion}
-                                isOpen={ACCORDION_VARIABLES[1]}
-                            >
-                                <ShippingDetails />
-                            </Accordion>
-                            <Accordion
-                                id={2}
-                                title="Review Items & Shipping"
-                                toggleAccordion={toggleAccordion}
-                                isOpen={ACCORDION_VARIABLES[2]}
-                            >
-                                <ReviewCheckout />
-                            </Accordion>
-                            <Accordion
-                                id={3}
-                                title="Payment Method"
-                                toggleAccordion={toggleAccordion}
-                                isOpen={ACCORDION_VARIABLES[3]}
-                            >
-                                <PaymentMethod setPayment={setPaymentMethod} />
-                            </Accordion>
-                        </div>
-                        <div className="col-lg-3 col-6">
-                            <OrderSummary
-                                handleClick={handleClick}
-                                activeAccordion={currentAccordionId}
-                                paymentMethod={paymentMethod}
-                            />
-                        </div>
-                    </div>
-                ) : (
-                    <>
-                        <p>No Items Present</p>
-                        <Link to={"/"}>Go Back to HomePage?</Link>
-                    </>
-                )}
-            </div>
-        </div>
+            )}
+        </>
     );
 }
 

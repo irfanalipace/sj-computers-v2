@@ -65,8 +65,8 @@ export const deleteNotLocalCartItem = () => {
     let cartTotalQuantity = cartDetails?.total_quantity - 1;
 
     let cartTotal =
-        cartDetails?.total -
-        cartItems[index]?.price * cartItems[index]?.quantity;
+        parseFloat(cartDetails?.total) -
+        parseFloat(cartItems[index]?.price * cartItems[index]?.quantity);
 
     cartDetails = {
         total_quantity: cartTotalQuantity > 0 ? cartTotalQuantity : 0,

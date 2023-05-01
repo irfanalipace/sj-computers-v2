@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { placeOrder } from "@store/orders/ordersThunk";
@@ -9,7 +9,6 @@ import "./PaymentMethod.css";
 
 export default function PaymentMethod({ setPayment }) {
     const [paymentMethod, setPaymentMethod] = useState("PAYPAL");
-    const [disabled, setDisabled] = useState(true);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
     const shippingDetails = useSelector(
         (state) => state.orders.shippingDetails
@@ -17,10 +16,12 @@ export default function PaymentMethod({ setPayment }) {
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
-        setPayment(e.target.value);
         setPaymentMethod(e.target.value);
-        setDisabled(false);
     };
+
+    useEffect(() => {
+        setPayment(paymentMethod);
+    }, [paymentMethod]);
 
     const clickHandler = () => {
         dispatch(
@@ -36,7 +37,9 @@ export default function PaymentMethod({ setPayment }) {
                         type="radio"
                         id="method1"
                         name="selectedAddress"
-                        value="Debit/Credit Card"
+                        value="SQUARE"
+                        onChange={handleChange}
+                        checked={true}
                     />
                     <div>
                         <label htmlFor="method1">
@@ -59,6 +62,7 @@ export default function PaymentMethod({ setPayment }) {
                         name="selectedAddress"
                         value="PAYPAL"
                         onChange={handleChange}
+                        checked={true}
                     />
                     <div>
                         <label htmlFor="method2">
@@ -79,7 +83,7 @@ export default function PaymentMethod({ setPayment }) {
             <PaymentButton
                 paymentMethod={paymentMethod}
                 isLoading={placingOrder}
-                disabled={disabled || !shippingDetails}
+                disabled={!paymentMethod || !shippingDetails}
                 clickHandler={clickHandler}
             />
         </div>

@@ -60,7 +60,7 @@ const ProductDetails = ({ product }) => {
             <hr></hr>
             <div className="row">
                 <div className="col-md-12 color-text">
-                    <sup className="$-color">$</sup>
+                    <span className="$-color">$</span>
                     {product?.price?.toString().split(".")[0]}
                     <sup>{product?.price?.toString().split(".")[1]}</sup>
                 </div>

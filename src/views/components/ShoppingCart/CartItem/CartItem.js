@@ -21,7 +21,8 @@ export const CartItem = memo(({ cartData }) => {
 
     const deleteItemFunction = () => {
         let cartQuantity = details?.total_quantity - 1;
-        let cartTotal = details?.total - cartData?.price;
+        let cartTotal =
+            parseFloat(details?.total) - parseFloat(cartData?.price);
 
         const cartDetails = {
             total_quantity: cartQuantity,

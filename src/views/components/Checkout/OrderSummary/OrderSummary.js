@@ -13,6 +13,7 @@ function OrderSummary({ handleClick, activeAccordion, paymentMethod }) {
     const dispatch = useDispatch();
     const [disabled, setDisabled] = useState(true);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
+    const cartDetails = useSelector((state) => state.cart.details);
 
     useEffect(() => {
         if (paymentMethod) setDisabled(false);
@@ -66,13 +67,13 @@ function OrderSummary({ handleClick, activeAccordion, paymentMethod }) {
                 <div className="summary-details">
                     <ul>
                         <li>
-                            <span>Item:</span>
-                            <span>Product Name</span>
+                            <span>Items:</span>
+                            <span>({cartDetails?.total_quantity})</span>
                         </li>
                         <li>
                             <span>Price:</span>
                             <span>
-                                <strong>$59.5</strong>
+                                <strong>${cartDetails?.total}</strong>
                             </span>
                         </li>
                         <li>
@@ -96,7 +97,7 @@ function OrderSummary({ handleClick, activeAccordion, paymentMethod }) {
                                 <strong>Order Total</strong>
                             </span>
                             <span>
-                                <strong>$59.5</strong>
+                                <strong>${cartDetails?.total}</strong>
                             </span>
                         </li>
                     </ul>

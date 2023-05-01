@@ -27,19 +27,17 @@ export default function ShippingDetails({ toggleAccordion, handleHeight }) {
         handleHeight();
     });
 
+    const handleChange = (e) => {
+        console.log(e.target.value);
+    };
+
     const ShippingFormWrapper = () => {
         if (newAddress)
-            return (
-                <ShippingDetailsForm
-                    toggleAccordion={toggleAccordion}
-                    handleHeight={handleHeight}
-                />
-            );
+            return <ShippingDetailsForm handleHeight={handleHeight} />;
         else
             return (
                 <ShippingDetailsForm
                     address={shippingAddress}
-                    toggleAccordion={toggleAccordion}
                     handleHeight={handleHeight}
                 />
             );
@@ -62,16 +60,14 @@ export default function ShippingDetails({ toggleAccordion, handleHeight }) {
                                 <div className="address">
                                     <input
                                         type="radio"
-                                        id="address2"
+                                        id="address_id"
                                         name="selectedAddress"
-                                        value="address2"
-                                        onChange={() =>
-                                            console.log(e.target.value)
-                                        }
+                                        value="address_id"
+                                        onChange={handleChange}
                                         checked={true}
                                     />
                                     <div>
-                                        <label htmlFor="address2">
+                                        <label htmlFor="address_id">
                                             {shippingAddress?.full_name}{" "}
                                             {shippingAddress?.address}{" "}
                                             {shippingAddress?.city}{" "}
