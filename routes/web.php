@@ -15,7 +15,7 @@ use TCG\Voyager\Facades\Voyager;
 |
 */
 
-Route::get('/', function () {
+Route::get('/{path?}', function () {
     return view('index');
 });
 

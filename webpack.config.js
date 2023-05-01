@@ -46,6 +46,7 @@ module.exports = {
             "@pages": path.resolve(__dirname, "src/views/pages"),
             "@store": path.resolve(__dirname, "src/core/store"),
             "@services": path.resolve(__dirname, "src/core/services"),
+            "@plugins": path.resolve(__dirname, "src/core/plugins"),
             "@api": path.resolve(__dirname, "src/core/api"),
             "@hooks": path.resolve(__dirname, "src/core/hooks"),
             "@utils": path.resolve(__dirname, "src/core/utils"),

@@ -11,6 +11,7 @@ import Product from "@pages/Product/Product";
 import Category from "@pages/Category/Category";
 import Cart from "@components/ShoppingCart/Cart";
 import Checkout from "@pages/Checkout/Checkout";
+import Test from "@pages/Test/Test";
 
 export const Router = () => {
     const routes = [
@@ -90,6 +91,10 @@ export const Router = () => {
                     <Checkout />
                 </ProtectedRoute>
             ),
+        },
+        {
+            path: "/test",
+            element: <Test />,
         },
         {
             path: "*",
