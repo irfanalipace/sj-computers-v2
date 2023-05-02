@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 import Home from "@pages/Home/Home";
 import LoginForm from "@pages/Auth/LoginForm";
 import Register from "@pages/Auth/Register";
-import Profile from "@pages/User/Profile";
+import Account from "@pages/Account/Account";
+import Profile from "@pages/Account/Profile";
 import ForgetPassword from "@pages/Auth/ForgetPassword/ForgetPassword";
 import ResetPassword from "@pages/Auth/ForgetPassword/ResetPassword";
 import Emailsent from "@pages/Auth/EmailSent";
@@ -69,7 +70,39 @@ export const Router = () => {
         },
 
         {
-            path: "/profile",
+            path: "/account",
+            element: (
+                <ProtectedRoute>
+                    <Account />
+                </ProtectedRoute>
+            ),
+        },
+        {
+            path: "/account/profile",
+            element: (
+                <ProtectedRoute>
+                    <Profile />
+                </ProtectedRoute>
+            ),
+        },
+        {
+            path: "/account/update-address",
+            element: (
+                <ProtectedRoute>
+                    <Profile />
+                </ProtectedRoute>
+            ),
+        },
+        {
+            path: "/account/update-password",
+            element: (
+                <ProtectedRoute>
+                    <Profile />
+                </ProtectedRoute>
+            ),
+        },
+        {
+            path: "/account/orders",
             element: (
                 <ProtectedRoute>
                     <Profile />

@@ -91,7 +91,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                         <ul className="menu-list">
                             {isAuthenticated && (
                                 <li>
-                                    <Link to={`/profile`}>Your Account</Link>
+                                    <Link to={`/account`}>Your Account</Link>
                                 </li>
                             )}
                             <li className="d-block">
