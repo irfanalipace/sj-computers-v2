@@ -101,6 +101,7 @@ class CartController extends BaseController
     {
         $details = [
             'total_quantity' => \Cart::session($this->userId)->getTotalQuantity(),
+            'total_items' => count(\Cart::session($this->userId)->getContent()),
             'sub_total' => \Cart::session($this->userId)->getSubTotal(),
             'total' => \Cart::session($this->userId)->getTotal(),
         ];
