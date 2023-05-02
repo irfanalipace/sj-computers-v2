@@ -37,7 +37,6 @@ class CartController extends BaseController
     public function addCart(AddToCartRequest $request)
     {
         try {
-
             $product = Product::find($request->product_id);
 
             $item = Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $request->qty, array(), array(), $product);
@@ -108,7 +107,7 @@ class CartController extends BaseController
         return $details;
     }
 
-    //saving local storage items to DB from frontend side 
+    //saving local storage items to DB from frontend side
     public function storelocalStorageItems(LocalStorageItemsRequest $request)
     {
         try {
