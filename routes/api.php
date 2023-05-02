@@ -60,7 +60,6 @@ Route::get('products', [ProductController::class, 'getList'])->name('products');
 
 Route::get('product-detail', [ProductController::class, 'getProductDetail'])->name('productDetail');
 
-
 /*
 *Add to Cart
 */
@@ -77,6 +76,8 @@ Route::get('get-details', [CartController::class, 'details'])->name('getItems');
 Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clearCart');
 
 Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('addQtyCart');
+
+Route::get('user-state', [StateController::class, 'getState'])->name('getState');
 
 
 /*
