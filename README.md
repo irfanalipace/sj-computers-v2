@@ -12,3 +12,4 @@ To run the project run following commands
 - Php artisan passport:install.
 - php artisan voyager:admin admin@admin.com
 - php artisan serve
+- php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
