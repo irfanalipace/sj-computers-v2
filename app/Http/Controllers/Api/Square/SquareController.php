@@ -45,13 +45,13 @@ class SquareController extends Controller
             (auth()->user()->square_cus_id == null) ? $customer = $this->createCustomer() : $customer = $this->getCustomer();
 
             // Get card Token
-            $cardToken = $this->customerCardToken($request, $customer);
+            // $cardToken = $this->customerCardToken($request, $customer);
 
             $amount_money = new Money();
             $amount_money->setAmount(Cart::session($this->userId)->getSubTotal());
             $amount_money->setCurrency(StatusEnum::currency);
             //create payment Request
-            $body = new CreatePaymentRequest($cardToken, $idempotencyKey);
+            $body = new CreatePaymentRequest($request->source_id, $idempotencyKey);
             $body->setAmountMoney($amount_money);
             $body->setAutocomplete(true);
             $body->setCustomerId($customer);
@@ -71,6 +71,7 @@ class SquareController extends Controller
 
             return response()->json(['code' => 200, 'msg' => StatusEnum::PAYMENTMESSAGE]);
         } catch (Exception $e) {
+            
             return response()->json(['code' => 400, 'msg' => "something went wrong." . $e]);
         }
     }
@@ -130,40 +131,40 @@ class SquareController extends Controller
     }
 
     //get card customer token
-    public function customerCardToken($data, $customerID)
-    {
-        try {
-            //unique identify value
-            $idempotencyKey = uniqid();
-            //card info get from customer
-            $card = new Card();
-            $card->setId($idempotencyKey);
-            $card->setCardBrand($data->card_brand);
-            $card->setCardholderName($data->card_holder_name);
-            $card->setBin($data->card_bin);
-            $card->setLast4($data->card_last_4);
-            $card->setExpMonth($data->card_expiry_month);
-            $card->setExpYear($data->card_expiry_year);
-            $card->setCardType($data->card_type);
-            $card->setCustomerId($customerID);
-            $card->setReferenceId('user-id-' . auth()->user()->id);
+    // public function customerCardToken($data, $customerID)
+    // {
+    //     try {
+    //         //unique identify value
+    //         $idempotencyKey = uniqid();
+    //         //card info get from customer
+    //         $card = new Card();
+    //         $card->setId($idempotencyKey);
+    //         $card->setCardBrand($data->card_brand);
+    //         $card->setCardholderName($data->card_holder_name);
+    //         $card->setBin($data->card_bin);
+    //         $card->setLast4($data->card_last_4);
+    //         $card->setExpMonth($data->card_expiry_month);
+    //         $card->setExpYear($data->card_expiry_year);
+    //         $card->setCardType($data->card_type);
+    //         $card->setCustomerId($customerID);
+    //         $card->setReferenceId('user-id-' . auth()->user()->id);
 
-            $body = new CreateCardRequest(
-                $idempotencyKey,
-                'cnon:card-nonce-ok',
-                $card
-            );
+    //         $body = new CreateCardRequest(
+    //             $idempotencyKey,
+    //             'cnon:card-nonce-ok',
+    //             $card
+    //         );
 
-            $api_response = $this->squareClient->getCardsApi()->createCard($body);
+    //         $api_response = $this->squareClient->getCardsApi()->createCard($body);
 
-            if ($api_response->isSuccess()) {
-                $result = $api_response->getResult()->getCard()->getId();
-            } else {
-                $errors = $api_response->getErrors();
-            }
-            return $result;
-        } catch (Exception $e) {
-            return response()->json(['Code' => 400, 'msg' => "Something went wrong" . $e]);
-        }
-    }
+    //         if ($api_response->isSuccess()) {
+    //             $result = $api_response->getResult()->getCard()->getId();
+    //         } else {
+    //             $errors = $api_response->getErrors();
+    //         }
+    //         return $result;
+    //     } catch (Exception $e) {
+    //         return response()->json(['Code' => 400, 'msg' => "Something went wrong" . $e]);
+    //     }
+    // }
 }
