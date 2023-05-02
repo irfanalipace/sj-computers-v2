@@ -13,7 +13,7 @@ const ApiService = {
     init() {
         if (!this.instance) {
             this.instance = axios.create({ withCredentials: true });
-            this.instance.defaults.baseURL = "https://dev.sjcomputers.us/";
+            this.instance.defaults.baseURL = "https://dev.sjcomputers.us/api";
             // console.log(
             //     "proces.env.REACT_APP_API_BASE_URL: ",
             //     process.env.NODE_ENV
