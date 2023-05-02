@@ -56,7 +56,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "public/js"),
 
-        publicPath: "http://localhost:3000/js/",
+        publicPath: "https://dev.sjcomputers.us/js/",
 
         filename: "app.js",
     },
