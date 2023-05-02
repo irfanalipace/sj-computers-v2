@@ -38,13 +38,14 @@ const Test = () => {
                  * Identifies the calling form with a verified application ID generated from
                  * the Square Application Dashboard.
                  */
-                applicationId="sq0idp-Y0QZQ-Xx-Xx-Xx-Xx"
+                applicationId="sandbox-sq0idb-t8msyKetfNoMu13KbfbYpg"
                 /**
                  * Invoked when payment form receives the result of a tokenize generation
                  * request. The result will be a valid credit card or wallet token, or an error.
                  */
-                cardTokenizeResponseReceived={(token, buyer) => {
-                    console.info({ token, buyer });
+                cardTokenizeResponseReceived={async (token, verifiedBuyer) => {
+                    console.log("token:", token);
+                    console.log("verifiedBuyer:", verifiedBuyer);
                 }}
                 /**
                  * This function enable the Strong Customer Authentication (SCA) flow
@@ -69,7 +70,7 @@ const Test = () => {
                  * Identifies the location of the merchant that is taking the payment.
                  * Obtained from the Square Application Dashboard - Locations tab.
                  */
-                locationId="LID"
+                locationId="L4B6P3RZRKTVQ"
             >
                 <CreditCard />
             </PaymentForm>
