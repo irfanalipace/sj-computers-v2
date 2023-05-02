@@ -28,3 +28,6 @@ Route::get('/{path?}', function () {
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Route::view('/{path?}', 'app');
+
