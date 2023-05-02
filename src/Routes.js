@@ -93,6 +93,19 @@ export const Router = () => {
             ),
         },
         {
+            path: "/success-transaction",
+            element: (
+                <div>
+                    <div
+                        className="w-100 d-flex justify-content-center align-items-center flex-column"
+                        style={{ height: "500px" }}
+                    >
+                        <h1>Transaction Successfull</h1>
+                    </div>
+                </div>
+            ),
+        },
+        {
             path: "/test",
             element: <Test />,
         },
