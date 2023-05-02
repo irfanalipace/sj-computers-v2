@@ -75,7 +75,7 @@ export default function Checkout() {
                     <div className="checkout-page-inner">
                         {checkoutDetails.total_quantity > 0 ? (
                             <div className="row mx-o">
-                                <div className="col-md-9 col-6">
+                                <div className="col-md-9 col-12">
                                     <Accordion
                                         id={1}
                                         title="Shipping Details"
@@ -104,7 +104,7 @@ export default function Checkout() {
                                         />
                                     </Accordion>
                                 </div>
-                                <div className="col-lg-3 col-6">
+                                <div className="col-md-3 col-12">
                                     <OrderSummary
                                         handleClick={handleClick}
                                         activeAccordion={currentAccordionId}

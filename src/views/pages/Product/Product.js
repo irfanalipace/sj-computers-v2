@@ -42,13 +42,13 @@ export default function Product() {
             <>
                 {product ? (
                     <div className="row">
-                        <div className="col-12 col-sm-6 col-md-4">
+                        <div className="col-12 col-md-4">
                             <ProductImage ProductImages={product?.image} />
                         </div>
-                        <div className="col-12 col-sm-6 col-md-5">
+                        <div className="col-12 col-md-5">
                             <ProductDetails product={product} />
                         </div>
-                        <div className="col-12 col-sm-6 col-md-3">
+                        <div className="col-12 col-md-3">
                             <CheckOutCard product={product} />
                         </div>
                     </div>
