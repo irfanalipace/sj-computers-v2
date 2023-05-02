@@ -11,17 +11,16 @@ export function getTokenApi() {
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error states", e);
+                console.log("Console Log: : error square", e);
                 reject(e);
             });
     });
 }
 
-export function sendTokenApi({ id, zip_code_start }) {
+export function sendTokenApi({ source_id }) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/update-state`, {
-            state_id: id,
-            zip_code: zip_code_start,
+        ApiService.post(`/square-charge`, {
+            source_id,
         })
             .then((response) => {
                 console.log(
@@ -31,7 +30,7 @@ export function sendTokenApi({ id, zip_code_start }) {
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error states", e);
+                console.log("Console Log: : error square", e);
                 reject(e);
             });
     });
