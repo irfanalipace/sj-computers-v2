@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { PaymentForm, CreditCard } from "react-square-web-payments-sdk";
+import { sendTokenApi } from "@api/square";
 
 // import { init } from "@services/square";
 const Test = () => {
@@ -46,6 +47,7 @@ const Test = () => {
                 cardTokenizeResponseReceived={async (token, verifiedBuyer) => {
                     console.log("token:", token);
                     console.log("verifiedBuyer:", verifiedBuyer);
+                    await sendTokenApi({ source_id: token.token });
                 }}
                 /**
                  * This function enable the Strong Customer Authentication (SCA) flow

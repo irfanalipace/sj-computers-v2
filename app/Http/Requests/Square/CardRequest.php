@@ -24,14 +24,7 @@ class CardRequest extends FormRequest
     public function rules()
     {
         return [
-            'card_brand' => ['required',],
-            'card_holder_name' => ['required',],
-            'card_bin' => ['required',],
-            'card_last_4' => ['required',],
-            'card_expiry_month' => ['required',],
-            'card_expiry_year' => ['required',],
-            'card_type' => ['required',],
-            'card_CVV' => ['required',],
+            'source_id' => ['required',]
         ];
     }
 }
