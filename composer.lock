@@ -6868,7 +6868,6 @@
             "time": "2022-11-03T14:55:06+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "symfony/polyfill-php81",
             "version": "v1.27.0",
             "source": {
@@ -6957,17 +6956,6 @@
             },
             "dist": {
                 "type": "zip",
-=======
-            "name": "symfony/process",
-            "version": "v5.4.23",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/process.git",
-                "reference": "4b842fc4b61609e0a155a114082bd94e31e98287"
-            },
-            "dist": {
-                "type": "zip",
->>>>>>> 253a41858c84b0cbeb3a462d445efb8df74e432f
                 "url": "https://api.github.com/repos/symfony/process/zipball/4b842fc4b61609e0a155a114082bd94e31e98287",
                 "reference": "4b842fc4b61609e0a155a114082bd94e31e98287",
                 "shasum": ""
@@ -10220,7 +10208,6 @@
         },
         {
             "name": "symfony/yaml",
-<<<<<<< HEAD
             "version": "v6.0.19",
             "source": {
                 "type": "git",
@@ -10231,18 +10218,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/yaml/zipball/deec3a812a0305a50db8ae689b183f43d915c884",
                 "reference": "deec3a812a0305a50db8ae689b183f43d915c884",
-=======
-            "version": "v6.2.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "61916f3861b1e9705b18cfde723921a71dd1559d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/61916f3861b1e9705b18cfde723921a71dd1559d",
-                "reference": "61916f3861b1e9705b18cfde723921a71dd1559d",
->>>>>>> 253a41858c84b0cbeb3a462d445efb8df74e432f
                 "shasum": ""
             },
             "require": {
@@ -10287,11 +10262,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-<<<<<<< HEAD
                 "source": "https://github.com/symfony/yaml/tree/v6.0.19"
-=======
-                "source": "https://github.com/symfony/yaml/tree/v6.2.10"
->>>>>>> 253a41858c84b0cbeb3a462d445efb8df74e432f
             },
             "funding": [
                 {
@@ -10307,11 +10278,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2023-01-11T11:50:03+00:00"
-=======
-            "time": "2023-04-28T13:25:36+00:00"
->>>>>>> 253a41858c84b0cbeb3a462d445efb8df74e432f
         },
         {
             "name": "theseer/tokenizer",

@@ -49,8 +49,9 @@ export const CheckOutCard = ({ product }) => {
     return (
         <div>
             <div className="card-section-left">
+                
                 <div className="row">
-                    <div className="col-md-12 color-text">
+                    <div className="col-md-12 color-text-cart">
                         <span className="$-color">$</span>
                         {product?.price?.toString().split(".")[0]}
                         <sup>{product?.price?.toString().split(".")[1]}</sup>
@@ -67,7 +68,7 @@ export const CheckOutCard = ({ product }) => {
                         </p>
                     </div>
                 </div>
-                <div>
+                <div className="color-card-dev">
                     <button className="color-card" onClick={handleShow}>
                         <img src={imges1} /> Deliver to
                         {currentState?.name
@@ -85,9 +86,10 @@ export const CheckOutCard = ({ product }) => {
                     <p>Item Added in Cart</p>
                 ) : (
                     <>
+                    <div className="text-stock">
                         <span className="color-card">In Stock</span>
                         <QuantityInput onChange={setQuantity} />
-
+                        </div>
                         <div className="button-cart-sell">
                             <Button
                                 className="button1 button-text-button"

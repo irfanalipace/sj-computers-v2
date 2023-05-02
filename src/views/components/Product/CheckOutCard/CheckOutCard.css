@@ -107,3 +107,28 @@
     text-align: center;
     margin-right: 21px;
 }
+.color-text-cart{
+    color: red;
+   
+}
+.mein-part{
+    justify-content: center;
+}
+@media screen and (max-width:750px) {
+    .color-card-dev{
+        text-align: center;
+    }
+}
+@media screen and (max-width:750px) {
+.quantity-inner {
+    justify-content: center;
+  
+}
+}
+@media screen and (max-width:750px) {
+    
+
+.text-stock{
+text-align: center;
+}
+}
