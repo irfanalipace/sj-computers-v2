@@ -2,13 +2,14 @@
     background: #eaeded;
 }
 .text-p {
+   
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 6px;
+   
+    font-size: 10px;
   
     color: #333333;
+  
 }
 /* .modal-content {
     position: relative;
@@ -41,12 +42,13 @@ color: #000000;
 
 }
 .location-button {
+    /* padding: 12px; */
     /* padding-right: 4px; */
     font-size: "18px";
     margin-top: "8px";
     color: "#333333";
     bottom: "8px";
-    width: 474px;
+    width: 327px;
     height: 38px;
     left: 579px;
     top: 349px;
@@ -59,11 +61,13 @@ color: #000000;
     line-height: 15px;
     color: #FFFFFF;
     border: none;
+    top: 4px;
+    margin-top: 2px;
 }
 .button-box {
     box-sizing: border-box;
-    width: 139px;
-    height: 38px;
+    width: 106px;
+    height: 34px;
     /* left: 770px; */
     /* top: 415px; */
     background: #edfff1;
@@ -71,16 +75,18 @@ color: #000000;
     border-radius: 7px;
     margin-top: 4px;
     font-size: 14px;
+    left: -12px;
+    margin-left: -11px;
 }
 .button-input {
     box-sizing: border-box;
     /* position: absolute; */
-    width: 310px;
-    height: 45px;
-    /* left: 579px; */
-    /* top: 413px; */
-    background: #edfff1;
-    border: 1px solid #52ac66;
+    width: 202px;
+    height: 37px;
+    left: 579px;
+    top: 413px;
+    background: #EDFFF1;
+    border: 1px solid #52AC66;
     border-radius: 5px;
 }
 .login-button-box{
@@ -102,8 +108,8 @@ bottom: 8px;
     color: black;
     box-sizing: border-box;
     max-width: 95%;
-    width: 490px;
-    height: 42px;
+    width: 349px;
+    height: 36px;
     left: 0px;
     top: 0px;
     border: 1px solid #000000;
@@ -131,11 +137,12 @@ bottom: 8px;
     border-radius: 8px;
     color: white;
 }
+
 .done-button:hover {
     background-color: #38C056;
 }
 .done-button:active{
-    background-color: #38C056;
+    background-color: #38C056 !important;
 }
 .done-button:focus {
     background: #52ac66;
@@ -143,7 +150,8 @@ bottom: 8px;
 }
 
 .dropdown-button-box:hover {
-    background-color: transparent;
+    color: black;
+
 
 }
 .dropdown-button-box:active {
@@ -153,9 +161,18 @@ bottom: 8px;
     width: 100%;
     position: absolute;
     inset: auto auto 0px 0px;
- 
-        width: 465px;
-       
-        transform: translate(0px, 43.75px);
-    
+    width: 331px;
+    transform: translate(0px, 43.75px);
+}
+.location-model .modal-content {
+    width: 360px;
+    height: 323px;
+    /* left: 63px; */
+    /* top: 240px; */
+    background: #FFFFFF;
+    border-radius: 5px;
+}
+.location-model .header {
+    margin-bottom: -10px;
+    background: #eaeded;
 }

@@ -46,9 +46,9 @@ function UpdateStateModel({ isOpen, handleClose }) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <span className="text-muted text-p">
-                Delivery option and delivery location may vary for different
-                    locations.
+                <span className=" text-p">
+                Delivery option and delivery location may vary for different locations.
+                   
                 </span>
 
                 {!isAuthenticated && (

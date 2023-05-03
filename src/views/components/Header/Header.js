@@ -75,6 +75,7 @@ const Header = () => {
                             <div className="d-flex flex-row align-items-center main-nav">
                                 <div className="d-flex align-items-center justify-content-center flex-wrap header-position">
                                     <Button
+                                    className="dliver-set"
                                         variant="primary"
                                         onClick={handleShow}
                                         style={{
@@ -199,7 +200,7 @@ const Header = () => {
                                     </div>
 
                                     <button
-                                        className="icon-cart me-2"
+                                        className="icon-cart me-2 icon-cart-effect-hover"
                                         onClick={toggleSidebar}
                                     >
                                         <div className="product-boll">
