@@ -52,6 +52,11 @@ const authSlice = createSlice({
             state.currentPage = 1;
             state.apiError = null;
         },
+        UPDATE_PROFILE: (state, action) => {
+            state.user.name = { ...action.payload.data.name };
+            state.user.profile_pic = { ...action.payload.data.profile_pic };
+            state.isLoading = false;
+        },
         API_ERROR: (state, action) => {
             state.apiError = { ...action.payload };
             state.isLoading = false;
@@ -70,6 +75,7 @@ export const {
     CLEAR_LOADING,
     VERIFY_EMAIL,
     VERIFY_OTP,
+    UPDATE_PROFILE,
     API_ERROR,
     CLEAR_API_ERRORS,
 } = authSlice.actions;
