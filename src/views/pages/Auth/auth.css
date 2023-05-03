@@ -269,7 +269,7 @@ h5:after {
     /* padding-left: 0px; */
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: 105%;
     background-color: rgb(233, 236, 239);
     margin-left: -11px;
 }
@@ -290,6 +290,7 @@ h5:after {
 .login-h3-reset {
     font-size: 24px;
 }
+
 
 .resend-otp-btn:disabled {
     color: gray !important;
@@ -365,4 +366,22 @@ color: #333333;
     /* height: 56px; */
     /* width: 263px; */
     /* margin: 4px; */
+}
+.set-register-text {
+    padding-top: 9px;
+    left: 567px;
+    top: 497px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 15px;
+}
+.register-sign-link {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 15px;
+    color: #333333;
 }

@@ -153,7 +153,7 @@ const PasswordForm = () => {
                         </p>
 
                         <div className="need-help">
-                            <FontAwesomeIcon icon={faCaretRight} />
+                            <FontAwesomeIcon icon={faCaretRight} className="icon-need-help"/>
                             <a
                                 href="#"
                                 className="text-decoration-none need-help"
