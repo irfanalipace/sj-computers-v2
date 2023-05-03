@@ -51,50 +51,32 @@ const Header = () => {
     };
     return (
         <>
-            {screenWidth <= 1024 ? (
+            {screenWidth <= 750 ? (
                 <div>
                     <MobileHeader />
 
-                            <div className="dropdown-cart">
-                                {isAuthenticated ? (
-                                    <div>
-                                        <p className="mb-0 text-white">
-                                            Hello, {user?.name}
-                                        </p>
-                                    </div>
-                                ) : (
-                                    <LoginCart className="card" />
-                                )}
-                            </div>
-                            <div className="return-button ">
-                                <button
-                                    className="order-button dropdown-toggle"
-                                    type="button"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                >
-                                    Return <br></br>& Order
-                                </button>
-                                <div
-                                    className="dropdown-menu"
-                                    aria-labelledby="dropdownMenuButton"
-                                >
-                                    <a className="dropdown-item" href="#">
-                                        Return
-                                    </a>
-                                    <a className="dropdown-item" href="#">
-                                        Order
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            <div className="icon-cart">
-                              {/* <CartOverLay /> */}
-                                   
-                                <div className="product-boll">
-                                    <div
-                                        className="dropdown dot"
+                    <MobileSearch />
+
+                    {/* components to render when screen width is less than or equal to 750px */}
+                </div>
+            ) : (
+                <div>
+                    {!nonHeaderRoutes.includes(
+                        location.pathname.split("/")[1]
+                    ) && (
+                        <header className="navbar navbar-expand-lg header-background px-3">
+                            <Link className="navbar-brand" to="/">
+                                <img
+                                    src={footerlogo}
+                                    alt=""
+                                    className="homepage-img"
+                                />
+                            </Link>
+                            <div className="d-flex flex-row align-items-center main-nav">
+                                <div className="d-flex align-items-center justify-content-center flex-wrap header-position">
+                                    <Button
+                                        variant="primary"
+                                        onClick={handleShow}
                                         style={{
                                             background: "#00305E",
                                             border: "#00305E",
