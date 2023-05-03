@@ -5,8 +5,8 @@ export function useFormValidation(initialState, { fieldLengths }, submitForm) {
     const [values, setValues] = useState(initialState);
     const [errors, setErrors] = useState({});
 
-    function handleChange(event) {
-        const { name, value } = event.target;
+    function handleChange(event, _value) {
+        const { name, value } = _value || event.target;
         setValues({
             ...values,
             [name]: value,
