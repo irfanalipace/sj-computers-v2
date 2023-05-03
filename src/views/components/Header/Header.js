@@ -9,7 +9,8 @@ import LoginCart from "./LoginCart";
 import Search from "./Search";
 import MobileHeader from "./MobileHeader/MobileHeader";
 import MobileSearch from "./MobileSearch/MobileSearch";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import footerlogo from "@images/header-logo.png";
 import english from "@images/home/eng.png";
 import vectorcart from "@images/home/vector.png";
@@ -120,7 +121,7 @@ const Header = () => {
                                             type="button"
                                             className="btn btn-success search-logo"
                                         >
-                                            <i className="fas fa-search"></i>
+                                         <FontAwesomeIcon icon={faSearch} size='2x'/>
                                         </button>
                                     </span>
                                 </div>
