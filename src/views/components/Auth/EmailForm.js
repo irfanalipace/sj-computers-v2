@@ -63,7 +63,7 @@ export default function EmailForm({ onFormSubmit, form }) {
                 <input
                     type="email"
                     name="email"
-                    className="form-control"
+                    className="form-control email-login-input"
                     placeholder="Enter your email"
                     value={values.email}
                     onChange={handleChange}
@@ -75,20 +75,20 @@ export default function EmailForm({ onFormSubmit, form }) {
             <div className="d-grid justify-content-center">
                 <button
                     type="submit"
-                    className="btn btn-primary login-button"
+                    className=" loginform-button"
                     disabled={isLoading}
                 >
                     {isLoading ? <Loader /> : "Continue"}
                 </button>
             </div>
-            <p className="text-muted small">
+            <p className=" small-text-paragrap">
                 By continuing, you agree to SJ Computer’s
                 <a href="#" className="text-decoration-none">
                     Conditions of Use
                 </a>
                 and
                 <a href="#" className="text-decoration-none">
-                    Privacy Notice
+                    Privacy Noticee
                 </a>
                 .
             </p>
