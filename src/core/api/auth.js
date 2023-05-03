@@ -145,6 +145,7 @@ export function resetPasswordApi({
 }
 
 export function updateProfileApi({ name, profile_pic }) {
+    console.log("profile_pic:", profile_pic);
     return new Promise((resolve, reject) => {
         ApiService.post("update-profile", {
             name,

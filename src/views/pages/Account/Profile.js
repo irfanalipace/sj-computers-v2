@@ -42,6 +42,7 @@ const Profile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("selected file: ", selectedFile);
         dispatch(updateProfile({ name, profile_pic: selectedFile }));
     };
 

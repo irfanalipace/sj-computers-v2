@@ -160,11 +160,12 @@ export const alreadyLoggedIn = (token) => {
 };
 
 export const updateProfile = ({ name, profile_pic }) => {
+    console.log("profile_pic", profile_pic);
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             await updateProfileApi({ name, profile_pic });
-            dispatch({ type: UPDATE_PROFILE, payload: { name, email } });
+            dispatch({ type: UPDATE_PROFILE, payload: { name, profile_pic } });
         } catch (error) {
             console.log("Something went wrong in updateProfile", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
