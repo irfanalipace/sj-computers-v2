@@ -141,7 +141,7 @@ const Header = () => {
                             </div>
                             
                             <div className="icon-cart">
-                              <CartOverLay />
+                              {/* <CartOverLay /> */}
                                    
                                 <div className="product-boll">
                                     <div
