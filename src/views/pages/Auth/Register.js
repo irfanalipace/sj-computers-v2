@@ -123,11 +123,11 @@ const Register = () => {
                                 </p>
                             )}
                         </div>
-                        <p className="text-muted small">
+                        <p className="register-p-text">
                             {/* <img src={vectoricon} alt='' style={{width:'7px'}}/> */}
                             <FontAwesomeIcon
                                 icon={faInfo}
-                                style={{ color: "#52AC66" }}
+                                style={{ color: "#52AC66", paddingRight:'6px' }}
                             />
                             Passwords must be at least 6 characters.
                         </p>
@@ -153,7 +153,7 @@ const Register = () => {
                         <div className="d-grid justify-content-center">
                             <button
                                 type="submit"
-                                className="btn btn-primary login-button"
+                                className="btn btn-primary set-register-button"
                                 disabled={isLoading}
                             >
                                 {isLoading ? <Loader /> : "Verify Email"}
