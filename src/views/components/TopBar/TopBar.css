@@ -24,6 +24,8 @@
     margin-right: 4rem;
     margin-left: 1.5rem;
     cursor: pointer;
+}.navIcon:hover{
+    border: 2.3px solid #FFFFFF;
 }
 
 .ullist {
@@ -39,10 +41,36 @@
     display: inline;
     color: white;
     padding-right: 30px;
+}.listitem:hover{
+    border: 2.3px solid #FFFFFF;
 }
 .text-color {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #FFFFFF;
     color: white;
+    
+}.text-color:hover{
+    color: none !important;
+}a:hover,
+Link:hover {
+  color: inherit;
+  text-decoration: none;
+  
 }
+
 .small-text-size {
-    font-size: 21px;
+   
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 15px;
+        line-height: 18px;
+        color: #FFFFFF;
+        padding-top: 5p;
+        padding-top: 8px;
+    
 }

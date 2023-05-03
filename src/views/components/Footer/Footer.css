@@ -29,6 +29,16 @@
     align-items: center;
     color: #ffffff;
     list-style-type: none;
+}.list-unstyle1 a:hover {
+    color: white !important;
+}
+.list-unstyle2 a:hover {
+    color: white !important;
+}
+.list-unstyle3 a:hover {
+    color: white !important;
+}.list-unstyle4 a:hover {
+    color: white !important;
 }
 .list-unstyle4 {
     text-align: initial;
@@ -118,8 +128,15 @@
 .back-to-top-button {
     background: #002549;
     border: 0px;
-    color: white;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+    /* color: white; */
 }
 .language-dropdown::after {
     display: none;
 }
+
