@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./ProductType.css";
 import ProductItem1 from "@components/homeproduct/productcategory/ProductItem1";
 import ProductItem4 from "@components/homeproduct/productcategory/ProductItem4";
 
 import imgcard from "@images/product/side-img.png";
 export const ProductType = () => {
+    const isAuthenticated = (state) => state.auth.isAuthenticated;
     return (
         <div className="product-type-container">
             <div className="row">
@@ -39,12 +41,24 @@ export const ProductType = () => {
                 <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="advertisement-section">
                         <div className="advertisement-heading">
-                            <h4 className="h2-cart">
-                                Sign up to get latest <br></br>update on sale
-                            </h4>
-                            <button type="button" className="button-save">
-                                Login Safely
-                            </button>
+                            {isAuthenticated ? (
+                                <div>
+                                    <h4>Advertisement</h4>
+                                </div>
+                            ) : (
+                                <>
+                                    <h4 className="h2-cart">
+                                        Sign up to get latest <br></br>update on
+                                        sale
+                                    </h4>
+                                    <button
+                                        type="button"
+                                        className="button-save"
+                                    >
+                                        Login Safely
+                                    </button>
+                                </>
+                            )}
                         </div>
 
                         <div className="product-section-advertisment">

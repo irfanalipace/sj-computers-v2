@@ -9,7 +9,7 @@
         "prod": "npm run production",
         "production": "mix --production",
         "start": "webpack-dev-server --mode development",
-        "build": "webpack"
+        "build": "webpack --mode production"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.21.4",
@@ -20,6 +20,7 @@
         "bootstrap": "^5.2.3",
         "case-sensitive-paths-webpack-plugin": "^2.4.0",
         "css-loader": "^6.7.3",
+        "dotenv-webpack": "^8.0.1",
         "file-loader": "^6.2.0",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
@@ -37,6 +38,7 @@
         "@fortawesome/fontawesome-free": "^6.4.0",
         "@fortawesome/free-solid-svg-icons": "^6.4.0",
         "@fortawesome/react-fontawesome": "^0.2.0",
+        "@material-ui/icons": "^4.11.3",
         "@reduxjs/toolkit": "^1.9.1",
         "country-flag-icons": "^1.5.7",
         "jquery": "^3.6.4",
@@ -49,6 +51,7 @@
         "react-responsive-carousel": "^3.2.23",
         "react-router-dom": "^6.4.0",
         "react-scripts": "5.0.1",
+        "react-square-web-payments-sdk": "^3.2.1",
         "react-star-ratings": "^2.3.0",
         "react-toastify": "^9.1.2",
         "reactstrap": "^9.1.9",

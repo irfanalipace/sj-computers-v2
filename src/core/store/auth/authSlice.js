@@ -32,8 +32,9 @@ const authSlice = createSlice({
         REGISTER: (state) => {
             state.isLoading = false;
         },
-        ALREADY_LOGGED_IN: (state) => {
+        ALREADY_LOGGED_IN: (state, action) => {
             state.isAuthenticated = true;
+            state.user = { ...action.payload };
             state.isLoading = false;
         },
         VERIFY_EMAIL: (state) => {

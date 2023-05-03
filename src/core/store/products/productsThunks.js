@@ -3,7 +3,7 @@ import {
     FETCH_PRODUCTS,
     API_ERROR,
 } from "@store/products/productsSlice";
-import { productsApi } from "@api/products";
+import { productsApi, productDetailsApi } from "@api/products";
 
 export const fetchProducts = (page = 1) => {
     return async (dispatch) => {

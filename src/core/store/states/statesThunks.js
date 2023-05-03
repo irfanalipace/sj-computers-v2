@@ -25,7 +25,10 @@ export const updateState = (data, cb) => {
             dispatch({ type: LOADING, payload: {} });
             await updateStateApi(data);
             if (typeof cb === "function") cb();
-            dispatch({ type: UPDATE_STATE, payload: data.state });
+            dispatch({
+                type: UPDATE_STATE,
+                payload: { id: data.id, name: data.name },
+            });
         } catch (error) {
             console.log("Something went wrong in states", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

@@ -15,14 +15,11 @@
 .sideMenu-close-btn {
     position: absolute;
     right: -5px;
+    color: white;
     margin-top: 6px;
     font-size: 30px;
     border: 0;
     background-color: transparent;
-}
-
-.sideMenu-close-btn i {
-    color: white;
 }
 
 .sideMenu-inner {

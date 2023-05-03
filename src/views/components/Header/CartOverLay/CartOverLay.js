@@ -1,16 +1,12 @@
-import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
-import imges from "@images/bottom-arrow.png";
-
+import { useState } from "react";
+import { Modal } from "react-bootstrap";
 
 export const CartOverLay = () => {
     const [smShow, setSmShow] = useState(false);
     const [lgShow, setLgShow] = useState(false);
     return (
         <div>
-            <button onClick={() => setSmShow(true)} className="me-2">
-            onClick
-            </button>
+            <button onClick={() => setSmShow(true)} className="me-2"></button>
 
             <Modal
                 size="sm"
@@ -26,29 +22,17 @@ export const CartOverLay = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="mein-text">
-                    <div>
-                        Price
-                    </div>
-                    <div>
-                        $550
-                    </div>
+                        <div>Price</div>
+                        <div>$550</div>
                     </div>
                     <div className="mein-text-dilvery">
-                    <div>
-                      Delivery Tax
-                    </div>
-                    <div>
-                        $50
-                    </div>
+                        <div>Delivery Tax</div>
+                        <div>$50</div>
                     </div>
                     <hr></hr>
                     <div className="mein-text-dilvery">
-                    <div>
-                     Total
-                    </div>
-                    <div>
-                        $600
-                    </div>
+                        <div>Total</div>
+                        <div>$600</div>
                     </div>
                 </Modal.Body>
             </Modal>

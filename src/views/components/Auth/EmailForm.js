@@ -66,7 +66,7 @@ export default function EmailForm({ onFormSubmit, form }) {
                     onChange={handleChange}
                 />
                 {fieldErrors && (
-                    <p className="text-danger">{fieldErrors.email}</p>
+                    <p className="fs-6 mt-1 text-danger">{fieldErrors.email}</p>
                 )}
             </div>
             <div className="d-grid justify-content-center">
@@ -79,11 +79,11 @@ export default function EmailForm({ onFormSubmit, form }) {
                 </button>
             </div>
             <p className="text-muted small">
-                By continuing, you agree to SJ Computer’s{" "}
+                By continuing, you agree to SJ Computer’s
                 <a href="#" className="text-decoration-none">
                     Conditions of Use
-                </a>{" "}
-                and{" "}
+                </a>
+                and
                 <a href="#" className="text-decoration-none">
                     Privacy Notice
                 </a>
@@ -91,7 +91,7 @@ export default function EmailForm({ onFormSubmit, form }) {
             </p>
 
             <div className="need-help">
-                <FontAwesomeIcon icon={faCaretRight} />{" "}
+                <FontAwesomeIcon icon={faCaretRight} />
                 <a href="#" className="text-decoration-none need-help">
                     Need Help?
                 </a>

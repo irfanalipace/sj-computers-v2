@@ -84,7 +84,7 @@ const Register = () => {
                                 placeholder="Full name"
                             />
                             {fieldErrors && (
-                                <p className="text-danger">
+                                <p className="fs-6 mt-1 text-danger">
                                     {fieldErrors.name}
                                 </p>
                             )}
@@ -102,7 +102,7 @@ const Register = () => {
                                 placeholder="Enter your email"
                             />
                             {fieldErrors && (
-                                <p className="text-danger">
+                                <p className="fs-6 mt-1 text-danger">
                                     {fieldErrors.email}
                                 </p>
                             )}
@@ -118,7 +118,7 @@ const Register = () => {
                                 placeholder="Enter password"
                             />
                             {fieldErrors && (
-                                <p className="text-danger">
+                                <p className="fs-6 mt-1 text-danger">
                                     {fieldErrors.password}
                                 </p>
                             )}
@@ -128,7 +128,7 @@ const Register = () => {
                             <FontAwesomeIcon
                                 icon={faInfo}
                                 style={{ color: "#52AC66" }}
-                            />{" "}
+                            />
                             Passwords must be at least 6 characters.
                         </p>
                         <div className="mb-3">
@@ -144,7 +144,7 @@ const Register = () => {
                                 placeholder="Re-enter password"
                             />
                             {fieldErrors && (
-                                <p className="text-danger">
+                                <p className="fs-6 mt-1 text-danger">
                                     {fieldErrors.confirmPassword}
                                 </p>
                             )}

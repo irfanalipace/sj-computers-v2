@@ -10,7 +10,7 @@ export const fetchCategory = () => {
         try {
             dispatch({ type: LOADING, payload: {} });
             const response = await categoryApi();
-            dispatch({ type: FETCH_CATEGORY, payload: response.data });
+            dispatch({ type: FETCH_CATEGORY, payload: response.data.data });
         } catch (error) {
             console.log("Something went wrong in category", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

@@ -9,6 +9,7 @@ import {
     VERIFY_EMAIL,
     VERIFY_OTP,
     API_ERROR,
+    ALREADY_LOGGED_IN,
 } from "@store/auth/authSlice";
 import {
     loginApi,
@@ -23,11 +24,16 @@ import {
     saveToken,
     destroyToken,
     saveUserEmail,
+    saveUserName,
     saveUserPassword,
-    destroyUserPassword,
     saveTempToken,
     getTempToken,
+    getUserName,
+    getUserEmail,
+    destroyTempKeys,
 } from "@services/jwtService";
+
+import ApiService from "@services/apiService";
 
 export const login = (credentials) => {
     return async (dispatch) => {
@@ -35,12 +41,13 @@ export const login = (credentials) => {
             dispatch({ type: LOADING, payload: {} });
             const response = await loginApi(credentials);
             let token = response.data.data.access_token;
-            saveToken("", "", credentials.email);
-            saveTempToken(token);
-            saveUserPassword(credentials.password);
+            let name = response.data.data.user;
+            saveUserName(name);
+            saveTempToken(token); // saving token temporarily to only allow user to call the login api
+            saveUserPassword(credentials.password); // saving password temporarily to only allow user to re login to resend the otp
             dispatch({
                 type: LOGIN,
-                payload: { user: { ...credentials }, token },
+                payload: response.data.data,
             });
         } catch (error) {
             console.log("Something went wrong in login", error);
@@ -96,12 +103,13 @@ export const verifyOtp = (credentials) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            const response = await verifyOtpApi(credentials);
-            // let token = response.data.data.access_token;
+            await verifyOtpApi(credentials);
             let temp_token = getTempToken();
-            console.log("temp_token: " + temp_token);
-            saveToken(temp_token, "", credentials.email);
-            dispatch({ type: VERIFY_OTP, payload: {} });
+            let name = getUserName();
+            let email = getUserEmail();
+            destroyTempKeys(); // destroy user password and temporary token after login success
+            saveToken(temp_token); // stores temporary token in right key to be used later for calling protected apis
+            dispatch({ type: VERIFY_OTP, payload: { name, email } });
         } catch (error) {
             console.log("Something went wrong in login", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
@@ -135,5 +143,16 @@ export const forgetPassword = (email, cb) => {
             console.log("Something went wrong in forgetPasswordApi", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
+    };
+};
+
+export const alreadyLoggedIn = (token) => {
+    return async (dispatch) => {
+        let user = {
+            name: getUserName(),
+            email: getUserEmail(),
+        };
+        ApiService.setHeader("Authorization", "Bearer " + token);
+        dispatch(ALREADY_LOGGED_IN(user));
     };
 };

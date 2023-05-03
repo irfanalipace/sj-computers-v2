@@ -5,7 +5,6 @@ const initialState = {
     currentState: null,
     apiError: false,
     isLoading: false,
-    currentPage: 1,
 };
 
 const productSlice = createSlice({
@@ -20,7 +19,6 @@ const productSlice = createSlice({
         },
         FETCH_STATES: (state, action) => {
             state.states = [...action.payload];
-            state.currentPage = state.currentPage + 1;
             state.isLoading = false;
         },
         UPDATE_STATE: (state, action) => {

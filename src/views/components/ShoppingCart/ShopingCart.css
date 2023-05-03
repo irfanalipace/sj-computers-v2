@@ -10,48 +10,44 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
- 
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 28px;
-     
-        color: #000000;
-  }
-  
 
-.ssd-image{
-    max-width: 100%;
-    margin-left: 10px;
-}.item-details{
-  
-        /* position: absolute; */
-        width: 631px;
-        height: 38px;
-        left: 323px;
-        top: 223px;
-        
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19px;
-        
-        color: #000000;
-    
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+
+    color: #000000;
 }
 
-.price-heading{
-   
-   text-align: end;
+.ssd-image {
+    max-width: 100%;
+    margin-left: 10px;
+}
+.item-details {
+    /* position: absolute; */
+    width: 631px;
+    height: 38px;
+    left: 323px;
     top: 223px;
-    font-family: 'Inter';
+
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+
+.price-heading {
+    text-align: end;
+    top: 223px;
+    font-family: "Inter";
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
     line-height: 19px;
     color: #000000;
-
 }
 .shopping-heading {
     margin-left: 10px;
@@ -59,7 +55,7 @@
     /* height: 34px; */
     left: 122px;
     top: 154px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 28px;
@@ -67,7 +63,7 @@
     color: #000000;
 }
 .item-list {
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -76,19 +72,15 @@
     color: #333333;
     list-style: none;
 }
-.item-capacity{
+.item-capacity {
     font-weight: bold;
 }
-.item-stock{
+.item-stock {
     color: #318243;
 }
 .button-link {
-    /* position: absolute; */
-    /* width: 38px; */
-    height: 30px;
-    left: 430px;
-    top: 361px;
-    font-family: 'Inter';
+    /* height: 30px; */
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 13px;
@@ -97,6 +89,8 @@
     border: none;
     background: white;
     margin-right: 9px;
+    border-left: 1px solid #318243;
+    line-height: 0;
 }
 .selectbutton-option {
     /* box-sizing: border-box; */
@@ -105,53 +99,50 @@
     height: 37px;
     left: 0px;
     top: 0px;
-    border: 1px solid #EAEDED;
+    border: 1px solid #eaeded;
     border-radius: 10px;
     margin-right: 14px;
 }
 .shopping-heading {
     margin-bottom: 0;
-  }
-  
-  .card p {
+}
+
+.card p {
     margin-bottom: 0;
-  }
- head:nth-child(2){
-background-color: #000000;
- }
+}
+head:nth-child(2) {
+    background-color: #000000;
+}
 
-
-
- .checkout-button-side {
+.checkout-button-side {
     background-color: none;
     /* width: 391px; */
     /* margin-top: 12px;
     margin-left: 35px; */
-    background: #38C056;
+    background: #38c056;
     border-radius: 10px;
-    border-color: #38C056;
+    border-color: #38c056;
     height: 49px;
 }
 .card-checkout {
     border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
-    
-  }
-  .sub-title{
-margin-right: 172px;
-margin-top: 10px;
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 19px;
+}
+.sub-title {
+    /* margin-right: 172px; */
+    margin-top: 10px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
 
-color: #000000;
-  }
-  .checkbox-paragraph {
+    color: #000000;
+}
+.checkbox-paragraph {
     margin-right: 10px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -163,26 +154,32 @@ color: #000000;
     background-color: none;
     margin-top: 12px;
     /* margin-left: 35px; */
-    background: #38C056;
+    background: #38c056;
     border-radius: 10px;
-    border-color: #38C056;
+    border-color: #38c056;
     height: 49px;
     width: 403px;
     max-width: 99%;
 }
 .button-checkout-data {
-   text-align: center;
- 
+    text-align: center;
 }
-  .checkout-button:hover{
-    background: #38C056;
-      
-   }.checkout-button:active{
-    background: #38C056 !important;
-   }
-  .card-body-text {
+.checkout-button:hover {
+    background: #38c056;
+}
+.checkout-button:active {
+    background: #38c056 !important;
+}
+.card-body-text {
     text-align: center;
     margin: 4px;
-}.card-box{
+}
+.cart-box {
     padding: 10px;
+    margin-bottom: 10px;
+}
+@media screen and (max-width:600px) {
+    .item-details {
+        font-size: 11px;
+     }
 }

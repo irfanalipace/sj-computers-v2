@@ -1,10 +1,9 @@
 const path = require("path");
 const webpack = require("webpack");
-var CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
-
+const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 module.exports = {
     entry: "./src/Index.js",
-    mode: "development",
     module: {
         rules: [
             {
@@ -46,6 +45,7 @@ module.exports = {
             "@pages": path.resolve(__dirname, "src/views/pages"),
             "@store": path.resolve(__dirname, "src/core/store"),
             "@services": path.resolve(__dirname, "src/core/services"),
+            "@plugins": path.resolve(__dirname, "src/core/plugins"),
             "@api": path.resolve(__dirname, "src/core/api"),
             "@hooks": path.resolve(__dirname, "src/core/hooks"),
             "@utils": path.resolve(__dirname, "src/core/utils"),
@@ -54,9 +54,7 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, "public/js"),
-
-        publicPath: "http://localhost:3000/js/",
-
+        publicPath: "/js",
         filename: "app.js",
     },
 
@@ -72,5 +70,6 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new CaseSensitivePathsPlugin({ debug: true }),
+        new Dotenv(),
     ],
 };

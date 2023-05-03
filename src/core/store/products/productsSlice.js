@@ -18,7 +18,6 @@ const productSlice = createSlice({
             state.isLoading = false;
         },
         FETCH_PRODUCTS: (state, action) => {
-            console.log("state current: ", state.currentPage);
             if (state.currentPage === 1) state.products = [...action.payload];
             else state.products = [...state.products, ...action.payload];
             state.currentPage = state.currentPage + 1;

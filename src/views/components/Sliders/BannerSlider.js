@@ -11,7 +11,7 @@ import sliderimg from "@images/slider-img/slider1.png";
 const Slider = () => {
     return (
         <>
-            <div className="slider-section">
+            <div className="banner-slider-section">
                 <Swiper
                     navigation={true}
                     modules={[Navigation]}

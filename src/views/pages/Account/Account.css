@@ -1,0 +1,69 @@
+.account-page * {
+    font-family: "Inter";
+}
+
+.account-page {
+    /* width: 95%; */
+    margin: 0 auto;
+}
+
+.account-page h3 {
+    font-weight: 400;
+    font-size: 28px;
+    margin: 30px 0 20px;
+    padding: 0 20px;
+}
+
+.account-page .account-options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+.account-card a {
+    text-decoration: none;
+}
+.account-page .account-card-inner {
+    display: flex;
+    border: 1px solid #dddddd;
+    padding: 14px 7px;
+    height: 100px;
+}
+
+.account-page a.account-card {
+    text-decoration: none;
+    color: black;
+    padding: 10px 20px;
+}
+
+.account-page .account-card .img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-page .account-card img {
+    max-width: 54px;
+    max-height: 54px;
+}
+
+.account-page .account-card p {
+    font-weight: 400;
+    font-size: 12px;
+    margin-bottom: 0;
+}
+
+.account-page .account-card h6 {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 4px;
+}
+
+.account-page .account-info {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    /* margin-top: 5px; */
+}

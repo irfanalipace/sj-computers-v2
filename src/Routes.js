@@ -3,13 +3,16 @@ import { useSelector } from "react-redux";
 import Home from "@pages/Home/Home";
 import LoginForm from "@pages/Auth/LoginForm";
 import Register from "@pages/Auth/Register";
-import Profile from "@pages/User/Profile";
+import Account from "@pages/Account/Account";
+import Profile from "@pages/Account/Profile";
 import ForgetPassword from "@pages/Auth/ForgetPassword/ForgetPassword";
 import ResetPassword from "@pages/Auth/ForgetPassword/ResetPassword";
 import Emailsent from "@pages/Auth/EmailSent";
 import Product from "@pages/Product/Product";
 import Category from "@pages/Category/Category";
 import Cart from "@components/ShoppingCart/Cart";
+import Checkout from "@pages/Checkout/Checkout";
+import Test from "@pages/Test/Test";
 
 export const Router = () => {
     const routes = [
@@ -67,7 +70,15 @@ export const Router = () => {
         },
 
         {
-            path: "/profile",
+            path: "/account",
+            element: (
+                <ProtectedRoute>
+                    <Account />
+                </ProtectedRoute>
+            ),
+        },
+        {
+            path: "/account/profile",
             element: (
                 <ProtectedRoute>
                     <Profile />
@@ -75,8 +86,61 @@ export const Router = () => {
             ),
         },
         {
-            path: "/Cart",
+            path: "/account/update-address",
+            element: (
+                <ProtectedRoute>
+                    <Profile />
+                </ProtectedRoute>
+            ),
+        },
+        {
+            path: "/account/update-password",
+            element: (
+                <ProtectedRoute>
+                    <Profile />
+                </ProtectedRoute>
+            ),
+        },
+        {
+            path: "/account/orders",
+            element: (
+                <ProtectedRoute>
+                    <Profile />
+                </ProtectedRoute>
+            ),
+        },
+        {
+            path: "/cart",
             element: <Cart />,
+        },
+        {
+            path: "/checkout/:productId",
+            element: <Checkout />,
+        },
+        {
+            path: "/checkout",
+            element: (
+             
+                    <Checkout />
+               
+            ),
+        },
+        {
+            path: "/success-transaction",
+            element: (
+                <div>
+                    <div
+                        className="w-100 d-flex justify-content-center align-items-center flex-column"
+                        style={{ height: "500px" }}
+                    >
+                        <h1>Transaction Successfull</h1>
+                    </div>
+                </div>
+            ),
+        },
+        {
+            path: "/test",
+            element: <Test />,
         },
         {
             path: "*",

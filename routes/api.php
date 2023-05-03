@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\PayPal\PaypalController;
 use App\Http\Controllers\Api\PayPal\PaypalwebhookController;
 use App\Http\Controllers\Api\ShoppingCart\CartController;
 use App\Http\Controllers\Api\Setting\ProfileController;
-
+use App\Http\Controllers\Api\Square\SquareController;
 
 use App\Http\Controllers\Api\Auth\VerificationController;
 use App\Http\Controllers\Api\StateController;
@@ -56,25 +56,29 @@ Route::get('categories', [CategoryController::class, 'getList'])->name('categori
 
 Route::get('brands', [BrandController::class, 'getList'])->name('brands');
 
-Route::get('products', [ProductController::class, 'getList'])->name('brands');
+Route::get('products', [ProductController::class, 'getList'])->name('products');
 
-
-/*
- * PayPal integration
- */
-Route::post('paypalwebhooks', [PaypalwebhookController::class, 'webhooks'])->name('paypalwebhooks');
-Route::post('process-transaction', [PaypalController::class, 'processTransaction'])->name('processTransaction');
-Route::get('success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
-Route::post('cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
+Route::get('product-detail', [ProductController::class, 'getProductDetail'])->name('productDetail');
 
 /*
 *Add to Cart
 */
 Route::get('get-items', [CartController::class, 'getItems'])->name('getItems');
+
 Route::post('add-to-cart', [CartController::class, 'addCart'])->name('addCart');
+
+Route::post('store-local-storage-items', [CartController::class, 'storelocalStorageItems'])->name('storelocalStorageItems');
+
 Route::post('delete-item', [CartController::class, 'delete'])->name('deleteItem');
+
 Route::get('get-details', [CartController::class, 'details'])->name('getItems');
+
 Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clearCart');
+
+Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('addQtyCart');
+
+Route::get('user-state', [StateController::class, 'getState'])->name('getState');
+
 
 /*
 *Place Order
@@ -83,7 +87,7 @@ Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeO
 
 Route::middleware(['auth:api'])->group(function () {
 
-    //    Route::post('user-details', UserDetailController::class)->name('user-details');
+    //Route::post('user-details', UserDetailController::class)->name('user-details');
 
     Route::post('verify-otp', [AuthController::class, 'verifyOtp'])->name('verify-otp');
 
@@ -102,8 +106,29 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('get-shipping-address', [OrderController::class, 'getShippingAddress'])->name('getShippingAddress');
     Route::post('order-shipping-address', [OrderController::class, 'shippingAddress'])->name('OrderShippingAddress');
 
+
+
     /*
-    *Add more quantity
+     * update state api
+     */
+    Route::post('update-state', [StateController::class, 'updateState'])->name('update-state');
+
+
+    /*
+    * PayPal integration
     */
-    Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('addQtyCart');
+    Route::post('paypalwebhooks', [PaypalwebhookController::class, 'webhooks'])->name('paypalwebhooks');
+
+    Route::post('process-transaction', [PaypalController::class, 'processTransaction'])->name('processTransaction');
+
+    Route::get('success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
+
+    Route::post('cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
+
+
+
+    /*
+    *Square Integration
+    */
+    Route::post('square-charge', [SquareController::class, 'chargeCustomer'])->name('squreCharge');
 });

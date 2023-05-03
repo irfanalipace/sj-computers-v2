@@ -26,7 +26,7 @@ const VerifyOTP = () => {
 
     const apiError = useSelector((state) => state.auth.apiError);
     const isLoading = useSelector((state) => state.auth.isLoading);
-    const accessToken = useSelector((state) => state.auth.accessToken);
+    // const accessToken = useSelector((state) => state.auth.accessToken);
     const [fieldErrors, setFieldErrors] = useState({});
     const [email, setEmail] = useState("");
     const [mounted, setMounted] = useState(false);
@@ -50,7 +50,7 @@ const VerifyOTP = () => {
             1000
         );
         setEmail(getUserEmail());
-        ApiService.setHeader("Authorization", "Bearer " + accessToken);
+        // ApiService.setHeader("Authorization", "Bearer " + accessToken);
         setMounted(true);
         return () => {
             clearInterval(interval);
@@ -118,27 +118,29 @@ const VerifyOTP = () => {
                 />
 
                 {fieldErrors && (
-                    <p className="text-danger">{fieldErrors.otp}</p>
+                    <p className="fs-6 mt-1 text-danger">{fieldErrors.otp}</p>
                 )}
             </div>
             <div className="d-grid justify-content-center">
                 <button
                     type="submit"
-                    className="btn btn-primary login-button"
+                    className="btn btn-primary login-button verify-otp-btn"
                     disabled={isLoading}
                 >
                     {isLoading ? <Loader /> : "Verify OTP"}
                 </button>
             </div>
-            {isLoading ? (
-                <Loader />
+            {loading ? (
+                <div className="d-flex justify-content-center mt-2">
+                    <Loader />
+                </div>
             ) : (
                 <div className="align-items-center d-flex flex-column justify-content-center">
                     <p className="text-muted small d-flex justify-content-center">
                         <button
                             onClick={resendOTP}
                             disabled={!isTimerFinished || isLoading || loading}
-                            className="bg-white border-0 text-primary"
+                            className="bg-white border-0 text-primary resend-otp-btn"
                         >
                             Resend OTP
                         </button>

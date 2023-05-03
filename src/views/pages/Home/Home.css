@@ -1,10 +1,13 @@
-.banner-wrapper {
+.banner-category-section {
     position: relative;
+}
+.banner-wrapper {
+    /* position: relative; */
 }
 
 .catergory-grid-wrapper {
     position: absolute;
     width: 100%;
-    bottom: 20px;
-    z-index: 2;
+    bottom: -20px;
+    z-index: 1;
 }

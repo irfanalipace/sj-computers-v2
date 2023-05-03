@@ -22,9 +22,6 @@ const PasswordForm = () => {
     const urlParams = new URLSearchParams(queryString);
     const token = urlParams.get("token");
     const email = urlParams.get("email");
-
-    console.log(email, token);
-
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
             email: email,
@@ -63,7 +60,7 @@ const PasswordForm = () => {
             access_token: token,
             email: values.email,
             password: values.password,
-            confirmPassword: values.confirmPassword,
+            confirm_password: values.confirmPassword,
         };
         dispatch(resetPassword(credentials, () => navigate("/login")));
     }
@@ -91,7 +88,7 @@ const PasswordForm = () => {
                                 readOnly
                             />
                             {fieldErrors && (
-                                <p className="text-danger">
+                                <p className="fs-6 mt-1 text-danger">
                                     {fieldErrors.email}
                                 </p>
                             )}
@@ -109,7 +106,7 @@ const PasswordForm = () => {
                                 onChange={handleChange}
                             />
                             {fieldErrors && (
-                                <p className="text-danger">
+                                <p className="fs-6 mt-1 text-danger">
                                     {fieldErrors.password}
                                 </p>
                             )}
@@ -128,7 +125,7 @@ const PasswordForm = () => {
                                 onChange={handleChange}
                             />
                             {fieldErrors && (
-                                <p className="text-danger">
+                                <p className="fs-6 mt-1 text-danger">
                                     {fieldErrors.confirmPassword}
                                 </p>
                             )}
@@ -144,11 +141,11 @@ const PasswordForm = () => {
                             </button>
                         </div>
                         <p className="text-muted small">
-                            By continuing, you agree to SJ Computer’s{" "}
+                            By continuing, you agree to SJ Computer’s
                             <a href="#" className="text-decoration-none">
                                 Conditions of Use
-                            </a>{" "}
-                            and{" "}
+                            </a>
+                            and
                             <a href="#" className="text-decoration-none">
                                 Privacy Notice
                             </a>
@@ -156,7 +153,7 @@ const PasswordForm = () => {
                         </p>
 
                         <div className="need-help">
-                            <FontAwesomeIcon icon={faCaretRight} />{" "}
+                            <FontAwesomeIcon icon={faCaretRight} />
                             <a
                                 href="#"
                                 className="text-decoration-none need-help"

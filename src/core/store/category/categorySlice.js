@@ -6,7 +6,7 @@ const initialState = {
     isLoading: false,
 };
 
-const productSlice = createSlice({
+const categorySlice = createSlice({
     name: "category",
     initialState,
     reducers: {
@@ -18,7 +18,7 @@ const productSlice = createSlice({
         },
         FETCH_CATEGORY: (state, action) => {
             state.category = [...action.payload];
-            state.currentPage = state.currentPage + 1;
+            state.isLoading = false;
         },
         CLEAR_CATEGORY: (state) => {
             state.category = [];
@@ -35,5 +35,5 @@ export const {
     FETCH_CATEGORY,
     CLEAR_CATEGORY,
     API_ERROR,
-} = productSlice.actions;
-export default productSlice.reducer;
+} = categorySlice.actions;
+export default categorySlice.reducer;

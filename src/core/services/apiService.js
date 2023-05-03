@@ -13,8 +13,7 @@ const ApiService = {
     init() {
         if (!this.instance) {
             this.instance = axios.create({ withCredentials: true });
-            this.instance.defaults.baseURL = "http://localhost:8000/api";
-            // this.instance.defaults.baseURL = process.env.API_BASE_URL;
+            this.instance.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
             this.instance.defaults.headers["content-type"] = "application/json";
         }
     },

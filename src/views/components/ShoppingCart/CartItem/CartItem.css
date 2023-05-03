@@ -14,3 +14,15 @@
     color: #000000;
 
 }
+@media screen and (max-width: 700px) {
+  .ssd-image {
+  
+    width: 44%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .item-details{
+  
+    font-size: 11px;
+  }
+}

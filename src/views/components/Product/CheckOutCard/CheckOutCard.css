@@ -1,25 +1,23 @@
 .card-section-left {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     padding: 20px;
     background-color: white;
-    margin-left: 30px;
-    margin-right: 50px;
     margin-top: 50px;
     max-width: 100%;
     margin-bottom: 12px;
 }
-.cart-text{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 13px;
-margin-top: 7px;
+.cart-text {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 13px;
+    margin-top: 7px;
 
-/* Primary */
+    /* Primary */
 
-color: #333333;
+    color: #333333;
 }
 .head {
     display: flex;
@@ -27,7 +25,7 @@ color: #333333;
 }
 .buttion-details {
     border: 1px !important;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 11px;
@@ -35,32 +33,34 @@ color: #333333;
     border: none;
     color: #318243;
     border-color: #318243;
+    padding-left: 0;
 }
 .color-card {
     margin-bottom: -7px;
-    font-family: 'Roboto';
+    font-family: "Roboto";
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 13px;
     color: #318243;
-    /* margin-top: -23px; */
+    padding: 0;
+    border: 0;
 }
-.selectbutton-option-button{
-    border: 1px solid #EAEDED;
-filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
-border-radius: 10px;
+.selectbutton-option-button {
+    border: 1px solid #eaeded;
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 10px;
 }
 .button1 {
     color: white;
     bottom: 0%;
     background: #318243;
     border-radius: 20.5px;
-    
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 318px;
     height: 54px;
 }
@@ -68,7 +68,7 @@ border-radius: 10px;
     color: white;
     bottom: 0%;
     border-radius: 20.5px;
-    background: #E87E24;
+    background: #e87e24;
     display: flex;
     width: 318px;
     height: 54px;
@@ -78,7 +78,7 @@ border-radius: 10px;
 }
 .button-cart-sell {
     margin: 15px;
-  
+
     display: flex;
     justify-content: center;
     /* align-items: center; */
@@ -90,21 +90,45 @@ border-radius: 10px;
     /* margin-left: 101px; */
     /* padding-top: 7px; */
     border: none;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
     line-height: 17px;
-    color: #FFFFFF;
+    color: #ffffff;
 }
-    .box-button1 {
-        height: 77px;
-        color: #6f6f6f;
-        border: 1px solid #6f6f6f;
-        padding: 10px;
-        display: inline-block;
-        width: 34%;
+.box-button1 {
+    height: 77px;
+    color: #6f6f6f;
+    border: 1px solid #6f6f6f;
+    padding: 10px;
+    display: inline-block;
+    width: 34%;
+    text-align: center;
+    margin-right: 21px;
+}
+.color-text-cart{
+    color: red;
+   
+}
+.mein-part{
+    justify-content: center;
+}
+@media screen and (max-width:750px) {
+    .color-card-dev{
         text-align: center;
-        margin-right: 21px;
     }
+}
+@media screen and (max-width:750px) {
+.quantity-inner {
+    justify-content: center;
   
+}
+}
+@media screen and (max-width:750px) {
+    
+
+.text-stock{
+text-align: center;
+}
+}

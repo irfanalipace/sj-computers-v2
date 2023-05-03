@@ -12,12 +12,12 @@ const LoginCart = () => {
         <div className="dropdown-payment">
             <button
                 onClick={handleButtonClick}
-                className="dropdown-toggle pb-0"
+                className="dropdown-toggle pb-0 login-cart-button"
             >
                 Login <br></br>Register
             </button>
             {isOpen ? (
-                <div className="product-section1">
+                <div className="product-section-cart">
                     <div className="d-grid ">
                         <div className="text-center mt-2">
                             <Link to={"/login"}>
@@ -47,7 +47,7 @@ const LoginCart = () => {
                         </div>
 
                         <div className="col-md-6">
-                            <h4 style={{ textAlign: "initial" }}>
+                            <h4  className="your-account">
                                 Your Account
                             </h4>
 

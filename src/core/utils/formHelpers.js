@@ -25,8 +25,8 @@ export function validateForm(values, { fieldLengths }) {
     }
 
     for (let fieldName in fieldLengths) {
-        let minLength = fieldLengths[fieldName].min;
-        let maxLength = fieldLengths[fieldName].max;
+        let minLength = fieldLengths[fieldName]?.min;
+        let maxLength = fieldLengths[fieldName]?.max;
         if (!values[fieldName]) {
             errors[fieldName] = ErrorMessages.field_required;
         } else if (minLength && values[fieldName].length < minLength) {
@@ -36,7 +36,7 @@ export function validateForm(values, { fieldLengths }) {
         }
         if (errors[fieldName]) {
             errors[fieldName] = errors[fieldName]
-                .replace("{fieldName}", FIELD_ENUMS[fieldName])
+                .replace("{fieldName}", FIELD_ENUMS[fieldName] || fieldName)
                 .replace("{minLength}", minLength)
                 .replace("{maxLength}", maxLength);
         }

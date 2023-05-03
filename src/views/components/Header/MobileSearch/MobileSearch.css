@@ -1,0 +1,17 @@
+.search-dev {
+  position: sticky;
+  width: 100%;
+  text-align: center;
+  /* margin-bottom: 290px; */
+  /* position: fixed !important; */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 899;
+  /* margin-bottom: -29px; */
+  padding: 12px;
+  background: aliceblue;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}

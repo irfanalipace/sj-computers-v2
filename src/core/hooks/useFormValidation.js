@@ -18,7 +18,7 @@ export function useFormValidation(initialState, { fieldLengths }, submitForm) {
         const validationErrors = validateForm(values, { fieldLengths });
         setErrors(validationErrors);
         if (Object.keys(validationErrors).length === 0) {
-            submitForm(values);
+            if (typeof submitForm === "function") submitForm(values);
         }
     }
 
