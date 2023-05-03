@@ -89,7 +89,7 @@ const Header = () => {
                                         <br></br>
                                         {currentState?.name
                                             ? currentState?.name
-                                            : "California"}
+                                            : "Select Location"}
                                     </Button>
                                 </div>
                                 {show && (

@@ -8,8 +8,8 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "start": "webpack-dev-server --mode development",
-        "build": "webpack --mode production"
+        "start": "webpack-dev-server --config webpack.config.dev",
+        "build": "webpack --config webpack.config.prod"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.21.4",
@@ -44,6 +44,7 @@
         "jquery": "^3.6.4",
         "react": "^18.2.0",
         "react-bootstrap": "^2.7.4",
+        "react-datepicker": "^4.11.0",
         "react-dom": "^18.2.0",
         "react-fontawesome": "^1.7.1",
         "react-icons": "^4.8.0",

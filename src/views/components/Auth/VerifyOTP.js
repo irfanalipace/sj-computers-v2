@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { verifyOtp } from "@store/auth/authThunks";
+import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import Loader from "@common/Spinner/Spinner";
 import { useFormValidation } from "@hooks/useFormValidation";
-import ApiService from "@services/apiService";
 import { loginApi } from "@api/auth";
 
 import "@pages/Auth/auth.css";
@@ -30,7 +30,7 @@ const VerifyOTP = () => {
     const [fieldErrors, setFieldErrors] = useState({});
     const [email, setEmail] = useState("");
     const [mounted, setMounted] = useState(false);
-    const [timer, setTimer] = useState(20);
+    const [timer, setTimer] = useState(30);
     const [isTimerFinished, setIsTimerFinished] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -55,6 +55,7 @@ const VerifyOTP = () => {
         return () => {
             clearInterval(interval);
             setMounted(false);
+            dispatch(CLEAR_API_ERRORS());
         };
     }, []);
 

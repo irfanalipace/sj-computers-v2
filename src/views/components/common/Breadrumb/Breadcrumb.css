@@ -1,19 +1,22 @@
-/* Breadcrumb.css */
+.breadcrumb * {
+    font-family: "Inter";
+}
 
 .breadcrumb {
-    margin: 0;
-    padding: 0;
+    margin: 20px 0;
+    padding: 0 20px;
     list-style: none;
 }
 
 .breadcrumb .breadcrumb-item {
     display: inline-block;
-    margin-right: 0.5rem;
+    font-weight: 400;
+    font-size: 14px;
 }
 
 .breadcrumb .breadcrumb-link {
-    color: #007bff;
     text-decoration: none;
+    color: #333333;
 }
 
 .breadcrumb .breadcrumb-link:hover,
@@ -25,14 +28,9 @@
 }
 
 .breadcrumb .breadcrumb-link.active {
-    color: #6c757d;
+    color: #e87e24;
 }
 
 .breadcrumb .breadcrumb-separator {
-    margin-left: 20px;
+    margin-left: 10px;
 }
-/* .breadcrumb-separator::after {
-    content: " > ";
-    margin-left: 0.5rem;
-    color: #6c757d;
-} */

@@ -8,6 +8,7 @@ import {
     CLEAR_LOADING,
     VERIFY_EMAIL,
     VERIFY_OTP,
+    UPDATE_PROFILE,
     API_ERROR,
     ALREADY_LOGGED_IN,
 } from "@store/auth/authSlice";
@@ -18,8 +19,9 @@ import {
     verifyOtpApi,
     resetPasswordApi,
     forgetPasswordApi,
+    verifyEmailApi,
+    updateProfileApi,
 } from "@api/auth";
-import { verifyEmailApi } from "@api/auth";
 import {
     saveToken,
     destroyToken,
@@ -154,5 +156,18 @@ export const alreadyLoggedIn = (token) => {
         };
         ApiService.setHeader("Authorization", "Bearer " + token);
         dispatch(ALREADY_LOGGED_IN(user));
+    };
+};
+
+export const updateProfile = ({ name, profile_pic }) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: LOADING, payload: {} });
+            await updateProfileApi({ name, profile_pic });
+            dispatch({ type: UPDATE_PROFILE, payload: { name, email } });
+        } catch (error) {
+            console.log("Something went wrong in updateProfile", error);
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
+        }
     };
 };

@@ -143,3 +143,23 @@ export function resetPasswordApi({
             });
     });
 }
+
+export function updateProfileApi({ name, profile_pic }) {
+    return new Promise((resolve, reject) => {
+        ApiService.post("update-profile", {
+            name,
+            profile_pic,
+        })
+            .then((response) => {
+                console.log(
+                    "file: auth.module.js | updateProfileApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error", e);
+                reject(e);
+            });
+    });
+}
