@@ -12,11 +12,13 @@ To run the project run following commands
 [//]: # (- php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider")
 - Php artisan migrate:fresh --seed.
 - Php artisan passport:install.
-- composer require tcg/voyager
-- php artisan voyager:install
-- php artisan voyager:install --with-dummy
 
-[//]: # (- php artisan voyager:admin admin@admin.com)
+[//]: # (- composer require tcg/voyager)
+- php artisan voyager:install
+
+[//]: # (- php artisan voyager:install --with-dummy)
+
+- php artisan voyager:admin admin@admin.com
 - php artisan serve
 
 
