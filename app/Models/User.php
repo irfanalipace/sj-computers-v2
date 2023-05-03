@@ -69,4 +69,15 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     public function userState(){
         return $this->hasOne(UserState::class);
     }
+
+    public function getProfilePicAttribute($value){
+
+        $picPath ='storage/'.$value;
+
+        if(public_path($picPath)){
+            return  url($picPath);
+        }
+
+        return '';
+    }
 }
