@@ -4,6 +4,18 @@
 .homepage-img {
     width: 185px !important;
     max-width: 100%;
+}.navbar-brand:focus {
+    outline: none;
+    border: 1px solid white;
+    color: white;
+}.dliver-set:focus{
+    outline: none !important;
+    border: 1px solid white !important;
+    color: white !important;
+}.product-boll:hover{
+    outline: none;
+    border: 1px solid white !important;
+    color: white;
 }
 .nav-text {
     color: white;
@@ -42,6 +54,10 @@
     line-height: 18px;
 
     color: #fffefe;
+}.eng-button:focus {
+    outline: none;
+    border: 1px solid white;
+    color: white;
 }
 .input-form-control {
     height: 60px;
@@ -84,14 +100,15 @@
     border-radius: 5px 0px 0px 5px;
 }
 
-.all-button :hover {
-    color: #b8b8b9;
-    /* position: absolute; */
+
+
+
+.all-button:hover {
+    /* color: var(--bs-btn-hover-color); */
+    background-color: none !important;
+ 
 }
-.all-button ::after {
-    color: #b8b8b9;
-    /* position: absolute; */
-}
+  
 .search-logo {
     height: 62px;
     border-top-left-radius: 0;
@@ -147,7 +164,13 @@
     line-height: 17px;
     color: #ffffff;
     text-align: left;
-}
+    
+}.order-button:focus {
+    outline: none;
+    border: 1px solid white;
+    color: white;
+  }
+  
 
 .ul-menu {
     margin: 18px;
