@@ -30,7 +30,7 @@ const LoginCart = () => {
                             </Link>
                         </div>
                         <p className="forgot-password text-left new-customer">
-                            New Customer
+                            New Customer{' '}{' '}
                             <Link
                                 to="/register"
                                 className="text-decoration-none"
@@ -39,14 +39,14 @@ const LoginCart = () => {
                             </Link>
                         </p>
                     </div>
-                    <hr></hr>
+                    <hr className="hr-list-head"></hr>
                     <div className="row">
                         <div className="col-md-6">
                             <h4 className="your-list">Your List</h4>
                             <p className="create-list">Create List</p>
                         </div>
 
-                        <div className="col-md-6">
+                        <div className="col-md-6 my-list-hr">
                             <h4  className="your-account">
                                 Your Account
                             </h4>
