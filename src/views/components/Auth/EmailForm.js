@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import { useSelector } from "react-redux";
+import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { useFormValidation } from "@hooks/useFormValidation";
@@ -20,6 +21,7 @@ export default function EmailForm({ onFormSubmit, form }) {
         verifyEmail
     );
 
+    const dispatch = useDispatch();
     const apiError = useSelector((state) => state.auth.apiError);
     const [mounted, setMounted] = useState(false);
     const [fieldErrors, setFieldErrors] = useState({});
@@ -36,6 +38,7 @@ export default function EmailForm({ onFormSubmit, form }) {
         setMounted(true);
         return () => {
             setMounted(false);
+            dispatch(CLEAR_API_ERRORS());
         };
     }, []);
 

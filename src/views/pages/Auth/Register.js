@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
+import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import Header from "@components/Auth/Header";
 import Footer from "@components/Auth/Footer";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
@@ -31,6 +32,7 @@ const Register = () => {
         registerFunction
     );
 
+    const dispatch = useDispatch();
     const apiError = useSelector((state) => state.auth.apiError);
     const [fieldErrors, setFieldErrors] = useState({});
     const [mounted, setMounted] = useState(false);
@@ -47,12 +49,12 @@ const Register = () => {
         setMounted(true);
         return () => {
             setMounted(false);
+            dispatch(CLEAR_API_ERRORS());
         };
     }, []);
 
     const isLoading = useSelector((state) => state.auth.isLoading);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     function registerFunction() {
         dispatch(register(values, () => navigate("/email-sent")));

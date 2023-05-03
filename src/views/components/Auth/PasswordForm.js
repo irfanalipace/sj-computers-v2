@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { Link } from "react-router-dom";
-import Loader from "@common/Spinner/Spinner";
 
+import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
+import Loader from "@common/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { login } from "@store/auth/authThunks";
@@ -42,6 +42,7 @@ const PasswordForm = () => {
         setMounted(true);
         return () => {
             setMounted(false);
+            dispatch(CLEAR_API_ERRORS());
         };
     }, []);
 

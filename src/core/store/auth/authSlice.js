@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     user: null,
     isAuthenticated: false,
-    apiError: false,
+    apiError: null,
     isLoading: false,
     accessToken: "",
     currentPage: 1,
@@ -23,14 +23,17 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.accessToken = action.payload.token;
             state.currentPage = state.currentPage + 1;
+            state.apiError = null;
         },
         LOGOUT: (state) => {
             state.isAuthenticated = false;
             state.isLoading = false;
             state.user = null;
+            state.apiError = null;
         },
         REGISTER: (state) => {
             state.isLoading = false;
+            state.apiError = null;
         },
         ALREADY_LOGGED_IN: (state, action) => {
             state.isAuthenticated = true;
@@ -40,16 +43,21 @@ const authSlice = createSlice({
         VERIFY_EMAIL: (state) => {
             state.isLoading = false;
             state.currentPage = state.currentPage + 1;
+            state.apiError = null;
         },
         VERIFY_OTP: (state, action) => {
             state.isAuthenticated = true;
             state.user = { ...action.payload };
             state.isLoading = false;
             state.currentPage = 1;
+            state.apiError = null;
         },
         API_ERROR: (state, action) => {
             state.apiError = { ...action.payload };
             state.isLoading = false;
+        },
+        CLEAR_API_ERRORS: (state) => {
+            state.apiError = null;
         },
     },
 });
@@ -63,5 +71,6 @@ export const {
     VERIFY_EMAIL,
     VERIFY_OTP,
     API_ERROR,
+    CLEAR_API_ERRORS,
 } = authSlice.actions;
 export default authSlice.reducer;

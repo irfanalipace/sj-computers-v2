@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { verifyOtp } from "@store/auth/authThunks";
+import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import Loader from "@common/Spinner/Spinner";
 import { useFormValidation } from "@hooks/useFormValidation";
-import ApiService from "@services/apiService";
 import { loginApi } from "@api/auth";
 
 import "@pages/Auth/auth.css";
@@ -55,6 +55,7 @@ const VerifyOTP = () => {
         return () => {
             clearInterval(interval);
             setMounted(false);
+            dispatch(CLEAR_API_ERRORS());
         };
     }, []);
 
