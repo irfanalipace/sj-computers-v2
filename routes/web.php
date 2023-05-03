@@ -24,5 +24,6 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::get('/{path?}', function () {
     return view('index');
-});
+})->where('path', '^(?!api).*$')
+    ->where('path', '^(?!storage).*$');
 
