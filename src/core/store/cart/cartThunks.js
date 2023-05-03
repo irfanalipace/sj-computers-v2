@@ -118,9 +118,10 @@ export const syncCartItems = () => {
 
                     let cartTotalQuantity = cartDetails?.total_quantity + 1;
                     let cartTotal =
-                        cartDetails?.total + item?.price * item.quantity;
+                        parseFloat(cartDetails?.total) +
+                        parseFloat(item?.price * item.quantity);
                     cartDetails.total_quantity = cartTotalQuantity;
-                    cartDetails.total = cartTotal;
+                    cartDetails.total = cartTotal.toFixed(2);
                     addItemToLocalCart({ cartItem, cartDetails });
                     return cartItem;
                 });

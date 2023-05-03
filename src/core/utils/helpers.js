@@ -103,7 +103,7 @@ export const compareLocalCartWithDBCart = (array_1, array_2) => {
 
     const missingObjects2 = array_2?.filter(
         (obj2) =>
-            !obj2.notLocal || !array_1?.some((obj1) => obj2.id === obj1.id)
+            !obj2.notLocal && !array_1?.some((obj1) => obj2.id === obj1.id)
     );
     // missingObjects2 is an array of objects that are present in array_2 but not in array_1 or local objects of array_2.
 

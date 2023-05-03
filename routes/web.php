@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
+use Laravel\Fortify\Fortify;
 use TCG\Voyager\Facades\Voyager;
 
 /*
@@ -19,12 +20,7 @@ Route::get('/{path?}', function () {
     return view('index');
 });
 
-Auth::routes();
-Route::view('forgot_password', 'auth.reset_password')->name('password.reset');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+

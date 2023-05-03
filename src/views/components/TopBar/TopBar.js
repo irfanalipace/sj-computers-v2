@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+
 import Sidebar from "@components/Sidebar/Sidebar";
 
 import "./TopBar.css";
@@ -36,44 +38,44 @@ export default function TopBar() {
 
                     <ul className="text-decoration-none ullist">
                         <li className="listitem">
-                            <a
-                                href="default.asp"
+                            <Link
+                                to="/"
                                 className="text-decoration-none text-color"
                             >
                                 Today's Deal
-                            </a>
+                            </Link>
                         </li>
                         <li className="listitem">
-                            <a
-                                href="news.asp"
+                            <Link
+                                to="/"
                                 className="text-decoration-none text-color"
                             >
                                 Laptop
-                            </a>
+                            </Link>
                         </li>
                         <li className="listitem">
-                            <a
-                                href="contact.asp"
+                            <Link
+                                to="/"
                                 className="text-decoration-none text-color"
                             >
                                 Desktop
-                            </a>
+                            </Link>
                         </li>
                         <li className="listitem">
-                            <a
-                                href="about.asp"
+                            <Link
+                                to="/"
                                 className="text-decoration-none text-color"
                             >
                                 Monitors
-                            </a>
+                            </Link>
                         </li>
                         <li className="listitem">
-                            <a
-                                href="about.asp"
+                            <Link
+                                to="/"
                                 className="text-decoration-none text-color"
                             >
                                 BTO
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                     {/* <span style={{ textAlign: "end" }}>Get Top Deals Now</span> */}

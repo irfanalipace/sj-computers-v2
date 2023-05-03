@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "@store/auth/authThunks";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 import userImg from "@images/user.png";
 import { US } from "country-flag-icons/react/3x2";
@@ -51,7 +55,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                     onClick={() => toggleSidebar()}
                     className="sideMenu-close-btn"
                 >
-                    <i className="fa fa-times"></i>
+                    <FontAwesomeIcon icon={faTimes} />
                 </button>
                 <div className="sideMenu-inner">
                     <div className="sideMenu-header">
@@ -78,7 +82,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                     <Link to={`/category/${category.id}`}>
                                         {category.name}
                                     </Link>
-                                    <i className="fa fa-angle-right"></i>
+                                    <FontAwesomeIcon icon={faAngleRight} />
                                 </li>
                             ))}
                         </ul>
@@ -87,11 +91,11 @@ export default function Sidebar({ openState, toggleSidebar }) {
                         <ul className="menu-list">
                             {isAuthenticated && (
                                 <li>
-                                    <Link to={`/profile`}>Your Account</Link>
+                                    <Link to={`/account`}>Your Account</Link>
                                 </li>
                             )}
                             <li className="d-block">
-                                <i className="fa fa-globe me-1"></i>
+                                <FontAwesomeIcon icon={faGlobe} />
                                 <Link>English</Link>
                             </li>
                             <li className="d-block">

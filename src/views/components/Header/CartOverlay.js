@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "@common/Spinner/Spinner";
 import { deleteItem, deleteLocalItem } from "@store/cart/cartThunks";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const CartOverlay = ({ isOpen, toggleSidebar }) => {
     const cartItems = useSelector((state) => state.cart.cart);
@@ -28,7 +30,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
     return (
         <div className={`sidebar-cart ${isOpen ? "open" : "closed"}`}>
             <button onClick={toggleSidebar} className="close-button">
-                <i className="fa fa-times"></i>
+                <FontAwesomeIcon icon={faTimes} />
             </button>
             {/* sidebar content */}
             <div className="bg-white py-5 px-4">

@@ -17,7 +17,7 @@ export default function ReviewCheckout({ toggleAccordion }) {
             <p>Item Shippied from sjcomputer.us</p> */}
 
             <div className="row mx-0 mb-3">
-                <div className="col-7 ps-0">
+                <div className="col-md-7 col-12 ps-0">
                     {cartItems.map((item) => (
                         <div className="item-card" key={item?.id}>
                             <div className="img-wrapper">
@@ -34,7 +34,7 @@ export default function ReviewCheckout({ toggleAccordion }) {
                         </div>
                     ))}
                 </div>
-                <div className="col-5">
+                <div className="col-md-5 col-12">
                     {/* <div>
                         <h6>Choose Delivery Options:</h6>
                         <div className="delivery-options">
