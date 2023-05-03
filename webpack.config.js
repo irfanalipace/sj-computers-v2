@@ -1,11 +1,9 @@
 const path = require("path");
 const webpack = require("webpack");
-var CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
+const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
-
 module.exports = {
     entry: "./src/Index.js",
-    mode: JSON.stringify(process.env.NODE_ENV),
     module: {
         rules: [
             {
@@ -56,8 +54,7 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, "public/js"),
-
-        publicPath: JSON.stringify(process.env.REACT_APP_URL) + "/js",
+        publicPath: "/js",
         filename: "app.js",
     },
 
