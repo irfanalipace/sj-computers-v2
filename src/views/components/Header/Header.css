@@ -46,6 +46,7 @@
     background: #00305e;
     border: 0px;
     color: white;
+    padding-left: 13px;
 
     font-family: "Inter";
     font-style: normal;
@@ -104,8 +105,8 @@
 
 
 .all-button:hover {
-    /* color: var(--bs-btn-hover-color); */
-    background-color: none !important;
+ 
+    color: #737373;
  
 }
   

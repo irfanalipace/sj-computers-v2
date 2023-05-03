@@ -286,4 +286,6 @@ h5:after {
     .form-container-reset {
         width: 95%;
     }
+}.login-container-div{
+    background-color: white;
 }
