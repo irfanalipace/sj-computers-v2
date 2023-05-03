@@ -1,9 +1,10 @@
 const path = require("path");
-const webpack = require("webpack");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
+
 module.exports = {
     entry: "./src/Index.js",
+    mode: "development",
     module: {
         rules: [
             {
@@ -66,10 +67,5 @@ module.exports = {
         port: 3000,
         historyApiFallback: true,
     },
-
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new CaseSensitivePathsPlugin({ debug: true }),
-        new Dotenv(),
-    ],
+    plugins: [new CaseSensitivePathsPlugin({ debug: true }), new Dotenv()],
 };

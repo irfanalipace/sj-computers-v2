@@ -27,7 +27,10 @@ const Breadcrumb = ({ routes }) => {
                             >
                                 <Link
                                     to={breadcrumb.path}
-                                    className="breadcrumb-link"
+                                    className={`breadcrumb-link ${
+                                        index === breadcrumbTrail.length - 1 &&
+                                        "active"
+                                    }`}
                                 >
                                     {breadcrumb.name}
                                 </Link>
