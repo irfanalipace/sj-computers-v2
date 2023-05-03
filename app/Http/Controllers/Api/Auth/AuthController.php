@@ -119,7 +119,7 @@ class AuthController extends BaseController
             return $this->sendError(['otp' => ['Invalid OTP Code,  Try again.']]);
         }
 
-        return $this->sendResponse([], 'OTP Verified Successfully.');
+        return $this->sendResponse(auth()->user()->only(['name','profile_pic','email']), 'OTP Verified Successfully.');
 
 
 //        $otpTried = Otp::where('user_id', $request->user_id);
