@@ -117,6 +117,7 @@
 .color-text {
     color: red;
 }
+
 .shipping-text {
     margin-bottom: -17px;
     font-family: "Inter";
@@ -297,4 +298,14 @@
 }
 .img-text-color-details {
     color: #07631c;
+} 
+ .color-text-cart{
+    color: red;
+   
+}
+@media screen and (max-width:750px) {
+    .color-text-cart{
+        color: red;
+        text-align: center;
+    }
 }

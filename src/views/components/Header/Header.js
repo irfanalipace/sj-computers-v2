@@ -51,13 +51,13 @@ const Header = () => {
     };
     return (
         <>
-            {screenWidth <= 750 ? (
+            {screenWidth <= 1024 ? (
                 <div>
                     <MobileHeader />
 
                     <MobileSearch />
 
-                    {/* components to render when screen width is less than or equal to 750px */}
+                    {/* components to render when screen width is less than or equal to 1024px */}
                 </div>
             ) : (
                 <div>

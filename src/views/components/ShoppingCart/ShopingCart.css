@@ -178,3 +178,8 @@ head:nth-child(2) {
     padding: 10px;
     margin-bottom: 10px;
 }
+@media screen and (max-width:600px) {
+    .item-details {
+        font-size: 11px;
+     }
+}
