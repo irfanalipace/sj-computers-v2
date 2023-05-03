@@ -30,7 +30,7 @@ const VerifyOTP = () => {
     const [fieldErrors, setFieldErrors] = useState({});
     const [email, setEmail] = useState("");
     const [mounted, setMounted] = useState(false);
-    const [timer, setTimer] = useState(20);
+    const [timer, setTimer] = useState(30);
     const [isTimerFinished, setIsTimerFinished] = useState(false);
     const [loading, setLoading] = useState(false);
 

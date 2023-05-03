@@ -8,8 +8,8 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "start": "webpack-dev-server --mode development",
-        "build": "webpack --mode production"
+        "start": "webpack-dev-server --config webpack.config.dev",
+        "build": "webpack --config webpack.config.prod"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.21.4",
