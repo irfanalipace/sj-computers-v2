@@ -91,7 +91,9 @@ const Profile = () => {
                                         {apiError.profile_pic}
                                     </p>
                                 )}
-                                <p> Your Profile photo should be 256x256</p>
+                                <p className="text-center">
+                                    Your Profile photo should be 256x256
+                                </p>
                             </div>
                             <div className="col-sm-4 col-12 mt-sm-0 mt-4">
                                 <div className="change-profile-buttons">
