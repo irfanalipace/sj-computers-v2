@@ -84,13 +84,17 @@ const Header = () => {
                                             border: "#00305E",
                                         }}
                                     >
-                                        <span className="deliver-text">
+                                        
+                                        <span className="deliver-text ">
                                             Deliver to
-                                        </span>{" "}
+                                        {" "}
+                                        </span>
                                         <br></br>
+                                     
                                         {currentState?.name
                                             ? currentState?.name
                                             : "Select Location"}
+                                       
                                     </Button>
                                 </div>
                                 {show && (

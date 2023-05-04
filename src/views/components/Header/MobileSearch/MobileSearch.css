@@ -9,9 +9,23 @@
   width: 100%;
   z-index: 899;
   /* margin-bottom: -29px; */
-  padding: 12px;
+  padding: 18px;
   background: aliceblue;
   display: flex;
   -webkit-box-align: center;
   align-items: center;
+}
+.search-icon-on-mobile-screen {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 13px;
+  width: 48px;
+  height: 48px;
+  background: rgba(40, 163, 67, 0.4);
+  border-radius: 0px 5px 5px 0px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
 }
