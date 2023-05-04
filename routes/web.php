@@ -19,12 +19,12 @@ use TCG\Voyager\Facades\Voyager;
 Route::get('/export-products',[\App\Http\Controllers\ProductController::class,
     'exportProducts'])->name('export-products');
 //
-//Route::group(['prefix' => 'admin'], function () {
-//    Voyager::routes();
-//});
-//
-//Route::get('/{path?}', function () {
-//    return view('index');
-//})->where('path', '^(?!api).*$')
-//    ->where('path', '^(?!storage).*$');
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
+Route::get('/{path?}', function () {
+    return view('index');
+})->where('path', '^(?!api).*$')
+    ->where('path', '^(?!storage).*$');
 
