@@ -3,9 +3,11 @@ namespace App\Http\Controllers\Auth;
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\Product as ProductResource;
 
 class ProductController extends Controller
@@ -126,5 +128,9 @@ class ProductController extends Controller
         $product->delete();
 
         return $this->sendResponse([], 'Product deleted successfully.');
+    }
+
+    public function exportProducts(Request $request){
+        return Excel::download(new ExportProduct, 'products.xlsx');
     }
 }
