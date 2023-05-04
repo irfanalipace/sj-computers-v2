@@ -179,7 +179,7 @@ export const updatePassword = (data) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            await resetPasswordApi(data);
+            await updatePasswordApi(data);
             dispatch({ type: CLEAR_LOADING, payload: {} });
         } catch (error) {
             console.log("Something went wrong in updateProfile", error);

@@ -30,10 +30,10 @@ const Security = () => {
         const params = {
             email: user.email,
             oldPassword,
-            password: password,
-            confirmPassword: confirmPassword,
+            newPassword: password,
+            passwordConfirmation: confirmPassword,
         };
-        // dispatch(updatePassword(params));
+        dispatch(updatePassword(params));
     };
 
     return (

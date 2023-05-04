@@ -23,3 +23,13 @@ span {
     opacity: 1;
     transform: translateX(0);
 }
+
+.inner-body {
+    min-height: calc(100vh - 605px);
+}
+
+@media (max-width: 767px) {
+    .inner-body {
+        min-height: calc(100vh - 800px);
+    }
+}

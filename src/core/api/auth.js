@@ -163,9 +163,9 @@ export function updateProfileApi(formData) {
     });
 }
 
-export function updatePasswordApi(formData) {
+export function updatePasswordApi(data) {
     return new Promise((resolve, reject) => {
-        ApiService.post("update-password", formData)
+        ApiService.post("change-password", data)
             .then((response) => {
                 console.log(
                     "file: auth.module.js | updateProfileApi| response",
