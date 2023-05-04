@@ -127,6 +127,7 @@ const VerifyOTP = () => {
                     type="submit"
                     className="btn btn-primary login-button verify-otp-btn"
                     disabled={isLoading}
+                    onClick={handleSubmit}
                 >
                     {isLoading ? <Loader /> : "Verify OTP"}
                 </button>

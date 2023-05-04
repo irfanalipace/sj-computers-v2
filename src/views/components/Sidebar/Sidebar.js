@@ -95,7 +95,11 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                 </li>
                             )}
                             <li className="d-block">
-                                <FontAwesomeIcon icon={faGlobe} />
+                                <FontAwesomeIcon
+                                    className="me-1"
+                                    icon={faGlobe}
+                                    stat
+                                />
                                 <Link>English</Link>
                             </li>
                             <li className="d-block">

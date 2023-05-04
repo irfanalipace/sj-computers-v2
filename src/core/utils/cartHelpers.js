@@ -27,7 +27,7 @@ export const getCartItems = () => {
 export const getCartDetails = () => {
     let cartDetails = JSON.parse(window.localStorage.getItem("cartDetails"));
     if (cartDetails) return cartDetails;
-    else return { total_quantity: 0, total: 0 };
+    else return { total_items: 0, total: 0 };
 };
 
 export const setCartDetails = (cartDetails) => {
@@ -64,7 +64,7 @@ export const deleteNotLocalCartItem = () => {
     let temp_cart_items = [...cartItems];
     temp_cart_items?.forEach((item, index) => {
         if (item?.notLocal) {
-            let cartTotalQuantity = cartDetails?.total_quantity - 1;
+            let cartTotalQuantity = cartDetails?.total_items - 1;
 
             let cartTotal =
                 parseFloat(cartDetails?.total) -
@@ -73,7 +73,7 @@ export const deleteNotLocalCartItem = () => {
                 );
 
             cartDetails = {
-                total_quantity: cartTotalQuantity > 0 ? cartTotalQuantity : 0,
+                total_items: cartTotalQuantity > 0 ? cartTotalQuantity : 0,
                 total: cartTotal > 0 ? cartTotal.toFixed(2) : 0,
             };
             if (index >= 0) {

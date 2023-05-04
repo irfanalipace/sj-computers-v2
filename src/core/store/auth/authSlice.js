@@ -53,8 +53,9 @@ const authSlice = createSlice({
             state.apiError = null;
         },
         UPDATE_PROFILE: (state, action) => {
-            state.user.name = { ...action.payload.data.name };
-            state.user.profile_pic = { ...action.payload.data.profile_pic };
+            console.log("action: ", action.payload);
+            state.user.name = action.payload.name;
+            state.user.profile_pic = action.payload.profile_pic;
             state.isLoading = false;
         },
         API_ERROR: (state, action) => {

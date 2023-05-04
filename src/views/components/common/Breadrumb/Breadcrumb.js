@@ -1,7 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
+import { breadcrumbRoutes } from "./BreadcrumbRoutes";
+
 import "./Breadcrumb.css";
 
-const Breadcrumb = ({ routes }) => {
+const Breadcrumb = () => {
     const { pathname } = useLocation();
 
     // Create an array of breadcrumb objects based on the current path
@@ -10,7 +12,7 @@ const Breadcrumb = ({ routes }) => {
         .filter((segment) => segment !== "");
     const breadcrumbTrail = pathSegments.map((segment, index) => {
         const path = `/${pathSegments.slice(0, index + 1).join("/")}`;
-        return { path, name: routes[path] };
+        return { path, name: breadcrumbRoutes[path] };
     });
 
     // Render the breadcrumb trail

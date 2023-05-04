@@ -23,7 +23,7 @@ export const CheckOutCard = ({ product }) => {
 
     const cartClickHandler = () => {
         let productPrice = product.price * quantity;
-        let cartQuantity = details.total_quantity + 1;
+        let cartQuantity = details.total_items + 1;
         let cartTotal = parseFloat(details.total) + parseFloat(productPrice);
         const cartItem = {
             id: product.id,
@@ -33,7 +33,7 @@ export const CheckOutCard = ({ product }) => {
         };
 
         const cartDetails = {
-            total_quantity: cartQuantity,
+            total_items: cartQuantity,
             total: cartTotal.toFixed(2),
         };
 
@@ -49,7 +49,6 @@ export const CheckOutCard = ({ product }) => {
     return (
         <div>
             <div className="card-section-left">
-                
                 <div className="row">
                     <div className="col-md-12 color-text-cart">
                         <span className="$-color">$</span>
@@ -86,9 +85,9 @@ export const CheckOutCard = ({ product }) => {
                     <p>Item Added in Cart</p>
                 ) : (
                     <>
-                    <div className="text-stock">
-                        <span className="color-card">In Stock</span>
-                        <QuantityInput onChange={setQuantity} />
+                        <div className="text-stock">
+                            <span className="color-card">In Stock</span>
+                            <QuantityInput onChange={setQuantity} />
                         </div>
                         <div className="button-cart-sell">
                             <Button

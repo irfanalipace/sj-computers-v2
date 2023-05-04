@@ -25,7 +25,7 @@ import {
     compareLocalCartWithDBCart,
     objectToArray,
     updateItemLocalProperty,
-} from "@utils/helpers";
+} from "@utils/cartHelpers";
 
 export const addToCart = (data) => {
     return async (dispatch) => {
@@ -116,11 +116,11 @@ export const syncCartItems = () => {
 
                     delete cartItem.associatedModel;
 
-                    let cartTotalQuantity = cartDetails?.total_quantity + 1;
+                    let cartTotalQuantity = cartDetails?.total_items + 1;
                     let cartTotal =
                         parseFloat(cartDetails?.total) +
                         parseFloat(item?.price * item.quantity);
-                    cartDetails.total_quantity = cartTotalQuantity;
+                    cartDetails.total_items = cartTotalQuantity;
                     cartDetails.total = cartTotal.toFixed(2);
                     addItemToLocalCart({ cartItem, cartDetails });
                     return cartItem;
