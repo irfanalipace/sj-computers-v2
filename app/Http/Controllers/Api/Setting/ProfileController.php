@@ -23,8 +23,8 @@ class ProfileController extends Controller
             }
             //update also name
             $update['name'] = $request->name;
-            $user = User::find(auth()->user()->id)->update($update);
-            return response(array('success' => true, 'data' => $user, 'message' => "user profile updated."), 200, []);
+            $user = auth()->user()->update($update);
+            return response(array('success' => true, 'data' => $user->fresh(), 'message' => "user profile updated."), 200, []);
         } catch (Exception $e) {
             return response()->json(['status' => 400, 'msg', 'Something went wrong.' . $e]);
         }
