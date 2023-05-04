@@ -28,11 +28,13 @@ import {
     destroyToken,
     saveUserEmail,
     saveUserName,
+    saveUserImage,
     saveUserPassword,
     saveTempToken,
     getTempToken,
     getUserName,
     getUserEmail,
+    getUser,
     destroyTempKeys,
 } from "@services/jwtService";
 
@@ -108,11 +110,10 @@ export const verifyOtp = (credentials) => {
             dispatch({ type: LOADING, payload: {} });
             await verifyOtpApi(credentials);
             let temp_token = getTempToken();
-            let name = getUserName();
-            let email = getUserEmail();
+            let user = getUser();
             destroyTempKeys(); // destroy user password and temporary token after login success
             saveToken(temp_token); // stores temporary token in right key to be used later for calling protected apis
-            dispatch({ type: VERIFY_OTP, payload: { name, email } });
+            dispatch({ type: VERIFY_OTP, payload: user });
         } catch (error) {
             console.log("Something went wrong in login", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
@@ -166,8 +167,8 @@ export const updateProfile = (formData) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            await updateProfileApi(formData);
-            dispatch({ type: UPDATE_PROFILE, payload: { name, profile_pic } });
+            let response = await updateProfileApi(formData);
+            dispatch({ type: UPDATE_PROFILE, payload: response.data.data });
         } catch (error) {
             console.log("Something went wrong in updateProfile", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

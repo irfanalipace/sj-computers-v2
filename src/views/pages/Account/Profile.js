@@ -28,7 +28,6 @@ const Profile = () => {
     const handleFileChange = (event) => {
         event.preventDefault();
         let files = event.target.files;
-        console.log(files);
         if (files.length > 0) {
             setSelectedFile(files[0]);
             const reader = new FileReader();
@@ -43,7 +42,6 @@ const Profile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("selected file: ", selectedFile);
         const formData = new FormData();
         formData.append("profile_pic", selectedFile);
         formData.append("name", name);
