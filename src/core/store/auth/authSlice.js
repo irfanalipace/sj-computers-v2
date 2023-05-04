@@ -42,7 +42,7 @@ const authSlice = createSlice({
         },
         VERIFY_EMAIL: (state) => {
             state.isLoading = false;
-            state.currentPage = state.currentPage + 1;
+            state.currentPage = parseInt(state.currentPage) + 1;
             state.apiError = null;
         },
         VERIFY_OTP: (state, action) => {
@@ -79,6 +79,7 @@ export const {
     VERIFY_EMAIL,
     VERIFY_OTP,
     UPDATE_PROFILE,
+    RESET_PAGE,
     API_ERROR,
     CLEAR_API_ERRORS,
 } = authSlice.actions;
