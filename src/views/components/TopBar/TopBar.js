@@ -16,7 +16,7 @@ export default function TopBar() {
             <header className="topBar">
                 <div className="menuBar">
                     <span
-                        className="navIcon"
+                        className="navIcon  hover-effect-sets"
                         onClick={() => {
                             toggleSidebar();
                         }}
@@ -37,10 +37,10 @@ export default function TopBar() {
                     </span>
 
                     <ul className="text-decoration-none ullist">
-                        <li className="listitem">
+                        <li className="listitem" >
                             <Link
                                 to="/"
-                                className="text-decoration-none text-color"
+                                className="text-decoration-none text-color hover-effect-sets-topbar"
                             >
                                 Today's Deal
                             </Link>
@@ -48,7 +48,7 @@ export default function TopBar() {
                         <li className="listitem">
                             <Link
                                 to="/"
-                                className="text-decoration-none text-color"
+                                className="text-decoration-none text-color hover-effect-sets-topbar"
                             >
                                 Laptop
                             </Link>
@@ -56,7 +56,7 @@ export default function TopBar() {
                         <li className="listitem">
                             <Link
                                 to="/"
-                                className="text-decoration-none text-color"
+                                className="text-decoration-none text-color hover-effect-sets-topbar"
                             >
                                 Desktop
                             </Link>
@@ -64,7 +64,7 @@ export default function TopBar() {
                         <li className="listitem">
                             <Link
                                 to="/"
-                                className="text-decoration-none text-color"
+                                className="text-decoration-none text-color hover-effect-sets-topbar"
                             >
                                 Monitors
                             </Link>
@@ -72,7 +72,7 @@ export default function TopBar() {
                         <li className="listitem">
                             <Link
                                 to="/"
-                                className="text-decoration-none text-color"
+                                className="text-decoration-none text-color hover-effect-sets-topbar"
                             >
                                 BTO
                             </Link>
