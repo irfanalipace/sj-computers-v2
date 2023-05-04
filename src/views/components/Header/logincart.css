@@ -119,3 +119,14 @@
         border-left: 1px solid #EEEEEE;
     
 }
+.login-register-cart-button {
+    box-sizing: border-box;
+    /* position: absolute; */
+    width: 200px;
+    height: 40px;
+    left: 139px;
+    top: 22px;
+    background: radial-gradient(323.37% 27804.13% at 0% 51.52%, #52AC66 0%, rgba(82, 172, 102, 0) 100%);
+    border: 1px solid #6F6F6F;
+    border-radius: 3px;
+}

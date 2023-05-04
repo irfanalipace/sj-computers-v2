@@ -281,12 +281,51 @@ h5:after {
 .login-h3-verify {
     font-size: 26px;
 }
+.login-h3-verify-form {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 27px;
+    color: #000000;
+    /* font-size: 26px; */
+}
 .form-container-reset {
     padding-top: 60px;
     width: 28%;
 }
-/* media query */
+.verify-button-data{
+ 
+        box-sizing: border-box;
+        /* position: absolute; */
+        width: 355px;
+        height: 39px;
+        left: 567px;
+        top: 269px;
+        background: radial-gradient(323.37% 27804.13% at 0% 51.52%, #52AC66 0%, rgba(82, 172, 102, 0) 100%);
+        border: 1px solid #6F6F6F;
+        border-radius: 3px;
+        color: white;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 15px;
+        /* identical to box height */
 
+
+        color: #FFFFFF;
+}
+/* media query */
+.email-text-verify-form{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 15px;
+
+color: #333333;
+}
 .login-h3-reset {
     font-size: 24px;
 }
@@ -365,7 +404,17 @@ h5:after {
 }.login-container-div{
     background-color: white;
 }
+.forget-password-text-loginform{
+    
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 11px;
+line-height: 12px;
 
+color: #1270C4;
+
+}
 .email-login-input {
     background: #EDFFF1;
 }.register-p-text{
@@ -377,6 +426,58 @@ line-height: 12px;
 
 color: #333333;
 }
+.singinnbutton{
+
+        box-sizing: border-box;
+        /* position: absolute; */
+        width: 354px;
+        height: 36px;
+        left: 567px;
+        top: 241px;
+        background: radial-gradient(323.37% 27804.13% at 0% 51.52%, #52AC66 0%, rgba(82, 172, 102, 0) 100%);
+        border: 1px solid #6F6F6F;
+        border-radius: 3px;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 15px;
+        color: #FFFFFF;
+    
+}
+.tetxt-signin{
+    
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 10px;
+line-height: 15px;
+
+color: #333333;
+padding-top: 8px;
+}
+.need-help-singin-arrow {
+    width: 7px;
+    padding-right: 6px;
+}
+.my-text-signin{
+    
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 15px;
+/* identical to box height */
+
+
+color: #1270C4;
+}
+a:hover,
+Link:hover {
+  color: #1270C4;
+  text-decoration: none;
+}
+
 .set-register-button {
     font-family: 'Inter';
     font-style: normal;

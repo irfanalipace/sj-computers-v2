@@ -12,7 +12,7 @@ const LoginCart = () => {
         <div className="dropdown-payment">
             <button
                 onClick={handleButtonClick}
-                className="dropdown-toggle pb-0 login-cart-button"
+                className=""
             >
                 Login <br></br>Register
             </button>
@@ -23,7 +23,7 @@ const LoginCart = () => {
                             <Link to={"/login"}>
                                 <button
                                     type="submit"
-                                    className="btn btn-primary login-button"
+                                    className="login-register-cart-button"
                                 >
                                     Sigin In
                                 </button>
