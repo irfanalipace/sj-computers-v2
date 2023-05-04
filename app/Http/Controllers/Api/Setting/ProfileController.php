@@ -25,7 +25,7 @@ class ProfileController extends BaseController
             //update also name
             $update['name'] = $request->name;
             $user = auth()->user()->update($update);
-            return $this->sendResponse($user->fresh(), "user profile updated.");
+            return $this->sendResponse(auth()->user()->fresh(), "user profile updated.");
         } catch (Exception $e) {
             return $this->sendError(["msg" => ['Something went wrong.' . $e]]);
         }
