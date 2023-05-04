@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Setting;
 
+use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
@@ -10,7 +11,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class ProfileController extends Controller
+class ProfileController extends BaseController
 {
     //update profile
     public function updateProfile(UpdateProfileRequest $request)
@@ -24,9 +25,9 @@ class ProfileController extends Controller
             //update also name
             $update['name'] = $request->name;
             $user = auth()->user()->update($update);
-            return response(array('success' => true, 'data' => $user->fresh(), 'message' => "user profile updated."), 200, []);
+            return $this->sendResponse($user->fresh(), "user profile updated.");
         } catch (Exception $e) {
-            return response()->json(['status' => 400, 'msg', 'Something went wrong.' . $e]);
+            return $this->sendError('Something went wrong.' . $e);
         }
     }
     //reset password
@@ -40,11 +41,11 @@ class ProfileController extends Controller
             if (Hash::check($request->oldPassword, $user->password)) {
                 $user->fill(['password' => bcrypt($request->newPassword)])->save();
             } else {
-                return response()->json(array('status' => 422, 'msg' => 'old password does not match please try again.'));
+                return $this->sendError('old password does not match please try again.');
             }
-            return response(array('success' => true, 'data' => $user, 'message' => "user password has been changed Successfully."), 200, []);
+            return $this->sendResponse($user,'user password has been changed Successfully.');
         } catch (Exception $e) {
-            return response()->json(['status' => 400, 'msg', 'Something went wrong.' . $e]);
+            return $this->sendError('Something went wrong.' . $e);
         }
     }
 }
