@@ -129,7 +129,10 @@ const Register = () => {
                             {/* <img src={vectoricon} alt='' style={{width:'7px'}}/> */}
                             <FontAwesomeIcon
                                 icon={faInfo}
-                                style={{ color: "#52AC66", paddingRight:'6px' }}
+                                style={{
+                                    color: "#52AC66",
+                                    paddingRight: "6px",
+                                }}
                             />
                             Passwords must be at least 6 characters.
                         </p>
@@ -156,17 +159,18 @@ const Register = () => {
                             <button
                                 type="submit"
                                 className=" set-register-button"
+                                onClick={handleSubmit}
                                 disabled={isLoading}
                             >
                                 {isLoading ? <Loader /> : "Verify Email"}
                             </button>
                         </div>
                         <p className="set-register-text">
-                            By continuing, you agree to SJ Computer’s
-                          {' '}  <a href="#" className="text-decoration-none">
+                            By continuing, you agree to SJ Computer’s{" "}
+                            <a href="#" className="text-decoration-none">
                                 Conditions of Use
-                            </a>{' '}
-                            and{' '}
+                            </a>{" "}
+                            and{" "}
                             <a href="#" className="text-decoration-none">
                                 Privacy Notice
                             </a>
@@ -174,7 +178,7 @@ const Register = () => {
                         </p>
 
                         <p className="register-sign-link">
-                            Already have an account?{' '}
+                            Already have an account?{" "}
                             <Link to="/login" className="text-decoration-none">
                                 Sign in?
                             </Link>
