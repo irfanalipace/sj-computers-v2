@@ -27,7 +27,7 @@ class ProfileController extends BaseController
             $user = auth()->user()->update($update);
             return $this->sendResponse($user->fresh(), "user profile updated.");
         } catch (Exception $e) {
-            return $this->sendError('Something went wrong.' . $e);
+            return $this->sendError(["msg" => ['Something went wrong.' . $e]]);
         }
     }
     //reset password
@@ -41,11 +41,11 @@ class ProfileController extends BaseController
             if (Hash::check($request->oldPassword, $user->password)) {
                 $user->fill(['password' => bcrypt($request->newPassword)])->save();
             } else {
-                return $this->sendError('old password does not match please try again.');
+                return $this->sendError(["msg" => ['old password does not match please try again.']]);
             }
             return $this->sendResponse($user,'user password has been changed Successfully.');
         } catch (Exception $e) {
-            return $this->sendError('Something went wrong.' . $e);
+            return $this->sendError(["msg" => ["Something went wrong.' . $e"]]);
         }
     }
 }
