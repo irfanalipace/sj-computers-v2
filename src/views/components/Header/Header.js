@@ -70,13 +70,13 @@ const Header = () => {
                                 <img
                                     src={footerlogo}
                                     alt=""
-                                    className="homepage-img"
+                                    className="homepage-img hover-effect-sets"
                                 />
                             </Link>
                             <div className="d-flex flex-row align-items-center main-nav">
-                                <div className="d-flex align-items-center justify-content-center flex-wrap header-position">
+                                <div className="d-flex align-items-center justify-content-center flex-wrap header-position hover-effect-sets">
                                     <Button
-                                    className="dliver-set"
+                                    className="dliver-set "
                                         variant="primary"
                                         onClick={handleShow}
                                         style={{
@@ -125,6 +125,8 @@ const Header = () => {
                                         </button>
                                     </span>
                                 </div>
+                              
+
                                 <div className="nav-right">
                                     <div className="dropdown">
                                         <button
@@ -160,7 +162,7 @@ const Header = () => {
                                         </div>
                                     </div>
 
-                                    <div className="dropdown-cart">
+                                    <div className="dropdown-cart hover-effect-sets">
                                         {isAuthenticated ? (
                                             <div>
                                                 <p className="mb-0 text-white check-auth">
@@ -171,7 +173,7 @@ const Header = () => {
                                             <LoginCart className="card" />
                                         )}
                                     </div>
-                                    <div className="return-button ">
+                                    <div className="return-button hover-effect-sets">
                                         <button
                                             className="order-button dropdown-toggle"
                                             type="button"
@@ -201,10 +203,10 @@ const Header = () => {
                                     </div>
 
                                     <button
-                                        className="icon-cart me-2 icon-cart-effect-hover"
+                                        className="icon-cart me-2 icon-cart-effect-hover "
                                         onClick={toggleSidebar}
                                     >
-                                        <div className="product-boll">
+                                        <div className="product-boll hover-effect-sets">
                                             <div
                                                 className="dropdown dot"
                                                 style={{

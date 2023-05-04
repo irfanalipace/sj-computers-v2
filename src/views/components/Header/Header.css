@@ -4,18 +4,28 @@
 .homepage-img {
     width: 185px !important;
     max-width: 100%;
-}.navbar-brand:focus {
-    outline: none;
-    border: 1px solid white;
-    color: white;
-}.dliver-set:focus{
-    outline: none !important;
-    border: 1px solid white !important;
-    color: white !important;
-}.product-boll:hover{
-    outline: none;
-    border: 1px solid white !important;
-    color: white;
+}
+
+.hover-effect-sets{
+      
+    border: 1px solid transparent;
+    padding: 1px;
+}.hover-effect-sets:hover{
+      
+    border-color: white;
+    cursor: pointer;
+}
+
+
+
+.hover-effect-sets-login-cart{
+     
+    border: 1px solid transparent;
+    padding: 8px;
+}.hover-effect-sets-login-cart:hover{
+     
+    border-color: white;
+    cursor: pointer;
 }
 .nav-text {
     color: white;
@@ -46,19 +56,22 @@
     background: #00305e;
     border: 0px;
     color: white;
-    padding-left: 13px;
+    padding-left: 15px;
 
     font-family: "Inter";
     font-style: normal;
     font-weight: 700;
     font-size: 15px;
     line-height: 18px;
-
-    color: #fffefe;
-}.eng-button:focus {
-    outline: none;
-    border: 1px solid white;
-    color: white;
+   
+    border: 1px solid transparent;
+    padding: 12px;
+  
+    
+ 
+}.eng-button:hover {
+    border-color: white;
+    cursor: pointer;
 }
 .input-form-control {
     height: 60px;
@@ -166,12 +179,7 @@
     color: #ffffff;
     text-align: left;
     
-}.order-button:focus {
-    outline: none;
-    border: 1px solid white;
-    color: white;
-  }
-  
+}
 
 .ul-menu {
     margin: 18px;
