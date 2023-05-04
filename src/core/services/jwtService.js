@@ -44,6 +44,26 @@ export const destroyUserPassword = () =>
 export const getUserName = () => window.localStorage.getItem(USER_NAME);
 export const getUserEmail = () => window.localStorage.getItem(USER_EMAIL);
 
+export const saveUser = (user) => {
+    window.localStorage.setItem(USER_EMAIL, user.userEmail);
+    window.localStorage.setItem(USER_IMAGE, user.userImage);
+    window.localStorage.setItem(USER_NAME, user.userName);
+};
+
+export const deleteUser = () => {
+    window.localStorage.removeItem(USER_EMAIL);
+    window.localStorage.removeItem(USER_IMAGE);
+    window.localStorage.removeItem(USER_NAME);
+};
+
+export const getUser = () => {
+    return {
+        name: window.localStorage.getItem(USER_NAME),
+        email: window.localStorage.getItem(USER_EMAIL),
+        profile_pic: window.localStorage.getItem(USER_IMAGE),
+    };
+};
+
 export const destroyTempKeys = () => {
     window.localStorage.removeItem(PASSWORD);
     window.localStorage.removeItem(TEMP_TOKEN);
@@ -51,9 +71,7 @@ export const destroyTempKeys = () => {
 
 export const destroyToken = () => {
     window.localStorage.removeItem(TOKEN);
-    window.localStorage.removeItem(USER_NAME);
-    window.localStorage.removeItem(USER_IMAGE);
-    window.localStorage.removeItem(USER_EMAIL);
+    deleteUser();
     window.localStorage.removeItem(PASSWORD);
     window.localStorage.removeItem(TEMP_TOKEN);
 };
@@ -61,7 +79,10 @@ export const destroyToken = () => {
 export default {
     getToken,
     saveToken,
+    saveUser,
     destroyToken,
+    deleteUser,
+    getUser,
     saveUserEmail,
     saveUserName,
     saveUserImage,

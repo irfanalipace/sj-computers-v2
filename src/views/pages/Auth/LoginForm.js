@@ -13,14 +13,14 @@ const LoginForm = () => {
     const CurrentForm = () => {
         return (
             <div>
-                {currentPage === 3 && <EmailForm form={"login"} />}
+                {currentPage === 1 && <EmailForm form={"login"} />}
                 {currentPage === 2 && <PasswordForm />}
-                {currentPage === 1 && <VerifyOTP />}
+                {currentPage === 3 && <VerifyOTP />}
             </div>
         );
     };
     return (
-        <div className="login-container-div" >
+        <div className="login-container-div">
             <div className="container form-container">
                 <div className="row">
                     <div className="header-logo">
