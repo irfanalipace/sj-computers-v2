@@ -50,7 +50,6 @@ const VerifyOTP = () => {
             1000
         );
         setEmail(getUserEmail());
-        // ApiService.setHeader("Authorization", "Bearer " + accessToken);
         setMounted(true);
         return () => {
             clearInterval(interval);
