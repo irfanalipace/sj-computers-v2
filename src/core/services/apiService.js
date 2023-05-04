@@ -23,6 +23,8 @@ const ApiService = {
      */
 
     setHeader(header, val) {
+        console.log("header", header);
+        console.log("val", val);
         this.instance.defaults.headers[header] = val;
     },
 

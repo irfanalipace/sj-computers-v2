@@ -153,7 +153,7 @@ export const forgetPassword = (email, cb) => {
 export const alreadyLoggedIn = (token) => {
     return async (dispatch) => {
         let user = getUser();
-        ApiService.setHeader("Authorization", "Bearer ", token);
+        ApiService.setHeader("Authorization", "Bearer " + token);
         dispatch(ALREADY_LOGGED_IN(user));
     };
 };

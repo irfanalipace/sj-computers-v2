@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Modal, Button, Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -118,9 +119,11 @@ function UpdateStateModel({ isOpen, handleClose }) {
                     </>
                 ) : (
                     <div className="d-grid justify-content-center">
-                        <button className="location-button">
-                            Sign in to see your address
-                        </button>
+                        <Link to={"/login"}>
+                            <button className="location-button">
+                                Sign in to see your address
+                            </button>
+                        </Link>
                     </div>
                 )}
             </Modal.Body>
