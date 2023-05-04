@@ -48,14 +48,13 @@ const authSlice = createSlice({
         VERIFY_OTP: (state, action) => {
             state.isAuthenticated = true;
             state.user = { ...action.payload };
+            state.user.profile_pic = action.payload.profile_pic;
             state.isLoading = false;
             state.currentPage = 1;
             state.apiError = null;
         },
         UPDATE_PROFILE: (state, action) => {
-            console.log("action: ", action.payload);
-            state.user.name = action.payload.name;
-            state.user.profile_pic = action.payload.profile_pic;
+            state.user = { ...action.payload };
             state.isLoading = false;
         },
         API_ERROR: (state, action) => {

@@ -164,10 +164,6 @@
     /* text-align: center; */
 }
 
-.profile-container .user-info-container {
-    margin-top: 30px;
-}
-
 .profile-container .user-info-form label {
     display: block;
     font-weight: 400;
@@ -227,5 +223,5 @@
 
 .profile-container .user-info-container {
     max-width: 500px;
-    margin: 0 auto;
+    margin: 30px auto 0;
 }

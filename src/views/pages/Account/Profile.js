@@ -10,7 +10,7 @@ import Button from "@common/Button/Button";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 
 import userDefault from "@images/common/user-default-avatar.png";
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 
 const Profile = () => {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -28,7 +28,6 @@ const Profile = () => {
     const handleFileChange = (event) => {
         event.preventDefault();
         let files = event.target.files;
-        console.log(files);
         if (files.length > 0) {
             setSelectedFile(files[0]);
             const reader = new FileReader();
@@ -43,7 +42,6 @@ const Profile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("selected file: ", selectedFile);
         const formData = new FormData();
         formData.append("profile_pic", selectedFile);
         formData.append("name", name);
@@ -91,7 +89,9 @@ const Profile = () => {
                                         {apiError.profile_pic}
                                     </p>
                                 )}
-                                <p> Your Profile photo should be 256x256</p>
+                                <p className="text-center">
+                                    Your Profile photo should be 256x256
+                                </p>
                             </div>
                             <div className="col-sm-4 col-12 mt-sm-0 mt-4">
                                 <div className="change-profile-buttons">
