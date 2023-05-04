@@ -28,7 +28,14 @@ class StateController extends BaseController
     }
 
     public function getState(){
-        $data = auth()->user()->userState;
-        return $this->sendResponse($data);
+        $userState = auth()->user()->userState;
+        if($userState){
+            $data = $userState->toArray();
+            $data['state'] = $userState->state->toArray();
+
+            return $this->sendResponse($data);
+        }
+
+        return $this->sendResponse($userState);
     }
 }
