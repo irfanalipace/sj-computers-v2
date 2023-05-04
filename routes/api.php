@@ -98,7 +98,7 @@ Route::middleware(['auth:api'])->group(function () {
     *update password as well
     */
     Route::post('update-profile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
-    Route::post('reset-password', [ProfileController::class, 'resetPassword'])->name('resetPassword');
+    Route::post('change-password', [ProfileController::class, 'resetPassword'])->name('changePassword');
 
     /*
     *Order shipping address
