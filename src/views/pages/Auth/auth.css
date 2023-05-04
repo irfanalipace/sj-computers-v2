@@ -290,8 +290,38 @@ h5:after {
 .login-h3-reset {
     font-size: 24px;
 }
-
-
+.resetpassword-button{
+   
+        color: white;
+        box-sizing: border-box;
+        /* position: absolute; */
+        width: 378px;
+        height: 43px;
+        /* left: 567px; */
+        /* top: 333px; */
+        background: radial-gradient(323.37% 27804.13% at 0% 51.52%, #52AC66 0%, rgba(82, 172, 102, 0) 100%);
+        border: 1px solid #6F6F6F;
+        border-radius: 3px;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 15px;
+        color: #FFFFFF;
+    
+}
+.resetpassword-praragraph-text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 15px;
+    color: #333333;
+    padding-top: 12px;
+}
+.icon-need-help-resetpassword{
+    padding-right: 8px;
+}
 .resend-otp-btn:disabled {
     color: gray !important;
 }

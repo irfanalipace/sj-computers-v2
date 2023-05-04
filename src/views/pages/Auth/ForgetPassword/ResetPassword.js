@@ -134,18 +134,18 @@ const PasswordForm = () => {
                         <div className="d-grid justify-content-center">
                             <button
                                 type="submit"
-                                className="btn btn-primary login-button"
+                                className="resetpassword-button"
                                 disabled={isLoading}
                             >
                                 {isLoading ? <Loader /> : "Continue"}
                             </button>
                         </div>
-                        <p className="text-muted small">
-                            By continuing, you agree to SJ Computer’s
+                        <p className="resetpassword-praragraph-text">
+                            By continuing, you agree to SJ Computer’s{' '}
                             <a href="#" className="text-decoration-none">
                                 Conditions of Use
-                            </a>
-                            and
+                            </a>{' '}
+                            and{' '}
                             <a href="#" className="text-decoration-none">
                                 Privacy Notice
                             </a>
@@ -153,7 +153,7 @@ const PasswordForm = () => {
                         </p>
 
                         <div className="need-help">
-                            <FontAwesomeIcon icon={faCaretRight} className="icon-need-help"/>
+                            <FontAwesomeIcon icon={faCaretRight} className="icon-need-help-resetpassword"/>
                             <a
                                 href="#"
                                 className="text-decoration-none need-help"
