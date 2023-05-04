@@ -5,9 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { updateProfile } from "@store/auth/authThunks";
+import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import Button from "@common/Button/Button";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
-import { breadcrumbRoutes } from "./BreadcrumbRoutes";
 
 import userDefault from "@images/common/user-default-avatar.png";
 import "react-datepicker/dist/react-datepicker.css";
@@ -22,6 +22,7 @@ const Profile = () => {
     const dispatch = useDispatch();
 
     const user = useSelector((state) => state.auth.user);
+    const apiError = useSelector((state) => state.auth.apiError);
     const isLoading = useSelector((state) => state.auth.isLoading);
 
     const handleFileChange = (event) => {
@@ -42,13 +43,23 @@ const Profile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(updateProfile({ name, profile_pic: selectedFile }));
+        console.log("selected file: ", selectedFile);
+        const formData = new FormData();
+        formData.append("profile_pic", selectedFile);
+        formData.append("name", name);
+        dispatch(updateProfile(formData));
     };
 
     useEffect(() => {
         setName(user.name);
         setImageUrl(user.profile_pic);
     }, [user]);
+
+    useEffect(() => {
+        return function () {
+            dispatch(CLEAR_API_ERRORS());
+        };
+    }, []);
 
     const handleDeleteImage = () => {
         setSelectedFile(null);
@@ -57,12 +68,12 @@ const Profile = () => {
     return (
         <div className="account-page">
             <div className="container-xl">
-                <Breadcrumb routes={breadcrumbRoutes} />
+                <Breadcrumb />
                 <h3 className="account-heading">Profile</h3>
                 <div className="profile-container">
                     <div className="profile-photo-container">
                         <div className="row mx-0">
-                            <div className="col-sm-4 col-6">
+                            <div className="col-sm-4 col-12">
                                 <div className="user-image-container">
                                     {/* <p>Profile Photo</p> */}
                                     <div className="image-wrapper">
@@ -75,9 +86,14 @@ const Profile = () => {
                                         />
                                     </div>
                                 </div>
+                                {apiError && (
+                                    <p className="fs-6 mt-1 text-danger">
+                                        {apiError.profile_pic}
+                                    </p>
+                                )}
                                 <p> Your Profile photo should be 256x256</p>
                             </div>
-                            <div className="col-4">
+                            <div className="col-sm-4 col-12 mt-sm-0 mt-4">
                                 <div className="change-profile-buttons">
                                     <div className="file-input-button-container">
                                         <label
@@ -133,6 +149,11 @@ const Profile = () => {
                                     </button>
                                 )}
                             </div>
+                            {apiError && (
+                                <p className="fs-6 mt-1 text-danger">
+                                    {apiError.name}
+                                </p>
+                            )}
                             <div className="input-wrapper">
                                 <label htmlFor="email">Your Email</label>
                                 <input
@@ -142,6 +163,11 @@ const Profile = () => {
                                     readOnly
                                 />
                             </div>
+                            {apiError && (
+                                <p className="fs-6 mt-1 text-danger">
+                                    {apiError.email}
+                                </p>
+                            )}
                             {/* <div className="input-wrapper">
                                 <label htmlFor="dob">Date of birth</label>
                                 <DatePicker

@@ -14,6 +14,23 @@ export function statesApi() {
     });
 }
 
+export function getCurrentStateApi() {
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/user-state`)
+            .then((response) => {
+                console.log(
+                    "file: states.js | getCurrentStateApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error states", e);
+                reject(e);
+            });
+    });
+}
+
 export function updateStateApi({ id, zip_code_start }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/update-state`, {

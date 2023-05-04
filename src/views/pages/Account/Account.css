@@ -85,6 +85,7 @@
 .profile-container .user-image-container p {
     font-weight: 600;
     font-size: 14px;
+    text-align: center;
 }
 
 .profile-photo-container .image-wrapper {
@@ -207,4 +208,24 @@
     background: #318243;
     color: white;
     width: 100%;
+}
+
+.profile-container.security-form {
+    max-width: 100%;
+}
+
+.profile-container .right-illustration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.profile-container .right-illustration img {
+    max-width: 90%;
+}
+
+.profile-container .user-info-container {
+    max-width: 500px;
+    margin: 0 auto;
 }

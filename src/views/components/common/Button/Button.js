@@ -7,12 +7,14 @@ export default function Button({
     isLoading,
     disabled,
     className,
+    ...props
 }) {
     return (
         <button
             className={`button ${className}`}
             onClick={clickHandler}
             disabled={isLoading || disabled}
+            {...props}
         >
             {isLoading ? <Loader /> : children}
         </button>

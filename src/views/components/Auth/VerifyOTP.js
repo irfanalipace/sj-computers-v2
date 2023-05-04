@@ -101,11 +101,11 @@ const VerifyOTP = () => {
             className={`auth-inner-body ${mounted && "slide"} `}
             onSubmit={handleSubmit}
         >
-            <h3 className="login-h3-verify">Verification required</h3>
-            One Time Password (OTP) sent to<br></br> {email}. Please enter it
-            below.
+            <h3 className="login-h3-verify-form">Verification required</h3>
+         <span className="email-text-verify-form">   One Time Password (OTP) sent to {email}<span  className="email-text-verify-form">Please enter it
+            below.</span> </span>
             <br></br>
-            <br></br>
+
             <div className="mb-3">
                 <label className="name-lable font-weight-bold">Enter OTP</label>
                 <input
@@ -125,8 +125,9 @@ const VerifyOTP = () => {
             <div className="d-grid justify-content-center">
                 <button
                     type="submit"
-                    className="btn btn-primary login-button verify-otp-btn"
+                    className="verify-button-data verify-otp-btn"
                     disabled={isLoading}
+                    onClick={handleSubmit}
                 >
                     {isLoading ? <Loader /> : "Verify OTP"}
                 </button>

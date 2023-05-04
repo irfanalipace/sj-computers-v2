@@ -21,6 +21,7 @@ import {
     forgetPasswordApi,
     verifyEmailApi,
     updateProfileApi,
+    updatePasswordApi,
 } from "@api/auth";
 import {
     saveToken,
@@ -125,7 +126,7 @@ export const resetPassword = (credentials, cb) => {
             dispatch({ type: LOADING, payload: {} });
             await resetPasswordApi(credentials);
             dispatch({ type: CLEAR_LOADING, payload: {} });
-            toast.success("Password reset successfully");
+            toast.success("Password Changed Successfully");
             if (typeof cb === "function") cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
@@ -159,12 +160,28 @@ export const alreadyLoggedIn = (token) => {
     };
 };
 
-export const updateProfile = ({ name, profile_pic }) => {
+export const updateProfile = (formData) => {
+    const name = formData.get("name");
+    const profile_pic = formData.get("profile_pic");
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            await updateProfileApi({ name, profile_pic });
-            dispatch({ type: UPDATE_PROFILE, payload: { name, email } });
+            await updateProfileApi(formData);
+            dispatch({ type: UPDATE_PROFILE, payload: { name, profile_pic } });
+        } catch (error) {
+            console.log("Something went wrong in updateProfile", error);
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
+        }
+    };
+};
+
+export const updatePassword = (data) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: LOADING, payload: {} });
+            await updatePasswordApi(data);
+            toast.success("Password Changed Successfully");
+            dispatch({ type: CLEAR_LOADING, payload: {} });
         } catch (error) {
             console.log("Something went wrong in updateProfile", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

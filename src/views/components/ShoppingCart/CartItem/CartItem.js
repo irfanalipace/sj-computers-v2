@@ -20,12 +20,12 @@ export const CartItem = memo(({ cartData }) => {
     const dispatch = useDispatch();
 
     const deleteItemFunction = () => {
-        let cartQuantity = details?.total_quantity - 1;
+        let cartQuantity = details?.total_items - 1;
         let cartTotal =
             parseFloat(details?.total) - parseFloat(cartData?.price);
 
         const cartDetails = {
-            total_quantity: cartQuantity,
+            total_items: cartQuantity,
             total: parseFloat(cartTotal).toFixed(2),
         };
 
@@ -40,7 +40,7 @@ export const CartItem = memo(({ cartData }) => {
         let price = cartData?.product?.price * difference;
         cartTotal = parseFloat(details?.total) + parseFloat(price);
         const cartDetails = {
-            total_quantity: details?.total_quantity,
+            total_items: details?.total_items,
             total: cartTotal.toFixed(2),
         };
 

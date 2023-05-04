@@ -155,26 +155,26 @@ const Register = () => {
                         <div className="d-grid justify-content-center">
                             <button
                                 type="submit"
-                                className="btn btn-primary set-register-button"
+                                className=" set-register-button"
                                 disabled={isLoading}
                             >
                                 {isLoading ? <Loader /> : "Verify Email"}
                             </button>
                         </div>
-                        <p className="text-muted small">
+                        <p className="set-register-text">
                             By continuing, you agree to SJ Computer’s
-                            <a href="#" className="text-decoration-none">
+                          {' '}  <a href="#" className="text-decoration-none">
                                 Conditions of Use
-                            </a>
-                            and
+                            </a>{' '}
+                            and{' '}
                             <a href="#" className="text-decoration-none">
                                 Privacy Notice
                             </a>
                             .
                         </p>
 
-                        <p className="forgot-password text-left">
-                            Already have an account?
+                        <p className="register-sign-link">
+                            Already have an account?{' '}
                             <Link to="/login" className="text-decoration-none">
                                 Sign in?
                             </Link>

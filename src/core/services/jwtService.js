@@ -3,6 +3,7 @@ import ApiService from "@services/apiService";
 const TOKEN = "token";
 const USER_NAME = "user_name";
 const USER_EMAIL = "user_email";
+const USER_IMAGE = "user_image";
 const PASSWORD = "user_password";
 const TEMP_TOKEN = "temp_token";
 
@@ -12,12 +13,16 @@ export const saveToken = (token) => {
     window.localStorage.setItem(TOKEN, token);
 };
 
-export const updateToken = (token) => {
-    window.localStorage.setItem(TOKEN, token);
-};
-
 export const saveUserName = (userName) =>
     window.localStorage.setItem(USER_NAME, userName);
+
+export const saveUserImage = (userImage) =>
+    window.localStorage.setItem(USER_IMAGE, userImage);
+
+export const getUserImage = (userImage) =>
+    window.localStorage.getItem(USER_IMAGE, userImage);
+
+export const deleteUserImage = () => window.localStorage.removeItem(USER_IMAGE);
 
 export const saveTempToken = (token) => {
     ApiService.setHeader("Authorization", "Bearer " + token);
@@ -47,6 +52,7 @@ export const destroyTempKeys = () => {
 export const destroyToken = () => {
     window.localStorage.removeItem(TOKEN);
     window.localStorage.removeItem(USER_NAME);
+    window.localStorage.removeItem(USER_IMAGE);
     window.localStorage.removeItem(USER_EMAIL);
     window.localStorage.removeItem(PASSWORD);
     window.localStorage.removeItem(TEMP_TOKEN);
@@ -55,10 +61,12 @@ export const destroyToken = () => {
 export default {
     getToken,
     saveToken,
-    updateToken,
     destroyToken,
     saveUserEmail,
     saveUserName,
+    saveUserImage,
+    getUserImage,
+    deleteUserImage,
     getUserName,
     getUserEmail,
     saveUserPassword,

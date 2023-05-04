@@ -76,7 +76,7 @@ const Header = () => {
                             <div className="d-flex flex-row align-items-center main-nav">
                                 <div className="d-flex align-items-center justify-content-center flex-wrap header-position">
                                     <Button
-                                    className="dliver-set"
+                                        className="dliver-set"
                                         variant="primary"
                                         onClick={handleShow}
                                         style={{
@@ -121,7 +121,10 @@ const Header = () => {
                                             type="button"
                                             className="btn btn-success search-logo"
                                         >
-                                         <FontAwesomeIcon icon={faSearch} size='2x'/>
+                                            <FontAwesomeIcon
+                                                icon={faSearch}
+                                                size="2x"
+                                            />
                                         </button>
                                     </span>
                                 </div>
@@ -212,7 +215,7 @@ const Header = () => {
                                                     color: "white",
                                                 }}
                                             >
-                                                {cartDetails.total_quantity}
+                                                {cartDetails.total_items}
                                                 <img
                                                     src={vectorcart}
                                                     alt=""

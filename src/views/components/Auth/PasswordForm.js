@@ -79,9 +79,9 @@ const PasswordForm = () => {
                 <div className="d-flex justify-content-end">
                     <Link
                         to={"/forget-password"}
-                        className="text-decoration-none mt-2"
+                        className="text-decoration-none mt-2 forget-password-text-loginform"
                     >
-                        Forget Password?
+                        Forget password?
                     </Link>
                 </div>
                 {fieldErrors && (
@@ -93,27 +93,27 @@ const PasswordForm = () => {
             <div className="d-grid justify-content-center">
                 <button
                     type="submit"
-                    className="btn btn-primary login-button"
+                    className=" singinnbutton"
                     disabled={isLoading}
                 >
                     {isLoading ? <Loader /> : "Continue"}
                 </button>
             </div>
-            <p className="text-muted small">
-                By continuing, you agree to SJ Computer’s
+            <p className="tetxt-signin">
+                By continuing, you agree to SJ Computer’s{' '}
                 <a href="#" className="text-decoration-none">
                     Conditions of Use
-                </a>
-                and
+                </a>{' '}
+                and{' '}
                 <a href="#" className="text-decoration-none">
                     Privacy Notice
                 </a>
                 .
             </p>
 
-            <div className="need-help">
-                <FontAwesomeIcon icon={faCaretRight} />
-                <a href="#" className="text-decoration-none need-help">
+            <div >
+                <FontAwesomeIcon icon={faCaretRight} className="need-help-singin-arrow"/>
+                <a href="#" className="text-decoration-none my-text-signin">
                     Need Help?
                 </a>
             </div>
