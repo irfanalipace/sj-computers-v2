@@ -15,11 +15,11 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
     const dispatch = useDispatch();
 
     const deleteItemFunction = (item) => {
-        let cartQuantity = details?.total_quantity - 1;
+        let cartQuantity = details?.total_items - 1;
         let cartTotal = parseFloat(details?.total) - parseFloat(item?.price);
 
         const cartDetails = {
-            total_quantity: cartQuantity,
+            total_items: cartQuantity,
             total: cartTotal.toFixed(2),
         };
 
@@ -115,7 +115,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                             <div>
                                 <span className="">Cart Subtotal</span>
                                 <span className="item1">
-                                    ( {details?.total_quantity} items ):
+                                    ( {details?.total_items} items ):
                                 </span>
                                 ${details?.total}
                                 <div className="mt-2">
@@ -135,7 +135,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                             onClick={toggleSidebar}
                                         >
                                             Proceed to checkout (
-                                            {details?.total_quantity} item)
+                                            {details?.total_items} item)
                                         </Link>
                                     </button>
                                 </div>

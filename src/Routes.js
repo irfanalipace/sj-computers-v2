@@ -5,6 +5,7 @@ import LoginForm from "@pages/Auth/LoginForm";
 import Register from "@pages/Auth/Register";
 import Account from "@pages/Account/Account";
 import Profile from "@pages/Account/Profile";
+import Security from "@pages/Account/Security";
 import ForgetPassword from "@pages/Auth/ForgetPassword/ForgetPassword";
 import ResetPassword from "@pages/Auth/ForgetPassword/ResetPassword";
 import Emailsent from "@pages/Auth/EmailSent";
@@ -97,7 +98,7 @@ export const Router = () => {
             path: "/account/update-password",
             element: (
                 <ProtectedRoute>
-                    <Profile />
+                    <Security />
                 </ProtectedRoute>
             ),
         },
@@ -119,11 +120,7 @@ export const Router = () => {
         },
         {
             path: "/checkout",
-            element: (
-             
-                    <Checkout />
-               
-            ),
+            element: <Checkout />,
         },
         {
             path: "/success-transaction",
