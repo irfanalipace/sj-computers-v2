@@ -472,11 +472,7 @@ line-height: 15px;
 
 color: #1270C4;
 }
-a:hover,
-Link:hover {
-  color: #1270C4;
-  text-decoration: none;
-}
+
 
 .set-register-button {
     font-family: 'Inter';
