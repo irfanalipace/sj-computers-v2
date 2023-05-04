@@ -77,9 +77,6 @@ Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clearCart'
 
 Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('addQtyCart');
 
-Route::get('user-state', [StateController::class, 'getState'])->name('getState');
-
-
 /*
 *Place Order
 */
@@ -112,6 +109,7 @@ Route::middleware(['auth:api'])->group(function () {
      * update state api
      */
     Route::post('update-state', [StateController::class, 'updateState'])->name('update-state');
+    Route::get('user-state', [StateController::class, 'getState'])->name('getState');
 
 
     /*
