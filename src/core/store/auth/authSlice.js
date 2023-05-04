@@ -57,6 +57,9 @@ const authSlice = createSlice({
             state.user = { ...action.payload };
             state.isLoading = false;
         },
+        RESET_PAGE: (state) => {
+            state.currentPage = 1;
+        },
         API_ERROR: (state, action) => {
             state.apiError = { ...action.payload };
             state.isLoading = false;

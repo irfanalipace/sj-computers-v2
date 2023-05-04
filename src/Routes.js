@@ -54,7 +54,7 @@ export const Router = () => {
             ),
         },
         {
-            path: "/forgot_password",
+            path: "/reset-password",
             element: (
                 <AuthRoute>
                     <ResetPassword />
