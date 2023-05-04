@@ -126,7 +126,7 @@ export const resetPassword = (credentials, cb) => {
             dispatch({ type: LOADING, payload: {} });
             await resetPasswordApi(credentials);
             dispatch({ type: CLEAR_LOADING, payload: {} });
-            toast.success("Password reset successfully");
+            toast.success("Password Changed Successfully");
             if (typeof cb === "function") cb();
         } catch (error) {
             console.log("Something went wrong in login", error);
@@ -180,6 +180,7 @@ export const updatePassword = (data) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             await updatePasswordApi(data);
+            toast.success("Password Changed Successfully");
             dispatch({ type: CLEAR_LOADING, payload: {} });
         } catch (error) {
             console.log("Something went wrong in updateProfile", error);

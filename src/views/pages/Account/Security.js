@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 import { updatePassword } from "@store/auth/authThunks";
+import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import Button from "@common/Button/Button";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 
@@ -35,6 +36,18 @@ const Security = () => {
         };
         dispatch(updatePassword(params));
     };
+
+    useEffect(() => {
+        setOldPassword("");
+        setConfirmPassword("");
+        setPassword("");
+    }, [isLoading]);
+
+    useEffect(() => {
+        return function () {
+            dispatch(CLEAR_API_ERRORS());
+        };
+    }, []);
 
     return (
         <div className="account-page">
@@ -188,7 +201,7 @@ const Security = () => {
                                     </div>
                                     {apiError && (
                                         <p className="fs-6 mt-1 text-danger">
-                                            {apiError.confirmPassword}
+                                            {apiError.passwordConfirmation}
                                         </p>
                                     )}
 

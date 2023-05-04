@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { updateProfile } from "@store/auth/authThunks";
+import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import Button from "@common/Button/Button";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 
@@ -53,6 +54,12 @@ const Profile = () => {
         setName(user.name);
         setImageUrl(user.profile_pic);
     }, [user]);
+
+    useEffect(() => {
+        return function () {
+            dispatch(CLEAR_API_ERRORS());
+        };
+    }, []);
 
     const handleDeleteImage = () => {
         setSelectedFile(null);
