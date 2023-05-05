@@ -43,7 +43,7 @@ const ProductItem4 = () => {
                     />
                    
                      </Link>
-                     <span className="paragraph-cases">cases</span>
+                 <p className="paragraph-cases">cases</p>
                  <Link to='/category'>
                     <img
                         src={images[3]}
