@@ -10,7 +10,7 @@ import "./Home.css";
 
 const Home = () => {
     return (
-        <div>
+        <div className="homePage">
             <TopBar />
             <div className="banner-category-section">
                 <div className="banner-wrapper">

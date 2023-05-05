@@ -1,6 +1,5 @@
-
 .auth-wrapper > * {
-    font-family: 'Inter';
+    font-family: "Inter";
 }
 
 .auth-wrapper {
@@ -11,6 +10,11 @@
 .navbar-light {
     background-color: #ffffff;
     box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+}
+
+.slide {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
 }
 .auth-wrapper {
     display: flex;
@@ -44,12 +48,12 @@
 .need-help {
     left: 583.67px;
     top: 332px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
-    color: #1270C4;
+    color: #1270c4;
     padding-right: 20px !important;
 }
 .custom-control-label {
@@ -67,12 +71,11 @@
     color: #167bff;
 }
 .login-h3 {
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 22px;
     line-height: 27px;
-   
 }
 .email-lable {
     padding-bottom: 3px;
@@ -84,25 +87,28 @@
     height: 37px;
     left: 567px;
     top: 224px;
-    background: radial-gradient(323.37% 27804.13% at 0% 51.52%, #52AC66 0%, rgba(82, 172, 102, 0) 100%);
-    border: 1px solid #6F6F6F;
+    background: radial-gradient(
+        323.37% 27804.13% at 0% 51.52%,
+        #52ac66 0%,
+        rgba(82, 172, 102, 0) 100%
+    );
+    border: 1px solid #6f6f6f;
     border-radius: 3px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 15px;
     /* identical to box height */
-    
-    
-    color: #FFFFFF;
+
+    color: #ffffff;
 }
 .small {
     margin-top: 21px !important;
 }
 .small-text-paragrap {
     margin-top: 12px !important;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 10px;
@@ -178,7 +184,7 @@ h5:after {
 }
 /*  */
 .rectangle {
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -242,13 +248,12 @@ h5:after {
     line-height: 20px;
 }
 .font-weight-bold {
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
     line-height: 15px;
     color: #000000;
-   
 }
 .font-weight {
     font-size: 21px !important;
@@ -282,7 +287,7 @@ h5:after {
     font-size: 26px;
 }
 .login-h3-verify-form {
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 22px;
@@ -294,63 +299,67 @@ h5:after {
     padding-top: 60px;
     width: 28%;
 }
-.verify-button-data{
- 
-        box-sizing: border-box;
-        /* position: absolute; */
-        width: 355px;
-        height: 39px;
-        left: 567px;
-        top: 269px;
-        background: radial-gradient(323.37% 27804.13% at 0% 51.52%, #52AC66 0%, rgba(82, 172, 102, 0) 100%);
-        border: 1px solid #6F6F6F;
-        border-radius: 3px;
-        color: white;
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 12px;
-        line-height: 15px;
-        /* identical to box height */
+.verify-button-data {
+    box-sizing: border-box;
+    /* position: absolute; */
+    width: 355px;
+    height: 39px;
+    left: 567px;
+    top: 269px;
+    background: radial-gradient(
+        323.37% 27804.13% at 0% 51.52%,
+        #52ac66 0%,
+        rgba(82, 172, 102, 0) 100%
+    );
+    border: 1px solid #6f6f6f;
+    border-radius: 3px;
+    color: white;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    /* identical to box height */
 
-
-        color: #FFFFFF;
+    color: #ffffff;
 }
 /* media query */
-.email-text-verify-form{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 12px;
-line-height: 15px;
+.email-text-verify-form {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
 
-color: #333333;
+    color: #333333;
 }
 .login-h3-reset {
     font-size: 24px;
 }
-.resetpassword-button{
-   
-        color: white;
-        box-sizing: border-box;
-        /* position: absolute; */
-        width: 378px;
-        height: 43px;
-        /* left: 567px; */
-        /* top: 333px; */
-        background: radial-gradient(323.37% 27804.13% at 0% 51.52%, #52AC66 0%, rgba(82, 172, 102, 0) 100%);
-        border: 1px solid #6F6F6F;
-        border-radius: 3px;
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 12px;
-        line-height: 15px;
-        color: #FFFFFF;
-    
+.resetpassword-button {
+    color: white;
+    box-sizing: border-box;
+    /* position: absolute; */
+    width: 378px;
+    height: 43px;
+    /* left: 567px; */
+    /* top: 333px; */
+    background: radial-gradient(
+        323.37% 27804.13% at 0% 51.52%,
+        #52ac66 0%,
+        rgba(82, 172, 102, 0) 100%
+    );
+    border: 1px solid #6f6f6f;
+    border-radius: 3px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: #ffffff;
 }
 .resetpassword-praragraph-text {
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 11px;
@@ -358,7 +367,7 @@ color: #333333;
     color: #333333;
     padding-top: 12px;
 }
-.icon-need-help-resetpassword{
+.icon-need-help-resetpassword {
     padding-right: 8px;
 }
 .resend-otp-btn:disabled {
@@ -401,94 +410,96 @@ color: #333333;
     .form-container-reset {
         width: 95%;
     }
-}.login-container-div{
+}
+.login-container-div {
     background-color: white;
 }
-.forget-password-text-loginform{
-    
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 11px;
-line-height: 12px;
+.forget-password-text-loginform {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 12px;
 
-color: #1270C4;
-
+    color: #1270c4;
 }
 .email-login-input {
-    background: #EDFFF1;
-}.register-p-text{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 10px;
-line-height: 12px;
-
-color: #333333;
+    background: #edfff1;
 }
-.singinnbutton{
+.register-p-text {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
 
-        box-sizing: border-box;
-        /* position: absolute; */
-        width: 354px;
-        height: 36px;
-        left: 567px;
-        top: 241px;
-        background: radial-gradient(323.37% 27804.13% at 0% 51.52%, #52AC66 0%, rgba(82, 172, 102, 0) 100%);
-        border: 1px solid #6F6F6F;
-        border-radius: 3px;
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 12px;
-        line-height: 15px;
-        color: #FFFFFF;
-    
+    color: #333333;
 }
-.tetxt-signin{
-    
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 10px;
-line-height: 15px;
+.singinnbutton {
+    box-sizing: border-box;
+    /* position: absolute; */
+    width: 354px;
+    height: 36px;
+    left: 567px;
+    top: 241px;
+    background: radial-gradient(
+        323.37% 27804.13% at 0% 51.52%,
+        #52ac66 0%,
+        rgba(82, 172, 102, 0) 100%
+    );
+    border: 1px solid #6f6f6f;
+    border-radius: 3px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: #ffffff;
+}
+.tetxt-signin {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 15px;
 
-color: #333333;
-padding-top: 8px;
+    color: #333333;
+    padding-top: 8px;
 }
 .need-help-singin-arrow {
     width: 7px;
     padding-right: 6px;
 }
-.my-text-signin{
-    
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 12px;
-line-height: 15px;
-/* identical to box height */
+.my-text-signin {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    /* identical to box height */
 
-
-color: #1270C4;
+    color: #1270c4;
 }
 
-
 .set-register-button {
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
     line-height: 15px;
-    color: #FFFFFF;
+    color: #ffffff;
     box-sizing: border-box;
     /* position: absolute; */
     width: 376px;
     height: 40px;
     left: 567px;
     top: 449px;
-    background: radial-gradient(323.37% 27804.13% at 0% 51.52%, #52AC66 0%, rgba(82, 172, 102, 0) 100%);
-    border: 1px solid #6F6F6F;
+    background: radial-gradient(
+        323.37% 27804.13% at 0% 51.52%,
+        #52ac66 0%,
+        rgba(82, 172, 102, 0) 100%
+    );
+    border: 1px solid #6f6f6f;
     border-radius: 3px;
     /* height: 56px; */
     /* width: 263px; */
@@ -498,14 +509,14 @@ color: #1270C4;
     padding-top: 9px;
     left: 567px;
     top: 497px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 11px;
     line-height: 15px;
 }
 .register-sign-link {
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 10px;

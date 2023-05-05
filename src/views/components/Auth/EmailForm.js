@@ -82,11 +82,11 @@ export default function EmailForm({ onFormSubmit, form }) {
                 </button>
             </div>
             <p className=" small-text-paragrap">
-                By continuing, you agree to SJ Computer’s{' '}
+                By continuing, you agree to SJ Computer’s{" "}
                 <a href="#" className="text-decoration-none">
                     Conditions of Use
-                </a>{' '}
-                and{' '}
+                </a>{" "}
+                and{" "}
                 <a href="#" className="text-decoration-none">
                     Privacy Noticee
                 </a>

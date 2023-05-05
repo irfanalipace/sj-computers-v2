@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Home = React.lazy(() => import("@pages/Home/Home"));
@@ -19,18 +19,25 @@ const Security = React.lazy(() => import("@pages/Account/Security"));
 const Cart = React.lazy(() => import("@components/ShoppingCart/Cart"));
 const Checkout = React.lazy(() => import("@pages/Checkout/Checkout"));
 const Test = React.lazy(() => import("@pages/Test/Test"));
+import Loader from "@common/LoaderComponent/LoaderComponent";
 
 export const Router = () => {
     const routes = [
         {
             path: "/",
-            element: <Home />,
+            element: (
+                <Suspense fallback={<Loader />}>
+                    <Home />
+                </Suspense>
+            ),
         },
         {
             path: "/login",
             element: (
                 <AuthRoute>
-                    <LoginForm />
+                    <Suspense fallback={<Loader />}>
+                        <LoginForm />
+                    </Suspense>
                 </AuthRoute>
             ),
         },
@@ -38,7 +45,9 @@ export const Router = () => {
             path: "/register",
             element: (
                 <AuthRoute>
-                    <Register />
+                    <Suspense fallback={<Loader />}>
+                        <Register />
+                    </Suspense>
                 </AuthRoute>
             ),
         },
@@ -46,7 +55,9 @@ export const Router = () => {
             path: "/email-sent",
             element: (
                 <AuthRoute>
-                    <Emailsent />
+                    <Suspense fallback={<Loader />}>
+                        <Emailsent />
+                    </Suspense>
                 </AuthRoute>
             ),
         },
@@ -54,7 +65,9 @@ export const Router = () => {
             path: "/forget-password",
             element: (
                 <AuthRoute>
-                    <ForgetPassword />
+                    <Suspense fallback={<Loader />}>
+                        <ForgetPassword />
+                    </Suspense>
                 </AuthRoute>
             ),
         },
@@ -62,13 +75,19 @@ export const Router = () => {
             path: "/reset-password",
             element: (
                 <AuthRoute>
-                    <ResetPassword />
+                    <Suspense fallback={<Loader />}>
+                        <ResetPassword />
+                    </Suspense>
                 </AuthRoute>
             ),
         },
         {
             path: "/product/:productId",
-            element: <Product />,
+            element: (
+                <Suspense fallback={<Loader />}>
+                    <Product />
+                </Suspense>
+            ),
         },
         {
             path: "/category/:categoryId",
@@ -79,7 +98,9 @@ export const Router = () => {
             path: "/account",
             element: (
                 <ProtectedRoute>
-                    <Account />
+                    <Suspense fallback={<Loader />}>
+                        <Account />
+                    </Suspense>
                 </ProtectedRoute>
             ),
         },
@@ -87,7 +108,9 @@ export const Router = () => {
             path: "/account/profile",
             element: (
                 <ProtectedRoute>
-                    <Profile />
+                    <Suspense fallback={<Loader />}>
+                        <Profile />
+                    </Suspense>
                 </ProtectedRoute>
             ),
         },
@@ -103,7 +126,9 @@ export const Router = () => {
             path: "/account/update-password",
             element: (
                 <ProtectedRoute>
-                    <Security />
+                    <Suspense fallback={<Loader />}>
+                        <Security />
+                    </Suspense>
                 </ProtectedRoute>
             ),
         },
@@ -111,21 +136,35 @@ export const Router = () => {
             path: "/account/orders",
             element: (
                 <ProtectedRoute>
-                    <Profile />
+                    <Suspense fallback={<Loader />}>
+                        <Profile />
+                    </Suspense>
                 </ProtectedRoute>
             ),
         },
         {
             path: "/cart",
-            element: <Cart />,
+            element: (
+                <Suspense fallback={<Loader />}>
+                    <Cart />
+                </Suspense>
+            ),
         },
         {
             path: "/checkout/:productId",
-            element: <Checkout />,
+            element: (
+                <Suspense fallback={<Loader />}>
+                    <Checkout />
+                </Suspense>
+            ),
         },
         {
             path: "/checkout",
-            element: <Checkout />,
+            element: (
+                <Suspense fallback={<Loader />}>
+                    <Checkout />
+                </Suspense>
+            ),
         },
         {
             path: "/success-transaction",
@@ -142,7 +181,11 @@ export const Router = () => {
         },
         {
             path: "/test",
-            element: <Test />,
+            element: (
+                <Suspense fallback={<Loader />}>
+                    <Test />
+                </Suspense>
+            ),
         },
         {
             path: "*",

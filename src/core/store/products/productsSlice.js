@@ -25,6 +25,7 @@ const productSlice = createSlice({
         },
         CLEAR_PRODUCTS: (state) => {
             state.products = [];
+            state.currentPage = 1;
         },
         RESET_PAGE: (state) => {
             state.currentPage = 1;
