@@ -164,6 +164,14 @@
     position: relative;
     display: inline-block;
 }
+.hover-effect-sets-boll{
+    border: 1px solid transparent;
+    padding: 3px;
+}.hover-effect-sets-boll:hover{
+      
+    border-color: white;
+    cursor: pointer;
+}
 
 .dropdown-payment iframe {
     position: absolute;
