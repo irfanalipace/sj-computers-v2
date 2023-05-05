@@ -94,7 +94,7 @@ export default function EmailForm({ onFormSubmit, form }) {
             </p>
 
             <div className="need-help">
-                <FontAwesomeIcon icon={faCaretRight} />
+                <FontAwesomeIcon icon={faCaretRight} className="need-help-singin-arrow"/>
                 <a href="#" className="text-decoration-none need-help">
                     Need Help?
                 </a>

@@ -17,9 +17,9 @@ const LoginForm = () => {
     const CurrentForm = () => {
         return (
             <div>
-                {currentPage === 1 && <EmailForm form={"login"} />}
-                {currentPage === 2 && <PasswordForm />}
-                {currentPage === 3 && <VerifyOTP />}
+                {currentPage === 2 && <EmailForm form={"login"} />}
+                {currentPage === 13 && <PasswordForm />}
+                {currentPage === 1 && <VerifyOTP />}
             </div>
         );
     };

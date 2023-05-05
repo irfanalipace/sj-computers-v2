@@ -211,8 +211,13 @@ h5:after {
     color: #706e6e;
 }
 .footer-mute {
-    text-align: center !important;
-    padding-top: 40px !important;
+    text-align: center;
+   
+    /* padding-top: 40px !important; */
+    padding-right: 88px;
+}
+.copyright-sjcomputer{
+    padding-right: 112px;
 }
 .header-logo {
     text-align: center !important;

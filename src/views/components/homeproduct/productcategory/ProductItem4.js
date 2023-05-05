@@ -43,7 +43,7 @@ const ProductItem4 = () => {
                     />
                    
                      </Link>
-                 <p className="paragraph-cases">cases</p>
+                     <Link className='text-decoration-none items-name-text' to='/category'>Moniter</Link>
                  <Link to='/category'>
                     <img
                         src={images[3]}
