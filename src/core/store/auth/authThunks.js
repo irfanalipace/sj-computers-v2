@@ -30,6 +30,7 @@ import {
     saveUserName,
     saveUserImage,
     saveUserPassword,
+    saveUser,
     saveTempToken,
     getTempToken,
     getUser,
@@ -164,6 +165,8 @@ export const updateProfile = (formData) => {
             dispatch({ type: LOADING, payload: {} });
             let response = await updateProfileApi(formData);
             dispatch({ type: UPDATE_PROFILE, payload: response.data.data });
+            saveUser(response.data.data);
+            toast.success("Profile Updated Successfully");
         } catch (error) {
             console.log("Something went wrong in updateProfile", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
