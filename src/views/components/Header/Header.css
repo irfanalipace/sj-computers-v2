@@ -61,27 +61,23 @@
     background: #00305e;
     border: 0px;
     color: white;
-    padding-left: 15px;
-
+    /* padding-left: 15px; */
     font-family: "Inter";
     font-style: normal;
     font-weight: 700;
     font-size: 15px;
+    padding-top: 23px;
     line-height: 18px;
-   
-  
-  
-    
- 
 }
-
 .input-form-control {
     height: 60px;
 }
-/* .vector-cart{
-    width: 25px;
+.vector-cart{
+    vertical-align: none !important;
    
-}.ellipse{
+}
+/* 
+.ellipse{
     color: white;
     width: 20px;
     height: 50;
@@ -161,12 +157,8 @@
     color: white;
     font-size: 18px;
 }
-.dot {
-    height: 28px;
-    width: 28px;
-    background-color: #ee9b38;
-    border-radius: 50%;
-    display: inline-block;
+.cart-image-boll-background-image {
+    padding-top: 20px;
 }
 .dropdown {
     position: relative;
@@ -216,12 +208,7 @@
     display: flex;
     width: 25%;
 }
-@media screen and (max-width:1350px) {
-    .nav-right {
-        display: flex;
-        width: 35%;
-    }
-}
+
 
 .nav-right > div {
     display: flex;
@@ -445,4 +432,20 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
+}
+@media screen and (max-width:1500px) {
+    .product-boll{
+    width: 69px;
+    }
+}
+@media screen and (max-width:1350px) {
+    .nav-right {
+        display: flex;
+        width: 35%;
+    }
+}
+@media screen and (max-width:1200px) {
+    .cart-text{
+    font-size: 12px;
+    }
 }
