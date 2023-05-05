@@ -1,5 +1,6 @@
 .banner-category-section {
     position: relative;
+    min-height: 490px;
 }
 .banner-wrapper {
     /* position: relative; */

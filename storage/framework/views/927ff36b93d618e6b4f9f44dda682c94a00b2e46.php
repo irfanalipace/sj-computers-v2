@@ -1,0 +1,3 @@
+<?php echo e($slot); ?>: <?php echo e($url); ?>
+
+<?php /**PATH C:\Users\Haroon.9985755\OneDrive - Higher Education Commission\Desktop\sj-computers\vendor\laravel\framework\src\Illuminate\Mail/resources/views/text/button.blade.php ENDPATH**/ ?>

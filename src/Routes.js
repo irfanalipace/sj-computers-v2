@@ -1,19 +1,24 @@
+import React from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Home from "@pages/Home/Home";
-import LoginForm from "@pages/Auth/LoginForm";
-import Register from "@pages/Auth/Register";
-import Account from "@pages/Account/Account";
-import Profile from "@pages/Account/Profile";
-import Security from "@pages/Account/Security";
-import ForgetPassword from "@pages/Auth/ForgetPassword/ForgetPassword";
-import ResetPassword from "@pages/Auth/ForgetPassword/ResetPassword";
-import Emailsent from "@pages/Auth/EmailSent";
-import Product from "@pages/Product/Product";
-import Category from "@pages/Category/Category";
-import Cart from "@components/ShoppingCart/Cart";
-import Checkout from "@pages/Checkout/Checkout";
-import Test from "@pages/Test/Test";
+const Home = React.lazy(() => import("@pages/Home/Home"));
+const LoginForm = React.lazy(() => import("@pages/Auth/LoginForm"));
+const Register = React.lazy(() => import("@pages/Auth/Register"));
+const ForgetPassword = React.lazy(() =>
+    import("@pages/Auth/ForgetPassword/ForgetPassword")
+);
+const ResetPassword = React.lazy(() =>
+    import("@pages/Auth/ForgetPassword/ResetPassword")
+);
+const Emailsent = React.lazy(() => import("@pages/Auth/EmailSent"));
+const Product = React.lazy(() => import("@pages/Product/Product"));
+const Category = React.lazy(() => import("@pages/Category/Category"));
+const Account = React.lazy(() => import("@pages/Account/Account"));
+const Profile = React.lazy(() => import("@pages/Account/Profile"));
+const Security = React.lazy(() => import("@pages/Account/Security"));
+const Cart = React.lazy(() => import("@components/ShoppingCart/Cart"));
+const Checkout = React.lazy(() => import("@pages/Checkout/Checkout"));
+const Test = React.lazy(() => import("@pages/Test/Test"));
 
 export const Router = () => {
     const routes = [
