@@ -4405,3 +4405,86 @@ Did you mean this?
 #65 /var/www/html/sj-computers/server.php(21): require_once('...')
 #66 {main}
 "} 
+[2023-05-05 08:08:54] local.ERROR: Class "Maatwebsite\Excel\ExcelServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Maatwebsite\\Excel\\ExcelServiceProvider\" not found at /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php:208)
+[stacktrace]
+#0 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#1 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#2 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(659): Illuminate\\Foundation\\ProviderRepository->load()
+#3 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(237): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#5 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(153): Illuminate\\Foundation\\Application->bootstrapWith()
+#6 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(137): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#7 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#8 /var/www/html/sj-computers/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle()
+#9 /var/www/html/sj-computers/server.php(21): require_once('...')
+#10 {main}
+"} 
+[2023-05-05 08:09:41] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:200)
+[stacktrace]
+#0 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(125): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(112): Illuminate\\Log\\LogManager->get()
+#2 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(590): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(247): Illuminate\\Log\\LogManager->error()
+#4 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(366): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(131): Illuminate\\Foundation\\Console\\Kernel->reportException()
+#6 /var/www/html/sj-computers/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle()
+#7 {main}
+"} 
+[2023-05-05 08:09:41] laravel.ERROR: Class "Laravel\Fortify\Features" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Fortify\\Features\" not found at /var/www/html/sj-computers/config/fortify.php:135)
+[stacktrace]
+#0 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/LoadConfiguration.php(72): require()
+#1 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/LoadConfiguration.php(39): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->loadConfigurationFiles()
+#2 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(237): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->bootstrap()
+#3 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#4 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#5 /var/www/html/sj-computers/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle()
+#6 {main}
+"} 
+[2023-05-05 08:09:44] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:200)
+[stacktrace]
+#0 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(125): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(112): Illuminate\\Log\\LogManager->get()
+#2 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(590): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(247): Illuminate\\Log\\LogManager->error()
+#4 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(415): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(113): Illuminate\\Foundation\\Http\\Kernel->reportException()
+#6 /var/www/html/sj-computers/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle()
+#7 /var/www/html/sj-computers/server.php(21): require_once('...')
+#8 {main}
+"} 
+[2023-05-05 08:09:44] laravel.ERROR: Class "Laravel\Fortify\Features" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Fortify\\Features\" not found at /var/www/html/sj-computers/config/fortify.php:135)
+[stacktrace]
+#0 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/LoadConfiguration.php(72): require()
+#1 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/LoadConfiguration.php(39): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->loadConfigurationFiles()
+#2 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(237): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->bootstrap()
+#3 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(153): Illuminate\\Foundation\\Application->bootstrapWith()
+#4 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(137): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#5 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#6 /var/www/html/sj-computers/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle()
+#7 /var/www/html/sj-computers/server.php(21): require_once('...')
+#8 {main}
+"} 
+[2023-05-05 08:14:08] local.ERROR: Class "Maatwebsite\Excel\ExcelServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Maatwebsite\\Excel\\ExcelServiceProvider\" not found at /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php:208)
+[stacktrace]
+#0 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#1 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#2 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(659): Illuminate\\Foundation\\ProviderRepository->load()
+#3 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(237): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#5 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#6 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 /var/www/html/sj-computers/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 {main}
+"} 
+[2023-05-05 09:18:40] local.ERROR: Class "Maatwebsite\Excel\ExcelServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Maatwebsite\\Excel\\ExcelServiceProvider\" not found at /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php:208)
+[stacktrace]
+#0 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#1 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#2 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(659): Illuminate\\Foundation\\ProviderRepository->load()
+#3 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(237): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#5 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#6 /var/www/html/sj-computers/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 /var/www/html/sj-computers/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 {main}
+"} 

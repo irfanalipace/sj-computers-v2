@@ -16,8 +16,6 @@ use TCG\Voyager\Facades\Voyager;
 |
 */
 
-Route::get('/export-products',[\App\Http\Controllers\ProductController::class,
-    'exportProducts'])->name('export-products');
 //
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

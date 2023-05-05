@@ -7,7 +7,6 @@ use App\Exports\ExportProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Validator;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\Product as ProductResource;
 
 class ProductController extends Controller
@@ -130,7 +129,5 @@ class ProductController extends Controller
         return $this->sendResponse([], 'Product deleted successfully.');
     }
 
-    public function exportProducts(Request $request){
-        return Excel::download(new ExportProduct, 'products.xlsx');
-    }
+
 }
