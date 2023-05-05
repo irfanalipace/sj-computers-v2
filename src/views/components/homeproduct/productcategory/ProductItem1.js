@@ -8,7 +8,7 @@ const ProductItem1 = () => {
     return (
         <Container>
             {/* <h4 className="laptop-product">Laptops</h4> */}
-            <div>
+            <div className="image-style">
                 <img src={images[0]} alt="Image 2" className="laptop-img" />
             </div>
             {/* <Link to="/" className="text-decoration-none">

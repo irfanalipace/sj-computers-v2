@@ -1,6 +1,7 @@
 .sidebar-cart .cartItem-image {
     max-width: 100%;
     margin-left: 10px;
+    max-height: 150px;
 }
 .sidebar-cart .item-details {
     /* position: absolute; */

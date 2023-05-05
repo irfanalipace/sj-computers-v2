@@ -21,7 +21,6 @@ const Checkout = React.lazy(() => import("@pages/Checkout/Checkout"));
 const Test = React.lazy(() => import("@pages/Test/Test"));
 import Loader from "@common/LoaderComponent/LoaderComponent";
 
-
 export const Router = () => {
     const routes = [
         {
@@ -92,7 +91,11 @@ export const Router = () => {
         },
         {
             path: "/category/:categoryId",
-            element: <Category />,
+            element: (
+                <Suspense fallback={<Loader />}>
+                    <Category />
+                </Suspense>
+            ),
         },
 
         {
