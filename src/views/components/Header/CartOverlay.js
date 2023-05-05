@@ -6,6 +6,8 @@ import { deleteItem, deleteLocalItem } from "@store/cart/cartThunks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
+import "./CartOverlay.css";
+
 const CartOverlay = ({ isOpen, toggleSidebar }) => {
     const cartItems = useSelector((state) => state.cart.cart);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -43,7 +45,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                     <img
                                         src={item?.product?.image}
                                         alt=""
-                                        className="ssd-image"
+                                        className="cartItem-image"
                                     />
                                 </div>
                                 <div className="col-md-10">
@@ -119,25 +121,26 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                 </span>
                                 ${details?.total}
                                 <div className="mt-2">
-                                    <button className="cart-overlaybutton">
-                                        <Link
-                                            to="/cart"
-                                            className="text-decoration-none cart-text-link"
-                                            onClick={toggleSidebar}
-                                        >
+                                    <Link
+                                        to="/cart"
+                                        className="text-decoration-none cart-text-link"
+                                        onClick={toggleSidebar}
+                                    >
+                                        <button className="cart-overlaybutton">
                                             Cart
-                                        </Link>
-                                    </button>
-                                    <button className="processed-button">
-                                        <Link
-                                            to="/checkout"
-                                            className="text-decoration-none processed-link"
-                                            onClick={toggleSidebar}
-                                        >
+                                        </button>
+                                    </Link>
+
+                                    <Link
+                                        to="/checkout"
+                                        className="text-decoration-none processed-link"
+                                        onClick={toggleSidebar}
+                                    >
+                                        <button className="processed-button">
                                             Proceed to checkout (
                                             {details?.total_items} item)
-                                        </Link>
-                                    </button>
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

@@ -1,5 +1,9 @@
+import React from "react";
+
 import { useEffect, useState, useRef } from "react";
-import { PaymentForm, CreditCard } from "react-square-web-payments-sdk";
+const PaymentForm = React.lazy(() => import("react-square-web-payments-sdk"));
+const CreditCard = React.lazy(() => import("react-square-web-payments-sdk"));
+
 import { sendTokenApi } from "@api/square";
 
 const Test = () => {

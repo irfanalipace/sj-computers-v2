@@ -10,7 +10,8 @@ import Button from "@common/Button/Button";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 
 import securityIllustration from "@images/security-illustration.png";
-import "react-datepicker/dist/react-datepicker.css";
+import "./Account.css";
+// import "react-datepicker/dist/react-datepicker.css";
 
 const Security = () => {
     const [password, setPassword] = useState("");

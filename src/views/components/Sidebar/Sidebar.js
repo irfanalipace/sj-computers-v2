@@ -46,82 +46,91 @@ export default function Sidebar({ openState, toggleSidebar }) {
     ];
 
     return (
-        <div
-            className="sideMenu-container"
-            style={{ left: openState ? "0" : "-350px" }}
-        >
-            <div className="sideMenu-wrapper">
-                <button
-                    onClick={() => toggleSidebar()}
-                    className="sideMenu-close-btn"
-                >
-                    <FontAwesomeIcon icon={faTimes} />
-                </button>
-                <div className="sideMenu-inner">
-                    <div className="sideMenu-header">
-                        <img
-                            className="me-3"
-                            src={
-                                user?.profileImage ? user.profileImage : userImg
-                            }
-                        />
-                        <span>
-                            Hello,
-                            {isAuthenticated ? (
-                                user?.name
-                            ) : (
-                                <Link to={"/login"}>Sign In</Link>
-                            )}
-                        </span>
-                    </div>
-                    <div className="sideMenu">
-                        <h4>Shop By Category</h4>
-                        <ul className="menu-list">
-                            {categories.map((category) => (
-                                <li key={category.id}>
-                                    <Link to={`/category/${category.id}`}>
-                                        {category.name}
-                                    </Link>
-                                    <FontAwesomeIcon icon={faAngleRight} />
-                                </li>
-                            ))}
-                        </ul>
-
-                        <h4>Help & Settings</h4>
-                        <ul className="menu-list">
-                            {isAuthenticated && (
-                                <li>
-                                    <Link to={`/account`}>Your Account</Link>
-                                </li>
-                            )}
-                            <li className="d-block">
-                                <FontAwesomeIcon
-                                    className="me-1"
-                                    icon={faGlobe}
-                                    stat
-                                />
-                                <Link>English</Link>
-                            </li>
-                            <li className="d-block">
-                                <US
-                                    title="United States"
-                                    className="country-flag"
-                                />
-                                <Link className="ms-1">United States</Link>
-                            </li>
-                            <li>
-                                <Link>Customer Services</Link>
-                            </li>
-                            <li>
+        <div>
+            {openState && <div className="sidebarOverlay"></div>}
+            <div
+                className="sideMenu-container"
+                style={{ left: openState ? "0" : "-350px" }}
+            >
+                <div className="sideMenu-wrapper">
+                    <button
+                        onClick={() => toggleSidebar()}
+                        className="sideMenu-close-btn"
+                    >
+                        <FontAwesomeIcon icon={faTimes} />
+                    </button>
+                    <div className="sideMenu-inner">
+                        <div className="sideMenu-header">
+                            <img
+                                className="me-3"
+                                src={
+                                    user?.profileImage
+                                        ? user.profileImage
+                                        : userImg
+                                }
+                            />
+                            <span>
+                                Hello,
                                 {isAuthenticated ? (
-                                    <Link onClick={() => dispatch(logout())}>
-                                        Logout
-                                    </Link>
+                                    user?.name
                                 ) : (
                                     <Link to={"/login"}>Sign In</Link>
                                 )}
-                            </li>
-                        </ul>
+                            </span>
+                        </div>
+                        <div className="sideMenu">
+                            <h4>Shop By Category</h4>
+                            <ul className="menu-list">
+                                {categories.map((category) => (
+                                    <li key={category.id}>
+                                        <Link to={`/category/${category.id}`}>
+                                            {category.name}
+                                        </Link>
+                                        <FontAwesomeIcon icon={faAngleRight} />
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <h4>Help & Settings</h4>
+                            <ul className="menu-list">
+                                {isAuthenticated && (
+                                    <li>
+                                        <Link to={`/account`}>
+                                            Your Account
+                                        </Link>
+                                    </li>
+                                )}
+                                <li className="d-block">
+                                    <FontAwesomeIcon
+                                        className="me-1"
+                                        icon={faGlobe}
+                                        stat
+                                    />
+                                    <Link>English</Link>
+                                </li>
+                                <li className="d-block">
+                                    <US
+                                        title="United States"
+                                        className="country-flag"
+                                    />
+                                    <Link className="ms-1">United States</Link>
+                                </li>
+                                <li>
+                                    <Link>Customer Services</Link>
+                                </li>
+                                <li>
+                                    {isAuthenticated ? (
+                                        <Link
+                                            onClick={() => dispatch(logout())}
+                                        >
+                                            Logout
+                                        </Link>
+                                    ) : (
+                                        <Link to={"/login"}>Sign In</Link>
+                                    )}
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
