@@ -220,24 +220,47 @@ const Header = () => {
                                     </div>
 
                                     <button
-                                        className="icon-cart me-2 icon-cart-effect-hover "
+                                        className="icon-cart me-2 icon-cart-effect-hover icon cart-image-boll-background-image"
                                         onClick={toggleSidebar}
                                     >
                                         <div className="product-boll hover-effect-sets">
-                                            <div
-                                                className="dropdown dot"
-                                                style={{
-                                                    textAlign: "center",
-                                                    color: "white",
-                                                }}
-                                            >
-                                                {cartDetails.total_items}
-                                                <img
-                                                    src={vectorcart}
-                                                    alt=""
-                                                    className="vector-cart"
-                                                />
-                                            </div>
+                                        <div
+  className="dropdown dot"
+  style={{
+    position: "relative",
+    display: "inline-block",
+  }}
+>
+  <img
+    src={vectorcart}
+    alt=""
+    className="vector-cart"
+    style={{
+      display: "block",
+    //   width: "50px", // adjust as needed
+    //   height: "50px", // adjust as needed
+    }}
+  />
+  <div
+    style={{
+      position: "absolute",
+      top: "0%",
+      left: "59%",
+      transform: "translate(-50%, -50%)",
+      textAlign: "center",
+      color: "white",
+      fontSize: "14px", // adjust as needed
+      fontWeight: "bold",
+      borderRadius:'50%',
+      backgroundColor: '#ee9b38',
+      width:'14px',
+      display:'inline-block'
+    }}
+  >
+    {cartDetails.total_items}
+  </div>
+</div>
+
                                             <span className="cart-text">
                                                 Cart
                                             </span>
