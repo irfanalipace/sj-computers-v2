@@ -9,10 +9,10 @@ const LoginCart = () => {
     };
     const [isPaymentFrameVisible, setIsPaymentFrameVisible] = useState(false);
     return (
-        <div className="dropdown-payment">
+        <div className="dropdown-payment hover-effect-sets">
             <button
                 onClick={handleButtonClick}
-                className=""
+                className="hover-effect-sets"
             >
                 Login <br></br>Register
             </button>

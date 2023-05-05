@@ -24,8 +24,8 @@ function Search() {
       <DropdownToggle caret className="all-button">
         {selectedItem}
       </DropdownToggle>
-      <DropdownMenu>
-        <DropdownItem onClick={handleItemClick}>Automotive Accessories</DropdownItem>
+      <DropdownMenu className="ul-liste-items-all-buttons">
+        <DropdownItem onClick={handleItemClick} >Automotive Accessories</DropdownItem>
         <DropdownItem onClick={handleItemClick}>Cell Phone Accessories</DropdownItem>
       </DropdownMenu>
     </Dropdown>

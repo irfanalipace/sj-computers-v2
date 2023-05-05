@@ -9,14 +9,19 @@
 .hover-effect-sets{
       
     border: 1px solid transparent;
-    padding: 1px;
+    padding: 3px;
 }.hover-effect-sets:hover{
       
     border-color: white;
     cursor: pointer;
 }
 
-
+.search-button-header-icon {
+    height: 23px;
+}
+.search-input-type{
+    height: 62px;
+}
 
 .hover-effect-sets-login-cart{
      
@@ -64,15 +69,12 @@
     font-size: 15px;
     line-height: 18px;
    
-    border: 1px solid transparent;
-    padding: 12px;
+  
   
     
  
-}.eng-button:hover {
-    border-color: white;
-    cursor: pointer;
 }
+
 .input-form-control {
     height: 60px;
 }
@@ -107,7 +109,7 @@
 }
 
 .all-button {
-    color: #b8b8b9;
+    color: #737373;
     /* position: absolute; */
     width: 60px;
     height: 63px;
@@ -116,12 +118,31 @@
     border-radius: 5px 0px 0px 5px;
 }
 
+/* .ul-liste-items-all-buttons{
 
+}
+.ul-liste-items-all-buttons:hover{
+    background-color: green;
+    color: white;
+  }
+  .ul-liste-items-all-buttons:active {
+    background-color: green;
+    color: white;
+  } */
 
+/* .ul-liste-items-all-buttons:nth-child(odd):hover {
+  background-color: lightgreen;
+  color: white;
+} */
 
 .all-button:hover {
  
     color: #737373;
+ 
+}
+.all-button:active {
+ 
+    color: #737373 !important;
  
 }
   
@@ -194,6 +215,12 @@
 .nav-right {
     display: flex;
     width: 25%;
+}
+@media screen and (max-width:1350px) {
+    .nav-right {
+        display: flex;
+        width: 35%;
+    }
 }
 
 .nav-right > div {
