@@ -15,6 +15,14 @@
     cursor: pointer;
 }
 
+.hover-effect-sets-boll {
+    border: 1px solid transparent;
+    padding: 3px;
+}
+.hover-effect-sets-boll:hover {
+    border-color: white;
+    cursor: pointer;
+}
 .search-button-header-icon {
     height: 23px;
 }

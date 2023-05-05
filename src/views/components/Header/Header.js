@@ -211,39 +211,42 @@ const Header = () => {
                                             </a>
                                         </div>
                                     </div>
-
-                                    <button
-                                        className="icon-cart me-2 icon-cart-effect-hover icon cart-image-boll-background-image"
-                                        onClick={toggleSidebar}
-                                    >
-                                        <div className="product-boll hover-effect-sets">
-                                            <div
-                                                className="dropdown dot"
-                                                style={{
-                                                    position: "relative",
-                                                    display: "inline-block",
-                                                }}
-                                            >
-                                                <img
-                                                    src={vectorcart}
-                                                    alt=""
-                                                    className="vector-cart"
+                                    <div className="hover-effect-sets">
+                                        <button
+                                            className="icon-cart me-2 icon-cart-effect-hover icon cart-image-boll-background-image"
+                                            onClick={toggleSidebar}
+                                        >
+                                            <div className="product-boll ">
+                                                <div
+                                                    className="dropdown dot "
                                                     style={{
-                                                        display: "block",
-                                                        //   width: "50px", // adjust as needed
-                                                        //   height: "50px", // adjust as needed
+                                                        position: "relative",
+                                                        display: "inline-block",
                                                     }}
-                                                />
-                                                <div className="total-items">
-                                                    {cartDetails.total_items}
+                                                >
+                                                    <img
+                                                        src={vectorcart}
+                                                        alt=""
+                                                        className="vector-cart"
+                                                        style={{
+                                                            display: "block",
+                                                            //   width: "50px", // adjust as needed
+                                                            //   height: "50px", // adjust as needed
+                                                        }}
+                                                    />
+                                                    <div className="total-items">
+                                                        {
+                                                            cartDetails.total_items
+                                                        }
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <span className="cart-text">
-                                                Cart
-                                            </span>
-                                        </div>
-                                    </button>
+                                                <span className="cart-text">
+                                                    Cart
+                                                </span>
+                                            </div>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </header>
