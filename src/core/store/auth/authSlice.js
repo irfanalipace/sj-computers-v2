@@ -42,12 +42,13 @@ const authSlice = createSlice({
         },
         VERIFY_EMAIL: (state) => {
             state.isLoading = false;
-            state.currentPage = state.currentPage + 1;
+            state.currentPage = parseInt(state.currentPage) + 1;
             state.apiError = null;
         },
         VERIFY_OTP: (state, action) => {
             state.isAuthenticated = true;
             state.user = { ...action.payload };
+            state.user.profile_pic = action.payload.profile_pic;
             state.isLoading = false;
             state.currentPage = 1;
             state.apiError = null;
@@ -55,6 +56,9 @@ const authSlice = createSlice({
         UPDATE_PROFILE: (state, action) => {
             state.user = { ...action.payload };
             state.isLoading = false;
+        },
+        RESET_PAGE: (state) => {
+            state.currentPage = 1;
         },
         API_ERROR: (state, action) => {
             state.apiError = { ...action.payload };
@@ -75,6 +79,7 @@ export const {
     VERIFY_EMAIL,
     VERIFY_OTP,
     UPDATE_PROFILE,
+    RESET_PAGE,
     API_ERROR,
     CLEAR_API_ERRORS,
 } = authSlice.actions;

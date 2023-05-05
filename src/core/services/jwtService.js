@@ -57,7 +57,7 @@ export const deleteUser = () => {
 };
 
 export const getUser = () => {
-    const user = {
+    return {
         name: window.localStorage.getItem(USER_NAME),
         email: window.localStorage.getItem(USER_EMAIL),
         profile_pic: window.localStorage.getItem(USER_IMAGE),

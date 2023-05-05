@@ -27,6 +27,8 @@ import {
     updateItemLocalProperty,
 } from "@utils/cartHelpers";
 
+import { toast } from "react-toastify";
+
 export const addToCart = (data) => {
     return async (dispatch) => {
         try {
@@ -41,6 +43,7 @@ export const addToCart = (data) => {
                 type: ADD_TO_CART,
                 payload: data,
             });
+            toast.success("Item Added In Cart");
             addItemToLocalCart(data);
         } catch (error) {
             console.log("Something went wrong in carts", error);
@@ -159,6 +162,7 @@ export const addToLocalCart = (data) => {
             type: ADD_TO_CART,
             payload: data,
         });
+        // toast.success("Item Added In Cart");
     };
 };
 

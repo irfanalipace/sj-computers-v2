@@ -10,6 +10,7 @@ import Button from "@common/Button/Button";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 
 import userDefault from "@images/common/user-default-avatar.png";
+import "./Account.css";
 // import "react-datepicker/dist/react-datepicker.css";
 
 const Profile = () => {

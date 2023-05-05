@@ -71,7 +71,7 @@ Route::post('store-local-storage-items', [CartController::class, 'storelocalStor
 
 Route::post('delete-item', [CartController::class, 'delete'])->name('deleteItem');
 
-Route::get('get-details', [CartController::class, 'details'])->name('getItems');
+Route::get('get-details', [CartController::class, 'details'])->name('getItemDetail');
 
 Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clearCart');
 

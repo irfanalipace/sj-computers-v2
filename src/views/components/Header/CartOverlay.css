@@ -1,0 +1,67 @@
+.sidebar-cart .cartItem-image {
+    max-width: 100%;
+    margin-left: 10px;
+}
+.sidebar-cart .item-details {
+    /* position: absolute; */
+    width: 631px;
+    height: 38px;
+    left: 323px;
+    top: 223px;
+
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #000000;
+}
+
+.sidebar-cart .item-list {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+    margin-left: -29px;
+    color: #333333;
+    list-style: none;
+}
+.sidebar-cart .item-capacity {
+    font-weight: bold;
+}
+.sidebar-cart .item-stock {
+    color: #318243;
+}
+
+.sidebar-cart .button-link {
+    /* height: 30px; */
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    color: #318243;
+    border: none;
+    background: white;
+    margin-right: 9px;
+    border-left: 1px solid #318243;
+    line-height: 0;
+}
+
+.sidebar-cart .price-item {
+    text-align: end;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+}
+
+@media screen and (max-width: 600px) {
+    .sidebar-cart .item-details {
+        font-size: 11px;
+    }
+}

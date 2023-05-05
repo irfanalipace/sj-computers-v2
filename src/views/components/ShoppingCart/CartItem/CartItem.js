@@ -63,7 +63,7 @@ export const CartItem = memo(({ cartData }) => {
                     <img
                         src={cartData?.product?.image}
                         alt=""
-                        className="ssd-image"
+                        className="cartItem-image"
                     />
                 </div>
                 <div className="col-md-10">
