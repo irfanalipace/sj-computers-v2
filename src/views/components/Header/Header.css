@@ -6,12 +6,11 @@
     max-width: 100%;
 }
 
-.hover-effect-sets{
-      
+.hover-effect-sets {
     border: 1px solid transparent;
     padding: 3px;
-}.hover-effect-sets:hover{
-      
+}
+.hover-effect-sets:hover {
     border-color: white;
     cursor: pointer;
 }
@@ -19,16 +18,15 @@
 .search-button-header-icon {
     height: 23px;
 }
-.search-input-type{
+.search-input-type {
     height: 62px;
 }
 
-.hover-effect-sets-login-cart{
-     
+.hover-effect-sets-login-cart {
     border: 1px solid transparent;
     padding: 8px;
-}.hover-effect-sets-login-cart:hover{
-     
+}
+.hover-effect-sets-login-cart:hover {
     border-color: white;
     cursor: pointer;
 }
@@ -72,9 +70,8 @@
 .input-form-control {
     height: 60px;
 }
-.vector-cart{
+.vector-cart {
     vertical-align: none !important;
-   
 }
 /* 
 .ellipse{
@@ -132,16 +129,12 @@
 } */
 
 .all-button:hover {
- 
     color: #737373;
- 
 }
 .all-button:active {
- 
     color: #737373 !important;
- 
 }
-  
+
 .search-logo {
     height: 62px;
     border-top-left-radius: 0;
@@ -163,6 +156,25 @@
 .dropdown {
     position: relative;
     display: inline-block;
+}
+.dropdown.dot .vector-cart {
+    width: 29px;
+    height: 26px;
+}
+.dropdown.dot > .total-items {
+    position: absolute;
+    top: -13px;
+    left: 7px;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50%;
+    background-color: rgb(238, 155, 56);
+    width: 18px;
+    display: inline-block;
+    height: 18px;
+    line-height: 1.3;
 }
 
 .dropdown-payment iframe {
@@ -193,7 +205,6 @@
     line-height: 17px;
     color: #ffffff;
     text-align: left;
-    
 }
 
 .ul-menu {
@@ -202,13 +213,14 @@
 }
 .cart-text {
     color: white !important;
+    font-weight: 700;
+    font-size: 16px;
 }
 
 .nav-right {
     display: flex;
     width: 25%;
 }
-
 
 .nav-right > div {
     display: flex;
@@ -433,19 +445,19 @@
     font-size: 14px;
     line-height: 17px;
 }
-@media screen and (max-width:1500px) {
-    .product-boll{
-    width: 69px;
+@media screen and (max-width: 1500px) {
+    .product-boll {
+        width: 69px;
     }
 }
-@media screen and (max-width:1350px) {
+@media screen and (max-width: 1350px) {
     .nav-right {
         display: flex;
         width: 35%;
     }
 }
-@media screen and (max-width:1200px) {
-    .cart-text{
-    font-size: 12px;
+@media screen and (max-width: 1200px) {
+    .cart-text {
+        font-size: 12px;
     }
 }
