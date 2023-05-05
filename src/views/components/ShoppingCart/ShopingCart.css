@@ -19,7 +19,7 @@
     color: #000000;
 }
 
-.ssd-image {
+.cartItem-image {
     max-width: 100%;
     margin-left: 10px;
 }
@@ -178,8 +178,8 @@ head:nth-child(2) {
     padding: 10px;
     margin-bottom: 10px;
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width: 600px) {
     .item-details {
         font-size: 11px;
-     }
+    }
 }

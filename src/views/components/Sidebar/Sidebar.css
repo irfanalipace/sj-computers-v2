@@ -4,7 +4,7 @@
     width: 350px;
     position: fixed;
     transition: all 0.35s ease-out;
-    z-index: 2;
+    z-index: 4;
 }
 
 .sideMenu-wrapper {
@@ -20,6 +20,16 @@
     font-size: 30px;
     border: 0;
     background-color: transparent;
+}
+
+.sidebarOverlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #0000005a;
+    z-index: 3;
 }
 
 .sideMenu-inner {

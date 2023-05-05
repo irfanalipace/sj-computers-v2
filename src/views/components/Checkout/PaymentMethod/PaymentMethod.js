@@ -25,7 +25,7 @@ export default function PaymentMethod({ setPayment }) {
 
     const clickHandler = () => {
         dispatch(
-            placeOrder({ paymentMethod }, (link) => window.open(link, "_blank"))
+            placeOrder({ paymentMethod }, (link) => location.replace(link))
         );
     };
 

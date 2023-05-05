@@ -18,8 +18,12 @@ const MobileSearch = () => {
         value={searchValue}
         onChange={handleInputChange}
       />
-      {/* <Button>Search</Button> */}
+
+    <span className="input-group-text red lighten-3 search-icon-on-mobile-screen" id="basic-text1"><i className="fas fa-search text-grey"
+        aria-hidden="true"></i></span>
+  
     </Container>
+    
     </div>
    
   );

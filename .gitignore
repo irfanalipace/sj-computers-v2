@@ -3,6 +3,7 @@
 /public/storage
 /public/js
 /storage/*.key
+/storage/framework/cache/*
 /vendor
 .env
 .env.backup
@@ -15,4 +16,7 @@ yarn-error.log
 /.idea
 /.vscode
 
-/storage/framework
+storage/app/*
+storage/logs/*
+storage/framework/*
+

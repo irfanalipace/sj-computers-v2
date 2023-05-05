@@ -1,14 +1,18 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { RESET_PAGE } from "@store/auth/authSlice";
 import EmailForm from "@components/Auth/EmailFormWrapper";
 import PasswordForm from "@components/Auth/PasswordForm";
 import VerifyOTP from "@components/Auth/VerifyOTP";
 import Header from "@components/Auth/Header";
 import Footer from "@components/Auth/Footer";
+import "@pages/Auth/auth.css";
 
 const LoginForm = () => {
     const currentPage = useSelector((state) => state.auth.currentPage);
+    const dispatch = useDispatch();
 
     const CurrentForm = () => {
         return (
@@ -19,6 +23,12 @@ const LoginForm = () => {
             </div>
         );
     };
+
+    useEffect(() => {
+        return () => {
+            dispatch(RESET_PAGE());
+        };
+    }, []);
     return (
         <div className="login-container-div">
             <div className="container form-container">

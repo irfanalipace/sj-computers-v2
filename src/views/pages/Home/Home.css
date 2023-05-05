@@ -1,5 +1,11 @@
+.homepage {
+    width: 100%;
+    height: 100%;
+}
+
 .banner-category-section {
     position: relative;
+    min-height: 490px;
 }
 .banner-wrapper {
     /* position: relative; */
