@@ -11,11 +11,7 @@ import {
     setCartDetails,
     clearCart,
 } from "@store/cart/cartThunks";
-import {
-    getCartItems,
-    getCartDetails,
-    deleteNotLocalCartItem,
-} from "@utils/cartHelpers";
+import { getCartItems, getCartDetails } from "@utils/cartHelpers";
 
 export const useInitDataFetching = () => {
     const dispatch = useDispatch();

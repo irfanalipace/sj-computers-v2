@@ -38,7 +38,7 @@ function OrderSummary({ handleClick, activeAccordion, paymentMethod }) {
             const placeOrderFunc = () => {
                 dispatch(
                     placeOrder({ paymentMethod }, (link) =>
-                        window.open(link, "_blank")
+                        location.replace(link)
                     )
                 );
             };

@@ -25,6 +25,10 @@ const productSlice = createSlice({
         },
         CLEAR_PRODUCTS: (state) => {
             state.products = [];
+            state.currentPage = 1;
+        },
+        RESET_PAGE: (state) => {
+            state.currentPage = 1;
         },
         API_ERROR: (state, action) => {
             state.apiError = { ...action.payload };
@@ -37,6 +41,7 @@ export const {
     CLEAR_LOADING,
     FETCH_PRODUCTS,
     CLEAR_PRODUCTS,
+    RESET_PAGE,
     API_ERROR,
 } = productSlice.actions;
 export default productSlice.reducer;

@@ -50,7 +50,6 @@ const VerifyOTP = () => {
             1000
         );
         setEmail(getUserEmail());
-        // ApiService.setHeader("Authorization", "Bearer " + accessToken);
         setMounted(true);
         return () => {
             clearInterval(interval);
@@ -102,8 +101,13 @@ const VerifyOTP = () => {
             onSubmit={handleSubmit}
         >
             <h3 className="login-h3-verify-form">Verification required</h3>
-         <span className="email-text-verify-form">   One Time Password (OTP) sent to {email}<span  className="email-text-verify-form">Please enter it
-            below.</span> </span>
+            <span className="email-text-verify-form">
+                {" "}
+                One Time Password (OTP) sent to {email}
+                <span className="email-text-verify-form">
+                    Please enter it below.
+                </span>{" "}
+            </span>
             <br></br>
 
             <div className="mb-3">
@@ -141,6 +145,7 @@ const VerifyOTP = () => {
                     <p className="text-muted small d-flex justify-content-center">
                         <button
                             onClick={resendOTP}
+                            type={"button"}
                             disabled={!isTimerFinished || isLoading || loading}
                             className="bg-white border-0 text-primary resend-otp-btn"
                         >

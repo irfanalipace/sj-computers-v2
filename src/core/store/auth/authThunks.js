@@ -30,10 +30,9 @@ import {
     saveUserName,
     saveUserImage,
     saveUserPassword,
+    saveUser,
     saveTempToken,
     getTempToken,
-    getUserName,
-    getUserEmail,
     getUser,
     destroyTempKeys,
 } from "@services/jwtService";
@@ -47,7 +46,9 @@ export const login = (credentials) => {
             const response = await loginApi(credentials);
             let token = response.data.data.access_token;
             let name = response.data.data.user;
+            let profile_pic = response.data.data.profile_pic;
             saveUserName(name);
+            saveUserImage(profile_pic);
             saveTempToken(token); // saving token temporarily to only allow user to call the login api
             saveUserPassword(credentials.password); // saving password temporarily to only allow user to re login to resend the otp
             dispatch({
@@ -111,9 +112,9 @@ export const verifyOtp = (credentials) => {
             await verifyOtpApi(credentials);
             let temp_token = getTempToken();
             let user = getUser();
+            dispatch({ type: VERIFY_OTP, payload: { ...user } });
             destroyTempKeys(); // destroy user password and temporary token after login success
             saveToken(temp_token); // stores temporary token in right key to be used later for calling protected apis
-            dispatch({ type: VERIFY_OTP, payload: user });
         } catch (error) {
             console.log("Something went wrong in login", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
@@ -152,23 +153,20 @@ export const forgetPassword = (email, cb) => {
 
 export const alreadyLoggedIn = (token) => {
     return async (dispatch) => {
-        let user = {
-            name: getUserName(),
-            email: getUserEmail(),
-        };
+        let user = getUser();
         ApiService.setHeader("Authorization", "Bearer " + token);
         dispatch(ALREADY_LOGGED_IN(user));
     };
 };
 
 export const updateProfile = (formData) => {
-    const name = formData.get("name");
-    const profile_pic = formData.get("profile_pic");
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             let response = await updateProfileApi(formData);
             dispatch({ type: UPDATE_PROFILE, payload: response.data.data });
+            saveUser(response.data.data);
+            toast.success("Profile Updated Successfully");
         } catch (error) {
             console.log("Something went wrong in updateProfile", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

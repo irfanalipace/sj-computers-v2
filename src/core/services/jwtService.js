@@ -45,9 +45,9 @@ export const getUserName = () => window.localStorage.getItem(USER_NAME);
 export const getUserEmail = () => window.localStorage.getItem(USER_EMAIL);
 
 export const saveUser = (user) => {
-    window.localStorage.setItem(USER_EMAIL, user.userEmail);
-    window.localStorage.setItem(USER_IMAGE, user.userImage);
-    window.localStorage.setItem(USER_NAME, user.userName);
+    window.localStorage.setItem(USER_EMAIL, user.email);
+    window.localStorage.setItem(USER_IMAGE, user.profile_pic);
+    window.localStorage.setItem(USER_NAME, user.name);
 };
 
 export const deleteUser = () => {
@@ -57,7 +57,7 @@ export const deleteUser = () => {
 };
 
 export const getUser = () => {
-    const user = {
+    return {
         name: window.localStorage.getItem(USER_NAME),
         email: window.localStorage.getItem(USER_EMAIL),
         profile_pic: window.localStorage.getItem(USER_IMAGE),
