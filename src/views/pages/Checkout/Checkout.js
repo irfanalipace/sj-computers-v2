@@ -65,18 +65,19 @@ export default function Checkout() {
                                 </div>
                                 <div className="items-number">
                                     <h3>
-                                        Checkout (
-                                        {checkoutDetails.total_quantity} items)
+                                        Checkout ({checkoutDetails.total_items}{" "}
+                                        items)
                                     </h3>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="checkout-page-inner">
-                        {checkoutDetails.total_quantity > 0 ? (
+                        {checkoutDetails.total_items > 0 ? (
                             <div className="row mx-o">
-                                <div className="col-md-9 col-6">
+                                <div className="col-md-9 col-12">
                                     <Accordion
+                                        className="shipping-details"
                                         id={1}
                                         title="Shipping Details"
                                         summary={<ShippingSummary />}
@@ -104,7 +105,7 @@ export default function Checkout() {
                                         />
                                     </Accordion>
                                 </div>
-                                <div className="col-lg-3 col-6">
+                                <div className="col-md-3 col-12">
                                     <OrderSummary
                                         handleClick={handleClick}
                                         activeAccordion={currentAccordionId}

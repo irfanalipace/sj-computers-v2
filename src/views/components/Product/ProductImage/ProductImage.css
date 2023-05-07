@@ -45,3 +45,17 @@
     object-fit: contain;
     margin-right: 20px;
 }
+
+@media screen and (max-width:800px) {
+    .image-screen{
+        width: 30%;
+        padding: 11px;
+    }
+    
+}
+@media screen and (max-width:770px) {
+.image-container {
+    justify-content: center;
+   
+}
+}

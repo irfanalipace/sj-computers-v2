@@ -26,15 +26,16 @@ function MobileHeader() {
             </li>
             <li>
               <Link to="/cart">
-              <i class="fa fa-cart-plus" aria-hidden="true"></i>
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
 
               </Link>
             </li>
             <li>
-              <Link to="/account"><i class="fa fa-align-justify" aria-hidden="true"></i></Link>
+              <Link to="/account"><i class="fa fa-bars" aria-hidden="true"></i></Link>
             </li>
           </ul>
         </div>
+        
       </div>
       
     </header>

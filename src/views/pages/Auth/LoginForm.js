@@ -1,26 +1,36 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { RESET_PAGE } from "@store/auth/authSlice";
 import EmailForm from "@components/Auth/EmailFormWrapper";
 import PasswordForm from "@components/Auth/PasswordForm";
 import VerifyOTP from "@components/Auth/VerifyOTP";
 import Header from "@components/Auth/Header";
 import Footer from "@components/Auth/Footer";
+import "@pages/Auth/auth.css";
 
 const LoginForm = () => {
     const currentPage = useSelector((state) => state.auth.currentPage);
+    const dispatch = useDispatch();
 
     const CurrentForm = () => {
         return (
             <div>
-                {currentPage === 1 && <EmailForm form={"login"} />}
-                {currentPage === 2 && <PasswordForm />}
-                {currentPage === 3 && <VerifyOTP />}
+                {currentPage === 2 && <EmailForm form={"login"} />}
+                {currentPage === 13 && <PasswordForm />}
+                {currentPage === 1 && <VerifyOTP />}
             </div>
         );
     };
+
+    useEffect(() => {
+        return () => {
+            dispatch(RESET_PAGE());
+        };
+    }, []);
     return (
-        <div>
+        <div className="login-container-div">
             <div className="container form-container">
                 <div className="row">
                     <div className="header-logo">

@@ -143,3 +143,39 @@ export function resetPasswordApi({
             });
     });
 }
+
+export function updateProfileApi(formData) {
+    ApiService.setHeader("content-type", "multipart/form-data");
+    return new Promise((resolve, reject) => {
+        ApiService.post("update-profile", formData)
+            .then((response) => {
+                console.log(
+                    "file: auth.module.js | updateProfileApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error", e);
+                reject(e);
+            });
+        ApiService.setHeader("content-type", "application/json");
+    });
+}
+
+export function updatePasswordApi(data) {
+    return new Promise((resolve, reject) => {
+        ApiService.post("change-password", data)
+            .then((response) => {
+                console.log(
+                    "file: auth.module.js | updateProfileApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error", e);
+                reject(e);
+            });
+    });
+}

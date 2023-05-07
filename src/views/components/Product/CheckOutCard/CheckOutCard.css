@@ -107,3 +107,53 @@
     text-align: center;
     margin-right: 21px;
 }
+.color-text-cart{
+    color: red;
+   
+}
+.mein-part{
+    justify-content: center;
+}
+
+.item-card-add-text-details{
+font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 22px;
+    color: #000000;
+}
+@media screen and (max-width:780px) {
+    .color-card-dev{
+        text-align: center;
+    }
+}
+@media screen and (max-width:780px) {
+.quantity-inner {
+    justify-content: center;
+  
+}
+}
+@media screen and (max-width:780px) {
+    
+
+.text-stock{
+text-align: center;
+}.color-text-cart {
+    text-align: center;
+    
+}
+}
+
+@media screen and (max-width:767px) {
+
+    .item-card-add-text-details {
+   
+        position: relative;
+        padding-top: 6px;
+        margin-top: -44px;
+        padding-left: 298px;
+        font-size: 10px;
+      
+    }
+}

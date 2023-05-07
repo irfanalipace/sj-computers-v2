@@ -16,19 +16,23 @@
         line-height: 17px;
         color: #FFFFFF;
 
+}.login-cart-button:focus {
+    outline: none;
+    border: 1px solid white;
+    color: white;
 }
 .product-section-cart {
     background: white;
     position: absolute;
     z-index: 2;
-    width: 400px;
+    width: 449px;
     height: 300px;
     /* background-color: #f7f7f7; */
     padding: 2px;
     border: 1px solid #ddd;
     margin-bottom: 20px;
     text-align: center;
-    left: -187px;
+    left: -249px;
 }
 .text-left {
     text-align: center !important;
@@ -43,7 +47,7 @@
     color: #333333;
     /* font-size: 16px; */
     list-style: none;
-    margin-left: -30px !important;
+    margin-left: -27px !important;
     text-align: initial;
 }
 .your-list {
@@ -59,7 +63,7 @@
     margin-top: 4px;
 }
 .your-account {
-    margin-left: -145px;
+    margin-left: -109px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -88,6 +92,8 @@
     font-size: 15px !important;
 }
 .dropdown-payment button {
+    /* width: 159px; */
+    /* height: 46px; */
     background-color: #00305e;
     font-family: 'Inter';
     font-style: normal;
@@ -96,7 +102,31 @@
     line-height: 17px;
     color: #FFFFFF;
     border: none;
+    width: 55%;
 }
 .dropdown-paymenr button:hover {
     background-color: #3e8e41;
+}
+.hr-list-head{
+    margin: 14px;
+    color: inherit;
+    border: 0;
+    border-top: 1px solid;
+    opacity: .25;
+}
+.my-list-hr{
+  
+        border-left: 1px solid #EEEEEE;
+    
+}
+.login-register-cart-button {
+    box-sizing: border-box;
+    /* position: absolute; */
+    width: 200px;
+    height: 40px;
+    left: 139px;
+    top: 22px;
+    background: radial-gradient(323.37% 27804.13% at 0% 51.52%, #52AC66 0%, rgba(82, 172, 102, 0) 100%);
+    border: 1px solid #6F6F6F;
+    border-radius: 3px;
 }

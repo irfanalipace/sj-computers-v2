@@ -9,10 +9,10 @@ const LoginCart = () => {
     };
     const [isPaymentFrameVisible, setIsPaymentFrameVisible] = useState(false);
     return (
-        <div className="dropdown-payment">
+        <div className="dropdown-payment hover-effect-sets">
             <button
                 onClick={handleButtonClick}
-                className="dropdown-toggle pb-0 login-cart-button"
+                className="hover-effect-sets"
             >
                 Login <br></br>Register
             </button>
@@ -23,14 +23,14 @@ const LoginCart = () => {
                             <Link to={"/login"}>
                                 <button
                                     type="submit"
-                                    className="btn btn-primary login-button"
+                                    className="login-register-cart-button"
                                 >
                                     Sigin In
                                 </button>
                             </Link>
                         </div>
                         <p className="forgot-password text-left new-customer">
-                            New Customer
+                            New Customer{' '}{' '}
                             <Link
                                 to="/register"
                                 className="text-decoration-none"
@@ -39,14 +39,14 @@ const LoginCart = () => {
                             </Link>
                         </p>
                     </div>
-                    <hr></hr>
+                    <hr className="hr-list-head"></hr>
                     <div className="row">
                         <div className="col-md-6">
                             <h4 className="your-list">Your List</h4>
                             <p className="create-list">Create List</p>
                         </div>
 
-                        <div className="col-md-6">
+                        <div className="col-md-6 my-list-hr">
                             <h4  className="your-account">
                                 Your Account
                             </h4>

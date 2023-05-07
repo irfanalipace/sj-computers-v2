@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import EmailForm from "@components/Auth/EmailFormWrapper";
 import Header from "@components/Auth/Header";
 import Footer from "@components/Auth/Footer";
+import "@pages/Auth/auth.css";
 
 const LoginForm = () => {
     return (

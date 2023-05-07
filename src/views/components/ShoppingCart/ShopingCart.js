@@ -54,9 +54,7 @@ export const ShopingCart = () => {
                                             <div className="text-body">
                                                 <span className="sub-title">
                                                     Subtotal(
-                                                    {
-                                                        cartDetails?.total_quantity
-                                                    }
+                                                    {cartDetails?.total_items}
                                                     items):
                                                     <strong className="price-items">
                                                         ${cartDetails?.total}

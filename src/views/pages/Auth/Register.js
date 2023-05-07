@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
+import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import Header from "@components/Auth/Header";
 import Footer from "@components/Auth/Footer";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
@@ -31,6 +32,7 @@ const Register = () => {
         registerFunction
     );
 
+    const dispatch = useDispatch();
     const apiError = useSelector((state) => state.auth.apiError);
     const [fieldErrors, setFieldErrors] = useState({});
     const [mounted, setMounted] = useState(false);
@@ -47,12 +49,12 @@ const Register = () => {
         setMounted(true);
         return () => {
             setMounted(false);
+            dispatch(CLEAR_API_ERRORS());
         };
     }, []);
 
     const isLoading = useSelector((state) => state.auth.isLoading);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     function registerFunction() {
         dispatch(register(values, () => navigate("/email-sent")));
@@ -123,11 +125,14 @@ const Register = () => {
                                 </p>
                             )}
                         </div>
-                        <p className="text-muted small">
+                        <p className="register-p-text">
                             {/* <img src={vectoricon} alt='' style={{width:'7px'}}/> */}
                             <FontAwesomeIcon
                                 icon={faInfo}
-                                style={{ color: "#52AC66" }}
+                                style={{
+                                    color: "#52AC66",
+                                    paddingRight: "6px",
+                                }}
                             />
                             Passwords must be at least 6 characters.
                         </p>
@@ -153,26 +158,27 @@ const Register = () => {
                         <div className="d-grid justify-content-center">
                             <button
                                 type="submit"
-                                className="btn btn-primary login-button"
+                                className=" set-register-button"
+                                onClick={handleSubmit}
                                 disabled={isLoading}
                             >
                                 {isLoading ? <Loader /> : "Verify Email"}
                             </button>
                         </div>
-                        <p className="text-muted small">
-                            By continuing, you agree to SJ Computer’s
+                        <p className="set-register-text">
+                            By continuing, you agree to SJ Computer’s{" "}
                             <a href="#" className="text-decoration-none">
                                 Conditions of Use
-                            </a>
-                            and
+                            </a>{" "}
+                            and{" "}
                             <a href="#" className="text-decoration-none">
                                 Privacy Notice
                             </a>
                             .
                         </p>
 
-                        <p className="forgot-password text-left">
-                            Already have an account?
+                        <p className="register-sign-link">
+                            Already have an account?{" "}
                             <Link to="/login" className="text-decoration-none">
                                 Sign in?
                             </Link>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import { useSelector } from "react-redux";
+import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { useFormValidation } from "@hooks/useFormValidation";
@@ -20,6 +21,7 @@ export default function EmailForm({ onFormSubmit, form }) {
         verifyEmail
     );
 
+    const dispatch = useDispatch();
     const apiError = useSelector((state) => state.auth.apiError);
     const [mounted, setMounted] = useState(false);
     const [fieldErrors, setFieldErrors] = useState({});
@@ -36,6 +38,7 @@ export default function EmailForm({ onFormSubmit, form }) {
         setMounted(true);
         return () => {
             setMounted(false);
+            dispatch(CLEAR_API_ERRORS());
         };
     }, []);
 
@@ -60,7 +63,7 @@ export default function EmailForm({ onFormSubmit, form }) {
                 <input
                     type="email"
                     name="email"
-                    className="form-control"
+                    className="form-control email-login-input"
                     placeholder="Enter your email"
                     value={values.email}
                     onChange={handleChange}
@@ -72,26 +75,26 @@ export default function EmailForm({ onFormSubmit, form }) {
             <div className="d-grid justify-content-center">
                 <button
                     type="submit"
-                    className="btn btn-primary login-button"
+                    className=" loginform-button"
                     disabled={isLoading}
                 >
                     {isLoading ? <Loader /> : "Continue"}
                 </button>
             </div>
-            <p className="text-muted small">
-                By continuing, you agree to SJ Computer’s
+            <p className=" small-text-paragrap">
+                By continuing, you agree to SJ Computer’s{" "}
                 <a href="#" className="text-decoration-none">
                     Conditions of Use
-                </a>
-                and
+                </a>{" "}
+                and{" "}
                 <a href="#" className="text-decoration-none">
-                    Privacy Notice
+                    Privacy Noticee
                 </a>
                 .
             </p>
 
             <div className="need-help">
-                <FontAwesomeIcon icon={faCaretRight} />
+                <FontAwesomeIcon icon={faCaretRight} className="need-help-singin-arrow"/>
                 <a href="#" className="text-decoration-none need-help">
                     Need Help?
                 </a>

@@ -19,7 +19,15 @@ span {
     font-family: "Inter", sans-serif;
 }
 
-.slide {
-    opacity: 1;
-    transform: translateX(0);
+.inner-body {
+    min-height: calc(100vh - 605px);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@media (max-width: 767px) {
+    .inner-body {
+        min-height: calc(100vh - 800px);
+    }
 }

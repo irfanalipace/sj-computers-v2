@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { objectToArray } from "@utils/helpers";
+import { objectToArray } from "@utils/cartHelpers";
 
 const initialState = {
     cart: [],
     details: {
-        total_quantity: 0,
+        total_items: 0,
         total: 0,
     },
     apiError: false,

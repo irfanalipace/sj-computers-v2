@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { verifyOtp } from "@store/auth/authThunks";
+import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import Loader from "@common/Spinner/Spinner";
 import { useFormValidation } from "@hooks/useFormValidation";
-import ApiService from "@services/apiService";
 import { loginApi } from "@api/auth";
 
 import "@pages/Auth/auth.css";
@@ -30,7 +30,7 @@ const VerifyOTP = () => {
     const [fieldErrors, setFieldErrors] = useState({});
     const [email, setEmail] = useState("");
     const [mounted, setMounted] = useState(false);
-    const [timer, setTimer] = useState(20);
+    const [timer, setTimer] = useState(30);
     const [isTimerFinished, setIsTimerFinished] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -50,11 +50,11 @@ const VerifyOTP = () => {
             1000
         );
         setEmail(getUserEmail());
-        // ApiService.setHeader("Authorization", "Bearer " + accessToken);
         setMounted(true);
         return () => {
             clearInterval(interval);
             setMounted(false);
+            dispatch(CLEAR_API_ERRORS());
         };
     }, []);
 
@@ -100,11 +100,16 @@ const VerifyOTP = () => {
             className={`auth-inner-body ${mounted && "slide"} `}
             onSubmit={handleSubmit}
         >
-            <h3 className="login-h3-verify">Verification required</h3>
-            One Time Password (OTP) sent to<br></br> {email}. Please enter it
-            below.
+            <h3 className="login-h3-verify-form">Verification required</h3>
+            <span className="email-text-verify-form">
+                {" "}
+                One Time Password (OTP) sent to {email}
+                <span className="email-text-verify-form">
+                    Please enter it below.
+                </span>{" "}
+            </span>
             <br></br>
-            <br></br>
+
             <div className="mb-3">
                 <label className="name-lable font-weight-bold">Enter OTP</label>
                 <input
@@ -124,8 +129,9 @@ const VerifyOTP = () => {
             <div className="d-grid justify-content-center">
                 <button
                     type="submit"
-                    className="btn btn-primary login-button verify-otp-btn"
+                    className="verify-button-data verify-otp-btn"
                     disabled={isLoading}
+                    onClick={handleSubmit}
                 >
                     {isLoading ? <Loader /> : "Verify OTP"}
                 </button>
@@ -139,6 +145,7 @@ const VerifyOTP = () => {
                     <p className="text-muted small d-flex justify-content-center">
                         <button
                             onClick={resendOTP}
+                            type={"button"}
                             disabled={!isTimerFinished || isLoading || loading}
                             className="bg-white border-0 text-primary resend-otp-btn"
                         >

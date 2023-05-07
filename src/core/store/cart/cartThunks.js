@@ -4,12 +4,14 @@ import {
     ADD_LIST_TO_CART,
     SET_CART_DETAILS,
     DELETE_ITEM,
+    CLEAR_CART,
     UPDATE_QUANTITY,
     UPDATING,
     API_ERROR,
 } from "@store/cart/cartSlice";
 import {
     addToCartApi,
+    addListToCartApi,
     fetchCartApi,
     deleteItemApi,
     updateQuantityApi,
@@ -23,7 +25,9 @@ import {
     compareLocalCartWithDBCart,
     objectToArray,
     updateItemLocalProperty,
-} from "@utils/helpers";
+} from "@utils/cartHelpers";
+
+import { toast } from "react-toastify";
 
 export const addToCart = (data) => {
     return async (dispatch) => {
@@ -39,6 +43,7 @@ export const addToCart = (data) => {
                 type: ADD_TO_CART,
                 payload: data,
             });
+            toast.success("Item Added In Cart");
             addItemToLocalCart(data);
         } catch (error) {
             console.log("Something went wrong in carts", error);
@@ -99,7 +104,6 @@ export const syncCartItems = () => {
                 type: ADD_LIST_TO_CART,
                 payload: { cartItems: localCartItems, cartDetails },
             });
-
             const [missingLocalItems, missingDBItems] =
                 compareLocalCartWithDBCart(items, localCartItems); // compares items in local storage and DB
             if (missingLocalItems?.length > 0) {
@@ -115,11 +119,12 @@ export const syncCartItems = () => {
 
                     delete cartItem.associatedModel;
 
-                    let cartTotalQuantity = cartDetails?.total_quantity + 1;
+                    let cartTotalQuantity = cartDetails?.total_items + 1;
                     let cartTotal =
-                        cartDetails?.total + item?.price * item.quantity;
-                    cartDetails.total_quantity = cartTotalQuantity;
-                    cartDetails.total = cartTotal;
+                        parseFloat(cartDetails?.total) +
+                        parseFloat(item?.price * item.quantity);
+                    cartDetails.total_items = cartTotalQuantity;
+                    cartDetails.total = cartTotal.toFixed(2);
                     addItemToLocalCart({ cartItem, cartDetails });
                     return cartItem;
                 });
@@ -132,16 +137,17 @@ export const syncCartItems = () => {
             if (missingDBItems?.length > 0) {
                 cartItems = missingDBItems?.map((item) => {
                     let cartItem = {
+                        id: item.id,
                         product_id: item.id,
                         qty: item?.quantity,
                     };
 
-                    updateItemLocalProperty(cartItem); //this function adds no local property on cart item is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
+                    updateItemLocalProperty(cartItem); //this function adds no local property on cart item in localStorage because now it is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
                     return cartItem;
                 });
             }
 
-            await addToCartApi({ cartItems });
+            await addListToCartApi({ cartItems });
         } catch (error) {
             console.log("Something went wrong in carts", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
@@ -156,6 +162,7 @@ export const addToLocalCart = (data) => {
             type: ADD_TO_CART,
             payload: data,
         });
+        // toast.success("Item Added In Cart");
     };
 };
 
@@ -184,6 +191,15 @@ export const setCartDetails = (data) => {
         dispatch({
             type: SET_CART_DETAILS,
             payload: data,
+        });
+    };
+};
+
+export const clearCart = () => {
+    return async (dispatch) => {
+        dispatch({
+            type: CLEAR_CART,
+            payload: {},
         });
     };
 };

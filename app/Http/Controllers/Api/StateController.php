@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\State;
+use App\Models\User;
 use App\Models\UserState;
 use Illuminate\Http\Request;
 
@@ -24,5 +25,17 @@ class StateController extends BaseController
 
         return $this->sendResponse();
 
+    }
+
+    public function getState(){
+        $userState = auth()->user()->userState;
+        if($userState){
+            $data = $userState->toArray();
+            $data['state'] = $userState->state->toArray();
+
+            return $this->sendResponse($data);
+        }
+
+        return $this->sendResponse($userState);
     }
 }

@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+
 import Sidebar from "@components/Sidebar/Sidebar";
 
 import "./TopBar.css";
@@ -14,7 +16,7 @@ export default function TopBar() {
             <header className="topBar">
                 <div className="menuBar">
                     <span
-                        className="navIcon"
+                        className="navIcon  hover-effect-sets"
                         onClick={() => {
                             toggleSidebar();
                         }}
@@ -35,45 +37,45 @@ export default function TopBar() {
                     </span>
 
                     <ul className="text-decoration-none ullist">
-                        <li className="listitem">
-                            <a
-                                href="default.asp"
-                                className="text-decoration-none text-color"
+                        <li className="listitem" >
+                            <Link
+                                to="/"
+                                className="text-decoration-none text-color hover-effect-sets-topbar"
                             >
                                 Today's Deal
-                            </a>
+                            </Link>
                         </li>
                         <li className="listitem">
-                            <a
-                                href="news.asp"
-                                className="text-decoration-none text-color"
+                            <Link
+                                to="/"
+                                className="text-decoration-none text-color hover-effect-sets-topbar"
                             >
                                 Laptop
-                            </a>
+                            </Link>
                         </li>
                         <li className="listitem">
-                            <a
-                                href="contact.asp"
-                                className="text-decoration-none text-color"
+                            <Link
+                                to="/"
+                                className="text-decoration-none text-color hover-effect-sets-topbar"
                             >
                                 Desktop
-                            </a>
+                            </Link>
                         </li>
                         <li className="listitem">
-                            <a
-                                href="about.asp"
-                                className="text-decoration-none text-color"
+                            <Link
+                                to="/"
+                                className="text-decoration-none text-color hover-effect-sets-topbar"
                             >
                                 Monitors
-                            </a>
+                            </Link>
                         </li>
                         <li className="listitem">
-                            <a
-                                href="about.asp"
-                                className="text-decoration-none text-color"
+                            <Link
+                                to="/"
+                                className="text-decoration-none text-color hover-effect-sets-topbar"
                             >
                                 BTO
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                     {/* <span style={{ textAlign: "end" }}>Get Top Deals Now</span> */}

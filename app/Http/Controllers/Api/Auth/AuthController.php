@@ -70,7 +70,7 @@ class AuthController extends BaseController
 
         $token = $user->createToken(User::AUTH_TOKEN)->accessToken;
 
-        return $this->sendResponse(['access_token' => $token , 'user' => $user->name, 'email' => $user->email], 'OTP sent to your email address.');
+        return $this->sendResponse(['access_token' => $token , 'user' => $user->name, 'email' => $user->email,'profile_pic' => $user->profile_pic], 'OTP sent to your email address.');
     }
 
     public function forgotPassword(ForgetPasswordRequest $request)
@@ -119,7 +119,7 @@ class AuthController extends BaseController
             return $this->sendError(['otp' => ['Invalid OTP Code,  Try again.']]);
         }
 
-        return $this->sendResponse([], 'OTP Verified Successfully.');
+        return $this->sendResponse(auth()->user()->only(['name','profile_pic','email']), 'OTP Verified Successfully.');
 
 
 //        $otpTried = Otp::where('user_id', $request->user_id);

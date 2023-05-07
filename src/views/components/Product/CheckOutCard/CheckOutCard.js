@@ -23,7 +23,7 @@ export const CheckOutCard = ({ product }) => {
 
     const cartClickHandler = () => {
         let productPrice = product.price * quantity;
-        let cartQuantity = details.total_quantity + 1;
+        let cartQuantity = details.total_items + 1;
         let cartTotal = parseFloat(details.total) + parseFloat(productPrice);
         const cartItem = {
             id: product.id,
@@ -33,8 +33,8 @@ export const CheckOutCard = ({ product }) => {
         };
 
         const cartDetails = {
-            total_quantity: cartQuantity,
-            total: parseFloat(cartTotal).toFixed(2),
+            total_items: cartQuantity,
+            total: cartTotal.toFixed(2),
         };
 
         if (isAuthenticated) dispatch(addToCart({ cartItem, cartDetails }));
@@ -50,7 +50,7 @@ export const CheckOutCard = ({ product }) => {
         <div>
             <div className="card-section-left">
                 <div className="row">
-                    <div className="col-md-12 color-text">
+                    <div className="col-md-12 color-text-cart">
                         <span className="$-color">$</span>
                         {product?.price?.toString().split(".")[0]}
                         <sup>{product?.price?.toString().split(".")[1]}</sup>
@@ -67,7 +67,7 @@ export const CheckOutCard = ({ product }) => {
                         </p>
                     </div>
                 </div>
-                <div>
+                <div className="color-card-dev">
                     <button className="color-card" onClick={handleShow}>
                         <img src={imges1} /> Deliver to
                         {currentState?.name
@@ -82,12 +82,13 @@ export const CheckOutCard = ({ product }) => {
                     />
                 )}
                 {cartItem?.length > 0 ? (
-                    <p>Item Added in Cart</p>
+                    <p className="item-card-add-text-details">Item Added in Cart</p>
                 ) : (
                     <>
-                        <span className="color-card">In Stock</span>
-                        <QuantityInput onChange={setQuantity} />
-
+                        <div className="text-stock">
+                            <span className="color-card">In Stock</span>
+                            <QuantityInput onChange={setQuantity} />
+                        </div>
                         <div className="button-cart-sell">
                             <Button
                                 className="button1 button-text-button"

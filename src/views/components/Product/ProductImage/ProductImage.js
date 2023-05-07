@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { toArray } from "@utils/helpers";
+import { toArray } from "@utils/cartHelpers";
 import "./ProductImage.css";
 
 const SelectedImage = ({ image }) => {

@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Auth;
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Validator;
@@ -127,4 +128,6 @@ class ProductController extends Controller
 
         return $this->sendResponse([], 'Product deleted successfully.');
     }
+
+
 }

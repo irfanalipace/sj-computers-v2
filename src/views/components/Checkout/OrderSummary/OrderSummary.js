@@ -38,7 +38,7 @@ function OrderSummary({ handleClick, activeAccordion, paymentMethod }) {
             const placeOrderFunc = () => {
                 dispatch(
                     placeOrder({ paymentMethod }, (link) =>
-                        window.open(link, "_blank")
+                        location.replace(link)
                     )
                 );
             };
@@ -68,7 +68,7 @@ function OrderSummary({ handleClick, activeAccordion, paymentMethod }) {
                     <ul>
                         <li>
                             <span>Items:</span>
-                            <span>({cartDetails?.total_quantity})</span>
+                            <span>({cartDetails?.total_items})</span>
                         </li>
                         <li>
                             <span>Price:</span>

@@ -19,7 +19,7 @@ const ProductDetails = ({ product }) => {
             <div className="">
                 <p className="item-title">{product?.name}</p>
             </div>
-            <div>
+            <div className="instock-detail">
                 {product?.quantity > 0 && (
                     <p className="most-demandind">In Stock</p>
                 )}
@@ -49,7 +49,7 @@ const ProductDetails = ({ product }) => {
                         </Link>
                     </div>
                     <span className="size-text">
-                        Size
+                      <span className="size-text-details">Size</span>  
                         <Link className="moniter-links border-0">
                             “lg 24 inch monitor”
                         </Link>
@@ -58,12 +58,14 @@ const ProductDetails = ({ product }) => {
             </div>
 
             <hr></hr>
-            <div className="row">
+          <div className="cart-details-text">
+          <div className="row">
                 <div className="col-md-12 color-text">
                     <span className="$-color">$</span>
                     {product?.price?.toString().split(".")[0]}
                     <sup>{product?.price?.toString().split(".")[1]}</sup>
                 </div>
+            </div>
             </div>
             <div className="content">
                 <div className="row">
@@ -75,11 +77,13 @@ const ProductDetails = ({ product }) => {
                     </div>
                 </div>
             </div>
+         
             <hr></hr>
 
             <p className="more-styles">More Styles:</p>
 
-            <div className="row">
+           <div className="text-box-details">
+           <div className="row">
                 <div className="button-detail-item">
                     <Link
                         to="#"
@@ -101,6 +105,7 @@ const ProductDetails = ({ product }) => {
                     </Link>
                 </div>
             </div>
+           </div>
 
             <hr></hr>
             <div className="col-md-12 list-style-margin">
@@ -128,7 +133,7 @@ const ProductDetails = ({ product }) => {
                 </ul>
             </div>
             <hr></hr>
-            <div className="col-md-12">
+            <div className="col-md-12 items-details-description">
                 <span className="items-text-style">Items Description</span>
                 <ul className="ui-list-items">{product?.description}</ul>
             </div>

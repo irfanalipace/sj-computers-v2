@@ -9,7 +9,8 @@ import LoginCart from "./LoginCart";
 import Search from "./Search";
 import MobileHeader from "./MobileHeader/MobileHeader";
 import MobileSearch from "./MobileSearch/MobileSearch";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import footerlogo from "@images/header-logo.png";
 import english from "@images/home/eng.png";
 import vectorcart from "@images/home/vector.png";
@@ -51,7 +52,7 @@ const Header = () => {
     };
     return (
         <>
-            {screenWidth <= 750 ? (
+            {screenWidth <= 950 ? (
                 <div>
                     <MobileHeader />
 
@@ -69,27 +70,31 @@ const Header = () => {
                                 <img
                                     src={footerlogo}
                                     alt=""
-                                    className="homepage-img"
+                                    className="homepage-img hover-effect-sets"
                                 />
                             </Link>
                             <div className="d-flex flex-row align-items-center main-nav">
-                                <div className="d-flex align-items-center justify-content-center flex-wrap header-position">
-                                    <Button
-                                        variant="primary"
-                                        onClick={handleShow}
-                                        style={{
-                                            background: "#00305E",
-                                            border: "#00305E",
-                                        }}
-                                    >
-                                        <span className="deliver-text">
-                                            Deliver to
-                                        </span>{" "}
-                                        <br></br>
-                                        {currentState?.name
-                                            ? currentState?.name
-                                            : "California"}
-                                    </Button>
+                                <div className="d-flex align-items-center justify-content-center flex-wrap header-position ">
+                                    <div className="hover-effect-sets">
+                                        <Button
+                                            className="dliver-set "
+                                            variant="primary"
+                                            onClick={handleShow}
+                                            style={{
+                                                background: "#00305E",
+                                                border: "#00305E",
+                                            }}
+                                        >
+                                            <span className="deliver-text ">
+                                                Deliver to{" "}
+                                            </span>
+                                            <br></br>
+
+                                            {currentState?.name
+                                                ? currentState?.name
+                                                : "Select Location"}
+                                        </Button>
+                                    </div>
                                 </div>
                                 {show && (
                                     <LocationModel
@@ -109,7 +114,7 @@ const Header = () => {
                                     />
                                     <input
                                         type="text"
-                                        className="form-control "
+                                        className="form-control search-input-type"
                                         name="x"
                                         id="search"
                                         placeholder="Search"
@@ -119,26 +124,33 @@ const Header = () => {
                                             type="button"
                                             className="btn btn-success search-logo"
                                         >
-                                            <i className="fas fa-search"></i>
+                                            <FontAwesomeIcon
+                                                icon={faSearch}
+                                                size="1x"
+                                                className="search-button-header-icon"
+                                            />
                                         </button>
                                     </span>
                                 </div>
+
                                 <div className="nav-right">
                                     <div className="dropdown">
-                                        <button
-                                            className="dropdown-toggle eng-button"
-                                            type="button"
-                                            id="dropdownMenuButton"
-                                            data-toggle="dropdown"
-                                            aria-haspopup="false"
-                                            aria-expanded="false"
-                                        >
-                                            <img
-                                                src={english}
-                                                alt="English Flag"
-                                            />{" "}
-                                            EN
-                                        </button>
+                                        <div className="hover-effect-sets ">
+                                            <button
+                                                className="dropdown-toggle eng-button"
+                                                type="button"
+                                                id="dropdownMenuButton"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="false"
+                                                aria-expanded="false"
+                                            >
+                                                <img
+                                                    src={english}
+                                                    alt="English Flag"
+                                                />{" "}
+                                                EN
+                                            </button>
+                                        </div>
                                         <div
                                             className="dropdown-menu"
                                             aria-labelledby="dropdownMenuButton"
@@ -158,7 +170,7 @@ const Header = () => {
                                         </div>
                                     </div>
 
-                                    <div className="dropdown-cart">
+                                    <div className="dropdown-cart ">
                                         {isAuthenticated ? (
                                             <div>
                                                 <p className="mb-0 text-white check-auth">
@@ -170,15 +182,17 @@ const Header = () => {
                                         )}
                                     </div>
                                     <div className="return-button ">
-                                        <button
-                                            className="order-button dropdown-toggle"
-                                            type="button"
-                                            data-toggle="dropdown"
-                                            aria-haspopup="true"
-                                            aria-expanded="false"
-                                        >
-                                            Return <br></br>& Order
-                                        </button>
+                                        <div className="hover-effect-sets">
+                                            <button
+                                                className="order-button dropdown-toggle "
+                                                type="button"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
+                                            >
+                                                Return <br></br>& Order
+                                            </button>
+                                        </div>
                                         <div
                                             className="dropdown-menu"
                                             aria-labelledby="dropdownMenuButton"
@@ -197,31 +211,42 @@ const Header = () => {
                                             </a>
                                         </div>
                                     </div>
+                                    <div className="hover-effect-sets">
+                                        <button
+                                            className="icon-cart me-2 icon-cart-effect-hover icon cart-image-boll-background-image"
+                                            onClick={toggleSidebar}
+                                        >
+                                            <div className="product-boll ">
+                                                <div
+                                                    className="dropdown dot "
+                                                    style={{
+                                                        position: "relative",
+                                                        display: "inline-block",
+                                                    }}
+                                                >
+                                                    <img
+                                                        src={vectorcart}
+                                                        alt=""
+                                                        className="vector-cart"
+                                                        style={{
+                                                            display: "block",
+                                                            //   width: "50px", // adjust as needed
+                                                            //   height: "50px", // adjust as needed
+                                                        }}
+                                                    />
+                                                    <div className="total-items">
+                                                        {
+                                                            cartDetails.total_items
+                                                        }
+                                                    </div>
+                                                </div>
 
-                                    <button
-                                        className="icon-cart me-2"
-                                        onClick={toggleSidebar}
-                                    >
-                                        <div className="product-boll">
-                                            <div
-                                                className="dropdown dot"
-                                                style={{
-                                                    textAlign: "center",
-                                                    color: "white",
-                                                }}
-                                            >
-                                                {cartDetails.total_quantity}
-                                                <img
-                                                    src={vectorcart}
-                                                    alt=""
-                                                    className="vector-cart"
-                                                />
+                                                <span className="cart-text">
+                                                    Cart
+                                                </span>
                                             </div>
-                                            <span className="cart-text">
-                                                Cart
-                                            </span>
-                                        </div>
-                                    </button>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </header>

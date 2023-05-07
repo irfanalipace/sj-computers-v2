@@ -20,13 +20,13 @@ export const CartItem = memo(({ cartData }) => {
     const dispatch = useDispatch();
 
     const deleteItemFunction = () => {
-        let cartQuantity = details?.total_quantity - 1;
+        let cartQuantity = details?.total_items - 1;
         let cartTotal =
             parseFloat(details?.total) - parseFloat(cartData?.price);
 
         const cartDetails = {
-            total_quantity: cartQuantity,
-            total: cartTotal,
+            total_items: cartQuantity,
+            total: parseFloat(cartTotal).toFixed(2),
         };
 
         isAuthenticated
@@ -40,8 +40,8 @@ export const CartItem = memo(({ cartData }) => {
         let price = cartData?.product?.price * difference;
         cartTotal = parseFloat(details?.total) + parseFloat(price);
         const cartDetails = {
-            total_quantity: details?.total_quantity,
-            total: parseFloat(cartTotal).toFixed(2),
+            total_items: details?.total_items,
+            total: cartTotal.toFixed(2),
         };
 
         let itemPrice = cartData?.product?.price * quantity;
@@ -63,7 +63,7 @@ export const CartItem = memo(({ cartData }) => {
                     <img
                         src={cartData?.product?.image}
                         alt=""
-                        className="ssd-image"
+                        className="cartItem-image"
                     />
                 </div>
                 <div className="col-md-10">

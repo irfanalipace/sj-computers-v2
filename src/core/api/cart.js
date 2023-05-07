@@ -17,6 +17,23 @@ export function addToCartApi(data) {
     });
 }
 
+export function addListToCartApi(cartItems) {
+    return new Promise((resolve, reject) => {
+        ApiService.post(`/store-local-storage-items`, cartItems)
+            .then((response) => {
+                console.log(
+                    "file: states.js | addListToCartApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error cart", e);
+                reject(e);
+            });
+    });
+}
+
 export function fetchCartApi() {
     return new Promise((resolve, reject) => {
         ApiService.get(`/get-items`)

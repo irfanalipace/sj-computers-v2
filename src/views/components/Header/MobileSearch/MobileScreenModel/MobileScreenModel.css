@@ -1,0 +1,126 @@
+.modal-mobile-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content-mobile-screen {
+    position: relative;
+    background-color: #fff;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    margin-bottom: -385px;
+    /* position: sticky; */
+    justify-content: center;
+    display: flex;
+}
+  
+.close-button-done {
+    color: white;
+    position: absolute;
+    top: -33px;
+    right: 41px;
+    background: none;
+    border: none;
+    color: #000;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+}
+  .box-button-text-mobile-screen{
+    color: white;
+  }
+.box-text-dilver-location{
+  font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #111111;
+}
+.box-text-dilver-location-text-p {
+    /* font-family: serif; */
+    /* font-family: 'Inter'; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    color: #333333;
+}
+.done-dilvery-button {
+    /* top: 104px; */
+    padding-left: 106px;
+    border: none;
+    width: 359px;
+    height: 36px;
+    /* left: 15px; */
+    /* top: 104px; */
+    background: #28A343;
+    border-radius: 5px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    max-width: 4;
+    /* text-align: center; */
+}
+.zip-code-text-mobile-screen{
+    color: black;
+}
+.padding-bottom-text-mobile-screen{
+    padding-bottom: 13px;
+}
+.mobile-zip-code-box-image {
+    background: white;
+    border: none;
+    /* width: 102px; */
+    /* height: 15px; */
+    /* left: 37px; */
+    /* top: 170px; */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    color: #004B94;
+}
+.mobile-zip-code-box-image-dilvery-box {
+    /* background-color: #004B94; */
+    border: none;
+    color: white;
+    background: #002549;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+.color-image-dilvery-box-mobile-screen{
+    background: white;
+}

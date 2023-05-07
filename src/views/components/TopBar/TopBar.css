@@ -21,7 +21,7 @@
 .navIcon {
     width: 55px;
     display: flex;
-    margin-right: 4rem;
+    margin-right: 3rem;
     margin-left: 1.5rem;
     cursor: pointer;
 }
@@ -41,8 +41,40 @@
     padding-right: 30px;
 }
 .text-color {
-    color: white;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #FFFFFF;
+ 
+    
 }
+a:hover,
+Link:hover {
+  color: inherit;
+  text-decoration: none;
+  
+}
+
 .small-text-size {
-    font-size: 21px;
+   
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 15px;
+        line-height: 18px;
+        color: #FFFFFF;
+        padding-top: 5p;
+        padding-top: 8px;
+    
+}
+
+.hover-effect-sets-topbar{
+      
+    border: 1px solid transparent;
+    padding: 10px;
+}.hover-effect-sets-topbar:hover{
+      
+    border-color: white;
 }

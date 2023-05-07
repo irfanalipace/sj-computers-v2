@@ -58,19 +58,24 @@ Route::get('brands', [BrandController::class, 'getList'])->name('brands');
 
 Route::get('products', [ProductController::class, 'getList'])->name('products');
 
-Route::get('product-detail', [ProductController::class, 'getProductDetail'])->name('product-detail');
+Route::get('product-detail', [ProductController::class, 'getProductDetail'])->name('productDetail');
 
 /*
 *Add to Cart
 */
 Route::get('get-items', [CartController::class, 'getItems'])->name('getItems');
+
 Route::post('add-to-cart', [CartController::class, 'addCart'])->name('addCart');
+
+Route::post('store-local-storage-items', [CartController::class, 'storelocalStorageItems'])->name('storelocalStorageItems');
+
 Route::post('delete-item', [CartController::class, 'delete'])->name('deleteItem');
-Route::get('get-details', [CartController::class, 'details'])->name('getItems');
+
+Route::get('get-details', [CartController::class, 'details'])->name('getItemDetail');
+
 Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clearCart');
 
 Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('addQtyCart');
-
 
 /*
 *Place Order
@@ -90,7 +95,7 @@ Route::middleware(['auth:api'])->group(function () {
     *update password as well
     */
     Route::post('update-profile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
-    Route::post('reset-password', [ProfileController::class, 'resetPassword'])->name('resetPassword');
+    Route::post('change-password', [ProfileController::class, 'resetPassword'])->name('changePassword');
 
     /*
     *Order shipping address
@@ -104,6 +109,7 @@ Route::middleware(['auth:api'])->group(function () {
      * update state api
      */
     Route::post('update-state', [StateController::class, 'updateState'])->name('update-state');
+    Route::get('user-state', [StateController::class, 'getState'])->name('getState');
 
 
     /*
