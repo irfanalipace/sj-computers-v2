@@ -9,74 +9,43 @@ const Contact = () => {
     return (
         <div>
             <div className="contact-header">
-                <nav className="navbar navbar-expand-lg nav-contact-background-color">
-                    <div className="container">
-                        <div
-                            className="collapse navbar-collapse justify-content-left"
-                            id="navbarNav"
-                        >
-                            <ul className="navbar-nav">
-                                <li className="nav-item">
-                                    <Link
-                                        className="nav-link text-aligin-contact-menu email-contact-hr-line link-no-hover " to="/"
-                                        href="contact"
-                                    >
-                                        Contact
-                                    </Link>
-                                </li>
-
-                                <li className="nav-item">
-                                    <Link
-                                        className="nav-link text-aligin-contact-menu link-no-hover"
-                                        href="home"
-                                    >
-                                        Home
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
-                        <button
-                            className="navbar-toggler"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav"
-                            aria-controls="navbarNav"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                        >
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <div
-                            className="collapse navbar-collapse justify-content-end"
-                            id="navbarNav"
-                        >
-                            <ul className="navbar-nav">
-                                <li className="nav-item">
-                                    <Link
-                                        className="nav-link text-aligin-contact-menu email-contact-hr-line link-no-hover"
-                                        href="mailto:your-email@example.com"
-                                    >
-                                        {" "}
-                                        <FontAwesomeIcon
-                                            icon={faEnvelope}
-                                        />{" "}
-                                        info@sjcomputer.com
-                                    </Link>
-                                </li>
-                                
-                                <li className="nav-item">
-                                    <Link
-                                        className="nav-link text-aligin-contact-menu link-no-hover"
-                                        href="tel:+1234567890"
-                                    >
-                                        <FontAwesomeIcon icon={faMobile} />{" "}
-                                        +92-12345678
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+          <div className="my-contact-menu">
+          <nav className="navbar navbar-expand-lg nav-contact-background-color">
+      <div className="container">
+        <div className="navbar-collapse">
+          <ul className="navbar-nav me-auto">
+            <li className="nav-item">
+                
+              <Link className="nav-link text-aligin-contact-menu link-no-hover" to="/home">
+               <span>Contact us</span> 
+              </Link>
+            </li>
+            <li className="nav-item">
+                
+                <Link className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line" to="/home">
+                  Home
+                </Link>
+              </li>
+          </ul>
+        </div>
+        <div className="navbar-collapse justify-content-end ">
+          <ul className="navbar-nav">
+          
+            <li className="nav-item">
+              <Link className="nav-link text-aligin-contact-menu link-no-hover" to="mailto:info@sjcomputer.com">
+                <FontAwesomeIcon icon={faEnvelope} />{' '} {' '} info@sjcomputer.com
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line" to="tel:+9212345678">
+                <FontAwesomeIcon icon={faMobile} /> {' '} +92-12345678
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+          </div>
                 <div className="home-text-paragraph-contact">
                     <div className="container">
                         <div className="row">

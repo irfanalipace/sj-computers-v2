@@ -13,8 +13,10 @@
 }
 
 .email-contact-hr-line {
-    border-right: 1px solid #ffffff;
-    transform: rotate(0deg);
+   
+      
+        border-left: 1px solid;
+    
 }
 .contact-text-home {
     font-family: "Inter";
@@ -162,3 +164,12 @@ padding: 46px;
 .link-no-hover a:focus {
     color: white !important;
   }
+
+  @media screen and (max-width:990px) {
+    
+  .my-contact-menu{
+    background: #318243;
+    display: flex;
+    justify-content: center;
+  }
+}
