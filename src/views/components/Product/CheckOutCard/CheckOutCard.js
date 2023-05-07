@@ -82,7 +82,7 @@ export const CheckOutCard = ({ product }) => {
                     />
                 )}
                 {cartItem?.length > 0 ? (
-                    <p>Item Added in Cart</p>
+                    <p className="item-card-add-text-details">Item Added in Cart</p>
                 ) : (
                     <>
                         <div className="text-stock">

@@ -53,3 +53,9 @@
     }
     
 }
+@media screen and (max-width:770px) {
+.image-container {
+    justify-content: center;
+   
+}
+}
