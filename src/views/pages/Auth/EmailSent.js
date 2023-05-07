@@ -22,7 +22,7 @@ const Emailsent = () => {
                         <Header />
                     </div>
 
-                    <form className={`auth-inner-body ${mounted && "slide"} `}>
+                    <form className={`auth-form ${mounted && "slide"} `}>
                         <div className="mb-3" style={{ textAlign: "center" }}>
                             <h3>Email Sent</h3>
                         </div>
