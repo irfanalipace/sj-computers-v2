@@ -69,14 +69,12 @@ const Register = () => {
                     </div>
 
                     <form
-                        className={`auth-inner-body ${mounted && "slide"} `}
+                        className={`auth-form ${mounted && "slide"} `}
                         onSubmit={handleSubmit}
                     >
                         <h3 className="login-h3">Create account</h3>
                         <div className="mb-3">
-                            <label className="name-lable font-weight-bold">
-                                Your name
-                            </label>
+                            <label className="name-label ">Your name</label>
                             <input
                                 type="text"
                                 name="name"
@@ -92,7 +90,7 @@ const Register = () => {
                             )}
                         </div>
                         <div className="mb-3">
-                            <label className="email-lable font-weight-bold">
+                            <label className="email-label ">
                                 Email or mobile phone number
                             </label>
                             <input
@@ -110,7 +108,7 @@ const Register = () => {
                             )}
                         </div>
                         <div className="mb-3">
-                            <label className="font-weight-bold">Password</label>
+                            <label className="">Password</label>
                             <input
                                 type="password"
                                 name="password"
@@ -137,9 +135,7 @@ const Register = () => {
                             Passwords must be at least 6 characters.
                         </p>
                         <div className="mb-3">
-                            <label className="font-weight-bold">
-                                Re-enter password
-                            </label>
+                            <label className="">Re-enter password</label>
                             <input
                                 type="password"
                                 name="confirmPassword"

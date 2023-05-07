@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
+import { RESET_PAGE } from "@store/auth/authSlice";
 import Loader from "@common/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
@@ -60,14 +61,23 @@ const PasswordForm = () => {
 
     return (
         <form
-            className={`auth-inner-body ${mounted && "slide"} `}
+            className={`auth-form ${mounted && "slide"} `}
             onSubmit={handleSubmit}
         >
             <h3 className="login-h3">Sign in</h3>
+            <div className="email-text-verify-form mt-2 mb-1">
+                {email}
+                {". "}
+                <button
+                    className="change-email-btn"
+                    onClick={() => dispatch(RESET_PAGE())}
+                    type="button"
+                >
+                    Change Email ?
+                </button>
+            </div>
             <div className="mb-3">
-                <label className="password-lable font-weight-bold">
-                    Enter your password
-                </label>
+                <label className="password-label ">Enter your password</label>
                 <input
                     type="password"
                     name="password"
@@ -75,6 +85,7 @@ const PasswordForm = () => {
                     placeholder="Enter your password"
                     value={values.password}
                     onChange={handleChange}
+                    autoFocus
                 />
                 <div className="d-flex justify-content-end">
                     <Link
@@ -100,19 +111,22 @@ const PasswordForm = () => {
                 </button>
             </div>
             <p className="tetxt-signin">
-                By continuing, you agree to SJ Computer’s{' '}
+                By continuing, you agree to SJ Computer’s{" "}
                 <a href="#" className="text-decoration-none">
                     Conditions of Use
-                </a>{' '}
-                and{' '}
+                </a>{" "}
+                and{" "}
                 <a href="#" className="text-decoration-none">
                     Privacy Notice
                 </a>
                 .
             </p>
 
-            <div >
-                <FontAwesomeIcon icon={faCaretRight} className="need-help-singin-arrow"/>
+            <div>
+                <FontAwesomeIcon
+                    icon={faCaretRight}
+                    className="need-help-singin-arrow"
+                />
                 <a href="#" className="text-decoration-none my-text-signin">
                     Need Help?
                 </a>

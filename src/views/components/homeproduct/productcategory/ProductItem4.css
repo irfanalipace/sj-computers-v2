@@ -1,12 +1,12 @@
 .items-name-text {
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    line-height: 15px;
+
     color: #000000;
-    text-decoration: none!important;
+    text-decoration: none !important;
 }
-.paragraph-cases{
+.paragraph-cases {
     font-size: 12px;
 }
