@@ -20,7 +20,7 @@ const Footer = () => {
             {!authRoutes.includes(location.pathname) && (
                 <div className="footer">
                     <div
-                        className="footer-copyright text-center py-3"
+                        className="footer-copyright text-center py-3 back-to-top-hover-effct"
                         style={{ backgroundColor: "#002549" }}
                     >
                         <h4 style={{ color: "wheat" }}>

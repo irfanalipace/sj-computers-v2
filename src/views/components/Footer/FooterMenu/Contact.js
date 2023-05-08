@@ -75,7 +75,7 @@ const Contact = () => {
                             <img src={contact} className="img-fluid-contact" alt="Image" />
                         </div>
                         <div class="col-lg-6">
-                            <form>
+                            <form className="contact-form-space">
                                 <h5 className="this-form-heading-contact">
                                     leave a message
                                 </h5>
@@ -90,6 +90,16 @@ const Contact = () => {
                                         className="form-control contact-field"
                                         id="name"
                                         placeholder="Enter your name"
+                                        style={{
+                                            fontFamily: 'Inter',
+                                        
+                                            fontSize: '14px',
+                           
+                                            color: '#999999',
+                                            paddingLeft: '26px',
+                                        paddingBottom:'12px'
+                                        }}
+                                    
                                     />
                                 </div>
                                 <div className="form-group text-group-input-contact">
@@ -98,6 +108,16 @@ const Contact = () => {
                                         className="form-control contact-field"
                                         id="email"
                                         placeholder="Enter your email"
+                                        style={{
+                                        fontFamily: 'Inter',
+                                    
+                                        fontSize: '14px',
+                       
+                                        color: '#999999',
+                                        paddingLeft: '26px',
+                                        paddingBottom:'12px'
+                                    
+                                    }}
                                     />
                                 </div>
                                 <div className="form-group text-group-input-contact">
@@ -106,6 +126,14 @@ const Contact = () => {
                                         id="comments"
                                         rows="5"
                                         placeholder="Enter your message"
+                                        style={{
+                                            fontFamily: 'Inter',
+                                            paddingTop:'15px',
+                                            fontSize: '14px',
+                           
+                                            color: '#999999',
+                                            paddingLeft: '26px' }}
+                                        
                                     ></textarea>
                                 </div>
                                 <button

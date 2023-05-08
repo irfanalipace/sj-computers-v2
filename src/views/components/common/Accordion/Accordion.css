@@ -39,7 +39,7 @@
 .accordion-header h4,
 .accordion-header h3 {
     margin-bottom: 0;
-    font-family: "Inter";
+
     font-weight: 600;
     font-size: 16px;
 }
@@ -49,7 +49,6 @@
 }
 
 .accordion-header .change-btn {
-    font-family: "Inter";
     font-weight: 400;
     font-size: 12px;
     background: white;
@@ -60,7 +59,7 @@
 
 .accordion-header p {
     margin-bottom: 0;
-    font-family: "Inter";
+
     font-weight: 500;
     font-size: 12px;
 }
@@ -78,7 +77,6 @@
 }
 
 .accordion-content-heading {
-    font-family: "Inter";
     font-weight: 600;
     font-size: 18px;
     margin-bottom: 20px;
