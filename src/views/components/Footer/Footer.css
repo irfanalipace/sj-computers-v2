@@ -139,6 +139,9 @@
 .language-dropdown::after {
     display: none;
 }
+.back-to-top-hover-effct:hover,.back-to-top-button:hover{
+background-color: #17436d !important;
+}
 @media screen and (max-width:770px) {
     .footer-text-line-font-size {
         display: flex;

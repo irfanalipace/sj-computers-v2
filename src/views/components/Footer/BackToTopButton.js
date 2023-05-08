@@ -26,7 +26,7 @@ function BackToTopButton() {
   return (
     <>
       {showButton && (
-        <button onClick={handleClick} className="back-to-top-button">
+        <button onClick={handleClick} className="back-to-top-button ">
           Back to top {' '} <img src={arrowfun} alt="" style={{ width: "16px"}} />
         </button>
       )}

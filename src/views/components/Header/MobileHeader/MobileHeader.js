@@ -2,7 +2,12 @@ import React from "react";
 import "./MobileHeader.css"
 import vectorcart from "@images/home/vector.png";
 import { Link } from 'react-router-dom';
+import Sidebar from "@components/Sidebar/Sidebar";
 function MobileHeader() {
+  const [isSideMenu, setSideMenu] = useState(false);
+  const toggleSidebar = () => {
+      return setSideMenu((state) => !state);
+  }
   return (
     <div className="header-mobile">
     <header className="mobile-header">
@@ -22,16 +27,16 @@ function MobileHeader() {
               <Link to="/"><i className="fa fa-home" aria-hidden="true"></i></Link>
             </li>
             <li>
-              <Link to="/shop"><i className="fa fa-user" aria-hidden="true"></i></Link>
+              <Link to="/account/profile"><i className="fa fa-user" aria-hidden="true"></i></Link>
             </li>
             <li>
-              <Link to="/cart">
-              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              <Link to="">
+              <i className="fa fa-shopping-cart" aria-hidden="true"></i>
 
               </Link>
             </li>
             <li>
-              <Link to="/account"><i class="fa fa-bars" aria-hidden="true"></i></Link>
+              <Link to="/"><i class="fa fa-bars" aria-hidden="true"></i></Link>
             </li>
           </ul>
         </div>

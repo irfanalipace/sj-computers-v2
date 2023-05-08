@@ -3,13 +3,10 @@ import { Link } from "react-router-dom";
 
 import Sidebar from "@components/Sidebar/Sidebar";
 
-import "./TopBar.css";
+
 
 export default function TopBar() {
-    const [isSideMenu, setSideMenu] = useState(false);
-    const toggleSidebar = () => {
-        return setSideMenu((state) => !state);
-    };
+  
 
     return (
         <>

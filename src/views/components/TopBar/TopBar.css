@@ -1,9 +1,10 @@
 .topBar {
-    height: 4rem;
     display: flex;
     justify-content: center;
     align-content: center;
     background: #110135;
+    height: 40px;
+    background: #002549;
 }
 .menuBar {
     display: flex;
