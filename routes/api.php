@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserStateController;
 use App\Http\Controllers\Api\Order\OrderController;
+use App\Http\Controllers\Api\ContactUs\ContactUsController;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -76,6 +77,12 @@ Route::get('get-details', [CartController::class, 'details'])->name('getItemDeta
 Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clearCart');
 
 Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('addQtyCart');
+
+/*
+*Contact-us
+*/
+Route::post('contact-us',[ContactUsController::class,'contactSubmit'])->name('customer-contact');
+
 
 /*
 *Place Order
