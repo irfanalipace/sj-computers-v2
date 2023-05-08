@@ -11,9 +11,11 @@ export const ProductType = () => {
         <div className="product-type-container">
             <div className="row">
                 <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div className="product-section">
+                    <div className="product-type-section">
                         <h4 className="h4-heading">Shop by Category</h4>
-                        <ProductItem4 />
+                        <div className="categories-container">
+                            <ProductItem4 />
+                        </div>
                         <Link to="/" className="text-decoration-none">
                             <p className="section-link">Shop Now</p>
                         </Link>
@@ -21,18 +23,22 @@ export const ProductType = () => {
                 </div>
 
                 <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div className="product-section">
+                    <div className="product-type-section">
                         <h4 className="h4-heading">Laptops</h4>
-                        <ProductItem1 />
+                        <div className="categories-container">
+                            <ProductItem1 />
+                        </div>
                         <Link to="/" className="text-decoration-none">
                             <p className="section-link">Shop Now</p>
                         </Link>
                     </div>
                 </div>
                 <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div className="product-section">
+                    <div className="product-type-section">
                         <h4 className="h4-heading">Laptops</h4>
-                        <ProductItem1 />
+                        <div className="categories-container">
+                            <ProductItem1 />
+                        </div>
                         <Link to="/" className="text-decoration-none">
                             <p className="section-link">Shop Now</p>
                         </Link>
@@ -66,43 +72,6 @@ export const ProductType = () => {
                         </div>
                     </div>
                 </div>
-                {/* <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div className="product-section">
-                        <h4>Shop by Category</h4>
-                        <ProductItem4 />
-                        <Link to="/" className="text-decoration-none">
-                            <p>Start here</p>
-                        </Link>
-                    </div>
-                </div> */}
-
-                {/* <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div className="product-section">
-                        <h4>Shop by Category</h4>
-                        <ProductItem4 />
-                        <Link to="/" className="text-decoration-none">
-                            <p>Start here</p>
-                        </Link>
-                    </div>
-                </div> */}
-                {/* <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div className="product-section">
-                        <h4>Shop by Category</h4>
-                        <ProductItem4 />
-                        <Link to="/" className="text-decoration-none">
-                            <p>Start here</p>
-                        </Link>
-                    </div>
-                </div> */}
-                {/* <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div className="product-section">
-                        <h4>Laptops</h4>
-                        <ProductItem1 />
-                        <Link to="/" className="text-decoration-none">
-                            <p>Start here</p>
-                        </Link>
-                    </div>
-                </div> */}
             </div>
         </div>
     );

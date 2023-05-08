@@ -69,7 +69,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                 </ul>
                                             </div>
                                             <div className="col-md-2 price-item">
-                                                <p className="text-center">
+                                                <p>
                                                     <strong className="">
                                                         ${item?.price}
                                                     </strong>
@@ -92,7 +92,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                                 item
                                                             )
                                                         }
-                                                        className="button-link ms-2 ps-0"
+                                                        className="button-link ps-0"
                                                         disabled={updatingItem}
                                                     >
                                                         {updatingItem ? (

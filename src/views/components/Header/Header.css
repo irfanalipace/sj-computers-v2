@@ -77,7 +77,7 @@
     color: white;
     /* padding-left: 15px; */
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 700;
     font-size: 15px;
     padding-top: 23px;
@@ -215,7 +215,7 @@
     color: white;
     padding: 12px 0 0;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -274,7 +274,7 @@
     /* padding-right: 84px; */
     /* margin-right: 172px; */
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
@@ -303,7 +303,7 @@
 
 .deliver-text {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 500;
     font-size: 13px;
     line-height: 16px;
@@ -317,7 +317,7 @@
     margin-right: 15px;
     border-radius: 8px;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -335,7 +335,7 @@
     border-radius: 8px;
     width: 230px;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -364,7 +364,7 @@
     top: 27.78%;
     bottom: 25%;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -383,7 +383,7 @@
 
 .check-auth {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 700;
     font-size: 15px;
     line-height: 18px;
@@ -423,7 +423,7 @@
 
 .processed-button {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -447,7 +447,7 @@
 .cart-text-link {
     color: black;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -456,7 +456,7 @@
 .processed-link {
     color: white;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -477,10 +477,10 @@
     }
 }
 
-@media screen and (max-width: 1250px) {
+@media (min-width: 768px) and (max-width: 1024px) {
     .nav-right {
         display: flex;
-        width: 35%;
+        width: 42% !important;
     }
 
     .search-inputgroup {

@@ -9,20 +9,20 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content-mobile-screen {
+}
+
+.modal-content-mobile-screen {
     position: relative;
     background-color: #fff;
     width: 100%;
     max-width: 600px;
     padding: 20px;
-    margin-bottom: -385px;
+    margin-bottom: -344px;
     /* position: sticky; */
     justify-content: center;
     display: flex;
 }
-  
+
 .close-button-done {
     color: white;
     position: absolute;
@@ -35,27 +35,27 @@
     cursor: pointer;
     border: none;
 }
-  .box-button-text-mobile-screen{
+.box-button-text-mobile-screen {
     color: white;
-  }
-.box-text-dilver-location{
-  font-family: 'Inter';
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 17px;
-/* identical to box height */
+}
+.box-text-dilver-location {
+    font-family: "Inter";
 
-display: flex;
-align-items: center;
-text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
 
-color: #111111;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #111111;
 }
 .box-text-dilver-location-text-p {
     /* font-family: serif; */
     /* font-family: 'Inter'; */
-    font-style: normal;
+
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
@@ -71,23 +71,23 @@ color: #111111;
     height: 36px;
     /* left: 15px; */
     /* top: 104px; */
-    background: #28A343;
+    background: #28a343;
     border-radius: 5px;
-    font-family: 'Inter';
-    font-style: normal;
+    font-family: "Inter";
+
     font-weight: 500;
     font-size: 12px;
     line-height: 15px;
     display: flex;
     align-items: center;
-    color: #FFFFFF;
+    color: #ffffff;
     max-width: 4;
     /* text-align: center; */
 }
-.zip-code-text-mobile-screen{
+.zip-code-text-mobile-screen {
     color: black;
 }
-.padding-bottom-text-mobile-screen{
+.padding-bottom-text-mobile-screen {
     padding-bottom: 13px;
 }
 .mobile-zip-code-box-image {
@@ -97,30 +97,30 @@ color: #111111;
     /* height: 15px; */
     /* left: 37px; */
     /* top: 170px; */
-    font-family: 'Inter';
-    font-style: normal;
+    font-family: "Inter";
+
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
     display: flex;
     align-items: center;
-    color: #004B94;
+    color: #004b94;
 }
 .mobile-zip-code-box-image-dilvery-box {
     /* background-color: #004B94; */
     border: none;
     color: white;
     background: #002549;
-    font-family: 'Inter';
-    font-style: normal;
+    font-family: "Inter";
+
     font-weight: 500;
     font-size: 12px;
     line-height: 24px;
     display: flex;
     align-items: center;
     text-align: center;
-    color: #FFFFFF;
+    color: #ffffff;
 }
-.color-image-dilvery-box-mobile-screen{
+.color-image-dilvery-box-mobile-screen {
     background: white;
 }

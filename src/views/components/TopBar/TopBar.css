@@ -1,10 +1,13 @@
 .topBar {
+    background: #110135;
+}
+
+.topBar-inner {
+    max-width: 1750px;
     display: flex;
     justify-content: center;
     align-content: center;
-    background: #110135;
-    height: 40px;
-    background: #002549;
+    margin: 0 auto;
 }
 .menuBar {
     display: flex;
@@ -14,36 +17,32 @@
     width: 100%;
 }
 
-.ullist {
+.menuBar .ullist {
     display: flex;
     flex-wrap: wrap;
-}
-
-.navIcon {
-    width: 55px;
-    display: flex;
-    margin-right: 3rem;
-    margin-left: 1.5rem;
-    cursor: pointer;
-}
-
-.ullist {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-.listitem {
-    padding-left: 0px !important;
+.menuBar .navIcon {
+    width: 55px;
+    display: flex;
+    margin-right: 3rem;
+    cursor: pointer;
+}
 
+.menuBar .listitem {
+    padding-left: 0px !important;
     margin-bottom: 0px !important;
     display: inline;
     color: white;
     padding-right: 30px;
+    padding: 8px 0;
 }
-.text-color {
+.menuBar .text-color {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 600;
     font-size: 15px;
     line-height: 18px;
@@ -57,7 +56,7 @@ Link:hover {
 
 .small-text-size {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 800;
     font-size: 15px;
     line-height: 18px;
@@ -67,8 +66,25 @@ Link:hover {
 
 .hover-effect-sets-topbar {
     border: 1px solid transparent;
-    padding: 10px;
+    padding: 5px 10px;
 }
 .hover-effect-sets-topbar:hover {
     border-color: white;
+}
+
+@media screen and (max-width: 576px) {
+    .menuBar {
+        justify-content: center;
+    }
+    .menuBar .navIcon {
+        display: none;
+    }
+    .menuBar .ullist {
+        max-width: 100%;
+        overflow: auto;
+        flex-wrap: nowrap;
+    }
+    .menuBar .listitem {
+        flex-shrink: 0;
+    }
 }

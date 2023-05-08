@@ -21,7 +21,7 @@
     left: 262px;
     top: 2764px;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 600;
     font-size: 15px;
     line-height: 30px;
@@ -29,7 +29,8 @@
     align-items: center;
     color: #ffffff;
     list-style-type: none;
-}.list-unstyle1 a:hover {
+}
+.list-unstyle1 a:hover {
     color: white !important;
 }
 .list-unstyle2 a:hover {
@@ -37,7 +38,8 @@
 }
 .list-unstyle3 a:hover {
     color: white !important;
-}.list-unstyle4 a:hover {
+}
+.list-unstyle4 a:hover {
     color: white !important;
 }
 .list-unstyle4 {
@@ -48,7 +50,7 @@
     left: 262px;
     top: 2764px;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 600;
     font-size: 15px;
     line-height: 25px;
@@ -66,7 +68,7 @@
     left: 262px;
     top: 2764px;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 600;
     font-size: 15px;
     line-height: 30px;
@@ -84,7 +86,7 @@
     left: 262px;
     top: 2764px;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 600;
     font-size: 15px;
     line-height: 30px;
@@ -128,19 +130,21 @@
 .back-to-top-button {
     background: #002549;
     border: 0px;
-    font-family: 'Inter';
-    font-style: normal;
+    font-family: "Inter";
+
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
-    color: #FFFFFF;
+    color: #ffffff;
     /* color: white; */
 }
 .language-dropdown::after {
     display: none;
 }
-.back-to-top-hover-effct:hover,.back-to-top-button:hover{
+.back-to-top-hover-effct:hover{
 background-color: #17436d !important;
+}.back-to-top-hover-effct:hover button{
+    background-color: #17436d !important;
 }
 @media screen and (max-width:770px) {
     .footer-text-line-font-size {

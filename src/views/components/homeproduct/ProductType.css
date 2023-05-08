@@ -25,14 +25,15 @@
     margin: 0 47px;
 }
 
-.product-section {
-    height: 340px;
+.product-type-section {
+    height: auto;
     width: 100%;
     background-color: white;
     margin: 8px 0;
+    padding: 10px 20px;
 }
 
-.product-section .container {
+.product-type-section .categories-container {
     height: 230px;
 }
 
@@ -40,14 +41,14 @@
     padding-top: 6px;
 }
 
-.product-section h4 {
+.product-type-section h4 {
     text-align: left;
-    padding-left: 20px;
+    /* padding-left: 20px; */
     font-weight: 600;
     font-size: 18px;
 }
 
-.product-section img {
+.product-type-section img {
     max-width: 100%;
 }
 
@@ -92,15 +93,16 @@
     height: 100%;
     width: 100%;
 }
-.product-section h3 {
+
+.product-type-section h3 {
     font-size: 24px;
     margin-bottom: 10px;
 }
 
-.product-section p {
+.product-type-section p {
     font-weight: 400;
     font-size: 12px;
-    padding-left: 18px;
+    /* padding-left: 18px; */
 }
 
 .section-link {
@@ -114,25 +116,33 @@
 }
 
 @media screen and (max-width: 1024px) {
-    .product-section {
-        height: 350px;
+    .product-type-section {
+        height: auto;
+        padding-bottom: 20px;
+        padding-top: 20px;
     }
 
-    .product-section .container {
+    .product-type-section .container {
         height: 260px;
     }
 
-    .product-section h4,
+    .product-type-section h4,
     .advertisement-heading h4,
     .advertisement-heading button {
         font-size: 16px;
     }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 585px) {
+    .product-type-section .categories-container {
+        height: auto;
+    }
+    .product-type-section img {
+        width: 200px;
+    }
 }
 @media screen and (max-width: 425px) {
-    .product-section h4,
+    .product-type-section h4,
     .advertisement-heading h4,
     .advertisement-heading button {
         font-size: 12px;

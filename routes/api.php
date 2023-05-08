@@ -82,6 +82,10 @@ Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('a
 */
 Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
 
+Route::get('success-transaction/{id}', [PaypalController::class, 'successTransaction'])->name('successTransaction');
+
+Route::post('cancel-transaction/{id}', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
+
 Route::middleware(['auth:api'])->group(function () {
 
     //Route::post('user-details', UserDetailController::class)->name('user-details');
@@ -119,9 +123,7 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::post('process-transaction', [PaypalController::class, 'processTransaction'])->name('processTransaction');
 
-    Route::get('success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 
-    Route::post('cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
 
 

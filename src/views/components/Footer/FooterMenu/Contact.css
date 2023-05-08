@@ -5,7 +5,7 @@
 }
 .text-aligin-contact-menu {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 600;
     font-size: 15px;
     line-height: 18px;
@@ -14,14 +14,11 @@
 }
 
 .email-contact-hr-line {
-   
-      
-        border-left: 1px solid;
-    
+    border-left: 1px solid;
 }
 .contact-text-home {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 600;
     font-size: 28px;
     line-height: 34px;
@@ -30,7 +27,6 @@
     color: #ffffff;
 }
 .home-text-paragraph-contact {
-    
     background: #318243;
 }
 .p-tages-text-contact {
@@ -41,7 +37,7 @@
 }
 .contact-text-home2 {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
@@ -51,7 +47,7 @@
 }
 .this-form-heading-contact {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 500;
     font-size: 20px;
     line-height: 100%;
@@ -63,7 +59,7 @@
 }
 .pa-form-heading-contact {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 400;
     font-size: 20px;
     line-height: 150%;
@@ -111,12 +107,12 @@
 .contact-field-commits {
     height: 123px;
 }
-.image-cotact-container{
-padding: 46px;
+.image-cotact-container {
+    padding: 46px;
 }
 .contact-heading-text-with-image {
-    font-family: 'Inter';
-    font-style: normal;
+    font-family: "Inter";
+
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;
@@ -131,12 +127,9 @@ padding: 46px;
     max-height: 100%;
 }
 
-@media screen and (max-width:1000px) {
-    
+@media screen and (max-width: 1000px) {
     .contact-text-home {
-      
         font-size: 18px;
-    
     }
     .contact-text-home2 {
         max-width: 100%;
@@ -145,28 +138,23 @@ padding: 46px;
     }
 }
 
-
-@media screen and (max-width:520px) {
-    
+@media screen and (max-width: 520px) {
     .pa-form-heading-contact {
-      
         font-size: 12px;
-    
     }
-  
 }
 /* Custom CSS to remove the hover effect on the Link component */
 .link-no-hover:hover {
     /* text-decoration: none; */
     color: white;
 }
- .link-no-hover a:hover {
-  color: white;
+.link-no-hover a:hover {
+    color: white;
 }
 
 .link-no-hover a:focus {
     color: white !important;
-  }
+}
 
 @media screen and (max-width:991px) {
 .contact-form-space{
