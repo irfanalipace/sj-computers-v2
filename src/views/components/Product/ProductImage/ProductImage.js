@@ -5,7 +5,7 @@ import "./ProductImage.css";
 const SelectedImage = ({ image }) => {
     return (
         <div className="image-screen">
-            <img src={image} className="selected-image" />
+            <img src={image} className="selected-image selected-image-data-icon-slider" />
         </div>
     );
 };

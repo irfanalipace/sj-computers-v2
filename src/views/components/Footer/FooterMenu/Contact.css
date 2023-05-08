@@ -1,0 +1,175 @@
+.nav-contact-background-color {
+    background: #318243;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.text-aligin-contact-menu {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+
+    color: #ffffff;
+}
+
+.email-contact-hr-line {
+   
+      
+        border-left: 1px solid;
+    
+}
+.contact-text-home {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    /* identical to box height */
+
+    color: #ffffff;
+}
+.home-text-paragraph-contact {
+    
+    background: #318243;
+}
+.p-tages-text-contact{
+   
+        padding: 36px;
+    
+}
+.contact-text-home2 {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+
+    color: #ffffff;
+}
+.this-form-heading-contact {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    /* identical to box height, or 20px */
+
+    text-transform: capitalize;
+
+    color: #000000;
+}
+.pa-form-heading-contact {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 150%;
+    /* or 30px */
+
+    /* Primary */
+
+    color: #333333;
+}
+
+.contact-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 23px 50px;
+    gap: 10px;
+    width: 470px;
+    /* padding: 10px; */
+    max-width: 100%;
+    height: 66px;
+    border: none;
+    color: white;
+    background: #52ac66;
+    border-radius: 8px;
+}
+.contact-field {
+    height: 56px;
+    display: block;
+    width: 466px;
+    max-width: 100%;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 170%;
+    color: #999999;
+}
+.text-group-input-contact {
+    padding-bottom: 7px;
+    background: #ffffff;
+    /* border: 3px solid white; */
+    border-radius: 2px;
+}
+.contact-field-commits {
+    height: 86px;
+}
+.image-cotact-container{
+padding: 46px;
+}
+.contact-heading-text-with-image {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+    padding-bottom: 34px;
+}
+.img-fluid-contact {
+    max-width: 100%;
+    height: 391px;
+    width: 453px;
+}
+
+@media screen and (max-width:1000px) {
+    
+    .contact-text-home {
+      
+        font-size: 18px;
+    
+    }
+    .contact-text-home2 {
+      
+       
+        font-size: 8px;
+      
+    }
+}
+
+
+@media screen and (max-width:520px) {
+    
+    .pa-form-heading-contact {
+      
+        font-size: 12px;
+    
+    }
+  
+}
+/* Custom CSS to remove the hover effect on the Link component */
+.link-no-hover:hover {
+    /* text-decoration: none; */
+    color: white;
+}
+ .link-no-hover a:hover {
+  color: white;
+}
+
+.link-no-hover a:focus {
+    color: white !important;
+  }
+
+  @media screen and (max-width:990px) {
+    
+  .my-contact-menu{
+    background: #318243;
+    display: flex;
+    justify-content: center;
+  }
+}

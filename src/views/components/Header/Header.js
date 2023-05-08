@@ -52,7 +52,7 @@ const Header = () => {
     };
     return (
         <>
-            {screenWidth <= 750 ? (
+            {screenWidth <= 950 ? (
                 <div>
                     <MobileHeader />
 

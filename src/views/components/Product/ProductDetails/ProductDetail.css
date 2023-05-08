@@ -302,6 +302,12 @@
  .color-text-cart{
     color: red;
    
+}.size-text-details{
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 15px;
 }
 @media screen and (max-width:750px) {
     .color-text-cart{
@@ -309,3 +315,36 @@
         text-align: center;
     }
 }
+@media screen and (max-width:880px) {
+    .item-title{
+          font-size: 12px;
+      }.res {
+        text-align: center;
+        
+    }.instock-detail{
+        
+            display: flex;
+            justify-content: center;
+        
+    }.cart-details-text{
+        text-align: center;
+    }.content {
+        justify-content: center;
+        display: flex;
+    }.more-styles {
+        text-align: center;
+    }.text-box-details{
+        display: flex;
+        justify-content: center;
+    }.list-style-margin {
+        justify-content: center;
+        display: flex;
+      margin-top: 0px !important;
+    }.items-details-description {
+        display: flex;
+        justify-content: center;
+    }
+    
+      }
+
+ 

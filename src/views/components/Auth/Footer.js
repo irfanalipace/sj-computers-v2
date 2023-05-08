@@ -14,7 +14,7 @@ const Footer = () => {
 
      
         <div className='copywrite-text'>
-          <small className=''>© 2023 Sjcomputers.us</small>
+          <small className='copyright-sjcomputer'>© 2023 Sjcomputers.us</small>
         </div>
       </div>
       </div>

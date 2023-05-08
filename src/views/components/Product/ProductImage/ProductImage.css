@@ -36,8 +36,7 @@
 }
 .selected-image {
     /* position: absolute; */
-    max-width: 80%;
-    max-height: 80%;
+   
     width: 100%;
     /* margin-top: -372px; */
     /* margin-left: -545px; */
@@ -52,4 +51,17 @@
         padding: 11px;
     }
     
+}
+@media screen and (max-width:770px) {
+.image-container {
+    justify-content: center;
+   
+}
+}
+@media screen and (max-width:600px) {
+.selected-image-data-icon-slider {
+    
+    width: 120px !important;
+  
+}
 }

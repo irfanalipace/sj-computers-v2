@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import './MobileSearch.css'
+import MobileScreenModel from './MobileScreenModel/MobileScreenModel'
+
 const MobileSearch = () => {
   const [searchValue, setSearchValue] = useState('');
 
@@ -21,9 +23,14 @@ const MobileSearch = () => {
 
     <span className="input-group-text red lighten-3 search-icon-on-mobile-screen" id="basic-text1"><i className="fas fa-search text-grey"
         aria-hidden="true"></i></span>
-  
+      <div>
+       
+      </div>
     </Container>
+    <div className='mobile-box-model'>
     
+   <MobileScreenModel />
+    </div>
     </div>
    
   );

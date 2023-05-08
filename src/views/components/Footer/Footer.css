@@ -139,4 +139,10 @@
 .language-dropdown::after {
     display: none;
 }
-
+@media screen and (max-width:770px) {
+    .footer-text-line-font-size {
+        display: flex;
+        justify-content: center;
+        margin-left: 40px;
+    }
+}
