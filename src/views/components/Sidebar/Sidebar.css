@@ -44,7 +44,6 @@
     padding: 25px 20px;
     font-weight: 700;
     font-size: 20px;
-    font-family: "Inter", "Sans-serif";
 }
 
 .sideMenu-header a,
@@ -60,7 +59,7 @@
 .sideMenu h4 {
     font-weight: 700;
     font-size: 18px;
-    font-family: "Inter", "Sans-serif";
+
     padding: 0 20px;
 }
 
@@ -75,7 +74,6 @@
     font-size: 16px;
     text-decoration: none;
     color: black;
-    font-family: "Inter", "Sans-serif";
 }
 
 .menu-list li .country-flag {

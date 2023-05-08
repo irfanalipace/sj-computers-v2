@@ -41,8 +41,6 @@
     padding: 8px 0;
 }
 .menuBar .text-color {
-    font-family: "Inter";
-
     font-weight: 600;
     font-size: 15px;
     line-height: 18px;
@@ -55,8 +53,6 @@ Link:hover {
 }
 
 .small-text-size {
-    font-family: "Inter";
-
     font-weight: 800;
     font-size: 15px;
     line-height: 18px;

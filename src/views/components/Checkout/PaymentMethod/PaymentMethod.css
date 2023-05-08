@@ -10,7 +10,7 @@
 
 .payment-method label {
     display: flex;
-    font-family: "Inter";
+
     font-weight: 400;
     font-size: 14px;
     margin-left: 10px;
@@ -21,7 +21,6 @@
 }
 
 .payment-btn {
-    font-family: "Inter";
     font-weight: 600;
     font-size: 12px;
     display: flex;

@@ -9,7 +9,12 @@ import ReviewCheckout from "@components/Checkout/ReviewCheckout/ReviewButton";
 
 import "./OrderSummary.css";
 
-function OrderSummary({ handleClick, activeAccordion, paymentMethod }) {
+function OrderSummary({
+    handleClick,
+    activeAccordion,
+    paymentMethod,
+    shippingCost,
+}) {
     const dispatch = useDispatch();
     const [disabled, setDisabled] = useState(true);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
@@ -78,7 +83,7 @@ function OrderSummary({ handleClick, activeAccordion, paymentMethod }) {
                         </li>
                         <li>
                             <span>Shipping & handling:</span>
-                            <span>--</span>
+                            <span>${shippingCost}</span>
                         </li>
                         <li>
                             <span>Total before tax:</span>
@@ -104,6 +109,10 @@ function OrderSummary({ handleClick, activeAccordion, paymentMethod }) {
                 </div>
             </div>
             <div className="summary-footer">
+                <p>
+                    You can track your shipment and view any applicable import
+                    fees deposit before placing your order.
+                </p>
                 <Link to={"#"}>How shipping costs calculates?</Link>
             </div>
         </div>
