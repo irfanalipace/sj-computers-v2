@@ -1,9 +1,13 @@
 .topBar {
-    height: 4rem;
+    background: #110135;
+}
+
+.topBar-inner {
+    max-width: 1750px;
     display: flex;
     justify-content: center;
     align-content: center;
-    background: #110135;
+    margin: 0 auto;
 }
 .menuBar {
     display: flex;
@@ -22,7 +26,6 @@
     width: 55px;
     display: flex;
     margin-right: 3rem;
-    margin-left: 1.5rem;
     cursor: pointer;
 }
 
@@ -34,11 +37,11 @@
 
 .listitem {
     padding-left: 0px !important;
-
     margin-bottom: 0px !important;
     display: inline;
     color: white;
     padding-right: 30px;
+    padding: 8px 0;
 }
 .text-color {
     font-family: "Inter";
@@ -66,7 +69,7 @@ Link:hover {
 
 .hover-effect-sets-topbar {
     border: 1px solid transparent;
-    padding: 10px;
+    padding: 5px 10px;
 }
 .hover-effect-sets-topbar:hover {
     border-color: white;
