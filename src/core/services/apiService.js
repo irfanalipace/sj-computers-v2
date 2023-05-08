@@ -14,7 +14,7 @@ const ApiService = {
         if (!this.instance) {
             this.instance = axios.create({ withCredentials: true });
             this.instance.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
-            console.log('api url: ', process.env.REACT_APP_API_BASE_URL);
+            console.log("api url: ", process.env.REACT_APP_API_BASE_URL);
             this.instance.defaults.headers["content-type"] = "application/json";
         }
     },
@@ -24,8 +24,6 @@ const ApiService = {
      */
 
     setHeader(header, val) {
-        console.log("header", header);
-        console.log("val", val);
         this.instance.defaults.headers[header] = val;
     },
 

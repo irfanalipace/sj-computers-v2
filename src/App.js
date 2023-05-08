@@ -14,23 +14,12 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import React, { useState, useEffect } from "react";
 function App() {
     const dispatch = useDispatch();
     const token = getToken();
     if (token) dispatch(alreadyLoggedIn(token));
     useInitDataFetching();
 
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
-    const handleResize = () => {
-        setScreenWidth(window.innerWidth);
-    };
     return (
         <div>
             <ToastContainer

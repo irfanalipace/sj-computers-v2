@@ -73,10 +73,10 @@ const PasswordForm = () => {
                         <Header />
                     </div>
 
-                    <form className={`auth-inner-body ${mounted && "slide"} `}>
+                    <form className={`auth-form ${mounted && "slide"} `}>
                         <h3 className="login-h3">Reset Password</h3>
                         <div className="mb-3">
-                            <label className="password-lable font-weight-bold">
+                            <label className="password-label ">
                                 Enter your Email
                             </label>
                             <input
@@ -94,7 +94,7 @@ const PasswordForm = () => {
                             )}
                         </div>
                         <div className="mb-3">
-                            <label className="password-lable font-weight-bold">
+                            <label className="password-label ">
                                 Enter new password
                             </label>
                             <input
@@ -113,7 +113,7 @@ const PasswordForm = () => {
                         </div>
 
                         <div className="mb-3">
-                            <label className="password-lable font-weight-bold">
+                            <label className="password-label ">
                                 Re-enter your password
                             </label>
                             <input

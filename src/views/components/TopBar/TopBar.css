@@ -41,40 +41,33 @@
     padding-right: 30px;
 }
 .text-color {
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
     line-height: 18px;
-    color: #FFFFFF;
- 
-    
+    color: #ffffff;
 }
 a:hover,
 Link:hover {
-  color: inherit;
-  text-decoration: none;
-  
+    color: inherit;
+    text-decoration: none;
 }
 
 .small-text-size {
-   
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 800;
-        font-size: 15px;
-        line-height: 18px;
-        color: #FFFFFF;
-        padding-top: 5p;
-        padding-top: 8px;
-    
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 18px;
+    color: #ffffff;
+    padding-top: 5px;
 }
 
-.hover-effect-sets-topbar{
-      
+.hover-effect-sets-topbar {
     border: 1px solid transparent;
     padding: 10px;
-}.hover-effect-sets-topbar:hover{
-      
+}
+.hover-effect-sets-topbar:hover {
     border-color: white;
 }

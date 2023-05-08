@@ -20,7 +20,9 @@ const Home = () => {
                     <ProductType />
                 </div>
             </div>
-            <ProductsGrid />
+            <div className="products-grid-container">
+                <ProductsGrid />
+            </div>
             {/* <CarouselSlider /> */}
             {/* <ProductThreeItem /> */}
             {/* <Recommendation /> */}

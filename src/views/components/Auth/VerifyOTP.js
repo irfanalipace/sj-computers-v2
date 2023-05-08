@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { verifyOtp } from "@store/auth/authThunks";
 import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
+import { RESET_PAGE } from "@store/auth/authSlice";
 import Loader from "@common/Spinner/Spinner";
 import { useFormValidation } from "@hooks/useFormValidation";
 import { loginApi } from "@api/auth";
@@ -97,21 +98,26 @@ const VerifyOTP = () => {
 
     return (
         <form
-            className={`auth-inner-body ${mounted && "slide"} `}
+            className={`auth-form ${mounted && "slide"} `}
             onSubmit={handleSubmit}
         >
             <h3 className="login-h3-verify-form">Verification required</h3>
-            <span className="email-text-verify-form">
-                {" "}
+            <div className="email-text-verify-form mt-2 mb-1">
                 One Time Password (OTP) sent to {email}
                 <span className="email-text-verify-form">
                     Please enter it below.
-                </span>{" "}
-            </span>
+                    <button
+                        className="change-email-btn"
+                        onClick={() => dispatch(RESET_PAGE())}
+                    >
+                        Change Email ?
+                    </button>
+                </span>
+            </div>
             <br></br>
 
             <div className="mb-3">
-                <label className="name-lable font-weight-bold">Enter OTP</label>
+                <label className="name-label ">Enter OTP</label>
                 <input
                     type="text"
                     name="otp"
@@ -120,6 +126,7 @@ const VerifyOTP = () => {
                     maxLength={4}
                     onKeyPress={handleKeyPress}
                     onChange={handleChange}
+                    autoFocus
                 />
 
                 {fieldErrors && (
