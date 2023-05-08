@@ -14,12 +14,15 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();            
+            $table->id();
             $table->foreignId('invoice_id')->constrained('invoices');
             $table->foreignId('user_id')->constrained('users');
-            $table->string('item_name');
             $table->integer('item_qty');
-            $table->string('amount');
+            $table->string('total_amount');
+            $table->string('sub_total');
+            $table->float('shipment_price')->nullable();
+            $table->integer('shipment_days')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

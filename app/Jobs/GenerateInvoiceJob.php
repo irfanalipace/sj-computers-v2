@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Classes\StatusEnum;
 use App\Models\Invoice;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Cart;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -46,16 +47,31 @@ class GenerateInvoiceJob implements ShouldQueue
         $invoice = $this->storeInvoice();
 
         //saving order after invoice created
-        $items = [];
+        $order = [];
 //        Cart::session($this->userId)->getContent()->each(function ($item) use (&$items) {
-        Cart::session($this->userId)->getContent()->each(function ($item) use (&$items) {
-            $items = ['item_id' => $item->id, 'item_name' => $item->name, 'item_qty' => $item->quantity];
+
+        $order['total_amount'] = Cart::session($this->userId)->getSubTotal();
+        $order['sub_total'] = Cart::session($this->userId)->getSubTotal();
+        $order['shipment_price'] = '';
+        $order['shipment_days'] = '';
+        $order['user_id'] = $this->userId;
+        $order['invoice_id'] = $invoice->id;
+        $order['status'] = StatusEnum::COMPLETE;
+        $order['item_qty'] = '';
+        $order = Order::create($order);
+
+        Cart::session($this->userId)->getContent()->each(function ($item) use ($order) {
+            $item = [
+                'order_id' => $order->id,
+                'product_id' => $item->id,
+                'product_name' => $item->name,
+                'qty' => $item->quantity,
+                'price' => $item->price
+            ];
+
+            OrderItem::create($item);
         });
-        $items['amount'] = Cart::session($this->userId)->getSubTotal();
-        $items['user_id'] = $this->userId;
-        $items['invoice_id'] = $invoice->id;
-        $items['status'] = StatusEnum::COMPLETE;
-        Order::create($items);
+
         $this->clearCartItems();
     }
     //Invoice create
