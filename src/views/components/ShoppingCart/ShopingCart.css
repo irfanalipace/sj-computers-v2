@@ -85,7 +85,7 @@
     font-style: normal;
     font-weight: 500;
     font-size: 13px;
-    line-height: 15px;
+
     color: #318243;
     border: none;
     background: white;
@@ -147,7 +147,7 @@ head:nth-child(2) {
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    line-height: 15px;
+
     align-items: center;
     color: #333333;
 }

@@ -1,9 +1,16 @@
+.header-container {
+    max-width: 1750px;
+    margin: auto;
+    width: 100%;
+    display: flex;
+}
+
 .header-background {
     background: #00305e !important;
 }
 .homepage-img {
-    width: 185px !important;
-    max-width: 100%;
+    width: 100%;
+    max-width: 185px;
 }
 
 .hover-effect-sets {
@@ -47,6 +54,7 @@
     width: 10%;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .main-nav {
@@ -458,10 +466,25 @@
         width: 69px;
     }
 }
-@media screen and (max-width: 1350px) {
+@media screen and (max-width: 1450px) {
+    .nav-right {
+        display: flex;
+        width: 32%;
+    }
+
+    .search-inputgroup {
+        width: 58%;
+    }
+}
+
+@media screen and (max-width: 1250px) {
     .nav-right {
         display: flex;
         width: 35%;
+    }
+
+    .search-inputgroup {
+        width: 55%;
     }
 }
 @media screen and (max-width: 1200px) {

@@ -50,14 +50,14 @@ export default function EmailForm({ onFormSubmit, form }) {
 
     return (
         <form
-            className={`auth-inner-body ${mounted && "slide"} `}
+            className={`auth-form ${mounted && "slide"} `}
             onSubmit={handleSubmit}
         >
             <h3 className="login-h3">
                 {form === "forgetPassword" ? "Forget Password" : "Sign In"}
             </h3>
             <div className="mb-3">
-                <label className="email-lable font-weight-bold">
+                <label className="email-label ">
                     Email or mobile phone number
                 </label>
                 <input
@@ -67,6 +67,7 @@ export default function EmailForm({ onFormSubmit, form }) {
                     placeholder="Enter your email"
                     value={values.email}
                     onChange={handleChange}
+                    autoFocus
                 />
                 {fieldErrors && (
                     <p className="fs-6 mt-1 text-danger">{fieldErrors.email}</p>
