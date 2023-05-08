@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./MobileHeader.css"
 import vectorcart from "@images/home/vector.png";
 import { Link } from 'react-router-dom';
-import Sidebar from "@components/Sidebar/Sidebar";
+
+
 function MobileHeader() {
   const [isSideMenu, setSideMenu] = useState(false);
   const toggleSidebar = () => {
       return setSideMenu((state) => !state);
-  }
+  };
   return (
     <div className="header-mobile">
     <header className="mobile-header">
@@ -36,7 +37,8 @@ function MobileHeader() {
               </Link>
             </li>
             <li>
-              <Link to="/"><i class="fa fa-bars" aria-hidden="true"></i></Link>
+              <Link to="/"   className="navIcon  hover-effect-sets"
+                       ><i class="fa fa-bars" aria-hidden="true" ></i></Link>
             </li>
           </ul>
         </div>
