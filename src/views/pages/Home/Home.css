@@ -22,3 +22,13 @@
     bottom: -25px;
     z-index: 1;
 }
+
+.products-grid-container {
+    margin: 11px 47px;
+}
+
+@media screen and (max-width: 991px) {
+    .catergory-grid-wrapper {
+        position: unset;
+    }
+}

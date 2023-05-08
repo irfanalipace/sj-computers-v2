@@ -24,7 +24,10 @@ export const currentState = () => {
         try {
             dispatch({ type: LOADING, payload: {} });
             const response = await getCurrentStateApi();
-            dispatch({ type: UPDATE_STATE, payload: response.data.data.state });
+            dispatch({
+                type: UPDATE_STATE,
+                payload: response.data.data?.state,
+            });
         } catch (error) {
             console.log("Something went wrong in states", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

@@ -237,8 +237,6 @@ const Header = () => {
                                                             style={{
                                                                 display:
                                                                     "block",
-                                                                //   width: "50px", // adjust as needed
-                                                                //   height: "50px", // adjust as needed
                                                             }}
                                                         />
                                                         <div className="total-items">
