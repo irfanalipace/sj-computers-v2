@@ -2,8 +2,6 @@
     background: #eaeded;
 }
 .text-p {
-    font-family: "Inter";
-
     font-size: 10px;
 
     color: #333333;
@@ -23,8 +21,6 @@
 } */
 
 .location-header-text {
-    font-family: "Inter";
-
     font-weight: 500;
 
     font-size: 20px;
@@ -48,7 +44,6 @@
     top: 349px;
     background: #38c056;
     border-radius: 10px;
-    font-family: "Inter";
 
     font-weight: 500;
     font-size: 12px;
@@ -84,8 +79,6 @@
     border-radius: 5px;
 }
 .login-button-box {
-    font-family: "Inter";
-
     font-weight: 400;
     font-size: 10px;
     line-height: 12px;

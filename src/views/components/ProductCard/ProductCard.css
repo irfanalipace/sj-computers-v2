@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    font-family: "Inter", sans-serif;
 }
 
 .product-grid {
@@ -22,7 +21,6 @@
 }
 
 .product-image-grid {
-    /* background-color: #f3f9ff; */
     height: 190px;
 }
 

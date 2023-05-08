@@ -31,7 +31,6 @@
 }
 
 .checkout-header-wrapper .items-number h3 {
-    font-family: "Inter";
     font-weight: 500;
     font-size: 18px;
     margin-bottom: 0;
@@ -40,7 +39,7 @@
 
 .checkout-page-inner {
     width: 75%;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 7px 0;
 }
 
@@ -51,6 +50,10 @@
 .checkout-page button:disabled {
     opacity: 0.4;
 }
-.shipping-details {
+
+.checkout-page .shipping-details {
     padding: 5px !important;
+}
+.checkout-page .shipping-method-component-wrapper {
+    margin-bottom: 35px;
 }
