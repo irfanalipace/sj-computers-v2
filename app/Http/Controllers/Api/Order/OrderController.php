@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\Api\Order;
 
 use App\Classes\StatusEnum;
+use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Order\OrderListRequest;
+use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreShippingAddressRequest;
 use App\Models\OrderShippingAddress;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 
-class OrderController extends Controller
+class OrderController extends BaseController
 {
     //
     public function placeOrder(Request $request)
@@ -58,5 +62,22 @@ class OrderController extends Controller
         } catch (Exception $e) {
             return response()->json(['status' => 400, 'msg', 'Something went wrong.' . $e]);
         }
+    }
+
+    public function getOrders(OrderListRequest $request){
+
+        $perPageRecord = $request->get('per_page') ?? 10;
+
+        $sql = Order::query();
+
+        if($request->month) {
+            $from = Carbon::now()->subMonth($request->get('month'));
+            $to = Carbon::now();
+            $sql = Order::whereBetween('created_at',[$from,$to]);
+        }
+
+        $data = $sql->paginate($perPageRecord);
+
+       return $this->sendResponse($data);
     }
 }

@@ -130,8 +130,10 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::post('process-transaction', [PaypalController::class, 'processTransaction'])->name('processTransaction');
 
-
-
+    /*
+     * get order-record
+     */
+    Route::get('order-list', [OrderController::class, 'getOrders'])->name('getOrderList');
 
 
     /*
