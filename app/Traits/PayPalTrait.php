@@ -9,15 +9,15 @@ trait PayPalTrait {
  {
     try{
         $data = ['items' => []];
-        
-        Cart::session($userId)->getContent()->each(function ($item) use (&$data) {        
+
+        Cart::session($userId)->getContent()->each(function ($item) use (&$data) {
             // Add the name,price,desc and quantity to the $items array
             $data['items'][] = ['name' => $item->name,'price' => $item->price,'desc'  => 'This Laptop is for Developer','qty' => $item->quantity];
         });
-    
+
         $data['invoice_id'] = rand(10,1000000);
-        $data['invoice_description'] = "Order Invoice";
-        $data['return_url'] = route('successTransaction');
+        $data['invoice_description'] = "Order Invoice {$data['invoice_id']}";
+        $data['return_url'] = route('successTransaction',['id' => auth()->user()->id]);
         $data['cancel_url'] = route('cancelTransaction');
         $data['total'] = Cart::session($userId)->getSubTotal();
 
@@ -30,7 +30,7 @@ trait PayPalTrait {
             'Error' => "Something went wrong!" .$e
         ]);
     }
-    
+
  }
 
 }

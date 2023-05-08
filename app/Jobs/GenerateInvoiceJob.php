@@ -47,11 +47,12 @@ class GenerateInvoiceJob implements ShouldQueue
 
         //saving order after invoice created
         $items = [];
+//        Cart::session($this->userId)->getContent()->each(function ($item) use (&$items) {
         Cart::session($this->userId)->getContent()->each(function ($item) use (&$items) {
             $items = ['item_id' => $item->id, 'item_name' => $item->name, 'item_qty' => $item->quantity];
         });
         $items['amount'] = Cart::session($this->userId)->getSubTotal();
-        $items['user_id'] = 2;
+        $items['user_id'] = $this->userId;
         $items['invoice_id'] = $invoice->id;
         $items['status'] = StatusEnum::COMPLETE;
         Order::create($items);
@@ -86,7 +87,7 @@ class GenerateInvoiceJob implements ShouldQueue
         $invoice = [];
         $invoice['payer_id'] = $payerID;
         $invoice['payment_type'] = $paymentType;
-        $invoice['user_id'] = 2;
+        $invoice['user_id'] = $this->userId;
         $invoice['amount'] =  $amount;
         $invoice['status'] = StatusEnum::SUCCESS;
         $invoice = Invoice::create($invoice);

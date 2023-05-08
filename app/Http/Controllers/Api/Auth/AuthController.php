@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use App\Classes\StatusEnum;
 use App\Http\Controllers\Api\BaseController;
 
 use App\Http\Requests\Auth\LoginRequest;
@@ -13,6 +14,7 @@ use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\Auth\VerifyEmailRequest;
 use App\Mail\LoginOtpMail;
 use App\Models\Otp;
+use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -22,6 +24,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
+
+use Cart;
 
 class AuthController extends BaseController
 {
@@ -73,6 +77,22 @@ class AuthController extends BaseController
         return $this->sendResponse(['access_token' => $token , 'user' => $user->name, 'email' => $user->email,'profile_pic' => $user->profile_pic], 'OTP sent to your email address.');
     }
 
+    public function setCart($userId){
+
+        \Cart::session(StatusEnum::DUMMY)->getContent()->each(function ($item) use (&$userId) {
+            \Cart::session($userId)->add(array(
+                'id' => $item->id,
+                'name' => $item->name,
+                'price' => $item->price,
+                'quantity' => $item->quantity,
+                'attributes' => array(),
+                'associatedModel' => Product::class
+            ));
+        });
+
+        Cart::session(StatusEnum::DUMMY)->clear();
+    }
+
     public function forgotPassword(ForgetPasswordRequest $request)
     {
         Password::sendResetLink($request->all());
@@ -118,6 +138,8 @@ class AuthController extends BaseController
         if (empty($data)) {
             return $this->sendError(['otp' => ['Invalid OTP Code,  Try again.']]);
         }
+
+        $this->setCart(auth()->user()->id);
 
         return $this->sendResponse(auth()->user()->only(['name','profile_pic','email']), 'OTP Verified Successfully.');
 

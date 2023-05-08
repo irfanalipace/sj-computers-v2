@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\PayPal;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use App\Classes\StatusEnum;
@@ -21,19 +22,21 @@ class PaypalController extends Controller
     private $provider;
     private $userId;
 
+    const DUMMY = "dummy";
+
     public function __construct()
     {
         $this->provider = new ExpressCheckout;
-        $this->userId = (auth()->user()) ? auth()->user()->id  : 'dummy';
+        $this->userId = (auth()->user()) ? auth()->user()->id  : self::DUMMY;
     }
     //
     public function processTransaction(Request $request)
     {
         try{
-       
+
            $response = $this->TransactionInProgress($request,$this->provider,$this->userId);
-           
-            // This code checks if the 'paypal_link' key exists and is not null in the $response array. 
+
+            // This code checks if the 'paypal_link' key exists and is not null in the $response array.
             // If it does, it returns a JSON response with a status code of 200, a success message, and the value of the 'paypal_link' key as data, which is used to redirect the user to the PayPal payment page.
             if (isset($response['paypal_link']) && $response['paypal_link'] != null) {
                 // return to paypal link
@@ -53,22 +56,26 @@ class PaypalController extends Controller
     public function successTransaction(Request $request)
     {
         try{
-           
+
             // DB::beginTransaction();
             $data = $request->all();
             $response = $this->provider->getExpressCheckoutDetails($request->token);
+            if($this->userId == self::DUMMY){
+                $this->userId = User::find($request->id)->id;
+            }
             //This code checks if the ACK code of a PayPal API response, is either "SUCCESS" or "SUCCESSWITHWARNING"
             if (in_array(strtoupper($response['ACK']), [StatusEnum::SUCCESS,StatusEnum::PAYPALSUCCESSWITHWARNING])) {
                 GenerateInvoiceJob::dispatch($data,$response,$this->userId,StatusEnum::PAYMENTTYPEPAYPAL);
                 //return successfull message
-                return response()->json(['status' => 200, 'msg' => StatusEnum::PAYMENTMESSAGE]);
-    
+
+                return redirect('success-transaction');
+
             } else {
                  // return error if something went wrong.
                 return response()->json(
                     ['status' => 400,'msg'=>'Something went wrong while processing transaction.']
                 );
-            } 
+            }
             // DB::commit();
         } catch(Exception $e) {
             // DB::rollBack();
@@ -78,8 +85,11 @@ class PaypalController extends Controller
         }
     }
 
-    public function cancelTransaction()
+    public function cancelTransaction($error = 'Something went wrong!')
     {
+
+        return redirect('checkout?error='.$error);
+
         try{
             return response()->json(
                 ['status' => 200,'msg'=> 'something went wrong while transaction.']
