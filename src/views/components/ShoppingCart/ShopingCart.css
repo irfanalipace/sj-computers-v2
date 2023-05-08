@@ -184,3 +184,20 @@ head:nth-child(2) {
         font-size: 11px;
     }
 }
+@media screen and (max-width: 350px) {
+    .cart-box {
+        width: 239px;
+        margin-left: -50px;
+    }
+    .shop-heading{
+        font-size: 15px;
+    }
+}
+@media screen and (max-width: 550px) {
+
+    .shop-heading{
+        font-size: 15px;
+    }.price-heading{
+        font-size: 15px;
+    }
+}
