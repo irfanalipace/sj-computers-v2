@@ -13,7 +13,7 @@ export default function TopBar() {
 
     return (
         <>
-            <header className="topBar">
+            <header className="topBar px-3">
                 <div className="topBar-inner">
                     <div className="menuBar">
                         <span

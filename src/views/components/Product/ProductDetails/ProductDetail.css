@@ -1,6 +1,6 @@
 .most-demandind {
     font-family: "Roboto";
-    font-style: normal;
+
     font-weight: 500;
     font-size: 11px;
     line-height: 13px;
@@ -10,7 +10,7 @@
 }
 .item-title {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
@@ -78,7 +78,7 @@
     border-radius: 5px;
     color: white;
     font-family: "Roboto";
-    font-style: normal;
+
     font-weight: 600;
     font-size: 11px;
     line-height: 13px;
@@ -86,7 +86,7 @@
 .selling-color {
     color: orange;
     font-family: "Roboto";
-    font-style: normal;
+
     font-weight: 600;
     font-size: 11px;
     line-height: 13px;
@@ -121,7 +121,7 @@
 .shipping-text {
     margin-bottom: -17px;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 400;
     font-size: 11px;
     line-height: 13px;
@@ -135,7 +135,7 @@
     background: white;
     border-color: white;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 400;
     font-size: 11px;
     border: none;
@@ -155,7 +155,7 @@
 }
 .more-styles {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 400;
     font-size: 11px;
     line-height: 13px;
@@ -170,7 +170,7 @@
     height: 77px;
     max-width: 100%;
     /* font-family: 'Inter'; */
-    /* font-style: normal; */
+    /*  */
     /* font-weight: 400; */
     font-size: 12px;
 
@@ -200,7 +200,7 @@
 }
 .item1 {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 700;
     font-size: 12px;
 
@@ -211,7 +211,7 @@
 }
 .item11 {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 700;
     font-size: 12px;
 
@@ -222,7 +222,7 @@
 }
 .item12 {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 700;
     font-size: 12px;
 
@@ -233,7 +233,7 @@
 }
 .items {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 400;
     font-size: 12px;
 
@@ -255,7 +255,7 @@
 .ui-list-items {
     list-style-type: decimal;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 400;
     font-size: 12px;
 
@@ -265,7 +265,7 @@
 }
 .items-text-style {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: bold;
     font-size: 12px;
 
@@ -299,7 +299,7 @@
 }
 .size-text-details {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: bold;
     font-size: 12px;
     line-height: 15px;

@@ -9,7 +9,7 @@
 }
 .login-cart-button {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -33,13 +33,13 @@
     text-align: center;
     left: -249px;
 }
-.text-left {
+.forgot-password {
     text-align: center !important;
     font-size: 21px !important;
 }
 .ul-list {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 400;
     font-size: 12px;
 
@@ -51,7 +51,7 @@
 }
 .your-list {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
@@ -64,7 +64,7 @@
 .your-account {
     margin-left: -109px;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
@@ -72,7 +72,7 @@
 }
 .create-list {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 400;
     font-size: 12px;
 
@@ -95,7 +95,7 @@
     /* height: 46px; */
     background-color: #00305e;
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;

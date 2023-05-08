@@ -17,25 +17,22 @@
     width: 100%;
 }
 
-.ullist {
+.menuBar .ullist {
     display: flex;
     flex-wrap: wrap;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
-.navIcon {
+.menuBar .navIcon {
     width: 55px;
     display: flex;
     margin-right: 3rem;
     cursor: pointer;
 }
 
-.ullist {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.listitem {
+.menuBar .listitem {
     padding-left: 0px !important;
     margin-bottom: 0px !important;
     display: inline;
@@ -43,9 +40,9 @@
     padding-right: 30px;
     padding: 8px 0;
 }
-.text-color {
+.menuBar .text-color {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 600;
     font-size: 15px;
     line-height: 18px;
@@ -59,7 +56,7 @@ Link:hover {
 
 .small-text-size {
     font-family: "Inter";
-    font-style: normal;
+
     font-weight: 800;
     font-size: 15px;
     line-height: 18px;
@@ -73,4 +70,21 @@ Link:hover {
 }
 .hover-effect-sets-topbar:hover {
     border-color: white;
+}
+
+@media screen and (max-width: 576px) {
+    .menuBar {
+        justify-content: center;
+    }
+    .menuBar .navIcon {
+        display: none;
+    }
+    .menuBar .ullist {
+        max-width: 100%;
+        overflow: auto;
+        flex-wrap: nowrap;
+    }
+    .menuBar .listitem {
+        flex-shrink: 0;
+    }
 }

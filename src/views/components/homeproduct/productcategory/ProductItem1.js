@@ -6,15 +6,9 @@ const ProductItem1 = () => {
     const images = [img1];
 
     return (
-        <Container>
-            {/* <h4 className="laptop-product">Laptops</h4> */}
-            <div className="image-style">
-                <img src={images[0]} alt="Image 2" className="laptop-img" />
-            </div>
-            {/* <Link to="/" className="text-decoration-none">
-                            <p>Start here</p>
-                        </Link> */}
-        </Container>
+        <div className="image-style">
+            <img src={images[0]} alt="Image 2" className="laptop-img" />
+        </div>
     );
 };
 
