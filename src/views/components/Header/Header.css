@@ -477,10 +477,10 @@
     }
 }
 
-@media screen and (max-width: 1250px) {
+@media (min-width: 768px) and (max-width: 1024px) {
     .nav-right {
         display: flex;
-        width: 35%;
+        width: 42% !important;
     }
 
     .search-inputgroup {
