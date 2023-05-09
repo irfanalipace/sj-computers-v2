@@ -24,7 +24,7 @@ class SearchOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'invoice_id' => ['required']
+            'name' => ['required']
         ];
     }
 }

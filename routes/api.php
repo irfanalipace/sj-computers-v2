@@ -59,6 +59,8 @@ Route::get('brands', [BrandController::class, 'getList'])->name('brands');
 
 Route::get('products', [ProductController::class, 'getList'])->name('products');
 
+Route::get('search-product', [ProductController::class, 'searchProduct'])->name('searchProduct');
+
 Route::get('product-detail', [ProductController::class, 'getProductDetail'])->name('productDetail');
 
 /*
@@ -82,7 +84,6 @@ Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('a
 *Contact-us
 */
 Route::post('contact-us',[ContactUsController::class,'contactSubmit'])->name('customer-contact');
-
 
 /*
 *Place Order

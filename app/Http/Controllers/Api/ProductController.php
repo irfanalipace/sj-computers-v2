@@ -18,4 +18,15 @@ class ProductController extends BaseController
         return $this->sendResponse($data);
     }
 
+    public function searchProduct($request){
+        $data = Product::where('status',true)
+            ->where(function ($query)use ($request) {
+                $query->where('name', 'LIKE', '%'.$request->get('name').'%')
+                    ->orWhere('sku', 'LIKE', '%'.$request->get('name').'%');
+            })
+            ->with('brand')
+            ->paginate(12);
+        return $this->sendResponse($data);
+    }
+
 }
