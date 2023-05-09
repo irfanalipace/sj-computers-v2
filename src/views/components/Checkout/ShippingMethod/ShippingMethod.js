@@ -32,7 +32,7 @@ const ShippingMehtod = ({ setShippingDetails }) => {
             <h3>Shipping Method</h3>
             <div className="shipping-method-inner">
                 <form>
-                    {shippingMethods.map((shippingMethod) => (
+                    {shippingMethods.map((shippingMethod, index) => (
                         <div className="shipping-method-input-group">
                             <input
                                 id={shippingMethod.id}
@@ -40,6 +40,7 @@ const ShippingMehtod = ({ setShippingDetails }) => {
                                 onChange={handleChange}
                                 name="shippingMethod"
                                 value={shippingMethod.cost}
+                                defaultChecked={index == 0}
                             />
                             <label htmlFor={shippingMethod.id}>
                                 <span>{shippingMethod.label}</span>

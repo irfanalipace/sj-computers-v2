@@ -52,8 +52,11 @@
     }
     
 }
-@media screen and (max-width:770px) {
+@media screen and (max-width:600px) {
 .image-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
    
 }

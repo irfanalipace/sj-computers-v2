@@ -82,7 +82,7 @@ export default function Checkout() {
                             <div className="row mx-o">
                                 <div className="col-md-9 col-12">
                                     <Accordion
-                                        className="shipping-details"
+                                        className="shipping-details px-0"
                                         id={1}
                                         title="Shipping Details"
                                         summary={<ShippingSummary />}

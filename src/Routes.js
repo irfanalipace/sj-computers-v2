@@ -158,22 +158,27 @@ export const Router = () => {
         {
             path: "/checkout/:productId",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <Checkout />
-                </Suspense>
+                <ProtectedRoute>
+                    <Suspense fallback={<Loader />}>
+                        <Checkout />
+                    </Suspense>
+                </ProtectedRoute>
             ),
         },
         {
             path: "/checkout",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <Checkout />
-                </Suspense>
+                <ProtectedRoute>
+                    <Suspense fallback={<Loader />}>
+                        <Checkout />
+                    </Suspense>
+                </ProtectedRoute>
             ),
-        },   {
+        },
+        {
             path: "/contact",
             element: (
-                <Suspense>
+                <Suspense fallback={<Loader />}>
                     <Contact />
                 </Suspense>
             ),

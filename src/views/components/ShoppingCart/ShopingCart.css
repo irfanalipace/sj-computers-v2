@@ -5,18 +5,16 @@
     padding-bottom: 4px;
 }
 .shop-heading {
+    padding-top: 7px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-
     font-weight: 400;
     font-size: 28px;
-
     color: #000000;
 }
-
 .cartItem-image {
     max-width: 100%;
     margin-left: 10px;
@@ -39,11 +37,17 @@
 .price-heading {
     text-align: end;
     top: 223px;
-
     font-weight: 600;
     font-size: 16px;
     line-height: 19px;
     color: #000000;
+    padding-top: 14px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #333333;
 }
 .shopping-heading {
     margin-left: 10px;
@@ -168,6 +172,24 @@ head:nth-child(2) {
     padding: 10px;
     margin-bottom: 10px;
 }
+@media screen and (min-width: 750px) and (max-width:1060px) {
+.checkout-button {
+  
+    height: 60px;
+}.sub-title {
+ 
+
+    font-size: 12px;
+
+}
+}@media screen and (min-width: 750px) and (max-width:1200px) {
+  .sub-title {
+     
+    
+        font-size: 12px;
+    
+    }
+    }
 @media screen and (max-width: 600px) {
     .item-details {
         font-size: 11px;
