@@ -134,6 +134,7 @@ Route::middleware(['auth:api'])->group(function () {
      * get order-record
      */
     Route::get('order-list', [OrderController::class, 'getOrders'])->name('getOrderList');
+    Route::get('search-order', [OrderController::class, 'searchOrder'])->name('searchOrder');
 
 
     /*

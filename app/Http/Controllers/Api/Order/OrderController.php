@@ -80,4 +80,9 @@ class OrderController extends BaseController
 
        return $this->sendResponse($data);
     }
+
+    public function searchOrder(Request $request){
+        $data = Order::where('invoice_id',$request->invoice_id)->get();
+        return $this->sendResponse($data);
+    }
 }
