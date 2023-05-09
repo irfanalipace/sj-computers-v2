@@ -62,6 +62,10 @@ const cartSlice = createSlice({
 
         CLEAR_CART: (state) => {
             state.cart = [];
+            state.details = {
+                total_items: 0,
+                total: 0,
+            };
         },
         DELETE_ITEM: (state, action) => {
             let cartItem = { ...action.payload.cartItem };
