@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\ShoppingCart;
 
 use App\Classes\StatusEnum;
 use App\Http\Controllers\Api\BaseController;
+use App\Http\Requests\shipment\ApplyShipmentDaysRequest;
+use Carbon\Carbon;
 use Exception;
 use Cart;
 use App\Http\Requests\Cart\AddToCartRequest;
@@ -11,7 +13,9 @@ use App\Http\Requests\Cart\DeleteCartRequest;
 use App\Http\Requests\Cart\LocalStorageItemsRequest;
 use App\Http\Requests\Cart\UpdateQuantityRequest;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use multitypetest\model\Car;
 
 class CartController extends BaseController
 {
@@ -19,7 +23,6 @@ class CartController extends BaseController
     private $user;
     public function __construct()
     {
-        $this->middleware(function ($request, $next) {
 
             $this->user = auth('api')->user();
 
@@ -28,9 +31,6 @@ class CartController extends BaseController
             }else {
                 $this->userId = StatusEnum::DUMMY;
             }
-
-            return $next($request);
-        });
 
     }
 
@@ -95,6 +95,7 @@ class CartController extends BaseController
     public function clearCart()
     {
         try {
+            Cart::session($this->userId)->clearCartConditions();
             $clear = Cart::session($this->userId)->clear();
             return response(array('success' => true, 'data' => $clear, 'message' => "Get cart details success."), 200, []);
         } catch (Exception $e) {
@@ -120,11 +121,15 @@ class CartController extends BaseController
     //details of cart items
     protected function cartDetails()
     {
+
+
+
         $details = [
             'total_quantity' => \Cart::session($this->userId)->getTotalQuantity(),
             'total_items' => count(\Cart::session($this->userId)->getContent()),
             'sub_total' => \Cart::session($this->userId)->getSubTotal(),
             'total' => \Cart::session($this->userId)->getTotal(),
+            'shipment_info' => $this->getShipmentAmount(true),
         ];
         return $details;
     }
@@ -151,4 +156,70 @@ class CartController extends BaseController
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
         }
     }
+
+    public function getShipmentAmount($oldShipmenDays = false, $days = ''){
+
+        $amount = 0;
+
+        if($oldShipmenDays){
+
+            $record = [];
+
+            $record['amount'] = $amount;
+            $record['other_info'] =  [
+                'days' => 5,
+                "estimate_day" => Carbon::now()->addDays(5)->format('l d-m-Y')
+            ];
+
+            $cartConditions = Cart::session($this->userId)->getConditions('shipment_days');
+
+            foreach($cartConditions as $condition)
+            {
+                $amount = $condition->getValue(); // the value of the condition
+                $record['amount'] = $amount;
+                $record['other_info'] =  $condition->getAttributes();
+            }
+
+            return  $record;
+        }
+
+
+        $quantity = \Cart::session($this->userId)->getTotalQuantity();
+
+        switch ($days) {
+            case "1":
+                $amount = 29.99;
+                break;
+            case "2":
+                $amount = 14.99;
+                break;
+            default:
+                $amount = 0;
+        }
+
+        return $amount * (int)$quantity;
+
+    }
+
+    public function applyShipment(ApplyShipmentDaysRequest $request){
+
+        $amount = $this->getShipmentAmount(false, $request->get('shipment_days'));
+
+        $condition = new \Darryldecode\Cart\CartCondition(array(
+            'name' => 'shipment_day',
+            'type' => 'shipping',
+            'target' => 'total', // this condition will be applied to cart's subtotal when getSubTotal() is called.
+            'value' =>  $amount,
+            'attributes' => [
+                'days' => $request->get('shipment_days'),
+                'estimate_day' => Carbon::now()->addDays($request->get('shipment_days'))->format('l d-m-Y')
+            ]
+        ));
+
+        Cart::session($this->userId)->condition($condition);
+        
+        $items = $this->getItems(true);
+        return response(array('success' => true, 'data' => $items, 'message' => 'Item added.'), 200, []);
+    }
+
 }
