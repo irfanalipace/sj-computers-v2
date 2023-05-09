@@ -9,8 +9,6 @@
     margin-bottom: -5px;
 }
 .item-title {
-    font-family: "Inter";
-
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
@@ -120,7 +118,6 @@
 
 .shipping-text {
     margin-bottom: -17px;
-    font-family: "Inter";
 
     font-weight: 400;
     font-size: 11px;
@@ -134,7 +131,6 @@
 .my-button {
     background: white;
     border-color: white;
-    font-family: "Inter";
 
     font-weight: 400;
     font-size: 11px;
@@ -154,8 +150,6 @@
     margin-left: -35px;
 }
 .more-styles {
-    font-family: "Inter";
-
     font-weight: 400;
     font-size: 11px;
     line-height: 13px;
@@ -182,7 +176,6 @@
     border-color: red;
 }
 .card-title1 {
-    font-family: "Inter";
     font-weight: 400;
     font-size: 14px;
 
@@ -199,8 +192,6 @@
     display: initial;
 }
 .item1 {
-    font-family: "Inter";
-
     font-weight: 700;
     font-size: 12px;
 
@@ -210,8 +201,6 @@
     margin-right: 128px;
 }
 .item11 {
-    font-family: "Inter";
-
     font-weight: 700;
     font-size: 12px;
 
@@ -221,8 +210,6 @@
     margin-right: 101px;
 }
 .item12 {
-    font-family: "Inter";
-
     font-weight: 700;
     font-size: 12px;
 
@@ -232,8 +219,6 @@
     margin-right: 86px;
 }
 .items {
-    font-family: "Inter";
-
     font-weight: 400;
     font-size: 12px;
 
@@ -254,7 +239,6 @@
 }
 .ui-list-items {
     list-style-type: decimal;
-    font-family: "Inter";
 
     font-weight: 400;
     font-size: 12px;
@@ -264,8 +248,6 @@
     color: #333333;
 }
 .items-text-style {
-    font-family: "Inter";
-
     font-weight: bold;
     font-size: 12px;
 
@@ -298,8 +280,6 @@
     color: red;
 }
 .size-text-details {
-    font-family: "Inter";
-
     font-weight: bold;
     font-size: 12px;
     line-height: 15px;

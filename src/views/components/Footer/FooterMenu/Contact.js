@@ -1,88 +1,150 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faMobile } from "@fortawesome/free-solid-svg-icons";
-import contact from "@images/footer/footer-links/contact-image.png";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faMobile } from "@fortawesome/free-solid-svg-icons";
+
+import { useFormValidation } from "@hooks/useFormValidation";
+import { contactUsApi } from "@api/contact-us";
+import contact from "@images/footer/footer-links/contact-image.png";
 import "./Contact.css";
 const Contact = () => {
+    const [setMessage, setSetMessage] = useState("");
+    const [error, setError] = useState([]);
+
+    const { values, handleChange, handleSubmit, errors } = useFormValidation(
+        {
+            name: "",
+            email: "",
+            message: "",
+        },
+        {
+            fieldLengths: {
+                name: { min: 3, max: 50 },
+                email: { min: 5, max: 100 },
+            },
+        },
+        postMessage
+    );
+
+    useEffect(() => {
+        setError(errors);
+    }, [errors]);
+
+    const postMessage = async () => {
+        const params = {
+            subject_name: values.name,
+            email: values.email,
+            password: values.password,
+        };
+        try {
+            let response = await contactUsApi(params);
+            console.log("response", response.data);
+
+            setMessage(response.data);
+        } catch (error) {
+            console.log("error", error);
+            setError(error);
+        }
+    };
+
     return (
         <div>
             <div className="contact-header">
-          <div className="my-contact-menu">
-          <nav className="navbar navbar-expand-lg nav-contact-background-color">
-      <div className="container">
-        <div className="navbar-collapse">
-          <ul className="navbar-nav me-auto">
-            <li className="nav-item">
-                
-              <Link className="nav-link text-aligin-contact-menu link-no-hover" to="/home">
-               <span>Contact us</span> 
-              </Link>
-            </li>
-            <li className="nav-item">
-                
-                <Link className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line" to="/home">
-                  Home
-                </Link>
-              </li>
-          </ul>
-        </div>
-        <div className="navbar-collapse justify-content-end ">
-          <ul className="navbar-nav">
-          
-            <li className="nav-item">
-              <Link className="nav-link text-aligin-contact-menu link-no-hover" to="mailto:info@sjcomputer.com">
-                <FontAwesomeIcon icon={faEnvelope} />{' '} {' '} info@sjcomputer.com
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line" to="tel:+9212345678">
-                <FontAwesomeIcon icon={faMobile} /> {' '} +92-12345678
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-          </div>
+                <div className="my-contact-menu">
+                    <nav className="navbar navbar-expand-lg nav-contact-background-color">
+                        <div className="container">
+                            <div className="navbar-collapse">
+                                <ul className="navbar-nav me-auto">
+                                    <li className="nav-item">
+                                        <Link
+                                            className="nav-link text-aligin-contact-menu link-no-hover"
+                                            to="/contact"
+                                        >
+                                            <span>Contact us</span>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link
+                                            className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line"
+                                            to="/"
+                                        >
+                                            Home
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="navbar-collapse justify-content-end ">
+                                <ul className="navbar-nav">
+                                    <li className="nav-item">
+                                        <Link
+                                            className="nav-link text-aligin-contact-menu link-no-hover"
+                                            to="mailto:info@sjcomputer.com"
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={faEnvelope}
+                                            />{" "}
+                                            info@sjcomputer.com
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link
+                                            className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line"
+                                            to="tel:+9212345678"
+                                        >
+                                            <FontAwesomeIcon icon={faMobile} />{" "}
+                                            +92-12345678
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
                 <div className="home-text-paragraph-contact">
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12 col-lg-12 col-sm-12">
-                               <div className="p-tages-text-contact">
-                               <h4 className="contact-text-home">
-                                    Welcome to SJ Computer Customer Service,
-                                    John
-                                </h4>
-                                <h6 className="contact-text-home2">
-                                    What would you like help with today? You can
-                                    quickly take care of most things here, or
-                                    connect with us when needed.
-                                </h6>
-                               </div>
+                                <div className="p-tages-text-contact">
+                                    <h4 className="contact-text-home">
+                                        Welcome to SJ Computer Customer Service,
+                                        John
+                                    </h4>
+                                    <h6 className="contact-text-home2">
+                                        What would you like help with today? You
+                                        can quickly take care of most things
+                                        here, or connect with us when needed.
+                                    </h6>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div></div>
-             
 
-                <div class="container image-cotact-container">
-                    <h4 className="contact-heading-text-with-image">Contact Us</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <img src={contact} className="img-fluid-contact" alt="Image" />
+                <div className="container image-cotact-container">
+                    <h4 className="contact-heading-text-with-image">
+                        Contact Us
+                    </h4>
+                    <div className="row">
+                        <div className="col-lg-6">
+                            <img
+                                src={contact}
+                                className="img-fluid-contact"
+                                alt="Image"
+                            />
                         </div>
-                        <div class="col-lg-6">
-                            <form>
+                        <div className="col-lg-6">
+                            <form
+                                className="contact-form-space"
+                                onSubmit={handleSubmit}
+                            >
                                 <h5 className="this-form-heading-contact">
                                     leave a message
                                 </h5>
                                 <p className="pa-form-heading-contact">
                                     Write to us if you have any questions, we
-                                    will <br></br>definitely contact you and find a
-                                    solution.
+                                    will <br></br>definitely contact you and
+                                    find a solution.
                                 </p>
                                 <div className="form-group text-group-input-contact">
                                     <input
@@ -90,6 +152,17 @@ const Contact = () => {
                                         className="form-control contact-field"
                                         id="name"
                                         placeholder="Enter your name"
+                                        value={values.name}
+                                        onChange={handleChange}
+                                        style={{
+                                            fontFamily: "Inter",
+
+                                            fontSize: "14px",
+
+                                            color: "#999999",
+                                            paddingLeft: "26px",
+                                            paddingBottom: "12px",
+                                        }}
                                     />
                                 </div>
                                 <div className="form-group text-group-input-contact">
@@ -98,6 +171,15 @@ const Contact = () => {
                                         className="form-control contact-field"
                                         id="email"
                                         placeholder="Enter your email"
+                                        style={{
+                                            fontFamily: "Inter",
+
+                                            fontSize: "14px",
+
+                                            color: "#999999",
+                                            paddingLeft: "26px",
+                                            paddingBottom: "12px",
+                                        }}
                                     />
                                 </div>
                                 <div className="form-group text-group-input-contact">
@@ -106,6 +188,14 @@ const Contact = () => {
                                         id="comments"
                                         rows="5"
                                         placeholder="Enter your message"
+                                        style={{
+                                            fontFamily: "Inter",
+                                            paddingTop: "15px",
+                                            fontSize: "14px",
+
+                                            color: "#999999",
+                                            paddingLeft: "26px",
+                                        }}
                                     ></textarea>
                                 </div>
                                 <button

@@ -7,14 +7,16 @@ import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./ReviewCheckout.css";
 
-export default function ReviewCheckout({ toggleAccordion }) {
+export default function ReviewCheckout({ toggleAccordion, estimatedDelivery }) {
     const cartItems = useSelector((state) => state.cart.cart);
     const [quantity, setQuantity] = useState(1);
 
     return (
         <div className="review-card">
-            {/* <h4>Estimated delivery: 14 April 2023 - 02 May 2023</h4>
-            <p>Item Shippied from sjcomputer.us</p> */}
+            <h4>
+                Estimated delivery: {estimatedDelivery ? estimatedDelivery : ""}
+            </h4>
+            <p>Item Shippied from sjcomputer.us</p>
 
             <div className="row mx-0 mb-3">
                 <div className="col-md-7 col-12 ps-0">

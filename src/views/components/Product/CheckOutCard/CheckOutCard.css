@@ -8,8 +8,6 @@
     margin-bottom: 12px;
 }
 .cart-text {
-    font-family: "Inter";
-
     font-weight: 400;
     font-size: 16px;
     line-height: 13px;
@@ -25,7 +23,6 @@
 }
 .buttion-details {
     border: 1px !important;
-    font-family: "Inter";
 
     font-weight: 400;
     font-size: 11px;
@@ -90,7 +87,6 @@
     /* margin-left: 101px; */
     /* padding-top: 7px; */
     border: none;
-    font-family: "Inter";
 
     font-weight: 700;
     font-size: 14px;
@@ -115,8 +111,6 @@
 }
 
 .item-card-add-text-details {
-    font-family: "Inter";
-
     font-weight: 400;
     font-size: 12px;
     line-height: 22px;

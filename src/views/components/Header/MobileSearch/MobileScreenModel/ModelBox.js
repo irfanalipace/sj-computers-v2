@@ -1,6 +1,8 @@
 import React from 'react';
 import './MobileScreenModel.css'
 import imges1 from "@images/cart-product/location.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarker } from '@fortawesome/free-solid-svg-icons';
 const ModelBox = ({ closeModal }) => {
     return (
         <div className="modal-mobile-screen">
@@ -17,8 +19,8 @@ const ModelBox = ({ closeModal }) => {
         <div>  
         <div className="color-card-dev">
                     <button className="mobile-zip-code-box-image">
-                        <img src={imges1} /> {' '} {' '} Enter US zip code
-                      
+                    <FontAwesomeIcon icon={faMapMarker} style={{ marginRight: '0.5em' }} />
+  <span>Enter US zip code</span>
                     </button>
                 </div>
         </div>

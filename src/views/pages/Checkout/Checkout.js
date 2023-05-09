@@ -2,13 +2,18 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { PAYMENT_METHODS } from "@utils/constants";
 import Accordion from "@common/Accordion/Accordion";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import ShippingDetails from "@components/Checkout/ShippingDetails/ShippingDetails";
 import PaymentMethod from "@components/Checkout/PaymentMethod/PaymentMethod";
 import ReviewCheckout from "@components/Checkout/ReviewCheckout/ReviewCheckout";
 import OrderSummary from "@components/Checkout/OrderSummary/OrderSummary";
+import ShippingMethod from "@components/Checkout/ShippingMethod/ShippingMethod";
 import footerlogo from "@images/header-logo.png";
+import paypal from "@images/common/paypal.png";
+import visa from "@images/common/visa.png";
+import mastercard from "@images/common/mastercard.png";
 
 import "./Checkout.css";
 
@@ -18,7 +23,7 @@ export default function Checkout() {
     const [accordionThree, setAccordionThree] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState("");
     const [currentAccordionId, setCurrentAccordionId] = useState();
-
+    const [shippingDetails, setShippingDetails] = useState({});
     const checkoutDetails = useSelector((state) => state.cart.details);
     const loading = useSelector((state) => state.cart.isLoading);
 
@@ -92,11 +97,20 @@ export default function Checkout() {
                                         toggleAccordion={toggleAccordion}
                                         isOpen={ACCORDION_VARIABLES[2]}
                                     >
-                                        <ReviewCheckout />
+                                        <ReviewCheckout
+                                            estimatedDelivery={
+                                                shippingDetails.estimatedDelivery
+                                            }
+                                        />
                                     </Accordion>
                                     <Accordion
                                         id={3}
                                         title="Payment Method"
+                                        summary={
+                                            <SelectedPaymentMethod
+                                                paymentMethod={paymentMethod}
+                                            />
+                                        }
                                         toggleAccordion={toggleAccordion}
                                         isOpen={ACCORDION_VARIABLES[3]}
                                     >
@@ -106,11 +120,23 @@ export default function Checkout() {
                                     </Accordion>
                                 </div>
                                 <div className="col-md-3 col-12">
-                                    <OrderSummary
-                                        handleClick={handleClick}
-                                        activeAccordion={currentAccordionId}
-                                        paymentMethod={paymentMethod}
-                                    />
+                                    <div className="shipping-method-component-wrapper">
+                                        <ShippingMethod
+                                            setShippingDetails={
+                                                setShippingDetails
+                                            }
+                                        />
+                                    </div>
+                                    <div className="order-summary-component-wrapper">
+                                        <OrderSummary
+                                            handleClick={handleClick}
+                                            activeAccordion={currentAccordionId}
+                                            paymentMethod={paymentMethod}
+                                            shippingCost={
+                                                shippingDetails.shippingCost
+                                            }
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         ) : (
@@ -139,4 +165,49 @@ export const ShippingSummary = () => {
             <p>{shippingDetails?.address}</p>
         </div>
     );
+};
+
+export const SelectedPaymentMethod = ({ paymentMethod }) => {
+    let Component = <></>;
+
+    switch (paymentMethod) {
+        case PAYMENT_METHODS.PAYPAL:
+            Component = (
+                <div className="payment-method">
+                    <div>
+                        <label htmlFor="method2">
+                            <div>PayPal</div>
+                            <div
+                                className="image-wrapper"
+                                style={{ marginLeft: "100px" }}
+                            >
+                                <img src={paypal} />
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            );
+            break;
+        case PAYMENT_METHODS.SQUARE:
+            Component = (
+                <div className="payment-method">
+                    <div>
+                        <label htmlFor="method1">
+                            <div>Debit/Credit Card</div>
+                            <div
+                                className="image-wrapper"
+                                style={{ marginLeft: "30px" }}
+                            >
+                                <img src={visa} />
+                                <img src={mastercard} />
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            );
+            break;
+        default:
+    }
+
+    return <div>{paymentMethod}</div>;
 };

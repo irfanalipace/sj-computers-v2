@@ -17,7 +17,7 @@
     width: 100%;
     max-width: 600px;
     padding: 20px;
-    margin-bottom: -385px;
+    margin-bottom: -344px;
     /* position: sticky; */
     justify-content: center;
     display: flex;
@@ -39,8 +39,6 @@
     color: white;
 }
 .box-text-dilver-location {
-    font-family: "Inter";
-
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
@@ -73,7 +71,6 @@
     /* top: 104px; */
     background: #28a343;
     border-radius: 5px;
-    font-family: "Inter";
 
     font-weight: 500;
     font-size: 12px;
@@ -97,7 +94,6 @@
     /* height: 15px; */
     /* left: 37px; */
     /* top: 170px; */
-    font-family: "Inter";
 
     font-weight: 400;
     font-size: 12px;
@@ -111,7 +107,6 @@
     border: none;
     color: white;
     background: #002549;
-    font-family: "Inter";
 
     font-weight: 500;
     font-size: 12px;
