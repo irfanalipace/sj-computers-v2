@@ -135,12 +135,10 @@
     }
 }
 
-@media screen and (max-width: 767px) {
-    .item-card-add-text-details {
-        position: relative;
-        padding-top: 6px;
-        margin-top: -44px;
-        padding-left: 298px;
-        font-size: 10px;
-    }
+.item-card-add-text-details {
+    position: relative;
+    padding-top: 9px;
+    margin-top: -44px;
+    /* padding-left: 298px; */
+    font-size: 10px;
 }

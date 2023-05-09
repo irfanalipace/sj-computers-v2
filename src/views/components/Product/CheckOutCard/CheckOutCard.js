@@ -74,33 +74,32 @@ export const CheckOutCard = ({ product }) => {
                             ? " " + currentState?.name
                             : " Location"}
                     </button>
-                </div>
-                {show && (
-                    <LocationModel
-                        isOpen={show}
-                        handleClose={() => setShow(false)}
-                    />
-                )}
-                {cartItem?.length > 0 ? (
-                    <p className="item-card-add-text-details">
-                        Item Added in Cart
-                    </p>
-                ) : (
-                    <>
-                        <div className="text-stock">
-                            <span className="color-card">In Stock</span>
-                            <QuantityInput onChange={setQuantity} />
-                        </div>
-                        <div className="button-cart-sell">
-                            <Button
-                                className="button1 button-text-button"
-                                clickHandler={cartClickHandler}
-                                isLoading={isLoading}
-                            >
-                                Add to Cart
-                            </Button>
-                        </div>
-                        {/* <div className="button-cart-sell">
+                    {show && (
+                        <LocationModel
+                            isOpen={show}
+                            handleClose={() => setShow(false)}
+                        />
+                    )}
+                    {cartItem?.length > 0 ? (
+                        <p className="item-card-add-text-details">
+                            Item Added in Cart
+                        </p>
+                    ) : (
+                        <>
+                            <div className="text-stock">
+                                <span className="color-card">In Stock</span>
+                                <QuantityInput onChange={setQuantity} />
+                            </div>
+                            <div className="button-cart-sell">
+                                <Button
+                                    className="button1 button-text-button"
+                                    clickHandler={cartClickHandler}
+                                    isLoading={isLoading}
+                                >
+                                    Add to Cart
+                                </Button>
+                            </div>
+                            {/* <div className="button-cart-sell">
                             <Button
                                 className="button2 button-text-button"
                                 clickHandler={cartClickHandler}
@@ -109,8 +108,9 @@ export const CheckOutCard = ({ product }) => {
                                 Buy Now
                             </Button>
                         </div> */}
-                    </>
-                )}
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     );
