@@ -21,7 +21,7 @@ class SendContactMail implements ShouldQueue
      * @return void
      */
     protected $data;
-    
+
 
     public function __construct($data)
     {

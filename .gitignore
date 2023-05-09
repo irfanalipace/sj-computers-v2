@@ -4,6 +4,8 @@
 /public/js
 /storage/*.key
 /storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
 /vendor
 .env
 /composer.lock
