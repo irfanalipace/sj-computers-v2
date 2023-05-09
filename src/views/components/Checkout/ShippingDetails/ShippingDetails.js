@@ -58,14 +58,14 @@ export default function ShippingDetails({ toggleAccordion, handleHeight }) {
                             </h3>
                             <div className="address-list">
                                 <div className="address">
-                                    <input
+                                    {/* <input
                                         type="radio"
                                         id="address_id"
                                         name="selectedAddress"
                                         value="address_id"
                                         onChange={handleChange}
-                                        checked={true}
-                                    />
+                                        defaultChecked={true}
+                                    /> */}
                                     <div>
                                         <label htmlFor="address_id">
                                             {shippingAddress?.full_name}{" "}
@@ -78,7 +78,7 @@ export default function ShippingDetails({ toggleAccordion, handleHeight }) {
                                                 type="button"
                                                 onClick={() => true}
                                             >
-                                                Edit
+                                                Edit Address
                                             </button>
                                         </div>
                                     </div>

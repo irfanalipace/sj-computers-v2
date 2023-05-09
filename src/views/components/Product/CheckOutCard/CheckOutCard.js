@@ -82,7 +82,9 @@ export const CheckOutCard = ({ product }) => {
                     />
                 )}
                 {cartItem?.length > 0 ? (
-                    <p className="item-card-add-text-details">Item Added in Cart</p>
+                    <p className="item-card-add-text-details">
+                        Item Added in Cart
+                    </p>
                 ) : (
                     <>
                         <div className="text-stock">
@@ -98,7 +100,7 @@ export const CheckOutCard = ({ product }) => {
                                 Add to Cart
                             </Button>
                         </div>
-                        <div className="button-cart-sell">
+                        {/* <div className="button-cart-sell">
                             <Button
                                 className="button2 button-text-button"
                                 clickHandler={cartClickHandler}
@@ -106,7 +108,7 @@ export const CheckOutCard = ({ product }) => {
                             >
                                 Buy Now
                             </Button>
-                        </div>
+                        </div> */}
                     </>
                 )}
             </div>
