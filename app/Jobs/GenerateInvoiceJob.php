@@ -50,14 +50,12 @@ class GenerateInvoiceJob implements ShouldQueue
         $order = [];
 //        Cart::session($this->userId)->getContent()->each(function ($item) use (&$items) {
 
-        $order['total_amount'] = Cart::session($this->userId)->getSubTotal();
-        $order['sub_total'] = Cart::session($this->userId)->getSubTotal();
-        $order['shipment_price'] = '';
-        $order['shipment_days'] = '';
+        $order['total_amount'] = \Cart::session($this->userId)->getTotal();
+        $order['sub_total'] = \Cart::session($this->userId)->getSubTotal();
         $order['user_id'] = $this->userId;
         $order['invoice_id'] = $invoice->id;
         $order['status'] = StatusEnum::COMPLETE;
-        $order['item_qty'] = '';
+        $order['item_qty'] =\Cart::session($this->userId)->getTotalQuantity();
         $order = Order::create($order);
 
         Cart::session($this->userId)->getContent()->each(function ($item) use ($order) {

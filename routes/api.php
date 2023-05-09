@@ -88,7 +88,7 @@ Route::post('contact-us',[ContactUsController::class,'contactSubmit'])->name('cu
 /*
 *Place Order
 */
-Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
+Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder')->middleware('auth');
 
 Route::get('success-transaction/{id}', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 
