@@ -8,19 +8,24 @@ import ShippingButton from "./ShippingButton";
 
 import "./ShippingDetails.css";
 
-export default function ShippingDetails({ toggleAccordion, handleHeight }) {
+export default function ShippingDetails({
+    toggleAccordion,
+    handleHeight,
+    shippingAddress,
+}) {
     const [newAddress, setNewAddress] = useState(false);
     const [editAddress, setEditAddress] = useState(false);
     const loading = useSelector((state) => state.orders.isLoading);
-    const shippingAddress = useSelector(
-        (state) => state.orders.shippingDetails
-    );
 
     const buttonClickHandler = (e) => toggleAccordion(e, true);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchStates());
+        return () => {
+            setNewAddress(false);
+            setEditAddress(false);
+        };
     }, []);
 
     useEffect(() => {
@@ -76,7 +81,9 @@ export default function ShippingDetails({ toggleAccordion, handleHeight }) {
                                         <div className="address-container">
                                             <button
                                                 type="button"
-                                                onClick={() => true}
+                                                onClick={() =>
+                                                    setEditAddress(true)
+                                                }
                                             >
                                                 Edit Address
                                             </button>

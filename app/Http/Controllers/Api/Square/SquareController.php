@@ -37,6 +37,7 @@ class SquareController extends Controller
     // charge process
     public function chargeCustomer(CardRequest $request)
     {
+       
         try {
             
             $idempotencyKey = uniqid();
@@ -57,7 +58,7 @@ class SquareController extends Controller
             $body->setCustomerId($customer);
             $body->setLocationId(env('SQUARE_LOCATION_ID'));
             $body->setReferenceId('user-' . auth()->user()->id);
-
+            
             $api_response = $this->squareClient->getPaymentsApi()->createPayment($body);
            
             if ($api_response->isSuccess()) {
