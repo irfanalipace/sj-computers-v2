@@ -62,6 +62,7 @@ class PaypalController extends Controller
             // DB::beginTransaction();
             $data = $request->all();
             $response = $this->provider->getExpressCheckoutDetails($request->token);
+
             if($this->userId == self::DUMMY){
                 $this->userId = User::find($request->id)->id;
             }
@@ -75,7 +76,7 @@ class PaypalController extends Controller
             $cartContent = Cart::session($this->userId)->getContent();
 
             //This code checks if the ACK code of a PayPal API response, is either "SUCCESS" or "SUCCESSWITHWARNING"
-            if (in_array(strtoupper($response['ACK']), [StatusEnum::SUCCESS,StatusEnum::PAYPALSUCCESSWITHWARNING])) {
+            if (isset($response['ACK']) && !empty($response['ACK']) &&  in_array(strtoupper($response['ACK']), [StatusEnum::SUCCESS,StatusEnum::PAYPALSUCCESSWITHWARNING])) {
                 GenerateInvoiceJob::dispatch($data,$response,$this->userId,StatusEnum::PAYMENTTYPEPAYPAL, $orderData , $cartContent);
                 //return successfull message
                 Cart::session($this->userId)->clear();
@@ -83,10 +84,12 @@ class PaypalController extends Controller
                 return redirect('success-transaction');
 
             } else {
+
+                return redirect('cancel-transaction?error'.'Something went wrong while processing transaction.');
                  // return error if something went wrong.
-                return response()->json(
-                    ['status' => 400,'msg'=>'Something went wrong while processing transaction.']
-                );
+//                return response()->json(
+//                    ['status' => 400,'msg'=>'Something went wrong while processing transaction.']
+//                );
             }
             // DB::commit();
         } catch(Exception $e) {
@@ -102,14 +105,14 @@ class PaypalController extends Controller
 
         return redirect('checkout?error='.$error);
 
-        try{
-            return response()->json(
-                ['status' => 200,'msg'=> 'something went wrong while transaction.']
-            );
-        } catch(Exception $e) {
-            return response()->json(
-                ['status' => 200,'error', 'Something went wrong.' .$e]
-            );
-        }
+//        try{
+//            return response()->json(
+//                ['status' => 200,'msg'=> 'something went wrong while transaction.']
+//            );
+//        } catch(Exception $e) {
+//            return response()->json(
+//                ['status' => 200,'error', 'Something went wrong.' .$e]
+//            );
+//        }
     }
 }
