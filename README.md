@@ -21,6 +21,12 @@ To run the project run following commands
 -   php artisan voyager:admin admin@admin.com
 -   php artisan serve
 
+# After Environment change
+
+-   php artisan config:clear
+-   php artisan config:cache
+-   php artisan optimize:clear
+
 For Frontend:
 
 -   npm install
