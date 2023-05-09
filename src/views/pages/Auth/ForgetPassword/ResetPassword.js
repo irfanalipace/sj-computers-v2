@@ -131,7 +131,7 @@ const PasswordForm = () => {
                             )}
                         </div>
 
-                        <div className="d-grid justify-content-center">
+                        <div className="d-flex justify-content-center w-100">
                             <button
                                 type="submit"
                                 className="resetpassword-button"

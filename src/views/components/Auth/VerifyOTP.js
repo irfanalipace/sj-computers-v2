@@ -133,7 +133,7 @@ const VerifyOTP = () => {
                     <p className="fs-6 mt-1 text-danger">{fieldErrors.otp}</p>
                 )}
             </div>
-            <div className="d-grid justify-content-center">
+            <div className="d-flex justify-content-center w-100">
                 <button
                     type="submit"
                     className="verify-button-data verify-otp-btn"
