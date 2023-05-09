@@ -26,15 +26,17 @@ class PaypalController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');
         $this->provider = new ExpressCheckout;
         $this->userId = (auth()->user()) ? auth()->user()->id  : self::DUMMY;
+       
     }
     //
     public function processTransaction(Request $request)
     {
         try{
-
-           $response = $this->TransactionInProgress($request,$this->provider,$this->userId);
+            
+           $response = $this->TransactionInProgress($request,$this->provider,auth()->user()->id );
 
             // This code checks if the 'paypal_link' key exists and is not null in the $response array.
             // If it does, it returns a JSON response with a status code of 200, a success message, and the value of the 'paypal_link' key as data, which is used to redirect the user to the PayPal payment page.
@@ -47,6 +49,7 @@ class PaypalController extends Controller
             }
 
         } catch(Exception $e) {
+            dd("error",$e);
             return response()->json(
                 ['status' => 200,'error', 'Something went wrong.' .$e]
             );
@@ -56,7 +59,7 @@ class PaypalController extends Controller
     public function successTransaction(Request $request)
     {
         try{
-
+            dd($request);
             // DB::beginTransaction();
             $data = $request->all();
             $response = $this->provider->getExpressCheckoutDetails($request->token);
