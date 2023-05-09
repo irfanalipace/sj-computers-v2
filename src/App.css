@@ -10,7 +10,7 @@ body {
 body * {
     font-weight: 400;
     font-family: "Inter", sans-serif;
-   
+    line-height: 1;
 }
 h1,
 h2,
