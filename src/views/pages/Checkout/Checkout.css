@@ -38,11 +38,13 @@
 }
 
 .checkout-page-inner {
-    width: 75%;
-    margin: 20px auto;
+    width: 89%;
+    margin-left: 79px;
+    padding-left: 33px;
+    /* margin: 39px auto; */
+    margin-top: 12px;
     padding: 7px 0;
 }
-
 .checkout-page {
     background-color: white;
 }
@@ -72,6 +74,8 @@
     
 }
 
+
+
 @media screen and (max-width:470px) {
 .checkout-header .logo-wrapper img {
     width: 60%;
@@ -83,21 +87,41 @@
    padding: 0px;
 }
 }
-
-@media screen and (max-width:300px) {
-.checkout-header .logo-wrapper {
-    width: 149px;
-    height: 46px;
+@media screen and (max-width: 1041px) {
+    .checkout-page-inner {
+        /* width: 88%; */
+        margin-left: 17px;
+        margin: 20px auto;
+        padding: 7px 0;
+        /* padding-right: 0px; */
+        /* margin-left: 45px; */
+        /* margin-right: 19px; */
+    }.shipping-method-container h3 {
+    padding-top: 12px;
  
-    padding-top: 6px;
-}.accordion-header h3 {
-    margin-left: 11px;
-    font-size: 9px !important;
+    color: #318243;
+    margin-bottom: 18px;
+    padding-left: 3px;
 }
 }
+
 @media screen and (max-width:550px) {
   .accordion-header h3 {
         margin-left: 11px;
         font-size: 10px !important;
     }
     }
+
+
+      @media screen and (max-width:300px) {
+        .checkout-header .logo-wrapper {
+            width: 149px;
+            height: 46px;
+         
+            padding-top: 6px;
+        }.accordion-header h3 {
+            margin-left: 11px;
+            font-size: 9px !important;
+        }
+        }
+   

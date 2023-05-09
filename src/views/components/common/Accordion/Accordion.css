@@ -81,3 +81,12 @@
     font-size: 18px;
     margin-bottom: 20px;
 }
+
+@media screen and (max-width:600px) {
+    .accordion-header {
+   
+        padding-left: 17px;
+        padding-top: 12px;
+ 
+    }
+}

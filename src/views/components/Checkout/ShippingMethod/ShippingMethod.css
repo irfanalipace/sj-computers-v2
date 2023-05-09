@@ -31,3 +31,8 @@
     cursor: pointer;
     height: 40px;
 }
+@media screen and (min-width: 772px) and (max-width:850px){
+    .checkout-page-inner {
+      width: 184px;
+    }
+}
