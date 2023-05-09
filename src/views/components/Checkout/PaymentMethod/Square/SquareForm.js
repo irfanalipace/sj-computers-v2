@@ -1,0 +1,50 @@
+import { PaymentForm, CreditCard } from "react-square-web-payments-sdk";
+
+import { clearCartLocally } from "@utils/cartHelpers";
+import { sendTokenApi } from "@api/square";
+
+import "./SquareForm.css";
+
+export const SquareForm = () => {
+    const buttonProps = {
+        css: {
+            backgroundColor: "#318243",
+            fontSize: "14px",
+            "&:hover": {
+                backgroundColor: "#2e663b",
+            },
+        },
+    };
+    const creditCardStyle = {
+        input: {
+            fontSize: "14px",
+        },
+    };
+
+    return (
+        <div>
+            <PaymentForm
+                applicationId={process.env.REACT_APP_SQUARE_APPLICATION_ID}
+                cardTokenizeResponseReceived={async (token) => {
+                    try {
+                        await sendTokenApi({
+                            source_id: token.token,
+                        });
+                    } catch (error) {
+                        clearCartLocally();
+                    }
+                }}
+                locationId={process.env.REACT_APP_SQUARE_LOCATION_ID}
+                formProps={{
+                    className: "payment-form",
+                }}
+            >
+                <CreditCard
+                    includeInputLabels
+                    buttonProps={buttonProps}
+                    style={creditCardStyle}
+                />
+            </PaymentForm>
+        </div>
+    );
+};
