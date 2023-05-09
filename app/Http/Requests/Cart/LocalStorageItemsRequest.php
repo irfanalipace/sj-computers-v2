@@ -24,7 +24,7 @@ class LocalStorageItemsRequest extends FormRequest
     public function rules()
     {
         return [
-            'cartItems' => ['required']
+            'cartItems' => ['nullable']
         ];
     }
 }
