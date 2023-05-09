@@ -19,15 +19,21 @@ export default function ReviewCheckout({ toggleAccordion, estimatedDelivery }) {
             <p>Item Shippied from sjcomputer.us</p>
 
             <div className="row mx-0 mb-3">
-                <div className="col-md-7 col-12 ps-0">
+                <div className="col-12 ps-0">
                     {cartItems.map((item) => (
                         <div className="item-card" key={item?.id}>
                             <div className="img-wrapper">
-                                <img src={item.product.image} alt="laptop" />
+                                <img
+                                    src={item.product.image}
+                                    alt={item.product.name}
+                                />
                             </div>
                             <div className="item-detail">
                                 <h6>{item.product.name}</h6>
                                 <h6 className="price">${item.price}</h6>
+                                <h6 className="quantity">
+                                    Quantity: {item.quantity}
+                                </h6>
                                 {/* <QuantityInput
                                     value={item.quantity}
                                     onChange={setQuantity}
