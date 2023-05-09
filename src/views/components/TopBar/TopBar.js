@@ -78,10 +78,25 @@ export default function TopBar() {
                                     BTO
                                 </Link>
                             </li>
+                          
                         </ul>
-                        {/* <span style={{ textAlign: "end" }}>Get Top Deals Now</span> */}
+                      
                     </div>
+
                 </div>
+             {/* <div className="get-top-deals">
+             <ul>
+                    <li className="listit">
+                                <Link
+                                    to="/"
+                                    className="text-decoration-none"
+                                    style={{color:'white', listStyle:'none', fontSize:'14px', fontFamily:'initial'}}
+                                >
+                                   Get Top Deals Now
+                                </Link>
+                            </li>
+                            </ul>
+             </div> */}
             </header>
 
             <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />

@@ -126,17 +126,15 @@
     border-radius: 5px 0px 0px 5px;
 }
 
-/* .ul-liste-items-all-buttons{
-
+ .ul-liste-items-all-buttons:active{
+    background-color: #3b71ca;
+    color: white;
 }
 .ul-liste-items-all-buttons:hover{
-    background-color: green;
+    background-color: #3b71ca;
     color: white;
   }
-  .ul-liste-items-all-buttons:active {
-    background-color: green;
-    color: white;
-  } */
+  
 
 /* .ul-liste-items-all-buttons:nth-child(odd):hover {
   background-color: lightgreen;
