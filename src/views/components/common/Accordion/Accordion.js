@@ -37,7 +37,7 @@ const Accordion = ({
             >
                 <div className="row mx-0">
                     <div className={`${summary ? "col-lg-4 col-5" : "col-12"}`}>
-                        <div className="d-flex align-items-center">
+                        <div className="d-flex align-items-center h-100">
                             <h4>{id}</h4>
                             <h3>{title}</h3>
                         </div>
