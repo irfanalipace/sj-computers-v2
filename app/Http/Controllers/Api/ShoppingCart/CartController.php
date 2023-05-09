@@ -21,7 +21,7 @@ class CartController extends BaseController
     }
 
     //show items of cart
-    public function getItems()
+    public function getItems($returnItems = false)
     {
         $items = [];
 
@@ -30,6 +30,10 @@ class CartController extends BaseController
             $items[] = $item;
         });
         $items['details'] = $this->cartDetails();
+
+        if($returnItems){
+            return $items;
+        }
         return response(array('success' => true, 'data' => $items, 'message' => 'cart get items success'), 200, []);
     }
 
@@ -39,9 +43,11 @@ class CartController extends BaseController
         try {
             $product = Product::find($request->product_id);
 
-            $item = Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $request->qty, array(), array(), $product);
+            Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $request->qty, array(), array(), $product);
 
-            return response(array('success' => true, 'data' => $item, 'message' => 'Item added.'), 200, []);
+            $items = $this->getItems(true);
+
+            return response(array('success' => true, 'data' => $items, 'message' => 'Item added.'), 200, []);
         } catch (Exception $e) {
 
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
@@ -112,13 +118,19 @@ class CartController extends BaseController
     public function storelocalStorageItems(LocalStorageItemsRequest $request)
     {
         try {
+
+            if(empty($request->carItems)){
+                return  $this->sendResponse([]);
+            }
             foreach ($request->cartItems as $value) {
 
                 $product = Product::find($value['product_id']);
 
-                $item =  Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $value['qty'], array(), array(), $product);
+                Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $value['qty'], array(), array(), $product);
             }
-            return response(array('success' => true, 'data' => $item, 'message' => 'Item added.'), 200, []);
+
+            $items = $this->getItems();
+            return response(array('success' => true, 'data' => $items, 'message' => 'Item added.'), 200, []);
         } catch (Exception $e) {
 
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);

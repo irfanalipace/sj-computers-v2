@@ -72,6 +72,10 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 
     public function getProfilePicAttribute($value){
 
+        if(empty($value)){
+            return  $value;
+        }
+
         $picPath ='storage/'.$value;
 
         if(public_path($picPath)){
