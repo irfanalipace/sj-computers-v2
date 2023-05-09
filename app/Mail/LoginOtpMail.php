@@ -30,6 +30,6 @@ class LoginOtpMail extends Mailable
     public function build()
     {
 //        return $this->view('view.name');
-        return $this->subject('Login OTP')->view('emails.otp');
+        return $this->subject('Login OTP')->view('emails.email-template');
     }
 }
