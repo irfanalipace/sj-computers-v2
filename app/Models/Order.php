@@ -13,7 +13,7 @@ class Order extends Model
 
     protected $with = ['orderItem'];
 
-    protected function orderItem(){
+    public function orderItem(){
         return $this->hasMany(OrderItem::class);
     }
 }
