@@ -12,6 +12,8 @@ import {
     placeOrderApi,
 } from "@api/checkout";
 
+import { clearCartLocally } from "@utils/cartHelpers";
+
 export const getShippingDetails = () => {
     return async (dispatch) => {
         try {
@@ -49,6 +51,7 @@ export const placeOrder = (data, cb) => {
         try {
             dispatch({ type: PLACING_ORDER, payload: {} });
             let response = await placeOrderApi(data);
+            clearCartLocally();
 
             if (typeof cb === "function") cb(response.data);
             dispatch({ type: ORDER_PLACED, payload: {} });

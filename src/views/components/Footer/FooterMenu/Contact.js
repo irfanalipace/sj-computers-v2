@@ -2,14 +2,36 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faMobile } from "@fortawesome/free-solid-svg-icons";
+import { Alert } from "react-bootstrap";
 
 import { useFormValidation } from "@hooks/useFormValidation";
 import { contactUsApi } from "@api/contact-us";
+import Button from "@common/Button/Button";
 import contact from "@images/footer/footer-links/contact-image.png";
 import "./Contact.css";
 const Contact = () => {
-    const [setMessage, setSetMessage] = useState("");
+    const [message, setMessage] = useState("");
     const [error, setError] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const postMessage = async (formValue) => {
+        setIsLoading(true);
+        const params = {
+            subject_name: formValue.name,
+            email: formValue.email,
+            message: formValue.message,
+        };
+        try {
+            let response = await contactUsApi(params);
+            setMessage(response.data);
+            values.subject_name = "";
+            values.email = "";
+            values.message = "";
+        } catch (error) {
+            setError(error.data.errors);
+        }
+        setIsLoading(false);
+    };
 
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
@@ -21,31 +43,15 @@ const Contact = () => {
             fieldLengths: {
                 name: { min: 3, max: 50 },
                 email: { min: 5, max: 100 },
+                message: { min: 5, max: 1000 },
             },
         },
         postMessage
     );
 
     useEffect(() => {
-        setError(errors);
+        setError({ ...errors });
     }, [errors]);
-
-    const postMessage = async () => {
-        const params = {
-            subject_name: values.name,
-            email: values.email,
-            password: values.password,
-        };
-        try {
-            let response = await contactUsApi(params);
-            console.log("response", response.data);
-
-            setMessage(response.data);
-        } catch (error) {
-            console.log("error", error);
-            setError(error);
-        }
-    };
 
     return (
         <div>
@@ -151,6 +157,7 @@ const Contact = () => {
                                         type="text"
                                         className="form-control contact-field"
                                         id="name"
+                                        name="name"
                                         placeholder="Enter your name"
                                         value={values.name}
                                         onChange={handleChange}
@@ -164,13 +171,21 @@ const Contact = () => {
                                             paddingBottom: "12px",
                                         }}
                                     />
+                                    {error.name && (
+                                        <p className="fs-6 mt-1 text-danger">
+                                            {error.name}
+                                        </p>
+                                    )}
                                 </div>
                                 <div className="form-group text-group-input-contact">
                                     <input
                                         type="email"
                                         className="form-control contact-field"
                                         id="email"
+                                        name="email"
                                         placeholder="Enter your email"
+                                        value={values.email}
+                                        onChange={handleChange}
                                         style={{
                                             fontFamily: "Inter",
 
@@ -181,13 +196,21 @@ const Contact = () => {
                                             paddingBottom: "12px",
                                         }}
                                     />
+                                    {error.email && (
+                                        <p className="fs-6 mt-1 text-danger">
+                                            {error.email}
+                                        </p>
+                                    )}
                                 </div>
                                 <div className="form-group text-group-input-contact">
                                     <textarea
                                         className="form-control contact-field  contact-field-commits"
-                                        id="comments"
+                                        id="message"
+                                        name="message"
                                         rows="5"
                                         placeholder="Enter your message"
+                                        value={values.message}
+                                        onChange={handleChange}
                                         style={{
                                             fontFamily: "Inter",
                                             paddingTop: "15px",
@@ -197,13 +220,25 @@ const Contact = () => {
                                             paddingLeft: "26px",
                                         }}
                                     ></textarea>
+                                    {error.message && (
+                                        <p className="fs-6 mt-1 text-danger">
+                                            {error.message}
+                                        </p>
+                                    )}
                                 </div>
-                                <button
+                                <Button
+                                    isLoading={isLoading}
+                                    onClick={handleSubmit}
                                     type="submit"
                                     className="contact-button"
                                 >
                                     SEND
-                                </button>
+                                </Button>
+                                {message && (
+                                    <Alert variant="success" className="mt-2">
+                                        Message has been sent successfully
+                                    </Alert>
+                                )}
                             </form>
                         </div>
                     </div>

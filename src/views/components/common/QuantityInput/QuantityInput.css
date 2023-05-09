@@ -29,3 +29,14 @@
     padding-left: 11px;
     font-size: 12px;
 }
+
+.quantity-container input::-webkit-outer-spin-button,
+.quantity-container input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.quantity-container input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}

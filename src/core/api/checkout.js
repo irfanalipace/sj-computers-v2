@@ -1,7 +1,5 @@
 import ApiService from "@services/apiService";
 
-import { clearCartLocally } from "@utils/cartHelpers";
-
 export function getShippingAddressApi() {
     return new Promise((resolve, reject) => {
         ApiService.get(`/get-shipping-address`)
@@ -63,7 +61,6 @@ export function placeOrderApi({ paymentMethod }) {
                     "file: checkout.js | placeOrderApi| response",
                     response
                 );
-                clearCartLocally();
                 resolve(response.data);
             })
             .catch((e) => {

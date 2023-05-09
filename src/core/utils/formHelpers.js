@@ -12,6 +12,7 @@ const FIELD_ENUMS = {
     email: "Email",
     password: "Password",
     confirmPassword: "Confirm Password",
+    message: "Message",
     otp: "OTP",
 };
 

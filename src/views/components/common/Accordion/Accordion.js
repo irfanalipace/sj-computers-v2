@@ -9,7 +9,6 @@ const Accordion = ({
     toggleAccordion,
     isOpen,
 }) => {
-    console.log("summary: ", summary);
     const contentRef = useRef(null);
 
     const handleToggle = (e, next = false) => {

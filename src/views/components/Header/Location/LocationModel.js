@@ -9,7 +9,7 @@ import { updateState } from "@store/states/statesThunks";
 import Loader from "@common/Spinner/Spinner";
 
 import "./LocationModel.css";
-function UpdateStateModel({ isOpen, handleClose }) {
+function UpdateStateModel({ isOpen = false, handleClose }) {
     const states = useSelector((state) => state.states.states);
     const isLoading = useSelector((state) => state.states.isLoading);
     const [state, setState] = useState("Ship outside the US");
