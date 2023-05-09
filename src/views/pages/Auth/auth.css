@@ -486,3 +486,21 @@ h5:after {
 
     color: #333333;
 }
+
+
+@media screen and (max-width:440px) {
+    .footer-mute {
+        text-align: center;
+        font-size: 13px;
+        padding-right: 8px;
+    }.copyright-sjcomputer {
+        padding-right: 0px;
+    }.sticky-bottom{
+        width: 440px;
+    }
+}
+@media screen and (max-width:390px) and (min-width:300px){
+    .sticky-bottom{
+        width: 420px;
+    }
+}

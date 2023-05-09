@@ -35,3 +35,9 @@ span {
         min-height: calc(100vh - 800px);
     }
 }
+
+@media screen and (max-width: 330px) {
+    body {
+      width:369px !important;
+    }
+}
