@@ -49,7 +49,7 @@ class GenerateInvoiceJob implements ShouldQueue
      */
     public function handle()
     {
-        
+
         //saving invoice for the payment
         $invoice = $this->storeInvoice();
 
@@ -62,6 +62,8 @@ class GenerateInvoiceJob implements ShouldQueue
         $order['user_id'] = $this->userId;
         $order['invoice_id'] = $invoice->id;
         $order['status'] = StatusEnum::COMPLETE;
+        $order['shipment_price'] = $this->cartData['shipment_amount'];
+        $order['shipment_days'] = $this->cartData['estimate_day'];
         $order['item_qty'] = $this->cartData['item_qty'];
         $order = Order::create($order);
 
