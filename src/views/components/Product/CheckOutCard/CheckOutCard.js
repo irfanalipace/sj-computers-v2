@@ -74,15 +74,17 @@ export const CheckOutCard = ({ product }) => {
                             ? " " + currentState?.name
                             : " Location"}
                     </button>
-                </div>
-                {show && (
+                    {show && (
                     <LocationModel
                         isOpen={show}
                         handleClose={() => setShow(false)}
                     />
                 )}
                 {cartItem?.length > 0 ? (
+                   
                     <p className="item-card-add-text-details">Item Added in Cart</p>
+                  
+                
                 ) : (
                     <>
                         <div className="text-stock">
@@ -109,6 +111,8 @@ export const CheckOutCard = ({ product }) => {
                         </div>
                     </>
                 )}
+                </div>
+              
             </div>
         </div>
     );
