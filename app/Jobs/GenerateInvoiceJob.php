@@ -49,6 +49,7 @@ class GenerateInvoiceJob implements ShouldQueue
      */
     public function handle()
     {
+        
         //saving invoice for the payment
         $invoice = $this->storeInvoice();
 

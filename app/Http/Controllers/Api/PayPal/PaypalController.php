@@ -58,11 +58,12 @@ class PaypalController extends Controller
 
     public function successTransaction(Request $request)
     {
+       
         try{
             // DB::beginTransaction();
             $data = $request->all();
             $response = $this->provider->getExpressCheckoutDetails($request->token);
-
+           
             if($this->userId == self::DUMMY){
                 $this->userId = User::find($request->id)->id;
             }

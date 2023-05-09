@@ -85,7 +85,10 @@ Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('a
 */
 Route::post('contact-us',[ContactUsController::class,'contactSubmit'])->name('customer-contact');
 
-Route::get('success-transaction/{id?}', [PaypalController::class, 'successTransaction'])->name('successTransaction');
+/*
+*Place Order
+*/
+Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder')->middleware('auth:api');
 
 Route::post('cancel-transaction/{id?}', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
