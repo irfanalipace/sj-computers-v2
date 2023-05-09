@@ -16,9 +16,6 @@
     margin-left: 10px;
 }
 
-.payment-method img {
-    margin-left: 5px;
-}
 
 .payment-btn {
     font-weight: 600;
@@ -34,3 +31,4 @@
     color: white;
     border: 0;
 }
+

@@ -91,3 +91,31 @@ input[type="number"] {
     color: #ffffff;
     border: 0;
 }
+
+
+@media screen and (max-width:600px) {
+    .item-card {
+        display: flex;
+        align-items: center;
+       
+        flex-direction: column;
+  
+            margin-top: -44px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+    
+    }
+    @media screen and (max-width:600px) {
+        .item-card .img-wrapper {
+            height: 24px ;
+            width: 97px ;
+            padding-bottom: 61px ;
+            padding-top: 61px ;
+        }
+}
+@media screen and (max-width:600px) {
+.item-detail h6{
+    font-size: 9px;
+}
+}
