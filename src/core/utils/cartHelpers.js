@@ -111,8 +111,8 @@ export const compareLocalCartWithDBCart = (array_1, array_2) => {
 };
 
 export const clearCartLocally = () => {
-    window.localStorage.deleteItem("cart");
-    window.localStorage.deleteItem("cartDetails");
+    window.localStorage.removeItem("cart");
+    window.localStorage.removeItem("cartDetails");
 };
 
 export const objectToArray = (obj) => {
