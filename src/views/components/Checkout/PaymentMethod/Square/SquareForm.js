@@ -1,11 +1,16 @@
 import { PaymentForm, CreditCard } from "react-square-web-payments-sdk";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { clearCartLocally } from "@utils/cartHelpers";
+import { CLEAR_CART } from "@store/cart/cartSlice";
 import { sendTokenApi } from "@api/square";
 
 import "./SquareForm.css";
 
 export const SquareForm = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const buttonProps = {
         css: {
             backgroundColor: "#318243",
@@ -30,8 +35,11 @@ export const SquareForm = () => {
                         await sendTokenApi({
                             source_id: token.token,
                         });
-                    } catch (error) {
                         clearCartLocally();
+                        dispatch(CLEAR_CART());
+                        navigate("/success-transaction");
+                    } catch (error) {
+                        console.log("error in square api: ", e);
                     }
                 }}
                 locationId={process.env.REACT_APP_SQUARE_LOCATION_ID}

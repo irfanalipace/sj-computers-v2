@@ -21,7 +21,8 @@ export default function ProductsGrid() {
     };
 
     useEffect(() => {
-        dispatch(fetchProducts());
+        if (products.length === 0) dispatch(fetchProducts());
+
         return () => {
             dispatch(CLEAR_PRODUCTS());
         };

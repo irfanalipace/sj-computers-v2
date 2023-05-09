@@ -104,7 +104,6 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                     <FontAwesomeIcon
                                         className="me-1"
                                         icon={faGlobe}
-                                        stat
                                     />
                                     <Link>English</Link>
                                 </li>

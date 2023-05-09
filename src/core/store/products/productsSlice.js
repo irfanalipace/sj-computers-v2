@@ -24,6 +24,10 @@ const productSlice = createSlice({
             state.isLoading = false;
         },
         CLEAR_PRODUCTS: (state) => {
+            state.products.splice(12, state.products.length - 12);
+            state.currentPage = 2;
+        },
+        CLEAR_ALL_PRODUCTS: (state) => {
             state.products = [];
             state.currentPage = 1;
         },
@@ -41,6 +45,7 @@ export const {
     CLEAR_LOADING,
     FETCH_PRODUCTS,
     CLEAR_PRODUCTS,
+    CLEAR_ALL_PRODUCTS,
     RESET_PAGE,
     API_ERROR,
 } = productSlice.actions;
