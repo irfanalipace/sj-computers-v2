@@ -85,11 +85,6 @@ Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('a
 */
 Route::post('contact-us',[ContactUsController::class,'contactSubmit'])->name('customer-contact');
 
-/*
-*Place Order
-*/
-Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder')->middleware('auth');
-
 Route::get('success-transaction/{id}', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 
 Route::post('cancel-transaction/{id}', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
@@ -142,4 +137,9 @@ Route::middleware(['auth:api'])->group(function () {
     *Square Integration
     */
     Route::post('square-charge', [SquareController::class, 'chargeCustomer'])->name('squreCharge');
+
+    /*
+     * place order
+     */
+    Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
 });

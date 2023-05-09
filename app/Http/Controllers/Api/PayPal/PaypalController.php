@@ -12,6 +12,7 @@ use Srmklive\PayPal\Services\ExpressCheckout;
 use Srmklive\PayPal\Facades\Paypal as PayPalClient;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\GenerateInvoiceJob;
+use Cart;
 
 use Illuminate\Support\Facades\DB;
 
@@ -64,10 +65,20 @@ class PaypalController extends Controller
             if($this->userId == self::DUMMY){
                 $this->userId = User::find($request->id)->id;
             }
+
+            $orderData = [];
+
+            $orderData['total_amount'] = \Cart::session($this->userId)->getTotal();
+            $orderData['sub_total'] = \Cart::session($this->userId)->getSubTotal();
+            $orderData['item_qty'] =\Cart::session($this->userId)->getTotalQuantity();
+
+            $cartContent = Cart::session($this->userId)->getContent();
+
             //This code checks if the ACK code of a PayPal API response, is either "SUCCESS" or "SUCCESSWITHWARNING"
             if (in_array(strtoupper($response['ACK']), [StatusEnum::SUCCESS,StatusEnum::PAYPALSUCCESSWITHWARNING])) {
-                GenerateInvoiceJob::dispatch($data,$response,$this->userId,StatusEnum::PAYMENTTYPEPAYPAL);
+                GenerateInvoiceJob::dispatch($data,$response,$this->userId,StatusEnum::PAYMENTTYPEPAYPAL, $orderData , $cartContent);
                 //return successfull message
+                Cart::session($this->userId)->clear();
 
                 return redirect('success-transaction');
 
