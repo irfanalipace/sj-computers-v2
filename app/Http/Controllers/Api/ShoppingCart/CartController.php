@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\ShoppingCart;
 
+use App\Classes\StatusEnum;
 use App\Http\Controllers\Api\BaseController;
 use Exception;
 use Cart;
@@ -15,14 +16,28 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends BaseController
 {
     private $userId;
+    private $user;
     public function __construct()
     {
-        $this->userId = (Auth::check()) ? auth()->user()->id  : 'dummy';
+        $this->middleware(function ($request, $next) {
+
+            $this->user = auth('api')->user();
+
+            if($this->user){
+                $this->userId = $this->user->id ;
+            }else {
+                $this->userId = StatusEnum::DUMMY;
+            }
+
+            return $next($request);
+        });
+
     }
 
     //show items of cart
     public function getItems($returnItems = false)
     {
+     
         $items = [];
 
         \Cart::session($this->userId)->getContent()->each(function ($item) use (&$items) {
