@@ -192,6 +192,8 @@ return [
         //'css/custom.css',
     ],
 
+    'assets_path' => env('APP_URL').'/public/vendor/tcg/voyager/assets',
+
     'additional_js' => [
         //'js/custom.js',
     ],
