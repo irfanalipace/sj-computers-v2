@@ -30,14 +30,13 @@ class PaypalController extends Controller
     {
         $this->provider = new ExpressCheckout;
         $this->userId = (auth()->user()) ? auth()->user()->id  : self::DUMMY;
-
     }
     //
     public function processTransaction(Request $request)
     {
-        try{
+        try {
 
-           $response = $this->TransactionInProgress($request,$this->provider,auth()->user()->id );
+            $response = $this->TransactionInProgress($request, $this->provider, auth()->user()->id);
 
             // This code checks if the 'paypal_link' key exists and is not null in the $response array.
             // If it does, it returns a JSON response with a status code of 200, a success message, and the value of the 'paypal_link' key as data, which is used to redirect the user to the PayPal payment page.
@@ -45,14 +44,13 @@ class PaypalController extends Controller
                 // return to paypal link
                 return response()->json(['status' => 200, 'msg' => 'Success', 'data' => $response['paypal_link']]);
             } else {
-               // return error if something went wrong.
-                return response()->json(['status' => 400,'msg' => 'Something went wrong in paypal generating link']);
+                // return error if something went wrong.
+                return response()->json(['status' => 400, 'msg' => 'Something went wrong in paypal generating link']);
             }
-
-        } catch(Exception $e) {
-            dd("error",$e);
+        } catch (Exception $e) {
+            dd("error", $e);
             return response()->json(
-                ['status' => 200,'error', 'Something went wrong.' .$e]
+                ['status' => 200, 'error', 'Something went wrong.' . $e]
             );
         }
     }
@@ -60,12 +58,12 @@ class PaypalController extends Controller
     public function successTransaction(Request $request)
     {
 
-        try{
+        try {
             // DB::beginTransaction();
             $data = $request->all();
             $response = $this->provider->getExpressCheckoutDetails($request->token);
 
-            if($this->userId == self::DUMMY){
+            if ($this->userId == self::DUMMY) {
                 $this->userId = User::find($request->id)->id;
             }
 
@@ -73,16 +71,15 @@ class PaypalController extends Controller
 
             $orderData['total_amount'] = \Cart::session($this->userId)->getTotal();
             $orderData['sub_total'] = \Cart::session($this->userId)->getSubTotal();
-            $orderData['item_qty'] =\Cart::session($this->userId)->getTotalQuantity();
+            $orderData['item_qty'] = \Cart::session($this->userId)->getTotalQuantity();
 
 
-            $orderData['shipment_amount'] =  0 ;
-            $orderData['estimate_day'] =  Carbon::now()->addDays(5)->format('l d-m-Y');
+            $orderData['shipment_amount'] =  0;
+            $orderData['estimate_day'] =  Carbon::now()->addWeekdays(5)->format('l d-m-Y');
 
             $cartConditions = Cart::session($this->userId)->getConditions('shipment_days');
 
-            foreach($cartConditions as $condition)
-            {
+            foreach ($cartConditions as $condition) {
                 $amount = $condition->getValue(); // the value of the condition
                 $orderData['shipment_amount'] = $amount;
                 $orderData['estimate_day'] =  $condition->getAttributes()['estimate_day'];
@@ -91,27 +88,28 @@ class PaypalController extends Controller
             $cartContent = Cart::session($this->userId)->getContent();
 
             //This code checks if the ACK code of a PayPal API response, is either "SUCCESS" or "SUCCESSWITHWARNING"
-            if (isset($response['ACK']) && !empty($response['ACK']) &&  in_array(strtoupper($response['ACK']), [StatusEnum::SUCCESS,StatusEnum::PAYPALSUCCESSWITHWARNING])) {
-                GenerateInvoiceJob::dispatch($data,$response,$this->userId,StatusEnum::PAYMENTTYPEPAYPAL, $orderData , $cartContent);
+            if (isset($response['ACK']) && !empty($response['ACK']) &&  in_array(strtoupper($response['ACK']), [StatusEnum::SUCCESS, StatusEnum::PAYPALSUCCESSWITHWARNING])) {
+                GenerateInvoiceJob::dispatch($data, $response, $this->userId, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent);
                 //return successfull message
+                //clear cart after successfull payment
                 Cart::session($this->userId)->clear();
+                //clear cart condition
                 Cart::session($this->userId)->clearCartConditions();
 
                 return redirect('success-transaction');
-
             } else {
 
-                return redirect('cancel-transaction?error'.'Something went wrong while processing transaction.');
-                 // return error if something went wrong.
-//                return response()->json(
-//                    ['status' => 400,'msg'=>'Something went wrong while processing transaction.']
-//                );
+                return redirect('cancel-transaction?error' . 'Something went wrong while processing transaction.');
+                // return error if something went wrong.
+                //     return response()->json(
+                //                    ['status' => 400,'msg'=>'Something went wrong while processing transaction.']
+                //                );
             }
             // DB::commit();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             // DB::rollBack();
             return response()->json(
-                ['status' => 400,'msg', 'Something went wrong.' .$e]
+                ['status' => 400, 'msg', 'Something went wrong.' . $e]
             );
         }
     }
@@ -119,16 +117,16 @@ class PaypalController extends Controller
     public function cancelTransaction($error = 'Something went wrong!')
     {
 
-        return redirect('checkout?error='.$error);
+        return redirect('checkout?error=' . $error);
 
-//        try{
-//            return response()->json(
-//                ['status' => 200,'msg'=> 'something went wrong while transaction.']
-//            );
-//        } catch(Exception $e) {
-//            return response()->json(
-//                ['status' => 200,'error', 'Something went wrong.' .$e]
-//            );
-//        }
+        //        try{
+        //            return response()->json(
+        //                ['status' => 200,'msg'=> 'something went wrong while transaction.']
+        //            );
+        //        } catch(Exception $e) {
+        //            return response()->json(
+        //                ['status' => 200,'error', 'Something went wrong.' .$e]
+        //            );
+        //        }
     }
 }
