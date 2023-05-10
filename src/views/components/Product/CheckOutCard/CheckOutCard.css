@@ -105,6 +105,8 @@
 }
 .color-text-cart {
     color: red;
+    padding: 11px;
+    /* line-height: 8px; */
 }
 .mein-part {
     justify-content: center;

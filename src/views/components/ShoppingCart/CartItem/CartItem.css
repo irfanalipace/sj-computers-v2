@@ -11,22 +11,22 @@
     line-height: 19px;
     color: #000000;
 }
-@media screen and (max-width: 700px) {
-    .cartItem-image {
-        max-width: 100%;
-        margin-left: 58px;
-        max-height: 150px;
-        width: 96px;
-        padding-bottom: 4px;
-    }
-}
-@media screen and (max-width: 600px) {
+
+
     .item-details {
         font-size: 11px;
     }.cart-image-mobile-size {
         display: flex;
         justify-content: center;
-        width: 229px;
-        height: 169px;
-    }
+      
+        margin: 0 auto;
+    
+}
+
+@media screen and (max-width: 600px) {
+.cartItem-image {
+    width: 200px;
+    margin-left: 0px !important;
+ 
+}
 }
