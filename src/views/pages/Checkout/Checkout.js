@@ -33,8 +33,8 @@ export default function Checkout() {
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const reason = useRef(null);
-    reason.current = urlParams.get("reason");
+    const paymentError = useRef(null);
+    paymentError.current = urlParams.get("error");
 
     const ACCORDION_VARIABLES = {
         1: accordionOne,
@@ -60,7 +60,7 @@ export default function Checkout() {
     };
 
     useEffect(() => {
-        reason.current ? toggleAccordion(3) : toggleAccordion(1);
+        paymentError.current ? toggleAccordion(3) : toggleAccordion(1);
     }, []);
 
     return (
@@ -87,9 +87,9 @@ export default function Checkout() {
                         </div>
                     </div>
                     <div className="checkout-page-inner">
-                        {reason.current && (
+                        {paymentError.current && (
                             <Alert variant="danger" className="my-3">
-                                {reason.current}
+                                {paymentError.current}
                             </Alert>
                         )}
                         {checkoutDetails.total_items > 0 ? (

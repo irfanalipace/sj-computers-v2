@@ -43,12 +43,14 @@ export const SquareForm = ({ hideCloseBtn }) => {
                             navigate("/success-transaction");
                         } else {
                             navigate(
-                                "/checkout?reason=" + response.data.message
+                                "/checkout?error=" + response.data.message
                             );
                         }
                     } catch (error) {
                         console.log("error in square api: ", e);
-                        navigate("/checkout?reason=" + response.data.message);
+                        navigate(
+                            "/checkout?error=" + response.derrorata.message
+                        );
                     }
                 }}
                 locationId={process.env.REACT_APP_SQUARE_LOCATION_ID}
