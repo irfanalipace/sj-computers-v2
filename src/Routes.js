@@ -233,5 +233,9 @@ export function ProtectedRoute({ children }) {
 
 export function AuthRoute({ children }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    return isAuthenticated ? <Navigate to="/" replace /> : children;
+    return isAuthenticated ? (
+        <Navigate to="/?firstLogin=true" replace />
+    ) : (
+        children
+    );
 }

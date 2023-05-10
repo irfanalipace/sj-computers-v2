@@ -11,10 +11,8 @@ const LoginCart = () => {
     return (
         <div className="dropdown-payment hover-effect-sets">
             <button onClick={handleButtonClick} className="hover-effect-sets">
-                <strong>
-                    <p className="text-start mb-1">Login</p>{" "}
-                    <p className="mb-0">Register</p>
-                </strong>
+                <p className="text-start mb-1">Login</p>{" "}
+                <p className="mb-0">Register</p>
             </button>
             {isOpen ? (
                 <div className="product-section-cart">

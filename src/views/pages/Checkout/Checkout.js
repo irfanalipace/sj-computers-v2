@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { PAYMENT_METHODS } from "@utils/constants";
+import { Alert } from "react-bootstrap";
 import Accordion from "@common/Accordion/Accordion";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import ShippingDetails from "@components/Checkout/ShippingDetails/ShippingDetails";
@@ -30,6 +31,11 @@ export default function Checkout() {
     );
     const loading = useSelector((state) => state.cart.isLoading);
 
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const reason = useRef(null);
+    reason.current = urlParams.get("reason");
+
     const ACCORDION_VARIABLES = {
         1: accordionOne,
         2: accordionTwo,
@@ -54,7 +60,7 @@ export default function Checkout() {
     };
 
     useEffect(() => {
-        toggleAccordion(1);
+        reason.current ? toggleAccordion(3) : toggleAccordion(1);
     }, []);
 
     return (
@@ -81,6 +87,11 @@ export default function Checkout() {
                         </div>
                     </div>
                     <div className="checkout-page-inner">
+                        {reason.current && (
+                            <Alert variant="danger" className="my-3">
+                                {reason.current}
+                            </Alert>
+                        )}
                         {checkoutDetails.total_items > 0 ? (
                             <div className="row mx-o">
                                 <div className="col-md-9 col-12">

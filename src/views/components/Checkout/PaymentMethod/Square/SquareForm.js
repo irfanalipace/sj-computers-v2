@@ -33,15 +33,22 @@ export const SquareForm = ({ hideCloseBtn }) => {
                 cardTokenizeResponseReceived={async (token) => {
                     try {
                         hideCloseBtn();
-                        await sendTokenApi({
+                        let response = await sendTokenApi({
                             source_id: token.token,
                         });
-                        clearCartLocally();
-                        dispatch(CLEAR_CART());
-                        navigate("/success-transaction");
+
+                        if (response.data.code === 200) {
+                            clearCartLocally();
+                            dispatch(CLEAR_CART());
+                            navigate("/success-transaction");
+                        } else {
+                            navigate(
+                                "/checkout?reason=" + response.data.message
+                            );
+                        }
                     } catch (error) {
-                        navigate("/checkout?reason=" + error.message);
                         console.log("error in square api: ", e);
+                        navigate("/checkout?reason=" + response.data.message);
                     }
                 }}
                 locationId={process.env.REACT_APP_SQUARE_LOCATION_ID}

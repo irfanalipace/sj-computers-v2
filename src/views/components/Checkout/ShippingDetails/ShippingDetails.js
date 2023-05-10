@@ -22,15 +22,12 @@ export default function ShippingDetails({
 
     useEffect(() => {
         dispatch(fetchStates());
+        handleHeight();
         return () => {
-            setNewAddress(false);
-            setEditAddress(false);
+            // setNewAddress(false);
+            // setEditAddress(false);
         };
     }, []);
-
-    useEffect(() => {
-        handleHeight();
-    });
 
     const handleChange = (e) => {
         console.log(e.target.value);

@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-
-import laptop from "@images/common/laptop-img.png";
 import ReviewButton from "./ReviewButton";
-import { QuantityInput } from "@common/QuantityInput/QuantityInput";
+// import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./ReviewCheckout.css";
 
-export default function ReviewCheckout({ toggleAccordion, estimatedDelivery }) {
+export default function ReviewCheckout({
+    toggleAccordion,
+    estimatedDelivery,
+    handleHeight,
+}) {
     const cartItems = useSelector((state) => state.cart.cart);
-    const [quantity, setQuantity] = useState(1);
+    // const [quantity, setQuantity] = useState(1);
+
+    useEffect(() => {
+        handleHeight();
+    }, []);
 
     return (
         <div className="review-card">

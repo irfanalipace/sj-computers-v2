@@ -20,8 +20,8 @@ const Slider = () => {
                     modules={[Navigation]}
                     className="mySwiper"
                 >
-                    {banners.map((banner) => (
-                        <SwiperSlide>
+                    {banners.map((banner, index) => (
+                        <SwiperSlide key={index}>
                             <img src={banner} />
                         </SwiperSlide>
                     ))}

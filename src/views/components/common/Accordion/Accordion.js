@@ -56,7 +56,7 @@ const Accordion = ({
                     <div
                         className={`${
                             summary
-                                ? "col-lg-2 col-1 d-md-block d-none"
+                                ? "col-lg-2 col-1 d-md-flex d-none"
                                 : "d-none"
                         } d-flex justify-content-end`}
                     >

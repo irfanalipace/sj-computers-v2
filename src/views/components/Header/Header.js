@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -24,9 +24,10 @@ const Header = () => {
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const firstLogin = urlParams.get("firstLogin");
+    const firstLogin = useRef(null);
+    firstLogin.current = urlParams.get("firstLogin");
 
-    const [show, setShow] = useState(firstLogin);
+    const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
     const location = useLocation();
     const nonHeaderRoutes = [
@@ -47,6 +48,10 @@ const Header = () => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    useEffect(() => {
+        firstLogin.current && setShow(true);
+    }, [firstLogin.current]);
 
     const handleResize = () => {
         setScreenWidth(window.innerWidth);

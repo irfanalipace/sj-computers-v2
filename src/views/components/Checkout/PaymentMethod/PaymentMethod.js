@@ -11,7 +11,7 @@ import PaymentButton from "./PaymentButton";
 
 import "./PaymentMethod.css";
 
-export default function PaymentMethod({ setPayment }) {
+export default function PaymentMethod({ setPayment, handleHeight }) {
     const [paymentMethod, setPaymentMethod] = useState(null);
     const [openPaymentModal, setPaymentModal] = useState(false);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
@@ -28,6 +28,10 @@ export default function PaymentMethod({ setPayment }) {
     useEffect(() => {
         setPayment(paymentMethod);
     }, [paymentMethod]);
+
+    useEffect(() => {
+        handleHeight();
+    }, []);
 
     const clickHandler = () => {
         switch (paymentMethod) {
@@ -66,8 +70,7 @@ export default function PaymentMethod({ setPayment }) {
                                 className="image-wrapper"
                                 style={{ marginLeft: "30px" }}
                             >
-                                <img src={visa} />{' '}{' '}
-                                <img src={mastercard} />
+                                <img src={visa} /> <img src={mastercard} />
                             </div>
                         </label>
                     </div>
@@ -88,7 +91,7 @@ export default function PaymentMethod({ setPayment }) {
                                 className="image-warpper-image2"
                                 style={{ marginLeft: "100px" }}
                             >
-                                <img src={paypal} className=""/>
+                                <img src={paypal} className="" />
                             </div>
                         </label>
                     </div>
