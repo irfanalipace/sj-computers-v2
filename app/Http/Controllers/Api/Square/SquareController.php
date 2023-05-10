@@ -20,6 +20,7 @@ use \Square\Models\Money;
 use Cart;
 use Square\Models\CreatePaymentRequest;
 use App\Jobs\GenerateInvoiceJob;
+use Carbon\Carbon;
 
 class SquareController extends Controller
 {
@@ -67,7 +68,7 @@ class SquareController extends Controller
                 $orderData['sub_total'] = \Cart::session(auth()->user()->id)->getSubTotal();
                 $orderData['item_qty'] = \Cart::session(auth()->user()->id)->getTotalQuantity();
 
-
+                
                 $orderData['shipment_amount'] =  0;
                 $orderData['estimate_day'] =  Carbon::now()->addWeekdays(5)->format('l d-m-Y');
 
