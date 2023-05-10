@@ -72,12 +72,12 @@ export const deleteNotLocalCartItem = () => {
                     cartItems[index]?.price * cartItems[index]?.quantity
                 );
 
-            cartDetails = {
-                total_items: cartTotalQuantity > 0 ? cartTotalQuantity : 0,
-                total: cartTotal > 0 ? cartTotal.toFixed(2) : 0,
-            };
             if (index >= 0) {
                 cartItems.splice(index, 1);
+                cartDetails = {
+                    total_items: cartTotalQuantity > 0 ? cartTotalQuantity : 0,
+                    total: cartTotal > 0 ? cartTotal.toFixed(2) : 0,
+                };
             }
         }
     });

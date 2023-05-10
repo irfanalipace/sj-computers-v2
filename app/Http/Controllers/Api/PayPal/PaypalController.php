@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\PayPal;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use App\Classes\StatusEnum;
@@ -58,12 +59,12 @@ class PaypalController extends Controller
 
     public function successTransaction(Request $request)
     {
-       
+
         try{
             // DB::beginTransaction();
             $data = $request->all();
             $response = $this->provider->getExpressCheckoutDetails($request->token);
-           
+
             if($this->userId == self::DUMMY){
                 $this->userId = User::find($request->id)->id;
             }
@@ -74,6 +75,19 @@ class PaypalController extends Controller
             $orderData['sub_total'] = \Cart::session($this->userId)->getSubTotal();
             $orderData['item_qty'] =\Cart::session($this->userId)->getTotalQuantity();
 
+
+            $orderData['shipment_amount'] =  0 ;
+            $orderData['estimate_day'] =  Carbon::now()->addDays(5)->format('l d-m-Y');
+
+            $cartConditions = Cart::session($this->userId)->getConditions('shipment_days');
+
+            foreach($cartConditions as $condition)
+            {
+                $amount = $condition->getValue(); // the value of the condition
+                $orderData['shipment_amount'] = $amount;
+                $orderData['estimate_day'] =  $condition->getAttributes()['estimate_day'];
+            }
+
             $cartContent = Cart::session($this->userId)->getContent();
 
             //This code checks if the ACK code of a PayPal API response, is either "SUCCESS" or "SUCCESSWITHWARNING"
@@ -81,6 +95,7 @@ class PaypalController extends Controller
                 GenerateInvoiceJob::dispatch($data,$response,$this->userId,StatusEnum::PAYMENTTYPEPAYPAL, $orderData , $cartContent);
                 //return successfull message
                 Cart::session($this->userId)->clear();
+                Cart::session($this->userId)->clearCartConditions();
 
                 return redirect('success-transaction');
 

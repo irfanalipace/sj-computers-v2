@@ -145,4 +145,9 @@ Route::middleware(['auth:api'])->group(function () {
      * place order
      */
     Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
+
+    /*
+     * Apply Shipment
+     */
+    Route::post('apply-shipment', [CartController::class, 'applyShipment'])->name('applyShipment');
 });
