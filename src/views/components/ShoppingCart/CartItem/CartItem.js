@@ -60,11 +60,14 @@ export const CartItem = memo(({ cartData }) => {
         <div>
             <div className="row">
                 <div className="col-md-2">
+                    <div className="cart-image-mobile-size">
                     <img
                         src={cartData?.product?.image}
                         alt=""
                         className="cartItem-image"
                     />
+                    </div>
+                   
                 </div>
                 <div className="col-md-10">
                     <div className="d-flex flex-column h-100 justify-content-between mx-0">

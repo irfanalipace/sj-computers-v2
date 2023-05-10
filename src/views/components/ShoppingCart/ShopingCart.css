@@ -188,11 +188,21 @@ head:nth-child(2) {
     
         font-size: 12px;
     
+    }.cart-mein-dev {
+      
+        padding-left: 30px;
+        padding-right: 30px;
+     
     }
     }
 @media screen and (max-width: 600px) {
     .item-details {
-        font-size: 11px;
+        font-size: 10px;
+    }.cart-mein-dev {
+        padding-top: 20px;
+        padding-left: 32px;
+        padding-right: 32px;
+        padding-bottom: 4px;
     }
 }
 @media screen and (max-width: 350px) {

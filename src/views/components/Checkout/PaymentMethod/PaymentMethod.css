@@ -16,10 +16,6 @@
     margin-left: 10px;
 }
 
-.payment-method img {
-    margin-left: 5px;
-}
-
 .payment-btn {
     font-weight: 600;
     font-size: 12px;
@@ -33,18 +29,4 @@
     border-radius: 8px;
     color: white;
     border: 0;
-}
-
-.payment-header-text {
-    font-weight: 500;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: #000000;
-}
-
-.payment-model .header {
-    margin-bottom: -10px;
-    background: #eaeded;
 }

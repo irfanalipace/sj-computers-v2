@@ -66,7 +66,7 @@ export default function PaymentMethod({ setPayment }) {
                                 className="image-wrapper"
                                 style={{ marginLeft: "30px" }}
                             >
-                                <img src={visa} />
+                                <img src={visa} />{' '}{' '}
                                 <img src={mastercard} />
                             </div>
                         </label>
@@ -85,10 +85,10 @@ export default function PaymentMethod({ setPayment }) {
                         <label htmlFor="method2">
                             <div>PayPal</div>
                             <div
-                                className="image-wrapper"
+                                className="image-warpper-image2"
                                 style={{ marginLeft: "100px" }}
                             >
-                                <img src={paypal} />
+                                <img src={paypal} className=""/>
                             </div>
                         </label>
                     </div>

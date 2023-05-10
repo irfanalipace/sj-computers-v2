@@ -23,5 +23,10 @@
 @media screen and (max-width: 600px) {
     .item-details {
         font-size: 11px;
+    }.cart-image-mobile-size {
+        display: flex;
+        justify-content: center;
+        width: 229px;
+        height: 169px;
     }
 }

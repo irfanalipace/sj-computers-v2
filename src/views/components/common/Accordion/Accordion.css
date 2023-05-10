@@ -5,7 +5,7 @@
 .accordion-header {
     background-color: transparent;
     cursor: pointer;
-    padding: 1rem;
+    padding: 8px;
     transition: background-color 0.3s ease;
 }
 
@@ -84,9 +84,11 @@
 
 @media screen and (max-width:600px) {
     .accordion-header {
-   
-        padding-left: 17px;
-        padding-top: 12px;
- 
+        margin-left: -8px;
+        padding: 1px;
+    }.accordion-body{
+        width: 258px;
     }
 }
+
+
