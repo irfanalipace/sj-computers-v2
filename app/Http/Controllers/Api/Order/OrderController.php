@@ -77,7 +77,13 @@ class OrderController extends BaseController
             $sql = Order::whereBetween('created_at',[$from,$to]);
         }
 
-        $data = $sql->paginate($perPageRecord);
+        $successOrder =  $sql->where('status',StatusEnum::COMPLETE)->paginate($perPageRecord);
+        $cancelOrder = $sql->where('status','!=',StatusEnum::COMPLETE)->paginate($perPageRecord);
+
+        $data = [
+            'success_orders' => $successOrder,
+            'cancel_orders' => $cancelOrder
+        ];
 
        return $this->sendResponse($data);
     }
