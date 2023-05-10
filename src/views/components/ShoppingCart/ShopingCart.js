@@ -31,7 +31,7 @@ export const ShopingCart = () => {
                                                 </h3>
                                             </div>
                                             <div className="col-md-2">
-                                                <p className="price-heading">
+                                                <p className="price-heading d-sm-block d-none">
                                                     Price
                                                 </p>
                                             </div>

@@ -120,18 +120,17 @@
     .color-card-dev {
         text-align: center;
     }
-}
-@media screen and (max-width: 780px) {
-    .quantity-inner {
-        justify-content: center;
-    }
-}
-@media screen and (max-width: 780px) {
     .text-stock {
         text-align: center;
     }
     .color-text-cart {
         text-align: center;
+    }
+    .quantity-inner {
+        justify-content: center;
+    }
+    .card-section-left {
+        margin-top: 10px;
     }
 }
 

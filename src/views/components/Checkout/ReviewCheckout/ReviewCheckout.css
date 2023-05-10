@@ -95,30 +95,22 @@ input[type="number"] {
     border: 0;
 }
 
-
-@media screen and (max-width:600px) {
+@media screen and (max-width: 600px) {
+    .item-card .img-wrapper {
+        width: 200px;
+        height: auto;
+    }
+    .item-detail {
+        padding-left: 0;
+        width: 100%;
+    }
+    .item-detail h6 {
+        font-size: 10px;
+    }
     .item-card {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-       
         flex-direction: column;
-  
-            margin-top: -44px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-    
     }
-    @media screen and (max-width:600px) {
-        .item-card .img-wrapper {
-            height: 24px ;
-            width: 97px ;
-            padding-bottom: 61px ;
-            padding-top: 61px ;
-        }
-}
-@media screen and (max-width:600px) {
-.item-detail h6{
-    font-size: 9px;
-}
 }

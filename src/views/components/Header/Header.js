@@ -17,15 +17,16 @@ import vectorcart from "@images/home/vector.png";
 import "./Header.css";
 
 const Header = () => {
-    const [smShow, setSmShow] = useState(false);
-    const [lgShow, setLgShow] = useState(false);
     const currentState = useSelector((state) => state.states.currentState);
-    const states = useSelector((state) => state.states.states);
     const user = useSelector((state) => state.auth.user);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cartDetails = useSelector((state) => state.cart.details);
 
-    const [show, setShow] = useState(false);
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const firstLogin = urlParams.get("firstLogin");
+
+    const [show, setShow] = useState(firstLogin);
     const handleShow = () => setShow(!show);
     const location = useLocation();
     const nonHeaderRoutes = [
