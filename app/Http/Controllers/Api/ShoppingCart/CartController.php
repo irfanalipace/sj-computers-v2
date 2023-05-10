@@ -122,8 +122,6 @@ class CartController extends BaseController
     protected function cartDetails()
     {
 
-
-
         $details = [
             'total_quantity' => \Cart::session($this->userId)->getTotalQuantity(),
             'total_items' => count(\Cart::session($this->userId)->getContent()),
@@ -168,7 +166,7 @@ class CartController extends BaseController
             $record['amount'] = $amount;
             $record['other_info'] =  [
                 'days' => 5,
-                "estimate_day" => Carbon::now()->addDays(5)->format('l d-m-Y')
+                "estimate_day" => Carbon::now()->addWeekdays(5)->format('l d-m-Y')
             ];
 
             $cartConditions = Cart::session($this->userId)->getConditions('shipment_days');
@@ -201,8 +199,9 @@ class CartController extends BaseController
 
     }
 
-    public function applyShipment(ApplyShipmentDaysRequest $request){
-
+    public function applyShipment(ApplyShipmentDaysRequest $request)
+    {
+        
         $amount = $this->getShipmentAmount(false, $request->get('shipment_days'));
 
         $condition = new \Darryldecode\Cart\CartCondition(array(
@@ -212,7 +211,7 @@ class CartController extends BaseController
             'value' =>  $amount,
             'attributes' => [
                 'days' => $request->get('shipment_days'),
-                'estimate_day' => Carbon::now()->addDays($request->get('shipment_days'))->format('l d-m-Y')
+                'estimate_day' => Carbon::now()->addWeekdays($request->get('shipment_days'))->format('l d-m-Y')
             ]
         ));
 
