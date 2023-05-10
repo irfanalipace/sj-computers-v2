@@ -92,7 +92,7 @@ Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeO
 
 Route::get('success-transaction/{id}', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 
-Route::post('cancel-transaction/{id?}', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
+Route::get('cancel-transaction/{id?}', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
 Route::middleware(['auth:api'])->group(function () {
 
