@@ -50,7 +50,7 @@ function ShippingDetailsForm({ address, handleHeight }) {
     };
 
     useEffect(() => {
-        handleHeight();
+        if (typeof cb === "function") handleHeight();
     }, [fieldErrors]);
 
     return (

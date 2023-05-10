@@ -38,11 +38,11 @@
 }
 
 .checkout-page-inner {
-    width: 89%;
-    margin-left: 79px;
+    width: 83%;
+    margin-left: 135px;
     padding-left: 33px;
     /* margin: 39px auto; */
-    margin-top: 12px;
+    margin-top: 31px;
     padding: 7px 0;
     min-height: 200px;
 }
@@ -109,6 +109,9 @@
     .accordion-header h3 {
         margin-left: 11px;
         font-size: 10px !important;
+    }
+    .checkout-page-inner {
+        min-height: 400px;
     }
 }
 

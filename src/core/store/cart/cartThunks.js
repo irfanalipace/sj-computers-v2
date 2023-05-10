@@ -23,6 +23,7 @@ import {
     getCartItems,
     getCartDetails,
     compareLocalCartWithDBCart,
+    deleteNotLocalCartItem,
     objectToArray,
     updateItemLocalProperty,
 } from "@utils/cartHelpers";
@@ -110,10 +111,11 @@ export const syncCartItems = () => {
                 cartItems = missingLocalItems?.map((item) => {
                     let cartItem = {
                         ...item,
-                        price: item?.price * item.quantity,
+                        price: parseFloat(item?.price * item?.quantity), // item total price which need to be paid in case of checkout
                         notLocal: true, //this property identifies that this cart item is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
                         product: {
                             ...item.associatedModel,
+                            price: parseFloat(item.associatedModel.price), // cost of one unit of product
                         },
                     };
 
@@ -142,7 +144,7 @@ export const syncCartItems = () => {
                         qty: item?.quantity,
                     };
 
-                    updateItemLocalProperty(cartItem); //this function adds no local property on cart item in localStorage because now it is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
+                    updateItemLocalProperty(cartItem); //this function adds no local property on cart item in localStorage because now it is also added in database cart so we know that which items in our local storage are also stored in database to manage deletion of cart items
                     return cartItem;
                 });
             }
@@ -197,6 +199,7 @@ export const setCartDetails = (data) => {
 
 export const clearCart = () => {
     return async (dispatch) => {
+        deleteNotLocalCartItem(); // remove db cart items from local storage so they are not compared again (in syncing process)
         dispatch({
             type: CLEAR_CART,
             payload: {},
