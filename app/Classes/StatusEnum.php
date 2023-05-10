@@ -17,4 +17,8 @@ class StatusEnum{
 
     public const DUMMY = "dummy";
 
+    public const FREE_DELIVERY_DAY = 5;
+    public const TWO_DELIVERY_DAY = 2;
+    public const ONE_DELIVERY_DAY = 1;
+
 }
