@@ -22,7 +22,7 @@
 }
 
 .product-type-container {
-    margin: 0 47px;
+    margin: 0 47px 10px;
 }
 
 .product-type-section {
@@ -53,7 +53,7 @@
 }
 
 .advertisement-section {
-    height: 340px;
+    height: 325px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -130,6 +130,13 @@
     .advertisement-heading h4,
     .advertisement-heading button {
         font-size: 16px;
+    }
+
+    .product-type-container {
+        margin: 0 30px;
+    }
+    .advertisement-section {
+        height: 342px;
     }
 }
 

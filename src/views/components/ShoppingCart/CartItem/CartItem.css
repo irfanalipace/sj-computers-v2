@@ -14,19 +14,20 @@
 @media screen and (max-width: 700px) {
     .cartItem-image {
         max-width: 100%;
-        margin-left: 58px;
+        margin-left: 0;
         max-height: 150px;
-        width: 96px;
+        width: 250px;
         padding-bottom: 4px;
     }
 }
 @media screen and (max-width: 600px) {
     .item-details {
         font-size: 11px;
-    }.cart-image-mobile-size {
+    }
+    .cart-image-mobile-size {
         display: flex;
         justify-content: center;
-        width: 229px;
+        width: 100%;
         height: 169px;
     }
 }

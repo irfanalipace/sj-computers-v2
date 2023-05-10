@@ -8,7 +8,7 @@ import { sendTokenApi } from "@api/square";
 
 import "./SquareForm.css";
 
-export const SquareForm = () => {
+export const SquareForm = ({ hideCloseBtn }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const buttonProps = {
@@ -32,6 +32,7 @@ export const SquareForm = () => {
                 applicationId={process.env.REACT_APP_SQUARE_APPLICATION_ID}
                 cardTokenizeResponseReceived={async (token) => {
                     try {
+                        hideCloseBtn();
                         await sendTokenApi({
                             source_id: token.token,
                         });
@@ -39,6 +40,7 @@ export const SquareForm = () => {
                         dispatch(CLEAR_CART());
                         navigate("/success-transaction");
                     } catch (error) {
+                        navigate("/checkout?reason=" + error.message);
                         console.log("error in square api: ", e);
                     }
                 }}

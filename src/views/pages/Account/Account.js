@@ -57,7 +57,7 @@ const Account = () => {
                             </div>
                         </div>
                     </Link>
-                    <Link
+                    {/* <Link
                         to={"update-address"}
                         className="account-card col-md-3 col-sm-6 col-12"
                     >
@@ -70,7 +70,7 @@ const Account = () => {
                                 <p>Edit remove or set default address</p>
                             </div>
                         </div>
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
         </div>

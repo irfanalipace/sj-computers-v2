@@ -11,6 +11,10 @@
 .list-unstyled {
     text-align: initial !important;
 }
+
+footer ul li {
+    margin: 15px 0;
+}
 .list-unstyle1 {
     text-align: initial;
     font-weight: 600;

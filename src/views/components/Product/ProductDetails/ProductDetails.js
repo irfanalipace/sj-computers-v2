@@ -42,7 +42,7 @@ const ProductDetails = ({ product }) => {
                     </button>
                 </div>
                 <div className="col-lg-8 col-md-6 col-sm-12">
-                    <div>
+                    <div className="my-1">
                         <Link className="links-rting">66 ratings</Link>
                         <Link className="moniter-links">
                             11 answered questions

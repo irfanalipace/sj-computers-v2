@@ -46,7 +46,9 @@ body {
 }
 .swiper-button-prev {
     color: #ffffff;
+    top: var(--swiper-navigation-top-offset, 35%);
 }
 .swiper-button-next {
     color: #ffffff;
+    top: var(--swiper-navigation-top-offset, 35%);
 }

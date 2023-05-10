@@ -83,7 +83,7 @@ const VerifyOTP = () => {
         const credentials = {
             otp: values.otp,
         };
-        dispatch(verifyOtp(credentials, () => navigate("/")));
+        dispatch(verifyOtp(credentials, () => navigate("/?firstLogin=true")));
     }
 
     const handleKeyPress = (event) => {

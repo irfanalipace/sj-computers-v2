@@ -7,8 +7,11 @@ import "./Slider.css";
 
 // import required modules
 import { Navigation } from "swiper";
-import sliderimg from "@images/slider-img/slider1.png";
+import Banner1 from "@images/Banner/homepage-banner-1.jpeg";
+import Banner2 from "@images/Banner/homepage-banner-2.jpeg";
+import Banner3 from "@images/Banner/homepage-banner-3.jpeg";
 const Slider = () => {
+    const banners = [Banner1, Banner2, Banner3];
     return (
         <>
             <div className="banner-slider-section">
@@ -17,15 +20,11 @@ const Slider = () => {
                     modules={[Navigation]}
                     className="mySwiper"
                 >
-                    <SwiperSlide>
-                        <img src={sliderimg} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src={sliderimg} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src={sliderimg} />
-                    </SwiperSlide>
+                    {banners.map((banner) => (
+                        <SwiperSlide>
+                            <img src={banner} />
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </div>
         </>

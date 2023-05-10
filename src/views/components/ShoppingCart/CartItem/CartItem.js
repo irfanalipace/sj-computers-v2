@@ -61,13 +61,12 @@ export const CartItem = memo(({ cartData }) => {
             <div className="row">
                 <div className="col-md-2">
                     <div className="cart-image-mobile-size">
-                    <img
-                        src={cartData?.product?.image}
-                        alt=""
-                        className="cartItem-image"
-                    />
+                        <img
+                            src={cartData?.product?.image}
+                            alt=""
+                            className="cartItem-image"
+                        />
                     </div>
-                   
                 </div>
                 <div className="col-md-10">
                     <div className="d-flex flex-column h-100 justify-content-between mx-0">
@@ -78,16 +77,25 @@ export const CartItem = memo(({ cartData }) => {
                                         {cartData?.product?.name}
                                     </strong>
                                 </p>
-                                <ul className="item-list">
-                                    <li>
-                                        <span className="item-stock">
-                                            {cartData?.product?.quantity
-                                                ? "In Stock"
-                                                : "Out of Stock"}
-                                        </span>
-                                    </li>
-                                    {/* <li>Discount Available</li> */}
-                                    {/* <li>
+                            </div>
+                            <div className="col-md-2 price-item">
+                                <p className="my-sm-0 my-2">
+                                    <strong className="">
+                                        ${cartData?.price}
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                        <ul className="item-list mt-1 mb-2">
+                            <li>
+                                <span className="item-stock">
+                                    {cartData?.product?.quantity
+                                        ? "In Stock"
+                                        : "Out of Stock"}
+                                </span>
+                            </li>
+                            {/* <li>Discount Available</li> */}
+                            {/* <li>
                                         <span className="item-capacity">
                                             Capacity:
                                         </span>
@@ -103,22 +111,13 @@ export const CartItem = memo(({ cartData }) => {
                                             980 PRO
                                         </span>
                                     </li> */}
-                                </ul>
-                            </div>
-                            <div className="col-md-2 price-item">
-                                <p>
-                                    <strong className="">
-                                        ${cartData?.price}
-                                    </strong>
-                                </p>
-                            </div>
-                        </div>
+                        </ul>
                         {cartData.loading ? (
                             <Loader />
                         ) : (
                             <>
                                 <div
-                                    className="d-flex"
+                                    className="d-flex justify-content-between justify-content-sm-center"
                                     style={{
                                         maxWidth: "700px",
                                     }}
