@@ -226,3 +226,45 @@
     max-width: 500px;
     margin: 30px auto 0;
 }
+/* .search-container {
+    position: relative;
+  }
+  
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: gray;
+    cursor: pointer;
+  } */
+  .search-input {
+    padding-left: 20px;
+    border-radius: 5px;
+    border: 1px solid #318243;
+    transition: border-color 0.3s;
+  }
+  
+  .green {
+    border-color: green;
+  }
+  .product-container {
+    box-sizing: border-box;
+    position: inherit;
+    width: 100%;
+    height: 241px;
+    left: 318px;
+    top: 320px;
+    border: 1px solid #DDDDDD;
+    border-radius: 8px;
+    margin-bottom: 30px;
+  }
+.orderType{
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 30px;
+}

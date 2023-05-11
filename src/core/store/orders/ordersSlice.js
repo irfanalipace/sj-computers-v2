@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     shippingDetails: {},
+    ordergDetails: {},
     settingAdress: false,
     apiError: false,
     isLoading: false,
@@ -26,6 +27,10 @@ const ordersSlice = createSlice({
             state.isLoading = false;
             state.settingAdress = false;
         },
+        SET_ORDER_DETAILS: (state, action) => {
+            state.ordergDetails = { ...action.payload };
+            state.isLoading = false;
+        },
         PLACING_ORDER: (state) => {
             state.placingOrder = true;
         },
@@ -45,6 +50,7 @@ export const {
     SETTING_ADDRESS,
     CLEAR_LOADING,
     SET_SHIPPING_DETAILS,
+    SET_ORDER_DETAILS,
     ORDER_PLACED,
     PLACING_ORDER,
     API_ERROR,
