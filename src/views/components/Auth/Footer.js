@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div>
 
-<div className='container'>
+
   <div className='row'>
     <div className='col-md-12'>
       <p className="footer-mute">
@@ -21,7 +21,6 @@ const Footer = () => {
       </div>
 
 
-    </div>
   )
 }
 export default Footer;
