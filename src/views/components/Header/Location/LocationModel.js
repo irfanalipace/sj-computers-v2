@@ -62,9 +62,16 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
 
                 {isAuthenticated ? (
                     <>
-                        <h5 className="login-button-box">
-                            Enter a US zip code
+                       <div className="location-button-box-signin">
+                       <button className="login-button-box-location-button">
+                       Sign in to see your address
+                        </button>
+                       </div>
+                       <div  className="hrozantel-hr-location-model">
+                      <h5 className="h5-model-box-loction">
+                           or
                         </h5>
+                     </div>
                         <div className="row">
                             <div className="col-md-8">
                                 <input
@@ -72,42 +79,38 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                                     onChange={handleZipCodeChange}
                                     value={zipCode}
                                     placeholder=" Enter zip code"
-                                    className="button-input"
+                                    className="button-input-fields-button"
                                 />
                             </div>
                             <div className="col-md-4">
                                 <button
                                     onClick={findZipCode}
                                     type="button"
-                                    className="button-box"
+                                    className="button-box-locationmodel-button"
                                 >
                                     Apply
                                 </button>
                             </div>
                         </div>
-                        <h5
-                            className="h"
-                            style={{
-                                fontSize: "14px",
-                                marginTop: "8px",
-                                color: "#333333",
-                                bottom: "8px",
-                            }}
-                        >
-                            or
+
+                     <div  className="hrozantel-hr-location-model">
+                     <h5 className="h5-model-box-loction">
+                           or
                         </h5>
+                     </div>
                         <Dropdown>
                             <Dropdown.Toggle
                                 id="dropdown-basic"
-                                className="dropdown-button-box d-flex justify-content-between align-items-center"
+                                className="dropdown-button-box d-flex justify-content-between align-items-center "
                             >
                                 {state?.name || "Select State"}
                                 <img src={img1} className="img-arrow" />
                             </Dropdown.Toggle>
 
-                            <Dropdown.Menu className="menus-sets">
+                            <Dropdown.Menu className="">
                                 {states.map((state) => (
                                     <Dropdown.Item
+                                    className="drop menus-set my-location-dropdown-model-box-buttons"
                                         onClick={() => setState(state)}
                                         key={state.id}
                                     >

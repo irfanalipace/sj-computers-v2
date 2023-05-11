@@ -53,31 +53,90 @@
     top: 4px;
     margin-top: 2px;
 }
-.button-box {
+.drop:active {
+    color: var(--bs-dropdown-link-active-color);
+    text-decoration: none;
+    background-color: var(--bs-dropdown-link-active-color) !important;
+}
+.button-box-locationmodel-button {
     box-sizing: border-box;
     width: 106px;
-    height: 34px;
+    height: 33px;
     /* left: 770px; */
     /* top: 415px; */
     background: #edfff1;
     border: 1px solid #52ac66;
     border-radius: 7px;
-    margin-top: 4px;
+    margin-top: 2px;
     font-size: 14px;
     left: -12px;
     margin-left: -11px;
 }
-.button-input {
+
+.button-input-fields-button {
     box-sizing: border-box;
     /* position: absolute; */
-    width: 202px;
-    height: 37px;
+    width: 208px;
+    height: 36px;
     left: 579px;
     top: 413px;
     background: #edfff1;
     border: 1px solid #52ac66;
     border-radius: 5px;
+    font-size: 13px;
+    outline: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 15px;
+    color: #333333;
 }
+.login-button-box-location-button {
+    width: 326px;
+    height: 32px;
+    left: 16px;
+    top: 109px;
+    background: #38C056;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #333333;
+    font-size: 14px;
+    color: #333333;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    color: #FFFFFF;
+    border: none;
+}
+.location-button-box-signin{
+    padding-top: 10px;
+    padding-bottom: 4px;
+}
+.hrozantel-hr-location-model h5 {
+    display: flex !important;
+    flex-direction: row !important;
+    font-size: 13px;
+    padding: 3px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+  
+    line-height: 12px;
+    
+    color: #333333;
+}
+.hrozantel-hr-location-model h5:before,
+.hrozantel-hr-location-model h5:after {
+    content: "";
+    flex: 1 1 !important;
+    border-bottom: 1px solid !important;
+    margin: auto !important;
+    color: #b1ceb7;
+}
+
 .login-button-box {
     font-weight: 400;
     font-size: 10px;
@@ -112,11 +171,13 @@
 }
 
 .done-button {
-    min-width: 100px;
-    height: 40px;
-    background: #52ac66;
-    border-radius: 8px;
+    min-width: 70px !important;
+    height: 29px !important;
+    background: #52ac66 !important;
+    border-radius: 9px !important;
     color: white;
+    font-size: 12px;
+    border-color: aliceblue;
 }
 
 .done-button:hover {
@@ -144,7 +205,7 @@
 }
 .location-model .modal-content {
     width: 360px;
-    height: 323px;
+    height: 332px;
     /* left: 63px; */
     /* top: 240px; */
     background: #ffffff;

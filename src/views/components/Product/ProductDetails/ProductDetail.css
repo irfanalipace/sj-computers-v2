@@ -69,6 +69,7 @@
     transform: rotate(90deg);
 }
 .selling-button {
+    width: 97px;
     padding: 8px !important;
     max-width: 100%;
     top: 0.01px;
@@ -76,10 +77,12 @@
     border-radius: 5px;
     color: white;
     font-family: "Roboto";
-
     font-weight: 600;
     font-size: 11px;
     line-height: 13px;
+}
+.hr-card-details{
+    margin-top:7px !important;
 }
 .selling-color {
     color: orange;
@@ -152,10 +155,7 @@
 .more-styles {
     font-weight: 400;
     font-size: 11px;
-    line-height: 13px;
-
-    /* Primary */
-
+    line-height: 1px;
     color: #333333;
 }
 .card-react {
@@ -271,8 +271,8 @@
     margin: none !important;
 }
 .list-style-margin {
-    margin-top: -36px;
-    padding: 0 10px;
+    margin-top: -21px;
+    padding: 0 0px;
 }
 
 .product-details li {

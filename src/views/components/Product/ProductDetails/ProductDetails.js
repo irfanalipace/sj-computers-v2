@@ -57,7 +57,7 @@ const ProductDetails = ({ product }) => {
                 </div>
             </div>
 
-            <hr></hr>
+            <hr className="hr-card-details"></hr>
             <div className="cart-details-text">
                 <div className="row">
                     <div className="col-md-12 color-text">
@@ -70,15 +70,15 @@ const ProductDetails = ({ product }) => {
             <div className="content">
                 <div className="row">
                     <div className="col-md-12 shipping-button">
-                        <p className="shipping-text">
+                        {/* <p className="shipping-text">
                             Shipping fee to Los Angeles $10 only
-                            {/* <DilveryBox /> */}
-                        </p>
+                         
+                        </p> */}
                     </div>
                 </div>
             </div>
 
-            <hr></hr>
+            <hr className="hr-card-details"></hr>
 
             <p className="more-styles">More Styles:</p>
 
@@ -107,7 +107,7 @@ const ProductDetails = ({ product }) => {
                 </div>
             </div>
 
-            <hr></hr>
+            <hr  className="hr-card-details"></hr>
             <div className="col-md-12 list-style-margin">
                 <ul className="product-details">
                     <li>

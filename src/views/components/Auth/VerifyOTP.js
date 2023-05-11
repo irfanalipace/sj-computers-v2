@@ -103,7 +103,7 @@ const VerifyOTP = () => {
         >
             <h3 className="login-h3-verify-form">Verification required</h3>
             <div className="email-text-verify-form mt-2 mb-1">
-                One Time Password (OTP) sent to {email}
+                One Time Password (OTP) sent to {email}{'. '}
                 <span className="email-text-verify-form">
                     Please enter it below.
                     <button
@@ -159,9 +159,10 @@ const VerifyOTP = () => {
                             Resend OTP
                         </button>
                     </p>
+                   
                     <div className="border-primary text-primary timer">
-                        {isTimerFinished ? "0" : timer}
-                    </div>
+      {isTimerFinished ? null : (timer === 0 ? '0' : timer)}
+                </div>
                 </div>
             )}
             <p className="forgot-password text-left">
