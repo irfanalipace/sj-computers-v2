@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Navigate, useRoutes } from "react-router-dom";
+import { Navigate, useRoutes, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Home = React.lazy(() => import("@pages/Home/Home"));
 const LoginForm = React.lazy(() => import("@pages/Auth/LoginForm"));
@@ -230,13 +230,28 @@ export const Router = () => {
 
 export function ProtectedRoute({ children }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    if (!isAuthenticated) {
+        const location = useLocation();
+        const redirectURL = location.pathname;
+        console.log("auth: ", redirectURL);
+
+        window.localStorage.setItem("redirectURL", redirectURL);
+    }
     return isAuthenticated ? children : <Navigate to="/login" replace />;
 }
 
 export function AuthRoute({ children }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    let redirectRoute = "/";
+
+    if (isAuthenticated) {
+        const redirectURL = localStorage.getItem("redirectURL");
+        localStorage.removeItem("redirectURL");
+        if (redirectURL) redirectRoute = redirectURL;
+    }
+
     return isAuthenticated ? (
-        <Navigate to="/?firstLogin=true" replace />
+        <Navigate to={`${redirectRoute}?firstLogin=true`} replace />
     ) : (
         children
     );
