@@ -17,7 +17,7 @@
 .product-section-cart {
     background: white;
     position: absolute;
-    z-index: 2;
+    z-index: 4;
     width: 449px;
     height: 300px;
     padding: 2px;

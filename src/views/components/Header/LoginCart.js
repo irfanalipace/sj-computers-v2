@@ -1,19 +1,24 @@
 import { useState } from "react";
 import "./logincart.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const LoginCart = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleButtonClick = () => {
         setIsOpen(!isOpen);
     };
-    const [isPaymentFrameVisible, setIsPaymentFrameVisible] = useState(false);
     return (
         <div className="dropdown-payment hover-effect-sets">
             <button onClick={handleButtonClick} className="hover-effect-sets">
                 <p className="text-start mb-1">Login</p>{" "}
                 <p className="mb-0">Register</p>
             </button>
+            {isOpen && (
+                <div
+                    className="sidebarOverlay"
+                    onClick={() => setIsOpen(false)}
+                ></div>
+            )}
             {isOpen ? (
                 <div className="product-section-cart">
                     <div className="d-grid ">

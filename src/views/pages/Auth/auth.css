@@ -171,13 +171,7 @@
     margin: auto !important;
     color: #b1ceb7;
 }
-h5:before {
-    /* margin-right: 10px !important; */
-}
-h5:after {
-    /* margin-left: 10px !important; */
-}
-/*  */
+
 .rectangle {
     font-weight: 500;
     font-size: 12px;
@@ -204,12 +198,12 @@ h5:after {
     color: #706e6e;
 }
 .footer-mute {
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 11px;
     line-height: 15px;
-    color: #1270C4;
+    color: #1270c4;
     text-align: center;
     /* padding-top: 40px !important; */
     padding-right: 88px;
@@ -386,7 +380,7 @@ h5:after {
     .login-h3-reset {
         font-size: 29px !important;
     }
- 
+
     .form-container {
         width: 95% !important;
         padding-top: 0px !important;
@@ -491,13 +485,13 @@ h5:after {
     color: #333333;
 }
 
-
-@media screen and (max-width:440px) {
+@media screen and (max-width: 440px) {
     .footer-mute {
         text-align: center;
         font-size: 13px;
         padding-right: 8px;
-    }.copyright-sjcomputer {
+    }
+    .copyright-sjcomputer {
         padding-right: 0px;
     }
 }
