@@ -160,9 +160,9 @@ const VerifyOTP = () => {
                         </button>
                     </p>
                    
-                    <div className="border-primary text-primary timer">
-      {isTimerFinished ? null : (timer === 0 ? '0' : timer)}
-                </div>
+                    <div className='border-primary text-primary timer'>
+      {isTimerFinished ? '0' : timer}
+    </div>
                 </div>
             )}
             <p className="forgot-password text-left">
