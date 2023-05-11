@@ -9,7 +9,6 @@ const Accordion = ({
     toggleAccordion,
     isOpen,
 }) => {
-    console.log("summary: ", summary);
     const contentRef = useRef(null);
 
     const handleToggle = (e, next = false) => {
@@ -37,18 +36,28 @@ const Accordion = ({
                 onClick={handleToggle}
             >
                 <div className="row mx-0">
-                    <div className={`${summary ? "col-lg-4 col-5" : "col-12"}`}>
-                        <div className="d-flex align-items-center">
+                    <div
+                        className={`${
+                            summary ? "col-lg-4 col-md-5 col-12" : "col-12"
+                        }`}
+                    >
+                        <div className="d-flex align-items-center h-100">
                             <h4>{id}</h4>
                             <h3>{title}</h3>
                         </div>
                     </div>
-                    <div className={`${summary ? "col-6" : "d-none"}`}>
+                    <div
+                        className={`${
+                            summary ? "col-6 d-md-block d-none" : "d-none"
+                        }`}
+                    >
                         <div className="summary">{summary}</div>
                     </div>
                     <div
                         className={`${
-                            summary ? "col-lg-2 col-1" : "d-none"
+                            summary
+                                ? "col-lg-2 col-1 d-md-flex d-none"
+                                : "d-none"
                         } d-flex justify-content-end`}
                     >
                         <button onClick={handleToggle} className="change-btn">

@@ -5,30 +5,26 @@
     padding-bottom: 4px;
 }
 .shop-heading {
+    padding-top: 7px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-
-    font-weight: 400;
+    font-weight: 500;
     font-size: 28px;
-
     color: #000000;
 }
-
 .cartItem-image {
     max-width: 100%;
     margin-left: 10px;
     max-height: 150px;
 }
 .item-details {
-    /* position: absolute; */
     width: 631px;
     height: 38px;
     left: 323px;
     top: 223px;
-
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
@@ -39,11 +35,17 @@
 .price-heading {
     text-align: end;
     top: 223px;
-
     font-weight: 600;
     font-size: 16px;
     line-height: 19px;
     color: #000000;
+    padding-top: 14px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #333333;
 }
 .shopping-heading {
     margin-left: 10px;
@@ -61,7 +63,8 @@
     font-weight: 400;
     font-size: 15px;
     line-height: 24px;
-    margin-left: -29px;
+    margin-left: 0;
+    padding-left: 0;
     color: #333333;
     list-style: none;
 }
@@ -72,11 +75,8 @@
     color: #318243;
 }
 .button-link {
-    /* height: 30px; */
-
     font-weight: 500;
     font-size: 13px;
-
     color: #318243;
     border: none;
     background: white;
@@ -168,9 +168,43 @@ head:nth-child(2) {
     padding: 10px;
     margin-bottom: 10px;
 }
+@media screen and (min-width: 750px) and (max-width: 1060px) {
+    .checkout-button {
+        height: 60px;
+    }
+    .sub-title {
+        font-size: 12px;
+    }
+}
+@media screen and (min-width: 750px) and (max-width: 1200px) {
+    .sub-title {
+        font-size: 12px;
+    }
+    .cart-mein-dev {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
 @media screen and (max-width: 600px) {
     .item-details {
-        font-size: 11px;
+        font-size: 12px;
+    }
+    .cart-mein-dev {
+        padding-top: 20px;
+        padding-left: 32px;
+        padding-right: 32px;
+        padding-bottom: 4px;
+    }
+
+    .shop-heading {
+        font-size: 15px;
+    }
+    .price-heading {
+        font-size: 15px;
+    }
+
+    .button-link {
+        border-left: 0;
     }
 }
 @media screen and (max-width: 350px) {
@@ -178,15 +212,7 @@ head:nth-child(2) {
         width: 239px;
         margin-left: -50px;
     }
-    .shop-heading{
-        font-size: 15px;
-    }
-}
-@media screen and (max-width: 550px) {
-
-    .shop-heading{
-        font-size: 15px;
-    }.price-heading{
+    .shop-heading {
         font-size: 15px;
     }
 }

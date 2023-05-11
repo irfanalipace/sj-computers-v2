@@ -26,7 +26,7 @@ const ProductDetails = ({ product }) => {
             </div>
             <div className="row px-0 res">
                 <div className="col-lg-4 col-md-6 col-sm-12 revie">
-                    <div className="star">
+                    <div className="star my-2">
                         <StarRatings
                             rating={product?.rating}
                             starRatedColor="rgb(232, 126, 36)"
@@ -42,14 +42,14 @@ const ProductDetails = ({ product }) => {
                     </button>
                 </div>
                 <div className="col-lg-8 col-md-6 col-sm-12">
-                    <div>
+                    <div className="my-1">
                         <Link className="links-rting">66 ratings</Link>
                         <Link className="moniter-links">
                             11 answered questions
                         </Link>
                     </div>
                     <span className="size-text">
-                      <span className="size-text-details">Size</span>  
+                        <span className="size-text-details">Size</span>
                         <Link className="moniter-links border-0">
                             “lg 24 inch monitor”
                         </Link>
@@ -58,14 +58,14 @@ const ProductDetails = ({ product }) => {
             </div>
 
             <hr></hr>
-          <div className="cart-details-text">
-          <div className="row">
-                <div className="col-md-12 color-text">
-                    <span className="$-color">$</span>
-                    {product?.price?.toString().split(".")[0]}
-                    <sup>{product?.price?.toString().split(".")[1]}</sup>
+            <div className="cart-details-text">
+                <div className="row">
+                    <div className="col-md-12 color-text">
+                        <span className="$-color">$</span>
+                        {product?.price?.toString().split(".")[0]}
+                        <sup>{product?.price?.toString().split(".")[1]}</sup>
+                    </div>
                 </div>
-            </div>
             </div>
             <div className="content">
                 <div className="row">
@@ -77,35 +77,35 @@ const ProductDetails = ({ product }) => {
                     </div>
                 </div>
             </div>
-         
+
             <hr></hr>
 
             <p className="more-styles">More Styles:</p>
 
-           <div className="text-box-details">
-           <div className="row">
-                <div className="button-detail-item">
-                    <Link
-                        to="#"
-                        className="text-decoration-none"
-                        style={{ color: "#333333" }}
-                    >
-                        <h6 className="card-title1">24” Full HD IPS</h6>
-                        <p className="card-text1">US$ 159.97</p>
-                    </Link>
-                </div>
-                <div className="button-detail-item">
-                    <Link
-                        to="#"
-                        className="text-decoration-none"
-                        style={{ color: "#333333" }}
-                    >
-                        <h6 className="card-title1">27” Full HD IPS</h6>
-                        <p className="card-text1">US$ 149.97</p>
-                    </Link>
+            <div className="text-box-details">
+                <div className="row">
+                    <div className="button-detail-item">
+                        <Link
+                            to="#"
+                            className="text-decoration-none"
+                            style={{ color: "#333333" }}
+                        >
+                            <h6 className="card-title1">24” Full HD IPS</h6>
+                            <p className="card-text1">US$ 159.97</p>
+                        </Link>
+                    </div>
+                    <div className="button-detail-item">
+                        <Link
+                            to="#"
+                            className="text-decoration-none"
+                            style={{ color: "#333333" }}
+                        >
+                            <h6 className="card-title1">27” Full HD IPS</h6>
+                            <p className="card-text1">US$ 149.97</p>
+                        </Link>
+                    </div>
                 </div>
             </div>
-           </div>
 
             <hr></hr>
             <div className="col-md-12 list-style-margin">

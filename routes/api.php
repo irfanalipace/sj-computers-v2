@@ -88,11 +88,11 @@ Route::post('contact-us',[ContactUsController::class,'contactSubmit'])->name('cu
 /*
 *Place Order
 */
-Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
+Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder')->middleware('auth:api');
 
 Route::get('success-transaction/{id}', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 
-Route::post('cancel-transaction/{id}', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
+Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
 Route::middleware(['auth:api'])->group(function () {
 
@@ -142,4 +142,14 @@ Route::middleware(['auth:api'])->group(function () {
     *Square Integration
     */
     Route::post('square-charge', [SquareController::class, 'chargeCustomer'])->name('squreCharge');
+
+    /*
+     * place order
+     */
+    Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
+
+    /*
+     * Apply Shipment
+     */
+    Route::post('apply-shipment', [CartController::class, 'applyShipment'])->name('applyShipment');
 });

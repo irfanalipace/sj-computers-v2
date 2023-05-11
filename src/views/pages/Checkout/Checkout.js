@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { PAYMENT_METHODS } from "@utils/constants";
+import { Alert } from "react-bootstrap";
 import Accordion from "@common/Accordion/Accordion";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import ShippingDetails from "@components/Checkout/ShippingDetails/ShippingDetails";
@@ -25,7 +26,15 @@ export default function Checkout() {
     const [currentAccordionId, setCurrentAccordionId] = useState();
     const [shippingDetails, setShippingDetails] = useState({});
     const checkoutDetails = useSelector((state) => state.cart.details);
+    const shippingAddress = useSelector(
+        (state) => state.orders.shippingDetails
+    );
     const loading = useSelector((state) => state.cart.isLoading);
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const paymentError = useRef(null);
+    paymentError.current = urlParams.get("error");
 
     const ACCORDION_VARIABLES = {
         1: accordionOne,
@@ -51,7 +60,7 @@ export default function Checkout() {
     };
 
     useEffect(() => {
-        toggleAccordion(1);
+        paymentError.current ? toggleAccordion(3) : toggleAccordion(1);
     }, []);
 
     return (
@@ -78,18 +87,29 @@ export default function Checkout() {
                         </div>
                     </div>
                     <div className="checkout-page-inner">
+                        {paymentError.current && (
+                            <Alert variant="danger" className="my-3">
+                                {paymentError.current}
+                            </Alert>
+                        )}
                         {checkoutDetails.total_items > 0 ? (
                             <div className="row mx-o">
                                 <div className="col-md-9 col-12">
                                     <Accordion
-                                        className="shipping-details"
+                                        className="shipping-details px-0 acoordeing"
                                         id={1}
                                         title="Shipping Details"
-                                        summary={<ShippingSummary />}
+                                        summary={
+                                            shippingAddress.address && (
+                                                <ShippingSummary />
+                                            )
+                                        }
                                         toggleAccordion={toggleAccordion}
                                         isOpen={ACCORDION_VARIABLES[1]}
                                     >
-                                        <ShippingDetails />
+                                        <ShippingDetails
+                                            shippingAddress={shippingAddress}
+                                        />
                                     </Accordion>
                                     <Accordion
                                         id={2}
@@ -107,9 +127,13 @@ export default function Checkout() {
                                         id={3}
                                         title="Payment Method"
                                         summary={
-                                            <SelectedPaymentMethod
-                                                paymentMethod={paymentMethod}
-                                            />
+                                            paymentMethod && (
+                                                <SelectedPaymentMethod
+                                                    paymentMethod={
+                                                        paymentMethod
+                                                    }
+                                                />
+                                            )
                                         }
                                         toggleAccordion={toggleAccordion}
                                         isOpen={ACCORDION_VARIABLES[3]}
@@ -168,46 +192,39 @@ export const ShippingSummary = () => {
 };
 
 export const SelectedPaymentMethod = ({ paymentMethod }) => {
-    let Component = <></>;
-
-    switch (paymentMethod) {
-        case PAYMENT_METHODS.PAYPAL:
-            Component = (
-                <div className="payment-method">
-                    <div>
-                        <label htmlFor="method2">
-                            <div>PayPal</div>
-                            <div
-                                className="image-wrapper"
-                                style={{ marginLeft: "100px" }}
-                            >
-                                <img src={paypal} />
-                            </div>
-                        </label>
+    let Component = () => {
+        switch (paymentMethod) {
+            case PAYMENT_METHODS.PAYPAL:
+                return (
+                    <div className="payment-method mb-0">
+                        <div>
+                            <label htmlFor={PAYMENT_METHODS.PAYPAL}>
+                                <div>PayPal</div>
+                                <div className="image-wrapper ms-4">
+                                    <img src={paypal} />
+                                </div>
+                            </label>
+                        </div>
                     </div>
-                </div>
-            );
-            break;
-        case PAYMENT_METHODS.SQUARE:
-            Component = (
-                <div className="payment-method">
-                    <div>
-                        <label htmlFor="method1">
-                            <div>Debit/Credit Card</div>
-                            <div
-                                className="image-wrapper"
-                                style={{ marginLeft: "30px" }}
-                            >
-                                <img src={visa} />
-                                <img src={mastercard} />
-                            </div>
-                        </label>
+                );
+            case PAYMENT_METHODS.SQUARE:
+                return (
+                    <div className="payment-method mb-0">
+                        <div>
+                            <label htmlFor={PAYMENT_METHODS.SQUARE}>
+                                <div>Debit/Credit Card</div>
+                                <div className="image-wrapper ms-4">
+                                    <img src={visa} />
+                                    <img src={mastercard} />
+                                </div>
+                            </label>
+                        </div>
                     </div>
-                </div>
-            );
-            break;
-        default:
-    }
+                );
+            default:
+                return <></>;
+        }
+    };
 
-    return <div>{paymentMethod}</div>;
+    return <Component />;
 };

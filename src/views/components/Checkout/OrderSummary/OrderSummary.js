@@ -78,12 +78,18 @@ function OrderSummary({
                         <li>
                             <span>Price:</span>
                             <span>
-                                <strong>${cartDetails?.total}</strong>
+                                <strong>
+                                    {cartDetails?.total
+                                        ? "$" + cartDetails.total
+                                        : "$0"}
+                                </strong>
                             </span>
                         </li>
                         <li>
                             <span>Shipping & handling:</span>
-                            <span>${shippingCost}</span>
+                            <span>
+                                {shippingCost ? "$" + shippingCost : "$0"}
+                            </span>
                         </li>
                         <li>
                             <span>Total before tax:</span>

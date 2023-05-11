@@ -160,23 +160,27 @@ export const Router = () => {
         {
             path: "/checkout/:productId",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <Checkout />
-                </Suspense>
+                <ProtectedRoute>
+                    <Suspense fallback={<Loader />}>
+                        <Checkout />
+                    </Suspense>
+                </ProtectedRoute>
             ),
         },
         {
             path: "/checkout",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <Checkout />
-                </Suspense>
+                <ProtectedRoute>
+                    <Suspense fallback={<Loader />}>
+                        <Checkout />
+                    </Suspense>
+                </ProtectedRoute>
             ),
-        }, 
-          {
+        },
+        {
             path: "/contact",
             element: (
-                <Suspense>
+                <Suspense fallback={<Loader />}>
                     <Contact />
                 </Suspense>
             ),
@@ -231,5 +235,9 @@ export function ProtectedRoute({ children }) {
 
 export function AuthRoute({ children }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    return isAuthenticated ? <Navigate to="/" replace /> : children;
+    return isAuthenticated ? (
+        <Navigate to="/?firstLogin=true" replace />
+    ) : (
+        children
+    );
 }

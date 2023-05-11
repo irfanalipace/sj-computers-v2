@@ -15,7 +15,10 @@
 
 .hover-effect-sets {
     border: 1px solid transparent;
-    padding: 3px;
+    padding: 3px 3px 0;
+}
+.hover-effect-sets p {
+    font-weight: 500;
 }
 .hover-effect-sets:hover {
     border-color: white;
@@ -126,17 +129,14 @@
     border-radius: 5px 0px 0px 5px;
 }
 
-/* .ul-liste-items-all-buttons{
-
+.ul-liste-items-all-buttons:active {
+    background-color: #3b71ca;
+    color: white;
 }
-.ul-liste-items-all-buttons:hover{
-    background-color: green;
+.ul-liste-items-all-buttons:hover {
+    background-color: #3b71ca;
     color: white;
-  }
-  .ul-liste-items-all-buttons:active {
-    background-color: green;
-    color: white;
-  } */
+}
 
 /* .ul-liste-items-all-buttons:nth-child(odd):hover {
   background-color: lightgreen;
@@ -212,8 +212,7 @@
     background: #00305e;
     border: 0px;
     color: white;
-    padding: 12px 0 0;
-
+    padding: 0;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -239,7 +238,7 @@
 .nav-right > div {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
     width: 25%;
 }
 

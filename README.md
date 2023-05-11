@@ -4,13 +4,13 @@
 
 To run the project run following commands
 
--   php artisan key:generate.
+-   php artisan key:generate
 -   composer install (delete composer lock if get error of version in lock file).
 
 [//]: # '- php artisan vendor:publish --provider="Laravel\\Fortify\FortifyServiceProvider"'
 
--   Php artisan migrate:fresh --seed.
--   Php artisan passport:install.
+-   php artisan migrate:fresh --seed
+-   php artisan passport:install
 
 [//]: # "- composer require tcg/voyager"
 
@@ -21,8 +21,14 @@ To run the project run following commands
 -   php artisan voyager:admin admin@admin.com
 -   php artisan serve
 
+# After Environment change
+
+-   php artisan config:clear
+-   php artisan config:cache
+-   php artisan optimize:clear
+
 For Frontend:
 
--   npm install
+-   npm install --force
 -   npm start (to start the development server)
 -   npm build (creates production build)

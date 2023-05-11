@@ -28,12 +28,18 @@ class GenerateInvoiceJob implements ShouldQueue
     public $response;
     private $userId;
     public $payment_type;
-    public function __construct($data, $response, $userId, $payment_type)
+
+    public $cartData;
+
+    public $cartContent;
+    public function __construct($data, $response, $userId, $payment_type, $cartData, $cartContent = [])
     {
         $this->response = $response;
         $this->userId = $userId;
         $this->data = $data;
         $this->payment_type = $payment_type;
+        $this->cartData = $cartData;
+        $this->cartContent = $cartContent;
     }
 
     /**
@@ -43,6 +49,7 @@ class GenerateInvoiceJob implements ShouldQueue
      */
     public function handle()
     {
+
         //saving invoice for the payment
         $invoice = $this->storeInvoice();
 
@@ -50,17 +57,17 @@ class GenerateInvoiceJob implements ShouldQueue
         $order = [];
 //        Cart::session($this->userId)->getContent()->each(function ($item) use (&$items) {
 
-        $order['total_amount'] = Cart::session($this->userId)->getSubTotal();
-        $order['sub_total'] = Cart::session($this->userId)->getSubTotal();
-        $order['shipment_price'] = '';
-        $order['shipment_days'] = '';
+        $order['total_amount'] = $this->cartData['total_amount'];
+        $order['sub_total'] = $this->cartData['sub_total'];
         $order['user_id'] = $this->userId;
         $order['invoice_id'] = $invoice->id;
         $order['status'] = StatusEnum::COMPLETE;
-        $order['item_qty'] = '';
+        $order['shipment_price'] = $this->cartData['shipment_amount'];
+        $order['shipment_days'] = $this->cartData['estimate_day'];
+        $order['item_qty'] = $this->cartData['item_qty'];
         $order = Order::create($order);
 
-        Cart::session($this->userId)->getContent()->each(function ($item) use ($order) {
+        $this->cartContent->each(function ($item) use ($order) {
             $item = [
                 'order_id' => $order->id,
                 'product_id' => $item->id,
@@ -71,8 +78,6 @@ class GenerateInvoiceJob implements ShouldQueue
 
             OrderItem::create($item);
         });
-
-        $this->clearCartItems();
     }
     //Invoice create
     protected function storeInvoice()
@@ -108,11 +113,5 @@ class GenerateInvoiceJob implements ShouldQueue
         $invoice['status'] = StatusEnum::SUCCESS;
         $invoice = Invoice::create($invoice);
         return $invoice;
-    }
-    //After Successfull payment cart items cleared
-    protected function clearCartItems()
-    {
-        $cart = Cart::session($this->userId)->clear();
-        return  $cart;
     }
 }

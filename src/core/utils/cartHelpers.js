@@ -72,12 +72,12 @@ export const deleteNotLocalCartItem = () => {
                     cartItems[index]?.price * cartItems[index]?.quantity
                 );
 
-            cartDetails = {
-                total_items: cartTotalQuantity > 0 ? cartTotalQuantity : 0,
-                total: cartTotal > 0 ? cartTotal.toFixed(2) : 0,
-            };
             if (index >= 0) {
                 cartItems.splice(index, 1);
+                cartDetails = {
+                    total_items: cartTotalQuantity > 0 ? cartTotalQuantity : 0,
+                    total: cartTotal > 0 ? cartTotal.toFixed(2) : 0,
+                };
             }
         }
     });
@@ -108,6 +108,10 @@ export const compareLocalCartWithDBCart = (array_1, array_2) => {
     // missingObjects2 is an array of objects that are present in array_2 but not in array_1 or local objects of array_2.
 
     return [missingObjects1, missingObjects2];
+};
+export const clearCartLocally = () => {
+    window.localStorage.removeItem("cart");
+    window.localStorage.removeItem("cartDetails");
 };
 
 export const objectToArray = (obj) => {

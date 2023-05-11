@@ -32,11 +32,11 @@ class SquareController extends Controller
             'accessToken' => env('SQUARE_TOKEN'),
             'environment' => Environment::SANDBOX,
         ]);
-        $this->userId = (auth()->user()) ? auth()->user()->id  : 'dummy';
     }
     // charge process
     public function chargeCustomer(CardRequest $request)
     {
+       
         try {
 
             $idempotencyKey = uniqid();
@@ -48,7 +48,7 @@ class SquareController extends Controller
             // $cardToken = $this->customerCardToken($request, $customer);
 
             $amount_money = new Money();
-            $amount_money->setAmount(Cart::session($this->userId)->getSubTotal());
+            $amount_money->setAmount(Cart::session(auth()->user()->id)->getSubTotal());
             $amount_money->setCurrency(StatusEnum::currency);
             //create payment Request
             $body = new CreatePaymentRequest($request->source_id, $idempotencyKey);
@@ -57,13 +57,39 @@ class SquareController extends Controller
             $body->setCustomerId($customer);
             $body->setLocationId(env('SQUARE_LOCATION_ID'));
             $body->setReferenceId('user-' . auth()->user()->id);
-
+            
             $api_response = $this->squareClient->getPaymentsApi()->createPayment($body);
-
+            
             if ($api_response->isSuccess()) {
+                $orderData = [];
+
+
+                $orderData['total_amount'] = \Cart::session(auth()->user()->id)->getTotal();
+                $orderData['sub_total'] = \Cart::session(auth()->user()->id)->getSubTotal();
+                $orderData['item_qty'] = \Cart::session(auth()->user()->id)->getTotalQuantity();
+
+
+                $orderData['shipment_amount'] =  0;
+                $orderData['estimate_day'] =  Carbon::now()->addWeekdays(5)->format('l d-m-Y');
+
+                $cartConditions = Cart::session(auth()->user()->id)->getConditions('shipment_days');
+
+                foreach ($cartConditions as $condition) {
+                    $amount = $condition->getValue(); // the value of the condition
+                    $orderData['shipment_amount'] = $amount;
+                    $orderData['estimate_day'] =  $condition->getAttributes()['estimate_day'];
+                }
+
+                $cartContent = Cart::session(auth()->user()->id)->getContent();
+
                 $result = $api_response->getResult();
-                GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, StatusEnum::PAYMENTTYPESQUARE);
-                
+
+                GenerateInvoiceJob::dispatch(array(), $api_response, auth()->user()->id, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
+
+                //clear cart after successfull payment
+                Cart::session(auth()->user()->id)->clear();
+                //clear cart condition
+                Cart::session(auth()->user()->id)->clearCartConditions();
             } else {
                 $errors = $api_response->getErrors();
                 return response()->json(['code' => 400, 'msg' => "Something went wrong in square payment."]);
@@ -71,7 +97,7 @@ class SquareController extends Controller
 
             return response()->json(['code' => 200, 'msg' => StatusEnum::PAYMENTMESSAGE]);
         } catch (Exception $e) {
-            
+
             return response()->json(['code' => 400, 'msg' => "something went wrong." . $e]);
         }
     }

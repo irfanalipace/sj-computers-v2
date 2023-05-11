@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -17,13 +17,15 @@ import vectorcart from "@images/home/vector.png";
 import "./Header.css";
 
 const Header = () => {
-    const [smShow, setSmShow] = useState(false);
-    const [lgShow, setLgShow] = useState(false);
     const currentState = useSelector((state) => state.states.currentState);
-    const states = useSelector((state) => state.states.states);
     const user = useSelector((state) => state.auth.user);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cartDetails = useSelector((state) => state.cart.details);
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const firstLogin = useRef(null);
+    firstLogin.current = urlParams.get("firstLogin");
 
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
@@ -46,6 +48,10 @@ const Header = () => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    useEffect(() => {
+        firstLogin.current && setShow(true);
+    }, [firstLogin.current]);
 
     const handleResize = () => {
         setScreenWidth(window.innerWidth);

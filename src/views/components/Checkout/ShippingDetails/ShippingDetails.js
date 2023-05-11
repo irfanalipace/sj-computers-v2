@@ -8,24 +8,26 @@ import ShippingButton from "./ShippingButton";
 
 import "./ShippingDetails.css";
 
-export default function ShippingDetails({ toggleAccordion, handleHeight }) {
+export default function ShippingDetails({
+    toggleAccordion,
+    handleHeight,
+    shippingAddress,
+}) {
     const [newAddress, setNewAddress] = useState(false);
     const [editAddress, setEditAddress] = useState(false);
     const loading = useSelector((state) => state.orders.isLoading);
-    const shippingAddress = useSelector(
-        (state) => state.orders.shippingDetails
-    );
 
     const buttonClickHandler = (e) => toggleAccordion(e, true);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchStates());
-    }, []);
-
-    useEffect(() => {
         handleHeight();
-    });
+        return () => {
+            // setNewAddress(false);
+            // setEditAddress(false);
+        };
+    }, []);
 
     const handleChange = (e) => {
         console.log(e.target.value);
@@ -58,14 +60,14 @@ export default function ShippingDetails({ toggleAccordion, handleHeight }) {
                             </h3>
                             <div className="address-list">
                                 <div className="address">
-                                    <input
+                                    {/* <input
                                         type="radio"
                                         id="address_id"
                                         name="selectedAddress"
                                         value="address_id"
                                         onChange={handleChange}
-                                        checked={true}
-                                    />
+                                        defaultChecked={true}
+                                    /> */}
                                     <div>
                                         <label htmlFor="address_id">
                                             {shippingAddress?.full_name}{" "}
@@ -76,9 +78,11 @@ export default function ShippingDetails({ toggleAccordion, handleHeight }) {
                                         <div className="address-container">
                                             <button
                                                 type="button"
-                                                onClick={() => true}
+                                                onClick={() =>
+                                                    setEditAddress(true)
+                                                }
                                             >
-                                                Edit
+                                                Edit Address
                                             </button>
                                         </div>
                                     </div>

@@ -11,6 +11,10 @@
     color: black;
     margin-bottom: 10px;
 }
+
+.product-type-section .category-item:hover .category-name {
+    color: #e87e24;
+}
 .items-name-text {
     font-weight: 400;
     /* font-size: 12px; */

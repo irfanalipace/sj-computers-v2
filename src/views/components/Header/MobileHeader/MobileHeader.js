@@ -28,10 +28,10 @@ function MobileHeader() {
               <Link to="/"><i className="fa fa-home" aria-hidden="true"></i></Link>
             </li>
             <li>
-              <Link to="/account/profile"><i className="fa fa-user" aria-hidden="true"></i></Link>
+              <Link to="/account"><i className="fa fa-user" aria-hidden="true"></i></Link>
             </li>
             <li>
-              <Link to="">
+              <Link to="/cart">
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>
 
               </Link>

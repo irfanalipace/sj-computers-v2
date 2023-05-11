@@ -105,6 +105,8 @@
 }
 .color-text-cart {
     color: red;
+    padding: 11px;
+    /* line-height: 8px; */
 }
 .mein-part {
     justify-content: center;
@@ -120,27 +122,24 @@
     .color-card-dev {
         text-align: center;
     }
-}
-@media screen and (max-width: 780px) {
-    .quantity-inner {
-        justify-content: center;
-    }
-}
-@media screen and (max-width: 780px) {
     .text-stock {
         text-align: center;
     }
     .color-text-cart {
         text-align: center;
     }
+    .quantity-inner {
+        justify-content: center;
+    }
+    .card-section-left {
+        margin-top: 10px;
+    }
 }
 
-@media screen and (max-width: 767px) {
-    .item-card-add-text-details {
-        position: relative;
-        padding-top: 6px;
-        margin-top: -44px;
-        padding-left: 298px;
-        font-size: 10px;
-    }
+.item-card-add-text-details {
+    position: relative;
+    padding-top: 9px;
+    margin-top: -44px;
+    /* padding-left: 298px; */
+    font-size: 10px;
 }

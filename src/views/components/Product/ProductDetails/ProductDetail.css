@@ -272,6 +272,12 @@
 }
 .list-style-margin {
     margin-top: -36px;
+    padding: 0 10px;
+}
+
+.product-details li {
+    /* display: flex;
+    justify-content: space-between; */
 }
 .img-text-color-details {
     color: #07631c;
@@ -319,8 +325,6 @@
         justify-content: center;
     }
     .list-style-margin {
-        justify-content: center;
-        display: flex;
         margin-top: 0px !important;
     }
     .items-details-description {

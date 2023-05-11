@@ -1,7 +1,7 @@
 .dropdown-payment {
     position: relative;
     padding: 2px;
-    margin: 3px;
+    margin: 3px 0 0;
 }
 .login-cart-button {
     font-weight: 500;
@@ -33,12 +33,16 @@
 .ul-list {
     font-weight: 400;
     font-size: 12px;
-
     color: #333333;
     list-style: none;
     margin-left: -27px !important;
     text-align: initial;
 }
+
+.ul-list li {
+    margin: 10px 0;
+}
+
 .your-list {
     font-weight: 600;
     font-size: 14px;
@@ -72,6 +76,7 @@
 }
 .new-customer {
     font-size: 15px !important;
+    margin-bottom: 0;
 }
 .dropdown-payment button {
     background-color: #00305e;
@@ -80,7 +85,8 @@
     line-height: 17px;
     color: #ffffff;
     border: none;
-    width: 55%;
+    width: 100%;
+    text-align: center;
 }
 .dropdown-paymenr button:hover {
     background-color: #3e8e41;
@@ -108,4 +114,5 @@
     );
     border: 1px solid #6f6f6f;
     border-radius: 3px;
+    margin-bottom: 10px;
 }

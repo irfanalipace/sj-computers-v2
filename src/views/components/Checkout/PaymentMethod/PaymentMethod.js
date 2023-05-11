@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { PAYMENT_METHODS } from "@utils/constants";
 import { placeOrder } from "@store/orders/ordersThunk";
+import PaymentModal from "./PaymentModal";
 import paypal from "@images/common/paypal.png";
 import visa from "@images/common/visa.png";
 import mastercard from "@images/common/mastercard.png";
@@ -10,8 +11,9 @@ import PaymentButton from "./PaymentButton";
 
 import "./PaymentMethod.css";
 
-export default function PaymentMethod({ setPayment }) {
-    const [paymentMethod, setPaymentMethod] = useState(PAYMENT_METHODS.PAYPAL);
+export default function PaymentMethod({ setPayment, handleHeight }) {
+    const [paymentMethod, setPaymentMethod] = useState(null);
+    const [openPaymentModal, setPaymentModal] = useState(false);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
     const shippingDetails = useSelector(
         (state) => state.orders.shippingDetails
@@ -27,10 +29,27 @@ export default function PaymentMethod({ setPayment }) {
         setPayment(paymentMethod);
     }, [paymentMethod]);
 
+    useEffect(() => {
+        handleHeight();
+    }, []);
+
     const clickHandler = () => {
-        dispatch(
-            placeOrder({ paymentMethod }, (link) => location.replace(link))
-        );
+        switch (paymentMethod) {
+            case PAYMENT_METHODS.PAYPAL:
+                dispatch(
+                    placeOrder({ paymentMethod }, (link) =>
+                        location.replace(link)
+                    )
+                );
+                break;
+
+            case PAYMENT_METHODS.SQUARE:
+                setPaymentModal(true);
+                break;
+
+            default:
+                break;
+        }
     };
 
     return (
@@ -41,9 +60,8 @@ export default function PaymentMethod({ setPayment }) {
                         type="radio"
                         id="method1"
                         name="selectedAddress"
-                        value="SQUARE"
+                        value={PAYMENT_METHODS.SQUARE}
                         onChange={handleChange}
-                        checked={true}
                     />
                     <div>
                         <label htmlFor="method1">
@@ -52,8 +70,7 @@ export default function PaymentMethod({ setPayment }) {
                                 className="image-wrapper"
                                 style={{ marginLeft: "30px" }}
                             >
-                                <img src={visa} />
-                                <img src={mastercard} />
+                                <img src={visa} /> <img src={mastercard} />
                             </div>
                         </label>
                     </div>
@@ -66,16 +83,15 @@ export default function PaymentMethod({ setPayment }) {
                         name="selectedAddress"
                         value={PAYMENT_METHODS.PAYPAL}
                         onChange={handleChange}
-                        checked={true}
                     />
                     <div>
                         <label htmlFor="method2">
                             <div>PayPal</div>
                             <div
-                                className="image-wrapper"
+                                className="image-warpper-image2"
                                 style={{ marginLeft: "100px" }}
                             >
-                                <img src={paypal} />
+                                <img src={paypal} className="" />
                             </div>
                         </label>
                     </div>
@@ -87,8 +103,15 @@ export default function PaymentMethod({ setPayment }) {
             <PaymentButton
                 paymentMethod={paymentMethod}
                 isLoading={placingOrder}
-                disabled={!paymentMethod || !shippingDetails.address}
+                disabled={
+                    !paymentMethod || !shippingDetails.address || !paymentMethod
+                }
                 clickHandler={clickHandler}
+            />
+
+            <PaymentModal
+                isOpen={openPaymentModal}
+                handleClose={() => setPaymentModal(false)}
             />
         </div>
     );
