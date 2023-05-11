@@ -14,7 +14,12 @@ export const addItemToLocalCart = ({ cartItem, cartDetails }) => {
             ? (cartItems = JSON.stringify([...cartItems, cartItem]))
             : (cartItems = JSON.stringify([cartItem]));
         window.localStorage.setItem("cart", cartItems);
-        window.localStorage.setItem("cartDetails", JSON.stringify(cartDetails));
+        if (cartDetails?.total) {
+            window.localStorage.setItem(
+                "cartDetails",
+                JSON.stringify(cartDetails)
+            );
+        }
     }
 };
 
@@ -30,7 +35,7 @@ export const getCartDetails = () => {
     else return { total_items: 0, total: 0 };
 };
 
-export const setCartDetails = (cartDetails) => {
+export const updateCartDetails = (cartDetails) => {
     window.localStorage.setItem("cartDetails", JSON.stringify(cartDetails));
 };
 

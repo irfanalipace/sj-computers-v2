@@ -16,7 +16,7 @@ const Category = React.lazy(() => import("@pages/Category/Category"));
 const Account = React.lazy(() => import("@pages/Account/Account"));
 const Profile = React.lazy(() => import("@pages/Account/Profile"));
 const Security = React.lazy(() => import("@pages/Account/Security"));
-const Order = React.lazy(() => import("@pages/Account/Order"));
+const Order = React.lazy(() => import("@pages/Account/Orders"));
 const Cart = React.lazy(() => import("@components/ShoppingCart/Cart"));
 const Checkout = React.lazy(() => import("@pages/Checkout/Checkout"));
 // const OrderPage = React.lazy(() => import("@pages/OrderPage/OrderPage.js"));

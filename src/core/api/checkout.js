@@ -69,3 +69,22 @@ export function placeOrderApi({ paymentMethod }) {
             });
     });
 }
+
+export function applyShipment({ shipment_days }) {
+    return new Promise((resolve, reject) => {
+        ApiService.post(`/apply-shipment`, {
+            shipment_days,
+        })
+            .then((response) => {
+                console.log(
+                    "file: checkout.js | applyShipment| response",
+                    response
+                );
+                resolve(response.data);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error checkout", e);
+                reject(e);
+            });
+    });
+}

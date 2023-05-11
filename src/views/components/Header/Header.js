@@ -50,8 +50,8 @@ const Header = () => {
     }, []);
 
     useEffect(() => {
-        firstLogin.current && setShow(true);
-    }, [firstLogin.current]);
+        firstLogin.current && !currentState && setShow(true);
+    }, [firstLogin.current, currentState]);
 
     const handleResize = () => {
         setScreenWidth(window.innerWidth);

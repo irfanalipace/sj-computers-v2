@@ -1,6 +1,3 @@
-.account-page * {
-}
-
 .account-page {
     margin: 0 auto;
     background-color: white;
@@ -16,8 +13,7 @@
 }
 
 .account-page .account-options {
-    display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin-bottom: 40px;
 }
 .account-card a {
@@ -239,32 +235,36 @@
     color: gray;
     cursor: pointer;
   } */
-  .search-input {
+.search-input {
     padding-left: 20px;
     border-radius: 5px;
     border: 1px solid #318243;
     transition: border-color 0.3s;
-  }
-  
-  .green {
+}
+
+.green {
     border-color: green;
-  }
-  .product-container {
+}
+.product-container {
     box-sizing: border-box;
     position: inherit;
     width: 100%;
     height: 241px;
     left: 318px;
     top: 320px;
-    border: 1px solid #DDDDDD;
+    border: 1px solid #dddddd;
     border-radius: 8px;
     margin-bottom: 30px;
-  }
-.orderType{
+}
+.orderType {
     font-weight: bold;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
     margin-right: 30px;
+}
+
+.orders-list-container {
+    padding: 0 20px;
 }

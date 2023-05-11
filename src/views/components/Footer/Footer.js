@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import "./Footer.css";
-import footer from "@images/common/header-logo.png";
+import footer from "@images/header-logo.png";
 import vectorimg from "@images/common/boll.png";
 import copyrightimg from "@images/common/copywrite.png";
 import img1 from "@images/footer/setting.png";

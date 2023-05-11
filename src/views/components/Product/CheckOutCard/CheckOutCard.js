@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
@@ -20,6 +21,7 @@ export const CheckOutCard = ({ product }) => {
     const [cartItem, setCartItem] = useState(null);
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const cartClickHandler = () => {
         let productPrice = product.price * quantity;
@@ -37,7 +39,8 @@ export const CheckOutCard = ({ product }) => {
             total: cartTotal.toFixed(2),
         };
 
-        if (isAuthenticated) dispatch(addToCart({ cartItem, cartDetails }));
+        if (isAuthenticated)
+            dispatch(addToCart({ cartItem }, () => navigate("/cart")));
         else dispatch(addToLocalCart({ cartItem, cartDetails }));
     };
 

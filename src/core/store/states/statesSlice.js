@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const currentState = JSON.parse(window.localStorage.getItem("state"));
+
 const initialState = {
     states: [],
-    currentState: null,
+    currentState: currentState,
     apiError: false,
     isLoading: false,
 };
@@ -23,6 +25,10 @@ const productSlice = createSlice({
         },
         UPDATE_STATE: (state, action) => {
             state.currentState = { ...action.payload };
+            window.localStorage.setItem(
+                "state",
+                JSON.stringify(action.payload)
+            );
             state.isLoading = false;
         },
         CLEAR_STATES: (state) => {

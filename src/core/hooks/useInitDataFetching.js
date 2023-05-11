@@ -20,6 +20,15 @@ export const useInitDataFetching = () => {
     const cartDetails = getCartDetails();
 
     useEffect(() => {
+        if (isAuthenticated) {
+            dispatch(clearCart()); //clear store cart items because all cart items are again fetched from backend to sync with localCart
+            dispatch(getShippingDetails());
+            dispatch(syncCartItems()); //gets all the cart items stored in database and stores them in store and local storage similarly stores local cart items in database
+            dispatch(currentState());
+        }
+    }, [isAuthenticated]);
+
+    useEffect(() => {
         dispatch(fetchCategory());
         dispatch(fetchBrands());
 
@@ -30,13 +39,4 @@ export const useInitDataFetching = () => {
             dispatch(setCartDetails(cartDetails));
         }
     }, []);
-
-    useEffect(() => {
-        if (isAuthenticated) {
-            dispatch(clearCart()); //clear store cart items because all cart items are again fetched from backend to sync with localCart
-            dispatch(getShippingDetails());
-            dispatch(syncCartItems()); //gets all the cart items stored in database and stores them in store and local storage similarly stores local cart items in database
-            dispatch(currentState());
-        }
-    }, [isAuthenticated]);
 };

@@ -47,7 +47,12 @@ export default function Sidebar({ openState, toggleSidebar }) {
 
     return (
         <div>
-            {openState && <div className="sidebarOverlay"></div>}
+            {openState && (
+                <div
+                    className="sidebarOverlay"
+                    onClick={() => toggleSidebar()}
+                ></div>
+            )}
             <div
                 className="sideMenu-container"
                 style={{ left: openState ? "0" : "-350px" }}
@@ -64,8 +69,8 @@ export default function Sidebar({ openState, toggleSidebar }) {
                             <img
                                 className="me-3"
                                 src={
-                                    user?.profileImage
-                                        ? user.profileImage
+                                    user?.profile_pic
+                                        ? user.profile_pic
                                         : userImg
                                 }
                             />
