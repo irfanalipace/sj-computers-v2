@@ -93,13 +93,13 @@ class SquareController extends Controller
                 Cart::session(auth()->user()->id)->clearCartConditions();
             } else {
                 $errors = $api_response->getErrors();
-                return response()->json(['code' => 400, 'msg' => "Something went wrong in square payment."]);
+                return response()->json(['code' => 400, 'message' => "Card declined Please try again."]);
             }
 
-            return response()->json(['code' => 200, 'msg' => StatusEnum::PAYMENTMESSAGE]);
+            return response()->json(['code' => 200, 'message' => StatusEnum::PAYMENTMESSAGE]);
         } catch (Exception $e) {
 
-            return response()->json(['code' => 400, 'msg' => "something went wrong." . $e]);
+            return response()->json(['code' => 400, 'message' => "something went wrong." . $e]);
         }
     }
 
@@ -136,7 +136,7 @@ class SquareController extends Controller
 
             return $customer_id;
         } catch (Exception $e) {
-            return response()->json(['Code' => 400, 'msg' => "Something went wrong" . $e]);
+            return response()->json(['Code' => 400, 'message' => "Something went wrong" . $e]);
         }
     }
     // retreive customer
@@ -153,7 +153,7 @@ class SquareController extends Controller
             }
             return $customer_id;
         } catch (Exception $e) {
-            return response()->json(['Code' => 400, 'msg' => "Something went wrong" . $e]);
+            return response()->json(['Code' => 400, 'message' => "Something went wrong" . $e]);
         }
     }
 
@@ -191,7 +191,7 @@ class SquareController extends Controller
     //         }
     //         return $result;
     //     } catch (Exception $e) {
-    //         return response()->json(['Code' => 400, 'msg' => "Something went wrong" . $e]);
+    //         return response()->json(['Code' => 400, 'message' => "Something went wrong" . $e]);
     //     }
     // }
 }

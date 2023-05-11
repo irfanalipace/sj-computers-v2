@@ -125,8 +125,8 @@ class CartController extends BaseController
         $details = [
             'total_quantity' => \Cart::session($this->userId)->getTotalQuantity(),
             'total_items' => count(\Cart::session($this->userId)->getContent()),
-            'sub_total' => \Cart::session($this->userId)->getSubTotal(),
-            'total' => \Cart::session($this->userId)->getTotal(),
+            'sub_total' => number_format(\Cart::session($this->userId)->getSubTotal(), 2, '.', ''),
+            'total' => number_format(\Cart::session($this->userId)->getTotal(), 2, '.', ''),
             'shipment_info' => $this->getShipmentAmount(true),
         ];
         return $details;
