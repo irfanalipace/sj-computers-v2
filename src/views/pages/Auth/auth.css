@@ -203,10 +203,16 @@ h5:after {
     color: #706e6e;
 }
 .footer-mute {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 15px;
+    color: #1270C4;
     text-align: center;
-
     /* padding-top: 40px !important; */
     padding-right: 88px;
+    /* font-size: 15px; */
 }
 .copyright-sjcomputer {
     padding-right: 112px;

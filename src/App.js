@@ -14,6 +14,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+
 function App() {
     const dispatch = useDispatch();
     const token = getToken();
@@ -40,6 +41,7 @@ function App() {
                 <div className="inner-body">
                     <Router />
                 </div>
+               
                 <Footer />
             </BrowserRouter>
         </div>
