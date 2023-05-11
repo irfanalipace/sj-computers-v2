@@ -23,7 +23,7 @@ const Footer = () => {
                         className="footer-copyright text-center py-3 back-to-top-hover-effct"
                         style={{ backgroundColor: "#002549" }}
                     >
-                        <h4 style={{ color: "wheat" }}>
+                        <h4 style={{ color: "white" }}>
                             <BackToTopButton />
                         </h4>
                     </div>
