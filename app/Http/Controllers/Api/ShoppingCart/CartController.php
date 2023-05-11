@@ -77,7 +77,9 @@ class CartController extends BaseController
 
             $cart = \Cart::session($this->userId)->remove($request->id);
 
-            return response(array('success' => true, 'data' => $cart, 'message' => "cart item {$request->id} removed."), 200, []);
+            $data = $this->getItems(true);
+
+            return response(array('success' => true, 'data' => $data, 'message' => "cart item {$request->id} removed."), 200, []);
         } catch (Exception $e) {
 
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
@@ -109,9 +111,11 @@ class CartController extends BaseController
         try {
             $item = Cart::session($this->userId)->update($request->item_id, array(
                 'quantity' => $request->qty, // so if the current product has a quantity of 4, another 2 will be added so this will result to 6
-            ),);
+            ));
 
-            return response(array('success' => true, 'data' => $item, 'message' => 'Quantity added in cart.'), 200, []);
+            $data = $this->getItems(true);
+
+            return response(array('success' => true, 'data' => $data, 'message' => 'Quantity added in cart.'), 200, []);
         } catch (Exception $e) {
 
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
@@ -201,7 +205,7 @@ class CartController extends BaseController
 
     public function applyShipment(ApplyShipmentDaysRequest $request)
     {
-        
+
         $amount = $this->getShipmentAmount(false, $request->get('shipment_days'));
 
         $condition = new \Darryldecode\Cart\CartCondition(array(
@@ -216,7 +220,7 @@ class CartController extends BaseController
         ));
 
         Cart::session($this->userId)->condition($condition);
-        
+
         $items = $this->getItems(true);
         return response(array('success' => true, 'data' => $items, 'message' => 'Item added.'), 200, []);
     }
