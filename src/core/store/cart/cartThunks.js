@@ -61,7 +61,7 @@ export const deleteItem = (data) => {
         try {
             dispatch({ type: UPDATING, payload: data });
             let response = await deleteItemApi(data.cartItem);
-            // data.cartDetails = { ...response.data.data.details };
+            data.cartDetails = { ...response.data.data.details };
             deleteCartItem(data);
             dispatch({
                 type: DELETE_ITEM,
@@ -79,7 +79,7 @@ export const updateQuantity = (data) => {
         try {
             dispatch({ type: UPDATING, payload: data });
             let response = await updateQuantityApi(data.cartItem);
-            // data.cartDetails = { ...response.data.data.details };
+            data.cartDetails = { ...response.data.data.details };
             updateCartItem(data);
             dispatch({
                 type: UPDATE_QUANTITY,

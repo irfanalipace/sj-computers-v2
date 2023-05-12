@@ -37,6 +37,7 @@ export const CheckOutCard = ({ product }) => {
         const cartDetails = {
             total_items: cartQuantity,
             total: cartTotal.toFixed(2),
+            sub_total: cartTotal.toFixed(2),
         };
 
         if (isAuthenticated)
@@ -77,7 +78,7 @@ export const CheckOutCard = ({ product }) => {
                 </div>
                 <div className="color-card-dev">
                     <button
-                        className="select-location-btn"
+                        className="select-location-btn mb-3"
                         onClick={handleShow}
                     >
                         <img src={imges1} /> Deliver to
@@ -93,13 +94,15 @@ export const CheckOutCard = ({ product }) => {
                     )}
                     {cartItem?.length > 0 ? (
                         <p className="item-card-add-text-details">
-                            Item Added in Cart
+                            Item Already in Cart
                         </p>
                     ) : (
                         <>
                             <div className="text-stock">
                                 <span className="color-card">In Stock</span>
-                                <QuantityInput onChange={setQuantity} />
+                                <div className="mt-3">
+                                    <QuantityInput onChange={setQuantity} />
+                                </div>
                             </div>
                             <div className="button-cart-sell">
                                 <Button

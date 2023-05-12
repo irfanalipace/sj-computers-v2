@@ -20,12 +20,16 @@ const ProductDetails = ({ product }) => {
                 <p className="item-title">{product?.name}</p>
             </div>
             <div className="instock-detail">
-                {product?.quantity > 0 && (
-                    <p className="most-demandind">In Stock</p>
-                )}
+                <p className="most-demandind">
+                    {product?.in_stock > 0 ? (
+                        <span className="text-green">In Stock</span>
+                    ) : (
+                        <span className="text-danger">Out of stock</span>
+                    )}
+                </p>
             </div>
             <div className="row px-0 res">
-                <div className="col-lg-4 col-md-6 col-sm-12 revie">
+                <div className="col-lg-4 col-md-6 col-sm-12 product-review">
                     <div className="star my-2">
                         <StarRatings
                             rating={product?.rating}
@@ -42,15 +46,15 @@ const ProductDetails = ({ product }) => {
                     </button>
                 </div>
                 <div className="col-lg-8 col-md-6 col-sm-12">
-                    <div className="my-1">
-                        <Link className="links-rting">66 ratings</Link>
-                        <Link className="moniter-links">
+                    <div className="my-2">
+                        <Link className="product-rating">66 ratings</Link>
+                        <Link className="product-info">
                             11 answered questions
                         </Link>
                     </div>
                     <span className="size-text">
                         <span className="size-text-details">Size</span>
-                        <Link className="moniter-links border-0">
+                        <Link className="product-info border-0">
                             “lg 24 inch monitor”
                         </Link>
                     </span>
@@ -107,7 +111,7 @@ const ProductDetails = ({ product }) => {
                 </div>
             </div>
 
-            <hr  className="hr-card-details"></hr>
+            <hr className="hr-card-details"></hr>
             <div className="col-md-12 list-style-margin">
                 <ul className="product-details">
                     <li>
