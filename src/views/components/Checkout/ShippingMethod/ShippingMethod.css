@@ -6,6 +6,7 @@
 }
 
 .shipping-method-inner {
+    position: relative;
     border-radius: 10px;
     border: 1px solid #dddddd;
 }
@@ -16,7 +17,7 @@
     display: flex;
 }
 
-.shipping-method-input-group:first-child {
+.shipping-method-input-group.active {
     background: rgba(49, 130, 67, 0.1);
 }
 

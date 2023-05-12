@@ -13,12 +13,11 @@ function OrderSummary({
     handleClick,
     activeAccordion,
     paymentMethod,
-    shippingCost,
+    shippingDetails,
 }) {
     const dispatch = useDispatch();
     const [disabled, setDisabled] = useState(true);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
-    const cartDetails = useSelector((state) => state.cart.details);
 
     useEffect(() => {
         if (paymentMethod) setDisabled(false);
@@ -73,14 +72,14 @@ function OrderSummary({
                     <ul>
                         <li>
                             <span>Items:</span>
-                            <span>({cartDetails?.total_items})</span>
+                            <span>({shippingDetails?.total_items})</span>
                         </li>
                         <li>
                             <span>Price:</span>
                             <span>
                                 <strong>
-                                    {cartDetails?.total
-                                        ? "$" + cartDetails.total
+                                    {shippingDetails?.sub_total
+                                        ? "$" + shippingDetails.sub_total
                                         : "$0"}
                                 </strong>
                             </span>
@@ -88,7 +87,10 @@ function OrderSummary({
                         <li>
                             <span>Shipping & handling:</span>
                             <span>
-                                {shippingCost ? "$" + shippingCost : "$0"}
+                                {shippingDetails?.shipment_info?.amount
+                                    ? "$" +
+                                      shippingDetails?.shipment_info?.amount
+                                    : "$0"}
                             </span>
                         </li>
                         <li>
@@ -108,7 +110,7 @@ function OrderSummary({
                                 <strong>Order Total</strong>
                             </span>
                             <span>
-                                <strong>${cartDetails?.total}</strong>
+                                <strong>${shippingDetails?.total}</strong>
                             </span>
                         </li>
                     </ul>

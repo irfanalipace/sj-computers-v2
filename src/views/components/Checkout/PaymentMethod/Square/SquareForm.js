@@ -1,16 +1,18 @@
 import { PaymentForm, CreditCard } from "react-square-web-payments-sdk";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { clearCartLocally } from "@utils/cartHelpers";
 import { CLEAR_CART } from "@store/cart/cartSlice";
+import { PLACING_ORDER, ORDER_PLACED } from "@store/orders/ordersSlice";
 import { sendTokenApi } from "@api/square";
 
 import "./SquareForm.css";
 
-export const SquareForm = ({ hideCloseBtn }) => {
+export const SquareForm = ({ hideCloseBtn, hideModal }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const placingOrder = useSelector((state) => state.orders.placingOrder);
     const buttonProps = {
         css: {
             backgroundColor: "#318243",
@@ -19,6 +21,7 @@ export const SquareForm = ({ hideCloseBtn }) => {
                 backgroundColor: "#2e663b",
             },
         },
+        isLoading: placingOrder,
     };
     const creditCardStyle = {
         input: {
@@ -31,8 +34,9 @@ export const SquareForm = ({ hideCloseBtn }) => {
             <PaymentForm
                 applicationId={process.env.REACT_APP_SQUARE_APPLICATION_ID}
                 cardTokenizeResponseReceived={async (token) => {
+                    dispatch(PLACING_ORDER());
+                    hideCloseBtn();
                     try {
-                        hideCloseBtn();
                         let response = await sendTokenApi({
                             source_id: token.token,
                         });
@@ -42,16 +46,14 @@ export const SquareForm = ({ hideCloseBtn }) => {
                             dispatch(CLEAR_CART());
                             navigate("/success-transaction");
                         } else {
-                            navigate(
-                                "/checkout?error=" + response.data.message
-                            );
+                            navigate("/checkout?error=" + response.data.msg);
                         }
                     } catch (error) {
-                        console.log("error in square api: ", e);
-                        navigate(
-                            "/checkout?error=" + response.derrorata.message
-                        );
+                        console.log("error in square api: ", error);
+                        navigate("/checkout?error=Something Went Wrong");
                     }
+                    hideModal();
+                    dispatch(ORDER_PLACED());
                 }}
                 locationId={process.env.REACT_APP_SQUARE_LOCATION_ID}
                 formProps={{

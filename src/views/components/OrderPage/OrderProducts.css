@@ -1,0 +1,103 @@
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #e2e8f0;
+    height: 4.5rem;
+    padding: 0.5rem;
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 17px;
+
+/* Primary */
+
+color: #333333;
+  }
+  
+  .order-info {
+    margin: 0.25rem;
+  }
+  
+  .order-label {
+    font-size: 1rem;
+  }
+  
+  .order-details {
+    margin: 0.25rem;
+  }
+  
+  /* .order-details:hover {
+    color: #34d399;
+    cursor: pointer;
+  } */
+  
+  .order-status {
+    display: flex;
+    justify-content: space-between;
+    margin: 1.5rem;
+  }
+  
+  .order-status-label {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    
+    
+    color: #000000;
+  }
+  
+  .track-package-button {
+    margin-right: 0.5rem;
+    height: 2.25rem;
+    width: 12rem;
+    background: #38C056;
+    color: #fff;
+    font-weight: normal;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: transparent;
+  }
+  .product-Image{
+    width: 25%;
+    height: auto;
+    margin-left: 5%;
+  }
+  .cancel-order{
+    margin: 14px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #1270C4;
+    cursor: pointer;
+  }
+
+  .cancel-order:hover{
+   color: #DD6500;
+   text-decoration: underline;
+  }
+
+  .product-description{
+    margin-top: 20px;
+    padding: 0px 20px;
+    font-size: small;
+    color: #38C056;
+
+  }
+  .product-description:hover{
+    color: #DD6500;
+    text-decoration: underline;
+  }
+  .order-details-view{
+    color: #38C056;
+
+  }
+  .order-details-view:hover{
+    color: #DD6500;
+    text-decoration: underline;
+  }

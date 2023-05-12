@@ -24,8 +24,8 @@ export default function Checkout() {
     const [accordionThree, setAccordionThree] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState("");
     const [currentAccordionId, setCurrentAccordionId] = useState();
-    const [shippingDetails, setShippingDetails] = useState({});
     const checkoutDetails = useSelector((state) => state.cart.details);
+
     const shippingAddress = useSelector(
         (state) => state.orders.shippingDetails
     );
@@ -119,7 +119,8 @@ export default function Checkout() {
                                     >
                                         <ReviewCheckout
                                             estimatedDelivery={
-                                                shippingDetails.estimatedDelivery
+                                                checkoutDetails.shipment_info
+                                                    ?.other_info?.estimate_day
                                             }
                                         />
                                     </Accordion>
@@ -145,20 +146,14 @@ export default function Checkout() {
                                 </div>
                                 <div className="col-md-3 col-12">
                                     <div className="shipping-method-component-wrapper">
-                                        <ShippingMethod
-                                            setShippingDetails={
-                                                setShippingDetails
-                                            }
-                                        />
+                                        <ShippingMethod />
                                     </div>
                                     <div className="order-summary-component-wrapper">
                                         <OrderSummary
                                             handleClick={handleClick}
                                             activeAccordion={currentAccordionId}
                                             paymentMethod={paymentMethod}
-                                            shippingCost={
-                                                shippingDetails.shippingCost
-                                            }
+                                            shippingDetails={checkoutDetails}
                                         />
                                     </div>
                                 </div>

@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Navigate, useRoutes } from "react-router-dom";
+import { Navigate, useRoutes, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Home = React.lazy(() => import("@pages/Home/Home"));
 const LoginForm = React.lazy(() => import("@pages/Auth/LoginForm"));
@@ -16,8 +16,10 @@ const Category = React.lazy(() => import("@pages/Category/Category"));
 const Account = React.lazy(() => import("@pages/Account/Account"));
 const Profile = React.lazy(() => import("@pages/Account/Profile"));
 const Security = React.lazy(() => import("@pages/Account/Security"));
+const Order = React.lazy(() => import("@pages/Account/Orders"));
 const Cart = React.lazy(() => import("@components/ShoppingCart/Cart"));
 const Checkout = React.lazy(() => import("@pages/Checkout/Checkout"));
+// const OrderPage = React.lazy(() => import("@pages/OrderPage/OrderPage.js"));
 const Test = React.lazy(() => import("@pages/Test/Test"));
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import Contact from "@components/Footer/FooterMenu/Contact";
@@ -142,7 +144,7 @@ export const Router = () => {
             element: (
                 <ProtectedRoute>
                     <Suspense fallback={<Loader />}>
-                        <Profile />
+                        <Order />
                     </Suspense>
                 </ProtectedRoute>
             ),
@@ -228,13 +230,28 @@ export const Router = () => {
 
 export function ProtectedRoute({ children }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    if (!isAuthenticated) {
+        const location = useLocation();
+        const redirectURL = location.pathname;
+        console.log("auth: ", redirectURL);
+
+        window.localStorage.setItem("redirectURL", redirectURL);
+    }
     return isAuthenticated ? children : <Navigate to="/login" replace />;
 }
 
 export function AuthRoute({ children }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    let redirectRoute = "/";
+
+    if (isAuthenticated) {
+        const redirectURL = localStorage.getItem("redirectURL");
+        localStorage.removeItem("redirectURL");
+        if (redirectURL) redirectRoute = redirectURL;
+    }
+
     return isAuthenticated ? (
-        <Navigate to="/?firstLogin=true" replace />
+        <Navigate to={`${redirectRoute}?firstLogin=true`} replace />
     ) : (
         children
     );

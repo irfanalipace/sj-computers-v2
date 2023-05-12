@@ -117,7 +117,7 @@ export const CartItem = memo(({ cartData }) => {
                         ) : (
                             <>
                                 <div
-                                    className="d-flex justify-content-between justify-content-sm-center"
+                                    className="d-flex justify-content-between justify-content-sm-start"
                                     style={{
                                         maxWidth: "700px",
                                     }}

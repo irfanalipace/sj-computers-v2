@@ -46,6 +46,12 @@
     font-size: 20px;
 }
 
+.sideMenu-header img {
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+}
+
 .sideMenu-header a,
 .sideMenu-header a :hover {
     color: white;

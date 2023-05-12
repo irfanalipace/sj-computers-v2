@@ -11,6 +11,12 @@ const Accordion = ({
 }) => {
     const contentRef = useRef(null);
 
+    /**
+     * Handle Accordion toggle
+     * @param e (event)
+     * @param next (false means toggle the active accordion, true means toggle off the current active accordion and open the next accordion)
+     * @returns {*}
+     */
     const handleToggle = (e, next = false) => {
         next ? toggleAccordion(id + 1) : toggleAccordion(id);
     };

@@ -34,10 +34,13 @@ const ApiService = {
      * @returns {*}
      */
 
-    get(resource, slug = "") {
+    get(resource, slug = "", params = {}) {
         return new Promise((resolve, reject) => {
+
+            const url = `${resource}${slug ? `/${slug}` : ''}`;
+            
             this.instance
-                .get(`${resource}${slug && "/" + slug}`)
+                .get(url, { params })
                 .then((res) => {
                     resolve(res);
                 })

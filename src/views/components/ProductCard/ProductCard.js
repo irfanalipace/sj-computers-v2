@@ -45,20 +45,8 @@ const Product = ({ product, inGrid }) => {
                 )}
                 <div className="product-new-price">
                     <span>$</span>
-                    {
-                        parseFloat(product?.price)
-                            .toFixed(2)
-                            ?.toString()
-                            .split(".")[0]
-                    }
-                    <sup>
-                        {
-                            parseFloat(product?.price)
-                                .toFixed(2)
-                                ?.toString()
-                                .split(".")[1]
-                        }
-                    </sup>
+                    {product?.price?.toString().split(".")[0]}
+                    <sup>{product?.price?.toString().split(".")[1]}</sup>
                 </div>
             </div>
             {product.deliveryCharges && (

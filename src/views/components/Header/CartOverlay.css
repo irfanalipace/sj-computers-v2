@@ -17,8 +17,7 @@
 .sidebar-cart .item-list {
     font-weight: 400;
     font-size: 15px;
-
-    margin-left: -29px;
+    /* margin-left: -29px; */
     color: #333333;
     list-style: none;
 }

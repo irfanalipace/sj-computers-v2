@@ -35,10 +35,14 @@
         "webpack-dev-server": "^4.13.2"
     },
     "dependencies": {
+        "@emotion/react": "^11.11.0",
+        "@emotion/styled": "^11.11.0",
         "@fortawesome/fontawesome-free": "^6.4.0",
         "@fortawesome/free-solid-svg-icons": "^6.4.0",
         "@fortawesome/react-fontawesome": "^0.2.0",
+        "@mantine/core": "^6.0.10",
         "@material-ui/icons": "^4.11.3",
+        "@mui/material": "^5.13.0",
         "@reduxjs/toolkit": "^1.9.1",
         "country-flag-icons": "^1.5.7",
         "jquery": "^3.6.4",
@@ -59,7 +63,8 @@
         "reactstrap": "^9.1.9",
         "redux-thunk": "^2.4.2",
         "styled-components": "^5.3.9",
-        "swiper": "^9.2.0"
+        "swiper": "^9.2.0",
+        "tailwindcss": "^3.3.2"
     },
     "browserslist": {
         "production": [
