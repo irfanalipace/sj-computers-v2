@@ -1,6 +1,6 @@
 import React from "react";
 
-import footerlogo from "@images/header-logo.png";
+import footerlogo from "@images/header-logo-black.png";
 // import footerlogo from path.resolve(__dirname, "src/assets/images/header-logo.png");
 //import footerlogo from path.join(__dirname, 'app', '@images/header-logo.png');
 const Header = () => {
