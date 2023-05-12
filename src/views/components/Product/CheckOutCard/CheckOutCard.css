@@ -1,4 +1,4 @@
-.card-section-left {
+.card-section-right {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     padding: 20px;
@@ -33,9 +33,10 @@
     padding-left: 0;
 }
 .color-card {
-    margin-bottom: -7px;
+    color: #318243;
+}
+.select-location-btn {
     font-family: "Roboto";
-
     font-weight: 400;
     font-size: 14px;
     line-height: 13px;
@@ -131,7 +132,7 @@
     .quantity-inner {
         justify-content: center;
     }
-    .card-section-left {
+    .card-section-right {
         margin-top: 10px;
     }
 }

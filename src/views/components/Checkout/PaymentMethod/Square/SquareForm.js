@@ -46,7 +46,9 @@ export const SquareForm = ({ hideCloseBtn, hideModal }) => {
                             dispatch(CLEAR_CART());
                             navigate("/success-transaction");
                         } else {
-                            navigate("/checkout?error=" + response.data.msg);
+                            navigate(
+                                "/checkout?error=" + response.data.message
+                            );
                         }
                     } catch (error) {
                         console.log("error in square api: ", error);
