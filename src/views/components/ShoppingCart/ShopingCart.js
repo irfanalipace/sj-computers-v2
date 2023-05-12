@@ -54,7 +54,7 @@ export const ShopingCart = () => {
                                 </div>
 
                                 <div className="add-more-items-dev">
-                                    <button>Add more items</button>
+                                    <button className="add-more-button-product">Add more items</button>
                                 </div>
                                 </div>
                                   
