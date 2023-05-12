@@ -26,4 +26,12 @@ class Product extends Model
         }
         return false;
     }
+
+    public function getPriceAttribute($value)
+    {
+        if(isset($value) && !empty($value)) {
+            return  number_format((float)$value, 2, '.', '');
+        }
+
+    }
 }
