@@ -59,10 +59,10 @@ export function logoutApi() {
     });
 }
 
-export function verifyEmailApi(email_verification) {
+export function verifyEmailApi(email) {
     return new Promise((resolve, reject) => {
         ApiService.post("verify-email", {
-            email: email_verification,
+            email,
             // formData,
         })
             .then((response) => {

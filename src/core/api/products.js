@@ -30,3 +30,20 @@ export function productDetailsApi(id) {
             });
     });
 }
+
+export function searchProductsApi(name, page = 1) {
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/search-product?page=${page}`, "", { name })
+            .then((response) => {
+                console.log(
+                    "file: products.js | searchProductsApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error searchProductsApi", e);
+                reject(e);
+            });
+    });
+}

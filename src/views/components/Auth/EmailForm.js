@@ -11,11 +11,11 @@ import Loader from "@common/Spinner/Spinner";
 export default function EmailForm({ onFormSubmit, form }) {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
-            email_verification: "",
+            email: "",
         },
         {
             fieldLengths: {
-                email_verification: { min: 5, max: 100 },
+                email: { min: 5, max: 100 },
             },
         },
         verifyEmail
@@ -45,7 +45,7 @@ export default function EmailForm({ onFormSubmit, form }) {
     const isLoading = useSelector((state) => state.auth.isLoading);
 
     function verifyEmail() {
-        onFormSubmit(values.email_verification);
+        onFormSubmit(values.email);
     }
 
     return (
@@ -57,23 +57,21 @@ export default function EmailForm({ onFormSubmit, form }) {
                 {form === "forgetPassword" ? "Forget Password" : "Sign In"}
             </h3>
             <div className="mb-3">
-                <label className="email-label" htmlFor="email_verification">
+                <label className="email-label" htmlFor="email">
                     Enter Email
                 </label>
                 <input
                     type="email"
-                    id="email_verification"
-                    name="email_verification"
+                    id="email"
+                    name="email"
                     className="form-control email-login-input"
                     placeholder="Enter your email"
-                    value={values.email_verification}
+                    value={values.email}
                     onChange={handleChange}
                     autoFocus
                 />
                 {fieldErrors && (
-                    <p className="fs-6 mt-1 text-danger">
-                        {fieldErrors.email_verification}
-                    </p>
+                    <p className="fs-6 mt-1 text-danger">{fieldErrors.email}</p>
                 )}
             </div>
             <div className="d-flex justify-content-center w-100">

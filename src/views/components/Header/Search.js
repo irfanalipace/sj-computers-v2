@@ -5,10 +5,20 @@ import {
     DropdownMenu,
     DropdownItem,
 } from "reactstrap";
+import { useSelector, useDispatch } from "react-redux";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { searchProducts } from "@store/products/productsThunks";
+import { CLEAR_SEARCH } from "@store/products/productsSlice";
+
 import "./Header.css";
 function Search() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState("All");
+    const [search, setSearch] = useState("");
+    const searchString = useSelector((state) => state.products.searchString);
+    const dispatch = useDispatch();
 
     const toggle = () => setDropdownOpen((prevState) => !prevState);
     const handleItemClick = (e) => {
@@ -23,26 +33,64 @@ function Search() {
         setDropdownOpen(false); // Close the dropdown after item is selected
     };
 
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (search.length > 0) dispatch(searchProducts(search, 1));
+        else dispatch(CLEAR_SEARCH());
+    };
+
     return (
-        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-            <DropdownToggle caret className="all-button">
-                {selectedItem}
-            </DropdownToggle>
-            <DropdownMenu className="">
-                <DropdownItem
-                    onClick={handleItemClick}
-                    className="ul-liste-items-all-buttons"
+        <form className="input-group search-inputgroup" onSubmit={handleSearch}>
+            <div className="input-group-btn search-panel">
+                <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                    <DropdownToggle caret className="all-button">
+                        {selectedItem}
+                    </DropdownToggle>
+                    <DropdownMenu className="">
+                        <DropdownItem
+                            onClick={handleItemClick}
+                            className="ul-liste-items-all-buttons"
+                        >
+                            Automotive Accessories
+                        </DropdownItem>
+                        <DropdownItem
+                            onClick={handleItemClick}
+                            className="ul-liste-items-all-buttons"
+                        >
+                            Cell Phone Accessories
+                        </DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
+            </div>
+            <input
+                type="hidden"
+                name="search_param"
+                value="all"
+                id="search_param"
+            />
+            <input
+                type="search"
+                className="form-control search-input-type"
+                name="x"
+                id="search"
+                placeholder="Search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
+            <span className="input-group-btn">
+                <button
+                    type="button"
+                    className="btn btn-success search-logo"
+                    onClick={handleSearch}
                 >
-                    Automotive Accessories
-                </DropdownItem>
-                <DropdownItem
-                    onClick={handleItemClick}
-                    className="ul-liste-items-all-buttons"
-                >
-                    Cell Phone Accessories
-                </DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
+                    <FontAwesomeIcon
+                        icon={faSearch}
+                        size="1x"
+                        className="search-button-header-icon"
+                    />
+                </button>
+            </span>
+        </form>
     );
 }
 export default Search;
