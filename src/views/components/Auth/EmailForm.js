@@ -57,9 +57,12 @@ export default function EmailForm({ onFormSubmit, form }) {
                 {form === "forgetPassword" ? "Forget Password" : "Sign In"}
             </h3>
             <div className="mb-3">
-                <label className="email-label ">Enter Email</label>
+                <label className="email-label" htmlFor="email">
+                    Enter Email
+                </label>
                 <input
                     type="email"
+                    id="email"
                     name="email"
                     className="form-control email-login-input"
                     placeholder="Enter your email"

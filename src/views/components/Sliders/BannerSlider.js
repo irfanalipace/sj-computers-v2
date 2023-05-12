@@ -8,9 +8,9 @@ import "./Slider.css";
 
 // import required modules
 import { Navigation } from "swiper";
-import Banner1 from "@images/Banner/homepage-banner-1.jpeg";
-import Banner2 from "@images/Banner/homepage-banner-2.jpeg";
-import Banner3 from "@images/Banner/homepage-banner-3.jpeg";
+import Banner1 from "@images/Banner/homepage-banner-1.png";
+import Banner2 from "@images/Banner/homepage-banner-2.png";
+import Banner3 from "@images/Banner/homepage-banner-3.png";
 const Slider = () => {
     const banners = [Banner1, Banner2, Banner3];
     return (
