@@ -62,16 +62,14 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
 
                 {isAuthenticated ? (
                     <>
-                       <div className="location-button-box-signin">
-                       <button className="login-button-box-location-button">
-                       Sign in to see your address
-                        </button>
-                       </div>
-                       <div  className="hrozantel-hr-location-model">
-                      <h5 className="h5-model-box-loction">
-                           or
-                        </h5>
-                     </div>
+                        <div className="location-button-box-signin">
+                            <button className="login-button-box-location-button">
+                                Sign in to see your address
+                            </button>
+                        </div>
+                        <div className="hrozantel-hr-location-model">
+                            <h5 className="h5-model-box-loction">or</h5>
+                        </div>
                         <div className="row">
                             <div className="col-md-8">
                                 <input
@@ -93,11 +91,9 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                             </div>
                         </div>
 
-                     <div  className="hrozantel-hr-location-model">
-                     <h5 className="h5-model-box-loction">
-                           or
-                        </h5>
-                     </div>
+                        <div className="hrozantel-hr-location-model">
+                            <h5 className="h5-model-box-loction">or</h5>
+                        </div>
                         <Dropdown>
                             <Dropdown.Toggle
                                 id="dropdown-basic"
@@ -110,7 +106,7 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                             <Dropdown.Menu className="">
                                 {states.map((state) => (
                                     <Dropdown.Item
-                                    className="drop menus-set my-location-dropdown-model-box-buttons"
+                                        className="drop menus-set my-location-dropdown-model-box-buttons"
                                         onClick={() => setState(state)}
                                         key={state.id}
                                     >

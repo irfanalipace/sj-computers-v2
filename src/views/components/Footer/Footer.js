@@ -9,6 +9,7 @@ import BackToTopButton from "./BackToTopButton";
 
 import "./Footer.css";
 
+
 const Footer = () => {
     const location = useLocation();
     const authRoutes = [
@@ -21,6 +22,7 @@ const Footer = () => {
 
     return (
         <>
+     
             {!authRoutes.includes(location.pathname) && (
                 <div className="footer">
                     <div
@@ -56,12 +58,12 @@ const Footer = () => {
                                             </a>
                                         </li>
                                         <li>
-                                            <a
+                                            <Link to='/contact'
                                                 href="#!"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Contact Us
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
                                             <a
@@ -201,6 +203,7 @@ const Footer = () => {
                                 src={footer}
                                 alt=""
                                 style={{ paddingRight: "105px" }}
+                                className="footer-copywrite-images"
                             />
 
                             <button
