@@ -45,7 +45,19 @@ export const ShopingCart = () => {
                                             </div>
                                         </div>
                                     ))}
+
+                                  
                                 </div>
+                                <div className="row">
+                                <div className="cart-product-subtotal-price">
+                                 <span>Subtotal( 2 items):<strong className="price-with-sign"> $120.50</strong></span>
+                                </div>
+
+                                <div className="add-more-items-dev">
+                                    <button>Add more items</button>
+                                </div>
+                                </div>
+                                  
                             </div>
                             <div className="col-md-3">
                                 <div className="card card-checkout">

@@ -168,6 +168,50 @@ head:nth-child(2) {
     padding: 10px;
     margin-bottom: 10px;
 }
+
+.cart-product-subtotal-price {
+    display: flex;
+    justify-content: end;
+    padding-top: 6px;
+    padding-right: 34px;
+    padding-bottom: 12px;
+}
+
+.cart-product-subtotal-price span{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 19px;
+    
+    color: #000000;
+}
+.price-with-sign {
+    font-weight: bold;
+    font-family: 'Inter';
+    font-style: normal;
+ 
+    font-size: 16px;
+
+}
+
+.add-more-items-dev{
+    padding-bottom: 12px;
+}.add-more-items-dev button{
+    border: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 19px;
+    color: #FFFFFF;
+ 
+    width: 147px;
+    height: 45px;
+  
+    background: #38C056;
+    border-radius: 8px;
+}
 @media screen and (min-width: 750px) and (max-width: 1060px) {
     .checkout-button {
         height: 60px;

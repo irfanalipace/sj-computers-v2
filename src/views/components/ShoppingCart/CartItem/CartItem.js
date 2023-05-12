@@ -149,6 +149,7 @@ export const CartItem = memo(({ cartData }) => {
                     </div>
                 </div>
             </div>
+            
         </div>
     );
 });
