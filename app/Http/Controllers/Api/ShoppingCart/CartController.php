@@ -42,9 +42,10 @@ class CartController extends BaseController
 
         \Cart::session($this->userId)->getContent()->each(function ($item) use (&$items) {
             $price = (int) $item->quantity * (float)$item->price;
-            $item['price'] = number_format((float)$price, 2, '.', '');;
+            $item['price'] = number_format((float)$price, 2, '.', '');
             $items[] = $item;
         });
+
         $items['details'] = $this->cartDetails();
 
         if($returnItems){
