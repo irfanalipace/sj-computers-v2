@@ -114,7 +114,7 @@
     overflow-x: hidden;
 }
 .search-inputgroup {
-    width: 65%;
+    width: 65% !important;
     padding-left: 5px;
     padding-right: 5px;
 }
@@ -458,7 +458,7 @@
     }
 
     .search-inputgroup {
-        width: 58%;
+        width: 58% !important;
     }
 }
 
@@ -469,7 +469,7 @@
     }
 
     .search-inputgroup {
-        width: 55%;
+        width: 55% !important;
     }
 }
 @media screen and (max-width: 1200px) {
