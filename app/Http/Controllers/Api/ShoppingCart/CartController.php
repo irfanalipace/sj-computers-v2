@@ -24,14 +24,13 @@ class CartController extends BaseController
     public function __construct()
     {
 
-            $this->user = auth('api')->user();
+        $this->user = auth('api')->user();
 
-            if($this->user){
-                $this->userId = $this->user->id ;
-            }else {
-                $this->userId = StatusEnum::DUMMY;
-            }
-
+        if ($this->user) {
+            $this->userId = $this->user->id;
+        } else {
+            $this->userId = StatusEnum::DUMMY;
+        }
     }
 
     //show items of cart
@@ -48,7 +47,7 @@ class CartController extends BaseController
 
         $items['details'] = $this->cartDetails();
 
-        if($returnItems){
+        if ($returnItems) {
             return $items;
         }
         return response(array('success' => true, 'data' => $items, 'message' => 'cart get items success'), 200, []);
@@ -59,7 +58,14 @@ class CartController extends BaseController
     {
         try {
             $product = Product::find($request->product_id);
-
+            // Check if quantity is less than product quantity
+            if ($request->qty > $product->quantity) {
+                return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of stock.'), 400, []);
+            }
+            else {
+                $minusQtyPrd = $this->updateProduct($product, $request->qty);
+            }
+            
             Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $request->qty, array(), array(), $product);
 
             $items = $this->getItems(true);
@@ -70,7 +76,14 @@ class CartController extends BaseController
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
         }
     }
+    // update product table (update quantity field)
+    public function updateProduct($product, $quantity)
+    {
+        $totalQty = $product->quantity - $quantity;
+        $updateProduct = $product->update(['quantity' => $totalQty]);
 
+        return $updateProduct;
+    }
 
     //delete item from cart
     public function delete(DeleteCartRequest $request)
@@ -143,7 +156,7 @@ class CartController extends BaseController
     {
         try {
 
-            if(empty($request->carItems)){
+            if (empty($request->carItems)) {
                 return  $this->sendResponse([]);
             }
             foreach ($request->cartItems as $value) {
@@ -161,11 +174,12 @@ class CartController extends BaseController
         }
     }
 
-    public function getShipmentAmount($oldShipmenDays = false, $days = ''){
+    public function getShipmentAmount($oldShipmenDays = false, $days = '')
+    {
 
         $amount = 0;
 
-        if($oldShipmenDays){
+        if ($oldShipmenDays) {
 
             $record = [];
 
@@ -177,8 +191,7 @@ class CartController extends BaseController
 
             $cartConditions = Cart::session($this->userId)->getConditions('shipment_days');
 
-            foreach($cartConditions as $condition)
-            {
+            foreach ($cartConditions as $condition) {
                 $amount = $condition->getValue(); // the value of the condition
                 $record['amount'] = $amount;
                 $record['other_info'] =  $condition->getAttributes();
@@ -202,7 +215,6 @@ class CartController extends BaseController
         }
 
         return $amount * (int)$quantity;
-
     }
 
     public function applyShipment(ApplyShipmentDaysRequest $request)
@@ -226,5 +238,4 @@ class CartController extends BaseController
         $items = $this->getItems(true);
         return response(array('success' => true, 'data' => $items, 'message' => 'Item added.'), 200, []);
     }
-
 }
