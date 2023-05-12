@@ -18,12 +18,12 @@ const ShippingMehtod = () => {
             cost: 0,
         },
         {
-            id: 1,
+            id: 2,
             label: "2 day shipping",
-            cost: 10,
+            cost: 15,
         },
         {
-            id: 2,
+            id: 1,
             label: "Next day delivery",
             cost: 30,
         },

@@ -114,6 +114,7 @@ export const compareLocalCartWithDBCart = (array_1, array_2) => {
 
     return [missingObjects1, missingObjects2];
 };
+
 export const clearCartLocally = () => {
     window.localStorage.removeItem("cart");
     window.localStorage.removeItem("cartDetails");

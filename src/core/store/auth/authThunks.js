@@ -83,6 +83,7 @@ export const logout = () => {
             await logoutApi();
             destroyToken();
             dispatch({ type: LOGOUT });
+            toast.success("Logged out");
         } catch (error) {
             console.log("Something went wrong in logout", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-
+import Loader from "@common/Spinner/Spinner";
 import userImg from "@images/user.png";
 import { US } from "country-flag-icons/react/3x2";
 
@@ -14,9 +14,8 @@ import "./Sidebar.css";
 export default function Sidebar({ openState, toggleSidebar }) {
     const user = useSelector((state) => state.auth.user);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    // const user = {
-    //     name: "haroon",
-    // };
+    const isLoading = useSelector((state) => state.auth.isLoading);
+
     const dispatch = useDispatch();
     const categories = [
         {
@@ -45,6 +44,8 @@ export default function Sidebar({ openState, toggleSidebar }) {
         },
     ];
 
+    console.log("user.profile_pic: ", typeof user.profile_pic);
+
     return (
         <div>
             {openState && (
@@ -66,14 +67,15 @@ export default function Sidebar({ openState, toggleSidebar }) {
                     </button>
                     <div className="sideMenu-inner">
                         <div className="sideMenu-header">
-                            <img
-                                className="me-3"
-                                src={
-                                    user?.profile_pic
-                                        ? user.profile_pic
-                                        : userImg
-                                }
-                            />
+                            {user?.profile_pic == "null" ||
+                            !user?.profile_pic ? (
+                                <img
+                                    className="me-3 default-image"
+                                    src={userImg}
+                                />
+                            ) : (
+                                <img className="me-3" src={user?.profile_pic} />
+                            )}
                             <span>
                                 Hello,
                                 {isAuthenticated ? (
@@ -124,11 +126,19 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                 </li>
                                 <li>
                                     {isAuthenticated ? (
-                                        <Link
-                                            onClick={() => dispatch(logout())}
-                                        >
-                                            Logout
-                                        </Link>
+                                        <>
+                                            {isLoading ? (
+                                                <Loader />
+                                            ) : (
+                                                <Link
+                                                    onClick={() =>
+                                                        dispatch(logout())
+                                                    }
+                                                >
+                                                    Logout
+                                                </Link>
+                                            )}
+                                        </>
                                     ) : (
                                         <Link to={"/login"}>Sign In</Link>
                                     )}
