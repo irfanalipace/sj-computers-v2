@@ -61,11 +61,10 @@ class CartController extends BaseController
             // Check if quantity is less than product quantity
             if ($request->qty > $product->quantity) {
                 return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of stock.'), 400, []);
-            }
-            else {
+            } else {
                 $minusQtyPrd = $this->updateProduct($product, $request->qty);
             }
-            
+
             Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $request->qty, array(), array(), $product);
 
             $items = $this->getItems(true);
@@ -124,6 +123,13 @@ class CartController extends BaseController
     public function addQtyCart(UpdateQuantityRequest $request)
     {
         try {
+            $product = Product::find($request->item_id);
+            // Check if quantity is less than product quantity
+            if ($request->qty > $product->quantity) {
+                return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of stock.'), 400, []);
+            } else {
+                $minusQtyPrd = $this->updateProduct($product, $request->qty);
+            }
             $item = Cart::session($this->userId)->update($request->item_id, array(
                 'quantity' => $request->qty, // so if the current product has a quantity of 4, another 2 will be added so this will result to 6
             ));
