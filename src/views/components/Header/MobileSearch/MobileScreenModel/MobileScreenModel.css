@@ -109,3 +109,47 @@
 .color-image-dilvery-box-mobile-screen {
     background: white;
 }
+
+.Apply-button-dilvery-box-auth {
+    color: white;
+    width: 99%;
+    height: 47px;
+    background: #002549;
+    /* border: none; */
+    border-radius: 8px;
+    border: none;
+}
+.zip-code-auth-box{
+    color: black;
+    font-size: 13px;
+}
+.zip-parant {
+    margin-top: -12px;
+    text-align: left;
+    margin-left: 39px;
+}
+.zip-code-text-fields{
+ 
+        padding-left: 10px;
+        font-size: 13px;
+        width: 98%;
+        height: 43px;
+        margin-bottom: 12px;
+        /* border: 1px black; */
+        /* color: red; */
+    
+}
+
+.box-text-hr-text {
+    width: 446px;
+    padding: -7px;
+    margin-bottom: 6px;
+    /* font-weight: 400; */
+    /* font-size: 12px; */
+    /* line-height: 15px; */
+    /* display: flex; */
+    /* align-items: center; */
+    color: #333333;
+    /* width: 44px; */
+    margin-left: 6px;
+}

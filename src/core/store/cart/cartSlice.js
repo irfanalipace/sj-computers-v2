@@ -65,6 +65,7 @@ const cartSlice = createSlice({
             state.details = {
                 total_items: 0,
                 total: 0,
+                sub_total: 0,
             };
         },
         DELETE_ITEM: (state, action) => {

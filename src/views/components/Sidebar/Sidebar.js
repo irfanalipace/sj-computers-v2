@@ -44,8 +44,6 @@ export default function Sidebar({ openState, toggleSidebar }) {
         },
     ];
 
-    console.log("user.profile_pic: ", typeof user.profile_pic);
-
     return (
         <div>
             {openState && (

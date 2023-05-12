@@ -42,6 +42,7 @@ export const CartItem = memo(({ cartData }) => {
         const cartDetails = {
             total_items: details?.total_items,
             total: cartTotal.toFixed(2),
+            sub_total: cartTotal.toFixed(2),
         };
 
         let itemPrice = cartData?.product?.price * quantity;

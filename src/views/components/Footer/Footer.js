@@ -1,10 +1,14 @@
 import { useLocation } from "react-router-dom";
-import "./Footer.css";
+import { Link } from "react-router-dom";
+
 import footer from "@images/header-logo.png";
 import vectorimg from "@images/common/boll.png";
 import copyrightimg from "@images/common/copywrite.png";
 import img1 from "@images/footer/setting.png";
 import BackToTopButton from "./BackToTopButton";
+
+import "./Footer.css";
+
 const Footer = () => {
     const location = useLocation();
     const authRoutes = [
@@ -86,7 +90,7 @@ const Footer = () => {
                                         </h6>
                                         <li>
                                             <a
-                                                href="#!"
+                                                href="#"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Facebook
@@ -94,7 +98,7 @@ const Footer = () => {
                                         </li>
                                         <li>
                                             <a
-                                                href="#!"
+                                                href="#"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Twitter
@@ -102,7 +106,7 @@ const Footer = () => {
                                         </li>
                                         <li>
                                             <a
-                                                href="#!"
+                                                href="#"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Instagram
@@ -110,7 +114,7 @@ const Footer = () => {
                                         </li>
                                         <li>
                                             <a
-                                                href="#!"
+                                                href="#"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Youtube
@@ -126,44 +130,44 @@ const Footer = () => {
                                             Let Us Help You
                                         </h6>
                                         <li>
-                                            <a
-                                                href="#!"
+                                            <Link
+                                                to="/account"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Your Account
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a
-                                                href="#!"
+                                            <Link
+                                                to="#"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Return And refund Policies
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a
-                                                href="#!"
+                                            <Link
+                                                to="#"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Shipping Policies
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a
-                                                href="#!"
+                                            <Link
+                                                to="#"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Terms of Services
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a
-                                                href="#!"
+                                            <Link
+                                                to="#"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Privacy Policy
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -176,13 +180,12 @@ const Footer = () => {
                                         <p className="text-uppercase herf-link">
                                             2817 Eagandale Blvd Eagan, MN 55121.
                                         </p>
-                                        {/* <li><a href="#!" className='herf-link text-decoration-none'></a></li> */}
                                         <p className="herf-link ">
                                             952-452-8884
                                         </p>
                                         <li>
                                             <a
-                                                href="#!"
+                                                href="mailto:cs@sjcomputersmn.com"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 cs@sjcomputersmn.com

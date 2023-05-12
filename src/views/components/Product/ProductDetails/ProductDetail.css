@@ -34,7 +34,7 @@
 .chek {
     font-size: 12px;
 }
-.links-rting {
+.product-page .product-rating {
     text-decoration: none;
     font-size: 12px;
     color: #07631c;
@@ -42,12 +42,12 @@
     line-height: 1;
     /* margin-left: -60px; */
 }
-.links-rting1 {
+.product-page .product-rating1 {
     text-decoration: none;
     font-size: 12px;
     color: #07631c;
 }
-.links-rting:hover {
+.product-page .product-rating:hover {
     color: #07631c;
 }
 .review {
@@ -81,8 +81,8 @@
     font-size: 11px;
     line-height: 13px;
 }
-.hr-card-details{
-    margin-top:7px !important;
+.hr-card-details {
+    margin-top: 7px !important;
 }
 .selling-color {
     color: orange;
@@ -92,7 +92,7 @@
     font-size: 11px;
     line-height: 13px;
 }
-.moniter-links {
+.product-page .product-info {
     text-decoration: none;
     font-size: 12px;
     color: #07631c;
@@ -100,7 +100,7 @@
     line-height: 1;
     border-left: 1px solid;
 }
-.moniter-links:hover {
+.product-page .product-info:hover {
     color: #07631c;
 }
 .moniter-data {
