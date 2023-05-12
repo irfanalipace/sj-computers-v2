@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import ScrollToTop from './ScrollToTop'
+import ScrollToTop from "./ScrollToTop";
 
 function App() {
     const dispatch = useDispatch();
@@ -37,13 +37,13 @@ function App() {
                 className={"notification-toast"}
             />
             <BrowserRouter>
-            {/* scroller set for scroll bottom to top  */}
-            <ScrollToTop />  
+                {/* scroller set for scroll bottom to top  */}
+                <ScrollToTop />
                 <Header />
                 <div className="inner-body">
                     <Router />
                 </div>
-               
+
                 <Footer />
             </BrowserRouter>
         </div>
