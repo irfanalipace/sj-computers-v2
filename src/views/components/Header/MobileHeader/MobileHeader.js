@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import "./MobileHeader.css"
-import vectorcart from "@images/home/vector.png";
+
 import { Link } from 'react-router-dom';
+
+import Sidebar from "@components/Sidebar/Sidebar";
+
 
 
 function MobileHeader() {
+  
   const [isSideMenu, setSideMenu] = useState(false);
   const toggleSidebar = () => {
       return setSideMenu((state) => !state);
@@ -36,10 +40,27 @@ function MobileHeader() {
 
               </Link>
             </li>
-            <li>
-              <Link to="/"   className="navIcon  hover-effect-sets"
-                       ><i class="fa fa-bars" aria-hidden="true" ></i></Link>
-            </li>
+      
+
+
+         
+                         <span
+                            className="navIcon  hover-effect-sets"
+                            onClick={() => {
+                                toggleSidebar();
+                            }}
+                        >
+                           <i className="fa fa-bars fa-icon-cart" aria-hidden="true"
+                            >
+                                {isSideMenu ? (
+                                    <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" />
+                                ) : (
+                                    <path d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" />
+                                )}
+                            </i>
+                            <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
+                        </span>
+         
           </ul>
         </div>
         

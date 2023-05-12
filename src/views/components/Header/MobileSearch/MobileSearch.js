@@ -111,7 +111,7 @@ const MobileSearch = () => {
                     <SearchIconContainer {...getToggleProps()}>
                         {!showSearchBar && (
                             <SearchIcon
-                                onClick={handleSearchIconClick}
+                                // onClick={handleSearchIconClick}
                                 className="fas fa-search"
                                 style={{ color: "white" }}
                             />
