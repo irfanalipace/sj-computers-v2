@@ -177,39 +177,34 @@ head:nth-child(2) {
     padding-bottom: 12px;
 }
 
-.cart-product-subtotal-price span{
-    font-family: 'Inter';
+.cart-product-subtotal-price span {
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
     line-height: 19px;
-    
+
     color: #000000;
 }
 .price-with-sign {
     font-weight: bold;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
- 
-    font-size: 15px;
 
+    font-size: 15px;
 }
 
-.add-more-items-dev{
+.add-more-items-dev {
     padding-bottom: 12px;
-}.add-more-items-dev button{
+}
+.add-more-items-dev button {
     border: none;
-    font-family: 'Inter';
-    font-style: normal;
     font-weight: 500;
     font-size: 13px;
-    line-height: 19px;
-    color: #FFFFFF;
- 
-    width: 147px;
+    color: #ffffff;
+    width: 200px;
     height: 45px;
-  
-    background: #38C056;
+    background: #38c056;
     border-radius: 8px;
 }
 @media screen and (min-width: 750px) and (max-width: 1060px) {
@@ -253,14 +248,15 @@ head:nth-child(2) {
 }
 
 @media screen and (max-width: 600px) {
-.add-more-items-dev{
-    display: flex !important;
-    justify-content: center !important;
-}.cart-product-subtotal-price {
-    display: flex;
-    justify-content: center;
-   padding-right: 0px;
-}
+    .add-more-items-dev {
+        display: flex !important;
+        justify-content: center !important;
+    }
+    .cart-product-subtotal-price {
+        display: flex;
+        justify-content: center;
+        padding-right: 0px;
+    }
 }
 @media screen and (max-width: 350px) {
     .cart-box {

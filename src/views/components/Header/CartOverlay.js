@@ -112,7 +112,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                 ))}
                 <div className="row mx-0">
                     <div className="col-3"></div>
-                    <div className="col-9">
+                    <div className="col-9 px-0">
                         <div className="sub-title-add d-flex justify-content-end">
                             <div>
                                 <span className="">Cart Subtotal</span>

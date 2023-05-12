@@ -11,11 +11,11 @@ import Loader from "@common/Spinner/Spinner";
 export default function EmailForm({ onFormSubmit, form }) {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
-            email: "",
+            email_verification: "",
         },
         {
             fieldLengths: {
-                email: { min: 5, max: 100 },
+                email_verification: { min: 5, max: 100 },
             },
         },
         verifyEmail
@@ -45,7 +45,7 @@ export default function EmailForm({ onFormSubmit, form }) {
     const isLoading = useSelector((state) => state.auth.isLoading);
 
     function verifyEmail() {
-        onFormSubmit(values.email);
+        onFormSubmit(values.email_verification);
     }
 
     return (
@@ -57,18 +57,23 @@ export default function EmailForm({ onFormSubmit, form }) {
                 {form === "forgetPassword" ? "Forget Password" : "Sign In"}
             </h3>
             <div className="mb-3">
-                <label className="email-label ">Enter Email</label>
+                <label className="email-label" htmlFor="email_verification">
+                    Enter Email
+                </label>
                 <input
                     type="email"
-                    name="email"
+                    id="email_verification"
+                    name="email_verification"
                     className="form-control email-login-input"
                     placeholder="Enter your email"
-                    value={values.email}
+                    value={values.email_verification}
                     onChange={handleChange}
                     autoFocus
                 />
                 {fieldErrors && (
-                    <p className="fs-6 mt-1 text-danger">{fieldErrors.email}</p>
+                    <p className="fs-6 mt-1 text-danger">
+                        {fieldErrors.email_verification}
+                    </p>
                 )}
             </div>
             <div className="d-flex justify-content-center w-100">
