@@ -11,9 +11,19 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
+    protected $appends = ['in_stock'];
+
+
     const DUMMY = "dummy";
 
     public function brand(){
         return $this->belongsTo(Brand::class);
+    }
+
+    public function getInStockAttribute(){
+        if($this->quantity > 0){
+            return true;
+        }
+        return false;
     }
 }
