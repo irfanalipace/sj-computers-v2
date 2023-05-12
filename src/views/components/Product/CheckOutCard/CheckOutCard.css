@@ -120,6 +120,7 @@
     }
     .text-stock {
         text-align: center;
+        padding: 6px !important;
     }
     .color-text-cart {
         text-align: center;

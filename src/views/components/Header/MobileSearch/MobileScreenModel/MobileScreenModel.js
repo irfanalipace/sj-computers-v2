@@ -4,24 +4,24 @@ import "./MobileScreenModel.css";
 import imges1 from "@images/cart-product/location.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
-const MobileScreenModel = ({ onClick }) => {
-    // const [showModal, setShowModal] = useState(false);
+import ModelUserAuth from './ModelUserAuth'
+const MobileScreenModel = () => {
+    const [showModal, setShowModal] = useState(false);
 
-    // const handleButtonClick = () => {
-    //     setShowModal(true);
-    // };
+    const handleButtonClick = () => {
+        setShowModal(true);
+    };
 
-    // const closeModal = () => {
-    //     setShowModal(false);
-    // };
+    const closeModal = () => {
+        setShowModal(false);
+    };
     return (
         <div>
             <header>
                 <div className="color-card-dev">
                     <button
                         className="mobile-zip-code-box-image-dilvery-box"
-                        onClick={onClick}
-                       
+                        onClick={handleButtonClick}
                     >
                         <FontAwesomeIcon
                             icon={faMapMarker}
@@ -33,7 +33,11 @@ const MobileScreenModel = ({ onClick }) => {
                     </button>
                 </div>
             </header>
-            {/* {showModal && <ModelBox closeModal={closeModal} />} */}
+            {showModal && <ModelBox closeModal={closeModal} />}
+
+            <div>
+                <ModelUserAuth />
+            </div>
         </div>
     );
 };
