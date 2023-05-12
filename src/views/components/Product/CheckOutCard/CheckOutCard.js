@@ -41,7 +41,12 @@ export const CheckOutCard = ({ product }) => {
 
         if (isAuthenticated)
             dispatch(addToCart({ cartItem }, () => navigate("/cart")));
-        else dispatch(addToLocalCart({ cartItem, cartDetails }));
+        else
+            dispatch(
+                addToLocalCart({ cartItem, cartDetails }, () =>
+                    navigate("/cart")
+                )
+            );
     };
 
     useEffect(() => {
