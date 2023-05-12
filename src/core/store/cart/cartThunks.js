@@ -162,13 +162,14 @@ export const syncCartItems = () => {
     };
 };
 
-export const addToLocalCart = (data) => {
+export const addToLocalCart = (data, cb) => {
     return async (dispatch) => {
         addItemToLocalCart(data);
         dispatch({
             type: ADD_TO_CART,
             payload: data,
         });
+        if (typeof cb === "function") cb();
         // toast.success("Item Added In Cart");
     };
 };

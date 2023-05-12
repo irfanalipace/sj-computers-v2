@@ -52,6 +52,10 @@
     height: 55px;
 }
 
+.sideMenu-header img.default-image {
+    width: 40px;
+    height: 40px;
+}
 .sideMenu-header a,
 .sideMenu-header a :hover {
     color: white;

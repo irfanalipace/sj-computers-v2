@@ -78,9 +78,9 @@ const Profile = () => {
                                     <div className="image-wrapper">
                                         <img
                                             src={
-                                                imageUrl
-                                                    ? imageUrl
-                                                    : userDefault
+                                                imageUrl == "null" || !imageUrl
+                                                    ? userDefault
+                                                    : imageUrl
                                             }
                                         />
                                     </div>

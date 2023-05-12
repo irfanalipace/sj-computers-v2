@@ -57,7 +57,8 @@ export const ShopingCart = () => {
                                                     {cartDetails?.total_items}
                                                     items):
                                                     <strong className="price-items">
-                                                        ${cartDetails?.total}
+                                                        $
+                                                        {cartDetails?.sub_total}
                                                     </strong>
                                                 </span>
                                                 <br></br>

@@ -1,4 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+import ProgressiveImage from "react-progressive-graceful-image";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -22,7 +23,9 @@ const Slider = () => {
                 >
                     {banners.map((banner, index) => (
                         <SwiperSlide key={index}>
-                            <img src={banner} />
+                            <ProgressiveImage src={banner} placeholder={banner}>
+                                {(src) => <img src={src} alt={"Banner"} />}
+                            </ProgressiveImage>
                         </SwiperSlide>
                     ))}
                 </Swiper>

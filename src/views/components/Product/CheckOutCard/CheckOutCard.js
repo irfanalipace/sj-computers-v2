@@ -41,7 +41,12 @@ export const CheckOutCard = ({ product }) => {
 
         if (isAuthenticated)
             dispatch(addToCart({ cartItem }, () => navigate("/cart")));
-        else dispatch(addToLocalCart({ cartItem, cartDetails }));
+        else
+            dispatch(
+                addToLocalCart({ cartItem, cartDetails }, () =>
+                    navigate("/cart")
+                )
+            );
     };
 
     useEffect(() => {
@@ -51,7 +56,7 @@ export const CheckOutCard = ({ product }) => {
 
     return (
         <div>
-            <div className="card-section-left">
+            <div className="card-section-right">
                 <div className="row">
                     <div className="col-md-12 color-text-cart">
                         <span className="$-color">$</span>
@@ -71,7 +76,10 @@ export const CheckOutCard = ({ product }) => {
                     </div>
                 </div>
                 <div className="color-card-dev">
-                    <button className="color-card" onClick={handleShow}>
+                    <button
+                        className="select-location-btn"
+                        onClick={handleShow}
+                    >
                         <img src={imges1} /> Deliver to
                         {currentState?.name
                             ? " " + currentState?.name

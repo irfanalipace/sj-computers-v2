@@ -119,7 +119,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                 <span className="item1">
                                     ( {details?.total_items} items ):
                                 </span>
-                                ${details?.total}
+                                ${details?.sub_total}
                                 <div className="mt-2">
                                     <Link
                                         to="/cart"
