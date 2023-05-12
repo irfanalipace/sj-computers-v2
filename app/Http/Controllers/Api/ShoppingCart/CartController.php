@@ -88,8 +88,13 @@ class CartController extends BaseController
     public function delete(DeleteCartRequest $request)
     {
         try {
-
-            $cart = \Cart::session($this->userId)->remove($request->id);
+            
+            $cart = Cart::session($this->userId);
+            $cart->getContent()->each(function ($item) {
+                $product = Product::find($item->id);
+                $product->update(['quantity' => ($item->quantity + $product->quantity)]);
+            });
+            $cart = $cart->remove($request->id);
 
             $data = $this->getItems(true);
 
@@ -111,9 +116,15 @@ class CartController extends BaseController
     public function clearCart()
     {
         try {
-            Cart::session($this->userId)->clearCartConditions();
-            $clear = Cart::session($this->userId)->clear();
-            return response(array('success' => true, 'data' => $clear, 'message' => "Get cart details success."), 200, []);
+            $cart = Cart::session($this->userId);
+            $cart->getContent()->each(function ($item) {
+                $product = Product::find($item->id);
+                $product->update(['quantity' => ($item->quantity + $product->quantity)]);
+            });
+            $cart->clearCartConditions();
+            $clear = $cart->clear();
+
+            return response(array('success' => true, 'data' => $clear, 'message' => "cart clear success."), 200, []);
         } catch (Exception $e) {
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
         }
@@ -132,6 +143,7 @@ class CartController extends BaseController
             }
             $item = Cart::session($this->userId)->update($request->item_id, array(
                 'quantity' => $request->qty, // so if the current product has a quantity of 4, another 2 will be added so this will result to 6
+                'associatedModel' => $product
             ));
 
             $data = $this->getItems(true);
@@ -168,7 +180,12 @@ class CartController extends BaseController
             foreach ($request->cartItems as $value) {
 
                 $product = Product::find($value['product_id']);
-
+                // Check if quantity is less than product quantity
+                if ($request->qty > $product->quantity) {
+                    return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of stock.'), 400, []);
+                } else {
+                    $minusQtyPrd = $this->updateProduct($product, $request->qty);
+                }
                 Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $value['qty'], array(), array(), $product);
             }
 
