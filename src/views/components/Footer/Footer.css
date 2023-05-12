@@ -44,7 +44,7 @@ footer ul li {
     align-items: center;
     color: #ffffff;
     list-style-type: none;
-    padding-top: 44px;
+  
 }
 .list-unstyle2 {
     text-align: initial;
@@ -54,7 +54,7 @@ footer ul li {
     align-items: center;
     color: #ffffff;
     list-style-type: none;
-    padding-top: 50px;
+   
 }
 .list-unstyle3 {
     text-align: initial;
@@ -101,6 +101,11 @@ footer ul li {
     line-height: 17px;
     color: #ffffff;
 }
+.footer-copywrite-images{
+    width: 17% !important;
+    padding-bottom: 12px !important;
+    }
+
 .language-dropdown::after {
     display: none;
 }
