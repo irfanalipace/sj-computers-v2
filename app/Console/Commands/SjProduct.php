@@ -84,27 +84,27 @@ class SjProduct extends Command
                 'price' => $product['OurPrice'],
                 'asin' => $product['ASIN'],
                 'sku' => $product['SKU'],
-                'image' => $product['URL'],
+                'image' => $product['Images'],
                 'brand_id' => $brand->id ?? '',
                 'quantity'  => $product['PackageQuantity'],
                 'status'  => $product['Status'],
+                'description'  => $product['AmazonDescription'],
+                'amazon_id'  => $product['ID'],
+//                'others'  => $product['JSON'],
 
             ];
 
             if(isset($product['Category1'])){
-                $category1 = $this->insertBrand($product['Category1']);
-
-                $data['category_id_1']  = $category1->name;
+                $data['category_id_1']  = strtolower(trim($product['Category1']));
             }
 
             if(isset($product['Category2'])){
-                $category2 = $this->insertBrand($product['Category2']);
-                $data['category_id_2']  = $category2->name;
+                $data['category_id_2']  =  strtolower(trim($product['Category2']));
             }
 
 
             Product::updateOrCreate(['asin' => $product['ASIN']],$data);
-            
+
 
             echo "product is added" . $key . "\n";
 
@@ -115,7 +115,6 @@ class SjProduct extends Command
 
 
     public function insertBrand($name){
-
         $name = strtolower(trim($name));
         return  Brand::updateOrCreate(['name' =>$name],[]);
     }

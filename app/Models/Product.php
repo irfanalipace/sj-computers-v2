@@ -34,4 +34,21 @@ class Product extends Model
         }
 
     }
+
+    public function getImageAttribute($value)
+    {
+        if(isset($value) && !empty($value)) {
+            return array_filter(explode(";",$value));
+        }
+        return [];
+    }
+
+    public function getDescriptionAttribute($value)
+    {
+        if(isset($value) && !empty($value)) {
+            return json_decode($value);
+        }
+        return [];
+
+    }
 }
