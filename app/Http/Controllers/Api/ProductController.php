@@ -20,7 +20,7 @@ class ProductController extends BaseController
     }
 
     public function searchProduct(SearchProductRequest $request){
-        $perPageRecord = $request->get('per_page') ?? 10;
+        $perPageRecord = $request->get('per_page') ?? 12;
         $data = Product::where('status',true)
             ->where(function ($query)use ($request) {
                 $query->where('name', 'LIKE', '%'.$request->get('name').'%')
