@@ -7,11 +7,15 @@ const BannerCategory = () => {
 
     const [height, setHeight] = useState("490px");
 
-    useEffect(() => {
+    const changeHeight = () => {
         setHeight(bannerSection.current.scrollHeight + "px");
-        // window.addEventListener("resize", () => {
-        //     setHeight(bannerSection.current.scrollHeight + "px");
-        // });
+    };
+
+    useEffect(() => {
+        // setHeight(bannerSection.current.scrollHeight + "px");
+        window.addEventListener("resize", () => {
+            // changeHeight();
+        });
     }, [bannerSection.current]);
 
     return (
