@@ -68,7 +68,7 @@ export const CheckOutCard = ({ product }) => {
                 <div className="head">
                     <div className="">
                         <p className="cart-text">
-                            {product?.description}
+                            {/* {product?.description} */}
                             {/* <button className="buttion-details">
                                 Details
                                 <img src={imges} />
