@@ -36,8 +36,12 @@
 .search-button-header-icon {
     height: 23px;
 }
+.search-panel .dropdown {
+    height: 100%;
+}
 .search-input-type {
-    height: 62px;
+    height: 100%;
+    border-color: transparent;
 }
 
 .hover-effect-sets-login-cart {
@@ -117,13 +121,14 @@
     width: 65% !important;
     padding-left: 5px;
     padding-right: 5px;
+    height: 62px;
 }
 
 .all-button {
     color: #737373;
     /* position: absolute; */
     width: 60px;
-    height: 63px;
+    height: 100%;
     background: #ece8e8 !important;
     border-right: 1px solid #b8b8b9;
     border-radius: 5px 0px 0px 5px;
@@ -151,7 +156,7 @@
 }
 
 .search-logo {
-    height: 62px;
+    height: 100%;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }

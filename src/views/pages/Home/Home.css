@@ -50,7 +50,7 @@
 @media screen and (max-width: 576px) {
     .catergory-grid-wrapper {
         bottom: unset;
-        top: 16% !important;
+        top: 75% !important;
     }
 }
 
