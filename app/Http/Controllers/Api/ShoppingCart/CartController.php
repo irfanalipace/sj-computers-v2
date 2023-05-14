@@ -65,7 +65,7 @@ class CartController extends BaseController
                 $minusQtyPrd = $this->updateProduct($product, $request->qty);
             }
 
-            Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $request->qty, array(), array(), $product);
+            Cart::session($this->userId)->add($product->id, $product->name, number_format((float)$product->price, 2, '.', '') ?? 0, $request->qty, array(), array(), $product);
 
             $items = $this->getItems(true);
 
@@ -88,7 +88,7 @@ class CartController extends BaseController
     public function delete(DeleteCartRequest $request)
     {
         try {
-            
+
             $cart = Cart::session($this->userId);
             $cart->getContent()->each(function ($item) {
                 $product = Product::find($item->id);
@@ -173,22 +173,23 @@ class CartController extends BaseController
     public function storelocalStorageItems(LocalStorageItemsRequest $request)
     {
         try {
-
-            if (empty($request->carItems)) {
-                return  $this->sendResponse([]);
+           
+            if ($request->filled('carItems')) {
+                return $this->sendError([]);
             }
             foreach ($request->cartItems as $value) {
-
+                
                 $product = Product::find($value['product_id']);
+
                 // Check if quantity is less than product quantity
                 if ($request->qty > $product->quantity) {
-                    return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of stock.'), 400, []);
+                    return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of range.'), 400, []);
                 } else {
-                    $minusQtyPrd = $this->updateProduct($product, $request->qty);
+                    $this->updateProduct($product, $value['qty']);
                 }
                 Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $value['qty'], array(), array(), $product);
             }
-
+           
             $items = $this->getItems();
             return response(array('success' => true, 'data' => $items, 'message' => 'Item added.'), 200, []);
         } catch (Exception $e) {
