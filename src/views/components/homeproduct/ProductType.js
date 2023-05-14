@@ -49,7 +49,7 @@ export const ProductType = () => {
                 </div>
                 <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="advertisement-section">
-                        {!isAuthenticated ? (
+                        {isAuthenticated ? (
                             <div className="advertisement-heading">
                                 <img
                                     src={welcomeImage}
@@ -72,13 +72,6 @@ export const ProductType = () => {
                                 </Link>
                             </div>
                         )}
-                        {/* <div className="advertisement-heading">
-                                <div>
-                                    <h4>Advertisement</h4>
-                                </div>
-                           
-                        </div> */}
-
                         <div className="product-section-advertisment">
                             <img
                                 src={addDesktop}

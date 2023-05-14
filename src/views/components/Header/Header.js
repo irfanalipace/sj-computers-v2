@@ -91,6 +91,9 @@ const Header = () => {
                                                 style={{
                                                     background: "#00305E",
                                                     border: "#00305E",
+                                                    fontSize: "12px",
+                                                    padding: "2px",
+                                                    textAlign: "left",
                                                 }}
                                             >
                                                 <span className="deliver-text ">

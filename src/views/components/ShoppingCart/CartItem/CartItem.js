@@ -21,28 +21,31 @@ export const CartItem = memo(({ cartData }) => {
 
     const deleteItemFunction = () => {
         let cartQuantity = details?.total_items - 1;
-        let cartTotal =
-            parseFloat(details?.total) - parseFloat(cartData?.price);
+        let cartTotal = parseFloat(details?.total) - cartData?.price;
+        let cartSubTotal = parseFloat(details?.sub_total) - cartData?.price;
 
         const cartDetails = {
             total_items: cartQuantity,
-            total: parseFloat(cartTotal).toFixed(2),
+            sub_total: cartSubTotal.toFixed(2),
+            total: cartTotal.toFixed(2),
         };
 
         isAuthenticated
-            ? dispatch(deleteItem({ cartItem: cartData, cartDetails }))
+            ? dispatch(deleteItem({ cartItem: cartData }))
             : dispatch(deleteLocalItem({ cartItem: cartData, cartDetails }));
     };
 
     const handleQuantity = (quantity) => {
-        let cartTotal = 0;
+        let subTotal = 0;
         let difference = quantity - cartData?.quantity;
         let price = cartData?.product?.price * difference;
-        cartTotal = parseFloat(details?.total) + parseFloat(price);
+        subTotal = parseFloat(details?.sub_total) + price;
+        let cartTotal = parseFloat(details?.total) + price;
+
         const cartDetails = {
             total_items: details?.total_items,
             total: cartTotal.toFixed(2),
-            sub_total: cartTotal.toFixed(2),
+            sub_total: subTotal.toFixed(2),
         };
 
         let itemPrice = cartData?.product?.price * quantity;
@@ -53,7 +56,7 @@ export const CartItem = memo(({ cartData }) => {
             price: itemPrice,
         };
         isAuthenticated
-            ? dispatch(updateQuantity({ cartItem, cartDetails }))
+            ? dispatch(updateQuantity({ cartItem }))
             : dispatch(updateLocalQuantity({ cartItem, cartDetails }));
     };
 
@@ -149,7 +152,6 @@ export const CartItem = memo(({ cartData }) => {
                     </div>
                 </div>
             </div>
-            
         </div>
     );
 });

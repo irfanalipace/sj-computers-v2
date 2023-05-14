@@ -103,7 +103,7 @@
 }
 .login-register-cart-button {
     box-sizing: border-box;
-    width: 200px;
+    width: 50% !important;
     height: 40px;
     left: 139px;
     top: 22px;
