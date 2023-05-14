@@ -57,7 +57,6 @@ const Product = ({ product, inGrid }) => {
         </div>
     );
 
-    console.log("product: ", product);
     return (
         <div className={`product ${inGrid && "product-grid"}`}>
             <div className={`${inGrid && "product-image-grid"} product-image`}>
