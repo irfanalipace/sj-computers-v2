@@ -1,19 +1,17 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import ProgressiveImage from "react-progressive-graceful-image";
-
-import "swiper/css";
-import "swiper/css/navigation";
-
-import "./Slider.css";
+import { Navigation } from "swiper";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 // import required modules
-import { Navigation } from "swiper";
-import Banner1 from "@images/Banner/homepage-banner-1.png";
-import Banner2 from "@images/Banner/homepage-banner-2.png";
-import Banner3 from "@images/Banner/homepage-banner-3.png";
-import mobileBanner1 from "@images/Banner/mobile-banner-1.png";
-import mobileBanner2 from "@images/Banner/mobile-banner-2.png";
-import mobileBanner3 from "@images/Banner/mobile-banner-3.png";
+import Banner1 from "@images/Banner/homepage-banner-1.jpg";
+import Banner2 from "@images/Banner/homepage-banner-2.jpg";
+import Banner3 from "@images/Banner/homepage-banner-3.jpg";
+import mobileBanner1 from "@images/Banner/mobile-banner-1.jpg";
+import mobileBanner2 from "@images/Banner/mobile-banner-2.jpg";
+import mobileBanner3 from "@images/Banner/mobile-banner-3.jpg";
+import "swiper/css";
+import "swiper/css/navigation";
+import "./Slider.css";
 
 const Slider = () => {
     const banners = [
@@ -46,12 +44,12 @@ const Slider = () => {
                                 >
                                     {(src) => <img src={src} alt={"Banner"} />}
                                 </ProgressiveImage> */}
-                                <img
+                                <LazyLoadImage
                                     className="d-md-block d-none"
                                     src={banner.desktop}
                                     alt={"Banner"}
                                 />
-                                <img
+                                <LazyLoadImage
                                     className="d-md-none d-block"
                                     src={banner.mobile}
                                     alt={"Banner"}

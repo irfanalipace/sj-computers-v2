@@ -12,7 +12,7 @@ import "./LocationModel.css";
 function UpdateStateModel({ isOpen = false, handleClose }) {
     const states = useSelector((state) => state.states.states);
     const isLoading = useSelector((state) => state.states.isLoading);
-    const [state, setState] = useState("Ship outside the US");
+    const [state, setState] = useState("Set Delivery Address");
     const [zipCode, setZipCode] = useState("");
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
