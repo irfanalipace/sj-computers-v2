@@ -4,33 +4,79 @@ import BannerSlider from "@components/Sliders/BannerSlider";
 
 const BannerCategory = () => {
     const bannerSection = useRef(null);
+    const categorySection = useRef(null);
+    const productType = useRef(null);
+    const bannerInner = useRef(null);
 
-    const [height, setHeight] = useState("490px");
+    const [height, setHeight] = useState();
+    const [categoryStyles, setCategoryStyles] = useState(null);
 
     const changeHeight = () => {
-        setHeight(bannerSection.current.scrollHeight + "px");
+        let screenWidth = window.innerWidth;
+        if (screenWidth >= 1025) {
+            setHeight(
+                bannerSection.current.scrollHeight +
+                    categorySection.current.scrollHeight -
+                    200 +
+                    "px"
+            );
+            setCategoryStyles({
+                height: productType.current.scrollHeight + "px",
+                top: "50%",
+            });
+        } else if (screenWidth > 768 && screenWidth < 1025) {
+            setHeight(
+                bannerSection.current.scrollHeight +
+                    categorySection.current.scrollHeight -
+                    300 +
+                    "px"
+            );
+            setCategoryStyles({
+                height: productType.current.scrollHeight + "px",
+                top: "40%",
+            });
+        } else {
+            setHeight(
+                bannerSection.current.scrollHeight +
+                    categorySection.current.scrollHeight -
+                    220 +
+                    "px"
+            );
+            setCategoryStyles({
+                height: productType.current.scrollHeight + "px",
+                bottom: "0",
+                top: "unset",
+            });
+        }
     };
 
     useEffect(() => {
-        // setHeight(bannerSection.current.scrollHeight + "px");
+        changeHeight();
         window.addEventListener("resize", () => {
-            // changeHeight();
+            changeHeight();
         });
-    }, [bannerSection.current]);
+    }, [bannerSection.current, categorySection.current, bannerInner.current]);
 
     return (
         <div
             className="banner-category-section"
             style={{
-                minHeight: height,
+                height,
             }}
-            ref={bannerSection}
         >
-            <div className="banner-wrapper">
-                <BannerSlider />
+            <div className="banner-wrapper" ref={bannerSection}>
+                <div ref={bannerInner} className="banner-inner">
+                    <BannerSlider />
+                </div>
             </div>
-            <div className="catergory-grid-wrapper">
-                <ProductType />
+            <div
+                className="catergory-grid-wrapper"
+                ref={categorySection}
+                style={categoryStyles}
+            >
+                <div ref={productType}>
+                    <ProductType />
+                </div>
             </div>
         </div>
     );

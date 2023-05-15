@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserStateController;
 use App\Http\Controllers\Api\Order\OrderController;
 use App\Http\Controllers\Api\ContactUs\ContactUsController;
+use Illuminate\Support\Facades\Auth;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -107,7 +108,7 @@ Route::get('success-transaction/{id}', [PaypalController::class, 'successTransac
 
 Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
-Route::middleware(['auth:api'])->group(function () {
+Route::middleware(['auth:api', 'verified'])->group(function () {
 
     //Route::post('user-details', UserDetailController::class)->name('user-details');
 
