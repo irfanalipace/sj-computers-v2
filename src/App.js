@@ -1,3 +1,5 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import { BrowserRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -11,14 +13,19 @@ import Footer from "@components/Footer/Footer";
 
 import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import ScrollToTop from './ScrollToTop'
+import ScrollToTop from "./ScrollToTop";
 
 function App() {
     const dispatch = useDispatch();
     const token = getToken();
     if (token) dispatch(alreadyLoggedIn(token));
+    // to clear the cart and cart Details keys from local storage
+    if (!window.localStorage.getItem("clearCartKeys")) {
+        window.localStorage.removeItem("cartDetails");
+        window.localStorage.removeItem("cart");
+        window.localStorage.setItem("clearCartKeys", true);
+    }
     useInitDataFetching();
 
     return (
@@ -37,13 +44,13 @@ function App() {
                 className={"notification-toast"}
             />
             <BrowserRouter>
-            {/* scroller set for scroll bottom to top  */}
-            <ScrollToTop />  
+                {/* scroller set for scroll bottom to top  */}
+                <ScrollToTop />
                 <Header />
                 <div className="inner-body">
                     <Router />
                 </div>
-               
+
                 <Footer />
             </BrowserRouter>
         </div>

@@ -9,8 +9,6 @@ import LoginCart from "./LoginCart";
 import Search from "./Search";
 import MobileHeader from "./MobileHeader/MobileHeader";
 import MobileSearch from "./MobileSearch/MobileSearch";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import footerlogo from "@images/header-logo.png";
 import english from "@images/home/eng.png";
 import vectorcart from "@images/home/vector.png";
@@ -93,6 +91,9 @@ const Header = () => {
                                                 style={{
                                                     background: "#00305E",
                                                     border: "#00305E",
+                                                    fontSize: "12px",
+                                                    padding: "2px",
+                                                    textAlign: "left",
                                                 }}
                                             >
                                                 <span className="deliver-text ">
@@ -112,36 +113,7 @@ const Header = () => {
                                             handleClose={() => setShow(false)}
                                         />
                                     )}
-                                    <div className="input-group search-inputgroup">
-                                        <div className="input-group-btn search-panel">
-                                            <Search />
-                                        </div>
-                                        <input
-                                            type="hidden"
-                                            name="search_param"
-                                            value="all"
-                                            id="search_param"
-                                        />
-                                        <input
-                                            type="text"
-                                            className="form-control search-input-type"
-                                            name="x"
-                                            id="search"
-                                            placeholder="Search"
-                                        />
-                                        <span className="input-group-btn">
-                                            <button
-                                                type="button"
-                                                className="btn btn-success search-logo"
-                                            >
-                                                <FontAwesomeIcon
-                                                    icon={faSearch}
-                                                    size="1x"
-                                                    className="search-button-header-icon"
-                                                />
-                                            </button>
-                                        </span>
-                                    </div>
+                                    <Search />
 
                                     <div className="nav-right">
                                         <div className="dropdown">

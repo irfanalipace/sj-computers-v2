@@ -71,15 +71,15 @@ import MobileScreenModel from "./MobileScreenModel/MobileScreenModel";
 import mobileheaderlogo from "@images/header-logo.png";
 import ModelBox from "./MobileScreenModel/ModelBox";
 const MobileSearch = () => {
-  const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
-  const handleButtonClick = () => {
-      setShowModal(true);
-  };
+    const handleButtonClick = () => {
+        setShowModal(true);
+    };
 
-  const closeModal = () => {
-      setShowModal(false);
-  };
+    const closeModal = () => {
+        setShowModal(false);
+    };
     const { getCollapseProps, getToggleProps, isOpen } = useCollapse();
 
     const [searchValue, setSearchValue] = useState("");
@@ -111,7 +111,7 @@ const MobileSearch = () => {
                     <SearchIconContainer {...getToggleProps()}>
                         {!showSearchBar && (
                             <SearchIcon
-                                onClick={handleSearchIconClick}
+                                // onClick={handleSearchIconClick}
                                 className="fas fa-search"
                                 style={{ color: "white" }}
                             />
@@ -143,10 +143,9 @@ const MobileSearch = () => {
             </CollapseContainer>
 
             <div className="mobile-box-model">
-                <MobileScreenModel onClick={handleButtonClick}/>
+                <MobileScreenModel onClick={handleButtonClick} />
                 {showModal && <ModelBox closeModal={closeModal} />}
             </div>
-            
         </div>
     );
 };

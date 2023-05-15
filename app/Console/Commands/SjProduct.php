@@ -4,15 +4,18 @@ namespace App\Console\Commands;
 
 
 use App\Models\Category;
+use App\Models\CategoryProduct;
 use App\Models\Product;
+use App\Models\ProductInfo;
 use App\Models\SjAmazonIntegration;
 use Illuminate\Console\Command;
 use App\Models\Brand;
+use function PHPUnit\Framework\stringStartsWith;
 
 class SjProduct extends Command
 {
 
-    protected $productCount = 0 ;
+    protected $productCount = 0;
 
     /**
      * The name and signature of the console command.
@@ -50,9 +53,8 @@ class SjProduct extends Command
     }
 
 
-    public function getProducts(){
-
-
+    public function getProducts()
+    {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -75,7 +77,12 @@ class SjProduct extends Command
 
         $products = json_decode($response, true);
 
-        foreach ($products as $key => $product){
+        foreach ($products as $key => $product) {
+
+
+            if(empty($product['Images'])){
+                continue ;
+            }
 
             $brand = $this->insertBrand($product['Brand']);
 
@@ -84,27 +91,20 @@ class SjProduct extends Command
                 'price' => $product['OurPrice'],
                 'asin' => $product['ASIN'],
                 'sku' => $product['SKU'],
-                'image' => $product['URL'],
+                'image' => $product['Images'],
                 'brand_id' => $brand->id ?? '',
                 'quantity'  => $product['PackageQuantity'],
-                'status'  => $product['Status'],
-
+                'status'  => $product['Status'] ?? 0,
+                'description'  => $product['AmazonDescription'],
+                'amazon_id'  => $product['ID'],
+//                'others'  => $product['JSON'],
             ];
 
-            if(isset($product['Category1'])){
-                $category1 = $this->insertBrand($product['Category1']);
+            $product = Product::updateOrCreate(['asin' => $product['ASIN']],$data);
 
-                $data['category_id_1']  = $category1->name;
-            }
+            $this->setProductInfo($product);
 
-            if(isset($product['Category2'])){
-                $category2 = $this->insertBrand($product['Category2']);
-                $data['category_id_2']  = $category2->name;
-            }
-
-
-            Product::updateOrCreate(['asin' => $product['ASIN']],$data);
-            
+            $this->setProductCategory($product);
 
             echo "product is added" . $key . "\n";
 
@@ -113,16 +113,357 @@ class SjProduct extends Command
 
     }
 
+    public function setProductInfo($product)
+    {
 
-    public function insertBrand($name){
+        $description = $product->description;
 
-        $name = strtolower(trim($name));
-        return  Brand::updateOrCreate(['name' =>$name],[]);
+        if (isset($description->cpu_model[0]->family[0]->value)) {
+            $processorInfo = [
+                'key' => 'processor',
+                'product_id' => $product->id,
+                'value' => $description->cpu_model[0]->family[0]->value
+            ];
+            $this->insertProductInfo($processorInfo);
+        }
+
+        if (isset($description->ram_memory[0]->installed_size[0])) {
+            $ramMemoryInfo = [
+                'key' => 'ram_memory',
+                'product_id' => $product->id,
+                'value' => $description->ram_memory[0]->installed_size[0]->value . ' ' . $description->ram_memory[0]->installed_size[0]->unit
+            ];
+            $this->insertProductInfo($ramMemoryInfo);
+        };
+
+        if (isset($description->operating_system[0]->value)) {
+            $operatingSystemInfo = [
+                'key' => 'operating_system',
+                'product_id' => $product->id,
+                'value' => $description->operating_system[0]->value
+            ];
+            $this->insertProductInfo($operatingSystemInfo);
+        };
+
+        if (isset($description->hard_disk[0]->size[0])) {
+            $hardDiskInfo = [
+                'key' => 'hard_disk',
+                'product_id' => $product->id,
+                'value' => $description->hard_disk[0]->size[0]->value . ' ' . $description->hard_disk[0]->size[0]->unit
+            ];
+            $this->insertProductInfo($hardDiskInfo);
+        };
+
+        if (isset($description->graphics_description)) {
+            $graphicsDescriptionInfo = [
+                'key' => 'graphic',
+                'product_id' => $product->id,
+                'value' => $description->graphics_description[0]->value
+            ];
+            $this->insertProductInfo($graphicsDescriptionInfo);
+        }
+
+        if (isset($description->brand)) {
+            $brandInfo = [
+                'key' => 'brand',
+                'product_id' => $product->id,
+                'value' => $description->brand[0]->value
+            ];
+            $this->insertProductInfo($brandInfo);
+        }
+
+        if (isset($description->generic_keyword)) {
+
+            foreach ($description->generic_keyword as $key => $value) {
+
+                // dont save long tags
+
+                if (strlen($value->value) > 100) {
+                    continue;
+                };
+
+                $tagInfo = [
+                    'key' => 'tag_' . $key,
+                    'product_id' => $product->id,
+                    'value' => $value->value
+                ];
+                $this->insertProductInfo($tagInfo);
+            }
+        }
+
     }
 
-    public function insertCategory($name){
-
-        $name = strtolower(trim($name));
-        return  Category::updateOrCreate(['name' =>$name],[]);
+    public function insertProductInfo($data)
+    {
+        ProductInfo::updateOrCreate(
+            [
+                'product_id' => $data['product_id'],
+                'key' => $data['key'],
+                'value' => $data['value']
+            ],
+            $data);
     }
+
+
+
+    public function strStartsWith($string, $startString)
+    {
+        $len = strlen($startString);
+        return (substr($string, 0, $len) === $startString);
+    }
+
+    public function setProductCategory($product)
+    {
+        $title = strtolower($product->name);
+
+        /*
+        * empty
+        */
+        if (empty($title)) {
+            $this->insertProductCategory('not_set', $product->id);
+            return ;
+        }
+
+        /*
+         * start with bto
+         */
+        if ($this->strStartsWith($title, 'bto')) {
+            $this->insertProductCategory('bto', $product->id);
+        }
+
+        /*
+         * contain Gaming or Alienware
+         * doesnot contain Desktop
+         * doesnot start with BTO
+         */
+        if ((strpos($title, 'gaming') || strpos($title, 'alienware'))
+            && !strpos($title, 'desktop') && (!$this->strStartsWith($title, 'bto'))) {
+            $this->insertProductCategory('gaming_laptops', $product->id);
+        }
+
+        /*
+        * contain Gaming or Alienware
+        * doesnot contain Laptop
+        * doesnot start with BTO
+        */
+        if ((strpos($title, 'gaming') || strpos($title, 'alienware'))
+            && !strpos($title, 'laptop') && (!$this->strStartsWith($title, 'bto'))) {
+            $this->insertProductCategory('gaming_desktops', $product->id);
+        }
+
+        /*
+        * contain Laptop
+        * doesnot start with BTO
+        */
+
+        if (strpos($title, 'laptop') && (!$this->strStartsWith($title, 'bto'))) {
+            $this->insertProductCategory('laptops', $product->id);
+        }
+
+        /*
+         * contain 2 in 1 or 2in1
+         */
+        if (strpos($title, '2 in 1') || (strpos($title, '2in1'))) {
+            $this->insertProductCategory('2_in_1_laptops', $product->id);
+        }
+
+        /*
+         * contain laptop and touchscreen
+         */
+        if (strpos($title, 'laptop') && (strpos($title, 'touchscreen'))) {
+            $this->insertProductCategory('touch_screen', $product->id);
+        }
+
+        /*
+        * contain windows 11
+        */
+        if (strpos($title, 'windows 11')) {
+            $this->insertProductCategory('windows_11', $product->id);
+        }
+
+        /*
+        * contain windows 10
+        */
+        if (strpos($title, 'windows 10')) {
+            $this->insertProductCategory('windows_10', $product->id);
+        }
+
+        /*
+        * contain windows chromebook
+         * doesnot start with bto
+        */
+        if (strpos($title, 'chromebook') && (!$this->strStartsWith($title, 'bto'))) {
+            $this->insertProductCategory('chromebook', $product->id);
+        }
+
+        /*
+       * contain dell and xps
+       */
+        if (strpos($title, 'dell') && (strpos($title, 'xps'))) {
+            $this->insertProductCategory('xps', $product->id);
+        }
+
+
+        /*
+      * contain Dell Precision
+         * doesnot start with bto
+      */
+        if (strpos($title, 'dell precision') && (!$this->strStartsWith($title, 'bto'))) {
+            $this->insertProductCategory('precision', $product->id);
+        }
+
+        /*
+      * contain Dell Latitude
+         * doesnot start with bto
+      */
+        if (strpos($title, 'dell latitude') && (!$this->strStartsWith($title, 'bto'))) {
+            $this->insertProductCategory('latitude', $product->id);
+        }
+
+
+        /*
+            * contain 17 inch or 17inch
+            */
+        if (strpos($title, '17 inch') || (strpos($title, '17inch'))) {
+            $this->insertProductCategory('screen_17_inch', $product->id);
+        }
+
+        /*
+           * contain 15 inch or 15inch
+           */
+        if (strpos($title, '15 inch') || (strpos($title, '15inch'))) {
+            $this->insertProductCategory('screen_15_inch', $product->id);
+        }
+
+        /*
+          * contain 14 inch or 14inch
+          */
+        if (strpos($title, '14 inch') || (strpos($title, '14inch'))) {
+            $this->insertProductCategory('screen_14_inch', $product->id);
+        }
+
+        /*
+        * contain 13 inch or 13inch
+        */
+        if (strpos($title, '13 inch') || (strpos($title, '13inch'))) {
+            $this->insertProductCategory('screen_13_inch', $product->id);
+        }
+
+        /*
+        * contain i3 inch or core i3
+        */
+        if (strpos($title, 'i3') || (strpos($title, 'core i3'))) {
+            $this->insertProductCategory('core_i3', $product->id);
+        }
+
+        /*
+        * contain i5 inch or core i5
+        */
+        if (strpos($title, 'i5') || (strpos($title, 'core i5'))) {
+            $this->insertProductCategory('core_i5', $product->id);
+        }
+
+        /*
+        * contain i7 inch or core i7
+        */
+        if (strpos($title, 'i7') || (strpos($title, 'core i7'))) {
+            $this->insertProductCategory('core_i7', $product->id);
+        }
+
+        /*
+      * contain Desktop
+      * doesnot start with BTO
+      */
+        if (strpos($title, 'desktop') && (!$this->strStartsWith($title, 'bto'))) {
+            $this->insertProductCategory('desktop', $product->id);
+        }
+
+        /*
+     * contain Tablet
+     * doesnot start with BTO
+     */
+        if (strpos($title, 'tablet') && (!$this->strStartsWith($title, 'bto'))) {
+            $this->insertProductCategory('tablets', $product->id);
+        }
+
+        /*
+     * contain Monitor
+     * doesnot contain desktop ,pc, Optiplex
+     */
+        if ( ( !strpos($title, 'desktop') && ( !strpos($title, 'pc')) && ( !strpos($title, 'optiplex') ))
+            && (strpos($title, 'Monitor'))) {
+            $this->insertProductCategory('monitor', $product->id);
+        }
+
+        /*
+    * contain business
+    */
+        if ((strpos($title, 'business'))) {
+            $this->insertProductCategory('business_computers', $product->id);
+        }
+
+        /*
+   * contain sff or Small Form Factor
+   */
+        if ((strpos($title, 'sff')) || strpos($title,'small form factor')) {
+            $this->insertProductCategory('sff', $product->id);
+        }
+
+        /*
+   * contain usff or Ultra
+   */
+        if ((strpos($title, 'usff')) || strpos($title,'ultra')) {
+            $this->insertProductCategory('usff', $product->id);
+        }
+
+        /*
+* contain Tower
+         * doesnot contain mini
+*/
+        if ((strpos($title, 'tower')) && (!strpos($title,'mini'))) {
+            $this->insertProductCategory('tower', $product->id);
+        }
+
+        /*
+* contain Tiny or Micro
+*/
+        if ((strpos($title, 'tiny')) || (strpos($title,'micro'))) {
+            $this->insertProductCategory('tiny', $product->id);
+        }
+
+
+        /*
+* contain mini
+*/
+        if ((strpos($title, 'mini'))) {
+            $this->insertProductCategory('mini', $product->id);
+        }
+
+    }
+
+    public function insertBrand($name)
+    {
+        $name = strtolower(trim($name));
+        return Brand::updateOrCreate(['name' => $name], []);
+    }
+
+    public function insertProductCategory($slug, $productId)
+    {
+
+        $category = Category::where('slug', $slug)->first();
+
+        if (empty($category)) {
+            return;
+        }
+
+        CategoryProduct::updateOrCreate(
+            [
+                'product_id' => $productId,
+                'category_id' => $category->id
+            ],);
+
+    }
+
+
+
 }

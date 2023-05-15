@@ -31,14 +31,13 @@ const ApiService = {
      * Send the GET HTTP request
      * @param resource
      * @param slug
+     * @param params
      * @returns {*}
      */
 
     get(resource, slug = "", params = {}) {
         return new Promise((resolve, reject) => {
-
-            const url = `${resource}${slug ? `/${slug}` : ''}`;
-            
+            const url = `${resource}${slug ? `/${slug}` : ""}`;
             this.instance
                 .get(url, { params })
                 .then((res) => {

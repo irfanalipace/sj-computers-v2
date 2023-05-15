@@ -171,8 +171,8 @@
 }
 
 .done-button {
-    min-width: 70px !important;
-    height: 29px !important;
+    min-width: 100px !important;
+    height: 40px !important;
     background: #52ac66 !important;
     border-radius: 9px !important;
     color: white;

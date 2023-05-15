@@ -34,6 +34,7 @@
 }
 .color-card {
     color: #318243;
+    font-size: 14px;
 }
 .select-location-btn {
     font-family: "Roboto";
@@ -113,18 +114,13 @@
     justify-content: center;
 }
 
-.item-card-add-text-details {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 22px;
-    color: #000000;
-}
 @media screen and (max-width: 780px) {
     .color-card-dev {
         text-align: center;
     }
     .text-stock {
         text-align: center;
+        padding: 6px !important;
     }
     .color-text-cart {
         text-align: center;
@@ -138,9 +134,5 @@
 }
 
 .item-card-add-text-details {
-    position: relative;
-    padding-top: 9px;
-    margin-top: -44px;
-    /* padding-left: 298px; */
-    font-size: 10px;
+    font-size: 12px;
 }

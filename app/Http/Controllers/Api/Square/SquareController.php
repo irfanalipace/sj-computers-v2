@@ -33,13 +33,15 @@ class SquareController extends Controller
             'accessToken' => env('SQUARE_TOKEN'),
             'environment' => Environment::SANDBOX,
         ]);
+        $this->userId = auth('api')->user()->id;
+
     }
     // charge process
     public function chargeCustomer(CardRequest $request)
     {
        
         try {
-
+            
             $idempotencyKey = uniqid();
 
             //create customer || retrieve customer if already added
@@ -49,7 +51,7 @@ class SquareController extends Controller
             // $cardToken = $this->customerCardToken($request, $customer);
 
             $amount_money = new Money();
-            $amount_money->setAmount(Cart::session(auth()->user()->id)->getSubTotal());
+            $amount_money->setAmount(Cart::session($this->userId)->getSubTotal());
             $amount_money->setCurrency(StatusEnum::currency);
             //create payment Request
             $body = new CreatePaymentRequest($request->source_id, $idempotencyKey);
@@ -57,7 +59,7 @@ class SquareController extends Controller
             $body->setAutocomplete(true);
             $body->setCustomerId($customer);
             $body->setLocationId(env('SQUARE_LOCATION_ID'));
-            $body->setReferenceId('user-' . auth()->user()->id);
+            $body->setReferenceId('user-' . $this->userId);
             
             $api_response = $this->squareClient->getPaymentsApi()->createPayment($body);
             
@@ -65,15 +67,15 @@ class SquareController extends Controller
                 $orderData = [];
 
 
-                $orderData['total_amount'] = \Cart::session(auth()->user()->id)->getTotal();
-                $orderData['sub_total'] = \Cart::session(auth()->user()->id)->getSubTotal();
-                $orderData['item_qty'] = \Cart::session(auth()->user()->id)->getTotalQuantity();
+                $orderData['total_amount'] = \Cart::session($this->userId)->getTotal();
+                $orderData['sub_total'] = \Cart::session($this->userId)->getSubTotal();
+                $orderData['item_qty'] = \Cart::session($this->userId)->getTotalQuantity();
 
                 
                 $orderData['shipment_amount'] =  0;
                 $orderData['estimate_day'] =  Carbon::now()->addWeekdays(5)->format('l d-m-Y');
 
-                $cartConditions = Cart::session(auth()->user()->id)->getConditions('shipment_days');
+                $cartConditions = Cart::session($this->userId)->getConditions('shipment_days');
 
                 foreach ($cartConditions as $condition) {
                     $amount = $condition->getValue(); // the value of the condition
@@ -81,16 +83,16 @@ class SquareController extends Controller
                     $orderData['estimate_day'] =  $condition->getAttributes()['estimate_day'];
                 }
 
-                $cartContent = Cart::session(auth()->user()->id)->getContent();
+                $cartContent = Cart::session($this->userId)->getContent();
 
                 $result = $api_response->getResult();
 
-                GenerateInvoiceJob::dispatch(array(), $api_response, auth()->user()->id, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
+                GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
 
                 //clear cart after successfull payment
-                Cart::session(auth()->user()->id)->clear();
+                Cart::session($this->userId)->clear();
                 //clear cart condition
-                Cart::session(auth()->user()->id)->clearCartConditions();
+                Cart::session($this->userId)->clearCartConditions();
             } else {
                 $errors = $api_response->getErrors();
                 return response()->json(['code' => 400, 'message' => "Card declined Please try again."]);
@@ -129,7 +131,7 @@ class SquareController extends Controller
             if ($api_response->isSuccess()) {
                 $customer_id = $api_response->getResult()->getCustomer()->getId();
                 //saving customer id in user table square_cus_id column
-                User::whereId(auth()->user()->id)->update(['square_cus_id' => $customer_id]);
+                User::whereId($this->userId)->update(['square_cus_id' => $customer_id]);
             } else {
                 $errors = $api_response->getErrors();
             }
@@ -174,7 +176,7 @@ class SquareController extends Controller
     //         $card->setExpYear($data->card_expiry_year);
     //         $card->setCardType($data->card_type);
     //         $card->setCustomerId($customerID);
-    //         $card->setReferenceId('user-id-' . auth()->user()->id);
+    //         $card->setReferenceId('user-id-' . $this->userId);
 
     //         $body = new CreateCardRequest(
     //             $idempotencyKey,

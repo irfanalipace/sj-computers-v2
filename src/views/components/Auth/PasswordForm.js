@@ -77,10 +77,13 @@ const PasswordForm = () => {
                 </button>
             </div>
             <div className="mb-3">
-                <label className="password-label ">Enter your password</label>
+                <label className="password-label" htmlFor="password">
+                    Enter your password
+                </label>
                 <input
                     type="password"
                     name="password"
+                    id="password"
                     className="form-control"
                     placeholder="Enter your password"
                     value={values.password}

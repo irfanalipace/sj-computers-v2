@@ -55,9 +55,13 @@ Route::get('states', [StateController::class, 'getList'])->name('states');
 
 Route::get('categories', [CategoryController::class, 'getList'])->name('categories');
 
+Route::get('category-product', [CategoryController::class, 'getCategoryProduct'])->name('getCategoryProduct');
+
 Route::get('brands', [BrandController::class, 'getList'])->name('brands');
 
 Route::get('products', [ProductController::class, 'getList'])->name('products');
+
+Route::get('products-filter-list', [ProductController::class, 'getProductFilterList'])->name('getProductFilterList');
 
 Route::get('search-product', [ProductController::class, 'searchProduct'])->name('searchProduct');
 

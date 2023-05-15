@@ -32,7 +32,7 @@ export const getCartItems = () => {
 export const getCartDetails = () => {
     let cartDetails = JSON.parse(window.localStorage.getItem("cartDetails"));
     if (cartDetails) return cartDetails;
-    else return { total_items: 0, total: 0 };
+    else return { total_items: 0, sub_total: 0, total: 0 };
 };
 
 export const updateCartDetails = (cartDetails) => {
@@ -67,22 +67,24 @@ export const deleteNotLocalCartItem = () => {
     let cartDetails = getCartDetails();
     let cartItems = getCartItems();
     let temp_cart_items = [...cartItems];
+    let cartTotalQuantity = cartDetails?.total_items;
     temp_cart_items?.forEach((item, index) => {
         if (item?.notLocal) {
-            let cartTotalQuantity = cartDetails?.total_items - 1;
+            cartTotalQuantity = cartDetails?.total_items - 1;
 
             let cartTotal =
-                parseFloat(cartDetails?.total) -
-                parseFloat(
-                    cartItems[index]?.price * cartItems[index]?.quantity
-                );
+                parseFloat(cartDetails?.total) - cartItems[index]?.price;
+
+            let cartSubTotal =
+                parseFloat(cartDetails?.sub_total) - cartItems[index]?.price;
 
             if (index >= 0) {
-                cartItems.splice(index, 1);
                 cartDetails = {
                     total_items: cartTotalQuantity > 0 ? cartTotalQuantity : 0,
                     total: cartTotal > 0 ? cartTotal.toFixed(2) : 0,
+                    sub_total: cartSubTotal > 0 ? cartSubTotal.toFixed(2) : 0,
                 };
+                cartItems.splice(index, 1);
             }
         }
     });

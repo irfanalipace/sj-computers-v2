@@ -57,11 +57,12 @@ export default function EmailForm({ onFormSubmit, form }) {
                 {form === "forgetPassword" ? "Forget Password" : "Sign In"}
             </h3>
             <div className="mb-3">
-                <label className="email-label ">
-                    Email or mobile phone number
+                <label className="email-label" htmlFor="email">
+                    Enter Email
                 </label>
                 <input
                     type="email"
+                    id="email"
                     name="email"
                     className="form-control email-login-input"
                     placeholder="Enter your email"
@@ -95,7 +96,10 @@ export default function EmailForm({ onFormSubmit, form }) {
             </p>
 
             <div className="need-help">
-                <FontAwesomeIcon icon={faCaretRight} className="need-help-singin-arrow"/>
+                <FontAwesomeIcon
+                    icon={faCaretRight}
+                    className="need-help-singin-arrow"
+                />
                 <a href="#" className="text-decoration-none need-help">
                     Need Help?
                 </a>

@@ -12,10 +12,10 @@
 }
 
 .ul-item-list-header a {
-  text-decoration: none; /* This removes the underline from the hyperlink */
-  color: #333; /* This sets the color of the hyperlink text */
-  font-size: 16px; /* This sets the font size of the hyperlink text */
-  font-weight: bold; /* This sets the font weight of the hyperlink text to bold */
+  text-decoration: none;
+  color: #333;
+  font-size: 12px;
+  font-weight: bold;
 }
 .header-mobile{
  
@@ -28,4 +28,7 @@
    
    
 
+}
+.fa-icon-cart{
+  font-size: 15px;
 }

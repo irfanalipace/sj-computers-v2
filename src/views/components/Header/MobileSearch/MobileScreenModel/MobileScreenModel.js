@@ -1,27 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ModelBox from "./ModelBox";
 import "./MobileScreenModel.css";
 import imges1 from "@images/cart-product/location.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
-const MobileScreenModel = ({ onClick }) => {
-    // const [showModal, setShowModal] = useState(false);
+import ModelUserAuth from "./ModelUserAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchStates } from "@store/states/statesThunks";
 
-    // const handleButtonClick = () => {
-    //     setShowModal(true);
-    // };
+const MobileScreenModel = () => {
+    const dispatch = useDispatch();
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-    // const closeModal = () => {
-    //     setShowModal(false);
-    // };
+    useEffect(() => {
+        dispatch(fetchStates());
+    }, []);
+    const [showModal, setShowModal] = useState(false);
+
+    const handleButtonClick = () => {
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
     return (
         <div>
             <header>
                 <div className="color-card-dev">
                     <button
                         className="mobile-zip-code-box-image-dilvery-box"
-                        onClick={onClick}
-                       
+                        onClick={handleButtonClick}
                     >
                         <FontAwesomeIcon
                             icon={faMapMarker}
@@ -31,9 +40,15 @@ const MobileScreenModel = ({ onClick }) => {
                             Enter US zip code
                         </span>
                     </button>
+                    {isAuthenticated ? (
+                        <div>
+                            {showModal && <ModelBox closeModal={closeModal} />}
+                        </div>
+                    ) : (
+                        <div>{showModal && <ModelUserAuth />}</div>
+                    )}
                 </div>
             </header>
-            {/* {showModal && <ModelBox closeModal={closeModal} />} */}
         </div>
     );
 };
