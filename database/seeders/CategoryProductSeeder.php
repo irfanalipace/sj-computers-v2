@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class CategoryProductSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -52,6 +52,10 @@ class CategorySeeder extends Seeder
                 'slug' => 'windows_10'
             ],
             [
+                'name' => 'Chromebook',
+                'slug' => 'chromebook'
+            ],
+            [
                 'name' => 'XPS',
                 'slug' => 'xps'
             ],
@@ -96,8 +100,8 @@ class CategorySeeder extends Seeder
                 'slug' => 'desktop'
             ],
             [
-                'name' => 'Tablets',
-                'slug' => 'tablets'
+                'name' => 'Tablet',
+                'slug' => 'tablet'
             ],
             [
                 'name' => 'Monitor',
