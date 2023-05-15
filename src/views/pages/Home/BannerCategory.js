@@ -16,7 +16,7 @@ const BannerCategory = () => {
         if (screenWidth >= 1025) {
             setHeight(
                 bannerSection.current.scrollHeight +
-                    categorySection.current.scrollHeight -
+                    productType.current.scrollHeight -
                     200 +
                     "px"
             );
@@ -27,7 +27,7 @@ const BannerCategory = () => {
         } else if (screenWidth > 768 && screenWidth < 1025) {
             setHeight(
                 bannerSection.current.scrollHeight +
-                    categorySection.current.scrollHeight -
+                    productType.current.scrollHeight -
                     300 +
                     "px"
             );
@@ -38,7 +38,7 @@ const BannerCategory = () => {
         } else {
             setHeight(
                 bannerSection.current.scrollHeight +
-                    categorySection.current.scrollHeight -
+                    productType.current.scrollHeight -
                     220 +
                     "px"
             );

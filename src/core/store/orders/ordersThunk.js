@@ -12,9 +12,7 @@ import {
     setShippingAddressApi,
     placeOrderApi,
 } from "@api/checkout";
-import {
-    getOrderDetailsApi,
-} from "@api/order";
+import { getOrderDetailsApi } from "@api/order";
 
 import { clearCartLocally } from "@utils/cartHelpers";
 
@@ -25,7 +23,7 @@ export const getShippingDetails = () => {
             let response = await getShippingAddressApi();
             dispatch({
                 type: SET_SHIPPING_DETAILS,
-                payload: response.data,
+                payload: response,
             });
         } catch (error) {
             console.log("Something went wrong in orders", error);
@@ -40,7 +38,7 @@ export const getOrderDetails = () => {
             let response = await getOrderDetailsApi();
             dispatch({
                 type: SET_ORDER_DETAILS,
-                payload: response.data,
+                payload: response,
             });
         } catch (error) {
             console.log("Something went wrong in orders", error);
@@ -72,7 +70,7 @@ export const placeOrder = (data, cb) => {
             let response = await placeOrderApi(data);
             clearCartLocally();
 
-            if (typeof cb === "function") cb(response.data);
+            if (typeof cb === "function") cb(response);
             dispatch({ type: ORDER_PLACED, payload: {} });
         } catch (error) {
             console.log("Something went wrong in orders", error);
