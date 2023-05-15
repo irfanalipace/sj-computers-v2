@@ -77,10 +77,7 @@ class SjProduct extends Command
 
         $products = json_decode($response, true);
 
-        $products = Product::all();
-
-
-        foreach ($products as $key => $product) {
+``        foreach ($products as $key => $product) {
 
 
             if(empty($product['Images'])){
@@ -109,7 +106,7 @@ class SjProduct extends Command
             $this->setProductInfo($product);
 
             $this->setProductCategory($product);
-            
+
             echo "product is added" . $key . "\n";
 
         }
