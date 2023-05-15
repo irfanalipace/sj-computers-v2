@@ -14,7 +14,7 @@ export const fetchProducts = (page = 1) => {
             const response = await productsApi(page);
             dispatch({
                 type: FETCH_PRODUCTS,
-                payload: response.data.data.data,
+                payload: response.data.data,
             });
         } catch (error) {
             console.log("Something went wrong in products", error);
@@ -32,7 +32,7 @@ export const searchProducts = (name = "", page = 1) => {
             dispatch({
                 type: SEARCH_PRODUCTS,
                 payload: {
-                    data: [...response.data.data.data],
+                    data: [...response.data.data],
                     searchString: name,
                 },
             });

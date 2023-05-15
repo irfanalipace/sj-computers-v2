@@ -41,7 +41,7 @@ const ApiService = {
             this.instance
                 .get(url, { params })
                 .then((res) => {
-                    resolve(res);
+                    resolve(res.data);
                 })
                 .catch((error) => {
                     if (error?.response?.status === 401) {
@@ -69,7 +69,7 @@ const ApiService = {
             this.instance
                 .post(`${resource}`, params)
                 .then((res) => {
-                    resolve(res);
+                    resolve(res.data);
                 })
                 .catch((error) => {
                     console.log("error status: ", error.response.status);
@@ -97,7 +97,7 @@ const ApiService = {
         return this.instance
             .put(`${resource}`, params)
             .then((res) => {
-                resolve(res);
+                resolve(res.data);
             })
             .catch((error, status) => {
                 if (error?.response?.status === 401) {
@@ -120,7 +120,7 @@ const ApiService = {
         return this.instance
             .delete(resource)
             .then((res) => {
-                resolve(res);
+                resolve(res.data);
             })
             .catch((error, status) => {
                 if (error?.response?.status === 401) {

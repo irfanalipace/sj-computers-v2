@@ -54,6 +54,7 @@
 
 .product-type-section img {
     max-width: 100%;
+    max-height: 230px;
 }
 
 .advertisement-section {
@@ -134,6 +135,10 @@
     }
     .product-type-section img {
         width: 200px;
+    }
+
+    .product-type-container > .row > * {
+        padding: 0 !important;
     }
 }
 

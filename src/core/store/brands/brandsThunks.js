@@ -6,7 +6,7 @@ export const fetchBrands = () => {
         try {
             dispatch({ type: LOADING, payload: {} });
             const response = await brandsApi();
-            dispatch({ type: FETCH_BRANDS, payload: response.data.data });
+            dispatch({ type: FETCH_BRANDS, payload: response.data });
         } catch (error) {
             console.log("Something went wrong in brands", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
