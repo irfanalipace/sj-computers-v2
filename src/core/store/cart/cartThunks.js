@@ -115,15 +115,11 @@ export const syncCartItems = () => {
                 cartItems = missingLocalItems?.map((item) => {
                     let cartItem = {
                         ...item,
-                        price: parseFloat(item?.price * item?.quantity).toFixed(
-                            2
-                        ), // item total price which need to be paid in case of checkout
+                        price: item?.price, // item total price which need to be paid in case of checkout
                         notLocal: true, //this property identifies that this cart item is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
                         product: {
                             ...item.associatedModel,
-                            price: parseFloat(
-                                item.associatedModel.price
-                            ).toFixed(2), // cost of one unit of product
+                            price: item.associatedModel.price, // cost of one unit of product
                         },
                     };
 

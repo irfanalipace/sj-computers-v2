@@ -21,6 +21,7 @@ function Search() {
     const dispatch = useDispatch();
 
     const toggle = () => setDropdownOpen((prevState) => !prevState);
+
     const handleItemClick = (e) => {
         e.preventDefault();
         const item = e.target.text;

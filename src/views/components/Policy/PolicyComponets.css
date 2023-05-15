@@ -1,0 +1,12 @@
+.policy-menu-item-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+li.policy-listitem {
+    color: antiquewhite;
+    margin-left: 22px;
+}

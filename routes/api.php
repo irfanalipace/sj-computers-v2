@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserStateController;
 use App\Http\Controllers\Api\Order\OrderController;
 use App\Http\Controllers\Api\ContactUs\ContactUsController;
+use Illuminate\Support\Facades\Auth;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -55,9 +56,13 @@ Route::get('states', [StateController::class, 'getList'])->name('states');
 
 Route::get('categories', [CategoryController::class, 'getList'])->name('categories');
 
+Route::get('category-product', [CategoryController::class, 'getCategoryProduct'])->name('getCategoryProduct');
+
 Route::get('brands', [BrandController::class, 'getList'])->name('brands');
 
 Route::get('products', [ProductController::class, 'getList'])->name('products');
+
+Route::get('products-filter-list', [ProductController::class, 'getProductFilterList'])->name('getProductFilterList');
 
 Route::get('search-product', [ProductController::class, 'searchProduct'])->name('searchProduct');
 
@@ -94,7 +99,7 @@ Route::get('success-transaction/{id}', [PaypalController::class, 'successTransac
 
 Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
-Route::middleware(['auth:api'])->group(function () {
+Route::middleware(['auth:api', 'verified'])->group(function () {
 
     //Route::post('user-details', UserDetailController::class)->name('user-details');
 

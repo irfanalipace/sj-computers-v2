@@ -1,6 +1,5 @@
 import TopBar from "@components/TopBar/TopBar";
-import BannerSlider from "@components/Sliders/BannerSlider";
-import { ProductType } from "@components/homeproduct/ProductType";
+import BannerCategory from "./BannerCategory";
 // import CarouselSlider from "@components/Sliders/CarouselSlider";
 // import ProductThreeItem from "@components/homeproduct/product3category/ProductThreeItem";
 // import Recommendation from "@components/Recommendation/Recommendation";
@@ -12,14 +11,7 @@ const Home = () => {
     return (
         <div className="homePage">
             <TopBar />
-            <div className="banner-category-section">
-                <div className="banner-wrapper">
-                    <BannerSlider />
-                </div>
-                <div className="catergory-grid-wrapper">
-                    <ProductType />
-                </div>
-            </div>
+            <BannerCategory />
             <div className="products-grid-container">
                 <ProductsGrid />
             </div>

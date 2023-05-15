@@ -67,7 +67,7 @@ class OrderController extends BaseController
 
     public function getOrders(OrderListRequest $request){
 
-        $perPageRecord = $request->get('per_page') ?? 10;
+        $perPageRecord = $request->get('per_page') ?? 12;
 
         $sql = Order::query();
 

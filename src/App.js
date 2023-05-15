@@ -20,6 +20,12 @@ function App() {
     const dispatch = useDispatch();
     const token = getToken();
     if (token) dispatch(alreadyLoggedIn(token));
+    // to clear the cart and cart Details keys from local storage
+    if (!window.localStorage.getItem("clearCartKeys")) {
+        window.localStorage.removeItem("cartDetails");
+        window.localStorage.removeItem("cart");
+        window.localStorage.setItem("clearCartKeys", true);
+    }
     useInitDataFetching();
 
     return (

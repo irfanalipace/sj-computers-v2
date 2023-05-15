@@ -73,7 +73,7 @@ const VerifyOTP = () => {
         setLoading(false);
         setIsTimerFinished(false);
 
-        setTimer(20);
+        setTimer(30);
     };
 
     const navigate = useNavigate();
@@ -103,7 +103,8 @@ const VerifyOTP = () => {
         >
             <h3 className="login-h3-verify-form">Verification required</h3>
             <div className="email-text-verify-form mt-2 mb-1">
-                One Time Password (OTP) sent to {email}{'. '}
+                One Time Password (OTP) sent to {email}
+                {". "}
                 <span className="email-text-verify-form">
                     Please enter it below.
                     <button
@@ -159,10 +160,12 @@ const VerifyOTP = () => {
                             Resend OTP
                         </button>
                     </p>
-                   
-                    <div className='border-primary text-primary timer'>
-      {isTimerFinished ? '0' : timer}
-    </div>
+
+                    {!isTimerFinished && (
+                        <div className="border-primary text-primary timer">
+                            {timer}
+                        </div>
+                    )}
                 </div>
             )}
             <p className="forgot-password text-left">

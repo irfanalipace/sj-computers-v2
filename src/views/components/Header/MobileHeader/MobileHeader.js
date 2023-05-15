@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 
 import Sidebar from "@components/Sidebar/Sidebar";
 
+import { useSelector } from "react-redux";
+
 function MobileHeader() {
+    const cartDetails = useSelector((state) => state.cart.details);
     const [isSideMenu, setSideMenu] = useState(false);
     const toggleSidebar = () => {
         return setSideMenu((state) => !state);
@@ -28,7 +31,7 @@ function MobileHeader() {
                             <li>
                                 <Link to="/">
                                     <i
-                                        className="fa fa-home"
+                                        className="fa fa-home font-size-mobile-icon"
                                         aria-hidden="true"
                                     ></i>
                                 </Link>
@@ -36,15 +39,21 @@ function MobileHeader() {
                             <li>
                                 <Link to="/account">
                                     <i
-                                        className="fa fa-user"
+                                        className="fa fa-user font-size-mobile-icon"
                                         aria-hidden="true"
                                     ></i>
                                 </Link>
                             </li>
-                            <li>
+
+                            <li className="list-view-item list-data-items">
+                                <span className="data-list-icon-list">
+                                    {" "}
+                                    {cartDetails.total_items}
+                                </span>
+
                                 <Link to="/cart">
                                     <i
-                                        className="fa fa-shopping-cart"
+                                        className="fa fa-shopping-cart font-size-mobile-icon"
                                         aria-hidden="true"
                                     ></i>
                                 </Link>

@@ -90,9 +90,7 @@ const Register = () => {
                             )}
                         </div>
                         <div className="mb-3">
-                            <label className="email-label ">
-                                Email or mobile phone number
-                            </label>
+                            <label className="email-label ">Email</label>
                             <input
                                 type="email"
                                 name="email"

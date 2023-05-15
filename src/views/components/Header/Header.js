@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 import CartOverlay from "./CartOverlay";
@@ -20,10 +20,10 @@ const Header = () => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cartDetails = useSelector((state) => state.cart.details);
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
     const firstLogin = useRef(null);
-    firstLogin.current = urlParams.get("firstLogin");
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    firstLogin.current = searchParams.get("firstLogin");
 
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
@@ -49,6 +49,8 @@ const Header = () => {
 
     useEffect(() => {
         firstLogin.current && !currentState && setShow(true);
+        searchParams.delete("firstLogin");
+        setSearchParams(searchParams);
     }, [firstLogin.current, currentState]);
 
     const handleResize = () => {
@@ -91,6 +93,9 @@ const Header = () => {
                                                 style={{
                                                     background: "#00305E",
                                                     border: "#00305E",
+                                                    fontSize: "12px",
+                                                    padding: "2px",
+                                                    textAlign: "left",
                                                 }}
                                             >
                                                 <span className="deliver-text ">

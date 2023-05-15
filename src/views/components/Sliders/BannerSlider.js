@@ -1,18 +1,24 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import ProgressiveImage from "react-progressive-graceful-image";
-
-import "swiper/css";
-import "swiper/css/navigation";
-
-import "./Slider.css";
+import { Navigation } from "swiper";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 // import required modules
-import { Navigation } from "swiper";
-import Banner1 from "@images/Banner/homepage-banner-1.png";
-import Banner2 from "@images/Banner/homepage-banner-2.png";
-import Banner3 from "@images/Banner/homepage-banner-3.png";
+import Banner1 from "@images/Banner/homepage-banner-1.jpg";
+import Banner2 from "@images/Banner/homepage-banner-2.jpg";
+import Banner3 from "@images/Banner/homepage-banner-3.jpg";
+import mobileBanner1 from "@images/Banner/mobile-banner-1.jpg";
+import mobileBanner2 from "@images/Banner/mobile-banner-2.jpg";
+import mobileBanner3 from "@images/Banner/mobile-banner-3.jpg";
+import "swiper/css";
+import "swiper/css/navigation";
+import "./Slider.css";
+
 const Slider = () => {
-    const banners = [Banner1, Banner2, Banner3];
+    const banners = [
+        { desktop: Banner1, mobile: mobileBanner1 },
+        { desktop: Banner2, mobile: mobileBanner2 },
+        { desktop: Banner3, mobile: mobileBanner3 },
+    ];
     return (
         <>
             <div className="banner-slider-section">
@@ -23,9 +29,32 @@ const Slider = () => {
                 >
                     {banners.map((banner, index) => (
                         <SwiperSlide key={index}>
-                            <ProgressiveImage src={banner} placeholder={banner}>
-                                {(src) => <img src={src} alt={"Banner"} />}
-                            </ProgressiveImage>
+                            <>
+                                {/* <ProgressiveImage
+                                    className="d-md-block d-none"
+                                    src={banner.desktop}
+                                    placeholder={banner.desktop}
+                                >
+                                    {(src) => <img src={src} alt={"Banner"} />}
+                                </ProgressiveImage>
+                                <ProgressiveImage
+                                    className="d-md-none d-block"
+                                    src={banner.mobile}
+                                    placeholder={banner.mobile}
+                                >
+                                    {(src) => <img src={src} alt={"Banner"} />}
+                                </ProgressiveImage> */}
+                                <LazyLoadImage
+                                    className="d-md-block d-none"
+                                    src={banner.desktop}
+                                    alt={"Banner"}
+                                />
+                                <LazyLoadImage
+                                    className="d-md-none d-block"
+                                    src={banner.mobile}
+                                    alt={"Banner"}
+                                />
+                            </>
                         </SwiperSlide>
                     ))}
                 </Swiper>

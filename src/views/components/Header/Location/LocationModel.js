@@ -12,7 +12,7 @@ import "./LocationModel.css";
 function UpdateStateModel({ isOpen = false, handleClose }) {
     const states = useSelector((state) => state.states.states);
     const isLoading = useSelector((state) => state.states.isLoading);
-    const [state, setState] = useState("Ship outside the US");
+    const [state, setState] = useState("Set Delivery Address");
     const [zipCode, setZipCode] = useState("");
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -62,14 +62,6 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
 
                 {isAuthenticated ? (
                     <>
-                        <div className="location-button-box-signin">
-                            <button className="login-button-box-location-button">
-                                Sign in to see your address
-                            </button>
-                        </div>
-                        <div className="hrozantel-hr-location-model">
-                            <h5 className="h5-model-box-loction">or</h5>
-                        </div>
                         <div className="row">
                             <div className="col-md-8">
                                 <input
