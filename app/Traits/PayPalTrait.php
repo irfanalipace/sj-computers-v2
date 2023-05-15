@@ -24,7 +24,7 @@ trait PayPalTrait {
         $data['total'] = Cart::session($userId)->getSubTotal();
 
         $response = $provider->setExpressCheckout($data);
-        $response = $provider->setExpressCheckout($data, true);
+
         return $response;
     } catch(Exception $e) {
 
