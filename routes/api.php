@@ -36,8 +36,6 @@ use Illuminate\Support\Facades\Auth;
  * Auth Apis
  */
 
-Auth::routes(['verify' => true]);
-
 Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
 
 Route::post('register', [AuthController::class, 'registerUser']);
@@ -101,7 +99,7 @@ Route::get('success-transaction/{id}', [PaypalController::class, 'successTransac
 
 Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
-Route::middleware(['auth:api'])->group(function () {
+Route::middleware(['auth:api', 'verified'])->group(function () {
 
     //Route::post('user-details', UserDetailController::class)->name('user-details');
 
