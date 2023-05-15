@@ -64,14 +64,33 @@
 
 // export default MobileSearch;
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useCollapse } from "react-collapsed";
 import "./MobileSearch.css";
 import MobileScreenModel from "./MobileScreenModel/MobileScreenModel";
 import mobileheaderlogo from "@images/header-logo.png";
 import ModelBox from "./MobileScreenModel/ModelBox";
+import { searchProducts } from "@store/products/productsThunks";
+import { CLEAR_SEARCH } from "@store/products/productsSlice";
+import { Link } from "react-router-dom";
 const MobileSearch = () => {
+    //search state here
+    const [search, setSearch] = useState("");
+    const { getCollapseProps, getToggleProps, isOpen } = useCollapse();
+
+    const [searchValue, setSearchValue] = useState("");
+    const [showSearchBar, setShowSearchBar] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const searchString = useSelector((state) => state.products.searchString);
+    const dispatch = useDispatch();
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (search.length > 0) dispatch(searchProducts(search, 1));
+        else dispatch(CLEAR_SEARCH());
+    };
+    //above search code
 
     const handleButtonClick = () => {
         setShowModal(true);
@@ -80,10 +99,6 @@ const MobileSearch = () => {
     const closeModal = () => {
         setShowModal(false);
     };
-    const { getCollapseProps, getToggleProps, isOpen } = useCollapse();
-
-    const [searchValue, setSearchValue] = useState("");
-    const [showSearchBar, setShowSearchBar] = useState(false);
 
     const handleInputChange = (event) => {
         setSearchValue(event.target.value);
@@ -101,11 +116,13 @@ const MobileSearch = () => {
         <div>
             <Container className="search-dev">
                 <>
+                    <Link to='/'>
                     <Image
                         src={mobileheaderlogo}
                         alt="Left Image"
                         className="mobile-imagelogo"
                     />
+                    </Link>
                 </>
                 <RightContent>
                     <SearchIconContainer {...getToggleProps()}>
@@ -121,13 +138,15 @@ const MobileSearch = () => {
             </Container>
 
             <CollapseContainer {...getCollapseProps()}>
-                <div className="search-hide-section-body">
-                    <SearchBar>
+            <form onSubmit={handleSearch}>
+            <div className="search-hide-section-body">
+                    <SearchBar >
                         <Input
                             className="search-section"
-                            value={searchValue}
                             type="text"
                             placeholder="Search"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
                         />
                         <span
                             className="input-group-text red lighten-3 search-icon-on-mobile-screen"
@@ -136,10 +155,12 @@ const MobileSearch = () => {
                             <i
                                 className="fas fa-search text-grey set"
                                 aria-hidden="true"
+                                onClick={handleSearch}
                             ></i>
                         </span>
                     </SearchBar>
                 </div>
+            </form>
             </CollapseContainer>
 
             <div className="mobile-box-model">

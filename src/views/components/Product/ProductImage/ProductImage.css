@@ -43,12 +43,18 @@
 }
 
 @media screen and (max-width: 766px) {
-    .image-container {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+   .image-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+}.horizontal-box {
+    display: flex !important;
+    align-items: center;
+    flex-direction: initial !important;
+}.horizontal-box .image-wrapper {
+    margin-left: 4px;
+}
 }
 @media screen and (max-width: 600px) {
     .image-screen {
