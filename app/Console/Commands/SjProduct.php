@@ -77,7 +77,7 @@ class SjProduct extends Command
 
         $products = json_decode($response, true);
 
-``        foreach ($products as $key => $product) {
+        foreach ($products as $key => $product) {
 
 
             if(empty($product['Images'])){
