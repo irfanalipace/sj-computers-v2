@@ -23,6 +23,7 @@ const Checkout = React.lazy(() => import("@pages/Checkout/Checkout"));
 const Test = React.lazy(() => import("@pages/Test/Test"));
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import Contact from "@components/Footer/FooterMenu/Contact";
+import Policy from "@pages/Policy/Policy";
 
 export const Router = () => {
     const routes = [
@@ -165,6 +166,15 @@ export const Router = () => {
                         <Checkout />
                     </Suspense>
                 </ProtectedRoute>
+            ),
+        },     {
+            path: "/policy-page",
+            element: (
+               
+                    <Suspense fallback={<Loader />}>
+                       <Policy />
+                    </Suspense>
+               
             ),
         },
         {
