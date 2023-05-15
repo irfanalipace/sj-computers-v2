@@ -76,13 +76,22 @@ class ProductController extends BaseController
          * for filters
          */
 
-        $key = $request->get('key') ?? '';
-        $value = $request->get('value') ?? '';
+        if(isset($request->filter)  && !empty($request->filter)){
 
-        if(!empty($key) && !empty($value)){
-            $productIds =  ProductInfo::where(['key' => $key, 'value' => $value])->pluck('product_id')->toArray();
 
-            $sql = $sql->whereIn('id',$productIds);
+            $filters = $request->filter;
+
+            foreach ($filters as $filter) {
+                $key = $filter['key'] ?? '';
+                $value = $filter['value'] ?? '';
+
+                if(!empty($key) && !empty($value)){
+                    $productIds =  ProductInfo::where(['key' => $key, 'value' => $value])->pluck('product_id')->toArray();
+
+                    $sql = $sql->whereIn('id',$productIds);
+                }
+            }
+
         }
 
         /*
