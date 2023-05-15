@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     shippingDetails: {},
     ordergDetails: {},
+    successOrders: [],
+    cancelOrders: [],
     settingAdress: false,
     apiError: false,
     isLoading: false,
@@ -28,9 +30,14 @@ const ordersSlice = createSlice({
             state.settingAdress = false;
         },
         SET_ORDER_DETAILS: (state, action) => {
-            state.ordergDetails = { ...action.payload };
+            const { success_orders, cancel_orders } = action.payload;
+            console.log(success_orders.data, cancel_orders, "just before update state")
+            state.ordergDetails = action.payload;
+            state.successOrders = success_orders.data;
+            state.cancelOrders = cancel_orders.data;
             state.isLoading = false;
         },
+        
         PLACING_ORDER: (state) => {
             state.placingOrder = true;
         },

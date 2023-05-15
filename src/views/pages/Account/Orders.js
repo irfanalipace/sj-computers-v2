@@ -15,11 +15,12 @@ import OrderInvoiceCard from "../../components/OrderPage/OrderInvoiceCard";
 import userDefault from "@images/common/user-default-avatar.png";
 import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 
 import { FaSearch } from "react-icons/fa";
 import "./Account.css";
 import { Select } from "@mantine/core";
-// import "react-datepicker/dist/react-datepicker.css";
+
 const dummyDataForOrders = [
     {
         orderPlacedDate: "April 17,2024",
@@ -47,18 +48,18 @@ const dummyDataForOrders = [
     },
 ];
 const dummyDataForCancelledOrders = [
-    {
-        orderPlacedDate: "April 17,2024",
-        TotalAmount: "$150",
-        orderID: "123456-878901234",
-        orderStatus: "Arriving",
-        earlyDeliveryDate: "April 20",
-        lateDeliveryDate: "May 8",
-        productImageUrl:
-            "https://images.philips.com/is/image/PhilipsConsumer/223V7QSB_00-RTP-global-001?$jpglarge$&wid=960",
-        productDescription:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the .",
-    },
+    // {
+    //     orderPlacedDate: "April 17,2024",
+    //     TotalAmount: "$150",
+    //     orderID: "123456-878901234",
+    //     orderStatus: "Arriving",
+    //     earlyDeliveryDate: "April 20",
+    //     lateDeliveryDate: "May 8",
+    //     productImageUrl:
+    //         "https://images.philips.com/is/image/PhilipsConsumer/223V7QSB_00-RTP-global-001?$jpglarge$&wid=960",
+    //     productDescription:
+    //         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the .",
+    // },
 ];
 
 const dummyInvoice = {
@@ -89,36 +90,42 @@ const OrderPage = () => {
     const [name, setName] = useState("");
     const [orderSearch, setOrderSearch] = useState("");
     const [selectedValue, setSelectedValue] = useState("2 month");
+    const [activeTab, setActiveTab] = useState(0);
+
+   
+
+    const user = useSelector((state) => state.auth.user);
+    const apiError = useSelector((state) => state.auth.apiError);
+    const isLoading = useSelector((state) => state.orders.isLoading);
+    const cancelOrders = useSelector((state) => state.orders.cancelOrders);
+    const successOrders = useSelector((state) => state.orders.successOrders);
 
     const handleDropdownChange = (value) => {
         setSelectedValue(value);
     };
 
     const dispatch = useDispatch();
-
-    const user = useSelector((state) => state.auth.user);
-    const apiError = useSelector((state) => state.auth.apiError);
-    const isLoading = useSelector((state) => state.auth.isLoading);
-
+    
     useEffect(() => {
         console.log(user, "user details");
         setName(user.name);
-        //  setImageUrl(user.profile_pic);
+       
+      
     }, [user]);
-
+    
     useEffect(() => {
-        dispatch(getOrderDetails());
-
+      
         return function () {
             dispatch(CLEAR_API_ERRORS());
         };
     }, []);
-
-    // const handleDeleteImage = () => {
-    //     setSelectedFile(null);
-    //     setImageUrl(null);
-    // };
-    const [activeTab, setActiveTab] = useState(0);
+    useEffect(() => {
+      
+         dispatch(getOrderDetails());
+      
+      }, [dispatch]);
+    
+        
 
     const handleTabChange = (event, newValue) => {
         setActiveTab(newValue);
@@ -127,16 +134,35 @@ const OrderPage = () => {
         console.log(event, "handle search");
         setOrderSearch("");
     };
+  
 
     const renderTabContent = () => {
-        if (activeTab === 0) {
-            return <OrderCard data={dummyDataForOrders} />;
-        } else if (activeTab === 1) {
-            return <OrderCard data={dummyDataForCancelledOrders} />;
-        }
+        if (isLoading) {
+            return <LoaderComponent />;
+          }
+        return activeTab === 0 ? (
+            successOrders.length === 0 ? (
+              <div className="flex justify-center items-center">
+                <p>No products placed.</p>
+              </div>
+            ) : (
+                <>
+                {/* {Object.Keys(orderDetails).length === 0 ? "data have" : "no data"} */}
+              <OrderCard data={successOrders} />
+                </>
+            )
+          ) : activeTab === 1 ? (
+            cancelOrders.length === 0 ? (
+              <div className="flex justify-center items-center">
+                <p>No cancelled orders.</p>
+              </div>
+            ) : (
+              <OrderCard data={cancelOrders} />
+            )
+          ) : null;
     };
     return (
-        <div className="account-page">
+        <div className="account-page order-page">
             <div className="container-xl">
                 <Breadcrumb />
                 <div className="row mx-0">
@@ -186,7 +212,7 @@ const OrderPage = () => {
                 </div>
 
                 <div className="row order-list-container">
-                    <div className="col-sm-6 col-md-8 col-8 px-0">
+                    <div className="col-sm-6 col-md-9 col-9 px-0">
                         <Box sx={{ flexGrow: 1 }}>
                             <CustomTabs
                                 value={activeTab}
@@ -206,8 +232,8 @@ const OrderPage = () => {
                                 <p className="orderType">
                                     {}{" "}
                                     {activeTab === 0
-                                        ? `${dummyDataForOrders.length} orders`
-                                        : `${dummyDataForCancelledOrders.length} cancelled order`}{" "}
+                                        ? `${successOrders.length} orders`
+                                        : `${cancelOrders.length} cancelled order`}{" "}
                                     place in
                                 </p>
                                 <div style={{ display: "inline-flex" }}>
@@ -254,10 +280,10 @@ const OrderPage = () => {
                         </Box>
                     </div>
                     <div
-                        style={{ marginTop: "15%" }}
-                        className="col-sm-6 col-md-4 col-4"
+                        style={{ marginTop: '15%', marginBottom: '5%' }}
+                        className="col-sm-12 col-md-3 col-3"
                     >
-                        <OrderInvoiceCard data={dummyInvoice} />
+                        <OrderInvoiceCard activeTab={activeTab} data={dummyInvoice} />
                     </div>
                 </div>
             </div>

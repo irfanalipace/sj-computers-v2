@@ -18,11 +18,12 @@ export default function ProductsGrid() {
 
     const handleClick = () => {
         dispatch(fetchProducts(currentPage));
+       
     };
 
     useEffect(() => {
         if (products.length === 0) dispatch(fetchProducts());
-
+        console.log(products, "products")
         return () => {
             dispatch(CLEAR_PRODUCTS());
         };

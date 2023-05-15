@@ -1,63 +1,106 @@
 import { Card, Text } from "@mantine/core";
+import Button from "@common/Button/Button";
+import { Link } from "react-router-dom";
+
 import './OrderInvoiceCard.css'
+const buttonStyles = {
+    fontWeight: 600,
+    fontSize: 12,
+    height: 36,
+    maxWidth: '95%',
+    background: '#38c056',
+    color: 'white',
+    border: 'none',
+    borderRadius: 8,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
 
-const OrderInvoiceCard = ({ data }) => {
+
+const OrderInvoiceCard = ({ data ,activeTab }) => {
+    console.log(activeTab, "avtive tab")
   return (
-    <div className="order-invoice-card">
-      <Card className="order-invoice-card__card">
-        <div className="order-invoice-card__header">
-          <button className="order-invoice-card__button">Order Invoice</button>
+    <div className="summary-card">
+    <div className="summary-wrapper">
+        <div className="summary-btn">
+        <Button
+        style={buttonStyles}
+            // clickHandler={(e) => handleClick(e, true, id)}
+             className={"form-button"}
+            // isLoading={isLoading}
+        >
+           {activeTab === 0 ? "Order Invoice" : activeTab === 1 ?  "Cancelled Order Invoice" : null}
+        </Button>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and
+                typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s,
+            </p>
         </div>
-
-        <Text className="order-invoice-card__description">
-          {data?.description}
-        </Text>
-        <hr />
-        <div className="order-invoice-card__details">
-          <div className="order-invoice-card__detail-row">
-            <Text>Item:</Text>
-            <Text>{data?.productName}</Text>
-          </div>
-          <div className="order-invoice-card__detail-row">
-            <Text>Price</Text>
-            <Text>{data?.price}</Text>
-          </div>
-          <div className="order-invoice-card__detail-row">
-            <Text>Shipping & handling</Text>
-            <Text>{data?.shipping}</Text>
-          </div>
-          <div className="order-invoice-card__detail-row">
-            <Text>Total Before Tax</Text>
-            <Text>{data?.beforeTax}</Text>
-          </div>
-          <div className="order-invoice-card__detail-row">
-            <Text>Estimated tax to be calculated</Text>
-            <Text>{data?.estTax}</Text>
-          </div>
+        <div className="summary-details">
+            <ul>
+                <li>
+                    <span>Items:</span>
+                    <span>({2})</span>
+                </li>
+                <li>
+                    <span>Price:</span>
+                    <span>
+                        <strong>
+                            {true
+                                ? "$" + 599
+                                : "$0"}
+                            {/* {shippingDetails?.sub_total
+                                ? "$" + shippingDetails.sub_total
+                                : "$0"} */}
+                        </strong>
+                    </span>
+                </li>
+                <li>
+                    <span>Shipping & handling:</span>
+                    <span>
+                        {true
+                            ? "$" +
+                              100
+                            : "$0"}
+                        {/* {shippingDetails?.shipment_info?.amount
+                            ? "$" +
+                              shippingDetails?.shipment_info?.amount
+                            : "$0"} */}
+                    </span>
+                </li>
+                <li>
+                    <span>Total before tax:</span>
+                    <span>--</span>
+                </li>
+                <li>
+                    <span>Estimated tax to be calculated:</span>
+                    <span>--</span>
+                </li>
+            </ul>
         </div>
-        <hr />
-        <div className="order-invoice-card__total-row">
-          <Text className="order-invoice-card__total-label" c="orange" fw={700} fz="lg">
-            Order Total
-          </Text>
-          <Text className="order-invoice-card__total-amount" c="orange" fw={700} fz="lg">
-            {data?.orderTotal}
-          </Text>
+        <div className="order-total">
+            <ul>
+                <li>
+                    <span>
+                        <strong>Order Total</strong>
+                    </span>
+                    <span>
+                        <strong>${599}</strong>
+                    </span>
+                </li>
+            </ul>
         </div>
-        <hr className="order-invoice-card__divider" />
-        <div className="order-invoice-card__footer">
-          <Text
-            fz="md"
-            className="order-invoice-card__footer-link"
-            onClick={() => {
-              console.log("I am clickable");
-            }}
-          >
-            How shipping cost calculates?
-          </Text>
-        </div>
-      </Card>
     </div>
+    <div className="summary-footer">
+        <p>
+            You can track your shipment and view any applicable import
+            fees deposit before placing your order.
+        </p>
+        <Link to={"#"}>How shipping costs calculates?</Link>
+    </div>
+</div>
   );
 };
 

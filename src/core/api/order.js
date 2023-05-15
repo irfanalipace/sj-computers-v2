@@ -13,7 +13,7 @@ export function getOrderDetailsApi() {
             .then((response) => {
                 console.log(
                     "file: order.js | getOrderDetailsApi| response",
-                    response
+                    response.data
                 );
                 resolve(response.data);
             })
