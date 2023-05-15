@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserStateController;
 use App\Http\Controllers\Api\Order\OrderController;
 use App\Http\Controllers\Api\ContactUs\ContactUsController;
+use Illuminate\Support\Facades\Auth;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -34,6 +35,8 @@ use App\Http\Controllers\Api\ContactUs\ContactUsController;
 /*
  * Auth Apis
  */
+
+Auth::routes(['verify' => true]);
 
 Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
 
