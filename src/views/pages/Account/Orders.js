@@ -9,6 +9,7 @@ import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import { getOrderDetails } from "@store/orders/ordersThunk";
 import Button from "@common/Button/Button";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
+import { OrderSearchApi} from "../../../core/api/order"
 import OrderCard from "../../components/OrderPage/OrderProducts";
 import OrderInvoiceCard from "../../components/OrderPage/OrderInvoiceCard";
 
@@ -130,8 +131,9 @@ const OrderPage = () => {
     const handleTabChange = (event, newValue) => {
         setActiveTab(newValue);
     };
-    const handleSearch = (event) => {
-        console.log(event, "handle search");
+    const handleSearch = async () => {
+        const responseSearch= await OrderSearchApi(orderSearch);
+        console.log(responseSearch.data, "response search");
         setOrderSearch("");
     };
   
@@ -143,7 +145,7 @@ const OrderPage = () => {
         return activeTab === 0 ? (
             successOrders.length === 0 ? (
               <div className="flex justify-center items-center">
-                <p>No products placed.</p>
+                <p>No success orders</p>
               </div>
             ) : (
                 <>
