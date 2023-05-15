@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserStateController;
 use App\Http\Controllers\Api\Order\OrderController;
 use App\Http\Controllers\Api\ContactUs\ContactUsController;
+use Illuminate\Support\Facades\Auth;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -34,6 +35,8 @@ use App\Http\Controllers\Api\ContactUs\ContactUsController;
 /*
  * Auth Apis
  */
+
+Auth::routes(['verify' => true]);
 
 Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
 
@@ -55,9 +58,13 @@ Route::get('states', [StateController::class, 'getList'])->name('states');
 
 Route::get('categories', [CategoryController::class, 'getList'])->name('categories');
 
+Route::get('category-product', [CategoryController::class, 'getCategoryProduct'])->name('getCategoryProduct');
+
 Route::get('brands', [BrandController::class, 'getList'])->name('brands');
 
 Route::get('products', [ProductController::class, 'getList'])->name('products');
+
+Route::get('products-filter-list', [ProductController::class, 'getProductFilterList'])->name('getProductFilterList');
 
 Route::get('search-product', [ProductController::class, 'searchProduct'])->name('searchProduct');
 

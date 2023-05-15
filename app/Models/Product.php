@@ -20,6 +20,10 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    public function categories(){
+        return $this->belongsToMany(Category::class,'category_product')->paginate(12);
+    }
+
     public function getInStockAttribute(){
         if($this->quantity > 0){
             return true;

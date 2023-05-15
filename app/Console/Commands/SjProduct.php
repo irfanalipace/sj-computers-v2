@@ -98,7 +98,6 @@ class SjProduct extends Command
                 'description'  => $product['AmazonDescription'],
                 'amazon_id'  => $product['ID'],
 //                'others'  => $product['JSON'],
-
             ];
 
             $product = Product::updateOrCreate(['asin' => $product['ASIN']],$data);

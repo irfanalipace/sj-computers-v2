@@ -26,6 +26,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 
 use Cart;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends BaseController
 {
@@ -34,10 +36,10 @@ class AuthController extends BaseController
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
-            return $this->sendError(['email' => [ 'Invalid Email.']], 404);
+            return $this->sendError(['email' => ['Invalid Email.']], 404);
         }
 
-        if(empty($user->email_verified_at)){
+        if (empty($user->email_verified_at)) {
             return $this->sendError(['email_verification' => ['Verify the email for further process.']], 401);
         }
 
@@ -46,12 +48,22 @@ class AuthController extends BaseController
 
     public function registerUser(RegisterUserRequest $request): JsonResponse
     {
-        User::create(
-            array_merge($request->only('name', 'email'),
-                ['role_id' => User::USER_ROLE_ID,'password' => bcrypt($request->password)]
-            ))->sendEmailVerificationNotification();
+        try {
+            DB::transaction(function () use ($request) {
+                User::create(
+                    array_merge(
+                        $request->only('name', 'email'),
+                        ['role_id' => User::USER_ROLE_ID, 'password' => bcrypt($request->password)]
+                    )
+                )->sendEmailVerificationNotification();
+            });
 
-        return $this->sendResponse([], 'User register successfully, Kindly verify the email for further process.');
+            return $this->sendResponse([], 'User register successfully, Kindly verify the email for further process.');
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError(['Email_exist' => 'Something went wrong.' . $e]);
+        }
     }
 
     public function login(LoginRequest $request): JsonResponse
@@ -69,15 +81,16 @@ class AuthController extends BaseController
         $otp->code = $otpCode;
         $otp->save();
 
-//        Cache::put('login_otp_'.$user->id, $otp, now()->addMinutes(5));
+        //        Cache::put('login_otp_'.$user->id, $otp, now()->addMinutes(5));
         Mail::to($user->email)->send(new LoginOtpMail($otp));
 
         $token = $user->createToken(User::AUTH_TOKEN)->accessToken;
 
-        return $this->sendResponse(['access_token' => $token , 'user' => $user->name, 'email' => $user->email,'profile_pic' => $user->profile_pic], 'OTP sent to your email address.');
+        return $this->sendResponse(['access_token' => $token, 'user' => $user->name, 'email' => $user->email, 'profile_pic' => $user->profile_pic], 'OTP sent to your email address.');
     }
 
-    public function setCart($userId){
+    public function setCart($userId)
+    {
 
         \Cart::session(StatusEnum::DUMMY)->getContent()->each(function ($item) use (&$userId) {
             \Cart::session($userId)->add(array(
@@ -123,7 +136,6 @@ class AuthController extends BaseController
             return $this->sendResponse([], 'User logged out successfully.');
         }
         return $this->sendError(['error' => ['Invalid operation.']]);
-
     }
 
     public function verifyOtp(VerifyOtpRequest $request)
@@ -141,28 +153,28 @@ class AuthController extends BaseController
 
         $this->setCart(auth()->user()->id);
 
-        return $this->sendResponse(auth()->user()->only(['name','profile_pic','email']), 'OTP Verified Successfully.');
+        return $this->sendResponse(auth()->user()->only(['name', 'profile_pic', 'email']), 'OTP Verified Successfully.');
 
 
-//        $otpTried = Otp::where('user_id', $request->user_id);
-//        if ($otp != $data) {
-//            $otpTried->increment('tried');
-//
-//            if ($otpTried->value('tried') >= 3) {
-//                $otpTried->update([
-//                    'updated_at' => Carbon::now()->addMinutes(2),
-//                    'tried' => 0,
-//                    'resend_code_limit' => DB::raw('resend_code_limit + 1'),
-//                ]);
-//                return $this->sendError('Too many attempts. Please try again in 2 minutes.');
-//            }
-//            return $this->sendError('Invalid OTP', 422);
-//        }
+        //        $otpTried = Otp::where('user_id', $request->user_id);
+        //        if ($otp != $data) {
+        //            $otpTried->increment('tried');
+        //
+        //            if ($otpTried->value('tried') >= 3) {
+        //                $otpTried->update([
+        //                    'updated_at' => Carbon::now()->addMinutes(2),
+        //                    'tried' => 0,
+        //                    'resend_code_limit' => DB::raw('resend_code_limit + 1'),
+        //                ]);
+        //                return $this->sendError('Too many attempts. Please try again in 2 minutes.');
+        //            }
+        //            return $this->sendError('Invalid OTP', 422);
+        //        }
 
-//        if ($data = true) {
-//            User::where('id', '=', $request->user_id)->update(['otp_verified' => 1]);
-//            $otpTried->update(['tried' => 0,'resend_code_limit' => 0]);
-//        }
+        //        if ($data = true) {
+        //            User::where('id', '=', $request->user_id)->update(['otp_verified' => 1]);
+        //            $otpTried->update(['tried' => 0,'resend_code_limit' => 0]);
+        //        }
     }
 
     public function updateProfile(UpdateProfileRequest $request)
@@ -179,5 +191,4 @@ class AuthController extends BaseController
 
         return $this->sendResponse([], 'Profile Updated Successfully.');
     }
-
 }
