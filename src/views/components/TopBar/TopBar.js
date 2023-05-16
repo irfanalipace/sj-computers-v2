@@ -11,6 +11,29 @@ export default function TopBar() {
         return setSideMenu((state) => !state);
     };
 
+    const categories = [
+        {
+            id: 1,
+            name: "BTO",
+            slug: "bto",
+        },
+        {
+            id: 2,
+            name: "Laptops",
+            slug: "laptops",
+        },
+        {
+            id: 3,
+            name: "Desktop",
+            slug: "desktop",
+        },
+        {
+            id: 4,
+            name: "Monitor",
+            slug: "monitor",
+        },
+    ];
+
     return (
         <>
             <header className="topBar px-3">
@@ -38,53 +61,20 @@ export default function TopBar() {
                         </span>
 
                         <ul className="text-decoration-none ullist">
-                            <li className="listitem">
-                                <Link
-                                    to="/"
-                                    className="text-decoration-none text-color hover-effect-sets-topbar"
-                                >
-                                    Today's Deal
-                                </Link>
-                            </li>
-                            <li className="listitem">
-                                <Link
-                                    to="/"
-                                    className="text-decoration-none text-color hover-effect-sets-topbar"
-                                >
-                                    Laptop
-                                </Link>
-                            </li>
-                            <li className="listitem">
-                                <Link
-                                    to="/"
-                                    className="text-decoration-none text-color hover-effect-sets-topbar"
-                                >
-                                    Desktop
-                                </Link>
-                            </li>
-                            <li className="listitem">
-                                <Link
-                                    to="/"
-                                    className="text-decoration-none text-color hover-effect-sets-topbar"
-                                >
-                                    Monitors
-                                </Link>
-                            </li>
-                            <li className="listitem">
-                                <Link
-                                    to="/"
-                                    className="text-decoration-none text-color hover-effect-sets-topbar"
-                                >
-                                    BTO
-                                </Link>
-                            </li>
-                          
+                            {categories.map((category) => (
+                                <li key={category.id} className="listitem">
+                                    <Link
+                                        to={`category/${category.slug}`}
+                                        className="text-decoration-none text-color hover-effect-sets-topbar"
+                                    >
+                                        {category.name}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
-                      
                     </div>
-
                 </div>
-             {/* <div className="get-top-deals">
+                {/* <div className="get-top-deals">
              <ul>
                     <li className="listit">
                                 <Link
