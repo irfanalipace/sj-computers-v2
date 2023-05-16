@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnsToProductsTable extends Migration
+class CreateSystemPagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddColumnsToProductsTable extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->string('amazon_id')->nullable();
+        Schema::create('system_pages', function (Blueprint $table) {
+            $table->id();
+            $table->string('key');
+            $table->longText('value');
+            $table->timestamps();
         });
     }
 
@@ -25,9 +28,6 @@ class AddColumnsToProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            //
-            $table->dropColumn('amazon_id');
-        });
+        Schema::dropIfExists('system_pages');
     }
 }

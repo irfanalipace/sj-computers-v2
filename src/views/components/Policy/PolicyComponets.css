@@ -5,11 +5,10 @@
     margin: 0;
     padding: 0;
     justify-content: center;
-    margin-left: 171px;
+  
 }
 li.policy-listitem {
-    /* color: antiquewhite; */
-    margin-left: 27px;
+    margin-left: 30px;
 }.policy-background-color{
     background: #002549;
 }
@@ -29,7 +28,7 @@ color: #FFFFFF;
   
     width: 245px;
     height: 207px;
- 
+    max-width: 100%;
     background: #FFFFFF;
     border-radius: 15px 15px 0px 0px;
 }
@@ -54,8 +53,7 @@ color: #333333;
     border: none;
     width: 226px;
     height: 33px;
-    /* left: 172px; */
-    /* top: 378px; */
+max-width: 100%;
     background: #38C056;
     border-radius: 8px;
     font-family: 'Inter';
@@ -75,8 +73,8 @@ color: #333333;
     color: #FFFFFF;
     margin-left: 5px;
 }
-.cart-dev-policy-section{
-    padding-top: 52px;
+.cart-dev-policy-section {
+    padding-top: 26px;
 }
 
 .policy-item-data li {
@@ -99,8 +97,9 @@ color: #333333;
     /* line-height: 109%; */
     color: #FFFFFF;
 }
-.policyset-container-dev{
+.policyset-container-dev {
     padding-top: 33px;
+    margin-left: 120px;
 }
 .conditional-granti {
     color: white;
@@ -108,10 +107,17 @@ color: #333333;
     font-style: normal;
     font-weight: 700;
     font-size: 12px;
+}    .card-policy-coponents img {
+  
+    max-width: 100%;
+
+}.text-dev-section-dev{
+    margin-left: -22px;
 }
-.conditional-granti-text{
-color: white;
-font-size: 12px;
+.conditional-granti-text {
+    color: white;
+    font-size: 12px;
+    line-height: 17px;
 }
 .policy-items-cart-sction2-dev {
     color: white;
@@ -126,4 +132,144 @@ font-size: 12px;
 .line-height-dev-ul {
     line-height: 17px;
     text-decoration: underline;
+}
+.topBar-inner-policy {
+    width: 1182px;
+    padding-top: 19px;
+    display: flex;
+    justify-content: right;
+    padding-top: 20px;
+    max-width: 100%;
+}
+.order-button-policy{
+    padding-top: 32px;
+}
+/* @media screen and (max-width:600px) {
+    .policyset-container-dev {
+        padding: 62px;
+        padding-top: 0px;
+        margin-left: 0px;
+    }.cart-dev-policy-section {
+     
+        padding-bottom: 12px;
+    }.card-policy-coponents {
+        width: 450px;
+        max-width: 100%;
+  
+    }.order-button-policy {
+        padding-top: 14px;
+    }.policy-card-order-button{
+        width:372px;
+    }.text-span-policy-dev {
+        padding: 22px;
+    }
+    .card-policy-coponents img {
+        width: 450px;
+        max-width: 100%;
+  
+    }.margin-text-policy-text{
+        margin-left: 33px;
+    }.policy-menu-item-list {
+        display: flex;
+        flex-wrap: wrap;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        justify-content: left;
+    }
+    
+    li.policy-listitem {
+        margin-left: 0px !important;
+    }
+    .policy-listitem a {
+
+        font-size: 11px;
+   
+    }
+    .cart-dev-policy-section {
+        padding-top: 19px;
+    }.text-color-all-text {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 144%;
+        color: #333333;
+        margin-top: 8px;
+    }.text-dev-section-dev {
+        margin-left: 0px;
+    }
+    
+} */
+@media screen and (max-width: 680px) {
+   
+.menuBar-policy {
+        display: flex;
+        overflow-x: auto;
+        width: 100%;
+ 
+      }
+      
+      
+      .policy-menu-item-list {
+        display: flex;
+        flex-wrap: nowrap;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+      }
+      
+      .policy-listitem {
+        width: 119px;
+        /* padding: 4px 21px; */
+    }
+      
+      .text-decoration-none {
+        text-decoration: none;
+      } .cart-dev-policy-section {
+        padding-top: 19px;
+    }.text-color-all-text {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 144%;
+        color: #333333;
+        margin-top: 8px;
+    }.text-dev-section-dev {
+        margin-left: 0px;
+    } .policyset-container-dev {
+        padding: 62px;
+        padding-top: 0px;
+        margin-left: 0px;
+    }.cart-dev-policy-section {
+     
+        padding-bottom: 12px;
+    }.card-policy-coponents {
+        width: 450px;
+        max-width: 100%;
+  
+    }.order-button-policy {
+        padding-top: 14px;
+    }.policy-card-order-button{
+        width:372px;
+    }.text-span-policy-dev {
+        padding: 22px;
+    }
+    .card-policy-coponents img {
+        width: 450px;
+        max-width: 100%;
+  
+    }.margin-text-policy-text{
+        margin-left: 33px;
+    }
+      
+      .text-color {
+        color: #000000;
+      }
+      
+      .hover-effect-sets-topbar:hover {
+        /* Add desired hover effect styles */
+      }
+      
 }

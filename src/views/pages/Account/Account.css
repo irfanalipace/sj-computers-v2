@@ -249,7 +249,7 @@
 .green {
     border-color: green;
 }
-.product-container {
+.account-page .product-container {
     box-sizing: border-box;
     position: inherit;
     width: 100%;

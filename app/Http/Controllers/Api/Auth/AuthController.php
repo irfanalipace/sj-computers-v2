@@ -62,7 +62,7 @@ class AuthController extends BaseController
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
-            return $this->sendError(['Email_exist' => 'Something went wrong.' . $e]);
+            return $this->sendError(['Email' => 'Something went wrong.' . $e]);
         }
     }
 
@@ -150,11 +150,13 @@ class AuthController extends BaseController
         if (empty($data)) {
             return $this->sendError(['otp' => ['Invalid OTP Code,  Try again.']]);
         }
+        //after verify OTP deleting OTP for a user 
+        Otp::where('user_id', '=', auth()->user()->id)
+            ->where('code', $otp)->delete();
 
         $this->setCart(auth()->user()->id);
 
         return $this->sendResponse(auth()->user()->only(['name', 'profile_pic', 'email']), 'OTP Verified Successfully.');
-
 
         //        $otpTried = Otp::where('user_id', $request->user_id);
         //        if ($otp != $data) {

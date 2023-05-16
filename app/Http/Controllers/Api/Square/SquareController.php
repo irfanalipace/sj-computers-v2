@@ -27,13 +27,20 @@ class SquareController extends Controller
     //
     private $squareClient;
     private $userId;
+    private $user;
     public function __construct()
     {
         $this->squareClient = new SquareClient([
             'accessToken' => env('SQUARE_TOKEN'),
             'environment' => Environment::SANDBOX,
         ]);
-        $this->userId = auth('api')->user()->id;
+        $this->user = auth('api')->user();
+
+        if ($this->user) {
+            $this->userId = $this->user->id;
+        } else {
+            $this->userId = StatusEnum::DUMMY;
+        }
 
     }
     // charge process
@@ -49,7 +56,6 @@ class SquareController extends Controller
 
             // Get card Token
             // $cardToken = $this->customerCardToken($request, $customer);
-
             $amount_money = new Money();
             $amount_money->setAmount(Cart::session($this->userId)->getSubTotal());
             $amount_money->setCurrency(StatusEnum::currency);
@@ -87,7 +93,7 @@ class SquareController extends Controller
 
                 $result = $api_response->getResult();
 
-                GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
+                GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId,$this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
 
                 //clear cart after successfull payment
                 Cart::session($this->userId)->clear();

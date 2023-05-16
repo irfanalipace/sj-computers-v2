@@ -19,6 +19,8 @@ To run the project run following commands
 [//]: # "- php artisan voyager:install --with-dummy"
 
 -   php artisan voyager:admin admin@admin.com
+-   php artisan db:seed --class=CategoryProductSeeder
+-   php aritsan db:seed --class=SystemPagesSeeder
 -   php artisan serve
 
 # After Environment change
