@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Systems extends Migration
+class CreateSystemPagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class Systems extends Migration
      */
     public function up()
     {
-        Schema::create('systems', function (Blueprint $table) {
-            $table->id();          
+        Schema::create('system_pages', function (Blueprint $table) {
+            $table->id();
             $table->string('key');
             $table->longText('value');
             $table->timestamps();
@@ -28,6 +28,6 @@ class Systems extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('systems');
+        Schema::dropIfExists('system_pages');
     }
 }
