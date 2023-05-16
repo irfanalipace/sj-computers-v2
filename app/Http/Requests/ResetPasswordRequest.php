@@ -26,7 +26,7 @@ class ResetPasswordRequest extends FormRequest
         return [
             'newPassword' => ['required', 'string', 'min:6', 'max:255'],
             'passwordConfirmation' => ['same:newPassword'],
-            'oldPassword' => ['required', 'string', 'min:8', 'max:255'],
+            'oldPassword' => ['required', 'string', 'min:6', 'max:255'],
         ];
     }
 }
