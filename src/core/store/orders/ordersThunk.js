@@ -12,9 +12,7 @@ import {
     setShippingAddressApi,
     placeOrderApi,
 } from "@api/checkout";
-import {
-    getOrderDetailsApi,
-} from "@api/order";
+import { getOrderDetailsApi } from "@api/order";
 
 import { clearCartLocally } from "@utils/cartHelpers";
 

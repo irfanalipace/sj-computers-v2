@@ -41,14 +41,12 @@ export const SquareForm = ({ hideCloseBtn, hideModal }) => {
                             source_id: token.token,
                         });
 
-                        if (response.data.code === 200) {
+                        if (response.code === 200) {
                             clearCartLocally();
                             dispatch(CLEAR_CART());
                             navigate("/success-transaction");
                         } else {
-                            navigate(
-                                "/checkout?error=" + response.data.message
-                            );
+                            navigate("/checkout?error=" + response.message);
                         }
                     } catch (error) {
                         console.log("error in square api: ", error);

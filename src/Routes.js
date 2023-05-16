@@ -94,7 +94,7 @@ export const Router = () => {
             ),
         },
         {
-            path: "/category/:categoryId",
+            path: "/category/:categorySlug",
             element: (
                 <Suspense fallback={<Loader />}>
                     <Category />
@@ -167,14 +167,13 @@ export const Router = () => {
                     </Suspense>
                 </ProtectedRoute>
             ),
-        },     {
+        },
+        {
             path: "/policy-page",
             element: (
-               
-                    <Suspense fallback={<Loader />}>
-                       <Policy />
-                    </Suspense>
-               
+                <Suspense fallback={<Loader />}>
+                    <Policy />
+                </Suspense>
             ),
         },
         {

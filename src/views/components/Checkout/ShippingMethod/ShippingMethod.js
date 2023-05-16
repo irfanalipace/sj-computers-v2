@@ -40,7 +40,7 @@ const ShippingMehtod = () => {
                 setActiveMethod(e.target.value);
                 dispatch(
                     setCartDetails({
-                        ...response.data.details,
+                        ...response.details,
                     })
                 );
             } catch (error) {

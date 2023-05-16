@@ -8,7 +8,7 @@ export function getShippingAddressApi() {
                     "file: checkout.js | getShippingAddressApi| response",
                     response
                 );
-                resolve(response.data);
+                resolve(response);
             })
             .catch((e) => {
                 console.log("Console Log: : error checkout", e);
@@ -42,7 +42,7 @@ export function setShippingAddressApi({
                     "file: checkout.js | setShippingAddressApi| response",
                     response
                 );
-                resolve(response.data);
+                resolve(response);
             })
             .catch((e) => {
                 console.log("Console Log: : error checkout", e);
@@ -61,7 +61,7 @@ export function placeOrderApi({ paymentMethod }) {
                     "file: checkout.js | placeOrderApi| response",
                     response
                 );
-                resolve(response.data);
+                resolve(response);
             })
             .catch((e) => {
                 console.log("Console Log: : error checkout", e);
@@ -80,7 +80,7 @@ export function applyShipment({ shipment_days }) {
                     "file: checkout.js | applyShipment| response",
                     response
                 );
-                resolve(response.data);
+                resolve(response);
             })
             .catch((e) => {
                 console.log("Console Log: : error checkout", e);

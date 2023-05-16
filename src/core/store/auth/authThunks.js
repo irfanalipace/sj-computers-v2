@@ -37,6 +37,9 @@ import {
     destroyTempKeys,
 } from "@services/jwtService";
 
+import { clearCartLocally } from "@utils/cartHelpers";
+import { CLEAR_CART } from "@store/cart/cartSlice";
+
 import ApiService from "@services/apiService";
 
 export const login = (credentials) => {
@@ -44,16 +47,16 @@ export const login = (credentials) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             const response = await loginApi(credentials);
-            let token = response.data.data.access_token;
-            let name = response.data.data.user;
-            let profile_pic = response.data.data.profile_pic;
+            let token = response.data.access_token;
+            let name = response.data.user;
+            let profile_pic = response.data.profile_pic;
             saveUserName(name);
             saveUserImage(profile_pic);
             saveTempToken(token); // saving token temporarily to only allow user to call the login api
             saveUserPassword(credentials.password); // saving password temporarily to only allow user to re login to resend the otp
             dispatch({
                 type: LOGIN,
-                payload: response.data.data,
+                payload: response.data,
             });
         } catch (error) {
             console.log("Something went wrong in login", error);
@@ -83,6 +86,8 @@ export const logout = () => {
             await logoutApi();
             destroyToken();
             dispatch({ type: LOGOUT });
+            dispatch({ type: CLEAR_CART });
+            clearCartLocally();
             toast.success("Logged out");
         } catch (error) {
             console.log("Something went wrong in logout", error);
@@ -165,8 +170,8 @@ export const updateProfile = (formData) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             let response = await updateProfileApi(formData);
-            dispatch({ type: UPDATE_PROFILE, payload: response.data.data });
-            saveUser(response.data.data);
+            dispatch({ type: UPDATE_PROFILE, payload: response.data });
+            saveUser(response.data);
             toast.success("Profile Updated Successfully");
         } catch (error) {
             console.log("Something went wrong in updateProfile", error);

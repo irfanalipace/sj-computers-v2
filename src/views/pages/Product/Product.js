@@ -30,7 +30,7 @@ export default function Product() {
         } else {
             try {
                 const response = await productDetailsApi(productId);
-                setProduct(response.data.data);
+                setProduct(response.data);
             } catch (error) {}
         }
         setIsLoading(false);
