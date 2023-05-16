@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserStateController;
 use App\Http\Controllers\Api\Order\OrderController;
 use App\Http\Controllers\Api\ContactUs\ContactUsController;
+use App\Http\Controllers\Api\SystemPages\SystemPagesController;
 use Illuminate\Support\Facades\Auth;
 
 //use Illuminate\Support\Facades\Auth;
@@ -76,7 +77,6 @@ Route::get('category-product', [CategoryController::class, 'getCategoryProduct']
 Route::get('filter-products', [ProductController::class, 'getFilterProducts'])->name('getFilterProducts');
 
 
-
 /*
 *Add to Cart
 */
@@ -107,6 +107,8 @@ Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeO
 Route::get('success-transaction/{id}', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 
 Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
+
+Route::get('system-pages/{key?}',[SystemPagesController::class,'getPages'])->name('getPages');
 
 Route::middleware(['auth:api', 'verified'])->group(function () {
 
