@@ -49,7 +49,6 @@ class SquareController extends Controller
 
             // Get card Token
             // $cardToken = $this->customerCardToken($request, $customer);
-
             $amount_money = new Money();
             $amount_money->setAmount(Cart::session($this->userId)->getSubTotal());
             $amount_money->setCurrency(StatusEnum::currency);
