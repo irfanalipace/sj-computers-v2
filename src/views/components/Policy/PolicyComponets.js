@@ -2,14 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import './PolicyComponets.css'
 import policyimage from "@images/Policy/polict-cart-comp.png";
+import Header from "@components/Header/Header";
+
 const PolicyComponets = () => {
     return (
-        <div className="policy-background-color">
+       <div>
+{/* <Header /> */}
+<div className="policy-background-color">
             <div className="row">
-                <div className="col-12">
-                    <header className="topBar px-3">
-                        <div className="topBar-inner-policy" style={{paddingTop:'19px'}}>
-                            <div className="menuBar">
+                <div >
+                    <header className="topBar px-3 policy-header-topbar">
+                        <div className="topBar-inner-policy">
+                            <div className="menuBar-policy" >
                             
 
                                 <ul className="text-decoration-none policy-menu-item-list">
@@ -76,19 +80,19 @@ const PolicyComponets = () => {
                 </div>
             </div>
            <div className="policyset-container-dev">
-           <div className="container">
+           <div className="">
                 
                 
                 <div className="row">
-                    <div className="col-3 text-color-all-text">
+                    <div className="col-lg-3 col-md-6 col-sm-8 text-color-all-text">
                     <span className="privacy-policy-text-dev">Privacy Policy</span>
                     <div className="cart-dev-policy-section">
                     <div className="card-policy-coponents">
                         <img src={policyimage} alt='' />
                       <div className="text-span-policy-dev">
                         <span className='text-color-all-text-span'>  Want to check the status of your order? Go to Your Orders to find tracking information and order details</span>
-                        <div style={{paddingTop:'32px'}}>
-                        <button className="policy-card-order-button">Click</button>
+                        <div className="order-button-policy">
+                        <button className="policy-card-order-button">Order</button>
                         </div>
                       </div>
                      
@@ -96,14 +100,14 @@ const PolicyComponets = () => {
                     </div>
                    
                         </div>
-                    <div className="col-9 text-color-all-text">
+                    <div className="col-lg-8 col-md-10 col-sm-12 text-color-all-text text-dev-section-dev" >
                         <div>
                         <p  className="data-ul-list-itel-paragraph" style={{color:'white'}}>Items shipped from sjcomputers.us, including SJ Computers Warehouse, can be returned within 30 days of delivery, with some exceptions</p>
                             <ul className="policy-item-data">
                               
                        
                             <li>
-                            For more information about returning to third-party sellers. For products purchased from the SJ Computers Global Store, see SJ Computers Returns. For more information on refund timing and amounts (including partial refunds and restocking fees), see Refunds. If you have returned an item to Amazon by mistake or included something not intended for Amazon in a return, see Mistaken Returns. 
+                            For more information about returning to third-party sellers. For products purchased from the SJ Computers Global Store,aken Returns. 
                             </li>
                             <li>
                             For more information about returning. For products purchased from the SJ Computers Global Store, see SJ Computers Returns. For more information on refund timing and amounts (including partial refunds and restocking fees), see Refunds. If you have returned an item to Amazon by mistake or included something not intended for Amazon in a return, see Mistaken Returns. 
@@ -112,7 +116,7 @@ const PolicyComponets = () => {
                           For products purchased from the SJ Computers Global Store, see SJ Computers Returns. For more information on refund timing and amounts (including partial refunds and restocking fees), see Refunds. If you have returned an item to Amazon by mistake or included something not intended for Amazon in a return, see Mistaken Returns. 
                             </li>
                             </ul>
-                            <div>
+                            <div className="margin-text-policy-text">
                                 <span className="conditional-granti">Unconditional Satisfaction Guarantee</span>
                                 <div style={{paddingTop:'12px'}}>
                                     <span className="conditional-granti-text">If you're not completely satisfied with these brands at any time, we are happy to give you a full refund: Buttoned Down Core 10 Moon and Back Obsidian</span>
@@ -127,27 +131,7 @@ const PolicyComponets = () => {
                                     </ul>
                                     </div>
                             </div>
-                            {/* <div className="dialog-box-policy-page" style={{background:'red'}}>
-  <div className="modal" tabindex="-1" role="dialog">
-    <div className="modal-dialog" role="document">
-      <div className="modal-content">
-        <div className="modal-header">
-          <h5 className="modal-title">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div className="modal-body">
-          <p>Modal body text goes here.</p>
-        </div>
-        <div className="modal-footer">
-          <button type="button" className="btn btn-primary">yes</button>
-          <button type="button" className="btn btn-secondary" data-dismiss="modal">no</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> */}
+   
 
                         </div>
                     </div>
@@ -155,6 +139,7 @@ const PolicyComponets = () => {
             </div>
            </div>
         </div>
+       </div>
     );
 };
 
