@@ -2,10 +2,15 @@ import {
     LOADING,
     FETCH_PRODUCTS,
     SEARCH_PRODUCTS,
+    FILTER_PRODUCTS,
     RESET_PAGE,
     API_ERROR,
 } from "@store/products/productsSlice";
-import { productsApi, searchProductsApi } from "@api/products";
+import {
+    productsApi,
+    searchProductsApi,
+    filterProductsApi,
+} from "@api/products";
 
 export const fetchProducts = (page = 1) => {
     return async (dispatch) => {
@@ -23,17 +28,36 @@ export const fetchProducts = (page = 1) => {
     };
 };
 
-export const searchProducts = (name = "", page = 1) => {
+export const searchProducts = (name = "", page = 1, per_page = 12) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            const response = await searchProductsApi(name, page);
+            const response = await searchProductsApi(name, page, per_page);
             if (page === 1) dispatch(RESET_PAGE());
             dispatch({
                 type: SEARCH_PRODUCTS,
                 payload: {
                     data: [...response.data.data],
                     searchString: name,
+                },
+            });
+        } catch (error) {
+            console.log("Something went wrong in products", error);
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
+        }
+    };
+};
+
+export const filterProducts = (filter) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: LOADING, payload: {} });
+            const response = await filterProductsApi(filter);
+            if (filter.page === 1) dispatch(RESET_PAGE());
+            dispatch({
+                type: FILTER_PRODUCTS,
+                payload: {
+                    data: [...response.data.data],
                 },
             });
         } catch (error) {

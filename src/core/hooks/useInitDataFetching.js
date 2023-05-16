@@ -29,6 +29,7 @@ export const useInitDataFetching = () => {
     }, [isAuthenticated]);
 
     useEffect(() => {
+        console.log("11 init");
         dispatch(fetchCategory());
         dispatch(fetchBrands());
 
