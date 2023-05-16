@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     Dropdown,
     DropdownToggle,
@@ -6,11 +6,10 @@ import {
     DropdownItem,
 } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { SET_SEARCH_STRING } from "@store/products/productsSlice";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { searchProducts } from "@store/products/productsThunks";
-import { CLEAR_SEARCH } from "@store/products/productsSlice";
 
 import "./Header.css";
 function Search() {
@@ -36,9 +35,12 @@ function Search() {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        if (search.length > 0) dispatch(searchProducts(search, 1));
-        else dispatch(CLEAR_SEARCH());
+        dispatch(SET_SEARCH_STRING(search));
     };
+
+    useEffect(() => {
+        setSearch(searchString || "");
+    }, [searchString]);
 
     return (
         <form className="input-group search-inputgroup" onSubmit={handleSearch}>

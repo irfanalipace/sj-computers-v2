@@ -31,9 +31,13 @@ export function productDetailsApi(id) {
     });
 }
 
-export function searchProductsApi(name, page = 1) {
+export function searchProductsApi(name, page = 1, per_page = 12) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/search-product?page=${page}`, "", { name })
+        ApiService.get(
+            `/search-product?page=${page}&per_page=${per_page}`,
+            "",
+            { name }
+        )
             .then((response) => {
                 console.log(
                     "file: products.js | searchProductsApi| response",
@@ -43,6 +47,23 @@ export function searchProductsApi(name, page = 1) {
             })
             .catch((e) => {
                 console.log("Console Log: : error searchProductsApi", e);
+                reject(e);
+            });
+    });
+}
+
+export function filterProductsApi(filter) {
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/filter-products`, "", filter)
+            .then((response) => {
+                console.log(
+                    "file: products.js | filterProductsApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error filterProductsApi", e);
                 reject(e);
             });
     });
