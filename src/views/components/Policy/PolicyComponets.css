@@ -1,0 +1,129 @@
+.policy-menu-item-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    margin-left: 171px;
+}
+li.policy-listitem {
+    /* color: antiquewhite; */
+    margin-left: 27px;
+}.policy-background-color{
+    background: #002549;
+}
+.policy-listitem a{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 13px;
+line-height: 18px;
+
+color: #FFFFFF;
+}
+.text-color-all-text{
+    color: white;
+}
+.card-policy-coponents {
+  
+    width: 245px;
+    height: 207px;
+ 
+    background: #FFFFFF;
+    border-radius: 15px 15px 0px 0px;
+}
+.text-color-all-text{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 144%;
+/* or 17px */
+
+
+/* Primary */
+
+color: #333333;
+}
+.text-span-policy-dev{
+    padding: 10px;
+}
+.policy-card-order-button {
+    /* padding-top: 13px; */
+    border: none;
+    width: 226px;
+    height: 33px;
+    /* left: 172px; */
+    /* top: 378px; */
+    background: #38C056;
+    border-radius: 8px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: white;
+    left: 0px !important;
+}
+.privacy-policy-text-dev {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 19px;
+    color: #FFFFFF;
+    margin-left: 5px;
+}
+.cart-dev-policy-section{
+    padding-top: 52px;
+}
+
+.policy-item-data li {
+    line-height: 20px;
+    color: white;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    /* line-height: 109%; */
+    color: #FFFFFF;
+}
+.data-ul-list-itel-paragraph {
+    line-height: 20px;
+    color: white;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    /* line-height: 109%; */
+    color: #FFFFFF;
+}
+.policyset-container-dev{
+    padding-top: 33px;
+}
+.conditional-granti {
+    color: white;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+}
+.conditional-granti-text{
+color: white;
+font-size: 12px;
+}
+.policy-items-cart-sction2-dev {
+    color: white;
+    margin-top: 28px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    /* line-height: 12px !important; */
+    color: #FFFFFF;
+}
+.line-height-dev-ul {
+    line-height: 17px;
+    text-decoration: underline;
+}

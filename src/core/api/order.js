@@ -2,7 +2,6 @@ import ApiService from "@services/apiService";
 
 export function getOrderDetailsApi() {
     return new Promise((resolve, reject) => {
-
         const myParams = {
             month: "1",
             per_page: "1",
@@ -15,7 +14,7 @@ export function getOrderDetailsApi() {
                     "file: order.js | getOrderDetailsApi| response",
                     response.data
                 );
-                resolve(response.data);
+                resolve(response);
             })
             .catch((e) => {
                 console.log("Console Log: : error OrderDetail", e);

@@ -11,7 +11,7 @@ export const fetchStates = () => {
         try {
             dispatch({ type: LOADING, payload: {} });
             const response = await statesApi();
-            dispatch({ type: FETCH_STATES, payload: response.data.data });
+            dispatch({ type: FETCH_STATES, payload: response.data });
         } catch (error) {
             console.log("Something went wrong in states", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
@@ -26,7 +26,7 @@ export const currentState = () => {
             const response = await getCurrentStateApi();
             dispatch({
                 type: UPDATE_STATE,
-                payload: response.data.data?.state,
+                payload: response.data?.state,
             });
         } catch (error) {
             console.log("Something went wrong in states", error);

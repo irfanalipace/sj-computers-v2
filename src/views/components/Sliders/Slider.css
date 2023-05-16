@@ -53,3 +53,9 @@ body {
     color: #ffffff;
     top: var(--swiper-navigation-top-offset, 35%);
 }
+
+@media screen and (max-width: 576px) {
+    .mySwiper {
+        width: 100%;
+    }
+}

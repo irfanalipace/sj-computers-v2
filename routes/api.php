@@ -36,8 +36,6 @@ use Illuminate\Support\Facades\Auth;
  * Auth Apis
  */
 
-Auth::routes(['verify' => true]);
-
 Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
 
 Route::post('register', [AuthController::class, 'registerUser']);
@@ -58,7 +56,6 @@ Route::get('states', [StateController::class, 'getList'])->name('states');
 
 Route::get('categories', [CategoryController::class, 'getList'])->name('categories');
 
-Route::get('category-product', [CategoryController::class, 'getCategoryProduct'])->name('getCategoryProduct');
 
 Route::get('brands', [BrandController::class, 'getList'])->name('brands');
 
@@ -66,9 +63,19 @@ Route::get('products', [ProductController::class, 'getList'])->name('products');
 
 Route::get('products-filter-list', [ProductController::class, 'getProductFilterList'])->name('getProductFilterList');
 
-Route::get('search-product', [ProductController::class, 'searchProduct'])->name('searchProduct');
+
 
 Route::get('product-detail', [ProductController::class, 'getProductDetail'])->name('productDetail');
+
+/*
+ * filters
+ */
+Route::get('search-product', [ProductController::class, 'searchProduct'])->name('searchProduct');
+Route::get('category-product', [CategoryController::class, 'getCategoryProduct'])->name('getCategoryProduct');
+
+Route::get('filter-products', [ProductController::class, 'getFilterProducts'])->name('getFilterProducts');
+
+
 
 /*
 *Add to Cart
@@ -101,7 +108,7 @@ Route::get('success-transaction/{id}', [PaypalController::class, 'successTransac
 
 Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
-Route::middleware(['auth:api'])->group(function () {
+Route::middleware(['auth:api', 'verified'])->group(function () {
 
     //Route::post('user-details', UserDetailController::class)->name('user-details');
 

@@ -24,7 +24,8 @@ class SearchProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string'],
+            'filter' => ['nullable', 'array'],
+            'value' => ['required_if:key,"!==",""', 'string'],
             'per_page' => ['nullable', 'integer'],
         ];
     }
