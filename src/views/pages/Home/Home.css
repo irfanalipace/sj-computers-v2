@@ -25,10 +25,10 @@
 }
 
 .catergory-grid-wrapper {
-    position: absolute;
     width: 100%;
-    /* bottom: -20%; */
     z-index: 2;
+    position: relative;
+    margin-top: -250px;
 }
 
 .products-grid-container {
@@ -38,9 +38,7 @@
 
 @media screen and (max-width: 576px) {
     .catergory-grid-wrapper {
-        /* position: unset; */
-        /* bottom: unset;
-        top: 75%; */
+        margin-top: -50px;
     }
 
     .products-grid-container,

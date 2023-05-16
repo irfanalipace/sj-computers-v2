@@ -24,7 +24,7 @@ export const getShippingDetails = () => {
            
             dispatch({
                 type: SET_SHIPPING_DETAILS,
-                payload: response,
+                payload: response.data,
             });
         } catch (error) {
             console.log("Something went wrong in orders", error);
@@ -43,7 +43,7 @@ export const getOrderDetails = () => {
 
             dispatch({
                 type: SET_ORDER_DETAILS,
-                payload: response,
+                payload: response.data,
             });
             // dispatch(setCancelOrders(cancelOrders.data));
         } catch (error) {
@@ -76,7 +76,7 @@ export const placeOrder = (data, cb) => {
             let response = await placeOrderApi(data);
             clearCartLocally();
 
-            if (typeof cb === "function") cb(response);
+            if (typeof cb === "function") cb(response.data);
             dispatch({ type: ORDER_PLACED, payload: {} });
         } catch (error) {
             console.log("Something went wrong in orders", error);
