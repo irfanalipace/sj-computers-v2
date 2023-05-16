@@ -5,122 +5,135 @@
 </head>
 
 <body>
-    <table border="0" align="center" cellpadding="0" cellspacing="0" width="100%"
-        style="max-width:100%;background:#e9e9e9;padding:50px 0px">
-        <tr>
-            <td>
-                <table border="0" align="center" cellpadding="0" cellspacing="0" width="100%"
-                    style="max-width:600px;background:#ffffff;padding:0px 25px">
-                    <tbody>
-                        <tr>
-                            <td style="margin:0;padding:0">
-                                <br>
-                                <br>
-                                <table border="0" cellpadding="20" cellspacing="0" width="100%"
-                                    style="color:#000000;line-height:150%;text-align:left;font:300 16px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif">
-                                    <tbody>
-                                        <tr>
-                                            <td valign="top" style="font-size:24px;">
-                                                <span style="text-decoration:underline;">Order ID:
-                                                    {{ $data['id'] }}</span>
-                                                {{--                                    <h2 style="display:inline-block;font-family:Arial;font-size:24px;font-weight:bold;margin-top:5px;margin-right:0;margin-bottom:5px;margin-left:0;text-align:left;line-height:100%">(April 25, 2016)</h2> --}}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table align="center" cellspacing="0" cellpadding="6" width="95%"
-                                    style="border:0;color:#000000;line-height:150%;text-align:left;font:300 14px/30px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif;"
-                                    border=".5px">
-                                    <thead>
-                                        <tr style="background:#efefef">
-                                            <th scope="col" width="30%"
-                                                style="text-align:left;border:1px solid #eee">Product</th>
-                                            <th scope="col" width="15%"
-                                                style="text-align:right;border:1px solid #eee">Quantity</th>
-                                            <th scope="col" width="20%"
-                                                style="text-align:right;border:1px solid #eee">Price</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($data['orderItem'] as $item)
-                                            <tr width="100%">
-                                                <td width="30%"
-                                                    style="text-align:left;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0;word-wrap:break-word">
-                                                    {{ $item['product_name'] ?? 0 }}
-                                                </td>
-                                                <td width="15%"
-                                                    style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
-                                                    {{ $item['qty'] ?? 0 }}
-                                                </td>
-                                                <td width="20%"
-                                                    style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
+<table border="0" align="center" cellpadding="0" cellspacing="0" width="100%" style="max-width:100%;background:#e9e9e9;padding:50px 0px">
+    <tr>
+        <td>
+            <table border="0" align="center" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;background:#ffffff;padding:0px 25px">
+                <tbody>
+                <tr>
+                    <td style="margin:0;padding:0">
+                        <table border="0" cellpadding="20" cellspacing="0" width="100%" style="background:#ffffff;color:#1a1a1a;line-height:150%;text-align:center;border-bottom:1px solid #e9e9e9;font-family:300 14px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif">
+                            <tbody>
+                            <tr>
+                                <td valign="top" align="center" width="100" style="background-color:#ffffff">
+                                    <img alt="SJ-Computers" style="width:134px" src="{{asset('js/images/header-logo-black.png')}}">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <br>
+
+                        <table border="0" cellpadding="" cellspacing="0" width="100%" style="background:#ffffff;color:#000000;line-height:150%;text-align:center;font:300 16px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif">
+                            <tbody>
+                            <tr>
+                                <td valign="top" width="100">
+                                    <h3 style="text-align:center;text-transform:uppercase">User: {{$data['userInfo']['name']}}</h3>
+                                    <!--                         <p>Payment method: <span style="font-size:18px;font-weight:bold">PayTM </span></p> -->
+                                    <!--                         <p>Last Delivery Boy: <span style="font-size:18px;font-weight:bold">NA</span></p> -->
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <table border="0" cellpadding="20" cellspacing="0" width="100%" style="color:#000000;line-height:150%;text-align:left;font:300 16px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif">
+                            <tbody>
+                            <tr>
+                                <td valign="top" style="font-size:24px;">
+                                    <span style="text-decoration:underline;">Order No: {{ $data['id'] }}</span>
+                                    <!--                         <h2 style="display:inline-block;font-family:Arial;font-size:24px;font-weight:bold;margin-top:5px;margin-right:0;margin-bottom:5px;margin-left:0;text-align:left;line-height:100%">(April 25, 2016)</h2> -->
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table align="center" cellspacing="0" cellpadding="6" width="95%"
+                               style="border:0;color:#000000;line-height:150%;text-align:left;font:300 14px/30px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif;"
+                               border=".5px">
+                            <thead>
+                            <tr style="background:#efefef">
+                                <th scope="col" width="30%"
+                                    style="text-align:left;border:1px solid #eee">Product</th>
+                                <th scope="col" width="15%"
+                                    style="text-align:right;border:1px solid #eee">Quantity</th>
+                                <th scope="col" width="20%"
+                                    style="text-align:right;border:1px solid #eee">Price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($data['orderItem'] as $item)
+                                <tr width="100%">
+                                    <td width="30%"
+                                        style="text-align:left;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0;word-wrap:break-word">
+                                        {{ $item['product_name'] ?? 0 }}
+                                    </td>
+                                    <td width="15%"
+                                        style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
+                                        {{ $item['qty'] ?? 0 }}
+                                    </td>
+                                    <td width="20%"
+                                        style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
                                                     <span>
                                                         ${{ $item['product']['price'] ?? 0 }}
                                                     </span>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
 
-                                    <tfoot>
-                                        <tr>
-                                            <th scope="row" colspan="2"
-                                                style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
-                                                Delivery Days </th>
-                                            <th
-                                                style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                                <span>{{ $data['shipment_days'] }}</span>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" colspan="2"
-                                                style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
-                                                Delivery Price</th>
-                                            <td
-                                                style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                                <span>${{ $data['shipment_price'] }}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" colspan="2"
-                                                style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
-                                                Total Quantity</th>
-                                            <td
-                                                style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                                <span>{{ $data['item_qty'] }}</span>
-                                            </td>
-                                        </tr>
+                            <tfoot>
+                            <tr>
+                                <th scope="row" colspan="2"
+                                    style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
+                                    Delivery Days </th>
+                                <th
+                                    style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
+                                    <span>{{ $data['shipment_days'] }}</span>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th scope="row" colspan="2"
+                                    style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
+                                    Delivery Price</th>
+                                <td
+                                    style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
+                                    <span>${{ $data['shipment_price'] }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" colspan="2"
+                                    style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
+                                    Total Quantity</th>
+                                <td
+                                    style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
+                                    <span>{{ $data['item_qty'] }}</span>
+                                </td>
+                            </tr>
 
-                                        <tr>
-                                            <th scope="row" colspan="2"
-                                                style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
-                                                Sub Total</th>
-                                            <td
-                                                style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                                <span>${{ $data['sub_total'] }}</span>
-                                            </td>
-                                        </tr>
+                            <tr>
+                                <th scope="row" colspan="2"
+                                    style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
+                                    Sub Total</th>
+                                <td
+                                    style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
+                                    <span>${{ $data['sub_total'] }}</span>
+                                </td>
+                            </tr>
 
-                                        <tr>
-                                            <th scope="row" colspan="2"
-                                                style="text-align:right;background:#efefef;text-align:right;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
-                                                Order Total</th>
-                                            <td
-                                                style="background:#efefef;text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0;color:#7db701;font-weight:bold">
-                                                <span>${{ $data['total_amount'] }}</span>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                                <br>
-                                <br>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-    </table>
+                            <tr>
+                                <th scope="row" colspan="2"
+                                    style="text-align:right;background:#efefef;text-align:right;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
+                                    Order Total</th>
+                                <td
+                                    style="background:#efefef;text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0;color:#7db701;font-weight:bold">
+                                    <span>${{ $data['total_amount'] }}</span>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>                        <br>
+                        <br>
+
 </body>
 
 </html>
+
+

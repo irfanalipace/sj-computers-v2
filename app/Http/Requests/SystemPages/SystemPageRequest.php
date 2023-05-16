@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\SystemPages;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SearchProductRequest extends FormRequest
+class SystemPageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,7 @@ class SearchProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'filter' => ['nullable', 'array'],
-            'category_id' => ['nullable'],
-            'name' => ['nullable'],
-            'per_page' => ['nullable', 'integer'],
+            'key' => ['required']
         ];
     }
 }
