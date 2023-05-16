@@ -41,156 +41,172 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                     <FontAwesomeIcon icon={faTimes} />
                 </button>
                 {/* sidebar content */}
-                <div className="bg-white py-5 px-4">
-                    {cartItems?.map((item) => (
-                        <div key={item.id} id={item.id}>
-                            <hr className="hrline"></hr>
-                            <div className="items">
-                                <div className="row">
-                                    <div className="col-md-2">
-                                        <img
-                                            src={item?.product?.image}
-                                            alt=""
-                                            className="cartItem-image"
-                                        />
-                                    </div>
-                                    <div className="col-md-10">
-                                        <div className="d-flex flex-column h-100 justify-content-between mx-0">
-                                            <div className="items-card-data">
-                                                <div className="col-md-10">
-                                                    <p>
-                                                        <strong className="item-details">
-                                                            {
-                                                                item?.product
-                                                                    ?.name
-                                                            }
-                                                        </strong>
-                                                    </p>
-                                                    <ul className="item-list">
-                                                        <li>
-                                                            <span className="item-stock">
-                                                                {item?.product
-                                                                    ?.quantity
-                                                                    ? "In Stock"
-                                                                    : "Out of Stock"}
-                                                            </span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div className="col-md-2 price-item">
-                                                    <p>
-                                                        <strong className="">
-                                                            ${item?.price}
-                                                        </strong>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            {item.loading ? (
-                                                <Loader />
-                                            ) : (
-                                                <>
-                                                    <div
-                                                        className="d-flex"
-                                                        style={{
-                                                            maxWidth: "700px",
-                                                        }}
-                                                    >
-                                                        <button
-                                                            onClick={() =>
-                                                                deleteItemFunction(
-                                                                    item
-                                                                )
-                                                            }
-                                                            className="button-link ps-0"
-                                                            disabled={
-                                                                updatingItem
-                                                            }
-                                                        >
-                                                            {updatingItem ? (
-                                                                <Loader />
-                                                            ) : (
-                                                                "Delete"
-                                                            )}
-                                                        </button>
-                                                    </div>
-                                                </>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                    <div className="row mx-0">
-                        <div className="col-3"></div>
-                        <div className="col-9 px-0">
-                            <div className="sub-title-add d-flex justify-content-end">
-                                <div>
-                                    <span className="">Cart Subtotal</span>
-                                    <span className="item1">
-                                        ( {details?.total_items} items ):
-                                    </span>
-                                    ${details?.sub_total}
-                                    <div className="mt-2">
-                                        <Link
-                                            to="/cart"
-                                            className="text-decoration-none cart-text-link"
-                                            onClick={toggleSidebar}
-                                        >
-                                            <button className="cart-overlaybutton">
-                                                Cart
-                                            </button>
-                                        </Link>
+              
 
-                                        <Link
-                                            to="/checkout"
-                                            className="text-decoration-none processed-link"
-                                            onClick={toggleSidebar}
-                                        >
-                                            <button className="processed-button">
-                                                Proceed to checkout (
-                                                {details?.total_items} item)
-                                            </button>
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {/* <div className="first-dev">
-                        <div className="not-add">
-                            <span>
-                                <img src={vectorimg} /> Not Added
-                            </span>
-                        </div>
-                    </div> */}
-                    </div>
+                {details?.total_items>0 ? (
+          <div className="bg-white py-5 px-4">
+          {cartItems?.map((item) => (
+              <div key={item.id} id={item.id}>
+                  <hr className="hrline"></hr>
+                  <div className="items">
+                      <div className="row">
+                          <div className="col-md-2">
+                              <img
+                                  src={item?.product?.image}
+                                  alt=""
+                                  className="cartItem-image"
+                              />
+                          </div>
+                          <div className="col-md-10">
+                              <div className="d-flex flex-column h-100 justify-content-between mx-0">
+                                  <div className="items-card-data">
+                                      <div className="col-md-10">
+                                          <p>
+                                              <strong className="item-details">
+                                                  {
+                                                      item?.product
+                                                          ?.name
+                                                  }
+                                              </strong>
+                                          </p>
+                                          <ul className="item-list">
+                                              <li>
+                                                  <span className="item-stock">
+                                                      {item?.product
+                                                          ?.quantity
+                                                          ? "In Stock"
+                                                          : "Out of Stock"}
+                                                  </span>
+                                              </li>
+                                          </ul>
+                                      </div>
+                                      <div className="col-md-2 price-item">
+                                          <p>
+                                              <strong className="">
+                                                  ${item?.price}
+                                              </strong>
+                                          </p>
+                                      </div>
+                                  </div>
+                                  {item.loading ? (
+                                      <Loader />
+                                  ) : (
+                                      <>
+                                          <div
+                                              className="d-flex"
+                                              style={{
+                                                  maxWidth: "700px",
+                                              }}
+                                          >
+                                              <button
+                                                  onClick={() =>
+                                                      deleteItemFunction(
+                                                          item
+                                                      )
+                                                  }
+                                                  className="button-link ps-0"
+                                                  disabled={
+                                                      updatingItem
+                                                  }
+                                              >
+                                                  {updatingItem ? (
+                                                      <Loader />
+                                                  ) : (
+                                                      "Delete"
+                                                  )}
+                                              </button>
+                                          </div>
+                                      </>
+                                  )}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          ))}
+          <div className="row mx-0">
+              <div className="col-3"></div>
+              <div className="col-9 px-0">
+                  <div className="sub-title-add d-flex justify-content-end">
+                      <div>
+                          <span className="">Cart Subtotal</span>
+                          <span className="item1">
+                              ( {details?.total_items} items ):
+                          </span>
+                          ${details?.sub_total}
+                          <div className="mt-2">
+                              <Link
+                                  to="/cart"
+                                  className="text-decoration-none cart-text-link"
+                                  onClick={toggleSidebar}
+                              >
+                                  <button className="cart-overlaybutton">
+                                      Cart
+                                  </button>
+                              </Link>
 
-                    {/* <div className="img-dev">
-                    <div className="img-sets">
-                        <img src={reaxtimg} alt="" />
-                    </div>
-                    <div className="cart-overlay-mein">
-                        <button className="cart-overlaybutton">
-                            <Link
-                                to="/cart"
-                                className="text-decoration-none cart-text-link"
-                            >
-                                Cart
-                            </Link>
-                        </button>
-                    </div>
-                    <div className="procesed-dev">
-                        <button className="processed-button">
-                            <Link
-                                to="/checkout"
-                                className="text-decoration-none processed-link"
-                            >
-                                Proceed to checkout (item)
-                            </Link>
-                        </button>
-                    </div>
-                </div> */}
-                </div>
+                              <Link
+                                  to="/checkout"
+                                  className="text-decoration-none processed-link"
+                                  onClick={toggleSidebar}
+                              >
+                                  <button className="processed-button">
+                                      Proceed to checkout (
+                                      {details?.total_items} item)
+                                  </button>
+                              </Link>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              {/* <div className="first-dev">
+              <div className="not-add">
+                  <span>
+                      <img src={vectorimg} /> Not Added
+                  </span>
+              </div>
+          </div> */}
+          </div>
+
+          {/* <div className="img-dev">
+          <div className="img-sets">
+              <img src={reaxtimg} alt="" />
+          </div>
+          <div className="cart-overlay-mein">
+              <button className="cart-overlaybutton">
+                  <Link
+                      to="/cart"
+                      className="text-decoration-none cart-text-link"
+                  >
+                      Cart
+                  </Link>
+              </button>
+          </div>
+          <div className="procesed-dev">
+              <button className="processed-button">
+                  <Link
+                      to="/checkout"
+                      className="text-decoration-none processed-link"
+                  >
+                      Proceed to checkout (item)
+                  </Link>
+              </button>
+          </div>
+      </div> */}
+      </div>
+      ) : (
+       <div className="buttonoverlay-condtions">
+  
+       <div style={{marginTop:'53px'}}><p className="nomore-item-text-p">No Added</p>
+       </div>
+        <div style={{marginTop:'53px'}}>
+         <Link to='/'  onClick={toggleSidebar}>
+         <button className="add-more-cart-overaybutton">Add To More Items</button>
+         </Link>  
+            </div>
+      
+       </div>
+      )}
             </div>
         </div>
     );

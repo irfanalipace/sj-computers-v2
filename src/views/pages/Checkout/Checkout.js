@@ -98,7 +98,7 @@ export default function Checkout() {
                                     <Accordion
                                         className="shipping-details px-0 acoordeing"
                                         id={1}
-                                        title="Shipping Details"
+                                        title="Enter Your Shipping Details "
                                         summary={
                                             shippingAddress.address && (
                                                 <ShippingSummary />

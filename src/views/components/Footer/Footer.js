@@ -38,7 +38,7 @@ const Footer = () => {
                             <div className="row">
                                 <div className="col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
                                     <ul className="list-unstyle1">
-                                        <h6 className="text-uppercase herf-link">
+                                        <h6 className="text-uppercase herf-link font-style-heading-footer">
                                             Get to Know Us
                                         </h6>
                                         <li>
@@ -87,7 +87,7 @@ const Footer = () => {
                                 <div className="col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
                                     {/* <h5 className="text-uppercase">Links</h5> */}
                                     <ul className="list-unstyle2">
-                                        <h6 className="text-uppercase herf-link">
+                                        <h6 className="text-uppercase herf-link font-style-heading-footer">
                                             Connect With Us
                                         </h6>
                                         <li>
@@ -128,7 +128,7 @@ const Footer = () => {
                                 <div className="col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
                                     {/* <h5 className="text-uppercase">Links</h5> */}
                                     <ul className="list-unstyle3">
-                                        <h6 className="text-uppercase herf-link">
+                                        <h6 className="text-uppercase herf-link font-style-heading-footer">
                                             Let Us Help You
                                         </h6>
                                         <li>
@@ -176,7 +176,7 @@ const Footer = () => {
                                 <div className="col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
                                     {/* <h5 className="text-uppercase">Links</h5> */}
                                     <ul className="list-unstyle4">
-                                        <h6 className="text-uppercase herf-link">
+                                        <h6 className="text-uppercase herf-link font-style-heading-footer">
                                             Reach Us
                                         </h6>
                                         <p className="text-uppercase herf-link">
