@@ -14,7 +14,9 @@ function MobileHeader() {
         return setSideMenu((state) => !state);
     };
     return (
-        <div className="header-mobile">
+      <div>
+  
+          <div className="header-mobile">
             <header className="mobile-header">
                 {/* <div className="mobile-header__logo">
         <Link to="/">
@@ -82,6 +84,7 @@ function MobileHeader() {
             </header>
             <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
         </div>
+      </div>
     );
 }
 

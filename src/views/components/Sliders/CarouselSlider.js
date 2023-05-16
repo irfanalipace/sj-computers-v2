@@ -1,12 +1,8 @@
 import React from "react";
-import rect1 from "@images/product/CarsulSlider/rectangle1.png";
-import rect2 from "@images/product/CarsulSlider/rectangle2.png";
-import rect3 from "@images/product/CarsulSlider/rectangle3.png";
-import rect4 from "@images/product/CarsulSlider/rectangle4.png";
-import rect5 from "@images/product/CarsulSlider/rectangle5.png";
-import rect6 from "@images/product/CarsulSlider/rectangle6.png";
-import rect7 from "@images/product/CarsulSlider/rectangle7.png";
-import rect8 from "@images/product/CarsulSlider/rectangle8.png";
+
+ import imgss1 from "@images/category1.png";
+ import imgss2 from "@images/category2.png";
+ import imgss3 from "@images/category3.png";
 import Carousel from "react-bootstrap/Carousel";
 import "./CarouselSlider.css";
 import { Link } from "react-router-dom";
@@ -24,14 +20,11 @@ const CarouselSlider = () => {
                                 </Link>
                             </div>
 
-                            <img src={rect1} className="img-slider-cursule" />
-                            <img src={rect2} className="img-slider-cursule" />
-                            <img src={rect3} className="img-slider-cursule" />
-                            <img src={rect4} className="img-slider-cursule" />
-                            <img src={rect5} className="img-slider-cursule" />
-                            <img src={rect6} className="img-slider-cursule" />
-                            <img src={rect7} className="img-slider-cursule" />
-                            <img src={rect8} className="img-slider-cursule" />
+                            <img src={imgss1} className="img-slider-cursule" />
+                            <img src={imgss2} className="img-slider-cursule" />
+                            <img src={imgss3} className="img-slider-cursule" />
+                          
+                        
                         </div>
                     </div>
                 </div>
@@ -51,14 +44,10 @@ const CarouselSlider = () => {
                             </Link>
                         </div>
 
-                        <img src={rect1} className="img-slider-cursule" />
-                        <img src={rect2} className="img-slider-cursule" />
-                        <img src={rect3} className="img-slider-cursule" />
-                        <img src={rect4} className="img-slider-cursule" />
-                        <img src={rect5} className="img-slider-cursule" />
-                        <img src={rect6} className="img-slider-cursule" />
-                        <img src={rect7} className="img-slider-cursule" />
-                        <img src={rect8} className="img-slider-cursule" />
+                        <img src={imgss1} className="img-slider-cursule" />
+                        <img src={imgss2} className="img-slider-cursule" />
+                        <img src={imgss3} className="img-slider-cursule" />
+                
                     </div>
                 </div>
 

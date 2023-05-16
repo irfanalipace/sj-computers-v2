@@ -1,0 +1,32 @@
+.seeling-product-p {
+        margin-top: 12px;
+        margin-bottom: 12px;
+        margin-left: 6px;
+        font-weight: bold;
+    
+}
+.seeling-product-p span {
+    font-weight: bold;
+    font-size: 15px;
+}
+.img-dev-selling-products {
+    max-width: 100%;
+    width: 238px;
+}
+.image-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .img-dev-selling-products {
+    max-width: 100%;
+  }
+  .dev-image-name {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 8px;
+}
+.dev-image-name span{
+    font-size: 12px;
+}
