@@ -49,9 +49,9 @@ export const ShopingCart = () => {
                                 <div className="row">
                                     <div className="cart-product-subtotal-price">
                                         <span>
-                                            Subtotal(
+                                            Subtotal (
                                             {cartDetails?.total_items
-                                                ? cartDetails.total_items
+                                              ? cartDetails.total_items
                                                 : 0}
                                             items):
                                             <strong className="price-with-sign">
@@ -78,10 +78,10 @@ export const ShopingCart = () => {
                                         <div className="card-body-text">
                                             <div className="text-body">
                                                 <span className="sub-title">
-                                                    Subtotal(
-                                                    {cartDetails?.total_items}
-                                                    items):
-                                                    <strong className="price-items">
+                                                    Subtotal(  
+                                                     {' '}  {cartDetails?.total_items}
+                                                    items):{' '}
+                                                    <strong className="price-items" style={{fontWeight:'bold'}}>
                                                         $
                                                         {cartDetails?.sub_total}
                                                     </strong>
