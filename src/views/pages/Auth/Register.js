@@ -156,7 +156,7 @@ const Register = () => {
                                 onClick={handleSubmit}
                                 disabled={isLoading}
                             >
-                                {isLoading ? <Loader /> : "Verify Email"}
+                                {isLoading ? <Loader /> : "Register Now"}
                             </button>
                         </div>
                         <p className="set-register-text">

@@ -1,10 +1,11 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "@store/auth/authThunks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import Loader from "@common/Spinner/Spinner";
 import userImg from "@images/user.png";
 import { US } from "country-flag-icons/react/3x2";
@@ -15,34 +16,27 @@ export default function Sidebar({ openState, toggleSidebar }) {
     const user = useSelector((state) => state.auth.user);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const isLoading = useSelector((state) => state.auth.isLoading);
+    const categoryLoader = useSelector((state) => state.category.isLoading);
+    const categories = useSelector((state) => state.category.categories);
+
+    const [visibleCategories, setVisibleCategories] = useState(8);
+
+    const handleShowMore = () => {
+        setVisibleCategories(
+            (prevVisibleCategories) => prevVisibleCategories + 8
+        );
+    };
+
+    let renderedCategories = categories
+        .slice(0, visibleCategories)
+        .map((category) => (
+            <li key={category.id}>
+                <Link to={`/category/${category.slug}`}>{category.name}</Link>
+                <FontAwesomeIcon icon={faAngleRight} />
+            </li>
+        ));
 
     const dispatch = useDispatch();
-    const categories = [
-        {
-            id: 1,
-            name: "Food",
-        },
-        {
-            id: 2,
-            name: "Clothes",
-        },
-        {
-            id: 3,
-            name: "Electronics",
-        },
-        {
-            id: 4,
-            name: "Home",
-        },
-        {
-            id: 5,
-            name: "Electronics",
-        },
-        {
-            id: 6,
-            name: "Laptops",
-        },
-    ];
 
     return (
         <div>
@@ -85,16 +79,25 @@ export default function Sidebar({ openState, toggleSidebar }) {
                         </div>
                         <div className="sideMenu">
                             <h4>Shop By Category</h4>
-                            <ul className="menu-list">
-                                {categories.map((category) => (
-                                    <li key={category.id}>
-                                        <Link to={`/category/${category.id}`}>
-                                            {category.name}
-                                        </Link>
-                                        <FontAwesomeIcon icon={faAngleRight} />
-                                    </li>
-                                ))}
-                            </ul>
+                            {categoryLoader ? (
+                                <div className="d-flex justify-content-center my-2">
+                                    <Loader />
+                                </div>
+                            ) : (
+                                <ul className="menu-list">
+                                    {renderedCategories}
+                                    {visibleCategories < categories.length && (
+                                        <li>
+                                            <button onClick={handleShowMore}>
+                                                Show More
+                                            </button>
+                                            <FontAwesomeIcon
+                                                icon={faAngleDown}
+                                            />
+                                        </li>
+                                    )}
+                                </ul>
+                            )}
 
                             <h4>Help & Settings</h4>
                             <ul className="menu-list">

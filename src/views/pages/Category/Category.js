@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 
 function Category() {
-    let { categoryId } = useParams();
+    let { categorySlug } = useParams();
 
-    return <div>Category: {categoryId}</div>;
+    return <div>Category: {categorySlug}</div>;
 }
 
 export default Category;

@@ -71,7 +71,9 @@ export default function EmailForm({ onFormSubmit, form }) {
                     autoFocus
                 />
                 {fieldErrors && (
-                    <p className="fs-6 mt-1 text-danger">{fieldErrors.email}</p>
+                    <p className="fs-6 mt-1 text-danger">
+                        {fieldErrors.email || fieldErrors.email_verification}
+                    </p>
                 )}
             </div>
             <div className="d-flex justify-content-center w-100">
