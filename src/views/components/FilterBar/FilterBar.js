@@ -1,35 +1,61 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 import Loader from "@common/Spinner/Spinner";
 import { getFilterListApi } from "@api/filters";
+import { SET_FILTERS_ARRAY } from "@store/products/productsSlice";
 
 import "./FilterBar.css";
 
 const FilterBar = () => {
     const [filters, setFilters] = useState([]);
-    const [selectedFilters, setSelectedFilters] = useState({});
+    const [selectedFilters, setSelectedFilters] = useState([]);
+    const [filtersInArray, setFiltersInArray] = useState([]);
     const [loadingFilters, setLoadingFilters] = useState(false);
+
+    const dispatch = useDispatch();
+
+    console.log("filters", filtersInArray);
 
     const handleCheckboxChange = (event, category, option) => {
         const isChecked = event.target.checked;
-        console.log("checked", isChecked);
+        setFiltersInArray((prevSelectedFilters) => {
+            let filter = {
+                key: category,
+                value: option,
+            };
+            const isChecked = event.target.checked;
 
-        // setSelectedFilters((prevSelectedFilters) => {
-        //     let filter = {
-        //         key: category,
+            if (isChecked) {
+                return [...prevSelectedFilters, filter];
+            }
+            let index = prevSelectedFilters.findIndex((filter) => {
+                return filter.value === option;
+            });
 
-        //         value: option,
-        //     };
-        //     ({
-        //         ...prevSelectedFilters,
-        //         [category]: isChecked
-        //             ? [...(prevSelectedFilters[category] || []), option]
-        //             : filter,
-        //     });
-        // });
+            let tempArray = [...prevSelectedFilters];
+
+            if (index > -1) {
+                tempArray.splice(index, 1);
+            }
+            return tempArray;
+        });
+
+        setSelectedFilters((prevSelectedFilters) => ({
+            ...prevSelectedFilters,
+            [category]: isChecked
+                ? [...(prevSelectedFilters[category] || []), option]
+                : prevSelectedFilters[category].filter(
+                      (filter) => filter.value !== option
+                  ),
+        }));
     };
+
+    useEffect(() => {
+        dispatch(SET_FILTERS_ARRAY(filtersInArray));
+    }, [filtersInArray]);
 
     useEffect(() => {
         fetchFilters();
@@ -49,10 +75,12 @@ const FilterBar = () => {
     return (
         <div className="filters-inner">
             {loadingFilters ? (
-                <Loader />
+                <div className="d-flex justify-content-center align-items-center my-3">
+                    <Loader />
+                </div>
             ) : (
                 <ul className="filters-list">
-                    {/* {Object.entries(filters).map(
+                    {Object.entries(filters).map(
                         ([category, options], index) => (
                             <li
                                 className="filter-key"
@@ -63,14 +91,14 @@ const FilterBar = () => {
                                     {options.map((option, index) => (
                                         <li
                                             className="filter-value"
-                                            key={`${option}-${index}`}
+                                            key={`${option.value}-${index}`}
                                         >
                                             <label
                                                 className="checkbox-container"
-                                                htmlFor={`${option}-${index}`}
+                                                htmlFor={`${option.value}-${index}`}
                                             >
                                                 <input
-                                                    id={`${option}-${index}`}
+                                                    id={`${option.value}-${index}`}
                                                     type="checkbox"
                                                     checked={
                                                         selectedFilters[
@@ -78,13 +106,13 @@ const FilterBar = () => {
                                                         ] &&
                                                         selectedFilters[
                                                             category
-                                                        ].includes(option)
+                                                        ].includes(option.value)
                                                     }
                                                     onChange={(event) =>
                                                         handleCheckboxChange(
                                                             event,
                                                             category,
-                                                            option
+                                                            option.value
                                                         )
                                                     }
                                                 />
@@ -93,7 +121,7 @@ const FilterBar = () => {
                                             </label>
                                         </li>
                                     ))}
-                                    <li>
+                                    <li className="filter-value">
                                         <button onClick={handleShowMore}>
                                             <span className="me-2">
                                                 Show More
@@ -106,8 +134,8 @@ const FilterBar = () => {
                                 </ul>
                             </li>
                         )
-                    )} */}
-                    <li>
+                    )}
+                    <li className="filter-value">
                         <button onClick={handleShowMore}>
                             <span className="me-2">Show More</span>
                             <FontAwesomeIcon icon={faAngleDown} />

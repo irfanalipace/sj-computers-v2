@@ -4,6 +4,7 @@ const initialState = {
     products: [],
     searchString: null,
     isSearchedProducts: false,
+    filtersArray: [],
     apiError: false,
     isLoading: false,
     currentPage: 1,
@@ -44,6 +45,9 @@ const productSlice = createSlice({
         SET_SEARCH_STRING: (state, action) => {
             state.searchString = action.payload;
         },
+        SET_FILTERS_ARRAY: (state, action) => {
+            state.filtersArray = [...action.payload];
+        },
         CLEAR_SEARCH: (state) => {
             state.searchString = null;
             state.currentPage = 1;
@@ -70,6 +74,7 @@ export const {
     LOADING,
     CLEAR_LOADING,
     FETCH_PRODUCTS,
+    SET_FILTERS_ARRAY,
     SEARCH_PRODUCTS,
     SET_SEARCH_STRING,
     FILTER_PRODUCTS,

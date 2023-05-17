@@ -7,7 +7,7 @@ import {
     CLEAR_ALL_PRODUCTS,
     SET_SEARCH_STRING,
 } from "@store/products/productsSlice";
-import Loader from "@common/LoaderComponent/LoaderComponent";
+import Loader from "@common/LoaderComponent/OverlayLoader";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
 
 const FilteredProducts = ({ categoryId }) => {
@@ -16,11 +16,8 @@ const FilteredProducts = ({ categoryId }) => {
     const isLoading = useSelector((state) => state.products.isLoading);
     const apiError = useSelector((state) => state.products.apiError);
     const searchString = useSelector((state) => state.products.searchString);
+    const filtersArray = useSelector((state) => state.products.filtersArray);
     const [mounted, setMounted] = useState(false);
-
-    const [filter, setFilter] = useState();
-
-    const [categoryList, setCategoryList] = useState([]);
 
     const dispatch = useDispatch();
 
@@ -50,26 +47,32 @@ const FilteredProducts = ({ categoryId }) => {
     }, []);
 
     useEffect(() => {
-        filterObject.name = searchString;
-        dispatch(filterProducts(filterObject));
-    }, [searchString]);
+        if (mounted) {
+            filterObject.name = searchString;
+            // const serializedArray = JSON.stringify(filtersArray);
+            filterObject.filter = filtersArray;
+            console.log("filterObject: ", filterObject);
+            dispatch(filterProducts(filterObject));
+        }
+    }, [searchString, filtersArray]);
 
     return (
-        <>
+        <div className="position-relative">
             {isLoading ? (
                 <Loader />
             ) : (
-                <div className="filter-results">
-                    <ProductsGrid
-                        products={products}
-                        handleClick={handleClick}
-                        isLoading={isLoading}
-                        apiError={apiError}
-                        heading={`Best ${categorySlug}`}
-                    />
-                </div>
+                // <div className="filter-results">
+                //     <ProductsGrid
+                //         products={products}
+                //         handleClick={handleClick}
+                //         isLoading={isLoading}
+                //         apiError={apiError}
+                //         heading={`Best ${categorySlug}`}
+                //     />
+                // </div>
+                <Loader isLoading={isLoading} />
             )}
-        </>
+        </div>
     );
 };
 

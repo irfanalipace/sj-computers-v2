@@ -2,9 +2,15 @@
     padding-left: 0;
     list-style: none;
 }
-
 .sticky-filter-bar {
+    position: absolute;
     padding: 5px 20px;
+    width: 250px;
+    height: 100%;
+    border-right: 1px solid lightgray;
+    z-index: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .sticky-filter-bar .filters-list h4 {
@@ -90,4 +96,16 @@
     border: solid white;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
+}
+
+.sticky-filter-bar .filters-list .filter-value button {
+    background: none;
+    border: none;
+    margin: 10px 0;
+    padding: 0;
+    color: #52ac66;
+}
+.sticky-filter-bar .filters-list .filter-value button span {
+    font-size: 14px;
+    font-weight: 700;
 }

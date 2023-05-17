@@ -8,14 +8,6 @@
     min-height: 600px;
 }
 
-.sticky-filter-bar {
-    position: absolute;
-    width: 250px;
-    height: 100%;
-    border-right: 1px solid lightgray;
-    z-index: 1;
-}
-
 .filter-results {
     margin-left: 250px;
     padding: 0 20px;
