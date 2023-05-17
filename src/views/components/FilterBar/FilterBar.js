@@ -14,15 +14,21 @@ const FilterBar = () => {
 
     const handleCheckboxChange = (event, category, option) => {
         const isChecked = event.target.checked;
+        console.log("checked", isChecked);
 
-        setSelectedFilters((prevSelectedFilters) => ({
-            ...prevSelectedFilters,
-            [category]: isChecked
-                ? [...(prevSelectedFilters[category] || []), option]
-                : prevSelectedFilters[category].filter(
-                      (filter) => filter !== option
-                  ),
-        }));
+        // setSelectedFilters((prevSelectedFilters) => {
+        //     let filter = {
+        //         key: category,
+
+        //         value: option,
+        //     };
+        //     ({
+        //         ...prevSelectedFilters,
+        //         [category]: isChecked
+        //             ? [...(prevSelectedFilters[category] || []), option]
+        //             : filter,
+        //     });
+        // });
     };
 
     useEffect(() => {
