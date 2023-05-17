@@ -165,7 +165,7 @@ const Footer = () => {
                                         </li>
                                         <li>
                                             <Link
-                                                to="#"
+                                                to="/privacy_policy"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Privacy Policy
