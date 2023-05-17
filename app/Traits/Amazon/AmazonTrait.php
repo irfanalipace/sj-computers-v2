@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Traits\Amazon;
 
 use App\Models\Product;
 use Exception;
 
-trait AmazonTrait {
+trait AmazonTrait
+{
 
     public function getAmazonInventory($productId)
     {
@@ -35,10 +37,16 @@ trait AmazonTrait {
         curl_close($curl);
 
         $response = json_decode($response, true);
+        if (isset($response['message']) && !empty($response['message'])) {
+
+            $data = json_decode($response['message'], true);
+            $quantity = (int) $data['attributes']['fulfillment_availability'][0]['quantity'];
+            $status = true;
+        }
 
         return [
             'sku' => $product->sku ?? '',
-            'data' => $response,
+            'quantity' => $quantity,
             'status' => $status
         ];
     }
