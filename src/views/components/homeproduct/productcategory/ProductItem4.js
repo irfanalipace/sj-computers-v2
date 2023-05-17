@@ -6,17 +6,17 @@ import img20 from "@images/product/image20.png";
 import btoimg from "@images/categories/btoweb.webp";
 import laptopimg from "@images/categories/laptopweb.webp";
 import monitorimg from "@images/categories/monitorweb.webp";
-import desktopimg from "@images/categories/desktopweb.webp";
+import desktopimgweb from "@images/categories/desktopweb-page.webp";
 import { Link } from "react-router-dom";
 import "./ProductItem4.css";
 const ProductItem4 = () => {
-    const images = [btoimg, laptopimg, desktopimg, monitorimg];
+    const images = [btoimg, laptopimg, desktopimgweb, monitorimg];
 
     return (
         <Row className="mx-0 product-item-4">
             {/* <h4>Shop by Category</h4> */}
             <Col xs={12} sm={6} className="px-0">
-                <Link to="/category/1" className="category-item">
+                <Link to="/category/bto" className="category-item">
                     <img
                         src={images[0]}
                         alt="Image 2"
@@ -26,7 +26,7 @@ const ProductItem4 = () => {
                 </Link>
             </Col>
             <Col xs={12} sm={6} className="px-0">
-                <Link to="/category/1" className="category-item">
+                <Link to="/category/laptops" className="category-item">
                     <img
                         src={images[1]}
                         alt="Image 2"
@@ -36,7 +36,7 @@ const ProductItem4 = () => {
                 </Link>
             </Col>
             <Col xs={12} sm={6} className="px-0">
-                <Link to="/category/1" className="category-item">
+                <Link to="/category/desktop" className="category-item">
                     <img
                         src={images[2]}
                         alt="Image 2"
@@ -46,7 +46,7 @@ const ProductItem4 = () => {
                 </Link>
             </Col>
             <Col xs={12} sm={6} className="px-0">
-                <Link to="/category/1" className="category-item">
+                <Link to="/category/monitor" className="category-item">
                     <img
                         src={images[3]}
                         alt="Image 2"

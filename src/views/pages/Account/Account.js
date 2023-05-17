@@ -13,7 +13,7 @@ const Account = () => {
     return (
         <div className="account-page">
             <div className="container-xl">
-                <h3 className="account-heading">Your Account</h3>
+                <h3 className="account-heading">Your Account </h3>
                 <div className="account-options row mx-0">
                     <Link
                         to={"orders"}
