@@ -8,12 +8,29 @@
     font-weight: 600;
     font-size: 12px;
 }
-
+.order-list-container{
+    margin-top: -14px;
+    margin-left: -213px;
+}
+.no-acces-order-dev{
+    
+        justify-content: center;
+        text-align: center;
+        margin-left: -318px;
+    
+}
 .account-page h3 {
+    margin-top: -9px;
     font-weight: 400;
     font-size: 28px;
-    margin: 30px 0 20px;
+    /* margin: 30px 0 20px; */
     padding: 0 20px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 34px;
+    color: #000000;
 }
 
 .account-page .account-options {
@@ -80,7 +97,13 @@
     width: 132px;
     height: 43px;
 }
-
+.container-xl-order {
+    padding-left: 218px;
+    padding-right: 130px;
+}
+.order-search-bar-input{
+    padding-top: 26px
+}
 /* Profile page  */
 
 .profile-container .user-image-container p {
@@ -239,11 +262,29 @@
     color: gray;
     cursor: pointer;
   } */
-.search-input {
+.search-input-order {
     padding-left: 20px;
     border-radius: 5px;
     border: 1px solid #318243;
     transition: border-color 0.3s;
+   
+        box-sizing: border-box;
+        /* position: absolute; */
+        width: 250px;
+        height: 32px;
+        left: 902px;
+        top: 165px;
+        border: 1px solid #318243;
+        border-radius: 5px;
+    
+}
+.button-order-dev{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 12px !important;
+line-height: 17px;
+
 }
 
 .green {

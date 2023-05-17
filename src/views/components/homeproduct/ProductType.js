@@ -8,7 +8,8 @@ import addDesktop from "@images/advertisement/advertisement-desktop.png";
 import addMobile from "@images/advertisement/advertisement-mobile.png";
 import welcomeImage from "@images/advertisement/welcome-banner.png";
 import categoryImg1 from "@images/categories/desktopweb.webp";
-import categorywellcom from "@images/categories/wellcom.webp";
+import categorybusinussweb from "@images/categories/businussweb.webp";
+import categorywellcom from "@images/categories/wellcomeweb.webp";
 import categoryImg2 from "@images/categories/category-laptop.png";
 import categoryImg3 from "@images/categories/category-desktop.png";
 import categoryImg4 from "@images/categories/category-4.png";
@@ -38,7 +39,7 @@ export const ProductType = () => {
                         <div className="categories-container">
                             <ProductItem1 image={categoryImg1} />
                         </div>
-                        <Link to="/" className="text-decoration-none">
+                        <Link to="/category/gaming_desktops" className="text-decoration-none">
                             <p className="section-link">Shop Now</p>
                         </Link>
                     </div>
@@ -47,9 +48,9 @@ export const ProductType = () => {
                     <div className="product-type-section">
                         <h4 className="h4-heading">Business Computer</h4>
                         <div className="categories-container">
-                            <ProductItem1 image={categoryImg1} />
+                            <ProductItem1 image={categorybusinussweb} />
                         </div>
-                        <Link to="/" className="text-decoration-none">
+                        <Link to="/category/business_computers" className="text-decoration-none">
                             <p className="section-link">Shop Now</p>
                         </Link>
                     </div>
