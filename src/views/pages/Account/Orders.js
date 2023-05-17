@@ -113,6 +113,7 @@ const OrderPage = () => {
     const isLoading = useSelector((state) => state.orders.isLoading);
     const cancelOrders = useSelector((state) => state.orders.cancelOrders);
     const successOrders = useSelector((state) => state.orders.successOrders);
+    const ordergDetails = useSelector((state) => state.orders.ordergDetails);
 
     const handleDropdownChange = (value) => {
         setSelectedValue(value);
@@ -142,11 +143,12 @@ const OrderPage = () => {
     };
     const handleSearch = async () => {
         setActiveTab(2);
-
+console.log(orderSearch, "input")
         const responseSearch = await OrderSearchApi(orderSearch);
-        console.log(responseSearch.data, "response search");
-        setOrderSearchData(searchOrderArray);
+        console.log(responseSearch, "response search");
+        setOrderSearchData(responseSearch);
         setOrderSearch("");
+        return;
     };
 
     const renderTabContent = () => {
@@ -154,54 +156,56 @@ const OrderPage = () => {
             return <LoaderComponent />;
         }
         return activeTab === 0 ? (
-            successOrders.length === 0 ? (
-                <div className="no-acces-order-dev">
+            successOrders.length === -1 ? (
+                <div className="flex justify-center items-center">
                     <p>No success orders</p>
                 </div>
             ) : (
                 <>
                     {/* {Object.Keys(orderDetails).length === 0 ? "data have" : "no data"} */}
-                    {/* <OrderCard data={successOrders} /> */}
-                    <div className="flex justify-center items-center">
+                    <OrderCard data={successOrders} />
+                    {/* <div className="flex justify-center items-center">
                         <p>No success orders</p>
-                    </div>
+                    </div> */}
                 </>
             )
         ) : activeTab === 1 ? (
-            cancelOrders.length === 0 ? (
-                <div className="no-acces-order-dev">
-                    <p>No cancelled orders.</p>
-                </div>
+            cancelOrders.length > 0 ? (
+                // <div className="flex justify-center items-center">
+                //     <p>No cancelled orders.</p>
+                // </div>
+                  <OrderCard data={cancelOrders} />
             ) : (
-                // <OrderCard data={cancelOrders} />
-                <div className="no-acces-order-dev">
+              
+                <div className="flex justify-center items-center">
                     <p>No cancelled orders</p>
                 </div>
             )
         ) : activeTab === 2 ? (
-            orderSearchData.length === 0 ? (
-                <div className="no-acces-order-dev">
+            orderSearchData.length > 0 ? (
+                <OrderCard data={orderSearchData} />
+                // <div className="flex justify-center items-center">
+                //     <p>Orders Not found.</p>
+                // </div>
+            ) : (
+                // <OrderCard data={orderSearchData} />
+                 <div className="flex justify-center items-center">
                     <p>Orders Not found.</p>
                 </div>
-            ) : (
-                <OrderCard data={orderSearchData} />
             )
         ) : null;
     };
     return (
         <div className="account-page order-page">
-        <div className='order-page-dev'>
-        <div className="container-xl-order">
-              
+            <div className="container-xl">
+                <Breadcrumb />
                 <div className="row mx-0">
-                    <div className="col-sm-6 col-md-8 col-7">
-                    <Breadcrumb />
+                    <div className="col-sm-6 col-md-8 col-8">
                         <h3 className="account-heading">Your Order</h3>
                     </div>
-                    <div className="col-sm-6 col-md-4 col-7">
-                    <div className="order-search-bar-input">
-                            {/* <p className="account-heading">Enter tracking id to search</p> */}
-                            <label
+                    <div className="col-sm-6 col-md-4 col-4">
+                        {/* <p className="account-heading">Enter tracking id to search</p> */}
+                        <label
                             style={{ marginBottom: 5 }}
                             htmlFor="orderSearch"
                         >
@@ -211,13 +215,13 @@ const OrderPage = () => {
                             <input
                                 id="orderSearch"
                                 name="orderSearch"
-                                placeholder="Search all order"
+                                placeholder="Search all orders"
                                 value={orderSearch}
                                 onChange={(e) => setOrderSearch(e.target.value)}
                                 className={
                                     orderSearch
                                         ? "search-input green"
-                                        : "search-input-order"
+                                        : "search-input"
                                 }
                             />
                             {/* <FaSearch style={{ marginRight: '5px' }} /> */}
@@ -239,26 +243,25 @@ const OrderPage = () => {
                             </button>
                         </div>
                     </div>
-                    </div>
                 </div>
 
                 <div className="row order-list-container">
-                    <div className="col-sm-6 col-md-9 col-8 px-0">
+                    <div className="col-sm-6 col-md-9 col-9 px-0">
                         <Box sx={{ flexGrow: 1 }}>
                             <CustomTabs
                                 value={activeTab}
                                 onChange={handleTabChange}
                                 centered
                             >
-                                <Tab label="Orders" className="button-order-dev"/>
-                                <Tab label="Cancelled Orders"  className="button-order-dev"/>
-                                <Tab label="Shipped or Not"  className="button-order-dev" />
+                                <Tab label="Orders" />
+                                <Tab label="Cancelled Orders" />
+                                <Tab label="Search orders" />
                             </CustomTabs>
                             <div
                                 style={{
                                     display: "flex",
-                                    marginTop: 23,
-                                 marginLeft:249
+                                    marginTop: 40,
+                                    marginBottom: 40,
                                 }}
                             >
                                 {activeTab !== 2 && (
@@ -274,8 +277,8 @@ const OrderPage = () => {
                                             <Select
                                                 data={[
                                                     {
-                                                        value: "2 month",
-                                                        label: "2 month",
+                                                        value: "1 month",
+                                                        label: "1 month",
                                                     },
                                                     // { value: 'option2', label: 'Option 2' },
                                                     // { value: 'option3', label: 'Option 3' },
@@ -314,33 +317,18 @@ const OrderPage = () => {
 
                             {renderTabContent()}
                         </Box>
-
-                        <div>
-                        <div class="card text-center">
-  <div className="card-header">
-    Featured
-  </div>
-  <div className="card-body">
-    <h5 className="card-title">Special title treatment</h5>
-    <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-
-</div>
-                        </div>
                     </div>
                     <div
-                        style={{ marginTop: "9%" }}
+                        style={{ marginTop: "15%", marginBottom: "5%" }}
                         className="col-sm-12 col-md-3 col-3"
                     >
                         <OrderInvoiceCard
                             activeTab={activeTab}
-                            data={dummyInvoice}
+                            data={ordergDetails}
                         />
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     );
 };
