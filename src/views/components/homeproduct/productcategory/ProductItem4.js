@@ -13,7 +13,7 @@ const ProductItem4 = () => {
     const images = [btoimg, laptopimg, desktopimg, monitorimg];
 
     return (
-        <Row className="mx-0">
+        <Row className="mx-0 product-item-4">
             {/* <h4>Shop by Category</h4> */}
             <Col xs={12} sm={6} className="px-0">
                 <Link to="/category/1" className="category-item">
