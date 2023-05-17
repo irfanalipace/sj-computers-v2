@@ -41,7 +41,7 @@ export const SquareForm = ({ hideCloseBtn, hideModal }) => {
                             source_id: token.token,
                         });
 
-                        if (response.data.code === 200) {
+                        if (response.code === 200) {
                             clearCartLocally();
                             dispatch(CLEAR_CART());
                             navigate("/success-transaction");
