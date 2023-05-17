@@ -6,8 +6,6 @@ use App\Classes\StatusEnum;
 use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\Product;
-use Cart;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -71,7 +69,7 @@ class GenerateInvoiceJob implements ShouldQueue
         $order = Order::create($order);
 
         $this->cartContent->each(function ($item) use ($order) {
-
+              
             $data = [
                 'order_id' => $order->id,
                 'product_id' => $item->id,
@@ -83,7 +81,6 @@ class GenerateInvoiceJob implements ShouldQueue
             // if ($productInfo['status']) {
             //     $this->updateAmazonInventory($productInfo, $item->quantity);
             // }
-
 
             OrderItem::create($data);
         });

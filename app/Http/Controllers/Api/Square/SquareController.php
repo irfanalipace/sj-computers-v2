@@ -41,19 +41,22 @@ class SquareController extends Controller
         } else {
             $this->userId = StatusEnum::DUMMY;
         }
-
     }
     // charge process
     public function chargeCustomer(CardRequest $request)
     {
-       
+
         try {
-            
+
             $idempotencyKey = uniqid();
 
             //create customer || retrieve customer if already added
-            (auth()->user()->square_cus_id == null) ? $customer = $this->createCustomer() : $customer = $this->getCustomer();
-           
+            if (auth()->user()->square_cus_id == null) {
+                $customer = $this->createCustomer();
+            } else {
+                $customer = $this->getCustomer();
+            }
+            
             // Get card Token
             // $cardToken = $this->customerCardToken($request, $customer);
             $amount_money = new Money();
@@ -66,9 +69,9 @@ class SquareController extends Controller
             $body->setCustomerId($customer);
             $body->setLocationId(env('SQUARE_LOCATION_ID'));
             $body->setReferenceId('user-' . $this->userId);
-            
+
             $api_response = $this->squareClient->getPaymentsApi()->createPayment($body);
-           
+
             if ($api_response->isSuccess()) {
                 $orderData = [];
 
@@ -77,7 +80,7 @@ class SquareController extends Controller
                 $orderData['sub_total'] = \Cart::session($this->userId)->getSubTotal();
                 $orderData['item_qty'] = \Cart::session($this->userId)->getTotalQuantity();
 
-                
+
                 $orderData['shipment_amount'] =  0;
                 $orderData['estimate_day'] =  Carbon::now()->addWeekdays(5)->format('l d-m-Y');
 
@@ -93,7 +96,7 @@ class SquareController extends Controller
 
                 $result = $api_response->getResult();
 
-                GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId,$this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
+                GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
 
                 //clear cart after successfull payment
                 Cart::session($this->userId)->clear();
@@ -115,31 +118,21 @@ class SquareController extends Controller
     public function createCustomer()
     {
         try {
-            
-            //set address
-            // $address = new Address();
-            // $address->setAddressLine1('500 Electric Ave');
-            // $address->setAddressLine2('Suite 600');
-            // $address->setLocality('New York');
-            // $address->setAdministrativeDistrictLevel1('NY');
-            // $address->setPostalCode('10003');
-            // $address->setCountry('US');
             //create customer
             $body = new CreateCustomerRequest();
             $body->setGivenName(auth()->user()->name);
             $body->setEmailAddress(auth()->user()->email);
-            // $body->setAddress($address);
-            // $body->setPhoneNumber('+1-212-555-4240');
             $body->setNote('our customer name is ' . auth()->user()->name . '');
-           
+
             $api_response = $this->squareClient->getCustomersApi()->createCustomer($body);
-            
+
             if ($api_response->isSuccess()) {
                 $customer_id = $api_response->getResult()->getCustomer()->getId();
                 //saving customer id in user table square_cus_id column
                 User::whereId($this->userId)->update(['square_cus_id' => $customer_id]);
             } else {
                 $errors = $api_response->getErrors();
+                return response()->json(['Code' => 400, 'message' => "Something went wrong while saving customer key"]);
             }
 
             return $customer_id;
@@ -153,53 +146,16 @@ class SquareController extends Controller
         try {
 
             $api_response = $this->squareClient->getCustomersApi()->retrieveCustomer(auth()->user()->square_cus_id);
-
+            
             if ($api_response->isSuccess()) {
                 $customer_id = $api_response->getResult()->getCustomer()->getId();
             } else {
                 $errors = $api_response->getErrors();
+                return response()->json(['Code' => 400, 'message' => "Something went wrong while fetching customer key"]);
             }
             return $customer_id;
         } catch (Exception $e) {
             return response()->json(['Code' => 400, 'message' => "Something went wrong" . $e]);
         }
     }
-
-    //get card customer token
-    // public function customerCardToken($data, $customerID)
-    // {
-    //     try {
-    //         //unique identify value
-    //         $idempotencyKey = uniqid();
-    //         //card info get from customer
-    //         $card = new Card();
-    //         $card->setId($idempotencyKey);
-    //         $card->setCardBrand($data->card_brand);
-    //         $card->setCardholderName($data->card_holder_name);
-    //         $card->setBin($data->card_bin);
-    //         $card->setLast4($data->card_last_4);
-    //         $card->setExpMonth($data->card_expiry_month);
-    //         $card->setExpYear($data->card_expiry_year);
-    //         $card->setCardType($data->card_type);
-    //         $card->setCustomerId($customerID);
-    //         $card->setReferenceId('user-id-' . $this->userId);
-
-    //         $body = new CreateCardRequest(
-    //             $idempotencyKey,
-    //             'cnon:card-nonce-ok',
-    //             $card
-    //         );
-
-    //         $api_response = $this->squareClient->getCardsApi()->createCard($body);
-
-    //         if ($api_response->isSuccess()) {
-    //             $result = $api_response->getResult()->getCard()->getId();
-    //         } else {
-    //             $errors = $api_response->getErrors();
-    //         }
-    //         return $result;
-    //     } catch (Exception $e) {
-    //         return response()->json(['Code' => 400, 'message' => "Something went wrong" . $e]);
-    //     }
-    // }
 }
