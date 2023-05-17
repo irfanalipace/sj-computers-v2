@@ -84,7 +84,7 @@
                             <tr>
                                 <th scope="row" colspan="2"
                                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
-                                    Delivery Days </th>
+                                    Estimated Delivery Day </th>
                                 <th
                                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
                                     <span>{{ $data['shipment_days'] }}</span>
@@ -96,7 +96,7 @@
                                     Delivery Price</th>
                                 <td
                                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                    <span>${{ $data['shipment_price'] }}</span>
+                                    <span>$ {{ $data['shipment_price'] }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -115,7 +115,7 @@
                                     Sub Total</th>
                                 <td
                                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                    <span>${{ $data['sub_total'] }}</span>
+                                    <span>$ {{ $data['sub_total'] }}</span>
                                 </td>
                             </tr>
 
@@ -125,7 +125,7 @@
                                     Order Total</th>
                                 <td
                                     style="background:#efefef;text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0;color:#7db701;font-weight:bold">
-                                    <span>${{ $data['total_amount'] }}</span>
+                                    <span>$ {{ $data['total_amount'] }}</span>
                                 </td>
                             </tr>
                             </tfoot>

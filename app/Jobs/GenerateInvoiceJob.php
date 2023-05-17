@@ -71,7 +71,8 @@ class GenerateInvoiceJob implements ShouldQueue
         $order = Order::create($order);
 
         $this->cartContent->each(function ($item) use ($order) {
-            $item = [
+
+            $data = [
                 'order_id' => $order->id,
                 'product_id' => $item->id,
                 'product_name' => $item->name,
@@ -84,14 +85,15 @@ class GenerateInvoiceJob implements ShouldQueue
             // }
 
 
-            OrderItem::create($item);
+            OrderItem::create($data);
         });
+
         $order['userInfo'] = $this->user;
         //Email to customer
         $email = $this->user->email;
         Mail::send('emails.customer-order', ['data' => $order], function ($m) use ($email) {
-            $m->from(env('MAIL_FROM_ADDRESS'), config('app.name', 'APP Name'));
-            $m->to("hariskh5512@gmail.com")->subject('Order Placed.');
+            $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
+            $m->to($email)->subject('Order Placed.');
         });
     }
     //Invoice create
