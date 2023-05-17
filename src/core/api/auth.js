@@ -128,7 +128,8 @@ export function resetPasswordApi({
         ApiService.post("reset-password", {
             email,
             password,
-            confirm_password,
+            password_confirmation: confirm_password,
+            token: access_token,
         })
             .then((response) => {
                 console.log(
