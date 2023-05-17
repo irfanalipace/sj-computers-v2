@@ -1,0 +1,47 @@
+.image-category-mobile-silder {
+    max-width: 100%;
+    width: 238px;
+
+}
+.swiper .image-category-mobile-silder {
+    width: 100% !important;
+    height: 165px;
+    width: 160px !important;
+}
+.link-text-category-mobile {
+    color: black;
+    font-family: 'Inter';
+    /* padding-top: 71px; */
+    font-size: 12px;
+}
+.category-dev-img-section-mobile {
+    text-align: left;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    margin-left: 9px;
+}
+.swiper-slider-mobile-category{
+display: flex ;
+}
+
+.my-swiper-mobile-category .swiper-button-next{
+display: none !important;
+}
+.my-swiper-mobile-category .swiper-button-prev{
+    display: none !important;
+}
+.image-container-category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px;
+}
+
+
+.swiper .swiper-pagination {
+    position: absolute;
+    text-align: center;
+    transition: .3s opacity;
+    transform: translate3d(0,0,0);
+    z-index: 0;
+}

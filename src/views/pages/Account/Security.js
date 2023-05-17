@@ -159,7 +159,7 @@ const Security = () => {
                                     </div>
                                     {apiError && (
                                         <p className="fs-6 mt-1 text-danger">
-                                            {apiError.password}
+                                            {apiError.newPassword}
                                         </p>
                                     )}
                                     <div className="input-wrapper">
@@ -202,7 +202,7 @@ const Security = () => {
                                     </div>
                                     {apiError && (
                                         <p className="fs-6 mt-1 text-danger">
-                                            {apiError.passwordConfirmation}
+                                            {apiError.newPassword}
                                         </p>
                                     )}
 
