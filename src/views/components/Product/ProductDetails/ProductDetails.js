@@ -139,7 +139,6 @@ const ProductDetails = ({ product }) => {
             <hr></hr>
             <div className="col-md-12 items-details-description">
                 <span className="items-text-style">Items Description</span>
-                {/* <ul className="ui-list-items">{product?.description}</ul> */}
             </div>
         </div>
     );

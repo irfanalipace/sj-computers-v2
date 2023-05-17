@@ -7,7 +7,6 @@ import {
     CLEAR_ALL_PRODUCTS,
     SET_SEARCH_STRING,
 } from "@store/products/productsSlice";
-import Loader from "@common/LoaderComponent/LoaderComponent";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
 
 const FilteredProducts = ({ categoryId }) => {
@@ -15,18 +14,12 @@ const FilteredProducts = ({ categoryId }) => {
     const products = useSelector((state) => state.products.products);
     const isLoading = useSelector((state) => state.products.isLoading);
     const apiError = useSelector((state) => state.products.apiError);
+    const currentPage = useSelector((state) => state.products.currentPage);
     const searchString = useSelector((state) => state.products.searchString);
+    const filtersArray = useSelector((state) => state.products.filtersArray);
     const [mounted, setMounted] = useState(false);
 
-    const [filter, setFilter] = useState();
-
-    const [categoryList, setCategoryList] = useState([]);
-
     const dispatch = useDispatch();
-
-    const handleClick = () => {
-        console.log("show more clicked");
-    };
 
     const filterObject = {
         page: 1,
@@ -49,27 +42,32 @@ const FilteredProducts = ({ categoryId }) => {
         };
     }, []);
 
+    const handleClick = () => {
+        filterObject.page = currentPage;
+        dispatch(filterProducts(filterObject, currentPage));
+    };
+
     useEffect(() => {
-        filterObject.name = searchString;
-        dispatch(filterProducts(filterObject));
-    }, [searchString]);
+        if (mounted) {
+            filterObject.name = searchString;
+            // const serializedArray = JSON.stringify(filtersArray);
+            filterObject.filter = filtersArray;
+            filterObject.page = 1;
+            console.log("filterObject: ", filterObject);
+            dispatch(filterProducts(filterObject));
+        }
+    }, [searchString, filtersArray]);
 
     return (
-        <>
-            {isLoading ? (
-                <Loader />
-            ) : (
-                <div className="filter-results">
-                    <ProductsGrid
-                        products={products}
-                        handleClick={handleClick}
-                        isLoading={isLoading}
-                        apiError={apiError}
-                        heading={`Best ${categorySlug}`}
-                    />
-                </div>
-            )}
-        </>
+        <div className="filter-results">
+            <ProductsGrid
+                products={products}
+                handleClick={handleClick}
+                isLoading={isLoading}
+                apiError={apiError}
+                heading={`Best ${categorySlug}`}
+            />
+        </div>
     );
 };
 

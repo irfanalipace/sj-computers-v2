@@ -53,6 +53,9 @@ function ShippingDetailsForm({ address, handleHeight }) {
         if (typeof cb === "function") handleHeight();
     }, [fieldErrors]);
 
+    useEffect(() => {
+        handleHeight();
+    }, []);
     return (
         <div>
             {settingAdress ? (
@@ -225,7 +228,8 @@ function ShippingDetailsForm({ address, handleHeight }) {
                             <div className="col-4">
                                 <div className="field-section">
                                     <label htmlFor={"zipCode"}>
-                                       {' '} Zip Code
+                                        {" "}
+                                        Zip Code
                                         <span className="text-danger">*</span>
                                     </label>
                                     <input

@@ -6,6 +6,7 @@ use App\Classes\StatusEnum;
 use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Cart;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -15,11 +16,11 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use App\Traits\Amazon\AmazonTrait;
 
 class GenerateInvoiceJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels,AmazonTrait;
     /**
      * Create a new job instance.
      *
@@ -58,7 +59,6 @@ class GenerateInvoiceJob implements ShouldQueue
 
         //saving order after invoice created
         $order = [];
-        //        Cart::session($this->userId)->getContent()->each(function ($item) use (&$items) {
 
         $order['total_amount'] = $this->cartData['total_amount'];
         $order['sub_total'] = $this->cartData['sub_total'];
@@ -70,25 +70,30 @@ class GenerateInvoiceJob implements ShouldQueue
         $order['item_qty'] = $this->cartData['item_qty'];
         $order = Order::create($order);
 
-
-
         $this->cartContent->each(function ($item) use ($order) {
-            $item = [
+
+            $data = [
                 'order_id' => $order->id,
                 'product_id' => $item->id,
                 'product_name' => $item->name,
                 'qty' => $item->quantity,
                 'price' => $item->price
             ];
+            $productInfo = $this->getAmazonInventory($item->id);
+            // if ($productInfo['status']) {
+            //     $this->updateAmazonInventory($productInfo, $item->quantity);
+            // }
 
-            OrderItem::create($item);
+
+            OrderItem::create($data);
         });
+
         $order['userInfo'] = $this->user;
         //Email to customer
         $email = $this->user->email;
         Mail::send('emails.customer-order', ['data' => $order], function ($m) use ($email) {
-            $m->from(env('MAIL_FROM_ADDRESS'), config('app.name', 'APP Name'));
-            $m->to("hariskh5512@gmail.com")->subject('Order Placed.');
+            $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
+            $m->to($email)->subject('Order Placed.');
         });
     }
     //Invoice create
@@ -125,5 +130,35 @@ class GenerateInvoiceJob implements ShouldQueue
         $invoice['status'] = StatusEnum::SUCCESS;
         $invoice = Invoice::create($invoice);
         return $invoice;
+    }
+
+    //update amzaon inventory
+    protected function updateAmazonInventory($productInfo, $qty)
+    {
+
+        $totalQuantity = (int) $productInfo['quantity'] - (int) $qty;
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://server5.sjops.us/api/inventory/data/update/Prod_05162023/',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $productInfo['sku'], 'quantity' => $totalQuantity)),
+            CURLOPT_HTTPHEADER => array(
+                'apikey: 810f8ad0-8585-4845-9954-9a82bdbc18bc',
+                'Content-Type: application/json',
+
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        return true;
     }
 }

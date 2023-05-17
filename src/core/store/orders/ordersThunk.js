@@ -21,7 +21,7 @@ export const getShippingDetails = () => {
         try {
             dispatch({ type: LOADING, payload: {} });
             let response = await getShippingAddressApi();
-           
+
             dispatch({
                 type: SET_SHIPPING_DETAILS,
                 payload: response.data,
@@ -37,7 +37,7 @@ export const getOrderDetails = () => {
         try {
             dispatch({ type: LOADING, payload: {} });
             let response = await getOrderDetailsApi();
-            const { success_orders , cancel_orders} = response.data;
+            const { success_orders, cancel_orders } = response.data;
             console.log(success_orders, "so before dispatch ");
             console.log(cancel_orders, "co before dispatch ");
 
