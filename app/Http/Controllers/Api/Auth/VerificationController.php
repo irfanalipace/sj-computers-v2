@@ -30,6 +30,6 @@ class VerificationController extends BaseController
 
         auth()->user()->sendEmailVerificationNotification();
 
-        return response()->json(["msg" => "Email verification link sent on your email id"]);
+        return $this->sendError(["msg" => ["IEmail verification link sent on your email id."]], 401);
     }
 }
