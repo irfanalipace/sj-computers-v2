@@ -23,7 +23,7 @@ const Contact = () => {
         };
         try {
             let response = await contactUsApi(params);
-            setMessage(response);
+            setMessage(response.data);
             values.subject_name = "";
             values.email = "";
             values.message = "";
