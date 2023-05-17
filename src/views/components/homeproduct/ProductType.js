@@ -7,7 +7,8 @@ import ProductItem4 from "@components/homeproduct/productcategory/ProductItem4";
 import addDesktop from "@images/advertisement/advertisement-desktop.png";
 import addMobile from "@images/advertisement/advertisement-mobile.png";
 import welcomeImage from "@images/advertisement/welcome-banner.png";
-import categoryImg1 from "@images/categories/category-bto.png";
+import categoryImg1 from "@images/categories/desktopweb.webp";
+import categorywellcom from "@images/categories/wellcom.webp";
 import categoryImg2 from "@images/categories/category-laptop.png";
 import categoryImg3 from "@images/categories/category-desktop.png";
 import categoryImg4 from "@images/categories/category-4.png";
@@ -18,7 +19,7 @@ export const ProductType = () => {
     return (
         <div className="product-type-container">
             <div className="row mx-0">
-                {/* <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-type-section">
                         <h4 className="h4-heading">Shop by Category</h4>
                         <div className="categories-container">
@@ -28,11 +29,12 @@ export const ProductType = () => {
                             <p className="section-link">Shop Now</p>
                         </Link>
                     </div>
-                </div> */}
+                </div>
 
+               
                 <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-type-section">
-                        <h4 className="h4-heading">BTO</h4>
+                        <h4 className="h4-heading">Gaming Desktop</h4>
                         <div className="categories-container">
                             <ProductItem1 image={categoryImg1} />
                         </div>
@@ -43,16 +45,16 @@ export const ProductType = () => {
                 </div>
                 <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-type-section">
-                        <h4 className="h4-heading">Laptops</h4>
+                        <h4 className="h4-heading">Business Computer</h4>
                         <div className="categories-container">
-                            <ProductItem1 image={categoryImg3} />
+                            <ProductItem1 image={categoryImg1} />
                         </div>
                         <Link to="/" className="text-decoration-none">
                             <p className="section-link">Shop Now</p>
                         </Link>
                     </div>
                 </div>
-                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                {/* <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-type-section">
                         <h4 className="h4-heading">Monitors</h4>
                         <div className="categories-container">
@@ -62,7 +64,7 @@ export const ProductType = () => {
                             <p className="section-link">Shop Now</p>
                         </Link>
                     </div>
-                </div>
+                </div> */}
                 <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="advertisement-section">
                         {isAuthenticated ? (
@@ -90,7 +92,7 @@ export const ProductType = () => {
                         )}
                         <div className="product-section-advertisment">
                             <img
-                                src={addDesktop}
+                                src={categorywellcom}
                                 className="advertisment-img d-sm-none d-lg-block"
                             />
                             <img
