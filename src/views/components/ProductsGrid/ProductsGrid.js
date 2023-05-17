@@ -5,7 +5,7 @@ import Product from "@components/ProductCard/ProductCard";
 import "./ProductsGrid.css";
 
 export default function ProductsGrid({
-    products,
+    products = [],
     handleClick,
     isLoading,
     apiError,

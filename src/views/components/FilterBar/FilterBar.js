@@ -52,7 +52,7 @@ const FilterBar = () => {
                 <Loader />
             ) : (
                 <ul className="filters-list">
-                    {Object.entries(filters).map(
+                    {/* {Object.entries(filters).map(
                         ([category, options], index) => (
                             <li
                                 className="filter-key"
@@ -106,7 +106,7 @@ const FilterBar = () => {
                                 </ul>
                             </li>
                         )
-                    )}
+                    )} */}
                     <li>
                         <button onClick={handleShowMore}>
                             <span className="me-2">Show More</span>
