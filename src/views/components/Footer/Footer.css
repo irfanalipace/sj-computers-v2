@@ -114,6 +114,9 @@ footer ul li {
 .back-to-top-hover-effct:hover button {
     background-color: #17436d !important;
 }
+.font-style-heading-footer{
+    font-weight: bold;
+}
 @media screen and (max-width: 770px) {
     .footer-text-line-font-size {
         display: flex;

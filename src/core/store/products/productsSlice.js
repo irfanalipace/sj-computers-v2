@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     products: [],
     searchString: null,
+    isSearchedProducts: false,
     apiError: false,
     isLoading: false,
     currentPage: 1,
@@ -25,7 +26,6 @@ const productSlice = createSlice({
             state.isLoading = false;
         },
         SEARCH_PRODUCTS: (state, action) => {
-            console.log("search products: ", action);
             if (state.currentPage === 1)
                 state.products = [...action.payload.data];
             else state.products = [...state.products, ...action.payload.data];
@@ -33,8 +33,18 @@ const productSlice = createSlice({
             state.searchString = action.payload.searchString;
             state.isLoading = false;
         },
+
+        FILTER_PRODUCTS: (state, action) => {
+            if (state.currentPage === 1)
+                state.products = [...action.payload.data];
+            else state.products = [...state.products, ...action.payload.data];
+            state.currentPage = state.currentPage + 1;
+            state.isLoading = false;
+        },
+        SET_SEARCH_STRING: (state, action) => {
+            state.searchString = action.payload;
+        },
         CLEAR_SEARCH: (state) => {
-            console.log("clear search");
             state.searchString = null;
             state.currentPage = 1;
             state.products = [];
@@ -61,6 +71,8 @@ export const {
     CLEAR_LOADING,
     FETCH_PRODUCTS,
     SEARCH_PRODUCTS,
+    SET_SEARCH_STRING,
+    FILTER_PRODUCTS,
     CLEAR_PRODUCTS,
     CLEAR_SEARCH,
     CLEAR_ALL_PRODUCTS,

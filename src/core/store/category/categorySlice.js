@@ -17,6 +17,7 @@ const categorySlice = createSlice({
             state.isLoading = false;
         },
         FETCH_CATEGORIES: (state, action) => {
+            console.log("11 fetch categories");
             state.categories = [...action.payload];
             state.isLoading = false;
         },

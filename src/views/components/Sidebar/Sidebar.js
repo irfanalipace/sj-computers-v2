@@ -89,11 +89,13 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                     {visibleCategories < categories.length && (
                                         <li>
                                             <button onClick={handleShowMore}>
-                                                Show More
+                                                <span className="me-2">
+                                                    Show More
+                                                </span>
+                                                <FontAwesomeIcon
+                                                    icon={faAngleDown}
+                                                />
                                             </button>
-                                            <FontAwesomeIcon
-                                                icon={faAngleDown}
-                                            />
                                         </li>
                                     )}
                                 </ul>

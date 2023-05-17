@@ -153,6 +153,7 @@ function ShippingDetailsForm({ address, handleHeight }) {
                                     {fieldErrors.address}
                                 </p>
                             )}
+                            <br></br>
                             <input
                                 id="floorAddress"
                                 name="floorAddress"
@@ -224,7 +225,7 @@ function ShippingDetailsForm({ address, handleHeight }) {
                             <div className="col-4">
                                 <div className="field-section">
                                     <label htmlFor={"zipCode"}>
-                                        ZipCode
+                                       {' '} Zip Code
                                         <span className="text-danger">*</span>
                                     </label>
                                     <input
@@ -232,7 +233,7 @@ function ShippingDetailsForm({ address, handleHeight }) {
                                         name="zip_code"
                                         className="input-field"
                                         type="text"
-                                        placeholder="ZipCode"
+                                        placeholder=" ZipCode"
                                         value={values?.zip_code}
                                         onChange={handleChange}
                                     />

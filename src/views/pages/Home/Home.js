@@ -3,7 +3,7 @@ import BannerCategory from "./BannerCategory";
 // import CarouselSlider from "@components/Sliders/CarouselSlider";
 // import ProductThreeItem from "@components/homeproduct/product3category/ProductThreeItem";
 // import Recommendation from "@components/Recommendation/Recommendation";
-import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
+import ProductsHomePage from "./ProductsHomePage";
 
 import "./Home.css";
 
@@ -13,7 +13,7 @@ const Home = () => {
             <TopBar />
             <BannerCategory />
             <div className="products-grid-container">
-                <ProductsGrid />
+                <ProductsHomePage />
             </div>
             {/* <CarouselSlider /> */}
             {/* <ProductThreeItem /> */}
