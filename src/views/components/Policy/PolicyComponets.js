@@ -1,79 +1,82 @@
-import React from "react";
+import React , {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import './PolicyComponets.css'
+import {  } from "../../../core/api/system-pages";
 import policyimage from "@images/Policy/polict-cart-comp.png";
+import { getSystemPagesApi } from "../../../core/api/system-pages";
+import { useLocation } from "react-router-dom";
 import Header from "@components/Header/Header";
 
+const HeadereLinks = [
+    { path: "/", title: "About Us" },
+    { path: "/", title: "What We Do?" },
+    { path: "/", title: "Return & Refund" },
+    { path: "/", title: "Shipping Policy" },
+    { path: "/", title: "Terms of Services" },
+    { path: "/", title: "Privacy Policy" },
+    { path: "/", title: "Subscribe" },
+  ];
+
 const PolicyComponets = () => {
+    const [pageContent, setPageContent] = useState({});
+    // const [PageTitle, setpageTitle] = useState("");
+    
+    // const pageName = {
+    //     key : "shipping_policy"
+    // }
+   
+
+
+    const location = useLocation();
+    const pageName = location.pathname.substring(1);
+
+    let PageTitle;
+
+    if (pageName === "term_services") {
+      PageTitle = "Terms of Services";
+    } 
+    else if (pageName === "return_refund_policy") {
+      PageTitle = "Return and Refund Policy";
+    } 
+    else if (pageName === "privacy_policy") {
+      PageTitle = "Privacy Policy";
+    } 
+    else if (pageName === "shipping_policy") {
+      PageTitle = "Shipping Policy";
+    } 
+    else {
+      pageName = pageName;
+    }
+
+   
+
+    useEffect( () => {
+        const responsePage = getSystemPagesApi(pageName);
+        setPageContent(responsePage);
+        console.log(pageContent, "page Content")
+    }, []);
+
     return (
        <div>
 {/* <Header /> */}
-<div className="policy-background-color">
-            <div className="row">
-                <div >
-                    <header className="topBar px-3 policy-header-topbar">
+            <div className="policy-background-color">
+                    <div className="row">
+                        <div >
+                         <header className="topBar px-3 policy-header-topbar">
                         <div className="topBar-inner-policy">
                             <div className="menuBar-policy" >
-                            
-
-                                <ul className="text-decoration-none policy-menu-item-list">
-                                    <li className="policy-listitem">
-                                        <Link
-                                            to="/"
-                                            className="text-decoration-none text-color hover-effect-sets-topbar"
-                                        >
-                                           About Us
-                                        </Link>
-                                    </li>
-                                    <li className="policy-listitem">
-                                        <Link
-                                            to="/"
-                                            className="text-decoration-none text-color hover-effect-sets-topbar"
-                                        >
-                                         What We Do?
-                                        </Link>
-                                    </li>
-                                    <li className="policy-listitem">
-                                        <Link
-                                            to="/"
-                                            className="text-decoration-none text-color hover-effect-sets-topbar"
-                                        >
-                                           Return & Refund
-                                        </Link>
-                                    </li>
-                                    <li className="policy-listitem">
-                                        <Link
-                                            to="/"
-                                            className="text-decoration-none text-color hover-effect-sets-topbar"
-                                        >
-                                            Shipping Policy
-                                        </Link>
-                                    </li>
-                                    <li className="policy-listitem">
-                                        <Link
-                                            to="/"
-                                            className="text-decoration-none text-color hover-effect-sets-topbar"
-                                        >
-                                          Terms of Services
-                                        </Link>
-                                    </li>
-                                    <li className="policy-listitem">
-                                        <Link
-                                            to="/"
-                                            className="text-decoration-none text-color hover-effect-sets-topbar"
-                                        >
-                                          Privacy Policy
-                                        </Link>
-                                    </li>
-                                    <li className="policy-listitem">
-                                        <Link
-                                            to="/"
-                                            className="text-decoration-none text-color hover-effect-sets-topbar"
-                                        >
-                                         Subscribe
-                                        </Link>
-                                    </li>
-                                </ul>
+                            <ul className="text-decoration-none policy-menu-item-list">
+                            {HeadereLinks.map((link, index) => (
+                                <li className="policy-listitem" key={index}>
+                                <Link
+                                    to={link.path}
+                                    className="text-decoration-none text-color hover-effect-sets-topbar"
+                                >
+                                    {link.title}
+                                </Link>
+                                </li>
+                            ))}
+                            </ul>
                             </div>
                         </div>
                     </header>
@@ -81,18 +84,16 @@ const PolicyComponets = () => {
             </div>
            <div className="policyset-container-dev">
            <div className="">
-                
-                
                 <div className="row">
                     <div className="col-lg-3 col-md-6 col-sm-8 text-color-all-text">
-                    <span className="privacy-policy-text-dev">Privacy Policy</span>
+                    <span className="privacy-policy-text-dev">{PageTitle}</span>
                     <div className="cart-dev-policy-section">
                     <div className="card-policy-coponents">
                         <img src={policyimage} alt='' />
                       <div className="text-span-policy-dev">
                         <span className='text-color-all-text-span'>  Want to check the status of your order? Go to Your Orders to find tracking information and order details</span>
                         <div className="order-button-policy">
-                        <button className="policy-card-order-button">Order</button>
+                        <button className="policy-card-order-button"><Link to={'/account/orders'}style={{textDecoration: 'none', color: '#ffffff'}}>Order</Link></button>
                         </div>
                       </div>
                      

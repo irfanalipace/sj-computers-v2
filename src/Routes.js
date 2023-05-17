@@ -169,7 +169,31 @@ export const Router = () => {
             ),
         },
         {
-            path: "/policy-page",
+            path: "/privacy_policy",
+            element: (
+                <Suspense fallback={<Loader />}>
+                    <Policy />
+                </Suspense>
+            ),
+        },
+        {
+            path: "/shipping_policy",
+            element: (
+                <Suspense fallback={<Loader />}>
+                    <Policy />
+                </Suspense>
+            ),
+        },
+        {
+            path: "/return_refund_policy",
+            element: (
+                <Suspense fallback={<Loader />}>
+                    <Policy />
+                </Suspense>
+            ),
+        },
+        {
+            path: "/term_services",
             element: (
                 <Suspense fallback={<Loader />}>
                     <Policy />

@@ -141,7 +141,7 @@ const Footer = () => {
                                         </li>
                                         <li>
                                             <Link
-                                                to="#"
+                                                to="/return_refund_policy"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Return And refund Policies
@@ -149,7 +149,7 @@ const Footer = () => {
                                         </li>
                                         <li>
                                             <Link
-                                                to="#"
+                                                to="/shipping_policy"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Shipping Policies
@@ -157,7 +157,7 @@ const Footer = () => {
                                         </li>
                                         <li>
                                             <Link
-                                                to="#"
+                                                to="/term_services"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Terms of Services
