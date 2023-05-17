@@ -42,7 +42,7 @@ class PaypalController extends Controller
     public function processTransaction(Request $request)
     {
         try {
-           
+
             $response = $this->TransactionInProgress($request, $this->provider, auth()->user()->id);
 
             // This code checks if the 'paypal_link' key exists and is not null in the $response array.
@@ -55,7 +55,7 @@ class PaypalController extends Controller
                 return response()->json(['status' => 400, 'msg' => 'Something went wrong in paypal generating link']);
             }
         } catch (Exception $e) {
-           
+
             return response()->json(
                 ['status' => 200, 'error', 'Something went wrong.' . $e]
             );
@@ -65,13 +65,15 @@ class PaypalController extends Controller
     public function successTransaction(Request $request)
     {
 
+
         try {
             // DB::beginTransaction();
             $data = $request->all();
             $response = $this->provider->getExpressCheckoutDetails($request->token);
 
             if ($this->userId == self::DUMMY) {
-                $this->userId = User::find($request->id)->id;
+                $this->user = User::find($request->id);
+                $this->userId = $this->user->id;
             }
 
             $orderData = [];
