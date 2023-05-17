@@ -6,7 +6,6 @@ import {
 import { categoryApi } from "@api/category";
 
 export const fetchCategory = () => {
-    console.log("11 fetch category running");
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
