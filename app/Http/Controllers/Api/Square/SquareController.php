@@ -53,11 +53,11 @@ class SquareController extends Controller
 
             //create customer || retrieve customer if already added
             (auth()->user()->square_cus_id == null) ? $customer = $this->createCustomer() : $customer = $this->getCustomer();
-
+           
             // Get card Token
             // $cardToken = $this->customerCardToken($request, $customer);
             $amount_money = new Money();
-            $amount_money->setAmount(Cart::session($this->userId)->getSubTotal());
+            $amount_money->setAmount(Cart::session($this->userId)->getTotal());
             $amount_money->setCurrency(StatusEnum::currency);
             //create payment Request
             $body = new CreatePaymentRequest($request->source_id, $idempotencyKey);
@@ -68,7 +68,7 @@ class SquareController extends Controller
             $body->setReferenceId('user-' . $this->userId);
             
             $api_response = $this->squareClient->getPaymentsApi()->createPayment($body);
-            
+           
             if ($api_response->isSuccess()) {
                 $orderData = [];
 
@@ -115,7 +115,7 @@ class SquareController extends Controller
     public function createCustomer()
     {
         try {
-
+            
             //set address
             // $address = new Address();
             // $address->setAddressLine1('500 Electric Ave');
@@ -129,11 +129,11 @@ class SquareController extends Controller
             $body->setGivenName(auth()->user()->name);
             $body->setEmailAddress(auth()->user()->email);
             // $body->setAddress($address);
-            $body->setPhoneNumber('+1-212-555-4240');
+            // $body->setPhoneNumber('+1-212-555-4240');
             $body->setNote('our customer name is ' . auth()->user()->name . '');
-
+           
             $api_response = $this->squareClient->getCustomersApi()->createCustomer($body);
-
+            
             if ($api_response->isSuccess()) {
                 $customer_id = $api_response->getResult()->getCustomer()->getId();
                 //saving customer id in user table square_cus_id column
