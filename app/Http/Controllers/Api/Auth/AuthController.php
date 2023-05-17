@@ -12,6 +12,8 @@ use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Http\Requests\Auth\VerifyOtpRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\Auth\VerifyEmailRequest;
+use App\Jobs\SendotpMail;
+use App\Jobs\SendVerificationMail;
 use App\Mail\LoginOtpMail;
 use App\Models\Otp;
 use App\Models\Product;
@@ -20,7 +22,6 @@ use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
@@ -55,7 +56,8 @@ class AuthController extends BaseController
                         $request->only('name', 'email'),
                         ['role_id' => User::USER_ROLE_ID, 'password' => bcrypt($request->password)]
                     )
-                )->sendEmailVerificationNotification();
+                );
+                SendVerificationMail::dispatch($request->email);
             });
 
             return $this->sendResponse([], 'User register successfully, Kindly verify the email for further process.');
@@ -80,9 +82,9 @@ class AuthController extends BaseController
         $otp->user_id = $user->id;
         $otp->code = $otpCode;
         $otp->save();
-
-        //        Cache::put('login_otp_'.$user->id, $otp, now()->addMinutes(5));
-        Mail::to($user->email)->send(new LoginOtpMail($otp));
+       
+        // Cache::put('login_otp_'.$user->id, $otp, now()->addMinutes(5));
+        SendotpMail::dispatch($user->email,$otp);
 
         $token = $user->createToken(User::AUTH_TOKEN)->accessToken;
 

@@ -12,6 +12,7 @@ class LoginOtpMail extends Mailable
     use Queueable, SerializesModels;
 
     public $otp;
+ 
     /**
      * Create a new message instance.
      *
@@ -19,7 +20,9 @@ class LoginOtpMail extends Mailable
      */
     public function __construct($otp)
     {
+        
         $this->otp = $otp;
+       
     }
 
     /**
