@@ -15,8 +15,10 @@ use TCG\Voyager\Facades\Voyager;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::view('forgot_password', 'auth.reset_password')->name('password.reset');
 
-//
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });

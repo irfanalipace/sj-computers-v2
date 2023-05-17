@@ -150,7 +150,7 @@ class AuthController extends BaseController
         if (empty($data)) {
             return $this->sendError(['otp' => ['Invalid OTP Code,  Try again.']]);
         }
-        //after verify OTP deleting OTP for a user 
+        //after verify OTP deleting OTP for a user
         Otp::where('user_id', '=', auth()->user()->id)
             ->where('code', $otp)->delete();
 
