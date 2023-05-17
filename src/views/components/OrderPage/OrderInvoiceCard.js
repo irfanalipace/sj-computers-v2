@@ -26,6 +26,7 @@ const OrderInvoiceCard = ({ data ,activeTab }) => {
         <div className="summary-btn">
         <Button
         style={buttonStyles}
+        disabled={activeTab === 2 ? true : false}
             // clickHandler={(e) => handleClick(e, true, id)}
              className={"form-button"}
             // isLoading={isLoading}

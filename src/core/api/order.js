@@ -44,3 +44,27 @@ export function OrderSearchApi(invoiceId) {
             });
     });
 }
+export function OrderListhApi() {
+
+    return new Promise((resolve, reject) => {
+
+        const myParams = {
+            month: "1",
+            per_page: "1",
+            page: "1"
+          };
+
+        ApiService.get(`/order-list`, "", myParams)
+            .then((response) => {
+                console.log(
+                    "file: order.js | order-list| response",
+                    response.data
+                );
+                resolve(response.data);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error order list", e);
+                reject(e);
+            });
+    });
+}

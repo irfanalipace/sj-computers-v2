@@ -9,7 +9,7 @@ import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import { getOrderDetails } from "@store/orders/ordersThunk";
 import Button from "@common/Button/Button";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
-import { OrderSearchApi} from "../../../core/api/order"
+import { OrderSearchApi, OrderListhApi } from "../../../core/api/order"
 import OrderCard from "../../components/OrderPage/OrderProducts";
 import OrderInvoiceCard from "../../components/OrderPage/OrderInvoiceCard";
 
@@ -62,6 +62,20 @@ const dummyDataForCancelledOrders = [
     //         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the .",
     // },
 ];
+const searchOrderArray = [
+    {
+        orderPlacedDate: "April 17,2024",
+        TotalAmount: "$150",
+        orderID: "123456-878901234",
+        orderStatus: "Arriving",
+        earlyDeliveryDate: "April 20",
+        lateDeliveryDate: "May 8",
+        productImageUrl:
+            "https://images.philips.com/is/image/PhilipsConsumer/223V7QSB_00-RTP-global-001?$jpglarge$&wid=960",
+        productDescription:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the .",
+    },
+];
 
 const dummyInvoice = {
     productName: "Product Name",
@@ -90,6 +104,7 @@ const CustomTabs = styled(Tabs)({
 const OrderPage = () => {
     const [name, setName] = useState("");
     const [orderSearch, setOrderSearch] = useState("");
+    const [orderSearchData, setOrderSearchData] = useState([]);
     const [selectedValue, setSelectedValue] = useState("2 month");
     const [activeTab, setActiveTab] = useState(0);
 
@@ -123,17 +138,24 @@ const OrderPage = () => {
     useEffect(() => {
       
          dispatch(getOrderDetails());
+         const orderlist= OrderListhApi();
+         console.log(orderlist, "orderList")
+
       
       }, [dispatch]);
     
         
 
     const handleTabChange = (event, newValue) => {
+        setOrderSearchData([])
         setActiveTab(newValue);
     };
     const handleSearch = async () => {
+        setActiveTab(2);
+        
         const responseSearch= await OrderSearchApi(orderSearch);
         console.log(responseSearch.data, "response search");
+        setOrderSearchData(searchOrderArray)
         setOrderSearch("");
     };
   
@@ -160,6 +182,14 @@ const OrderPage = () => {
               </div>
             ) : (
               <OrderCard data={cancelOrders} />
+            )
+          ) : activeTab === 2 ?(
+            orderSearchData.length === 0 ? (
+              <div className="flex justify-center items-center">
+                <p>Orders Not found.</p>
+              </div>
+            ) : (
+              <OrderCard data={orderSearchData} />
             )
           ) : null;
     };
@@ -223,6 +253,7 @@ const OrderPage = () => {
                             >
                                 <Tab label="Orders" />
                                 <Tab label="Cancelled Orders" />
+                                <Tab label="Search orders" />
                             </CustomTabs>
                             <div
                                 style={{
@@ -231,7 +262,9 @@ const OrderPage = () => {
                                     marginBottom: 40,
                                 }}
                             >
-                                <p className="orderType">
+                                {activeTab !== 2 && (
+                                    <>
+                                    <p className="orderType">
                                     {}{" "}
                                     {activeTab === 0
                                         ? `${successOrders.length} orders`
@@ -276,6 +309,10 @@ const OrderPage = () => {
                         <option value="Option 3">Option 3</option>
                         </select> */}
                                 </div>
+                                    </>
+                                    
+                                )}
+                                
                             </div>
 
                             {renderTabContent()}
