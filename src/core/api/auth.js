@@ -8,7 +8,7 @@ export function loginApi({ email, password }) {
         })
             .then((response) => {
                 console.log("file: auth.module.js | login| response", response);
-                resolve(response);
+                resolve(response.data);
             })
             .catch((e) => {
                 console.log("Console Log: : error Login", e);
@@ -30,7 +30,7 @@ export function registerApi({ name, email, password, confirmPassword }) {
                     "file: auth.module.js | register| response",
                     response
                 );
-                resolve(response);
+                resolve(response.data);
             })
             .catch((e) => {
                 console.log("Console Log: : error", e);
@@ -50,7 +50,7 @@ export function logoutApi() {
                     "file: auth.module.js | logout| response",
                     response
                 );
-                resolve(response);
+                resolve(response.data);
             })
             .catch((e) => {
                 console.log("Console Log: : error", e);
@@ -70,7 +70,7 @@ export function verifyEmailApi(email) {
                     "file: auth.module.js | verifyEmailApi| response",
                     response
                 );
-                resolve(response);
+                resolve(response.data);
             })
             .catch((e) => {
                 console.log("Console Log: : error", e);
@@ -89,7 +89,7 @@ export function verifyOtpApi({ otp }) {
                     "file: auth.module.js | verifyOtpApi| response",
                     response
                 );
-                resolve(response);
+                resolve(response.data);
             })
             .catch((e) => {
                 console.log("Console Log: : error", e);
@@ -108,7 +108,7 @@ export function forgetPasswordApi({ email }) {
                     "file: auth.module.js | forgetPasswordApi| response",
                     response
                 );
-                resolve(response);
+                resolve(response.data);
             })
             .catch((e) => {
                 console.log("Console Log: : error", e);
@@ -135,7 +135,7 @@ export function resetPasswordApi({
                     "file: auth.module.js | resetPasswordApi| response",
                     response
                 );
-                resolve(response);
+                resolve(response.data);
             })
             .catch((e) => {
                 console.log("Console Log: : error", e);
@@ -153,7 +153,7 @@ export function updateProfileApi(formData) {
                     "file: auth.module.js | updateProfileApi| response",
                     response
                 );
-                resolve(response);
+                resolve(response.data);
             })
             .catch((e) => {
                 console.log("Console Log: : error", e);
@@ -171,7 +171,7 @@ export function updatePasswordApi(data) {
                     "file: auth.module.js | updateProfileApi| response",
                     response
                 );
-                resolve(response);
+                resolve(response.data);
             })
             .catch((e) => {
                 console.log("Console Log: : error", e);

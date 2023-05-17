@@ -4,8 +4,7 @@ import BannerCategory from "./BannerCategory";
 // import CarouselSlider from "@components/Sliders/CarouselSlider";
 // import ProductThreeItem from "@components/homeproduct/product3category/ProductThreeItem";
 // import Recommendation from "@components/Recommendation/Recommendation";
-import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
-import MobileHomeCategory from "@components/MobileCategory/MobileHomeCategory";
+import ProductsHomePage from "./ProductsHomePage";
 import SellingProducts from "@components/MobileCategory/SellingProducts/SellingProducts";
 import "./Home.css";
 
@@ -31,7 +30,7 @@ const Home = () => {
                     <TopBar />
                     <BannerCategory />
                     <div className="products-grid-container">
-                        <ProductsGrid />
+                        <ProductsHomePage />
                     </div>
                 </div>
             )}

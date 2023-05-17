@@ -9,7 +9,7 @@ import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import { getOrderDetails } from "@store/orders/ordersThunk";
 import Button from "@common/Button/Button";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
-import { OrderSearchApi, OrderListhApi } from "../../../core/api/order"
+import { OrderSearchApi, OrderListhApi } from "../../../core/api/order";
 import OrderCard from "../../components/OrderPage/OrderProducts";
 import OrderInvoiceCard from "../../components/OrderPage/OrderInvoiceCard";
 
@@ -108,8 +108,6 @@ const OrderPage = () => {
     const [selectedValue, setSelectedValue] = useState("2 month");
     const [activeTab, setActiveTab] = useState(0);
 
-   
-
     const user = useSelector((state) => state.auth.user);
     const apiError = useSelector((state) => state.auth.apiError);
     const isLoading = useSelector((state) => state.orders.isLoading);
@@ -121,77 +119,74 @@ const OrderPage = () => {
     };
 
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         console.log(user, "user details");
         setName(user.name);
-       
-      
     }, [user]);
-    
+
     useEffect(() => {
-      
         return function () {
             dispatch(CLEAR_API_ERRORS());
         };
     }, []);
     useEffect(() => {
-      
-         dispatch(getOrderDetails());
-         const orderlist= OrderListhApi();
-         console.log(orderlist, "orderList")
-
-      
-      }, [dispatch]);
-    
-        
+        dispatch(getOrderDetails());
+        const orderlist = OrderListhApi();
+        console.log(orderlist, "orderList");
+    }, [dispatch]);
 
     const handleTabChange = (event, newValue) => {
-        setOrderSearchData([])
+        setOrderSearchData([]);
         setActiveTab(newValue);
     };
     const handleSearch = async () => {
         setActiveTab(2);
-        
-        const responseSearch= await OrderSearchApi(orderSearch);
+
+        const responseSearch = await OrderSearchApi(orderSearch);
         console.log(responseSearch.data, "response search");
-        setOrderSearchData(searchOrderArray)
+        setOrderSearchData(searchOrderArray);
         setOrderSearch("");
     };
-  
 
     const renderTabContent = () => {
         if (isLoading) {
             return <LoaderComponent />;
-          }
+        }
         return activeTab === 0 ? (
             successOrders.length === 0 ? (
-              <div className="flex justify-center items-center">
-                <p>No success orders</p>
-              </div>
+                <div className="flex justify-center items-center">
+                    <p>No success orders</p>
+                </div>
             ) : (
                 <>
-                {/* {Object.Keys(orderDetails).length === 0 ? "data have" : "no data"} */}
-              <OrderCard data={successOrders} />
+                    {/* {Object.Keys(orderDetails).length === 0 ? "data have" : "no data"} */}
+                    {/* <OrderCard data={successOrders} /> */}
+                    <div className="flex justify-center items-center">
+                        <p>No success orders</p>
+                    </div>
                 </>
             )
-          ) : activeTab === 1 ? (
+        ) : activeTab === 1 ? (
             cancelOrders.length === 0 ? (
-              <div className="flex justify-center items-center">
-                <p>No cancelled orders.</p>
-              </div>
+                <div className="flex justify-center items-center">
+                    <p>No cancelled orders.</p>
+                </div>
             ) : (
-              <OrderCard data={cancelOrders} />
+                // <OrderCard data={cancelOrders} />
+                <div className="flex justify-center items-center">
+                    <p>No cancelled orders</p>
+                </div>
             )
-          ) : activeTab === 2 ?(
+        ) : activeTab === 2 ? (
             orderSearchData.length === 0 ? (
-              <div className="flex justify-center items-center">
-                <p>Orders Not found.</p>
-              </div>
+                <div className="flex justify-center items-center">
+                    <p>Orders Not found.</p>
+                </div>
             ) : (
-              <OrderCard data={orderSearchData} />
+                <OrderCard data={orderSearchData} />
             )
-          ) : null;
+        ) : null;
     };
     return (
         <div className="account-page order-page">
@@ -264,41 +259,41 @@ const OrderPage = () => {
                             >
                                 {activeTab !== 2 && (
                                     <>
-                                    <p className="orderType">
-                                    {}{" "}
-                                    {activeTab === 0
-                                        ? `${successOrders.length} orders`
-                                        : `${cancelOrders.length} cancelled order`}{" "}
-                                    place in
-                                </p>
-                                <div style={{ display: "inline-flex" }}>
-                                    <Select
-                                        data={[
-                                            {
-                                                value: "2 month",
-                                                label: "2 month",
-                                            },
-                                            // { value: 'option2', label: 'Option 2' },
-                                            // { value: 'option3', label: 'Option 3' },
-                                        ]}
-                                        value={selectedValue}
-                                        onChange={handleDropdownChange}
-                                        placeholder="Select an option"
-                                        style={{
-                                            background: "#FFFFFF",
-                                            border: "1px solid #DDDDDD",
-                                            boxShadow:
-                                                "0px 1px 4px rgba(0, 0, 0, 0.25)",
-                                            borderRadius: "8px",
-                                            fontFamily: "Inter",
-                                            fontStyle: "normal",
-                                            fontWeight: "400",
-                                            fontSize: "12px",
-                                            lineHeight: "164%",
-                                            color: "#000000",
-                                        }}
-                                    />
-                                    {/* <select
+                                        <p className="orderType">
+                                            {}{" "}
+                                            {activeTab === 0
+                                                ? `${successOrders.length} orders`
+                                                : `${cancelOrders.length} cancelled order`}{" "}
+                                            place in
+                                        </p>
+                                        <div style={{ display: "inline-flex" }}>
+                                            <Select
+                                                data={[
+                                                    {
+                                                        value: "2 month",
+                                                        label: "2 month",
+                                                    },
+                                                    // { value: 'option2', label: 'Option 2' },
+                                                    // { value: 'option3', label: 'Option 3' },
+                                                ]}
+                                                value={selectedValue}
+                                                onChange={handleDropdownChange}
+                                                placeholder="Select an option"
+                                                style={{
+                                                    background: "#FFFFFF",
+                                                    border: "1px solid #DDDDDD",
+                                                    boxShadow:
+                                                        "0px 1px 4px rgba(0, 0, 0, 0.25)",
+                                                    borderRadius: "8px",
+                                                    fontFamily: "Inter",
+                                                    fontStyle: "normal",
+                                                    fontWeight: "400",
+                                                    fontSize: "12px",
+                                                    lineHeight: "164%",
+                                                    color: "#000000",
+                                                }}
+                                            />
+                                            {/* <select
                         value={1}
                         //   onChange={}
                         style={{ marginLeft: '5px' }}
@@ -308,21 +303,22 @@ const OrderPage = () => {
                         <option value="Option 2">Option 2</option>
                         <option value="Option 3">Option 3</option>
                         </select> */}
-                                </div>
+                                        </div>
                                     </>
-                                    
                                 )}
-                                
                             </div>
 
                             {renderTabContent()}
                         </Box>
                     </div>
                     <div
-                        style={{ marginTop: '15%', marginBottom: '5%' }}
+                        style={{ marginTop: "15%", marginBottom: "5%" }}
                         className="col-sm-12 col-md-3 col-3"
                     >
-                        <OrderInvoiceCard activeTab={activeTab} data={dummyInvoice} />
+                        <OrderInvoiceCard
+                            activeTab={activeTab}
+                            data={dummyInvoice}
+                        />
                     </div>
                 </div>
             </div>

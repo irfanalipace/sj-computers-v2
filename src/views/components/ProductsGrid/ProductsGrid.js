@@ -5,7 +5,7 @@ import Product from "@components/ProductCard/ProductCard";
 import "./ProductsGrid.css";
 
 export default function ProductsGrid({
-    products = [],
+    products,
     handleClick,
     isLoading,
     apiError,
@@ -16,7 +16,7 @@ export default function ProductsGrid({
         <div className="products-grid mb-3">
             <h3>{heading}</h3>
             <Row className="mx-0 justify-content-left">
-                {products.map((product) => (
+                {products?.map((product) => (
                     <Col xs={12} sm={6} md={4} lg={2} key={product.id}>
                         <Product product={product} inGrid={true} />
                     </Col>
