@@ -16,11 +16,29 @@ const FilterBar = () => {
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [filtersInArray, setFiltersInArray] = useState([]);
     const [loadingFilters, setLoadingFilters] = useState(false);
+    const [visibleCategories, setVisibleCategories] = useState(8);
+    const [visibleEntries, setVisibleEntries] = useState({});
+    console.log("visisble entries", visibleEntries);
     const isLoading = useSelector((state) => state.products.isFiltering);
 
     const dispatch = useDispatch();
 
-    console.log("filters", filtersInArray);
+    const handleShowMoreCategory = () => {
+        setVisibleCategories(
+            (prevVisibleCategories) => prevVisibleCategories + 8
+        );
+    };
+
+    const handleShowMoreitems = (category) => {
+        console.log("11 category: ", category);
+        console.log("11 visible: ", visibleEntries[category].visibleEntries);
+        setVisibleEntries((prevVisibleCategories) => {
+            let tempVariable = { ...prevVisibleCategories };
+            tempVariable[category].visibleEntries =
+                prevVisibleCategories[category].visibleEntries + 8;
+            return tempVariable;
+        });
+    };
 
     const handleCheckboxChange = (event, category, option) => {
         const isChecked = event.target.checked;
@@ -68,92 +86,78 @@ const FilterBar = () => {
         setLoadingFilters(true);
         let response = await getFilterListApi();
         setFilters(response.data);
+        const keys = Object.keys(response.data);
+        const tempVariable = {};
+
+        for (const key of keys) {
+            tempVariable[key] = { visibleEntries: 8 };
+        }
+        setVisibleEntries(tempVariable);
         setLoadingFilters(false);
     };
 
-    const handleShowMore = () => {
-        console.log("showm ore");
-    };
+    let renderedItems = (options, category) =>
+        options
+            .slice(0, visibleEntries[category].visibleEntries)
+            .map((option, index) => (
+                <li className="filter-value" key={`${option.value}-${index}`}>
+                    <label
+                        className="checkbox-container"
+                        htmlFor={`${option.value}-${index}`}
+                    >
+                        <input
+                            id={`${option.value}-${index}`}
+                            type="checkbox"
+                            checked={
+                                selectedFilters[category] &&
+                                selectedFilters[category].includes(option.value)
+                            }
+                            onChange={(event) =>
+                                handleCheckboxChange(
+                                    event,
+                                    category,
+                                    option.value
+                                )
+                            }
+                        />
+                        <span className="checkmark"></span>
+                        {option.value}
+                    </label>
+                </li>
+            ));
+
+    let renderedCategories = Object.entries(filters).map(
+        ([category, options], index) => (
+            <li className="filter-key" key={`${category}-${index}`}>
+                <h4 className="filter-heading">{category}</h4>
+                <ul className="filter-values-list">
+                    {renderedItems(options, category)}
+                    <li className="filter-value">
+                        <button onClick={() => handleShowMoreitems(category)}>
+                            <span className="me-2">Show More</span>
+                            <FontAwesomeIcon icon={faAngleDown} />
+                        </button>
+                    </li>
+                </ul>
+            </li>
+        )
+    );
 
     return (
         <div className="position-relative h-100">
             <div>
-                <OverlayLoader isLoading={isLoading} />
+                <OverlayLoader isLoading={isLoading || loadingFilters} />
             </div>
             <div className="filters-inner">
-                {loadingFilters ? (
-                    <div className="d-flex justify-content-center align-items-center my-3">
-                        <Loader />
-                    </div>
-                ) : (
-                    <ul className="filters-list">
-                        {Object.entries(filters).map(
-                            ([category, options], index) => (
-                                <li
-                                    className="filter-key"
-                                    key={`${category}-${index}`}
-                                >
-                                    <h4 className="filter-heading">
-                                        {category}
-                                    </h4>
-                                    <ul className="filter-values-list">
-                                        {options.map((option, index) => (
-                                            <li
-                                                className="filter-value"
-                                                key={`${option.value}-${index}`}
-                                            >
-                                                <label
-                                                    className="checkbox-container"
-                                                    htmlFor={`${option.value}-${index}`}
-                                                >
-                                                    <input
-                                                        id={`${option.value}-${index}`}
-                                                        type="checkbox"
-                                                        checked={
-                                                            selectedFilters[
-                                                                category
-                                                            ] &&
-                                                            selectedFilters[
-                                                                category
-                                                            ].includes(
-                                                                option.value
-                                                            )
-                                                        }
-                                                        onChange={(event) =>
-                                                            handleCheckboxChange(
-                                                                event,
-                                                                category,
-                                                                option.value
-                                                            )
-                                                        }
-                                                    />
-                                                    <span className="checkmark"></span>
-                                                    {option.value}
-                                                </label>
-                                            </li>
-                                        ))}
-                                        <li className="filter-value">
-                                            <button onClick={handleShowMore}>
-                                                <span className="me-2">
-                                                    Show More
-                                                </span>
-                                                <FontAwesomeIcon
-                                                    icon={faAngleDown}
-                                                />
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </li>
-                            )
-                        )}
-                        <li className="filter-value">
-                            <button onClick={handleShowMore}>
-                                <span className="me-2">Show More</span>
-                                <FontAwesomeIcon icon={faAngleDown} />
-                            </button>
-                        </li>
-                    </ul>
-                )}
+                <ul className="filters-list">
+                    {renderedCategories}
+                    {/* <li className="filter-value">
+                        <button onClick={handleShowMoreCategory}>
+                            <span className="me-2">Show More</span>
+                            <FontAwesomeIcon icon={faAngleDown} />
+                        </button>
+                    </li> */}
+                </ul>
             </div>
         </div>
     );
