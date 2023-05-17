@@ -47,16 +47,17 @@ export const login = (credentials) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             const response = await loginApi(credentials);
-            let token = response.data.access_token;
-            let name = response.data.user;
-            let profile_pic = response.data.profile_pic;
+            console.log('response:', response);
+            let token = response.access_token;
+            let name = response.user;
+            let profile_pic = response.profile_pic;
             saveUserName(name);
             saveUserImage(profile_pic);
             saveTempToken(token); // saving token temporarily to only allow user to call the login api
             saveUserPassword(credentials.password); // saving password temporarily to only allow user to re login to resend the otp
             dispatch({
                 type: LOGIN,
-                payload: response.data,
+                payload: response,
             });
         } catch (error) {
             console.log("Something went wrong in login", error);
@@ -170,8 +171,8 @@ export const updateProfile = (formData) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             let response = await updateProfileApi(formData);
-            dispatch({ type: UPDATE_PROFILE, payload: response.data });
-            saveUser(response.data);
+            dispatch({ type: UPDATE_PROFILE, payload: response });
+            saveUser(response);
             toast.success("Profile Updated Successfully");
         } catch (error) {
             console.log("Something went wrong in updateProfile", error);

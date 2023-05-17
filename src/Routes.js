@@ -179,11 +179,9 @@ export const Router = () => {
         {
             path: "/checkout",
             element: (
-              
-                    <Suspense fallback={<Loader />}>
-                        <Checkout />
-                    </Suspense>
-                
+                <Suspense fallback={<Loader />}>
+                    <Checkout />
+                </Suspense>
             ),
         },
         {

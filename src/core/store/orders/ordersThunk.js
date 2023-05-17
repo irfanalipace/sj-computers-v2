@@ -21,6 +21,7 @@ export const getShippingDetails = () => {
         try {
             dispatch({ type: LOADING, payload: {} });
             let response = await getShippingAddressApi();
+           
             dispatch({
                 type: SET_SHIPPING_DETAILS,
                 payload: response.data,
@@ -36,10 +37,15 @@ export const getOrderDetails = () => {
         try {
             dispatch({ type: LOADING, payload: {} });
             let response = await getOrderDetailsApi();
+            const { success_orders , cancel_orders} = response.data;
+            console.log(success_orders, "so before dispatch ");
+            console.log(cancel_orders, "co before dispatch ");
+
             dispatch({
                 type: SET_ORDER_DETAILS,
                 payload: response.data,
             });
+            // dispatch(setCancelOrders(cancelOrders.data));
         } catch (error) {
             console.log("Something went wrong in orders", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
