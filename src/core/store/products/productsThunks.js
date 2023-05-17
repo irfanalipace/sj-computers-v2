@@ -3,6 +3,7 @@ import {
     FETCH_PRODUCTS,
     SEARCH_PRODUCTS,
     FILTER_PRODUCTS,
+    SET_FILTERING_PRODUCTS,
     RESET_PAGE,
     API_ERROR,
 } from "@store/products/productsSlice";
@@ -52,6 +53,7 @@ export const filterProducts = (filter) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
+            dispatch({ type: SET_FILTERING_PRODUCTS, payload: {} });
             const response = await filterProductsApi(filter);
             if (filter.page === 1) dispatch(RESET_PAGE());
             dispatch({

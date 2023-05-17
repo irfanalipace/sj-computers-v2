@@ -76,7 +76,7 @@ export const Router = () => {
             ),
         },
         {
-            path: "/reset-password",
+            path: "/forgot_password",
             element: (
                 <AuthRoute>
                     <Suspense fallback={<Loader />}>

@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 import Loader from "@common/Spinner/Spinner";
+import OverlayLoader from "@common/LoaderComponent/OverlayLoader";
+
 import { getFilterListApi } from "@api/filters";
 import { SET_FILTERS_ARRAY } from "@store/products/productsSlice";
 
@@ -14,6 +16,7 @@ const FilterBar = () => {
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [filtersInArray, setFiltersInArray] = useState([]);
     const [loadingFilters, setLoadingFilters] = useState(false);
+    const isLoading = useSelector((state) => state.products.isFiltering);
 
     const dispatch = useDispatch();
 
@@ -73,76 +76,85 @@ const FilterBar = () => {
     };
 
     return (
-        <div className="filters-inner">
-            {loadingFilters ? (
-                <div className="d-flex justify-content-center align-items-center my-3">
-                    <Loader />
-                </div>
-            ) : (
-                <ul className="filters-list">
-                    {Object.entries(filters).map(
-                        ([category, options], index) => (
-                            <li
-                                className="filter-key"
-                                key={`${category}-${index}`}
-                            >
-                                <h4 className="filter-heading">{category}</h4>
-                                <ul className="filter-values-list">
-                                    {options.map((option, index) => (
-                                        <li
-                                            className="filter-value"
-                                            key={`${option.value}-${index}`}
-                                        >
-                                            <label
-                                                className="checkbox-container"
-                                                htmlFor={`${option.value}-${index}`}
+        <div className="position-relative h-100">
+            <div>
+                <OverlayLoader isLoading={isLoading} />
+            </div>
+            <div className="filters-inner">
+                {loadingFilters ? (
+                    <div className="d-flex justify-content-center align-items-center my-3">
+                        <Loader />
+                    </div>
+                ) : (
+                    <ul className="filters-list">
+                        {Object.entries(filters).map(
+                            ([category, options], index) => (
+                                <li
+                                    className="filter-key"
+                                    key={`${category}-${index}`}
+                                >
+                                    <h4 className="filter-heading">
+                                        {category}
+                                    </h4>
+                                    <ul className="filter-values-list">
+                                        {options.map((option, index) => (
+                                            <li
+                                                className="filter-value"
+                                                key={`${option.value}-${index}`}
                                             >
-                                                <input
-                                                    id={`${option.value}-${index}`}
-                                                    type="checkbox"
-                                                    checked={
-                                                        selectedFilters[
-                                                            category
-                                                        ] &&
-                                                        selectedFilters[
-                                                            category
-                                                        ].includes(option.value)
-                                                    }
-                                                    onChange={(event) =>
-                                                        handleCheckboxChange(
-                                                            event,
-                                                            category,
-                                                            option.value
-                                                        )
-                                                    }
+                                                <label
+                                                    className="checkbox-container"
+                                                    htmlFor={`${option.value}-${index}`}
+                                                >
+                                                    <input
+                                                        id={`${option.value}-${index}`}
+                                                        type="checkbox"
+                                                        checked={
+                                                            selectedFilters[
+                                                                category
+                                                            ] &&
+                                                            selectedFilters[
+                                                                category
+                                                            ].includes(
+                                                                option.value
+                                                            )
+                                                        }
+                                                        onChange={(event) =>
+                                                            handleCheckboxChange(
+                                                                event,
+                                                                category,
+                                                                option.value
+                                                            )
+                                                        }
+                                                    />
+                                                    <span className="checkmark"></span>
+                                                    {option.value}
+                                                </label>
+                                            </li>
+                                        ))}
+                                        <li className="filter-value">
+                                            <button onClick={handleShowMore}>
+                                                <span className="me-2">
+                                                    Show More
+                                                </span>
+                                                <FontAwesomeIcon
+                                                    icon={faAngleDown}
                                                 />
-                                                <span className="checkmark"></span>
-                                                {option.value}
-                                            </label>
+                                            </button>
                                         </li>
-                                    ))}
-                                    <li className="filter-value">
-                                        <button onClick={handleShowMore}>
-                                            <span className="me-2">
-                                                Show More
-                                            </span>
-                                            <FontAwesomeIcon
-                                                icon={faAngleDown}
-                                            />
-                                        </button>
-                                    </li>
-                                </ul>
-                            </li>
-                        )
-                    )}
-                    <li className="filter-value">
-                        <button onClick={handleShowMore}>
-                            <span className="me-2">Show More</span>
-                            <FontAwesomeIcon icon={faAngleDown} />
-                        </button>
-                    </li>
-                </ul>
-            )}
+                                    </ul>
+                                </li>
+                            )
+                        )}
+                        <li className="filter-value">
+                            <button onClick={handleShowMore}>
+                                <span className="me-2">Show More</span>
+                                <FontAwesomeIcon icon={faAngleDown} />
+                            </button>
+                        </li>
+                    </ul>
+                )}
+            </div>
         </div>
     );
 };

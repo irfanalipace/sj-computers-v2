@@ -7,7 +7,6 @@ import {
     CLEAR_ALL_PRODUCTS,
     SET_SEARCH_STRING,
 } from "@store/products/productsSlice";
-import Loader from "@common/LoaderComponent/OverlayLoader";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
 
 const FilteredProducts = ({ categoryId }) => {
@@ -57,21 +56,14 @@ const FilteredProducts = ({ categoryId }) => {
     }, [searchString, filtersArray]);
 
     return (
-        <div className="position-relative">
-            {isLoading ? (
-                <Loader />
-            ) : (
-                // <div className="filter-results">
-                //     <ProductsGrid
-                //         products={products}
-                //         handleClick={handleClick}
-                //         isLoading={isLoading}
-                //         apiError={apiError}
-                //         heading={`Best ${categorySlug}`}
-                //     />
-                // </div>
-                <Loader isLoading={isLoading} />
-            )}
+        <div className="filter-results">
+            <ProductsGrid
+                products={products}
+                handleClick={handleClick}
+                isLoading={isLoading}
+                apiError={apiError}
+                heading={`Best ${categorySlug}`}
+            />
         </div>
     );
 };
