@@ -156,17 +156,18 @@ console.log(orderSearch, "input")
             return <LoaderComponent />;
         }
         return activeTab === 0 ? (
-            successOrders.length === -1 ? (
-                <div className="flex justify-center items-center">
-                    <p>No success orders</p>
-                </div>
+            successOrders.length > 0 ? (
+                <OrderCard data={successOrders} />
+                // <div className="flex justify-center items-center">
+                //     <p>No success orders</p>
+                // </div>
             ) : (
                 <>
                     {/* {Object.Keys(orderDetails).length === 0 ? "data have" : "no data"} */}
-                    <OrderCard data={successOrders} />
-                    {/* <div className="flex justify-center items-center">
+                  
+                    <div className="flex justify-center items-center">
                         <p>No success orders</p>
-                    </div> */}
+                    </div>
                 </>
             )
         ) : activeTab === 1 ? (
