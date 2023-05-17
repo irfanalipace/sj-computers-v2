@@ -21,9 +21,7 @@
                             </tr>
                             </tbody>
                         </table>
-
                         <br>
-
                         <table border="0" cellpadding="" cellspacing="0" width="100%" style="background:#ffffff;color:#000000;line-height:150%;text-align:center;font:300 16px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif">
                             <tbody>
                             <tr>
@@ -73,7 +71,7 @@
                                     <td width="20%"
                                         style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
                                                     <span>
-                                                        ${{ $item['product']['price'] ?? 0 }}
+                                                        $ {{ number_format((float)$item['product']['price'], 2, '.', '') }}
                                                     </span>
                                     </td>
                                 </tr>
@@ -96,7 +94,7 @@
                                     Delivery Price</th>
                                 <td
                                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                    <span>$ {{ $data['shipment_price'] }}</span>
+                                    <span>$ {{ number_format((float)$data['shipment_price'], 2, '.', '') }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -115,7 +113,7 @@
                                     Sub Total</th>
                                 <td
                                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                    <span>$ {{ $data['sub_total'] }}</span>
+                                    <span>$ {{ number_format((float)$data['sub_total'], 2, '.', '') }}</span>
                                 </td>
                             </tr>
 
@@ -125,12 +123,20 @@
                                     Order Total</th>
                                 <td
                                     style="background:#efefef;text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0;color:#7db701;font-weight:bold">
-                                    <span>$ {{ $data['total_amount'] }}</span>
+                                    <span>$ {{ number_format((float)$data['total_amount'], 2, '.', '') }}</span>
                                 </td>
                             </tr>
                             </tfoot>
-                        </table>                        <br>
+                        </table>
                         <br>
+                        <br>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>
 
 </body>
 
