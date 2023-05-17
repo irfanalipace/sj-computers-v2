@@ -113,6 +113,7 @@ const OrderPage = () => {
     const isLoading = useSelector((state) => state.orders.isLoading);
     const cancelOrders = useSelector((state) => state.orders.cancelOrders);
     const successOrders = useSelector((state) => state.orders.successOrders);
+    const ordergDetails = useSelector((state) => state.orders.ordergDetails);
 
     const handleDropdownChange = (value) => {
         setSelectedValue(value);
@@ -142,11 +143,12 @@ const OrderPage = () => {
     };
     const handleSearch = async () => {
         setActiveTab(2);
-
+console.log(orderSearch, "input")
         const responseSearch = await OrderSearchApi(orderSearch);
-        console.log(responseSearch.data, "response search");
-        setOrderSearchData(searchOrderArray);
+        console.log(responseSearch, "response search");
+        setOrderSearchData(responseSearch);
         setOrderSearch("");
+        return;
     };
 
     const renderTabContent = () => {
@@ -154,37 +156,42 @@ const OrderPage = () => {
             return <LoaderComponent />;
         }
         return activeTab === 0 ? (
-            successOrders.length === 0 ? (
+            successOrders.length === -1 ? (
                 <div className="flex justify-center items-center">
                     <p>No success orders</p>
                 </div>
             ) : (
                 <>
                     {/* {Object.Keys(orderDetails).length === 0 ? "data have" : "no data"} */}
-                    {/* <OrderCard data={successOrders} /> */}
-                    <div className="flex justify-center items-center">
+                    <OrderCard data={successOrders} />
+                    {/* <div className="flex justify-center items-center">
                         <p>No success orders</p>
-                    </div>
+                    </div> */}
                 </>
             )
         ) : activeTab === 1 ? (
-            cancelOrders.length === 0 ? (
-                <div className="flex justify-center items-center">
-                    <p>No cancelled orders.</p>
-                </div>
+            cancelOrders.length > 0 ? (
+                // <div className="flex justify-center items-center">
+                //     <p>No cancelled orders.</p>
+                // </div>
+                  <OrderCard data={cancelOrders} />
             ) : (
-                // <OrderCard data={cancelOrders} />
+              
                 <div className="flex justify-center items-center">
                     <p>No cancelled orders</p>
                 </div>
             )
         ) : activeTab === 2 ? (
-            orderSearchData.length === 0 ? (
-                <div className="flex justify-center items-center">
+            orderSearchData.length > 0 ? (
+                <OrderCard data={orderSearchData} />
+                // <div className="flex justify-center items-center">
+                //     <p>Orders Not found.</p>
+                // </div>
+            ) : (
+                // <OrderCard data={orderSearchData} />
+                 <div className="flex justify-center items-center">
                     <p>Orders Not found.</p>
                 </div>
-            ) : (
-                <OrderCard data={orderSearchData} />
             )
         ) : null;
     };
@@ -270,8 +277,8 @@ const OrderPage = () => {
                                             <Select
                                                 data={[
                                                     {
-                                                        value: "2 month",
-                                                        label: "2 month",
+                                                        value: "1 month",
+                                                        label: "1 month",
                                                     },
                                                     // { value: 'option2', label: 'Option 2' },
                                                     // { value: 'option3', label: 'Option 3' },
@@ -317,7 +324,7 @@ const OrderPage = () => {
                     >
                         <OrderInvoiceCard
                             activeTab={activeTab}
-                            data={dummyInvoice}
+                            data={ordergDetails}
                         />
                     </div>
                 </div>

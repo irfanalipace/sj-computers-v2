@@ -19,7 +19,14 @@ const buttonStyles = {
 
 
 const OrderInvoiceCard = ({ data ,activeTab }) => {
+    const {success_orders } = data;
+    console.log(data, "invoic data" );
+    console.log(success_orders, "so for invoice")
     console.log(activeTab, "avtive tab")
+
+
+ 
+    // return;
   return (
     <div className="summary-card">
     <div className="summary-wrapper">
@@ -43,14 +50,14 @@ const OrderInvoiceCard = ({ data ,activeTab }) => {
             <ul>
                 <li>
                     <span>Items:</span>
-                    <span>({2})</span>
+                    <span>{activeTab === 0 ? success_orders?.data[0]?.item_qty : 0 }</span>
                 </li>
                 <li>
                     <span>Price:</span>
                     <span>
                         <strong>
-                            {true
-                                ? "$" + 599
+                            {activeTab === 0
+                                ? "$" + success_orders?.data[0]?.sub_total
                                 : "$0"}
                             {/* {shippingDetails?.sub_total
                                 ? "$" + shippingDetails.sub_total
@@ -61,9 +68,9 @@ const OrderInvoiceCard = ({ data ,activeTab }) => {
                 <li>
                     <span>Shipping & handling:</span>
                     <span>
-                        {true
+                        {activeTab === 0
                             ? "$" +
-                              100
+                            success_orders?.data[0]?.shipment_price
                             : "$0"}
                         {/* {shippingDetails?.shipment_info?.amount
                             ? "$" +
@@ -88,7 +95,7 @@ const OrderInvoiceCard = ({ data ,activeTab }) => {
                         <strong>Order Total</strong>
                     </span>
                     <span>
-                        <strong>${599}</strong>
+                        <strong>{activeTab === 0?  success_orders?.data[0]?.total_amount : "$0"}</strong>
                     </span>
                 </li>
             </ul>

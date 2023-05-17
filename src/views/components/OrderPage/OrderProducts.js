@@ -2,7 +2,19 @@ import { Card, Select, Text, useMantineTheme } from "@mantine/core";
 import './OrderProducts.css'
 
 function OrderProducts({ data }) {
+    // const ;
+    console.log(data, "order items");
+
+    // return;
+
+    
+    // return;
   const theme = useMantineTheme();
+  function formatDate(dateString) {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const date = new Date(dateString);
+    return date.toLocaleDateString(undefined, options);
+  }
 
   return (
     <>
@@ -11,12 +23,14 @@ function OrderProducts({ data }) {
             <div className="order-header">
             <div className="order-info">
                 <Text className="order-label">Order Placed</Text>
-                <Text>{product?.orderPlacedDate}</Text>
+                <Text>{
+                formatDate(product?.created_at) 
+                }</Text>
             </div>
 
             <div className="order-info">
                 <Text>Total</Text>
-                <Text>{product?.TotalAmount}</Text>
+                <Text>{`$${product?.total_amount}`}</Text>
             </div>
 
             <div className="order-info">
@@ -49,7 +63,7 @@ function OrderProducts({ data }) {
             </div>
 
             <div className="order-info">
-                <Text>Order # {product?.orderID}</Text>
+                <Text>Order # {product?.id}</Text>
                 <Text
                 className="order-details-view text-green-500 cursor-pointer"
                 onClick={() => {
@@ -64,7 +78,8 @@ function OrderProducts({ data }) {
             <div className="order-details">
             <div className="order-status">
                 <Text className="order-status-label" fw={700} fz="lg">
-                {product?.orderStatus} {product?.earlyDeliveryDate} -
+                {product?.status} {product?.shipment_days
+}
                 {product?.lateDeliveryDate}
                 </Text>
                 <button className="track-package-button">
@@ -76,7 +91,7 @@ function OrderProducts({ data }) {
                 <div style={{display: 'flex', displayDirection: 'row', width: '100%'}}>
                     <div style={{display: 'inherit'}}>
                     <img
-                        src={product?.productImageUrl}
+                        src={product?.order_item[0]?.product?.image[0]}
                         className="product-image"
                         style={{
                             width: '15%',
@@ -84,7 +99,7 @@ function OrderProducts({ data }) {
                             marginLeft: '5%',
                         }}
                     />
-        <Text className="product-description">{product?.productDescription}</Text>
+        <Text className="product-description">{product?.order_item[0]?.product?.name}</Text>
                     </div>
                     <div style={{}}>
                     {/* <Text className="product-description">{product?.productDescription}</Text> */}
