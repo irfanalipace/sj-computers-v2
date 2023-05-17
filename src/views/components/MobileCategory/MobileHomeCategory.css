@@ -1,11 +1,12 @@
 .image-category-mobile-silder {
-    width: 29% !important;
-    margin-left: 8px;
+    max-width: 100%;
+    width: 238px;
+
 }
 .swiper .image-category-mobile-silder {
     width: 100% !important;
-    height: 204px;
-    width: 157px !important;
+    height: 165px;
+    width: 160px !important;
 }
 .link-text-category-mobile {
     color: black;
@@ -28,4 +29,19 @@ display: none !important;
 }
 .my-swiper-mobile-category .swiper-button-prev{
     display: none !important;
+}
+.image-container-category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px;
+}
+
+
+.swiper .swiper-pagination {
+    position: absolute;
+    text-align: center;
+    transition: .3s opacity;
+    transform: translate3d(0,0,0);
+    z-index: 0;
 }

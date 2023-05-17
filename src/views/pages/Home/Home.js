@@ -19,6 +19,7 @@ const Home = () => {
             {screenWidth <= 570 ? (
               <div style={{background:'white'}}>
                   <div>
+                  <BannerCategory />
                     <MobileHomeCategory />
                 </div>
                 <div>

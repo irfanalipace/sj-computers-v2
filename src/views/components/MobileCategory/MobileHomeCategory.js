@@ -45,102 +45,121 @@ const MobileHomeCategory = () => {
       }}
     >
       <SwiperSlide className='swiper-slider-mobile-category'>
-      <div>
-        <div className='category-dev-img-section-mobile'>
-        <Link className='text-decoration-none link-text-category-mobile'>Laptop</Link>
-        </div>
-        <div style={{width:'328%'}}>
-           
-        <img src={img1} alt="Image 1" className='image-category-mobile-silder'/>
-         
-        </div>
-      </div>
-           
-     
     
-      <div>
-      <div className='category-dev-img-section-mobile'>
-        <Link className='text-decoration-none link-text-category-mobile'>Laptop</Link>
-        </div>
-        <div style={{width:'328%'}}>
-           
-        <img src={img2} alt="Image 1" className='image-category-mobile-silder'/>
-         
-        </div>
-      </div>
-      <div>
-      <div className='category-dev-img-section-mobile'>
-        <Link className='text-decoration-none link-text-category-mobile'>Desktops</Link>
-        </div>
-        <div style={{width:'328%'}}>
-           
-        <img src={img3} alt="Image 1" className='image-category-mobile-silder'/>
-         
-        </div>
-      </div>
-      </SwiperSlide>
-      <SwiperSlide className='swiper-slider-mobile-category'>
-      <div>
-      <div className='category-dev-img-section-mobile'>
-        <Link className='text-decoration-none link-text-category-mobile'>Laptop</Link>
+      <div className="image-container-category">
+     
+      <Link to='./category/laptops' className='text-decoration-none link-text-category-mobile'>
+        <div className='category-dev-img-section-mobile'>
+        Laptop
         </div>
         <div style={{width:'328%'}}>
            
         <img src={img1} alt="Image 1" className='image-category-mobile-silder'/>
          
         </div>
+        </Link>
       </div>
-      <div>
+    
+      <div className="image-container-category">
+      <Link to='./category/laptops' className='text-decoration-none link-text-category-mobile'>
       <div className='category-dev-img-section-mobile'>
-        <Link className='text-decoration-none link-text-category-mobile'>Laptop</Link>
+        Laptop
         </div>
         <div style={{width:'328%'}}>
            
         <img src={img2} alt="Image 1" className='image-category-mobile-silder'/>
          
         </div>
+        </Link>
       </div>
-      <div>
+      <div className="image-container-category">
+      <Link to='./category/laptops' className='text-decoration-none link-text-category-mobile'>
       <div className='category-dev-img-section-mobile'>
-        <Link className='text-decoration-none link-text-category-mobile'>Desktops</Link>
+      Desktops
         </div>
         <div style={{width:'328%'}}>
            
         <img src={img3} alt="Image 1" className='image-category-mobile-silder'/>
          
         </div>
+        </Link>
       </div>
       </SwiperSlide>
       <SwiperSlide className='swiper-slider-mobile-category'>
-      <div>
+      <div className="image-container-category">
+      <Link to='./category/laptops' className='text-decoration-none link-text-category-mobile'>
       <div className='category-dev-img-section-mobile'>
-        <Link className='text-decoration-none link-text-category-mobile'>Laptop</Link>
+       Laptop
+        </div >
+        <div style={{width:'328%'}}>
+           
+        <img src={img1} alt="Image 1" className='image-category-mobile-silder'/>
+         
+        </div>
+       </Link>
+      </div>
+      <div className="image-container-category">
+      <Link to='./category/laptops' className='text-decoration-none link-text-category-mobile'>
+      <div className='category-dev-img-section-mobile'>
+    
+        Laptop
+        </div>
+        <div style={{width:'328%'}}>
+           
+        <img src={img2} alt="Image 1" className='image-category-mobile-silder'/>
+         
+        </div>
+        </Link>
+      </div>
+      <div className="image-container-category">
+      <Link to='./category/laptops' className='text-decoration-none link-text-category-mobile'>
+      <div className='category-dev-img-section-mobile'>
+        Desktops
+        </div>
+        <div style={{width:'328%'}}>
+           
+        <img src={img3} alt="Image 1" className='image-category-mobile-silder'/>
+         
+        </div>
+        </Link>
+      </div>
+      </SwiperSlide>
+      <SwiperSlide className='swiper-slider-mobile-category'>
+      <div className="image-container-category">
+      <Link to='./category/laptops' className='text-decoration-none link-text-category-mobile'>
+      <div className='category-dev-img-section-mobile'>
+        Laptop
         </div>
         <div style={{width:'328%'}}>
            
         <img src={img1} alt="Image 1" className='image-category-mobile-silder'/>
          
         </div>
+        </Link>
       </div>
       <div>
+      <Link to='./category/laptops' className='text-decoration-none link-text-category-mobile'>
       <div className='category-dev-img-section-mobile'>
-        <Link className='text-decoration-none link-text-category-mobile'>Laptop</Link>
+      Laptop
         </div>
         <div style={{width:'328%'}}>
            
         <img src={img2} alt="Image 1" className='image-category-mobile-silder'/>
          
         </div>
+        </Link>
       </div>
-      <div>
+      <div className="image-container-category">
+      <Link to='./category/laptops' className='text-decoration-none link-text-category-mobile'>
       <div className='category-dev-img-section-mobile'>
-        <Link className='text-decoration-none link-text-category-mobile'>Desktops</Link>
+             Desktops
         </div>
         <div style={{width:'328%'}}>
            
         <img src={img3} alt="Image 1" className='image-category-mobile-silder'/>
          
         </div>
+        </Link>
       </div>
       </SwiperSlide>
     </Swiper>
