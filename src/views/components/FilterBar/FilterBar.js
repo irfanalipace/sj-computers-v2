@@ -2,18 +2,44 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
+import Loader from "@common/Spinner/Spinner";
 import { getFilterListApi } from "@api/filters";
+
+import "./FilterBar.css";
 
 const FilterBar = () => {
     const [filters, setFilters] = useState([]);
+    const [selectedFilters, setSelectedFilters] = useState({});
+    const [loadingFilters, setLoadingFilters] = useState(false);
+
+    const handleCheckboxChange = (event, category, option) => {
+        const isChecked = event.target.checked;
+        console.log("checked", isChecked);
+
+        // setSelectedFilters((prevSelectedFilters) => {
+        //     let filter = {
+        //         key: category,
+
+        //         value: option,
+        //     };
+        //     ({
+        //         ...prevSelectedFilters,
+        //         [category]: isChecked
+        //             ? [...(prevSelectedFilters[category] || []), option]
+        //             : filter,
+        //     });
+        // });
+    };
 
     useEffect(() => {
         fetchFilters();
     }, []);
 
     const fetchFilters = async () => {
+        setLoadingFilters(true);
         let response = await getFilterListApi();
-        console.log("response: ", response);
+        setFilters(response.data);
+        setLoadingFilters(false);
     };
 
     const handleShowMore = () => {
@@ -22,27 +48,73 @@ const FilterBar = () => {
 
     return (
         <div className="filters-inner">
-            <ul className="filters-list">
-                <li className="filter-key">
-                    <h4 className="filter-heading">Category</h4>
-                    <ul className="filter-values-list">
-                        <li className="filter-value">Monitors</li>
-                        <li>Laptops</li>
-                        <li>
-                            <button onClick={handleShowMore}>
-                                <span className="me-2">Show More</span>
-                                <FontAwesomeIcon icon={faAngleDown} />
-                            </button>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <button onClick={handleShowMore}>
-                        <span className="me-2">Show More</span>
-                        <FontAwesomeIcon icon={faAngleDown} />
-                    </button>
-                </li>
-            </ul>
+            {loadingFilters ? (
+                <Loader />
+            ) : (
+                <ul className="filters-list">
+                    {Object.entries(filters).map(
+                        ([category, options], index) => (
+                            <li
+                                className="filter-key"
+                                key={`${category}-${index}`}
+                            >
+                                <h4 className="filter-heading">{category}</h4>
+                                <ul className="filter-values-list">
+                                    {options.map((option, index) => (
+                                        <li
+                                            className="filter-value"
+                                            key={`${option}-${index}`}
+                                        >
+                                            <label
+                                                className="checkbox-container"
+                                                htmlFor={`${option}-${index}`}
+                                            >
+                                                <input
+                                                    id={`${option}-${index}`}
+                                                    type="checkbox"
+                                                    checked={
+                                                        selectedFilters[
+                                                            category
+                                                        ] &&
+                                                        selectedFilters[
+                                                            category
+                                                        ].includes(option)
+                                                    }
+                                                    onChange={(event) =>
+                                                        handleCheckboxChange(
+                                                            event,
+                                                            category,
+                                                            option
+                                                        )
+                                                    }
+                                                />
+                                                <span className="checkmark"></span>
+                                                {option.value}
+                                            </label>
+                                        </li>
+                                    ))}
+                                    <li>
+                                        <button onClick={handleShowMore}>
+                                            <span className="me-2">
+                                                Show More
+                                            </span>
+                                            <FontAwesomeIcon
+                                                icon={faAngleDown}
+                                            />
+                                        </button>
+                                    </li>
+                                </ul>
+                            </li>
+                        )
+                    )}
+                    <li>
+                        <button onClick={handleShowMore}>
+                            <span className="me-2">Show More</span>
+                            <FontAwesomeIcon icon={faAngleDown} />
+                        </button>
+                    </li>
+                </ul>
+            )}
         </div>
     );
 };

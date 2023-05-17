@@ -1,0 +1,93 @@
+.sticky-filter-bar ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.sticky-filter-bar {
+    padding: 5px 20px;
+}
+
+.sticky-filter-bar .filters-list h4 {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.sticky-filter-bar .filters-list .filter-value {
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.sticky-filter-bar .filters-list .filter-value .checkbox-container {
+    display: inline-block;
+    position: relative;
+    padding-left: 19px;
+    margin-bottom: 3px;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.sticky-filter-bar .filters-list .filter-value .checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.sticky-filter-bar .filters-list .filter-value .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 13px;
+    width: 13px;
+    background-color: #eee;
+    border-radius: 3px;
+}
+
+.sticky-filter-bar
+    .filters-list
+    .filter-value.checkbox-container
+    input:checked
+    ~ .checkmark {
+    background-color: #2196f3;
+}
+
+.sticky-filter-bar .filters-list .filter-value .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.sticky-filter-bar
+    .filters-list
+    .filter-value
+    .checkbox-container
+    input:checked
+    ~ .checkmark:after {
+    display: block;
+}
+
+.sticky-filter-bar
+    .filters-list
+    .filter-value
+    .checkbox-container
+    input:checked
+    ~ .checkmark {
+    background: #52ac66;
+}
+
+.sticky-filter-bar
+    .filters-list
+    .filter-value
+    .checkbox-container
+    .checkmark:after {
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 7px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}

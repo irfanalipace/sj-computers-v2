@@ -179,11 +179,11 @@ export const Router = () => {
         {
             path: "/checkout",
             element: (
-                    <ProtectedRoute>
+                <ProtectedRoute>
                     <Suspense fallback={<Loader />}>
                         <Checkout />
                     </Suspense>
-                    </ProtectedRoute>
+                </ProtectedRoute>
             ),
         },
         {
