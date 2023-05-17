@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Mail;
 class GenerateInvoiceJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
     /**
      * Create a new job instance.
      *
@@ -78,11 +77,11 @@ class GenerateInvoiceJob implements ShouldQueue
                 'qty' => $item->quantity,
                 'price' => $item->price
             ];
-            $producttInfo = $this->getAmazonInventory($item->id);
-            if($producttInfo['status']){
-                $this->updateAmazonInventory($producttInfo, $item->quantity);
-            }
-            
+            $productInfo = $this->getAmazonInventory($item->id);
+            // if ($productInfo['status']) {
+            //     $this->updateAmazonInventory($productInfo, $item->quantity);
+            // }
+
 
             OrderItem::create($item);
         });
@@ -159,16 +158,16 @@ class GenerateInvoiceJob implements ShouldQueue
         curl_close($curl);
 
         $response = json_decode($response, true);
-        if(isset($response['message']) && !empty($response['message'])){
+        if (isset($response['message']) && !empty($response['message'])) {
 
             $data = json_decode($response['message'], true);
             $quantity = (int) $data['attributes']['fulfillment_availability'][0]['quantity'];
             $status = true;
         }
-        
+
         return [
             'sku' => $product->sku ?? '',
-            'quantity' => $quantity ,
+            'quantity' => $quantity,
             'status' => $status
         ];
     }
