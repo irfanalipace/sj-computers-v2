@@ -19,12 +19,6 @@ const Slider = () => {
         { desktop: Banner2, mobile: mobileBanner2 },
         { desktop: Banner3, mobile: mobileBanner3 },
     ];
-    const swiperOptions = {
-        slidesPerView: 3, // Number of slides to show at a time
-        spaceBetween: 10, // Space between slides
-        navigation: true,
-        modules: [Navigation],
-      };
     return (
         <>
             <div className="banner-slider-section">
@@ -32,7 +26,6 @@ const Slider = () => {
                     navigation={true}
                     modules={[Navigation]}
                     className="mySwiper"
-                    {...swiperOptions}
                 >
                     {banners.map((banner, index) => (
                         <SwiperSlide key={index}>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import TopBar from "@components/TopBar/TopBar";
 import BannerCategory from "./BannerCategory";
 // import CarouselSlider from "@components/Sliders/CarouselSlider";
@@ -9,31 +9,26 @@ import SellingProducts from "@components/MobileCategory/SellingProducts/SellingP
 import "./Home.css";
 
 const Home = () => {
-    const handleResize = () => {
-        setScreenWidth(window.innerWidth);
-    };
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    // const handleResize = () => {
+    //     setScreenWidth(window.innerWidth);
+    // };
+    // const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     return (
         <div className="homePage">
-            {screenWidth <= 570 ? (
-                <div style={{ background: "white" }}>
-                    <div>
-                        <BannerCategory />
-                        <MobileHomeCategory />
-                    </div>
-                    <div>
-                        <SellingProducts />
-                    </div>
-                </div>
-            ) : (
-                <div>
+          
+               
+                        {/* <MobileHomeCategory />
+                
+                        <SellingProducts /> */}
+              
+         
                     <TopBar />
                     <BannerCategory />
+
                     <div className="products-grid-container">
                         <ProductsHomePage />
                     </div>
-                </div>
-            )}
+      
             {/* <CarouselSlider /> */}
             {/* <ProductThreeItem /> */}
             {/* <Recommendation /> */}

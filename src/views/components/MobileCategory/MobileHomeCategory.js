@@ -52,7 +52,7 @@ const MobileHomeCategory = () => {
         <div className='category-dev-img-section-mobile'>
         Laptop
         </div>
-        <div style={{width:'328%'}}>
+        <div >
            
         <img src={img1} alt="Image 1" className='image-category-mobile-silder'/>
          
@@ -65,7 +65,7 @@ const MobileHomeCategory = () => {
       <div className='category-dev-img-section-mobile'>
         Laptop
         </div>
-        <div style={{width:'328%'}}>
+        <div>
            
         <img src={img2} alt="Image 1" className='image-category-mobile-silder'/>
          
@@ -77,7 +77,7 @@ const MobileHomeCategory = () => {
       <div className='category-dev-img-section-mobile'>
       Desktops
         </div>
-        <div style={{width:'328%'}}>
+        <div >
            
         <img src={img3} alt="Image 1" className='image-category-mobile-silder'/>
          
@@ -91,7 +91,7 @@ const MobileHomeCategory = () => {
       <div className='category-dev-img-section-mobile'>
        Laptop
         </div >
-        <div style={{width:'328%'}}>
+        <div>
            
         <img src={img1} alt="Image 1" className='image-category-mobile-silder'/>
          
@@ -104,7 +104,7 @@ const MobileHomeCategory = () => {
     
         Laptop
         </div>
-        <div style={{width:'328%'}}>
+        <div>
            
         <img src={img2} alt="Image 1" className='image-category-mobile-silder'/>
          
@@ -116,7 +116,7 @@ const MobileHomeCategory = () => {
       <div className='category-dev-img-section-mobile'>
         Desktops
         </div>
-        <div style={{width:'328%'}}>
+        <div >
            
         <img src={img3} alt="Image 1" className='image-category-mobile-silder'/>
          
@@ -130,7 +130,7 @@ const MobileHomeCategory = () => {
       <div className='category-dev-img-section-mobile'>
         Laptop
         </div>
-        <div style={{width:'328%'}}>
+        <div>
            
         <img src={img1} alt="Image 1" className='image-category-mobile-silder'/>
          
@@ -142,7 +142,7 @@ const MobileHomeCategory = () => {
       <div className='category-dev-img-section-mobile'>
       Laptop
         </div>
-        <div style={{width:'328%'}}>
+        <div>
            
         <img src={img2} alt="Image 1" className='image-category-mobile-silder'/>
          
@@ -154,7 +154,7 @@ const MobileHomeCategory = () => {
       <div className='category-dev-img-section-mobile'>
              Desktops
         </div>
-        <div style={{width:'328%'}}>
+        <div>
            
         <img src={img3} alt="Image 1" className='image-category-mobile-silder'/>
          
