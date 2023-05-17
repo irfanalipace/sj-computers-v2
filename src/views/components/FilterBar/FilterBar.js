@@ -39,6 +39,7 @@ const FilterBar = () => {
             return tempVariable;
         });
     };
+    console.log("filterArray: ", filtersInArray);
 
     const handleCheckboxChange = (event, category, option) => {
         const isChecked = event.target.checked;
@@ -52,9 +53,12 @@ const FilterBar = () => {
             if (isChecked) {
                 return [...prevSelectedFilters, filter];
             }
+            console.log("11 not cheked");
             let index = prevSelectedFilters.findIndex((filter) => {
                 return filter.value === option;
             });
+
+            console.log("11 index");
 
             let tempArray = [...prevSelectedFilters];
 
@@ -108,10 +112,6 @@ const FilterBar = () => {
                         <input
                             id={`${option.value}-${index}`}
                             type="checkbox"
-                            checked={
-                                selectedFilters[category] &&
-                                selectedFilters[category].includes(option.value)
-                            }
                             onChange={(event) =>
                                 handleCheckboxChange(
                                     event,

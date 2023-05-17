@@ -4,16 +4,13 @@ import "./ProductType.css";
 import ProductItem1 from "@components/homeproduct/productcategory/ProductItem1";
 import ProductItem4 from "@components/homeproduct/productcategory/ProductItem4";
 
-import addDesktop from "@images/advertisement/advertisement-desktop.png";
-import addMobile from "@images/advertisement/advertisement-mobile.png";
+import addDesktop from "@images/categories/wellcome.webp";
+// import addMobile from "@images/advertisement/advertisement-mobile.png";
 import welcomeImage from "@images/advertisement/welcome-banner.png";
 import categoryImg1 from "@images/categories/desktopweb.webp";
 import categorybusinussweb from "@images/categories/businussweb.webp";
 import categorywellcom from "@images/categories/wellcomeweb.webp";
-import categoryImg2 from "@images/categories/category-laptop.png";
-import categoryImg3 from "@images/categories/category-desktop.png";
-import categoryImg4 from "@images/categories/category-4.png";
-import categoryImg5 from "@images/categories/category-5.png";
+import { AddAlarmRounded } from "@material-ui/icons";
 
 export const ProductType = () => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -32,14 +29,16 @@ export const ProductType = () => {
                     </div>
                 </div>
 
-               
                 <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-type-section">
                         <h4 className="h4-heading">Gaming Desktop</h4>
                         <div className="categories-container">
                             <ProductItem1 image={categoryImg1} />
                         </div>
-                        <Link to="/category/gaming_desktops" className="text-decoration-none">
+                        <Link
+                            to="/category/gaming_desktops"
+                            className="text-decoration-none"
+                        >
                             <p className="section-link">Shop Now</p>
                         </Link>
                     </div>
@@ -50,7 +49,10 @@ export const ProductType = () => {
                         <div className="categories-container">
                             <ProductItem1 image={categorybusinussweb} />
                         </div>
-                        <Link to="/category/business_computers" className="text-decoration-none">
+                        <Link
+                            to="/category/business_computers"
+                            className="text-decoration-none"
+                        >
                             <p className="section-link">Shop Now</p>
                         </Link>
                     </div>
@@ -71,7 +73,7 @@ export const ProductType = () => {
                         {isAuthenticated ? (
                             <div className="advertisement-heading">
                                 <img
-                                    src={welcomeImage}
+                                    src={categorywellcom}
                                     className="advertisment-img"
                                 />
                             </div>
@@ -93,12 +95,12 @@ export const ProductType = () => {
                         )}
                         <div className="product-section-advertisment">
                             <img
-                                src={categorywellcom}
+                                src={addDesktop}
                                 className="advertisment-img d-sm-none d-lg-block"
                             />
                             <img
-                                src={addMobile}
-                                className="advertisment-img d-none d-sm-block d-lg-none"
+                                src={addDesktop}
+                                className="advertisment-img d-none d-lg-none"
                             />
                         </div>
                     </div>
