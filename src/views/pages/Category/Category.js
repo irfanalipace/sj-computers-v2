@@ -1,5 +1,4 @@
-import { useSelector } from "react-redux";
-
+import { useState } from "react";
 import FilterBar from "@components/FilterBar/FilterBar";
 import Loader from "@common/LoaderComponent/OverlayLoader";
 
@@ -8,24 +7,24 @@ import ProductsByCategory from "./ProductsByCategory";
 import "./Category.css";
 
 function Category() {
-    const isLoading = false;
+    const [isOpen, setIsOpen] = useState(false);
 
+    const toggleFilter = () => {
+        setIsOpen((state) => !state);
+    };
     return (
         <div className="category-page">
             <div className="category-page-inner">
-                {isLoading ? (
-                    <div>
-                        <Loader isLoading={isLoading} />
+                <div>
+                    <Loader isLoading={false} />
+                </div>
+                <div>
+                    <div className={`sticky-filter-bar ${isOpen && "active"}`}>
+                        <FilterBar />
                     </div>
-                ) : (
-                    <div>
-                        <div className="sticky-filter-bar">
-                            <FilterBar />
-                        </div>
 
-                        <ProductsByCategory />
-                    </div>
-                )}
+                    <ProductsByCategory toggleFilter={toggleFilter} />
+                </div>
             </div>
         </div>
     );

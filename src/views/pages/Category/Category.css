@@ -16,3 +16,18 @@
 .category-page .product-image-grid {
     /* background: #f3f9ff; */
 }
+
+.filter-results .heading {
+    padding: 20px 30px 0;
+}
+.filter-results h3 {
+    font-weight: 600;
+    font-size: 16px;
+    width: 100%;
+}
+
+@media screen and (max-width: 585px) {
+    .filter-results {
+        margin-left: 0;
+    }
+}

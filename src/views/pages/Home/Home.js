@@ -1,4 +1,3 @@
-
 import TopBar from "@components/TopBar/TopBar";
 import BannerCategory from "./BannerCategory";
 // import CarouselSlider from "@components/Sliders/CarouselSlider";
@@ -15,20 +14,18 @@ const Home = () => {
     // const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     return (
         <div className="homePage">
-          
-               
-                        {/* <MobileHomeCategory />
+            {/* <MobileHomeCategory />
                 
                         <SellingProducts /> */}
-              
-         
-                    <TopBar />
-                    <BannerCategory />
 
-                    <div className="products-grid-container">
-                        <ProductsHomePage />
-                    </div>
-      
+            <TopBar />
+            <BannerCategory />
+
+            <div className="products-grid-container">
+                <h3>Products</h3>
+                <ProductsHomePage />
+            </div>
+
             {/* <CarouselSlider /> */}
             {/* <ProductThreeItem /> */}
             {/* <Recommendation /> */}

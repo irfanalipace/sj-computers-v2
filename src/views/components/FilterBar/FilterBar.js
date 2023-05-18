@@ -12,13 +12,12 @@ import { SET_FILTERS_ARRAY } from "@store/products/productsSlice";
 import "./FilterBar.css";
 
 const FilterBar = () => {
-    const [filters, setFilters] = useState([]);
+    const [filters, setFilters] = useState({});
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [filtersInArray, setFiltersInArray] = useState([]);
     const [loadingFilters, setLoadingFilters] = useState(false);
     const [visibleCategories, setVisibleCategories] = useState(8);
     const [visibleEntries, setVisibleEntries] = useState({});
-    console.log("visisble entries", visibleEntries);
     const isLoading = useSelector((state) => state.products.isFiltering);
 
     const dispatch = useDispatch();
@@ -30,8 +29,6 @@ const FilterBar = () => {
     };
 
     const handleShowMoreitems = (category) => {
-        console.log("11 category: ", category);
-        console.log("11 visible: ", visibleEntries[category].visibleEntries);
         setVisibleEntries((prevVisibleCategories) => {
             let tempVariable = { ...prevVisibleCategories };
             tempVariable[category].visibleEntries =
@@ -39,7 +36,6 @@ const FilterBar = () => {
             return tempVariable;
         });
     };
-    console.log("filterArray: ", filtersInArray);
 
     const handleCheckboxChange = (event, category, option) => {
         const isChecked = event.target.checked;
@@ -53,12 +49,9 @@ const FilterBar = () => {
             if (isChecked) {
                 return [...prevSelectedFilters, filter];
             }
-            console.log("11 not cheked");
             let index = prevSelectedFilters.findIndex((filter) => {
                 return filter.value === option;
             });
-
-            console.log("11 index");
 
             let tempArray = [...prevSelectedFilters];
 
@@ -87,23 +80,28 @@ const FilterBar = () => {
     }, []);
 
     const fetchFilters = async () => {
-        setLoadingFilters(true);
-        let response = await getFilterListApi();
-        setFilters(response.data);
-        const keys = Object.keys(response.data);
-        const tempVariable = {};
-
-        for (const key of keys) {
-            tempVariable[key] = { visibleEntries: 8 };
-        }
-        setVisibleEntries(tempVariable);
+        try {
+            setLoadingFilters(true);
+            let response = await getFilterListApi();
+            setFilters(response.data ? response.data : {});
+            const keys = Object.keys(response.data);
+            const tempVariable = {};
+            for (const key of keys) {
+                tempVariable[key] = { visibleEntries: 8 };
+            }
+            setVisibleEntries(tempVariable);
+        } catch (error) {}
         setLoadingFilters(false);
     };
 
-    let renderedItems = (options, category) =>
-        options
-            .slice(0, visibleEntries[category].visibleEntries)
-            .map((option, index) => (
+    let renderedItems = (options, category) => {
+        let optionArray = options.slice(
+            0,
+            visibleEntries[category].visibleEntries
+        );
+
+        optionArray.map((option, index) => (
+            <>
                 <li className="filter-value" key={`${option.value}-${index}`}>
                     <label
                         className="checkbox-container"
@@ -124,7 +122,15 @@ const FilterBar = () => {
                         {option.value}
                     </label>
                 </li>
-            ));
+                <li className="filter-value">
+                    <button onClick={() => handleShowMoreitems(category)}>
+                        <span className="me-2">Show More</span>
+                        <FontAwesomeIcon icon={faAngleDown} />
+                    </button>
+                </li>
+            </>
+        ));
+    };
 
     let renderedCategories = Object.entries(filters).map(
         ([category, options], index) => (
@@ -132,12 +138,6 @@ const FilterBar = () => {
                 <h4 className="filter-heading">{category}</h4>
                 <ul className="filter-values-list">
                     {renderedItems(options, category)}
-                    <li className="filter-value">
-                        <button onClick={() => handleShowMoreitems(category)}>
-                            <span className="me-2">Show More</span>
-                            <FontAwesomeIcon icon={faAngleDown} />
-                        </button>
-                    </li>
                 </ul>
             </li>
         )

@@ -4,17 +4,17 @@ import { useParams } from "react-router-dom";
 
 import FilteredProducts from "./FilteredProducts";
 
-const ProductsHomePage = () => {
+const ProductsByCategory = ({ toggleFilter }) => {
     const { categorySlug } = useParams();
     const categories = useSelector((state) => state.category.categories);
-    const [categoryId, setCategoryId] = useState(null);
+    const [category, setCategory] = useState(null);
 
     useEffect(() => {
-        const categoryId = categories.find((c) => c.slug === categorySlug)?.id;
-        setCategoryId(categoryId);
+        const _category = categories.find((c) => c.slug === categorySlug);
+        setCategory(_category);
     }, [categories]);
 
-    return <FilteredProducts categoryId={categoryId} />;
+    return <FilteredProducts category={category} toggleFilter={toggleFilter} />;
 };
 
-export default ProductsHomePage;
+export default ProductsByCategory;

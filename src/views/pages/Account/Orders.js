@@ -18,7 +18,6 @@ import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 
-import { FaSearch } from "react-icons/fa";
 import "./Account.css";
 import { Select } from "@mantine/core";
 
@@ -143,7 +142,7 @@ const OrderPage = () => {
     };
     const handleSearch = async () => {
         setActiveTab(2);
-console.log(orderSearch, "input")
+        console.log(orderSearch, "input");
         const responseSearch = await OrderSearchApi(orderSearch);
         console.log(responseSearch, "response search");
         setOrderSearchData(responseSearch);
@@ -158,13 +157,13 @@ console.log(orderSearch, "input")
         return activeTab === 0 ? (
             successOrders.length > 0 ? (
                 <OrderCard data={successOrders} />
+            ) : (
                 // <div className="flex justify-center items-center">
                 //     <p>No success orders</p>
                 // </div>
-            ) : (
                 <>
                     {/* {Object.Keys(orderDetails).length === 0 ? "data have" : "no data"} */}
-                  
+
                     <div className="flex justify-center items-center">
                         <p>No success orders</p>
                     </div>
@@ -175,9 +174,8 @@ console.log(orderSearch, "input")
                 // <div className="flex justify-center items-center">
                 //     <p>No cancelled orders.</p>
                 // </div>
-                  <OrderCard data={cancelOrders} />
+                <OrderCard data={cancelOrders} />
             ) : (
-              
                 <div className="flex justify-center items-center">
                     <p>No cancelled orders</p>
                 </div>
@@ -185,12 +183,12 @@ console.log(orderSearch, "input")
         ) : activeTab === 2 ? (
             orderSearchData.length > 0 ? (
                 <OrderCard data={orderSearchData} />
+            ) : (
                 // <div className="flex justify-center items-center">
                 //     <p>Orders Not found.</p>
                 // </div>
-            ) : (
                 // <OrderCard data={orderSearchData} />
-                 <div className="flex justify-center items-center">
+                <div className="flex justify-center items-center">
                     <p>Orders Not found.</p>
                 </div>
             )
@@ -225,7 +223,6 @@ console.log(orderSearch, "input")
                                         : "search-input"
                                 }
                             />
-                            {/* <FaSearch style={{ marginRight: '5px' }} /> */}
                             <button
                                 type="button"
                                 style={{

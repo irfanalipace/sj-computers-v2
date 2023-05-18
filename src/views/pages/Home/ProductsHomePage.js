@@ -33,7 +33,6 @@ const ProductsHomePage = () => {
             isLoading={isLoading}
             apiError={apiError}
             smallBtn={true}
-            heading={"products"}
         />
     );
 };

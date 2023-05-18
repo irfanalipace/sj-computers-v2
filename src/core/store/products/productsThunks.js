@@ -20,7 +20,7 @@ export const fetchProducts = (page = 1) => {
             const response = await productsApi(page);
             dispatch({
                 type: FETCH_PRODUCTS,
-                payload: response.data.data,
+                payload: response?.data?.data,
             });
         } catch (error) {
             console.log("Something went wrong in products", error);
@@ -38,7 +38,7 @@ export const searchProducts = (name = "", page = 1, per_page = 12) => {
             dispatch({
                 type: SEARCH_PRODUCTS,
                 payload: {
-                    data: [...response.data.data],
+                    data: [...response?.data?.data],
                     searchString: name,
                 },
             });
@@ -56,12 +56,16 @@ export const filterProducts = (filter) => {
             dispatch({ type: SET_FILTERING_PRODUCTS, payload: {} });
             const response = await filterProductsApi(filter);
             if (filter.page === 1) dispatch(RESET_PAGE());
-            dispatch({
-                type: FILTER_PRODUCTS,
-                payload: {
-                    data: [...response.data.data],
-                },
-            });
+            if (response?.data?.data) {
+                dispatch({
+                    type: FILTER_PRODUCTS,
+                    payload: {
+                        data: [...response?.data?.data],
+                    },
+                });
+            } else {
+                dispatch({ type: API_ERROR, payload: {} });
+            }
         } catch (error) {
             console.log("Something went wrong in products", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

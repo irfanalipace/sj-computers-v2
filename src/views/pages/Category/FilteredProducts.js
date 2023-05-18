@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 import { filterProducts } from "@store/products/productsThunks";
 import {
@@ -9,8 +10,7 @@ import {
 } from "@store/products/productsSlice";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
 
-const FilteredProducts = ({ categoryId }) => {
-    const { categorySlug } = useParams();
+const FilteredProducts = ({ category, toggleFilter }) => {
     const products = useSelector((state) => state.products.products);
     const isLoading = useSelector((state) => state.products.isLoading);
     const apiError = useSelector((state) => state.products.apiError);
@@ -24,7 +24,7 @@ const FilteredProducts = ({ categoryId }) => {
     const filterObject = {
         page: 1,
         per_page: 12,
-        categoryId,
+        categoryId: category?.categoryId,
     };
 
     const init = () => {
@@ -60,12 +60,26 @@ const FilteredProducts = ({ categoryId }) => {
 
     return (
         <div className="filter-results">
+            <div className="d-flex justify-content-space-between align-items-center heading">
+                <h3>
+                    Best
+                    <span className="text-capitalize">
+                        {category?.categoryName}
+                    </span>
+                </h3>
+                <button
+                    className="d-sm-none d-block bg-transparent border-0"
+                    onClick={toggleFilter}
+                >
+                    <FontAwesomeIcon icon={faFilter} />
+                </button>
+            </div>
+
             <ProductsGrid
                 products={products}
                 handleClick={handleClick}
                 isLoading={isLoading}
                 apiError={apiError}
-                heading={`Best ${categorySlug}`}
             />
         </div>
     );
