@@ -9,7 +9,7 @@ import { sendTokenApi } from "@api/square";
 
 import "./SquareForm.css";
 
-export const SquareForm = ({ hideCloseBtn, hideModal }) => {
+export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const placingOrder = useSelector((state) => state.orders.placingOrder);
@@ -39,6 +39,7 @@ export const SquareForm = ({ hideCloseBtn, hideModal }) => {
                     try {
                         let response = await sendTokenApi({
                             source_id: token.token,
+                            shipping_address: shippingDetails,
                         });
 
                         if (response.code === 200) {

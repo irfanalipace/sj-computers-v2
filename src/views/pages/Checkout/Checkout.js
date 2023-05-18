@@ -29,6 +29,7 @@ export default function Checkout() {
     const shippingAddress = useSelector(
         (state) => state.orders.shippingDetails
     );
+
     const loading = useSelector((state) => state.cart.isLoading);
 
     const queryString = window.location.search;

@@ -37,8 +37,9 @@ export default function PaymentMethod({ setPayment, handleHeight }) {
         switch (paymentMethod) {
             case PAYMENT_METHODS.PAYPAL:
                 dispatch(
-                    placeOrder({ paymentMethod }, (link) =>
-                        location.replace(link)
+                    placeOrder(
+                        { paymentMethod, shipping_address: shippingDetails },
+                        (link) => location.replace(link)
                     )
                 );
                 break;
@@ -114,6 +115,7 @@ export default function PaymentMethod({ setPayment, handleHeight }) {
             <PaymentModal
                 isOpen={openPaymentModal}
                 handleClose={() => setPaymentModal(false)}
+                shippingDetails={shippingDetails}
             />
         </div>
     );
