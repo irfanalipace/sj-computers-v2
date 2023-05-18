@@ -226,7 +226,7 @@ export const Router = () => {
                         className="w-100 d-flex justify-content-center align-items-center flex-column"
                         style={{ height: "500px" }}
                     >
-                        <h1>Transaction Successfull</h1>
+                        <h1>Transaction Successful</h1>
                     </div>
                 </div>
             ),
