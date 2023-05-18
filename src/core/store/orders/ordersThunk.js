@@ -53,11 +53,12 @@ export const getOrderDetails = () => {
     };
 };
 
-export const setShippingDetails = (data) => {
+export const setShippingDetails = (data, cb) => {
     return async (dispatch) => {
         try {
             dispatch({ type: SETTING_ADDRESS, payload: {} });
             await setShippingAddressApi(data);
+            if (typeof cb === "function") cb();
             dispatch({
                 type: SET_SHIPPING_DETAILS,
                 payload: data,
