@@ -19,18 +19,13 @@
     border-radius: 0px 5px 5px 0px;
 }
 .mobile-box-model {
-    position: sticky;
     width: 100%;
-    text-align: center;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 18px;
-    display: flex;
+    display: block;
     -webkit-box-align: center;
     align-items: center;
     background: #002549;
     color: white;
+    position: relative;
 }
 .search-section {
     border-radius: 10px 0px 0px 10px !important;
