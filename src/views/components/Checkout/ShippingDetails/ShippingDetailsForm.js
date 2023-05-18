@@ -2,6 +2,7 @@ import { useEffect, useState, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { setShippingDetails } from "@store/orders/ordersThunk";
+import { SET_SHIPPING_DETAILS } from "@store/orders/ordersSlice";
 import { useFormValidation } from "@hooks/useFormValidation";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import ShippingButton from "./ShippingButton";
@@ -17,7 +18,6 @@ function ShippingDetailsForm({ address, handleHeight }) {
             city: address?.city || "",
             state: address?.state || "Alabama",
             zip_code: address?.zip_code || "",
-            saveAddress: false,
         },
         {
             fieldLengths: {
@@ -33,7 +33,12 @@ function ShippingDetailsForm({ address, handleHeight }) {
     const settingAdress = useSelector((state) => state.orders.settingAdress);
 
     const [fieldErrors, setFieldErrors] = useState({});
+    const [permanentAddress, setPermanentAddress] = useState(false);
     const dispatch = useDispatch();
+
+    const handlePermanentAddresses = (e) => {
+        setPermanentAddress(e.target.checked);
+    };
 
     useEffect(() => {
         setFieldErrors({ ...errors });
@@ -46,7 +51,9 @@ function ShippingDetailsForm({ address, handleHeight }) {
     const submitShippingDetails = (e) => {
         e.preventDefault();
         let params = { ...values };
-        dispatch(setShippingDetails(params));
+
+        if (permanentAddress) dispatch(setShippingDetails(params));
+        else dispatch(SET_SHIPPING_DETAILS(params));
     };
 
     useEffect(() => {
@@ -251,14 +258,17 @@ function ShippingDetailsForm({ address, handleHeight }) {
                         </div>
                         <div className="field-section checkbox-wrapper">
                             <input
-                                id="saveAddress"
-                                name="saveAddress"
+                                id="permanent_address"
+                                name="permanent_address"
                                 className="input-field"
                                 type="checkbox"
-                                placeholder=""
-                                onChange={handleChange}
+                                checked={permanentAddress}
+                                onChange={handlePermanentAddresses}
                             />
-                            <label htmlFor={"saveAddress"}>
+                            <label
+                                htmlFor={"permanent_address"}
+                                className="pb-0"
+                            >
                                 Make this my address
                             </label>
                         </div>
