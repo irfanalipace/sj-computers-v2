@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        if (App::environment('local') && \Request::getScheme() == "http") {
+        if (!App::environment('local') && \Request::getScheme() == "http") {
             $this->app['request']->server->set('HTTPS', true);
 //            \URL::forceScheme('https');
         }
