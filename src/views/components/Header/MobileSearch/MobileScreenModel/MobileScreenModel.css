@@ -1,9 +1,9 @@
 .modal-mobile-screen {
-    z-index: 999;
+    z-index: 5;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 0;
+    height: 0;
     background-color: transparent;
     position: absolute;
 }
@@ -17,11 +17,10 @@
 .modal-content-mobile-screen {
     position: fixed;
     background-color: #fff;
-    width: 100%;
     max-width: 600px;
     padding: 20px;
-
-    bottom: 26px;
+    bottom: 4vh;
+    z-index: 3;
 }
 
 .modal-content-mobile-screen-box2 {
@@ -46,7 +45,7 @@
     border: none;
 }
 .box-button-text-mobile-screen {
-    color: white;
+    color: lightgray;
 }
 .box-text-dilver-location {
     font-weight: 600;
@@ -107,7 +106,7 @@
     border: none;
     color: white;
     background: #002549;
-
+    padding: 10px;
     font-weight: 500;
     font-size: 12px;
     line-height: 24px;
@@ -144,8 +143,7 @@
     width: 97%;
     height: 43px;
     margin-bottom: 12px;
-    /* border: 1px black; */
-    /* color: red; */
+  
 }
 .box-text-hr-text {
     width: 443px;
