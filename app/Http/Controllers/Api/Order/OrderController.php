@@ -12,6 +12,7 @@ use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreShippingAddressRequest;
 use App\Models\OrderShippingAddress;
+use App\Models\UserAddress;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 
@@ -36,7 +37,7 @@ class OrderController extends BaseController
                     break;
                 default:
                     # code...
-                    return response()->json(['code' => 400 ,'msg' => "Please choose one option"]);
+                    return response()->json(['code' => 400, 'msg' => "Please choose one option"]);
                     break;
             }
         } catch (Exception $e) {
@@ -46,7 +47,7 @@ class OrderController extends BaseController
 
     public function getShippingAddress()
     {
-        $shippingAdress = OrderShippingAddress::where('user_id', auth()->user()->id)->first();
+        $shippingAdress = UserAddress::where('user_id', auth()->user()->id)->first();
         return response(array('success' => true, 'data' => $shippingAdress, 'message' => "Get Shipping address success"));
     }
 
@@ -54,43 +55,50 @@ class OrderController extends BaseController
     {
         try {
 
-            $order = OrderShippingAddress::updateOrCreate(
+            $order = UserAddress::updateOrCreate(
                 ['user_id' => auth()->user()->id],
-                ['country' => $request['country'], 'full_name' => $request['full_name'], 'phone_number' => $request['phone_number'], 'address' => $request['address'], 'city' => $request['city'], 'state' => $request['state'], 'zip_code' => $request['zip_code'], 'user_id' => auth()->user()->id]
+                ['country' => $request['country'], 'full_name' => $request['full_name'], 'phone_number' => $request['phone_number'], 'address' => $request['address'], 'city' => $request['city'], 'state' => $request['state'], 'zip_code' => $request['zip_code'], 'status' => 'Active', 'user_id' => auth()->user()->id]
             );
 
+            // else {
+
+            //     $order = OrderShippingAddress::create(
+            //         ['country' => $request->country, 'full_name' => $request->full_name, 'phone_number' => $request->phone_number, 'address' => $request->address, 'city' => $request->city, 'state' => $request->state, 'zip_code' => $request->zip_code, 'user_id' => auth()->user()->id]
+            //     );
+            // }
             return response(array('success' => true, 'data' => $order, 'message' => "Shipping address added."), 200, []);
         } catch (Exception $e) {
             return response()->json(['status' => 400, 'msg', 'Something went wrong.' . $e]);
         }
     }
 
-    public function getOrders(OrderListRequest $request){
+    public function getOrders(OrderListRequest $request)
+    {
 
         $perPageRecord = $request->get('per_page') ?? 12;
 
         $sql = Order::query();
 
-        if($request->month) {
+        if ($request->month) {
             $from = Carbon::now()->subMonth($request->get('month'));
             $to = Carbon::now();
-            $sql = Order::whereBetween('created_at',[$from,$to]);
+            $sql = Order::whereBetween('created_at', [$from, $to]);
         }
 
-        $successOrder =  $sql->where('status',StatusEnum::COMPLETE)->paginate($perPageRecord);
-        $cancelOrder = $sql->where('status','!=',StatusEnum::COMPLETE)->paginate($perPageRecord);
+        $successOrder =  $sql->where('status', StatusEnum::COMPLETE)->paginate($perPageRecord);
+        $cancelOrder = $sql->where('status', '!=', StatusEnum::COMPLETE)->paginate($perPageRecord);
 
         $data = [
             'success_orders' => $successOrder,
             'cancel_orders' => $cancelOrder
         ];
 
-       return $this->sendResponse($data);
-    }
-
-    public function searchOrder(Request $request){
-        $data = Order::where('invoice_id',$request->invoice_id)->get();
         return $this->sendResponse($data);
     }
 
+    public function searchOrder(Request $request)
+    {
+        $data = Order::where('invoice_id', $request->invoice_id)->get();
+        return $this->sendResponse($data);
+    }
 }

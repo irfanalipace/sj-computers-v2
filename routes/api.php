@@ -97,18 +97,18 @@ Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('a
 /*
 *Contact-us
 */
-Route::post('contact-us',[ContactUsController::class,'contactSubmit'])->name('customer-contact');
+Route::post('contact-us', [ContactUsController::class, 'contactSubmit'])->name('customer-contact');
 
 /*
 *Place Order
 */
 Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder')->middleware('auth:api');
 
-Route::get('success-transaction/{id}', [PaypalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 
 Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
-Route::get('system-pages/{key?}',[SystemPagesController::class,'getPages'])->name('getPages');
+Route::get('system-pages/{key?}', [SystemPagesController::class, 'getPages'])->name('getPages');
 
 Route::middleware(['auth:api', 'verified'])->group(function () {
 

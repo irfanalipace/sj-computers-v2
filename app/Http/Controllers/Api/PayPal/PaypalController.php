@@ -13,6 +13,7 @@ use Srmklive\PayPal\Services\ExpressCheckout;
 use Srmklive\PayPal\Facades\Paypal as PayPalClient;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\GenerateInvoiceJob;
+use App\Repositories\OrderRepository;
 use Cart;
 
 use Illuminate\Support\Facades\DB;
@@ -65,7 +66,6 @@ class PaypalController extends Controller
     public function successTransaction(Request $request)
     {
 
-
         try {
             // DB::beginTransaction();
             $data = $request->all();
@@ -98,7 +98,12 @@ class PaypalController extends Controller
 
             //This code checks if the ACK code of a PayPal API response, is either "SUCCESS" or "SUCCESSWITHWARNING"
             if (isset($response['ACK']) && !empty($response['ACK']) &&  in_array(strtoupper($response['ACK']), [StatusEnum::SUCCESS, StatusEnum::PAYPALSUCCESSWITHWARNING])) {
-                GenerateInvoiceJob::dispatch($data, $response, $this->userId,$this->user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent);
+                $repository = new OrderRepository;
+                $order = $repository->createOrder($data, $response, $this->userId, $this->user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $request->address);
+                
+                //sending invoice email of the payment to user
+                GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
+                // GenerateInvoiceJob::dispatch($data, $response, $this->userId,$this->user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent);
                 //return successfull message
                 //clear cart after successfull payment
                 Cart::session($this->userId)->clear();

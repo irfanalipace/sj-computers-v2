@@ -34,6 +34,8 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         'otp_verified'
     ];
 
+    protected $with = ['shippingAddress'];
+    
     public function otps()
     {
         return $this->hasOne(Otp::class);
@@ -84,4 +86,10 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 
         return '';
     }
+
+    public function shippingAddress()
+    {
+        return $this->hasOne(OrderShippingAddress::class);
+    }
+
 }
