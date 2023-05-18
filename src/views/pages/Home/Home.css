@@ -5,13 +5,14 @@
 .banner-category-section {
     position: relative;
     min-height: 490px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
+    max-width: 1500px;
+    margin: 0 auto;
 }
 .banner-wrapper {
     position: relative;
     width: 100%;
     height: 100%;
-    min-height: 600px;
 }
 
 .banner-wrapper::before {
@@ -33,10 +34,10 @@
 }
 
 .products-grid-container {
-    margin: 15px 47px 11px;
     padding: 0 12px;
-    max-width: 1750px;
     background-color: white;
+    margin: 15px auto 11px;
+    max-width: calc(1450px);
 }
 
 .products-grid-container h3 {
@@ -47,7 +48,8 @@
 
 @media screen and (max-width: 576px) {
     .catergory-grid-wrapper {
-        margin-top: -250px !important;
+        margin: -80px auto 0 !important;
+        width: calc(100% - 15px);
     }
 
     .products-grid-container,
@@ -55,6 +57,12 @@
         margin-left: 10px !important;
         margin-right: 10px !important;
         padding: 0;
+    }
+
+    .banner-category-section {
+        position: relative;
+        min-height: 400px;
+        margin-bottom: 15px;
     }
 }
 

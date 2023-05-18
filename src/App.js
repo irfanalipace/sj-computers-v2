@@ -46,6 +46,7 @@ function App() {
                 {/* scroller set for scroll bottom to top  */}
                 <ScrollToTop />
                 <Header />
+
                 <div className="inner-body">
                     <Router />
                 </div>

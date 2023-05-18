@@ -27,6 +27,8 @@ const FilteredProducts = ({ category, toggleFilter }) => {
         categoryId: category?.categoryId,
     };
 
+    console.log("category: ", category);
+
     const init = () => {
         dispatch(SET_SEARCH_STRING(""));
         dispatch(CLEAR_ALL_PRODUCTS());
@@ -60,20 +62,22 @@ const FilteredProducts = ({ category, toggleFilter }) => {
 
     return (
         <div className="filter-results">
-            <div className="d-flex justify-content-space-between align-items-center heading">
-                <h3>
-                    Best
-                    <span className="text-capitalize">
-                        {category?.categoryName}
-                    </span>
-                </h3>
-                <button
-                    className="d-sm-none d-block bg-transparent border-0"
-                    onClick={toggleFilter}
-                >
-                    <FontAwesomeIcon icon={faFilter} />
-                </button>
-            </div>
+            {category?.name && (
+                <div className="d-flex justify-content-space-between align-items-center heading">
+                    <h3>
+                        Best{" "}
+                        <span className="text-capitalize">
+                            {category?.name}
+                        </span>
+                    </h3>
+                    <button
+                        className="d-sm-none d-block bg-transparent border-0"
+                        onClick={toggleFilter}
+                    >
+                        <FontAwesomeIcon icon={faFilter} />
+                    </button>
+                </div>
+            )}
 
             <ProductsGrid
                 products={products}

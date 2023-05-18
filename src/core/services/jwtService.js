@@ -19,6 +19,9 @@ export const saveUserName = (userName) =>
 export const saveUserImage = (userImage) =>
     window.localStorage.setItem(USER_IMAGE, userImage);
 
+export const saveUserState = (userState) =>
+    window.localStorage.setItem(USER_IMAGE, userState);
+
 export const getUserImage = (userImage) =>
     window.localStorage.getItem(USER_IMAGE, userImage);
 

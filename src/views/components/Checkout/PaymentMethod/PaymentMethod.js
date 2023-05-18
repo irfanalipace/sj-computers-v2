@@ -107,7 +107,9 @@ export default function PaymentMethod({ setPayment, handleHeight }) {
                     !paymentMethod || !shippingDetails.address || !paymentMethod
                 }
                 clickHandler={clickHandler}
-            />
+            >
+                Proceed for payment
+            </PaymentButton>
 
             <PaymentModal
                 isOpen={openPaymentModal}

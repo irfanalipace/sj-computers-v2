@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 
+import { snakeCaseToPrettyText } from "@utils/helpers";
+
 import { DilveryBox } from "./DilveryBox/DilveryBox";
 
 import "./ProductDetail.css";
@@ -10,10 +12,69 @@ import "./ProductDetail.css";
 const ProductDetails = ({ product }) => {
     const brands = useSelector((state) => state.brands.brands);
     const [productBrand, setProductBrand] = useState(null);
+    const [description, setDescription] = useState([]);
+    const [productDetails, setProductDetails] = useState([]);
+
+    console.log("description", product.description);
+    let acceptedKeys = [
+        "brand",
+        "cpu_model",
+        "hard_disk",
+        "operating_system",
+        "ram_memory",
+    ];
     useEffect(() => {
         let brand = brands.filter((brand) => brand?.id == product?.id);
         setProductBrand(brand[0]);
     }, [brands]);
+
+    useEffect(() => {
+        productDetailsArray();
+    }, [product?.description]);
+
+    const productDetailsArray = () => {
+        Object.entries(product?.description).forEach(([key, value]) => {
+            let _value = "";
+            console.log("value: ", value);
+            if (key === "bullet_point") {
+                setDescription(value);
+                return;
+            }
+            if (Array.isArray(value)) {
+                if (value[0]?.value) {
+                    let unit = value[0]?.unit ? value[0]?.unit : "";
+                    _value = value[0]?.value + " " + unit;
+                } else if (
+                    value[0]?.installed_size &&
+                    Array.isArray(value[0]?.installed_size)
+                ) {
+                    let unit = value[0]?.installed_size[0]?.unit
+                        ? value[0]?.installed_size[0]?.unit
+                        : "";
+                    _value = value[0]?.installed_size[0]?.value + " " + unit;
+                } else if (
+                    value[0]?.family &&
+                    Array.isArray(value[0]?.family)
+                ) {
+                    _value = value[0]?.family[0]?.value;
+                } else if (value[0]?.size && Array.isArray(value[0]?.size)) {
+                    let unit = value[0]?.size[0]?.unit
+                        ? value[0]?.size[0]?.unit
+                        : "";
+                    _value = value[0]?.size[0]?.value + " " + unit;
+                }
+            }
+
+            if (acceptedKeys.includes(key)) {
+                let item = {
+                    key: snakeCaseToPrettyText(key),
+                    value: _value,
+                };
+                setProductDetails((prev) => [...prev, item]);
+            }
+        });
+    };
+
     return (
         <div>
             <div className="">
@@ -47,15 +108,24 @@ const ProductDetails = ({ product }) => {
                 </div>
                 <div className="col-lg-8 col-md-6 col-sm-12">
                     <div className="my-2">
-                        <Link className="product-rating">66 ratings</Link>
-                        <Link className="product-info">
-                            11 answered questions
+                        <Link className="product-rating">
+                            {product?.numReviews ? product.numReviews : "0"}{" "}
+                            ratings
                         </Link>
+                        {/* <Link className="product-info">
+                            11 answered questions
+                        </Link> */}
                     </div>
                     <span className="size-text">
-                        <span className="size-text-details">Size</span>
-                        <Link className="product-info border-0">
+                        <span className="size-text-details">
+                            Items Available
+                        </span>
+                        {/* <Link className="product-info border-0">
                             “lg 24 inch monitor”
+                        </Link> */}
+                        <Link className="product-info border-0">
+                            {product?.quantity}
+                            {" items"}
                         </Link>
                     </span>
                 </div>
@@ -81,7 +151,7 @@ const ProductDetails = ({ product }) => {
                     </div>
                 </div>
             </div>
-
+            {/* 
             <hr className="hr-card-details"></hr>
 
             <p className="more-styles">More Styles:</p>
@@ -109,36 +179,37 @@ const ProductDetails = ({ product }) => {
                         </Link>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <hr className="hr-card-details"></hr>
             <div className="col-md-12 list-style-margin">
                 <ul className="product-details">
-                    <li>
-                        <span className="item1">Brand</span>
-                        <span className="items capitalize">
-                            {productBrand?.name}
-                        </span>
-                    </li>
-                    <span className="item11">Resolution</span>
-                    <span className="items">FHD 1080p</span>
-                    <li>
-                        <span className="item12">Technologies</span>
-                        <span className="items">Led</span>
-                    </li>
-                    <li>
-                        <span className="item1">Model</span>
-                        <span className="items">Smart</span>
-                    </li>
-                    <li>
-                        <span className="item1">Series</span>
-                        <span className="items">LG24ML600MBOB</span>
-                    </li>
+                    {productDetails.map((item, index) => (
+                        <li key={`${item.key}-${index}`} className="row mx-0">
+                            <div className="col-md-3 col-6">
+                                <span className="item12 text-capitalize">
+                                    {item?.key}
+                                </span>
+                            </div>
+                            <div className="col-md-9 col-6">
+                                <span className="items text-capitalize">
+                                    {item?.value}
+                                </span>
+                            </div>
+                        </li>
+                    ))}
                 </ul>
             </div>
-            <hr></hr>
+            <hr className="hr-card-details"></hr>
+
             <div className="col-md-12 items-details-description">
-                <span className="items-text-style">Items Description</span>
+                <h3 className="items-text-style">Items Description</h3>
+
+                <ol type="1">
+                    {description?.map((item) => (
+                        <li>{item.value}</li>
+                    ))}
+                </ol>
             </div>
         </div>
     );

@@ -22,8 +22,8 @@
 }
 
 .product-type-container {
-    margin: 0 47px 10px;
-    max-width: 1750px;
+    margin: 0 auto 10px;
+    max-width: calc(100% - 47px);
 }
 
 .product-type-section {

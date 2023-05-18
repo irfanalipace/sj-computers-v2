@@ -1,6 +1,6 @@
 import Button from "@common/Button/Button";
 
-function PaymentButton({ isLoading, clickHandler, disabled }) {
+function PaymentButton({ isLoading, clickHandler, disabled, children }) {
     return (
         <Button
             isLoading={isLoading}
@@ -8,7 +8,7 @@ function PaymentButton({ isLoading, clickHandler, disabled }) {
             clickHandler={clickHandler}
             disabled={disabled}
         >
-            Proceed for payment
+            {children}
         </Button>
     );
 }

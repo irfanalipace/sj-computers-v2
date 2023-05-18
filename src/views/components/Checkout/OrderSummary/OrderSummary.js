@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { placeOrder } from "@store/orders/ordersThunk";
 import ShippingButton from "@components/Checkout/ShippingDetails/ShippingButton";
 import PaymentButton from "@components/Checkout/PaymentMethod/PaymentButton";
-import ReviewCheckout from "@components/Checkout/ReviewCheckout/ReviewButton";
+import ReviewButton from "@components/Checkout/ReviewCheckout/ReviewButton";
 
 import "./OrderSummary.css";
 
@@ -33,10 +33,12 @@ function OrderSummary({
             );
         } else if (activeAccordion === 2) {
             return (
-                <ReviewCheckout
+                <ReviewButton
                     toggleAccordion={handleClick}
                     id={activeAccordion}
-                />
+                >
+                    Review Items
+                </ReviewButton>
             );
         } else {
             const placeOrderFunc = () => {
@@ -49,11 +51,13 @@ function OrderSummary({
 
             return (
                 <PaymentButton
-                    clickHandler={placeOrderFunc}
+                    clickHandler={() => false}
                     id={activeAccordion}
-                    disabled={disabled}
+                    disabled={true}
                     isLoading={placingOrder}
-                />
+                >
+                    Select Payment Method
+                </PaymentButton>
             );
         }
     };

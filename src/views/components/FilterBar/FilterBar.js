@@ -99,37 +99,44 @@ const FilterBar = () => {
             0,
             visibleEntries[category].visibleEntries
         );
-
-        optionArray.map((option, index) => (
+        return (
             <>
-                <li className="filter-value" key={`${option.value}-${index}`}>
-                    <label
-                        className="checkbox-container"
-                        htmlFor={`${option.value}-${index}`}
+                {optionArray.map((option, index) => (
+                    <li
+                        className="filter-value"
+                        key={`${option.value}-${index}`}
                     >
-                        <input
-                            id={`${option.value}-${index}`}
-                            type="checkbox"
-                            onChange={(event) =>
-                                handleCheckboxChange(
-                                    event,
-                                    category,
-                                    option.value
-                                )
-                            }
-                        />
-                        <span className="checkmark"></span>
-                        {option.value}
-                    </label>
-                </li>
-                <li className="filter-value">
-                    <button onClick={() => handleShowMoreitems(category)}>
-                        <span className="me-2">Show More</span>
-                        <FontAwesomeIcon icon={faAngleDown} />
-                    </button>
-                </li>
+                        <label
+                            className="checkbox-container"
+                            htmlFor={`${option.value}-${index}`}
+                        >
+                            <input
+                                id={`${option.value}-${index}`}
+                                type="checkbox"
+                                onChange={(event) =>
+                                    handleCheckboxChange(
+                                        event,
+                                        category,
+                                        option.value
+                                    )
+                                }
+                            />
+                            <span className="checkmark"></span>
+                            {option.value}
+                        </label>
+                    </li>
+                ))}
+                {visibleEntries[category].visibleEntries <=
+                    filters[category].length && (
+                    <li className="filter-value">
+                        <button onClick={() => handleShowMoreitems(category)}>
+                            <span className="me-2">Show More</span>
+                            <FontAwesomeIcon icon={faAngleDown} />
+                        </button>
+                    </li>
+                )}
             </>
-        ));
+        );
     };
 
     let renderedCategories = Object.entries(filters).map(

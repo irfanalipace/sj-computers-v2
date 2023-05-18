@@ -15,7 +15,7 @@ export default function ProductsGrid({
         <div className="products-grid mb-3">
             <Row className="mx-0 justify-content-left">
                 {products?.map((product) => (
-                    <Col xs={12} sm={6} md={4} lg={2} key={product.id}>
+                    <Col xs={6} md={4} lg={2} key={product.id}>
                         <Product product={product} inGrid={true} />
                     </Col>
                 ))}

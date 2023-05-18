@@ -102,7 +102,10 @@ export const CheckOutCard = ({ product }) => {
                             <div className="text-stock">
                                 <span className="color-card">In Stock</span>
                                 <div className="mt-3">
-                                    <QuantityInput onChange={setQuantity} />
+                                    <QuantityInput
+                                        onChange={setQuantity}
+                                        maxQuantity={product?.quantity}
+                                    />
                                 </div>
                             </div>
                             <div className="button-cart-sell">

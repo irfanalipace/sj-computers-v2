@@ -29,6 +29,7 @@ import {
     saveUserEmail,
     saveUserName,
     saveUserImage,
+    saveUserState,
     saveUserPassword,
     saveUser,
     saveTempToken,
@@ -47,12 +48,14 @@ export const login = (credentials) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             const response = await loginApi(credentials);
-            console.log('response:', response);
+            console.log("response:", response);
             let token = response.access_token;
             let name = response.user;
             let profile_pic = response.profile_pic;
+            let state = response.state;
             saveUserName(name);
             saveUserImage(profile_pic);
+            saveUserState(state);
             saveTempToken(token); // saving token temporarily to only allow user to call the login api
             saveUserPassword(credentials.password); // saving password temporarily to only allow user to re login to resend the otp
             dispatch({

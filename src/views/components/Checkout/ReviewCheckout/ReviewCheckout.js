@@ -90,7 +90,9 @@ export default function ReviewCheckout({
                 </div>
             </div>
 
-            <ReviewButton toggleAccordion={toggleAccordion} />
+            <ReviewButton toggleAccordion={toggleAccordion}>
+                Proceed
+            </ReviewButton>
         </div>
     );
 }
