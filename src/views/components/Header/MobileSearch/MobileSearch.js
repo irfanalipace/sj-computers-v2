@@ -63,7 +63,7 @@
 // `;
 
 // export default MobileSearch;
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useCollapse } from "react-collapsed";
@@ -72,26 +72,30 @@ import MobileScreenModel from "./MobileScreenModel/MobileScreenModel";
 import mobileheaderlogo from "@images/header-logo.png";
 import ModelBox from "./MobileScreenModel/ModelBox";
 import { searchProducts } from "@store/products/productsThunks";
-import { CLEAR_SEARCH } from "@store/products/productsSlice";
+import { SET_SEARCH_STRING } from "@store/products/productsSlice";
 import { Link } from "react-router-dom";
+
 const MobileSearch = () => {
     //search state here
-    const [search, setSearch] = useState("");
+
     const { getCollapseProps, getToggleProps, isOpen } = useCollapse();
 
     const [searchValue, setSearchValue] = useState("");
     const [showSearchBar, setShowSearchBar] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [search, setSearch] = useState("");
     const searchString = useSelector((state) => state.products.searchString);
     const dispatch = useDispatch();
 
     const handleSearch = (e) => {
         e.preventDefault();
-        if (search.length > 0) dispatch(searchProducts(search, 1));
-        else dispatch(CLEAR_SEARCH());
+        dispatch(SET_SEARCH_STRING(search));
     };
-    //above search code
 
+    useEffect(() => {
+        setSearch(searchString || "");
+    }, [searchString]);
+    
     const handleButtonClick = () => {
         setShowModal(true);
     };
