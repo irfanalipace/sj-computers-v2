@@ -27,13 +27,13 @@ export const QuantityInput = ({
                     className="quantity-button"
                     onClick={(e) =>
                         setQuantity(
-                            quantity < maxQuantity
-                                ? parseInt(quantity) + 1
+                            quantity > minQuantity
+                                ? parseInt(quantity) - 1
                                 : quantity
                         )
                     }
                 >
-                    +
+                    -
                 </button>
                 <input
                     type="number"
@@ -49,13 +49,13 @@ export const QuantityInput = ({
                     className="quantity-button"
                     onClick={(e) =>
                         setQuantity(
-                            quantity > minQuantity
-                                ? parseInt(quantity) - 1
+                            quantity < maxQuantity
+                                ? parseInt(quantity) + 1
                                 : quantity
                         )
                     }
                 >
-                    -
+                    +
                 </button>
             </div>
         </div>
