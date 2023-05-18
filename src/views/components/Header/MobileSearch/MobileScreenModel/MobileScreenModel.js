@@ -40,15 +40,16 @@ const MobileScreenModel = () => {
                             Enter US zip code
                         </span>
                     </button>
-                    {isAuthenticated ? (
+
+                </div>
+            </header>
+            {isAuthenticated ? (
                         <div>
                             {showModal && <ModelBox closeModal={closeModal} />}
                         </div>
                     ) : (
-                        <div>{showModal && <ModelUserAuth />}</div>
+                        <div>{showModal && <ModelUserAuth closeModal={closeModal}/>}</div>
                     )}
-                </div>
-            </header>
         </div>
     );
 };
