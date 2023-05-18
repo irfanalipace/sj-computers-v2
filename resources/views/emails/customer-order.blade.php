@@ -38,7 +38,7 @@
                             <tbody>
                             <tr>
                                 <td valign="top" style="font-size:24px;">
-                                    <span style="text-decoration:underline;">Order No: {{ $data['id'] }}</span>
+                                    <span style="text-decoration:underline;">Order No: {{ $data['order']['id'] }}</span>
                                     <!--                         <h2 style="display:inline-block;font-family:Arial;font-size:24px;font-weight:bold;margin-top:5px;margin-right:0;margin-bottom:5px;margin-left:0;text-align:left;line-height:100%">(April 25, 2016)</h2> -->
                                 </td>
                             </tr>
@@ -58,7 +58,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($data['orderItem'] as $item)
+                            @foreach ($data['order']['orderItem'] as $item)
                                 <tr width="100%">
                                     <td width="30%"
                                         style="text-align:left;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0;word-wrap:break-word">
@@ -85,7 +85,7 @@
                                     Estimated Delivery Day </th>
                                 <th
                                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                    <span>{{ $data['shipment_days'] }}</span>
+                                    <span>{{ $data['orderDetail']['estimate_day'] }}</span>
                                 </th>
                             </tr>
                             <tr>
@@ -94,7 +94,7 @@
                                     Delivery Price</th>
                                 <td
                                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                    <span>$ {{ number_format((float)$data['shipment_price'], 2, '.', '') }}</span>
+                                    <span>$ {{ number_format((float)$data['orderDetail']['shipment_amount'], 2, '.', '') }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -103,7 +103,7 @@
                                     Total Quantity</th>
                                 <td
                                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                    <span>{{ $data['item_qty'] }}</span>
+                                    <span>{{ $data['orderDetail']['item_qty'] }}</span>
                                 </td>
                             </tr>
 
@@ -113,7 +113,7 @@
                                     Sub Total</th>
                                 <td
                                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                    <span>$ {{ number_format((float)$data['sub_total'], 2, '.', '') }}</span>
+                                    <span>$ {{ number_format((float)$data['orderDetail']['sub_total'], 2, '.', '') }}</span>
                                 </td>
                             </tr>
 
@@ -123,7 +123,7 @@
                                     Order Total</th>
                                 <td
                                     style="background:#efefef;text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0;color:#7db701;font-weight:bold">
-                                    <span>$ {{ number_format((float)$data['total_amount'], 2, '.', '') }}</span>
+                                    <span>$ {{ number_format((float)$data['orderDetail']['total_amount'], 2, '.', '') }}</span>
                                 </td>
                             </tr>
                             </tfoot>

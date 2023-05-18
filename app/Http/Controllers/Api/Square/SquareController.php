@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Square;
 
 use App\Classes\StatusEnum;
+use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Square\CardRequest;
 use App\Models\User;
@@ -21,8 +22,10 @@ use Cart;
 use Square\Models\CreatePaymentRequest;
 use App\Jobs\GenerateInvoiceJob;
 use Carbon\Carbon;
+use App\Repositories\OrderRepository;
+use Illuminate\Support\Facades\Artisan;
 
-class SquareController extends Controller
+class SquareController extends BaseController
 {
     //
     private $squareClient;
@@ -43,12 +46,17 @@ class SquareController extends Controller
         }
     }
     // charge process
-    public function chargeCustomer(CardRequest $request)
+    public function chargeCustomer(CardRequest $request, OrderRepository $repository)
     {
-
         try {
-
+            
             $idempotencyKey = uniqid();
+            // Clear the all cache
+            Artisan::call('optimize:clear');
+            // Clear the application cache
+            Artisan::call('cache:clear');
+            // Clear the configuration cache
+            Artisan::call('config:clear');
 
             //create customer || retrieve customer if already added
             if (auth()->user()->square_cus_id == null) {
@@ -58,7 +66,6 @@ class SquareController extends Controller
             }
             
             // Get card Token
-            // $cardToken = $this->customerCardToken($request, $customer);
             $amount_money = new Money();
             $amount_money->setAmount(Cart::session($this->userId)->getTotal());
             $amount_money->setCurrency(StatusEnum::currency);
@@ -95,19 +102,22 @@ class SquareController extends Controller
                 $cartContent = Cart::session($this->userId)->getContent();
 
                 $result = $api_response->getResult();
-
-                GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
+                $order = $repository->createOrder(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address);
+                
+                //sending invoice email of the payment to user
+                GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
+                // GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
 
                 //clear cart after successfull payment
                 Cart::session($this->userId)->clear();
                 //clear cart condition
                 Cart::session($this->userId)->clearCartConditions();
             } else {
+
                 $errors = $api_response->getErrors();
                 return response()->json(['code' => 400, 'message' => "Card declined Please try again."]);
             }
-
-            return response()->json(['code' => 200, 'message' => StatusEnum::PAYMENTMESSAGE]);
+            return $this->sendResponse(['Order' => $orderData], StatusEnum::PAYMENTMESSAGE);
         } catch (Exception $e) {
 
             return response()->json(['code' => 400, 'message' => "something went wrong." . $e]);
@@ -146,7 +156,7 @@ class SquareController extends Controller
         try {
 
             $api_response = $this->squareClient->getCustomersApi()->retrieveCustomer(auth()->user()->square_cus_id);
-            
+
             if ($api_response->isSuccess()) {
                 $customer_id = $api_response->getResult()->getCustomer()->getId();
             } else {

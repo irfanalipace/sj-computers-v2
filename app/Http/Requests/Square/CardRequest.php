@@ -24,7 +24,8 @@ class CardRequest extends FormRequest
     public function rules()
     {
         return [
-            'source_id' => ['required',]
+            'source_id' => ['required',],
+            'shipping_address' => ['required',]
         ];
     }
 }
