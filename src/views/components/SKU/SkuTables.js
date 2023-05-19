@@ -8,9 +8,10 @@ const SkuTables = () => {
         <div>
          <div className="sku-page-dev">
          <div className="row">
-                <div className="col-12">
-                           {''} <span> Search</span>
-                    <div className="seach-input-sku">
+                <div className="col-lg-12 col-md-12 col-sm-12">
+                <div className="seach-input-sku">
+                           {''} <label className="search-lable-span"> Search</label>
+                 
 
                             <input type="text" className="search-sku-input-fields" placeholder="Search by Name, ASIN"/>
                             <FontAwesomeIcon icon={faSearch} className="search-icon" />
@@ -22,7 +23,7 @@ const SkuTables = () => {
             <div className="row">
                  <div className="sku-main-dev-button">
                  <span>Add or Release Product’s quantity</span>
-                       <div style={{marginTop:'10px', paddingBottom:'4px'}}>
+                       <div style={{marginTop:'10px', paddingBottom:'4px'}} className="mein-input-dev-section">
                     
                         <input type="text" className="search-sku-input-asin" placeholder="Enter or Name ASIN"/>
                         <input type="text" className="search-sku-input-quantity" placeholder="Add Quantity"/>

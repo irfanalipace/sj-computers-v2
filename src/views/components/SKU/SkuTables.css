@@ -89,27 +89,24 @@
 
 
 .button-sku-button button {
-
-        left: 31.9%;
-        right: 33.15%;
-        top: 31.25%;
-        bottom: 23.51%;
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 19px;
-        text-align: center;
-        color: #FFFFFF;
-        width: 94px;
-        height: 40px;
-    
-        background: #AF0000;
-        border: 1px solid #AF0000;
-        border-radius: 8px;
-        margin-top: 15px;
-        margin-right: 38px;
-    
+    left: 31.9%;
+    right: 33.15%;
+    top: 31.25%;
+    bottom: 23.51%;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    color: #FFFFFF;
+    width: 106px;
+    height: 42px;
+    background: #AF0000;
+    border: 1px solid #AF0000;
+    border-radius: 8px;
+    margin-top: 15px;
+    margin-right: 38px;
 }
 .table-sku-style {
     width: 100%;
@@ -221,4 +218,44 @@ border-bottom: 1px solid #989494c8;
     font-size: 18px;
     color: #888;
   }
-  
+  .search-lable-span{
+  font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 143%;
+/* identical to box height, or 20px */
+
+display: flex;
+align-items: center;
+letter-spacing: 0.17px;
+
+/* text/primary */
+
+color: rgba(0, 0, 0, 0.87);
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+  }
+  @media screen and (max-width:600px) {
+    .sku-page-dev {
+        text-align: center;
+        padding-top: 30px;
+        padding-left: 0px;
+    }.search-lable-span{
+      
+       
+    }.sku-main-dev-button span {
+    
+        margin-left: 52px;
+       
+    }.mein-input-dev-section {
+        display: flex !important;
+   
+        /* max-width: 100%; */
+    }
+  }
