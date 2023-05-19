@@ -41,6 +41,8 @@
                                 <p style="margin:0;margin-bottom:10px;padding:0;"><strong>Shipping Address:</strong> {{$data['OrderAddress']['address']}}</p>
 
                             </th>
+
+                            
                             </thead>
                         </table>
 
