@@ -25,27 +25,24 @@
                         <br>
                         <br>
 
-                        <table align="center" cellspacing="0" cellpadding="6" width="95%"
-                               style="border:0;color:#000000;line-height:150%;text-align:left;font:300 14px/30px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif;"
-                               border=".5px">
+                        <table align="center" cellspacing="0" cellpadding="6" width="95%" style="border: 0; color: #000000; line-height: 150%; text-align: left; font: 300 14px/30px 'Helvetica Neue', Helvetica, Arial, sans-serif;" border=".5px">
                             <thead>
-                            <tr style="background:#efefef">
-                                <th scope="col" style="text-align:center;border:1px solid #eee">Customer Detail</th>
+                            <tr style="background: #efefef">
+                                <th scope="col" style="text-align: center; border: 1px solid #eee">Customer Detail</th>
                             </tr>
-
-                            <th scope="col" style="text-align:left;border:1px solid #eee">
-                                <p style="margin:0;margin-bottom:10px;padding:0;"><strong>Name:</strong> {{$data['userInfo']['name']}}</p>
-                                <p style="margin:0;margin-bottom:10px;padding:0;"><strong>Email:</strong> <a
-                                        href="mailto:{{$data['userInfo']['email']}}" target="_blank">{{$data['userInfo']['email']}}</a></p>
-                                <p style="margin:0;margin-bottom:10px;padding:0;"><strong>Shipping Phone:</strong>  {{$data['OrderAddress']['phone_number']}}</p>
-                                <p style="margin:0;margin-bottom:10px;padding:0;"><strong>Shipping Address:</strong> {{$data['OrderAddress']['address']}}</p>
-
-                            </th>
-
-                            
                             </thead>
+                            <tbody>
+                            <tr>
+                                <td style="text-align: left; border: 1px solid #eee">
+                                    <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Name:</strong> {{$data['userInfo']['name']}}</p>
+                                    <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Email:</strong> <a href="mailto:{{$data['userInfo']['email']}}" target="_blank">{{$data['userInfo']['email']}}</a></p>
+                                    <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Shipping Phone:</strong> {{$data['OrderAddress']['phone_number']}}</p>
+                                    <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Shipping Address:</strong> {{$data['OrderAddress']['address']}}</p>
+                                </td>
+                            </tr>
+                            </tbody>
                         </table>
-
+                        
                         <br>
                         <br>
                         <table border="0" cellpadding="20" cellspacing="0" width="100%" style="color:#000000;line-height:150%;text-align:left;font:200 16px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif">
