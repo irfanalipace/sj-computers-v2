@@ -21,6 +21,7 @@ use \Square\Models\Money;
 use Cart;
 use Square\Models\CreatePaymentRequest;
 use App\Jobs\GenerateInvoiceJob;
+use App\Models\Order;
 use Carbon\Carbon;
 use App\Repositories\OrderRepository;
 use Illuminate\Support\Facades\Artisan;
@@ -104,6 +105,8 @@ class SquareController extends BaseController
                 $result = $api_response->getResult();
                 $order = $repository->createOrder(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address);
                 
+                $orderData['order'] =$order['order'];
+                
                 //sending invoice email of the payment to user
                 GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
                 // GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
@@ -115,7 +118,8 @@ class SquareController extends BaseController
             } else {
 
                 $errors = $api_response->getErrors();
-                return response()->json(['code' => 400, 'message' => "Card declined Please try again."]);
+                
+                return response()->json(['code' => 400, 'message' => $errors[0]->getDetail()]);
             }
             return $this->sendResponse(['Order' => $orderData], StatusEnum::PAYMENTMESSAGE);
         } catch (Exception $e) {

@@ -100,7 +100,8 @@ class PaypalController extends Controller
             if (isset($response['ACK']) && !empty($response['ACK']) &&  in_array(strtoupper($response['ACK']), [StatusEnum::SUCCESS, StatusEnum::PAYPALSUCCESSWITHWARNING])) {
                 $repository = new OrderRepository;
                 $order = $repository->createOrder($data, $response, $this->userId, $this->user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $request->address);
-                
+
+                $orderData['order'] =$order['order'];
                 //sending invoice email of the payment to user
                 GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
                 // GenerateInvoiceJob::dispatch($data, $response, $this->userId,$this->user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent);
@@ -110,7 +111,7 @@ class PaypalController extends Controller
                 //clear cart condition
                 Cart::session($this->userId)->clearCartConditions();
 
-                return redirect('success-transaction');
+                return redirect('success-transaction')->with('Order', $orderData);
             } else {
 
                 return redirect('cancel-transaction?error' . 'Something went wrong while processing transaction.');
