@@ -26,9 +26,26 @@
                             <tbody>
                             <tr>
                                 <td valign="top" width="100">
-                                    <h3 style="text-align:center;text-transform:uppercase">User: {{$data['userInfo']['name']}}</h3>
-                                    <!--                         <p>Payment method: <span style="font-size:18px;font-weight:bold">PayTM </span></p> -->
-                                    <!--                         <p>Last Delivery Boy: <span style="font-size:18px;font-weight:bold">NA</span></p> -->
+                                    <h4 style="text-align:left;text-transform:uppercase">Name: {{$data['userInfo']['name']}}</h4>
+                                   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" width="100">
+                                    <h4 style="text-align:left;text-transform:uppercase">Email: {{$data['userInfo']['email']}}</h4>
+                
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" width="100">
+                                    <h4 style="text-align:left;text-transform:uppercase">Phone: {{$data['OrderAddress']['phone_number']}}</h4>
+                
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" width="100">
+                                    <h4 style="text-align:left;text-transform:uppercase">Shipping Address: {{$data['OrderAddress']['address']}}</h4>
+                
                                 </td>
                             </tr>
                             </tbody>
