@@ -49,19 +49,20 @@ class OrderRepository
                     // }
                     OrderItem::create($data);
                 });
-                // dd($shippingAddreess);
-                // foreach ($shippingAddreess as $address) {
-                    
-                    //saving address of order
-                    $OrderAddress = OrderShippingAddress::Create(['country' => $shippingAddreess['country'], 'full_name' => $shippingAddreess['full_name'], 'phone_number' => $shippingAddreess['phone_number'], 'address' => $shippingAddreess['address'], 'city' => $shippingAddreess['city'], 'state' => $shippingAddreess['state'], 'zip_code' => $shippingAddreess['zip_code'], 'user_id' => $userId, 'order_id' => $order->id]);
-                // }
-               
+
+
+
+                //saving address of order
+                $OrderAddress = OrderShippingAddress::Create(['country' => $shippingAddreess['country'], 'full_name' => $shippingAddreess['full_name'], 'phone_number' => $shippingAddreess['phone_number'], 'address' => $shippingAddreess['address'], 'city' => $shippingAddreess['city'], 'state' => $shippingAddreess['state'], 'zip_code' => $shippingAddreess['zip_code'], 'user_id' => $userId, 'order_id' => $order->id]);
+
+
                 return [
                     "order" => $order,
                     "OrderAddress" => $OrderAddress
+                    
                 ];
-            });      
-            return $data;    
+            });
+            return $data;
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
