@@ -103,6 +103,7 @@ const CustomTabs = styled(Tabs)({
 
 const OrderPage = () => {
     const [name, setName] = useState("");
+    const [localLoading, setLocalLoading] = useState(false);
     const [orderSearch, setOrderSearch] = useState("");
     const [orderSearchData, setOrderSearchData] = useState([]);
     const [selectedValue, setSelectedValue] = useState("2 month");
@@ -143,10 +144,12 @@ const OrderPage = () => {
     };
     const handleSearch = async () => {
         setActiveTab(2);
-console.log(orderSearch, "input")
+        // console.log(orderSearch, "input")
+        setLocalLoading(true);
         const responseSearch = await OrderSearchApi(orderSearch);
         console.log(responseSearch, "response search");
         setOrderSearchData(responseSearch);
+        setLocalLoading(false);
         setOrderSearch("");
         return;
     };
@@ -184,7 +187,9 @@ console.log(orderSearch, "input")
             )
         ) : activeTab === 2 ? (
             orderSearchData.length > 0 ? (
-                <OrderCard data={orderSearchData} />
+               !!localLoading === true ? <LoaderComponent /> :   <OrderCard data={orderSearchData} />
+
+          
                 // <div className="flex justify-center items-center">
                 //     <p>Orders Not found.</p>
                 // </div>
