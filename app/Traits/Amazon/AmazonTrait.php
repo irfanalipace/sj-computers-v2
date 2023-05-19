@@ -25,7 +25,8 @@ trait AmazonTrait
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $product->sku)),
+//            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $product->sku)),
+            CURLOPT_POSTFIELDS => json_encode(array('SKU' => 'AI-NRCD-SNXP')),
             CURLOPT_HTTPHEADER => array(
                 'apikey: 810f8ad0-8585-4845-9954-9a82bdbc18bc',
                 'Content-Type: application/json'
@@ -49,5 +50,35 @@ trait AmazonTrait
             'quantity' => $quantity,
             'status' => $status
         ];
+    }
+
+    public function updateAmazonInventory($productInfo, $qty)
+    {
+
+        $totalQuantity = (int) $productInfo['quantity'] - (int) $qty;
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://server5.sjops.us/api/inventory/data/update/Prod_05162023/',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+//            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $productInfo['sku'], 'quantity' => $totalQuantity)),
+            CURLOPT_POSTFIELDS => json_encode(array('SKU' => 'AI-NRCD-SNXP', 'quantity' => $totalQuantity)),
+            CURLOPT_HTTPHEADER => array(
+                'apikey: 810f8ad0-8585-4845-9954-9a82bdbc18bc',
+                'Content-Type: application/json',
+
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        return true;
     }
 }
