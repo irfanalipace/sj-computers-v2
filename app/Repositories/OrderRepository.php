@@ -44,9 +44,9 @@ class OrderRepository
                         'price' => $item->price
                     ];
                     $productInfo = $this->getAmazonInventory($item->id);
-                    // if ($productInfo['status']) {
-                    //     $this->updateAmazonInventory($productInfo, $item->quantity);
-                    // }
+                     if ($productInfo['status']) {
+                         $this->updateAmazonInventory($productInfo, $item->quantity);
+                     }
                     OrderItem::create($data);
                 });
 
@@ -59,7 +59,7 @@ class OrderRepository
                 return [
                     "order" => $order,
                     "OrderAddress" => $OrderAddress
-                    
+
                 ];
             });
             return $data;
@@ -121,7 +121,8 @@ class OrderRepository
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $productInfo['sku'], 'quantity' => $totalQuantity)),
+//            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $productInfo['sku'], 'quantity' => $totalQuantity)),
+            CURLOPT_POSTFIELDS => json_encode(array('SKU' => 'AI-NRCD-SNXP', 'quantity' => $totalQuantity)),
             CURLOPT_HTTPHEADER => array(
                 'apikey: 810f8ad0-8585-4845-9954-9a82bdbc18bc',
                 'Content-Type: application/json',
