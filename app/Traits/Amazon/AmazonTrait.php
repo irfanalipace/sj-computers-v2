@@ -45,7 +45,7 @@ trait AmazonTrait
         }
 
         return [
-            'sku' => $product->sku ?? '',
+            'sku' => $product->sku,
             'quantity' => $quantity,
             'status' => $status
         ];
