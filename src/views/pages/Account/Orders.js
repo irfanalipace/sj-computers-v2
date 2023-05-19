@@ -18,6 +18,7 @@ import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 
+import { FaSearch } from "react-icons/fa";
 import "./Account.css";
 import { Select } from "@mantine/core";
 
@@ -102,6 +103,7 @@ const CustomTabs = styled(Tabs)({
 
 const OrderPage = () => {
     const [name, setName] = useState("");
+    const [localLoading, setLocalLoading] = useState(false);
     const [orderSearch, setOrderSearch] = useState("");
     const [orderSearchData, setOrderSearchData] = useState([]);
     const [selectedValue, setSelectedValue] = useState("2 month");
@@ -142,10 +144,12 @@ const OrderPage = () => {
     };
     const handleSearch = async () => {
         setActiveTab(2);
-        console.log(orderSearch, "input");
+        // console.log(orderSearch, "input")
+        setLocalLoading(true);
         const responseSearch = await OrderSearchApi(orderSearch);
         console.log(responseSearch, "response search");
         setOrderSearchData(responseSearch);
+        setLocalLoading(false);
         setOrderSearch("");
         return;
     };
@@ -157,13 +161,13 @@ const OrderPage = () => {
         return activeTab === 0 ? (
             successOrders.length > 0 ? (
                 <OrderCard data={successOrders} />
-            ) : (
                 // <div className="flex justify-center items-center">
                 //     <p>No success orders</p>
                 // </div>
+            ) : (
                 <>
                     {/* {Object.Keys(orderDetails).length === 0 ? "data have" : "no data"} */}
-
+                  
                     <div className="flex justify-center items-center">
                         <p>No success orders</p>
                     </div>
@@ -174,21 +178,24 @@ const OrderPage = () => {
                 // <div className="flex justify-center items-center">
                 //     <p>No cancelled orders.</p>
                 // </div>
-                <OrderCard data={cancelOrders} />
+                  <OrderCard data={cancelOrders} />
             ) : (
+              
                 <div className="flex justify-center items-center">
                     <p>No cancelled orders</p>
                 </div>
             )
         ) : activeTab === 2 ? (
             orderSearchData.length > 0 ? (
-                <OrderCard data={orderSearchData} />
-            ) : (
+               !!localLoading === true ? <LoaderComponent /> :   <OrderCard data={orderSearchData} />
+
+          
                 // <div className="flex justify-center items-center">
                 //     <p>Orders Not found.</p>
                 // </div>
+            ) : (
                 // <OrderCard data={orderSearchData} />
-                <div className="flex justify-center items-center">
+                 <div className="flex justify-center items-center">
                     <p>Orders Not found.</p>
                 </div>
             )
@@ -223,6 +230,7 @@ const OrderPage = () => {
                                         : "search-input"
                                 }
                             />
+                            {/* <FaSearch style={{ marginRight: '5px' }} /> */}
                             <button
                                 type="button"
                                 style={{

@@ -134,7 +134,7 @@ color: #333333;
   
   .product-image {
     width: 100%;
-    max-width: 100px; /* Adjust the image width as needed */
+    max-width: 20%; /* Adjust the image width as needed */
     height: auto;
     display: block; /* Ensures proper spacing around the image */
     margin: 0 auto; /* Centers the image horizontally */
