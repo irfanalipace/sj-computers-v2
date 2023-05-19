@@ -55,6 +55,7 @@ class OrderRepository
                 //saving address of order
                 $OrderAddress = OrderShippingAddress::Create(['country' => $shippingAddreess['country'], 'full_name' => $shippingAddreess['full_name'], 'phone_number' => $shippingAddreess['phone_number'], 'address' => $shippingAddreess['address'], 'city' => $shippingAddreess['city'], 'state' => $shippingAddreess['state'], 'zip_code' => $shippingAddreess['zip_code'], 'user_id' => $userId, 'order_id' => $order->id]);
 
+                $order = Order::find($order->id);
 
                 return [
                     "order" => $order,
