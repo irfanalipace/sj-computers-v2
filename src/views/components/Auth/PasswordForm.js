@@ -115,13 +115,13 @@ const PasswordForm = () => {
             </div>
             <p className="tetxt-signin">
                 By continuing, you agree to SJ Computer’s{" "}
-                <a href="#" className="text-decoration-none">
+                    <Link to="/term_services" className="text-decoration-none">
                     Conditions of Use
-                </a>{" "}
+                </Link>{" "}
                 and{" "}
-                <a href="#" className="text-decoration-none">
-                    Privacy Notice
-                </a>
+                <Link to="/term_services" className="text-decoration-none">
+                    Privacy Noticee
+                </Link>
                 .
             </p>
 
@@ -130,9 +130,9 @@ const PasswordForm = () => {
                     icon={faCaretRight}
                     className="need-help-singin-arrow"
                 />
-                <a href="#" className="text-decoration-none my-text-signin">
+                <Link to="" className="text-decoration-none my-text-signin">
                     Need Help?
-                </a>
+                </Link>
             </div>
         </form>
     );
