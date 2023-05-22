@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\UserStateController;
 use App\Http\Controllers\Api\Order\OrderController;
 use App\Http\Controllers\Api\ContactUs\ContactUsController;
 use App\Http\Controllers\Api\SystemPages\SystemPagesController;
+use App\Http\Controllers\Api\InventoryController;
 use Illuminate\Support\Facades\Auth;
 
 //use Illuminate\Support\Facades\Auth;
@@ -110,6 +111,10 @@ Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])
 
 Route::get('system-pages/{key?}', [SystemPagesController::class, 'getPages'])->name('getPages');
 
+Route::post('get-inventory',[InventoryController::class,'getInventory'])->name('getInventory');
+
+Route::post('action-perfom',[InventoryController::class,'ActionPerform'])->name('ActionPerform');
+
 Route::middleware(['auth:api', 'verified'])->group(function () {
 
     //Route::post('user-details', UserDetailController::class)->name('user-details');
@@ -168,4 +173,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      * Apply Shipment
      */
     Route::post('apply-shipment', [CartController::class, 'applyShipment'])->name('applyShipment');
+
+
 });

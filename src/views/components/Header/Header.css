@@ -4,6 +4,10 @@
     width: 100%;
     display: flex;
 }
+.header-thank-you{
+    display: flex;
+    justify-content: center;
+}
 
 .header-background {
     background: #00305e !important;

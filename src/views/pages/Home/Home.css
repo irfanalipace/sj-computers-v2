@@ -40,6 +40,10 @@
     max-width: calc(1450px);
 }
 
+.products-grid-container .products-grid {
+    min-height: 300px;
+}
+
 .products-grid-container h3 {
     font-weight: 600;
     font-size: 16px;

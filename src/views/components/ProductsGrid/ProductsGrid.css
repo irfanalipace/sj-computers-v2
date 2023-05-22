@@ -1,3 +1,7 @@
+.products-grid-wrapper {
+    position: relative;
+}
+
 .products-grid {
     background-color: white;
     margin-top: 20px;
