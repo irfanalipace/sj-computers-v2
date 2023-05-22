@@ -273,11 +273,31 @@ export const CheckOutCard = ({ product }) => {
                                             receipt. Read full return policy
                                         </p>
                                     </div>
+                                    <Link
+                                        to={"/return_refund_policy"}
+                                        style={{
+                                            marginTop: "12px",
+                                            fontSize: "11px",
+                                        }}
+                                    >
+                                        Read full return policy
+                                    </Link>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <hr></hr>
+                <Link
+                    to={"/term_services"}
+                    style={{
+                        marginTop: "12px",
+                        fontSize: "11px",
+                        textDecoration: "none",
+                    }}
+                >
+                    Details
+                </Link>
             </div>
         </div>
     );

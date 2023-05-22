@@ -225,7 +225,8 @@
     position: relative;
 }
 
-.order-button {
+.order-button,
+.order-button:hover {
     background: #00305e;
     border: 0px;
     color: white;
@@ -235,6 +236,8 @@
     line-height: 17px;
     color: #ffffff;
     text-align: left;
+    color: white;
+    text-decoration: none;
 }
 
 .ul-menu {

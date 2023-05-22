@@ -38,13 +38,14 @@
     font-size: 14px;
 }
 .select-location-btn {
-    font-family: "Roboto";
+    font-family: "Inter";
     font-weight: 400;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 13px;
     color: #318243;
     padding: 0;
     border: 0;
+    background-color: transparent;
 }
 .selectbutton-option-button {
     border: 1px solid #eaeded;
@@ -137,52 +138,49 @@
 .item-card-add-text-details {
     font-size: 12px;
 }
-.dilvery-text-paragraph-card{
-font-family: 'Inter';
-font-style: normal;
-font-weight: 500;
-font-size: 13px;
-line-height: 18px;
-
-
+.dilvery-text-paragraph-card {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
 }
 
-.card-dev-section-paragrap-product{
+.card-dev-section-paragrap-product {
     margin-bottom: 12px;
 }
-.instock-dev-card-product-section-with-color-card{
+.instock-dev-card-product-section-with-color-card {
     display: flex;
     justify-content: space-between;
 }
-.color-text-cart-with-inStock{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 11px;
-line-height: 13px;
+.color-text-cart-with-inStock {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
 
-color: #FF0000;
+    color: #ff0000;
 }
-.secure-payment-method{
-    font-family: 'Inter';
+.secure-payment-method {
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 11px;
     line-height: 13px;
 }
-.color-card-text-paragrap-payment{
-    font-family: 'Inter';
+.color-card-text-paragrap-payment {
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 11px;
     line-height: 13px;
 }
-.ship-card-details-card-payment-method-checkout-card{
+.ship-card-details-card-payment-method-checkout-card {
     padding-bottom: 8px;
 }
 
-
-.info-content-box-the-card{
+.info-content-box-the-card {
     position: absolute;
     margin-top: -79px;
     background-color: white;
@@ -193,17 +191,17 @@ color: #FF0000;
 .hover-box {
     position: relative;
     display: inline-block;
-  }
-  
-  .secure-payment-method:hover + .hidden-box,
-  .hidden-box:hover {
+}
+
+.secure-payment-method:hover + .hidden-box,
+.hidden-box:hover {
     display: block; /* show the hidden box on hover */
-  }
-  
-  .hidden-box {
+}
+
+.hidden-box {
     display: none;
     position: absolute;
-    top: 0;
+    top: -60px;
     left: 0;
     background-color: #f1f1f1;
     border: 1px solid #ccc;
@@ -211,13 +209,11 @@ color: #FF0000;
     padding: 10px;
     z-index: 4;
 }
-  
 
- .hidden-box {
+.hidden-box {
     /* max-width: 100%; */
     width: 248px !important;
-   
-   
+
     background: white;
     /* margin-right: 23px; */
 }
