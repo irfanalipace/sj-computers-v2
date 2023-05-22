@@ -159,12 +159,30 @@ class CartController extends BaseController
     protected function cartDetails()
     {
 
+        $totalAmount = \Cart::session($this->userId)->getTotal();
+
         $details = [
             'total_quantity' => \Cart::session($this->userId)->getTotalQuantity(),
             'total_items' => count(\Cart::session($this->userId)->getContent()),
             'sub_total' => number_format(\Cart::session($this->userId)->getSubTotal(), 2, '.', ''),
-            'total' => number_format(\Cart::session($this->userId)->getTotal(), 2, '.', ''),
+            'total' => number_format($totalAmount, 2, '.', ''),
             'shipment_info' => $this->getShipmentAmount(true),
+            'free_shipment_amount' => [
+                'amount' =>  number_format(0 , 2, '.', ''),
+                'estimate_amount' =>  number_format((float)$totalAmount , 2, '.', ''),
+                'estimate_day' =>   Carbon::now()->addWeekdays(5)->format('l d-m-Y'),
+            ],
+
+            '2_day_shipment_amount' =>  [
+                'amount' =>  number_format(14.99, 2, '.', ''),
+                'estimate_amount' =>  number_format((float)$totalAmount + (float) $this->getShipmentAmount(false,2), 2, '.', ''),
+                'estimate_day' =>  Carbon::now()->addWeekdays(2)->format('l d-m-Y'),
+            ],
+            '1_day_shipment_amount' =>[
+                'amount' =>  number_format(29.99, 2, '.', ''),
+                'estimate_amount' =>  number_format((float)$totalAmount + (float) $this->getShipmentAmount(false,1), 2, '.', ''),
+                'estimate_day' =>   Carbon::now()->addWeekdays(1)->format('l d-m-Y'),
+            ],
         ];
         return $details;
     }
@@ -173,12 +191,12 @@ class CartController extends BaseController
     public function storelocalStorageItems(LocalStorageItemsRequest $request)
     {
         try {
-           
+
             if ($request->filled('carItems')) {
                 return $this->sendError([]);
             }
             foreach ($request->cartItems as $value) {
-                
+
                 $product = Product::find($value['product_id']);
 
                 // Check if quantity is less than product quantity
@@ -189,7 +207,7 @@ class CartController extends BaseController
                 }
                 Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $value['qty'], array(), array(), $product);
             }
-           
+
             $items = $this->getItems();
             return response(array('success' => true, 'data' => $items, 'message' => 'Item added.'), 200, []);
         } catch (Exception $e) {
