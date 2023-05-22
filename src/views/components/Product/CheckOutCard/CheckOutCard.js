@@ -69,7 +69,6 @@ export const CheckOutCard = ({ product }) => {
                 <div className="head">
                     <div className="">
                         <p className="cart-text">
-                            
                             {/* {product?.description} */}
                             {/* <button className="buttion-details">
                                 Details
@@ -80,16 +79,27 @@ export const CheckOutCard = ({ product }) => {
                 </div>
                 <div className="card-dev-section-paragrap-product">
                     <span className="dilvery-text-paragraph-card">
-                  <Link className="text-decoration-none">Free delivery</Link>  <span style={{fontWeight:'bold'}}>Friday, May 19</span>{' '}
-                 shipped by SJ Computers
+                        <Link className="text-decoration-none">
+                            Free delivery
+                        </Link>{" "}
+                        <span style={{ fontWeight: "bold" }}>
+                            Friday, May 19
+                        </span>{" "}
+                        shipped by SJ Computers
                     </span>
-                    </div>
-                    <div className="card-dev-section-paragrap-product">
+                </div>
+                <div className="card-dev-section-paragrap-product">
                     <span className="dilvery-text-paragraph-card">
-                  or <Link className="text-decoration-none">Fastest delivery</Link>  <span style={{fontWeight:'bold'}}>Moday, May 15</span>{' '}
-                   (Tentative)
+                        or{" "}
+                        <Link className="text-decoration-none">
+                            Fastest delivery
+                        </Link>{" "}
+                        <span style={{ fontWeight: "bold" }}>
+                            Moday, May 15
+                        </span>{" "}
+                        (Tentative)
                     </span>
-                    </div>
+                </div>
                 <div className="color-card-dev">
                     <button
                         className="select-location-btn mb-3"
@@ -113,14 +123,18 @@ export const CheckOutCard = ({ product }) => {
                     ) : (
                         <>
                             <div className="text-stock">
-                            <div className="instock-dev-card-product-section-with-color-card">
-                            <div>
-                              <span className="color-card">In Stock</span>
-                              </div>
-                              <div>
-                              <span className="color-text-cart-with-inStock">Only 10 pieces left</span>
-                              </div>
-                            </div>
+                                <div className="instock-dev-card-product-section-with-color-card">
+                                    <div>
+                                        <span className="color-card">
+                                            In Stock
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span className="color-text-cart-with-inStock">
+                                            Only 10 pieces left
+                                        </span>
+                                    </div>
+                                </div>
                                 <div className="mt-3">
                                     <QuantityInput
                                         onChange={setQuantity}
@@ -149,33 +163,44 @@ export const CheckOutCard = ({ product }) => {
                         </>
                     )}
 
-                <div className="instock-dev-card-product-section-with-color-card">
-                            <div>
-                              <span className="color-card-text-paragrap-payment">Payment</span>
-                              </div>
-                              <div>
-                              <Link className="text-decoration-none secure-payment-method">Secure transaction</Link>
-                              </div>
-                            </div>
-                            <div className="instock-dev-card-product-section-with-color-card">
-                            <div>
-                              <span className="color-card-text-paragrap-payment">Ships Form</span>
-                              </div>
-                              <div>
-                              <span className="color-card-text-paragrap-payment">Sj Computers</span>
-                              </div>
-                            </div>
-                            <div className="instock-dev-card-product-section-with-color-card">
-                            <div>
-                              <span className="color-card-text-paragrap-payment">Return</span>
-                              </div>
-                              <div>
-                              <Link className="text-decoration-none secure-payment-method">Eligible for returns<br></br>
-                                <Link>refund or </Link> 
-                               <Link> replacement wi...</Link>
-                                </Link>
-                              </div>
-                            </div>
+                    <div className="row ship-card-details-card-payment-method-checkout-card">
+                        <div className="col-xl-7 col-6">
+                            <span className="color-card-text-paragrap-payment">
+                                Payment
+                            </span>
+                        </div>
+                        <div className="col-xl-5 col-6">
+                            <Link className="text-decoration-none secure-payment-method">
+                                Secure transaction
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="row ship-card-details-card-payment-method-checkout-card">
+                        <div className="col-xl-7 col-6">
+                            <span className="color-card-text-paragrap-payment">
+                                Ships Form
+                            </span>
+                        </div>
+                        <div className="col-xl-5 col-6">
+                            <span className="color-card-text-paragrap-payment">
+                                Sj Computers
+                            </span>
+                        </div>
+                    </div>
+                    <div className="row ">
+                        <div className="col-xl-7 col-6">
+                            <span className="color-card-text-paragrap-payment">
+                                Return
+                            </span>
+                        </div>
+                        <div className="col-xl-5 col-6">
+                            <Link className="text-decoration-none secure-payment-method">
+                                Eligible for returns<br></br>
+                                refund or <br></br>
+                                replacement wi...
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
