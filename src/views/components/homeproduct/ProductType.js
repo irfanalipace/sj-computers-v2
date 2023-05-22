@@ -10,6 +10,7 @@ import welcomeImage from "@images/advertisement/welcome-banner.png";
 import categoryImg1 from "@images/categories/desktopweb.webp";
 import categorybusinussweb from "@images/categories/businussweb.webp";
 import categorywellcom from "@images/categories/wellcomeweb.webp";
+import wellsjcomputer from "@images/categories/welcomesjcomputer.webp";
 import { AddAlarmRounded } from "@material-ui/icons";
 
 export const ProductType = () => {
@@ -73,7 +74,7 @@ export const ProductType = () => {
                         {isAuthenticated ? (
                             <div className="advertisement-heading">
                                 <img
-                                    src={categorywellcom}
+                                    src={wellsjcomputer}
                                     className="advertisment-img"
                                 />
                             </div>
