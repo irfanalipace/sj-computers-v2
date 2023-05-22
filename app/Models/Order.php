@@ -11,9 +11,13 @@ class Order extends Model
 
     protected $guarded = ['id'];
 
-    protected $with = ['orderItem'];
+    protected $with = ['orderItem','Invoice'];
 
     public function orderItem(){
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function Invoice(){
+        return $this->belongsTo(Invoice::class);
     }
 }
