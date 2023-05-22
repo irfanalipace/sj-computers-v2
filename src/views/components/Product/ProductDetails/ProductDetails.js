@@ -35,7 +35,6 @@ const ProductDetails = ({ product }) => {
     const productDetailsArray = () => {
         Object.entries(product?.description).forEach(([key, value]) => {
             let _value = "";
-            console.log("value: ", value);
             if (key === "bullet_point") {
                 setDescription(value);
                 return;

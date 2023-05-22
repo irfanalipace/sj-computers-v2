@@ -55,6 +55,9 @@ class ProductController extends BaseController
     public function getFilterProducts(SearchProductRequest $request){
         $perPageRecord = $request->get('per_page') ?? 12;
 
+        // return $request->all();
+        // dd($request->all());
+
         $sql = Product::query();
 
 
@@ -82,6 +85,10 @@ class ProductController extends BaseController
             $filters = $request->filter;
 
             foreach ($filters as $filter) {
+
+
+                $filter = json_decode($filter, true);
+
                 $key = $filter['key'] ?? '';
                 $value = $filter['value'] ?? '';
 

@@ -42,12 +42,12 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                             shipping_address: shippingDetails,
                         });
 
-                        if (response.data.code === 200) {
+                        if (response?.status == 200) {
                             clearCartLocally();
                             dispatch(CLEAR_CART());
                             navigate("/success-transaction");
                         } else {
-                            navigate("/checkout?error=" + response.message);
+                            navigate("/checkout?error=" + response?.message);
                         }
                     } catch (error) {
                         console.log("error in square api: ", error);

@@ -27,8 +27,6 @@ const FilteredProducts = ({ category, toggleFilter }) => {
         categoryId: category?.categoryId,
     };
 
-    console.log("category: ", category);
-
     const init = () => {
         dispatch(SET_SEARCH_STRING(""));
         dispatch(CLEAR_ALL_PRODUCTS());
