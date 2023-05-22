@@ -1,5 +1,6 @@
+import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
+import SwiperCore, { Controller, Navigation } from "swiper";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 // import required modules
@@ -14,36 +15,38 @@ import "swiper/css/navigation";
 import "./Slider.css";
 
 const Slider = () => {
+    SwiperCore.use([Navigation, Controller]);
+    const swiperRef = useRef(null);
     const banners = [
         { desktop: Banner1, mobile: mobileBanner1 },
         { desktop: Banner2, mobile: mobileBanner2 },
         { desktop: Banner3, mobile: mobileBanner3 },
     ];
+
+    const goToNextSlide = () => {
+        if (swiperRef.current) {
+            swiperRef.current.slideNext();
+        }
+    };
+
+    const goToPreviousSlide = () => {
+        if (swiperRef.current) {
+            swiperRef.current.slidePrev();
+        }
+    };
+
     return (
         <>
             <div className="banner-slider-section">
                 <Swiper
-                    navigation={true}
                     modules={[Navigation]}
                     className="mySwiper"
+                    onSwiper={(swiper) => (swiperRef.current = swiper)}
+                    onSlideChange={() => false}
                 >
                     {banners.map((banner, index) => (
                         <SwiperSlide key={index}>
                             <>
-                                {/* <ProgressiveImage
-                                    className="d-md-block d-none"
-                                    src={banner.desktop}
-                                    placeholder={banner.desktop}
-                                >
-                                    {(src) => <img src={src} alt={"Banner"} />}
-                                </ProgressiveImage>
-                                <ProgressiveImage
-                                    className="d-md-none d-block"
-                                    src={banner.mobile}
-                                    placeholder={banner.mobile}
-                                >
-                                    {(src) => <img src={src} alt={"Banner"} />}
-                                </ProgressiveImage> */}
                                 <LazyLoadImage
                                     className="d-md-block d-none"
                                     src={banner.desktop}
@@ -58,6 +61,14 @@ const Slider = () => {
                         </SwiperSlide>
                     ))}
                 </Swiper>
+                <div
+                    className="swiper-button-prev"
+                    onClick={goToPreviousSlide}
+                ></div>
+                <div
+                    className="swiper-button-next"
+                    onClick={goToNextSlide}
+                ></div>
             </div>
         </>
     );

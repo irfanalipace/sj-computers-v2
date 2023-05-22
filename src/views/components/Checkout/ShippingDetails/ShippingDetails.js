@@ -20,27 +20,33 @@ export default function ShippingDetails({
     const buttonClickHandler = (e) => toggleAccordion(e, true);
     const dispatch = useDispatch();
 
+    const hideForm = () => {
+        setNewAddress(false);
+        setEditAddress(false);
+    };
+
     useEffect(() => {
         dispatch(fetchStates());
         handleHeight();
         return () => {
-            // setNewAddress(false);
-            // setEditAddress(false);
+            hideForm();
         };
     }, []);
 
-    const handleChange = (e) => {
-        console.log(e.target.value);
-    };
-
     const ShippingFormWrapper = () => {
         if (newAddress)
-            return <ShippingDetailsForm handleHeight={handleHeight} />;
+            return (
+                <ShippingDetailsForm
+                    handleHeight={handleHeight}
+                    hideForm={hideForm}
+                />
+            );
         else
             return (
                 <ShippingDetailsForm
                     address={shippingAddress}
                     handleHeight={handleHeight}
+                    hideForm={hideForm}
                 />
             );
     };

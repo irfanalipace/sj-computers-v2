@@ -21,24 +21,35 @@
                             </tr>
                             </tbody>
                         </table>
+
                         <br>
-                        <table border="0" cellpadding="" cellspacing="0" width="100%" style="background:#ffffff;color:#000000;line-height:150%;text-align:center;font:300 16px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif">
+                        <br>
+
+                        <table align="center" cellspacing="0" cellpadding="6" width="95%" style="border: 0; color: #000000; line-height: 150%; text-align: left; font: 300 14px/30px 'Helvetica Neue', Helvetica, Arial, sans-serif;" border=".5px">
+                            <thead>
+                            <tr style="background: #efefef">
+                                <th scope="col" style="text-align: center; border: 1px solid #eee">Customer Detail</th>
+                            </tr>
+                            </thead>
                             <tbody>
                             <tr>
-                                <td valign="top" width="100">
-                                    <h3 style="text-align:center;text-transform:uppercase">User: {{$data['userInfo']['name']}}</h3>
-                                    <!--                         <p>Payment method: <span style="font-size:18px;font-weight:bold">PayTM </span></p> -->
-                                    <!--                         <p>Last Delivery Boy: <span style="font-size:18px;font-weight:bold">NA</span></p> -->
+                                <td style="text-align: left; border: 1px solid #eee">
+                                    <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Name:</strong> {{$data['userInfo']['name']}}</p>
+                                    <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Email:</strong> <a href="mailto:{{$data['userInfo']['email']}}" target="_blank">{{$data['userInfo']['email']}}</a></p>
+                                    <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Shipping Phone:</strong> {{$data['OrderAddress']['phone_number']}}</p>
+                                    <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Shipping Address:</strong> {{$data['OrderAddress']['address']}}</p>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
+                        
                         <br>
-                        <table border="0" cellpadding="20" cellspacing="0" width="100%" style="color:#000000;line-height:150%;text-align:left;font:300 16px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif">
+                        <br>
+                        <table border="0" cellpadding="20" cellspacing="0" width="100%" style="color:#000000;line-height:150%;text-align:left;font:200 16px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif">
                             <tbody>
                             <tr>
-                                <td valign="top" style="font-size:24px;">
-                                    <span style="text-decoration:underline;">Order No: {{ $data['id'] }}</span>
+                                <td valign="top" style="font-size:18px;">
+                                    <span style="text-decoration:underline;">Order No: {{ $data['order']['id'] }}</span>
                                     <!--                         <h2 style="display:inline-block;font-family:Arial;font-size:24px;font-weight:bold;margin-top:5px;margin-right:0;margin-bottom:5px;margin-left:0;text-align:left;line-height:100%">(April 25, 2016)</h2> -->
                                 </td>
                             </tr>
@@ -58,7 +69,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($data['orderItem'] as $item)
+                            @foreach ($data['order']['orderItem'] as $item)
                                 <tr width="100%">
                                     <td width="30%"
                                         style="text-align:left;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0;word-wrap:break-word">
@@ -85,7 +96,7 @@
                                     Estimated Delivery Day </th>
                                 <th
                                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                    <span>{{ $data['shipment_days'] }}</span>
+                                    <span>{{ $data['orderDetail']['estimate_day'] }}</span>
                                 </th>
                             </tr>
                             <tr>
@@ -94,7 +105,7 @@
                                     Delivery Price</th>
                                 <td
                                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                    <span>$ {{ number_format((float)$data['shipment_price'], 2, '.', '') }}</span>
+                                    <span>$ {{ number_format((float)$data['orderDetail']['shipment_amount'], 2, '.', '') }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -103,7 +114,7 @@
                                     Total Quantity</th>
                                 <td
                                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                    <span>{{ $data['item_qty'] }}</span>
+                                    <span>{{ $data['orderDetail']['item_qty'] }}</span>
                                 </td>
                             </tr>
 
@@ -113,7 +124,7 @@
                                     Sub Total</th>
                                 <td
                                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                                    <span>$ {{ number_format((float)$data['sub_total'], 2, '.', '') }}</span>
+                                    <span>$ {{ number_format((float)$data['orderDetail']['sub_total'], 2, '.', '') }}</span>
                                 </td>
                             </tr>
 
@@ -123,7 +134,7 @@
                                     Order Total</th>
                                 <td
                                     style="background:#efefef;text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0;color:#7db701;font-weight:bold">
-                                    <span>$ {{ number_format((float)$data['total_amount'], 2, '.', '') }}</span>
+                                    <span>$ {{ number_format((float)$data['orderDetail']['total_amount'], 2, '.', '') }}</span>
                                 </td>
                             </tr>
                             </tfoot>

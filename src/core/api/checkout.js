@@ -26,6 +26,7 @@ export function setShippingAddressApi({
     city,
     state,
     zip_code,
+    permanent_address,
 }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/order-shipping-address`, {
@@ -36,6 +37,7 @@ export function setShippingAddressApi({
             city,
             state,
             zip_code,
+            permanent_address,
         })
             .then((response) => {
                 console.log(

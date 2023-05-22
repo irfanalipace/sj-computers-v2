@@ -7,10 +7,10 @@ import { useFormValidation } from "@hooks/useFormValidation";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import ShippingButton from "./ShippingButton";
 
-function ShippingDetailsForm({ address, handleHeight }) {
+function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
-            country: address?.country || "",
+            country: address?.country || "US",
             full_name: address?.full_name || "",
             phone_number: address?.phone_number || "",
             address: address?.address || "",
@@ -50,10 +50,13 @@ function ShippingDetailsForm({ address, handleHeight }) {
 
     const submitShippingDetails = (e) => {
         e.preventDefault();
-        let params = { ...values };
-
-        if (permanentAddress) dispatch(setShippingDetails(params));
-        else dispatch(SET_SHIPPING_DETAILS(params));
+        let params = { ...values, permanent_address: permanentAddress };
+        console.log("params: ", params);
+        if (permanentAddress) dispatch(setShippingDetails(params, hideForm));
+        else {
+            dispatch(SET_SHIPPING_DETAILS(params));
+            hideForm();
+        }
     };
 
     useEffect(() => {
@@ -83,7 +86,7 @@ function ShippingDetailsForm({ address, handleHeight }) {
                         onSubmit={submitShippingDetails}
                     >
                         <div className="field-section">
-                            <label htmlFor={"state"}>
+                            {/* <label htmlFor={"state"}>
                                 Country/State{" "}
                                 <span className="text-danger">*</span>
                             </label>
@@ -101,7 +104,7 @@ function ShippingDetailsForm({ address, handleHeight }) {
                                 <p className="fs-6 mt-1 text-danger">
                                     {fieldErrors.country}
                                 </p>
-                            )}
+                            )} */}
                         </div>
                         <div className="field-section">
                             <label htmlFor={"name"}>

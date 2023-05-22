@@ -31,6 +31,7 @@ class StoreShippingAddressRequest extends FormRequest
             'city'=> ['required', 'string'],
             'state'=> ['required', 'string'],
             'zip_code'=> ['required', 'string'],
+            'permanent_address' => ['required','boolean']
         ];
     }
 }

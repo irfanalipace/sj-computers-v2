@@ -48,10 +48,12 @@ body {
 .banner-slider-section .swiper-button-prev {
     color: #ffffff;
     top: var(--swiper-navigation-top-offset, 30%) !important;
+    left: var(--swiper-navigation-sides-offset, 30px);
 }
 .banner-slider-section .swiper-button-next {
     color: #ffffff;
     top: var(--swiper-navigation-top-offset, 30%) !important;
+    right: var(--swiper-navigation-sides-offset, 30px);
 }
 
 @media screen and (max-width: 576px) {

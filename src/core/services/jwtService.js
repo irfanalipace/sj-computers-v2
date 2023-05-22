@@ -5,6 +5,7 @@ const USER_NAME = "user_name";
 const USER_EMAIL = "user_email";
 const USER_IMAGE = "user_image";
 const PASSWORD = "user_password";
+const USER_STATE = "state";
 const TEMP_TOKEN = "temp_token";
 
 export const getToken = () => window.localStorage.getItem(TOKEN);
@@ -20,7 +21,7 @@ export const saveUserImage = (userImage) =>
     window.localStorage.setItem(USER_IMAGE, userImage);
 
 export const saveUserState = (userState) =>
-    window.localStorage.setItem(USER_IMAGE, userState);
+    window.localStorage.setItem(USER_STATE, userState);
 
 export const getUserImage = (userImage) =>
     window.localStorage.getItem(USER_IMAGE, userImage);
