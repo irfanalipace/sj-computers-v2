@@ -43,7 +43,7 @@ class ProfileController extends BaseController
                 $user->fill(['password' => bcrypt($request->newPassword)])->save();
             } else {
                 
-                return $this->sendError(["msg" => ['old password does not match please try again.']]);
+                return $this->sendError(["oldPassword" => ['old password does not match please try again.']]);
             }
             return $this->sendResponse($user,'user password has been changed Successfully.');
         } catch (Exception $e) {
