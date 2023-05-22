@@ -115,7 +115,7 @@ const PasswordForm = () => {
             </div>
             <p className="tetxt-signin">
                 By continuing, you agree to SJ Computer’s{" "}
-                    <Link to="/term_services" className="text-decoration-none">
+                <Link to="/term_services" className="text-decoration-none">
                     Conditions of Use
                 </Link>{" "}
                 and{" "}

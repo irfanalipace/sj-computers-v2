@@ -253,7 +253,7 @@ export const Router = () => {
             path: "/sku",
             element: (
                 <Suspense fallback={<Loader />}>
-                <SkuTables />
+                    <SkuTables />
                 </Suspense>
             ),
         },

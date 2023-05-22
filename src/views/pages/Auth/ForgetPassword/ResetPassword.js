@@ -142,11 +142,17 @@ const PasswordForm = () => {
                         </div>
                         <p className="resetpassword-praragraph-text">
                             By continuing, you agree to SJ Computer’s{" "}
-                            <Link to="/term_services" className="text-decoration-none">
+                            <Link
+                                to="/term_services"
+                                className="text-decoration-none"
+                            >
                                 Conditions of Use
                             </Link>{" "}
                             and{" "}
-                            <Link to="/term_services" className="text-decoration-none">
+                            <Link
+                                to="/term_services"
+                                className="text-decoration-none"
+                            >
                                 Privacy Notice
                             </Link>
                             .
@@ -158,7 +164,7 @@ const PasswordForm = () => {
                                 className="icon-need-help-resetpassword"
                             />
                             <Link
-                                to=''
+                                to=""
                                 className="text-decoration-none need-help"
                             >
                                 Need Help?
