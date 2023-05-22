@@ -168,16 +168,19 @@ class CartController extends BaseController
             'total' => number_format($totalAmount, 2, '.', ''),
             'shipment_info' => $this->getShipmentAmount(true),
             'free_shipment_amount' => [
-                'amount' =>  number_format((float)$totalAmount , 2, '.', ''),
+                'amount' =>  number_format(0 , 2, '.', ''),
+                'estimate_amount' =>  number_format((float)$totalAmount , 2, '.', ''),
                 'estimate_day' =>   Carbon::now()->addWeekdays(5)->format('l d-m-Y'),
             ],
 
             '2_day_shipment_amount' =>  [
-                'amount' =>  number_format((float)$totalAmount + (float) $this->getShipmentAmount(false,2), 2, '.', ''),
+                'amount' =>  number_format(14.99, 2, '.', ''),
+                'estimate_amount' =>  number_format((float)$totalAmount + (float) $this->getShipmentAmount(false,2), 2, '.', ''),
                 'estimate_day' =>  Carbon::now()->addWeekdays(2)->format('l d-m-Y'),
             ],
             '1_day_shipment_amount' =>[
-                'amount' =>  number_format((float)$totalAmount + (float) $this->getShipmentAmount(false,1), 2, '.', ''),
+                'amount' =>  number_format(29.99, 2, '.', ''),
+                'estimate_amount' =>  number_format((float)$totalAmount + (float) $this->getShipmentAmount(false,1), 2, '.', ''),
                 'estimate_day' =>   Carbon::now()->addWeekdays(1)->format('l d-m-Y'),
             ],
         ];
