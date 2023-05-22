@@ -18,7 +18,7 @@ import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 
-import { FaSearch } from "react-icons/fa";
+// import { FaSearch } from "react-icons/fa";
 import "./Account.css";
 import { Select } from "@mantine/core";
 
@@ -161,13 +161,13 @@ const OrderPage = () => {
         return activeTab === 0 ? (
             successOrders.length > 0 ? (
                 <OrderCard data={successOrders} />
+            ) : (
                 // <div className="flex justify-center items-center">
                 //     <p>No success orders</p>
                 // </div>
-            ) : (
                 <>
                     {/* {Object.Keys(orderDetails).length === 0 ? "data have" : "no data"} */}
-                  
+
                     <div className="flex justify-center items-center">
                         <p>No success orders</p>
                     </div>
@@ -178,24 +178,25 @@ const OrderPage = () => {
                 // <div className="flex justify-center items-center">
                 //     <p>No cancelled orders.</p>
                 // </div>
-                  <OrderCard data={cancelOrders} />
+                <OrderCard data={cancelOrders} />
             ) : (
-              
                 <div className="flex justify-center items-center">
                     <p>No cancelled orders</p>
                 </div>
             )
         ) : activeTab === 2 ? (
             orderSearchData.length > 0 ? (
-               !!localLoading === true ? <LoaderComponent /> :   <OrderCard data={orderSearchData} />
-
-          
+                !!localLoading === true ? (
+                    <LoaderComponent />
+                ) : (
+                    <OrderCard data={orderSearchData} />
+                )
+            ) : (
                 // <div className="flex justify-center items-center">
                 //     <p>Orders Not found.</p>
                 // </div>
-            ) : (
                 // <OrderCard data={orderSearchData} />
-                 <div className="flex justify-center items-center">
+                <div className="flex justify-center items-center">
                     <p>Orders Not found.</p>
                 </div>
             )

@@ -33,6 +33,10 @@ export default function ShippingDetails({
         };
     }, []);
 
+    useEffect(() => {
+        handleHeight();
+    }, [shippingAddress]);
+
     const ShippingFormWrapper = () => {
         if (newAddress)
             return (

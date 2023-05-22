@@ -202,7 +202,7 @@ const Security = () => {
                                     </div>
                                     {apiError && (
                                         <p className="fs-6 mt-1 text-danger">
-                                            {apiError.newPassword}
+                                            {apiError.passwordConfirmation}
                                         </p>
                                     )}
 

@@ -27,6 +27,8 @@ export default function Sidebar({ openState, toggleSidebar }) {
         );
     };
 
+    
+
     let renderedCategories = categories
         .slice(0, visibleCategories)
         .map((category) => (
@@ -105,7 +107,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                             <ul className="menu-list">
                                 {isAuthenticated && (
                                     <li>
-                                        <Link to={`/account`}>
+                                        <Link to={`/account`} >
                                             Your Account
                                         </Link>
                                     </li>

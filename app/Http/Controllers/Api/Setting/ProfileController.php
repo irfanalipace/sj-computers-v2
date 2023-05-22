@@ -39,9 +39,11 @@ class ProfileController extends BaseController
             //This code checks if the user's old password matches the hashed password stored in the database, and if so, updates the user's password to the new password provided by the user.
             //If the old password does not match, it returns a JSON response with a status code of 422 and an error message stating that the old password does not match.
             if (Hash::check($request->oldPassword, $user->password)) {
+                
                 $user->fill(['password' => bcrypt($request->newPassword)])->save();
             } else {
-                return $this->sendError(["msg" => ['old password does not match please try again.']]);
+                
+                return $this->sendError(["oldPassword" => ['old password does not match please try again.']]);
             }
             return $this->sendResponse($user,'user password has been changed Successfully.');
         } catch (Exception $e) {

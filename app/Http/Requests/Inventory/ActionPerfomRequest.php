@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Inventory;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ResetPasswordRequest extends FormRequest
+class ActionPerfomRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,9 @@ class ResetPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'newPassword' => ['required', 'string', 'min:6', 'max:255','different:oldPassword'],
-            'passwordConfirmation' => ['same:newPassword'],
-            'oldPassword' => ['required', 'string', 'min:6', 'max:255'],
+            'action' => ['required','in:hold,release'],
+            'quantity' => ['required','integer','min:1'],
+            'sku' => ['required','exists:products,sku']
         ];
     }
 }

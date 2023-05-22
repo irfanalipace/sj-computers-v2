@@ -13,18 +13,42 @@ import { useNavigate, useLocation   } from "react-router-dom";
 
 
 export default function ThankYou() {
+
+    function formatDate(dateString) {
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        const date = new Date(dateString);
+        return date.toLocaleDateString(undefined, options);
+      }
+
     const navigate  = useNavigate ();
+    const [thankOrderDetails , setThankOrderDetails] = useState({});
+    const [thankOrderItems , setThankOrderItems] = useState([]);
     const location = useLocation();
     const order = location.state?.order;
-
+    console.log( location, "haris details")
 //   const handleButtonClick = () => {
 //     // Redirect to the specific path
 //     history.push("/specific-path");
 //   };
 
     useEffect(() => {
-        console.log(order, "order details")
+        const order = location?.state?.order ;
+        setThankOrderDetails(order);
+        let Order = order?.Order;
+        console.log(Order?.order?.order_item           , "order");
+        setThankOrderItems(Order?.order?.order_item);
+        console.log(thankOrderItems          , "order 3");
+
+        
     }, []);
+
+
+    useEffect(() => {
+        
+       console.log(thankOrderItems, "2nd useeffect")
+       console.log(thankOrderDetails, "2nd useeffect for order details")
+        
+    }, [thankOrderItems]);
 
     const tableData = [
         {
@@ -63,7 +87,7 @@ export default function ThankYou() {
         <img
           src={tickImage}
           alt="Tick Image"
-          style={{ position: "", zIndex: 2 }}
+          style={{ position: "", zIndex: 2, marginLeft: '-3.3%' }}
         />
       </div>
     </div>
@@ -71,7 +95,7 @@ export default function ThankYou() {
                     <h1>Thanks for Order</h1>
                 </div>
                 <div className="col-12 my-20">
-                    <p>Your order with tracking No <span style={{fontWeight: '900'}}>#124548</span> has been successfully confirmed. We’ll send you an email notification once your order has shipped.</p>
+                    <p>Your order with tracking No <span style={{fontWeight: '900'}}>#{thankOrderDetails?.Order?.order?.id}</span> has been successfully confirmed. We’ll send you an email notification once your order has shipped.</p>
                 </div>
              </div>
         <div >
@@ -95,25 +119,27 @@ export default function ThankYou() {
       </thead>
       <tbody>
         {/* Map through the tableData array and render table rows */}
-        {tableData.map((data, index) => (
+        {thankOrderItems?.map((data, index) => (
           <tr key={index}>
             <td>
               <div style={{ display: "flex" }}>
-                {data.productImage && (
+                {data?.product?.image[0] && (
                   <div className="product-thumbnail">
-                    <img src={data.productImage} alt="Product" />
-                    {data.productName}
+                    <img src={data?.product?.image[0] ? data?.product?.image[0] : 'https://m.media-amazon.com/images/I/81zf6aaAK1L.jpg'} alt="Product" />
+                    {data && data?.product_name.length > 20 ? data?.product_name.slice(0, 20) + '...' : data?.product_name }
+                    {/* <div class="text-truncate"></div> */}
+                    
                   </div>
                 )}
-                {/* <div className="product-title">{data.productName}</div> */}
+                {/* <div className="product-title">{data?.product_name}</div> */}
               </div>
             </td>
-            <td>{data.quantity}</td>
-            <td>{data.orderNo}</td>
-            <td>{data.orderDate}</td>
-            <td>{data.deliveryDetails}</td>
-            <td>{data.paymentType}</td>
-            <td>{data.subTotal}</td>
+            <td>{data.qty}</td>
+            <td>{data?.order_id}</td>
+            <td>{formatDate(data.created_at)}</td>
+            <td>{thankOrderDetails?.Order?.estimate_day }</td>
+            <td>{"Square"}</td>
+            <td>{data.price}</td>
           </tr>
         ))}
       </tbody>
@@ -123,13 +149,13 @@ export default function ThankYou() {
           {/* <p >Tax ${120.6}</p> */}
         </div>
         <div className="col-12 d-flex justify-content-end">
-        <p style={{marginRight: '1%', marginTop: '2%'}}>Tax ${120.6}</p>
+        <p style={{marginRight: '1%', marginTop: '2%'}}>Tax ${'N/A'}</p>
         </div>
         <div className="col-6 d-flex justify-content-start">
         <p className="bold-total">Total</p>
         </div>
         <div className="col-6 d-flex justify-content-end">
-        <p className="bold-total">${120.6}</p>
+        <p className="bold-total">${thankOrderDetails?.Order?.total_amount ? thankOrderDetails?.Order?.total_amount :  'N/A'}</p>
         </div>
      </div>
       <div className="row mx-0">
