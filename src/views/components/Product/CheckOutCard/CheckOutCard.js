@@ -149,30 +149,30 @@ export const CheckOutCard = ({ product }) => {
                         </>
                     )}
 
-                <div className="instock-dev-card-product-section-with-color-card">
-                            <div>
+                <div className="row ship-card-details-card-payment-method-checkout-card" >
+                            <div className='col-5'>
                               <span className="color-card-text-paragrap-payment">Payment</span>
                               </div>
-                              <div>
+                              <div className='col-7'>
                               <Link className="text-decoration-none secure-payment-method">Secure transaction</Link>
                               </div>
                             </div>
-                            <div className="instock-dev-card-product-section-with-color-card">
-                            <div>
+                            <div className="row ship-card-details-card-payment-method-checkout-card">
+                            <div className='col-5'>
                               <span className="color-card-text-paragrap-payment">Ships Form</span>
                               </div>
-                              <div>
+                              <div className='col-7'>
                               <span className="color-card-text-paragrap-payment">Sj Computers</span>
                               </div>
                             </div>
-                            <div className="instock-dev-card-product-section-with-color-card">
-                            <div>
+                            <div className="row ">
+                            <div className='col-5'>
                               <span className="color-card-text-paragrap-payment">Return</span>
                               </div>
-                              <div>
+                              <div className='col-7'>
                               <Link className="text-decoration-none secure-payment-method">Eligible for returns<br></br>
-                                <Link>refund or </Link> 
-                               <Link> replacement wi...</Link>
+                                refund or <br></br>
+                                replacement wi...
                                 </Link>
                               </div>
                             </div>
