@@ -136,3 +136,43 @@
 .item-card-add-text-details {
     font-size: 12px;
 }
+.dilvery-text-paragraph-card{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 13px;
+line-height: 18px;
+
+
+}
+
+.card-dev-section-paragrap-product{
+    margin-bottom: 12px;
+}
+.instock-dev-card-product-section-with-color-card{
+    display: flex;
+    justify-content: space-between;
+}
+.color-text-cart-with-inStock{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 11px;
+line-height: 13px;
+
+color: #FF0000;
+}
+.secure-payment-method{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+}
+.color-card-text-paragrap-payment{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+}

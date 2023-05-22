@@ -9,7 +9,7 @@ import LocationModel from "@components/Header/Location/LocationModel";
 import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./CheckOutCard.css";
-
+import { Link } from "react-router-dom";
 export const CheckOutCard = ({ product }) => {
     const currentState = useSelector((state) => state.states.currentState);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -69,6 +69,7 @@ export const CheckOutCard = ({ product }) => {
                 <div className="head">
                     <div className="">
                         <p className="cart-text">
+                            
                             {/* {product?.description} */}
                             {/* <button className="buttion-details">
                                 Details
@@ -77,6 +78,18 @@ export const CheckOutCard = ({ product }) => {
                         </p>
                     </div>
                 </div>
+                <div className="card-dev-section-paragrap-product">
+                    <span className="dilvery-text-paragraph-card">
+                  <Link className="text-decoration-none">Free delivery</Link>  <span style={{fontWeight:'bold'}}>Friday, May 19</span>{' '}
+                 shipped by SJ Computers
+                    </span>
+                    </div>
+                    <div className="card-dev-section-paragrap-product">
+                    <span className="dilvery-text-paragraph-card">
+                  or <Link className="text-decoration-none">Fastest delivery</Link>  <span style={{fontWeight:'bold'}}>Moday, May 15</span>{' '}
+                   (Tentative)
+                    </span>
+                    </div>
                 <div className="color-card-dev">
                     <button
                         className="select-location-btn mb-3"
@@ -100,7 +113,14 @@ export const CheckOutCard = ({ product }) => {
                     ) : (
                         <>
                             <div className="text-stock">
-                                <span className="color-card">In Stock</span>
+                            <div className="instock-dev-card-product-section-with-color-card">
+                            <div>
+                              <span className="color-card">In Stock</span>
+                              </div>
+                              <div>
+                              <span className="color-text-cart-with-inStock">Only 10 pieces left</span>
+                              </div>
+                            </div>
                                 <div className="mt-3">
                                     <QuantityInput
                                         onChange={setQuantity}
@@ -128,6 +148,34 @@ export const CheckOutCard = ({ product }) => {
                         </div> */}
                         </>
                     )}
+
+                <div className="instock-dev-card-product-section-with-color-card">
+                            <div>
+                              <span className="color-card-text-paragrap-payment">Payment</span>
+                              </div>
+                              <div>
+                              <Link className="text-decoration-none secure-payment-method">Secure transaction</Link>
+                              </div>
+                            </div>
+                            <div className="instock-dev-card-product-section-with-color-card">
+                            <div>
+                              <span className="color-card-text-paragrap-payment">Ships Form</span>
+                              </div>
+                              <div>
+                              <span className="color-card-text-paragrap-payment">Sj Computers</span>
+                              </div>
+                            </div>
+                            <div className="instock-dev-card-product-section-with-color-card">
+                            <div>
+                              <span className="color-card-text-paragrap-payment">Return</span>
+                              </div>
+                              <div>
+                              <Link className="text-decoration-none secure-payment-method">Eligible for returns<br></br>
+                                <Link>refund or </Link> 
+                               <Link> replacement wi...</Link>
+                                </Link>
+                              </div>
+                            </div>
                 </div>
             </div>
         </div>
