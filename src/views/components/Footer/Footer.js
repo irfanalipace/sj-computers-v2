@@ -12,12 +12,12 @@ import "./Footer.css";
 const Footer = () => {
     const location = useLocation();
     const authRoutes = [
-        "login",
-        "register",
-        "forgot_password",
-        "forget-password",
-        "email-sent",
-        "checkout",
+        "/login",
+        "/register",
+        "/forgot_password",
+        "/forget-password",
+        "/email-sent",
+        "/thank-you",
     ];
 
     return (
