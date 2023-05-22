@@ -15,6 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'amazon_apikey' => env('AMAZON_APIKEY','810f8ad0-8585-4845-9954-9a82bdbc18bc'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment
