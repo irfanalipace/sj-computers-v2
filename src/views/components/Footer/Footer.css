@@ -143,3 +143,13 @@ footer ul li {
     padding-bottom: 12px !important;
     width: 267px;
 }
+
+
+.footer-image-lien {
+    padding-left: 21px;
+    /* padding-right: 23px; */
+}
+
+.footer-end-image-data {
+    padding-bottom: 12px;
+}

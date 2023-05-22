@@ -49,7 +49,7 @@ function Search() {
                     <DropdownToggle caret className="all-button">
                         {selectedItem}
                     </DropdownToggle>
-                    <DropdownMenu className="">
+                    {/* <DropdownMenu className="">
                         <DropdownItem
                             onClick={handleItemClick}
                             className="ul-liste-items-all-buttons"
@@ -62,7 +62,7 @@ function Search() {
                         >
                             Cell Phone Accessories
                         </DropdownItem>
-                    </DropdownMenu>
+                    </DropdownMenu> */}
                 </Dropdown>
             </div>
             <input

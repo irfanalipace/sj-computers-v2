@@ -198,7 +198,7 @@ const Footer = () => {
                             </div>
                         </div>
                         <hr className="hr-line"></hr>
-                        <div className="footer-copyright text-center py-3">
+                        <div className="footer-copyright text-center py-3 footer-image-lien">
                             <img
                                 src={footer}
                                 alt=""
@@ -242,7 +242,7 @@ const Footer = () => {
                             <img
                                 src={copyrightimg}
                                 alt=""
-                                className="copywriten"
+                                className="copywriten footer-end-image-data"
                             />
                         </div>
                     </footer>
