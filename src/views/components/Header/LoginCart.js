@@ -43,7 +43,7 @@ const LoginCart = () => {
                         </p>
                     </div>
                     <hr className="hr-list-head"></hr>
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="col-md-6">
                             <h4 className="your-list">Your List</h4>
                             <p className="create-list">Create Your Wishlist</p>
@@ -60,7 +60,7 @@ const LoginCart = () => {
                                 <li> Recommendations </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             ) : null}
         </div>
