@@ -42,7 +42,7 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                             shipping_address: shippingDetails,
                         });
 
-                        if (response.code === 200) {
+                        if (response.data.code === 200) {
                             clearCartLocally();
                             dispatch(CLEAR_CART());
                             navigate("/success-transaction");
