@@ -39,7 +39,7 @@ trait AmazonTrait
             // CURLOPT_POSTFIELDS => json_encode(array('SKU' => $sku)),
             CURLOPT_POSTFIELDS => json_encode(array('SKU' => 'AI-NRCD-SNXP')),
             CURLOPT_HTTPHEADER => array(
-                'apikey: 810f8ad0-8585-4845-9954-9a82bdbc18bc',
+                'apikey: ' . config('app.amazon_apikey'),
                 'Content-Type: application/json'
             ),
         ));
@@ -69,16 +69,16 @@ trait AmazonTrait
         switch ($type) {
             case StatusEnum::RELEASE:
                 # code...
-              
+
                 $totalQuantity = (int) $productInfo['quantity'] + (int) $qty;
-               
+
                 break;
             default:
                 # code...
                 $totalQuantity = (int) $productInfo['quantity'] - (int) $qty;
                 break;
         }
-       
+
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -93,7 +93,7 @@ trait AmazonTrait
             //            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $productInfo['sku'], 'quantity' => $totalQuantity)),
             CURLOPT_POSTFIELDS => json_encode(array('SKU' => 'AI-NRCD-SNXP', 'quantity' => $totalQuantity)),
             CURLOPT_HTTPHEADER => array(
-                'apikey: 810f8ad0-8585-4845-9954-9a82bdbc18bc',
+                'apikey: ' . config('app.amazon_apikey'),
                 'Content-Type: application/json',
 
             ),
