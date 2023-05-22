@@ -36,7 +36,6 @@ const ApiService = {
      */
 
     get(resource, slug = "", params = {}) {
-        console.log("params", params);
         return new Promise((resolve, reject) => {
             const url = `${resource}${slug ? `/${slug}` : ""}`;
             this.instance

@@ -15,7 +15,6 @@ const ProductDetails = ({ product }) => {
     const [description, setDescription] = useState([]);
     const [productDetails, setProductDetails] = useState([]);
 
-    console.log("description", product.description);
     let acceptedKeys = [
         "brand",
         "cpu_model",
@@ -205,8 +204,8 @@ const ProductDetails = ({ product }) => {
                 <h3 className="items-text-style">Items Description</h3>
 
                 <ol type="1">
-                    {description?.map((item) => (
-                        <li>{item.value}</li>
+                    {description?.map((item, index) => (
+                        <li key={index}>{item.value}</li>
                     ))}
                 </ol>
             </div>

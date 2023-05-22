@@ -13,8 +13,9 @@
     padding: 0 20px;
     min-height: calc(100vh - 100px);
 }
-.category-page .product-image-grid {
-    /* background: #f3f9ff; */
+
+.filter-results .products-grid {
+    min-height: 100%;
 }
 
 .filter-results .heading {
@@ -33,12 +34,19 @@
     width: 100%;
     padding: 20px;
 }
+
+.category-page .products-grid {
+    min-height: calc(100vh - 100px);
+}
 @media screen and (max-width: 585px) {
     .filter-results {
         margin-left: 0;
     }
     .category-page-inner {
         position: relative;
+        min-height: calc(100vh - 500px);
+    }
+    .category-page .products-grid {
         min-height: calc(100vh - 500px);
     }
 }
