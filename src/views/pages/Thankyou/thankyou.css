@@ -37,7 +37,7 @@ letter-spacing: 0.03em;
   }
   
   .product-thumbnail img {
-    width: 40px
+    height: 80px;
   }
   .thank-you-table th {
     /* background-color: #318243; */

@@ -78,17 +78,20 @@ export default function ThankYou() {
     <div className="thank-you-page" style={{marginLeft: '10%', marginRight: '10%'}}>
          <div className="row margintopBottom">
          <div className="col-12 my-10">
-      <div style={{ position: "relative" }}>
-        <img
+      <div className="d-flex justify-content-center align-items-center">
+        {/* <img
           src={circle}
           alt="Circle Image"
           style={{ position: "", zIndex: 1 }}
-        />
+        /> */}
+        <div className="d-flex justify-content-center align-items-center" style={{width:'70px', height:'70px', borderRadius:'50%',backgroundColor:'#318243'}}>
         <img
           src={tickImage}
           alt="Tick Image"
           style={{ position: "", zIndex: 2, marginLeft: '-3.3%' }}
         />
+        </div>
+        
       </div>
     </div>
                 <div className="col-12">
@@ -139,7 +142,7 @@ export default function ThankYou() {
             <td>{formatDate(data.created_at)}</td>
             <td>{thankOrderDetails?.Order?.estimate_day }</td>
             <td>{"Square"}</td>
-            <td>{data.price}</td>
+            <td>${data.price}</td>
           </tr>
         ))}
       </tbody>
