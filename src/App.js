@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter , useLocation} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
@@ -27,6 +27,12 @@ function App() {
     }
     useInitDataFetching();
 
+    // const location = useLocation();
+    // ${process.env.REACT_APP_URL}
+    const hideHeaderFooter = window.location.pathname === `/thank-you`;
+
+    // console.log(hideHeaderFooter, "header and footer")
+
     return (
         <div>
             <ToastContainer
@@ -51,7 +57,8 @@ function App() {
                     <Router />
                 </div>
 
-                <Footer />
+                 <Footer />
+
             </BrowserRouter>
         </div>
     );

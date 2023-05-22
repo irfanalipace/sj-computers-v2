@@ -18,6 +18,7 @@ const Footer = () => {
         "/forgot_password",
         "/forget-password",
         "/email-sent",
+        "/thank-you",
     ];
 
     return (

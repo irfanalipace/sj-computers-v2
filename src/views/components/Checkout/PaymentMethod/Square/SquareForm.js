@@ -45,7 +45,7 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                         if (response.code === 200) {
                             clearCartLocally();
                             dispatch(CLEAR_CART());
-                            navigate("/success-transaction");
+                            navigate("/thank-you", { state: { response } });
                         } else {
                             navigate("/checkout?error=" + response.message);
                         }
