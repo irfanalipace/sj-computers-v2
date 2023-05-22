@@ -252,7 +252,7 @@ const OrderPage = () => {
                     </div>
                 </div>
 
-                <div className="row order-list-container">
+                <div className="row mx-0 order-list-container">
                     <div className="col-sm-6 col-md-9 col-9 px-0">
                         <Box sx={{ flexGrow: 1 }}>
                             <CustomTabs
