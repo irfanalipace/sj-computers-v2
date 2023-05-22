@@ -216,11 +216,31 @@ export const syncCartItems = () => {
 
 export const addToLocalCart = (data, cb) => {
     return async (dispatch) => {
-        addItemToLocalCart(data);
-        dispatch({
-            type: ADD_TO_CART,
-            payload: data,
-        });
+        try {
+            dispatch({ type: LOADING, payload: {} });
+            let param = {
+                product_id: data.cartItem.id,
+                qty: data.cartItem.quantity,
+            };
+            let response = await addToCartApi(param);
+            data.cartDetails = { ...response.data.details };
+            dispatch({
+                type: ADD_TO_CART,
+                payload: data,
+            });
+            // toast.success("Item Added In Cart");
+            if (typeof cb === "function") cb();
+            addItemToLocalCart(data);
+        } catch (error) {
+            console.log("Something went wrong in carts", error);
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
+        }
+
+        // addItemToLocalCart(data);
+        // dispatch({
+        //     type: ADD_TO_CART,
+        //     payload: data,
+        // });
         if (typeof cb === "function") cb();
         // toast.success("Item Added In Cart");
     };
