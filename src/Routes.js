@@ -24,6 +24,7 @@ const Test = React.lazy(() => import("@pages/Test/Test"));
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import Contact from "@components/Footer/FooterMenu/Contact";
 import Policy from "@pages/Policy/Policy";
+import SkuTables from "@components/SKU/SkuTables";
 
 export const Router = () => {
     const routes = [
@@ -236,6 +237,14 @@ export const Router = () => {
             element: (
                 <Suspense fallback={<Loader />}>
                     <Test />
+                </Suspense>
+            ),
+        },
+        {
+            path: "/sku",
+            element: (
+                <Suspense fallback={<Loader />}>
+                <SkuTables />
                 </Suspense>
             ),
         },

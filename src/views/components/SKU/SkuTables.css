@@ -1,0 +1,261 @@
+.sku-page-dev {
+    padding-top: 30px;
+    padding-left: 187px;
+}
+.search-sku-input-fields {
+    width: 240px;
+
+    font-size: 12px;
+
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.38);
+    flex: none;
+    order: 2;
+    flex-grow: 1;
+    z-index: 2;
+    border: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    padding: 5px;
+}
+.sku-page-dev span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 143%;
+    /* identical to box height, or 20px */
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.17px;
+
+    /* text/primary */
+
+    color: rgba(0, 0, 0, 0.87);
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+.sku-main-dev-button span {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: #000000;
+    margin-top: 33px;
+}
+
+.search-sku-input-asin {
+    border: 1px solid rgba(0, 0, 0, 0.42);
+    border-radius: 4px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.42);
+    width: 260px;
+    height: 40px;
+    margin-right: 6px;
+}
+.search-sku-input-quantity {
+  
+    width: 118px;
+    height: 41px;
+    border: 1px solid rgba(0, 0, 0, 0.42);
+    border-radius: 4px;
+    left: 499px;
+    top: 317px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.42);
+    padding-left: 12px;
+    left: 10px;
+}
+
+
+.button-sku-button button {
+    left: 31.9%;
+    right: 33.15%;
+    top: 31.25%;
+    bottom: 23.51%;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    color: #FFFFFF;
+    width: 106px;
+    height: 42px;
+    background: #AF0000;
+    border: 1px solid #AF0000;
+    border-radius: 8px;
+    margin-top: 15px;
+    margin-right: 38px;
+}
+.table-sku-style {
+    width: 100%;
+    top: 12px;
+    margin-top: 11px;
+}
+.your-selected-product-sku{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 16px !important;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+letter-spacing: 0.15px;
+
+color: #000000 
+
+}
+
+
+
+.table-sku-style thead {
+    box-sizing: border-box;
+    /* display: flex; */
+    flex-direction: row;
+    align-items: center;
+    /* padding: 0px; */
+    width: 1009px;
+    height: 56px;
+    background: rgba(40, 163, 67, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.table-sku-style thead th{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    /* identical to box height, or 171% */
+    
+    letter-spacing: 0.17px;
+    text-align: center;
+    /* text/primary */
+    
+    color: rgba(0, 0, 0, 0.87);
+    
+    
+    /* Inside auto layout */
+    
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+.table-sku-style tbody{
+ text-align: center;
+}
+
+
+.table-sku-style tbody tr{
+width: 100%; /* Set the desired width */
+height: 50px; /* Set the desired height */
+border-bottom: 1px solid #989494c8; 
+}
+.buy-now-button-sku{
+
+        margin-bottom: 200px;
+        border: none;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        text-align: center;
+        color: #FFFFFF;
+        width: 169px;
+        height: 53px;
+        margin-top: 46px;
+        left: 213px;
+        top: 639px;
+        background: #318243;
+        border-radius: 8px;
+        top: 22px;
+    
+}
+.search-container {
+    position: relative;
+  }
+  
+  .search-container input[type="text"] {
+    padding-right: 30px; /* Add padding to accommodate the icon */
+  }
+  
+  .search-container i {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+  
+  /* Adjust the size and color of the icon as needed */
+  .search-container i.fas.fa-search {
+    font-size: 18px;
+    color: #888;
+  }
+  .search-lable-span{
+  font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 143%;
+/* identical to box height, or 20px */
+
+display: flex;
+align-items: center;
+letter-spacing: 0.17px;
+
+/* text/primary */
+
+color: rgba(0, 0, 0, 0.87);
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+  }
+  @media screen and (max-width:600px) {
+    .sku-page-dev {
+        text-align: center;
+        padding-top: 30px;
+        padding-left: 0px;
+    }.search-lable-span{
+      
+       
+    }.sku-main-dev-button span {
+    
+        margin-left: 52px;
+       
+    }.mein-input-dev-section {
+        display: flex !important;
+   
+        /* max-width: 100%; */
+    }
+  }
