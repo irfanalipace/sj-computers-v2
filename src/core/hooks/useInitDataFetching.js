@@ -9,9 +9,10 @@ import {
     addToLocalCart,
     syncCartItems,
     setCartDetails,
+    getCartDetails,
     clearCart,
 } from "@store/cart/cartThunks";
-import { getCartItems, getCartDetails } from "@utils/cartHelpers";
+import { getCartItems } from "@utils/cartHelpers";
 
 export const useInitDataFetching = () => {
     const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export const useInitDataFetching = () => {
     useEffect(() => {
         dispatch(fetchCategory());
         dispatch(fetchBrands());
+        dispatch(getCartDetails());
 
         if (!isAuthenticated) {
             cartItems.forEach((cartItem) => {
