@@ -170,9 +170,9 @@ export const CheckOutCard = ({ product }) => {
                               <span className="color-card-text-paragrap-payment">Return</span>
                               </div>
                               <div>
-                              <Link className="text-decoration-none secure-payment-method">Eligible for returns,
-                                refund or 
-                                replacement wi...
+                              <Link className="text-decoration-none secure-payment-method">Eligible for returns<br></br>
+                                <Link>refund or </Link> 
+                               <Link> replacement wi...</Link>
                                 </Link>
                               </div>
                             </div>
