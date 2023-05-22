@@ -61,13 +61,13 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                 category_id: category?.id,
                 filter: filtersArray,
             };
-            dispatch(filterProducts(filterObject));
+            console.log("11 : ", filtersArray, searchString, category?.id);
+            if (filtersArray || searchString || category?.id) {
+                console.log("running");
+                dispatch(filterProducts(filterObject));
+            }
         }
     }, [searchString, filtersArray, category]);
-
-    useEffect(() => {
-        console.log("fddsafsa");
-    }, []);
 
     return (
         <div className="filter-results">
