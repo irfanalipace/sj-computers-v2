@@ -14,8 +14,8 @@ import Footer from "@components/Footer/Footer";
 
 import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-free/css/all.css";
+
 import "./App.css";
-// import "./assets/bootstrap/bootstrap.css";
 
 import ScrollToTop from "./ScrollToTop";
 

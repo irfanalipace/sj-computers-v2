@@ -20,8 +20,9 @@
     align-items: center;
 }
 
-.product-image-grid {
+.product-image-grid.product-image {
     height: 190px;
+    max-width: 100%;
 }
 
 .product-image-grid .product-badge {
@@ -40,7 +41,7 @@
     align-items: center;
 }
 
-.product-image-grid img {
+.product-image-grid.product-image img {
     width: 100%;
     max-width: 300px;
     max-height: 187px;
