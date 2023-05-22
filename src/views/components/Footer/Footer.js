@@ -199,14 +199,17 @@ const Footer = () => {
                         </div>
                         <hr className="hr-line"></hr>
                         <div className="footer-copyright text-center py-3 footer-image-lien">
-                            <img
+                      <div>
+                      <img
                                 src={footer}
                                 alt=""
                                 style={{ paddingRight: "105px" }}
                                 className="footer-copywrite-images"
                             />
+                      </div>
 
-                            <button
+                        <div className="setting-button-fax">
+                        <button
                                 className="btn btn-secondary dropdown-toggle language-dropdown"
                                 style={{ background: "#00305E" }}
                                 type="button"
@@ -237,6 +240,7 @@ const Footer = () => {
                                     UK
                                 </a>
                             </div>
+                        </div>
                         </div>
                         <div className="footer-copyright text-center py-3">
                             <img

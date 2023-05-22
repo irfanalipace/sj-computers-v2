@@ -143,13 +143,27 @@ footer ul li {
     padding-bottom: 12px !important;
     width: 267px;
 }
-
+.setting-button-fax{
+    margin-top: 14px;
+}
 
 .footer-image-lien {
-    padding-left: 21px;
+    justify-content: center;
+    display: flex;
+    padding-left: ju;
     /* padding-right: 23px; */
 }
 
 .footer-end-image-data {
     padding-bottom: 12px;
+}
+
+@media screen and (max-width:600px) {
+    .footer-copywrite-images {
+        margin-left: 29px;
+        max-width: 100% !important;
+        padding-bottom: 12px !important;
+        width: 267px;
+        /* margin-right: 0px !important; */
+    }
 }
