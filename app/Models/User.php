@@ -17,7 +17,7 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     const USER_ROLE_ID = 2;
 
     const AUTH_TOKEN = 'SJAuthToken';
-
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -34,7 +34,7 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
         'otp_verified'
     ];
 
-    protected $with = ['shippingAddress'];
+    protected $with = ['shippingAddress','userState'];
     
     public function otps()
     {

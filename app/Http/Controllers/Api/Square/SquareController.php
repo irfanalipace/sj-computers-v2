@@ -57,6 +57,7 @@ class SquareController extends BaseController
             // Clear the application cache
             Artisan::call('cache:clear');
             // Clear the configuration cache
+            Artisan::call('config:cache');
             Artisan::call('config:clear');
 
             //create customer || retrieve customer if already added
