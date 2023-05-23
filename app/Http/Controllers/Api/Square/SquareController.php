@@ -56,14 +56,14 @@ class SquareController extends BaseController
             Artisan::call('optimize:clear');
             // Clear the application cache
             Artisan::call('cache:clear');
-            // Clear the configuration cache
-            Artisan::call('config:cache');
+            // Clear the configuration cache           
             Artisan::call('config:clear');
 
             //create customer || retrieve customer if already added
-            if (auth()->user()->square_cus_id == null) {
+            if (auth()->user()->square_cus_id == null) {                
                 $customer = $this->createCustomer();
-            } else {
+            } else {               
+               
                 $customer = $this->getCustomer();
             }
             
