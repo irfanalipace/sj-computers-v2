@@ -7,6 +7,7 @@ import { productDetailsApi } from "@api/products";
 import { ProductImage } from "@components/Product/ProductImage/ProductImage";
 import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
 import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
+import Recommendation from "@components/Recommendation/Recommendation";
 
 import "./Product.css";
 
@@ -18,7 +19,7 @@ export default function Product() {
 
     useEffect(() => {
         getProductDetails();
-    }, []);
+    }, [productId]);
 
     const getProductDetails = async () => {
         setIsLoading(true);
@@ -46,7 +47,7 @@ export default function Product() {
                             <ProductImage ProductImages={product?.image} />
                         </div>
                         <div className="col-12 col-md-5">
-                            <ProductDetails product={product} />
+                            <ProductDetails product={product}/>
                         </div>
                         <div className="col-12 col-md-3">
                             <CheckOutCard product={product} />
@@ -64,7 +65,10 @@ export default function Product() {
     return (
         <div className="product-page">
             <div className="product-container">
+               
                 {isLoading ? <LoaderComponent /> : <ProductComponent />}
+                <Recommendation productId={productId} />
+
             </div>
         </div>
     );

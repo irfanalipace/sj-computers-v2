@@ -3,6 +3,7 @@ import "./SkuTables.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Table from "./Table";
+import { InputLabel, MenuItem, Select } from "@mui/material";
 const SkuTables = () => {
     return (
         <div>
@@ -26,7 +27,9 @@ const SkuTables = () => {
                 </div>
                 <div className="row">
                     <div className="sku-main-dev-button">
-                        <span>Add or Release Product’s quantity</span>
+                        <span>
+                            <b>Add or Release Product’s quantity</b>
+                        </span>
                         <div
                             style={{ marginTop: "10px", paddingBottom: "4px" }}
                             className="mein-input-dev-section"
@@ -34,13 +37,13 @@ const SkuTables = () => {
                             <input
                                 type="text"
                                 className="search-sku-input-asin"
-                                placeholder="Enter or Name ASIN"
+                                placeholder="Enter quantity..."
                             />
-                            <input
+                            {/* <input
                                 type="text"
                                 className="search-sku-input-quantity"
                                 placeholder="Add Quantity"
-                            />
+                            /> */}
                         </div>
 
                         <div className="button-sku-button">

@@ -24,7 +24,7 @@ const Product = ({ product, inGrid }) => {
                 </span>
             </div>
 
-            {!inGrid && (
+            {/* {!inGrid && (
                 <>
                     <div className="product-badge">
                         <div className="badge-text">Best Seller</div>
@@ -36,7 +36,7 @@ const Product = ({ product, inGrid }) => {
                         <span>Deals</span>
                     </div>
                 </>
-            )}
+            )} */}
             <div className="product-prices">
                 {product.originalPrice && (
                     <div className="product-original-price">

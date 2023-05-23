@@ -6,7 +6,7 @@
 .swiper .image-category-mobile-silder {
     max-width: 100%;
     width: 160px !important;
-    border-radius: 8px;
+    border-radius: 6px;
 }
 .link-text-category-mobile {
     color: black;
@@ -14,7 +14,7 @@
     /* padding-top: 71px; */
     font-size: 12px;
     background: white;
-    border-radius: 8px;
+    border-radius: 6px;
 }
 
 .category-dev-img-section-mobile {

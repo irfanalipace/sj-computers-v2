@@ -12,7 +12,6 @@ const ProductsByCategory = ({ toggleFilter }) => {
     useEffect(() => {
         const _category = categories.find((c) => c.slug === categorySlug);
         setCategory(_category);
-        console.log("11 categorySlug: ", categorySlug);
     }, [categories, categorySlug]);
 
     return <FilteredProducts category={category} toggleFilter={toggleFilter} />;

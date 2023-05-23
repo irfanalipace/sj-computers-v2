@@ -69,6 +69,7 @@ const Contact = () => {
                                             <span>Contact us</span>
                                         </Link>
                                     </li>
+                                    <hr className="vertical-line-contactus"></hr>
                                     <li className="nav-item">
                                         <Link
                                             className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line"
@@ -92,6 +93,7 @@ const Contact = () => {
                                             info@sjcomputer.com
                                         </Link>
                                     </li>
+                                    <hr className="vertical-line-contactus"></hr>
                                     <li className="nav-item">
                                         <Link
                                             className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line"

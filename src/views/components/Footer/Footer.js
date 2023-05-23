@@ -28,7 +28,7 @@ const Footer = () => {
                         className="footer-copyright text-center py-3 back-to-top-hover-effct"
                         style={{ backgroundColor: "#002549" }}
                     >
-                        <h4 style={{ color: "white" }}>
+                        <h4 className="backtotop-button-footer-click-onit">
                             <BackToTopButton />
                         </h4>
                     </div>
@@ -200,12 +200,15 @@ const Footer = () => {
                         <hr className="hr-line"></hr>
                         <div className="footer-copyright text-center py-3 footer-image-lien">
                       <div>
-                      <img
+                   <Link to='/'>
+                   <img
                                 src={footer}
                                 alt=""
                                 style={{ paddingRight: "105px" }}
                                 className="footer-copywrite-images"
-                            />
+                            /> 
+                   
+                   </Link>
                       </div>
 
                         <div className="setting-button-fax">

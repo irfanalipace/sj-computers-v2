@@ -9,7 +9,7 @@ import './OrderProducts.css'
 
 function OrderTable({ deliveryDate , orderDetails, onToggleExpanded }) {
     const [expandedOrders, setExpandedOrders] = useState([]);
-    console.log(orderDetails, 'order details 222');
+    // console.log(orderDetails, 'order details 222');
     function formatDate(dateString) {
         const options = { year: "numeric", month: "long", day: "numeric" };
         const date = new Date(dateString);
