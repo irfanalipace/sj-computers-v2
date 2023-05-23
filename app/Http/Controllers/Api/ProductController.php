@@ -14,7 +14,6 @@ class ProductController extends BaseController
     public function getList(request $request){
         
         $data= Product::where('status',true)->with('brand')->paginate(12);
-        dd($data);
         return $this->sendResponse($data);
     }
 
