@@ -372,14 +372,7 @@
     .header-logo {
         margin-top: 20px;
     }
-    .h5-heading {
-        padding-top: 10px !important;
-        /* text-align: center; */
-        padding-left: 0px !important;
-        width: 351px !important;
-        font-size: 10px !important;
-        color: #706e6e !important;
-    }
+   
     .rectangle {
         color: #6f6f6f;
         border: 1px solid #6f6f6f;
@@ -481,6 +474,8 @@
     /* width: 263px; */
     /* margin: 4px; */
 }
+
+
 .set-register-text {
     padding-top: 9px;
     left: 567px;
@@ -496,6 +491,8 @@
     color: #333333;
 }
 
+
+
 @media screen and (max-width: 440px) {
     .footer-mute {
         text-align: center;
@@ -504,5 +501,14 @@
     }
     .copyright-sjcomputer {
         padding-right: 0px;
+    }
+}
+
+
+@media screen and (max-width:600px) {
+    .h5-heading {
+     
+       max-width: 100% !important;
+      
     }
 }
