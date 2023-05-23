@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./SkuTables.css";
 import { right } from "@popperjs/core";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 const DynamicTable = () => {
     const [tableData, setTableData] = useState([
         {

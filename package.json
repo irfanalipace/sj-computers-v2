@@ -41,6 +41,7 @@
         "@mantine/core": "^6.0.10",
         "@material-ui/icons": "^4.11.3",
         "@mui/material": "^5.13.0",
+        "@mui/x-data-grid": "^6.5.0",
         "@reduxjs/toolkit": "^1.9.1",
         "country-flag-icons": "^1.5.7",
         "jquery": "^3.6.4",
