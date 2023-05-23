@@ -5,8 +5,8 @@ export function getOrderDetailsApi() {
         const myParams = {
             month: "0",
             per_page: "100",
-            page: "1"
-          };
+            page: "1",
+        };
 
         ApiService.get(`/order-list`, "", myParams)
             .then((response) => {
@@ -46,17 +46,10 @@ export function OrderSearchApi(invoiceId) {
 export function OrderListhApi() {
     return new Promise((resolve, reject) => {
         const myParams = {
-<<<<<<< HEAD
-            month: "1",
-            per_page: "1",
-            page: "1",
-        };
-=======
             month: "0",
             per_page: "100",
-            page: "1"
-          };
->>>>>>> haris_front101
+            page: "1",
+        };
 
         ApiService.get(`/order-list`, "", myParams)
             .then((response) => {
