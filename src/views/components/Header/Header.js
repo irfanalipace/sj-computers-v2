@@ -52,9 +52,15 @@ const Header = () => {
     useEffect(() => {
         ((firstLogin.current && !currentState) ||
             window.localStorage.getItem("state") == null) &&
-            setShow(true);
+             setTimeout(() => {
+                setShow(true); // Update the state `isOpen` to true after 5 seconds
+              }, 5000);
+            // setShow(true);
         searchParams.delete("firstLogin");
         setSearchParams(searchParams);
+        return () => {
+            clearTimeout(setTimeout); // Clean up the timeout on component unmount
+          };
     }, [firstLogin.current, currentState]);
 
     const handleResize = () => {

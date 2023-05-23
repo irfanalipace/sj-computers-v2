@@ -139,9 +139,10 @@
 
 .order-table thead th {
     background-color: #f0f0f0;
-}
-
-.order-table tbody tr:nth-child(even) {
+    text-align: center;
+  }
+  
+  .order-table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
@@ -152,4 +153,8 @@
 
 .order-table tbody tr:last-child td {
     border-bottom: none;
+  }
+  .order-table th,
+.order-table td {
+  border: none;
 }
