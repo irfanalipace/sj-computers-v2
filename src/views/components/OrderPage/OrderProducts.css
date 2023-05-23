@@ -49,6 +49,11 @@
     color: #000000;
 }
 
+.product-info {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
 .track-package-button {
     margin-right: 0.5rem;
     height: 2.25rem;
@@ -140,9 +145,9 @@
 .order-table thead th {
     background-color: #f0f0f0;
     text-align: center;
-  }
-  
-  .order-table tbody tr:nth-child(even) {
+}
+
+.order-table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
@@ -153,8 +158,8 @@
 
 .order-table tbody tr:last-child td {
     border-bottom: none;
-  }
-  .order-table th,
+}
+.order-table th,
 .order-table td {
-  border: none;
+    border: none;
 }
