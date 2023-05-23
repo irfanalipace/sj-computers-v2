@@ -117,17 +117,17 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                         className="me-1"
                                         icon={faGlobe}
                                     />
-                                    <Link>English</Link>
+                                    <Link onClick={() => toggleSidebar()}>English</Link>
                                 </li>
                                 <li className="d-block">
                                     <US
                                         title="United States"
                                         className="country-flag"
                                     />
-                                    <Link className="ms-1">United States</Link>
+                                    <Link className="ms-1" onClick={() => toggleSidebar()}>United States</Link>
                                 </li>
                                 <li>
-                                    <Link>Customer Services</Link>
+                                    <Link onClick={() => toggleSidebar()}>Customer Services</Link>
                                 </li>
                                 <li>
                                     {isAuthenticated ? (
