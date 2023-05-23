@@ -25,7 +25,7 @@ export const useInitDataFetching = () => {
             dispatch(clearCart()); //clear store cart items because all cart items are again fetched from backend to sync with localCart
             dispatch(getShippingDetails());
             dispatch(syncCartItems()); //gets all the cart items stored in database and stores them in store and local storage similarly stores local cart items in database
-            dispatch(currentState());
+            // dispatch(currentState());
         }
     }, [isAuthenticated]);
 

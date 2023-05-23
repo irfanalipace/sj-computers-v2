@@ -52,7 +52,7 @@ export const login = (credentials) => {
             let token = response.access_token;
             let name = response.user;
             let profile_pic = response.profile_pic;
-            let state = response.state;
+            let state = response.state.state;
             saveUserName(name);
             saveUserImage(profile_pic);
             saveUserState(state);
