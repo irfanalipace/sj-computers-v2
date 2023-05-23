@@ -53,11 +53,11 @@ class SquareController extends BaseController
             
             $idempotencyKey = uniqid();
             // Clear the all cache
-            Artisan::call('optimize:clear');
+            // Artisan::call('optimize:clear');
             // Clear the application cache
-            Artisan::call('cache:clear');
+            // Artisan::call('cache:clear');
             // Clear the configuration cache           
-            Artisan::call('config:clear');
+            // Artisan::call('config:clear');
 
             //create customer || retrieve customer if already added
             if (auth()->user()->square_cus_id == null) {                
