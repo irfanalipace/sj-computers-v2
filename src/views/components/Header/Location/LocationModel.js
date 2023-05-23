@@ -149,7 +149,7 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                         </Dropdown>
                     </>
                 ) : (
-                    <div className="d-grid justify-content-center">
+                    <>
                         <div className="row my-3">
                             <div className="col-md-8">
                                 <input
@@ -170,10 +170,12 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                                 </button>
                             </div>
                         </div>
+
+                      
                         <Dropdown>
                             <Dropdown.Toggle
                                 id="dropdown-basic"
-                                className="dropdown-button-box d-flex justify-content-between align-items-center "
+                                className="dropdown-button-box d-flex justify-content-between align-items-center"
                             >
                                 {state?.name || "Select State"}
                                 <img src={img1} className="img-arrow" />
@@ -191,22 +193,22 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                                 ))}
                             </Dropdown.Menu>
                         </Dropdown>
-                        <Modal.Footer>
-                        <Button onClick={clickHandler} className="done-button-full">
-                            {isLoading ? <Loader /> : "Done"}
-                        </Button>
-                       </Modal.Footer>
+                        <Button onClick={clickHandler} className="done-button my-3 px-0 mx-0">
+                        {isLoading ? <Loader /> : "Done"}
+                       </Button>
                         <div className="hrozantel-hr-location-model">
                             <h5 className="h5-model-box-loction">or</h5>
                         </div>
-                       
                         <Link to={"/login"}>
                             <button className="location-button">
                                 Sign in to see your address
                             </button>
                         </Link>
+                    </>
+                       
+                      
                         
-                    </div>
+                    // </div>
                 )}
             </Modal.Body>
             {isAuthenticated && (
