@@ -3,7 +3,7 @@ import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 
 export default function DataTable(props) {
     return (
-        <div style={{ height: 400 }}>
+        <div style={{ width: 1000 }}>
             <DataGrid
                 rows={props.rows}
                 columns={props.columns}

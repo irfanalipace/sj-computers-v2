@@ -3,15 +3,18 @@ import "./SkuTables.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Table from "./Table";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
+    TextField,
+} from "@mui/material";
 import { useDispatch } from "react-redux";
 import { getInventory } from "../../../core/api/inventory.js";
-import DynamicTable from "./DynamicTable";
 import DataTable from "./DynamicTable";
 const SkuTables = () => {
-    const [val, setVal] = useState("");
     const [invent, setInvent] = useState();
-    const dispatch = useDispatch();
     const [data, setData] = useState([]);
     const handleChange = async (e) => {
         await getInventory({
@@ -20,32 +23,40 @@ const SkuTables = () => {
             setInvent(_.data[0]?.product);
             let obj = [
                 {
-                    field: _?.data[0]?.product?.id,
-                    headerName: "ID#",
-                },
-                {
-                    field: _?.data[0]?.product?.name,
-                    headerName: "Name",
-                },
-                {
-                    field: _?.data[0]?.product?.asin,
-                    headerName: "ASIN",
+                    id: _?.data[0]?.product?.id,
+                    name: _?.data[0]?.product?.name,
+                    asin: _?.data[0]?.product?.asin,
+                    sku: _?.data[0]?.product?.sku,
+                    hQuantity: 0,
+                    fQuantity: _?.data[0]?.quantity,
                 },
             ];
-            setData((state) => [...state, { ...obj }]);
-            console.log(data, "sd");
+            setData(() => [...obj]);
         });
-        setVal(e.target.value);
     };
-
-    // const data = [
-    //     { field: `id`, headerName: "ID#" },
-    //     { field: "name", headerName: "Name" },
-    //     { field: "asin", headerName: "ASIN" },
-    //     { field: "price", headerName: "SKU" },
-    //     { field: "rating", headerName: "Total Quantity" },
-    //     { field: "rating", headerName: "Hold Quantity" },
-    // ];
+    const columns = [
+        { field: "id", headerName: "ID", width: 130 },
+        { field: "name", headerName: "Name", width: 150 },
+        { field: "asin", headerName: "ASIN", width: 150 },
+        {
+            field: "sku",
+            headerName: "SKU",
+            type: "number",
+            width: 100,
+        },
+        {
+            field: "quantity",
+            headerName: "Total Quantity",
+            sortable: false,
+            width: 170,
+        },
+        {
+            field: "hold_quantity",
+            headerName: "Hold Quantity",
+            sortable: false,
+            width: 180,
+        },
+    ];
 
     return (
         <div>
@@ -54,12 +65,16 @@ const SkuTables = () => {
                     <div className="col-lg-12 col-md-12 col-sm-12">
                         <div className="seach-input-sku">
                             {""}{" "}
-                            {/* <label className="search-lable-span"> Search</label> */}
                             <FormControl sx={{ m: 1, minWidth: 300 }}>
-                                <InputLabel id="demo-simple-select-label">
-                                    Search
-                                </InputLabel>
-                                <Select
+                                <TextField
+                                    id="outlined-basic"
+                                    label="Search"
+                                    variant="outlined"
+                                    onChange={(e) => e.target.value}
+                                    value={invent}
+                                    onChange={handleChange}
+                                />
+                                {/* <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     value={invent}
@@ -69,19 +84,12 @@ const SkuTables = () => {
                                     <MenuItem value={"AI-NRCD-SNXP"}>
                                         AI-NRCD-SNXP
                                     </MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
-                                </Select>
+                                </Select> */}
                             </FormControl>
-                            {/* <input
-                                type="text"
-                                className="search-sku-input-fields"
-                                placeholder="Search by Name, ASIN"
-                            /> */}
-                            <FontAwesomeIcon
+                            {/* <FontAwesomeIcon
                                 icon={faSearch}
                                 className="search-icon"
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>
@@ -121,13 +129,13 @@ const SkuTables = () => {
                 </div>
                 <div>
                     <div className="col-lg-8 col-md-10 col-sm-12">
-                        {invent ? (
+                        {invent && data ? (
                             <>
                                 <div style={{ marginTop: "28px" }}>
                                     <h3 className="your-selected-product-sku">
                                         Your Selected Products
                                     </h3>
-                                    <DataTable columns={data} rows={invent} />
+                                    <DataTable columns={columns} rows={data} />
                                 </div>
                                 <button className="buy-now-button-sku">
                                     Buy Now
