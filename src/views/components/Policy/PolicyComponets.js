@@ -5,6 +5,7 @@ import {  } from "../../../core/api/system-pages";
 import policyimage from "@images/Policy/polict-cart-comp.png";
 import { getSystemPagesApi } from "../../../core/api/system-pages";
 import { useLocation } from "react-router-dom";
+import Loader from "@common/LoaderComponent/LoaderComponent";
 import Header from "@components/Header/Header";
 
 const HeadereLinks = [
@@ -20,6 +21,7 @@ const HeadereLinks = [
 const PolicyComponets = () => {
     const [pageContent, setPageContent] = useState({});
     const [pTagValue, setPTagValue] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     // const [PageTitle, setpageTitle] = useState("");
     
     // const pageName = {
@@ -52,14 +54,17 @@ const PolicyComponets = () => {
     useEffect(() => {
         const fetchPageContent = async () => {
           try {
+              setIsLoading(true);
             const responsePage = await getSystemPagesApi(pageName);
             console.log(responsePage.data.value, "page Content 1");
             setPageContent(responsePage);
             console.log(pageContent, "page Content 2");
             setPTagValue(responsePage?.data?.value)
             console.log(pTagValue, "page Content 3");
+            setIsLoading(false);
           } catch (error) {
             console.error('Error fetching page content:', error);
+            setIsLoading(false);
           }
         };
       
@@ -116,7 +121,11 @@ const PolicyComponets = () => {
                         </div>
                     <div className="col-lg-8 col-md-10 col-sm-12 text-color-all-text text-dev-section-dev" >
                         <div>
-                        <p  className="data-ul-list-itel-paragraph" style={{color:'white'}}>{pTagValue}</p>
+                        <p  className="data-ul-list-itel-paragraph" style={{color:'white'}}>{ isLoading ? (
+                        <>
+                        <Loader />
+                        
+                        </>) : pTagValue}</p>
                             {/* <ul className="policy-item-data">
                               
                        
