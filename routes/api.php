@@ -38,6 +38,8 @@ use Illuminate\Support\Facades\Auth;
  * Auth Apis
  */
 
+Route::post('estimated-days', [CartController::class, 'estimatedDays'])->name('estimated-days');
+
 Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
 
 Route::post('register', [AuthController::class, 'registerUser']);

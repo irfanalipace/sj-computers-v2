@@ -155,6 +155,24 @@ class CartController extends BaseController
         }
     }
 
+    public function estimatedDays(){
+
+        $data = [
+            'free_shipment_amount' => [
+                'estimate_day' =>   Carbon::now()->addWeekdays(5)->format('l d-m-Y'),
+            ],
+            '2_day_shipment_amount' =>  [
+                    'estimate_day' =>  Carbon::now()->addWeekdays(2)->format('l d-m-Y'),
+            ],
+            '1_day_shipment_amount' =>[
+                         'estimate_day' =>   Carbon::now()->addWeekdays(1)->format('l d-m-Y'),
+            ],
+        ];
+
+        return $this->sendResponse($data);
+
+    }
+
     //details of cart items
     protected function cartDetails()
     {
