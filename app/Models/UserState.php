@@ -11,6 +11,8 @@ class UserState extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = ['state'];
+    
     public function state(){
         return $this->belongsTo(State::class);
     }
