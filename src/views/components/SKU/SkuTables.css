@@ -231,6 +231,7 @@
     order: 0;
     flex-grow: 0;
 }
+
 @media screen and (max-width: 600px) {
     .sku-page-dev {
         text-align: center;
