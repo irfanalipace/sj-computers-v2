@@ -327,3 +327,9 @@
         margin-top: 0px !important;
     }
 }
+
+@media screen and (max-width:1900px) and (min-width:680px) {
+    .divsection{
+        display: none;
+    }
+}

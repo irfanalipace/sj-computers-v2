@@ -110,6 +110,11 @@
         width: 135px;
     }
 }
+@media screen and (max-width: 600px) {
+    .checkout-header  {
+       display: none;
+    }
+}
 
 @media screen and (max-width: 300px) {
     .checkout-header .logo-wrapper {

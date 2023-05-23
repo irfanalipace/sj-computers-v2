@@ -4,6 +4,7 @@ import {
     SEARCH_PRODUCTS,
     FILTER_PRODUCTS,
     SET_FILTERING_PRODUCTS,
+    SET_IS_SHOW_MORE,
     RESET_PAGE,
     API_ERROR,
 } from "@store/products/productsSlice";
@@ -13,10 +14,11 @@ import {
     filterProductsApi,
 } from "@api/products";
 
-export const fetchProducts = (page = 1) => {
+export const fetchProducts = (page = 1, loadMore) => {
     return async (dispatch) => {
         try {
-            dispatch({ type: LOADING, payload: {} });
+            if (loadMore) dispatch({ type: SET_IS_SHOW_MORE, payload: {} });
+            else dispatch({ type: LOADING, payload: {} });
             const response = await productsApi(page);
             dispatch({
                 type: FETCH_PRODUCTS,
@@ -49,11 +51,14 @@ export const searchProducts = (name = "", page = 1, per_page = 12) => {
     };
 };
 
-export const filterProducts = (filter) => {
+export const filterProducts = (filter, loadMore = false) => {
     return async (dispatch) => {
         try {
-            dispatch({ type: LOADING, payload: {} });
-            dispatch({ type: SET_FILTERING_PRODUCTS, payload: {} });
+            if (loadMore) dispatch({ type: SET_IS_SHOW_MORE, payload: {} });
+            else {
+                dispatch({ type: LOADING, payload: {} });
+                dispatch({ type: SET_FILTERING_PRODUCTS, payload: {} });
+            }
             const response = await filterProductsApi(filter);
             if (filter.page === 1) dispatch(RESET_PAGE());
             if (response?.data?.data) {

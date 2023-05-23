@@ -18,13 +18,15 @@
     background: white;
     position: absolute;
     z-index: 4;
-    width: 449px;
-    height: 300px;
+    width: 210px;
+    height: 120px;
     padding: 2px;
     border: 1px solid #ddd;
     margin-bottom: 20px;
     text-align: center;
-    left: -249px;
+    left: -60px;
+    padding: 10px;
+    border-radius: 5px;
 }
 .forgot-password {
     text-align: center !important;
@@ -103,7 +105,7 @@
 }
 .login-register-cart-button {
     box-sizing: border-box;
-    width: 50% !important;
+    width: 80% !important;
     height: 40px;
     left: 139px;
     top: 22px;

@@ -30,6 +30,7 @@ const Header = () => {
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
     const location = useLocation();
+    const ThankyouPage = location.pathname === '/thank-you';
     const nonHeaderRoutes = [
         "login",
         "register",
@@ -75,7 +76,7 @@ const Header = () => {
                     ) && (
                         <>
                             <header className="navbar navbar-expand-lg header-background px-3">
-                                <div className="header-container">
+                                <div className={`header-container ${ThankyouPage ? "header-thank-you" : ""}`}>
                                     <Link
                                         className="navbar-brand me-xl-2 me-0"
                                         to="/"
@@ -86,7 +87,9 @@ const Header = () => {
                                             className="homepage-img hover-effect-sets"
                                         />
                                     </Link>
-                                    <div className="d-flex flex-row align-items-center main-nav">
+                                    {!ThankyouPage && (
+                                        <>
+                                          <div className="d-flex flex-row align-items-center main-nav">
                                         <div className="d-flex align-items-center justify-content-center flex-wrap header-position ">
                                             <div className="hover-effect-sets">
                                                 <Button
@@ -239,9 +242,12 @@ const Header = () => {
                                             </div>
                                         </div>
                                     </div>
+                                        </>
+                                    )}
+                                  
                                 </div>
                             </header>
-                            <TopBar />
+                           {!ThankyouPage && <TopBar />} 
                         </>
                     )}
 

@@ -2,17 +2,28 @@
 
 namespace App\Traits\Amazon;
 
+use App\Classes\StatusEnum;
 use App\Models\Product;
 use Exception;
 
 trait AmazonTrait
 {
 
-    public function getAmazonInventory($productId)
+    public function getAmazonInventory($productId = '', $sku = '')
     {
+
         $status = false;
         $quantity = 0;
-        $product = Product::find($productId);
+        if (empty($productId)) {
+            $product = Product::where('sku', $sku)->first();
+        } else {
+            $product = Product::find($productId);
+        }
+
+
+        if (empty($sku)) {
+            $sku = $product->sku;
+        }
 
         $curl = curl_init();
 
@@ -25,10 +36,10 @@ trait AmazonTrait
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-//            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $product->sku)),
+            // CURLOPT_POSTFIELDS => json_encode(array('SKU' => $sku)),
             CURLOPT_POSTFIELDS => json_encode(array('SKU' => 'AI-NRCD-SNXP')),
             CURLOPT_HTTPHEADER => array(
-                'apikey: 810f8ad0-8585-4845-9954-9a82bdbc18bc',
+                'apikey: ' . config('app.amazon_apikey'),
                 'Content-Type: application/json'
             ),
         ));
@@ -48,14 +59,26 @@ trait AmazonTrait
         return [
             'sku' => $product->sku,
             'quantity' => $quantity,
-            'status' => $status
+            'status' => $status,
+            'product' => $product
         ];
     }
 
-    public function updateAmazonInventory($productInfo, $qty)
+    public function updateAmazonInventory($productInfo, $qty, $type = " ")
     {
+        switch ($type) {
+            case StatusEnum::RELEASE:
+                # code...
 
-        $totalQuantity = (int) $productInfo['quantity'] - (int) $qty;
+                $totalQuantity = (int) $productInfo['quantity'] + (int) $qty;
+
+                break;
+            default:
+                # code...
+                $totalQuantity = (int) $productInfo['quantity'] - (int) $qty;
+                break;
+        }
+
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -67,10 +90,10 @@ trait AmazonTrait
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-//            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $productInfo['sku'], 'quantity' => $totalQuantity)),
+            //            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $productInfo['sku'], 'quantity' => $totalQuantity)),
             CURLOPT_POSTFIELDS => json_encode(array('SKU' => 'AI-NRCD-SNXP', 'quantity' => $totalQuantity)),
             CURLOPT_HTTPHEADER => array(
-                'apikey: 810f8ad0-8585-4845-9954-9a82bdbc18bc',
+                'apikey: ' . config('app.amazon_apikey'),
                 'Content-Type: application/json',
 
             ),

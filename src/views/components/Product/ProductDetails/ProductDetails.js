@@ -15,7 +15,6 @@ const ProductDetails = ({ product }) => {
     const [description, setDescription] = useState([]);
     const [productDetails, setProductDetails] = useState([]);
 
-    console.log("description", product.description);
     let acceptedKeys = [
         "brand",
         "cpu_model",
@@ -130,7 +129,8 @@ const ProductDetails = ({ product }) => {
                 </div>
             </div>
 
-            <hr className="hr-card-details"></hr>
+        <div className="divsection">
+        <hr className="hr-card-details"></hr>
             <div className="cart-details-text">
                 <div className="row">
                     <div className="col-md-12 color-text">
@@ -140,6 +140,7 @@ const ProductDetails = ({ product }) => {
                     </div>
                 </div>
             </div>
+        </div>
             <div className="content">
                 <div className="row">
                     <div className="col-md-12 shipping-button">
@@ -205,8 +206,8 @@ const ProductDetails = ({ product }) => {
                 <h3 className="items-text-style">Items Description</h3>
 
                 <ol type="1">
-                    {description?.map((item) => (
-                        <li>{item.value}</li>
+                    {description?.map((item, index) => (
+                        <li key={index}>{item.value}</li>
                     ))}
                 </ol>
             </div>

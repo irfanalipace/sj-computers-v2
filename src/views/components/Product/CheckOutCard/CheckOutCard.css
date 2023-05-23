@@ -221,3 +221,9 @@ color: #FF0000;
     background: white;
     /* margin-right: 23px; */
 }
+
+@media screen and (max-width:600px) {
+    .card-price-section-card-product{
+        display: none;
+    }
+}

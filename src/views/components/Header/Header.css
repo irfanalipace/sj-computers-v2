@@ -4,6 +4,10 @@
     width: 100%;
     display: flex;
 }
+.header-thank-you {
+    display: flex;
+    justify-content: center;
+}
 
 .header-background {
     background: #00305e !important;
@@ -11,6 +15,14 @@
 .homepage-img {
     width: 100%;
     max-width: 185px;
+}
+
+.dilvery-text-paragraph-card button {
+    border: 0;
+    background: none;
+    padding: 0;
+    color: #1270c4;
+    font-weight: 600;
 }
 
 .hover-effect-sets {

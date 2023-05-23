@@ -42,7 +42,7 @@ function OrderTable({ deliveryDate , orderDetails, onToggleExpanded }) {
                   />
                 )}
               </td> */}
-              <td>{order?.order_item[0].order_id}</td>
+              <td>{order?.order_item[0]?.order_id}</td>
 
               <td>{formatDate(order?.created_at)}</td>
               <td>{order?.shipment_days}</td>

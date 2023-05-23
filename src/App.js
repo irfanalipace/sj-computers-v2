@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
@@ -8,12 +8,15 @@ import { getToken } from "@services/jwtService";
 import { Router } from "@src/Routes";
 import { alreadyLoggedIn } from "@store/auth/authThunks";
 import { useInitDataFetching } from "@hooks/useInitDataFetching";
+
 import Header from "@components/Header/Header";
 import Footer from "@components/Footer/Footer";
 
 import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-free/css/all.css";
+
 import "./App.css";
+
 import ScrollToTop from "./ScrollToTop";
 
 function App() {
@@ -26,6 +29,12 @@ function App() {
         window.localStorage.removeItem("clearCartKeys");
     }
     useInitDataFetching();
+
+    // const location = useLocation();
+    // ${process.env.REACT_APP_URL}
+    const hideHeaderFooter = window.location.pathname === `/thank-you`;
+
+    // console.log(hideHeaderFooter, "header and footer")
 
     return (
         <div>

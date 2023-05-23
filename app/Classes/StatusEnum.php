@@ -21,4 +21,8 @@ class StatusEnum{
     public const TWO_DELIVERY_DAY = 2;
     public const ONE_DELIVERY_DAY = 1;
 
+    //Amazon inventory
+    public const HOLD = 'hold';
+    public const RELEASE = 'release';
+
 }

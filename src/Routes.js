@@ -21,6 +21,7 @@ const Cart = React.lazy(() => import("@components/ShoppingCart/Cart"));
 const Checkout = React.lazy(() => import("@pages/Checkout/Checkout"));
 // const OrderPage = React.lazy(() => import("@pages/OrderPage/OrderPage.js"));
 const Test = React.lazy(() => import("@pages/Test/Test"));
+const ThankYou = React.lazy(() => import("@pages/Thankyou/Thankyou"));
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import Contact from "@components/Footer/FooterMenu/Contact";
 import Policy from "@pages/Policy/Policy";
@@ -233,6 +234,14 @@ export const Router = () => {
             ),
         },
         {
+            path: "/thank-you",
+            element: (
+                <Suspense fallback={<Loader />}>
+                    <ThankYou />
+                </Suspense>
+            ),
+        },
+        {
             path: "/test",
             element: (
                 <Suspense fallback={<Loader />}>
@@ -244,7 +253,7 @@ export const Router = () => {
             path: "/sku",
             element: (
                 <Suspense fallback={<Loader />}>
-                <SkuTables />
+                    <SkuTables />
                 </Suspense>
             ),
         },

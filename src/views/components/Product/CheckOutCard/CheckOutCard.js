@@ -22,6 +22,7 @@ export const CheckOutCard = ({ product }) => {
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const orderDetails = useSelector((state) => state.cart.details);
 
     const cartClickHandler = () => {
         let productPrice = product.price * quantity;
@@ -72,7 +73,7 @@ export const CheckOutCard = ({ product }) => {
     return (
         <div>
             <div className="card-section-right">
-                <div className="row">
+                <div className="row card-price-section-card-product">
                     <div className="col-md-12 color-text-cart">
                         <span className="$-color">$</span>
                         {product?.price?.toString().split(".")[0]}
@@ -92,23 +93,27 @@ export const CheckOutCard = ({ product }) => {
                 </div>
                 <div className="card-dev-section-paragrap-product">
                     <span className="dilvery-text-paragraph-card">
-                        <Link className="text-decoration-none">
+                        <button className="text-decoration-none">
                             Free delivery
-                        </Link>{" "}
+                        </button>{" "}
                         <span style={{ fontWeight: "bold" }}>
-                            Friday, May 19
-                        </span>{" "}
+                            {orderDetails?.free_shipment_amount?.estimate_day}
+                        </span>
+                        <br></br>
                         shipped by SJ Computers
                     </span>
                 </div>
                 <div className="card-dev-section-paragrap-product">
                     <span className="dilvery-text-paragraph-card">
                         or{" "}
-                        <Link className="text-decoration-none">
+                        <button className="text-decoration-none">
                             Fastest delivery
-                        </Link>{" "}
+                        </button>{" "}
                         <span style={{ fontWeight: "bold" }}>
-                            Moday, May 15
+                            {
+                                orderDetails["1_day_shipment_amount"]
+                                    ?.estimate_day
+                            }
                         </span>{" "}
                         (Tentative)
                     </span>
@@ -139,12 +144,19 @@ export const CheckOutCard = ({ product }) => {
                                 <div className="instock-dev-card-product-section-with-color-card">
                                     <div>
                                         <span className="color-card">
-                                            In Stock
+                                            {product?.quantity > 0 && (
+                                                <span>In Stock</span>
+                                            )}
                                         </span>
                                     </div>
                                     <div>
                                         <span className="color-text-cart-with-inStock">
-                                            Only 10 pieces left
+                                            {product?.quantity < 11 && (
+                                                <span>
+                                                    Only {product?.quantity}{" "}
+                                                    pieces left
+                                                </span>
+                                            )}
                                         </span>
                                     </div>
                                 </div>
@@ -177,12 +189,12 @@ export const CheckOutCard = ({ product }) => {
                     )}
 
                     <div className="row ship-card-details-card-payment-method-checkout-card">
-                        <div className="col-5">
+                        <div className="col-xl-7 col-6">
                             <span className="color-card-text-paragrap-payment">
                                 Payment
                             </span>
                         </div>
-                        <div className="col-7">
+                        <div className="col-xl-5 col-6">
                             <div className="hover-box">
                                 <Link
                                     href="#"
@@ -217,25 +229,25 @@ export const CheckOutCard = ({ product }) => {
                         </div>
                     </div>
                     <div className="row ship-card-details-card-payment-method-checkout-card">
-                        <div className="col-5">
+                        <div className="col-xl-7 col-6">
                             <span className="color-card-text-paragrap-payment">
                                 Ships Form
                             </span>
                         </div>
-                        <div className="col-7">
+                        <div className="col-xl-5 col-6">
                             <span className="color-card-text-paragrap-payment">
                                 Sj Computers
                             </span>
                         </div>
                     </div>
                     <div className="row ">
-                        <div className="col-5">
+                        <div className="col-xl-7 col-6">
                             <span className="color-card-text-paragrap-payment">
                                 Return
                             </span>
                         </div>
 
-                        <div class="col-7">
+                        <div class="col-xl-5 col-6">
                             <div class="hover-box">
                                 <Link className="text-decoration-none secure-payment-method ">
                                     Eligible for returns<br></br>

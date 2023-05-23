@@ -6,7 +6,7 @@ import { forgetPassword } from "@store/auth/authThunks";
 
 import Form from "@components/Auth/EmailForm";
 
-import "@pages/Auth/auth.css";
+// import "@pages/Auth/auth.css";
 
 const EmailForm = ({ form }) => {
     const dispatch = useDispatch();
