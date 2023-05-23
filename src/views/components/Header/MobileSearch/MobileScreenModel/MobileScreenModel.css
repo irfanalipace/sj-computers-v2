@@ -121,7 +121,7 @@
 
 .Apply-button-dilvery-box-auth {
     color: white;
-    width: 99%;
+    width: 97%;
     height: 47px;
     background: #002549;
     /* border: none; */
@@ -153,4 +153,7 @@
     color: #333333;
 
     margin-left: 6px;
+}
+.a.done-dilvery-button.text-decoration-none {
+    padding-top: 10px;
 }
