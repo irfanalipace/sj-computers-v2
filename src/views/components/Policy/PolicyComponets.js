@@ -114,7 +114,7 @@ const PolicyComponets = () => {
                     </div>
                    
                         </div>
-                    <div className="col-lg-8 col-md-10 col-sm-12 text-color-all-text text-dev-section-dev" >
+                    <div className="col-lg-8 col-md-10 col-sm-12 text-color-all-text text-dev-section-dev " style={{marginBottom:'44px'}}>
                         <div>
                         <p  className="data-ul-list-itel-paragraph" style={{color:'white'}}>{pTagValue}</p>
                             {/* <ul className="policy-item-data">
