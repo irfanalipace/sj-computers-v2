@@ -45,10 +45,11 @@ const MobileScreenModel = () => {
             </header>
             {isAuthenticated ? (
                         <div>
-                            {showModal && <ModelBox closeModal={closeModal} />}
+                             <div>{showModal && <ModelUserAuth closeModal={closeModal}/>}</div>
+                          
                         </div>
                     ) : (
-                        <div>{showModal && <ModelUserAuth closeModal={closeModal}/>}</div>
+                       <div>  {showModal && <ModelBox closeModal={closeModal} />}</div>
                     )}
         </div>
     );

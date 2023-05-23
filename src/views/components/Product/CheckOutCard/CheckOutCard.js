@@ -64,7 +64,7 @@ export const CheckOutCard = ({ product }) => {
     return (
         <div>
             <div className="card-section-right">
-                <div className="row">
+                <div className="row card-price-section-card-product">
                     <div className="col-md-12 color-text-cart">
                         <span className="$-color">$</span>
                         {product?.price?.toString().split(".")[0]}
