@@ -9,10 +9,10 @@ import {
     addToLocalCart,
     syncCartItems,
     setCartDetails,
-    getCartDetails,
     clearCart,
 } from "@store/cart/cartThunks";
-import { getCartItems } from "@utils/cartHelpers";
+import { getEstimatedDelivery } from "@store/orders/ordersThunk";
+import { getCartItems, getCartDetails } from "@utils/cartHelpers";
 
 export const useInitDataFetching = () => {
     const dispatch = useDispatch();
@@ -25,14 +25,14 @@ export const useInitDataFetching = () => {
             dispatch(clearCart()); //clear store cart items because all cart items are again fetched from backend to sync with localCart
             dispatch(getShippingDetails());
             dispatch(syncCartItems()); //gets all the cart items stored in database and stores them in store and local storage similarly stores local cart items in database
-            dispatch(currentState());
+            // dispatch(currentState());
         }
     }, [isAuthenticated]);
 
     useEffect(() => {
         dispatch(fetchCategory());
         dispatch(fetchBrands());
-        dispatch(getCartDetails());
+        dispatch(getEstimatedDelivery());
 
         if (!isAuthenticated) {
             cartItems.forEach((cartItem) => {

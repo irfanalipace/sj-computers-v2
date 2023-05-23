@@ -22,7 +22,11 @@ export const CheckOutCard = ({ product }) => {
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const orderDetails = useSelector((state) => state.cart.details);
+    const orderEstimatedDelivery = useSelector(
+        (state) => state.orders.orderEstimatedDelivery
+    );
+
+    console.log("estimated delivery order: ", orderEstimatedDelivery);
 
     const cartClickHandler = () => {
         let productPrice = product.price * quantity;
@@ -57,19 +61,6 @@ export const CheckOutCard = ({ product }) => {
         setCartItem(item);
     }, [cart]);
 
-    const [isHovered, setIsHovered] = useState(false);
-
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
-
-    const handleCloseClick = () => {
-        setIsHovered(false);
-    };
     return (
         <div>
             <div className="card-section-right">
@@ -97,10 +88,13 @@ export const CheckOutCard = ({ product }) => {
                             Free delivery
                         </button>{" "}
                         <span style={{ fontWeight: "bold" }}>
-                            {orderDetails?.free_shipment_amount?.estimate_day}
+                            {
+                                orderEstimatedDelivery?.free_shipment_amount
+                                    ?.estimate_day
+                            }
                         </span>
                         <br></br>
-                        shipped by SJ Computers
+                        Shipped by SJ Computers
                     </span>
                 </div>
                 <div className="card-dev-section-paragrap-product">
@@ -111,7 +105,7 @@ export const CheckOutCard = ({ product }) => {
                         </button>{" "}
                         <span style={{ fontWeight: "bold" }}>
                             {
-                                orderDetails["1_day_shipment_amount"]
+                                orderEstimatedDelivery["1_day_shipment_amount"]
                                     ?.estimate_day
                             }
                         </span>{" "}
@@ -273,11 +267,31 @@ export const CheckOutCard = ({ product }) => {
                                             receipt. Read full return policy
                                         </p>
                                     </div>
+                                    <Link
+                                        to={"/return_refund_policy"}
+                                        style={{
+                                            marginTop: "12px",
+                                            fontSize: "11px",
+                                        }}
+                                    >
+                                        Read full return policy
+                                    </Link>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <hr></hr>
+                <Link
+                    to={"/term_services"}
+                    style={{
+                        marginTop: "12px",
+                        fontSize: "11px",
+                        textDecoration: "none",
+                    }}
+                >
+                    Details
+                </Link>
             </div>
         </div>
     );

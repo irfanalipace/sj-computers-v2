@@ -6,7 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchStates } from "@store/states/statesThunks";
 import img1 from "@images/bottom-arrow.png";
 import { updateState } from "@store/states/statesThunks";
+import { UPDATE_STATE } from "@store/states/statesSlice";
 import Loader from "@common/Spinner/Spinner";
+import { saveUserState } from "@services/jwtService";
+
 
 import "./LocationModel.css";
 function UpdateStateModel({ isOpen = false, handleClose }) {
@@ -14,8 +17,36 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
     const isLoading = useSelector((state) => state.states.isLoading);
     const [state, setState] = useState("Set Delivery Address");
     const [zipCode, setZipCode] = useState("");
+    const [showModal, setShowModal] = useState(isOpen);
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+    // useEffect(() => {
+    //     setShowModal(true);
+        
+    //     return;
+    //     let timer;
+        
+    //     const handleModal = () => {
+    //       timer = setTimeout(() => {
+    //       }, 5000);
+    //     };
+    
+    //     // Check if it's the first visit
+    //     const isFirstVisit = localStorage.getItem('firstVisit') === null;
+    
+    //     if (isFirstVisit) {
+    //       // Show the modal after 5 seconds
+    //       handleModal();
+    
+    //       // Set a flag to indicate the first visit
+    //       localStorage.setItem('firstVisit', 'true');
+    //     }
+    
+    //     // Clear the timer when the component unmounts or when the user closes the modal
+    //     return () => clearTimeout(timer);
+    //   }, []);
+    //   console.log(showModal, 'modal')
 
     useEffect(() => {
         dispatch(fetchStates());
@@ -26,7 +57,16 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
     };
 
     const clickHandler = async () => {
-        dispatch(updateState(state, handleClose));
+        // local state me store 
+        // console.log(state, "state data");
+        if(isAuthenticated){
+            dispatch(updateState(state, handleClose));
+        }
+        else {
+            dispatch(UPDATE_STATE(state))
+            // saveUserState(state);
+            handleClose();
+        }
     };
 
     const findZipCode = () => {
@@ -41,7 +81,7 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
 
     return (
         <Modal
-            show={isOpen}
+            show={showModal}
             onHide={handleClose}
             centered
             className="location-model"
@@ -109,13 +149,66 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                         </Dropdown>
                     </>
                 ) : (
-                    <div className="d-grid justify-content-center">
+                    <>
+                        <div className="row my-3">
+                            <div className="col-md-8">
+                                <input
+                                    type="text"
+                                    onChange={handleZipCodeChange}
+                                    value={zipCode}
+                                    placeholder=" Enter zip code"
+                                    className="button-input-fields-button"
+                                />
+                            </div>
+                            <div className="col-md-4">
+                                <button
+                                    onClick={findZipCode}
+                                    type="button"
+                                    className="button-box-locationmodel-button"
+                                >
+                                    Apply
+                                </button>
+                            </div>
+                        </div>
+
+                      
+                        <Dropdown>
+                            <Dropdown.Toggle
+                                id="dropdown-basic"
+                                className="dropdown-button-box d-flex justify-content-between align-items-center"
+                            >
+                                {state?.name || "Select State"}
+                                <img src={img1} className="img-arrow" />
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu className="">
+                                {states.map((state) => (
+                                    <Dropdown.Item
+                                        className="drop menus-set my-location-dropdown-model-box-buttons"
+                                        onClick={() => setState(state)}
+                                        key={state.id}
+                                    >
+                                        <h6>{state.name}</h6>
+                                    </Dropdown.Item>
+                                ))}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        <Button onClick={clickHandler} className="done-button my-3 px-0 mx-0">
+                        {isLoading ? <Loader /> : "Done"}
+                       </Button>
+                        <div className="hrozantel-hr-location-model">
+                            <h5 className="h5-model-box-loction">or</h5>
+                        </div>
                         <Link to={"/login"}>
                             <button className="location-button">
                                 Sign in to see your address
                             </button>
                         </Link>
-                    </div>
+                    </>
+                       
+                      
+                        
+                    // </div>
                 )}
             </Modal.Body>
             {isAuthenticated && (

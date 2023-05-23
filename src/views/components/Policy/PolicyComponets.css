@@ -271,8 +271,7 @@ max-width: 100%;
       
       .hover-effect-sets-topbar:hover {
         /* Add desired hover effect styles */
-      }.policy-listitem a{
-        font-size: 11px;
+        color: #FFFFFF;
       }
       
 }

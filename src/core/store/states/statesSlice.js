@@ -27,7 +27,7 @@ const productSlice = createSlice({
         },
         UPDATE_STATE: (state, action) => {
             state.currentState = { ...action.payload };
-            saveUserState(JSON.stringify(action.payload));
+            saveUserState((action.payload));
             state.isLoading = false;
         },
         CLEAR_STATES: (state) => {

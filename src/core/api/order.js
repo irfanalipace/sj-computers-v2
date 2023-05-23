@@ -3,10 +3,10 @@ import ApiService from "@services/apiService";
 export function getOrderDetailsApi() {
     return new Promise((resolve, reject) => {
         const myParams = {
-            month: "1",
-            per_page: "1",
-            page: "1"
-          };
+            month: "0",
+            per_page: "100",
+            page: "1",
+        };
 
         ApiService.get(`/order-list`, "", myParams)
             .then((response) => {
@@ -23,12 +23,10 @@ export function getOrderDetailsApi() {
     });
 }
 export function OrderSearchApi(invoiceId) {
-
     return new Promise((resolve, reject) => {
-
         const myParams = {
-           invoice_id : invoiceId
-          };
+            invoice_id: invoiceId,
+        };
 
         ApiService.get(`/search-order`, "", myParams)
             .then((response) => {
@@ -44,20 +42,36 @@ export function OrderSearchApi(invoiceId) {
             });
     });
 }
+
 export function OrderListhApi() {
-
     return new Promise((resolve, reject) => {
-
         const myParams = {
-            month: "1",
-            per_page: "1",
-            page: "1"
-          };
+            month: "0",
+            per_page: "100",
+            page: "1",
+        };
 
         ApiService.get(`/order-list`, "", myParams)
             .then((response) => {
                 console.log(
                     "file: order.js | order-list| response",
+                    response.data
+                );
+                resolve(response.data);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error order list", e);
+                reject(e);
+            });
+    });
+}
+
+export function getEstimatedDaysApi() {
+    return new Promise((resolve, reject) => {
+        ApiService.get("/estimated-days")
+            .then((response) => {
+                console.log(
+                    "file: order.js | getEstimatedDays| response",
                     response.data
                 );
                 resolve(response.data);

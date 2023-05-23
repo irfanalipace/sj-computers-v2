@@ -253,7 +253,7 @@ const OrderPage = () => {
                 </div>
 
                 <div className="row mx-0 order-list-container">
-                    <div className="col-sm-6 col-md-9 col-9 px-0">
+                    <div className="col-sm-6 col-md-12 col-12 px-0">
                         <Box sx={{ flexGrow: 1 }}>
                             <CustomTabs
                                 value={activeTab}
@@ -325,7 +325,7 @@ const OrderPage = () => {
                             {renderTabContent()}
                         </Box>
                     </div>
-                    <div
+                    {/* <div
                         style={{ marginTop: "15%", marginBottom: "5%" }}
                         className="col-sm-12 col-md-3 col-3"
                     >
@@ -333,7 +333,7 @@ const OrderPage = () => {
                             activeTab={activeTab}
                             data={ordergDetails}
                         />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

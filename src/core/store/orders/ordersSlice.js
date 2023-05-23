@@ -5,6 +5,7 @@ const initialState = {
     ordergDetails: {},
     successOrders: [],
     cancelOrders: [],
+    orderEstimatedDelivery: {},
     settingAdress: false,
     apiError: false,
     isLoading: false,
@@ -31,13 +32,19 @@ const ordersSlice = createSlice({
         },
         SET_ORDER_DETAILS: (state, action) => {
             const { success_orders, cancel_orders } = action.payload;
-            console.log(success_orders.data, cancel_orders, "just before update state")
+            console.log(
+                success_orders.data,
+                cancel_orders,
+                "just before update state"
+            );
             state.ordergDetails = action.payload;
             state.successOrders = success_orders.data;
             state.cancelOrders = cancel_orders.data;
             state.isLoading = false;
         },
-        
+        SET_ORDER_ESTIMATE: (state, action) => {
+            state.orderEstimatedDelivery = { ...action.payload };
+        },
         PLACING_ORDER: (state) => {
             state.placingOrder = true;
         },
@@ -58,6 +65,7 @@ export const {
     CLEAR_LOADING,
     SET_SHIPPING_DETAILS,
     SET_ORDER_DETAILS,
+    SET_ORDER_ESTIMATE,
     ORDER_PLACED,
     PLACING_ORDER,
     API_ERROR,
