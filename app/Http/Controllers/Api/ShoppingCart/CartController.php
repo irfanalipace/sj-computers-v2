@@ -155,7 +155,7 @@ class CartController extends BaseController
         }
     }
 
-    public function estimatedDays(){
+    public function estimatedDays(Request $request){
 
         $data = [
             'free_shipment_amount' => [
