@@ -32,7 +32,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
     let renderedCategories = categories
         .slice(0, visibleCategories)
         .map((category) => (
-            <li key={category.id}>
+            <li key={category.id} onClick={() => toggleSidebar()}>
                 <Link to={`/category/${category.slug}`}>{category.name}</Link>
                 <FontAwesomeIcon icon={faAngleRight} />
             </li>
@@ -86,7 +86,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                     <Loader />
                                 </div>
                             ) : (
-                                <ul className="menu-list">
+                                <ul className="menu-list" >
                                     {renderedCategories}
                                     {visibleCategories < categories.length && (
                                         <li>
@@ -107,7 +107,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                             <ul className="menu-list">
                                 {isAuthenticated && (
                                     <li>
-                                        <Link to={`/account`} >
+                                        <Link to={`/account`} onClick={() => toggleSidebar()}>
                                             Your Account
                                         </Link>
                                     </li>
@@ -117,17 +117,17 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                         className="me-1"
                                         icon={faGlobe}
                                     />
-                                    <Link>English</Link>
+                                    <Link onClick={() => toggleSidebar()}>English</Link>
                                 </li>
                                 <li className="d-block">
                                     <US
                                         title="United States"
                                         className="country-flag"
                                     />
-                                    <Link className="ms-1">United States</Link>
+                                    <Link className="ms-1" onClick={() => toggleSidebar()}>United States</Link>
                                 </li>
                                 <li>
-                                    <Link>Customer Services</Link>
+                                    <Link onClick={() => toggleSidebar()}>Customer Services</Link>
                                 </li>
                                 <li>
                                     {isAuthenticated ? (

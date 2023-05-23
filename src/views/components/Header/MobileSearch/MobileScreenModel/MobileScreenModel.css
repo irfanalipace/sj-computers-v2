@@ -29,8 +29,7 @@
     width: 100%;
     max-width: 600px;
     padding: 20px;
-
-    bottom: 22px;
+    bottom: 30px;
 }
 .close-button-done {
     color: white;
@@ -66,21 +65,23 @@
     align-items: center;
     color: #333333;
 }
+
 .done-dilvery-button {
     border: none;
     width: 359px;
     height: 36px;
-
     background: #28a343;
     border-radius: 5px;
     font-weight: 500;
     font-size: 12px;
     line-height: 15px;
-
     color: #ffffff;
     max-width: 100%;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .zip-code-text-mobile-screen {
     color: black;
 }
@@ -121,7 +122,7 @@
 
 .Apply-button-dilvery-box-auth {
     color: white;
-    width: 99%;
+    width: 97%;
     height: 47px;
     background: #002549;
     /* border: none; */
@@ -135,7 +136,7 @@
 .zip-parant {
     margin-top: -12px;
     text-align: left;
-    margin-left: 39px;
+    margin-left: 15px;
 }
 .zip-code-text-fields {
     padding-left: 10px;
@@ -143,7 +144,6 @@
     width: 97%;
     height: 43px;
     margin-bottom: 12px;
-  
 }
 .box-text-hr-text {
     width: 443px;
@@ -153,4 +153,7 @@
     color: #333333;
 
     margin-left: 6px;
+}
+.a.done-dilvery-button.text-decoration-none {
+    padding-top: 10px;
 }

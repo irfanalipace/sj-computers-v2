@@ -8,13 +8,26 @@ import { Card,
 import './OrderProducts.css'
 
 function OrderTable({ deliveryDate , orderDetails, onToggleExpanded }) {
-    console.log(orderDetails, 'order details 222');
+    const [expandedOrders, setExpandedOrders] = useState([]);
+    // console.log(orderDetails, 'order details 222');
     function formatDate(dateString) {
         const options = { year: "numeric", month: "long", day: "numeric" };
         const date = new Date(dateString);
         return date.toLocaleDateString(undefined, options);
       }
-
+      const toggleExpandedcopy = (orderId) => {
+        console.log(orderId,"order id")
+        // return;
+        if (expandedOrders.includes(orderId)) {
+            setExpandedOrders((prevState) =>
+              prevState.filter((id) => id !== orderId)
+            );
+          } else {
+            setExpandedOrders((prevState) => [...prevState, orderId]);
+          }
+       
+      };
+      
 
     return (
       <table className="order-table">
@@ -22,38 +35,109 @@ function OrderTable({ deliveryDate , orderDetails, onToggleExpanded }) {
           <tr>
           {/* <th>Image</th> */}
             <th>Order ID</th>
+            <th>Invoice ID</th>
             <th>Order Date</th>
             <th>Order Delivery Date</th>
+            <th>Shipment Price</th>
             <th>Total Items</th>
+            <th>Sub Total</th>
             <th>Total Price</th>
             <th>Action</th>
            
           </tr>
         </thead>
+      
         <tbody>
-          {orderDetails?.map((order, index) => (
-            <tr key={order?.id}>
-                 {/* <td>
-                {order?.product?.image.length > 0 && (
-                  <img
-                    src={order?.product?.image[0]}
-                    alt={order.product_name}
-                    className="product-image"
-                  />
-                )}
-              </td> */}
-              <td>{order?.order_item[0].order_id}</td>
+        <>
+        {orderDetails?.map((order, index) => (
+            <>
+             <tr key={order?.id}>
+               
+               <td>{order?.id}</td>
+               <td>{order?.invoice_id}</td>
+ 
+               <td>{formatDate(order?.created_at)}</td>
+               <td>{order?.shipment_days}</td>
+               <td>${order?.shipment_price}</td>
+               <td>{order?.item_qty}</td>
+               <td>${order?.sub_total}</td>
+               <td>${order?.total_amount}</td>
+               <td>
+                 <button className="view-button" onClick={() => toggleExpandedcopy(order?.id)}>View</button>
+               </td>
+               
+             </tr>
+ 
+                 {expandedOrders.includes(order?.id)  && (
+                     <>
+                      <tr key={order?.id}>
+                     <td colSpan="9">
+                         <div className="expanded-content">
+                         {/* Render your order items here */}
+                         <ul>
+                             {order?.order_item?.map((item) => (
+                            //  <li key={item.id}>{item?.product_name}</li>
 
-              <td>{formatDate(order?.created_at)}</td>
-              <td>{order?.shipment_days}</td>
-              <td>{order?.item_qty}</td>
-              <td>${order?.total_amount}</td>
-              <td>
-                <button className="view-button" onClick={() => onToggleExpanded(order?.order_item)}>View</button>
-              </td>
-              
-            </tr>
+
+                             <div key={item.id}style={{display: 'flex', displayDirection: 'row', width: '100%'}}>
+                                                <div style={{display: 'inherit',flexGrow: 1}}>
+                                                <img
+                                                // src={'https://m.media-amazon.com/images/I/51c4fed1l1L.jpg'}
+                                                src={item?.product?.image[0]}
+                                                className="product-image"
+                                                style={{
+                                                    // width: '%',
+                                                    height: 'auto',
+                                                    marginLeft: '5%',
+                                                }}
+                                            />
+                                                <Text className="product-description">{item?.product_name}</Text>
+                                                <Text   style={{
+                                                    width: '20%',
+                                                   
+                                                    margin: '4%',
+                                                }} className=""><span><b style={{
+                                                   
+                                                    fontWeight: 900,
+                                                     
+                                                 }}>Product ID</b></span><br/>{item?.product_id}</Text>
+                                                <Text   style={{
+                                                    width: '20%',
+                                                   
+                                                    margin: '4%',
+                                                }} className=""><span><b style={{
+                                                   
+                                                    fontWeight: 900,
+                                                     
+                                                 }}>Product Price</b></span><br/>${item?.price}</Text>
+                                                {/* <Text  style={{
+                                                    width: '20%',
+                                                   fontWeight: 900,
+                                                    margin: '4%',
+                                                }} className=""><span><b style={{
+                                                   
+                                                   fontWeight: 900,
+                                                    
+                                                }}>Product Price</b></span><br/>${item?.price}</Text> */}
+                                            
+                                                </div>
+                                     
+                                           </div>
+                             ))}
+                         </ul>
+                         </div>
+                     </td>
+                     </tr>
+                     </>
+                    
+                 )}</>
+
+           
+            
+            
           ))}
+        </>
+         
         </tbody>
       </table>
     );
@@ -71,11 +155,16 @@ function OrderProducts({ data }) {
   }
 
 
-  const toggleExpanded = (orderitems) => {
-    setView(!view);
-      console.log(orderitems, 'dd')
-      setExpandedOrders(orderitems);
-    //   return;
+  const toggleExpanded = (orderId) => {
+    console.log(orderId,"order id")
+    // return;
+    if (expandedOrders.includes(orderId)) {
+        setExpandedOrders((prevState) =>
+          prevState.filter((id) => id !== orderId)
+        );
+      } else {
+        setExpandedOrders((prevState) => [...prevState, orderId]);
+      }
    
   };
   
@@ -157,11 +246,13 @@ function OrderProducts({ data }) {
                                 {data && (
                         <OrderTable  orderDetails={data} onToggleExpanded={toggleExpanded} />
                         )} 
+                        
+                        
 
-                        {
-                            view && expandedOrders.length >  0 &&  (
+                        {/* {
+                            expandedOrders.includes(order?.id) &&   (
                                 <>
-                                {expandedOrders.map((product, index)=> {
+                                {expandedOrders?.map((product, index)=> {
                                     return (
                                         <div key={product?.product_id}style={{display: 'flex', displayDirection: 'row', width: '100%'}}>
                                                 <div style={{display: 'inherit',flexGrow: 1}}>
@@ -205,7 +296,7 @@ function OrderProducts({ data }) {
                                 
                                 </>
                             )
-                        }
+                        } */}
 
 
                        

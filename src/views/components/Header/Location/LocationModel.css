@@ -61,7 +61,7 @@
 .button-box-locationmodel-button {
     box-sizing: border-box;
     width: 106px;
-    height: 33px;
+    height: 36px;
     /* left: 770px; */
     /* top: 415px; */
     background: #edfff1;
@@ -171,6 +171,7 @@
 }
 
 .done-button {
+    width: 100%;
     min-width: 100px !important;
     height: 40px !important;
     background: #52ac66 !important;

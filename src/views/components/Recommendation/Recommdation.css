@@ -15,7 +15,10 @@
 
 .recommendation-container .slider-wrapper {
     width: 94%;
-    margin: 0 auto 50px;
+    margin: 10px auto 50px;
+}
+.slider-wrapper .swiper-button-next:after, .swiper-button-prev:after{
+    font-size: 25px !important;
 }
 
 .recommendation-container h3 {

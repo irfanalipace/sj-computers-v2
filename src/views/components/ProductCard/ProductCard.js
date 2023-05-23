@@ -29,12 +29,12 @@ const Product = ({ product, inGrid }) => {
                     <div className="product-badge">
                         <div className="badge-text">Best Seller</div>
                     </div>
-                    <div className="product-deal my-1">
+                    {/* <div className="product-deal my-1">
                         <div className="product-off-percentage">
                             {product.offPercentage}% off
                         </div>
                         <span>Deals</span>
-                    </div>
+                    </div> */}
                 </>
             )}
             <div className="product-prices">

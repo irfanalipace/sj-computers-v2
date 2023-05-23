@@ -6,6 +6,7 @@
     margin-top: 50px;
     max-width: 100%;
     margin-bottom: 12px;
+    position: relative;
 }
 .cart-text {
     font-weight: 400;
@@ -135,4 +136,104 @@
 
 .item-card-add-text-details {
     font-size: 12px;
+}
+.dilvery-text-paragraph-card{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 13px;
+line-height: 18px;
+
+
+}
+
+.card-dev-section-paragrap-product{
+    margin-bottom: 12px;
+}
+.instock-dev-card-product-section-with-color-card{
+    display: flex;
+    justify-content: space-between;
+}
+.color-text-cart-with-inStock{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 11px;
+line-height: 13px;
+
+color: #FF0000;
+}
+.secure-payment-method{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+}
+.color-card-text-paragrap-payment{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+}
+.ship-card-details-card-payment-method-checkout-card{
+    padding-bottom: 8px;
+}
+
+
+.info-content-box-the-card{
+    position: absolute;
+    margin-top: -79px;
+    background-color: white;
+    width: 300px;
+    height: 60px;
+}
+
+.hover-box {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .secure-payment-method:hover + .hidden-box,
+  .hidden-box:hover {
+    display: block; /* show the hidden box on hover */
+  }
+  
+  .hidden-box {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: -40px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    z-index: 4;
+}
+  
+
+ .hidden-box {
+    /* max-width: 100%; */
+    width: 248px !important;
+   
+   
+    background: white;
+    /* margin-right: 23px; */
+}
+
+@media screen and (max-width:600px) {
+    .card-price-section-card-product{
+        display: none;
+    }.hidden-box:hover {
+        /* margin-right: 30px; */
+        position: absolute;
+        top: -4px;
+        left: -104%;
+        width: 100%;
+        /* height: 100%; */
+        /* background-color: #f2f2f2; */
+        padding: 10px;
+        transition: left 0.3s ease-in-out;
+    }
 }

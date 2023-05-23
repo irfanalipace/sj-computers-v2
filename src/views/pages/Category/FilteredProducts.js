@@ -30,8 +30,8 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     const init = () => {
         dispatch(SET_SEARCH_STRING(""));
         dispatch(CLEAR_ALL_PRODUCTS());
-        dispatch(filterProducts(filterObject));
-        setMounted(true);
+        // dispatch(filterProducts(filterObject));
+        // setMounted(true);
     };
 
     useEffect(() => {
@@ -61,39 +61,60 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                 category_id: category?.id,
                 filter: filtersArray,
             };
-            dispatch(filterProducts(filterObject));
+            if (filtersArray.length > 0 || searchString || category?.id) {
+                dispatch(filterProducts(filterObject));
+            }
         }
-    }, [searchString, filtersArray, category]);
+    }, [searchString, filtersArray]);
 
     useEffect(() => {
-        console.log("fddsafsa");
-    }, []);
+        filterObject = {
+            ...filterObject,
+            page: 1,
+            name: searchString,
+            category_id: category?.id,
+            filter: filtersArray,
+        };
+        if (category?.id) {
+            dispatch(filterProducts(filterObject));
+        }
+    }, [category]);
 
     return (
         <div className="filter-results">
-            {category?.name && (
-                <div className="d-flex justify-content-space-between align-items-center heading">
-                    <h3>
-                        Best{" "}
-                        <span className="text-capitalize">
-                            {category?.name}
-                        </span>
-                    </h3>
-                    <button
-                        className="d-sm-none d-block bg-transparent border-0"
-                        onClick={toggleFilter}
-                    >
-                        <FontAwesomeIcon icon={faFilter} />
-                    </button>
-                </div>
-            )}
+            {products.length > 0 ? (
+                <>
+                    {category?.name && (
+                        <div className="d-flex justify-content-space-between align-items-center heading">
+                            <h3>
+                                Best{" "}
+                                <span className="text-capitalize">
+                                    {category?.name}
+                                </span>
+                            </h3>
+                            <button
+                                className="d-sm-none d-block bg-transparent border-0"
+                                onClick={toggleFilter}
+                            >
+                                <FontAwesomeIcon icon={faFilter} />
+                            </button>
+                        </div>
+                    )}
 
-            <ProductsGrid
-                products={products}
-                handleClick={handleClick}
-                isLoading={isLoading}
-                apiError={apiError}
-            />
+                    <ProductsGrid
+                        products={products}
+                        handleClick={handleClick}
+                        isLoading={isLoading}
+                        apiError={apiError}
+                    />
+                </>
+            ) : (
+                <>
+                    {!isLoading && (
+                        <h3 className="heading">No products found</h3>
+                    )}
+                </>
+            )}
         </div>
     );
 });

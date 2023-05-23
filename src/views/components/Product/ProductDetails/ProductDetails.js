@@ -129,7 +129,8 @@ const ProductDetails = ({ product }) => {
                 </div>
             </div>
 
-            <hr className="hr-card-details"></hr>
+        <div className="divsection">
+        <hr className="hr-card-details"></hr>
             <div className="cart-details-text">
                 <div className="row">
                     <div className="col-md-12 color-text">
@@ -139,6 +140,7 @@ const ProductDetails = ({ product }) => {
                     </div>
                 </div>
             </div>
+        </div>
             <div className="content">
                 <div className="row">
                     <div className="col-md-12 shipping-button">
