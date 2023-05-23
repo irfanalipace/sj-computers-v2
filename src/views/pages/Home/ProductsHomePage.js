@@ -5,6 +5,7 @@ import { fetchProducts, searchProducts } from "@store/products/productsThunks";
 import { CLEAR_PRODUCTS } from "@store/products/productsSlice";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
 
+
 const ProductsHomePage = () => {
     const products = useSelector((state) => state.products.products) || [];
     const isLoading = useSelector((state) => state.products.isLoading);

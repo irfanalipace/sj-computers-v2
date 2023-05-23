@@ -18,4 +18,5 @@
 .banner-slider-section .swiper-button-prev,
 .banner-slider-section .swiper-button-next {
     top: 20%;
+    font-size: 10px;
 }

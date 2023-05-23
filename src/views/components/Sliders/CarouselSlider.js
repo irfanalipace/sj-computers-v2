@@ -6,7 +6,11 @@ import React from "react";
 import Carousel from "react-bootstrap/Carousel";
 import "./CarouselSlider.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const CarouselSlider = () => {
+    const productss = useSelector((state) => state.products.products) || [];
+    console.log('product@@@' ,productss)
+
     return (
         <Carousel>
             <Carousel.Item>
