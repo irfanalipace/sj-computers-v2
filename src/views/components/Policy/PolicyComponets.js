@@ -19,6 +19,7 @@ const HeadereLinks = [
 
 const PolicyComponets = () => {
     const [pageContent, setPageContent] = useState({});
+    const [pTagValue, setPTagValue] = useState("");
     // const [PageTitle, setpageTitle] = useState("");
     
     // const pageName = {
@@ -48,13 +49,25 @@ const PolicyComponets = () => {
       pageName = pageName;
     }
 
+    useEffect(() => {
+        const fetchPageContent = async () => {
+          try {
+            const responsePage = await getSystemPagesApi(pageName);
+            console.log(responsePage.data.value, "page Content 1");
+            setPageContent(responsePage);
+            console.log(pageContent, "page Content 2");
+            setPTagValue(responsePage?.data?.value)
+            console.log(pTagValue, "page Content 3");
+          } catch (error) {
+            console.error('Error fetching page content:', error);
+          }
+        };
+      
+        fetchPageContent();
+      }, [location.pathname]);
+      
    
 
-    useEffect( () => {
-        const responsePage = getSystemPagesApi(pageName);
-        setPageContent(responsePage);
-        console.log(pageContent, "page Content")
-    }, []);
 
     return (
        <div>
@@ -103,8 +116,8 @@ const PolicyComponets = () => {
                         </div>
                     <div className="col-lg-8 col-md-10 col-sm-12 text-color-all-text text-dev-section-dev" >
                         <div>
-                        <p  className="data-ul-list-itel-paragraph" style={{color:'white'}}>Items shipped from sjcomputers.us, including SJ Computers Warehouse, can be returned within 30 days of delivery, with some exceptions</p>
-                            <ul className="policy-item-data">
+                        <p  className="data-ul-list-itel-paragraph" style={{color:'white'}}>{pTagValue}</p>
+                            {/* <ul className="policy-item-data">
                               
                        
                             <li>
@@ -116,20 +129,20 @@ const PolicyComponets = () => {
                             <li>
                           For products purchased from the SJ Computers Global Store, see SJ Computers Returns. For more information on refund timing and amounts (including partial refunds and restocking fees), see Refunds. If you have returned an item to Amazon by mistake or included something not intended for Amazon in a return, see Mistaken Returns. 
                             </li>
-                            </ul>
+                            </ul> */}
                             <div className="margin-text-policy-text">
-                                <span className="conditional-granti">Unconditional Satisfaction Guarantee</span>
+                                {/* <span className="conditional-granti">Unconditional Satisfaction Guarantee</span> */}
                                 <div style={{paddingTop:'12px'}}>
-                                    <span className="conditional-granti-text">If you're not completely satisfied with these brands at any time, we are happy to give you a full refund: Buttoned Down Core 10 Moon and Back Obsidian</span>
+                                    {/* <span className="conditional-granti-text">If you're not completely satisfied with these brands at any time, we are happy to give you a full refund: Buttoned Down Core 10 Moon and Back Obsidian</span> */}
                            
                                 </div>
                                 <div>
-                                <ul className="policy-items-cart-sction2-dev">
-                                    <li className="line-height-dev-ul">Buttoned Down</li>
-                                    <li className="line-height-dev-ul">Core 10</li>
-                                    <li className="line-height-dev-ul">Moon and Back</li>
-                                    <li className="line-height-dev-ul">Obsidian</li>
-                                    </ul>
+                                    {/* <ul className="policy-items-cart-sction2-dev">
+                                        <li className="line-height-dev-ul">Buttoned Down</li>
+                                        <li className="line-height-dev-ul">Core 10</li>
+                                        <li className="line-height-dev-ul">Moon and Back</li>
+                                        <li className="line-height-dev-ul">Obsidian</li>
+                                        </ul> */}
                                     </div>
                             </div>
    
