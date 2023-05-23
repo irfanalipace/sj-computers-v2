@@ -396,7 +396,11 @@
     padding-top: 12px;
     text-align: center;
 }
-
+.hover-effect-sets-topbar-hello-user:hover{
+   
+        border-color: white;
+    
+}
 .sidebar-cart {
     position: fixed;
     top: 0;
