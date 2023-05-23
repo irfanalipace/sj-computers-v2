@@ -10,10 +10,10 @@ import Header from "@components/Header/Header";
 const HeadereLinks = [
     { path: "/", title: "About Us" },
     { path: "/", title: "What We Do?" },
-    { path: "/", title: "Return & Refund" },
-    { path: "/", title: "Shipping Policy" },
-    { path: "/", title: "Terms of Services" },
-    { path: "/", title: "Privacy Policy" },
+    { path: "/term_services", title: "Return & Refund" },
+    { path: "/term_services", title: "Shipping Policy" },
+    { path: "/term_services", title: "Terms of Services" },
+    { path: "/term_services", title: "Privacy Policy" },
     { path: "/", title: "Subscribe" },
   ];
 
@@ -83,7 +83,7 @@ const PolicyComponets = () => {
                                 <li className="policy-listitem" key={index}>
                                 <Link
                                     to={link.path}
-                                    className="text-decoration-none text-color hover-effect-sets-topbar"
+                                    className="text-decoration-none text-color hover-effect-sets-topbar hover-text-color-policy-comp"
                                 >
                                     {link.title}
                                 </Link>

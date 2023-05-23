@@ -2,6 +2,7 @@ import {
     LOADING,
     SETTING_ADDRESS,
     SET_SHIPPING_DETAILS,
+    SET_ORDER_ESTIMATE,
     SET_ORDER_DETAILS,
     PLACING_ORDER,
     ORDER_PLACED,
@@ -12,7 +13,8 @@ import {
     setShippingAddressApi,
     placeOrderApi,
 } from "@api/checkout";
-import { getOrderDetailsApi } from "@api/order";
+
+import { getOrderDetailsApi, getEstimatedDaysApi } from "@api/order";
 
 import { clearCartLocally } from "@utils/cartHelpers";
 
@@ -79,6 +81,18 @@ export const placeOrder = (data, cb) => {
 
             if (typeof cb === "function") cb(response.data);
             dispatch({ type: ORDER_PLACED, payload: {} });
+        } catch (error) {
+            console.log("Something went wrong in orders", error);
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
+        }
+    };
+};
+
+export const getEstimatedDelivery = () => {
+    return async (dispatch) => {
+        try {
+            let response = await getEstimatedDaysApi();
+            dispatch({ type: SET_ORDER_ESTIMATE, payload: response });
         } catch (error) {
             console.log("Something went wrong in orders", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

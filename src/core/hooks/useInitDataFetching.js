@@ -11,6 +11,7 @@ import {
     setCartDetails,
     clearCart,
 } from "@store/cart/cartThunks";
+import { getEstimatedDelivery } from "@store/orders/ordersThunk";
 import { getCartItems, getCartDetails } from "@utils/cartHelpers";
 
 export const useInitDataFetching = () => {
@@ -31,6 +32,7 @@ export const useInitDataFetching = () => {
     useEffect(() => {
         dispatch(fetchCategory());
         dispatch(fetchBrands());
+        dispatch(getEstimatedDelivery());
 
         if (!isAuthenticated) {
             cartItems.forEach((cartItem) => {

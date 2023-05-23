@@ -12,6 +12,11 @@
     opacity: 1 !important;
     transform: translateX(0) !important;
 }
+
+.password-visbility-button-auth{
+    border: 1px solid #ced4da;
+    background: white;
+}
 .auth-wrapper {
     display: flex;
     justify-content: center;

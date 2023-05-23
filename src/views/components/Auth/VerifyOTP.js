@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { verifyOtp } from "@store/auth/authThunks";
@@ -169,9 +169,9 @@ const VerifyOTP = () => {
                 </div>
             )}
             <p className="forgot-password text-left">
-                <a href="/sign-in" className="text-decoration-none">
+                <Link href="/sign-in" className="text-decoration-none">
                     I need more help
-                </a>
+                </Link>
             </p>
         </form>
     );

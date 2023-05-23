@@ -142,13 +142,19 @@ const PasswordForm = () => {
                         </div>
                         <p className="resetpassword-praragraph-text">
                             By continuing, you agree to SJ Computer’s{" "}
-                            <a href="#" className="text-decoration-none">
+                            <Link
+                                to="/term_services"
+                                className="text-decoration-none"
+                            >
                                 Conditions of Use
-                            </a>{" "}
+                            </Link>{" "}
                             and{" "}
-                            <a href="#" className="text-decoration-none">
+                            <Link
+                                to="/term_services"
+                                className="text-decoration-none"
+                            >
                                 Privacy Notice
-                            </a>
+                            </Link>
                             .
                         </p>
 
@@ -157,12 +163,12 @@ const PasswordForm = () => {
                                 icon={faCaretRight}
                                 className="icon-need-help-resetpassword"
                             />
-                            <a
-                                href="#"
+                            <Link
+                                to=""
                                 className="text-decoration-none need-help"
                             >
                                 Need Help?
-                            </a>
+                            </Link>
                         </div>
                     </form>
                     <div className="container new-data">

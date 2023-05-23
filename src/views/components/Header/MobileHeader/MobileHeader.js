@@ -62,7 +62,7 @@ function MobileHeader() {
                             </li>
 
                             <span
-                                className="navIcon  hover-effect-sets"
+                                className="navIcon  hover-effect-sets sidebar-icon-fields-bar"
                                 onClick={() => {
                                     toggleSidebar();
                                 }}

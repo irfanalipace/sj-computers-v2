@@ -1,12 +1,12 @@
-.image-category-mobile-silder {
+/* .image-category-mobile-silder {
     max-width: 100%;
     width: 238px;
 
-}
+} */
 .swiper .image-category-mobile-silder {
-    max-width: 100% ;
-    height: 165px;
+    max-width: 100%;
     width: 160px !important;
+    border-radius: 8px;
 }
 .link-text-category-mobile {
     color: black;
@@ -14,6 +14,7 @@
     /* padding-top: 71px; */
     font-size: 12px;
     background: white;
+    border-radius: 8px;
 }
 
 .category-dev-img-section-mobile {
@@ -21,6 +22,7 @@
     margin-top: 8px;
     margin-bottom: 12px;
     margin-left: 9px;
+    font-size: 11px;
 }
 .swiper-slider-mobile-category{
 display: flex ;
@@ -48,3 +50,8 @@ display: none !important;
     transform: translate3d(0,0,0);
     z-index: 0;
 }
+
+.my-swiper-mobile-category .swiper-pagination-bullet {
+    display: none;
+  }
+  

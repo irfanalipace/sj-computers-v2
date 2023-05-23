@@ -9,7 +9,7 @@ import LocationModel from "@components/Header/Location/LocationModel";
 import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./CheckOutCard.css";
-
+import { Link } from "react-router-dom";
 export const CheckOutCard = ({ product }) => {
     const currentState = useSelector((state) => state.states.currentState);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -22,6 +22,11 @@ export const CheckOutCard = ({ product }) => {
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const orderEstimatedDelivery = useSelector(
+        (state) => state.orders.orderEstimatedDelivery
+    );
+
+    console.log("estimated delivery order: ", orderEstimatedDelivery);
 
     const cartClickHandler = () => {
         let productPrice = product.price * quantity;
@@ -59,7 +64,7 @@ export const CheckOutCard = ({ product }) => {
     return (
         <div>
             <div className="card-section-right">
-                <div className="row">
+                <div className="row card-price-section-card-product">
                     <div className="col-md-12 color-text-cart">
                         <span className="$-color">$</span>
                         {product?.price?.toString().split(".")[0]}
@@ -76,6 +81,36 @@ export const CheckOutCard = ({ product }) => {
                             </button> */}
                         </p>
                     </div>
+                </div>
+                <div className="card-dev-section-paragrap-product">
+                    <span className="dilvery-text-paragraph-card">
+                        <button className="text-decoration-none">
+                            Free delivery
+                        </button>{" "}
+                        <span style={{ fontWeight: "bold" }}>
+                            {
+                                orderEstimatedDelivery?.free_shipment_amount
+                                    ?.estimate_day
+                            }
+                        </span>
+                        <br></br>
+                        Shipped by SJ Computers
+                    </span>
+                </div>
+                <div className="card-dev-section-paragrap-product">
+                    <span className="dilvery-text-paragraph-card">
+                        or{" "}
+                        <button className="text-decoration-none">
+                            Fastest delivery
+                        </button>{" "}
+                        <span style={{ fontWeight: "bold" }}>
+                            {
+                                orderEstimatedDelivery["1_day_shipment_amount"]
+                                    ?.estimate_day
+                            }
+                        </span>{" "}
+                        (Tentative)
+                    </span>
                 </div>
                 <div className="color-card-dev">
                     <button
@@ -100,7 +135,25 @@ export const CheckOutCard = ({ product }) => {
                     ) : (
                         <>
                             <div className="text-stock">
-                                <span className="color-card">In Stock</span>
+                                <div className="instock-dev-card-product-section-with-color-card">
+                                    <div>
+                                        <span className="color-card">
+                                            {product?.quantity > 0 && (
+                                                <span>In Stock</span>
+                                            )}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span className="color-text-cart-with-inStock">
+                                            {product?.quantity < 11 && (
+                                                <span>
+                                                    Only {product?.quantity}{" "}
+                                                    pieces left
+                                                </span>
+                                            )}
+                                        </span>
+                                    </div>
+                                </div>
                                 <div className="mt-3">
                                     <QuantityInput
                                         onChange={setQuantity}
@@ -128,7 +181,117 @@ export const CheckOutCard = ({ product }) => {
                         </div> */}
                         </>
                     )}
+
+                    <div className="row ship-card-details-card-payment-method-checkout-card">
+                        <div className="col-xl-7 col-6">
+                            <span className="color-card-text-paragrap-payment">
+                                Payment
+                            </span>
+                        </div>
+                        <div className="col-xl-5 col-6">
+                            <div className="hover-box">
+                                <Link
+                                    href="#"
+                                    class="text-decoration-none secure-payment-method"
+                                >
+                                    Secure transaction
+                                </Link>
+                                <div className="hidden-box">
+                                    <span
+                                        style={{
+                                            fontSize: "12px",
+                                            fontWeight: "bold",
+                                            marginBottom: "12px",
+                                        }}
+                                    >
+                                        Your transaction is Secure
+                                    </span>
+                                    <div style={{ marginTop: "12px" }}>
+                                        <p style={{ fontSize: "11px" }}>
+                                            We work hard to protect your
+                                            security and privacy. Our payment
+                                            security system encrypts your
+                                            information during transmission. We
+                                            don’t share your credit card details
+                                            with third-party sellers, and we
+                                            don’t sell your information to
+                                            others
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row ship-card-details-card-payment-method-checkout-card">
+                        <div className="col-xl-7 col-6">
+                            <span className="color-card-text-paragrap-payment">
+                                Ships Form
+                            </span>
+                        </div>
+                        <div className="col-xl-5 col-6">
+                            <span className="color-card-text-paragrap-payment">
+                                Sj Computers
+                            </span>
+                        </div>
+                    </div>
+                    <div className="row ">
+                        <div className="col-xl-7 col-6">
+                            <span className="color-card-text-paragrap-payment">
+                                Return
+                            </span>
+                        </div>
+
+                        <div class="col-xl-5 col-6">
+                            <div class="hover-box">
+                                <Link className="text-decoration-none secure-payment-method ">
+                                    Eligible for returns<br></br>
+                                    refund or <br></br>
+                                    replacement wi...
+                                </Link>
+                                <div class="hidden-box">
+                                    <span
+                                        style={{
+                                            fontSize: "12px",
+                                            fontWeight: "bold",
+                                            marginBottom: "12px",
+                                        }}
+                                    >
+                                        Eligible for Return, Refund or
+                                        Replacement within 30 days of receipt
+                                    </span>
+                                    <div style={{ marginTop: "12px" }}>
+                                        <p style={{ fontSize: "11px" }}>
+                                            This item can be returned in its
+                                            original condition for a full refund
+                                            or replacement within 30 days of
+                                            receipt. Read full return policy
+                                        </p>
+                                    </div>
+                                    <Link
+                                        to={"/return_refund_policy"}
+                                        style={{
+                                            marginTop: "12px",
+                                            fontSize: "11px",
+                                        }}
+                                    >
+                                        Read full return policy
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <hr></hr>
+                <Link
+                    to={"/term_services"}
+                    style={{
+                        marginTop: "12px",
+                        fontSize: "11px",
+                        textDecoration: "none",
+                    }}
+                >
+                    Details
+                </Link>
             </div>
         </div>
     );

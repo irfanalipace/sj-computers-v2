@@ -4,7 +4,7 @@
     width: 100%;
     display: flex;
 }
-.header-thank-you{
+.header-thank-you {
     display: flex;
     justify-content: center;
 }
@@ -15,6 +15,14 @@
 .homepage-img {
     width: 100%;
     max-width: 185px;
+}
+
+.dilvery-text-paragraph-card button {
+    border: 0;
+    background: none;
+    padding: 0;
+    color: #1270c4;
+    font-weight: 600;
 }
 
 .hover-effect-sets {
@@ -217,7 +225,8 @@
     position: relative;
 }
 
-.order-button {
+.order-button,
+.order-button:hover {
     background: #00305e;
     border: 0px;
     color: white;
@@ -227,6 +236,8 @@
     line-height: 17px;
     color: #ffffff;
     text-align: left;
+    color: white;
+    text-decoration: none;
 }
 
 .ul-menu {
@@ -383,7 +394,7 @@
 
 .check-auth {
     font-weight: 700;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 18px;
     padding-top: 12px;
     text-align: center;
