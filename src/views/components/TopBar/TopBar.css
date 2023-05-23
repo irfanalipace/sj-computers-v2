@@ -63,6 +63,7 @@ Link:hover {
 .hover-effect-sets-topbar {
     border: 1px solid transparent;
     padding: 5px 10px;
+    color: #ffffff !important;
 }
 .hover-effect-sets-topbar:hover {
     border-color: white;
