@@ -88,7 +88,7 @@ class AuthController extends BaseController
 
         $token = $user->createToken(User::AUTH_TOKEN)->accessToken;
 
-        return $this->sendResponse(['access_token' => $token, 'user' => $user->name, 'email' => $user->email, 'profile_pic' => $user->profile_pic], 'OTP sent to your email address.');
+        return $this->sendResponse(['access_token' => $token, 'user' => $user->name, 'email' => $user->email, 'profile_pic' => $user->profile_pic,'state' => $user->userState], 'OTP sent to your email address.');
     }
 
     public function setCart($userId)
