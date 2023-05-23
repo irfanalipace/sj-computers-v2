@@ -11,9 +11,9 @@
     color: #ffffff;
 }
 
-.email-contact-hr-line {
+/* .email-contact-hr-line {
     border-left: 1px solid;
-}
+} */
 .contact-text-home {
     font-weight: 600;
     font-size: 28px;
@@ -21,6 +21,14 @@
     /* identical to box height */
 
     color: #ffffff;
+}
+.vertical-line-contactus {
+    height: 24px;
+    width: 2px;
+    background-color: white;
+    border: none;
+
+    margin: 5px 0;
 }
 .home-text-paragraph-contact {
     background: #318243;
@@ -156,7 +164,7 @@
     .nav-contact-background-color {
         padding-left: 65px;
     }
-    .email-contact-hr-line {
-        border-left: none;
+    .vertical-line-contactus {
+       display: none;
     }
 }

@@ -174,7 +174,7 @@ const PasswordForm = () => {
                     <div className="container new-data">
                         <div className="row">
                             <div className="col-12">
-                                <h5 className="h5-heading">
+                                <h5 className="h5-heading ">
                                     New to SJ Computers?
                                 </h5>
                             </div>
