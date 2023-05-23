@@ -94,7 +94,7 @@ export const CheckOutCard = ({ product }) => {
                             }
                         </span>
                         <br></br>
-                        shipped by SJ Computers
+                        Shipped by SJ Computers
                     </span>
                 </div>
                 <div className="card-dev-section-paragrap-product">

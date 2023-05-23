@@ -92,8 +92,7 @@ export const getEstimatedDelivery = () => {
     return async (dispatch) => {
         try {
             let response = await getEstimatedDaysApi();
-            console.log("response", response);
-            dispatch({ type: SET_ORDER_ESTIMATE, payload: {} });
+            dispatch({ type: SET_ORDER_ESTIMATE, payload: response });
         } catch (error) {
             console.log("Something went wrong in orders", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

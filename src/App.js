@@ -24,10 +24,6 @@ function App() {
     const token = getToken();
     if (token) dispatch(alreadyLoggedIn(token));
 
-    // to clear the cart and cart Details keys from local storage
-    if (window.localStorage.getItem("clearCartKeys")) {
-        window.localStorage.removeItem("clearCartKeys");
-    }
     useInitDataFetching();
 
     // const location = useLocation();

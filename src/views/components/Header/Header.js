@@ -50,7 +50,9 @@ const Header = () => {
     }, []);
 
     useEffect(() => {
-        firstLogin.current && !currentState && setShow(true);
+        ((firstLogin.current && !currentState) ||
+            window.localStorage.getItem("state") == null) &&
+            setShow(true);
         searchParams.delete("firstLogin");
         setSearchParams(searchParams);
     }, [firstLogin.current, currentState]);
