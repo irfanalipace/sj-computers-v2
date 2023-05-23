@@ -15,6 +15,7 @@ export default function Product() {
     const [product, setProduct] = useState(null);
     const products = useSelector((state) => state.products.products);
     const { productId } = useParams();
+
     useEffect(() => {
         getProductDetails();
     }, []);
