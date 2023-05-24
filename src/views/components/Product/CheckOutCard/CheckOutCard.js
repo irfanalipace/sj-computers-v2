@@ -241,14 +241,14 @@ export const CheckOutCard = ({ product }) => {
                             </span>
                         </div>
 
-                        <div class="col-xl-5 col-6">
-                            <div class="hover-box">
+                        <div className="col-xl-5 col-6">
+                            <div className="hover-box">
                                 <Link className="text-decoration-none secure-payment-method ">
                                     Eligible for returns<br></br>
                                     refund or <br></br>
                                     replacement wi...
                                 </Link>
-                                <div class="hidden-box">
+                                <div className="hidden-box">
                                     <span
                                         style={{
                                             fontSize: "12px",
