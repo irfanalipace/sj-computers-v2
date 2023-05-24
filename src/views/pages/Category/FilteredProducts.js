@@ -31,7 +31,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
         dispatch(SET_SEARCH_STRING(""));
         dispatch(CLEAR_ALL_PRODUCTS());
         // dispatch(filterProducts(filterObject));
-        // setMounted(true);
+        setMounted(true);
     };
 
     useEffect(() => {
@@ -51,6 +51,9 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
         };
         dispatch(filterProducts(filterObject, true));
     };
+
+    console.log("filterArray", filtersArray);
+    console.log("filterArray.length", filtersArray.length);
 
     useEffect(() => {
         if (mounted) {
@@ -110,8 +113,10 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                 </>
             ) : (
                 <>
-                    {!isLoading && (
-                        <h3 className="heading">No products found</h3>
+                    {isLoading || !category ? (
+                        <h3 className="heading">Fetching Products</h3>
+                    ) : (
+                        <h3 className="heading">No Products Found</h3>
                     )}
                 </>
             )}
