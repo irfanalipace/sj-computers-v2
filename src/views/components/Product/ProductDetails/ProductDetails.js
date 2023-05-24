@@ -76,7 +76,7 @@ const ProductDetails = ({ product }) => {
     return (
         <div>
             <div className="">
-                {/* <p className="item-title">{product?.name}</p> */}
+                <p className="item-title">{product?.name}</p>
             </div>
             <div className="instock-detail">
                 <p className="most-demandind">
@@ -129,18 +129,20 @@ const ProductDetails = ({ product }) => {
                 </div>
             </div>
 
-        <div className="divsection">
-        <hr className="hr-card-details"></hr>
-            <div className="cart-details-text">
-                <div className="row">
-                    <div className="col-md-12 color-text">
-                        <span className="$-color">$</span>
-                        {product?.price?.toString().split(".")[0]}
-                        <sup>{product?.price?.toString().split(".")[1]}</sup>
+            <div className="divsection">
+                <hr className="hr-card-details"></hr>
+                <div className="cart-details-text">
+                    <div className="row">
+                        <div className="col-md-12 color-text">
+                            <span className="$-color">$</span>
+                            {product?.price?.toString().split(".")[0]}
+                            <sup>
+                                {product?.price?.toString().split(".")[1]}
+                            </sup>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
             <div className="content">
                 <div className="row">
                     <div className="col-md-12 shipping-button">
