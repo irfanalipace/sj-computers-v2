@@ -50,14 +50,14 @@ class SquareController extends BaseController
     public function chargeCustomer(CardRequest $request, OrderRepository $repository)
     {
         try {
-            
+
             $idempotencyKey = uniqid();
             // Clear the all cache
-            Artisan::call('optimize:clear');
+            // Artisan::call('optimize:clear');
             // Clear the application cache
-            Artisan::call('cache:clear');
+            // Artisan::call('cache:clear');
             // Clear the configuration cache
-            Artisan::call('config:clear');
+            // Artisan::call('config:clear');
 
             //create customer || retrieve customer if already added
             if (auth()->user()->square_cus_id == null) {
@@ -65,7 +65,7 @@ class SquareController extends BaseController
             } else {
                 $customer = $this->getCustomer();
             }
-            
+
             // Get card Token
             $amount_money = new Money();
             $amount_money->setAmount(Cart::session($this->userId)->getTotal());
@@ -84,8 +84,8 @@ class SquareController extends BaseController
                 $orderData = [];
 
 
-                $orderData['total_amount'] = \Cart::session($this->userId)->getTotal();
-                $orderData['sub_total'] = \Cart::session($this->userId)->getSubTotal();
+                $orderData['total_amount'] = number_format(\Cart::session($this->userId)->getTotal(), 2, '.', '');
+                $orderData['sub_total'] = number_format(\Cart::session($this->userId)->getSubTotal(), 2, '.', '');
                 $orderData['item_qty'] = \Cart::session($this->userId)->getTotalQuantity();
 
 
@@ -104,9 +104,9 @@ class SquareController extends BaseController
 
                 $result = $api_response->getResult();
                 $order = $repository->createOrder(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address);
-                
-                $orderData['order'] =$order['order'];
-                
+
+                $orderData['order'] = $order['order'];
+
                 //sending invoice email of the payment to user
                 GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
                 // GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
@@ -118,7 +118,7 @@ class SquareController extends BaseController
             } else {
 
                 $errors = $api_response->getErrors();
-                
+
                 return response()->json(['code' => 400, 'message' => $errors[0]->getDetail()]);
             }
             return $this->sendResponse(['Order' => $orderData], StatusEnum::PAYMENTMESSAGE);
