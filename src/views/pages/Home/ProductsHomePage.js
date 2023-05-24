@@ -16,7 +16,7 @@ const ProductsHomePage = () => {
     const handleClick = () => {
         searchString
             ? dispatch(searchProducts(searchString, currentPage))
-            : dispatch(fetchProducts(currentPage));
+            : dispatch(fetchProducts(currentPage, true));
     };
 
     useEffect(() => {

@@ -89,3 +89,20 @@ export function updateQuantityApi({ id, difference }) {
             });
     });
 }
+
+export function getDetailsApi() {
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/get-details`)
+            .then((response) => {
+                console.log(
+                    "file: states.js | getDetailsApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error cart", e);
+                reject(e);
+            });
+    });
+}

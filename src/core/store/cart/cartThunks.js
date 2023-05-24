@@ -15,6 +15,7 @@ import {
     fetchCartApi,
     deleteItemApi,
     updateQuantityApi,
+    getDetailsApi,
 } from "@api/cart";
 import {
     deleteCartItem,
@@ -82,6 +83,24 @@ export const updateQuantity = (data) => {
             updateCartItem(data);
             dispatch({
                 type: UPDATE_QUANTITY,
+                payload: data,
+            });
+        } catch (error) {
+            console.log("Something went wrong in carts", error);
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
+        }
+    };
+};
+
+export const getCartDetails = (data) => {
+    return async (dispatch) => {
+        try {
+            let response = await getDetailsApi();
+            console.log("response", response);
+            let data = { ...response.data };
+            updateCartDetails(data);
+            dispatch({
+                type: SET_CART_DETAILS,
                 payload: data,
             });
         } catch (error) {
@@ -216,11 +235,31 @@ export const syncCartItems = () => {
 
 export const addToLocalCart = (data, cb) => {
     return async (dispatch) => {
-        addItemToLocalCart(data);
-        dispatch({
-            type: ADD_TO_CART,
-            payload: data,
-        });
+        try {
+            dispatch({ type: LOADING, payload: {} });
+            let param = {
+                product_id: data.cartItem.id,
+                qty: data.cartItem.quantity,
+            };
+            let response = await addToCartApi(param);
+            data.cartDetails = { ...response.data.details };
+            dispatch({
+                type: ADD_TO_CART,
+                payload: data,
+            });
+            // toast.success("Item Added In Cart");
+            if (typeof cb === "function") cb();
+            addItemToLocalCart(data);
+        } catch (error) {
+            console.log("Something went wrong in carts", error);
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
+        }
+
+        // addItemToLocalCart(data);
+        // dispatch({
+        //     type: ADD_TO_CART,
+        //     payload: data,
+        // });
         if (typeof cb === "function") cb();
         // toast.success("Item Added In Cart");
     };

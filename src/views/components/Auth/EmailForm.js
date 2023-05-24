@@ -5,7 +5,7 @@ import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { useFormValidation } from "@hooks/useFormValidation";
-
+import { Link } from "react-router-dom";
 import Loader from "@common/Spinner/Spinner";
 
 export default function EmailForm({ onFormSubmit, form }) {
@@ -87,13 +87,13 @@ export default function EmailForm({ onFormSubmit, form }) {
             </div>
             <p className=" small-text-paragrap">
                 By continuing, you agree to SJ Computer’s{" "}
-                <a href="#" className="text-decoration-none">
+                <Link to="/term_services" className="text-decoration-none">
                     Conditions of Use
-                </a>{" "}
+                </Link>{" "}
                 and{" "}
-                <a href="#" className="text-decoration-none">
+                <Link to="/term_services" className="text-decoration-none">
                     Privacy Noticee
-                </a>
+                </Link>
                 .
             </p>
 
@@ -102,9 +102,9 @@ export default function EmailForm({ onFormSubmit, form }) {
                     icon={faCaretRight}
                     className="need-help-singin-arrow"
                 />
-                <a href="#" className="text-decoration-none need-help">
+                  <Link to="" className="text-decoration-none need-help">
                     Need Help?
-                </a>
+                </Link>
             </div>
         </form>
     );

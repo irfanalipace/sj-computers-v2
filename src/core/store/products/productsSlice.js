@@ -4,6 +4,7 @@ const initialState = {
     products: [],
     searchString: null,
     isSearchedProducts: false,
+    isShowMore: false,
     filtersArray: [],
     isFiltering: false,
     apiError: false,
@@ -27,6 +28,7 @@ const productSlice = createSlice({
             state.currentPage = state.currentPage + 1;
             state.isLoading = false;
             state.isFiltering = false;
+            state.isShowMore = false;
         },
         SEARCH_PRODUCTS: (state, action) => {
             if (state.currentPage === 1)
@@ -44,6 +46,7 @@ const productSlice = createSlice({
             state.currentPage = state.currentPage + 1;
             state.isLoading = false;
             state.isFiltering = false;
+            state.isShowMore = false;
         },
         SET_SEARCH_STRING: (state, action) => {
             state.searchString = action.payload;
@@ -53,6 +56,9 @@ const productSlice = createSlice({
         },
         SET_FILTERING_PRODUCTS: (state, action) => {
             state.isFiltering = true;
+        },
+        SET_IS_SHOW_MORE: (state) => {
+            state.isShowMore = true;
         },
         CLEAR_SEARCH: (state) => {
             state.searchString = null;
@@ -74,6 +80,7 @@ const productSlice = createSlice({
             state.apiError = { ...action.payload };
             state.isLoading = false;
             state.isFiltering = false;
+            state.isShowMore = false;
         },
     },
 });
@@ -83,6 +90,7 @@ export const {
     FETCH_PRODUCTS,
     SET_FILTERS_ARRAY,
     SET_FILTERING_PRODUCTS,
+    SET_IS_SHOW_MORE,
     SEARCH_PRODUCTS,
     SET_SEARCH_STRING,
     FILTER_PRODUCTS,

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
@@ -10,7 +10,7 @@ import {
 } from "@store/products/productsSlice";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
 
-const FilteredProducts = ({ category, toggleFilter }) => {
+const FilteredProducts = memo(({ category, toggleFilter }) => {
     const products = useSelector((state) => state.products.products);
     const isLoading = useSelector((state) => state.products.isLoading);
     const apiError = useSelector((state) => state.products.apiError);
@@ -21,10 +21,10 @@ const FilteredProducts = ({ category, toggleFilter }) => {
 
     const dispatch = useDispatch();
 
-    const filterObject = {
+    let filterObject = {
         page: 1,
         per_page: 12,
-        categoryId: category?.categoryId,
+        category_id: category?.id,
     };
 
     const init = () => {
@@ -43,20 +43,31 @@ const FilteredProducts = ({ category, toggleFilter }) => {
     }, []);
 
     const handleClick = () => {
-        filterObject.page = currentPage;
-        dispatch(filterProducts(filterObject, currentPage));
+        filterObject = {
+            ...filterObject,
+            page: currentPage,
+            name: searchString,
+            filter: filtersArray,
+        };
+        dispatch(filterProducts(filterObject, true));
     };
 
     useEffect(() => {
         if (mounted) {
-            filterObject.name = searchString;
-            // const serializedArray = JSON.stringify(filtersArray);
-            filterObject.filter = filtersArray;
-            filterObject.page = 1;
-            console.log("filterObject: ", filterObject);
-            dispatch(filterProducts(filterObject));
+            filterObject = {
+                ...filterObject,
+                page: 1,
+                name: searchString,
+                category_id: category?.id,
+                filter: filtersArray,
+            };
+            console.log("11 : ", filtersArray, searchString, category?.id);
+            if (filtersArray || searchString || category?.id) {
+                console.log("running");
+                dispatch(filterProducts(filterObject));
+            }
         }
-    }, [searchString, filtersArray]);
+    }, [searchString, filtersArray, category]);
 
     return (
         <div className="filter-results">
@@ -85,6 +96,6 @@ const FilteredProducts = ({ category, toggleFilter }) => {
             />
         </div>
     );
-};
+});
 
 export default FilteredProducts;

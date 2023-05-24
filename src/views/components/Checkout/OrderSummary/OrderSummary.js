@@ -66,11 +66,11 @@ function OrderSummary({
             <div className="summary-wrapper">
                 <div className="summary-btn">
                     <Button />
-                    <p>
+                    {/* <p>
                         Lorem Ipsum is simply dummy text of the printing and
                         typesetting industry. Lorem Ipsum has been the
                         industry's standard dummy text ever since the 1500s,
-                    </p>
+                    </p> */}
                 </div>
                 <div className="summary-details">
                     <ul>

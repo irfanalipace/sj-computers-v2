@@ -4,155 +4,157 @@
     background-color: #e2e8f0;
     height: 4.5rem;
     padding: 0.5rem;
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 17px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
 
-/* Primary */
+    /* Primary */
 
-color: #333333;
-  }
-  
-  .order-info {
+    color: #333333;
+}
+
+.order-info {
     margin: 0.25rem;
-  }
-  
-  .order-label {
+}
+
+.order-label {
     font-size: 1rem;
-  }
-  
-  .order-details {
+}
+
+.order-details {
     margin: 0.25rem;
-  }
-  
-  /* .order-details:hover {
+}
+
+/* .order-details:hover {
     color: #34d399;
     cursor: pointer;
   } */
-  
-  .order-status {
+
+.order-status {
     display: flex;
     justify-content: space-between;
     margin: 1.5rem;
-  }
-  
-  .order-status-label {
-    font-family: 'Inter';
+}
+
+.order-status-label {
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
     /* identical to box height */
-    
-    
+
     color: #000000;
-  }
-  
-  .track-package-button {
+}
+
+.track-package-button {
     margin-right: 0.5rem;
     height: 2.25rem;
     width: 12rem;
-    background: #38C056;
+    background: #38c056;
     color: #fff;
     font-weight: normal;
     padding: 0.5rem 1rem;
     border-radius: 8px;
     border: transparent;
-  }
-  .view-button {
+}
+.view-button {
     margin-right: 0.5rem;
     height: 2.25rem;
     width: 12rem;
-    background: #38C056;
+    background: #38c056;
     color: #fff;
     font-weight: normal;
     padding: 0.5rem 1rem;
     border-radius: 8px;
     border: transparent;
-  }
-  .product-Image{
+}
+.order-table .product-Image {
     width: 25%;
     height: auto;
     margin-left: 5%;
-  }
-  .cancel-order{
+}
+.cancel-order {
     margin: 14px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
-    color: #1270C4;
+    color: #1270c4;
     cursor: pointer;
-  }
+}
 
-  .cancel-order:hover{
-   color: #DD6500;
-   text-decoration: underline;
-  }
+.cancel-order:hover {
+    color: #dd6500;
+    text-decoration: underline;
+}
 
-  .product-description{
+.product-description {
     margin-top: 20px;
     padding: 0px 20px;
     font-size: small;
-    color: #38C056;
-
-  }
-  .product-description:hover{
-    color: #DD6500;
+    color: #38c056;
+}
+.product-description:hover {
+    color: #dd6500;
     text-decoration: underline;
-  }
-  .order-details-view{
-    color: #38C056;
-
-  }
-  .order-details-view:hover{
-    color: #DD6500;
+}
+.order-details-view {
+    color: #38c056;
+}
+.order-details-view:hover {
+    color: #dd6500;
     text-decoration: underline;
-  }
-  .order-table {
+}
+.order-table {
     width: 100%;
     border-collapse: collapse;
     border: 1px solid #ccc;
-  }
-  
-  .order-table th,
-  .order-table td {
+}
+
+.order-table th,
+.order-table td {
     border: 1px solid #ccc;
     padding: 8px;
-  }
-  
-  .col-width {
+}
+
+.col-width {
     flex: 1;
-  }
-  
-  .view-button {
+}
+
+.view-button {
     width: 100%;
-  }
-  
-  .product-image {
+}
+
+.order-table .product-image {
     width: 100%;
     max-width: 20%; /* Adjust the image width as needed */
     height: auto;
     display: block; /* Ensures proper spacing around the image */
     margin: 0 auto; /* Centers the image horizontally */
-  }
-  
-  .order-table thead th {
+}
+
+.order-table thead th {
     background-color: #f0f0f0;
+    text-align: center;
   }
   
   .order-table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
-  }
-  
-  .order-table tbody td {
+}
+
+.order-table tbody td {
     vertical-align: middle;
     text-align: center;
-  }
-  
-  .order-table tbody tr:last-child td {
+}
+
+.order-table tbody tr:last-child td {
     border-bottom: none;
   }
+  .order-table th,
+.order-table td {
+  border: none;
+}

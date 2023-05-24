@@ -9,7 +9,6 @@ import BackToTopButton from "./BackToTopButton";
 
 import "./Footer.css";
 
-
 const Footer = () => {
     const location = useLocation();
     const authRoutes = [
@@ -18,11 +17,11 @@ const Footer = () => {
         "/forgot_password",
         "/forget-password",
         "/email-sent",
+        "/thank-you",
     ];
 
     return (
         <>
-     
             {!authRoutes.includes(location.pathname) && (
                 <div className="footer">
                     <div
@@ -58,7 +57,8 @@ const Footer = () => {
                                             </a>
                                         </li>
                                         <li>
-                                            <Link to='/contact'
+                                            <Link
+                                                to="/contact"
                                                 href="#!"
                                                 className="herf-link text-decoration-none"
                                             >
@@ -198,15 +198,18 @@ const Footer = () => {
                             </div>
                         </div>
                         <hr className="hr-line"></hr>
-                        <div className="footer-copyright text-center py-3">
-                            <img
+                        <div className="footer-copyright text-center py-3 footer-image-lien">
+                      <div>
+                      <img
                                 src={footer}
                                 alt=""
                                 style={{ paddingRight: "105px" }}
                                 className="footer-copywrite-images"
                             />
+                      </div>
 
-                            <button
+                        <div className="setting-button-fax">
+                        <button
                                 className="btn btn-secondary dropdown-toggle language-dropdown"
                                 style={{ background: "#00305E" }}
                                 type="button"
@@ -238,11 +241,12 @@ const Footer = () => {
                                 </a>
                             </div>
                         </div>
+                        </div>
                         <div className="footer-copyright text-center py-3">
                             <img
                                 src={copyrightimg}
                                 alt=""
-                                className="copywriten"
+                                className="copywriten footer-end-image-data"
                             />
                         </div>
                     </footer>
