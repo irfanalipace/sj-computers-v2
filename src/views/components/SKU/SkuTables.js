@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./SkuTables.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import Table from "./Table";
-import {
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Select,
-    TextField,
-} from "@mui/material";
-import { useDispatch } from "react-redux";
+import { FormControl, InputAdornment, TextField } from "@mui/material";
 import { getInventory } from "../../../core/api/inventory.js";
-import DataTable from "./DynamicTable";
+import SearchIcon from "@mui/icons-material/Search";
+import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
+import { useSelector } from "react-redux";
+
 const SkuTables = () => {
     const [invent, setInvent] = useState();
     const [data, setData] = useState([]);
+    const [search, setSearch] = useState("");
+    // const {isLoading} = useSelector((state) => state?.)
+
     const handleChange = async (e) => {
         await getInventory({
-            SKU: e.target.value,
+            SKU: search,
         }).then((_) => {
             setInvent(_.data[0]?.product);
             let obj = [
@@ -34,29 +30,6 @@ const SkuTables = () => {
             setData(() => [...obj]);
         });
     };
-    const columns = [
-        { field: "id", headerName: "ID", width: 130 },
-        { field: "name", headerName: "Name", width: 150 },
-        { field: "asin", headerName: "ASIN", width: 150 },
-        {
-            field: "sku",
-            headerName: "SKU",
-            type: "number",
-            width: 100,
-        },
-        {
-            field: "quantity",
-            headerName: "Total Quantity",
-            sortable: false,
-            width: 170,
-        },
-        {
-            field: "hold_quantity",
-            headerName: "Hold Quantity",
-            sortable: false,
-            width: 180,
-        },
-    ];
 
     return (
         <div>
@@ -65,31 +38,30 @@ const SkuTables = () => {
                     <div className="col-lg-12 col-md-12 col-sm-12">
                         <div className="seach-input-sku">
                             {""}{" "}
-                            <FormControl sx={{ m: 1, minWidth: 300 }}>
+                            <FormControl
+                                classname="search-field"
+                                sx={{ m: 1, minWidth: 500 }}
+                            >
                                 <TextField
                                     id="outlined-basic"
-                                    label="Search"
+                                    label="Search by SKU"
                                     variant="outlined"
                                     onChange={(e) => e.target.value}
-                                    value={invent}
-                                    onChange={handleChange}
+                                    value={data?.SKU}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <SearchIcon />
+                                        </InputAdornment>
+                                    }
                                 />
-                                {/* <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={invent}
-                                    label="Search by Name, ASIN"
-                                    onChange={handleChange}
-                                >
-                                    <MenuItem value={"AI-NRCD-SNXP"}>
-                                        AI-NRCD-SNXP
-                                    </MenuItem>
-                                </Select> */}
                             </FormControl>
-                            {/* <FontAwesomeIcon
-                                icon={faSearch}
-                                className="search-icon"
-                            /> */}
+                            <button
+                                onClick={handleChange}
+                                className="search-btn"
+                            >
+                                Search
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -107,11 +79,6 @@ const SkuTables = () => {
                                 className="search-sku-input-asin"
                                 placeholder="Enter quantity..."
                             />
-                            {/* <input
-                                type="text"
-                                className="search-sku-input-quantity"
-                                placeholder="Add Quantity"
-                            /> */}
                         </div>
 
                         <div className="button-sku-button">
@@ -135,7 +102,60 @@ const SkuTables = () => {
                                     <h3 className="your-selected-product-sku">
                                         Your Selected Products
                                     </h3>
-                                    <DataTable columns={columns} rows={data} />
+                                    <div>
+                                        {data.map((row) => (
+                                            <div className="table">
+                                                <div className="sku-table-cell">
+                                                    <div className="sku-table-headers">
+                                                        #ID
+                                                    </div>
+                                                    <div className="sku-table-data">
+                                                        {row.id}
+                                                    </div>
+                                                </div>
+                                                <div className="sku-table-cell">
+                                                    <div className="sku-table-headers">
+                                                        Name
+                                                    </div>
+                                                    <div className="sku-table-data">
+                                                        {row.name}
+                                                    </div>
+                                                </div>
+                                                <div className="sku-table-cell">
+                                                    <div className="sku-table-headers">
+                                                        ASIN
+                                                    </div>
+                                                    <div className="sku-table-data">
+                                                        {row.asin}
+                                                    </div>
+                                                </div>
+                                                <div className="sku-table-cell">
+                                                    <div className="sku-table-headers">
+                                                        SKU
+                                                    </div>
+                                                    <div className="sku-table-data">
+                                                        {row.sku}
+                                                    </div>
+                                                </div>
+                                                <div className="sku-table-cell">
+                                                    <div className="sku-table-headers">
+                                                        Total Quantity
+                                                    </div>
+                                                    <div className="sku-table-data">
+                                                        {row.fQuantity}
+                                                    </div>
+                                                </div>
+                                                <div className="sku-table-cell">
+                                                    <div className="sku-table-headers">
+                                                        Hold Quantity
+                                                    </div>
+                                                    <div className="sku-table-data">
+                                                        {0}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                                 <button className="buy-now-button-sku">
                                     Buy Now
