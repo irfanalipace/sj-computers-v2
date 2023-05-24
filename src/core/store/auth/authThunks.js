@@ -48,11 +48,10 @@ export const login = (credentials) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             const response = await loginApi(credentials);
-            console.log("response:", response);
             let token = response.access_token;
             let name = response.user;
             let profile_pic = response.profile_pic;
-            let state = response.state.state;
+            let state = response?.state?.state;
             saveUserName(name);
             saveUserImage(profile_pic);
             saveUserState(state);
@@ -88,11 +87,13 @@ export const logout = () => {
         try {
             dispatch({ type: LOADING, payload: {} });
             await logoutApi();
+
             destroyToken();
             dispatch({ type: LOGOUT });
             dispatch({ type: CLEAR_CART });
             clearCartLocally();
             toast.success("Logged out");
+            ApiService.setHeader("Authorization", "");
         } catch (error) {
             console.log("Something went wrong in logout", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

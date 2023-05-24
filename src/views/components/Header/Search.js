@@ -1,33 +1,38 @@
 import { useState, useEffect } from "react";
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import {
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+} from "reactstrap";
+import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { SET_SEARCH_STRING } from "@store/products/productsSlice";
+import {
+    SET_SEARCH_STRING,
+    SET_SELECTED_CATEGORY,
+} from "@store/products/productsSlice";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Loader from "@common/Spinner/Spinner";
 import "./Header.css";
 
-function Search({ toggleSidebar }) {
+function Search() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState("All");
+    const [selectedItem, setSelectedItem] = useState({ name: "ALL", id: null });
     const [search, setSearch] = useState("");
-    const searchString = useSelector((state) => state.products.searchString);
+    const { searchString, selectedCategory } = useSelector(
+        (state) => state.products
+    );
     const dispatch = useDispatch();
     const categories = useSelector((state) => state.category.categories);
+    const location = useLocation();
 
     const toggle = () => setDropdownOpen((prevState) => !prevState);
 
-    const handleItemClick = (e) => {
-        e.preventDefault();
-        const item = e.target.text;
-        setSelectedItem(item);
-        if (item === "Automotive Accessories") {
-            console.log("You selected Automotive Accessories");
-        } else if (item === "Cell Phone Accessories") {
-            console.log("You selected Cell Phone Accessories");
-        }
-        setDropdownOpen(false); // Close the dropdown after item is selected
+    const handleItemClick = (category) => {
+        setSelectedItem(category);
+        dispatch(SET_SELECTED_CATEGORY(category?.id));
     };
 
     const handleSearch = (e) => {
@@ -39,17 +44,23 @@ function Search({ toggleSidebar }) {
         setSearch(searchString || "");
     }, [searchString]);
 
-    let renderedCategories = categories
-        .map((category) => (
-            <DropdownItem key={category.id} onClick={handleItemClick} className="ul-liste-items-all-buttons">
-                <Link className="text-decoration-none div-link-category-search">
-                 
-                    {category.name}
-                    
-                </Link>
-            </DropdownItem>
-        ))
-        // .slice(0, visibleCategories);
+    useEffect(() => {
+        if (selectedCategory === null)
+            setSelectedItem({ name: "ALL", id: null });
+    }, [selectedCategory]);
+
+    let renderedCategories = categories.map((category) => (
+        <DropdownItem
+            key={category.id}
+            onClick={() => handleItemClick(category)}
+            className="ul-liste-items-all-buttons"
+        >
+            <span className="text-decoration-none div-link-category-search">
+                {category.name}
+            </span>
+        </DropdownItem>
+    ));
+    // .slice(0, visibleCategories);
 
     // const [visibleCategories, setVisibleCategories] = useState(8);
     // const handleShowMore = () => {
@@ -59,13 +70,24 @@ function Search({ toggleSidebar }) {
     return (
         <form className="input-group search-inputgroup" onSubmit={handleSearch}>
             <div className="input-group-btn search-panel">
-                <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                <Dropdown
+                    isOpen={dropdownOpen}
+                    toggle={toggle}
+                    disabled={location.pathname.includes("category")}
+                >
                     <DropdownToggle caret className="all-button">
-                        {selectedItem}
+                        {selectedItem.name}
                     </DropdownToggle>
                     <DropdownMenu className="">
-                        <DropdownItem onClick={handleItemClick} className="ul-liste-items-all-buttons">
-                        <Link to='/' className="text-decoration-none">All Category</Link>
+                        <DropdownItem
+                            onClick={() =>
+                                handleItemClick({ name: "ALL", id: null })
+                            }
+                            className="ul-liste-items-all-buttons"
+                        >
+                            <span className="text-decoration-none">
+                                All Category
+                            </span>
                         </DropdownItem>
                         {renderedCategories}
                         {/* {categories.length > visibleCategories && (
@@ -76,7 +98,12 @@ function Search({ toggleSidebar }) {
                     </DropdownMenu>
                 </Dropdown>
             </div>
-            <input type="hidden" name="search_param" value="all" id="search_param" />
+            <input
+                type="hidden"
+                name="search_param"
+                value="all"
+                id="search_param"
+            />
             <input
                 type="search"
                 className="form-control search-input-type"
@@ -87,11 +114,18 @@ function Search({ toggleSidebar }) {
                 onChange={(e) => setSearch(e.target.value)}
             />
             <span className="input-group-btn">
-                <button type="button" className="btn btn-success search-logo" onClick={handleSearch}>
-                    <FontAwesomeIcon icon={faSearch} size="1x" className="search-button-header-icon" />
+                <button
+                    type="button"
+                    className="btn btn-success search-logo"
+                    onClick={handleSearch}
+                >
+                    <FontAwesomeIcon
+                        icon={faSearch}
+                        size="1x"
+                        className="search-button-header-icon"
+                    />
                 </button>
             </span>
-
         </form>
     );
 }

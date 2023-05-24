@@ -8,6 +8,7 @@ import { getToken } from "@services/jwtService";
 import { Router } from "@src/Routes";
 import { alreadyLoggedIn } from "@store/auth/authThunks";
 import { useInitDataFetching } from "@hooks/useInitDataFetching";
+import { TawkTo } from "@components/Tawk.To/Messenger";
 
 import Header from "@components/Header/Header";
 import Footer from "@components/Footer/Footer";
@@ -34,6 +35,7 @@ function App() {
 
     return (
         <div>
+            <TawkTo />
             <ToastContainer
                 position="top-right"
                 autoClose={5000}

@@ -7,6 +7,7 @@ const initialState = {
     isShowMore: false,
     filtersArray: [],
     isFiltering: false,
+    selectedCategory: null,
     apiError: false,
     isLoading: false,
     currentPage: 1,
@@ -51,6 +52,9 @@ const productSlice = createSlice({
         SET_SEARCH_STRING: (state, action) => {
             state.searchString = action.payload;
         },
+        SET_SELECTED_CATEGORY: (state, action) => {
+            state.selectedCategory = action.payload;
+        },
         SET_FILTERS_ARRAY: (state, action) => {
             state.filtersArray = [...action.payload];
         },
@@ -89,6 +93,7 @@ export const {
     CLEAR_LOADING,
     FETCH_PRODUCTS,
     SET_FILTERS_ARRAY,
+    SET_SELECTED_CATEGORY,
     SET_FILTERING_PRODUCTS,
     SET_IS_SHOW_MORE,
     SEARCH_PRODUCTS,
