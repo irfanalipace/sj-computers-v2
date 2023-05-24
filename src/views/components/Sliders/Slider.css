@@ -21,12 +21,7 @@ body {
     height: 100%;
 }
 
-.recommendation-slider .swiper-button-prev,
-.recommendation-slider .swiper-button-next {
-    /* left: 0; */
-  
-    color: gray;
-}
+
 
 
 
@@ -58,6 +53,11 @@ body {
     top: var(--swiper-navigation-top-offset, 20%) !important;
     right: var(--swiper-navigation-sides-offset, 30px);
 }
+.banner-slider-section .swiper-button-next:after, .banner-slider-section .swiper-button-prev:after   {
+    font-size: 20px  !important;
+    color: gray;
+ }
+ 
 
 @media screen and (max-width: 576px) {
     .mySwiper {
