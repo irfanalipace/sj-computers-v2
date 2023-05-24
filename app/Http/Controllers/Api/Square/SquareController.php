@@ -50,7 +50,7 @@ class SquareController extends BaseController
     public function chargeCustomer(CardRequest $request, OrderRepository $repository)
     {
         try {
-            
+
             $idempotencyKey = uniqid();
             // Clear the all cache
             // Artisan::call('optimize:clear');
@@ -66,7 +66,7 @@ class SquareController extends BaseController
                
                 $customer = $this->getCustomer();
             }
-            
+
             // Get card Token
             $amount_money = new Money();
             $amount_money->setAmount(Cart::session($this->userId)->getTotal());
@@ -85,8 +85,8 @@ class SquareController extends BaseController
                 $orderData = [];
 
 
-                $orderData['total_amount'] = \Cart::session($this->userId)->getTotal();
-                $orderData['sub_total'] = \Cart::session($this->userId)->getSubTotal();
+                $orderData['total_amount'] = number_format(\Cart::session($this->userId)->getTotal(), 2, '.', '');
+                $orderData['sub_total'] = number_format(\Cart::session($this->userId)->getSubTotal(), 2, '.', '');
                 $orderData['item_qty'] = \Cart::session($this->userId)->getTotalQuantity();
 
 
@@ -105,9 +105,9 @@ class SquareController extends BaseController
 
                 $result = $api_response->getResult();
                 $order = $repository->createOrder(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address);
-                
-                $orderData['order'] =$order['order'];
-                
+
+                $orderData['order'] = $order['order'];
+
                 //sending invoice email of the payment to user
                 GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
                 // GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
@@ -119,7 +119,7 @@ class SquareController extends BaseController
             } else {
 
                 $errors = $api_response->getErrors();
-                
+
                 return response()->json(['code' => 400, 'message' => $errors[0]->getDetail()]);
             }
             return $this->sendResponse(['Order' => $orderData], StatusEnum::PAYMENTMESSAGE);

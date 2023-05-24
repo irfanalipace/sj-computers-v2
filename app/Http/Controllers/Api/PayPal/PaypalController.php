@@ -78,8 +78,8 @@ class PaypalController extends Controller
 
             $orderData = [];
 
-            $orderData['total_amount'] = \Cart::session($this->userId)->getTotal();
-            $orderData['sub_total'] = \Cart::session($this->userId)->getSubTotal();
+            $orderData['total_amount'] = number_format(\Cart::session($this->userId)->getTotal(), 2, '.', '');
+            $orderData['sub_total'] = number_format(\Cart::session($this->userId)->getSubTotal(), 2, '.', '');
             $orderData['item_qty'] = \Cart::session($this->userId)->getTotalQuantity();
 
 
@@ -101,7 +101,7 @@ class PaypalController extends Controller
                 $repository = new OrderRepository;
                 $order = $repository->createOrder($data, $response, $this->userId, $this->user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $request->address);
 
-                $orderData['order'] =$order['order'];
+                $orderData['order'] = $order['order'];
                 //sending invoice email of the payment to user
                 GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
                 // GenerateInvoiceJob::dispatch($data, $response, $this->userId,$this->user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent);
