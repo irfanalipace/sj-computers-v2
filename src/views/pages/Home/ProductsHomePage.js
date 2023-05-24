@@ -1,40 +1,81 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchProducts, searchProducts } from "@store/products/productsThunks";
+import {
+    fetchProducts,
+    searchProducts,
+    filterProducts,
+} from "@store/products/productsThunks";
 import { CLEAR_PRODUCTS } from "@store/products/productsSlice";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
 
-
 const ProductsHomePage = () => {
-    const products = useSelector((state) => state.products.products) || [];
-    const isLoading = useSelector((state) => state.products.isLoading);
-    const currentPage = useSelector((state) => state.products.currentPage);
-    const apiError = useSelector((state) => state.products.apiError);
-    const searchString = useSelector((state) => state.products.searchString);
+    const {
+        searchString,
+        selectedCategory,
+        products,
+        isLoading,
+        currentPage,
+        apiError,
+    } = useSelector((state) => state.products);
     const dispatch = useDispatch();
 
+    let filterObject = {
+        page: 1,
+        per_page: 12,
+        category_id: selectedCategory,
+        name: searchString,
+    };
+
     const handleClick = () => {
-        searchString
-            ? dispatch(searchProducts(searchString, currentPage))
-            : dispatch(fetchProducts(currentPage, true));
+        filterObject = {
+            ...filterObject,
+            page: currentPage,
+        };
+        if (searchString || selectedCategory) {
+            dispatch(filterProducts(filterObject, true));
+        } else dispatch(fetchProducts(currentPage, true));
+        // searchString
+        //     ? dispatch(searchProducts(searchString, currentPage))
+        //     : dispatch(fetchProducts(currentPage, true));
     };
 
     useEffect(() => {
-        if (!searchString && products.length === 0) dispatch(fetchProducts());
-        else dispatch(searchProducts(searchString, 1));
+        if ((!searchString || !selectedCategory) && products.length === 0) {
+            dispatch(fetchProducts());
+            return;
+        }
+        filterObject = {
+            ...filterObject,
+            page: 1,
+        };
+        dispatch(filterProducts(filterObject));
+
         return () => {
             dispatch(CLEAR_PRODUCTS());
         };
-    }, [searchString]);
+    }, [searchString, selectedCategory]);
+
     return (
-        <ProductsGrid
-            products={products || []}
-            handleClick={handleClick}
-            isLoading={isLoading}
-            apiError={apiError}
-            smallBtn={true}
-        />
+        <>
+            {isLoading ? (
+                <h3 className="pb-4">Fetching Products</h3>
+            ) : (
+                <>
+                    {products.length > 0 ? (
+                        <ProductsGrid
+                            products={products || []}
+                            handleClick={handleClick}
+                            isLoading={isLoading}
+                            apiError={apiError}
+                            smallBtn={true}
+                        />
+                    ) : (
+                        <h3 className="pb-4">No Products Found</h3>
+                    )}
+                </>
+            )}
+        </>
     );
 };
 

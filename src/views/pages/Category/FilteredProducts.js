@@ -7,16 +7,19 @@ import { filterProducts } from "@store/products/productsThunks";
 import {
     CLEAR_ALL_PRODUCTS,
     SET_SEARCH_STRING,
+    SET_SELECTED_CATEGORY,
 } from "@store/products/productsSlice";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
 
 const FilteredProducts = memo(({ category, toggleFilter }) => {
-    const products = useSelector((state) => state.products.products);
-    const isLoading = useSelector((state) => state.products.isLoading);
-    const apiError = useSelector((state) => state.products.apiError);
-    const currentPage = useSelector((state) => state.products.currentPage);
-    const searchString = useSelector((state) => state.products.searchString);
-    const filtersArray = useSelector((state) => state.products.filtersArray);
+    const {
+        products,
+        isLoading,
+        apiError,
+        currentPage,
+        searchString,
+        filtersArray,
+    } = useSelector((state) => state.products);
     const [mounted, setMounted] = useState(false);
 
     const dispatch = useDispatch();
@@ -29,6 +32,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
 
     const init = () => {
         dispatch(SET_SEARCH_STRING(""));
+        dispatch(SET_SELECTED_CATEGORY(null));
         dispatch(CLEAR_ALL_PRODUCTS());
         // dispatch(filterProducts(filterObject));
         setMounted(true);
@@ -51,9 +55,6 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
         };
         dispatch(filterProducts(filterObject, true));
     };
-
-    console.log("filterArray", filtersArray);
-    console.log("filterArray.length", filtersArray.length);
 
     useEffect(() => {
         if (mounted) {
