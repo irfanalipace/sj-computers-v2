@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SkuTables.css";
 import { FormControl, InputAdornment, TextField } from "@mui/material";
-import { getInventory } from "../../../core/api/inventory.js";
+import { getInventory, inventoryAction } from "../../../core/api/inventory.js";
 import SearchIcon from "@mui/icons-material/Search";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 
@@ -9,12 +9,54 @@ const SkuTables = () => {
     const [invent, setInvent] = useState();
     const [data, setData] = useState([]);
     const [search, setSearch] = useState("");
+    const [holdQuantity, setholdQuantity] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const handleChange = async (e) => {
         setLoading(true);
         await getInventory({
             SKU: search,
+        }).then((_) => {
+            setInvent(_.data[0]?.product);
+            let obj = [
+                {
+                    id: _?.data[0]?.product?.id,
+                    name: _?.data[0]?.product?.name,
+                    asin: _?.data[0]?.product?.asin,
+                    sku: _?.data[0]?.product?.sku,
+                    hQuantity: 0,
+                    fQuantity: _?.data[0]?.quantity,
+                },
+            ];
+            setData(() => [...obj]);
+        });
+    };
+    const handlehold = async (e) => {
+        await inventoryAction({
+            action: "hold",
+            quantity: holdQuantity,
+            sku: search,
+        }).then((_) => {
+            setInvent(_.data[0]?.product);
+            let obj = [
+                {
+                    id: _?.data[0]?.product?.id,
+                    name: _?.data[0]?.product?.name,
+                    asin: _?.data[0]?.product?.asin,
+                    sku: _?.data[0]?.product?.sku,
+                    hQuantity: 0,
+                    fQuantity: _?.data[0]?.quantity,
+                },
+            ];
+            setData(() => [...obj]);
+        });
+    };
+    const handleRelease = async (e) => {
+        setholdQuantity(null);
+        await inventoryAction({
+            action: "release",
+            quantity: holdQuantity,
+            sku: search,
         }).then((_) => {
             setInvent(_.data[0]?.product);
             let obj = [
@@ -78,12 +120,17 @@ const SkuTables = () => {
                                 type="text"
                                 className="search-sku-input-asin"
                                 placeholder="Enter quantity..."
+                                value={holdQuantity}
+                                onChange={(_) =>
+                                    setholdQuantity(_.target.value)
+                                }
                             />
                         </div>
 
                         <div className="button-sku-button">
-                            <button>Hold</button>
+                            <button onClick={handlehold}>Hold</button>
                             <button
+                                onClick={handleRelease}
                                 style={{
                                     background: "#269C40",
                                     border: "none",
@@ -150,7 +197,7 @@ const SkuTables = () => {
                                                         Hold Quantity
                                                     </div>
                                                     <div className="sku-table-data">
-                                                        {0}
+                                                        {holdQuantity}
                                                     </div>
                                                 </div>
                                             </div>
