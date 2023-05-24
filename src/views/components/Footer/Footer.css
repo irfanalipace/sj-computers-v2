@@ -141,7 +141,8 @@ footer ul li {
 .footer-copywrite-images {
     max-width: 100% !important;
     padding-bottom: 12px !important;
-    width: 267px;
+    width: 154px;
+    /* padding-right: 38px; */
 }
 .setting-button-fax{
     margin-top: 14px;
@@ -153,6 +154,10 @@ footer ul li {
     padding-left: ju;
     padding-right: 15px;
 }
+.image-footer-dev-sectionsjcomputers{
+    padding-right: 30px;
+    }
+    
 
 .footer-end-image-data {
     padding-bottom: 12px;
@@ -165,7 +170,7 @@ footer ul li {
         margin-left: 29px;
         max-width: 100% !important;
         padding-bottom: 12px !important;
-        width: 267px;
+        /* width: 270px; */
         /* margin-right: 0px !important; */
     }
 }

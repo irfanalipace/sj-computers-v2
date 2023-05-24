@@ -118,6 +118,7 @@
 @media screen and (max-width: 780px) {
     .color-card-dev {
         text-align: center;
+       
     }
     .text-stock {
         text-align: center;
@@ -193,7 +194,8 @@ color: #FF0000;
 .hover-box {
     position: relative;
     display: inline-block;
-  }
+    text-align: initial;
+}
   
   .secure-payment-method:hover + .hidden-box,
   .hidden-box:hover {
@@ -235,5 +237,11 @@ color: #FF0000;
         /* background-color: #f2f2f2; */
         padding: 10px;
         transition: left 0.3s ease-in-out;
+    }.ships-form-span-tag{
+        margin-left: 11px;
+    }.return-from-span-tag-checkout{
+        margin-left: -11px;
+    }.sjcomputer-tag-checkout-card{
+        margin-left: -25px;
     }
 }

@@ -49,10 +49,7 @@
     color: #000000;
 }
 
-.product-info {
-    /* max-height: 400px;
-    overflow-y: auto; */
-}
+
 
 .track-package-button {
     margin-right: 0.5rem;
@@ -163,3 +160,33 @@
 .order-table td {
     border: none;
 }
+@media screen and (max-width:600px) {
+    .product-info {
+        /* max-height: 400px; */
+        overflow-y: auto;
+    }.order-table thead th {
+       
+        font-size: 9px;
+    }.order-table tbody td {
+   
+        font-size: 9px;
+    }.order-status-label {
+       
+        font-size: 12px;
+      
+    }.search-product-order-tables{
+        width:100%;
+        margin-left: 22px;
+
+        
+    }.order-table .product-image {
+        max-height: 120px;
+    
+}.product-description {
+  
+    font-size: 11px;
+  
+}
+     
+      
+    }

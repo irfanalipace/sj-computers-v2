@@ -199,12 +199,12 @@ const Footer = () => {
                         </div>
                         <hr className="hr-line"></hr>
                         <div className="footer-copyright text-center py-3 footer-image-lien">
-                      <div>
+                      <div className="image-footer-dev-sectionsjcomputers">
                    <Link to='/'>
                    <img
                                 src={footer}
                                 alt=""
-                                style={{ paddingRight: "105px" }}
+                               
                                 className="footer-copywrite-images"
                             /> 
                    

@@ -314,3 +314,8 @@ line-height: 17px;
 .orders-list-container {
     padding: 0 20px;
 }
+@media screen and (max-width:600px) {
+    .account-page h3{
+ font-size: 14px !important;
+    }
+}

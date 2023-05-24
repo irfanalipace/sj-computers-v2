@@ -224,31 +224,31 @@ export const CheckOutCard = ({ product }) => {
                     </div>
                     <div className="row ship-card-details-card-payment-method-checkout-card">
                         <div className="col-xl-7 col-6">
-                            <span className="color-card-text-paragrap-payment">
+                            <span className="color-card-text-paragrap-payment ships-form-span-tag">
                                 Ships Form
                             </span>
                         </div>
                         <div className="col-xl-5 col-6">
-                            <span className="color-card-text-paragrap-payment">
+                            <span className="color-card-text-paragrap-payment sjcomputer-tag-checkout-card">
                                 Sj Computers
                             </span>
                         </div>
                     </div>
                     <div className="row ">
                         <div className="col-xl-7 col-6">
-                            <span className="color-card-text-paragrap-payment">
+                            <span className="color-card-text-paragrap-payment return-from-span-tag-checkout">
                                 Return
                             </span>
                         </div>
 
-                        <div class="col-xl-5 col-6">
-                            <div class="hover-box">
+                        <div className="col-xl-5 col-6">
+                            <div className="hover-box">
                                 <Link className="text-decoration-none secure-payment-method ">
                                     Eligible for returns<br></br>
                                     refund or <br></br>
                                     replacement wi...
                                 </Link>
-                                <div class="hidden-box">
+                                <div className="hidden-box">
                                     <span
                                         style={{
                                             fontSize: "12px",
