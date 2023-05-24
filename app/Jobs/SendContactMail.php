@@ -40,7 +40,7 @@ class SendContactMail implements ShouldQueue
         $details = $this->data;       
         Mail::send('emails.contact-us',['data'=> $details], function ($m) use ($details) {
             $m->from(env('MAIL_FROM_ADDRESS'), config('app.name', 'APP Name'));
-            $m->to($details['email'])->subject($details['subject_name']);
+            $m->to(config('app.contact_us_email'))->subject($details['subject_name']);
         });
     }
 }
