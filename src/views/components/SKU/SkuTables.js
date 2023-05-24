@@ -11,6 +11,7 @@ const SkuTables = () => {
     const [search, setSearch] = useState("");
     const [holdQuantity, setholdQuantity] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [showButton, setShowButton] = useState(true);
 
     const handleChange = async (e) => {
         setLoading(true);
@@ -49,6 +50,7 @@ const SkuTables = () => {
                 },
             ];
             setData(() => [...obj]);
+            setShowButton(false);
         });
     };
     const handleRelease = async (e) => {
@@ -70,6 +72,7 @@ const SkuTables = () => {
                 },
             ];
             setData(() => [...obj]);
+            setShowButton(true);
         });
     };
 
@@ -128,7 +131,9 @@ const SkuTables = () => {
                         </div>
 
                         <div className="button-sku-button">
-                            <button onClick={handlehold}>Hold</button>
+                            {showButton && (
+                                <button onClick={handlehold}>Hold</button>
+                            )}
                             <button
                                 onClick={handleRelease}
                                 style={{
