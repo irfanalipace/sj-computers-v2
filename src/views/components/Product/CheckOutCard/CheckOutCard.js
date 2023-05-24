@@ -192,7 +192,7 @@ export const CheckOutCard = ({ product }) => {
                             <div className="hover-box">
                                 <Link
                                     href="#"
-                                    class="text-decoration-none secure-payment-method"
+                                    className="text-decoration-none secure-payment-method"
                                 >
                                     Secure transaction
                                 </Link>
