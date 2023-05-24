@@ -27,7 +27,7 @@ const MobileScreenModel = () => {
     return (
         <div>
             <header>
-                <div className="color-card-dev">
+                <div className="color-card-dev mobile-enter-sub-button-screen">
                     <button
                         className="mobile-zip-code-box-image-dilvery-box"
                         onClick={handleButtonClick}
@@ -37,7 +37,7 @@ const MobileScreenModel = () => {
                             style={{ marginRight: "0.5em" }}
                         />
                         <span style={{ color: "white" }}>
-                            Enter US zip code
+                            Enter US zip code 
                         </span>
                     </button>
 
