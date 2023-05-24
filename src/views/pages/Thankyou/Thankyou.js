@@ -141,7 +141,7 @@ useEffect(() => {
         <div className="product-name">
           {data && data?.product_name.length > 40 ? data?.product_name.slice(0, 40) + '...' : data?.product_name}
         </div>
-        <div className="product-details">
+        <div className="product-details-Thanks">
   <div className="quantity">
     <span>Quantity:</span> 
   </div>

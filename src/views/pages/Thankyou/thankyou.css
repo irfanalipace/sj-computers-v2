@@ -23,7 +23,7 @@
     /* border: 1px solid #000; */
 }
 
-.product-name {
+.thank-you-page .product-name-thanks {
     width: 20%;
     display: flex;
     align-items: center;
@@ -43,7 +43,7 @@
     border-top: 1px solid #dddddd;
 }
 
-.product-name {
+.thank-you-page .product-name-thanks {
     width: auto;
     display: flex;
     align-items: center;
@@ -129,28 +129,27 @@
     padding: 10px;
   }
   
-  .product-name {
+  .thank-you-page .product-name-thanks {
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 10px;
   }
   
-  .product-details div {
+  .product-details-Thanks div {
     margin-bottom: 5px;
   }
   
-  .product-details {
+  .product-details-Thanks {
     display: flex;
     flex-wrap: wrap;
   }
   
-  .product-details > div {
+  .product-details-Thanks > div {
     flex: 1 1 auto;
     display: flex;
     align-items: flex-start;
   }
   
-  .product-details span {
+  .product-details-Thanks span {
     font-weight: bold;
     margin-right: 5px;
   }
