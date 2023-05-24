@@ -35,7 +35,7 @@ class SquareController extends BaseController
     public function __construct()
     {
         $this->squareClient = new SquareClient([
-            'accessToken' => env('SQUARE_TOKEN'),
+            'accessToken' => config('app.square_token'),
             'environment' => Environment::SANDBOX,
         ]);
         $this->user = auth('api')->user();
