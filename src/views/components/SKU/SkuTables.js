@@ -75,7 +75,7 @@ const SkuTables = () => {
 
     return (
         <div>
-            <div className="sku-page-dev">
+            <div className="sku-page-dev mb-5">
                 <div className="row">
                     <div className="col-lg-12 col-md-12 col-sm-12">
                         <div className="seach-input-sku">
