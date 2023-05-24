@@ -1,11 +1,11 @@
 import ApiService from "@services/apiService";
 
-export function getOrderDetailsApi() {
+export function getOrderDetailsApi(page) {
     return new Promise((resolve, reject) => {
         const myParams = {
             month: "0",
-            per_page: "100",
-            page: "1",
+            per_page: "12",
+            page: page,
         };
 
         ApiService.get(`/order-list`, "", myParams)

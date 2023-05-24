@@ -18,6 +18,8 @@ return [
     'amazon_apikey' => env('AMAZON_APIKEY','810f8ad0-8585-4845-9954-9a82bdbc18bc'),
 
     'contact_us_email' => env('CONTACT_US_EMAIL','support@sjcomputers.us'),
+
+    'square_token' => env('SQUARE_TOKEN','EAAAECb1ai32160Bz6Aepr3tfyTPPA_jTpGVMgIclNbbyyUVMA0GoauqveDOpLs7'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment

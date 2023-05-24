@@ -31,16 +31,21 @@ export default function ThankYou() {
 //     history.push("/specific-path");
 //   };
 
-    useEffect(() => {
-        const order = location?.state?.order ;
-        setThankOrderDetails(order);
-        let Order = order?.Order;
-        console.log(Order?.order?.order_item           , "order");
-        setThankOrderItems(Order?.order?.order_item);
-        console.log(thankOrderItems          , "order 3");
+useEffect(() => {
+    const storedOrder = window.localStorage.getItem('thankyouOrderDetails');
+  const order = location?.state?.order || JSON.parse(storedOrder);
 
-        
-    }, []);
+  if (order) {
+    const orderString = JSON.stringify(order);
+    window.localStorage.setItem('thankyouOrderDetails', orderString);
+      setThankOrderDetails(order);
+      let Order = order?.Order;
+      
+      console.log(Order?.order?.order_item, "order");
+      setThankOrderItems(Order?.order?.order_item);
+      console.log(thankOrderItems, "order 3");
+    }
+  }, []);
 
 
     useEffect(() => {
@@ -103,6 +108,7 @@ export default function ThankYou() {
              </div>
         <div >
         </div>
+        <div className="row ">
         <table className="thank-you-table">
       <thead>
         <tr>
@@ -146,7 +152,10 @@ export default function ThankYou() {
           </tr>
         ))}
       </tbody>
-    </table>
+       </table>
+
+        </div>
+       
       <div className="row total-tax-row mx-0">
         <div className="col-12 d-flex justify-content-end">
           {/* <p >Tax ${120.6}</p> */}
@@ -161,7 +170,7 @@ export default function ThankYou() {
         <p className="bold-total">${thankOrderDetails?.Order?.total_amount ? thankOrderDetails?.Order?.total_amount :  'N/A'}</p>
         </div>
      </div>
-      <div className="row mx-0">
+      <div className="row mx-0 my-5">
         <div className="col-6 d-flex justify-content-start">
             <button className="track-order-btn" onClick={() =>  navigate ("/")}>Track your order</button>
         </div>

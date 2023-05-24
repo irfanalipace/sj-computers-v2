@@ -5,6 +5,7 @@ import { Card,
     useMantineTheme,
     Image,
     Button } from "@mantine/core";
+    import { ButtonGroup } from "@mantine/core";
 import './OrderProducts.css'
 
 function OrderTable({ deliveryDate , orderDetails, onToggleExpanded }) {
@@ -143,9 +144,39 @@ function OrderTable({ deliveryDate , orderDetails, onToggleExpanded }) {
     );
   }
 
-function OrderProducts({ data }) {
+function OrderProducts({ data , totalItems , sendToPage}) {
+
     const [expandedOrders, setExpandedOrders] = useState([]);
     const [view, setView] = useState(false);
+
+    const [totalRecords, setTotalRecords] = useState(totalItems?.success_orders?.total);
+    const [currentPage, setCurrentPage] = useState(totalItems?.success_orders?.current_page);
+    const perPage = 12; // Adjust the number of items per page as needed
+    // ...
+  
+    const pageCount = Math.ceil(totalRecords / perPage);
+  
+    const goToPage = (page) => {
+      setCurrentPage(page);
+      sendToPage(page);
+    };
+  
+    const nextPage = () => {
+      if (currentPage < pageCount) {
+        // setCurrentPage((prevPage) => prevPage + 1);
+        setCurrentPage(currentPage+1);
+        console.log(currentPage, 'current after next')
+        console.log(currentPage+1, '+1 after next')
+        sendToPage(currentPage +1 );
+      }
+    };
+  
+    const previousPage = () => {
+      if (currentPage > 1) {
+        setCurrentPage(currentPage-1);
+        sendToPage(currentPage-1);
+      }
+    };
 
   const theme = useMantineTheme();
   function formatDate(dateString) {
@@ -167,6 +198,65 @@ function OrderProducts({ data }) {
       }
    
   };
+
+  const renderPagination = () => {
+    const pages = [];
+  
+    // Case 1: More than 5 pages
+    if (pageCount > 5) {
+      for (let i = 1; i <= 2; i++) {
+        pages.push(
+          <Button
+            style={{
+              background: currentPage === i ? '#198754' : 'outline',
+              margin: '0px 5px',
+            }}
+            key={i}
+            onClick={() => goToPage(i)}
+            variant={currentPage === i ? 'filled' : 'outline'}
+          >
+            {i}
+          </Button>
+        );
+      }
+      pages.push(<span key="dots">...</span>);
+      pages.push(
+        <Button
+          style={{
+            background: currentPage === pageCount ? '#198754' : 'outline',
+            margin: '0px 5px',
+          }}
+          key={pageCount}
+          onClick={() => goToPage(pageCount)}
+          variant={currentPage === pageCount ? 'filled' : 'outline'}
+        >
+          {pageCount}
+        </Button>
+      );
+    }
+    // Case 2: Less than or equal to 5 pages
+    else {
+      for (let i = 1; i <= pageCount; i++) {
+        pages.push(
+          <Button
+            style={{
+              background: currentPage === i ? '#198754' : 'outline',
+              margin: '0px 5px',
+            }}
+            key={i}
+            onClick={() => goToPage(i)}
+            variant={currentPage === i ? 'filled' : 'outline'}
+          >
+            {i}
+          </Button>
+        );
+      }
+    }
+  
+    return <div>{pages}</div>;
+  };
+     
+  
   
 
   return (
@@ -246,6 +336,15 @@ function OrderProducts({ data }) {
                                 {data && (
                         <OrderTable  orderDetails={data} onToggleExpanded={toggleExpanded} />
                         )} 
+                        <div className='my-2' style={{display: 'flex', justifyContent : 'flex-end'}}>
+                            <Button style={{background: '#198754', marginRight: '2px'}} onClick={previousPage} disabled={currentPage === 1}>
+                            Previous
+                            </Button>
+                            {renderPagination()}
+                            <Button style={{background: '#198754'}} onClick={nextPage} disabled={currentPage === pageCount}>
+                            Next
+                            </Button>
+                        </div>
                         
                         
 
