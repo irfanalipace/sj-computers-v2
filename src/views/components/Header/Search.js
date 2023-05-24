@@ -1,23 +1,20 @@
 import { useState, useEffect } from "react";
-import {
-    Dropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-} from "reactstrap";
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { SET_SEARCH_STRING } from "@store/products/productsSlice";
-
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-
+import Loader from "@common/Spinner/Spinner";
 import "./Header.css";
-function Search() {
+
+function Search({ toggleSidebar }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState("All");
     const [search, setSearch] = useState("");
     const searchString = useSelector((state) => state.products.searchString);
     const dispatch = useDispatch();
+    const categories = useSelector((state) => state.category.categories);
 
     const toggle = () => setDropdownOpen((prevState) => !prevState);
 
@@ -42,6 +39,23 @@ function Search() {
         setSearch(searchString || "");
     }, [searchString]);
 
+    let renderedCategories = categories
+        .map((category) => (
+            <DropdownItem key={category.id} onClick={handleItemClick} className="ul-liste-items-all-buttons">
+                <Link className="text-decoration-none div-link-category-search">
+                 
+                    {category.name}
+                    
+                </Link>
+            </DropdownItem>
+        ))
+        // .slice(0, visibleCategories);
+
+    // const [visibleCategories, setVisibleCategories] = useState(8);
+    // const handleShowMore = () => {
+    //     setVisibleCategories((prevVisibleCategories) => prevVisibleCategories + 8);
+    // };
+
     return (
         <form className="input-group search-inputgroup" onSubmit={handleSearch}>
             <div className="input-group-btn search-panel">
@@ -49,28 +63,20 @@ function Search() {
                     <DropdownToggle caret className="all-button">
                         {selectedItem}
                     </DropdownToggle>
-                    {/* <DropdownMenu className="">
-                        <DropdownItem
-                            onClick={handleItemClick}
-                            className="ul-liste-items-all-buttons"
-                        >
-                            Automotive Accessories
+                    <DropdownMenu className="">
+                        <DropdownItem onClick={handleItemClick} className="ul-liste-items-all-buttons">
+                        <Link to='/' className="text-decoration-none">All Category</Link>
                         </DropdownItem>
-                        <DropdownItem
-                            onClick={handleItemClick}
-                            className="ul-liste-items-all-buttons"
-                        >
-                            Cell Phone Accessories
-                        </DropdownItem>
-                    </DropdownMenu> */}
+                        {renderedCategories}
+                        {/* {categories.length > visibleCategories && (
+                            <DropdownItem onClick={handleShowMore} className="ul-liste-items-all-buttons">
+                              categories
+                            </DropdownItem>
+                        )} */}
+                    </DropdownMenu>
                 </Dropdown>
             </div>
-            <input
-                type="hidden"
-                name="search_param"
-                value="all"
-                id="search_param"
-            />
+            <input type="hidden" name="search_param" value="all" id="search_param" />
             <input
                 type="search"
                 className="form-control search-input-type"
@@ -81,18 +87,11 @@ function Search() {
                 onChange={(e) => setSearch(e.target.value)}
             />
             <span className="input-group-btn">
-                <button
-                    type="button"
-                    className="btn btn-success search-logo"
-                    onClick={handleSearch}
-                >
-                    <FontAwesomeIcon
-                        icon={faSearch}
-                        size="1x"
-                        className="search-button-header-icon"
-                    />
+                <button type="button" className="btn btn-success search-logo" onClick={handleSearch}>
+                    <FontAwesomeIcon icon={faSearch} size="1x" className="search-button-header-icon" />
                 </button>
             </span>
+
         </form>
     );
 }
