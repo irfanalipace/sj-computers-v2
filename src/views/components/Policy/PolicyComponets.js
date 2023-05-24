@@ -121,7 +121,7 @@ const PolicyComponets = () => {
                         </div>
                     <div className="col-lg-8 col-md-10 col-sm-12 text-color-all-text text-dev-section-dev " style={{marginBottom:'44px'}}>
                         <div>
-                        <p  className="data-ul-list-itel-paragraph" style={{color:'white'}}>{ isLoading ? (
+                        <p  className="" style={{color:'white'}}>{ isLoading ? (
                         <>
                         <Loader />
                         
@@ -139,9 +139,9 @@ const PolicyComponets = () => {
                           For products purchased from the SJ Computers Global Store, see SJ Computers Returns. For more information on refund timing and amounts (including partial refunds and restocking fees), see Refunds. If you have returned an item to Amazon by mistake or included something not intended for Amazon in a return, see Mistaken Returns. 
                             </li>
                             </ul> */}
-                            <div className="margin-text-policy-text">
+                            <div className="">
                                 {/* <span className="conditional-granti">Unconditional Satisfaction Guarantee</span> */}
-                                <div style={{paddingTop:'12px'}}>
+                                <div style={{}}>
                                     {/* <span className="conditional-granti-text">If you're not completely satisfied with these brands at any time, we are happy to give you a full refund: Buttoned Down Core 10 Moon and Back Obsidian</span> */}
                            
                                 </div>

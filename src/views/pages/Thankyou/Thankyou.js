@@ -31,16 +31,21 @@ export default function ThankYou() {
 //     history.push("/specific-path");
 //   };
 
-    useEffect(() => {
-        const order = location?.state?.order ;
-        setThankOrderDetails(order);
-        let Order = order?.Order;
-        console.log(Order?.order?.order_item           , "order");
-        setThankOrderItems(Order?.order?.order_item);
-        console.log(thankOrderItems          , "order 3");
+useEffect(() => {
+    const storedOrder = window.localStorage.getItem('thankyouOrderDetails');
+  const order = location?.state?.order || JSON.parse(storedOrder);
 
-        
-    }, []);
+  if (order) {
+    const orderString = JSON.stringify(order);
+    window.localStorage.setItem('thankyouOrderDetails', orderString);
+      setThankOrderDetails(order);
+      let Order = order?.Order;
+      
+      console.log(Order?.order?.order_item, "order");
+      setThankOrderItems(Order?.order?.order_item);
+      console.log(thankOrderItems, "order 3");
+    }
+  }, []);
 
 
     useEffect(() => {

@@ -11,7 +11,7 @@ li.policy-listitem {
     margin-left: 30px;
 }.policy-background-color{
     background: #002549;
-    margin-bottom: 80px;
+    padding-bottom: 10px;
 }
 .policy-listitem a{
     font-family: 'Inter';
