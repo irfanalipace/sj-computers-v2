@@ -220,10 +220,10 @@ const OrderPage = () => {
             <div className="container-xl">
                 <Breadcrumb />
                 <div className="row mx-0">
-                    <div className="col-sm-6 col-md-8 col-8">
+                    <div className="col-sm-4  col-md-8 col-8">
                         <h3 className="account-heading">Your Order</h3>
                     </div>
-                    <div className="col-sm-6 col-md-4 col-4">
+                    <div className="col-sm-8 col-md-4 col-4">
                         {/* <p className="account-heading">Enter tracking id to search</p> */}
                         <label
                             style={{ marginBottom: 5 }}
