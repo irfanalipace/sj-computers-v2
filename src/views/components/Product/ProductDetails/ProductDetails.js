@@ -76,7 +76,7 @@ const ProductDetails = ({ product }) => {
     return (
         <div>
             <div className="">
-                <p className="item-title">{product?.name}</p>
+                {/* <p className="item-title">{product?.name}</p> */}
             </div>
             <div className="instock-detail">
                 <p className="most-demandind">
