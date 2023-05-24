@@ -139,26 +139,31 @@
 .all-button {
     color: #737373;
     /* position: absolute; */
-    width: 60px;
+    width: auto;
     height: 100%;
     background: #ece8e8 !important;
     border-right: 1px solid #b8b8b9;
     border-radius: 5px 0px 0px 5px;
 }
 
-.ul-liste-items-all-buttons:active {
+/* .ul-liste-items-all-buttons:active {
     background-color: #3b71ca;
     color: white;
-}
+} */
 .ul-liste-items-all-buttons:hover {
     background-color: #3b71ca;
-    color: white;
+    color: white ;
 }
 
-/* .ul-liste-items-all-buttons:nth-child(odd):hover {
-  background-color: lightgreen;
-  color: white;
-} */
+.ul-liste-items-all-buttons a {
+  
+  color: black;
+}
+.ul-liste-items-all-buttons a:hover {
+  
+    color: black;
+  }
+  
 
 .all-button:hover {
     color: #737373;
@@ -469,6 +474,9 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
+}
+.div-link-category-search{
+    list-style-type: none;
 }
 @media screen and (max-width: 1500px) {
     .product-boll {
