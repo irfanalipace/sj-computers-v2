@@ -109,11 +109,11 @@ const SkuTables = () => {
         <div>
             <div className="sku-page-dev mb-5">
                 <div className="row">
-                    <div className="col-lg-12 col-md-12 col-sm-12">
+                    <div className="col-lg-12 col-md-12 col-sm-12 ps-0">
                         <div className="seach-input-sku">
                             {""}{" "}
                             <FormControl
-                                classname="search-field"
+                                className="search-field"
                                 sx={{ m: 1, minWidth: 500 }}
                             >
                                 <TextField

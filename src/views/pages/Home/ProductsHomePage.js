@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Loader from "@common/LoaderComponent/LoaderComponent";
 
 import {
     fetchProducts,
@@ -59,7 +60,9 @@ const ProductsHomePage = () => {
     return (
         <>
             {isLoading ? (
-                <h3 className="pb-4">Fetching Products</h3>
+                <h3 className="pb-4">
+                    <Loader />
+                </h3>
             ) : (
                 <>
                     {products.length > 0 ? (
