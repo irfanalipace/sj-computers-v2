@@ -192,4 +192,8 @@
     .product-rating {
         width: 70%;
     }
+    .product-name{
+        margin: 80px  0 30px 0;
+        
+    }
 }

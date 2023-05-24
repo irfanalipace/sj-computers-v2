@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Controller, Navigation } from "swiper";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
+
+
 // import required modules
 import Banner1 from "@images/Banner/homepage-banner-1.jpg";
 import Banner2 from "@images/Banner/homepage-banner-2.jpg";
