@@ -4,15 +4,15 @@ import { FormControl, InputAdornment, TextField } from "@mui/material";
 import { getInventory } from "../../../core/api/inventory.js";
 import SearchIcon from "@mui/icons-material/Search";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-import { useSelector } from "react-redux";
 
 const SkuTables = () => {
     const [invent, setInvent] = useState();
     const [data, setData] = useState([]);
     const [search, setSearch] = useState("");
-    // const {isLoading} = useSelector((state) => state?.)
+    const [loading, setLoading] = useState(false);
 
     const handleChange = async (e) => {
+        setLoading(true);
         await getInventory({
             SKU: search,
         }).then((_) => {
@@ -162,7 +162,7 @@ const SkuTables = () => {
                                 </button>{" "}
                             </>
                         ) : (
-                            <></>
+                            <> {loading && <LoaderComponent />}</>
                         )}
                     </div>
                 </div>
