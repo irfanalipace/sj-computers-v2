@@ -224,19 +224,19 @@ export const CheckOutCard = ({ product }) => {
                     </div>
                     <div className="row ship-card-details-card-payment-method-checkout-card">
                         <div className="col-xl-7 col-6">
-                            <span className="color-card-text-paragrap-payment">
+                            <span className="color-card-text-paragrap-payment ships-form-span-tag">
                                 Ships Form
                             </span>
                         </div>
                         <div className="col-xl-5 col-6">
-                            <span className="color-card-text-paragrap-payment">
+                            <span className="color-card-text-paragrap-payment sjcomputer-tag-checkout-card">
                                 Sj Computers
                             </span>
                         </div>
                     </div>
                     <div className="row ">
                         <div className="col-xl-7 col-6">
-                            <span className="color-card-text-paragrap-payment">
+                            <span className="color-card-text-paragrap-payment return-from-span-tag-checkout">
                                 Return
                             </span>
                         </div>

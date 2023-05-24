@@ -139,7 +139,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                         Customer Services
                                     </Link>
                                 </li>
-                                <li>
+                                <li >
                                     {isAuthenticated ? (
                                         <>
                                             {isLoading ? (
@@ -148,6 +148,8 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                                 <Link
                                                     onClick={() =>
                                                         dispatch(logout())
+                                                        
+                                                       
                                                     }
                                                 >
                                                     Logout
@@ -155,7 +157,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                             )}
                                         </>
                                     ) : (
-                                        <Link to={"/login"}>Sign In</Link>
+                                        <Link to={"/login"} onClick={() => toggleSidebar()}>Sign In</Link>
                                     )}
                                 </li>
                             </ul>
