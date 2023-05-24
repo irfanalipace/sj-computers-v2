@@ -87,11 +87,13 @@ export const logout = () => {
         try {
             dispatch({ type: LOADING, payload: {} });
             await logoutApi();
+
             destroyToken();
             dispatch({ type: LOGOUT });
             dispatch({ type: CLEAR_CART });
             clearCartLocally();
             toast.success("Logged out");
+            ApiService.setHeader("Authorization", "");
         } catch (error) {
             console.log("Something went wrong in logout", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

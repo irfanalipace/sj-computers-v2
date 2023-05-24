@@ -9,14 +9,11 @@
     border-bottom: 1px solid lightgray;
 }
 
-
 /* .recommendation-slider .swiper-button-prev,
 .recommendation-slider .swiper-button-next , .prev-next-btn{
     font-size: 10px ;
     color: rgb(144, 29, 54);
 } */
-
-
 
 .product-image {
     width: 100%;
@@ -44,12 +41,7 @@
     padding-left: 0;
 }
 
-
-
-.image-wrapper {.recommendation-slider .swiper-button-prev,
-    .recommendation-slider .swiper-button-next , .prev-next-btn{
-        font-size: 20px !important;
-    }
+.image-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,8 +74,6 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     white-space: normal;
-    margin: 70px 0 8px 0;
-
 }
 
 .product-name:hover {
