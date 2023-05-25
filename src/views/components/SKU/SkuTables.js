@@ -41,7 +41,11 @@ const SkuTables = () => {
 
     const handlehold = async (e) => {
         setLoading(true);
-        await inventoryAction("hold", holdQuantity, search)
+        await inventoryAction({
+            action: "hold",
+            quantity: holdQuantity,
+            search,
+        })
             .then((_) => {
                 setLoading(false);
                 if (_.data.length > 0) {
@@ -66,7 +70,11 @@ const SkuTables = () => {
     const handleRelease = async (e) => {
         setLoading(true);
         setholdQuantity(null);
-        await inventoryAction("release", holdQuantity, search)
+        await inventoryAction({
+            action: "release",
+            quantity: holdQuantity,
+            search: search,
+        })
             .then((_) => {
                 setLoading(false);
                 if (_.data.length > 0) {
@@ -125,40 +133,47 @@ const SkuTables = () => {
                         </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="sku-main-dev-button">
-                        <span>
-                            <b>Add or Release Product’s quantity</b>
-                        </span>
-                        <div
-                            style={{ marginTop: "10px", paddingBottom: "4px" }}
-                            className="mein-input-dev-section"
-                        >
-                            <input
-                                type="text"
-                                className="search-sku-input-asin"
-                                placeholder="Enter quantity..."
-                                value={holdQuantity}
-                                onChange={(_) =>
-                                    setholdQuantity(_.target.value)
-                                }
-                            />
-                        </div>
-
-                        <div className="button-sku-button">
-                            <button onClick={handlehold}>Hold</button>
-                            <button
-                                onClick={handleRelease}
+                {invent?.id ? (
+                    <div className="row">
+                        <div className="sku-main-dev-button">
+                            <span>
+                                <b>Add or Release Product’s quantity</b>
+                            </span>
+                            <div
                                 style={{
-                                    background: "#269C40",
-                                    border: "none",
+                                    marginTop: "10px",
+                                    paddingBottom: "4px",
                                 }}
+                                className="mein-input-dev-section"
                             >
-                                Release
-                            </button>
+                                <input
+                                    type="text"
+                                    className="search-sku-input-asin"
+                                    placeholder="Enter quantity..."
+                                    value={holdQuantity}
+                                    onChange={(_) =>
+                                        setholdQuantity(_.target.value)
+                                    }
+                                />
+                            </div>
+
+                            <div className="button-sku-button">
+                                <button onClick={handlehold}>Hold</button>
+                                <button
+                                    onClick={handleRelease}
+                                    style={{
+                                        background: "#269C40",
+                                        border: "none",
+                                    }}
+                                >
+                                    Release
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                ) : (
+                    <></>
+                )}
                 <div>
                     <div className="col-lg-8 col-md-10 col-sm-12">
                         {" "}
@@ -242,7 +257,7 @@ const SkuTables = () => {
                                         </button>{" "}
                                     </>
                                 ) : (
-                                    <h3 className="my-3">No data found...</h3>
+                                    <h3 className="my-3">No data to show...</h3>
                                 )}
                             </>
                         )}

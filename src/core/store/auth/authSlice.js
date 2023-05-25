@@ -5,6 +5,7 @@ const initialState = {
     isAuthenticated: false,
     apiError: null,
     isLoading: false,
+    isDeletingPic: false,
     accessToken: "",
     currentPage: 1,
 };
@@ -56,6 +57,10 @@ const authSlice = createSlice({
         UPDATE_PROFILE: (state, action) => {
             state.user = { ...action.payload };
             state.isLoading = false;
+            state.isDeletingPic = false;
+        },
+        DELETING_PROFILE_PIC: (state, action) => {
+            state.isDeletingPic = true;
         },
         RESET_PAGE: (state) => {
             state.currentPage = 1;
@@ -63,6 +68,7 @@ const authSlice = createSlice({
         API_ERROR: (state, action) => {
             state.apiError = { ...action.payload };
             state.isLoading = false;
+            state.isDeletingPic = false;
         },
         CLEAR_API_ERRORS: (state) => {
             state.apiError = null;
@@ -79,6 +85,7 @@ export const {
     VERIFY_EMAIL,
     VERIFY_OTP,
     UPDATE_PROFILE,
+    DELETING_PROFILE_PIC,
     RESET_PAGE,
     API_ERROR,
     CLEAR_API_ERRORS,
