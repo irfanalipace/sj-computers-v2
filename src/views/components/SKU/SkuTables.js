@@ -15,7 +15,7 @@ const SkuTables = () => {
     const handleChange = async (e) => {
         setLoading(true);
         await getInventory({
-            SKU: search,
+            search: search,
         })
             .then((_) => {
                 setLoading(false);
@@ -38,7 +38,6 @@ const SkuTables = () => {
                 setLoading(false);
             });
     };
-
     const handlehold = async (e) => {
         setLoading(true);
         await inventoryAction({
@@ -118,7 +117,7 @@ const SkuTables = () => {
                             >
                                 <TextField
                                     id="outlined-basic"
-                                    label="Search by SKU"
+                                    label="Search"
                                     variant="outlined"
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
