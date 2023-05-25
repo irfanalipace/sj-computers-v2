@@ -4,21 +4,19 @@
     width: 100%;
     height: 100%;
 }
-.order-page{
+.order-page {
     font-weight: 600;
     font-size: 12px;
 }
-.order-list-container{
+.order-list-container {
     /* margin-top: -14px; */
     margin-left: -213px;
-    margin-top: 2%
+    margin-top: 2%;
 }
-.no-acces-order-dev{
-    
-        justify-content: center;
-        text-align: center;
-        margin-left: -318px;
-    
+.no-acces-order-dev {
+    justify-content: center;
+    text-align: center;
+    margin-left: -318px;
 }
 .account-page h3 {
     margin-top: 4px;
@@ -26,7 +24,7 @@
     font-size: 28px;
     /* margin: 30px 0 20px; */
     padding: 0 20px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 25px;
@@ -102,8 +100,8 @@
     padding-left: 218px;
     padding-right: 130px;
 }
-.order-search-bar-input{
-    padding-top: 26px
+.order-search-bar-input {
+    padding-top: 26px;
 }
 /* Profile page  */
 
@@ -268,24 +266,22 @@
     border-radius: 5px;
     border: 1px solid #318243;
     transition: border-color 0.3s;
-   
-        box-sizing: border-box;
-        /* position: absolute; */
-        width: 250px;
-        height: 32px;
-        left: 902px;
-        top: 165px;
-        border: 1px solid #318243;
-        border-radius: 5px;
-    
-}
-.button-order-dev{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 12px !important;
-line-height: 17px;
 
+    box-sizing: border-box;
+    /* position: absolute; */
+    width: 250px;
+    height: 32px;
+    left: 902px;
+    top: 165px;
+    border: 1px solid #318243;
+    border-radius: 5px;
+}
+.button-order-dev {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px !important;
+    line-height: 17px;
 }
 
 .green {
@@ -313,4 +309,9 @@ line-height: 17px;
 
 .orders-list-container {
     padding: 0 20px;
+}
+@media screen and (max-width: 600px) {
+    .account-page h3 {
+        font-size: 14px !important;
+    }
 }

@@ -114,7 +114,9 @@ const OrderPage = () => {
     const isLoading = useSelector((state) => state.orders.isLoading);
     const cancelOrders = useSelector((state) => state.orders.cancelOrders);
     const successOrders = useSelector((state) => state.orders.successOrders);
-    const ordergDetails = useSelector((state) => state.orders.ordergDetails);
+    const orderDetails = useSelector((state) => state.orders.orderDetails);
+
+    // console.log(orderDetails.total, 'total')
 
     const handleDropdownChange = (value) => {
         setSelectedValue(value);
@@ -122,21 +124,25 @@ const OrderPage = () => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        console.log(user, "user details");
-        setName(user.name);
-    }, [user]);
+    // useEffect(() => {
+    //     console.log(user, "user details");
+    //     setName(user.name);
+    // }, [user]);
 
-    useEffect(() => {
-        return function () {
-            dispatch(CLEAR_API_ERRORS());
-        };
-    }, []);
+    // useEffect(() => {
+    //     return function () {
+    //         dispatch(CLEAR_API_ERRORS());
+    //     };
+    // }, []);
     useEffect(() => {
         dispatch(getOrderDetails());
         const orderlist = OrderListhApi();
         console.log(orderlist, "orderList");
     }, [dispatch]);
+
+    useEffect(() => {
+        updatePage(1);
+    }, [activeTab]);
 
     const handleTabChange = (event, newValue) => {
         setOrderSearchData([]);
@@ -154,13 +160,22 @@ const OrderPage = () => {
         return;
     };
 
+    const updatePage = (data) => {
+        console.log(data, "select page");
+        dispatch(getOrderDetails(data));
+    };
+
     const renderTabContent = () => {
         if (isLoading) {
             return <LoaderComponent />;
         }
         return activeTab === 0 ? (
             successOrders.length > 0 ? (
-                <OrderCard data={successOrders} />
+                <OrderCard
+                    data={successOrders}
+                    totalItems={orderDetails}
+                    sendToPage={updatePage}
+                />
             ) : (
                 // <div className="flex justify-center items-center">
                 //     <p>No success orders</p>
@@ -207,10 +222,12 @@ const OrderPage = () => {
             <div className="container-xl">
                 <Breadcrumb />
                 <div className="row mx-0">
-                    <div className="col-sm-6 col-md-8 col-8">
-                        <h3 className="account-heading">Your Order</h3>
+                    <div className="col-sm-4 col-md-8 col-8">
+                        <h3 className="account-heading your-order-page">
+                            Your Order
+                        </h3>
                     </div>
-                    <div className="col-sm-6 col-md-4 col-4">
+                    <div className="col-sm-8 col-md-4 col-4 search-product-order-tables">
                         {/* <p className="account-heading">Enter tracking id to search</p> */}
                         <label
                             style={{ marginBottom: 5 }}
@@ -260,9 +277,18 @@ const OrderPage = () => {
                                 onChange={handleTabChange}
                                 centered
                             >
-                                <Tab label="Orders" />
-                                <Tab label="Cancelled Orders" />
-                                <Tab label="Search orders" />
+                                <Tab
+                                    label="Orders"
+                                    style={{ fontSize: "12px" }}
+                                />
+                                <Tab
+                                    label="Cancelled Orders"
+                                    style={{ fontSize: "12px" }}
+                                />
+                                <Tab
+                                    label="Search orders"
+                                    style={{ fontSize: "12px" }}
+                                />
                             </CustomTabs>
                             <div
                                 style={{
@@ -275,9 +301,20 @@ const OrderPage = () => {
                                     <>
                                         <p className="orderType">
                                             {}{" "}
-                                            {activeTab === 0
-                                                ? `${successOrders.length} orders`
-                                                : `${cancelOrders.length} cancelled order`}{" "}
+                                            {activeTab === 0 ? (
+                                                <>
+                                                    {!orderDetails
+                                                        ?.success_orders
+                                                        ?.total ? (
+                                                        <LoaderComponent />
+                                                    ) : (
+                                                        `${orderDetails?.success_orders?.total} orders`
+                                                    )}
+                                                    {/* { } */}
+                                                </>
+                                            ) : (
+                                                `${orderDetails?.cancel_orders?.total} cancelled order`
+                                            )}{" "}
                                             place in
                                         </p>
                                         <div style={{ display: "inline-flex" }}>
@@ -331,7 +368,7 @@ const OrderPage = () => {
                     >
                         <OrderInvoiceCard
                             activeTab={activeTab}
-                            data={ordergDetails}
+                            data={orderDetails}
                         />
                     </div> */}
                 </div>

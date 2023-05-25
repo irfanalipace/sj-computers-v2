@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Controller, Navigation } from "swiper";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
+
+
 // import required modules
 import Banner1 from "@images/Banner/homepage-banner-1.jpg";
 import Banner2 from "@images/Banner/homepage-banner-2.jpg";
@@ -48,12 +50,12 @@ const Slider = () => {
                         <SwiperSlide key={index}>
                             <>
                                 <LazyLoadImage
-                                    className="d-md-block d-none"
+                                    className="d-sm-block d-none"
                                     src={banner.desktop}
                                     alt={"Banner"}
                                 />
                                 <LazyLoadImage
-                                    className="d-md-none d-block"
+                                    className="d-sm-none d-block"
                                     src={banner.mobile}
                                     alt={"Banner"}
                                 />

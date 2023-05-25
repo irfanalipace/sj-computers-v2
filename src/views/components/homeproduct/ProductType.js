@@ -6,12 +6,9 @@ import ProductItem4 from "@components/homeproduct/productcategory/ProductItem4";
 
 import addDesktop from "@images/categories/wellcome.webp";
 // import addMobile from "@images/advertisement/advertisement-mobile.png";
-import welcomeImage from "@images/advertisement/welcome-banner.png";
 import categoryImg1 from "@images/categories/desktopweb.webp";
 import categorybusinussweb from "@images/categories/businussweb.webp";
-import categorywellcom from "@images/categories/wellcomeweb.webp";
 import wellsjcomputer from "@images/categories/welcomesjcomputer.webp";
-import { AddAlarmRounded } from "@material-ui/icons";
 
 export const ProductType = () => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -97,12 +94,12 @@ export const ProductType = () => {
                         <div className="product-section-advertisment">
                             <img
                                 src={addDesktop}
-                                className="advertisment-img d-sm-none d-lg-block"
+                                className="advertisment-img"
                             />
-                            <img
+                            {/* <img
                                 src={addDesktop}
                                 className="advertisment-img d-none d-lg-none"
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>

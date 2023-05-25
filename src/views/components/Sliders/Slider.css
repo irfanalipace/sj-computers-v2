@@ -21,15 +21,6 @@ body {
     height: 100%;
 }
 
-.recommendation-slider .swiper-button-prev,
-.recommendation-slider .swiper-button-next {
-    /* left: 0; */
-  
-    color: gray;
-}
-
-
-
 .banner-slider-section .swiper-slide {
     text-align: center;
     font-size: 18px;
@@ -50,13 +41,18 @@ body {
 }
 .banner-slider-section .swiper-button-prev {
     color: #ffffff;
-    top: var(--swiper-navigation-top-offset, 20%) !important;
+    top: var(--swiper-navigation-top-offset, 25%) !important;
     left: var(--swiper-navigation-sides-offset, 30px);
 }
 .banner-slider-section .swiper-button-next {
     color: #ffffff;
-    top: var(--swiper-navigation-top-offset, 20%) !important;
+    top: var(--swiper-navigation-top-offset, 25%) !important;
     right: var(--swiper-navigation-sides-offset, 30px);
+}
+.banner-slider-section .swiper-button-next:after,
+.banner-slider-section .swiper-button-prev:after {
+    font-size: 35px !important;
+    color: #0c1fa670;
 }
 
 @media screen and (max-width: 576px) {

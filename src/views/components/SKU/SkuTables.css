@@ -43,6 +43,10 @@
     order: 0;
     flex-grow: 0;
 }
+.sku-table-row {
+    padding: 20px;
+    height: 100px;
+}
 .sku-main-dev-button span {
     font-family: "Inter";
     font-style: normal;
@@ -107,7 +111,7 @@
     margin-right: 38px;
 }
 .table-sku-style {
-    width: 100%;
+    width: 70em;
     top: 12px;
     margin-top: 11px;
 }
@@ -161,10 +165,40 @@
     order: 1;
     flex-grow: 0;
 }
+.table {
+    border-radius: 8px;
+    width: 1000px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
 .table-sku-style tbody {
     text-align: center;
 }
-
+.sku-table-data {
+    padding: 10px;
+}
+.sku-table-headers {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    background-color: rgba(40, 163, 67, 0.2);
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+.sku-table-data {
+    width: 70%;
+    padding: 20px;
+}
+.sku-table-cell {
+    display: flex;
+}
+.search-btn {
+    color: white;
+    background: #269c40;
+    border: none;
+    border-radius: 8px;
+    padding: 1.2rem;
+    margin-top: 8px;
+}
 .table-sku-style tbody tr {
     width: 100%; /* Set the desired width */
     height: 50px; /* Set the desired height */

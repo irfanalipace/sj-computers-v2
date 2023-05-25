@@ -31,6 +31,7 @@ export default function Product() {
             setProduct(filteredProduct);
         } else {
             try {
+
                 const response = await productDetailsApi(productId);
                 setProduct(response.data);
             } catch (error) {}
@@ -67,7 +68,7 @@ export default function Product() {
             <div className="product-container">
                
                 {isLoading ? <LoaderComponent /> : <ProductComponent />}
-                <Recommendation productId={productId} />
+                <Recommendation  />
 
             </div>
         </div>

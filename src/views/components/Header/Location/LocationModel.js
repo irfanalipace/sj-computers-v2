@@ -8,8 +8,6 @@ import img1 from "@images/bottom-arrow.png";
 import { updateState } from "@store/states/statesThunks";
 import { UPDATE_STATE } from "@store/states/statesSlice";
 import Loader from "@common/Spinner/Spinner";
-import { saveUserState } from "@services/jwtService";
-
 
 import "./LocationModel.css";
 function UpdateStateModel({ isOpen = false, handleClose }) {
@@ -23,26 +21,26 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
 
     // useEffect(() => {
     //     setShowModal(true);
-        
+
     //     return;
     //     let timer;
-        
+
     //     const handleModal = () => {
     //       timer = setTimeout(() => {
     //       }, 5000);
     //     };
-    
+
     //     // Check if it's the first visit
     //     const isFirstVisit = localStorage.getItem('firstVisit') === null;
-    
+
     //     if (isFirstVisit) {
     //       // Show the modal after 5 seconds
     //       handleModal();
-    
+
     //       // Set a flag to indicate the first visit
     //       localStorage.setItem('firstVisit', 'true');
     //     }
-    
+
     //     // Clear the timer when the component unmounts or when the user closes the modal
     //     return () => clearTimeout(timer);
     //   }, []);
@@ -57,15 +55,16 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
     };
 
     const clickHandler = async () => {
-        // local state me store 
+        // local state me store
         // console.log(state, "state data");
-        if(isAuthenticated){
-            dispatch(updateState(state, handleClose));
-        }
-        else {
-            dispatch(UPDATE_STATE(state))
-            // saveUserState(state);
-            handleClose();
+        if (state?.id) {
+            if (isAuthenticated) {
+                dispatch(updateState(state, handleClose));
+            } else {
+                dispatch(UPDATE_STATE(state));
+                // saveUserState(state);
+                handleClose();
+            }
         }
     };
 
@@ -171,7 +170,6 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                             </div>
                         </div>
 
-                      
                         <Dropdown>
                             <Dropdown.Toggle
                                 id="dropdown-basic"
@@ -193,9 +191,12 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                                 ))}
                             </Dropdown.Menu>
                         </Dropdown>
-                        <Button onClick={clickHandler} className="done-button my-3 px-0 mx-0">
-                        {isLoading ? <Loader /> : "Done"}
-                       </Button>
+                        <Button
+                            onClick={clickHandler}
+                            className="done-button my-3 px-0 mx-0"
+                        >
+                            {isLoading ? <Loader /> : "Done"}
+                        </Button>
                         <div className="hrozantel-hr-location-model">
                             <h5 className="h5-model-box-loction">or</h5>
                         </div>
@@ -205,9 +206,7 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                             </button>
                         </Link>
                     </>
-                       
-                      
-                        
+
                     // </div>
                 )}
             </Modal.Body>

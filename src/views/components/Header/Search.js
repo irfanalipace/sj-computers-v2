@@ -5,32 +5,34 @@ import {
     DropdownMenu,
     DropdownItem,
 } from "reactstrap";
+import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { SET_SEARCH_STRING } from "@store/products/productsSlice";
-
+import {
+    SET_SEARCH_STRING,
+    SET_SELECTED_CATEGORY,
+} from "@store/products/productsSlice";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-
+import Loader from "@common/Spinner/Spinner";
 import "./Header.css";
+
 function Search() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState("All");
+    const [selectedItem, setSelectedItem] = useState({ name: "ALL", id: null });
     const [search, setSearch] = useState("");
-    const searchString = useSelector((state) => state.products.searchString);
+    const { searchString, selectedCategory } = useSelector(
+        (state) => state.products
+    );
     const dispatch = useDispatch();
+    const categories = useSelector((state) => state.category.categories);
+    const location = useLocation();
 
     const toggle = () => setDropdownOpen((prevState) => !prevState);
 
-    const handleItemClick = (e) => {
-        e.preventDefault();
-        const item = e.target.text;
-        setSelectedItem(item);
-        if (item === "Automotive Accessories") {
-            console.log("You selected Automotive Accessories");
-        } else if (item === "Cell Phone Accessories") {
-            console.log("You selected Cell Phone Accessories");
-        }
-        setDropdownOpen(false); // Close the dropdown after item is selected
+    const handleItemClick = (category) => {
+        setSelectedItem(category);
+        dispatch(SET_SELECTED_CATEGORY(category?.id));
     };
 
     const handleSearch = (e) => {
@@ -42,27 +44,58 @@ function Search() {
         setSearch(searchString || "");
     }, [searchString]);
 
+    useEffect(() => {
+        if (selectedCategory === null)
+            setSelectedItem({ name: "ALL", id: null });
+    }, [selectedCategory]);
+
+    let renderedCategories = categories.map((category) => (
+        <DropdownItem
+            key={category.id}
+            onClick={() => handleItemClick(category)}
+            className="ul-liste-items-all-buttons"
+        >
+            <span className="text-decoration-none div-link-category-search">
+                {category.name}
+            </span>
+        </DropdownItem>
+    ));
+    // .slice(0, visibleCategories);
+
+    // const [visibleCategories, setVisibleCategories] = useState(8);
+    // const handleShowMore = () => {
+    //     setVisibleCategories((prevVisibleCategories) => prevVisibleCategories + 8);
+    // };
+
     return (
         <form className="input-group search-inputgroup" onSubmit={handleSearch}>
             <div className="input-group-btn search-panel">
-                <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                <Dropdown
+                    isOpen={dropdownOpen}
+                    toggle={toggle}
+                    disabled={location.pathname.includes("category")}
+                >
                     <DropdownToggle caret className="all-button">
-                        {selectedItem}
+                        {selectedItem.name}
                     </DropdownToggle>
-                    {/* <DropdownMenu className="">
+                    <DropdownMenu className="">
                         <DropdownItem
-                            onClick={handleItemClick}
+                            onClick={() =>
+                                handleItemClick({ name: "ALL", id: null })
+                            }
                             className="ul-liste-items-all-buttons"
                         >
-                            Automotive Accessories
+                            <span className="text-decoration-none">
+                                All Category
+                            </span>
                         </DropdownItem>
-                        <DropdownItem
-                            onClick={handleItemClick}
-                            className="ul-liste-items-all-buttons"
-                        >
-                            Cell Phone Accessories
-                        </DropdownItem>
-                    </DropdownMenu> */}
+                        {renderedCategories}
+                        {/* {categories.length > visibleCategories && (
+                            <DropdownItem onClick={handleShowMore} className="ul-liste-items-all-buttons">
+                              categories
+                            </DropdownItem>
+                        )} */}
+                    </DropdownMenu>
                 </Dropdown>
             </div>
             <input

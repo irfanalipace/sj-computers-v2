@@ -45,6 +45,8 @@
     padding: 25px 20px;
     font-weight: 700;
     font-size: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .sideMenu-header img {

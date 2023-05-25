@@ -7,121 +7,10 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 
 import { useState } from "react";
 import { useEffect } from "react";
-// const products = [
-//     {
-//         id: 1,
-//         imageSrc: "https://via.placeholder.com/165x135",
-//         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt.",
-//         rating: 4.5,
-//         numReviews: 100,
-//         offPercentage: 20,
-//         originalPrice: "$100",
-//         newPrice: "$80",
-//         deliveryCharges: "Free delivery",
-//     },
-//     {
-//         id: 2,
-//         imageSrc: "https://via.placeholder.com/165x135",
-//         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt.",
-//         rating: 3.5,
-//         numReviews: 50,
-//         offPercentage: 10,
-//         originalPrice: "$50",
-//         newPrice: "$45",
-//         deliveryCharges: "$5 delivery",
-//     },
-//     {
-//         id: 3,
-//         imageSrc: "https://via.placeholder.com/165x135",
-//         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 3",
-//         rating: 4,
-//         numReviews: 75,
-//         offPercentage: 30,
-//         originalPrice: "$80",
-//         newPrice: "$56",
-//         deliveryCharges: "Free delivery",
-//     },
-//     {
-//         id: 4,
-//         imageSrc: "https://via.placeholder.com/165x135",
-//         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 4",
-//         rating: 5,
-//         numReviews: 120,
-//         offPercentage: 15,
-//         originalPrice: "$90",
-//         newPrice: "$76",
-//         deliveryCharges: "$5 delivery",
-//     },
-//     {
-//         id: 5,
-//         imageSrc: "https://via.placeholder.com/165x135",
-//         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 5",
-//         rating: 4.5,
-//         numReviews: 90,
-//         offPercentage: 25,
-//         originalPrice: "$120",
-//         newPrice: "$90",
-//         deliveryCharges: "Free delivery",
-//     },
-//     {
-//         id: 6,
-//         imageSrc: "https://via.placeholder.com/165x135",
-//         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 1",
-//         rating: 4.5,
-//         numReviews: 100,
-//         offPercentage: 20,
-//         originalPrice: "$100",
-//         newPrice: "$80",
-//         deliveryCharges: "Free delivery",
-//     },
-//     {
-//         id: 7,
-//         imageSrc: "https://via.placeholder.com/165x135",
-//         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 2",
-//         rating: 3.5,
-//         numReviews: 50,
-//         offPercentage: 10,
-//         originalPrice: "$50",
-//         newPrice: "$45",
-//         deliveryCharges: "$5 delivery",
-//     },
-//     {
-//         id: 8,
-//         imageSrc: "https://via.placeholder.com/165x135",
-//         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 3",
-//         rating: 4,
-//         numReviews: 75,
-//         offPercentage: 30,
-//         originalPrice: "$80",
-//         newPrice: "$56",
-//         deliveryCharges: "Free delivery",
-//     },
-//     {
-//         id: 9,
-//         imageSrc: "https://via.placeholder.com/165x135",
-//         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 4",
-//         rating: 5,
-//         numReviews: 120,
-//         offPercentage: 15,
-//         originalPrice: "$90",
-//         newPrice: "$76",
-//         deliveryCharges: "$5 delivery",
-//     },
-//     {
-//         id: 10,
-//         imageSrc: "https://via.placeholder.com/165x135",
-//         name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp eiusmod tempor incididunt. 5",
-//         rating: 4.5,
-//         numReviews: 90,
-//         offPercentage: 25,
-//         originalPrice: "$120",
-//         newPrice: "$90",
-//         deliveryCharges: "Free delivery",
-//     },
-// ];
 
 
-export default function Recommendation({productId}) {
+
+export default function Recommendation() {
     const dispatch = useDispatch();
     const [product, setProduct] = useState(null);
     const products = useSelector((state) => state.products.products);
@@ -149,7 +38,7 @@ export default function Recommendation({productId}) {
                         {isLoading || !products ? (
                             <LoaderComponent />
                         ) : (
-                            <ProductSlider products={products}  productId={productId}/>
+                            <ProductSlider products={products}/>
                         )}
                     </div>
                 </div>

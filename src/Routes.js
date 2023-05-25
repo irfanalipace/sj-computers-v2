@@ -236,9 +236,11 @@ export const Router = () => {
         {
             path: "/thank-you",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <ThankYou />
-                </Suspense>
+                <ProtectedRoute>
+                    <Suspense fallback={<Loader />}>
+                        <ThankYou />
+                    </Suspense>
+                </ProtectedRoute>
             ),
         },
         {
@@ -252,9 +254,11 @@ export const Router = () => {
         {
             path: "/sku",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <SkuTables />
-                </Suspense>
+                <ProtectedRoute>
+                    <Suspense fallback={<Loader />}>
+                        <SkuTables />
+                    </Suspense>
+                </ProtectedRoute>
             ),
         },
         {
