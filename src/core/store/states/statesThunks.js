@@ -5,6 +5,7 @@ import {
     API_ERROR,
 } from "@store/states/statesSlice";
 import { statesApi, updateStateApi, getCurrentStateApi } from "@api/states";
+import { toast } from "react-toastify";
 
 export const fetchStates = () => {
     return async (dispatch) => {
@@ -45,6 +46,8 @@ export const updateState = (data, cb) => {
                 type: UPDATE_STATE,
                 payload: { id: data.id, name: data.name },
             });
+            window.localStorage.removeItem("tempState");
+            toast.success("State Updated Successfully");
         } catch (error) {
             console.log("Something went wrong in states", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
