@@ -237,7 +237,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                             </div>
                             <div className="col-4">
                                 <div className="field-section">
-                                    <label htmlFor={"zipCode"}>
+                                    <label htmlFor={"zip_code"}>
                                         {" "}
                                         Zip Code
                                         <span className="text-danger">*</span>

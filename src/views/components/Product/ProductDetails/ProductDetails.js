@@ -187,18 +187,25 @@ const ProductDetails = ({ product }) => {
             <div className="col-md-12 list-style-margin">
                 <ul className="product-details">
                     {productDetails.map((item, index) => (
-                        <li key={`${item.key}-${index}`} className="row mx-0">
-                            <div className="col-md-3 col-6">
-                                <span className="item12 text-capitalize">
-                                    {item?.key}
-                                </span>
-                            </div>
-                            <div className="col-md-9 col-6">
-                                <span className="items text-capitalize">
-                                    {item?.value}
-                                </span>
-                            </div>
-                        </li>
+                        <>
+                            {item?.value && (
+                                <li
+                                    key={`${item.key}-${index}`}
+                                    className="row mx-0"
+                                >
+                                    <div className="col-md-3 col-6">
+                                        <span className="item12 text-capitalize">
+                                            {item?.key}
+                                        </span>
+                                    </div>
+                                    <div className="col-md-9 col-6">
+                                        <span className="items text-capitalize">
+                                            {item?.value}
+                                        </span>
+                                    </div>
+                                </li>
+                            )}
+                        </>
                     ))}
                 </ul>
             </div>
