@@ -61,6 +61,7 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
             if (isAuthenticated) {
                 dispatch(updateState(state, handleClose));
             } else {
+                window.localStorage.setItem('tempState', JSON.stringify(state));
                 dispatch(UPDATE_STATE(state));
                 // saveUserState(state);
                 handleClose();
