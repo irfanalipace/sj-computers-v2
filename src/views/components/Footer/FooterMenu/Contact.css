@@ -34,7 +34,7 @@
     background: #318243;
 }
 .p-tages-text-contact {
-    padding-left: 57px;
+    padding-left: 30px;
     /* padding: 36px; */
     padding-top: 64px;
     padding-bottom: 64px;
@@ -122,7 +122,21 @@
     width: 476px;
     max-height: 100%;
 }
+.text-aligin-contact-menu:hover {
+    border: 1px solid white;
+    /* padding: 4px; */
+    margin-right: 2px;
+    margin-left: 3px;
+}
 
+.nav-item-contact {
+    border-right: 1px solid white;
+    margin-right: 6px;
+    margin-left: 6px;
+}
+.on-focus-colo-contact:focus{
+    color: white !important;
+}
 @media screen and (max-width: 1000px) {
     .contact-text-home {
         font-size: 18px;
@@ -166,5 +180,9 @@
     }
     .vertical-line-contactus {
        display: none;
+    }.nav-item-contact{
+        display: none;
+    }.text-aligin-contact-menu:hover {
+      display: none;
     }
 }

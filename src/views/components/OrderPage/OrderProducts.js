@@ -337,11 +337,11 @@ function OrderProducts({ data , totalItems , sendToPage}) {
                         <OrderTable  orderDetails={data} onToggleExpanded={toggleExpanded} />
                         )} 
                         <div className='my-2' style={{display: 'flex', justifyContent : 'flex-end'}}>
-                            <Button style={{background: '#198754', marginRight: '2px'}} onClick={previousPage} disabled={currentPage === 1}>
+                            <Button style={{background: '#198754', marginRight: '2px'}} onClick={previousPage} disabled={currentPage === 1} className="toggle-button-table-data">
                             Previous
                             </Button>
                             {renderPagination()}
-                            <Button style={{background: '#198754'}} onClick={nextPage} disabled={currentPage === pageCount}>
+                            <Button style={{background: '#198754'}} onClick={nextPage} disabled={currentPage === pageCount} className="toggle-button-table-data">
                             Next
                             </Button>
                         </div>
