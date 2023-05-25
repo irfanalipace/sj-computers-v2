@@ -9,13 +9,13 @@ use Exception;
 trait AmazonTrait
 {
 
-    public function getAmazonInventory($productId = '', $sku = '')
+    public function getAmazonInventory($productId = '', $sku = '',$asin = '')
     {
-
+        
         $status = false;
         $quantity = 0;
         if (empty($productId)) {
-            $product = Product::where('sku', $sku)->first();
+            $product = Product::where('sku', $sku)->orWhere('asin',$asin)->first();
         } else {
             $product = Product::find($productId);
         }

@@ -17,7 +17,8 @@ class InventoryController extends BaseController
     public function getInventory(GetInventoryRequest $request)
     {
         try {
-            $inventory = $this->getAmazonInventory(null, $request->SKU);
+           
+            $inventory = $this->getAmazonInventory(null, $request->sku,$request->asin);
 
             return $this->sendResponse([$inventory], 'Amazon product list');
         } catch (Exception $e) {
@@ -29,13 +30,13 @@ class InventoryController extends BaseController
     public function ActionPerform(ActionPerfomRequest $request)
     {
         try {
-            $inventory = $this->getAmazonInventory(null,$request->sku);
+            $inventory = $this->getAmazonInventory(null,$request->sku,$request->asin);
 
             if ($inventory['status']) {
 
                 $this->updateAmazonInventory($inventory, $request->quantity,$request->action);
 
-                $amazonInventory =  $this->getAmazonInventory(null,$request->sku);
+                $amazonInventory =  $this->getAmazonInventory(null,$request->sku,$request->asin);
 
                 return $this->sendResponse([$amazonInventory], 'Amazon product list');
             }else{

@@ -24,7 +24,8 @@ class GetInventoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'SKU' => ['required']
+            'asin' => ["required_without:sku"],
+            'sku' => ['required_without:asin']
         ];
     }
 }
