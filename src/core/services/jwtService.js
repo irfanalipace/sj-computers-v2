@@ -6,7 +6,7 @@ const USER = "user";
 // const USER_EMAIL = "user_email";
 // const USER_IMAGE = "user_image";
 const PASSWORD = "user_password";
-// const USER_STATE = "state";
+const USER_STATE = "state";
 const TEMP_TOKEN = "temp_token";
 
 export const getToken = () => window.localStorage.getItem(TOKEN);
@@ -19,9 +19,8 @@ export const saveUser = (user) => {
         userName: user.name,
         userEmail: user.email,
         userImage: user.profile_pic,
-        userState: user.state,
     };
-    return window.localStorage.setItem(USER, JSON.stringify(userDetails));
+    window.localStorage.setItem(USER, JSON.stringify(userDetails));
 };
 export const saveUserName = (userName) => {
     const user = getUser();
@@ -36,9 +35,7 @@ export const saveUserImage = (userImage) => {
 };
 
 export const saveUserState = (userState) => {
-    const user = getUser();
-    user.state = userState;
-    saveUser(user);
+    window.localStorage.setItem(USER_STATE, JSON.stringify(userState));
 };
 export const saveUserEmail = (email) => {
     const user = getUser();
@@ -46,14 +43,11 @@ export const saveUserEmail = (email) => {
     saveUser(user);
 };
 
-
-
 export const saveTempToken = (token) => {
     ApiService.setHeader("Authorization", "Bearer " + token);
     window.localStorage.setItem(TEMP_TOKEN, token);
 };
 export const getTempToken = () => window.localStorage.getItem(TEMP_TOKEN);
-
 
 export const saveUserPassword = (password) => {
     window.localStorage.setItem(PASSWORD, password);
@@ -64,27 +58,25 @@ export const getUserPassword = () => window.localStorage.getItem(PASSWORD);
 export const destroyUserPassword = () =>
     window.localStorage.removeItem(PASSWORD);
 
-
-export const getUser = () => JSON.parse(window.localStorage.getItem(USER));
+export const getUser = () =>
+    JSON.parse(window.localStorage.getItem(USER)) || {};
 
 export const getUserEmail = () => {
     const user = getUser();
-    return user.email;
+    return user?.userEmail;
 };
 export const getUserName = () => {
     const user = getUser();
-    return user.name;
+    return user.userName;
 };
 
 export const getUserImage = () => {
     const user = getUser();
-    return user.name;
+    return user.profile_pic;
 };
 
-export const getUserState = () => {
-    const user = getUser();
-    return user.state;
-};
+export const getUserState = () =>
+    JSON.parse(window.localStorage.getItem(USER_STATE));
 
 const deleteUser = () => window.localStorage.removeItem(USER);
 
