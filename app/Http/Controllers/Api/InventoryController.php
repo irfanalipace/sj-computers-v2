@@ -18,7 +18,17 @@ class InventoryController extends BaseController
     {
         try {
            
-            $inventory = $this->getAmazonInventory(null, $request->sku,$request->asin);
+            $search = $request->search;
+            if (preg_match('/^B0/', $search)) {
+                // Value starts with "B0", treat it as ASIN
+                $type = StatusEnum::ASIN;
+                
+            } elseif (strpos($search, '-') !== false) {
+                // Value contains a hyphen "-", treat it as SKU
+                $type = StatusEnum::SKU;
+            }
+            
+            $inventory = $this->getAmazonInventory(null,$type, $search);
 
             return $this->sendResponse([$inventory], 'Amazon product list');
         } catch (Exception $e) {
@@ -30,13 +40,13 @@ class InventoryController extends BaseController
     public function ActionPerform(ActionPerfomRequest $request)
     {
         try {
-            $inventory = $this->getAmazonInventory(null,$request->sku,$request->asin);
+            $inventory = $this->getAmazonInventory(null,$request->search);
 
             if ($inventory['status']) {
 
                 $this->updateAmazonInventory($inventory, $request->quantity,$request->action);
 
-                $amazonInventory =  $this->getAmazonInventory(null,$request->sku,$request->asin);
+                $amazonInventory =  $this->getAmazonInventory(null,$request->search);
 
                 return $this->sendResponse([$amazonInventory], 'Amazon product list');
             }else{

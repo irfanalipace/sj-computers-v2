@@ -26,8 +26,7 @@ class ActionPerfomRequest extends FormRequest
         return [
             'action' => ['required','in:hold,release'],
             'quantity' => ['required','integer','min:1'],
-            'sku' => ['required_without:asin','exists:products,sku'],
-            'asin' => ['required_without:sku','exists:products,asin']
+            'search' => ['required'],
         ];
     }
 }
