@@ -1,32 +1,52 @@
 import ApiService from "@services/apiService";
 
 const TOKEN = "token";
-const USER_NAME = "user_name";
-const USER_EMAIL = "user_email";
-const USER_IMAGE = "user_image";
+// const USER_NAME = "user_name";
+const USER = "user";
+// const USER_EMAIL = "user_email";
+// const USER_IMAGE = "user_image";
 const PASSWORD = "user_password";
-const USER_STATE = "state";
+// const USER_STATE = "state";
 const TEMP_TOKEN = "temp_token";
 
 export const getToken = () => window.localStorage.getItem(TOKEN);
-
 export const saveToken = (token) => {
     window.localStorage.setItem(TOKEN, token);
 };
 
-export const saveUserName = (userName) =>
-    window.localStorage.setItem(USER_NAME, userName);
+export const saveUser = (user) => {
+    const userDetails = {
+        userName: user.name,
+        userEmail: user.email,
+        userImage: user.profile_pic,
+        userState: user.state,
+    };
+    return window.localStorage.setItem(USER, JSON.stringify(userDetails));
+};
+export const saveUserName = (userName) => {
+    const user = getUser();
+    user.userName = userName;
+    saveUser(user);
+};
 
-export const saveUserImage = (userImage) =>
-    window.localStorage.setItem(USER_IMAGE, userImage);
+export const saveUserImage = (userImage) => {
+    const user = getUser();
+    user.profile_pic = userImage;
+    saveUser(user);
+};
 
-export const saveUserState = (userState) =>
-    window.localStorage.setItem(USER_STATE, JSON.stringify(userState));
+export const saveUserState = (userState) => {
+    const user = getUser();
+    user.state = userState;
+    saveUser(user);
+};
+export const saveUserEmail = (email) => {
+    const user = getUser();
+    user.userEmail = email;
+    saveUser(user);
+};
 
-export const getUserImage = (userImage) =>
-    window.localStorage.getItem(USER_IMAGE, userImage);
 
-export const deleteUserImage = () => window.localStorage.removeItem(USER_IMAGE);
 
 export const saveTempToken = (token) => {
     ApiService.setHeader("Authorization", "Bearer " + token);
@@ -34,39 +54,39 @@ export const saveTempToken = (token) => {
 };
 export const getTempToken = () => window.localStorage.getItem(TEMP_TOKEN);
 
-export const saveUserEmail = (userEmail) =>
-    window.localStorage.setItem(USER_EMAIL, userEmail);
 
-export const saveUserPassword = (password) =>
+export const saveUserPassword = (password) => {
     window.localStorage.setItem(PASSWORD, password);
+};
 
 export const getUserPassword = () => window.localStorage.getItem(PASSWORD);
 
 export const destroyUserPassword = () =>
     window.localStorage.removeItem(PASSWORD);
 
-export const getUserName = () => window.localStorage.getItem(USER_NAME);
-export const getUserEmail = () => window.localStorage.getItem(USER_EMAIL);
 
-export const saveUser = (user) => {
-    window.localStorage.setItem(USER_EMAIL, user.email);
-    window.localStorage.setItem(USER_IMAGE, user.profile_pic);
-    window.localStorage.setItem(USER_NAME, user.name);
+export const getUser = () => JSON.parse(window.localStorage.getItem(USER));
+
+export const getUserEmail = () => {
+    const user = getUser();
+    return user.email;
+};
+export const getUserName = () => {
+    const user = getUser();
+    return user.name;
 };
 
-export const deleteUser = () => {
-    window.localStorage.removeItem(USER_EMAIL);
-    window.localStorage.removeItem(USER_IMAGE);
-    window.localStorage.removeItem(USER_NAME);
+export const getUserImage = () => {
+    const user = getUser();
+    return user.name;
 };
 
-export const getUser = () => {
-    return {
-        name: window.localStorage.getItem(USER_NAME),
-        email: window.localStorage.getItem(USER_EMAIL),
-        profile_pic: window.localStorage.getItem(USER_IMAGE),
-    };
+export const getUserState = () => {
+    const user = getUser();
+    return user.state;
 };
+
+const deleteUser = () => window.localStorage.removeItem(USER);
 
 export const destroyTempKeys = () => {
     window.localStorage.removeItem(PASSWORD);
@@ -91,7 +111,6 @@ export default {
     saveUserName,
     saveUserImage,
     getUserImage,
-    deleteUserImage,
     getUserName,
     getUserEmail,
     saveUserPassword,
