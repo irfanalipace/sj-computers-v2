@@ -131,6 +131,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     */
     Route::post('update-profile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
     Route::post('change-password', [ProfileController::class, 'resetPassword'])->name('changePassword');
+    Route::post('delete-profile-picture',[ProfileController::class,'deleteProfilePic'])->name('deleteProfilePic');
 
     /*
     *Order shipping address
