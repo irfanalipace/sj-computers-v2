@@ -61,19 +61,20 @@ const Contact = () => {
                         <div className="container">
                             <div className="navbar-collapse">
                                 <ul className="navbar-nav me-auto">
-                                    <li className="nav-item">
+                                    <li className="nav-item nav-item-contact">
                                         <Link
-                                            className="nav-link text-aligin-contact-menu link-no-hover"
+                                            className="nav-link text-aligin-contact-menu link-no-hover on-focus-colo-contact"
                                             to="/contact"
                                         >
-                                            <span>Contact us</span>
+                                            <span>Contact Us</span>
                                         </Link>
                                     </li>
                                     <hr className="vertical-line-contactus"></hr>
                                     <li className="nav-item">
                                         <Link
-                                            className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line"
+                                            className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line on-focus-colo-contact"
                                             to="/"
+                                           
                                         >
                                             Home
                                         </Link>
@@ -84,8 +85,8 @@ const Contact = () => {
                                 <ul className="navbar-nav">
                                     <li className="nav-item">
                                         <Link
-                                            className="nav-link text-aligin-contact-menu link-no-hover"
-                                            to="mailto:info@sjcomputer.com"
+                                            className="nav-link text-aligin-contact-menu link-no-hover on-focus-colo-contact "
+                                            to="mailto: cs@sjcomputersmn.com"
                                         >
                                             <FontAwesomeIcon
                                                 icon={faEnvelope}
@@ -96,10 +97,10 @@ const Contact = () => {
                                     <hr className="vertical-line-contactus"></hr>
                                     <li className="nav-item">
                                         <Link
-                                            className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line"
-                                            to="tel:+9212345678"
+                                            className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line on-focus-colo-contact"
+                                            to="tel: 952-452-8884"
                                         >
-                                            <FontAwesomeIcon icon={faMobile} />{" "}
+                                            <FontAwesomeIcon icon={faMobile}  />{" "}
                                             952-452-8884
                                         </Link>
                                     </li>
