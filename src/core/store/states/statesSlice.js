@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { saveUserState } from "@services/jwtService";
 
+
 let currentState = window.localStorage.getItem("state");
 currentState = currentState == "undefined" ? null : JSON.parse(currentState);
 
@@ -29,6 +30,7 @@ const productSlice = createSlice({
             state.currentState = { ...action.payload };
             saveUserState((action.payload));
             state.isLoading = false;
+            
         },
         CLEAR_STATES: (state) => {
             state.states = [];
