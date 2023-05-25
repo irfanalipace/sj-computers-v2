@@ -33,11 +33,14 @@ class SquareController extends BaseController
     private $userId;
     private $user;
     public function __construct()
-    {
+    {       
+        // Environment value
+        $environment = $this->enviromnet();
+        
         // SANDBOX or PRODUCTION
         $this->squareClient = new SquareClient([
             'accessToken' => config('app.square_token') ?? 'EAAAECb1ai32160Bz6Aepr3tfyTPPA_jTpGVMgIclNbbyyUVMA0GoauqveDOpLs7',
-            'environment' => Environment::SANDBOX,
+            'environment' => $environment,
         ]);
         $this->user = auth('api')->user();
 
@@ -55,10 +58,10 @@ class SquareController extends BaseController
             $idempotencyKey = uniqid();
 
             //create customer || retrieve customer if already added
-            if (auth()->user()->square_cus_id == null) {                
+            if (auth()->user()->square_cus_id == null) {
                 $customer = $this->createCustomer();
-            } else {               
-               
+            } else {
+
                 $customer = $this->getCustomer();
             }
 
@@ -167,5 +170,16 @@ class SquareController extends BaseController
         } catch (Exception $e) {
             return response()->json(['Code' => 400, 'message' => "Something went wrong" . $e]);
         }
+    }
+
+    //enviromnet
+    public function enviromnet()
+    {
+        if (config('app.env') != StatusEnum::ENV_PRODUCTION) {
+            $environment = Environment::SANDBOX;
+        } else {
+            $environment = Environment::PRODUCTION;
+        }
+        return $environment;
     }
 }

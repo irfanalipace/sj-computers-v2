@@ -29,4 +29,6 @@ class StatusEnum{
     public const SKU = "sku";
     public const ASIN = "asin";
 
+    //Environment
+    public const ENV_PRODUCTION = 'production';
 }

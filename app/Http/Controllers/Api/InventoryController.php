@@ -27,7 +27,7 @@ class InventoryController extends BaseController
         }
     }
 
-    //Hold Inventory
+    //Hold and Realease action perform in Inventory
     public function ActionPerform(ActionPerfomRequest $request)
     {
         try {
@@ -50,6 +50,7 @@ class InventoryController extends BaseController
         }
     }
 
+    // Search a value where get a asin and sku type
     public function search($search)
     {
         if (preg_match('/^B0/', $search)) {
