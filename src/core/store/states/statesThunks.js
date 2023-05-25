@@ -46,8 +46,8 @@ export const updateState = (data, cb) => {
                 type: UPDATE_STATE,
                 payload: { id: data.id, name: data.name },
             });
-               toast.success("state updated Successfully");
-        
+            window.localStorage.removeItem("tempState");
+            toast.success("State Updated Successfully");
         } catch (error) {
             console.log("Something went wrong in states", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
