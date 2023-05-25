@@ -6,14 +6,14 @@ const PASSWORD = "user_password";
 const USER_STATE = "state";
 const TEMP_TOKEN = "temp_token";
 
-export const getToken = () => window.localStorage.getItem(TOKEN);
+export const getToken = () => atob(window.localStorage.getItem(TOKEN));
 export const saveToken = (token) => {
-    window.localStorage.setItem(TOKEN, token);
+    const encodedToken = btoa(token)
+    window.localStorage.setItem(TOKEN, encodedToken);
 };
 
 export const saveUser = (user) => {
     const userDetails = {...user}
-
     window.localStorage.setItem(USER, JSON.stringify(userDetails));
 };
 export const saveUserName = (name) => {
@@ -40,15 +40,18 @@ export const saveUserEmail = (email) => {
 
 export const saveTempToken = (token) => {
     ApiService.setHeader("Authorization", "Bearer " + token);
-    window.localStorage.setItem(TEMP_TOKEN, token);
+    const encodedToken = btoa(token)
+    window.localStorage.setItem(TEMP_TOKEN, encodedToken);
 };
-export const getTempToken = () => window.localStorage.getItem(TEMP_TOKEN);
+export const getTempToken = () =>atob(window.localStorage.getItem((TEMP_TOKEN)));
 
 export const saveUserPassword = (password) => {
-    window.localStorage.setItem(PASSWORD, password);
+    const encodeedPassword = btoa(password)
+    window.localStorage.setItem(PASSWORD, encodeedPassword);
 };
-
-export const getUserPassword = () => window.localStorage.getItem(PASSWORD);
+export const getUserPassword = () => {
+   return atob (window.localStorage.getItem((PASSWORD)));
+}
 
 export const destroyUserPassword = () =>
     window.localStorage.removeItem(PASSWORD);
@@ -56,7 +59,7 @@ export const destroyUserPassword = () =>
 export const getUser = () => JSON.parse(window.localStorage.getItem(USER)) || {};
 
 export const getUserEmail = () => {
-    const user = getUser();
+    const user = getUser();  
     return user?.email;
 };
 export const getUserName = () => {
