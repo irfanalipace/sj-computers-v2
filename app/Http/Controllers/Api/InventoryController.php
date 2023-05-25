@@ -17,17 +17,9 @@ class InventoryController extends BaseController
     public function getInventory(GetInventoryRequest $request)
     {
         try {
+            $type =  $this->search($request->search);
 
-            $search = $request->search;
-            if (preg_match('/^B0/', $search)) {
-                // Value starts with "B0", treat it as ASIN
-                $type = StatusEnum::ASIN;
-            } elseif (strpos($search, '-') !== false) {
-                // Value contains a hyphen "-", treat it as SKU
-                $type = StatusEnum::SKU;
-            }
-
-            $inventory = $this->getAmazonInventory(null, $type, $search);
+            $inventory = $this->getAmazonInventory(null, $type, $request->search);
 
             return $this->sendResponse([$inventory], 'Amazon product list');
         } catch (Exception $e) {
@@ -39,21 +31,15 @@ class InventoryController extends BaseController
     public function ActionPerform(ActionPerfomRequest $request)
     {
         try {
-            $search = $request->search;
-            if (preg_match('/^B0/', $search)) {
-                // Value starts with "B0", treat it as ASIN
-                $type = StatusEnum::ASIN;
-            } elseif (strpos($search, '-') !== false) {
-                // Value contains a hyphen "-", treat it as SKU
-                $type = StatusEnum::SKU;
-            }
-            $inventory = $this->getAmazonInventory(null,$type, $search);
+            $type =  $this->search($request->search);
+
+            $inventory = $this->getAmazonInventory(null, $type, $request->search);
 
             if ($inventory['status']) {
 
                 $this->updateAmazonInventory($inventory, $request->quantity, $request->action);
 
-                $amazonInventory =  $this->getAmazonInventory(null, $request->search);
+                $amazonInventory =  $this->getAmazonInventory(null, $type, $request->search);
 
                 return $this->sendResponse([$amazonInventory], 'Amazon product list');
             } else {
@@ -62,5 +48,17 @@ class InventoryController extends BaseController
         } catch (Exception $e) {
             $this->sendError(["Error", "Something went wrong." . $e]);
         }
+    }
+
+    public function search($search)
+    {
+        if (preg_match('/^B0/', $search)) {
+            // Value starts with "B0", treat it as ASIN
+            $type = StatusEnum::ASIN;
+        } elseif (strpos($search, '-') !== false) {
+            // Value contains a hyphen "-", treat it as SKU
+            $type = StatusEnum::SKU;
+        }
+        return $type;
     }
 }
