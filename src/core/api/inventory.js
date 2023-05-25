@@ -15,12 +15,12 @@ export function getInventory(search) {
             });
     });
 }
-export function inventoryAction({ action, quantity, sku }) {
+export function inventoryAction({ action, quantity, search }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/action-perfom`, {
             action,
             quantity,
-            sku,
+            search,
         })
             .then((response) => {
                 console.log("resp", response);

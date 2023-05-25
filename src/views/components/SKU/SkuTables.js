@@ -14,11 +14,10 @@ const SkuTables = () => {
 
     const handleChange = async (e) => {
         setLoading(true);
-        await getInventory({
-            search: search,
-        })
+        await getInventory(search)
             .then((_) => {
                 setLoading(false);
+
                 if (_.data.length > 0) {
                     setInvent(_.data[0]?.product);
                     let obj = [
@@ -36,15 +35,13 @@ const SkuTables = () => {
             })
             .catch((e) => {
                 setLoading(false);
+                console.log(search);
             });
     };
+
     const handlehold = async (e) => {
         setLoading(true);
-        await inventoryAction({
-            action: "hold",
-            quantity: holdQuantity,
-            sku: search,
-        })
+        await inventoryAction("hold", holdQuantity, search)
             .then((_) => {
                 setLoading(false);
                 if (_.data.length > 0) {
@@ -69,11 +66,7 @@ const SkuTables = () => {
     const handleRelease = async (e) => {
         setLoading(true);
         setholdQuantity(null);
-        await inventoryAction({
-            action: "release",
-            quantity: holdQuantity,
-            sku: search,
-        })
+        await inventoryAction("release", holdQuantity, search)
             .then((_) => {
                 setLoading(false);
                 if (_.data.length > 0) {
@@ -117,7 +110,7 @@ const SkuTables = () => {
                             >
                                 <TextField
                                     id="outlined-basic"
-                                    label="Search"
+                                    label="Search by SKU"
                                     variant="outlined"
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
