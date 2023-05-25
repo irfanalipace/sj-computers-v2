@@ -50,8 +50,8 @@ const Header = () => {
     }, []);
 
     useEffect(() => {
-        ((firstLogin.current && !currentState) ||
-            !window.localStorage.getItem("state")) &&
+        firstLogin.current &&
+            !currentState &&
             setTimeout(() => {
                 setShow(true); // Update the state `isOpen` to true after 5 seconds
             }, 5000);
