@@ -183,14 +183,14 @@ const Footer = () => {
                                             2817 Eagandale Blvd Eagan, MN 55121.
                                         </p>
                                         <p className="herf-link ">
-                                            952-452-8884
+                                        952-452-8884
                                         </p>
                                         <li>
                                             <a
                                                 href="mailto:cs@sjcomputersmn.com"
                                                 className="herf-link text-decoration-none"
                                             >
-                                                cs@sjcomputersmn.com
+                                              cs@sjcomputersmn.com
                                             </a>
                                         </li>
                                     </ul>

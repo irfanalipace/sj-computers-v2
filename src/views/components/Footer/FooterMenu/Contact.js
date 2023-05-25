@@ -90,7 +90,7 @@ const Contact = () => {
                                             <FontAwesomeIcon
                                                 icon={faEnvelope}
                                             />{" "}
-                                            info@sjcomputer.com
+                                         cs@sjcomputersmn.com
                                         </Link>
                                     </li>
                                     <hr className="vertical-line-contactus"></hr>
@@ -100,7 +100,7 @@ const Contact = () => {
                                             to="tel:+9212345678"
                                         >
                                             <FontAwesomeIcon icon={faMobile} />{" "}
-                                            +92-12345678
+                                            952-452-8884
                                         </Link>
                                     </li>
                                 </ul>
