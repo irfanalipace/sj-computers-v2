@@ -75,7 +75,7 @@ const PolicyComponets = () => {
 
 
     return (
-       <div>
+       <div style={{marginBottom:'79px'}}>
 {/* <Header /> */}
             <div className="policy-background-color">
                     <div className="row">
