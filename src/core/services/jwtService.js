@@ -1,10 +1,7 @@
 import ApiService from "@services/apiService";
 
 const TOKEN = "token";
-// const USER_NAME = "user_name";
 const USER = "user";
-// const USER_EMAIL = "user_email";
-// const USER_IMAGE = "user_image";
 const PASSWORD = "user_password";
 const USER_STATE = "state";
 const TEMP_TOKEN = "temp_token";
@@ -15,22 +12,19 @@ export const saveToken = (token) => {
 };
 
 export const saveUser = (user) => {
-    const userDetails = {
-        userName: user.name,
-        userEmail: user.email,
-        userImage: user.profile_pic,
-    };
+    const userDetails = {...user}
+
     window.localStorage.setItem(USER, JSON.stringify(userDetails));
 };
-export const saveUserName = (userName) => {
-    const user = getUser();
-    user.userName = userName;
+export const saveUserName = (name) => {
+    let  user = getUser();
+    user = {...user , name}
     saveUser(user);
 };
 
-export const saveUserImage = (userImage) => {
-    const user = getUser();
-    user.profile_pic = userImage;
+export const saveUserImage = (profile_pic) => {
+    let  user = getUser();
+    user = {...user , profile_pic}
     saveUser(user);
 };
 
@@ -38,9 +32,10 @@ export const saveUserState = (userState) => {
     window.localStorage.setItem(USER_STATE, JSON.stringify(userState));
 };
 export const saveUserEmail = (email) => {
-    const user = getUser();
-    user.userEmail = email;
-    saveUser(user);
+    let  user = getUser();
+      user = {...user,email}
+      console.log('user@' , user , email)
+    saveUser(user)
 };
 
 export const saveTempToken = (token) => {
@@ -58,16 +53,15 @@ export const getUserPassword = () => window.localStorage.getItem(PASSWORD);
 export const destroyUserPassword = () =>
     window.localStorage.removeItem(PASSWORD);
 
-export const getUser = () =>
-    JSON.parse(window.localStorage.getItem(USER)) || {};
+export const getUser = () => JSON.parse(window.localStorage.getItem(USER)) || {};
 
 export const getUserEmail = () => {
     const user = getUser();
-    return user?.userEmail;
+    return user?.email;
 };
 export const getUserName = () => {
     const user = getUser();
-    return user.userName;
+    return user.name;
 };
 
 export const getUserImage = () => {
