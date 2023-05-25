@@ -164,6 +164,23 @@ export function updateProfileApi(formData) {
     });
 }
 
+export function deleteProfilePicApi(data) {
+    return new Promise((resolve, reject) => {
+        ApiService.post("delete-profile-picture", data)
+            .then((response) => {
+                console.log(
+                    "file: auth.module.js | deleteProfilePicApi| response",
+                    response
+                );
+                resolve(response.data);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error", e);
+                reject(e);
+            });
+    });
+}
+
 export function updatePasswordApi(data) {
     return new Promise((resolve, reject) => {
         ApiService.post("change-password", data)

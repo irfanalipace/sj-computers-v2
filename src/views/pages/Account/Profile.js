@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import DatePicker from "react-datepicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faListSquares, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Modal } from "react-bootstrap";
 
-import { updateProfile } from "@store/auth/authThunks";
+import { updateProfile, deleteProfilePic } from "@store/auth/authThunks";
 import { CLEAR_API_ERRORS } from "@store/auth/authSlice";
 import Button from "@common/Button/Button";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
@@ -19,12 +20,13 @@ const Profile = () => {
     const [nameEditable, setNameEditable] = useState(false);
     const [imageUrl, setImageUrl] = useState(null);
     const [name, setName] = useState("");
+    const [showDialog, setShowDialog] = useState(false);
 
     const dispatch = useDispatch();
 
-    const user = useSelector((state) => state.auth.user);
-    const apiError = useSelector((state) => state.auth.apiError);
-    const isLoading = useSelector((state) => state.auth.isLoading);
+    const { user, apiError, isLoading, isDeletingPic } = useSelector(
+        (state) => state.auth
+    );
 
     const handleFileChange = (event) => {
         event.preventDefault();
@@ -60,9 +62,18 @@ const Profile = () => {
         };
     }, []);
 
+    const deleteImage = () => {
+        dispatch(
+            deleteProfilePic({}, () => {
+                setSelectedFile(null);
+                setImageUrl(null);
+                setShowDialog(false);
+            })
+        );
+    };
+
     const handleDeleteImage = () => {
-        setSelectedFile(null);
-        setImageUrl(null);
+        setShowDialog(true);
     };
     return (
         <div className="account-page">
@@ -190,6 +201,32 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
+
+            <Modal
+                show={showDialog}
+                onHide={() => setShowDialog(false)}
+                centered
+                className="confirm-dialog"
+            >
+                <Modal.Body>
+                    <h3>Are You Sure you want to delete image?</h3>
+                    <div className="d-flex justify-content-around">
+                        <Button
+                            className="yes-btn"
+                            isLoading={isDeletingPic}
+                            onClick={deleteImage}
+                        >
+                            Yes
+                        </Button>{" "}
+                        <Button
+                            className="no-btn"
+                            onClick={() => setShowDialog(false)}
+                        >
+                            No
+                        </Button>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
     );
 };
