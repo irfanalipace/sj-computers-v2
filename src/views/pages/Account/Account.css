@@ -310,6 +310,29 @@
 .orders-list-container {
     padding: 0 20px;
 }
+
+.confirm-dialog h3 {
+    font-size: 16px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.confirm-dialog .modal-body .yes-btn {
+    background: #318243;
+}
+
+.confirm-dialog .modal-body button {
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    color: white;
+    border: transparent;
+}
+
+.confirm-dialog .no-btn {
+    background: #e53f3f;
+}
+
 @media screen and (max-width: 600px) {
     .account-page h3 {
         font-size: 14px !important;

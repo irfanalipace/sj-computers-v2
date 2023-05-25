@@ -11,6 +11,7 @@ import {
     UPDATE_PROFILE,
     API_ERROR,
     ALREADY_LOGGED_IN,
+    DELETING_PROFILE_PIC,
 } from "@store/auth/authSlice";
 import {
     loginApi,
@@ -22,6 +23,7 @@ import {
     verifyEmailApi,
     updateProfileApi,
     updatePasswordApi,
+    deleteProfilePicApi,
 } from "@api/auth";
 import {
     saveToken,
@@ -190,8 +192,25 @@ export const updatePassword = (data) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             await updatePasswordApi(data);
-            toast.success("Password Changed Successfully");
+            toast.success("Profile Updated Successfully");
+
             dispatch({ type: CLEAR_LOADING, payload: {} });
+        } catch (error) {
+            console.log("Something went wrong in updatePassword", error);
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
+        }
+    };
+};
+
+export const deleteProfilePic = (data, cb) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: DELETING_PROFILE_PIC, payload: {} });
+            let response = await deleteProfilePicApi(data);
+            dispatch({ type: UPDATE_PROFILE, payload: response });
+            saveUser(response);
+            if (typeof cb === "function") cb();
+            toast.success("Profile Picture removed");
         } catch (error) {
             console.log("Something went wrong in updateProfile", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
