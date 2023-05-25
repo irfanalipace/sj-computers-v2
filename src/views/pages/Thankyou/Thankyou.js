@@ -24,7 +24,7 @@ export default function ThankYou() {
     const navigate  = useNavigate ();
     const [thankOrderDetails , setThankOrderDetails] = useState({});
     const [thankOrderItems , setThankOrderItems] = useState([]);
-    const [isMobile , setIsMobile] = useState(false);
+    const [isMobile , setIsMobile] = useState(window.innerWidth <= 768);
     const location = useLocation();
     const order = location.state?.order;
     console.log( location, "haris details")
@@ -63,10 +63,15 @@ useEffect(() => {
       }
       
       useEffect(() => {
-        window.addEventListener('resize', handleWindowSizeChange);
+        const handleResize = () => {
+          handleWindowSizeChange();
+        };
+    
+        window.addEventListener('resize', handleResize);
+    
         return () => {
-          window.removeEventListener('resize', handleWindowSizeChange);
-        }
+          window.removeEventListener('resize', handleResize);
+        };
       }, []);
 
     const tableData = [
@@ -145,37 +150,37 @@ useEffect(() => {
                     <div className="quantity">
                         <span>Quantity:</span> 
                     </div>
-                    <div className="col-6 quantity">
+                    <div className="col-12 my-2 quantity">
                         {data.qty}
                     </div>
-                    <div className="col-6 order-no">
+                    <div className="col-12 my-2 order-no">
                         <span>Order No:</span> 
                     </div>
-                    <div className="col-6 order-no">
+                    <div className="col-12 my-2 order-no">
                     {data?.order_id}
                     </div>
-                    <div className="col-6 order-date">
+                    <div className="col-12 my-2 order-date">
                         <span>Order Date:</span>
                     </div>
-                    <div className="col-6 order-date">
+                    <div className="col-12 my-2 order-date">
                     {formatDate(data.created_at)}
                     </div>
-                    <div style={{width: '100%'}}className="col-6 delivery-details">
+                    <div style={{width: '100%'}}className="col-12 my-2 delivery-details">
                         <span>Delivery Details:</span>
                     </div>
-                    <div className="col-6 delivery-details">
+                    <div className="col-12 my-2 delivery-details">
                         {thankOrderDetails?.Order?.estimate_day}
                     </div>
-                    <div className="col-6 payment-type">
+                    <div className="col-12 my-2 payment-type">
                         <span>Payment Type:</span>
                     </div>
-                    <div className="col-6 payment-type">
+                    <div className="col-12 my-2 payment-type">
                     Square
                     </div>
-                    <div className="col-6 sub-total">
+                    <div className="col-6 my-2 sub-total">
                         <span>Sub Total:</span>
                     </div>
-                    <div className="col-6 sub-total">
+                    <div className="col-6 my-2 sub-total">
                         ${data.price}
                     </div>
                 </div>
