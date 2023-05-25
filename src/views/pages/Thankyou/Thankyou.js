@@ -138,47 +138,47 @@ useEffect(() => {
         <img src={data?.product?.image[0] ? data?.product?.image[0] : 'https://m.media-amazon.com/images/I/81zf6aaAK1L.jpg'} alt="Product" />
       </div>
       <div className="card-content">
-        <div className="product-name">
+        <div className="product-name-thanks">
           {data && data?.product_name.length > 40 ? data?.product_name.slice(0, 40) + '...' : data?.product_name}
         </div>
         <div className="product-details-Thanks">
-  <div className="quantity">
-    <span>Quantity:</span> 
-  </div>
-  <div className="col-12 quantity">
-     {data.qty}
-  </div>
-  <div className="col-12 order-no">
-    <span>Order No:</span> 
-  </div>
-  <div className="col-12 order-no">
-  {data?.order_id}
-  </div>
-  <div className="col-12 order-date">
-    <span>Order Date:</span>
-  </div>
-  <div className="col-12 order-date">
-   {formatDate(data.created_at)}
-  </div>
-  <div style={{width: '100%'}}className="col-12 delivery-details">
-    <span>Delivery Details:</span>
-  </div>
-  <div className="col-12 delivery-details">
-    {thankOrderDetails?.Order?.estimate_day}
-  </div>
-  <div className="col-12 payment-type">
-    <span>Payment Type:</span>
-  </div>
-  <div className="col-12 payment-type">
-   Square
-  </div>
-  <div className="col-12 sub-total">
-    <span>Sub Total:</span>
-  </div>
-  <div className="col-12 sub-total">
-     ${data.price}
-  </div>
-</div>
+                    <div className="quantity">
+                        <span>Quantity:</span> 
+                    </div>
+                    <div className="col-6 quantity">
+                        {data.qty}
+                    </div>
+                    <div className="col-6 order-no">
+                        <span>Order No:</span> 
+                    </div>
+                    <div className="col-6 order-no">
+                    {data?.order_id}
+                    </div>
+                    <div className="col-6 order-date">
+                        <span>Order Date:</span>
+                    </div>
+                    <div className="col-6 order-date">
+                    {formatDate(data.created_at)}
+                    </div>
+                    <div style={{width: '100%'}}className="col-6 delivery-details">
+                        <span>Delivery Details:</span>
+                    </div>
+                    <div className="col-6 delivery-details">
+                        {thankOrderDetails?.Order?.estimate_day}
+                    </div>
+                    <div className="col-6 payment-type">
+                        <span>Payment Type:</span>
+                    </div>
+                    <div className="col-6 payment-type">
+                    Square
+                    </div>
+                    <div className="col-6 sub-total">
+                        <span>Sub Total:</span>
+                    </div>
+                    <div className="col-6 sub-total">
+                        ${data.price}
+                    </div>
+                </div>
       </div>
     </div>
   ))}
@@ -189,7 +189,7 @@ useEffect(() => {
              <table className="thank-you-table">
       <thead>
         <tr>
-          <th className="product-name">
+          <th className="product-name-thanks">
             <div className="product-title">Product Name</div>
           </th>
           <th>Quantity</th>
