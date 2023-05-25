@@ -17,7 +17,17 @@ class InventoryController extends BaseController
     public function getInventory(GetInventoryRequest $request)
     {
         try {
-            $inventory = $this->getAmazonInventory(null, $request->SKU);
+
+            $search = $request->search;
+            if (preg_match('/^B0/', $search)) {
+                // Value starts with "B0", treat it as ASIN
+                $type = StatusEnum::ASIN;
+            } elseif (strpos($search, '-') !== false) {
+                // Value contains a hyphen "-", treat it as SKU
+                $type = StatusEnum::SKU;
+            }
+
+            $inventory = $this->getAmazonInventory(null, $type, $search);
 
             return $this->sendResponse([$inventory], 'Amazon product list');
         } catch (Exception $e) {
@@ -29,22 +39,28 @@ class InventoryController extends BaseController
     public function ActionPerform(ActionPerfomRequest $request)
     {
         try {
-            $inventory = $this->getAmazonInventory(null,$request->sku);
+            $search = $request->search;
+            if (preg_match('/^B0/', $search)) {
+                // Value starts with "B0", treat it as ASIN
+                $type = StatusEnum::ASIN;
+            } elseif (strpos($search, '-') !== false) {
+                // Value contains a hyphen "-", treat it as SKU
+                $type = StatusEnum::SKU;
+            }
+            $inventory = $this->getAmazonInventory(null,$type, $search);
 
             if ($inventory['status']) {
 
-                $this->updateAmazonInventory($inventory, $request->quantity,$request->action);
+                $this->updateAmazonInventory($inventory, $request->quantity, $request->action);
 
-                $amazonInventory =  $this->getAmazonInventory(null,$request->sku);
+                $amazonInventory =  $this->getAmazonInventory(null, $request->search);
 
                 return $this->sendResponse([$amazonInventory], 'Amazon product list');
-            }else{
+            } else {
                 $this->sendError(["Error", "Sku not found."]);
             }
-           
         } catch (Exception $e) {
             $this->sendError(["Error", "Something went wrong." . $e]);
         }
     }
-
 }
