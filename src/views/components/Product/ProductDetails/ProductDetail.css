@@ -34,13 +34,16 @@
 .chek {
     font-size: 12px;
 }
+
 .product-page .product-rating {
-    text-decoration: none;
+    border: none;
+  
     font-size: 12px;
     color: #07631c;
     padding: 0 6px;
     line-height: 1;
     /* margin-left: -60px; */
+    background: white;
 }
 .product-page .product-rating1 {
     text-decoration: none;

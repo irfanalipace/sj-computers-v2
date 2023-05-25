@@ -106,10 +106,10 @@ const ProductDetails = ({ product }) => {
                 </div>
                 <div className="col-lg-8 col-md-6 col-sm-12">
                     <div className="my-2">
-                        <Link className="product-rating">
+                        <button className="product-rating">
                             {product?.numReviews ? product.numReviews : "0"}{" "}
                             ratings
-                        </Link>
+                        </button>
                         {/* <Link className="product-info">
                             11 answered questions
                         </Link> */}
@@ -121,10 +121,10 @@ const ProductDetails = ({ product }) => {
                         {/* <Link className="product-info border-0">
                             “lg 24 inch monitor”
                         </Link> */}
-                        <Link className="product-info border-0">
+                        <button className="product-info border-0" style={{backgroundColor:'white'}}>
                             {product?.quantity}
                             {" items"}
-                        </Link>
+                        </button>
                     </span>
                 </div>
             </div>
