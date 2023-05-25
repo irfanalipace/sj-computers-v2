@@ -13,6 +13,7 @@ import { useNavigate, useLocation   } from "react-router-dom";
 
 
 export default function ThankYou() {
+    // const isMobile = window.innerWidth <= 768;
 
     function formatDate(dateString) {
         const options = { year: "numeric", month: "long", day: "numeric" };
@@ -23,6 +24,7 @@ export default function ThankYou() {
     const navigate  = useNavigate ();
     const [thankOrderDetails , setThankOrderDetails] = useState({});
     const [thankOrderItems , setThankOrderItems] = useState([]);
+    const [isMobile , setIsMobile] = useState(false);
     const location = useLocation();
     const order = location.state?.order;
     console.log( location, "haris details")
@@ -32,6 +34,7 @@ export default function ThankYou() {
 //   };
 
 useEffect(() => {
+    
     const storedOrder = window.localStorage.getItem('thankyouOrderDetails');
   const order = location?.state?.order || JSON.parse(storedOrder);
 
@@ -50,10 +53,21 @@ useEffect(() => {
 
     useEffect(() => {
         
-       console.log(thankOrderItems, "2nd useeffect")
-       console.log(thankOrderDetails, "2nd useeffect for order details")
-        
+    //    console.log(thankOrderItems, "2nd useeffect")
+    //    console.log(thankOrderDetails, "2nd useeffect for order details")
+        console.log(isMobile, 'isMobile');
     }, [thankOrderItems]);
+
+    const handleWindowSizeChange = () => {
+        setIsMobile(window.innerWidth <= 768);
+      }
+      
+      useEffect(() => {
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+          window.removeEventListener('resize', handleWindowSizeChange);
+        }
+      }, []);
 
     const tableData = [
         {
@@ -99,7 +113,7 @@ useEffect(() => {
         
       </div>
     </div>
-                <div className="col-12">
+                <div className="col-12 my-2">
                     <h1>Thanks for Order</h1>
                 </div>
                 <div className="col-12 my-20">
@@ -108,14 +122,74 @@ useEffect(() => {
              </div>
         <div >
         </div>
-        <div className="row ">
-        <table className="thank-you-table">
-      <thead>
-        <tr>
-          <th className="product-name">
             {/* <div className="product-thumbnail">
               <img src={productImage} alt="Product" />
             </div> */}
+        {/* Map through the tableData array and render table rows */}
+                    {/* <div class="text-truncate"></div> */}
+          {/* <div className="product-title">{data?.product_name}</div> */}
+
+          {isMobile === true ? (
+            <>
+             <div className="card-container">
+  {thankOrderItems?.map((data, index) => (
+    <div className="card" key={index}>
+      <div className="card-image">
+        <img src={data?.product?.image[0] ? data?.product?.image[0] : 'https://m.media-amazon.com/images/I/81zf6aaAK1L.jpg'} alt="Product" />
+      </div>
+      <div className="card-content">
+        <div className="product-name-thanks">
+          {data && data?.product_name.length > 40 ? data?.product_name.slice(0, 40) + '...' : data?.product_name}
+        </div>
+        <div className="product-details-Thanks">
+                    <div className="quantity">
+                        <span>Quantity:</span> 
+                    </div>
+                    <div className="col-6 quantity">
+                        {data.qty}
+                    </div>
+                    <div className="col-6 order-no">
+                        <span>Order No:</span> 
+                    </div>
+                    <div className="col-6 order-no">
+                    {data?.order_id}
+                    </div>
+                    <div className="col-6 order-date">
+                        <span>Order Date:</span>
+                    </div>
+                    <div className="col-6 order-date">
+                    {formatDate(data.created_at)}
+                    </div>
+                    <div style={{width: '100%'}}className="col-6 delivery-details">
+                        <span>Delivery Details:</span>
+                    </div>
+                    <div className="col-6 delivery-details">
+                        {thankOrderDetails?.Order?.estimate_day}
+                    </div>
+                    <div className="col-6 payment-type">
+                        <span>Payment Type:</span>
+                    </div>
+                    <div className="col-6 payment-type">
+                    Square
+                    </div>
+                    <div className="col-6 sub-total">
+                        <span>Sub Total:</span>
+                    </div>
+                    <div className="col-6 sub-total">
+                        ${data.price}
+                    </div>
+                </div>
+      </div>
+    </div>
+  ))}
+        </div>
+            </>
+          ) : (
+            <>
+             <table className="thank-you-table">
+      <thead>
+        <tr>
+          <th className="product-name-thanks">
             <div className="product-title">Product Name</div>
           </th>
           <th>Quantity</th>
@@ -127,7 +201,6 @@ useEffect(() => {
         </tr>
       </thead>
       <tbody>
-        {/* Map through the tableData array and render table rows */}
         {thankOrderItems?.map((data, index) => (
           <tr key={index}>
             <td>
@@ -136,11 +209,9 @@ useEffect(() => {
                   <div className="product-thumbnail">
                     <img src={data?.product?.image[0] ? data?.product?.image[0] : 'https://m.media-amazon.com/images/I/81zf6aaAK1L.jpg'} alt="Product" />
                     {data && data?.product_name.length > 20 ? data?.product_name.slice(0, 20) + '...' : data?.product_name }
-                    {/* <div class="text-truncate"></div> */}
                     
                   </div>
                 )}
-                {/* <div className="product-title">{data?.product_name}</div> */}
               </div>
             </td>
             <td>{data.qty}</td>
@@ -152,10 +223,12 @@ useEffect(() => {
           </tr>
         ))}
       </tbody>
-       </table>
-
-        </div>
+        </table>
+            </>
+          )}
        
+       
+
       <div className="row total-tax-row mx-0">
         <div className="col-12 d-flex justify-content-end">
           {/* <p >Tax ${120.6}</p> */}
@@ -170,7 +243,7 @@ useEffect(() => {
         <p className="bold-total">${thankOrderDetails?.Order?.total_amount ? thankOrderDetails?.Order?.total_amount :  'N/A'}</p>
         </div>
      </div>
-      <div className="row mx-0 my-5">
+      <div className="row mx-0">
         <div className="col-6 d-flex justify-content-start">
             <button className="track-order-btn" onClick={() =>  navigate ("/")}>Track your order</button>
         </div>

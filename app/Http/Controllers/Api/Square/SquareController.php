@@ -34,8 +34,9 @@ class SquareController extends BaseController
     private $user;
     public function __construct()
     {
+        // SANDBOX or PRODUCTION
         $this->squareClient = new SquareClient([
-            'accessToken' => config('app.square_token'),
+            'accessToken' => config('app.square_token') ?? 'EAAAECb1ai32160Bz6Aepr3tfyTPPA_jTpGVMgIclNbbyyUVMA0GoauqveDOpLs7',
             'environment' => Environment::SANDBOX,
         ]);
         $this->user = auth('api')->user();
@@ -52,12 +53,6 @@ class SquareController extends BaseController
         try {
 
             $idempotencyKey = uniqid();
-            // Clear the all cache
-            // Artisan::call('optimize:clear');
-            // Clear the application cache
-            // Artisan::call('cache:clear');
-            // Clear the configuration cache           
-            // Artisan::call('config:clear');
 
             //create customer || retrieve customer if already added
             if (auth()->user()->square_cus_id == null) {                

@@ -25,4 +25,8 @@ class StatusEnum{
     public const HOLD = 'hold';
     public const RELEASE = 'release';
 
+    //Inventory
+    public const SKU = "sku";
+    public const ASIN = "asin";
+
 }
