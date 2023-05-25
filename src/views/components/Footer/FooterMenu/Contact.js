@@ -61,7 +61,7 @@ const Contact = () => {
                         <div className="container">
                             <div className="navbar-collapse">
                                 <ul className="navbar-nav me-auto">
-                                    <li className="nav-item nav-item-contact">
+                                    <li className="nav-item ">
                                         <Link
                                             className="nav-link text-aligin-contact-menu link-no-hover on-focus-colo-contact"
                                             to="/contact"
@@ -69,7 +69,7 @@ const Contact = () => {
                                             <span>Contact Us</span>
                                         </Link>
                                     </li>
-                                    <hr className="vertical-line-contactus"></hr>
+                                    <span className="nav-item-contact"></span>
                                     <li className="nav-item">
                                         <Link
                                             className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line on-focus-colo-contact"
@@ -83,7 +83,7 @@ const Contact = () => {
                             </div>
                             <div className="navbar-collapse justify-content-end ">
                                 <ul className="navbar-nav">
-                                    <li className="nav-item">
+                                    <li className="nav-item ">
                                         <Link
                                             className="nav-link text-aligin-contact-menu link-no-hover on-focus-colo-contact "
                                             to="mailto: cs@sjcomputersmn.com"
@@ -94,8 +94,8 @@ const Contact = () => {
                                          cs@sjcomputersmn.com
                                         </Link>
                                     </li>
-                                    <hr className="vertical-line-contactus"></hr>
-                                    <li className="nav-item">
+                                    <span className="nav-item-contact"></span>
+                                    <li className="nav-item ">
                                         <Link
                                             className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line on-focus-colo-contact"
                                             to="tel: 952-452-8884"

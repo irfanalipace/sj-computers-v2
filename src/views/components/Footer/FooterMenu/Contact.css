@@ -129,7 +129,11 @@
     margin-left: 3px;
 }
 
-
+.nav-item-contact {
+    border-right: 1px solid white;
+    margin-right: 6px;
+    margin-left: 6px;
+}
 .on-focus-colo-contact:focus{
     color: white !important;
 }
@@ -176,5 +180,9 @@
     }
     .vertical-line-contactus {
        display: none;
+    }.nav-item-contact{
+        display: none;
+    }.text-aligin-contact-menu:hover {
+      display: none;
     }
 }
