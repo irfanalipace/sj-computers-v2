@@ -113,9 +113,9 @@ Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])
 
 Route::get('system-pages/{key?}', [SystemPagesController::class, 'getPages'])->name('getPages');
 
-Route::post('get-inventory',[InventoryController::class,'getInventory'])->name('getInventory');
+Route::post('get-inventory', [InventoryController::class, 'getInventory'])->name('getInventory');
 
-Route::post('action-perfom',[InventoryController::class,'ActionPerform'])->name('ActionPerform');
+Route::post('action-perfom', [InventoryController::class, 'ActionPerform'])->name('ActionPerform');
 
 Route::middleware(['auth:api', 'verified'])->group(function () {
 
@@ -131,6 +131,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     */
     Route::post('update-profile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
     Route::post('change-password', [ProfileController::class, 'resetPassword'])->name('changePassword');
+    Route::post('delete-profile-picture',[ProfileController::class,'deleteProfilePic'])->name('deleteProfilePic');
 
     /*
     *Order shipping address
@@ -175,6 +176,4 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      * Apply Shipment
      */
     Route::post('apply-shipment', [CartController::class, 'applyShipment'])->name('applyShipment');
-
-
 });

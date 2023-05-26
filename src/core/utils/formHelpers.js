@@ -47,3 +47,11 @@ export function validateForm(values, { fieldLengths }) {
     }
     return errors;
 }
+
+export const validatePhoneNumber = (number) => {
+    return /^\+?\d{0,3}\d{0,10}$/.test(number);
+};
+
+export const validateZipCode = (code) => {
+    return /^\d{0,5}$/.test(code);
+};

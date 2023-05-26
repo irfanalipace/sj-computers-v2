@@ -75,6 +75,8 @@ class AuthController extends BaseController
         }
 
         $user = Auth::user();
+        //Deleted previous otps of user
+        auth()->user()->otps()->delete();
 
         $otpCode = rand(1000, 9999);
 
@@ -82,13 +84,13 @@ class AuthController extends BaseController
         $otp->user_id = $user->id;
         $otp->code = $otpCode;
         $otp->save();
-       
+
         // Cache::put('login_otp_'.$user->id, $otp, now()->addMinutes(5));
-        SendotpMail::dispatch($user->email,$otp);
+        SendotpMail::dispatch($user->email, $otp);
 
         $token = $user->createToken(User::AUTH_TOKEN)->accessToken;
 
-        return $this->sendResponse(['access_token' => $token, 'user' => $user->name, 'email' => $user->email, 'profile_pic' => $user->profile_pic,'state' => $user->userState], 'OTP sent to your email address.');
+        return $this->sendResponse(['access_token' => $token, 'user' => $user->name, 'email' => $user->email, 'profile_pic' => $user->profile_pic, 'state' => $user->userState], 'OTP sent to your email address.');
     }
 
     public function setCart($userId)

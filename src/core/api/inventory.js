@@ -1,9 +1,9 @@
 import ApiService from "@services/apiService";
 
-export function getInventory(SKU) {
+export function getInventory(search) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/get-inventory`, {
-            SKU,
+            search,
         })
             .then((response) => {
                 console.log("resp", response);
@@ -15,12 +15,12 @@ export function getInventory(SKU) {
             });
     });
 }
-export function inventoryAction({ action, quantity, sku }) {
+export function inventoryAction({ action, quantity, search }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/action-perfom`, {
             action,
             quantity,
-            sku,
+            search,
         })
             .then((response) => {
                 console.log("resp", response);

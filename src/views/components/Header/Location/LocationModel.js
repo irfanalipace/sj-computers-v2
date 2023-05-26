@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Modal, Button, Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -61,8 +62,9 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
             if (isAuthenticated) {
                 dispatch(updateState(state, handleClose));
             } else {
-                window.localStorage.setItem('tempState', JSON.stringify(state));
+                window.localStorage.setItem("tempState", JSON.stringify(state));
                 dispatch(UPDATE_STATE(state));
+                toast.success("State Updated Successfully");
                 // saveUserState(state);
                 handleClose();
             }

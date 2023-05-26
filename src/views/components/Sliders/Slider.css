@@ -43,11 +43,13 @@ body {
     color: #ffffff;
     top: var(--swiper-navigation-top-offset, 25%) !important;
     left: var(--swiper-navigation-sides-offset, 30px);
+    z-index: 1 !important;
 }
 .banner-slider-section .swiper-button-next {
     color: #ffffff;
     top: var(--swiper-navigation-top-offset, 25%) !important;
     right: var(--swiper-navigation-sides-offset, 30px);
+    z-index: 1 !important;
 }
 .banner-slider-section .swiper-button-next:after,
 .banner-slider-section .swiper-button-prev:after {
@@ -58,5 +60,12 @@ body {
 @media screen and (max-width: 576px) {
     .mySwiper {
         width: 100%;
+    }
+
+    .banner-slider-section .swiper-button-prev {
+        left: var(--swiper-navigation-sides-offset, 10px);
+    }
+    .banner-slider-section .swiper-button-next {
+        right: var(--swiper-navigation-sides-offset, 10px);
     }
 }

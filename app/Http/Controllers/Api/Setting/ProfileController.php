@@ -22,9 +22,11 @@ class ProfileController extends BaseController
                 $filename = $request->file('profile_pic')->store('public/profile_pics');
                 $update['profile_pic'] = str_replace('public/', '', $filename);
             }
+
             //update also name
             $update['name'] = $request->name;
-            $user = auth()->user()->update($update);
+
+            auth()->user()->update($update);
             return $this->sendResponse(auth()->user()->fresh(), "user profile updated.");
         } catch (Exception $e) {
             return $this->sendError(["msg" => ['Something went wrong.' . $e]]);
@@ -39,15 +41,25 @@ class ProfileController extends BaseController
             //This code checks if the user's old password matches the hashed password stored in the database, and if so, updates the user's password to the new password provided by the user.
             //If the old password does not match, it returns a JSON response with a status code of 422 and an error message stating that the old password does not match.
             if (Hash::check($request->oldPassword, $user->password)) {
-                
+
                 $user->fill(['password' => bcrypt($request->newPassword)])->save();
             } else {
-                
+
                 return $this->sendError(["oldPassword" => ['old password does not match please try again.']]);
             }
-            return $this->sendResponse($user,'user password has been changed Successfully.');
+            return $this->sendResponse($user, 'user password has been changed Successfully.');
         } catch (Exception $e) {
             return $this->sendError(["msg" => ["Something went wrong.' . $e"]]);
+        }
+    }
+    //delete profile picture
+    public function deleteProfilePic()
+    {
+        try {
+            auth()->user()->update(['profile_pic' => null]);
+            return $this->sendResponse(auth()->user()->fresh(), "user profile deleted.");
+        } catch (Exception $e) {
+            return $this->sendError(["msg" => ['Something went wrong.' . $e]]);
         }
     }
 }

@@ -1,5 +1,14 @@
 import { useState } from "react";
-import { validateForm } from "@utils/formHelpers";
+import {
+    validateForm,
+    validateZipCode,
+    validatePhoneNumber,
+} from "@utils/formHelpers";
+
+const FIELD_TYPE_ENUMS = {
+    phone_number: validatePhoneNumber,
+    zip_code: validateZipCode,
+};
 
 export function useFormValidation(initialState, { fieldLengths }, submitForm) {
     const [values, setValues] = useState(initialState);
@@ -7,10 +16,17 @@ export function useFormValidation(initialState, { fieldLengths }, submitForm) {
 
     function handleChange(event, _value) {
         const { name, value } = _value || event.target;
-        setValues({
-            ...values,
-            [name]: value,
-        });
+        if (typeof FIELD_TYPE_ENUMS[name] === "function") {
+            if (FIELD_TYPE_ENUMS[name](value))
+                setValues({
+                    ...values,
+                    [name]: value,
+                });
+        } else
+            setValues({
+                ...values,
+                [name]: value,
+            });
     }
 
     function handleSubmit(event) {
