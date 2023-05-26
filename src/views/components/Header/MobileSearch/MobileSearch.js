@@ -78,6 +78,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import SearchAccordian from "../SearchAccordian/SearchAccordian";
 import { Modal } from "@mui/material";
+import Sidebar from "../../../../views/components/Sidebar/Sidebar.js";
 
 const MobileSearch = () => {
     //search state here
@@ -93,6 +94,10 @@ const MobileSearch = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [isSideMenu, setSideMenu] = useState(false);
+    const toggleSidebar = () => {
+        return setSideMenu((state) => !state);
+    };
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -141,7 +146,10 @@ const MobileSearch = () => {
                         <FontAwesomeIcon
                             icon={faBars}
                             size="xl"
-                            onClick={handleOpen}
+                            onClick={() => {
+                                toggleSidebar();
+                            }}
+                            // onClick={handleOpen}
                             style={{ color: "#ffffff" }}
                         />
 
@@ -178,14 +186,15 @@ const MobileSearch = () => {
                     </div>
                 </form>
             </CollapseContainer>
-            <Modal
+            <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
+            {/* <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
                 <SearchAccordian />
-            </Modal>
+            </Modal> */}
             <div className="mobile-box-model">
                 <MobileScreenModel onClick={handleButtonClick} />
                 {showModal && <ModelBox closeModal={closeModal} />}
