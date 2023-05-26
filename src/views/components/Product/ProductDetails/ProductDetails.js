@@ -121,7 +121,10 @@ const ProductDetails = ({ product }) => {
                         {/* <Link className="product-info border-0">
                             “lg 24 inch monitor”
                         </Link> */}
-                        <button className="product-info border-0" style={{backgroundColor:'white'}}>
+                        <button
+                            className="product-info border-0"
+                            style={{ backgroundColor: "white" }}
+                        >
                             {product?.quantity}
                             {" items"}
                         </button>
@@ -207,6 +210,16 @@ const ProductDetails = ({ product }) => {
                             )}
                         </>
                     ))}
+                    <li className="row mx-0">
+                        <div className="col-md-3 col-6">
+                            <span className="item12 text-capitalize">ASIN</span>
+                        </div>
+                        <div className="col-md-9 col-6">
+                            <span className="items text-capitalize">
+                                {product?.asin}
+                            </span>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <hr className="hr-card-details"></hr>
