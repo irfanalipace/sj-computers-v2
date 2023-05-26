@@ -138,7 +138,7 @@ useEffect(() => {
             <>
              <div className="card-container">
   {thankOrderItems?.map((data, index) => (
-    <div className="card" key={index}>
+    <div className="oder-item-card" key={index}>
       <div className="card-image">
         <img src={data?.product?.image[0] ? data?.product?.image[0] : 'https://m.media-amazon.com/images/I/81zf6aaAK1L.jpg'} alt="Product" />
       </div>
