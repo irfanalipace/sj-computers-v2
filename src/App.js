@@ -26,6 +26,7 @@ function App() {
     if (token) dispatch(alreadyLoggedIn(token));
 
     useInitDataFetching();
+    console.log("in App.js");
 
     // const location = useLocation();
     // ${process.env.REACT_APP_URL}

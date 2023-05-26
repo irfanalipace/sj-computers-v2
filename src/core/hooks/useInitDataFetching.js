@@ -19,7 +19,7 @@ import { getCartItems, getCartDetails } from "@utils/cartHelpers";
 
 export const useInitDataFetching = () => {
     const dispatch = useDispatch();
-    const { isAuthenticated } = useSelector((state) => state.auth);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cartItems = getCartItems() || [];
     const cartDetails = getCartDetails();
 
@@ -56,9 +56,9 @@ export const useInitDataFetching = () => {
 
         if (!isAuthenticated) {
             cartItems.forEach((cartItem) => {
-                dispatch(addToLocalCart({ cartItem }));
+                dispatch(addToLocalCart({ cartItem })); // adds local cart items to redux store
             });
-            dispatch(setCartDetails(cartDetails));
+            dispatch(setCartDetails(cartDetails)); // add local store details to redux store
         }
     }, []);
 };
