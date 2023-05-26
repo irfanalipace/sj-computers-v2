@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-import { productDetailsApi } from "@api/products";
+import { productDetailsbyAsinApi } from "@api/products";
 import { ProductImage } from "@components/Product/ProductImage/ProductImage";
 import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
 import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
@@ -31,7 +31,7 @@ export default function Product() {
             setProduct(filteredProduct);
         } else {
             try {
-                const response = await productDetailsApi(productId);
+                const response = await productDetailsbyAsinApi(productId);
                 setProduct(response.data);
             } catch (error) {}
         }
