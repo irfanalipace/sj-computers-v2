@@ -21,7 +21,7 @@ class ProductController extends BaseController
         $data = Product::where('id',$request->product_id)->first();
         return $this->sendResponse($data);
     }
-    public function getProductDetailAsin(ProductDetailRequest $request){
+    public function getProductDetailAsin(ProductDetailAsinRequest $request){
         $data = Product::where('asin',$request->asin)->first();
         return $this->sendResponse($data);
     }
