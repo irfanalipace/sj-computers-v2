@@ -7,6 +7,7 @@ import { getSystemPagesApi } from "../../../core/api/system-pages";
 import { useLocation } from "react-router-dom";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import Header from "@components/Header/Header";
+import { useNavigate } from "react-router-dom";
 
 const HeadereLinks = [
     { path: "/", title: "About Us" },
@@ -21,12 +22,14 @@ const HeadereLinks = [
 const PolicyComponets = () => {
     const [pageContent, setPageContent] = useState({});
     const [pTagValue, setPTagValue] = useState("");
+    const [htmlContent, setHtmlContent] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
     // const [PageTitle, setpageTitle] = useState("");
 
     // const pageName = {
     //     key : "shipping_policy"
-    // }
+    // }'
 
     const location = useLocation();
     const pageName = location.pathname.substring(1);
@@ -54,6 +57,7 @@ const PolicyComponets = () => {
                 setPageContent(responsePage);
                 console.log(pageContent, "page Content 2");
                 setPTagValue(responsePage?.data?.value);
+                setHtmlContent(responsePage?.data?.value);
                 console.log(pTagValue, "page Content 3");
                 setIsLoading(false);
             } catch (error) {
@@ -113,7 +117,7 @@ const PolicyComponets = () => {
                                                 details
                                             </span>
                                             <div className="order-button-policy">
-                                                <button className="policy-card-order-button">
+                                                <button Onclick={() => navigate('/account/orders')} className="policy-card-order-button">
                                                     <Link
                                                         to={"/account/orders"}
                                                         style={{
@@ -141,7 +145,8 @@ const PolicyComponets = () => {
                                                 <Loader />
                                             </>
                                         ) : (
-                                            pTagValue
+                                            
+                                            <div style={{lineHeight: '16px'}}dangerouslySetInnerHTML={{ __html: htmlContent }} />
                                         )}
                                     </p>
                                     {/* <ul className="policy-item-data">
