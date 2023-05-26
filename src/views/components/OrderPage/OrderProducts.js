@@ -411,14 +411,14 @@ function OrderProducts({ data , totalItems , sendToPage}) {
 
             </div> */}
             <hr />
-            <Text
+            {/* <Text
                 className="cancel-order text-blue-400 cursor-pointer"
                 onClick={() => {
                 console.log("I am clickable");
                 }}
             >
                 Cancel my order
-            </Text>
+            </Text> */}
             </div>
         </Card>
 
