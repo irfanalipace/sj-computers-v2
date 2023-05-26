@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Product\ProductDetailRequest;
 use App\Http\Requests\Product\SearchProductRequest;
+use App\Http\Requests\ProductDetailAsinRequest;
 use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\ProductInfo;
