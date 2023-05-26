@@ -188,3 +188,171 @@
         width: 70%;
     }
 }
+
+@media screen and (max-width:575px) {
+    .product-image {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 61px 16px;
+        /* background: rgba(82, 172, 102, 0.4); */
+        border-radius: 5px 5px 0px 0px;
+        flex: none;
+        order: 0;
+        margin-bottom: 0;
+        flex-grow: 0;
+        border: 1px solid rgba(82, 172, 102, 0.4);
+        border-bottom: none;
+    }.product-image-grid.product-image img {
+      
+    
+    }.product-details {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 12px;
+        gap: 16px;
+        width: 100%;
+        /* width: 162px; */
+        /* max-width: 100%; */
+        height: 264px;
+        background: #FFFFFF;
+        border: 1px solid rgba(82, 172, 102, 0.4);
+        border-radius: 0px 0px 5px 5px;
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+    }.span.span-the-product-color-product {
+        width: 132px;
+        height: 57px;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        color: #111111;
+        flex: none;
+        order: 0;
+        align-self: stretch;
+        flex-grow: 0;
+    }.product-cart-name-mobile-screen {
+        font-family: 'Inter';
+        font-style: normal;
+        max-width: auto;
+        width: 118px;
+        max-width: 100%;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        color: #111111;
+        flex: none;
+        order: 0;
+        align-self: stretch;
+        flex-grow: 0;
+    }.old-price-product-card{
+    
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 19px;
+display: flex;
+align-items: center;
+text-decoration-line: line-through;
+
+color: #333333;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 1;
+flex-grow: 0;
+}.product-new-price {
+    font-size: 14px;
+    margin-right: 8px;
+    /* color: yellow; */
+    color: #E87E24;
+}.product-prices {
+    display: flex;
+    align-items: center;
+    margin-left: -8px;
+    margin-top: -15px;
+}.off-sale-button-product-card {
+    height: 22px;
+    width: 66px;
+    left: calc(50% - 52px/2);
+    top: 2px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    background: black;
+}.off-sale-button-product-card span {
+    color: #e87e24;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    margin-left: 4px;
+}
+.span-get-data-pagragraph-card {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #333333;
+    flex: none;
+    order: 3;
+    align-self: stretch;
+    flex-grow: 0;
+    margin-top: 4px;
+}button.add-to-card-button-mobile-product {
+    /* flex-direction: row; */
+    justify-content: center;
+    align-items: center;
+    padding: 8px 24px;
+    width: auto;
+    height: 32px;
+    max-width: 100%;
+    background: #28A343;
+    border-radius: 100px;
+    /* flex: none; */
+    /* order: 1; */
+    /* align-self: stretch; */
+    /* flex-grow: 0; */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    border: none;
+    margin-top: 18px;
+}.product-image-grid.product-image {
+    height: 0px;
+    max-width: 100%;
+}.product-image-grid.product-image img {
+    width: 83%;
+    max-width: 300px;
+    max-height: 133px;
+}
+}

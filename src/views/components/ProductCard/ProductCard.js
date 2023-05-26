@@ -6,10 +6,48 @@ import "./ProductCard.css";
 const Product = ({ product, inGrid }) => {
     const ProductDetails = () => (
         <div className="product-details">
+             {/* <div>
+                <span className="span-the-product-color-product">
+                crocs Contrary to popular
+                (205100-410)
+                </span>
+            </div> */}
             <Link to={`/product/${product.id}`}>
-                <div className="product-name">{product.name}</div>
+                <div className="product-name product-cart-name-mobile-screen">{product.name}</div>
             </Link>
-            <div className="product-rating">
+            
+
+            {/* Mobile code here */}
+        
+        <div className=" d-sm-none product-prices">
+                {product.originalPrice && (
+                    <div className="product-original-price">
+                        ${product.originalPrice}
+                    </div>
+                )}
+                <div className="product-new-price">
+                    <span>$</span>
+                    {product?.price?.toString().split(".")[0]}
+                    <sup>{product?.price?.toString().split(".")[1]}</sup>
+                   
+                </div>
+                    <div>
+                    <span className="old-price-product-card">$3,495</span>
+                        </div>
+                 
+               
+            </div>
+        
+     
+            <div className="d-sm-none " style={{marginTop:'-14px'}}>
+                    <button className="off-sale-button-product-card">50% <span>{' '} off</span></button>
+                    <span className="span-get-data-pagragraph-card">Get it by Tomorrow, May 26 </span>
+
+                    <span className="span-get-data-pagragraph-card">Free Delivery Available</span>
+                      <button className="add-to-card-button-mobile-product">Add To Cart</button>
+                  </div>
+
+            <div className="d-none d-sm-block product-rating">
                 <StarRatings
                     rating={product.rating}
                     starRatedColor="rgb(232, 126, 36)"
@@ -22,6 +60,8 @@ const Product = ({ product, inGrid }) => {
                 <span className="product-num-reviews ms-2 mt-1">
                     {product.numReviews ? product.numReviews : 0}
                 </span>
+
+              
             </div>
 
             {/* {!inGrid && (
@@ -37,7 +77,7 @@ const Product = ({ product, inGrid }) => {
                     </div>
                 </>
             )} */}
-            <div className="product-prices">
+            <div className="d-none d-sm-block product-prices">
                 {product.originalPrice && (
                     <div className="product-original-price">
                         ${product.originalPrice}
