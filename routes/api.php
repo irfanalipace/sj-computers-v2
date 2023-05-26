@@ -70,6 +70,7 @@ Route::get('products-filter-list', [ProductController::class, 'getProductFilterL
 
 
 Route::get('product-detail', [ProductController::class, 'getProductDetail'])->name('productDetail');
+Route::get('product-detail-asin', [ProductController::class, 'getProductDetailAsin'])->name('productDetailAsin');
 
 /*
  * filters

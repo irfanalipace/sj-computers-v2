@@ -10,4 +10,9 @@ class ProductInfo extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function getValueAttribute($value){
+        $value =   str_replace("_"," ",$value);
+        return   str_replace("-"," ",$value);
+    }
 }
