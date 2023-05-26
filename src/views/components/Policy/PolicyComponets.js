@@ -146,7 +146,7 @@ const PolicyComponets = () => {
                                             </>
                                         ) : (
                                             
-                                            <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+                                            <div style={{lineHeight: '16px'}}dangerouslySetInnerHTML={{ __html: htmlContent }} />
                                         )}
                                     </p>
                                     {/* <ul className="policy-item-data">
