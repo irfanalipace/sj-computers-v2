@@ -29,7 +29,7 @@ function App() {
 
     // const location = useLocation();
     // ${process.env.REACT_APP_URL}
-    const hideHeaderFooter = window.location.pathname === `/thank-you`;
+    // const hideHeaderFooter = window.location.pathname === `/thank-you`;
 
     // console.log(hideHeaderFooter, "header and footer")
 

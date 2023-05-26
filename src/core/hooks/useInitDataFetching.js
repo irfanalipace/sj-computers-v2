@@ -24,6 +24,10 @@ export const useInitDataFetching = () => {
     const cartItems = getCartItems() || [];
     const cartDetails = getCartDetails();
 
+    if (window.localStorage.getItem("cartDetails")) {
+        window.localStorage.removeItem("cartDetails");
+    }
+
     useEffect(() => {
         if (isAuthenticated) {
             console.log("initially hook");
