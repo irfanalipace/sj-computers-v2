@@ -63,7 +63,7 @@
 // `;
 
 // export default MobileSearch;
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useCollapse } from "react-collapsed";
@@ -74,6 +74,10 @@ import ModelBox from "./MobileScreenModel/ModelBox";
 import { searchProducts } from "@store/products/productsThunks";
 import { SET_SEARCH_STRING } from "@store/products/productsSlice";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import SearchAccordian from "../SearchAccordian/SearchAccordian";
+import { Modal } from "@mui/material";
 
 const MobileSearch = () => {
     //search state here
@@ -86,6 +90,9 @@ const MobileSearch = () => {
     const [search, setSearch] = useState("");
     const searchString = useSelector((state) => state.products.searchString);
     const dispatch = useDispatch();
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -95,7 +102,7 @@ const MobileSearch = () => {
     useEffect(() => {
         setSearch(searchString || "");
     }, [searchString]);
-    
+
     const handleButtonClick = () => {
         setShowModal(true);
     };
@@ -116,57 +123,69 @@ const MobileSearch = () => {
         setShowSearchBar(false);
         setSearchValue("");
     };
+
     return (
         <div>
             <Container className="search-dev">
                 <>
-                    <Link to='/'>
-                    <Image
-                        src={mobileheaderlogo}
-                        alt="Left Image"
-                        className="mobile-imagelogo"
-                    />
+                    <Link to="/">
+                        <Image
+                            src={mobileheaderlogo}
+                            alt="Left Image"
+                            className="mobile-imagelogo"
+                        />
                     </Link>
                 </>
                 <RightContent>
-                    <SearchIconContainer {...getToggleProps()}>
-                        {!showSearchBar && (
-                            <SearchIcon
-                                // onClick={handleSearchIconClick}
-                                className="fas fa-search"
-                                style={{ color: "white" }}
-                            />
-                        )}
+                    <SearchIconContainer>
+                        <FontAwesomeIcon
+                            icon={faBars}
+                            size="xl"
+                            onClick={handleOpen}
+                            style={{ color: "#ffffff" }}
+                        />
+
+                        {/* <SearchIcon
+                           
+                            className="fas fa-search"
+                            style={{ color: "white" }}
+                        /> */}
                     </SearchIconContainer>
                 </RightContent>
             </Container>
-
-            <CollapseContainer {...getCollapseProps()}>
-            <form onSubmit={handleSearch}>
-            <div className="search-hide-section-body">
-                    <SearchBar >
-                        <Input
-                            className="search-section"
-                            type="text"
-                            placeholder="Search"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                        />
-                        <span
-                            className="input-group-text red lighten-3 search-icon-on-mobile-screen"
-                            id="basic-text1"
-                        >
-                            <i
-                                className="fas fa-search text-grey set"
-                                aria-hidden="true"
-                                onClick={handleSearch}
-                            ></i>
-                        </span>
-                    </SearchBar>
-                </div>
-            </form>
+            <CollapseContainer>
+                <form onSubmit={handleSearch}>
+                    <div className="search-hide-section-body">
+                        <SearchBar>
+                            <Input
+                                className="search-section"
+                                type="text"
+                                placeholder="Search"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                            <span
+                                className="input-group-text red lighten-3 search-icon-on-mobile-screen"
+                                id="basic-text1"
+                            >
+                                <i
+                                    className="fas fa-search text-grey set"
+                                    aria-hidden="true"
+                                    onClick={handleSearch}
+                                ></i>
+                            </span>
+                        </SearchBar>
+                    </div>
+                </form>
             </CollapseContainer>
-
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <SearchAccordian />
+            </Modal>
             <div className="mobile-box-model">
                 <MobileScreenModel onClick={handleButtonClick} />
                 {showModal && <ModelBox closeModal={closeModal} />}
