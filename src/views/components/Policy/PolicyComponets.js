@@ -72,8 +72,6 @@ const PolicyComponets = () => {
       }, [location.pathname]);
       
    
-
-
     return (
        <div style={{marginBottom:'79px'}}>
 {/* <Header /> */}
