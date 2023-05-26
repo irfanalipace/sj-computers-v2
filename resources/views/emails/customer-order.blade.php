@@ -19,6 +19,11 @@
                                      <img alt="SJ-Computers" style="width:134px" src="{{asset('js/images/header-logo-black.png')}}">
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <br>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
 
