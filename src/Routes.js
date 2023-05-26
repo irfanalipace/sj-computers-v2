@@ -1,7 +1,8 @@
 import React, { Suspense } from "react";
 import { Navigate, useRoutes, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-const Home = React.lazy(() => import("@pages/Home/Home"));
+import Home from "@pages/Home/Home";
+// const Home = React.lazy(() => import("@pages/Home/Home"));
 const LoginForm = React.lazy(() => import("@pages/Auth/LoginForm"));
 const Register = React.lazy(() => import("@pages/Auth/Register"));
 const ForgetPassword = React.lazy(() =>
@@ -32,9 +33,9 @@ export const Router = () => {
         {
             path: "/",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <Home />
-                </Suspense>
+                // <Suspense fallback={<Loader />}>
+                <Home />
+                // </Suspense>
             ),
         },
         {

@@ -4,7 +4,7 @@ import Loader from "@common/LoaderComponent/LoaderComponent";
 
 import {
     fetchProducts,
-    searchProducts,
+    // searchProducts,
     filterProducts,
 } from "@store/products/productsThunks";
 import { CLEAR_PRODUCTS } from "@store/products/productsSlice";
