@@ -92,7 +92,7 @@ const Footer = () => {
                                         </h6>
                                         <li>
                                             <a
-                                                href="#"
+                                                href="https://www.facebook.com/sjcomputersllc"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Facebook
@@ -100,28 +100,28 @@ const Footer = () => {
                                         </li>
                                         <li>
                                             <a
-                                                href="#"
+                                                href="https://www.linkedin.com/company/sj-computers/"
                                                 className="herf-link text-decoration-none"
                                             >
-                                                Twitter
+                                                LinkedIn
                                             </a>
                                         </li>
                                         <li>
                                             <a
-                                                href="#"
+                                                href="https://www.instagram.com/sjcomputersllc/"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Instagram
                                             </a>
                                         </li>
-                                        <li>
+                                        {/* <li>
                                             <a
                                                 href="#"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Youtube
                                             </a>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </div>
 
@@ -144,7 +144,7 @@ const Footer = () => {
                                                 to="/return_refund_policy"
                                                 className="herf-link text-decoration-none"
                                             >
-                                                Return And refund Policies
+                                                Return And Refund Policies
                                             </Link>
                                         </li>
                                         <li>
