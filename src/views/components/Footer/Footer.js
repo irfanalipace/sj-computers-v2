@@ -20,6 +20,7 @@ const Footer = () => {
         "/thank-you",
     ];
 
+   
     return (
         <>
             {!authRoutes.includes(location.pathname) && (

@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faMobile } from "@fortawesome/free-solid-svg-icons";
 import { Alert } from "react-bootstrap";
-
+import { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import { useFormValidation } from "@hooks/useFormValidation";
 import { contactUsApi } from "@api/contact-us";
 import Button from "@common/Button/Button";
@@ -13,7 +14,7 @@ const Contact = () => {
     const [message, setMessage] = useState("");
     const [error, setError] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-
+    const user = useSelector((state) => state.auth.user);
     const postMessage = async (formValue) => {
         setIsLoading(true);
         const params = {
@@ -115,8 +116,8 @@ const Contact = () => {
                             <div className="col-md-12 col-lg-12 col-sm-12">
                                 <div className="p-tages-text-contact">
                                     <h4 className="contact-text-home">
-                                        Welcome to SJ Computer Customer Service,
-                                        John
+                                        Welcome to SJ Computer Customer Service,{' '}
+                                        {user?.name}
                                     </h4>
                                     <h6 className="contact-text-home2">
                                         What would you like help with today? You
