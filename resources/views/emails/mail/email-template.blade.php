@@ -28,6 +28,12 @@
                                     </a>
                                 </td>
                             </tr>
+                            <tr>
+                                <td style="padding-bottom: 5px; padding-left: 20px; padding-right: 20px;" align="center" valign="top"
+                                    class="mainTitle">
+                                    <img alt="SJ-Computers" style="width:134px" src="{{asset('js/images/header-logo-black.png')}}">
+                                </td>
+                            </tr>
                             @yield('content')
 
                             <tr>
