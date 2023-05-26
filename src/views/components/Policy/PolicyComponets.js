@@ -117,7 +117,7 @@ const PolicyComponets = () => {
                                                 details
                                             </span>
                                             <div className="order-button-policy">
-                                                <button Onclick={() => navigate('/account/orders')} className="policy-card-order-button">
+                                                <button onClick={() => navigate('/account/orders')} className="policy-card-order-button">
                                                     <Link
                                                         to={"/account/orders"}
                                                         style={{
@@ -146,7 +146,7 @@ const PolicyComponets = () => {
                                             </>
                                         ) : (
                                             
-                                            <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+                                            <div style={{lineHeight: '27px'}}dangerouslySetInnerHTML={{ __html: htmlContent }} />
                                         )}
                                     </p>
                                     {/* <ul className="policy-item-data">
