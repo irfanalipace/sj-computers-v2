@@ -19,14 +19,12 @@ import { getCartItems, getCartDetails } from "@utils/cartHelpers";
 
 export const useInitDataFetching = () => {
     const dispatch = useDispatch();
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const state = useSelector((state) => state.auth.isAuthenticated);
+    const { isAuthenticated } = useSelector((state) => state.auth);
     const cartItems = getCartItems() || [];
     const cartDetails = getCartDetails();
 
-    if (window.localStorage.getItem("cartDetails")) {
+    if (window.localStorage.getItem("cartDetails"))
         window.localStorage.removeItem("cartDetails");
-    }
 
     useEffect(() => {
         if (isAuthenticated) {
