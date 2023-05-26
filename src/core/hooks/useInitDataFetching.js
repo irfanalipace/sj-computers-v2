@@ -23,12 +23,8 @@ export const useInitDataFetching = () => {
     const cartItems = getCartItems() || [];
     const cartDetails = getCartDetails();
 
-    if (window.localStorage.getItem("cartDetails"))
-        window.localStorage.removeItem("cartDetails");
-
     useEffect(() => {
         if (isAuthenticated) {
-            console.log("initially hook");
             dispatch(clearCart()); //clear store cart items because all cart items are again fetched from backend to sync with localCart
             dispatch(getShippingDetails());
             dispatch(syncCartItems()); //gets all the cart items stored in database and stores them in store and local storage similarly stores local cart items in database
@@ -36,7 +32,6 @@ export const useInitDataFetching = () => {
             // dispatch(conditionState());
 
             if (!window.localStorage.getItem("state")?.id) {
-                console.log("inside state");
                 const tempState = JSON.parse(
                     window.localStorage.getItem("tempState")
                 );

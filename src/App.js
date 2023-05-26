@@ -25,6 +25,9 @@ function App() {
     const token = getToken();
     if (token) dispatch(alreadyLoggedIn(token));
 
+    if (window.localStorage.getItem("cartDetails"))
+        window.localStorage.removeItem("cartDetails");
+
     useInitDataFetching();
     console.log("in App.js");
 
