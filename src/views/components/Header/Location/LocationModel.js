@@ -92,7 +92,7 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                 <Modal.Title>
                     <span className="location-header-text">
                         {" "}
-                        Choose to your location
+                        Choose your location
                     </span>
                 </Modal.Title>
             </Modal.Header>

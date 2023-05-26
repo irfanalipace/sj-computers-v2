@@ -35,8 +35,10 @@ export default function EmailForm({ onFormSubmit, form }) {
     }, [apiError]);
 
     useEffect(() => {
+        console.log("running s");
         setMounted(true);
         return () => {
+            console.log("running e");
             setMounted(false);
             dispatch(CLEAR_API_ERRORS());
         };
@@ -102,7 +104,7 @@ export default function EmailForm({ onFormSubmit, form }) {
                     icon={faCaretRight}
                     className="need-help-singin-arrow"
                 />
-                  <Link to="" className="text-decoration-none need-help">
+                <Link to="" className="text-decoration-none need-help">
                     Need Help?
                 </Link>
             </div>

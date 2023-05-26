@@ -20,13 +20,11 @@ import { getCartItems, getCartDetails } from "@utils/cartHelpers";
 export const useInitDataFetching = () => {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const state = useSelector((state) => state.auth.isAuthenticated);
     const cartItems = getCartItems() || [];
     const cartDetails = getCartDetails();
 
     useEffect(() => {
         if (isAuthenticated) {
-            console.log("initially hook");
             dispatch(clearCart()); //clear store cart items because all cart items are again fetched from backend to sync with localCart
             dispatch(getShippingDetails());
             dispatch(syncCartItems()); //gets all the cart items stored in database and stores them in store and local storage similarly stores local cart items in database
@@ -34,7 +32,6 @@ export const useInitDataFetching = () => {
             // dispatch(conditionState());
 
             if (!window.localStorage.getItem("state")?.id) {
-                console.log("inside state");
                 const tempState = JSON.parse(
                     window.localStorage.getItem("tempState")
                 );
@@ -54,9 +51,9 @@ export const useInitDataFetching = () => {
 
         if (!isAuthenticated) {
             cartItems.forEach((cartItem) => {
-                dispatch(addToLocalCart({ cartItem }));
+                dispatch(addToLocalCart({ cartItem })); // adds local cart items to redux store
             });
-            dispatch(setCartDetails(cartDetails));
+            dispatch(setCartDetails(cartDetails)); // add local store details to redux store
         }
     }, []);
 };

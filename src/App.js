@@ -25,11 +25,15 @@ function App() {
     const token = getToken();
     if (token) dispatch(alreadyLoggedIn(token));
 
+    if (window.localStorage.getItem("cartDetails"))
+        window.localStorage.removeItem("cartDetails");
+
     useInitDataFetching();
+    console.log("in App.js");
 
     // const location = useLocation();
     // ${process.env.REACT_APP_URL}
-    const hideHeaderFooter = window.location.pathname === `/thank-you`;
+    // const hideHeaderFooter = window.location.pathname === `/thank-you`;
 
     // console.log(hideHeaderFooter, "header and footer")
 

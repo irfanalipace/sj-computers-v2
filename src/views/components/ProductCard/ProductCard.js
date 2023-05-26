@@ -6,7 +6,7 @@ import "./ProductCard.css";
 const Product = ({ product, inGrid }) => {
     const ProductDetails = () => (
         <div className="product-details">
-            <Link to={`/product/${product.id}`}>
+            <Link to={`/product/${product?.asin}`}>
                 <div className="product-name">{product.name}</div>
             </Link>
             <div className="product-rating">

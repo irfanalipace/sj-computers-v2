@@ -31,6 +31,23 @@ export function productDetailsApi(id) {
     });
 }
 
+export function productDetailsbyAsinApi(asin) {
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/product-detail-asin?asin=${asin}`)
+            .then((response) => {
+                console.log(
+                    "file: products.js | productDetailsbyAsinApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error productDetail", e);
+                reject(e);
+            });
+    });
+}
+
 export function searchProductsApi(name, page = 1, per_page = 12) {
     return new Promise((resolve, reject) => {
         ApiService.get(

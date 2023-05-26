@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Product\ProductDetailRequest;
 use App\Http\Requests\Product\SearchProductRequest;
+use App\Http\Requests\ProductDetailAsinRequest;
 use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\ProductInfo;
@@ -12,13 +13,17 @@ use Illuminate\Http\Request;
 class ProductController extends BaseController
 {
     public function getList(request $request){
-        
+
         $data= Product::where('status',true)->with('brand')->paginate(12);
         return $this->sendResponse($data);
     }
 
     public function getProductDetail(ProductDetailRequest $request){
         $data = Product::where('id',$request->product_id)->first();
+        return $this->sendResponse($data);
+    }
+    public function getProductDetailAsin(ProductDetailAsinRequest $request){
+        $data = Product::where('asin',$request->asin)->first();
         return $this->sendResponse($data);
     }
 

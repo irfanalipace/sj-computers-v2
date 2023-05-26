@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-import { productDetailsApi } from "@api/products";
+import { productDetailsbyAsinApi } from "@api/products";
 import { ProductImage } from "@components/Product/ProductImage/ProductImage";
 import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
 import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
@@ -25,14 +25,13 @@ export default function Product() {
         setIsLoading(true);
 
         const filteredProduct = products.filter(
-            (product) => product.id == productId
+            (product) => product?.asin == productId
         )[0];
         if (filteredProduct) {
             setProduct(filteredProduct);
         } else {
             try {
-
-                const response = await productDetailsApi(productId);
+                const response = await productDetailsbyAsinApi(productId);
                 setProduct(response.data);
             } catch (error) {}
         }
@@ -48,7 +47,7 @@ export default function Product() {
                             <ProductImage ProductImages={product?.image} />
                         </div>
                         <div className="col-12 col-md-5">
-                            <ProductDetails product={product}/>
+                            <ProductDetails product={product} />
                         </div>
                         <div className="col-12 col-md-3">
                             <CheckOutCard product={product} />
@@ -66,10 +65,8 @@ export default function Product() {
     return (
         <div className="product-page">
             <div className="product-container">
-               
                 {isLoading ? <LoaderComponent /> : <ProductComponent />}
-                <Recommendation  />
-
+                <Recommendation />
             </div>
         </div>
     );

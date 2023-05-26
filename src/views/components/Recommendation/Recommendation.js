@@ -8,13 +8,11 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { useState } from "react";
 import { useEffect } from "react";
 
-
-
 export default function Recommendation() {
     const dispatch = useDispatch();
     const [product, setProduct] = useState(null);
     const products = useSelector((state) => state.products.products);
-    const {isLoading} = useSelector((state) => state?.products);
+    const isLoading = useSelector((state) => state?.products.isLoading);
 
     useEffect(() => {
         getProduct();
@@ -28,7 +26,6 @@ export default function Recommendation() {
         } catch (error) {}
     };
 
-
     return (
         <>
             <div className="recommendation-container">
@@ -38,7 +35,7 @@ export default function Recommendation() {
                         {isLoading || !products ? (
                             <LoaderComponent />
                         ) : (
-                            <ProductSlider products={products}/>
+                            <ProductSlider products={products} />
                         )}
                     </div>
                 </div>

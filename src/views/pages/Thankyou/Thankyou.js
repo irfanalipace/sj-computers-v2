@@ -138,7 +138,7 @@ useEffect(() => {
             <>
              <div className="card-container">
   {thankOrderItems?.map((data, index) => (
-    <div className="card" key={index}>
+    <div className="oder-item-card" key={index}>
       <div className="card-image">
         <img src={data?.product?.image[0] ? data?.product?.image[0] : 'https://m.media-amazon.com/images/I/81zf6aaAK1L.jpg'} alt="Product" />
       </div>
@@ -248,7 +248,7 @@ useEffect(() => {
         <p className="bold-total">${thankOrderDetails?.Order?.total_amount ? thankOrderDetails?.Order?.total_amount :  'N/A'}</p>
         </div>
      </div>
-      <div className="row mx-0">
+      <div className="row mx-0 mb-5">
         <div className="col-6 d-flex justify-content-start">
             <button className="track-order-btn" onClick={() =>  navigate ("/")}>Track your order</button>
         </div>
