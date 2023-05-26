@@ -161,7 +161,6 @@ const OrderPage = () => {
     };
 
     const updatePage = (data) => {
-        console.log(data, "select page");
         dispatch(getOrderDetails(data));
     };
 
