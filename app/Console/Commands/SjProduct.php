@@ -128,30 +128,43 @@ class SjProduct extends Command
         }
 
         if (isset($description->ram_memory[0]->installed_size[0])) {
-            $ramMemoryInfo = [
-                'key' => 'ram_memory',
-                'product_id' => $product->id,
-                'value' => $description->ram_memory[0]->installed_size[0]->value . ' ' . $description->ram_memory[0]->installed_size[0]->unit
-            ];
-            $this->insertProductInfo($ramMemoryInfo);
+            /*
+             * memory must be greater than 0
+             */
+            if((int)$description->ram_memory[0]->installed_size[0]->value != 0 ) {
+                $ramMemoryInfo = [
+                    'key' => 'ram_memory',
+                    'product_id' => $product->id,
+                    'value' => $description->ram_memory[0]->installed_size[0]->value . ' ' . $description->ram_memory[0]->installed_size[0]->unit
+                ];
+                $this->insertProductInfo($ramMemoryInfo);
+            }
         };
 
         if (isset($description->operating_system[0]->value)) {
-            $operatingSystemInfo = [
-                'key' => 'operating_system',
-                'product_id' => $product->id,
-                'value' => $description->operating_system[0]->value
-            ];
-            $this->insertProductInfo($operatingSystemInfo);
+
+            if($description->operating_system[0]->value != 'No' && $description->operating_system[0]->value != 'Unknown'
+            && !str_contains($description->operating_system[0]->value, 'English')
+            ) {
+                $operatingSystemInfo = [
+                    'key' => 'operating_system',
+                    'product_id' => $product->id,
+                    'value' => $description->operating_system[0]->value
+                ];
+                $this->insertProductInfo($operatingSystemInfo);
+            }
         };
 
         if (isset($description->hard_disk[0]->size[0])) {
-            $hardDiskInfo = [
-                'key' => 'hard_disk',
-                'product_id' => $product->id,
-                'value' => $description->hard_disk[0]->size[0]->value . ' ' . $description->hard_disk[0]->size[0]->unit
-            ];
-            $this->insertProductInfo($hardDiskInfo);
+
+            if((int)$description->hard_disk[0]->size[0]->value != 0){
+                $hardDiskInfo = [
+                    'key' => 'hard_disk',
+                    'product_id' => $product->id,
+                    'value' => $description->hard_disk[0]->size[0]->value . ' ' . $description->hard_disk[0]->size[0]->unit
+                ];
+                $this->insertProductInfo($hardDiskInfo);
+            }
         };
 
         if (isset($description->graphics_description)) {
