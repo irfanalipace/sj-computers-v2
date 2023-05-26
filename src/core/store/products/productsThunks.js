@@ -14,12 +14,12 @@ import {
     filterProductsApi,
 } from "@api/products";
 
-export const fetchProducts = (page = 1, loadMore,per_page=12) => {
+export const fetchProducts = (page = 1, loadMore = false, per_page = 12) => {
     return async (dispatch) => {
         try {
             if (loadMore) dispatch({ type: SET_IS_SHOW_MORE, payload: {} });
             else dispatch({ type: LOADING, payload: {} });
-            const response = await productsApi(page,per_page);
+            const response = await productsApi(page, per_page);
             dispatch({
                 type: FETCH_PRODUCTS,
                 payload: response?.data?.data,

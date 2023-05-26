@@ -54,13 +54,5 @@ module.exports = {
         filename: "app.js",
     },
 
-    devServer: {
-        static: {
-            directory: path.join(__dirname, "public"),
-        },
-        headers: { "Access-Control-Allow-Origin": "" },
-        port: 3000,
-        historyApiFallback: true,
-    },
     plugins: [new Dotenv()],
 };
