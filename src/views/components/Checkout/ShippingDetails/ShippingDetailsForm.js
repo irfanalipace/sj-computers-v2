@@ -214,7 +214,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                     <select
                                         id="state"
                                         name="state"
-                                        className="input-field"
+                                        className="input-field text-capitalize"
                                         placeholder="Select Stte"
                                         onChange={handleChange}
                                         value={values?.state}
@@ -223,6 +223,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                             <option
                                                 value={state?.name}
                                                 key={state?.id}
+                                                className="text-capitalize"
                                             >
                                                 {state?.name}
                                             </option>

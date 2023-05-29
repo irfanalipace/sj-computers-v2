@@ -144,7 +144,9 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                                         onClick={() => setState(state)}
                                         key={state.id}
                                     >
-                                        <h6>{state.name}</h6>
+                                        <h6 className="text-capitalize">
+                                            {state.name}
+                                        </h6>
                                     </Dropdown.Item>
                                 ))}
                             </Dropdown.Menu>
