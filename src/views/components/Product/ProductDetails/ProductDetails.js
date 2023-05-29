@@ -74,7 +74,7 @@ const ProductDetails = ({ product }) => {
     };
 
     return (
-        <div>
+        <div className="container">
             <div className="">
                 <p className="item-title">{product?.name}</p>
             </div>
@@ -87,8 +87,8 @@ const ProductDetails = ({ product }) => {
                     )}
                 </p>
             </div>
-            <div className="row px-0 res">
-                <div className="col-lg-4 col-md-6 col-sm-12 product-review">
+            <div className="row px-0  res row-cols-sm-2">
+                <div className="col-6 col-sm-6 col-lg-4 col-md-6  product-review">
                     <div className="star my-2">
                         <StarRatings
                             rating={product?.rating}
@@ -104,8 +104,8 @@ const ProductDetails = ({ product }) => {
                         Top <span className="selling-color">Selling</span>
                     </button>
                 </div>
-                <div className="col-lg-8 col-md-6 col-sm-12">
-                    <div className="my-2">
+                <div className="col-6 col-sm-6 col-lg-4 col-md-6">
+                    <div className="mt-3">
                         <button className="product-rating">
                             {product?.numReviews ? product.numReviews : "0"}{" "}
                             ratings

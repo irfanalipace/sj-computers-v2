@@ -78,7 +78,6 @@
 }
 .button-cart-sell {
     margin: 15px;
-
     display: flex;
     justify-content: center;
     /* align-items: center; */
@@ -118,7 +117,6 @@
 @media screen and (max-width: 780px) {
     .color-card-dev {
         text-align: center;
-       
     }
     .text-stock {
         text-align: center;
@@ -138,52 +136,49 @@
 .item-card-add-text-details {
     font-size: 12px;
 }
-.dilvery-text-paragraph-card{
-font-family: 'Inter';
-font-style: normal;
-font-weight: 500;
-font-size: 13px;
-line-height: 18px;
-
-
+.dilvery-text-paragraph-card {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
 }
 
-.card-dev-section-paragrap-product{
+.card-dev-section-paragrap-product {
     margin-bottom: 12px;
 }
-.instock-dev-card-product-section-with-color-card{
+.instock-dev-card-product-section-with-color-card {
     display: flex;
     justify-content: space-between;
 }
-.color-text-cart-with-inStock{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 11px;
-line-height: 13px;
+.color-text-cart-with-inStock {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
 
-color: #FF0000;
+    color: #ff0000;
 }
-.secure-payment-method{
-    font-family: 'Inter';
+.secure-payment-method {
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 11px;
     line-height: 13px;
 }
-.color-card-text-paragrap-payment{
-    font-family: 'Inter';
+.color-card-text-paragrap-payment {
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 11px;
     line-height: 13px;
 }
-.ship-card-details-card-payment-method-checkout-card{
+.ship-card-details-card-payment-method-checkout-card {
     padding-bottom: 8px;
 }
 
-
-.info-content-box-the-card{
+.info-content-box-the-card {
     position: absolute;
     margin-top: -79px;
     background-color: white;
@@ -196,13 +191,13 @@ color: #FF0000;
     display: inline-block;
     text-align: initial;
 }
-  
-  .secure-payment-method:hover + .hidden-box,
-  .hidden-box:hover {
+
+.secure-payment-method:hover + .hidden-box,
+.hidden-box:hover {
     display: block; /* show the hidden box on hover */
-  }
-  
-  .hidden-box {
+}
+
+.hidden-box {
     display: none;
     position: absolute;
     top: 0;
@@ -213,21 +208,47 @@ color: #FF0000;
     padding: 10px;
     z-index: 4;
 }
-  
 
- .hidden-box {
+.hidden-box {
     /* max-width: 100%; */
     width: 248px !important;
-   
-   
+
     background: white;
     /* margin-right: 23px; */
 }
 
-@media screen and (max-width:600px) {
-    .card-price-section-card-product{
+@media screen and (min-width: 767px) and (max-width: 1150px) {
+    .button-cart-sell .button-text-button{
+        font-size: 12px;
+        padding: 0px 0 !important;
+    }
+    
+}
+
+@media screen and (min-width: 767px) and (max-width: 1150px) {
+    .button1 {
+        width: 318px !important;
+        height: 33px !important;
+    }
+    
+}
+
+@media screen and  (max-width: 766px) {
+    .button1 {
+        width: 318px !important;
+        height: 30px !important;
+    }
+    
+}
+
+
+
+
+@media screen and (max-width: 600px) {
+    .card-price-section-card-product {
         display: none;
-    }.hidden-box:hover {
+    }
+    .hidden-box:hover {
         /* margin-right: 30px; */
         position: absolute;
         top: -4px;
@@ -237,11 +258,20 @@ color: #FF0000;
         /* background-color: #f2f2f2; */
         padding: 10px;
         transition: left 0.3s ease-in-out;
-    }.ships-form-span-tag{
+    }
+    .ships-form-span-tag {
         margin-left: 11px;
-    }.return-from-span-tag-checkout{
+    }
+    .return-from-span-tag-checkout {
         margin-left: -11px;
-    }.sjcomputer-tag-checkout-card{
+    }
+    .sjcomputer-tag-checkout-card {
         margin-left: -25px;
     }
 }
+
+
+
+
+
+
