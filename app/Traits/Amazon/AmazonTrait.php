@@ -3,6 +3,7 @@
 namespace App\Traits\Amazon;
 
 use App\Classes\StatusEnum;
+use App\Models\HoldReleaseUser;
 use App\Models\Product;
 use Exception;
 
@@ -68,9 +69,7 @@ trait AmazonTrait
         switch ($type) {
             case StatusEnum::RELEASE:
                 # code...
-
                 $totalQuantity = (int) $productInfo['quantity'] + (int) $qty;
-
                 break;
             default:
                 # code...
@@ -89,7 +88,11 @@ trait AmazonTrait
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
+<<<<<<< Updated upstream
             //            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $productInfo['sku'], 'quantity' => $totalQuantity)),
+=======
+//            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $productInfo['sku'], 'quantity' => $totalQuantity)),
+>>>>>>> Stashed changes
             CURLOPT_POSTFIELDS => json_encode(array('SKU' => 'AI-NRCD-SNXP', 'quantity' => $totalQuantity)),
             CURLOPT_HTTPHEADER => array(
                 'apikey: ' . config('app.amazon_apikey'),
@@ -101,6 +104,19 @@ trait AmazonTrait
         $response = curl_exec($curl);
 
         curl_close($curl);
+
+        $this->insertHoldRelease($qty, $type, $productInfo['product']->id);
         return true;
+    }
+
+    public function insertHoldRelease($qty, $status, $productId){
+
+        HoldReleaseUser::create([
+            'user_id' => auth()->user()->id,
+            'product_id' => $productId,
+            'quantity' => (int)$qty,
+            'status'  => $status,
+        ]);
+
     }
 }
