@@ -42,6 +42,7 @@ class GenerateInvoiceJob implements ShouldQueue
         $order['order'] = $this->order['order'];
         //Email to customer
         $email = $this->user->email;
+
         Mail::send('emails.order.customer-order', ['data' => $order], function ($m) use ($email) {
             $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
             $m->to($email)->subject('Order Placed.');
@@ -49,7 +50,7 @@ class GenerateInvoiceJob implements ShouldQueue
 
         Mail::send('emails.order.order-send-to-admin', ['data' => $order], function ($m) use ($email) {
             $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
-            $m->to(env('MAIL_FROM_ADDRESS'))->subject('Order Placed.');
+            $m->to(config('mail.from.address'))->subject('Order Placed.');
         });
     }
 }
