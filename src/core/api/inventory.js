@@ -17,7 +17,7 @@ export function getInventory(search) {
 }
 export function inventoryAction({ action, quantity, search }) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/action-perfom`, {
+        ApiService.post(`/action-perform`, {
             action,
             quantity,
             search,

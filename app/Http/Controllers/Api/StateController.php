@@ -12,12 +12,12 @@ class StateController extends BaseController
 {
     public function getList(request $request)
     {
-        $data= State::all();
+        $data= State::orderBy('name')->get();
         return $this->sendResponse($data);
     }
 
     public function updateState(UpdateStateRequest $request)
-    {        
+    {
         UserState::updateOrCreate(['user_id' => auth()->user()->id],
             [
                 'zip_code'=> $request->zip_code,
