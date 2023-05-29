@@ -179,4 +179,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      * Apply Shipment
      */
     Route::post('apply-shipment', [CartController::class, 'applyShipment'])->name('applyShipment');
+
+
+    /*
+    * Download inventory Excel
+    */
+    Route::get('download-inventory',[InventoryController::class,'downloadInventory'])->name('downloadInventory');
 });

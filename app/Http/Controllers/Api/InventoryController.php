@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Classes\StatusEnum;
+use App\Exports\ExportProduct;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Inventory\GetInventoryRequest;
 use App\Http\Requests\Inventory\ActionPerfomRequest;
 use App\Traits\Amazon\AmazonTrait;
 use Exception;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class InventoryController extends BaseController
@@ -62,5 +64,12 @@ class InventoryController extends BaseController
             $type = StatusEnum::SKU;
         }
         return $type;
+    }
+
+    // Download Inventory via Excel
+    public function downloadInventory()
+    {
+        
+        return $this->sendResponse([Excel::download(new ExportProduct(), 'inventory.csv'),'Successfully Dowloaded Inventory.']);
     }
 }
