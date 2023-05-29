@@ -9,6 +9,9 @@ import {
     UPDATING,
     API_ERROR,
 } from "@store/cart/cartSlice";
+
+import { SET_PRODUCT_LOADING,  SET_PRODUCT_CLEAR_LOADING } from "@store/products/productsSlice";
+
 import {
     addToCartApi,
     addListToCartApi,
@@ -34,9 +37,9 @@ import { toast } from "react-toastify";
 export const addToCart = (data, cb) => {
     return async (dispatch) => {
         try {
-            dispatch({ type: LOADING, payload: {} });
+            dispatch({ type: SET_PRODUCT_LOADING, payload: {id: data?.cartItem?.id} });
             let param = {
-                product_id: data.cartItem.id,
+                product_id: data?.cartItem?.id,
                 qty: data.cartItem.quantity,
             };
             let response = await addToCartApi(param);
@@ -53,6 +56,9 @@ export const addToCart = (data, cb) => {
             console.log("Something went wrong in carts", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
+
+        dispatch({ type:  SET_PRODUCT_CLEAR_LOADING, payload: {id: data?.id} });
+      
     };
 };
 
