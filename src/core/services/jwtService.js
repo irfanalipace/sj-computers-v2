@@ -6,25 +6,35 @@ const PASSWORD = "user_password";
 const USER_STATE = "state";
 const TEMP_TOKEN = "temp_token";
 
-export const getToken = () => atob(window.localStorage.getItem(TOKEN));
+export const getToken = () => {
+    if (window.localStorage.getItem(TOKEN)) {
+        let token = "";
+        try {
+            token = atob();
+        } catch (error) {
+            token = window.localStorage.getItem(TOKEN);
+        }
+        return token;
+    }
+};
 export const saveToken = (token) => {
-    const encodedToken = btoa(token)
+    const encodedToken = btoa(token);
     window.localStorage.setItem(TOKEN, encodedToken);
 };
 
 export const saveUser = (user) => {
-    const userDetails = {...user}
+    const userDetails = { ...user };
     window.localStorage.setItem(USER, JSON.stringify(userDetails));
 };
 export const saveUserName = (name) => {
-    let  user = getUser();
-    user = {...user , name}
+    let user = getUser();
+    user = { ...user, name };
     saveUser(user);
 };
 
 export const saveUserImage = (profile_pic) => {
-    let  user = getUser();
-    user = {...user , profile_pic}
+    let user = getUser();
+    user = { ...user, profile_pic };
     saveUser(user);
 };
 
@@ -32,44 +42,59 @@ export const saveUserState = (userState) => {
     window.localStorage.setItem(USER_STATE, JSON.stringify(userState));
 };
 export const saveUserEmail = (email) => {
-    let  user = getUser();
-      user = {...user,email}
-      console.log('user@' , user , email)
-    saveUser(user)
+    let user = getUser();
+    user = { ...user, email };
+    saveUser(user);
 };
 
 export const saveTempToken = (token) => {
     ApiService.setHeader("Authorization", "Bearer " + token);
-    const encodedToken = btoa(token)
+    const encodedToken = btoa(token);
     window.localStorage.setItem(TEMP_TOKEN, encodedToken);
 };
-export const getTempToken = () =>atob(window.localStorage.getItem((TEMP_TOKEN)));
+export const getTempToken = () => {
+    let tempToken = "";
+    try {
+        tempToken = atob(window.localStorage.getItem(TEMP_TOKEN));
+    } catch (error) {
+        tempToken = window.localStorage.getItem(TEMP_TOKEN);
+    }
+
+    return tempToken;
+};
 
 export const saveUserPassword = (password) => {
-    const encodeedPassword = btoa(password)
+    const encodeedPassword = btoa(password);
     window.localStorage.setItem(PASSWORD, encodeedPassword);
 };
 export const getUserPassword = () => {
-   return atob (window.localStorage.getItem((PASSWORD)));
-}
+    let password = "";
+    try {
+        password = atob(window.localStorage.getItem(PASSWORD));
+    } catch (error) {
+        password = window.localStorage.getItem(PASSWORD);
+    }
+    return password;
+};
 
 export const destroyUserPassword = () =>
     window.localStorage.removeItem(PASSWORD);
 
-export const getUser = () => JSON.parse(window.localStorage.getItem(USER)) || {};
+export const getUser = () =>
+    JSON.parse(window.localStorage.getItem(USER)) || {};
 
 export const getUserEmail = () => {
-    const user = getUser();  
+    const user = getUser();
     return user?.email;
 };
 export const getUserName = () => {
     const user = getUser();
-    return user.name;
+    return user?.name;
 };
 
 export const getUserImage = () => {
     const user = getUser();
-    return user.profile_pic;
+    return user?.profile_pic;
 };
 
 export const getUserState = () =>
