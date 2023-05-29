@@ -134,7 +134,7 @@
     margin-right: 6px;
     margin-left: 6px;
 }
-.on-focus-colo-contact:focus{
+.on-focus-colo-contact:focus {
     color: white !important;
 }
 @media screen and (max-width: 1000px) {
@@ -145,6 +145,11 @@
         max-width: 100%;
         font-size: 14px;
         width: 460px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .contact-container {
+        display: none !important;
     }
 }
 
@@ -179,10 +184,12 @@
         padding-left: 65px;
     }
     .vertical-line-contactus {
-       display: none;
-    }.nav-item-contact{
         display: none;
-    }.text-aligin-contact-menu:hover {
-      display: none;
+    }
+    .nav-item-contact {
+        display: none;
+    }
+    .text-aligin-contact-menu:hover {
+        display: none;
     }
 }

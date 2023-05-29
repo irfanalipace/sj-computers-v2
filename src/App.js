@@ -9,6 +9,7 @@ import { Router } from "@src/Routes";
 import { alreadyLoggedIn } from "@store/auth/authThunks";
 import { useInitDataFetching } from "@hooks/useInitDataFetching";
 import { TawkTo } from "@components/Tawk.To/Messenger";
+import { setUserTracking } from "@services/cookiesService";
 
 import Header from "@components/Header/Header";
 import Footer from "@components/Footer/Footer";
@@ -23,13 +24,9 @@ import ScrollToTop from "./ScrollToTop";
 function App() {
     const dispatch = useDispatch();
     const token = getToken();
+    setUserTracking(); // sets user visit data in cookies
     if (token) dispatch(alreadyLoggedIn(token));
-
-    if (window.localStorage.getItem("cartDetails"))
-        window.localStorage.removeItem("cartDetails");
-
     useInitDataFetching();
-    console.log("in App.js");
 
     // const location = useLocation();
     // ${process.env.REACT_APP_URL}

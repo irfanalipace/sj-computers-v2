@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faMobile } from "@fortawesome/free-solid-svg-icons";
@@ -55,7 +54,7 @@ const Contact = () => {
     }, [errors]);
 
     return (
-        <div>
+        <div className="contact-container">
             <div className="contact-header">
                 <div className="my-contact-menu">
                     <nav className="navbar navbar-expand-lg nav-contact-background-color">
@@ -75,7 +74,6 @@ const Contact = () => {
                                         <Link
                                             className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line on-focus-colo-contact"
                                             to="/"
-                                           
                                         >
                                             Home
                                         </Link>
@@ -92,7 +90,7 @@ const Contact = () => {
                                             <FontAwesomeIcon
                                                 icon={faEnvelope}
                                             />{" "}
-                                         cs@sjcomputersmn.com
+                                            cs@sjcomputersmn.com
                                         </Link>
                                     </li>
                                     <span className="nav-item-contact"></span>
@@ -101,7 +99,7 @@ const Contact = () => {
                                             className="nav-link text-aligin-contact-menu link-no-hover email-contact-hr-line on-focus-colo-contact"
                                             to="tel: 952-452-8884"
                                         >
-                                            <FontAwesomeIcon icon={faMobile}  />{" "}
+                                            <FontAwesomeIcon icon={faMobile} />{" "}
                                             952-452-8884
                                         </Link>
                                     </li>
@@ -116,7 +114,7 @@ const Contact = () => {
                             <div className="col-md-12 col-lg-12 col-sm-12">
                                 <div className="p-tages-text-contact">
                                     <h4 className="contact-text-home">
-                                        Welcome to SJ Computer Customer Service,{' '}
+                                        Welcome to SJ Computer Customer Service,{" "}
                                         {user?.name}
                                     </h4>
                                     <h6 className="contact-text-home2">
