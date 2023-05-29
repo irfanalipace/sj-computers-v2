@@ -147,14 +147,14 @@ const Footer = () => {
                                                 Return And Refund Policies
                                             </Link>
                                         </li>
-                                        <li>
+                                        {/* <li>
                                             <Link
                                                 to="/shipping_policy"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Shipping Policies
                                             </Link>
-                                        </li>
+                                        </li> */}
                                         <li>
                                             <Link
                                                 to="/term_services"
