@@ -197,7 +197,7 @@ const ProductDetails = ({ product }) => {
                                     className="row mx-0"
                                 >
                                     <div className="col-md-3 col-6">
-                                        <span className="item12 text-capitalize">
+                                        <span className="item12 text-uppercase">
                                             {item?.key}
                                         </span>
                                     </div>

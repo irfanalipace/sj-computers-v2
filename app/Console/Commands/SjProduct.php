@@ -157,7 +157,7 @@ class SjProduct extends Command
 
         if (isset($description->hard_disk[0]->size[0])) {
 
-            if((int)$description->hard_disk[0]->size[0]->value != 0){
+            if((int)$description->hard_disk[0]->size[0]->value != 0 && !empty($description->hard_disk[0]->size[0]->unit)){
                 $hardDiskInfo = [
                     'key' => 'hard_disk',
                     'product_id' => $product->id,

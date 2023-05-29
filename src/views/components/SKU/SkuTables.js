@@ -11,6 +11,7 @@ const SkuTables = () => {
     const [search, setSearch] = useState("");
     const [holdQuantity, setholdQuantity] = useState("");
     const [loading, setLoading] = useState(false);
+    const [action, setAction] = useState(null);
 
     const handleChange = async (e) => {
         setLoading(true);
@@ -48,6 +49,7 @@ const SkuTables = () => {
         })
             .then((_) => {
                 setLoading(false);
+                setAction("HOLD");
                 if (_.data.length > 0) {
                     setInvent(_?.data[0]?.product);
                     let obj = [
@@ -67,6 +69,7 @@ const SkuTables = () => {
                 setLoading(false);
             });
     };
+
     const handleRelease = async (e) => {
         setLoading(true);
         setholdQuantity(null);
@@ -76,6 +79,7 @@ const SkuTables = () => {
             search: search,
         })
             .then((_) => {
+                setAction("RELEASE");
                 setLoading(false);
                 if (_.data.length > 0) {
                     setInvent(_.data[0]?.product);
@@ -97,12 +101,14 @@ const SkuTables = () => {
                 setLoading(false);
             });
     };
+
     const handleBuy = () => {
         setInvent();
         setData([]);
         setSearch("");
         setholdQuantity("");
         setLoading(false);
+        setAction("");
     };
 
     return (
@@ -151,6 +157,7 @@ const SkuTables = () => {
                                     className="search-sku-input-asin"
                                     placeholder="Enter quantity..."
                                     value={holdQuantity}
+                                    readOnly={action === "HOLD"}
                                     onChange={(_) =>
                                         setholdQuantity(_.target.value)
                                     }
@@ -158,16 +165,26 @@ const SkuTables = () => {
                             </div>
 
                             <div className="button-sku-button">
-                                <button onClick={handlehold}>Hold</button>
-                                <button
-                                    onClick={handleRelease}
-                                    style={{
-                                        background: "#269C40",
-                                        border: "none",
-                                    }}
-                                >
-                                    Release
-                                </button>
+                                {(!action || action === "RELEASE") && (
+                                    <button
+                                        onClick={handlehold}
+                                        disabled={loading}
+                                    >
+                                        Hold
+                                    </button>
+                                )}
+                                {action === "HOLD" && (
+                                    <button
+                                        onClick={handleRelease}
+                                        style={{
+                                            background: "#269C40",
+                                            border: "none",
+                                        }}
+                                        disabled={loading}
+                                    >
+                                        Release
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>

@@ -16,7 +16,12 @@
                             <tbody>
                             <tr>
                                 <td valign="top" align="center" width="100" style="background-color:#ffffff">
-                                    {{-- <img alt="SJ-Computers" style="width:134px" src="{{asset('js/images/header-logo-black.png')}}"> --}}
+                                     <img alt="SJ-Computers" style="width:134px" src="{{asset('js/images/header-logo-black.png')}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br>
                                 </td>
                             </tr>
                             </tbody>
@@ -42,7 +47,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        
+
                         <br>
                         <br>
                         <table border="0" cellpadding="20" cellspacing="0" width="100%" style="color:#000000;line-height:150%;text-align:left;font:200 16px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif">

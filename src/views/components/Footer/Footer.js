@@ -20,7 +20,6 @@ const Footer = () => {
         "/thank-you",
     ];
 
-   
     return (
         <>
             {!authRoutes.includes(location.pathname) && (
@@ -49,14 +48,14 @@ const Footer = () => {
                                                 About us
                                             </a>
                                         </li>
-                                        <li>
+                                        {/* <li>
                                             <a
                                                 href="#!"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Product
                                             </a>
-                                        </li>
+                                        </li> */}
                                         <li>
                                             <Link
                                                 to="/contact"
@@ -66,7 +65,7 @@ const Footer = () => {
                                                 Contact Us
                                             </Link>
                                         </li>
-                                        <li>
+                                        {/* <li>
                                             <a
                                                 href="#!"
                                                 className="herf-link text-decoration-none"
@@ -81,7 +80,7 @@ const Footer = () => {
                                             >
                                                 Shop
                                             </a>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </div>
 
@@ -184,14 +183,14 @@ const Footer = () => {
                                             2817 Eagandale Blvd Eagan, MN 55121.
                                         </p>
                                         <p className="herf-link ">
-                                        952-452-8884
+                                            952-452-8884
                                         </p>
                                         <li>
                                             <a
                                                 href="mailto:cs@sjcomputersmn.com"
                                                 className="herf-link text-decoration-none"
                                             >
-                                              cs@sjcomputersmn.com
+                                                cs@sjcomputersmn.com
                                             </a>
                                         </li>
                                     </ul>
@@ -200,51 +199,49 @@ const Footer = () => {
                         </div>
                         <hr className="hr-line"></hr>
                         <div className="footer-copyright text-center py-3 footer-image-lien">
-                      <div className="image-footer-dev-sectionsjcomputers">
-                   <Link to='/'>
-                   <img
-                                src={footer}
-                                alt=""
-                               
-                                className="footer-copywrite-images"
-                            /> 
-                   
-                   </Link>
-                      </div>
-
-                        <div className="setting-button-fax">
-                        <button
-                                className="btn btn-secondary dropdown-toggle language-dropdown"
-                                style={{ background: "#00305E" }}
-                                type="button"
-                                id="dropdownMenuButton"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
-                                <img
-                                    src={vectorimg}
-                                    alt=""
-                                    className="english-dropdown"
-                                />
-                                English
-                                <img
-                                    src={img1}
-                                    style={{ marginLeft: "10px" }}
-                                />
-                            </button>
-                            <div
-                                className="dropdown-menu"
-                                aria-labelledby="dropdownMenuButton"
-                            >
-                                <a className="dropdown-item" href="#">
-                                    span
-                                </a>
-                                <a className="dropdown-item" href="#">
-                                    UK
-                                </a>
+                            <div className="image-footer-dev-sectionsjcomputers">
+                                <Link to="/">
+                                    <img
+                                        src={footer}
+                                        alt=""
+                                        className="footer-copywrite-images"
+                                    />
+                                </Link>
                             </div>
-                        </div>
+
+                            <div className="setting-button-fax">
+                                <button
+                                    className="btn btn-secondary dropdown-toggle language-dropdown"
+                                    style={{ background: "#00305E" }}
+                                    type="button"
+                                    id="dropdownMenuButton"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    <img
+                                        src={vectorimg}
+                                        alt=""
+                                        className="english-dropdown"
+                                    />
+                                    English
+                                    <img
+                                        src={img1}
+                                        style={{ marginLeft: "10px" }}
+                                    />
+                                </button>
+                                <div
+                                    className="dropdown-menu"
+                                    aria-labelledby="dropdownMenuButton"
+                                >
+                                    <a className="dropdown-item" href="#">
+                                        span
+                                    </a>
+                                    <a className="dropdown-item" href="#">
+                                        UK
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div className="footer-copyright text-center py-3">
                             <img
