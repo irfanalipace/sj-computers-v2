@@ -50,6 +50,7 @@ export const login = (credentials) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             const response = await loginApi(credentials);
+            console.log("response: ", response);
             let token = response.access_token;
             let name = response.user;
             let profile_pic = response.profile_pic;

@@ -7,12 +7,13 @@ const USER_STATE = "state";
 const TEMP_TOKEN = "temp_token";
 
 export const getToken = () => {
-    if (window.localStorage.getItem(TOKEN)) {
+    let Token = window.localStorage.getItem(TOKEN);
+    if (Token) {
         let token = "";
         try {
-            token = atob();
+            token = atob(Token);
         } catch (error) {
-            token = window.localStorage.getItem(TOKEN);
+            token = Token;
         }
         return token;
     }
@@ -23,7 +24,7 @@ export const saveToken = (token) => {
 };
 
 export const saveUser = (user) => {
-    const userDetails = { ...user };
+    const userDetails = { ...user, name: user.name || user.user };
     window.localStorage.setItem(USER, JSON.stringify(userDetails));
 };
 export const saveUserName = (name) => {
