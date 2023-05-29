@@ -101,6 +101,19 @@ trait AmazonTrait
         $response = curl_exec($curl);
 
         curl_close($curl);
+
+        $this->insertHoldRelease($qty, $type, $productInfo['product']->id);
         return true;
+    }
+
+    public function insertHoldRelease($qty, $status, $productId){
+
+        HoldReleaseUser::create([
+            'user_id' => auth()->user()->id,
+            'product_id' => $productId,
+            'quantity' => (int)$qty,
+            'status'  => $status,
+        ]);
+
     }
 }
