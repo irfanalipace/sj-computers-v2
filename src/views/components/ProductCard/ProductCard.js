@@ -1,9 +1,55 @@
 import StarRatings from "react-star-ratings";
 import { Link } from "react-router-dom";
-
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import Button from "@common/Button/Button";
+import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
 import "./ProductCard.css";
 
 const Product = ({ product, inGrid }) => {
+    const currentState = useSelector((state) => state.states.currentState);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const cart = useSelector((state) => state.cart.cart);
+    const details = useSelector((state) => state.cart.details);
+    const isLoading = useSelector((state) => state.cart.isLoading);
+    const [quantity, setQuantity] = useState(1);
+    const [show, setShow] = useState(false);
+    const [cartItem, setCartItem] = useState(null);
+    const handleShow = () => setShow(!show);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const orderEstimatedDelivery = useSelector(
+        (state) => state.orders.orderEstimatedDelivery
+    );
+
+    const cartClickHandler = () => {
+        let productPrice = product.price * quantity;
+        let cartQuantity = details.total_items + 1;
+        let cartTotal = parseFloat(details?.total) + productPrice;
+        let cartSubTotal = parseFloat(details?.sub_total) + productPrice;
+        const cartItem = {
+            id: product.id,
+            quantity: quantity,
+            price: productPrice,
+            product: { ...product },
+        };
+
+        const cartDetails = {
+            total_items: cartQuantity,
+            total: cartTotal.toFixed(2),
+            sub_total: cartSubTotal.toFixed(2),
+        };
+
+        if (isAuthenticated)
+            dispatch(addToCart({ cartItem }, () => navigate("/cart")));
+        else
+            dispatch(
+                addToLocalCart({ cartItem, cartDetails }, () =>
+                    navigate("/cart")
+                )
+            );
+    };
     const ProductDetails = () => (
         <div className="product-details">
              {/* <div>
@@ -32,7 +78,7 @@ const Product = ({ product, inGrid }) => {
                    
                 </div>
                     <div>
-                    <span className="old-price-product-card">$3,495</span>
+                    {/* <span className="old-price-product-card">$3,495</span> */}
                         </div>
                  
                
@@ -40,11 +86,24 @@ const Product = ({ product, inGrid }) => {
         
      
             <div className="d-sm-none " style={{marginTop:'-14px'}}>
-                    <button className="off-sale-button-product-card">50% <span>{' '} off</span></button>
-                    <span className="span-get-data-pagragraph-card">Get it by Tomorrow, May 26 </span>
+                    {/* <button className="off-sale-button-product-card">50% <span>{' '} off</span></button> */}
+                  
 
-                    <span className="span-get-data-pagragraph-card">Free Delivery Available</span>
-                      <button className="add-to-card-button-mobile-product">Add To Cart</button>
+                    <span className="dilvery-system-mobile-card-product">
+                        Get it by  {' '}
+                            {
+                                orderEstimatedDelivery?.free_shipment_amount
+                                    ?.estimate_day
+                            }
+                        </span>
+                        <span className="span-get-data-pagragraph-card">Free Delivery Available </span>
+                        <Button
+                                   className="add-to-card-button-mobile-product"
+                                    clickHandler={cartClickHandler}
+                                    isLoading={isLoading}
+                                >
+                                    Add to Cart
+                                </Button>
                   </div>
 
             <div className="d-none d-sm-block product-rating">

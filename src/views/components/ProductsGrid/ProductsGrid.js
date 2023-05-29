@@ -22,9 +22,9 @@ export default function ProductsGrid({
                     {products?.map((product) => (
                         <Col xs={6} md={4} lg={2} key={product.id}>
 
-<Link to='/' className="text-decoration-none ">
+
                             <Product product={product} inGrid={true} />
-                         </Link>
+                      
                           
                         </Col>
                     ))}
