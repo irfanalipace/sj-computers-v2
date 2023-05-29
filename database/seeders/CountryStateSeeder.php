@@ -2,10 +2,15 @@
 
 namespace Database\Seeders;
 
+use App\Models\Country;
 use App\Models\Role;
+use App\Models\State;
+use App\Models\SystemPage;
+use App\Models\UserDetail;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Constraint\Count;
 
 class CountryStateSeeder extends Seeder
 {
@@ -16,6 +21,10 @@ class CountryStateSeeder extends Seeder
      */
     public function run()
     {
+        Country::whereNotNull('id')->delete();
+        UserDetail::whereNotNull('id')->delete();
+        State::whereNotNull('id')->delete();
+
         DB::table('countries')->insert([
             'name' => 'US'
         ]);
