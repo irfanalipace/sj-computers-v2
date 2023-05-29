@@ -1,9 +1,8 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Controller, Navigation } from "swiper";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
-
+import { useViewportWidth } from "@hooks/useViewportWidth";
 
 // import required modules
 import Banner1 from "@images/Banner/homepage-banner-1.jpg";
@@ -17,6 +16,7 @@ import "swiper/css/navigation";
 import "./Slider.css";
 
 const Slider = () => {
+    const width = useViewportWidth();
     SwiperCore.use([Navigation, Controller]);
     const swiperRef = useRef(null);
     const banners = [
@@ -49,16 +49,19 @@ const Slider = () => {
                     {banners.map((banner, index) => (
                         <SwiperSlide key={index}>
                             <>
-                                <LazyLoadImage
-                                    className="d-sm-block d-none"
-                                    src={banner.desktop}
-                                    alt={"Banner"}
-                                />
-                                <LazyLoadImage
-                                    className="d-sm-none d-block"
-                                    src={banner.mobile}
-                                    alt={"Banner"}
-                                />
+                                {width > 576 ? (
+                                    <LazyLoadImage
+                                        className="d-sm-block d-none"
+                                        src={banner.desktop}
+                                        alt={"Banner"}
+                                    />
+                                ) : (
+                                    <LazyLoadImage
+                                        className="d-sm-none d-block"
+                                        src={banner.mobile}
+                                        alt={"Banner"}
+                                    />
+                                )}
                             </>
                         </SwiperSlide>
                     ))}

@@ -43,10 +43,11 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                         });
 
                         if (response?.status == 200) {
+                            console.log("payment successful");
                             clearCartLocally();
                             dispatch(CLEAR_CART());
-                            const order =response.data;
-                            console.log(order, 'thank order details')
+                            const order = response.data;
+                            console.log(order, "thank order details");
                             navigate("/thank-you", { state: { order } });
                         } else {
                             navigate("/checkout?error=" + response?.message);

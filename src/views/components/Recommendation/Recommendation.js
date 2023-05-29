@@ -16,14 +16,14 @@ export default function Recommendation() {
 
     useEffect(() => {
         getProduct();
-    }, []);
+    }, [products]);
 
     const getProduct = async () => {
-        try {
-            if (!products.length) {
+        if (!products?.length) {
+            try {
                 await dispatch(fetchProducts());
-            }
-        } catch (error) {}
+            } catch (error) {}
+        }
     };
 
     return (

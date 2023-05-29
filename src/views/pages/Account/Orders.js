@@ -200,7 +200,7 @@ const OrderPage = () => {
             )
         ) : activeTab === 2 ? (
             orderSearchData.length > 0 ? (
-                !!localLoading === true ? (
+                localLoading === true ? (
                     <LoaderComponent />
                 ) : (
                     <OrderCard data={orderSearchData} />

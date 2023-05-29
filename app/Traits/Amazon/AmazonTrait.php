@@ -3,7 +3,6 @@
 namespace App\Traits\Amazon;
 
 use App\Classes\StatusEnum;
-use App\Models\HoldReleaseUser;
 use App\Models\Product;
 use Exception;
 
@@ -12,7 +11,7 @@ trait AmazonTrait
 
     public function getAmazonInventory($productId = '',$type = '', $search = '')
     {
-        
+
         $status = false;
         $quantity = 0;
         if (empty($productId)) {
@@ -36,8 +35,8 @@ trait AmazonTrait
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            // CURLOPT_POSTFIELDS => json_encode(array('SKU' => $sku)),
-            CURLOPT_POSTFIELDS => json_encode(array('SKU' => 'AI-NRCD-SNXP')),
+             CURLOPT_POSTFIELDS => json_encode(array('SKU' => $sku)),
+//            CURLOPT_POSTFIELDS => json_encode(array('SKU' => 'AI-NRCD-SNXP')),
             CURLOPT_HTTPHEADER => array(
                 'apikey: ' . config('app.amazon_apikey'),
                 'Content-Type: application/json'
@@ -69,7 +68,9 @@ trait AmazonTrait
         switch ($type) {
             case StatusEnum::RELEASE:
                 # code...
+
                 $totalQuantity = (int) $productInfo['quantity'] + (int) $qty;
+
                 break;
             default:
                 # code...
@@ -88,8 +89,8 @@ trait AmazonTrait
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-//            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $productInfo['sku'], 'quantity' => $totalQuantity)),
-            CURLOPT_POSTFIELDS => json_encode(array('SKU' => 'AI-NRCD-SNXP', 'quantity' => $totalQuantity)),
+            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $productInfo['sku'], 'quantity' => $totalQuantity)),
+//            CURLOPT_POSTFIELDS => json_encode(array('SKU' => 'AI-NRCD-SNXP', 'quantity' => $totalQuantity)),
             CURLOPT_HTTPHEADER => array(
                 'apikey: ' . config('app.amazon_apikey'),
                 'Content-Type: application/json',
