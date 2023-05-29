@@ -98,7 +98,7 @@ class SystemPagesSeeder extends Seeder
         $privacyPolicy .= "<br><br><h2>Cookies and Web Beacons</h2><br>";
         $privacyPolicy .= "<p>Like any other website, SJ Computers uses 'cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information. </p>";
         $privacyPolicy .= "<br><br><h2>Google DoubleClick DART Cookie</h2><br>";
-        $privacyPolicy .= "<p>Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.website.com and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href="https://policies.google.com/technologies/ads">https://policies.google.com/technologies/ads</a></p>";
+        $privacyPolicy .= "<p>Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.website.com and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href='https://policies.google.com/technologies/ads'>https://policies.google.com/technologies/ads</a></p>";
         $privacyPolicy .= "<br><br><h2>Our Advertising Partners</h2><br>";
         $privacyPolicy .= "<p>Some of the advertisers on our site may use cookies and web beacons. Our advertising partners are listed below. Each of our advertising partners has their own Privacy Policy for their policies on user data. For easier access, we hyperlinked to their Privacy Policies below. </p>";
         $privacyPolicy .= "<ul>";
@@ -151,7 +151,7 @@ class SystemPagesSeeder extends Seeder
             [
             'key' => 'privacy_policy',
             'value' => $privacyPolicy
-        ]
+            ]
         ];
 
         foreach($systems as $items){
