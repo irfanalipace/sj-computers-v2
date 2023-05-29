@@ -114,11 +114,13 @@ Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])
 
 Route::get('system-pages/{key?}', [SystemPagesController::class, 'getPages'])->name('getPages');
 
-Route::post('get-inventory', [InventoryController::class, 'getInventory'])->name('getInventory');
 
-Route::post('action-perfom', [InventoryController::class, 'ActionPerform'])->name('ActionPerform');
 
 Route::middleware(['auth:api', 'verified'])->group(function () {
+
+    Route::post('get-inventory', [InventoryController::class, 'getInventory'])->name('getInventory');
+
+    Route::post('action-perform', [InventoryController::class, 'ActionPerform'])->name('ActionPerform');
 
     //Route::post('user-details', UserDetailController::class)->name('user-details');
 
