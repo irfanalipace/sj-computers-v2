@@ -97,13 +97,13 @@ const Product = ({ product, inGrid }) => {
                             }
                         </span>
                         <span className="span-get-data-pagragraph-card">Free Delivery Available </span>
-                        <Button
+                        {/* <Button
                                    className="add-to-card-button-mobile-product"
                                     clickHandler={cartClickHandler}
                                     isLoading={isLoading}
                                 >
                                     Add to Cart
-                                </Button>
+                                </Button> */}
                   </div>
 
             <div className="d-none d-sm-block product-rating">

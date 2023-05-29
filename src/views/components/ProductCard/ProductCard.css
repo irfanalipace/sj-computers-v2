@@ -277,7 +277,7 @@ order: 1;
 flex-grow: 0;
 }.product-new-price {
     font-size: 14px;
-    margin-right: 8px;
+  
     /* color: yellow; */
     color: #E87E24;
 }.product-prices {
