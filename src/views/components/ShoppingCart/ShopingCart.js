@@ -21,7 +21,7 @@ export const ShopingCart = () => {
                 <div>
                     <div className=" cart-mein-dev">
                         <div className="row">
-                            <div className="col-md-9">
+                            <div className="col-md-8 col-lg-9">
                                 <div className="card cart-box">
                                     <div className="row mx-0">
                                         <div className="shop-heading">
@@ -72,7 +72,7 @@ export const ShopingCart = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-3">
+                            <div className="col-md-4 col-lg-3">
                                 <div className="card card-checkout">
                                     <div className="card-body">
                                         <div className="checkout-container">
