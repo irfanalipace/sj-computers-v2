@@ -179,20 +179,24 @@ const Footer = () => {
                                         <h6 className="text-uppercase herf-link font-style-heading-footer">
                                             Reach Us
                                         </h6>
-                                        <p className="text-uppercase herf-link">
-                                            2817 Eagandale Blvd Eagan, MN 55121.
-                                        </p>
-                                        <p className="herf-link ">
-                                            952-452-8884
-                                        </p>
-                                        <li>
-                                            <a
-                                                href="mailto:cs@sjcomputersmn.com"
-                                                className="herf-link text-decoration-none"
-                                            >
-                                                cs@sjcomputersmn.com
-                                            </a>
-                                        </li>
+                                        <div className="reach-us mt-4">
+                                            <p className="text-uppercase herf-link">
+                                                2817 &nbsp;Eagandale &nbsp;Blvd
+                                                &nbsp;Eagan, &nbsp;MN
+                                                &nbsp;55121.
+                                            </p>
+                                            <p className="herf-link ">
+                                                952-452-8884
+                                            </p>
+                                            <p>
+                                                <a
+                                                    href="mailto:cs@sjcomputersmn.com"
+                                                    className="herf-link text-decoration-none"
+                                                >
+                                                    cs@sjcomputersmn.com
+                                                </a>
+                                            </p>
+                                        </div>
                                     </ul>
                                 </div>
                             </div>

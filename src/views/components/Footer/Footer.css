@@ -66,6 +66,9 @@ footer ul li {
 .footer-data {
     padding: 23px;
 }
+.reach-us p {
+    margin-top: -10px;
+}
 .copywrite {
     width: 361px;
 }
@@ -144,7 +147,7 @@ footer ul li {
     width: 154px;
     /* padding-right: 38px; */
 }
-.setting-button-fax{
+.setting-button-fax {
     margin-top: 14px;
 }
 
@@ -154,18 +157,17 @@ footer ul li {
     padding-left: ju;
     padding-right: 15px;
 }
-.image-footer-dev-sectionsjcomputers{
+.image-footer-dev-sectionsjcomputers {
     padding-right: 30px;
-    }
-    
+}
 
 .footer-end-image-data {
     padding-bottom: 12px;
 }
-.backtotop-button-footer-click-onit{
+.backtotop-button-footer-click-onit {
     color: white;
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width: 600px) {
     .footer-copywrite-images {
         margin-left: 29px;
         max-width: 100% !important;

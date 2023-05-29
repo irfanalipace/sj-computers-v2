@@ -47,11 +47,11 @@ export const ShopingCart = () => {
                                     ))}
                                 </div>
                                 <div className="row">
-                                    <div className="cart-product-subtotal-price">
+                                    <div className="cart-product-subtotal-price hide-mobile-cart-btn">
                                         <span>
                                             Subtotal (
                                             {cartDetails?.total_items
-                                              ? cartDetails.total_items
+                                                ? cartDetails.total_items
                                                 : 0}
                                             items):
                                             <strong className="price-with-sign">
@@ -65,7 +65,7 @@ export const ShopingCart = () => {
 
                                     <div className="add-more-items-dev">
                                         <Link to={"/"}>
-                                            <button className="add-more-button-product">
+                                            <button className="add-more-button-product  hide-mobile-cart-btn">
                                                 Add more items
                                             </button>
                                         </Link>
@@ -75,19 +75,30 @@ export const ShopingCart = () => {
                             <div className="col-md-3">
                                 <div className="card card-checkout">
                                     <div className="card-body">
-                                        <div className="card-body-text">
-                                            <div className="text-body">
-                                                <span className="sub-title">
-                                                    Subtotal(  
-                                                     {' '}  {cartDetails?.total_items}
-                                                    items):{' '}
-                                                    <strong className="price-items" style={{fontWeight:'bold'}}>
-                                                        $
-                                                        {cartDetails?.sub_total}
-                                                    </strong>
-                                                </span>
-                                                <br></br>
-                                                {/* <label>
+                                        <div className="checkout-container">
+                                            <div className="card-body-text">
+                                                <div className="text-body">
+                                                    <span className="sub-title">
+                                                        Subtotal({" "}
+                                                        {
+                                                            cartDetails?.total_items
+                                                        }
+                                                        items):{" "}
+                                                        <strong
+                                                            className="price-items"
+                                                            style={{
+                                                                fontWeight:
+                                                                    "bold",
+                                                            }}
+                                                        >
+                                                            $
+                                                            {
+                                                                cartDetails?.sub_total
+                                                            }
+                                                        </strong>
+                                                    </span>
+                                                    <br></br>
+                                                    {/* <label>
                                             <input
                                                 type="checkbox"
                                                 name="myCheckbox"
@@ -95,12 +106,20 @@ export const ShopingCart = () => {
                                             />
                                             This is a paragraph with a checkbox.
                                         </label> */}
+                                                </div>
+                                            </div>
+                                            <div className="button-checkout-data">
+                                                <Link to={"/checkout"}>
+                                                    <button className="btn btn-primary checkout-button">
+                                                        Proceed to checkout
+                                                    </button>
+                                                </Link>
                                             </div>
                                         </div>
-                                        <div className="button-checkout-data">
-                                            <Link to={"/checkout"}>
-                                                <button className="btn btn-primary checkout-button">
-                                                    Proceed to checkout
+                                        <div className="add-more-items-dev mt-3 hide-desktop-cart-btn">
+                                            <Link to={"/"}>
+                                                <button className="add-more-button-product">
+                                                    Add more items
                                                 </button>
                                             </Link>
                                         </div>

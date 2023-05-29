@@ -37,7 +37,7 @@ const PolicyComponets = () => {
     let PageTitle;
 
     if (pageName === "term_services") {
-        PageTitle = "Terms of Services";
+        PageTitle = "Terms and Conditions";
     } else if (pageName === "return_refund_policy") {
         PageTitle = "Return and Refund Policy";
     } else if (pageName === "privacy_policy") {
@@ -117,7 +117,14 @@ const PolicyComponets = () => {
                                                 details
                                             </span>
                                             <div className="order-button-policy">
-                                                <button onClick={() => navigate('/account/orders')} className="policy-card-order-button">
+                                                <button
+                                                    onClick={() =>
+                                                        navigate(
+                                                            "/account/orders"
+                                                        )
+                                                    }
+                                                    className="policy-card-order-button"
+                                                >
                                                     <Link
                                                         to={"/account/orders"}
                                                         style={{
@@ -145,8 +152,12 @@ const PolicyComponets = () => {
                                                 <Loader />
                                             </>
                                         ) : (
-                                            
-                                            <div style={{lineHeight: '27px'}}dangerouslySetInnerHTML={{ __html: htmlContent }} />
+                                            <div
+                                                style={{ lineHeight: "27px" }}
+                                                dangerouslySetInnerHTML={{
+                                                    __html: htmlContent,
+                                                }}
+                                            />
                                         )}
                                     </p>
                                     {/* <ul className="policy-item-data">
