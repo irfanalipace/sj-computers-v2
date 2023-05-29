@@ -24,7 +24,7 @@ import ScrollToTop from "./ScrollToTop";
 function App() {
     const dispatch = useDispatch();
     const token = getToken();
-    setUserTracking();
+    setUserTracking(); // sets user visit data in cookies
     if (token) dispatch(alreadyLoggedIn(token));
     useInitDataFetching();
 
