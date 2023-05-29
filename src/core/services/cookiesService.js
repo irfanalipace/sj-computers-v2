@@ -1,3 +1,5 @@
+import { saveUser } from "./jwtService";
+
 // Function sets user latest visit date in cookie
 export function setUserTracking() {
     try {
@@ -18,9 +20,18 @@ const dateToCheck = "2023-05-29";
 
 const actionToPerform = () => {
     window.localStorage.removeItem("cartDetails");
+    let userName = window.localStorage.getItem("user_name");
     window.localStorage.removeItem("user_name");
+    let userEmail = window.localStorage.getItem("user_email");
     window.localStorage.removeItem("user_email");
+    let userImage = window.localStorage.getItem("user_image");
     window.localStorage.removeItem("user_image");
+    let user = {
+        name: userName,
+        email: userEmail,
+        profile_pic: userImage,
+    };
+    saveUser(user);
 };
 
 // This Function checks when did user last visited our website
