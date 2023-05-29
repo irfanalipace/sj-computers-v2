@@ -182,8 +182,7 @@ const Footer = () => {
                                         <div className="reach-us mt-4">
                                             <p className="text-uppercase herf-link">
                                                 2817 &nbsp;Eagandale &nbsp;Blvd
-                                                &nbsp;Eagan, &nbsp;MN
-                                                &nbsp;55121.
+                                                Eagan,&nbsp;MN &nbsp;55121.
                                             </p>
                                             <p className="herf-link ">
                                                 952-452-8884
