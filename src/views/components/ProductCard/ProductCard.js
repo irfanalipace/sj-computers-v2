@@ -58,11 +58,10 @@ const Product = ({ product, inGrid }) => {
                 (205100-410)
                 </span>
             </div> */}
-            <Link to={`/product/${product?.asin}`}>
-                <div className="product-name product-cart-name-mobile-screen">
-                    {product.name}
-                </div>
-            </Link>
+
+            <div className="product-name product-cart-name-mobile-screen">
+                {product.name}
+            </div>
 
             {/* Mobile code here */}
 
@@ -82,7 +81,7 @@ const Product = ({ product, inGrid }) => {
                 </div>
             </div>
 
-            <div className="d-sm-none " style={{ marginTop: "-14px" }}>
+            <div className="d-sm-none ">
                 {/* <button className="off-sale-button-product-card">50% <span>{' '} off</span></button> */}
 
                 <span className="dilvery-system-mobile-card-product">
