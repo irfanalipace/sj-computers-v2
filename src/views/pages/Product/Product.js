@@ -41,7 +41,7 @@ export default function Product() {
     const ProductComponent = () => {
         return (
             <>
-              {product ? (
+                {product ? (
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <ProductImage ProductImages={product?.image} />
@@ -63,14 +63,8 @@ export default function Product() {
     };
 
     return (
-<<<<<<< HEAD
-        <div className="product-page">
-            <div className="product-container">
-=======
         <div className="product-page ">
             <div className="product-container container-fluid">
-               
->>>>>>> mujtaba_dev
                 {isLoading ? <LoaderComponent /> : <ProductComponent />}
                 <Recommendation />
             </div>
