@@ -14,7 +14,7 @@ export function setUserTracking() {
     }
 }
 
-const dateToCheck = "2023-05-30";
+const dateToCheck = "2023-05-29";
 
 const actionToPerform = () => {
     window.localStorage.removeItem("cartDetails");
