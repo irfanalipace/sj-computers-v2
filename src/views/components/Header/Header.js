@@ -68,7 +68,7 @@ const Header = () => {
     };
     return (
         <>
-            {screenWidth <= 889 ? (
+            {screenWidth <= 767 ? (
                 <div>
                     <MobileHeader />
 
@@ -271,7 +271,7 @@ const Header = () => {
                                     )}
                                 </div>
                             </header>
-                            {!ThankyouPage && <TopBar />}
+                            {!ThankyouPage && <TopBar className="topbar" />}
                         </>
                     )}
 

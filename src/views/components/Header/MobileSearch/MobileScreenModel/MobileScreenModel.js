@@ -37,20 +37,20 @@ const MobileScreenModel = () => {
                             style={{ marginRight: "0.5em" }}
                         />
                         <span style={{ color: "white" }}>
-                            Enter US zip code 
+                            Enter US zip code
                         </span>
                     </button>
-
                 </div>
             </header>
             {isAuthenticated ? (
-                        <div>
-                             <div>{showModal && <ModelUserAuth closeModal={closeModal}/>}</div>
-                          
-                        </div>
-                    ) : (
-                       <div>  {showModal && <ModelBox closeModal={closeModal} />}</div>
-                    )}
+                <div>
+                    <div>
+                        {showModal && <ModelUserAuth closeModal={closeModal} />}
+                    </div>
+                </div>
+            ) : (
+                <div> {showModal && <ModelBox closeModal={closeModal} />}</div>
+            )}
         </div>
     );
 };
