@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import LoadMore from "@common/Button/LoadMore";
 import Product from "@components/ProductCard/ProductCard";
 import OverlayLoader from "@common/LoaderComponent/OverlayLoader";
-
+import { Link } from "react-router-dom";
 import "./ProductsGrid.css";
 
 export default function ProductsGrid({
@@ -17,11 +17,15 @@ export default function ProductsGrid({
 
     return (
         <div className="products-grid-wrapper">
-            <div className="products-grid mb-3">
+            <div className="products-grid product-gride-card-componets-mobile-screen mb-3 ">
                 <Row className="mx-0 justify-content-left">
                     {products?.map((product) => (
                         <Col xs={6} md={4} lg={2} key={product.id}>
+
+
                             <Product product={product} inGrid={true} />
+                      
+                          
                         </Col>
                     ))}
                 </Row>
