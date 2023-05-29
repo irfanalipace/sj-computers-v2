@@ -306,9 +306,11 @@ const OrderPage = () => {
                                                         ?.success_orders
                                                         ?.total ? (
                                                         <LoaderComponent />
-                                                    ) : (
+                                                    )   : orderDetails?.success_orders?.total > 0 ? (
                                                         `${orderDetails?.success_orders?.total} orders`
-                                                    )}
+                                                    ): (
+                                                        `0 orders`
+                                                    ) }
                                                     {/* { } */}
                                                 </>
                                             ) : (
