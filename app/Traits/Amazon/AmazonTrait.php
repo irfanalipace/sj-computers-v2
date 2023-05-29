@@ -88,11 +88,7 @@ trait AmazonTrait
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-<<<<<<< Updated upstream
-            //            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $productInfo['sku'], 'quantity' => $totalQuantity)),
-=======
 //            CURLOPT_POSTFIELDS => json_encode(array('SKU' => $productInfo['sku'], 'quantity' => $totalQuantity)),
->>>>>>> Stashed changes
             CURLOPT_POSTFIELDS => json_encode(array('SKU' => 'AI-NRCD-SNXP', 'quantity' => $totalQuantity)),
             CURLOPT_HTTPHEADER => array(
                 'apikey: ' . config('app.amazon_apikey'),
