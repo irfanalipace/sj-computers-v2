@@ -79,7 +79,6 @@
 }
 .button-cart-sell {
     margin: 15px;
-
     display: flex;
     justify-content: center;
     /* align-items: center; */
@@ -217,6 +216,27 @@
 
     background: white;
     /* margin-right: 23px; */
+}
+
+@media screen and (min-width: 767px) and (max-width: 1150px) {
+    .button-cart-sell .button-text-button {
+        font-size: 12px;
+        padding: 0px 0 !important;
+    }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1150px) {
+    .button1 {
+        width: 318px !important;
+        height: 33px !important;
+    }
+}
+
+@media screen and (max-width: 766px) {
+    .button1 {
+        width: 318px !important;
+        height: 30px !important;
+    }
 }
 
 @media screen and (max-width: 600px) {

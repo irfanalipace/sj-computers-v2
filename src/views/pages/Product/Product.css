@@ -6,12 +6,12 @@
 
 .product-container {
     max-width: 95%;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     padding: 17px 0;
 }
 
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
     .product-container {
         width: 90%;
     }
@@ -21,4 +21,4 @@
     .product-container {
         width: 95%;
     }
-}
+} */
