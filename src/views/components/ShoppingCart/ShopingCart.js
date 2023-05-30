@@ -38,6 +38,7 @@ export const ShopingCart = () => {
                                         </div>
                                     </div>
                                     {cartItems?.map((item) => (
+                                       
                                         <div key={item.id} id={item.id}>
                                             <hr className="hrline"></hr>
                                             <div className="items">
