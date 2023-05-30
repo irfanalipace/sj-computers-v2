@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use Laravel\Fortify\Fortify;
 use TCG\Voyager\Facades\Voyager;
+use App\Http\Controllers\HoldRelease\HoldReleaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,17 +20,21 @@ use TCG\Voyager\Facades\Voyager;
 
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
 
+Route::get('hold-release-product',[HoldReleaseController::class,'updateRecord'])->name('hold-release-product');
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Route::get('forgot_password',  function () {
+    return view('index');
+})->name('password.reset');
 
 Route::get('/{path?}', function () {
     return view('index');
 })->where('path', '^(?!api).*$')
     ->where('path', '^(?!storage).*$');
 
-//Route::get('forgot_password', 'auth.reset_password')->name('password.reset');
-Route::get('forgot_password',  function () {
-    return view('index');
-})->name('password.reset');
+
+
 
