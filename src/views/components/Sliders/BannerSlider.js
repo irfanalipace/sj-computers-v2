@@ -13,6 +13,9 @@ import Bannerprograssive3 from "@images/Banner/SJBannerBannernePrograssive3.jpg"
 import mobileBanner1 from "@images/Banner/mobile-banner-1.jpg";
 import mobileBanner2 from "@images/Banner/SJbanner13MobileSizedRevised.png";
 import mobileBanner3 from "@images/Banner/SJbanner23MobileSizedRevised.png";
+import progmobile1 from "@images/Banner/mobileLoaderimage/prograssivemobile1.jpg";
+import progmobile2 from "@images/Banner/mobileLoaderimage/prograssivemobile2.jpg";
+import progmobile3 from "@images/Banner/mobileLoaderimage/prograssivemobile3.jpg";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Slider.css";
@@ -26,16 +29,19 @@ const Slider = () => {
             prograssive: Bannerprograssive1,
             desktop: Banner1,
             mobile: mobileBanner1,
+            mobilePro: progmobile1
         },
         {
             prograssive: Bannerprograssive2,
             desktop: Banner2,
             mobile: mobileBanner2,
+            mobilePro: progmobile2
         },
         {
             prograssive: Bannerprograssive3,
             desktop: Banner3,
             mobile: mobileBanner3,
+            mobilePro: progmobile3
         },
     ];
 
@@ -79,11 +85,31 @@ const Slider = () => {
                                         )}
                                     </ProgressiveImage>
                                 ) : (
-                                    <LazyLoadImage
-                                        className="d-md-none d-block"
-                                        src={banner.mobile}
-                                        alt={"Banner"}
-                                    />
+
+                                    <ProgressiveImage
+                                    src={banner.mobile} // High-resolution image URL
+                                    placeholder={banner.mobilePro} // Low-resolution image URL
+                                >
+                                    {(src, loading) => (
+                                        <img
+                                            className={` className="d-md-none d-block" ${
+                                                loading ? "blur" : ""
+                                            }`}
+                                            src={src}
+                                            alt={"mobilePro"}
+                                        />
+                                    )}
+                                </ProgressiveImage>
+
+
+
+
+
+                                    // <LazyLoadImage
+                                    //     className="d-md-none d-block"
+                                    //     src={banner.mobile}
+                                    //     alt={"Banner"}
+                                    // />
                                 )}
                             </>
                         </SwiperSlide>
