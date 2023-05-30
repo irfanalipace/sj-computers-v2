@@ -11,6 +11,7 @@ use App\Traits\Amazon\AmazonTrait;
 use Exception;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class InventoryController extends BaseController
 {
@@ -69,7 +70,22 @@ class InventoryController extends BaseController
     // Download Inventory via Excel
     public function downloadInventory()
     {
-        
-        return $this->sendResponse([Excel::download(new ExportProduct(), 'inventory.csv'),'Successfully Dowloaded Inventory.']);
+        $export = new ExportProduct();
+        $now = now();
+        $now = str_replace(array(":", "-", ' '), "", $now);
+        $filename = 'Inventory_' . $now . '.xlsx';
+
+        Excel::store($export, $filename, 'public');
+        $route = route('export-inventory',['file_name' => $filename]);
+        return $this->sendResponse([
+            'url' => $route,
+        ], 'Inventory exported successfully.');
+       
+    }
+
+    public function downloadInventoryFile(Request $request)
+    {
+        $path = storage_path('app/public/' . $request->url);
+        return response()->download($path)->deleteFileAfterSend(true);
     }
 }

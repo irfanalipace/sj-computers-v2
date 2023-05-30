@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\InventoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use Laravel\Fortify\Fortify;
@@ -22,7 +23,7 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
-
+Route::get('export-inventory',[InventoryController::class,'downloadInventoryFile'])->name('export-inventory');
 Route::get('/{path?}', function () {
     return view('index');
 })->where('path', '^(?!api).*$')
