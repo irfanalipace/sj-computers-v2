@@ -10,7 +10,7 @@ import "./Slider.css";
 // Install Swiper navigation plugin
 SwiperCore.use([Navigation]);
 
-const ProductSlider = ({ products}) => {
+const ProductSlider = ({ products }) => {
     return (
         <Swiper
             slidesPerView={7}
@@ -41,7 +41,9 @@ const ProductSlider = ({ products}) => {
         >
             {products?.map((product) => (
                 <SwiperSlide key={product.id}>
-                    <Product product={product} />
+                    <div className="px-1">
+                        <Product product={product} />
+                    </div>
                 </SwiperSlide>
             ))}
         </Swiper>

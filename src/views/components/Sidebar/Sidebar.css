@@ -118,16 +118,7 @@ ul.menu-list {
 }
 
 @media screen and (max-width: 585px) {
-    /* .sideMenu-close-btn {
-        right: 30px;
-        top: 12px;
-    } */
-    /* .sideMenu-container {
-    top: 0;
-    height: 100%;
-    width: 90%;
-    position: fixed;
-    transition: all 0.35s ease-out;
-    z-index: 4;
-} */
+    .sideMenu {
+        margin-bottom: 20px;
+    }
 }
