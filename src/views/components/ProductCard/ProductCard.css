@@ -16,6 +16,7 @@
 .recommendation-container .swiper-button-next:after,
 .recommendation-container .swiper-button-prev:after {
     font-size: 20px !important;
+    font-weight: 700;
     color: gray;
 }
 
@@ -312,6 +313,11 @@
 
         color: #333333;
     }
+    .recommendation-container .swiper-button-next:after,
+.recommendation-container .swiper-button-prev:after {
+    position: absolute;
+    top: -32px
+}
 }
 
 /* Small Tablets (landscape phones, less than 768px) */
