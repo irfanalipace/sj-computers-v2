@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\InventoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use Laravel\Fortify\Fortify;
@@ -25,10 +26,7 @@ Route::get('hold-release-product',[HoldReleaseController::class,'updateRecord'])
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
-
-Route::get('forgot_password',  function () {
-    return view('index');
-})->name('password.reset');
+Route::get('export-inventory',[InventoryController::class,'downloadInventoryFile'])->name('export-inventory');
 
 Route::get('/{path?}', function () {
     return view('index');
