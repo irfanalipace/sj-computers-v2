@@ -12,7 +12,6 @@ const Product = ({ product, inGrid }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cart = useSelector((state) => state.cart.cart);
     const details = useSelector((state) => state.cart.details);
-    const isLoading = useSelector((state) => state.cart.isLoading);
     const [quantity, setQuantity] = useState(1);
     const [show, setShow] = useState(false);
     const [cartItem, setCartItem] = useState(null);
@@ -98,13 +97,13 @@ const Product = ({ product, inGrid }) => {
                     <span className="span-get-data-pagragraph-card">
                         Free Delivery Available{" "}
                     </span>
-                    {/* <Button
-                               className="add-to-card-button-mobile-product"
-                                clickHandler={cartClickHandler}
-                                isLoading={isLoading}
-                            >
-                                Add to Cart
-                            </Button> */}
+                    <Button
+                        className="add-to-card-button-mobile-product"
+                        clickHandler={cartClickHandler}
+                        isLoading={product.loading}
+                    >
+                        Add to Cart
+                    </Button>
                 </div>
 
                 <div className="d-none d-sm-block product-rating">

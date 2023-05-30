@@ -25,6 +25,10 @@
     margin-bottom: 50px;
 }
 
+.recommendation-inner .product-details {
+    margin-top: 60px;
+}
+
 @media (max-width: 575px) {
     .recommendation-inner .product-details {
         padding: 0 15px;
