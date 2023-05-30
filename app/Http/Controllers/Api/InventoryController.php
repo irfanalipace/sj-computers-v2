@@ -38,7 +38,6 @@ class InventoryController extends BaseController
 
             $inventory = $this->getAmazonInventory(null, $type, $request->search);
 
-
             if ($inventory['status']) {
 
                 $this->updateAmazonInventory($inventory, $request->quantity, $request->action);
