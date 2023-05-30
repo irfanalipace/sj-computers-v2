@@ -10,37 +10,32 @@ import Paper from "@mui/material/Paper";
 import { productsApi } from "@api/products";
 
 export const SkuProducts = () => {
-    const [data, setData] = useState([
-        { name: "fdsafa", asin: "fdsafa", sku: "fsdfsa", quantity: "2" },
-        { name: "fdsafa", asin: "fdsafa", sku: "fsdfsa", quantity: "2" },
-        { name: "fdsafa", asin: "fdsafa", sku: "fsdfsa", quantity: "2" },
-        { name: "fdsafa", asin: "fdsafa", sku: "fsdfsa", quantity: "2" },
-        { name: "fdsafa", asin: "fdsafa", sku: "fsdfsa", quantity: "2" },
-        { name: "fdsafa", asin: "fdsafa", sku: "fsdfsa", quantity: "2" },
-    ]);
-
+    const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-
     const [totalRecords, setTotalRecords] = useState(40);
+
+    const perPage = 12; // Adjust the number of items per page as needed
 
     useEffect(() => {
         fetchProducts(currentPage + 1);
     }, []);
 
     const fetchProducts = async (page) => {
-        let response = await productsApi(page, perPage);
+        try {
+            let response = await productsApi(page, perPage);
+            setData(response.data.data);
+            setTotalRecords(response.data.total);
+            setCurrentPage(response.data.current_page);
+        } catch (error) {
+            console.log("error", error);
+        }
     };
-
-    const totalItems = 40;
-
-    const perPage = 12; // Adjust the number of items per page as needed
-    // ...
 
     const pageCount = Math.ceil(totalRecords / perPage);
 
     const goToPage = (page) => {
         setCurrentPage(page);
-        sendToPage(page);
+        fetchProducts(page);
     };
 
     const nextPage = () => {
@@ -49,14 +44,14 @@ export const SkuProducts = () => {
             setCurrentPage(currentPage + 1);
             console.log(currentPage, "current after next");
             console.log(currentPage + 1, "+1 after next");
-            sendToPage(currentPage + 1);
+            fetchProducts(currentPage + 1);
         }
     };
 
     const previousPage = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
-            sendToPage(currentPage - 1);
+            fetchProducts(currentPage - 1);
         }
     };
 
@@ -125,7 +120,7 @@ export const SkuProducts = () => {
             <div className="product-info py-4">
                 <h3 className="my-3">Products</h3>
                 <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <Table aria-label="products table">
                         <TableHead>
                             <TableRow>
                                 <TableCell>Name</TableCell>
@@ -144,7 +139,7 @@ export const SkuProducts = () => {
                                         },
                                     }}
                                 >
-                                    <TableCell component="th" scope="row">
+                                    <TableCell align="left" scope="row">
                                         {row.name}
                                     </TableCell>
                                     <TableCell align="right">

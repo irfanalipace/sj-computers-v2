@@ -156,7 +156,7 @@ export const SkuTables = () => {
                                     className="search-sku-input-asin"
                                     placeholder="Enter quantity..."
                                     value={holdQuantity}
-                                    readOnly={action === "HOLD"}
+                                    // readOnly={action === "HOLD"}
                                     onChange={(_) =>
                                         setholdQuantity(_.target.value)
                                     }

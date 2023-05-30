@@ -1,10 +1,10 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { SkuTables } from "@components/SKU/SkuTables";
 import { SkuProducts } from "@components/SKU/SkuProducts";
 
 const SkuPage = () => {
     return (
-        <Container>
+        <div className="sku-page-container container-xxl">
             <Row>
                 <Col sm={6}>
                     <SkuTables />
@@ -13,7 +13,7 @@ const SkuPage = () => {
                     <SkuProducts />
                 </Col>
             </Row>
-        </Container>
+        </div>
     );
 };
 

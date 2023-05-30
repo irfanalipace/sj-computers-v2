@@ -281,3 +281,9 @@
         /* max-width: 100%; */
     }
 }
+
+@media (min-width: 1400px) {
+.sku-page-container.container-xxl {
+    max-width: 1720px;
+}
+}
