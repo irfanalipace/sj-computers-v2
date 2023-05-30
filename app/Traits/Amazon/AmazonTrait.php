@@ -3,6 +3,7 @@
 namespace App\Traits\Amazon;
 
 use App\Classes\StatusEnum;
+use App\Models\HoldReleaseUser;
 use App\Models\Product;
 use Exception;
 
