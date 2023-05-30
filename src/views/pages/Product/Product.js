@@ -49,7 +49,7 @@ export default function Product() {
                         <div className="col-12 col-md-5">
                             <ProductDetails product={product} />
                         </div>
-                        <div className="col-12 col-md-3">
+                        <div className="col-12 col-md-3 p-0 m-0">
                             <CheckOutCard product={product} />
                         </div>
                     </div>
@@ -63,8 +63,8 @@ export default function Product() {
     };
 
     return (
-        <div className="product-page">
-            <div className="product-container">
+        <div className="product-page ">
+            <div className="product-container container-fluid">
                 {isLoading ? <LoaderComponent /> : <ProductComponent />}
                 <Recommendation />
             </div>

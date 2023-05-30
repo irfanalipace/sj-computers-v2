@@ -20,9 +20,28 @@ const productSlice = createSlice({
         LOADING: (state) => {
             state.isLoading = true;
         },
+        SET_PRODUCT_LOADING: (state, action) => {
+            let index = state.products.findIndex(
+                (item) => item.id === action.payload.id
+            );
+            if (index >= 0) {
+                state.products[index] = { ...state.products[index], loading: true };
+            }
+        }, SET_PRODUCT_CLEAR_LOADING: (state, action) => {
+            let index = state.products.findIndex(
+                (item) => item.id === action.payload.id
+            );
+            if (index >= 0) {
+                state.products[index] = { ...state.products[index], loading: false };
+                console.log("Loader cleared-product:", state.products.find(item => item.id === data?.id)?.loading === false);
+            }
+           
+        },
+    
         CLEAR_LOADING: (state) => {
             state.isLoading = false;
         },
+      
         FETCH_PRODUCTS: (state, action) => {
             if (state.currentPage === 1) state.products = [...action.payload];
             else state.products = [...state.products, ...action.payload];
@@ -90,6 +109,8 @@ const productSlice = createSlice({
 });
 export const {
     LOADING,
+    SET_PRODUCT_LOADING,
+    SET_PRODUCT_CLEAR_LOADING,
     CLEAR_LOADING,
     FETCH_PRODUCTS,
     SET_FILTERS_ARRAY,
