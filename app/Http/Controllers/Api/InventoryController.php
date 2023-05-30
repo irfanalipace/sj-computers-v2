@@ -79,12 +79,16 @@ class InventoryController extends BaseController
         return $this->sendResponse([
             'url' => $route,
         ], 'Inventory exported successfully.');
-       
+
     }
 
     public function downloadInventoryFile(Request $request)
     {
-        $path = storage_path('app/public/' . $request->url);
-        return response()->download($path)->deleteFileAfterSend(true);
+        $path = public_path('storage/' . $request->file_name);
+
+        return response()->download($path, 'products_list.xlsx', [
+            'Content-Type' => 'application/vnd.ms-excel',
+            'Content-Disposition' => "attachment; filename='products_list.xls'"
+        ])->deleteFileAfterSend(true);
     }
 }
