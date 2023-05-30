@@ -295,12 +295,17 @@
     font-size: 12px;
     margin: 10px 0;
 }
+
+
+
 @media screen and (max-width: 750px) {
     .color-text-cart {
         color: red;
         text-align: center;
     }
 }
+
+
 @media screen and (max-width: 880px) {
     .item-title {
         font-size: 12px;
@@ -329,6 +334,14 @@
     .list-style-margin {
         margin-top: 0px !important;
     }
+}
+
+@media screen and (max-width: 450px) {
+    .item-title {
+        line-height: 1.5;
+
+    }
+   
 }
 
 @media screen and (min-width: 450px) {
