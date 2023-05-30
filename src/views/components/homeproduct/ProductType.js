@@ -3,12 +3,14 @@ import { useSelector } from "react-redux";
 import "./ProductType.css";
 import ProductItem1 from "@components/homeproduct/productcategory/ProductItem1";
 import ProductItem4 from "@components/homeproduct/productcategory/ProductItem4";
-
+import ProgressiveImage from "react-progressive-image";
 import addDesktop from "@images/categories/wellcome.webp";
-// import addMobile from "@images/advertisement/advertisement-mobile.png";
+import prograssivewellcom from "@images/categories/wellcomeprograssive.webp";
+import prograssivewellcom2 from "@images/categories/welcomesprograssiveimg2.webp";
 import categoryImg1 from "@images/categories/desktopweb.webp";
 import categorybusinussweb from "@images/categories/businussweb.webp";
 import wellsjcomputer from "@images/categories/welcomesjcomputer.webp";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export const ProductType = () => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -70,10 +72,29 @@ export const ProductType = () => {
                     <div className="advertisement-section">
                         {isAuthenticated ? (
                             <div className="advertisement-heading">
-                                <img
+                                {/* <img
                                     src={wellsjcomputer}
                                     className="advertisment-img"
-                                />
+                                /> */}
+
+                                <ProgressiveImage
+                                 
+                                    src={wellsjcomputer}
+                                  
+                                    // High-resolution image URL
+                                    placeholder={prograssivewellcom2} // Low-resolution image URL
+                                   
+                                >
+                                    {(src, loading) => (
+                                        <img
+                                            className={`advertisment-img ${
+                                                loading ? "blur" : ""
+                                            }`}
+                                            src={src}
+                                            alt={"wellsjcomputer"}
+                                        />
+                                    )}
+                                </ProgressiveImage>
                             </div>
                         ) : (
                             <div className="advertisement-heading">
@@ -92,14 +113,28 @@ export const ProductType = () => {
                             </div>
                         )}
                         <div className="product-section-advertisment">
-                            <img
+                            {/* <img
                                 src={addDesktop}
                                 className="advertisment-img"
-                            />
+                            /> */}
                             {/* <img
                                 src={addDesktop}
                                 className="advertisment-img d-none d-lg-none"
                             /> */}
+
+                            <ProgressiveImage
+                                src={addDesktop} // High-resolution image URL
+                                placeholder={prograssivewellcom} // Low-resolution image URL
+                               
+                            >
+                                {(src, loading) => (
+                                    <img
+                                        className={`advertisment-img ${loading ? "blur" : ""}`}
+                                        src={src}
+                                        alt={"addDesktop"}
+                                    />
+                                )}
+                            </ProgressiveImage>
                         </div>
                     </div>
                 </div>

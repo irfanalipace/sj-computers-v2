@@ -3,6 +3,7 @@
 namespace App\Traits\Amazon;
 
 use App\Classes\StatusEnum;
+use App\Models\HoldReleaseUser;
 use App\Models\Product;
 use Exception;
 
@@ -20,9 +21,7 @@ trait AmazonTrait
             $product = Product::find($productId);
         }
 
-        if (empty($sku)) {
-            $sku = $product->sku;
-        }
+        $sku = $product->sku;
 
         $curl = curl_init();
 
@@ -63,7 +62,7 @@ trait AmazonTrait
         ];
     }
 
-    public function updateAmazonInventory($productInfo, $qty, $type = " ")
+    public function updateAmazonInventory($productInfo, $qty, $type = "", $insert= true)
     {
         switch ($type) {
             case StatusEnum::RELEASE:
@@ -102,7 +101,9 @@ trait AmazonTrait
 
         curl_close($curl);
 
-        $this->insertHoldRelease($qty, $type, $productInfo['product']->id);
+        if($insert){
+            $this->insertHoldRelease($qty, $type, $productInfo['product']->id);
+        }
         return true;
     }
 

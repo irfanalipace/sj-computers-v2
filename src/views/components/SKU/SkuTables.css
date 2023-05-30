@@ -1,12 +1,10 @@
 .sku-page-dev {
     padding-top: 30px;
-    padding-left: 187px;
+    /* padding-left: 187px; */
 }
 .search-sku-input-fields {
     width: 240px;
-
     font-size: 12px;
-
     letter-spacing: 0.15px;
     color: rgba(0, 0, 0, 0.38);
     flex: none;
@@ -167,7 +165,7 @@
 }
 .table {
     border-radius: 8px;
-    width: 1000px;
+    width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.12);
 }
 .table-sku-style tbody {
@@ -282,4 +280,10 @@
 
         /* max-width: 100%; */
     }
+}
+
+@media (min-width: 1400px) {
+.sku-page-container.container-xxl {
+    max-width: 1720px;
+}
 }

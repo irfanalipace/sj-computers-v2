@@ -32,7 +32,7 @@ class SystemPagesSeeder extends Seeder
         $refundPolicy .=  "  <br>";
 
 
-        $termCondition = "<h1>Term of Services</h1> <br>";
+        $termCondition = "<h1>Terms and Conditions</h1> <br>";
         $termCondition .= "Please read these Terms and Conditions carefully before using the Service. <br>";
         $termCondition .= "Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service. <br>";
         $termCondition .= "By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service. <br>";
@@ -131,7 +131,6 @@ class SystemPagesSeeder extends Seeder
         $privacyPolicy .= "<p>SJ Computers does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records. </p>";
         $privacyPolicy .= "<br><br><h2>Changes to This Privacy Policy</h2><br>";
         $privacyPolicy .= "<p>We may update our Privacy Policy from time to time. Thus, we advise you to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately, after they are posted on this page. </p>";
-        $privacyPolicy .= "<p>Our Privacy Policy was created with the help of the <a href='https://www.privacypolicygenerator.info'>Privacy Policy Generator</a>. </p>";
         $privacyPolicy .= "<br><br><h2>Contact Us</h2><br>";
         $privacyPolicy .= "<p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us. </p>";
 
