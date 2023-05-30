@@ -259,7 +259,7 @@
                                                 @endif
                                             @endforeach
                                             @if($data->status == \App\Classes\StatusEnum::HOLD)
-                                            <a  href="{{route('hold-release-product',['id' => $data->id])}}" class="btn btn-success float-right">
+                                            <a  href="{{route('hold-release-product',['id' => $data->id])}}" class="btn btn-success float-right" style="margin-right:0.5rem !important;">
                                                 <i class="voyager-rocket"></i> Release</a>
                                             @endif
 

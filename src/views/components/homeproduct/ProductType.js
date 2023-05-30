@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import "./ProductType.css";
 import ProductItem1 from "@components/homeproduct/productcategory/ProductItem1";
 import ProductItem4 from "@components/homeproduct/productcategory/ProductItem4";
-
+import ProgressiveImage from "react-progressive-image";
 import addDesktop from "@images/categories/wellcome.webp";
-// import addMobile from "@images/advertisement/advertisement-mobile.png";
+import prograssivewellcom from "@images/categories/wellcomeprograssive.webp";
 import categoryImg1 from "@images/categories/desktopweb.webp";
 import categorybusinussweb from "@images/categories/businussweb.webp";
 import wellsjcomputer from "@images/categories/welcomesjcomputer.webp";
@@ -92,14 +92,32 @@ export const ProductType = () => {
                             </div>
                         )}
                         <div className="product-section-advertisment">
-                            <img
+                            {/* <img
                                 src={addDesktop}
                                 className="advertisment-img"
-                            />
+                            /> */}
                             {/* <img
                                 src={addDesktop}
                                 className="advertisment-img d-none d-lg-none"
                             /> */}
+
+
+                                  <ProgressiveImage
+                                        src={addDesktop} // High-resolution image URL
+                                        placeholder={prograssivewellcom} // Low-resolution image URL
+                                        className="advertisment-img"
+                                    >
+                                        {(src, loading) => (
+                                            <img
+                                                className={` ${
+                                                    loading ? "blur" : ""
+                                                }`}
+                                                src={src}
+                                                alt={'addDesktop'}
+                                        
+                                                />
+                                        )}
+                                    </ProgressiveImage>
                         </div>
                     </div>
                 </div>
