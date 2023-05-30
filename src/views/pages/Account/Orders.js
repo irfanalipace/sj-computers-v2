@@ -21,6 +21,7 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 // import { FaSearch } from "react-icons/fa";
 import "./Account.css";
 import { Select } from "@mantine/core";
+import { Stack } from "react-bootstrap";
 
 const dummyDataForOrders = [
     {
@@ -234,7 +235,7 @@ const OrderPage = () => {
                         >
                             Enter tracking id to search
                         </label>
-                        <div style={{ display: "flex" }}>
+                        <div style={{ display: "flex", alignItems: "center" }}>
                             <input
                                 id="orderSearch"
                                 name="orderSearch"
@@ -243,12 +244,13 @@ const OrderPage = () => {
                                 onChange={(e) => setOrderSearch(e.target.value)}
                                 className={
                                     orderSearch
-                                        ? "search-input green"
-                                        : "search-input"
+                                        ? " form-control  form-control-sm  my-lg-0 search-input green"
+                                        : "  form-control form-control-sm  my-lg-0 search-input"
                                 }
                             />
                             {/* <FaSearch style={{ marginRight: '5px' }} /> */}
                             <button
+                                className="searchOrderBtn btn btn-sm"
                                 type="button"
                                 style={{
                                     backgroundColor: "#52AC66",
@@ -268,82 +270,99 @@ const OrderPage = () => {
                     </div>
                 </div>
 
-                <div className="row mx-0 order-list-container">
-                    <div className="col-sm-6 col-md-12 col-12 px-0">
-                        <Box sx={{ flexGrow: 1 }}>
-                            <CustomTabs
-                                value={activeTab}
-                                onChange={handleTabChange}
-                                centered
-                            >
-                                <Tab
-                                    label="Orders"
-                                    style={{ fontSize: "12px" }}
-                                />
-                                <Tab
-                                    label="Cancelled Orders"
-                                    style={{ fontSize: "12px" }}
-                                />
-                                <Tab
-                                    label="Search orders"
-                                    style={{ fontSize: "12px" }}
-                                />
-                            </CustomTabs>
-                            <div
-                                style={{
-                                    display: "flex",
-                                    marginTop: 40,
-                                    marginBottom: 40,
+                <div className="row  mx-0 order-list-container mt-2 orderTabsSection">
+                    <div className="col-12 px-0">
+                        <CustomTabs
+                            value={activeTab}
+                            onChange={handleTabChange}
+                            centered
+                        >
+                            <Tab
+                                label="Orders"
+                                sx={{
+                                    fontSize: {
+                                        xs: "10px",
+                                        md: "11px",
+                                        lg: "12px",
+                                    },
                                 }}
-                            >
-                                {activeTab !== 2 && (
-                                    <>
-                                        <p className="orderType">
-                                            {}{" "}
-                                            {activeTab === 0 ? (
-                                                <>
-                                                    {!orderDetails
-                                                        ?.success_orders
-                                                        ?.total ? (
-                                                        <LoaderComponent />
-                                                    ) : (
-                                                        `${orderDetails?.success_orders?.total} orders`
-                                                    )}
-                                                    {/* { } */}
-                                                </>
-                                            ) : (
-                                                `${orderDetails?.cancel_orders?.total} cancelled order`
-                                            )}{" "}
-                                            place in
-                                        </p>
-                                        <div style={{ display: "inline-flex" }}>
-                                            <Select
-                                                data={[
-                                                    {
-                                                        value: "1 month",
-                                                        label: "1 month",
-                                                    },
-                                                    // { value: 'option2', label: 'Option 2' },
-                                                    // { value: 'option3', label: 'Option 3' },
-                                                ]}
-                                                value={selectedValue}
-                                                onChange={handleDropdownChange}
-                                                placeholder="Select an option"
-                                                style={{
-                                                    background: "#FFFFFF",
-                                                    border: "1px solid #DDDDDD",
-                                                    boxShadow:
-                                                        "0px 1px 4px rgba(0, 0, 0, 0.25)",
-                                                    borderRadius: "8px",
-                                                    fontFamily: "Inter",
-                                                    fontStyle: "normal",
-                                                    fontWeight: "400",
-                                                    fontSize: "12px",
-                                                    lineHeight: "164%",
-                                                    color: "#000000",
-                                                }}
-                                            />
-                                            {/* <select
+                            />
+                            <Tab
+                                label="Cancelled Orders"
+                                sx={{
+                                    fontSize: {
+                                        xs: "10px",
+                                        md: "11px",
+                                        lg: "12px",
+                                    },
+                                }}
+                            />
+                            <Tab
+                                label="Search orders"
+                                sx={{
+                                    fontSize: {
+                                        xs: "10px",
+                                        md: "11px",
+                                        lg: "12px",
+                                    },
+                                }}
+                            />
+                        </CustomTabs>
+
+                        <div
+                            style={{
+                                display: "flex",
+                                marginTop: 40,
+                                marginBottom: 40,
+                            }}
+                        >
+                            {activeTab !== 2 && (
+                                <>
+                                    <p className="orderType">
+                                        {}{" "}
+                                        {activeTab === 0 ? (
+                                            <>
+                                                {!orderDetails?.success_orders
+                                                    ?.total ? (
+                                                    <LoaderComponent />
+                                                ) : (
+                                                    `${orderDetails?.success_orders?.total} orders`
+                                                )}
+                                                {/* { } */}
+                                            </>
+                                        ) : (
+                                            `${orderDetails?.cancel_orders?.total} cancelled order`
+                                        )}{" "}
+                                        place in
+                                    </p>
+                                    <div style={{ display: "inline-flex" }}>
+                                        <Select
+                                            data={[
+                                                {
+                                                    value: "1 month",
+                                                    label: "1 month",
+                                                },
+                                                // { value: 'option2', label: 'Option 2' },
+                                                // { value: 'option3', label: 'Option 3' },
+                                            ]}
+                                            value={selectedValue}
+                                            onChange={handleDropdownChange}
+                                            placeholder="Select an option"
+                                            style={{
+                                                background: "#FFFFFF",
+                                                border: "1px solid #DDDDDD",
+                                                boxShadow:
+                                                    "0px 1px 4px rgba(0, 0, 0, 0.25)",
+                                                borderRadius: "8px",
+                                                fontFamily: "Inter",
+                                                fontStyle: "normal",
+                                                fontWeight: "400",
+                                                fontSize: "12px",
+                                                lineHeight: "164%",
+                                                color: "#000000",
+                                            }}
+                                        />
+                                        {/* <select
                         value={1}
                         //   onChange={}
                         style={{ marginLeft: '5px' }}
@@ -353,13 +372,12 @@ const OrderPage = () => {
                         <option value="Option 2">Option 2</option>
                         <option value="Option 3">Option 3</option>
                         </select> */}
-                                        </div>
-                                    </>
-                                )}
-                            </div>
+                                    </div>
+                                </>
+                            )}
+                        </div>
 
-                            {renderTabContent()}
-                        </Box>
+                        {renderTabContent()}
                     </div>
                     {/* <div
                         style={{ marginTop: "15%", marginBottom: "5%" }}
