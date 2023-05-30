@@ -34,7 +34,7 @@ export const SkuProducts = () => {
         try {
             let response = await downloadProductsApi();
             console.log("response", response);
-            downloadFile(response.data.fileUrl);
+            downloadFile(response.data.file_name);
         } catch (error) {
             console.log(error);
         }

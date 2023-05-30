@@ -36,7 +36,7 @@ export function inventoryAction({ action, quantity, search }) {
 
 export function downloadProductsApi() {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/get-file`)
+        ApiService.get(`/download-inventory`)
             .then((response) => {
                 console.log("resp", response);
                 resolve(response);
