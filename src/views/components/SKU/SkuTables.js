@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./SkuTables.css";
-import { FormControl, InputAdornment, TextField } from "@mui/material";
-import { getInventory, inventoryAction } from "../../../core/api/inventory.js";
-import SearchIcon from "@mui/icons-material/Search";
+import { TextField, FormControl } from "@mui/material";
+import { getInventory, inventoryAction } from "@api/inventory.js";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 
-const SkuTables = () => {
+export const SkuTables = () => {
     const [invent, setInvent] = useState();
     const [data, setData] = useState([]);
     const [search, setSearch] = useState("");
@@ -165,18 +164,16 @@ const SkuTables = () => {
                             </div>
 
                             <div className="button-sku-button">
-                                {(!action || action === "RELEASE") && (
-                                    <button
-                                        onClick={handlehold}
-                                        disabled={loading}
-                                    >
-                                        Hold
-                                    </button>
-                                )}
-                                {action === "HOLD" && (
+                                {/* {(!action || action === "RELEASE") && ( */}
+                                <button onClick={handlehold} disabled={loading}>
+                                    Hold
+                                </button>
+                                {/* )} */}
+                                {/* {action === "HOLD" && (
                                     <button
                                         onClick={handleRelease}
                                         style={{
+                                            
                                             background: "#269C40",
                                             border: "none",
                                         }}
@@ -184,7 +181,7 @@ const SkuTables = () => {
                                     >
                                         Release
                                     </button>
-                                )}
+                                )} */}
                             </div>
                         </div>
                     </div>
@@ -192,7 +189,7 @@ const SkuTables = () => {
                     <></>
                 )}
                 <div>
-                    <div className="col-lg-8 col-md-10 col-sm-12">
+                    <div>
                         {" "}
                         {loading ? (
                             <LoaderComponent />
@@ -270,7 +267,7 @@ const SkuTables = () => {
                                             onClick={handleBuy}
                                             className="buy-now-button-sku"
                                         >
-                                            Buy Now
+                                            Clear
                                         </button>{" "}
                                     </>
                                 ) : (
@@ -284,5 +281,3 @@ const SkuTables = () => {
         </div>
     );
 };
-
-export default SkuTables;

@@ -10,8 +10,8 @@ import { getOrderDetails } from "@store/orders/ordersThunk";
 import Button from "@common/Button/Button";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 import { OrderSearchApi, OrderListhApi } from "../../../core/api/order";
-import OrderCard from "../../components/OrderPage/OrderProducts";
-import OrderInvoiceCard from "../../components/OrderPage/OrderInvoiceCard";
+import OrderCard from "@components/OrderPage/OrderProducts";
+import OrderInvoiceCard from "@components/OrderPage/OrderInvoiceCard";
 
 import userDefault from "@images/common/user-default-avatar.png";
 import { Tabs, Tab, Box, Typography } from "@mui/material";
@@ -306,11 +306,13 @@ const OrderPage = () => {
                                                         ?.success_orders
                                                         ?.total ? (
                                                         <LoaderComponent />
-                                                    )   : orderDetails?.success_orders?.total > 0 ? (
+                                                    ) : orderDetails
+                                                          ?.success_orders
+                                                          ?.total > 0 ? (
                                                         `${orderDetails?.success_orders?.total} orders`
-                                                    ): (
+                                                    ) : (
                                                         `0 orders`
-                                                    ) }
+                                                    )}
                                                     {/* { } */}
                                                 </>
                                             ) : (
