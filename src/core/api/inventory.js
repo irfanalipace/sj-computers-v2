@@ -10,11 +10,12 @@ export function getInventory(search) {
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error products", e);
+                console.log("Console Log: : error inventory", e);
                 reject(e);
             });
     });
 }
+
 export function inventoryAction({ action, quantity, search }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/action-perform`, {
@@ -27,7 +28,21 @@ export function inventoryAction({ action, quantity, search }) {
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error products", e);
+                console.log("Console Log: : error inventory", e);
+                reject(e);
+            });
+    });
+}
+
+export function downloadProductsApi() {
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/get-file`)
+            .then((response) => {
+                console.log("resp", response);
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error inventory", e);
                 reject(e);
             });
     });

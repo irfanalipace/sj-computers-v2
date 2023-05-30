@@ -11,6 +11,8 @@ import Loader from "@common/Spinner/Spinner";
 
 import Paper from "@mui/material/Paper";
 import { productsApi, filterProductsApi } from "@api/products";
+import { downloadProductsApi } from "@api/inventory";
+import { downloadFile } from "@utils/helpers";
 
 export const SkuProducts = () => {
     const [data, setData] = useState([]);
@@ -19,12 +21,25 @@ export const SkuProducts = () => {
     const [search, setSearch] = useState("");
     const [isSearchActive, setIsSearchActive] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [downloadingProducts, setDownloadingProducts] = useState(false);
 
     const perPage = 12; // Adjust the number of items per page as needed
 
     useEffect(() => {
         fetchProducts(null, currentPage + 1);
     }, []);
+
+    const downloadProducts = async () => {
+        setDownloadingProducts(true);
+        try {
+            let response = await downloadProductsApi();
+            console.log("response", response);
+            downloadFile(response.data.fileUrl);
+        } catch (error) {
+            console.log(error);
+        }
+        setDownloadingProducts(false);
+    };
 
     const fetchProducts = async (e, page) => {
         try {
@@ -71,7 +86,7 @@ export const SkuProducts = () => {
                 <div className="seach-input-sku">
                     <FormControl
                         className="search-field"
-                        sx={{ m: 1, minWidth: 500 }}
+                        sx={{ m: 1, minWidth: 300 }}
                     >
                         <TextField
                             id="outlined-basic"
@@ -81,8 +96,18 @@ export const SkuProducts = () => {
                             onChange={(e) => setSearch(e.target.value)}
                         />
                     </FormControl>
-                    <button onClick={handleSearch} className="search-btn">
+                    <button onClick={handleSearch} className="sku-form-btn">
                         Search
+                    </button>
+                    <button
+                        className="sku-form-btn ms-3"
+                        onClick={downloadProducts}
+                    >
+                        {downloadingProducts ? (
+                            <Loader />
+                        ) : (
+                            " Download Products"
+                        )}
                     </button>
                 </div>
                 <>
