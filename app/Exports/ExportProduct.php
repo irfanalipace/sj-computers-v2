@@ -19,6 +19,6 @@ class ExportProduct implements FromCollection, WithHeadings, ShouldAutoSize
 
     public function headings(): array
     {
-        return ["Name", "Quantity", "Price", "SKU","ASIN"];
+        return ["Name", "Price","Quantity", "SKU","ASIN"];
     }
 }
