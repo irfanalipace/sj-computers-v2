@@ -61,13 +61,16 @@
         margin-left: 10px !important;
         margin-right: 10px !important;
         padding: 0;
-
     }
 
     .banner-category-section {
         position: relative;
         min-height: 400px;
-        margin-bottom: 15px;
+        margin-bottom: 5px;
+    }
+
+    .products-grid-container {
+        margin-top: 0 !important;
     }
 }
 

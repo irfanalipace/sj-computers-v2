@@ -18,11 +18,31 @@
     margin: 10px auto 50px;
 }
 
-
-
 .recommendation-container h3 {
     width: 94%;
     margin: 10px auto 50px;
     margin-top: 30px;
     margin-bottom: 50px;
+}
+
+.recommendation-inner .product-details {
+    margin-top: 60px;
+}
+
+@media (max-width: 575px) {
+    .recommendation-inner .product-details {
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 575px) {
+    .recommendation-inner .product-image {
+        padding-top: 80px;
+    }
+}
+
+@media (max-width: 375px) {
+    .recommendation-inner .product-image {
+        padding-top: 72px;
+    }
 }

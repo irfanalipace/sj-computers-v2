@@ -14,54 +14,53 @@ function MobileHeader() {
         return setSideMenu((state) => !state);
     };
     return (
-      <div>
-  
-          <div className="header-mobile">
-            <header className="mobile-header">
-                {/* <div className="mobile-header__logo">
+        <div>
+            <div className="header-mobile">
+                <header className="mobile-header">
+                    {/* <div className="mobile-header__logo">
         <Link to="/">
           <img src="Logo" alt="Logo" />
         </Link>
       </div> */}
-                <div className="mobile-header__menu">
-                    {/* <button className="mobile-header__menu-button">
+                    <div className="mobile-header__menu">
+                        {/* <button className="mobile-header__menu-button">
         <img src="Logo" alt="Menu" />
         <i className="fa fa-home" aria-hidden="true"></i>
       </button> */}
-                    <div className="mobile-header__menu-items">
-                        <ul className="ul-item-list-header">
-                            <li>
-                                <Link to="/">
-                                    <i
-                                        className="fa fa-home font-size-mobile-icon"
-                                        aria-hidden="true"
-                                    ></i>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/account">
-                                    <i
-                                        className="fa fa-user font-size-mobile-icon"
-                                        aria-hidden="true"
-                                    ></i>
-                                </Link>
-                            </li>
+                        <div className="mobile-header__menu-items">
+                            <ul className="ul-item-list-header">
+                                <li>
+                                    <Link to="/">
+                                        <i
+                                            className="fa fa-home font-size-mobile-icon"
+                                            aria-hidden="true"
+                                        ></i>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/account">
+                                        <i
+                                            className="fa fa-user font-size-mobile-icon"
+                                            aria-hidden="true"
+                                        ></i>
+                                    </Link>
+                                </li>
 
-                            <li className="list-view-item list-data-items">
-                                <span className="data-list-icon-list">
-                                    {" "}
-                                    {cartDetails.total_items}
-                                </span>
+                                <li className="list-view-item list-data-items">
+                                    <span className="data-list-icon-list">
+                                        {" "}
+                                        {cartDetails.total_items}
+                                    </span>
 
-                                <Link to="/cart">
-                                    <i
-                                        className="fa fa-shopping-cart font-size-mobile-icon"
-                                        aria-hidden="true"
-                                    ></i>
-                                </Link>
-                            </li>
+                                    <Link to="/cart">
+                                        <i
+                                            className="fa fa-shopping-cart font-size-mobile-icon"
+                                            aria-hidden="true"
+                                        ></i>
+                                    </Link>
+                                </li>
 
-                            <span
+                                {/* <span
                                 className="navIcon  hover-effect-sets sidebar-icon-fields-bar"
                                 onClick={() => {
                                     toggleSidebar();
@@ -77,14 +76,14 @@ function MobileHeader() {
                                         <path d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" />
                                     )}
                                 </i>
-                            </span>
-                        </ul>
+                            </span> */}
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </header>
-            <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
+                </header>
+                <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
+            </div>
         </div>
-      </div>
     );
 }
 

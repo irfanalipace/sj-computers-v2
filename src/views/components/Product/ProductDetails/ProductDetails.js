@@ -188,7 +188,7 @@ const ProductDetails = ({ product }) => {
 
             <hr className="hr-card-details"></hr>
             <div className="col-md-12 list-style-margin">
-                <ul className="product-details">
+                <ul className="product-specs">
                     {productDetails.map((item, index) => (
                         <>
                             {item?.value && (

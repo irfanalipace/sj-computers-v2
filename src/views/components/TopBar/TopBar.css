@@ -90,3 +90,8 @@ Link:hover {
         flex-shrink: 0;
     }
 }
+@media screen and (max-width: 850px) {
+    .all-menu {
+        display: none;
+    }
+}

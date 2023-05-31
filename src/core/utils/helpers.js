@@ -10,3 +10,22 @@ export function snakeCaseToPrettyText(snakeCase) {
     // Join the words with spaces and return the result
     return prettyWords.join(" ");
 }
+
+export const downloadFile = (fileUrl) => {
+    const filename = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
+
+    fetch(fileUrl)
+        .then((response) => response.blob())
+        .then((blob) => {
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", filename);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        })
+        .catch((error) => {
+            console.error("Error downloading file:", error);
+        });
+};

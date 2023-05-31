@@ -271,7 +271,7 @@ const Header = () => {
                                     )}
                                 </div>
                             </header>
-                            {!ThankyouPage && <TopBar className="topbar" />}
+                            {!ThankyouPage && <TopBar />}
                         </>
                     )}
 

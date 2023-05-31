@@ -131,7 +131,7 @@ export const SkuTables = () => {
                             </FormControl>
                             <button
                                 onClick={handleChange}
-                                className="search-btn"
+                                className="sku-form-btn"
                             >
                                 Search
                             </button>

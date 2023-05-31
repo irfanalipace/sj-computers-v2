@@ -189,7 +189,7 @@
 .sku-table-cell {
     display: flex;
 }
-.search-btn {
+.sku-form-btn {
     color: white;
     background: #269c40;
     border: none;
@@ -283,7 +283,7 @@
 }
 
 @media (min-width: 1400px) {
-.sku-page-container.container-xxl {
-    max-width: 1720px;
-}
+    .sku-page-container.container-xxl {
+        max-width: 1720px;
+    }
 }

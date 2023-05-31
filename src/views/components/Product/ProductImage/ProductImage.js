@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { toArray } from "@utils/cartHelpers";
 import "./ProductImage.css";
 
 const SelectedImage = ({ image }) => {
     return (
         <div className="image-screen">
-            <img src={image} className="selected-image selected-image-data-icon-slider" />
+            <img
+                src={image}
+                className="selected-image selected-image-data-icon-slider"
+            />
         </div>
     );
 };
 
-export const ProductImage = ({ ProductImages }) => {
+const ProductImageComponent = ({ ProductImages }) => {
     const [selectedImg, setSelectedImg] = useState(null);
     const [images, setImages] = useState([]);
 
@@ -39,3 +42,5 @@ export const ProductImage = ({ ProductImages }) => {
         </div>
     );
 };
+
+export const ProductImage = memo(ProductImageComponent);
