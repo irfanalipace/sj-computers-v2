@@ -14,11 +14,11 @@ class ExportProduct implements FromCollection, WithHeadings, ShouldAutoSize
      */
     public function collection()
     {
-        return Product::select("name", "price", "sku","asin", "category_id_1", 'category_id_2',"status")->get();
+        return Product::select("name", "price","quantity", "sku","asin")->get();
     }
 
     public function headings(): array
     {
-        return ["Name", "Price", "SKU","ASIN", "Category 1", 'Category 2', "Image","Status"];
+        return ["Name", "Quantity", "Price", "SKU","ASIN"];
     }
 }

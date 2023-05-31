@@ -66,8 +66,8 @@ footer ul li {
 .footer-data {
     padding: 23px;
 }
-.reach-us p {
-    margin-top: -10px;
+.reach-us {
+  margin-top: 12px;
 }
 .copywrite {
     width: 361px;
@@ -105,6 +105,17 @@ footer ul li {
 .footer-copywrite-images {
     max-width: 17% !important;
     padding-bottom: 12px !important;
+}
+.reach-us-paragraph-data-footer{
+    
+font-family: 'Inter';
+font-style: normal;
+
+font-size: 15px;
+
+display: flex;
+align-items: center;
+
 }
 
 .language-dropdown::after {

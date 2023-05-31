@@ -6,10 +6,10 @@ const SkuPage = () => {
     return (
         <div className="sku-page-container container-xxl">
             <Row>
-                <Col sm={6}>
+                <Col sm={5}>
                     <SkuTables />
                 </Col>
-                <Col sm={6}>
+                <Col sm={7}>
                     <SkuProducts />
                 </Col>
             </Row>
