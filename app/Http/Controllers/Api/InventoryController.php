@@ -75,17 +75,16 @@ class InventoryController extends BaseController
         $filename = 'Inventory_' . $now . '.xlsx';
 
         Excel::store($export, $filename, 'public');
-        $route = route('export-inventory',['file_name' => $filename]);
+        $route = route('export-inventory', ['file_name' => $filename]);
         return $this->sendResponse([
             'url' => $route,
         ], 'Inventory exported successfully.');
-
     }
 
     public function downloadInventoryFile(Request $request)
     {
         $path = public_path('storage/' . $request->file_name);
-
+      
         return response()->download($path, 'products_list.xlsx', [
             'Content-Type' => 'application/vnd.ms-excel',
             'Content-Disposition' => "attachment; filename='products_list.xls'"
