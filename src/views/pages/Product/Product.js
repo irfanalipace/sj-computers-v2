@@ -19,7 +19,7 @@ export default function Product() {
 
     useEffect(() => {
         getProductDetails();
-    }, [productId]);
+    }, [productId,products]);
 
     const getProductDetails = async () => {
         setIsLoading(true);
@@ -50,7 +50,7 @@ export default function Product() {
                             <ProductDetails product={product} />
                         </div>
                         <div className="col-12 col-md-3 p-0 m-0">
-                            <CheckOutCard product={product} />
+                            <CheckOutCard product={{...product}} />
                         </div>
                     </div>
                 ) : (

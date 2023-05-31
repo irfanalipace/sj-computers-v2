@@ -21,10 +21,10 @@ export default function ProductsGrid({
                 <Row className="mx-0 justify-content-left">
                     {products?.map((product) => (
                         <Col xs={6} md={4} lg={2} key={product.id}>
-                            <Link to={`/product/${product?.asin}`}>
+                            {/* <Link to={`/product/${product?.asin}`}> */}
                                 <Product product={product} inGrid={true} />
                                 
-                            </Link>
+                            {/* </Link> */}
                             
                         </Col>
                     ))}

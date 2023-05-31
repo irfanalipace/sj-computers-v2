@@ -23,6 +23,7 @@ const Product = ({ product, inGrid }) => {
     );
 
     const cartClickHandler = () => {
+     
         let productPrice = product.price * quantity;
         let cartQuantity = details.total_items + 1;
         let cartTotal = parseFloat(details?.total) + productPrice;
@@ -48,12 +49,15 @@ const Product = ({ product, inGrid }) => {
                     navigate("/cart")
                 )
             );
+            
     };
+    useEffect(() => {
+        let item = cart.filter((ci) => ci.id === product.id);
+        setCartItem(item);
+    }, [cart]);
     const ProductDetails = () => (
-        <Link
-            to={`/product/${product?.asin}`}
-            style={{ textDecoration: "none" }}
-        >
+        <div>
+      
             
             <div className="product-details">
                 {/* <div>
@@ -62,14 +66,16 @@ const Product = ({ product, inGrid }) => {
             (205100-410)
             </span>
         </div> */}
-          
+           
              <div className="dev-section-button-dev-card">
-             <div className="product-name product-cart-name-mobile-screen">
+            
+             <Link to={`/product/${product?.asin}`}>   
+                       <div className="product-name product-cart-name-mobile-screen">
                     {product.name}
                 </div>
 
                 {/* Mobile code here */}
-
+            
                 <div className=" d-sm-none product-prices">
                     {product.originalPrice && (
                         <div className="product-original-price">
@@ -100,17 +106,34 @@ const Product = ({ product, inGrid }) => {
                     <span className="span-get-data-pagragraph-card">
                         Free Delivery Available{" "}
                     </span>
-                    {/* <Button
-                        className=" d-sm-none add-to-card-button-mobile-product"
-                        clickHandler={cartClickHandler}
-                        isLoading={product.loading}
-                    >
-                        Add to Cart
-                    </Button> */}
+                 <div>
+                
+                 </div>
                 </div>
               
+                </Link>
+                <div className="d-sm-none ">
+                {cartItem?.length > 0 ? (
+                        <p className="item-card-add-carditems-product-card">
+                            Item Already in Cart
+                        </p>
+                    ) : (
+                <Button
+                        className=" d-sm-none add-to-card-button-mobile-product"
+                        clickHandler={cartClickHandler}
+                        isLoading={product?.loading}
+                    >
+                        Add to Cart
+                    </Button>
+
+                    )}
+                </div>
              </div>
-             
+            
+             <Link
+            to={`/product/${product?.asin}`}
+            style={{ textDecoration: "none" }}
+        >
                 <div className="d-none d-sm-block product-rating">
                     <StarRatings
                         rating={product.rating}
@@ -125,7 +148,7 @@ const Product = ({ product, inGrid }) => {
                         {product.numReviews ? product.numReviews : 0}
                     </span>
                 </div>
-
+                </Link>
                 {/* {!inGrid && (
             <>
                 <div className="product-badge">
@@ -158,7 +181,8 @@ const Product = ({ product, inGrid }) => {
                     </div>
                 )}
             </div>
-        </Link>
+                   
+        </div>
     );
 
     return (

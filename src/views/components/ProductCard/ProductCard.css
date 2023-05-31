@@ -191,6 +191,14 @@
         background: #ffffff;
         border: 1px solid rgba(82, 172, 102, 0.4);
         border-radius: 0px 0px 5px 5px;
+    }.item-card-add-carditems-product-card {
+        font-family: "Inter";
+        font-style: normal;
+        /* font-weight: 500; */
+        font-size: 13px;
+        line-height: 19px;
+        /* display: flex; */
+        /* align-items: center; */
     }
     .span.span-the-product-color-product {
         width: 132px;
