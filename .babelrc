@@ -3,4 +3,9 @@
         "@babel/preset-env",
         ["@babel/preset-react", { "runtime": "automatic" }]
     ]
+    // "env": {
+    //     "production": {
+    //         "plugins": ["transform-remove-console"]
+    //     }
+    // }
 }

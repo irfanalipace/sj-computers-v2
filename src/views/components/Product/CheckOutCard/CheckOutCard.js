@@ -56,6 +56,8 @@ export const CheckOutCard = ({ product }) => {
             );
     };
 
+    console.log("product: ", product);
+
     useEffect(() => {
         let item = cart.filter((ci) => ci.id === product.id);
         setCartItem(item);

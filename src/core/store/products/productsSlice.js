@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
     products: [],
@@ -22,7 +22,7 @@ const productSlice = createSlice({
         },
         SET_PRODUCT_LOADING: (state, action) => {
             let index = state.products.findIndex(
-                (item) => item.id === action.payload.id
+                (item) => item.id === action.payload?.id
             );
             if (index >= 0) {
                 state.products[index] = {
@@ -40,11 +40,6 @@ const productSlice = createSlice({
                     ...state.products[index],
                     loading: false,
                 };
-                console.log(
-                    "Loader cleared-product:",
-                    state.products.find((item) => item.id === data?.id)
-                        ?.loading === false
-                );
             }
         },
 
