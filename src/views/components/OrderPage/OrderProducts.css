@@ -159,11 +159,9 @@
     border: none;
 }
 
-
 .form-control:hover {
     box-shadow: none !important;
-  }
-
+}
 
 @media screen and (max-width: 600px) {
     .product-info {
@@ -183,8 +181,16 @@
         width: 100%;
         margin-left: 22px;
     }
+
+    .expanded-content ul {
+        padding-left: 0;
+    }
     .order-table .product-image {
-        max-height: 120px;
+        max-height: 175px;
+        margin-left: 0 !important;
+        padding: 10px;
+        max-width: 100px;
+        border: none;
     }
     .product-description {
         font-size: 11px;
@@ -192,9 +198,4 @@
     .toggle-button-table-data {
         width: 69px;
     }
-    
 }
-
-
-
-
