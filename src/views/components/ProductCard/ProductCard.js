@@ -54,6 +54,7 @@ const Product = ({ product, inGrid }) => {
             to={`/product/${product?.asin}`}
             style={{ textDecoration: "none" }}
         >
+            
             <div className="product-details">
                 {/* <div>
             <span className="span-the-product-color-product">
@@ -61,7 +62,7 @@ const Product = ({ product, inGrid }) => {
             (205100-410)
             </span>
         </div> */}
-
+          
              <div className="dev-section-button-dev-card">
              <div className="product-name product-cart-name-mobile-screen">
                     {product.name}
@@ -99,17 +100,17 @@ const Product = ({ product, inGrid }) => {
                     <span className="span-get-data-pagragraph-card">
                         Free Delivery Available{" "}
                     </span>
-                  
-                </div>
-                <Button
+                    {/* <Button
                         className=" d-sm-none add-to-card-button-mobile-product"
                         clickHandler={cartClickHandler}
                         isLoading={product.loading}
                     >
                         Add to Cart
-                    </Button>
+                    </Button> */}
+                </div>
+              
              </div>
-
+             
                 <div className="d-none d-sm-block product-rating">
                     <StarRatings
                         rating={product.rating}
@@ -161,7 +162,7 @@ const Product = ({ product, inGrid }) => {
     );
 
     return (
-        <div className={`product   ${inGrid && "product-grid"}`}>
+        <div className={` product   ${inGrid && "product-grid"}`}>
             <div className={` ${inGrid && "product-image-grid"} product-image`}>
                 {/* {inGrid && (
                     <div className="product-badge">
@@ -171,6 +172,7 @@ const Product = ({ product, inGrid }) => {
                 <div className="image-wrapper">
                     <img src={product.image} alt={product.brand} />
                 </div>
+                
             </div>
             <ProductDetails />
         </div>

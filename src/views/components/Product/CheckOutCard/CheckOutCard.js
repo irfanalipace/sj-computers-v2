@@ -15,7 +15,7 @@ export const CheckOutCard = ({ product }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cart = useSelector((state) => state.cart.cart);
     const details = useSelector((state) => state.cart.details);
-    // const isLoading = useSelector((state) => state.cart.isLoading);
+    const isLoading = useSelector((state) => state.cart.isLoading);
     const [quantity, setQuantity] = useState(1);
     const [show, setShow] = useState(false);
     const [cartItem, setCartItem] = useState(null);
@@ -55,8 +55,6 @@ export const CheckOutCard = ({ product }) => {
                 )
             );
     };
-
-    console.log("product: ", product);
 
     useEffect(() => {
         let item = cart.filter((ci) => ci.id === product.id);
@@ -167,7 +165,7 @@ export const CheckOutCard = ({ product }) => {
                                 <Button
                                     className="button1 button-text-button"
                                     clickHandler={cartClickHandler}
-                                    isLoading={product.loading}
+                                    isLoading={isLoading}
                                 >
                                     Add to Cart
                                 </Button>

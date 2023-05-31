@@ -5,7 +5,7 @@ import Product from "@components/ProductCard/ProductCard";
 import OverlayLoader from "@common/LoaderComponent/OverlayLoader";
 import { Link } from "react-router-dom";
 import "./ProductsGrid.css";
-
+import Button from "@common/Button/Button";
 export default function ProductsGrid({
     products,
     handleClick,
@@ -23,10 +23,13 @@ export default function ProductsGrid({
                         <Col xs={6} md={4} lg={2} key={product.id}>
                             <Link to={`/product/${product?.asin}`}>
                                 <Product product={product} inGrid={true} />
+                                
                             </Link>
+                            
                         </Col>
                     ))}
                 </Row>
+               
                 {products.length > 11 && (
                     <div className="d-flex justify-content-center">
                         <LoadMore
