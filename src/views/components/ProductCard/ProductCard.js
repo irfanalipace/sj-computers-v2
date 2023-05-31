@@ -62,7 +62,8 @@ const Product = ({ product, inGrid }) => {
             </span>
         </div> */}
 
-                <div className="product-name product-cart-name-mobile-screen">
+             <div className="dev-section-button-dev-card">
+             <div className="product-name product-cart-name-mobile-screen">
                     {product.name}
                 </div>
 
@@ -82,6 +83,7 @@ const Product = ({ product, inGrid }) => {
                     <div>
                         {/* <span className="old-price-product-card">$3,495</span> */}
                     </div>
+                    
                 </div>
 
                 <div className="d-sm-none ">
@@ -97,14 +99,16 @@ const Product = ({ product, inGrid }) => {
                     <span className="span-get-data-pagragraph-card">
                         Free Delivery Available{" "}
                     </span>
-                    <Button
-                        className="add-to-card-button-mobile-product"
+                  
+                </div>
+                <Button
+                        className=" d-sm-none add-to-card-button-mobile-product"
                         clickHandler={cartClickHandler}
                         isLoading={product.loading}
                     >
                         Add to Cart
                     </Button>
-                </div>
+             </div>
 
                 <div className="d-none d-sm-block product-rating">
                     <StarRatings
