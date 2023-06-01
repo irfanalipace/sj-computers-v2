@@ -77,6 +77,7 @@ const Product = ({ product, inGrid }) => {
                 {/* Mobile code here */}
             
                 <div className=" d-sm-none product-prices">
+            
                     {product.originalPrice && (
                         <div className="product-original-price">
                             ${product.originalPrice}

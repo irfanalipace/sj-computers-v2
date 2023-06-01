@@ -317,6 +317,11 @@
         color: #ffffff;
         border: none;
         margin-top: 18px;
+    }.product {
+        display: inherit;
+        flex-direction: column;
+        align-items: center;
+        /* padding: 10px; */
     }
     .product-image-grid.product-image {
         height: 0px;
