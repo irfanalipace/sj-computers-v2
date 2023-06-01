@@ -228,7 +228,7 @@ head:nth-child(2) {
         padding-right: 30px;
     }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 991px) {
     .item-details {
         font-size: 12px;
     }

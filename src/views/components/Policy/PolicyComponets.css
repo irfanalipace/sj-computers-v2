@@ -221,8 +221,11 @@ max-width: 100%;
       }
       
       .policy-listitem {
-        width: 119px;
+        width: 100%;
         /* padding: 4px 21px; */
+        width: 157px;
+    }li.policy-listitem {
+        margin-left: 0px;
     }
       
       .text-decoration-none {

@@ -181,16 +181,16 @@ const Footer = () => {
                                         </h6>
                                         <div className="reach-us ">
                                             <p className="text-uppercase herf-link  reach-us-paragraph-data-footer" style={{lineHeight:'17px'}}>
-                                                2817 &nbsp;Eagandale &nbsp;Blvd
-                                                Eagan,&nbsp;MN 55121.
+                                                2817 Eagandale Blvd
+                                                Eagan, MN 55121.
                                             </p>
-                                            <p className="herf-link ">
+                                            <p className="herf-link phonenumber-footer">
                                                 952-452-8884
                                             </p>
                                             <p>
                                                 <a
                                                     href="mailto:cs@sjcomputersmn.com"
-                                                    className="herf-link text-decoration-none"
+                                                    className="herf-link text-decoration-none phonenumber-footer"
                                                 >
                                                     cs@sjcomputersmn.com
                                                 </a>
