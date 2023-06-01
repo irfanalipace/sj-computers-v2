@@ -182,6 +182,9 @@
         flex-grow: 0;
         border: 1px solid rgba(82, 172, 102, 0.4);
         border-bottom: none;
+    }.div-button-card-product{
+        display: flex;
+        justify-content: center;
     }
     .product-details {
         display: block;
@@ -312,8 +315,13 @@
         /* padding: 8px 24px; */
         background: #28a343;
         border-radius: 100px;
-        font-family: "Roboto";
-        font-size: 12px;
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
         color: #ffffff;
         border: none;
         margin-top: 18px;

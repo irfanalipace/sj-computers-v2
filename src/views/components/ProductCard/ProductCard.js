@@ -113,11 +113,11 @@ const Product = ({ product, inGrid }) => {
                 </div>
               
                 </Link>
-                <div className="d-sm-none ">
+                <div className="d-sm-none div-button-card-product">
                 {cartItem?.length > 0 ? (
-                        <p className="item-card-add-carditems-product-card">
+                        <Button className="add-to-card-button-mobile-product">
                             Item Already in Cart
-                        </p>
+                        </Button>
                     ) : (
                 <Button
                         className=" d-sm-none add-to-card-button-mobile-product"
