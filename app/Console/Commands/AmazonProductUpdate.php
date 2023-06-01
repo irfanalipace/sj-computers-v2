@@ -54,6 +54,46 @@ class AmazonProductUpdate extends Command
         return 0;
     }
 
+    public function getProductsList(){
+
+        $status = false;
+
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://server5.sjops.us/api/inventory/data/export/skulist/',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'apikey: 810f8ad0-8585-4845-9954-9a82bdbc18bc'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        $response = json_decode($response,true);
+
+        if (isset($response)) {
+            $status = true;
+        }
+
+        return [
+            'status' => $status,
+            'response' => $response
+        ];
+
+    }
+
+
+
 
 
 }
