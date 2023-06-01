@@ -14,28 +14,31 @@ import "./Product.css";
 export default function Product() {
     const [isLoading, setIsLoading] = useState(false);
     const [product, setProduct] = useState(null);
+    const [productImages, setProductImages] = useState([]);
     const products = useSelector((state) => state.products.products);
     const { productId } = useParams();
 
     useEffect(() => {
         getProductDetails();
-    }, [productId,products]);
+    }, [productId, products]);
 
     const getProductDetails = async () => {
-        setIsLoading(true);
-
         const filteredProduct = products.filter(
             (product) => product?.asin == productId
         )[0];
         if (filteredProduct) {
             setProduct(filteredProduct);
+            setProductImages(filteredProduct?.image);
         } else {
+            setIsLoading(true);
+
             try {
                 const response = await productDetailsbyAsinApi(productId);
                 setProduct(response.data);
+                setProductImages(filteredProduct?.image);
             } catch (error) {}
+            setIsLoading(false);
         }
-        setIsLoading(false);
     };
 
     const ProductComponent = () => {
@@ -44,13 +47,13 @@ export default function Product() {
                 {product ? (
                     <div className="row">
                         <div className="col-12 col-md-4">
-                            <ProductImage ProductImages={product?.image} />
+                            <ProductImage ProductImages={productImages} />
                         </div>
                         <div className="col-12 col-md-5">
                             <ProductDetails product={product} />
                         </div>
                         <div className="col-12 col-md-3 p-0 m-0">
-                            <CheckOutCard product={{...product}} />
+                            <CheckOutCard product={{ ...product }} />
                         </div>
                     </div>
                 ) : (
