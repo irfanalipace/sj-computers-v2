@@ -100,11 +100,10 @@
     }
 }
 
-@media screen and (max-width: 1024px) {
-    /* .catergory-grid-wrapper {
-        position: unset;
-        bottom: -15%;
-    } */
+@media screen and (max-width: 991px) {
+    .catergory-grid-wrapper {
+       margin-left: 52px;
+    }
 
     .products-grid-container {
         margin: 15px 30px 11px;

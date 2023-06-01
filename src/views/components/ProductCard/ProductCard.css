@@ -182,9 +182,10 @@
         flex-grow: 0;
         border: 1px solid rgba(82, 172, 102, 0.4);
         border-bottom: none;
-    }.div-button-card-product{
+    }.div-button-card-product {
         display: flex;
         justify-content: center;
+        margin-bottom: 6px;
     }
     .product-details {
         display: block;
