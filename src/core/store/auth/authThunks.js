@@ -12,6 +12,7 @@ import {
     API_ERROR,
     ALREADY_LOGGED_IN,
     DELETING_PROFILE_PIC,
+    CLEAR_API_ERRORS,
 } from "@store/auth/authSlice";
 import {
     loginApi,
@@ -193,9 +194,10 @@ export const updatePassword = (data) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             await updatePasswordApi(data);
-            toast.success("Profile Updated Successfully");
+            toast.success("Password Updated Successfully");
 
             dispatch({ type: CLEAR_LOADING, payload: {} });
+            dispatch({ type: CLEAR_API_ERRORS, payload: {} });
         } catch (error) {
             console.log("Something went wrong in updatePassword", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
