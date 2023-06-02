@@ -147,11 +147,11 @@
         width: 460px;
     }
 }
-@media screen and (max-width: 450px) {
+/* @media screen and (max-width: 450px) {
     .contact-container {
         display: none !important;
     }
-}
+} */
 
 @media screen and (max-width: 520px) {
     .pa-form-heading-contact {
