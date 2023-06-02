@@ -26,8 +26,6 @@ export const CheckOutCard = ({ product }) => {
         (state) => state.orders.orderEstimatedDelivery
     );
 
-    console.log("estimated delivery order: ", orderEstimatedDelivery);
-
     const cartClickHandler = () => {
         let productPrice = product.price * quantity;
         let cartQuantity = details.total_items + 1;
@@ -55,8 +53,6 @@ export const CheckOutCard = ({ product }) => {
                 )
             );
     };
-
-    console.log("product: ", product);
 
     useEffect(() => {
         let item = cart.filter((ci) => ci.id === product.id);
@@ -167,7 +163,7 @@ export const CheckOutCard = ({ product }) => {
                                 <Button
                                     className="button1 button-text-button"
                                     clickHandler={cartClickHandler}
-                                    isLoading={product.loading}
+                                    isLoading={product?.loading}
                                 >
                                     Add to Cart
                                 </Button>

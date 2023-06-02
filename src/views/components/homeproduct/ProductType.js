@@ -17,7 +17,7 @@ export const ProductType = () => {
     return (
         <div className="product-type-container">
             <div className="row mx-0">
-                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="col-12 col-sm-6 col-lg-3">
                     <div className="product-type-section">
                         <h4 className="h4-heading">Shop by Category</h4>
                         <div className="categories-container">
@@ -29,7 +29,7 @@ export const ProductType = () => {
                     </div>
                 </div>
 
-                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="col-12 col-sm-6 col-lg-3">
                     <div className="product-type-section">
                         <h4 className="h4-heading">Gaming Desktop</h4>
                         <div className="categories-container">
@@ -43,7 +43,7 @@ export const ProductType = () => {
                         </Link>
                     </div>
                 </div>
-                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="col-12 col-sm-6 col-lg-3 ">
                     <div className="product-type-section">
                         <h4 className="h4-heading">Business Computer</h4>
                         <div className="categories-container">
@@ -68,7 +68,7 @@ export const ProductType = () => {
                         </Link>
                     </div>
                 </div> */}
-                <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="col-12 col-sm-6 col-lg-3">
                     <div className="advertisement-section">
                         {isAuthenticated ? (
                             <div className="advertisement-heading">
@@ -78,12 +78,9 @@ export const ProductType = () => {
                                 /> */}
 
                                 <ProgressiveImage
-                                 
                                     src={wellsjcomputer}
-                                  
                                     // High-resolution image URL
                                     placeholder={prograssivewellcom2} // Low-resolution image URL
-                                   
                                 >
                                     {(src, loading) => (
                                         <img
@@ -125,11 +122,12 @@ export const ProductType = () => {
                             <ProgressiveImage
                                 src={addDesktop} // High-resolution image URL
                                 placeholder={prograssivewellcom} // Low-resolution image URL
-                               
                             >
                                 {(src, loading) => (
                                     <img
-                                        className={`advertisment-img ${loading ? "blur" : ""}`}
+                                        className={`advertisment-img ${
+                                            loading ? "blur" : ""
+                                        }`}
                                         src={src}
                                         alt={"addDesktop"}
                                     />

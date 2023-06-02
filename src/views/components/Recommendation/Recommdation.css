@@ -29,20 +29,26 @@
     margin-top: 60px;
 }
 
+@media (max-width: 375px) {
+    .recommendation-inner .product-image {
+        padding-top: 72px;
+    }
+}
+
 @media (max-width: 575px) {
     .recommendation-inner .product-details {
         padding: 0 15px;
     }
-}
 
-@media (max-width: 575px) {
     .recommendation-inner .product-image {
-        padding-top: 80px;
+        padding: 0;
     }
-}
 
-@media (max-width: 375px) {
-    .recommendation-inner .product-image {
-        padding-top: 72px;
+    .product-image img {
+        max-height: 125px;
+    }
+
+    .recommendation-inner .product-details {
+        margin-top: 0;
     }
 }
