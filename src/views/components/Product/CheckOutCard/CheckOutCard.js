@@ -10,6 +10,7 @@ import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./CheckOutCard.css";
 import { Link } from "react-router-dom";
+import AddCartComponents from "@components/ProductCard/AddCartComponents";
 export const CheckOutCard = ({ product }) => {
     const currentState = useSelector((state) => state.states.currentState);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -160,13 +161,16 @@ export const CheckOutCard = ({ product }) => {
                                 </div>
                             </div>
                             <div className="button-cart-sell">
-                                <Button
+                                {/* <Button
                                     className="button1 button-text-button"
                                     clickHandler={cartClickHandler}
                                     isLoading={product?.loading}
                                 >
                                     Add to Cart
-                                </Button>
+                                </Button> */}
+
+     <AddCartComponents product={product} className=" button1 button-text-button"/>
+     
                             </div>
                             {/* <div className="button-cart-sell">
                             <Button
