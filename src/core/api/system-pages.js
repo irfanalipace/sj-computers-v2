@@ -5,10 +5,10 @@ export function getSystemPagesApi(pageName) {
     // return;
     return new Promise((resolve, reject) => {
         const body = {
-            key:pageName,
-          };
+            key: pageName,
+        };
 
-        ApiService.get(`/system-pages`, "",body)
+        ApiService.get(`/system-pages`, "", body)
             .then((response) => {
                 console.log(
                     "file: system-pages.js | getSystemPagesApi| response",
@@ -22,4 +22,3 @@ export function getSystemPagesApi(pageName) {
             });
     });
 }
-

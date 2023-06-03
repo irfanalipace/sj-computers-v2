@@ -16,10 +16,16 @@ export function setUserTracking() {
     }
 }
 
-const dateToCheck = "2023-05-29";
+const dateToCheck = "2023-06-03";
 
 const actionToPerform = () => {
-    window.localStorage.removeItem("cartDetails");
+    if (
+        window.localStorage.getItem("cart") == null ||
+        window.localStorage.getItem("cartDetails") == null
+    ) {
+        window.localStorage.removeItem("cart");
+        window.localStorage.removeItem("cartDetails");
+    }
     let userName = window.localStorage.getItem("user_name");
     if (userName) saveUserName(userName);
     window.localStorage.removeItem("user_name");
@@ -39,13 +45,12 @@ function checkLastVisitDate() {
             const cookie = cookies[i]?.trim();
             if (cookie?.startsWith(`visited=`)) {
                 const cookieValue = cookie?.substring("visited".length + 1);
-
                 let decodedDate = decodeURIComponent(cookieValue);
 
                 //  write all the conditions and opeartion to perform on conditions below
 
                 if (
-                    new Date(decodedDate).getTime() >=
+                    new Date(decodedDate).getTime() <=
                     new Date(dateToCheck).getTime()
                 ) {
                     actionToPerform();
@@ -56,7 +61,6 @@ function checkLastVisitDate() {
     } catch (error) {
         console.log(error);
     }
-    const cookies = document.cookie.split(";");
 }
 
 function getCurrentDate() {

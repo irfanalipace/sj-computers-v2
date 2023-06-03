@@ -22,7 +22,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     } = useSelector((state) => state.products);
 
     const prod = useSelector((state) => state.products);
-    console.log('@loader' , prod)
+    console.log("@loader", prod);
 
     const [mounted, setMounted] = useState(false);
 
