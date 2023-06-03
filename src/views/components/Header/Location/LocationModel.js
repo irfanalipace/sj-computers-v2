@@ -45,7 +45,7 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
     //     // Clear the timer when the component unmounts or when the user closes the modal
     //     return () => clearTimeout(timer);
     //   }, []);
-    //   console.log(showModal, 'modal')
+    //   console.print(showModal, 'modal')
 
     useEffect(() => {
         dispatch(fetchStates());
@@ -57,7 +57,7 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
 
     const clickHandler = async () => {
         // local state me store
-        // console.log(state, "state data");
+        // console.print(state, "state data");
         if (state?.id) {
             if (isAuthenticated) {
                 dispatch(updateState(state, handleClose));

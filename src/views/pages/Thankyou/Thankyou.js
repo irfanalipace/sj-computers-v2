@@ -24,7 +24,7 @@ export default function ThankYou() {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const location = useLocation();
     const order = location.state?.order;
-    console.log(location, "haris details");
+    console.print(location, "haris details");
     //   const handleButtonClick = () => {
     //     // Redirect to the specific path
     //     history.push("/specific-path");
@@ -40,16 +40,16 @@ export default function ThankYou() {
             setThankOrderDetails(order);
             let Order = order?.Order;
 
-            console.log(Order?.order?.order_item, "order");
+            console.print(Order?.order?.order_item, "order");
             setThankOrderItems(Order?.order?.order_item);
-            console.log(thankOrderItems, "order 3");
+            console.print(thankOrderItems, "order 3");
         }
     }, []);
 
     useEffect(() => {
-        //    console.log(thankOrderItems, "2nd useeffect")
-        //    console.log(thankOrderDetails, "2nd useeffect for order details")
-        console.log(isMobile, "isMobile");
+        //    console.print(thankOrderItems, "2nd useeffect")
+        //    console.print(thankOrderDetails, "2nd useeffect for order details")
+        console.print(isMobile, "isMobile");
     }, [thankOrderItems]);
 
     const handleWindowSizeChange = () => {

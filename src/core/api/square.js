@@ -7,14 +7,14 @@ export function sendTokenApi({ source_id, shipping_address }) {
             shipping_address,
         })
             .then((response) => {
-                console.log(
+                console.print(
                     "file: square.js | sendTokenApi| response",
                     response
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error square", e);
+                console.print("Console Log: : error square", e);
                 reject(e);
             });
     });

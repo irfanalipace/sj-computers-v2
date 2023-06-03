@@ -62,14 +62,14 @@ const cartSlice = createSlice({
         },
 
         CLEAR_CART: (state) => {
-            console.log("clearing cart");
+            console.print("clearing cart");
             state.cart = [];
             state.details = {
                 total_items: 0,
                 total: 0,
                 sub_total: 0,
             };
-            console.log("cart: ", state.cart);
+            console.print("cart: ", state.cart);
         },
         DELETE_ITEM: (state, action) => {
             let cartItem = { ...action.payload.cartItem };

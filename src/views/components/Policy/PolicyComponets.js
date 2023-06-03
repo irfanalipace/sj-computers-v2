@@ -53,12 +53,12 @@ const PolicyComponets = () => {
             try {
                 setIsLoading(true);
                 const responsePage = await getSystemPagesApi(pageName);
-                console.log(responsePage.data.value, "page Content 1");
+                console.print(responsePage.data.value, "page Content 1");
                 setPageContent(responsePage);
-                console.log(pageContent, "page Content 2");
+                console.print(pageContent, "page Content 2");
                 setPTagValue(responsePage?.data?.value);
                 setHtmlContent(responsePage?.data?.value);
-                console.log(pTagValue, "page Content 3");
+                console.print(pTagValue, "page Content 3");
                 setIsLoading(false);
             } catch (error) {
                 console.error("Error fetching page content:", error);

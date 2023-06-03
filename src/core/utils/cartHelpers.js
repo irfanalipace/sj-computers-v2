@@ -14,7 +14,7 @@ export const addItemToLocalCart = ({ cartItem, cartDetails }) => {
             ? (cartItems = JSON.stringify([...cartItems, cartItem]))
             : (cartItems = JSON.stringify([cartItem]));
         window.localStorage.setItem("cart", cartItems);
-        console.log("cartDetails: ", cartDetails);
+        console.print("cartDetails: ", cartDetails);
         if (cartDetails?.total) {
             window.localStorage.setItem(
                 "cartDetails",

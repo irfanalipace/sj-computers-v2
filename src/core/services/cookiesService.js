@@ -12,7 +12,7 @@ export function setUserTracking() {
         )};expires=${expirationDate.toUTCString()};path=/`;
         document.cookie = cookie;
     } catch (error) {
-        console.log(error);
+        console.print(error);
     }
 }
 
@@ -59,7 +59,7 @@ function checkLastVisitDate() {
         }
         return false;
     } catch (error) {
-        console.log(error);
+        console.print(error);
     }
 }
 

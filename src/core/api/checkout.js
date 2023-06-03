@@ -4,14 +4,14 @@ export function getShippingAddressApi() {
     return new Promise((resolve, reject) => {
         ApiService.get(`/get-shipping-address`)
             .then((response) => {
-                console.log(
+                console.print(
                     "file: checkout.js | getShippingAddressApi| response",
                     response
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error checkout", e);
+                console.print("Console Log: : error checkout", e);
                 reject(e);
             });
     });
@@ -40,14 +40,14 @@ export function setShippingAddressApi({
             permanent_address,
         })
             .then((response) => {
-                console.log(
+                console.print(
                     "file: checkout.js | setShippingAddressApi| response",
                     response
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error checkout", e);
+                console.print("Console Log: : error checkout", e);
                 reject(e);
             });
     });
@@ -59,14 +59,14 @@ export function placeOrderApi({ paymentMethod }) {
             payment_type: paymentMethod,
         })
             .then((response) => {
-                console.log(
+                console.print(
                     "file: checkout.js | placeOrderApi| response",
                     response
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error checkout", e);
+                console.print("Console Log: : error checkout", e);
                 reject(e);
             });
     });
@@ -78,14 +78,14 @@ export function applyShipment({ shipment_days }) {
             shipment_days,
         })
             .then((response) => {
-                console.log(
+                console.print(
                     "file: checkout.js | applyShipment| response",
                     response
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error checkout", e);
+                console.print("Console Log: : error checkout", e);
                 reject(e);
             });
     });

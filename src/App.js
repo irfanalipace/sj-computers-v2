@@ -1,5 +1,3 @@
-console.log("11 App.js");
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter, useLocation } from "react-router-dom";

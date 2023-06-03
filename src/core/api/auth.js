@@ -7,11 +7,14 @@ export function loginApi({ email, password }) {
             password,
         })
             .then((response) => {
-                console.log("file: auth.module.js | login| response", response);
+                console.print(
+                    "file: auth.module.js | login| response",
+                    response
+                );
                 resolve(response.data);
             })
             .catch((e) => {
-                console.log("Console Log: : error Login", e);
+                console.print("Console Log: : error Login", e);
                 reject(e);
             });
     });
@@ -26,14 +29,14 @@ export function registerApi({ name, email, password, confirmPassword }) {
             password_confirmation: confirmPassword,
         })
             .then((response) => {
-                console.log(
+                console.print(
                     "file: auth.module.js | register| response",
                     response
                 );
                 resolve(response.data);
             })
             .catch((e) => {
-                console.log("Console Log: : error", e);
+                console.print("Console Log: : error", e);
                 reject(e);
             });
     });
@@ -46,14 +49,14 @@ export function logoutApi() {
             // password,
         })
             .then((response) => {
-                console.log(
+                console.print(
                     "file: auth.module.js | logout| response",
                     response
                 );
                 resolve(response.data);
             })
             .catch((e) => {
-                console.log("Console Log: : error", e);
+                console.print("Console Log: : error", e);
                 reject(e);
             });
     });
@@ -66,14 +69,14 @@ export function verifyEmailApi(email) {
             // formData,
         })
             .then((response) => {
-                console.log(
+                console.print(
                     "file: auth.module.js | verifyEmailApi| response",
                     response
                 );
                 resolve(response.data);
             })
             .catch((e) => {
-                console.log("Console Log: : error", e);
+                console.print("Console Log: : error", e);
                 reject(e);
             });
     });
@@ -85,14 +88,14 @@ export function verifyOtpApi({ otp }) {
             otp_code: otp,
         })
             .then((response) => {
-                console.log(
+                console.print(
                     "file: auth.module.js | verifyOtpApi| response",
                     response
                 );
                 resolve(response.data);
             })
             .catch((e) => {
-                console.log("Console Log: : error", e);
+                console.print("Console Log: : error", e);
                 reject(e);
             });
     });
@@ -104,14 +107,14 @@ export function forgetPasswordApi({ email }) {
             email,
         })
             .then((response) => {
-                console.log(
+                console.print(
                     "file: auth.module.js | forgetPasswordApi| response",
                     response
                 );
                 resolve(response.data);
             })
             .catch((e) => {
-                console.log("Console Log: : error", e);
+                console.print("Console Log: : error", e);
                 reject(e);
             });
     });
@@ -132,14 +135,14 @@ export function resetPasswordApi({
             token: access_token,
         })
             .then((response) => {
-                console.log(
+                console.print(
                     "file: auth.module.js | resetPasswordApi| response",
                     response
                 );
                 resolve(response.data);
             })
             .catch((e) => {
-                console.log("Console Log: : error", e);
+                console.print("Console Log: : error", e);
                 reject(e);
             });
     });
@@ -150,14 +153,14 @@ export function updateProfileApi(formData) {
     return new Promise((resolve, reject) => {
         ApiService.post("update-profile", formData)
             .then((response) => {
-                console.log(
+                console.print(
                     "file: auth.module.js | updateProfileApi| response",
                     response
                 );
                 resolve(response.data);
             })
             .catch((e) => {
-                console.log("Console Log: : error", e);
+                console.print("Console Log: : error", e);
                 reject(e);
             });
         ApiService.setHeader("content-type", "application/json");
@@ -168,14 +171,14 @@ export function deleteProfilePicApi(data) {
     return new Promise((resolve, reject) => {
         ApiService.post("delete-profile-picture", data)
             .then((response) => {
-                console.log(
+                console.print(
                     "file: auth.module.js | deleteProfilePicApi| response",
                     response
                 );
                 resolve(response.data);
             })
             .catch((e) => {
-                console.log("Console Log: : error", e);
+                console.print("Console Log: : error", e);
                 reject(e);
             });
     });
@@ -185,14 +188,14 @@ export function updatePasswordApi(data) {
     return new Promise((resolve, reject) => {
         ApiService.post("change-password", data)
             .then((response) => {
-                console.log(
+                console.print(
                     "file: auth.module.js | updateProfileApi| response",
                     response
                 );
                 resolve(response.data);
             })
             .catch((e) => {
-                console.log("Console Log: : error", e);
+                console.print("Console Log: : error", e);
                 reject(e);
             });
     });

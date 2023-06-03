@@ -8,14 +8,14 @@ export function contactUsApi({ subject_name, email, message }) {
             message,
         })
             .then((response) => {
-                console.log(
+                console.print(
                     "file: states.js | contactUsApi| response",
                     response
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error contactUs", e);
+                console.print("Console Log: : error contactUs", e);
                 reject(e);
             });
     });

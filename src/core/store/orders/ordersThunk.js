@@ -29,7 +29,7 @@ export const getShippingDetails = () => {
                 payload: response.data,
             });
         } catch (error) {
-            console.log("Something went wrong in orders", error);
+            console.print("Something went wrong in orders", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -40,8 +40,8 @@ export const getOrderDetails = (page = 1) => {
             dispatch({ type: LOADING, payload: {} });
             let response = await getOrderDetailsApi(page);
             const { success_orders, cancel_orders } = response.data;
-            console.log(success_orders, "so before dispatch ");
-            console.log(cancel_orders, "co before dispatch ");
+            console.print(success_orders, "so before dispatch ");
+            console.print(cancel_orders, "co before dispatch ");
 
             dispatch({
                 type: SET_ORDER_DETAILS,
@@ -49,7 +49,7 @@ export const getOrderDetails = (page = 1) => {
             });
             // dispatch(setCancelOrders(cancelOrders.data));
         } catch (error) {
-            console.log("Something went wrong in orders", error);
+            console.print("Something went wrong in orders", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -66,7 +66,7 @@ export const setShippingDetails = (data, cb) => {
                 payload: data,
             });
         } catch (error) {
-            console.log("Something went wrong in orders", error);
+            console.print("Something went wrong in orders", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -82,7 +82,7 @@ export const placeOrder = (data, cb) => {
             if (typeof cb === "function") cb(response.data);
             dispatch({ type: ORDER_PLACED, payload: {} });
         } catch (error) {
-            console.log("Something went wrong in orders", error);
+            console.print("Something went wrong in orders", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -94,7 +94,7 @@ export const getEstimatedDelivery = () => {
             let response = await getEstimatedDaysApi();
             dispatch({ type: SET_ORDER_ESTIMATE, payload: response });
         } catch (error) {
-            console.log("Something went wrong in orders", error);
+            console.print("Something went wrong in orders", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };

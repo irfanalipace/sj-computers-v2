@@ -4,14 +4,14 @@ export function addToCartApi(data) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/add-to-cart`, data)
             .then((response) => {
-                console.log(
+                console.print(
                     "file: states.js | addToCartApi| response",
                     response
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error cart", e);
+                console.print("Console Log: : error cart", e);
                 reject(e);
             });
     });
@@ -21,14 +21,14 @@ export function addListToCartApi(cartItems) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/store-local-storage-items`, cartItems)
             .then((response) => {
-                console.log(
+                console.print(
                     "file: states.js | addListToCartApi| response",
                     response
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error cart", e);
+                console.print("Console Log: : error cart", e);
                 reject(e);
             });
     });
@@ -38,14 +38,14 @@ export function fetchCartApi() {
     return new Promise((resolve, reject) => {
         ApiService.get(`/get-items`)
             .then((response) => {
-                console.log(
+                console.print(
                     "file: states.js | fetchCartApi| response",
                     response
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error cart", e);
+                console.print("Console Log: : error cart", e);
                 reject(e);
             });
     });
@@ -57,14 +57,14 @@ export function deleteItemApi({ id }) {
             id,
         })
             .then((response) => {
-                console.log(
+                console.print(
                     "file: states.js | deleteItemApi| response",
                     response
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error cart", e);
+                console.print("Console Log: : error cart", e);
                 reject(e);
             });
     });
@@ -77,14 +77,14 @@ export function updateQuantityApi({ id, difference }) {
             qty: difference,
         })
             .then((response) => {
-                console.log(
+                console.print(
                     "file: states.js | updateQuantityApi| response",
                     response
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error cart", e);
+                console.print("Console Log: : error cart", e);
                 reject(e);
             });
     });
@@ -94,14 +94,14 @@ export function getDetailsApi() {
     return new Promise((resolve, reject) => {
         ApiService.get(`/get-details`)
             .then((response) => {
-                console.log(
+                console.print(
                     "file: states.js | getDetailsApi| response",
                     response
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error cart", e);
+                console.print("Console Log: : error cart", e);
                 reject(e);
             });
     });

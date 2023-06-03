@@ -72,7 +72,7 @@ const ApiService = {
                     resolve(res.data);
                 })
                 .catch((error) => {
-                    console.log("error status: ", error.response.status);
+                    console.print("error status: ", error.response.status);
                     if (error?.response?.status === 401) {
                         destroyToken();
                     }

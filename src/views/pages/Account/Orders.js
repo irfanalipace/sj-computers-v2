@@ -117,7 +117,7 @@ const OrderPage = () => {
     const successOrders = useSelector((state) => state.orders.successOrders);
     const orderDetails = useSelector((state) => state.orders.orderDetails);
 
-    // console.log(orderDetails.total, 'total')
+    // console.print(orderDetails.total, 'total')
 
     const handleDropdownChange = (value) => {
         setSelectedValue(value);
@@ -126,7 +126,7 @@ const OrderPage = () => {
     const dispatch = useDispatch();
 
     // useEffect(() => {
-    //     console.log(user, "user details");
+    //     console.print(user, "user details");
     //     setName(user.name);
     // }, [user]);
 
@@ -138,7 +138,7 @@ const OrderPage = () => {
     useEffect(() => {
         dispatch(getOrderDetails());
         const orderlist = OrderListhApi();
-        console.log(orderlist, "orderList");
+        console.print(orderlist, "orderList");
     }, [dispatch]);
 
     useEffect(() => {
@@ -151,10 +151,10 @@ const OrderPage = () => {
     };
     const handleSearch = async () => {
         setActiveTab(2);
-        // console.log(orderSearch, "input")
+        // console.print(orderSearch, "input")
         setLocalLoading(true);
         const responseSearch = await OrderSearchApi(orderSearch);
-        console.log(responseSearch, "response search");
+        console.print(responseSearch, "response search");
         setOrderSearchData(responseSearch);
         setLocalLoading(false);
         setOrderSearch("");

@@ -44,7 +44,7 @@ const ShippingMehtod = () => {
                     })
                 );
             } catch (error) {
-                console.log("error: ", error);
+                console.print("error: ", error);
             }
             setIsLoading(false);
         }
