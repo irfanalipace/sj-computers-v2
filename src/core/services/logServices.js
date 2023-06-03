@@ -1,5 +1,5 @@
 export const initLogService = () => {
-    // Replace the global console object to disable logging on production
+    // Replace the global console object
     if (process.env.NODE_ENV === "development") {
         // Create a custom console object
         const print = function (...args) {
