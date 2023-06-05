@@ -37,7 +37,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </noscript>
     <script>
         let times = window.localStorage.getItem('cacheCleared')
-        if(!times){
+        if(!times || times === 1){
                     window.location.reload(true);
                     window.localStorage.setItem('cacheCleared', times +1)
         }  

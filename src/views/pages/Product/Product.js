@@ -19,6 +19,14 @@ export default function Product() {
     const { productId } = useParams();
 
     useEffect(() => {
+        let times = window.localStorage.getItem("cacheCleared");
+        if (!times || times == 1) {
+            window.location.reload(true);
+            window.localStorage.setItem("cacheCleared", parseInt(times) + 1);
+        }
+    }, []);
+
+    useEffect(() => {
         getProductDetails();
     }, [productId, products]);
 
@@ -41,7 +49,7 @@ export default function Product() {
         }
     };
 
-    console.log('11 product images: ', productImages);
+    console.log("11 product images: ", productImages);
 
     const ProductComponent = () => {
         return (
