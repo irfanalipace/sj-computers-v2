@@ -162,6 +162,11 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                                 ))}
                             </Dropdown.Menu>
                         </Dropdown>
+                        {errorMessage && (
+            <p style={{ color: "red", margin: "0",
+            marginLeft: '3px',
+            marginTop: '-6px' }} className="error-message-location-model2">{errorMessage}</p>
+          )}
                     </>
                 ) : (
                     <>
@@ -204,9 +209,16 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                                     >
                                         <h6>{state.name}</h6>
                                     </Dropdown.Item>
+                                    
                                 ))}
                             </Dropdown.Menu>
+                           
                         </Dropdown>
+                        {errorMessage && (
+            <p style={{ color: "red", margin: "0",
+            marginLeft: '3px',
+            marginTop: '-6px' }} className="error-message-location-model">{errorMessage}</p>
+          )}
                         <Button
                             onClick={clickHandler}
                             className="done-button my-3 px-0 mx-0"
@@ -227,12 +239,9 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                     // </div>
                 )}
             </Modal.Body>
-            {errorMessage && (
-            <p style={{ color: "red", margin: "0",
-            marginLeft: '19px',
-            marginTop: '-6px' }} className="error-message-location-model">{errorMessage}</p>
-          )}
+          
             {isAuthenticated && (
+                
                 <Modal.Footer>
                     <Button onClick={clickHandler} className="done-button">
                         {isLoading ? <Loader /> : "Done"}

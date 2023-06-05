@@ -217,6 +217,7 @@
     background: #eaeded;
 }
 .error-message-location-model {
+    padding-top: 12px;
     font-weight: 400;
     font-size: 12px;
     line-height: 12px;
@@ -226,5 +227,10 @@
     /* font-family: "Inter"; */
     /* font-style: normal; */
     /* font-weight: 500; */
-    padding-bottom: 3px;
+    /* padding-bottom: 3px; */
+}.error-message-location-model2{
+    padding-top: 12px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
 }
