@@ -31,6 +31,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     let filterObject = {
         page: 1,
         per_page: 12,
+        name: "",
         category_id: category?.id,
     };
 
@@ -54,7 +55,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
         filterObject = {
             ...filterObject,
             page: currentPage,
-            name: searchString,
+            name: "",
             filter: filtersArray,
         };
         dispatch(filterProducts(filterObject, true));
@@ -65,7 +66,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
             filterObject = {
                 ...filterObject,
                 page: 1,
-                name: searchString,
+                name: "",
                 category_id: category?.id,
                 filter: filtersArray,
             };
@@ -80,7 +81,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
         filterObject = {
             ...filterObject,
             page: 1,
-            name: searchString,
+            name: "",
             category_id: category?.id,
             filter: filtersArray,
         };
@@ -122,7 +123,15 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                     {isLoading || !category ? (
                         <h3 className="heading">Fetching Products</h3>
                     ) : (
-                        <h3 className="heading">No Products Found</h3>
+                        <div className="d-flex justify-content-space-between align-items-center heading">
+                            <h3>No Products Found</h3>
+                            <button
+                                className="d-sm-none d-block bg-transparent border-0"
+                                onClick={toggleFilter}
+                            >
+                                <FontAwesomeIcon icon={faFilter} />
+                            </button>
+                        </div>
                     )}
                 </>
             )}
