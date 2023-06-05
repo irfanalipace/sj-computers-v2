@@ -115,22 +115,25 @@ const ProductDetails = ({ product }) => {
                         </Link> */}
                     </div>
                    <div className="details-dev">
-                   <span className="size-text">
+                  
                         <span className="size-text-details">
                             Items Available
                         </span>
+                        </div>
                         {/* <Link className="product-info border-0">
                             “lg 24 inch monitor”
                         </Link> */}
-                        <button
+                      <div className="items-list-data-mobile-stayle">
+                      <button
                             className="product-info border-0"
                             style={{ backgroundColor: "white" }}
                         >
                             {product?.quantity}
                             {" items"}
                         </button>
-                    </span>
-                   </div>
+                   
+                      </div>
+                 
                 </div>
             </div>
 

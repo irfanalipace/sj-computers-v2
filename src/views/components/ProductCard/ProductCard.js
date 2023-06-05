@@ -131,21 +131,28 @@ const Product = ({ product, inGrid }) => {
     );
 
     return (
+    
         <div className={` product   ${inGrid && "product-grid"}`}>
-             <Link to={`/product/${product?.asin}`}>
+           <Link to={`/products/${product?.asin}`}>
             <div className={` ${inGrid && "product-image-grid"} product-image`}>
                 {/* {inGrid && (
                     <div className="product-badge">
                         <div className="badge-text">Best Seller</div>
                     </div>
                 )} */}
+                
                 <div className="image-wrapper">
+            
                     <img src={product.image} alt={product.brand} />
+                 
                 </div>
+             
             </div>
             </Link>
             <ProductDetails />
+            
         </div>
+       
     );
 };
 
