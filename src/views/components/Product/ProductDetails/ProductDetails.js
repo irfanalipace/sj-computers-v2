@@ -114,7 +114,8 @@ const ProductDetails = ({ product }) => {
                             11 answered questions
                         </Link> */}
                     </div>
-                    <span className="size-text">
+                   <div className="details-dev">
+                   <span className="size-text">
                         <span className="size-text-details">
                             Items Available
                         </span>
@@ -129,6 +130,7 @@ const ProductDetails = ({ product }) => {
                             {" items"}
                         </button>
                     </span>
+                   </div>
                 </div>
             </div>
 

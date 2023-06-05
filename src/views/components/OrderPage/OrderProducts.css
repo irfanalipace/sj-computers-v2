@@ -49,8 +49,6 @@
     color: #000000;
 }
 
-
-
 .track-package-button {
     margin-right: 0.5rem;
     height: 2.25rem;
@@ -160,35 +158,44 @@
 .order-table td {
     border: none;
 }
-@media screen and (max-width:600px) {
+
+.form-control:hover {
+    box-shadow: none !important;
+}
+
+@media screen and (max-width: 600px) {
     .product-info {
         /* max-height: 400px; */
         overflow-y: auto;
-    }.order-table thead th {
-       
-        font-size: 9px;
-    }.order-table tbody td {
-   
-        font-size: 9px;
-    }.order-status-label {
-       
-        font-size: 12px;
-      
-    }.search-product-order-tables{
-        width:100%;
-        margin-left: 22px;
-
-        
-    }.order-table .product-image {
-        max-height: 120px;
-    
-}.product-description {
-  
-    font-size: 11px;
-  
-}.toggle-button-table-data{
-    width: 69px;
-}
-     
-      
     }
+    .order-table thead th {
+        font-size: 9px;
+    }
+    .order-table tbody td {
+        font-size: 9px;
+    }
+    .order-status-label {
+        font-size: 12px;
+    }
+    .search-product-order-tables {
+        width: 100%;
+        margin-left: 22px;
+    }
+
+    .expanded-content ul {
+        padding-left: 0;
+    }
+    .order-table .product-image {
+        max-height: 175px;
+        margin-left: 0 !important;
+        padding: 10px;
+        max-width: 100px;
+        border: none;
+    }
+    .product-description {
+        font-size: 11px;
+    }
+    .toggle-button-table-data {
+        width: 69px;
+    }
+}

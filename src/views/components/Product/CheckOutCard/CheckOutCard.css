@@ -61,8 +61,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    width: 318px;
+max-width: 100%;
+ width: 180px;
     height: 54px;
 }
 .button2 {
@@ -202,7 +202,7 @@
     display: none;
     position: absolute;
     top: 0;
-    left: -40px;
+    right: 0;
     background-color: #f1f1f1;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -227,15 +227,28 @@
 
 @media screen and (min-width: 767px) and (max-width: 1150px) {
     .button1 {
-        width: 318px !important;
+        width: 168px;
         height: 33px !important;
     }
 }
+@media screen and (max-width: 768px) {
 
+    .select-location-btn {
+       
+        font-size: 13px;
+       
+      
+    }
+}
 @media screen and (max-width: 766px) {
     .button1 {
-        width: 318px !important;
+      
         height: 30px !important;
+    }.select-location-btn {
+       
+        font-size: 13px;
+       
+      
     }
 }
 

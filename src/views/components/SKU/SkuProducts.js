@@ -129,6 +129,9 @@ export const SkuProducts = () => {
                                             <TableCell align="right">
                                                 Quantity
                                             </TableCell>
+                                            <TableCell align="right">
+                                                Price
+                                            </TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -160,6 +163,9 @@ export const SkuProducts = () => {
                                                 </TableCell>
                                                 <TableCell align="right">
                                                     {row.quantity}
+                                                </TableCell>
+                                                <TableCell align="right">
+                                                    ${row.price}
                                                 </TableCell>
                                             </TableRow>
                                         ))}
