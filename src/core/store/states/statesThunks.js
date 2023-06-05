@@ -14,7 +14,7 @@ export const fetchStates = () => {
             const response = await statesApi();
             dispatch({ type: FETCH_STATES, payload: response.data });
         } catch (error) {
-            console.log("Something went wrong in states", error);
+            console.print("Something went wrong in states", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -30,7 +30,7 @@ export const currentState = () => {
                 payload: response.data?.state,
             });
         } catch (error) {
-            console.log("Something went wrong in states", error);
+            console.print("Something went wrong in states", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -49,7 +49,7 @@ export const updateState = (data, cb) => {
             window.localStorage.removeItem("tempState");
             toast.success("State Updated Successfully");
         } catch (error) {
-            console.log("Something went wrong in states", error);
+            console.print("Something went wrong in states", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };

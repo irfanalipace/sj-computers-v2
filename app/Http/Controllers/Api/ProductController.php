@@ -6,6 +6,7 @@ use App\Http\Requests\Product\ProductDetailRequest;
 use App\Http\Requests\Product\SearchProductRequest;
 use App\Http\Requests\ProductDetailAsinRequest;
 use App\Models\CategoryProduct;
+use App\Models\IpAddress;
 use App\Models\Product;
 use App\Models\ProductInfo;
 use Illuminate\Http\Request;
@@ -36,9 +37,19 @@ class ProductController extends BaseController
             })
             ->with('brand')
             ->paginate($perPageRecord);
+
+        $this->saveSearch($request->ip(), $request->name);
         return $this->sendResponse($data);
     }
 
+    public function saveSearch($ip,$search)
+    {
+       IpAddress::create(
+            [
+                'ip' => $ip,
+                'search' => $search
+            ]);
+    }
 
     public function getProductFilterList(){
         $data =  [];

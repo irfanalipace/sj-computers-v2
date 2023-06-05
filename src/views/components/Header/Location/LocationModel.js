@@ -19,7 +19,7 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
     const [showModal, setShowModal] = useState(isOpen);
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState("");
 
     // useEffect(() => {
     //     setShowModal(true);
@@ -46,14 +46,12 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
     //     // Clear the timer when the component unmounts or when the user closes the modal
     //     return () => clearTimeout(timer);
     //   }, []);
-    //   console.log(showModal, 'modal')
+    //   console.print(showModal, 'modal')
 
     useEffect(() => {
-        if(state?.id){
-            setErrorMessage('');
-        }else
-        dispatch(fetchStates());
-
+        if (state?.id) {
+            setErrorMessage("");
+        } else dispatch(fetchStates());
     }, [state]);
 
     const handleZipCodeChange = (e) => {
@@ -63,11 +61,10 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
     const clickHandler = async () => {
         // local state me store
         // console.log(state, "state data");
-       
+
         if (!state?.id) {
             setErrorMessage("Please Select a State.");
-           
-          } 
+        }
         if (state?.id) {
             if (isAuthenticated) {
                 dispatch(updateState(state, handleClose));
@@ -78,7 +75,7 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                 // saveUserState(state);
                 handleClose();
             }
-        }  
+        }
     };
 
     const findZipCode = () => {
@@ -90,8 +87,7 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
             )[0]
         );
     };
-  
-    
+
     return (
         <Modal
             show={showModal}
@@ -163,10 +159,18 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                             </Dropdown.Menu>
                         </Dropdown>
                         {errorMessage && (
-            <p style={{ color: "red", margin: "0",
-            marginLeft: '3px',
-            marginTop: '-6px' }} className="error-message-location-model2">{errorMessage}</p>
-          )}
+                            <p
+                                style={{
+                                    color: "red",
+                                    margin: "0",
+                                    marginLeft: "3px",
+                                    marginTop: "-6px",
+                                }}
+                                className="error-message-location-model2"
+                            >
+                                {errorMessage}
+                            </p>
+                        )}
                     </>
                 ) : (
                     <>
@@ -209,23 +213,29 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                                     >
                                         <h6>{state.name}</h6>
                                     </Dropdown.Item>
-                                    
                                 ))}
                             </Dropdown.Menu>
-                           
                         </Dropdown>
                         {errorMessage && (
-            <p style={{ color: "red", margin: "0",
-            marginLeft: '3px',
-            marginTop: '-6px' }} className="error-message-location-model">{errorMessage}</p>
-          )}
+                            <p
+                                style={{
+                                    color: "red",
+                                    margin: "0",
+                                    marginLeft: "3px",
+                                    marginTop: "-6px",
+                                }}
+                                className="error-message-location-model"
+                            >
+                                {errorMessage}
+                            </p>
+                        )}
                         <Button
                             onClick={clickHandler}
                             className="done-button my-3 px-0 mx-0"
                         >
                             {isLoading ? <Loader /> : "Done"}
                         </Button>
-                       
+
                         <div className="hrozantel-hr-location-model">
                             <h5 className="h5-model-box-loction">or</h5>
                         </div>
@@ -239,14 +249,12 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
                     // </div>
                 )}
             </Modal.Body>
-          
+
             {isAuthenticated && (
-                
                 <Modal.Footer>
                     <Button onClick={clickHandler} className="done-button">
                         {isLoading ? <Loader /> : "Done"}
                     </Button>
-                   
                 </Modal.Footer>
             )}
         </Modal>

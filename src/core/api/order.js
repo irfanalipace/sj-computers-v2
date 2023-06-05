@@ -10,14 +10,14 @@ export function getOrderDetailsApi(page) {
 
         ApiService.get(`/order-list`, "", myParams)
             .then((response) => {
-                console.log(
+                console.print(
                     "file: order.js | getOrderDetailsApi| response",
                     response.data
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error OrderDetail", e);
+                console.print("Console Log: : error OrderDetail", e);
                 reject(e);
             });
     });
@@ -30,14 +30,14 @@ export function OrderSearchApi(invoiceId) {
 
         ApiService.get(`/search-order`, "", myParams)
             .then((response) => {
-                console.log(
+                console.print(
                     "file: order.js | OrderSearchApi| response",
                     response.data
                 );
                 resolve(response.data);
             })
             .catch((e) => {
-                console.log("Console Log: : error order search", e);
+                console.print("Console Log: : error order search", e);
                 reject(e);
             });
     });
@@ -53,14 +53,14 @@ export function OrderListhApi() {
 
         ApiService.get(`/order-list`, "", myParams)
             .then((response) => {
-                console.log(
+                console.print(
                     "file: order.js | order-list| response",
                     response.data
                 );
                 resolve(response.data);
             })
             .catch((e) => {
-                console.log("Console Log: : error order list", e);
+                console.print("Console Log: : error order list", e);
                 reject(e);
             });
     });
@@ -70,14 +70,14 @@ export function getEstimatedDaysApi() {
     return new Promise((resolve, reject) => {
         ApiService.get("/estimated-days")
             .then((response) => {
-                console.log(
+                console.print(
                     "file: order.js | getEstimatedDays| response",
                     response.data
                 );
                 resolve(response.data);
             })
             .catch((e) => {
-                console.log("Console Log: : error order list", e);
+                console.print("Console Log: : error order list", e);
                 reject(e);
             });
     });

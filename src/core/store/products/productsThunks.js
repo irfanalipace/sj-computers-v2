@@ -25,7 +25,7 @@ export const fetchProducts = (page = 1, loadMore = false, per_page = 12) => {
                 payload: response?.data?.data,
             });
         } catch (error) {
-            console.log("Something went wrong in products", error);
+            console.print("Something went wrong in products", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -45,7 +45,7 @@ export const searchProducts = (name = "", page = 1, per_page = 12) => {
                 },
             });
         } catch (error) {
-            console.log("Something went wrong in products", error);
+            console.print("Something went wrong in products", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -72,7 +72,7 @@ export const filterProducts = (filter, loadMore = false) => {
                 dispatch({ type: API_ERROR, payload: {} });
             }
         } catch (error) {
-            console.log("Something went wrong in products", error);
+            console.print("Something went wrong in products", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };

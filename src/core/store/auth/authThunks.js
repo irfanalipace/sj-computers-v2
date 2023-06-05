@@ -51,7 +51,7 @@ export const login = (credentials) => {
         try {
             dispatch({ type: LOADING, payload: {} });
             const response = await loginApi(credentials);
-            console.log("response: ", response);
+            console.print("response: ", response);
             let token = response.access_token;
             let name = response.user;
             let profile_pic = response.profile_pic;
@@ -66,7 +66,7 @@ export const login = (credentials) => {
                 payload: response,
             });
         } catch (error) {
-            console.log("Something went wrong in login", error);
+            console.print("Something went wrong in login", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -80,7 +80,7 @@ export const register = (credentials, cb) => {
             dispatch({ type: REGISTER, payload: credentials });
             if (typeof cb === "function") cb();
         } catch (error) {
-            console.log("Something went wrong in register", error);
+            console.print("Something went wrong in register", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -99,7 +99,7 @@ export const logout = () => {
             toast.success("Logged out");
             ApiService.setHeader("Authorization", "");
         } catch (error) {
-            console.log("Something went wrong in logout", error);
+            console.print("Something went wrong in logout", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -114,7 +114,7 @@ export const verifyEmail = (email, cb) => {
             dispatch({ type: VERIFY_EMAIL, payload: email });
             if (typeof cb === "function") cb();
         } catch (error) {
-            console.log("Something went wrong in login", error);
+            console.print("Something went wrong in login", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -131,7 +131,7 @@ export const verifyOtp = (credentials) => {
             destroyTempKeys(); // destroy user password and temporary token after login success
             saveToken(temp_token); // stores temporary token in right key to be used later for calling protected apis
         } catch (error) {
-            console.log("Something went wrong in login", error);
+            console.print("Something went wrong in login", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -146,7 +146,7 @@ export const resetPassword = (credentials, cb) => {
             toast.success("Password Changed Successfully");
             if (typeof cb === "function") cb();
         } catch (error) {
-            console.log("Something went wrong in login", error);
+            console.print("Something went wrong in login", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -160,7 +160,7 @@ export const forgetPassword = (email, cb) => {
             dispatch({ type: CLEAR_LOADING, payload: {} });
             if (typeof cb === "function") cb();
         } catch (error) {
-            console.log("Something went wrong in forgetPasswordApi", error);
+            console.print("Something went wrong in forgetPasswordApi", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -183,7 +183,7 @@ export const updateProfile = (formData) => {
             saveUser(response);
             toast.success("Profile Updated Successfully");
         } catch (error) {
-            console.log("Something went wrong in updateProfile", error);
+            console.print("Something went wrong in updateProfile", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -199,7 +199,7 @@ export const updatePassword = (data) => {
             dispatch({ type: CLEAR_LOADING, payload: {} });
             dispatch({ type: CLEAR_API_ERRORS, payload: {} });
         } catch (error) {
-            console.log("Something went wrong in updatePassword", error);
+            console.print("Something went wrong in updatePassword", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -215,7 +215,7 @@ export const deleteProfilePic = (data, cb) => {
             if (typeof cb === "function") cb();
             toast.success("Profile Picture removed");
         } catch (error) {
-            console.log("Something went wrong in updateProfile", error);
+            console.print("Something went wrong in updateProfile", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };

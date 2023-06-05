@@ -1,25 +1,24 @@
 import ApiService from "@services/apiService";
 
 export function getSystemPagesApi(pageName) {
-    console.log(pageName, "pageName");
+    console.print(pageName, "pageName");
     // return;
     return new Promise((resolve, reject) => {
         const body = {
-            key:pageName,
-          };
+            key: pageName,
+        };
 
-        ApiService.get(`/system-pages`, "",body)
+        ApiService.get(`/system-pages`, "", body)
             .then((response) => {
-                console.log(
+                console.print(
                     "file: system-pages.js | getSystemPagesApi| response",
                     response.data
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error system-pages", e);
+                console.print("Console Log: : error system-pages", e);
                 reject(e);
             });
     });
 }
-

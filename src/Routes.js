@@ -13,6 +13,7 @@ const ResetPassword = React.lazy(() =>
 );
 const Emailsent = React.lazy(() => import("@pages/Auth/EmailSent"));
 const Product = React.lazy(() => import("@pages/Product/Product"));
+const ProductList = React.lazy(() => import("@pages/Product/ProductsBySearch"));
 const Category = React.lazy(() => import("@pages/Category/Category"));
 const Account = React.lazy(() => import("@pages/Account/Account"));
 const Profile = React.lazy(() => import("@pages/Account/Profile"));
@@ -89,10 +90,18 @@ export const Router = () => {
             ),
         },
         {
-            path: "/product/:productId",
+            path: "/products/:productId",
             element: (
                 <Suspense fallback={<Loader />}>
                     <Product />
+                </Suspense>
+            ),
+        },
+        {
+            path: "/products/search",
+            element: (
+                <Suspense fallback={<Loader />}>
+                    <ProductList />
                 </Suspense>
             ),
         },
@@ -289,7 +298,7 @@ export function ProtectedRoute({ children }) {
     if (!isAuthenticated) {
         const location = useLocation();
         const redirectURL = location.pathname;
-        console.log("auth: ", redirectURL);
+        console.print("auth: ", redirectURL);
 
         window.localStorage.setItem("redirectURL", redirectURL);
     }

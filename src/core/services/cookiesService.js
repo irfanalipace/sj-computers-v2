@@ -12,14 +12,22 @@ export function setUserTracking() {
         )};expires=${expirationDate.toUTCString()};path=/`;
         document.cookie = cookie;
     } catch (error) {
-        console.log(error);
+        console.print(error);
     }
 }
 
-const dateToCheck = "2023-05-29";
+const dateToCheck = "2023-06-06";
 
 const actionToPerform = () => {
-    window.localStorage.removeItem("cartDetails");
+    if (
+        window.localStorage.getItem("cart") == null ||
+        !window.localStorage.getItem("cart")?.length ||
+        !window.localStorage.getItem("cartDetails")?.sub_total ||
+        window.localStorage.getItem("cartDetails") == null
+    ) {
+        window.localStorage.removeItem("cart");
+        window.localStorage.removeItem("cartDetails");
+    }
     let userName = window.localStorage.getItem("user_name");
     if (userName) saveUserName(userName);
     window.localStorage.removeItem("user_name");
@@ -39,13 +47,12 @@ function checkLastVisitDate() {
             const cookie = cookies[i]?.trim();
             if (cookie?.startsWith(`visited=`)) {
                 const cookieValue = cookie?.substring("visited".length + 1);
-
                 let decodedDate = decodeURIComponent(cookieValue);
 
                 //  write all the conditions and opeartion to perform on conditions below
 
                 if (
-                    new Date(decodedDate).getTime() >=
+                    new Date(decodedDate).getTime() <=
                     new Date(dateToCheck).getTime()
                 ) {
                     actionToPerform();
@@ -54,9 +61,8 @@ function checkLastVisitDate() {
         }
         return false;
     } catch (error) {
-        console.log(error);
+        console.print(error);
     }
-    const cookies = document.cookie.split(";");
 }
 
 function getCurrentDate() {

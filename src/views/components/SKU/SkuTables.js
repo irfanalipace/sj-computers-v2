@@ -35,7 +35,7 @@ export const SkuTables = () => {
             })
             .catch((e) => {
                 setLoading(false);
-                console.log(search);
+                console.print(search);
             });
     };
 

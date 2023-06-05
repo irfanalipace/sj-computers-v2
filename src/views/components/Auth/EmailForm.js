@@ -35,10 +35,10 @@ export default function EmailForm({ onFormSubmit, form }) {
     }, [apiError]);
 
     useEffect(() => {
-        console.log("running s");
+        console.print("running s");
         setMounted(true);
         return () => {
-            console.log("running e");
+            console.print("running e");
             setMounted(false);
             dispatch(CLEAR_API_ERRORS());
         };

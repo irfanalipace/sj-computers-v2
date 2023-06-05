@@ -22,7 +22,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     } = useSelector((state) => state.products);
 
     const prod = useSelector((state) => state.products);
-    console.log('@loader' , prod)
+    console.print("@loader", prod);
 
     const [mounted, setMounted] = useState(false);
 
@@ -35,7 +35,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     };
 
     const init = () => {
-        dispatch(SET_SEARCH_STRING(""));
+        // dispatch(SET_SEARCH_STRING(""));
         dispatch(SET_SELECTED_CATEGORY(null));
         dispatch(CLEAR_ALL_PRODUCTS());
         // dispatch(filterProducts(filterObject));
@@ -45,7 +45,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     useEffect(() => {
         init();
         return () => {
-            dispatch(SET_SEARCH_STRING(""));
+            // dispatch(SET_SEARCH_STRING(""));
             dispatch(CLEAR_ALL_PRODUCTS());
         };
     }, []);
@@ -73,7 +73,8 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                 dispatch(filterProducts(filterObject));
             }
         }
-    }, [searchString, filtersArray]);
+        // }, [searchString, filtersArray]);
+    }, [filtersArray]);
 
     useEffect(() => {
         filterObject = {

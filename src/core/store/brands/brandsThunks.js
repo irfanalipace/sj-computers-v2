@@ -8,7 +8,7 @@ export const fetchBrands = () => {
             const response = await brandsApi();
             dispatch({ type: FETCH_BRANDS, payload: response.data });
         } catch (error) {
-            console.log("Something went wrong in brands", error);
+            console.print("Something went wrong in brands", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
