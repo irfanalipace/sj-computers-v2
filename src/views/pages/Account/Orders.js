@@ -23,71 +23,8 @@ import "./Account.css";
 import { Select } from "@mantine/core";
 import { Stack } from "react-bootstrap";
 
-const dummyDataForOrders = [
-    {
-        orderPlacedDate: "April 17,2024",
-        TotalAmount: "$150",
-        orderID: "123456-878901234",
-        orderStatus: "Arriving",
-        earlyDeliveryDate: "April 20",
-        lateDeliveryDate: "May 8",
-        productImageUrl:
-            "https://images.philips.com/is/image/PhilipsConsumer/223V7QSB_00-RTP-global-001?$jpglarge$&wid=960",
-        productDescription:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the .",
-    },
-    {
-        orderPlacedDate: "April 17,2024",
-        TotalAmount: "$150",
-        orderID: "123456-878901234",
-        orderStatus: "Arriving",
-        earlyDeliveryDate: "April 20",
-        lateDeliveryDate: "May 8",
-        productImageUrl:
-            "https://images.philips.com/is/image/PhilipsConsumer/223V7QSB_00-RTP-global-001?$jpglarge$&wid=960",
-        productDescription:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-];
-const dummyDataForCancelledOrders = [
-    // {
-    //     orderPlacedDate: "April 17,2024",
-    //     TotalAmount: "$150",
-    //     orderID: "123456-878901234",
-    //     orderStatus: "Arriving",
-    //     earlyDeliveryDate: "April 20",
-    //     lateDeliveryDate: "May 8",
-    //     productImageUrl:
-    //         "https://images.philips.com/is/image/PhilipsConsumer/223V7QSB_00-RTP-global-001?$jpglarge$&wid=960",
-    //     productDescription:
-    //         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the .",
-    // },
-];
-const searchOrderArray = [
-    {
-        orderPlacedDate: "April 17,2024",
-        TotalAmount: "$150",
-        orderID: "123456-878901234",
-        orderStatus: "Arriving",
-        earlyDeliveryDate: "April 20",
-        lateDeliveryDate: "May 8",
-        productImageUrl:
-            "https://images.philips.com/is/image/PhilipsConsumer/223V7QSB_00-RTP-global-001?$jpglarge$&wid=960",
-        productDescription:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the .",
-    },
-];
 
-const dummyInvoice = {
-    productName: "Product Name",
-    price: "$59.5",
-    shipping: "--",
-    beforeTax: "--",
-    estTax: "--",
-    orderTotal: "$59.5",
-    description:
-        " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s",
-};
+
 
 const CustomTabs = styled(Tabs)({
     "& .MuiTabs-indicator": {
@@ -322,13 +259,10 @@ const OrderPage = () => {
                                         {}{" "}
                                         {activeTab === 0 ? (
                                             <>
-                                                {!orderDetails?.success_orders
-                                                    ?.total ? (
-                                                    <LoaderComponent />
-                                                ) : (
-                                                    `${orderDetails?.success_orders?.total} orders`
-                                                )}
-                                                {/* { } */}
+
+
+                                              {orderDetails?.success_orders?.data.length >= 0 ?  `${orderDetails?.success_orders?.data.length} orders` :    <LoaderComponent />}
+
                                             </>
                                         ) : (
                                             `${orderDetails?.cancel_orders?.total} cancelled order`
