@@ -14,14 +14,14 @@ import "./OrderProducts.css";
 
 function OrderTable({ deliveryDate, orderDetails, onToggleExpanded }) {
     const [expandedOrders, setExpandedOrders] = useState([]);
-    // console.log(orderDetails, 'order details 222');
+    // console.print(orderDetails, 'order details 222');
     function formatDate(dateString) {
         const options = { year: "numeric", month: "long", day: "numeric" };
         const date = new Date(dateString);
         return date.toLocaleDateString(undefined, options);
     }
     const toggleExpandedcopy = (orderId) => {
-        console.log(orderId, "order id");
+        console.print(orderId, "order id");
         // return;
         if (expandedOrders.includes(orderId)) {
             setExpandedOrders((prevState) =>
@@ -220,8 +220,8 @@ function OrderProducts({ data, totalItems, sendToPage }) {
         if (currentPage < pageCount) {
             // setCurrentPage((prevPage) => prevPage + 1);
             setCurrentPage(currentPage + 1);
-            console.log(currentPage, "current after next");
-            console.log(currentPage + 1, "+1 after next");
+            console.print(currentPage, "current after next");
+            console.print(currentPage + 1, "+1 after next");
             sendToPage(currentPage + 1);
         }
     };
@@ -241,7 +241,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
     }
 
     const toggleExpanded = (orderId) => {
-        console.log(orderId, "order id");
+        console.print(orderId, "order id");
         // return;
         if (expandedOrders.includes(orderId)) {
             setExpandedOrders((prevState) =>
@@ -358,7 +358,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                     <Text
                     className="order-details-view text-green-500 cursor-pointer"
                     onClick={() => {
-                        console.log("I am clickable");
+                        console.print("I am clickable");
                     }}
                     >
                 John Nick
@@ -370,7 +370,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                         <Text
                         className="order-details-view text-green-500 cursor-pointer"
                         onClick={() => {
-                            console.log("I am clickable");
+                            console.print("I am clickable");
                         }}
                         >
                         View Order Details
@@ -482,7 +482,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                     {/* <Text
                 className="cancel-order text-blue-400 cursor-pointer"
                 onClick={() => {
-                console.log("I am clickable");
+                console.print("I am clickable");
                 }}
             >
                 Cancel my order

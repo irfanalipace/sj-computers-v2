@@ -6,11 +6,11 @@ export function getInventory(search) {
             search,
         })
             .then((response) => {
-                console.log("resp", response);
+                console.print("resp", response);
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error inventory", e);
+                console.print("Console Log: : error inventory", e);
                 reject(e);
             });
     });
@@ -24,11 +24,11 @@ export function inventoryAction({ action, quantity, search }) {
             search,
         })
             .then((response) => {
-                console.log("resp", response);
+                console.print("resp", response);
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error inventory", e);
+                console.print("Console Log: : error inventory", e);
                 reject(e);
             });
     });
@@ -38,11 +38,11 @@ export function downloadProductsApi() {
     return new Promise((resolve, reject) => {
         ApiService.get(`/download-inventory`)
             .then((response) => {
-                console.log("resp", response);
+                console.print("resp", response);
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error inventory", e);
+                console.print("Console Log: : error inventory", e);
                 reject(e);
             });
     });

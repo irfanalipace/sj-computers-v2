@@ -19,9 +19,9 @@ const buttonStyles = {
 
 const OrderInvoiceCard = ({ data, activeTab }) => {
     const { success_orders } = data;
-    console.log(data, "invoic data");
-    console.log(success_orders, "so for invoice");
-    console.log(activeTab, "avtive tab");
+    console.print(data, "invoic data");
+    console.print(success_orders, "so for invoice");
+    console.print(activeTab, "avtive tab");
 
     // return;
     return (

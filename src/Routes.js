@@ -298,7 +298,7 @@ export function ProtectedRoute({ children }) {
     if (!isAuthenticated) {
         const location = useLocation();
         const redirectURL = location.pathname;
-        console.log("auth: ", redirectURL);
+        console.print("auth: ", redirectURL);
 
         window.localStorage.setItem("redirectURL", redirectURL);
     }

@@ -35,7 +35,7 @@ export const SkuProducts = () => {
             let response = await downloadProductsApi();
             downloadFile(response.data.url);
         } catch (error) {
-            console.log(error);
+            console.print(error);
         }
         setDownloadingProducts(false);
     };
@@ -48,7 +48,7 @@ export const SkuProducts = () => {
             setCurrentPage(response.data.current_page);
             setPageCount(response.data.last_page);
         } catch (error) {
-            console.log("error", error);
+            console.print("error", error);
         }
         setIsLoading(false);
     };
@@ -72,7 +72,7 @@ export const SkuProducts = () => {
                 setIsSearchActive(false);
             }
         } catch (error) {
-            console.log("error", error);
+            console.print("error", error);
         }
         setIsLoading(false);
     };

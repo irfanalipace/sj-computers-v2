@@ -3,12 +3,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
-
 import { getToken } from "@services/jwtService";
 import { Router } from "@src/Routes";
 import { alreadyLoggedIn } from "@store/auth/authThunks";
 import { useInitDataFetching } from "@hooks/useInitDataFetching";
 import { TawkTo } from "@components/Tawk.To/Messenger";
+import initServices from "@services/initServices";
 
 import Header from "@components/Header/Header";
 import Footer from "@components/Footer/Footer";
@@ -24,13 +24,14 @@ function App() {
     const dispatch = useDispatch();
     const token = getToken();
     if (token) dispatch(alreadyLoggedIn(token));
+    initServices.init(); //initialize services
     useInitDataFetching();
 
     // const location = useLocation();
     // ${process.env.REACT_APP_URL}
     // const hideHeaderFooter = window.location.pathname === `/thank-you`;
 
-    // console.log(hideHeaderFooter, "header and footer")
+    // console.print(hideHeaderFooter, "header and footer")
 
     return (
         <div>

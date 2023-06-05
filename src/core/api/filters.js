@@ -4,14 +4,14 @@ export function getFilterListApi() {
     return new Promise((resolve, reject) => {
         ApiService.get(`/products-filter-list`)
             .then((response) => {
-                console.log(
+                console.print(
                     "file: category.js | getFilterListApi| response",
                     response
                 );
                 resolve(response);
             })
             .catch((e) => {
-                console.log("Console Log: : error filters", e);
+                console.print("Console Log: : error filters", e);
                 reject(e);
             });
     });

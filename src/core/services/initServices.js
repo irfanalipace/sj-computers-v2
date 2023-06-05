@@ -1,8 +1,13 @@
 import { setUserTracking } from "./cookiesService";
 import { initLogService } from "./logServices";
 
-export const initServices = () => {
-    console.log("11 initServices");
-    setUserTracking(); // sets user visit data in cookies
-    initLogService();
+const initServices = {
+    init() {
+        setUserTracking(); // sets user visit data in cookies
+        initLogService();
+    },
 };
+
+initServices.init();
+
+export default initServices;

@@ -59,7 +59,7 @@ export const addToCart = (data, cb) => {
             if (typeof cb === "function") cb();
             addItemToLocalCart(data);
         } catch (error) {
-            console.log("Something went wrong in carts", error);
+            console.print("Something went wrong in carts", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
 
@@ -82,7 +82,7 @@ export const deleteItem = (data) => {
                 payload: data,
             });
         } catch (error) {
-            console.log("Something went wrong in carts", error);
+            console.print("Something went wrong in carts", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -100,7 +100,7 @@ export const updateQuantity = (data) => {
                 payload: data,
             });
         } catch (error) {
-            console.log("Something went wrong in carts", error);
+            console.print("Something went wrong in carts", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -110,7 +110,7 @@ export const getCartDetails = (data) => {
     return async (dispatch) => {
         try {
             let response = await getDetailsApi();
-            console.log("response", response);
+            console.print("response", response);
             let data = { ...response.data };
             updateCartDetails(data);
             dispatch({
@@ -118,7 +118,7 @@ export const getCartDetails = (data) => {
                 payload: data,
             });
         } catch (error) {
-            console.log("Something went wrong in carts", error);
+            console.print("Something went wrong in carts", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };
@@ -241,7 +241,7 @@ export const syncCartItems = () => {
                 });
             }
         } catch (error) {
-            console.log("Something went wrong in carts", error);
+            console.print("Something went wrong in carts", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
         }
     };

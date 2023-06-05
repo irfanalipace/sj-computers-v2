@@ -43,17 +43,17 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                         });
 
                         if (response?.status == 200) {
-                            console.log("payment successful");
+                            console.print("payment successful");
                             clearCartLocally();
                             dispatch(CLEAR_CART());
                             const order = response.data;
-                            console.log(order, "thank order details");
+                            console.print(order, "thank order details");
                             navigate("/thank-you", { state: { order } });
                         } else {
                             navigate("/checkout?error=" + response?.message);
                         }
                     } catch (error) {
-                        console.log("error in square api: ", error);
+                        console.print("error in square api: ", error);
                         navigate("/checkout?error=Something Went Wrong");
                     }
                     hideModal();
