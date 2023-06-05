@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./ProductCard.css";
 import AddCartComponents from "./AddCartComponents";
 
-const Product = ({ product, inGrid, }) => {
+const Product = ({ product, inGrid }) => {
     const [show, setShow] = useState(false);
 
     const orderEstimatedDelivery = useSelector(
@@ -25,7 +25,7 @@ const Product = ({ product, inGrid, }) => {
         </div> */}
 
                 <div className="dev-section-button-dev-card">
-                    <Link to={`/product/${product?.asin}`}>
+                    <Link to={`/products/${product?.asin}`}>
                         <div className="product-name product-cart-name-mobile-screen">
                             {product.name}
                         </div>
@@ -67,7 +67,10 @@ const Product = ({ product, inGrid, }) => {
                         </div>
                     </Link>
                     <div className="d-sm-none div-button-card-product">
-                        <AddCartComponents product={product} className="d-sm-none add-to-card-button-mobile-product"/>
+                        <AddCartComponents
+                            product={product}
+                            className="d-sm-none add-to-card-button-mobile-product"
+                        />
                     </div>
                 </div>
 

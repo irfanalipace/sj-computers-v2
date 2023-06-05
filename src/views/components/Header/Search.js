@@ -5,7 +5,7 @@ import {
     DropdownMenu,
     DropdownItem,
 } from "reactstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
     SET_SEARCH_STRING,
@@ -25,6 +25,7 @@ function Search() {
         (state) => state.products
     );
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const categories = useSelector((state) => state.category.categories);
     const location = useLocation();
 
@@ -37,7 +38,10 @@ function Search() {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        dispatch(SET_SEARCH_STRING(search));
+        if (search) {
+            dispatch(SET_SEARCH_STRING(search));
+            navigate("/products/search");
+        }
     };
 
     useEffect(() => {

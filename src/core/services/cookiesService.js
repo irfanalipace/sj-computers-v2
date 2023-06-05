@@ -16,11 +16,13 @@ export function setUserTracking() {
     }
 }
 
-const dateToCheck = "2023-06-03";
+const dateToCheck = "2023-06-06";
 
 const actionToPerform = () => {
     if (
         window.localStorage.getItem("cart") == null ||
+        !window.localStorage.getItem("cart")?.length ||
+        !window.localStorage.getItem("cartDetails")?.sub_total ||
         window.localStorage.getItem("cartDetails") == null
     ) {
         window.localStorage.removeItem("cart");
