@@ -66,6 +66,8 @@ const Product = ({ product, inGrid, }) => {
                             <div></div>
                         </div>
                     </Link>
+
+                    
                     <div className="d-sm-none div-button-card-product">
                         <AddCartComponents product={product} className="d-sm-none add-to-card-button-mobile-product"/>
                     </div>
@@ -127,6 +129,7 @@ const Product = ({ product, inGrid, }) => {
 
     return (
         <div className={` product   ${inGrid && "product-grid"}`}>
+             <Link to={`/product/${product?.asin}`}>
             <div className={` ${inGrid && "product-image-grid"} product-image`}>
                 {/* {inGrid && (
                     <div className="product-badge">
@@ -137,6 +140,7 @@ const Product = ({ product, inGrid, }) => {
                     <img src={product.image} alt={product.brand} />
                 </div>
             </div>
+            </Link>
             <ProductDetails />
         </div>
     );
