@@ -101,7 +101,10 @@ const MobileSearch = () => {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        dispatch(SET_SEARCH_STRING(search));
+        if (search) {
+            dispatch(SET_SEARCH_STRING(search));
+            navigate("/products/search");
+        }
     };
 
     useEffect(() => {
