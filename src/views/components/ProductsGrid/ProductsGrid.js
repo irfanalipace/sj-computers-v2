@@ -21,15 +21,14 @@ export default function ProductsGrid({
                 <Row className="mx-0 justify-content-left">
                     {products?.map((product) => (
                         <Col xs={6} md={4} lg={2} key={product.id}>
-                            {/* <Link to={`/product/${product?.asin}`}> */}
-                                <Product product={product} inGrid={true} />
-                                
+                            {/* <Link to={`/products/${product?.asin}`}> */}
+                            <Product product={product} inGrid={true} />
+
                             {/* </Link> */}
-                            
                         </Col>
                     ))}
                 </Row>
-               
+
                 {products.length > 11 && (
                     <div className="d-flex justify-content-center">
                         <LoadMore
