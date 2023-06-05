@@ -35,11 +35,13 @@ export default function Product() {
             try {
                 const response = await productDetailsbyAsinApi(productId);
                 setProduct(response.data);
-                setProductImages(filteredProduct?.image);
+                setProductImages(response?.data?.image);
             } catch (error) {}
             setIsLoading(false);
         }
     };
+
+    console.log('11 product images: ', productImages);
 
     const ProductComponent = () => {
         return (

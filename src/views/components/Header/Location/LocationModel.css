@@ -216,3 +216,21 @@
     margin-bottom: -10px;
     background: #eaeded;
 }
+.error-message-location-model {
+    padding-top: 12px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    /* color: #333333; */
+    /* font-size: 14px; */
+    /* color: #333333; */
+    /* font-family: "Inter"; */
+    /* font-style: normal; */
+    /* font-weight: 500; */
+    /* padding-bottom: 3px; */
+}.error-message-location-model2{
+    padding-top: 12px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+}
