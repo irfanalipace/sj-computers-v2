@@ -12,7 +12,7 @@ import categorybusinussweb from "@images/categories/businussweb.webp";
 import wellsjcomputer from "@images/categories/welcomesjcomputer.webp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-export const ProductType = () => {
+const ProductType = () => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     return (
         <div className="product-type-container">
@@ -162,3 +162,5 @@ export const ProductType = () => {
         </div>
     );
 };
+
+export default ProductType;

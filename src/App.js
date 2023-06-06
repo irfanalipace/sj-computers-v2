@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import React, { Suspense } from "react";
 import { BrowserRouter, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -10,8 +10,11 @@ import { useInitDataFetching } from "@hooks/useInitDataFetching";
 import { TawkTo } from "@components/Tawk.To/Messenger";
 import initServices from "@services/initServices";
 
+// import Header from "@components/Header/Header";
 import Header from "@components/Header/Header";
-import Footer from "@components/Footer/Footer";
+import Loader from "@common/LoaderComponent/LoaderComponent";
+
+const Footer = React.lazy(() => import("@components/Footer/Footer"));
 
 import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-free/css/all.css";
@@ -52,13 +55,15 @@ function App() {
             <BrowserRouter>
                 {/* scroller set for scroll bottom to top  */}
                 <ScrollToTop />
-                <Header />
-
+                <Suspense>
+                    <Header />
+                </Suspense>
                 <div className="inner-body">
                     <Router />
                 </div>
-
-                <Footer />
+                <Suspense>
+                    <Footer />
+                </Suspense>
             </BrowserRouter>
         </div>
     );

@@ -25,7 +25,7 @@ span {
 }
 
 .inner-body {
-    min-height: calc(100vh - 650px);
+    min-height: calc(100vh - 600px);
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -48,5 +48,17 @@ span {
 @media (max-width: 767px) {
     .inner-body {
         min-height: calc(100vh - 800px);
+    }
+}
+
+@media (min-width: 1024px) {
+    .inner-body {
+        min-height: calc(100vh - 650px);
+    }
+}
+
+@media (min-width: 1700px) {
+    .inner-body {
+        min-height: calc(100vh - 550px);
     }
 }
