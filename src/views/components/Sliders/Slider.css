@@ -56,7 +56,14 @@ body {
     font-size: 35px !important;
     color: #0c1fa670;
 }
-
+@media screen and (max-width: 600px) {
+.banner-slider-section .swiper-slide img {
+   
+    
+    min-height: 350px;
+ 
+}
+}
 @media screen and (max-width: 576px) {
     .mySwiper {
         width: 100%;
