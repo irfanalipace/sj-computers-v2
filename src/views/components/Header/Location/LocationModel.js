@@ -59,9 +59,6 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
     };
 
     const clickHandler = async () => {
-        // local state me store
-        // console.log(state, "state data");
-
         if (!state?.id) {
             setErrorMessage("Please Select a State.");
         }

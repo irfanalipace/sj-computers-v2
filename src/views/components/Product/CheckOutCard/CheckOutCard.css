@@ -61,8 +61,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-max-width: 100%;
- width: 180px;
+    max-width: 100%;
+    width: 180px;
     height: 54px;
 }
 .button2 {
@@ -95,6 +95,12 @@ max-width: 100%;
     font-size: 14px;
     line-height: 17px;
     color: #ffffff;
+}
+
+.button-cart-sell button {
+    width: 280px;
+    max-width: 90%;
+    margin: 0 auto;
 }
 .box-button1 {
     height: 77px;
@@ -223,32 +229,22 @@ max-width: 100%;
         font-size: 12px;
         padding: 0px 0 !important;
     }
-}
-
-@media screen and (min-width: 767px) and (max-width: 1150px) {
     .button1 {
         width: 168px;
         height: 33px !important;
     }
 }
 @media screen and (max-width: 768px) {
-
     .select-location-btn {
-       
         font-size: 13px;
-       
-      
     }
 }
 @media screen and (max-width: 766px) {
     .button1 {
-      
         height: 30px !important;
-    }.select-location-btn {
-       
+    }
+    .select-location-btn {
         font-size: 13px;
-       
-      
     }
 }
 
