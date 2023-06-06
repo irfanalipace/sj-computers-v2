@@ -36,8 +36,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     </noscript>
 
-
-    <script src={{ asset(mix('/js/app.js')) }}></script>
+    <script src={{ asset(mix('/js/main.js')) }}></script>
 
     
 

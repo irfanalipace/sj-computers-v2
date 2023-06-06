@@ -290,7 +290,7 @@ export const setCartDetails = (data) => {
 
 export const clearCart = () => {
     return async (dispatch) => {
-        deleteNotLocalCartItem(); // remove db cart items from local storage so they are not compared again (in syncing process)
+        // deleteNotLocalCartItem(); // remove db cart items from local storage so they are not compared again (in syncing process)
         dispatch({
             type: CLEAR_CART,
             payload: {},

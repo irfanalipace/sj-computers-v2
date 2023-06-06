@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,10 +17,8 @@ const AddCartComponents = ({ product, className }) => {
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-  
 
     const cartClickHandler = () => {
-     
         let productPrice = product.price * quantity;
         let cartQuantity = details.total_items + 1;
         let cartTotal = parseFloat(details?.total) + productPrice;
@@ -46,26 +44,28 @@ const AddCartComponents = ({ product, className }) => {
                     navigate("/cart")
                 )
             );
-            
     };
     useEffect(() => {
         let item = cart.filter((ci) => ci.id === product.id);
         setCartItem(item);
     }, [cart]);
-  return (
-    <div>
-    {cartItem?.length > 0 ? (
-      <Button className="add-to-card-button-mobile-product">
-        Item Already in Cart
-      </Button>
-    ) : (
-      <Button onClick={cartClickHandler}  isLoading={product?.loading}  className={className}>
-        Add to Cart
-      </Button>
-    )}
-  </div>
-  
-  )
-}
+    return (
+        <div>
+            {cartItem?.length > 0 ? (
+                <Button className="add-to-card-button-mobile-product">
+                    Item Already in Cart
+                </Button>
+            ) : (
+                <Button
+                    onClick={cartClickHandler}
+                    isLoading={product?.loading}
+                    className={className}
+                >
+                    Add to Cart
+                </Button>
+            )}
+        </div>
+    );
+};
 
-export default AddCartComponents
+export default AddCartComponents;
