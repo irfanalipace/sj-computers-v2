@@ -232,6 +232,10 @@
     .button1 {
         width: 168px;
         height: 33px !important;
+    }.button-cart-sell button {
+        width: 179px;
+        max-width: 90%;
+        margin: 0 auto;
     }
 }
 @media screen and (max-width: 768px) {
