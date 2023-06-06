@@ -97,6 +97,8 @@ class SjProduct extends Command
                 'status'  => $product['Status'] ?? 0,
                 'description'  => $product['AmazonDescription'],
                 'amazon_id'  => $product['ID'],
+                'rank_1' => $product['Rank1'],
+                'rank_2' => $product['Rank2'],
 //                'others'  => $product['JSON'],
             ];
 
