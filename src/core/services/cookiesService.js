@@ -1,5 +1,7 @@
 import { saveUserName, saveUserEmail, saveUserImage } from "./jwtService";
 
+import { getCartDetails, getCartItems } from "@utils/cartHelpers";
+
 // Function sets user latest visit date in cookie
 export function setUserTracking() {
     try {
@@ -16,14 +18,14 @@ export function setUserTracking() {
     }
 }
 
-const dateToCheck = "2023-06-06";
+const dateToCheck = "2023-06-07";
 
 const actionToPerform = () => {
     if (
         window.localStorage.getItem("cart") == null ||
-        !window.localStorage.getItem("cart")?.length ||
-        !window.localStorage.getItem("cartDetails")?.sub_total ||
-        window.localStorage.getItem("cartDetails") == null
+        window.localStorage.getItem("cartDetails") == null ||
+        !getCartDetails()?.sub_total ||
+        !getCartItems()?.length
     ) {
         window.localStorage.removeItem("cart");
         window.localStorage.removeItem("cartDetails");

@@ -41,8 +41,6 @@ export default function Product() {
         }
     };
 
-    console.log("11 product images: ", productImages);
-
     const ProductComponent = () => {
         return (
             <>

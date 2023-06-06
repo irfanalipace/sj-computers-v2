@@ -168,7 +168,6 @@ export const syncCartItems = () => {
             //         cartDetails,
             //     },
             // });
-            console.log("localCartItems: ", localCartItems);
             if (localCartItems?.length > 0) {
                 cartItems = localCartItems?.map((item) => {
                     let cartItem = {
@@ -182,7 +181,6 @@ export const syncCartItems = () => {
                 });
             }
             if (cartItems.length > 0) {
-                console.log("cartItems: ", cartItems);
                 let response = await addListToCartApi({ cartItems }); // posting local storage cart items in database
                 let items = { ...response.data.original.data };
                 delete items.details;
@@ -292,7 +290,7 @@ export const setCartDetails = (data) => {
 
 export const clearCart = () => {
     return async (dispatch) => {
-        deleteNotLocalCartItem(); // remove db cart items from local storage so they are not compared again (in syncing process)
+        // deleteNotLocalCartItem(); // remove db cart items from local storage so they are not compared again (in syncing process)
         dispatch({
             type: CLEAR_CART,
             payload: {},
