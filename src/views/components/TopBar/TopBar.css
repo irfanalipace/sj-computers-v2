@@ -73,6 +73,10 @@ Link:hover {
     justify-content: end;
     margin-top: -37px;
 }
+.hover-effect-sets-topbar:active{
+   
+    border: 1px solid white;
+}
 
 @media screen and (max-width: 576px) {
     .menuBar {
