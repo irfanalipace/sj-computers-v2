@@ -1,5 +1,6 @@
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
     entry: "./src/Index.js",
@@ -51,8 +52,12 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "public/js"),
         publicPath: "/js/",
-        filename: "app.js",
+        filename: "[name].js",
+        chunkFilename: "[name].chunk.js", // Specify a different chunk filename
     },
 
-    plugins: [new Dotenv()],
+    plugins: [
+        new CleanWebpackPlugin(), // Clean output directory before each build
+        new Dotenv(),
+    ],
 };

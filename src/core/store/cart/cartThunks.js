@@ -168,6 +168,7 @@ export const syncCartItems = () => {
             //         cartDetails,
             //     },
             // });
+            console.log("localCartItems: ", localCartItems);
             if (localCartItems?.length > 0) {
                 cartItems = localCartItems?.map((item) => {
                     let cartItem = {
@@ -181,6 +182,7 @@ export const syncCartItems = () => {
                 });
             }
             if (cartItems.length > 0) {
+                console.log("cartItems: ", cartItems);
                 let response = await addListToCartApi({ cartItems }); // posting local storage cart items in database
                 let items = { ...response.data.original.data };
                 delete items.details;

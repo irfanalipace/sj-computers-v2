@@ -35,16 +35,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         You need to enable JavaScript to run this app.
 
     </noscript>
-    <script>
-        let times = window.localStorage.getItem('cacheCleared')
-        if(!times || times === 1){
-                    window.location.reload(true);
-                    window.localStorage.setItem('cacheCleared', times +1)
-        }  
 
-    </script>
-
-    <script src={{ asset(mix('/js/app.js')) }}></script>
+    <script src={{ asset(mix('/js/main.js')) }}></script>
 
     
 

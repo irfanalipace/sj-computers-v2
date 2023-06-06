@@ -45,8 +45,8 @@
         "@mui/x-data-grid": "^6.5.0",
         "@reduxjs/toolkit": "^1.9.1",
         "@tawk.to/tawk-messenger-react": "^2.0.2",
+        "clean-webpack-plugin": "^4.0.0",
         "country-flag-icons": "^1.5.7",
-        "jquery": "^3.6.4",
         "react": "^18.2.0",
         "react-bootstrap": "^2.7.4",
         "react-collapsed": "^4.0.2",
@@ -56,8 +56,6 @@
         "react-lazy-load-image-component": "^1.5.6",
         "react-progressive-image": "^0.6.0",
         "react-redux": "^8.0.5",
-        "react-responsive": "^9.0.2",
-        "react-responsive-carousel": "^3.2.23",
         "react-router-dom": "^6.4.0",
         "react-scripts": "5.0.1",
         "react-square-web-payments-sdk": "^3.2.1",
@@ -66,8 +64,7 @@
         "reactstrap": "^9.1.9",
         "redux-thunk": "^2.4.2",
         "styled-components": "^5.3.9",
-        "swiper": "^9.2.0",
-        "tailwindcss": "^3.3.2"
+        "swiper": "^9.2.0"
     },
     "browserslist": {
         "production": [

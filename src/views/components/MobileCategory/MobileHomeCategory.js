@@ -7,8 +7,7 @@ import "swiper/css/navigation";
 import img1 from "@images/category1.png";
 import img2 from "@images/category2.png";
 import img3 from "@images/category3.png";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 import { Link } from "react-router-dom";
 SwiperCore.use([Navigation, Pagination]);
 import "./MobileHomeCategory.css";
