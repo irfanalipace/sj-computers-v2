@@ -11,7 +11,7 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
-    protected $appends = ['in_stock'];
+    protected $appends = ['in_stock','rating'];
 
 
     const DUMMY = "dummy";
@@ -54,5 +54,9 @@ class Product extends Model
         }
         return [];
 
+    }
+
+    public function getRankingAttribute(){
+        return mt_rand (3*10, 5*10) / 10 ;
     }
 }
