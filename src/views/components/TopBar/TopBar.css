@@ -67,17 +67,19 @@ Link:hover {
 }
 .hover-effect-sets-topbar:hover {
     border-color: white;
+    margin-right: 3px;
 }
 .get-top-deals {
     display: flex;
     justify-content: end;
     margin-top: -37px;
 }
-.hover-effect-sets-topbar:active{
-   
-    border: 1px solid white;
-}
 
+.active-classfor-dev {
+    border: 1px solid white;
+    margin-right: 3px;
+}
+  
 @media screen and (max-width: 576px) {
     .menuBar {
         justify-content: center;
