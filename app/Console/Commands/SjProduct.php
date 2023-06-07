@@ -79,7 +79,6 @@ class SjProduct extends Command
 
         foreach ($products as $key => $product) {
 
-
             if(empty($product['Images'])){
                 continue ;
             }
@@ -475,10 +474,8 @@ class SjProduct extends Command
             [
                 'product_id' => $productId,
                 'category_id' => $category->id
-            ],);
+            ],[]);
 
     }
-
-
 
 }
