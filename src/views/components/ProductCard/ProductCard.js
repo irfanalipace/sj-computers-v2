@@ -77,7 +77,7 @@ const Product = ({ product, inGrid }) => {
                 </div>
 
                 <Link
-                    to={`/product/${product?.asin}`}
+                    to={`/products/${product?.asin}`}
                     style={{ textDecoration: "none" }}
                 >
                     <div className="d-none d-sm-block product-rating">
