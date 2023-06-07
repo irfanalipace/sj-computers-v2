@@ -41,8 +41,9 @@ class AmazonProductUpdate extends Command
 
         $products = $this->getProductsList();
 
-
         if($products['status']){
+
+            $this->deleteProducts(collect($products['response']));
 
             foreach ($products['response'] as $key => $product){
                 Product::where(['sku' => $product['sku']])
@@ -52,6 +53,11 @@ class AmazonProductUpdate extends Command
             }
         }
         return 0;
+    }
+
+    public function deleteProducts($products){
+        $skuList = $products->pluck('sku');
+        Product::whereNotIn('sku',$skuList)->delete();
     }
 
     public function getProductsList(){

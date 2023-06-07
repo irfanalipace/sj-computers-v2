@@ -50,7 +50,7 @@ trait AmazonTrait
         if (isset($response['message']) && !empty($response['message'])) {
 
             $data = json_decode($response['message'], true);
-            $quantity = (int) $data['attributes']['fulfillment_availability'][0]['quantity'];
+            $quantity = (int) $data['fulfillmentAvailability'][0]['quantity'];
             $status = true;
         }
 
@@ -101,10 +101,16 @@ trait AmazonTrait
 
         curl_close($curl);
 
+        $this->updateProductQuantity($productInfo['sku'], $totalQuantity);
+
         if($insert){
             $this->insertHoldRelease($qty, $type, $productInfo['product']->id);
         }
         return true;
+    }
+
+    public function updateProductQuantity($sku,$qty){
+        Product::where('sku',$sku)->update(['qty'=> $qty]);
     }
 
     public function insertHoldRelease($qty, $status, $productId){
