@@ -56,7 +56,7 @@ class Product extends Model
 
     }
 
-    public function getRankingAttribute(){
+    public function getRatingAttribute(){
         return mt_rand (3*10, 5*10) / 10 ;
     }
 }
