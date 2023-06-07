@@ -7,6 +7,8 @@ import "./TopBar.css";
 
 export default function TopBar() {
     const [isSideMenu, setSideMenu] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
     const toggleSidebar = () => {
         return setSideMenu((state) => !state);
     };
@@ -62,12 +64,32 @@ export default function TopBar() {
                             </span>
                         </div>
 
-                        <ul className="text-decoration-none ullist">
+                        {/* <ul className="text-decoration-none ullist">
                             {categories.map((category) => (
                                 <li key={category.id} className="listitem">
                                     <Link
                                         to={`category/${category.slug}`}
                                         className="text-decoration-none text-color hover-effect-sets-topbar"
+                                        // className= {`text-decoration-none text-color hover-effect-sets-topbar  ${category.id && "active-classfor-dev"}`}
+                                    >
+                                        {category.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul> */}
+                        <ul className="text-decoration-none ullist">
+                            {categories.map((category) => (
+                                <li key={category.id} className="listitem">
+                                    <Link
+                                        to={`category/${category.slug}`}
+                                        className={`text-decoration-none text-color hover-effect-sets-topbar ${
+                                            selectedCategory === category.id
+                                                ? "active-classfor-dev"
+                                                : ""
+                                        }`}
+                                        onClick={() =>
+                                            setSelectedCategory(category.id)
+                                        }
                                     >
                                         {category.name}
                                     </Link>
