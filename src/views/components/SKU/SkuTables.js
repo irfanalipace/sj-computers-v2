@@ -4,7 +4,7 @@ import { TextField, FormControl } from "@mui/material";
 import { getInventory, inventoryAction } from "@api/inventory.js";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 
-export const SkuTables = () => {
+export const SkuTables = ({render, setRender}) => {
     const [invent, setInvent] = useState();
     const [data, setData] = useState([]);
     const [search, setSearch] = useState("");
@@ -49,6 +49,8 @@ export const SkuTables = () => {
             .then((_) => {
                 setLoading(false);
                 setAction("HOLD");
+                setRender(render+1);
+         
                 if (_.data.length > 0) {
                     setInvent(_?.data[0]?.product);
                     let obj = [

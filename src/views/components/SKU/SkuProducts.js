@@ -14,7 +14,7 @@ import { productsApi, filterProductsApi } from "@api/products";
 import { downloadProductsApi } from "@api/inventory";
 import { downloadFile } from "@utils/helpers";
 
-export const SkuProducts = () => {
+export const SkuProducts = ({reRender}) => {
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [pageCount, setPageCount] = useState(0);
@@ -28,6 +28,11 @@ export const SkuProducts = () => {
     useEffect(() => {
         fetchProducts(null, currentPage + 1);
     }, []);
+    useEffect(() => {
+        fetchProducts(null, currentPage);
+
+    }, [reRender])
+    
 
     const downloadProducts = async () => {
         setDownloadingProducts(true);
