@@ -59,7 +59,8 @@ export const login = (credentials) => {
             saveUserName(name);
             saveUserImage(profile_pic);
             saveUserState(state);
-            saveTempToken(token); // saving token temporarily to only allow user to call the login api
+            saveTempToken(token); 
+            // saving token temporarily to only allow user to call the login api
             saveUserPassword(credentials.password); // saving password temporarily to only allow user to re login to resend the otp
             dispatch({
                 type: LOGIN,
@@ -130,6 +131,7 @@ export const verifyOtp = (credentials) => {
             dispatch({ type: VERIFY_OTP, payload: { ...user } });
             destroyTempKeys(); // destroy user password and temporary token after login success
             saveToken(temp_token); // stores temporary token in right key to be used later for calling protected apis
+            toast.success("Login Successfully");
         } catch (error) {
             console.print("Something went wrong in login", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });
