@@ -106,10 +106,10 @@ const ProductDetails = ({ product }) => {
                 </div>
                 <div className="col-6 col-sm-6 col-lg-4 col-md-6">
                     <div className="mt-3">
-                        <button className="product-rating">
+                        {/* <button className="product-rating">
                             {product?.numReviews ? product.numReviews : "0"}{" "}
                             ratings
-                        </button>
+                        </button> */}
                         {/* <Link className="product-info">
                             11 answered questions
                         </Link> */}
