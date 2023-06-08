@@ -66,6 +66,7 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
       centered
       className="location-model"
     >
+      
       <Modal.Header className="header">
         <Modal.Title>
           <span className="location-header-text">Choose your location</span>
