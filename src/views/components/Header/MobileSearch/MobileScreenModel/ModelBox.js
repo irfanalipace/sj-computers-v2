@@ -4,6 +4,7 @@ import imges1 from "@images/cart-product/location.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+
 const ModelBox = ({ closeModal }) => {
     return (
         <div className="modal-mobile-screen">
@@ -18,7 +19,7 @@ const ModelBox = ({ closeModal }) => {
                         different locations{" "}
                     </p>
                     <div className="padding-bottom-text-mobile-screen">
-                        <Link to='/login' className="done-dilvery-button text-decoration-none">
+                        <Link to='/login' className="done-dilvery-button text-decoration-none" onClick={() => toggleSidebar()}>
                             Sign to see your address
                         </Link>
                     </div>

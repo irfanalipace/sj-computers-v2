@@ -26,6 +26,7 @@ const MobileScreenModel = () => {
     };
     return (
         <div>
+            
             <header>
                 <div className="color-card-dev mobile-enter-sub-button-screen">
                     <button
@@ -42,7 +43,8 @@ const MobileScreenModel = () => {
                     </button>
                 </div>
             </header>
-            {isAuthenticated ? (
+           <div>
+           {isAuthenticated ? (
                 <div>
                     <div>
                         {showModal && <ModelUserAuth closeModal={closeModal} />}
@@ -51,6 +53,7 @@ const MobileScreenModel = () => {
             ) : (
                 <div> {showModal && <ModelBox closeModal={closeModal} />}</div>
             )}
+           </div>
         </div>
     );
 };
