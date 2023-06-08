@@ -91,7 +91,7 @@ const Product = ({ product, inGrid }) => {
                             starSpacing={"0"}
                         />
                         <span className="product-num-reviews ms-2 mt-1">
-                            {product.numReviews ? product.numReviews : 0}
+                            {product.rating ? product.rating : 0}
                         </span>
                     </div>
                 </Link>

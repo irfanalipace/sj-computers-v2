@@ -81,7 +81,15 @@
     align-items: center;
     justify-content: center;
 }
-
+.sidebarOverlay1 {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #0000005a;
+    z-index: 3;
+}
 .zip-code-text-mobile-screen {
     color: black;
 }
