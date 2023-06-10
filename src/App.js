@@ -29,8 +29,10 @@ function App() {
     const token = getToken();
     if (token) dispatch(alreadyLoggedIn(token));
     initServices.init(); //initialize services
-    useInitDataFetching();
 
+    setTimeout(() => {
+        useInitDataFetching();
+    }, 2000);
     // const location = useLocation();
     // ${process.env.REACT_APP_URL}
     // const hideHeaderFooter = window.location.pathname === `/thank-you`;

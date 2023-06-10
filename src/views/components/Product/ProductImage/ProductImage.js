@@ -6,6 +6,7 @@ const SelectedImage = ({ image }) => {
     return (
         <div className="image-screen">
             <img
+                alt="selected-image"
                 src={image}
                 className="selected-image selected-image-data-icon-slider"
             />

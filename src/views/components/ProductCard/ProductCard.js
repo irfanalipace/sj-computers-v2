@@ -67,7 +67,6 @@ const Product = ({ product, inGrid }) => {
                         </div>
                     </Link>
 
-                    
                     <div className="d-sm-none div-button-card-product">
                         <AddCartComponents
                             product={product}
@@ -131,28 +130,33 @@ const Product = ({ product, inGrid }) => {
     );
 
     return (
-    
         <div className={` product   ${inGrid && "product-grid"}`}>
-           <Link to={`/products/${product?.asin}`}>
-            <div className={` ${inGrid && "product-image-grid"} product-image`}>
-                {/* {inGrid && (
+            <Link to={`/products/${product?.asin}`}>
+                <div
+                    className={` ${
+                        inGrid && "product-image-grid"
+                    } product-image`}
+                >
+                    {/* {inGrid && (
                     <div className="product-badge">
                         <div className="badge-text">Best Seller</div>
                     </div>
                 )} */}
-                
-                <div className="image-wrapper">
-            
-                    <img src={product.image} alt={product.brand} />
-                 
+
+                    <div className="image-wrapper">
+                        <img
+                            src={product.image}
+                            alt={product?.name
+                                ?.trim()
+                                ?.split(" ")
+                                ?.slice(0, 3)
+                                ?.join(" ")}
+                        />
+                    </div>
                 </div>
-             
-            </div>
             </Link>
             <ProductDetails />
-            
         </div>
-       
     );
 };
 

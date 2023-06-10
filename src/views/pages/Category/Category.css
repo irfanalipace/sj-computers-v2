@@ -38,6 +38,11 @@
 .category-page .products-grid {
     min-height: calc(100vh - 100px);
 }
+
+.category-page .product-name {
+    margin-top: 0;
+}
+
 @media screen and (max-width: 585px) {
     .filter-results {
         margin-left: 0;
