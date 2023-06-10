@@ -1,6 +1,6 @@
 import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 
-export const TawkTo = () => {
+const TawkTo = () => {
     return (
         <div className="tawk-to-container">
             <TawkMessengerReact
@@ -10,3 +10,5 @@ export const TawkTo = () => {
         </div>
     );
 };
+
+export default TawkTo;

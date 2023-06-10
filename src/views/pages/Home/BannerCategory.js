@@ -1,12 +1,13 @@
 import React, { Suspense } from "react";
 // import { ProductType } from "@components/homeproduct/ProductType";
+const BannerSlider = React.lazy(() =>
+    import("@components/Sliders/BannerSlider")
+);
 const ProductType = React.lazy(() =>
     import("@components/homeproduct/ProductType")
 );
 import Loader from "@common/LoaderComponent/LoaderComponent";
-const BannerSlider = React.lazy(() =>
-    import("@components/Sliders/BannerSlider")
-);
+
 // import BannerSlider from "@components/Sliders/BannerSlider";
 // import MobileHomeCategory from "@components/MobileCategory/MobileHomeCategory";
 const MobileHomeCategory = React.lazy(() =>
@@ -19,7 +20,7 @@ const BannerCategory = () => {
         <div className="banner-category-section">
             <div className="banner-wrapper">
                 <div className="banner-inner">
-                    <Suspense fallback={<Loader />}>
+                    <Suspense>
                         <BannerSlider />
                     </Suspense>
                 </div>

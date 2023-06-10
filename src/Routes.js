@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
 import { Navigate, useRoutes, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Home from "@pages/Home/Home";
-// const Home = React.lazy(() => import("@pages/Home/Home"));
+// import Home from "@pages/Home/Home";
+const Home = React.lazy(() => import("@pages/Home/Home"));
 const LoginForm = React.lazy(() => import("@pages/Auth/LoginForm"));
 const Register = React.lazy(() => import("@pages/Auth/Register"));
 const ForgetPassword = React.lazy(() =>
@@ -24,18 +24,20 @@ const Checkout = React.lazy(() => import("@pages/Checkout/Checkout"));
 const Test = React.lazy(() => import("@pages/Test/Test"));
 const ThankYou = React.lazy(() => import("@pages/Thankyou/Thankyou"));
 import Loader from "@common/LoaderComponent/LoaderComponent";
-import Contact from "@components/Footer/FooterMenu/Contact";
-import Policy from "@pages/Policy/Policy";
-import SkuPage from "@pages/SKUTables/SkuPage";
+const Contact = React.lazy(() =>
+    import("@components/Footer/FooterMenu/Contact")
+);
+const Policy = React.lazy(() => import("@pages/Policy/Policy"));
+const SkuPage = React.lazy(() => import("@pages/SKUTables/SkuPage"));
 
-export const Router = () => {
+const Router = () => {
     const routes = [
         {
             path: "/",
             element: (
-                // <Suspense fallback={<Loader />}>
-                <Home />
-                // </Suspense>
+                <Suspense fallback={<Loader />}>
+                    <Home />
+                </Suspense>
             ),
         },
         {
@@ -291,6 +293,8 @@ export const Router = () => {
 
     return router;
 };
+
+export default Router;
 
 export function ProtectedRoute({ children }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
