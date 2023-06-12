@@ -27,6 +27,8 @@ import Loader from "@common/LoaderComponent/LoaderComponent";
 import Contact from "@components/Footer/FooterMenu/Contact";
 import Policy from "@pages/Policy/Policy";
 import SkuPage from "@pages/SKUTables/SkuPage";
+import BlogPage from "@pages/Blog/BlogPage";
+import SingleBlog from "@components/Blog/SingleBlog/SingleBlog";
 
 const Router = () => {
     const routes = [
@@ -193,6 +195,24 @@ const Router = () => {
                 <Suspense fallback={<Loader />}>
                     <Policy />
                 </Suspense>
+            ),
+        },{
+            path: "/blog",
+            element: (
+             
+                    <Suspense fallback={<Loader />}>
+                     <BlogPage />
+                    </Suspense>
+               
+            ),
+        },,{
+            path: "/blog-page",
+            element: (
+             
+                    <Suspense fallback={<Loader />}>
+                     <SingleBlog />
+                    </Suspense>
+               
             ),
         },
         {

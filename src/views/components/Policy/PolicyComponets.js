@@ -153,6 +153,7 @@ const PolicyComponets = () => {
                                             </>
                                         ) : (
                                             <div
+                                            className="dev-p-h-section-dev-data"
                                                 style={{ lineHeight: "27px" }}
                                                 dangerouslySetInnerHTML={{
                                                     __html: htmlContent,

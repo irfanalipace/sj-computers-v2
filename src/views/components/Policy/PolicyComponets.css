@@ -289,3 +289,16 @@ max-width: 100%;
   
     color: white !important;
 }
+@media screen and (max-width:600px) {
+    
+    .cart-dev-policy-section {
+        padding-top: 14px !important;
+    }.dev-p-h-section-dev-data h1 {
+        font-size: 20px;
+        margin-bottom: -18px;
+    }.policyset-container-dev {
+        padding: 17px;
+        padding-top: 0px;
+        margin-left: 0px;
+    }
+}
