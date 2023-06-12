@@ -135,12 +135,12 @@ export const CheckOutCard = ({ product }) => {
                         <>
                             <div className="text-stock">
                                 <div className="instock-dev-card-product-section-with-color-card">
-                                    <div>
-                                        <span className="color-card">
+                                    <div className="in-stock-area-lable">
+                                      
                                             {product?.quantity > 0 && (
-                                                <span>In Stock</span>
+                                               <small> In Stock</small>
                                             )}
-                                        </span>
+                                     
                                     </div>
                                     <div>
                                         <span className="color-text-cart-with-inStock">
@@ -191,7 +191,7 @@ export const CheckOutCard = ({ product }) => {
                             </span>
                         </div>
                         <div className="col-xl-5 col-6">
-                            <div className="hover-box">
+                            <div className="hover-box secure-transection-display">
                                 <Link
                                     href="#"
                                     className="text-decoration-none secure-payment-method"

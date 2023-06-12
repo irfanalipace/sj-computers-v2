@@ -273,7 +273,32 @@
     .return-from-span-tag-checkout {
         margin-left: -11px;
     }
-    .sjcomputer-tag-checkout-card {
-        margin-left: -25px;
-    }
+   
+}
+@media screen and (max-width: 576px) {
+.sjcomputer-tag-checkout-card {
+    margin-left: 0px;
+    display: flex;
+justify-content: end;
+}.ships-form-span-tag {
+    margin-left: 0px;
+}.sjcomputer-tag-checkout-card {
+    margin-left: 41px;
+}.return-from-span-tag-checkout {
+    margin-left: 0px;
+}.sjcomputer-tag-checkout-card {
+    margin-left: 0px;
+    display: flex;
+    justify-content: end;
+    margin-right: 25px;
+}.hover-box {
+    position: relative;
+    display: inline-block;
+    text-align: initial;
+    display: flex;
+    justify-content: end;
+}.in-stock-area-lable{
+width: 100%;
+}
+
 }
