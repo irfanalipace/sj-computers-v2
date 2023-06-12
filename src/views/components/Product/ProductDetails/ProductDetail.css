@@ -420,6 +420,10 @@
             margin-bottom: 9px;
         }.deatisl-data-set-image-view-data-details{
             margin-top: -13px;
+        }.color-card-text-paragrap-payment{
+            display: flex;
+        }.ships-form-span-tag {
+             margin-left: 0px; 
         }
     }
 }
