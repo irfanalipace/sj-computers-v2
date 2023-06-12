@@ -78,7 +78,7 @@ const ProductDetails = ({ product }) => {
             <div className="">
                 <p className="item-title">{product?.name}</p>
             </div>
-            <div className="instock-detail">
+            <div className="instock-detail ">
                 <p className="most-demandind">
                     {product?.in_stock > 0 ? (
                         <span className="text-green">In Stock</span>
@@ -87,9 +87,9 @@ const ProductDetails = ({ product }) => {
                     )}
                 </p>
             </div>
-            <div className="row px-0  res row-cols-sm-2">
+            <div className="row px-0  res row-cols-sm-2 deatisl-data-set-image-view-data-details">
                 <div className="col-6 col-sm-6 col-lg-4 col-md-6  product-review">
-                    <div className="star my-2">
+                    <div className="star my-2 star-alignment-gride">
                         <StarRatings
                             rating={product?.rating}
                             starRatedColor="rgb(232, 126, 36)"

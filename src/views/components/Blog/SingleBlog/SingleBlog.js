@@ -20,7 +20,10 @@ const SingleBlog = () => {
     return (
         <div>
             <div className="mein-dev-single-page-cantainer">
-                <div className="container conatnier-dev-single-blog-dev">
+                <div
+                    className="container conatnier-dev-single-blog-dev"
+                    style={{ "max-width": "73%" }}
+                >
                     <div className="col-12">
                         <div className="span-dev-page-text-page">
                             <span>
@@ -33,7 +36,7 @@ const SingleBlog = () => {
                 </div>
             </div>
 
-            <div className="container">
+            <div className="container" style={{ "max-width": "75%" }}>
                 <div className="row">
                     <div className="col-md-3">
                         <div className="container container-card-slice-dev">
@@ -47,7 +50,6 @@ const SingleBlog = () => {
                                         <span>
                                             Lorem ipsum dolor sit amet, trt
                                             aksdg asking no one consectetur sit
-                                         
                                         </span>
                                     </div>
                                     <div className="jun-date-space-card-blog">
@@ -59,7 +61,6 @@ const SingleBlog = () => {
                                         <span>
                                             Lorem ipsum dolor sit amet, trt
                                             aksdg asking no one consectetur sit
-                                          
                                         </span>
                                     </div>
                                     <div className="jun-date-space-card-blog">
@@ -218,16 +219,13 @@ const SingleBlog = () => {
                 </div>
             </div>
 
-            <div className="container">
+            <div className="container" style={{ "max-width": "75%" }}>
                 <div className="treding-blog-sets">
                     <span> Trending Blogs</span>
                 </div>
             </div>
 
-            <div
-                className="container"
-              
-            >
+            <div className="container " style={{ "max-width": "75%" }}>
                 <div className="row">
                     <div className="col-md-4">
                         <div className="product-card">
@@ -296,10 +294,10 @@ const SingleBlog = () => {
                                     <span>
                                         Sign up for the latest news, facts,
                                         analysis, and original stories about
-                                        Amazon delivered to you.
-                                        Sign up for the latest news, facts,
-                                        analysis, and original stories about
-                                        Amazon delivered to you.
+                                        Amazon delivered to you. Sign up for the
+                                        latest news, facts, analysis, and
+                                        original stories about Amazon delivered
+                                        to you.
                                     </span>
                                 </div>
                                 <div
@@ -453,7 +451,7 @@ const SingleBlog = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-sm-6">
                         <div className="card card-data-setelledted-data">
                             <div className="row no-gutters">
                                 <div className="col-6 custom-col">
@@ -500,7 +498,7 @@ const SingleBlog = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-sm-6">
                         <div className="card card-data-setelledted-data">
                             <div className="row no-gutters">
                                 <div>
@@ -531,7 +529,7 @@ const SingleBlog = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-sm-6">
                         <div className="card card-data-setelledted-data">
                             <div className="row no-gutters">
                                 <div className="col-6 text-right custom-col">
@@ -579,15 +577,14 @@ const SingleBlog = () => {
                         </div>
                     </div>
                 </div>
+
                 <div className="recent-blogs-data">
-                <div>
-                <span>
-                    Recent Blog
-                  </span>
-                </div>
-                <div className="recent-blogs-data-more">
-                  <span>see All</span>
-                </div>
+                    <div>
+                        <span>Recent Blog</span>
+                    </div>
+                    <div className="recent-blogs-data-more">
+                        <span>see All</span>
+                    </div>
                 </div>
                 <div className="row">
                     <div className="col-md-4">
@@ -649,32 +646,31 @@ const SingleBlog = () => {
                     <div className="col-md-4">
                         <div className="card card-data-setelledted-data">
                             <div className="row ">
-                            <div className="row no-gutters">
-                            <div className="col-5 text-right custom-col">
-                                    <img
-                                        src={bloglaptop2}
-                                        alt="Image 3"
-                                        className="product-single-data-view-product"
-                                    />
-                                </div>
-                                <div className="col-7 custom-col">
-                                    <div>
+                                <div className="row no-gutters">
+                                    <div className="col-5 text-right custom-col">
                                         <img
-                                            src={bloglaptop1}
-                                            alt="Image 1"
-                                            className="product-blog-view-data-image-peoduct-image"
+                                            src={bloglaptop2}
+                                            alt="Image 3"
+                                            className="product-single-data-view-product"
                                         />
                                     </div>
-                                    <div className="">
-                                        <img
-                                            src={imagepencel}
-                                            alt="Image 2"
-                                            className="product-blog-view-data-image-peoduct-image"
-                                        />
+                                    <div className="col-7 custom-col">
+                                        <div>
+                                            <img
+                                                src={bloglaptop1}
+                                                alt="Image 1"
+                                                className="product-blog-view-data-image-peoduct-image"
+                                            />
+                                        </div>
+                                        <div className="">
+                                            <img
+                                                src={imagepencel}
+                                                alt="Image 2"
+                                                className="product-blog-view-data-image-peoduct-image"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                         
-                            </div>
                             </div>
 
                             <div className="card-body">
@@ -698,7 +694,10 @@ const SingleBlog = () => {
                     </div>
                     <div className="col-md-4">
                         <div className="card card-data-setelledted-data">
-                           <img src={productviewblog}  className="image-laptop-type-scroll"/>
+                            <img
+                                src={productviewblog}
+                                className="image-laptop-type-scroll"
+                            />
 
                             <div className="card-body">
                                 <div className="dev-data-span-card-dev">
@@ -721,28 +720,29 @@ const SingleBlog = () => {
                     </div>
                 </div>
                 <div className="row">
-                  <div className="col-10">
-                    <div className="position-image-data-blog">
-                      <img src={meetingset} />
+                    <div className="col-10">
+                        <div className="position-image-data-blog">
+                            <img src={meetingset} />
+                        </div>
                     </div>
-                  </div>
-                
-                 
-              <div className="col-2">
-                  <div className="position-image-data-blog-text-data">
-<div className="dev-green-space-dev">
-  
-<span>Lorem ipsum dolor sit amet,
-trt Lorem ipsum dolor sit amet, trt</span>
-</div>
-               <div className="space-green-card-data">
-               Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one c.
-               </div>
-                 </div>
-                 </div>
+
+                    <div className="col-2">
+                        <div className="position-image-data-blog-text-data">
+                            <div className="dev-green-space-dev">
+                                <span>
+                                    Lorem ipsum dolor sit amet, trt Lorem ipsum
+                                    dolor sit amet, trt
+                                </span>
+                            </div>
+                            <div className="space-green-card-data">
+                                Lorem ipsum dolor sit amet, trt aksdg asking no
+                                one consectetur asking no one consectetur
+                                jsjshdi. Lorem ipsum dolor sit amet, trt aksdg
+                                asking no one consectetur asking no one c.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-               
-               
             </div>
         </div>
     );
