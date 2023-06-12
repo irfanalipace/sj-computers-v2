@@ -1,18 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { Suspense } from "react";
-const Header = React.lazy(() => import("@components/Header/Header"));
-
 import { BrowserRouter, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { getToken } from "@services/jwtService";
-const Router = React.lazy(() => import("@src/Routes"));
+import { Router } from "@src/Routes";
 import { alreadyLoggedIn } from "@store/auth/authThunks";
 import { useInitDataFetching } from "@hooks/useInitDataFetching";
-const TawkTo = React.lazy(() => import("@components/Tawk.To/Messenger"));
+import { TawkTo } from "@components/Tawk.To/Messenger";
 import initServices from "@services/initServices";
 
 // import Header from "@components/Header/Header";
+import Header from "@components/Header/Header";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 
 const Footer = React.lazy(() => import("@components/Footer/Footer"));
@@ -29,10 +28,8 @@ function App() {
     const token = getToken();
     if (token) dispatch(alreadyLoggedIn(token));
     initServices.init(); //initialize services
+    useInitDataFetching();
 
-    setTimeout(() => {
-        useInitDataFetching();
-    }, 2000);
     // const location = useLocation();
     // ${process.env.REACT_APP_URL}
     // const hideHeaderFooter = window.location.pathname === `/thank-you`;
@@ -41,20 +38,7 @@ function App() {
 
     return (
         <div>
-            <BrowserRouter>
-                {/* scroller set for scroll bottom to top  */}
-                <ScrollToTop />
-                <Suspense>
-                    <Header />
-                    <div className="inner-body">
-                        <Router />
-                    </div>
-                    <Footer />
-                </Suspense>
-            </BrowserRouter>
-            <Suspense>
-                <TawkTo />
-            </Suspense>
+            <TawkTo />
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -68,6 +52,19 @@ function App() {
                 theme="light"
                 className={"notification-toast"}
             />
+            <BrowserRouter>
+                {/* scroller set for scroll bottom to top  */}
+                <ScrollToTop />
+                <Suspense>
+                    <Header />
+                </Suspense>
+                <div className="inner-body">
+                    <Router />
+                </div>
+                <Suspense>
+                    <Footer />
+                </Suspense>
+            </BrowserRouter>
         </div>
     );
 }
