@@ -1,0 +1,489 @@
+.mein-dev-single-page-cantainer {
+    background: rgba(49, 130, 67, 0.1);
+}
+.conatnier-dev-single-blog-dev {
+    margin-top: 28px;
+    margin-bottom: 30px;
+    /* display: flex; */
+}
+.span-dev-page-text-page {
+    padding-top: 26px;
+    padding-bottom: 26px;
+}
+.span-dev-page-text-page span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+    color: #000000;
+}
+.container-card-slice-dev {
+    margin-bottom: 27px;
+    width: 308px;
+    max-width: 100%;
+    height: 550px;
+    max-height: 100%;
+    left: 0px;
+    top: 0px;
+    background: rgba(49, 130, 67, 0.03);
+}
+.newsfeed-data-space {
+    padding-top: 15px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 144%;
+    color: #333333;
+}
+.text-data-span-graph-p-card-blog span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 131%;
+    /* or 16px */
+
+    /* Primary */
+
+    color: #333333;
+}
+.jun-date-space-card-blog {
+    padding-top: 25px;
+}
+.jun-date-space-card-blog span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 131%;
+    /* identical to box height, or 16px */
+
+    color: #000000;
+}
+.more-data-add-blog-space span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 22px;
+    /* identical to box height, or 169% */
+
+    letter-spacing: 0.46px;
+
+    color: #000000;
+}
+.meeting-data-blog-save-dev-form img {
+    max-height: 100%;
+    max-width: 100%;
+    width: 525px;
+    height: 323px;
+    left: calc(50% - 494px / 2 - 49px);
+    top: 326px;
+}
+.stories-data-effctive-blog span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 144%;
+    /* identical to box height, or 23px */
+
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    color: #333333;
+}
+.stories-data-effctive-blog {
+    padding-top: 11px;
+}
+
+.dev-data-sngle-stories-data span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 131%;
+    /* or 16px */
+
+    /* Primary */
+
+    color: #333333;
+}
+.smimage-stories-blog img {
+    width: 122px;
+}
+.conatiner-dev-stories-dev-data-for-blog {
+    width: 352px;
+    /* max-width: 100%; */
+    padding: 9px;
+    background: rgba(49, 130, 67, 0.03);
+}
+.see-all-stories-data-ever-data {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 22px;
+    /* identical to box height, or 169% */
+
+    letter-spacing: 0.46px;
+
+    color: #000000;
+}
+.mid-graph-pargarph-page-data span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 144%;
+    /* or 35px */
+
+    /* Primary */
+
+    color: #333333;
+}
+.mid-graph-pargarph-page-data {
+    margin-top: 17px;
+    margin-bottom: 17px;
+}
+.mid-graph-pargarph-page-data span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 144%;
+    color: #333333;
+}
+.mid-graph-pargarph-page-datap-data {
+    margin-bottom: 26px;
+}
+.treding-blog-sets span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 144%;
+    /* identical to box height, or 35px */
+
+    color: #000000;
+}
+.treding-blog-sets {
+    padding-bottom: 20px;
+}
+
+.mein-image-dev-setion img {
+    width: 397px;
+    max-width: 100%;
+    height: 242px;
+}
+.dev-data-span-card-dev span {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 144%;
+    color: #333333;
+}
+.dev-data-span-card-dev {
+    margin-top: 5px;
+    padding: 14px;
+}
+.read-section-date-section {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 14px;
+    padding-right: 24px;
+    padding-top: 58px;
+    padding-bottom: 21px;
+}
+.read-section-date-section span {
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 144%;
+/* or 23px */
+
+
+/* Primary */
+
+color: #333333;
+}
+.box-with-shadow {
+    left: 0;
+    box-shadow: 0px 4px 1px 0px rgba(0, 0, 0, 0.2);
+    /* padding: 20px; */
+    padding-bottom: 1px;
+    background-color: #ffffff;
+    margin-bottom: 12px;
+}
+.dev-data-fase-balls {
+    height: 416px;
+    width: 372px;
+    max-width: 100%;
+    background: rgb(49, 130, 67);
+}
+.total-green-view-page-end {
+    margin-top: 69px;
+}
+.span-sj-computer-side{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 144%;
+/* identical to box height, or 35px */
+
+
+color: #FFFFFF;
+}
+.dev-space-name-folder-span-text span {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 144%;
+    color: #FFFFFF;
+}
+.end-card-sparate-card {
+    width: 373px;
+    max-width: 100%;
+    height: 417px;
+    background: rgb(49, 130, 67);
+}
+.product-card {
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    max-height: 100%;
+    height: 400px;
+   
+}
+.product-card img {
+    width: 100%;
+    height: 191px;
+    margin-bottom: 10px;
+}.email-input-data-feilds {
+    margin-top: 45px;
+    margin-left: 18px;
+    display: flex;
+    /* position: relative; */
+    justify-content: center;
+    /* display: inline-block; */
+}
+.input-email-fileds-data-file {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background-color: transparent;
+    color: #fff;
+    outline: none;
+}
+.email-input-data-feilds input[type="email"] {
+    border: none !important;
+    border-bottom: 1px solid white !important;
+    padding: 5px;
+    width: 444px;
+    margin-top: 15px;
+}
+.input-email-fileds-data-file button {
+    border: none;
+    border-bottom: 1px solid white;
+    padding: 5px;
+    width: 444px;
+    margin-top: 15px;
+}
+
+        .input-email-fileds-data-file::placeholder {
+            color: white;
+        }
+
+
+        .button-arrow-dev-blog-dve i {
+            width: 22px;
+            height: 22px;
+            background: #318243;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid white;
+        }
+        .protected-link-effectdspan-dev-blog {
+            margin-top: 25px;
+            margin-left: 7px;
+            /* display: flex; */
+            /* justify-content: left; */
+        }
+
+        .protected-link-effectdspan-dev-blog span{
+         color: white;
+         font-size: 13px;
+        }
+        .image-view-blog-data {
+            width: 210px;
+            height: 125px;
+            
+        }
+        .image-view-blog-data2 {
+            height: 251px;
+            width: 166px;
+         
+        }
+        .card-data-setelledted-data {
+            /* width: 398px; */
+            margin-bottom: 13px;
+            height: 462px;
+        }
+        .container-blog-product-data {
+            padding-left: 11px;
+            padding-right: 61px;
+        }
+        .image-view-blog-dat-pencel {
+            width: 355px;
+            height: 251px;
+        }
+        .image-view-blog-dataset {
+            height: 250px;
+            width: 189px;
+        }
+        .image-view-blog-data3 {
+            width: 166px;
+            height: 125px;
+        }
+       .image-view-blog-dateta{
+        
+            padding-left: 25px;
+        
+            width: 188px;
+            height: 143px;
+        }
+        .image-section-last-one {
+            width: 176px;
+            height: 130px;
+        }
+
+        .recent-blogs-data {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 22px;
+            margin-bottom: 28px;
+        }
+        .recent-blogs-data div span{
+         font-weight: bold;
+        }
+        .recent-blogs-data-more span {
+            font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height, or 138% */
+
+letter-spacing: 0.46px;
+
+color: #318243;
+
+           }
+           .product-single-data-view-product {
+            height: 264px;
+            width: 149px;
+        }
+        .product-blog-view-data-image-peoduct-image {
+            width: 206px;
+            height: 132px;
+        }
+
+        .image-view-blog-dateta22 {
+            /* padding-left: 25px; */
+            width: 197px;
+            height: 131px;
+        }
+        .image-laptop-type-scroll{
+            height:266px;
+        }
+
+        .read-section-date-section-end{
+            padding-top: 46px;
+            display: flex;
+            justify-content: space-between
+            ;
+        }
+
+        .position-image-data-blog img{
+            width: 1030px;
+            height: 372px;
+            margin-bottom: 29px;
+            position: relative;
+        }
+
+        .position-image-data-blog{
+        
+            position: relative;
+        }
+
+        .position-image-data-blog-text-data {
+            padding-left: -50px;
+            width: 100%;
+            z-index: 2;
+            position: relative;
+            /* margin-top: -164px; */
+            /* position: absolute; */
+            top: 35px;
+            left: -135px;
+            z-index: 1;
+            width: 300px;
+            background-color: red;
+            height: 300px;
+
+
+background: #E7FFEC;
+        }
+        .dev-green-space-dev span{
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 144%;
+            /* or 40px */
+            
+            
+            /* Primary */
+            
+            color: #333333;
+        }
+        .dev-green-space-dev{
+                padding-top: 20px;
+                padding-left: 30px;
+                padding-right: 30px;
+                padding-bottom: 12px;
+        
+        }
+        .space-green-card-data span{
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 144%;
+            /* or 23px */
+            
+            
+            /* Primary */
+            
+            color: #333333;
+        }
+        .space-green-card-data{
+          
+            padding-left: 30px;
+            padding-right: 30px;
+
+    }
+
+    .col-syle-width-data{
+        height: 551px;
+        background: rgba(49, 130, 67, 0.03);
+    }
