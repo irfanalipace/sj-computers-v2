@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Blog.css";
+import "./About.css";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import policyimage from "@images/Policy/polict-cart-comp.png";
@@ -17,9 +17,9 @@ import meetingimage from "@images/blog/meeting.png";
 import smimage from "@images/blog/smallimage.png";
 import meetingset from "@images/blog/meeting2image.png";
 import meetingset1 from "@images/blog/videoimagemeeting1.png";
-import meetingset2 from "@images/blog/videoimagemeeting2.png";
+import whoareimage from "@images/blog/whoarewe.png";
 import meetingset3 from "@images/blog/videoimagemeeting3.png";
-
+import '@fortawesome/fontawesome-free/css/all.min.css';
 const HeadereLinks = [
     { path: "/", title: "About Us" },
     { path: "/", title: "What We Do?" },
@@ -29,14 +29,10 @@ const HeadereLinks = [
     { path: "/term_services", title: "Privacy Policy" },
     { path: "/", title: "Subscribe" },
 ];
-const nonHeaderRoutes = [""];
-const Blog = () => {
-    return (
-        <div>
-            {/* {!nonHeaderRoutes.includes(
-                        location.pathname.split("/")[1]
-                    ) && ( */}
-            <>
+const About = () => {
+  return (
+    <div>
+          <>
                 <div className="">
                     <div className="row">
                         <div>
@@ -64,94 +60,98 @@ const Blog = () => {
                         </div>
                     </div>
                     <div className="blog-background-color">
-                        <div className="container dev-container-side">
+                        <div className="container my-text-container-about-us-page">
                             <div className="row">
                                 <div className="col-md-2">
-                                    <div className="div-left-blog-text">
-                                        <span>
-                                            <span
-                                                style={{
-                                                    backgroundColor: "#ffff00",
-                                                    padding: "3px",
-                                                    borderRadius: "5px",
-                                                    color: "black",
-                                                    /* color: white; */
-                                                }}
-                                            >
-                                                Blog
-                                            </span>{" "}
-                                            <span
-                                                 style={{
-                                                    backgroundColor: "#ffff00",
-                                                    padding: "3px",
-                                                    borderRadius: "5px",
-                                                    color: "black",
-                                                    /* color: white; */
-                                                }}
-                                            >
-                                                {" "}
-                                                Blog
-                                            </span>
-                                            Name
-                                        </span>
+                                    <div className="who-we-are-blog">
+                                       <span>Who We Are</span>
                                     </div>
-                                    <div className="dive-reight-border">
-                                        <div className="circle-dev-blog">
-                                            <span>3 min</span>
-                                        </div>
-                                        <div className="date-blog-after-circle">
-                                            <span>12 Jun, 2023</span>
-                                        </div>
-                                        <div className="ul-item-blog-social-icon">
-                                            <a href="https://www.instagram.com/example">
-                                                <FontAwesomeIcon
-                                                    icon={faInstagram}
-                                                />
-                                            </a>
-                                            <a href="https://www.facebook.com/example">
-                                                <FontAwesomeIcon
-                                                    icon={faFacebook}
-                                                />
-                                            </a>
-                                            <a href="https://www.youtube.com/example">
-                                                <FontAwesomeIcon
-                                                    icon={faYoutube}
-                                                />
-                                            </a>
-                                            <a href="https://twitter.com/example">
-                                                <FontAwesomeIcon
-                                                    icon={faTwitter}
-                                                />
-                                            </a>
-                                        </div>
-                                    </div>
+                                  
                                 </div>
                                 <div className="col-md-10">
                                     {/* <div className="div-left-blog-text">
                                         <h5 style={}>reight side</h5>
                                     </div> */}
-                                    <div className="dev-left-blog-p">
+                                    <div className="blog-with-content-set-with-image">
                                         <span>
-                                            Lorem ipsum dolor sit amet, trt
-                                            aksdg asking no one consectetur
-                                            asking no one.
-                                            Lorem ipsum dolor sit amet, trt
-                                            aksdg asking no one consectetur
-                                            asking no one.
+                                        Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi.Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi.Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. 
                                         </span>
                                     </div>
-                                    <div className="div-left-blog-text-written">
-                                        <span>Written by SJ Staff</span>
-                                    </div>
+                                  
                                 </div>
                             </div>
+                            <div className="container">
+                             <div className="row">
+                               <div className="col-3">
+                                 <div className="div-container-font-alignment-box-cart">
+                                <div className='div-container-font-alignment-box-cart-text'>
+                                <span >Leadership Principle</span>
+                               
+                                </div>
+                                <div className="dev-space-text-area-data-scrool-card">
+                                <span >Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one c.</span>
+                                </div>
+                                <div className="dev-button-learn-more-data-card">
+                                <button >Learn <small>more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
+                            </button>
+                                </div>
+                                 </div>
+                               </div>
+                               <div className="col-3">
+                                 <div className="div-container-font-alignment-box-cart">
+                                <div className='div-container-font-alignment-box-cart-text'>
+                                <span >Leadership Principle</span>
+                               
+                                </div>
+                                <div className="dev-space-text-area-data-scrool-card">
+                                <span >Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one c.</span>
+                                </div>
+                                <div className="dev-button-learn-more-data-card">
+                                <button >Learn <small>more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
+                            </button>
+                                </div>
+                                 </div>
+                               </div>
+                               <div className="col-3">
+                                 <div className="div-container-font-alignment-box-cart">
+                                <div className='div-container-font-alignment-box-cart-text'>
+                                <span >Leadership Principle</span>
+                               
+                                </div>
+                                <div className="dev-space-text-area-data-scrool-card">
+                                <span >Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one c.</span>
+                                </div>
+                                <div className="dev-button-learn-more-data-card">
+                                <button >Learn <small>more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
+                            </button>
+                                </div>
+                                 </div>
+                               </div>
+                               <div className="col-3">
+                                 <div className="div-container-font-alignment-box-cart">
+                                <div className='div-container-font-alignment-box-cart-text'>
+                                <span >Leadership Principle</span>
+                               
+                                </div>
+                                <div className="dev-space-text-area-data-scrool-card">
+                                <span >Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one c.</span>
+                                </div>
+                                <div className="dev-button-learn-more-data-card">
+                                <button >Learn <small>more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
+                            </button>
+                                </div>
+                                 </div>
+                               </div>
+                             </div>
+                            </div>
                         </div>
+
                     </div>
                     <div className="container image-cainter-dev">
                         <div className="row">
                             <div className="col-12">
                                 <div className="background-image-lin-dve">
-                                    <img src={meetingimage} alt="" />
+                                    <img src={whoareimage} alt="" />
                                 </div>
                             </div>
                         </div>
@@ -529,9 +529,8 @@ const Blog = () => {
                     </div>
                 </div>
             </>
-            {/* )} */}
-        </div>
-    );
-};
+    </div>
+  )
+}
 
-export default Blog;
+export default About

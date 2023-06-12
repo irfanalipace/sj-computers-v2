@@ -28,7 +28,8 @@ import Contact from "@components/Footer/FooterMenu/Contact";
 import Policy from "@pages/Policy/Policy";
 import SkuPage from "@pages/SKUTables/SkuPage";
 import BlogPage from "@pages/Blog/BlogPage";
-import SingleBlog from "@components/Blog/SingleBlog/SingleBlog";
+import SingleBlog from "@pages/Blog/BlogSingle";
+import AboutPage from "@pages/About/AboutPage";
 
 const Router = () => {
     const routes = [
@@ -205,12 +206,21 @@ const Router = () => {
                     </Suspense>
                
             ),
-        },,{
+        },{
             path: "/blog-page",
             element: (
              
                     <Suspense fallback={<Loader />}>
-                     <SingleBlog />
+                <SingleBlog />
+                    </Suspense>
+               
+            ),
+        },{
+            path: "/about-us",
+            element: (
+             
+                    <Suspense fallback={<Loader />}>
+                   <AboutPage />
                     </Suspense>
                
             ),

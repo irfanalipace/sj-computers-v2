@@ -222,8 +222,9 @@
 
     background: white;
     /* margin-right: 23px; */
-}
-
+}.in-stock-area-lable{
+    font-size: 15px;
+    }
 @media screen and (min-width: 767px) and (max-width: 1150px) {
     .button-cart-sell .button-text-button {
         font-size: 12px;
