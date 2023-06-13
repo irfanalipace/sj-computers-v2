@@ -173,7 +173,7 @@ const About = () => {
                                 </div>
                                 <div className="row">
                             <div className="col-10">
-                                <div className="position-image-data-blog">
+                                <div className="position-image-data-blog blog-about-position-image-data-footer">
                                     <img src={meetingset} />
                                 </div>
                             </div>

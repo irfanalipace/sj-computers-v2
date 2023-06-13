@@ -396,15 +396,15 @@ const Blog = () => {
                 <div style={{ background: "rgba(49, 130, 67, 0.1)" }}>
                     <div className="container container-blog-data-footer">
                         <div className="row">
-                            <div className="col-2">
+                            <div className="col-md-2">
                                 <div className="sj-left-dev-set-data-from-section">
                                     <span>More from SJ</span>
                                 </div>
                             </div>
-                            <div className="col-9">
-                                <div style={{ marginLeft: "59px" }}>
+                            <div className="col-md-9 col-sm-10">
+                                <div  className="card-dev-container-mobile-space-section-age-cart">
                                     <div className="row">
-                                        <div className="col-3">
+                                    <div className="col-md-3 col-sm-6 col-6">
                                             <div className="image-fooetr-blog">
                                                 <img
                                                     className="image-for-blog-data-sets-view"
@@ -412,6 +412,7 @@ const Blog = () => {
                                                 />
                                             </div>
                                             <div
+                                             className="dev-folder-card-blog-section-dev-page"
                                                 style={{ background: "white" }}
                                             >
                                                 <div
@@ -443,7 +444,7 @@ const Blog = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-3">
+                                        <div className="col-md-3 col-sm-6 col-6">
                                             <div className="image-fooetr-blog">
                                                 <img
                                                     src={meetingset1}
@@ -451,6 +452,7 @@ const Blog = () => {
                                                 />
                                             </div>
                                             <div
+                                             className="dev-folder-card-blog-section-dev-page"
                                                 style={{ background: "white" }}
                                             >
                                                 <div
@@ -483,7 +485,7 @@ const Blog = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-3">
+                                        <div className="col-md-3 col-sm-6 col-6">
                                             <div className="image-fooetr-blog">
                                                 <img
                                                     src={meetingset1}
@@ -491,6 +493,7 @@ const Blog = () => {
                                                 />
                                             </div>
                                             <div
+                                            className="dev-folder-card-blog-section-dev-page"
                                                 style={{ background: "white" }}
                                             >
                                                 <div

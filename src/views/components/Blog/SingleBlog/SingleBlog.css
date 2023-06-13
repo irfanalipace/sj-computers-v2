@@ -532,6 +532,9 @@ color: #318243;
         color: goldenrod;
         padding-right: 12px;
     }
+  .single-blog-pages-dev-container-all-products{
+    padding-right: 116px;
+  }
 @media screen and (max-width:576px) {
     .position-image-data-blog-text-data {
         padding-left: -50px;
@@ -550,6 +553,33 @@ color: #318243;
     }.treding-blog-sets {
         padding-bottom: 20px;
         margin-top: 12px;
+    }.mid-graph-pargarph-page-data span {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 144%;
+        color: #333333;
+    }   .single-blog-pages-dev-container-all-products{
+        padding-right: 11px;
+      }.stories-data-effctive-blog {
+        padding-top: 29px;
+    }.see-all-stories-data-ever-data {
+        margin-left: 10px;
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 22px;
+        letter-spacing: 0.46px;
+        color: #000000;
+    }.dev-space-name-folder-span-text span {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 144%;
+        color: #FFFFFF;
     }
 }
  

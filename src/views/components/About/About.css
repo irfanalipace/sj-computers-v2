@@ -139,7 +139,14 @@ line-height: 144%;
 
 color: #333333;
 }
-
+.blog-about-position-image-data-footer{
+    height: 372px;
+    margin-bottom: 29px;
+    position: relative;
+    width: 100%;
+    width: 1111px;
+    /* max-width: 100%; */
+}
 @media screen and (max-width:800px) {
     .cart-about-ul-components-dev-section {
         padding-right: 0px;
@@ -186,5 +193,12 @@ color: #333333;
         font-size: 14px;
         line-height: 144%;
         color: #FFFFFF;
+    }.blog-about-position-image-data-footer {
+        height: 372px;
+        margin-bottom: 29px;
+        position: relative;
+        width: 0%;
+        width: 1111px;
+        max-width: 100%;
     }
 }

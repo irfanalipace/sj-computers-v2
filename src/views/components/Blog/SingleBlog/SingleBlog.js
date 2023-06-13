@@ -230,9 +230,9 @@ const SingleBlog = () => {
                 </div>
             </div>
 
-            <div className="container " style={{paddingRight:'116px'}} >
+            <div className="container single-blog-pages-dev-container-all-products">
                 <div className="row">
-                    <div className="col-md-4 ">
+                    <div className="col-md-4 col-lg-4 col-sm-6">
                         <div className="product-card">
                             <img src={book} alt="Product 1" />
                             <div className="dev-data-span-card-dev">
@@ -252,7 +252,7 @@ const SingleBlog = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-lg-4 col-sm-6">
                         <div className="product-card">
                             <img src={book} alt="Product 1" />
                             <div className="dev-data-span-card-dev">
@@ -272,7 +272,7 @@ const SingleBlog = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-lg-4 col-sm-6">
                         <div
                             className="product-card"
                             style={{ backgroundColor: "#318243" }}
