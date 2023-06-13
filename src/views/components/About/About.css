@@ -111,3 +111,80 @@ color: #FFFFFF;
 .dev-button-learn-more-data-card {
     padding: 0px 0 0 22px;
 }
+
+.cart-about-ul-components-dev-section {
+    padding-right: 162px;
+    padding-left: 28px;
+    margin-top: 45px;
+}
+
+.blog-with-content-set-with-image{
+    padding-right: 192px;
+}
+
+.about-us-page-after-image-data {
+    margin-bottom: 28px;
+}
+.about-us-page-after-image-data span {
+   
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 144%;
+/* or 23px */
+
+
+/* Primary */
+
+color: #333333;
+}
+
+@media screen and (max-width:800px) {
+    .cart-about-ul-components-dev-section {
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-top: 45px;
+    }.div-container-font-alignment-box-cart{
+        margin-bottom: 16px;
+    }.div-container-font-alignment-box-cart {
+        width: 100%;
+        /* height: 459px; */
+        left: 231px;
+        max-height: 100%;
+        top: 302px;
+        background: #03407A;
+    }.blog-with-content-set-with-image {
+        padding-right: 4px;
+        margin-top: 12px;
+    }.div-container-font-alignment-box-cart-text span {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 22px;
+        color: #E0BC00;
+    }.dev-space-text-area-data-scrool-card {
+        padding: 14px;
+    }.dev-space-text-area-data-scrool-card span {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 144%;
+        color: #FFFFFF;
+    }.image-cainter-dev {
+        padding-left: 13px;
+        width: 100%;
+        z-index: 2;
+        position: relative;
+        margin-top: -164px;
+    }.blog-with-content-set-with-image span {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 144%;
+        color: #FFFFFF;
+    }
+}
