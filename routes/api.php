@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\ContactUs\ContactUsController;
 use App\Http\Controllers\Api\SystemPages\SystemPagesController;
 use App\Http\Controllers\Api\InventoryController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Api\Blog\BlogController;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -102,6 +103,11 @@ Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('a
 *Contact-us
 */
 Route::post('contact-us', [ContactUsController::class, 'contactSubmit'])->name('customer-contact');
+
+/*
+ * blogs
+ */
+Route::get('blogs', [BlogController::class, 'getList'])->name('blogs');
 
 /*
 *Place Order
