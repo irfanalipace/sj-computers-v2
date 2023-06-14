@@ -41,12 +41,12 @@ const Footer = () => {
                                             Get to Know Us
                                         </h6>
                                         <li>
-                                            <a
-                                                href="#!"
+                                            <Link
+                                                to="/about-us"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 About us
-                                            </a>
+                                            </Link>
                                         </li>
                                         {/* <li>
                                             <a
