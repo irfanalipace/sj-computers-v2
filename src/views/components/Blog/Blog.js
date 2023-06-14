@@ -19,7 +19,8 @@ import meetingset from "@images/blog/meeting2image.png";
 import meetingset1 from "@images/blog/videoimagemeeting1.png";
 import meetingset2 from "@images/blog/videoimagemeeting2.png";
 import meetingset3 from "@images/blog/videoimagemeeting3.png";
-
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 const HeadereLinks = [
     { path: "/", title: "About Us" },
     { path: "/", title: "What We Do?" },
@@ -399,6 +400,10 @@ const Blog = () => {
                             <div className="col-md-2">
                                 <div className="sj-left-dev-set-data-from-section">
                                     <span>More from SJ</span>
+                                 <Stack spacing={2}>
+                                <Pagination count={3} shape="rounded" />
+                            
+                                </Stack>
                                 </div>
                             </div>
                             <div className="col-md-9 col-sm-10">

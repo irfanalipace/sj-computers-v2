@@ -678,12 +678,6 @@ color: #333333;
     }.container-blog-data-footer {
         padding-top: 20px;
         padding-bottom: 20px;
-    }.sj-left-dev-set-data-from-section{
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 300;
-        font-size: 12px;
-        line-height: 144%;
     }
     .dve-sj-computers-icon-dev-blog{
         margin-top: 3px;
@@ -703,6 +697,19 @@ color: #333333;
     }
     .card-dev-container-mobile-space-section-age-cart{
 margin-left: 59px;
+    }
+
+    .sj-left-dev-set-data-from-section span{
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 144%;
+    }
+    .sj-left-dev-set-data-from-section {
+        
+        margin-bottom: 6px;
+       
     }
     @media screen and (max-width:600px) {
         .dive-reight-border {

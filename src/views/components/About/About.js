@@ -20,6 +20,7 @@ import meetingset1 from "@images/blog/videoimagemeeting1.png";
 import whoareimage from "@images/blog/whoarewe.png";
 import meetingset3 from "@images/blog/videoimagemeeting3.png";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+
 const HeadereLinks = [
     { path: "/", title: "About Us" },
     { path: "/", title: "What We Do?" },
@@ -89,14 +90,14 @@ const About = () => {
                                        <div className="col-md-6 col-lg-3 col-6">
                                          <div className="div-container-font-alignment-box-cart">
                                         <div className='div-container-font-alignment-box-cart-text'>
-                                        <span >Leadership Principle</span>
+                                        <span>Leadership Principle</span>
                                        
                                         </div>
                                         <div className="dev-space-text-area-data-scrool-card">
                                         <span >Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one c.</span>
                                         </div>
                                         <div className="dev-button-learn-more-data-card">
-                                        <button >Learn <small>more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
+                                        <button >Learn <small className="fa-decoration-span-arrow-dev-card">more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
                                     </button>
                                         </div>
                                          </div>
@@ -111,7 +112,7 @@ const About = () => {
                                         <span >Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one c.</span>
                                         </div>
                                         <div className="dev-button-learn-more-data-card">
-                                        <button >Learn <small>more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
+                                        <button >Learn <small className="fa-decoration-span-arrow-dev-card">more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
                                     </button>
                                         </div>
                                          </div>
@@ -126,7 +127,7 @@ const About = () => {
                                         <span >Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one c.</span>
                                         </div>
                                         <div className="dev-button-learn-more-data-card">
-                                        <button >Learn <small>more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
+                                        <button >Learn <small className="fa-decoration-span-arrow-dev-card">more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
                                     </button>
                                         </div>
                                          </div>
@@ -141,7 +142,7 @@ const About = () => {
                                         <span >Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one c.</span>
                                         </div>
                                         <div className="dev-button-learn-more-data-card">
-                                        <button >Learn <small>more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
+                                        <button >Learn <small className="fa-decoration-span-arrow-dev-card">more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
                                     </button>
                                         </div>
                                          </div>
