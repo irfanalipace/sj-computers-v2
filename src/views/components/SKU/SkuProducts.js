@@ -14,7 +14,7 @@ import { productsApi, filterProductsApi } from "@api/products";
 import { downloadProductsApi } from "@api/inventory";
 import { downloadFile } from "@utils/helpers";
 
-export const SkuProducts = ({reRender}) => {
+export const SkuProducts = ({ reRender }) => {
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [pageCount, setPageCount] = useState(0);
@@ -30,9 +30,7 @@ export const SkuProducts = ({reRender}) => {
     }, []);
     useEffect(() => {
         fetchProducts(null, currentPage);
-
-    }, [reRender])
-    
+    }, [reRender]);
 
     const downloadProducts = async () => {
         setDownloadingProducts(true);
@@ -58,36 +56,64 @@ export const SkuProducts = ({reRender}) => {
         setIsLoading(false);
     };
 
-    const handleSearch = async (e, page = 1) => {
+    // const handleSearch = async (e, page = 1) => {
+    //     setIsLoading(true);
+    //     const filter = {
+    //         name: search,
+    //         page,
+    //         per_page: perPage,
+    //     };
+    //     try {
+    //         setIsSearchActive(true);
+    //         if (search) {
+    //             let response = await filterProductsApi(filter);
+    //             setData(response.data.data);
+    //             setCurrentPage(response.data.current_page);
+    //             setPageCount(response.data.last_page);
+    //         } else {
+    //             fetchProducts(null, 1);
+    //             setIsSearchActive(false);
+    //         }
+    //     } catch (error) {
+    //         console.print("error", error);
+    //     }
+    //     setIsLoading(false);
+    // };
+    const handleSearch = async (e) => {
+        e.preventDefault(); // Prevent form submission
+    
         setIsLoading(true);
         const filter = {
-            name: search,
-            page,
-            per_page: perPage,
+          name: search,
+          page: 1, // Always start from the first page when searching
+          per_page: perPage,
         };
+    
         try {
-            setIsSearchActive(true);
-            if (search) {
-                let response = await filterProductsApi(filter);
-                setData(response.data.data);
-                setCurrentPage(response.data.current_page);
-                setPageCount(response.data.last_page);
-            } else {
-                fetchProducts(null, 1);
-                setIsSearchActive(false);
-            }
+          setIsSearchActive(true);
+          if (search) {
+            let response = await filterProductsApi(filter);
+            setData(response.data.data);
+            setCurrentPage(response.data.current_page);
+            setPageCount(response.data.last_page);
+          } else {
+            fetchProducts(null, 1);
+            setIsSearchActive(false);
+          }
         } catch (error) {
-            console.print("error", error);
+          console.error("error", error);
         }
+    
         setIsLoading(false);
-    };
-
+      };
+    
     return (
         <div>
             <div className="product-info py-4">
                 <h3 className="my-3">Products</h3>
 
-                <div className="seach-input-sku">
+                {/* <div className="seach-input-sku">
+               
                     <FormControl
                         className="search-field"
                         sx={{ m: 1, minWidth: 300 }}
@@ -103,6 +129,7 @@ export const SkuProducts = ({reRender}) => {
                     <button onClick={handleSearch} className="sku-form-btn">
                         Search
                     </button>
+                   
                     <button
                         className="sku-form-btn ms-3"
                         onClick={downloadProducts}
@@ -113,7 +140,38 @@ export const SkuProducts = ({reRender}) => {
                             " Download Products"
                         )}
                     </button>
+                </div> */}
+                <div className="search-input-sku">
+                    <form onSubmit={handleSearch}>
+                        <FormControl
+                            className="search-field"
+                            sx={{ m: 1, minWidth: 300 }}
+                        >
+                            <TextField
+                                id="outlined-basic"
+                                label="Search by name"
+                                variant="outlined"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                        </FormControl>
+                        <button type="submit" className="sku-form-btn">
+                            Search
+                        </button>
+                        <button
+                            className="sku-form-btn ms-3"
+                            onClick={downloadProducts}
+                        >
+                            {downloadingProducts ? (
+                                <Loader />
+                            ) : (
+                                " Download Products"
+                            )}
+                        </button>
+                    </form>
                 </div>
+
+            
                 <>
                     {isLoading ? (
                         <Loader />

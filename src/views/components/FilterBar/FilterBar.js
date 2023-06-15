@@ -235,8 +235,6 @@ const FilterBar = () => {
       </div>
               </div>
              )
-         
-        
              }
               
    
@@ -250,7 +248,7 @@ const FilterBar = () => {
                     filters.hasOwnProperty("hard_disk")
                         ? renderItemsRam(options)
                         : renderedItems(options, category)}
-                        {console.log(renderedCategories,'jfdwejfwfhwhfwe ewhfewhefhwfhwef')}
+                        {console.log(category,'jfdwejfwfhwhfwe ewhfewhefhwfhwef')}
                 </ul>
             </li>
         )

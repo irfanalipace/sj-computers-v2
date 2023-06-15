@@ -117,6 +117,28 @@ export const SkuTables = ({render, setRender}) => {
             <div className="sku-page-dev mb-5">
                 <div className="row">
                     <div className="col-lg-12 col-md-12 col-sm-12 ps-0">
+                        {/* <div className="seach-input-sku">
+                            {""}{" "}
+                            <FormControl
+                                className="search-field"
+                                sx={{ m: 1, minWidth: 500 }}
+                            >
+                                <TextField
+                                    id="outlined-basic"
+                                    label="Search by SKU"
+                                    variant="outlined"
+                                    value={search}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
+                            </FormControl>
+                            <button
+                                onClick={handleChange}
+                                className="sku-form-btn"
+                            >
+                                Search
+                            </button>
+                        </div> */}
+                   
                         <div className="seach-input-sku">
                             {""}{" "}
                             <FormControl
@@ -138,6 +160,7 @@ export const SkuTables = ({render, setRender}) => {
                                 Search
                             </button>
                         </div>
+                      
                     </div>
                 </div>
                 {invent?.id ? (

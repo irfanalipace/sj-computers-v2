@@ -30,6 +30,7 @@ import SkuPage from "@pages/SKUTables/SkuPage";
 import BlogPage from "@pages/Blog/BlogPage";
 import SingleBlog from "@pages/Blog/BlogSingle";
 import AboutPage from "@pages/About/AboutPage";
+import WhatWeDoPage from "@pages/WhatWeDo/WhatWeDoPage";
 
 const Router = () => {
     const routes = [
@@ -221,6 +222,15 @@ const Router = () => {
              
                     <Suspense fallback={<Loader />}>
                    <AboutPage />
+                    </Suspense>
+               
+            ),
+        },{
+            path: "/what-we-do",
+            element: (
+             
+                    <Suspense fallback={<Loader />}>
+                  <WhatWeDoPage />
                     </Suspense>
                
             ),
