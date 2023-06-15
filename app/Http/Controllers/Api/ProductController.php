@@ -104,13 +104,10 @@ class ProductController extends BaseController
 
 
     public function getFilterProducts(SearchProductRequest $request){
+
         $perPageRecord = $request->get('per_page') ?? 12;
 
-        // return $request->all();
-        // dd($request->all());
-
         $sql = Product::query();
-
 
         /*
          * for general search
@@ -137,17 +134,27 @@ class ProductController extends BaseController
 
             foreach ($filters as $filter) {
 
-
-                $filter = json_decode($filter, true);
+//                $filter = json_decode($filter, true);
 
                 $key = $filter['key'] ?? '';
                 $value = $filter['value'] ?? '';
 
-                if(!empty($key) && !empty($value)){
-                    $productIds =  ProductInfo::where(['key' => $key, 'value' => $value])->pluck('product_id')->toArray();
 
-                    $sql = $sql->whereIn('id',$productIds);
-                }
+               if($key == 'ram_memory' || $key == 'hard_disk'){
+                    $productIds = $this->getProductFilterIds($key, $value['unit'], (int) $value['min'], (int) $value['max']);
+                    
+                   $sql = $sql->whereIn('id',$productIds);
+               }
+
+               if($key == 'processor' || $key == 'brand'){
+                   if(!empty($key) && !empty($value)){
+                       $productIds =  ProductInfo::where(['key' => $key, 'value' => $value])->pluck('product_id')->toArray();
+
+                       $sql = $sql->whereIn('id',$productIds);
+                   }
+               }
+
+
             }
 
         }
@@ -168,6 +175,46 @@ class ProductController extends BaseController
 
         return $this->sendResponse($data);
 
+
+    }
+
+
+    public function getProductFilterIds($key,$unit,int $min,int $max)
+    {
+        $ids = [];
+
+        $query = '';
+
+        if($unit == 'TB') {
+            $query = ProductInfo::where(function ($query) use ($key) {
+                $query->where('key', $key)
+                    ->Where('value', 'LIKE', '%MB%');
+            })->orwhere(function ($query) use ($key) {
+                $query->where('key', $key)
+                    ->Where('value', 'LIKE', '%GB%');
+            });
+
+        } elseif($unit == 'GB'){
+            $query = ProductInfo::where('key', $key)
+                ->Where('value', 'LIKE', '%MB%');
+        }
+
+        if(!empty($query)){
+            $ids = $query->pluck('product_id')
+                ->toArray();
+        }
+
+        $record = DB::table('product_infos')  ->where('key',$key)
+            ->Where('value', 'like', '%' . $unit . '%')
+            ->select(DB::raw('CAST(value AS UNSIGNED) AS value'),'product_id','id' )
+            ->get();
+
+        $productInfos = $record->where('value','>=', $min)
+            ->where('value','<=',$max)
+        ->pluck('product_id')
+        ->toArray();
+
+        return array_merge($productInfos,$ids);
 
     }
 
