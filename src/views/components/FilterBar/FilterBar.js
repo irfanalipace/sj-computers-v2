@@ -302,17 +302,15 @@ const FilterBar = () => {
 
     const applyRange = (e, category) => {
         let unit = selectedUnit[category]?.unit;
-        console.log("11111 categories", category);
-        console.log("11111 selectedUnit", selectedUnit);
         let options = {
             unit: unit,
             min:
-                selectedUnit[category]?.min || rangeValues[category][unit]?.min,
+                selectedUnit[category]?.range?.min ||
+                rangeValues[category][unit]?.min,
             max:
-                selectedUnit[category]?.max || rangeValues[category][unit]?.max,
+                selectedUnit[category]?.range?.max ||
+                rangeValues[category][unit]?.max,
         };
-        console.log("11111 options: ", options);
-
         handleFilterSelect(e, category, options);
     };
 
