@@ -134,7 +134,7 @@ class ProductController extends BaseController
 
             foreach ($filters as $filter) {
 
-//                $filter = json_decode($filter, true);
+                $filter = json_decode($filter, true);
 
                 $key = $filter['key'] ?? '';
                 $value = $filter['value'] ?? '';
@@ -142,7 +142,7 @@ class ProductController extends BaseController
 
                if($key == 'ram_memory' || $key == 'hard_disk'){
                     $productIds = $this->getProductFilterIds($key, $value['unit'], (int) $value['min'], (int) $value['max']);
-                    
+
                    $sql = $sql->whereIn('id',$productIds);
                }
 
