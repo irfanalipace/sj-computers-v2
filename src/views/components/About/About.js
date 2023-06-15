@@ -96,7 +96,7 @@ const About = () => {
                                         <div className="dev-space-text-area-data-scrool-card">
                                         <span >Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one c.</span>
                                         </div>
-                                        <div className="dev-button-learn-more-data-card">
+                                        <div className="dev-button-learn-more-data-card hover-effect-card-button-blogs">
                                         <button >Learn <small className="fa-decoration-span-arrow-dev-card">more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
                                     </button>
                                         </div>
@@ -111,7 +111,7 @@ const About = () => {
                                         <div className="dev-space-text-area-data-scrool-card">
                                         <span >Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one c.</span>
                                         </div>
-                                        <div className="dev-button-learn-more-data-card">
+                                        <div className="dev-button-learn-more-data-card hover-effect-card-button-blogs">
                                         <button >Learn <small className="fa-decoration-span-arrow-dev-card">more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
                                     </button>
                                         </div>
@@ -126,7 +126,7 @@ const About = () => {
                                         <div className="dev-space-text-area-data-scrool-card">
                                         <span >Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one c.</span>
                                         </div>
-                                        <div className="dev-button-learn-more-data-card">
+                                        <div className="dev-button-learn-more-data-card hover-effect-card-button-blogs">
                                         <button >Learn <small className="fa-decoration-span-arrow-dev-card">more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
                                     </button>
                                         </div>
@@ -141,7 +141,7 @@ const About = () => {
                                         <div className="dev-space-text-area-data-scrool-card">
                                         <span >Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one c.</span>
                                         </div>
-                                        <div className="dev-button-learn-more-data-card">
+                                        <div className="dev-button-learn-more-data-card hover-effect-card-button-blogs">
                                         <button >Learn <small className="fa-decoration-span-arrow-dev-card">more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
                                     </button>
                                         </div>

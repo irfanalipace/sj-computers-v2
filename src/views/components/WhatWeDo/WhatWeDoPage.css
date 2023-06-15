@@ -40,7 +40,17 @@ height: 244px;
     width: 1010px;
     max-width: 100%;
 }
+.dev-button-learn-more-data-what-we-do-button {
+    padding: 20px 0 0 17px;
+}
 
+.hover-effect-card-button-blogs button:hover{
+    background: black;
+    border: none;
+}
+.fa-decoration-span-arrow-dev-card{
+color:#E0BC00
+}
 @media screen and (max-width:600px) {
     .position-image-data-what-todo-page {
        

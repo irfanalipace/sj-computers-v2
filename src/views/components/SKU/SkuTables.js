@@ -13,6 +13,7 @@ export const SkuTables = ({render, setRender}) => {
     const [action, setAction] = useState(null);
 
     const handleChange = async (e) => {
+        e.preventDefault();
         setLoading(true);
         await getInventory(search)
             .then((_) => {
@@ -141,7 +142,7 @@ export const SkuTables = ({render, setRender}) => {
                    
                         <div className="seach-input-sku">
                             {""}{" "}
-                            <FormControl
+                            {/* <FormControl
                                 className="search-field"
                                 sx={{ m: 1, minWidth: 500 }}
                             >
@@ -158,7 +159,21 @@ export const SkuTables = ({render, setRender}) => {
                                 className="sku-form-btn"
                             >
                                 Search
-                            </button>
+                            </button> */}
+                            <form onSubmit={handleChange}>
+    <FormControl className="search-field" sx={{ m: 1, minWidth: 500 }}>
+        <TextField
+            id="outlined-basic"
+            label="Search by SKU"
+            variant="outlined"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+        />
+    </FormControl>
+    <button className="sku-form-btn" type="submit">
+        Search
+    </button>
+</form>
                         </div>
                       
                     </div>
