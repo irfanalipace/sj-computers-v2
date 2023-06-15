@@ -118,7 +118,14 @@
     font-size: 16px;
     font-weight: 600;
 }
-
+.radio-container input[type="radio"]:checked + .checkmark::before {
+    background-color: green;
+  }
+  
+  .radio-container input[type="radio"]:checked + .checkmark::after {
+    background-color: green;
+  }
+  
 @media screen and (max-width: 585px) {
     .sticky-filter-bar {
         width: 0;

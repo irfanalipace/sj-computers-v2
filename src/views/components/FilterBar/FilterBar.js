@@ -132,6 +132,7 @@ const FilterBar = () => {
       type="radio"
       name={category} // Add a name attribute to group the radio buttons by category
       value={option.value} // Add a value attribute to specify the value of the selected radio button
+  
       onChange={(event) =>
                          handleCheckboxChange(
                              event,
@@ -140,7 +141,7 @@ const FilterBar = () => {
                          )
                     }
     />
-    <span className="radiomark"></span> {/* Replace the checkmark with radiomark class */}
+    <span className="radiomark " ></span> {/* Replace the checkmark with radiomark class */}
     {option.value}
   </label>
 </li>
