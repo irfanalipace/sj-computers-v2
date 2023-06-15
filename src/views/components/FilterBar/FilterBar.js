@@ -102,29 +102,49 @@ const FilterBar = () => {
         return (
             <>
                 {optionArray.map((option, index) => (
-                    <li
-                        className="filter-value"
-                        key={`${option.value}-${index}`}
-                    >
-                        <label
-                            className="checkbox-container"
-                            htmlFor={`${option.value}-${index}`}
-                        >
-                            <input
-                                id={`${option.value}-${index}`}
-                                type="checkbox"
-                                onChange={(event) =>
-                                    handleCheckboxChange(
-                                        event,
-                                        category,
-                                        option.value
-                                    )
-                                }
-                            />
-                            <span className="checkmark"></span>
-                            {option.value}
-                        </label>
-                    </li>
+                    // <li
+                    //     className="filter-value"
+                    //     key={`${option.value}-${index}`}
+                    // >
+                    //     <label
+                    //         className="checkbox-container"
+                    //         htmlFor={`${option.value}-${index}`}
+                    //     >
+                    //         <input
+                    //             id={`${option.value}-${index}`}
+                    //             type="checkbox"
+                    //             onChange={(event) =>
+                    //                 handleCheckboxChange(
+                    //                     event,
+                    //                     category,
+                    //                     option.value
+                    //                 )
+                    //             }
+                    //         />
+                    //         <span className="checkmark"></span>
+                    //         {option.value}
+                    //     </label>
+                    // </li>
+                    <li className="filter-value" key={`${option.value}-${index}`}>
+  <label className="radio-container" htmlFor={`${option.value}-${index}`}>
+    <input
+      id={`${option.value}-${index}`}
+      type="radio"
+      name={category} // Add a name attribute to group the radio buttons by category
+      value={option.value} // Add a value attribute to specify the value of the selected radio button
+      onChange={(event) =>
+                         handleCheckboxChange(
+                             event,
+                             category,
+                             option.value
+                         )
+                    }
+    />
+    <span className="radiomark"></span> {/* Replace the checkmark with radiomark class */}
+    {option.value}
+  </label>
+</li>
+
                 ))}
                 {visibleEntries[category].visibleEntries <=
                     filters[category].length && (
