@@ -37,38 +37,64 @@ const FilterBar = () => {
         });
     };
 
-    const handleCheckboxChange = (event, category, option) => {
+    // const handleCheckboxChange = (event, category, option) => {
+    //     const isChecked = event.target.checked;
+    //     setFiltersInArray((prevSelectedFilters) => {
+    //         let filter = {
+    //             key: category,
+    //             value: option,
+    //         };
+    //         const isChecked = event.target.checked;
+
+    //         if (isChecked) {
+    //             return [...prevSelectedFilters, filter];
+    //         }
+    //         let index = prevSelectedFilters.findIndex((filter) => {
+    //             return filter.value === option;
+    //         });
+
+    //         let tempArray = [...prevSelectedFilters];
+
+    //         if (index > -1) {
+    //             tempArray.splice(index, 1);
+    //         }
+    //         return tempArray;
+    //     });
+
+    //     setSelectedFilters((prevSelectedFilters) => ({
+    //         ...prevSelectedFilters,
+    //         [category]: isChecked
+    //             ? [...(prevSelectedFilters[category] || []), option]
+    //             : prevSelectedFilters[category].filter(
+    //                   (filter) => filter.value !== option
+    //               ),
+    //     }));
+    // };
+    const handleRadioButton = (event, category, option) => {
         const isChecked = event.target.checked;
         setFiltersInArray((prevSelectedFilters) => {
             let filter = {
                 key: category,
                 value: option,
             };
-            const isChecked = event.target.checked;
 
-            if (isChecked) {
-                return [...prevSelectedFilters, filter];
-            }
+            // const isChecked = event.target.checked;
+
+            // if (isChecked) {
+            //     return [...prevSelectedFilters, filter];
+            // }
             let index = prevSelectedFilters.findIndex((filter) => {
-                return filter.value === option;
+                return filter.key === category;
             });
-
             let tempArray = [...prevSelectedFilters];
 
             if (index > -1) {
-                tempArray.splice(index, 1);
-            }
-            return tempArray;
-        });
+                tempArray[index] = filter;
 
-        setSelectedFilters((prevSelectedFilters) => ({
-            ...prevSelectedFilters,
-            [category]: isChecked
-                ? [...(prevSelectedFilters[category] || []), option]
-                : prevSelectedFilters[category].filter(
-                      (filter) => filter.value !== option
-                  ),
-        }));
+                return tempArray;
+            }
+            return [...tempArray, filter];
+        });
     };
 
     useEffect(() => {
@@ -95,69 +121,78 @@ const FilterBar = () => {
     };
 
     let renderedItems = (options, category) => {
-        let optionArray = options.slice(
-            0,
-            visibleEntries[category].visibleEntries
-        );
-        return (
-            <>
-                {optionArray.map((option, index) => (
-                    // <li
-                    //     className="filter-value"
-                    //     key={`${option.value}-${index}`}
-                    // >
-                    //     <label
-                    //         className="checkbox-container"
-                    //         htmlFor={`${option.value}-${index}`}
-                    //     >
-                    //         <input
-                    //             id={`${option.value}-${index}`}
-                    //             type="checkbox"
-                    //             onChange={(event) =>
-                    //                 handleCheckboxChange(
-                    //                     event,
-                    //                     category,
-                    //                     option.value
-                    //                 )
-                    //             }
-                    //         />
-                    //         <span className="checkmark"></span>
-                    //         {option.value}
-                    //     </label>
-                    // </li>
-                    <li className="filter-value" key={`${option.value}-${index}`}>
-  <label className="radio-container" htmlFor={`${option.value}-${index}`}>
-    <input
-      id={`${option.value}-${index}`}
-      type="radio"
-      name={category} // Add a name attribute to group the radio buttons by category
-      value={option.value} // Add a value attribute to specify the value of the selected radio button
-  
-      onChange={(event) =>
-                         handleCheckboxChange(
-                             event,
-                             category,
-                             option.value
-                         )
-                    }
-    />
-    <span className="radiomark " ></span> {/* Replace the checkmark with radiomark class */}
-    {option.value}
-  </label>
-</li>
-
-                ))}
-                {visibleEntries[category].visibleEntries <=
-                    filters[category].length && (
-                    <li className="filter-value">
-                        <button onClick={() => handleShowMoreitems(category)}>
-                            <span className="me-2">Show More</span>
-                            <FontAwesomeIcon icon={faAngleDown} />
-                        </button>
-                    </li>
-                )}
-            </>
-        );
+        if (options.length) {
+            let optionArray = options?.slice(
+                0,
+                visibleEntries[category].visibleEntries
+            );
+            return (
+                <>
+                    {optionArray?.map((option, index) => (
+                        // <li
+                        //     className="filter-value"
+                        //     key={`${option.value}-${index}`}
+                        // >
+                        //     <label
+                        //         className="checkbox-container"
+                        //         htmlFor={`${option.value}-${index}`}
+                        //     >
+                        //         <input
+                        //             id={`${option.value}-${index}`}
+                        //             type="checkbox"
+                        //             onChange={(event) =>
+                        //                 handleRadioButton(
+                        //                     event,
+                        //                     category,
+                        //                     option.value
+                        //                 )
+                        //             }
+                        //         />
+                        //         <span className="checkmark"></span>
+                        //         {option.value}
+                        //     </label>
+                        // </li>
+                        <li
+                            className="filter-value"
+                            key={`${option.value}-${index}`}
+                        >
+                            <label
+                                className="radio-container"
+                                htmlFor={`${option.value}-${index}`}
+                            >
+                                <input
+                                    id={`${option.value}-${index}`}
+                                    type="radio"
+                                    name={category} // Add a name attribute to group the radio buttons by category
+                                    value={option.value} // Add a value attribute to specify the value of the selected radio button
+                                    onChange={(event) =>
+                                        handleRadioButton(
+                                            event,
+                                            category,
+                                            option.value
+                                        )
+                                    }
+                                />
+                                <span className="radiomark "></span>{" "}
+                                {/* Replace the checkmark with radiomark class */}
+                                {option.value}
+                            </label>
+                        </li>
+                    ))}
+                    {visibleEntries[category].visibleEntries <=
+                        filters[category].length && (
+                        <li className="filter-value">
+                            <button
+                                onClick={() => handleShowMoreitems(category)}
+                            >
+                                <span className="me-2">Show More</span>
+                                <FontAwesomeIcon icon={faAngleDown} />
+                            </button>
+                        </li>
+                    )}
+                </>
+            );
+        } else <></>;
     };
 
     let renderedCategories = Object.entries(filters).map(
