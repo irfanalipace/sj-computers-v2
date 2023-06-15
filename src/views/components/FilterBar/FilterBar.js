@@ -10,7 +10,7 @@ import { getFilterListApi } from "@api/filters";
 import { SET_FILTERS_ARRAY } from "@store/products/productsSlice";
 
 import "./FilterBar.css";
-
+import { Slider, Typography } from "@mui/material";
 const FilterBar = () => {
     const [filters, setFilters] = useState({});
     const [selectedFilters, setSelectedFilters] = useState([]);
@@ -19,7 +19,11 @@ const FilterBar = () => {
     const [visibleCategories, setVisibleCategories] = useState(8);
     const [visibleEntries, setVisibleEntries] = useState({});
     const isLoading = useSelector((state) => state.products.isFiltering);
+    const [priceRange, setPriceRange] = useState([0, 100]); // Initial price range values
 
+    const handlePriceChange = (event, newValue) => {
+        setPriceRange(newValue);
+    };
     const dispatch = useDispatch();
 
     const handleShowMoreCategory = () => {
@@ -122,13 +126,14 @@ const FilterBar = () => {
 
     let renderedItems = (options, category) => {
         if (options.length) {
-            let optionArray = options?.slice(
+            let optionArray = options.slice(
                 0,
                 visibleEntries[category].visibleEntries
             );
+            console.print("category", category);
             return (
                 <>
-                    {optionArray?.map((option, index) => (
+                    {optionArray.map((option, index) => (
                         // <li
                         //     className="filter-value"
                         //     key={`${option.value}-${index}`}
@@ -141,7 +146,7 @@ const FilterBar = () => {
                         //             id={`${option.value}-${index}`}
                         //             type="checkbox"
                         //             onChange={(event) =>
-                        //                 handleRadioButton(
+                        //                 handleCheckboxChange(
                         //                     event,
                         //                     category,
                         //                     option.value
@@ -166,7 +171,7 @@ const FilterBar = () => {
                                     name={category} // Add a name attribute to group the radio buttons by category
                                     value={option.value} // Add a value attribute to specify the value of the selected radio button
                                     onChange={(event) =>
-                                        handleRadioButton(
+                                        handleCheckboxChange(
                                             event,
                                             category,
                                             option.value
@@ -195,12 +200,85 @@ const FilterBar = () => {
         } else <></>;
     };
 
+    // let renderedCategories = Object.entries(filters).map(
+    //     ([category, options], index) => (
+    //         <li className="filter-key" key={`${category}-${index}`}>
+    //             <h4 className="filter-heading">{category}</h4>
+    //             <ul className="filter-values-list">
+    //                 {renderedItems(options, category)}
+    //                 {console.log(renderedCategories,'jfdwejfwfhwhfwe ewhfewhefhwfhwef')}
+    //             </ul>
+    //         </li>
+    //     )
+    // );
+
+    // let renderItemsRam = (options, category) => {
+
+    //     return data.map((item, index) => (
+    //       <div>
+    //          <ul>
+
+    //          <li className="filter-value">
+    //             <label className="radio-container">
+    //                 <input type="radio" />
+    //                 <span className="radiomark">{item}</span>
+    //             </label>
+
+    //         </li>
+
+    //        </ul>
+
+    //       </div>
+    //     ));
+
+    // };
+
+    let renderItemsRam = () => {
+        return (
+            <div>
+                <div style={{ marginBottom: "8px" }}>
+                    <input type="radio" />
+                    TB
+                </div>
+                <div>
+                    <input type="radio" style={{ marginBottom: "8px" }} />
+                    GB
+                </div>
+                <div>
+                    <input type="radio" />
+                    MB
+                </div>
+                <div>
+                    <Slider
+                        style={{ color: "#198754" }}
+                        value={priceRange}
+                        onChange={handlePriceChange}
+                        valueLabelDisplay="auto"
+                        min={0}
+                        max={1000}
+                        aria-labelledby="price-range-slider"
+                    />
+                </div>
+                <div className="filter-button-category-page">
+                    <button>Apply</button>
+                </div>
+            </div>
+        );
+    };
+
     let renderedCategories = Object.entries(filters).map(
         ([category, options], index) => (
             <li className="filter-key" key={`${category}-${index}`}>
                 <h4 className="filter-heading">{category}</h4>
                 <ul className="filter-values-list">
-                    {renderedItems(options, category)}
+                    {category === "ram_memory" &&
+                    filters.hasOwnProperty("hard_disk")
+                        ? renderItemsRam(options)
+                        : renderedItems(options, category)}
+                    {console.log(
+                        renderedCategories,
+                        "jfdwejfwfhwhfwe ewhfewhefhwfhwef"
+                    )}
                 </ul>
             </li>
         )
