@@ -6,6 +6,7 @@ use App\Classes\StatusEnum;
 use App\Models\HoldReleaseUser;
 use App\Models\Product;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 trait AmazonTrait
 {
@@ -106,11 +107,11 @@ trait AmazonTrait
         if($insert){
             $this->insertHoldRelease($qty, $type, $productInfo['product']->id);
         }
-        return true;
+
     }
 
     public function updateProductQuantity($sku,$qty){
-        Product::where('sku',$sku)->update(['qty'=> $qty]);
+        Product::where('sku',$sku)->update(['quantity'=> $qty]);
     }
 
     public function insertHoldRelease($qty, $status, $productId){

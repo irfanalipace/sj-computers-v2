@@ -37,6 +37,7 @@ const Header = () => {
         "forget-password",
         "email-sent",
         "checkout",
+       
     ];
     const toggleSidebar = () => {
         setIsOpen(!isOpen);

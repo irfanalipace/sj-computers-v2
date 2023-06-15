@@ -123,7 +123,7 @@ class SjProduct extends Command
             $processorInfo = [
                 'key' => 'processor',
                 'product_id' => $product->id,
-                'value' => $description->cpu_model[0]->family[0]->value
+                'value' => $this->getProcessorName($description->cpu_model[0]->family[0]->value)
             ];
             $this->insertProductInfo($processorInfo);
         }
@@ -181,7 +181,7 @@ class SjProduct extends Command
             $brandInfo = [
                 'key' => 'brand',
                 'product_id' => $product->id,
-                'value' => $description->brand[0]->value
+                'value' => $this->getBrandName($description->brand[0]->value)
             ];
             $this->insertProductInfo($brandInfo);
         }
@@ -217,8 +217,6 @@ class SjProduct extends Command
             ],
             $data);
     }
-
-
 
     public function strStartsWith($string, $startString)
     {
@@ -457,8 +455,42 @@ class SjProduct extends Command
 
     public function insertBrand($name)
     {
-        $name = strtolower(trim($name));
+        $name = $this->getBrandName(strtolower(trim($name)));
         return Brand::updateOrCreate(['name' => $name], []);
+    }
+
+    public function getBrandName($name){
+
+        if(preg_match("/h.p.cy/i", $name ) ||
+            preg_match("/hewlett packard/i", $name ) ||
+            preg_match("/elite/i", $name ) ){
+            return 'HP';
+        }elseif(preg_match("/oemgenuine/i", $name )){
+            return 'Lenovo';
+        }elseif( preg_match("/optiplex/i", $name )){
+            return 'Dell';
+        }else{
+            return $name;
+        }
+
+    }
+
+    public function getProcessorName($name){
+
+        $name = strtolower(trim($name));
+
+        if(preg_match("/core i5/i", $name) || preg_match("/core_i5/i", $name)){
+            return "Core i5";
+        } if(preg_match("/core i3/i", $name) || preg_match("/core_i3/i", $name)){
+            return "Core i3";
+        } if(preg_match("/core i7/i", $name) || preg_match("/core_i7/i", $name)){
+            return "Core i7";
+        }if(preg_match("/core 2/i", $name) || preg_match("/core_2/i", $name)){
+            return "Core 2";
+        } else{
+            return $name;
+         }
+
     }
 
     public function insertProductCategory($slug, $productId)

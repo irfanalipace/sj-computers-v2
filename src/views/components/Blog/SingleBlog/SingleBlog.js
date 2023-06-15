@@ -16,13 +16,16 @@ import bloglaptop2 from "@images/blog/laptopwithbook2.png";
 import productviewblog from "@images/blog/typelaptop.png";
 
 import meetingset from "@images/blog/meeting2image.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 const SingleBlog = () => {
     return (
         <div>
             <div className="mein-dev-single-page-cantainer">
                 <div
                     className="container conatnier-dev-single-blog-dev"
-                    style={{ "max-width": "73%" }}
+                   
                 >
                     <div className="col-12">
                         <div className="span-dev-page-text-page">
@@ -36,7 +39,7 @@ const SingleBlog = () => {
                 </div>
             </div>
 
-            <div className="container" style={{ "max-width": "75%" }}>
+            <div className="container" >
                 <div className="row">
                     <div className="col-md-3">
                         <div className="container container-card-slice-dev">
@@ -208,9 +211,11 @@ const SingleBlog = () => {
                                     <div>
                                         <hr></hr>
 
-                                        <span className="see-all-stories-data-ever-data">
+                                      <div className="see-all-stories-data-ever-data-dev-store-data-live">
+                                      <span >
                                             See all Stories
                                         </span>
+                                      </div>
                                     </div>
                                 </div>
                             </div>
@@ -219,15 +224,15 @@ const SingleBlog = () => {
                 </div>
             </div>
 
-            <div className="container" style={{ "max-width": "75%" }}>
+            <div className="container" >
                 <div className="treding-blog-sets">
                     <span> Trending Blogs</span>
                 </div>
             </div>
 
-            <div className="container " style={{ "max-width": "75%" }}>
+            <div className="container single-blog-pages-dev-container-all-products">
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-lg-4 col-sm-6">
                         <div className="product-card">
                             <img src={book} alt="Product 1" />
                             <div className="dev-data-span-card-dev">
@@ -247,7 +252,7 @@ const SingleBlog = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-lg-4 col-sm-6">
                         <div className="product-card">
                             <img src={book} alt="Product 1" />
                             <div className="dev-data-span-card-dev">
@@ -267,7 +272,7 @@ const SingleBlog = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-lg-4 col-sm-6">
                         <div
                             className="product-card"
                             style={{ backgroundColor: "#318243" }}
@@ -453,8 +458,8 @@ const SingleBlog = () => {
                 <div className="row">
                     <div className="col-md-4 col-sm-6">
                         <div className="card card-data-setelledted-data">
-                            <div className="row no-gutters">
-                                <div className="col-6 custom-col">
+                            <div className="row no-gutters m-0">
+                                <div className="col-6 custom-col p-0">
                                     <div>
                                         <img
                                             src={imageproduct1}
@@ -470,7 +475,7 @@ const SingleBlog = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className="col-6 text-right custom-col">
+                                <div className="col-6 text-right custom-col p-0">
                                     <img
                                         src={imageproduct}
                                         alt="Image 3"
@@ -531,15 +536,15 @@ const SingleBlog = () => {
                     </div>
                     <div className="col-md-4 col-sm-6">
                         <div className="card card-data-setelledted-data">
-                            <div className="row no-gutters">
-                                <div className="col-6 text-right custom-col">
+                            <div className="row no-gutters m-0">
+                                <div className="col-6 p-0 text-right custom-col">
                                     <img
                                         src={imageproduct}
                                         alt="Image 3"
                                         className="image-view-blog-dataset"
                                     />
                                 </div>
-                                <div className="col-6 custom-col">
+                                <div className="col-6 p-0 custom-col">
                                     <div>
                                         <img
                                             src={imageproduct1}
@@ -589,8 +594,8 @@ const SingleBlog = () => {
                 <div className="row">
                     <div className="col-md-4">
                         <div className="card card-data-setelledted-data">
-                            <div className="row ">
-                                <div className="col-5 ">
+                            <div className="row m-0 ">
+                                <div className="col-5 p-0">
                                     <div>
                                         <img
                                             src={imageproduct2}
@@ -606,7 +611,7 @@ const SingleBlog = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className="col-7 custom-col">
+                                <div className="col-7 p-0 custom-col">
                                     <div>
                                         <img
                                             src={imagepencel}
@@ -646,15 +651,15 @@ const SingleBlog = () => {
                     <div className="col-md-4">
                         <div className="card card-data-setelledted-data">
                             <div className="row ">
-                                <div className="row no-gutters">
-                                    <div className="col-5 text-right custom-col">
+                                <div className="row no-gutters m-0">
+                                    <div className="col-5 p-0 text-right custom-col">
                                         <img
                                             src={bloglaptop2}
                                             alt="Image 3"
                                             className="product-single-data-view-product"
                                         />
                                     </div>
-                                    <div className="col-7 custom-col">
+                                    <div className="col-7 p-0 custom-col">
                                         <div>
                                             <img
                                                 src={bloglaptop1}
@@ -739,6 +744,10 @@ const SingleBlog = () => {
                                 one consectetur asking no one consectetur
                                 jsjshdi. Lorem ipsum dolor sit amet, trt aksdg
                                 asking no one consectetur asking no one c.
+                            </div>
+                            <div className="learn-more-blog-button">
+                              <button >Learn <small>more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
+</button>
                             </div>
                         </div>
                     </div>

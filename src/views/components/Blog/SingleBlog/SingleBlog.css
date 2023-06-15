@@ -8,6 +8,8 @@
 }
 .span-dev-page-text-page {
     padding-top: 26px;
+    margin-left: 9px;
+
     padding-bottom: 26px;
 }
 .span-dev-page-text-page span {
@@ -22,7 +24,7 @@
 }
 .container-card-slice-dev {
     margin-bottom: 27px;
-    width: 308px;
+    width: 100%;
     max-width: 100%;
     height: 550px;
     max-height: 100%;
@@ -76,6 +78,9 @@
 
     color: #000000;
 }
+.more-data-add-blog-space {
+   margin-top: 8px;
+}
 .meeting-data-blog-save-dev-form img {
     max-height: 100%;
     max-width: 100%;
@@ -113,15 +118,33 @@
     color: #333333;
 }
 .smimage-stories-blog img {
-    width: 122px;
+    width: 100%;
+    height: 100%;
 }
 .conatiner-dev-stories-dev-data-for-blog {
-    width: 352px;
-    /* max-width: 100%; */
+    height: 551px;
+    width: 100%;
+    max-width: 100%;
     padding: 9px;
     background: rgba(49, 130, 67, 0.03);
+    max-height: 100%;
 }
 .see-all-stories-data-ever-data {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 22px;
+    /* identical to box height, or 169% */
+
+    letter-spacing: 0.46px;
+
+    color: #000000;
+}
+.see-all-stories-data-ever-data-dev-store-data-live{
+    padding-top: 18px;
+}
+.see-all-stories-data-ever-data-dev-store-data-live span{
     font-family: "Inter";
     font-style: normal;
     font-weight: 500;
@@ -158,7 +181,7 @@
     color: #333333;
 }
 .mid-graph-pargarph-page-datap-data {
-    margin-bottom: 26px;
+    margin-bottom: 29px;
 }
 .treding-blog-sets span {
     font-family: "Inter";
@@ -325,13 +348,13 @@ color: #FFFFFF;
          font-size: 13px;
         }
         .image-view-blog-data {
-            width: 210px;
+            width: 100%;
             height: 125px;
             
         }
         .image-view-blog-data2 {
             height: 251px;
-            width: 166px;
+            width: 100%;
          
         }
         .card-data-setelledted-data {
@@ -344,15 +367,15 @@ color: #FFFFFF;
             padding-right: 61px;
         }
         .image-view-blog-dat-pencel {
-            width: 355px;
+            width: 100%;
             height: 251px;
         }
         .image-view-blog-dataset {
             height: 250px;
-            width: 189px;
+            width: 100%;
         }
         .image-view-blog-data3 {
-            width: 166px;
+            width: 100%;
             height: 125px;
         }
        .image-view-blog-dateta{
@@ -363,7 +386,7 @@ color: #FFFFFF;
             height: 143px;
         }
         .image-section-last-one {
-            width: 176px;
+            width: 100%;
             height: 130px;
         }
 
@@ -391,16 +414,16 @@ color: #318243;
            }
            .product-single-data-view-product {
             height: 264px;
-            width: 149px;
+            width: 100%;
         }
         .product-blog-view-data-image-peoduct-image {
-            width: 206px;
+            width: 100%;
             height: 132px;
         }
 
         .image-view-blog-dateta22 {
             /* padding-left: 25px; */
-            width: 197px;
+            width: 100%;
             height: 131px;
         }
         .image-laptop-type-scroll{
@@ -415,10 +438,10 @@ color: #318243;
         }
 
         .position-image-data-blog img{
-            width: 1030px;
             height: 372px;
             margin-bottom: 29px;
             position: relative;
+            width: 100%;
         }
 
         .position-image-data-blog{
@@ -434,14 +457,12 @@ color: #318243;
             /* margin-top: -164px; */
             /* position: absolute; */
             top: 35px;
-            left: -135px;
+            left: -111px;
             z-index: 1;
             width: 300px;
             background-color: red;
             height: 300px;
-
-
-background: #E7FFEC;
+            background: #E7FFEC;
         }
         .dev-green-space-dev span{
             font-family: 'Inter';
@@ -487,3 +508,80 @@ background: #E7FFEC;
         height: 551px;
         background: rgba(49, 130, 67, 0.03);
     }
+
+    .learn-more-blog-button button {
+        /* padding-top: 12px; */
+        height: 34px;
+        width: 130px;
+        left: 0%;
+        max-width: 100%;
+        right: 0%;
+        top: 0%;
+        bottom: 0%;
+        background: #000000;
+        border-radius: 20px;
+        color: white;
+        font-size: 14px;
+        /* padding-left: 25px; */
+    }
+
+    .learn-more-blog-button{
+        padding-top: 15px;
+ 
+        padding-left: 25px;
+    }
+    .learn-more-blog-button small {
+        color: goldenrod;
+        padding-right: 12px;
+    }
+  .single-blog-pages-dev-container-all-products{
+    padding-right: 116px;
+  }
+@media screen and (max-width:576px) {
+    .position-image-data-blog-text-data {
+        padding-left: -50px;
+        width: 100%;
+        z-index: 2;
+        position: relative;
+        /* margin-top: -164px; */
+        /* position: absolute; */
+        top: 35px;
+        left: -263px;
+        z-index: 1;
+        width: 300px;
+        background-color: red;
+        height: 300px;
+        background: #E7FFEC;
+    }.treding-blog-sets {
+        padding-bottom: 20px;
+        margin-top: 12px;
+    }.mid-graph-pargarph-page-data span {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 144%;
+        color: #333333;
+    }   .single-blog-pages-dev-container-all-products{
+        padding-right: 11px;
+      }.stories-data-effctive-blog {
+        padding-top: 29px;
+    }.see-all-stories-data-ever-data {
+        margin-left: 10px;
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 22px;
+        letter-spacing: 0.46px;
+        color: #000000;
+    }.dev-space-name-folder-span-text span {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 144%;
+        color: #FFFFFF;
+    }
+}
+ 

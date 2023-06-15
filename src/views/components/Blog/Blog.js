@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import "./Blog.css";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,7 +19,8 @@ import meetingset from "@images/blog/meeting2image.png";
 import meetingset1 from "@images/blog/videoimagemeeting1.png";
 import meetingset2 from "@images/blog/videoimagemeeting2.png";
 import meetingset3 from "@images/blog/videoimagemeeting3.png";
-
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 const HeadereLinks = [
     { path: "/", title: "About Us" },
     { path: "/", title: "What We Do?" },
@@ -31,6 +32,40 @@ const HeadereLinks = [
 ];
 const nonHeaderRoutes = [""];
 const Blog = () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 3;
+  
+    // Example data for the cards
+    const data = [
+      {
+        id: 1,
+        image: meetingset1,
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        date: "Jun 8, 2023",
+      },
+      {
+        id: 2,
+        image: meetingset2,
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        date: "Jun 9, 2023",
+      },
+      {
+        id: 3,
+        image: meetingset3,
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        date: "Jun 10,",
+      }
+      // Add more data objects as needed
+    ];
+  
+    // Calculate the index range of the items to be displayed on the current page
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  
+    const handlePageChange = (event, value) => {
+      setCurrentPage(value);
+    };
     return (
         <div>
             {/* {!nonHeaderRoutes.includes(
@@ -393,18 +428,22 @@ const Blog = () => {
                         </div>
                     </div>
                 </div>
-                <div style={{ background: "rgba(49, 130, 67, 0.1)" }}>
+                {/* <div style={{ background: "rgba(49, 130, 67, 0.1)" }}>
                     <div className="container container-blog-data-footer">
                         <div className="row">
-                            <div className="col-2">
+                            <div className="col-md-2">
                                 <div className="sj-left-dev-set-data-from-section">
                                     <span>More from SJ</span>
+                                 <Stack spacing={2}>
+                                <Pagination count={3} shape="rounded" />
+                            
+                                </Stack>
                                 </div>
                             </div>
-                            <div className="col-9">
-                                <div style={{ marginLeft: "59px" }}>
+                            <div className="col-md-9 col-sm-10">
+                                <div  className="card-dev-container-mobile-space-section-age-cart">
                                     <div className="row">
-                                        <div className="col-3">
+                                    <div className="col-md-3 col-sm-6 col-6">
                                             <div className="image-fooetr-blog">
                                                 <img
                                                     className="image-for-blog-data-sets-view"
@@ -412,12 +451,11 @@ const Blog = () => {
                                                 />
                                             </div>
                                             <div
+                                             className="dev-folder-card-blog-section-dev-page"
                                                 style={{ background: "white" }}
                                             >
                                                 <div
-                                                    style={{
-                                                        paddingLeft: "6px",
-                                                    }}
+                                                    className="dve-sj-computers-icon-dev-blog"
                                                 >
                                                     <span className="image-fooetr-blog">
                                                         SJ
@@ -445,7 +483,7 @@ const Blog = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-3">
+                                        <div className="col-md-3 col-sm-6 col-6">
                                             <div className="image-fooetr-blog">
                                                 <img
                                                     src={meetingset1}
@@ -453,12 +491,12 @@ const Blog = () => {
                                                 />
                                             </div>
                                             <div
+                                             className="dev-folder-card-blog-section-dev-page"
                                                 style={{ background: "white" }}
                                             >
                                                 <div
-                                                    style={{
-                                                        paddingLeft: "6px",
-                                                    }}
+                                                 
+                                                    className="dve-sj-computers-icon-dev-blog"
                                                 >
                                                     <span className="image-fooetr-blog">
                                                         SJ
@@ -486,7 +524,7 @@ const Blog = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-3">
+                                        <div className="col-md-3 col-sm-6 col-6">
                                             <div className="image-fooetr-blog">
                                                 <img
                                                     src={meetingset1}
@@ -494,12 +532,11 @@ const Blog = () => {
                                                 />
                                             </div>
                                             <div
+                                            className="dev-folder-card-blog-section-dev-page"
                                                 style={{ background: "white" }}
                                             >
                                                 <div
-                                                    style={{
-                                                        paddingLeft: "6px",
-                                                    }}
+                                                   className="dve-sj-computers-icon-dev-blog"
                                                 >
                                                     <span className="image-fooetr-blog">
                                                         SJ
@@ -532,7 +569,67 @@ const Blog = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
+                   <div style={{ background: "rgba(49, 130, 67, 0.1)" }}>
+      <div className="container container-blog-data-footer">
+        {/* Pagination */}
+        <div className="row">
+          <div className="col-md-2">
+            <div className="sj-left-dev-set-data-from-section">
+              <span>More from SJ</span>
+              <Pagination
+                count={Math.ceil(data.length / itemsPerPage)}
+                shape="rounded"
+                page={currentPage}
+                onChange={handlePageChange}
+              />
+            </div>
+          </div>
+          <div className="col-md-9 col-sm-10">
+            <div className="card-dev-container-mobile-space-section-age-cart">
+              <div className="row">
+                {/* Render the current items */}
+                {currentItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="col-md-3 col-sm-6 col-6"
+                  >
+                    <div className="image-fooetr-blog">
+                      <img
+                        className="image-for-blog-data-sets-view"
+                        src={item.image}
+                        alt="Card"
+                      />
+                    </div>
+                    <div
+                      className="dev-folder-card-blog-section-dev-page"
+                      style={{ background: "white" }}
+                    >
+                      <div className="dve-sj-computers-icon-dev-blog">
+                        <span className="image-fooetr-blog">SJ</span>
+                      </div>
+                      <div className="blog-post-paragraph-tag">
+                        <span>{item.content}</span>
+                      </div>
+                      <div className="read-date-blog-post-data">
+                        <div>
+                          <span className="read-more-blog">Read more..</span>
+                        </div>
+                        <div>
+                          <span className="read-more-date-with-data-date">
+                            {item.date}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
             </>
             {/* )} */}
         </div>

@@ -26,7 +26,9 @@ const MobileScreenModel = () => {
     };
     return (
         <div>
-            
+                {showModal && (
+                <div className="sidebarOverlaymobile" onClick={closeModal}></div>
+            )}
             <header>
                 <div className="color-card-dev mobile-enter-sub-button-screen">
                     <button

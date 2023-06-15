@@ -348,9 +348,12 @@ color: #DDDDDD;
     line-height: 144%;
     color: #FFFFFF;
     margin-top: 30px;
-}.dev-container-side{
+    padding-right: 108px;
+}
+.dev-container-side{
     padding: 48px;
-}.ul-item-blog-social-icon{
+}
+.ul-item-blog-social-icon{
  
         margin-top: 24px;
     
@@ -490,8 +493,10 @@ margin-top: 34px;
     height: 366px;
     left: 0px;
     top: 0px;
+    margin-left: 30px;
     background: rgba(49, 130, 67, 0.1);
-}.left-dev-span-stories {
+}
+.left-dev-span-stories {
   
     text-align: center;
     padding-top: 19px;
@@ -675,10 +680,102 @@ color: #333333;
     }.container-blog-data-footer {
         padding-top: 20px;
         padding-bottom: 20px;
-    }.sj-left-dev-set-data-from-section{
+    }
+    .dve-sj-computers-icon-dev-blog{
+        margin-top: 3px;
+        width: 45px;
+        height: 25px;
+        border-radius: 33px;
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        left: 6px;
+        top: 174px;
+        background: #D9D9D9;
+        /* padding-left: 6px; */
+    }
+    .read-more-blog{
+        font-size: 13px;
+    }
+    .card-dev-container-mobile-space-section-age-cart{
+margin-left: 59px;
+    }
+
+    .sj-left-dev-set-data-from-section span{
         font-family: 'Inter';
         font-style: normal;
         font-weight: 300;
-        font-size: 12px;
+        font-size: 16px;
         line-height: 144%;
+    }
+    .sj-left-dev-set-data-from-section {
+        
+        margin-bottom: 6px;
+       
+    }
+    @media screen and (max-width:600px) {
+        .dive-reight-border {
+            display: none;
+        }.dev-left-blog-p span{
+            font-size: 15px;
+         
+        }.dev-left-blog-p {
+         
+            margin-top: 11px;
+            padding-right: 0px;
+        }.div-left-blog-text-written {
+       
+            margin-top: 25px;
+        }
+        .background-image-lin-dve img {
+            height: 402px;
+            margin-top: 49px;
+        }
+        .ul-item-blog-social-icon2 {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }.dev-left-blog-section2 span{
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 144%;
+            color: #333333;
+        }.dev-container-side {
+            padding: 24px;
+        }
+        .main-dev-card-deprt {
+            width: 100%;
+            height: 100%;
+            left: 0px;
+            margin-left: 0px;
+            top: 0px;
+            background: rgba(49, 130, 67, 0.1);
+        }
+        .image-for-meeting2-section {
+            margin-top: 11px;
+            margin-bottom: 5px;
+        }.dev-card-for-sj-computer-data span {
+            text-align: center;
+            font-family: 'Inter';
+            width: 100%;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 144%;
+            color: #333333;
+        }.protected-link-effectd span{
+            font-size: 11px;
+        }.protected-link-effectd {
+            margin-left: 0px;
+            display: flex;
+            margin-top: 10px;
+        }.dev-folder-card-blog-section-dev-page {
+            width: 225px;
+            margin-bottom: 16px;
+            background: white;
+            max-width: 100%;
+        }.card-dev-container-mobile-space-section-age-cart{
+            margin-left: 0px;
+        }
     }
