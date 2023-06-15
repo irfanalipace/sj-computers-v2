@@ -171,6 +171,25 @@ const FilterBar = () => {
         );
         return (
             <>
+                <li className="filter-value">
+                    <label
+                        className="radio-container"
+                        htmlFor={"all-" + category}
+                    >
+                        <input
+                            id={"all-" + category}
+                            type="radio"
+                            name={category} // Add a name attribute to group the radio buttons by category
+                            value={""} // Add a value attribute to specify the value of the selected radio button
+                            onChange={(event) =>
+                                handleFilterSelect(event, category, "")
+                            }
+                        />
+                        <span className="radiomark "></span>{" "}
+                        {/* Replace the checkmark with rad  iomark class */}
+                        All
+                    </label>
+                </li>
                 {optionArray.map((option, index) => (
                     // <li
                     //     className="filter-value"
@@ -195,6 +214,7 @@ const FilterBar = () => {
                     //         {option.value}
                     //     </label>
                     // </li>
+
                     <li
                         className="filter-value"
                         key={`${option.value}-${index}`}
@@ -222,6 +242,7 @@ const FilterBar = () => {
                         </label>
                     </li>
                 ))}
+
                 {visibleEntries[category].visibleEntries <=
                     filters[category].length && (
                     <li className="filter-value">
