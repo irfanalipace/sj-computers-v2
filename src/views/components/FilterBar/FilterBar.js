@@ -10,7 +10,8 @@ import { getFilterListApi } from "@api/filters";
 import { SET_FILTERS_ARRAY } from "@store/products/productsSlice";
 
 import "./FilterBar.css";
-import { Slider, Typography } from '@mui/material';
+import { Slider, Typography } from "@mui/material";
+import Button from "../common/Button/Button";
 const FilterBar = () => {
     const [filters, setFilters] = useState({});
     const [selectedFilters, setSelectedFilters] = useState([]);
@@ -19,11 +20,9 @@ const FilterBar = () => {
     const [visibleCategories, setVisibleCategories] = useState(8);
     const [visibleEntries, setVisibleEntries] = useState({});
     const isLoading = useSelector((state) => state.products.isFiltering);
-    const [priceRange, setPriceRange] = useState([0, 100]); // Initial price range values
+    const [selectedUnit, setSelectedUnit] = useState({});
+    const [rangeValues, setRangeValues] = useState({});
 
-    const handlePriceChange = (event, newValue) => {
-      setPriceRange(newValue);
-    };
     const dispatch = useDispatch();
 
     const handleShowMoreCategory = () => {
@@ -41,38 +40,63 @@ const FilterBar = () => {
         });
     };
 
-    const handleCheckboxChange = (event, category, option) => {
-        const isChecked = event.target.checked;
+    // const handleCheckboxChange = (event, category, option) => {
+    //     const isChecked = event.target.checked;
+    //     setFiltersInArray((prevSelectedFilters) => {
+    //         let filter = {
+    //             key: category,
+    //             value: option,
+    //         };
+    //         const isChecked = event.target.checked;
+
+    //         if (isChecked) {
+    //             return [...prevSelectedFilters, filter];
+    //         }
+    //         let index = prevSelectedFilters.findIndex((filter) => {
+    //             return filter.value === option;
+    //         });
+
+    //         let tempArray = [...prevSelectedFilters];
+
+    //         if (index > -1) {
+    //             tempArray.splice(index, 1);
+    //         }
+    //         return tempArray;
+    //     });
+
+    //     setSelectedFilters((prevSelectedFilters) => ({
+    //         ...prevSelectedFilters,
+    //         [category]: isChecked
+    //             ? [...(prevSelectedFilters[category] || []), option]
+    //             : prevSelectedFilters[category].filter(
+    //                   (filter) => filter.value !== option
+    //               ),
+    //     }));
+    // };
+    const handleFilterSelect = (event, category, option) => {
         setFiltersInArray((prevSelectedFilters) => {
             let filter = {
                 key: category,
                 value: option,
             };
-            const isChecked = event.target.checked;
 
-            if (isChecked) {
-                return [...prevSelectedFilters, filter];
-            }
+            // const isChecked = event.target.checked;
+
+            // if (isChecked) {
+            //     return [...prevSelectedFilters, filter];
+            // }
             let index = prevSelectedFilters.findIndex((filter) => {
-                return filter.value === option;
+                return filter.key === category;
             });
-
             let tempArray = [...prevSelectedFilters];
 
             if (index > -1) {
-                tempArray.splice(index, 1);
-            }
-            return tempArray;
-        });
+                tempArray[index] = filter;
 
-        setSelectedFilters((prevSelectedFilters) => ({
-            ...prevSelectedFilters,
-            [category]: isChecked
-                ? [...(prevSelectedFilters[category] || []), option]
-                : prevSelectedFilters[category].filter(
-                      (filter) => filter.value !== option
-                  ),
-        }));
+                return tempArray;
+            }
+            return [...tempArray, filter];
+        });
     };
 
     useEffect(() => {
@@ -87,8 +111,50 @@ const FilterBar = () => {
         try {
             setLoadingFilters(true);
             let response = await getFilterListApi();
-            setFilters(response.data ? response.data : {});
-            const keys = Object.keys(response.data);
+            let data = response?.data;
+            setFilters(data ? data : {});
+            Object.keys(data)?.forEach((key, index) => {
+                let value = data[key];
+                if (!Array.isArray(value)) {
+                    let options = {
+                        MB: {
+                            min: value.least_MB,
+                            max: value.highest_MB,
+                        },
+                        GB: {
+                            min: value.least_GB,
+                            max: value.highest_GB,
+                        },
+                        TB: {
+                            min: value.least_TB,
+                            max: value.highest_TB,
+                        },
+                    };
+                    setRangeValues((prev) => {
+                        return {
+                            ...prev,
+                            [key]: { ...options },
+                        };
+                    });
+                    let selectedUnit =
+                        value.least_MB && value.highest_MB
+                            ? "MB"
+                            : value.least_GB && value.highest_GB
+                            ? "GB"
+                            : value.least_TB && value.highest_TB
+                            ? "TB"
+                            : "";
+                    setSelectedUnit((prevState) => {
+                        return {
+                            ...prevState,
+                            [key]: {
+                                unit: selectedUnit,
+                            },
+                        };
+                    });
+                }
+            });
+            const keys = Object.keys(data);
             const tempVariable = {};
             for (const key of keys) {
                 tempVariable[key] = { visibleEntries: 8 };
@@ -103,9 +169,27 @@ const FilterBar = () => {
             0,
             visibleEntries[category].visibleEntries
         );
-        console.print("category", category);
         return (
             <>
+                <li className="filter-value">
+                    <label
+                        className="radio-container"
+                        htmlFor={"all-" + category}
+                    >
+                        <input
+                            id={"all-" + category}
+                            type="radio"
+                            name={category} // Add a name attribute to group the radio buttons by category
+                            value={""} // Add a value attribute to specify the value of the selected radio button
+                            onChange={(event) =>
+                                handleFilterSelect(event, category, "")
+                            }
+                        />
+                        <span className="radiomark "></span>{" "}
+                        {/* Replace the checkmark with rad  iomark class */}
+                        All
+                    </label>
+                </li>
                 {optionArray.map((option, index) => (
                     // <li
                     //     className="filter-value"
@@ -130,6 +214,7 @@ const FilterBar = () => {
                     //         {option.value}
                     //     </label>
                     // </li>
+
                     <li
                         className="filter-value"
                         key={`${option.value}-${index}`}
@@ -144,7 +229,7 @@ const FilterBar = () => {
                                 name={category} // Add a name attribute to group the radio buttons by category
                                 value={option.value} // Add a value attribute to specify the value of the selected radio button
                                 onChange={(event) =>
-                                    handleCheckboxChange(
+                                    handleFilterSelect(
                                         event,
                                         category,
                                         option.value
@@ -157,6 +242,7 @@ const FilterBar = () => {
                         </label>
                     </li>
                 ))}
+
                 {visibleEntries[category].visibleEntries <=
                     filters[category].length && (
                     <li className="filter-value">
@@ -182,75 +268,202 @@ const FilterBar = () => {
     //     )
     // );
 
-   
-
-    // let renderItemsRam = (options, category) => {
+    // let renderRangeSliders = (options, category) => {
 
     //     return data.map((item, index) => (
     //       <div>
     //          <ul>
-             
+
     //          <li className="filter-value">
     //             <label className="radio-container">
     //                 <input type="radio" />
-    //                 <span className="radiomark">{item}</span> 
+    //                 <span className="radiomark">{item}</span>
     //             </label>
-              
+
     //         </li>
-   
+
     //        </ul>
-        
+
     //       </div>
     //     ));
-        
+
     // };
-    
-        let renderItemsRam =()=>{    
-             
-             return (
-              <div>
-                  <div style={{marginBottom:'8px'}}>
-                <input type="radio" />TB
-                </div>
+
+    const handleRangeUnit = (category, unit) => {
+        setSelectedUnit((prevState) => {
+            return {
+                ...prevState,
+                [category]: {
+                    unit,
+                },
+            };
+        });
+    };
+
+    const applyRange = (e, category) => {
+        let unit = selectedUnit[category]?.unit;
+        let options = {
+            unit: unit,
+            min:
+                selectedUnit[category]?.range?.min ||
+                rangeValues[category][unit]?.min,
+            max:
+                selectedUnit[category]?.range?.max ||
+                rangeValues[category][unit]?.max,
+        };
+        handleFilterSelect(e, category, options);
+    };
+
+    const handleRange = (event, category, unit, newValue) => {
+        setSelectedUnit((prev) => {
+            return {
+                ...prev,
+                [category]: {
+                    ...prev[category],
+                    range: {
+                        min: newValue[0],
+                        max: newValue[1],
+                    },
+                },
+            };
+        });
+    };
+
+    let renderRangeSliders = (category) => {
+        return (
+            <div>
+                {filters[category]?.least_MB &&
+                filters[category]?.highest_MB ? (
+                    <div className="my-2  filter-value">
+                        <label
+                            className="radio-container"
+                            htmlFor={category + "MB"}
+                        >
+                            <input
+                                type="radio"
+                                value="MB"
+                                id={category + "MB"}
+                                className="me-1"
+                                name={category}
+                                checked={selectedUnit[category]?.unit === "MB"}
+                                onChange={() => handleRangeUnit(category, "MB")}
+                            />
+                            MB
+                        </label>
+                    </div>
+                ) : (
+                    <></>
+                )}
+
+                {filters[category]?.least_GB &&
+                filters[category]?.highest_GB ? (
+                    <div className="my-2  filter-value">
+                        <label
+                            className="radio-container"
+                            htmlFor={category + "GB"}
+                        >
+                            <input
+                                type="radio"
+                                value="GB"
+                                id={category + "GB"}
+                                className="me-1"
+                                name={category}
+                                checked={selectedUnit[category]?.unit === "GB"}
+                                onChange={(e) =>
+                                    handleRangeUnit(category, "GB")
+                                }
+                            />
+                            GB
+                        </label>
+                    </div>
+                ) : (
+                    <></>
+                )}
+
+                {filters[category]?.least_TB &&
+                filters[category]?.highest_TB ? (
+                    <li className="my-2 filter-value">
+                        <label
+                            className="radio-container"
+                            htmlFor={category + "TB"}
+                        >
+                            <input
+                                type="radio"
+                                value="TB"
+                                id={category + "TB"}
+                                className="me-1"
+                                name={category}
+                                checked={selectedUnit[category]?.unit === "TB"}
+                                onChange={(e, values) =>
+                                    handleRangeUnit(category, "TB")
+                                }
+                            />
+                            TB
+                        </label>
+                    </li>
+                ) : (
+                    <></>
+                )}
                 <div>
-                <input type="radio" style={{marginBottom:'8px'}}/>GB
+                    <Slider
+                        style={{ color: "#52ac66" }}
+                        value={[
+                            selectedUnit[category].range?.min ||
+                                rangeValues[category][
+                                    selectedUnit[category]?.unit
+                                ]?.min,
+                            selectedUnit[category].range?.max ||
+                                rangeValues[category][
+                                    selectedUnit[category]?.unit
+                                ]?.max,
+                        ]}
+                        onChange={(e, values) =>
+                            handleRange(
+                                e,
+                                category,
+                                selectedUnit[category]?.unit,
+                                values
+                            )
+                        }
+                        valueLabelDisplay="auto"
+                        min={
+                            rangeValues[category][selectedUnit[category]?.unit]
+                                ?.min
+                        }
+                        max={
+                            rangeValues[category][selectedUnit[category]?.unit]
+                                ?.max
+                        }
+                        aria-labelledby="price-range-slider"
+                    />
                 </div>
-                <div>
-                <input type="radio"/>MB
+                <div className="filter-button-category-page">
+                    <Button
+                        isLoading={isLoading}
+                        onClick={(e) => applyRange(e, category)}
+                    >
+                        Apply
+                    </Button>
                 </div>
-                <div>
-      
-        <Slider
-        style={{color:'#198754'}}
-          value={priceRange}
-          onChange={handlePriceChange}
-          valueLabelDisplay="auto"
-          min={0}
-          max={1000}
-          aria-labelledby="price-range-slider"
-        />
-      </div>
-      <div className="filter-button-category-page">
-        <button>Apply</button>
-      </div>
-              </div>
-             )
-             }
-              
-   
+            </div>
+        );
+    };
 
     let renderedCategories = Object.entries(filters).map(
         ([category, options], index) => (
-            <li className="filter-key" key={`${category}-${index}`}>
-                <h4 className="filter-heading">{category}</h4>
-                <ul className="filter-values-list">
-                    {category === "ram_memory" &&
-                    filters.hasOwnProperty("hard_disk")
-                        ? renderItemsRam(options)
-                        : renderedItems(options, category)}
-                        {console.log(category,'jfdwejfwfhwhfwe ewhfewhefhwfhwef')}
-                </ul>
-            </li>
+            <>
+                {(!!filters[category].length ||
+                    !Array.isArray(filters[category])) && (
+                    <li className="filter-key" key={`${category}-${index}`}>
+                        <h4 className="filter-heading">{category}</h4>
+                        <ul className="filter-values-list">
+                            {Array.isArray(filters[category])
+                                ? renderedItems(options, category)
+                                : renderRangeSliders(category)}
+                        </ul>
+                    </li>
+                )}
+            </>
         )
     );
 

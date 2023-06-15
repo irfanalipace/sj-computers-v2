@@ -120,18 +120,19 @@
 }
 .radio-container input[type="radio"]:checked + .checkmark::before {
     background-color: green;
-  }
-  
-  .radio-container input[type="radio"]:checked + .checkmark::after {
+}
+
+.radio-container input[type="radio"]:checked + .checkmark::after {
     background-color: green;
-  }
-  .filter-button-category-page button{
+}
+.filter-button-category-page button {
     color: white;
     background: #198754;
     border: none;
-    width: 71px;
-    height: 38px;
+    width: 85px;
+    height: 30px;
     margin-bottom: 7px;
+    border-radius: 4px;
 }
 @media screen and (max-width: 585px) {
     .sticky-filter-bar {
