@@ -28,8 +28,38 @@ export const SkuProducts = ({ reRender }) => {
     useEffect(() => {
         fetchProducts(null, currentPage + 1);
     }, []);
+
+    const handleSearch = async (e) => {
+        e?.preventDefault(); // Prevent form submission
+
+        setIsLoading(true);
+        const filter = {
+            name: search,
+            page: 1, // Always start from the first page when searching
+            per_page: perPage,
+        };
+
+        try {
+            setIsSearchActive(true);
+            if (search) {
+                let response = await filterProductsApi(filter);
+                setData(response.data.data);
+                setCurrentPage(response.data.current_page);
+                setPageCount(response.data.last_page);
+            } else {
+                fetchProducts(null, 1);
+                setIsSearchActive(false);
+            }
+        } catch (error) {
+            console.error("error", error);
+        }
+
+        setIsLoading(false);
+    };
+
     useEffect(() => {
-        fetchProducts(null, currentPage);
+        if (search) handleSearch();
+        else fetchProducts(null, currentPage);
     }, [reRender]);
 
     const downloadProducts = async () => {
@@ -79,34 +109,7 @@ export const SkuProducts = ({ reRender }) => {
     //     }
     //     setIsLoading(false);
     // };
-    const handleSearch = async (e) => {
-        e.preventDefault(); // Prevent form submission
-    
-        setIsLoading(true);
-        const filter = {
-          name: search,
-          page: 1, // Always start from the first page when searching
-          per_page: perPage,
-        };
-    
-        try {
-          setIsSearchActive(true);
-          if (search) {
-            let response = await filterProductsApi(filter);
-            setData(response.data.data);
-            setCurrentPage(response.data.current_page);
-            setPageCount(response.data.last_page);
-          } else {
-            fetchProducts(null, 1);
-            setIsSearchActive(false);
-          }
-        } catch (error) {
-          console.error("error", error);
-        }
-    
-        setIsLoading(false);
-      };
-    
+
     return (
         <div>
             <div className="product-info py-4">
@@ -171,7 +174,6 @@ export const SkuProducts = ({ reRender }) => {
                     </form>
                 </div>
 
-            
                 <>
                     {isLoading ? (
                         <Loader />

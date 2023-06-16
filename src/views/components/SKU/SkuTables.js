@@ -4,7 +4,7 @@ import { TextField, FormControl } from "@mui/material";
 import { getInventory, inventoryAction } from "@api/inventory.js";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 
-export const SkuTables = ({render, setRender}) => {
+export const SkuTables = ({ render, setRender }) => {
     const [invent, setInvent] = useState();
     const [data, setData] = useState([]);
     const [search, setSearch] = useState("");
@@ -50,8 +50,8 @@ export const SkuTables = ({render, setRender}) => {
             .then((_) => {
                 setLoading(false);
                 setAction("HOLD");
-                setRender(render+1);
-         
+                setRender(render + 1);
+
                 if (_.data.length > 0) {
                     setInvent(_?.data[0]?.product);
                     let obj = [
@@ -61,7 +61,7 @@ export const SkuTables = ({render, setRender}) => {
                             asin: _?.data[0]?.product?.asin,
                             sku: _?.data[0]?.product?.sku,
                             hQuantity: holdQuantity,
-                            fQuantity: _?.data[0]?.quantity,
+                            fQuantity: _?.data[0]?.product?.quantity,
                         },
                     ];
                     setData(() => [...obj]);
@@ -92,7 +92,7 @@ export const SkuTables = ({render, setRender}) => {
                             asin: _?.data[0]?.product?.asin,
                             sku: _?.data[0]?.product?.sku,
                             hQuantity: 0,
-                            fQuantity: _?.data[0]?.quantity,
+                            fQuantity: _?.data[0]?.product?.quantity,
                         },
                     ];
                     setholdQuantity(0);
@@ -139,7 +139,7 @@ export const SkuTables = ({render, setRender}) => {
                                 Search
                             </button>
                         </div> */}
-                   
+
                         <div className="seach-input-sku">
                             {""}{" "}
                             {/* <FormControl
@@ -161,21 +161,25 @@ export const SkuTables = ({render, setRender}) => {
                                 Search
                             </button> */}
                             <form onSubmit={handleChange}>
-    <FormControl className="search-field" sx={{ m: 1, minWidth: 500 }}>
-        <TextField
-            id="outlined-basic"
-            label="Search by SKU"
-            variant="outlined"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-        />
-    </FormControl>
-    <button className="sku-form-btn" type="submit">
-        Search
-    </button>
-</form>
+                                <FormControl
+                                    className="search-field"
+                                    sx={{ m: 1, minWidth: 500 }}
+                                >
+                                    <TextField
+                                        id="outlined-basic"
+                                        label="Search by SKU"
+                                        variant="outlined"
+                                        value={search}
+                                        onChange={(e) =>
+                                            setSearch(e.target.value)
+                                        }
+                                    />
+                                </FormControl>
+                                <button className="sku-form-btn" type="submit">
+                                    Search
+                                </button>
+                            </form>
                         </div>
-                      
                     </div>
                 </div>
                 {invent?.id ? (
