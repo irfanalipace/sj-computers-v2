@@ -15,7 +15,9 @@ import Button from "../common/Button/Button";
 import FilterByRange from "./FilterByRange";
 const FilterBar = () => {
 
-  
+    const getCategory= (data) => {
+console.log('hhhhh' ,data)        
+    }
     const [filters, setFilters] = useState({});
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [filtersInArray, setFiltersInArray] = useState([]);
@@ -139,19 +141,12 @@ const FilterBar = () => {
                             [key]: { ...options },
                         };
                     });
-                    let selectedUnit =
-                        value.least_MB && value.highest_MB
-                            ? "MB"
-                            : value.least_GB && value.highest_GB
-                            ? "GB"
-                            : value.least_TB && value.highest_TB
-                            ? "TB"
-                            : "";
+
                     setSelectedUnit((prevState) => {
                         return {
                             ...prevState,
                             [key]: {
-                                unit: selectedUnit,
+                                unit: "",
                             },
                         };
                     });
@@ -305,16 +300,19 @@ const FilterBar = () => {
 
     const applyRange = (e, category) => {
         let unit = selectedUnit[category]?.unit;
-        let options = {
-            unit: unit,
-            min:
-                selectedUnit[category]?.range?.min ||
-                rangeValues[category][unit]?.min,
-            max:
-                selectedUnit[category]?.range?.max ||
-                rangeValues[category][unit]?.max,
-        };
-        handleFilterSelect(e, category, options);
+        let value = {};
+        if (unit) {
+            value = {
+                unit: unit,
+                min:
+                    selectedUnit[category]?.range?.min ||
+                    rangeValues[category][unit]?.min,
+                max:
+                    selectedUnit[category]?.range?.max ||
+                    rangeValues[category][unit]?.max,
+            };
+        }
+        handleFilterSelect(e, category, value);
     };
 
     const handleRange = (event, category, unit, newValue) => {
@@ -332,14 +330,30 @@ const FilterBar = () => {
         });
     };
 
-
-
     let renderRangeSliders = (category) => {
         return (
-            <div>
+            <ul className="filter-values-list">
+                <li className="my-2  filter-value">
+                    <label
+                        className="radio-container"
+                        htmlFor={category + "All"}
+                    >
+                        <input
+                            type="radio"
+                            value="MB"
+                            id={category + "All"}
+                            className="me-1"
+                            name={category}
+                            checked={selectedUnit[category]?.unit === ""}
+                            onChange={() => handleRangeUnit(category, "")}
+                        />
+                        <span className="radiomark "></span>
+                        All
+                    </label>
+                </li>
                 {filters[category]?.least_MB &&
                 filters[category]?.highest_MB ? (
-                    <div className="my-2  filter-value">
+                    <li className="my-2  filter-value">
                         <label
                             className="radio-container"
                             htmlFor={category + "MB"}
@@ -356,14 +370,14 @@ const FilterBar = () => {
                             <span className="radiomark "></span>
                             MB
                         </label>
-                    </div>
+                    </li>
                 ) : (
                     <></>
                 )}
 
                 {filters[category]?.least_GB &&
                 filters[category]?.highest_GB ? (
-                    <div className="my-2  filter-value">
+                    <li className="my-2  filter-value">
                         <label
                             className="radio-container"
                             htmlFor={category + "GB"}
@@ -382,7 +396,7 @@ const FilterBar = () => {
                             <span className="radiomark "></span>
                             GB
                         </label>
-                    </div>
+                    </li>
                 ) : (
                     <></>
                 )}
@@ -412,39 +426,56 @@ const FilterBar = () => {
                 ) : (
                     <></>
                 )}
-                <div style={{paddingLeft:'6px'}}>
-                    <Slider
-                        style={{ color: "#52ac66", width:'170px' }}
-                        value={[
-                            selectedUnit[category].range?.min ||
+
+                {selectedUnit[category]?.unit ? (
+                    <div className="range-slider">
+                        <p style={{ fontSize: "14px", marginBottom: "0" }}>
+                            Select Range:
+                        </p>
+                        <Slider
+                            style={{
+                                color: "#52ac66",
+                                width: "150px",
+                                marginLeft: "10px",
+                                paddingTop: "20px",
+                                padddingBottom: "20px",
+                            }}
+                            value={[
+                                selectedUnit[category].range?.min ||
+                                    rangeValues[category][
+                                        selectedUnit[category]?.unit
+                                    ]?.min,
+                                selectedUnit[category].range?.max ||
+                                    rangeValues[category][
+                                        selectedUnit[category]?.unit
+                                    ]?.max,
+                            ]}
+                            onChange={(e, values) =>
+                                handleRange(
+                                    e,
+                                    category,
+                                    selectedUnit[category]?.unit,
+                                    values
+                                )
+                            }
+                            valueLabelDisplay="auto"
+                            min={
                                 rangeValues[category][
                                     selectedUnit[category]?.unit
-                                ]?.min,
-                            selectedUnit[category].range?.max ||
+                                ]?.min
+                            }
+                            max={
                                 rangeValues[category][
                                     selectedUnit[category]?.unit
-                                ]?.max,
-                        ]}
-                        onChange={(e, values) =>
-                            handleRange(
-                                e,
-                                category,
-                                selectedUnit[category]?.unit,
-                                values
-                            )
-                        }
-                        valueLabelDisplay="auto"
-                        min={
-                            rangeValues[category][selectedUnit[category]?.unit]
-                                ?.min
-                        }
-                        max={
-                            rangeValues[category][selectedUnit[category]?.unit]
-                                ?.max
-                        }
-                        aria-labelledby="price-range-slider"
-                    />
-                </div>
+                                ]?.max
+                            }
+                            aria-labelledby="price-range-slider"
+                        />
+                    </div>
+                ) : (
+                    <></>
+                )}
+
                 <div className="filter-button-category-page">
                     <Button
                         disabled={isLoading}
@@ -453,7 +484,7 @@ const FilterBar = () => {
                         Apply
                     </Button>
                 </div>
-            </div>
+            </ul>
         );
     };
 
@@ -467,7 +498,7 @@ const FilterBar = () => {
                         <ul className="filter-values-list">
                             {Array.isArray(filters[category])
                                 ? renderedItems(options, category)
-                              : renderRangeSliders(category)}
+                                 : renderRangeSliders(category)}
                                  
                         </ul>
                     </li>
