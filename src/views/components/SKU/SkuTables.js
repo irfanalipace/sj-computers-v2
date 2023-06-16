@@ -60,7 +60,7 @@ export const SkuTables = ({ render, setRender }) => {
                             name: _?.data[0]?.product?.name,
                             asin: _?.data[0]?.product?.asin,
                             sku: _?.data[0]?.product?.sku,
-                            hQuantity: holdQuantity,
+                            hQuantity: _?.data[0]?.hold_quantity,
                             fQuantity: _?.data[0]?.product?.quantity,
                         },
                     ];
