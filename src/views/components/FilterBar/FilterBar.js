@@ -12,7 +12,12 @@ import { SET_FILTERS_ARRAY } from "@store/products/productsSlice";
 import "./FilterBar.css";
 import { Slider, Typography } from "@mui/material";
 import Button from "../common/Button/Button";
+import FilterByRange from "./FilterByRange";
 const FilterBar = () => {
+
+    const getCategory= (data) => {
+console.log('hhhhh' ,data)        
+    }
     const [filters, setFilters] = useState({});
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [filtersInArray, setFiltersInArray] = useState([]);
@@ -329,6 +334,8 @@ const FilterBar = () => {
         });
     };
 
+
+
     let renderRangeSliders = (category) => {
         return (
             <div>
@@ -407,9 +414,9 @@ const FilterBar = () => {
                 ) : (
                     <></>
                 )}
-                <div>
+                <div style={{paddingLeft:'6px'}}>
                     <Slider
-                        style={{ color: "#52ac66" }}
+                        style={{ color: "#52ac66", width:'170px' }}
                         value={[
                             selectedUnit[category].range?.min ||
                                 rangeValues[category][
@@ -442,7 +449,7 @@ const FilterBar = () => {
                 </div>
                 <div className="filter-button-category-page">
                     <Button
-                        isLoading={isLoading}
+                        disabled={isLoading}
                         onClick={(e) => applyRange(e, category)}
                     >
                         Apply
@@ -462,7 +469,8 @@ const FilterBar = () => {
                         <ul className="filter-values-list">
                             {Array.isArray(filters[category])
                                 ? renderedItems(options, category)
-                                : renderRangeSliders(category)}
+                                 : renderRangeSliders(category)}
+                                 
                         </ul>
                     </li>
                 )}
