@@ -125,6 +125,69 @@
 .radio-container input[type="radio"]:checked + .checkmark::after {
     background-color: green;
 }
+
+.sticky-filter-bar .filters-list .filter-value .radio-container {
+    display: inline-block;
+    position: relative;
+    padding-left: 19px;
+    margin-bottom: 3px;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.sticky-filter-bar .filters-list .filter-value .radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.sticky-filter-bar
+    .filters-list
+    .filter-value
+    .radio-container
+    input:checked
+    ~ .radiomark {
+    background: #52ac66;
+}
+
+.sticky-filter-bar .filters-list .filter-value .radiomark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 13px;
+    width: 13px;
+    background-color: #eee;
+    border-radius: 3px;
+}
+.sticky-filter-bar
+    .filters-list
+    .filter-value
+    .radio-container
+    input:checked
+    ~ .radiomark:after {
+    display: block;
+}
+
+.sticky-filter-bar
+    .filters-list
+    .filter-value
+    .radio-container
+    .radiomark:after {
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 7px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.sticky-filter-bar .filters-list .filter-value .radiomark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
 .filter-button-category-page button {
     color: white;
     background: #198754;
