@@ -24,6 +24,10 @@ class Product extends Model
         return $this->belongsToMany(Category::class,'category_product')->paginate(12);
     }
 
+    public function holdProducts(){
+        return $this->hasMany(HoldReleaseUser::class)->where('status','hold');
+    }
+
     public function getInStockAttribute(){
         if($this->quantity > 0){
             return true;

@@ -59,7 +59,8 @@ trait AmazonTrait
             'sku' => $product->sku,
             'quantity' => $quantity,
             'status' => $status,
-            'product' => $product
+            'product' => $product,
+            'hold_quantity' => $product->holdProducts->sum('quantity')
         ];
     }
 
