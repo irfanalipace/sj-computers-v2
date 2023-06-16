@@ -59,7 +59,7 @@ function Search() {
             onClick={() => handleItemClick(category)}
             className="ul-liste-items-all-buttons"
         >
-            <span className="text-decoration-none div-link-category-search">
+            <span className="text-decoration-none div-link-category-search" style={{fontSize:'13px'}}>
                 {category.name}
             </span>
         </DropdownItem>
@@ -79,7 +79,7 @@ function Search() {
                     toggle={toggle}
                     disabled={location.pathname.includes("category")}
                 >
-                    <DropdownToggle caret className="all-button">
+                    <DropdownToggle caret className="all-button" style={{fontSize:'13px'}}>
                         {selectedItem.name}
                     </DropdownToggle>
                     <DropdownMenu className="">
@@ -87,9 +87,9 @@ function Search() {
                             onClick={() =>
                                 handleItemClick({ name: "ALL", id: null })
                             }
-                            className="ul-liste-items-all-buttons"
+                            className="ul-liste-items-all-buttons "
                         >
-                            <span className="text-decoration-none">
+                            <span className="text-decoration-none" style={{fontSize:'13px'}}>
                                 All Category
                             </span>
                         </DropdownItem>

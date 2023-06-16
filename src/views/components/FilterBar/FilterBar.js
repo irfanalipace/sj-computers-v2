@@ -15,9 +15,6 @@ import Button from "../common/Button/Button";
 import FilterByRange from "./FilterByRange";
 const FilterBar = () => {
 
-    const getCategory= (data) => {
-console.log('hhhhh' ,data)        
-    }
     const [filters, setFilters] = useState({});
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [filtersInArray, setFiltersInArray] = useState([]);
@@ -498,7 +495,10 @@ console.log('hhhhh' ,data)
                         <ul className="filter-values-list">
                             {Array.isArray(filters[category])
                                 ? renderedItems(options, category)
-                                 : renderRangeSliders(category)}
+                                  : renderRangeSliders(category)
+                              
+                                
+                                 }
                                  
                         </ul>
                     </li>

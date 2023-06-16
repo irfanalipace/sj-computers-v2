@@ -188,16 +188,22 @@
     position: absolute;
     display: none;
 }
-.filter-button-category-page button {
-    color: white;
-    background: rgb(82, 172, 102);
-    border: none;
-    width: 85px;
-    height: 30px;
-    margin-bottom: 7px;
-    border-radius: 4px;
-    margin-bottom: 15px;
-}
+
+    .filter-button-category-page button {
+        color: #52ac66;
+        background: white;
+        border: 1px solid #52ac66;
+        width: 85px;
+        height: 30px;
+        font-size: 14px;
+        margin-bottom: 7px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+    }
+    .filter-button-category-page button:hover{
+      background: #52ac66;
+       color: white;
+    }
 
 .range-slider .MuiSlider-root {
     height: 2px;

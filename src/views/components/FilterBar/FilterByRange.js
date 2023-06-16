@@ -1,7 +1,6 @@
 import React from 'react'
 
-
-const FilterByRange = ({getCategory}) => {
+const FilterByRange = (category) => {
     let renderRangeSliders = (category) => {
         return (
             <div>
@@ -126,7 +125,7 @@ const FilterByRange = ({getCategory}) => {
     };
   return (
     <div>
-    
+        
     </div>
   )
 }
