@@ -139,6 +139,10 @@ class ProductController extends BaseController
                 $key = $filter['key'] ?? '';
                 $value = $filter['value'] ?? '';
 
+                if(empty($key) || empty($value)){
+                    continue;
+                }
+
 
                if($key == 'ram_memory' || $key == 'hard_disk'){
                     $productIds = $this->getProductFilterIds($key, $value['unit'], (int) $value['min'], (int) $value['max']);
