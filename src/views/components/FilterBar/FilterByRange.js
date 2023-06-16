@@ -1,5 +1,5 @@
 import React from 'react'
-import FilterBar from './FilterBar';
+
 
 const FilterByRange = ({getCategory}) => {
     let renderRangeSliders = (category) => {
@@ -126,8 +126,7 @@ const FilterByRange = ({getCategory}) => {
     };
   return (
     <div>
-        {/* <FilterBar renderRangeSliders={category} /> */}
-        {getCategory(renderRangeSliders)}
+    
     </div>
   )
 }
