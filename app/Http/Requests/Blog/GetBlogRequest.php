@@ -24,7 +24,7 @@ class GetBlogRequest extends FormRequest
     public function rules()
     {
         return [
-            'slug' => ['required', 'string', 'unique:blogs']
+            'slug' => ['required', 'string']
         ];
     }
 }
