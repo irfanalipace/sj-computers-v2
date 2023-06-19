@@ -108,6 +108,7 @@ Route::post('contact-us', [ContactUsController::class, 'contactSubmit'])->name('
  * blogs
  */
 Route::get('blogs', [BlogController::class, 'getList'])->name('blogs');
+Route::get('get-blogs', [BlogController::class, 'getBlog'])->name('get-blogs');
 
 /*
 *Place Order

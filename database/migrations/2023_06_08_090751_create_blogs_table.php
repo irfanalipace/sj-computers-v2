@@ -31,6 +31,7 @@ class CreateBlogsTable extends Migration
             $table->date('publish_date')->nullable();
             $table->date('draft_date')->nullable();
             $table->string('status')->nullable();
+            $table->string('slug')->nullable()->unique();
             $table->timestamps();
         });
     }
