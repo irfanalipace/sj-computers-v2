@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./SingleBlog.css";
 import blogmeeting from "@images/blog/meetingblog-page2.png";
 import smimage from "@images/blog/smallimage.png";
@@ -14,19 +15,40 @@ import laptopimg from "@images/blog/latopimage.png";
 import bloglaptop1 from "@images/blog/bookwithlaptop.png";
 import bloglaptop2 from "@images/blog/laptopwithbook2.png";
 import productviewblog from "@images/blog/typelaptop.png";
-
+import { getBlogsPagesApi } from "../../../../core/api/blogs";
 import meetingset from "@images/blog/meeting2image.png";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 const SingleBlog = () => {
+    const [blogs, setBlogs] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [expandedBlogs, setExpandedBlogs] = useState([]);
+
+    const toggleExpanded = (blogId) => {
+        if (expandedBlogs.includes(blogId)) {
+            setExpandedBlogs(expandedBlogs.filter((id) => id !== blogId));
+        } else {
+            setExpandedBlogs([...expandedBlogs, blogId]);
+        }
+    };
+    useEffect(() => {
+        getBlogsPagesApi()
+            .then((response) => {
+                // Handle the successful response
+                console.log("singleblogs response-pages-data:", response);
+                setBlogs(response.data); // Assuming response.data contains the blog data
+            })
+            .catch((error) => {
+                // Handle the error
+                console.error("API Error:", error);
+            });
+    }, []);
+
     return (
         <div>
             <div className="mein-dev-single-page-cantainer">
-                <div
-                    className="container conatnier-dev-single-blog-dev"
-                   
-                >
+                <div className="container conatnier-dev-single-blog-dev">
                     <div className="col-12">
                         <div className="span-dev-page-text-page">
                             <span>
@@ -39,10 +61,10 @@ const SingleBlog = () => {
                 </div>
             </div>
 
-            <div className="container" >
+            <div className="container">
                 <div className="row">
                     <div className="col-md-3">
-                        <div className="container container-card-slice-dev">
+                        {/* <div className="container container-card-slice-dev">
                             <div className="row">
                                 <div className="col-12">
                                     <div className="newsfeed-data-space">
@@ -97,39 +119,83 @@ const SingleBlog = () => {
                                     </div>
                                 </div>
                             </div>
+                        </div> */}
+
+                        <div className="container container-card-slice-dev">
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className="newsfeed-data-space">
+                                        <span>NEWSFEED</span>
+                                    </div>
+                                    <hr />
+                                    {blogs.slice(0, 6).map((blog) => (
+                                        <React.Fragment key={blog.id}>
+                                            <div className="text-data-span-graph-p-card-blog">
+                                                <span>
+                                                    {blog.meta_description}
+                                                </span>
+                                            </div>
+                                            <div className="jun-date-space-card-blog">
+                                                <span>{blog.publish_date}</span>
+                                            </div>
+                                            <hr />
+                                        </React.Fragment>
+                                    ))}
+                                    <div className="more-data-add-blog-space">
+                                        <span>More</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="col-md-5 col-syle-width-data">
-                        <div className="meeting-data-blog-save-dev-form">
-                            <img src={blogmeeting} />
-                        </div>
-                        <div className="mid-graph-pargarph-page-data">
-                            <span>
-                                {" "}
-                                Lorem ipsum dolor sit amet, trt aksdg asking no
-                                one consectetur asking no one consectetur.{" "}
-                            </span>
-                        </div>
-                        <div className="mid-graph-pargarph-page-datap-data">
-                            <span>
-                                {" "}
-                                Lorem ipsum dolor sit amet, trt aksdg asking no
-                                one consectetur asking no one consectetur
-                                jsjshdi. Lorem ipsum dolor sit amet, trt aksdg
-                                asking no one consectetur asking no one
-                                consectetur asking no one consectetur jsjshdi.
-                                Lorem ipsum dolor sit amet, one c
-                            </span>
-                        </div>
-                        <div>
-                            <span className="see-all-stories-data-ever-data">
-                                Read More
-                            </span>
-                        </div>
+                        {blogs.map((blog) => (
+                            <div key={blog.id}>
+                                <div className="meeting-data-blog-save-dev-form">
+                                    <img src={blogmeeting} />
+                                </div>
+                                <div className="mid-graph-pargarph-page-data">
+                                    <span>{blog.title}</span>
+                                </div>
+                                <div className="mid-graph-pargarph-page-datap-data blog-dynamic-style-heading-data1">
+                                    {expandedBlogs.includes(blog.id) ? (
+                                        <div
+                                            dangerouslySetInnerHTML={{
+                                                __html: blog.content,
+                                            }}
+                                        />
+                                    ) : (
+                                        <div
+                                            dangerouslySetInnerHTML={{
+                                                __html: blog.content.slice(
+                                                    0,
+                                                    100
+                                                ),
+                                            }}
+                                        />
+                                    )}
+                                </div>
+
+                                <div>
+                                    {blog.content.length > 100 && (
+                                        <span
+                                            className="see-all-stories-data-ever-data"
+                                            onClick={() =>
+                                                toggleExpanded(blog.id)
+                                            }
+                                        >
+                                            {expandedBlogs.includes(blog.id)
+                                                ? "Read Less"
+                                                : "Read More"}
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
                     </div>
                     <div className="col-md-3">
                         <div>
-                            <div className="conatiner conatiner-dev-stories-dev-data-for-blog">
+                            {/* <div className="conatiner conatiner-dev-stories-dev-data-for-blog">
                                 <div className="row">
                                     <div className="stories-data-effctive-blog">
                                         <span>TOP STORIES</span>
@@ -218,13 +284,56 @@ const SingleBlog = () => {
                                       </div>
                                     </div>
                                 </div>
+                            </div> */}
+
+                            <div className="conatiner conatiner-dev-stories-dev-data-for-blog">
+                                <div className="row">
+                                    <div className="stories-data-effctive-blog">
+                                        <span>TOP STORIES</span>
+                                    </div>
+                                    <div>
+                                        <hr />
+                                    </div>
+                                    {blogs.slice(0, 5).map((blog) => (
+                                        <React.Fragment key={blog.id}>
+                                            <div className="col-5">
+                                                <div className="smimage-stories-blog">
+                                                    <img
+                                                        src={
+                                                            blog.thumbnail_image
+                                                        }
+                                                        alt={blog.all_text}
+                                                    />
+                                                </div>
+                                            </div>
+                                            
+                                            <div className="col-7">
+                                                <div className="dev-data-sngle-stories-data">
+                                                    
+                                                    <span>
+                                                        {blog.meta_description}
+                                                        
+                                                    </span>
+                                                 
+                                                </div>
+                                            </div>
+                                        </React.Fragment>
+                                    ))}
+                                   
+                                    <div>
+                                        <hr />
+                                        <div className="see-all-stories-data-ever-data-dev-store-data-live">
+                                            <span>See all Stories</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="container" >
+            <div className="container">
                 <div className="treding-blog-sets">
                     <span> Trending Blogs</span>
                 </div>
@@ -329,6 +438,51 @@ const SingleBlog = () => {
                             </div>
                         </div>
                     </div>
+                    {/* {blogs.slice(0, 2).map((blog, index) => (
+            <div className="col-md-4 col-lg-4 col-sm-6" key={index}>
+              <div className="product-card">
+                <img src={blog.thumbnail_image} alt={`Product ${index + 1}`} />
+                <div className="dev-data-span-card-dev">
+                  <span>{blog.content}</span>
+                </div>
+                <div className="read-section-date-section">
+                  <div>
+                    <span>Read me</span>
+                  </div>
+                  <div>
+                    <span>{blog.content}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="col-md-4 col-lg-4 col-sm-6">
+            <div className="product-card" style={{ backgroundColor: "#318243" }}>
+              <div style={{ paddingTop: "50px", paddingLeft: "12px", paddingRight: "80px", paddingBottom: "px" }}>
+                <div style={{ display: "flex" }}>
+                  <span className="span-sj-computer-side">SJ News</span>
+                </div>
+                <div className="dev-space-name-folder-span-text">
+                  <span>
+                    Sign up for the latest news, facts, analysis, and original stories about
+                    Amazon delivered to you. Sign up for the latest news, facts, analysis,
+                    and original stories about Amazon delivered to you.
+                  </span>
+                </div>
+                <div className="email-input-data-feilds" style={{ color: "white" }}>
+                  <input type="email" placeholder="Enter Email" className="input-email-fileds-data-file" />
+                  <button className="button-arrow-dev input-email-fileds-data-file button-arrow-dev-blog-dve">
+                    <i className="fa-solid fa-chevron-right reight-border-icon"></i>
+                  </button>
+                </div>
+                <div className="protected-link-effectdspan-dev-blog">
+                  <span>
+                    Protected by reCAPTCHA. The Google <Link>Privacy Policy</Link> and apply.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div> */}
                 </div>
 
                 <div className="row">
@@ -393,6 +547,28 @@ const SingleBlog = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* <div className="row">
+  {blogs.map((blog) => (
+    <div className="col-md-4" key={blog.id}>
+      <div className="product-card">
+        <img src={blog.primary_image} alt={blog.all_text} />
+        <div className="dev-data-span-card-dev">
+          <span>{blog.content}</span>
+        </div>
+        <div className="read-section-date-section">
+          <div>
+            <span>{blog.title}</span>
+          </div>
+          <div>
+            <span>{blog.publish_date}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div> */}
+
                 <div className="row">
                     <div className="col-md-4">
                         <div className="product-card">
@@ -746,8 +922,10 @@ const SingleBlog = () => {
                                 asking no one consectetur asking no one c.
                             </div>
                             <div className="learn-more-blog-button">
-                              <button >Learn <small>more</small> {' '} {' '}<i className="fas fa-arrow-right fa-0x"></i>
-</button>
+                                <button>
+                                    Learn <small>more</small>{" "}
+                                    <i className="fas fa-arrow-right fa-0x"></i>
+                                </button>
                             </div>
                         </div>
                     </div>

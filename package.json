@@ -54,6 +54,7 @@
         "react-datepicker": "^4.11.0",
         "react-dom": "^18.2.0",
         "react-fontawesome": "^1.7.1",
+        "react-helmet": "^6.1.0",
         "react-lazy-load-image-component": "^1.5.6",
         "react-progressive-image": "^0.6.0",
         "react-redux": "^8.0.5",

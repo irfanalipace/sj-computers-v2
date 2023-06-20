@@ -713,6 +713,56 @@ margin-left: 59px;
         margin-bottom: 6px;
        
     }
+
+    .blog-dynamic-style-heading-data h1 {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 23px;
+        color: #333333;
+    }
+    .dev-left-blog-data-flow span{
+        font-size: 22px;
+    }
+
+    .dev-left-blog-data-flow {
+       margin-bottom: 18px;
+       font-weight: 500;
+       line-height: 20px;
+    }
+
+
+
+    .blog-dynamic-style-heading-data p {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: #333333;
+    }
+    .blog-dynamic-style-heading-data h2{
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px ;
+      
+        color: #333333;
+    }
+
+    .blog-dynamic-style-heading-data h3{
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 17px ;
+      
+        color: #333333;
+    }
+
+   
+  .blog-dynamic-style-heading-data a {
+    font-size: 14px;
+    }
     @media screen and (max-width:600px) {
         .dive-reight-border {
             display: none;
@@ -752,6 +802,7 @@ margin-left: 59px;
             top: 0px;
             background: rgba(49, 130, 67, 0.1);
         }
+   
         .image-for-meeting2-section {
             margin-top: 11px;
             margin-bottom: 5px;

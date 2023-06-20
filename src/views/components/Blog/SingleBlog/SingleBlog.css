@@ -120,6 +120,7 @@
 .smimage-stories-blog img {
     width: 100%;
     height: 100%;
+    font-size: 12px;
 }
 .conatiner-dev-stories-dev-data-for-blog {
     height: 551px;
@@ -161,7 +162,7 @@
     font-style: normal;
     font-weight: 500;
     font-size: 24px;
-    line-height: 144%;
+    line-height: 20px;
     /* or 35px */
 
     /* Primary */
@@ -176,8 +177,8 @@
     font-family: "Inter";
     font-style: normal;
     font-weight: 500;
-    font-size: 20px;
-    line-height: 144%;
+    font-size: 17px;
+    line-height: 20px;
     color: #333333;
 }
 .mid-graph-pargarph-page-datap-data {
@@ -505,7 +506,7 @@ color: #318243;
     }
 
     .col-syle-width-data{
-        height: 551px;
+       
         background: rgba(49, 130, 67, 0.03);
     }
 
@@ -537,6 +538,74 @@ color: #318243;
   .single-blog-pages-dev-container-all-products{
     padding-right: 116px;
   }
+
+
+
+  .blog-dynamic-style-heading-data1 a {
+font-size: 14px;
+}
+
+
+  .blog-dynamic-style-heading-data1 h1 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    color: #333333;
+}
+.dev-left-blog-data-flow1 span{
+    font-size: 22px;
+}
+
+.dev-left-blog-data-flow1 {
+   margin-bottom: 18px;
+   font-weight: 500;
+   line-height: 20px;
+}
+
+.mid-graph-pargarph-page-data1 span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 144%;
+    color: #333333;
+}
+
+.blog-dynamic-style-heading-data1 p {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+}
+.blog-dynamic-style-heading-data1 h2{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px ;
+  
+    color: #333333;
+}
+
+.blog-dynamic-style-heading-data1 h3{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px ;
+  
+    color: #333333;
+}
+
+
+
+
+
+
+
+
+  
 @media screen and (max-width:576px) {
     .position-image-data-blog-text-data {
         padding-left: -50px;
@@ -560,7 +629,7 @@ color: #318243;
         font-style: normal;
         font-weight: 500;
         font-size: 18px;
-        line-height: 144%;
+        line-height: 20px;
         color: #333333;
     }   .single-blog-pages-dev-container-all-products{
         padding-right: 11px;
