@@ -15,8 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-//         $schedule->command('amazon-product-update')->everyFifteenMinutes();
-//         $schedule->command('sj-products')->daily();
+         $schedule->command('amazon-product-update')->everyFifteenMinutes();
+         $schedule->command('sj-products')->daily();
     }
 
     /**
