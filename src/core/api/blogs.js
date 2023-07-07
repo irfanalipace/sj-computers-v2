@@ -1,3 +1,4 @@
+
 import ApiService from "@services/apiService";
 
 export function getBlogsPagesApi() {
@@ -18,3 +19,22 @@ export function getBlogsPagesApi() {
             });
     });
 }
+
+
+export function blogsDetails(blogslug) {
+  return new Promise((resolve, reject) => {
+    ApiService.post(`${blogslug}`, {
+      // Additional parameters for the API request
+    })
+      .then((response) => {
+        console.log("file: states.js | blogsPostApi | response", response);
+        resolve(response);
+      })
+      .catch((error) => {
+        console.log("Console Log: : error blogsApi", error);
+        reject(error);
+      });
+  });
+}
+
+  

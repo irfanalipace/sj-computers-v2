@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Navigate, useRoutes, useLocation } from "react-router-dom";
+import { Navigate, useRoutes, useLocation,useParams  } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Home from "@pages/Home/Home";
 // const Home = React.lazy(() => import("@pages/Home/Home"));
@@ -28,9 +28,12 @@ import Contact from "@components/Footer/FooterMenu/Contact";
 import Policy from "@pages/Policy/Policy";
 import SkuPage from "@pages/SKUTables/SkuPage";
 import BlogPage from "@pages/Blog/BlogPage";
-import SingleBlog from "@pages/Blog/BlogSingle";
+
+
 import AboutPage from "@pages/About/AboutPage";
 import WhatWeDoPage from "@pages/WhatWeDo/WhatWeDoPage";
+import BlogSingle from "@pages/Blog/BlogSingle";
+import BlogsDetails from "@pages/Blog/BlogsDetails";
 
 const Router = () => {
     const routes = [
@@ -199,20 +202,20 @@ const Router = () => {
                 </Suspense>
             ),
         },{
-            path: "/blog",
+            path: "/:blogslug",
             element: (
              
                     <Suspense fallback={<Loader />}>
-                     <BlogPage />
+                     <BlogsDetails />
                     </Suspense>
                
             ),
         },{
-            path: "/blog-page",
+            path: "/blog-lending-page",
             element: (
              
                     <Suspense fallback={<Loader />}>
-                <SingleBlog />
+                   <BlogSingle />
                     </Suspense>
                
             ),
@@ -292,6 +295,7 @@ const Router = () => {
                 </ProtectedRoute>
             ),
         },
+
         {
             path: "/test",
             element: (
@@ -300,6 +304,7 @@ const Router = () => {
                 </Suspense>
             ),
         },
+        
         {
             path: "/sku",
             element: (
@@ -310,6 +315,7 @@ const Router = () => {
                 </ProtectedRoute>
             ),
         },
+
         {
             path: "*",
             element: (

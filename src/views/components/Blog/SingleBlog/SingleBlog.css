@@ -84,8 +84,8 @@
 .meeting-data-blog-save-dev-form img {
     max-height: 100%;
     max-width: 100%;
-    width: 525px;
-    height: 323px;
+    width: 1290px;
+    height: 354px;
     left: calc(50% - 494px / 2 - 49px);
     top: 326px;
 }
@@ -169,9 +169,14 @@
 
     color: #333333;
 }
+.trending-blog-filter-data {
+    display: flex;
+    justify-content: space-between;
+}
 .mid-graph-pargarph-page-data {
     margin-top: 17px;
     margin-bottom: 17px;
+    width: 95%;
 }
 .mid-graph-pargarph-page-data span {
     font-family: "Inter";
@@ -182,7 +187,14 @@
     color: #333333;
 }
 .mid-graph-pargarph-page-datap-data {
+    margin-top: 29px;
     margin-bottom: 29px;
+   
+}
+.trending-blog-filter-data select{
+    box-shadow: 2px 0px 4px 1px;
+    border: none;
+    height: 26px;
 }
 .treding-blog-sets span {
     font-family: "Inter";
@@ -536,7 +548,7 @@ color: #318243;
         padding-right: 12px;
     }
   .single-blog-pages-dev-container-all-products{
-    padding-right: 116px;
+    /* padding-right: 116px; */
   }
 
 

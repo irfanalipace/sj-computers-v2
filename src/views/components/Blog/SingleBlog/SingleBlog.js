@@ -24,7 +24,13 @@ const SingleBlog = () => {
     const [blogs, setBlogs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
+    const [selectedFilter, setSelectedFilter] = useState('');
 
+    const handleChange = (event) => {
+      const filterValue = event.target.value;
+      setSelectedFilter(filterValue);
+      handleFilter(filterValue);
+    };
     const toggleExpanded = (blogId) => {
         if (expandedBlogs.includes(blogId)) {
             setExpandedBlogs(expandedBlogs.filter((id) => id !== blogId));
@@ -45,6 +51,8 @@ const SingleBlog = () => {
             });
     }, []);
 
+
+    
     return (
         <div>
             <div className="mein-dev-single-page-cantainer">
@@ -63,8 +71,8 @@ const SingleBlog = () => {
 
             <div className="container">
                 <div className="row">
-                    <div className="col-md-3">
-                        {/* <div className="container container-card-slice-dev">
+                    {/* <div className="col-md-3">
+                        <div className="container container-card-slice-dev">
                             <div className="row">
                                 <div className="col-12">
                                     <div className="newsfeed-data-space">
@@ -119,7 +127,7 @@ const SingleBlog = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div> */}
+                        </div>
 
                         <div className="container container-card-slice-dev">
                             <div className="row">
@@ -147,16 +155,17 @@ const SingleBlog = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-md-5 col-syle-width-data">
+                    </div> */}
+                    <div className="col-md-12">
                         {blogs.map((blog) => (
+                           
                             <div key={blog.id}>
                                 <div className="meeting-data-blog-save-dev-form">
                                     <img src={blogmeeting} />
                                 </div>
-                                <div className="mid-graph-pargarph-page-data">
+                                {/* <div className="mid-graph-pargarph-page-data">
                                     <span>{blog.title}</span>
-                                </div>
+                                </div> */}
                                 <div className="mid-graph-pargarph-page-datap-data blog-dynamic-style-heading-data1">
                                     {expandedBlogs.includes(blog.id) ? (
                                         <div
@@ -169,7 +178,7 @@ const SingleBlog = () => {
                                             dangerouslySetInnerHTML={{
                                                 __html: blog.content.slice(
                                                     0,
-                                                    100
+                                                    400
                                                 ),
                                             }}
                                         />
@@ -177,7 +186,7 @@ const SingleBlog = () => {
                                 </div>
 
                                 <div>
-                                    {blog.content.length > 100 && (
+                                    {blog.content.length > 400 && (
                                         <span
                                             className="see-all-stories-data-ever-data"
                                             onClick={() =>
@@ -191,11 +200,14 @@ const SingleBlog = () => {
                                     )}
                                 </div>
                             </div>
+                          
+
                         ))}
+                           
                     </div>
-                    <div className="col-md-3">
+                    {/* <div className="col-md-3">
                         <div>
-                            {/* <div className="conatiner conatiner-dev-stories-dev-data-for-blog">
+                            <div className="conatiner conatiner-dev-stories-dev-data-for-blog">
                                 <div className="row">
                                     <div className="stories-data-effctive-blog">
                                         <span>TOP STORIES</span>
@@ -284,7 +296,7 @@ const SingleBlog = () => {
                                       </div>
                                     </div>
                                 </div>
-                            </div> */}
+                            </div>
 
                             <div className="conatiner conatiner-dev-stories-dev-data-for-blog">
                                 <div className="row">
@@ -329,18 +341,28 @@ const SingleBlog = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
             <div className="container">
-                <div className="treding-blog-sets">
+               <div className="trending-blog-filter-data">
+               <div className="treding-blog-sets">
                     <span> Trending Blogs</span>
                 </div>
-            </div>
+                            <div>
+                       <select value={selectedFilter} >
+                    <option value="">Recent Blogs</option>
+                    <option value="trending">Trending Blog</option>
+                    <option value="az">Sorting A-Z</option>
+                    <option value="date">Sorting by Date</option>
+                </select>
+                </div>
+               </div>
+               </div>
 
             <div className="container single-blog-pages-dev-container-all-products">
-                <div className="row">
+                {/* <div className="row">
                     <div className="col-md-4 col-lg-4 col-sm-6">
                         <div className="product-card">
                             <img src={book} alt="Product 1" />
@@ -438,6 +460,7 @@ const SingleBlog = () => {
                             </div>
                         </div>
                     </div>
+                    </div> */}
                     {/* {blogs.slice(0, 2).map((blog, index) => (
             <div className="col-md-4 col-lg-4 col-sm-6" key={index}>
               <div className="product-card">
@@ -483,7 +506,7 @@ const SingleBlog = () => {
               </div>
             </div>
           </div> */}
-                </div>
+              
 
                 <div className="row">
                     <div className="col-md-4">
@@ -569,7 +592,7 @@ const SingleBlog = () => {
   ))}
 </div> */}
 
-                <div className="row">
+                {/* <div className="row">
                     <div className="col-md-4">
                         <div className="product-card">
                             <img src={book} alt="Product 1" />
@@ -929,7 +952,7 @@ const SingleBlog = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );
