@@ -5,7 +5,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import policyimage from "@images/Policy/polict-cart-comp.png";
 import TopBar from "../TopBar/TopBar";
-import { getBlogsPagesApi } from "../../../core/api/blogs";
+import {
+    getBlogsPagesApi,
+    blogSlugApiblogDetails,
+} from "../../../core/api/blogs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
@@ -36,14 +39,12 @@ const HeadereLinks = [
     { path: "/", title: "Subscribe" },
 ];
 const nonHeaderRoutes = [""];
-    const Blog = () => {
-
+const Blog = () => {
+    const [blogdteails, setBlogDetails] = useState("");
     const [blogs, setBlogs] = useState([]);
     const { blogslug } = useParams();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
-
-    console.log('blog-id-data',blogslug)
 
     const data = [
         {
@@ -63,7 +64,7 @@ const nonHeaderRoutes = [""];
             image: meetingset3,
             content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             date: "Jun 10,",
-        }
+        },
     ];
 
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -75,278 +76,179 @@ const nonHeaderRoutes = [""];
     };
 
     useEffect(() => {
-        getBlogsPagesApi()
+        blogSlugApiblogDetails(blogslug)
             .then((response) => {
-                setBlogs(response.data);
-                
+                setBlogDetails(response.data);
             })
             .catch((error) => {
-                // Handle the error
                 console.error("API Error:", error);
             });
     }, []);
 
-
-
     const [blog, setBlog] = useState(null);
 
     useEffect(() => {
-      getBlogsPagesApi()
-        .then((response) => {
-          if (response.data && response.data.length > 0) {
-            const firstBlog = response.data[0];
-            console.log(firstBlog,'responseof all blog-data')
-            setBlog(firstBlog);
-          }
-        })
-        .catch((error) => {
-          // Handle the error
-          console.error("API Error:", error);
-        });
+        getBlogsPagesApi()
+            .then((response) => {
+                if (response.data && response.data?.data.length > 0) {
+                    const firstBlog = response.data?.data[0];
+                    console.log('console of the dta',firstBlog)
+                    setBlog(firstBlog);
+                }
+            })
+            .catch((error) => {
+                console.error("API Error:", error);
+            });
     }, []);
-  
+
     if (!blog) {
-      return <div>Loading...</div>;
+        return <div>Loading...</div>;
     }
-  
 
-
-
-    
-
-    
-    // const blogsdata = blogs.map((blog) => {});
-
-    
     return (
         <div>
-            {/* {!nonHeaderRoutes.includes(
-                        location.pathname.split("/")[1]
-                    ) && ( */}
             <>
                 <div>
-                   
-                        <div>
-                            <Helmet>
-                                <title>{blog.meta_title}</title>
-                                
-                                <meta
-                                    name="meta-description-meta-title"
-                                    content={blog.meta_description}
-                                />
-                            </Helmet>
-                            <div className="">
-                                <div className="row">
-                                    <div>
-                                        <header className="topBar px-3 policy-header-topbar">
-                                            <div className="topBar-inner-policy">
-                                                <div className="menuBar-policy">
-                                                    <ul className="text-decoration-none policy-menu-item-list">
-                                                        {HeadereLinks.map(
-                                                            (link, index) => (
-                                                                <li
-                                                                    className="policy-listitem"
-                                                                    key={index}
+                    <div>
+                        <Helmet>
+                            <title>{blog.meta_title}</title>
+
+                            <meta
+                                name="meta-description-meta-title"
+                                content={blog.meta_description}
+                            />
+                        </Helmet>
+                        <div className="">
+                            <div className="row">
+                                <div>
+                                    <header className="topBar px-3 policy-header-topbar">
+                                        <div className="topBar-inner-policy">
+                                            <div className="menuBar-policy">
+                                                <ul className="text-decoration-none policy-menu-item-list">
+                                                    {HeadereLinks.map(
+                                                        (link, index) => (
+                                                            <li
+                                                                className="policy-listitem"
+                                                                key={index}
+                                                            >
+                                                                <Link
+                                                                    to={
+                                                                        link.path
+                                                                    }
+                                                                    className="text-decoration-none text-color hover-effect-sets-topbar hover-text-color-policy-comp"
                                                                 >
-                                                                    <Link
-                                                                        to={
-                                                                            link.path
-                                                                        }
-                                                                        className="text-decoration-none text-color hover-effect-sets-topbar hover-text-color-policy-comp"
-                                                                    >
-                                                                        {
-                                                                            link.title
-                                                                        }
-                                                                    </Link>
-                                                                </li>
-                                                            )
-                                                        )}
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </header>
-                                    </div>
-                                </div>
-
-                           
-                                <div
-                                    className="blog-background-color"
-                                    key={blog.id}
-                                >
-                                    <div className="container dev-container-side">
-                                        <div className="row">
-                                            <div className="col-md-2">
-                                                <div className="div-left-blog-text">
-                                                    <span>
-                                                        <span
-                                                            style={{
-                                                                backgroundColor:
-                                                                    "#ffff00",
-                                                                padding: "3px",
-                                                                borderRadius:
-                                                                    "5px",
-                                                                color: "black",
-                                                            }}
-                                                        >
-                                                
-                                                            Blog
-                                                        </span>{" "}
-                                                        <span
-                                                            style={{
-                                                                backgroundColor:
-                                                                    "#ffff00",
-                                                                padding: "3px",
-                                                                borderRadius:
-                                                                    "5px",
-                                                                color: "black",
-                                                            }}
-                                                        >
-                                                            {" "}
-                                                            {blog.tags}
-                                                        </span>
-                                                        {blog.lsi}
-                                                    </span>
-                                                </div>
-                                                <div className="dive-reight-border">
-                                                    <div className="circle-dev-blog">
-                                                        <span>3 min</span>
-                                                    </div>
-                                                    <div className="date-blog-after-circle">
-                                                        <span>
-                                                            {blog.publish_date}
-                                                        </span>
-                                                    </div>
-                                                    <div className="ul-item-blog-social-icon">
-                                                        <a href="https://www.instagram.com/example">
-                                                            <FontAwesomeIcon
-                                                                icon={
-                                                                    faInstagram
-                                                                }
-                                                            />
-                                                        </a>
-                                                        <a href="https://www.facebook.com/example">
-                                                            <FontAwesomeIcon
-                                                                icon={
-                                                                    faFacebook
-                                                                }
-                                                            />
-                                                        </a>
-                                                        <a href="https://www.youtube.com/example">
-                                                            <FontAwesomeIcon
-                                                                icon={faYoutube}
-                                                            />
-                                                        </a>
-                                                        <a href="https://twitter.com/example">
-                                                            <FontAwesomeIcon
-                                                                icon={faTwitter}
-                                                            />
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-10">
-                                                <div className="dev-left-blog-p">
-                                                    <h3> {blogslug}</h3>
-                                                    <span>{blog.title}</span>
-                                                </div>
-                                                <div className="div-left-blog-text-written">
-                                                    <span>
-                                                        Written by SJ Staff
-                                                    </span>
-                                                </div>
+                                                                    {link.title}
+                                                                </Link>
+                                                            </li>
+                                                        )
+                                                    )}
+                                                </ul>
                                             </div>
                                         </div>
-                                    </div>
+                                    </header>
                                 </div>
+                            </div>
 
-                                <div className="container image-cainter-dev">
+                            <div
+                                className="blog-background-color"
+                                key={blog.id}
+                            >
+                                <div className="container dev-container-side">
                                     <div className="row">
-                                        <div className="col-12">
-                                            <div className="background-image-lin-dve">
-                                                <img
-                                                    src={meetingimage}
-                                                    alt="all_text"
-                                                />
+                                        <div className="col-md-2">
+                                            <div className="div-left-blog-text">
+                                                <span>
+                                                    <span
+                                                        style={{
+                                                            backgroundColor:
+                                                                "#ffff00",
+                                                            padding: "3px",
+                                                            borderRadius: "5px",
+                                                            color: "black",
+                                                        }}
+                                                    >
+                                                        Blog
+                                                    </span>{" "}
+                                                    <span
+                                                        style={{
+                                                            backgroundColor:
+                                                                "#ffff00",
+                                                            padding: "3px",
+                                                            borderRadius: "5px",
+                                                            color: "black",
+                                                        }}
+                                                    >
+                                                        {" "}
+                                                      Blog
+                                                    </span>
+                                                    Blog Name
+                                                </span>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* <div className="container dev-container-side">
-                                    <div className="row">
-                                        <div className="col-md-3 ">
-                                            <div className="">
-                                                <div className="circle-dev-blog1">
+                                            <div className="dive-reight-border">
+                                                <div className="circle-dev-blog">
                                                     <span>3 min</span>
                                                 </div>
-                                                <div className="reading-blog-after-circle">
-                                                    <span>Reading:</span>
-                                                </div>
-
-                                                <div className="span-dev-paragraph">
+                                                <div className="date-blog-after-circle">
                                                     <span>
-                                                     
-                                                     {blog.meta_description}
+                                                        {blog.publish_date}
                                                     </span>
                                                 </div>
-                                                <div className="ul-item-blog-social-icon2">
-                                                    <div className="div-social-dev-blog-p2">
-                                                        <a href="https://www.instagram.com/example">
-                                                            <FontAwesomeIcon
-                                                                icon={
-                                                                    faInstagram
-                                                                }
-                                                            />
-                                                        </a>
-                                                        <a href="https://www.facebook.com/example">
-                                                            <FontAwesomeIcon
-                                                                icon={
-                                                                    faFacebook
-                                                                }
-                                                            />
-                                                        </a>
-                                                        <a href="https://www.youtube.com/example">
-                                                            <FontAwesomeIcon
-                                                                icon={faYoutube}
-                                                            />
-                                                        </a>
-                                                        <a href="https://twitter.com/example">
-                                                            <FontAwesomeIcon
-                                                                icon={faTwitter}
-                                                            />
-                                                        </a>
-                                                    </div>
+                                                <div className="ul-item-blog-social-icon">
+                                                    <a href="https://www.instagram.com/example">
+                                                        <FontAwesomeIcon
+                                                            icon={faInstagram}
+                                                        />
+                                                    </a>
+                                                    <a href="https://www.facebook.com/example">
+                                                        <FontAwesomeIcon
+                                                            icon={faFacebook}
+                                                        />
+                                                    </a>
+                                                    <a href="https://www.youtube.com/example">
+                                                        <FontAwesomeIcon
+                                                            icon={faYoutube}
+                                                        />
+                                                    </a>
+                                                    <a href="https://twitter.com/example">
+                                                        <FontAwesomeIcon
+                                                            icon={faTwitter}
+                                                        />
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-md-6">
-                                            <div className="dev-left-blog-data-flow ">
-                                                 <span>
-                                                  
-                                                       {blog.title}
-                                                </span> 
-                                
-                                
-
+                                        <div className="col-md-10">
+                                            <div className="dev-left-blog-p">
+                                                <h3> {blogslug}</h3>
+                                                <span>{blog.title}</span>
                                             </div>
-                                 
-                                            <div className="dev-left-blog-section2">
-                                               
-                                   
-                                   <div className="blog-dynamic-style-heading-data">
-                                    <div dangerouslySetInnerHTML={{ __html: blog.content }} />
-                                    </div>
-
-                                            </div>         
+                                            <div className="div-left-blog-text-written">
+                                                <span>Written by SJ Staff</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div> */}
+                                </div>
+                            </div>
 
-                                <div className="container content-data-of-the-iamges-blogs">
-                                    <div className="row">
-                                        <div className="col-md-3">
-                                       <div>
-                                       <div className="main-dev-card-deprt">
+                            <div className="container image-cainter-dev">
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="background-image-lin-dve">
+                                            <img
+                                                src={meetingimage}
+                                                alt="all_text"
+                                            />
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="container content-data-of-the-iamges-blogs">
+                                <div className="row">
+                                    <div className="col-md-3">
+                                        <div>
+                                            <div className="main-dev-card-deprt">
                                                 <div className="left-dev-span-stories">
                                                     <span>
                                                         STORIES WE THINK YOU’LL
@@ -366,8 +268,9 @@ const nonHeaderRoutes = [""];
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                  
-                                                                    {blog.meta_description}
+                                                                    {
+                                                                        blog.meta_description
+                                                                    }
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -382,8 +285,9 @@ const nonHeaderRoutes = [""];
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                  
-                                                                   {blog.meta_description}
+                                                                    {
+                                                                        blog.meta_description
+                                                                    }
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -398,316 +302,103 @@ const nonHeaderRoutes = [""];
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                  
-                                                                     {blog.meta_description}
+                                                                    {
+                                                                        blog.meta_description
+                                                                    }
                                                                 </span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                       </div>
                                         </div>
+                                    </div>
 
-                                 
+                                    <div className="col-md-6">
+                                        <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
+                                            <div
+                                                dangerouslySetInnerHTML={{
+                                                    __html: blog.content,
+                                                }}
+                                            />
+                                         
+                                        </div>
+                                        <div className="image-for-meeting2-section">
+                                            <img src={meetingset} />
 
-                                        <div className="col-md-6">
-                                            <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
+                                            {/* <img
+                                            src={blog.secondary_image ? blog.secondary_image : meetingimage }
+                                            alt={blog.all_text}
+                                        /> */}
+                                        </div>
+                                        <span className="span-deve-loram-space">
+                                            {blog.meta_description}
+                                        </span>
+                                        <div className="dve-space-paragrapgh">
+                                            <div className="blog-dynamic-style-heading-data">
                                                 <div
                                                     dangerouslySetInnerHTML={{
                                                         __html: blog.content,
                                                     }}
                                                 />
                                             </div>
-                                            <div className="image-for-meeting2-section">
-                                                <img src={meetingset} />
+                                        </div>
 
-                                                {/* <img
-                                            src={blog.secondary_image ? blog.secondary_image : meetingimage }
-                                            alt={blog.all_text}
-                                        /> */}
-                                            </div>
-                                            <span className="span-deve-loram-space">
-                                                {blog.meta_description}
-                                            </span>
-                                            <div className="dve-space-paragrapgh">
-                                                {/* <span>
-                                                     Lorem ipsum dolor sit amet,
-                                                    trt aksdg asking no one
-                                                    consectetur asking no one
-                                                    consectetur jsjshdi. Lorem
-                                                    ipsum dolor sit amet, trt
-                                                    aksdg asking no one
-                                                    consectetur asking no one c.
-                                                    Lorem ipsum dolor sit amet,
-                                                    trt aksdg asking no one
-                                                    consectetur asking no one
-                                                    consectetur jsjshdi. Lorem
-                                                    ipsum dolor sit amet, trt
-                                                    aksdg asking no one
-                                                    consectetur asking no one c. 
-                                                    {blog.content}
-                                                </span> */}
+                                        <div className="image-for-meeting2-section">
+                                            <img src={meetingset} />
 
-                                                <div className="blog-dynamic-style-heading-data">
-                                                    <div
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: blog.content,
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="image-for-meeting2-section">
-                                                <img src={meetingset} />
-
-                                                {/* <img
+                                            {/* <img
                                             src={blog.thumbnail_image ? blog.thumbnail_image : meetingimage }
                                             alt={blog.all_text}
                                         /> */}
-                                            </div>
-                                            <div className="dve-space-paragrapgh">
-                                                {/* <span>
-                                                     Lorem ipsum dolor sit amet,
-                                                    trt aksdg asking no one
-                                                    consectetur asking no one
-                                                    consectetur jsjshdi. Lorem
-                                                    ipsum dolor sit amet, trt
-                                                    aksdg asking no one
-                                                    consectetur asking no one c.
-                                                    Lorem ipsum dolor sit amet,
-                                                    trt aksdg asking no one
-                                                    consectetur asking no one
-                                                    consectetur jsjshdi. Lorem
-                                                    ipsum dolor sit amet, trt
-                                                    aksdg asking no on
-                                                    consectetur asking no one c. 
-                                                    {blog.content}
-                                                </span> */}
-                                                <div className="blog-dynamic-style-heading-data">
-                                                    <div
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: blog.content,
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            {/* <div className="dev-card-for-sj-computer-data">
-                                                <div className="dev-card-for-sj-computer-data-div">
-                                                    <span>
-                                                        Sign up for weekly Sj
-                                                        Computer newsletter
-                                                    </span>
-                                                </div>
-                                                <div class="email-input">
-                                                    <input
-                                                        type="email"
-                                                        placeholder="Enter Email"
-                                                    />
-                                                    <button className="button-arrow-dev">
-                                                        <i className="fa-solid fa-chevron-right reight-border-icon"></i>
-                                                    </button>
-                                                </div>
-                                                <div className="protected-link-effectd">
-                                                    <span>
-                                                        Protected by reCAPTCHA.
-                                                        The Google{" "}
-                                                        <Link>
-                                                            Privacy Policy
-                                                        </Link>{" "}
-                                                        and apply.
-                                                    </span>
-                                                </div>
-                                            </div> */}
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* <div style={{ background: "rgba(49, 130, 67, 0.1)" }}>
-                    <div className="container container-blog-data-footer">
-                        <div className="row">
-                            <div className="col-md-2">
-                                <div className="sj-left-dev-set-data-from-section">
-                                    <span>More from SJ</span>
-                                 <Stack spacing={2}>
-                                <Pagination count={3} shape="rounded" />
-                            
-                                </Stack>
-                                </div>
-                            </div>
-                            <div className="col-md-9 col-sm-10">
-                                <div  className="card-dev-container-mobile-space-section-age-cart">
-                                    <div className="row">
-                                    <div className="col-md-3 col-sm-6 col-6">
-                                            <div className="image-fooetr-blog">
-                                                <img
-                                                    className="image-for-blog-data-sets-view"
-                                                    src={meetingset1}
-                                                />
-                                            </div>
-                                            <div
-                                             className="dev-folder-card-blog-section-dev-page"
-                                                style={{ background: "white" }}
-                                            >
+                                        <div className="dve-space-paragrapgh">
+                                            <div className="blog-dynamic-style-heading-data">
                                                 <div
-                                                    className="dve-sj-computers-icon-dev-blog"
-                                                >
-                                                    <span className="image-fooetr-blog">
-                                                        SJ
-                                                    </span>
-                                                </div>
-                                                <div className="blog-post-paragraph-tag">
-                                                    <span>
-                                                        Lorem ipsum dolor sit
-                                                        amet, Lorem ne
-                                                        consectetur jsjshdi.{" "}
-                                                    </span>
-                                                </div>
-
-                                                <div className="read-date-blog-post-data">
-                                                    <div>
-                                                        <span className="read-more-blog">
-                                                            Read more..
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span className="read-more-date-with-data-date">
-                                                            Jun 8,2023
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-3 col-sm-6 col-6">
-                                            <div className="image-fooetr-blog">
-                                                <img
-                                                    src={meetingset1}
-                                                    className="image-for-blog-data-sets-view"
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: blog.content,
+                                                    }}
                                                 />
-                                            </div>
-                                            <div
-                                             className="dev-folder-card-blog-section-dev-page"
-                                                style={{ background: "white" }}
-                                            >
-                                                <div
-                                                 
-                                                    className="dve-sj-computers-icon-dev-blog"
-                                                >
-                                                    <span className="image-fooetr-blog">
-                                                        SJ
-                                                    </span>
-                                                </div>
-                                                <div className="blog-post-paragraph-tag">
-                                                    <span>
-                                                        Lorem ipsum dolor sit
-                                                        amet, Lorem ne
-                                                        consectetur jsjshdi.{" "}
-                                                    </span>
-                                                </div>
-
-                                                <div className="read-date-blog-post-data">
-                                                    <div>
-                                                        <span className="read-more-blog">
-                                                            Read more..
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span className="read-more-date-with-data-date">
-                                                            Jun 8,2023
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-3 col-sm-6 col-6">
-                                            <div className="image-fooetr-blog">
-                                                <img
-                                                    src={meetingset1}
-                                                    className="image-for-blog-data-sets-view"
-                                                />
-                                            </div>
-                                            <div
-                                            className="dev-folder-card-blog-section-dev-page"
-                                                style={{ background: "white" }}
-                                            >
-                                                <div
-                                                   className="dve-sj-computers-icon-dev-blog"
-                                                >
-                                                    <span className="image-fooetr-blog">
-                                                        SJ
-                                                    </span>
-                                                </div>
-                                                <div className="blog-post-paragraph-tag">
-                                                    <span>
-                                                        Lorem ipsum dolor sit
-                                                        amet, Lorem ne
-                                                        consectetur jsjshdi.{" "}
-                                                    </span>
-                                                </div>
-
-                                                <div className="read-date-blog-post-data">
-                                                    <div>
-                                                        <span className="read-more-blog">
-                                                            Read more..
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span className="read-more-date-with-data-date">
-                                                            Jun 8,2023
-                                                        </span>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div> */}
 
-                            <div
-                                style={{ background: "rgba(49, 130, 67, 0.1)" }}
-                            >
-                                <div className="container container-blog-data-footer">
-                                    {/* Pagination */}
-                                    <div className="row">
-                                        <div className="col-md-2">
-                                            <div className="sj-left-dev-set-data-from-section">
-                                                <span>More from SJ</span>
-                                                <Pagination
-                                                    count={Math.ceil(
-                                                        data.length /
-                                                            itemsPerPage
-                                                    )}
-                                                    shape="rounded"
-                                                    page={currentPage}
-                                                    onChange={handlePageChange}
-                                                />
-                                            </div>
+                        <div style={{ background: "rgba(49, 130, 67, 0.1)" }}>
+                            <div className="container container-blog-data-footer">
+                                <div className="row">
+                                    <div className="col-md-2">
+                                        <div className="sj-left-dev-set-data-from-section">
+                                            <span>More from SJ</span>
+                                            <Pagination
+                                                count={Math.ceil(
+                                                    data.length / itemsPerPage
+                                                )}
+                                                shape="rounded"
+                                                page={currentPage}
+                                                onChange={handlePageChange}
+                                            />
                                         </div>
-                                        <div className="col-md-9 col-sm-10">
+                                    </div>
+                                    <div className="col-md-9 col-sm-10">
                                             <div className="card-dev-container-mobile-space-section-age-cart">
                                                 <div className="row">
-                                                    {/* Render the current items */}
-                                                    {blogs.map((blog) => (
+                                                  
+                                                    {currentItems.map((item) => (
                                                         <div
-                                                            key={blog.id}
+                                                            key={item.id}
                                                             className="col-md-3 col-sm-6 col-6"
                                                         >
                                                             <div className="image-fooetr-blog">
-                                                                {/* <img
-                                                            className="image-for-blog-data-sets-view"
-                                                            src={item.image}
-                                                            alt="Card"
-                                                        /> */}
+                                                               
                                                                 <img
                                                                     src={
-                                                                        blog.thumbnail_image
+                                                                        item.thumbnail_image
                                                                     }
                                                                     alt={
-                                                                        blog.all_text
+                                                                        item.all_text
                                                                     }
                                                                 />
                                                             </div>
@@ -726,7 +417,7 @@ const nonHeaderRoutes = [""];
                                                                 <div className="blog-post-paragraph-tag">
                                                                     <span>
                                                                         {
-                                                                            blog.meta_description
+                                                                            item.meta_description
                                                                         }
                                                                     </span>
                                                                 </div>
@@ -740,7 +431,7 @@ const nonHeaderRoutes = [""];
                                                                     <div>
                                                                         <span className="read-more-date-with-data-date">
                                                                             {
-                                                                                blog.publish_date
+                                                                                item.publish_date
                                                                             }
                                                                         </span>
                                                                     </div>
@@ -751,11 +442,10 @@ const nonHeaderRoutes = [""];
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                   
+                    </div>
                 </div>
             </>
             {/* )} */}

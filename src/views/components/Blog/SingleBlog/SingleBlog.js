@@ -21,11 +21,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router-dom";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+
 const SingleBlog = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState("");
+    const [blogs, setBlogs] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(12);
+    const [prevPageUrl, setPrevPageUrl] = useState(null);
+    const [nextPageUrl, setNextPageUrl] = useState(null);
+
     const { blogslug } = useParams();
+
     console.log("sulg-single-page-data", blogslug);
     const handleChange = (event) => {
         const filterValue = event.target.value;
@@ -40,26 +48,40 @@ const SingleBlog = () => {
         }
     };
 
-    const [blogs, setBlogs] = useState([]);
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(12);
-
     useEffect(() => {
+        setIsLoading(true);
         getBlogsPagesApi(currentPage, itemsPerPage)
             .then((response) => {
                 if (response.data && response.data?.data.length > 0) {
                     setBlogs(response.data?.data);
-                    console.log(response?.data, "data response blog-data");
+                    setPrevPageUrl(response.data?.prev_page_url);
+                    setNextPageUrl(response.data?.next_page_url);
+                } else {
+                    setBlogs([]);
+                    setPrevPageUrl(response.data?.prev_page_url);
+                    setNextPageUrl(response.data?.next_page_url);
                 }
+                setIsLoading(false);
             })
             .catch((error) => {
-              
                 console.error("API Error:", error);
+                setIsLoading(false);
             });
     }, [currentPage, itemsPerPage]);
 
-    if (blogs.length === 0) {
+    const handlePaginationClick = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const handlePrevPage = () => {
+        setCurrentPage(currentPage - 1);
+    };
+
+    const handleNextPage = () => {
+        setCurrentPage(currentPage + 1);
+    };
+
+    if (isLoading) {
         return <div>Loading...</div>;
     }
 
@@ -68,10 +90,7 @@ const SingleBlog = () => {
     const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
 
     const totalPages = Math.ceil(blogs.length / itemsPerPage);
-
-    const handlePaginationClick = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
+    //    console.log('responseof paginationClasses',currentItems)
 
     return (
         <div>
@@ -91,120 +110,26 @@ const SingleBlog = () => {
 
             <div className="container">
                 <div className="row">
-                    {/* <div className="col-md-3">
-                        <div className="container container-card-slice-dev">
-                            <div className="row">
-                                <div className="col-12">
-                                    <div className="newsfeed-data-space">
-                                        <span>NEWSFEED</span>
-                                    </div>
-                                    <hr></hr>
-                                    <div className="text-data-span-graph-p-card-blog">
-                                        <span>
-                                            Lorem ipsum dolor sit amet, trt
-                                            aksdg asking no one consectetur sit
-                                        </span>
-                                    </div>
-                                    <div className="jun-date-space-card-blog">
-                                        <span>Jun 8, 2023</span>
-                                    </div>
-
-                                    <hr></hr>
-                                    <div className="text-data-span-graph-p-card-blog">
-                                        <span>
-                                            Lorem ipsum dolor sit amet, trt
-                                            aksdg asking no one consectetur sit
-                                        </span>
-                                    </div>
-                                    <div className="jun-date-space-card-blog">
-                                        <span>Jun 8, 2023</span>
-                                    </div>
-
-                                    <hr></hr>
-                                    <div className="text-data-span-graph-p-card-blog">
-                                        <span>
-                                            Lorem ipsum dolor sit amet, trt
-                                            aksdg asking no one consectetur sit
-                                        </span>
-                                    </div>
-                                    <div className="jun-date-space-card-blog">
-                                        <span>Jun 8, 2023</span>
-                                    </div>
-                                    <hr></hr>
-
-                                    <div className="text-data-span-graph-p-card-blog">
-                                        <span>
-                                            Lorem ipsum dolor sit amet, trt
-                                            aksdg asking no one consectetur sit
-                                        </span>
-                                    </div>
-                                    <div className="jun-date-space-card-blog">
-                                        <span>Jun 8, 2023</span>
-                                    </div>
-                                    <hr></hr>
-                                    <div className="more-data-add-blog-space">
-                                        <span>More</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="container container-card-slice-dev">
-                            <div className="row">
-                                <div className="col-12">
-                                    <div className="newsfeed-data-space">
-                                        <span>NEWSFEED</span>
-                                    </div>
-                                    <hr />
-                                    {blogs.slice(0, 6).map((blog) => (
-                                        <React.Fragment key={blog.id}>
-                                            <div className="text-data-span-graph-p-card-blog">
-                                                <span>
-                                                    {blog.meta_description}
-                                                </span>
-                                            </div>
-                                            <div className="jun-date-space-card-blog">
-                                                <span>{blog.publish_date}</span>
-                                            </div>
-                                            <hr />
-                                        </React.Fragment>
-                                    ))}
-                                    <div className="more-data-add-blog-space">
-                                        <span>More</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
                     <div className="col-md-12">
-                        {blogs.map((blog) => (
-                            <div key={blog.id}>
-                                <div className="meeting-data-blog-save-dev-form">
-                                    <img src={blogmeeting} />
-                                </div>
-                                <div className="mid-graph-pargarph-page-data">
-                                    <span>{blog.title}</span>
-                                </div>
-                                <div className="mid-graph-pargarph-page-datap-data blog-dynamic-style-heading-data1">
-                                    {expandedBlogs.includes(blog.id) ? (
-                                        <div
-                                            dangerouslySetInnerHTML={{
-                                                __html: blog.content,
-                                            }}
-                                        />
-                                    ) : (
-                                        <div
-                                            dangerouslySetInnerHTML={{
-                                                __html: blog.content.slice(
-                                                    0,
-                                                    400
-                                                ),
-                                            }}
-                                        />
-                                    )}
-                                </div>
+                        <div>
+                            <div className="meeting-data-blog-save-dev-form">
+                                <img src={blogmeeting} />
+                            </div>
+                            <div className="mid-graph-pargarph-page-data">
+                                <span>Title of My Blogs</span>
+                            </div>
+                            <div className="mid-graph-pargarph-page-datap-data blog-dynamic-style-heading-data1">
+                                Did you know? SJ Computer is the first, and
+                                only, marketer to protuct customers in third
+                                party product liability cases Did you know? SJ
+                                Computer is the first, and only, marketer to
+                                protuct customers in third party product
+                                liability cases Did you know? SJ Computer is the
+                                first, and only, marketer to protuct customers
+                                in third party product liability cases
+                            </div>
 
-                                <div>
+                            {/* <div>
                                     {blog.content.length > 400 && (
                                         <span
                                             className="see-all-stories-data-ever-data"
@@ -217,9 +142,8 @@ const SingleBlog = () => {
                                                 : "Read More"}
                                         </span>
                                     )}
-                                </div>
-                            </div>
-                        ))}
+                                </div> */}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -242,43 +166,51 @@ const SingleBlog = () => {
 
             <div className="container single-blog-pages-dev-container-all-products">
                 <div className="row">
-                    {currentItems.map((blog) => (
+                    {blogs.map((blog) => (
                         <div className="col-md-4" key={blog.id}>
-                            <div className="product-card">
-                                <img src={book} alt={blog.title} />
-                                {/* <div className="dev-data-span-card-dev">
-              <div
+                            <Link to={`/${blog.slug}`}>
+                                <div className="product-card">
+                                    <img src={book} alt={blog.title} />
+                                    {/* <div className="dev-data-span-card-dev">
+                                   <div
                                                     dangerouslySetInnerHTML={{
                                                         __html: blog.content,
                                                     }}
                                                 />
                                             </div> */}
 
-                                <span>
-                                    {" "}
-                                    Ready to create a WordPress blog? You’ve
-                                    made an outstanding choice! Learning how to
-                                    start a blog can be your path to an exciting
-                                    new adventure. Lucky for you, WordPress is
-                                    an excellent tool you can use for that. It’s
-                                    free, user-friendly, powerful, plus it also
-                                    allows you to start your blog for free
-                                    (almost).
-                                </span>
-                                <div className="read-section-date-section">
-                                    <div>
-                                        <span>Read me</span>
-                                    </div>
-                                    <div>
-                                        <span>{blog.publish_date}</span>
+                                    <span>
+                                        {" "}
+                                        Ready to create a WordPress blog? You’ve
+                                        made an outstanding choice! Learning how
+                                        to start a blog can be your path to an
+                                        exciting new adventure. Lucky for you,
+                                        WordPress is an excellent tool you can
+                                        use for that. It’s free, user-friendly,
+                                        powerful, plus it also allows you to
+                                        start your blog for free (almost).
+                                    </span>
+                                    <div className="read-section-date-section">
+                                        <div>
+                                            <span>Read me</span>
+                                        </div>
+                                        <div>
+                                            <span>{blog.publish_date}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     ))}
                 </div>
 
                 <div className="pagination-blogs-page">
+                    {prevPageUrl && (
+                        <button onClick={handlePrevPage}>
+                            &laquo; Previous
+                        </button>
+                    )}
+
                     {Array.from({ length: totalPages }, (_, index) => (
                         <button
                             key={index}
@@ -290,6 +222,10 @@ const SingleBlog = () => {
                             {index + 1}
                         </button>
                     ))}
+
+                    {nextPageUrl && (
+                        <button onClick={handleNextPage}>Next &raquo;</button>
+                    )}
                 </div>
             </div>
         </div>
