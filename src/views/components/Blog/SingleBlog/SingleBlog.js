@@ -44,19 +44,6 @@ const SingleBlog = () => {
 
 
 
-    // useEffect(() => {
-    //     getBlogsPagesApi()
-    //         .then((response) => {
-               
-    //             console.log("singleblogs response-pages-data:", response);
-    //             setBlogss(response.data); 
-    //         })
-    //         .catch((error) => {
-               
-    //             console.error("API Error:", error);
-    //         });
-    // }, []);
-
 
 
     const [blogs, setBlogs] = useState([]);
@@ -642,17 +629,18 @@ const SingleBlog = () => {
         ))}
       </div>
 
-      <div className="pagination">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index}
-            onClick={() => handlePaginationClick(index + 1)}
-            className={currentPage === index + 1 ? 'active' : ''}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
+      <div className="pagination-blogs-page">
+  {Array.from({ length: totalPages }, (_, index) => (
+    <button
+      key={index}
+      onClick={() => handlePaginationClick(index + 1)}
+      className={currentPage === index + 1 ? 'active' : ''}
+    >
+      {index + 1}
+    </button>
+  ))}
+</div>
+
 
 
                 {/* <div className="row">
