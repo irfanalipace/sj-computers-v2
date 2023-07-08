@@ -24,14 +24,14 @@ export function getBlogsPagesApi(page = 1, per_page = 12) {
   return new Promise((resolve, reject) => {
       ApiService.get(`/blogs?page=${page}&per_page=${per_page}`)
           .then((response) => {
-              console.print(
-                  "blogs.data show he",
+              console.log(
+                  "blogs.data show he ya nhi",
                   response
               );
               resolve(response);
           })
           .catch((e) => {
-              console.print("Console Log: : error blogs", e);
+              console.log("Console Log: : error blogs", e);
               reject(e);
           });
   });
@@ -43,20 +43,20 @@ export function getBlogsPagesApi(page = 1, per_page = 12) {
 
 
 
-export function blogsDetails(blogslug) {
-  return new Promise((resolve, reject) => {
-    ApiService.post(`${blogslug}`, {
-      // Additional parameters for the API request
-    })
-      .then((response) => {
-        console.log("file: states.js | blogsPostApi | response", response);
-        resolve(response);
-      })
-      .catch((error) => {
-        console.log("Console Log: : error blogsApi", error);
-        reject(error);
-      });
-  });
-}
+// export function blogsDetails(blogslug) {
+//   return new Promise((resolve, reject) => {
+//     ApiService.post(`${blogslug}`, {
+//       // Additional parameters for the API request
+//     })
+//       .then((response) => {
+//         console.log("file: states.js | blogsPostApi | response", response);
+//         resolve(response);
+//       })
+//       .catch((error) => {
+//         console.log("Console Log: : error blogsApi", error);
+//         reject(error);
+//       });
+//   });
+// }
 
   

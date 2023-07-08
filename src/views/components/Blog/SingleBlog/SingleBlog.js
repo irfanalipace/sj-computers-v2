@@ -23,7 +23,7 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 const SingleBlog = () => {
 
-    const [blogs, setBlogs] = useState([]);
+  
     const [isLoading, setIsLoading] = useState(true);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState('');
@@ -49,7 +49,7 @@ const SingleBlog = () => {
     //         .then((response) => {
                
     //             console.log("singleblogs response-pages-data:", response);
-    //             setBlogs(response.data); 
+    //             setBlogss(response.data); 
     //         })
     //         .catch((error) => {
                
@@ -59,7 +59,7 @@ const SingleBlog = () => {
 
 
 
-    // const [blogs, setBlogs] = useState([]);
+    const [blogs, setBlogs] = useState([]);
 
 
 
@@ -69,8 +69,10 @@ const SingleBlog = () => {
     useEffect(() => {
       getBlogsPagesApi(currentPage, itemsPerPage)
         .then((response) => {
-          if (response.data && response.data.length > 0) {
-            setBlogs(response.data);
+          if (response.data && response.data?.data.length > 0) {
+            setBlogs(response.data?.data);
+            console.log(response?.data,'data response blog-data')
+
           }
         })
         .catch((error) => {
