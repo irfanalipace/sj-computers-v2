@@ -20,6 +20,14 @@ class ProductController extends BaseController
         return $this->sendResponse($data);
     }
 
+    public function getInventoryData(request $request){
+
+        $data= Product::select('name','price','description')
+            ->where('status',true)
+            ->get();
+        return $this->sendResponse($data);
+    }
+
     public function getProductDetail(ProductDetailRequest $request){
         $data = Product::where('id',$request->product_id)->first();
         return $this->sendResponse($data);

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
              UsersTableSeeder::class,
              CountryStateSeeder::class,
 //            SystemPagesSeeder::class
+            BlogSeeder::class
         ]);
     }
 }

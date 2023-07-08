@@ -66,6 +66,8 @@ Route::get('brands', [BrandController::class, 'getList'])->name('brands');
 
 Route::get('products', [ProductController::class, 'getList'])->name('products');
 
+Route::get('inventory-data', [ProductController::class, 'getInventoryData'])->name('inventoryData');
+
 Route::get('products-filter-list', [ProductController::class, 'getProductFilterList'])->name('getProductFilterList');
 
 
@@ -108,6 +110,7 @@ Route::post('contact-us', [ContactUsController::class, 'contactSubmit'])->name('
  * blogs
  */
 Route::get('blogs', [BlogController::class, 'getList'])->name('blogs');
+Route::get('get-blogs', [BlogController::class, 'getBlog'])->name('get-blogs');
 
 /*
 *Place Order
