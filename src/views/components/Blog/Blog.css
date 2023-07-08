@@ -722,7 +722,11 @@ margin-left: 59px;
     }
 
 
-  
+   .show-more-button {
+        border: none;
+        background: no-repeat;
+        font-size: 12px;
+    }
     .dev-left-blog-data-flow span{
         font-size: 22px;
     }

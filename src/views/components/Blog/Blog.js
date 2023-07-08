@@ -84,8 +84,8 @@ const Blog = () => {
                 console.error("API Error:", error);
             });
     }, []);
-
     const [blog, setBlog] = useState(null);
+    const [showMore, setShowMore] = useState(false);
 
     useEffect(() => {
         getBlogsPagesApi()
@@ -104,6 +104,10 @@ const Blog = () => {
     if (!blog) {
         return <div>Loading...</div>;
     }
+
+    const toggleContent = () => {
+        setShowMore(!showMore);
+      };
 
     return (
         <div>
@@ -219,8 +223,8 @@ const Blog = () => {
                                         </div>
                                         <div className="col-md-10">
                                             <div className="dev-left-blog-p">
-                                                <h3> {blogslug}</h3>
-                                                <span>{blog.title}</span>
+                                              
+                                                <h2>{blog.title}</h2>
                                             </div>
                                             <div className="div-left-blog-text-written">
                                                 <span>Written by SJ Staff</span>
@@ -316,49 +320,58 @@ const Blog = () => {
 
                                     <div className="col-md-6">
                                         <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
-                                            <div
-                                                dangerouslySetInnerHTML={{
-                                                    __html: blog.content,
-                                                }}
-                                            />
-                                         
+                                        <div
+        dangerouslySetInnerHTML={{
+          __html: showMore ? blog.content : blog.content.substring(0, 700) + '...',
+        }}
+      />
+      {!showMore && (
+        <button className="show-more-button" onClick={toggleContent}>Show More</button>
+      )}
+      
                                         </div>
                                         <div className="image-for-meeting2-section">
                                             <img src={meetingset} />
 
-                                            {/* <img
+                                            <img
                                             src={blog.secondary_image ? blog.secondary_image : meetingimage }
                                             alt={blog.all_text}
-                                        /> */}
+                                        />
                                         </div>
                                         <span className="span-deve-loram-space">
                                             {blog.meta_description}
                                         </span>
                                         <div className="dve-space-paragrapgh">
                                             <div className="blog-dynamic-style-heading-data">
-                                                <div
-                                                    dangerouslySetInnerHTML={{
-                                                        __html: blog.content,
-                                                    }}
-                                                />
+                                            <div
+        dangerouslySetInnerHTML={{
+          __html: showMore ? blog.content : blog.content.substring(0, 700) + '...',
+        }}
+      />
+      {!showMore && (
+        <button className="show-more-button" onClick={toggleContent}>Show More</button>
+      )}
                                             </div>
                                         </div>
 
                                         <div className="image-for-meeting2-section">
-                                            <img src={meetingset} />
+                                            {/* <img src={meetingset} /> */}
 
-                                            {/* <img
+                                            <img
                                             src={blog.thumbnail_image ? blog.thumbnail_image : meetingimage }
                                             alt={blog.all_text}
-                                        /> */}
+                                        />
                                         </div>
                                         <div className="dve-space-paragrapgh">
                                             <div className="blog-dynamic-style-heading-data">
-                                                <div
-                                                    dangerouslySetInnerHTML={{
-                                                        __html: blog.content,
-                                                    }}
-                                                />
+                                            <div
+        dangerouslySetInnerHTML={{
+          __html: showMore ? blog.content : blog.content.substring(0, 700) + '...',
+        }}
+      />
+      {!showMore && (
+        <button className="show-more-button" onClick={toggleContent}>Show More</button>
+      )}
                                             </div>
                                         </div>
                                     </div>
