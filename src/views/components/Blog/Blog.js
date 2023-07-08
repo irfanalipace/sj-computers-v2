@@ -36,7 +36,7 @@ const HeadereLinks = [
     { path: "/", title: "Subscribe" },
 ];
 const nonHeaderRoutes = [""];
-const Blog = () => {
+    const Blog = () => {
 
     const [blogs, setBlogs] = useState([]);
     const { blogslug } = useParams();
@@ -45,7 +45,6 @@ const Blog = () => {
 
     console.log('blog-id-data',blogslug)
 
-    // Example data for the cards
     const data = [
         {
             id: 1,
@@ -67,7 +66,6 @@ const Blog = () => {
         }
     ];
 
-    // Calculate the index range of the items to be displayed on the current page
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
@@ -80,6 +78,7 @@ const Blog = () => {
         getBlogsPagesApi()
             .then((response) => {
                 setBlogs(response.data);
+                
             })
             .catch((error) => {
                 // Handle the error
@@ -87,8 +86,38 @@ const Blog = () => {
             });
     }, []);
 
-    const blogsdata = blogs.map((blog) => {});
 
+
+    const [blog, setBlog] = useState(null);
+
+    useEffect(() => {
+      getBlogsPagesApi()
+        .then((response) => {
+          if (response.data && response.data.length > 0) {
+            const firstBlog = response.data[0];
+            console.log(firstBlog,'responseof all blog-data')
+            setBlog(firstBlog);
+          }
+        })
+        .catch((error) => {
+          // Handle the error
+          console.error("API Error:", error);
+        });
+    }, []);
+  
+    if (!blog) {
+      return <div>Loading...</div>;
+    }
+  
+
+
+
+    
+
+    
+    // const blogsdata = blogs.map((blog) => {});
+
+    
     return (
         <div>
             {/* {!nonHeaderRoutes.includes(
@@ -96,13 +125,14 @@ const Blog = () => {
                     ) && ( */}
             <>
                 <div>
-                    {blogs.map((blog) => (
+                   
                         <div>
                             <Helmet>
-                                <title>{blogsdata.meta_title}</title>
+                                <title>{blog.meta_title}</title>
+                                
                                 <meta
                                     name="meta-description-meta-title"
-                                    content={blogsdata.meta_description}
+                                    content={blog.meta_description}
                                 />
                             </Helmet>
                             <div className="">
@@ -725,7 +755,7 @@ const Blog = () => {
                                 </div>
                             </div>
                         </div>
-                    ))}
+                   
                 </div>
             </>
             {/* )} */}

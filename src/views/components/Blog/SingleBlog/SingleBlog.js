@@ -18,14 +18,17 @@ import productviewblog from "@images/blog/typelaptop.png";
 import { getBlogsPagesApi } from "../../../../core/api/blogs";
 import meetingset from "@images/blog/meeting2image.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useParams } from "react-router-dom";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 const SingleBlog = () => {
+
     const [blogs, setBlogs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState('');
-
+    const { blogslug } = useParams();
+    console.log('sulg-single-page-data',blogslug)
     const handleChange = (event) => {
       const filterValue = event.target.value;
       setSelectedFilter(filterValue);
@@ -38,20 +41,57 @@ const SingleBlog = () => {
             setExpandedBlogs([...expandedBlogs, blogId]);
         }
     };
+
+
+
+    // useEffect(() => {
+    //     getBlogsPagesApi()
+    //         .then((response) => {
+               
+    //             console.log("singleblogs response-pages-data:", response);
+    //             setBlogs(response.data); 
+    //         })
+    //         .catch((error) => {
+               
+    //             console.error("API Error:", error);
+    //         });
+    // }, []);
+
+
+
+    // const [blogs, setBlogs] = useState([]);
+
+
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(12);
+  
     useEffect(() => {
-        getBlogsPagesApi()
-            .then((response) => {
-                // Handle the successful response
-                console.log("singleblogs response-pages-data:", response);
-                setBlogs(response.data); // Assuming response.data contains the blog data
-            })
-            .catch((error) => {
-                // Handle the error
-                console.error("API Error:", error);
-            });
-    }, []);
-
-
+      getBlogsPagesApi(currentPage, itemsPerPage)
+        .then((response) => {
+          if (response.data && response.data.length > 0) {
+            setBlogs(response.data);
+          }
+        })
+        .catch((error) => {
+          // Handle the error
+          console.error("API Error:", error);
+        });
+    }, [currentPage, itemsPerPage]);
+  
+    if (blogs.length === 0) {
+      return <div>Loading...</div>;
+    }
+  
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
+  
+    const totalPages = Math.ceil(blogs.length / itemsPerPage);
+  
+    const handlePaginationClick = (pageNumber) => {
+      setCurrentPage(pageNumber);
+    };
     
     return (
         <div>
@@ -163,9 +203,9 @@ const SingleBlog = () => {
                                 <div className="meeting-data-blog-save-dev-form">
                                     <img src={blogmeeting} />
                                 </div>
-                                {/* <div className="mid-graph-pargarph-page-data">
+                                <div className="mid-graph-pargarph-page-data">
                                     <span>{blog.title}</span>
-                                </div> */}
+                                </div>
                                 <div className="mid-graph-pargarph-page-datap-data blog-dynamic-style-heading-data1">
                                     {expandedBlogs.includes(blog.id) ? (
                                         <div
@@ -508,7 +548,7 @@ const SingleBlog = () => {
           </div> */}
               
 
-                <div className="row">
+                {/* <div className="row">
                     <div className="col-md-4">
                         <div className="product-card">
                             <img src={book} alt="Product 1" />
@@ -569,7 +609,49 @@ const SingleBlog = () => {
                             </div>
                         </div>
                     </div>
+                </div> */}
+
+
+        <div className="row">
+        {currentItems.map((blog) => (
+          <div className="col-md-4" key={blog.id}>
+          
+            <div className="product-card">
+              <img src={book} alt={blog.title} />
+              {/* <div className="dev-data-span-card-dev">
+              <div
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: blog.content,
+                                                    }}
+                                                />
+                                            </div> */}
+              
+              <span> Ready to create a WordPress blog? You’ve made an outstanding choice! Learning how to start a blog can be your path to an exciting new adventure. Lucky for you, WordPress is an excellent tool you can use for that. It’s free, user-friendly, powerful, plus it also allows you to start your blog for free (almost).</span>
+              <div className="read-section-date-section">
+                <div>
+                  <span>Read me</span>
                 </div>
+                <div>
+                  <span>{blog.publish_date}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePaginationClick(index + 1)}
+            className={currentPage === index + 1 ? 'active' : ''}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
+
 
                 {/* <div className="row">
   {blogs.map((blog) => (
