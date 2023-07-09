@@ -373,11 +373,12 @@ color: #DDDDDD;
     margin-top: 70px;
 }
 .background-image-lin-dve img {
-    width: 1104px;
+    width: 1141px;
     max-width: 100%;
     height: 496px;
     max-height: 100%;
-    margin-top: 56px;
+    margin-bottom: 20px;
+    margin-top: 19px;
 }
 .image-cainter-dev {
     padding-left: 45px;
@@ -771,7 +772,15 @@ margin-left: 59px;
         color: #333333;
     }
 
-   
+    /* .content-image-data-paragrap {
+        font-size: 15px;
+        line-height: 23px;
+    } */
+
+    .content-image-data-paragrap img {
+        width: 852px;
+        height: 500px;
+    }
   .blog-dynamic-style-heading-data a {
     font-size: 14px;
     }
@@ -789,6 +798,14 @@ margin-left: 59px;
        
             margin-top: 25px;
         }
+
+        .content-image-data-paragrap img{
+            height: 400px !important;
+            width: 1100px !important;
+            max-width: 100%;
+        }
+
+      
         .background-image-lin-dve img {
             height: 402px;
             margin-top: 49px;

@@ -296,7 +296,7 @@ color: #FFFFFF;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     max-height: 100%;
-    height: 400px;
+    
    
 }
 .product-card img {
@@ -610,12 +610,12 @@ font-size: 14px;
     color: #333333;
 }
 
-.pagination-blogs-page{
+.pagination-blogs-page {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-  }
-  
+    margin-bottom: 20px;
+}
   .pagination-blogs-page button {
     padding: 8px 12px;
     margin: 0 5px;

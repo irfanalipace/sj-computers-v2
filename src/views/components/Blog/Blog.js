@@ -237,10 +237,15 @@ const Blog = () => {
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="background-image-lin-dve">
-                                            <img
+                                            {/* <img
                                                 src={meetingimage}
                                                 alt="all_text"
-                                            />
+                                            /> */}
+
+<img
+                                           src={blog.primary_image ? blog.primary_image : meetingimage }
+                                            alt={blog.all_text}
+                                           />
                                         </div>
                                     </div>
                                 </div>
@@ -316,47 +321,45 @@ const Blog = () => {
                                         </div>
                                     </div>
 
-                                    <div className="col-md-6">
+                                    <div className="col-md-8">
                                         <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
-                                        <div
+                                        <div className="content-image-data-paragrap"
+                                        
                                                         dangerouslySetInnerHTML={{
                                                         __html: showMore
                                                             ? blog.content
-                                                            : blog.content.substring(0, 700) + "...",
+                                                            : blog.content.substring(0, 3000) + "...",
                                                         }}
                                                     />
-                                                    {!showMore && blog.content.length > 700 && (
-                                                        <div>
-                                                        <img src={meetingset} alt="Blog Image" />
-                                                        <div
-                                                dangerouslySetInnerHTML={{
-                                                __html: blog.content.substring(700),
-                                                }}
-                                            />
-                                                        </div>
-                                                    )}
-                                                        {!showMore && (
+                                                      {/* {!showMore && (
                                                     <button
                                                         className="show-more-button"
                                                         onClick={toggleContent}
                                                     >
                                                         Show More
                                                     </button>
-                                                )}
+                                                )} */}
+                                                        <div className="background-image-lin-dve">
+                                                        <img src={blog.secondary_image} alt="Blog Image" />
+                                                        <div className="content-image-data-paragrap"
+                                                dangerouslySetInnerHTML={{
+                                                __html: blog.content.substring(3000),
+                                                }}
+                                            />
+                                                        </div>
+                                                
+                                                      
                                             </div>
-                                        <div className="image-for-meeting2-section">
+                                        {/* <div className="image-for-meeting2-section">
                                             <img src={meetingset} />
 
-                                            {/* <img
+                                            <img
                                             src={blog.secondary_image ? blog.secondary_image : meetingimage }
                                             alt={blog.all_text}
                                            
-                                        /> */}
-                                            {console.log(
-                                                blog.secondary_image,
-                                                "ferting-data-grtrtr"
-                                            )}
-                                        </div>
+                                        />
+                                         
+                                        </div> */}
                                         <span className="span-deve-loram-space">
                                             {blog.meta_description}
                                         </span>

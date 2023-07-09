@@ -114,6 +114,7 @@ const SingleBlog = () => {
                         <div>
                             <div className="meeting-data-blog-save-dev-form">
                                 <img src={blogmeeting} />
+                                
                             </div>
                             <div className="mid-graph-pargarph-page-data">
                                 <span>Title of My Blogs</span>
@@ -168,28 +169,26 @@ const SingleBlog = () => {
                 <div className="row">
                     {blogs.map((blog) => (
                         <div className="col-md-4" key={blog.id}>
-                            <Link to={`/${blog.slug}`}>
+                            <Link to={`/${blog.slug}`} className="text-decoration-none">
                                 <div className="product-card">
-                                    <img src={book} alt={blog.title} />
-                                    {/* <div className="dev-data-span-card-dev">
-                                   <div
-                                                    dangerouslySetInnerHTML={{
-                                                        __html: blog.content,
-                                                    }}
-                                                />
-                                            </div> */}
+                                    {/* <img src={book} alt={blog.title} /> */}
 
-                                    <span>
+
+                                    <img
+                                            src={blog.thumbnail_image ? blog.thumbnail_image : book }
+                                            alt={blog.all_text}
+                                           
+                                        /> 
+
+
+                                     <div className="dev-data-span-card-dev">
+                                     <span>
                                         {" "}
-                                        Ready to create a WordPress blog? You’ve
-                                        made an outstanding choice! Learning how
-                                        to start a blog can be your path to an
-                                        exciting new adventure. Lucky for you,
-                                        WordPress is an excellent tool you can
-                                        use for that. It’s free, user-friendly,
-                                        powerful, plus it also allows you to
-                                        start your blog for free (almost).
+                                      {blog.tags}
                                     </span>
+                                            </div> 
+
+                                 
                                     <div className="read-section-date-section">
                                         <div>
                                             <span>Read me</span>
@@ -204,7 +203,7 @@ const SingleBlog = () => {
                     ))}
                 </div>
 
-                <div className="pagination-blogs-page">
+                {/* <div className="pagination-blogs-page">
                     {prevPageUrl && (
                         <button onClick={handlePrevPage}>
                             &laquo; Previous
@@ -226,7 +225,25 @@ const SingleBlog = () => {
                     {nextPageUrl && (
                         <button onClick={handleNextPage}>Next &raquo;</button>
                     )}
-                </div>
+                </div> */}
+                
+                <div className="pagination-blogs-page">
+  <button onClick={handlePrevPage}>&laquo; Previous</button>
+  
+  {Array.from({ length: totalPages }, (_, index) => (
+    <button
+      key={index}
+      onClick={() => handlePaginationClick(index + 1)}
+      className={currentPage === index + 1 ? "active" : ""}
+    >
+      {index + 1}
+    </button>
+  ))}
+
+  <button onClick={handleNextPage}>Next &raquo;</button>
+</div>
+
+
             </div>
         </div>
     );
