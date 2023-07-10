@@ -35,7 +35,7 @@ export const SkuProducts = ({ reRender }) => {
         setIsLoading(true);
         const filter = {
             name: search,
-            page: 1, // Always start from the first page when searching
+            page: 1, 
             per_page: perPage,
         };
 

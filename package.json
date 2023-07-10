@@ -41,6 +41,7 @@
         "@fortawesome/react-fontawesome": "^0.2.0",
         "@mantine/core": "^6.0.10",
         "@material-ui/icons": "^4.11.3",
+        "@material-ui/lab": "^4.0.0-alpha.61",
         "@mui/icons-material": "^5.11.16",
         "@mui/material": "^5.13.0",
         "@mui/x-data-grid": "^6.5.0",

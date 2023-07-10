@@ -52,7 +52,7 @@ const SingleBlog = () => {
         setIsLoading(true);
         getBlogsPagesApi(currentPage, itemsPerPage)
             .then((response) => {
-                console.log(response,'lnffffffff"')
+                console.log(response, 'lnffffffff"');
 
                 if (response.data && response.data?.data.length > 0) {
                     setBlogs(response.data?.data);
@@ -68,11 +68,13 @@ const SingleBlog = () => {
             .catch((error) => {
                 console.error("API Error:", error);
                 setIsLoading(false);
-            });
+            }).finally(() => {
+                setIsLoading(false);
+              });
     }, [currentPage, itemsPerPage]);
 
     const handlePaginationClick = (pageNumber) => {
-        setCurrentPage(pageNumber);
+        setCurrentPage(pageNumber - 1);
     };
 
     const handlePrevPage = () => {
@@ -116,7 +118,6 @@ const SingleBlog = () => {
                         <div>
                             <div className="meeting-data-blog-save-dev-form">
                                 <img src={blogmeeting} />
-                                
                             </div>
                             <div className="mid-graph-pargarph-page-data">
                                 <span>Title of My Blogs</span>
@@ -171,26 +172,27 @@ const SingleBlog = () => {
                 <div className="row">
                     {blogs.map((blog) => (
                         <div className="col-md-4" key={blog.id}>
-                            <Link to={`/${blog.slug}`} className="text-decoration-none">
+                              
+                              <Link
+                                to={`/${blog.slug}`}
+                                className="text-decoration-none"
+                            >
                                 <div className="product-card">
                                     {/* <img src={book} alt={blog.title} /> */}
 
-
                                     <img
-                                            src={blog.thumbnail_image ? blog.thumbnail_image : book }
-                                            alt={blog.all_text}
-                                           
-                                        /> 
+                                        src={
+                                            blog.thumbnail_image
+                                                ? blog.thumbnail_image
+                                                : book
+                                        }
+                                        alt={blog.all_text}
+                                    />
 
+                                    <div className="dev-data-span-card-dev">
+                                        <span> {blog.tags}</span>
+                                    </div>
 
-                                     <div className="dev-data-span-card-dev">
-                                     <span>
-                                        {" "}
-                                      {blog.tags}
-                                    </span>
-                                            </div> 
-
-                                 
                                     <div className="read-section-date-section">
                                         <div>
                                             <span>Read me</span>
@@ -201,8 +203,10 @@ const SingleBlog = () => {
                                     </div>
                                 </div>
                             </Link>
+                         
                         </div>
                     ))}
+                   
                 </div>
 
                 {/* <div className="pagination-blogs-page">
@@ -228,23 +232,28 @@ const SingleBlog = () => {
                         <button onClick={handleNextPage}>Next &raquo;</button>
                     )}
                 </div> */}
-                
-                            <div className="pagination-blogs-page">
-            <button onClick={handlePrevPage}>&laquo; Previous</button>
-            
-            {Array.from({ length: totalPages }, (_, index) => (
-                <button
-                key={index}
-                onClick={() => handlePaginationClick(index + 1)}
-                className={currentPage === index + 1 ? "active" : ""}
-                >
-                {index + 1}
-                </button>
-            ))}
 
-            <button onClick={handleNextPage}>Next &raquo;</button>
-            </div>
+<div className="pagination-blogs-page">
+  <button onClick={handlePrevPage} disabled={!prevPageUrl}>
+    &laquo; Pre
+  </button>
 
+  {Array.from({ length: totalPages }, (_, index) => (
+    <button
+      key={index}
+      onClick={() => handlePaginationClick(index + 1)}
+      className={currentPage === index + 1 ? "active" : ""}
+    >
+      {currentPage}
+    </button>
+  ))}
+
+  <button onClick={handleNextPage} disabled={!nextPageUrl}>
+    Nxt &raquo;
+  </button>
+
+  {isLoading && <div className="loader">Loading...</div>}
+</div>
 
             </div>
         </div>
@@ -252,3 +261,8 @@ const SingleBlog = () => {
 };
 
 export default SingleBlog;
+
+
+
+
+

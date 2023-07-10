@@ -42,18 +42,21 @@ const HeadereLinks = [
 const nonHeaderRoutes = [""];
 const Blog = () => {
     const [blogdteails, setBlogDetails] = useState("");
+    console.log('blogdteails' , blogdteails)
 
     const { blogslug } = useParams();
+    console.log('blogslug' , blogslug)
 
     useEffect(() => {
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
+                console.log('slugggggg' , blogslug )
                 setBlogDetails(response?.data);
             })
             .catch((error) => {
                 console.error("API Error:", error);
             });
-    }, []);
+    }, [blogslug]);
 
     const [showMore, setShowMore] = useState(false);
 
@@ -61,14 +64,13 @@ const Blog = () => {
         setShowMore(!showMore);
     };
 
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [blogs, setBlogs] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(3);
     const [prevPageUrl, setPrevPageUrl] = useState(null);
     const [nextPageUrl, setNextPageUrl] = useState(null);
-
 
     useEffect(() => {
         setIsLoading(true);
@@ -94,7 +96,7 @@ const Blog = () => {
     }, [currentPage, itemsPerPage]);
 
     const handlePaginationClick = (pageNumber) => {
-        setCurrentPage(pageNumber);
+        setCurrentPage(pageNumber - 1);
     };
 
     const handlePrevPage = () => {
@@ -105,12 +107,22 @@ const Blog = () => {
         setCurrentPage(currentPage + 1);
     };
 
-    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfLastItem = (currentPage + 1) * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
     const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
 
     const totalPages = Math.ceil(blogs.length / itemsPerPage);
 
+
+    const handlelinkClick = () => {
+        setIsLoading(false);
+    };
+
+
+
+
+        
     return (
         <div>
             <>
@@ -273,15 +285,27 @@ const Blog = () => {
                                                 <div style={{ padding: "7px" }}>
                                                     <div className="row">
                                                         <div className="col-4">
-                                                            <img
+                                                            {/* <img
                                                                 src={smimage}
-                                                            />
+                                                            /> */}
+                                                         <div className="them-stori-mage">
+                                                         <img
+                                        src={
+                                            blogdteails.thumbnail_image
+                                                ? blogdteails.thumbnail_image
+                                                : smimage
+                                        }
+                                        alt={blogdteails.all_text}
+                                    />
+                                                         </div>
+
                                                         </div>
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                    {/* {  blogdteails.tags} */}
-                                                                    desds fdfdgd
+                                                                    {
+                                                                        blogdteails.all_text
+                                                                    }
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -289,14 +313,26 @@ const Blog = () => {
                                                     <hr></hr>
                                                     <div className="row">
                                                         <div className="col-4">
-                                                            <img
+                                                            {/* <img
                                                                 src={smimage}
-                                                            />
+                                                            /> */}
+                                                              <div className="them-stori-mage">
+                                                         <img
+                                        src={
+                                            blogdteails.thumbnail_image
+                                                ? blogdteails.thumbnail_image
+                                                : smimage
+                                        }
+                                        alt={blogdteails.all_text}
+                                    />
+                                                         </div>
                                                         </div>
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                    ffer
+                                                                    {
+                                                                        blogdteails.all_text
+                                                                    }
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -304,14 +340,26 @@ const Blog = () => {
                                                     <hr></hr>
                                                     <div className="row">
                                                         <div className="col-4">
-                                                            <img
+                                                            {/* <img
                                                                 src={smimage}
-                                                            />
+                                                            /> */}
+                                                              <div className="them-stori-mage">
+                                                         <img
+                                        src={
+                                            blogdteails.thumbnail_image
+                                                ? blogdteails.thumbnail_image
+                                                : smimage
+                                        }
+                                        alt={blogdteails.all_text}
+                                    />
+                                                         </div>
                                                         </div>
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                    frefererr
+                                                                    {
+                                                                        blogdteails.all_text
+                                                                    }
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -344,10 +392,10 @@ const Blog = () => {
                                                     </button>
                                                 )} */}
                                             <div className="background-image-lin-dve">
-                                                <img
+                                                {/* <img
                                                     src={meetingset}
                                                     alt="Blog Image"
-                                                />
+                                                /> */}
                                                 {/* <div className="content-image-data-paragrap"
                                                 dangerouslySetInnerHTML={{
                                                 __html: blogdteails.content.substring(3000),
@@ -367,7 +415,7 @@ const Blog = () => {
                                         </div> */}
                                         <span className="span-deve-loram-space">
                                             {/* {blog.meta_description} */}
-                                            data dev
+                                           
                                         </span>
                                         {/* <div className="dve-space-paragrapgh">
                                             <div className="blog-dynamic-style-heading-data">
@@ -478,9 +526,13 @@ const Blog = () => {
                                                 >
                                                     Nxt &raquo;
                                                 </button>
-                                            </div>
 
-                        
+                                                {isLoading && (
+                                                    <div className="loader">
+                                                        Loading...
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="col-md-9 col-sm-10">
@@ -493,10 +545,20 @@ const Blog = () => {
                                                     >
                                                         <Link
                                                             to={`/${item.slug}`}
-                                                            className="text-decoration-none"
+                                                            className="text-decoration-none link-add-color-dev-data"
+                                                            onClick={() =>
+                                                                handlelinkClick(
+                                                                    true
+                                                                )
+                                                            }
                                                         >
                                                             <div className="image-fooetr-blog">
-                                                                <img src={item.thumbnail_image}  className="image-for-blog-data-sets-view" />
+                                                                <img
+                                                                    src={
+                                                                        item.thumbnail_image
+                                                                    }
+                                                                    className="image-for-blog-data-sets-view"
+                                                                />
                                                             </div>
                                                             <div
                                                                 className="dev-folder-card-blog-section-dev-page"

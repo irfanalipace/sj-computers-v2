@@ -44,3 +44,19 @@ export function blogSlugApiblogDetails(slug) {
             });
     });
 }
+
+
+export function blogHeaderDetails(slug) {
+  
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/get-blogs?slug=${slug}`)
+            .then((response) => {
+              console.log(response,'update blog slug')
+                resolve(response);
+            })
+            .catch((e) => {
+                console.print("Console Log: : error blogsDetail", e);
+                reject(e);
+            });
+    });
+}
