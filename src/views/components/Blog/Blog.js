@@ -78,7 +78,9 @@ const Blog = () => {
     useEffect(() => {
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
-                setBlogDetails(response.data);
+                console.log(response,'respohshsfhf')
+
+                setBlogDetails(response?.data?.data);
             })
             .catch((error) => {
                 console.error("API Error:", error);
@@ -87,9 +89,12 @@ const Blog = () => {
     const [blog, setBlog] = useState(null);
     const [showMore, setShowMore] = useState(false);
 
+
     useEffect(() => {
         getBlogsPagesApi()
             .then((response) => {
+                console.log(response,'hhhjhjhkjk"')
+
                 if (response.data && response.data?.data.length > 0) {
                     const firstBlog = response.data?.data[0];
                     console.log("console of the dta", firstBlog);
@@ -115,11 +120,11 @@ const Blog = () => {
                 <div>
                     <div>
                         <Helmet>
-                            <title>{blog.meta_title}</title>
+                            <title>meta_title</title>
 
                             <meta
                                 name="meta-description-meta-title"
-                                content={blog.meta_description}
+                                // content={blog.meta_description}
                             />
                         </Helmet>
                         <div className="">
@@ -223,7 +228,7 @@ const Blog = () => {
                                         </div>
                                         <div className="col-md-10">
                                             <div className="dev-left-blog-p">
-                                                <h2>{blog.title}</h2>
+                                                <h2>blog title</h2>
                                             </div>
                                             <div className="div-left-blog-text-written">
                                                 <span>Written by SJ Staff</span>
@@ -237,15 +242,18 @@ const Blog = () => {
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="background-image-lin-dve">
-                                            {/* <img
+                                            <img
                                                 src={meetingimage}
                                                 alt="all_text"
-                                            /> */}
+                                            />
 
 <img
-                                           src={blog.primary_image ? blog.primary_image : meetingimage }
-                                            alt={blog.all_text}
+                                        //    src={blog.primary_image ? blog.primary_image : meetingimage }
+                                        //     alt={blog.all_text}
+
+                                        
                                            />
+                                         
                                         </div>
                                     </div>
                                 </div>
@@ -323,14 +331,14 @@ const Blog = () => {
 
                                     <div className="col-md-8">
                                         <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
-                                        <div className="content-image-data-paragrap"
+                                        {/* <div className="content-image-data-paragrap"
                                         
                                                         dangerouslySetInnerHTML={{
                                                         __html: showMore
                                                             ? blog.content
                                                             : blog.content.substring(0, 3000) + "...",
                                                         }}
-                                                    />
+                                                    /> */}
                                                       {/* {!showMore && (
                                                     <button
                                                         className="show-more-button"
@@ -340,12 +348,12 @@ const Blog = () => {
                                                     </button>
                                                 )} */}
                                                         <div className="background-image-lin-dve">
-                                                        <img src={blog.secondary_image} alt="Blog Image" />
-                                                        <div className="content-image-data-paragrap"
+                                                        <img src={meetingset} alt="Blog Image" />
+                                                        {/* <div className="content-image-data-paragrap"
                                                 dangerouslySetInnerHTML={{
                                                 __html: blog.content.substring(3000),
                                                 }}
-                                            />
+                                            /> */}
                                                         </div>
                                                 
                                                       
@@ -361,7 +369,8 @@ const Blog = () => {
                                          
                                         </div> */}
                                         <span className="span-deve-loram-space">
-                                            {blog.meta_description}
+                                            {/* {blog.meta_description} */}
+                                            data dev
                                         </span>
                                         {/* <div className="dve-space-paragrapgh">
                                             <div className="blog-dynamic-style-heading-data">

@@ -52,6 +52,8 @@ const SingleBlog = () => {
         setIsLoading(true);
         getBlogsPagesApi(currentPage, itemsPerPage)
             .then((response) => {
+                console.log(response,'lnffffffff"')
+
                 if (response.data && response.data?.data.length > 0) {
                     setBlogs(response.data?.data);
                     setPrevPageUrl(response.data?.prev_page_url);
