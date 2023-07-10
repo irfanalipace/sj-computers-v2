@@ -8,6 +8,7 @@ import TopBar from "../TopBar/TopBar";
 import {
     getBlogsPagesApi,
     blogSlugApiblogDetails,
+    getBlogsHeaderPagesApi,
 } from "../../../core/api/blogs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -41,78 +42,74 @@ const HeadereLinks = [
 const nonHeaderRoutes = [""];
 const Blog = () => {
     const [blogdteails, setBlogDetails] = useState("");
-    const [blogs, setBlogs] = useState([]);
+
     const { blogslug } = useParams();
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 3;
-
-    const data = [
-        {
-            id: 1,
-            image: meetingset1,
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            date: "Jun 8, 2023",
-        },
-        {
-            id: 2,
-            image: meetingset2,
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            date: "Jun 9, 2023",
-        },
-        {
-            id: 3,
-            image: meetingset3,
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            date: "Jun 10,",
-        },
-    ];
-
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-
-    const handlePageChange = (event, value) => {
-        setCurrentPage(value);
-    };
 
     useEffect(() => {
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
-                console.log(response,'response of the slug details')
-
-                setBlogDetails(response?.data?.data);
+                setBlogDetails(response?.data);
             })
             .catch((error) => {
                 console.error("API Error:", error);
             });
     }, []);
-    const [blog, setBlog] = useState(null);
+
     const [showMore, setShowMore] = useState(false);
-
-
-    useEffect(() => {
-        getBlogsPagesApi()
-            .then((response) => {
-                console.log(response,'hhhjhjhkjk"')
-
-                if (response.data && response.data?.data.length > 0) {
-                    const firstBlog = response.data?.data[0];
-                    console.log("console of the dta", firstBlog);
-                    setBlog(firstBlog);
-                }
-            })
-            .catch((error) => {
-                console.error("API Error:", error);
-            });
-    }, []);
-
-    if (!blog) {
-        return <div>Loading...</div>;
-    }
 
     const toggleContent = () => {
         setShowMore(!showMore);
     };
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [blogs, setBlogs] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(3);
+    const [prevPageUrl, setPrevPageUrl] = useState(null);
+    const [nextPageUrl, setNextPageUrl] = useState(null);
+
+    ///this the header pagination code start
+    useEffect(() => {
+        setIsLoading(true);
+        getBlogsHeaderPagesApi(currentPage, itemsPerPage)
+            .then((response) => {
+                console.log(response, 'lnffffffff"');
+
+                if (response.data && response.data?.data.length > 0) {
+                    setBlogs(response.data?.data);
+                    setPrevPageUrl(response.data?.prev_page_url);
+                    setNextPageUrl(response.data?.next_page_url);
+                } else {
+                    setBlogs([]);
+                    setPrevPageUrl(response.data?.prev_page_url);
+                    setNextPageUrl(response.data?.next_page_url);
+                }
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                console.error("API Error:", error);
+                setIsLoading(false);
+            });
+    }, [currentPage, itemsPerPage]);
+
+    const handlePaginationClick = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const handlePrevPage = () => {
+        setCurrentPage(currentPage - 1);
+    };
+
+    const handleNextPage = () => {
+        setCurrentPage(currentPage + 1);
+    };
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
+
+    const totalPages = Math.ceil(blogs.length / itemsPerPage);
 
     return (
         <div>
@@ -120,11 +117,11 @@ const Blog = () => {
                 <div>
                     <div>
                         <Helmet>
-                            <title>meta_title</title>
+                            <title>{blogdteails.meta_title}</title>
 
                             <meta
                                 name="meta-description-meta-title"
-                                // content={blog.meta_description}
+                                content={blogdteails.meta_description}
                             />
                         </Helmet>
                         <div className="">
@@ -158,10 +155,7 @@ const Blog = () => {
                                 </div>
                             </div>
 
-                            <div
-                                className="blog-background-color"
-                                key={blog.id}
-                            >
+                            <div className="blog-background-color">
                                 <div className="container dev-container-side">
                                     <div className="row">
                                         <div className="col-md-2">
@@ -199,7 +193,9 @@ const Blog = () => {
                                                 </div>
                                                 <div className="date-blog-after-circle">
                                                     <span>
-                                                        {blog.publish_date}
+                                                        {
+                                                            blogdteails.publish_date
+                                                        }
                                                     </span>
                                                 </div>
                                                 <div className="ul-item-blog-social-icon">
@@ -228,7 +224,7 @@ const Blog = () => {
                                         </div>
                                         <div className="col-md-10">
                                             <div className="dev-left-blog-p">
-                                                <h2>blog title</h2>
+                                                <h2>{blogdteails.title}</h2>
                                             </div>
                                             <div className="div-left-blog-text-written">
                                                 <span>Written by SJ Staff</span>
@@ -242,18 +238,19 @@ const Blog = () => {
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="background-image-lin-dve">
-                                            <img
+                                            {/* <img
                                                 src={meetingimage}
                                                 alt="all_text"
+                                            /> */}
+
+                                            <img
+                                                src={
+                                                    blogdteails.primary_image
+                                                        ? blogdteails.primary_image
+                                                        : meetingimage
+                                                }
+                                                alt={blogdteails.all_text}
                                             />
-
-<img
-                                        //    src={blog.primary_image ? blog.primary_image : meetingimage }
-                                        //     alt={blog.all_text}
-
-                                        
-                                           />
-                                         
                                         </div>
                                     </div>
                                 </div>
@@ -283,9 +280,8 @@ const Blog = () => {
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                    {
-                                                                        blog.meta_description
-                                                                    }
+                                                                    {/* {  blogdteails.tags} */}
+                                                                    desds fdfdgd
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -300,9 +296,7 @@ const Blog = () => {
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                    {
-                                                                        blog.meta_description
-                                                                    }
+                                                                    ffer
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -317,9 +311,7 @@ const Blog = () => {
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                    {
-                                                                        blog.meta_description
-                                                                    }
+                                                                    frefererr
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -331,15 +323,19 @@ const Blog = () => {
 
                                     <div className="col-md-8">
                                         <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
-                                        {/* <div className="content-image-data-paragrap"
-                                        
-                                                        dangerouslySetInnerHTML={{
-                                                        __html: showMore
-                                                            ? blog.content
-                                                            : blog.content.substring(0, 3000) + "...",
-                                                        }}
-                                                    /> */}
-                                                      {/* {!showMore && (
+                                            <div
+                                                className="content-image-data-paragrap"
+                                                // dangerouslySetInnerHTML={{
+                                                // __html: showMore
+                                                //     ? blogdteails.content
+                                                //     : blogdteails.content.substring(0, 3000) + "...",
+                                                // }}
+
+                                                dangerouslySetInnerHTML={{
+                                                    __html: blogdteails.content,
+                                                }}
+                                            />
+                                            {/* {!showMore && (
                                                     <button
                                                         className="show-more-button"
                                                         onClick={toggleContent}
@@ -347,17 +343,18 @@ const Blog = () => {
                                                         Show More
                                                     </button>
                                                 )} */}
-                                                        <div className="background-image-lin-dve">
-                                                        <img src={meetingset} alt="Blog Image" />
-                                                        {/* <div className="content-image-data-paragrap"
+                                            <div className="background-image-lin-dve">
+                                                <img
+                                                    src={meetingset}
+                                                    alt="Blog Image"
+                                                />
+                                                {/* <div className="content-image-data-paragrap"
                                                 dangerouslySetInnerHTML={{
-                                                __html: blog.content.substring(3000),
+                                                __html: blogdteails.content.substring(3000),
                                                 }}
-                                            /> */}
-                                                        </div>
-                                                
-                                                      
+                                            />  */}
                                             </div>
+                                        </div>
                                         {/* <div className="image-for-meeting2-section">
                                             <img src={meetingset} />
 
@@ -447,69 +444,94 @@ const Blog = () => {
                                     <div className="col-md-2">
                                         <div className="sj-left-dev-set-data-from-section">
                                             <span>More from SJ</span>
-                                            <Pagination
-                                                count={Math.ceil(
-                                                    data.length / itemsPerPage
+                                            <div className="pagination-blogs-page">
+                                                <button
+                                                    onClick={handlePrevPage}
+                                                >
+                                                    &laquo; Pre
+                                                </button>
+
+                                                {Array.from(
+                                                    { length: totalPages },
+                                                    (_, index) => (
+                                                        <button
+                                                            key={index}
+                                                            onClick={() =>
+                                                                handlePaginationClick(
+                                                                    index + 1
+                                                                )
+                                                            }
+                                                            className={
+                                                                currentPage ===
+                                                                index + 1
+                                                                    ? "active"
+                                                                    : ""
+                                                            }
+                                                        >
+                                                            {index + 1}
+                                                        </button>
+                                                    )
                                                 )}
-                                                shape="rounded"
-                                                page={currentPage}
-                                                onChange={handlePageChange}
-                                            />
+
+                                                <button
+                                                    onClick={handleNextPage}
+                                                >
+                                                    Nxt &raquo;
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="col-md-9 col-sm-10">
                                         <div className="card-dev-container-mobile-space-section-age-cart">
                                             <div className="row">
-                                                {currentItems.map((item) => (
+                                                {blogs.map((item) => (
                                                     <div
                                                         key={item.id}
                                                         className="col-md-3 col-sm-6 col-6"
                                                     >
-                                                        <div className="image-fooetr-blog">
-                                                            <img
-                                                                src={
-                                                                    item.thumbnail_image
-                                                                }
-                                                                alt={
-                                                                    item.all_text
-                                                                }
-                                                            />
-                                                        </div>
-                                                        <div
-                                                            className="dev-folder-card-blog-section-dev-page"
-                                                            style={{
-                                                                background:
-                                                                    "white",
-                                                            }}
+                                                        <Link
+                                                            to={`/${item.slug}`}
+                                                            className="text-decoration-none"
                                                         >
-                                                            <div className="dve-sj-computers-icon-dev-blog">
-                                                                <span className="image-fooetr-blog">
-                                                                    SJ
-                                                                </span>
+                                                            <div className="image-fooetr-blog">
+                                                                <img src={item.thumbnail_image} />
                                                             </div>
-                                                            <div className="blog-post-paragraph-tag">
-                                                                <span>
-                                                                    {
-                                                                        item.meta_description
-                                                                    }
-                                                                </span>
-                                                            </div>
-                                                            <div className="read-date-blog-post-data">
-                                                                <div>
-                                                                    <span className="read-more-blog">
-                                                                        Read
-                                                                        more..
+                                                            <div
+                                                                className="dev-folder-card-blog-section-dev-page"
+                                                                style={{
+                                                                    background:
+                                                                        "white",
+                                                                }}
+                                                            >
+                                                                <div className="dve-sj-computers-icon-dev-blog">
+                                                                    <span className="image-fooetr-blog">
+                                                                        SJ
                                                                     </span>
                                                                 </div>
-                                                                <div>
-                                                                    <span className="read-more-date-with-data-date">
+                                                                <div className="blog-post-paragraph-tag">
+                                                                    <span>
                                                                         {
-                                                                            item.publish_date
+                                                                            item.meta_description
                                                                         }
                                                                     </span>
                                                                 </div>
+                                                                <div className="read-date-blog-post-data">
+                                                                    <div>
+                                                                        <span className="read-more-blog">
+                                                                            Read
+                                                                            more..
+                                                                        </span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <span className="read-more-date-with-data-date">
+                                                                            {
+                                                                                item.publish_date
+                                                                            }
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        </Link>
                                                     </div>
                                                 ))}
                                             </div>
