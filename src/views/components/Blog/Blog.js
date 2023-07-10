@@ -69,7 +69,7 @@ const Blog = () => {
     const [prevPageUrl, setPrevPageUrl] = useState(null);
     const [nextPageUrl, setNextPageUrl] = useState(null);
 
-    ///this the header pagination code start
+
     useEffect(() => {
         setIsLoading(true);
         getBlogsHeaderPagesApi(currentPage, itemsPerPage)
@@ -479,6 +479,8 @@ const Blog = () => {
                                                     Nxt &raquo;
                                                 </button>
                                             </div>
+
+                        
                                         </div>
                                     </div>
                                     <div className="col-md-9 col-sm-10">
@@ -494,7 +496,7 @@ const Blog = () => {
                                                             className="text-decoration-none"
                                                         >
                                                             <div className="image-fooetr-blog">
-                                                                <img src={item.thumbnail_image} />
+                                                                <img src={item.thumbnail_image}  className="image-for-blog-data-sets-view" />
                                                             </div>
                                                             <div
                                                                 className="dev-folder-card-blog-section-dev-page"
