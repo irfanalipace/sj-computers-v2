@@ -19,10 +19,7 @@ export function blogSlugApiblogDetails(slug) {
     return new Promise((resolve, reject) => {
         ApiService.get(`/get-blogs-slug?slug=${slug}`)
             .then((response) => {
-                console.log(
-                    "file: products.js | blogSlugApiblogDetails| response",
-                    response
-                );
+              console.log(response,'update blog slug')
                 resolve(response);
             })
             .catch((e) => {

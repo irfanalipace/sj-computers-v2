@@ -78,7 +78,7 @@ const Blog = () => {
     useEffect(() => {
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
-                console.log(response,'respohshsfhf')
+                console.log(response,'response of the slug details')
 
                 setBlogDetails(response?.data?.data);
             })
