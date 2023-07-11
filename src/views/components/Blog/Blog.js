@@ -42,15 +42,15 @@ const HeadereLinks = [
 const nonHeaderRoutes = [""];
 const Blog = () => {
     const [blogdteails, setBlogDetails] = useState("");
-    console.log('blogdteails' , blogdteails)
+    console.log("blogdteails", blogdteails);
 
     const { blogslug } = useParams();
-    console.log('blogslug' , blogslug)
+    console.log("blogslug", blogslug);
 
     useEffect(() => {
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
-                console.log('slugggggg' , blogslug )
+                console.log("slugggggg", blogslug);
                 setBlogDetails(response?.data);
             })
             .catch((error) => {
@@ -114,32 +114,32 @@ const Blog = () => {
 
     const totalPages = Math.ceil(blogs.length / itemsPerPage);
 
-
     const handlelinkClick = () => {
         setIsLoading(false);
     };
 
-
-
-
     const MAX_CONTENT_WORDS = 500; // Maximum number of words before inserting the additional image
     const IMAGE_AFTER_WORDS = 500; // Number of words after which to insert the additional image
     const IMAGE_URL = blogdteails.primary_image; // URL of the additional image
-    
+
     const insertImageAfterWords = (content) => {
-      const words = content.split(" ");
-      const wordCount = words.length;
-    
-      if (wordCount <= MAX_CONTENT_WORDS) {
-        return content;
-      }
-    
-      // Insert the image after the specified number of words
-      words.splice(IMAGE_AFTER_WORDS, 0, `<img src="${IMAGE_URL}" alt="Additional Image" />`);
-    
-      return words.join(" ");
+        const words = content.split(" ");
+        const wordCount = words.length;
+
+        if (wordCount <= MAX_CONTENT_WORDS) {
+            return content;
+        }
+
+        // Insert the image after the specified number of words
+        words.splice(
+            IMAGE_AFTER_WORDS,
+            0,
+            `<img src="${IMAGE_URL}" alt="Additional Image" />`
+        );
+
+        return words.join(" ");
     };
-    
+
     return (
         <div>
             <>
@@ -305,17 +305,18 @@ const Blog = () => {
                                                             {/* <img
                                                                 src={smimage}
                                                             /> */}
-                                                         <div className="them-stori-mage">
-                                                         <img
-                                        src={
-                                            blogdteails.thumbnail_image
-                                                ? blogdteails.thumbnail_image
-                                                : smimage
-                                        }
-                                        alt={blogdteails.all_text}
-                                    />
-                                                         </div>
-
+                                                            <div className="them-stori-mage">
+                                                                <img
+                                                                    src={
+                                                                        blogdteails.thumbnail_image
+                                                                            ? blogdteails.thumbnail_image
+                                                                            : smimage
+                                                                    }
+                                                                    alt={
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                />
+                                                            </div>
                                                         </div>
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
@@ -333,16 +334,18 @@ const Blog = () => {
                                                             {/* <img
                                                                 src={smimage}
                                                             /> */}
-                                                              <div className="them-stori-mage">
-                                                         <img
-                                        src={
-                                            blogdteails.thumbnail_image
-                                                ? blogdteails.thumbnail_image
-                                                : smimage
-                                        }
-                                        alt={blogdteails.all_text}
-                                    />
-                                                         </div>
+                                                            <div className="them-stori-mage">
+                                                                <img
+                                                                    src={
+                                                                        blogdteails.thumbnail_image
+                                                                            ? blogdteails.thumbnail_image
+                                                                            : smimage
+                                                                    }
+                                                                    alt={
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                />
+                                                            </div>
                                                         </div>
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
@@ -360,16 +363,18 @@ const Blog = () => {
                                                             {/* <img
                                                                 src={smimage}
                                                             /> */}
-                                                              <div className="them-stori-mage">
-                                                         <img
-                                        src={
-                                            blogdteails.thumbnail_image
-                                                ? blogdteails.thumbnail_image
-                                                : smimage
-                                        }
-                                        alt={blogdteails.all_text}
-                                    />
-                                                         </div>
+                                                            <div className="them-stori-mage">
+                                                                <img
+                                                                    src={
+                                                                        blogdteails.thumbnail_image
+                                                                            ? blogdteails.thumbnail_image
+                                                                            : smimage
+                                                                    }
+                                                                    alt={
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                />
+                                                            </div>
                                                         </div>
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
@@ -400,7 +405,7 @@ const Blog = () => {
                                                     __html: blogdteails.content,
                                                 }}
                                             />
-                                           {/* <div
+                                            {/* <div
   className="content-image-data-paragrap"
   dangerouslySetInnerHTML={{
     __html: insertImageAfterWords(blogdteails.content),
@@ -439,7 +444,6 @@ const Blog = () => {
                                         </div> */}
                                         <span className="span-deve-loram-space">
                                             {/* {blog.meta_description} */}
-                                           
                                         </span>
                                         {/* <div className="dve-space-paragrapgh">
                                             <div className="blog-dynamic-style-heading-data">
