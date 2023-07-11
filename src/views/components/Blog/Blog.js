@@ -122,7 +122,24 @@ const Blog = () => {
 
 
 
-        
+    const MAX_CONTENT_WORDS = 500; // Maximum number of words before inserting the additional image
+    const IMAGE_AFTER_WORDS = 500; // Number of words after which to insert the additional image
+    const IMAGE_URL = blogdteails.primary_image; // URL of the additional image
+    
+    const insertImageAfterWords = (content) => {
+      const words = content.split(" ");
+      const wordCount = words.length;
+    
+      if (wordCount <= MAX_CONTENT_WORDS) {
+        return content;
+      }
+    
+      // Insert the image after the specified number of words
+      words.splice(IMAGE_AFTER_WORDS, 0, `<img src="${IMAGE_URL}" alt="Additional Image" />`);
+    
+      return words.join(" ");
+    };
+    
     return (
         <div>
             <>
@@ -383,6 +400,13 @@ const Blog = () => {
                                                     __html: blogdteails.content,
                                                 }}
                                             />
+                                           {/* <div
+  className="content-image-data-paragrap"
+  dangerouslySetInnerHTML={{
+    __html: insertImageAfterWords(blogdteails.content),
+  }}
+/> */}
+
                                             {/* {!showMore && (
                                                     <button
                                                         className="show-more-button"
