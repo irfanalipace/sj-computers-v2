@@ -30,6 +30,7 @@ import meetingset3 from "@images/blog/videoimagemeeting3.png";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
+import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 const HeadereLinks = [
     { path: "/", title: "About Us" },
     { path: "/", title: "What We Do?" },
@@ -48,6 +49,7 @@ const Blog = () => {
     console.log("blogslug", blogslug);
 
     useEffect(() => {
+        setIsLoading(true);
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
                 console.log("slugggggg", blogslug);
@@ -137,21 +139,23 @@ const Blog = () => {
 
         return words.join(" ");
     };
-
+    if (isLoading) {
+        return <LoaderComponent />; // Render the loader component if isLoading is true
+      }
     const addImageAfter500Words = (content) => {
-        const words = content.split(' ');
+        const words = content.split(" ");
         const wordCount = words.length;
         const index = 500 < wordCount ? 500 : wordCount;
-        const first500Words = words.slice(0, index).join(' ');
-        const remainingContent = words.slice(index).join(' ');
+        const first500Words = words.slice(0, index).join(" ");
+        const remainingContent = words.slice(index).join(" ");
         return (
             <>
-              <div dangerouslySetInnerHTML={{ __html: first500Words }} />
-              {blogdetails_myimage}
-              <div dangerouslySetInnerHTML={{ __html: remainingContent }} />
+                <div dangerouslySetInnerHTML={{ __html: first500Words }} />
+                {blogdetails_myimage}
+                <div dangerouslySetInnerHTML={{ __html: remainingContent }} />
             </>
-          );
-        };    
+        );
+    };
     return (
         <div>
             <>
@@ -417,7 +421,7 @@ const Blog = () => {
                                                     __html: blogdteails.content,
                                                 }}
                                             />
-                                            
+
                                             {/* <div
   className="content-image-data-paragrap"
   dangerouslySetInnerHTML={{
@@ -546,7 +550,7 @@ const Blog = () => {
                                         <div className="sj-left-dev-set-data-from-section">
                                             <span>More from SJ</span>
                                             <div className="pagination-blogs-page">
-                                                <button
+                                                {/* <button
                                                     onClick={handlePrevPage}
                                                 >
                                                     &laquo; Pre
@@ -576,6 +580,48 @@ const Blog = () => {
 
                                                 <button
                                                     onClick={handleNextPage}
+                                                >
+                                                    Nxt &raquo;
+                                                </button>
+
+                                                {isLoading && (
+                                                    <div className="loader">
+                                                        Loading...
+                                                    </div>
+                                                )} */}
+
+                                                <button
+                                                    onClick={handlePrevPage}
+                                                    disabled={!prevPageUrl}
+                                                >
+                                                    &laquo; Pre
+                                                </button>
+
+                                                {Array.from(
+                                                    { length: totalPages },
+                                                    (_, index) => (
+                                                        <button
+                                                            key={index}
+                                                            onClick={() =>
+                                                                handlePaginationClick(
+                                                                    index + 1
+                                                                )
+                                                            }
+                                                            className={
+                                                                currentPage ===
+                                                                index + 1
+                                                                    ? "active"
+                                                                    : ""
+                                                            }
+                                                        >
+                                                            {currentPage}
+                                                        </button>
+                                                    )
+                                                )}
+
+                                                <button
+                                                    onClick={handleNextPage}
+                                                    disabled={!nextPageUrl}
                                                 >
                                                     Nxt &raquo;
                                                 </button>

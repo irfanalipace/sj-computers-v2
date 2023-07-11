@@ -5,6 +5,7 @@ import blogmeeting from "@images/blog/meetingblog-page2.png";
 import smimage from "@images/blog/smallimage.png";
 import book from "@images/blog/blogbook.png";
 
+import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { Link } from "react-router-dom";
 
 import imageproduct from "@images/blog/product.png";
@@ -23,7 +24,7 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const SingleBlog = () => {
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState("");
     const [blogs, setBlogs] = useState([]);
@@ -51,6 +52,7 @@ const SingleBlog = () => {
     useEffect(() => {
         setIsLoading(true);
         getBlogsPagesApi(currentPage, itemsPerPage)
+        
             .then((response) => {
                 console.log(response, '22222222"');
 
@@ -58,19 +60,23 @@ const SingleBlog = () => {
                     setBlogs(response.data?.data);
                     setPrevPageUrl(response.data?.prev_page_url);
                     setNextPageUrl(response.data?.next_page_url);
+                 
                 } else {
                     setBlogs([]);
                     setPrevPageUrl(response.data?.prev_page_url);
                     setNextPageUrl(response.data?.next_page_url);
+                  
+
                 }
-                setIsLoading(false);
+                
             })
             .catch((error) => {
                 console.error("API Error:", error);
                 setIsLoading(false);
-            }).finally(() => {
+            })
+            .finally(() => {
                 setIsLoading(false);
-              });
+            });
     }, [currentPage, itemsPerPage]);
 
     const handlePaginationClick = (pageNumber) => {
@@ -86,18 +92,18 @@ const SingleBlog = () => {
     };
 
     if (isLoading) {
-        return <div>Loading...</div>;
-    }
+    return <LoaderComponent />; // Render the loader component if isLoading is true
+  }
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
 
     const totalPages = Math.ceil(blogs.length / itemsPerPage);
-   
 
 
 
+    
     return (
         <div>
             <div className="mein-dev-single-page-cantainer">
@@ -108,8 +114,6 @@ const SingleBlog = () => {
                                 Did you know? SJ Computer is the first, and
                                 only, marketer to protuct customers in third
                                 party product liability cases
-
-
                             </span>
                         </div>
                     </div>
@@ -122,16 +126,15 @@ const SingleBlog = () => {
                         <div>
                             <div className="meeting-data-blog-save-dev-form">
                                 {/* <img src={blogmeeting} /> */}
-                               <img   src={
-                                            blogs.primary_image
-                                                ? blogs.primary_image
-                                                : blogmeeting
-                                        }
-                                        alt={blogs.all_text}
-
-                                    
-                                    />
-                                    {console.log(blogs.data?.primary_image,'')}
+                                <img
+                                    src={
+                                        blogs.primary_image
+                                            ? blogs.primary_image
+                                            : blogmeeting
+                                    }
+                                    alt={blogs.all_text}
+                                />
+                                {console.log(blogs.data?.primary_image, "")}
                             </div>
                             <div className="mid-graph-pargarph-page-data">
                                 <span>Title of My Blogs</span>
@@ -181,16 +184,22 @@ const SingleBlog = () => {
                     </div>
                 </div>
             </div>
-
+           
             <div className="container single-blog-pages-dev-container-all-products">
                 <div className="row">
+                    
                     {blogs.map((blog) => (
+                     
                         <div className="col-md-4" key={blog.id}>
-                              
-                              <Link
+                               {isLoading ? (
+                                    <LoaderComponent /> 
+                                ) : (
+                            <Link
                                 to={`/${blog.slug}`}
                                 className="text-decoration-none"
+                               
                             >
+     
                                 <div className="product-card">
                                     {/* <img src={book} alt={blog.title} /> */}
 
@@ -201,6 +210,7 @@ const SingleBlog = () => {
                                                 : book
                                         }
                                         alt={blog.all_text}
+                                        
                                     />
 
                                     <div className="dev-data-span-card-dev">
@@ -216,11 +226,14 @@ const SingleBlog = () => {
                                         </div>
                                     </div>
                                 </div>
+                                
                             </Link>
-                         
+                             )}
                         </div>
                     ))}
-                   
+
+
+                    
                 </div>
 
                 {/* <div className="pagination-blogs-page">
@@ -247,36 +260,32 @@ const SingleBlog = () => {
                     )}
                 </div> */}
 
-<div className="pagination-blogs-page">
-  <button onClick={handlePrevPage} disabled={!prevPageUrl}>
-    &laquo; Pre
-  </button>
+                <div className="pagination-blogs-page">
+                    <button onClick={handlePrevPage} disabled={!prevPageUrl}>
+                        &laquo; Pre
+                    </button>
 
-  {Array.from({ length: totalPages }, (_, index) => (
-    <button
-      key={index}
-      onClick={() => handlePaginationClick(index + 1)}
-      className={currentPage === index + 1 ? "active" : ""}
-    >
-      {currentPage}
-    </button>
-  ))}
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => handlePaginationClick(index + 1)}
+                            className={
+                                currentPage === index + 1 ? "active" : ""
+                            }
+                        >
+                            {currentPage}
+                        </button>
+                    ))}
 
-  <button onClick={handleNextPage} disabled={!nextPageUrl}>
-    Nxt &raquo;
-  </button>
+                    <button onClick={handleNextPage} disabled={!nextPageUrl}>
+                        Nxt &raquo;
+                    </button>
 
-  {isLoading && <div className="loader">Loading...</div>}
-</div>
-
+                    {isLoading && <div className="loader">Loading...</div>}
+                </div>
             </div>
         </div>
     );
 };
 
 export default SingleBlog;
-
-
-
-
-
