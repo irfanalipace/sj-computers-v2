@@ -52,7 +52,7 @@ const SingleBlog = () => {
         setIsLoading(true);
         getBlogsPagesApi(currentPage, itemsPerPage)
             .then((response) => {
-                console.log(response, 'lnffffffff"');
+                console.log(response, '22222222"');
 
                 if (response.data && response.data?.data.length > 0) {
                     setBlogs(response.data?.data);
@@ -94,7 +94,9 @@ const SingleBlog = () => {
     const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
 
     const totalPages = Math.ceil(blogs.length / itemsPerPage);
-    //    console.log('responseof paginationClasses',currentItems)
+   
+
+
 
     return (
         <div>
@@ -106,6 +108,8 @@ const SingleBlog = () => {
                                 Did you know? SJ Computer is the first, and
                                 only, marketer to protuct customers in third
                                 party product liability cases
+
+
                             </span>
                         </div>
                     </div>
@@ -117,7 +121,17 @@ const SingleBlog = () => {
                     <div className="col-md-12">
                         <div>
                             <div className="meeting-data-blog-save-dev-form">
-                                <img src={blogmeeting} />
+                                {/* <img src={blogmeeting} /> */}
+                               <img   src={
+                                            blogs.primary_image
+                                                ? blogs.primary_image
+                                                : blogmeeting
+                                        }
+                                        alt={blogs.all_text}
+
+                                    
+                                    />
+                                    {console.log(blogs.data?.primary_image,'')}
                             </div>
                             <div className="mid-graph-pargarph-page-data">
                                 <span>Title of My Blogs</span>

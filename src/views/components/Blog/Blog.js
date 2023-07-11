@@ -42,15 +42,15 @@ const HeadereLinks = [
 const nonHeaderRoutes = [""];
 const Blog = () => {
     const [blogdteails, setBlogDetails] = useState("");
-    console.log('blogdteails' , blogdteails)
+    console.log("blogdteails", blogdteails);
 
     const { blogslug } = useParams();
-    console.log('blogslug' , blogslug)
+    console.log("blogslug", blogslug);
 
     useEffect(() => {
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
-                console.log('slugggggg' , blogslug )
+                console.log("slugggggg", blogslug);
                 setBlogDetails(response?.data);
             })
             .catch((error) => {
@@ -76,8 +76,6 @@ const Blog = () => {
         setIsLoading(true);
         getBlogsHeaderPagesApi(currentPage, itemsPerPage)
             .then((response) => {
-                console.log(response, 'lnffffffff"');
-
                 if (response.data && response.data?.data.length > 0) {
                     setBlogs(response.data?.data);
                     setPrevPageUrl(response.data?.prev_page_url);
@@ -114,32 +112,46 @@ const Blog = () => {
 
     const totalPages = Math.ceil(blogs.length / itemsPerPage);
 
-
     const handlelinkClick = () => {
         setIsLoading(false);
     };
 
-
-
-
     const MAX_CONTENT_WORDS = 500; // Maximum number of words before inserting the additional image
     const IMAGE_AFTER_WORDS = 500; // Number of words after which to insert the additional image
     const IMAGE_URL = blogdteails.primary_image; // URL of the additional image
-    
+
     const insertImageAfterWords = (content) => {
-      const words = content.split(" ");
-      const wordCount = words.length;
-    
-      if (wordCount <= MAX_CONTENT_WORDS) {
-        return content;
-      }
-    
-      // Insert the image after the specified number of words
-      words.splice(IMAGE_AFTER_WORDS, 0, `<img src="${IMAGE_URL}" alt="Additional Image" />`);
-    
-      return words.join(" ");
+        const words = content.split(" ");
+        const wordCount = words.length;
+
+        if (wordCount <= MAX_CONTENT_WORDS) {
+            return content;
+        }
+
+        // Insert the image after the specified number of words
+        words.splice(
+            IMAGE_AFTER_WORDS,
+            0,
+            `<img src="${IMAGE_URL}" alt="Additional Image" />`
+        );
+
+        return words.join(" ");
     };
-    
+
+    const addImageAfter500Words = (content) => {
+        const words = content.split(' ');
+        const wordCount = words.length;
+        const index = 500 < wordCount ? 500 : wordCount;
+        const first500Words = words.slice(0, index).join(' ');
+        const remainingContent = words.slice(index).join(' ');
+        return (
+            <>
+              <div dangerouslySetInnerHTML={{ __html: first500Words }} />
+              {blogdetails_myimage}
+              <div dangerouslySetInnerHTML={{ __html: remainingContent }} />
+            </>
+          );
+        };    
     return (
         <div>
             <>
@@ -305,17 +317,18 @@ const Blog = () => {
                                                             {/* <img
                                                                 src={smimage}
                                                             /> */}
-                                                         <div className="them-stori-mage">
-                                                         <img
-                                        src={
-                                            blogdteails.thumbnail_image
-                                                ? blogdteails.thumbnail_image
-                                                : smimage
-                                        }
-                                        alt={blogdteails.all_text}
-                                    />
-                                                         </div>
-
+                                                            <div className="them-stori-mage">
+                                                                <img
+                                                                    src={
+                                                                        blogdteails.thumbnail_image
+                                                                            ? blogdteails.thumbnail_image
+                                                                            : smimage
+                                                                    }
+                                                                    alt={
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                />
+                                                            </div>
                                                         </div>
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
@@ -333,16 +346,18 @@ const Blog = () => {
                                                             {/* <img
                                                                 src={smimage}
                                                             /> */}
-                                                              <div className="them-stori-mage">
-                                                         <img
-                                        src={
-                                            blogdteails.thumbnail_image
-                                                ? blogdteails.thumbnail_image
-                                                : smimage
-                                        }
-                                        alt={blogdteails.all_text}
-                                    />
-                                                         </div>
+                                                            <div className="them-stori-mage">
+                                                                <img
+                                                                    src={
+                                                                        blogdteails.thumbnail_image
+                                                                            ? blogdteails.thumbnail_image
+                                                                            : smimage
+                                                                    }
+                                                                    alt={
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                />
+                                                            </div>
                                                         </div>
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
@@ -360,16 +375,18 @@ const Blog = () => {
                                                             {/* <img
                                                                 src={smimage}
                                                             /> */}
-                                                              <div className="them-stori-mage">
-                                                         <img
-                                        src={
-                                            blogdteails.thumbnail_image
-                                                ? blogdteails.thumbnail_image
-                                                : smimage
-                                        }
-                                        alt={blogdteails.all_text}
-                                    />
-                                                         </div>
+                                                            <div className="them-stori-mage">
+                                                                <img
+                                                                    src={
+                                                                        blogdteails.thumbnail_image
+                                                                            ? blogdteails.thumbnail_image
+                                                                            : smimage
+                                                                    }
+                                                                    alt={
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                />
+                                                            </div>
                                                         </div>
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
@@ -400,7 +417,8 @@ const Blog = () => {
                                                     __html: blogdteails.content,
                                                 }}
                                             />
-                                           {/* <div
+                                            
+                                            {/* <div
   className="content-image-data-paragrap"
   dangerouslySetInnerHTML={{
     __html: insertImageAfterWords(blogdteails.content),
@@ -425,6 +443,18 @@ const Blog = () => {
                                                 __html: blogdteails.content.substring(3000),
                                                 }}
                                             />  */}
+                                                {/* <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
+  __html: showMore
+    ? blogdteails.content
+    : (blogdteails.content.length > 3000 ? blogdteails.content.substring(0, 3000) + "..." : blogdteails.content)
+}} />
+
+{blogdteails.content.length > 3000 && !showMore &&
+  <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
+    __html: blogdteails.content.substring(3000)
+  }} />
+}
+{console.log(blogdteails.content,'blogs of the dta')} */}
                                             </div>
                                         </div>
                                         {/* <div className="image-for-meeting2-section">
@@ -439,7 +469,6 @@ const Blog = () => {
                                         </div> */}
                                         <span className="span-deve-loram-space">
                                             {/* {blog.meta_description} */}
-                                           
                                         </span>
                                         {/* <div className="dve-space-paragrapgh">
                                             <div className="blog-dynamic-style-heading-data">
