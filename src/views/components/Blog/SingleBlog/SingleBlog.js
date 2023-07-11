@@ -57,7 +57,7 @@ const SingleBlog = () => {
         setIsLoading(true);
         getBlogsPagesApi(currentPage, itemsPerPage)
             .then((response) => {
-                console.log(response, '22222222"');
+                console.log(response.data?.meta_title, '22222222"');
 
                 if (response.data && response.data?.data.length > 0) {
                     setBlogs(response.data?.data);
@@ -119,6 +119,43 @@ const SingleBlog = () => {
     // }, [blogslug]);
 
 
+
+
+
+
+
+
+
+
+ const [singleblog, setSingle]=useState("")
+
+    useEffect(() => {
+        setIsLoading(true);
+        getBlogsPagesApi(currentPage, itemsPerPage)
+          .then((response) => {
+            console.log(response.data?.meta_title, '22222222"');
+      
+            if (response.data && response.data?.data.length > 0) {
+              const singleBlog = response.data?.data[0]; // Extract the first blog from the array
+              setSingle(singleBlog);
+              setPrevPageUrl(response.data?.prev_page_url);
+              setNextPageUrl(response.data?.next_page_url);
+            } else {
+                setSingle(null); // No blog available
+              setPrevPageUrl(response.data?.prev_page_url);
+              setNextPageUrl(response.data?.next_page_url);
+            }
+          })
+          .catch((error) => {
+            console.error("API Error:", error);
+            setIsLoading(false);
+          })
+          .finally(() => {
+            setIsLoading(false);
+          });
+      }, [currentPage, itemsPerPage]);
+      
+
     return (
         <div>
             <div className="mein-dev-single-page-cantainer">
@@ -143,27 +180,25 @@ const SingleBlog = () => {
                                 {/* <img src={blogmeeting} /> */}
                                 <img
                                     src={
-                                        blogs.primary_image
-                                            ? blogs.primary_image
+                                        singleblog.primary_image
+                                            ? singleblog.primary_image
                                             : blogmeeting
                                     }
                                     alt={blogs.all_text}
                                 />
-                                {console.log(blogs.data?.primary_image, "blog@@@")}
+                               
                             </div>
                             <div className="mid-graph-pargarph-page-data">
-                                <span>Title of My Blogs</span>
+                                <span>{singleblog.title}</span>
                             </div>
                             <div className="mid-graph-pargarph-page-datap-data blog-dynamic-style-heading-data1">
-                                Did you know? SJ Computer is the first, and
-                                only, marketer to protuct customers in third
-                                party product liability cases Did you know? SJ
-                                Computer is the first, and only, marketer to
-                                protuct customers in third party product
-                                liability cases Did you know? SJ Computer is the
-                                first, and only, marketer to protuct customers
-                                in third party product liability cases
-
+                    
+                              
+                                <div className="content-image-data-paragrap"
+                                                dangerouslySetInnerHTML={{
+                                                __html: singleblog.content
+                                                }}
+                                            /> 
                                 
                             </div>
 
