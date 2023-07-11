@@ -16,14 +16,14 @@ import laptopimg from "@images/blog/latopimage.png";
 import bloglaptop1 from "@images/blog/bookwithlaptop.png";
 import bloglaptop2 from "@images/blog/laptopwithbook2.png";
 import productviewblog from "@images/blog/typelaptop.png";
-import { getBlogsPagesApi } from "../../../../core/api/blogs";
+import { getBlogsPagesApi,blogSlugApiblogDetails } from "../../../../core/api/blogs";
 import meetingset from "@images/blog/meeting2image.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router-dom";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 const SingleBlog = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
@@ -51,12 +51,11 @@ const SingleBlog = () => {
     };
     const handlePaginationClick1 = (page) => {
         setCurrentPage(page);
-      };
-      
+    };
+
     useEffect(() => {
         setIsLoading(true);
         getBlogsPagesApi(currentPage, itemsPerPage)
-        
             .then((response) => {
                 console.log(response, '22222222"');
 
@@ -64,15 +63,11 @@ const SingleBlog = () => {
                     setBlogs(response.data?.data);
                     setPrevPageUrl(response.data?.prev_page_url);
                     setNextPageUrl(response.data?.next_page_url);
-                 
                 } else {
                     setBlogs([]);
                     setPrevPageUrl(response.data?.prev_page_url);
                     setNextPageUrl(response.data?.next_page_url);
-                  
-
                 }
-                
             })
             .catch((error) => {
                 console.error("API Error:", error);
@@ -95,9 +90,9 @@ const SingleBlog = () => {
         setCurrentPage(currentPage + 1);
     };
 
-//     if (isLoading) {
-//     return <LoaderComponent />; // Render the loader component if isLoading is true
-//   }
+    //     if (isLoading) {
+    //     return <LoaderComponent />; // Render the loader component if isLoading is true
+    //   }
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -105,12 +100,25 @@ const SingleBlog = () => {
 
     const totalPages = Math.ceil(blogs.length / itemsPerPage);
 
-
     const handlePageChange = (event, page) => {
         setCurrentPage(page);
-      };
-      
-    
+    };
+
+
+
+    // const [blogdteails, setBlogDetails] = useState("");
+    // useEffect(() => {
+    //     blogSlugApiblogDetails(blogslug)
+    //         .then((response) => {
+    //             console.log("slugggggg", blogslug);
+    //             setBlogDetails(response?.data);
+    //         })
+    //         .catch((error) => {
+    //             console.error("API Error:", error);
+    //         });
+    // }, [blogslug]);
+
+
     return (
         <div>
             <div className="mein-dev-single-page-cantainer">
@@ -141,7 +149,7 @@ const SingleBlog = () => {
                                     }
                                     alt={blogs.all_text}
                                 />
-                                {console.log(blogs.data?.primary_image, "")}
+                                {console.log(blogs.data?.primary_image, "blog@@@")}
                             </div>
                             <div className="mid-graph-pargarph-page-data">
                                 <span>Title of My Blogs</span>
@@ -155,6 +163,8 @@ const SingleBlog = () => {
                                 liability cases Did you know? SJ Computer is the
                                 first, and only, marketer to protuct customers
                                 in third party product liability cases
+
+                                
                             </div>
 
                             {/* <div>
@@ -191,67 +201,60 @@ const SingleBlog = () => {
                     </div>
                 </div>
             </div>
-           
+
             {isLoading ? (
-                <div className="blog-pagesloader-overlay" style={{ display: isLoading ? 'flex' : 'none'}}>
-                      <LoaderComponent /> 
+                <div
+                    className="blog-pagesloader-overlay"
+                    style={{ display: isLoading ? "flex" : "none" }}
+                >
+                    <LoaderComponent />
                 </div>
-    
-               ) : (
-        <div className="container single-blog-pages-dev-container-all-products">
-        <div className="row">
-            
-            {blogs.map((blog) => (
-             
-                <div className="col-md-4" key={blog.id}>
-                       {isLoading ? (
-                            <LoaderComponent /> 
-                        ) : (
-                    <Link
-                        to={`/${blog.slug}`}
-                        className="text-decoration-none"
-                       
-                    >
+            ) : (
+                <div className="container single-blog-pages-dev-container-all-products">
+                    <div className="row">
+                        {blogs.map((blog) => (
+                            <div className="col-md-4" key={blog.id}>
+                                {isLoading ? (
+                                    <LoaderComponent />
+                                ) : (
+                                    <Link
+                                        to={`/${blog.slug}`}
+                                        className="text-decoration-none"
+                                    >
+                                        <div className="product-card">
+                                            {/* <img src={book} alt={blog.title} /> */}
 
-                        <div className="product-card">
-                            {/* <img src={book} alt={blog.title} /> */}
+                                            <img
+                                                src={
+                                                    blog.thumbnail_image
+                                                        ? blog.thumbnail_image
+                                                        : book
+                                                }
+                                                alt={blog.all_text}
+                                            />
 
-                            <img
-                                src={
-                                    blog.thumbnail_image
-                                        ? blog.thumbnail_image
-                                        : book
-                                }
-                                alt={blog.all_text}
-                                
-                            />
+                                            <div className="dev-data-span-card-dev">
+                                                <span> {blog.tags}</span>
+                                            </div>
 
-                            <div className="dev-data-span-card-dev">
-                                <span> {blog.tags}</span>
+                                            <div className="read-section-date-section">
+                                                <div>
+                                                    <span>Read me</span>
+                                                </div>
+                                                <div>
+                                                    <span>
+                                                        {blog.publish_date}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                )}
                             </div>
+                        ))}
+                    </div>
 
-                            <div className="read-section-date-section">
-                                <div>
-                                    <span>Read me</span>
-                                </div>
-                                <div>
-                                    <span>{blog.publish_date}</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </Link>
-                     )}
-                </div>
-            ))}
-
-
-
-
-            
-        </div>
-
-        {/* <div className="pagination-blogs-page">
+                    {/* <div className="pagination-blogs-page">
             {prevPageUrl && (
                 <button onClick={handlePrevPage}>
                     &laquo; Previous
@@ -275,8 +278,8 @@ const SingleBlog = () => {
             )}
         </div> */}
 
-        <div className="pagination-blogs-page">
-            {/* <button onClick={handlePrevPage} disabled={!prevPageUrl}>
+                    <div className="pagination-blogs-page">
+                        {/* <button onClick={handlePrevPage} disabled={!prevPageUrl}>
                 &laquo; Pre
             </button>
 
@@ -295,22 +298,19 @@ const SingleBlog = () => {
             <button onClick={handleNextPage} disabled={!nextPageUrl}>
                 Nxt &raquo;
             </button> */}
-                  <div>    
-        <Stack spacing={2}>
-      <Pagination
-        count={10}
-        page={currentPage}
-        onChange={handlePageChange}
-      />
-    </Stack>
-    </div>
-            {isLoading && <div className="loader">Loading...</div>}
-        </div>
-    
-    </div>
-    )}
-          
-           
+                        <div>
+                            <Stack spacing={2}>
+                                <Pagination
+                                    count={10}
+                                    page={currentPage}
+                                    onChange={handlePageChange}
+                                />
+                            </Stack>
+                        </div>
+                        {isLoading && <div className="loader">Loading...</div>}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
