@@ -22,7 +22,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router-dom";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 const SingleBlog = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
@@ -48,7 +49,10 @@ const SingleBlog = () => {
             setExpandedBlogs([...expandedBlogs, blogId]);
         }
     };
-
+    const handlePaginationClick1 = (page) => {
+        setCurrentPage(page);
+      };
+      
     useEffect(() => {
         setIsLoading(true);
         getBlogsPagesApi(currentPage, itemsPerPage)
@@ -91,9 +95,9 @@ const SingleBlog = () => {
         setCurrentPage(currentPage + 1);
     };
 
-    if (isLoading) {
-    return <LoaderComponent />; // Render the loader component if isLoading is true
-  }
+//     if (isLoading) {
+//     return <LoaderComponent />; // Render the loader component if isLoading is true
+//   }
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -102,7 +106,10 @@ const SingleBlog = () => {
     const totalPages = Math.ceil(blogs.length / itemsPerPage);
 
 
-
+    const handlePageChange = (event, page) => {
+        setCurrentPage(page);
+      };
+      
     
     return (
         <div>
@@ -185,105 +192,125 @@ const SingleBlog = () => {
                 </div>
             </div>
            
-            <div className="container single-blog-pages-dev-container-all-products">
-                <div className="row">
-                    
-                    {blogs.map((blog) => (
-                     
-                        <div className="col-md-4" key={blog.id}>
-                               {isLoading ? (
-                                    <LoaderComponent /> 
-                                ) : (
-                            <Link
-                                to={`/${blog.slug}`}
-                                className="text-decoration-none"
-                               
-                            >
-     
-                                <div className="product-card">
-                                    {/* <img src={book} alt={blog.title} /> */}
+            {isLoading ? (
+                <div className="blog-pagesloader-overlay" style={{ display: isLoading ? 'flex' : 'none'}}>
+                      <LoaderComponent /> 
+                </div>
+    
+               ) : (
+        <div className="container single-blog-pages-dev-container-all-products">
+        <div className="row">
+            
+            {blogs.map((blog) => (
+             
+                <div className="col-md-4" key={blog.id}>
+                       {isLoading ? (
+                            <LoaderComponent /> 
+                        ) : (
+                    <Link
+                        to={`/${blog.slug}`}
+                        className="text-decoration-none"
+                       
+                    >
 
-                                    <img
-                                        src={
-                                            blog.thumbnail_image
-                                                ? blog.thumbnail_image
-                                                : book
-                                        }
-                                        alt={blog.all_text}
-                                        
-                                    />
+                        <div className="product-card">
+                            {/* <img src={book} alt={blog.title} /> */}
 
-                                    <div className="dev-data-span-card-dev">
-                                        <span> {blog.tags}</span>
-                                    </div>
-
-                                    <div className="read-section-date-section">
-                                        <div>
-                                            <span>Read me</span>
-                                        </div>
-                                        <div>
-                                            <span>{blog.publish_date}</span>
-                                        </div>
-                                    </div>
-                                </div>
+                            <img
+                                src={
+                                    blog.thumbnail_image
+                                        ? blog.thumbnail_image
+                                        : book
+                                }
+                                alt={blog.all_text}
                                 
-                            </Link>
-                             )}
+                            />
+
+                            <div className="dev-data-span-card-dev">
+                                <span> {blog.tags}</span>
+                            </div>
+
+                            <div className="read-section-date-section">
+                                <div>
+                                    <span>Read me</span>
+                                </div>
+                                <div>
+                                    <span>{blog.publish_date}</span>
+                                </div>
+                            </div>
                         </div>
-                    ))}
-
-
-                    
+                        
+                    </Link>
+                     )}
                 </div>
+            ))}
 
-                {/* <div className="pagination-blogs-page">
-                    {prevPageUrl && (
-                        <button onClick={handlePrevPage}>
-                            &laquo; Previous
-                        </button>
-                    )}
 
-                    {Array.from({ length: totalPages }, (_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => handlePaginationClick(index + 1)}
-                            className={
-                                currentPage === index + 1 ? "active" : ""
-                            }
-                        >
-                            {index + 1}
-                        </button>
-                    ))}
 
-                    {nextPageUrl && (
-                        <button onClick={handleNextPage}>Next &raquo;</button>
-                    )}
-                </div> */}
 
-                <div className="pagination-blogs-page">
-                    <button onClick={handlePrevPage} disabled={!prevPageUrl}>
-                        &laquo; Pre
-                    </button>
+            
+        </div>
 
-                    {Array.from({ length: totalPages }, (_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => handlePaginationClick(index + 1)}
-                            className={
-                                currentPage === index + 1 ? "active" : ""
-                            }
-                        >
-                            {currentPage}
-                        </button>
-                    ))}
+        {/* <div className="pagination-blogs-page">
+            {prevPageUrl && (
+                <button onClick={handlePrevPage}>
+                    &laquo; Previous
+                </button>
+            )}
 
-                    <button onClick={handleNextPage} disabled={!nextPageUrl}>
-                        Nxt &raquo;
-                    </button>
+            {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                    key={index}
+                    onClick={() => handlePaginationClick(index + 1)}
+                    className={
+                        currentPage === index + 1 ? "active" : ""
+                    }
+                >
+                    {index + 1}
+                </button>
+            ))}
 
-                    {isLoading && <div className="loader">Loading...</div>}
-                </div>
-            </div>
+            {nextPageUrl && (
+                <button onClick={handleNextPage}>Next &raquo;</button>
+            )}
+        </div> */}
+
+        <div className="pagination-blogs-page">
+            {/* <button onClick={handlePrevPage} disabled={!prevPageUrl}>
+                &laquo; Pre
+            </button>
+
+            {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                    key={index}
+                    onClick={() => handlePaginationClick(index + 1)}
+                    className={
+                        currentPage === index + 1 ? "active" : ""
+                    }
+                >
+                    {currentPage}
+                </button>
+            ))}
+
+            <button onClick={handleNextPage} disabled={!nextPageUrl}>
+                Nxt &raquo;
+            </button> */}
+                  <div>    
+        <Stack spacing={2}>
+      <Pagination
+        count={10}
+        page={currentPage}
+        onChange={handlePageChange}
+      />
+    </Stack>
+    </div>
+            {isLoading && <div className="loader">Loading...</div>}
+        </div>
+    
+    </div>
+    )}
+          
+           
         </div>
     );
 };

@@ -49,7 +49,7 @@ const Blog = () => {
     console.log("blogslug", blogslug);
 
     useEffect(() => {
-        setIsLoading(true);
+      
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
                 console.log("slugggggg", blogslug);
@@ -118,44 +118,14 @@ const Blog = () => {
         setIsLoading(false);
     };
 
-    const MAX_CONTENT_WORDS = 500; // Maximum number of words before inserting the additional image
-    const IMAGE_AFTER_WORDS = 500; // Number of words after which to insert the additional image
-    const IMAGE_URL = blogdteails.primary_image; // URL of the additional image
 
-    const insertImageAfterWords = (content) => {
-        const words = content.split(" ");
-        const wordCount = words.length;
-
-        if (wordCount <= MAX_CONTENT_WORDS) {
-            return content;
-        }
-
-        // Insert the image after the specified number of words
-        words.splice(
-            IMAGE_AFTER_WORDS,
-            0,
-            `<img src="${IMAGE_URL}" alt="Additional Image" />`
-        );
-
-        return words.join(" ");
-    };
     if (isLoading) {
-        return <LoaderComponent />; // Render the loader component if isLoading is true
+        return <LoaderComponent />; 
       }
-    const addImageAfter500Words = (content) => {
-        const words = content.split(" ");
-        const wordCount = words.length;
-        const index = 500 < wordCount ? 500 : wordCount;
-        const first500Words = words.slice(0, index).join(" ");
-        const remainingContent = words.slice(index).join(" ");
-        return (
-            <>
-                <div dangerouslySetInnerHTML={{ __html: first500Words }} />
-                {blogdetails_myimage}
-                <div dangerouslySetInnerHTML={{ __html: remainingContent }} />
-            </>
-        );
-    };
+  
+
+
+
     return (
         <div>
             <>
@@ -208,27 +178,15 @@ const Blog = () => {
                                                 <span>
                                                     <span
                                                         style={{
-                                                            backgroundColor:
-                                                                "#ffff00",
+                                                         
                                                             padding: "3px",
                                                             borderRadius: "5px",
-                                                            color: "black",
+                                                            color: "whit",
                                                         }}
                                                     >
-                                                        Blog
+                                                        Blog /
                                                     </span>{" "}
-                                                    <span
-                                                        style={{
-                                                            backgroundColor:
-                                                                "#ffff00",
-                                                            padding: "3px",
-                                                            borderRadius: "5px",
-                                                            color: "black",
-                                                        }}
-                                                    >
-                                                        {" "}
-                                                        Blog
-                                                    </span>
+                                               
                                                     Blog Name
                                                 </span>
                                             </div>
@@ -635,6 +593,7 @@ const Blog = () => {
                                         </div>
                                     </div>
                                     <div className="col-md-9 col-sm-10">
+           
                                         <div className="card-dev-container-mobile-space-section-age-cart">
                                             <div className="row">
                                                 {blogs.map((item) => (

@@ -211,7 +211,7 @@ const Router = () => {
                
             ),
         },{
-            path: "/blog-lending-page",
+            path: "/blogs",
             element: (
              
                     <Suspense fallback={<Loader />}>
