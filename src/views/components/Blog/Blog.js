@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import policyimage from "@images/Policy/polict-cart-comp.png";
 import TopBar from "../TopBar/TopBar";
+import DOMPurify from "dompurify"; // External library for sanitizing HTML
+
 import {
     getBlogsPagesApi,
     blogSlugApiblogDetails,
@@ -49,7 +51,6 @@ const Blog = () => {
     console.log("blogslug", blogslug);
 
     useEffect(() => {
-      
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
                 console.log("slugggggg", blogslug);
@@ -118,13 +119,9 @@ const Blog = () => {
         setIsLoading(false);
     };
 
-
     if (isLoading) {
-        return <LoaderComponent />; 
-      }
-  
-
-
+        return <LoaderComponent />;
+    }
 
     return (
         <div>
@@ -178,7 +175,6 @@ const Blog = () => {
                                                 <span>
                                                     <span
                                                         style={{
-                                                         
                                                             padding: "3px",
                                                             borderRadius: "5px",
                                                             color: "whit",
@@ -186,7 +182,6 @@ const Blog = () => {
                                                     >
                                                         Blog /
                                                     </span>{" "}
-                                               
                                                     Blog Name
                                                 </span>
                                             </div>
@@ -367,25 +362,51 @@ const Blog = () => {
 
                                     <div className="col-md-8">
                                         <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
-                                            <div
-                                                className="content-image-data-paragrap"
-                                                // dangerouslySetInnerHTML={{
-                                                // __html: showMore
-                                                //     ? blogdteails.content
-                                                //     : blogdteails.content.substring(0, 3000) + "...",
-                                                // }}
-
-                                                dangerouslySetInnerHTML={{
-                                                    __html: blogdteails.content,
-                                                }}
-                                            />
+                                            <div className="blog-dynamic-style-heading-data">
+                                                {blogdteails.content && (
+                                                    <>
+                                                        <div
+                                                            dangerouslySetInnerHTML={{
+                                                                __html:
+                                                                    blogdteails.content.substring(
+                                                                        0,
+                                                                        700
+                                                                    ) + "...",
+                                                            }}
+                                                        />
+                                                        {blogdteails.content
+                                                            .length > 700 && (
+                                                            <div className="image-secondry-image">
+                                                                =
+                                                                <img
+                                                                    src={
+                                                                        blogdteails.secondary_image
+                                                                            ? blogdteails.secondary_image
+                                                                            : meetingset
+                                                                    }
+                                                                    alt={
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                />
+                                                                <div
+                                                                    dangerouslySetInnerHTML={{
+                                                                        __html: blogdteails.content.substring(
+                                                                            700
+                                                                        ),
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </div>
 
                                             {/* <div
-  className="content-image-data-paragrap"
-  dangerouslySetInnerHTML={{
-    __html: insertImageAfterWords(blogdteails.content),
-  }}
-/> */}
+                                                className="content-image-data-paragrap"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: insertImageAfterWords(blogdteails.content),
+                                                }}
+                                                /> */}
 
                                             {/* {!showMore && (
                                                     <button
@@ -593,7 +614,6 @@ const Blog = () => {
                                         </div>
                                     </div>
                                     <div className="col-md-9 col-sm-10">
-           
                                         <div className="card-dev-container-mobile-space-section-age-cart">
                                             <div className="row">
                                                 {blogs.map((item) => (
@@ -633,7 +653,7 @@ const Blog = () => {
                                                                 <div className="blog-post-paragraph-tag">
                                                                     <span>
                                                                         {
-                                                                            item.meta_description
+                                                                            item.tags
                                                                         }
                                                                     </span>
                                                                 </div>
