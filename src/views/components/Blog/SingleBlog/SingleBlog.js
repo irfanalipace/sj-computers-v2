@@ -94,6 +94,7 @@ const SingleBlog = () => {
     //     return <LoaderComponent />; // Render the loader component if isLoading is true
     //   }
 
+    
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
