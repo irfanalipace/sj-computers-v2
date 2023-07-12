@@ -339,8 +339,19 @@ color: #DDDDDD;
 
 .dive-reight-border{
     border-right: 1px solid white;
+    margin-bottom: 15px;
    
-}.dev-left-blog-p {
+}
+.image-secondry-image img {
+    margin-top: 12px;
+    height: 500px;
+    width: 859px;
+    max-width: 100%;
+    margin-bottom: 12px;
+}
+
+
+.dev-left-blog-p {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -370,7 +381,7 @@ color: #DDDDDD;
     line-height: 12px;
     color: #DDDDDD;
     top: 03;
-    margin-top: 70px;
+    margin-top: 94px;
 }
 .background-image-lin-dve img {
     width: 1141px;

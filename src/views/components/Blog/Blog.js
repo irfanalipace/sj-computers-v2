@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import policyimage from "@images/Policy/polict-cart-comp.png";
 import TopBar from "../TopBar/TopBar";
+import DOMPurify from "dompurify"; // External library for sanitizing HTML
+
 import {
     getBlogsPagesApi,
     blogSlugApiblogDetails,
@@ -30,6 +32,7 @@ import meetingset3 from "@images/blog/videoimagemeeting3.png";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
+import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 const HeadereLinks = [
     { path: "/", title: "About Us" },
     { path: "/", title: "What We Do?" },
@@ -76,8 +79,6 @@ const Blog = () => {
         setIsLoading(true);
         getBlogsHeaderPagesApi(currentPage, itemsPerPage)
             .then((response) => {
-                console.log(response, 'lnffffffff"');
-
                 if (response.data && response.data?.data.length > 0) {
                     setBlogs(response.data?.data);
                     setPrevPageUrl(response.data?.prev_page_url);
@@ -118,27 +119,9 @@ const Blog = () => {
         setIsLoading(false);
     };
 
-    const MAX_CONTENT_WORDS = 500; // Maximum number of words before inserting the additional image
-    const IMAGE_AFTER_WORDS = 500; // Number of words after which to insert the additional image
-    const IMAGE_URL = blogdteails.primary_image; // URL of the additional image
-
-    const insertImageAfterWords = (content) => {
-        const words = content.split(" ");
-        const wordCount = words.length;
-
-        if (wordCount <= MAX_CONTENT_WORDS) {
-            return content;
-        }
-
-        // Insert the image after the specified number of words
-        words.splice(
-            IMAGE_AFTER_WORDS,
-            0,
-            `<img src="${IMAGE_URL}" alt="Additional Image" />`
-        );
-
-        return words.join(" ");
-    };
+    if (isLoading) {
+        return <LoaderComponent />;
+    }
 
     return (
         <div>
@@ -192,27 +175,13 @@ const Blog = () => {
                                                 <span>
                                                     <span
                                                         style={{
-                                                            backgroundColor:
-                                                                "#ffff00",
                                                             padding: "3px",
                                                             borderRadius: "5px",
-                                                            color: "black",
+                                                            color: "whit",
                                                         }}
                                                     >
-                                                        Blog
+                                                        Blog /
                                                     </span>{" "}
-                                                    <span
-                                                        style={{
-                                                            backgroundColor:
-                                                                "#ffff00",
-                                                            padding: "3px",
-                                                            borderRadius: "5px",
-                                                            color: "black",
-                                                        }}
-                                                    >
-                                                        {" "}
-                                                        Blog
-                                                    </span>
                                                     Blog Name
                                                 </span>
                                             </div>
@@ -393,24 +362,51 @@ const Blog = () => {
 
                                     <div className="col-md-8">
                                         <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
-                                            <div
-                                                className="content-image-data-paragrap"
-                                                // dangerouslySetInnerHTML={{
-                                                // __html: showMore
-                                                //     ? blogdteails.content
-                                                //     : blogdteails.content.substring(0, 3000) + "...",
-                                                // }}
+                                            <div className="blog-dynamic-style-heading-data">
+                                                {blogdteails.content && (
+                                                    <>
+                                                        <div
+                                                            dangerouslySetInnerHTML={{
+                                                                __html:
+                                                                    blogdteails.content.substring(
+                                                                        0,
+                                                                        700
+                                                                    ) + "...",
+                                                            }}
+                                                        />
+                                                        {blogdteails.content
+                                                            .length > 700 && (
+                                                            <div className="image-secondry-image">
+                                                                =
+                                                                <img
+                                                                    src={
+                                                                        blogdteails.secondary_image
+                                                                            ? blogdteails.secondary_image
+                                                                            : meetingset
+                                                                    }
+                                                                    alt={
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                />
+                                                                <div
+                                                                    dangerouslySetInnerHTML={{
+                                                                        __html: blogdteails.content.substring(
+                                                                            700
+                                                                        ),
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </div>
 
-                                                dangerouslySetInnerHTML={{
-                                                    __html: blogdteails.content,
-                                                }}
-                                            />
                                             {/* <div
-  className="content-image-data-paragrap"
-  dangerouslySetInnerHTML={{
-    __html: insertImageAfterWords(blogdteails.content),
-  }}
-/> */}
+                                                className="content-image-data-paragrap"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: insertImageAfterWords(blogdteails.content),
+                                                }}
+                                                /> */}
 
                                             {/* {!showMore && (
                                                     <button
@@ -430,6 +426,18 @@ const Blog = () => {
                                                 __html: blogdteails.content.substring(3000),
                                                 }}
                                             />  */}
+                                                {/* <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
+  __html: showMore
+    ? blogdteails.content
+    : (blogdteails.content.length > 3000 ? blogdteails.content.substring(0, 3000) + "..." : blogdteails.content)
+}} />
+
+{blogdteails.content.length > 3000 && !showMore &&
+  <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
+    __html: blogdteails.content.substring(3000)
+  }} />
+}
+{console.log(blogdteails.content,'blogs of the dta')} */}
                                             </div>
                                         </div>
                                         {/* <div className="image-for-meeting2-section">
@@ -521,7 +529,7 @@ const Blog = () => {
                                         <div className="sj-left-dev-set-data-from-section">
                                             <span>More from SJ</span>
                                             <div className="pagination-blogs-page">
-                                                <button
+                                                {/* <button
                                                     onClick={handlePrevPage}
                                                 >
                                                     &laquo; Pre
@@ -551,6 +559,48 @@ const Blog = () => {
 
                                                 <button
                                                     onClick={handleNextPage}
+                                                >
+                                                    Nxt &raquo;
+                                                </button>
+
+                                                {isLoading && (
+                                                    <div className="loader">
+                                                        Loading...
+                                                    </div>
+                                                )} */}
+
+                                                <button
+                                                    onClick={handlePrevPage}
+                                                    disabled={!prevPageUrl}
+                                                >
+                                                    &laquo; Pre
+                                                </button>
+
+                                                {Array.from(
+                                                    { length: totalPages },
+                                                    (_, index) => (
+                                                        <button
+                                                            key={index}
+                                                            onClick={() =>
+                                                                handlePaginationClick(
+                                                                    index + 1
+                                                                )
+                                                            }
+                                                            className={
+                                                                currentPage ===
+                                                                index + 1
+                                                                    ? "active"
+                                                                    : ""
+                                                            }
+                                                        >
+                                                            {currentPage}
+                                                        </button>
+                                                    )
+                                                )}
+
+                                                <button
+                                                    onClick={handleNextPage}
+                                                    disabled={!nextPageUrl}
                                                 >
                                                     Nxt &raquo;
                                                 </button>
@@ -603,7 +653,7 @@ const Blog = () => {
                                                                 <div className="blog-post-paragraph-tag">
                                                                     <span>
                                                                         {
-                                                                            item.meta_description
+                                                                            item.tags
                                                                         }
                                                                     </span>
                                                                 </div>
