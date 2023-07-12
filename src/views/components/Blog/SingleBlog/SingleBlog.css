@@ -248,6 +248,12 @@ line-height: 144%;
 
 color: #333333;
 }
+
+.pagination-blogs-page.css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    background-color: rgb(0 0 0 / 20%) !important;
+}
+
+
 .box-with-shadow {
     left: 0;
     box-shadow: 0px 4px 1px 0px rgba(0, 0, 0, 0.2);

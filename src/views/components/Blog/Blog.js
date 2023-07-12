@@ -119,9 +119,9 @@ const Blog = () => {
         setIsLoading(false);
     };
 
-    if (isLoading) {
-        return <LoaderComponent />;
-    }
+    // if (isLoading) {
+    //     return <LoaderComponent />;
+    // }
 
     return (
         <div>
