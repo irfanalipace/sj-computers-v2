@@ -130,30 +130,26 @@ const SingleBlog = () => {
  const [singleblog, setSingle]=useState("")
 
     useEffect(() => {
-        setIsLoading(true);
+       
         getBlogsPagesApi(currentPage, itemsPerPage)
           .then((response) => {
-            console.log(response.data?.meta_title, '22222222"');
+       
       
             if (response.data && response.data?.data.length > 0) {
               const singleBlog = response.data?.data[0]; // Extract the first blog from the array
               setSingle(singleBlog);
-              setPrevPageUrl(response.data?.prev_page_url);
-              setNextPageUrl(response.data?.next_page_url);
+             
             } else {
-                setSingle(null); // No blog available
-              setPrevPageUrl(response.data?.prev_page_url);
-              setNextPageUrl(response.data?.next_page_url);
+                setSingle(''); // No blog available
+             
             }
           })
           .catch((error) => {
             console.error("API Error:", error);
-            setIsLoading(false);
+      
           })
-          .finally(() => {
-            setIsLoading(false);
-          });
-      }, [currentPage, itemsPerPage]);
+         
+      }, []);
       
 
     return (
@@ -339,6 +335,7 @@ const SingleBlog = () => {
                                     count={10}
                                     page={currentPage}
                                     onChange={handlePageChange}
+                                    
                                 />
                             </Stack>
                         </div>
