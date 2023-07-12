@@ -184,7 +184,8 @@ const Blog = () => {
                                                     >
                                                         Blogs /
                                                     </span>{" "}
-                                                    {blogslug}
+                                                    {/* {blogslug} */}
+                                                    Blog Name
                                                 </span>
                                             </div>
                                             <div className="dive-reight-border">
