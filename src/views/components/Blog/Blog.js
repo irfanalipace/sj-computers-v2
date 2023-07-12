@@ -180,9 +180,9 @@ const Blog = () => {
                                                             color: "whit",
                                                         }}
                                                     >
-                                                        Blog /
+                                                        Blogs /
                                                     </span>{" "}
-                                                    Blog Name
+                                                   {blogslug}
                                                 </span>
                                             </div>
                                             <div className="dive-reight-border">
@@ -388,6 +388,11 @@ const Blog = () => {
                                                                         blogdteails.all_text
                                                                     }
                                                                 />
+                                                                <div className="after-data-image-secoundry-data-image">
+                                                                    <span>
+                                                                        {blogdteails.all_text}
+                                                                    </span>
+                                                                </div>
                                                                 <div
                                                                     dangerouslySetInnerHTML={{
                                                                         __html: blogdteails.content.substring(

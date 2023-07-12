@@ -349,8 +349,12 @@ color: #DDDDDD;
     max-width: 100%;
     margin-bottom: 12px;
 }
-
-
+.after-data-image-secoundry-data-image span{
+font-size: 12px;
+}
+.after-data-image-secoundry-data-image{
+    margin-bottom: 12px;
+}
 .dev-left-blog-p {
     font-family: 'Inter';
     font-style: normal;
