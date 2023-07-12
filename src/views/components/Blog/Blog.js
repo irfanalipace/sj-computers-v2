@@ -296,6 +296,7 @@ const Blog = () => {
                                                                     {
                                                                         blogdteails.all_text
                                                                     }
+                                                                    here is all electronics products
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -325,6 +326,7 @@ const Blog = () => {
                                                                     {
                                                                         blogdteails.all_text
                                                                     }
+                                                                    here is all electronics products
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -354,6 +356,7 @@ const Blog = () => {
                                                                     {
                                                                         blogdteails.all_text
                                                                     }
+                                                                    here is all electronics products
                                                                 </span>
                                                             </div>
                                                         </div>
