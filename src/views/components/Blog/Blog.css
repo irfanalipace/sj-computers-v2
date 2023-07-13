@@ -509,10 +509,6 @@ margin-top: 34px;
     width: 262px;
     height: 366px;
     margin-bottom: 12px;
-    left: 0px;
-   
-    top: 0px;
-  
     background: rgba(49, 130, 67, 0.1);
     
     /* position: fixed;
@@ -521,6 +517,8 @@ margin-top: 34px;
     /* margin-left: 100px; */
     
 }
+
+
 .blog-dynamic-style-heading-data h2 strong{ 
 font-weight: bold;
 }
