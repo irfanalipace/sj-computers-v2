@@ -6,7 +6,7 @@ import { Grid } from "@material-ui/core";
 import policyimage from "@images/Policy/polict-cart-comp.png";
 import TopBar from "../TopBar/TopBar";
 import DOMPurify from "dompurify"; // External library for sanitizing HTML
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
     getBlogsPagesApi,
@@ -36,6 +36,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
+import { useRef } from "react";
 const HeadereLinks = [
     { path: "/", title: "About Us" },
     { path: "/", title: "What We Do?" },
@@ -46,6 +47,18 @@ const HeadereLinks = [
     { path: "/", title: "Subscribe" },
 ];
 const nonHeaderRoutes = [""];
+
+const useStyles = makeStyles((theme) => ({
+    stickyElement: {
+        position: "relative",
+    },
+    stickyContainer: {
+        position: "sticky",
+        top: 0,
+        zIndex: theme.zIndex.appBar,
+        // Additional styling as needed
+    },
+}));
 const Blog = () => {
     const [blogdteails, setBlogDetails] = useState("");
     console.log("blogdteails", blogdteails);
@@ -54,6 +67,7 @@ const Blog = () => {
     console.log("blogslug", blogslug);
 
     useEffect(() => {
+        setIsLoading(true);
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
                 console.log("slugggggg", blogslug);
@@ -79,7 +93,6 @@ const Blog = () => {
     const [nextPageUrl, setNextPageUrl] = useState(null);
 
     useEffect(() => {
-        setIsLoading(true);
         getBlogsHeaderPagesApi(currentPage, itemsPerPage)
             .then((response) => {
                 if (response.data && response.data?.data.length > 0) {
@@ -126,29 +139,67 @@ const Blog = () => {
     //     return <LoaderComponent />;
     // }
 
+    // useEffect(() => {
+    //     const blogContent = document.getElementById('blog-content');
+    //     const h2Tags = blogContent.getElementsByTagName('h2');
+
+    //    if (h2Tags.length > 0) {
+    //       const firstH2Tag = h2Tags[0];
+    //       const imgTag = document.createElement('img');
+    //       imgTag.src = blogdteails.secondary_image;
+    //       imgTag.alt = blogdteails.all_text;
+
+    //      firstH2Tag.insertAdjacentElement('afterend', imgTag);
+    //     }
+    //   }, [blogdteails]);
 
     useEffect(() => {
-        const blogContent = document.getElementById('blog-content');
-        const h2Tags = blogContent.getElementsByTagName('h2');
-    
-    
-    
-    
-       if (h2Tags.length > 0) {
-          const firstH2Tag = h2Tags[0];
-          const imgTag = document.createElement('img');
-          imgTag.src = blogdteails.secondary_image; 
-          imgTag.alt = blogdteails.all_text; 
-    
+        const blogContent = document.getElementById("blog-content");
+        const h2Tags = blogContent.getElementsByTagName("h2");
 
-         firstH2Tag.insertAdjacentElement('afterend', imgTag);
+        if (h2Tags.length > 0) {
+            const firstH2Tag = h2Tags[0];
+            const imgTag = document.createElement("img");
+            imgTag.src = blogdteails.secondary_image
+                ? blogdteails.secondary_image
+                : meetingimage;
+            imgTag.alt = blogdteails.all_text;
+
+            firstH2Tag.insertAdjacentElement("afterend", imgTag);
         }
-      }, [blogdteails]);
-    
+    }, [blogdteails]);
 
+    const classes = useStyles();
+    const stickyContainerRef = useRef(null);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const stickyContainer = stickyContainerRef.current;
+
+            if (stickyContainer) {
+                const rect = stickyContainer.getBoundingClientRect();
+                const isSticky = rect.top <= 0;
+
+                if (isSticky) {
+                    stickyContainer.classList.add(classes.stickyContainer);
+                } else {
+                    stickyContainer.classList.remove(classes.stickyContainer);
+                }
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [classes.stickyContainer]);
     return (
         <div>
-            <>
+
+
+
+                <>
                 <div>
                     <div>
                         <Helmet>
@@ -215,9 +266,18 @@ const Blog = () => {
                                                 </div>
                                                 <div className="date-blog-after-circle">
                                                     <span>
-                                                        {
-                                                            blogdteails.publish_date
-                                                        }
+                                                        {blogdteails.publish_date
+                                                            ? new Date(
+                                                                  blogdteails.publish_date
+                                                              ).toLocaleDateString(
+                                                                  "en-GB",
+                                                                  {
+                                                                      day: "2-digit",
+                                                                      month: "2-digit",
+                                                                      year: "numeric",
+                                                                  }
+                                                              )
+                                                            : null}
                                                     </span>
                                                 </div>
                                                 <div className="ul-item-blog-social-icon">
@@ -255,7 +315,7 @@ const Blog = () => {
                                     </div>
                                 </div>
                             </div>
-                           
+
                             <div className="container image-cainter-dev">
                                 <div className="row">
                                     <div className="col-12">
@@ -276,26 +336,16 @@ const Blog = () => {
                                         </div>
                                     </div>
                                 </div>
-                         </div>
-               
-                         {/* <div className="main-dev-card-deprt1">
-  <div className="fixed-element">
-    Fixed content
-
-  </div>
-  <div className="scrollable-area">
-    Content that will scroll within the container
-  </div>
-</div> */}
-
-
+                            </div>
 
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3">
-                            
-                                            <div className="main-dev-card-deprt ">
-                                              
+                                        <div className={classes.stickyElement}>
+                                            <div
+                                                className="main-dev-card-deprt"
+                                                ref={stickyContainerRef}
+                                            >
                                                 <div className="left-dev-span-stories">
                                                     <span>
                                                         STORIES WE THINK YOU’LL
@@ -308,7 +358,6 @@ const Blog = () => {
                                                 <div style={{ padding: "7px" }}>
                                                     <div className="row">
                                                         <div className="col-4">
-                                                       
                                                             <div className="them-stori-mage">
                                                                 <img
                                                                     src={
@@ -328,7 +377,6 @@ const Blog = () => {
                                                                     {
                                                                         blogdteails.all_text
                                                                     }
-                                                                    here is all electronics products
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -336,7 +384,6 @@ const Blog = () => {
                                                     <hr></hr>
                                                     <div className="row">
                                                         <div className="col-4">
-                                                          
                                                             <div className="them-stori-mage">
                                                                 <img
                                                                     src={
@@ -356,7 +403,6 @@ const Blog = () => {
                                                                     {
                                                                         blogdteails.all_text
                                                                     }
-                                                                    here is all electronics products
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -364,7 +410,6 @@ const Blog = () => {
                                                     <hr></hr>
                                                     <div className="row">
                                                         <div className="col-4">
-                                                            
                                                             <div className="them-stori-mage">
                                                                 <img
                                                                     src={
@@ -384,28 +429,25 @@ const Blog = () => {
                                                                     {
                                                                         blogdteails.all_text
                                                                     }
-                                                                    here is all electronics products
                                                                 </span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                </div>
-                                    
-
-
-                                     
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div className="col-md-8">
                                         <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
-                                        <div id="blog-content"
+                                            <div
+                                                id="blog-content"
                                                 dangerouslySetInnerHTML={{
-                                                __html: blogdteails.content
+                                                    __html: blogdteails.content,
                                                 }}
-                                            /> 
-                                        
-                                                {/* {blogdteails.content && (
+                                            />
+
+                                            {/* {blogdteails.content && (
                                                     <>
                                                         <div
                                                             dangerouslySetInnerHTML={{
@@ -447,7 +489,6 @@ const Blog = () => {
                                                         )}
                                                     </>
                                                 )} */}
-                                          
 
                                             {/* <div
                                                 className="content-image-data-paragrap"
@@ -703,7 +744,9 @@ const Blog = () => {
                     </div>
                 </div>
             </>
-            {/* )} */}
+            
+           
+
         </div>
     );
 };
