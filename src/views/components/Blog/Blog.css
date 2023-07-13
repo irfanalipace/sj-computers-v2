@@ -210,11 +210,6 @@ max-width: 100%;
 
 
 
-
-
-
-
-
 .hover-text-color-policy-comp {
   
     color: white !important;
@@ -285,9 +280,10 @@ div.sticky {
 #blog-content {
     margin-bottom: 20px;
 }
-#blog-content h2,h3,h4,h5 strong{
-   font-weight: bold;
-}
+#blog-content h1 strong, h2 strong, h3 strong, h4 strong, h5 strong {
+    font-weight: bold;
+  }
+  
 .after-data-image-secoundry-data-image span{
 font-size: 12px;
 }
@@ -504,24 +500,24 @@ margin-top: 34px;
 
 
 
-
-.main-dev-card-deprt {
-    width: 262px;
+  .main-dev-card-deprt {
+    /* width: 262px; */
     height: 366px;
     margin-bottom: 12px;
     background: rgba(49, 130, 67, 0.1);
-    
-    /* position: fixed;
-    z-index: 99;
-    margin-top: 100px; */
-    /* margin-left: 100px; */
-    
-}
+  
+  }
+  div.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 100px;
+    background-color: yellow;
+    padding: 50px;
+    font-size: 20px;
+  }
 
 
-.blog-dynamic-style-heading-data h2 strong{ 
-font-weight: bold;
-}
+ 
 
 
 .left-dev-span-stories {
