@@ -6,6 +6,7 @@ import { Grid } from "@material-ui/core";
 import policyimage from "@images/Policy/polict-cart-comp.png";
 import TopBar from "../TopBar/TopBar";
 import DOMPurify from "dompurify"; // External library for sanitizing HTML
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {
     getBlogsPagesApi,
@@ -125,6 +126,26 @@ const Blog = () => {
     //     return <LoaderComponent />;
     // }
 
+
+    useEffect(() => {
+        const blogContent = document.getElementById('blog-content');
+        const h2Tags = blogContent.getElementsByTagName('h2');
+    
+    
+    
+    
+       if (h2Tags.length > 0) {
+          const firstH2Tag = h2Tags[0];
+          const imgTag = document.createElement('img');
+          imgTag.src = blogdteails.secondary_image; 
+          imgTag.alt = blogdteails.all_text; 
+    
+
+         firstH2Tag.insertAdjacentElement('afterend', imgTag);
+        }
+      }, [blogdteails]);
+    
+
     return (
         <div>
             <>
@@ -234,7 +255,7 @@ const Blog = () => {
                                     </div>
                                 </div>
                             </div>
-
+                           
                             <div className="container image-cainter-dev">
                                 <div className="row">
                                     <div className="col-12">
@@ -255,13 +276,26 @@ const Blog = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                         </div>
+               
+                         {/* <div className="main-dev-card-deprt1">
+  <div className="fixed-element">
+    Fixed content
+
+  </div>
+  <div className="scrollable-area">
+    Content that will scroll within the container
+  </div>
+</div> */}
+
+
 
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3">
-                                        <div>
-                                            <div className="main-dev-card-deprt">
+                            
+                                            <div className="main-dev-card-deprt ">
+                                              
                                                 <div className="left-dev-span-stories">
                                                     <span>
                                                         STORIES WE THINK YOU’LL
@@ -274,9 +308,7 @@ const Blog = () => {
                                                 <div style={{ padding: "7px" }}>
                                                     <div className="row">
                                                         <div className="col-4">
-                                                            {/* <img
-                                                                src={smimage}
-                                                            /> */}
+                                                       
                                                             <div className="them-stori-mage">
                                                                 <img
                                                                     src={
@@ -296,6 +328,7 @@ const Blog = () => {
                                                                     {
                                                                         blogdteails.all_text
                                                                     }
+                                                                    here is all electronics products
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -303,9 +336,7 @@ const Blog = () => {
                                                     <hr></hr>
                                                     <div className="row">
                                                         <div className="col-4">
-                                                            {/* <img
-                                                                src={smimage}
-                                                            /> */}
+                                                          
                                                             <div className="them-stori-mage">
                                                                 <img
                                                                     src={
@@ -325,6 +356,7 @@ const Blog = () => {
                                                                     {
                                                                         blogdteails.all_text
                                                                     }
+                                                                    here is all electronics products
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -332,9 +364,7 @@ const Blog = () => {
                                                     <hr></hr>
                                                     <div className="row">
                                                         <div className="col-4">
-                                                            {/* <img
-                                                                src={smimage}
-                                                            /> */}
+                                                            
                                                             <div className="them-stori-mage">
                                                                 <img
                                                                     src={
@@ -354,31 +384,40 @@ const Blog = () => {
                                                                     {
                                                                         blogdteails.all_text
                                                                     }
+                                                                    here is all electronics products
                                                                 </span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                </div>
+                                    
+
+
+                                     
                                     </div>
 
                                     <div className="col-md-8">
                                         <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
-                                            <div className="blog-dynamic-style-heading-data">
-                                                {blogdteails.content && (
+                                        <div id="blog-content"
+                                                dangerouslySetInnerHTML={{
+                                                __html: blogdteails.content
+                                                }}
+                                            /> 
+                                        
+                                                {/* {blogdteails.content && (
                                                     <>
                                                         <div
                                                             dangerouslySetInnerHTML={{
                                                                 __html:
                                                                     blogdteails.content.substring(
                                                                         0,
-                                                                        700
+                                                                        600
                                                                     ) + "...",
                                                             }}
                                                         />
                                                         {blogdteails.content
-                                                            .length > 700 && (
+                                                            .length > 600 && (
                                                             <div className="image-secondry-image">
                                                                 <img
                                                                     src={
@@ -400,15 +439,15 @@ const Blog = () => {
                                                                 <div
                                                                     dangerouslySetInnerHTML={{
                                                                         __html: blogdteails.content.substring(
-                                                                            700
+                                                                            600
                                                                         ),
                                                                     }}
                                                                 />
                                                             </div>
                                                         )}
                                                     </>
-                                                )}
-                                            </div>
+                                                )} */}
+                                          
 
                                             {/* <div
                                                 className="content-image-data-paragrap"
@@ -531,52 +570,14 @@ const Blog = () => {
                             </div>
                         </div>
 
-                        <div style={{ background: "rgba(49, 130, 67, 0.1)" }}>
+                        {/* <div style={{ background: "rgba(49, 130, 67, 0.1)" }}>
                             <div className="container container-blog-data-footer">
                                 <div className="row">
                                     <div className="col-md-2">
                                         <div className="sj-left-dev-set-data-from-section">
                                             <span>More from SJ</span>
                                             <div className="pagination-blogs-page">
-                                                {/* <button
-                                                    onClick={handlePrevPage}
-                                                >
-                                                    &laquo; Pre
-                                                </button>
-
-                                                {Array.from(
-                                                    { length: totalPages },
-                                                    (_, index) => (
-                                                        <button
-                                                            key={index}
-                                                            onClick={() =>
-                                                                handlePaginationClick(
-                                                                    index + 1
-                                                                )
-                                                            }
-                                                            className={
-                                                                currentPage ===
-                                                                index + 1
-                                                                    ? "active"
-                                                                    : ""
-                                                            }
-                                                        >
-                                                            {index + 1}
-                                                        </button>
-                                                    )
-                                                )}
-
-                                                <button
-                                                    onClick={handleNextPage}
-                                                >
-                                                    Nxt &raquo;
-                                                </button>
-
-                                                {isLoading && (
-                                                    <div className="loader">
-                                                        Loading...
-                                                    </div>
-                                                )} */}
+                                         
 
                                                 <button
                                                     onClick={handlePrevPage}
@@ -698,7 +699,7 @@ const Blog = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </>

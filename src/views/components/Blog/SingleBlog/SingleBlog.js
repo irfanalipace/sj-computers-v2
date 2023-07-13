@@ -153,6 +153,11 @@ const SingleBlog = () => {
       }, []);
       
 
+
+
+
+
+      
     return (
         <div>
             <div className="mein-dev-single-page-cantainer">
@@ -160,9 +165,10 @@ const SingleBlog = () => {
                     <div className="col-12">
                         <div className="span-dev-page-text-page">
                             <span>
-                                Did you know? SJ Computer is the first, and
+                                {/* Did you know? SJ Computer is the first, and
                                 only, marketer to protuct customers in third
-                                party product liability cases
+                                party product liability cases */}
+                                {singleblog.title}
                             </span>
                         </div>
                     </div>
@@ -186,17 +192,23 @@ const SingleBlog = () => {
                                
                             </div>
                             <div className="mid-graph-pargarph-page-data">
-                                <span>{singleblog.title}</span>
+                                {/* <span>{singleblog.title}</span> */}
                             </div>
                             <div className="mid-graph-pargarph-page-datap-data blog-dynamic-style-heading-data1">
                     
                               
                                 <div className="content-image-data-paragrap"
-                                                dangerouslySetInnerHTML={{
-                                                __html: singleblog.content
-                                                }}
+                                                // dangerouslySetInnerHTML={{
+                                                // __html: singleblog.content
+                                                // }}
                                             /> 
-                                
+                                <span>Did you know? SJ Computer is the first, and
+                                only, marketer to protuct customers in third
+                                party product liability cases Did you know? SJ Computer is the first, and
+                                only, marketer to protuct customers in third
+                                party product liability cases Did you know? SJ Computer is the first, and
+                                only, marketer to protuct customers in third
+                                party product liability cases </span>
                             </div>
 
                             {/* <div>
