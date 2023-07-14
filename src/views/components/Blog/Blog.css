@@ -1,3 +1,27 @@
+#blog-content h1,
+#blog-content h2,
+#blog-content h3,
+#blog-content h4,
+#blog-content h5,
+#blog-content h6,
+#blog-content h1 *,
+#blog-content h2 *,
+#blog-content h3 *,
+#blog-content h4 *,
+#blog-content h5 *,
+#blog-content h6 * {
+    font-weight: bold;
+}
+
+
+
+.heading-data-title-image{
+    font-size: 28px ;
+}
+
+
+
+
 .policy-menu-item-list {
     display: flex;
     flex-wrap: wrap;
@@ -280,10 +304,15 @@ div.sticky {
 #blog-content {
     margin-bottom: 20px;
 }
-#blog-content h1 strong, h2 strong, h3 strong, h4 strong, h5 strong {
+/* #blog-content h1 strong, h2 strong, h3 strong, h4 strong, h5 strong {
     font-weight: bold;
   }
-  
+
+  #blog-content h2 span{
+    font-weight: bold;
+  } */
+
+
 .after-data-image-secoundry-data-image span{
 font-size: 12px;
 }
@@ -489,22 +518,6 @@ margin-top: 34px;
     }
   }
   
-
-
-
-
-
-  .container11 {
-    height: 400px;
-    overflow: auto;
-  }
-  
-  .sticky-element11 {
-    position: sticky;
-    top: 20px; /* Adjust this value as needed */
-    background-color: lightblue;
-    padding: 10px;
-  }
 
 
 
