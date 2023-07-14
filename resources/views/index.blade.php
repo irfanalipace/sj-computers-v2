@@ -7,7 +7,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href={{ asset('favicon.png') }} />
-    <!-- <link href={{ asset('/css/bootstrap.css') }}> -->
 
     <!-- Google Tag Manager -->
     <script>
@@ -54,7 +53,7 @@
             document.getElementsByTagName('head')[0].appendChild(script);
         }
     </script>
-    <script src={{ asset(mix('/js/main.js.gz')) }} onerror="loadFallback()"></script>
+    <script src={{ asset(mix('/js/main.js')) }} onerror="loadFallback()"></script>
 
 
 
