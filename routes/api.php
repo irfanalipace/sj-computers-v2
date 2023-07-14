@@ -124,6 +124,10 @@ Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])
 Route::get('system-pages/{key?}', [SystemPagesController::class, 'getPages'])->name('getPages');
 
 
+/*
+* Refund order
+*/
+Route::post('customer-email-verify',[AuthController::class,'verifyCustomerEmail'])->name('customer-email-verify');
 
 Route::middleware(['auth:api', 'verified'])->group(function () {
 
