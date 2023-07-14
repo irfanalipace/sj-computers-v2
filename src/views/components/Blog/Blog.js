@@ -56,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
         position: "sticky",
         top: 0,
         zIndex: theme.zIndex.appBar,
-     
     },
 }));
 const Blog = () => {
@@ -135,22 +134,19 @@ const Blog = () => {
         setIsLoading(false);
     };
 
-
     useEffect(() => {
-        const blogContent = document.getElementById('blog-content');
-        const h2Tags = blogContent.getElementsByTagName('h2');
+        const blogContent = document.getElementById("blog-content");
+        const h2Tags = blogContent.getElementsByTagName("h2");
 
-       if (h2Tags.length > 0) {
-          const firstH2Tag = h2Tags[0];
-          const imgTag = document.createElement('img');
-          imgTag.src = blogdteails.secondary_image;
-          imgTag.alt = blogdteails.all_text;
+        if (h2Tags.length > 0) {
+            const firstH2Tag = h2Tags[0];
+            const imgTag = document.createElement("img");
+            imgTag.src = blogdteails.secondary_image;
+            imgTag.alt = blogdteails.all_text;
 
-         firstH2Tag.insertAdjacentElement('afterend', imgTag);
+            firstH2Tag.insertAdjacentElement("afterend", imgTag);
         }
-      }, [blogdteails]);
-
-  
+    }, [blogdteails]);
 
     const classes = useStyles();
     const stickyContainerRef = useRef(null);
@@ -178,263 +174,280 @@ const Blog = () => {
         };
     }, [classes.stickyContainer]);
 
-
-
     return (
         <div>
-       
-                                                <>
-                                                <div>
-                                                    <div>
-                                                        <Helmet>
-                                                            <title>{blogdteails.meta_title}</title>
-                                
-                                                            <meta
-                                                                name="meta-description-meta-title"
-                                                                content={blogdteails.meta_description}
-                                                            />
-                                                        </Helmet>
-                                                        <div className="">
-                                                            <div className="row">
-                                                                <div>
-                                                                    <header className="topBar px-3 policy-header-topbar">
-                                                                        <div className="topBar-inner-policy">
-                                                                            <div className="menuBar-policy">
-                                                                                <ul className="text-decoration-none policy-menu-item-list">
-                                                                                    {HeadereLinks.map(
-                                                                                        (link, index) => (
-                                                                                            <li
-                                                                                                className="policy-listitem"
-                                                                                                key={index}
-                                                                                            >
-                                                                                                <Link
-                                                                                                    to={
-                                                                                                        link.path
-                                                                                                    }
-                                                                                                    className="text-decoration-none text-color hover-effect-sets-topbar hover-text-color-policy-comp"
-                                                                                                >
-                                                                                                    {link.title}
-                                                                                                </Link>
-                                                                                            </li>
-                                                                                        )
-                                                                                    )}
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                    </header>
-                                                                </div>
-                                                            </div>
-                                
-                                                            <div className="blog-background-color">
-                                                                <div className="container dev-container-side">
-                                                                    <div className="row">
-                                                                        <div className="col-md-2">
-                                                                            <div className="div-left-blog-text">
-                                                                                <span>
-                                                                                    <span
-                                                                                        style={{
-                                                                                            padding: "3px",
-                                                                                            borderRadius: "5px",
-                                                                                            color: "whit",
-                                                                                        }}
-                                                                                    >
-                                                                                        Blogs /
-                                                                                    </span>{" "}
-                                                                                    {/* {blogslug} */}
-                                                                                    Blog Name
-                                                                                </span>
-                                                                            </div>
-                                                                            <div className="dive-reight-border">
-                                                                                <div className="circle-dev-blog">
-                                                                                    <span>3 min</span>
-                                                                                </div>
-                                                                                <div className="date-blog-after-circle">
-                                                                                    <span>
-                                                                                        {blogdteails.publish_date
-                                                                                            ? new Date(
-                                                                                                  blogdteails.publish_date
-                                                                                              ).toLocaleDateString(
-                                                                                                  "en-US",
-                                                                                                  {
-                                                                                                      month: "2-digit",
-                                                                                                      day: "2-digit",
-                                                                                                      year: "numeric",
-                                                                                                  }
-                                                                                              )
-                                                                                            : null}
-                                                                                    </span>
-                                                                                </div>
-                                                                                <div className="ul-item-blog-social-icon">
-                                                                                    <a href="https://www.instagram.com/example">
-                                                                                        <FontAwesomeIcon
-                                                                                            icon={faInstagram}
-                                                                                        />
-                                                                                    </a>
-                                                                                    <a href="https://www.facebook.com/example">
-                                                                                        <FontAwesomeIcon
-                                                                                            icon={faFacebook}
-                                                                                        />
-                                                                                    </a>
-                                                                                    <a href="https://www.youtube.com/example">
-                                                                                        <FontAwesomeIcon
-                                                                                            icon={faYoutube}
-                                                                                        />
-                                                                                    </a>
-                                                                                    <a href="https://twitter.com/example">
-                                                                                        <FontAwesomeIcon
-                                                                                            icon={faTwitter}
-                                                                                        />
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="col-md-10">
-                                                                            <div className="dev-left-blog-p">
-                                                                                <h1 className="heading-data-title-image">{blogdteails.title}</h1>
-                                                                            </div>
-                                                                            <div className="div-left-blog-text-written">
-                                                                                <span>Written by SJ Staff</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                
-                                                            <div className="container image-cainter-dev">
-                                                                <div className="row">
-                                                                    <div className="col-12">
-                                                                        <div className="background-image-lin-dve">
-                                                                            {/* <img
+            <>
+                <div>
+                    <div>
+                        <Helmet>
+                            <title>{blogdteails.meta_title}</title>
+
+                            <meta
+                                name="meta-description-meta-title"
+                                content={blogdteails.meta_description}
+                            />
+                        </Helmet>
+                        <div className="">
+                            <div className="row">
+                                <div>
+                                    <header className="topBar px-3 policy-header-topbar">
+                                        <div className="topBar-inner-policy">
+                                            <div className="menuBar-policy">
+                                                <ul className="text-decoration-none policy-menu-item-list">
+                                                    {HeadereLinks.map(
+                                                        (link, index) => (
+                                                            <li
+                                                                className="policy-listitem"
+                                                                key={index}
+                                                            >
+                                                                <Link
+                                                                    to={
+                                                                        link.path
+                                                                    }
+                                                                    className="text-decoration-none text-color hover-effect-sets-topbar hover-text-color-policy-comp"
+                                                                >
+                                                                    {link.title}
+                                                                </Link>
+                                                            </li>
+                                                        )
+                                                    )}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </header>
+                                </div>
+                            </div>
+
+                            <div className="blog-background-color">
+                                <div className="container dev-container-side">
+                                    <div className="row">
+                                        <div className="col-md-2">
+                                            <div className="div-left-blog-text">
+                                                <span>
+                                                    <span
+                                                        style={{
+                                                            padding: "3px",
+                                                            borderRadius: "5px",
+                                                            color: "whit",
+                                                        }}
+                                                    >
+                                                        Blogs /
+                                                    </span>{" "}
+                                                    {/* {blogslug} */}
+                                                    Blog Name
+                                                </span>
+                                            </div>
+                                            <div className="dive-reight-border">
+                                                <div className="circle-dev-blog">
+                                                    <span>3 min</span>
+                                                </div>
+                                                <div className="date-blog-after-circle">
+                                                    <span>
+                                                        {blogdteails.publish_date
+                                                            ? new Date(
+                                                                  blogdteails.publish_date
+                                                              ).toLocaleDateString(
+                                                                  "en-US",
+                                                                  {
+                                                                      month: "2-digit",
+                                                                      day: "2-digit",
+                                                                      year: "numeric",
+                                                                  }
+                                                              )
+                                                            : null}
+                                                    </span>
+                                                </div>
+                                                <div className="ul-item-blog-social-icon">
+                                                    <a href="https://www.instagram.com/example">
+                                                        <FontAwesomeIcon
+                                                            icon={faInstagram}
+                                                        />
+                                                    </a>
+                                                    <a href="https://www.facebook.com/example">
+                                                        <FontAwesomeIcon
+                                                            icon={faFacebook}
+                                                        />
+                                                    </a>
+                                                    <a href="https://www.youtube.com/example">
+                                                        <FontAwesomeIcon
+                                                            icon={faYoutube}
+                                                        />
+                                                    </a>
+                                                    <a href="https://twitter.com/example">
+                                                        <FontAwesomeIcon
+                                                            icon={faTwitter}
+                                                        />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-10">
+                                            <div className="dev-left-blog-p">
+                                                <h1 className="heading-data-title-image">
+                                                    {blogdteails.title}
+                                                </h1>
+                                            </div>
+                                            <div className="div-left-blog-text-written">
+                                                <span>Written by SJ Staff</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="container image-cainter-dev">
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="background-image-lin-dve">
+                                            {/* <img
                                                                                 src={meetingimage}
                                                                                 alt="all_text"
                                                                             /> */}
-                                
-                                                                            <img
-                                                                                src={
-                                                                                    blogdteails.primary_image
-                                                                                        ? blogdteails.primary_image
-                                                                                        : meetingimage
-                                                                                }
-                                                                                alt={blogdteails.all_text}
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+
+                                            <img
+                                                src={
+                                                    blogdteails.primary_image
+                                                        ? blogdteails.primary_image
+                                                        : meetingimage
+                                                }
+                                                alt={blogdteails.all_text}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="container content-data-of-the-iamges-blogs">
+                                <div className="row">
+                                    <div className="col-md-3">
+                                        <div className={classes.stickyElement}>
+                                            <div
+                                                className="main-dev-card-deprt"
+                                                ref={stickyContainerRef}
+                                            >
+                                                <div className="left-dev-span-stories">
+                                                    <span>
+                                                        STORIES WE THINK YOU’LL
+                                                        LIKE
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <hr></hr>
+                                                </div>
+                                                <div style={{ padding: "7px" }}>
+                                                    <div className="row">
+                                                        <div className="col-4">
+                                                            <div className="them-stori-mage">
+                                                                <img
+                                                                    src={
+                                                                        blogdteails.thumbnail_image
+                                                                            ? blogdteails.thumbnail_image
+                                                                            : smimage
+                                                                    }
+                                                                    alt={
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                />
                                                             </div>
-                                                          
-                                                            <div className="container content-data-of-the-iamges-blogs">
-                                                                <div className="row">
-                                                                    <div className="col-md-3">
-                                                                        <div className={classes.stickyElement}>
-                                                                            <div
-                                                                                className="main-dev-card-deprt"
-                                                                                ref={stickyContainerRef}
-                                                                            >
-                                                                                <div className="left-dev-span-stories">
-                                                                                    <span>
-                                                                                        STORIES WE THINK YOU’LL
-                                                                                        LIKE
-                                                                                    </span>
-                                                                                </div>
-                                                                                <div>
-                                                                                    <hr></hr>
-                                                                                </div>
-                                                                                <div style={{ padding: "7px" }}>
-                                                                                    <div className="row">
-                                                                                        <div className="col-4">
-                                                                                            <div className="them-stori-mage">
-                                                                                                <img
-                                                                                                    src={
-                                                                                                        blogdteails.thumbnail_image
-                                                                                                            ? blogdteails.thumbnail_image
-                                                                                                            : smimage
-                                                                                                    }
-                                                                                                    alt={
-                                                                                                        blogdteails.all_text
-                                                                                                    }
-                                                                                                />
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div className="col-8">
-                                                                                            <div className="dev-span-section4-dev">
-                                                                                                <span>
-                                                                                                    {
-                                                                                                        blogdteails.all_text
-                                                                                                    }
-                                                                                                    principles by which we process your personal data, and mentions our responsibilities.
-                                                                                                </span>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <hr></hr>
-                                                                                    <div className="row">
-                                                                                        <div className="col-4">
-                                                                                            <div className="them-stori-mage">
-                                                                                                <img
-                                                                                                    src={
-                                                                                                        blogdteails.thumbnail_image
-                                                                                                            ? blogdteails.thumbnail_image
-                                                                                                            : smimage
-                                                                                                    }
-                                                                                                    alt={
-                                                                                                        blogdteails.all_text
-                                                                                                    }
-                                                                                                />
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div className="col-8">
-                                                                                            <div className="dev-span-section4-dev">
-                                                                                                <span>
-                                                                                                    {
-                                                                                                        blogdteails.all_text
-                                                                                                    }
-                                                                                                    principles by which we process your personal data, and mentions our responsibilities.
-                                                                                                </span>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <hr></hr>
-                                                                                    <div className="row">
-                                                                                        <div className="col-4">
-                                                                                            <div className="them-stori-mage">
-                                                                                                <img
-                                                                                                    src={
-                                                                                                        blogdteails.thumbnail_image
-                                                                                                            ? blogdteails.thumbnail_image
-                                                                                                            : smimage
-                                                                                                    }
-                                                                                                    alt={
-                                                                                                        blogdteails.all_text
-                                                                                                    }
-                                                                                                />
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div className="col-8">
-                                                                                            <div className="dev-span-section4-dev">
-                                                                                                <span>
-                                                                                                    {
-                                                                                                        blogdteails.all_text
-                                                                                                    }
-                                                                                                    principles by which we process your personal data, and mentions our responsibilities.
-                                                                                                </span>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                
-                                                                    <div className="col-md-8">
-                                                                        <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
-                                                                            <div
-                                                                                id="blog-content"
-                                                                                dangerouslySetInnerHTML={{
-                                                                                    __html: blogdteails.content,
-                                                                                }}
-                                                                            />
-                             
-                                                                            {/* {blogdteails.content && (
+                                                        </div>
+                                                        <div className="col-8">
+                                                            <div className="dev-span-section4-dev">
+                                                                <span>
+                                                                    {
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                    principles
+                                                                    by which we
+                                                                    process your
+                                                                    personal
+                                                                    data, and
+                                                                    mentions our
+                                                                    responsibilities.
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr></hr>
+                                                    <div className="row">
+                                                        <div className="col-4">
+                                                            <div className="them-stori-mage">
+                                                                <img
+                                                                    src={
+                                                                        blogdteails.thumbnail_image
+                                                                            ? blogdteails.thumbnail_image
+                                                                            : smimage
+                                                                    }
+                                                                    alt={
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-8">
+                                                            <div className="dev-span-section4-dev">
+                                                                <span>
+                                                                    {
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                    principles
+                                                                    by which we
+                                                                    process your
+                                                                    personal
+                                                                    data, and
+                                                                    mentions our
+                                                                    responsibilities.
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr></hr>
+                                                    <div className="row">
+                                                        <div className="col-4">
+                                                            <div className="them-stori-mage">
+                                                                <img
+                                                                    src={
+                                                                        blogdteails.thumbnail_image
+                                                                            ? blogdteails.thumbnail_image
+                                                                            : smimage
+                                                                    }
+                                                                    alt={
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-8">
+                                                            <div className="dev-span-section4-dev">
+                                                                <span>
+                                                                    {
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                    principles
+                                                                    by which we
+                                                                    process your
+                                                                    personal
+                                                                    data, and
+                                                                    mentions our
+                                                                    responsibilities.
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="col-md-8">
+                                        <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
+                                            <div
+                                                id="blog-content"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: blogdteails.content,
+                                                }}
+                                            />
+
+                                            {/* {blogdteails.content && (
                                                                                     <>
                                                                                         <div
                                                                                             dangerouslySetInnerHTML={{
@@ -476,15 +489,15 @@ const Blog = () => {
                                                                                         )}
                                                                                     </>
                                                                                 )} */}
-                                
-                                                                            {/* <div
+
+                                            {/* <div
                                                                                 className="content-image-data-paragrap"
                                                                                 dangerouslySetInnerHTML={{
                                                                                     __html: insertImageAfterWords(blogdteails.content),
                                                                                 }}
                                                                                 /> */}
-                                
-                                                                            {/* {!showMore && (
+
+                                            {/* {!showMore && (
                                                                                     <button
                                                                                         className="show-more-button"
                                                                                         onClick={toggleContent}
@@ -492,17 +505,17 @@ const Blog = () => {
                                                                                         Show More
                                                                                     </button>
                                                                                 )} */}
-                                                                            <div className="background-image-lin-dve">
-                                                                                {/* <img
+                                            <div className="background-image-lin-dve">
+                                                {/* <img
                                                                                     src={meetingset}
                                                                                     alt="Blog Image"
                                                                                 /> */}
-                                                                                {/* <div className="content-image-data-paragrap"
+                                                {/* <div className="content-image-data-paragrap"
                                                                                 dangerouslySetInnerHTML={{
                                                                                 __html: blogdteails.content.substring(3000),
                                                                                 }}
                                                                             />  */}
-                                                                                {/* <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
+                                                {/* <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
                                   __html: showMore
                                     ? blogdteails.content
                                     : (blogdteails.content.length > 3000 ? blogdteails.content.substring(0, 3000) + "..." : blogdteails.content)
@@ -514,9 +527,9 @@ const Blog = () => {
                                   }} />
                                 }
                                 {console.log(blogdteails.content,'blogs of the dta')} */}
-                                                                            </div>
-                                                                        </div>
-                                                                        {/* <div className="image-for-meeting2-section">
+                                            </div>
+                                        </div>
+                                        {/* <div className="image-for-meeting2-section">
                                                                             <img src={meetingset} />
                                 
                                                                             <img
@@ -526,10 +539,10 @@ const Blog = () => {
                                                                         />
                                                                          
                                                                         </div> */}
-                                                                        <span className="span-deve-loram-space">
-                                                                            {/* {blog.meta_description} */}
-                                                                        </span>
-                                                                        {/* <div className="dve-space-paragrapgh">
+                                        <span className="span-deve-loram-space">
+                                            {/* {blog.meta_description} */}
+                                        </span>
+                                        {/* <div className="dve-space-paragrapgh">
                                                                             <div className="blog-dynamic-style-heading-data">
                                                                             <div
                                                                                         dangerouslySetInnerHTML={{
@@ -558,8 +571,8 @@ const Blog = () => {
                                                                                 )}
                                                                             </div>
                                                                         </div> */}
-                                
-                                                                        {/* <div className="image-for-meeting2-section">
+
+                                        {/* <div className="image-for-meeting2-section">
                                                                             <img src={meetingset} />
                                 
                                                                             <img
@@ -593,12 +606,12 @@ const Blog = () => {
                                                                                 )}
                                                                             </div>
                                                                         </div> */}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                
-                                                        {/* <div style={{ background: "rgba(49, 130, 67, 0.1)" }}>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* <div style={{ background: "rgba(49, 130, 67, 0.1)" }}>
                                                             <div className="container container-blog-data-footer">
                                                                 <div className="row">
                                                                     <div className="col-md-2">
@@ -728,11 +741,9 @@ const Blog = () => {
                                                                 </div>
                                                             </div>
                                                         </div> */}
-                                                    </div>
-                                                </div>
-                                            </>
-                                  
-          
+                    </div>
+                </div>
+            </>
         </div>
     );
 };
