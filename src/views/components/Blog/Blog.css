@@ -291,13 +291,13 @@ div.sticky {
 #blog-content {
     margin-bottom: 20px;
 }
-/* #blog-content h1 strong, h2 strong, h3 strong, h4 strong, h5 strong {
+#blog-content h1 strong, h2 strong, h3 strong, h4 strong, h5 strong {
     font-weight: bold;
   }
 
   #blog-content h2 span{
     font-weight: bold;
-  } */
+  }
 
 .after-data-image-secoundry-data-image span {
     font-size: 12px;
