@@ -265,20 +265,16 @@ const Blog = () => {
                                                     <span>3 min</span>
                                                 </div>
                                                 <div className="date-blog-after-circle">
-                                                    <span>
-                                                        {blogdteails.publish_date
-                                                            ? new Date(
-                                                                  blogdteails.publish_date
-                                                              ).toLocaleDateString(
-                                                                  "en-GB",
-                                                                  {
-                                                                      day: "2-digit",
-                                                                      month: "2-digit",
-                                                                      year: "numeric",
-                                                                  }
-                                                              )
-                                                            : null}
-                                                    </span>
+                                                  <span>
+  {blogdteails.publish_date
+    ? new Date(blogdteails.publish_date).toLocaleDateString("en-US", {
+        month: "2-digit",
+        day: "2-digit",
+        year: "numeric",
+      })
+    : null}
+</span>
+
                                                 </div>
                                                 <div className="ul-item-blog-social-icon">
                                                     <a href="https://www.instagram.com/example">
