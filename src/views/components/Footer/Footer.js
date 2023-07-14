@@ -171,6 +171,14 @@ const Footer = () => {
                                                 Privacy Policy
                                             </Link>
                                         </li>
+                                        <li>
+                                            <Link
+                                                to="/refund-order"
+                                                className="herf-link text-decoration-none"
+                                            >
+                                                Refund Order
+                                            </Link>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div className="col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
@@ -180,9 +188,12 @@ const Footer = () => {
                                             Reach Us
                                         </h6>
                                         <div className="reach-us ">
-                                            <p className="text-uppercase herf-link  reach-us-paragraph-data-footer" style={{lineHeight:'17px'}}>
-                                                2817 Eagandale Blvd
-                                                Eagan, MN 55121.
+                                            <p
+                                                className="text-uppercase herf-link  reach-us-paragraph-data-footer"
+                                                style={{ lineHeight: "17px" }}
+                                            >
+                                                2817 Eagandale Blvd Eagan, MN
+                                                55121.
                                             </p>
                                             <p className="herf-link phonenumber-footer">
                                                 952-452-8884
