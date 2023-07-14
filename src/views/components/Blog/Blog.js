@@ -196,10 +196,7 @@ const Blog = () => {
     }, [classes.stickyContainer]);
     return (
         <div>
-
-
-
-                <>
+            <>
                 <div>
                     <div>
                         <Helmet>
@@ -270,10 +267,10 @@ const Blog = () => {
                                                             ? new Date(
                                                                   blogdteails.publish_date
                                                               ).toLocaleDateString(
-                                                                  "en-GB",
+                                                                  "en-US",
                                                                   {
-                                                                      day: "2-digit",
                                                                       month: "2-digit",
+                                                                      day: "2-digit",
                                                                       year: "numeric",
                                                                   }
                                                               )
@@ -337,7 +334,13 @@ const Blog = () => {
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="container11">
+    <div class="sticky-element11">
+      I am a sticky element!
+    </div>
+    
+     Place other content here 
+  </div>
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3">
@@ -744,9 +747,6 @@ const Blog = () => {
                     </div>
                 </div>
             </>
-            
-           
-
         </div>
     );
 };

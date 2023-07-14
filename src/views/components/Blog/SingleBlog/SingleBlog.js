@@ -142,10 +142,7 @@ const SingleBlog = () => {
                 <div className="container conatnier-dev-single-blog-dev">
                     <div className="col-12">
                         <div className="span-dev-page-text-page">
-                            <span>
-                            
-                                {singleblog.title}
-                            </span>
+                            <span>{singleblog.title}</span>
                         </div>
                     </div>
                 </div>
@@ -236,40 +233,36 @@ const SingleBlog = () => {
                     <div className="row">
                         {blogs.map((blog) => (
                             <div className="col-md-4" key={blog.id}>
-                             
-                                    <Link
-                                        to={`/${blog.slug}`}
-                                        className="text-decoration-none"
-                                    >
-                                        <div className="product-card">
-                                            {/* <img src={book} alt={blog.title} /> */}
+                                <Link
+                                    to={`/${blog.slug}`}
+                                    className="text-decoration-none"
+                                >
+                                    <div className="product-card">
+                                        {/* <img src={book} alt={blog.title} /> */}
 
-                                            <img
-                                                src={
-                                                    blog.thumbnail_image
-                                                        ? blog.thumbnail_image
-                                                        : book
-                                                }
-                                                alt={blog.all_text}
-                                            />
+                                        <img
+                                            src={
+                                                blog.thumbnail_image
+                                                    ? blog.thumbnail_image
+                                                    : book
+                                            }
+                                            alt={blog.all_text}
+                                        />
 
-                                            <div className="dev-data-span-card-dev">
-                                                <span> {blog.tags}</span>
+                                        <div className="dev-data-span-card-dev">
+                                            <span> {blog.tags}</span>
+                                        </div>
+
+                                        <div className="read-section-date-section">
+                                            <div>
+                                                <span>Read me</span>
                                             </div>
-
-                                            <div className="read-section-date-section">
-                                                <div>
-                                                    <span>Read me</span>
-                                                </div>
-                                                <div>
-                                                    <span>
-                                                        {blog.publish_date}
-                                                    </span>
-                                                </div>
+                                            <div>
+                                                <span>{blog.publish_date}</span>
                                             </div>
                                         </div>
-                                    </Link>
-                                
+                                    </div>
+                                </Link>
                             </div>
                         ))}
                     </div>
