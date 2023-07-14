@@ -36,6 +36,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
+import { useRef } from "react";
 const HeadereLinks = [
     { path: "/", title: "About Us" },
     { path: "/", title: "What We Do?" },
@@ -46,6 +47,18 @@ const HeadereLinks = [
     { path: "/", title: "Subscribe" },
 ];
 const nonHeaderRoutes = [""];
+
+const useStyles = makeStyles((theme) => ({
+    stickyElement: {
+        position: "relative",
+    },
+    stickyContainer: {
+        position: "sticky",
+        top: 0,
+        zIndex: theme.zIndex.appBar,
+        // Additional styling as needed
+    },
+}));
 const Blog = () => {
     const [blogdteails, setBlogDetails] = useState("");
     console.log("blogdteails", blogdteails);
@@ -54,6 +67,7 @@ const Blog = () => {
     console.log("blogslug", blogslug);
 
     useEffect(() => {
+        setIsLoading(true);
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
                 console.log("slugggggg", blogslug);
@@ -79,7 +93,6 @@ const Blog = () => {
     const [nextPageUrl, setNextPageUrl] = useState(null);
 
     useEffect(() => {
-        setIsLoading(true);
         getBlogsHeaderPagesApi(currentPage, itemsPerPage)
             .then((response) => {
                 if (response.data && response.data?.data.length > 0) {
@@ -126,6 +139,20 @@ const Blog = () => {
     //     return <LoaderComponent />;
     // }
 
+    // useEffect(() => {
+    //     const blogContent = document.getElementById('blog-content');
+    //     const h2Tags = blogContent.getElementsByTagName('h2');
+
+    //    if (h2Tags.length > 0) {
+    //       const firstH2Tag = h2Tags[0];
+    //       const imgTag = document.createElement('img');
+    //       imgTag.src = blogdteails.secondary_image;
+    //       imgTag.alt = blogdteails.all_text;
+
+    //      firstH2Tag.insertAdjacentElement('afterend', imgTag);
+    //     }
+    //   }, [blogdteails]);
+
     useEffect(() => {
         const blogContent = document.getElementById("blog-content");
         const h2Tags = blogContent.getElementsByTagName("h2");
@@ -133,13 +160,40 @@ const Blog = () => {
         if (h2Tags.length > 0) {
             const firstH2Tag = h2Tags[0];
             const imgTag = document.createElement("img");
-            imgTag.src = blogdteails.secondary_image;
+            imgTag.src = blogdteails.secondary_image
+                ? blogdteails.secondary_image
+                : meetingimage;
             imgTag.alt = blogdteails.all_text;
 
             firstH2Tag.insertAdjacentElement("afterend", imgTag);
         }
     }, [blogdteails]);
 
+    const classes = useStyles();
+    const stickyContainerRef = useRef(null);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const stickyContainer = stickyContainerRef.current;
+
+            if (stickyContainer) {
+                const rect = stickyContainer.getBoundingClientRect();
+                const isSticky = rect.top <= 0;
+
+                if (isSticky) {
+                    stickyContainer.classList.add(classes.stickyContainer);
+                } else {
+                    stickyContainer.classList.remove(classes.stickyContainer);
+                }
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [classes.stickyContainer]);
     return (
         <div>
             <>
@@ -209,9 +263,18 @@ const Blog = () => {
                                                 </div>
                                                 <div className="date-blog-after-circle">
                                                     <span>
-                                                        {
-                                                            blogdteails.publish_date
-                                                        }
+                                                        {blogdteails.publish_date
+                                                            ? new Date(
+                                                                  blogdteails.publish_date
+                                                              ).toLocaleDateString(
+                                                                  "en-GB",
+                                                                  {
+                                                                      day: "2-digit",
+                                                                      month: "2-digit",
+                                                                      year: "numeric",
+                                                                  }
+                                                              )
+                                                            : null}
                                                     </span>
                                                 </div>
                                                 <div className="ul-item-blog-social-icon">
@@ -272,112 +335,99 @@ const Blog = () => {
                                 </div>
                             </div>
 
-                            {/* <div className="main-dev-card-deprt1">
-  <div className="fixed-element">
-    Fixed content
-
-  </div>
-  <div className="scrollable-area">
-    Content that will scroll within the container
-  </div>
-</div> */}
-
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3">
-                                        <div className="main-dev-card-deprt ">
-                                            <div className="left-dev-span-stories">
-                                                <span>
-                                                    STORIES WE THINK YOU’LL LIKE
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <hr></hr>
-                                            </div>
-                                            <div style={{ padding: "7px" }}>
-                                                <div className="row">
-                                                    <div className="col-4">
-                                                        <div className="them-stori-mage">
-                                                            <img
-                                                                src={
-                                                                    blogdteails.thumbnail_image
-                                                                        ? blogdteails.thumbnail_image
-                                                                        : smimage
-                                                                }
-                                                                alt={
-                                                                    blogdteails.all_text
-                                                                }
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-8">
-                                                        <div className="dev-span-section4-dev">
-                                                            <span>
-                                                                {
-                                                                    blogdteails.all_text
-                                                                }
-                                                                here is all
-                                                                electronics
-                                                                products
-                                                            </span>
-                                                        </div>
-                                                    </div>
+                                        <div className={classes.stickyElement}>
+                                            <div
+                                                className="main-dev-card-deprt"
+                                                ref={stickyContainerRef}
+                                            >
+                                                <div className="left-dev-span-stories">
+                                                    <span>
+                                                        STORIES WE THINK YOU’LL
+                                                        LIKE
+                                                    </span>
                                                 </div>
-                                                <hr></hr>
-                                                <div className="row">
-                                                    <div className="col-4">
-                                                        <div className="them-stori-mage">
-                                                            <img
-                                                                src={
-                                                                    blogdteails.thumbnail_image
-                                                                        ? blogdteails.thumbnail_image
-                                                                        : smimage
-                                                                }
-                                                                alt={
-                                                                    blogdteails.all_text
-                                                                }
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-8">
-                                                        <div className="dev-span-section4-dev">
-                                                            <span>
-                                                                {
-                                                                    blogdteails.all_text
-                                                                }
-                                                                here is all
-                                                                electronics
-                                                                products
-                                                            </span>
-                                                        </div>
-                                                    </div>
+                                                <div>
+                                                    <hr></hr>
                                                 </div>
-                                                <hr></hr>
-                                                <div className="row">
-                                                    <div className="col-4">
-                                                        <div className="them-stori-mage">
-                                                            <img
-                                                                src={
-                                                                    blogdteails.thumbnail_image
-                                                                        ? blogdteails.thumbnail_image
-                                                                        : smimage
-                                                                }
-                                                                alt={
-                                                                    blogdteails.all_text
-                                                                }
-                                                            />
+                                                <div style={{ padding: "7px" }}>
+                                                    <div className="row">
+                                                        <div className="col-4">
+                                                            <div className="them-stori-mage">
+                                                                <img
+                                                                    src={
+                                                                        blogdteails.thumbnail_image
+                                                                            ? blogdteails.thumbnail_image
+                                                                            : smimage
+                                                                    }
+                                                                    alt={
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-8">
+                                                            <div className="dev-span-section4-dev">
+                                                                <span>
+                                                                    {
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div className="col-8">
-                                                        <div className="dev-span-section4-dev">
-                                                            <span>
-                                                                {
-                                                                    blogdteails.all_text
-                                                                }
-                                                                here is all
-                                                                electronics
-                                                                products
-                                                            </span>
+                                                    <hr></hr>
+                                                    <div className="row">
+                                                        <div className="col-4">
+                                                            <div className="them-stori-mage">
+                                                                <img
+                                                                    src={
+                                                                        blogdteails.thumbnail_image
+                                                                            ? blogdteails.thumbnail_image
+                                                                            : smimage
+                                                                    }
+                                                                    alt={
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-8">
+                                                            <div className="dev-span-section4-dev">
+                                                                <span>
+                                                                    {
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr></hr>
+                                                    <div className="row">
+                                                        <div className="col-4">
+                                                            <div className="them-stori-mage">
+                                                                <img
+                                                                    src={
+                                                                        blogdteails.thumbnail_image
+                                                                            ? blogdteails.thumbnail_image
+                                                                            : smimage
+                                                                    }
+                                                                    alt={
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-8">
+                                                            <div className="dev-span-section4-dev">
+                                                                <span>
+                                                                    {
+                                                                        blogdteails.all_text
+                                                                    }
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -691,7 +741,6 @@ const Blog = () => {
                     </div>
                 </div>
             </>
-            {/* )} */}
         </div>
     );
 };

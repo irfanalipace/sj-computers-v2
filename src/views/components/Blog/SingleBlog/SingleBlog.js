@@ -16,7 +16,10 @@ import laptopimg from "@images/blog/latopimage.png";
 import bloglaptop1 from "@images/blog/bookwithlaptop.png";
 import bloglaptop2 from "@images/blog/laptopwithbook2.png";
 import productviewblog from "@images/blog/typelaptop.png";
-import { getBlogsPagesApi,blogSlugApiblogDetails } from "../../../../core/api/blogs";
+import {
+    getBlogsPagesApi,
+    blogSlugApiblogDetails,
+} from "../../../../core/api/blogs";
 import meetingset from "@images/blog/meeting2image.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router-dom";
@@ -94,7 +97,6 @@ const SingleBlog = () => {
     //     return <LoaderComponent />; // Render the loader component if isLoading is true
     //   }
 
-    
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
@@ -104,8 +106,6 @@ const SingleBlog = () => {
     const handlePageChange = (event, page) => {
         setCurrentPage(page);
     };
-
-
 
     // const [blogdteails, setBlogDetails] = useState("");
     // useEffect(() => {
@@ -119,45 +119,23 @@ const SingleBlog = () => {
     //         });
     // }, [blogslug]);
 
-
-
-
-
-
-
-
-
-
- const [singleblog, setSingle]=useState("")
+    const [singleblog, setSingle] = useState("");
 
     useEffect(() => {
-       
         getBlogsPagesApi(currentPage, itemsPerPage)
-          .then((response) => {
-       
-      
-            if (response.data && response.data?.data.length > 0) {
-              const singleBlog = response.data?.data[0]; // Extract the first blog from the array
-              setSingle(singleBlog);
-             
-            } else {
-                setSingle(''); // No blog available
-             
-            }
-          })
-          .catch((error) => {
-            console.error("API Error:", error);
-      
-          })
-         
-      }, []);
-      
+            .then((response) => {
+                if (response.data && response.data?.data.length > 0) {
+                    const singleBlog = response.data?.data[0]; // Extract the first blog from the array
+                    setSingle(singleBlog);
+                } else {
+                    setSingle(""); // No blog available
+                }
+            })
+            .catch((error) => {
+                console.error("API Error:", error);
+            });
+    }, []);
 
-
-
-
-
-      
     return (
         <div>
             <div className="mein-dev-single-page-cantainer">
@@ -165,9 +143,7 @@ const SingleBlog = () => {
                     <div className="col-12">
                         <div className="span-dev-page-text-page">
                             <span>
-                                {/* Did you know? SJ Computer is the first, and
-                                only, marketer to protuct customers in third
-                                party product liability cases */}
+                            
                                 {singleblog.title}
                             </span>
                         </div>
@@ -189,26 +165,28 @@ const SingleBlog = () => {
                                     }
                                     alt={blogs.all_text}
                                 />
-                               
                             </div>
                             <div className="mid-graph-pargarph-page-data">
                                 {/* <span>{singleblog.title}</span> */}
                             </div>
                             <div className="mid-graph-pargarph-page-datap-data blog-dynamic-style-heading-data1">
-                    
-                              
-                                <div className="content-image-data-paragrap"
-                                                // dangerouslySetInnerHTML={{
-                                                // __html: singleblog.content
-                                                // }}
-                                            /> 
-                                <span>Did you know? SJ Computer is the first, and
-                                only, marketer to protuct customers in third
-                                party product liability cases Did you know? SJ Computer is the first, and
-                                only, marketer to protuct customers in third
-                                party product liability cases Did you know? SJ Computer is the first, and
-                                only, marketer to protuct customers in third
-                                party product liability cases </span>
+                                <div
+                                    className="content-image-data-paragrap"
+                                    // dangerouslySetInnerHTML={{
+                                    // __html: singleblog.content
+                                    // }}
+                                />
+                                <span>
+                                    Did you know? SJ Computer is the first, and
+                                    only, marketer to protuct customers in third
+                                    party product liability cases Did you know?
+                                    SJ Computer is the first, and only, marketer
+                                    to protuct customers in third party product
+                                    liability cases Did you know? SJ Computer is
+                                    the first, and only, marketer to protuct
+                                    customers in third party product liability
+                                    cases{" "}
+                                </span>
                             </div>
 
                             {/* <div>
@@ -258,9 +236,7 @@ const SingleBlog = () => {
                     <div className="row">
                         {blogs.map((blog) => (
                             <div className="col-md-4" key={blog.id}>
-                                {isLoading ? (
-                                    <LoaderComponent />
-                                ) : (
+                             
                                     <Link
                                         to={`/${blog.slug}`}
                                         className="text-decoration-none"
@@ -293,7 +269,7 @@ const SingleBlog = () => {
                                             </div>
                                         </div>
                                     </Link>
-                                )}
+                                
                             </div>
                         ))}
                     </div>
@@ -348,7 +324,6 @@ const SingleBlog = () => {
                                     count={10}
                                     page={currentPage}
                                     onChange={handlePageChange}
-                                    
                                 />
                             </Stack>
                         </div>
