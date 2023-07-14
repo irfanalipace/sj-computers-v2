@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
         position: "sticky",
         top: 0,
         zIndex: theme.zIndex.appBar,
-        // Additional styling as needed
+     
     },
 }));
 const Blog = () => {
@@ -135,39 +135,22 @@ const Blog = () => {
         setIsLoading(false);
     };
 
-    // if (isLoading) {
-    //     return <LoaderComponent />;
-    // }
-
-    // useEffect(() => {
-    //     const blogContent = document.getElementById('blog-content');
-    //     const h2Tags = blogContent.getElementsByTagName('h2');
-
-    //    if (h2Tags.length > 0) {
-    //       const firstH2Tag = h2Tags[0];
-    //       const imgTag = document.createElement('img');
-    //       imgTag.src = blogdteails.secondary_image;
-    //       imgTag.alt = blogdteails.all_text;
-
-    //      firstH2Tag.insertAdjacentElement('afterend', imgTag);
-    //     }
-    //   }, [blogdteails]);
 
     useEffect(() => {
-        const blogContent = document.getElementById("blog-content");
-        const h2Tags = blogContent.getElementsByTagName("h2");
+        const blogContent = document.getElementById('blog-content');
+        const h2Tags = blogContent.getElementsByTagName('h2');
 
-        if (h2Tags.length > 0) {
-            const firstH2Tag = h2Tags[0];
-            const imgTag = document.createElement("img");
-            imgTag.src = blogdteails.secondary_image
-                ? blogdteails.secondary_image
-                : meetingimage;
-            imgTag.alt = blogdteails.all_text;
+       if (h2Tags.length > 0) {
+          const firstH2Tag = h2Tags[0];
+          const imgTag = document.createElement('img');
+          imgTag.src = blogdteails.secondary_image;
+          imgTag.alt = blogdteails.all_text;
 
-            firstH2Tag.insertAdjacentElement("afterend", imgTag);
+         firstH2Tag.insertAdjacentElement('afterend', imgTag);
         }
-    }, [blogdteails]);
+      }, [blogdteails]);
+
+  
 
     const classes = useStyles();
     const stickyContainerRef = useRef(null);
@@ -194,9 +177,15 @@ const Blog = () => {
             window.removeEventListener("scroll", handleScroll);
         };
     }, [classes.stickyContainer]);
+
+
+
     return (
         <div>
-            <>
+
+
+
+                <>
                 <div>
                     <div>
                         <Helmet>
@@ -262,16 +251,20 @@ const Blog = () => {
                                                     <span>3 min</span>
                                                 </div>
                                                 <div className="date-blog-after-circle">
-                                                  <span>
-  {blogdteails.publish_date
-    ? new Date(blogdteails.publish_date).toLocaleDateString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
-        year: "numeric",
-      })
-    : null}
-</span>
-
+                                                    <span>
+                                                        {blogdteails.publish_date
+                                                            ? new Date(
+                                                                  blogdteails.publish_date
+                                                              ).toLocaleDateString(
+                                                                  "en-GB",
+                                                                  {
+                                                                      day: "2-digit",
+                                                                      month: "2-digit",
+                                                                      year: "numeric",
+                                                                  }
+                                                              )
+                                                            : null}
+                                                    </span>
                                                 </div>
                                                 <div className="ul-item-blog-social-icon">
                                                     <a href="https://www.instagram.com/example">
@@ -737,6 +730,9 @@ const Blog = () => {
                     </div>
                 </div>
             </>
+            
+           
+
         </div>
     );
 };
