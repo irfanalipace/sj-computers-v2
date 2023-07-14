@@ -196,10 +196,7 @@ const Blog = () => {
     }, [classes.stickyContainer]);
     return (
         <div>
-
-
-
-                <>
+            <>
                 <div>
                     <div>
                         <Helmet>
@@ -740,9 +737,6 @@ const Blog = () => {
                     </div>
                 </div>
             </>
-            
-           
-
         </div>
     );
 };
