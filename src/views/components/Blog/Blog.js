@@ -141,12 +141,43 @@ const Blog = () => {
         if (h2Tags.length > 0) {
             const firstH2Tag = h2Tags[0];
             const imgTag = document.createElement("img");
-            imgTag.src = blogdteails.secondary_image;
+            imgTag.src =   
+                blogdteails.secondary_image
+                    ? blogdteails.secondary_image
+                    : meetingimage
+            
+               
+               
+            console.log(blogdteails.secandary_image,'meeting-image')
             imgTag.alt = blogdteails.all_text;
 
             firstH2Tag.insertAdjacentElement("afterend", imgTag);
         }
     }, [blogdteails]);
+
+    // useEffect(() => {
+    //     const blogContent = document.getElementById("blog-content");
+    //     const h2Tags = blogContent.getElementsByTagName("h2");
+      
+    //     if (h2Tags.length > 0) {
+    //       const firstH2Tag = h2Tags[0];
+    //       if (blogdteails.secondary_image) {
+    //         const imgTag = document.createElement("img");
+    //         imgTag.src = blogdteails.secondary_image;
+    //         imgTag.alt = blogdteails.all_text;
+    //         firstH2Tag.insertAdjacentElement("afterend", imgTag);
+    //       } else {
+    //         const imgTags = firstH2Tag.nextElementSibling.getElementsByTagName("img");
+    //         for (let i = 0; i < imgTags.length; i++) {
+    //           imgTags[i].style.display = "none";
+    //         }
+    //       }
+    //     }
+    //   }, [blogdteails]);
+      
+      
+      
+      
 
     const classes = useStyles();
     const stickyContainerRef = useRef(null);
