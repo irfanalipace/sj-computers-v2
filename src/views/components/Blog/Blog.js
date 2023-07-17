@@ -469,7 +469,7 @@ const Blog = () => {
                                         </div>
                                     </div>
 
-                                    <div className="col-md-8">
+                                    <div className="col-md-7">
                                         <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
                                             <div
                                                 id="blog-content"

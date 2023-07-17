@@ -502,8 +502,9 @@ div.sticky {
 }
 
 .main-dev-card-deprt {
-    /* width: 262px; */
-    height: 366px;
+    margin-left: 29px;
+    width: 262px;
+    /* height: 366px; */
     margin-bottom: 12px;
     background: rgba(49, 130, 67, 0.1);
 }
