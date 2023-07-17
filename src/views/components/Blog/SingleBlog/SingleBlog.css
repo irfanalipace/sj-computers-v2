@@ -191,10 +191,11 @@
     margin-bottom: 29px;
    
 }
-.trending-blog-filter-data select{
-    box-shadow: 2px 0px 4px 1px;
+.trending-blog-filter-data select {
+    box-shadow: 0px 0px 1px 1px;
     border: none;
     height: 26px;
+    border-radius: 4px;
 }
 .treding-blog-sets span {
     font-family: "Inter";

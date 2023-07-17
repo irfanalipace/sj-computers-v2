@@ -36,7 +36,7 @@ const SingleBlog = () => {
     const [itemsPerPage] = useState(12);
     const [prevPageUrl, setPrevPageUrl] = useState(null);
     const [nextPageUrl, setNextPageUrl] = useState(null);
-
+    const [pageCount, setPageCount] = useState(0);
     const { blogslug } = useParams();
 
     console.log("sulg-single-page-data", blogslug);
@@ -66,6 +66,7 @@ const SingleBlog = () => {
                     setBlogs(response.data?.data);
                     setPrevPageUrl(response.data?.prev_page_url);
                     setNextPageUrl(response.data?.next_page_url);
+                    setPageCount(response.data?.last_page);
                 } else {
                     setBlogs([]);
                     setPrevPageUrl(response.data?.prev_page_url);
@@ -314,7 +315,7 @@ const SingleBlog = () => {
                         <div>
                             <Stack spacing={2}>
                                 <Pagination
-                                    count={10}
+                                    count={pageCount}
                                     page={currentPage}
                                     onChange={handlePageChange}
                                 />
