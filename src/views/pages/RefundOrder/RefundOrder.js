@@ -53,7 +53,7 @@ export default function RefundOrder() {
 
     const [orderType, setOrderType] = useState();
     const [InvoicesList, setInvoicesList] = useState([]);
-    const [setselectedOrder, setSetselectedOrder] = useState();
+    const [selectedOrder, setSelectedOrder] = useState();
 
     const setOrderTypeFunction = async () => {
         console.log("orderType: ", orderType);
@@ -65,8 +65,8 @@ export default function RefundOrder() {
 
     const handleListChange = (e, value) => {
         console.log("handleListChange value: ", value);
-        let response = dummyList.find((order) => order.id === value);
-        setselectedOrder(response);
+        let response = dummyList.find((order) => order.id === value) || {};
+        setSelectedOrder(response);
     };
 
     return (
@@ -111,11 +111,11 @@ export default function RefundOrder() {
                             <p>Select invoice for further proceeding.</p>
                             <div className="d-flex">
                                 <FormControl fullWidth>
-                                    <InputLabel id="order-refund-invoice-list">
+                                    <label id="order-refund-invoice-list">
                                         {orderType === ORDER_TYPE_ENUM.WEBSITE
                                             ? " Orders list"
                                             : " Invoices list"}
-                                    </InputLabel>
+                                    </label>
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
@@ -125,8 +125,8 @@ export default function RefundOrder() {
                                     >
                                         {dummyList.map((item) => (
                                             <>
-                                                <MenuItem value={item.id}>
-                                                    {item.name}
+                                                <MenuItem value={item?.id}>
+                                                    {item?.name}
                                                 </MenuItem>
                                             </>
                                         ))}
@@ -140,7 +140,7 @@ export default function RefundOrder() {
                             </div>
                         </>
                     )}
-                    {!!response.id && (
+                    {selectedOrder?.id && (
                         <>
                             <div className="order-details-container border">
                                 <h3>Order Details</h3>
@@ -149,24 +149,30 @@ export default function RefundOrder() {
                                         <tr>
                                             <th>
                                                 <div>Order Placed</div>
-                                                <div>{response.order_date}</div>
+                                                <div>
+                                                    {selectedOrder?.order_date}
+                                                </div>
                                             </th>
                                             <th>
                                                 <div>Total</div>
-                                                <div>{response.total}</div>
+                                                <div>
+                                                    {selectedOrder?.total}
+                                                </div>
                                             </th>
                                             <th>
                                                 <div>Ship To</div>
                                                 <div>
                                                     <span className="text-success">
-                                                        {response.ship_to}
+                                                        {selectedOrder?.ship_to}
                                                     </span>
                                                 </div>
                                             </th>
                                             <th>
                                                 <div>Order #</div>
                                                 <div>
-                                                    {response.order_number}
+                                                    {
+                                                        selectedOrder?.order_number
+                                                    }
                                                 </div>
                                             </th>
                                         </tr>
