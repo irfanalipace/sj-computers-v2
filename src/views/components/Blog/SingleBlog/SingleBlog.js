@@ -139,7 +139,7 @@ const SingleBlog = () => {
 
     return (
         <div>
-            <div className="mein-dev-single-page-cantainer">
+            {/* <div className="mein-dev-single-page-cantainer">
                 <div className="container conatnier-dev-single-blog-dev">
                     <div className="col-12">
                         <div className="span-dev-page-text-page">
@@ -147,7 +147,7 @@ const SingleBlog = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className="container">
                 <div className="row">
@@ -209,7 +209,7 @@ const SingleBlog = () => {
             <div className="container">
                 <div className="trending-blog-filter-data">
                     <div className="treding-blog-sets">
-                        <span> Trending Blogs</span>
+                        {/* <span> Trending Blogs</span> */}
                     </div>
                     <div className="dev-trending-data-image">
                         <select value={selectedFilter}>
@@ -245,7 +245,7 @@ const SingleBlog = () => {
                                             src={
                                                 blog.thumbnail_image
                                                     ? blog.thumbnail_image
-                                                    : book
+                                                    : "https://via.placeholder.com/400x400"
                                             }
                                             alt={blog.all_text}
                                         />
