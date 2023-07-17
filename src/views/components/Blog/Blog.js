@@ -144,7 +144,7 @@ const Blog = () => {
             imgTag.src =   
                 blogdteails.secondary_image
                     ? blogdteails.secondary_image
-                    : meetingimage
+                    :"https://via.placeholder.com/400x400"
             
                
                
@@ -339,7 +339,7 @@ const Blog = () => {
                                                 src={
                                                     blogdteails.primary_image
                                                         ? blogdteails.primary_image
-                                                        : meetingimage
+                                                        : "https://via.placeholder.com/400x400"
                                                 }
                                                 alt={blogdteails.all_text}
                                             />
