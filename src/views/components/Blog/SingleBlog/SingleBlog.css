@@ -88,6 +88,7 @@
     height: 354px;
     left: calc(50% - 494px / 2 - 49px);
     top: 326px;
+    margin-top: 18px;
 }
 .stories-data-effctive-blog span {
     font-family: "Inter";
