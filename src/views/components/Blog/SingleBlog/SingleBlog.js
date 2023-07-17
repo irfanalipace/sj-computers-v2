@@ -211,7 +211,7 @@ const SingleBlog = () => {
                     <div className="treding-blog-sets">
                         <span> Trending Blogs</span>
                     </div>
-                    <div>
+                    <div className="dev-trending-data-image">
                         <select value={selectedFilter}>
                             <option value="">Recent Blogs</option>
                             <option value="trending">Trending Blog</option>
