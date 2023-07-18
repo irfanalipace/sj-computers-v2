@@ -194,6 +194,10 @@ const Router = () => {
                 </Suspense>
             ),
         },
+
+
+
+
         {
             path: "/shipping_policy",
             element: (
