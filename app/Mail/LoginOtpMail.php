@@ -12,7 +12,7 @@ class LoginOtpMail extends Mailable
     use Queueable, SerializesModels;
 
     public $otp;
- 
+
     /**
      * Create a new message instance.
      *
@@ -20,9 +20,8 @@ class LoginOtpMail extends Mailable
      */
     public function __construct($otp)
     {
-        
+
         $this->otp = $otp;
-       
     }
 
     /**
@@ -32,7 +31,7 @@ class LoginOtpMail extends Mailable
      */
     public function build()
     {
-//        return $this->view('view.name');
-        return $this->subject('Login OTP')->view('emails.otp');
+        //        return $this->view('view.name');
+        return $this->subject('Verify OTP Code')->view('emails.otp');
     }
 }

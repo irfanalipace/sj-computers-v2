@@ -15,6 +15,7 @@ use App\Http\Requests\Auth\VerifyEmailRequest;
 use App\Jobs\SendotpMail;
 use App\Jobs\SendVerificationMail;
 use App\Mail\LoginOtpMail;
+use App\Models\CustomerVerification;
 use App\Models\Otp;
 use App\Models\Product;
 use App\Models\User;
@@ -75,18 +76,9 @@ class AuthController extends BaseController
         }
 
         $user = Auth::user();
-        //Deleted previous otps of user
-        auth()->user()->otps()->delete();
-
-        $otpCode = rand(1000, 9999);
-
-        $otp = new Otp();
-        $otp->user_id = $user->id;
-        $otp->code = $otpCode;
-        $otp->save();
-
+        $this->sendOtp(StatusEnum::LOGIN, $user);
         // Cache::put('login_otp_'.$user->id, $otp, now()->addMinutes(5));
-        SendotpMail::dispatch($user->email, $otp);
+        // SendotpMail::dispatch($user->email, $otp);
 
         $token = $user->createToken(User::AUTH_TOKEN)->accessToken;
 
@@ -196,5 +188,74 @@ class AuthController extends BaseController
         $user->update($data);
 
         return $this->sendResponse([], 'Profile Updated Successfully.');
+    }
+
+    // verify customer email of refund
+    public function verifyCustomerEmail(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $user = User::where('email', $request->email)->first();
+            if (!$user) {
+                return $this->sendError(['error' => ['Invalid Email Please try again.']], 404);
+            }
+            // if (empty($user->email_verified_at)) {
+            //     return $this->sendError(['error' => ['Please Verify the email for further process.']], 401);
+            // }
+            $this->sendOtp(StatusEnum::REFUND, $user);
+            DB::commit();
+            return $this->sendResponse([$user], 'OTP sent to your email address.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError(['error' => [$e->getMessage()]], 401);
+        }
+    }
+    //verify method
+
+    //sent otp code to customer email
+    private function sendOtp($type, $user)
+    {
+        $otpCode = rand(1000, 9999);
+        switch ($type) {
+            case StatusEnum::REFUND:
+                $otp = CustomerVerification::updateOrCreate(
+                    ['email' => $user->email],
+                    [
+                        'email' => $user->email,
+                        'otp_code' => $otpCode,
+                        'is_verified' => 0
+                    ]
+                );
+                break;
+
+            default:
+                //Deleted previous otps of user
+                $user->otps()->delete();
+                $otp = new Otp();
+                $otp->user_id = $user->id;
+                $otp->code = $otpCode;
+                $otp->save();
+                break;
+        }
+
+        SendotpMail::dispatch($user->email, $otp);
+
+        return $otp;
+    }
+
+    public function verifyOtpCustomerEmail(VerifyOtpRequest $request)
+    {
+        $otp = $request->get('otp_code');
+
+        $data = CustomerVerification::where('email', $request->email)->where('otp_code', $otp)
+            ->exists();
+
+        if (empty($data)) {
+            return $this->sendError(['otp' => ['Invalid OTP Code,  Try again.']]);
+        }
+        //after verify OTP updating CustomerVerification for a user
+        CustomerVerification::where('email', $request->email)->where('otp_code', $otp)->update(['is_verified' => 1]);
+
+        return $this->sendResponse('OTP Verified Successfully.');
     }
 }
