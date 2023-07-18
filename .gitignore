@@ -8,7 +8,7 @@
 /storage/framework/sessions/*
 /storage/framework/views/*
 /vendor
-# /public/mix-manifest.json
+/public/mix-manifest.json
 .env
 /composer.lock
 /package-lock.json
