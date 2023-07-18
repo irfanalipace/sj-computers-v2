@@ -12,6 +12,9 @@ export const ShopingCart = () => {
     const cartDetails = useSelector((state) => state.cart.details);
     const isLoading = useSelector((state) => state.cart.isLoading);
     const dispatch = useDispatch();
+    
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
 
     return (
         <>
@@ -109,6 +112,7 @@ export const ShopingCart = () => {
                                         </label> */}
                                                 </div>
                                             </div>
+                                          
                                             <div className="button-checkout-data">
                                                 <Link to={"/checkout"}>
                                                     <button className="btn btn-primary checkout-button">
