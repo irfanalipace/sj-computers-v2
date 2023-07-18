@@ -88,6 +88,7 @@
     height: 354px;
     left: calc(50% - 494px / 2 - 49px);
     top: 326px;
+    margin-top: 18px;
 }
 .stories-data-effctive-blog span {
     font-family: "Inter";
@@ -191,11 +192,27 @@
     margin-bottom: 29px;
    
 }
-.trending-blog-filter-data select{
-    box-shadow: 2px 0px 4px 1px;
+.trending-blog-filter-data select {
+    /* box-shadow: 0px 0px 1px 1px; */
     border: none;
-    height: 26px;
+    height: 27px;
+    /* border-radius: 4px; */
 }
+
+.trending-blog-filter-data select :hover{
+ display: none;
+}
+
+.dev-trending-data-image {
+    background-color: white;
+    box-shadow: 4px 4px 9px 4px rgba(0, 0, 0, 0.1);
+    padding: 7px;
+    margin-bottom: 7px;
+    border-radius: 12px;
+}
+
+
+
 .treding-blog-sets span {
     font-family: "Inter";
     font-style: normal;

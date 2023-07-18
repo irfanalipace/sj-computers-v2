@@ -141,12 +141,43 @@ const Blog = () => {
         if (h2Tags.length > 0) {
             const firstH2Tag = h2Tags[0];
             const imgTag = document.createElement("img");
-            imgTag.src = blogdteails.secondary_image;
+            imgTag.src =   
+                blogdteails.secondary_image
+                    ? blogdteails.secondary_image
+                    :"https://via.placeholder.com/400x400"
+            
+               
+               
+            console.log(blogdteails.secandary_image,'meeting-image')
             imgTag.alt = blogdteails.all_text;
 
             firstH2Tag.insertAdjacentElement("afterend", imgTag);
         }
     }, [blogdteails]);
+
+    // useEffect(() => {
+    //     const blogContent = document.getElementById("blog-content");
+    //     const h2Tags = blogContent.getElementsByTagName("h2");
+      
+    //     if (h2Tags.length > 0) {
+    //       const firstH2Tag = h2Tags[0];
+    //       if (blogdteails.secondary_image) {
+    //         const imgTag = document.createElement("img");
+    //         imgTag.src = blogdteails.secondary_image;
+    //         imgTag.alt = blogdteails.all_text;
+    //         firstH2Tag.insertAdjacentElement("afterend", imgTag);
+    //       } else {
+    //         const imgTags = firstH2Tag.nextElementSibling.getElementsByTagName("img");
+    //         for (let i = 0; i < imgTags.length; i++) {
+    //           imgTags[i].style.display = "none";
+    //         }
+    //       }
+    //     }
+    //   }, [blogdteails]);
+      
+      
+      
+      
 
     const classes = useStyles();
     const stickyContainerRef = useRef(null);
@@ -308,7 +339,7 @@ const Blog = () => {
                                                 src={
                                                     blogdteails.primary_image
                                                         ? blogdteails.primary_image
-                                                        : meetingimage
+                                                        : "https://via.placeholder.com/400x400"
                                                 }
                                                 alt={blogdteails.all_text}
                                             />
@@ -438,7 +469,7 @@ const Blog = () => {
                                         </div>
                                     </div>
 
-                                    <div className="col-md-8">
+                                    <div className="col-md-7">
                                         <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
                                             <div
                                                 id="blog-content"

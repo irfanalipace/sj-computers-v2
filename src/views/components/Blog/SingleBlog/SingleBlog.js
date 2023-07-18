@@ -36,7 +36,7 @@ const SingleBlog = () => {
     const [itemsPerPage] = useState(12);
     const [prevPageUrl, setPrevPageUrl] = useState(null);
     const [nextPageUrl, setNextPageUrl] = useState(null);
-
+    const [pageCount, setPageCount] = useState(0);
     const { blogslug } = useParams();
 
     console.log("sulg-single-page-data", blogslug);
@@ -66,6 +66,7 @@ const SingleBlog = () => {
                     setBlogs(response.data?.data);
                     setPrevPageUrl(response.data?.prev_page_url);
                     setNextPageUrl(response.data?.next_page_url);
+                    setPageCount(response.data?.last_page);
                 } else {
                     setBlogs([]);
                     setPrevPageUrl(response.data?.prev_page_url);
@@ -138,7 +139,7 @@ const SingleBlog = () => {
 
     return (
         <div>
-            <div className="mein-dev-single-page-cantainer">
+            {/* <div className="mein-dev-single-page-cantainer">
                 <div className="container conatnier-dev-single-blog-dev">
                     <div className="col-12">
                         <div className="span-dev-page-text-page">
@@ -146,7 +147,7 @@ const SingleBlog = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className="container">
                 <div className="row">
@@ -208,9 +209,9 @@ const SingleBlog = () => {
             <div className="container">
                 <div className="trending-blog-filter-data">
                     <div className="treding-blog-sets">
-                        <span> Trending Blogs</span>
+                        {/* <span> Trending Blogs</span> */}
                     </div>
-                    <div>
+                    <div className="dev-trending-data-image">
                         <select value={selectedFilter}>
                             <option value="">Recent Blogs</option>
                             <option value="trending">Trending Blog</option>
@@ -244,7 +245,7 @@ const SingleBlog = () => {
                                             src={
                                                 blog.thumbnail_image
                                                     ? blog.thumbnail_image
-                                                    : book
+                                                    : "https://via.placeholder.com/400x400"
                                             }
                                             alt={blog.all_text}
                                         />
@@ -314,7 +315,7 @@ const SingleBlog = () => {
                         <div>
                             <Stack spacing={2}>
                                 <Pagination
-                                    count={10}
+                                    count={pageCount}
                                     page={currentPage}
                                     onChange={handlePageChange}
                                 />
