@@ -65,8 +65,8 @@
     },
     "devDependencies": {
         "case-sensitive-paths-webpack-plugin": "^2.4.0",
-        "webpack-dev-server": "^4.13.2",
-        "webpack-bundle-analyzer": "^4.9.0"
+        "webpack-bundle-analyzer": "^4.9.0",
+        "webpack-dev-server": "^4.13.2"
     },
     "browserslist": {
         "production": [
