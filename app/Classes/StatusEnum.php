@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Classes;
 
-class StatusEnum{
+class StatusEnum
+{
 
     public const currency = "USD";
     public const SUCCESS = "SUCCESS";
@@ -15,11 +17,17 @@ class StatusEnum{
 
     public const PAYMENTMESSAGE = "Payment Successfully completed";
 
+    public const REFUND = "refund";
+    public const LOGIN = "login";
+
     public const DUMMY = "dummy";
 
     public const FREE_DELIVERY_DAY = 5;
     public const TWO_DELIVERY_DAY = 2;
     public const ONE_DELIVERY_DAY = 1;
+
+    public const PARTIAL = "partial";
+    public const FULL = "full";
 
     //Amazon inventory
     public const HOLD = 'hold';
