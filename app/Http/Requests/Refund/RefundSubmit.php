@@ -25,7 +25,10 @@ class RefundSubmit extends FormRequest
     {
         return [
             'user_id' => 'required|exists:users,id',
-            'orders*' => 'required'
+            'orders.*.order_id' => 'required|integer|exists:orders,id', // Validate each 'order_id' within the 'orders' array
+            'orders.*.refund_type' => 'required|in:partial,full', // Validate 'refund_type' for each order
+            'orders.*.reasons' => 'required|string', // Validate 'reasons' for each order
+            'orders.*.amount' => 'nullable|numeric' // Validate 'amount' for each order
         ];
     }
 }

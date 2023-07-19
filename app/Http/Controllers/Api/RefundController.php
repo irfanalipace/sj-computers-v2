@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Classes\StatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Refund\RefundSubmit;
 use App\Models\Order;
+use App\Models\Refund;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -36,7 +38,18 @@ class RefundController extends BaseController
     public function refundSubmit(RefundSubmit $request)
     {
         try {
-            dd($request);
+
+            $refund = collect($request->orders)->map(function ($order) use ($request) {
+                return Refund::create([
+                    'user_id' => $request->user_id,
+                    'order_id' => $order['order_id'],
+                    'refund_type' => $order['refund_type'],
+                    'reasons' => $order['reasons'],
+                    'amount' => $order['amount'],
+                    'status' => StatusEnum::PENDING
+                ]);
+            });
+            return $this->sendResponse($refund, 'Successfully added refund.');
         } catch (Exception $e) {
             return $this->sendError(['error', $e->getMessage()]);
         }
