@@ -157,6 +157,7 @@ export default function Checkout() {
                                             shippingDetails={checkoutDetails}
                                         />
                                     </div>
+                                  
                                 </div>
                             </div>
                         ) : (

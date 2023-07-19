@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -7,14 +7,41 @@ import { CartItem } from "./CartItem/CartItem";
 
 import "./ShopingCart.css";
 
-export const ShopingCart = () => {
+export const ShopingCart = ({ onFormSubmit, form }) => {
     const cartItems = useSelector((state) => state.cart.cart);
     const cartDetails = useSelector((state) => state.cart.details);
     const isLoading = useSelector((state) => state.cart.isLoading);
     const dispatch = useDispatch();
-    
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const [showModal, setShowModal] = useState(false);
+    const modalRef = useRef(null);
+
+    const handleClick = () => {
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
+    const handleClickOutside = (event) => {
+        if (modalRef.current && !modalRef.current.contains(event.target)) {
+            setShowModal(false);
+        }
+    };
+
+    useEffect(() => {
+        if (showModal) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showModal]);
 
     return (
         <>
@@ -41,7 +68,6 @@ export const ShopingCart = () => {
                                         </div>
                                     </div>
                                     {cartItems?.map((item) => (
-                                       
                                         <div key={item.id} id={item.id}>
                                             <hr className="hrline"></hr>
                                             <div className="items">
@@ -112,14 +138,134 @@ export const ShopingCart = () => {
                                         </label> */}
                                                 </div>
                                             </div>
-                                          
-                                            <div className="button-checkout-data">
-                                                <Link to={"/checkout"}>
-                                                    <button className="btn btn-primary checkout-button">
-                                                        Proceed to checkout
-                                                    </button>
-                                                </Link>
-                                            </div>
+
+                                            {isAuthenticated ? (
+                                                <div className="button-checkout-data">
+                                                    <Link to={"/checkout"}>
+                                                        <button className="btn btn-primary checkout-button">
+                                                            Proceed to checkout
+                                                        </button>
+                                                    </Link>
+                                                </div>
+                                            ) : (
+                                                <div>
+                                                    <div className="button-checkout-data">
+                                                        <button
+                                                            className="btn btn-primary checkout-button"
+                                                            onClick={
+                                                                handleClick
+                                                            }
+                                                        >
+                                                            Proceed to checkout
+                                                        </button>
+                                                    </div>
+
+                                                    {showModal && (
+                                                        <div className="overlay-model-checkout-model">
+                                                            <div
+                                                                className="overlay-modal-checkout-model-checkout-model"
+                                                                ref={modalRef}
+                                                            >
+                                                                <div className="modal-content">
+                                                                    <form className="auth-form ">
+                                                                        <div className="dve-heading-data-login-checkout">
+                                                                            <h4 className="login-h3">
+                                                                                {form ===
+                                                                                "forgetPassword"
+                                                                                    ? "Forget Password"
+                                                                                    : "Sign in to checkout"}
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div className="mb-3">
+                                                                            <label
+                                                                                className="email-label"
+                                                                                htmlFor="email"
+                                                                                style={{
+                                                                                    fontWeight:
+                                                                                        "bold",
+                                                                                    fontSize:
+                                                                                        "13px",
+                                                                                }}
+                                                                            >
+                                                                                Email
+                                                                                or
+                                                                                mobile
+                                                                                phone
+                                                                                number
+                                                                            </label>
+                                                                            <input
+                                                                                type="email"
+                                                                                id="email"
+                                                                                name="email"
+                                                                                className="form-control email-checkout-data-here"
+                                                                                placeholder="Enter your email"
+                                                                                value=""
+                                                                                autoFocus
+                                                                            />
+                                                                        </div>
+                                                                        <div className="d-flex justify-content-center w-100">
+                                                                            <button
+                                                                                type="submit"
+                                                                                disabled={
+                                                                                    isLoading
+                                                                                }
+                                                                            >
+                                                                                {isLoading ? (
+                                                                                    <Loader />
+                                                                                ) : (
+                                                                                    "Continue"
+                                                                                )}
+                                                                            </button>
+                                                                        </div>
+                                                                        <div>
+                                                                            <p className=" small-text-paragrap">
+                                                                                <Link
+                                                                                    to="/login"
+                                                                                    className="text-decoration-none"
+                                                                                >
+                                                                                    Don't
+                                                                                    have
+                                                                                    account?{" "}
+                                                                                    <span>
+                                                                                        Sign
+                                                                                        Up
+                                                                                    </span>
+                                                                                </Link>
+                                                                            </p>
+                                                                        </div>
+                                                                        <div className="or-dev-section-overlay-checkout">
+                                                                            <span
+                                                                                style={{
+                                                                                    fontWeight:
+                                                                                        "bold",
+                                                                                }}
+                                                                            >
+                                                                                OR
+                                                                            </span>
+                                                                        </div>
+
+                                                                        <div className="after-the-or-dev-sction-leve-model-checkout">
+                                                                            <button>
+                                                                                <Link
+                                                                                    className="text-decoration-none"
+                                                                                    to={
+                                                                                        "/checkout"
+                                                                                    }
+                                                                                >
+                                                                                    Continue
+                                                                                    as
+                                                                                    a
+                                                                                    Guest
+                                                                                </Link>
+                                                                            </button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
                                         </div>
                                         <div className="add-more-items-dev mt-3 hide-desktop-cart-btn">
                                             <Link to={"/"}>

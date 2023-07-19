@@ -19,6 +19,8 @@ function OrderSummary({
     const [disabled, setDisabled] = useState(true);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
 
+    
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     useEffect(() => {
         if (paymentMethod) setDisabled(false);
     }, [paymentMethod]);
@@ -62,6 +64,11 @@ function OrderSummary({
         }
     };
     return (
+     
+
+        <div>
+               
+                
         <div className="summary-card">
             <div className="summary-wrapper">
                 <div className="summary-btn">
@@ -127,6 +134,11 @@ function OrderSummary({
                 </p>
                 <Link to={"#"}>How shipping costs calculates?</Link>
             </div>
+        
+            
+        
+        </div>
+           
         </div>
     );
 }
