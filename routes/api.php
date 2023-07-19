@@ -133,7 +133,15 @@ Route::post('customer-email-verify', [AuthController::class, 'verifyCustomerEmai
 Route::post('customer-verify-otp', [AuthController::class, 'verifyOtpCustomerEmail'])->name('customer-verify-otp');
 
 Route::group(['middleware' => 'refund'], function () {
+
+    //list of orders
     Route::get('customer-orders-list', [RefundController::class, 'ordersList']);
+
+    // details or orders
+    Route::get('order-details',[RefundController::class,'orderDetail'])->name('order-details');
+
+    // refund submit
+    Route::post('refund-submit',[RefundController::class,'refundSubmit'])->name('refund-submit');
 });
 
 Route::middleware(['auth:api', 'verified'])->group(function () {
