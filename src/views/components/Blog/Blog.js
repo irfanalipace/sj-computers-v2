@@ -60,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Blog = () => {
     const [blogdteails, setBlogDetails] = useState("");
-    console.log("blogdteails", blogdteails);
 
     const { blogslug } = useParams();
     console.log("blogslug", blogslug);
@@ -141,14 +140,11 @@ const Blog = () => {
         if (h2Tags.length > 0) {
             const firstH2Tag = h2Tags[0];
             const imgTag = document.createElement("img");
-            imgTag.src =   
-                blogdteails.secondary_image
-                    ? blogdteails.secondary_image
-                    :"https://via.placeholder.com/400x400"
-            
-               
-               
-            console.log(blogdteails.secandary_image,'meeting-image')
+            imgTag.src = blogdteails.secondary_image
+                ? blogdteails.secondary_image
+                : "https://via.placeholder.com/400x400";
+
+            console.log(blogdteails.secandary_image, "meeting-image");
             imgTag.alt = blogdteails.all_text;
 
             firstH2Tag.insertAdjacentElement("afterend", imgTag);
@@ -158,7 +154,7 @@ const Blog = () => {
     // useEffect(() => {
     //     const blogContent = document.getElementById("blog-content");
     //     const h2Tags = blogContent.getElementsByTagName("h2");
-      
+
     //     if (h2Tags.length > 0) {
     //       const firstH2Tag = h2Tags[0];
     //       if (blogdteails.secondary_image) {
@@ -174,10 +170,6 @@ const Blog = () => {
     //       }
     //     }
     //   }, [blogdteails]);
-      
-      
-      
-      
 
     const classes = useStyles();
     const stickyContainerRef = useRef(null);
@@ -204,6 +196,21 @@ const Blog = () => {
             window.removeEventListener("scroll", handleScroll);
         };
     }, [classes.stickyContainer]);
+
+
+
+
+    const [readingTime, setReadingTime] = useState(0);
+
+    const wpm = 225;
+    const text = `${blogdteails.content}`;
+    useEffect(() => {
+        const words = text.trim().split(/\s+/).length;
+        const time = Math.ceil(words / wpm);
+        setReadingTime(time);
+    }, [text, wpm]);
+
+
 
     return (
         <div>
@@ -264,13 +271,12 @@ const Blog = () => {
                                                     >
                                                         Blogs /
                                                     </span>{" "}
-                                                    {/* {blogslug} */}
-                                                    Blog Name
+                                                    {blogslug}
                                                 </span>
                                             </div>
                                             <div className="dive-reight-border">
                                                 <div className="circle-dev-blog">
-                                                    <span>3 min</span>
+                                                    <span> {readingTime} </span>
                                                 </div>
                                                 <div className="date-blog-after-circle">
                                                     <span>

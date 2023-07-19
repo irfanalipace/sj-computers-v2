@@ -20,6 +20,10 @@ class StatusEnum
     public const REFUND = "refund";
     public const LOGIN = "login";
 
+    public const PENDING = "pending";
+    public const CANCELED = "canceled";
+    public const APPROVED = "approved";
+
     public const DUMMY = "dummy";
 
     public const FREE_DELIVERY_DAY = 5;

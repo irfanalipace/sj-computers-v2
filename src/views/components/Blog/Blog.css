@@ -228,6 +228,7 @@ li.policy-listitem {
     color: white !important;
 }
 .div-left-blog-text {
+    width: 800px;
     color: white;
 }
 .div-left-blog-text span {
@@ -508,6 +509,7 @@ div.sticky {
     margin-bottom: 12px;
     background: rgba(49, 130, 67, 0.1);
 }
+
 div.sticky {
     position: -webkit-sticky;
     position: sticky;
