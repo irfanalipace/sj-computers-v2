@@ -22,7 +22,7 @@
 }
 
 .refund-order-page .verify-otp {
-    width: 115px;
+    width: 135px;
     height: 49px;
     left: 166px;
     padding: 12px 25px 16px 25px;
@@ -103,4 +103,10 @@
 .refund-order-page .order-details-container .order-summary .value,
 .refund-order-page .order-details-container .order-summary .grand-total-row * {
     font-weight: 600;
+}
+@media screen and (max-width: 575px) {
+    .refund-order-page .order-details-container table tr th > div {
+        font-size: 10px;
+        margin-bottom: 8px;
+    }
 }

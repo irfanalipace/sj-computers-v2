@@ -1,11 +1,13 @@
 import ApiService from "@services/apiService";
 
-export function verifyEmail() {
+const OTOBaseURL = process.env.REACT_APP_OTO_BASE_URL;
+
+export function verifyEmailSjApi(param) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/verify-email`)
+        ApiService.post(`/customer-email-verify`, param, OTOBaseURL)
             .then((response) => {
                 console.print(
-                    "file: refundOrder.js | verifyEmail| response",
+                    "file: refundOrder.js | verifyEmailSjApi| response",
                     response
                 );
                 resolve(response);
@@ -17,12 +19,12 @@ export function verifyEmail() {
     });
 }
 
-export function verifyOTP() {
+export function verifyOtpSjApi(param) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/verify-otp`)
+        ApiService.post(`/customer-otp-verify`, param, OTOBaseURL)
             .then((response) => {
                 console.print(
-                    "file: refundOrder.js | verifyOTP| response",
+                    "file: refundOrder.js | verifyOtpSjApi| response",
                     response
                 );
                 resolve(response);
@@ -34,9 +36,9 @@ export function verifyOTP() {
     });
 }
 
-export function verifyEmailOTO() {
+export function verifyEmailOTO(param) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/verify-email`)
+        ApiService.post(`/verify-email`, param, OTOBaseURL)
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | verifyEmailOTO| response",
@@ -51,9 +53,9 @@ export function verifyEmailOTO() {
     });
 }
 
-export function verifyOTPOTO() {
+export function verifyOTPOTO(param) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/verify-otp`)
+        ApiService.post(`/verify-otp`, param, OTOBaseURL)
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | verifyOTPOTO| response",
@@ -68,9 +70,9 @@ export function verifyOTPOTO() {
     });
 }
 
-export function getOrdersList() {
+export function getOrdersList(param) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/orders-list`)
+        ApiService.get(`/customer-orders-list`, null, param, OTOBaseURL)
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | getOrdersList| response",
@@ -85,9 +87,9 @@ export function getOrdersList() {
     });
 }
 
-export function getInvoicesList() {
+export function getInvoicesList(param) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/invoices-list`)
+        ApiService.get(`/invoices-list`, null, param, OTOBaseURL)
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | getInvoicesList| response",
@@ -102,12 +104,12 @@ export function getInvoicesList() {
     });
 }
 
-export function getPreviousRefundsList() {
+export function getPreviousRefundsListSj(params) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/refunds-list`)
+        ApiService.get(`/refunds-list`, null, params, OTOBaseURL)
             .then((response) => {
                 console.print(
-                    "file: refundOrder.js | getPreviousRefundsList| response",
+                    "file: refundOrder.js | getPreviousRefundsListSj| response",
                     response
                 );
                 resolve(response);
@@ -119,9 +121,26 @@ export function getPreviousRefundsList() {
     });
 }
 
-export function getOrderDetailsSJ(orderDetails) {
+export function getPreviousRefundsListOto(params) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/order-detail`)
+        ApiService.get(`/refunds-list`, null, params, OTOBaseURL)
+            .then((response) => {
+                console.print(
+                    "file: refundOrder.js | getPreviousRefundsListOto| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.print("Console Log: : error refundOrder", e);
+                reject(e);
+            });
+    });
+}
+
+export function getOrderDetailsSJ(param) {
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/order-detail`, null, param, OTOBaseURL)
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | getOrderDetailsSJ| response",
@@ -136,14 +155,9 @@ export function getOrderDetailsSJ(orderDetails) {
     });
 }
 
-export function getOrderDetailsOTO(orderID) {
+export function getOrderDetailsOTO(param) {
     return new Promise((resolve, reject) => {
-        ApiService.get(
-            `/order-detail`,
-            null,
-            { order_id: orderID },
-            process.env.REACT_APP_OTO_BASE_URL
-        )
+        ApiService.get(`/order-detail`, null, param, OTOBaseURL)
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | getOrderDetailsOTO| response",
@@ -160,7 +174,7 @@ export function getOrderDetailsOTO(orderID) {
 
 export function submitRefundRequestAPiSJ(params) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/order-detail`, params)
+        ApiService.post(`/order-detail`, params, OTOBaseURL)
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | submitRefundRequestAPiSJ| response",
@@ -176,7 +190,7 @@ export function submitRefundRequestAPiSJ(params) {
 }
 export function submitRefundRequestAPiOTO(params) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/order-detail`, params)
+        ApiService.post(`/order-detail`, params, OTOBaseURL)
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | submitRefundRequestAPiOTO| response",

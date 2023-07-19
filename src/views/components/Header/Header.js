@@ -129,14 +129,14 @@ const Header = () => {
                                                         </Button>
                                                     </div>
                                                 </div>
-                                                {show && (
+                                                {/* {show && (
                                                     <LocationModel
                                                         isOpen={show}
                                                         handleClose={() =>
                                                             setShow(false)
                                                         }
                                                     />
-                                                )}
+                                                )} */}
                                                 <Search />
 
                                                 <div className="nav-right">
