@@ -13,21 +13,27 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import "./RefundOrder.css";
 import PreviousRefundsModal from "@components/RefundOrder/PreviousRefundsModal";
-import { getOrderDetailsOTO } from "@api/refund-order";
+import {
+    getOrderDetailsSJ,
+    verifyEmailSjApi,
+    verifyOtpSjApi,
+    getOrdersList,
+    submitRefundRequestAPiSJ,
+} from "@api/refund-order";
 
 import {
     isSessionValid,
     logoutUser,
-    setSignInTime,
     getUserTypes,
-    setIsVerified,
     getUserID,
-    getSalesID,
-    setSalesID,
     getSignInTime,
     SESSION_TIMEOUT,
     loginUser,
 } from "@utils/guestSessionHelper";
+import { toast } from "react-toastify";
+import Loader from "@common/Spinner/Spinner";
+import { formatDate, prettifyError } from "@utils/helpers";
+import { getUserId } from "@services/jwtService";
 
 export default function RefundOrder() {
     // const classes = useStyles();
@@ -36,68 +42,26 @@ export default function RefundOrder() {
         SALE_PERSON: "sale_person",
     };
 
-    const dummyList = [
-        {
-            id: "1",
-            name: "List Item 1",
-            order_placed: "April 17, 2023",
-            total: "$150.5",
-            ship_to: "John Wick",
-            order_number: "12345-32234",
-        },
-        {
-            id: "2",
-            name: "List Item 2",
-            order_placed: "April 18, 2023",
-            total: "$140.5",
-            ship_to: "John Nick",
-            order_number: "12345-32234",
-        },
-        {
-            id: "3",
-            name: "List Item 3",
-            order_placed: "April 19, 2023",
-            total: "$130.5",
-            ship_to: "John Nick",
-            order_number: "12345-32234",
-        },
-        {
-            id: "4",
-            name: "List Item 4",
-            order_placed: "April 1228, 2023",
-            total: "$1540.5",
-            ship_to: "fdsafsa Nick",
-            order_number: "12345-32234",
-        },
-        {
-            id: "5",
-            name: "List Item 5",
-            order_placed: "April 11, 2023",
-            total: "$140.5",
-            ship_to: "John Nick",
-            order_number: "12345-32234",
-        },
-    ];
-
     const REFUND_TYPES = [
         {
             label: "Partial Refund",
-            key: "partial_refund",
+            key: "partial",
         },
         {
             label: "Fully Refund",
-            key: "fully_refund",
+            key: "full",
         },
     ];
 
-    const [orderType, setOrderType] = useState();
-    const [InvoicesList, setInvoicesList] = useState([]);
+    const [orderType, setOrderType] = useState(null);
+    const [invoicesList, setInvoicesList] = useState([]);
+    const [list, setSelectedList] = useState([]);
     const [selectedOrder, setSelectedOrder] = useState([]);
     const [customerEmail, setCustomerEmail] = useState("");
     const [salesEmail, setSalesEmail] = useState("");
     const [otp, setOtp] = useState("");
     const [note, setNote] = useState("");
-    const [refundOption, setRefundOption] = useState("fully_refund");
+    const [refundOption, setRefundOption] = useState("partial");
     const [refundAmount, setRefundAmount] = useState();
     const [showRefundsModal, setShowRefundsModal] = useState(false);
     const [isEmailSentForSJ, setIsEmailSentForSJ] = useState(false);
@@ -108,57 +72,106 @@ export default function RefundOrder() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const [customerID, setCustomerIDState] = useState(null);
     const [salesID, setSalesIDState] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [submitRequestList, setSubmitRequestList] = useState([]);
+    const [isLoadingList, setIsLoadingList] = useState(false);
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+    // const [firstLoad, setFirstLoad] = useState(false);
 
     let remainingTime = 0;
 
+    let clearInterval = () => {};
+
     // Simulated login function for customer and sales
-    const loginCustomer = (customerID) => {
+    const loginCustomer = async (customerID) => {
         if (customerID) {
-            loginUser("customer", customerID, customerEmail);
-            setTimer("customer");
+            let userType = "customer";
+            loginUser(userType, customerID, customerEmail);
+            setTimer(userType);
+            fetchOrdersList(ORDER_TYPE_ENUM.WEBSITE);
         }
     };
 
     const loginSales = (salesID) => {
         if (salesID) {
-            loginUser("sales", salesID, salesEmail);
-            setTimer("sales");
+            let userType = "sales";
+            loginUser(userType, salesID, salesEmail);
+            clearInterval = setTimer(userType);
         }
     };
 
     const closeModal = () => setShowRefundsModal(false);
     const setOrderTypeFunction = async (type) => {
-        console.print("orderType: ", type);
         setOrderType(type);
     };
 
-    const handleListChange = (e) => {
-        const value = e?.target?.value;
-        console.print("handleListChange value: ", value);
-        // let response = dummyList.find((order) => order?.id === value);
-        setSelectedOrder(value);
+    const handleListChange = async (e) => {
+        const values = e?.target?.value;
+        setSelectedOrder(values);
+        if (values.length > 0)
+            try {
+                setIsLoading(true);
+                let response = await getOrderDetailsSJ({
+                    user_id: customerID,
+                    order_id: values,
+                });
+                setSelectedList(response?.data);
+                setSubmitRequestList(
+                    response?.data?.map((item) => {
+                        return {
+                            ...item,
+                            order_id: item?.id,
+                            refund_type: "partial",
+                            amount: 0,
+                        };
+                    })
+                );
+            } catch (error) {
+                toast.error(error?.message);
+            }
+        setIsLoading(false);
     };
 
-    const handleEmailSubmit = (e) => {
+    const handleEmailSubmit = async (e) => {
         e.preventDefault();
         console.print("handleEmailSubmit");
-        if (orderType === ORDER_TYPE_ENUM.WEBSITE) setIsEmailSentForSJ(true);
-        else if (orderType === ORDER_TYPE_ENUM.SALE_PERSON)
+        setIsLoading(true);
+        if (orderType === ORDER_TYPE_ENUM.WEBSITE) {
+            try {
+                let response = await verifyEmailSjApi({ email: customerEmail });
+                setCustomerIDState(response?.data?.id);
+                setIsEmailSentForSJ(true);
+                toast.success("OTP sent to email");
+            } catch (error) {
+                toast.error(error?.data?.errors?.error[0]);
+            }
+        } else if (orderType === ORDER_TYPE_ENUM.SALE_PERSON) {
             setIsEmailSentForOTO(true);
+        }
+        setIsLoading(false);
     };
 
-    const handleOTPSubmit = (e) => {
+    const handleOTPSubmit = async (e) => {
         e?.preventDefault();
         console.print("handleOTPSubmit");
+        setIsLoading(true);
         if (orderType === ORDER_TYPE_ENUM.WEBSITE) {
-            setIsUserVerifiedOnSJ(true);
-            const customerID = prompt("Enter Customer ID:");
-            loginCustomer(customerID);
+            try {
+                await verifyOtpSjApi({
+                    otp_code: otp,
+                    email: customerEmail,
+                });
+                setIsUserVerifiedOnSJ(true);
+                loginCustomer(customerID);
+            } catch (error) {
+                toast.error(error?.data?.errors?.otp[0]);
+            }
         } else if (orderType === ORDER_TYPE_ENUM.SALE_PERSON) {
             setIsUserVerifiedOnOTO(true);
             const salesID = prompt("Enter Sales ID:");
             loginSales(salesID);
         }
+        setIsLoading(false);
     };
 
     const handleChangeEmail = (userVerified) => {
@@ -184,14 +197,169 @@ export default function RefundOrder() {
         setOtp("");
     };
 
-    const handleFormSubmit = (e) => {
+    const fetchOrdersList = async (orderType) => {
+        switch (orderType) {
+            case ORDER_TYPE_ENUM.WEBSITE:
+                try {
+                    setIsLoadingList(true);
+                    let response = await getOrdersList({
+                        user_id: 1,
+                    });
+                    setInvoicesList(response?.data);
+                } catch (error) {
+                    toast.error("Something went wrong");
+                }
+                break;
+
+            default:
+                break;
+        }
+        setIsLoadingList(false);
+    };
+
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
-        console.print("handleFormSubmit");
+        switch (orderType) {
+            case ORDER_TYPE_ENUM.WEBSITE:
+                try {
+                    setIsLoading(true);
+                    await submitRefundRequestAPiSJ({
+                        user_id: customerID,
+                        orders: submitRequestList,
+                    });
+                    toast.success("Refund Request Submitted Successfully");
+                    resetFormStates();
+                } catch (error) {
+                    toast.error(
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: prettifyError(error?.data?.errors),
+                            }}
+                        />
+                    );
+                }
+                break;
+
+            default:
+                break;
+        }
+        setIsLoading(false);
     };
 
     const getModuleText = () => {
         if (orderType === ORDER_TYPE_ENUM.WEBSITE) return "Order";
         return "Invoice";
+    };
+
+    const handleOrderListChange = (index, key, value) => {
+        const updatedList = [...submitRequestList];
+        updatedList[index] = { ...updatedList[index], [key]: value };
+        let tempArray = updatedList.filter((item) => {
+            return item?.reasons && item?.refund_type && item?.amount > 0;
+        });
+        console.log("tempArray", tempArray);
+        if (tempArray.length > 0) setIsSubmitDisabled(true);
+        else setIsSubmitDisabled(false);
+        setSubmitRequestList(updatedList);
+    };
+
+    const setTimer = (userType) => {
+        let timer = setInterval(() => {
+            const sessionValid = isSessionValid(userType);
+            if (!sessionValid) {
+                logoutUser(userType);
+                window.location.reload();
+            } else {
+                const signInTime = getSignInTime(userType);
+                const currentTime = new Date().getTime();
+                const timeElapsed = currentTime - signInTime;
+                remainingTime = SESSION_TIMEOUT - timeElapsed;
+                console.log("remainingTime: " + remainingTime);
+                if (remainingTime === 0) {
+                    logoutUser(userType);
+                    window.location.reload();
+                }
+            }
+        }, 1000); // Check every second to update the remaining time
+
+        return () => {
+            clearInterval(timer);
+        };
+    };
+
+    useEffect(() => {
+        setOrderType(localStorage.getItem("orderType"));
+        const userTypes = getUserTypes();
+
+        if (isAuthenticated) {
+            setCustomerIDState(getUserId());
+            fetchOrdersList(ORDER_TYPE_ENUM.WEBSITE);
+        } else if (userTypes?.includes("customer")) {
+            const sessionValid = isSessionValid("customer");
+            if (sessionValid) {
+                setCustomerIDState(getUserID("customer"));
+                // setSignInTime("customer");
+                clearInterval = setTimer("customer");
+                setIsUserVerifiedOnSJ(true);
+                fetchOrdersList(ORDER_TYPE_ENUM.WEBSITE);
+            } else {
+                logoutUser("customer");
+                setIsUserVerifiedOnSJ(false);
+            }
+        }
+        if (userTypes?.includes("sales")) {
+            const sessionValid = isSessionValid("sales");
+            if (sessionValid) {
+                setSalesIDState(getUserID("sales"));
+                // setSignInTime("sales");
+                clearInterval = setTimer("sales");
+                setIsUserVerifiedOnOTO(true);
+                fetchOrdersList(ORDER_TYPE_ENUM.SALE_PERSON);
+            } else {
+                logoutUser("sales");
+                setIsUserVerifiedOnOTO(false);
+            }
+        }
+        return () => {
+            clearInterval();
+        };
+    }, []);
+
+    useEffect(() => {
+        resetStates();
+        localStorage.setItem("orderType", orderType);
+
+        switch (orderType) {
+            case ORDER_TYPE_ENUM.WEBSITE:
+                if (customerID) {
+                    fetchOrdersList(ORDER_TYPE_ENUM.WEBSITE);
+                }
+                break;
+            case ORDER_TYPE_ENUM.SALE_PERSON:
+                if (salesID) {
+                    console.log("fetch invoice list");
+                }
+            default:
+                break;
+        }
+    }, [orderType]);
+
+    const resetStates = () => {
+        setSelectedOrder([]);
+        setInvoicesList([]);
+        setRefundAmount(null);
+        setRefundOption("partial");
+        setNote("");
+        setOtp("");
+        setSelectedList([]);
+    };
+
+    const resetFormStates = () => {
+        setSelectedOrder([]);
+        setInvoicesList([]);
+        setRefundAmount(null);
+        setRefundOption("partial");
+        setNote("");
     };
 
     const EmailVerificationJSX = useMemo(() => {
@@ -232,8 +400,9 @@ export default function RefundOrder() {
                         <button
                             className="refund-btn ms-3 btn btn-success verify-otp"
                             onClick={handleEmailSubmit}
+                            disabled={isLoading}
                         >
-                            Send Email
+                            {isLoading ? <Loader /> : " Send Email"}
                         </button>
                     </div>
                 </div>
@@ -259,6 +428,7 @@ export default function RefundOrder() {
         salesEmail,
         isEmailSentForSJ,
         isEmailSentForOTO,
+        isLoading,
     ]);
 
     const OTPVerficationJSX = useMemo(() => {
@@ -295,8 +465,9 @@ export default function RefundOrder() {
                         <button
                             className="refund-btn ms-3 btn btn-success verify-otp"
                             onClick={handleOTPSubmit}
+                            disabled={isLoading || otp.length < 4}
                         >
-                            Verify Me
+                            {isLoading ? <Loader /> : "Verify Me"}
                         </button>
                     </div>
                     <div className="align-items-center d-flex ms-2">
@@ -332,6 +503,7 @@ export default function RefundOrder() {
         otp,
         isEmailSentForOTO,
         isEmailSentForSJ,
+        isLoading,
     ]);
 
     const ShowListSelectJSX = useMemo(() => {
@@ -353,26 +525,32 @@ export default function RefundOrder() {
                 </div>
 
                 <div className="d-flex mb-4">
-                    <FormControl fullWidth>
-                        <InputLabel id="order-refund-invoice-list">
-                            {getModuleText()}s list
-                        </InputLabel>
-                        <Select
-                            labelId="list-select-label"
-                            id="list-select"
-                            multiple
-                            value={selectedOrder}
-                            label={`${getModuleText()}sList`}
-                            onChange={handleListChange}
-                            color="success"
-                        >
-                            {dummyList.map((item, index) => (
-                                <MenuItem key={index} value={item?.id}>
-                                    {item?.name}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
+                    {isLoadingList ? (
+                        <Loader />
+                    ) : (
+                        <FormControl fullWidth>
+                            <InputLabel id="order-refund-invoice-list">
+                                {getModuleText()}s list
+                            </InputLabel>
+
+                            <Select
+                                labelId="list-select-label"
+                                id="list-select"
+                                multiple
+                                value={selectedOrder}
+                                label={`${getModuleText()}sList`}
+                                onChange={handleListChange}
+                                color="success"
+                            >
+                                {invoicesList?.map((item) => (
+                                    <MenuItem key={item?.id} value={item?.id}>
+                                        Order # {item?.id}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    )}
+
                     <div className="align-items-center d-flex ms-2">
                         <button
                             className="bg-white border-0 text-decoration-underline text-success"
@@ -397,83 +575,13 @@ export default function RefundOrder() {
             return JSX;
         }
         return <></>;
-    }, [orderType, isUserVerifiedOnSJ, isUserVerifiedOnOTO, selectedOrder]);
-
-    const setTimer = (userType) => {
-        let timer = setInterval(() => {
-            const sessionValid = isSessionValid(userType);
-            if (!sessionValid) {
-                logoutUser(userType);
-                window.location.reload();
-            } else {
-                const signInTime = getSignInTime(userType);
-                const currentTime = new Date().getTime();
-                const timeElapsed = currentTime - signInTime;
-                remainingTime = SESSION_TIMEOUT - timeElapsed;
-                console.log("remainingTime: " + remainingTime);
-                if (remainingTime === 0) {
-                    logoutUser(userType);
-                    window.location.reload();
-                }
-            }
-        }, 1000); // Check every second to update the remaining time
-
-        return () => {
-            clearInterval(timer);
-        };
-    };
-
-    useEffect(() => {
-        const userTypes = getUserTypes();
-        let timerClear = () => {};
-        console.log("userTypes", userTypes);
-        if (userTypes?.includes("customer")) {
-            console.log("1");
-            const sessionValid = isSessionValid("customer");
-            if (sessionValid) {
-                console.log("jlkjlkjl 2");
-                setCustomerIDState(getUserID("customer"));
-                // setSignInTime("customer");
-                timerClear = setTimer("customer");
-                setIsUserVerifiedOnSJ(true);
-            } else {
-                console.log("jlkjlkjl else 3");
-                logoutUser("customer");
-                setIsUserVerifiedOnSJ(false);
-            }
-        } else if (userTypes?.includes("sales")) {
-            const sessionValid = isSessionValid("sales");
-            if (sessionValid) {
-                setSalesIDState(getSalesID());
-                // setSignInTime("sales");
-                timerClear = setTimer("sales");
-                setIsUserVerifiedOnOTO(true);
-            } else {
-                logoutUser("sales");
-                setIsUserVerifiedOnOTO(false);
-            }
-        }
-        return () => {
-            timerClear();
-        };
-    }, []);
-
-    useEffect(() => {
-        // if (orderType === ORDER_TYPE_ENUM.WEBSITE)
-        //     ApiService.setDefaultBaseUrl();
-        // else if (orderType === ORDER_TYPE_ENUM.SALE_PERSON)
-        //     ApiService.setOTOBaseUrl();
-        resetStates();
-    }, [orderType]);
-
-    const resetStates = () => {
-        setSelectedOrder([]);
-        setInvoicesList([]);
-        setRefundAmount(null);
-        setRefundOption("fully_refund");
-        setNote("");
-        setOtp("");
-    };
+    }, [
+        orderType,
+        isUserVerifiedOnSJ,
+        isUserVerifiedOnOTO,
+        selectedOrder,
+        invoicesList,
+    ]);
 
     return (
         <div className="refund-order-page py-5">
@@ -521,13 +629,13 @@ export default function RefundOrder() {
                         {ShowListSelectJSX}
                     </div>
 
-                    {!!selectedOrder?.length && (
+                    {!!list?.length && (
                         <>
-                            {selectedOrder?.map((order, index) => (
+                            {list?.map((order, index) => (
                                 <div key={index}>
                                     <div className="order-details-container">
-                                        <h3 className="my-3 px-3">
-                                            {getModuleText()} Details
+                                        <h3 className="my-3 px-3 fw-bold">
+                                            {getModuleText()} # {order?.id}
                                         </h3>
                                         <table className="order-details-table round-2">
                                             <thead>
@@ -535,32 +643,31 @@ export default function RefundOrder() {
                                                     <th>
                                                         <div>Order Placed</div>
                                                         <div>
-                                                            {
-                                                                order?.order_placed
-                                                            }
+                                                            {formatDate(
+                                                                order?.created_at
+                                                            )}
                                                         </div>
                                                     </th>
                                                     <th>
                                                         <div>Total</div>
                                                         <div>
-                                                            {order?.total}
+                                                            $
+                                                            {
+                                                                order?.total_amount
+                                                            }
                                                         </div>
                                                     </th>
-                                                    <th>
+                                                    {/* <th>
                                                         <div>Ship To</div>
                                                         <div>
                                                             <span className="text-success">
                                                                 {order?.ship_to}
                                                             </span>
                                                         </div>
-                                                    </th>
+                                                    </th> */}
                                                     <th>
                                                         <div>Order #</div>
-                                                        <div>
-                                                            {
-                                                                order?.order_number
-                                                            }
-                                                        </div>
+                                                        <div>{order?.id}</div>
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -568,48 +675,64 @@ export default function RefundOrder() {
                                                 <tr>
                                                     <td
                                                         className="order-item px-3"
-                                                        colSpan={3}
+                                                        colSpan={4}
                                                     >
                                                         <table className="w-100">
                                                             <tbody>
                                                                 <tr>
                                                                     <td>
                                                                         <p className="fw-medium my-3">
-                                                                            Your
                                                                             {getModuleText()}
+                                                                            {
+                                                                                " Items"
+                                                                            }
                                                                         </p>
-                                                                        <div className="d-flex">
-                                                                            <div className="img-wrapper">
-                                                                                <img src="https://dummyimage.com/500" />
-                                                                            </div>
-                                                                            <div className="item-description">
-                                                                                <p className="py-0">
-                                                                                    Lorem
-                                                                                    Ipsum
-                                                                                    Text
-                                                                                    Dot
-                                                                                    Ext
-                                                                                    not
-                                                                                    Isxh
-                                                                                    sdbd
-                                                                                    sjhk
-                                                                                    skjdg
-                                                                                    KMC
-                                                                                    Lorem
-                                                                                    Ipsum,
-                                                                                    Text
-                                                                                    Dot
-                                                                                    Ext.
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
+                                                                        {order?.order_item?.map(
+                                                                            (
+                                                                                item
+                                                                            ) => {
+                                                                                return (
+                                                                                    <div
+                                                                                        className="d-flex"
+                                                                                        key={
+                                                                                            item?.id
+                                                                                        }
+                                                                                    >
+                                                                                        <div className="img-wrapper">
+                                                                                            <img
+                                                                                                src={
+                                                                                                    item
+                                                                                                        ?.product
+                                                                                                        ?.image
+                                                                                                        ?.length >
+                                                                                                    0
+                                                                                                        ? item
+                                                                                                              ?.product
+                                                                                                              ?.image[0]
+                                                                                                        : "https://dummyimage.com/150"
+                                                                                                }
+                                                                                            />
+                                                                                        </div>
+                                                                                        <div className="item-description">
+                                                                                            <p className="py-0">
+                                                                                                {
+                                                                                                    item
+                                                                                                        ?.product
+                                                                                                        ?.name
+                                                                                                }
+                                                                                            </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                );
+                                                                            }
+                                                                        )}
                                                                     </td>
                                                                 </tr>
                                                                 <hr className="horizontal-line"></hr>
                                                             </tbody>
                                                         </table>
                                                     </td>
-                                                    <td className="order-summary d-sm-table-cell d-none px-1">
+                                                    {/* <td className="order-summary d-sm-table-cell d-none px-1">
                                                         <p className="my-3 fw-bold">
                                                             {getModuleText()}{" "}
                                                             Summary
@@ -622,7 +745,10 @@ export default function RefundOrder() {
                                                                         Subtotal:
                                                                     </td>
                                                                     <td className="value">
-                                                                        $150
+                                                                        $
+                                                                        {
+                                                                            order?.sub_total
+                                                                        }
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -632,7 +758,10 @@ export default function RefundOrder() {
                                                                         Handling:
                                                                     </td>
                                                                     <td className="value">
-                                                                        --
+                                                                        $
+                                                                        {
+                                                                            order?.shipment_price
+                                                                        }
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -642,7 +771,10 @@ export default function RefundOrder() {
                                                                         tax:
                                                                     </td>
                                                                     <td className="value">
-                                                                        $150
+                                                                        $
+                                                                        {
+                                                                            order?.total_amount
+                                                                        }
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -653,7 +785,7 @@ export default function RefundOrder() {
                                                                         collected:
                                                                     </td>
                                                                     <td className="value">
-                                                                        $7
+                                                                        $0
                                                                     </td>
                                                                 </tr>
                                                                 <hr className="horizontal-line"></hr>
@@ -663,14 +795,17 @@ export default function RefundOrder() {
                                                                         Total:
                                                                     </td>
                                                                     <td className="value">
-                                                                        $150
+                                                                        $
+                                                                        {
+                                                                            order?.total_amount
+                                                                        }
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
-                                                    </td>
+                                                    </td> */}
                                                 </tr>
-                                                <tr className="d-sm-none">
+                                                {/* <tr className="d-sm-none">
                                                     <td
                                                         className="order-summary w-100 px-2"
                                                         colSpan={4}
@@ -734,13 +869,16 @@ export default function RefundOrder() {
                                                             </tbody>
                                                         </table>
                                                     </td>
-                                                </tr>
+                                                </tr> */}
                                             </tbody>
                                         </table>
                                     </div>
                                     <div>
                                         <p className="my-3 fw-medium">
-                                            Note About Refund / Return
+                                            Note About Refund / Return{" "}
+                                            <span className="text-danger">
+                                                (Required)
+                                            </span>
                                         </p>
                                         <div className="d-flex">
                                             <FormControl fullWidth>
@@ -750,9 +888,16 @@ export default function RefundOrder() {
                                                     placeholder="Type note here..."
                                                     variant="outlined"
                                                     color="success"
-                                                    value={note}
+                                                    value={
+                                                        submitRequestList[index]
+                                                            ?.reasons
+                                                    }
                                                     onChange={(e) =>
-                                                        setNote(e.target.value)
+                                                        handleOrderListChange(
+                                                            index,
+                                                            "reasons",
+                                                            e.target.value
+                                                        )
                                                     }
                                                     className="form-control"
                                                 />
@@ -762,17 +907,25 @@ export default function RefundOrder() {
                                     <div>
                                         <p className="my-3 fw-medium">
                                             Select an option to refund your
-                                            ammount
+                                            ammount{" "}
+                                            <span className="text-danger">
+                                                (Required)
+                                            </span>
                                         </p>
                                         <div className="d-flex">
                                             <Select
                                                 className="mb-3"
                                                 labelId="select-refund-type-label"
                                                 id="list-refund-type-select"
-                                                value={refundOption}
+                                                value={
+                                                    submitRequestList[index]
+                                                        ?.refund_type
+                                                }
                                                 label="Select Refund Option"
                                                 onChange={(e) =>
-                                                    setRefundOption(
+                                                    handleOrderListChange(
+                                                        index,
+                                                        "refund_type",
                                                         e.target.value
                                                     )
                                                 }
@@ -791,10 +944,14 @@ export default function RefundOrder() {
                                             </Select>
                                         </div>
                                     </div>
-                                    {refundOption === "partial_refund" && (
+                                    {submitRequestList[index]?.refund_type ===
+                                        "partial" && (
                                         <form onSubmit={handleFormSubmit}>
                                             <p className="my-3 fw-medium">
-                                                Please Enter Your Refund Amount
+                                                Please Enter Your Refund Amount{" "}
+                                                <span className="text-danger">
+                                                    (Required)
+                                                </span>
                                             </p>
                                             <FormControl>
                                                 <TextField
@@ -804,10 +961,17 @@ export default function RefundOrder() {
                                                     variant="outlined"
                                                     color="success"
                                                     type="number"
-                                                    value={refundAmount}
+                                                    value={
+                                                        submitRequestList[index]
+                                                            ?.amount || 0
+                                                    }
                                                     onChange={(e) => {
-                                                        setRefundAmount(
-                                                            e.target.value
+                                                        handleOrderListChange(
+                                                            index,
+                                                            "amount",
+                                                            e.target.value > 0
+                                                                ? e.target.value
+                                                                : ""
                                                         );
                                                     }}
                                                 />
@@ -819,8 +983,9 @@ export default function RefundOrder() {
                             <button
                                 className="refund-btn btn btn-success"
                                 onClick={handleFormSubmit}
+                                disabled={isLoading || isSubmitDisabled}
                             >
-                                Submit
+                                {isLoading ? <Loader /> : "Submit"}
                             </button>
                         </>
                     )}

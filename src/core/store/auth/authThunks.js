@@ -39,6 +39,7 @@ import {
     getTempToken,
     getUser,
     destroyTempKeys,
+    saveUserID,
 } from "@services/jwtService";
 
 import { clearCartLocally } from "@utils/cartHelpers";
@@ -52,14 +53,12 @@ export const login = (credentials) => {
             dispatch({ type: LOADING, payload: {} });
             const response = await loginApi(credentials);
             console.print("response: ", response);
-            let token = response.access_token;
-            let name = response.user;
-            let profile_pic = response.profile_pic;
-            let state = response?.state?.state;
-            saveUserName(name);
+            let { id, access_token, user, profile_pic, state } = response;
+            saveUserName(user);
             saveUserImage(profile_pic);
-            saveUserState(state);
-            saveTempToken(token); 
+            saveUserState(state?.state);
+            saveTempToken(access_token);
+            saveUserID(id);
             // saving token temporarily to only allow user to call the login api
             saveUserPassword(credentials.password); // saving password temporarily to only allow user to re login to resend the otp
             dispatch({
@@ -131,7 +130,7 @@ export const verifyOtp = (credentials) => {
             dispatch({ type: VERIFY_OTP, payload: { ...user } });
             destroyTempKeys(); // destroy user password and temporary token after login success
             saveToken(temp_token); // stores temporary token in right key to be used later for calling protected apis
-            toast.success("Login Successfully");
+            toast.success("Login Successful");
         } catch (error) {
             console.print("Something went wrong in login", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

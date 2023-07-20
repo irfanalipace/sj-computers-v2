@@ -29,3 +29,37 @@ export const downloadFile = (fileUrl) => {
             console.error("Error downloading file:", error);
         });
 };
+
+export const formatDate = (dateString) => {
+    const options = {
+        day: "2-digit",
+
+        month: "short",
+
+        year: "numeric",
+    };
+
+    const date = new Date(dateString);
+
+    return date.toLocaleDateString(undefined, options);
+};
+
+export const prettifyError = (error) => {
+    let prettifiedError = "";
+
+    for (const key in error) {
+        if (Array.isArray(error[key])) {
+            const formattedErrors = error[key].map(
+                (message) => `${message}<br>`
+            );
+
+            prettifiedError += `<strong>${
+                key.charAt(0).toUpperCase() + key.slice(1)
+            }:</strong> ${formattedErrors.join("")}`;
+        } else {
+            prettifiedError += `<strong>${key}:</strong> ${error[key]}<br>`;
+        }
+    }
+
+    return prettifiedError;
+};

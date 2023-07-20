@@ -1,4 +1,4 @@
-export const SESSION_TIMEOUT = 1 * 30 * 1000; // 30 minutes in milliseconds
+export const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes in milliseconds
 
 const getCurrentTimestamp = () => new Date().getTime();
 
@@ -51,24 +51,8 @@ export const getUserEmail = (userType) => {
     return getLocalStorageItem(`${userType}_email`);
 };
 
-export const setSalesEmail = (email) => {
-    return setLocalStorageItem("salesEmail", email);
-};
-
-export const getSalesEmail = () => {
-    return getLocalStorageItem("salesEmail");
-};
-
-export const getSalesID = () => {
-    return getLocalStorageItem("salesID");
-};
-
 export const setUserID = (userType, userID) => {
     setLocalStorageItem(`${userType}_id`, userID);
-};
-
-export const setSalesID = (salesID) => {
-    setLocalStorageItem("salesID", salesID);
 };
 
 export const isSessionValid = (userType) => {
@@ -94,4 +78,5 @@ export const logoutUser = (userType) => {
     localStorage.removeItem(`${userType}_signInTime`);
     localStorage.removeItem(`${userType}_id`);
     localStorage.removeItem(`${userType}_email`);
+    localStorage.removeItem("orderType");
 };
