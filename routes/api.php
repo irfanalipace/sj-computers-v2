@@ -138,10 +138,13 @@ Route::group(['middleware' => 'refund'], function () {
     Route::get('customer-orders-list', [RefundController::class, 'ordersList']);
 
     // details or orders
-    Route::get('order-details',[RefundController::class,'orderDetail'])->name('order-details');
+    Route::get('order-details', [RefundController::class, 'orderDetail'])->name('order-details');
 
     // refund submit
-    Route::post('refund-submit',[RefundController::class,'refundSubmit'])->name('refund-submit');
+    Route::post('refund-submit', [RefundController::class, 'refundSubmit'])->name('refund-submit');
+
+    // List of refund
+    Route::get('customer-refund-list', [RefundController::class, 'refundList'])->name('refund-list');
 });
 
 Route::middleware(['auth:api', 'verified'])->group(function () {

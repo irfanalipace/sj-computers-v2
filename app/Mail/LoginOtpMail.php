@@ -11,17 +11,18 @@ class LoginOtpMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $otp;
+    public $otp, $type;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($otp)
+    public function __construct($otp, $type)
     {
 
         $this->otp = $otp;
+        $this->type = $type;
     }
 
     /**

@@ -82,7 +82,7 @@ class AuthController extends BaseController
 
         $token = $user->createToken(User::AUTH_TOKEN)->accessToken;
 
-        return $this->sendResponse(['access_token' => $token, 'user' => $user->name, 'email' => $user->email, 'profile_pic' => $user->profile_pic, 'state' => $user->userState], 'OTP sent to your email address.');
+        return $this->sendResponse(['access_token' => $token, 'user' => $user->name, 'email' => $user->email, 'profile_pic' => $user->profile_pic, 'state' => $user->userState, 'id' => $user->id], 'OTP sent to your email address.');
     }
 
     public function setCart($userId)
@@ -199,9 +199,7 @@ class AuthController extends BaseController
             if (!$user) {
                 return $this->sendError(['error' => ['Invalid Email Please try again.']], 404);
             }
-            // if (empty($user->email_verified_at)) {
-            //     return $this->sendError(['error' => ['Please Verify the email for further process.']], 401);
-            // }
+
             $this->sendOtp(StatusEnum::REFUND, $user);
             DB::commit();
             return $this->sendResponse([$user], 'OTP sent to your email address.');
@@ -226,6 +224,7 @@ class AuthController extends BaseController
                         'is_verified' => 0
                     ]
                 );
+                $type = "RefundVerify";
                 break;
 
             default:
@@ -235,10 +234,11 @@ class AuthController extends BaseController
                 $otp->user_id = $user->id;
                 $otp->code = $otpCode;
                 $otp->save();
+                $type = null;
                 break;
         }
 
-        SendotpMail::dispatch($user->email, $otp);
+        SendotpMail::dispatch($user->email, $otp, $type);
 
         return $otp;
     }
