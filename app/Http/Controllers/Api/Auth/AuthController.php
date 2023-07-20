@@ -202,7 +202,7 @@ class AuthController extends BaseController
 
             $this->sendOtp(StatusEnum::REFUND, $user);
             DB::commit();
-            return $this->sendResponse([$user], 'OTP sent to your email address.');
+            return $this->sendResponse($user, 'OTP sent to your email address.');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError(['error' => [$e->getMessage()]], 401);
