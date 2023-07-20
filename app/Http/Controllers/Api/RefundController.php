@@ -4,18 +4,22 @@ namespace App\Http\Controllers\Api;
 
 use App\Classes\StatusEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Refund\OrderListRequest;
+use App\Http\Requests\Refund\RefundListRequest;
 use App\Http\Requests\Refund\RefundSubmit;
+use App\Jobs\SendRefundMail;
 use App\Models\Order;
 use App\Models\Refund;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RefundController extends BaseController
 {
     // orders list
-    public function ordersList(Request $request)
+    public function ordersList(OrderListRequest $request)
     {
-
         $orders_list = Order::where('user_id', $request->user_id)->select('orders.id')->without('Invoice', 'orderItem')->get();
         if (is_null($orders_list)) {
             return $this->sendError(['error', 'Order list is not found.']);
@@ -37,8 +41,9 @@ class RefundController extends BaseController
     // refund submit
     public function refundSubmit(RefundSubmit $request)
     {
-        try {
 
+        try {
+            DB::beginTransaction();
             $refund = collect($request->orders)->map(function ($order) use ($request) {
                 return Refund::create([
                     'user_id' => $request->user_id,
@@ -49,9 +54,23 @@ class RefundController extends BaseController
                     'status' => StatusEnum::PENDING
                 ]);
             });
+
+            SendRefundMail::dispatch(User::whereId($request->user_id)->without('shippingAddress')->first(), $refund);
+            DB::commit();
             return $this->sendResponse($refund, 'Successfully added refund.');
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError(['error', $e->getMessage()]);
         }
+    }
+
+    //list of refund
+    public function refundList(RefundListRequest $request)
+    {
+        $refund = Refund::where('user_id', $request->user_id)->get();
+        if (is_null($refund)) {
+            return $this->sendError(['error', 'Refund list is not found']);
+        }
+        return $this->sendResponse($refund, 'Successfully fetch refund.');
     }
 }

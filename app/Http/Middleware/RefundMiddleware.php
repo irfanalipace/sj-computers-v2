@@ -18,11 +18,21 @@ class RefundMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = User::whereId($request->user_id)->select(['id', 'email'])->first();
+        
+        if (auth('api')->user()== null) {
+           
+            $user = User::whereId($request->user_id)->select(['id', 'email'])->first();
 
-        if ($this->isRefundVerified($user->email)) {
+            if ($this->isRefundVerified($user->email)) {
+                return $next($request);
+            } else {
+                return response()->json(['error' => 'Unauthorized.'], 401);
+            }
+        } else {
+           
             return $next($request);
         }
+
         return response()->json(['error' => 'Unauthorized.'], 401);
     }
     private function isRefundVerified($user_email)
