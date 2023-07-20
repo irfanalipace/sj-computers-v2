@@ -251,7 +251,7 @@ class AuthController extends BaseController
             ->exists();
 
         if (empty($data)) {
-            return $this->sendError(['otp' => ['Invalid OTP Code,  Try again.']]);
+            return $this->sendError(['error' => ['Invalid OTP Code,  Try again.']]);
         }
         //after verify OTP updating CustomerVerification for a user
         CustomerVerification::where('email', $request->email)->where('otp_code', $otp)->update(['is_verified' => 1]);
