@@ -21,6 +21,7 @@ class CreateRefundsTable extends Migration
             $table->enum('refund_type', [StatusEnum::PARTIAL, StatusEnum::FULL]);
             $table->text('reasons');
             $table->double('amount');
+            $table->longText('admin_note')->nullable();
             $table->date('refund_delivery_date')->nullable();
             $table->enum('status', [StatusEnum::PENDING, StatusEnum::CANCELED, StatusEnum::APPROVED]);
             $table->softDeletes();
