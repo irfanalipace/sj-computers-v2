@@ -40,10 +40,10 @@ import { useRef } from "react";
 const HeadereLinks = [
     { path: "/", title: "About Us" },
     { path: "/", title: "What We Do?" },
-    { path: "/term_services", title: "Return & Refund" },
-    { path: "/term_services", title: "Shipping Policy" },
+    { path: "/return_refund_policy", title: "Return & Refund" },
+    { path: "/", title: "Shipping Policy" },
     { path: "/term_services", title: "Terms of Services" },
-    { path: "/term_services", title: "Privacy Policy" },
+    { path: "/privacy_policy", title: "Privacy Policy" },
     { path: "/", title: "Subscribe" },
 ];
 const nonHeaderRoutes = [""];
@@ -327,6 +327,7 @@ const Blog = () => {
                                             <div className="div-left-blog-text-written">
                                                 <span>Written by SJ Staff</span>
                                             </div>
+                                          
                                         </div>
                                     </div>
                                 </div>

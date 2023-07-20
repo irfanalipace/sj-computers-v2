@@ -66,6 +66,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     useEffect(() => {
         handleHeight();
     }, []);
+    
     return (
         <div>
             {settingAdress ? (

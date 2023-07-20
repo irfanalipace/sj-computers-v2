@@ -150,7 +150,6 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                             ) : (
                                                 <div>
                                                     <div className="button-checkout-data">
-                                                        
                                                         <button
                                                             className="btn btn-primary checkout-button"
                                                             onClick={
@@ -177,7 +176,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                                     : "Sign in to checkout"}
                                                                             </h4>
                                                                         </div>
-                                                                        <div className="mb-3">
+                                                                        {/* <div className="mb-3">
                                                                             <label
                                                                                 className="email-label"
                                                                                 htmlFor="email"
@@ -203,20 +202,27 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                                 value=""
                                                                                 autoFocus
                                                                             />
-                                                                        </div>
+                                                                        </div> */}
                                                                         <div className="d-flex justify-content-center w-100">
-                                                                            <button
-                                                                               
-                                                                                disabled={
-                                                                                    isLoading
+                                                                            <Link
+                                                                                className="text-decoration-none"
+                                                                                to={
+                                                                                    "/login"
                                                                                 }
                                                                             >
-                                                                                {isLoading ? (
-                                                                                    <Loader />
-                                                                                ) : (
-                                                                                    "Continue"
-                                                                                )}
-                                                                            </button>
+                                                                                {" "}
+                                                                                <button
+                                                                                    disabled={
+                                                                                        isLoading
+                                                                                    }
+                                                                                >
+                                                                                    {isLoading ? (
+                                                                                        <Loader />
+                                                                                    ) : (
+                                                                                        "Sign in"
+                                                                                    )}
+                                                                                </button>
+                                                                            </Link>
                                                                         </div>
                                                                         <div>
                                                                             <p className="small-text-paragrap">
@@ -237,8 +243,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                         <div className="or-dev-section-overlay-checkout">
                                                                             <span
                                                                                 style={{
-                                                                                    fontWeight:
-                                                                                        "bold",
+                                                                                    color: "black",
                                                                                 }}
                                                                             >
                                                                                 OR
@@ -246,20 +251,20 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                         </div>
 
                                                                         <div className="after-the-or-dev-sction-leve-model-checkout">
-                                                                           
-                                                                                <Link
-                                                                                    className="text-decoration-none"
-                                                                                    to={
-                                                                                        "/checkout"
-                                                                                    }
-                                                                                >
-                                                                                     <button> Continue
+                                                                            <Link
+                                                                                className="text-decoration-none"
+                                                                                to={
+                                                                                    "/checkout"
+                                                                                }
+                                                                            >
+                                                                                <button>
+                                                                                    {" "}
+                                                                                    Continue
                                                                                     as
                                                                                     a
-                                                                                    Guest</button>
-                                                                                   
-                                                                                </Link>
-                                                                           
+                                                                                    Guest
+                                                                                </button>
+                                                                            </Link>
                                                                         </div>
                                                                     </form>
                                                                 </div>
