@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Classes\StatusEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Refund\OrderDetailRequest;
 use App\Http\Requests\Refund\OrderListRequest;
 use App\Http\Requests\Refund\RefundListRequest;
 use App\Http\Requests\Refund\RefundSubmit;
@@ -29,8 +30,9 @@ class RefundController extends BaseController
     }
 
     // order details
-    public function orderDetail(Request $request)
+    public function orderDetail(OrderDetailRequest $request)
     {
+        
         $order_details = Order::whereIn("id", $request->order_id)->where('user_id', $request->user_id)->select('orders.id', 'orders.total_amount', 'orders.sub_total', 'orders.shipment_price', 'orders.created_at')->get();
         if (is_null($order_details)) {
             return $this->sendError(['error', 'Order Details is not found.']);
