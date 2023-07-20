@@ -21,13 +21,13 @@ class SendotpMail implements ShouldQueue
      *
      * @return void
      */
-    public $email;
-    public $otp;
-    public function __construct($email,$otp)
+    public $email, $otp, $type;
+    public function __construct($email, $otp, $type = [])
     {
         //       
         $this->otp = $otp;
         $this->email = $email;
+        $this->type = $type;
     }
 
     /**
@@ -37,6 +37,6 @@ class SendotpMail implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->email)->send(new LoginOtpMail($this->otp));
+        Mail::to($this->email)->send(new LoginOtpMail($this->otp, $this->type));
     }
 }

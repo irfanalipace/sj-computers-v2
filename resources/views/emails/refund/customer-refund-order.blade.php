@@ -7,7 +7,7 @@
             class="subTitle">
             <h4 class="text"
                 style="color:#999;font-family:Poppins,Helvetica,Arial,sans-serif;font-size:16px;font-weight:500;font-style:normal;letter-spacing:normal;line-height:24px;text-transform:none;text-align:center;padding:0;margin:0">
-                Verify Your OTP</h4>
+                Refund Order</h4>
         </td>
     </tr>
     <tr>
@@ -18,13 +18,9 @@
                         <td style="padding-bottom: 20px;" align="center" valign="top" class="description">
                             <p class="text"
                                 style="color:#666;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;font-style:normal;letter-spacing:normal;line-height:22px;text-transform:none;text-align:center;padding:0;margin:0">
-                                Use the following OTP to complete your sign in process.</p><br>
-                            @if ($type == 'RefundVerify')
-                                <h2>{{ $otp->otp_code }}</h2>
-                            @else
-                                <h2>{{ $otp->code }}</h2>
-                            @endif
-
+                                Dear {{ $data['user']['name'] }} Thank you for your refund order our team will contact you
+                                as soon as possible.</p><br>
+                            {{-- <h2>{{ $data['order_id'] }}</h2> --}}
                         </td>
                     </tr>
                 </tbody>
