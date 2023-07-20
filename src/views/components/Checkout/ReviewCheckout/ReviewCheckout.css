@@ -19,7 +19,9 @@
     padding: 5px 0;
     border-bottom: 1px solid lightgray;
 }
-
+.data-table-components{
+    display: none;
+}
 .item-card .img-wrapper img {
     max-width: 100%;
     max-height: 150px;

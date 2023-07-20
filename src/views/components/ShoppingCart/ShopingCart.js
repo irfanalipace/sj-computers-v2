@@ -150,6 +150,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                             ) : (
                                                 <div>
                                                     <div className="button-checkout-data">
+                                                        
                                                         <button
                                                             className="btn btn-primary checkout-button"
                                                             onClick={
@@ -167,7 +168,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                 ref={modalRef}
                                                             >
                                                                 <div className="modal-content">
-                                                                    <form className="auth-form ">
+                                                                    <form>
                                                                         <div className="dve-heading-data-login-checkout">
                                                                             <h4 className="login-h3">
                                                                                 {form ===
@@ -205,7 +206,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                         </div>
                                                                         <div className="d-flex justify-content-center w-100">
                                                                             <button
-                                                                                type="submit"
+                                                                               
                                                                                 disabled={
                                                                                     isLoading
                                                                                 }
@@ -218,7 +219,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                             </button>
                                                                         </div>
                                                                         <div>
-                                                                            <p className=" small-text-paragrap">
+                                                                            <p className="small-text-paragrap">
                                                                                 <Link
                                                                                     to="/login"
                                                                                     className="text-decoration-none"
@@ -245,19 +246,20 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                         </div>
 
                                                                         <div className="after-the-or-dev-sction-leve-model-checkout">
-                                                                            <button>
+                                                                           
                                                                                 <Link
                                                                                     className="text-decoration-none"
                                                                                     to={
                                                                                         "/checkout"
                                                                                     }
                                                                                 >
-                                                                                    Continue
+                                                                                     <button> Continue
                                                                                     as
                                                                                     a
-                                                                                    Guest
+                                                                                    Guest</button>
+                                                                                   
                                                                                 </Link>
-                                                                            </button>
+                                                                           
                                                                         </div>
                                                                     </form>
                                                                 </div>
