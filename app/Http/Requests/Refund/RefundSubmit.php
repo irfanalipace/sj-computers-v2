@@ -28,7 +28,7 @@ class RefundSubmit extends FormRequest
             'orders.*.order_id' => 'required|integer|exists:orders,id', // Validate each 'order_id' within the 'orders' array
             'orders.*.refund_type' => 'required|in:partial,full', // Validate 'refund_type' for each order
             'orders.*.reasons' => 'required|string', // Validate 'reasons' for each order
-            'orders.*.amount' => 'nullable|numeric' // Validate 'amount' for each order
+            'orders.*.amount' => 'nullable|numeric|gt:0' // Validate 'amount' for each order
         ];
     }
 }
