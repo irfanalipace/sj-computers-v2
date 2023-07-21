@@ -73,7 +73,10 @@ class RefundController extends BaseController
     //list of refund
     public function refundList(RefundListRequest $request)
     {
-        $refund = Refund::where('user_id', $request->user_id)->paginate(10);
+        $per_page = $request->per_page ?? 10;
+        $refund = Refund::where('user_id', $request->user_id)->with(['orders' => function ($query) {
+            $query->select('id', 'total_amount');
+        }])->select('id', 'user_id', 'order_id', 'refund_type', 'reasons', 'amount', 'refund_delivery_date', 'status', 'created_at', 'updated_at')->paginate($per_page);
         if (is_null($refund)) {
             return $this->sendError(['error', 'Refund list is not found']);
         }
