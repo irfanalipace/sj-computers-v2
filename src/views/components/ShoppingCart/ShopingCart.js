@@ -6,6 +6,7 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { CartItem } from "./CartItem/CartItem";
 
 import "./ShopingCart.css";
+import { CheckoutBox } from "./CheckOut/CheckoutBox";
 
 export const ShopingCart = ({ onFormSubmit, form }) => {
     const cartItems = useSelector((state) => state.cart.cart);
@@ -166,7 +167,8 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                 className="overlay-modal-checkout-model-checkout-model"
                                                                 ref={modalRef}
                                                             >
-                                                                <div className="modal-content">
+                                                                <CheckoutBox />
+                                                                {/* <div className="modal-content">
                                                                     <form>
                                                                         <div className="dve-heading-data-login-checkout">
                                                                             <h4 className="login-h3">
@@ -176,33 +178,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                                     : "Sign in to checkout"}
                                                                             </h4>
                                                                         </div>
-                                                                        {/* <div className="mb-3">
-                                                                            <label
-                                                                                className="email-label"
-                                                                                htmlFor="email"
-                                                                                style={{
-                                                                                    fontWeight:
-                                                                                        "bold",
-                                                                                    fontSize:
-                                                                                        "13px",
-                                                                                }}
-                                                                            >
-                                                                                Email
-                                                                                or
-                                                                                mobile
-                                                                                phone
-                                                                                number
-                                                                            </label>
-                                                                            <input
-                                                                                type="email"
-                                                                                id="email"
-                                                                                name="email"
-                                                                                className="form-control email-checkout-data-here"
-                                                                                placeholder="Enter your email"
-                                                                                value=""
-                                                                                autoFocus
-                                                                            />
-                                                                        </div> */}
+                                                                   
                                                                         <div className="d-flex justify-content-center w-100">
                                                                             <Link
                                                                                 className="text-decoration-none"
@@ -267,7 +243,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                             </Link>
                                                                         </div>
                                                                     </form>
-                                                                </div>
+                                                                </div> */}
                                                             </div>
                                                         </div>
                                                     )}

@@ -35,6 +35,8 @@ import WhatWeDoPage from "@pages/WhatWeDo/WhatWeDoPage";
 import BlogSingle from "@pages/Blog/BlogSingle";
 import BlogsDetails from "@pages/Blog/BlogsDetails";
 
+
+
 const Router = () => {
     const routes = [
         {
@@ -195,6 +197,7 @@ const Router = () => {
             ),
         },
 
+       
 
 
 

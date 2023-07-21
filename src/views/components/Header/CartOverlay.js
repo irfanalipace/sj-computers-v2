@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "@common/Spinner/Spinner";
@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import "./CartOverlay.css";
+import { CheckoutBox } from "../ShoppingCart/CheckOut/CheckoutBox";
 
 const CartOverlay = ({ isOpen, toggleSidebar }) => {
     const cartItems = useSelector((state) => state.cart.cart);
@@ -31,6 +32,37 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
             ? dispatch(deleteItem({ cartItem: item }))
             : dispatch(deleteLocalItem({ cartItem: item, cartDetails }));
     };
+
+    const [showModal, setShowModal] = useState(false);
+    const modalRef = useRef(null);
+
+    const handleClick = () => {
+        setShowModal(true);
+        
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
+    const handleClickOutside = (event) => {
+        if (modalRef.current && !modalRef.current.contains(event.target)) {
+            setShowModal(false);
+        }
+    };
+
+    useEffect(() => {
+        if (showModal) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showModal]);
+
     return (
         <div>
             {isOpen && (
@@ -136,7 +168,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                             ( {details?.total_items} items ):
                                         </span>
                                         ${details?.sub_total}
-                                        <div className="mt-2">
+                                        {/* <div className="mt-2">
                                             <Link
                                                 to="/cart"
                                                 className="text-decoration-none cart-text-link"
@@ -157,7 +189,66 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                     {details?.total_items} item)
                                                 </button>
                                             </Link>
-                                        </div>
+
+                                         
+                                        </div> */}
+                                        {isAuthenticated ? (
+                                            <div className="mt-2">
+                                                <Link
+                                                    to="/cart"
+                                                    className="text-decoration-none cart-text-link"
+                                                    onClick={toggleSidebar}
+                                                >
+                                                    <button className="cart-overlaybutton">
+                                                        Cart
+                                                    </button>
+                                                </Link>
+
+                                                <Link
+                                                    to="/checkout"
+                                                    className="text-decoration-none processed-link"
+                                                    onClick={toggleSidebar}
+                                                >
+                                                    <button className="processed-button">
+                                                        Proceed to checkout (
+                                                        {details?.total_items}{" "}
+                                                        item)
+                                                    </button>
+                                                </Link>
+                                            </div>
+                                        ) : (
+                                            <div >
+                                                <Link
+                                                    to="/cart"
+                                                    className="text-decoration-none cart-text-link"
+                                                    onClick={toggleSidebar}
+                                                >
+                                                    <button className="cart-overlaybutton">
+                                                        Cart
+                                                    </button>
+                                                </Link>
+
+                                                <Link
+                                                    className="text-decoration-none processed-link"
+                                                    onClick={handleClick}
+                                                >
+                                                    <button className="processed-button">
+                                                        Proceed to checkout ( 1
+                                                        item)
+                                                    </button>
+                                                </Link>
+                                                {showModal && (
+                                                    <div className="overlay-model-checkout-model">
+                                                        <div
+                                                            className="overlay-modal-checkout-model-checkout-model"
+                                                            ref={modalRef}
+                                                        >
+                                                           <CheckoutBox />
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
