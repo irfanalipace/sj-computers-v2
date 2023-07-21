@@ -24,6 +24,7 @@ class RefundListRequest extends FormRequest
     public function rules()
     {
         return [
+            'per_page' => 'nullable|numeric|gt:0',
             'user_id' => 'required|exists:users,id'
         ];
     }
