@@ -6,7 +6,7 @@ import { destroyToken } from "@services/jwtService";
  * Service to call HTTP request via Axios
  */
 
-const ACCEPTED_ERROR_CODES = [400, 401, 403, 422];
+const ACCEPTED_ERROR_CODES = [400, 401, 403, 404, 422];
 
 const ApiService = {
     instance: null,

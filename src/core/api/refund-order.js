@@ -38,7 +38,7 @@ export function verifyOtpSjApi(param) {
 
 export function verifyEmailOTOApi(param) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/verify-email`, param, OTOBaseURL)
+        ApiService.post(`/customer-email-verify`, param, OTOBaseURL)
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | verifyEmailOTO| response",
@@ -55,7 +55,7 @@ export function verifyEmailOTOApi(param) {
 
 export function verifyOTPOTOApi(param) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/verify-otp`, param, OTOBaseURL)
+        ApiService.post(`/customer-verify-otp`, param, OTOBaseURL)
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | verifyOTPOTO| response",
@@ -89,7 +89,7 @@ export function getOrdersList(param) {
 
 export function getInvoicesList(param) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/invoices-list`, null, param, OTOBaseURL)
+        ApiService.get(`/customer-invoice-list`, null, param, OTOBaseURL)
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | getInvoicesList| response",
@@ -106,7 +106,7 @@ export function getInvoicesList(param) {
 
 export function getPreviousRefundsListSj(params) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/refunds-list`, null, params)
+        ApiService.get(`/customer-refund-list`, null, params)
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | getPreviousRefundsListSj| response",
@@ -123,7 +123,7 @@ export function getPreviousRefundsListSj(params) {
 
 export function getPreviousRefundsListOto(params) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/refunds-list`, null, params, OTOBaseURL)
+        ApiService.get(`/customer-refund-list`, null, params, OTOBaseURL)
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | getPreviousRefundsListOto| response",
@@ -155,9 +155,9 @@ export function getOrderDetailsSJ(param) {
     });
 }
 
-export function getOrderDetailsOTO(param) {
+export function getInvoiceDetailsOTO(param) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/order-detail`, null, param, OTOBaseURL)
+        ApiService.get(`/customer-invoice-details`, null, param, OTOBaseURL)
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | getOrderDetailsOTO| response",

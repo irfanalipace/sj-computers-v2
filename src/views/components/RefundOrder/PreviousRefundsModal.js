@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import { styled } from "@mui/material/styles";
 import {
@@ -13,13 +13,28 @@ import {
     Pagination,
 } from "@mui/material";
 
+import {
+    getPreviousRefundsListSj,
+    getPreviousRefundsListOto,
+} from "@api/refund-order";
+import { USER_TYPE_ENUM, ORDER_TYPE_ENUM } from "@pages/RefundOrder/constants";
+import { STATUS_COLOR_ENUM } from "@utils/constants";
+
+import Loader from "@common/Spinner/Spinner";
+import { height } from "@mui/system";
+
 export default function PreviousRefundsModal({
     showModal = false,
     handleClose,
+    orderType,
+    userID,
 }) {
-    const [data, setData] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0);
-    const [pageCount, setPageCount] = useState(0);
+    const [data, setData] = useState({
+        current_page: 1,
+        data: [],
+        last_page: 1,
+    });
+    const [isLoading, setIsLoading] = useState(false);
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
@@ -41,17 +56,49 @@ export default function PreviousRefundsModal({
         },
     }));
 
-    function createData(name, calories, fat, carbs, protein) {
-        return { name, calories, fat, carbs, protein };
-    }
+    const fetchPreviousRefundsData = async (e, value) => {
+        switch (orderType) {
+            case ORDER_TYPE_ENUM.WEBSITE:
+                try {
+                    setIsLoading(true);
+                    let response = await getPreviousRefundsListSj({
+                        per_page: 10,
+                        page: value || data?.current_page,
+                        user_id: userID,
+                    });
+                    console.log("response", response?.data);
+                    setData(response?.data);
+                } catch (error) {}
+                break;
+            case ORDER_TYPE_ENUM.SALE_PERSON:
+                try {
+                    setIsLoading(true);
+                    let response = await getPreviousRefundsListOto({
+                        per_page: 10,
+                        page: value || data?.current_page,
+                        customer_id: userID,
+                    });
+                    console.log("response", response?.data);
+                    setData(response?.data);
+                } catch (error) {}
+                break;
 
-    const rows = [
-        createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-        createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-        createData("Eclair", 262, 16.0, 24, 6.0),
-        createData("Cupcake", 305, 3.7, 67, 4.3),
-        createData("Gingerbread", 356, 16.0, 49, 3.9),
-    ];
+            default:
+                break;
+        }
+        setIsLoading(false);
+
+        getPreviousRefundsListSj;
+    };
+
+    useEffect(() => {
+        fetchPreviousRefundsData();
+    }, [orderType]);
+
+    const getModuleText = () => {
+        if (orderType === ORDER_TYPE_ENUM.WEBSITE) return "Order";
+        return "Invoice";
+    };
 
     return (
         <Modal show={showModal} onHide={handleClose} size="xl" centered>
@@ -64,52 +111,87 @@ export default function PreviousRefundsModal({
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>
-                                    Dessert (100g serving)
+                                    {getModuleText()}#
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    Calories
+                                    Total Paid
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    Fat&nbsp;(g)
+                                    Total Refund
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    Carbs&nbsp;(g)
+                                    Note
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    Protein&nbsp;(g)
+                                    Status
                                 </StyledTableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody>
-                            {rows.map((row) => (
-                                <StyledTableRow key={row.name}>
-                                    <StyledTableCell component="th" scope="row">
-                                        {row.name}
-                                    </StyledTableCell>
-                                    <StyledTableCell align="right">
-                                        {row.calories}
-                                    </StyledTableCell>
-                                    <StyledTableCell align="right">
-                                        {row.fat}
-                                    </StyledTableCell>
-                                    <StyledTableCell align="right">
-                                        {row.carbs}
-                                    </StyledTableCell>
-                                    <StyledTableCell align="right">
-                                        {row.protein}
-                                    </StyledTableCell>
-                                </StyledTableRow>
-                            ))}
-                        </TableBody>
+                        {isLoading ? (
+                            <tr>
+                                <td colSpan={5}>
+                                    <div
+                                        className="d-flex justify-content-center align-items-center"
+                                        style={{
+                                            minHeight: "400px",
+                                            width: "100%",
+                                        }}
+                                    >
+                                        <Loader />
+                                    </div>
+                                </td>
+                            </tr>
+                        ) : (
+                            <TableBody>
+                                <>
+                                    {data?.data?.map((row) => (
+                                        <StyledTableRow key={row?.id}>
+                                            <StyledTableCell
+                                                component="th"
+                                                scope="row"
+                                            >
+                                                {row?.order_id ||
+                                                    row?.order_number ||
+                                                    "SJ-INV-" +
+                                                        row?.invoice?.id}
+                                            </StyledTableCell>
+                                            <StyledTableCell align="right">
+                                                {row?.invoice?.total}
+                                            </StyledTableCell>
+                                            <StyledTableCell align="right">
+                                                {row?.amount}
+                                            </StyledTableCell>
+                                            <StyledTableCell align="right">
+                                                {row?.reasons ||
+                                                    row?.reason ||
+                                                    "--"}
+                                            </StyledTableCell>
+                                            <StyledTableCell align="right">
+                                                <span
+                                                    class={
+                                                        "text-capitalize badge rounded-pill bg-" +
+                                                        STATUS_COLOR_ENUM[
+                                                            row?.status
+                                                        ]
+                                                    }
+                                                >
+                                                    {row?.status}
+                                                </span>
+                                            </StyledTableCell>
+                                        </StyledTableRow>
+                                    ))}{" "}
+                                </>
+                            </TableBody>
+                        )}
                     </Table>
                 </TableContainer>
             </Modal.Body>
 
             <Modal.Footer>
                 <Pagination
-                    count={pageCount}
-                    page={currentPage}
-                    onChange={(value) => console.log(value)}
+                    count={data?.last_page}
+                    page={data?.current_page}
+                    onChange={fetchPreviousRefundsData}
                 />
             </Modal.Footer>
         </Modal>

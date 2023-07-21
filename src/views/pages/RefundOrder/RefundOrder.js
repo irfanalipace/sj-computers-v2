@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { useSelector } from "react-redux";
 import {
     FormControl,
@@ -19,6 +19,11 @@ import {
     verifyOtpSjApi,
     getOrdersList,
     submitRefundRequestAPiSJ,
+    getInvoiceDetailsOTO,
+    getInvoicesList,
+    verifyEmailOTOApi,
+    verifyOTPOTOApi,
+    submitRefundRequestAPiOTO,
 } from "@api/refund-order";
 
 import {
@@ -34,25 +39,14 @@ import { toast } from "react-toastify";
 import Loader from "@common/Spinner/Spinner";
 import { formatDate, prettifyError } from "@utils/helpers";
 import { getUserId } from "@services/jwtService";
+import {
+    USER_TYPE_ENUM,
+    ORDER_TYPE_ENUM,
+    REFUND_TYPES,
+    ORDER_TYPE_KEYS_ENUMS,
+} from "./constants";
 
 export default function RefundOrder() {
-    // const classes = useStyles();
-    const ORDER_TYPE_ENUM = {
-        WEBSITE: "website",
-        SALE_PERSON: "sale_person",
-    };
-
-    const REFUND_TYPES = [
-        {
-            label: "Partial Refund",
-            key: "partial",
-        },
-        {
-            label: "Fully Refund",
-            key: "full",
-        },
-    ];
-
     const [orderType, setOrderType] = useState(null);
     const [invoicesList, setInvoicesList] = useState([]);
     const [list, setSelectedList] = useState([]);
@@ -60,43 +54,42 @@ export default function RefundOrder() {
     const [customerEmail, setCustomerEmail] = useState("");
     const [salesEmail, setSalesEmail] = useState("");
     const [otp, setOtp] = useState("");
-    const [note, setNote] = useState("");
-    const [refundOption, setRefundOption] = useState("partial");
-    const [refundAmount, setRefundAmount] = useState();
     const [showRefundsModal, setShowRefundsModal] = useState(false);
     const [isEmailSentForSJ, setIsEmailSentForSJ] = useState(false);
     const [isEmailSentForOTO, setIsEmailSentForOTO] = useState(false);
     const [isUserVerifiedOnOTO, setIsUserVerifiedOnOTO] = useState(false);
     const [isUserVerifiedOnSJ, setIsUserVerifiedOnSJ] = useState(false);
-    const [selected, setSelected] = useState([]);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const [customerID, setCustomerIDState] = useState(null);
-    const [salesID, setSalesIDState] = useState(null);
+    const [customerID, setCustomerID] = useState(null);
+    const [salesID, setSalesID] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [submitRequestList, setSubmitRequestList] = useState([]);
+    const [submitRequestOrderList, setSubmitRequestOrderList] = useState([]);
     const [isLoadingList, setIsLoadingList] = useState(false);
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
     // const [firstLoad, setFirstLoad] = useState(false);
 
+    let listItemsKey = useRef("");
+
     let remainingTime = 0;
 
-    let clearInterval = () => {};
+    let clearTimer = () => {};
 
     // Simulated login function for customer and sales
     const loginCustomer = async (customerID) => {
         if (customerID) {
-            let userType = "customer";
+            let userType = USER_TYPE_ENUM.CUSTOMER;
             loginUser(userType, customerID, customerEmail);
-            setTimer(userType);
+            clearTimer = setTimer(userType);
             fetchOrdersList(ORDER_TYPE_ENUM.WEBSITE);
         }
     };
 
     const loginSales = (salesID) => {
         if (salesID) {
-            let userType = "sales";
+            let userType = USER_TYPE_ENUM.SALE_PERSON;
             loginUser(userType, salesID, salesEmail);
-            clearInterval = setTimer(userType);
+            clearTimer = setTimer(userType);
+            fetchOrdersList(ORDER_TYPE_ENUM.SALE_PERSON);
         }
     };
 
@@ -108,28 +101,17 @@ export default function RefundOrder() {
     const handleListChange = async (e) => {
         const values = e?.target?.value;
         setSelectedOrder(values);
-        if (values.length > 0)
-            try {
-                setIsLoading(true);
-                let response = await getOrderDetailsSJ({
-                    user_id: customerID,
-                    order_id: values,
-                });
-                setSelectedList(response?.data);
-                setSubmitRequestList(
-                    response?.data?.map((item) => {
-                        return {
-                            ...item,
-                            order_id: item?.id,
-                            refund_type: "partial",
-                            amount: 0,
-                        };
-                    })
-                );
-            } catch (error) {
-                toast.error(error?.message);
-            }
-        setIsLoading(false);
+        switch (orderType) {
+            case ORDER_TYPE_ENUM.WEBSITE:
+                fetchOrdersDetails(values);
+
+                break;
+            case ORDER_TYPE_ENUM.SALE_PERSON:
+                fetchInvoiceDetails(values);
+                break;
+            default:
+                break;
+        }
     };
 
     const handleEmailSubmit = async (e) => {
@@ -139,14 +121,21 @@ export default function RefundOrder() {
         if (orderType === ORDER_TYPE_ENUM.WEBSITE) {
             try {
                 let response = await verifyEmailSjApi({ email: customerEmail });
-                setCustomerIDState(response?.data?.id);
+                setCustomerID(response?.data?.id);
                 setIsEmailSentForSJ(true);
                 toast.success("OTP sent to email");
             } catch (error) {
                 toast.error(error?.data?.errors?.error[0]);
             }
         } else if (orderType === ORDER_TYPE_ENUM.SALE_PERSON) {
-            setIsEmailSentForOTO(true);
+            try {
+                let response = await verifyEmailOTOApi({ email: salesEmail });
+                setSalesID(response?.data?.id);
+                setIsEmailSentForOTO(true);
+                toast.success("OTP sent to email");
+            } catch (error) {
+                toast.error(error?.data?.errors?.error[0]);
+            }
         }
         setIsLoading(false);
     };
@@ -167,9 +156,16 @@ export default function RefundOrder() {
                 toast.error(error?.data?.errors?.otp[0]);
             }
         } else if (orderType === ORDER_TYPE_ENUM.SALE_PERSON) {
-            setIsUserVerifiedOnOTO(true);
-            const salesID = prompt("Enter Sales ID:");
-            loginSales(salesID);
+            try {
+                await verifyOTPOTOApi({
+                    otp_code: otp,
+                    email: salesEmail,
+                });
+                setIsUserVerifiedOnOTO(true);
+                loginSales(salesID);
+            } catch (error) {
+                toast.error(error?.data?.errors?.otp[0]);
+            }
         }
         setIsLoading(false);
     };
@@ -179,42 +175,106 @@ export default function RefundOrder() {
             if (orderType === ORDER_TYPE_ENUM.WEBSITE) {
                 setIsUserVerifiedOnSJ(false);
                 setIsEmailSentForSJ(false);
-                logoutUser("customer");
+                logoutUser(USER_TYPE_ENUM.CUSTOMER);
             } else if (orderType === ORDER_TYPE_ENUM.SALE_PERSON) {
                 setIsUserVerifiedOnOTO(false);
                 setIsEmailSentForOTO(false);
-                logoutUser("sales");
+                logoutUser(USER_TYPE_ENUM.SALE_PERSON);
             }
         } else {
             if (orderType === ORDER_TYPE_ENUM.WEBSITE) {
                 setIsEmailSentForSJ(false);
-                logoutUser("customer");
+                logoutUser(USER_TYPE_ENUM.CUSTOMER);
             } else if (orderType === ORDER_TYPE_ENUM.SALE_PERSON) {
                 setIsEmailSentForOTO(false);
-                logoutUser("sales");
+                logoutUser(USER_TYPE_ENUM.SALE_PERSON);
             }
         }
         setOtp("");
     };
 
     const fetchOrdersList = async (orderType) => {
+        console.log("orderType", orderType);
         switch (orderType) {
             case ORDER_TYPE_ENUM.WEBSITE:
-                try {
-                    setIsLoadingList(true);
-                    let response = await getOrdersList({
-                        user_id: 1,
-                    });
-                    setInvoicesList(response?.data);
-                } catch (error) {
-                    toast.error("Something went wrong");
-                }
+                if (isUserVerifiedOnSJ || isAuthenticated)
+                    try {
+                        setIsLoadingList(true);
+                        let response = await getOrdersList({
+                            user_id: customerID,
+                        });
+                        setInvoicesList(response?.data);
+                    } catch (error) {
+                        toast.error("Something went wrong");
+                    }
+                break;
+            case ORDER_TYPE_ENUM.SALE_PERSON:
+                if (isUserVerifiedOnOTO)
+                    try {
+                        setIsLoadingList(true);
+                        let response = await getInvoicesList({
+                            customer_id: salesID,
+                        });
+                        setInvoicesList(response?.data);
+                    } catch (error) {
+                        toast.error("Something went wrong");
+                    }
                 break;
 
             default:
                 break;
         }
         setIsLoadingList(false);
+    };
+
+    const fetchOrdersDetails = async (values) => {
+        if (values.length > 0)
+            try {
+                setIsLoading(true);
+                let response = await getOrderDetailsSJ({
+                    user_id: customerID,
+                    order_id: values,
+                });
+                setSelectedList(response?.data);
+                setSubmitRequestOrderList(
+                    response?.data?.map((item) => {
+                        return {
+                            order_id: item?.id,
+                            refund_type: "partial",
+                            amount: 0,
+                            reasons: "",
+                        };
+                    })
+                );
+            } catch (error) {
+                toast.error(error?.message);
+            }
+        setIsLoading(false);
+    };
+
+    const fetchInvoiceDetails = async (values) => {
+        if (values.length > 0)
+            try {
+                setIsLoading(true);
+                let response = await getInvoiceDetailsOTO({
+                    customer_id: salesID,
+                    invoice_id: values,
+                });
+                setSelectedList(response?.data);
+                setSubmitRequestOrderList(
+                    response?.data?.map((item) => {
+                        return {
+                            invoice_id: item?.id,
+                            refund_type: "partial",
+                            amount: 0,
+                            reasons: "",
+                        };
+                    })
+                );
+            } catch (error) {
+                toast.error(error?.message);
+            }
+        setIsLoading(false);
     };
 
     const handleFormSubmit = async (e) => {
@@ -225,7 +285,7 @@ export default function RefundOrder() {
                     setIsLoading(true);
                     await submitRefundRequestAPiSJ({
                         user_id: customerID,
-                        orders: submitRequestList,
+                        orders: submitRequestOrderList,
                     });
                     toast.success("Refund Request Submitted Successfully");
                     resetFormStates();
@@ -237,6 +297,29 @@ export default function RefundOrder() {
                             }}
                         />
                     );
+                }
+                break;
+            case ORDER_TYPE_ENUM.SALE_PERSON:
+                try {
+                    setIsLoading(true);
+                    await submitRefundRequestAPiOTO({
+                        customer_id: salesID,
+                        invoices: submitRequestOrderList,
+                    });
+                    toast.success("Refund Request Submitted Successfully");
+                    resetFormStates();
+                } catch (error) {
+                    // toast.error(
+                    //     <div
+                    //         dangerouslySetInnerHTML={{
+                    //             __html: prettifyError(
+                    //                 error?.data?.errors ||
+                    //                     error?.data?.message[1]
+                    //             ),
+                    //         }}
+                    //     />
+                    // );
+                    toast.error(error?.data?.errors || error?.data?.message[1]);
                 }
                 break;
 
@@ -251,16 +334,14 @@ export default function RefundOrder() {
         return "Invoice";
     };
 
-    const handleOrderListChange = (index, key, value) => {
-        const updatedList = [...submitRequestList];
+    const handleRequestOrderListChange = (index, key, value) => {
+        const updatedList = [...submitRequestOrderList];
         updatedList[index] = { ...updatedList[index], [key]: value };
-        let tempArray = updatedList.filter((item) => {
-            return item?.reasons && item?.refund_type && item?.amount > 0;
-        });
-        console.log("tempArray", tempArray);
-        if (tempArray.length > 0) setIsSubmitDisabled(true);
-        else setIsSubmitDisabled(false);
-        setSubmitRequestList(updatedList);
+        // if (key === "refund_type" && value === "full")
+        //     delete updatedList[index]?.amount;
+        console.log("updatedList[index]: ", updatedList[index]);
+        setIsSubmitDisabled(isAnyPropertyInvalid(updatedList));
+        setSubmitRequestOrderList(updatedList);
     };
 
     const setTimer = (userType) => {
@@ -274,7 +355,7 @@ export default function RefundOrder() {
                 const currentTime = new Date().getTime();
                 const timeElapsed = currentTime - signInTime;
                 remainingTime = SESSION_TIMEOUT - timeElapsed;
-                console.log("remainingTime: " + remainingTime);
+                console.print("remainingTime: " + remainingTime);
                 if (remainingTime === 0) {
                     logoutUser(userType);
                     window.location.reload();
@@ -292,36 +373,33 @@ export default function RefundOrder() {
         const userTypes = getUserTypes();
 
         if (isAuthenticated) {
-            setCustomerIDState(getUserId());
-            fetchOrdersList(ORDER_TYPE_ENUM.WEBSITE);
-        } else if (userTypes?.includes("customer")) {
-            const sessionValid = isSessionValid("customer");
+            setCustomerID(getUserId());
+        } else if (userTypes?.includes(USER_TYPE_ENUM.CUSTOMER)) {
+            const sessionValid = isSessionValid(USER_TYPE_ENUM.CUSTOMER);
             if (sessionValid) {
-                setCustomerIDState(getUserID("customer"));
-                // setSignInTime("customer");
-                clearInterval = setTimer("customer");
+                setCustomerID(getUserID(USER_TYPE_ENUM.CUSTOMER));
+                // setSignInTime(USER_TYPE_ENUM.CUSTOMER);
+                clearTimer = setTimer(USER_TYPE_ENUM.CUSTOMER);
                 setIsUserVerifiedOnSJ(true);
-                fetchOrdersList(ORDER_TYPE_ENUM.WEBSITE);
             } else {
-                logoutUser("customer");
+                logoutUser(USER_TYPE_ENUM.CUSTOMER);
                 setIsUserVerifiedOnSJ(false);
             }
         }
-        if (userTypes?.includes("sales")) {
-            const sessionValid = isSessionValid("sales");
+        if (userTypes?.includes(USER_TYPE_ENUM.SALE_PERSON)) {
+            const sessionValid = isSessionValid(USER_TYPE_ENUM.SALE_PERSON);
             if (sessionValid) {
-                setSalesIDState(getUserID("sales"));
-                // setSignInTime("sales");
-                clearInterval = setTimer("sales");
+                setSalesID(getUserID(USER_TYPE_ENUM.SALE_PERSON));
+                // setSignInTime(USER_TYPE_ENUM.SALE_PERSON);
+                clearTimer = setTimer(USER_TYPE_ENUM.SALE_PERSON);
                 setIsUserVerifiedOnOTO(true);
-                fetchOrdersList(ORDER_TYPE_ENUM.SALE_PERSON);
             } else {
-                logoutUser("sales");
+                logoutUser(USER_TYPE_ENUM.SALE_PERSON);
                 setIsUserVerifiedOnOTO(false);
             }
         }
         return () => {
-            clearInterval();
+            clearTimer();
         };
     }, []);
 
@@ -331,36 +409,58 @@ export default function RefundOrder() {
 
         switch (orderType) {
             case ORDER_TYPE_ENUM.WEBSITE:
-                if (customerID) {
-                    fetchOrdersList(ORDER_TYPE_ENUM.WEBSITE);
-                }
+                listItemsKey.current = ORDER_TYPE_KEYS_ENUMS.WEBSITE.items;
+
                 break;
+
             case ORDER_TYPE_ENUM.SALE_PERSON:
-                if (salesID) {
-                    console.log("fetch invoice list");
-                }
+                listItemsKey.current = ORDER_TYPE_KEYS_ENUMS.SALE_PERSON.items;
+                break;
+
             default:
                 break;
         }
     }, [orderType]);
 
+    useEffect(() => {
+        switch (orderType) {
+            case ORDER_TYPE_ENUM.WEBSITE:
+                fetchOrdersList(ORDER_TYPE_ENUM.WEBSITE);
+                break;
+            case ORDER_TYPE_ENUM.SALE_PERSON:
+                fetchOrdersList(ORDER_TYPE_ENUM.SALE_PERSON);
+            default:
+                break;
+        }
+    }, [orderType, isUserVerifiedOnSJ, isUserVerifiedOnOTO]);
+
     const resetStates = () => {
         setSelectedOrder([]);
         setInvoicesList([]);
-        setRefundAmount(null);
-        setRefundOption("partial");
-        setNote("");
         setOtp("");
         setSelectedList([]);
+        setSubmitRequestOrderList([]);
     };
 
     const resetFormStates = () => {
         setSelectedOrder([]);
-        setInvoicesList([]);
-        setRefundAmount(null);
-        setRefundOption("partial");
-        setNote("");
+        setSelectedList([]);
+        setSubmitRequestOrderList([]);
     };
+
+    const isAnyPropertyInvalid = (arrayOfObjects) =>
+        arrayOfObjects.some((obj) => {
+            if (obj.refund_type === "partial") {
+                return (
+                    !obj.reasons ||
+                    !obj.refund_type ||
+                    !obj.amount ||
+                    obj.amount <= 0
+                );
+            } else {
+                return !obj.reasons || !obj.refund_type;
+            }
+        });
 
     const EmailVerificationJSX = useMemo(() => {
         const JSX = (
@@ -544,7 +644,7 @@ export default function RefundOrder() {
                             >
                                 {invoicesList?.map((item) => (
                                     <MenuItem key={item?.id} value={item?.id}>
-                                        Order # {item?.id}
+                                        {getModuleText()}# {item?.id}
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -645,16 +745,16 @@ export default function RefundOrder() {
                                                         <div>
                                                             {formatDate(
                                                                 order?.created_at
-                                                            )}
+                                                            ) ||
+                                                                order?.invoice_date}
                                                         </div>
                                                     </th>
                                                     <th>
                                                         <div>Total</div>
                                                         <div>
                                                             $
-                                                            {
-                                                                order?.total_amount
-                                                            }
+                                                            {order?.total_amount ||
+                                                                order?.total}
                                                         </div>
                                                     </th>
                                                     {/* <th>
@@ -667,7 +767,12 @@ export default function RefundOrder() {
                                                     </th> */}
                                                     <th>
                                                         <div>Order #</div>
-                                                        <div>{order?.id}</div>
+                                                        <div>
+                                                            {orderType ===
+                                                            ORDER_TYPE_ENUM.WEBSITE
+                                                                ? order?.id
+                                                                : order?.order_number}
+                                                        </div>
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -687,7 +792,10 @@ export default function RefundOrder() {
                                                                                 " Items"
                                                                             }
                                                                         </p>
-                                                                        {order?.order_item?.map(
+                                                                        {order[
+                                                                            listItemsKey
+                                                                                .current
+                                                                        ]?.map(
                                                                             (
                                                                                 item
                                                                             ) => {
@@ -715,11 +823,10 @@ export default function RefundOrder() {
                                                                                         </div>
                                                                                         <div className="item-description">
                                                                                             <p className="py-0">
-                                                                                                {
-                                                                                                    item
-                                                                                                        ?.product
-                                                                                                        ?.name
-                                                                                                }
+                                                                                                {item
+                                                                                                    ?.product
+                                                                                                    ?.name ||
+                                                                                                    item?.item_name}
                                                                                             </p>
                                                                                         </div>
                                                                                     </div>
@@ -889,11 +996,12 @@ export default function RefundOrder() {
                                                     variant="outlined"
                                                     color="success"
                                                     value={
-                                                        submitRequestList[index]
-                                                            ?.reasons
+                                                        submitRequestOrderList[
+                                                            index
+                                                        ]?.reasons
                                                     }
                                                     onChange={(e) =>
-                                                        handleOrderListChange(
+                                                        handleRequestOrderListChange(
                                                             index,
                                                             "reasons",
                                                             e.target.value
@@ -918,12 +1026,13 @@ export default function RefundOrder() {
                                                 labelId="select-refund-type-label"
                                                 id="list-refund-type-select"
                                                 value={
-                                                    submitRequestList[index]
-                                                        ?.refund_type
+                                                    submitRequestOrderList[
+                                                        index
+                                                    ]?.refund_type
                                                 }
                                                 label="Select Refund Option"
                                                 onChange={(e) =>
-                                                    handleOrderListChange(
+                                                    handleRequestOrderListChange(
                                                         index,
                                                         "refund_type",
                                                         e.target.value
@@ -944,8 +1053,8 @@ export default function RefundOrder() {
                                             </Select>
                                         </div>
                                     </div>
-                                    {submitRequestList[index]?.refund_type ===
-                                        "partial" && (
+                                    {submitRequestOrderList[index]
+                                        ?.refund_type === "partial" && (
                                         <form onSubmit={handleFormSubmit}>
                                             <p className="my-3 fw-medium">
                                                 Please Enter Your Refund Amount{" "}
@@ -962,11 +1071,12 @@ export default function RefundOrder() {
                                                     color="success"
                                                     type="number"
                                                     value={
-                                                        submitRequestList[index]
-                                                            ?.amount || 0
+                                                        submitRequestOrderList[
+                                                            index
+                                                        ]?.amount
                                                     }
                                                     onChange={(e) => {
-                                                        handleOrderListChange(
+                                                        handleRequestOrderListChange(
                                                             index,
                                                             "amount",
                                                             e.target.value > 0
@@ -987,6 +1097,12 @@ export default function RefundOrder() {
                             >
                                 {isLoading ? <Loader /> : "Submit"}
                             </button>
+                            {isSubmitDisabled && (
+                                <p className="fs-6 text-danger mt-2">
+                                    *Please fill all the required fields to
+                                    submit refund request.
+                                </p>
+                            )}
                         </>
                     )}
                 </div>
@@ -995,6 +1111,12 @@ export default function RefundOrder() {
                 <PreviousRefundsModal
                     showModal={showRefundsModal}
                     handleClose={closeModal}
+                    orderType={orderType}
+                    userID={
+                        orderType === ORDER_TYPE_ENUM.WEBSITE
+                            ? customerID
+                            : salesID
+                    }
                 />
             )}
         </div>
