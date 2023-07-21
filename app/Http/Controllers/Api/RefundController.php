@@ -32,7 +32,7 @@ class RefundController extends BaseController
     // order details
     public function orderDetail(OrderDetailRequest $request)
     {
-        
+
         $order_details = Order::whereIn("id", $request->order_id)->where('user_id', $request->user_id)->select('orders.id', 'orders.total_amount', 'orders.sub_total', 'orders.shipment_price', 'orders.created_at')->get();
         if (is_null($order_details)) {
             return $this->sendError(['error', 'Order Details is not found.']);
@@ -46,17 +46,21 @@ class RefundController extends BaseController
 
         try {
             DB::beginTransaction();
-            $refund = collect($request->orders)->map(function ($order) use ($request) {
-                return Refund::create([
-                    'user_id' => $request->user_id,
-                    'order_id' => $order['order_id'],
-                    'refund_type' => $order['refund_type'],
-                    'reasons' => $order['reasons'],
-                    'amount' => $order['amount'],
-                    'status' => StatusEnum::PENDING
-                ]);
-            });
-
+            $checkIfExists = Refund::where('order_id', $request->order_id)->exists();
+            if (is_null($checkIfExists)) {
+                $refund = collect($request->orders)->map(function ($order) use ($request) {
+                    return Refund::create([
+                        'user_id' => $request->user_id,
+                        'order_id' => $order['order_id'],
+                        'refund_type' => $order['refund_type'],
+                        'reasons' => $order['reasons'],
+                        'amount' => $order['amount'],
+                        'status' => StatusEnum::PENDING
+                    ]);
+                });
+            } else {
+                return $this->sendError(['error', 'This order has already refunded']);
+            }
             SendRefundMail::dispatch(User::whereId($request->user_id)->without('shippingAddress')->first(), $refund);
             DB::commit();
             return $this->sendResponse($refund, 'Successfully added refund.');
@@ -69,7 +73,7 @@ class RefundController extends BaseController
     //list of refund
     public function refundList(RefundListRequest $request)
     {
-        $refund = Refund::where('user_id', $request->user_id)->get();
+        $refund = Refund::where('user_id', $request->user_id)->paginate(10);
         if (is_null($refund)) {
             return $this->sendError(['error', 'Refund list is not found']);
         }
