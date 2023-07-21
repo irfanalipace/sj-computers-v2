@@ -43,30 +43,37 @@ class RefundController extends BaseController
     // refund submit
     public function refundSubmit(RefundSubmit $request)
     {
-
         try {
             DB::beginTransaction();
-            $checkIfExists = Refund::where('order_id', $request->order_id)->exists();
-            if (is_null($checkIfExists)) {
-                $refund = collect($request->orders)->map(function ($order) use ($request) {
-                    return Refund::create([
-                        'user_id' => $request->user_id,
-                        'order_id' => $order['order_id'],
-                        'refund_type' => $order['refund_type'],
-                        'reasons' => $order['reasons'],
-                        'amount' => $order['amount'],
-                        'status' => StatusEnum::PENDING
-                    ]);
-                });
-            } else {
-                return $this->sendError(['error', 'This order has already refunded']);
+
+            $orderIds = collect($request->orders)->pluck('order_id')->toArray();
+
+            $existingOrderIds = Refund::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
+
+            $refund = collect($request->orders)->reject(function ($order) use ($existingOrderIds) {
+                return in_array($order['order_id'], $existingOrderIds);
+            })->map(function ($order) use ($request) {
+                return Refund::create([
+                    'user_id' => $request->user_id,
+                    'order_id' => $order['order_id'],
+                    'refund_type' => $order['refund_type'],
+                    'reasons' => $order['reasons'],
+                    'amount' => $order['amount'],
+                    'status' => StatusEnum::PENDING
+                ]);
+            });
+
+            if ($refund->isEmpty()) {
+                DB::rollBack();
+                return $this->sendError(['error' => 'The selected orders have already been refunded.']);
             }
+
             SendRefundMail::dispatch(User::whereId($request->user_id)->without('shippingAddress')->first(), $refund);
             DB::commit();
             return $this->sendResponse($refund, 'Successfully added refund.');
         } catch (Exception $e) {
             DB::rollBack();
-            return $this->sendError(['error', $e->getMessage()]);
+            return $this->sendError(['error' => $e->getMessage()]);
         }
     }
 
