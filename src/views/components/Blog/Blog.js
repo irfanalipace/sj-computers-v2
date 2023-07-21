@@ -327,6 +327,20 @@ const Blog = () => {
                                             <div className="div-left-blog-text-written">
                                                 <span>Written by SJ Staff</span>
                                             </div>
+                                            <div className="div-left-blog-text-writt">
+                                                <div>
+                                                <button >Category 1</button>
+                                                </div>
+                                                <div className="vertical-line-blogs"></div>
+
+                                                <div>
+                                                <button >Category 2</button>
+                                                </div>
+                                                <div className="vertical-line-blogs"></div>
+                                                <div>
+                                                <button >Category 3</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

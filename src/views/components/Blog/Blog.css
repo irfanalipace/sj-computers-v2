@@ -223,7 +223,20 @@ li.policy-listitem {
     }
     
 } */
-
+.div-left-blog-text-writt {
+    display: flex;
+    margin-top: 6px;
+}
+.div-left-blog-text-writt button{
+    background: none;
+    border: none;
+    color: white;
+    /* border-right: white; */
+  
+    margin-right: 12px;
+    padding: 8px;
+    /* margin-left: -7px; */
+}
 .hover-text-color-policy-comp {
     color: white !important;
 }
@@ -326,6 +339,12 @@ div.sticky {
     color: white;
     padding-right: 8px;
 }
+.vertical-line-blogs {
+    margin-right: 8px;
+    width: 1px;
+    height: 31px;
+    background-color: white;
+}
 .div-left-blog-text-written {
     bottom: 0;
     font-family: "Inter";
@@ -335,7 +354,7 @@ div.sticky {
     line-height: 12px;
     color: #dddddd;
     top: 03;
-    margin-top: 94px;
+    margin-top: 72px;
 }
 .background-image-lin-dve img {
     width: 1141px;
