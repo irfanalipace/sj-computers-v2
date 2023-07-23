@@ -39,7 +39,7 @@ export const setIsVerified = (userType, value) => {
     setLocalStorageItem(`${userType}_isVerified`, value);
 };
 
-export const getUserID = (userType) => {
+export const getLoggedInUserID = (userType) => {
     return getLocalStorageItem(`${userType}_id`);
 };
 

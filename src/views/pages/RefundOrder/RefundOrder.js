@@ -30,10 +30,11 @@ import {
     isSessionValid,
     logoutUser,
     getUserTypes,
-    getUserID,
+    getLoggedInUserID,
     getSignInTime,
     SESSION_TIMEOUT,
     loginUser,
+    getUserEmail,
 } from "@utils/guestSessionHelper";
 import { toast } from "react-toastify";
 import Loader from "@common/Spinner/Spinner";
@@ -41,179 +42,105 @@ import { formatDate, prettifyError } from "@utils/helpers";
 import { getUserId } from "@services/jwtService";
 import {
     USER_TYPE_ENUM,
-    ORDER_TYPE_ENUM,
     REFUND_TYPES,
-    ORDER_TYPE_KEYS_ENUMS,
+    ORDER_DETAILS_KEYS_ENUMS,
 } from "./constants";
 
 export default function RefundOrder() {
-    const [orderType, setOrderType] = useState(null);
+    const [selectedUserType, setSelectedUserType] = useState(null);
     const [invoicesList, setInvoicesList] = useState([]);
     const [list, setSelectedList] = useState([]);
     const [selectedOrder, setSelectedOrder] = useState([]);
-    const [customerEmail, setCustomerEmail] = useState("");
-    const [salesEmail, setSalesEmail] = useState("");
-    const [otp, setOtp] = useState("");
     const [showRefundsModal, setShowRefundsModal] = useState(false);
-    const [isEmailSentForSJ, setIsEmailSentForSJ] = useState(false);
-    const [isEmailSentForOTO, setIsEmailSentForOTO] = useState(false);
-    const [isUserVerifiedOnOTO, setIsUserVerifiedOnOTO] = useState(false);
-    const [isUserVerifiedOnSJ, setIsUserVerifiedOnSJ] = useState(false);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const [customerID, setCustomerID] = useState(null);
-    const [salesID, setSalesID] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [submitRequestOrderList, setSubmitRequestOrderList] = useState([]);
     const [isLoadingList, setIsLoadingList] = useState(false);
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-    // const [firstLoad, setFirstLoad] = useState(false);
+
+    const [VERIFIED_USERS, SET_VERIFIED_USERS] = useState({
+        [USER_TYPE_ENUM.CUSTOMER]: {
+            isVerified: false,
+            isEmailSent: false,
+            email: "",
+            otp: "",
+            id: "",
+        },
+        [USER_TYPE_ENUM.SALE_PERSON]: {
+            isVerified: false,
+            isEmailSent: false,
+            email: "",
+            otp: "",
+            id: "",
+        },
+    });
 
     let listItemsKey = useRef("");
-
     let remainingTime = 0;
-
-    let clearTimer = () => {};
+    let clearTimer = useRef(null);
 
     // Simulated login function for customer and sales
-    const loginCustomer = async (customerID) => {
-        if (customerID) {
-            let userType = USER_TYPE_ENUM.CUSTOMER;
-            loginUser(userType, customerID, customerEmail);
-            clearTimer = setTimer(userType);
-            fetchOrdersList(ORDER_TYPE_ENUM.WEBSITE);
+    const loginCustomer = async () => {
+        let userType = USER_TYPE_ENUM.CUSTOMER;
+        if (VERIFIED_USERS[userType]?.id) {
+            loginUser(
+                userType,
+                VERIFIED_USERS[userType]?.id,
+                VERIFIED_USERS[userType]?.email
+            );
+            welcomeUser(userType);
         }
     };
 
-    const loginSales = (salesID) => {
-        if (salesID) {
-            let userType = USER_TYPE_ENUM.SALE_PERSON;
-            loginUser(userType, salesID, salesEmail);
-            clearTimer = setTimer(userType);
-            fetchOrdersList(ORDER_TYPE_ENUM.SALE_PERSON);
+    const loginSales = () => {
+        let userType = USER_TYPE_ENUM.SALE_PERSON;
+        if (VERIFIED_USERS[userType]?.id) {
+            loginUser(
+                userType,
+                VERIFIED_USERS[userType]?.id,
+                VERIFIED_USERS[userType]?.email
+            );
+            welcomeUser(userType);
         }
+    };
+
+    const welcomeUser = (userType) => {
+        clearTimer.current = setTimer(userType);
+        fetchOrdersList(userType);
     };
 
     const closeModal = () => setShowRefundsModal(false);
-    const setOrderTypeFunction = async (type) => {
-        setOrderType(type);
+
+    const setVerifiedUsers = (userType, key, value) => {
+        SET_VERIFIED_USERS({
+            ...VERIFIED_USERS,
+            [userType]: {
+                ...VERIFIED_USERS[userType],
+                [key]: value,
+            },
+        });
     };
 
-    const handleListChange = async (e) => {
-        const values = e?.target?.value;
-        setSelectedOrder(values);
-        switch (orderType) {
-            case ORDER_TYPE_ENUM.WEBSITE:
-                fetchOrdersDetails(values);
-
-                break;
-            case ORDER_TYPE_ENUM.SALE_PERSON:
-                fetchInvoiceDetails(values);
-                break;
-            default:
-                break;
-        }
-    };
-
-    const handleEmailSubmit = async (e) => {
-        e.preventDefault();
-        console.print("handleEmailSubmit");
-        setIsLoading(true);
-        if (orderType === ORDER_TYPE_ENUM.WEBSITE) {
-            try {
-                let response = await verifyEmailSjApi({ email: customerEmail });
-                setCustomerID(response?.data?.id);
-                setIsEmailSentForSJ(true);
-                toast.success("OTP sent to email");
-            } catch (error) {
-                toast.error(error?.data?.errors?.error[0]);
-            }
-        } else if (orderType === ORDER_TYPE_ENUM.SALE_PERSON) {
-            try {
-                let response = await verifyEmailOTOApi({ email: salesEmail });
-                setSalesID(response?.data?.id);
-                setIsEmailSentForOTO(true);
-                toast.success("OTP sent to email");
-            } catch (error) {
-                toast.error(error?.data?.errors?.error[0]);
-            }
-        }
-        setIsLoading(false);
-    };
-
-    const handleOTPSubmit = async (e) => {
-        e?.preventDefault();
-        console.print("handleOTPSubmit");
-        setIsLoading(true);
-        if (orderType === ORDER_TYPE_ENUM.WEBSITE) {
-            try {
-                await verifyOtpSjApi({
-                    otp_code: otp,
-                    email: customerEmail,
-                });
-                setIsUserVerifiedOnSJ(true);
-                loginCustomer(customerID);
-            } catch (error) {
-                toast.error(error?.data?.errors?.otp[0]);
-            }
-        } else if (orderType === ORDER_TYPE_ENUM.SALE_PERSON) {
-            try {
-                await verifyOTPOTOApi({
-                    otp_code: otp,
-                    email: salesEmail,
-                });
-                setIsUserVerifiedOnOTO(true);
-                loginSales(salesID);
-            } catch (error) {
-                toast.error(error?.data?.errors?.otp[0]);
-            }
-        }
-        setIsLoading(false);
-    };
-
-    const handleChangeEmail = (userVerified) => {
-        if (userVerified) {
-            if (orderType === ORDER_TYPE_ENUM.WEBSITE) {
-                setIsUserVerifiedOnSJ(false);
-                setIsEmailSentForSJ(false);
-                logoutUser(USER_TYPE_ENUM.CUSTOMER);
-            } else if (orderType === ORDER_TYPE_ENUM.SALE_PERSON) {
-                setIsUserVerifiedOnOTO(false);
-                setIsEmailSentForOTO(false);
-                logoutUser(USER_TYPE_ENUM.SALE_PERSON);
-            }
-        } else {
-            if (orderType === ORDER_TYPE_ENUM.WEBSITE) {
-                setIsEmailSentForSJ(false);
-                logoutUser(USER_TYPE_ENUM.CUSTOMER);
-            } else if (orderType === ORDER_TYPE_ENUM.SALE_PERSON) {
-                setIsEmailSentForOTO(false);
-                logoutUser(USER_TYPE_ENUM.SALE_PERSON);
-            }
-        }
-        setOtp("");
-    };
-
-    const fetchOrdersList = async (orderType) => {
-        console.log("orderType", orderType);
-        switch (orderType) {
-            case ORDER_TYPE_ENUM.WEBSITE:
-                if (isUserVerifiedOnSJ || isAuthenticated)
+    const fetchOrdersList = async (userType) => {
+        switch (userType) {
+            case USER_TYPE_ENUM.CUSTOMER:
+                if (VERIFIED_USERS[userType]?.isVerified || isAuthenticated)
                     try {
                         setIsLoadingList(true);
                         let response = await getOrdersList({
-                            user_id: customerID,
+                            user_id: VERIFIED_USERS[userType]?.id,
                         });
                         setInvoicesList(response?.data);
                     } catch (error) {
                         toast.error("Something went wrong");
                     }
                 break;
-            case ORDER_TYPE_ENUM.SALE_PERSON:
-                if (isUserVerifiedOnOTO)
+            case USER_TYPE_ENUM.SALE_PERSON:
+                if (VERIFIED_USERS[userType]?.isVerified)
                     try {
                         setIsLoadingList(true);
                         let response = await getInvoicesList({
-                            customer_id: salesID,
+                            customer_id: VERIFIED_USERS[userType]?.id,
                         });
                         setInvoicesList(response?.data);
                     } catch (error) {
@@ -232,7 +159,7 @@ export default function RefundOrder() {
             try {
                 setIsLoading(true);
                 let response = await getOrderDetailsSJ({
-                    user_id: customerID,
+                    user_id: VERIFIED_USERS[selectedUserType]?.id,
                     order_id: values,
                 });
                 setSelectedList(response?.data);
@@ -257,7 +184,7 @@ export default function RefundOrder() {
             try {
                 setIsLoading(true);
                 let response = await getInvoiceDetailsOTO({
-                    customer_id: salesID,
+                    customer_id: VERIFIED_USERS[userType]?.id,
                     invoice_id: values,
                 });
                 setSelectedList(response?.data);
@@ -279,12 +206,12 @@ export default function RefundOrder() {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        switch (orderType) {
-            case ORDER_TYPE_ENUM.WEBSITE:
+        switch (selectedUserType) {
+            case USER_TYPE_ENUM.CUSTOMER:
                 try {
                     setIsLoading(true);
                     await submitRefundRequestAPiSJ({
-                        user_id: customerID,
+                        user_id: VERIFIED_USERS[selectedUserType]?.id,
                         orders: submitRequestOrderList,
                     });
                     toast.success("Refund Request Submitted Successfully");
@@ -299,11 +226,11 @@ export default function RefundOrder() {
                     );
                 }
                 break;
-            case ORDER_TYPE_ENUM.SALE_PERSON:
+            case USER_TYPE_ENUM.SALE_PERSON:
                 try {
                     setIsLoading(true);
                     await submitRefundRequestAPiOTO({
-                        customer_id: salesID,
+                        customer_id: VERIFIED_USERS[selectedUserType]?.id,
                         invoices: submitRequestOrderList,
                     });
                     toast.success("Refund Request Submitted Successfully");
@@ -329,8 +256,108 @@ export default function RefundOrder() {
         setIsLoading(false);
     };
 
+    const handleListChange = async (e) => {
+        const values = e?.target?.value;
+        setSelectedOrder(values);
+        switch (selectedUserType) {
+            case USER_TYPE_ENUM.CUSTOMER:
+                fetchOrdersDetails(values);
+
+                break;
+            case USER_TYPE_ENUM.SALE_PERSON:
+                fetchInvoiceDetails(values);
+                break;
+            default:
+                break;
+        }
+    };
+
+    const handleEmailSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        if (selectedUserType === USER_TYPE_ENUM.CUSTOMER) {
+            try {
+                let response = await verifyEmailSjApi({
+                    email: VERIFIED_USERS[selectedUserType]?.email,
+                });
+                SET_VERIFIED_USERS({
+                    ...VERIFIED_USERS,
+                    [selectedUserType]: {
+                        ...VERIFIED_USERS[selectedUserType],
+                        id: response?.data?.id,
+                        isEmailSent: true,
+                    },
+                });
+                toast.success("OTP sent to email");
+            } catch (error) {
+                toast.error(error?.data?.errors?.error[0]);
+            }
+        } else if (selectedUserType === USER_TYPE_ENUM.SALE_PERSON) {
+            try {
+                let response = await verifyEmailOTOApi({
+                    email: VERIFIED_USERS[selectedUserType]?.email,
+                });
+                SET_VERIFIED_USERS({
+                    ...VERIFIED_USERS,
+                    [selectedUserType]: {
+                        ...VERIFIED_USERS[selectedUserType],
+                        id: response?.data?.id,
+                        isEmailSent: true,
+                    },
+                });
+                toast.success("OTP sent to email");
+            } catch (error) {
+                toast.error(error?.data?.errors?.error[0]);
+            }
+        }
+        setIsLoading(false);
+    };
+
+    const handleOTPSubmit = async (e) => {
+        e?.preventDefault();
+        setIsLoading(true);
+        if (selectedUserType === USER_TYPE_ENUM.CUSTOMER) {
+            try {
+                await verifyOtpSjApi({
+                    otp_code: VERIFIED_USERS[selectedUserType]?.otp,
+                    email: VERIFIED_USERS[selectedUserType]?.email,
+                });
+                setVerifiedUsers(selectedUserType, "isVerified", true);
+                loginCustomer();
+            } catch (error) {
+                toast.error(error?.data?.errors?.otp[0]);
+            }
+        } else if (selectedUserType === USER_TYPE_ENUM.SALE_PERSON) {
+            try {
+                await verifyOTPOTOApi({
+                    otp_code: VERIFIED_USERS[selectedUserType]?.otp,
+                    email: VERIFIED_USERS[selectedUserType]?.email,
+                });
+                setVerifiedUsers(selectedUserType, "isVerified", true);
+                loginSales();
+            } catch (error) {
+                toast.error(error?.data?.errors?.otp[0]);
+            }
+        }
+        setIsLoading(false);
+    };
+
+    const handleChangeEmail = () => {
+        SET_VERIFIED_USERS({
+            ...VERIFIED_USERS,
+            [selectedUserType]: {
+                ...VERIFIED_USERS[selectedUserType],
+                isVerified: false,
+                isEmailSent: false,
+                otp: "",
+            },
+        });
+        logoutUser(selectedUserType);
+        if (typeof clearTimer === "function") clearTimer();
+    };
+
     const getModuleText = () => {
-        if (orderType === ORDER_TYPE_ENUM.WEBSITE) return "Order";
+        if (selectedUserType === USER_TYPE_ENUM.CUSTOMER) return "Order";
         return "Invoice";
     };
 
@@ -339,7 +366,6 @@ export default function RefundOrder() {
         updatedList[index] = { ...updatedList[index], [key]: value };
         // if (key === "refund_type" && value === "full")
         //     delete updatedList[index]?.amount;
-        console.log("updatedList[index]: ", updatedList[index]);
         setIsSubmitDisabled(isAnyPropertyInvalid(updatedList));
         setSubmitRequestOrderList(updatedList);
     };
@@ -369,75 +395,87 @@ export default function RefundOrder() {
     };
 
     useEffect(() => {
-        setOrderType(localStorage.getItem("orderType"));
+        setSelectedUserType(localStorage.getItem("selectedUserType"));
         const userTypes = getUserTypes();
-
+        let { CUSTOMER, SALE_PERSON } = USER_TYPE_ENUM;
         if (isAuthenticated) {
-            setCustomerID(getUserId());
-        } else if (userTypes?.includes(USER_TYPE_ENUM.CUSTOMER)) {
-            const sessionValid = isSessionValid(USER_TYPE_ENUM.CUSTOMER);
+            setVerifiedUsers(CUSTOMER, "id", getUserId());
+        } else if (userTypes?.includes(CUSTOMER)) {
+            const sessionValid = isSessionValid(CUSTOMER);
             if (sessionValid) {
-                setCustomerID(getUserID(USER_TYPE_ENUM.CUSTOMER));
-                // setSignInTime(USER_TYPE_ENUM.CUSTOMER);
-                clearTimer = setTimer(USER_TYPE_ENUM.CUSTOMER);
-                setIsUserVerifiedOnSJ(true);
+                console.log("CUSTOMER:", CUSTOMER);
+                SET_VERIFIED_USERS({
+                    ...VERIFIED_USERS,
+                    [CUSTOMER]: {
+                        ...VERIFIED_USERS[CUSTOMER],
+                        id: getLoggedInUserID(CUSTOMER),
+                        isVerified: true,
+                        email: getUserEmail(CUSTOMER),
+                    },
+                });
+                clearTimer.current = setTimer(CUSTOMER);
             } else {
-                logoutUser(USER_TYPE_ENUM.CUSTOMER);
-                setIsUserVerifiedOnSJ(false);
+                logoutUser(CUSTOMER);
+                setVerifiedUsers(CUSTOMER, "isVerified", false);
             }
         }
-        if (userTypes?.includes(USER_TYPE_ENUM.SALE_PERSON)) {
-            const sessionValid = isSessionValid(USER_TYPE_ENUM.SALE_PERSON);
+        if (userTypes?.includes(SALE_PERSON)) {
+            const sessionValid = isSessionValid(SALE_PERSON);
             if (sessionValid) {
-                setSalesID(getUserID(USER_TYPE_ENUM.SALE_PERSON));
-                // setSignInTime(USER_TYPE_ENUM.SALE_PERSON);
-                clearTimer = setTimer(USER_TYPE_ENUM.SALE_PERSON);
-                setIsUserVerifiedOnOTO(true);
+                SET_VERIFIED_USERS({
+                    ...VERIFIED_USERS,
+                    [SALE_PERSON]: {
+                        ...VERIFIED_USERS[SALE_PERSON],
+                        id: getLoggedInUserID(SALE_PERSON),
+                        isVerified: true,
+                        email: getUserEmail(SALE_PERSON),
+                    },
+                });
+                clearTimer.current = setTimer(SALE_PERSON);
             } else {
-                logoutUser(USER_TYPE_ENUM.SALE_PERSON);
-                setIsUserVerifiedOnOTO(false);
+                logoutUser(SALE_PERSON);
+                setVerifiedUsers(SALE_PERSON, "isVerified", false);
             }
         }
         return () => {
-            clearTimer();
+            if (typeof clearTimer.current === "function") clearTimer.current();
         };
     }, []);
 
     useEffect(() => {
         resetStates();
-        localStorage.setItem("orderType", orderType);
+        localStorage.setItem("selectedUserType", selectedUserType);
 
-        switch (orderType) {
-            case ORDER_TYPE_ENUM.WEBSITE:
-                listItemsKey.current = ORDER_TYPE_KEYS_ENUMS.WEBSITE.items;
-
+        switch (selectedUserType) {
+            case USER_TYPE_ENUM.CUSTOMER:
+                listItemsKey.current = ORDER_DETAILS_KEYS_ENUMS.WEBSITE.items;
                 break;
 
-            case ORDER_TYPE_ENUM.SALE_PERSON:
-                listItemsKey.current = ORDER_TYPE_KEYS_ENUMS.SALE_PERSON.items;
+            case USER_TYPE_ENUM.SALE_PERSON:
+                listItemsKey.current =
+                    ORDER_DETAILS_KEYS_ENUMS.SALE_PERSON.items;
                 break;
 
             default:
                 break;
         }
-    }, [orderType]);
+    }, [selectedUserType]);
 
     useEffect(() => {
-        switch (orderType) {
-            case ORDER_TYPE_ENUM.WEBSITE:
-                fetchOrdersList(ORDER_TYPE_ENUM.WEBSITE);
+        switch (selectedUserType) {
+            case USER_TYPE_ENUM.CUSTOMER:
+                fetchOrdersList(USER_TYPE_ENUM.CUSTOMER);
                 break;
-            case ORDER_TYPE_ENUM.SALE_PERSON:
-                fetchOrdersList(ORDER_TYPE_ENUM.SALE_PERSON);
+            case USER_TYPE_ENUM.SALE_PERSON:
+                fetchOrdersList(USER_TYPE_ENUM.SALE_PERSON);
             default:
                 break;
         }
-    }, [orderType, isUserVerifiedOnSJ, isUserVerifiedOnOTO]);
+    }, [selectedUserType, VERIFIED_USERS]);
 
     const resetStates = () => {
         setSelectedOrder([]);
         setInvoicesList([]);
-        setOtp("");
         setSelectedList([]);
         setSubmitRequestOrderList([]);
     };
@@ -477,15 +515,13 @@ export default function RefundOrder() {
                             type="email"
                             color="success"
                             autoFocus
-                            value={
-                                orderType === ORDER_TYPE_ENUM.WEBSITE
-                                    ? customerEmail
-                                    : salesEmail
-                            }
+                            value={VERIFIED_USERS[selectedUserType]?.email}
                             onChange={(e) => {
-                                orderType === ORDER_TYPE_ENUM.WEBSITE
-                                    ? setCustomerEmail(e.target.value)
-                                    : setSalesEmail(e.target.value);
+                                setVerifiedUsers(
+                                    selectedUserType,
+                                    "email",
+                                    e?.target?.value
+                                );
                             }}
                             InputProps={{
                                 endAdornment: (
@@ -508,38 +544,34 @@ export default function RefundOrder() {
                 </div>
             </form>
         );
-        if (orderType === ORDER_TYPE_ENUM.WEBSITE) {
-            if (!isEmailSentForSJ && !isUserVerifiedOnSJ && !isAuthenticated) {
+        if (selectedUserType === USER_TYPE_ENUM.CUSTOMER) {
+            if (
+                !VERIFIED_USERS[selectedUserType]?.isEmailSent &&
+                !VERIFIED_USERS[selectedUserType]?.isVerified &&
+                !isAuthenticated
+            ) {
                 return JSX;
             }
             return <></>;
-        } else if (orderType === ORDER_TYPE_ENUM.SALE_PERSON) {
-            if (!isEmailSentForOTO && !isUserVerifiedOnOTO) {
+        } else if (selectedUserType === USER_TYPE_ENUM.SALE_PERSON) {
+            if (
+                !VERIFIED_USERS[selectedUserType]?.isEmailSent &&
+                !VERIFIED_USERS[selectedUserType]?.isVerified
+            ) {
                 return JSX;
             }
             return <></>;
         }
         return <></>;
-    }, [
-        orderType,
-        isUserVerifiedOnSJ,
-        isUserVerifiedOnOTO,
-        customerEmail,
-        salesEmail,
-        isEmailSentForSJ,
-        isEmailSentForOTO,
-        isLoading,
-    ]);
+    }, [selectedUserType, VERIFIED_USERS, isLoading]);
 
     const OTPVerficationJSX = useMemo(() => {
         const JSX = (
             <>
                 <p className="my-3 fw-medium">
                     We’ve sent a 4 digits code to{" "}
-                    {orderType === ORDER_TYPE_ENUM.WEBSITE
-                        ? customerEmail
-                        : salesEmail}
-                    , open your email and Enter the code below.
+                    {VERIFIED_USERS[selectedUserType]?.email}, open your email
+                    and Enter the code below.
                 </p>
                 <div className="d-flex">
                     <form onSubmit={handleOTPSubmit}>
@@ -549,13 +581,17 @@ export default function RefundOrder() {
                                 label="OTP"
                                 variant="outlined"
                                 color="success"
-                                value={otp}
+                                value={VERIFIED_USERS[selectedUserType]?.otp}
                                 autoFocus
                                 onChange={(e) => {
                                     const { value } = e.target;
                                     const otpRegex = /^[0-9]*$/;
                                     if (value === "" || otpRegex.test(value)) {
-                                        setOtp(value.slice(0, 4));
+                                        setVerifiedUsers(
+                                            selectedUserType,
+                                            "otp",
+                                            value.slice(0, 4)
+                                        );
                                     }
                                 }}
                             />
@@ -565,7 +601,11 @@ export default function RefundOrder() {
                         <button
                             className="refund-btn ms-3 btn btn-success verify-otp"
                             onClick={handleOTPSubmit}
-                            disabled={isLoading || otp.length < 4}
+                            disabled={
+                                isLoading ||
+                                VERIFIED_USERS[selectedUserType]?.otp?.length <
+                                    4
+                            }
                         >
                             {isLoading ? <Loader /> : "Verify Me"}
                         </button>
@@ -583,28 +623,20 @@ export default function RefundOrder() {
             </>
         );
         if (
-            isEmailSentForSJ &&
-            orderType === ORDER_TYPE_ENUM.WEBSITE &&
-            !(isUserVerifiedOnSJ || isAuthenticated)
+            VERIFIED_USERS[selectedUserType]?.isEmailSent &&
+            !(VERIFIED_USERS[selectedUserType]?.isVerified || isAuthenticated)
         ) {
             return JSX;
         } else if (
-            isEmailSentForOTO &&
-            orderType === ORDER_TYPE_ENUM.SALE_PERSON &&
-            !isUserVerifiedOnOTO
+            VERIFIED_USERS[selectedUserType]?.isEmailSent &&
+            !VERIFIED_USERS[selectedUserType]?.isVerified
         ) {
             return JSX;
         }
         return <></>;
-    }, [
-        orderType,
-        isUserVerifiedOnSJ,
-        isUserVerifiedOnOTO,
-        otp,
-        isEmailSentForOTO,
-        isEmailSentForSJ,
-        isLoading,
-    ]);
+    }, [selectedUserType, VERIFIED_USERS, isLoading]);
+
+    console.log("VERIFIED_USERS: ", VERIFIED_USERS);
 
     const ShowListSelectJSX = useMemo(() => {
         const JSX = (
@@ -664,24 +696,18 @@ export default function RefundOrder() {
             </>
         );
         if (
-            orderType === ORDER_TYPE_ENUM.WEBSITE &&
-            (isUserVerifiedOnSJ || isAuthenticated)
+            selectedUserType === USER_TYPE_ENUM.CUSTOMER &&
+            (VERIFIED_USERS[selectedUserType]?.isVerified || isAuthenticated)
         ) {
             return JSX;
         } else if (
-            orderType === ORDER_TYPE_ENUM.SALE_PERSON &&
-            isUserVerifiedOnOTO
+            selectedUserType === USER_TYPE_ENUM.SALE_PERSON &&
+            VERIFIED_USERS[selectedUserType]?.isVerified
         ) {
             return JSX;
         }
         return <></>;
-    }, [
-        orderType,
-        isUserVerifiedOnSJ,
-        isUserVerifiedOnOTO,
-        selectedOrder,
-        invoicesList,
-    ]);
+    }, [selectedUserType, VERIFIED_USERS, selectedOrder, invoicesList]);
 
     return (
         <div className="refund-order-page py-5">
@@ -695,27 +721,26 @@ export default function RefundOrder() {
                         <div className="d-flex flex-sm-row flex-column align-items-center">
                             <button
                                 className={`refund-btn btn btn-${
-                                    orderType === ORDER_TYPE_ENUM.WEBSITE
+                                    selectedUserType === USER_TYPE_ENUM.CUSTOMER
                                         ? "success"
                                         : "outline-success"
                                 }`}
                                 onClick={() =>
-                                    setOrderTypeFunction(
-                                        ORDER_TYPE_ENUM.WEBSITE
-                                    )
+                                    setSelectedUserType(USER_TYPE_ENUM.CUSTOMER)
                                 }
                             >
                                 Order through website
                             </button>
                             <button
                                 className={`refund-btn ms-sm-3 mt-sm-0 mt-2 btn btn-${
-                                    orderType === ORDER_TYPE_ENUM.SALE_PERSON
+                                    selectedUserType ===
+                                    USER_TYPE_ENUM.SALE_PERSON
                                         ? "success"
                                         : "outline-success"
                                 }`}
                                 onClick={() =>
-                                    setOrderTypeFunction(
-                                        ORDER_TYPE_ENUM.SALE_PERSON
+                                    setSelectedUserType(
+                                        USER_TYPE_ENUM.SALE_PERSON
                                     )
                                 }
                             >
@@ -768,8 +793,8 @@ export default function RefundOrder() {
                                                     <th>
                                                         <div>Order #</div>
                                                         <div>
-                                                            {orderType ===
-                                                            ORDER_TYPE_ENUM.WEBSITE
+                                                            {selectedUserType ===
+                                                            USER_TYPE_ENUM.CUSTOMER
                                                                 ? order?.id
                                                                 : order?.order_number}
                                                         </div>
@@ -1111,12 +1136,8 @@ export default function RefundOrder() {
                 <PreviousRefundsModal
                     showModal={showRefundsModal}
                     handleClose={closeModal}
-                    orderType={orderType}
-                    userID={
-                        orderType === ORDER_TYPE_ENUM.WEBSITE
-                            ? customerID
-                            : salesID
-                    }
+                    selectedUserType={selectedUserType}
+                    userID={VERIFIED_USERS[selectedUserType]?.id}
                 />
             )}
         </div>

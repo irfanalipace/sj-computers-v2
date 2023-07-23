@@ -69,7 +69,7 @@ const ApiService = {
                     ) {
                         toast.error("Something Went Wrong");
                     }
-                    reject(error.response);
+                    reject(error?.response);
                 });
             if (baseURL) this.setDefaultBaseUrl();
         });
@@ -92,7 +92,7 @@ const ApiService = {
                     resolve(res.data);
                 })
                 .catch((error) => {
-                    console.print("error status: ", error.response.status);
+                    console.print("error status: ", error?.response?.status);
                     if (error?.response?.status === 401) {
                         destroyToken();
                     }
@@ -101,7 +101,7 @@ const ApiService = {
                     ) {
                         toast.error("Something Went Wrong");
                     }
-                    reject(error.response);
+                    reject(error?.response);
                 });
             if (baseURL) this.setDefaultBaseUrl();
         });
@@ -127,7 +127,7 @@ const ApiService = {
                 if (ACCEPTED_ERROR_CODES.includes(error?.response?.status)) {
                     toast.error("Something Went Wrong");
                 }
-                reject(error.response);
+                reject(error?.response);
             });
     },
 
@@ -150,7 +150,7 @@ const ApiService = {
                 if (ACCEPTED_ERROR_CODES.includes(error?.response?.status)) {
                     toast.error("Something Went Wrong");
                 }
-                reject(error.response);
+                reject(error?.response);
             });
     },
 };
