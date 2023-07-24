@@ -358,6 +358,7 @@ export default function RefundOrder() {
 
     useEffect(() => {
         resetStates();
+        localStorage.setItem("selectedUserType", selectedUserType);
     }, [selectedUserType]);
 
     useEffect(() => {
