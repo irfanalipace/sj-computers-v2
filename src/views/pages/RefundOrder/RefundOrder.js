@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo, useRef } from "react";
+import { useNavigate, useLocation } from "react-router";
 import { useSelector } from "react-redux";
 import {
     FormControl,
@@ -37,8 +38,10 @@ import {
 import { toast } from "react-toastify";
 import Loader from "@common/Spinner/Spinner";
 import { getUserId } from "@services/jwtService";
-import { USER_TYPE_ENUM, ORDER_DETAILS_KEYS_ENUMS } from "./constants";
+import { USER_TYPE_ENUM } from "./constants";
 import RefundForms from "@components/RefundOrder/RefundForms";
+
+import loginSVG from "@images/login-invitation.png";
 
 export default function RefundOrder() {
     const [selectedUserType, setSelectedUserType] = useState(null);
@@ -66,6 +69,9 @@ export default function RefundOrder() {
             id: "",
         },
     });
+
+    const navigate = useNavigate();
+    const location = useLocation();
 
     let remainingTime = 0;
     let clearTimer = useRef(null);
@@ -584,59 +590,99 @@ export default function RefundOrder() {
         return <></>;
     }, [selectedUserType, USERS_DATA, selectedOrder, invoicesList]);
 
+    const handleSignInButton = () => {
+        console.print("handleSignInButton");
+        const redirectURL = location.pathname;
+        window.localStorage.setItem("redirectURL", redirectURL);
+        navigate("/login");
+    };
+
     return (
         <div className="refund-order-page py-5">
             <div className="container">
-                <div className="refund-header">
-                    <h3 className="mb-4">Refund/Return</h3>
-                    <p className="my-3 fw-medium">
-                        Choose the Button below to perform certain action.
-                    </p>
-                    <div className="order-type-btns mb-4">
-                        <div className="d-flex flex-sm-row flex-column align-items-center">
-                            <button
-                                className={`refund-btn btn btn-${
-                                    selectedUserType === USER_TYPE_ENUM.CUSTOMER
-                                        ? "success"
-                                        : "outline-success"
-                                }`}
-                                onClick={() =>
-                                    setSelectedUserType(USER_TYPE_ENUM.CUSTOMER)
-                                }
-                            >
-                                Order through website
-                            </button>
-                            <button
-                                className={`refund-btn ms-sm-3 mt-sm-0 mt-2 btn btn-${
-                                    selectedUserType ===
-                                    USER_TYPE_ENUM.SALE_PERSON
-                                        ? "success"
-                                        : "outline-success"
-                                }`}
-                                onClick={() =>
-                                    setSelectedUserType(
-                                        USER_TYPE_ENUM.SALE_PERSON
-                                    )
-                                }
-                            >
-                                Order through sales person
-                            </button>
+                <div className="row flex-column-reverse flex-sm-row mx-0">
+                    <div className="col-sm-9 col-12">
+                        <div className="refund-header">
+                            <h3 className="mb-4">Refund/Return</h3>
+                            <p className="my-3 fw-medium">
+                                Choose the Button below to perform certain
+                                action.
+                            </p>
+                            <div className="order-type-btns mb-4">
+                                <div className="d-flex flex-sm-row flex-column align-items-center">
+                                    <button
+                                        className={`refund-btn btn btn-${
+                                            selectedUserType ===
+                                            USER_TYPE_ENUM.CUSTOMER
+                                                ? "success"
+                                                : "outline-success"
+                                        }`}
+                                        onClick={() =>
+                                            setSelectedUserType(
+                                                USER_TYPE_ENUM.CUSTOMER
+                                            )
+                                        }
+                                    >
+                                        Order through website
+                                    </button>
+                                    <button
+                                        className={`refund-btn ms-sm-3 mt-sm-0 mt-2 btn btn-${
+                                            selectedUserType ===
+                                            USER_TYPE_ENUM.SALE_PERSON
+                                                ? "success"
+                                                : "outline-success"
+                                        }`}
+                                        onClick={() =>
+                                            setSelectedUserType(
+                                                USER_TYPE_ENUM.SALE_PERSON
+                                            )
+                                        }
+                                    >
+                                        Order through sales person
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="refund-forms">
+                                {EmailVerificationJSX}
+                                {OTPVerficationJSX}
+                                {ShowListSelectJSX}
+                            </div>
+
+                            {list?.length > 0 && (
+                                <RefundForms
+                                    selectedUserType={selectedUserType}
+                                    list={list}
+                                    resetLists={resetLists}
+                                    userData={USERS_DATA[selectedUserType]}
+                                />
+                            )}
                         </div>
                     </div>
-                    <div className="refund-forms">
-                        {EmailVerificationJSX}
-                        {OTPVerficationJSX}
-                        {ShowListSelectJSX}
-                    </div>
-
-                    {list?.length > 0 && (
-                        <RefundForms
-                            selectedUserType={selectedUserType}
-                            list={list}
-                            resetLists={resetLists}
-                            userData={USERS_DATA[selectedUserType]}
-                        />
-                    )}
+                    {selectedUserType === USER_TYPE_ENUM.CUSTOMER &&
+                        !(
+                            USERS_DATA[selectedUserType]?.isVerified ||
+                            isAuthenticated
+                        ) && (
+                            <div className="col-sm-3 col-12 mb-sm-0 mb-3">
+                                <div className="login-section">
+                                    <div className="d-flex justify-content-center align-items-center">
+                                        <img src={loginSVG} />
+                                    </div>
+                                    <p className="text-center">
+                                        Sign in to get Hustle free tracking
+                                    </p>
+                                    <hr></hr>
+                                    <div className="d-flex justify-content-center">
+                                        <button
+                                            className="refund-btn btn btn-success w-100"
+                                            onClick={handleSignInButton}
+                                        >
+                                            Sign in
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                 </div>
             </div>
             {showRefundsModal && (
