@@ -538,7 +538,7 @@ const Blog = () => {
                                                                                         Show More
                                                                                     </button>
                                                                                 )} */}
-                                            <div className="background-image-lin-dve">
+                                                         <div className="background-image-lin-dve">
                                                 {/* <img
                                                                                     src={meetingset}
                                                                                     alt="Blog Image"
