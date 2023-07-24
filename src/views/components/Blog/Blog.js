@@ -329,16 +329,16 @@ const Blog = () => {
                                             </div>
                                             <div className="div-left-blog-text-writt">
                                                 <div>
-                                                <button >Category 1</button>
+                                                <Link to={'/blogs'} className="text-decoration-none">Category 1</Link>
                                                 </div>
                                                 <div className="vertical-line-blogs"></div>
 
                                                 <div>
-                                                <button >Category 2</button>
+                                                <Link  to={'/blogs'} className="text-decoration-none">Category 2</Link>
                                                 </div>
-                                                <div className="vertical-line-blogs"></div>
+                                                <div  to={'/blogs'} className="vertical-line-blogs"></div>
                                                 <div>
-                                                <button >Category 3</button>
+                                                <Link  to={'/blogs'} className="text-decoration-none">Category 3</Link>
                                                 </div>
                                             </div>
                                         </div>
