@@ -38,7 +38,6 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
 
     const handleClick = () => {
         setShowModal(true);
-        
     };
 
     const handleCloseModal = () => {
@@ -217,7 +216,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                 </Link>
                                             </div>
                                         ) : (
-                                            <div >
+                                            <div>
                                                 <Link
                                                     to="/cart"
                                                     className="text-decoration-none cart-text-link"
@@ -243,7 +242,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                             className="overlay-modal-checkout-model-checkout-model"
                                                             ref={modalRef}
                                                         >
-                                                           <CheckoutBox />
+                                                            <CheckoutBox toggleSidebar={toggleSidebar}/>
                                                         </div>
                                                     </div>
                                                 )}

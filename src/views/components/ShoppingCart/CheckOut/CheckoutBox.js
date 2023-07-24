@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const CheckoutBox = () => {
-
+export const CheckoutBox = ({toggleSidebar}) => {
+console.log('hello toogle', toggleSidebar)
     return (
         <div>
            
-          
                     <div className="modal-content">
                         <form>
                             <div className="dve-heading-data-login-checkout">
@@ -19,9 +18,12 @@ export const CheckoutBox = () => {
                                 <Link
                                     className="text-decoration-none"
                                     to={"/login"}
+                                    onClick={toggleSidebar}
                                 >
                                     {" "}
-                                    <button >
+                                    <button 
+                                   
+                                    >
                                          Sign in
                                     </button>
                                 </Link>
@@ -48,6 +50,7 @@ export const CheckoutBox = () => {
 
                             <div className="after-the-or-dev-sction-leve-model-checkout">
                                 <Link
+                                 onClick={toggleSidebar}
                                     className="text-decoration-none"
                                     to={"/checkout"}
                                 >

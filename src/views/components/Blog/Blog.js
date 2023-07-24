@@ -197,20 +197,16 @@ const Blog = () => {
         };
     }, [classes.stickyContainer]);
 
-
-
-
     const [readingTime, setReadingTime] = useState(0);
 
     const wpm = 225;
     const text = `${blogdteails.content}`;
+
     useEffect(() => {
         const words = text.trim().split(/\s+/).length;
         const time = Math.ceil(words / wpm);
         setReadingTime(time);
     }, [text, wpm]);
-
-
 
     return (
         <div>
@@ -327,7 +323,6 @@ const Blog = () => {
                                             <div className="div-left-blog-text-written">
                                                 <span>Written by SJ Staff</span>
                                             </div>
-                                          
                                         </div>
                                     </div>
                                 </div>
