@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
-import { Navigate, useRoutes, useLocation,useParams  } from "react-router-dom";
+import { Navigate, useRoutes, useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Home from "@pages/Home/Home";
+const Home = React.lazy(() => import("@pages/Home/Home"));
 // const Home = React.lazy(() => import("@pages/Home/Home"));
 const LoginForm = React.lazy(() => import("@pages/Auth/LoginForm"));
 const Register = React.lazy(() => import("@pages/Auth/Register"));
@@ -23,26 +23,29 @@ const Cart = React.lazy(() => import("@components/ShoppingCart/Cart"));
 const Checkout = React.lazy(() => import("@pages/Checkout/Checkout"));
 const Test = React.lazy(() => import("@pages/Test/Test"));
 const ThankYou = React.lazy(() => import("@pages/Thankyou/Thankyou"));
+const RefundOrder = React.lazy(() => import("@pages/RefundOrder/RefundOrder"));
+const Contact = React.lazy(() =>
+    import("@components/Footer/FooterMenu/Contact")
+);
+const Policy = React.lazy(() => import("@pages/Policy/Policy"));
+const SkuPage = React.lazy(() => import("@pages/SKUTables/SkuPage"));
+const BlogPage = React.lazy(() => import("@pages/Blog/BlogPage"));
+
+const AboutPage = React.lazy(() => import("@pages/About/AboutPage"));
+const WhatWeDoPage = React.lazy(() => import("@pages/WhatWeDo/WhatWeDoPage"));
+const BlogSingle = React.lazy(() => import("@pages/Blog/BlogSingle"));
+const BlogsDetails = React.lazy(() => import("@pages/Blog/BlogsDetails"));
+
 import Loader from "@common/LoaderComponent/LoaderComponent";
-import Contact from "@components/Footer/FooterMenu/Contact";
-import Policy from "@pages/Policy/Policy";
-import SkuPage from "@pages/SKUTables/SkuPage";
-import BlogPage from "@pages/Blog/BlogPage";
-
-
-import AboutPage from "@pages/About/AboutPage";
-import WhatWeDoPage from "@pages/WhatWeDo/WhatWeDoPage";
-import BlogSingle from "@pages/Blog/BlogSingle";
-import BlogsDetails from "@pages/Blog/BlogsDetails";
 
 const Router = () => {
     const routes = [
         {
             path: "/",
             element: (
-                // <Suspense fallback={<Loader />}>
-                <Home />
-                // </Suspense>
+                <Suspense fallback={<Loader />}>
+                    <Home />
+                </Suspense>
             ),
         },
         {
@@ -205,41 +208,37 @@ const Router = () => {
                     <Policy />
                 </Suspense>
             ),
-        },{
+        },
+        {
             path: "/:blogslug",
             element: (
-             
-                    <Suspense fallback={<Loader />}>
-                     <BlogsDetails />
-                    </Suspense>
-               
+                <Suspense fallback={<Loader />}>
+                    <BlogsDetails />
+                </Suspense>
             ),
-        },{
+        },
+        {
             path: "/blogs",
             element: (
-             
-                    <Suspense fallback={<Loader />}>
-                   <BlogSingle />
-                    </Suspense>
-               
+                <Suspense fallback={<Loader />}>
+                    <BlogSingle />
+                </Suspense>
             ),
-        },{
+        },
+        {
             path: "/about-us",
             element: (
-             
-                    <Suspense fallback={<Loader />}>
-                   <AboutPage />
-                    </Suspense>
-               
+                <Suspense fallback={<Loader />}>
+                    <AboutPage />
+                </Suspense>
             ),
-        },{
+        },
+        {
             path: "/what-we-do",
             element: (
-             
-                    <Suspense fallback={<Loader />}>
-                  <WhatWeDoPage />
-                    </Suspense>
-               
+                <Suspense fallback={<Loader />}>
+                    <WhatWeDoPage />
+                </Suspense>
             ),
         },
         {
@@ -308,7 +307,7 @@ const Router = () => {
                 </Suspense>
             ),
         },
-        
+
         {
             path: "/sku",
             element: (
@@ -317,6 +316,14 @@ const Router = () => {
                         <SkuPage />
                     </Suspense>
                 </ProtectedRoute>
+            ),
+        },
+        {
+            path: "/refund-order",
+            element: (
+                <Suspense fallback={<Loader />}>
+                    <RefundOrder />
+                </Suspense>
             ),
         },
 

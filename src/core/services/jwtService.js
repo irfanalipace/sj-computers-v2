@@ -38,6 +38,11 @@ export const saveUserImage = (profile_pic) => {
     user = { ...user, profile_pic };
     saveUser(user);
 };
+export const saveUserID = (id) => {
+    let user = getUser();
+    user = { ...user, id };
+    saveUser(user);
+};
 
 export const saveUserState = (userState) => {
     window.localStorage.setItem(USER_STATE, JSON.stringify(userState));
@@ -97,6 +102,10 @@ export const getUserImage = () => {
     const user = getUser();
     return user?.profile_pic;
 };
+export const getUserId = () => {
+    const user = getUser();
+    return user?.id;
+};
 
 export const getUserState = () =>
     JSON.parse(window.localStorage.getItem(USER_STATE));
@@ -128,10 +137,12 @@ export default {
     getUserImage,
     getUserName,
     getUserEmail,
+    getUserId,
     saveUserPassword,
     getUserPassword,
     destroyUserPassword,
     saveTempToken,
     getTempToken,
     destroyTempKeys,
+    saveUserID,
 };

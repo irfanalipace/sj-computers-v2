@@ -6,7 +6,7 @@ import { destroyToken } from "@services/jwtService";
  * Service to call HTTP request via Axios
  */
 
-const ACCEPTED_ERROR_CODES = [400, 401, 403, 422];
+const ACCEPTED_ERROR_CODES = [400, 401, 403, 404, 422];
 
 const ApiService = {
     instance: null,
@@ -28,6 +28,22 @@ const ApiService = {
     },
 
     /**
+     * Set the default Base URL of api requests
+     */
+
+    setDefaultBaseUrl(url = process.env.REACT_APP_API_BASE_URL) {
+        this.instance.defaults.baseURL = url;
+    },
+
+    /**
+     * Set the default Base URL of api requests =  OTO BAse URL
+     */
+
+    setOTOBaseUrl() {
+        this.instance.defaults.baseUrl = process.env.REACT_APP_OTO_BASE_URL;
+    },
+
+    /**
      * Send the GET HTTP request
      * @param resource
      * @param slug
@@ -35,9 +51,10 @@ const ApiService = {
      * @returns {*}
      */
 
-    get(resource, slug = "", params = {}) {
+    get(resource, slug = "", params = {}, baseURL) {
         return new Promise((resolve, reject) => {
             const url = `${resource}${slug ? `/${slug}` : ""}`;
+            if (baseURL) this.setDefaultBaseUrl(baseURL);
             this.instance
                 .get(url, { params })
                 .then((res) => {
@@ -54,6 +71,7 @@ const ApiService = {
                     }
                     reject(error.response);
                 });
+            if (baseURL) this.setDefaultBaseUrl();
         });
     },
 
@@ -64,8 +82,10 @@ const ApiService = {
      * @returns {*}
      */
 
-    post(resource, params = {}) {
+    post(resource, params = {}, baseURL) {
         return new Promise((resolve, reject) => {
+            if (baseURL) this.setDefaultBaseUrl(baseURL);
+
             this.instance
                 .post(`${resource}`, params)
                 .then((res) => {
@@ -83,6 +103,7 @@ const ApiService = {
                     }
                     reject(error.response);
                 });
+            if (baseURL) this.setDefaultBaseUrl();
         });
     },
 

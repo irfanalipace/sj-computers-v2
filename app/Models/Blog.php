@@ -10,4 +10,10 @@ class Blog extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public $with = ['categories'];
+
+    public function categories(){
+        return $this->belongsToMany(Category::class,'blogs_categories');
+    }
 }

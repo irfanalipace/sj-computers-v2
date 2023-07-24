@@ -14,7 +14,7 @@ const LoginForm = () => {
     const currentPage = useSelector((state) => state.auth.currentPage);
     const dispatch = useDispatch();
 
-    const CurrentForm = () => {
+    const ActiveForm = () => {
         return (
             <div>
                 {currentPage === 1 && <EmailForm form={"login"} />}
@@ -37,7 +37,7 @@ const LoginForm = () => {
                         <Header />
                     </div>
 
-                    <CurrentForm />
+                    <ActiveForm />
 
                     <div className="container new-data">
                         <div className="row">

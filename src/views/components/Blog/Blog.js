@@ -709,84 +709,26 @@ const Blog = () => {
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div className="col-md-9 col-sm-10">
-                                                                        <div className="card-dev-container-mobile-space-section-age-cart">
-                                                                            {isLoading ? (
-                                                                                <div className="specific-area-loader">
-                                                                                    <div className="loader-circle"></div>
-                                                                                    <div className="loader-text">
-                                                                                        Loading
-                                                                                    </div>
-                                                                                </div>
-                                                                            ) : (
-                                                                                <div className="row">
-                                                                                    {blogs.map((item) => (
-                                                                                        <div
-                                                                                            key={item.id}
-                                                                                            className="col-md-3 col-sm-6 col-6"
-                                                                                        >
-                                                                                            <Link
-                                                                                                to={`/${item.slug}`}
-                                                                                                className="text-decoration-none link-add-color-dev-data"
-                                                                                                onClick={() =>
-                                                                                                    handlelinkClick(
-                                                                                                        true
-                                                                                                    )
-                                                                                                }
-                                                                                            >
-                                                                                                <div className="image-fooetr-blog">
-                                                                                                    <img
-                                                                                                        src={
-                                                                                                            item.thumbnail_image
-                                                                                                                ? item.thumbnail_image
-                                                                                                                : smimage
-                                                                                                        }
-                                                                                                        alt={
-                                                                                                            item.all_text
-                                                                                                        }
-                                                                                                        className="image-for-blog-data-sets-view"
-                                                                                                    />
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    className="dev-folder-card-blog-section-dev-page"
-                                                                                                    style={{
-                                                                                                        background:
-                                                                                                            "white",
-                                                                                                    }}
-                                                                                                >
-                                                                                                    <div className="dve-sj-computers-icon-dev-blog">
-                                                                                                        <span className="image-fooetr-blog">
-                                                                                                            SJ
-                                                                                                        </span>
-                                                                                                    </div>
-                                                                                                    <div className="blog-post-paragraph-tag">
-                                                                                                        <span>
-                                                                                                            {
-                                                                                                                item.tags
-                                                                                                            }
-                                                                                                        </span>
-                                                                                                    </div>
-                                                                                                    <div className="read-date-blog-post-data">
-                                                                                                        <div>
-                                                                                                            <span className="read-more-blog">
-                                                                                                                Read
-                                                                                                                more..
-                                                                                                            </span>
-                                                                                                        </div>
-                                                                                                        <div>
-                                                                                                            <span className="read-more-date-with-data-date">
-                                                                                                                {
-                                                                                                                    item.publish_date
-                                                                                                                }
-                                                                                                            </span>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </Link>
-                                                                                        </div>
-                                                                                    ))}
-                                                                                </div>
-                                                                            )}
+                                                                    <div className="blog-post-paragraph-tag">
+                                                                        <span>
+                                                                            {
+                                                                                item.tags
+                                                                            }
+                                                                        </span>
+                                                                    </div>
+                                                                    <div className="read-date-blog-post-data">
+                                                                        <div>
+                                                                            <span className="read-more-blog">
+                                                                                Read
+                                                                                more..
+                                                                            </span>
+                                                                        </div>
+                                                                        <div>
+                                                                            <span className="read-more-date-with-data-date">
+                                                                                {
+                                                                                    item.publish_date
+                                                                                }
+                                                                            </span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
