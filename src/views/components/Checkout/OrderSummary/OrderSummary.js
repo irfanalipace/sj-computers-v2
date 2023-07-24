@@ -14,11 +14,14 @@ function OrderSummary({
     activeAccordion,
     paymentMethod,
     shippingDetails,
-}) {
+}) 
+{
     const dispatch = useDispatch();
     const [disabled, setDisabled] = useState(true);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
 
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    
     useEffect(() => {
         if (paymentMethod) setDisabled(false);
     }, [paymentMethod]);
@@ -50,6 +53,7 @@ function OrderSummary({
             };
 
             return (
+                
                 <PaymentButton
                     clickHandler={() => false}
                     id={activeAccordion}
@@ -62,71 +66,155 @@ function OrderSummary({
         }
     };
     return (
-        <div className="summary-card">
-            <div className="summary-wrapper">
-                <div className="summary-btn">
-                    <Button />
-                    {/* <p>
+        <div>
+            {isAuthenticated ? (
+                <div>
+                    <div className="summary-card">
+                        <div className="summary-wrapper">
+                            <div className="summary-btn summery-btton-order-summery">
+                                <Button />
+                                {/* <p>
                         Lorem Ipsum is simply dummy text of the printing and
                         typesetting industry. Lorem Ipsum has been the
                         industry's standard dummy text ever since the 1500s,
                     </p> */}
+                            </div>
+                            <div className="summary-details">
+                                <ul>
+                                    <li>
+                                        <span>Items:</span>
+                                        <span>
+                                            ({shippingDetails?.total_items})
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>Price:</span>
+                                        <span>
+                                            <strong>
+                                                {shippingDetails?.sub_total
+                                                    ? "$" +
+                                                      shippingDetails.sub_total
+                                                    : "$0"}
+                                            </strong>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>Shipping & handling:</span>
+                                        <span>
+                                            {shippingDetails?.shipment_info
+                                                ?.amount
+                                                ? "$" +
+                                                  shippingDetails?.shipment_info
+                                                      ?.amount
+                                                : "$0"}
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>Total before tax:</span>
+                                        <span>--</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            Estimated tax to be calculated:
+                                        </span>
+                                        <span>--</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="order-total">
+                                <ul>
+                                    <li>
+                                        <span>
+                                            <strong>Order Total</strong>
+                                        </span>
+                                        <span>
+                                            <strong>
+                                                ${shippingDetails?.total}
+                                            </strong>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="summary-footer">
+                            <p>
+                                You can track your shipment and view any
+                                applicable import fees deposit before placing
+                                your order.
+                            </p>
+                            <Link to={"#"}>How shipping costs calculates?</Link>
+                        </div>
+                    </div>
                 </div>
-                <div className="summary-details">
-                    <ul>
-                        <li>
-                            <span>Items:</span>
-                            <span>({shippingDetails?.total_items})</span>
-                        </li>
-                        <li>
-                            <span>Price:</span>
-                            <span>
-                                <strong>
-                                    {shippingDetails?.sub_total
-                                        ? "$" + shippingDetails.sub_total
-                                        : "$0"}
-                                </strong>
-                            </span>
-                        </li>
-                        <li>
-                            <span>Shipping & handling:</span>
-                            <span>
-                                {shippingDetails?.shipment_info?.amount
-                                    ? "$" +
-                                      shippingDetails?.shipment_info?.amount
-                                    : "$0"}
-                            </span>
-                        </li>
-                        <li>
-                            <span>Total before tax:</span>
-                            <span>--</span>
-                        </li>
-                        <li>
-                            <span>Estimated tax to be calculated:</span>
-                            <span>--</span>
-                        </li>
-                    </ul>
+            ) : (
+                <div>
+                    <div className="summary-card">
+                        <div className="summary-wrapper summery-data-checkout-data">
+                            <h3>Order Summary</h3>
+
+                            <div className="summary-details">
+                                <ul>
+                                    <li>
+                                        <span>Items:</span>
+                                        <span>
+                                            ({shippingDetails?.total_items})
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>Price:</span>
+                                        <span>
+                                            <strong>
+                                                {shippingDetails?.sub_total
+                                                    ? "$" +
+                                                      shippingDetails.sub_total
+                                                    : "$0"}
+                                            </strong>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>Shipping & handling:</span>
+                                        <span>
+                                            {shippingDetails?.shipment_info
+                                                ?.amount
+                                                ? "$" +
+                                                  shippingDetails?.shipment_info
+                                                      ?.amount
+                                                : "$0"}
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>Total before tax:</span>
+                                        <span>--</span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            Estimated tax to be calculated:
+                                        </span>
+                                        <span>--</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="order-total">
+                                <ul>
+                                    <li>
+                                        <span>
+                                            <strong>Order Total</strong>
+                                        </span>
+                                        <span>
+                                            <strong>
+                                                ${shippingDetails?.total}
+                                            </strong>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="summary-footer">
+                            <Link to={"#"}>How shipping costs calculates?</Link>
+                        </div>
+                    </div>
                 </div>
-                <div className="order-total">
-                    <ul>
-                        <li>
-                            <span>
-                                <strong>Order Total</strong>
-                            </span>
-                            <span>
-                                <strong>${shippingDetails?.total}</strong>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div className="summary-footer">
-                <p>
-                    You can track your shipment and view any applicable import
-                    fees deposit before placing your order.
-                </p>
-                <Link to={"#"}>How shipping costs calculates?</Link>
-            </div>
+            )}
         </div>
     );
 }

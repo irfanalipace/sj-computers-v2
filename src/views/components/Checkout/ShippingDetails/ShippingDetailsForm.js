@@ -26,7 +26,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
             },
         }
     );
-
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const states = useSelector((state) => state.states.states);
     const apiError = useSelector((state) => state.orders.apiError);
     const loading = useSelector((state) => state.orders.isLoading);
@@ -147,6 +147,29 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                 </p>
                             )}
                         </div>
+                       {
+                        !isAuthenticated &&
+                         <div className="field-section">
+                         <label htmlFor={"email"}>
+                            Email
+                             <span className="text-danger">*</span>
+                         </label>
+                         <input
+                             id="email"
+                             name="email"
+                             className="input-field"
+                             type="text"
+                             placeholder="Enter Email to track order"
+                             value={values?.email}
+                             onChange={handleChange}
+                         ></input>
+                         {fieldErrors.email && (
+                             <p className="fs-6 mt-1 text-danger">
+                                 {fieldErrors.email}
+                             </p>
+                         )}
+                     </div>
+                       }
                         <div className="field-section">
                             <label htmlFor={"streetAddress"}>
                                 Address
