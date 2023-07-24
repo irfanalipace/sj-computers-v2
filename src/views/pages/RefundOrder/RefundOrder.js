@@ -165,7 +165,7 @@ export default function RefundOrder() {
             try {
                 setIsLoading(true);
                 let response = await getInvoiceDetailsOTO({
-                    customer_id: USERS_DATA[userType]?.id,
+                    customer_id: USERS_DATA[selectedUserType]?.id,
                     invoice_id: values,
                 });
                 setSelectedList(response?.data);
@@ -181,7 +181,6 @@ export default function RefundOrder() {
         switch (selectedUserType) {
             case USER_TYPE_ENUM.CUSTOMER:
                 fetchOrdersDetails(values);
-
                 break;
             case USER_TYPE_ENUM.SALE_PERSON:
                 fetchInvoiceDetails(values);
@@ -635,6 +634,7 @@ export default function RefundOrder() {
                             selectedUserType={selectedUserType}
                             list={list}
                             resetLists={resetLists}
+                            userData={USERS_DATA[selectedUserType]}
                         />
                     )}
                 </div>

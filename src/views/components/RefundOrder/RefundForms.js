@@ -4,16 +4,22 @@ import {
     submitRefundRequestAPiSJ,
     submitRefundRequestAPiOTO,
 } from "@api/refund-order";
-import { formatDate } from "@utils/helpers";
+import { formatDate, prettifyError } from "@utils/helpers";
 import {
     USER_TYPE_ENUM,
     REFUND_TYPES,
     ORDER_DETAILS_KEYS_ENUMS,
 } from "@pages/RefundOrder/constants";
+import { toast } from "react-toastify";
 
 import Loader from "@common/Spinner/Spinner";
 
-export default function RefundForms({ selectedUserType, list, resetLists }) {
+export default function RefundForms({
+    selectedUserType,
+    list,
+    resetLists,
+    userData,
+}) {
     const [isLoading, setIsLoading] = useState(false);
     const [submitRequestOrderList, setSubmitRequestOrderList] = useState([]);
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
@@ -78,8 +84,8 @@ export default function RefundForms({ selectedUserType, list, resetLists }) {
     const handleRequestOrderListChange = (index, key, value) => {
         const updatedList = [...submitRequestOrderList];
         updatedList[index] = { ...updatedList[index], [key]: value };
-        // if (key === "refund_type" && value === "full")
-        //     delete updatedList[index]?.amount;
+        if (key === "refund_type" && value === "full")
+            updatedList[index].amount = 1;
         setIsSubmitDisabled(isAnyPropertyInvalid(updatedList));
         setSubmitRequestOrderList(updatedList);
     };
@@ -91,12 +97,13 @@ export default function RefundForms({ selectedUserType, list, resetLists }) {
                 try {
                     setIsLoading(true);
                     await submitRefundRequestAPiSJ({
-                        user_id: VERIFIED_USERS[selectedUserType]?.id,
+                        user_id: userData?.id,
                         orders: submitRequestOrderList,
                     });
                     toast.success("Refund Request Submitted Successfully");
                     resetStates();
                 } catch (error) {
+                    console.log("error", error);
                     toast.error(
                         <div
                             dangerouslySetInnerHTML={{
@@ -110,7 +117,7 @@ export default function RefundForms({ selectedUserType, list, resetLists }) {
                 try {
                     setIsLoading(true);
                     await submitRefundRequestAPiOTO({
-                        customer_id: VERIFIED_USERS[selectedUserType]?.id,
+                        customer_id: userData?.id,
                         invoices: submitRequestOrderList,
                     });
                     toast.success("Refund Request Submitted Successfully");
