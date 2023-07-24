@@ -35,6 +35,7 @@ export default function RefundForms({
                     refund_type: "partial",
                     amount: 0,
                     reasons: "",
+                    totalAmount: item?.amount,
                 };
                 return orderItem;
             })
@@ -85,7 +86,7 @@ export default function RefundForms({
         const updatedList = [...submitRequestOrderList];
         updatedList[index] = { ...updatedList[index], [key]: value };
         if (key === "refund_type" && value === "full")
-            updatedList[index].amount = 1;
+            updatedList[index].amount = updatedList[index]?.totalAmount;
         setIsSubmitDisabled(isAnyPropertyInvalid(updatedList));
         setSubmitRequestOrderList(updatedList);
     };
