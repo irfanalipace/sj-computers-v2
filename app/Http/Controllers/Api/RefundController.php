@@ -49,9 +49,18 @@ class RefundController extends BaseController
             $orderIds = collect($request->orders)->pluck('order_id')->toArray();
 
             $existingOrderIds = Refund::whereIn('order_id', $orderIds)->pluck('order_id')->toArray();
-
-            $refund = collect($request->orders)->reject(function ($order) use ($existingOrderIds) {
-                return in_array($order['order_id'], $existingOrderIds);
+            $refundErrors = [];
+            $refund = collect($request->orders)->reject(function ($order) use ($existingOrderIds, &$refundErrors) {
+                if (in_array($order['order_id'], $existingOrderIds)) {
+                    $refundErrors[] = 'Order ' . $order['order_id'] . ' has already been refunded.';
+                    return true;
+                }
+                $totalAmount = Order::where('id', $order['order_id'])->first();
+                if ($order['amount'] > $totalAmount->total_amount) {
+                    $refundErrors[] = 'Refund amount for Order ' . $order['order_id'] . ' is greater than the remaining amount for refund.';                    
+                    return true;
+                }
+                return false;
             })->map(function ($order) use ($request) {
                 return Refund::create([
                     'user_id' => $request->user_id,
@@ -61,11 +70,10 @@ class RefundController extends BaseController
                     'amount' => $order['amount'],
                     'status' => StatusEnum::PENDING
                 ]);
-            });
-
-            if ($refund->isEmpty()) {
+            });          
+            if (!empty($refundErrors)) {
                 DB::rollBack();
-                return $this->sendError(['error' => 'The selected orders have already been refunded.']);
+                return $this->sendError(['error' => $refundErrors]);
             }
 
             SendRefundMail::dispatch(User::whereId($request->user_id)->without('shippingAddress')->first(), $refund);

@@ -1,8 +1,3 @@
-export const ORDER_TYPE_ENUM = {
-    WEBSITE: "website",
-    SALE_PERSON: "sale_person",
-};
-
 export const USER_TYPE_ENUM = {
     CUSTOMER: "customer",
     SALE_PERSON: "sale_person",
@@ -19,7 +14,7 @@ export const REFUND_TYPES = [
     },
 ];
 
-export const ORDER_TYPE_KEYS_ENUMS = {
+export const ORDER_DETAILS_KEYS_ENUMS = {
     WEBSITE: {
         items: "order_item",
         singleItem: "item",
