@@ -472,7 +472,16 @@ export default function RefundForms({
                                             index,
                                             "amount",
                                             e.target.value > 0
-                                                ? e.target.value
+                                                ? e.target.value <=
+                                                      parseFloat(
+                                                          list[index].total
+                                                      ) ||
+                                                  parseFloat(
+                                                      list[index].total_amount
+                                                  )
+                                                    ? e.target.value
+                                                    : list[index].total ||
+                                                      list[index].total_amount
                                                 : ""
                                         );
                                     }}
