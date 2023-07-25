@@ -65,15 +65,15 @@ const Footer = () => {
                                                 Contact Us
                                             </Link>
                                         </li>
-                                        {/* <li>
-                                            <a
-                                                href="#!"
+                                        <li>
+                                            <Link
+                                                to={'/blogs'}
                                                 className="herf-link text-decoration-none"
                                             >
-                                                Amazon Science
-                                            </a>
+                                               News
+                                            </Link>
                                         </li>
-                                        <li>
+                                       {/*  <li>
                                             <a
                                                 href="#!"
                                                 className="herf-link text-decoration-none"

@@ -68,7 +68,7 @@ const Blog = () => {
         setIsLoading(true);
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
-                console.log("slugggggg", blogslug);
+                console.log("@@@", response?.data?.categories);
                 setBlogDetails(response?.data);
             })
             .catch((error) => {
@@ -197,9 +197,6 @@ const Blog = () => {
         };
     }, [classes.stickyContainer]);
 
-
-
-
     const [readingTime, setReadingTime] = useState(0);
 
     const wpm = 225;
@@ -210,7 +207,22 @@ const Blog = () => {
         setReadingTime(time);
     }, [text, wpm]);
 
+    const categories = [
+        { id: 1, name: "Category 1" },
+        { id: 2, name: "Category 2" },
+        { id: 3, name: "Category 3" },
+        // Add more categories as needed
+    ];
 
+    const handleClick = (event, category_id) => {
+        event.preventDefault();
+        window.history.pushState(null, null, `#`);
+    };
+
+    // const handleClick = (event, category_id) => {
+    //     event.preventDefault();
+    //     window.history.pushState(null, null, `#${category_id}`);
+    //   };
 
     return (
         <div>
@@ -318,7 +330,7 @@ const Blog = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-md-10">
+                                        <div className="col-md-9">
                                             <div className="dev-left-blog-p">
                                                 <h1 className="heading-data-title-image">
                                                     {blogdteails.title}
@@ -327,20 +339,37 @@ const Blog = () => {
                                             <div className="div-left-blog-text-written">
                                                 <span>Written by SJ Staff</span>
                                             </div>
-                                            <div className="div-left-blog-text-writt">
-                                                <div>
-                                                <Link to={'/blogs'} className="text-decoration-none">Category 1</Link>
-                                                </div>
-                                                <div className="vertical-line-blogs"></div>
-
-                                                <div>
-                                                <Link  to={'/blogs'} className="text-decoration-none">Category 2</Link>
-                                                </div>
-                                                <div  to={'/blogs'} className="vertical-line-blogs"></div>
-                                                <div>
-                                                <Link  to={'/blogs'} className="text-decoration-none">Category 3</Link>
-                                                </div>
-                                            </div>
+                                            {/* <div className="div-left-blog-text-writt">
+                                                {blogdteails.categories?.map(
+                                                    (category, index) => (
+                                                        <React.Fragment
+                                                            key={category.id}
+                                                        >
+                                                            {index > 0 && (
+                                                                <div className="vertical-line-blogs"></div>
+                                                            )}
+                                                            <div>
+                                                                <Link
+                                                                    to="#"
+                                                                    onClick={(
+                                                                        event
+                                                                    ) =>
+                                                                        handleClick(
+                                                                            event,
+                                                                            category.id
+                                                                        )
+                                                                    }
+                                                                    className="text-decoration-none"
+                                                                >
+                                                                    {
+                                                                        category.name
+                                                                    }
+                                                                </Link>
+                                                            </div>
+                                                        </React.Fragment>
+                                                    )
+                                                )}
+                                            </div> */}
                                         </div>
                                     </div>
                                 </div>
