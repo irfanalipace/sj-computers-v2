@@ -270,7 +270,6 @@ export default function RefundOrder() {
     };
 
     const handleChangeEmail = (e) => {
-        console.log("1111 handleChangeEmail");
         e?.preventDefault();
         SET_USERS_DATA({
             ...USERS_DATA,
@@ -282,7 +281,7 @@ export default function RefundOrder() {
             },
         });
         logoutUser(selectedUserType);
-        if (typeof clearTimer === "function") clearTimer();
+        if (typeof clearTimer.current === "function") clearTimer.current();
     };
 
     const getModuleText = () => {
@@ -377,10 +376,6 @@ export default function RefundOrder() {
                 break;
         }
     }, [selectedUserType, USERS_DATA]);
-
-    useEffect(() => {
-        console.log("1111 USERS_DATA: ", USERS_DATA);
-    }, [USERS_DATA]);
 
     const resetStates = () => {
         setSelectedOrders([]);
