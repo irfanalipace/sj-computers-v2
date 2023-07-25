@@ -108,7 +108,7 @@ export default function RefundOrder() {
 
     const closeModal = () => setShowRefundsModal(false);
 
-    const setVerifiedUsers = (userType, key, value) => {
+    const setUsersData = (userType, key, value) => {
         SET_USERS_DATA({
             ...USERS_DATA,
             [userType]: {
@@ -116,6 +116,7 @@ export default function RefundOrder() {
                 [key]: value,
             },
         });
+        console.log("key-value", key, value);
     };
 
     const fetchOrdersList = async (userType) => {
@@ -214,6 +215,7 @@ export default function RefundOrder() {
                 });
                 toast.success("OTP sent to email");
             } catch (error) {
+                console.log("error", error);
                 toast.error(error?.data?.errors?.error[0]);
             }
         } else if (selectedUserType === USER_TYPE_ENUM.SALE_PERSON) {
@@ -231,7 +233,8 @@ export default function RefundOrder() {
                 });
                 toast.success("OTP sent to email");
             } catch (error) {
-                toast.error(error?.data?.errors?.error[0]);
+                console.log("error", error);
+                toast.error(error?.data?.message?.error[0]);
             }
         }
         setIsLoading(false);
@@ -246,7 +249,7 @@ export default function RefundOrder() {
                     otp_code: USERS_DATA[selectedUserType]?.otp,
                     email: USERS_DATA[selectedUserType]?.email,
                 });
-                setVerifiedUsers(selectedUserType, "isVerified", true);
+                setUsersData(selectedUserType, "isVerified", true);
                 loginCustomer();
             } catch (error) {
                 toast.error(error?.data?.errors?.otp[0]);
@@ -257,7 +260,7 @@ export default function RefundOrder() {
                     otp_code: USERS_DATA[selectedUserType]?.otp,
                     email: USERS_DATA[selectedUserType]?.email,
                 });
-                setVerifiedUsers(selectedUserType, "isVerified", true);
+                setUsersData(selectedUserType, "isVerified", true);
                 loginSales();
             } catch (error) {
                 toast.error(error?.data?.errors?.otp[0]);
@@ -266,7 +269,9 @@ export default function RefundOrder() {
         setIsLoading(false);
     };
 
-    const handleChangeEmail = () => {
+    const handleChangeEmail = (e) => {
+        console.log("1111 handleChangeEmail");
+        e?.preventDefault();
         SET_USERS_DATA({
             ...USERS_DATA,
             [selectedUserType]: {
@@ -314,41 +319,41 @@ export default function RefundOrder() {
         const userTypes = getUserTypes();
         let { CUSTOMER, SALE_PERSON } = USER_TYPE_ENUM;
         if (isAuthenticated) {
-            setVerifiedUsers(CUSTOMER, "id", getUserId());
+            setUsersData(CUSTOMER, "id", getUserId());
         } else if (userTypes?.includes(CUSTOMER)) {
             const sessionValid = isSessionValid(CUSTOMER);
             if (sessionValid) {
-                SET_USERS_DATA({
-                    ...USERS_DATA,
+                SET_USERS_DATA((prev) => ({
+                    ...prev,
                     [CUSTOMER]: {
-                        ...USERS_DATA[CUSTOMER],
+                        ...prev[CUSTOMER],
                         id: getLoggedInUserID(CUSTOMER),
                         isVerified: true,
                         email: getUserEmail(CUSTOMER),
                     },
-                });
+                }));
                 clearTimer.current = setTimer(CUSTOMER);
             } else {
                 logoutUser(CUSTOMER);
-                setVerifiedUsers(CUSTOMER, "isVerified", false);
+                setUsersData(CUSTOMER, "isVerified", false);
             }
         }
         if (userTypes?.includes(SALE_PERSON)) {
             const sessionValid = isSessionValid(SALE_PERSON);
             if (sessionValid) {
-                SET_USERS_DATA({
-                    ...USERS_DATA,
+                SET_USERS_DATA((prev) => ({
+                    ...prev,
                     [SALE_PERSON]: {
-                        ...USERS_DATA[SALE_PERSON],
+                        ...prev[SALE_PERSON],
                         id: getLoggedInUserID(SALE_PERSON),
                         isVerified: true,
                         email: getUserEmail(SALE_PERSON),
                     },
-                });
+                }));
                 clearTimer.current = setTimer(SALE_PERSON);
             } else {
                 logoutUser(SALE_PERSON);
-                setVerifiedUsers(SALE_PERSON, "isVerified", false);
+                setUsersData(SALE_PERSON, "isVerified", false);
             }
         }
         return () => {
@@ -372,6 +377,10 @@ export default function RefundOrder() {
                 break;
         }
     }, [selectedUserType, USERS_DATA]);
+
+    useEffect(() => {
+        console.log("1111 USERS_DATA: ", USERS_DATA);
+    }, [USERS_DATA]);
 
     const resetStates = () => {
         setSelectedOrders([]);
@@ -401,7 +410,7 @@ export default function RefundOrder() {
                             autoFocus
                             value={USERS_DATA[selectedUserType]?.email}
                             onChange={(e) => {
-                                setVerifiedUsers(
+                                setUsersData(
                                     selectedUserType,
                                     "email",
                                     e?.target?.value
@@ -471,7 +480,7 @@ export default function RefundOrder() {
                                     const { value } = e.target;
                                     const otpRegex = /^[0-9]*$/;
                                     if (value === "" || otpRegex.test(value)) {
-                                        setVerifiedUsers(
+                                        setUsersData(
                                             selectedUserType,
                                             "otp",
                                             value.slice(0, 4)
@@ -497,7 +506,7 @@ export default function RefundOrder() {
                         <button
                             className="bg-white border-0 text-decoration-underline text-success"
                             style={{ width: "150px" }}
-                            onClick={() => handleChangeEmail(true)}
+                            onClick={handleChangeEmail}
                         >
                             Change Email
                         </button>
@@ -531,7 +540,7 @@ export default function RefundOrder() {
                         <button
                             className="bg-white border-0 text-decoration-underline text-success text-start"
                             style={{ width: "150px", fontSize: "12px" }}
-                            onClick={() => handleChangeEmail(true)}
+                            onClick={handleChangeEmail}
                         >
                             Change Email
                         </button>
@@ -592,7 +601,6 @@ export default function RefundOrder() {
     }, [selectedUserType, USERS_DATA, selectedOrder, invoicesList]);
 
     const handleSignInButton = () => {
-        console.print("handleSignInButton");
         const redirectURL = location.pathname;
         window.localStorage.setItem("redirectURL", redirectURL);
         navigate("/login");

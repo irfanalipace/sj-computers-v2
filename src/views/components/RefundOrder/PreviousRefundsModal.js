@@ -155,7 +155,10 @@ export default function PreviousRefundsModal({
                                                         row?.invoice?.id}
                                             </StyledTableCell>
                                             <StyledTableCell align="right">
-                                                {row?.invoice?.total}
+                                                {selectedUserType ===
+                                                USER_TYPE_ENUM.CUSTOMER
+                                                    ? row?.orders?.total_amount
+                                                    : row?.invoice?.total}
                                             </StyledTableCell>
                                             <StyledTableCell align="right">
                                                 {row?.amount}

@@ -35,11 +35,12 @@ export default function RefundForms({
                     refund_type: "partial",
                     amount: 0,
                     reasons: "",
-                    totalAmount: item?.amount,
+                    totalAmount: item?.total || item?.total_amount,
                 };
                 return orderItem;
             })
         );
+        setIsSubmitDisabled(isAnyPropertyInvalid(list));
     }, [list]);
 
     useEffect(() => {
@@ -85,8 +86,11 @@ export default function RefundForms({
     const handleRequestOrderListChange = (index, key, value) => {
         const updatedList = [...submitRequestOrderList];
         updatedList[index] = { ...updatedList[index], [key]: value };
-        if (key === "refund_type" && value === "full")
+        if (key === "refund_type" && value === "full") {
             updatedList[index].amount = updatedList[index]?.totalAmount;
+            delete updatedList[index].totalAmount;
+        }
+
         setIsSubmitDisabled(isAnyPropertyInvalid(updatedList));
         setSubmitRequestOrderList(updatedList);
     };
@@ -108,7 +112,10 @@ export default function RefundForms({
                     toast.error(
                         <div
                             dangerouslySetInnerHTML={{
-                                __html: prettifyError(error?.data?.errors),
+                                __html: prettifyError(
+                                    error?.data?.errors?.error ||
+                                        error?.data?.errors
+                                ),
                             }}
                         />
                     );
@@ -124,17 +131,16 @@ export default function RefundForms({
                     toast.success("Refund Request Submitted Successfully");
                     resetStates();
                 } catch (error) {
-                    // toast.error(
-                    //     <div
-                    //         dangerouslySetInnerHTML={{
-                    //             __html: prettifyError(
-                    //                 error?.data?.errors ||
-                    //                     error?.data?.message[1]
-                    //             ),
-                    //         }}
-                    //     />
-                    // );
-                    toast.error(error?.data?.errors || error?.data?.message[1]);
+                    toast.error(
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: prettifyError(
+                                    error?.data?.message?.error ||
+                                        error?.data?.message
+                                ),
+                            }}
+                        />
+                    );
                 }
                 break;
 
