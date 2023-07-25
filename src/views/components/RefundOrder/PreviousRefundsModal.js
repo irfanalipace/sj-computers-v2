@@ -150,9 +150,8 @@ export default function PreviousRefundsModal({
                                                 scope="row"
                                             >
                                                 {row?.order_id ||
-                                                    row?.order_number ||
-                                                    "SJ-INV-" +
-                                                        row?.invoice?.id}
+                                                    row?.invoice
+                                                        ?.invoice_number}
                                             </StyledTableCell>
                                             <StyledTableCell align="right">
                                                 {selectedUserType ===
