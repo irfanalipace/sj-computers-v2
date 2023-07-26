@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -7,8 +7,8 @@ import CartOverlay from "./CartOverlay";
 import LocationModel from "./Location/LocationModel";
 import LoginCart from "./LoginCart";
 import Search from "./Search";
-import MobileHeader from "./MobileHeader/MobileHeader";
-import MobileSearch from "./MobileSearch/MobileSearch";
+const MobileHeader = lazy(() => import("./MobileHeader/MobileHeader"));
+const MobileSearch = lazy(() => import("./MobileSearch/MobileSearch"));
 import TopBar from "@components/TopBar/TopBar";
 import footerlogo from "@images/header-logo.png";
 import english from "@images/home/eng.png";
@@ -129,14 +129,14 @@ const Header = () => {
                                                         </Button>
                                                     </div>
                                                 </div>
-                                                {/* {show && (
+                                                {show && (
                                                     <LocationModel
                                                         isOpen={show}
                                                         handleClose={() =>
                                                             setShow(false)
                                                         }
                                                     />
-                                                )} */}
+                                                )}
                                                 <Search />
 
                                                 <div className="nav-right">
