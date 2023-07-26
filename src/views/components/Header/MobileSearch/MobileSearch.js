@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useCollapse } from "react-collapsed";
 import "./MobileSearch.css";
 import MobileScreenModel from "./MobileScreenModel/MobileScreenModel";
 import mobileheaderlogo from "@images/header-logo.png";
@@ -18,8 +17,6 @@ import Sidebar from "../../../../views/components/Sidebar/Sidebar.js";
 
 const MobileSearch = () => {
     //search state here
-
-    const { getCollapseProps, getToggleProps, isOpen } = useCollapse();
 
     const [searchValue, setSearchValue] = useState("");
     const [showSearchBar, setShowSearchBar] = useState(false);

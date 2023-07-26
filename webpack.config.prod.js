@@ -2,8 +2,8 @@ const path = require("path");
 const Dotenv = require("dotenv-webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
-// const BundleAnalyzerPlugin =
-//     require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin =
+    require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = {
     entry: "./src/Index.js",
@@ -62,7 +62,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(), // Clean output directory before each build
         new Dotenv(),
-        // new BundleAnalyzerPlugin(),
+        new BundleAnalyzerPlugin(),
         new CompressionPlugin({
             algorithm: "gzip",
             test: /\.(js|css)$/,

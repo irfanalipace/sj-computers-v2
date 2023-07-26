@@ -8,20 +8,18 @@ import PasswordForm from "@components/Auth/PasswordForm";
 import VerifyOTP from "@components/Auth/VerifyOTP";
 import Header from "@components/Auth/Header";
 import Footer from "@components/Auth/Footer";
+import { AUTH_PAGES } from "@utils/constants";
+
 import "@pages/Auth/auth.css";
 
 const LoginForm = () => {
     const currentPage = useSelector((state) => state.auth.currentPage);
     const dispatch = useDispatch();
 
-    const ActiveForm = () => {
-        return (
-            <div>
-                {currentPage === 1 && <EmailForm form={"login"} />}
-                {currentPage === 2 && <PasswordForm />}
-                {currentPage === 3 && <VerifyOTP />}
-            </div>
-        );
+    const ActiveForm = {
+        email_form: <EmailForm form={"login"} />,
+        password_form: <PasswordForm />,
+        verify_otp: <VerifyOTP />,
     };
 
     useEffect(() => {
@@ -37,7 +35,7 @@ const LoginForm = () => {
                         <Header />
                     </div>
 
-                    <ActiveForm />
+                    {ActiveForm[AUTH_PAGES[currentPage]]}
 
                     <div className="container new-data">
                         <div className="row">

@@ -1,18 +1,12 @@
 import React, { Suspense } from "react";
 // import { ProductType } from "@components/homeproduct/ProductType";
-const BannerSlider = React.lazy(() =>
-    import("@components/Sliders/BannerSlider")
-);
-const ProductType = React.lazy(() =>
-    import("@components/homeproduct/ProductType")
-);
+import BannerSlider from "@components/Sliders/BannerSlider";
+import ProductType from "@components/homeproduct/ProductType";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 
 // import BannerSlider from "@components/Sliders/BannerSlider";
 // import MobileHomeCategory from "@components/MobileCategory/MobileHomeCategory";
-const MobileHomeCategory = React.lazy(() =>
-    import("@components/MobileCategory/MobileHomeCategory")
-);
+import MobileHomeCategory from "@components/MobileCategory/MobileHomeCategory";
 import { useViewportWidth } from "@hooks/useViewportWidth";
 const BannerCategory = () => {
     const screenWidth = useViewportWidth();

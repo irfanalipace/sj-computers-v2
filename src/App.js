@@ -4,7 +4,7 @@ import { BrowserRouter, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { getToken } from "@services/jwtService";
-const Router = React.lazy(() => import("@src/Routes"));
+import Router from "@src/Routes";
 import { alreadyLoggedIn } from "@store/auth/authThunks";
 import { useInitDataFetching } from "@hooks/useInitDataFetching";
 import TawkTo from "@components/Tawk.To/Messenger";
@@ -17,7 +17,7 @@ import Loader from "@common/LoaderComponent/LoaderComponent";
 const Footer = React.lazy(() => import("@components/Footer/Footer"));
 
 import "react-toastify/dist/ReactToastify.css";
-import "@fortawesome/fontawesome-free/css/all.css";
+// import "@fortawesome/fontawesome-free/css/all.css";
 
 import "./App.css";
 
