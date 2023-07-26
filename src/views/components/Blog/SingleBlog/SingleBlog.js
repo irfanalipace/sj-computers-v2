@@ -39,7 +39,6 @@ const SingleBlog = () => {
     const [pageCount, setPageCount] = useState(0);
     const { blogslug } = useParams();
 
-    console.log("sulg-single-page-data", blogslug);
     const handleChange = (event) => {
         const filterValue = event.target.value;
         setSelectedFilter(filterValue);
@@ -60,7 +59,6 @@ const SingleBlog = () => {
         setIsLoading(true);
         getBlogsPagesApi(currentPage, itemsPerPage)
             .then((response) => {
-                console.log(response.data?.meta_title, '22222222"');
 
                 if (response.data && response.data?.data.length > 0) {
                     setBlogs(response.data?.data);

@@ -47,15 +47,13 @@
     </noscript>
 
     <script>
-        function loadFallback() {
-            var script = document.createElement('script');
-            script.src = {{ asset(mix('/js/main.js')) }};
-            document.getElementsByTagName('head')[0].appendChild(script);
-        }
+        // function loadFallback() {
+        //     var script = document.createElement('script');
+        //     script.src = {{ asset(mix('/js/main.js')) }};
+        //     document.getElementsByTagName('head')[0].appendChild(script);
+        // }
     </script>
     <script src={{ asset(mix('/js/main.js')) }} onerror="loadFallback()"></script>
-
-
 
 
 </body>

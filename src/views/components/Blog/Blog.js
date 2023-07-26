@@ -62,13 +62,13 @@ const Blog = () => {
     const [blogdteails, setBlogDetails] = useState("");
 
     const { blogslug } = useParams();
-    console.log("blogslug", blogslug);
+ 
 
     useEffect(() => {
         setIsLoading(true);
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
-                console.log("@@@", response?.data?.categories);
+             
                 setBlogDetails(response?.data);
             })
             .catch((error) => {
@@ -144,7 +144,7 @@ const Blog = () => {
                 ? blogdteails.secondary_image
                 : "https://via.placeholder.com/400x400";
 
-            console.log(blogdteails.secandary_image, "meeting-image");
+          
             imgTag.alt = blogdteails.all_text;
 
             firstH2Tag.insertAdjacentElement("afterend", imgTag);
@@ -339,7 +339,7 @@ const Blog = () => {
                                             <div className="div-left-blog-text-written">
                                                 <span>Written by SJ Staff</span>
                                             </div>
-                                            {/* <div className="div-left-blog-text-writt">
+                                            <div className="div-left-blog-text-writt">
                                                 {blogdteails.categories?.map(
                                                     (category, index) => (
                                                         <React.Fragment
@@ -369,7 +369,7 @@ const Blog = () => {
                                                         </React.Fragment>
                                                     )
                                                 )}
-                                            </div> */}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
