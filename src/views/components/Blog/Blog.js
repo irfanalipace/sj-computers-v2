@@ -339,7 +339,7 @@ const Blog = () => {
                                             <div className="div-left-blog-text-written">
                                                 <span>Written by SJ Staff</span>
                                             </div>
-                                            {/* <div className="div-left-blog-text-writt">
+                                            <div className="div-left-blog-text-writt">
                                                 {blogdteails.categories?.map(
                                                     (category, index) => (
                                                         <React.Fragment
@@ -369,7 +369,7 @@ const Blog = () => {
                                                         </React.Fragment>
                                                     )
                                                 )}
-                                            </div> */}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
