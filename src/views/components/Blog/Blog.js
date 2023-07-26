@@ -62,13 +62,13 @@ const Blog = () => {
     const [blogdteails, setBlogDetails] = useState("");
 
     const { blogslug } = useParams();
-    console.log("blogslug", blogslug);
+ 
 
     useEffect(() => {
         setIsLoading(true);
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
-                console.log("@@@", response?.data?.categories);
+             
                 setBlogDetails(response?.data);
             })
             .catch((error) => {
@@ -144,7 +144,7 @@ const Blog = () => {
                 ? blogdteails.secondary_image
                 : "https://via.placeholder.com/400x400";
 
-            console.log(blogdteails.secandary_image, "meeting-image");
+          
             imgTag.alt = blogdteails.all_text;
 
             firstH2Tag.insertAdjacentElement("afterend", imgTag);
