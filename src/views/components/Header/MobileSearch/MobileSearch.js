@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "./MobileSearch.css";
-import MobileScreenModel from "./MobileScreenModel/MobileScreenModel";
 import mobileheaderlogo from "@images/header-logo.png";
 import ModelBox from "./MobileScreenModel/ModelBox";
 import { searchProducts } from "@store/products/productsThunks";
@@ -13,7 +12,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import SearchAccordian from "../SearchAccordian/SearchAccordian";
 import { Modal } from "@mui/material";
-import Sidebar from "../../../../views/components/Sidebar/Sidebar.js";
+const Sidebar = lazy(() => import("@components/Sidebar/Sidebar.js"));
+const MobileScreenModel = lazy(() =>
+    import("./MobileScreenModel/MobileScreenModel")
+);
 
 const MobileSearch = () => {
     //search state here
@@ -123,7 +125,9 @@ const MobileSearch = () => {
                     </div>
                 </form>
             </CollapseContainer>
-            <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
+            <Suspense>
+                <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
+            </Suspense>
             {/* <Modal
                 open={open}
                 onClose={handleClose}
@@ -132,10 +136,12 @@ const MobileSearch = () => {
             >
                 <SearchAccordian />
             </Modal> */}
-            <div className="mobile-box-model">
-                <MobileScreenModel onClick={handleButtonClick} />
-                {showModal && <ModelBox closeModal={closeModal} />}
-            </div>
+            <Suspense>
+                <div className="mobile-box-model">
+                    <MobileScreenModel onClick={handleButtonClick} />
+                    {showModal && <ModelBox closeModal={closeModal} />}
+                </div>
+            </Suspense>
         </div>
     );
 };

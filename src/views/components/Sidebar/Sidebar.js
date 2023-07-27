@@ -27,7 +27,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
         );
     };
 
-    let renderedCategories = categories
+    let RenderedCategories = categories
         .slice(0, visibleCategories)
         .map((category) => (
             <li key={category.id} onClick={() => toggleSidebar()}>
@@ -85,7 +85,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                 </div>
                             ) : (
                                 <ul className="menu-list">
-                                    {renderedCategories}
+                                    {RenderedCategories}
                                     {visibleCategories < categories.length && (
                                         <li>
                                             <button onClick={handleShowMore}>
@@ -139,7 +139,7 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                         Customer Services
                                     </Link>
                                 </li>
-                                <li >
+                                <li>
                                     {isAuthenticated ? (
                                         <>
                                             {isLoading ? (
@@ -148,8 +148,6 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                                 <Link
                                                     onClick={() =>
                                                         dispatch(logout())
-                                                        
-                                                       
                                                     }
                                                 >
                                                     Logout
@@ -157,7 +155,12 @@ export default function Sidebar({ openState, toggleSidebar }) {
                                             )}
                                         </>
                                     ) : (
-                                        <Link to={"/login"} onClick={() => toggleSidebar()}>Sign In</Link>
+                                        <Link
+                                            to={"/login"}
+                                            onClick={() => toggleSidebar()}
+                                        >
+                                            Sign In
+                                        </Link>
                                     )}
                                 </li>
                             </ul>

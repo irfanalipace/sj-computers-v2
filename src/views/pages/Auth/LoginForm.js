@@ -23,11 +23,11 @@ const LoginForm = () => {
         },
         2: {
             key: "password_form",
-            value: <PasswordForm />,
+            component: <PasswordForm />,
         },
         3: {
             key: "verify_otp",
-            value: <VerifyOTP />,
+            component: <VerifyOTP />,
         },
     };
 

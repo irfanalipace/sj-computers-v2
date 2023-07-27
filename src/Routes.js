@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
 import { Navigate, useRoutes, useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-const Home = React.lazy(() => import("@pages/Home/Home"));
 // const Home = React.lazy(() => import("@pages/Home/Home"));
+const Home = React.lazy(() => import("@pages/Home/Home"));
 const LoginForm = React.lazy(() => import("@pages/Auth/LoginForm"));
 const Register = React.lazy(() => import("@pages/Auth/Register"));
 const ForgetPassword = React.lazy(() =>
@@ -43,9 +43,9 @@ const Router = () => {
         {
             path: "/",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <Home />
-                </Suspense>
+                // <Suspense fallback={<Loader />}>
+                <Home />
+                // </Suspense>
             ),
         },
         {
@@ -198,9 +198,6 @@ const Router = () => {
             ),
         },
 
-
-
-
         {
             path: "/shipping_policy",
             element: (
@@ -260,11 +257,9 @@ const Router = () => {
         {
             path: "/checkout",
             element: (
-                
-                    <Suspense fallback={<Loader />}>
-                        <Checkout />
-                    </Suspense>
-               
+                <Suspense fallback={<Loader />}>
+                    <Checkout />
+                </Suspense>
             ),
         },
         {

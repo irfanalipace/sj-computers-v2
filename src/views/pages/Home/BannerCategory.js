@@ -11,31 +11,27 @@ import { useViewportWidth } from "@hooks/useViewportWidth";
 const BannerCategory = () => {
     const screenWidth = useViewportWidth();
     return (
-        <div className="banner-category-section">
-            <div className="banner-wrapper">
-                <div className="banner-inner">
-                    <Suspense>
+        <Suspense>
+            <div className="banner-category-section">
+                <div className="banner-wrapper">
+                    <div className="banner-inner">
                         <BannerSlider />
-                    </Suspense>
-                </div>
-            </div>
-
-            {screenWidth < 576 ? (
-                <div className="catergory-grid-wrapper">
-                    <Suspense>
-                        <MobileHomeCategory />
-                    </Suspense>
-                </div>
-            ) : (
-                <div className="catergory-grid-wrapper">
-                    <div>
-                        <Suspense>
-                            <ProductType />
-                        </Suspense>
                     </div>
                 </div>
-            )}
-        </div>
+
+                {screenWidth < 576 ? (
+                    <div className="catergory-grid-wrapper">
+                        <MobileHomeCategory />
+                    </div>
+                ) : (
+                    <div className="catergory-grid-wrapper">
+                        <div>
+                            <ProductType />
+                        </div>
+                    </div>
+                )}
+            </div>
+        </Suspense>
     );
 };
 

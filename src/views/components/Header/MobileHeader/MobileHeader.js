@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import "./MobileHeader.css";
 
 import { Link } from "react-router-dom";
-
-import Sidebar from "@components/Sidebar/Sidebar";
 
 import { useSelector } from "react-redux";
 
@@ -81,7 +79,12 @@ function MobileHeader() {
                         </div>
                     </div>
                 </header>
-                <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
+                {/* <Suspense>
+                    <Sidebar
+                        openState={isSideMenu}
+                        toggleSidebar={toggleSidebar}
+                    />
+                </Suspense> */}
             </div>
         </div>
     );

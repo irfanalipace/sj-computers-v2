@@ -8,12 +8,20 @@ import footerlogo from "@images/header-logo.png";
 import english from "@images/home/eng.png";
 import vectorcart from "@images/home/vector.png";
 
+import Loader from "@common/Spinner/Spinner";
+
 const TopBar = lazy(() => import("@components/TopBar/TopBar"));
-const Search = lazy(() => import("./Search"));
+// const Search = lazy(() => import("./Search"));
 const LocationModel = lazy(() => import("./Location/LocationModel"));
 const MobileHeader = lazy(() => import("./MobileHeader/MobileHeader"));
-const MobileSearch = lazy(() => import("./MobileSearch/MobileSearch"));
+// const MobileSearch = lazy(() => import("./MobileSearch/MobileSearch"));
 const CartOverlay = lazy(() => import("./CartOverlay"));
+// import TopBar from "@components/TopBar/TopBar";
+import Search from "./Search";
+// import LocationModel from "./Location/LocationModel";
+// import MobileHeader from "./MobileHeader/MobileHeader";
+import MobileSearch from "./MobileSearch/MobileSearch";
+// import CartOverlay from "./CartOverlay";
 
 import "./Header.css";
 
@@ -69,12 +77,21 @@ const Header = () => {
         setScreenWidth(window.innerWidth);
     };
     return (
-        <Suspense>
+        <>
             {screenWidth <= 850 ? (
                 <div>
-                    <MobileHeader />
+                    <Suspense>
+                        <MobileHeader />
+                    </Suspense>
                     <MobileSearch />
-                    {screenWidth > 450 ? <TopBar /> : <></>}
+
+                    {screenWidth > 450 ? (
+                        <Suspense>
+                            <TopBar />
+                        </Suspense>
+                    ) : (
+                        <></>
+                    )}
 
                     {/* components to render when screen width is less than or equal to 750px */}
                 </div>
@@ -132,12 +149,14 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 {show && (
-                                                    <LocationModel
-                                                        isOpen={show}
-                                                        handleClose={() =>
-                                                            setShow(false)
-                                                        }
-                                                    />
+                                                    <Suspense>
+                                                        <LocationModel
+                                                            isOpen={show}
+                                                            handleClose={() =>
+                                                                setShow(false)
+                                                            }
+                                                        />
+                                                    </Suspense>
                                                 )}
                                                 <Search />
 
@@ -273,19 +292,26 @@ const Header = () => {
                                     )}
                                 </div>
                             </header>
-                            {!ThankyouPage && <TopBar />}
+                            {!ThankyouPage && (
+                                <Suspense>
+                                    <TopBar />
+                                </Suspense>
+                            )}
                         </>
                     )}
 
                     {/* CartOverLay code */}
-                    <CartOverlay
-                        isOpen={isOpen}
-                        toggleSidebar={toggleSidebar}
-                    />
+                    <Suspense>
+                        <CartOverlay
+                            isOpen={isOpen}
+                            toggleSidebar={toggleSidebar}
+                        />
+                    </Suspense>
+
                     {/* components to render when screen width is greater than 750px */}
                 </div>
             )}
-        </Suspense>
+        </>
     );
 };
 
