@@ -288,7 +288,7 @@ const Blog = () => {
                                             </div>
                                             <div className="dive-reight-border">
                                                 <div className="circle-dev-blog">
-                                                    <span> {readingTime} </span>
+                                                    <span> {readingTime} min</span>
                                                 </div>
                                                 <div className="date-blog-after-circle">
                                                     <span>
