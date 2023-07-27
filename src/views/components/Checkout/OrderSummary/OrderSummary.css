@@ -7,6 +7,29 @@
     padding: 10px 15px;
 }
 
+.summery-btton-order-summery button{
+    font-weight: 600;
+    font-size: 12px;
+    width: 271px;
+    height: 36px;
+    max-width: 100%;
+    background: #38c056;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.summery-data-checkout-data h3{
+    margin-top: 7px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+
 .summary-btn {
     display: flex;
     flex-direction: column;

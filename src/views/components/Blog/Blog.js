@@ -62,13 +62,13 @@ const Blog = () => {
     const [blogdteails, setBlogDetails] = useState("");
 
     const { blogslug } = useParams();
-    console.log("blogslug", blogslug);
+ 
 
     useEffect(() => {
         setIsLoading(true);
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
-                console.log("slugggggg", blogslug);
+             
                 setBlogDetails(response?.data);
             })
             .catch((error) => {
@@ -144,7 +144,7 @@ const Blog = () => {
                 ? blogdteails.secondary_image
                 : "https://via.placeholder.com/400x400";
 
-            console.log(blogdteails.secandary_image, "meeting-image");
+          
             imgTag.alt = blogdteails.all_text;
 
             firstH2Tag.insertAdjacentElement("afterend", imgTag);
@@ -197,9 +197,6 @@ const Blog = () => {
         };
     }, [classes.stickyContainer]);
 
-
-
-
     const [readingTime, setReadingTime] = useState(0);
 
     const wpm = 225;
@@ -210,7 +207,22 @@ const Blog = () => {
         setReadingTime(time);
     }, [text, wpm]);
 
+    const categories = [
+        { id: 1, name: "Category 1" },
+        { id: 2, name: "Category 2" },
+        { id: 3, name: "Category 3" },
+        // Add more categories as needed
+    ];
 
+    const handleClick = (event, category_id) => {
+        event.preventDefault();
+        window.history.pushState(null, null, `#`);
+    };
+
+    // const handleClick = (event, category_id) => {
+    //     event.preventDefault();
+    //     window.history.pushState(null, null, `#${category_id}`);
+    //   };
 
     return (
         <div>
@@ -318,7 +330,7 @@ const Blog = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-md-10">
+                                        <div className="col-md-9">
                                             <div className="dev-left-blog-p">
                                                 <h1 className="heading-data-title-image">
                                                     {blogdteails.title}
@@ -326,6 +338,37 @@ const Blog = () => {
                                             </div>
                                             <div className="div-left-blog-text-written">
                                                 <span>Written by SJ Staff</span>
+                                            </div>
+                                            <div className="div-left-blog-text-writt">
+                                                {blogdteails.categories?.map(
+                                                    (category, index) => (
+                                                        <React.Fragment
+                                                            key={category.id}
+                                                        >
+                                                            {index > 0 && (
+                                                                <div className="vertical-line-blogs"></div>
+                                                            )}
+                                                            <div>
+                                                                <Link
+                                                                    to="#"
+                                                                    onClick={(
+                                                                        event
+                                                                    ) =>
+                                                                        handleClick(
+                                                                            event,
+                                                                            category.id
+                                                                        )
+                                                                    }
+                                                                    className="text-decoration-none"
+                                                                >
+                                                                    {
+                                                                        category.name
+                                                                    }
+                                                                </Link>
+                                                            </div>
+                                                        </React.Fragment>
+                                                    )
+                                                )}
                                             </div>
                                         </div>
                                     </div>

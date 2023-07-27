@@ -17,16 +17,15 @@ import {
     getPreviousRefundsListSj,
     getPreviousRefundsListOto,
 } from "@api/refund-order";
-import { USER_TYPE_ENUM, ORDER_TYPE_ENUM } from "@pages/RefundOrder/constants";
+import { USER_TYPE_ENUM } from "@pages/RefundOrder/constants";
 import { STATUS_COLOR_ENUM } from "@utils/constants";
 
 import Loader from "@common/Spinner/Spinner";
-import { height } from "@mui/system";
 
 export default function PreviousRefundsModal({
     showModal = false,
     handleClose,
-    orderType,
+    selectedUserType,
     userID,
 }) {
     const [data, setData] = useState({
@@ -57,8 +56,8 @@ export default function PreviousRefundsModal({
     }));
 
     const fetchPreviousRefundsData = async (e, value) => {
-        switch (orderType) {
-            case ORDER_TYPE_ENUM.WEBSITE:
+        switch (selectedUserType) {
+            case USER_TYPE_ENUM.CUSTOMER:
                 try {
                     setIsLoading(true);
                     let response = await getPreviousRefundsListSj({
@@ -70,7 +69,7 @@ export default function PreviousRefundsModal({
                     setData(response?.data);
                 } catch (error) {}
                 break;
-            case ORDER_TYPE_ENUM.SALE_PERSON:
+            case USER_TYPE_ENUM.SALE_PERSON:
                 try {
                     setIsLoading(true);
                     let response = await getPreviousRefundsListOto({
@@ -93,10 +92,10 @@ export default function PreviousRefundsModal({
 
     useEffect(() => {
         fetchPreviousRefundsData();
-    }, [orderType]);
+    }, [selectedUserType]);
 
     const getModuleText = () => {
-        if (orderType === ORDER_TYPE_ENUM.WEBSITE) return "Order";
+        if (selectedUserType === USER_TYPE_ENUM.CUSTOMER) return "Order";
         return "Invoice";
     };
 
@@ -151,12 +150,14 @@ export default function PreviousRefundsModal({
                                                 scope="row"
                                             >
                                                 {row?.order_id ||
-                                                    row?.order_number ||
-                                                    "SJ-INV-" +
-                                                        row?.invoice?.id}
+                                                    row?.invoice
+                                                        ?.invoice_number}
                                             </StyledTableCell>
                                             <StyledTableCell align="right">
-                                                {row?.invoice?.total}
+                                                {selectedUserType ===
+                                                USER_TYPE_ENUM.CUSTOMER
+                                                    ? row?.orders?.total_amount
+                                                    : row?.invoice?.total}
                                             </StyledTableCell>
                                             <StyledTableCell align="right">
                                                 {row?.amount}

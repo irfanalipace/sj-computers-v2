@@ -260,11 +260,11 @@ const Router = () => {
         {
             path: "/checkout",
             element: (
-                <ProtectedRoute>
+                
                     <Suspense fallback={<Loader />}>
                         <Checkout />
                     </Suspense>
-                </ProtectedRoute>
+               
             ),
         },
         {
