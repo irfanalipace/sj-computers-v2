@@ -1,18 +1,20 @@
-import { useState, useEffect, useRef, lazy } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
-import CartOverlay from "./CartOverlay";
-import LocationModel from "./Location/LocationModel";
 import LoginCart from "./LoginCart";
-import Search from "./Search";
-const MobileHeader = lazy(() => import("./MobileHeader/MobileHeader"));
-const MobileSearch = lazy(() => import("./MobileSearch/MobileSearch"));
-import TopBar from "@components/TopBar/TopBar";
 import footerlogo from "@images/header-logo.png";
 import english from "@images/home/eng.png";
 import vectorcart from "@images/home/vector.png";
+
+const TopBar = lazy(() => import("@components/TopBar/TopBar"));
+const Search = lazy(() => import("./Search"));
+const LocationModel = lazy(() => import("./Location/LocationModel"));
+const MobileHeader = lazy(() => import("./MobileHeader/MobileHeader"));
+const MobileSearch = lazy(() => import("./MobileSearch/MobileSearch"));
+const CartOverlay = lazy(() => import("./CartOverlay"));
+
 import "./Header.css";
 
 const Header = () => {
@@ -67,7 +69,7 @@ const Header = () => {
         setScreenWidth(window.innerWidth);
     };
     return (
-        <>
+        <Suspense>
             {screenWidth <= 850 ? (
                 <div>
                     <MobileHeader />
@@ -283,7 +285,7 @@ const Header = () => {
                     {/* components to render when screen width is greater than 750px */}
                 </div>
             )}
-        </>
+        </Suspense>
     );
 };
 

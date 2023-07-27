@@ -17,9 +17,18 @@ const LoginForm = () => {
     const dispatch = useDispatch();
 
     const ActiveForm = {
-        email_form: <EmailForm form={"login"} />,
-        password_form: <PasswordForm />,
-        verify_otp: <VerifyOTP />,
+        1: {
+            key: "email_sent",
+            component: <EmailForm form={"login"} />,
+        },
+        2: {
+            key: "password_form",
+            value: <PasswordForm />,
+        },
+        3: {
+            key: "verify_otp",
+            value: <VerifyOTP />,
+        },
     };
 
     useEffect(() => {
@@ -35,7 +44,7 @@ const LoginForm = () => {
                         <Header />
                     </div>
 
-                    {ActiveForm[AUTH_PAGES[currentPage]]}
+                    {ActiveForm[currentPage].component}
 
                     <div className="container new-data">
                         <div className="row">
