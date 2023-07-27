@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import Sidebar from "@components/Sidebar/Sidebar";
 
 import { useSelector } from "react-redux";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome,faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 function MobileHeader() {
     const cartDetails = useSelector((state) => state.cart.details);
     const [isSideMenu, setSideMenu] = useState(false);
@@ -31,18 +32,28 @@ function MobileHeader() {
                             <ul className="ul-item-list-header">
                                 <li>
                                     <Link to="/">
-                                        <i
+                                        {/* <i
                                             className="fa fa-home font-size-mobile-icon"
                                             aria-hidden="true"
-                                        ></i>
+                                        ></i> */}
+                                          <FontAwesomeIcon
+                    icon={faHome}
+                    className="font-size-mobile-icon"
+                />
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to="/account">
-                                        <i
+                                        {/* <i
                                             className="fa fa-user font-size-mobile-icon"
                                             aria-hidden="true"
-                                        ></i>
+                                        ></i> */}
+                                         <FontAwesomeIcon
+                    icon={faUser}
+                    className="font-size-mobile-icon">
+
+                    </FontAwesomeIcon>
+                    
                                     </Link>
                                 </li>
 
@@ -53,10 +64,15 @@ function MobileHeader() {
                                     </span>
 
                                     <Link to="/cart">
-                                        <i
+                                        {/* <i
                                             className="fa fa-shopping-cart font-size-mobile-icon"
                                             aria-hidden="true"
-                                        ></i>
+                                        ></i> */}
+                                         <FontAwesomeIcon
+                    icon={faShoppingCart}
+                    className="font-size-mobile-icon">
+
+                    </FontAwesomeIcon>
                                     </Link>
                                 </li>
 

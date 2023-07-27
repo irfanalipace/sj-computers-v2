@@ -48,7 +48,7 @@ const SearchAccordian = () => {
                         <Input
                             className="search-section"
                             type="text"
-                            placeholder="Search"
+                            placeholder="Search "
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                         />
