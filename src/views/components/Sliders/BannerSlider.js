@@ -29,19 +29,19 @@ const Slider = () => {
             prograssive: Bannerprograssive1,
             desktop: Banner1,
             mobile: mobileBanner1,
-            mobilePro: progmobile1
+            mobilePro: progmobile1,
         },
         {
             prograssive: Bannerprograssive2,
             desktop: Banner2,
             mobile: mobileBanner2,
-            mobilePro: progmobile2
+            mobilePro: progmobile2,
         },
         {
             prograssive: Bannerprograssive3,
             desktop: Banner3,
             mobile: mobileBanner3,
-            mobilePro: progmobile3
+            mobilePro: progmobile3,
         },
     ];
 
@@ -81,29 +81,25 @@ const Slider = () => {
                                                 }`}
                                                 src={src}
                                                 alt={"Banner"}
+                                                loading="lazy"
                                             />
                                         )}
                                     </ProgressiveImage>
                                 ) : (
-
                                     <ProgressiveImage
-                                    src={banner.mobile} // High-resolution image URL
-                                    placeholder={banner.mobilePro} // Low-resolution image URL
-                                >
-                                    {(src, loading) => (
-                                        <img
-                                            className={` className="d-md-none d-block" ${
-                                                loading ? "blur" : ""
-                                            }`}
-                                            src={src}
-                                            alt={"mobilePro"}
-                                        />
-                                    )}
-                                </ProgressiveImage>
-
-
-
-
+                                        src={banner.mobile} // High-resolution image URL
+                                        placeholder={banner.mobilePro} // Low-resolution image URL
+                                    >
+                                        {(src, loading) => (
+                                            <img
+                                                className={` className="d-md-none d-block" ${
+                                                    loading ? "blur" : ""
+                                                }`}
+                                                src={src}
+                                                alt={"mobilePro"}
+                                            />
+                                        )}
+                                    </ProgressiveImage>
 
                                     // <LazyLoadImage
                                     //     className="d-md-none d-block"

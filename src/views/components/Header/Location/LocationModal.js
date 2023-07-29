@@ -10,9 +10,9 @@ import { updateState } from "@store/states/statesThunks";
 import { UPDATE_STATE } from "@store/states/statesSlice";
 import Loader from "@common/Spinner/Spinner";
 
-import "./LocationModel.css";
+import "./LocationModal.css";
 
-function UpdateStateModel({ isOpen = false, handleClose }) {
+function UpdateStateModal({ isOpen = false, handleClose }) {
     const states = useSelector((state) => state.states.states);
     const isLoading = useSelector((state) => state.states.isLoading);
     const [state, setState] = useState("Set Delivery Address");
@@ -192,4 +192,4 @@ function UpdateStateModel({ isOpen = false, handleClose }) {
     );
 }
 
-export default UpdateStateModel;
+export default UpdateStateModal;

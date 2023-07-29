@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
 import Button from "@common/Button/Button";
 import imges1 from "@images/cart-product/location.png";
-import LocationModel from "@components/Header/Location/LocationModel";
+import LocationModal from "@components/Header/Location/LocationModal";
 import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./CheckOutCard.css";
@@ -122,7 +122,7 @@ export const CheckOutCard = ({ product }) => {
                             : " Location"}
                     </button>
                     {show && (
-                        <LocationModel
+                        <LocationModal
                             isOpen={show}
                             handleClose={() => setShow(false)}
                         />
@@ -136,11 +136,9 @@ export const CheckOutCard = ({ product }) => {
                             <div className="text-stock">
                                 <div className="instock-dev-card-product-section-with-color-card">
                                     <div className="in-stock-area-lable">
-                                      
-                                            {product?.quantity > 0 && (
-                                               <small> In Stock</small>
-                                            )}
-                                     
+                                        {product?.quantity > 0 && (
+                                            <small> In Stock</small>
+                                        )}
                                     </div>
                                     <div>
                                         <span className="color-text-cart-with-inStock">
@@ -169,8 +167,10 @@ export const CheckOutCard = ({ product }) => {
                                     Add to Cart
                                 </Button> */}
 
-     <AddCartComponents product={product} className=" button1 button-text-button"/>
-     
+                                <AddCartComponents
+                                    product={product}
+                                    className=" button1 button-text-button"
+                                />
                             </div>
                             {/* <div className="button-cart-sell">
                             <Button

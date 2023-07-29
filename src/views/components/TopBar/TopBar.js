@@ -1,7 +1,7 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const Sidebar = lazy(() => import("@components/Sidebar/Sidebar"));
+import Sidebar from "@components/Sidebar/Sidebar";
 
 import "./TopBar.css";
 
@@ -87,9 +87,7 @@ export default function TopBar() {
                     </div>
                 </div>
             </header>
-            <Suspense>
-                <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
-            </Suspense>
+            <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
         </>
     );
 }

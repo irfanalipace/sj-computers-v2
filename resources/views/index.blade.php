@@ -8,6 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href={{ asset('favicon.png') }} />
 
+    <title>SJ-Computers</title>
+
+</head>
+
+
+<body>
+
+    <div id="root"></div>
+
+    <script defer src={{ asset(mix('/js/main.js')) }}></script>
+
     <!-- Google Tag Manager -->
     <script>
         (function(w, d, s, l, i) {
@@ -27,25 +38,15 @@
     </script>
     <!-- End Google Tag Manager -->
 
-
-    <title>SJ-Computers</title>
-
-</head>
-
-
-<body>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5KJ773M" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <div id="root"></div>
-
     <noscript>
 
         You need to enable JavaScript to run this app.
 
     </noscript>
-    <script src={{ asset(mix('/js/main.js')) }}></script>
 
 
 

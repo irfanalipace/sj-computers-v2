@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
-import LoginCart from "./LoginCart";
+import LoginCard from "./LoginCard";
 import footerlogo from "@images/header-logo.png";
 import english from "@images/home/eng.png";
 import vectorcart from "@images/home/vector.png";
@@ -12,15 +12,15 @@ import Loader from "@common/Spinner/Spinner";
 
 const TopBar = lazy(() => import("@components/TopBar/TopBar"));
 // const Search = lazy(() => import("./Search"));
-const LocationModel = lazy(() => import("./Location/LocationModel"));
+const LocationModal = lazy(() => import("./Location/LocationModal"));
 const MobileHeader = lazy(() => import("./MobileHeader/MobileHeader"));
-// const MobileSearch = lazy(() => import("./MobileSearch/MobileSearch"));
+const MobileSearch = lazy(() => import("./MobileSearch/MobileSearch"));
 const CartOverlay = lazy(() => import("./CartOverlay"));
 // import TopBar from "@components/TopBar/TopBar";
 import Search from "./Search";
-// import LocationModel from "./Location/LocationModel";
+// import LocationModal from "./Location/LocationModal";
 // import MobileHeader from "./MobileHeader/MobileHeader";
-import MobileSearch from "./MobileSearch/MobileSearch";
+// import MobileSearch from "./MobileSearch/MobileSearch";
 // import CartOverlay from "./CartOverlay";
 
 import "./Header.css";
@@ -64,7 +64,7 @@ const Header = () => {
             window.localStorage.getItem("state") == null) &&
             setTimeout(() => {
                 setShow(true); // Update the state `isOpen` to true after 5 seconds
-            }, 5000);
+            }, 10000);
         // setShow(true);
         searchParams.delete("firstLogin");
         setSearchParams(searchParams);
@@ -83,8 +83,9 @@ const Header = () => {
                     <Suspense>
                         <MobileHeader />
                     </Suspense>
-                    <MobileSearch />
-
+                    <Suspense>
+                        <MobileSearch />
+                    </Suspense>
                     {screenWidth > 450 ? (
                         <Suspense>
                             <TopBar />
@@ -150,7 +151,7 @@ const Header = () => {
                                                 </div>
                                                 {show && (
                                                     <Suspense>
-                                                        <LocationModel
+                                                        <LocationModal
                                                             isOpen={show}
                                                             handleClose={() =>
                                                                 setShow(false)
@@ -208,7 +209,7 @@ const Header = () => {
                                                                 </p>
                                                             </div>
                                                         ) : (
-                                                            <LoginCart className="card" />
+                                                            <LoginCard className="card" />
                                                         )}
                                                     </div>
                                                     <div className="return-button ">
@@ -301,12 +302,14 @@ const Header = () => {
                     )}
 
                     {/* CartOverLay code */}
-                    <Suspense>
-                        <CartOverlay
-                            isOpen={isOpen}
-                            toggleSidebar={toggleSidebar}
-                        />
-                    </Suspense>
+                    {isOpen && (
+                        <Suspense>
+                            <CartOverlay
+                                isOpen={isOpen}
+                                toggleSidebar={toggleSidebar}
+                            />
+                        </Suspense>
+                    )}
 
                     {/* components to render when screen width is greater than 750px */}
                 </div>
