@@ -36,7 +36,8 @@ class ExportMarketingProduct implements FromCollection, WithHeadings, ShouldAuto
             $dummyData['description']    =   empty($desc) ? $product->name : $desc;
             $dummyData['brand']    =   ucfirst($product->brand->name) ?? '';
             $dummyData['condition']    =   "refurbished";
-            $dummyData['price']    =   $product->price;
+            $dummyData['price']    =   $product->price." USD";
+            $dummyData['sale_price']    =   $product->price." USD";
             $dummyData['availability']    =   "In stock";
             $dummyData['link']    =   "https://sjcomputers.us/products/".$product->asin;
             $dummyData['image_link']    =   $product->image[0] ?? '';
@@ -72,7 +73,7 @@ class ExportMarketingProduct implements FromCollection, WithHeadings, ShouldAuto
 
     public function headings(): array
     {
-        return ["id", "title","description", "brand", "condition", "price",
+        return ["id", "title","description", "brand", "condition", "price", "sale_price",
             "availability", "link", "image_link", "additional_image_link", "google_product_category", "identifier_exists"];
     }
 }
