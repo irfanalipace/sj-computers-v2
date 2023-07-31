@@ -28,18 +28,22 @@ class MarketingController extends Controller
     public function gmarketingfeed()
     {
 
-        $export = new ExportMarketingProduct();
-        $now = now();
-        $now = str_replace(array(":", "-", ' '), "", $now);
-        $filename = 'Inventory_' . $now . '.xlsx';
+//        $export = new ExportMarketingProduct();
+//        $now = now();
+//        $now = str_replace(array(":", "-", ' '), "", $now);
+//        $filename = 'Inventory_' . $now . '.xlsx';
+//
+//        Excel::store($export, $filename, 'public');
 
-        Excel::store($export, $filename, 'public');
+        return Excel::download(new ExportMarketingProduct, 'products_list.csv', \Maatwebsite\Excel\Excel::CSV, [
+            'Content-Type' => 'text/csv',
+        ]);
 
-        $path = public_path('storage/' . $filename);
-
-        return response()->download($path, 'products_list.xlsx', [
-            'Content-Type' => 'application/vnd.ms-excel',
-            'Content-Disposition' => "attachment; filename='products_list.xls'"
-        ])->deleteFileAfterSend(true);
+//        $path = public_path('storage/' . $filename);
+//
+//        return response()->download($path, 'products_list.xlsx', [
+//            'Content-Type' => 'application/vnd.ms-excel',
+//            'Content-Disposition' => "attachment; filename='products_list.xls'"
+//        ])->deleteFileAfterSend(true);
     }
 }
