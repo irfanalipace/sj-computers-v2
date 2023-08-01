@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\InventoryController;
+use App\Http\Controllers\MarketingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use Laravel\Fortify\Fortify;
@@ -27,6 +28,8 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 Route::get('export-inventory',[InventoryController::class,'downloadInventoryFile'])->name('export-inventory');
+
+Route::get('gmarketingfeed',[MarketingController::class,'gmarketingfeed'])->name('gmarketingfeed');
 
 Route::get('/{path?}', function () {
     return view('index');
