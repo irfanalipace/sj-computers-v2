@@ -150,6 +150,10 @@
 //     );
 // }
 // export default Search;
+
+
+
+
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -158,7 +162,7 @@ import {
 } from "@store/products/productsSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import Loader from "@common/Spinner/Spinner";
 import "./Header.css";
 
@@ -201,7 +205,7 @@ function Search() {
     <div
       key={category.id}
       onClick={() => handleItemClick(category)}
-      className="custom-dropdown-item dropdown ul-liste-items-all-buttons"
+      className="dropdown-item ul-liste-items-all-buttons custom-dropdown-item"
     >
       <span className="text-decoration-none div-link-category-search" style={{ fontSize: '13px' }}>
         {category.name}
@@ -216,7 +220,10 @@ function Search() {
           className={`custom-dropdown${dropdownOpen ? " custom-dropdown-open" : ""}${location.pathname.includes("category") ? " custom-dropdown-disabled" : ""}`}
         >
           <div className="custom-dropdown-toggle" onClick={toggle}>
-            <span style={{ fontSize: "13px" }}>{selectedItem.name}</span>
+            <span style={{ fontSize: "13px" }}>
+              {selectedItem.name}
+              <FontAwesomeIcon icon={faCaretDown} className="dropdown-icon" style={{marginLeft:'4px'}} />
+            </span>
           </div>
           {dropdownOpen && (
             <div className="custom-dropdown-menu">
@@ -224,7 +231,10 @@ function Search() {
                 onClick={() => handleItemClick({ name: "ALL", id: null })}
                 className="custom-dropdown-item dropdown"
               >
-                <span style={{ fontSize: "13px" }}>All Category</span>
+                <span style={{ fontSize: "13px" }}>
+                  All Category
+                  <FontAwesomeIcon icon={faCaretDown} className="dropdown-icon" />
+                </span>
               </div>
               {renderedCategories}
             </div>
