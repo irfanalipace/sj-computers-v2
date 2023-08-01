@@ -124,17 +124,21 @@ const Slider = () => {
                     className="advertisement-img"
                     src={banner.desktop}
                     alt="Banner"
-                    effect="blur" // Add blur effect while loading
+                    effect="blur" 
                 />
+                
             ) : (
                 <LazyLoadImage
                     className="d-md-none d-block"
                     src={banner.mobile}
                     alt="Banner"
-                    effect="blur" // Add blur effect while loading
+                    effect="blur" 
                 />
             )}
         </> */}
+
+
+        
                         </SwiperSlide>
                     ))}
                 </Swiper>
