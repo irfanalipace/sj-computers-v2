@@ -233,7 +233,7 @@ function Search() {
               >
                 <span style={{ fontSize: "13px" }}>
                   All Category
-                  <FontAwesomeIcon icon={faCaretDown} className="dropdown-icon" />
+                  {/* <FontAwesomeIcon icon={faCaretDown} className="dropdown-icon" /> */}
                 </span>
               </div>
               {renderedCategories}
