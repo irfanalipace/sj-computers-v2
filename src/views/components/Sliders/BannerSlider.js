@@ -20,6 +20,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "./Slider.css";
 import { useViewportWidth } from "@hooks/useViewportWidth";
+
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 const Slider = () => {
     const width = useViewportWidth();
     SwiperCore.use([Navigation, Controller]);
@@ -68,11 +71,11 @@ const Slider = () => {
                 >
                     {banners.map((banner, index) => (
                         <SwiperSlide key={index}>
-                            <>
+                            {/* <>
                                 {width > 576 ? (
                                     <ProgressiveImage
-                                        src={banner.desktop} // High-resolution image URL
-                                        placeholder={banner.prograssive} // Low-resolution image URL
+                                        src={banner.desktop} 
+                                        placeholder={banner.prograssive} 
                                     >
                                         {(src, loading) => (
                                             <img
@@ -87,25 +90,38 @@ const Slider = () => {
                                     </ProgressiveImage>
                                 ) : (
                                     <ProgressiveImage
-                                        src={banner.mobile} // High-resolution image URL
-                                        placeholder={banner.mobilePro} // Low-resolution image URL
-                                    >
-                                        {(src, loading) => (
-                                            <img
-                                                className={` className="d-md-none d-block" ${
-                                                    loading ? "blur" : ""
-                                                }`}
-                                                src={src}
-                                                alt={"mobilePro"}
-                                            />
-                                        )}
-                                    </ProgressiveImage>
+                                    src={banner.mobile} 
+                                    placeholder={banner.mobilePro} 
+                                >
+                                    {(src, loading) => (
+                                        <img
+                                            className={` className="d-md-none d-block" ${
+                                                loading ? "blur" : ""
+                                            }`}
+                                            src={src}
+                                            alt={"mobilePro"}
+                                        />
+                                    )}
+                                </ProgressiveImage>
 
-                                    // <LazyLoadImage
-                                    //     className="d-md-none d-block"
-                                    //     src={banner.mobile}
-                                    //     alt={"Banner"}
-                                    // />
+                                )}
+                            </> */}
+
+                            <>
+                                {width > 576 ? (
+                                    <LazyLoadImage
+                                        className="advertisement-img"
+                                        src={banner.desktop}
+                                        alt="Banner"
+                                        effect="blur"
+                                    />
+                                ) : (
+                                    <LazyLoadImage
+                                        className="d-md-none d-block"
+                                        src={banner.mobile}
+                                        alt="Banner"
+                                        effect="blur"
+                                    />
                                 )}
                             </>
                         </SwiperSlide>
