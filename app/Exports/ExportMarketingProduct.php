@@ -47,6 +47,7 @@ class ExportMarketingProduct implements FromCollection, WithHeadings, ShouldAuto
             $dummyData['additional_image_link']    =   implode(',', $product->image);
             $dummyData['google_product_category']    =  "Electronics > Computers > ".$this->getType($product->id);
             $dummyData['identifier_exists']    =   "no";
+            $dummyData['shipping_weight']    =   "10 kg";
 
             $data[] = $dummyData;
         }
