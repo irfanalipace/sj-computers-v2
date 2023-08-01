@@ -20,6 +20,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "./Slider.css";
 import { useViewportWidth } from "@hooks/useViewportWidth";
+
+import "react-lazy-load-image-component/src/effects/blur.css";
+
+
+
 const Slider = () => {
     const width = useViewportWidth();
     SwiperCore.use([Navigation, Controller]);
@@ -71,8 +76,8 @@ const Slider = () => {
                             <>
                                 {width > 576 ? (
                                     <ProgressiveImage
-                                        src={banner.desktop} // High-resolution image URL
-                                        placeholder={banner.prograssive} // Low-resolution image URL
+                                        src={banner.desktop} 
+                                        placeholder={banner.prograssive} 
                                     >
                                         {(src, loading) => (
                                             <img
@@ -87,8 +92,8 @@ const Slider = () => {
                                 ) : (
 
                                     <ProgressiveImage
-                                    src={banner.mobile} // High-resolution image URL
-                                    placeholder={banner.mobilePro} // Low-resolution image URL
+                                    src={banner.mobile} 
+                                    placeholder={banner.mobilePro} 
                                 >
                                     {(src, loading) => (
                                         <img
@@ -112,6 +117,24 @@ const Slider = () => {
                                     // />
                                 )}
                             </>
+
+{/* <>
+            {width > 576 ? (
+                <LazyLoadImage
+                    className="advertisement-img"
+                    src={banner.desktop}
+                    alt="Banner"
+                    effect="blur" // Add blur effect while loading
+                />
+            ) : (
+                <LazyLoadImage
+                    className="d-md-none d-block"
+                    src={banner.mobile}
+                    alt="Banner"
+                    effect="blur" // Add blur effect while loading
+                />
+            )}
+        </> */}
                         </SwiperSlide>
                     ))}
                 </Swiper>
