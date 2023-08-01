@@ -82,17 +82,12 @@ export default function Checkout() {
                                     </Link>
                                 </div>
                                 <div className="items-number">
-                                    {isAuthenticated ? (
+                                  
                                         <h3>
                                             Checkout (
                                             {checkoutDetails.total_items} items)
                                         </h3>
-                                    ) : (
-                                        <h3>
-                                           Guest Checkout (
-                                            1 items)
-                                        </h3>
-                                    )}
+                                  
                                 </div>
                             </div>
                         </div>
@@ -161,24 +156,7 @@ export default function Checkout() {
                                             <ShippingMethod />
                                         </div>
                                     </div>
-                                    {!isAuthenticated && (
-                                        <div>
-                                            <div>
-                                                <Discount
-                                                    handleClick={handleClick}
-                                                    activeAccordion={
-                                                        currentAccordionId
-                                                    }
-                                                    paymentMethod={
-                                                        paymentMethod
-                                                    }
-                                                    shippingDetails={
-                                                        checkoutDetails
-                                                    }
-                                                />
-                                            </div>
-                                        </div>
-                                    )}
+                                  
 
                                     {/* <div className="shipping-method-component-wrapper">
                                         <ShippingMethod />
