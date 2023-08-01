@@ -2,7 +2,6 @@ import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // import styled from "styled-components";
-import { useCollapse } from "react-collapsed";
 import "./MobileSearch.css";
 import mobileheaderlogo from "@images/header-logo.png";
 import ModalBox from "./MobileScreenModal/ModalBox";
@@ -173,8 +172,8 @@ const MobileSearch = () => {
             <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
 
             <div className="mobile-box-model">
-                <MobileScreenModel onClick={handleButtonClick} />
-                {showModal && <ModelBox closeModal={closeModal} />}
+                <MobileScreenModal onClick={handleButtonClick} />
+                {showModal && <ModalBox closeModal={closeModal} />}
             </div>
         </div>
     );
