@@ -8,7 +8,7 @@ import ModalBox from "./MobileScreenModal/ModalBox";
 import { SET_SEARCH_STRING } from "@store/products/productsSlice";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "@components/Sidebar/Sidebar.js";
 const MobileScreenModal = lazy(() =>
     import("./MobileScreenModal/MobileScreenModal")
@@ -159,10 +159,15 @@ const MobileSearch = () => {
                                 id="basic-text1"
                                 onClick={handleSearch}
                             >
-                                <i
+                                {/* <i
                                     className="fas fa-search text-grey set"
                                     aria-hidden="true"
-                                ></i>
+                                ></i> */}
+                                <FontAwesomeIcon
+                            icon={faSearch}
+                            size="x2"
+                          className="fa-search text-grey set"
+                        />
                             </span>
                         </div>
                     </div>
