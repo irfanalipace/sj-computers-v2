@@ -73,7 +73,7 @@ const Slider = () => {
                 >
                     {banners.map((banner, index) => (
                         <SwiperSlide key={index}>
-                            <>
+                            {/* <>
                                 {width > 576 ? (
                                     <ProgressiveImage
                                         src={banner.desktop} 
@@ -106,19 +106,10 @@ const Slider = () => {
                                     )}
                                 </ProgressiveImage>
 
-
-
-
-
-                                    // <LazyLoadImage
-                                    //     className="d-md-none d-block"
-                                    //     src={banner.mobile}
-                                    //     alt={"Banner"}
-                                    // />
                                 )}
-                            </>
+                            </> */}
 
-{/* <>
+<>
             {width > 576 ? (
                 <LazyLoadImage
                     className="advertisement-img"
@@ -135,7 +126,7 @@ const Slider = () => {
                     effect="blur" 
                 />
             )}
-        </> */}
+        </>
 
 
         
