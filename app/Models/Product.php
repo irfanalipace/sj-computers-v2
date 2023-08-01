@@ -13,6 +13,7 @@ class Product extends Model
 
     protected $appends = ['in_stock','rating'];
 
+    public $timestamps = true;
 
     const DUMMY = "dummy";
 
