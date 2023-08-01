@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\CategoryProduct;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -31,7 +32,7 @@ class ExportMarketingProduct implements FromCollection, WithHeadings, ShouldAuto
                 $desc .= $bulletPoint->value;
             }
 
-            $dummyData['id']    =   $key;
+            $dummyData['id']    =   $key + 1;
             $dummyData['title']    =   "Refurbished ".$product->name;
             $dummyData['description']    =   empty($desc) ? $product->name : $desc;
             $dummyData['brand']    =   ucfirst($product->brand->name) ?? '';
@@ -39,6 +40,8 @@ class ExportMarketingProduct implements FromCollection, WithHeadings, ShouldAuto
             $dummyData['price']    =   $product->price." USD";
             $dummyData['sale_price']    =   $product->price." USD";
             $dummyData['availability']    =   "In stock";
+            $dummyData['availability_date']    =   $product->created_at->format('Y-d-M');
+            $dummyData['quantity']    =   $product->quantity;
             $dummyData['link']    =   "https://sjcomputers.us/products/".$product->asin;
             $dummyData['image_link']    =   $product->image[0] ?? '';
             $dummyData['additional_image_link']    =   implode(',', $product->image);
