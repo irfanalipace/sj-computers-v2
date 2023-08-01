@@ -1,3 +1,75 @@
+/* Header.css */
+
+/* Custom styles for the dropdown component */
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .custom-dropdown-toggle {
+    cursor: pointer;
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 13px;
+    height: 62px;
+    padding-top: 22px;
+}
+  .custom-dropdown-toggle:hover {
+    background-color: #e9ecef;
+  }
+  
+  .custom-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 9;
+    display: block;
+    min-width: 160px;
+    padding: 5px 0;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-dropdown-item {
+    cursor: pointer;
+    padding: 5px 15px;
+    font-size: 13px;
+  }
+  
+  .custom-dropdown-item:hover {
+    background-color: #f8f9fa;
+  }
+  
+  /* Additional styles for the disabled state */
+  .custom-dropdown-disabled .custom-dropdown-toggle {
+    pointer-events: none;
+    background-color: #e9ecef;
+  }
+  
+  /* Additional styles for the open state */
+  .custom-dropdown-open .custom-dropdown-toggle {
+    background-color: #e9ecef;
+  }
+  
+  /* Additional styles for the selected item */
+  .custom-dropdown-item.selected {
+    background-color: #e9ecef;
+  }
+  
+
+
+
+
+
+
+
+
+
+
 .header-container {
     max-width: 1750px;
     margin: auto;

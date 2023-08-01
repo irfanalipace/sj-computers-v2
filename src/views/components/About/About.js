@@ -18,69 +18,46 @@ const HeadereLinks = [
 
 const About = () => {
     return (
-        <div>
-            <>
-                <div className="">
-                    <div className="row">
-                        <div>
-                            <header className="topBar px-3 policy-header-topbar">
-                                <div className="topBar-inner-policy">
-                                    <div className="menuBar-policy">
-                                        <ul className="text-decoration-none policy-menu-item-list">
-                                            {HeadereLinks.map((link, index) => (
-                                                <li
-                                                    className="policy-listitem"
-                                                    key={index}
-                                                >
-                                                    <Link
-                                                        to={link.path}
-                                                        className="text-decoration-none text-color hover-effect-sets-topbar hover-text-color-policy-comp"
-                                                    >
-                                                        {link.title}
-                                                    </Link>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </header>
-                        </div>
-                    </div>
-                    <div className="blog-background-color">
-                        <div className="container my-text-container-about-us-page">
+        <>
+            {/* <>
+                        <div className="">
                             <div className="row">
-                                <div className="col-md-2">
-                                    <div className="who-we-are-blog">
-                                        <span>Who We Are</span>
-                                    </div>
-                                </div>
-                                <div className="col-md-10">
-                                    {/* <div className="div-left-blog-text">
-                                                <h5 style={}>reight side</h5>
-                                            </div> */}
-                                    <div className="blog-with-content-set-with-image">
-                                        <span>
-                                            Lorem ipsum dolor sit amet, trt
-                                            aksdg asking no one consectetur
-                                            asking no one consectetur jsjshdi.
-                                            Lorem ipsum dolor sit amet, trt
-                                            aksdg asking no one consectetur
-                                            asking no one consectetur
-                                            jsjshdi.Lorem ipsum dolor sit amet,
-                                            trt aksdg asking no one consectetur
-                                            asking no one consectetur
-                                            jsjshdi.Lorem ipsum dolor sit amet,
-                                            trt aksdg asking no one consectetur
-                                            asking no one consectetur jsjshdi.
-                                        </span>
-                                    </div>
+                                <div>
+                                    <header className="topBar px-3 policy-header-topbar">
+                                        <div className="topBar-inner-policy">
+                                            <div className="menuBar-policy">
+                                                <ul className="text-decoration-none policy-menu-item-list">
+                                                    {HeadereLinks.map((link, index) => (
+                                                        <li
+                                                            className="policy-listitem"
+                                                            key={index}
+                                                        >
+                                                            <Link
+                                                                to={link.path}
+                                                                className="text-decoration-none text-color hover-effect-sets-topbar hover-text-color-policy-comp"
+                                                            >
+                                                                {link.title}
+                                                            </Link>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </header>
                                 </div>
                             </div>
-                            <div className="container cart-about-ul-components-dev-section">
-                                <div className="row">
-                                    <div className="col-md-6 col-lg-3 col-6">
-                                        <div className="div-container-font-alignment-box-cart">
-                                            <div className="div-container-font-alignment-box-cart-text">
+                            <div className="blog-background-color">
+                                <div className="container my-text-container-about-us-page">
+                                    <div className="row">
+                                        <div className="col-md-2">
+                                            <div className="who-we-are-blog">
+                                               <span>Who We Are</span>
+                                            </div>
+                                          
+                                        </div>
+                                        <div className="col-md-10">
+                                          
+                                            <div className="blog-with-content-set-with-image">
                                                 <span>
                                                     Leadership Principle
                                                 </span>
@@ -252,10 +229,13 @@ const About = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </>
-        </div>
+                            </div>
+                          
+                        </div>
+                    
+                       
+                    </> */}
+        </>
     );
 };
 

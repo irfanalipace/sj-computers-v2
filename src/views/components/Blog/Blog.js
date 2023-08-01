@@ -48,27 +48,18 @@ const HeadereLinks = [
 ];
 const nonHeaderRoutes = [""];
 
-const useStyles = makeStyles((theme) => ({
-    stickyElement: {
-        position: "relative",
-    },
-    stickyContainer: {
-        position: "sticky",
-        top: 0,
-        zIndex: theme.zIndex.appBar,
-    },
-}));
+
 const Blog = () => {
     const [blogdteails, setBlogDetails] = useState("");
 
     const { blogslug } = useParams();
-    console.log("blogslug", blogslug);
+ 
 
     useEffect(() => {
         setIsLoading(true);
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
-                console.log("@@@", response?.data?.categories);
+             
                 setBlogDetails(response?.data);
             })
             .catch((error) => {
@@ -144,7 +135,7 @@ const Blog = () => {
                 ? blogdteails.secondary_image
                 : "https://via.placeholder.com/400x400";
 
-            console.log(blogdteails.secandary_image, "meeting-image");
+          
             imgTag.alt = blogdteails.all_text;
 
             firstH2Tag.insertAdjacentElement("afterend", imgTag);
@@ -171,31 +162,7 @@ const Blog = () => {
     //     }
     //   }, [blogdteails]);
 
-    const classes = useStyles();
-    const stickyContainerRef = useRef(null);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const stickyContainer = stickyContainerRef.current;
-
-            if (stickyContainer) {
-                const rect = stickyContainer.getBoundingClientRect();
-                const isSticky = rect.top <= 0;
-
-                if (isSticky) {
-                    stickyContainer.classList.add(classes.stickyContainer);
-                } else {
-                    stickyContainer.classList.remove(classes.stickyContainer);
-                }
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, [classes.stickyContainer]);
+  
 
     const [readingTime, setReadingTime] = useState(0);
 
@@ -288,7 +255,7 @@ const Blog = () => {
                                             </div>
                                             <div className="dive-reight-border">
                                                 <div className="circle-dev-blog">
-                                                    <span> {readingTime} </span>
+                                                    <span> {readingTime} min</span>
                                                 </div>
                                                 <div className="date-blog-after-circle">
                                                     <span>
@@ -339,7 +306,7 @@ const Blog = () => {
                                             <div className="div-left-blog-text-written">
                                                 <span>Written by SJ Staff</span>
                                             </div>
-                                            {/* <div className="div-left-blog-text-writt">
+                                            <div className="div-left-blog-text-writt">
                                                 {blogdteails.categories?.map(
                                                     (category, index) => (
                                                         <React.Fragment
@@ -369,7 +336,7 @@ const Blog = () => {
                                                         </React.Fragment>
                                                     )
                                                 )}
-                                            </div> */}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -400,10 +367,10 @@ const Blog = () => {
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3">
-                                        <div className={classes.stickyElement}>
+                                        <div className=''>
                                             <div
                                                 className="main-dev-card-deprt"
-                                                ref={stickyContainerRef}
+                                                
                                             >
                                                 <div className="left-dev-span-stories">
                                                     <span>

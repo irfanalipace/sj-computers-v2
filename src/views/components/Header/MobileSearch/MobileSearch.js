@@ -1,7 +1,8 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+// import styled from "styled-components";
+import { useCollapse } from "react-collapsed";
 import "./MobileSearch.css";
 import mobileheaderlogo from "@images/header-logo.png";
 import ModalBox from "./MobileScreenModal/ModalBox";
@@ -67,7 +68,7 @@ const MobileSearch = () => {
 
     return (
         <div>
-            <Container className="search-dev">
+            {/* <Container className="search-dev">
                 <>
                     <Link to="/">
                         <Image
@@ -85,19 +86,15 @@ const MobileSearch = () => {
                             onClick={() => {
                                 toggleSidebar();
                             }}
-                            // onClick={handleOpen}
+                           
                             style={{ color: "#ffffff" }}
                         />
 
-                        {/* <SearchIcon
-                           
-                            className="fas fa-search"
-                            style={{ color: "white" }}
-                        /> */}
+                      
                     </SearchIconContainer>
                 </RightContent>
-            </Container>
-            <CollapseContainer>
+            </Container> */}
+            {/* <CollapseContainer>
                 <form onSubmit={handleSearch}>
                     <div className="search-hide-section-body">
                         <SearchBar>
@@ -121,69 +118,111 @@ const MobileSearch = () => {
                         </SearchBar>
                     </div>
                 </form>
-            </CollapseContainer>
-            <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
-            {/* <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <SearchAccordian />
-            </Modal> */}
-            <Suspense>
-                <div className="mobile-box-model">
-                    <MobileScreenModal onClick={handleButtonClick} />
-                    {showModal && <ModalBox closeModal={closeModal} />}
+            </CollapseContainer> */}
+
+            <div className="search-dev">
+                <>
+                    <Link to="/">
+                        <img
+                            src={mobileheaderlogo}
+                            alt="Left Image"
+                            className="mobile-imagelogo"
+                        />
+                    </Link>
+                </>
+                <div className="right-content">
+                    <div className="search-icon-container">
+                        <FontAwesomeIcon
+                            icon={faBars}
+                            size="xl"
+                            onClick={() => {
+                                toggleSidebar();
+                            }}
+                            style={{ color: "#ffffff" }}
+                        />
+                    </div>
                 </div>
-            </Suspense>
+            </div>
+
+            <div className="collapse-container">
+                <form onSubmit={handleSearch}>
+                    <div className="search-hide-section-body">
+                        <div className="search-bar">
+                            <input
+                                className="search-section"
+                                type="text"
+                                placeholder="Search"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                            <span
+                                className="input-group-text red lighten-3 search-icon-on-mobile-screen"
+                                id="basic-text1"
+                                onClick={handleSearch}
+                            >
+                                <i
+                                    className="fas fa-search text-grey set"
+                                    aria-hidden="true"
+                                ></i>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
+
+            <div className="mobile-box-model">
+                <MobileScreenModel onClick={handleButtonClick} />
+                {showModal && <ModelBox closeModal={closeModal} />}
+            </div>
         </div>
     );
 };
 
-const Container = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-`;
+// const Container = styled.div`
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+// `;
 
-const LeftContent = styled.div`
-    flex: 1;
-`;
+// const LeftContent = styled.div`
+//     flex: 1;
+// `;
 
-const RightContent = styled.div`
-    display: flex;
-    align-items: center;
-`;
+// const RightContent = styled.div`
+//     display: flex;
+//     align-items: center;
+// `;
 
-const Image = styled.img`
-    width: 50px;
-    height: 50px;
-`;
+// const Image = styled.img`
+//     width: 50px;
+//     height: 50px;
+// `;
 
-const SearchIconContainer = styled.div`
-    padding: 10px;
-    cursor: pointer;
-`;
+// const SearchIconContainer = styled.div`
+//     padding: 10px;
+//     cursor: pointer;
+// `;
 
-const SearchIcon = styled.i`
-    font-size: 20px;
-    color: #0077c2;
-`;
+// const SearchIcon = styled.i`
+//     font-size: 20px;
+//     color: #0077c2;
+// `;
 
-const SearchBar = styled.div`
-    display: flex;
-    align-items: center;
-`;
+// const SearchBar = styled.div`
+//     display: flex;
+//     align-items: center;
+// `;
 
-const CollapseContainer = styled.div``;
+// const CollapseContainer = styled.div``;
 
-const Input = styled.input`
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-`;
+// const Input = styled.input`
+//     width: 100%;
+//     padding: 10px;
+//     border-radius: 5px;
+//     border: 1px solid #ccc;
+//     font-size: 16px;
+// `;
 
 export default MobileSearch;
