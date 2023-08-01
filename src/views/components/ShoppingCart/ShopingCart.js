@@ -150,7 +150,6 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                             ) : (
                                                 <div>
                                                     <div className="button-checkout-data">
-                                                        
                                                         <button
                                                             className="btn btn-primary checkout-button"
                                                             onClick={
@@ -206,7 +205,6 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                         </div>
                                                                         <div className="d-flex justify-content-center w-100">
                                                                             <button
-                                                                               
                                                                                 disabled={
                                                                                     isLoading
                                                                                 }
@@ -246,20 +244,20 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                         </div>
 
                                                                         <div className="after-the-or-dev-sction-leve-model-checkout">
-                                                                           
-                                                                                <Link
-                                                                                    className="text-decoration-none"
-                                                                                    to={
-                                                                                        "/checkout"
-                                                                                    }
-                                                                                >
-                                                                                     <button> Continue
+                                                                            <Link
+                                                                                className="text-decoration-none"
+                                                                                to={
+                                                                                    "/checkout"
+                                                                                }
+                                                                            >
+                                                                                <button>
+                                                                                    {" "}
+                                                                                    Continue
                                                                                     as
                                                                                     a
-                                                                                    Guest</button>
-                                                                                   
-                                                                                </Link>
-                                                                           
+                                                                                    Guest
+                                                                                </button>
+                                                                            </Link>
                                                                         </div>
                                                                     </form>
                                                                 </div>
