@@ -33,7 +33,7 @@ class MarketingController extends Controller
 //        $now = str_replace(array(":", "-", ' '), "", $now);
 //        $filename = 'Inventory_' . $now . '.xlsx';
 //
-//        Excel::store($export, $filename, 'public');
+//        Excel::store($export, $filename, 'public/gemarketing');
 
         return Excel::download(new ExportMarketingProduct, 'products_list.csv', \Maatwebsite\Excel\Excel::CSV, [
             'Content-Type' => 'text/csv',
