@@ -49,7 +49,7 @@ class SquareController extends BaseController
             $this->user = Auth::guard('api')->user();
             $this->userId = $this->user->id;
         } else {
-            $guestUser = $this->getOrCreateGuestUser($request->email);
+            $guestUser = $this->getOrCreateGuestUser($request->shipping_address);
             $this->user = $guestUser;
             $this->userId = StatusEnum::DUMMY;
         }
@@ -64,13 +64,10 @@ class SquareController extends BaseController
 
             //create customer || retrieve customer if already added
             if ($this->user->square_cus_id == null) {
-                dump('inside square cus id null');
                 $customer = $this->createCustomer();
             } else {
-                dump('inside square cus id not null');
                 $customer = $this->getCustomer();
             }
-dd('sadas');
             // Get card Token
             $amount_money = new Money();
             $amount_money->setAmount(Cart::session($this->userId)->getTotal());
@@ -178,15 +175,23 @@ dd('sadas');
         }
     }
 
-    private function getOrCreateGuestUser($email)
+    private function getOrCreateGuestUser($detail)
     {
         // Check if the email exists in the guest_users table
-        $guestUser = Guest::where('email', $email)->first();
+        $guestUser = Guest::where('email', $detail['email'])->first();
 
         // If the guest user does not exist, create a new one
         if (!$guestUser) {
             $guestUser = new Guest();
-            $guestUser->email = $email;
+            $guestUser->ip_address = request()->ip();
+            $guestUser->full_name = $detail['full_name'] ?? null;
+            $guestUser->phone_number = $detail['phone_number'] ?? null;
+            $guestUser->email = $detail['email'];
+            $guestUser->address = $detail['address'] ?? null;
+            $guestUser->city = $detail['city'] ?? null;
+            $guestUser->state = $detail['state'] ?? null;
+            $guestUser->zip_code = $detail['zip_code'] ?? null;
+            $guestUser->country = $detail['country'] ?? null;
             $guestUser->save();
         }
 
