@@ -123,6 +123,10 @@ Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])
 
 Route::get('system-pages/{key?}', [SystemPagesController::class, 'getPages'])->name('getPages');
 
+/*
+*Square Integration
+*/
+Route::POST('square-charge', [SquareController::class, 'chargeCustomer'])->name('squreCharge');
 
 
 Route::middleware(['auth:api', 'verified'])->group(function () {
@@ -174,10 +178,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('search-order', [OrderController::class, 'searchOrder'])->name('searchOrder');
 
 
-    /*
-    *Square Integration
-    */
-    Route::post('square-charge', [SquareController::class, 'chargeCustomer'])->name('squreCharge');
 
     /*
      * place order

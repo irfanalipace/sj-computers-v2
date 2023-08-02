@@ -6,9 +6,11 @@ use App\Classes\StatusEnum;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Square\CardRequest;
+use App\Models\Guest;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Square\SquareClient;
 use Square\LocationsApi;
 use Square\Exceptions\ApiException;
@@ -32,24 +34,27 @@ class SquareController extends BaseController
     private $squareClient;
     private $userId;
     private $user;
-    public function __construct()
-    {       
+    public function __construct(Request $request)
+    {
         // Environment value
         $environment = $this->enviromnet();
-        
+
         // SANDBOX or PRODUCTION
         $this->squareClient = new SquareClient([
             'accessToken' => config('app.square_token') ?? 'EAAAECb1ai32160Bz6Aepr3tfyTPPA_jTpGVMgIclNbbyyUVMA0GoauqveDOpLs7',
             'environment' => $environment,
         ]);
-        $this->user = auth('api')->user();
 
         if ($this->user) {
+            $this->user = Auth::guard('api')->user();
             $this->userId = $this->user->id;
         } else {
+            $guestUser = $this->getOrCreateGuestUser($request->email);
+            $this->user = $guestUser;
             $this->userId = StatusEnum::DUMMY;
         }
     }
+
     // charge process
     public function chargeCustomer(CardRequest $request, OrderRepository $repository)
     {
@@ -58,13 +63,14 @@ class SquareController extends BaseController
             $idempotencyKey = uniqid();
 
             //create customer || retrieve customer if already added
-            if (auth()->user()->square_cus_id == null) {
+            if ($this->user->square_cus_id == null) {
+                dump('inside square cus id null');
                 $customer = $this->createCustomer();
             } else {
-
+                dump('inside square cus id not null');
                 $customer = $this->getCustomer();
             }
-
+dd('sadas');
             // Get card Token
             $amount_money = new Money();
             $amount_money->setAmount(Cart::session($this->userId)->getTotal());
@@ -133,9 +139,9 @@ class SquareController extends BaseController
         try {
             //create customer
             $body = new CreateCustomerRequest();
-            $body->setGivenName(auth()->user()->name);
-            $body->setEmailAddress(auth()->user()->email);
-            $body->setNote('our customer name is ' . auth()->user()->name . '');
+            $body->setGivenName($this->user->name);
+            $body->setEmailAddress($this->user->email);
+            $body->setNote('our customer name is ' . $this->user->name . '');
 
             $api_response = $this->squareClient->getCustomersApi()->createCustomer($body);
 
@@ -158,7 +164,7 @@ class SquareController extends BaseController
     {
         try {
 
-            $api_response = $this->squareClient->getCustomersApi()->retrieveCustomer(auth()->user()->square_cus_id);
+            $api_response = $this->squareClient->getCustomersApi()->retrieveCustomer($this->user->square_cus_id);
 
             if ($api_response->isSuccess()) {
                 $customer_id = $api_response->getResult()->getCustomer()->getId();
@@ -171,6 +177,22 @@ class SquareController extends BaseController
             return response()->json(['Code' => 400, 'message' => "Something went wrong" . $e]);
         }
     }
+
+    private function getOrCreateGuestUser($email)
+    {
+        // Check if the email exists in the guest_users table
+        $guestUser = Guest::where('email', $email)->first();
+
+        // If the guest user does not exist, create a new one
+        if (!$guestUser) {
+            $guestUser = new Guest();
+            $guestUser->email = $email;
+            $guestUser->save();
+        }
+
+        return $guestUser;
+    }
+
 
     //enviromnet
     public function enviromnet()
