@@ -14,7 +14,10 @@ class BlogController extends BaseController
 {
     public function getList(request $request)
     {
-        $data = Blog::whereDate('publish_date', '<=', Carbon::now()->toDateString());
+        $perPage = $request->per_page ?? 12;
+        $data = Blog::whereDate('publish_date', '<=', Carbon::now()->toDateString())
+            ->orderBy('id','desc')
+            ->paginate($perPage);
         return $this->sendResponse($data);
     }
 

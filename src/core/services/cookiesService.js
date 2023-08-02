@@ -1,7 +1,3 @@
-import { saveUserName, saveUserEmail, saveUserImage } from "./jwtService";
-
-import { getCartDetails, getCartItems } from "@utils/cartHelpers";
-
 // Function sets user latest visit date in cookie
 export function setUserTracking() {
     try {
@@ -20,26 +16,7 @@ export function setUserTracking() {
 
 const dateToCheck = "2023-06-07";
 
-const actionToPerform = () => {
-    if (
-        window.localStorage.getItem("cart") == null ||
-        window.localStorage.getItem("cartDetails") == null ||
-        !getCartDetails()?.sub_total ||
-        !getCartItems()?.length
-    ) {
-        window.localStorage.removeItem("cart");
-        window.localStorage.removeItem("cartDetails");
-    }
-    let userName = window.localStorage.getItem("user_name");
-    if (userName) saveUserName(userName);
-    window.localStorage.removeItem("user_name");
-    let userEmail = window.localStorage.getItem("user_email");
-    if (userEmail) saveUserEmail(userEmail);
-    window.localStorage.removeItem("user_email");
-    let userImage = window.localStorage.getItem("user_image");
-    if (userImage) saveUserImage(userImage);
-    window.localStorage.removeItem("user_image");
-};
+const actionToPerform = () => {};
 
 // This Function checks when did user last visited our website
 function checkLastVisitDate() {

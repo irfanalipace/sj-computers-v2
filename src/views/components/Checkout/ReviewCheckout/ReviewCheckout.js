@@ -4,6 +4,7 @@ import ReviewButton from "./ReviewButton";
 // import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./ReviewCheckout.css";
+import Discount from "../Discount/Discount";
 
 export default function ReviewCheckout({
     toggleAccordion,
@@ -16,6 +17,15 @@ export default function ReviewCheckout({
     useEffect(() => {
         handleHeight();
     }, []);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+    const handleProceed = () => {
+        // Update the heading and button text when "Proceed" is clicked
+        setDiscountHeading("New Heading");
+    };
+    const [discountHeading, setDiscountHeading] = useState(
+        "Get Discount & Benefits"
+    );
 
     return (
         <div className="review-card">
@@ -90,9 +100,15 @@ export default function ReviewCheckout({
                 </div>
             </div>
 
-            <ReviewButton toggleAccordion={toggleAccordion}>
-                Proceed
-            </ReviewButton>
+            {isAuthenticated ? (
+                <ReviewButton toggleAccordion={toggleAccordion}>
+                    Proceed
+                </ReviewButton>
+            ) : (
+                <ReviewButton toggleAccordion={toggleAccordion}>
+                    Proceed
+                </ReviewButton>
+            )}
         </div>
     );
 }

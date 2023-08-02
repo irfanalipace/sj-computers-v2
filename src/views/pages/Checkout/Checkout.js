@@ -17,6 +17,7 @@ import visa from "@images/common/visa.png";
 import mastercard from "@images/common/mastercard.png";
 
 import "./Checkout.css";
+import Discount from "@components/Checkout/Discount/Discount";
 
 export default function Checkout() {
     const [accordionOne, setAccordionOne] = useState(false);
@@ -29,6 +30,8 @@ export default function Checkout() {
     const shippingAddress = useSelector(
         (state) => state.orders.shippingDetails
     );
+
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     const loading = useSelector((state) => state.cart.isLoading);
 
@@ -79,10 +82,17 @@ export default function Checkout() {
                                     </Link>
                                 </div>
                                 <div className="items-number">
-                                    <h3>
-                                        Checkout ({checkoutDetails.total_items}{" "}
-                                        items)
-                                    </h3>
+                                    {isAuthenticated ? (
+                                        <h3>
+                                            Checkout (
+                                            {checkoutDetails.total_items} items)
+                                        </h3>
+                                    ) : (
+                                        <h3>
+                                           Guest Checkout (
+                                            1 items)
+                                        </h3>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -146,9 +156,33 @@ export default function Checkout() {
                                     </Accordion>
                                 </div>
                                 <div className="col-md-3 col-12">
-                                    <div className="shipping-method-component-wrapper">
-                                        <ShippingMethod />
+                                    <div>
+                                        <div className="shipping-method-component-wrapper">
+                                            <ShippingMethod />
+                                        </div>
                                     </div>
+                                    {!isAuthenticated && (
+                                        <div>
+                                            <div>
+                                                <Discount
+                                                    handleClick={handleClick}
+                                                    activeAccordion={
+                                                        currentAccordionId
+                                                    }
+                                                    paymentMethod={
+                                                        paymentMethod
+                                                    }
+                                                    shippingDetails={
+                                                        checkoutDetails
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* <div className="shipping-method-component-wrapper">
+                                        <ShippingMethod />
+                                    </div> */}
                                     <div className="order-summary-component-wrapper">
                                         <OrderSummary
                                             handleClick={handleClick}
@@ -157,6 +191,9 @@ export default function Checkout() {
                                             shippingDetails={checkoutDetails}
                                         />
                                     </div>
+                                    {/* <div>
+                                    <Discount />
+                                  </div> */}
                                 </div>
                             </div>
                         ) : (

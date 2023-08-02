@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\SystemPages\SystemPagesController;
 use App\Http\Controllers\Api\InventoryController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\Blog\BlogController;
+use App\Http\Controllers\Api\RefundController;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -65,6 +66,8 @@ Route::get('categories', [CategoryController::class, 'getList'])->name('categori
 Route::get('brands', [BrandController::class, 'getList'])->name('brands');
 
 Route::get('products', [ProductController::class, 'getList'])->name('products');
+
+Route::get('inventory-data', [ProductController::class, 'getInventoryData'])->name('inventoryData');
 
 Route::get('products-filter-list', [ProductController::class, 'getProductFilterList'])->name('getProductFilterList');
 
@@ -122,6 +125,27 @@ Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])
 Route::get('system-pages/{key?}', [SystemPagesController::class, 'getPages'])->name('getPages');
 
 
+/*
+* Refund order
+*/
+Route::post('customer-email-verify', [AuthController::class, 'verifyCustomerEmail'])->name('customer-email-verify');
+
+Route::post('customer-verify-otp', [AuthController::class, 'verifyOtpCustomerEmail'])->name('customer-verify-otp');
+
+Route::group(['middleware' => 'refund'], function () {
+
+    //list of orders
+    Route::get('customer-orders-list', [RefundController::class, 'ordersList']);
+
+    // details or orders
+    Route::get('order-details', [RefundController::class, 'orderDetail'])->name('order-details');
+
+    // refund submit
+    Route::post('refund-submit', [RefundController::class, 'refundSubmit'])->name('refund-submit');
+
+    // List of refund
+    Route::get('customer-refund-list', [RefundController::class, 'refundList'])->name('refund-list');
+});
 
 Route::middleware(['auth:api', 'verified'])->group(function () {
 
@@ -141,7 +165,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     */
     Route::post('update-profile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
     Route::post('change-password', [ProfileController::class, 'resetPassword'])->name('changePassword');
-    Route::post('delete-profile-picture',[ProfileController::class,'deleteProfilePic'])->name('deleteProfilePic');
+    Route::post('delete-profile-picture', [ProfileController::class, 'deleteProfilePic'])->name('deleteProfilePic');
 
     /*
     *Order shipping address
@@ -191,5 +215,5 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     /*
     * Download inventory Excel
     */
-    Route::get('download-inventory',[InventoryController::class,'downloadInventory'])->name('downloadInventory');
+    Route::get('download-inventory', [InventoryController::class, 'downloadInventory'])->name('downloadInventory');
 });
