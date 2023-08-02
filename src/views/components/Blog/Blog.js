@@ -223,7 +223,7 @@ const Blog = () => {
     //     event.preventDefault();
     //     window.history.pushState(null, null, `#${category_id}`);
     //   };
-    console.log(blogdteails,'@@@@')
+  
     return (
         <div>
             <>
