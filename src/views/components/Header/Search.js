@@ -297,6 +297,7 @@ function Search() {
   const handleItemClick = (category) => {
     setSelectedItem(category);
     dispatch(SET_SELECTED_CATEGORY(category?.id));
+    setDropdownOpen(false);
   };
 
   const handleSearch = (e) => {
