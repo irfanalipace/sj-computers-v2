@@ -5,6 +5,7 @@ import PageWrapper from '../../../PageWrapper'
 
 const BlogSingle = () => {
   return (
+    
     <PageWrapper title='SJ | Blogs'>
 
    <SingleBlog />
