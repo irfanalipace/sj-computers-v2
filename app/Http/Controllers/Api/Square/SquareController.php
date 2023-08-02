@@ -145,7 +145,14 @@ class SquareController extends BaseController
             if ($api_response->isSuccess()) {
                 $customer_id = $api_response->getResult()->getCustomer()->getId();
                 //saving customer id in user table square_cus_id column
-                User::whereId($this->userId)->update(['square_cus_id' => $customer_id]);
+
+                if ($this->userId != StatusEnum::DUMMY) {
+                    User::whereId($this->userId)->update(['square_cus_id' => $customer_id]);
+                }
+                else{
+                    Guest::whereId($this->user->id)->update(['square_cus_id' => $customer_id]);
+                }
+
             } else {
                 $errors = $api_response->getErrors();
                 return response()->json(['Code' => 400, 'message' => "Something went wrong while saving customer key"]);
