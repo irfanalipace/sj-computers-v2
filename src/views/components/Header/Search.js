@@ -270,7 +270,7 @@
 // export default Search;
 
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { SET_SEARCH_STRING, SET_SELECTED_CATEGORY } from "@store/products/productsSlice";
@@ -328,10 +328,30 @@ function Search() {
     </Link>
   ));
 
+
+
+
+
+  const dropdownRef = useRef(null);
+
+
+
+  const handleDocumentClick = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleDocumentClick);
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+    };
+  }, []);
   return (
     <form className="input-group search-inputgroup" onSubmit={handleSearch}>
-      <div className="input-group-btn search-panel">
-        <div className="dropdown">
+      <div ref={dropdownRef} className="input-group-btn search-panel">
+        <div className="dropdown my-drop-down-data-seachbar-icon">
           <button
             type="button"
             className="btn btn-primary dropdown-toggle all-button"
@@ -341,7 +361,7 @@ function Search() {
           >
             {selectedItem.name}
           </button>
-          <div className={`dropdown-menu ${dropdownOpen ? "show" : ""}`}>
+          <div className={`dropdown-menu ${dropdownOpen ? "show" : ""}`} style={{ maxHeight: "200px", overflowY: "auto" }}>
             <Link
               to="#"
               onClick={() => handleItemClick({ name: "ALL", id: null })}
