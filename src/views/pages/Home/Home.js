@@ -9,6 +9,7 @@ import Loader from "@common/LoaderComponent/LoaderComponent";
 
 // import SellingProducts from "@components/MobileCategory/SellingProducts/SellingProducts";
 import "./Home.css";
+import PageWrapper from "../../../PageWrapper";
 
 const Home = () => {
     // const handleResize = () => {
@@ -16,6 +17,7 @@ const Home = () => {
     // };
     // const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     return (
+        <PageWrapper title='SJ | Home'>
         <div className="homePage">
             {/* <MobileHomeCategory />
                 
@@ -32,6 +34,7 @@ const Home = () => {
             {/* <ProductThreeItem /> */}
             {/* <Recommendation /> */}
         </div>
+        </PageWrapper>
     );
 };
 

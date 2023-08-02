@@ -73,7 +73,7 @@
 
 //     return (
 //         <form className="input-group search-inputgroup" onSubmit={handleSearch}>
-//             {/* <div className="input-group-btn search-panel">
+//             <div className="input-group-btn search-panel">
 //                 <Dropdown
 //                     isOpen={dropdownOpen}
 //                     toggle={toggle}
@@ -97,27 +97,8 @@
 
 //                     </DropdownMenu>
 //                 </Dropdown>
-//             </div> */}
-//               <div className="input-group-btn search-panel">
-//         <div
-//           className={`custom-dropdown${dropdownOpen ? " custom-dropdown-open" : ""}${location.pathname.includes("category") ? " custom-dropdown-disabled" : ""}`}
-//         >
-//           <div className="custom-dropdown-toggle" onClick={toggle}>
-//             <span style={{ fontSize: "13px" }}>{selectedItem.name}</span>
-//           </div>
-//           {dropdownOpen && (
-//             <div className="custom-dropdown-menu">
-//               <div
-//                 onClick={() => handleItemClick({ name: "ALL", id: null })}
-//                 className="custom-dropdown-item dropdown"
-//               >
-//                 <span style={{ fontSize: "13px" }}>All Category</span>
-//               </div>
-//               {renderedCategories}
 //             </div>
-//           )}
-//         </div>
-//       </div>
+     
 //             <input
 //                 type="hidden"
 //                 name="search_param"
@@ -151,139 +132,255 @@
 // }
 // export default Search;
 
+// import { useState, useEffect } from "react";
+// import { useSelector, useDispatch } from "react-redux";
+// import {
+//     SET_SEARCH_STRING,
+//     SET_SELECTED_CATEGORY,
+// } from "@store/products/productsSlice";
+// import { useLocation, useNavigate } from "react-router-dom";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faSearch, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+// import Loader from "@common/Spinner/Spinner";
+// import "./Header.css";
+
+// function Search() {
+//     const [dropdownOpen, setDropdownOpen] = useState(false);
+//     const [selectedItem, setSelectedItem] = useState({ name: "ALL", id: null });
+//     const [search, setSearch] = useState("");
+//     const { searchString, selectedCategory } = useSelector(
+//         (state) => state.products
+//     );
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate();
+//     const categories = useSelector((state) => state.category.categories);
+//     const location = useLocation();
+
+//     const toggle = () => setDropdownOpen((prevState) => !prevState);
+
+//     const handleItemClick = (category) => {
+//         setSelectedItem(category);
+//         dispatch(SET_SELECTED_CATEGORY(category?.id));
+//     };
+
+//     const handleSearch = (e) => {
+//         e.preventDefault();
+//         if (search) {
+//             dispatch(SET_SEARCH_STRING(search));
+//             navigate("/products/search");
+//         }
+//     };
+
+//     useEffect(() => {
+//         setSearch(searchString || "");
+//     }, [searchString]);
+
+//     useEffect(() => {
+//         if (selectedCategory === null)
+//             setSelectedItem({ name: "ALL", id: null });
+//     }, [selectedCategory]);
+
+//     let renderedCategories = categories.map((category) => (
+//         <div
+//             key={category.id}
+//             onClick={() => handleItemClick(category)}
+//             className="dropdown-item ul-liste-items-all-buttons custom-dropdown-item"
+//         >
+//             <span
+//                 className="text-decoration-none div-link-category-search"
+//                 style={{ fontSize: "13px" }}
+//             >
+//                 {category.name}
+//             </span>
+//         </div>
+//     ));
+
+//     return (
+//         <form className="input-group search-inputgroup" onSubmit={handleSearch}>
+//             <div className="input-group-btn search-panel">
+//                 <div
+//                     className={`custom-dropdown${
+//                         dropdownOpen ? " custom-dropdown-open" : ""
+//                     }${
+//                         location.pathname.includes("category")
+//                             ? " custom-dropdown-disabled"
+//                             : ""
+//                     }`}
+//                 >
+//                     <div className="custom-dropdown-toggle" onClick={toggle}>
+//                         <span style={{ fontSize: "13px" }}>
+//                             {selectedItem.name}
+//                             <FontAwesomeIcon
+//                                 icon={faCaretDown}
+//                                 className="dropdown-icon"
+//                                 style={{ marginLeft: "4px" }}
+//                             />
+//                         </span>
+//                     </div>
+//                     {dropdownOpen && (
+//                         <div className="custom-dropdown-menu">
+//                             <div
+//                                 onClick={() =>
+//                                     handleItemClick({ name: "ALL", id: null })
+//                                 }
+//                                 className="custom-dropdown-item dropdown"
+//                             >
+//                                 <span style={{ fontSize: "13px" }}>
+//                                     All Category
+//                                     {/* <FontAwesomeIcon icon={faCaretDown} className="dropdown-icon" /> */}
+//                                 </span>
+//                             </div>
+//                             {renderedCategories}
+//                         </div>
+//                     )}
+//                 </div>
+//             </div>
+//             <input
+//                 type="hidden"
+//                 name="search_param"
+//                 value="all"
+//                 id="search_param"
+//             />
+//             <input
+//                 type="search"
+//                 className="form-control search-input-type"
+//                 name="x"
+//                 id="search"
+//                 placeholder="Search"
+//                 value={search}
+//                 onChange={(e) => setSearch(e.target.value)}
+//             />
+//             <span className="input-group-btn">
+//                 <button
+//                     type="button"
+//                     className="btn btn-success search-logo"
+//                     onClick={handleSearch}
+//                 >
+//                     <FontAwesomeIcon
+//                         icon={faSearch}
+//                         size="1x"
+//                         className="search-button-header-icon"
+//                     />
+//                 </button>
+//             </span>
+//         </form>
+//     );
+// }
+
+// export default Search;
+
+
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-    SET_SEARCH_STRING,
-    SET_SELECTED_CATEGORY,
-} from "@store/products/productsSlice";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { SET_SEARCH_STRING, SET_SELECTED_CATEGORY } from "@store/products/productsSlice";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Loader from "@common/Spinner/Spinner";
 import "./Header.css";
 
 function Search() {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState({ name: "ALL", id: null });
-    const [search, setSearch] = useState("");
-    const { searchString, selectedCategory } = useSelector(
-        (state) => state.products
-    );
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const categories = useSelector((state) => state.category.categories);
-    const location = useLocation();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({ name: "ALL", id: null });
+  const [search, setSearch] = useState("");
+  const { searchString, selectedCategory } = useSelector(
+    (state) => state.products
+  );
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const categories = useSelector((state) => state.category.categories);
+  const location = useLocation();
 
-    const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
 
-    const handleItemClick = (category) => {
-        setSelectedItem(category);
-        dispatch(SET_SELECTED_CATEGORY(category?.id));
-    };
+  const handleItemClick = (category) => {
+    setSelectedItem(category);
+    dispatch(SET_SELECTED_CATEGORY(category?.id));
+  };
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        if (search) {
-            dispatch(SET_SEARCH_STRING(search));
-            navigate("/products/search");
-        }
-    };
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (search) {
+      dispatch(SET_SEARCH_STRING(search));
+      navigate("/products/search");
+    }
+  };
 
-    useEffect(() => {
-        setSearch(searchString || "");
-    }, [searchString]);
+  useEffect(() => {
+    setSearch(searchString || "");
+  }, [searchString]);
 
-    useEffect(() => {
-        if (selectedCategory === null)
-            setSelectedItem({ name: "ALL", id: null });
-    }, [selectedCategory]);
+  useEffect(() => {
+    if (selectedCategory === null) setSelectedItem({ name: "ALL", id: null });
+  }, [selectedCategory]);
 
-    let renderedCategories = categories.map((category) => (
-        <div
-            key={category.id}
-            onClick={() => handleItemClick(category)}
-            className="dropdown-item ul-liste-items-all-buttons custom-dropdown-item"
-        >
-            <span
-                className="text-decoration-none div-link-category-search"
-                style={{ fontSize: "13px" }}
+  let renderedCategories = categories.map((category) => (
+    <Link
+      to="#"
+      key={category.id}
+      onClick={() => handleItemClick(category)}
+      className="dropdown-item ul-liste-items-all-buttons"
+    >
+      <span className="text-decoration-none div-link-category-search" style={{ fontSize: "13px" }}>
+        {category.name}
+      </span>
+    </Link>
+  ));
+
+  return (
+    <form className="input-group search-inputgroup" onSubmit={handleSearch}>
+      <div className="input-group-btn search-panel">
+        <div className="dropdown">
+          <button
+            type="button"
+            className="btn btn-primary dropdown-toggle all-button"
+            style={{ fontSize: "13px" }}
+            onClick={toggleDropdown}
+            disabled={location.pathname.includes("category")}
+          >
+            {selectedItem.name}
+          </button>
+          <div className={`dropdown-menu ${dropdownOpen ? "show" : ""}`}>
+            <Link
+              to="#"
+              onClick={() => handleItemClick({ name: "ALL", id: null })}
+              className="dropdown-item ul-liste-items-all-buttons"
             >
-                {category.name}
-            </span>
+              <span className="text-decoration-none" style={{ fontSize: "13px" }}>
+                All Category
+              </span>
+            </Link>
+            {renderedCategories}
+          </div>
         </div>
-    ));
+      </div>
 
-    return (
-        <form className="input-group search-inputgroup" onSubmit={handleSearch}>
-            <div className="input-group-btn search-panel">
-                <div
-                    className={`custom-dropdown${
-                        dropdownOpen ? " custom-dropdown-open" : ""
-                    }${
-                        location.pathname.includes("category")
-                            ? " custom-dropdown-disabled"
-                            : ""
-                    }`}
-                >
-                    <div className="custom-dropdown-toggle" onClick={toggle}>
-                        <span style={{ fontSize: "13px" }}>
-                            {selectedItem.name}
-                            <FontAwesomeIcon
-                                icon={faCaretDown}
-                                className="dropdown-icon"
-                                style={{ marginLeft: "4px" }}
-                            />
-                        </span>
-                    </div>
-                    {dropdownOpen && (
-                        <div className="custom-dropdown-menu">
-                            <div
-                                onClick={() =>
-                                    handleItemClick({ name: "ALL", id: null })
-                                }
-                                className="custom-dropdown-item dropdown"
-                            >
-                                <span style={{ fontSize: "13px" }}>
-                                    All Category
-                                    {/* <FontAwesomeIcon icon={faCaretDown} className="dropdown-icon" /> */}
-                                </span>
-                            </div>
-                            {renderedCategories}
-                        </div>
-                    )}
-                </div>
-            </div>
-            <input
-                type="hidden"
-                name="search_param"
-                value="all"
-                id="search_param"
-            />
-            <input
-                type="search"
-                className="form-control search-input-type"
-                name="x"
-                id="search"
-                placeholder="Search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-            />
-            <span className="input-group-btn">
-                <button
-                    type="button"
-                    className="btn btn-success search-logo"
-                    onClick={handleSearch}
-                >
-                    <FontAwesomeIcon
-                        icon={faSearch}
-                        size="1x"
-                        className="search-button-header-icon"
-                    />
-                </button>
-            </span>
-        </form>
-    );
+      <input type="hidden" name="search_param" value="all" id="search_param" />
+      <input
+        type="search"
+        className="form-control search-input-type"
+        name="x"
+        id="search"
+        placeholder="Search"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      <span className="input-group-btn">
+        <button
+          type="button"
+          className="btn btn-success search-logo"
+          onClick={handleSearch}
+        >
+          <FontAwesomeIcon
+            icon={faSearch}
+            size="1x"
+            className="search-button-header-icon"
+          />
+        </button>
+      </span>
+    </form>
+  );
 }
 
 export default Search;

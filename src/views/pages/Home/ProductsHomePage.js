@@ -9,6 +9,7 @@ import {
 } from "@store/products/productsThunks";
 import { CLEAR_PRODUCTS } from "@store/products/productsSlice";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
+import PageWrapper from "../../../PageWrapper";
 
 const ProductsHomePage = () => {
     const {
@@ -58,7 +59,8 @@ const ProductsHomePage = () => {
     }, [searchString, selectedCategory]);
 
     return (
-        <>
+        <PageWrapper title='SJ | ProductHomePage'>
+  <>
             {isLoading ? (
                 <h3 className="pb-4">
                     <Loader />
@@ -79,6 +81,8 @@ const ProductsHomePage = () => {
                 </>
             )}
         </>
+        </PageWrapper>
+      
     );
 };
 

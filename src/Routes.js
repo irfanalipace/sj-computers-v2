@@ -37,15 +37,20 @@ const BlogSingle = React.lazy(() => import("@pages/Blog/BlogSingle"));
 const BlogsDetails = React.lazy(() => import("@pages/Blog/BlogsDetails"));
 
 import Loader from "@common/LoaderComponent/LoaderComponent";
-
+import PageWrapper from "./PageWrapper";
 const Router = () => {
+
     const routes = [
         {
             path: "/",
             element: (
-                // <Suspense fallback={<Loader />}>
+                <Suspense fallback={<Loader />}>
                 <Home />
-                // </Suspense>
+                </Suspense>
+
+        //         <PageWrapper>
+        //      <Home />
+        //    </PageWrapper>
             ),
         },
         {
@@ -263,7 +268,7 @@ const Router = () => {
             ),
         },
         {
-            path: "/contact",
+            path: "/contact-us",
             element: (
                 <Suspense fallback={<Loader />}>
                     <Contact />

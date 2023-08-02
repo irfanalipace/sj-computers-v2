@@ -12,6 +12,7 @@ import { getUserEmail } from "@services/jwtService";
 import { useFormValidation } from "@hooks/useFormValidation";
 
 import "@pages/Auth/auth.css";
+import PageWrapper from "../../../PageWrapper";
 
 const PasswordForm = () => {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
@@ -60,7 +61,8 @@ const PasswordForm = () => {
     }
 
     return (
-        <form
+        <PageWrapper title='SJ | PasswordForm'>
+  <form
             className={`auth-form ${mounted && "slide"} `}
             onSubmit={handleSubmit}
         >
@@ -135,6 +137,8 @@ const PasswordForm = () => {
                 </Link>
             </div>
         </form>
+        </PageWrapper>
+      
     );
 };
 

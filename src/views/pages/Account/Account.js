@@ -9,11 +9,13 @@ import securityIcon from "@images/common/security-icon.png";
 import Profile from "./Profile";
 
 import "./Account.css";
+import PageWrapper from "../../../PageWrapper";
 
 
 const Account = () => {
     return (
-        <div className="account-page">
+        <PageWrapper title='SJ | Account'>
+     <div className="account-page">
             <div className="container-xl">
                 <h3 className="account-heading">Your Account </h3>
                 <div className="account-options row mx-0">
@@ -77,6 +79,8 @@ const Account = () => {
             </div>
       
         </div>
+        </PageWrapper>
+      
     );
 };
 

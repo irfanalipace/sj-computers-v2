@@ -9,6 +9,7 @@ import { contactUsApi } from "@api/contact-us";
 import Button from "@common/Button/Button";
 import contact from "@images/footer/footer-links/contact-image.png";
 import "./Contact.css";
+import PageWrapper from "../../../../PageWrapper";
 const Contact = () => {
     const [message, setMessage] = useState("");
     const [error, setError] = useState([]);
@@ -54,7 +55,8 @@ const Contact = () => {
     }, [errors]);
 
     return (
-        <div className="contact-container">
+        <PageWrapper title='SJ | Contact'>
+ <div className="contact-container">
             <div className="contact-header">
                 <div className="my-contact-menu">
                     <nav className="navbar navbar-expand-lg nav-contact-background-color">
@@ -64,7 +66,7 @@ const Contact = () => {
                                     <li className="nav-item ">
                                         <Link
                                             className="nav-link text-aligin-contact-menu link-no-hover on-focus-colo-contact"
-                                            to="/contact"
+                                            to="/contact-us"
                                         >
                                             <span>Contact Us</span>
                                         </Link>
@@ -247,6 +249,8 @@ const Contact = () => {
                 </div>
             </div>
         </div>
+        </PageWrapper>
+       
     );
 };
 

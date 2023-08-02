@@ -5,6 +5,7 @@ import Header from "@components/Auth/Header";
 import Footer from "@components/Auth/Footer";
 
 import "@pages/Auth/auth.css";
+import PageWrapper from "../../../PageWrapper";
 
 const Emailsent = () => {
     const [mounted, setMounted] = useState(false);
@@ -15,7 +16,8 @@ const Emailsent = () => {
         };
     }, []);
     return (
-        <div>
+        <PageWrapper title='SJ | EmailSent'>
+    <div>
             <div className="container form-container">
                 <div className="row">
                     <div className="header-logo">
@@ -94,6 +96,8 @@ const Emailsent = () => {
                 </div>
             </div>
         </div>
+        </PageWrapper>
+        
     );
 };
 

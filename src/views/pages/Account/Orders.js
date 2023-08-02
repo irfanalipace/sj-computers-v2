@@ -22,6 +22,7 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import "./Account.css";
 import { Select } from "@mantine/core";
 import { Stack } from "react-bootstrap";
+import PageWrapper from "../../../PageWrapper";
 
 
 
@@ -155,7 +156,8 @@ const OrderPage = () => {
         ) : null;
     };
     return (
-        <div className="account-page order-page">
+        <PageWrapper title='SJ | Orders'>
+ <div className="account-page order-page">
             <div className="container-xl">
                 <Breadcrumb />
                 <div className="row mx-0">
@@ -325,6 +327,8 @@ const OrderPage = () => {
                 </div>
             </div>
         </div>
+        </PageWrapper>
+       
     );
 };
 

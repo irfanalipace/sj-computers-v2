@@ -8,6 +8,7 @@ import "./thankyou.css"; // Import the CSS file for the component
 import circle from "../../../assets/images/green-circle.svg";
 import tickImage from "../../../assets/images/tick1.svg";
 import { useNavigate, useLocation } from "react-router-dom";
+import PageWrapper from "../../../PageWrapper";
 
 export default function ThankYou() {
     // const isMobile = window.innerWidth <= 768;
@@ -93,7 +94,8 @@ export default function ThankYou() {
     ];
 
     return (
-        <div
+        <PageWrapper title='SJ | Thankyou'>
+ <div
             className="thank-you-page"
             style={{ marginLeft: "10%", marginRight: "10%" }}
         >
@@ -323,5 +325,7 @@ export default function ThankYou() {
                 </div>
             </div>
         </div>
+        </PageWrapper>
+       
     );
 }
