@@ -13,6 +13,8 @@ class Blog extends Model
 
     public $with = ['categories'];
 
+    const PUBLISHED = 'Published';
+
     public function categories(){
         return $this->belongsToMany(Category::class,'blogs_categories');
     }
