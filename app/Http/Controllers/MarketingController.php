@@ -28,6 +28,12 @@ class MarketingController extends Controller
      */
     public function gmarketingfeed()
     {
-        return  response()->download();
+        $file = public_path(). "/storage/gmarketing/marketing_feed.csv";
+
+        $headers = array(
+            'Content-Type: text/csv',
+        );
+
+        return response()->download($file, 'products_list.csv', $headers);
     }
 }

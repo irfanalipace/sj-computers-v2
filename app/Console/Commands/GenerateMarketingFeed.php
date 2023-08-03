@@ -51,11 +51,10 @@ class GenerateMarketingFeed extends Command
          * delete old file
          */
         Storage::deleteDirectory('public/gmarketing');
-
         /*
          * make new marketing feed file
          */
-        Excel::store(new ExportMarketingProduct(), 'public/gmarketing/' . 'marketing_feed.xlsx');
+        Excel::store(new ExportMarketingProduct(), 'public/gmarketing/' . 'marketing_feed.csv');
 
     }
 }
