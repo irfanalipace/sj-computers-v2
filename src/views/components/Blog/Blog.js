@@ -223,7 +223,7 @@ const Blog = () => {
     //     event.preventDefault();
     //     window.history.pushState(null, null, `#${category_id}`);
     //   };
-
+  
     return (
         <div>
             <>
@@ -288,7 +288,7 @@ const Blog = () => {
                                             </div>
                                             <div className="dive-reight-border">
                                                 <div className="circle-dev-blog">
-                                                    <span> {readingTime} </span>
+                                                    <span> {readingTime} min</span>
                                                 </div>
                                                 <div className="date-blog-after-circle">
                                                     <span>
@@ -340,7 +340,9 @@ const Blog = () => {
                                                 <span>Written by SJ Staff</span>
                                             </div>
                                             <div className="div-left-blog-text-writt">
+                                                
                                                 {blogdteails.categories?.map(
+                                                 
                                                     (category, index) => (
                                                         <React.Fragment
                                                             key={category.id}
