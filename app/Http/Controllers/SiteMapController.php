@@ -16,84 +16,13 @@ class SiteMapController extends Controller
 
     public function generateSiteMap()
     {
-        $baseUrl = config('app.url'); // Retrieve the base URL from the configuration
-
-        SitemapGenerator::create($baseUrl)->getSitemap();
-
-        $sitemap = Sitemap::create();
-
-        $routes = [
-            '/',
-            '/login',
-            '/register',
-            '/email-sent',
-            '/forget-password',
-            '/forgot_password',
-            '/products/{productId}',
-            '/products/search',
-            '/category/{categorySlug}',
-            '/account',
-            '/account/profile',
-            '/account/update-address',
-            '/account/update-password',
-            '/account/orders',
-            '/cart',
-            '/checkout/{productId}',
-            '/privacy_policy',
-            '/shipping_policy',
-            '/blog',
-            '/blog-page',
-            '/about-us',
-            '/what-we-do',
-            '/return_refund_policy',
-            '/term_services',
-            '/checkout',
-            '/contact',
-            '/success-transaction',
-            '/thank-you',
-            '/test',
-            '/sku',
-        ];
-
-        $products = Product::select('asin')
-            ->where('quantity','>',0)
-            ->where('status',1)
-            ->get();
-
-
-        // Add product URLs to the sitemap
-        foreach ($products as $product) {
-            $productUrl = $baseUrl . '/products/' . $product->asin;
-            $sitemap->add(Url::create($productUrl));
-        }
-
-        $blogs = Blog::select('slug')
-            ->where('status',Blog::PUBLISHED)
-            ->get();
-
-        foreach ($blogs as $blog) {
-            $blogUrl = $baseUrl . '/' . $blog->slug;
-            $sitemap->add(Url::create($blogUrl));
-        }
-
-        foreach ($routes as $route) {
-            $sitemap->add(Url::create($baseUrl . $route)); // Use the full URL with the base
-        }
-
-        $xmlContent = $sitemap->render();
-
-        // Generate a temporary file path
-        $tempFilePath = storage_path('app/sitemap.xml');
-
-        // Write the XML content to the temporary file
-        File::put($tempFilePath, $xmlContent);
+        $file = public_path(). "/storage/sitemap/sitemap.xml";
 
         $headers = [
             'Content-Type' => 'application/xml',
             'Content-Disposition' => 'attachment; filename="sitemap.xml"',
         ];
 
-        return Response::download($tempFilePath, 'sitemap.xml', $headers)->deleteFileAfterSend();
+        return response()->download($file, 'sitemap.xml', $headers);
     }
-
 }

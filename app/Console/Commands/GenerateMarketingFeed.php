@@ -55,6 +55,5 @@ class GenerateMarketingFeed extends Command
          * make new marketing feed file
          */
         Excel::store(new ExportMarketingProduct(), 'public/gmarketing/' . 'marketing_feed.csv');
-
     }
 }
