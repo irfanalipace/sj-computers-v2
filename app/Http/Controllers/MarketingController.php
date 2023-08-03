@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ExportMarketingProduct;
 use App\Exports\ExportProduct;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -27,23 +28,12 @@ class MarketingController extends Controller
      */
     public function gmarketingfeed()
     {
+        $file = public_path(). "/storage/gmarketing/marketing_feed.csv";
 
-//        $export = new ExportMarketingProduct();
-//        $now = now();
-//        $now = str_replace(array(":", "-", ' '), "", $now);
-//        $filename = 'Inventory_' . $now . '.xlsx';
-//
-//        Excel::store($export, $filename, 'public');
+        $headers = array(
+            'Content-Type: text/csv',
+        );
 
-        return Excel::download(new ExportMarketingProduct, 'products_list.csv', \Maatwebsite\Excel\Excel::CSV, [
-            'Content-Type' => 'text/csv',
-        ]);
-
-//        $path = public_path('storage/' . $filename);
-//
-//        return response()->download($path, 'products_list.xlsx', [
-//            'Content-Type' => 'application/vnd.ms-excel',
-//            'Content-Disposition' => "attachment; filename='products_list.xls'"
-//        ])->deleteFileAfterSend(true);
+        return response()->download($file, 'products_list.csv', $headers);
     }
 }

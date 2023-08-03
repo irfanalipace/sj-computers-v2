@@ -25,6 +25,7 @@ const PolicyComponets = () => {
     const [htmlContent, setHtmlContent] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    
     // const [PageTitle, setpageTitle] = useState("");
 
     // const pageName = {
@@ -37,14 +38,20 @@ const PolicyComponets = () => {
     let PageTitle;
 
     if (pageName === "term_services") {
+
         PageTitle = "Terms and Conditions";
     } else if (pageName === "return_refund_policy") {
+       
         PageTitle = "Return and Refund Policy";
     } else if (pageName === "privacy_policy") {
         PageTitle = "Privacy Policy";
     } else if (pageName === "shipping_policy") {
         PageTitle = "Shipping Policy";
-    } else {
+    }   else if (pageName === "about_us") {
+      
+        PageTitle = "About Us";
+    }
+    else {
         pageName = pageName;
     }
 

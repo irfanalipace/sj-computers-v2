@@ -37,7 +37,7 @@ const About = () => {
   
   return (
     <div>
-                        <>
+                        {/* <>
                         <div className="">
                             <div className="row">
                                 <div>
@@ -74,9 +74,7 @@ const About = () => {
                                           
                                         </div>
                                         <div className="col-md-10">
-                                            {/* <div className="div-left-blog-text">
-                                                <h5 style={}>reight side</h5>
-                                            </div> */}
+                                          
                                             <div className="blog-with-content-set-with-image">
                                                 <span>
                                                 Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi.Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi.Lorem ipsum dolor sit amet, trt aksdg asking no one consectetur asking no one consectetur jsjshdi. 
@@ -205,7 +203,7 @@ const About = () => {
                         </div>
                     
                        
-                    </>
+                    </> */}
 
         
     </div>
