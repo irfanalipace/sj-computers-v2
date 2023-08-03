@@ -1,9 +1,45 @@
+import { metaDetailsApi } from '../core/api/meta-details';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
 const PageWrapper = (props) => {
+  const [meta, setMeta]=useState("")
+  
+
+  useEffect(() => {
+   
+    metaDetailsApi()
+        .then((response) => {
+         
+          setMeta(response.data);
+          console.log(response?.data,'data meta')
+        })
+        .catch((error) => {
+            console.error("API Error:", error);
+        });
+}, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const { title, meta_descriptions } = props;
-console.log(props.meta_descriptions,'1111')
+
   useEffect(() => {
     document.title = title;
     const descriptionMetaTag = document.querySelector('meta[name="description"]');
