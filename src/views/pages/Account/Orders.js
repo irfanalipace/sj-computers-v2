@@ -12,7 +12,7 @@ import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 import { OrderSearchApi, OrderListhApi } from "../../../core/api/order";
 import OrderCard from "@components/OrderPage/OrderProducts";
 import OrderInvoiceCard from "@components/OrderPage/OrderInvoiceCard";
-
+import PageWrapper from "../../PageWrapper";
 import userDefault from "@images/common/user-default-avatar.png";
 import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -155,7 +155,9 @@ const OrderPage = () => {
         ) : null;
     };
     return (
-        <div className="account-page order-page">
+        <PageWrapper title="Order Refurbished Laptops: Quality Tech at Affordable Prices" meta_descriptions="Browse and order laptops from SJ Computers for top-notch performance and reliable service. Get the perfect tech companion for your needs today!">
+ 
+ <div className="account-page order-page">
             <div className="container-xl">
                 <Breadcrumb />
                 <div className="row mx-0">
@@ -325,6 +327,9 @@ const OrderPage = () => {
                 </div>
             </div>
         </div>
+   
+     </PageWrapper> 
+       
     );
 };
 
