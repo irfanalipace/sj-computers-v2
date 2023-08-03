@@ -354,7 +354,7 @@ div.sticky {
     line-height: 12px;
     color: #dddddd;
     top: 03;
-    margin-top: 72px;
+    margin-top: 76px;
 }
 .background-image-lin-dve img {
     width: 1141px;
@@ -940,10 +940,14 @@ div.sticky {
 }
 @media screen and (max-width: 600px) {
     .dive-reight-border {
-        display: none;
+        border-right:none;
     }
     .dev-left-blog-p span {
         font-size: 15px;
+    }.div-left-blog-text {
+   
+        color: white;
+        width: 100%;
     }
     .dev-left-blog-p {
         margin-top: 11px;
