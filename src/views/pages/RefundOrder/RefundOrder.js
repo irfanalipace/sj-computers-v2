@@ -38,20 +38,10 @@ import {
 import { toast } from "react-toastify";
 import Loader from "@common/Spinner/Spinner";
 import { getUserId } from "@services/jwtService";
-<<<<<<< HEAD
-import {
-    USER_TYPE_ENUM,
-    ORDER_TYPE_ENUM,
-    REFUND_TYPES,
-    ORDER_TYPE_KEYS_ENUMS,
-} from "./constants";
-import PageWrapper from "../../PageWrapper";
-=======
 import { USER_TYPE_ENUM } from "./constants";
 import RefundForms from "@components/RefundOrder/RefundForms";
 
 import loginSVG from "@images/login-invitation.png";
->>>>>>> 6b565185f2f2084d61237dbfdf6504f5ee5aabd9
 
 export default function RefundOrder() {
     const [selectedUserType, setSelectedUserType] = useState(null);
