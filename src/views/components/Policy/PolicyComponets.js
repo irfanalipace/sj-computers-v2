@@ -8,7 +8,6 @@ import { useLocation } from "react-router-dom";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import Header from "@components/Header/Header";
 import { useNavigate } from "react-router-dom";
-import PageWrapper from "../../PageWrapper";
 
 const HeadereLinks = [
     { path: "/", title: "About Us" },
@@ -26,7 +25,6 @@ const PolicyComponets = () => {
     const [htmlContent, setHtmlContent] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
-    
     // const [PageTitle, setpageTitle] = useState("");
 
     // const pageName = {
@@ -39,14 +37,20 @@ const PolicyComponets = () => {
     let PageTitle;
 
     if (pageName === "term_services") {
+
         PageTitle = "Terms and Conditions";
     } else if (pageName === "return_refund_policy") {
+       
         PageTitle = "Return and Refund Policy";
     } else if (pageName === "privacy_policy") {
         PageTitle = "Privacy Policy";
     } else if (pageName === "shipping_policy") {
         PageTitle = "Shipping Policy";
-    } else {
+    }   else if (pageName === "about_us") {
+      
+        PageTitle = "About Us";
+    }
+    else {
         pageName = pageName;
     }
 
@@ -72,8 +76,7 @@ const PolicyComponets = () => {
     }, [location.pathname]);
 
     return (
-        <PageWrapper title="Privacy Policy - SJ Computers"  meta_descriptions="Your privacy matters at SJ Computers. Learn more about our commitment to protecting your personal information in our detailed privacy policy.">
- <div>
+        <div>
             {/* <Header /> */}
             <div className="policy-background-color">
                 <div className="row">
@@ -198,8 +201,6 @@ const PolicyComponets = () => {
                 </div>
             </div>
         </div>
-        </PageWrapper>
-       
     );
 };
 
