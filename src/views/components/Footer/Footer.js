@@ -42,7 +42,7 @@ const Footer = () => {
                                         </h6>
                                         <li>
                                             <Link
-                                                to=""
+                                                to="about_us"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 About us

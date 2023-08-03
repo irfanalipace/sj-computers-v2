@@ -226,10 +226,10 @@ const Router = () => {
             ),
         },
         {
-            path: "/about-us",
+            path: "/about_us",
             element: (
                 <Suspense fallback={<Loader />}>
-                    <AboutPage />
+                    <Policy />
                 </Suspense>
             ),
         },
