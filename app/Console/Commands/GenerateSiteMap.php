@@ -116,9 +116,6 @@ class GenerateSiteMap extends Command
          */
         Storage::delete('public/sitemap/sitemap.xml');
 
-        public_path("storage/sitemap/sitemap.xml");
-
-        // Save the XML content to the new file
         Storage::put('public/sitemap/sitemap.xml', $xmlContent);
     }
 }
