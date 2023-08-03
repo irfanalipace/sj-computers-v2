@@ -80,6 +80,7 @@ class ExportMarketingProduct implements FromCollection, WithHeadings, ShouldAuto
     public function headings(): array
     {
         return ["id", "title","description", "brand", "condition", "price", "sale_price",
-            "availability", "availability_date", "quantity", "link", "image_link", "additional_image_link", "google_product_category", "identifier_exists"];
+            "availability", "availability_date", "quantity", "link", "image_link", "additional_image_link",
+            "google_product_category", "identifier_exists", "weight"];
     }
 }
