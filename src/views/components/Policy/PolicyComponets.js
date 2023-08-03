@@ -25,6 +25,7 @@ const PolicyComponets = () => {
     const [htmlContent, setHtmlContent] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    
     // const [PageTitle, setpageTitle] = useState("");
 
     // const pageName = {
