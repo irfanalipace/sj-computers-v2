@@ -47,30 +47,15 @@ class GenerateMarketingFeed extends Command
 
     public function handle()
     {
-        $export = new ExportMarketingProduct();
-        $now = now()->format('YmdHis');
-        $filename = 'Inventory_' . $now . '.xlsx';
+        /*
+         * delete old file
+         */
+        Storage::deleteDirectory('public/gmarketing');
 
-        Excel::store($export, 'public/gemarketing/' . $filename);
+        /*
+         * make new marketing feed file
+         */
+        Excel::store(new ExportMarketingProduct(), 'public/gmarketing/' . 'marketing_feed.xlsx');
 
-        $this->deleteOldFiles();
-
-        $this->info('Marketing feed generated and stored successfully.');
-    }
-
-    private function deleteOldFiles()
-    {
-        $disk = Storage::disk('public');
-        $directory = 'gemarketing';
-
-        $files = $disk->files($directory);
-
-        if (count($files) > 1) {
-            $oldestFiles = collect($files)->sortBy('timestamp')->take(count($files) - 1);
-
-            foreach ($oldestFiles as $file) {
-                $disk->delete($file);
-            }
-        }
     }
 }

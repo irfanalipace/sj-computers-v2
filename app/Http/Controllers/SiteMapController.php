@@ -14,7 +14,7 @@ use Spatie\Sitemap\Tags\Url;
 class SiteMapController extends Controller
 {
 
-    public function generateXML()
+    public function generateSiteMap()
     {
         $baseUrl = config('app.url'); // Retrieve the base URL from the configuration
 
@@ -55,20 +55,24 @@ class SiteMapController extends Controller
             '/sku',
         ];
 
-        $products = Product::all();
-        $productAsins = $products->pluck('asin');
+        $products = Product::select('asin')
+            ->where('quantity','>',0)
+            ->where('status',1)
+            ->get();
+
 
         // Add product URLs to the sitemap
-        foreach ($productAsins as $asin) {
-            $productUrl = $baseUrl . '/products/' . $asin;
+        foreach ($products as $product) {
+            $productUrl = $baseUrl . '/products/' . $product->asin;
             $sitemap->add(Url::create($productUrl));
         }
 
-        $blogs = Blog::all();
-        $blogsSlugs = $blogs->pluck('slug');
+        $blogs = Blog::select('slug')
+            ->where('status',Blog::PUBLISHED)
+            ->get();
 
-        foreach ($blogsSlugs as $slug) {
-            $blogUrl = $baseUrl . '/' . $slug;
+        foreach ($blogs as $blog) {
+            $blogUrl = $baseUrl . '/' . $blog->slug;
             $sitemap->add(Url::create($blogUrl));
         }
 
