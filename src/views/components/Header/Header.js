@@ -149,7 +149,7 @@ const Header = () => {
                                                         </Button>
                                                     </div>
                                                 </div>
-                                                {show && (
+                                                {show && screenWidth > 576 && (
                                                     <Suspense>
                                                         <LocationModal
                                                             isOpen={show}

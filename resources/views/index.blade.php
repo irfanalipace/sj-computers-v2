@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+<link>
 
-    <meta charset=“UTF-8” />
+<meta charset=“UTF-8” />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href={{ asset('favicon.png') }} />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="icon" href={{ asset('favicon.png') }} />
 
-    <title>SJ-Computers</title>
-
-</head>
+<title>SJ-Computers</title>
 
 
 <body>
@@ -20,7 +18,7 @@
     <script defer src={{ asset(mix('/js/main.js')) }}></script>
 
     <!-- Google Tag Manager -->
-    <script>
+    <script defer>
         (function(w, d, s, l, i) {
             w[l] = w[l] || [];
             w[l].push({

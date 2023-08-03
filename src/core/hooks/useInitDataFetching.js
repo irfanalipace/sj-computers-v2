@@ -45,15 +45,17 @@ export const useInitDataFetching = () => {
     }, [isAuthenticated]);
 
     useEffect(() => {
-        dispatch(fetchCategory());
-        dispatch(fetchBrands());
-        dispatch(getEstimatedDelivery());
+        setTimeout(() => {
+            dispatch(fetchCategory());
+            dispatch(fetchBrands());
+            dispatch(getEstimatedDelivery());
 
-        if (!isAuthenticated) {
-            cartItems.forEach((cartItem) => {
-                dispatch(addToLocalCart({ cartItem })); // adds local cart items to redux store
-            });
-            dispatch(setCartDetails(cartDetails)); // add local store details to redux store
-        }
+            if (!isAuthenticated) {
+                cartItems.forEach((cartItem) => {
+                    dispatch(addToLocalCart({ cartItem })); // adds local cart items to redux store
+                });
+                dispatch(setCartDetails(cartDetails)); // add local store details to redux store
+            }
+        }, 2000);
     }, []);
 };

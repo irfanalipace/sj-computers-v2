@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -12,7 +12,7 @@ import initServices from "@services/initServices";
 
 // import Header from "@components/Header/Header";
 import Header from "@components/Header/Header";
-import Loader from "@common/LoaderComponent/LoaderComponent";
+// import Loader from "@common/LoaderComponent/LoaderComponent";
 
 const Footer = React.lazy(() => import("@components/Footer/Footer"));
 
@@ -26,9 +26,21 @@ import ScrollToTop from "./ScrollToTop";
 function App() {
     const dispatch = useDispatch();
     const token = getToken();
+    const [tawkComponent, setTawkComponent] = useState(<></>);
     if (token) dispatch(alreadyLoggedIn(token));
     initServices.init(); //initialize services
     useInitDataFetching();
+
+    useEffect(() => {
+        setTimeout(() => {
+            let jsx = (
+                <Suspense>
+                    <TawkTo />
+                </Suspense>
+            );
+            setTawkComponent(jsx);
+        }, 5000);
+    }, []);
 
     // const location = useLocation();
     // ${process.env.REACT_APP_URL}
@@ -64,9 +76,10 @@ function App() {
                     <Footer />
                 </Suspense>
             </BrowserRouter>
-            <Suspense>
+            {tawkComponent}
+            {/* <Suspense>
                 <TawkTo />
-            </Suspense>
+            </Suspense> */}
         </div>
     );
 }
