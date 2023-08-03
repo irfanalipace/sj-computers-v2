@@ -45,7 +45,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
     }, [showModal]);
 
     return (
-      <PageWrapper title='SJ | Shopping Cart'>
+      <PageWrapper title='SJ | Cart'>
           <>
             {isLoading ? (
                 <LoaderComponent />

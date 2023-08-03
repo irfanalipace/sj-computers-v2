@@ -45,7 +45,7 @@ export default function Product() {
 
     const ProductComponent = () => {
         return (
-            <PageWrapper title='SJ | ProductHomePage'>
+            <PageWrapper title='SJ | Product'>
   <>
                 {product ? (
                     <div className="row">
