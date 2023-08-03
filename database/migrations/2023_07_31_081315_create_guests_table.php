@@ -24,6 +24,7 @@ class CreateGuestsTable extends Migration
             $table->string('state')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('country')->nullable();
+            $table->string('square_cus_id')->nullable();
             $table->timestamps();
         });
     }

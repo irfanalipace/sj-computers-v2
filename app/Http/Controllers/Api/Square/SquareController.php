@@ -49,6 +49,7 @@ class SquareController extends BaseController
             $this->user = Auth::guard('api')->user();
             $this->userId = $this->user->id;
         } else {
+
             $guestUser = $this->getOrCreateGuestUser($request->shipping_address);
             $this->user = $guestUser;
             $this->userId = StatusEnum::DUMMY;
@@ -81,7 +82,6 @@ class SquareController extends BaseController
             $body->setReferenceId('user-' . $this->userId);
 
             $api_response = $this->squareClient->getPaymentsApi()->createPayment($body);
-
             if ($api_response->isSuccess()) {
                 $orderData = [];
 
@@ -105,8 +105,12 @@ class SquareController extends BaseController
                 $cartContent = Cart::session($this->userId)->getContent();
 
                 $result = $api_response->getResult();
-                $order = $repository->createOrder(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address);
 
+                /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
+                $userIdToPass = ($this->userId !== StatusEnum::DUMMY) ? $this->userId : $this->user->id ;
+                $user_type = ($this->userId !== StatusEnum::DUMMY) ? StatusEnum::USER : StatusEnum::GUEST;
+
+                $order = $repository->createOrder(array(), $api_response, $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address,$user_type);
                 $orderData['order'] = $order['order'];
 
                 //sending invoice email of the payment to user

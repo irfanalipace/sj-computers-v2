@@ -3,6 +3,9 @@ namespace App\Classes;
 
 class StatusEnum{
 
+    public const USER = "user";
+    public const GUEST = "guest";
+
     public const currency = "USD";
     public const SUCCESS = "SUCCESS";
     public const PAYPALSUCCESSWITHWARNING = "SUCCESSWITHWARNING";
