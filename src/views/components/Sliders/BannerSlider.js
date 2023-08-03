@@ -2,7 +2,6 @@ import { useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Controller, Navigation } from "swiper";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import ProgressiveImage from "react-progressive-image";
 // import required modules
 import Banner1 from "@images/Banner/homepage-banner-1.jpg";
 import Banner2 from "@images/Banner/homepage-banner-2.jpg";
@@ -21,7 +20,7 @@ import "swiper/css/navigation";
 import "./Slider.css";
 import { useViewportWidth } from "@hooks/useViewportWidth";
 
-import "react-lazy-load-image-component/src/effects/blur.css";
+// import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Slider = () => {
     const width = useViewportWidth();
@@ -113,14 +112,12 @@ const Slider = () => {
                                         className="advertisement-img"
                                         src={banner.desktop}
                                         alt="Banner"
-                                        effect="blur"
                                     />
                                 ) : (
                                     <LazyLoadImage
                                         className="d-md-none d-block"
                                         src={banner.mobile}
                                         alt="Banner"
-                                        effect="blur"
                                     />
                                 )}
                             </>

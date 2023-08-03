@@ -57,12 +57,10 @@ body {
     color: #0c1fa670;
 }
 @media screen and (max-width: 600px) {
-.banner-slider-section .swiper-slide img {
-   
-    
-    min-height: 350px;
- 
-}
+    .banner-slider-section .swiper-slide img,
+    .banner-slider-section {
+        min-height: 350px;
+    }
 }
 @media screen and (max-width: 576px) {
     .mySwiper {
