@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Api\InventoryController;
+use App\Http\Controllers\MarketingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use Laravel\Fortify\Fortify;
 use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\HoldRelease\HoldReleaseController;
+use App\Http\Controllers\SiteMapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,10 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 Route::get('export-inventory',[InventoryController::class,'downloadInventoryFile'])->name('export-inventory');
+
+Route::get('gmarketingfeed',[MarketingController::class,'gmarketingfeed'])->name('gmarketingfeed');
+
+Route::get('sitemap-xml', [SiteMapController::class, 'generateSiteMap']);
 
 Route::get('/{path?}', function () {
     return view('index');
