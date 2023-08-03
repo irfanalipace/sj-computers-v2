@@ -225,6 +225,7 @@ const Router = () => {
                 </Suspense>
             ),
         },
+
         {
             path: "/about-us",
             element: (
@@ -233,6 +234,7 @@ const Router = () => {
                 </Suspense>
             ),
         },
+        
         {
             path: "/what-we-do",
             element: (
@@ -241,6 +243,7 @@ const Router = () => {
                 </Suspense>
             ),
         },
+
         {
             path: "/return_refund_policy",
             element: (

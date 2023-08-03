@@ -9,6 +9,7 @@ import Loader from "@common/LoaderComponent/LoaderComponent";
 
 // import SellingProducts from "@components/MobileCategory/SellingProducts/SellingProducts";
 import "./Home.css";
+import PageWrapper from "../../PageWrapper";
 
 const Home = () => {
     // const handleResize = () => {
@@ -16,7 +17,9 @@ const Home = () => {
     // };
     // const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     return (
-        <div className="homePage">
+        <PageWrapper title="Buy Perfect Gaming PC Computers, Laptops & Accessories | SJ Computers LLC"  meta_descriptions="Buy ALL Brands Touch Screen Laptops, Gaming Desktop, Business Computer, Best BTO and more We looked at many companies, including Dell and Apple.">
+
+<div className="homePage">
             {/* <MobileHomeCategory />
                 
                         <SellingProducts /> */}
@@ -32,6 +35,8 @@ const Home = () => {
             {/* <ProductThreeItem /> */}
             {/* <Recommendation /> */}
         </div>
+        </PageWrapper>
+       
     );
 };
 

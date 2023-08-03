@@ -9,6 +9,7 @@ import VerifyOTP from "@components/Auth/VerifyOTP";
 import Header from "@components/Auth/Header";
 import Footer from "@components/Auth/Footer";
 import "@pages/Auth/auth.css";
+import PageWrapper from "../../PageWrapper";
 
 const LoginForm = () => {
     const currentPage = useSelector((state) => state.auth.currentPage);
@@ -30,7 +31,8 @@ const LoginForm = () => {
         };
     }, []);
     return (
-        <div className="login-container-div">
+        <PageWrapper title="SJ | Login">
+ <div className="login-container-div">
             <div className="container form-container">
                 <div className="row">
                     <div className="header-logo">
@@ -76,6 +78,8 @@ const LoginForm = () => {
                 </div>
             </div>
         </div>
+        </PageWrapper>
+       
     );
 };
 

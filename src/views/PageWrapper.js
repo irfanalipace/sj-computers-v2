@@ -13,7 +13,7 @@ console.log(props.meta_descriptions,'1111')
   }, [title, meta_descriptions]);
 
                   return <>
-                   {/* {props.children} */}
+                   {props.children}
                           <Helmet>
                             <title>{props.title}</title>
 

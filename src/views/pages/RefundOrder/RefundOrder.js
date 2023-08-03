@@ -45,6 +45,7 @@ import {
     REFUND_TYPES,
     ORDER_TYPE_KEYS_ENUMS,
 } from "./constants";
+import PageWrapper from "../../PageWrapper";
 
 export default function RefundOrder() {
     const [orderType, setOrderType] = useState(null);
@@ -684,7 +685,8 @@ export default function RefundOrder() {
     ]);
 
     return (
-        <div className="refund-order-page py-5">
+        <PageWrapper title="Refund Order - SJ Computers" meta_descriptions="Read our Refund Policy for SJ Computers to understand the process for requesting refunds on orders. Your satisfaction is important to us, and we strive to ensure a smooth refund process.">
+ <div className="refund-order-page py-5">
             <div className="container">
                 <div className="refund-header">
                     <h3 className="mb-4">Refund/Return</h3>
@@ -1120,5 +1122,7 @@ export default function RefundOrder() {
                 />
             )}
         </div>
+        </PageWrapper>
+       
     );
 }

@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import Header from "@components/Header/Header";
 import { useNavigate } from "react-router-dom";
+import PageWrapper from "../../PageWrapper";
 
 const HeadereLinks = [
     { path: "/", title: "About Us" },
@@ -70,7 +71,8 @@ const PolicyComponets = () => {
     }, [location.pathname]);
 
     return (
-        <div>
+        <PageWrapper title="Privacy Policy - SJ Computers"  meta_descriptions="Your privacy matters at SJ Computers. Learn more about our commitment to protecting your personal information in our detailed privacy policy.">
+ <div>
             {/* <Header /> */}
             <div className="policy-background-color">
                 <div className="row">
@@ -195,6 +197,8 @@ const PolicyComponets = () => {
                 </div>
             </div>
         </div>
+        </PageWrapper>
+       
     );
 };
 
