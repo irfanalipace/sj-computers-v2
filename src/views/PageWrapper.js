@@ -11,27 +11,13 @@ const PageWrapper = (props) => {
     metaDetailsApi()
         .then((response) => {
          
-          setMeta(response.data);
-          console.log(response?.data,'data meta')
+          setMeta(response);
+          console.log(response,'data meta@@@')
         })
         .catch((error) => {
             console.error("API Error:", error);
         });
 }, []);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
