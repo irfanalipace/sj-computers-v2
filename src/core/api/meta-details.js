@@ -3,9 +3,9 @@
 
 import ApiService from "@services/apiService";
 
-export function metaDetailsApi() {
+export function metaDetailsApi(url) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/meta_detail`)
+        ApiService.get(`/meta_detail?url=${url}`)
             .then((response) => {
 
                 console.print("file: meta-details.js | meta-details| response", response);

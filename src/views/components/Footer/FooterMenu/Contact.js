@@ -56,7 +56,7 @@ const Contact = () => {
 
     return (
        
-        <PageWrapper title="Contact Us - Sj computers" meta_descriptions="For inquiries, support, and tech solutions, contact SJ Computers. Our friendly team is here to assist you. Reach out to us now!">
+        <PageWrapper>
         <div className="contact-container">
             <div className="contact-header">
                 <div className="my-contact-menu">
