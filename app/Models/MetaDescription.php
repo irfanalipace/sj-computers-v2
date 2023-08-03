@@ -10,4 +10,6 @@ class MetaDescription extends Model
     use HasFactory;
 
      protected $guarded = ['id'];
+
+     public $timestamps = true;
 }

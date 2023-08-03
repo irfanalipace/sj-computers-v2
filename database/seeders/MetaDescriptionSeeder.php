@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\MetaDescription;
 use Illuminate\Database\Seeder;
 
 class MetaDescriptionSeeder extends Seeder
@@ -19,28 +20,10 @@ class MetaDescriptionSeeder extends Seeder
                 "title" => "Buy Perfect Gaming PC Computers, Laptops & Accessories | SJ Computers LLC",
                 "description" => "Buy ALL Brands Touch Screen Laptops, Gaming Desktop, Business Computer, Best BTO and more We looked at many companies, including Dell and Apple."
             ],
-            [
-                "url" => "Buy ALL Brands Touch Screen Laptops, Gaming Desktop, Business Computer, Best BTO and more We looked at many companies, including Dell and Apple.",
-                "title" => "",
-                "description" => ""
-            ],
-            [
-                "url" => "",
-                "title" => "",
-                "description" => ""
-            ],
-            [
-                "url" => "",
-                "title" => "",
-                "description" => ""
-            ],
-            [
-                "url" => "",
-                "title" => "",
-                "description" => ""
-            ],
-
-
         ];
+
+        foreach ($data as $meta){
+            MetaDescription::insert($meta);
+        }
     }
 }
