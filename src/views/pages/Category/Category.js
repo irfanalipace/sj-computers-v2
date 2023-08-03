@@ -7,7 +7,7 @@ import Loader from "@common/LoaderComponent/OverlayLoader";
 import ProductsByCategory from "./ProductsByCategory";
 
 import "./Category.css";
-import PageWrapper from "../../PageWrapper";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
 function Category() {
     const [isOpen, setIsOpen] = useState(false);
@@ -17,39 +17,41 @@ function Category() {
     };
     return (
         <PageWrapper title="SJ | Category">
- <div className="category-page">
-            <div className="category-page-inner">
-                <div>
-                    <Loader isLoading={false} />
-                </div>
-                {isOpen && (
-                    <div
-                        onClick={toggleFilter}
-                        className="sidebarOverlay"
-                    ></div>
-                )}
-
-                <div>
-                    <div className={`sticky-filter-bar ${isOpen && "active"}`}>
-                        <div className="d-flex justify-content-between align-items-center heading">
-                            <h3>Filters</h3>
-                            <button
-                                className="d-sm-none d-block bg-transparent border-0"
-                                onClick={toggleFilter}
-                            >
-                                <FontAwesomeIcon size="lg" icon={faTimes} />
-                            </button>
-                        </div>
-                        <FilterBar />
+            <div className="category-page">
+                <div className="category-page-inner">
+                    <div>
+                        <Loader isLoading={false} />
                     </div>
+                    {isOpen && (
+                        <div
+                            onClick={toggleFilter}
+                            className="sidebarOverlay"
+                        ></div>
+                    )}
 
-                    <ProductsByCategory toggleFilter={toggleFilter} />
+                    <div>
+                        <div
+                            className={`sticky-filter-bar ${
+                                isOpen && "active"
+                            }`}
+                        >
+                            <div className="d-flex justify-content-between align-items-center heading">
+                                <h3>Filters</h3>
+                                <button
+                                    className="d-sm-none d-block bg-transparent border-0"
+                                    onClick={toggleFilter}
+                                >
+                                    <FontAwesomeIcon size="lg" icon={faTimes} />
+                                </button>
+                            </div>
+                            <FilterBar />
+                        </div>
+
+                        <ProductsByCategory toggleFilter={toggleFilter} />
+                    </div>
                 </div>
             </div>
-        </div>
-
         </PageWrapper>
-       
     );
 }
 

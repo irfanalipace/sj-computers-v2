@@ -12,7 +12,7 @@ import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 import { OrderSearchApi, OrderListhApi } from "../../../core/api/order";
 import OrderCard from "@components/OrderPage/OrderProducts";
 import OrderInvoiceCard from "@components/OrderPage/OrderInvoiceCard";
-import PageWrapper from "../../PageWrapper";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import userDefault from "@images/common/user-default-avatar.png";
 import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -22,9 +22,6 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import "./Account.css";
 import { Select } from "@mantine/core";
 import { Stack } from "react-bootstrap";
-
-
-
 
 const CustomTabs = styled(Tabs)({
     "& .MuiTabs-indicator": {
@@ -155,9 +152,7 @@ const OrderPage = () => {
         ) : null;
     };
     return (
-        <PageWrapper title="Order Refurbished Laptops: Quality Tech at Affordable Prices" meta_descriptions="Browse and order laptops from SJ Computers for top-notch performance and reliable service. Get the perfect tech companion for your needs today!">
- 
- <div className="account-page order-page">
+        <div className="account-page order-page">
             <div className="container-xl">
                 <Breadcrumb />
                 <div className="row mx-0">
@@ -261,10 +256,12 @@ const OrderPage = () => {
                                         {}{" "}
                                         {activeTab === 0 ? (
                                             <>
-
-
-                                              {orderDetails?.success_orders?.data.length >= 0 ?  `${orderDetails?.success_orders?.data.length} orders` :    <LoaderComponent />}
-
+                                                {orderDetails?.success_orders
+                                                    ?.data.length >= 0 ? (
+                                                    `${orderDetails?.success_orders?.data.length} orders`
+                                                ) : (
+                                                    <LoaderComponent />
+                                                )}
                                             </>
                                         ) : (
                                             `${orderDetails?.cancel_orders?.total} cancelled order`
@@ -327,9 +324,6 @@ const OrderPage = () => {
                 </div>
             </div>
         </div>
-   
-     </PageWrapper> 
-       
     );
 };
 

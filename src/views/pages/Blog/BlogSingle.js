@@ -1,17 +1,9 @@
-import React from 'react'
-import SingleBlog from '@components/Blog/SingleBlog/SingleBlog'
-import PageWrapper from '../../PageWrapper'
+import React from "react";
+import SingleBlog from "@components/Blog/SingleBlog/SingleBlog";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
 const BlogSingle = () => {
-  return (
-    
-     <PageWrapper >
- 
-     <SingleBlog />
+    return <SingleBlog />;
+};
 
-  </PageWrapper> 
-  
-  )
-}
-
-export default BlogSingle
+export default BlogSingle;

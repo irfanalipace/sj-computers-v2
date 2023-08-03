@@ -11,7 +11,7 @@ import { loginApi } from "@api/auth";
 
 import "@pages/Auth/auth.css";
 import { getUserEmail, getUserPassword } from "@services/jwtService";
-import PageWrapper from "../../PageWrapper";
+import PageWrapper from "../PageWrapper/PageWrapper";
 
 const VerifyOTP = () => {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
@@ -99,85 +99,88 @@ const VerifyOTP = () => {
 
     return (
         <PageWrapper title="SJ | Verify OTP">
- <form
-            className={`auth-form ${mounted && "slide"} `}
-            onSubmit={handleSubmit}
-        >
-            <h3 className="login-h3-verify-form">Verification required</h3>
-            <div className="email-text-verify-form mt-2 mb-1">
-                One Time Password (OTP) sent to {email}
-                {". "}
-                <span className="email-text-verify-form">
-                    Please enter it below.
-                    <button
-                        className="change-email-btn"
-                        onClick={() => dispatch(RESET_PAGE())}
-                    >
-                        Change Email ?
-                    </button>
-                </span>
-            </div>
-            <br></br>
-
-            <div className="mb-3">
-                <label className="name-label ">Enter OTP</label>
-                <input
-                    type="text"
-                    name="otp"
-                    className="form-control"
-                    value={values.otp}
-                    maxLength={4}
-                    onKeyPress={handleKeyPress}
-                    onChange={handleChange}
-                    autoFocus
-                />
-
-                {fieldErrors && (
-                    <p className="fs-6 mt-1 text-danger">{fieldErrors.otp}</p>
-                )}
-            </div>
-            <div className="d-flex justify-content-center w-100">
-                <button
-                    type="submit"
-                    className="verify-button-data verify-otp-btn"
-                    disabled={isLoading}
-                    onClick={handleSubmit}
-                >
-                    {isLoading ? <Loader /> : "Verify OTP"}
-                </button>
-            </div>
-            {loading ? (
-                <div className="d-flex justify-content-center mt-2">
-                    <Loader />
-                </div>
-            ) : (
-                <div className="align-items-center d-flex flex-column justify-content-center">
-                    <p className="text-muted small d-flex justify-content-center">
+            <form
+                className={`auth-form ${mounted && "slide"} `}
+                onSubmit={handleSubmit}
+            >
+                <h3 className="login-h3-verify-form">Verification required</h3>
+                <div className="email-text-verify-form mt-2 mb-1">
+                    One Time Password (OTP) sent to {email}
+                    {". "}
+                    <span className="email-text-verify-form">
+                        Please enter it below.
                         <button
-                            onClick={resendOTP}
-                            type={"button"}
-                            disabled={!isTimerFinished || isLoading || loading}
-                            className="bg-white border-0 text-primary resend-otp-btn"
+                            className="change-email-btn"
+                            onClick={() => dispatch(RESET_PAGE())}
                         >
-                            Resend OTP
+                            Change Email ?
                         </button>
-                    </p>
+                    </span>
+                </div>
+                <br></br>
 
-                    {!isTimerFinished && (
-                        <div className="border-primary text-primary timer">
-                            {timer}
-                        </div>
+                <div className="mb-3">
+                    <label className="name-label ">Enter OTP</label>
+                    <input
+                        type="text"
+                        name="otp"
+                        className="form-control"
+                        value={values.otp}
+                        maxLength={4}
+                        onKeyPress={handleKeyPress}
+                        onChange={handleChange}
+                        autoFocus
+                    />
+
+                    {fieldErrors && (
+                        <p className="fs-6 mt-1 text-danger">
+                            {fieldErrors.otp}
+                        </p>
                     )}
                 </div>
-            )}
-            <p className="forgot-password text-left">
-                <Link href="/sign-in" className="text-decoration-none">
-                    I need more help
-                </Link>
-            </p>
-        </form>
+                <div className="d-flex justify-content-center w-100">
+                    <button
+                        type="submit"
+                        className="verify-button-data verify-otp-btn"
+                        disabled={isLoading}
+                        onClick={handleSubmit}
+                    >
+                        {isLoading ? <Loader /> : "Verify OTP"}
+                    </button>
+                </div>
+                {loading ? (
+                    <div className="d-flex justify-content-center mt-2">
+                        <Loader />
+                    </div>
+                ) : (
+                    <div className="align-items-center d-flex flex-column justify-content-center">
+                        <p className="text-muted small d-flex justify-content-center">
+                            <button
+                                onClick={resendOTP}
+                                type={"button"}
+                                disabled={
+                                    !isTimerFinished || isLoading || loading
+                                }
+                                className="bg-white border-0 text-primary resend-otp-btn"
+                            >
+                                Resend OTP
+                            </button>
+                        </p>
+
+                        {!isTimerFinished && (
+                            <div className="border-primary text-primary timer">
+                                {timer}
+                            </div>
+                        )}
+                    </div>
+                )}
+                <p className="forgot-password text-left">
+                    <Link href="/sign-in" className="text-decoration-none">
+                        I need more help
+                    </Link>
+                </p>
+            </form>
         </PageWrapper>
-       
     );
 };
 export default VerifyOTP;
