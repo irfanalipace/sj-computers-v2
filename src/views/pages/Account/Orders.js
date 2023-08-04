@@ -22,7 +22,6 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import "./Account.css";
 import { Select } from "@mantine/core";
 import { Stack } from "react-bootstrap";
-import PageWrapper from "../../../PageWrapper";
 
 const CustomTabs = styled(Tabs)({
     "& .MuiTabs-indicator": {
@@ -153,14 +152,13 @@ const OrderPage = () => {
         ) : null;
     };
     return (
-        <PageWrapper title='SJ | Orders'>
- <div className="account-page order-page">
+        <div className="account-page order-page">
             <div className="container-xl">
                 <Breadcrumb />
                 <div className="row mx-0">
                     <div className="col-sm-4 col-md-8 col-8">
                         <h3 className="account-heading your-order-page">
-                            Your Order 
+                            Your Order
                         </h3>
                     </div>
                     <div className="col-sm-8 col-md-4 col-4 search-product-order-tables">
@@ -326,17 +324,7 @@ const OrderPage = () => {
                 </div>
             </div>
         </div>
-        </PageWrapper>
-       
     );
 };
 
 export default OrderPage;
-
-
-
-
-
-
-
-
