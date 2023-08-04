@@ -10,7 +10,6 @@ import { useInitDataFetching } from "@hooks/useInitDataFetching";
 const TawkTo = lazy(() => import("@components/Tawk.To/Messenger"));
 import initServices from "@services/initServices";
 
-// import Header from "@components/Header/Header";
 import Header from "@components/Header/Header";
 // import Loader from "@common/LoaderComponent/LoaderComponent";
 
@@ -39,14 +38,8 @@ function App() {
                 </Suspense>
             );
             setTawkComponent(jsx);
-        }, 5000);
+        }, 7000); // giving timeout to tawk.to to improve initial page speed
     }, []);
-
-    // const location = useLocation();
-    // ${process.env.REACT_APP_URL}
-    // const hideHeaderFooter = window.location.pathname === `/thank-you`;
-
-    // console.print(hideHeaderFooter, "header and footer")
 
     return (
         <div>

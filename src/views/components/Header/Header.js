@@ -13,13 +13,15 @@ import Loader from "@common/Spinner/Spinner";
 const TopBar = lazy(() => import("@components/TopBar/TopBar"));
 // const Search = lazy(() => import("./Search"));
 const LocationModal = lazy(() => import("./Location/LocationModal"));
-const MobileHeader = lazy(() => import("./MobileHeader/MobileHeader"));
+// const BottomNavigation = lazy(() =>
+//     import("./BottomNavigation/BottomNavigation")
+// );
 const MobileSearch = lazy(() => import("./MobileSearch/MobileSearch"));
 const CartOverlay = lazy(() => import("./CartOverlay"));
 // import TopBar from "@components/TopBar/TopBar";
 import Search from "./Search";
 // import LocationModal from "./Location/LocationModal";
-// import MobileHeader from "./MobileHeader/MobileHeader";
+import BottomNavigation from "./BottomNavigation/BottomNavigation";
 // import MobileSearch from "./MobileSearch/MobileSearch";
 // import CartOverlay from "./CartOverlay";
 
@@ -80,9 +82,9 @@ const Header = () => {
         <>
             {screenWidth <= 850 ? (
                 <div>
-                    <Suspense>
-                        <MobileHeader />
-                    </Suspense>
+                    {/* <Suspense> */}
+                    <BottomNavigation />
+                    {/* </Suspense> */}
                     <Suspense>
                         <MobileSearch />
                     </Suspense>

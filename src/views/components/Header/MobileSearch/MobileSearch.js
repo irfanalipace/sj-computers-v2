@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // import styled from "styled-components";
 import "./MobileSearch.css";
-import mobileheaderlogo from "@images/header-logo.png";
+import BottomNavigationlogo from "@images/header-logo.png";
 import ModalBox from "./MobileScreenModal/ModalBox";
 import { SET_SEARCH_STRING } from "@store/products/productsSlice";
 import { Link } from "react-router-dom";
@@ -71,7 +71,7 @@ const MobileSearch = () => {
                 <>
                     <Link to="/">
                         <Image
-                            src={mobileheaderlogo}
+                            src={BottomNavigationlogo}
                             alt="Left Image"
                             className="mobile-imagelogo"
                         />
@@ -123,7 +123,7 @@ const MobileSearch = () => {
                 <>
                     <Link to="/">
                         <img
-                            src={mobileheaderlogo}
+                            src={BottomNavigationlogo}
                             alt="Left Image"
                             className="mobile-imagelogo"
                         />
@@ -164,10 +164,10 @@ const MobileSearch = () => {
                                     aria-hidden="true"
                                 ></i> */}
                                 <FontAwesomeIcon
-                            icon={faSearch}
-                            size="x2"
-                          className="fa-search text-grey set"
-                        />
+                                    icon={faSearch}
+                                    size="x2"
+                                    className="fa-search text-grey set"
+                                />
                             </span>
                         </div>
                     </div>
