@@ -67,7 +67,7 @@ const Contact = () => {
                                     <li className="nav-item ">
                                         <Link
                                             className="nav-link text-aligin-contact-menu link-no-hover on-focus-colo-contact"
-                                            to="/contact-us"
+                                            to="/contact"
                                         >
                                             <span>Contact Us</span>
                                         </Link>

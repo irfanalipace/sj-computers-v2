@@ -271,7 +271,7 @@ const Router = () => {
             ),
         },
         {
-            path: "/contact-us",
+            path: "/contact",
             element: (
                 <Suspense fallback={<Loader />}>
                     <Contact />
