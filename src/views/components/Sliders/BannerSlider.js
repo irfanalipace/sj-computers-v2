@@ -111,13 +111,13 @@ const Slider = () => {
                                     <LazyLoadImage
                                         className="advertisement-img"
                                         src={banner.desktop}
-                                        alt="Banner"
+                                        alt="Buy ALL Brands Touch Screen Laptops, Gaming Desktop, Business Computer, Best BTO and more We looked at many companies, including Dell and Apple."
                                     />
                                 ) : (
                                     <LazyLoadImage
                                         className="d-md-none d-block"
                                         src={banner.mobile}
-                                        alt="Banner"
+                                        alt="Buy ALL Brands Touch Screen Laptops, Gaming Desktop, Business Computer, Best BTO and more We looked at many companies, including Dell and Apple."
                                     />
                                 )}
                             </>

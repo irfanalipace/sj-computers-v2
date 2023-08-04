@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 
-<link>
+<head>
 
-<meta charset=“UTF-8” />
+    <meta charset=“UTF-8” />
 
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="icon" href={{ asset('favicon.png') }} />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href={{ asset('favicon.png') }} />
+    <meta name="description"
+        content="Buy ALL Brands Touch Screen Laptops, Gaming Desktop, Business Computer, Best BTO and more We looked at many companies, including Dell and Apple." />
+    <title>Buy Perfect Gaming PC Computers, Laptops & Accessories | SJ Computers LLC</title>
 
-<title>SJ-Computers</title>
-
+</head>
 
 <body>
 
