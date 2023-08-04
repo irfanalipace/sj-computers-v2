@@ -16,6 +16,7 @@ const Home = () => {
     //     setScreenWidth(window.innerWidth);
     // };
     // const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
     return (
         <PageWrapper title="SJ | Home">
             <div className="homePage">

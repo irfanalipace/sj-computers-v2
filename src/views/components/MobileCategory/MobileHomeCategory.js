@@ -2,7 +2,7 @@ import React from "react";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+// import { LazyLoadImage } from "react-lazy-load-image-component";
 import "swiper/css/navigation";
 import img1 from "@images/category1.png";
 import img2 from "@images/category2.png";
