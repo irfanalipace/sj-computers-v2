@@ -12,10 +12,9 @@ import Loader from "@common/Spinner/Spinner";
 import { register } from "@store/auth/authThunks";
 
 import "@pages/Auth/auth.css";
-import PageWrapper from "../../../PageWrapper";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
 const Register = () => {
-    
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
             name: "",
@@ -73,177 +72,187 @@ const Register = () => {
     }
 
     return (
-        <PageWrapper title='SJ | Register'>
- <div>
-            <div className="container form-container">
-                <div className="row">
-                    <div className="header-logo">
-                        <Header />
-                    </div>
+        <PageWrapper title="SJ | Register">
+            <div>
+                <div className="container form-container">
+                    <div className="row">
+                        <div className="header-logo">
+                            <Header />
+                        </div>
 
-                    <form
-                        className={`auth-form ${mounted && "slide"} `}
-                        onSubmit={handleSubmit}
-                    >
-                        <h3 className="login-h3">Create account</h3>
-                        <div className="mb-3">
-                            <label className="name-label ">Your name</label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={values.name}
-                                onChange={handleChange}
-                                className="form-control"
-                                placeholder="Full name"
-                            />
-                            {fieldErrors && (
-                                <p className="fs-6 mt-1 text-danger">
-                                    {fieldErrors.name}
-                                </p>
-                            )}
-                        </div>
-                        <div className="mb-3">
-                            <label className="email-label ">Email</label>
-                            <input
-                                type="email"
-                                name="email"
-                                value={values.emal}
-                                onChange={handleChange}
-                                className="form-control"
-                                placeholder="Enter your email"
-                            />
-                            {fieldErrors && (
-                                <p className="fs-6 mt-1 text-danger">
-                                    {fieldErrors.email}
-                                </p>
-                            )}
-                        </div>
-                        <div className="mb-3">
-                            <label className="">Password</label>
-                            <div className="input-group">
+                        <form
+                            className={`auth-form ${mounted && "slide"} `}
+                            onSubmit={handleSubmit}
+                        >
+                            <h3 className="login-h3">Create account</h3>
+                            <div className="mb-3">
+                                <label className="name-label ">Your name</label>
                                 <input
-                                    type={showPassword ? "text" : "password"}
-                                    name="password"
-                                    value={values.password}
+                                    type="text"
+                                    name="name"
+                                    value={values.name}
                                     onChange={handleChange}
                                     className="form-control"
-                                    placeholder="Enter password"
+                                    placeholder="Full name"
                                 />
-                                <button
-                                    type="button"
-                                    className=" password-visbility-button-auth"
-                                    onClick={togglePasswordVisibility}
-                                >
-                                    <FontAwesomeIcon
-                                        icon={showPassword ? faEyeSlash : faEye}
-                                        style={{
-                                            color: "#777",
-                                        }}
-                                    />
-                                </button>
+                                {fieldErrors && (
+                                    <p className="fs-6 mt-1 text-danger">
+                                        {fieldErrors.name}
+                                    </p>
+                                )}
                             </div>
-                            {fieldErrors && (
-                                <p className="fs-6 mt-1 text-danger">
-                                    {fieldErrors.password}
-                                </p>
-                            )}
-                        </div>
-                        <p className="register-p-text">
-                            <FontAwesomeIcon
-                                icon={faInfo}
-                                style={{
-                                    color: "#52AC66",
-                                    paddingRight: "6px",
-                                }}
-                            />
-                            Passwords must be at least 6 characters.
-                        </p>
-                        <div className="mb-3">
-                            <label className="">Re-enter password</label>
-                            <div className="input-group">
+                            <div className="mb-3">
+                                <label className="email-label ">Email</label>
                                 <input
-                                    type={
-                                        showConfirmPassword
-                                            ? "text"
-                                            : "password"
-                                    }
-                                    name="confirmPassword"
-                                    value={values.confirmPassword}
+                                    type="email"
+                                    name="email"
+                                    value={values.emal}
                                     onChange={handleChange}
                                     className="form-control"
-                                    placeholder="Re-enter password"
+                                    placeholder="Enter your email"
                                 />
-                                <button
-                                    type="button"
-                                    className=" password-visbility-button-auth"
-                                    onClick={toggleConfirmPasswordVisibility}
-                                >
-                                    <FontAwesomeIcon
-                                        icon={
-                                            showConfirmPassword
-                                                ? faEyeSlash
-                                                : faEye
+                                {fieldErrors && (
+                                    <p className="fs-6 mt-1 text-danger">
+                                        {fieldErrors.email}
+                                    </p>
+                                )}
+                            </div>
+                            <div className="mb-3">
+                                <label className="">Password</label>
+                                <div className="input-group">
+                                    <input
+                                        type={
+                                            showPassword ? "text" : "password"
                                         }
-                                        style={{
-                                            color: "#777",
-                                        }}
+                                        name="password"
+                                        value={values.password}
+                                        onChange={handleChange}
+                                        className="form-control"
+                                        placeholder="Enter password"
                                     />
+                                    <button
+                                        type="button"
+                                        className=" password-visbility-button-auth"
+                                        onClick={togglePasswordVisibility}
+                                    >
+                                        <FontAwesomeIcon
+                                            icon={
+                                                showPassword
+                                                    ? faEyeSlash
+                                                    : faEye
+                                            }
+                                            style={{
+                                                color: "#777",
+                                            }}
+                                        />
+                                    </button>
+                                </div>
+                                {fieldErrors && (
+                                    <p className="fs-6 mt-1 text-danger">
+                                        {fieldErrors.password}
+                                    </p>
+                                )}
+                            </div>
+                            <p className="register-p-text">
+                                <FontAwesomeIcon
+                                    icon={faInfo}
+                                    style={{
+                                        color: "#52AC66",
+                                        paddingRight: "6px",
+                                    }}
+                                />
+                                Passwords must be at least 6 characters.
+                            </p>
+                            <div className="mb-3">
+                                <label className="">Re-enter password</label>
+                                <div className="input-group">
+                                    <input
+                                        type={
+                                            showConfirmPassword
+                                                ? "text"
+                                                : "password"
+                                        }
+                                        name="confirmPassword"
+                                        value={values.confirmPassword}
+                                        onChange={handleChange}
+                                        className="form-control"
+                                        placeholder="Re-enter password"
+                                    />
+                                    <button
+                                        type="button"
+                                        className=" password-visbility-button-auth"
+                                        onClick={
+                                            toggleConfirmPasswordVisibility
+                                        }
+                                    >
+                                        <FontAwesomeIcon
+                                            icon={
+                                                showConfirmPassword
+                                                    ? faEyeSlash
+                                                    : faEye
+                                            }
+                                            style={{
+                                                color: "#777",
+                                            }}
+                                        />
+                                    </button>
+                                </div>
+                                {fieldErrors && (
+                                    <p className="fs-6 mt-1 text-danger">
+                                        {fieldErrors.confirmPassword}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div className="d-flex justify-content-center w-100">
+                                <button
+                                    type="submit"
+                                    className=" set-register-button"
+                                    onClick={handleSubmit}
+                                    disabled={isLoading}
+                                >
+                                    {isLoading ? <Loader /> : "Register Now"}
                                 </button>
                             </div>
-                            {fieldErrors && (
-                                <p className="fs-6 mt-1 text-danger">
-                                    {fieldErrors.confirmPassword}
-                                </p>
-                            )}
-                        </div>
+                            <p className="set-register-text">
+                                By continuing, you agree to SJ Computer’s{" "}
+                                <Link
+                                    to="/term_services"
+                                    className="text-decoration-none"
+                                >
+                                    Conditions of Use
+                                </Link>{" "}
+                                and{" "}
+                                <Link
+                                    to="/term_services"
+                                    className="text-decoration-none"
+                                >
+                                    Privacy Notice
+                                </Link>
+                                .
+                            </p>
 
-                        <div className="d-flex justify-content-center w-100">
-                            <button
-                                type="submit"
-                                className=" set-register-button"
-                                onClick={handleSubmit}
-                                disabled={isLoading}
-                            >
-                                {isLoading ? <Loader /> : "Register Now"}
-                            </button>
-                        </div>
-                        <p className="set-register-text">
-                            By continuing, you agree to SJ Computer’s{" "}
-                            <Link
-                                to="/term_services"
-                                className="text-decoration-none"
-                            >
-                                Conditions of Use
-                            </Link>{" "}
-                            and{" "}
-                            <Link
-                                to="/term_services"
-                                className="text-decoration-none"
-                            >
-                                Privacy Notice
-                            </Link>
-                            .
-                        </p>
+                            <p className="register-sign-link">
+                                Already have an account?{" "}
+                                <Link
+                                    to="/login"
+                                    className="text-decoration-none"
+                                >
+                                    Sign in?
+                                </Link>
+                            </p>
+                        </form>
 
-                        <p className="register-sign-link">
-                            Already have an account?{" "}
-                            <Link to="/login" className="text-decoration-none">
-                                Sign in?
-                            </Link>
-                        </p>
-                    </form>
-
-                    <div></div>
-                    <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <br></br>
+                <div className="col-md-12 sticky-bottom py-3">
+                    <Footer />
                 </div>
             </div>
-            <br></br>
-            <div className="col-md-12 sticky-bottom py-3">
-                <Footer />
-            </div>
-        </div>
         </PageWrapper>
-       
     );
 };
 export default Register;

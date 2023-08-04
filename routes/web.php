@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use Laravel\Fortify\Fortify;
 use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\HoldRelease\HoldReleaseController;
+use App\Http\Controllers\SiteMapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('export-inventory',[InventoryController::class,'downloadInventoryFile'])->name('export-inventory');
 
 Route::get('gmarketingfeed',[MarketingController::class,'gmarketingfeed'])->name('gmarketingfeed');
+
+Route::get('sitemap.xml', [SiteMapController::class, 'generateSiteMap']);
 
 Route::get('/{path?}', function () {
     return view('index');

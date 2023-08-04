@@ -3,14 +3,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Controller, Navigation } from "swiper";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 // import required modules
-import Banner1 from "@images/Banner/homepage-banner-1.jpg";
-import Banner2 from "@images/Banner/homepage-banner-2.jpg";
+import Banner1 from "@images/Banner/homepage-banner-1.webp";
+import Banner2 from "@images/Banner/homepage-banner-2.webp";
 import Banner3 from "@images/Banner/homepage-banner-3.jpg";
 import Bannerprograssive1 from "@images/Banner/SJBannerBannernePrograssive1.jpg";
 import Bannerprograssive2 from "@images/Banner/SJBannerBannernePrograssive2.jpg";
 import Bannerprograssive3 from "@images/Banner/SJBannerBannernePrograssive3.jpg";
-import mobileBanner1 from "@images/Banner/mobile-banner-1.jpg";
-import mobileBanner2 from "@images/Banner/SJbanner13MobileSizedRevised.png";
+import mobileBanner1 from "@images/Banner/mobile-banner-1.webp";
+import mobileBanner2 from "@images/Banner/mobile-banner-2.webp";
 import mobileBanner3 from "@images/Banner/SJbanner23MobileSizedRevised.png";
 import progmobile1 from "@images/Banner/mobileLoaderimage/prograssivemobile1.jpg";
 import progmobile2 from "@images/Banner/mobileLoaderimage/prograssivemobile2.jpg";

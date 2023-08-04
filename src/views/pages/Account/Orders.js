@@ -12,7 +12,7 @@ import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 import { OrderSearchApi, OrderListhApi } from "../../../core/api/order";
 import OrderCard from "@components/OrderPage/OrderProducts";
 import OrderInvoiceCard from "@components/OrderPage/OrderInvoiceCard";
-
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import userDefault from "@images/common/user-default-avatar.png";
 import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -23,9 +23,6 @@ import "./Account.css";
 import { Select } from "@mantine/core";
 import { Stack } from "react-bootstrap";
 import PageWrapper from "../../../PageWrapper";
-
-
-
 
 const CustomTabs = styled(Tabs)({
     "& .MuiTabs-indicator": {
@@ -261,10 +258,12 @@ const OrderPage = () => {
                                         {}{" "}
                                         {activeTab === 0 ? (
                                             <>
-
-
-                                              {orderDetails?.success_orders?.data.length >= 0 ?  `${orderDetails?.success_orders?.data.length} orders` :    <LoaderComponent />}
-
+                                                {orderDetails?.success_orders
+                                                    ?.data.length >= 0 ? (
+                                                    `${orderDetails?.success_orders?.data.length} orders`
+                                                ) : (
+                                                    <LoaderComponent />
+                                                )}
                                             </>
                                         ) : (
                                             `${orderDetails?.cancel_orders?.total} cancelled order`
