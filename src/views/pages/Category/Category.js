@@ -7,7 +7,7 @@ import Loader from "@common/LoaderComponent/OverlayLoader";
 import ProductsByCategory from "./ProductsByCategory";
 
 import "./Category.css";
-import PageWrapper from "../../../PageWrapper";
+import PageWrapper from "../../PageWrapper";
 
 function Category() {
     const [isOpen, setIsOpen] = useState(false);
@@ -16,8 +16,8 @@ function Category() {
         setIsOpen((state) => !state);
     };
     return (
-        <PageWrapper title='SJ | Category'>
-<div className="category-page">
+        <PageWrapper title="SJ | Category">
+ <div className="category-page">
             <div className="category-page-inner">
                 <div>
                     <Loader isLoading={false} />
@@ -47,8 +47,9 @@ function Category() {
                 </div>
             </div>
         </div>
+
         </PageWrapper>
-        
+       
     );
 }
 

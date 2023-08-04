@@ -11,7 +11,7 @@ import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 
 import securityIllustration from "@images/security-illustration.png";
 import "./Account.css";
-import PageWrapper from "../../../PageWrapper";
+import PageWrapper from "../../PageWrapper";
 // import "react-datepicker/dist/react-datepicker.css";
 
 const Security = () => {
@@ -52,8 +52,8 @@ const Security = () => {
     }, []);
 
     return (
-        <PageWrapper title='SJ | Security'>
-    <div className="account-page">
+        <PageWrapper title="SJ | Security">
+ <div className="account-page">
             <div className="container-xl">
                 <Breadcrumb />
                 <h3 className="account-heading">Security</h3>

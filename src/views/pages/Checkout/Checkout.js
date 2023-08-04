@@ -18,7 +18,7 @@ import mastercard from "@images/common/mastercard.png";
 
 import "./Checkout.css";
 import Discount from "@components/Checkout/Discount/Discount";
-import PageWrapper from "../../../PageWrapper";
+import PageWrapper from "../../PageWrapper";
 
 export default function Checkout() {
     const [accordionOne, setAccordionOne] = useState(false);
@@ -69,8 +69,8 @@ export default function Checkout() {
     }, []);
 
     return (
-        <PageWrapper title='SJ | Checkout'>
- <>
+        <PageWrapper title="SJ | Checkout">
+        <>
             {loading ? (
                 <Loader />
             ) : (
@@ -209,7 +209,7 @@ export default function Checkout() {
             )}
         </>
         </PageWrapper>
-       
+      
     );
 }
 

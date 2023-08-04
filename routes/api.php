@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\InventoryController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\Blog\BlogController;
 use App\Http\Controllers\Api\RefundController;
+use App\Http\Controllers\Api\Meta\MetaDetailController;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -112,6 +113,12 @@ Route::post('contact-us', [ContactUsController::class, 'contactSubmit'])->name('
  */
 Route::get('blogs', [BlogController::class, 'getList'])->name('blogs');
 Route::get('get-blogs', [BlogController::class, 'getBlog'])->name('get-blogs');
+
+/*
+ * meta title and description
+ */
+
+Route::get('meta_detail',[MetaDetailController::class,'getDetail'])->name('meta_detail');
 
 /*
 *Place Order

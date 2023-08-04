@@ -156,7 +156,8 @@ const OrderPage = () => {
         ) : null;
     };
     return (
-        <PageWrapper title='SJ | Orders'>
+        <PageWrapper title="Order Refurbished Laptops: Quality Tech at Affordable Prices" meta_descriptions="Browse and order laptops from SJ Computers for top-notch performance and reliable service. Get the perfect tech companion for your needs today!">
+ 
  <div className="account-page order-page">
             <div className="container-xl">
                 <Breadcrumb />
@@ -327,7 +328,8 @@ const OrderPage = () => {
                 </div>
             </div>
         </div>
-        </PageWrapper>
+   
+     </PageWrapper> 
        
     );
 };

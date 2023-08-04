@@ -1,17 +1,16 @@
 import React from 'react'
 import SingleBlog from '@components/Blog/SingleBlog/SingleBlog'
-import PageWrapper from '../../../PageWrapper'
-
+import PageWrapper from '../../PageWrapper'
 
 const BlogSingle = () => {
   return (
     
-    <PageWrapper title='SJ | Blogs'>
-
-   <SingleBlog />
-  
-    </PageWrapper>
+     <PageWrapper >
  
+     <SingleBlog />
+
+  </PageWrapper> 
+  
   )
 }
 

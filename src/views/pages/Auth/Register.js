@@ -12,7 +12,7 @@ import Loader from "@common/Spinner/Spinner";
 import { register } from "@store/auth/authThunks";
 
 import "@pages/Auth/auth.css";
-import PageWrapper from "../../../PageWrapper";
+import PageWrapper from "../../PageWrapper";
 
 const Register = () => {
     
@@ -73,8 +73,8 @@ const Register = () => {
     }
 
     return (
-        <PageWrapper title='SJ | Register'>
- <div>
+        <PageWrapper title="SJ | Register">
+  <div>
             <div className="container form-container">
                 <div className="row">
                     <div className="header-logo">
@@ -243,7 +243,7 @@ const Register = () => {
             </div>
         </div>
         </PageWrapper>
-       
+      
     );
 };
 export default Register;

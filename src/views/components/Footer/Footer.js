@@ -70,7 +70,7 @@ const Footer = () => {
                                                 to={'/blogs'}
                                                 className="herf-link text-decoration-none"
                                             >
-                                               News
+                                               Blogs
                                             </Link>
                                         </li>
                                        {/*  <li>

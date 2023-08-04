@@ -11,7 +11,7 @@ import { loginApi } from "@api/auth";
 
 import "@pages/Auth/auth.css";
 import { getUserEmail, getUserPassword } from "@services/jwtService";
-import PageWrapper from "../../../PageWrapper";
+import PageWrapper from "../../PageWrapper";
 
 const VerifyOTP = () => {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
@@ -98,8 +98,8 @@ const VerifyOTP = () => {
     };
 
     return (
-        <PageWrapper title='SJ | VerifyOTP'>
-    <form
+        <PageWrapper title="SJ | Verify OTP">
+ <form
             className={`auth-form ${mounted && "slide"} `}
             onSubmit={handleSubmit}
         >
@@ -177,7 +177,7 @@ const VerifyOTP = () => {
             </p>
         </form>
         </PageWrapper>
-    
+       
     );
 };
 export default VerifyOTP;

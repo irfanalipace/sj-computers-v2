@@ -603,8 +603,8 @@ export default function RefundOrder() {
     };
 
     return (
-        <PageWrapper title='SJ | RefundOrder'>
-  <div className="refund-order-page py-5">
+        <PageWrapper title="Refund Order - SJ Computers" meta_descriptions="Read our Refund Policy for SJ Computers to understand the process for requesting refunds on orders. Your satisfaction is important to us, and we strive to ensure a smooth refund process.">
+ <div className="refund-order-page py-5">
             <div className="container">
                 <div className="row flex-column-reverse flex-sm-row mx-0">
                     <div className="col-sm-9 col-12">
@@ -701,6 +701,6 @@ export default function RefundOrder() {
             )}
         </div>
         </PageWrapper>
-      
+       
     );
 }

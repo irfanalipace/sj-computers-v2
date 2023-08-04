@@ -126,6 +126,8 @@ const Slider = () => {
                             </>
                         </SwiperSlide>
                     ))}
+
+                    
                 </Swiper>
                 <div
                     className="swiper-button-prev"
