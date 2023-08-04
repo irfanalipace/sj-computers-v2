@@ -106,13 +106,16 @@ import { Helmet } from 'react-helmet';
 import { metaDetailsApi } from '../core/api/meta-details';
 
 const PageWrapper = (props) => {
+
+
   const [meta, setMeta] = useState({ title: '', description: '' });
   const url = window.location.href;
 
   useEffect(() => {
+
     metaDetailsApi(url)
       .then((response) => {
-        console.log(response?.data, 'response data');
+     
         const { title, description } = response?.data;
         setMeta({ title, description });
       })
@@ -120,6 +123,7 @@ const PageWrapper = (props) => {
         console.error('API Error:', error);
         setMeta({ title: 'SJ Computers', description:'' });
       });
+
   }, [url]);
 
   // useEffect(() => {
@@ -130,8 +134,7 @@ const PageWrapper = (props) => {
   //   }
   // }, [meta]);
 
-  console.log(meta.title, 'meta-data titles');
-  console.log(meta.description, 'meta-data descriptions');
+
 
   return (
     <>
