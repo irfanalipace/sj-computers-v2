@@ -3,11 +3,9 @@ import About from '@components/About/About'
 import PageWrapper from '../../../PageWrapper'
 const AboutPage = () => {
   return (
-   <PageWrapper title='SJ | About'>
-      <About />
-   </PageWrapper>
-  
-    
+    <div>
+    {/* <About /> */}
+    </div>
   )
 }
 
