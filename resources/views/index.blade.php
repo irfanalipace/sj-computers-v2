@@ -36,7 +36,7 @@
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
                 f.parentNode.insertBefore(j, f);
             })(window, document, 'script', 'dataLayer', 'GTM-5KJ773M');
-        }, 5000)
+        }, 7000)
     </script>
     <!-- End Google Tag Manager -->
 

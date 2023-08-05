@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getShippingDetails } from "@store/orders/ordersThunk";
 import { fetchBrands } from "@store/brands/brandsThunks";
 import { fetchCategory } from "@store/category/categoryThunks";
-import { currentState } from "@store/states/statesThunks";
-import { toast } from "react-toastify";
 
 import {
     addToLocalCart,
@@ -56,6 +54,6 @@ export const useInitDataFetching = () => {
                 });
                 dispatch(setCartDetails(cartDetails)); // add local store details to redux store
             }
-        }, 2000);
+        }, 2000); // giving timeout to increase initial page load speed
     }, []);
 };
