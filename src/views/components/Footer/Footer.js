@@ -58,7 +58,7 @@ const Footer = () => {
                                         </li> */}
                                         <li>
                                             <Link
-                                                to="/contact"
+                                                to="/contact-us"
                                                 href="#!"
                                                 className="herf-link text-decoration-none"
                                             >

@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import Header from "@components/Header/Header";
 import { useNavigate } from "react-router-dom";
+import PageWrapper from "../../../PageWrapper";
 
 const HeadereLinks = [
     { path: "/", title: "About Us" },
@@ -76,9 +77,9 @@ const PolicyComponets = () => {
     }, [location.pathname]);
 
     return (
-        <div>
-            {/* <Header /> */}
-            <div className="policy-background-color">
+        <PageWrapper title='SJ | Policy'>
+             {/* <Header /> */}
+             <div className="policy-background-color">
                 <div className="row">
                     <div>
                         <header className="topBar px-3 policy-header-topbar">
@@ -200,7 +201,9 @@ const PolicyComponets = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </PageWrapper>
+           
+      
     );
 };
 

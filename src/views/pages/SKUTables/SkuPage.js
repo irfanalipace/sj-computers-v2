@@ -7,16 +7,18 @@ import PageWrapper from "../../components/PageWrapper/PageWrapper";
 const SkuPage = () => {
     const [reRender, setRender] = useState(0);
     return (
-        <div className="sku-page-container container-xxl">
-            <Row>
-                <Col sm={5}>
-                    <SkuTables render={reRender} setRender={setRender} />
-                </Col>
-                <Col sm={7}>
-                    <SkuProducts reRender={reRender} />
-                </Col>
-            </Row>
-        </div>
+        <PageWrapper title="SJ | SkuPage">
+            <div className="sku-page-container container-xxl">
+                <Row>
+                    <Col sm={5}>
+                        <SkuTables render={reRender} setRender={setRender} />
+                    </Col>
+                    <Col sm={7}>
+                        <SkuProducts reRender={reRender} />
+                    </Col>
+                </Row>
+            </div>
+        </PageWrapper>
     );
 };
 

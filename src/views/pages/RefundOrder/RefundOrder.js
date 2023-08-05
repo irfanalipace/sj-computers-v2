@@ -42,6 +42,7 @@ import { USER_TYPE_ENUM } from "./constants";
 import RefundForms from "@components/RefundOrder/RefundForms";
 
 import loginSVG from "@images/login-invitation.png";
+import PageWrapper from "../../../PageWrapper";
 
 export default function RefundOrder() {
     const [selectedUserType, setSelectedUserType] = useState(null);
@@ -602,7 +603,8 @@ export default function RefundOrder() {
     };
 
     return (
-        <div className="refund-order-page py-5">
+        <PageWrapper title='SJ | RefundOrder'>
+  <div className="refund-order-page py-5">
             <div className="container">
                 <div className="row flex-column-reverse flex-sm-row mx-0">
                     <div className="col-sm-9 col-12">
@@ -698,5 +700,7 @@ export default function RefundOrder() {
                 />
             )}
         </div>
+        </PageWrapper>
+      
     );
 }

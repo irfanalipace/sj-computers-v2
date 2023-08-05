@@ -10,6 +10,7 @@ import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
 import Recommendation from "@components/Recommendation/Recommendation";
 
 import "./Product.css";
+import PageWrapper from "../../../PageWrapper";
 
 export default function Product() {
     
@@ -44,7 +45,8 @@ export default function Product() {
 
     const ProductComponent = () => {
         return (
-            <>
+            <PageWrapper title='SJ | Product'>
+  <>
                 {product ? (
                     <div className="row">
                         <div className="col-12 col-md-4">
@@ -63,6 +65,8 @@ export default function Product() {
                     </div>
                 )}
             </>
+            </PageWrapper>
+          
         );
     };
 

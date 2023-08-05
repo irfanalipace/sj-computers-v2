@@ -65,7 +65,7 @@ module.exports = {
         // new BundleAnalyzerPlugin(),
         new CompressionPlugin({
             algorithm: "gzip",
-            test: /\.(js|css)$/,
+            test: /\.(js|css|png|jpg|jpeg|webp)$/,
             threshold: 10240,
             minRatio: 0.8,
         }),

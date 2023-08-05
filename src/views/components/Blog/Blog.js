@@ -48,16 +48,7 @@ const HeadereLinks = [
 ];
 const nonHeaderRoutes = [""];
 
-const useStyles = makeStyles((theme) => ({
-    stickyElement: {
-        position: "relative",
-    },
-    stickyContainer: {
-        position: "sticky",
-        top: 0,
-        zIndex: theme.zIndex.appBar,
-    },
-}));
+
 const Blog = () => {
     const [blogdteails, setBlogDetails] = useState("");
 
@@ -171,31 +162,7 @@ const Blog = () => {
     //     }
     //   }, [blogdteails]);
 
-    const classes = useStyles();
-    const stickyContainerRef = useRef(null);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const stickyContainer = stickyContainerRef.current;
-
-            if (stickyContainer) {
-                const rect = stickyContainer.getBoundingClientRect();
-                const isSticky = rect.top <= 0;
-
-                if (isSticky) {
-                    stickyContainer.classList.add(classes.stickyContainer);
-                } else {
-                    stickyContainer.classList.remove(classes.stickyContainer);
-                }
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, [classes.stickyContainer]);
+  
 
     const [readingTime, setReadingTime] = useState(0);
 
@@ -402,10 +369,10 @@ const Blog = () => {
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3">
-                                        <div className={classes.stickyElement}>
+                                        <div className=''>
                                             <div
                                                 className="main-dev-card-deprt"
-                                                ref={stickyContainerRef}
+                                                
                                             >
                                                 <div className="left-dev-span-stories">
                                                     <span>

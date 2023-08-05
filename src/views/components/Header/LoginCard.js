@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./logincart.css";
 import { Link } from "react-router-dom";
-const LoginCart = () => {
+const LoginCard = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleButtonClick = () => {
@@ -67,4 +67,4 @@ const LoginCart = () => {
     );
 };
 
-export default LoginCart;
+export default LoginCard;
