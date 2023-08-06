@@ -1,15 +1,11 @@
-import React from 'react'
-import WhatWeDo from '@components/WhatWeDo/WhatWeDo'
-import PageWrapper from '../../../PageWrapper'
+import React from "react";
+import WhatWeDo from "@components/WhatWeDo/WhatWeDo";
 const WhatWeDoPage = () => {
-  return (
-    <PageWrapper title='SJ | WhatWeDoPage'>
-   <div>
-        <WhatWeDo />
-    </div>
-    </PageWrapper>
- 
-  )
-}
+    return (
+        <div>
+            <WhatWeDo />
+        </div>
+    );
+};
 
-export default WhatWeDoPage
+export default WhatWeDoPage;

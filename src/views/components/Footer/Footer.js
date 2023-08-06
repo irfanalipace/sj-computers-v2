@@ -67,13 +67,13 @@ const Footer = () => {
                                         </li>
                                         <li>
                                             <Link
-                                                to={'/blogs'}
+                                                to={"/blogs"}
                                                 className="herf-link text-decoration-none"
                                             >
-                                               Blogs
+                                                Blogs
                                             </Link>
                                         </li>
-                                       {/*  <li>
+                                        {/*  <li>
                                             <a
                                                 href="#!"
                                                 className="herf-link text-decoration-none"

@@ -10,7 +10,7 @@
     <meta name="description"
         content="Buy ALL Brands Touch Screen Laptops, Gaming Desktop, Business Computer, Best BTO and more We looked at many companies, including Dell and Apple." />
     <title>Buy Perfect Gaming PC Computers, Laptops & Accessories | SJ Computers LLC</title>
-
+    <!-- <link rel="preload" src={{ asset('/js/images/mobile-banner-1.webp') }} /> -->
 </head>
 
 <body>

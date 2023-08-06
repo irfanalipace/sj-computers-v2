@@ -65,7 +65,7 @@ const Header = () => {
         ((firstLogin.current && !currentState) ||
             window.localStorage.getItem("state") == null) &&
             setTimeout(() => {
-                setShow(true); // Update the state `isOpen` to true after 5 seconds
+                setShow(true); // show the set delivery location modal after 10 seconds
             }, 10000);
         // setShow(true);
         searchParams.delete("firstLogin");

@@ -70,42 +70,6 @@ const Slider = () => {
                 >
                     {banners.map((banner, index) => (
                         <SwiperSlide key={index}>
-                            {/* <>
-                                {width > 576 ? (
-                                    <ProgressiveImage
-                                        src={banner.desktop} 
-                                        placeholder={banner.prograssive} 
-                                    >
-                                        {(src, loading) => (
-                                            <img
-                                                className={`advertisement-img ${
-                                                    loading ? "blur" : ""
-                                                }`}
-                                                src={src}
-                                                alt={"Banner"}
-                                                loading="lazy"
-                                            />
-                                        )}
-                                    </ProgressiveImage>
-                                ) : (
-                                    <ProgressiveImage
-                                    src={banner.mobile} 
-                                    placeholder={banner.mobilePro} 
-                                >
-                                    {(src, loading) => (
-                                        <img
-                                            className={` className="d-md-none d-block" ${
-                                                loading ? "blur" : ""
-                                            }`}
-                                            src={src}
-                                            alt={"mobilePro"}
-                                        />
-                                    )}
-                                </ProgressiveImage>
-
-                                )}
-                            </> */}
-
                             <>
                                 {width > 576 ? (
                                     <LazyLoadImage

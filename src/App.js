@@ -1,34 +1,21 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import { getToken } from "@services/jwtService";
 import Router from "@src/Routes";
-import { alreadyLoggedIn } from "@store/auth/authThunks";
-import { useInitDataFetching } from "@hooks/useInitDataFetching";
 const TawkTo = lazy(() => import("@components/Tawk.To/Messenger"));
 import initServices from "@services/initServices";
-
 import Header from "@components/Header/Header";
-// import Loader from "@common/LoaderComponent/LoaderComponent";
-
 const Footer = React.lazy(() => import("@components/Footer/Footer"));
-
 import "react-toastify/dist/ReactToastify.css";
-// import "@fortawesome/fontawesome-free/css/all.css";
-
 import "./App.css";
 
-import ScrollToTop from "./ScrollToTop";
+import ScrollToTop from "@components/ScrollToTop/ScrollToTop";
+import AppWrapper from "@components/AppWrapper/AppWrapper";
 
 function App() {
-    const dispatch = useDispatch();
-    const token = getToken();
     const [tawkComponent, setTawkComponent] = useState(<></>);
-    if (token) dispatch(alreadyLoggedIn(token));
     initServices.init(); //initialize services
-    useInitDataFetching();
 
     useEffect(() => {
         setTimeout(() => {
@@ -42,7 +29,7 @@ function App() {
     }, []);
 
     return (
-        <div>
+        <AppWrapper>
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -73,7 +60,7 @@ function App() {
             {/* <Suspense>
                 <TawkTo />
             </Suspense> */}
-        </div>
+        </AppWrapper>
     );
 }
 
