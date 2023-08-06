@@ -102,17 +102,20 @@ const PageWrapper = (props) => {
     const url = window.location.href;
 
     useEffect(() => {
-        metaDetailsApi(url)
-            .then((response) => {
-                console.log(response?.data, "response data");
-                const { title, description } = response?.data;
-                setMeta({ title, description });
-            })
-            .catch((error) => {
-                console.error("API Error:", error);
-                setMeta({ title: "SJ Computers", description: "" });
-            });
-    }, [url]);
+        if (url)
+            metaDetailsApi(url)
+                .then((response) => {
+                    const { title, description } = response?.data;
+                    setMeta({ title, description });
+                })
+                .catch((error) => {
+                    setMeta({
+                        title: "SJ Computers",
+                        description:
+                            "Buy ALL Brands Touch Screen Laptops, Gaming Desktop, Business Computer, Best BTO and more We looked at many companies, including Dell and Apple.",
+                    });
+                });
+    }, []);
 
     // useEffect(() => {
     //   document.title = meta.title;
@@ -121,9 +124,6 @@ const PageWrapper = (props) => {
     //     descriptionMetaTag.setAttribute('content', meta.description);
     //   }
     // }, [meta]);
-
-    console.log(meta.title, "meta-data titles");
-    console.log(meta.description, "meta-data descriptions");
 
     return (
         <>
