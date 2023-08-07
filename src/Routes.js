@@ -53,16 +53,18 @@ const Router = () => {
         //    </PageWrapper>
             ),
         },
+        
         {
             path: "/login",
             element: (
                 <AuthRoute>
                   <PageWrapper>
-                        <LoginForm />
+                      <LoginForm />
                     </PageWrapper>
                 </AuthRoute>
             ),
         },
+
         {
             path: "/register",
             element: (
