@@ -45,12 +45,10 @@ const Router = () => {
             path: "/",
             element: (
                 <Suspense fallback={<Loader />}>
-                    <Home />
+                    <PageWrapper>
+                        <Home />
+                    </PageWrapper>
                 </Suspense>
-
-                //         <PageWrapper>
-                //      <Home />
-                //    </PageWrapper>
             ),
         },
 
