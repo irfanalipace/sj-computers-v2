@@ -13,8 +13,9 @@ const ApiService = {
     init() {
         if (!this.instance) {
             this.instance = axios.create({ withCredentials: true });
-            this.instance.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
-            console.log("api url: ", process.env.REACT_APP_API_BASE_URL);
+            this.instance.defaults.baseURL =
+                import.meta.env.REACT_APP_API_BASE_URL;
+            console.log("api url: ", import.meta.env.REACT_APP_API_BASE_URL);
             this.instance.defaults.headers["content-type"] = "application/json";
         }
     },
@@ -31,7 +32,7 @@ const ApiService = {
      * Set the default Base URL of api requests
      */
 
-    setDefaultBaseUrl(url = process.env.REACT_APP_API_BASE_URL) {
+    setDefaultBaseUrl(url = import.meta.env.REACT_APP_API_BASE_URL) {
         this.instance.defaults.baseURL = url;
     },
 
@@ -40,7 +41,7 @@ const ApiService = {
      */
 
     setOTOBaseUrl() {
-        this.instance.defaults.baseUrl = process.env.REACT_APP_OTO_BASE_URL;
+        this.instance.defaults.baseUrl = import.meta.env.REACT_APP_OTO_BASE_URL;
     },
 
     /**

@@ -1,0 +1,1 @@
+import{j as o}from"./index-48fa8cfd.js";import{L as a}from"./Spinner-784b5e7e.js";/* empty css               */function x({children:r,clickHandler:s,isLoading:t,disabled:n,className:e,...m}){return o.jsx("button",{className:`button ${e}`,onClick:s,disabled:t||n,...m,children:t?o.jsx(a,{}):r})}export{x as B};

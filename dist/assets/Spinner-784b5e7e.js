@@ -1,0 +1,1 @@
+import{j as a,aF as n}from"./index-48fa8cfd.js";function s(){return a.jsx(n,{animation:"border",role:"status",children:a.jsx("span",{className:"visually-hidden",children:"Loading..."})})}export{s as L};

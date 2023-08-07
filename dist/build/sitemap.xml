@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pretty Sitemap</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-left: 20px;
+    }
+    .level-1 {
+      color: #333;
+      font-weight: bold;
+    }
+    .level-2 {
+      color: #666;
+    }
+    .level-3 {
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <h1>Pretty Sitemap</h1>
+  <ul class="level-1">
+    <li>
+      <a href="https://example.com/">Home</a>
+      <ul class="level-2">
+        <li><a href="https://example.com/about">About</a></li>
+        <li><a href="https://example.com/services">Services</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="https://example.com/products">Products</a>
+      <ul class="level-2">
+        <li><a href="https://example.com/products/category1">Category 1</a></li>
+        <li><a href="https://example.com/products/category2">Category 2</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="https://example.com/contact">Contact</a>
+    </li>
+  </ul>
+</body>
+</html>
