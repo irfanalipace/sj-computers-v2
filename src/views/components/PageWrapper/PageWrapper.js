@@ -102,6 +102,7 @@ const PageWrapper = (props) => {
     const url = window.location.href;
 
     useEffect(() => {
+        console.log('running')
         if (url)
             metaDetailsApi(url)
                 .then((response) => {
@@ -109,6 +110,7 @@ const PageWrapper = (props) => {
                     setMeta({ title, description });
                 })
                 .catch((error) => {
+                    console.log('catch')
                     setMeta({
                         title: "SJ Computers",
                         description:
