@@ -54,7 +54,7 @@ const AppWrapper = ({ children }) => {
                 });
                 dispatch(setCartDetails(cartDetails)); // add local store details to redux store
             }
-        }, 2000); // giving timeout to increase initial page load speed
+        }, 3000); // giving timeout to increase initial page load speed
     }, []);
 
     return <div>{children}</div>;
