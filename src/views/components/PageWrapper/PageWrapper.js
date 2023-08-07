@@ -100,7 +100,6 @@ import Loader from "@common/LoaderComponent/LoaderComponent";
 const PageWrapper = (props) => {
     const [meta, setMeta] = useState({ title: "", description: "" });
     const url = window.location.href;
-    console.log("running");
 
     useEffect(() => {
         if (url)
@@ -108,10 +107,8 @@ const PageWrapper = (props) => {
                 .then((response) => {
                     const { title, description } = response?.data;
                     setMeta({ title, description });
-                    console.log("then");
                 })
                 .catch((error) => {
-                    console.log("catch");
                     setMeta({
                         title: "SJ Computers",
                         description:
