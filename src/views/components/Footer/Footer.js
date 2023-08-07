@@ -6,7 +6,8 @@ import vectorimg from "@images/common/boll.png";
 import copyrightimg from "@images/common/copywrite.png";
 import img1 from "@images/footer/setting.png";
 import BackToTopButton from "./BackToTopButton";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import "./Footer.css";
 
 const Footer = () => {
@@ -233,11 +234,7 @@ const Footer = () => {
                                     aria-haspopup="true"
                                     aria-expanded="false"
                                 >
-                                    <img
-                                        src={vectorimg}
-                                        alt=""
-                                        className="english-dropdown"
-                                    />
+                                  <FontAwesomeIcon className="me-1" icon={faGlobe} />
                                     English
                                     <img
                                         src={img1}
@@ -258,11 +255,12 @@ const Footer = () => {
                             </div>
                         </div>
                         <div className="footer-copyright text-center py-3">
-                            <img
+                            {/* <img
                                 src={copyrightimg}
                                 alt=""
                                 className="copywriten footer-end-image-data"
-                            />
+                            /> */}
+                         <span   className="copywriten footer-end-image-data">S.J Computers @ 2023 Tech Store. All Rights <br></br>Reserved</span>   
                         </div>
                     </footer>
                 </div>
