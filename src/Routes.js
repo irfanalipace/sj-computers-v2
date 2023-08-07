@@ -256,7 +256,9 @@ const Router = () => {
             path: "/blogs",
             element: (
                 <Suspense fallback={<Loader />}>
-                    <BlogSingle />
+                    <PageWrapper>
+                        <BlogSingle />
+                    </PageWrapper>
                 </Suspense>
             ),
         },
