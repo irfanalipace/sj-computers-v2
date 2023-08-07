@@ -36,7 +36,6 @@ const WhatWeDoPage = React.lazy(() => import("@pages/WhatWeDo/WhatWeDoPage"));
 const BlogSingle = React.lazy(() => import("@pages/Blog/BlogSingle"));
 const BlogsDetails = React.lazy(() => import("@pages/Blog/BlogsDetails"));
 
-PageWrapper;
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
 
@@ -318,7 +317,7 @@ const Router = () => {
             ),
         },
         {
-            path: "/contact-us",
+            path: "/contact",
             element: (
                 <Suspense fallback={<Loader />}>
                     <PageWrapper>

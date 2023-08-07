@@ -24,6 +24,38 @@ span {
     font-family: "Inter", sans-serif;
 }
 
+ @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src:  url("./assets/font/Inter\(400\).ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src:  url("./assets/font/Inter\(500\).ttf") format("truetype");
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src:  url("./assets/font/Inter\(600\).ttf") format("truetype");
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src:  url("./assets/font/Inter\(700\).ttf") format("truetype");
+  } 
+
+
+
 .inner-body {
     min-height: calc(100vh - 600px);
     display: flex;
