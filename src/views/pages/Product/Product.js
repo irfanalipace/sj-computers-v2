@@ -10,10 +10,6 @@ import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
 import Recommendation from "@components/Recommendation/Recommendation";
 
 import "./Product.css";
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/test-merge-3
 
 export default function Product() {
     const [isLoading, setIsLoading] = useState(false);
@@ -47,12 +43,7 @@ export default function Product() {
 
     const ProductComponent = () => {
         return (
-<<<<<<< HEAD
-          
-  <>
-=======
             <>
->>>>>>> origin/test-merge-3
                 {product ? (
                     <div className="row">
                         <div className="col-12 col-md-4">
@@ -71,11 +62,6 @@ export default function Product() {
                     </div>
                 )}
             </>
-<<<<<<< HEAD
-        
-          
-=======
->>>>>>> origin/test-merge-3
         );
     };
 

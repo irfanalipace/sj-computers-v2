@@ -9,10 +9,6 @@ import {
 } from "@store/products/productsThunks";
 import { CLEAR_PRODUCTS } from "@store/products/productsSlice";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/test-merge-3
 
 const ProductsHomePage = () => {
     const {
@@ -62,12 +58,7 @@ const ProductsHomePage = () => {
     }, [searchString, selectedCategory]);
 
     return (
-<<<<<<< HEAD
-   
-  <>
-=======
         <>
->>>>>>> origin/test-merge-3
             {isLoading ? (
                 <h3 className="pb-4">
                     <Loader />
@@ -88,11 +79,6 @@ const ProductsHomePage = () => {
                 </>
             )}
         </>
-<<<<<<< HEAD
-     
-      
-=======
->>>>>>> origin/test-merge-3
     );
 };
 

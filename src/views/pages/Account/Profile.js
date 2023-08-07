@@ -12,10 +12,6 @@ import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 
 import userDefault from "@images/common/user-default-avatar.png";
 import "./Account.css";
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/test-merge-3
 // import "react-datepicker/dist/react-datepicker.css";
 
 const Profile = () => {
@@ -80,12 +76,7 @@ const Profile = () => {
         setShowDialog(true);
     };
     return (
-<<<<<<< HEAD
-   
- <div className="account-page">
-=======
         <div className="account-page">
->>>>>>> origin/test-merge-3
             <div className="container-xl">
                 <Breadcrumb />
                 <h3 className="account-heading">Profile</h3>
@@ -237,11 +228,6 @@ const Profile = () => {
                 </Modal.Body>
             </Modal>
         </div>
-<<<<<<< HEAD
-      
-       
-=======
->>>>>>> origin/test-merge-3
     );
 };
 

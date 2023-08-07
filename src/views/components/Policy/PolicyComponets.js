@@ -8,10 +8,6 @@ import { useLocation } from "react-router-dom";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import Header from "@components/Header/Header";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/test-merge-3
 
 const HeadereLinks = [
     { path: "/", title: "About Us" },
@@ -76,21 +72,6 @@ const PolicyComponets = () => {
     }, [location.pathname]);
 
     return (
-<<<<<<< HEAD
-        <>
-             {/* <Header /> */}
-             <div className="policy-background-color">
-                <div className="row">
-                    <div>
-                        <header className="topBar px-3 policy-header-topbar">
-                            <div className="topBar-inner-policy">
-                                <div className="menuBar-policy">
-                                    <ul className="text-decoration-none policy-menu-item-list">
-                                        {HeadereLinks.map((link, index) => (
-                                            <li
-                                                className="policy-listitem"
-                                                key={index}
-=======
         <div className="policy-background-color">
             <div className="row">
                 <div>
@@ -141,7 +122,6 @@ const PolicyComponets = () => {
                                                     navigate("/account/orders")
                                                 }
                                                 className="policy-card-order-button"
->>>>>>> origin/test-merge-3
                                             >
                                                 <Link
                                                     to={"/account/orders"}
@@ -210,13 +190,7 @@ const PolicyComponets = () => {
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-        </>
-           
-      
-=======
         </div>
->>>>>>> origin/test-merge-3
     );
 };
 

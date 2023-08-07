@@ -9,10 +9,6 @@ import { contactUsApi } from "@api/contact-us";
 import Button from "@common/Button/Button";
 import contact from "@images/footer/footer-links/contact-image.png";
 import "./Contact.css";
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/test-merge-3
 const Contact = () => {
     const [message, setMessage] = useState("");
     const [error, setError] = useState([]);
@@ -58,11 +54,6 @@ const Contact = () => {
     }, [errors]);
 
     return (
-<<<<<<< HEAD
-       
-     
-=======
->>>>>>> origin/test-merge-3
         <div className="contact-container">
             <div className="contact-header">
                 <div className="my-contact-menu">
@@ -256,12 +247,6 @@ const Contact = () => {
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-   
-   
-       
-=======
->>>>>>> origin/test-merge-3
     );
 };
 

@@ -9,20 +9,10 @@ import securityIcon from "@images/common/security-icon.png";
 import Profile from "./Profile";
 
 import "./Account.css";
-<<<<<<< HEAD
-
-
-
-const Account = () => {
-    return (
-    
-<div className="account-page">
-=======
 
 const Account = () => {
     return (
         <div className="account-page">
->>>>>>> origin/test-merge-3
             <div className="container-xl">
                 <h3 className="account-heading">Your Account </h3>
                 <div className="account-options row mx-0">
@@ -85,11 +75,6 @@ const Account = () => {
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-      
-        
-=======
->>>>>>> origin/test-merge-3
     );
 };
 

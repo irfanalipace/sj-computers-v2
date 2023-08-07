@@ -21,13 +21,6 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import "./Account.css";
 import { Select } from "@mantine/core";
 import { Stack } from "react-bootstrap";
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> origin/test-merge-3
 
 const CustomTabs = styled(Tabs)({
     "& .MuiTabs-indicator": {
@@ -158,13 +151,7 @@ const OrderPage = () => {
         ) : null;
     };
     return (
-<<<<<<< HEAD
-        
- 
- <div className="account-page order-page">
-=======
         <div className="account-page order-page">
->>>>>>> origin/test-merge-3
             <div className="container-xl">
                 <Breadcrumb />
                 <div className="row mx-0">
@@ -336,12 +323,6 @@ const OrderPage = () => {
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-   
-   
-       
-=======
->>>>>>> origin/test-merge-3
     );
 };
 
