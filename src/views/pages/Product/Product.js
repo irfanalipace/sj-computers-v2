@@ -12,7 +12,6 @@ import Recommendation from "@components/Recommendation/Recommendation";
 import "./Product.css";
 
 export default function Product() {
-    
     const [isLoading, setIsLoading] = useState(false);
     const [product, setProduct] = useState(null);
     const [productImages, setProductImages] = useState([]);

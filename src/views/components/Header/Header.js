@@ -1,18 +1,30 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
-import CartOverlay from "./CartOverlay";
-import LocationModel from "./Location/LocationModel";
-import LoginCart from "./LoginCart";
-import Search from "./Search";
-import MobileHeader from "./MobileHeader/MobileHeader";
-import MobileSearch from "./MobileSearch/MobileSearch";
-import TopBar from "@components/TopBar/TopBar";
+import LoginCard from "./LoginCard";
 import footerlogo from "@images/header-logo.png";
 import english from "@images/home/eng.png";
 import vectorcart from "@images/home/vector.png";
+
+import Loader from "@common/Spinner/Spinner";
+
+const TopBar = lazy(() => import("@components/TopBar/TopBar"));
+// const Search = lazy(() => import("./Search"));
+const LocationModal = lazy(() => import("./Location/LocationModal"));
+// const BottomNavigation = lazy(() =>
+//     import("./BottomNavigation/BottomNavigation")
+// );
+const MobileSearch = lazy(() => import("./MobileSearch/MobileSearch"));
+const CartOverlay = lazy(() => import("./CartOverlay"));
+// import TopBar from "@components/TopBar/TopBar";
+import Search from "./Search";
+// import LocationModal from "./Location/LocationModal";
+import BottomNavigation from "./BottomNavigation/BottomNavigation";
+// import MobileSearch from "./MobileSearch/MobileSearch";
+// import CartOverlay from "./CartOverlay";
+
 import "./Header.css";
 
 const Header = () => {
@@ -53,8 +65,8 @@ const Header = () => {
         ((firstLogin.current && !currentState) ||
             window.localStorage.getItem("state") == null) &&
             setTimeout(() => {
-                setShow(true); // Update the state `isOpen` to true after 5 seconds
-            }, 5000);
+                setShow(true); // show the set delivery location modal after 10 seconds
+            }, 10000);
         // setShow(true);
         searchParams.delete("firstLogin");
         setSearchParams(searchParams);
@@ -70,9 +82,19 @@ const Header = () => {
         <>
             {screenWidth <= 850 ? (
                 <div>
-                    <MobileHeader />
-                    <MobileSearch />
-                    {screenWidth > 450 ? <TopBar /> : <></>}
+                    {/* <Suspense> */}
+                    <BottomNavigation />
+                    {/* </Suspense> */}
+                    <Suspense>
+                        <MobileSearch />
+                    </Suspense>
+                    {screenWidth > 450 ? (
+                        <Suspense>
+                            <TopBar />
+                        </Suspense>
+                    ) : (
+                        <></>
+                    )}
 
                     {/* components to render when screen width is less than or equal to 750px */}
                 </div>
@@ -129,14 +151,16 @@ const Header = () => {
                                                         </Button>
                                                     </div>
                                                 </div>
-                                                {/* {show && (
-                                                    <LocationModel
-                                                        isOpen={show}
-                                                        handleClose={() =>
-                                                            setShow(false)
-                                                        }
-                                                    />
-                                                )} */}
+                                                {show && screenWidth > 576 && (
+                                                    <Suspense>
+                                                        <LocationModal
+                                                            isOpen={show}
+                                                            handleClose={() =>
+                                                                setShow(false)
+                                                            }
+                                                        />
+                                                    </Suspense>
+                                                )}
                                                 <Search />
 
                                                 <div className="nav-right">
@@ -187,7 +211,7 @@ const Header = () => {
                                                                 </p>
                                                             </div>
                                                         ) : (
-                                                            <LoginCart className="card" />
+                                                            <LoginCard className="card" />
                                                         )}
                                                     </div>
                                                     <div className="return-button ">
@@ -271,15 +295,24 @@ const Header = () => {
                                     )}
                                 </div>
                             </header>
-                            {!ThankyouPage && <TopBar />}
+                            {!ThankyouPage && (
+                                <Suspense>
+                                    <TopBar />
+                                </Suspense>
+                            )}
                         </>
                     )}
 
                     {/* CartOverLay code */}
-                    <CartOverlay
-                        isOpen={isOpen}
-                        toggleSidebar={toggleSidebar}
-                    />
+                    {isOpen && (
+                        <Suspense>
+                            <CartOverlay
+                                isOpen={isOpen}
+                                toggleSidebar={toggleSidebar}
+                            />
+                        </Suspense>
+                    )}
+
                     {/* components to render when screen width is greater than 750px */}
                 </div>
             )}

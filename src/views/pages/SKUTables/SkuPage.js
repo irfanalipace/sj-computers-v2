@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { SkuTables } from "@components/SKU/SkuTables";
 import { SkuProducts } from "@components/SKU/SkuProducts";
-import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
 const SkuPage = () => {
     const [reRender, setRender] = useState(0);

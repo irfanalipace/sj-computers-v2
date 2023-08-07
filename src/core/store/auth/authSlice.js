@@ -1,12 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getToken, getUser } from "@services/jwtService";
+
+const token = getToken();
+const user = getUser();
 
 const initialState = {
-    user: null,
-    isAuthenticated: false,
+    user: user ? user : null,
+    isAuthenticated: token ? true : false,
     apiError: null,
     isLoading: false,
     isDeletingPic: false,
-    accessToken: "",
+    accessToken: token,
     currentPage: 1,
 };
 

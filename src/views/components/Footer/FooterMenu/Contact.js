@@ -9,7 +9,6 @@ import { contactUsApi } from "@api/contact-us";
 import Button from "@common/Button/Button";
 import contact from "@images/footer/footer-links/contact-image.png";
 import "./Contact.css";
-import PageWrapper from "../../PageWrapper/PageWrapper";
 const Contact = () => {
     const [message, setMessage] = useState("");
     const [error, setError] = useState([]);

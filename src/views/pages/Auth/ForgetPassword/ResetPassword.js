@@ -12,7 +12,6 @@ import Loader from "@common/Spinner/Spinner";
 import { useFormValidation } from "@hooks/useFormValidation";
 
 import "@pages/Auth/auth.css";
-import PageWrapper from "../../../components/PageWrapper/PageWrapper";
 
 const PasswordForm = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);
@@ -67,153 +66,148 @@ const PasswordForm = () => {
     }
 
     return (
-        <PageWrapper title="SJ | Reset Password">
-            <div>
-                <div
-                    className={`container form-container`}
-                    onSubmit={handleSubmit}
-                >
-                    <div className="row">
-                        <div className="header-logo">
-                            <Header />
-                        </div>
-
-                        <form className={`auth-form ${mounted && "slide"} `}>
-                            <h3 className="login-h3">Reset Password</h3>
-                            <div className="mb-3">
-                                <label className="password-label ">
-                                    Enter your Email
-                                </label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    className="form-control"
-                                    placeholder="Enter your Email"
-                                    value={email}
-                                    readOnly
-                                />
-                                {fieldErrors && (
-                                    <p className="fs-6 mt-1 text-danger">
-                                        {fieldErrors.email}
-                                    </p>
-                                )}
-                            </div>
-                            <div className="mb-3">
-                                <label className="password-label ">
-                                    Enter new password
-                                </label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    className="form-control"
-                                    placeholder="Enter your password"
-                                    value={values.password}
-                                    onChange={handleChange}
-                                />
-                                {fieldErrors && (
-                                    <p className="fs-6 mt-1 text-danger">
-                                        {fieldErrors.password}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="mb-3">
-                                <label className="password-label ">
-                                    Re-enter your password
-                                </label>
-                                <input
-                                    type="password"
-                                    name="confirmPassword"
-                                    className="form-control"
-                                    placeholder="Confirm password"
-                                    value={values.confirmPassword}
-                                    onChange={handleChange}
-                                />
-                                {fieldErrors && (
-                                    <p className="fs-6 mt-1 text-danger">
-                                        {fieldErrors.confirmPassword}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="d-flex justify-content-center w-100">
-                                <button
-                                    type="submit"
-                                    className="resetpassword-button"
-                                    disabled={isLoading}
-                                >
-                                    {isLoading ? <Loader /> : "Continue"}
-                                </button>
-                            </div>
-                            <p className="resetpassword-praragraph-text">
-                                By continuing, you agree to SJ Computer’s{" "}
-                                <Link
-                                    to="/term_services"
-                                    className="text-decoration-none"
-                                >
-                                    Conditions of Use
-                                </Link>{" "}
-                                and{" "}
-                                <Link
-                                    to="/term_services"
-                                    className="text-decoration-none"
-                                >
-                                    Privacy Notice
-                                </Link>
-                                .
-                            </p>
-
-                            <div className="need-help">
-                                <FontAwesomeIcon
-                                    icon={faCaretRight}
-                                    className="icon-need-help-resetpassword"
-                                />
-                                <Link
-                                    to=""
-                                    className="text-decoration-none need-help"
-                                >
-                                    Need Help?
-                                </Link>
-                            </div>
-                        </form>
-                        <div className="container new-data">
-                            <div className="row">
-                                <div className="col-12">
-                                    <h5 className="h5-heading ">
-                                        New to SJ Computers?
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div></div>
-
-                        <div className="react-heading">
-                            <div className="rectangle">
-                                <Link
-                                    to="/register"
-                                    className="text-decoration-none"
-                                    style={{ color: "#333333" }}
-                                >
-                                    Create your SJ Computer account
-                                </Link>
-                            </div>
-                        </div>
-
-                        <div></div>
+        <div>
+            <div className={`container form-container`} onSubmit={handleSubmit}>
+                <div className="row">
+                    <div className="header-logo">
+                        <Header />
                     </div>
-                </div>
-                <div className="container-fluid bg-light">
-                    <div className="row">
-                        <div className="col">
-                            <div className="sticky-bottom py-3">
-                                <Footer />
+
+                    <form className={`auth-form ${mounted && "slide"} `}>
+                        <h3 className="login-h3">Reset Password</h3>
+                        <div className="mb-3">
+                            <label className="password-label ">
+                                Enter your Email
+                            </label>
+                            <input
+                                type="email"
+                                name="email"
+                                className="form-control"
+                                placeholder="Enter your Email"
+                                value={email}
+                                readOnly
+                            />
+                            {fieldErrors && (
+                                <p className="fs-6 mt-1 text-danger">
+                                    {fieldErrors.email}
+                                </p>
+                            )}
+                        </div>
+                        <div className="mb-3">
+                            <label className="password-label ">
+                                Enter new password
+                            </label>
+                            <input
+                                type="password"
+                                name="password"
+                                className="form-control"
+                                placeholder="Enter your password"
+                                value={values.password}
+                                onChange={handleChange}
+                            />
+                            {fieldErrors && (
+                                <p className="fs-6 mt-1 text-danger">
+                                    {fieldErrors.password}
+                                </p>
+                            )}
+                        </div>
+
+                        <div className="mb-3">
+                            <label className="password-label ">
+                                Re-enter your password
+                            </label>
+                            <input
+                                type="password"
+                                name="confirmPassword"
+                                className="form-control"
+                                placeholder="Confirm password"
+                                value={values.confirmPassword}
+                                onChange={handleChange}
+                            />
+                            {fieldErrors && (
+                                <p className="fs-6 mt-1 text-danger">
+                                    {fieldErrors.confirmPassword}
+                                </p>
+                            )}
+                        </div>
+
+                        <div className="d-flex justify-content-center w-100">
+                            <button
+                                type="submit"
+                                className="resetpassword-button"
+                                disabled={isLoading}
+                            >
+                                {isLoading ? <Loader /> : "Continue"}
+                            </button>
+                        </div>
+                        <p className="resetpassword-praragraph-text">
+                            By continuing, you agree to SJ Computer’s{" "}
+                            <Link
+                                to="/term_services"
+                                className="text-decoration-none"
+                            >
+                                Conditions of Use
+                            </Link>{" "}
+                            and{" "}
+                            <Link
+                                to="/term_services"
+                                className="text-decoration-none"
+                            >
+                                Privacy Notice
+                            </Link>
+                            .
+                        </p>
+
+                        <div className="need-help">
+                            <FontAwesomeIcon
+                                icon={faCaretRight}
+                                className="icon-need-help-resetpassword"
+                            />
+                            <Link
+                                to=""
+                                className="text-decoration-none need-help"
+                            >
+                                Need Help?
+                            </Link>
+                        </div>
+                    </form>
+                    <div className="container new-data">
+                        <div className="row">
+                            <div className="col-12">
+                                <h5 className="h5-heading ">
+                                    New to SJ Computers?
+                                </h5>
                             </div>
+                        </div>
+                    </div>
+
+                    <div></div>
+
+                    <div className="react-heading">
+                        <div className="rectangle">
+                            <Link
+                                to="/register"
+                                className="text-decoration-none"
+                                style={{ color: "#333333" }}
+                            >
+                                Create your SJ Computer account
+                            </Link>
+                        </div>
+                    </div>
+
+                    <div></div>
+                </div>
+            </div>
+            <div className="container-fluid bg-light">
+                <div className="row">
+                    <div className="col">
+                        <div className="sticky-bottom py-3">
+                            <Footer />
                         </div>
                     </div>
                 </div>
             </div>
-        </PageWrapper>
+        </div>
     );
 };
 

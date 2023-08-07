@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import "./MobileScreenModel.css";
+import "./MobileScreenModal.css";
 import { updateState } from "@store/states/statesThunks";
 import Loader from "@common/Spinner/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStates } from "@store/states/statesThunks";
 
-const ModelUserAuth = ({ closeModal, isOpen = false }) => {
+const ModalUserAuth = ({ closeModal, isOpen = false }) => {
     const states = useSelector((state) => state.states.states);
     const isLoading = useSelector((state) => state.states.isLoading);
     const [zipCode, setZipCode] = useState("");
@@ -79,4 +79,4 @@ const ModelUserAuth = ({ closeModal, isOpen = false }) => {
     );
 };
 
-export default ModelUserAuth;
+export default ModalUserAuth;
