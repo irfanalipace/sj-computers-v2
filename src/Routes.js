@@ -37,29 +37,29 @@ const BlogSingle = React.lazy(() => import("@pages/Blog/BlogSingle"));
 const BlogsDetails = React.lazy(() => import("@pages/Blog/BlogsDetails"));
 
 import Loader from "@common/LoaderComponent/LoaderComponent";
-import PageWrapper from "./PageWrapper";
-const Router = () => {
+import PageWrapper from "@components/PageWrapper/PageWrapper";
 
+const Router = () => {
     const routes = [
         {
             path: "/",
             element: (
                 <Suspense fallback={<Loader />}>
-                <Home />
+                    <Home />
                 </Suspense>
 
-        //         <PageWrapper>
-        //      <Home />
-        //    </PageWrapper>
+                //         <PageWrapper>
+                //      <Home />
+                //    </PageWrapper>
             ),
         },
-        
+
         {
             path: "/login",
             element: (
                 <AuthRoute>
-                  <PageWrapper>
-                      <LoginForm />
+                    <PageWrapper>
+                        <LoginForm />
                     </PageWrapper>
                 </AuthRoute>
             ),
@@ -71,7 +71,7 @@ const Router = () => {
                 <AuthRoute>
                     <PageWrapper>
                         <Register />
-                     </PageWrapper>
+                    </PageWrapper>
                 </AuthRoute>
             ),
         },
@@ -99,34 +99,34 @@ const Router = () => {
             path: "/forgot_password",
             element: (
                 <AuthRoute>
-                     <PageWrapper>
+                    <PageWrapper>
                         <ResetPassword />
-                   </PageWrapper>
+                    </PageWrapper>
                 </AuthRoute>
             ),
         },
         {
             path: "/products/:productId",
             element: (
-                  <PageWrapper>
+                <PageWrapper>
                     <Product />
-                    </PageWrapper>
+                </PageWrapper>
             ),
         },
         {
             path: "/products/search",
             element: (
-                   <PageWrapper>
+                <PageWrapper>
                     <ProductList />
-                    </PageWrapper>
+                </PageWrapper>
             ),
         },
         {
             path: "/category/:categorySlug",
             element: (
-                  <PageWrapper>
+                <PageWrapper>
                     <Category />
-                    </PageWrapper>
+                </PageWrapper>
             ),
         },
 
@@ -134,9 +134,9 @@ const Router = () => {
             path: "/account",
             element: (
                 <ProtectedRoute>
-                  <PageWrapper>
+                    <PageWrapper>
                         <Account />
-                  </PageWrapper>
+                    </PageWrapper>
                 </ProtectedRoute>
             ),
         },
@@ -144,9 +144,9 @@ const Router = () => {
             path: "/account/profile",
             element: (
                 <ProtectedRoute>
-                  <PageWrapper>
+                    <PageWrapper>
                         <Profile />
-                 </PageWrapper>
+                    </PageWrapper>
                 </ProtectedRoute>
             ),
         },
@@ -155,7 +155,7 @@ const Router = () => {
             element: (
                 <ProtectedRoute>
                     <PageWrapper>
-                    <Profile />
+                        <Profile />
                     </PageWrapper>
                 </ProtectedRoute>
             ),
@@ -164,9 +164,9 @@ const Router = () => {
             path: "/account/update-password",
             element: (
                 <ProtectedRoute>
-                   <PageWrapper>
+                    <PageWrapper>
                         <Security />
-                     </PageWrapper>
+                    </PageWrapper>
                 </ProtectedRoute>
             ),
         },
@@ -174,16 +174,16 @@ const Router = () => {
             path: "/account/orders",
             element: (
                 <ProtectedRoute>
-                   <PageWrapper>
+                    <PageWrapper>
                         <Order />
-                     </PageWrapper>
+                    </PageWrapper>
                 </ProtectedRoute>
             ),
         },
         {
             path: "/cart",
             element: (
-               <PageWrapper>
+                <PageWrapper>
                     <Cart />
                 </PageWrapper>
             ),
@@ -192,94 +192,94 @@ const Router = () => {
             path: "/checkout/:productId",
             element: (
                 <ProtectedRoute>
-                  <PageWrapper>
+                    <PageWrapper>
                         <Checkout />
-                 </PageWrapper>
+                    </PageWrapper>
                 </ProtectedRoute>
             ),
         },
         {
             path: "/privacy_policy",
             element: (
-               <PageWrapper>
+                <PageWrapper>
                     <Policy />
-                    </PageWrapper>
+                </PageWrapper>
             ),
         },
 
         {
             path: "/shipping_policy",
             element: (
-              <PageWrapper>
+                <PageWrapper>
                     <Policy />
-              </PageWrapper>
+                </PageWrapper>
             ),
         },
         {
             path: "/:blogslug",
             element: (
-                 <PageWrapper>
+                <PageWrapper>
                     <BlogsDetails />
-                    </PageWrapper>
+                </PageWrapper>
             ),
         },
         {
             path: "/blogs",
             element: (
-                 <PageWrapper>
+                <PageWrapper>
                     <BlogSingle />
-                    </PageWrapper>
+                </PageWrapper>
             ),
         },
 
         {
             path: "/about_us",
             element: (
-              <PageWrapper>
+                <PageWrapper>
                     <Policy />
-                 </PageWrapper>
+                </PageWrapper>
             ),
         },
-        
+
         {
             path: "/what-we-do",
             element: (
-               <PageWrapper>
+                <PageWrapper>
                     <WhatWeDoPage />
-                    </PageWrapper>
+                </PageWrapper>
             ),
         },
 
         {
             path: "/return_refund_policy",
             element: (
-             <PageWrapper>
+                <PageWrapper>
                     <Policy />
-                 </PageWrapper>
+                </PageWrapper>
             ),
         },
         {
             path: "/term_services",
             element: (
-                  <PageWrapper>
+                <PageWrapper>
                     <Policy />
-                    </PageWrapper>
+                </PageWrapper>
             ),
         },
         {
             path: "/checkout",
             element: (
-                   <PageWrapper>
+                <PageWrapper>
                     <Checkout />
-                    </PageWrapper>
+                </PageWrapper>
             ),
         },
         {
             path: "/contact",
             element: (
-                   <PageWrapper>
+                <PageWrapper>
                     <Contact />
-                    </PageWrapper>
+                </PageWrapper>
             ),
         },
         {
@@ -299,9 +299,9 @@ const Router = () => {
             path: "/thank-you",
             element: (
                 <ProtectedRoute>
-                   <PageWrapper>
+                    <PageWrapper>
                         <ThankYou />
-                     </PageWrapper>
+                    </PageWrapper>
                 </ProtectedRoute>
             ),
         },
@@ -309,9 +309,9 @@ const Router = () => {
         {
             path: "/test",
             element: (
-               <PageWrapper>
+                <PageWrapper>
                     <Test />
-                 </PageWrapper>
+                </PageWrapper>
             ),
         },
 
@@ -319,18 +319,18 @@ const Router = () => {
             path: "/sku",
             element: (
                 <ProtectedRoute>
-                   <PageWrapper>
+                    <PageWrapper>
                         <SkuPage />
-                     </PageWrapper>
+                    </PageWrapper>
                 </ProtectedRoute>
             ),
         },
         {
             path: "/refund-order",
             element: (
-              <PageWrapper>
+                <PageWrapper>
                     <RefundOrder />
-              </PageWrapper>
+                </PageWrapper>
             ),
         },
 
