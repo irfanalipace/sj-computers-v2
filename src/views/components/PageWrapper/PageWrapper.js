@@ -100,24 +100,25 @@ import Loader from "@common/LoaderComponent/LoaderComponent";
 const PageWrapper = (props) => {
     const [meta, setMeta] = useState({ title: "", description: "" });
     const url = window.location.href;
+    console.log("running");
 
     useEffect(() => {
-        console.log('running')
         if (url)
             metaDetailsApi(url)
                 .then((response) => {
                     const { title, description } = response?.data;
                     setMeta({ title, description });
+                    console.log("then");
                 })
                 .catch((error) => {
-                    console.log('catch')
+                    console.log("catch");
                     setMeta({
                         title: "SJ Computers",
                         description:
                             "Buy ALL Brands Touch Screen Laptops, Gaming Desktop, Business Computer, Best BTO and more We looked at many companies, including Dell and Apple.",
                     });
                 });
-    }, []);
+    }, [url]);
 
     // useEffect(() => {
     //   document.title = meta.title;
@@ -128,7 +129,7 @@ const PageWrapper = (props) => {
     // }, [meta]);
 
     return (
-          <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Loader />}>
             {meta.title && (
                 <Helmet>
                     <title>{meta.title}</title>
@@ -137,7 +138,7 @@ const PageWrapper = (props) => {
             )}
 
             {props.children}
-            </Suspense>
+        </Suspense>
     );
 };
 
