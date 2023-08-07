@@ -138,7 +138,7 @@ const Product = ({ product, inGrid }) => {
             <Link to={`/products/${product?.asin}`}>
                 <div
                     className={` ${
-                        inGrid && "product-image-grid"
+                        inGrid ? "product-image-grid" : ""
                     } product-image`}
                 >
                     {/* {inGrid && (
