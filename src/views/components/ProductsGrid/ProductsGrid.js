@@ -1,7 +1,7 @@
 import { Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import LoadMore from "@common/Button/LoadMore";
-import Product from "@components/ProductCard/ProductCard";
+import ProductCard from "@components/ProductCard/ProductCard";
 import OverlayLoader from "@common/LoaderComponent/OverlayLoader";
 import { Link } from "react-router-dom";
 import "./ProductsGrid.css";
@@ -22,7 +22,7 @@ export default function ProductsGrid({
                     {products?.map((product) => (
                         <Col xs={6} md={4} lg={2} key={product.id}>
                             {/* <Link to={`/products/${product?.asin}`}> */}
-                            <Product product={product} inGrid={true} />
+                            <ProductCard product={product} inGrid={true} />
 
                             {/* </Link> */}
                         </Col>
