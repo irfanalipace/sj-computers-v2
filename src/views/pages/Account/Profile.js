@@ -12,7 +12,7 @@ import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 
 import userDefault from "@images/common/user-default-avatar.png";
 import "./Account.css";
-import PageWrapper from "../../PageWrapper";
+
 // import "react-datepicker/dist/react-datepicker.css";
 
 const Profile = () => {
@@ -77,7 +77,7 @@ const Profile = () => {
         setShowDialog(true);
     };
     return (
-        <PageWrapper title="SJ | Profile">
+   
  <div className="account-page">
             <div className="container-xl">
                 <Breadcrumb />
@@ -230,7 +230,7 @@ const Profile = () => {
                 </Modal.Body>
             </Modal>
         </div>
-        </PageWrapper>
+      
        
     );
 };

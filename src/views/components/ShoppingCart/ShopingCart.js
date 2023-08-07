@@ -6,7 +6,7 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { CartItem } from "./CartItem/CartItem";
 
 import "./ShopingCart.css";
-import PageWrapper from "../../PageWrapper";
+
 
 export const ShopingCart = ({ onFormSubmit, form }) => {
     const cartItems = useSelector((state) => state.cart.cart);
@@ -45,7 +45,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
     }, [showModal]);
 
     return (
-      <PageWrapper title="SJ | Cart">
+    
           <>
             {isLoading ? (
                 <LoaderComponent />
@@ -284,6 +284,6 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                 </div>
             )}
         </>
-      </PageWrapper>
+   
     );
 };

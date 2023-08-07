@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { SkuTables } from "@components/SKU/SkuTables";
 import { SkuProducts } from "@components/SKU/SkuProducts";
-import PageWrapper from "../../PageWrapper";
+
 
 const SkuPage = () => {
 const [reRender, setRender] = useState(0)
     return (
-        <PageWrapper title="SJ | SKU">
+ 
  <div className="sku-page-container container-xxl">
             <Row>
                 <Col sm={5}>
@@ -18,7 +18,7 @@ const [reRender, setRender] = useState(0)
                 </Col>
             </Row>
         </div>
-        </PageWrapper>
+      
        
     );
 };

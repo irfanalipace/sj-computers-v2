@@ -10,7 +10,7 @@ import {
     SET_SELECTED_CATEGORY,
 } from "@store/products/productsSlice";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
-import PageWrapper from "../../../PageWrapper";
+
 
 const FilteredProducts = memo(({ category, toggleFilter }) => {
     const {
@@ -92,7 +92,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     }, [category]);
 
     return (
-        <PageWrapper title='SJ | FilteredProducts'>
+    
  <div className="filter-results">
             {products.length > 0 ? (
                 <>
@@ -138,7 +138,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                 </>
             )}
         </div>
-        </PageWrapper>
+      
        
     );
 });

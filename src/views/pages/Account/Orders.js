@@ -22,7 +22,7 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import "./Account.css";
 import { Select } from "@mantine/core";
 import { Stack } from "react-bootstrap";
-import PageWrapper from "../../../PageWrapper";
+
 
 
 
@@ -156,7 +156,7 @@ const OrderPage = () => {
         ) : null;
     };
     return (
-        <PageWrapper title="Order Refurbished Laptops: Quality Tech at Affordable Prices" meta_descriptions="Browse and order laptops from SJ Computers for top-notch performance and reliable service. Get the perfect tech companion for your needs today!">
+        
  
  <div className="account-page order-page">
             <div className="container-xl">
@@ -329,7 +329,7 @@ const OrderPage = () => {
             </div>
         </div>
    
-     </PageWrapper> 
+   
        
     );
 };

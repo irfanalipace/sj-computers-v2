@@ -4,11 +4,11 @@ import EmailForm from "@components/Auth/EmailFormWrapper";
 import Header from "@components/Auth/Header";
 import Footer from "@components/Auth/Footer";
 import "@pages/Auth/auth.css";
-import PageWrapper from "../../../PageWrapper";
+
 
 const LoginForm = () => {
     return (
-        <PageWrapper title="SJ | Forget Password">
+    
             <div>
             <div className="container form-container">
                 <div className="row">
@@ -55,7 +55,7 @@ const LoginForm = () => {
                 </div>
             </div>
         </div>
-        </PageWrapper>
+       
        
     );
 };

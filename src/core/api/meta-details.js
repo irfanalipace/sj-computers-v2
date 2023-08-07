@@ -1,6 +1,5 @@
 
 
-
 import ApiService from "@services/apiService";
 
 export function metaDetailsApi(url) {

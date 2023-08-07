@@ -12,7 +12,7 @@ import Loader from "@common/Spinner/Spinner";
 import { useFormValidation } from "@hooks/useFormValidation";
 
 import "@pages/Auth/auth.css";
-import PageWrapper from "../../../PageWrapper";
+
 
 const PasswordForm = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);
@@ -67,7 +67,7 @@ const PasswordForm = () => {
     }
 
     return (
-        <PageWrapper title="SJ | Reset Password">
+    
         <div>
             <div className={`container form-container`} onSubmit={handleSubmit}>
                 <div className="row">
@@ -210,7 +210,7 @@ const PasswordForm = () => {
                 </div>
             </div>
         </div>
-        </PageWrapper>
+      
        
     );
 };

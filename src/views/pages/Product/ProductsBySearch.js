@@ -9,7 +9,7 @@ import {
 } from "@store/products/productsThunks";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
 import "./ProductsBySearch.css";
-import PageWrapper from "../../../PageWrapper";
+
 
 const ProductsList = () => {
     const { searchString, products, isLoading, currentPage, apiError } =
@@ -27,7 +27,7 @@ const ProductsList = () => {
     }, [searchString]);
 
     return (
-        <PageWrapper title='SJ | About'>
+    
   <>
             <div className="search-results container-lg">
                 {products.length > 0 ? (
@@ -54,7 +54,7 @@ const ProductsList = () => {
                 )}
             </div>
         </>
-        </PageWrapper>
+   
       
     );
 };

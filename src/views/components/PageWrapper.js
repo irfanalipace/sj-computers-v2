@@ -101,12 +101,11 @@
 // // export default PageWrapper;
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,Suspense } from 'react';
 import { Helmet } from 'react-helmet';
 import { metaDetailsApi } from '../core/api/meta-details';
-
+import Loader from "@common/LoaderComponent/LoaderComponent";
 const PageWrapper = (props) => {
-
 
   const [meta, setMeta] = useState({ title: '', description: '' });
   const url = window.location.href;
@@ -137,7 +136,7 @@ const PageWrapper = (props) => {
 
 
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       {meta.title && (
         <Helmet>
           <title>{meta.title}</title>
@@ -146,7 +145,7 @@ const PageWrapper = (props) => {
       )}
 
       {props.children}
-    </>
+    </Suspense>
   );
 };
 
