@@ -5,11 +5,13 @@ import BannerCategory from "./BannerCategory";
 // import Recommendation from "@components/Recommendation/Recommendation";
 // import ProductsHomePage from "./ProductsHomePage";
 const ProductsHomePage = React.lazy(() => import("./ProductsHomePage"));
-import Loader from "@common/LoaderComponent/LoaderComponent";
 
 // import SellingProducts from "@components/MobileCategory/SellingProducts/SellingProducts";
 import "./Home.css";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/test-merge-3
 
 const Home = () => {
     // const handleResize = () => {
@@ -17,9 +19,13 @@ const Home = () => {
     // };
     // const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     return (
+<<<<<<< HEAD
       
 
 <div className="homePage">
+=======
+        <div className="homePage">
+>>>>>>> origin/test-merge-3
             {/* <MobileHomeCategory />
                 
                         <SellingProducts /> */}
@@ -35,8 +41,11 @@ const Home = () => {
             {/* <ProductThreeItem /> */}
             {/* <Recommendation /> */}
         </div>
+<<<<<<< HEAD
 
        
+=======
+>>>>>>> origin/test-merge-3
     );
 };
 

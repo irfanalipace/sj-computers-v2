@@ -12,7 +12,10 @@ import { getUserEmail } from "@services/jwtService";
 import { useFormValidation } from "@hooks/useFormValidation";
 
 import "@pages/Auth/auth.css";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/test-merge-3
 
 const PasswordForm = () => {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
@@ -61,8 +64,12 @@ const PasswordForm = () => {
     }
 
     return (
+<<<<<<< HEAD
      
  <form
+=======
+        <form
+>>>>>>> origin/test-merge-3
             className={`auth-form ${mounted && "slide"} `}
             onSubmit={handleSubmit}
         >
@@ -137,8 +144,11 @@ const PasswordForm = () => {
                 </Link>
             </div>
         </form>
+<<<<<<< HEAD
        
        
+=======
+>>>>>>> origin/test-merge-3
     );
 };
 

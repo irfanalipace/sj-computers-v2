@@ -12,7 +12,6 @@ import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 import { OrderSearchApi, OrderListhApi } from "../../../core/api/order";
 import OrderCard from "@components/OrderPage/OrderProducts";
 import OrderInvoiceCard from "@components/OrderPage/OrderInvoiceCard";
-
 import userDefault from "@images/common/user-default-avatar.png";
 import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -22,10 +21,13 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import "./Account.css";
 import { Select } from "@mantine/core";
 import { Stack } from "react-bootstrap";
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> origin/test-merge-3
 
 const CustomTabs = styled(Tabs)({
     "& .MuiTabs-indicator": {
@@ -156,15 +158,19 @@ const OrderPage = () => {
         ) : null;
     };
     return (
+<<<<<<< HEAD
         
  
  <div className="account-page order-page">
+=======
+        <div className="account-page order-page">
+>>>>>>> origin/test-merge-3
             <div className="container-xl">
                 <Breadcrumb />
                 <div className="row mx-0">
                     <div className="col-sm-4 col-md-8 col-8">
                         <h3 className="account-heading your-order-page">
-                            Your Order 
+                            Your Order
                         </h3>
                     </div>
                     <div className="col-sm-8 col-md-4 col-4 search-product-order-tables">
@@ -262,10 +268,12 @@ const OrderPage = () => {
                                         {}{" "}
                                         {activeTab === 0 ? (
                                             <>
-
-
-                                              {orderDetails?.success_orders?.data.length >= 0 ?  `${orderDetails?.success_orders?.data.length} orders` :    <LoaderComponent />}
-
+                                                {orderDetails?.success_orders
+                                                    ?.data.length >= 0 ? (
+                                                    `${orderDetails?.success_orders?.data.length} orders`
+                                                ) : (
+                                                    <LoaderComponent />
+                                                )}
                                             </>
                                         ) : (
                                             `${orderDetails?.cancel_orders?.total} cancelled order`
@@ -328,18 +336,13 @@ const OrderPage = () => {
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
    
    
        
+=======
+>>>>>>> origin/test-merge-3
     );
 };
 
 export default OrderPage;
-
-
-
-
-
-
-
-

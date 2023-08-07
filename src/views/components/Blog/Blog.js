@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Blog.css";
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
-import policyimage from "@images/Policy/polict-cart-comp.png";
-import TopBar from "../TopBar/TopBar";
-import DOMPurify from "dompurify"; // External library for sanitizing HTML
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
@@ -22,21 +17,10 @@ import {
     faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
-import LoadingOverlay from "react-loading-overlay";
-import styled, { css } from "styled-components";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import meetingimage from "@images/blog/meeting.png";
 import smimage from "@images/blog/smallimage.png";
-import meetingset from "@images/blog/meeting2image.png";
-import meetingset1 from "@images/blog/videoimagemeeting1.png";
-import meetingset2 from "@images/blog/videoimagemeeting2.png";
-import meetingset3 from "@images/blog/videoimagemeeting3.png";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 
-import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-import { useRef } from "react";
 const HeadereLinks = [
     { path: "/", title: "About Us" },
     { path: "/", title: "What We Do?" },
@@ -46,20 +30,16 @@ const HeadereLinks = [
     { path: "/term_services", title: "Privacy Policy" },
     { path: "/", title: "Subscribe" },
 ];
-const nonHeaderRoutes = [""];
-
 
 const Blog = () => {
     const [blogdteails, setBlogDetails] = useState("");
 
     const { blogslug } = useParams();
- 
 
     useEffect(() => {
         setIsLoading(true);
         blogSlugApiblogDetails(blogslug)
             .then((response) => {
-             
                 setBlogDetails(response?.data);
             })
             .catch((error) => {
@@ -135,7 +115,6 @@ const Blog = () => {
                 ? blogdteails.secondary_image
                 : "https://via.placeholder.com/400x400";
 
-          
             imgTag.alt = blogdteails.all_text;
 
             firstH2Tag.insertAdjacentElement("afterend", imgTag);
@@ -161,8 +140,6 @@ const Blog = () => {
     //       }
     //     }
     //   }, [blogdteails]);
-
-  
 
     const [readingTime, setReadingTime] = useState(0);
 
@@ -190,7 +167,7 @@ const Blog = () => {
     //     event.preventDefault();
     //     window.history.pushState(null, null, `#${category_id}`);
     //   };
-  
+
     return (
         <div>
             <>
@@ -255,7 +232,10 @@ const Blog = () => {
                                             </div>
                                             <div className="dive-reight-border">
                                                 <div className="circle-dev-blog">
-                                                    <span> {readingTime} min</span>
+                                                    <span>
+                                                        {" "}
+                                                        {readingTime} min
+                                                    </span>
                                                 </div>
                                                 <div className="date-blog-after-circle">
                                                     <span>
@@ -307,9 +287,7 @@ const Blog = () => {
                                                 <span>Written by SJ Staff</span>
                                             </div>
                                             <div className="div-left-blog-text-writt">
-                                                
                                                 {blogdteails.categories?.map(
-                                                 
                                                     (category, index) => (
                                                         <React.Fragment
                                                             key={category.id}
@@ -369,11 +347,8 @@ const Blog = () => {
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3">
-                                        <div className=''>
-                                            <div
-                                                className="main-dev-card-deprt"
-                                                
-                                            >
+                                        <div className="">
+                                            <div className="main-dev-card-deprt">
                                                 <div className="left-dev-span-stories">
                                                     <span>
                                                         STORIES WE THINK YOU’LL

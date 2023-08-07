@@ -7,7 +7,10 @@ import Loader from "@common/LoaderComponent/OverlayLoader";
 import ProductsByCategory from "./ProductsByCategory";
 
 import "./Category.css";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/test-merge-3
 
 function Category() {
     const [isOpen, setIsOpen] = useState(false);
@@ -16,8 +19,12 @@ function Category() {
         setIsOpen((state) => !state);
     };
     return (
+<<<<<<< HEAD
        
  <div className="category-page">
+=======
+        <div className="category-page">
+>>>>>>> origin/test-merge-3
             <div className="category-page-inner">
                 <div>
                     <Loader isLoading={false} />
@@ -47,9 +54,12 @@ function Category() {
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
 
      
        
+=======
+>>>>>>> origin/test-merge-3
     );
 }
 

@@ -42,7 +42,10 @@ import { USER_TYPE_ENUM } from "./constants";
 import RefundForms from "@components/RefundOrder/RefundForms";
 
 import loginSVG from "@images/login-invitation.png";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/test-merge-3
 
 export default function RefundOrder() {
     const [selectedUserType, setSelectedUserType] = useState(null);
@@ -603,8 +606,12 @@ export default function RefundOrder() {
     };
 
     return (
+<<<<<<< HEAD
      
  <div className="refund-order-page py-5">
+=======
+        <div className="refund-order-page py-5">
+>>>>>>> origin/test-merge-3
             <div className="container">
                 <div className="row flex-column-reverse flex-sm-row mx-0">
                     <div className="col-sm-9 col-12">
@@ -700,7 +707,10 @@ export default function RefundOrder() {
                 />
             )}
         </div>
+<<<<<<< HEAD
        
        
+=======
+>>>>>>> origin/test-merge-3
     );
 }

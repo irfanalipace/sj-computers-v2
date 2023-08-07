@@ -18,11 +18,8 @@ class SiteMapController extends Controller
     {
         $file = public_path(). "/storage/sitemap/sitemap.xml";
 
-        $headers = [
-            'Content-Type' => 'application/xml',
-            'Content-Disposition' => 'attachment; filename="sitemap.xml"',
-        ];
-
-        return response()->download($file, 'sitemap.xml', $headers);
+        return response()->file($file, [
+            'Content-Type' => 'application/xml'
+        ]);
     }
 }

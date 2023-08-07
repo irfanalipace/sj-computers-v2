@@ -5,7 +5,10 @@ import Header from "@components/Auth/Header";
 import Footer from "@components/Auth/Footer";
 
 import "@pages/Auth/auth.css";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/test-merge-3
 
 const Emailsent = () => {
     const [mounted, setMounted] = useState(false);
@@ -16,8 +19,12 @@ const Emailsent = () => {
         };
     }, []);
     return (
+<<<<<<< HEAD
     
      <div>
+=======
+        <div>
+>>>>>>> origin/test-merge-3
             <div className="container form-container">
                 <div className="row">
                     <div className="header-logo">
@@ -30,7 +37,10 @@ const Emailsent = () => {
                         </div>
                         <div
                             className="mb-3"
-                            style={{ textAlign: "center", fontSize: "18px" }}
+                            style={{
+                                textAlign: "center",
+                                fontSize: "18px",
+                            }}
                         >
                             <span>
                                 Please check your inbox we’ve sent a
@@ -41,7 +51,10 @@ const Emailsent = () => {
 
                         <div
                             className="mb-3"
-                            style={{ textAlign: "center", paddingTop: "56px" }}
+                            style={{
+                                textAlign: "center",
+                                paddingTop: "56px",
+                            }}
                         >
                             <Link to={"/login"}>
                                 <button
@@ -96,8 +109,11 @@ const Emailsent = () => {
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
        
      
+=======
+>>>>>>> origin/test-merge-3
     );
 };
 

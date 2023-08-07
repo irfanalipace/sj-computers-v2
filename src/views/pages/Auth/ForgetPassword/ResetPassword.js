@@ -12,7 +12,10 @@ import Loader from "@common/Spinner/Spinner";
 import { useFormValidation } from "@hooks/useFormValidation";
 
 import "@pages/Auth/auth.css";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/test-merge-3
 
 const PasswordForm = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);
@@ -67,7 +70,10 @@ const PasswordForm = () => {
     }
 
     return (
+<<<<<<< HEAD
     
+=======
+>>>>>>> origin/test-merge-3
         <div>
             <div className={`container form-container`} onSubmit={handleSubmit}>
                 <div className="row">
@@ -210,8 +216,11 @@ const PasswordForm = () => {
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
       
        
+=======
+>>>>>>> origin/test-merge-3
     );
 };
 

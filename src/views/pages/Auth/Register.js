@@ -12,10 +12,12 @@ import Loader from "@common/Spinner/Spinner";
 import { register } from "@store/auth/authThunks";
 
 import "@pages/Auth/auth.css";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/test-merge-3
 
 const Register = () => {
-    
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
             name: "",
@@ -73,8 +75,12 @@ const Register = () => {
     }
 
     return (
+<<<<<<< HEAD
        
          <div>
+=======
+        <div>
+>>>>>>> origin/test-merge-3
             <div className="container form-container">
                 <div className="row">
                     <div className="header-logo">
@@ -242,8 +248,11 @@ const Register = () => {
                 <Footer />
             </div>
         </div>
+<<<<<<< HEAD
       
       
+=======
+>>>>>>> origin/test-merge-3
     );
 };
 export default Register;

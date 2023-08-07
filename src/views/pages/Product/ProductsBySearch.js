@@ -9,7 +9,10 @@ import {
 } from "@store/products/productsThunks";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
 import "./ProductsBySearch.css";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/test-merge-3
 
 const ProductsList = () => {
     const { searchString, products, isLoading, currentPage, apiError } =
@@ -27,8 +30,12 @@ const ProductsList = () => {
     }, [searchString]);
 
     return (
+<<<<<<< HEAD
     
   <>
+=======
+        <>
+>>>>>>> origin/test-merge-3
             <div className="search-results container-lg">
                 {products.length > 0 ? (
                     <>
@@ -54,8 +61,11 @@ const ProductsList = () => {
                 )}
             </div>
         </>
+<<<<<<< HEAD
    
       
+=======
+>>>>>>> origin/test-merge-3
     );
 };
 

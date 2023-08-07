@@ -11,7 +11,10 @@ import { loginApi } from "@api/auth";
 
 import "@pages/Auth/auth.css";
 import { getUserEmail, getUserPassword } from "@services/jwtService";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/test-merge-3
 
 const VerifyOTP = () => {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
@@ -98,7 +101,10 @@ const VerifyOTP = () => {
     };
 
     return (
+<<<<<<< HEAD
       
+=======
+>>>>>>> origin/test-merge-3
         <form
             className={`auth-form ${mounted && "slide"} `}
             onSubmit={handleSubmit}
@@ -176,8 +182,11 @@ const VerifyOTP = () => {
                 </Link>
             </p>
         </form>
+<<<<<<< HEAD
   
        
+=======
+>>>>>>> origin/test-merge-3
     );
 };
 export default VerifyOTP;

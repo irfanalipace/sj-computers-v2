@@ -11,7 +11,10 @@ import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 
 import securityIllustration from "@images/security-illustration.png";
 import "./Account.css";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/test-merge-3
 // import "react-datepicker/dist/react-datepicker.css";
 
 const Security = () => {
@@ -52,8 +55,12 @@ const Security = () => {
     }, []);
 
     return (
+<<<<<<< HEAD
     
  <div className="account-page">
+=======
+        <div className="account-page">
+>>>>>>> origin/test-merge-3
             <div className="container-xl">
                 <Breadcrumb />
                 <h3 className="account-heading">Security</h3>
@@ -229,8 +236,11 @@ const Security = () => {
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
        
        
+=======
+>>>>>>> origin/test-merge-3
     );
 };
 

@@ -4,12 +4,19 @@ import EmailForm from "@components/Auth/EmailFormWrapper";
 import Header from "@components/Auth/Header";
 import Footer from "@components/Auth/Footer";
 import "@pages/Auth/auth.css";
+<<<<<<< HEAD
 
 
 const LoginForm = () => {
     return (
     
             <div>
+=======
+
+const LoginForm = () => {
+    return (
+        <div>
+>>>>>>> origin/test-merge-3
             <div className="container form-container">
                 <div className="row">
                     <div className="header-logo">
@@ -55,8 +62,11 @@ const LoginForm = () => {
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
        
        
+=======
+>>>>>>> origin/test-merge-3
     );
 };
 

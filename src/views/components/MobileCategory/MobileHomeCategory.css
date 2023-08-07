@@ -10,11 +10,12 @@
 }
 .link-text-category-mobile {
     color: black;
-    font-family: 'Inter';
+    font-family: "Inter";
     /* padding-top: 71px; */
     font-size: 12px;
     background: white;
     border-radius: 6px;
+    min-height: 170px;
 }
 
 .category-dev-img-section-mobile {
@@ -24,15 +25,15 @@
     margin-left: 9px;
     font-size: 11px;
 }
-.swiper-slider-mobile-category{
-display: flex ;
-background: none !important;
+.swiper-slider-mobile-category {
+    display: flex;
+    background: none !important;
 }
 
-.my-swiper-mobile-category .swiper-button-next{
-display: none !important;
+.my-swiper-mobile-category .swiper-button-next {
+    display: none !important;
 }
-.my-swiper-mobile-category .swiper-button-prev{
+.my-swiper-mobile-category .swiper-button-prev {
     display: none !important;
 }
 .image-container-category {
@@ -42,16 +43,14 @@ display: none !important;
     padding: 4px;
 }
 
-
 .swiper .swiper-pagination {
     position: absolute;
     text-align: center;
-    transition: .3s opacity;
-    transform: translate3d(0,0,0);
+    transition: 0.3s opacity;
+    transform: translate3d(0, 0, 0);
     z-index: 0;
 }
 
 .my-swiper-mobile-category .swiper-pagination-bullet {
     display: none;
-  }
-  
+}

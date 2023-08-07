@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getShippingDetails } from "@store/orders/ordersThunk";
 import { fetchBrands } from "@store/brands/brandsThunks";
 import { fetchCategory } from "@store/category/categoryThunks";
-import { currentState } from "@store/states/statesThunks";
-import { toast } from "react-toastify";
 
 import {
     addToLocalCart,
@@ -45,15 +43,17 @@ export const useInitDataFetching = () => {
     }, [isAuthenticated]);
 
     useEffect(() => {
-        dispatch(fetchCategory());
-        dispatch(fetchBrands());
-        dispatch(getEstimatedDelivery());
+        setTimeout(() => {
+            dispatch(fetchCategory());
+            dispatch(fetchBrands());
+            dispatch(getEstimatedDelivery());
 
-        if (!isAuthenticated) {
-            cartItems.forEach((cartItem) => {
-                dispatch(addToLocalCart({ cartItem })); // adds local cart items to redux store
-            });
-            dispatch(setCartDetails(cartDetails)); // add local store details to redux store
-        }
+            if (!isAuthenticated) {
+                cartItems.forEach((cartItem) => {
+                    dispatch(addToLocalCart({ cartItem })); // adds local cart items to redux store
+                });
+                dispatch(setCartDetails(cartDetails)); // add local store details to redux store
+            }
+        }, 2000); // giving timeout to increase initial page load speed
     }, []);
 };

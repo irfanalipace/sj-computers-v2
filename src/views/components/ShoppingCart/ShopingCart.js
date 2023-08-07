@@ -6,7 +6,10 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { CartItem } from "./CartItem/CartItem";
 
 import "./ShopingCart.css";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/test-merge-3
 
 export const ShopingCart = ({ onFormSubmit, form }) => {
     const cartItems = useSelector((state) => state.cart.cart);
@@ -45,8 +48,12 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
     }, [showModal]);
 
     return (
+<<<<<<< HEAD
     
           <>
+=======
+        <>
+>>>>>>> origin/test-merge-3
             {isLoading ? (
                 <LoaderComponent />
             ) : (
@@ -284,6 +291,9 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                 </div>
             )}
         </>
+<<<<<<< HEAD
    
+=======
+>>>>>>> origin/test-merge-3
     );
 };

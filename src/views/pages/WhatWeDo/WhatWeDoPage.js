@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 import WhatWeDo from '@components/WhatWeDo/WhatWeDo'
 
@@ -11,5 +12,16 @@ const WhatWeDoPage = () => {
  
   )
 }
+=======
+import React from "react";
+import WhatWeDo from "@components/WhatWeDo/WhatWeDo";
+const WhatWeDoPage = () => {
+    return (
+        <div>
+            <WhatWeDo />
+        </div>
+    );
+};
+>>>>>>> origin/test-merge-3
 
-export default WhatWeDoPage
+export default WhatWeDoPage;

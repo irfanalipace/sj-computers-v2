@@ -18,7 +18,10 @@ import mastercard from "@images/common/mastercard.png";
 
 import "./Checkout.css";
 import Discount from "@components/Checkout/Discount/Discount";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/test-merge-3
 
 export default function Checkout() {
     const [accordionOne, setAccordionOne] = useState(false);
@@ -69,7 +72,10 @@ export default function Checkout() {
     }, []);
 
     return (
+<<<<<<< HEAD
      
+=======
+>>>>>>> origin/test-merge-3
         <>
             {loading ? (
                 <Loader />
@@ -90,10 +96,7 @@ export default function Checkout() {
                                             {checkoutDetails.total_items} items)
                                         </h3>
                                     ) : (
-                                        <h3>
-                                           Guest Checkout (
-                                            1 items)
-                                        </h3>
+                                        <h3>Guest Checkout ( 1 items)</h3>
                                     )}
                                 </div>
                             </div>
@@ -208,8 +211,11 @@ export default function Checkout() {
                 </div>
             )}
         </>
+<<<<<<< HEAD
     
       
+=======
+>>>>>>> origin/test-merge-3
     );
 }
 

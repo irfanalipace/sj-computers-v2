@@ -10,7 +10,10 @@ import {
     SET_SELECTED_CATEGORY,
 } from "@store/products/productsSlice";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/test-merge-3
 
 const FilteredProducts = memo(({ category, toggleFilter }) => {
     const {
@@ -92,8 +95,12 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     }, [category]);
 
     return (
+<<<<<<< HEAD
     
  <div className="filter-results">
+=======
+        <div className="filter-results">
+>>>>>>> origin/test-merge-3
             {products.length > 0 ? (
                 <>
                     {category?.name && (
@@ -138,8 +145,11 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                 </>
             )}
         </div>
+<<<<<<< HEAD
       
        
+=======
+>>>>>>> origin/test-merge-3
     );
 });
 

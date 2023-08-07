@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import "./MobileHeader.css";
+import "./BottomNavigation.css";
 
 import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome,faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
-function MobileHeader() {
+import {
+    faHome,
+    faShoppingCart,
+    faUser,
+} from "@fortawesome/free-solid-svg-icons";
+function BottomNavigation() {
     const cartDetails = useSelector((state) => state.cart.details);
     const [isSideMenu, setSideMenu] = useState(false);
     const toggleSidebar = () => {
@@ -14,19 +18,10 @@ function MobileHeader() {
     };
     return (
         <div>
-            <div className="header-mobile">
-                <header className="mobile-header">
-                    {/* <div className="mobile-header__logo">
-        <Link to="/">
-          <img src="Logo" alt="Logo" />
-        </Link>
-      </div> */}
-                    <div className="mobile-header__menu">
-                        {/* <button className="mobile-header__menu-button">
-        <img src="Logo" alt="Menu" />
-        <i className="fa fa-home" aria-hidden="true"></i>
-      </button> */}
-                        <div className="mobile-header__menu-items">
+            <div className="bottom-navigation">
+                <div>
+                    <div className="bottom-navigation__menu">
+                        <div className="bottom-navigation__menu-items">
                             <ul className="ul-item-list-header">
                                 <li>
                                     <Link to="/">
@@ -34,10 +29,10 @@ function MobileHeader() {
                                             className="fa fa-home font-size-mobile-icon"
                                             aria-hidden="true"
                                         ></i> */}
-                                          <FontAwesomeIcon
-                    icon={faHome}
-                    className="font-size-mobile-icon"
-                />
+                                        <FontAwesomeIcon
+                                            icon={faHome}
+                                            className="font-size-mobile-icon"
+                                        />
                                     </Link>
                                 </li>
                                 <li>
@@ -46,12 +41,10 @@ function MobileHeader() {
                                             className="fa fa-user font-size-mobile-icon"
                                             aria-hidden="true"
                                         ></i> */}
-                                         <FontAwesomeIcon
-                    icon={faUser}
-                    className="font-size-mobile-icon">
-
-                    </FontAwesomeIcon>
-                    
+                                        <FontAwesomeIcon
+                                            icon={faUser}
+                                            className="font-size-mobile-icon"
+                                        ></FontAwesomeIcon>
                                     </Link>
                                 </li>
 
@@ -66,11 +59,10 @@ function MobileHeader() {
                                             className="fa fa-shopping-cart font-size-mobile-icon"
                                             aria-hidden="true"
                                         ></i> */}
-                                         <FontAwesomeIcon
-                    icon={faShoppingCart}
-                    className="font-size-mobile-icon">
-
-                    </FontAwesomeIcon>
+                                        <FontAwesomeIcon
+                                            icon={faShoppingCart}
+                                            className="font-size-mobile-icon"
+                                        ></FontAwesomeIcon>
                                     </Link>
                                 </li>
 
@@ -94,16 +86,10 @@ function MobileHeader() {
                             </ul>
                         </div>
                     </div>
-                </header>
-                {/* <Suspense>
-                    <Sidebar
-                        openState={isSideMenu}
-                        toggleSidebar={toggleSidebar}
-                    />
-                </Suspense> */}
+                </div>
             </div>
         </div>
     );
 }
 
-export default MobileHeader;
+export default BottomNavigation;
