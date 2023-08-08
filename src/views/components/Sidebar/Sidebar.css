@@ -5,6 +5,7 @@
     position: fixed;
     transition: all 0.35s ease-out;
     z-index: 4;
+    background-color: white;
 }
 
 .sideMenu-wrapper {
