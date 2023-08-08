@@ -76,8 +76,9 @@ class OrderRepository
 
                 ];
             });
-            return $data;
             DB::commit();
+            return $data;
+            
         } catch (Exception $e) {
             DB::rollBack();
             return $e;
