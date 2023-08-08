@@ -13,7 +13,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
             country: address?.country || "US",
             full_name: address?.full_name || "",
             phone_number: address?.phone_number || "",
-            // email: email?.email || "",
+            email: address?.email || "",
             address: address?.address || "",
             floorAddress: "",
             city: address?.city || "",
@@ -24,6 +24,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
             fieldLengths: {
                 country: { min: 3, max: 50 },
                 full_name: { min: 3, max: 100 },
+                email: { min: 5, max: 100 },
             },
         }
     );

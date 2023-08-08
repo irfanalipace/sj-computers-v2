@@ -6,8 +6,10 @@ import { clearCartLocally } from "@utils/cartHelpers";
 import { CLEAR_CART } from "@store/cart/cartSlice";
 import { PLACING_ORDER, ORDER_PLACED } from "@store/orders/ordersSlice";
 import { sendTokenApi } from "@api/square";
+import { addListToCartApi } from "../../../../../core/api/cart";
 
 import "./SquareForm.css";
+import { response } from "express";
 
 export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
     const dispatch = useDispatch();
@@ -37,7 +39,15 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                     dispatch(PLACING_ORDER());
                     hideCloseBtn();
                     try {
-                        let response = await sendTokenApi({
+
+
+                        // write add list to cart logic here
+                        //here data squre cartitem
+                        // let response = await addListToCartApi({
+                           
+                        // });
+                        // console.log('response the api data',response)
+                        response = await sendTokenApi({
                             source_id: token.token,
                             shipping_address: shippingDetails,
                         });

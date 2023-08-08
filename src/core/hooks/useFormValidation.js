@@ -16,6 +16,7 @@ export function useFormValidation(initialState, { fieldLengths }, submitForm) {
 
     function handleChange(event, _value) {
         const { name, value } = _value || event.target;
+        
         if (typeof FIELD_TYPE_ENUMS[name] === "function") {
             if (FIELD_TYPE_ENUMS[name](value))
                 setValues({
