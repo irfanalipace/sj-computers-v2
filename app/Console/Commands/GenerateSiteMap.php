@@ -106,7 +106,6 @@ class GenerateSiteMap extends Command
         foreach ($blogs as $blog) {
 
             $blogUrl = $baseUrl . '/' . $blog->slug;
-            dd(Url::create($blogUrl));
             $sitemap->add($blogUrl);
         }
 
