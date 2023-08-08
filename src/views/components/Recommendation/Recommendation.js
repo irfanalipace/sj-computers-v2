@@ -8,10 +8,8 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { useState } from "react";
 import { useEffect } from "react";
 
-export default function Recommendation() {
+export default function Recommendation({ products }) {
     const dispatch = useDispatch();
-    const [product, setProduct] = useState(null);
-    const products = useSelector((state) => state.products.products);
     const isLoading = useSelector((state) => state?.products.isLoading);
 
     useEffect(() => {
