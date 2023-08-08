@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import ModelBox from "./ModelBox";
-import "./MobileScreenModel.css";
+import ModalBox from "./ModalBox";
+import "./MobileScreenModal.css";
 import imges1 from "@images/cart-product/location.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
-import ModelUserAuth from "./ModelUserAuth";
+import ModalUserAuth from "./ModalUserAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStates } from "@store/states/statesThunks";
 
-const MobileScreenModel = () => {
+const MobileScreenModal = () => {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
@@ -26,8 +26,11 @@ const MobileScreenModel = () => {
     };
     return (
         <div>
-                {showModal && (
-                <div className="sidebarOverlaymobile" onClick={closeModal}></div>
+            {showModal && (
+                <div
+                    className="sidebarOverlaymobile"
+                    onClick={closeModal}
+                ></div>
             )}
             <header>
                 <div className="color-card-dev mobile-enter-sub-button-screen">
@@ -45,19 +48,24 @@ const MobileScreenModel = () => {
                     </button>
                 </div>
             </header>
-           <div>
-           {isAuthenticated ? (
-                <div>
+            <div>
+                {isAuthenticated ? (
                     <div>
-                        {showModal && <ModelUserAuth closeModal={closeModal} />}
+                        <div>
+                            {showModal && (
+                                <ModalUserAuth closeModal={closeModal} />
+                            )}
+                        </div>
                     </div>
-                </div>
-            ) : (
-                <div> {showModal && <ModelBox closeModal={closeModal} />}</div>
-            )}
-           </div>
+                ) : (
+                    <div>
+                        {" "}
+                        {showModal && <ModalBox closeModal={closeModal} />}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
 
-export default MobileScreenModel;
+export default MobileScreenModal;

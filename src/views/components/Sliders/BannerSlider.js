@@ -2,7 +2,6 @@ import { useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Controller, Navigation } from "swiper";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import ProgressiveImage from "react-progressive-image";
 // import required modules
 import Banner1 from "@images/Banner/homepage-banner-1.webp";
 import Banner2 from "@images/Banner/homepage-banner-2.webp";
@@ -20,6 +19,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "./Slider.css";
 import { useViewportWidth } from "@hooks/useViewportWidth";
+
+// import "react-lazy-load-image-component/src/effects/blur.css";
+
 const Slider = () => {
     const width = useViewportWidth();
     SwiperCore.use([Navigation, Controller]);
@@ -70,41 +72,17 @@ const Slider = () => {
                         <SwiperSlide key={index}>
                             <>
                                 {width > 576 ? (
-                                    <ProgressiveImage
-                                        src={banner.desktop} // High-resolution image URL
-                                        placeholder={banner.desktop} // Low-resolution image URL
-                                    >
-                                        {(src, loading) => (
-                                            <img
-                                                className={`advertisement-img ${
-                                                    loading ? "blur" : ""
-                                                }`}
-                                                src={src}
-                                                alt={"Banner"}
-                                            />
-                                        )}
-                                    </ProgressiveImage>
+                                    <LazyLoadImage
+                                        className="advertisement-img"
+                                        src={banner.desktop}
+                                        alt="Buy ALL Brands Touch Screen Laptops, Gaming Desktop, Business Computer, Best BTO and more We looked at many companies, including Dell and Apple."
+                                    />
                                 ) : (
-                                    <ProgressiveImage
-                                        src={banner.mobile} // High-resolution image URL
-                                        placeholder={banner.mobile} // Low-resolution image URL
-                                    >
-                                        {(src, loading) => (
-                                            <img
-                                                className={` className="d-md-none d-block" ${
-                                                    loading ? "blur" : ""
-                                                }`}
-                                                src={src}
-                                                alt={"mobilePro"}
-                                            />
-                                        )}
-                                    </ProgressiveImage>
-
-                                    // <LazyLoadImage
-                                    //     className="d-md-none d-block"
-                                    //     src={banner.mobile}
-                                    //     alt={"Banner"}
-                                    // />
+                                    <LazyLoadImage
+                                        className="d-md-none d-block"
+                                        src={banner.mobile}
+                                        alt="Buy ALL Brands Touch Screen Laptops, Gaming Desktop, Business Computer, Best BTO and more We looked at many companies, including Dell and Apple."
+                                    />
                                 )}
                             </>
                         </SwiperSlide>

@@ -12,7 +12,6 @@ import { getUserEmail } from "@services/jwtService";
 import { useFormValidation } from "@hooks/useFormValidation";
 
 import "@pages/Auth/auth.css";
-import PageWrapper from "../PageWrapper/PageWrapper";
 
 const PasswordForm = () => {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
@@ -61,83 +60,81 @@ const PasswordForm = () => {
     }
 
     return (
-        <PageWrapper title="SJ | Password Form">
-            <form
-                className={`auth-form ${mounted && "slide"} `}
-                onSubmit={handleSubmit}
-            >
-                <h3 className="login-h3">Sign in</h3>
-                <div className="email-text-verify-form mt-2 mb-1">
-                    {email}
-                    {". "}
-                    <button
-                        className="change-email-btn"
-                        onClick={() => dispatch(RESET_PAGE())}
-                        type="button"
+        <form
+            className={`auth-form ${mounted && "slide"} `}
+            onSubmit={handleSubmit}
+        >
+            <h3 className="login-h3">Sign in</h3>
+            <div className="email-text-verify-form mt-2 mb-1">
+                {email}
+                {". "}
+                <button
+                    className="change-email-btn"
+                    onClick={() => dispatch(RESET_PAGE())}
+                    type="button"
+                >
+                    Change Email ?
+                </button>
+            </div>
+            <div className="mb-3">
+                <label className="password-label" htmlFor="password">
+                    Enter your password
+                </label>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    className="form-control"
+                    placeholder="Enter your password"
+                    value={values.password}
+                    onChange={handleChange}
+                    autoFocus
+                />
+                <div className="d-flex justify-content-end">
+                    <Link
+                        to={"/forget-password"}
+                        className="text-decoration-none mt-2 forget-password-text-loginform"
                     >
-                        Change Email ?
-                    </button>
-                </div>
-                <div className="mb-3">
-                    <label className="password-label" htmlFor="password">
-                        Enter your password
-                    </label>
-                    <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        className="form-control"
-                        placeholder="Enter your password"
-                        value={values.password}
-                        onChange={handleChange}
-                        autoFocus
-                    />
-                    <div className="d-flex justify-content-end">
-                        <Link
-                            to={"/forget-password"}
-                            className="text-decoration-none mt-2 forget-password-text-loginform"
-                        >
-                            Forget password?
-                        </Link>
-                    </div>
-                    {fieldErrors && (
-                        <p className="fs-6 mt-1 text-danger">
-                            {fieldErrors.password || fieldErrors.credentials}
-                        </p>
-                    )}
-                </div>
-                <div className="d-flex justify-content-center w-100">
-                    <button
-                        type="submit"
-                        className=" singinnbutton"
-                        disabled={isLoading}
-                    >
-                        {isLoading ? <Loader /> : "Continue"}
-                    </button>
-                </div>
-                <p className="tetxt-signin">
-                    By continuing, you agree to SJ Computer’s{" "}
-                    <Link to="/term_services" className="text-decoration-none">
-                        Conditions of Use
-                    </Link>{" "}
-                    and{" "}
-                    <Link to="/term_services" className="text-decoration-none">
-                        Privacy Noticee
+                        Forget password?
                     </Link>
-                    .
-                </p>
+                </div>
+                {fieldErrors && (
+                    <p className="fs-6 mt-1 text-danger">
+                        {fieldErrors.password || fieldErrors.credentials}
+                    </p>
+                )}
+            </div>
+            <div className="d-flex justify-content-center w-100">
+                <button
+                    type="submit"
+                    className=" singinnbutton"
+                    disabled={isLoading}
+                >
+                    {isLoading ? <Loader /> : "Continue"}
+                </button>
+            </div>
+            <p className="tetxt-signin">
+                By continuing, you agree to SJ Computer’s{" "}
+                <Link to="/term_services" className="text-decoration-none">
+                    Conditions of Use
+                </Link>{" "}
+                and{" "}
+                <Link to="/term_services" className="text-decoration-none">
+                    Privacy Noticee
+                </Link>
+                .
+            </p>
 
-                <div>
-                    <FontAwesomeIcon
-                        icon={faCaretRight}
-                        className="need-help-singin-arrow"
-                    />
-                    <Link to="" className="text-decoration-none my-text-signin">
-                        Need Help?
-                    </Link>
-                </div>
-            </form>
-        </PageWrapper>
+            <div>
+                <FontAwesomeIcon
+                    icon={faCaretRight}
+                    className="need-help-singin-arrow"
+                />
+                <Link to="" className="text-decoration-none my-text-signin">
+                    Need Help?
+                </Link>
+            </div>
+        </form>
     );
 };
 

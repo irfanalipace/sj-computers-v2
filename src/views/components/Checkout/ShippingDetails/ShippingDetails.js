@@ -5,7 +5,8 @@ import { fetchStates } from "@store/states/statesThunks";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import ShippingDetailsForm from "./ShippingDetailsForm";
 import ShippingButton from "./ShippingButton";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import "./ShippingDetails.css";
 
 export default function ShippingDetails({
@@ -103,7 +104,7 @@ export default function ShippingDetails({
                                     className="new-address"
                                     onClick={() => setNewAddress(true)}
                                 >
-                                    <i className="fa fa-add"></i>Add a new
+                                    <FontAwesomeIcon icon={faAdd} /> Add a new
                                     address
                                 </button>
                             </div>

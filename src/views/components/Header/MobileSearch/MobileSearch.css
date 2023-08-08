@@ -69,6 +69,7 @@
 }
 
 
+
 /* MobileSearch.css */
 
 .search-dev {
@@ -97,3 +98,31 @@
 }
 
 /* Add more styles for other components as needed */
+/* MobileSearch.css */
+
+.collapse-container {
+    /* Add custom styles for the CollapseContainer */
+  }
+  
+  .search-hide-section-body {
+    /* Add custom styles for the search-hide-section-body div */
+  }
+  
+  .search-bar {
+    display: flex;
+    /* Add custom styles for the SearchBar div */
+  }
+  
+  .search-section {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    /* Add other custom styles for the input element */
+  }
+  
+  .search-icon-on-mobile-screen {
+    /* Add custom styles for the search icon span */
+  }
+  
