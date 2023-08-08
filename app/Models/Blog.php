@@ -23,5 +23,13 @@ class Blog extends Model
     {
         return url('storage/'.$value);
     }
+    public function getSecondaryImageAttribute($value)
+    {
+        return url('storage/'.$value);
+    }
+    public function getPrimaryImageAttribute($value)
+    {
+        return url('storage/'.$value);
+    }
 
 }
