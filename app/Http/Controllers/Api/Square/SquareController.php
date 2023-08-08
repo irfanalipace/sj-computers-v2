@@ -31,9 +31,7 @@ use Illuminate\Support\Facades\Artisan;
 class SquareController extends BaseController
 {
     //
-    private $squareClient;
-    private $userId;
-    private $user;
+    private $squareClient, $userId, $user;
     public function __construct(Request $request)
     {
         // Environment value
@@ -107,10 +105,10 @@ class SquareController extends BaseController
                 $result = $api_response->getResult();
 
                 /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
-                $userIdToPass = ($this->userId !== StatusEnum::DUMMY) ? $this->userId : $this->user->id ;
-                $user_type = ($this->userId !== StatusEnum::DUMMY) ? StatusEnum::USER : StatusEnum::GUEST;
+                $userIdToPass = ($this->userId != StatusEnum::DUMMY) ? $this->userId : $this->user->id;
+                $user_type = ($this->userId != StatusEnum::DUMMY) ? StatusEnum::USER : StatusEnum::GUEST;
 
-                $order = $repository->createOrder(array(), $api_response, $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address,$user_type);
+                $order = $repository->createOrder(array(), $api_response, $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type);
                 $orderData['order'] = $order['order'];
 
                 //sending invoice email of the payment to user
@@ -152,11 +150,9 @@ class SquareController extends BaseController
 
                 if ($this->userId != StatusEnum::DUMMY) {
                     User::whereId($this->userId)->update(['square_cus_id' => $customer_id]);
-                }
-                else{
+                } else {
                     Guest::whereId($this->user->id)->update(['square_cus_id' => $customer_id]);
                 }
-
             } else {
                 $errors = $api_response->getErrors();
                 return response()->json(['Code' => 400, 'message' => "Something went wrong while saving customer key"]);
@@ -188,23 +184,31 @@ class SquareController extends BaseController
 
     private function getOrCreateGuestUser($detail)
     {
-        // Check if the email exists in the guest_users table
-        $guestUser = Guest::where('email', $detail['email'])->first();
 
-        // If the guest user does not exist, create a new one
-        if (!$guestUser) {
-            $guestUser = new Guest();
-            $guestUser->ip_address = request()->ip();
-            $guestUser->full_name = $detail['full_name'] ?? null;
-            $guestUser->phone_number = $detail['phone_number'] ?? null;
-            $guestUser->email = $detail['email'];
-            $guestUser->address = $detail['address'] ?? null;
-            $guestUser->city = $detail['city'] ?? null;
-            $guestUser->state = $detail['state'] ?? null;
-            $guestUser->zip_code = $detail['zip_code'] ?? null;
-            $guestUser->country = $detail['country'] ?? null;
-            $guestUser->save();
+        if (isset($detail['email']) && !is_null($detail['email'])) {
+            // Check if the email exists in the guest_users table
+            $guestUser = Guest::where('email', $detail['email'])->first();
+            // If the guest user does not exist, create a new one
+            if (!$guestUser) {
+                $guestUser = new Guest();
+                $guestUser->ip_address = request()->ip();
+                $guestUser->full_name = $detail['full_name'] ?? null;
+                $guestUser->phone_number = $detail['phone_number'] ?? null;
+                $guestUser->email = $detail['email'];
+                $guestUser->address = $detail['address'] ?? null;
+                $guestUser->city = $detail['city'] ?? null;
+                $guestUser->state = $detail['state'] ?? null;
+                $guestUser->zip_code = $detail['zip_code'] ?? null;
+                $guestUser->country = $detail['country'] ?? null;
+                $guestUser->save();
+            }
+        } else {
+
+            return null;
         }
+
+
+
 
         return $guestUser;
     }
