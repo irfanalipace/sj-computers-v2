@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\SitemapGenerator;
 use Spatie\Sitemap\Tags\Url;
+use Spatie\Sitemap\SitemapIndex;
+
 use function Symfony\Component\Translation\t;
 
 class GenerateSiteMap extends Command
@@ -50,7 +52,7 @@ class GenerateSiteMap extends Command
 
         SitemapGenerator::create($baseUrl)->getSitemap();
 
-        $sitemap = Sitemap::create();
+        $sitemap = SitemapIndex::create();
 
         $routes = [
             '/',
@@ -91,10 +93,10 @@ class GenerateSiteMap extends Command
             ->get();
 
 
-        // Add product URLs to the sitemap
+//         Add product URLs to the sitemap
         foreach ($products as $product) {
             $productUrl = $baseUrl . '/products/' . $product->asin;
-            $sitemap->add(Url::create($productUrl));
+            $sitemap->add($productUrl);
         }
 
         $blogs = Blog::select('slug')
@@ -102,12 +104,14 @@ class GenerateSiteMap extends Command
             ->get();
 
         foreach ($blogs as $blog) {
+
             $blogUrl = $baseUrl . '/' . $blog->slug;
-            $sitemap->add(Url::create($blogUrl));
+            dd(Url::create($blogUrl));
+            $sitemap->add($blogUrl);
         }
 
         foreach ($routes as $route) {
-            $sitemap->add(Url::create($baseUrl . $route)); // Use the full URL with the base
+            $sitemap->add($route); // Use the full URL with the base
         }
 
         $xmlContent = $sitemap->render();
