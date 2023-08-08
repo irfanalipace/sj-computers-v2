@@ -16,18 +16,18 @@ class OrderRepository
 {
     use AmazonTrait;
 
-    public function createOrder($data, $response, $userId, $user, $payment_type, $cartData, $cartContent = [], $shippingAddreess)
+    public function createOrder($data, $response, $userId, $user, $payment_type, $cartData, $cartContent = [], $shippingAddreess, $user_type)
     {
         try {
-            $data = DB::transaction(function () use ($data, $response, $userId, $user, $payment_type, $cartData, $cartContent, $shippingAddreess) {
-                $invoice = $this->storeInvoice($payment_type, $data, $response, $userId);
+            $data = DB::transaction(function () use ($data, $response, $userId, $user, $payment_type, $cartData, $cartContent, $shippingAddreess, $user_type) {
+                $invoice = $this->storeInvoice($payment_type, $data, $response, $userId,$user_type);
 
                 //saving order after invoice created
                 $order = [];
 
                 $order['total_amount'] = $cartData['total_amount'];
                 $order['sub_total'] = $cartData['sub_total'];
-                $order['user_id'] = $userId;
+                $order[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $userId;          //user id or guest id
                 $order['invoice_id'] = $invoice->id;
                 $order['status'] = StatusEnum::COMPLETE;
                 $order['shipment_price'] = $cartData['shipment_amount'];
@@ -45,15 +45,28 @@ class OrderRepository
                     ];
                     $productInfo = $this->getAmazonInventory($item->id);
                      if ($productInfo['status']) {
-                         $this->updateAmazonInventory($productInfo, $item->quantity);
+                         $this->updateAmazonInventory($productInfo, $item->quantity,'',false);
                      }
                     OrderItem::create($data);
                 });
 
 
-
                 //saving address of order
-                $OrderAddress = OrderShippingAddress::Create(['country' => $shippingAddreess['country'], 'full_name' => $shippingAddreess['full_name'], 'phone_number' => $shippingAddreess['phone_number'], 'address' => $shippingAddreess['address'], 'city' => $shippingAddreess['city'], 'state' => $shippingAddreess['state'], 'zip_code' => $shippingAddreess['zip_code'], 'user_id' => $userId, 'order_id' => $order->id]);
+                $OrderAddress = OrderShippingAddress::Create(
+                    [
+                        'country' => $shippingAddreess['country'],
+                        'full_name' => $shippingAddreess['full_name'],
+                        'phone_number' => $shippingAddreess['phone_number'],
+                        'email'=> $shippingAddreess['email'] ?? null,
+                        'address' => $shippingAddreess['address'],
+                        'city' => $shippingAddreess['city'],
+                        'state' => $shippingAddreess['state'],
+                        'zip_code' => $shippingAddreess['zip_code'],
+                        $user_type == StatusEnum::USER ? 'user_id' : 'guest_id' => $userId,       //user id or guest id
+                        'user_type' => $user_type,
+                        'order_id' => $order->id
+                    ]
+                );
 
                 $order = Order::find($order->id);
 
@@ -72,7 +85,7 @@ class OrderRepository
     }
 
     //Invoice create
-    protected function storeInvoice($payment_type, $data, $response, $userId)
+    protected function storeInvoice($payment_type, $data, $response, $userId,$user_type)
     {
         switch ($payment_type) {
             case StatusEnum::PAYMENTTYPEPAYPAL:
@@ -99,7 +112,7 @@ class OrderRepository
         $invoice = [];
         $invoice['payer_id'] = $payerID;
         $invoice['payment_type'] = $paymentType;
-        $invoice['user_id'] = $userId;
+        $invoice[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $userId;          //user id or guest id
         $invoice['amount'] =  $amount;
         $invoice['status'] = StatusEnum::SUCCESS;
         $invoice = Invoice::create($invoice);

@@ -44,6 +44,11 @@ return [
             'driver' => 'passport',
             'provider' => 'users',
         ],
+        // Custom Guard for Guest Users
+        'guest-api' => [
+            'driver' => 'session',
+            'provider' => 'guest_users', // The user provider for the guest guard
+        ],
     ],
 
     /*
@@ -73,6 +78,12 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        // Custom User Provider for Guest Users
+        'guest_users' => [
+            'driver' => 'eloquent', // Create a custom driver or use 'eloquent', 'database', etc.
+            'model' => App\Models\Guest::class, // The model for the guest users (if applicable)
+        ],
     ],
 
     /*
