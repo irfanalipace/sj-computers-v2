@@ -1,44 +1,35 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { Suspense } from "react";
-import { BrowserRouter, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React, { lazy, Suspense, useEffect, useState } from "react";
+import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { getToken } from "@services/jwtService";
 import Router from "@src/Routes";
-import { alreadyLoggedIn } from "@store/auth/authThunks";
-import { useInitDataFetching } from "@hooks/useInitDataFetching";
-import TawkTo from "@components/Tawk.To/Messenger";
+const TawkTo = lazy(() => import("@components/Tawk.To/Messenger"));
 import initServices from "@services/initServices";
-
-// import Header from "@components/Header/Header";
 import Header from "@components/Header/Header";
-import Loader from "@common/LoaderComponent/LoaderComponent";
-
 const Footer = React.lazy(() => import("@components/Footer/Footer"));
-
 import "react-toastify/dist/ReactToastify.css";
-import "@fortawesome/fontawesome-free/css/all.css";
-
 import "./App.css";
 
-import ScrollToTop from "./ScrollToTop";
+import ScrollToTop from "@components/ScrollToTop/ScrollToTop";
+import AppWrapper from "@components/AppWrapper/AppWrapper";
 
 function App() {
-    const dispatch = useDispatch();
-    const token = getToken();
-    if (token) dispatch(alreadyLoggedIn(token));
+    const [tawkComponent, setTawkComponent] = useState(<></>);
     initServices.init(); //initialize services
-    useInitDataFetching();
 
-    // const location = useLocation();
-    // ${process.env.REACT_APP_URL}
-    // const hideHeaderFooter = window.location.pathname === `/thank-you`;
-
-    // console.print(hideHeaderFooter, "header and footer")
+    useEffect(() => {
+        setTimeout(() => {
+            let jsx = (
+                <Suspense>
+                    <TawkTo />
+                </Suspense>
+            );
+            setTawkComponent(jsx);
+        }, 7000); // giving timeout to tawk.to to improve initial page speed
+    }, []);
 
     return (
-        <div>
-            <TawkTo />
+        <AppWrapper>
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -65,7 +56,11 @@ function App() {
                     <Footer />
                 </Suspense>
             </BrowserRouter>
-        </div>
+            {tawkComponent}
+            {/* <Suspense>
+                <TawkTo />
+            </Suspense> */}
+        </AppWrapper>
     );
 }
 

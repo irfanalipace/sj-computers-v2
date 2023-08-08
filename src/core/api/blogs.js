@@ -4,7 +4,7 @@ export function getBlogsPagesApi(page = 1, per_page = 12) {
     return new Promise((resolve, reject) => {
         ApiService.get(`/blogs?page=${page}&per_page=${per_page}`)
             .then((response) => {
-                console.log("blogs.data", response.data);
+                
                 resolve(response);
             })
             .catch((error) => {
@@ -19,7 +19,7 @@ export function getBlogsHeaderPagesApi(page = 1, per_page = 3) {
     return new Promise((resolve, reject) => {
         ApiService.get(`/blogs?page=${page}&per_page=${per_page}`)
             .then((response) => {
-                console.log("blogs.data", response.data);
+        
                 resolve(response);
             })
             .catch((error) => {

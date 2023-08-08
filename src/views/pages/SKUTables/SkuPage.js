@@ -4,7 +4,7 @@ import { SkuTables } from "@components/SKU/SkuTables";
 import { SkuProducts } from "@components/SKU/SkuProducts";
 
 const SkuPage = () => {
-const [reRender, setRender] = useState(0)
+    const [reRender, setRender] = useState(0);
     return (
         <div className="sku-page-container container-xxl">
             <Row>

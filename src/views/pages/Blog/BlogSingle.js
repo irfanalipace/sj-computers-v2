@@ -4,9 +4,12 @@ import SingleBlog from '@components/Blog/SingleBlog/SingleBlog'
 
 const BlogSingle = () => {
   return (
-    <div>
-   <SingleBlog />
-    </div>
+    
+  
+ 
+     <SingleBlog />
+
+  
   )
 }
 

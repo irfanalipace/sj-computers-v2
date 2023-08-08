@@ -28,7 +28,10 @@ const Emailsent = () => {
                         </div>
                         <div
                             className="mb-3"
-                            style={{ textAlign: "center", fontSize: "18px" }}
+                            style={{
+                                textAlign: "center",
+                                fontSize: "18px",
+                            }}
                         >
                             <span>
                                 Please check your inbox we’ve sent a
@@ -39,7 +42,10 @@ const Emailsent = () => {
 
                         <div
                             className="mb-3"
-                            style={{ textAlign: "center", paddingTop: "56px" }}
+                            style={{
+                                textAlign: "center",
+                                paddingTop: "56px",
+                            }}
                         >
                             <Link to={"/login"}>
                                 <button

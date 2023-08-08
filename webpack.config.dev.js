@@ -56,7 +56,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "public/js"),
         publicPath: "/js/",
-        filename: "app.js",
+        filename: "main.js",
     },
 
     devServer: {
@@ -67,5 +67,5 @@ module.exports = {
         port: 3000,
         historyApiFallback: true,
     },
-    plugins: [new CaseSensitivePathsPlugin({ debug: true }), new Dotenv()],
+    plugins: [new CaseSensitivePathsPlugin(), new Dotenv()],
 };

@@ -6,8 +6,9 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./SearchAccordian.css";
 import { makeStyles } from "@material-ui/core/styles";
-import styled from "styled-components";
+// import styled from "styled-components";
 import { useState } from "react";
+
 const SearchAccordian = () => {
     const [search, setSearch] = useState("");
     const [expanded, setExpanded] = React.useState(false);
@@ -44,11 +45,11 @@ const SearchAccordian = () => {
         <div className={classes.root}>
             <form onSubmit={handleSearch}>
                 <div className="search-hide-section-body">
-                    <SearchBar>
+                    <SearchBar className='search-acorditions-withorder-pace-data'>
                         <Input
                             className="search-section"
                             type="text"
-                            placeholder="Search"
+                            placeholder="Search "
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                         />
@@ -62,7 +63,7 @@ const SearchAccordian = () => {
                                 onClick={handleSearch}
                             ></i>
                         </span>
-                    </SearchBar>
+                    </SearchBar >
                 </div>
             </form>
             <Accordion
@@ -226,17 +227,17 @@ const SearchAccordian = () => {
         </div>
     );
 };
-const SearchBar = styled.div`
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
-`;
-const Input = styled.input`
-    width: 330px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-`;
+// const SearchBar = styled.div`
+//     display: flex;
+//     align-items: center;
+//     width: 100%;
+//     margin-bottom: 20px;
+// `;
+// const Input = styled.input`
+//     width: 330px;
+//     padding: 10px;
+//     border-radius: 5px;
+//     border: 1px solid #ccc;
+//     font-size: 16px;
+// `;
 export default SearchAccordian;

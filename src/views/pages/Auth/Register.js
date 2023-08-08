@@ -14,7 +14,6 @@ import { register } from "@store/auth/authThunks";
 import "@pages/Auth/auth.css";
 
 const Register = () => {
-    
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
             name: "",

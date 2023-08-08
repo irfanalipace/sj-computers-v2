@@ -223,7 +223,20 @@ li.policy-listitem {
     }
     
 } */
-
+.div-left-blog-text-writt {
+    display: flex;
+    margin-top: 12px;
+}
+.div-left-blog-text-writt a{
+    background: none;
+    border: none;
+    color: white;
+    /* border-right: white; */
+  
+    margin-right: 12px;
+   
+    /* margin-left: -7px; */
+}
 .hover-text-color-policy-comp {
     color: white !important;
 }
@@ -326,6 +339,12 @@ div.sticky {
     color: white;
     padding-right: 8px;
 }
+.vertical-line-blogs {
+    margin-right: 8px;
+    width: 1px;
+    height: 19px;
+    background-color: white;
+}
 .div-left-blog-text-written {
     bottom: 0;
     font-family: "Inter";
@@ -335,7 +354,7 @@ div.sticky {
     line-height: 12px;
     color: #dddddd;
     top: 03;
-    margin-top: 94px;
+    margin-top: 76px;
 }
 .background-image-lin-dve img {
     width: 1141px;
@@ -344,6 +363,7 @@ div.sticky {
     max-height: 100%;
     margin-bottom: 20px;
     margin-top: 19px;
+    margin-left: -21px;
 }
 .image-cainter-dev {
     padding-left: 45px;
@@ -509,6 +529,7 @@ div.sticky {
     margin-bottom: 12px;
     background: rgba(49, 130, 67, 0.1);
 }
+
 div.sticky {
     position: -webkit-sticky;
     position: sticky;
@@ -808,6 +829,13 @@ div.sticky {
     font-size: 14px;
 }
 
+@media screen and (min-width: 900px) and (max-width: 1376px) {
+    #blog-content {
+        /* width: 389px; */
+        margin-left: 74px;
+        margin-bottom: 20px;
+    }
+}
 @media screen and (max-width: 1003px) {
     .menuBar-policy {
         display: flex;
@@ -889,19 +917,52 @@ div.sticky {
         color: #ffffff;
     }
 }
+
+
+
+@media screen and (min-width: 730px) and (max-width: 900px) {
+    #blog-content {
+        width: 400px;
+        margin-left: 119px;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 730px) {
+.main-dev-card-deprt {
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    margin-left: 0px;
+    top: 0px;
+    background: rgba(49, 130, 67, 0.1);
+}
+}
 @media screen and (max-width: 600px) {
     .dive-reight-border {
-        display: none;
+        border-right:none;
     }
     .dev-left-blog-p span {
         font-size: 15px;
+    }.div-left-blog-text {
+   
+        color: white;
+        width: 100%;
     }
     .dev-left-blog-p {
         margin-top: 11px;
         padding-right: 0px;
+    }.heading-data-title-image {
+        font-size: 21px;
     }
     .div-left-blog-text-written {
         margin-top: 25px;
+    }.div-left-blog-text-writt a {
+        font-size: 11px;
+     
+    }.background-image-lin-dve img {
+    
+        margin-left: -21px;
     }
 
     .content-image-data-paragrap img {
@@ -931,14 +992,7 @@ div.sticky {
     .dev-container-side {
         padding: 24px;
     }
-    .main-dev-card-deprt {
-        width: 100%;
-        height: 100%;
-        left: 0px;
-        margin-left: 0px;
-        top: 0px;
-        background: rgba(49, 130, 67, 0.1);
-    }
+
 
     .dev-card-for-sj-computer-data span {
         text-align: center;

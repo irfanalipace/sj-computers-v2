@@ -44,6 +44,8 @@ const PolicyComponets = () => {
         PageTitle = "Privacy Policy";
     } else if (pageName === "shipping_policy") {
         PageTitle = "Shipping Policy";
+    } else if (pageName === "about_us") {
+        PageTitle = "About Us";
     } else {
         pageName = pageName;
     }
@@ -70,98 +72,93 @@ const PolicyComponets = () => {
     }, [location.pathname]);
 
     return (
-        <div>
-            {/* <Header /> */}
-            <div className="policy-background-color">
-                <div className="row">
-                    <div>
-                        <header className="topBar px-3 policy-header-topbar">
-                            <div className="topBar-inner-policy">
-                                <div className="menuBar-policy">
-                                    <ul className="text-decoration-none policy-menu-item-list">
-                                        {HeadereLinks.map((link, index) => (
-                                            <li
-                                                className="policy-listitem"
-                                                key={index}
+        <div className="policy-background-color">
+            <div className="row">
+                <div>
+                    <header className="topBar px-3 policy-header-topbar">
+                        <div className="topBar-inner-policy">
+                            <div className="menuBar-policy">
+                                <ul className="text-decoration-none policy-menu-item-list">
+                                    {HeadereLinks.map((link, index) => (
+                                        <li
+                                            className="policy-listitem"
+                                            key={index}
+                                        >
+                                            <Link
+                                                to={link.path}
+                                                className="text-decoration-none text-color hover-effect-sets-topbar hover-text-color-policy-comp"
+                                            >
+                                                {link.title}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    </header>
+                </div>
+            </div>
+            <div className="policyset-container-dev">
+                <div className="">
+                    <div className="row">
+                        <div className="col-lg-3 col-md-6 col-sm-8 text-color-all-text">
+                            <span className="privacy-policy-text-dev">
+                                {PageTitle}
+                            </span>
+                            <div className="cart-dev-policy-section">
+                                <div className="card-policy-coponents">
+                                    <img src={policyimage} alt="" />
+                                    <div className="text-span-policy-dev">
+                                        <span className="text-color-all-text-span">
+                                            {" "}
+                                            Want to check the status of your
+                                            order? Go to Your Orders to find
+                                            tracking information and order
+                                            details
+                                        </span>
+                                        <div className="order-button-policy">
+                                            <button
+                                                onClick={() =>
+                                                    navigate("/account/orders")
+                                                }
+                                                className="policy-card-order-button"
                                             >
                                                 <Link
-                                                    to={link.path}
-                                                    className="text-decoration-none text-color hover-effect-sets-topbar hover-text-color-policy-comp"
+                                                    to={"/account/orders"}
+                                                    style={{
+                                                        textDecoration: "none",
+                                                        color: "#ffffff",
+                                                    }}
                                                 >
-                                                    {link.title}
+                                                    Order
                                                 </Link>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        </header>
-                    </div>
-                </div>
-                <div className="policyset-container-dev">
-                    <div className="">
-                        <div className="row">
-                            <div className="col-lg-3 col-md-6 col-sm-8 text-color-all-text">
-                                <span className="privacy-policy-text-dev">
-                                    {PageTitle}
-                                </span>
-                                <div className="cart-dev-policy-section">
-                                    <div className="card-policy-coponents">
-                                        <img src={policyimage} alt="" />
-                                        <div className="text-span-policy-dev">
-                                            <span className="text-color-all-text-span">
-                                                {" "}
-                                                Want to check the status of your
-                                                order? Go to Your Orders to find
-                                                tracking information and order
-                                                details
-                                            </span>
-                                            <div className="order-button-policy">
-                                                <button
-                                                    onClick={() =>
-                                                        navigate(
-                                                            "/account/orders"
-                                                        )
-                                                    }
-                                                    className="policy-card-order-button"
-                                                >
-                                                    <Link
-                                                        to={"/account/orders"}
-                                                        style={{
-                                                            textDecoration:
-                                                                "none",
-                                                            color: "#ffffff",
-                                                        }}
-                                                    >
-                                                        Order
-                                                    </Link>
-                                                </button>
-                                            </div>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                className="col-lg-8 col-md-10 col-sm-12 text-color-all-text text-dev-section-dev "
-                                style={{ marginBottom: "44px" }}
-                            >
-                                <div>
-                                    <p className="" style={{ color: "white" }}>
-                                        {isLoading ? (
-                                            <>
-                                                <Loader />
-                                            </>
-                                        ) : (
-                                            <div
+                        </div>
+                        <div
+                            className="col-lg-8 col-md-10 col-sm-12 text-color-all-text text-dev-section-dev "
+                            style={{ marginBottom: "44px" }}
+                        >
+                            <div>
+                                <p className="" style={{ color: "white" }}>
+                                    {isLoading ? (
+                                        <>
+                                            <Loader />
+                                        </>
+                                    ) : (
+                                        <div
                                             className="dev-p-h-section-dev-data"
-                                                style={{ lineHeight: "27px" }}
-                                                dangerouslySetInnerHTML={{
-                                                    __html: htmlContent,
-                                                }}
-                                            />
-                                        )}
-                                    </p>
-                                    {/* <ul className="policy-item-data">
+                                            style={{ lineHeight: "27px" }}
+                                            dangerouslySetInnerHTML={{
+                                                __html: htmlContent,
+                                            }}
+                                        />
+                                    )}
+                                </p>
+                                {/* <ul className="policy-item-data">
                               
                        
                             <li>
@@ -174,19 +171,18 @@ const PolicyComponets = () => {
                           For products purchased from the SJ Computers Global Store, see SJ Computers Returns. For more information on refund timing and amounts (including partial refunds and restocking fees), see Refunds. If you have returned an item to Amazon by mistake or included something not intended for Amazon in a return, see Mistaken Returns. 
                             </li>
                             </ul> */}
-                                    <div className="">
-                                        {/* <span className="conditional-granti">Unconditional Satisfaction Guarantee</span> */}
-                                        <div style={{}}>
-                                            {/* <span className="conditional-granti-text">If you're not completely satisfied with these brands at any time, we are happy to give you a full refund: Buttoned Down Core 10 Moon and Back Obsidian</span> */}
-                                        </div>
-                                        <div>
-                                            {/* <ul className="policy-items-cart-sction2-dev">
+                                <div className="">
+                                    {/* <span className="conditional-granti">Unconditional Satisfaction Guarantee</span> */}
+                                    <div style={{}}>
+                                        {/* <span className="conditional-granti-text">If you're not completely satisfied with these brands at any time, we are happy to give you a full refund: Buttoned Down Core 10 Moon and Back Obsidian</span> */}
+                                    </div>
+                                    <div>
+                                        {/* <ul className="policy-items-cart-sction2-dev">
                                         <li className="line-height-dev-ul">Buttoned Down</li>
                                         <li className="line-height-dev-ul">Core 10</li>
                                         <li className="line-height-dev-ul">Moon and Back</li>
                                         <li className="line-height-dev-ul">Obsidian</li>
                                         </ul> */}
-                                        </div>
                                     </div>
                                 </div>
                             </div>

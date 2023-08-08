@@ -10,7 +10,6 @@ import Profile from "./Profile";
 
 import "./Account.css";
 
-
 const Account = () => {
     return (
         <div className="account-page">
@@ -75,7 +74,6 @@ const Account = () => {
                     </Link> */}
                 </div>
             </div>
-      
         </div>
     );
 };
