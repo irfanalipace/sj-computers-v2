@@ -18,4 +18,10 @@ class Blog extends Model
     public function categories(){
         return $this->belongsToMany(Category::class,'blogs_categories');
     }
+
+    public function getThumbnailImageAttribute($value)
+    {
+        return url('storage/'.$value);
+    }
+
 }
