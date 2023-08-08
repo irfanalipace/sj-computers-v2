@@ -23,9 +23,16 @@ class CardRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'source_id' => ['required',],
-            'shipping_address' => ['required',]
+        $rules = [
+            'source_id' => ['required'],
+            'shipping_address' => ['required', 'array'],
         ];
+
+        // If the user is a guest, add email as a required field
+        if (!$this->user()) {
+            $rules['shipping_address.email'] = ['required', 'email'];
+        }
+
+        return $rules;
     }
 }
