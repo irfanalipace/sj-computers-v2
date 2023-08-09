@@ -3,7 +3,7 @@ import {
     validateForm,
     validateZipCode,
     validatePhoneNumber,
-    validateUntherizeForm
+   
 } from "@utils/formHelpers";
 
 const FIELD_TYPE_ENUMS = {
