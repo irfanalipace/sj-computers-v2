@@ -60,7 +60,7 @@ class SquareController extends BaseController
         try {
 
             $idempotencyKey = uniqid();
-
+                    dd($this->user);
             //create customer || retrieve customer if already added
             if ($this->user->square_cus_id == null) {
                 $customer = $this->createCustomer();
