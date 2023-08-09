@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: false, // Initial state of the toggle
+  checkout: false, 
 };
 
 const toggleSlice = createSlice({
@@ -9,7 +9,7 @@ const toggleSlice = createSlice({
   initialState,
   reducers: {
     toggle: (state) => {
-      state.value = !state.value; // Toggle the value between true and false
+      state.value = !state.value; 
     },
   },
 });

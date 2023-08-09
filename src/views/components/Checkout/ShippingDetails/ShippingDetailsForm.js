@@ -53,9 +53,11 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
 
     const submitShippingDetails = (e) => {
         e.preventDefault();
+        
         let params = { ...values, permanent_address: permanentAddress };
         console.print("@@params: ", params);
         if (permanentAddress) dispatch(setShippingDetails(params, hideForm));
+        
         else {
             dispatch(SET_SHIPPING_DETAILS(params));
             hideForm();
@@ -70,10 +72,6 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
         handleHeight();
     }, []);
     
-
-
-
-
 
     return (
         <div>
