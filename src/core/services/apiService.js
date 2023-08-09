@@ -28,6 +28,14 @@ const ApiService = {
     },
 
     /**
+     * Set the Authorization header for each request
+     */
+
+    setAuthorization(token) {
+        this.instance.defaults.headers.Authorization = "Bearer " + token;
+    },
+
+    /**
      * Set the default Base URL of api requests
      */
 
