@@ -18,6 +18,7 @@ export const getToken = () => {
         return token;
     }
 };
+
 export const saveToken = (token) => {
     const encodedToken = btoa(token);
     window.localStorage.setItem(TOKEN, encodedToken);
@@ -27,6 +28,7 @@ export const saveUser = (user) => {
     const userDetails = { ...user, name: user.name || user.user };
     window.localStorage.setItem(USER, JSON.stringify(userDetails));
 };
+
 export const saveUserName = (name) => {
     let user = getUser();
     user = { ...user, name };
@@ -38,6 +40,7 @@ export const saveUserImage = (profile_pic) => {
     user = { ...user, profile_pic };
     saveUser(user);
 };
+
 export const saveUserID = (id) => {
     let user = getUser();
     user = { ...user, id };
@@ -47,6 +50,7 @@ export const saveUserID = (id) => {
 export const saveUserState = (userState) => {
     window.localStorage.setItem(USER_STATE, JSON.stringify(userState));
 };
+
 export const saveUserEmail = (email) => {
     let user = getUser();
     user = { ...user, email };
