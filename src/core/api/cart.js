@@ -17,9 +17,12 @@ export function addToCartApi(data) {
     });
 }
 
+
+
 export function addListToCartApi(cartItems) {
+    console.log('cartitemmmm' , cartItems)
     return new Promise((resolve, reject) => {
-        ApiService.post(`/store-local-storage-items`, {cartItems})
+        ApiService.post(`/store-local-storage-items`, {cartItems: [...cartItems]})
             .then((response) => {
                 console.print(
                     "file: states.js | addListToCartApi| response",

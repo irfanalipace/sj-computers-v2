@@ -38,21 +38,25 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
 
     const handleClick = () => {
         setShowModal(true);
+        
     };
 
     const handleCloseModal = () => {
         setShowModal(false);
+        
     };
 
     const handleClickOutside = (event) => {
         if (modalRef.current && !modalRef.current.contains(event.target)) {
             setShowModal(false);
+            toggleSidebar(false)
         }
     };
 
     useEffect(() => {
         if (showModal) {
             document.addEventListener("mousedown", handleClickOutside);
+            
         } else {
             document.removeEventListener("mousedown", handleClickOutside);
         }
@@ -232,7 +236,8 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                     onClick={handleClick}
                                                 >
                                                     <button className="processed-button">
-                                                        Proceed to checkout ( 1
+                                                    Proceed to checkout (
+                                                        {details?.total_items}{" "}
                                                         item)
                                                     </button>
                                                 </Link>

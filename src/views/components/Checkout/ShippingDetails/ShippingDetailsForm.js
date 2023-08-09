@@ -8,6 +8,7 @@ import Loader from "@common/LoaderComponent/LoaderComponent";
 import ShippingButton from "./ShippingButton";
 
 function ShippingDetailsForm({ address, handleHeight, hideForm }) {
+    
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
             country: address?.country || "US",
@@ -69,6 +70,11 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
         handleHeight();
     }, []);
     
+
+
+
+
+
     return (
         <div>
             {settingAdress ? (

@@ -7,6 +7,7 @@ import { CartItem } from "./CartItem/CartItem";
 
 import "./ShopingCart.css";
 import { CheckoutBox } from "./CheckOut/CheckoutBox";
+import CartOverlay from "../Header/CartOverlay";
 
 export const ShopingCart = ({ onFormSubmit, form }) => {
     const cartItems = useSelector((state) => state.cart.cart);
@@ -161,12 +162,13 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                         </button>
                                                     </div>
 
-                                                    {showModal && (
+                                                    {showModal &&  (
                                                         <div className="overlay-model-checkout-model">
                                                             <div
                                                                 className="overlay-modal-checkout-model-checkout-model"
                                                                 ref={modalRef}
                                                             >
+                                                              
                                                                 <CheckoutBox />
                                                                 {/* <div className="modal-content">
                                                                     <form>
