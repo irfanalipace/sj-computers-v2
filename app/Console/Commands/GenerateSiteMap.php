@@ -56,58 +56,58 @@ class GenerateSiteMap extends Command
 
         $routes = [
             '/',
-            '/login',
-            '/register',
-            '/email-sent',
-            '/forget-password',
-            '/forgot_password',
+//            '/login',
+//            '/register',
+//            '/email-sent',
+//            '/forget-password',
+//            '/forgot_password',
 //            '/products/{productId}',
-            '/products/search',
+//            '/products/search',
 //            '/category/{categorySlug}',
-            '/account',
-            '/account/profile',
-            '/account/update-address',
-            '/account/update-password',
-            '/account/orders',
-            '/cart',
-            '/checkout/{productId}',
-            '/privacy_policy',
-            '/shipping_policy',
-            '/blog',
-            '/blog-page',
-            '/about-us',
-            '/what-we-do',
-            '/return_refund_policy',
-            '/term_services',
-            '/checkout',
-            '/contact',
-            '/success-transaction',
-            '/thank-you',
-            '/test',
-            '/sku',
+//            '/account',
+//            '/account/profile',
+//            '/account/update-address',
+//            '/account/update-password',
+//            '/account/orders',
+//            '/cart',
+//            '/checkout/{productId}',
+//            '/privacy_policy',
+//            '/shipping_policy',
+//            '/blog',
+//            '/blog-page',
+//            '/about-us',
+//            '/what-we-do',
+//            '/return_refund_policy',
+//            '/term_services',
+//            '/checkout',
+//            '/contact',
+//            '/success-transaction',
+//            '/thank-you',
+//            '/test',
+//            '/sku',
         ];
-
-        $products = Product::select('asin')
-            ->where('quantity','>',0)
-            ->where('status',1)
-            ->get();
+//
+//        $products = Product::select('asin')
+//            ->where('quantity','>',0)
+//            ->where('status',1)
+//            ->get();
 
 
 //         Add product URLs to the sitemap
-        foreach ($products as $product) {
-            $productUrl = $baseUrl . '/products/' . $product->asin;
-            $sitemap->add($productUrl);
-        }
+//        foreach ($products as $product) {
+//            $productUrl = $baseUrl . '/products/' . $product->asin;
+//            $sitemap->add($productUrl);
+//        }
 
-        $blogs = Blog::select('slug')
-            ->where('status',Blog::PUBLISHED)
-            ->get();
-
-        foreach ($blogs as $blog) {
-
-            $blogUrl = $baseUrl . '/' . $blog->slug;
-            $sitemap->add($blogUrl);
-        }
+//        $blogs = Blog::select('slug')
+//            ->where('status',Blog::PUBLISHED)
+//            ->get();
+//
+//        foreach ($blogs as $blog) {
+//
+//            $blogUrl = $baseUrl . '/' . $blog->slug;
+//            $sitemap->add($blogUrl);
+//        }
 
         foreach ($routes as $route) {
             $sitemap->add($route); // Use the full URL with the base
