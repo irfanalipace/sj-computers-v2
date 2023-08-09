@@ -61,7 +61,7 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                     hideCloseBtn();
                     try {
                         let cartItemss = getCartItems()
-                        console.log('cartttttt' , cartItemss)
+                       
                         /// add to cart item list api
                         const cartData =  cartItemss.map(item => ({                          
                             product_id: item.id,
