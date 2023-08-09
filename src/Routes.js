@@ -298,11 +298,11 @@ const Router = () => {
         {
             path: "/thank-you",
             element: (
-                <ProtectedRoute>
+               
                     <PageWrapper>
                         <ThankYou />
                     </PageWrapper>
-                </ProtectedRoute>
+               
             ),
         },
 

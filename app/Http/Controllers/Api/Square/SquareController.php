@@ -42,16 +42,16 @@ class SquareController extends BaseController
             'accessToken' => config('app.square_token') ?? 'EAAAECb1ai32160Bz6Aepr3tfyTPPA_jTpGVMgIclNbbyyUVMA0GoauqveDOpLs7',
             'environment' => $environment,
         ]);
-
-        if ($this->user) {
-            $this->user = Auth::guard('api')->user();
+        $this->user = Auth::guard('api')->user();
+        if ($this->user) {           
             $this->userId = $this->user->id;
         } else {
-
+           
             $guestUser = $this->getOrCreateGuestUser($request->shipping_address);
             $this->user = $guestUser;
             $this->userId = StatusEnum::DUMMY;
         }
+        
     }
 
     // charge process
