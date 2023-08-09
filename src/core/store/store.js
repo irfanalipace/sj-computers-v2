@@ -8,6 +8,7 @@ import brandsReducer from "@store/brands/brandsSlice";
 import cartReducer from "@store/cart/cartSlice";
 import ordersReducer from "@store/orders/ordersSlice";
 
+
 const store = configureStore({
     reducer: {
         auth: authReducer,
@@ -18,6 +19,7 @@ const store = configureStore({
         cart: cartReducer,
         orders: ordersReducer,
         // Add additional reducers for other features here
+        // reducer: toggleSlice.reducer,
     },
     middleware: [thunkMiddleware],
 });

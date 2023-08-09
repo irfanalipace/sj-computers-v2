@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { CartItem } from "./CartItem/CartItem";
-
+import toggleSlice from "../../../core/store/toggle/toggleSlice";
 import "./ShopingCart.css";
 import { CheckoutBox } from "./CheckOut/CheckoutBox";
 import CartOverlay from "../Header/CartOverlay";
@@ -19,6 +19,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
     const [showModal, setShowModal] = useState(false);
     const modalRef = useRef(null);
 
+    
     const handleClick = () => {
         setShowModal(true);
     };
