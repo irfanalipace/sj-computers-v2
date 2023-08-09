@@ -8,6 +8,7 @@ import { ProductImage } from "@components/Product/ProductImage/ProductImage";
 import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
 import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
 import Recommendation from "@components/Recommendation/Recommendation";
+import NotFound from "../NotFound/NotFound";
 
 import "./Product.css";
 
@@ -20,7 +21,7 @@ export default function Product() {
 
     useEffect(() => {
         getProductDetails();
-    }, [productId, products]);
+    }, [productId]);
 
     const getProductDetails = async () => {
         const filteredProduct = products.filter(
@@ -31,46 +32,49 @@ export default function Product() {
             setProductImages(filteredProduct?.image);
         } else {
             setIsLoading(true);
-
             try {
                 const response = await productDetailsbyAsinApi(productId);
                 setProduct(response.data);
                 setProductImages(response?.data?.image);
-            } catch (error) {}
-            setIsLoading(false);
+                setIsLoading(false);
+            } catch (error) {
+                setIsLoading(false);
+            }
         }
     };
 
     const ProductComponent = () => {
         return (
-            <>
-                {product ? (
-                    <div className="row">
-                        <div className="col-12 col-md-4">
-                            <ProductImage ProductImages={productImages} />
-                        </div>
-                        <div className="col-12 col-md-5">
-                            <ProductDetails product={product} />
-                        </div>
-                        <div className="col-12 col-md-3 p-0 m-0">
-                            <CheckOutCard product={{ ...product }} />
-                        </div>
-                    </div>
-                ) : (
-                    <div>
-                        <h4>Product Data Not Found</h4>
-                    </div>
-                )}
-            </>
+            <div className="row">
+                <div className="col-12 col-md-4">
+                    <ProductImage ProductImages={productImages} />
+                </div>
+                <div className="col-12 col-md-5">
+                    <ProductDetails product={product} />
+                </div>
+                <div className="col-12 col-md-3 p-0 m-0">
+                    <CheckOutCard product={{ ...product }} />
+                </div>
+            </div>
         );
     };
 
     return (
-        <div className="product-page ">
-            <div className="product-container container-fluid">
-                {isLoading ? <LoaderComponent /> : <ProductComponent />}
-                <Recommendation />
-            </div>
-        </div>
+        <>
+            {product?.id || isLoading || !products?.length ? (
+                <div className="product-page ">
+                    <div className="product-container container-fluid">
+                        {isLoading || !products?.length ? (
+                            <LoaderComponent />
+                        ) : (
+                            <ProductComponent />
+                        )}
+                        <Recommendation products={products} />
+                    </div>
+                </div>
+            ) : (
+                <NotFound />
+            )}
+        </>
     );
 }

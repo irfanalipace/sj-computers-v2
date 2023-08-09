@@ -43,7 +43,7 @@ class SquareController extends BaseController
             'environment' => $environment,
         ]);
         $this->user = Auth::guard('api')->user();
-        if ($this->user) {           
+        if ($this->user) {
             $this->userId = $this->user->id;
         } else {
            
@@ -206,10 +206,6 @@ class SquareController extends BaseController
 
             return null;
         }
-
-
-
-
         return $guestUser;
     }
 

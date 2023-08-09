@@ -35,6 +35,7 @@ const AboutPage = React.lazy(() => import("@pages/About/AboutPage"));
 const WhatWeDoPage = React.lazy(() => import("@pages/WhatWeDo/WhatWeDoPage"));
 const BlogSingle = React.lazy(() => import("@pages/Blog/BlogSingle"));
 const BlogsDetails = React.lazy(() => import("@pages/Blog/BlogsDetails"));
+import NotFound from "@pages/NotFound/NotFound";
 
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
@@ -336,18 +337,7 @@ const Router = () => {
 
         {
             path: "*",
-            element: (
-                <div>
-                    <div
-                        className="w-100 d-flex justify-content-center align-items-center flex-column"
-                        style={{ height: "500px" }}
-                    >
-                        <h1>404</h1>
-                        <h2>OOPS!</h2>
-                        <h3>Page Not Found</h3>
-                    </div>
-                </div>
-            ),
+            element: <NotFound />,
         },
     ];
 

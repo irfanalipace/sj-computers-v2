@@ -27,12 +27,13 @@ class CardRequest extends FormRequest
             'source_id' => ['required'],
             'shipping_address' => ['required', 'array'],
         ];
+
         // If the user is a guest, add email as a required field
         if (is_null(auth('api')->user())) {
-           
+
             $rules['shipping_address.email'] = ['required', 'email'];
         }
-       
+
         return $rules;
     }
 }

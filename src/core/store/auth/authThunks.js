@@ -40,7 +40,7 @@ import {
     getUser,
     destroyTempKeys,
     saveUserID,
-} from "@services/jwtService";
+} from "@services/authService";
 
 import { clearCartLocally } from "@utils/cartHelpers";
 import { CLEAR_CART } from "@store/cart/cartSlice";

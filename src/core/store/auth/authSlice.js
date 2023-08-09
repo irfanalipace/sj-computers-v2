@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getToken, getUser } from "@services/jwtService";
+import { getToken, getUser } from "@services/authService";
+import ApiService from "@services/apiService";
 
 const token = getToken();
 const user = getUser();
+token && ApiService.setAuthorization(token);
 
 const initialState = {
     user: user ? user : null,

@@ -5,7 +5,7 @@ export function addToCartApi(data) {
         ApiService.post(`/add-to-cart`, data)
             .then((response) => {
                 console.print(
-                    "file: states.js | addToCartApi| response",
+                    "file: cart.js | addToCartApi| response",
                     response
                 );
                 resolve(response);
@@ -25,7 +25,7 @@ export function addListToCartApi(cartItems) {
         ApiService.post(`/store-local-storage-items`, {cartItems: [...cartItems]})
             .then((response) => {
                 console.print(
-                    "file: states.js | addListToCartApi| response",
+                    "file: cart.js | addListToCartApi| response",
                     response
                 );
                 resolve(response);
@@ -42,7 +42,7 @@ export function fetchCartApi() {
         ApiService.get(`/get-items`)
             .then((response) => {
                 console.print(
-                    "file: states.js | fetchCartApi| response",
+                    "file: cart.js | fetchCartApi| response",
                     response
                 );
                 resolve(response);
@@ -61,7 +61,7 @@ export function deleteItemApi({ id }) {
         })
             .then((response) => {
                 console.print(
-                    "file: states.js | deleteItemApi| response",
+                    "file: cart.js | deleteItemApi| response",
                     response
                 );
                 resolve(response);
@@ -81,7 +81,7 @@ export function updateQuantityApi({ id, difference }) {
         })
             .then((response) => {
                 console.print(
-                    "file: states.js | updateQuantityApi| response",
+                    "file: cart.js | updateQuantityApi| response",
                     response
                 );
                 resolve(response);
@@ -98,7 +98,7 @@ export function getDetailsApi() {
         ApiService.get(`/get-details`)
             .then((response) => {
                 console.print(
-                    "file: states.js | getDetailsApi| response",
+                    "file: cart.js | getDetailsApi| response",
                     response
                 );
                 resolve(response);

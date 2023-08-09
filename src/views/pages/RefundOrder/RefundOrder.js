@@ -37,7 +37,7 @@ import {
 } from "@utils/guestSessionHelper";
 import { toast } from "react-toastify";
 import Loader from "@common/Spinner/Spinner";
-import { getUserId } from "@services/jwtService";
+import { getUserId } from "@services/authService";
 import { USER_TYPE_ENUM } from "./constants";
 import RefundForms from "@components/RefundOrder/RefundForms";
 
