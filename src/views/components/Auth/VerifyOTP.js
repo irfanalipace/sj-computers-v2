@@ -10,7 +10,7 @@ import { useFormValidation } from "@hooks/useFormValidation";
 import { loginApi } from "@api/auth";
 
 import "@pages/Auth/auth.css";
-import { getUserEmail, getUserPassword } from "@services/jwtService";
+import { getUserEmail, getUserPassword } from "@services/authService";
 
 const VerifyOTP = () => {
     const { values, handleChange, handleSubmit, errors } = useFormValidation(

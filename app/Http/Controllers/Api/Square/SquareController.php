@@ -42,9 +42,8 @@ class SquareController extends BaseController
             'accessToken' => config('app.square_token') ?? 'EAAAECb1ai32160Bz6Aepr3tfyTPPA_jTpGVMgIclNbbyyUVMA0GoauqveDOpLs7',
             'environment' => $environment,
         ]);
-
+        $this->user = Auth::guard('api')->user();
         if ($this->user) {
-            $this->user = Auth::guard('api')->user();
             $this->userId = $this->user->id;
         } else {
 
@@ -206,10 +205,6 @@ class SquareController extends BaseController
 
             return null;
         }
-
-
-
-
         return $guestUser;
     }
 

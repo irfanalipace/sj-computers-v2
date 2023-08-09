@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { destroyToken } from "@services/jwtService";
+import { destroyToken } from "@services/authService";
 
 /**
  * Service to call HTTP request via Axios
@@ -25,6 +25,14 @@ const ApiService = {
 
     setHeader(header, val) {
         this.instance.defaults.headers[header] = val;
+    },
+
+    /**
+     * Set the Authorization header for each request
+     */
+
+    setAuthorization(token) {
+        this.instance.defaults.headers.Authorization = "Bearer " + token;
     },
 
     /**
@@ -63,6 +71,7 @@ const ApiService = {
                 .catch((error) => {
                     if (error?.response?.status === 401) {
                         destroyToken();
+                        window.location.reload();
                     }
                     if (
                         !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
@@ -95,6 +104,7 @@ const ApiService = {
                     console.print("error status: ", error?.response?.status);
                     if (error?.response?.status === 401) {
                         destroyToken();
+                        window.location.reload();
                     }
                     if (
                         !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
@@ -123,6 +133,7 @@ const ApiService = {
             .catch((error, status) => {
                 if (error?.response?.status === 401) {
                     destroyToken();
+                    window.location.reload();
                 }
                 if (ACCEPTED_ERROR_CODES.includes(error?.response?.status)) {
                     toast.error("Something Went Wrong");
@@ -146,6 +157,7 @@ const ApiService = {
             .catch((error, status) => {
                 if (error?.response?.status === 401) {
                     destroyToken();
+                    window.location.reload();
                 }
                 if (ACCEPTED_ERROR_CODES.includes(error?.response?.status)) {
                     toast.error("Something Went Wrong");
