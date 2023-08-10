@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\SitemapGenerator;
 use Spatie\Sitemap\Tags\Url;
+use Spatie\Sitemap\SitemapIndex;
+
 use function Symfony\Component\Translation\t;
 
 class GenerateSiteMap extends Command
@@ -50,64 +52,65 @@ class GenerateSiteMap extends Command
 
         SitemapGenerator::create($baseUrl)->getSitemap();
 
-        $sitemap = Sitemap::create();
+        $sitemap = SitemapIndex::create();
 
         $routes = [
             '/',
-            '/login',
-            '/register',
-            '/email-sent',
-            '/forget-password',
-            '/forgot_password',
-            '/products/{productId}',
-            '/products/search',
-            '/category/{categorySlug}',
-            '/account',
-            '/account/profile',
-            '/account/update-address',
-            '/account/update-password',
-            '/account/orders',
-            '/cart',
-            '/checkout/{productId}',
-            '/privacy_policy',
-            '/shipping_policy',
-            '/blog',
-            '/blog-page',
-            '/about-us',
-            '/what-we-do',
-            '/return_refund_policy',
-            '/term_services',
-            '/checkout',
-            '/contact',
-            '/success-transaction',
-            '/thank-you',
-            '/test',
-            '/sku',
+//            '/login',
+//            '/register',
+//            '/email-sent',
+//            '/forget-password',
+//            '/forgot_password',
+//            '/products/{productId}',
+//            '/products/search',
+//            '/category/{categorySlug}',
+//            '/account',
+//            '/account/profile',
+//            '/account/update-address',
+//            '/account/update-password',
+//            '/account/orders',
+//            '/cart',
+//            '/checkout/{productId}',
+//            '/privacy_policy',
+//            '/shipping_policy',
+//            '/blog',
+//            '/blog-page',
+//            '/about-us',
+//            '/what-we-do',
+//            '/return_refund_policy',
+//            '/term_services',
+//            '/checkout',
+//            '/contact',
+//            '/success-transaction',
+//            '/thank-you',
+//            '/test',
+//            '/sku',
         ];
+//
+//        $products = Product::select('asin')
+//            ->where('quantity','>',0)
+//            ->where('status',1)
+//            ->get();
 
-        $products = Product::select('asin')
-            ->where('quantity','>',0)
-            ->where('status',1)
-            ->get();
 
+//         Add product URLs to the sitemap
+//        foreach ($products as $product) {
+//            $productUrl = $baseUrl . '/products/' . $product->asin;
+//            $sitemap->add($productUrl);
+//        }
 
-        // Add product URLs to the sitemap
-        foreach ($products as $product) {
-            $productUrl = $baseUrl . '/products/' . $product->asin;
-            $sitemap->add(Url::create($productUrl));
-        }
-
-        $blogs = Blog::select('slug')
-            ->where('status',Blog::PUBLISHED)
-            ->get();
-
-        foreach ($blogs as $blog) {
-            $blogUrl = $baseUrl . '/' . $blog->slug;
-            $sitemap->add(Url::create($blogUrl));
-        }
+//        $blogs = Blog::select('slug')
+//            ->where('status',Blog::PUBLISHED)
+//            ->get();
+//
+//        foreach ($blogs as $blog) {
+//
+//            $blogUrl = $baseUrl . '/' . $blog->slug;
+//            $sitemap->add($blogUrl);
+//        }
 
         foreach ($routes as $route) {
-            $sitemap->add(Url::create($baseUrl . $route)); // Use the full URL with the base
+            $sitemap->add($route); // Use the full URL with the base
         }
 
         $xmlContent = $sitemap->render();

@@ -7,8 +7,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href={{ asset('favicon.png') }} />
-    <meta name="description"
-        content="Buy ALL Brands Touch Screen Laptops, Gaming Desktop, Business Computer, Best BTO and more We looked at many companies, including Dell and Apple." />
     <title>Buy Perfect Gaming PC Computers, Laptops & Accessories | SJ Computers LLC</title>
     <!-- <link rel="preload" src={{ asset('/js/images/mobile-banner-1.webp') }} /> -->
 </head>
@@ -44,11 +42,6 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5KJ773M" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <noscript>
-
-        You need to enable JavaScript to run this app.
-
-    </noscript>
 
 
 </body>
