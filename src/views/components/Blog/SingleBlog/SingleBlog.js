@@ -12,6 +12,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 import "./SingleBlog.css";
+import Blog from "../Blog";
 
 const SingleBlog = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -38,10 +39,12 @@ const SingleBlog = () => {
         setCurrentPage(page);
     };
 
+    
     useEffect(() => {
         setIsLoading(true);
         getBlogsPagesApi(currentPage, itemsPerPage)
             .then((response) => {
+              
                 if (response.data && response.data?.data.length > 0) {
                     setBlogs(response.data?.data);
                     setPageCount(response.data?.last_page);
@@ -112,14 +115,29 @@ const SingleBlog = () => {
                         <div>
                             <div className="meeting-data-blog-save-dev-form">
                                 {/* <img src={blogmeeting} /> */}
-                                <img
+                                {blogs.length > 0 && (
+                                    
+                        <div>
+               
+              
+                    <img
+                        src={blogs[0].primary_image ? blogs[0].primary_image:blogmeeting}
+                        alt={blogs[0].all_text}
+                    />
+              
+                         </div>
+                      )
+                    
+                      }
+                     
+                                {/* <img
                                     src={
                                         singleblog.primary_image
                                             ? singleblog.primary_image
                                             : blogmeeting
                                     }
                                     alt={blogs.all_text}
-                                />
+                                /> */}
                             </div>
                             <div className="mid-graph-pargarph-page-data">
                                 {/* <span>{singleblog.title}</span> */}
@@ -204,7 +222,7 @@ const SingleBlog = () => {
                                                     ? blog.thumbnail_image
                                                     : "https://via.placeholder.com/400x400"
                                             }
-                                            alt={blog.all_text}
+                                            alt={blog.alt_thumbnail_image}
                                         />
 
                                         <div className="dev-data-span-card-dev">
@@ -282,6 +300,8 @@ const SingleBlog = () => {
                     </div>
                 </div>
             )}
+
+           
         </div>
     );
 };

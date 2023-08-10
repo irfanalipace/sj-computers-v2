@@ -357,6 +357,8 @@ div.sticky {
     margin-top: 76px;
 }
 .background-image-lin-dve img {
+    font-size: 14px;
+    color:white;
     width: 1141px;
     max-width: 100%;
     height: 496px;
@@ -478,6 +480,7 @@ div.sticky {
 .them-stori-mage img {
     height: 55px;
     width: 84px;
+    font-size:12px;
 }
 
 .specific-area-loader {
