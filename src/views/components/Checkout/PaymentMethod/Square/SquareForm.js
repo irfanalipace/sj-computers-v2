@@ -1,14 +1,14 @@
 import { PaymentForm, CreditCard } from "react-square-web-payments-sdk";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { getCartItems } from "../../../../../core/utils/cartHelpers";
 import { clearCartLocally } from "@utils/cartHelpers";
 import { CLEAR_CART } from "@store/cart/cartSlice";
 import { PLACING_ORDER, ORDER_PLACED } from "@store/orders/ordersSlice";
 import { sendTokenApi } from "@api/square";
-
+import { addListToCartApi } from "../../../../../core/api/cart";
 import "./SquareForm.css";
-
+import { useState,useEffect } from "react";
 export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -28,7 +28,30 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
             fontSize: "14px",
         },
     };
+    const [mappedData, setMappedData] = useState([]);
+    useEffect(() => {
 
+        async function fetchData() {
+          try {
+            const response = await addListToCartApi({mappedResponse});
+            console.log(response,'mappedResponse data')
+            
+            const mappedResponse = response.map(item => {
+              return {
+                id: item.id,
+                quantity: item.quantity,
+                
+              };
+            });
+        
+            setMappedData(mappedResponse);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        }
+    console.log(mappedData,'mappedDatamappedDatamappedData')
+        fetchData();
+      }, []);
     return (
         <div>
             <PaymentForm
@@ -37,6 +60,19 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                     dispatch(PLACING_ORDER());
                     hideCloseBtn();
                     try {
+                        let cartItemss = getCartItems()
+                       
+                        /// add to cart item list api
+                        const cartData =  cartItemss.map(item => ({                          
+                            product_id: item.id,
+                            qty: item.quantity
+                          }));
+                          console.log('cartdata'  , cartData)
+
+                       let responsed= await addListToCartApi(
+                        cartData);
+
+                       console.log(responsed,'response data add cart')
                         let response = await sendTokenApi({
                             source_id: token.token,
                             shipping_address: shippingDetails,

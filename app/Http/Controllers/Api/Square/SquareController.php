@@ -46,11 +46,12 @@ class SquareController extends BaseController
         if ($this->user) {
             $this->userId = $this->user->id;
         } else {
-
+           
             $guestUser = $this->getOrCreateGuestUser($request->shipping_address);
             $this->user = $guestUser;
             $this->userId = StatusEnum::DUMMY;
         }
+        
     }
 
     // charge process
@@ -59,7 +60,7 @@ class SquareController extends BaseController
         try {
 
             $idempotencyKey = uniqid();
-
+                   
             //create customer || retrieve customer if already added
             if ($this->user->square_cus_id == null) {
                 $customer = $this->createCustomer();

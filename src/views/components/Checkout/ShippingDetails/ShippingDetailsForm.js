@@ -8,11 +8,13 @@ import Loader from "@common/LoaderComponent/LoaderComponent";
 import ShippingButton from "./ShippingButton";
 
 function ShippingDetailsForm({ address, handleHeight, hideForm }) {
+    
     const { values, handleChange, handleSubmit, errors } = useFormValidation(
         {
             country: address?.country || "US",
             full_name: address?.full_name || "",
             phone_number: address?.phone_number || "",
+            // email: address?.email || "",
             address: address?.address || "",
             floorAddress: "",
             city: address?.city || "",
@@ -23,6 +25,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
             fieldLengths: {
                 country: { min: 3, max: 50 },
                 full_name: { min: 3, max: 100 },
+                // email: { min: 5, max: 100 },
             },
         }
     );
@@ -50,9 +53,11 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
 
     const submitShippingDetails = (e) => {
         e.preventDefault();
+        
         let params = { ...values, permanent_address: permanentAddress };
-        console.print("params: ", params);
+        console.print("@@params: ", params);
         if (permanentAddress) dispatch(setShippingDetails(params, hideForm));
+        
         else {
             dispatch(SET_SHIPPING_DETAILS(params));
             hideForm();
@@ -66,6 +71,8 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     useEffect(() => {
         handleHeight();
     }, []);
+    
+
     return (
         <div>
             {settingAdress ? (

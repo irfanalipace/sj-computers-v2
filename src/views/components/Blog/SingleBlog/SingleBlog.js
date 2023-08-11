@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import blogmeeting from "@images/blog/meetingblog-page2.png";
+import axios from "axios";
+import "./SingleBlog.css";
+import blogmeeting from "@images/blog/Refurbished-Laptops.webp";
+import smimage from "@images/blog/smallimage.png";
+import book from "@images/blog/blogbook.png";
+
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { Link } from "react-router-dom";
 import {
@@ -111,15 +116,15 @@ const SingleBlog = () => {
                     <div className="col-md-12">
                         <div>
                             <div className="meeting-data-blog-save-dev-form">
-                                {/* <img src={blogmeeting} /> */}
-                                <img
+                                <img src={blogmeeting} />
+                                {/* <img
                                     src={
                                         singleblog.primary_image
                                             ? singleblog.primary_image
                                             : blogmeeting
                                     }
                                     alt={blogs.all_text}
-                                />
+                                /> */}
                             </div>
                             <div className="mid-graph-pargarph-page-data">
                                 {/* <span>{singleblog.title}</span> */}

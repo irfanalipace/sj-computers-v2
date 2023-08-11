@@ -7,6 +7,7 @@ import statesReducer from "@store/states/statesSlice";
 import brandsReducer from "@store/brands/brandsSlice";
 import cartReducer from "@store/cart/cartSlice";
 import ordersReducer from "@store/orders/ordersSlice";
+import toggleReducer from '@store/toggle/toggleSlice'
 
 const store = configureStore({
     reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
         cart: cartReducer,
         orders: ordersReducer,
         // Add additional reducers for other features here
+        toggle: toggleReducer,
     },
     middleware: [thunkMiddleware],
 });

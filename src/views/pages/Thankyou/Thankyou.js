@@ -25,6 +25,7 @@ export default function ThankYou() {
     const location = useLocation();
     const order = location.state?.order;
     console.print(location, "haris details");
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     //   const handleButtonClick = () => {
     //     // Redirect to the specific path
     //     history.push("/specific-path");
@@ -306,12 +307,16 @@ export default function ThankYou() {
             </div>
             <div className="row mx-0 mb-5">
                 <div className="col-6 d-flex justify-content-start">
+                {isAuthenticated && (
+                <div className="col-6 d-flex justify-content-start">
                     <button
                         className="track-order-btn"
                         onClick={() => navigate("/")}
                     >
                         Track your order
                     </button>
+                </div>
+            )}
                 </div>
                 <div className="col-6 d-flex justify-content-end">
                     <button

@@ -88,7 +88,7 @@ export default function Checkout() {
                                             {checkoutDetails.total_items} items)
                                         </h3>
                                     ) : (
-                                        <h3>Guest Checkout ( 1 items)</h3>
+                                        <h3>Guest Checkout ( {checkoutDetails.total_items} items)</h3>
                                     )}
                                 </div>
                             </div>
