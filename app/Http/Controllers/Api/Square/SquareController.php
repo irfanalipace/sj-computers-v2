@@ -48,8 +48,8 @@ class SquareController extends BaseController
         } else {
 
             $guestUser = $this->getOrCreateGuestUser($request->shipping_address);
-            $this->user = $guestUser;
-            $this->userId = StatusEnum::DUMMY;
+            $this->user = $guestUser;           
+            $this->userId = $guestUser->email ?? StatusEnum::DUMMY;
         }
     }
 
