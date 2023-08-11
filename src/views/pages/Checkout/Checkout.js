@@ -88,7 +88,10 @@ export default function Checkout() {
                                             {checkoutDetails.total_items} items)
                                         </h3>
                                     ) : (
-                                        <h3>Guest Checkout ( 1 items)</h3>
+                                        <h3>
+                                            Guest Checkout ({" "}
+                                            {checkoutDetails.total_items} items)
+                                        </h3>
                                     )}
                                 </div>
                             </div>
@@ -153,11 +156,14 @@ export default function Checkout() {
                                     </Accordion>
                                 </div>
                                 <div className="col-md-3 col-12">
-                                    <div>
-                                        <div className="shipping-method-component-wrapper">
-                                            <ShippingMethod />
+                                    {isAuthenticated && (
+                                        <div>
+                                            <div className="shipping-method-component-wrapper">
+                                                <ShippingMethod />
+                                            </div>
                                         </div>
-                                    </div>
+                                    )}
+
                                     {!isAuthenticated && (
                                         <div>
                                             <div>

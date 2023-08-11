@@ -21,15 +21,23 @@ class Blog extends Model
 
     public function getThumbnailImageAttribute($value)
     {
-        return url('storage/'.$value);
+        return $this->getSafeValue($value);
     }
     public function getSecondaryImageAttribute($value)
     {
-        return url('storage/'.$value);
+        return $this->getSafeValue($value);
     }
     public function getPrimaryImageAttribute($value)
     {
-        return url('storage/'.$value);
+        return $this->getSafeValue($value);
     }
 
+    private function getSafeValue($value)
+    {
+        if (preg_match('/^(https?|www)/i', $value)) {
+            return $value;
+        }
+
+        return 'storage/' . $value;
+    }
 }

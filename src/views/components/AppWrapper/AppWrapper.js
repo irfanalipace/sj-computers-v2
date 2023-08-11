@@ -20,11 +20,13 @@ const AppWrapper = ({ children }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cartItems = getCartItems() || [];
     const cartDetails = getCartDetails();
-
+    console.log("in AppWrapper: ", isAuthenticated);
     useEffect(() => {
+        console.log("111111 in UserEffect: ", isAuthenticated);
         if (isAuthenticated) {
             dispatch(clearCart()); //clear store cart items because all cart items are again fetched from backend to sync with localCart
             dispatch(getShippingDetails());
+            console.log("111111 in isAuthenticated: ", isAuthenticated);
             dispatch(syncCartItems()); //gets all the cart items stored in database and stores them in store and local storage similarly stores local cart items in database
             // dispatch(currentState());
             // dispatch(conditionState());

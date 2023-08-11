@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { CartItem } from "./CartItem/CartItem";
-
+import toggleSlice from "../../../core/store/toggle/toggleSlice";
 import "./ShopingCart.css";
+import { CheckoutBox } from "./CheckOut/CheckoutBox";
+import CartOverlay from "../Header/CartOverlay";
 
 export const ShopingCart = ({ onFormSubmit, form }) => {
     const cartItems = useSelector((state) => state.cart.cart);
@@ -17,6 +19,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
     const [showModal, setShowModal] = useState(false);
     const modalRef = useRef(null);
 
+    
     const handleClick = () => {
         setShowModal(true);
     };
@@ -160,13 +163,15 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                         </button>
                                                     </div>
 
-                                                    {showModal && (
+                                                    {showModal &&  (
                                                         <div className="overlay-model-checkout-model">
                                                             <div
                                                                 className="overlay-modal-checkout-model-checkout-model"
                                                                 ref={modalRef}
                                                             >
-                                                                <div className="modal-content">
+                                                              
+                                                                <CheckoutBox />
+                                                                {/* <div className="modal-content">
                                                                     <form>
                                                                         <div className="dve-heading-data-login-checkout">
                                                                             <h4 className="login-h3">
@@ -176,45 +181,27 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                                     : "Sign in to checkout"}
                                                                             </h4>
                                                                         </div>
-                                                                        <div className="mb-3">
-                                                                            <label
-                                                                                className="email-label"
-                                                                                htmlFor="email"
-                                                                                style={{
-                                                                                    fontWeight:
-                                                                                        "bold",
-                                                                                    fontSize:
-                                                                                        "13px",
-                                                                                }}
-                                                                            >
-                                                                                Email
-                                                                                or
-                                                                                mobile
-                                                                                phone
-                                                                                number
-                                                                            </label>
-                                                                            <input
-                                                                                type="email"
-                                                                                id="email"
-                                                                                name="email"
-                                                                                className="form-control email-checkout-data-here"
-                                                                                placeholder="Enter your email"
-                                                                                value=""
-                                                                                autoFocus
-                                                                            />
-                                                                        </div>
+                                                                   
                                                                         <div className="d-flex justify-content-center w-100">
-                                                                            <button
-                                                                                disabled={
-                                                                                    isLoading
+                                                                            <Link
+                                                                                className="text-decoration-none"
+                                                                                to={
+                                                                                    "/login"
                                                                                 }
                                                                             >
-                                                                                {isLoading ? (
-                                                                                    <Loader />
-                                                                                ) : (
-                                                                                    "Continue"
-                                                                                )}
-                                                                            </button>
+                                                                                {" "}
+                                                                                <button
+                                                                                    disabled={
+                                                                                        isLoading
+                                                                                    }
+                                                                                >
+                                                                                    {isLoading ? (
+                                                                                        <Loader />
+                                                                                    ) : (
+                                                                                        "Sign in"
+                                                                                    )}
+                                                                                </button>
+                                                                            </Link>
                                                                         </div>
                                                                         <div>
                                                                             <p className="small-text-paragrap">
@@ -235,8 +222,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                         <div className="or-dev-section-overlay-checkout">
                                                                             <span
                                                                                 style={{
-                                                                                    fontWeight:
-                                                                                        "bold",
+                                                                                    color: "black",
                                                                                 }}
                                                                             >
                                                                                 OR
@@ -260,7 +246,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                                             </Link>
                                                                         </div>
                                                                     </form>
-                                                                </div>
+                                                                </div> */}
                                                             </div>
                                                         </div>
                                                     )}

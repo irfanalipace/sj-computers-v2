@@ -40,6 +40,8 @@ import NotFound from "@pages/NotFound/NotFound";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
 
+
+
 const Router = () => {
     const routes = [
         {
@@ -297,11 +299,11 @@ const Router = () => {
         {
             path: "/thank-you",
             element: (
-                <ProtectedRoute>
+               
                     <PageWrapper>
                         <ThankYou />
                     </PageWrapper>
-                </ProtectedRoute>
+               
             ),
         },
 

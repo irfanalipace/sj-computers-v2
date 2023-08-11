@@ -20,7 +20,6 @@ use App\Http\Controllers\SiteMapController;
 |
 */
 
-
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
 
 Route::get('hold-release-product',[HoldReleaseController::class,'updateRecord'])->name('hold-release-product');

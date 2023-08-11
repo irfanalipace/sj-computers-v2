@@ -46,11 +46,12 @@ class SquareController extends BaseController
         if ($this->user) {
             $this->userId = $this->user->id;
         } else {
-
+           
             $guestUser = $this->getOrCreateGuestUser($request->shipping_address);
             $this->user = $guestUser;           
             $this->userId = $guestUser->email ?? StatusEnum::DUMMY;
         }
+        
     }
 
     // charge process
@@ -59,7 +60,7 @@ class SquareController extends BaseController
         try {
 
             $idempotencyKey = uniqid();
-
+                   
             //create customer || retrieve customer if already added
             if ($this->user->square_cus_id == null) {
                 $customer = $this->createCustomer();
@@ -108,6 +109,7 @@ class SquareController extends BaseController
                 $user_type = ($this->userId != StatusEnum::DUMMY) ? StatusEnum::USER : StatusEnum::GUEST;
 
                 $order = $repository->createOrder(array(), $api_response, $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type);
+
                 $orderData['order'] = $order['order'];
 
                 //sending invoice email of the payment to user

@@ -57,8 +57,8 @@
 }
 
 .dve-heading-data-login-checkout h4 {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 18px;
+    
 }
 .dve-heading-data-login-checkout label
 
@@ -85,9 +85,10 @@
     color: darkgreen;
 }
 
-.after-the-or-dev-sction-leve-model-checkout a{
+.after-the-or-dev-sction-leve-model-checkout a button{
     background: transparent !important;
-    border-color: green;
+    border-color: #3f833f;
+    color: #3f833f;
 }
 .after-the-or-dev-sction-leve-model-checkout a {
     color: #318243 !important;

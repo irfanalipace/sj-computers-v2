@@ -180,8 +180,11 @@ export const syncCartItems = () => {
                     return cartItem;
                 });
             }
+            console.log("111111 cartItems", cartItems);
             if (cartItems.length > 0) {
                 let response = await addListToCartApi({ cartItems }); // posting local storage cart items in database
+
+                console.log("111111 response", response);
                 let items = { ...response.data.original.data };
                 delete items.details;
                 items = objectToArray(items);
