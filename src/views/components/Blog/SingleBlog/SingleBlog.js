@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import blogmeeting from "@images/blog/meetingblog-page2.png";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import {
     getBlogsPagesApi,
     blogSlugApiblogDetails,
@@ -13,8 +13,11 @@ import Stack from "@mui/material/Stack";
 
 import "./SingleBlog.css";
 import Blog from "../Blog";
+import BlogsDetails from "../../../pages/Blog/BlogsDetails";
+import BlogPage from "../../../pages/Blog/BlogPage";
 
 const SingleBlog = () => {
+
     const [isLoading, setIsLoading] = useState(false);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState("");
@@ -80,22 +83,38 @@ const SingleBlog = () => {
     //         });
     // }, [blogslug]);
 
-    const [singleblog, setSingle] = useState("");
+    // const [singleblog, setSingle] = useState("");
 
-    useEffect(() => {
-        getBlogsPagesApi(currentPage, itemsPerPage)
-            .then((response) => {
-                if (response.data && response.data?.data.length > 0) {
-                    const singleBlog = response.data?.data[0]; // Extract the first blog from the array
-                    setSingle(singleBlog);
-                } else {
-                    setSingle(""); // No blog available
-                }
-            })
-            .catch((error) => {
-                console.error("API Error:", error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     getBlogsPagesApi(currentPage, itemsPerPage)
+    //         .then((response) => {
+    //             if (response.data && response.data?.data.length > 0) {
+    //                 const singleBlog = response.data?.data[0]; // Extract the first blog from the array
+    //                 setSingle(singleBlog);
+    //             } else {
+    //                 setSingle(""); // No blog available
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error("API Error:", error);
+    //         });
+    // }, []);
+
+
+   
+    const navigate = useNavigate();
+
+    const blogslist = (blog) => {
+
+      navigate(`/${blog.slug}`, {
+        state: {
+          blogList: blog,
+          
+        }
+       
+      });
+    };
+  
 
     return (
         <div>
@@ -196,7 +215,8 @@ const SingleBlog = () => {
                     </div>
                 </div>
             </div>
-
+           
+        
             {isLoading ? (
                 <div
                     className="blog-pagesloader-overlay"
@@ -206,19 +226,30 @@ const SingleBlog = () => {
                 </div>
             ) : (
                 <div className="container single-blog-pages-dev-container-all-products">
+                   
                     <div className="row">
                         {blogs.map((blog) => (
-                            <div className="col-md-4" key={blog.id}>
+                         
+                            <div className="col-md-4" key={blog.id} >
+                               <div>
+                      
+                               </div>
                                 <Link
                                     to={`/${blog.slug}`}
                                     className="text-decoration-none"
+                                   
+                                    state={{
+                                        blogList: blog
+                                    }}
+                                    onClick={() => blogslist(blog)}
                                 >
+                                   
                                     <div className="product-card">
                                         {/* <img src={book} alt={blog.title} /> */}
 
                                         <img
                                             src={
-                                                blog.thumbnail_image
+                                                blog.thumbnail_image   
                                                     ? blog.thumbnail_image
                                                     : "https://via.placeholder.com/400x400"
                                             }
@@ -227,11 +258,13 @@ const SingleBlog = () => {
 
                                         <div className="dev-data-span-card-dev">
                                             <span> {blog.tags}</span>
-                                        </div>
+                                        </div>           
+                                        
 
                                         <div className="read-section-date-section">
                                             <div>
                                                 <span>Read me</span>
+                                                
                                             </div>
                                             <div>
                                                 <span>{blog.publish_date}</span>
@@ -241,6 +274,8 @@ const SingleBlog = () => {
                                 </Link>
                             </div>
                         ))}
+                        
+                      
                     </div>
 
                     {/* <div className="pagination-blogs-page">

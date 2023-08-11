@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Blog.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -21,6 +21,7 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import smimage from "@images/blog/smallimage.png";
 import primardataimage from '@images/blog/meeting.png'
+
 const HeadereLinks = [
     { path: "/", title: "About Us" },
     { path: "/", title: "What We Do?" },
@@ -32,6 +33,14 @@ const HeadereLinks = [
 ];
 
 const Blog = () => {
+    const location = useLocation();
+  const { blogList } = location.state || {};
+
+ 
+
+   
+console.log('mylocations data',blogList);
+  
     const [blogdteails, setBlogDetails] = useState("");
     const [blogsdetailserror, setBlogdetailsError] = useState(false);
 
@@ -45,17 +54,24 @@ const Blog = () => {
     const { blogslug } = useParams();
 
     useEffect(() => {
-        setIsLoading(true);
-        blogSlugApiblogDetails(blogslug)
-            .then((response) => {
-                setBlogDetails(response?.data);
-            })
-            .catch((error) => {
-                console.error("API Error:", error);
-                if (error) {
-                    setBlogdetailsError(true);
-                }
-            });
+        if(blogList){
+            setBlogDetails(blogList)
+        }else{
+
+            setIsLoading(true);
+            blogSlugApiblogDetails(blogslug)
+                .then((response) => {
+                    setBlogDetails(response?.data);
+                    
+                })
+                .catch((error) => {
+                    console.error("API Error:", error);
+                    if (error) {
+                        setBlogdetailsError(true);
+                    }
+                });
+        }
+      
     }, [blogslug]);
 
     const [showMore, setShowMore] = useState(false);
@@ -342,7 +358,7 @@ const Blog = () => {
                                     </div>
                                 </div>
                             </div>
-
+                            {blogdteails.primary_image && blogdteails.all_text && (
                             <div className="container image-cainter-dev">
                                 <div className="row">
                                     <div className="col-12">
@@ -351,7 +367,7 @@ const Blog = () => {
                                                                          src={primardataimage}
                                                                          alt="all_text"
                                                                      /> */}
-                                            {blogdteails.primary_image &&
+                                            {/* {blogdteails.primary_image &&
                                                 blogdteails.all_text && (
                                                     <img
                                                         src={
@@ -361,13 +377,26 @@ const Blog = () => {
                                                             blogdteails.all_text
                                                         }
                                                     />
-                                                )}
+                                                )} */}
                                                 
+
+
+                                                <div>
+                                                
+        <img
+            src={blogdteails.primary_image}
+            alt={blogdteails.all_text}
+        />
+    
+
+   
+</div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
+                                )}
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3">
