@@ -127,37 +127,20 @@ const SingleBlog = () => {
                     </div>
                 </div>
             </div> */}
-
+        
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
                         <div>
-                            <div className="meeting-data-blog-save-dev-form">
-                                {/* <img src={blogmeeting} /> */}
-                                {blogs.length > 0 && (
-                                    
-                        <div>
-               
-              
-                    <img
-                        src={blogs[0].primary_image ? blogs[0].primary_image:blogmeeting}
-                        alt={blogs[0].all_text}
-                    />
-              
-                         </div>
-                      )
-                    
-                      }
-                     
-                                {/* <img
-                                    src={
-                                        singleblog.primary_image
-                                            ? singleblog.primary_image
-                                            : blogmeeting
-                                    }
-                                    alt={blogs.all_text}
-                                /> */}
-                            </div>
+                        {blogs.length > 0 && blogs[0].primary_image && blogs[0].all_text && (
+    <div className="meeting-data-blog-save-dev-form">
+        <img
+            src={blogs[0].primary_image}
+            alt={blogs[0].all_text}
+        />
+    </div>
+)}
+
                             <div className="mid-graph-pargarph-page-data">
                                 {/* <span>{singleblog.title}</span> */}
                             </div>
