@@ -40,8 +40,6 @@ import NotFound from "@pages/NotFound/NotFound";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
 
-
-
 const Router = () => {
     const routes = [
         {
@@ -218,11 +216,7 @@ const Router = () => {
         },
         {
             path: "/:blogslug",
-            element: (
-                <PageWrapper>
-                    <BlogsDetails />
-                </PageWrapper>
-            ),
+            element: <BlogsDetails />,
         },
         {
             path: "/blogs",
@@ -299,11 +293,9 @@ const Router = () => {
         {
             path: "/thank-you",
             element: (
-               
-                    <PageWrapper>
-                        <ThankYou />
-                    </PageWrapper>
-               
+                <PageWrapper>
+                    <ThankYou />
+                </PageWrapper>
             ),
         },
 

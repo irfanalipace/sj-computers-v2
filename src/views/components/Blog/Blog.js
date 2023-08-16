@@ -178,7 +178,7 @@ const Blog = () => {
                             <title>{blogdteails.meta_title}</title>
 
                             <meta
-                                name="meta-description-meta-title"
+                                name="description"
                                 content={blogdteails.meta_description}
                             />
                         </Helmet>
@@ -530,7 +530,7 @@ const Blog = () => {
                                                                                         Show More
                                                                                     </button>
                                                                                 )} */}
-                                                         <div className="background-image-lin-dve">
+                                            <div className="background-image-lin-dve">
                                                 {/* <img
                                                                                     src={meetingset}
                                                                                     alt="Blog Image"
