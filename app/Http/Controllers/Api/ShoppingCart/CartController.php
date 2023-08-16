@@ -12,6 +12,7 @@ use App\Http\Requests\Cart\AddToCartRequest;
 use App\Http\Requests\Cart\DeleteCartRequest;
 use App\Http\Requests\Cart\LocalStorageItemsRequest;
 use App\Http\Requests\Cart\UpdateQuantityRequest;
+use App\Models\Guest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,7 @@ class CartController extends BaseController
 {
     private $userId;
     private $user;
-    public function __construct()
+    public function __construct(Request $request)
     {
 
         $this->user = auth('api')->user();
@@ -29,7 +30,8 @@ class CartController extends BaseController
         if ($this->user) {
             $this->userId = $this->user->id;
         } else {
-            $this->userId = StatusEnum::DUMMY;
+            $guestUser = $this->getOrCreateGuestUser($request);
+            $this->userId = $guestUser->email ??  StatusEnum::DUMMY;
         }
     }
 
@@ -56,6 +58,7 @@ class CartController extends BaseController
     //adding item to cart
     public function addCart(AddToCartRequest $request)
     {
+
         try {
             $product = Product::find($request->product_id);
             // Check if quantity is less than product quantity
@@ -155,22 +158,22 @@ class CartController extends BaseController
         }
     }
 
-    public function estimatedDays(Request $request){
+    public function estimatedDays(Request $request)
+    {
 
         $data = [
             'free_shipment_amount' => [
                 'estimate_day' =>   Carbon::now()->addWeekdays(5)->format('l d-m-Y'),
             ],
             '2_day_shipment_amount' =>  [
-                    'estimate_day' =>  Carbon::now()->addWeekdays(2)->format('l d-m-Y'),
+                'estimate_day' =>  Carbon::now()->addWeekdays(2)->format('l d-m-Y'),
             ],
-            '1_day_shipment_amount' =>[
-                         'estimate_day' =>   Carbon::now()->addWeekdays(1)->format('l d-m-Y'),
+            '1_day_shipment_amount' => [
+                'estimate_day' =>   Carbon::now()->addWeekdays(1)->format('l d-m-Y'),
             ],
         ];
 
         return $this->sendResponse($data);
-
     }
 
     //details of cart items
@@ -186,19 +189,19 @@ class CartController extends BaseController
             'total' => number_format($totalAmount, 2, '.', ''),
             'shipment_info' => $this->getShipmentAmount(true),
             'free_shipment_amount' => [
-                'amount' =>  number_format(0 , 2, '.', ''),
-                'estimate_amount' =>  number_format((float)$totalAmount , 2, '.', ''),
+                'amount' =>  number_format(0, 2, '.', ''),
+                'estimate_amount' =>  number_format((float)$totalAmount, 2, '.', ''),
                 'estimate_day' =>   Carbon::now()->addWeekdays(5)->format('l d-m-Y'),
             ],
 
             '2_day_shipment_amount' =>  [
                 'amount' =>  number_format(14.99, 2, '.', ''),
-                'estimate_amount' =>  number_format((float)$totalAmount + (float) $this->getShipmentAmount(false,2), 2, '.', ''),
+                'estimate_amount' =>  number_format((float)$totalAmount + (float) $this->getShipmentAmount(false, 2), 2, '.', ''),
                 'estimate_day' =>  Carbon::now()->addWeekdays(2)->format('l d-m-Y'),
             ],
-            '1_day_shipment_amount' =>[
+            '1_day_shipment_amount' => [
                 'amount' =>  number_format(29.99, 2, '.', ''),
-                'estimate_amount' =>  number_format((float)$totalAmount + (float) $this->getShipmentAmount(false,1), 2, '.', ''),
+                'estimate_amount' =>  number_format((float)$totalAmount + (float) $this->getShipmentAmount(false, 1), 2, '.', ''),
                 'estimate_day' =>   Carbon::now()->addWeekdays(1)->format('l d-m-Y'),
             ],
         ];
@@ -297,5 +300,35 @@ class CartController extends BaseController
 
         $items = $this->getItems(true);
         return response(array('success' => true, 'data' => $items, 'message' => 'Item added.'), 200, []);
+    }
+
+    // create guest user if exist get user
+    private function getOrCreateGuestUser($detail)
+    {
+        $detail = $detail->shipping_address ?? $detail;
+       
+        if (isset($detail['email']) && !is_null($detail['email'])) {
+            // Check if the email exists in the guest_users table
+            $guestUser = Guest::where('email', $detail['email'])->first();
+
+            // If the guest user does not exist, create a new one
+            if (!$guestUser) {
+                $guestUser = new Guest();
+                $guestUser->ip_address = request()->ip();
+                $guestUser->full_name = $detail['full_name'] ?? null;
+                $guestUser->phone_number = $detail['phone_number'] ?? null;
+                $guestUser->email = $detail['email'];
+                $guestUser->address = $detail['address'] ?? null;
+                $guestUser->city = $detail['city'] ?? null;
+                $guestUser->state = $detail['state'] ?? null;
+                $guestUser->zip_code = $detail['zip_code'] ?? null;
+                $guestUser->country = $detail['country'] ?? null;
+                $guestUser->save();
+            }
+        } else {
+
+            return null;
+        }
+        return $guestUser;
     }
 }

@@ -20,14 +20,14 @@ class OrderRepository
     {
         try {
             $data = DB::transaction(function () use ($data, $response, $userId, $user, $payment_type, $cartData, $cartContent, $shippingAddreess, $user_type) {
-                $invoice = $this->storeInvoice($payment_type, $data, $response, $userId,$user_type);
-
+                $invoice = $this->storeInvoice($payment_type, $data, $response, $userId,$user_type,$user);
+               
                 //saving order after invoice created
                 $order = [];
 
                 $order['total_amount'] = $cartData['total_amount'];
                 $order['sub_total'] = $cartData['sub_total'];
-                $order[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $userId;          //user id or guest id
+                $order[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $user->id;          //user id or guest id
                 $order['invoice_id'] = $invoice->id;
                 $order['status'] = StatusEnum::COMPLETE;
                 $order['shipment_price'] = $cartData['shipment_amount'];
@@ -62,7 +62,7 @@ class OrderRepository
                         'city' => $shippingAddreess['city'],
                         'state' => $shippingAddreess['state'],
                         'zip_code' => $shippingAddreess['zip_code'],
-                        $user_type == StatusEnum::USER ? 'user_id' : 'guest_id' => $userId,       //user id or guest id
+                        $user_type == StatusEnum::USER ? 'user_id' : 'guest_id' => $user->id,       //user id or guest id
                         'user_type' => $user_type,
                         'order_id' => $order->id
                     ]
@@ -86,8 +86,9 @@ class OrderRepository
     }
 
     //Invoice create
-    protected function storeInvoice($payment_type, $data, $response, $userId,$user_type)
+    protected function storeInvoice($payment_type, $data, $response, $userId,$user_type,$user)
     {
+      
         switch ($payment_type) {
             case StatusEnum::PAYMENTTYPEPAYPAL:
                 # Paypal data...
@@ -110,13 +111,15 @@ class OrderRepository
                 # code...
                 break;
         }
+       
         $invoice = [];
         $invoice['payer_id'] = $payerID;
         $invoice['payment_type'] = $paymentType;
-        $invoice[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $userId;          //user id or guest id
+        $invoice[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $user->id;          //user id or guest id
         $invoice['amount'] =  $amount;
         $invoice['status'] = StatusEnum::SUCCESS;
         $invoice = Invoice::create($invoice);
+     
         return $invoice;
     }
 
