@@ -24,7 +24,7 @@ import Search from "./Search";
 import BottomNavigation from "./BottomNavigation/BottomNavigation";
 // import MobileSearch from "./MobileSearch/MobileSearch";
 // import CartOverlay from "./CartOverlay";
-
+import { US } from "country-flag-icons/react/3x2";
 import "./Header.css";
 
 const Header = () => {
@@ -174,13 +174,17 @@ const Header = () => {
                                                                 aria-haspopup="false"
                                                                 aria-expanded="false"
                                                             >
-                                                                <img
+                                                                {/* <img
                                                                     src={
                                                                         english
                                                                     }
                                                                     alt="English Flag"
                                                                 />{" "}
-                                                                EN
+                                                                EN */}
+                                                                 <US
+                                title="United States"
+                                className="eng-button-type-data"
+                            /> EN
                                                             </button>
                                                         </div>
                                                         <div

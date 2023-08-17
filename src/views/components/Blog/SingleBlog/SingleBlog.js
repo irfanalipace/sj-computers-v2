@@ -6,7 +6,7 @@ import smimage from "@images/blog/smallimage.png";
 import book from "@images/blog/blogbook.png";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import {
     getBlogsPagesApi,
     blogSlugApiblogDetails,
@@ -17,8 +17,12 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 import "./SingleBlog.css";
+import Blog from "../Blog";
+import BlogsDetails from "../../../pages/Blog/BlogsDetails";
+import BlogPage from "../../../pages/Blog/BlogPage";
 
 const SingleBlog = () => {
+
     const [isLoading, setIsLoading] = useState(false);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState("");
@@ -43,10 +47,12 @@ const SingleBlog = () => {
         setCurrentPage(page);
     };
 
+    
     useEffect(() => {
         setIsLoading(true);
         getBlogsPagesApi(currentPage, itemsPerPage)
             .then((response) => {
+              
                 if (response.data && response.data?.data.length > 0) {
                     setBlogs(response.data?.data);
                     setPageCount(response.data?.last_page);
@@ -82,22 +88,38 @@ const SingleBlog = () => {
     //         });
     // }, [blogslug]);
 
-    const [singleblog, setSingle] = useState("");
+    // const [singleblog, setSingle] = useState("");
 
-    useEffect(() => {
-        getBlogsPagesApi(currentPage, itemsPerPage)
-            .then((response) => {
-                if (response.data && response.data?.data.length > 0) {
-                    const singleBlog = response.data?.data[0]; // Extract the first blog from the array
-                    setSingle(singleBlog);
-                } else {
-                    setSingle(""); // No blog available
-                }
-            })
-            .catch((error) => {
-                console.error("API Error:", error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     getBlogsPagesApi(currentPage, itemsPerPage)
+    //         .then((response) => {
+    //             if (response.data && response.data?.data.length > 0) {
+    //                 const singleBlog = response.data?.data[0]; // Extract the first blog from the array
+    //                 setSingle(singleBlog);
+    //             } else {
+    //                 setSingle(""); // No blog available
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error("API Error:", error);
+    //         });
+    // }, []);
+
+
+   
+    const navigate = useNavigate();
+
+    const blogslist = (blog) => {
+
+      navigate(`/${blog.slug}`, {
+        state: {
+          blogList: blog,
+          
+        }
+       
+      });
+    };
+  
 
 
 
@@ -113,11 +135,12 @@ const SingleBlog = () => {
                     </div>
                 </div>
             </div> */}
-
+        
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
                         <div>
+<<<<<<< HEAD
                             <div className="meeting-data-blog-save-dev-form">
                                 <img src={blogmeeting} />
                                 {/* <img
@@ -129,6 +152,17 @@ const SingleBlog = () => {
                                     alt={blogs.all_text}
                                 /> */}
                             </div>
+=======
+                        {blogs.length > 0 && blogs[0].primary_image && blogs[0].all_text && (
+    <div className="meeting-data-blog-save-dev-form">
+        <img
+            src={blogs[0].primary_image}
+            alt={blogs[0].all_text}
+        />
+    </div>
+)}
+
+>>>>>>> sj-optimizations
                             <div className="mid-graph-pargarph-page-data">
                                 {/* <span>{singleblog.title}</span> */}
                             </div>
@@ -186,7 +220,8 @@ const SingleBlog = () => {
                     </div>
                 </div>
             </div>
-
+           
+        
             {isLoading ? (
                 <div
                     className="blog-pagesloader-overlay"
@@ -196,26 +231,42 @@ const SingleBlog = () => {
                 </div>
             ) : (
                 <div className="container single-blog-pages-dev-container-all-products">
+                   
                     <div className="row">
                         {blogs.map((blog) => (
-                            <div className="col-md-4" key={blog.id}>
+                         
+                            <div className="col-md-4" key={blog.id} >
+                               <div>
+                      
+                               </div>
                                 <Link
                                     to={`/${blog.slug}`}
                                     className="text-decoration-none"
+                                   
+                                    state={{
+                                        blogList: blog
+                                    }}
+                                    onClick={() => blogslist(blog)}
                                 >
+<<<<<<< HEAD
                                     <div className="product-card product-blogs-card">
+=======
+                                   
+                                    <div className="product-card">
+>>>>>>> sj-optimizations
                                         {/* <img src={book} alt={blog.title} /> */}
 
                                         <img
                                             src={
-                                                blog.thumbnail_image
+                                                blog.thumbnail_image   
                                                     ? blog.thumbnail_image
                                                     : "https://via.placeholder.com/400x400"
                                             }
-                                            alt={blog.all_text}
+                                            alt={blog.alt_thumbnail_image}
                                         />
                                       
                                         <div className="dev-data-span-card-dev">
+<<<<<<< HEAD
                                             <span> {blog.title}</span>
                                         </div>
                                         <div className="read-more-button-blogs">
@@ -230,6 +281,16 @@ const SingleBlog = () => {
                                         <div className="read-section-date-section">
                                             <div style={{paddingTop:'4px'}}>
                                                 <span style={{fontWeight:'bold'}}>Read Full Blog</span>
+=======
+                                            <span> {blog.tags}</span>
+                                        </div>           
+                                        
+
+                                        <div className="read-section-date-section">
+                                            <div>
+                                                <span>Read me</span>
+                                                
+>>>>>>> sj-optimizations
                                             </div>
                                                                                        
                                            <div style={{display:'flex'}}> 
@@ -246,6 +307,8 @@ const SingleBlog = () => {
                                 </Link>
                             </div>
                         ))}
+                        
+                      
                     </div>
 
                     {/* <div className="pagination-blogs-page">
@@ -305,6 +368,8 @@ const SingleBlog = () => {
                     </div>
                 </div>
             )}
+
+           
         </div>
     );
 };

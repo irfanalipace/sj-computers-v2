@@ -15,8 +15,9 @@ class Blog extends Model
 
     const PUBLISHED = 'Published';
 
-    public function categories(){
-        return $this->belongsToMany(Category::class,'blogs_categories');
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'blogs_categories');
     }
 
     public function getThumbnailImageAttribute($value)

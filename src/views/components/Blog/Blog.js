@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Blog.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -16,10 +16,11 @@ import {
     faYoutube,
     faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-
+import NotFound from "../../pages/NotFound/NotFound";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import smimage from "@images/blog/smallimage.png";
+import primardataimage from '@images/blog/meeting.png'
 
 const HeadereLinks = [
     { path: "/", title: "About Us" },
@@ -32,26 +33,16 @@ const HeadereLinks = [
 ];
 
 const Blog = () => {
+    const location = useLocation();
+  const { blogList } = location.state || {};
+
+ 
+
+   
+console.log('mylocations data',blogList);
+  
     const [blogdteails, setBlogDetails] = useState("");
-
-    const { blogslug } = useParams();
-
-    useEffect(() => {
-        setIsLoading(true);
-        blogSlugApiblogDetails(blogslug)
-            .then((response) => {
-                setBlogDetails(response?.data);
-            })
-            .catch((error) => {
-                console.error("API Error:", error);
-            });
-    }, [blogslug]);
-
-    const [showMore, setShowMore] = useState(false);
-
-    const toggleContent = () => {
-        setShowMore(!showMore);
-    };
+    const [blogsdetailserror, setBlogdetailsError] = useState(false);
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -60,6 +51,34 @@ const Blog = () => {
     const [itemsPerPage] = useState(3);
     const [prevPageUrl, setPrevPageUrl] = useState(null);
     const [nextPageUrl, setNextPageUrl] = useState(null);
+    const { blogslug } = useParams();
+
+    useEffect(() => {
+        if(blogList){
+            setBlogDetails(blogList)
+        }else{
+
+            setIsLoading(true);
+            blogSlugApiblogDetails(blogslug)
+                .then((response) => {
+                    setBlogDetails(response?.data);
+                    
+                })
+                .catch((error) => {
+                    console.error("API Error:", error);
+                    if (error) {
+                        setBlogdetailsError(true);
+                    }
+                });
+        }
+      
+    }, [blogslug]);
+
+    const [showMore, setShowMore] = useState(false);
+
+    const toggleContent = () => {
+        setShowMore(!showMore);
+    };
 
     useEffect(() => {
         getBlogsHeaderPagesApi(currentPage, itemsPerPage)
@@ -108,18 +127,34 @@ const Blog = () => {
         const blogContent = document.getElementById("blog-content");
         const h2Tags = blogContent.getElementsByTagName("h2");
 
-        if (h2Tags.length > 0) {
+        if (
+            h2Tags.length > 0 &&
+            blogdteails.secondary_image &&
+            blogdteails.alt_secondary_image
+        ) {
             const firstH2Tag = h2Tags[0];
             const imgTag = document.createElement("img");
-            imgTag.src = blogdteails.secondary_image
-                ? blogdteails.secondary_image
-                : "https://via.placeholder.com/400x400";
-
-            imgTag.alt = blogdteails.all_text;
+            imgTag.src = blogdteails.secondary_image;
+            imgTag.alt = blogdteails.alt_secondary_image;
 
             firstH2Tag.insertAdjacentElement("afterend", imgTag);
         }
     }, [blogdteails]);
+
+    // useEffect(() => {
+    //     const blogContent = document.getElementById("blog-content");
+    //     const h2Tags = blogContent.getElementsByTagName("h2");
+
+    //     if (h2Tags.length > 0) {
+    //         const firstH2Tag = h2Tags[0];
+    //         const imgTag = document.createElement("img");
+    //         imgTag.src = blogdteails.secondary_image
+
+    //         imgTag.alt = blogdteails.alt_secondary_image;
+
+    //         firstH2Tag.insertAdjacentElement("afterend", imgTag);
+    //     }
+    // }, [blogdteails]);
 
     // useEffect(() => {
     //     const blogContent = document.getElementById("blog-content");
@@ -170,8 +205,10 @@ const Blog = () => {
     //   };
 
     return (
-        <div>
-            <>
+        <>
+            {blogsdetailserror ? (
+                <NotFound />
+            ) : (
                 <div>
                     <div>
                         <Helmet>
@@ -322,29 +359,45 @@ const Blog = () => {
                                     </div>
                                 </div>
                             </div>
-
+                            {blogdteails.primary_image && blogdteails.all_text && (
                             <div className="container image-cainter-dev">
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="background-image-lin-dve">
                                             {/* <img
-                                                                                src={meetingimage}
-                                                                                alt="all_text"
-                                                                            /> */}
+                                                                         src={primardataimage}
+                                                                         alt="all_text"
+                                                                     /> */}
+                                            {/* {blogdteails.primary_image &&
+                                                blogdteails.all_text && (
+                                                    <img
+                                                        src={
+                                                            blogdteails.primary_image
+                                                        }
+                                                        alt={
+                                                            blogdteails.all_text
+                                                        }
+                                                    />
+                                                )} */}
+                                                
 
-                                            <img
-                                                src={
-                                                    blogdteails.primary_image
-                                                        ? blogdteails.primary_image
-                                                        : "https://via.placeholder.com/400x400"
-                                                }
-                                                alt={blogdteails.all_text}
-                                            />
+
+                                                <div>
+                                                
+        <img
+            src={blogdteails.primary_image}
+            alt={blogdteails.all_text}
+        />
+    
+
+   
+</div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
+                                )}
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3">
@@ -370,7 +423,7 @@ const Blog = () => {
                                                                             : smimage
                                                                     }
                                                                     alt={
-                                                                        blogdteails.all_text
+                                                                        blogdteails.alt_thumbnail_image
                                                                     }
                                                                 />
                                                             </div>
@@ -378,9 +431,7 @@ const Blog = () => {
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                    {
-                                                                        blogdteails.all_text
-                                                                    }
+                                                                  
                                                                     principles
                                                                     by which we
                                                                     process your
@@ -403,7 +454,7 @@ const Blog = () => {
                                                                             : smimage
                                                                     }
                                                                     alt={
-                                                                        blogdteails.all_text
+                                                                        blogdteails.alt_thumbnail_image
                                                                     }
                                                                 />
                                                             </div>
@@ -411,9 +462,7 @@ const Blog = () => {
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                    {
-                                                                        blogdteails.all_text
-                                                                    }
+                                                                  
                                                                     principles
                                                                     by which we
                                                                     process your
@@ -436,7 +485,7 @@ const Blog = () => {
                                                                             : smimage
                                                                     }
                                                                     alt={
-                                                                        blogdteails.all_text
+                                                                        blogdteails.alt_thumbnail_image
                                                                     }
                                                                 />
                                                             </div>
@@ -444,9 +493,7 @@ const Blog = () => {
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                    {
-                                                                        blogdteails.all_text
-                                                                    }
+                                                                   
                                                                     principles
                                                                     by which we
                                                                     process your
@@ -473,245 +520,245 @@ const Blog = () => {
                                             />
 
                                             {/* {blogdteails.content && (
-                                                                                    <>
-                                                                                        <div
-                                                                                            dangerouslySetInnerHTML={{
-                                                                                                __html:
-                                                                                                    blogdteails.content.substring(
-                                                                                                        0,
-                                                                                                        600
-                                                                                                    ) + "...",
-                                                                                            }}
-                                                                                        />
-                                                                                        {blogdteails.content
-                                                                                            .length > 600 && (
-                                                                                            <div className="image-secondry-image">
-                                                                                                <img
-                                                                                                    src={
-                                                                                                        blogdteails.secondary_image
-                                                                                                            ? blogdteails.secondary_image
-                                                                                                            : meetingset
-                                                                                                    }
-                                                                                                    alt={
-                                                                                                        blogdteails.all_text
-                                                                                                    }
-                                                                                                />
-                                                                                                <div className="after-data-image-secoundry-data-image">
-                                                                                                    <span>
-                                                                                                        {
-                                                                                                            blogdteails.all_text
-                                                                                                        }
-                                                                                                    </span>
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    dangerouslySetInnerHTML={{
-                                                                                                        __html: blogdteails.content.substring(
-                                                                                                            600
-                                                                                                        ),
-                                                                                                    }}
-                                                                                                />
-                                                                                            </div>
-                                                                                        )}
-                                                                                    </>
-                                                                                )} */}
+                                                                             <>
+                                                                                 <div
+                                                                                     dangerouslySetInnerHTML={{
+                                                                                         __html:
+                                                                                             blogdteails.content.substring(
+                                                                                                 0,
+                                                                                                 600
+                                                                                             ) + "...",
+                                                                                     }}
+                                                                                 />
+                                                                                 {blogdteails.content
+                                                                                     .length > 600 && (
+                                                                                     <div className="image-secondry-image">
+                                                                                         <img
+                                                                                             src={
+                                                                                                 blogdteails.secondary_image
+                                                                                                     ? blogdteails.secondary_image
+                                                                                                     : meetingset
+                                                                                             }
+                                                                                             alt={
+                                                                                                 blogdteails.all_text
+                                                                                             }
+                                                                                         />
+                                                                                         <div className="after-data-image-secoundry-data-image">
+                                                                                             <span>
+                                                                                                 {
+                                                                                                     blogdteails.all_text
+                                                                                                 }
+                                                                                             </span>
+                                                                                         </div>
+                                                                                         <div
+                                                                                             dangerouslySetInnerHTML={{
+                                                                                                 __html: blogdteails.content.substring(
+                                                                                                     600
+                                                                                                 ),
+                                                                                             }}
+                                                                                         />
+                                                                                     </div>
+                                                                                 )}
+                                                                             </>
+                                                                         )} */}
 
                                             {/* <div
-                                                                                className="content-image-data-paragrap"
-                                                                                dangerouslySetInnerHTML={{
-                                                                                    __html: insertImageAfterWords(blogdteails.content),
-                                                                                }}
-                                                                                /> */}
+                                                                         className="content-image-data-paragrap"
+                                                                         dangerouslySetInnerHTML={{
+                                                                             __html: insertImageAfterWords(blogdteails.content),
+                                                                         }}
+                                                                         /> */}
 
                                             {/* {!showMore && (
-                                                                                    <button
-                                                                                        className="show-more-button"
-                                                                                        onClick={toggleContent}
-                                                                                    >
-                                                                                        Show More
-                                                                                    </button>
-                                                                                )} */}
+                                                                             <button
+                                                                                 className="show-more-button"
+                                                                                 onClick={toggleContent}
+                                                                             >
+                                                                                 Show More
+                                                                             </button>
+                                                                         )} */}
                                             <div className="background-image-lin-dve">
                                                 {/* <img
-                                                                                    src={meetingset}
-                                                                                    alt="Blog Image"
-                                                                                /> */}
+                                                                             src={meetingset}
+                                                                             alt="Blog Image"
+                                                                         /> */}
                                                 {/* <div className="content-image-data-paragrap"
-                                                                                dangerouslySetInnerHTML={{
-                                                                                __html: blogdteails.content.substring(3000),
-                                                                                }}
-                                                                            />  */}
+                                                                         dangerouslySetInnerHTML={{
+                                                                         __html: blogdteails.content.substring(3000),
+                                                                         }}
+                                                                     />  */}
                                                 {/* <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
-                                  __html: showMore
-                                    ? blogdteails.content
-                                    : (blogdteails.content.length > 3000 ? blogdteails.content.substring(0, 3000) + "..." : blogdteails.content)
-                                }} />
-                                
-                                {blogdteails.content.length > 3000 && !showMore &&
-                                  <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
-                                    __html: blogdteails.content.substring(3000)
-                                  }} />
-                                }
-                                {console.log(blogdteails.content,'blogs of the dta')} */}
+                           __html: showMore
+                             ? blogdteails.content
+                             : (blogdteails.content.length > 3000 ? blogdteails.content.substring(0, 3000) + "..." : blogdteails.content)
+                         }} />
+                         
+                         {blogdteails.content.length > 3000 && !showMore &&
+                           <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
+                             __html: blogdteails.content.substring(3000)
+                           }} />
+                         }
+                         {console.log(blogdteails.content,'blogs of the dta')} */}
                                             </div>
                                         </div>
                                         {/* <div className="image-for-meeting2-section">
-                                                                            <img src={meetingset} />
-                                
-                                                                            <img
-                                                                            src={blog.secondary_image ? blog.secondary_image : meetingimage }
-                                                                            alt={blog.all_text}
-                                                                           
-                                                                        />
-                                                                         
-                                                                        </div> */}
+                                                                     <img src={meetingset} />
+                         
+                                                                     <img
+                                                                     src={blog.secondary_image ? blog.secondary_image : meetingimage }
+                                                                     alt={blog.all_text}
+                                                                    
+                                                                 />
+                                                                  
+                                                                 </div> */}
                                         <span className="span-deve-loram-space">
                                             {/* {blog.meta_description} */}
                                         </span>
                                         {/* <div className="dve-space-paragrapgh">
-                                                                            <div className="blog-dynamic-style-heading-data">
-                                                                            <div
-                                                                                        dangerouslySetInnerHTML={{
-                                                                                        __html: showMore
-                                                                                            ? blog.content
-                                                                                            : blog.content.substring(0, 700) + "...",
-                                                                                        }}
-                                                                                    />
-                                                                                    {!showMore && blog.content.length > 700 && (
-                                                                                        <div>
-                                                                                        <img src={meetingset} alt="Blog Image" />
-                                                                                        <div
-                                                                                dangerouslySetInnerHTML={{
-                                                                                __html: blog.content.substring(700),
-                                                                                }}
-                                                                            />
-                                                                                        </div>
-                                                                                    )}
-                                                                                        {!showMore && (
-                                                                                    <button
-                                                                                        className="show-more-button"
-                                                                                        onClick={toggleContent}
-                                                                                    >
-                                                                                        Show More
-                                                                                    </button>
-                                                                                )}
-                                                                            </div>
-                                                                        </div> */}
+                                                                     <div className="blog-dynamic-style-heading-data">
+                                                                     <div
+                                                                                 dangerouslySetInnerHTML={{
+                                                                                 __html: showMore
+                                                                                     ? blog.content
+                                                                                     : blog.content.substring(0, 700) + "...",
+                                                                                 }}
+                                                                             />
+                                                                             {!showMore && blog.content.length > 700 && (
+                                                                                 <div>
+                                                                                 <img src={meetingset} alt="Blog Image" />
+                                                                                 <div
+                                                                         dangerouslySetInnerHTML={{
+                                                                         __html: blog.content.substring(700),
+                                                                         }}
+                                                                     />
+                                                                                 </div>
+                                                                             )}
+                                                                                 {!showMore && (
+                                                                             <button
+                                                                                 className="show-more-button"
+                                                                                 onClick={toggleContent}
+                                                                             >
+                                                                                 Show More
+                                                                             </button>
+                                                                         )}
+                                                                     </div>
+                                                                 </div> */}
 
                                         {/* <div className="image-for-meeting2-section">
-                                                                            <img src={meetingset} />
-                                
-                                                                            <img
-                                                                                src={
-                                                                                    blog.thumbnail_image
-                                                                                        ? blog.thumbnail_image
-                                                                                        : meetingimage
-                                                                                }
-                                                                                alt={blog.all_text}
-                                                                            />
-                                                                        </div>
-                                                                        <div className="dve-space-paragrapgh">
-                                                                            <div className="blog-dynamic-style-heading-data">
-                                                                                <div
-                                                                                    dangerouslySetInnerHTML={{
-                                                                                        __html: showMore
-                                                                                            ? blog.content
-                                                                                            : blog.content.substring(
-                                                                                                  0,
-                                                                                                  700
-                                                                                              ) + "...",
-                                                                                    }}
-                                                                                />
-                                                                                {!showMore && (
-                                                                                    <button
-                                                                                        className="show-more-button"
-                                                                                        onClick={toggleContent}
-                                                                                    >
-                                                                                        Show More
-                                                                                    </button>
-                                                                                )}
-                                                                            </div>
-                                                                        </div> */}
+                                                                     <img src={meetingset} />
+                         
+                                                                     <img
+                                                                         src={
+                                                                             blog.thumbnail_image
+                                                                                 ? blog.thumbnail_image
+                                                                                 : meetingimage
+                                                                         }
+                                                                         alt={blog.all_text}
+                                                                     />
+                                                                 </div>
+                                                                 <div className="dve-space-paragrapgh">
+                                                                     <div className="blog-dynamic-style-heading-data">
+                                                                         <div
+                                                                             dangerouslySetInnerHTML={{
+                                                                                 __html: showMore
+                                                                                     ? blog.content
+                                                                                     : blog.content.substring(
+                                                                                           0,
+                                                                                           700
+                                                                                       ) + "...",
+                                                                             }}
+                                                                         />
+                                                                         {!showMore && (
+                                                                             <button
+                                                                                 className="show-more-button"
+                                                                                 onClick={toggleContent}
+                                                                             >
+                                                                                 Show More
+                                                                             </button>
+                                                                         )}
+                                                                     </div>
+                                                                 </div> */}
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         {/* <div style={{ background: "rgba(49, 130, 67, 0.1)" }}>
-                                                            <div className="container container-blog-data-footer">
-                                                                <div className="row">
-                                                                    <div className="col-md-2">
-                                                                        <div className="sj-left-dev-set-data-from-section">
-                                                                            <span>More from SJ</span>
-                                                                            <div className="pagination-blogs-page">
-                                                                         
-                                
-                                                                                <button
-                                                                                    onClick={handlePrevPage}
-                                                                                    disabled={!prevPageUrl}
-                                                                                >
-                                                                                    &laquo; Pre
-                                                                                </button>
-                                
-                                                                                {Array.from(
-                                                                                    { length: totalPages },
-                                                                                    (_, index) => (
-                                                                                        <button
-                                                                                            key={index}
-                                                                                            onClick={() =>
-                                                                                                handlePaginationClick(
-                                                                                                    index + 1
-                                                                                                )
-                                                                                            }
-                                                                                            className={
-                                                                                                currentPage ===
-                                                                                                index + 1
-                                                                                                    ? "active"
-                                                                                                    : ""
-                                                                                            }
-                                                                                        >
-                                                                                            {currentPage}
-                                                                                        </button>
-                                                                                    )
-                                                                                )}
-                                
-                                                                                <button
-                                                                                    onClick={handleNextPage}
-                                                                                    disabled={!nextPageUrl}
-                                                                                >
-                                                                                    Nxt &raquo;
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="blog-post-paragraph-tag">
-                                                                        <span>
-                                                                            {
-                                                                                item.tags
-                                                                            }
-                                                                        </span>
-                                                                    </div>
-                                                                    <div className="read-date-blog-post-data">
-                                                                        <div>
-                                                                            <span className="read-more-blog">
-                                                                                Read
-                                                                                more..
-                                                                            </span>
-                                                                        </div>
-                                                                        <div>
-                                                                            <span className="read-more-date-with-data-date">
-                                                                                {
-                                                                                    item.publish_date
-                                                                                }
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> */}
+                                                     <div className="container container-blog-data-footer">
+                                                         <div className="row">
+                                                             <div className="col-md-2">
+                                                                 <div className="sj-left-dev-set-data-from-section">
+                                                                     <span>More from SJ</span>
+                                                                     <div className="pagination-blogs-page">
+                                                                  
+                         
+                                                                         <button
+                                                                             onClick={handlePrevPage}
+                                                                             disabled={!prevPageUrl}
+                                                                         >
+                                                                             &laquo; Pre
+                                                                         </button>
+                         
+                                                                         {Array.from(
+                                                                             { length: totalPages },
+                                                                             (_, index) => (
+                                                                                 <button
+                                                                                     key={index}
+                                                                                     onClick={() =>
+                                                                                         handlePaginationClick(
+                                                                                             index + 1
+                                                                                         )
+                                                                                     }
+                                                                                     className={
+                                                                                         currentPage ===
+                                                                                         index + 1
+                                                                                             ? "active"
+                                                                                             : ""
+                                                                                     }
+                                                                                 >
+                                                                                     {currentPage}
+                                                                                 </button>
+                                                                             )
+                                                                         )}
+                         
+                                                                         <button
+                                                                             onClick={handleNextPage}
+                                                                             disabled={!nextPageUrl}
+                                                                         >
+                                                                             Nxt &raquo;
+                                                                         </button>
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                             <div className="blog-post-paragraph-tag">
+                                                                 <span>
+                                                                     {
+                                                                         item.tags
+                                                                     }
+                                                                 </span>
+                                                             </div>
+                                                             <div className="read-date-blog-post-data">
+                                                                 <div>
+                                                                     <span className="read-more-blog">
+                                                                         Read
+                                                                         more..
+                                                                     </span>
+                                                                 </div>
+                                                                 <div>
+                                                                     <span className="read-more-date-with-data-date">
+                                                                         {
+                                                                             item.publish_date
+                                                                         }
+                                                                     </span>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div> */}
                     </div>
                 </div>
-            </>
-        </div>
+            )}
+        </>
     );
 };
 
