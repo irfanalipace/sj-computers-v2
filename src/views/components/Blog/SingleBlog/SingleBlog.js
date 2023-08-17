@@ -140,7 +140,6 @@ const SingleBlog = () => {
                 <div className="row">
                     <div className="col-md-12">
                         <div>
-<<<<<<< HEAD
                             <div className="meeting-data-blog-save-dev-form">
                                 <img src={blogmeeting} />
                                 {/* <img
@@ -152,17 +151,6 @@ const SingleBlog = () => {
                                     alt={blogs.all_text}
                                 /> */}
                             </div>
-=======
-                        {blogs.length > 0 && blogs[0].primary_image && blogs[0].all_text && (
-    <div className="meeting-data-blog-save-dev-form">
-        <img
-            src={blogs[0].primary_image}
-            alt={blogs[0].all_text}
-        />
-    </div>
-)}
-
->>>>>>> sj-optimizations
                             <div className="mid-graph-pargarph-page-data">
                                 {/* <span>{singleblog.title}</span> */}
                             </div>
@@ -248,12 +236,7 @@ const SingleBlog = () => {
                                     }}
                                     onClick={() => blogslist(blog)}
                                 >
-<<<<<<< HEAD
                                     <div className="product-card product-blogs-card">
-=======
-                                   
-                                    <div className="product-card">
->>>>>>> sj-optimizations
                                         {/* <img src={book} alt={blog.title} /> */}
 
                                         <img
@@ -266,7 +249,6 @@ const SingleBlog = () => {
                                         />
                                       
                                         <div className="dev-data-span-card-dev">
-<<<<<<< HEAD
                                             <span> {blog.title}</span>
                                         </div>
                                         <div className="read-more-button-blogs">
@@ -281,16 +263,6 @@ const SingleBlog = () => {
                                         <div className="read-section-date-section">
                                             <div style={{paddingTop:'4px'}}>
                                                 <span style={{fontWeight:'bold'}}>Read Full Blog</span>
-=======
-                                            <span> {blog.tags}</span>
-                                        </div>           
-                                        
-
-                                        <div className="read-section-date-section">
-                                            <div>
-                                                <span>Read me</span>
-                                                
->>>>>>> sj-optimizations
                                             </div>
                                                                                        
                                            <div style={{display:'flex'}}> 

@@ -216,7 +216,12 @@ const Router = () => {
         },
         {
             path: "/:blogslug",
-            element: <BlogsDetails />,
+            element: 
+           <Suspense >
+
+              <BlogsDetails />
+           </Suspense>
+          
         },
         {
             path: "/blogs",
