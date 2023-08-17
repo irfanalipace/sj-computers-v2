@@ -145,13 +145,18 @@
    margin-top: 8px;
 }
 .meeting-data-blog-save-dev-form img {
+  
     max-height: 100%;
     max-width: 100%;
-    width: 1290px;
+    width: 1004px;
     height: 354px;
     left: calc(50% - 494px / 2 - 49px);
     top: 326px;
     margin-top: 18px;
+}
+.meeting-data-blog-save-dev-form {
+    text-align: center;
+  
 }
 .stories-data-effctive-blog span {
     font-family: "Inter";
