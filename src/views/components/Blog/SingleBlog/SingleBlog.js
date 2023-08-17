@@ -99,6 +99,9 @@ const SingleBlog = () => {
             });
     }, []);
 
+
+
+    
     return (
         <div>
             {/* <div className="mein-dev-single-page-cantainer">
@@ -200,7 +203,7 @@ const SingleBlog = () => {
                                     to={`/${blog.slug}`}
                                     className="text-decoration-none"
                                 >
-                                    <div className="product-card">
+                                    <div className="product-card product-blogs-card">
                                         {/* <img src={book} alt={blog.title} /> */}
 
                                         <img
@@ -211,18 +214,33 @@ const SingleBlog = () => {
                                             }
                                             alt={blog.all_text}
                                         />
-
+                                      
                                         <div className="dev-data-span-card-dev">
-                                            <span> {blog.tags}</span>
+                                            <span> {blog.title}</span>
                                         </div>
-
+                                        <div className="read-more-button-blogs">
+                                         <span>{blog.publish_date}</span>
+                                       
+                                          </div>
+                                          <div className="read-more-span-text">
+                                         <span>{blog.meta_description}</span>
+                                        
+                                       
+                                          </div>
                                         <div className="read-section-date-section">
-                                            <div>
-                                                <span>Read me</span>
+                                            <div style={{paddingTop:'4px'}}>
+                                                <span style={{fontWeight:'bold'}}>Read Full Blog</span>
                                             </div>
-                                            <div>
-                                                <span>{blog.publish_date}</span>
+                                                                                       
+                                           <div style={{display:'flex'}}> 
+                                            {blog.tags.split(',').slice(0, 3).map(tag => (
+                                                <div className="span-data-blogs-lending-page" key={tag}>
+                                                <span>{tag}</span>
+                                                </div>
+                                            ))}
                                             </div>
+                                          
+
                                         </div>
                                     </div>
                                 </Link>
