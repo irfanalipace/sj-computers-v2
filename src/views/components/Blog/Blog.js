@@ -70,6 +70,7 @@ console.log('mylocations data',blogList);
                     console.error("API Error:", error);
                     if (error) {
                         setBlogdetailsError(true);
+                        setblogLoading(false)
                     }
                 });
         }
