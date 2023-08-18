@@ -122,20 +122,22 @@ const Blog = () => {
     };
 
     useEffect(() => {
-        const blogContent = document.getElementById("blog-content");
-        const h2Tags = blogContent.getElementsByTagName("h2");
+        if (blogdteails) {
+            const blogContent = document.getElementById("blog-content");
+            const h2Tags = blogContent.getElementsByTagName("h2");
 
-        if (
-            h2Tags.length > 0 &&
-            blogdteails.secondary_image &&
-            blogdteails.alt_secondary_image
-        ) {
-            const firstH2Tag = h2Tags[0];
-            const imgTag = document.createElement("img");
-            imgTag.src = blogdteails.secondary_image;
-            imgTag.alt = blogdteails.alt_secondary_image;
+            if (
+                h2Tags.length > 0 &&
+                blogdteails.secondary_image &&
+                blogdteails.alt_secondary_image
+            ) {
+                const firstH2Tag = h2Tags[0];
+                const imgTag = document.createElement("img");
+                imgTag.src = blogdteails.secondary_image;
+                imgTag.alt = blogdteails.alt_secondary_image;
 
-            firstH2Tag.insertAdjacentElement("afterend", imgTag);
+                firstH2Tag.insertAdjacentElement("afterend", imgTag);
+            }
         }
     }, [blogdteails]);
 
@@ -211,7 +213,7 @@ const Blog = () => {
         <>
             {blogsdetailserror ? (
                 <NotFound />
-            ) : blogList ? (
+            ) : blogList || blogdteails ? (
                 <div>
                     <div>
                         <Helmet>
