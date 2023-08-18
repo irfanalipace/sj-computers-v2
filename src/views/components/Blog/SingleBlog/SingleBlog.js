@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./SingleBlog.css";
-import blogmeeting from "@images/blog/Refurbished-Laptops.webp";
+import blogmeetingdesktop from "@images/blog/Refurbished-Laptops-desktop.webp";
+import blogmeetingmobile from "@images/blog/Refurbished-Laptops-mobile.webp";
 import smimage from "@images/blog/smallimage.png";
 import book from "@images/blog/blogbook.png";
 
@@ -138,9 +139,14 @@ const SingleBlog = () => {
                 <div className="row">
                     <div className="col-md-12">
                         <div>
-                            <div className="meeting-data-blog-save-dev-form">
-                                <img src={blogmeeting} />
-   
+                        <div className="meeting-data-blog-save-dev-form">
+                                {/* <img src={blogmeeting} />
+                                <img src={blogmeetingmobile}  className="mobile-image-blogs-data"/> */}
+                                  {window.innerWidth > 600 ? ( // Check if screen width is greater than 767px (desktop)
+                <img src={blogmeetingdesktop}/>
+            ) : (
+                <img src={blogmeetingmobile} />
+            )}
                             </div>
                             <div className="mid-graph-pargarph-page-data">
                                 {/* <span>{singleblog.title}</span> */}
