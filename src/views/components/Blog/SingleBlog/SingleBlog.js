@@ -140,14 +140,7 @@ const SingleBlog = () => {
                         <div>
                             <div className="meeting-data-blog-save-dev-form">
                                 <img src={blogmeeting} />
-                                {/* <img
-                                    src={
-                                        singleblog.primary_image
-                                            ? singleblog.primary_image
-                                            : blogmeeting
-                                    }
-                                    alt={blogs.all_text}
-                                /> */}
+   
                             </div>
                             <div className="mid-graph-pargarph-page-data">
                                 {/* <span>{singleblog.title}</span> */}
