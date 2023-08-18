@@ -20,7 +20,7 @@ import NotFound from "../../pages/NotFound/NotFound";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import smimage from "@images/blog/smallimage.png";
-import primardataimage from '@images/blog/meeting.png'
+import primardataimage from "@images/blog/meeting.png";
 import { Loader } from "@mantine/core";
 
 const HeadereLinks = [
@@ -35,13 +35,10 @@ const HeadereLinks = [
 
 const Blog = () => {
     const location = useLocation();
-  const { blogList } = location.state || {};
+    const { blogList } = location.state || {};
 
- 
+    console.log("mylocations data", blogList);
 
-   
-console.log('mylocations data',blogList);
-  
     const [blogdteails, setBlogDetails] = useState("");
     const [blogsdetailserror, setBlogdetailsError] = useState(false);
 
@@ -55,26 +52,24 @@ console.log('mylocations data',blogList);
     const { blogslug } = useParams();
 
     useEffect(() => {
-        if(blogList){
-            setBlogDetails(blogList)
-        }else{
-
+        if (blogList) {
+            setBlogDetails(blogList);
+        } else {
             setblogLoading(true);
             blogSlugApiblogDetails(blogslug)
                 .then((response) => {
                     setBlogDetails(response?.data);
-                    
-                    setblogLoading(false)
+
+                    setblogLoading(false);
                 })
                 .catch((error) => {
                     console.error("API Error:", error);
                     if (error) {
                         setBlogdetailsError(true);
-                        setblogLoading(false)
+                        setblogLoading(false);
                     }
                 });
         }
-      
     }, [blogslug]);
 
     const [showMore, setShowMore] = useState(false);
@@ -205,16 +200,18 @@ console.log('mylocations data',blogList);
     //     event.preventDefault();
     //     window.history.pushState(null, null, `#${category_id}`);
     //   };
-if(blogLoading) {
-    return <div className="text-center">
-       <Loader/>
-        </div>
-}
+    if (blogLoading) {
+        return (
+            <div className="text-center">
+                <Loader />
+            </div>
+        );
+    }
     return (
         <>
             {blogsdetailserror ? (
                 <NotFound />
-            ) : (
+            ) : blogList ? (
                 <div>
                     <div>
                         <Helmet>
@@ -365,8 +362,11 @@ if(blogLoading) {
                                     </div>
                                 </div>
                             </div>
-                           
-                            <div className="container image-cainter-dev" style={{height:'400px'}}>
+
+                            <div
+                                className="container image-cainter-dev"
+                                style={{ height: "400px" }}
+                            >
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="background-image-lin-dve ">
@@ -385,32 +385,26 @@ if(blogLoading) {
                                                         }
                                                     />
                                                 )} */}
-                                                
 
-
-                                                <div>
-                                                
-                                    {/* <img
+                                            <div>
+                                                {/* <img
                                         src={blogdteails.primary_image}
                                         alt={blogdteails.all_text}
                                     /> */}
-                                                  <img
-                                            src={
-                                                blogdteails.primary_image   
-                                                    ? blogdteails.primary_image
-                                                    : "https://via.placeholder.com/400x400"
-                                            }
-                                            alt={blogdteails.all_text}
-                                        />
-
-   
-</div>
-
+                                                <img
+                                                    src={
+                                                        blogdteails.primary_image
+                                                            ? blogdteails.primary_image
+                                                            : "https://via.placeholder.com/400x400"
+                                                    }
+                                                    alt={blogdteails.all_text}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3">
@@ -444,7 +438,6 @@ if(blogLoading) {
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                  
                                                                     principles
                                                                     by which we
                                                                     process your
@@ -475,7 +468,6 @@ if(blogLoading) {
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                  
                                                                     principles
                                                                     by which we
                                                                     process your
@@ -506,7 +498,6 @@ if(blogLoading) {
                                                         <div className="col-8">
                                                             <div className="dev-span-section4-dev">
                                                                 <span>
-                                                                   
                                                                     principles
                                                                     by which we
                                                                     process your
@@ -770,6 +761,8 @@ if(blogLoading) {
                                                  </div> */}
                     </div>
                 </div>
+            ) : (
+                <></>
             )}
         </>
     );
