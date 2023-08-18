@@ -364,8 +364,8 @@ div.sticky {
     height: 400px;
     max-height: 100%;
     margin-bottom: 20px;
-    margin-top: 19px;
-    margin-left: -21px;
+   
+  
 }
 .image-cainter-dev {
     padding-left: 45px;
@@ -783,7 +783,7 @@ div.sticky {
 }
 
 .content-data-of-the-iamges-blogs {
-    margin-top: 38px;
+    margin-top: 19px;
 }
 .dve-space-paragrapgh {
     margin-top: 17px;
@@ -944,6 +944,14 @@ div.sticky {
 @media screen and (max-width: 600px) {
     .dive-reight-border {
         border-right:none;
+    }.image-cainter-dev {
+        padding-left: 45px;
+        width: 100%;
+        z-index: 2;
+        position: relative;
+        margin-top: -162px;
+    }.content-data-of-the-iamges-blogs {
+        margin-top: 63px;
     }
     .dev-left-blog-p span {
         font-size: 15px;

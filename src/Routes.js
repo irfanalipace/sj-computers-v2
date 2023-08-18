@@ -217,7 +217,7 @@ const Router = () => {
         {
             path: "/:blogslug",
             element: 
-           <Suspense >
+           <Suspense>
               <BlogsDetails />
            </Suspense>
           
