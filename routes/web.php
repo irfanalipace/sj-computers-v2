@@ -20,6 +20,7 @@ use App\Http\Controllers\SiteMapController;
 |
 */
 
+
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
 
 Route::get('hold-release-product',[HoldReleaseController::class,'updateRecord'])->name('hold-release-product');
@@ -31,7 +32,9 @@ Route::get('export-inventory',[InventoryController::class,'downloadInventoryFile
 
 Route::get('gmarketingfeed',[MarketingController::class,'gmarketingfeed'])->name('gmarketingfeed');
 
-Route::get('sitemap.xml', [SiteMapController::class, 'generateSiteMap']);
+Route::get('pages.xml', [SiteMapController::class, 'generateSiteMap']);
+Route::get('blogs.xml', [SiteMapController::class, 'generateBlogsSiteMap']);
+Route::get('categories.xml', [SiteMapController::class, 'generateCategoriesSiteMap']);
 
 Route::get('/{path?}', function () {
     return view('index');
