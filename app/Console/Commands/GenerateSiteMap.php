@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Blog;
+use App\Models\Category;
+use App\Models\CategoryProduct;
 use App\Models\Product;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -48,90 +50,71 @@ class GenerateSiteMap extends Command
      */
     public function handle()
     {
-        $urlsetAttributes = [
-            'xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
-            'xmlns:xhtml' => 'http://www.w3.org/1999/xhtml',
-            'xmlns:image' => 'http://www.google.com/schemas/sitemap-image/1.1',
-            'xmlns:video' => 'http://www.google.com/schemas/sitemap-video/1.1',
-        ];
-
-
         $baseUrl = config('app.url'); // Retrieve the base URL from the configuration
 
         SitemapGenerator::create($baseUrl)->getSitemap();
 
-        $pagesSitemap = Sitemap::create();
-        $blogsSitemap = Sitemap::create();
-        $categoriesSitemap = Sitemap::create();
+        $pagesSitemap = SitemapIndex::create();
+        $blogsSitemap = SitemapIndex::create();
+        $categoriesSitemap = SitemapIndex::create();
 
         $pagesRoutes = [
             '/',
             '/login',
-            '/register',
-            '/email-sent',
-            '/forget-password',
-            '/forgot_password',
-//            '/products/{productId}',
-//            '/products/search',
-//            '/category/{categorySlug}',
-//            '/account',
-//            '/account/profile',
-//            '/account/update-address',
-//            '/account/update-password',
-//            '/account/orders',
+//            '/register',
+//            '/email-sent',
+//            '/forget-password',
+//            '/forgot_password',
+           '/category.xml',
+
             '/cart',
-            '/checkout/{productId}',
-            '/privacy_policy',
-//            '/shipping_policy',
-//            '/blog',
-//            '/blog-page',
+//            '/checkout/{productId}',
+
             '/about-us',
-//            '/what-we-do',
-//            '/return_refund_policy',
+            '/contact',
+            '/blogs.xml',
+
             '/term_services',
-//            '/checkout',
-//            '/contact',
-//            '/success-transaction',
-//            '/thank-you',
-//            '/test',
-//            '/sku',
+            '/return_refund_policy',
+            '/privacy_policy',
+            '/refund-order'
         ];
 
         $categoriesRoutes = [
-            '/bto',
-            '/gaming_laptops',
-            '/gaming_desktops',
-            '/laptops',
-            '/2_in_1_laptops',
-            '/touch_screen',
-            '/windows_11',
+            'bto',
+            'gaming_laptops',
+            'gaming_desktops',
+            'laptops',
+            '2_in_1_laptops',
+            'touch_screen',
+            'windows_11',
             'windows_10',
-            '/chromebook',
-            '/xps',
-            '/precision',
-            '/latitude',
-            '/screen_17_inch',
-            '/screen_15_inch',
-            '/screen_14_inch',
-            '/screen_13_inch',
-            '/core_i3',
-            '/core_i5',
-            '/core_i7',
-            '/desktop',
-            '/tablet',
-            '/monitor',
-            '/not_set',
-            '/business_computers',
-            '/sff',
-            '/usff',
-            '/tower',
-            '/tiny',
-            '/mini',
+            'chromebook',
+            'xps',
+            'precision',
+            'latitude',
+            'screen_17_inch',
+            'screen_15_inch',
+            'screen_14_inch',
+            'screen_13_inch',
+            'core_i3',
+            'core_i5',
+            'core_i7',
+            'desktop',
+            'tablet',
+            'monitor',
+            'not_set',
+            'business_computers',
+            'sff',
+            'usff',
+            'tower',
+            'tiny',
+            'mini',
         ];
 
 
         foreach ($pagesRoutes as $route) {
-            $pagesSitemap->add(Url::create($baseUrl . $route)); // Use the full URL with the base
+            $pagesSitemap->add($route); // Use the full URL with the base
         }
 
         $blogs = Blog::select('slug')
@@ -139,24 +122,43 @@ class GenerateSiteMap extends Command
             ->get();
 
         foreach ($blogs as $blog) {
-            $blogUrl = $baseUrl . '/' . $blog->slug;
-            $blogsSitemap->add(Url::create($blogUrl));
+            $blogUrl = '/' . $blog->slug;
+            $blogsSitemap->add($blogUrl);
         }
 
         foreach ($categoriesRoutes as $route) {
-            $categoriesSitemap->add(Url::create($baseUrl . '/category' . $route)); // Use the full URL with the base
-        }
+            $route = trim($route);
+            $url =  '/category/' . $route.'xml';
+            $categoriesSitemap->add($url);
 
-//        $products = Product::select('asin')
-//            ->where('quantity','>',0)
-//            ->where('status',1)
-//            ->get();
+            $categoryProductSitemap = SitemapIndex::create();
+
+            $category = Category::where('slug', $route)->first();
+
+            $productIds = CategoryProduct::where('category_id',$category->id)->limit(10)->pluck('product_id');
+
+            $productAsins = Product::whereIn('id',$productIds)
+                ->where('quantity','>',0)
+                ->where('status',1)
+                ->pluck('asin');
+
+//            if(isset($productAsins[0])) {
+//                $categoryProductUrl = '/products/'.$productAsins[0];
+//                $categoryProductSitemap->add($categoryProductUrl);
 //
-//        // Add product URLs to the sitemap
-//        foreach ($products as $product) {
-//            $productUrl = $baseUrl . '/products/' . $product->asin;
-//            $sitemap->add(Url::create($productUrl));
-//        }
+//                Storage::delete('public/sitemap/categories-sitemap/category/'.$route.'.xml');
+//                Storage::put('public/sitemap/categories-sitemap/category/'.$route.'.xml', $categoryProductSitemap);
+//            }
+
+
+            foreach ($productAsins as $productAsin){
+                $categoryProductUrl = '/products/'.$productAsin;
+                $categoryProductSitemap->add($categoryProductUrl);
+            }
+
+            Storage::delete('public/sitemap/categories-sitemap/category/'.$route.'.xml');
+            Storage::put('public/sitemap/categories-sitemap/category/'.$route.'.xml', $categoryProductSitemap);
+        }
 
         $xmlPagesContent = $pagesSitemap->render();
         $xmlBlogsContent = $blogsSitemap->render();
