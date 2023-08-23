@@ -54,31 +54,55 @@ class GenerateSiteMap extends Command
 
         SitemapGenerator::create($baseUrl)->getSitemap();
 
+        $generalSitemap = SitemapIndex::create();
         $pagesSitemap = SitemapIndex::create();
         $blogsSitemap = SitemapIndex::create();
         $categoriesSitemap = SitemapIndex::create();
 
-        $pagesRoutes = [
+
+        $generalRoutes = [
             '/',
+            '/sitemap_pages.xml',
+            '/sitemap_categories.xml',
+            '/sitemap_blogs.xml',
+        ];
+
+        foreach ($generalRoutes as $route) {
+            $generalSitemap->add($route); // Use the full URL with the base
+        }
+
+        $pagesRoutes = [
             '/login',
 //            '/register',
 //            '/email-sent',
 //            '/forget-password',
 //            '/forgot_password',
-           '/category.xml',
 
-            '/cart',
+
+//            '/cart',
 //            '/checkout/{productId}',
 
             '/about-us',
             '/contact',
-            '/blogs.xml',
 
             '/term_services',
             '/return_refund_policy',
             '/privacy_policy',
             '/refund-order'
         ];
+
+        foreach ($pagesRoutes as $route) {
+            $pagesSitemap->add($route); // Use the full URL with the base
+        }
+
+        $blogs = Blog::select('slug')
+            ->where('status',Blog::PUBLISHED)
+            ->get();
+
+        foreach ($blogs as $blog) {
+            $blogUrl = '/' . $blog->slug;
+            $blogsSitemap->add($blogUrl);
+        }
 
         $categoriesRoutes = [
             'bto',
@@ -113,42 +137,21 @@ class GenerateSiteMap extends Command
         ];
 
 
-        foreach ($pagesRoutes as $route) {
-            $pagesSitemap->add($route); // Use the full URL with the base
-        }
-
-        $blogs = Blog::select('slug')
-            ->where('status',Blog::PUBLISHED)
-            ->get();
-
-        foreach ($blogs as $blog) {
-            $blogUrl = '/' . $blog->slug;
-            $blogsSitemap->add($blogUrl);
-        }
-
         foreach ($categoriesRoutes as $route) {
             $route = trim($route);
-            $url =  '/category/' . $route.'xml';
+            $url =  '/category/sitemap_' . $route.'.xml';
             $categoriesSitemap->add($url);
 
             $categoryProductSitemap = SitemapIndex::create();
 
             $category = Category::where('slug', $route)->first();
 
-            $productIds = CategoryProduct::where('category_id',$category->id)->limit(10)->pluck('product_id');
+            $productIds = CategoryProduct::where('category_id',$category->id)->pluck('product_id');
 
             $productAsins = Product::whereIn('id',$productIds)
                 ->where('quantity','>',0)
                 ->where('status',1)
                 ->pluck('asin');
-
-//            if(isset($productAsins[0])) {
-//                $categoryProductUrl = '/products/'.$productAsins[0];
-//                $categoryProductSitemap->add($categoryProductUrl);
-//
-//                Storage::delete('public/sitemap/categories-sitemap/category/'.$route.'.xml');
-//                Storage::put('public/sitemap/categories-sitemap/category/'.$route.'.xml', $categoryProductSitemap);
-//            }
 
 
             foreach ($productAsins as $productAsin){
@@ -156,10 +159,14 @@ class GenerateSiteMap extends Command
                 $categoryProductSitemap->add($categoryProductUrl);
             }
 
-            Storage::delete('public/sitemap/categories-sitemap/category/'.$route.'.xml');
-            Storage::put('public/sitemap/categories-sitemap/category/'.$route.'.xml', $categoryProductSitemap);
+            $xmlCategoryProductContent = $categoryProductSitemap->render();
+
+            Storage::delete('public/sitemap/categories-sitemap/category/sitemap_'.$route.'.xml');
+            Storage::put('public/sitemap/categories-sitemap/category/sitemap_'.$route.'.xml', $xmlCategoryProductContent);
+
         }
 
+        $xmlGeneralContent = $generalSitemap->render();
         $xmlPagesContent = $pagesSitemap->render();
         $xmlBlogsContent = $blogsSitemap->render();
         $xmlCategoriesContent = $categoriesSitemap->render();
@@ -167,6 +174,9 @@ class GenerateSiteMap extends Command
         /*
          * delete old file
          */
+        Storage::delete('public/sitemap/general-sitemap/general_sitemap.xml');
+        Storage::put('public/sitemap/general-sitemap/general_sitemap.xml', $xmlGeneralContent);
+
         Storage::delete('public/sitemap/pages-sitemap/pages_sitemap.xml');
         Storage::put('public/sitemap/pages-sitemap/pages_sitemap.xml', $xmlPagesContent);
 
