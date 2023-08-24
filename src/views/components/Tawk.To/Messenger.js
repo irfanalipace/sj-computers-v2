@@ -4,17 +4,13 @@ import "./Tawk.css";
 
 const TawkTo = () => {
   useEffect(() => {
-    const iframe = document.querySelector(".tawk-messenger-iframe");
-    if (iframe) {
-      const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-      const chatButton = iframeDocument.querySelector(".tawk-float-button");
+    
+    setTimeout(() => {
+        const widget  = document.querySelector('.widget-visible>iframe')
+      if(widget)  widget.style.marginBottom = '25px'
       
-      if (chatButton) {
-        // Apply custom styles to the chat button
-        chatButton.style.bottom='100px'; // Set the bottom property to 12px
-        // You can also add more custom styles here
-      }
-    }
+    }, 3000);
+      
   }, []);
 
   return (
