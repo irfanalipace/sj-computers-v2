@@ -928,7 +928,7 @@ div.sticky {
 }
 @media screen and (min-width: 880px) and (max-width: 991px) {
 .top-stories-data{
-width:35%
+width:31%
 }
 }
 @media screen and (min-width: 768px) and (max-width: 900px) {
@@ -944,6 +944,17 @@ width:35%
         border-right:none;
     }
     }
+    @media screen and (min-width: 594px) and (max-width: 767px) {
+    .image-cainter-dev {
+       
+        margin-top: -64px;
+    }.heading-data-title-image {
+        font-size: 23px;
+    }.div-left-blog-text-written {
+     
+        margin-top: 33px;
+    }
+}
 @media screen and (min-width: 721px) and (max-width: 758px) {
 .main-dev-card-deprt {
     margin-left: 157px;
