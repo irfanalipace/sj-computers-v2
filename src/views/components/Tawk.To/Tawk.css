@@ -1,3 +1,5 @@
-.tawk-to-container button.tawk-custom-color.tawk-custom-border-color.tawk-button.tawk-button-circle.tawk-button-large {
+.tawk-min-container, .tawk-min-container .tawk-button {
+    height: 100%;
+    width: 100%;
     margin-bottom: 12px;
 }

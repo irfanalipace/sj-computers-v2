@@ -11,7 +11,7 @@ const TawkTo = () => {
       
       if (chatButton) {
         // Apply custom styles to the chat button
-        chatButton.style.bottom='44px'; // Set the bottom property to 12px
+        chatButton.style.bottom='100px'; // Set the bottom property to 12px
         // You can also add more custom styles here
       }
     }
