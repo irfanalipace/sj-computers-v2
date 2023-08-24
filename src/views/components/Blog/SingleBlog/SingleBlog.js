@@ -241,7 +241,7 @@ const SingleBlog = () => {
                                                     Read Full Blog
                                                 </span>
                                             </div>
-
+                                            {blog.tags && blog.tags.length > 0 && (
                                             <div style={{ display: "flex" }}>
                                                 {blog.tags
                                                     ?.split(",")
@@ -255,8 +255,11 @@ const SingleBlog = () => {
                                                         </div>
                                                     ))}
                                             </div>
+                                              )}
                                         </div>
+                                        
                                     </div>
+                                    
                                 </Link>
                             </div>
                         ))}
