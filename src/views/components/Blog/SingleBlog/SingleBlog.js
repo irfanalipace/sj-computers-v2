@@ -159,15 +159,7 @@ const SingleBlog = () => {
                                     // }}
                                 />
                                 <span>
-                                    Did you know? SJ Computer is the first, and
-                                    only, marketer to protuct customers in third
-                                    party product liability cases Did you know?
-                                    SJ Computer is the first, and only, marketer
-                                    to protuct customers in third party product
-                                    liability cases Did you know? SJ Computer is
-                                    the first, and only, marketer to protuct
-                                    customers in third party product liability
-                                    cases{" "}
+                                  
                                 </span>
                             </div>
 
@@ -220,7 +212,7 @@ const SingleBlog = () => {
                     <div className="row">
                         {blogs.map((blog) => (
                          
-                            <div className="col-md-4" key={blog.id} >
+                            <div className="col-lg-4 col-md-6 col-sm-12" key={blog.id} >
                                <div>
                       
                                </div>

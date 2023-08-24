@@ -409,8 +409,8 @@ const Blog = () => {
 
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
-                                    <div className="col-md-3">
-                                        <div className="">
+                                    <div className="col-md-3 top-stories-data">
+                                       
                                             <div className="main-dev-card-deprt">
                                                 <div className="left-dev-span-stories">
                                                     <span>
@@ -513,7 +513,7 @@ const Blog = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                      
                                     </div>
 
                                     <div className="col-md-7">
