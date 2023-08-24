@@ -7,7 +7,7 @@ import smimage from "@images/blog/smallimage.png";
 import book from "@images/blog/blogbook.png";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
     getBlogsPagesApi,
     blogSlugApiblogDetails,
@@ -23,7 +23,6 @@ import BlogsDetails from "../../../pages/Blog/BlogsDetails";
 import BlogPage from "../../../pages/Blog/BlogPage";
 
 const SingleBlog = () => {
-
     const [isLoading, setIsLoading] = useState(false);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState("");
@@ -48,12 +47,10 @@ const SingleBlog = () => {
         setCurrentPage(page);
     };
 
-    
     useEffect(() => {
         setIsLoading(true);
         getBlogsPagesApi(currentPage, itemsPerPage)
             .then((response) => {
-              
                 if (response.data && response.data?.data.length > 0) {
                     setBlogs(response.data?.data);
                     setPageCount(response.data?.last_page);
@@ -106,22 +103,15 @@ const SingleBlog = () => {
     //         });
     // }, []);
 
-
-   
     const navigate = useNavigate();
 
     const blogslist = (blog) => {
-
-      navigate(`/${blog.slug}`, {
-        state: {
-          blogList: blog,
-          
-        }
-       
-      });
+        navigate(`/${blog.slug}`, {
+            state: {
+                blogList: blog,
+            },
+        });
     };
-  
-
 
     return (
         <div>
@@ -134,19 +124,19 @@ const SingleBlog = () => {
                     </div>
                 </div>
             </div> */}
-        
+
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
                         <div>
-                        <div className="meeting-data-blog-save-dev-form">
+                            <div className="meeting-data-blog-save-dev-form">
                                 {/* <img src={blogmeeting} />
                                 <img src={blogmeetingmobile}  className="mobile-image-blogs-data"/> */}
-                                  {window.innerWidth > 600 ? ( // Check if screen width is greater than 767px (desktop)
-                <img src={blogmeetingdesktop}/>
-            ) : (
-                <img src={blogmeetingmobile} />
-            )}
+                                {window.innerWidth > 600 ? ( // Check if screen width is greater than 767px (desktop)
+                                    <img src={blogmeetingdesktop} />
+                                ) : (
+                                    <img src={blogmeetingmobile} />
+                                )}
                             </div>
                             <div className="mid-graph-pargarph-page-data">
                                 {/* <span>{singleblog.title}</span> */}
@@ -158,9 +148,7 @@ const SingleBlog = () => {
                                     // __html: singleblog.content
                                     // }}
                                 />
-                                <span>
-                                  
-                                </span>
+                                <span></span>
                             </div>
 
                             {/* <div>
@@ -197,8 +185,7 @@ const SingleBlog = () => {
                     </div>
                 </div>
             </div>
-           
-        
+
             {isLoading ? (
                 <div
                     className="blog-pagesloader-overlay"
@@ -208,20 +195,18 @@ const SingleBlog = () => {
                 </div>
             ) : (
                 <div className="container single-blog-pages-dev-container-all-products">
-                   
                     <div className="row">
                         {blogs.map((blog) => (
-                         
-                            <div className="col-lg-4 col-md-6 col-sm-12" key={blog.id} >
-                               <div>
-                      
-                               </div>
+                            <div
+                                className="col-lg-4 col-md-6 col-sm-12"
+                                key={blog.id}
+                            >
+                                <div></div>
                                 <Link
                                     to={`/${blog.slug}`}
                                     className="text-decoration-none"
-                                   
                                     state={{
-                                        blogList: blog
+                                        blogList: blog,
                                     }}
                                     onClick={() => blogslist(blog)}
                                 >
@@ -230,46 +215,51 @@ const SingleBlog = () => {
 
                                         <img
                                             src={
-                                                blog.thumbnail_image   
+                                                blog.thumbnail_image
                                                     ? blog.thumbnail_image
                                                     : "https://via.placeholder.com/400x400"
                                             }
                                             alt={blog.alt_thumbnail_image}
                                         />
-                                      
+
                                         <div className="dev-data-span-card-dev">
                                             <span> {blog.title}</span>
                                         </div>
                                         <div className="read-more-button-blogs">
-                                         <span>{blog.publish_date}</span>
-                                       
-                                          </div>
-                                          <div className="read-more-span-text">
-                                         <span>{blog.meta_description}</span>
-                                        
-                                       
-                                          </div>
+                                            <span>{blog.publish_date}</span>
+                                        </div>
+                                        <div className="read-more-span-text">
+                                            <span>{blog.meta_description}</span>
+                                        </div>
                                         <div className="read-section-date-section">
-                                            <div style={{paddingTop:'4px'}}>
-                                                <span style={{fontWeight:'bold'}}>Read Full Blog</span>
+                                            <div style={{ paddingTop: "4px" }}>
+                                                <span
+                                                    style={{
+                                                        fontWeight: "bold",
+                                                    }}
+                                                >
+                                                    Read Full Blog
+                                                </span>
                                             </div>
-                                                                                       
-                                           <div style={{display:'flex'}}> 
-                                            {blog.tags.split(',').slice(0, 3).map(tag => (
-                                                <div className="span-data-blogs-lending-page" key={tag}>
-                                                <span>{tag}</span>
-                                                </div>
-                                            ))}
-                                            </div>
-                                          
 
+                                            <div style={{ display: "flex" }}>
+                                                {blog.tags
+                                                    ?.split(",")
+                                                    .slice(0, 3)
+                                                    .map((tag) => (
+                                                        <div
+                                                            className="span-data-blogs-lending-page"
+                                                            key={tag}
+                                                        >
+                                                            <span>{tag}</span>
+                                                        </div>
+                                                    ))}
+                                            </div>
                                         </div>
                                     </div>
                                 </Link>
                             </div>
                         ))}
-                        
-                      
                     </div>
 
                     {/* <div className="pagination-blogs-page">
@@ -329,8 +319,6 @@ const SingleBlog = () => {
                     </div>
                 </div>
             )}
-
-           
         </div>
     );
 };

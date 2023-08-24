@@ -181,7 +181,7 @@ const Blog = () => {
     const wpm = 225;
     const text = `${blogdteails.content}`;
     useEffect(() => {
-        const words = text.trim().split(/\s+/).length;
+        const words = text.trim()?.split(/\s+/).length;
         const time = Math.ceil(words / wpm);
         setReadingTime(time);
     }, [text, wpm]);
@@ -410,110 +410,104 @@ const Blog = () => {
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3 top-stories-data">
-                                       
-                                            <div className="main-dev-card-deprt">
-                                                <div className="left-dev-span-stories">
-                                                    <span>
-                                                        STORIES WE THINK YOU’LL
-                                                        LIKE
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <hr></hr>
-                                                </div>
-                                                <div style={{ padding: "7px" }}>
-                                                    <div className="row">
-                                                        <div className="col-4">
-                                                            <div className="them-stori-mage">
-                                                                <img
-                                                                    src={
-                                                                        blogdteails.thumbnail_image
-                                                                            ? blogdteails.thumbnail_image
-                                                                            : smimage
-                                                                    }
-                                                                    alt={
-                                                                        blogdteails.alt_thumbnail_image
-                                                                    }
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-8">
-                                                            <div className="dev-span-section4-dev">
-                                                                <span>
-                                                                    principles
-                                                                    by which we
-                                                                    process your
-                                                                    personal
-                                                                    data, and
-                                                                    mentions our
-                                                                    responsibilities.
-                                                                </span>
-                                                            </div>
+                                        <div className="main-dev-card-deprt">
+                                            <div className="left-dev-span-stories">
+                                                <span>
+                                                    STORIES WE THINK YOU’LL LIKE
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <hr></hr>
+                                            </div>
+                                            <div style={{ padding: "7px" }}>
+                                                <div className="row">
+                                                    <div className="col-4">
+                                                        <div className="them-stori-mage">
+                                                            <img
+                                                                src={
+                                                                    blogdteails.thumbnail_image
+                                                                        ? blogdteails.thumbnail_image
+                                                                        : smimage
+                                                                }
+                                                                alt={
+                                                                    blogdteails.alt_thumbnail_image
+                                                                }
+                                                            />
                                                         </div>
                                                     </div>
-                                                    <hr></hr>
-                                                    <div className="row">
-                                                        <div className="col-4">
-                                                            <div className="them-stori-mage">
-                                                                <img
-                                                                    src={
-                                                                        blogdteails.thumbnail_image
-                                                                            ? blogdteails.thumbnail_image
-                                                                            : smimage
-                                                                    }
-                                                                    alt={
-                                                                        blogdteails.alt_thumbnail_image
-                                                                    }
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-8">
-                                                            <div className="dev-span-section4-dev">
-                                                                <span>
-                                                                    principles
-                                                                    by which we
-                                                                    process your
-                                                                    personal
-                                                                    data, and
-                                                                    mentions our
-                                                                    responsibilities.
-                                                                </span>
-                                                            </div>
+                                                    <div className="col-8">
+                                                        <div className="dev-span-section4-dev">
+                                                            <span>
+                                                                principles by
+                                                                which we process
+                                                                your personal
+                                                                data, and
+                                                                mentions our
+                                                                responsibilities.
+                                                            </span>
                                                         </div>
                                                     </div>
-                                                    <hr></hr>
-                                                    <div className="row">
-                                                        <div className="col-4">
-                                                            <div className="them-stori-mage">
-                                                                <img
-                                                                    src={
-                                                                        blogdteails.thumbnail_image
-                                                                            ? blogdteails.thumbnail_image
-                                                                            : smimage
-                                                                    }
-                                                                    alt={
-                                                                        blogdteails.alt_thumbnail_image
-                                                                    }
-                                                                />
-                                                            </div>
+                                                </div>
+                                                <hr></hr>
+                                                <div className="row">
+                                                    <div className="col-4">
+                                                        <div className="them-stori-mage">
+                                                            <img
+                                                                src={
+                                                                    blogdteails.thumbnail_image
+                                                                        ? blogdteails.thumbnail_image
+                                                                        : smimage
+                                                                }
+                                                                alt={
+                                                                    blogdteails.alt_thumbnail_image
+                                                                }
+                                                            />
                                                         </div>
-                                                        <div className="col-8">
-                                                            <div className="dev-span-section4-dev">
-                                                                <span>
-                                                                    principles
-                                                                    by which we
-                                                                    process your
-                                                                    personal
-                                                                    data, and
-                                                                    mentions our
-                                                                    responsibilities.
-                                                                </span>
-                                                            </div>
+                                                    </div>
+                                                    <div className="col-8">
+                                                        <div className="dev-span-section4-dev">
+                                                            <span>
+                                                                principles by
+                                                                which we process
+                                                                your personal
+                                                                data, and
+                                                                mentions our
+                                                                responsibilities.
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr></hr>
+                                                <div className="row">
+                                                    <div className="col-4">
+                                                        <div className="them-stori-mage">
+                                                            <img
+                                                                src={
+                                                                    blogdteails.thumbnail_image
+                                                                        ? blogdteails.thumbnail_image
+                                                                        : smimage
+                                                                }
+                                                                alt={
+                                                                    blogdteails.alt_thumbnail_image
+                                                                }
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-8">
+                                                        <div className="dev-span-section4-dev">
+                                                            <span>
+                                                                principles by
+                                                                which we process
+                                                                your personal
+                                                                data, and
+                                                                mentions our
+                                                                responsibilities.
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                      
+                                        </div>
                                     </div>
 
                                     <div className="col-md-7">
