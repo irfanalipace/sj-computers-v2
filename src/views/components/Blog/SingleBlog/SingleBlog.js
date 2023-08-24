@@ -216,8 +216,7 @@ const SingleBlog = () => {
                                         <img
                                             src={
                                                 blog.thumbnail_image
-                                                    ? blog.thumbnail_image
-                                                    : "https://via.placeholder.com/400x400"
+                                                    
                                             }
                                             alt={blog.alt_thumbnail_image}
                                         />
