@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Blog;
+use App\Models\Category;
+use App\Models\CategoryProduct;
 use App\Models\Product;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -48,77 +50,163 @@ class GenerateSiteMap extends Command
      */
     public function handle()
     {
-        $baseUrl = config('app.url'); // Retrieve the base URL from the configuration
 
-        SitemapGenerator::create($baseUrl)->getSitemap();
+        $generalSitemap = SitemapIndex::create();
+        $pagesSitemap = Sitemap::create();
+        $blogsSitemap = Sitemap::create();
+        $categoriesSitemap = SitemapIndex::create();
 
-        $sitemap = SitemapIndex::create();
 
-        $routes = [
+        $generalRoutes = [
+            '/sitemap_pages.xml',
+            '/sitemap_categories.xml',
+            '/sitemap_blogs.xml',
+        ];
+
+        foreach ($generalRoutes as $route) {
+            $generalSitemap->add($route); // Use the full URL with the base
+        }
+
+        $pagesRoutes = [
             '/',
-//            '/login',
+            '/login',
 //            '/register',
 //            '/email-sent',
 //            '/forget-password',
 //            '/forgot_password',
-//            '/products/{productId}',
-//            '/products/search',
-//            '/category/{categorySlug}',
-//            '/account',
-//            '/account/profile',
-//            '/account/update-address',
-//            '/account/update-password',
-//            '/account/orders',
+
+
 //            '/cart',
 //            '/checkout/{productId}',
-//            '/privacy_policy',
-//            '/shipping_policy',
-//            '/blog',
-//            '/blog-page',
-//            '/about-us',
-//            '/what-we-do',
-//            '/return_refund_policy',
-//            '/term_services',
-//            '/checkout',
-//            '/contact',
-//            '/success-transaction',
-//            '/thank-you',
-//            '/test',
-//            '/sku',
+
+            '/about-us',
+            '/contact',
+
+            '/term_services',
+            '/return_refund_policy',
+            '/privacy_policy',
+            '/refund-order'
         ];
-//
-//        $products = Product::select('asin')
-//            ->where('quantity','>',0)
-//            ->where('status',1)
-//            ->get();
 
-
-//         Add product URLs to the sitemap
-//        foreach ($products as $product) {
-//            $productUrl = $baseUrl . '/products/' . $product->asin;
-//            $sitemap->add($productUrl);
-//        }
-
-//        $blogs = Blog::select('slug')
-//            ->where('status',Blog::PUBLISHED)
-//            ->get();
-//
-//        foreach ($blogs as $blog) {
-//
-//            $blogUrl = $baseUrl . '/' . $blog->slug;
-//            $sitemap->add($blogUrl);
-//        }
-
-        foreach ($routes as $route) {
-            $sitemap->add($route); // Use the full URL with the base
+        foreach ($pagesRoutes as $route) {
+            $pagesSitemap->add($route); // Use the full URL with the base
         }
 
-        $xmlContent = $sitemap->render();
+        $blogs = Blog::select('slug')
+            ->where('status',Blog::PUBLISHED)
+            ->get();
+
+        foreach ($blogs as $blog) {
+            $blogUrl = '/' . $blog->slug;
+            $blogsSitemap->add($blogUrl);
+        }
+
+        $categoriesRoutes = [
+            'bto',
+            'gaming_laptops',
+            'gaming_desktops',
+            'laptops',
+            '2_in_1_laptops',
+            'touch_screen',
+            'windows_11',
+            'windows_10',
+            'chromebook',
+            'xps',
+            'precision',
+            'latitude',
+            'screen_17_inch',
+            'screen_15_inch',
+            'screen_14_inch',
+            'screen_13_inch',
+            'core_i3',
+            'core_i5',
+            'core_i7',
+            'desktop',
+            'tablet',
+            'monitor',
+            'not_set',
+            'business_computers',
+            'sff',
+            'usff',
+            'tower',
+            'tiny',
+            'mini',
+        ];
+
+
+        foreach ($categoriesRoutes as $route) {
+            $route = trim($route);
+            $url =  '/category/sitemap_' . $route.'.xml';
+            $categoriesSitemap->add($url);
+
+            $categoryProductSitemap = Sitemap::create();
+
+            $category = Category::where('slug', $route)->first();
+
+            $productIds = CategoryProduct::where('category_id',$category->id)->pluck('product_id');
+
+            $productAsins = Product::whereIn('id',$productIds)
+                ->where('quantity','>',0)
+                ->where('status',1)
+                ->pluck('asin');
+
+
+            foreach ($productAsins as $productAsin){
+                $categoryProductUrl = '/products/'.$productAsin;
+                $categoryProductSitemap->add($categoryProductUrl);
+            }
+
+            $xmlCategoryProductContent = $categoryProductSitemap->render();
+
+            Storage::delete('public/sitemap/categories-sitemap/category/sitemap_'.$route.'.xml');
+            Storage::put('public/sitemap/categories-sitemap/category/sitemap_'.$route.'.xml', $xmlCategoryProductContent);
+
+            $categoryProductSitemapPath =  public_path(). "/storage/sitemap/categories-sitemap/category/sitemap_".$route.'.xml';
+            $xmlContent = file_get_contents($categoryProductSitemapPath);
+            $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+            file_put_contents($categoryProductSitemapPath, $xmlContent);
+
+        }
+
+        $xmlGeneralContent = $generalSitemap->render();
+        $xmlPagesContent = $pagesSitemap->render();
+        $xmlBlogsContent = $blogsSitemap->render();
+        $xmlCategoriesContent = $categoriesSitemap->render();
+
         /*
          * delete old file
          */
-        Storage::delete('public/sitemap/sitemap.xml');
+        Storage::delete('public/sitemap/general-sitemap/general_sitemap.xml');
+        Storage::put('public/sitemap/general-sitemap/general_sitemap.xml', $xmlGeneralContent);
 
-        Storage::put('public/sitemap/sitemap.xml', $xmlContent);
+        $generalSitemapPath =  public_path(). '/storage/sitemap/general-sitemap/general_sitemap.xml';
+        $xmlContent = file_get_contents($generalSitemapPath);
+        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+        file_put_contents($generalSitemapPath, $xmlContent);
+
+        Storage::delete('public/sitemap/pages-sitemap/pages_sitemap.xml');
+        Storage::put('public/sitemap/pages-sitemap/pages_sitemap.xml', $xmlPagesContent);
+
+        $pageSitemapPath =  public_path(). '/storage/sitemap/pages-sitemap/pages_sitemap.xml';
+        $xmlContent = file_get_contents($pageSitemapPath);
+        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+        file_put_contents($pageSitemapPath, $xmlContent);
+
+        Storage::delete('public/sitemap/blogs-sitemap/blogs_sitemap.xml');
+        Storage::put('public/sitemap/blogs-sitemap/blogs_sitemap.xml', $xmlBlogsContent);
+
+        $blogSitemapPath =  public_path(). "/storage/sitemap/blogs-sitemap/blogs_sitemap.xml";
+        $xmlContent = file_get_contents($blogSitemapPath);
+        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+        file_put_contents($blogSitemapPath, $xmlContent);
+
+
+        Storage::delete('public/sitemap/categories-sitemap/categories_sitemap.xml');
+        Storage::put('public/sitemap/categories-sitemap/categories_sitemap.xml', $xmlCategoriesContent);
+
+        $categorySitemapPath =  public_path(). "/storage/sitemap/categories-sitemap/categories_sitemap.xml";
+        $xmlContent = file_get_contents($categorySitemapPath);
+        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+        file_put_contents($categorySitemapPath, $xmlContent);
     }
 }
