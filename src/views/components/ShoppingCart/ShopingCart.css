@@ -365,10 +365,10 @@ head:nth-child(2) {
 }
 
 @media screen and (max-width: 350px) {
-    .cart-box {
+    /* .cart-box {
         width: 239px;
         margin-left: -50px;
-    }
+    } */
     .shop-heading {
         font-size: 15px;
     }
