@@ -396,8 +396,7 @@ const Blog = () => {
                                                 <img
                                                     src={
                                                         blogdteails.primary_image
-                                                            ? blogdteails.primary_image
-                                                            : "https://via.placeholder.com/400x400"
+                                                            
                                                     }
                                                     alt={blogdteails.all_text}
                                                 />
