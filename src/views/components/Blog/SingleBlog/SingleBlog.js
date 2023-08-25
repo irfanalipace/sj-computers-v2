@@ -199,11 +199,11 @@ const SingleBlog = () => {
                         {blogs.map((blog) => (
                             <div
                                 className="col-lg-4 col-md-6 col-sm-12"
-                                key={blog.id}
+                                key={blog?.id}
                             >
                                 <div></div>
                                 <Link
-                                    to={`/${blog.slug}`}
+                                    to={`/${blog?.slug}`}
                                     className="text-decoration-none"
                                     state={{
                                         blogList: blog,
@@ -215,20 +215,20 @@ const SingleBlog = () => {
 
                                         <img
                                             src={
-                                                blog.thumbnail_image
+                                                blog?.thumbnail_image
                                                   
                                             }
-                                            alt={blog.alt_thumbnail_image}
+                                            alt={blog?.alt_thumbnail_image}
                                         />
 
                                         <div className="dev-data-span-card-dev">
-                                            <span> {blog.title}</span>
+                                            <span> {blog?.title}</span>
                                         </div>
                                         <div className="read-more-button-blogs">
-                                            <span>{blog.publish_date}</span>
+                                            <span>{blog?.publish_date}</span>
                                         </div>
                                         <div className="read-more-span-text">
-                                            <span>{blog.meta_description}</span>
+                                            <span>{blog?.meta_description}</span>
                                         </div>
                                         <div className="read-section-date-section">
                                             <div style={{ paddingTop: "4px" }}>
@@ -240,12 +240,12 @@ const SingleBlog = () => {
                                                     Read Full Blog
                                                 </span>
                                             </div>
-                                            {blog.tags && blog.tags.length > 0 && (
+                                            {blog?.tags && blog?.tags?.length > 0 && (
                                             <div style={{ display: "flex" }}>
-                                                {blog.tags
+                                                {blog?.tags
                                                     ?.split(",")
-                                                    .slice(0, 3)
-                                                    .map((tag) => (
+                                                    ?.slice(0, 3)
+                                                    ?.map((tag) => (
                                                         <div
                                                             className="span-data-blogs-lending-page"
                                                             key={tag}
