@@ -9,6 +9,7 @@
     <link rel="icon" href={{ asset('favicon.png') }} />
     <title>Buy Perfect Gaming PC Computers, Laptops & Accessories | SJ Computers LLC</title>
     <!-- <link rel="preload" src={{ asset('/js/images/mobile-banner-1.webp') }} /> -->
+    <meta name="google-site-verification" content="5PS2oRiahS_ZwW7U_GAXkDd24qj8EYMyAHuHSY4D3mc" />
 </head>
 
 <body>
