@@ -42,7 +42,8 @@ class ProductController extends BaseController
         $data = Product::where('status',true)
             ->where(function ($query)use ($request) {
                 $query->where('name', 'LIKE', '%'.$request->get('name').'%')
-                    ->orWhere('sku', 'LIKE', '%'.$request->get('name').'%');
+                    ->orWhere('sku', 'LIKE', '%'.$request->get('name').'%')
+                    ->orWhere('asin', 'LIKE', '%'.$request->get('name').'%');
             })
             ->with('brand')
             ->paginate($perPageRecord);

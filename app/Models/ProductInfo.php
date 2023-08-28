@@ -11,8 +11,14 @@ class ProductInfo extends Model
 
     protected $guarded = ['id'];
 
+    protected $appends = ['backend_value'];
+
     public function getValueAttribute($value){
         $value =   str_replace("_"," ",$value);
         return   str_replace("-"," ",$value);
+    }
+
+    public function getAppendAttribute(){
+        return $this->value;
     }
 }
