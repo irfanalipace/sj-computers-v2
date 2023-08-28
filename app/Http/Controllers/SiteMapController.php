@@ -13,7 +13,7 @@ class SiteMapController extends Controller
 
         return response()->file($file, [
             'Content-Type' => 'application/xml',
-        ]);
+        ])->setStatusCode(200);
     }
 
     public function pageSiteMap()
@@ -22,7 +22,7 @@ class SiteMapController extends Controller
 
         return response()->file($file, [
             'Content-Type' => 'application/xml',
-        ]);
+        ])->setStatusCode(200);
     }
     public function blogsSiteMap()
     {
@@ -30,7 +30,7 @@ class SiteMapController extends Controller
 
         return response()->file($file, [
             'Content-Type' => 'application/xml',
-        ]);
+        ])->setStatusCode(200);
     }
     public function categoriesSiteMap()
     {
@@ -38,7 +38,7 @@ class SiteMapController extends Controller
 
         return response()->file($file, [
             'Content-Type' => 'application/xml',
-        ]);
+        ])->setStatusCode(200);
     }
 
     public function categoryProductSiteMap(Request $request)
@@ -47,6 +47,6 @@ class SiteMapController extends Controller
 
         return response()->file($file, [
             'Content-Type' => 'application/xml',
-        ]);
+        ])->setStatusCode(200);
     }
 }
