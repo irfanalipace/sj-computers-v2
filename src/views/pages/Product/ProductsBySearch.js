@@ -28,8 +28,8 @@ const ProductsList = () => {
     }, [searchString]);
 
     useEffect(() => {
-        return dispatch(SET_SEARCH_STRING(""));
-    });
+        return () => dispatch(SET_SEARCH_STRING(""));
+    }, []);
 
     return (
         <>

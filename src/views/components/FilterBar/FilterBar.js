@@ -101,7 +101,7 @@ const FilterBar = () => {
     };
 
     useEffect(() => {
-        dispatch(SET_FILTERS_ARRAY(filtersInArray));
+        return () => dispatch(SET_FILTERS_ARRAY(filtersInArray));
     }, [filtersInArray]);
 
     useEffect(() => {
