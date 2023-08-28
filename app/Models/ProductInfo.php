@@ -18,7 +18,7 @@ class ProductInfo extends Model
         return   str_replace("-"," ",$value);
     }
 
-    public function getAppendAttribute(){
+    public function getBackendValueAttribute(){
         return $this->value;
     }
 }
