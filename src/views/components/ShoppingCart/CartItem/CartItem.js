@@ -134,7 +134,7 @@ export const CartItem = memo(({ cartData }) => {
 
                                     <button
                                         onClick={deleteItemFunction}
-                                        className="button-link ms-2"
+                                        className="button-link cartitem-delete-button ms-2"
                                         disabled={updatingItem}
                                     >
                                         {updatingItem ? <Loader /> : "Delete"}

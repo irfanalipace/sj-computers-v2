@@ -176,6 +176,10 @@
     border-left: 1px solid #318243;
     line-height: 0;
 }
+
+.button-link-delete-button {
+    padding-top: 19px;
+}
 .selectbutton-option {
     /* box-sizing: border-box; */
     /* position: absolute; */
