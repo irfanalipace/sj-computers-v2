@@ -32,7 +32,7 @@ Route::get('export-inventory',[InventoryController::class,'downloadInventoryFile
 
 Route::get('gmarketingfeed',[MarketingController::class,'gmarketingfeed'])->name('gmarketingfeed');
 
-Route::get('sitemap.xml', [SiteMapController::class, 'generateSiteMap']);
+Route::get('sitemap/index.xml', [SiteMapController::class, 'generateSiteMap']);
 Route::get('sitemap_pages.xml', [SiteMapController::class, 'pageSiteMap']);
 Route::get('sitemap_blogs.xml', [SiteMapController::class, 'blogsSiteMap']);
 Route::get('sitemap_categories.xml', [SiteMapController::class, 'categoriesSiteMap']);
