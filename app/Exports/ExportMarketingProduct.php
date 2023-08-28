@@ -50,6 +50,7 @@ class ExportMarketingProduct implements FromCollection, WithHeadings, ShouldAuto
             $dummyData['google_product_category']    =  "Electronics > Computers > ".$this->getType($product->id);
             $dummyData['identifier_exists']    =   "no";
             $dummyData['shipping_weight']    =   "10 kg";
+            $dummyData['total_quantity_price']    =   (float)$product->price * (int)$product->quantity;
 
             $data[] = $dummyData;
         }
@@ -81,6 +82,6 @@ class ExportMarketingProduct implements FromCollection, WithHeadings, ShouldAuto
     {
         return ["id", "title","description", "brand", "condition", "price", "sale_price",
             "availability", "availability_date", "quantity", "link", "image_link", "additional_image_link",
-            "google_product_category", "identifier_exists", "weight"];
+            "google_product_category", "identifier_exists", "weight" ,"total_quantity_price"];
     }
 }
