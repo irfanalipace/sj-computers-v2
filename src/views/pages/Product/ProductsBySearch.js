@@ -8,6 +8,8 @@ import {
     searchProducts,
 } from "@store/products/productsThunks";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
+import { SET_SEARCH_STRING } from "@store/products/productsSlice";
+
 import "./ProductsBySearch.css";
 
 const ProductsList = () => {
@@ -24,6 +26,10 @@ const ProductsList = () => {
     useEffect(() => {
         if (searchString) dispatch(searchProducts(searchString));
     }, [searchString]);
+
+    useEffect(() => {
+        return dispatch(SET_SEARCH_STRING(""));
+    });
 
     return (
         <>
