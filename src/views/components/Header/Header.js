@@ -165,7 +165,7 @@ const Header = () => {
 
                                                 <div className="nav-right">
                                                     <div className="dropdown">
-                                                        <div className="hover-effect-sets ">
+                                                        {/* <div className="hover-effect-sets ">
                                                             <button
                                                                 className="dropdown-toggle eng-button"
                                                                 type="button"
@@ -174,19 +174,13 @@ const Header = () => {
                                                                 aria-haspopup="false"
                                                                 aria-expanded="false"
                                                             >
-                                                                {/* <img
-                                                                    src={
-                                                                        english
-                                                                    }
-                                                                    alt="English Flag"
-                                                                />{" "}
-                                                                EN */}
-                                                                 <US
-                                title="United States"
-                                className="eng-button-type-data"
-                            /> EN
-                                                            </button>
-                                                        </div>
+                                                               
+                                                           <US
+                                                            title="United States"
+                                                            className="eng-button-type-data"
+                                                        /> EN
+                                                         </button>
+                                                        </div> */}
                                                         <div
                                                             className="dropdown-menu"
                                                             aria-labelledby="dropdownMenuButton"
