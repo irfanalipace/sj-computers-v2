@@ -13,12 +13,14 @@ class ProductInfo extends Model
 
     protected $appends = ['backend_value'];
 
+    public function getBackendValueAttribute(){
+        return $this->attributes['value'];
+    }
+
     public function getValueAttribute($value){
         $value =   str_replace("_"," ",$value);
         return   str_replace("-"," ",$value);
     }
 
-    public function getBackendValueAttribute(){
-        return $this->value;
-    }
+
 }
