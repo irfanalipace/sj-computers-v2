@@ -58,9 +58,9 @@ class GenerateSiteMap extends Command
 
 
         $generalRoutes = [
-            '/sitemap_pages.xml',
-            '/sitemap_categories.xml',
-            '/sitemap_blogs.xml',
+            '/pages.xml',
+            '/categories.xml',
+            '/blogs.xml',
         ];
 
         foreach ($generalRoutes as $route) {
@@ -136,7 +136,7 @@ class GenerateSiteMap extends Command
 
         foreach ($categoriesRoutes as $route) {
             $route = trim($route);
-            $url =  '/category/sitemap_' . $route.'.xml';
+            $url =  '/category/' . $route.'.xml';
             $categoriesSitemap->add($url);
 
             $categoryProductSitemap = Sitemap::create();
@@ -158,11 +158,11 @@ class GenerateSiteMap extends Command
 
             $xmlCategoryProductContent = $categoryProductSitemap->render();
 
-            $publicPath = public_path('sitemap/categories-sitemap/category/sitemap_'.$route.'.xml');
+            $publicPath = public_path('sitemap/category/'.$route.'.xml');
             File::makeDirectory(dirname($publicPath), 0777, true, true);
             file_put_contents($publicPath, $xmlCategoryProductContent);
 
-            $categoryProductSitemapPath =  public_path('sitemap/categories-sitemap/category/sitemap_'.$route.'.xml');
+            $categoryProductSitemapPath =  public_path('sitemap/category/'.$route.'.xml');
             $xmlContent = file_get_contents($categoryProductSitemapPath);
             $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
             file_put_contents($categoryProductSitemapPath, $xmlContent);
@@ -177,43 +177,42 @@ class GenerateSiteMap extends Command
         /*
          * delete old file
          */
-        $publicPath = public_path('sitemap/general-sitemap/general_sitemap.xml');
+        $publicPath = public_path('sitemap/index.xml');
         File::makeDirectory(dirname($publicPath), 0777, true, true);
         file_put_contents($publicPath, $xmlGeneralContent);
-//        Storage::delete('public/sitemap/general-sitemap/general_sitemap.xml');
-//        Storage::put('public/sitemap/general-sitemap/general_sitemap.xml', $xmlGeneralContent);
 
-        $generalSitemapPath =  public_path('sitemap/general-sitemap/general_sitemap.xml');
+
+        $generalSitemapPath =  public_path('sitemap/index.xml');
         $xmlContent = file_get_contents($generalSitemapPath);
         $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($generalSitemapPath, $xmlContent);
 
-        $publicPath = public_path('sitemap/pages-sitemap/pages_sitemap.xml');
+        $publicPath = public_path('sitemap/pages.xml');
         File::makeDirectory(dirname($publicPath), 0777, true, true);
         file_put_contents($publicPath, $xmlPagesContent);
 
 
-        $pageSitemapPath =  public_path('sitemap/pages-sitemap/pages_sitemap.xml');
+        $pageSitemapPath =  public_path('sitemap/pages.xml');
         $xmlContent = file_get_contents($pageSitemapPath);
         $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($pageSitemapPath, $xmlContent);
 
-        $publicPath = public_path('sitemap/blogs-sitemap/blogs_sitemap.xml');
+        $publicPath = public_path('sitemap/blogs.xml');
         File::makeDirectory(dirname($publicPath), 0777, true, true);
         file_put_contents($publicPath, $xmlBlogsContent);
 
 
-        $blogSitemapPath =  public_path('sitemap/blogs-sitemap/blogs_sitemap.xml');
+        $blogSitemapPath =  public_path('sitemap/blogs.xml');
         $xmlContent = file_get_contents($blogSitemapPath);
         $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($blogSitemapPath, $xmlContent);
 
-        $publicPath = public_path('sitemap/categories-sitemap/categories_sitemap.xml');
+        $publicPath = public_path('sitemap/categories.xml');
         File::makeDirectory(dirname($publicPath), 0777, true, true);
         file_put_contents($publicPath, $xmlCategoriesContent);
 
 
-        $categorySitemapPath =  public_path('sitemap/categories-sitemap/categories_sitemap.xml');
+        $categorySitemapPath =  public_path('sitemap/categories.xml');
         $xmlContent = file_get_contents($categorySitemapPath);
         $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($categorySitemapPath, $xmlContent);
