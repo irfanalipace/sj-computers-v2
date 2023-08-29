@@ -16,7 +16,9 @@ class ProductController extends BaseController
 {
     public function getList(request $request){
 
-        $data= Product::where('status',true)->with('brand')->paginate(12);
+        $data= Product::where('status',true)
+            ->where('quantity','>',0)
+            ->with('brand')->paginate(12);
         return $this->sendResponse($data);
     }
 
@@ -40,6 +42,7 @@ class ProductController extends BaseController
     public function searchProduct(SearchProductRequest $request){
         $perPageRecord = $request->get('per_page') ?? 12;
         $data = Product::where('status',true)
+            ->where('quantity','>',0)
             ->where(function ($query)use ($request) {
                 $query->where('name', 'LIKE', '%'.$request->get('name').'%')
                     ->orWhere('sku', 'LIKE', '%'.$request->get('name').'%')
@@ -124,6 +127,7 @@ class ProductController extends BaseController
         if($request->get('name'))
         {
             $sql = $sql->where('status',true)
+                ->where('quantity','>',0)
                 ->where(function ($query)use ($request) {
                     $query->where('name', 'LIKE', '%'.$request->get('name').'%')
                         ->orWhere('sku', 'LIKE', '%'.$request->get('name').'%')
