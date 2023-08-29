@@ -121,7 +121,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
             ) : (
                 <>
                     {isLoading || !category ? (
-                        <h3 className="heading">Fetching Products</h3>
+                        <h3 className="heading">Waiting</h3>
                     ) : (
                         <div className="d-flex justify-content-space-between align-items-center heading">
                             <h3>No Products Found</h3>
