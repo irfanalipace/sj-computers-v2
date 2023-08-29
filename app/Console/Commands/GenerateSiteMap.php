@@ -158,10 +158,13 @@ class GenerateSiteMap extends Command
 
             $xmlCategoryProductContent = $categoryProductSitemap->render();
 
-            Storage::delete('public/sitemap/categories-sitemap/category/sitemap_'.$route.'.xml');
-            Storage::put('public/sitemap/categories-sitemap/category/sitemap_'.$route.'.xml', $xmlCategoryProductContent);
+            $publicPath = public_path('sitemap/categories-sitemap/category/sitemap_'.$route.'.xml');
+            File::makeDirectory(dirname($publicPath), 0777, true, true);
+            file_put_contents($publicPath, $xmlCategoryProductContent);
+//            Storage::delete('public/sitemap/categories-sitemap/category/sitemap_'.$route.'.xml');
+//            Storage::put('public/sitemap/categories-sitemap/category/sitemap_'.$route.'.xml', $xmlCategoryProductContent);
 
-            $categoryProductSitemapPath =  public_path(). "/storage/sitemap/categories-sitemap/category/sitemap_".$route.'.xml';
+            $categoryProductSitemapPath =  public_path('sitemap/categories-sitemap/category/sitemap_'.$route.'.xml');
             $xmlContent = file_get_contents($categoryProductSitemapPath);
             $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
             file_put_contents($categoryProductSitemapPath, $xmlContent);
@@ -176,35 +179,46 @@ class GenerateSiteMap extends Command
         /*
          * delete old file
          */
-        Storage::delete('public/sitemap/general-sitemap/general_sitemap.xml');
-        Storage::put('public/sitemap/general-sitemap/general_sitemap.xml', $xmlGeneralContent);
+        $publicPath = public_path('sitemap/general-sitemap/general_sitemap.xml');
+        File::makeDirectory(dirname($publicPath), 0777, true, true);
+        file_put_contents($publicPath, $xmlGeneralContent);
+//        Storage::delete('public/sitemap/general-sitemap/general_sitemap.xml');
+//        Storage::put('public/sitemap/general-sitemap/general_sitemap.xml', $xmlGeneralContent);
 
-        $generalSitemapPath =  public_path(). '/storage/sitemap/general-sitemap/general_sitemap.xml';
+        $generalSitemapPath =  public_path('sitemap/general-sitemap/general_sitemap.xml');
         $xmlContent = file_get_contents($generalSitemapPath);
         $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($generalSitemapPath, $xmlContent);
 
-        Storage::delete('public/sitemap/pages-sitemap/pages_sitemap.xml');
-        Storage::put('public/sitemap/pages-sitemap/pages_sitemap.xml', $xmlPagesContent);
+        $publicPath = public_path('sitemap/pages-sitemap/pages_sitemap.xml');
+        File::makeDirectory(dirname($publicPath), 0777, true, true);
+        file_put_contents($publicPath, $xmlPagesContent);
+//        Storage::delete('public/sitemap/pages-sitemap/pages_sitemap.xml');
+//        Storage::put('public/sitemap/pages-sitemap/pages_sitemap.xml', $xmlPagesContent);
 
-        $pageSitemapPath =  public_path(). '/storage/sitemap/pages-sitemap/pages_sitemap.xml';
+        $pageSitemapPath =  public_path('sitemap/pages-sitemap/pages_sitemap.xml');
         $xmlContent = file_get_contents($pageSitemapPath);
         $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($pageSitemapPath, $xmlContent);
 
-        Storage::delete('public/sitemap/blogs-sitemap/blogs_sitemap.xml');
-        Storage::put('public/sitemap/blogs-sitemap/blogs_sitemap.xml', $xmlBlogsContent);
+        $publicPath = public_path('sitemap/blogs-sitemap/blogs_sitemap.xml');
+        File::makeDirectory(dirname($publicPath), 0777, true, true);
+        file_put_contents($publicPath, $xmlBlogsContent);
+//        Storage::delete('public/sitemap/blogs-sitemap/blogs_sitemap.xml');
+//        Storage::put('public/sitemap/blogs-sitemap/blogs_sitemap.xml', $xmlBlogsContent);
 
-        $blogSitemapPath =  public_path(). "/storage/sitemap/blogs-sitemap/blogs_sitemap.xml";
+        $blogSitemapPath =  public_path('sitemap/blogs-sitemap/blogs_sitemap.xml');
         $xmlContent = file_get_contents($blogSitemapPath);
         $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($blogSitemapPath, $xmlContent);
 
+        $publicPath = public_path('sitemap/categories-sitemap/categories_sitemap.xml');
+        File::makeDirectory(dirname($publicPath), 0777, true, true);
+        file_put_contents($publicPath, $xmlCategoriesContent);
+//        Storage::delete('public/sitemap/categories-sitemap/categories_sitemap.xml');
+//        Storage::put('public/sitemap/categories-sitemap/categories_sitemap.xml', $xmlCategoriesContent);
 
-        Storage::delete('public/sitemap/categories-sitemap/categories_sitemap.xml');
-        Storage::put('public/sitemap/categories-sitemap/categories_sitemap.xml', $xmlCategoriesContent);
-
-        $categorySitemapPath =  public_path(). "/storage/sitemap/categories-sitemap/categories_sitemap.xml";
+        $categorySitemapPath =  public_path('sitemap/categories-sitemap/categories_sitemap.xml');
         $xmlContent = file_get_contents($categorySitemapPath);
         $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($categorySitemapPath, $xmlContent);
