@@ -58,9 +58,9 @@ class GenerateSiteMap extends Command
 
 
         $generalRoutes = [
-            '/pages.xml',
-            '/categories.xml',
-            '/blogs.xml',
+            '/sitemap/pages.xml',
+            '/sitemap/categories.xml',
+            '/sitemap/blogs.xml',
         ];
 
         foreach ($generalRoutes as $route) {
