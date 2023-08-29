@@ -11,7 +11,7 @@ import {
     setCartDetails,
     clearCart,
 } from "@store/cart/cartThunks";
-import { updateState } from "@store/states/statesThunks";
+import { updateState, currentState } from "@store/states/statesThunks";
 import { getEstimatedDelivery } from "@store/orders/ordersThunk";
 import {
     getCartItems,
@@ -24,12 +24,14 @@ const AppWrapper = ({ children }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cartItems = getCartItems() || [];
     const cartDetails = getCartDetails();
+    const state = useSelector((state) => state.states.currentState);
+
     useEffect(() => {
         if (isAuthenticated) {
             dispatch(clearCart()); //clear store cart items because all cart items are again fetched from backend to sync with localCart
-            dispatch(getShippingDetails());
+            dispatch(getShippingDetails()); // fetch shipping details of customer and stor in redux
             dispatch(syncCartItems()); //gets all the cart items stored in database and stores them in store and local storage similarly stores local cart items in database
-            // dispatch(currentState());
+            dispatch(currentState()); // fetches current state from api and sets in redux store
             // dispatch(conditionState());
 
             if (!window.localStorage.getItem("state")?.id) {
@@ -49,7 +51,7 @@ const AppWrapper = ({ children }) => {
         setTimeout(() => {
             dispatch(fetchCategory());
             dispatch(fetchBrands());
-            dispatch(getEstimatedDelivery());
+            dispatch(getEstimatedDelivery(state?.id));
 
             if (!isAuthenticated) {
                 if (cartItems?.length > 0 && cartDetails?.total_items > 0) {

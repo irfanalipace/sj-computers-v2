@@ -66,9 +66,9 @@ export function OrderListhApi() {
     });
 }
 
-export function getEstimatedDaysApi() {
+export function getEstimatedDaysApi(data) {
     return new Promise((resolve, reject) => {
-        ApiService.get("/estimated-days")
+        ApiService.get("/estimated-days", null, data)
             .then((response) => {
                 console.print(
                     "file: order.js | getEstimatedDays| response",
