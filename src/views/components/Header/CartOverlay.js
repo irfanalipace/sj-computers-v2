@@ -118,7 +118,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                             <strong className="">
                                                                 $
                                                                 {parseFloat(
-                                                                    5555555.6666666
+                                                                    item?.price
                                                                 ).toFixed(2)}
                                                             </strong>
                                                         </p>
