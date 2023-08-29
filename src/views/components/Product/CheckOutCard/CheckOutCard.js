@@ -169,6 +169,7 @@ export const CheckOutCard = ({ product }) => {
 
                                 <AddCartComponents
                                     product={product}
+                                    quantity={quantity}
                                     className=" button1 button-text-button"
                                 />
                             </div>

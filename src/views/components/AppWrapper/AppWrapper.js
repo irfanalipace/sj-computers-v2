@@ -13,20 +13,21 @@ import {
 } from "@store/cart/cartThunks";
 import { updateState } from "@store/states/statesThunks";
 import { getEstimatedDelivery } from "@store/orders/ordersThunk";
-import { getCartItems, getCartDetails } from "@utils/cartHelpers";
+import {
+    getCartItems,
+    getCartDetails,
+    clearCartLocally,
+} from "@utils/cartHelpers";
 
 const AppWrapper = ({ children }) => {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cartItems = getCartItems() || [];
     const cartDetails = getCartDetails();
-    console.log("in AppWrapper: ", isAuthenticated);
     useEffect(() => {
-        console.log("111111 in UserEffect: ", isAuthenticated);
         if (isAuthenticated) {
             dispatch(clearCart()); //clear store cart items because all cart items are again fetched from backend to sync with localCart
             dispatch(getShippingDetails());
-            console.log("111111 in isAuthenticated: ", isAuthenticated);
             dispatch(syncCartItems()); //gets all the cart items stored in database and stores them in store and local storage similarly stores local cart items in database
             // dispatch(currentState());
             // dispatch(conditionState());
@@ -51,10 +52,14 @@ const AppWrapper = ({ children }) => {
             dispatch(getEstimatedDelivery());
 
             if (!isAuthenticated) {
-                cartItems.forEach((cartItem) => {
-                    dispatch(addToLocalCart({ cartItem })); // adds local cart items to redux store
-                });
-                dispatch(setCartDetails(cartDetails)); // add local store details to redux store
+                if (cartItems?.length > 0 && cartDetails?.total_items > 0) {
+                    cartItems.forEach((cartItem) => {
+                        dispatch(addToLocalCart({ cartItem })); // adds local cart items to redux store
+                    });
+                    dispatch(setCartDetails(cartDetails)); // add local store details to redux store
+                } else {
+                    clearCartLocally();
+                }
             }
         }, 3000); // giving timeout to increase initial page load speed
     }, []);

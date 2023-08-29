@@ -6,12 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 import Button from "@common/Button/Button";
 import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
 import "./ProductCard.css";
-const AddCartComponents = ({ product, className }) => {
-    const currentState = useSelector((state) => state.states.currentState);
+const AddCartComponents = ({ product, className, quantity = 1 }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cart = useSelector((state) => state.cart.cart);
     const details = useSelector((state) => state.cart.details);
-    const [quantity, setQuantity] = useState(1);
     const [show, setShow] = useState(false);
     const [cartItem, setCartItem] = useState(null);
     const handleShow = () => setShow(!show);
@@ -38,12 +36,14 @@ const AddCartComponents = ({ product, className }) => {
 
         if (isAuthenticated)
             dispatch(addToCart({ cartItem }, () => navigate("/cart")));
-        else
+        else {
+            console.log("cartItem: ", cartItem);
             dispatch(
                 addToLocalCart({ cartItem, cartDetails }, () =>
                     navigate("/cart")
                 )
             );
+        }
     };
     useEffect(() => {
         let item = cart.filter((ci) => ci.id === product.id);
