@@ -19,7 +19,6 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
     const [showModal, setShowModal] = useState(false);
     const modalRef = useRef(null);
 
-    
     const handleClick = () => {
         setShowModal(true);
     };
@@ -90,7 +89,9 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                             <strong className="price-with-sign">
                                                 $
                                                 {cartDetails?.sub_total
-                                                    ? cartDetails.sub_total
+                                                    ? parseFloat(
+                                                          cartDetails.sub_total
+                                                      ).toFixed(2)
                                                     : 0}
                                             </strong>
                                         </span>
@@ -163,13 +164,12 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                         </button>
                                                     </div>
 
-                                                    {showModal &&  (
+                                                    {showModal && (
                                                         <div className="overlay-model-checkout-model">
                                                             <div
                                                                 className="overlay-modal-checkout-model-checkout-model"
                                                                 ref={modalRef}
                                                             >
-                                                              
                                                                 <CheckoutBox />
                                                                 {/* <div className="modal-content">
                                                                     <form>
