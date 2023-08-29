@@ -113,8 +113,8 @@ function UpdateStateModal({ isOpen = false, handleClose }) {
                             id="dropdown-basic"
                             className="dropdown-button-box d-flex justify-content-between align-items-center "
                         >
-                            {currentState?.name ||
-                                state?.name ||
+                            {state?.name ||
+                                currentState?.name ||
                                 "Select State"}
                             <img src={img1} className="img-arrow" />
                         </Dropdown.Toggle>
