@@ -48,10 +48,13 @@ const AppWrapper = ({ children }) => {
     }, [isAuthenticated]);
 
     useEffect(() => {
+        dispatch(getEstimatedDelivery(state?.id));
+    }, [state]);
+
+    useEffect(() => {
         setTimeout(() => {
             dispatch(fetchCategory());
             dispatch(fetchBrands());
-            dispatch(getEstimatedDelivery(state?.id));
 
             if (!isAuthenticated) {
                 if (cartItems?.length > 0 && cartDetails?.total_items > 0) {
