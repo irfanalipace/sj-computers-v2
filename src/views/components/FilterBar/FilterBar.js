@@ -78,7 +78,7 @@ const FilterBar = () => {
         setFiltersInArray((prevSelectedFilters) => {
             let filter = {
                 key: category,
-                backend_value: option,
+                value: option,
             };
 
             // const isChecked = event.target.checked;
@@ -221,12 +221,12 @@ const FilterBar = () => {
                                 id={`${option.value}-${index}`}
                                 type="radio"
                                 name={category} // Add a name attribute to group the radio buttons by category
-                                value={option.value} // Add a value attribute to specify the value of the selected radio button
+                                value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
                                 onChange={(event) =>
                                     handleFilterSelect(
                                         event,
                                         category,
-                                        option.value
+                                        option.backend_value
                                     )
                                 }
                             />
