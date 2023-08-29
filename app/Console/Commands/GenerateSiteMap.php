@@ -136,7 +136,7 @@ class GenerateSiteMap extends Command
 
         foreach ($categoriesRoutes as $route) {
             $route = trim($route);
-            $url =  '/category/' . $route.'.xml';
+            $url =  '/sitemap/category/' . $route.'.xml';
             $categoriesSitemap->add($url);
 
             $categoryProductSitemap = Sitemap::create();
