@@ -169,22 +169,22 @@ export const syncCartItems = () => {
             //     },
             // });
             if (localCartItems?.length > 0) {
-                cartItems = localCartItems?.map((item) => {
-                    let cartItem = {
-                        id: item.id,
-                        product_id: item.id,
-                        qty: item?.quantity,
-                    };
+                cartItems = localCartItems
+                    ?.filter((item) => !item.notLocal)
+                    ?.map((item) => {
+                        // converting cart items according to api payload
+                        let cartItem = {
+                            id: item.id,
+                            product_id: item.id,
+                            qty: item?.quantity,
+                        };
 
-                    updateItemLocalProperty(cartItem); //this function adds no local property on cart item in localStorage because now it is also added in database cart so we know that which items in our local storage are also stored in database to manage deletion of cart items
-                    return cartItem;
-                });
+                        updateItemLocalProperty(cartItem); //this function adds no local property on cart item in localStorage because now it is also added in database cart so we know that which items in our local storage are also stored in database to manage deletion of cart items
+                        return cartItem;
+                    });
             }
-            console.log("111111 cartItems", cartItems);
             if (cartItems.length > 0) {
                 let response = await addListToCartApi({ cartItems }); // posting local storage cart items in database
-
-                console.log("111111 response", response);
                 let items = { ...response.data.original.data };
                 delete items.details;
                 items = objectToArray(items);

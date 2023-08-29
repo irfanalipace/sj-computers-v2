@@ -80,7 +80,6 @@ const FilterBar = () => {
                 key: category,
                 value: option,
             };
-
             // const isChecked = event.target.checked;
 
             // if (isChecked) {
@@ -93,7 +92,6 @@ const FilterBar = () => {
 
             if (index > -1) {
                 tempArray[index] = filter;
-
                 return tempArray;
             }
             return [...tempArray, filter];
@@ -101,7 +99,7 @@ const FilterBar = () => {
     };
 
     useEffect(() => {
-        return () => dispatch(SET_FILTERS_ARRAY(filtersInArray));
+        dispatch(SET_FILTERS_ARRAY(filtersInArray));
     }, [filtersInArray]);
 
     useEffect(() => {
@@ -211,14 +209,14 @@ const FilterBar = () => {
 
                     <li
                         className="filter-value"
-                        key={`${option.value}-${index}`}
+                        key={`${option.backend_value}-${index}`}
                     >
                         <label
                             className="radio-container"
-                            htmlFor={`${option.value}-${index}`}
+                            htmlFor={`${option.backend_value}-${index}`}
                         >
                             <input
-                                id={`${option.value}-${index}`}
+                                id={`${option.backend_value}-${index}`}
                                 type="radio"
                                 name={category} // Add a name attribute to group the radio buttons by category
                                 value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
@@ -486,7 +484,7 @@ const FilterBar = () => {
 
     let renderedCategories = Object.entries(filters).map(
         ([category, options], index) => (
-            <>
+            <div key={index}>
                 {(!!filters[category].length ||
                     !Array.isArray(filters[category])) && (
                     <li className="filter-key" key={`${category}-${index}`}>
@@ -498,7 +496,7 @@ const FilterBar = () => {
                         </ul>
                     </li>
                 )}
-            </>
+            </div>
         )
     );
 

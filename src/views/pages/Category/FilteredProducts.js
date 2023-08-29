@@ -22,7 +22,6 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     } = useSelector((state) => state.products);
 
     const prod = useSelector((state) => state.products);
-    console.print("@filtersArray", filtersArray);
 
     const [mounted, setMounted] = useState(false);
 
@@ -34,7 +33,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
         name: "",
         category_id: category?.id,
     };
- 
+
     const init = () => {
         // dispatch(SET_SEARCH_STRING(""));
         dispatch(SET_SELECTED_CATEGORY(null));
@@ -58,7 +57,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
             name: "",
             filter: filtersArray,
         };
-     
+
         dispatch(filterProducts(filterObject, true));
     };
 
@@ -77,7 +76,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
         }
         // }, [searchString, filtersArray]);
     }, [filtersArray]);
-   
+
     useEffect(() => {
         filterObject = {
             ...filterObject,

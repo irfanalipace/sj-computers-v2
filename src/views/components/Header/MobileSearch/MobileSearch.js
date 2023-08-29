@@ -165,7 +165,6 @@ const MobileSearch = () => {
                                 ></i> */}
                                 <FontAwesomeIcon
                                     icon={faSearch}
-                                    size="x2"
                                     className="fa-search text-grey set"
                                 />
                             </span>
