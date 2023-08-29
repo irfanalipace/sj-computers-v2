@@ -52,6 +52,8 @@ export const searchProducts = (name = "", page = 1, per_page = 12) => {
 };
 
 export const filterProducts = (filter, loadMore = false) => {
+    console.log('fillllll' ,  filter)
+    
     return async (dispatch) => {
         try {
             if (loadMore) dispatch({ type: SET_IS_SHOW_MORE, payload: {} });
@@ -59,6 +61,7 @@ export const filterProducts = (filter, loadMore = false) => {
                 dispatch({ type: LOADING, payload: {} });
                 dispatch({ type: SET_FILTERING_PRODUCTS, payload: {} });
             }
+            // const filterdata=
             const response = await filterProductsApi(filter);
             if (filter.page === 1) dispatch(RESET_PAGE());
             if (response?.data?.data) {

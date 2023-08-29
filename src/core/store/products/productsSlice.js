@@ -80,6 +80,7 @@ const productSlice = createSlice({
             state.selectedCategory = action.payload;
         },
         SET_FILTERS_ARRAY: (state, action) => {
+            // {console.log('fillarray' , action)}
             state.filtersArray = [...action.payload];
         },
         SET_FILTERING_PRODUCTS: (state, action) => {

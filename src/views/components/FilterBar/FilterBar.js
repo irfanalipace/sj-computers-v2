@@ -78,7 +78,7 @@ const FilterBar = () => {
         setFiltersInArray((prevSelectedFilters) => {
             let filter = {
                 key: category,
-                value: option,
+                backend_value: option,
             };
 
             // const isChecked = event.target.checked;
