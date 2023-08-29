@@ -161,8 +161,6 @@ class GenerateSiteMap extends Command
             $publicPath = public_path('sitemap/categories-sitemap/category/sitemap_'.$route.'.xml');
             File::makeDirectory(dirname($publicPath), 0777, true, true);
             file_put_contents($publicPath, $xmlCategoryProductContent);
-//            Storage::delete('public/sitemap/categories-sitemap/category/sitemap_'.$route.'.xml');
-//            Storage::put('public/sitemap/categories-sitemap/category/sitemap_'.$route.'.xml', $xmlCategoryProductContent);
 
             $categoryProductSitemapPath =  public_path('sitemap/categories-sitemap/category/sitemap_'.$route.'.xml');
             $xmlContent = file_get_contents($categoryProductSitemapPath);
@@ -193,8 +191,7 @@ class GenerateSiteMap extends Command
         $publicPath = public_path('sitemap/pages-sitemap/pages_sitemap.xml');
         File::makeDirectory(dirname($publicPath), 0777, true, true);
         file_put_contents($publicPath, $xmlPagesContent);
-//        Storage::delete('public/sitemap/pages-sitemap/pages_sitemap.xml');
-//        Storage::put('public/sitemap/pages-sitemap/pages_sitemap.xml', $xmlPagesContent);
+
 
         $pageSitemapPath =  public_path('sitemap/pages-sitemap/pages_sitemap.xml');
         $xmlContent = file_get_contents($pageSitemapPath);
@@ -204,8 +201,7 @@ class GenerateSiteMap extends Command
         $publicPath = public_path('sitemap/blogs-sitemap/blogs_sitemap.xml');
         File::makeDirectory(dirname($publicPath), 0777, true, true);
         file_put_contents($publicPath, $xmlBlogsContent);
-//        Storage::delete('public/sitemap/blogs-sitemap/blogs_sitemap.xml');
-//        Storage::put('public/sitemap/blogs-sitemap/blogs_sitemap.xml', $xmlBlogsContent);
+
 
         $blogSitemapPath =  public_path('sitemap/blogs-sitemap/blogs_sitemap.xml');
         $xmlContent = file_get_contents($blogSitemapPath);
@@ -215,8 +211,7 @@ class GenerateSiteMap extends Command
         $publicPath = public_path('sitemap/categories-sitemap/categories_sitemap.xml');
         File::makeDirectory(dirname($publicPath), 0777, true, true);
         file_put_contents($publicPath, $xmlCategoriesContent);
-//        Storage::delete('public/sitemap/categories-sitemap/categories_sitemap.xml');
-//        Storage::put('public/sitemap/categories-sitemap/categories_sitemap.xml', $xmlCategoriesContent);
+
 
         $categorySitemapPath =  public_path('sitemap/categories-sitemap/categories_sitemap.xml');
         $xmlContent = file_get_contents($categorySitemapPath);
