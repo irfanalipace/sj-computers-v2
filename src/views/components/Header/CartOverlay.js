@@ -38,25 +38,22 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
 
     const handleClick = () => {
         setShowModal(true);
-        
     };
 
     const handleCloseModal = () => {
         setShowModal(false);
-        
     };
 
     const handleClickOutside = (event) => {
         if (modalRef.current && !modalRef.current.contains(event.target)) {
             setShowModal(false);
-            toggleSidebar(false)
+            toggleSidebar(false);
         }
     };
 
     useEffect(() => {
         if (showModal) {
             document.addEventListener("mousedown", handleClickOutside);
-            
         } else {
             document.removeEventListener("mousedown", handleClickOutside);
         }
@@ -93,8 +90,8 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                         </div>
                                         <div className="col-md-10">
                                             <div className="d-flex flex-column h-100 justify-content-between mx-0">
-                                                <div className="items-card-data">
-                                                    <div className="col-md-10">
+                                                <div className="items-card-data row">
+                                                    <div className="col-md-10 item-detail-col">
                                                         <p>
                                                             <strong className="item-details">
                                                                 {
@@ -119,7 +116,10 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                     <div className="col-md-2 price-item">
                                                         <p>
                                                             <strong className="">
-                                                                ${item?.price}
+                                                                $
+                                                                {parseFloat(
+                                                                    5555555.6666666
+                                                                ).toFixed(2)}
                                                             </strong>
                                                         </p>
                                                     </div>
@@ -220,7 +220,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                 </Link>
                                             </div>
                                         ) : (
-                                            <div className="mt-2" >
+                                            <div className="mt-2">
                                                 <Link
                                                     to="/cart"
                                                     className="text-decoration-none cart-text-link"
@@ -236,7 +236,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                     onClick={handleClick}
                                                 >
                                                     <button className="processed-button">
-                                                    Proceed to checkout (
+                                                        Proceed to checkout (
                                                         {details?.total_items}{" "}
                                                         item)
                                                     </button>
@@ -247,59 +247,81 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                             className="overlay-modal-checkout-model-checkout-model-sidebar-checkout"
                                                             ref={modalRef}
                                                         >
-                                                              <div className="modal-content-sidebar-checkout">
-                                                        <form>
-                                                            <div className="dve-heading-data-login-checkout-sidebar-checkout">
-                                                                <h4 className="login-h3">
-                                                                    Sign in to checkout
-                                                                </h4>
-                                                            </div>
-                                                        
-                                                            <div className="d-flex justify-content-center-sidebar-checkout w-100">
-                                                                <Link
-                                                                    className="text-decoration-none"
-                                                                    to={"/login"}
-                                                                    onClick={toggleSidebar}
-                                                                >
-                                                                    {" "}
-                                                                    <button 
-                                                                
-                                                                    >
-                                                                        Sign in
-                                                                    </button>
-                                                                </Link>
-                                                            </div>
-                                                            <div>
-                                                                <p className="small-text-paragrap">
-                                                                    <Link
-                                                                        to="/login"
-                                                                        className="text-decoration-none"
-                                                                    >
-                                                                        Don't have account? <span>Sign Up</span>
-                                                                    </Link>
-                                                                </p>
-                                                            </div>
-                                                            <div className="or-dev-section-overlay-checkout-sidebar-checkout">
-                                                                <span
-                                                                    style={{
-                                                                        color: "black",
-                                                                    }}
-                                                                >
-                                                                    OR
-                                                                </span>
-                                                            </div>
+                                                            <div className="modal-content-sidebar-checkout">
+                                                                <form>
+                                                                    <div className="dve-heading-data-login-checkout-sidebar-checkout">
+                                                                        <h4 className="login-h3">
+                                                                            Sign
+                                                                            in
+                                                                            to
+                                                                            checkout
+                                                                        </h4>
+                                                                    </div>
 
-                                                            <div className="after-the-or-dev-sction-leve-model-checkout-sidebar-checkout">
-                                                                <Link
-                                                                onClick={toggleSidebar}
-                                                                    className="text-decoration-none"
-                                                                    to={"/checkout"}
-                                                                >
-                                                                    <button> Continue as a Guest</button>
-                                                                </Link>
+                                                                    <div className="d-flex justify-content-center-sidebar-checkout w-100">
+                                                                        <Link
+                                                                            className="text-decoration-none"
+                                                                            to={
+                                                                                "/login"
+                                                                            }
+                                                                            onClick={
+                                                                                toggleSidebar
+                                                                            }
+                                                                        >
+                                                                            {" "}
+                                                                            <button>
+                                                                                Sign
+                                                                                in
+                                                                            </button>
+                                                                        </Link>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className="small-text-paragrap">
+                                                                            <Link
+                                                                                to="/login"
+                                                                                className="text-decoration-none"
+                                                                            >
+                                                                                Don't
+                                                                                have
+                                                                                account?{" "}
+                                                                                <span>
+                                                                                    Sign
+                                                                                    Up
+                                                                                </span>
+                                                                            </Link>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div className="or-dev-section-overlay-checkout-sidebar-checkout">
+                                                                        <span
+                                                                            style={{
+                                                                                color: "black",
+                                                                            }}
+                                                                        >
+                                                                            OR
+                                                                        </span>
+                                                                    </div>
+
+                                                                    <div className="after-the-or-dev-sction-leve-model-checkout-sidebar-checkout">
+                                                                        <Link
+                                                                            onClick={
+                                                                                toggleSidebar
+                                                                            }
+                                                                            className="text-decoration-none"
+                                                                            to={
+                                                                                "/checkout"
+                                                                            }
+                                                                        >
+                                                                            <button>
+                                                                                {" "}
+                                                                                Continue
+                                                                                as
+                                                                                a
+                                                                                Guest
+                                                                            </button>
+                                                                        </Link>
+                                                                    </div>
+                                                                </form>
                                                             </div>
-                                                        </form>
-                                                         </div>
                                                         </div>
                                                     </div>
                                                 )}
