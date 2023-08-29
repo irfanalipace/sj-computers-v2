@@ -165,22 +165,22 @@ const Header = () => {
 
                                                 <div className="nav-right">
                                                     <div className="dropdown">
-                                                        {/* <div className="hover-effect-sets ">
+                                                        <div className="hover-effect-sets ">
                                                             <button
-                                                                className="dropdown-toggle eng-button"
+                                                                className=" eng-button"
                                                                 type="button"
                                                                 id="dropdownMenuButton"
                                                                 data-toggle="dropdown"
                                                                 aria-haspopup="false"
                                                                 aria-expanded="false"
                                                             >
-                                                               
-                                                           <US
-                                                            title="United States"
-                                                            className="eng-button-type-data"
-                                                        /> EN
-                                                         </button>
-                                                        </div> */}
+                                                                <US
+                                                                    title="United States"
+                                                                    className="eng-button-type-data"
+                                                                />{" "}
+                                                                EN
+                                                            </button>
+                                                        </div>
                                                         <div
                                                             className="dropdown-menu"
                                                             aria-labelledby="dropdownMenuButton"

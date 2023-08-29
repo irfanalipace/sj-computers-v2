@@ -85,7 +85,8 @@ export const CartItem = memo(({ cartData }) => {
                             <div className="col-md-2 price-item">
                                 <p className="my-sm-0 my-2">
                                     <strong className="">
-                                        ${cartData?.price}
+                                        $
+                                        {parseFloat(cartData?.price).toFixed(2)}
                                     </strong>
                                 </p>
                             </div>
@@ -121,7 +122,7 @@ export const CartItem = memo(({ cartData }) => {
                         ) : (
                             <>
                                 <div
-                                    className="d-flex justify-content-between justify-content-sm-start"
+                                    className="d-flex justify-content-between justify-content-sm-start align-items-end"
                                     style={{
                                         maxWidth: "700px",
                                     }}

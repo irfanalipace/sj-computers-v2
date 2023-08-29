@@ -57,7 +57,7 @@ export const addToCart = (data, cb) => {
             });
             toast.success("Item Added In Cart");
             if (typeof cb === "function") cb();
-            addItemToLocalCart(data);
+            // addItemToLocalCart(data);
         } catch (error) {
             console.print("Something went wrong in carts", error);
             dispatch({ type: API_ERROR, payload: error?.data?.errors });

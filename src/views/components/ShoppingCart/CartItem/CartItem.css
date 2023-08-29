@@ -21,8 +21,8 @@
 
     margin: 0 auto;
 }
-.cartitem-delete-button{
-    padding-top: 19px;
+.cartitem-delete-button {
+    height: 25px;
 }
 @media screen and (max-width: 600px) {
     .cartItem-image {
