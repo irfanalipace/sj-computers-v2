@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { PAYMENT_METHODS } from "@utils/constants";
 import { Alert } from "react-bootstrap";
@@ -34,11 +34,8 @@ export default function Checkout() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     const loading = useSelector((state) => state.cart.isLoading);
-
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
+    const [searchParams, setSearchParams] = useSearchParams();
     const paymentError = useRef(null);
-    paymentError.current = urlParams.get("error");
 
     const ACCORDION_VARIABLES = {
         1: accordionOne,
@@ -64,8 +61,16 @@ export default function Checkout() {
     };
 
     useEffect(() => {
-        paymentError.current ? toggleAccordion(3) : toggleAccordion(1);
-    }, []);
+        const error = searchParams.get("error");
+        if (error) {
+            paymentError.current = error;
+            toggleAccordion(3);
+            searchParams.delete("error");
+            setSearchParams(searchParams);
+        } else {
+            toggleAccordion(1);
+        }
+    }, [searchParams]);
 
     return (
         <>

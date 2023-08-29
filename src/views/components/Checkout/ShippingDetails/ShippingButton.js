@@ -1,11 +1,13 @@
 import Button from "@common/Button/Button";
 
-function ShippingButton({ handleClick, id, isLoading }) {
+function ShippingButton({ handleClick, id, ...rest }) {
+    console.log("rest", rest);
+
     return (
         <Button
             clickHandler={(e) => handleClick(e, true, id)}
             className={"form-button"}
-            isLoading={isLoading}
+            {...rest}
         >
             Use this address
         </Button>

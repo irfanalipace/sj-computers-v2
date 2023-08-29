@@ -44,11 +44,12 @@ class SquareController extends BaseController
         ]);
         $this->user = Auth::guard('api')->user();
         if ($this->user) {
+            
             $this->userId = $this->user->id;
         } else {
            
             $guestUser = $this->getOrCreateGuestUser($request->shipping_address);
-            $this->user = $guestUser;           
+            $this->user = $guestUser;          
             $this->userId = $guestUser->email ?? StatusEnum::DUMMY;
         }
         
@@ -58,7 +59,7 @@ class SquareController extends BaseController
     public function chargeCustomer(CardRequest $request, OrderRepository $repository)
     {
         try {
-
+           
             $idempotencyKey = uniqid();
                    
             //create customer || retrieve customer if already added

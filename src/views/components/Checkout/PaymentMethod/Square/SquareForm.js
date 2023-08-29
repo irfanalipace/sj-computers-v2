@@ -33,8 +33,9 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
         try {
             dispatch(PLACING_ORDER());
             hideCloseBtn();
-            try {
-                if (!isAuthenticated) {
+
+            if (!isAuthenticated) {
+                try {
                     let cartItemss = getCartItems();
                     /// add to cart item list api
                     const cartData = cartItemss.map((item) => ({
@@ -44,9 +45,14 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
 
                     await addListToCartApi({
                         cartItems: cartData,
+                        shipping_address: shippingDetails,
                     });
+                } catch (error) {
+                    console.print("error in addLocalListToCart api: ", error);
+                    navigate("/checkout?error=Something Went Wrong");
                 }
-
+            }
+            try {
                 let response = await sendTokenApi({
                     source_id: token.token,
                     shipping_address: shippingDetails,
