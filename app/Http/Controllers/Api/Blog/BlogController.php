@@ -41,7 +41,6 @@ class BlogController extends BaseController
 
 
                 return $this->sendResponse($record, 'blog is displayed');
-//                return $this->sendResponse($data, 'blog is displayed');
             }
             return $this->sendError([], 'Blog not found');
         } catch (\Exception $e) {
