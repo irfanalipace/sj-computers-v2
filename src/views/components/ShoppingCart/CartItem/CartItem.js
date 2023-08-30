@@ -129,7 +129,9 @@ export const CartItem = memo(({ cartData }) => {
                                 >
                                     <QuantityInput
                                         onChange={handleQuantity}
-                                        minQuantity={1}
+                                        maxQuantity={
+                                            cartData?.product?.quantity
+                                        }
                                         value={cartData?.quantity}
                                     />
 
