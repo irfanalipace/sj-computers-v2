@@ -38,9 +38,9 @@ const Footer = () => {
                             <div className="row">
                                 <div className="col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
                                     <ul className="list-unstyle1">
-                                        <p className="text-uppercase herf-link font-style-heading-footer">
+                                        <h6 className="text-uppercase herf-link font-style-heading-footer">
                                             Get to Know Us
-                                        </p>
+                                        </h6>
                                         <li>
                                             <Link
                                                 to="about_us"
@@ -234,10 +234,7 @@ const Footer = () => {
                                     aria-haspopup="true"
                                     aria-expanded="false"
                                 >
-                                    <FontAwesomeIcon
-                                        className="me-1"
-                                        icon={faGlobe}
-                                    />
+                                  <FontAwesomeIcon className="me-1" icon={faGlobe} />
                                     English
                                     <img
                                         src={img1}
@@ -263,10 +260,7 @@ const Footer = () => {
                                 alt=""
                                 className="copywriten footer-end-image-data"
                             /> */}
-                            <span className="copywriten footer-end-image-data">
-                                S.J Computers @ 2023 Tech Store. All Rights{" "}
-                                <br></br>Reserved
-                            </span>
+                         <span   className="copywriten footer-end-image-data">S.J Computers @ 2023 Tech Store. All Rights <br></br>Reserved</span>   
                         </div>
                     </footer>
                 </div>
