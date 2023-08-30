@@ -6,6 +6,10 @@ export const toArray = (data) => {
     }
 };
 
+export const setLocalCart = (cart) => {
+    window.localStorage.setItem("cart", JSON.stringify(cart));
+};
+
 export const addItemToLocalCart = ({ cartItem, cartDetails }) => {
     let cartItems = getCartItems();
     let itemExists = cartItems?.find((item) => item.id === cartItem.id);
@@ -100,6 +104,17 @@ export const updateItemLocalProperty = (cartItem) => {
     if (index >= 0) {
         cartItems[index].notLocal = true;
     }
+    window.localStorage.setItem("cart", JSON.stringify(cartItems));
+};
+
+export const updateLocalPropertyOfAllItems = () => {
+    let cartItems = JSON.parse(window.localStorage.getItem("cart"));
+    cartItems = cartItems.map((item) => {
+        return {
+            ...item,
+            notLocal: true,
+        };
+    });
     window.localStorage.setItem("cart", JSON.stringify(cartItems));
 };
 

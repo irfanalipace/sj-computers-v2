@@ -41,32 +41,24 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
         validate: (values) => {
             const errors = {};
             if (!isAuthenticated) {
-                if (!values.email) errors.email = "Email is required";
+                if (!values.email) errors.email = "( Required )";
             }
-            if (!values.address) errors.address = "Address is required";
+            if (!values.address) errors.address = "( Required )";
             return errors;
         },
-        submit: submitShippingDetails,
+        onSubmit: (values) => {
+            submitShippingDetails(values);
+        },
     });
     const handlePermanentAddresses = (e) => {
         setPermanentAddress(e.target.checked);
     };
 
-    console.log("11111 isValid", isValid);
-    console.log("11111 errors: ", errors);
-    console.log(
-        "11111 Object.keys(errors)?.length: ",
-        Object.keys(errors)?.length
-    );
-    // useEffect(() => {
-    //     setFieldErrors({ ...errors });
-    // }, [errors]);
-
     useEffect(() => {
         setErrors({ ...apiError });
     }, [apiError]);
 
-    const submitShippingDetails = () => {
+    const submitShippingDetails = (values) => {
         let params = { ...values, permanent_address: permanentAddress };
         console.print("@@params: ", params);
         if (permanentAddress) dispatch(setShippingDetails(params, hideForm));
@@ -76,10 +68,9 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
         }
     };
 
-    useEffect(() => {
-        if (typeof cb === "function") handleHeight();
-        console.log("running");
-    }, [touched.email, touched.address]);
+    // useEffect(() => {
+    //     if (typeof cb === "function") handleHeight();
+    // }, [errors]);
 
     useEffect(() => {
         handleHeight();
@@ -172,7 +163,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                     <span className="text-danger">*</span>
                                     {errors.email && touched.email && (
                                         <span className="fs-6 mt-1 text-danger">
-                                            ( Required )
+                                            {errors.email}
                                         </span>
                                     )}
                                 </label>
@@ -203,7 +194,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                 <span className="text-danger">*</span>
                                 {errors.address && touched.address && (
                                     <span className="fs-6 mt-1 text-danger">
-                                        ( Required )
+                                        {errors?.address}
                                     </span>
                                 )}
                             </label>

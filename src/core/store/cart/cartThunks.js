@@ -31,11 +31,14 @@ import {
     getCartItems,
     compareLocalCartWithDBCart,
     deleteNotLocalCartItem,
+    setLocalCart,
     objectToArray,
     updateItemLocalProperty,
 } from "@utils/cartHelpers";
 
 import { toast } from "react-toastify";
+import { clearCartLocally } from "../../utils/cartHelpers";
+import { getGuestUserEmail } from "../../services/authService";
 
 export const addToCart = (data, cb) => {
     return async (dispatch) => {
@@ -259,6 +262,59 @@ export const addToLocalCart = (data, cb) => {
         });
         if (typeof cb === "function") cb();
         // toast.success("Item Added In Cart");
+    };
+};
+
+export const syncGuestUserCart = (cartDetails) => {
+    return async (dispatch) => {
+        // const email = getGuestUserEmail();
+        // if (email) {
+        //     try {
+        //         let response = await fetchCartApi(email);
+        //         let items = { ...response.data };
+        //         console.log("response: ", response.data);
+        //         delete items.details;
+        //         console.log("items: ", items);
+        //         items = objectToArray(items);
+        //         const cartDetails = {
+        //             ...response.data.details,
+        //         };
+        //         cartItems = items?.map((item) => {
+        //             let cartItem = {
+        //                 ...item,
+        //                 price: item?.price, // item total price which need to be paid in case of checkout
+        //                 notLocal: true, //this property identifies that this cart item is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
+        //                 product: {
+        //                     ...item.associatedModel,
+        //                     price: item.associatedModel.price, // cost of one unit of product
+        //                 },
+        //             };
+
+        //             delete cartItem.associatedModel;
+        //             return cartItem;
+        //         });
+        //         console.log("cartItems:", cartItems);
+        //         setLocalCart(cartItems);
+        //         updateCartDetails(cartDetails);
+        //         dispatch({
+        //             //adds existing cart items of local storage in the redux store
+        //             type: ADD_LIST_TO_CART,
+        //             payload: {
+        //                 cartItems,
+        //                 cartDetails,
+        //             },
+        //         });
+        //     } catch (e) {}
+        // }
+        let cartItems = getCartItems() || [];
+        if (cartItems?.length > 0 && cartDetails?.total_items > 0) {
+            cartItems.forEach((cartItem) => {
+                dispatch(addToLocalCart({ cartItem })); // adds local cart items to redux store
+            });
+            dispatch(setCartDetails(cartDetails)); // add local store details to redux store
+        } else {
+            clearCartLocally();
+        }
     };
 };
 

@@ -1,13 +1,25 @@
 import { PaymentForm, CreditCard } from "react-square-web-payments-sdk";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getCartItems } from "../../../../../core/utils/cartHelpers";
-import { clearCartLocally } from "@utils/cartHelpers";
-import { CLEAR_CART } from "@store/cart/cartSlice";
+import {
+    getCartItems,
+    updateLocalPropertyOfAllItems,
+} from "../../../../../core/utils/cartHelpers";
+import {
+    CLEAR_CART,
+    UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS,
+} from "@store/cart/cartSlice";
 import { PLACING_ORDER, ORDER_PLACED } from "@store/orders/ordersSlice";
 import { sendTokenApi } from "@api/square";
 import { addListToCartApi } from "../../../../../core/api/cart";
+import { clearCartLocally, getCartDetails } from "@utils/cartHelpers";
+import {
+    saveGuestUserEmail,
+    deleteGuestUserEmail,
+} from "@services/authService";
+
 import "./SquareForm.css";
+
 export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -29,56 +41,85 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
         },
     };
 
+    const destroyCart = () => {
+        // deleteGuestUserEmail();
+        clearCartLocally();
+        dispatch(CLEAR_CART());
+    };
+
+    // const updateCart = () => {
+    //     saveGuestUserEmail(shippingDetails?.email);
+    //     updateLocalPropertyOfAllItems();
+    //     dispatch(UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS());
+    // };
+
     async function onTokenSuccess(token) {
+        dispatch(PLACING_ORDER());
+        hideCloseBtn();
+        // let itemsAdded = false;
+        // if (!isAuthenticated) {
+        //     try {
+        //         let cartItemss = getCartItems();
+        //         /// add to cart item list api
+        //         const cartData = cartItemss
+        //             .filter((item) => !item.notLocal)
+        //             .map((item) => ({
+        //                 product_id: item.id,
+        //                 qty: item.quantity,
+        //             }));
+
+        //         await addListToCartApi({
+        //             cartItems: cartData,
+        //             shipping_address: shippingDetails,
+        //         });
+        //         itemsAdded = true;
+        //     } catch (error) {
+        //         console.print("error in addLocalListToCart api: ", error);
+        //         navigate("/checkout?error=Something Went Wrong");
+        //     }
+        // }
+        // if (isAuthenticated || itemsAdded) {
         try {
-            dispatch(PLACING_ORDER());
-            hideCloseBtn();
+            let cartItems = getCartItems();
+            /// add to cart item list api
+            const cartData = cartItems.map((item) => ({
+                product_id: item.id,
+                qty: item.quantity,
+            }));
 
-            if (!isAuthenticated) {
-                try {
-                    let cartItemss = getCartItems();
-                    /// add to cart item list api
-                    const cartData = cartItemss.map((item) => ({
-                        product_id: item.id,
-                        qty: item.quantity,
-                    }));
+            const cartDetails = getCartDetails();
+            let guestParams = {};
+            if (!isAuthenticated)
+                guestParams = {
+                    is_guest: true,
+                    cart_items: cartData,
+                    details: cartDetails,
+                };
+            let response = await sendTokenApi({
+                source_id: token.token,
+                shipping_address: shippingDetails,
+                ...guestParams,
+            });
 
-                    await addListToCartApi({
-                        cartItems: cartData,
-                        shipping_address: shippingDetails,
-                    });
-                } catch (error) {
-                    console.print("error in addLocalListToCart api: ", error);
-                    navigate("/checkout?error=Something Went Wrong");
-                }
-            }
-            try {
-                let response = await sendTokenApi({
-                    source_id: token.token,
-                    shipping_address: shippingDetails,
+            if (response?.status == 200) {
+                console.print("payment successful");
+                destroyCart();
+                const order = response.data;
+                console.print(order, "thank order details");
+                navigate("/thank-you", {
+                    state: { order },
                 });
-
-                if (response?.status == 200) {
-                    console.print("payment successful");
-                    clearCartLocally();
-                    dispatch(CLEAR_CART());
-                    const order = response.data;
-                    console.print(order, "thank order details");
-                    navigate("/thank-you", {
-                        state: { order },
-                    });
-                } else {
-                    navigate("/checkout?error=" + response?.message);
-                }
-            } catch (error) {
-                console.print("error in square api: ", error);
-                navigate("/checkout?error=Something Went Wrong");
+            } else {
+                navigate("/checkout?error=" + response?.message);
             }
-            hideModal();
-            dispatch(ORDER_PLACED());
         } catch (error) {
-            console.error("Error fetching data:", error);
+            // updateCart();
+            console.print("error in square api: ", error);
+            navigate("/checkout?error=Something Went Wrong");
         }
+        // }
+        hideModal();
+        dispatch(ORDER_PLACED());
     }
 
     return (
