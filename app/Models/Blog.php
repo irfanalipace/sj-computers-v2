@@ -38,7 +38,9 @@ class Blog extends Model
         if (preg_match('/^(https?|www)/i', $value)) {
             return $value;
         }
-
-        return 'storage/' . $value;
+        elseif (empty($value)){
+            return '';
+        }
+        return $value;
     }
 }
