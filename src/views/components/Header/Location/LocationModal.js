@@ -13,6 +13,7 @@ import Loader from "@common/Spinner/Spinner";
 import "./LocationModal.css";
 
 function UpdateStateModal({ isOpen = false, handleClose }) {
+    const currentState = useSelector((state) => state.states.currentState);
     const states = useSelector((state) => state.states.states);
     const isLoading = useSelector((state) => state.states.isLoading);
     const [state, setState] = useState("Set Delivery Address");
@@ -29,6 +30,8 @@ function UpdateStateModal({ isOpen = false, handleClose }) {
             dispatch(fetchStates());
         }
     }, [state]);
+
+    useEffect(() => {}, [currentState]);
 
     const handleZipCodeChange = (e) => {
         setZipCode(e.target.value.replace(/\D/g, ""));
@@ -110,7 +113,9 @@ function UpdateStateModal({ isOpen = false, handleClose }) {
                             id="dropdown-basic"
                             className="dropdown-button-box d-flex justify-content-between align-items-center "
                         >
-                            {state?.name || "Select State"}
+                            {state?.name ||
+                                currentState?.name ||
+                                "Select State"}
                             <img src={img1} className="img-arrow" />
                         </Dropdown.Toggle>
 

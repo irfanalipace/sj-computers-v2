@@ -233,7 +233,9 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
 
                                                 <Link
                                                     className="text-decoration-none processed-link"
-                                                    onClick={handleClick}
+                                                    // onClick={handleClick}
+                                                    onClick={toggleSidebar}
+                                                    to={"/checkout"}
                                                 >
                                                     <button className="processed-button">
                                                         Proceed to checkout (
@@ -241,7 +243,8 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                         item)
                                                     </button>
                                                 </Link>
-                                                {showModal && (
+                                                {/* {showModal && ( */}
+                                                {false && (
                                                     <div className="overlay-model-checkout-model-sidebar-checkout">
                                                         <div
                                                             className="overlay-modal-checkout-model-checkout-model-sidebar-checkout"

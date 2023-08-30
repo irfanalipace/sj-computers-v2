@@ -88,10 +88,10 @@ export const placeOrder = (data, cb) => {
     };
 };
 
-export const getEstimatedDelivery = () => {
+export const getEstimatedDelivery = (state_id) => {
     return async (dispatch) => {
         try {
-            let response = await getEstimatedDaysApi();
+            let response = await getEstimatedDaysApi({ state_id });
             dispatch({ type: SET_ORDER_ESTIMATE, payload: response });
         } catch (error) {
             console.print("Something went wrong in orders", error);

@@ -10,9 +10,6 @@ use Illuminate\Http\Request;
 class VerificationController extends BaseController
 {
     public function verify($user_id, Request $request) {
-        if (!$request->hasValidSignature()) {
-            return $this->sendError(["msg" => ["Invalid/Expired url provided."]], 401);
-        }
 
         $user = User::findOrFail($user_id);
 

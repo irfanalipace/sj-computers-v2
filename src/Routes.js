@@ -216,11 +216,11 @@ const Router = () => {
         },
         {
             path: "/:blogslug",
-            element: 
-           <Suspense>
-              <BlogsDetails />
-           </Suspense>
-          
+            element: (
+                <Suspense>
+                    <BlogsDetails />
+                </Suspense>
+            ),
         },
         {
             path: "/blogs",
@@ -268,9 +268,11 @@ const Router = () => {
         {
             path: "/checkout",
             element: (
-                <PageWrapper>
-                    <Checkout />
-                </PageWrapper>
+                <ProtectedRoute>
+                    <PageWrapper>
+                        <Checkout />
+                    </PageWrapper>
+                </ProtectedRoute>
             ),
         },
         {

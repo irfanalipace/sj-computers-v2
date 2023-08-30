@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\ShoppingCart;
 use App\Classes\StatusEnum;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\shipment\ApplyShipmentDaysRequest;
+use App\Http\Requests\shipment\EstimatedDaysRequest;
 use Carbon\Carbon;
 use Exception;
 use Cart;
@@ -158,20 +159,34 @@ class CartController extends BaseController
         }
     }
 
-    public function estimatedDays(Request $request)
+    public function estimatedDays(EstimatedDaysRequest $request)
     {
 
-        $data = [
-            'free_shipment_amount' => [
-                'estimate_day' =>   Carbon::now()->addWeekdays(5)->format('l d-m-Y'),
-            ],
-            '2_day_shipment_amount' =>  [
-                'estimate_day' =>  Carbon::now()->addWeekdays(2)->format('l d-m-Y'),
-            ],
-            '1_day_shipment_amount' => [
-                'estimate_day' =>   Carbon::now()->addWeekdays(1)->format('l d-m-Y'),
-            ],
-        ];
+        if(isset($request->state_id) && $request->state_id == 23){
+            $data = [
+                'free_shipment_amount' => [
+                    'estimate_day' =>   Carbon::now()->addWeekdays(0)->format('l d-m-Y'),
+                ],
+                '2_day_shipment_amount' =>  [
+                    'estimate_day' =>  Carbon::now()->addWeekdays(0)->format('l d-m-Y'),
+                ],
+                '1_day_shipment_amount' => [
+                    'estimate_day' =>   Carbon::now()->addWeekdays(0)->format('l d-m-Y'),
+                ],
+            ];
+        } else{
+            $data = [
+                'free_shipment_amount' => [
+                    'estimate_day' =>   Carbon::now()->addWeekdays(5)->format('l d-m-Y'),
+                ],
+                '2_day_shipment_amount' =>  [
+                    'estimate_day' =>  Carbon::now()->addWeekdays(2)->format('l d-m-Y'),
+                ],
+                '1_day_shipment_amount' => [
+                    'estimate_day' =>   Carbon::now()->addWeekdays(1)->format('l d-m-Y'),
+                ],
+            ];
+        }
 
         return $this->sendResponse($data);
     }
@@ -306,7 +321,7 @@ class CartController extends BaseController
     private function getOrCreateGuestUser($detail)
     {
         $detail = $detail->shipping_address ?? $detail;
-       
+
         if (isset($detail['email']) && !is_null($detail['email'])) {
             // Check if the email exists in the guest_users table
             $guestUser = Guest::where('email', $detail['email'])->first();
