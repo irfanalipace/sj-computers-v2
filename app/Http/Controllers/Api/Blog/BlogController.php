@@ -15,18 +15,33 @@ class BlogController extends BaseController
     public function getList(request $request)
     {
         $perPage = $request->per_page ?? 12;
-        $data = Blog::whereDate('publish_date', '<=', Carbon::now()->toDateString())
+        $records = Blog::whereDate('publish_date', '<=', Carbon::now()->toDateString())
             ->orderBy('id','desc')
             ->paginate($perPage);
-        return $this->sendResponse($data);
+
+        $records->map(function ($record) {
+
+            $record['primary_image']   = config('app.url').'/storage/'.$record['primary_image'];
+            $record['thumbnail_image'] = config('app.url').'/storage/'.$record['thumbnail_image'];
+            $record['secondary_image'] = config('app.url').'/storage/'.$record['secondary_image'];
+            return $record;
+        });
+
+        return $this->sendResponse($records);
     }
 
     public function getBlog(GetBlogRequest $request)
     {
         try {
-            $data = Blog::where('slug', $request->slug)->first();
-            if ($data) {
-                return $this->sendResponse($data, 'blog is displayed');
+            $record = Blog::where('slug', $request->slug)->first();
+            if ($record) {
+                    $record['primary_image']   = config('app.url').'/storage/'.$record['primary_image'];
+                    $record['thumbnail_image'] = config('app.url').'/storage/'.$record['thumbnail_image'];
+                    $record['secondary_image'] = config('app.url').'/storage/'.$record['secondary_image'];
+
+
+                return $this->sendResponse($record, 'blog is displayed');
+//                return $this->sendResponse($data, 'blog is displayed');
             }
             return $this->sendError([], 'Blog not found');
         } catch (\Exception $e) {
