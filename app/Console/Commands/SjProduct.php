@@ -108,7 +108,6 @@ class SjProduct extends Command
             $this->setProductCategory($product);
 
             echo "product is added" . $key . "\n";
-
         }
         dd('done');
 
