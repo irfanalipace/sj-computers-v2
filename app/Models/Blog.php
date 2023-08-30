@@ -19,28 +19,4 @@ class Blog extends Model
     {
         return $this->belongsToMany(Category::class, 'blogs_categories');
     }
-
-    public function getThumbnailImageAttribute($value)
-    {
-        return $this->getSafeValue($value);
-    }
-    public function getSecondaryImageAttribute($value)
-    {
-        return $this->getSafeValue($value);
-    }
-    public function getPrimaryImageAttribute($value)
-    {
-        return $this->getSafeValue($value);
-    }
-
-    private function getSafeValue($value)
-    {
-        if (preg_match('/^(https?|www)/i', $value)) {
-            return $value;
-        }
-        elseif (empty($value)){
-            return '';
-        }
-        return $value;
-    }
 }
