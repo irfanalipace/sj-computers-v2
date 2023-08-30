@@ -161,13 +161,11 @@ export default function Checkout() {
                                     </Accordion>
                                 </div>
                                 <div className="col-md-3 col-12">
-                                    {isAuthenticated && (
-                                        <div>
-                                            <div className="shipping-method-component-wrapper">
-                                                <ShippingMethod />
-                                            </div>
+                                    <div>
+                                        <div className="shipping-method-component-wrapper">
+                                            <ShippingMethod />
                                         </div>
-                                    )}
+                                    </div>
 
                                     {!isAuthenticated && (
                                         <div>

@@ -25,6 +25,9 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
     const navigate = useNavigate();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
+
+    const cartItems = useSelector((state) => state.cart.cart);
+    const cartDetails = useSelector((state) => state.cart.details);
     const buttonProps = {
         css: {
             backgroundColor: "#318243",
@@ -52,7 +55,6 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
     //     updateLocalPropertyOfAllItems();
     //     dispatch(UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS());
     // };
-
     async function onTokenSuccess(token) {
         dispatch(PLACING_ORDER());
         hideCloseBtn();
@@ -80,21 +82,24 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
         // }
         // if (isAuthenticated || itemsAdded) {
         try {
-            let cartItems = getCartItems();
             /// add to cart item list api
-            const cartData = cartItems.map((item) => ({
-                product_id: item.id,
-                qty: item.quantity,
-            }));
+            let total_quantity = 0;
+            const cartData = cartItems?.map((item) => {
+                total_quantity += item?.quantity;
+                return {
+                    product_id: item.id,
+                    qty: item.quantity,
+                };
+            });
 
-            const cartDetails = getCartDetails();
             let guestParams = {};
             if (!isAuthenticated)
                 guestParams = {
                     is_guest: true,
                     cart_items: cartData,
-                    details: cartDetails,
+                    details: { ...cartDetails, total_quantity },
                 };
+
             let response = await sendTokenApi({
                 source_id: token.token,
                 shipping_address: shippingDetails,
