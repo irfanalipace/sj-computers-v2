@@ -19,7 +19,7 @@ const ProductType = () => {
             <div className="row mx-0">
                 <div className="col-12 col-sm-6 col-lg-3">
                     <div className="product-type-section">
-                        <h4 className="h4-heading">Shop by Category</h4>
+                        <h2 className="h4-heading">Shop by Category</h2>
                         <div className="categories-container">
                             <ProductItem4 />
                         </div>
@@ -31,7 +31,7 @@ const ProductType = () => {
 
                 <div className="col-12 col-sm-6 col-lg-3">
                     <div className="product-type-section">
-                        <h4 className="h4-heading">Gaming Desktop</h4>
+                        <h2 className="h4-heading">Gaming Desktop</h2>
                         <div className="categories-container">
                             <ProductItem1 image={categoryImg1} />
                         </div>
@@ -45,7 +45,7 @@ const ProductType = () => {
                 </div>
                 <div className="col-12 col-sm-6 col-lg-3 ">
                     <div className="product-type-section">
-                        <h4 className="h4-heading">Business Computer</h4>
+                        <h2 className="h4-heading">Business Computer</h2>
                         <div className="categories-container">
                             <ProductItem1 image={categorybusinussweb} />
                         </div>
