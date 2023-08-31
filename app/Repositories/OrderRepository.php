@@ -34,7 +34,7 @@ class OrderRepository
                 $order['shipment_days'] = $cartData['estimate_day'];
                 $order['item_qty'] = $cartData['item_qty'];
                 $order = Order::create($order);
-
+                
                 $cartContent->each(function ($item) use ($order) {
                     $data = [
                         'order_id' => $order->id,

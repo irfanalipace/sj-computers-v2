@@ -26,12 +26,11 @@ use App\Jobs\GenerateInvoiceJob;
 use App\Models\Order;
 use Carbon\Carbon;
 use App\Repositories\OrderRepository;
-use Illuminate\Support\Facades\Artisan;
 
 class SquareController extends BaseController
 {
     //
-    private $squareClient, $userId, $user;
+    private $squareClient, $userId, $user, $totalAmount, $subTotal, $totalQty, $userType;
     public function __construct(Request $request)
     {
         // Environment value
@@ -46,13 +45,20 @@ class SquareController extends BaseController
         if ($this->user) {
             
             $this->userId = $this->user->id;
+            $this->userType = StatusEnum::USER;
+            $this->totalAmount = \Cart::session($this->userId)->getTotal();
+            $this->subTotal = \Cart::session($this->userId)->getSubTotal();
+            $this->totalQty = \Cart::session($this->userId)->getTotalQuantity();
         } else {
-           
+
             $guestUser = $this->getOrCreateGuestUser($request->shipping_address);
-            $this->user = $guestUser;          
-            $this->userId = $guestUser->email ?? StatusEnum::DUMMY;
+            $this->user = $guestUser;
+            $this->userId = $guestUser->email;
+            $this->totalAmount = $request->details['total'];
+            $this->subTotal = $request->details['sub_total'];
+            $this->totalQty = $request->details['total_quantity'];
+            $this->userType = StatusEnum::GUEST;
         }
-        
     }
 
     // charge process
@@ -61,7 +67,7 @@ class SquareController extends BaseController
         try {
            
             $idempotencyKey = uniqid();
-                   
+
             //create customer || retrieve customer if already added
             if ($this->user->square_cus_id == null) {
                 $customer = $this->createCustomer();
@@ -70,7 +76,7 @@ class SquareController extends BaseController
             }
             // Get card Token
             $amount_money = new Money();
-            $amount_money->setAmount(Cart::session($this->userId)->getTotal());
+            $amount_money->setAmount($this->totalAmount);
             $amount_money->setCurrency(StatusEnum::currency);
             //create payment Request
             $body = new CreatePaymentRequest($request->source_id, $idempotencyKey);
@@ -85,9 +91,9 @@ class SquareController extends BaseController
                 $orderData = [];
 
 
-                $orderData['total_amount'] = number_format(\Cart::session($this->userId)->getTotal(), 2, '.', '');
-                $orderData['sub_total'] = number_format(\Cart::session($this->userId)->getSubTotal(), 2, '.', '');
-                $orderData['item_qty'] = \Cart::session($this->userId)->getTotalQuantity();
+                $orderData['total_amount'] = number_format($this->totalAmount, 2, '.', '');
+                $orderData['sub_total'] = number_format($this->subTotal, 2, '.', '');
+                $orderData['item_qty'] =  $this->totalQty;
 
 
                 $orderData['shipment_amount'] =  0;
@@ -102,12 +108,12 @@ class SquareController extends BaseController
                 }
 
                 $cartContent = Cart::session($this->userId)->getContent();
-
+                // dd($cartConditions,$cartContent);
                 $result = $api_response->getResult();
 
                 /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
-                $userIdToPass = ($this->userId != StatusEnum::DUMMY) ? $this->userId : $this->user->id;
-                $user_type = ($this->userId != StatusEnum::DUMMY) ? StatusEnum::USER : StatusEnum::GUEST;
+                $userIdToPass = ($this->userType != StatusEnum::GUEST) ? $this->userId : $this->user->id;
+                $user_type = ($this->userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
 
                 $order = $repository->createOrder(array(), $api_response, $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type);
 

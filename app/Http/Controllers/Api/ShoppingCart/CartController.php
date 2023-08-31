@@ -39,7 +39,6 @@ class CartController extends BaseController
     //show items of cart
     public function getItems($returnItems = false)
     {
-
         $items = [];
 
         \Cart::session($this->userId)->getContent()->each(function ($item) use (&$items) {
