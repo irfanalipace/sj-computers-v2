@@ -55,7 +55,7 @@ class SquareController extends BaseController
             $this->userId = $guestUser->email;
             $this->totalAmount = isset($request->details['total']) ? $request->details['total'] : 0.00;
             $this->subTotal = isset($request->details['sub_total']) ? $request->details['sub_total'] : 0.00;
-            $this->totalQty = isset($request->details['total_quantity']) ? $request->details['total_quantity'] : 0.00;
+            $this->totalQty = isset($request->details['total_quantity']) ? $request->details['total_quantity'] : 0;
             $this->userType = StatusEnum::GUEST;
         }
     }
