@@ -56,6 +56,8 @@ class CardRequest extends FormRequest
                 'details.sub_total' => 'required|gt:0',
                 'details.total_items' => 'required|gt:0',
                 'details.total_quantity' => 'required|gt:0',
+                'details.shipment_amount' => 'required',
+                'details.estimate_days' => 'required',
             ];
         }
 
