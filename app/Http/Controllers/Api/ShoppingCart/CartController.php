@@ -31,8 +31,8 @@ class CartController extends BaseController
         if ($this->user) {
             $this->userId = $this->user->id;
         } else {
-            $guestUser = $this->getOrCreateGuestUser($request);
-            $this->userId = $guestUser->email ??  StatusEnum::DUMMY;
+           
+            $this->userId = StatusEnum::DUMMY;
         }
     }
 
@@ -314,35 +314,5 @@ class CartController extends BaseController
 
         $items = $this->getItems(true);
         return response(array('success' => true, 'data' => $items, 'message' => 'Item added.'), 200, []);
-    }
-
-    // create guest user if exist get user
-    private function getOrCreateGuestUser($detail)
-    {
-        $detail = $detail->shipping_address ?? $detail;
-
-        if (isset($detail['email']) && !is_null($detail['email'])) {
-            // Check if the email exists in the guest_users table
-            $guestUser = Guest::where('email', $detail['email'])->first();
-
-            // If the guest user does not exist, create a new one
-            if (!$guestUser) {
-                $guestUser = new Guest();
-                $guestUser->ip_address = request()->ip();
-                $guestUser->full_name = $detail['full_name'] ?? null;
-                $guestUser->phone_number = $detail['phone_number'] ?? null;
-                $guestUser->email = $detail['email'];
-                $guestUser->address = $detail['address'] ?? null;
-                $guestUser->city = $detail['city'] ?? null;
-                $guestUser->state = $detail['state'] ?? null;
-                $guestUser->zip_code = $detail['zip_code'] ?? null;
-                $guestUser->country = $detail['country'] ?? null;
-                $guestUser->save();
-            }
-        } else {
-
-            return null;
-        }
-        return $guestUser;
     }
 }

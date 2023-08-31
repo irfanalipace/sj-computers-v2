@@ -109,7 +109,7 @@ class SquareController extends BaseController
                 }
 
                 $cartContent = Cart::session($this->userId)->getContent();
-                // dd($cartConditions,$cartContent);
+               
                 $result = $api_response->getResult();
 
                 /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
