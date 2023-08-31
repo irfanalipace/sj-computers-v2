@@ -116,7 +116,7 @@ class SquareController extends BaseController
                 $user_type = ($this->userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
 
                 $order = $repository->createOrder(array(), $api_response, $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type);
-
+               
                 $orderData['order'] = $order['order'];
 
                 //sending invoice email of the payment to user

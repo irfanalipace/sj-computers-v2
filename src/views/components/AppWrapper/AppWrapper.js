@@ -49,18 +49,19 @@ const AppWrapper = ({ children }) => {
     }, [isAuthenticated]);
 
     useEffect(() => {
-        dispatch(getEstimatedDelivery(state?.id));
+        setTimeout(() => {
+            dispatch(getEstimatedDelivery(state?.id));
+        }, 3000); // giving timeout to increase initial page load speed
     }, [state]);
 
     useEffect(() => {
         setTimeout(() => {
             dispatch(fetchCategory());
             dispatch(fetchBrands());
-
-            if (!isAuthenticated) {
-                dispatch(syncGuestUserCart(cartDetails));
-            }
         }, 3000); // giving timeout to increase initial page load speed
+        if (!isAuthenticated) {
+            dispatch(syncGuestUserCart(cartDetails));
+        }
     }, []);
 
     return <div>{children}</div>;

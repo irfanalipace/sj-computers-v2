@@ -56,6 +56,7 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
     //     dispatch(UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS());
     // };
     async function onTokenSuccess(token) {
+        console.log("token: ", token);
         dispatch(PLACING_ORDER());
         hideCloseBtn();
         // let itemsAdded = false;
@@ -81,6 +82,9 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
         //     }
         // }
         // if (isAuthenticated || itemsAdded) {
+
+        hideModal();
+        dispatch(ORDER_PLACED());
         try {
             /// add to cart item list api
             let total_quantity = 0;
@@ -92,19 +96,18 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                 };
             });
 
-            let guestParams = {};
+            let paymentParams = {
+                source_id: token.token,
+                shipping_address: shippingDetails,
+            };
             if (!isAuthenticated)
-                guestParams = {
+                paymentParams = {
+                    ...paymentParams,
                     is_guest: true,
                     cart_items: cartData,
                     details: { ...cartDetails, total_quantity },
                 };
-
-            let response = await sendTokenApi({
-                source_id: token.token,
-                shipping_address: shippingDetails,
-                ...guestParams,
-            });
+            let response = await sendTokenApi(paymentParams);
 
             if (response?.status == 200) {
                 console.print("payment successful");
@@ -123,8 +126,6 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
             navigate("/checkout?error=Something Went Wrong");
         }
         // }
-        hideModal();
-        dispatch(ORDER_PLACED());
     }
 
     return (

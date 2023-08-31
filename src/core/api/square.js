@@ -1,11 +1,8 @@
 import ApiService from "@services/apiService";
 
-export function sendTokenApi({ source_id, shipping_address }) {
+export function sendTokenApi(data) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/square-charge`, {
-            source_id,
-            shipping_address,
-        })
+        ApiService.post(`/square-charge`, data)
             .then((response) => {
                 console.print(
                     "file: square.js | sendTokenApi| response",

@@ -44,6 +44,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                 if (!values.email) errors.email = "( Required )";
             }
             if (!values.address) errors.address = "( Required )";
+            if (!values.phone_number) errors.phone_number = "( Required )";
             return errors;
         },
         onSubmit: (values) => {
@@ -128,33 +129,43 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             ></input>
-                            {errors.full_name && (
+                            {/* {errors.full_name && (
                                 <p className="fs-6 mt-1 text-danger">
                                     {errors.full_name}
                                 </p>
-                            )}
+                            )} */}
                         </div>
 
                         <div className="field-section">
                             <label htmlFor={"phoneNumber"}>
                                 Phone Number
                                 <span className="text-danger">*</span>
+                                {errors.phone_number &&
+                                    touched.phone_number && (
+                                        <span className="fs-6 mt-1 text-danger">
+                                            {errors?.phone_number}
+                                        </span>
+                                    )}
                             </label>
                             <input
                                 id="phone_number"
                                 name="phone_number"
-                                className="input-field"
+                                className={
+                                    errors.email && touched.email
+                                        ? "input-field border-danger"
+                                        : "input-field"
+                                }
                                 type="text"
                                 placeholder="Phone Number"
                                 value={values?.phone_number}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             ></input>
-                            {errors.phone_number && (
+                            {/* {errors.phone_number && (
                                 <p className="fs-6 mt-1 text-danger">
                                     {errors.phone_number}
                                 </p>
-                            )}
+                            )} */}
                         </div>
                         {!isAuthenticated && (
                             <div className="field-section">
@@ -251,11 +262,11 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                     ></input>
-                                    {errors.city && (
+                                    {/* {errors.city && (
                                         <p className="fs-6 mt-1 text-danger">
                                             {errors.city}
                                         </p>
-                                    )}
+                                    )} */}
                                 </div>
                             </div>
                             <div className="col-4">
