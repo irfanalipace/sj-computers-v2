@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { setCartDetails } from "@store/cart/cartThunks";
 import { applyShipment } from "@api/checkout";
@@ -10,6 +10,8 @@ import "./ShippingMethod.css";
 const ShippingMehtod = () => {
     const [activeMethod, setActiveMethod] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const currentState = useSelector((state) => state.states.currentState);
+
     const dispatch = useDispatch();
     const shippingMethods = [
         {
@@ -36,6 +38,7 @@ const ShippingMehtod = () => {
             try {
                 let response = await applyShipment({
                     shipment_days: e.target.value,
+                    state_id: currentState?.id,
                 });
                 setActiveMethod(e.target.value);
                 dispatch(
