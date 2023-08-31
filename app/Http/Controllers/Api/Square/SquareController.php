@@ -109,15 +109,15 @@ class SquareController extends BaseController
                 }
 
                 $cartContent = Cart::session($this->userId)->getContent();
-               
+
                 $result = $api_response->getResult();
 
                 /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
                 $userIdToPass = ($this->userType != StatusEnum::GUEST) ? $this->userId : $this->user->id;
                 $user_type = ($this->userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
-
-                $order = $repository->createOrder(array(), $api_response, $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type);
-
+                $cartItems = ($this->userType == StatusEnum::GUEST) ? $request->cart_items : [];
+                $order = $repository->createOrder(array(), $api_response, $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems);
+            
                 $orderData['order'] = $order['order'];
 
                 //sending invoice email of the payment to user
