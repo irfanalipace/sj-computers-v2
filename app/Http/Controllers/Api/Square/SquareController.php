@@ -54,9 +54,9 @@ class SquareController extends BaseController
             $guestUser = $this->getOrCreateGuestUser($request->shipping_address);
             $this->user = $guestUser;
             $this->userId = $guestUser->email;
-            $this->totalAmount = $request->details['total'];
-            $this->subTotal = $request->details['sub_total'];
-            $this->totalQty = $request->details['total_quantity'];
+            $this->totalAmount = isset($request->details['total']) ? $request->details['total'] : 0.00;
+            $this->subTotal = isset($request->details['sub_total']) ? $request->details['sub_total'] : 0.00;
+            $this->totalQty = isset($request->details['total_quantity']) ? $request->details['total_quantity'] : 0.00;
             $this->userType = StatusEnum::GUEST;
         }
     }
@@ -74,6 +74,7 @@ class SquareController extends BaseController
             } else {
                 $customer = $this->getCustomer();
             }
+
             // Get card Token
             $amount_money = new Money();
             $amount_money->setAmount($this->totalAmount);
@@ -87,6 +88,7 @@ class SquareController extends BaseController
             $body->setReferenceId('user-' . $this->userId);
 
             $api_response = $this->squareClient->getPaymentsApi()->createPayment($body);
+
             if ($api_response->isSuccess()) {
                 $orderData = [];
 
@@ -156,7 +158,7 @@ class SquareController extends BaseController
                 $customer_id = $api_response->getResult()->getCustomer()->getId();
                 //saving customer id in user table square_cus_id column
 
-                if ($this->userId != StatusEnum::DUMMY) {
+                if ($this->userType != StatusEnum::GUEST) {
                     User::whereId($this->userId)->update(['square_cus_id' => $customer_id]);
                 } else {
                     Guest::whereId($this->user->id)->update(['square_cus_id' => $customer_id]);
