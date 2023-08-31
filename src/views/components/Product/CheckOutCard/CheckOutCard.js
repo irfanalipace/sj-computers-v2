@@ -136,18 +136,24 @@ export const CheckOutCard = ({ product }) => {
                             <div className="text-stock">
                                 <div className="instock-dev-card-product-section-with-color-card">
                                     <div className="in-stock-area-lable">
-                                        {product?.quantity > 0 && (
+                                        {product?.quantity > 0 ? (
                                             <small> In Stock</small>
+                                        ) : (
+                                            <small className="text-danger">
+                                                {" "}
+                                                Out of Stock
+                                            </small>
                                         )}
                                     </div>
                                     <div>
                                         <span className="color-text-cart-with-inStock">
-                                            {product?.quantity < 11 && (
-                                                <span>
-                                                    Only {product?.quantity}{" "}
-                                                    pieces left
-                                                </span>
-                                            )}
+                                            {product?.quantity < 11 &&
+                                                product?.quantity > 0 && (
+                                                    <span>
+                                                        Only {product?.quantity}{" "}
+                                                        pieces left
+                                                    </span>
+                                                )}
                                         </span>
                                     </div>
                                 </div>
@@ -171,6 +177,9 @@ export const CheckOutCard = ({ product }) => {
                                     product={product}
                                     quantity={quantity}
                                     className=" button1 button-text-button"
+                                    disabled={
+                                        product?.quantity < 1 ? true : false
+                                    }
                                 />
                             </div>
                             {/* <div className="button-cart-sell">

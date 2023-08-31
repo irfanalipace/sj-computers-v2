@@ -132,7 +132,7 @@ export default function ThankYou() {
                     <p>
                         Your order with tracking No{" "}
                         <span style={{ fontWeight: "900" }}>
-                            #{thankOrderDetails?.Order?.order?.id}
+                            {thankOrderDetails?.Order?.order?.id}
                         </span>{" "}
                         has been successfully confirmed. We’ll send you an email
                         notification once your order has shipped.
