@@ -6,10 +6,6 @@ export const toArray = (data) => {
     }
 };
 
-export const setLocalCart = (cart) => {
-    window.localStorage.setItem("cart", JSON.stringify(cart));
-};
-
 export const addItemToLocalCart = ({ cartItem, cartDetails }) => {
     let cartItems = getCartItems();
     let itemExists = cartItems?.find((item) => item.id === cartItem.id);
@@ -107,17 +103,6 @@ export const updateItemLocalProperty = (cartItem) => {
     window.localStorage.setItem("cart", JSON.stringify(cartItems));
 };
 
-export const updateLocalPropertyOfAllItems = () => {
-    let cartItems = JSON.parse(window.localStorage.getItem("cart"));
-    cartItems = cartItems.map((item) => {
-        return {
-            ...item,
-            notLocal: true,
-        };
-    });
-    window.localStorage.setItem("cart", JSON.stringify(cartItems));
-};
-
 export const compareLocalCartWithDBCart = (array_1, array_2) => {
     const missingObjects1 = array_1?.filter(
         (obj1) => !array_2?.some((obj2) => obj1.id === obj2.id)
@@ -131,6 +116,16 @@ export const compareLocalCartWithDBCart = (array_1, array_2) => {
     // missingObjects2 is an array of objects that are present in array_2 but not in array_1 or local objects of array_2.
 
     return [missingObjects1, missingObjects2];
+};
+
+export const getTotalQuantity = () => {
+    const cartItems = getCartItems();
+    console.log("cartIems: ", cartItems);
+    const total_quantity = cartItems.reduce((acc, item) => {
+        if (acc.id) return acc.quantity + item.quantity;
+        else return acc + item.quantity;
+    });
+    return total_quantity;
 };
 
 export const clearCartLocally = () => {

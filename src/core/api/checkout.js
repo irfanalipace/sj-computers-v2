@@ -88,3 +88,19 @@ export function applyShipment(data) {
             });
     });
 }
+export function applyShipmentForGuest(data) {
+    return new Promise((resolve, reject) => {
+        ApiService.post(`/apply-shippment-guest`, data)
+            .then((response) => {
+                console.print(
+                    "file: checkout.js | applyShipmentForGuest| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.print("Console Log: : error checkout", e);
+                reject(e);
+            });
+    });
+}

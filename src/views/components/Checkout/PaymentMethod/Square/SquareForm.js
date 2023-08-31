@@ -105,7 +105,11 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                     ...paymentParams,
                     is_guest: true,
                     cart_items: cartData,
-                    details: { ...cartDetails, total_quantity },
+                    details: {
+                        ...cartDetails,
+                        shipment_amount: cartDetails.amount,
+                        total_quantity,
+                    },
                 };
             let response = await sendTokenApi(paymentParams);
 
