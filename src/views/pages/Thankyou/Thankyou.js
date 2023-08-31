@@ -134,7 +134,7 @@ export default function ThankYou() {
                     <p>
                         Your order with tracking No{" "}
                         <span style={{ fontWeight: "900" }}>
-                            #{thankOrderDetails?.Order?.order?.id}
+                            {thankOrderDetails?.Order?.order?.id}
                         </span>{" "}
                         has been successfully confirmed. We’ll send you an email
                         notification once your order has shipped.
@@ -307,16 +307,16 @@ export default function ThankYou() {
             </div>
             <div className="row mx-0 mb-5">
                 <div className="col-6 d-flex justify-content-start">
-                {isAuthenticated && (
-                <div className="col-6 d-flex justify-content-start">
-                    <button
-                        className="track-order-btn"
-                        onClick={() => navigate("/")}
-                    >
-                        Track your order
-                    </button>
-                </div>
-            )}
+                    {isAuthenticated && (
+                        <div className="col-6 d-flex justify-content-start">
+                            <button
+                                className="track-order-btn"
+                                onClick={() => navigate("/")}
+                            >
+                                Track your order
+                            </button>
+                        </div>
+                    )}
                 </div>
                 <div className="col-6 d-flex justify-content-end">
                     <button
