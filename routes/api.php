@@ -143,10 +143,10 @@ Route::post('customer-email-verify', [AuthController::class, 'verifyCustomerEmai
 
 Route::post('customer-verify-otp', [AuthController::class, 'verifyOtpCustomerEmail'])->name('customer-verify-otp');
 
-/*
- * Apply Shipment
+/* 
+ Apply shippment for guest 
 */
-Route::post('apply-shipment', [CartController::class, 'applyShipment'])->name('applyShipment');
+Route::post('apply-shippment-guest',[CartController::class,'applyShipmentGuest']);
 
 
 Route::group(['middleware' => 'refund'], function () {
@@ -212,7 +212,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('order-list', [OrderController::class, 'getOrders'])->name('getOrderList');
     Route::get('search-order', [OrderController::class, 'searchOrder'])->name('searchOrder');
 
-
+    /*
+    * Apply Shipment
+    */
+    Route::post('apply-shipment', [CartController::class, 'applyShipment'])->name('applyShipment');
 
     /*
      * place order
