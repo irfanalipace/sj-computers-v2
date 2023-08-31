@@ -40,11 +40,15 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
         },
         validate: (values) => {
             const errors = {};
+            if (!values.full_name) errors.full_name = "( Required )";
             if (!isAuthenticated) {
                 if (!values.email) errors.email = "( Required )";
             }
             if (!values.address) errors.address = "( Required )";
             if (!values.phone_number) errors.phone_number = "( Required )";
+            if (!values.city) errors.city = "( Required )";
+            if (!values.state) errors.state = "( Required )";
+            if (!values.zip_code) errors.zip_code = "( Required )";
             return errors;
         },
         onSubmit: (values) => {
@@ -118,11 +122,20 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                             <label htmlFor={"name"}>
                                 Full Name (First & Last Name)
                                 <span className="text-danger">*</span>
+                                {errors.full_name && touched.full_name && (
+                                    <span className="fs-6 mt-1 text-danger">
+                                        {errors?.full_name}
+                                    </span>
+                                )}
                             </label>
                             <input
                                 id="full_name"
                                 name="full_name"
-                                className="input-field"
+                                className={
+                                    errors.full_name && touched.full_name
+                                        ? "input-field border-danger"
+                                        : "input-field"
+                                }
                                 type="text"
                                 placeholder="Full Name"
                                 value={values?.full_name}
@@ -251,11 +264,20 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                     <label htmlFor={"city"}>
                                         City
                                         <span className="text-danger">*</span>
+                                        {errors.city && touched.city && (
+                                            <span className="fs-6 mt-1 text-danger">
+                                                {errors?.city}
+                                            </span>
+                                        )}
                                     </label>
                                     <input
                                         id="city"
                                         name="city"
-                                        className="input-field"
+                                        className={
+                                            errors.city && touched.city
+                                                ? "input-field border-danger"
+                                                : "input-field"
+                                        }
                                         type="text"
                                         placeholder="City"
                                         value={values?.city}
@@ -274,11 +296,20 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                     <label htmlFor={"state"}>
                                         State
                                         <span className="text-danger">*</span>
+                                        {errors.state && touched.state && (
+                                            <span className="fs-6 mt-1 text-danger">
+                                                {errors?.state}
+                                            </span>
+                                        )}
                                     </label>
                                     <select
                                         id="state"
                                         name="state"
-                                        className="input-field text-capitalize"
+                                        className={
+                                            errors.state && touched.estatemail
+                                                ? "input-field border-danger text-capitalize"
+                                                : "input-field text-capitalize"
+                                        }
                                         placeholder="Select Stte"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -304,25 +335,34 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                             <div className="col-4">
                                 <div className="field-section">
                                     <label htmlFor={"zip_code"}>
-                                        {" "}
                                         Zip Code
                                         <span className="text-danger">*</span>
+                                        {errors.zip_code &&
+                                            touched.zip_code && (
+                                                <span className="fs-6 mt-1 text-danger">
+                                                    {errors?.zip_code}
+                                                </span>
+                                            )}
                                     </label>
                                     <input
                                         id="zip_code"
                                         name="zip_code"
-                                        className="input-field"
+                                        className={
+                                            errors.zip_code && touched.zip_code
+                                                ? "input-field border-danger"
+                                                : "input-field"
+                                        }
                                         type="text"
                                         placeholder=" ZipCode"
                                         value={values?.zip_code}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                     />
-                                    {errors.zip_code && (
+                                    {/* {errors.zip_code && (
                                         <p className="fs-6 mt-1 text-danger">
                                             {errors.zip_code}
                                         </p>
-                                    )}
+                                    )} */}
                                 </div>
                             </div>
                         </div>
