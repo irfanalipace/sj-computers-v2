@@ -133,6 +133,7 @@
     width: 100%;
     max-width: 20%; /* Adjust the image width as needed */
     height: auto;
+    max-height: 200px;
     display: block; /* Ensures proper spacing around the image */
     margin: 0 auto; /* Centers the image horizontally */
 }

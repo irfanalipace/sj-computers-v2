@@ -118,7 +118,7 @@ Route::get('get-blogs', [BlogController::class, 'getBlog'])->name('get-blogs');
  * meta title and description
  */
 
-Route::get('meta_detail',[MetaDetailController::class,'getDetail'])->name('meta_detail');
+Route::get('meta_detail', [MetaDetailController::class, 'getDetail'])->name('meta_detail');
 
 /*
 *Place Order
@@ -142,6 +142,12 @@ Route::POST('square-charge', [SquareController::class, 'chargeCustomer'])->name(
 Route::post('customer-email-verify', [AuthController::class, 'verifyCustomerEmail'])->name('customer-email-verify');
 
 Route::post('customer-verify-otp', [AuthController::class, 'verifyOtpCustomerEmail'])->name('customer-verify-otp');
+
+/*
+ * Apply Shipment
+*/
+Route::post('apply-shipment', [CartController::class, 'applyShipment'])->name('applyShipment');
+
 
 Route::group(['middleware' => 'refund'], function () {
 
@@ -212,12 +218,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      * place order
      */
     Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
-
-    /*
-     * Apply Shipment
-     */
-    Route::post('apply-shipment', [CartController::class, 'applyShipment'])->name('applyShipment');
-
 
     /*
     * Download inventory Excel
