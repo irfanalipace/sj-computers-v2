@@ -1,13 +1,13 @@
 import Button from "@common/Button/Button";
 
-function ShippingButton({ handleClick, id, ...rest }) {
+function ShippingButton({ handleClick, children, id, ...rest }) {
     return (
         <Button
             clickHandler={(e) => handleClick(e, true, id)}
             className={"form-button"}
             {...rest}
         >
-            Use this address
+            {children}
         </Button>
     );
 }

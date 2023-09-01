@@ -14,6 +14,7 @@ function OrderSummary({
     activeAccordion,
     paymentMethod,
     shippingDetails,
+    isDisabled,
 }) {
     const dispatch = useDispatch();
     const [disabled, setDisabled] = useState(true);
@@ -31,7 +32,10 @@ function OrderSummary({
                 <ShippingButton
                     handleClick={handleClick}
                     id={activeAccordion}
-                />
+                    disabled={isDisabled}
+                >
+                    Review Order
+                </ShippingButton>
             );
         } else if (activeAccordion === 2) {
             return (
@@ -39,7 +43,7 @@ function OrderSummary({
                     toggleAccordion={handleClick}
                     id={activeAccordion}
                 >
-                    Review Items
+                    Proceed
                 </ReviewButton>
             );
         } else {

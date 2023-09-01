@@ -31,7 +31,7 @@ export default function ReviewCheckout({
             <h4>
                 Estimated delivery: {estimatedDelivery ? estimatedDelivery : ""}
             </h4>
-            <p>Item Shippied from sjcomputer.us</p>
+            <p>Items Shipped from sjcomputer.us</p>
 
             <div className="row mx-0 mb-3">
                 <div className="col-12 ps-0">

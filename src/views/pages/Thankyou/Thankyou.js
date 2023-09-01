@@ -309,7 +309,7 @@ export default function ThankYou() {
                         <div className="col-6 d-flex justify-content-start">
                             <button
                                 className="track-order-btn"
-                                onClick={() => navigate("/")}
+                                onClick={() => navigate("/account/orders")}
                             >
                                 Track your order
                             </button>

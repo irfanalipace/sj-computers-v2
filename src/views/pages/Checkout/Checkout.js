@@ -31,6 +31,8 @@ export default function Checkout() {
         (state) => state.orders.shippingDetails
     );
 
+    console.log("shippingAddress", shippingAddress);
+
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     const loading = useSelector((state) => state.cart.isLoading);
@@ -197,6 +199,9 @@ export default function Checkout() {
                                             activeAccordion={currentAccordionId}
                                             paymentMethod={paymentMethod}
                                             shippingDetails={checkoutDetails}
+                                            isDisabled={
+                                                !shippingAddress?.isValid
+                                            }
                                         />
                                     </div>
                                     {/* <div>

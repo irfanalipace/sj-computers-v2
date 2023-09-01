@@ -63,7 +63,11 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     }, [apiError]);
 
     const submitShippingDetails = (values) => {
-        let params = { ...values, permanent_address: permanentAddress };
+        let params = {
+            ...values,
+            permanent_address: permanentAddress,
+            isValid,
+        };
         console.print("@@params: ", params);
         if (permanentAddress) dispatch(setShippingDetails(params, hideForm));
         else {
@@ -386,7 +390,9 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                             handleClick={handleSubmit}
                             isLoading={loading}
                             disabled={!isValid}
-                        />
+                        >
+                            Use this address
+                        </ShippingButton>
                     </form>
                 </>
             )}

@@ -24,6 +24,7 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const user = useSelector((state) => state.auth.user);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
 
     const cartItems = useSelector((state) => state.cart.cart);
@@ -94,7 +95,11 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
 
             let paymentParams = {
                 source_id: token.token,
-                shipping_address: shippingDetails,
+                shipping_address: {
+                    ...shippingDetails,
+                    email: user?.email,
+                    full_name: user?.name,
+                },
             };
             if (!isAuthenticated)
                 paymentParams = {
