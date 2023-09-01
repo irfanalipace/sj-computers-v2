@@ -51,13 +51,9 @@ export function productDetailsbyAsinApi(asin) {
     });
 }
 
-export function searchProductsApi(name, page = 1, per_page = 12) {
+export function searchProductsApi(data) {
     return new Promise((resolve, reject) => {
-        ApiService.get(
-            `/search-product?page=${page}&per_page=${per_page}`,
-            "",
-            { name }
-        )
+        ApiService.get(`/search-product`, "", data)
             .then((response) => {
                 console.print(
                     "file: products.js | searchProductsApi| response",
