@@ -14,14 +14,13 @@ function OrderSummary({
     activeAccordion,
     paymentMethod,
     shippingDetails,
-}) 
-{
+}) {
     const dispatch = useDispatch();
     const [disabled, setDisabled] = useState(true);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
 
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    
+
     useEffect(() => {
         if (paymentMethod) setDisabled(false);
     }, [paymentMethod]);
@@ -53,7 +52,6 @@ function OrderSummary({
             };
 
             return (
-                
                 <PaymentButton
                     clickHandler={() => false}
                     id={activeAccordion}
@@ -174,11 +172,9 @@ function OrderSummary({
                                     <li>
                                         <span>Shipping & handling:</span>
                                         <span>
-                                            {shippingDetails?.shipment_info
-                                                ?.amount
+                                            {shippingDetails?.shipment_amount
                                                 ? "$" +
-                                                  shippingDetails?.shipment_info
-                                                      ?.amount
+                                                  shippingDetails?.shipment_amount
                                                 : "$0"}
                                         </span>
                                     </li>

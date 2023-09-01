@@ -136,7 +136,9 @@ export default function Checkout() {
                                         <ReviewCheckout
                                             estimatedDelivery={
                                                 checkoutDetails.shipment_info
-                                                    ?.other_info?.estimate_day
+                                                    ?.other_info
+                                                    ?.estimate_day ||
+                                                checkoutDetails?.estimate_day
                                             }
                                         />
                                     </Accordion>

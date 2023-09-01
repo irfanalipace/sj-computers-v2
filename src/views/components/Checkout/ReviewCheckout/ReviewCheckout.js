@@ -4,7 +4,6 @@ import ReviewButton from "./ReviewButton";
 // import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./ReviewCheckout.css";
-import Discount from "../Discount/Discount";
 
 export default function ReviewCheckout({
     toggleAccordion,

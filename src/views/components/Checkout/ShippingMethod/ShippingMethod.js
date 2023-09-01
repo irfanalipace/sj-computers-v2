@@ -71,6 +71,7 @@ const ShippingMehtod = () => {
                     const updatedCartDetails = {
                         ...cartDetails,
                         ...response.data,
+                        shipment_amount: response?.data?.amount,
                         total: response?.data?.estimate_amount,
                     };
                     updateCartDetails(updatedCartDetails);
