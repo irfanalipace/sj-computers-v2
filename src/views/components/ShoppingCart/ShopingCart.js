@@ -18,6 +18,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
 
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const [showModal, setShowModal] = useState(false);
+    
     const modalRef = useRef(null);
 
     const handleClick = () => {
