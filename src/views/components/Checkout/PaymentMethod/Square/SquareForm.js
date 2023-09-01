@@ -56,7 +56,6 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
     //     dispatch(UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS());
     // };
     async function onTokenSuccess(token) {
-        console.log("token: ", token);
         dispatch(PLACING_ORDER());
         hideCloseBtn();
         // let itemsAdded = false;
