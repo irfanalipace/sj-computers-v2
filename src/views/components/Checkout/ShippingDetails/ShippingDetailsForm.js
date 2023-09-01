@@ -9,10 +9,12 @@ import { useFormik } from "formik";
 
 function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const userDetails = useSelector((state) => state.auth.user);
     const states = useSelector((state) => state.states.states);
     const apiError = useSelector((state) => state.orders.apiError);
     const loading = useSelector((state) => state.orders.isLoading);
     const settingAdress = useSelector((state) => state.orders.settingAdress);
+    console.log("userDetails: ", userDetails);
 
     // const [fieldErrors, setFieldErrors] = useState({});
     const [permanentAddress, setPermanentAddress] = useState(false);
@@ -29,9 +31,9 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     } = useFormik({
         initialValues: {
             country: address?.country || "US",
-            full_name: address?.full_name || "",
+            full_name: address?.full_name || userDetails?.name || "",
             phone_number: address?.phone_number || "",
-            email: address?.email || "",
+            email: address?.email || userDetails?.email || "",
             address: address?.address || "",
             floorAddress: address?.floorAddress || "",
             city: address?.city || "",
@@ -41,9 +43,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
         validate: (values) => {
             const errors = {};
             if (!values.full_name) errors.full_name = "( Required )";
-            if (!isAuthenticated) {
-                if (!values.email) errors.email = "( Required )";
-            }
+            if (!values.email) errors.email = "( Required )";
             if (!values.address) errors.address = "( Required )";
             if (!values.phone_number) errors.phone_number = "( Required )";
             if (!values.city) errors.city = "( Required )";
@@ -180,38 +180,36 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                 </p>
                             )} */}
                         </div>
-                        {!isAuthenticated && (
-                            <div className="field-section">
-                                <label htmlFor={"email"}>
-                                    Email
-                                    <span className="text-danger">*</span>
-                                    {errors.email && touched.email && (
-                                        <span className="fs-6 mt-1 text-danger">
-                                            {errors.email}
-                                        </span>
-                                    )}
-                                </label>
-                                <input
-                                    id="email"
-                                    name="email"
-                                    className={
-                                        errors.email && touched.email
-                                            ? "input-field border-danger"
-                                            : "input-field"
-                                    }
-                                    type="text"
-                                    placeholder="Enter Email to track order"
-                                    value={values?.email}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                ></input>
-                                {/* {errors.email && touched.email && (
+                        <div className="field-section">
+                            <label htmlFor={"email"}>
+                                Email
+                                <span className="text-danger">*</span>
+                                {errors.email && touched.email && (
+                                    <span className="fs-6 mt-1 text-danger">
+                                        {errors.email}
+                                    </span>
+                                )}
+                            </label>
+                            <input
+                                id="email"
+                                name="email"
+                                className={
+                                    errors.email && touched.email
+                                        ? "input-field border-danger"
+                                        : "input-field"
+                                }
+                                type="text"
+                                placeholder="Enter Email to track order"
+                                value={values?.email}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            ></input>
+                            {/* {errors.email && touched.email && (
                                     <p className="fs-6 mt-1 text-danger">
                                         {errors.email}
                                     </p>
                                 )} */}
-                            </div>
-                        )}
+                        </div>
                         <div className="field-section">
                             <label htmlFor={"streetAddress"}>
                                 Address

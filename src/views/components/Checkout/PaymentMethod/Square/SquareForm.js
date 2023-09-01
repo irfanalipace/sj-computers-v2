@@ -82,9 +82,6 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
         //     }
         // }
         // if (isAuthenticated || itemsAdded) {
-
-        hideModal();
-        dispatch(ORDER_PLACED());
         try {
             /// add to cart item list api
             let total_quantity = 0;
@@ -107,7 +104,8 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                     cart_items: cartData,
                     details: {
                         ...cartDetails,
-                        shipment_amount: cartDetails.amount,
+                        shipment_amount: cartDetails.shipment_amount || 0,
+                        estimate_days: cartDetails.estimate_days || 0,
                         total_quantity,
                     },
                 };
@@ -130,6 +128,8 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
             navigate("/checkout?error=Something Went Wrong");
         }
         // }
+        hideModal();
+        dispatch(ORDER_PLACED());
     }
 
     return (

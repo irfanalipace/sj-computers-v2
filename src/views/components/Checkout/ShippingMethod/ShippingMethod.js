@@ -16,9 +16,7 @@ const ShippingMehtod = () => {
     const [activeMethod, setActiveMethod] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const currentState = useSelector((state) => state.states.currentState);
-    const isAuthenticated = useSelector(
-        (state) => state.states.isAuthenticated
-    );
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     const dispatch = useDispatch();
     const shippingMethods = [

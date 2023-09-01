@@ -138,7 +138,7 @@ export default function Checkout() {
                                                 checkoutDetails.shipment_info
                                                     ?.other_info
                                                     ?.estimate_day ||
-                                                checkoutDetails?.estimate_day
+                                                checkoutDetails?.estimate_days
                                             }
                                         />
                                     </Accordion>
