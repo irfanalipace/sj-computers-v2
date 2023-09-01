@@ -13,7 +13,7 @@ import NotFound from "../NotFound/NotFound";
 import "./Product.css";
 
 export default function Product() {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [product, setProduct] = useState(null);
     const [productImages, setProductImages] = useState([]);
     const products = useSelector((state) => state.products.products);
@@ -37,10 +37,9 @@ export default function Product() {
                 setProduct(response.data);
                 setProductImages(response?.data?.image);
                 setIsLoading(false);
-            } catch (error) {
-                setIsLoading(false);
-            }
+            } catch (error) {}
         }
+        setIsLoading(false);
     };
 
     const ProductComponent = () => {
