@@ -334,9 +334,9 @@ class CartController extends BaseController
         }
         $total_amount = number_format((float)$request->total_amount + (float) ($amount * (int)$request->total_quantity), 2, '.', '');
         $data = [
-            'amount' => $amount,
+            'shipment_amount' => $amount,
             'estimate_amount' => $total_amount,
-            'estimate_day' => Carbon::now()->addWeekdays($days)->format('l d-m-Y')
+            'estimate_days' => Carbon::now()->addWeekdays($days)->format('l d-m-Y')
         ];
         return response(array('success' => true, 'data' => $data, 'message' => 'Shipping Details.'), 200, []);
     }
