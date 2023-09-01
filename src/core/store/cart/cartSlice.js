@@ -114,6 +114,16 @@ const cartSlice = createSlice({
             state.apiError = { ...action.payload };
             state.isLoading = false;
         },
+        UPDATED_QUANTITY: (state, action) => {
+            state.isLoading = false;
+            console.log("actions.payload: ", action.payload);
+            let index = state.cart.findIndex(
+                (item) => item.id === action.payload.id
+            );
+            if (index >= 0) {
+                state.cart[index] = { ...state.cart[index], loading: false };
+            }
+        },
     },
 });
 export const {
@@ -128,5 +138,6 @@ export const {
     UPDATE_QUANTITY,
     UPDATING,
     UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS,
+    UPDATED_QUANTITY,
 } = cartSlice.actions;
 export default cartSlice.reducer;

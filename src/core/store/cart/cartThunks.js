@@ -8,6 +8,7 @@ import {
     UPDATE_QUANTITY,
     UPDATING,
     API_ERROR,
+    UPDATED_QUANTITY,
 } from "@store/cart/cartSlice";
 
 import {
@@ -86,7 +87,10 @@ export const deleteItem = (data) => {
             });
         } catch (error) {
             console.print("Something went wrong in carts", error);
-            dispatch({ type: API_ERROR, payload: error?.data?.errors });
+            dispatch({
+                type: UPDATED_QUANTITY,
+                payload: data.cartItem,
+            });
         }
     };
 };
@@ -104,7 +108,7 @@ export const updateQuantity = (data) => {
             });
         } catch (error) {
             console.print("Something went wrong in carts", error);
-            dispatch({ type: API_ERROR, payload: error?.data?.errors });
+            dispatch({ type: UPDATED_QUANTITY, payload: data.cartItem });
         }
     };
 };
