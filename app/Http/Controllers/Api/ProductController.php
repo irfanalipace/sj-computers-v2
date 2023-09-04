@@ -119,7 +119,7 @@ class ProductController extends BaseController
 
         $perPageRecord = $request->get('per_page') ?? 12;
 
-        $sql = Product::query();
+        $sql = Product::where('status',1)->where('quantity','>',0)->query();
 
         /*
          * for general search
@@ -127,7 +127,6 @@ class ProductController extends BaseController
         if($request->get('name'))
         {
             $sql = $sql->where('status',true)
-                ->where('quantity','>',0)
                 ->where(function ($query)use ($request) {
                     $query->where('name', 'LIKE', '%'.$request->get('name').'%')
                         ->orWhere('sku', 'LIKE', '%'.$request->get('name').'%')
