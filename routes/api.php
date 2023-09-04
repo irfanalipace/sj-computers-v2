@@ -113,6 +113,7 @@ Route::post('contact-us', [ContactUsController::class, 'contactSubmit'])->name('
  */
 Route::get('blogs', [BlogController::class, 'getList'])->name('blogs');
 Route::get('get-blogs', [BlogController::class, 'getBlog'])->name('get-blogs');
+Route::get('category-blogs', [BlogController::class, 'getCategoryProduct'])->name('category-blogs');
 
 /*
  * meta title and description
@@ -143,8 +144,8 @@ Route::post('customer-email-verify', [AuthController::class, 'verifyCustomerEmai
 
 Route::post('customer-verify-otp', [AuthController::class, 'verifyOtpCustomerEmail'])->name('customer-verify-otp');
 
-/* 
- Apply shippment for guest 
+/*
+ Apply shippment for guest
 */
 Route::post('apply-shippment-guest',[CartController::class,'applyShipmentGuest']);
 
