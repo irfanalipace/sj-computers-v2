@@ -227,15 +227,12 @@ class ProductController extends BaseController
             $query = ProductInfo::query()
                 ->where('key', '=', $key)
                 ->where('value', 'LIKE', '%MB%');
-//                ->count();
-//            dd($query);
         }
 
         if (!empty($query)) {
             $ids = $query->pluck('product_id')
                 ->toArray();
         }
-//        dd(count($ids));
         $record = DB::table('product_infos')->where('key', $key)
             ->where('value', 'like', '%' . $unit . '%')
             ->select(DB::raw('CAST(value AS UNSIGNED) AS value'), 'product_id', 'id')
