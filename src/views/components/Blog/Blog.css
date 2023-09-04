@@ -842,6 +842,18 @@ div.sticky {
         margin-bottom: 20px;
     }
 }
+
+
+@media screen and (max-width: 1190px) {
+    
+.background-image-lin-dve img {
+   
+    margin-left: 0px;
+}
+}
+
+
+
 @media screen and (max-width: 1003px) {
     .menuBar-policy {
         display: flex;
@@ -996,7 +1008,7 @@ div.sticky {
         margin-top: -162px;
     }
     .content-data-of-the-iamges-blogs {
-        margin-top: 63px;
+        margin-top: 85px;
     }
     .dev-left-blog-p span {
         font-size: 15px;
