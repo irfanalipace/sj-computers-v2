@@ -30,7 +30,7 @@ use App\Repositories\OrderRepository;
 class SquareController extends BaseController
 {
     //
-    private $squareClient, $userId, $user, $totalAmount, $subTotal, $totalQty, $userType;
+    private $squareClient, $userId, $user, $totalAmount, $subTotal, $totalQty, $userType, $estimate_days, $shipment_amount;
     public function __construct(Request $request)
     {
         // Environment value
@@ -43,6 +43,7 @@ class SquareController extends BaseController
         ]);
         $this->user = Auth::guard('api')->user();
         if ($this->user) {
+            
             $this->userId = $this->user->id;
             $this->userType = StatusEnum::USER;
             $this->totalAmount = \Cart::session($this->userId)->getTotal();
@@ -56,6 +57,8 @@ class SquareController extends BaseController
             $this->totalAmount = isset($request->details['total']) ? $request->details['total'] : 0.00;
             $this->subTotal = isset($request->details['sub_total']) ? $request->details['sub_total'] : 0.00;
             $this->totalQty = isset($request->details['total_quantity']) ? $request->details['total_quantity'] : 0;
+            $this->shipment_amount = isset($request->details['shipment_amount']) ? $request->details['shipment_amount'] : 0.00;
+            $this->estimate_days = isset($request->details['estimate_days']) ? $request->details['estimate_days'] : null;
             $this->userType = StatusEnum::GUEST;
         }
     }
@@ -64,7 +67,7 @@ class SquareController extends BaseController
     public function chargeCustomer(CardRequest $request, OrderRepository $repository)
     {
         try {
-
+           
             $idempotencyKey = uniqid();
 
             //create customer || retrieve customer if already added
@@ -107,7 +110,11 @@ class SquareController extends BaseController
                     $orderData['shipment_amount'] = $amount;
                     $orderData['estimate_day'] =  $condition->getAttributes()['estimate_day'];
                 }
-
+                if ($this->userType == StatusEnum::GUEST) {
+                    $orderData['shipment_amount'] = $this->shipment_amount ?? 0;
+                    $orderData['estimate_day'] =  $this->estimate_days ?? Carbon::now()->addWeekdays(5)->format('l d-m-Y');
+                }
+               
                 $cartContent = Cart::session($this->userId)->getContent();
 
                 $result = $api_response->getResult();
@@ -117,7 +124,9 @@ class SquareController extends BaseController
                 $user_type = ($this->userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
                 $cartItems = ($this->userType == StatusEnum::GUEST) ? $request->cart_items : [];
                 $order = $repository->createOrder(array(), $api_response, $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems);
-            
+                if (!$order) {
+                    return response()->json(['code' => 400, 'message' => "something went wrong." . $order]);
+                }
                 $orderData['order'] = $order['order'];
 
                 //sending invoice email of the payment to user

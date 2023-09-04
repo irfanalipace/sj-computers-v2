@@ -13,18 +13,39 @@ import { SET_SEARCH_STRING } from "@store/products/productsSlice";
 import "./ProductsBySearch.css";
 
 const ProductsList = () => {
-    const { searchString, products, isLoading, currentPage, apiError } =
-        useSelector((state) => state.products);
+    const {
+        searchString,
+        selectedCategory,
+        products,
+        isLoading,
+        currentPage,
+        apiError,
+    } = useSelector((state) => state.products);
     const dispatch = useDispatch();
 
-    const handleClick = () => {
+    const handleSearch = () => {
         if (searchString) {
-            dispatch(searchProducts(searchString, currentPage));
+            dispatch(
+                searchProducts({
+                    name: searchString,
+                    category_id: selectedCategory,
+                    page: currentPage,
+                    per_page: 12,
+                })
+            );
         } else dispatch(fetchProducts(currentPage, true));
     };
 
     useEffect(() => {
-        if (searchString) dispatch(searchProducts(searchString));
+        if (searchString)
+            dispatch(
+                searchProducts({
+                    name: searchString,
+                    category_id: selectedCategory,
+                    page: currentPage,
+                    per_page: 12,
+                })
+            );
     }, [searchString]);
 
     useEffect(() => {
@@ -41,7 +62,7 @@ const ProductsList = () => {
                         </div>
                         <ProductsGrid
                             products={products || []}
-                            handleClick={handleClick}
+                            handleSearch={handleSearch}
                             isLoading={isLoading}
                             apiError={apiError}
                             smallBtn={true}

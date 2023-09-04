@@ -23,9 +23,12 @@ const AddCartComponents = ({ product, className, quantity = 1, ...rest }) => {
         let cartSubTotal = parseFloat(details?.sub_total) + productPrice;
         const cartItem = {
             id: product.id,
-            quantity: quantity,
+            quantity,
             price: productPrice,
-            product: { ...product },
+            product: {
+                ...product,
+                in_stock: quantity >= product.quantity ? false : true,
+            },
         };
 
         const cartDetails = {

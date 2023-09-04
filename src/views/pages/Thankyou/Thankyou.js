@@ -24,7 +24,6 @@ export default function ThankYou() {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const location = useLocation();
     const order = location.state?.order;
-    console.print(location, "haris details");
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     //   const handleButtonClick = () => {
     //     // Redirect to the specific path
@@ -34,7 +33,7 @@ export default function ThankYou() {
     useEffect(() => {
         const storedOrder = window.localStorage.getItem("thankyouOrderDetails");
         const order = location?.state?.order || JSON.parse(storedOrder);
-
+        console.log("order", order);
         if (order) {
             const orderString = JSON.stringify(order);
             window.localStorage.setItem("thankyouOrderDetails", orderString);
@@ -50,7 +49,6 @@ export default function ThankYou() {
     useEffect(() => {
         //    console.print(thankOrderItems, "2nd useeffect")
         //    console.print(thankOrderDetails, "2nd useeffect for order details")
-        console.print(isMobile, "isMobile");
     }, [thankOrderItems]);
 
     const handleWindowSizeChange = () => {
@@ -311,7 +309,7 @@ export default function ThankYou() {
                         <div className="col-6 d-flex justify-content-start">
                             <button
                                 className="track-order-btn"
-                                onClick={() => navigate("/")}
+                                onClick={() => navigate("/account/orders")}
                             >
                                 Track your order
                             </button>

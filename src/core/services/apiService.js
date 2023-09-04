@@ -104,7 +104,7 @@ const ApiService = {
                     console.print("error status: ", error?.response?.status);
                     if (error?.response?.status === 401) {
                         destroyToken();
-                        window.location.reload();
+                        // window.location.reload();
                     } else if (
                         !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
                     ) {

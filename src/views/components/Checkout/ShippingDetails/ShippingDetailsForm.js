@@ -3,75 +3,86 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { setShippingDetails } from "@store/orders/ordersThunk";
 import { SET_SHIPPING_DETAILS } from "@store/orders/ordersSlice";
-import { useFormValidation } from "@hooks/useFormValidation";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import ShippingButton from "./ShippingButton";
+import { useFormik } from "formik";
 
 function ShippingDetailsForm({ address, handleHeight, hideForm }) {
-    
-    const { values, handleChange, handleSubmit, errors } = useFormValidation(
-        {
-            country: address?.country || "US",
-            full_name: address?.full_name || "",
-            phone_number: address?.phone_number || "",
-            // email: address?.email || "",
-            address: address?.address || "",
-            floorAddress: "",
-            city: address?.city || "",
-            state: address?.state || "Alabama",
-            zip_code: address?.zip_code || "",
-        },
-        {
-            fieldLengths: {
-                country: { min: 3, max: 50 },
-                full_name: { min: 3, max: 100 },
-                // email: { min: 5, max: 100 },
-            },
-        }
-    );
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const userDetails = useSelector((state) => state.auth.user);
     const states = useSelector((state) => state.states.states);
     const apiError = useSelector((state) => state.orders.apiError);
     const loading = useSelector((state) => state.orders.isLoading);
     const settingAdress = useSelector((state) => state.orders.settingAdress);
 
-    const [fieldErrors, setFieldErrors] = useState({});
+    // const [fieldErrors, setFieldErrors] = useState({});
     const [permanentAddress, setPermanentAddress] = useState(false);
     const dispatch = useDispatch();
-
+    const {
+        values,
+        handleChange,
+        handleSubmit,
+        errors,
+        touched,
+        handleBlur,
+        setErrors,
+        isValid,
+    } = useFormik({
+        initialValues: {
+            country: address?.country || "US",
+            full_name: address?.full_name || userDetails?.name || "",
+            phone_number: address?.phone_number || "",
+            email: address?.email || userDetails?.email || "",
+            address: address?.address || "",
+            floorAddress: address?.floorAddress || "",
+            city: address?.city || "",
+            state: address?.state || "Alabama",
+            zip_code: address?.zip_code || "",
+        },
+        validate: (values) => {
+            const errors = {};
+            if (!values.full_name) errors.full_name = "( Required )";
+            if (!values.email) errors.email = "( Required )";
+            if (!values.address) errors.address = "( Required )";
+            if (!values.phone_number) errors.phone_number = "( Required )";
+            if (!values.city) errors.city = "( Required )";
+            if (!values.state) errors.state = "( Required )";
+            if (!values.zip_code) errors.zip_code = "( Required )";
+            return errors;
+        },
+        onSubmit: (values) => {
+            submitShippingDetails(values);
+        },
+    });
     const handlePermanentAddresses = (e) => {
         setPermanentAddress(e.target.checked);
     };
 
     useEffect(() => {
-        setFieldErrors({ ...errors });
-    }, [errors]);
-
-    useEffect(() => {
-        setFieldErrors({ ...apiError });
+        setErrors({ ...apiError });
     }, [apiError]);
 
-    const submitShippingDetails = (e) => {
-        e.preventDefault();
-        
-        let params = { ...values, permanent_address: permanentAddress };
+    const submitShippingDetails = (values) => {
+        let params = {
+            ...values,
+            permanent_address: permanentAddress,
+            isValid,
+        };
         console.print("@@params: ", params);
         if (permanentAddress) dispatch(setShippingDetails(params, hideForm));
-        
         else {
             dispatch(SET_SHIPPING_DETAILS(params));
             hideForm();
         }
     };
 
-    useEffect(() => {
-        if (typeof cb === "function") handleHeight();
-    }, [fieldErrors]);
+    // useEffect(() => {
+    //     if (typeof cb === "function") handleHeight();
+    // }, [errors]);
 
     useEffect(() => {
         handleHeight();
     }, []);
-    
 
     return (
         <div>
@@ -88,10 +99,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                     <button className="autofill-btn">Autofill</button>
                 </div>
             </div> */}
-                    <form
-                        className="shipping-form"
-                        onSubmit={submitShippingDetails}
-                    >
+                    <form className="shipping-form" onSubmit={handleSubmit}>
                         <div className="field-section">
                             {/* <label htmlFor={"state"}>
                                 Country/State{" "}
@@ -117,85 +125,123 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                             <label htmlFor={"name"}>
                                 Full Name (First & Last Name)
                                 <span className="text-danger">*</span>
+                                {errors.full_name && touched.full_name && (
+                                    <span className="fs-6 mt-1 text-danger">
+                                        {errors?.full_name}
+                                    </span>
+                                )}
                             </label>
                             <input
                                 id="full_name"
                                 name="full_name"
-                                className="input-field"
+                                className={
+                                    errors.full_name && touched.full_name
+                                        ? "input-field border-danger"
+                                        : "input-field"
+                                }
                                 type="text"
                                 placeholder="Full Name"
                                 value={values?.full_name}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                             ></input>
-                            {fieldErrors.full_name && (
+                            {/* {errors.full_name && (
                                 <p className="fs-6 mt-1 text-danger">
-                                    {fieldErrors.full_name}
+                                    {errors.full_name}
                                 </p>
-                            )}
+                            )} */}
                         </div>
 
                         <div className="field-section">
                             <label htmlFor={"phoneNumber"}>
                                 Phone Number
                                 <span className="text-danger">*</span>
+                                {errors.phone_number &&
+                                    touched.phone_number && (
+                                        <span className="fs-6 mt-1 text-danger">
+                                            {errors?.phone_number}
+                                        </span>
+                                    )}
                             </label>
                             <input
                                 id="phone_number"
                                 name="phone_number"
-                                className="input-field"
+                                className={
+                                    errors.email && touched.email
+                                        ? "input-field border-danger"
+                                        : "input-field"
+                                }
                                 type="text"
                                 placeholder="Phone Number"
                                 value={values?.phone_number}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                             ></input>
-                            {fieldErrors.phone_number && (
+                            {/* {errors.phone_number && (
                                 <p className="fs-6 mt-1 text-danger">
-                                    {fieldErrors.phone_number}
+                                    {errors.phone_number}
                                 </p>
-                            )}
+                            )} */}
                         </div>
-                       {
-                        !isAuthenticated &&
-                         <div className="field-section">
-                         <label htmlFor={"email"}>
-                            Email
-                             <span className="text-danger">*</span>
-                         </label>
-                         <input
-                             id="email"
-                             name="email"
-                             className="input-field"
-                             type="text"
-                             placeholder="Enter Email to track order"
-                             value={values?.email}
-                             onChange={handleChange}
-                         ></input>
-                         {fieldErrors.email && (
-                             <p className="fs-6 mt-1 text-danger">
-                                 {fieldErrors.email}
-                             </p>
-                         )}
-                     </div>
-                       }
+                        <div className="field-section">
+                            <label htmlFor={"email"}>
+                                Email
+                                <span className="text-danger">*</span>
+                                {errors.email && touched.email && (
+                                    <span className="fs-6 mt-1 text-danger">
+                                        {errors.email}
+                                    </span>
+                                )}
+                            </label>
+                            <input
+                                id="email"
+                                name="email"
+                                className={
+                                    errors.email && touched.email
+                                        ? "input-field border-danger"
+                                        : "input-field"
+                                }
+                                type="text"
+                                placeholder="Enter Email to track order"
+                                value={values?.email}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            ></input>
+                            {/* {errors.email && touched.email && (
+                                    <p className="fs-6 mt-1 text-danger">
+                                        {errors.email}
+                                    </p>
+                                )} */}
+                        </div>
                         <div className="field-section">
                             <label htmlFor={"streetAddress"}>
                                 Address
                                 <span className="text-danger">*</span>
+                                {errors.address && touched.address && (
+                                    <span className="fs-6 mt-1 text-danger">
+                                        {errors?.address}
+                                    </span>
+                                )}
                             </label>
                             <input
                                 id="address"
                                 name="address"
-                                className="input-field"
+                                className={
+                                    errors.address && touched.address
+                                        ? "input-field border-danger"
+                                        : "input-field"
+                                }
                                 type="text"
                                 placeholder="Street address (P.O Box)"
                                 value={values?.address}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                             ></input>
-                            {fieldErrors.address && (
+                            {/* {errors.address && touched.address && (
                                 <p className="fs-6 mt-1 text-danger">
-                                    {fieldErrors.address}
+                                    {errors.address}
                                 </p>
-                            )}
+                            )} */}
                             <br></br>
                             <input
                                 id="floorAddress"
@@ -205,10 +251,11 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                 placeholder="Unit, building, floor etc."
                                 value={values?.floorAddress}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                             ></input>
-                            {fieldErrors.floorAddress && (
+                            {errors.floorAddress && (
                                 <p className="fs-6 mt-1 text-danger">
-                                    {fieldErrors.floorAddress}
+                                    {errors.floorAddress}
                                 </p>
                             )}
                         </div>
@@ -218,21 +265,31 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                     <label htmlFor={"city"}>
                                         City
                                         <span className="text-danger">*</span>
+                                        {errors.city && touched.city && (
+                                            <span className="fs-6 mt-1 text-danger">
+                                                {errors?.city}
+                                            </span>
+                                        )}
                                     </label>
                                     <input
                                         id="city"
                                         name="city"
-                                        className="input-field"
+                                        className={
+                                            errors.city && touched.city
+                                                ? "input-field border-danger"
+                                                : "input-field"
+                                        }
                                         type="text"
                                         placeholder="City"
                                         value={values?.city}
                                         onChange={handleChange}
+                                        onBlur={handleBlur}
                                     ></input>
-                                    {fieldErrors.city && (
+                                    {/* {errors.city && (
                                         <p className="fs-6 mt-1 text-danger">
-                                            {fieldErrors.city}
+                                            {errors.city}
                                         </p>
-                                    )}
+                                    )} */}
                                 </div>
                             </div>
                             <div className="col-4">
@@ -240,13 +297,23 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                     <label htmlFor={"state"}>
                                         State
                                         <span className="text-danger">*</span>
+                                        {errors.state && touched.state && (
+                                            <span className="fs-6 mt-1 text-danger">
+                                                {errors?.state}
+                                            </span>
+                                        )}
                                     </label>
                                     <select
                                         id="state"
                                         name="state"
-                                        className="input-field text-capitalize"
+                                        className={
+                                            errors.state && touched.estatemail
+                                                ? "input-field border-danger text-capitalize"
+                                                : "input-field text-capitalize"
+                                        }
                                         placeholder="Select Stte"
                                         onChange={handleChange}
+                                        onBlur={handleBlur}
                                         value={values?.state}
                                     >
                                         {states.map((state) => (
@@ -259,9 +326,9 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                             </option>
                                         ))}
                                     </select>
-                                    {fieldErrors.state && (
+                                    {errors.state && (
                                         <p className="fs-6 mt-1 text-danger">
-                                            {fieldErrors.state}
+                                            {errors.state}
                                         </p>
                                     )}
                                 </div>
@@ -269,47 +336,63 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                             <div className="col-4">
                                 <div className="field-section">
                                     <label htmlFor={"zip_code"}>
-                                        {" "}
                                         Zip Code
                                         <span className="text-danger">*</span>
+                                        {errors.zip_code &&
+                                            touched.zip_code && (
+                                                <span className="fs-6 mt-1 text-danger">
+                                                    {errors?.zip_code}
+                                                </span>
+                                            )}
                                     </label>
                                     <input
                                         id="zip_code"
                                         name="zip_code"
-                                        className="input-field"
+                                        className={
+                                            errors.zip_code && touched.zip_code
+                                                ? "input-field border-danger"
+                                                : "input-field"
+                                        }
                                         type="text"
                                         placeholder=" ZipCode"
                                         value={values?.zip_code}
                                         onChange={handleChange}
+                                        onBlur={handleBlur}
                                     />
-                                    {fieldErrors.zip_code && (
+                                    {/* {errors.zip_code && (
                                         <p className="fs-6 mt-1 text-danger">
-                                            {fieldErrors.zip_code}
+                                            {errors.zip_code}
                                         </p>
-                                    )}
+                                    )} */}
                                 </div>
                             </div>
                         </div>
-                        <div className="field-section checkbox-wrapper">
-                            <input
-                                id="permanent_address"
-                                name="permanent_address"
-                                className="input-field"
-                                type="checkbox"
-                                checked={permanentAddress}
-                                onChange={handlePermanentAddresses}
-                            />
-                            <label
-                                htmlFor={"permanent_address"}
-                                className="pb-0"
-                            >
-                                Make this my address
-                            </label>
-                        </div>
+                        {isAuthenticated && (
+                            <div className="field-section checkbox-wrapper">
+                                <input
+                                    id="permanent_address"
+                                    name="permanent_address"
+                                    className="input-field"
+                                    type="checkbox"
+                                    checked={permanentAddress}
+                                    onChange={handlePermanentAddresses}
+                                />
+                                <label
+                                    htmlFor={"permanent_address"}
+                                    className="pb-0"
+                                >
+                                    Make this my address
+                                </label>
+                            </div>
+                        )}
+
                         <ShippingButton
-                            handleClick={submitShippingDetails}
+                            handleClick={handleSubmit}
                             isLoading={loading}
-                        />
+                            disabled={!isValid}
+                        >
+                            Use this address
+                        </ShippingButton>
                     </form>
                 </>
             )}

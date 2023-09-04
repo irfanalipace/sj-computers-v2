@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const CheckoutBox = ({toggleSidebar}) => {
-console.log('hello toogle', toggleSidebar)
+
     return (
         <div>
            

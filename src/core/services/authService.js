@@ -5,6 +5,7 @@ const USER = "user";
 const PASSWORD = "user_password";
 const USER_STATE = "state";
 const TEMP_TOKEN = "temp_token";
+const GUEST_USER_EMAIL = "guestEmail";
 
 export const getToken = () => {
     let Token = window.localStorage.getItem(TOKEN);
@@ -55,6 +56,16 @@ export const saveUserEmail = (email) => {
     let user = getUser();
     user = { ...user, email };
     saveUser(user);
+};
+
+export const saveGuestUserEmail = (email) => {
+    localStorage.setItem(GUEST_USER_EMAIL, email);
+};
+export const getGuestUserEmail = () => {
+    return localStorage.getItem(GUEST_USER_EMAIL);
+};
+export const deleteGuestUserEmail = () => {
+    localStorage.removeItem(GUEST_USER_EMAIL);
 };
 
 export const saveTempToken = (token) => {
@@ -149,4 +160,7 @@ export default {
     getTempToken,
     destroyTempKeys,
     saveUserID,
+    deleteGuestUserEmail,
+    getGuestUserEmail,
+    saveGuestUserEmail,
 };

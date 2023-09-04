@@ -51,6 +51,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
         }
     };
 
+    
     useEffect(() => {
         if (showModal) {
             document.addEventListener("mousedown", handleClickOutside);
@@ -63,10 +64,25 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
         };
     }, [showModal]);
 
+
+
+    // useEffect(() => {
+    //     if (showModal) {
+    //         document.body.classList.add("modal-open");
+    //     } else {
+    //         document.body.classList.remove("modal-open");
+    //     }
+    
+    //     return () => {
+    //         document.body.classList.remove("modal-open");
+    //     };
+    // }, [showModal]);
+
+    
     return (
         <div>
             {isOpen && (
-                <div className="sidebarOverlay" onClick={toggleSidebar}></div>
+                <div className="sidebarOverlay" onClick={toggleSidebar} style={{overflowY:'hidden'}}></div>
             )}
             <div className={`sidebar-cart ${isOpen ? "open" : "closed"}`}>
                 <button onClick={toggleSidebar} className="close-button">
@@ -233,9 +249,9 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
 
                                                 <Link
                                                     className="text-decoration-none processed-link"
-                                                    // onClick={handleClick}
-                                                    onClick={toggleSidebar}
-                                                    to={"/checkout"}
+                                                    onClick={handleClick}
+                                                    // onClick={toggleSidebar}
+                                                    // to={"/checkout"}
                                                 >
                                                     <button className="processed-button">
                                                         Proceed to checkout (
@@ -244,7 +260,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                     </button>
                                                 </Link>
                                                 {/* {showModal && ( */}
-                                                {false && (
+                                                {showModal && (
                                                     <div className="overlay-model-checkout-model-sidebar-checkout">
                                                         <div
                                                             className="overlay-modal-checkout-model-checkout-model-sidebar-checkout"
@@ -327,6 +343,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                             </div>
                                                         </div>
                                                     </div>
+                                               
                                                 )}
                                             </div>
                                         )}
