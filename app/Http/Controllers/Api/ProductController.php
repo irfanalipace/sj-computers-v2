@@ -209,37 +209,32 @@ class ProductController extends BaseController
 
         $query = '';
 
-        if ($unit == 'TB') {
-            $query = ProductInfo::query()->where(function ($query) use ($key) {
+        if($unit == 'TB') {
+            $query = ProductInfo::where(function ($query) use ($key) {
                 $query->where('key', $key)
                     ->Where('value', 'LIKE', '%MB%');
             })->orwhere(function ($query) use ($key) {
                 $query->where('key', $key)
                     ->Where('value', 'LIKE', '%GB%');
             });
-        } elseif ($unit == 'GB') {
-            $query = ProductInfo::query()->where(function ($query) use ($key) {
-            })->orwhere(function ($query) use ($key) {
-                $query->where('key', $key)
-                    ->where('value', 'LIKE', '%MB%');
-            });
-        } elseif ($unit == 'MB') {
-            $query = ProductInfo::query()
-                ->where('key', '=', $key)
-                ->where('value', 'LIKE', '%MB%');
+
+        } elseif($unit == 'GB'){
+            $query = ProductInfo::where('key', $key)
+                ->Where('value', 'LIKE', '%MB%');
         }
 
-        if (!empty($query)) {
+        if(!empty($query)){
             $ids = $query->pluck('product_id')
                 ->toArray();
         }
-        $record = DB::table('product_infos')->where('key', $key)
-            ->where('value', 'like', '%' . $unit . '%')
-            ->select(DB::raw('CAST(value AS UNSIGNED) AS value'), 'product_id', 'id')
+
+        $record = DB::table('product_infos')  ->where('key',$key)
+            ->Where('value', 'like', '%' . $unit . '%')
+            ->select(DB::raw('CAST(value AS UNSIGNED) AS value'),'product_id','id' )
             ->get();
 
-        $productInfos = $record->where('value', '>=', $min)
-            ->where('value', '<=', $max)
+        $productInfos = $record->where('value','>=', $min)
+            ->where('value','<=',$max)
             ->pluck('product_id')
             ->toArray();
 
