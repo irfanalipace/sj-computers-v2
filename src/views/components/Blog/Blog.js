@@ -90,11 +90,11 @@ const Blog = () => {
                     setPrevPageUrl(response.data?.prev_page_url);
                     setNextPageUrl(response.data?.next_page_url);
                 }
-                setIsLoading(false);
+              
             })
             .catch((error) => {
                 console.error("API Error:", error);
-                setIsLoading(false);
+              
             });
     }, [currentPage, itemsPerPage]);
 
@@ -117,9 +117,9 @@ const Blog = () => {
 
     const totalPages = Math.ceil(blogs.length / itemsPerPage);
 
-    const handlelinkClick = () => {
-        setIsLoading(false);
-    };
+    // const handlelinkClick = () => {
+    //     setIsLoading(false);
+    // };
 
     useEffect(() => {
         if (blogdteails) {
