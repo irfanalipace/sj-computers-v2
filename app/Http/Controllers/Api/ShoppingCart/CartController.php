@@ -31,8 +31,8 @@ class CartController extends BaseController
         if ($this->user) {
             $this->userId = $this->user->id;
         } else {
-            $guestUser = $this->getOrCreateGuestUser($request);
-            $this->userId = $guestUser->email ??  StatusEnum::DUMMY;
+
+            $this->userId = StatusEnum::DUMMY;
         }
     }
 
@@ -161,7 +161,7 @@ class CartController extends BaseController
     public function estimatedDays(EstimatedDaysRequest $request)
     {
 
-        if(isset($request->state_id) && $request->state_id == 23){
+        if (isset($request->state_id) && $request->state_id == 23) {
             $data = [
                 'free_shipment_amount' => [
                     'estimate_day' =>   Carbon::now()->addWeekdays(0)->format('l d-m-Y'),
@@ -173,7 +173,7 @@ class CartController extends BaseController
                     'estimate_day' =>   Carbon::now()->addWeekdays(0)->format('l d-m-Y'),
                 ],
             ];
-        } else{
+        } else {
             $data = [
                 'free_shipment_amount' => [
                     'estimate_day' =>   Carbon::now()->addWeekdays(5)->format('l d-m-Y'),
@@ -316,33 +316,28 @@ class CartController extends BaseController
         return response(array('success' => true, 'data' => $items, 'message' => 'Item added.'), 200, []);
     }
 
-    // create guest user if exist get user
-    private function getOrCreateGuestUser($detail)
+    // Apply shipping for guest
+    public function applyShipmentGuest(ApplyShipmentDaysRequest $request)
     {
-        $detail = $detail->shipping_address ?? $detail;
-
-        if (isset($detail['email']) && !is_null($detail['email'])) {
-            // Check if the email exists in the guest_users table
-            $guestUser = Guest::where('email', $detail['email'])->first();
-
-            // If the guest user does not exist, create a new one
-            if (!$guestUser) {
-                $guestUser = new Guest();
-                $guestUser->ip_address = request()->ip();
-                $guestUser->full_name = $detail['full_name'] ?? null;
-                $guestUser->phone_number = $detail['phone_number'] ?? null;
-                $guestUser->email = $detail['email'];
-                $guestUser->address = $detail['address'] ?? null;
-                $guestUser->city = $detail['city'] ?? null;
-                $guestUser->state = $detail['state'] ?? null;
-                $guestUser->zip_code = $detail['zip_code'] ?? null;
-                $guestUser->country = $detail['country'] ?? null;
-                $guestUser->save();
-            }
-        } else {
-
-            return null;
+        switch ($request->shipment_days) {
+            case "1":
+                $amount = 29.99;
+                $days = $request->get('shipment_days');
+                break;
+            case "2":
+                $amount = 14.99;
+                $days = $request->get('shipment_days');
+                break;
+            default:
+                $amount = 0;
+                $days = 5;
         }
-        return $guestUser;
+        $total_amount = number_format((float)$request->total_amount + (float) ($amount * (int)$request->total_quantity), 2, '.', '');
+        $data = [
+            'shipment_amount' => $amount,
+            'estimate_amount' => $total_amount,
+            'estimate_days' => Carbon::now()->addWeekdays($days)->format('l d-m-Y')
+        ];
+        return response(array('success' => true, 'data' => $data, 'message' => 'Shipping Details.'), 200, []);
     }
 }

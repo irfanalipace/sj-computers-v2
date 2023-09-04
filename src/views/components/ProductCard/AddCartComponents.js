@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Button from "@common/Button/Button";
 import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
 import "./ProductCard.css";
-const AddCartComponents = ({ product, className, quantity = 1 }) => {
+const AddCartComponents = ({ product, className, quantity = 1, ...rest }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cart = useSelector((state) => state.cart.cart);
     const details = useSelector((state) => state.cart.details);
@@ -23,9 +23,12 @@ const AddCartComponents = ({ product, className, quantity = 1 }) => {
         let cartSubTotal = parseFloat(details?.sub_total) + productPrice;
         const cartItem = {
             id: product.id,
-            quantity: quantity,
+            quantity,
             price: productPrice,
-            product: { ...product },
+            product: {
+                ...product,
+                in_stock: quantity >= product.quantity ? false : true,
+            },
         };
 
         const cartDetails = {
@@ -46,12 +49,12 @@ const AddCartComponents = ({ product, className, quantity = 1 }) => {
         }
     };
     useEffect(() => {
-        let item = cart.filter((ci) => ci.id === product.id);
+        let item = cart.find((ci) => ci.id === product.id);
         setCartItem(item);
     }, [cart]);
     return (
         <div>
-            {cartItem?.length > 0 ? (
+            {cartItem?.id ? (
                 <Button className="add-to-card-button-mobile-product">
                     Item Already in Cart
                 </Button>
@@ -60,6 +63,7 @@ const AddCartComponents = ({ product, className, quantity = 1 }) => {
                     onClick={cartClickHandler}
                     isLoading={product?.loading}
                     className={className}
+                    {...rest}
                 >
                     Add to Cart
                 </Button>

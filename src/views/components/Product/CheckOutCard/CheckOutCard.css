@@ -102,6 +102,10 @@
     max-width: 90%;
     margin: 0 auto;
 }
+.button-cart-sell button:disabled {
+    opacity: 0.6;
+}
+
 .box-button1 {
     height: 77px;
     color: #6f6f6f;
@@ -222,9 +226,10 @@
 
     background: white;
     /* margin-right: 23px; */
-}.in-stock-area-lable{
+}
+.in-stock-area-lable {
     font-size: 15px;
-    }
+}
 @media screen and (min-width: 767px) and (max-width: 1150px) {
     .button-cart-sell .button-text-button {
         font-size: 12px;
@@ -233,7 +238,8 @@
     .button1 {
         width: 168px;
         height: 33px !important;
-    }.button-cart-sell button {
+    }
+    .button-cart-sell button {
         width: 179px;
         max-width: 90%;
         margin: 0 auto;
@@ -274,32 +280,36 @@
     .return-from-span-tag-checkout {
         margin-left: -11px;
     }
-   
 }
 @media screen and (max-width: 576px) {
-.sjcomputer-tag-checkout-card {
-    margin-left: 0px;
-    display: flex;
-justify-content: end;
-}.ships-form-span-tag {
-    margin-left: 0px;
-}.sjcomputer-tag-checkout-card {
-    margin-left: 41px;
-}.return-from-span-tag-checkout {
-    margin-left: 0px;
-}.sjcomputer-tag-checkout-card {
-    margin-left: 0px;
-    display: flex;
-    justify-content: end;
-    margin-right: 25px;
-}.hover-box {
-    position: relative;
-    display: inline-block;
-    text-align: initial;
-    display: flex;
-    justify-content: end;
-}.in-stock-area-lable{
-width: 100%;
-}
-
+    .sjcomputer-tag-checkout-card {
+        margin-left: 0px;
+        display: flex;
+        justify-content: end;
+    }
+    .ships-form-span-tag {
+        margin-left: 0px;
+    }
+    .sjcomputer-tag-checkout-card {
+        margin-left: 41px;
+    }
+    .return-from-span-tag-checkout {
+        margin-left: 0px;
+    }
+    .sjcomputer-tag-checkout-card {
+        margin-left: 0px;
+        display: flex;
+        justify-content: end;
+        margin-right: 25px;
+    }
+    .hover-box {
+        position: relative;
+        display: inline-block;
+        text-align: initial;
+        display: flex;
+        justify-content: end;
+    }
+    .in-stock-area-lable {
+        width: 100%;
+    }
 }

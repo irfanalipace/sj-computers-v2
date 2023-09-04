@@ -17,16 +17,15 @@ export function addToCartApi(data) {
     });
 }
 
-export function addListToCartApi(cartItems) {
-    console.log("111111 cartitemmmm", cartItems);
+export function addListToCartApi(data) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/store-local-storage-items`, cartItems)
+        ApiService.post(`/store-local-storage-items`, data)
             .then((response) => {
                 console.print(
                     "file: cart.js | addListToCartApi| response",
                     response
                 );
-                console.log("111111 response", response);
+                console.print("response", response);
                 resolve(response);
             })
             .catch((e) => {
@@ -36,9 +35,11 @@ export function addListToCartApi(cartItems) {
     });
 }
 
-export function fetchCartApi() {
+export function fetchCartApi(email) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/get-items`)
+        ApiService.get(`/get-items`, null, {
+            email,
+        })
             .then((response) => {
                 console.print(
                     "file: cart.js | fetchCartApi| response",

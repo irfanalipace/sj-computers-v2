@@ -3,25 +3,30 @@
 
 <head>
 
-    <meta charset=“UTF-8” />
+    <meta charset=“UTF-8”/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href={{ asset('favicon.png') }} />
     <title>Buy Perfect Gaming PC Computers, Laptops & Accessories | SJ Computers LLC</title>
     <!-- <link rel="preload" src={{ asset('/js/images/mobile-banner-1.webp') }} /> -->
-    <meta name="google-site-verification" content="5PS2oRiahS_ZwW7U_GAXkDd24qj8EYMyAHuHSY4D3mc" />
+
+    @if(config('app.env') == 'production')
+        <meta name="google-site-verification" content="5PS2oRiahS_ZwW7U_GAXkDd24qj8EYMyAHuHSY4D3mc"/>
+    @endif
 </head>
 
 <body>
 
-    <div id="root"></div>
+<div id="root"></div>
 
-    <script defer src={{ asset(mix('/js/main.js')) }}></script>
+<script defer src={{ asset(mix('/js/main.js')) }}></script>
+
+@if(config('app.env') == 'production')
 
     <!-- Google Tag Manager -->
     <script defer>
         setTimeout(() => {
-            (function(w, d, s, l, i) {
+            (function (w, d, s, l, i) {
                 w[l] = w[l] || [];
                 w[l].push({
                     'gtm.start': new Date().getTime(),
@@ -40,9 +45,13 @@
     <!-- End Google Tag Manager -->
 
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5KJ773M" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5KJ773M" height="0" width="0"
+                style="display:none;visibility:hidden"></iframe>
+    </noscript>
     <!-- End Google Tag Manager (noscript) -->
+
+@endif
 
 
 </body>

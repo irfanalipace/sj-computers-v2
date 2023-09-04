@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { CartItem } from "./CartItem/CartItem";
@@ -14,13 +14,15 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
     const cartDetails = useSelector((state) => state.cart.details);
     const isLoading = useSelector((state) => state.cart.isLoading);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const [showModal, setShowModal] = useState(false);
+    
     const modalRef = useRef(null);
 
     const handleClick = () => {
-        setShowModal(true);
+        isAuthenticated ? navigate("/checkout") : setShowModal(true);
     };
 
     const handleCloseModal = () => {
@@ -144,11 +146,14 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                             </div>
 
                                             <div className="button-checkout-data">
-                                                <Link to={"/checkout"}>
-                                                    <button className="btn btn-primary checkout-button">
-                                                        Proceed to checkout
-                                                    </button>
-                                                </Link>
+                                                {/* <Link > */}
+                                                <button
+                                                    onClick={handleClick}
+                                                    className="btn btn-primary checkout-button"
+                                                >
+                                                    Proceed to checkout
+                                                </button>
+                                                {/* </Link> */}
                                             </div>
                                         </div>
                                         <div className="add-more-items-dev mt-3 hide-desktop-cart-btn">
@@ -162,6 +167,17 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            )}
+
+            {showModal && (
+                <div className="overlay-model-checkout-model">
+                    <div
+                        className="overlay-modal-checkout-model-checkout-model"
+                        ref={modalRef}
+                    >
+                        <CheckoutBox />
                     </div>
                 </div>
             )}

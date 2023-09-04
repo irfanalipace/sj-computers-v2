@@ -114,26 +114,24 @@ const ProductDetails = ({ product }) => {
                             11 answered questions
                         </Link> */}
                     </div>
-                   <div className="details-dev">
-                  
+                    <div className="details-dev">
                         <span className="size-text-details">
                             Items Available
                         </span>
-                        </div>
-                        {/* <Link className="product-info border-0">
+                    </div>
+                    {/* <Link className="product-info border-0">
                             “lg 24 inch monitor”
                         </Link> */}
-                      <div className="items-list-data-mobile-stayle">
-                      <button
+                    <div className="items-list-data-mobile-stayle">
+                        <button
                             className="product-info border-0"
                             style={{ backgroundColor: "white" }}
                         >
-                            {product?.quantity}
-                            {" items"}
+                            {product?.quantity > 0
+                                ? product?.quantity + " items"
+                                : "Out of stock"}
                         </button>
-                   
-                      </div>
-                 
+                    </div>
                 </div>
             </div>
 

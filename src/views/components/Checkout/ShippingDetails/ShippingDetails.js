@@ -111,7 +111,9 @@ export default function ShippingDetails({
                             <div>
                                 <ShippingButton
                                     handleClick={buttonClickHandler}
-                                />
+                                >
+                                    Use this Address
+                                </ShippingButton>
                             </div>
                         </div>
                     )}

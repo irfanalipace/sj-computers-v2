@@ -268,11 +268,11 @@ const Router = () => {
         {
             path: "/checkout",
             element: (
-                <ProtectedRoute>
-                    <PageWrapper>
-                        <Checkout />
-                    </PageWrapper>
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <PageWrapper>
+                    <Checkout />
+                </PageWrapper>
+                // </ProtectedRoute>
             ),
         },
         {

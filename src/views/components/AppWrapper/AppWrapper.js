@@ -9,6 +9,7 @@ import {
     addToLocalCart,
     syncCartItems,
     setCartDetails,
+    syncGuestUserCart,
     clearCart,
 } from "@store/cart/cartThunks";
 import { updateState, currentState } from "@store/states/statesThunks";
@@ -48,25 +49,19 @@ const AppWrapper = ({ children }) => {
     }, [isAuthenticated]);
 
     useEffect(() => {
-        dispatch(getEstimatedDelivery(state?.id));
+        setTimeout(() => {
+            dispatch(getEstimatedDelivery(state?.id));
+        }, 3000); // giving timeout to increase initial page load speed
     }, [state]);
 
     useEffect(() => {
         setTimeout(() => {
             dispatch(fetchCategory());
             dispatch(fetchBrands());
-
-            if (!isAuthenticated) {
-                if (cartItems?.length > 0 && cartDetails?.total_items > 0) {
-                    cartItems.forEach((cartItem) => {
-                        dispatch(addToLocalCart({ cartItem })); // adds local cart items to redux store
-                    });
-                    dispatch(setCartDetails(cartDetails)); // add local store details to redux store
-                } else {
-                    clearCartLocally();
-                }
-            }
         }, 3000); // giving timeout to increase initial page load speed
+        if (!isAuthenticated) {
+            dispatch(syncGuestUserCart(cartDetails));
+        }
     }, []);
 
     return <div>{children}</div>;

@@ -90,7 +90,7 @@ const OrderPage = () => {
         console.print(responseSearch, "response search");
         setOrderSearchData(responseSearch);
         setLocalLoading(false);
-        setOrderSearch("");
+        // setOrderSearch("");
         return;
     };
 
@@ -166,7 +166,7 @@ const OrderPage = () => {
                             style={{ marginBottom: 5 }}
                             htmlFor="orderSearch"
                         >
-                            Enter tracking id to search
+                            Enter order id to search
                         </label>
                         <div style={{ display: "flex", alignItems: "center" }}>
                             <input
@@ -270,6 +270,10 @@ const OrderPage = () => {
                                     <div style={{ display: "inline-flex" }}>
                                         <Select
                                             data={[
+                                                {
+                                                    value: "",
+                                                    label: "All",
+                                                },
                                                 {
                                                     value: "1 month",
                                                     label: "1 month",

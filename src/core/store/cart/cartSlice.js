@@ -69,7 +69,6 @@ const cartSlice = createSlice({
                 total: 0,
                 sub_total: 0,
             };
-            console.print("cart: ", state.cart);
         },
         DELETE_ITEM: (state, action) => {
             let cartItem = { ...action.payload.cartItem };
@@ -99,12 +98,31 @@ const cartSlice = createSlice({
             }
             state.updatingItem = false;
         },
+        UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS: (state, action) => {
+            const cartItems = state.cart.map((item) => {
+                return {
+                    ...item,
+                    notLocal: true,
+                };
+            });
+            state.cart = cartItems;
+        },
         SET_CART_DETAILS: (state, action) => {
             state.details = { ...action.payload };
         },
         API_ERROR: (state, action) => {
             state.apiError = { ...action.payload };
             state.isLoading = false;
+        },
+        UPDATED_QUANTITY: (state, action) => {
+            state.isLoading = false;
+            console.log("actions.payload: ", action.payload);
+            let index = state.cart.findIndex(
+                (item) => item.id === action.payload.id
+            );
+            if (index >= 0) {
+                state.cart[index] = { ...state.cart[index], loading: false };
+            }
         },
     },
 });
@@ -119,5 +137,7 @@ export const {
     DELETE_ITEM,
     UPDATE_QUANTITY,
     UPDATING,
+    UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS,
+    UPDATED_QUANTITY,
 } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { PAYMENT_METHODS } from "@utils/constants";
 import { Alert } from "react-bootstrap";
@@ -31,14 +31,13 @@ export default function Checkout() {
         (state) => state.orders.shippingDetails
     );
 
+    console.log("shippingAddress", shippingAddress);
+
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     const loading = useSelector((state) => state.cart.isLoading);
-
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
+    const [searchParams, setSearchParams] = useSearchParams();
     const paymentError = useRef(null);
-    paymentError.current = urlParams.get("error");
 
     const ACCORDION_VARIABLES = {
         1: accordionOne,
@@ -64,8 +63,16 @@ export default function Checkout() {
     };
 
     useEffect(() => {
-        paymentError.current ? toggleAccordion(3) : toggleAccordion(1);
-    }, []);
+        const error = searchParams.get("error");
+        if (error) {
+            paymentError.current = error;
+            toggleAccordion(3);
+            searchParams.delete("error");
+            setSearchParams(searchParams);
+        } else {
+            toggleAccordion(1);
+        }
+    }, [searchParams]);
 
     return (
         <>
@@ -131,7 +138,9 @@ export default function Checkout() {
                                         <ReviewCheckout
                                             estimatedDelivery={
                                                 checkoutDetails.shipment_info
-                                                    ?.other_info?.estimate_day
+                                                    ?.other_info
+                                                    ?.estimate_day ||
+                                                checkoutDetails?.estimate_days
                                             }
                                         />
                                     </Accordion>
@@ -156,13 +165,11 @@ export default function Checkout() {
                                     </Accordion>
                                 </div>
                                 <div className="col-md-3 col-12">
-                                    {isAuthenticated && (
-                                        <div>
-                                            <div className="shipping-method-component-wrapper">
-                                                <ShippingMethod />
-                                            </div>
+                                    <div>
+                                        <div className="shipping-method-component-wrapper">
+                                            <ShippingMethod />
                                         </div>
-                                    )}
+                                    </div>
 
                                     {!isAuthenticated && (
                                         <div>
@@ -192,6 +199,9 @@ export default function Checkout() {
                                             activeAccordion={currentAccordionId}
                                             paymentMethod={paymentMethod}
                                             shippingDetails={checkoutDetails}
+                                            isDisabled={
+                                                !shippingAddress?.isValid
+                                            }
                                         />
                                     </div>
                                     {/* <div>
