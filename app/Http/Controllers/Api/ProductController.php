@@ -117,7 +117,7 @@ class ProductController extends BaseController
 
         $perPageRecord = $request->get('per_page') ?? 12;
 
-        $sql = Product::where('status',1)->query();
+        $sql = Product::where('status',1);
 
         /*
          * for general search
