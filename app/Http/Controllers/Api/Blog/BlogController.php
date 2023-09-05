@@ -16,14 +16,14 @@ class BlogController extends BaseController
     {
         $perPage = $request->per_page ?? 12;
         $records = Blog::whereDate('publish_date', '<=', Carbon::now()->toDateString())
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->paginate($perPage);
 
         $records->map(function ($record) {
 
-            $record['primary_image']   = config('app.url').'/storage/'.$record['primary_image'];
-            $record['thumbnail_image'] = config('app.url').'/storage/'.$record['thumbnail_image'];
-            $record['secondary_image'] = config('app.url').'/storage/'.$record['secondary_image'];
+            $record['primary_image'] = is_null($record['primary_image']) ? $record['primary_image'] : config('app.url') . '/storage/' . $record['primary_image'];
+            $record['thumbnail_image'] = is_null($record['thumbnail_image']) ? $record['thumbnail_image'] : config('app.url') . '/storage/' . $record['thumbnail_image'];
+            $record['secondary_image'] = is_null($record['secondary_image']) ? $record['secondary_image'] : config('app.url') . '/storage/' . $record['secondary_image'];
             return $record;
         });
 
@@ -35,9 +35,9 @@ class BlogController extends BaseController
         try {
             $record = Blog::where('slug', $request->slug)->first();
             if ($record) {
-                    $record['primary_image']   = config('app.url').'/storage/'.$record['primary_image'];
-                    $record['thumbnail_image'] = config('app.url').'/storage/'.$record['thumbnail_image'];
-                    $record['secondary_image'] = config('app.url').'/storage/'.$record['secondary_image'];
+                $record['primary_image'] = is_null($record['primary_image']) ? $record['primary_image'] : config('app.url') . '/storage/' . $record['primary_image'];
+                $record['thumbnail_image'] = is_null($record['thumbnail_image']) ? $record['thumbnail_image'] : config('app.url') . '/storage/' . $record['thumbnail_image'];
+                $record['secondary_image'] = is_null($record['secondary_image']) ? $record['secondary_image'] : config('app.url') . '/storage/' . $record['secondary_image'];
 
 
                 return $this->sendResponse($record, 'blog is displayed');
