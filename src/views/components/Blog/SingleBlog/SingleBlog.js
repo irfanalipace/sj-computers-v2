@@ -21,7 +21,7 @@ import "./SingleBlog.css";
 import Blog from "../Blog";
 import BlogsDetails from "../../../pages/Blog/BlogsDetails";
 import BlogPage from "../../../pages/Blog/BlogPage";
-
+import BlogGrid from "../BlogGrid";
 const SingleBlog = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
@@ -194,132 +194,139 @@ const SingleBlog = () => {
                     <LoaderComponent />
                 </div>
             ) : (
-                <div className="container single-blog-pages-dev-container-all-products">
-                    <div className="row">
-                        {blogs.map((blog) => (
-                            <div
-                                className="col-lg-4 col-md-6 col-sm-12"
-                                key={blog?.id}
-                            >
-                                <div></div>
-                                <Link
-                                    to={`/${blog?.slug}`}
-                                    className="text-decoration-none"
-                                    state={{
-                                        blogList: blog,
-                                    }}
-                                    onClick={() => blogslist(blog)}
-                                >
-                                    <div className="product-card product-blogs-card">
-                                       
+        //         <div className="container single-blog-pages-dev-container-all-products">
+        //             <div className="row">
+        //                 {blogs.map((blog) => (
+        //                     <div
+        //                         className="col-lg-4 col-md-6 col-sm-12"
+        //                         key={blog?.id}
+        //                     >
+        //                         <div></div>
+        //                         <Link
+        //                             to={`/${blog?.slug}`}
+        //                             className="text-decoration-none"
+        //                             state={{
+        //                                 blogList: blog,
+        //                             }}
+        //                             onClick={() => blogslist(blog)}
+        //                         >
+        //                             <div className="product-card product-blogs-card">
+        //                                 {/* <img src={book} alt={blog.title} /> */}
 
-                                        <img
-                                            src={
-                                                blog?.thumbnail_image
+        //                                 <img
+        //                                     src={
+        //                                         blog?.thumbnail_image
                                                   
-                                            }
-                                            alt={blog?.alt_thumbnail_image}
-                                        />
+        //                                     }
+        //                                     alt={blog?.alt_thumbnail_image}
+        //                                 />
 
-                                        <div className="dev-data-span-card-dev">
-                                            <span> {blog?.title}</span>
-                                        </div>
-                                        <div className="read-more-button-blogs">
-                                            <span>{blog?.publish_date}</span>
-                                        </div>
-                                        <div className="read-more-span-text">
-                                            <span>{blog?.meta_description}</span>
-                                        </div>
-                                        <div className="read-section-date-section">
-                                            <div style={{ paddingTop: "4px" }}>
-                                                <span
-                                                    style={{
-                                                        fontWeight: "bold",
-                                                    }}
-                                                >
-                                                    Read Full Blog
-                                                </span>
-                                            </div>
-                                            {blog?.tags && blog?.tags?.length > 0 && (
-                                            <div style={{ display: "flex" }}>
-                                                {blog?.tags
-                                                    ?.split(",")
-                                                    ?.slice(0, 3)
-                                                    ?.map((tag) => (
-                                                        <div
-                                                            className="span-data-blogs-lending-page"
-                                                            key={tag}
-                                                        >
-                                                            <span>{tag}</span>
-                                                        </div>
-                                                    ))}
-                                            </div>
-                                              )}
-                                        </div>
+        //                                 <div className="dev-data-span-card-dev">
+        //                                     <span> {blog?.title}</span>
+        //                                 </div>
+        //                                 <div className="read-more-button-blogs">
+        //                                     <span>{blog?.publish_date}</span>
+        //                                 </div>
+        //                                 <div className="read-more-span-text">
+        //                                     <span>{blog?.meta_description}</span>
+        //                                 </div>
+        //                                 <div className="read-section-date-section">
+        //                                     <div style={{ paddingTop: "4px" }}>
+        //                                         <span
+        //                                             style={{
+        //                                                 fontWeight: "bold",
+        //                                             }}
+        //                                         >
+        //                                             Read Full Blog
+        //                                         </span>
+        //                                     </div>
+        //                                     {blog?.tags && blog?.tags?.length > 0 && (
+        //                                     <div style={{ display: "flex" }}>
+        //                                         {blog?.tags
+        //                                             ?.split(",")
+        //                                             ?.slice(0, 3)
+        //                                             ?.map((tag) => (
+        //                                                 <div
+        //                                                     className="span-data-blogs-lending-page"
+        //                                                     key={tag}
+        //                                                 >
+        //                                                     <span>{tag}</span>
+        //                                                 </div>
+        //                                             ))}
+        //                                     </div>
+        //                                       )}
+        //                                 </div>
                                         
-                                    </div>
+        //                             </div>
                                     
-                                </Link>
-                            </div>
-                        ))}
-                    </div>
+        //                         </Link>
+        //                     </div>
+        //                 ))}
+        //             </div>
 
-                    {/* <div className="pagination-blogs-page">
-            {prevPageUrl && (
-                <button onClick={handlePrevPage}>
-                    &laquo; Previous
-                </button>
-            )}
+        //             {/* <div className="pagination-blogs-page">
+        //     {prevPageUrl && (
+        //         <button onClick={handlePrevPage}>
+        //             &laquo; Previous
+        //         </button>
+        //     )}
 
-            {Array.from({ length: totalPages }, (_, index) => (
-                <button
-                    key={index}
-                    onClick={() => handlePaginationClick(index + 1)}
-                    className={
-                        currentPage === index + 1 ? "active" : ""
-                    }
-                >
-                    {index + 1}
-                </button>
-            ))}
+        //     {Array.from({ length: totalPages }, (_, index) => (
+        //         <button
+        //             key={index}
+        //             onClick={() => handlePaginationClick(index + 1)}
+        //             className={
+        //                 currentPage === index + 1 ? "active" : ""
+        //             }
+        //         >
+        //             {index + 1}
+        //         </button>
+        //     ))}
 
-            {nextPageUrl && (
-                <button onClick={handleNextPage}>Next &raquo;</button>
-            )}
-        </div> */}
+        //     {nextPageUrl && (
+        //         <button onClick={handleNextPage}>Next &raquo;</button>
+        //     )}
+        // </div> */}
 
-                    <div className="pagination-blogs-page">
-                        {/* <button onClick={handlePrevPage} disabled={!prevPageUrl}>
-                &laquo; Pre
-            </button>
+        //             <div className="pagination-blogs-page">
+        //                 {/* <button onClick={handlePrevPage} disabled={!prevPageUrl}>
+        //         &laquo; Pre
+        //     </button>
 
-            {Array.from({ length: totalPages }, (_, index) => (
-                <button
-                    key={index}
-                    onClick={() => handlePaginationClick(index + 1)}
-                    className={
-                        currentPage === index + 1 ? "active" : ""
-                    }
-                >
-                    {currentPage}
-                </button>
-            ))}
+        //     {Array.from({ length: totalPages }, (_, index) => (
+        //         <button
+        //             key={index}
+        //             onClick={() => handlePaginationClick(index + 1)}
+        //             className={
+        //                 currentPage === index + 1 ? "active" : ""
+        //             }
+        //         >
+        //             {currentPage}
+        //         </button>
+        //     ))}
 
-            <button onClick={handleNextPage} disabled={!nextPageUrl}>
-                Nxt &raquo;
-            </button> */}
-                        <div>
-                            <Stack spacing={2}>
-                                <Pagination
-                                    count={pageCount}
-                                    page={currentPage}
-                                    onChange={handlePageChange}
-                                />
-                            </Stack>
-                        </div>
-                        {isLoading && <div className="loader">Loading...</div>}
-                    </div>
-                </div>
+        //     <button onClick={handleNextPage} disabled={!nextPageUrl}>
+        //         Nxt &raquo;
+        //     </button> */}
+        //                 <div>
+        //                     <Stack spacing={2}>
+        //                         <Pagination
+        //                             count={pageCount}
+        //                             page={currentPage}
+        //                             onChange={handlePageChange}
+        //                         />
+        //                     </Stack>
+        //                 </div>
+        //                 {isLoading && <div className="loader">Loading...</div>}
+        //             </div>
+        //         </div>
+        <BlogGrid
+        blogs={blogs}
+        pageCount={pageCount}
+        currentPage={currentPage}
+        handlePageChange={handlePageChange} 
+        isLoading={isLoading}
+      />
             )}
         </div>
     );

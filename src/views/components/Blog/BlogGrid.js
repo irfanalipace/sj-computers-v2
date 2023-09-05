@@ -1,0 +1,64 @@
+import React, { useEffect, useState } from "react";
+import "../Blog/SingleBlog/SingleBlog.css";
+import { Link, useNavigate } from "react-router-dom";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import Pagination from "@mui/material/Pagination";
+
+const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }) => {
+   
+    return (
+        <div className="container single-blog-pages-dev-container-all-products">
+        <div className="row">
+          {blogs.map((blog) => (
+            <div className="col-lg-4 col-md-6 col-sm-12" key={blog?.id}>
+              <div className="product-card product-blogs-card">
+                <Link
+                  to={`/${blog?.slug}`}
+                  className="text-decoration-none"
+                  state={{
+                    blogList: blog,
+                  }}
+                >
+                  <img src={blog?.thumbnail_image} alt={blog?.alt_thumbnail_image} />
+                  <div className="dev-data-span-card-dev">
+                    <span>{blog?.title}</span>
+                  </div>
+                  <div className="read-more-button-blogs">
+                    <span>{blog?.publish_date}</span>
+                  </div>
+                  <div className="read-more-span-text">
+                    <span>{blog?.meta_description}</span>
+                  </div>
+                  <div className="read-section-date-section">
+                    <div style={{ paddingTop: "4px" }}>
+                      <span style={{ fontWeight: "bold" }}>Read Full Blog</span>
+                    </div>
+                    {blog?.tags && blog?.tags?.length > 0 && (
+                      <div style={{ display: "flex" }}>
+                        {blog?.tags
+                          ?.split(",")
+                          ?.slice(0, 3)
+                          ?.map((tag) => (
+                            <div className="span-data-blogs-lending-page" key={tag}>
+                              <span>{tag}</span>
+                            </div>
+                          ))}
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="pagination-blogs-page">
+          <div>
+            <Pagination count={pageCount} page={currentPage} onChange={handlePageChange} />
+          </div>
+          {isLoading && <div className="loader">Loading...</div>}
+        </div>
+      </div>
+    );
+};
+
+export default BlogGrid;

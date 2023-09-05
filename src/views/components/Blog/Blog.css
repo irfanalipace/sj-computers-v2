@@ -35,7 +35,7 @@ li.policy-listitem {
 }
 
 .widget_categories {
-    border: 1px solid gray;
+    border: 1px solid #c7c0c0;
     padding: 15px;
     border-radius: 4px;
     width: 270px;
@@ -68,6 +68,11 @@ li.policy-listitem {
     -o-transition: all 400ms ease-in-out 0s;
     -ms-transition: all 400ms ease-in-out 0s;
 }
+
+.widget_categories a{
+    color: #00a0d9;
+}
+
 
 
 .policy-listitem a {

@@ -235,7 +235,7 @@ const Router = () => {
 
 
         {
-            path: "/category-blogs",
+            path: "blogs/category/:categoryslug",
             element: (
                 <PageWrapper>
                     <CategoryBlogs />

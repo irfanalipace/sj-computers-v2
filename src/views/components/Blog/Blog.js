@@ -7,6 +7,7 @@ import {
     getBlogsPagesApi,
     blogSlugApiblogDetails,
     getBlogsHeaderPagesApi,
+    getBlogCategories
 } from "../../../core/api/blogs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -37,8 +38,11 @@ const Blog = () => {
     const location = useLocation();
     const { blogList } = location.state || {};
 
-    console.log("mylocations data", blogList);
+    const { categoryslug } = useParams();
 
+
+
+    const [categoriesblogs, setCategoriesBlogs] = useState([]);
     const [blogdteails, setBlogDetails] = useState("");
     const [blogsdetailserror, setBlogdetailsError] = useState(false);
 
@@ -200,6 +204,24 @@ const Blog = () => {
     //     event.preventDefault();
     //     window.history.pushState(null, null, `#${category_id}`);
     //   };
+
+
+    useEffect(() => {
+        getBlogCategories(categoryslug)
+            .then((response) => {
+                console.log("API Response:", response); // List of the Category Blogs Show Here
+                setCategoriesBlogs(response);
+                console.log(response, 'response aapi');
+            })
+            .catch((error) => {
+                console.error("API Error:", error);
+                if (error) {
+                    setBlogdetailsError(true);
+                }
+            });
+    }, [categoryslug]);
+
+
     if (blogLoading) {
         return (
             <div className="text-center">
@@ -509,14 +531,13 @@ const Blog = () => {
                                         <div className="widget widget_categories">
                                             <h4>Category</h4>
 
-                                            <ul >
-                                                <li>
-                                                    <Link className="text-decoration-none" to={"/blogs"}>
-                                                      Desktop
+                                            {categoriesblogs?.map((categoryitem) => (
+                                                <li key={categoryitem.id}>
+                                                    <Link to={`/blogs/category/${categoryslug}`} className="text-decoration-none">
+                                                        {categoryitem.name}
                                                     </Link>
                                                 </li>
-                                            
-                                            </ul>
+                                            ))}
                                         </div>
                                     </div>
 
