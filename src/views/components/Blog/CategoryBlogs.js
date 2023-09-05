@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./SingleBlog.css";
+import "../Blog/SingleBlog/SingleBlog.css";
 import blogmeetingdesktop from "@images/blog/Refurbished-Laptops-desktop.webp";
 import blogmeetingmobile from "@images/blog/Refurbished-Laptops-mobile.webp";
 import smimage from "@images/blog/smallimage.png";
@@ -8,21 +8,15 @@ import book from "@images/blog/blogbook.png";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { Link, useNavigate } from "react-router-dom";
-import {
-    getBlogsPagesApi,
-    blogSlugApiblogDetails,
-} from "../../../../core/api/blogs";
+import { getBlogsPagesApi } from "../../../core/api/blogs";
 import { useParams } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-import "./SingleBlog.css";
-import Blog from "../Blog";
-import BlogsDetails from "../../../pages/Blog/BlogsDetails";
-import BlogPage from "../../../pages/Blog/BlogPage";
 
-const SingleBlog = () => {
+
+const CategoryBlogs = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState("");
@@ -211,7 +205,7 @@ const SingleBlog = () => {
                                     onClick={() => blogslist(blog)}
                                 >
                                     <div className="product-card product-blogs-card">
-                                       
+                                        {/* <img src={book} alt={blog.title} /> */}
 
                                         <img
                                             src={
@@ -325,4 +319,4 @@ const SingleBlog = () => {
     );
 };
 
-export default SingleBlog;
+export default CategoryBlogs;

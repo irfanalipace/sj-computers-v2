@@ -65,3 +65,18 @@ export function blogHeaderDetails(slug) {
 
 
 
+//getBlogs by category blogs api
+export function getBlogsCategoryApi(per_page = 12, slug) {
+    const params = { per_page, slug }; // Create an object with the parameters
+    console.log(slug, 'slug dta')
+    return new Promise((resolve, reject) => {
+        ApiService.get("/category-blogs", { params }) // Pass the parameters as an object
+            .then((response) => {
+                resolve(response);
+            })
+            .catch((error) => {
+                console.error("API Error:", error);
+                reject(error);
+            });
+    });
+}

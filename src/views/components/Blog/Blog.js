@@ -90,11 +90,11 @@ const Blog = () => {
                     setPrevPageUrl(response.data?.prev_page_url);
                     setNextPageUrl(response.data?.next_page_url);
                 }
-              
+
             })
             .catch((error) => {
                 console.error("API Error:", error);
-              
+
             });
     }, [currentPage, itemsPerPage]);
 
@@ -117,9 +117,7 @@ const Blog = () => {
 
     const totalPages = Math.ceil(blogs.length / itemsPerPage);
 
-    // const handlelinkClick = () => {
-    //     setIsLoading(false);
-    // };
+
 
     useEffect(() => {
         if (blogdteails) {
@@ -284,15 +282,15 @@ const Blog = () => {
                                                     <span>
                                                         {blogdteails.publish_date
                                                             ? new Date(
-                                                                  blogdteails.publish_date
-                                                              ).toLocaleDateString(
-                                                                  "en-US",
-                                                                  {
-                                                                      month: "2-digit",
-                                                                      day: "2-digit",
-                                                                      year: "numeric",
-                                                                  }
-                                                              )
+                                                                blogdteails.publish_date
+                                                            ).toLocaleDateString(
+                                                                "en-US",
+                                                                {
+                                                                    month: "2-digit",
+                                                                    day: "2-digit",
+                                                                    year: "numeric",
+                                                                }
+                                                            )
                                                             : null}
                                                     </span>
                                                 </div>
@@ -396,7 +394,7 @@ const Blog = () => {
                                                 <img
                                                     src={
                                                         blogdteails.primary_image
-                                                            
+
                                                     }
                                                     alt={blogdteails.all_text}
                                                 />
@@ -506,6 +504,19 @@ const Blog = () => {
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div className="widget widget_categories">
+                                            <h4>Category</h4>
+
+                                            <ul >
+                                                <li>
+                                                    <Link className="text-decoration-none" to={"/blogs"}>
+                                                      Desktop
+                                                    </Link>
+                                                </li>
+                                            
+                                            </ul>
                                         </div>
                                     </div>
 
@@ -679,6 +690,7 @@ const Blog = () => {
                                                                  </div> */}
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 

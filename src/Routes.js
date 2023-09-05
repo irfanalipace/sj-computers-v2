@@ -39,6 +39,7 @@ import NotFound from "@pages/NotFound/NotFound";
 
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
+import CategoryBlogs from "@components/Blog/CategoryBlogs";
 
 const Router = () => {
     const routes = [
@@ -222,6 +223,7 @@ const Router = () => {
                 </Suspense>
             ),
         },
+
         {
             path: "/blogs",
             element: (
@@ -230,6 +232,17 @@ const Router = () => {
                 </PageWrapper>
             ),
         },
+
+
+        {
+            path: "/category-blogs",
+            element: (
+                <PageWrapper>
+                    <CategoryBlogs />
+                </PageWrapper>
+            ),
+        },
+
 
         {
             path: "/about_us",
