@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Pagination from "@mui/material/Pagination";
 
-const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }) => {
-   
+const BlogGrid = ({ blogs, pageCount, blogslist, currentPage, handlePageChange, isLoading }) => {
+ 
     return (
         <div className="container single-blog-pages-dev-container-all-products">
         <div className="row">
@@ -17,7 +17,10 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
                   className="text-decoration-none"
                   state={{
                     blogList: blog,
+                    
                   }}
+                  
+                  onClick={blogslist}
                 >
                   <img src={blog?.thumbnail_image} alt={blog?.alt_thumbnail_image} />
                   <div className="dev-data-span-card-dev">

@@ -15,8 +15,6 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import BlogGrid from "./BlogGrid";
 
-
-
 const CategoryBlogs = () => {
     const { categoryslug }=useParams();
     
@@ -147,6 +145,7 @@ const CategoryBlogs = () => {
                 currentPage={currentPage}
                 handlePageChange={handlePageChange} 
                 isLoading={isLoading}
+                blogslist={blogslist}
               />
             )}
         </div>

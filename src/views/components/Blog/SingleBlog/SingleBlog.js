@@ -23,6 +23,7 @@ import BlogsDetails from "../../../pages/Blog/BlogsDetails";
 import BlogPage from "../../../pages/Blog/BlogPage";
 import BlogGrid from "../BlogGrid";
 const SingleBlog = () => {
+
     const [isLoading, setIsLoading] = useState(false);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState("");
@@ -74,7 +75,7 @@ const SingleBlog = () => {
         setCurrentPage(page);
     };
 
-    // const [blogdteails, setBlogDetails] = useState("");
+  
     // useEffect(() => {
     //     blogSlugApiblogDetails(blogslug)
     //         .then((response) => {
@@ -326,6 +327,8 @@ const SingleBlog = () => {
         currentPage={currentPage}
         handlePageChange={handlePageChange} 
         isLoading={isLoading}
+        blogslist={blogslist}
+        
       />
             )}
         </div>
