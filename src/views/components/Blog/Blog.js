@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import "./Blog.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -42,7 +43,6 @@ const Blog = () => {
 
 
 
-    const [categoriesblogs, setCategoriesBlogs] = useState([]);
     const [blogdteails, setBlogDetails] = useState("");
     const [blogsdetailserror, setBlogdetailsError] = useState(false);
 
@@ -54,6 +54,19 @@ const Blog = () => {
     const [prevPageUrl, setPrevPageUrl] = useState(null);
     const [nextPageUrl, setNextPageUrl] = useState(null);
     const { blogslug } = useParams();
+
+    const [visibleCategories, setVisibleCategories] = useState(8);
+    const blogscategories = useSelector((state) => state.category.categories);
+    
+    let RenderedCategories = blogscategories.slice(0, visibleCategories)
+    .map((category) => (
+        <li key={category.id} >
+            <Link to={`/blogs/category/${category.slug}`} className="text-decoration-none">{category.name}</Link>
+           {console.log(category, 'category data')}
+        </li>
+    ));
+  
+
 
     useEffect(() => {
         if (blogList) {
@@ -206,20 +219,20 @@ const Blog = () => {
     //   };
 
 
-    useEffect(() => {
-        getBlogCategories(categoryslug)
-            .then((response) => {
-                console.log("API Response:", response); // List of the Category Blogs Show Here
-                setCategoriesBlogs(response);
-                console.log(response, 'response aapi');
-            })
-            .catch((error) => {
-                console.error("API Error:", error);
-                if (error) {
-                    setBlogdetailsError(true);
-                }
-            });
-    }, [categoryslug]);
+    // useEffect(() => {
+    //     getBlogCategories(categoryslug)
+    //         .then((response) => {
+    //             console.log("API Response:", response); // List of the Category Blogs Show Here
+    //             setCategoriesBlogs(response);
+    //             console.log(response, 'response aapi');
+    //         })
+    //         .catch((error) => {
+    //             console.error("API Error:", error);
+    //             if (error) {
+    //                 setBlogdetailsError(true);
+    //             }
+    //         });
+    // }, [categoryslug]);
 
 
     if (blogLoading) {
@@ -530,14 +543,20 @@ const Blog = () => {
 
                                         <div className="widget widget_categories">
                                             <h4>Category</h4>
-
-                                            {categoriesblogs?.map((categoryitem) => (
+                                            <li >
+                                          
+                                              {RenderedCategories}
+                            
+                      
+                           
+                                          </li>
+                                            {/* {categoriesblogs?.map((categoryitem) => (
                                                 <li key={categoryitem.id}>
                                                     <Link to={`/blogs/category/${categoryslug}`} className="text-decoration-none">
                                                         {categoryitem.name}
                                                     </Link>
                                                 </li>
-                                            ))}
+                                            ))} */}
                                         </div>
                                     </div>
 

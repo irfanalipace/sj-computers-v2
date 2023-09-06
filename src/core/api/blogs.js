@@ -57,36 +57,20 @@ export function blogHeaderDetails(slug) {
 
 
 
-export function getBlogCategories(categoryslug) {
-    console.log("Fetching categories..."); 
-    const dummyCategories = [
-        {
-            id: 1,
-            name: "Loptop",
-            slug: "category-1",
-        },
-        {
-            id: 2,
-            name: "Desktop",
-            slug: "category-2",
-        },
-        {
-            id: 3,
-            name: "Monitor",
-            slug: "category-3",
-        },
-        {
-            id: 4,
-            name: "Screen",
-            slug: "category-4",
-        },
-        // ... (other categories)
-    ];
-
+///Category Api Call
+export function getCategoryApi(category_id) {
+   
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            console.log("Categories fetched:", dummyCategories,categoryslug); // Add this line
-            resolve(dummyCategories);
-        }, 2000);
+        ApiService.get(`/category-blogs?category_id=${category_id}`)
+            .then((response) => {
+                console.log(response, "category the blogs");
+                resolve(response);
+            })
+            .catch((e) => {
+                console.error("Error in getCategoryApi:", e);
+                reject(e);
+            });
     });
 }
+
+
