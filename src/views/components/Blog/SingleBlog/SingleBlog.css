@@ -12,6 +12,10 @@
 
     padding-bottom: 26px;
 }
+.blogs-not-found-message{
+    text-align: center;
+    padding: 100px;
+}
 .div-blogs-data-lending-page{
     display: flex;
 }

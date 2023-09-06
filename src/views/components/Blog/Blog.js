@@ -59,6 +59,7 @@ const Blog = () => {
     const blogscategories = useSelector((state) => state.category.categories);
     
     let RenderedCategories = blogscategories.slice(0, visibleCategories)
+    
     .map((category) => (
         <li key={category.id} >
             <Link to={`/blogs/category/${category.slug}`} className="text-decoration-none">{category.name}</Link>

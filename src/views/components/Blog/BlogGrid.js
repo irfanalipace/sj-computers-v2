@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../Blog/SingleBlog/SingleBlog.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,useParams } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Pagination from "@mui/material/Pagination";
-import { colors } from "laravel-mix/src/Log";
+
 
 const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }) => {
-  
 
   
   const navigate = useNavigate();
@@ -19,13 +18,7 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
       });
   };
 
-  if (blogs.categories && Array.isArray(blog.categories)) {
-    blog.categories.forEach((category) => {
-      console.log(category.name, 'list data');
-    });
-  } else {
-    console.error('Categories not defined or not an array');
-  }
+ 
   
     return (
         <div className="container single-blog-pages-dev-container-all-products">
@@ -80,8 +73,8 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
                     <div style={{ display: "flex" }}>
                      {blog?.categories?.map((category) => (
                     <div className="span-data-blogs-lending-page" key={category}>
-                    {/* <span>{category.name} {console.log(category.name, 'category')}</span> */}
-                    <Link to={`/blogs/category/${category.slug}`} className="text-decoration-none" style={{color:'black', fontSize:'12'}}>{category.name}</Link>
+                    
+                    <Link to={`/blogs/category/${category.slug}`} className="text-decoration-none" style={{color:'black', fontSize:'12px'}}>{category.name}</Link>
                    </div>
                    ))}
                     </div>
