@@ -18,8 +18,6 @@ class ExportMarketingProduct implements FromCollection, WithHeadings, ShouldAuto
     public function collection()
     {
         $products =  Product::with('brand')->select("created_at","quantity","id", "name", "description", "price", "asin", "image", "brand_id")
-            ->where('quantity','>',0)
-            ->where('status',1)
             ->get();
 
         $data = [];

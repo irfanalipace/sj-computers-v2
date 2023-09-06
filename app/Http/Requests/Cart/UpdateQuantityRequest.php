@@ -24,6 +24,7 @@ class UpdateQuantityRequest extends FormRequest
     public function rules()
     {
         return [
+//            'item_id' => ['required', 'integer', 'exists:products,id'],
             'qty' => 'required',
         ];
     }

@@ -19,6 +19,7 @@ use App\Models\CustomerVerification;
 use App\Models\Otp;
 use App\Models\Product;
 use App\Models\User;
+use App\Providers\RegisterUser;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -52,13 +53,14 @@ class AuthController extends BaseController
     {
         try {
             DB::transaction(function () use ($request) {
-                User::create(
+                $user = User::create(
                     array_merge(
                         $request->only('name', 'email'),
                         ['role_id' => User::USER_ROLE_ID, 'password' => bcrypt($request->password)]
                     )
                 );
                 SendVerificationMail::dispatch($request->email);
+                event(new RegisterUser($user));
             });
 
             return $this->sendResponse([], 'User register successfully, Kindly verify the email for further process.');
