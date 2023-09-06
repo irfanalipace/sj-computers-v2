@@ -14,7 +14,7 @@ import {
     faTwitter,
     faFacebook,
     faYoutube,
-    faInstagram,
+    faInstagram, faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import NotFound from "../../pages/NotFound/NotFound";
 import { useParams } from "react-router-dom";
@@ -297,26 +297,26 @@ const Blog = () => {
                                                     </span>
                                                 </div>
                                                 <div className="ul-item-blog-social-icon">
-                                                    <a href="https://www.instagram.com/example">
+                                                    <a href="https://www.instagram.com/sjcomputersllc">
                                                         <FontAwesomeIcon
                                                             icon={faInstagram}
                                                         />
                                                     </a>
-                                                    <a href="https://www.facebook.com/example">
+                                                    <a href="https://www.facebook.com/sjcomputersllc">
                                                         <FontAwesomeIcon
                                                             icon={faFacebook}
                                                         />
                                                     </a>
-                                                    <a href="https://www.youtube.com/example">
+                                                    <a href="https://www.linkedin.com/company/sj-computers/">
                                                         <FontAwesomeIcon
-                                                            icon={faYoutube}
+                                                            icon={faLinkedin}
                                                         />
                                                     </a>
-                                                    <a href="https://twitter.com/example">
-                                                        <FontAwesomeIcon
-                                                            icon={faTwitter}
-                                                        />
-                                                    </a>
+                                                    {/*<a href="https://twitter.com/example">*/}
+                                                    {/*    <FontAwesomeIcon*/}
+                                                    {/*        icon={faTwitter}*/}
+                                                    {/*    />*/}
+                                                    {/*</a>*/}
                                                 </div>
                                             </div>
                                         </div>
@@ -396,7 +396,7 @@ const Blog = () => {
                                                 <img
                                                     src={
                                                         blogdteails.primary_image
-                                                            
+
                                                     }
                                                     alt={blogdteails.all_text}
                                                 />
@@ -591,7 +591,7 @@ const Blog = () => {
                              ? blogdteails.content
                              : (blogdteails.content.length > 3000 ? blogdteails.content.substring(0, 3000) + "..." : blogdteails.content)
                          }} />
-                         
+
                          {blogdteails.content.length > 3000 && !showMore &&
                            <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
                              __html: blogdteails.content.substring(3000)
@@ -602,13 +602,13 @@ const Blog = () => {
                                         </div>
                                         {/* <div className="image-for-meeting2-section">
                                                                      <img src={meetingset} />
-                         
+
                                                                      <img
                                                                      src={blog.secondary_image ? blog.secondary_image : meetingimage }
                                                                      alt={blog.all_text}
-                                                                    
+
                                                                  />
-                                                                  
+
                                                                  </div> */}
                                         <span className="span-deve-loram-space">
                                             {/* {blog.meta_description} */}
@@ -645,7 +645,7 @@ const Blog = () => {
 
                                         {/* <div className="image-for-meeting2-section">
                                                                      <img src={meetingset} />
-                         
+
                                                                      <img
                                                                          src={
                                                                              blog.thumbnail_image
@@ -689,15 +689,15 @@ const Blog = () => {
                                                                  <div className="sj-left-dev-set-data-from-section">
                                                                      <span>More from SJ</span>
                                                                      <div className="pagination-blogs-page">
-                                                                  
-                         
+
+
                                                                          <button
                                                                              onClick={handlePrevPage}
                                                                              disabled={!prevPageUrl}
                                                                          >
                                                                              &laquo; Pre
                                                                          </button>
-                         
+
                                                                          {Array.from(
                                                                              { length: totalPages },
                                                                              (_, index) => (
@@ -719,7 +719,7 @@ const Blog = () => {
                                                                                  </button>
                                                                              )
                                                                          )}
-                         
+
                                                                          <button
                                                                              onClick={handleNextPage}
                                                                              disabled={!nextPageUrl}
