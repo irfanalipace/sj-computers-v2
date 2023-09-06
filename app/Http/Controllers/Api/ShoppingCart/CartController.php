@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\shipment\ApplyShipmentDaysRequest;
 use App\Http\Requests\shipment\EstimatedDaysRequest;
 use Carbon\Carbon;
-use Darryldecode\Cart\Cart;
+use Cart;
 use Exception;
 use App\Http\Requests\Cart\AddToCartRequest;
 use App\Http\Requests\Cart\DeleteCartRequest;
@@ -139,28 +139,30 @@ class CartController extends BaseController
     //After shipping address add quantity
     public function addQtyCart(UpdateQuantityRequest $request)
     {
-//        try {
+        try {
             $product = Product::find($request->item_id);
-            $quantity = $product->quantity + $request->qty;
+            $quantity = $request->qty;
+            if ($request->qty < 0) {
+                $quantity = $product->quantity + $request->qty;
+            }
+
             // Check if quantity is less than product quantity
             if ($quantity > $product->quantity) {
                 return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of stock.'), 400, []);
             } else {
                 $minusQtyPrd = $this->updateProduct($product, abs($request->qty));
-
             }
-            $item = \Cart::session($this->userId)->update($request->item_id, array(
-                'quantity' => $request->qty, // so if the current product has a quantity of 4, another 2 will be added so this will result to 6
+            $item = \Cart::session($this->userId)->update($request->item_id, [
+                'quantity' => $quantity, // so if the current product has a quantity of 4, another 2 will be added so this will result to 6
                 'associatedModel' => $product
-            ));
-//            dd($item);
+            ]);
             $data = $this->getItems(true);
 
             return response(array('success' => true, 'data' => $data, 'message' => 'Quantity added in cart.'), 200, []);
-//        } catch (Exception $e) {
-//
-//            return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
-//        }
+        } catch (Exception $e) {
+
+            return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
+        }
     }
 
     public function estimatedDays(EstimatedDaysRequest $request)
