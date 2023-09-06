@@ -78,8 +78,9 @@ class Product extends Model
     {
         parent::boot();
 
-        static::addGlobalScope('product_quantity', function (Builder $builder) {
+        static::addGlobalScope('product_quantity_status', function (Builder $builder) {
             $builder->where('quantity', '>', 0);
+            $builder->where('status', '=', 1);
         });
     }
 }

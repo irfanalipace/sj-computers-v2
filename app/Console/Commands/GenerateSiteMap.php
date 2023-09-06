@@ -146,8 +146,6 @@ class GenerateSiteMap extends Command
             $productIds = CategoryProduct::where('category_id',$category->id)->pluck('product_id');
 
             $productAsins = Product::whereIn('id',$productIds)
-                ->where('quantity','>',0)
-                ->where('status',1)
                 ->pluck('asin');
 
 
