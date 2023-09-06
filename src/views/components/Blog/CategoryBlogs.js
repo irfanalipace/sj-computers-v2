@@ -127,22 +127,27 @@ useEffect(() => {
 
 
 console.log(categoriesblogs, 'categoriesblogs')
-const [isloading, setLoading] = useState(true);
+const [myloading, setLoading] = useState(true);
 useEffect(() => {
-   
+    
     getCategoryApi(category_id)
     .then((response) => {
         if (response.data && response.data?.data.length > 0) {
             setCategoriesBlogs(response.data?.data);
             setPageCount(response.data?.last_page);
+           setLoading(false); 
         } else {
             setCategoriesBlogs([]);
+           
         }
     })
       .catch((error) => {
         console.error("API Error:", error);
        
-      });
+      })
+      .finally(() => {
+        setLoading(false); 
+    });
   }, [category_id]);
 
 
