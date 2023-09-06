@@ -22,6 +22,9 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
   
     return (
         <div className="container single-blog-pages-dev-container-all-products">
+           {blogs.length === 0 ? (
+    <div className="no-blogs-found-message">No blogs found.</div>
+  ) : (
         <div className="row">
           {blogs.map((blog) => (
             <div className="col-lg-4 col-md-6 col-sm-12" key={blog?.id}>
@@ -49,13 +52,24 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
                   </div>
                   </Link>
                   <div className="read-section-date-section">
+                  <Link
+                  to={`/${blog?.slug}`}
+                  className="text-decoration-none"
+                  state={{
+                    blogList: blog,
+                    
+                  }}
+                  
+                  onClick={() => blogslist(blog)}
+                >
                     <div style={{ paddingTop: "4px" }}>
+                      
                       <span style={{ fontWeight: "bold" }}>Read Full Blog
                       
                   
                       </span>
                     </div>
-           
+           </Link>
                     {/* {blog?.tags && blog?.tags?.length > 0 && (
                       <div style={{ display: "flex" }}>
                         {console.log(blogs?.categories,'category name')}
@@ -85,6 +99,7 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
             </div>
           ))}
         </div>
+         )}
         <div className="pagination-blogs-page">
           <div>
             <Pagination count={pageCount} page={currentPage} onChange={handlePageChange} />

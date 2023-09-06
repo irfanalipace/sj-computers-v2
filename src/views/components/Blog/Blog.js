@@ -17,6 +17,7 @@ import {
     faFacebook,
     faYoutube,
     faInstagram,
+    faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import NotFound from "../../pages/NotFound/NotFound";
 import { useParams } from "react-router-dom";
@@ -331,26 +332,22 @@ const Blog = () => {
                                                     </span>
                                                 </div>
                                                 <div className="ul-item-blog-social-icon">
-                                                    <a href="https://www.instagram.com/example">
+                                                    <a href="https://www.instagram.com/sjcomputersllc/">
                                                         <FontAwesomeIcon
                                                             icon={faInstagram}
                                                         />
                                                     </a>
-                                                    <a href="https://www.facebook.com/example">
+                                                    <a href="https://www.facebook.com/sjcomputersllc">
                                                         <FontAwesomeIcon
                                                             icon={faFacebook}
                                                         />
                                                     </a>
-                                                    <a href="https://www.youtube.com/example">
+                                                    <a href="https://www.linkedin.com/company/sj-computers/">
                                                         <FontAwesomeIcon
-                                                            icon={faYoutube}
+                                                            icon={faLinkedin}
                                                         />
                                                     </a>
-                                                    <a href="https://twitter.com/example">
-                                                        <FontAwesomeIcon
-                                                            icon={faTwitter}
-                                                        />
-                                                    </a>
+                                                   
                                                 </div>
                                             </div>
                                         </div>
