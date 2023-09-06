@@ -225,7 +225,7 @@ useEffect(() => {
             <div className="blog-pagesloader-overlay">
                 <LoaderComponent />
             </div>
-        ) : categoriesblogs.length > 0 ? (
+        ) :  (
             <BlogGrid
                 blogs={categoriesblogs}
                 pageCount={pageCount}
@@ -234,10 +234,7 @@ useEffect(() => {
                 isLoading={isLoading}
                 blogslist={blogslist}
             />
-        ) : (
-            <div className="blogs-not-found-message">
-                <h2>Blogs not found.</h2>
-            </div>
+        
         )}
         </div>
     );

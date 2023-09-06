@@ -23,7 +23,9 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
     return (
         <div className="container single-blog-pages-dev-container-all-products">
            {blogs.length === 0 ? (
-    <div className="no-blogs-found-message">No blogs found.</div>
+     <div className="blogs-not-found-message">
+     <h2>Blogs not found.</h2>
+ </div>
   ) : (
         <div className="row">
           {blogs.map((blog) => (
