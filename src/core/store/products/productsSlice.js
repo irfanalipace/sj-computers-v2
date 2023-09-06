@@ -56,9 +56,9 @@ const productSlice = createSlice({
             state.isShowMore = false;
         },
         SEARCH_PRODUCTS: (state, action) => {
-            if (state.currentPage === 1)
-                state.products = [...action.payload.data];
-            else state.products = [...state.products, ...action.payload.data];
+            // if (state.currentPage === 1)
+            state.products = [...action.payload.data];
+            // else state.products = [...state.products, ...action.payload.data];
             state.currentPage = state.currentPage + 1;
             state.searchString = action.payload.searchString;
             state.isLoading = false;

@@ -22,7 +22,7 @@ const ProductsList = () => {
         apiError,
     } = useSelector((state) => state.products);
     const dispatch = useDispatch();
-
+    console.log("products: ", products);
     const handleSearch = () => {
         if (searchString) {
             dispatch(

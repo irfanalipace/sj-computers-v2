@@ -10,11 +10,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Loader from "@common/Spinner/Spinner";
 import "./Header.css";
+import { useSearchParams } from "react-router-dom";
 
 function Search() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState({ name: "ALL", id: null });
     const [search, setSearch] = useState("");
+    const [searchParams, setSearchParams] = useSearchParams();
     const { searchString, selectedCategory } = useSelector(
         (state) => state.products
     );
@@ -38,10 +40,17 @@ function Search() {
             navigate("/products/search");
         }
     };
-
     useEffect(() => {
         setSearch(searchString || "");
-    }, [searchString]);
+        setSearchParams({ s: searchString });
+    }, [searchString, searchParams.get("s")]);
+
+    useEffect(() => {
+        const _searchParam = searchParams.get("s");
+        if (_searchParam) {
+            dispatch(SET_SEARCH_STRING(_searchParam));
+        }
+    }, [searchParams.get("s")]);
 
     useEffect(() => {
         if (selectedCategory === null)
