@@ -100,7 +100,6 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                     full_name: shippingDetails?.full_name || user?.name,
                 },
             };
-            console.log("111111 paymentParams", paymentParams);
             if (!isAuthenticated)
                 paymentParams = {
                     ...paymentParams,
