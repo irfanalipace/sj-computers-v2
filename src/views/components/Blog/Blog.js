@@ -41,7 +41,7 @@ const Blog = () => {
     const { blogList } = location.state || {};
 
     const { categoryslug } = useParams();
-
+   
 
 
     const [blogdteails, setBlogDetails] = useState("");
@@ -64,7 +64,7 @@ const Blog = () => {
     .map((category) => (
         <li key={category.id} >
             <Link to={`/blogs/category/${category.slug}`} className="text-decoration-none">{category.name}</Link>
-           {console.log(category, 'category data')}
+           {console.log(category.slug, 'category data')}
         </li>
     ));
   
@@ -539,23 +539,23 @@ const Blog = () => {
                                             </div>
                                         </div>
 
-                                        <div className="widget widget_categories">
+
+                                  {blogscategories && blogscategories.length > 0 && (
+                                    <div className="widget widget_categories">
+                                        <h4>Category</h4>
+                                        {RenderedCategories}
+                                    </div>
+                                    )}
+
+                                        {/* <div className="widget widget_categories">
                                             <h4>Category</h4>
-                                            <li >
+                                           
                                           
                                               {RenderedCategories}
                             
                       
-                           
-                                          </li>
-                                            {/* {categoriesblogs?.map((categoryitem) => (
-                                                <li key={categoryitem.id}>
-                                                    <Link to={`/blogs/category/${categoryslug}`} className="text-decoration-none">
-                                                        {categoryitem.name}
-                                                    </Link>
-                                                </li>
-                                            ))} */}
-                                        </div>
+                                          
+                                        </div> */}
                                     </div>
 
                                     <div className="col-md-7">

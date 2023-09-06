@@ -91,6 +91,7 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
                     <div className="span-data-blogs-lending-page" key={category}>
                     
                     <Link to={`/blogs/category/${category.slug}`} className="text-decoration-none" style={{color:'black', fontSize:'12px'}}>{category.name}</Link>
+                  {console.log(category.slug,'@@@')}
                    </div>
                    ))}
                     </div>
