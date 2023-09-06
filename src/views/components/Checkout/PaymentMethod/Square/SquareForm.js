@@ -92,15 +92,15 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                     qty: item.quantity,
                 };
             });
-
             let paymentParams = {
                 source_id: token.token,
                 shipping_address: {
                     ...shippingDetails,
-                    email: user?.email,
-                    full_name: user?.name,
+                    email: shippingDetails?.email || user?.email,
+                    full_name: shippingDetails?.full_name || user?.name,
                 },
             };
+            console.log("111111 paymentParams", paymentParams);
             if (!isAuthenticated)
                 paymentParams = {
                     ...paymentParams,
