@@ -105,7 +105,7 @@ const CategoryBlogs = () => {
     useEffect(() => {
         if (category_id) {
             setIsLoading(true); // Set loading to true before making the API call
-            getCategoryApi(category_id)
+            getCategoryApi(category_id, currentPage)
                 .then((response) => {
                     if ( response.data?.data?.length > 0) {
                         setCategoriesBlogs(response.data?.data);
@@ -121,7 +121,7 @@ const CategoryBlogs = () => {
                     setIsLoading(false); // Set loading to false in case of an error
                 });
         }
-    }, [category_id]);
+    }, [category_id, currentPage]);
 
     // useEffect(() => {
 
