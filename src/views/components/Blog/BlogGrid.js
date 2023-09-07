@@ -21,6 +21,8 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
  
   
     return (
+      <div>
+        
         <div className="container single-blog-pages-dev-container-all-products">
            {blogs?.length >= 0 ? (
 
@@ -104,12 +106,16 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
      <h2>Blogs not found.</h2>
           </div>
          )}
+
+{blogs.length > 0 && (
         <div className="pagination-blogs-page">
           <div>
             <Pagination count={pageCount} page={currentPage} onChange={handlePageChange} />
           </div>
-          {isLoading && <div className="loader">Loading...</div>}
+          {/* {isLoading && <div className="loader">Loading...</div>} */}
         </div>
+)}
+      </div>
       </div>
     );
 };

@@ -205,21 +205,24 @@ useEffect(() => {
                 </div>
             </div>
 
+            {categoriesblogs.length > 0 && (
             <div className="container">
                 <div className="trending-blog-filter-data">
-                    <div className="treding-blog-sets">
-                        {/* <span> Trending Blogs</span> */}
-                    </div>
-                    <div className="dev-trending-data-image">
-                        <select value={selectedFilter}>
-                            <option value="">Recent Blogs</option>
-                            <option value="trending">Trending Blog</option>
-                            <option value="az">Sorting A-Z</option>
-                            <option value="date">Sorting by Date</option>
-                        </select>
-                    </div>
+                <div className="treding-blog-sets">
+                    {/* <span> Trending Blogs</span> */}
+                </div>
+                <div className="dev-trending-data-image">
+                    <select value={selectedFilter}>
+                    <option value="">Recent Blogs</option>
+                    <option value="trending">Trending Blog</option>
+                    <option value="az">Sorting A-Z</option>
+                    <option value="date">Sorting by Date</option>
+                    </select>
+                </div>
                 </div>
             </div>
+            )}
+
 
             {isLoading ? (
             <div className="blog-pagesloader-overlay">
