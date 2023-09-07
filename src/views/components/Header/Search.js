@@ -42,8 +42,8 @@ function Search() {
     };
     useEffect(() => {
         setSearch(searchString || "");
-        setSearchParams({ s: searchString });
-    }, [searchString, searchParams.get("s")]);
+        if (searchString) setSearchParams({ s: searchString });
+    }, [searchString]);
 
     useEffect(() => {
         const _searchParam = searchParams.get("s");
