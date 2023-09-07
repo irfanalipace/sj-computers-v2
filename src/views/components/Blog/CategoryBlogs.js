@@ -17,10 +17,8 @@ import Stack from "@mui/material/Stack";
 import BlogGrid from "./BlogGrid";
 
 const CategoryBlogs = () => {
+    const { categoryslug } = useParams();
 
-    const { categoryslug }=useParams();
-    
-    
     const [isLoading, setIsLoading] = useState(false);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState("");
@@ -29,45 +27,31 @@ const CategoryBlogs = () => {
     const [itemsPerPage] = useState(12);
     const [pageCount, setPageCount] = useState(0);
     const [categoriesblogs, setCategoriesBlogs] = useState([]);
-    const [categorylist, setCategoryList]=useState([]);
+    const [categorylist, setCategoryList] = useState([]);
 
     // const categoriesstate = useSelector((state) => state.category.categories);
-    // console.log(categoriesstate, 'categoriesstate'); 
-   
+    // console.log(categoriesstate, 'categoriesstate');
 
-    const category_id = categorylist?.find(category => category.slug === categoryslug)?.id;
-    console.log(category_id, 'id1');
+    const category_id = categorylist?.find(
+        (category) => category.slug === categoryslug
+    )?.id;
+    console.log(category_id, "id1");
 
-    
-
-
-console.log(categorylist, '@@')
-useEffect(() => {
-    categoryApi()
-        .then((response) => {
-            console.log("API Response:", response);
-            setCategoryList(response?.data);
-            setLoading(false); 
-        })
-        .catch((error) => {
-            console.error("API Error:", error);
-            setLoading(false); 
-        });
-}, []);
-
-
-
-
-
-
-
-
-
-
-   
+    console.log(categorylist, "@@");
+    useEffect(() => {
+        categoryApi()
+            .then((response) => {
+                console.log("API Response:", response);
+                setCategoryList(response?.data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("API Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
     const handleChange = (event) => {
-
         const filterValue = event.target.value;
         setSelectedFilter(filterValue);
         handleFilter(filterValue);
@@ -110,8 +94,6 @@ useEffect(() => {
         setCurrentPage(page);
     };
 
-   
-
     const navigate = useNavigate();
 
     const blogslist = (blog) => {
@@ -122,68 +104,45 @@ useEffect(() => {
         });
     };
 
-
-
-
-
-console.log(categoriesblogs, 'categoriesblogs')
-const [myloading, setLoading] = useState(true);
-useEffect(() => {
-    
-    getCategoryApi(category_id)
-    .then((response) => {
-        if (response.data && response.data?.data.length > 0) {
-            setCategoriesBlogs(response.data?.data);
-            setPageCount(response.data?.last_page);
-           setLoading(false); 
-        } else {
-            setCategoriesBlogs([]);
-           
-        }
-    })
-      .catch((error) => {
-        console.error("API Error:", error);
-       
-      })
-      .finally(() => {
-        setLoading(false); 
-    });
-  }, [category_id]);
-
-
-
-
-
-
+    console.log(categoriesblogs, "categoriesblogs");
+    const [myloading, setLoading] = useState(true);
+    useEffect(() => {
+        getCategoryApi(category_id)
+            .then((response) => {
+                if (esponse.data?.data?.length > 0) {
+                    setCategoriesBlogs(response.data?.data);
+                    setPageCount(response.data?.last_page);
+                    setLoading(false);
+                } else {
+                    setCategoriesBlogs([]);
+                }
+            })
+            .catch((error) => {
+                console.error("API Error:", error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, [category_id]);
 
     return (
         <div>
-          
-
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
                         <div>
                             <div className="meeting-data-blog-save-dev-form">
-                                
-                                {window.innerWidth > 600 ? ( 
+                                {window.innerWidth > 600 ? (
                                     <img src={blogmeetingdesktop} />
                                 ) : (
                                     <img src={blogmeetingmobile} />
                                 )}
                             </div>
-                            <div className="mid-graph-pargarph-page-data">
-                              
-                            </div>
+                            <div className="mid-graph-pargarph-page-data"></div>
                             <div className="mid-graph-pargarph-page-datap-data blog-dynamic-style-heading-data1">
-                                <div
-                                    className="content-image-data-paragrap"
-                                   
-                                />
+                                <div className="content-image-data-paragrap" />
                                 <span></span>
                             </div>
-
-                            
                         </div>
                     </div>
                 </div>
@@ -214,13 +173,13 @@ useEffect(() => {
                 </div>
             ) : (
                 <BlogGrid
-                blogs={categoriesblogs}
-                pageCount={pageCount}
-                currentPage={currentPage}
-                handlePageChange={handlePageChange} 
-                isLoading={isLoading}
-                blogslist={blogslist}
-              />
+                    blogs={categoriesblogs}
+                    pageCount={pageCount}
+                    currentPage={currentPage}
+                    handlePageChange={handlePageChange}
+                    isLoading={isLoading}
+                    blogslist={blogslist}
+                />
             )}
         </div>
     );
