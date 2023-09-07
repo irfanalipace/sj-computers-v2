@@ -92,17 +92,19 @@ class CartController extends BaseController
     //delete item from cart
     public function delete(DeleteCartRequest $request)
     {
+//        \Cart::remove($request->id);
+//        session()->flash('success', 'Item Cart Remove Successfully !');
+
         try {
 
             $cart = Cart::session($this->userId);
-//            $cart->getContent()->each(function ($item) {
-//                $product = Product::find($item->id);
-//                $product->update(['quantity' => ($item->quantity + $product->quantity)]);
-//            });
+            $cart->getContent()->each(function ($item) {
+                $product = Product::find($item->id);
+                $product->update(['quantity' => ($item->quantity + $product->quantity)]);
+            });
             $cart = $cart->remove($request->id);
 
             $data = $this->getItems(true);
-
             return response(array('success' => true, 'data' => $data, 'message' => "cart item {$request->id} removed."), 200, []);
         } catch (Exception $e) {
 
@@ -140,18 +142,27 @@ class CartController extends BaseController
     public function addQtyCart(UpdateQuantityRequest $request)
     {
         try {
-            $product = Product::find($request->item_id);
+            $product = Product::query()->withoutGlobalScopes()->find($request->item_id);
             $quantity = $request->qty;
-            if ($request->qty < 0) {
-                $quantity = $product->quantity + $request->qty;
+            if ($quantity > $product->quantity && $request->qty > 0) {
+                return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of stock.'), 400, []);
+            }
+            elseif ($product->quantity != 0 && $request->qty < 0) {
+                $quantity = $product->quantity - $request->qty;
+                $product->update(['quantity' => $quantity]);
+//            }
+//            elseif ($product->quantity != 0 && $quantity < $product->quantity) {
+//                $quantity = $product->quantity - $request->qty;
+//                $product->update(['quantity' => $quantity]);
+
+            } elseif ($product->quantity == 0 && $request->qty < 0) {
+                $quantity = abs($request->qty);
+                $product->update(['quantity' => $quantity]);
+            }
+            elseif (($product->quantity - $request->qty) === 0) {
+                $product->update(['quantity' => 0]);
             }
 
-            // Check if quantity is less than product quantity
-            if ($quantity > $product->quantity) {
-                return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of stock.'), 400, []);
-            } else {
-                $minusQtyPrd = $this->updateProduct($product, abs($request->qty));
-            }
             $item = \Cart::session($this->userId)->update($request->item_id, [
                 'quantity' => $quantity, // so if the current product has a quantity of 4, another 2 will be added so this will result to 6
                 'associatedModel' => $product
