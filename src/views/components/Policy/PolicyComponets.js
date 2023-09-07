@@ -10,10 +10,10 @@ import Header from "@components/Header/Header";
 import { useNavigate } from "react-router-dom";
 
 const HeadereLinks = [
-    { path: "/", title: "About Us" },
+    { path: "/about_us", title: "About Us" },
     { path: "/", title: "What We Do?" },
     { path: "/return_refund_policy", title: "Return & Refund" },
-    { path: "/", title: "Shipping Policy" },
+    { path: "/shipping_policy", title: "Shipping Policy" },
     { path: "/term_services", title: "Terms of Services" },
     { path: "/privacy_policy", title: "Privacy Policy" },
     { path: "/", title: "Subscribe" },

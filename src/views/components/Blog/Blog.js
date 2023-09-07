@@ -27,12 +27,12 @@ import primardataimage from "@images/blog/meeting.png";
 import { Loader } from "@mantine/core";
 
 const HeadereLinks = [
-    { path: "/", title: "About Us" },
+    { path: "/about_us", title: "About Us" },
     { path: "/", title: "What We Do?" },
-    { path: "/term_services", title: "Return & Refund" },
-    { path: "/term_services", title: "Shipping Policy" },
+    { path: "/return_refund_policy", title: "Return & Refund" },
+    { path: "/shipping_policy", title: "Shipping Policy" },
     { path: "/term_services", title: "Terms of Services" },
-    { path: "/term_services", title: "Privacy Policy" },
+    { path: "/privacy_policy", title: "Privacy Policy" },
     { path: "/", title: "Subscribe" },
 ];
 
@@ -84,12 +84,27 @@ const Blog = () => {
                 })
                 .catch((error) => {
                     console.error("API Error:", error);
-                    if (error) {
                         setBlogdetailsError(true);
                         setblogLoading(false);
-                    }
                 });
         }
+
+        getBlogsHeaderPagesApi()
+        .then((response) => {
+            if (response.data?.data?.length > 0) {
+                setBlogs(response.data?.data);
+                setPrevPageUrl(response.data?.prev_page_url);
+                setNextPageUrl(response.data?.next_page_url);
+               
+            } else {
+                setBlogs([]);
+                setPrevPageUrl(response.data?.prev_page_url);
+                setNextPageUrl(response.data?.next_page_url);
+            }
+        })
+        .catch((error) => {
+            console.error("API Error:", error);
+        });
     }, [blogslug]);
 
     const [showMore, setShowMore] = useState(false);
@@ -99,25 +114,8 @@ const Blog = () => {
     };
 
 
-    useEffect(() => {
-        getBlogsHeaderPagesApi()
-            .then((response) => {
-                if (response.data?.data?.length > 0) {
-                    setBlogs(response.data?.data);
-                    setPrevPageUrl(response.data?.prev_page_url);
-                    setNextPageUrl(response.data?.next_page_url);
-                } else {
-                    setBlogs([]);
-                    setPrevPageUrl(response.data?.prev_page_url);
-                    setNextPageUrl(response.data?.next_page_url);
-                }
-            })
-            .catch((error) => {
-                console.error("API Error:", error);
-            });
-    }, []);
 
-
+  
 
     const handlePaginationClick = (pageNumber) => {
         setCurrentPage(pageNumber - 1);
@@ -139,7 +137,10 @@ const Blog = () => {
     const totalPages = Math.ceil(blogs?.length / itemsPerPage);
 
     useEffect(() => {
-        if (blogdteails) {
+        if (blogdteails?.id) {
+            console.log('@@@@ blogdteails: ', blogdteails);
+            try {
+            
             const blogContent = document.getElementById("blog-content");
             const h2Tags = blogContent.getElementsByTagName("h2");
 
@@ -155,7 +156,15 @@ const Blog = () => {
 
                 firstH2Tag.insertAdjacentElement("afterend", imgTag);
             }
+        } catch (error) {}
+            const wpm = 225;
+            const text = `${blogdteails.content}`;
+                const words = text.trim()?.split(/\s+/)?.length;
+                const time = Math.ceil(words / wpm);
+                setReadingTime(time);
         }
+
+        
     }, [blogdteails]);
 
     // useEffect(() => {
@@ -195,13 +204,7 @@ const Blog = () => {
 
     const [readingTime, setReadingTime] = useState(0);
 
-    const wpm = 225;
-    const text = `${blogdteails.content}`;
-    useEffect(() => {
-        const words = text.trim()?.split(/\s+/)?.length;
-        const time = Math.ceil(words / wpm);
-        setReadingTime(time);
-    }, [text, wpm]);
+    
 
     const categories = [
         { id: 1, name: "Category 1" },
@@ -449,7 +452,9 @@ const Blog = () => {
   </div>
   <div style={{ padding: "7px" }}>
   {blogs?.map((blog) => (
+    
     <div key={blog.id}>
+         { console.log(blogs,'response.data?.data')}
       <Link to={`/${blog?.slug}`} className="text-decoration-none">
         <div className="row">
           <div className="col-4">

@@ -1039,13 +1039,13 @@ div.sticky {
 @media screen and (max-width: 730px) {
     .main-dev-card-deprt {
         width: 100%;
-        height: 100%;
+      
         left: 0px;
         margin-left: 0px;
         top: 0px;
         background: rgba(49, 130, 67, 0.1);
     }.blog-dynamic-style-heading-data{
-        margin-top: 200px;
+        margin-top: 19px;
     }.widget_categories {
         border: 1px solid #c7c0c0;
         padding: 15px;
