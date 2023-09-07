@@ -59,7 +59,7 @@ const Blog = () => {
 
     let RenderedCategories = blogscategories
         .slice(0, visibleCategories)
-        .map((category) => (
+        ?.map((category) => (
             <li key={category.id}>
                 <Link
                     to={`/blogs/category/${category.slug}`}
@@ -342,7 +342,6 @@ const Blog = () => {
                                                             icon={faLinkedin}
                                                         />
                                                     </a>
-                                                   
                                                 </div>
                                             </div>
                                         </div>
@@ -533,25 +532,22 @@ const Blog = () => {
                                             </div>
                                         </div>
 
-
-                                  {blogscategories && blogscategories.length > 0 && (
-                                    <div className="widget widget_categories">
-                                        <h4>Category</h4>
-                                        {RenderedCategories}
-                                    </div>
-                                    )}
+                                        {blogscategories?.length > 0 && (
+                                            <div className="widget widget_categories">
+                                                <h4>Category</h4>
+                                                {RenderedCategories}
+                                            </div>
+                                        )}
 
                                         {/* <div className="widget widget_categories">
                                             <h4>Category</h4>
-                                            <li>{RenderedCategories}</li>
-                                            {/* {categoriesblogs?.map((categoryitem) => (
-                                                <li key={categoryitem.id}>
-                                                    <Link to={`/blogs/category/${categoryslug}`} className="text-decoration-none">
-                                                        {categoryitem.name}
-                                                    </Link>
-                                                </li>
-                                            ))} */}
-                                        </div>
+                                           
+                                          
+                                              {RenderedCategories}
+                            
+                      
+                                          
+                                        </div> */}
                                     </div>
 
                                     <div className="col-md-7">
