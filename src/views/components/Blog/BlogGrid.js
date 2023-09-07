@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../Blog/SingleBlog/SingleBlog.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,useParams } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Pagination from "@mui/material/Pagination";
-import { colors } from "laravel-mix/src/Log";
+
 
 const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }) => {
-  
 
   
   const navigate = useNavigate();
@@ -19,16 +18,15 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
       });
   };
 
-  if (blogs.categories && Array.isArray(blog.categories)) {
-    blog.categories.forEach((category) => {
-      console.log(category.name, 'list data');
-    });
-  } else {
-    console.error('Categories not defined or not an array');
-  }
+ 
   
     return (
         <div className="container single-blog-pages-dev-container-all-products">
+           {blogs.length === 0 ? (
+     <div className="blogs-not-found-message">
+     <h2>Blogs not found.</h2>
+ </div>
+  ) : (
         <div className="row">
           {blogs.map((blog) => (
             <div className="col-lg-4 col-md-6 col-sm-12" key={blog?.id}>
@@ -56,13 +54,24 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
                   </div>
                   </Link>
                   <div className="read-section-date-section">
+                  <Link
+                  to={`/${blog?.slug}`}
+                  className="text-decoration-none"
+                  state={{
+                    blogList: blog,
+                    
+                  }}
+                  
+                  onClick={() => blogslist(blog)}
+                >
                     <div style={{ paddingTop: "4px" }}>
+                      
                       <span style={{ fontWeight: "bold" }}>Read Full Blog
                       
                   
                       </span>
                     </div>
-           
+           </Link>
                     {/* {blog?.tags && blog?.tags?.length > 0 && (
                       <div style={{ display: "flex" }}>
                         {console.log(blogs?.categories,'category name')}
@@ -80,8 +89,9 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
                     <div style={{ display: "flex" }}>
                      {blog?.categories?.map((category) => (
                     <div className="span-data-blogs-lending-page" key={category}>
-                    {/* <span>{category.name} {console.log(category.name, 'category')}</span> */}
-                    <Link to={`/blogs/category/${category.slug}`} className="text-decoration-none" style={{color:'black', fontSize:'12'}}>{category.name}</Link>
+                    
+                    <Link to={`/blogs/category/${category.slug}`} className="text-decoration-none" style={{color:'black', fontSize:'12px'}}>{category.name}</Link>
+                 
                    </div>
                    ))}
                     </div>
@@ -92,6 +102,7 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
             </div>
           ))}
         </div>
+         )}
         <div className="pagination-blogs-page">
           <div>
             <Pagination count={pageCount} page={currentPage} onChange={handlePageChange} />

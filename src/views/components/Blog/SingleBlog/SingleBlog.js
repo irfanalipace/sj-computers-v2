@@ -22,6 +22,7 @@ import Blog from "../Blog";
 import BlogsDetails from "../../../pages/Blog/BlogsDetails";
 import BlogPage from "../../../pages/Blog/BlogPage";
 import BlogGrid from "../BlogGrid";
+
 const SingleBlog = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [expandedBlogs, setExpandedBlogs] = useState([]);

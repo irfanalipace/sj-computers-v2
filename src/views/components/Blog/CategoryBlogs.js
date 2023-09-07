@@ -35,19 +35,17 @@ const CategoryBlogs = () => {
     const category_id = categorylist?.find(
         (category) => category.slug === categoryslug
     )?.id;
-    console.log(category_id, "id1");
 
-    console.log(categorylist, "@@");
     useEffect(() => {
         categoryApi()
             .then((response) => {
                 console.log("API Response:", response);
                 setCategoryList(response?.data);
-                setLoading(false);
+                setIsLoading(true);
             })
             .catch((error) => {
                 console.error("API Error:", error);
-                setLoading(false);
+                setIsLoading(true);
             });
     }, []);
 
@@ -104,26 +102,49 @@ const CategoryBlogs = () => {
         });
     };
 
-    console.log(categoriesblogs, "categoriesblogs");
-    const [myloading, setLoading] = useState(true);
     useEffect(() => {
-        getCategoryApi(category_id)
-            .then((response) => {
-                if (esponse.data?.data?.length > 0) {
-                    setCategoriesBlogs(response.data?.data);
-                    setPageCount(response.data?.last_page);
-                    setLoading(false);
-                } else {
-                    setCategoriesBlogs([]);
-                }
-            })
-            .catch((error) => {
-                console.error("API Error:", error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+        if (category_id) {
+            setIsLoading(true); // Set loading to true before making the API call
+            getCategoryApi(category_id)
+                .then((response) => {
+                    if (response.data && response.data?.data?.length > 0) {
+                        setCategoriesBlogs(response.data?.data);
+                        setPageCount(response.data?.last_page);
+                        setIsLoading(false); // Set loading to false after successful API call
+                    } else {
+                        setCategoriesBlogs([]);
+                        setIsLoading(false); // Set loading to false if no data is found
+                    }
+                })
+                .catch((error) => {
+                    console.error("API Error:", error);
+                    setIsLoading(false); // Set loading to false in case of an error
+                });
+        }
     }, [category_id]);
+
+    // useEffect(() => {
+
+    //     getCategoryApi(category_id)
+    //     .then((response) => {
+    //         if (response.data && response.data?.data.length > 0) {
+    //             setCategoriesBlogs(response.data?.data);
+    //             setPageCount(response.data?.last_page);
+    //             console.log(response?.data, 'categoriesblogs')
+    //             setIsLoading(true);
+    //         } else {
+    //             setCategoriesBlogs([]);
+
+    //         }
+    //     })
+    //       .catch((error) => {
+    //         console.error("API Error:", error);
+    //         setIsLoading(false);
+    //       })
+    //       .finally(() => {
+    //         setIsLoading(false);
+    //     });
+    //   }, [category_id]);
 
     return (
         <div>
@@ -165,10 +186,7 @@ const CategoryBlogs = () => {
             </div>
 
             {isLoading ? (
-                <div
-                    className="blog-pagesloader-overlay"
-                    style={{ display: isLoading ? "flex" : "none" }}
-                >
+                <div className="blog-pagesloader-overlay">
                     <LoaderComponent />
                 </div>
             ) : (
