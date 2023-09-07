@@ -8,7 +8,7 @@ import {
     getBlogsPagesApi,
     blogSlugApiblogDetails,
     getBlogsHeaderPagesApi,
-    getBlogCategories
+    getBlogCategories,
 } from "../../../core/api/blogs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -41,8 +41,6 @@ const Blog = () => {
     const { blogList } = location.state || {};
 
     const { categoryslug } = useParams();
-   
-
 
     const [blogdteails, setBlogDetails] = useState("");
     const [blogsdetailserror, setBlogdetailsError] = useState(false);
@@ -58,15 +56,20 @@ const Blog = () => {
 
     const [visibleCategories, setVisibleCategories] = useState(8);
     const blogscategories = useSelector((state) => state.category.categories);
-    
-    let RenderedCategories = blogscategories.slice(0, visibleCategories)?.map((category) => (
-        <li key={category.id} >
-            <Link to={`/blogs/category/${category.slug}`} className="text-decoration-none">{category.name}</Link>
-           {console.log(category.slug, 'category data')}
-        </li>
-    ));
-  
 
+    let RenderedCategories = blogscategories
+        .slice(0, visibleCategories)
+        ?.map((category) => (
+            <li key={category.id}>
+                <Link
+                    to={`/blogs/category/${category.slug}`}
+                    className="text-decoration-none"
+                >
+                    {category.name}
+                </Link>
+                {console.log(category, "category data")}
+            </li>
+        ));
 
     useEffect(() => {
         if (blogList) {
@@ -108,11 +111,9 @@ const Blog = () => {
                     setPrevPageUrl(response.data?.prev_page_url);
                     setNextPageUrl(response.data?.next_page_url);
                 }
-
             })
             .catch((error) => {
                 console.error("API Error:", error);
-
             });
     }, []);
 
@@ -135,9 +136,7 @@ const Blog = () => {
 
     const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
 
-    const totalPages = Math.ceil(blogs.length / itemsPerPage);
-
-
+    const totalPages = Math.ceil(blogs?.length / itemsPerPage);
 
     useEffect(() => {
         if (blogdteails) {
@@ -145,7 +144,7 @@ const Blog = () => {
             const h2Tags = blogContent.getElementsByTagName("h2");
 
             if (
-                h2Tags.length > 0 &&
+                h2Tags?.length > 0 &&
                 blogdteails.secondary_image &&
                 blogdteails.alt_secondary_image
             ) {
@@ -199,7 +198,7 @@ const Blog = () => {
     const wpm = 225;
     const text = `${blogdteails.content}`;
     useEffect(() => {
-        const words = text.trim()?.split(/\s+/).length;
+        const words = text.trim()?.split(/\s+/)?.length;
         const time = Math.ceil(words / wpm);
         setReadingTime(time);
     }, [text, wpm]);
@@ -221,7 +220,6 @@ const Blog = () => {
     //     window.history.pushState(null, null, `#${category_id}`);
     //   };
 
-
     // useEffect(() => {
     //     getBlogCategories(categoryslug)
     //         .then((response) => {
@@ -236,7 +234,6 @@ const Blog = () => {
     //             }
     //         });
     // }, [categoryslug]);
-
 
     if (blogLoading) {
         return (
@@ -324,15 +321,15 @@ const Blog = () => {
                                                     <span>
                                                         {blogdteails.publish_date
                                                             ? new Date(
-                                                                blogdteails.publish_date
-                                                            ).toLocaleDateString(
-                                                                "en-US",
-                                                                {
-                                                                    month: "2-digit",
-                                                                    day: "2-digit",
-                                                                    year: "numeric",
-                                                                }
-                                                            )
+                                                                  blogdteails.publish_date
+                                                              ).toLocaleDateString(
+                                                                  "en-US",
+                                                                  {
+                                                                      month: "2-digit",
+                                                                      day: "2-digit",
+                                                                      year: "numeric",
+                                                                  }
+                                                              )
                                                             : null}
                                                     </span>
                                                 </div>
@@ -352,7 +349,6 @@ const Blog = () => {
                                                             icon={faLinkedin}
                                                         />
                                                     </a>
-                                                   
                                                 </div>
                                             </div>
                                         </div>
@@ -432,7 +428,6 @@ const Blog = () => {
                                                 <img
                                                     src={
                                                         blogdteails.primary_image
-
                                                     }
                                                     alt={blogdteails.all_text}
                                                 />
@@ -468,9 +463,7 @@ const Blog = () => {
                 {blog?.meta_description}
               </span>
             </div>
-            <div className="dev-span-section4-dev">
-              <span>{blog?.publish_date}</span>
-            </div>
+           
           </div>
         </div>
       </Link>
@@ -482,13 +475,12 @@ const Blog = () => {
 
 
 
-
-                                  {blogscategories && blogscategories.length > 0 && (
-                                    <div className="widget widget_categories">
-                                        <h4>Category</h4>
-                                        {RenderedCategories}
-                                    </div>
-                                    )}
+                                        {blogscategories?.length > 0 && (
+                                            <div className="widget widget_categories">
+                                                <h4>Category</h4>
+                                                {RenderedCategories}
+                                            </div>
+                                        )}
 
                                         {/* <div className="widget widget_categories">
                                             <h4>Category</h4>
@@ -671,7 +663,6 @@ const Blog = () => {
                                                                  </div> */}
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 

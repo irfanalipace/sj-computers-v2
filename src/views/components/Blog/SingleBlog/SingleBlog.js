@@ -24,7 +24,6 @@ import BlogPage from "../../../pages/Blog/BlogPage";
 import BlogGrid from "../BlogGrid";
 
 const SingleBlog = () => {
-
     const [isLoading, setIsLoading] = useState(false);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState("");
@@ -53,7 +52,7 @@ const SingleBlog = () => {
         setIsLoading(true);
         getBlogsPagesApi(currentPage, itemsPerPage)
             .then((response) => {
-                if (response.data && response.data?.data.length > 0) {
+                if (response.data?.data?.length > 0) {
                     setBlogs(response.data?.data);
                     setPageCount(response.data?.last_page);
                 } else {
@@ -75,7 +74,6 @@ const SingleBlog = () => {
     const handlePageChange = (event, page) => {
         setCurrentPage(page);
     };
-
 
     // useEffect(() => {
     //     blogSlugApiblogDetails(blogslug)
@@ -146,9 +144,9 @@ const SingleBlog = () => {
                             <div className="mid-graph-pargarph-page-datap-data blog-dynamic-style-heading-data1">
                                 <div
                                     className="content-image-data-paragrap"
-                                // dangerouslySetInnerHTML={{
-                                // __html: singleblog.content
-                                // }}
+                                    // dangerouslySetInnerHTML={{
+                                    // __html: singleblog.content
+                                    // }}
                                 />
                                 <span></span>
                             </div>
@@ -333,7 +331,6 @@ const SingleBlog = () => {
                     handlePageChange={handlePageChange}
                     isLoading={isLoading}
                     blogslist={blogslist}
-
                 />
             )}
         </div>
