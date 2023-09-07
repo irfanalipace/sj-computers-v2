@@ -150,9 +150,11 @@ class CartController extends BaseController
             elseif ($product->quantity != 0 && $request->qty < 0) {
                 $quantity = $product->quantity - $request->qty;
                 $product->update(['quantity' => $quantity]);
-            } elseif ($product->quantity != 0 && $quantity < $product->quantity) {
-                $quantity = $product->quantity - $request->qty;
-                $product->update(['quantity' => $quantity]);
+//            }
+//            elseif ($product->quantity != 0 && $quantity < $product->quantity) {
+//                $quantity = $product->quantity - $request->qty;
+//                $product->update(['quantity' => $quantity]);
+
             } elseif ($product->quantity == 0 && $request->qty < 0) {
                 $quantity = abs($request->qty);
                 $product->update(['quantity' => $quantity]);
