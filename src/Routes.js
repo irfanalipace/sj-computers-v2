@@ -257,7 +257,7 @@ const Router = () => {
             path: "/what-we-do",
             element: (
                 <PageWrapper>
-                    <WhatWeDoPage />
+                    <Policy />
                 </PageWrapper>
             ),
         },

@@ -102,23 +102,24 @@ const CategoryBlogs = () => {
         });
     };
 
+ 
     useEffect(() => {
         if (category_id) {
-            setIsLoading(true); // Set loading to true before making the API call
+            setIsLoading(true); 
             getCategoryApi(category_id, currentPage)
                 .then((response) => {
                     if ( response.data?.data?.length > 0) {
                         setCategoriesBlogs(response.data?.data);
                         setPageCount(response.data?.last_page);
-                        setIsLoading(false); // Set loading to false after successful API call
+                        setIsLoading(false); 
                     } else {
                         setCategoriesBlogs([]);
-                        setIsLoading(false); // Set loading to false if no data is found
+                        setIsLoading(false); 
                     }
                 })
                 .catch((error) => {
                     console.error("API Error:", error);
-                    setIsLoading(false); // Set loading to false in case of an error
+                    setIsLoading(false); 
                 });
         }
     }, [category_id, currentPage]);

@@ -11,12 +11,12 @@ import { useNavigate } from "react-router-dom";
 
 const HeadereLinks = [
     { path: "/about_us", title: "About Us" },
-    { path: "/", title: "What We Do?" },
+    { path: "/what-we-do", title: "What We Do?" },
     { path: "/return_refund_policy", title: "Return & Refund" },
     { path: "/shipping_policy", title: "Shipping Policy" },
     { path: "/term_services", title: "Terms of Services" },
     { path: "/privacy_policy", title: "Privacy Policy" },
-    { path: "/", title: "Subscribe" },
+    // { path: "/", title: "Subscribe" },
 ];
 
 const PolicyComponets = () => {
@@ -46,7 +46,11 @@ const PolicyComponets = () => {
         PageTitle = "Shipping Policy";
     } else if (pageName === "about_us") {
         PageTitle = "About Us";
-    } else {
+    } else if (pageName === "what-we-do") {
+        PageTitle = "What we Do";
+    }
+    
+    else {
         pageName = pageName;
     }
 
