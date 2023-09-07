@@ -108,8 +108,8 @@ class CategoryProductSeeder extends Seeder
                 'slug' => 'monitor'
             ],
             [
-                'name' => 'NOT SET',
-                'slug' => 'not_set'
+                'name' => 'Miscellaneous',
+                'slug' => 'miscellaneous'
             ],
             [
                 'name' => 'Business Computers',

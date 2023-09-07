@@ -95,10 +95,10 @@ class CartController extends BaseController
         try {
 
             $cart = Cart::session($this->userId);
-            $cart->getContent()->each(function ($item) {
-                $product = Product::find($item->id);
-                $product->update(['quantity' => ($item->quantity + $product->quantity)]);
-            });
+//            $cart->getContent()->each(function ($item) {
+//                $product = Product::find($item->id);
+//                $product->update(['quantity' => ($item->quantity + $product->quantity)]);
+//            });
             $cart = $cart->remove($request->id);
 
             $data = $this->getItems(true);
