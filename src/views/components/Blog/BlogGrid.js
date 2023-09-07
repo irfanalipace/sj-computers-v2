@@ -24,8 +24,7 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
     <div>
 
       <div className="container single-blog-pages-dev-container-all-products">
-        {blogs?.length >= 0 ? (
-
+      {blogs?.length > 0 ? (
           <div className="row">
             {blogs.map((blog) => (
               <div className="col-lg-4 col-md-6 col-sm-12" key={blog?.id}>
