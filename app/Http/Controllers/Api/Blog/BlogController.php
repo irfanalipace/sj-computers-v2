@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Blog;
 
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\Blog\GetBlogRequest;
+use App\Http\Requests\Category\CategoryProductRequest;
 use App\Models\Blog;
 use App\Models\Brand;
 use Carbon\Carbon;
@@ -43,6 +44,22 @@ class BlogController extends BaseController
                 return $this->sendResponse($record, 'blog is displayed');
             }
             return $this->sendError([], 'Blog not found');
+        } catch (\Exception $e) {
+            return $this->sendError('error', $e->getMessage());
+        }
+    }
+
+    public function getCategoryProduct(Request $request)
+    {
+        try {
+            $perPage = $request->per_page ?? 12;
+            $blogs = Blog::where('category_id', $request->category_id)->paginate($perPage);
+
+            if ($blogs->isEmpty()) {
+                return $this->sendError([], 'Blogs not found');
+            }
+
+            return $this->sendResponse($blogs, 'Blogs are displayed');
         } catch (\Exception $e) {
             return $this->sendError('error', $e->getMessage());
         }
