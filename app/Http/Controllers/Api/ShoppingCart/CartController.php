@@ -144,18 +144,22 @@ class CartController extends BaseController
         try {
             $product = Product::query()->withoutGlobalScopes()->find($request->item_id);
             $quantity = $request->qty;
-            if ($request->qty < 0) {
-                $quantity = $product->quantity + $request->qty;
-            }
             if ($quantity > $product->quantity && $request->qty > 0) {
                 return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of stock.'), 400, []);
-            } else {
-                $minusQtyPrd = $this->updateProduct($product, abs($request->qty));
             }
-            if ($product->quantity == 0 && $request->qty < 0) {
-                $quantity = $request->qty;
-                $minusQtyPrd = $this->updateProduct($product, $request->qty);
-            } // Check if quantity is less than product quantity
+            elseif ($product->quantity != 0 && $request->qty < 0) {
+                $quantity = $product->quantity - $request->qty;
+                $product->update(['quantity' => $quantity]);
+            } elseif ($product->quantity != 0 && $quantity < $product->quantity) {
+                $quantity = $product->quantity - $request->qty;
+                $product->update(['quantity' => $quantity]);
+            } elseif ($product->quantity == 0 && $request->qty < 0) {
+                $quantity = abs($request->qty);
+                $product->update(['quantity' => $quantity]);
+            }
+            elseif (($product->quantity - $request->qty) === 0) {
+                $product->update(['quantity' => 0]);
+            }
 
             $item = \Cart::session($this->userId)->update($request->item_id, [
                 'quantity' => $quantity, // so if the current product has a quantity of 4, another 2 will be added so this will result to 6
