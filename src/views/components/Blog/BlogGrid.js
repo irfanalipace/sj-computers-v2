@@ -7,10 +7,10 @@ import Pagination from "@mui/material/Pagination";
 
 const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }) => {
 
-  
+  console.log('blogs: ', blogs);
   const navigate = useNavigate();
 
-  const blogslist = (blog) => {
+  const handleBlogClick = (blog) => {
       navigate(`/${blog.slug}`, {
           state: {
               blogList: blog,
@@ -22,12 +22,9 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
   
     return (
         <div className="container single-blog-pages-dev-container-all-products">
-           {blogs.length === 0 ? (
-     <div className="blogs-not-found-message">
-     <h2>Blogs not found.</h2>
- </div>
-  ) : (
-        <div className="row">
+           {blogs?.length >= 0 ? (
+
+     <div className="row">
           {blogs.map((blog) => (
             <div className="col-lg-4 col-md-6 col-sm-12" key={blog?.id}>
               <div className="product-card product-blogs-card">
@@ -39,7 +36,7 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
                     
                   }}
                   
-                  onClick={() => blogslist(blog)}
+                  onClick={() => handleBlogClick(blog)}
                 >
                   <img src={blog?.thumbnail_image} alt={blog?.alt_thumbnail_image} />
                   <div className="dev-data-span-card-dev">
@@ -62,7 +59,7 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
                     
                   }}
                   
-                  onClick={() => blogslist(blog)}
+                  onClick={() => handleBlogClick(blog)}
                 >
                     <div style={{ paddingTop: "4px" }}>
                       
@@ -102,6 +99,10 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
             </div>
           ))}
         </div>
+  ) : (
+     <div className="blogs-not-found-message">
+     <h2>Blogs not found.</h2>
+          </div>
          )}
         <div className="pagination-blogs-page">
           <div>

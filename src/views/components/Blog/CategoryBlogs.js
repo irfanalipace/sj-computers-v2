@@ -46,11 +46,11 @@ useEffect(() => {
         .then((response) => {
             console.log("API Response:", response);
             setCategoryList(response?.data);
-            setIsLoading(true);
+            // setIsLoading(true);
         })
         .catch((error) => {
             console.error("API Error:", error);
-            setIsLoading(true);
+            // setIsLoading(true);
         });
 }, []);
 
@@ -102,8 +102,8 @@ useEffect(() => {
     //         });
     // }, [category_id]);
 
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    // const indexOfLastItem = currentPage * itemsPerPage;
+    // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
     const handlePageChange = (event, page) => {
         setCurrentPage(page);
@@ -126,7 +126,7 @@ useEffect(() => {
             setIsLoading(true); // Set loading to true before making the API call
             getCategoryApi(category_id)
                 .then((response) => {
-                    if (response.data && response.data?.data.length > 0) {
+                    if (response.data?.data?.length > 0) {
                         setCategoriesBlogs(response.data?.data);
                         setPageCount(response.data?.last_page);
                         setIsLoading(false); // Set loading to false after successful API call
@@ -232,7 +232,6 @@ useEffect(() => {
                 currentPage={currentPage}
                 handlePageChange={handlePageChange} 
                 isLoading={isLoading}
-                blogslist={blogslist}
             />
         
         )}
