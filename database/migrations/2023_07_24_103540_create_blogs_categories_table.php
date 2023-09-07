@@ -13,7 +13,7 @@ class CreateBlogsCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('blogs_categories', function (Blueprint $table) {
+//        Schema::create('blogs_categories', function (Blueprint $table) {
 //            $table->id();
 //            $table->foreignId('blog_id')->nullable()->constrained('blogs');
 //
@@ -21,7 +21,7 @@ class CreateBlogsCategoriesTable extends Migration
 //            $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('set null');
 //
 //            $table->timestamps();
-        });
+//        });
     }
 
     /**
