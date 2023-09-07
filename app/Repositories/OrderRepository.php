@@ -22,7 +22,7 @@ class OrderRepository
         try {
             $data = DB::transaction(function () use ($data, $response, $userId, $user, $payment_type, $cartData, $cartContent, $shippingAddreess, $user_type, $cartItems) {
                 $invoice = $this->storeInvoice($payment_type, $data, $response, $userId, $user_type, $user);
-
+                
                 //saving order after invoice created
                 $order = [];
 
@@ -35,7 +35,7 @@ class OrderRepository
                 $order['shipment_days'] = $cartData['estimate_day'];
                 $order['item_qty'] = $cartData['item_qty'];
                 $order = Order::create($order);
-               
+              
                 if ($user_type == StatusEnum::GUEST) {
                     foreach ($cartItems as $item) {
                         $product = Product::whereId($item['product_id'])->first();
@@ -53,7 +53,8 @@ class OrderRepository
                         OrderItem::create($data);
                     }
                 } else {
-                    $cartContent->each(function ($item) use ($order) {
+                    
+                     $cartContent->each(function ($item) use ($order) {
                         $data = [
                             'order_id' => $order->id,
                             'product_id' => $item->id,
@@ -61,15 +62,17 @@ class OrderRepository
                             'qty' => $item->quantity,
                             'price' => $item->price
                         ];
-
-                        $productInfo = $this->getAmazonInventory($item->id);
-                        if ($productInfo['status']) {
+ 
+                        // $productInfo = $this->getAmazonInventory($item->id);
+                   
+                        // if ($productInfo['status']) {
                             //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
-                        }
+                        // }
                         OrderItem::create($data);
                     });
+                   
                 }
-
+              
                 //saving address of order
                 $OrderAddress = OrderShippingAddress::Create(
                     [
@@ -86,9 +89,9 @@ class OrderRepository
                         'order_id' => $order->id
                     ]
                 );
-
+             
                 $order = Order::find($order->id);
-               
+                
                 return [
                     "order" => $order,
                     "OrderAddress" => $OrderAddress
@@ -96,7 +99,6 @@ class OrderRepository
                 ];
             });
 
-          
             DB::commit();
             return $data;
         } catch (Exception $e) {
