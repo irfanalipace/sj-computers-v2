@@ -8,8 +8,10 @@ use App\Http\Requests\Blog\GetBlogRequest;
 use App\Http\Requests\Category\CategoryProductRequest;
 use App\Models\Blog;
 use App\Models\Brand;
+use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends BaseController
 {
@@ -53,7 +55,8 @@ class BlogController extends BaseController
     {
         try {
             $perPage = $request->per_page ?? 12;
-            $blogs = Blog::where('category_id', $request->category_id)->paginate($perPage);
+
+            $blogs = Category::where('id',$request->category_id)->blogs()->paginate($perPage);
 
             $blogs->map(function ($record) {
 
