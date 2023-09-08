@@ -55,10 +55,6 @@ class BlogController extends BaseController
             $perPage = $request->per_page ?? 12;
             $blogs = Blog::where('category_id', $request->category_id)->paginate($perPage);
 
-            if ($blogs->isEmpty()) {
-                return $this->sendError([], 'Blogs not found');
-            }
-
             $blogs->map(function ($record) {
 
                 $record['primary_image'] = is_null($record['primary_image']) ? $record['primary_image'] : config('app.url') . '/storage/' . $record['primary_image'];
@@ -66,7 +62,6 @@ class BlogController extends BaseController
                 $record['secondary_image'] = is_null($record['secondary_image']) ? $record['secondary_image'] : config('app.url') . '/storage/' . $record['secondary_image'];
                 return $record;
             });
-
 
             return $this->sendResponse($blogs, 'Blogs are displayed');
         } catch (\Exception $e) {
