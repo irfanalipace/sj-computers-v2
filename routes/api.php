@@ -51,7 +51,8 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::post('forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password');
 
-Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
+Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
+
 
 Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify'); // Make sure to keep this as your route name
 
