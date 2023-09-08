@@ -59,6 +59,15 @@ class BlogController extends BaseController
                 return $this->sendError([], 'Blogs not found');
             }
 
+            $blogs->map(function ($record) {
+
+                $record['primary_image'] = is_null($record['primary_image']) ? $record['primary_image'] : config('app.url') . '/storage/' . $record['primary_image'];
+                $record['thumbnail_image'] = is_null($record['thumbnail_image']) ? $record['thumbnail_image'] : config('app.url') . '/storage/' . $record['thumbnail_image'];
+                $record['secondary_image'] = is_null($record['secondary_image']) ? $record['secondary_image'] : config('app.url') . '/storage/' . $record['secondary_image'];
+                return $record;
+            });
+
+
             return $this->sendResponse($blogs, 'Blogs are displayed');
         } catch (\Exception $e) {
             return $this->sendError('error', $e->getMessage());
