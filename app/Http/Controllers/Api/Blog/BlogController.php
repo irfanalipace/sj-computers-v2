@@ -56,10 +56,8 @@ class BlogController extends BaseController
         try {
             $perPage = $request->per_page ?? 12;
 
-            $category = Category::where('id',$request->category_id)->with('blogs', function($query) {
-                $query->paginate(20);
-            })->first();
-            $blogs= $category->blogs;
+            $category = Category::where('id',$request->category_id)->with('blogs')->first();
+            $blogs= $category->blogs()->paginate($perPage);
 
             $blogs->map(function ($record) {
 
