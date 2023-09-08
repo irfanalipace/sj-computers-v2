@@ -113,7 +113,6 @@ const cartSlice = createSlice({
         },
         SET_OUT_OF_STOCK: (state, action) => {
             let cartItem = { ...action.payload.cartItem };
-            let details = { ...action.payload.cartDetails };
             let index = state.cart.findIndex((item) => item.id === cartItem.id);
             if (index >= 0) {
                 state.cart[index] = {
@@ -124,9 +123,6 @@ const cartSlice = createSlice({
                     },
                     loading: false,
                 };
-                if (details) {
-                    state.details = { ...details };
-                }
             }
             state.updatingItem = false;
         },
