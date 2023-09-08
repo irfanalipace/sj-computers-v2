@@ -352,6 +352,11 @@ const Blog = () => {
                                                             icon={faLinkedin}
                                                         />
                                                     </a>
+                                                    {/*<a href="https://twitter.com/example">*/}
+                                                    {/*    <FontAwesomeIcon*/}
+                                                    {/*        icon={faTwitter}*/}
+                                                    {/*    />*/}
+                                                    {/*</a>*/}
                                                 </div>
                                             </div>
                                         </div>
@@ -580,7 +585,7 @@ const Blog = () => {
                              ? blogdteails.content
                              : (blogdteails.content.length > 3000 ? blogdteails.content.substring(0, 3000) + "..." : blogdteails.content)
                          }} />
-                         
+
                          {blogdteails.content.length > 3000 && !showMore &&
                            <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
                              __html: blogdteails.content.substring(3000)
@@ -591,13 +596,13 @@ const Blog = () => {
                                         </div>
                                         {/* <div className="image-for-meeting2-section">
                                                                      <img src={meetingset} />
-                         
+
                                                                      <img
                                                                      src={blog.secondary_image ? blog.secondary_image : meetingimage }
                                                                      alt={blog.all_text}
-                                                                    
+
                                                                  />
-                                                                  
+
                                                                  </div> */}
                                         <span className="span-deve-loram-space">
                                             {/* {blog.meta_description} */}
@@ -634,7 +639,7 @@ const Blog = () => {
 
                                         {/* <div className="image-for-meeting2-section">
                                                                      <img src={meetingset} />
-                         
+
                                                                      <img
                                                                          src={
                                                                              blog.thumbnail_image
@@ -678,15 +683,15 @@ const Blog = () => {
                                                                  <div className="sj-left-dev-set-data-from-section">
                                                                      <span>More from SJ</span>
                                                                      <div className="pagination-blogs-page">
-                                                                  
-                         
+
+
                                                                          <button
                                                                              onClick={handlePrevPage}
                                                                              disabled={!prevPageUrl}
                                                                          >
                                                                              &laquo; Pre
                                                                          </button>
-                         
+
                                                                          {Array.from(
                                                                              { length: totalPages },
                                                                              (_, index) => (
@@ -708,7 +713,7 @@ const Blog = () => {
                                                                                  </button>
                                                                              )
                                                                          )}
-                         
+
                                                                          <button
                                                                              onClick={handleNextPage}
                                                                              disabled={!nextPageUrl}
