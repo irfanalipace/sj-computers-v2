@@ -11,6 +11,7 @@ import {
 import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./CartItem.css";
+import { Link } from "react-router-dom";
 
 export const CartItem = memo(({ cartData }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -76,11 +77,14 @@ export const CartItem = memo(({ cartData }) => {
                     <div className="d-flex flex-column h-100 justify-content-between mx-0">
                         <div className="items-card-data">
                             <div className="col-md-10">
-                                <p>
+                                <Link
+                                    className="items-card-name"
+                                    to={"/products/" + cartData?.product?.asin}
+                                >
                                     <strong className="item-details">
                                         {cartData?.product?.name}
                                     </strong>
-                                </p>
+                                </Link>
                             </div>
                             <div className="col-md-2 price-item">
                                 <p className="my-sm-0 my-2">

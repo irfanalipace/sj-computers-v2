@@ -3,6 +3,14 @@
     flex-wrap: wrap;
     overflow-x: auto;
 }
+
+.items-card-data .items-card-name {
+    text-decoration: none;
+    display: block;
+}
+.items-card-data .item-details:hover {
+    color: #e87e24;
+}
 .price-item {
     text-align: end;
 

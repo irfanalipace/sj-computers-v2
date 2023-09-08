@@ -9,6 +9,7 @@ import {
     UPDATING,
     API_ERROR,
     UPDATED_QUANTITY,
+    SET_OUT_OF_STOCK,
 } from "@store/cart/cartSlice";
 
 import {
@@ -35,6 +36,7 @@ import {
     setLocalCart,
     objectToArray,
     updateItemLocalProperty,
+    mapResponse,
 } from "@utils/cartHelpers";
 
 import { toast } from "react-toastify";
@@ -101,14 +103,21 @@ export const updateQuantity = (data) => {
             dispatch({ type: UPDATING, payload: data });
             let response = await updateQuantityApi(data.cartItem);
             data.cartDetails = { ...response.data.details };
+            let in_stock = data.cartDetails.in_stock;
             updateCartItem(data);
             dispatch({
                 type: UPDATE_QUANTITY,
-                payload: data,
+                payload: { ...data, in_stock },
             });
         } catch (error) {
             console.print("Something went wrong in carts", error);
-            dispatch({ type: UPDATED_QUANTITY, payload: data.cartItem });
+            if (error?.in_stock === false) {
+                dispatch({
+                    type: SET_OUT_OF_STOCK,
+                    payload: { ...data, in_stock: false },
+                });
+                toast.error("Item out of stock");
+            } else dispatch({ type: UPDATED_QUANTITY, payload: data.cartItem });
         }
     };
 };
@@ -133,6 +142,21 @@ export const getCartDetails = (data) => {
 
 export const syncCartItems = () => {
     return async (dispatch) => {
+        const fetchItems = async (cartItems) => {
+            let response = await fetchCartApi();
+            let items = { ...response.data };
+            delete items.details;
+            cartItems = mapResponse(items);
+            const cartDetails = { ...response.data.details };
+            dispatch({
+                //adds existing cart items of local storage in the redux store
+                type: ADD_LIST_TO_CART,
+                payload: {
+                    cartItems,
+                    cartDetails,
+                },
+            });
+        };
         try {
             dispatch({ type: LOADING, payload: {} });
             // let response = await fetchCartApi();
@@ -191,64 +215,42 @@ export const syncCartItems = () => {
                     });
             }
             if (cartItems.length > 0) {
-                let response = await addListToCartApi({ cartItems }); // posting local storage cart items in database
-                let items = { ...response.data.original.data };
-                delete items.details;
-                items = objectToArray(items);
-                const cartDetails = {
-                    ...response.data.original.data.details,
-                };
-                cartItems = items?.map((item) => {
-                    let cartItem = {
-                        ...item,
-                        price: item?.price, // item total price which need to be paid in case of checkout
-                        notLocal: true, //this property identifies that this cart item is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
-                        product: {
-                            ...item.associatedModel,
-                            price: item.associatedModel.price, // cost of one unit of product
-                        },
+                try {
+                    let response = await addListToCartApi({ cartItems }); // posting local storage cart items in database
+                    let items = { ...response.data.original.data };
+                    delete items.details;
+                    items = objectToArray(items);
+                    const cartDetails = {
+                        ...response.data.original.data.details,
                     };
+                    cartItems = items?.map((item) => {
+                        let cartItem = {
+                            ...item,
+                            price: item?.price, // item total price which need to be paid in case of checkout
+                            notLocal: true, //this property identifies that this cart item is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
+                            product: {
+                                ...item.associatedModel,
+                                price: item.associatedModel.price, // cost of one unit of product
+                            },
+                        };
 
-                    delete cartItem.associatedModel;
-                    return cartItem;
-                });
-                updateCartDetails(cartDetails);
-                dispatch({
-                    //adds existing cart items of local storage in the redux store
-                    type: ADD_LIST_TO_CART,
-                    payload: {
-                        cartItems,
-                        cartDetails,
-                    },
-                });
+                        delete cartItem.associatedModel;
+                        return cartItem;
+                    });
+                    updateCartDetails(cartDetails);
+                    dispatch({
+                        //adds existing cart items of local storage in the redux store
+                        type: ADD_LIST_TO_CART,
+                        payload: {
+                            cartItems,
+                            cartDetails,
+                        },
+                    });
+                } catch (error) {
+                    fetchItems(cartItems);
+                }
             } else {
-                let response = await fetchCartApi();
-                let items = { ...response.data };
-                delete items.details;
-                items = objectToArray(items);
-                cartItems = items?.map((item) => {
-                    let cartItem = {
-                        ...item,
-                        price: item?.price, // item total price which need to be paid in case of checkout
-                        notLocal: true, //this property identifies that this cart item is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
-                        product: {
-                            ...item.associatedModel,
-                            price: item.associatedModel.price, // cost of one unit of product
-                        },
-                    };
-
-                    delete cartItem.associatedModel;
-                    return cartItem;
-                });
-                const cartDetails = { ...response.data.details };
-                dispatch({
-                    //adds existing cart items of local storage in the redux store
-                    type: ADD_LIST_TO_CART,
-                    payload: {
-                        cartItems,
-                        cartDetails,
-                    },
-                });
+                fetchItems(cartItems);
             }
         } catch (error) {
             console.print("Something went wrong in carts", error);

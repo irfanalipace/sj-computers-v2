@@ -90,6 +90,7 @@ const cartSlice = createSlice({
                     ...state.cart[index],
                     quantity: cartItem.quantity,
                     price: cartItem.price,
+                    in_stock: cartItem.in_stock,
                     loading: false,
                 };
                 if (details) {
@@ -98,6 +99,25 @@ const cartSlice = createSlice({
             }
             state.updatingItem = false;
         },
+        SET_OUT_OF_STOCK: (state, action) => {
+            let cartItem = { ...action.payload.cartItem };
+            let details = { ...action.payload.cartDetails };
+            let index = state.cart.findIndex((item) => item.id === cartItem.id);
+            if (index >= 0) {
+                state.cart[index] = {
+                    ...state.cart[index],
+                    quantity: cartItem.quantity,
+                    price: cartItem.price,
+                    in_stock: cartItem?.in_stock,
+                    loading: false,
+                };
+                if (details) {
+                    state.details = { ...details };
+                }
+            }
+            state.updatingItem = false;
+        },
+
         UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS: (state, action) => {
             const cartItems = state.cart.map((item) => {
                 return {
@@ -139,5 +159,6 @@ export const {
     UPDATING,
     UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS,
     UPDATED_QUANTITY,
+    SET_OUT_OF_STOCK,
 } = cartSlice.actions;
 export default cartSlice.reducer;
