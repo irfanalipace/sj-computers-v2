@@ -98,9 +98,10 @@ export const CartItem = memo(({ cartData }) => {
                         <ul className="item-list mt-1 mb-2">
                             <li>
                                 <span className="item-stock">
-                                    {cartData?.product?.in_stock
-                                        ? "In Stock"
-                                        : "Out of Stock"}
+                                    {cartData?.product?.quantity ===
+                                    cartData?.quantity
+                                        ? "Out of Stock"
+                                        : "In Stock"}
                                 </span>
                             </li>
                             {/* <li>Discount Available</li> */}
