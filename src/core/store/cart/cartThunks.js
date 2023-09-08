@@ -103,20 +103,23 @@ export const updateQuantity = (data) => {
             dispatch({ type: UPDATING, payload: data });
             let response = await updateQuantityApi(data.cartItem);
             data.cartDetails = { ...response.data.details };
-            let in_stock = data.cartDetails.in_stock;
+            let in_stock = response.in_stock;
             updateCartItem(data);
             dispatch({
                 type: UPDATE_QUANTITY,
-                payload: { ...data, in_stock },
+                payload: {
+                    cartItem: { ...data.cartItem, in_stock },
+                    cartDetails: { ...data?.cartDetails },
+                },
             });
         } catch (error) {
             console.print("Something went wrong in carts", error);
-            if (error?.in_stock === false) {
+            if (error?.data?.in_stock === false) {
                 dispatch({
                     type: SET_OUT_OF_STOCK,
                     payload: { ...data, in_stock: false },
                 });
-                toast.error("Item out of stock");
+                toast.error(error?.data?.message);
             } else dispatch({ type: UPDATED_QUANTITY, payload: data.cartItem });
         }
     };

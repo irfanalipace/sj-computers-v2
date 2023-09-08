@@ -86,13 +86,25 @@ const cartSlice = createSlice({
             let details = { ...action.payload.cartDetails };
             let index = state.cart.findIndex((item) => item.id === cartItem.id);
             if (index >= 0) {
-                state.cart[index] = {
-                    ...state.cart[index],
-                    quantity: cartItem.quantity,
-                    price: cartItem.price,
-                    in_stock: cartItem.in_stock,
-                    loading: false,
-                };
+                if (cartItem?.in_stock)
+                    state.cart[index] = {
+                        ...state.cart[index],
+                        quantity: cartItem.quantity,
+                        price: cartItem.price,
+                        product: {
+                            ...state.cart[index].product,
+                            in_stock: cartItem.in_stock,
+                        },
+                        loading: false,
+                    };
+                else
+                    state.cart[index] = {
+                        ...state.cart[index],
+                        product: {
+                            ...state.cart[index].product,
+                        },
+                        loading: false,
+                    };
                 if (details) {
                     state.details = { ...details };
                 }
@@ -106,9 +118,10 @@ const cartSlice = createSlice({
             if (index >= 0) {
                 state.cart[index] = {
                     ...state.cart[index],
-                    quantity: cartItem.quantity,
-                    price: cartItem.price,
-                    in_stock: cartItem?.in_stock,
+                    product: {
+                        ...state.cart[index].product,
+                        in_stock: cartItem.in_stock,
+                    },
                     loading: false,
                 };
                 if (details) {
