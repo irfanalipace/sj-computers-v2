@@ -7,7 +7,7 @@ import Pagination from "@mui/material/Pagination";
 
 const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }) => {
 
-  console.log('blogs: ', blogs);
+ 
   const navigate = useNavigate();
 
   const handleBlogClick = (blog) => {
@@ -17,14 +17,14 @@ const BlogGrid = ({ blogs, pageCount, currentPage, handlePageChange, isLoading }
       },
     });
   };
-
+console.log(blogs, 'blogs data')
 
 
   return (
     <div>
 
       <div className="container single-blog-pages-dev-container-all-products">
-      {blogs?.length > 0 ? (
+        {blogs?.length > 0 ? (
           <div className="row">
             {blogs.map((blog) => (
               <div className="col-lg-4 col-md-6 col-sm-12" key={blog?.id}>
