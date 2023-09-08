@@ -85,8 +85,8 @@ const CategoryBlogs = () => {
     //         });
     // }, [category_id]);
 
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    // const indexOfLastItem = currentPage * itemsPerPage;
+    // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
     const handlePageChange = (event, page) => {
         setCurrentPage(page);
@@ -102,26 +102,27 @@ const CategoryBlogs = () => {
         });
     };
 
+ 
     useEffect(() => {
         if (category_id) {
-            setIsLoading(true); // Set loading to true before making the API call
-            getCategoryApi(category_id)
+            setIsLoading(true); 
+            getCategoryApi(category_id, currentPage)
                 .then((response) => {
-                    if (response.data && response.data?.data?.length > 0) {
+                    if ( response.data?.data?.length > 0) {
                         setCategoriesBlogs(response.data?.data);
                         setPageCount(response.data?.last_page);
-                        setIsLoading(false); // Set loading to false after successful API call
+                        setIsLoading(false); 
                     } else {
                         setCategoriesBlogs([]);
-                        setIsLoading(false); // Set loading to false if no data is found
+                        setIsLoading(false); 
                     }
                 })
                 .catch((error) => {
                     console.error("API Error:", error);
-                    setIsLoading(false); // Set loading to false in case of an error
+                    setIsLoading(false); 
                 });
         }
-    }, [category_id]);
+    }, [category_id, currentPage]);
 
     // useEffect(() => {
 
@@ -169,21 +170,24 @@ const CategoryBlogs = () => {
                 </div>
             </div>
 
+            {categoriesblogs.length > 0 && (
             <div className="container">
                 <div className="trending-blog-filter-data">
-                    <div className="treding-blog-sets">
-                        {/* <span> Trending Blogs</span> */}
-                    </div>
-                    <div className="dev-trending-data-image">
-                        <select value={selectedFilter}>
-                            <option value="">Recent Blogs</option>
-                            <option value="trending">Trending Blog</option>
-                            <option value="az">Sorting A-Z</option>
-                            <option value="date">Sorting by Date</option>
-                        </select>
-                    </div>
+                <div className="treding-blog-sets">
+                    {/* <span> Trending Blogs</span> */}
+                </div>
+                <div className="dev-trending-data-image">
+                    <select value={selectedFilter}>
+                    <option value="">Recent Blogs</option>
+                    <option value="trending">Trending Blog</option>
+                    <option value="az">Sorting A-Z</option>
+                    <option value="date">Sorting by Date</option>
+                    </select>
+                </div>
                 </div>
             </div>
+            )}
+
 
             {isLoading ? (
                 <div className="blog-pagesloader-overlay">

@@ -21,14 +21,13 @@ import whoareimage from "@images/blog/whoarewe.png";
 import meetingset3 from "@images/blog/videoimagemeeting3.png";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-
 const HeadereLinks = [
-    { path: "/", title: "About Us" },
+    { path: "/about_us", title: "About Us" },
     { path: "/", title: "What We Do?" },
-    { path: "/term_services", title: "Return & Refund" },
-    { path: "/term_services", title: "Shipping Policy" },
+    { path: "/return_refund_policy", title: "Return & Refund" },
+    { path: "/shipping_policy", title: "Shipping Policy" },
     { path: "/term_services", title: "Terms of Services" },
-    { path: "/term_services", title: "Privacy Policy" },
+    { path: "/privacy_policy", title: "Privacy Policy" },
     { path: "/", title: "Subscribe" },
 ];
 

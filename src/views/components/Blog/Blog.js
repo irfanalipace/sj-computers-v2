@@ -27,13 +27,13 @@ import primardataimage from "@images/blog/meeting.png";
 import { Loader } from "@mantine/core";
 
 const HeadereLinks = [
-    { path: "/", title: "About Us" },
-    { path: "/", title: "What We Do?" },
-    { path: "/term_services", title: "Return & Refund" },
-    { path: "/term_services", title: "Shipping Policy" },
+    { path: "/about_us", title: "About Us" },
+    { path: "/what-we-do", title: "What We Do?" },
+    { path: "/return_refund_policy", title: "Return & Refund" },
+    { path: "/shipping_policy", title: "Shipping Policy" },
     { path: "/term_services", title: "Terms of Services" },
-    { path: "/term_services", title: "Privacy Policy" },
-    { path: "/", title: "Subscribe" },
+    { path: "/privacy_policy", title: "Privacy Policy" },
+    // { path: "/", title: "Subscribe" },
 ];
 
 const Blog = () => {
@@ -84,12 +84,27 @@ const Blog = () => {
                 })
                 .catch((error) => {
                     console.error("API Error:", error);
-                    if (error) {
                         setBlogdetailsError(true);
                         setblogLoading(false);
-                    }
                 });
         }
+
+        getBlogsHeaderPagesApi()
+        .then((response) => {
+            if (response.data?.data?.length > 0) {
+                setBlogs(response.data?.data);
+                setPrevPageUrl(response.data?.prev_page_url);
+                setNextPageUrl(response.data?.next_page_url);
+               
+            } else {
+                setBlogs([]);
+                setPrevPageUrl(response.data?.prev_page_url);
+                setNextPageUrl(response.data?.next_page_url);
+            }
+        })
+        .catch((error) => {
+            console.error("API Error:", error);
+        });
     }, [blogslug]);
 
     const [showMore, setShowMore] = useState(false);
@@ -98,23 +113,9 @@ const Blog = () => {
         setShowMore(!showMore);
     };
 
-    useEffect(() => {
-        getBlogsHeaderPagesApi(currentPage, itemsPerPage)
-            .then((response) => {
-                if (response.data?.data?.length > 0) {
-                    setBlogs(response.data?.data);
-                    setPrevPageUrl(response.data?.prev_page_url);
-                    setNextPageUrl(response.data?.next_page_url);
-                } else {
-                    setBlogs([]);
-                    setPrevPageUrl(response.data?.prev_page_url);
-                    setNextPageUrl(response.data?.next_page_url);
-                }
-            })
-            .catch((error) => {
-                console.error("API Error:", error);
-            });
-    }, [currentPage, itemsPerPage]);
+
+
+  
 
     const handlePaginationClick = (pageNumber) => {
         setCurrentPage(pageNumber - 1);
@@ -136,7 +137,10 @@ const Blog = () => {
     const totalPages = Math.ceil(blogs?.length / itemsPerPage);
 
     useEffect(() => {
-        if (blogdteails) {
+        if (blogdteails?.id) {
+            console.log('@@@@ blogdteails: ', blogdteails);
+            try {
+            
             const blogContent = document.getElementById("blog-content");
             const h2Tags = blogContent.getElementsByTagName("h2");
 
@@ -152,7 +156,15 @@ const Blog = () => {
 
                 firstH2Tag.insertAdjacentElement("afterend", imgTag);
             }
+        } catch (error) {}
+            const wpm = 225;
+            const text = `${blogdteails.content}`;
+                const words = text.trim()?.split(/\s+/)?.length;
+                const time = Math.ceil(words / wpm);
+                setReadingTime(time);
         }
+
+        
     }, [blogdteails]);
 
     // useEffect(() => {
@@ -192,13 +204,7 @@ const Blog = () => {
 
     const [readingTime, setReadingTime] = useState(0);
 
-    const wpm = 225;
-    const text = `${blogdteails.content}`;
-    useEffect(() => {
-        const words = text.trim()?.split(/\s+/)?.length;
-        const time = Math.ceil(words / wpm);
-        setReadingTime(time);
-    }, [text, wpm]);
+    
 
     const categories = [
         { id: 1, name: "Category 1" },
@@ -239,6 +245,10 @@ const Blog = () => {
             </div>
         );
     }
+
+
+    const sortedBlogs = blogs.sort((a, b) => new Date(b.publish_date) - new Date(a.publish_date));
+
     return (
         <>
             {blogsdetailserror ? (
@@ -433,104 +443,42 @@ const Blog = () => {
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3 top-stories-data">
-                                        <div className="main-dev-card-deprt">
-                                            <div className="left-dev-span-stories">
-                                                <span>
-                                                    STORIES WE THINK YOU’LL LIKE
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <hr></hr>
-                                            </div>
-                                            <div style={{ padding: "7px" }}>
-                                                <div className="row">
-                                                    <div className="col-4">
-                                                        <div className="them-stori-mage">
-                                                            <img
-                                                                src={
-                                                                    blogdteails.thumbnail_image
-                                                                        ? blogdteails.thumbnail_image
-                                                                        : smimage
-                                                                }
-                                                                alt={
-                                                                    blogdteails.alt_thumbnail_image
-                                                                }
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-8">
-                                                        <div className="dev-span-section4-dev">
-                                                            <span>
-                                                                principles by
-                                                                which we process
-                                                                your personal
-                                                                data, and
-                                                                mentions our
-                                                                responsibilities.
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr></hr>
-                                                <div className="row">
-                                                    <div className="col-4">
-                                                        <div className="them-stori-mage">
-                                                            <img
-                                                                src={
-                                                                    blogdteails.thumbnail_image
-                                                                        ? blogdteails.thumbnail_image
-                                                                        : smimage
-                                                                }
-                                                                alt={
-                                                                    blogdteails.alt_thumbnail_image
-                                                                }
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-8">
-                                                        <div className="dev-span-section4-dev">
-                                                            <span>
-                                                                principles by
-                                                                which we process
-                                                                your personal
-                                                                data, and
-                                                                mentions our
-                                                                responsibilities.
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr></hr>
-                                                <div className="row">
-                                                    <div className="col-4">
-                                                        <div className="them-stori-mage">
-                                                            <img
-                                                                src={
-                                                                    blogdteails.thumbnail_image
-                                                                        ? blogdteails.thumbnail_image
-                                                                        : smimage
-                                                                }
-                                                                alt={
-                                                                    blogdteails.alt_thumbnail_image
-                                                                }
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-8">
-                                                        <div className="dev-span-section4-dev">
-                                                            <span>
-                                                                principles by
-                                                                which we process
-                                                                your personal
-                                                                data, and
-                                                                mentions our
-                                                                responsibilities.
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div className="main-dev-card-deprt">
+  <div className="left-dev-span-stories">
+    <span>Recent Articles</span>
+  </div>
+  <div>
+    <hr />
+  </div>
+  <div style={{ padding: "7px" }}>
+  {blogs?.map((blog) => (
+    
+    <div key={blog.id}>
+         { console.log(blogs,'response.data?.data')}
+      <Link to={`/${blog?.slug}`} className="text-decoration-none">
+        <div className="row">
+          <div className="col-4">
+            <div className="them-stori-mage">
+              <img src={blog?.thumbnail_image} alt={blog?.alt_thumbnail_image} />
+            </div>
+          </div>
+          <div className="col-8">
+            <div className="dev-span-section4-dev">
+              <span className="read-more-span-text">
+                {blog?.meta_description}
+              </span>
+            </div>
+           
+          </div>
+        </div>
+      </Link>
+      <hr />
+    </div>
+  ))}
+  </div>
+</div>
+
+
 
                                         {blogscategories?.length > 0 && (
                                             <div className="widget widget_categories">

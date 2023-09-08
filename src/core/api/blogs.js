@@ -58,10 +58,10 @@ export function blogHeaderDetails(slug) {
 
 
 ///Category Api Call
-export function getCategoryApi(category_id) {
-   
+export function getCategoryApi(category_id, page = 1, per_page = 12) {
+
     return new Promise((resolve, reject) => {
-        ApiService.get(`/category-blogs?category_id=${category_id}`)
+        ApiService.get(`/category-blogs?category_id=${category_id}&page=${page}&per_page=${per_page}`)
             .then((response) => {
                 console.log(response, "category the blogs");
                 resolve(response);
