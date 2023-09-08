@@ -38,11 +38,12 @@ const ShippingMehtod = () => {
     ];
 
     const handleChange = async (e) => {
+        console.log("handleChange", e);
         const cartDetails = getCartDetails();
-        const total_quantity = getTotalQuantity();
         if (isLoading) return false;
         else {
             setIsLoading(true);
+            console.log("isAuthenticated: ", isAuthenticated);
             if (isAuthenticated) {
                 try {
                     let response = await applyShipment({
@@ -59,6 +60,7 @@ const ShippingMehtod = () => {
                     console.print("error: ", error);
                 }
             } else {
+                const total_quantity = getTotalQuantity();
                 try {
                     let response = await applyShipmentForGuest({
                         shipment_days: e.target.value,

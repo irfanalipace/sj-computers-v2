@@ -120,7 +120,6 @@ export const compareLocalCartWithDBCart = (array_1, array_2) => {
 
 export const getTotalQuantity = () => {
     const cartItems = getCartItems();
-    console.log("cartIems: ", cartItems);
     const total_quantity = cartItems.reduce((acc, item) => {
         if (acc.id) return acc.quantity + item.quantity;
         else return acc + item.quantity;
