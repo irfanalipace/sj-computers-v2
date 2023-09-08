@@ -983,6 +983,17 @@ div.sticky {
     }
 }
 
+
+@media screen and (max-width: 991px) {
+    .ul-item-blog-social-icon a {
+        color: white;
+        padding-right: 5px;
+    }
+
+}
+
+
+
 @media screen and (min-width: 880px) and (max-width: 991px) {
     .top-stories-data {
         width: 31%;
