@@ -144,9 +144,9 @@ const SingleBlog = () => {
                             <div className="mid-graph-pargarph-page-datap-data blog-dynamic-style-heading-data1">
                                 <div
                                     className="content-image-data-paragrap"
-                                    // dangerouslySetInnerHTML={{
-                                    // __html: singleblog.content
-                                    // }}
+                                // dangerouslySetInnerHTML={{
+                                // __html: singleblog.content
+                                // }}
                                 />
                                 <span></span>
                             </div>
@@ -172,22 +172,22 @@ const SingleBlog = () => {
 
 
             {blogs.length > 0 && (
-  <div className="container">
-    <div className="trending-blog-filter-data">
-      <div className="treding-blog-sets">
-        {/* <span> Trending Blogs</span> */}
-      </div>
-      <div className="dev-trending-data-image">
-        <select value={selectedFilter}>
-          <option value="">Recent Blogs</option>
-          <option value="trending">Trending Blog</option>
-          <option value="az">Sorting A-Z</option>
-          <option value="date">Sorting by Date</option>
-        </select>
-      </div>
-    </div>
-  </div>
-)}
+                <div className="container">
+                    <div className="trending-blog-filter-data">
+                        <div className="treding-blog-sets">
+                            {/* <span> Trending Blogs</span> */}
+                        </div>
+                        <div className="dev-trending-data-image">
+                            <select value={selectedFilter}>
+                                <option value="">Recent Blogs</option>
+                                <option value="trending">Trending Blog</option>
+                                <option value="az">Sorting A-Z</option>
+                                <option value="date">Sorting by Date</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            )}
 
 
             {isLoading ? (

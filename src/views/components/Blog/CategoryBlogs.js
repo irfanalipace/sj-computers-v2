@@ -102,7 +102,6 @@ const CategoryBlogs = () => {
         });
     };
 
- 
     useEffect(() => {
         if (category_id) {
             setIsLoading(true); 

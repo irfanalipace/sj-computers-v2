@@ -54,12 +54,10 @@ const Blog = () => {
     const [nextPageUrl, setNextPageUrl] = useState(null);
     const { blogslug } = useParams();
 
-    const [visibleCategories, setVisibleCategories] = useState(8);
+   
     const blogscategories = useSelector((state) => state.category.categories);
 
-    let RenderedCategories = blogscategories
-        .slice(0, visibleCategories)
-        ?.map((category) => (
+    let RenderedCategories = blogscategories?.map((category) => (
             <li key={category.id}>
                 <Link
                     to={`/blogs/category/${category.slug}`}
@@ -84,27 +82,27 @@ const Blog = () => {
                 })
                 .catch((error) => {
                     console.error("API Error:", error);
-                        setBlogdetailsError(true);
-                        setblogLoading(false);
+                    setBlogdetailsError(true);
+                    setblogLoading(false);
                 });
         }
 
         getBlogsHeaderPagesApi()
-        .then((response) => {
-            if (response.data?.data?.length > 0) {
-                setBlogs(response.data?.data);
-                setPrevPageUrl(response.data?.prev_page_url);
-                setNextPageUrl(response.data?.next_page_url);
-               
-            } else {
-                setBlogs([]);
-                setPrevPageUrl(response.data?.prev_page_url);
-                setNextPageUrl(response.data?.next_page_url);
-            }
-        })
-        .catch((error) => {
-            console.error("API Error:", error);
-        });
+            .then((response) => {
+                if (response.data?.data?.length > 0) {
+                    setBlogs(response.data?.data);
+                    setPrevPageUrl(response.data?.prev_page_url);
+                    setNextPageUrl(response.data?.next_page_url);
+
+                } else {
+                    setBlogs([]);
+                    setPrevPageUrl(response.data?.prev_page_url);
+                    setNextPageUrl(response.data?.next_page_url);
+                }
+            })
+            .catch((error) => {
+                console.error("API Error:", error);
+            });
     }, [blogslug]);
 
     const [showMore, setShowMore] = useState(false);
@@ -115,7 +113,7 @@ const Blog = () => {
 
 
 
-  
+
 
     const handlePaginationClick = (pageNumber) => {
         setCurrentPage(pageNumber - 1);
@@ -140,31 +138,31 @@ const Blog = () => {
         if (blogdteails?.id) {
             console.log('@@@@ blogdteails: ', blogdteails);
             try {
-            
-            const blogContent = document.getElementById("blog-content");
-            const h2Tags = blogContent.getElementsByTagName("h2");
 
-            if (
-                h2Tags?.length > 0 &&
-                blogdteails.secondary_image &&
-                blogdteails.alt_secondary_image
-            ) {
-                const firstH2Tag = h2Tags[0];
-                const imgTag = document.createElement("img");
-                imgTag.src = blogdteails.secondary_image;
-                imgTag.alt = blogdteails.alt_secondary_image;
+                const blogContent = document.getElementById("blog-content");
+                const h2Tags = blogContent.getElementsByTagName("h2");
 
-                firstH2Tag.insertAdjacentElement("afterend", imgTag);
-            }
-        } catch (error) {}
+                if (
+                    h2Tags?.length > 0 &&
+                    blogdteails.secondary_image &&
+                    blogdteails.alt_secondary_image
+                ) {
+                    const firstH2Tag = h2Tags[0];
+                    const imgTag = document.createElement("img");
+                    imgTag.src = blogdteails.secondary_image;
+                    imgTag.alt = blogdteails.alt_secondary_image;
+
+                    firstH2Tag.insertAdjacentElement("afterend", imgTag);
+                }
+            } catch (error) { }
             const wpm = 225;
             const text = `${blogdteails.content}`;
-                const words = text.trim()?.split(/\s+/)?.length;
-                const time = Math.ceil(words / wpm);
-                setReadingTime(time);
+            const words = text.trim()?.split(/\s+/)?.length;
+            const time = Math.ceil(words / wpm);
+            setReadingTime(time);
         }
 
-        
+
     }, [blogdteails]);
 
     // useEffect(() => {
@@ -204,7 +202,7 @@ const Blog = () => {
 
     const [readingTime, setReadingTime] = useState(0);
 
-    
+
 
     const categories = [
         { id: 1, name: "Category 1" },
@@ -324,15 +322,15 @@ const Blog = () => {
                                                     <span>
                                                         {blogdteails.publish_date
                                                             ? new Date(
-                                                                  blogdteails.publish_date
-                                                              ).toLocaleDateString(
-                                                                  "en-US",
-                                                                  {
-                                                                      month: "2-digit",
-                                                                      day: "2-digit",
-                                                                      year: "numeric",
-                                                                  }
-                                                              )
+                                                                blogdteails.publish_date
+                                                            ).toLocaleDateString(
+                                                                "en-US",
+                                                                {
+                                                                    month: "2-digit",
+                                                                    day: "2-digit",
+                                                                    year: "numeric",
+                                                                }
+                                                            )
                                                             : null}
                                                     </span>
                                                 </div>
@@ -443,48 +441,48 @@ const Blog = () => {
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3 top-stories-data">
-                                    <div className="main-dev-card-deprt">
-  <div className="left-dev-span-stories">
-    <span>Recent Articles</span>
-  </div>
-  <div>
-    <hr />
-  </div>
-  <div style={{ padding: "7px" }}>
-  {blogs?.map((blog) => (
-    
-    <div key={blog.id}>
-         { console.log(blogs,'response.data?.data')}
-      <Link to={`/${blog?.slug}`} className="text-decoration-none">
-        <div className="row">
-          <div className="col-4">
-            <div className="them-stori-mage">
-              <img src={blog?.thumbnail_image} alt={blog?.alt_thumbnail_image} />
-            </div>
-          </div>
-          <div className="col-8">
-            <div className="dev-span-section4-dev">
-              <span className="read-more-span-text">
-                {blog?.meta_description}
-              </span>
-            </div>
-           
-          </div>
-        </div>
-      </Link>
-      <hr />
-    </div>
-  ))}
-  </div>
-</div>
+                                        <div className="main-dev-card-deprt">
+                                            <div className="left-dev-span-stories">
+                                                <span>Recent Articles</span>
+                                            </div>
+                                            <div>
+                                                <hr />
+                                            </div>
+                                            <div style={{ padding: "7px" }}>
+                                                {blogs?.map((blog) => (
+
+                                                    <div key={blog.id}>
+                                                        {console.log(blogs, 'response.data?.data')}
+                                                        <Link to={`/${blog?.slug}`} className="text-decoration-none">
+                                                            <div className="row">
+                                                                <div className="col-4">
+                                                                    <div className="them-stori-mage">
+                                                                        <img src={blog?.thumbnail_image} alt={blog?.alt_thumbnail_image} />
+                                                                    </div>
+                                                                </div>
+                                                                <div className="col-8">
+                                                                    <div className="dev-span-section4-dev">
+                                                                        <span className="read-more-span-text">
+                                                                            {blog?.meta_description}
+                                                                        </span>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </Link>
+                                                        <hr />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
 
 
 
                                         {blogscategories?.length > 0 && (
                                             <div className="widget widget_categories">
-                                                <h4>Category</h4>
+                                                <h4>Categories</h4>
                                                 {RenderedCategories}
-                                               { console.log(RenderedCategories,'RenderedCategories')}
+                                               
                                             </div>
                                         )}
 
