@@ -484,6 +484,7 @@ const Blog = () => {
                                             <div className="widget widget_categories">
                                                 <h4>Category</h4>
                                                 {RenderedCategories}
+                                               { console.log(RenderedCategories,'RenderedCategories')}
                                             </div>
                                         )}
 
