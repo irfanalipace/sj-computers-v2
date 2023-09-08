@@ -47,13 +47,13 @@ class CartController extends BaseController
             $item['price'] = number_format((float)$price, 2, '.', '');
             $items[] = $item;
         });
-
+        // dd(collect($items));
         $items['details'] = $this->cartDetails();
 
         if ($returnItems) {
             return $items;
         }
-        return response(array('success' => true, 'data' => $items, 'message' => 'cart get items success'), 200, []);
+        return response(array('success' => true, 'data' => collect($items), 'message' => 'cart get items success'), 200, []);
     }
 
     //adding item to cart
@@ -136,22 +136,18 @@ class CartController extends BaseController
     {
         try {
             $product = Product::query()->withoutGlobalScopes()->find($request->item_id);
-            $quantity = \Cart::session($this->userId)->getTotalQuantity();
-            $validationQty = $quantity + $request->qty;
-            // dd($product, $quantity);
-            if ($quantity > $product->quantity && $request->qty > 0) {
+            $quantity = $request->qty;
+            if ($quantity >= $product->quantity && $quantity > 0) {
                 return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of stock.', 'in_stock' => false), 400, []);
-            } elseif ($product->quantity != 0 && $request->qty < 0) {
+            } elseif ($product->quantity != 0 && $quantity < 0) {
                 // $quantity = $product->quantity - $quantity;
                 // $product->update(['quantity' => $quantity]);
 
-            } elseif ($product->quantity == 0 && $request->qty < 0) {
+            } elseif ($product->quantity == 0 && $quantity < 0) {
                 // $quantity = abs($quantity);
                 // $product->update(['quantity' => $quantity]);
-            } elseif (($product->quantity - $request->qty) === 0) {
+            } elseif (($product->quantity - $quantity) === 0) {
                 // $product->update(['quantity' => 0]);
-            } elseif ($validationQty > $product->quantity) {
-                return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of stock.', 'in_stock' => false), 400, []);
             }
             $item = \Cart::session($this->userId)->update($request->item_id, [
                 'quantity' => $quantity, // so if the current product has a quantity of 4, another 2 will be added so this will result to 6
