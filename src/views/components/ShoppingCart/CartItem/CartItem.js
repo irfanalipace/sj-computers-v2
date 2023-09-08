@@ -135,6 +135,9 @@ export const CartItem = memo(({ cartData }) => {
                                         onChange={handleQuantity}
                                         minQuantity={1}
                                         value={cartData?.quantity}
+                                        maxQuantity={
+                                            cartData?.product?.quantity
+                                        }
                                     />
 
                                     <button
