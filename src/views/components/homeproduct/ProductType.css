@@ -77,7 +77,7 @@
     height: 43%;
 }
 
-.advertisement-heading h4 {
+.advertisement-heading h2 {
     text-align: center;
     margin: 20px 0 30px 0;
     font-weight: 500;
@@ -123,7 +123,7 @@
 
 @media screen and (max-width: 425px) {
     .product-type-section h2,
-    .advertisement-heading h4,
+    .advertisement-heading h2,
     .advertisement-heading button {
         font-size: 12px;
     }
@@ -170,11 +170,11 @@
     }
 
     .product-type-section h2,
-    .advertisement-heading h4,
+    .advertisement-heading h2,
     .advertisement-heading button {
         font-size: 16px;
     }
-
+    
     .product-type-container {
         margin: 0 30px;
     }
