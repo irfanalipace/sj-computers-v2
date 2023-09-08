@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getShippingDetails } from "@store/orders/ordersThunk";
@@ -27,6 +27,7 @@ const AppWrapper = ({ children }) => {
     const cartItems = useSelector((state) => state.cart.cart);
     const cartDetails = getCartDetails();
     const state = useSelector((state) => state.states.currentState);
+    const [isMounted, setIsMounted] = useState(false);
     let timer = null;
     const timeToTimeout = 15 * 60000; // 15 minutes
     useEffect(() => {
@@ -51,39 +52,40 @@ const AppWrapper = ({ children }) => {
     }, [isAuthenticated]);
 
     useEffect(() => {
-        setTimeout(() => {
-            dispatch(getEstimatedDelivery(state?.id));
-        }, 3000); // giving timeout to increase initial page load speed
+        if (isMounted)
+            setTimeout(() => {
+                dispatch(getEstimatedDelivery(state?.id));
+            }, 3000); // giving timeout to increase initial page load speed
     }, [state]);
 
-    useEffect(() => {
-        if (isAuthenticated && cartItems?.length > 0) {
-            if (!document._clickListenerAdded) {
-                // attach click listener only if its not previously attached
-                document.addEventListener("click", clearCartAfterTimeout);
-                document._clickListenerAdded = true;
-            }
-            if (!timer) clearCartAfterTimeout(); // start timer whenever user adds items in cart only if timer is not created previously
-        }
+    // useEffect(() => {
+    //     if (isAuthenticated && cartItems?.length > 0) {
+    //         if (!document._clickListenerAdded) {
+    //             // attach click listener only if its not previously attached
+    //             document.addEventListener("click", clearCartAfterTimeout);
+    //             document._clickListenerAdded = true;
+    //         }
+    //         if (!timer) clearCartAfterTimeout(); // start timer whenever user adds items in cart only if timer is not created previously
+    //     }
 
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [cartItems]);
+    //     return () => {
+    //         clearTimeout(timer);
+    //     };
+    // }, [cartItems]);
 
-    const clearCartAfterTimeout = () => {
-        if (timer) {
-            clearTimeout(timer);
-            timer = null;
-        }
-        timer = setTimeout(async () => {
-            try {
-                await clearCartApi(); // clear the cart if user remains idel for more than timeout time.
-                clearCartLocally(); // clear cart from local storage
-                dispatch(CLEAR_CART()); // clear cart from redux
-            } catch (error) {}
-        }, timeToTimeout);
-    };
+    // const clearCartAfterTimeout = () => {
+    //     if (timer) {
+    //         clearTimeout(timer);
+    //         timer = null;
+    //     }
+    //     timer = setTimeout(async () => {
+    //         try {
+    //             await clearCartApi(); // clear the cart if user remains idel for more than timeout time.
+    //             clearCartLocally(); // clear cart from local storage
+    //             dispatch(CLEAR_CART()); // clear cart from redux
+    //         } catch (error) {}
+    //     }, timeToTimeout);
+    // };
 
     useEffect(() => {
         timer = setTimeout(() => {
@@ -93,6 +95,7 @@ const AppWrapper = ({ children }) => {
         if (!isAuthenticated) {
             dispatch(syncGuestUserCart(cartDetails));
         }
+        setIsMounted(true);
     }, []);
 
     return <div>{children}</div>;
