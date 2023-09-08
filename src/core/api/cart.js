@@ -109,3 +109,20 @@ export function getDetailsApi() {
             });
     });
 }
+
+export function clearCartApi() {
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/clear-cart`)
+            .then((response) => {
+                console.print(
+                    "file: cart.js | clearCartApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.print("Console Log: : error cart", e);
+                reject(e);
+            });
+    });
+}
