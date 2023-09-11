@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { objectToArray } from "@utils/cartHelpers";
 
 const initialState = {
     cart: [],
@@ -41,9 +40,10 @@ const cartSlice = createSlice({
         },
 
         ADD_LIST_TO_CART: (state, action) => {
-            let items = { ...action.payload.cartItems };
+            let items = action.payload.cartItems;
+            console.log("items: ", items);
             let details = { ...action.payload.cartDetails };
-            items = objectToArray(items);
+            // items = objectToArray(items);
             state.cart = [...state.cart, ...items];
             if (details) {
                 state.details = { ...details };

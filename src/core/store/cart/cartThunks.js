@@ -147,10 +147,9 @@ export const syncCartItems = () => {
     return async (dispatch) => {
         const fetchItems = async (cartItems) => {
             let response = await fetchCartApi();
-            let items = { ...response.data };
-            delete items.details;
-            cartItems = mapResponse(items);
-            const cartDetails = { ...response.data.details };
+            let items = response?.data;
+            cartItems = mapResponse(items); // maps items according to redux format
+            const cartDetails = { ...response?.details };
             dispatch({
                 //adds existing cart items of local storage in the redux store
                 type: ADD_LIST_TO_CART,
@@ -220,11 +219,10 @@ export const syncCartItems = () => {
             if (cartItems.length > 0) {
                 try {
                     let response = await addListToCartApi({ cartItems }); // posting local storage cart items in database
-                    let items = { ...response.data.original.data };
-                    delete items.details;
-                    items = objectToArray(items);
+                    let items = response?.data;
+                    // items = objectToArray(items);
                     const cartDetails = {
-                        ...response.data.original.data.details,
+                        ...response?.details,
                     };
                     cartItems = items?.map((item) => {
                         let cartItem = {

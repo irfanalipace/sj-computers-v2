@@ -140,9 +140,8 @@ export const objectToArray = (obj) => {
     return items;
 };
 
-export const mapResponse = (response) => {
-    let array = objectToArray(response);
-    let cartItems = array?.map((item) => {
+export const mapResponse = (items) => {
+    let cartItems = items?.map((item) => {
         let cartItem = {
             ...item,
             price: item?.price, // item total price which need to be paid in case of checkout
