@@ -239,12 +239,16 @@ class CartController extends BaseController
             foreach ($request->cartItems as $value) {
                 $validationQty = $quantity + $value['qty'];
                 $product = Product::find($value['product_id']);
+
                 if ($quantity > $product->quantity) {
+                    
                     return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of range.'), 400, []);
-                } elseif ($validationQty < $product->quantit) {
+                } elseif ($validationQty < $product->quantity) {
+                   
                     // Check if quantity is less than product quantity
                     Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $value['qty'], array(), array(), $product);
                 } else {
+                   
                     return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of range.'), 400, []);
                 }
             }
