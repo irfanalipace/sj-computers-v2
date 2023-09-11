@@ -123,12 +123,12 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                     state: { order },
                 });
             } else {
-                navigate("/checkout?error=" + response?.message);
+                navigate("/checkout?error=" + response?.message); // sets error in search params and checkout component reads this error and opens the shipping form and hides this modal
             }
         } catch (error) {
             // updateCart();
             console.print("error in square api: ", error);
-            navigate("/checkout?error=Something Went Wrong");
+            navigate("/checkout?error=Something Went Wrong"); // sets error in search params and checkout component reads this error and opens the shipping form and hides this modal
         }
         // }
         hideModal();

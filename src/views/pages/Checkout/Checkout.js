@@ -20,9 +20,14 @@ import "./Checkout.css";
 import Discount from "@components/Checkout/Discount/Discount";
 
 export default function Checkout() {
-    const [accordionOne, setAccordionOne] = useState(false);
-    const [accordionTwo, setAccordionTwo] = useState(false);
-    const [accordionThree, setAccordionThree] = useState(false);
+
+    const initAccordionValues = {
+        1: { open: false },
+        2: { open: false },
+        3: { open: false },
+    };
+
+    const [accordion, setAccordion] = useState(initAccordionValues);
     const [paymentMethod, setPaymentMethod] = useState("");
     const [currentAccordionId, setCurrentAccordionId] = useState();
     const checkoutDetails = useSelector((state) => state.cart.details);
@@ -31,44 +36,36 @@ export default function Checkout() {
         (state) => state.orders.shippingDetails
     );
 
-    console.log("shippingAddress", shippingAddress);
-
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     const loading = useSelector((state) => state.cart.isLoading);
     const [searchParams, setSearchParams] = useSearchParams();
     const paymentError = useRef(null);
 
-    const ACCORDION_VARIABLES = {
-        1: accordionOne,
-        2: accordionTwo,
-        3: accordionThree,
-    };
-    const ACCORDION_SETTERS = {
-        1: setAccordionOne,
-        2: setAccordionTwo,
-        3: setAccordionThree,
-    };
-
     const toggleAccordion = (id) => {
-        for (const [key, value] of Object.entries(ACCORDION_SETTERS)) {
-            key != id && value(false);
-        }
-        ACCORDION_SETTERS[id](!ACCORDION_VARIABLES[id]);
+        openAccordion(id, !accordion[id].open);
         setCurrentAccordionId(id);
     };
 
+    const openAccordion = (id, value) => {
+        setAccordion({
+            ...initAccordionValues, // closes all the open accordions
+            [id]: { open: value }, // toggles that specific accordion
+        });
+    };
+
     const handleClick = (e, next = false, id) => {
-        next ? toggleAccordion(id + 1) : toggleAccordion(id);
+        next ? toggleAccordion(id + 1) : toggleAccordion(id); // adds +1 because accordoin keys start from 1
     };
 
     useEffect(() => {
+        // displays error on top whenever payment fails and open shipping details form (First Accordion)
         const error = searchParams.get("error");
         if (error) {
             paymentError.current = error;
             toggleAccordion(3);
             searchParams.delete("error");
-            setSearchParams(searchParams);
+            setSearchParams(searchParams); // clear search params after displaying error
         } else {
             toggleAccordion(1);
         }
@@ -123,7 +120,7 @@ export default function Checkout() {
                                             )
                                         }
                                         toggleAccordion={toggleAccordion}
-                                        isOpen={ACCORDION_VARIABLES[1]}
+                                        isOpen={accordion[1].open}
                                     >
                                         <ShippingDetails
                                             shippingAddress={shippingAddress}
@@ -133,7 +130,7 @@ export default function Checkout() {
                                         id={2}
                                         title="Review Items & Shipping"
                                         toggleAccordion={toggleAccordion}
-                                        isOpen={ACCORDION_VARIABLES[2]}
+                                        isOpen={accordion[2].open}
                                     >
                                         <ReviewCheckout
                                             estimatedDelivery={
@@ -157,7 +154,7 @@ export default function Checkout() {
                                             )
                                         }
                                         toggleAccordion={toggleAccordion}
-                                        isOpen={ACCORDION_VARIABLES[3]}
+                                        isOpen={accordion[3].open}
                                     >
                                         <PaymentMethod
                                             setPayment={setPaymentMethod}
