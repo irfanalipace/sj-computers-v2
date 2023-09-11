@@ -43,10 +43,13 @@ class CartController extends BaseController
         $items = [];
 
         \Cart::session($this->userId)->getContent()->each(function ($item) use (&$items) {
+            
+            ($item['associatedModel'] == null) ? $this->clearNonAssociateItem($item['id']) : true;
             $price = (int)$item->quantity * (float)$item->price;
             $item['price'] = number_format((float)$price, 2, '.', '');
             $items[] = $item;
         });
+
         // Convert the indexed array to a // Convert the indexed array to an associative array
         $items = array_values($items);
         $details = $this->cartDetails();
@@ -56,7 +59,11 @@ class CartController extends BaseController
         }
         return response(array('success' => true, 'data' => $items, 'details' => $details, 'message' => 'cart get items success'), 200, []);
     }
-
+    private function clearNonAssociateItem($id)
+    {
+        $cart = Cart::session($this->userId);
+        return $cart->remove($id);
+    }
     //adding item to cart
     public function addCart(AddToCartRequest $request)
     {
