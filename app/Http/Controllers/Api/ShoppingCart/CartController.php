@@ -49,11 +49,12 @@ class CartController extends BaseController
         });
         // dd(collect($items));
         $items['details'] = $this->cartDetails();
-
+        // Convert the indexed array to an associative array
+        $items = array_values($items);
         if ($returnItems) {
             return $items;
         }
-        return response(array('success' => true, 'data' => collect($items), 'message' => 'cart get items success'), 200, []);
+        return response(array('success' => true, 'data' => $items, 'message' => 'cart get items success'), 200, []);
     }
 
     //adding item to cart
