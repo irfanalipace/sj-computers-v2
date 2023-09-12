@@ -106,8 +106,11 @@ function OrderSummary({
                                             {shippingDetails?.shipment_info
                                                 ?.amount
                                                 ? "$" +
-                                                  shippingDetails?.shipment_info
-                                                      ?.amount
+                                                  parseFloat(
+                                                      shippingDetails
+                                                          ?.shipment_info
+                                                          ?.amount
+                                                  ).toFixed(2)
                                                 : "$0"}
                                         </span>
                                     </li>
@@ -178,7 +181,9 @@ function OrderSummary({
                                         <span>
                                             {shippingDetails?.shipment_amount
                                                 ? "$" +
-                                                  shippingDetails?.shipment_amount
+                                                  parseFloat(
+                                                      shippingDetails?.shipment_amount
+                                                  ).toFixed(2)
                                                 : "$0"}
                                         </span>
                                     </li>
