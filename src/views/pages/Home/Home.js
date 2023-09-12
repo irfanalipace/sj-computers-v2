@@ -22,7 +22,7 @@ const Home = () => {
             <BannerCategory />
             <Suspense>
                 <div className="products-grid-container">
-                    <h3>Products</h3>
+                    <h2>Products</h2>
                     <ProductsHomePage />
                 </div>
             </Suspense>

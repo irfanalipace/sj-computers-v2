@@ -81,7 +81,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     // }, [errors]);
 
     useEffect(() => {
-        handleHeight();
+        handleHeight(); // adjust height of accordion dynamically according to shipping address form
     }, []);
 
     return (

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { objectToArray } from "@utils/cartHelpers";
 
 const initialState = {
     cart: [],
@@ -41,9 +40,10 @@ const cartSlice = createSlice({
         },
 
         ADD_LIST_TO_CART: (state, action) => {
-            let items = { ...action.payload.cartItems };
+            let items = action.payload.cartItems;
+            console.log("items: ", items);
             let details = { ...action.payload.cartDetails };
-            items = objectToArray(items);
+            // items = objectToArray(items);
             state.cart = [...state.cart, ...items];
             if (details) {
                 state.details = { ...details };
@@ -86,18 +86,47 @@ const cartSlice = createSlice({
             let details = { ...action.payload.cartDetails };
             let index = state.cart.findIndex((item) => item.id === cartItem.id);
             if (index >= 0) {
-                state.cart[index] = {
-                    ...state.cart[index],
-                    quantity: cartItem.quantity,
-                    price: cartItem.price,
-                    loading: false,
-                };
+                if (cartItem?.in_stock)
+                    state.cart[index] = {
+                        ...state.cart[index],
+                        quantity: cartItem.quantity,
+                        price: cartItem.price,
+                        product: {
+                            ...state.cart[index].product,
+                            in_stock: cartItem.in_stock,
+                        },
+                        loading: false,
+                    };
+                else
+                    state.cart[index] = {
+                        ...state.cart[index],
+                        product: {
+                            ...state.cart[index].product,
+                        },
+                        loading: false,
+                    };
                 if (details) {
                     state.details = { ...details };
                 }
             }
             state.updatingItem = false;
         },
+        SET_OUT_OF_STOCK: (state, action) => {
+            let cartItem = { ...action.payload.cartItem };
+            let index = state.cart.findIndex((item) => item.id === cartItem.id);
+            if (index >= 0) {
+                state.cart[index] = {
+                    ...state.cart[index],
+                    product: {
+                        ...state.cart[index].product,
+                        in_stock: cartItem.in_stock,
+                    },
+                    loading: false,
+                };
+            }
+            state.updatingItem = false;
+        },
+
         UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS: (state, action) => {
             const cartItems = state.cart.map((item) => {
                 return {
@@ -139,5 +168,6 @@ export const {
     UPDATING,
     UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS,
     UPDATED_QUANTITY,
+    SET_OUT_OF_STOCK,
 } = cartSlice.actions;
 export default cartSlice.reducer;

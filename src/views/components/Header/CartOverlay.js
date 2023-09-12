@@ -51,7 +51,6 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
         }
     };
 
-    
     useEffect(() => {
         if (showModal) {
             document.addEventListener("mousedown", handleClickOutside);
@@ -64,25 +63,26 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
         };
     }, [showModal]);
 
-
-
     // useEffect(() => {
     //     if (showModal) {
     //         document.body.classList.add("modal-open");
     //     } else {
     //         document.body.classList.remove("modal-open");
     //     }
-    
+
     //     return () => {
     //         document.body.classList.remove("modal-open");
     //     };
     // }, [showModal]);
 
-    
     return (
         <div>
             {isOpen && (
-                <div className="sidebarOverlay" onClick={toggleSidebar} style={{overflowY:'hidden'}}></div>
+                <div
+                    className="sidebarOverlay"
+                    onClick={toggleSidebar}
+                    style={{ overflowY: "hidden" }}
+                ></div>
             )}
             <div className={`sidebar-cart ${isOpen ? "open" : "closed"}`}>
                 <button onClick={toggleSidebar} className="close-button">
@@ -108,7 +108,14 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                             <div className="d-flex flex-column h-100 justify-content-between mx-0">
                                                 <div className="items-card-data row">
                                                     <div className="col-md-10 item-detail-col">
-                                                        <p>
+                                                        <Link
+                                                            to={
+                                                                "/products/" +
+                                                                item?.product
+                                                                    ?.asin
+                                                            }
+                                                            className="text-decoration-none pb-2 d-block"
+                                                        >
                                                             <strong className="item-details">
                                                                 {
                                                                     item
@@ -116,7 +123,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                                         ?.name
                                                                 }
                                                             </strong>
-                                                        </p>
+                                                        </Link>
                                                         <ul className="item-list">
                                                             <li>
                                                                 <span className="item-stock">
@@ -343,7 +350,6 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                               
                                                 )}
                                             </div>
                                         )}

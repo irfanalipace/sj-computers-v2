@@ -6,7 +6,7 @@ export const QuantityInput = ({
     onChange,
     value,
     minQuantity = 1,
-    maxQuantity = 100,
+    maxQuantity = 1000,
 }) => {
     const [quantity, setQuantity] = useState(parseInt(value) || minQuantity);
     const [hasRendered, setHasRendered] = useState(false);

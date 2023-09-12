@@ -28,14 +28,14 @@ export default function ShippingDetails({
 
     useEffect(() => {
         dispatch(fetchStates());
-        handleHeight();
+        handleHeight(); // sets height of accordion dynamically
         return () => {
             hideForm();
         };
     }, []);
 
     useEffect(() => {
-        handleHeight();
+        handleHeight(); // adjust height of accordion dynamically according to shippingAddress
     }, [shippingAddress]);
 
     const ShippingFormWrapper = () => {

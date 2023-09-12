@@ -93,10 +93,10 @@ const ProductType = () => {
                             </div>
                         ) : (
                             <div className="advertisement-heading">
-                                <h4 className="h2-cart">
+                                <h2 className="h2-cart">
                                     Sign up to get latest <br></br>update on
                                     sale
-                                </h4>
+                                </h2>
                                 <Link to="/login">
                                     <button
                                         type="button"

@@ -74,7 +74,7 @@ const ProductsHomePage = () => {
                             smallBtn={true}
                         />
                     ) : (
-                        <h3 className="pb-4">No Products Found</h3>
+                        <h2 className="pb-4">No Products Found</h2>
                     )}
                 </>
             )}

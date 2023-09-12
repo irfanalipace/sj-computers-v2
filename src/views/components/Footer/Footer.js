@@ -29,9 +29,9 @@ const Footer = () => {
                         className="footer-copyright text-center py-3 back-to-top-hover-effct"
                         style={{ backgroundColor: "#002549" }}
                     >
-                        <h4 className="backtotop-button-footer-click-onit">
+                        <p className="backtotop-button-footer-click-onit">
                             <BackToTopButton />
-                        </h4>
+                        </p>
                     </div>
                     <footer className="page-footer font-small blue pt-4 footer-section">
                         <div className="container text-center text-md-center footer-data">

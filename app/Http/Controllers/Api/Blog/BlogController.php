@@ -8,8 +8,10 @@ use App\Http\Requests\Blog\GetBlogRequest;
 use App\Http\Requests\Category\CategoryProductRequest;
 use App\Models\Blog;
 use App\Models\Brand;
+use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends BaseController
 {
@@ -53,11 +55,9 @@ class BlogController extends BaseController
     {
         try {
             $perPage = $request->per_page ?? 12;
-            $blogs = Blog::where('category_id', $request->category_id)->paginate($perPage);
 
-            if ($blogs->isEmpty()) {
-                return $this->sendError([], 'Blogs not found');
-            }
+            $category = Category::where('id',$request->category_id)->with('blogs')->first();
+            $blogs= $category->blogs()->paginate($perPage);
 
             $blogs->map(function ($record) {
 
@@ -66,7 +66,6 @@ class BlogController extends BaseController
                 $record['secondary_image'] = is_null($record['secondary_image']) ? $record['secondary_image'] : config('app.url') . '/storage/' . $record['secondary_image'];
                 return $record;
             });
-
 
             return $this->sendResponse($blogs, 'Blogs are displayed');
         } catch (\Exception $e) {

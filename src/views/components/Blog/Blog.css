@@ -65,6 +65,9 @@ li.policy-listitem {
     margin: 0 0 20px;
     cursor: pointer;
     float: left;
+  
+      font-weight: bold;
+    
     width: 100%;
     position: relative;
     transition: all 400ms ease-in-out 0s;
@@ -76,6 +79,9 @@ li.policy-listitem {
 
 .widget_categories a{
     color: #00a0d9;
+}
+.widget_categories a:hover{
+    color: black;
 }
 
 

@@ -22,6 +22,8 @@ const Accordion = ({
     };
 
     const handleHeight = () => {
+        // this function set the height of accordion according to the inner body
+        // if passed down to component as callback then components can call this function to change set accordion height dynamically if inner height changes
         contentRef.current.style.maxHeight = isOpen
             ? contentRef?.current?.scrollHeight + "px"
             : "0px";
