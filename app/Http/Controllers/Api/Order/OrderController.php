@@ -98,7 +98,7 @@ class OrderController extends BaseController
 
     public function searchOrder(Request $request)
     {
-        $data = Order::where('invoice_id', $request->invoice_id)->get();
+        $data = Order::where('invoice_id', $request->invoice_id)->OrWhere('id', $request->order_id)->get();
         return $this->sendResponse($data);
     }
 }
