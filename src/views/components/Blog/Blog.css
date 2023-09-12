@@ -25,9 +25,6 @@
     padding: 0;
     justify-content: center;
 }
-.policy-header-topbar-scroll-blogs{
-    background: #002549;
-}
 
 
 
@@ -1160,5 +1157,8 @@ div.sticky {
     }
     .card-dev-container-mobile-space-section-age-cart {
         margin-left: 0px;
+    }.policy-header-topbar-scroll-blogs{
+        background: #002549;
     }
+    
 }
