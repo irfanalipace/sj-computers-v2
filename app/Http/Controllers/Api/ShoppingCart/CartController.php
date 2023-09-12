@@ -78,7 +78,7 @@ class CartController extends BaseController
 
             $items = $this->getItems(true);
 
-            return response(array('success' => true, 'data' => $items, 'message' => 'Item added.'), 200, []);
+            return response(array('success' => true, 'data' => $items,'details' => $this->cartDetails(), 'message' => 'Item added.'), 200, []);
         } catch (Exception $e) {
 
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
@@ -106,10 +106,10 @@ class CartController extends BaseController
             $cart = $cart->remove($request->id);
 
             $data = $this->getItems(true);
-            return response(array('success' => true, 'data' => $data, 'message' => "cart item {$request->id} removed."), 200, []);
+            return response(array('success' => true, 'data' => $data,'details'=>$this->cartDetails(), 'message' => "cart item {$request->id} removed."), 200, []);
         } catch (Exception $e) {
 
-            return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
+            return response(array('error' => true, 'data' => $e,  'message' => "Something went wrong."), 400, []);
         }
     }
 
@@ -163,7 +163,7 @@ class CartController extends BaseController
             ]);
             $data = $this->getItems(true);
 
-            return response(array('success' => true, 'data' => $data, 'message' => 'Quantity added in cart.', 'in_stock' => true), 200, []);
+            return response(array('success' => true, 'data' => $data,'details'=>$this->cartDetails(), 'message' => 'Quantity added in cart.', 'in_stock' => true), 200, []);
         } catch (Exception $e) {
 
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);

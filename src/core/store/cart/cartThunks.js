@@ -55,7 +55,7 @@ export const addToCart = (data, cb) => {
                 qty: data.cartItem.quantity,
             };
             let response = await addToCartApi(param);
-            data.cartDetails = { ...response.data.details };
+            data.cartDetails = { ...response.details };
             data.cartItem.notLocal = true; //this property identifies that this cart item is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
             dispatch({
                 type: ADD_TO_CART,
@@ -81,7 +81,7 @@ export const deleteItem = (data) => {
         try {
             dispatch({ type: UPDATING, payload: data });
             let response = await deleteItemApi(data.cartItem);
-            data.cartDetails = { ...response.data.details };
+            data.cartDetails = { ...response.details };
             deleteCartItem(data);
             dispatch({
                 type: DELETE_ITEM,
@@ -102,7 +102,7 @@ export const updateQuantity = (data) => {
         try {
             dispatch({ type: UPDATING, payload: data });
             let response = await updateQuantityApi(data.cartItem);
-            data.cartDetails = { ...response.data.details };
+            data.cartDetails = { ...response.details };
             let in_stock = response.in_stock;
             updateCartItem(data);
             dispatch({
