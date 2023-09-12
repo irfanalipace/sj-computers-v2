@@ -37,6 +37,7 @@ export const CartItem = memo(({ cartData }) => {
     };
 
     const handleQuantity = (quantity) => {
+        quantity = parseInt(quantity);
         let subTotal = 0;
         let difference = quantity - cartData?.quantity;
         let price = cartData?.product?.price * difference;
@@ -56,6 +57,11 @@ export const CartItem = memo(({ cartData }) => {
             difference,
             price: itemPrice,
         };
+        if (!isAuthenticated) {
+            let productQuantity = cartData?.product?.quantity + difference;
+            let in_stock = productQuantity < 1 ? false : true;
+            cartItem.in_stock = in_stock;
+        }
         isAuthenticated
             ? dispatch(updateQuantity({ cartItem }))
             : dispatch(updateLocalQuantity({ cartItem, cartDetails }));
