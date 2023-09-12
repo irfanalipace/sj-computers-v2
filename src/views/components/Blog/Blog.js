@@ -265,7 +265,7 @@ const Blog = () => {
                         <div className="">
                             <div className="row">
                                 <div>
-                                    <header className="topBar px-3 policy-header-topbar">
+                                    <header className="topBar px-3 policy-header-topbar policy-header-topbar-scroll-blogs">
                                         <div className="topBar-inner-policy">
                                             <div className="menuBar-policy">
                                                 <ul className="text-decoration-none policy-menu-item-list">

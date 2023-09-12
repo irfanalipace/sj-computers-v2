@@ -256,7 +256,7 @@ class CartController extends BaseController
                     return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of range.'), 400, []);
                 }
             }
-            
+
             $items = $this->getItems(true);
             $details = $this->cartDetails();
             return response(array('success' => true, 'data' => $items, 'details' => $details,  'message' => 'Item added.', 'in_stock' => true), 200, []);
@@ -326,9 +326,8 @@ class CartController extends BaseController
         ));
 
         Cart::session($this->userId)->condition($condition);
-
-        $items = $this->getItems(true);
-        return response(array('success' => true, 'data' => $items, 'message' => 'Item added.'), 200, []);
+        $details = $this->cartDetails();
+        return response(array('success' => true,'data' => $details, 'message' => 'Item added.'), 200, []);
     }
 
     // Apply shipping for guest
