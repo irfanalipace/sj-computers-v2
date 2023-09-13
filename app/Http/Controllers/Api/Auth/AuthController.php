@@ -67,7 +67,7 @@ class AuthController extends BaseController
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
-            return $this->sendError(['Email' => 'Something went wrong.' . $e]);
+            return $this->sendError('Something went wrong, error in processing email', 406, 406);
         }
     }
 
