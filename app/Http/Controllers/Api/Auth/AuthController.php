@@ -67,7 +67,7 @@ class AuthController extends BaseController
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
-            return $this->sendError(['Email' => 'Something went wrong.' . $e]);
+            return $this->sendError('Something went wrong, error in processing email', 406, 406);
         }
     }
 
@@ -106,9 +106,12 @@ class AuthController extends BaseController
 
     public function forgotPassword(ForgetPasswordRequest $request)
     {
-        Password::sendResetLink($request->all());
-
-        return $this->sendResponse([], 'Reset password link sent on your email id.');
+        try {
+            Password::sendResetLink($request->all());
+            return $this->sendResponse([], 'Reset password link sent on your email id.');
+        } catch (Exception $e) {
+            return $this->sendError('Something went wrong, error in processing email', 406, 406);
+        }
     }
 
     public function resetPassword(ResetPasswordRequest $request)
