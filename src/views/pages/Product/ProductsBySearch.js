@@ -23,30 +23,28 @@ const ProductsList = () => {
     } = useSelector((state) => state.products);
     const dispatch = useDispatch();
     console.log("products: ", products);
+
+    const dispatchSearch = () => {
+        dispatch(
+            searchProducts({
+                name: searchString,
+                category_id: selectedCategory,
+                page: currentPage,
+                per_page: 12,
+            })
+        );
+    };
     const handleSearch = () => {
         if (searchString) {
-            dispatch(
-                searchProducts({
-                    name: searchString,
-                    category_id: selectedCategory,
-                    page: currentPage,
-                    per_page: 12,
-                })
-            );
+            dispatchSearch();
         } else dispatch(fetchProducts(currentPage, true));
     };
 
     useEffect(() => {
-        if (searchString)
-            dispatch(
-                searchProducts({
-                    name: searchString,
-                    category_id: selectedCategory,
-                    page: currentPage,
-                    per_page: 12,
-                })
-            );
-    }, [searchString]);
+        if (searchString) {
+            dispatchSearch();
+        }
+    }, [searchString, selectedCategory]);
 
     useEffect(() => {
         return () => dispatch(SET_SEARCH_STRING(""));
