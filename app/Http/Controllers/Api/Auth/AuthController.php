@@ -110,7 +110,7 @@ class AuthController extends BaseController
             Password::sendResetLink($request->all());
             return $this->sendResponse([], 'Reset password link sent on your email id.');
         } catch (Exception $e) {
-            return $this->sendError('Something went wrong.' . $e, 406, 406);
+            return $this->sendError('Something went wrong, error in processing email', 406, 406);
         }
     }
 
