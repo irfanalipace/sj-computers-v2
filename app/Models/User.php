@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -17,7 +18,7 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     const USER_ROLE_ID = 2;
 
     const AUTH_TOKEN = 'SJAuthToken';
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -35,7 +36,7 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     ];
 
     protected $with = ['shippingAddress','userState'];
-    
+
     public function otps()
     {
         return $this->hasOne(Otp::class);
@@ -90,6 +91,11 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     public function shippingAddress()
     {
         return $this->hasOne(OrderShippingAddress::class);
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
     }
 
 }
