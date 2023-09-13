@@ -106,9 +106,12 @@ class AuthController extends BaseController
 
     public function forgotPassword(ForgetPasswordRequest $request)
     {
-        Password::sendResetLink($request->all());
-
-        return $this->sendResponse([], 'Reset password link sent on your email id.');
+        try {
+            Password::sendResetLink($request->all());
+            return $this->sendResponse([], 'Reset password link sent on your email id.');
+        } catch (Exception $e) {
+            return $this->sendError('Something went wrong.' . $e, 406, 406);
+        }
     }
 
     public function resetPassword(ResetPasswordRequest $request)
