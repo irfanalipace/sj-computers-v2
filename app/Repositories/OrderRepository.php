@@ -23,11 +23,9 @@ class OrderRepository
             $data = DB::transaction(function () use ($data, $response, $userId, $user, $payment_type, $cartData, $cartContent, $shippingAddreess, $user_type, $cartItems) {
                 $invoice = $this->storeInvoice($payment_type, $data, $response, $userId, $user_type, $user);
 
-                // Update item in product table
-                $this->updateProduct($cartContent);
                 //saving order after invoice created
                 $order = [];
-
+                // dd($cartContent, $cartData, $cartItems);
                 $order['total_amount'] = $cartData['total_amount'];
                 $order['sub_total'] = $cartData['sub_total'];
                 $order[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $user->id;          //user id or guest id
@@ -48,6 +46,9 @@ class OrderRepository
                             'qty' => $product->quantity,
                             'price' => $product->price
                         ];
+                        // Update item in product table
+                        $this->updateProduct($item['product_id'], $item['qty']);
+
                         // $productInfo = $this->getAmazonInventory($item['product_id']);
                         // if ($productInfo['status']) {
                         //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
@@ -70,6 +71,9 @@ class OrderRepository
                         // if ($productInfo['status']) {
                         //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
                         // }
+
+                        // Update item in product table
+                        $this->updateProduct($item->id, $item->quantity);
                         OrderItem::create($data);
                     });
                 }
@@ -147,20 +151,11 @@ class OrderRepository
     }
 
     //update product inventory
-    public function updateProduct($cartContent)
+    public function updateProduct($productID, $quantity)
     {
-        $cartContent->each(function ($item) {         
-            $prod = Product::whereId($item['id'])->first();
-            $this->updateProductQuantity($prod, $item['quantity']);
-        });
-        return true;
-    }
-    // update product table (update quantity field)
-    public function updateProductQuantity($product, $quantity)
-    {
+        $product = Product::whereId($productID)->first();
         $totalQty = $product->quantity - $quantity;
         $updateProduct = $product->update(['quantity' => $totalQty]);
-
         return $updateProduct;
     }
 }
