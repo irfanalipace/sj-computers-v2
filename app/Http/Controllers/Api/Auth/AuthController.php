@@ -74,7 +74,7 @@ class AuthController extends BaseController
     public function login(LoginRequest $request): JsonResponse
     {
         try {
-            DB::transaction(function () use ($request) {
+
                 if (!Auth::attempt($request->only(['email', 'password']))) {
                     return $this->sendError(['credentials' => ['Invalid credentials.']], 401);
                 }
@@ -87,12 +87,8 @@ class AuthController extends BaseController
                 $token = $user->createToken(User::AUTH_TOKEN)->accessToken;
 
                 return $this->sendResponse(['access_token' => $token, 'user' => $user->name, 'email' => $user->email, 'profile_pic' => $user->profile_pic, 'state' => $user->userState, 'id' => $user->id], 'OTP sent to your email address.');
-            });
 
-            return $this->sendResponse([], 'User register successfully, Kindly verify the email for further process.');
-            DB::commit();
         } catch (Exception $e) {
-            DB::rollBack();
             return $this->sendError('Something went wrong, error in processing email', 406, 406);
         }
 
