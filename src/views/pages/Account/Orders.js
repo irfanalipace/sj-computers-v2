@@ -81,6 +81,7 @@ const OrderPage = () => {
     const handleTabChange = (event, newValue) => {
         setOrderSearchData([]);
         setActiveTab(newValue);
+        setOrderSearch("");
     };
     const handleSearch = async () => {
         setActiveTab(2);

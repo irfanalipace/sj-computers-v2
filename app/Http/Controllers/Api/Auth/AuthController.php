@@ -73,18 +73,28 @@ class AuthController extends BaseController
 
     public function login(LoginRequest $request): JsonResponse
     {
-        if (!Auth::attempt($request->only(['email', 'password']))) {
-            return $this->sendError(['credentials' => ['Invalid credentials.']], 401);
+        try {
+
+                if (!Auth::attempt($request->only(['email', 'password']))) {
+                    return $this->sendError(['credentials' => ['Invalid credentials.']], 401);
+                }
+
+                $user = Auth::user();
+                $this->sendOtp(StatusEnum::LOGIN, $user);
+                // Cache::put('login_otp_'.$user->id, $otp, now()->addMinutes(5));
+                // SendotpMail::dispatch($user->email, $otp);
+
+                $token = $user->createToken(User::AUTH_TOKEN)->accessToken;
+
+                return $this->sendResponse(['access_token' => $token, 'user' => $user->name, 'email' => $user->email, 'profile_pic' => $user->profile_pic, 'state' => $user->userState, 'id' => $user->id], 'OTP sent to your email address.');
+
+        } catch (Exception $e) {
+            return $this->sendError('Something went wrong, error in processing email', 406, 406);
         }
 
-        $user = Auth::user();
-        $this->sendOtp(StatusEnum::LOGIN, $user);
-        // Cache::put('login_otp_'.$user->id, $otp, now()->addMinutes(5));
-        // SendotpMail::dispatch($user->email, $otp);
 
-        $token = $user->createToken(User::AUTH_TOKEN)->accessToken;
 
-        return $this->sendResponse(['access_token' => $token, 'user' => $user->name, 'email' => $user->email, 'profile_pic' => $user->profile_pic, 'state' => $user->userState, 'id' => $user->id], 'OTP sent to your email address.');
+
     }
 
     public function setCart($userId)
