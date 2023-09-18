@@ -28,6 +28,7 @@
     </table>
     <br>
     <br>
+
     <table border="0" cellpadding="20" cellspacing="0" width="100%"
         style="color:#000000;line-height:150%;text-align:left;font:200 16px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif">
         <tbody>
@@ -56,6 +57,7 @@
         </thead>
         <tbody>
             @foreach ($data['order']['orderItem'] as $item)
+                
                 <tr width="100%">
                     <td width="30%"
                         style="text-align:left;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0;word-wrap:break-word">
@@ -63,7 +65,7 @@
                     </td>
                     <td width="15%"
                         style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
-                        {{ $item['product']['asin'] ?? '-' }}
+                        {{ isset($item['product']['asin']) ? $item['product']['asin'] : '-' }}
                     </td>
                     <td width="15%"
                         style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
@@ -72,13 +74,13 @@
                     <td width="20%"
                         style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
                         <span>
-                            $ {{ number_format((float) $item['product']['price'], 2, '.', '') }}
+                            $ {{ number_format((float) $item['price'], 2, '.', '') }}
                         </span>
                     </td>
                 </tr>
             @endforeach
         </tbody>
-
+        
         <tfoot>
             <tr>
                 <th scope="row" colspan="3"
@@ -134,6 +136,7 @@
             </tr>
         </tfoot>
     </table>
+
     <br>
     <br>
 @endsection
