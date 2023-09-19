@@ -46,6 +46,7 @@ import { clearCartLocally } from "@utils/cartHelpers";
 import { CLEAR_CART } from "@store/cart/cartSlice";
 
 import ApiService from "@services/apiService";
+import { SET_SHIPPING_DETAILS } from "../orders/ordersSlice";
 
 export const login = (credentials) => {
     return async (dispatch) => {
@@ -95,6 +96,7 @@ export const logout = () => {
             destroyToken();
             dispatch({ type: LOGOUT });
             dispatch({ type: CLEAR_CART });
+            dispatch({ type: SET_SHIPPING_DETAILS, payload: {} });
             clearCartLocally();
             toast.success("Logged out");
             ApiService.setHeader("Authorization", "");

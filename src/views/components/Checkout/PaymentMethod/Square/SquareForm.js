@@ -86,6 +86,7 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
             /// add to cart item list api
             let total_quantity = 0;
             const cartData = cartItems?.map((item) => {
+                // map item according to the request payload format
                 total_quantity += item?.quantity;
                 return {
                     product_id: item.id,

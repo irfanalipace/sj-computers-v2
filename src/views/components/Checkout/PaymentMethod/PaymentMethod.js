@@ -10,14 +10,19 @@ import mastercard from "@images/common/mastercard.png";
 import PaymentButton from "./PaymentButton";
 
 import "./PaymentMethod.css";
+import { useNavigate } from "react-router-dom";
+import { validateCartItems } from "../../../../core/store/cart/cartThunks";
 
-export default function PaymentMethod({ setPayment, handleHeight }) {
+export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
     const [paymentMethod, setPaymentMethod] = useState(null);
     const [openPaymentModal, setPaymentModal] = useState(false);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
+    const [isLoading, setIsLoading] = useState(false);
     const shippingDetails = useSelector(
         (state) => state.orders.shippingDetails
     );
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
@@ -34,6 +39,24 @@ export default function PaymentMethod({ setPayment, handleHeight }) {
     }, []);
 
     const clickHandler = () => {
+        setIsLoading(true);
+        const cartData = cartItems?.map((item) => {
+            // map item according to the request payload format
+            return {
+                product_id: item.id,
+                qty: item.quantity,
+            };
+        });
+        const onSuccess = () => {
+            setIsLoading(false);
+        };
+        const onFailure = () => {
+            navigate("/cart");
+            setIsLoading(false);
+        };
+        dispatch(
+            validateCartItems({ cart_items: cartData }, onSuccess, onFailure)
+        );
         switch (paymentMethod) {
             case PAYMENT_METHODS.PAYPAL:
                 dispatch(
@@ -103,7 +126,7 @@ export default function PaymentMethod({ setPayment, handleHeight }) {
             )}
             <PaymentButton
                 paymentMethod={paymentMethod}
-                isLoading={placingOrder}
+                isLoading={isLoading || placingOrder}
                 disabled={
                     !paymentMethod || !shippingDetails.address || !paymentMethod
                 }

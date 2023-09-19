@@ -9,8 +9,8 @@ export default function ReviewCheckout({
     toggleAccordion,
     estimatedDelivery,
     handleHeight,
+    cartItems,
 }) {
-    const cartItems = useSelector((state) => state.cart.cart);
     // const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {

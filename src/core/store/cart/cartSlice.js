@@ -139,13 +139,39 @@ const cartSlice = createSlice({
         SET_CART_DETAILS: (state, action) => {
             state.details = { ...action.payload };
         },
+        SET_CART_ERRORS: (state, action) => {
+            let tempArray = [...state.cart];
+            action.payload?.errors?.forEach((item) => {
+                if (!item?.success) {
+                    const index = state.cart?.findIndex(
+                        (_item) => _item?.id === item?.product_id
+                    );
+                    if (index > -1) {
+                        if (item?.available_quantity === 0) {
+                            tempArray.splice(index, 1);
+                        } else if (
+                            tempArray[index]?.quantity >
+                            item?.available_quantity
+                        ) {
+                            const cartItem = {
+                                ...state.cart[index],
+                                error: item?.message,
+                                quantity: item?.available_quantity,
+                            };
+                            tempArray[index] = cartItem;
+                        }
+                    }
+                }
+            });
+            state.details = action.payload.cartDetails;
+            state.cart = tempArray;
+        },
         API_ERROR: (state, action) => {
             state.apiError = { ...action.payload };
             state.isLoading = false;
         },
         UPDATED_QUANTITY: (state, action) => {
             state.isLoading = false;
-            console.log("actions.payload: ", action.payload);
             let index = state.cart.findIndex(
                 (item) => item.id === action.payload.id
             );
@@ -169,5 +195,6 @@ export const {
     UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS,
     UPDATED_QUANTITY,
     SET_OUT_OF_STOCK,
+    SET_CART_ERRORS,
 } = cartSlice.actions;
 export default cartSlice.reducer;

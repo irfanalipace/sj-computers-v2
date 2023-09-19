@@ -167,6 +167,9 @@ export const CartItem = memo(({ cartData }) => {
                     </div>
                 </div>
             </div>
+            {cartData?.error && (
+                <p className="fs-6 mt-3 text-danger">{cartData?.error}</p>
+            )}
         </div>
     );
 });

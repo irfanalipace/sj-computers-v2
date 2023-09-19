@@ -10,6 +10,7 @@ import {
     API_ERROR,
     UPDATED_QUANTITY,
     SET_OUT_OF_STOCK,
+    SET_CART_ERRORS,
 } from "@store/cart/cartSlice";
 
 import {
@@ -31,10 +32,6 @@ import {
     updateCartDetails,
     updateCartItem,
     getCartItems,
-    compareLocalCartWithDBCart,
-    deleteNotLocalCartItem,
-    setLocalCart,
-    objectToArray,
     updateItemLocalProperty,
     mapResponse,
 } from "@utils/cartHelpers";
@@ -42,6 +39,7 @@ import {
 import { toast } from "react-toastify";
 import { clearCartLocally } from "../../utils/cartHelpers";
 import { getGuestUserEmail } from "../../services/authService";
+import { validateCartItemsApi } from "../../api/order";
 
 export const addToCart = (data, cb) => {
     return async (dispatch) => {
@@ -361,5 +359,29 @@ export const clearCart = () => {
             type: CLEAR_CART,
             payload: {},
         });
+    };
+};
+
+export const validateCartItems = (data, onSuccess, onFailure) => {
+    return async (dispatch) => {
+        try {
+            let errors = await validateCartItemsApi(data);
+
+            if (errors?.length > 0) {
+                let response = await fetchCartApi();
+                const cartDetails = { ...response?.details };
+                dispatch({
+                    type: SET_CART_ERRORS,
+                    payload: {
+                        errors,
+                        cartDetails,
+                    },
+                });
+                onFailure();
+            } else onSuccess();
+        } catch (error) {
+            console.print("Something went wrong in orders", error);
+        }
+        if (typeof cb === "function") cb();
     };
 };

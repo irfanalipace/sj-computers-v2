@@ -82,3 +82,29 @@ export function getEstimatedDaysApi(data) {
             });
     });
 }
+
+export function validateCartItemsApi(data) {
+    return new Promise((resolve, reject) => {
+        // const errors = [
+        //     {
+        //         status: false,
+        //         message: "Quantity out of range",
+        //         product_id: 15,
+        //         quantity: "",
+        //         available_quantity: 0,
+        //     },
+        // ];
+        ApiService.post("check-product-qty", data)
+            .then((response) => {
+                console.print(
+                    "file: order.js | validateCartItems| response",
+                    response.data
+                );
+                resolve(response.data);
+            })
+            .catch((e) => {
+                console.print("Console Log: : error order list", e);
+                reject(e);
+            });
+    });
+}

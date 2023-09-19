@@ -20,7 +20,6 @@ import "./Checkout.css";
 import Discount from "@components/Checkout/Discount/Discount";
 
 export default function Checkout() {
-
     const initAccordionValues = {
         1: { open: false },
         2: { open: false },
@@ -31,6 +30,7 @@ export default function Checkout() {
     const [paymentMethod, setPaymentMethod] = useState("");
     const [currentAccordionId, setCurrentAccordionId] = useState();
     const checkoutDetails = useSelector((state) => state.cart.details);
+    const cartItems = useSelector((state) => state.cart.cart);
 
     const shippingAddress = useSelector(
         (state) => state.orders.shippingDetails
@@ -139,6 +139,7 @@ export default function Checkout() {
                                                     ?.estimate_day ||
                                                 checkoutDetails?.estimate_days
                                             }
+                                            cartItems={cartItems}
                                         />
                                     </Accordion>
                                     <Accordion
@@ -158,6 +159,7 @@ export default function Checkout() {
                                     >
                                         <PaymentMethod
                                             setPayment={setPaymentMethod}
+                                            cartItems={cartItems}
                                         />
                                     </Accordion>
                                 </div>

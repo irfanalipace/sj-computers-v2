@@ -44,7 +44,7 @@ const MobileSearch = () => {
 
     useEffect(() => {
         setSearch(searchString || "");
-        setSearchParams({ s: searchString });
+        if (searchString) setSearchParams({ s: searchString });
     }, [searchString]);
 
     const handleButtonClick = () => {
