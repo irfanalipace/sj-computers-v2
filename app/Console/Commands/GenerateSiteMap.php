@@ -135,8 +135,8 @@ class GenerateSiteMap extends Command
             '2_in_1_laptops',
             'touch_screen',
             'windows_11',
-//            'windows_10',
-//            'chromebook',
+            'windows_10',
+            'chromebook',
             'xps',
             'precision',
             'latitude',
@@ -145,12 +145,12 @@ class GenerateSiteMap extends Command
             'screen_14_inch',
             'screen_13_inch',
             'core_i3',
-//            'core_i5',
-//            'core_i7',
-//            'desktop',
-//            'tablet',
-//            'monitor',
-//            'not_set',
+            'core_i5',
+            'core_i7',
+            'desktop',
+            'tablet',
+            'monitor',
+            'not_set',
             'business_computers',
             'sff',
             'usff',
@@ -169,29 +169,29 @@ class GenerateSiteMap extends Command
 
             $category = Category::where('slug', $route)->first();
 
-            if(!empty($category)) {
-                $productIds = CategoryProduct::where('category_id',$category->id)->pluck('product_id');
-
-                if(!empty($productIds)){
-                    $productAsins = Product::whereIn('id',$productIds)
-                        ->pluck('asin');
-
-
-                    foreach ($productAsins as $productAsin){
-                        $categoryProductUrl = '/products/'.$productAsin;
-                        $categoryProductSitemap->add($categoryProductUrl);
-                        $xmlCategoryProductContent = $categoryProductSitemap->render();
-                        $publicPath = public_path('sitemap/category/'.$route.'.xml');
-                        File::makeDirectory(dirname($publicPath), 0777, true, true);
-                        file_put_contents($publicPath, $xmlCategoryProductContent);
-
-                        $categoryProductSitemapPath =  public_path('sitemap/category/'.$route.'.xml');
-                        $xmlContent = file_get_contents($categoryProductSitemapPath);
-                        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
-                        file_put_contents($categoryProductSitemapPath, $xmlContent);
-                    }
-                }
-            }
+//            if(!empty($category)) {
+//                $productIds = CategoryProduct::where('category_id',$category->id)->pluck('product_id');
+//
+//                if(!empty($productIds)){
+//                    $productAsins = Product::whereIn('id',$productIds)
+//                        ->pluck('asin');
+//
+//
+//                    foreach ($productAsins as $productAsin){
+//                        $categoryProductUrl = '/products/'.$productAsin;
+//                        $categoryProductSitemap->add($categoryProductUrl);
+//                        $xmlCategoryProductContent = $categoryProductSitemap->render();
+//                        $publicPath = public_path('sitemap/category/'.$route.'.xml');
+//                        File::makeDirectory(dirname($publicPath), 0777, true, true);
+//                        file_put_contents($publicPath, $xmlCategoryProductContent);
+//
+//                        $categoryProductSitemapPath =  public_path('sitemap/category/'.$route.'.xml');
+//                        $xmlContent = file_get_contents($categoryProductSitemapPath);
+//                        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+//                        file_put_contents($categoryProductSitemapPath, $xmlContent);
+//                    }
+//                }
+//            }
 
         }
 
@@ -210,5 +210,6 @@ class GenerateSiteMap extends Command
         $xmlContent = file_get_contents($categorySitemapPath);
         $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($categorySitemapPath, $xmlContent);
+
     }
 }
