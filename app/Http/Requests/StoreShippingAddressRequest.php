@@ -25,7 +25,7 @@ class StoreShippingAddressRequest extends FormRequest
     {
         return [
             'country'=> ['required', 'string'],
-            'full_name'=> ['required', 'string'],
+            'full_name'=> ['required', 'string','max:50'],
             'phone_number'=> ['required', 'string'],
             'address'=> ['required', 'string'],
             'city'=> ['required', 'string'],

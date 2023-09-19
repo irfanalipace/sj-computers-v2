@@ -14,6 +14,6 @@ class OrderItem extends Model
     protected $with = ['product'];
 
     public function product(){
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class)->withoutGlobalScopes();
     }
 }

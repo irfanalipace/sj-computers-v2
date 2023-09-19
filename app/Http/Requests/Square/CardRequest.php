@@ -28,7 +28,7 @@ class CardRequest extends FormRequest
             'shipping_address' => ['required', 'array'],
             'shipping_address.email' => 'required|email',
             'shipping_address.country' => 'required',
-            'shipping_address.full_name' => 'required',
+            'shipping_address.full_name' => 'required|max:50',
             'shipping_address.phone_number' => 'required',
             'shipping_address.address' => 'required',
             'shipping_address.city' => 'required',
@@ -41,7 +41,7 @@ class CardRequest extends FormRequest
             $rules = [
                 'shipping_address.email' => 'required|email',
                 'shipping_address.country' => 'required',
-                'shipping_address.full_name' => 'required',
+                'shipping_address.full_name' => 'required|max:50',
                 'shipping_address.phone_number' => 'required',
                 'shipping_address.address' => 'required',
                 'shipping_address.city' => 'required',

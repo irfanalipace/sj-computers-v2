@@ -10,6 +10,9 @@ const AddCartComponents = ({ product, className, quantity = 1, ...rest }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cart = useSelector((state) => state.cart.cart);
     const details = useSelector((state) => state.cart.details);
+    const productAddingToCard = useSelector(
+        (state) => state.products.isLoading
+    );
     const [show, setShow] = useState(false);
     const [cartItem, setCartItem] = useState(null);
     const handleShow = () => setShow(!show);
@@ -61,7 +64,7 @@ const AddCartComponents = ({ product, className, quantity = 1, ...rest }) => {
             ) : (
                 <Button
                     onClick={cartClickHandler}
-                    isLoading={product?.loading}
+                    isLoading={productAddingToCard}
                     className={className}
                     {...rest}
                 >
