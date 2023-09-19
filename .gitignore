@@ -21,6 +21,8 @@ yarn-error.log
 /.idea
 /.vscode
 
+/public/sitemap/*
+
 #storage/app/*
 storage/logs/*
 #storage/framework/*
