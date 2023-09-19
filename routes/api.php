@@ -104,6 +104,8 @@ Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clearCart'
 
 Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('addQtyCart');
 
+Route::post('check-product-qty',[CartController::class,'checkProduct']);
+
 /*
 *Contact-us
 */
