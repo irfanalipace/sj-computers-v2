@@ -145,25 +145,25 @@ class GenerateSiteMap extends Command
 
             $productIds = CategoryProduct::where('category_id',$category->id)->pluck('product_id');
 
-            $productAsins = Product::whereIn('id',$productIds)
-                ->pluck('asin');
+            if(!empty($productIds)){
+                $productAsins = Product::whereIn('id',$productIds)
+                    ->pluck('asin');
 
 
-            foreach ($productAsins as $productAsin){
-                $categoryProductUrl = '/products/'.$productAsin;
-                $categoryProductSitemap->add($categoryProductUrl);
+                foreach ($productAsins as $productAsin){
+                    $categoryProductUrl = '/products/'.$productAsin;
+                    $categoryProductSitemap->add($categoryProductUrl);
+                    $xmlCategoryProductContent = $categoryProductSitemap->render();
+                    $publicPath = public_path('sitemap/category/'.$route.'.xml');
+                    File::makeDirectory(dirname($publicPath), 0777, true, true);
+                    file_put_contents($publicPath, $xmlCategoryProductContent);
+
+                    $categoryProductSitemapPath =  public_path('sitemap/category/'.$route.'.xml');
+                    $xmlContent = file_get_contents($categoryProductSitemapPath);
+                    $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+                    file_put_contents($categoryProductSitemapPath, $xmlContent);
+                }
             }
-
-            $xmlCategoryProductContent = $categoryProductSitemap->render();
-
-            $publicPath = public_path('sitemap/category/'.$route.'.xml');
-            File::makeDirectory(dirname($publicPath), 0777, true, true);
-            file_put_contents($publicPath, $xmlCategoryProductContent);
-
-            $categoryProductSitemapPath =  public_path('sitemap/category/'.$route.'.xml');
-            $xmlContent = file_get_contents($categoryProductSitemapPath);
-            $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
-            file_put_contents($categoryProductSitemapPath, $xmlContent);
 
         }
 
