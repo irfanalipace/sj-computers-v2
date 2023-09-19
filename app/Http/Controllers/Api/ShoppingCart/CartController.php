@@ -356,12 +356,12 @@ class CartController extends BaseController
         return response(array('success' => true, 'data' => $data, 'message' => 'Shipping Details.'), 200, []);
     }
 
-    // check product quantity
+    // check cart quantity with product quantity
     public function checkProduct(CheckQtyProduct $request)
     {
         try {
             $data = [];
-            foreach ($request['cart_items'] as $key => $value) {
+            foreach ($request['cart_items'] as $value) {
                 # code...
                 $product = Product::whereId($value['product_id'])->withoutGlobalScopes()->first();
                 if ($product->quantity == 0) {
@@ -381,13 +381,13 @@ class CartController extends BaseController
                         'available_quantity' => $product->quantity
                     ];
                 } else {
-                    $data[] = [
-                        'status' => true,
-                        'product_id' => $product->id,
-                        'message' => "quantity is available.",
-                        'quantity' => $value['qty'],
-                        'available_quantity' => $product->quantity
-                    ];
+                    // $data[] = [
+                    //     'status' => true,
+                    //     'product_id' => $product->id,
+                    //     'message' => "quantity is available.",
+                    //     'quantity' => $value['qty'],
+                    //     'available_quantity' => $product->quantity
+                    // ];
                 }
             }
 
