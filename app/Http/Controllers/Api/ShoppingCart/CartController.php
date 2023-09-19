@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Cart;
 use Exception;
 use App\Http\Requests\Cart\AddToCartRequest;
+use App\Http\Requests\Cart\CheckQtyProduct;
 use App\Http\Requests\Cart\DeleteCartRequest;
 use App\Http\Requests\Cart\LocalStorageItemsRequest;
 use App\Http\Requests\Cart\UpdateQuantityRequest;
@@ -78,7 +79,7 @@ class CartController extends BaseController
 
             $items = $this->getItems(true);
 
-            return response(array('success' => true, 'data' => $items,'details' => $this->cartDetails(), 'message' => 'Item added.'), 200, []);
+            return response(array('success' => true, 'data' => $items, 'details' => $this->cartDetails(), 'message' => 'Item added.'), 200, []);
         } catch (Exception $e) {
 
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
@@ -106,7 +107,7 @@ class CartController extends BaseController
             $cart = $cart->remove($request->id);
 
             $data = $this->getItems(true);
-            return response(array('success' => true, 'data' => $data,'details'=>$this->cartDetails(), 'message' => "cart item {$request->id} removed."), 200, []);
+            return response(array('success' => true, 'data' => $data, 'details' => $this->cartDetails(), 'message' => "cart item {$request->id} removed."), 200, []);
         } catch (Exception $e) {
 
             return response(array('error' => true, 'data' => $e,  'message' => "Something went wrong."), 400, []);
@@ -163,7 +164,7 @@ class CartController extends BaseController
             ]);
             $data = $this->getItems(true);
 
-            return response(array('success' => true, 'data' => $data,'details'=>$this->cartDetails(), 'message' => 'Quantity added in cart.', 'in_stock' => true), 200, []);
+            return response(array('success' => true, 'data' => $data, 'details' => $this->cartDetails(), 'message' => 'Quantity added in cart.', 'in_stock' => true), 200, []);
         } catch (Exception $e) {
 
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
@@ -251,7 +252,7 @@ class CartController extends BaseController
                     return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of range.'), 400, []);
                 } elseif ($validationQty < $product->quantity) {
                     // Check if quantity is less than product quantity
-                    Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $value['qty'], array(), array(),$product);
+                    Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $value['qty'], array(), array(), $product);
                 } else {
                     return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of range.'), 400, []);
                 }
@@ -327,7 +328,7 @@ class CartController extends BaseController
 
         Cart::session($this->userId)->condition($condition);
         $details = $this->cartDetails();
-        return response(array('success' => true,'data' => $details, 'message' => 'Item added.'), 200, []);
+        return response(array('success' => true, 'data' => $details, 'message' => 'Item added.'), 200, []);
     }
 
     // Apply shipping for guest
@@ -353,5 +354,46 @@ class CartController extends BaseController
             'estimate_days' => Carbon::now()->addWeekdays($days)->format('l d-m-Y')
         ];
         return response(array('success' => true, 'data' => $data, 'message' => 'Shipping Details.'), 200, []);
+    }
+
+    // check cart quantity with product quantity
+    public function checkProduct(CheckQtyProduct $request)
+    {
+        try {
+            $data = [];
+            foreach ($request['cart_items'] as $value) {
+                # code...
+                $product = Product::whereId($value['product_id'])->withoutGlobalScopes()->first();
+                if ($product->quantity == 0) {
+                    $data[] = [
+                        'status' => false,
+                        'product_id' => $product->id,
+                        'message' => "Quantity is out of stock",
+                        'quantity' => $value['qty'],
+                        'available_quantity' => $product->quantity
+                    ];
+                } elseif ($product->quantity < $value['qty']) {
+                    $data[] = [
+                        'status' => false,
+                        'product_id' => $product->id,
+                        'message' => "Quantity is greater than product quantity",
+                        'quantity' => $value['qty'],
+                        'available_quantity' => $product->quantity
+                    ];
+                } else {
+                    // $data[] = [
+                    //     'status' => true,
+                    //     'product_id' => $product->id,
+                    //     'message' => "quantity is available.",
+                    //     'quantity' => $value['qty'],
+                    //     'available_quantity' => $product->quantity
+                    // ];
+                }
+            }
+
+            return response(array('success' => true, 'data' => $data, 'message' => 'Successfully check the product of quantity.'), 200, []);
+        } catch (Exception $e) {
+            return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
+        }
     }
 }

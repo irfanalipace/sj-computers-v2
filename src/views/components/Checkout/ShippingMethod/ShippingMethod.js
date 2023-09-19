@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { setCartDetails } from "@store/cart/cartThunks";
 import { applyShipment, applyShipmentForGuest } from "@api/checkout";
+import { shippingMethods } from "@utils/constants";
 import OverlayLoader from "@common/LoaderComponent/OverlayLoader";
 
 import "./ShippingMethod.css";
@@ -19,23 +20,6 @@ const ShippingMehtod = () => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     const dispatch = useDispatch();
-    const shippingMethods = [
-        {
-            id: 0,
-            label: "Free Shipping (3 - 5 days)",
-            cost: 0,
-        },
-        {
-            id: 2,
-            label: "2 day shipping",
-            cost: 15,
-        },
-        {
-            id: 1,
-            label: "Next day delivery",
-            cost: 30,
-        },
-    ];
 
     const handleChange = async (e) => {
         console.log("handleChange", e);

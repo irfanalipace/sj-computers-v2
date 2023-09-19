@@ -1,5 +1,6 @@
 @extends('emails.mail.order')
 @section('content')
+
     <table align="center" cellspacing="0" cellpadding="6" width="95%"
         style="border: 0; color: #000000; line-height: 150%; text-align: left; font: 300 14px/30px 'Helvetica Neue', Helvetica, Arial, sans-serif;"
         border=".5px">
@@ -26,6 +27,7 @@
             </tr>
         </tbody>
     </table>
+   
     <br>
     <br>
     <table border="0" cellpadding="20" cellspacing="0" width="100%"
@@ -39,6 +41,7 @@
             </tr>
         </tbody>
     </table>
+   
     <table align="center" cellspacing="0" cellpadding="6" width="95%"
         style="border:0;color:#000000;line-height:150%;text-align:left;font:300 14px/30px &#39;Helvetica Neue&#39;,Helvetica,Arial,sans-serif;"
         border=".5px">
@@ -63,7 +66,7 @@
                     </td>
                     <td width="15%"
                         style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
-                        {{ $item['product']['asin'] ?? '-' }}
+                        {{ isset($item['product']['asin']) ? $item['product']['asin'] : '-' }}
                     </td>
                     <td width="15%"
                         style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
@@ -72,13 +75,13 @@
                     <td width="20%"
                         style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
                         <span>
-                            $ {{ number_format((float) $item['product']['price'], 2, '.', '') }}
+                            $ {{ number_format((float) $item['price'], 2, '.', '') }}
                         </span>
                     </td>
                 </tr>
             @endforeach
         </tbody>
-
+       
         <tfoot>
             <tr>
                 <th scope="row" colspan="3"
@@ -134,6 +137,7 @@
             </tr>
         </tfoot>
     </table>
+    
     <br>
     <br>
 @endsection

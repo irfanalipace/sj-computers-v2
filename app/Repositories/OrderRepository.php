@@ -7,7 +7,6 @@ use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Traits\Amazon\AmazonTrait;
-use App\Jobs\GenerateInvoiceJob;
 use App\Models\OrderShippingAddress;
 use App\Models\Product;
 use Exception;
@@ -20,92 +19,91 @@ class OrderRepository
     public function createOrder($data, $response, $userId, $user, $payment_type, $cartData, $cartContent = [], $shippingAddreess, $user_type, $cartItems = [])
     {
         try {
-            $data = DB::transaction(function () use ($data, $response, $userId, $user, $payment_type, $cartData, $cartContent, $shippingAddreess, $user_type, $cartItems) {
-                $invoice = $this->storeInvoice($payment_type, $data, $response, $userId, $user_type, $user);
+            DB::beginTransaction();
 
-                //saving order after invoice created
-                $order = [];
-                // dd($cartContent, $cartData, $cartItems);
-                $order['total_amount'] = $cartData['total_amount'];
-                $order['sub_total'] = $cartData['sub_total'];
-                $order[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $user->id;          //user id or guest id
-                $order['invoice_id'] = $invoice->id;
-                $order['status'] = StatusEnum::COMPLETE;
-                $order['shipment_price'] = $cartData['shipment_amount'];
-                $order['shipment_days'] = $cartData['estimate_day'];
-                $order['item_qty'] = $cartData['item_qty'];
-                $order = Order::create($order);
+            $invoice = $this->storeInvoice($payment_type, $data, $response, $userId, $user_type, $user);
 
-                if ($user_type == StatusEnum::GUEST) {
-                    foreach ($cartItems as $item) {
-                        $product = Product::whereId($item['product_id'])->first();
-                        $data = [
-                            'order_id' => $order->id,
-                            'product_id' => $item['product_id'],
-                            'product_name' => $product->name,
-                            'qty' => $product->quantity,
-                            'price' => $product->price
-                        ];
-                        // Update item in product table
-                        $this->updateProduct($item['product_id'], $item['qty']);
+            //saving order after invoice created
+            $order = [];
+            // dd($cartContent, $cartData, $cartItems);
+            $order['total_amount'] = $cartData['total_amount'];
+            $order['sub_total'] = $cartData['sub_total'];
+            $order[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $user->id;          //user id or guest id
+            $order['invoice_id'] = $invoice->id;
+            $order['status'] = StatusEnum::COMPLETE;
+            $order['shipment_price'] = $cartData['shipment_amount'];
+            $order['shipment_days'] = $cartData['estimate_day'];
+            $order['item_qty'] = $cartData['item_qty'];
+            $order = Order::create($order);
+           
+            if ($user_type == StatusEnum::GUEST) {
 
-                        // $productInfo = $this->getAmazonInventory($item['product_id']);
-                        // if ($productInfo['status']) {
-                        //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
-                        // }
-                        OrderItem::create($data);
-                    }
-                } else {
+                foreach ($cartItems as $item) {
+                    $product = Product::whereId($item['product_id'])->first();
+                    $data = [
+                        'order_id' => $order->id,
+                        'product_id' => $item['product_id'],
+                        'product_name' => $product->name,
+                        'qty' => $product->quantity,
+                        'price' => $product->price
+                    ];
+                    // Update item in product table
+                    $this->updateProduct($item['product_id'], $item['qty']);
 
-                    $cartContent->each(function ($item) use ($order) {
-                        $data = [
-                            'order_id' => $order->id,
-                            'product_id' => $item->id,
-                            'product_name' => $item->name,
-                            'qty' => $item->quantity,
-                            'price' => $item->price
-                        ];
-
-                        // $productInfo = $this->getAmazonInventory($item->id);
-
-                        // if ($productInfo['status']) {
-                        //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
-                        // }
-
-                        // Update item in product table
-                        $this->updateProduct($item->id, $item->quantity);
-                        OrderItem::create($data);
-                    });
+                    // $productInfo = $this->getAmazonInventory($item['product_id']);
+                    // if ($productInfo['status']) {
+                    //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
+                    // }
+                    OrderItem::create($data);
                 }
+            } else {
+                foreach ($cartContent as $item) {
+                   
+                    $data = [
+                        'order_id' => $order->id,
+                        'product_id' => $item->id,
+                        'product_name' => $item->name,
+                        'qty' => $item->quantity,
+                        'price' => $item->price
+                    ];
 
-                //saving address of order
-                $OrderAddress = OrderShippingAddress::Create(
-                    [
-                        'country' => $shippingAddreess['country'],
-                        'full_name' => $shippingAddreess['full_name'],
-                        'phone_number' => $shippingAddreess['phone_number'],
-                        'email' => $shippingAddreess['email'] ?? null,
-                        'address' => $shippingAddreess['address'],
-                        'city' => $shippingAddreess['city'],
-                        'state' => $shippingAddreess['state'],
-                        'zip_code' => $shippingAddreess['zip_code'],
-                        $user_type == StatusEnum::USER ? 'user_id' : 'guest_id' => $user->id,       //user id or guest id
-                        'user_type' => $user_type,
-                        'order_id' => $order->id
-                    ]
-                );
+                    // $productInfo = $this->getAmazonInventory($item->id);
 
-                $order = Order::find($order->id);
+                    // if ($productInfo['status']) {
+                    //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
+                    // }
+                    // dd('auth',$item);
+                    // Update item in product table
+                    $this->updateProduct($item->id, $item->quantity);
+                    OrderItem::create($data);
+                }
+                
+            }
+            
+            //saving address of order
+            $OrderAddress = OrderShippingAddress::Create(
+                [
+                    'country' => $shippingAddreess['country'],
+                    'full_name' => $shippingAddreess['full_name'],
+                    'phone_number' => $shippingAddreess['phone_number'],
+                    'email' => $shippingAddreess['email'] ?? null,
+                    'address' => $shippingAddreess['address'],
+                    'city' => $shippingAddreess['city'],
+                    'state' => $shippingAddreess['state'],
+                    'zip_code' => $shippingAddreess['zip_code'],
+                    $user_type == StatusEnum::USER ? 'user_id' : 'guest_id' => $user->id,       //user id or guest id
+                    'user_type' => $user_type,
+                    'order_id' => $order->id
+                ]
+            );
 
-                return [
-                    "order" => $order,
-                    "OrderAddress" => $OrderAddress
-
-                ];
-            });
-
+            $order = Order::find($order->id);
             DB::commit();
-            return $data;
+            return [
+                "order" => $order,
+                "OrderAddress" => $OrderAddress
+
+            ];
         } catch (Exception $e) {
             DB::rollBack();
             return $e;
@@ -151,11 +149,16 @@ class OrderRepository
     }
 
     //update product inventory
-    public function updateProduct($productID, $quantity)
+    public function updateProduct($product_id, $quantity)
     {
-        $product = Product::whereId($productID)->first();
-        $totalQty = $product->quantity - $quantity;
-        $updateProduct = $product->update(['quantity' => $totalQty]);
+        $product = Product::whereId($product_id)->first();
+        if (!$product) {
+            return false;
+        } else {
+            $totalQty = $product->quantity - $quantity;
+            $updateProduct = $product->update(['quantity' => $totalQty]);
+        }
+
         return $updateProduct;
     }
 }

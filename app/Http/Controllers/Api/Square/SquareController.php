@@ -125,15 +125,18 @@ class SquareController extends BaseController
                 $cartItems = ($this->userType == StatusEnum::GUEST) ? $request->cart_items : [];
               
                 $order = $repository->createOrder(array(), $api_response, $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems);
+              
                 if (!$order) {
+                    
                     return response()->json(['code' => 400, 'message' => "something went wrong." . $order]);
                 }
+              
                 $orderData['order'] = $order['order'];
                 
                 //sending invoice email of the payment to user
                 GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
                 // GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
-
+                
                 //clear cart after successfull payment
                 Cart::session($this->userId)->clear();
                 //clear cart condition

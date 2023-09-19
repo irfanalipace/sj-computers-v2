@@ -91,10 +91,6 @@ class AuthController extends BaseController
         } catch (Exception $e) {
             return $this->sendError('Something went wrong, error in processing email', 406, 406);
         }
-
-
-
-
     }
 
     public function setCart($userId)

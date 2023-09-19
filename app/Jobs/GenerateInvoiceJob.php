@@ -22,7 +22,7 @@ class GenerateInvoiceJob implements ShouldQueue
     private $user;
     private $cartData;
     private $order;
-    public function __construct($user, $cartData,$order)
+    public function __construct($user, $cartData, $order)
     {
         $this->cartData = $cartData;
         $this->user = $user;
@@ -36,6 +36,7 @@ class GenerateInvoiceJob implements ShouldQueue
      */
     public function handle()
     {
+       
         $order['orderDetail'] = $this->cartData;
         $order['userInfo'] = $this->user;
         $order['OrderAddress'] = $this->order['OrderAddress'];
@@ -47,7 +48,7 @@ class GenerateInvoiceJob implements ShouldQueue
             $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
             $m->to($email)->subject('Order Placed.');
         });
-         //order mail for adminFF
+        //order mail for adminFF
         Mail::send('emails.order.order-send-to-admin', ['data' => $order], function ($m) use ($email) {
             $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
             $m->to(config('mail.from.address'))->subject('Order Placed.');
