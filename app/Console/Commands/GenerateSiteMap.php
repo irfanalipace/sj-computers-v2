@@ -145,12 +145,12 @@ class GenerateSiteMap extends Command
             'screen_14_inch',
             'screen_13_inch',
             'core_i3',
-            'core_i5',
-            'core_i7',
-            'desktop',
-            'tablet',
-            'monitor',
-            'not_set',
+//            'core_i5',
+//            'core_i7',
+//            'desktop',
+//            'tablet',
+//            'monitor',
+//            'not_set',
             'business_computers',
             'sff',
             'usff',
@@ -193,12 +193,7 @@ class GenerateSiteMap extends Command
                 }
             }
 
-
-
         }
-
-
-
 
         $xmlCategoriesContent = $categoriesSitemap->render();
 
