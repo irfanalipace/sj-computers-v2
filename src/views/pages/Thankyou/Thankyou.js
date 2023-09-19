@@ -169,6 +169,7 @@ export default function ThankYou() {
                                               "..."
                                             : data?.product_name}
                                     </div>
+                                   
                                     <div className="product-details-Thanks">
                                         <div className="quantity">
                                             <span>Quantity:</span>
