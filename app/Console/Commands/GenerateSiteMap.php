@@ -67,21 +67,22 @@ class GenerateSiteMap extends Command
             $generalSitemap->add($route); // Use the full URL with the base
         }
 
+        $xmlGeneralContent = $generalSitemap->render();
+
+        $publicPath = public_path('sitemap/index.xml');
+        File::makeDirectory(dirname($publicPath), 0777, true, true);
+        file_put_contents($publicPath, $xmlGeneralContent);
+
+        $generalSitemapPath =  public_path('sitemap/index.xml');
+        $xmlContent = file_get_contents($generalSitemapPath);
+        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+        file_put_contents($generalSitemapPath, $xmlContent);
+
         $pagesRoutes = [
             '/',
             '/login',
-//            '/register',
-//            '/email-sent',
-//            '/forget-password',
-//            '/forgot_password',
-
-
-//            '/cart',
-//            '/checkout/{productId}',
-
             '/about-us',
             '/contact',
-
             '/term_services',
             '/return_refund_policy',
             '/privacy_policy',
@@ -92,6 +93,19 @@ class GenerateSiteMap extends Command
             $pagesSitemap->add($route); // Use the full URL with the base
         }
 
+        $xmlPagesContent = $pagesSitemap->render();
+
+        $publicPath = public_path('sitemap/pages.xml');
+        File::makeDirectory(dirname($publicPath), 0777, true, true);
+        file_put_contents($publicPath, $xmlPagesContent);
+
+
+        $pageSitemapPath =  public_path('sitemap/pages.xml');
+        $xmlContent = file_get_contents($pageSitemapPath);
+        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+        file_put_contents($pageSitemapPath, $xmlContent);
+
+
         $blogs = Blog::select('slug')
             ->where('status',Blog::PUBLISHED)
             ->get();
@@ -101,6 +115,18 @@ class GenerateSiteMap extends Command
             $blogsSitemap->add($blogUrl);
         }
 
+        $xmlBlogsContent = $blogsSitemap->render();
+
+        $publicPath = public_path('sitemap/blogs.xml');
+        File::makeDirectory(dirname($publicPath), 0777, true, true);
+        file_put_contents($publicPath, $xmlBlogsContent);
+
+
+        $blogSitemapPath =  public_path('sitemap/blogs.xml');
+        $xmlContent = file_get_contents($blogSitemapPath);
+        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+        file_put_contents($blogSitemapPath, $xmlContent);
+
         $categoriesRoutes = [
             'bto',
             'gaming_laptops',
@@ -109,8 +135,8 @@ class GenerateSiteMap extends Command
             '2_in_1_laptops',
             'touch_screen',
             'windows_11',
-            'windows_10',
-            'chromebook',
+//            'windows_10',
+//            'chromebook',
             'xps',
             'precision',
             'latitude',
@@ -171,43 +197,14 @@ class GenerateSiteMap extends Command
 
         }
 
-        $xmlGeneralContent = $generalSitemap->render();
-        $xmlPagesContent = $pagesSitemap->render();
-        $xmlBlogsContent = $blogsSitemap->render();
+
+
+
         $xmlCategoriesContent = $categoriesSitemap->render();
 
         /*
          * delete old file
          */
-        $publicPath = public_path('sitemap/index.xml');
-        File::makeDirectory(dirname($publicPath), 0777, true, true);
-        file_put_contents($publicPath, $xmlGeneralContent);
-
-
-        $generalSitemapPath =  public_path('sitemap/index.xml');
-        $xmlContent = file_get_contents($generalSitemapPath);
-        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
-        file_put_contents($generalSitemapPath, $xmlContent);
-
-        $publicPath = public_path('sitemap/pages.xml');
-        File::makeDirectory(dirname($publicPath), 0777, true, true);
-        file_put_contents($publicPath, $xmlPagesContent);
-
-
-        $pageSitemapPath =  public_path('sitemap/pages.xml');
-        $xmlContent = file_get_contents($pageSitemapPath);
-        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
-        file_put_contents($pageSitemapPath, $xmlContent);
-
-        $publicPath = public_path('sitemap/blogs.xml');
-        File::makeDirectory(dirname($publicPath), 0777, true, true);
-        file_put_contents($publicPath, $xmlBlogsContent);
-
-
-        $blogSitemapPath =  public_path('sitemap/blogs.xml');
-        $xmlContent = file_get_contents($blogSitemapPath);
-        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
-        file_put_contents($blogSitemapPath, $xmlContent);
 
         $publicPath = public_path('sitemap/categories.xml');
         File::makeDirectory(dirname($publicPath), 0777, true, true);
