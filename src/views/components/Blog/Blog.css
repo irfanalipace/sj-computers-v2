@@ -211,6 +211,7 @@ li.policy-listitem {
     justify-content: right;
     padding-top: 20px;
     max-width: 100%;
+    padding-bottom: 8px;
    
 }
 .order-button-policy {
@@ -912,7 +913,7 @@ div.sticky {
         display: flex;
         overflow-x: auto;
         width: 100%;
-        padding: 5px;
+       
     }
 
     .policy-menu-item-list {

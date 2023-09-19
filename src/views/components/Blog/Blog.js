@@ -68,13 +68,30 @@ const Blog = () => {
                 {console.log(category, "category data")}
             </li>
         ));
+       
+        const path = window.location.pathname;
+       
+        
+        const pathWithoutSlash = path.slice(1);
+        
+        const filteredArr = blogs?.filter(item => item?.slug !== pathWithoutSlash);
+        
+        if (filteredArr?.length > 3) {
+          filteredArr?.pop(); // Remove the last element
+        }
+        
+        
 
+        
+        
     useEffect(() => {
         if (blogList) {
             setBlogDetails(blogList);
         } else {
             setblogLoading(true);
             blogSlugApiblogDetails(blogslug)
+             
+           
                 .then((response) => {
                     setBlogDetails(response?.data);
 
@@ -87,10 +104,17 @@ const Blog = () => {
                 });
         }
 
+
+
+        ////blogs category code 
+     
+       
+
         getBlogsHeaderPagesApi()
             .then((response) => {
                 if (response.data?.data?.length > 0) {
                     setBlogs(response.data?.data);
+
                     setPrevPageUrl(response.data?.prev_page_url);
                     setNextPageUrl(response.data?.next_page_url);
 
@@ -454,7 +478,7 @@ const Blog = () => {
                                                 <hr />
                                             </div>
                                             <div style={{ padding: "7px" }}>
-                                                {blogs?.map((blog) => (
+                                                {filteredArr?.map((blog) => (
 
                                                     <div key={blog.id}>
                                                         {console.log(blogs, 'response.data?.data')}
