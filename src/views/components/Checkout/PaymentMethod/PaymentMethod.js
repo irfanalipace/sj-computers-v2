@@ -55,7 +55,7 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
             setIsLoading(false);
         };
         dispatch(
-            validateCartItems({ cart_items: cartData }, onSuccess, onFailure)
+            validateCartItems({ cart_items: cartData }, onSuccess, onFailure) //validate if all the items in the cart are available or not
         );
         switch (paymentMethod) {
             case PAYMENT_METHODS.PAYPAL:

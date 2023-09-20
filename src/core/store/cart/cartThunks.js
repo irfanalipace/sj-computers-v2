@@ -362,21 +362,26 @@ export const clearCart = () => {
 };
 
 export const validateCartItems = (data, onSuccess, onFailure) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
+        const state = getState();
         try {
+            if (!state.auth.isAuthenticated)
+                data.email = state.orders.shippingDetails.email;
             let errors = await validateCartItemsApi(data);
 
             if (errors?.length > 0) {
                 let response = await fetchCartApi();
                 const cartDetails = { ...response?.details };
                 const cartItems = [...response?.data];
+                const payload = {
+                    cartItems,
+                    errors,
+                    cartDetails,
+                };
+
                 dispatch({
                     type: SET_CART_ERRORS,
-                    payload: {
-                        cartItems,
-                        errors,
-                        cartDetails,
-                    },
+                    payload,
                 });
                 onFailure();
             } else onSuccess();
