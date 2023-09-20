@@ -53,6 +53,7 @@ export const updateCartItem = ({ cartItem, cartDetails }) => {
             ...cartItems[index],
             quantity: cartItem.quantity,
             price: cartItem.price,
+            error: false,
         };
     }
     window.localStorage.setItem("cart", JSON.stringify(cartItems));
