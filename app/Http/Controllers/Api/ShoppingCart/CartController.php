@@ -31,10 +31,10 @@ class CartController extends BaseController
         $this->user = auth('api')->user();
 
         if ($this->user) {
-           
+
             $this->userId = $this->user->id;
         } else {
-            
+
             $this->userId = ($request->email) ? $request->email : StatusEnum::DUMMY;
         }
     }
@@ -362,15 +362,15 @@ class CartController extends BaseController
     {
         try {
             $data = [];
+            $cart = Cart::session($this->userId);
             foreach ($request['cart_items'] as $value) {
                 # code...
                 $product = Product::whereId($value['product_id'])->withoutGlobalScopes()->first();
-                
+
                 if ($product->quantity == 0) {
-                   
-                    $cart = Cart::session($this->userId);
+
                     $cart = $cart->remove($value['product_id']);
-                  
+
                     $data[] = [
                         'status' => false,
                         'product_id' => $product->id,
@@ -378,14 +378,16 @@ class CartController extends BaseController
                         'quantity' => $value['qty'],
                         'available_quantity' => $product->quantity
                     ];
-                    
                 } elseif ($product->quantity < $value['qty']) {
-                    
-                    \Cart::session($this->userId)->update($value['product_id'], [
-                        'quantity' => $product->quantity, // so if the current product has a quantity of 4, another 2 will be added so this will result to 6
+
+                    $cart->update($value['product_id'], [
+                        'quantity' => array(
+                            'relative' => false,
+                            'value' => $product->quantity
+                        ),
                         'associatedModel' => $product
                     ]);
-                    
+
                     $data[] = [
                         'status' => false,
                         'product_id' => $product->id,
@@ -393,7 +395,6 @@ class CartController extends BaseController
                         'quantity' => $value['qty'],
                         'available_quantity' => $product->quantity
                     ];
-                    
                 } else {
                     // $data[] = [
                     //     'status' => true,
@@ -404,7 +405,7 @@ class CartController extends BaseController
                     // ];
                 }
             }
-            
+
             return response(array('success' => true, 'data' => $data, 'message' => 'Successfully check the product of quantity.'), 200, []);
         } catch (Exception $e) {
             return response(array('error' => true, 'data' => $e->getMessage(), 'message' => "Something went wrong."), 400, []);
