@@ -475,9 +475,9 @@ const Blog = () => {
                                                 <span>Recent Articles</span>
                                             </div>
                                             <div>
-                                                <hr />
+                                            <hr style={{marginBottom:'8px', marginTop:'6px', marginRight:'5px', marginLeft:'2px'}}/>
                                             </div>
-                                            <div style={{ padding: "7px" }}>
+                                            <div >
                                                 {filteredArr?.map((blog) => (
 
                                                     <div key={blog.id}>
@@ -499,7 +499,7 @@ const Blog = () => {
                                                                 </div>
                                                             </div>
                                                         </Link>
-                                                        <hr />
+                                                        <hr style={{marginBottom:'5px', marginTop:'4px', marginRight:'5px', marginLeft:'2px'}}/>
                                                     </div>
                                                 ))}
                                             </div>
