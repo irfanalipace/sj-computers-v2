@@ -11,6 +11,7 @@ import {
     UPDATED_QUANTITY,
     SET_OUT_OF_STOCK,
     SET_CART_ERRORS,
+    SET_GUEST_CART_ERRORS,
 } from "@store/cart/cartSlice";
 
 import {
@@ -340,7 +341,7 @@ export const updateLocalQuantity = (data) => {
         updateCartItem(data);
         dispatch({
             type: UPDATE_QUANTITY,
-            payload: data,
+            payload: { ...data, cartItem: { ...data.cartItem, error: false } },
         });
     };
 };
@@ -393,7 +394,7 @@ export const validateCartItems = (data, onSuccess, onFailure) => {
                     );
 
                     dispatch({
-                        type: ADD_LIST_TO_CART,
+                        type: SET_GUEST_CART_ERRORS,
                         payload: cart,
                     });
                 }
