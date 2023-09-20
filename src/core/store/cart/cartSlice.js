@@ -95,6 +95,7 @@ const cartSlice = createSlice({
                             ...state.cart[index].product,
                             in_stock: cartItem.in_stock,
                         },
+                        error: cartItem.error,
                         loading: false,
                     };
                 else
@@ -140,31 +141,42 @@ const cartSlice = createSlice({
             state.details = { ...action.payload };
         },
         SET_CART_ERRORS: (state, action) => {
-            let tempArray = [...state.cart];
-            action.payload?.errors?.forEach((item) => {
-                if (!item?.success) {
-                    const index = state.cart?.findIndex(
-                        (_item) => _item?.id === item?.product_id
-                    );
-                    if (index > -1) {
-                        if (item?.available_quantity === 0) {
-                            tempArray.splice(index, 1);
-                        } else if (
-                            tempArray[index]?.quantity >
-                            item?.available_quantity
-                        ) {
-                            const cartItem = {
-                                ...state.cart[index],
-                                error: item?.message,
-                                quantity: item?.available_quantity,
-                            };
-                            tempArray[index] = cartItem;
-                        }
-                    }
-                }
+            let tempArray = [...action.payload.cartItems];
+            // action.payload?.errors?.forEach((item) => {
+            //     if (!item?.success) {
+            //         const index = state.cart?.findIndex(
+            //             (_item) => _item?.id === item?.product_id
+            //         );
+            //         if (index > -1) {
+            //             if (item?.available_quantity === 0) {
+            //                 tempArray.splice(index, 1);
+            //             } else if (
+            //                 tempArray[index]?.quantity >
+            //                 item?.available_quantity
+            //             ) {
+            //                 const cartItem = {
+            //                     ...state.cart[index],
+            //                     error: item?.message,
+            //                     quantity: item?.available_quantity,
+            //                 };
+            //                 tempArray[index] = cartItem;
+            //             }
+            //         }
+            //     }
+            // });
+            const items = tempArray?.map((item) => {
+                const cartItem = {
+                    ...item,
+                    product: { ...item?.associatedModel },
+                    error: "Selected Quantity is greater than available quantity",
+                };
+
+                delete cartItem.associatedModel;
+
+                return cartItem;
             });
             state.details = action.payload.cartDetails;
-            state.cart = tempArray;
+            state.cart = items;
         },
         API_ERROR: (state, action) => {
             state.apiError = { ...action.payload };

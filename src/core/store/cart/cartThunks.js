@@ -106,12 +106,11 @@ export const updateQuantity = (data) => {
             dispatch({
                 type: UPDATE_QUANTITY,
                 payload: {
-                    cartItem: { ...data.cartItem, in_stock },
+                    cartItem: { ...data.cartItem, in_stock, error: false },
                     cartDetails: { ...data?.cartDetails },
                 },
             });
         } catch (error) {
-            console.print("Something went wrong in carts", error);
             if (error?.data?.in_stock === false) {
                 dispatch({
                     type: SET_OUT_OF_STOCK,
@@ -370,9 +369,11 @@ export const validateCartItems = (data, onSuccess, onFailure) => {
             if (errors?.length > 0) {
                 let response = await fetchCartApi();
                 const cartDetails = { ...response?.details };
+                const cartItems = [...response?.data];
                 dispatch({
                     type: SET_CART_ERRORS,
                     payload: {
+                        cartItems,
                         errors,
                         cartDetails,
                     },
