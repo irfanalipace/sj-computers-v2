@@ -37,7 +37,10 @@ import {
 } from "@utils/cartHelpers";
 
 import { toast } from "react-toastify";
-import { clearCartLocally } from "../../utils/cartHelpers";
+import {
+    calculateGuestCartPriceAfterError,
+    clearCartLocally,
+} from "../../utils/cartHelpers";
 import { getGuestUserEmail } from "../../services/authService";
 import { validateCartItemsApi } from "../../api/order";
 
@@ -373,16 +376,27 @@ export const validateCartItems = (data, onSuccess, onFailure) => {
                 let response = await fetchCartApi();
                 const cartDetails = { ...response?.details };
                 const cartItems = [...response?.data];
-                const payload = {
+                let payload = {
                     cartItems,
                     errors,
                     cartDetails,
                 };
+                if (state.auth.isAuthenticated)
+                    dispatch({
+                        type: SET_CART_ERRORS,
+                        payload,
+                    });
+                else {
+                    const cart = calculateGuestCartPriceAfterError(
+                        state.cart.cart,
+                        errors
+                    );
 
-                dispatch({
-                    type: SET_CART_ERRORS,
-                    payload,
-                });
+                    dispatch({
+                        type: ADD_LIST_TO_CART,
+                        payload: cart,
+                    });
+                }
                 onFailure();
             } else onSuccess();
         } catch (error) {

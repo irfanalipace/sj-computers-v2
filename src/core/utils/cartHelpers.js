@@ -5,6 +5,7 @@ export const toArray = (data) => {
         return [data];
     }
 };
+const initCartDetails = { total_items: 0, sub_total: 0, total: 0 };
 
 export const addItemToLocalCart = ({ cartItem, cartDetails }) => {
     let cartItems = getCartItems();
@@ -33,7 +34,11 @@ export const getCartItems = () => {
 export const getCartDetails = () => {
     let cartDetails = JSON.parse(window.localStorage.getItem("cartDetails"));
     if (cartDetails) return cartDetails;
-    else return { total_items: 0, sub_total: 0, total: 0 };
+    else return initCartDetails;
+};
+
+export const setCartItems = (cartItemsArray) => {
+    window.localStorage.setItem("cart", JSON.stringify(cartItemsArray));
 };
 
 export const updateCartDetails = (cartDetails) => {
@@ -138,6 +143,62 @@ export const objectToArray = (obj) => {
         items.push(obj[key]);
     }
     return items;
+};
+
+export const calculateGuestCartPriceAfterError = (cart, errors) => {
+    const cartItems = setCartItemAfterError(cart, errors);
+    const cartDetails = calculateGuestCartPrice(cartItems);
+    return {
+        cartItems,
+        cartDetails,
+    };
+};
+
+export const calculateGuestCartPrice = (cart) => {
+    let tempArray = [...cart];
+    let cartDetails = initCartDetails;
+    tempArray?.forEach((item) => {
+        const total = cartDetails.sub_total + item.price;
+        cartDetails = {
+            total_items: cartDetails.total_items + 1,
+            sub_total: total,
+            total,
+        };
+    });
+    updateCartDetails(cartDetails);
+    return cartDetails;
+};
+
+export const setCartItemAfterError = (cart, errors) => {
+    let tempArray = [...cart];
+    errors?.forEach((item) => {
+        const index = cart?.findIndex(
+            (_item) => _item?.id === item?.product_id
+        );
+        if (item?.success) {
+            tempArray.splice(index, 1);
+        } else {
+            if (index > -1) {
+                if (item?.available_quantity === 0) {
+                    tempArray.splice(index, 1);
+                } else if (
+                    tempArray[index]?.quantity > item?.available_quantity
+                ) {
+                    const itemPrice =
+                        cart[index]?.product.price * item?.available_quantity;
+                    const cartItem = {
+                        ...cart[index],
+                        error: "Selected Quantity is greater than available quantity",
+                        quantity: item?.available_quantity,
+                        price: itemPrice,
+                    };
+                    tempArray[index] = cartItem;
+                }
+            }
+        }
+    });
+    setCartItems(tempArray);
+    return tempArray;
 };
 
 export const mapResponse = (items) => {

@@ -31,23 +31,15 @@ const cartSlice = createSlice({
         },
         ADD_TO_CART: (state, action) => {
             let item = { ...action.payload.cartItem };
-            let details = { ...action.payload.cartDetails };
             state.cart = [...state.cart, { ...item }];
-            if (details) {
-                state.details = { ...details };
-            }
+            state.details = { ...action.payload.cartDetails };
             state.isLoading = false;
         },
 
         ADD_LIST_TO_CART: (state, action) => {
             let items = action.payload.cartItems;
-            console.log("items: ", items);
-            let details = { ...action.payload.cartDetails };
-            // items = objectToArray(items);
             state.cart = [...state.cart, ...items];
-            if (details) {
-                state.details = { ...details };
-            }
+            state.details = { ...action.payload.cartDetails };
             state.isLoading = false;
         },
 
@@ -142,28 +134,6 @@ const cartSlice = createSlice({
         },
         SET_CART_ERRORS: (state, action) => {
             let tempArray = [...action.payload.cartItems];
-            // action.payload?.errors?.forEach((item) => {
-            //     if (!item?.success) {
-            //         const index = state.cart?.findIndex(
-            //             (_item) => _item?.id === item?.product_id
-            //         );
-            //         if (index > -1) {
-            //             if (item?.available_quantity === 0) {
-            //                 tempArray.splice(index, 1);
-            //             } else if (
-            //                 tempArray[index]?.quantity >
-            //                 item?.available_quantity
-            //             ) {
-            //                 const cartItem = {
-            //                     ...state.cart[index],
-            //                     error: item?.message,
-            //                     quantity: item?.available_quantity,
-            //                 };
-            //                 tempArray[index] = cartItem;
-            //             }
-            //         }
-            //     }
-            // });
             const items = tempArray?.map((item) => {
                 const cartItem = {
                     ...item,
@@ -175,6 +145,10 @@ const cartSlice = createSlice({
 
                 return cartItem;
             });
+            state.details = action.payload.cartDetails;
+            state.cart = items;
+        },
+        SET_GUEST_CART_ERRORS: (state, action) => {
             state.details = action.payload.cartDetails;
             state.cart = items;
         },
@@ -208,5 +182,6 @@ export const {
     UPDATED_QUANTITY,
     SET_OUT_OF_STOCK,
     SET_CART_ERRORS,
+    SET_GUEST_CART_ERRORS,
 } = cartSlice.actions;
 export default cartSlice.reducer;
