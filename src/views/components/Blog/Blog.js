@@ -54,20 +54,31 @@ const Blog = () => {
     const [nextPageUrl, setNextPageUrl] = useState(null);
     const { blogslug } = useParams();
 
-   
     const blogscategories = useSelector((state) => state.category.categories);
 
     let RenderedCategories = blogscategories?.map((category) => (
-            <li key={category.id}>
-                <Link
-                    to={`/blogs/category/${category.slug}`}
-                    className="text-decoration-none"
-                >
-                    {category.name}
-                </Link>
-                {console.log(category, "category data")}
-            </li>
-        ));
+        <li key={category.id}>
+            <Link
+                to={`/blogs/category/${category.slug}`}
+                className="text-decoration-none"
+            >
+                {category.name}
+            </Link>
+            {console.log(category, "category data")}
+        </li>
+    ));
+
+    const path = window.location.pathname;
+
+    const pathWithoutSlash = path.slice(1);
+
+    const filteredArr = blogs?.filter(
+        (item) => item?.slug !== pathWithoutSlash
+    );
+
+    if (filteredArr?.length > 3) {
+        filteredArr?.pop(); // Remove the last element
+    }
 
     useEffect(() => {
         if (blogList) {
@@ -87,13 +98,15 @@ const Blog = () => {
                 });
         }
 
+        ////blogs category code
+
         getBlogsHeaderPagesApi()
             .then((response) => {
                 if (response.data?.data?.length > 0) {
                     setBlogs(response.data?.data);
+
                     setPrevPageUrl(response.data?.prev_page_url);
                     setNextPageUrl(response.data?.next_page_url);
-
                 } else {
                     setBlogs([]);
                     setPrevPageUrl(response.data?.prev_page_url);
@@ -110,10 +123,6 @@ const Blog = () => {
     const toggleContent = () => {
         setShowMore(!showMore);
     };
-
-
-
-
 
     const handlePaginationClick = (pageNumber) => {
         setCurrentPage(pageNumber - 1);
@@ -136,9 +145,8 @@ const Blog = () => {
 
     useEffect(() => {
         if (blogdteails?.id) {
-            console.log('@@@@ blogdteails: ', blogdteails);
+            console.log("@@@@ blogdteails: ", blogdteails);
             try {
-
                 const blogContent = document.getElementById("blog-content");
                 const h2Tags = blogContent.getElementsByTagName("h2");
 
@@ -154,15 +162,13 @@ const Blog = () => {
 
                     firstH2Tag.insertAdjacentElement("afterend", imgTag);
                 }
-            } catch (error) { }
+            } catch (error) {}
             const wpm = 225;
             const text = `${blogdteails.content}`;
             const words = text.trim()?.split(/\s+/)?.length;
             const time = Math.ceil(words / wpm);
             setReadingTime(time);
         }
-
-
     }, [blogdteails]);
 
     // useEffect(() => {
@@ -201,8 +207,6 @@ const Blog = () => {
     //   }, [blogdteails]);
 
     const [readingTime, setReadingTime] = useState(0);
-
-
 
     const categories = [
         { id: 1, name: "Category 1" },
@@ -244,8 +248,9 @@ const Blog = () => {
         );
     }
 
-
-    const sortedBlogs = blogs.sort((a, b) => new Date(b.publish_date) - new Date(a.publish_date));
+    const sortedBlogs = blogs.sort(
+        (a, b) => new Date(b.publish_date) - new Date(a.publish_date)
+    );
 
     return (
         <>
@@ -322,15 +327,15 @@ const Blog = () => {
                                                     <span>
                                                         {blogdteails.publish_date
                                                             ? new Date(
-                                                                blogdteails.publish_date
-                                                            ).toLocaleDateString(
-                                                                "en-US",
-                                                                {
-                                                                    month: "2-digit",
-                                                                    day: "2-digit",
-                                                                    year: "numeric",
-                                                                }
-                                                            )
+                                                                  blogdteails.publish_date
+                                                              ).toLocaleDateString(
+                                                                  "en-US",
+                                                                  {
+                                                                      month: "2-digit",
+                                                                      day: "2-digit",
+                                                                      year: "numeric",
+                                                                  }
+                                                              )
                                                             : null}
                                                     </span>
                                                 </div>
@@ -451,43 +456,71 @@ const Blog = () => {
                                                 <span>Recent Articles</span>
                                             </div>
                                             <div>
-                                                <hr />
+                                                <hr
+                                                    style={{
+                                                        marginBottom: "8px",
+                                                        marginTop: "6px",
+                                                        marginRight: "5px",
+                                                        marginLeft: "2px",
+                                                    }}
+                                                />
                                             </div>
-                                            <div style={{ padding: "7px" }}>
-                                                {blogs?.map((blog) => (
-
+                                            <div>
+                                                {filteredArr?.map((blog) => (
                                                     <div key={blog.id}>
-                                                        {console.log(blogs, 'response.data?.data')}
-                                                        <Link to={`/${blog?.slug}`} className="text-decoration-none">
+                                                        {console.log(
+                                                            blogs,
+                                                            "response.data?.data"
+                                                        )}
+                                                        <Link
+                                                            to={`/${blog?.slug}`}
+                                                            className="text-decoration-none"
+                                                        >
                                                             <div className="row">
                                                                 <div className="col-4">
                                                                     <div className="them-stori-mage">
-                                                                        <img src={blog?.thumbnail_image} alt={blog?.alt_thumbnail_image} />
+                                                                        <img
+                                                                            src={
+                                                                                blog?.thumbnail_image
+                                                                            }
+                                                                            alt={
+                                                                                blog?.alt_thumbnail_image
+                                                                            }
+                                                                        />
                                                                     </div>
                                                                 </div>
                                                                 <div className="col-8">
                                                                     <div className="dev-span-section4-dev">
                                                                         <span className="read-more-span-text">
-                                                                            {blog?.meta_description}
+                                                                            {
+                                                                                blog?.meta_description
+                                                                            }
                                                                         </span>
                                                                     </div>
-
                                                                 </div>
                                                             </div>
                                                         </Link>
-                                                        <hr />
+                                                        <hr
+                                                            style={{
+                                                                marginBottom:
+                                                                    "5px",
+                                                                marginTop:
+                                                                    "4px",
+                                                                marginRight:
+                                                                    "5px",
+                                                                marginLeft:
+                                                                    "2px",
+                                                            }}
+                                                        />
                                                     </div>
                                                 ))}
                                             </div>
                                         </div>
 
-
-
                                         {blogscategories?.length > 0 && (
                                             <div className="widget widget_categories">
                                                 <h4>Categories</h4>
                                                 {RenderedCategories}
-                                               
                                             </div>
                                         )}
 

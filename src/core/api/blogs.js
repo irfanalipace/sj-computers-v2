@@ -13,7 +13,7 @@ export function getBlogsPagesApi(page = 1, per_page = 12) {
     });
 }
 
-export function getBlogsHeaderPagesApi(page = 1, per_page = 3) {
+export function getBlogsHeaderPagesApi(page = 1, per_page = 4) {
     return new Promise((resolve, reject) => {
         ApiService.get(`/blogs?page=${page}&per_page=${per_page}`)
             .then((response) => {

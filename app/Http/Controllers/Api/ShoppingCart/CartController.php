@@ -369,7 +369,7 @@ class CartController extends BaseController
 
                 if ($product->quantity == 0) {
 
-                    $cart = $cart->remove($value['product_id']);
+                    $cart = ($cart) ? $cart->remove($value['product_id']) : true;
 
                     $data[] = [
                         'status' => false,
@@ -380,13 +380,13 @@ class CartController extends BaseController
                     ];
                 } elseif ($product->quantity < $value['qty']) {
 
-                    $cart->update($value['product_id'], [
+                    ($cart) ?  $cart->update($value['product_id'], [
                         'quantity' => array(
                             'relative' => false,
                             'value' => $product->quantity
                         ),
                         'associatedModel' => $product
-                    ]);
+                    ]) : true;
 
                     $data[] = [
                         'status' => false,
@@ -396,13 +396,13 @@ class CartController extends BaseController
                         'available_quantity' => $product->quantity
                     ];
                 } else {
-                    // $data[] = [
-                    //     'status' => true,
-                    //     'product_id' => $product->id,
-                    //     'message' => "quantity is available.",
-                    //     'quantity' => $value['qty'],
-                    //     'available_quantity' => $product->quantity
-                    // ];
+                    $data[] = [
+                        'status' => true,
+                        'product_id' => $product->id,
+                        'message' => "quantity is available.",
+                        'quantity' => $value['qty'],
+                        'available_quantity' => $product->quantity
+                    ];
                 }
             }
 
