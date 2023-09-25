@@ -26,6 +26,7 @@ use App\Jobs\GenerateInvoiceJob;
 use App\Models\Order;
 use Carbon\Carbon;
 use App\Repositories\OrderRepository;
+use Illuminate\Support\Facades\DB;
 
 class SquareController extends BaseController
 {
@@ -43,7 +44,7 @@ class SquareController extends BaseController
         ]);
         $this->user = Auth::guard('api')->user();
         if ($this->user) {
-            
+
             $this->userId = $this->user->id;
             $this->userType = StatusEnum::USER;
             $this->totalAmount = \Cart::session($this->userId)->getTotal();
@@ -67,7 +68,7 @@ class SquareController extends BaseController
     public function chargeCustomer(CardRequest $request, OrderRepository $repository)
     {
         try {
-           
+
             $idempotencyKey = uniqid();
 
             //create customer || retrieve customer if already added
@@ -90,7 +91,7 @@ class SquareController extends BaseController
             $body->setReferenceId('user-' . $this->userId);
 
             $api_response = $this->squareClient->getPaymentsApi()->createPayment($body);
-
+            DB::beginTransaction();
             if ($api_response->isSuccess()) {
                 $orderData = [];
 
@@ -114,7 +115,7 @@ class SquareController extends BaseController
                     $orderData['shipment_amount'] = $this->shipment_amount ?? 0;
                     $orderData['estimate_day'] =  $this->estimate_days ?? Carbon::now()->addWeekdays(5)->format('l d-m-Y');
                 }
-               
+
                 $cartContent = Cart::session($this->userId)->getContent();
 
                 $result = $api_response->getResult();
@@ -123,33 +124,34 @@ class SquareController extends BaseController
                 $userIdToPass = ($this->userType != StatusEnum::GUEST) ? $this->userId : $this->user->id;
                 $user_type = ($this->userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
                 $cartItems = ($this->userType == StatusEnum::GUEST) ? $request->cart_items : [];
-              
+
                 $order = $repository->createOrder(array(), $api_response, $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems);
-              
+
                 if (!$order) {
-                    
+
                     return response()->json(['code' => 400, 'message' => "something went wrong." . $order]);
                 }
-              
+
                 $orderData['order'] = $order['order'];
-                
+
                 //sending invoice email of the payment to user
                 GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
                 // GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
-                
+
                 //clear cart after successfull payment
                 Cart::session($this->userId)->clear();
                 //clear cart condition
                 Cart::session($this->userId)->clearCartConditions();
             } else {
-
+                DB::rollBack();
                 $errors = $api_response->getErrors();
 
                 return response()->json(['code' => 400, 'message' => $errors[0]->getDetail()]);
             }
+            DB::commit();
             return $this->sendResponse(['Order' => $orderData], StatusEnum::PAYMENTMESSAGE);
         } catch (Exception $e) {
-
+            DB::rollBack();
             return response()->json(['code' => 400, 'message' => "something went wrong." . $e]);
         }
     }
