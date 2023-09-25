@@ -133,22 +133,6 @@ const cartSlice = createSlice({
             state.details = { ...action.payload };
         },
         SET_CART_ERRORS: (state, action) => {
-            let tempArray = [...action.payload.cartItems];
-            const items = tempArray?.map((item) => {
-                const cartItem = {
-                    ...item,
-                    product: { ...item?.associatedModel },
-                    error: "Selected Quantity is greater than available quantity",
-                };
-
-                delete cartItem.associatedModel;
-
-                return cartItem;
-            });
-            state.details = action.payload.cartDetails;
-            state.cart = items;
-        },
-        SET_GUEST_CART_ERRORS: (state, action) => {
             state.details = action.payload.cartDetails;
             state.cart = action.payload.cartItems;
         },
@@ -182,6 +166,5 @@ export const {
     UPDATED_QUANTITY,
     SET_OUT_OF_STOCK,
     SET_CART_ERRORS,
-    SET_GUEST_CART_ERRORS,
 } = cartSlice.actions;
 export default cartSlice.reducer;

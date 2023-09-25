@@ -11,7 +11,6 @@ import {
     UPDATED_QUANTITY,
     SET_OUT_OF_STOCK,
     SET_CART_ERRORS,
-    SET_GUEST_CART_ERRORS,
 } from "@store/cart/cartSlice";
 
 import {
@@ -41,6 +40,7 @@ import { toast } from "react-toastify";
 import {
     calculateGuestCartPriceAfterError,
     clearCartLocally,
+    setCartItemAfterError,
 } from "../../utils/cartHelpers";
 import { getGuestUserEmail } from "../../services/authService";
 import { validateCartItemsApi } from "../../api/order";
@@ -376,13 +376,17 @@ export const validateCartItems = (data, onSuccess, onFailure) => {
             if (failedItems?.length > 0) {
                 let response = await fetchCartApi();
                 const cartDetails = { ...response?.details };
-                const cartItems = [...response?.data];
+                let cartItems = [...response?.data];
+                cartItems = mapResponse(cartItems);
+                console.log("cartItems before: ", cartItems);
+                cartItems = setCartItemAfterError(cartItems, errors, true);
+                console.log("cartItems after: ", cartItems);
+
                 if (state.auth.isAuthenticated)
                     dispatch({
                         type: SET_CART_ERRORS,
                         payload: {
                             cartItems,
-                            failedItems,
                             cartDetails,
                         },
                     });
@@ -393,11 +397,11 @@ export const validateCartItems = (data, onSuccess, onFailure) => {
                     );
 
                     dispatch({
-                        type: SET_GUEST_CART_ERRORS,
+                        type: SET_CART_ERRORS,
                         payload: cart,
                     });
                 }
-                onFailure();
+                // onFailure();
             } else onSuccess();
         } catch (error) {
             console.print("Something went wrong in orders", error);

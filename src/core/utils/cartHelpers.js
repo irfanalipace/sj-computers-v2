@@ -170,34 +170,35 @@ export const calculateGuestCartPrice = (cart) => {
     return cartDetails;
 };
 
-export const setCartItemAfterError = (cart, errors) => {
-    let tempArray = [...cart];
+export const setCartItemAfterError = (cart, errors, isAuthenticated) => {
+    let tempArray = [];
     errors?.forEach((item) => {
-        const index = cart?.findIndex(
-            (_item) => _item?.id === item?.product_id
-        );
-        if (item?.success) {
-            tempArray.splice(index, 1);
+        let cartItem = cart?.find((_item) => _item?.id === item?.product_id);
+        console.log("cartItem", cartItem);
+        if (item?.status) {
+            console.log("if");
+            tempArray.push(cartItem);
         } else {
-            if (index > -1) {
-                if (item?.available_quantity === 0) {
-                    tempArray.splice(index, 1);
-                } else if (
-                    tempArray[index]?.quantity > item?.available_quantity
-                ) {
-                    const itemPrice =
-                        cart[index]?.product.price * item?.available_quantity;
-                    const cartItem = {
-                        ...cart[index],
-                        error: "Selected Quantity is greater than available quantity",
-                        quantity: item?.available_quantity,
-                        price: itemPrice,
-                    };
-                    tempArray[index] = cartItem;
-                }
+            console.log("else");
+            if (
+                (isAuthenticated &&
+                    cartItem?.quantity === item?.available_quantity) ||
+                cartItem?.quantity > item?.available_quantity
+            ) {
+                console.log("else if");
+                const itemPrice =
+                    cartItem?.product.price * item?.available_quantity;
+                cartItem = {
+                    ...cartItem,
+                    error: "Selected Quantity is greater than available quantity",
+                    quantity: item?.available_quantity,
+                    price: itemPrice,
+                };
+                tempArray.push(cartItem);
             }
         }
     });
+    console.log("tempArray: ", tempArray);
     setCartItems(tempArray);
     return tempArray;
 };
