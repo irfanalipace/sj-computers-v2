@@ -363,13 +363,14 @@ class CartController extends BaseController
         try {
             $data = [];
             $cart = Cart::session($this->userId);
+
             foreach ($request['cart_items'] as $value) {
                 # code...
                 $product = Product::whereId($value['product_id'])->withoutGlobalScopes()->first();
 
                 if ($product->quantity == 0) {
 
-                    $cart = ($cart) ? $cart->remove($value['product_id']) : true;
+                     (!$cart->isEmpty()) ? $cart->remove($value['product_id']) : true;
 
                     $data[] = [
                         'status' => false,
@@ -379,15 +380,17 @@ class CartController extends BaseController
                         'available_quantity' => $product->quantity
                     ];
                 } elseif ($product->quantity < $value['qty']) {
-
-                    ($cart) ?  $cart->update($value['product_id'], [
-                        'quantity' => array(
-                            'relative' => false,
-                            'value' => $product->quantity
-                        ),
-                        'associatedModel' => $product
-                    ]) : true;
-
+                   
+                    if (!$cart->isEmpty()) {
+                        $cart->update($value['product_id'], [
+                            'quantity' => array(
+                                'relative' => false,
+                                'value' => $product->quantity
+                            ),
+                            'associatedModel' => $product
+                        ]);
+                    }
+                    
                     $data[] = [
                         'status' => false,
                         'product_id' => $product->id,
@@ -405,7 +408,7 @@ class CartController extends BaseController
                     ];
                 }
             }
-
+            
             return response(array('success' => true, 'data' => $data, 'message' => 'Successfully check the product of quantity.'), 200, []);
         } catch (Exception $e) {
             return response(array('error' => true, 'data' => $e->getMessage(), 'message' => "Something went wrong."), 400, []);
