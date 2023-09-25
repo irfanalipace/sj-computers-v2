@@ -174,18 +174,14 @@ export const setCartItemAfterError = (cart, errors, isAuthenticated) => {
     let tempArray = [];
     errors?.forEach((item) => {
         let cartItem = cart?.find((_item) => _item?.id === item?.product_id);
-        console.log("cartItem", cartItem);
         if (item?.status) {
-            console.log("if");
             tempArray.push(cartItem);
         } else {
-            console.log("else");
             if (
                 (isAuthenticated &&
                     cartItem?.quantity === item?.available_quantity) ||
                 cartItem?.quantity > item?.available_quantity
             ) {
-                console.log("else if");
                 const itemPrice =
                     cartItem?.product.price * item?.available_quantity;
                 cartItem = {
@@ -198,7 +194,6 @@ export const setCartItemAfterError = (cart, errors, isAuthenticated) => {
             }
         }
     });
-    console.log("tempArray: ", tempArray);
     setCartItems(tempArray);
     return tempArray;
 };
