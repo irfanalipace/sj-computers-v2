@@ -150,7 +150,7 @@ const cartSlice = createSlice({
         },
         SET_GUEST_CART_ERRORS: (state, action) => {
             state.details = action.payload.cartDetails;
-            state.cart = items;
+            state.cart = action.payload.cartItems;
         },
         API_ERROR: (state, action) => {
             state.apiError = { ...action.payload };
