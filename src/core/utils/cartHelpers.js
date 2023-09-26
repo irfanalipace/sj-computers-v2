@@ -180,12 +180,17 @@ export const setCartItemAfterError = (cart, errors, isAuthenticated) => {
             if (
                 (isAuthenticated &&
                     cartItem?.quantity === item?.available_quantity) ||
-                cartItem?.quantity > item?.available_quantity
+                (cartItem?.quantity > item?.available_quantity &&
+                    item?.available_quantity > 0)
             ) {
                 const itemPrice =
                     cartItem?.product.price * item?.available_quantity;
                 cartItem = {
                     ...cartItem,
+                    product: {
+                        ...cartItem.product,
+                        quantity: item?.available_quantity,
+                    },
                     error: "Selected Quantity is greater than available quantity",
                     quantity: item?.available_quantity,
                     price: itemPrice,

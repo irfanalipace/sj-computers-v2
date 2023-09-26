@@ -401,7 +401,7 @@ export const validateCartItems = (data, onSuccess, onFailure) => {
                         payload: cart,
                     });
                 }
-                // onFailure();
+                onFailure();
             } else onSuccess();
         } catch (error) {
             console.print("Something went wrong in orders", error);
