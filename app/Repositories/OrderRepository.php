@@ -35,7 +35,7 @@ class OrderRepository
             $order['shipment_days'] = $cartData['estimate_day'];
             $order['item_qty'] = $cartData['item_qty'];
             $order = Order::create($order);
-           
+
             if ($user_type == StatusEnum::GUEST) {
 
                 foreach ($cartItems as $item) {
@@ -58,7 +58,7 @@ class OrderRepository
                 }
             } else {
                 foreach ($cartContent as $item) {
-                   
+
                     $data = [
                         'order_id' => $order->id,
                         'product_id' => $item->id,
@@ -77,9 +77,8 @@ class OrderRepository
                     $this->updateProduct($item->id, $item->quantity);
                     OrderItem::create($data);
                 }
-                
             }
-            
+
             //saving address of order
             $OrderAddress = OrderShippingAddress::Create(
                 [
@@ -151,7 +150,7 @@ class OrderRepository
     //update product inventory
     public function updateProduct($product_id, $quantity)
     {
-        $product = Product::whereId($product_id)->first();
+        $product = Product::whereId($product_id)->lockForUpdate()->first();
         if (!$product) {
             return false;
         } else {
