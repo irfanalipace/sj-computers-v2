@@ -68,7 +68,7 @@ class SquareController extends BaseController
     public function chargeCustomer(CardRequest $request, OrderRepository $repository)
     {
         try {
-
+           
             $idempotencyKey = uniqid();
 
             //create customer || retrieve customer if already added
@@ -77,10 +77,10 @@ class SquareController extends BaseController
             } else {
                 $customer = $this->getCustomer();
             }
-
+            DB::beginTransaction();
             // Get card Token
             $amount_money = new Money();
-            $amount_money->setAmount($this->totalAmount);
+            $amount_money->setAmount($this->totalAmount * 100);
             $amount_money->setCurrency(StatusEnum::currency);
             //create payment Request
             $body = new CreatePaymentRequest($request->source_id, $idempotencyKey);
@@ -91,7 +91,7 @@ class SquareController extends BaseController
             $body->setReferenceId('user-' . $this->userId);
 
             $api_response = $this->squareClient->getPaymentsApi()->createPayment($body);
-            DB::beginTransaction();
+           
             if ($api_response->isSuccess()) {
                 $orderData = [];
 
@@ -135,7 +135,7 @@ class SquareController extends BaseController
                 $orderData['order'] = $order['order'];
 
                 //sending invoice email of the payment to user
-                GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
+                // GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
                 // GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
 
                 //clear cart after successfull payment
