@@ -135,7 +135,7 @@ class SquareController extends BaseController
                 $orderData['order'] = $order['order'];
 
                 //sending invoice email of the payment to user
-                // GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
+                GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
                 // GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
 
                 //clear cart after successfull payment
