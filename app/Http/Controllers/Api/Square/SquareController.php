@@ -68,7 +68,7 @@ class SquareController extends BaseController
     public function chargeCustomer(CardRequest $request, OrderRepository $repository)
     {
         try {
-           
+
             $idempotencyKey = uniqid();
 
             //create customer || retrieve customer if already added
@@ -91,7 +91,7 @@ class SquareController extends BaseController
             $body->setReferenceId('user-' . $this->userId);
 
             $api_response = $this->squareClient->getPaymentsApi()->createPayment($body);
-           
+
             if ($api_response->isSuccess()) {
                 $orderData = [];
 
@@ -152,7 +152,7 @@ class SquareController extends BaseController
             return $this->sendResponse(['Order' => $orderData], StatusEnum::PAYMENTMESSAGE);
         } catch (Exception $e) {
             DB::rollBack();
-            return response()->json(['code' => 400, 'message' => "something went wrong." . $e]);
+            return response()->json(['code' => 400, 'message' => "something went wrong." . $e->getMessage()]);
         }
     }
 
@@ -184,7 +184,7 @@ class SquareController extends BaseController
 
             return $customer_id;
         } catch (Exception $e) {
-            return response()->json(['Code' => 400, 'message' => "Something went wrong" . $e]);
+            return response()->json(['Code' => 400, 'message' => "Something went wrong" . $e->getMessage()]);
         }
     }
     // retreive customer
@@ -202,7 +202,7 @@ class SquareController extends BaseController
             }
             return $customer_id;
         } catch (Exception $e) {
-            return response()->json(['Code' => 400, 'message' => "Something went wrong" . $e]);
+            return response()->json(['Code' => 400, 'message' => "Something went wrong" . $e->getMessage()]);
         }
     }
 
