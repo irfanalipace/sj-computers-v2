@@ -86,6 +86,17 @@ class SquareController extends BaseController
                 $customer = $this->getCustomer();
             }
 
+            /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
+            $userIdToPass = ($this->userType != StatusEnum::GUEST) ? $this->userId : $this->user->id;
+            $user_type = ($this->userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
+            $cartItems = ($this->userType == StatusEnum::GUEST) ? $request->cart_items : [];
+
+            $cartContent = Cart::session($this->userId)->getContent();
+            $listofItems = ($this->userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
+            $check_product_first = $this->checkProduct($listofItems);
+            if (!$check_product_first) {
+                return response()->json(['code' => 400, "cart_error" => true, 'message' => "something went wrong."]);
+            }
             // create invoice along with order
             $orderData = [];
 
@@ -108,12 +119,6 @@ class SquareController extends BaseController
                 $orderData['shipment_amount'] = $this->shipment_amount ?? 0;
                 $orderData['estimate_day'] =  $this->estimate_days ?? Carbon::now()->addWeekdays(5)->format('l d-m-Y');
             }
-
-            $cartContent = Cart::session($this->userId)->getContent();
-            /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
-            $userIdToPass = ($this->userType != StatusEnum::GUEST) ? $this->userId : $this->user->id;
-            $user_type = ($this->userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
-            $cartItems = ($this->userType == StatusEnum::GUEST) ? $request->cart_items : [];
 
             $order = $this->createOrder(array(), $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems);
             if (!$order) {
@@ -156,7 +161,7 @@ class SquareController extends BaseController
             }
 
             DB::commit();
-            return $this->sendResponse(['Order' => $orderData], StatusEnum::PAYMENTMESSAGE);
+            return $this->sendResponse(['Order' => $orderData, "cart_data" => $check_product_first], StatusEnum::PAYMENTMESSAGE);
         } catch (Exception $e) {
             DB::rollBack();
             return response()->json(['code' => 400, 'message' => "something went wrong." . $e->getMessage()]);
@@ -251,7 +256,63 @@ class SquareController extends BaseController
         }
         return $environment;
     }
+    // check cart quantity with product quantity
+    public function checkProduct($cart_items)
+    {
+        try {
+            $data = [];
+            $cart = Cart::session($this->userId);
 
+            foreach ($cart_items as $value) {
+                # code...
+                $product = Product::whereId($value['product_id'])->withoutGlobalScopes()->first();
+
+                if ($product->quantity == 0) {
+
+                    (!$cart->isEmpty()) ? $cart->remove($value['product_id']) : true;
+
+                    $data[] = [
+                        'status' => false,
+                        'product_id' => $product->id,
+                        'message' => "Quantity is out of stock",
+                        'quantity' => $value['qty'],
+                        'available_quantity' => $product->quantity
+                    ];
+                } elseif ($product->quantity < $value['qty']) {
+
+                    if (!$cart->isEmpty()) {
+                        $cart->update($value['product_id'], [
+                            'quantity' => array(
+                                'relative' => false,
+                                'value' => $product->quantity
+                            ),
+                            'associatedModel' => $product
+                        ]);
+                    }
+
+                    $data[] = [
+                        'status' => false,
+                        'product_id' => $product->id,
+                        'message' => "Quantity is greater than product quantity",
+                        'quantity' => $value['qty'],
+                        'available_quantity' => $product->quantity
+                    ];
+                } else {
+                    $data[] = [
+                        'status' => true,
+                        'product_id' => $product->id,
+                        'message' => "quantity is available.",
+                        'quantity' => $value['qty'],
+                        'available_quantity' => $product->quantity
+                    ];
+                }
+            }
+
+            return $data;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
     // Transaction proceed
 
     // create order ,order item,invoice and update product
@@ -282,9 +343,11 @@ class SquareController extends BaseController
                     $ids[] = $item['product_id'];
                 }
                 //query to lock products
-                Product::whereIn('id', $ids)->lockForUpdate()
+                $check = Product::whereIn('id', $ids)->lockForUpdate()
                     ->get();
-
+                if ($check->isEmpty()) {
+                    return false;
+                }
                 foreach ($cartItems as $item) {
                     $product = Product::whereId($item['product_id'])->first();
 
@@ -297,13 +360,13 @@ class SquareController extends BaseController
                     ];
 
                     // Update item in product table
-                    $this->updateProduct($item['product_id'], $item['qty']);
+                    $update_product = $this->updateProduct($item['product_id'], $item['qty']);
 
                     // $productInfo = $this->getAmazonInventory($item['product_id']);
                     // if ($productInfo['status']) {
                     //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
                     // }
-                    $orderItem = OrderItem::create($data);
+                    OrderItem::create($data);
                 }
             } else {
                 foreach ($cartContent as $key => $item) {
@@ -311,9 +374,11 @@ class SquareController extends BaseController
                     $ids[] = $item->id;
                 }
                 //query to lock products
-                Product::whereIn('id', $ids)->lockForUpdate()
+                $check = Product::whereIn('id', $ids)->lockForUpdate()
                     ->get();
-
+                if ($check->isEmpty()) {
+                    return false;
+                }
                 foreach ($cartContent as $item) {
 
                     $data = [
@@ -331,7 +396,7 @@ class SquareController extends BaseController
                     // }
 
                     // Update item in product table
-                    $this->updateProduct($item->id, $item->quantity);
+                    $update_product = $this->updateProduct($item->id, $item->quantity);
 
                     OrderItem::create($data);
                 }
