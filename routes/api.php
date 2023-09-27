@@ -104,7 +104,7 @@ Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clearCart'
 
 Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('addQtyCart');
 
-Route::post('check-product-qty',[CartController::class,'checkProduct']);
+Route::post('check-product-qty', [CartController::class, 'checkProduct']);
 
 /*
 *Contact-us
@@ -138,6 +138,7 @@ Route::get('system-pages/{key?}', [SystemPagesController::class, 'getPages'])->n
 /*
 *Square Integration
 */
+
 Route::POST('square-charge', [SquareController::class, 'chargeCustomer'])->name('squreCharge');
 
 /*
@@ -150,7 +151,7 @@ Route::post('customer-verify-otp', [AuthController::class, 'verifyOtpCustomerEma
 /*
  Apply shippment for guest
 */
-Route::post('apply-shippment-guest',[CartController::class,'applyShipmentGuest']);
+Route::post('apply-shippment-guest', [CartController::class, 'applyShipmentGuest']);
 
 
 Route::group(['middleware' => 'refund'], function () {
