@@ -26,10 +26,16 @@ use App\Jobs\GenerateInvoiceJob;
 use App\Models\Order;
 use Carbon\Carbon;
 use App\Repositories\OrderRepository;
+use App\Models\Invoice;
+use App\Models\OrderItem;
+use App\Traits\Amazon\AmazonTrait;
+use App\Models\OrderShippingAddress;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
 class SquareController extends BaseController
 {
+    use AmazonTrait;
     //
     private $squareClient, $userId, $user, $totalAmount, $subTotal, $totalQty, $userType, $estimate_days, $shipment_amount;
     public function __construct(Request $request)
@@ -77,7 +83,11 @@ class SquareController extends BaseController
             } else {
                 $customer = $this->getCustomer();
             }
+
+
             DB::beginTransaction();
+
+
             // Get card Token
             $amount_money = new Money();
             $amount_money->setAmount($this->totalAmount * 100);
@@ -125,12 +135,8 @@ class SquareController extends BaseController
                 $user_type = ($this->userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
                 $cartItems = ($this->userType == StatusEnum::GUEST) ? $request->cart_items : [];
 
-                $order = $repository->createOrder(array(), $api_response, $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems);
-
-                if (!$order) {
-
-                    return response()->json(['code' => 400, 'message' => "something went wrong." . $order]);
-                }
+                $order = $this->createOrder(array(), $api_response, $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems);
+                return response()->json($order);
 
                 $orderData['order'] = $order['order'];
 
@@ -148,6 +154,7 @@ class SquareController extends BaseController
 
                 return response()->json(['code' => 400, 'message' => $errors[0]->getDetail()]);
             }
+
             DB::commit();
             return $this->sendResponse(['Order' => $orderData], StatusEnum::PAYMENTMESSAGE);
         } catch (Exception $e) {
@@ -243,5 +250,155 @@ class SquareController extends BaseController
             $environment = Environment::PRODUCTION;
         }
         return $environment;
+    }
+
+    // Transaction proceed
+
+    // create order ,order item,invoice and update product 
+    public function createOrder($data, $response, $userId, $user, $payment_type, $cartData, $cartContent = [], $shippingAddreess, $user_type, $cartItems = [])
+    {
+        try {
+
+            $invoice = $this->storeInvoice($payment_type, $data, $response, $userId, $user_type, $user);
+            //saving order after invoice created
+            $order = [];
+            // dd($cartContent, $cartData, $cartItems);
+            $order['total_amount'] = $cartData['total_amount'];
+            $order['sub_total'] = $cartData['sub_total'];
+            $order[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $user->id;      //user id or guest id
+            $order['invoice_id'] = $invoice->id;
+            $order['status'] = StatusEnum::COMPLETE;
+            $order['shipment_price'] = $cartData['shipment_amount'];
+            $order['shipment_days'] = $cartData['estimate_day'];
+            $order['item_qty'] = $cartData['item_qty'];
+            $order = Order::create($order);
+
+            if ($user_type == StatusEnum::GUEST) {
+
+                foreach ($cartItems as $item) {
+                    $product = Product::whereId($item['product_id'])->first();
+                    $data = [
+                        'order_id' => $order->id,
+                        'product_id' => $item['product_id'],
+                        'product_name' => $product->name,
+                        'qty' => $product->quantity,
+                        'price' => $product->price
+                    ];
+                    // Update item in product table
+                    $check_quantity = $this->updateProduct($item['product_id'], $item['qty']);
+
+                    // $productInfo = $this->getAmazonInventory($item['product_id']);
+                    // if ($productInfo['status']) {
+                    //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
+                    // }
+                    OrderItem::create($data);
+                }
+            } else {
+                foreach ($cartContent as $item) {
+
+                    $data = [
+                        'order_id' => $order->id,
+                        'product_id' => $item->id,
+                        'product_name' => $item->name,
+                        'qty' => $item->quantity,
+                        'price' => $item->price
+                    ];
+
+                    // $productInfo = $this->getAmazonInventory($item->id);
+
+                    // if ($productInfo['status']) {
+                    //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
+                    // }
+                    // dd('auth',$item);
+                    // Update item in product table
+                    $check_quantity = $this->updateProduct($item->id, $item->quantity);
+
+                    OrderItem::create($data);
+                }
+            }
+
+            //saving address of order
+            $OrderAddress = OrderShippingAddress::Create(
+                [
+                    'country' => $shippingAddreess['country'],
+                    'full_name' => $shippingAddreess['full_name'],
+                    'phone_number' => $shippingAddreess['phone_number'],
+                    'email' => $shippingAddreess['email'] ?? null,
+                    'address' => $shippingAddreess['address'],
+                    'city' => $shippingAddreess['city'],
+                    'state' => $shippingAddreess['state'],
+                    'zip_code' => $shippingAddreess['zip_code'],
+                    $user_type == StatusEnum::USER ? 'user_id' : 'guest_id' => $user->id,       //user id or guest id
+                    'user_type' => $user_type,
+                    'order_id' => $order->id
+                ]
+            );
+
+            $order = Order::find($order->id);
+
+            return [
+                "order" => $order,
+                "OrderAddress" => $OrderAddress
+
+            ];
+        } catch (Exception $e) {
+
+            return $e;
+        }
+    }
+
+    //Invoice create
+    protected function storeInvoice($payment_type, $data, $response, $userId, $user_type, $user)
+    {
+        try {
+
+
+            switch ($payment_type) {
+                case StatusEnum::PAYMENTTYPEPAYPAL:
+                    # Paypal data...
+                    $payerID = $data['PayerID'];
+
+                    $paymentType = StatusEnum::PAYMENTTYPEPAYPAL;
+
+                    $amount = $response['AMT'];
+
+                    break;
+                case StatusEnum::PAYMENTTYPESQUARE:
+                    # Square data...
+                    $payerID = $response->getResult()->getPayment()->getId();
+
+                    $paymentType = StatusEnum::PAYMENTTYPESQUARE;
+
+                    $amount = $response->getResult()->getPayment()->getApprovedMoney()->getAmount();
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+
+            $invoice = [];
+            $invoice['payer_id'] = $payerID;
+            $invoice['payment_type'] = $paymentType;
+            $invoice[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $user->id;          //user id or guest id
+            $invoice['amount'] =  $amount;
+            $invoice['status'] = StatusEnum::SUCCESS;
+            $invoice = Invoice::create($invoice);
+
+            return $invoice;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    //update product inventory
+    public function updateProduct($product_id, $quantity)
+    {
+        $product = Product::whereId($product_id)->first();
+
+
+        $totalQty = $product->quantity - $quantity;
+        $updateProduct = $product->update(['quantity' => $totalQty]);
+
+        return $updateProduct;
     }
 }
