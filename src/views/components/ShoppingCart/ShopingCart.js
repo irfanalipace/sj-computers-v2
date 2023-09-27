@@ -1,6 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import {
+    Link,
+    useLocation,
+    useNavigate,
+    useSearchParams,
+} from "react-router-dom";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { CartItem } from "./CartItem/CartItem";
@@ -8,6 +13,7 @@ import toggleSlice from "../../../core/store/toggle/toggleSlice";
 import "./ShopingCart.css";
 import { CheckoutBox } from "./CheckOut/CheckoutBox";
 import CartOverlay from "../Header/CartOverlay";
+import { validateCartItems } from "../../../core/store/cart/cartThunks";
 
 export const ShopingCart = ({ onFormSubmit, form }) => {
     const cartItems = useSelector((state) => state.cart.cart);
@@ -15,10 +21,12 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
     const isLoading = useSelector((state) => state.cart.isLoading);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const [searchParams, setSearchParams] = useSearchParams();
+    const location = useLocation();
+    const error = location.state?.error;
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const [showModal, setShowModal] = useState(false);
-    
+
     const modalRef = useRef(null);
 
     const handleClick = () => {
@@ -34,6 +42,22 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
             setShowModal(false);
         }
     };
+
+    useEffect(() => {
+        // displays error on top whenever payment fails and open shipping details form (First Accordion)
+        if (error && cartItems.length > 0) {
+            const cartData = cartItems?.map((item) => {
+                // map item according to the request payload format
+                return {
+                    product_id: item.id,
+                    qty: item.quantity,
+                };
+            });
+            dispatch(
+                validateCartItems({ cart_items: cartData }) //validate if all the items in the cart are available or not
+            );
+        }
+    }, [error, cartItems]);
 
     useEffect(() => {
         if (showModal) {

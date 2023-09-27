@@ -124,7 +124,11 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                     state: { order },
                 });
             } else {
-                navigate("/checkout?error=" + response?.message); // sets error in search params and checkout component reads this error and opens the shipping form and hides this modal
+                if (response?.cart_error) {
+                    navigate("/cart", {
+                        state: { error: true },
+                    }); // navigating to cart to update the cart according to available quantity
+                } else navigate("/checkout?error=" + response?.message); // sets error in search params and checkout component reads this error and opens the shipping form and hides this modal
             }
         } catch (error) {
             // updateCart();

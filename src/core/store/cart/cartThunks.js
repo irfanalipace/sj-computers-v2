@@ -280,9 +280,9 @@ export const syncGuestUserCart = (cartDetails) => {
         //     try {
         //         let response = await fetchCartApi(email);
         //         let items = { ...response.data };
-        //         console.log("response: ", response.data);
+        //         console.print("response: ", response.data);
         //         delete items.details;
-        //         console.log("items: ", items);
+        //         console.print("items: ", items);
         //         items = objectToArray(items);
         //         const cartDetails = {
         //             ...response.data.details,
@@ -301,7 +301,7 @@ export const syncGuestUserCart = (cartDetails) => {
         //             delete cartItem.associatedModel;
         //             return cartItem;
         //         });
-        //         console.log("cartItems:", cartItems);
+        //         console.print("cartItems:", cartItems);
         //         setLocalCart(cartItems);
         //         updateCartDetails(cartDetails);
         //         dispatch({
@@ -365,22 +365,25 @@ export const clearCart = () => {
     };
 };
 
-export const validateCartItems = (data, onSuccess, onFailure) => {
+export const validateCartItems = (args) => {
+    console.log("args: ", args);
     return async (dispatch, getState) => {
         const state = getState();
         try {
             if (!state.auth.isAuthenticated)
-                data.email = state.orders.shippingDetails.email;
-            let errors = await validateCartItemsApi(data);
+                args.cart_items.email = state.orders.shippingDetails.email;
+            let errors = await validateCartItemsApi({
+                cart_items: args.cart_items,
+            });
             const failedItems = errors.filter((err) => !err.status);
             if (failedItems?.length > 0) {
                 let response = await fetchCartApi();
                 const cartDetails = { ...response?.details };
                 let cartItems = [...response?.data];
                 cartItems = mapResponse(cartItems);
-                console.log("cartItems before: ", cartItems);
+                console.print("cartItems before: ", cartItems);
                 cartItems = setCartItemAfterError(cartItems, errors, true);
-                console.log("cartItems after: ", cartItems);
+                console.print("cartItems after: ", cartItems);
 
                 if (state.auth.isAuthenticated)
                     dispatch({
@@ -401,8 +404,8 @@ export const validateCartItems = (data, onSuccess, onFailure) => {
                         payload: cart,
                     });
                 }
-                onFailure();
-            } else onSuccess();
+                if (args.onFailure) args.onFailure();
+            } else if (args.onSuccess) args.onSuccess();
         } catch (error) {
             console.print("Something went wrong in orders", error);
         }

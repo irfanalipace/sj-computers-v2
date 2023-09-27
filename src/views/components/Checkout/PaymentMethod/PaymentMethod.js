@@ -49,31 +49,34 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
         });
         const onSuccess = () => {
             setIsLoading(false);
+            switch (paymentMethod) {
+                case PAYMENT_METHODS.PAYPAL:
+                    dispatch(
+                        placeOrder(
+                            {
+                                paymentMethod,
+                                shipping_address: shippingDetails,
+                            },
+                            (link) => location.replace(link)
+                        )
+                    );
+                    break;
+
+                case PAYMENT_METHODS.SQUARE:
+                    setPaymentModal(true);
+                    break;
+
+                default:
+                    break;
+            }
         };
         const onFailure = () => {
             navigate("/cart");
             setIsLoading(false);
         };
         dispatch(
-            validateCartItems({ cart_items: cartData }, onSuccess, onFailure) //validate if all the items in the cart are available or not
+            validateCartItems({ cart_items: cartData, onSuccess, onFailure }) //validate if all the items in the cart are available or not
         );
-        switch (paymentMethod) {
-            case PAYMENT_METHODS.PAYPAL:
-                dispatch(
-                    placeOrder(
-                        { paymentMethod, shipping_address: shippingDetails },
-                        (link) => location.replace(link)
-                    )
-                );
-                break;
-
-            case PAYMENT_METHODS.SQUARE:
-                setPaymentModal(true);
-                break;
-
-            default:
-                break;
-        }
     };
 
     return (
