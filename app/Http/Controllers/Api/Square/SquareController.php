@@ -73,6 +73,8 @@ class SquareController extends BaseController
     // charge process
     public function chargeCustomer(CardRequest $request, OrderRepository $repository)
     {
+        DB::beginTransaction();
+
         try {
 
             $idempotencyKey = uniqid();
@@ -83,10 +85,6 @@ class SquareController extends BaseController
             } else {
                 $customer = $this->getCustomer();
             }
-
-
-            DB::beginTransaction();
-
 
             // Get card Token
             $amount_money = new Money();
@@ -254,7 +252,7 @@ class SquareController extends BaseController
 
     // Transaction proceed
 
-    // create order ,order item,invoice and update product 
+    // create order ,order item,invoice and update product
     public function createOrder($data, $response, $userId, $user, $payment_type, $cartData, $cartContent = [], $shippingAddreess, $user_type, $cartItems = [])
     {
         try {
@@ -275,6 +273,13 @@ class SquareController extends BaseController
 
             if ($user_type == StatusEnum::GUEST) {
 
+
+                //query to lock products
+//                $record = YourModel::lockForUpdate()
+//                    ->whereIn('id', [$productIds])
+//                ->get();
+
+
                 foreach ($cartItems as $item) {
                     $product = Product::whereId($item['product_id'])->first();
                     $data = [
@@ -294,6 +299,12 @@ class SquareController extends BaseController
                     OrderItem::create($data);
                 }
             } else {
+
+                //query to lock products
+//                $record = YourModel::lockForUpdate()
+//                    ->whereIn('id', [$productIds])
+//                ->get();
+
                 foreach ($cartContent as $item) {
 
                     $data = [
