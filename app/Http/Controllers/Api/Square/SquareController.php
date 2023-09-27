@@ -86,6 +86,41 @@ class SquareController extends BaseController
                 $customer = $this->getCustomer();
             }
 
+            // create invoice along with order
+            $orderData = [];
+
+            $orderData['total_amount'] = number_format($this->totalAmount, 2, '.', '');
+            $orderData['sub_total'] = number_format($this->subTotal, 2, '.', '');
+            $orderData['item_qty'] =  $this->totalQty;
+
+
+            $orderData['shipment_amount'] =  0;
+            $orderData['estimate_day'] =  Carbon::now()->addWeekdays(5)->format('l d-m-Y');
+
+            $cartConditions = Cart::session($this->userId)->getConditions('shipment_days');
+
+            foreach ($cartConditions as $condition) {
+                $amount = $condition->getValue(); // the value of the condition
+                $orderData['shipment_amount'] = $amount;
+                $orderData['estimate_day'] =  $condition->getAttributes()['estimate_day'];
+            }
+            if ($this->userType == StatusEnum::GUEST) {
+                $orderData['shipment_amount'] = $this->shipment_amount ?? 0;
+                $orderData['estimate_day'] =  $this->estimate_days ?? Carbon::now()->addWeekdays(5)->format('l d-m-Y');
+            }
+
+            $cartContent = Cart::session($this->userId)->getContent();
+            /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
+            $userIdToPass = ($this->userType != StatusEnum::GUEST) ? $this->userId : $this->user->id;
+            $user_type = ($this->userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
+            $cartItems = ($this->userType == StatusEnum::GUEST) ? $request->cart_items : [];
+
+            $order = $this->createOrder(array(), $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems);
+            if (!$order) {
+                return response()->json(["cart" => 'Please Try Again']);
+            }
+            $orderData['order'] = $order['order'];
+
             // Get card Token
             $amount_money = new Money();
             $amount_money->setAmount($this->totalAmount * 100);
@@ -101,43 +136,10 @@ class SquareController extends BaseController
             $api_response = $this->squareClient->getPaymentsApi()->createPayment($body);
 
             if ($api_response->isSuccess()) {
-                $orderData = [];
-
-
-                $orderData['total_amount'] = number_format($this->totalAmount, 2, '.', '');
-                $orderData['sub_total'] = number_format($this->subTotal, 2, '.', '');
-                $orderData['item_qty'] =  $this->totalQty;
-
-
-                $orderData['shipment_amount'] =  0;
-                $orderData['estimate_day'] =  Carbon::now()->addWeekdays(5)->format('l d-m-Y');
-
-                $cartConditions = Cart::session($this->userId)->getConditions('shipment_days');
-
-                foreach ($cartConditions as $condition) {
-                    $amount = $condition->getValue(); // the value of the condition
-                    $orderData['shipment_amount'] = $amount;
-                    $orderData['estimate_day'] =  $condition->getAttributes()['estimate_day'];
-                }
-                if ($this->userType == StatusEnum::GUEST) {
-                    $orderData['shipment_amount'] = $this->shipment_amount ?? 0;
-                    $orderData['estimate_day'] =  $this->estimate_days ?? Carbon::now()->addWeekdays(5)->format('l d-m-Y');
-                }
-
-                $cartContent = Cart::session($this->userId)->getContent();
 
                 $result = $api_response->getResult();
-
-                /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
-                $userIdToPass = ($this->userType != StatusEnum::GUEST) ? $this->userId : $this->user->id;
-                $user_type = ($this->userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
-                $cartItems = ($this->userType == StatusEnum::GUEST) ? $request->cart_items : [];
-
-                $order = $this->createOrder(array(), $api_response, $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems);
-                return response()->json($order);
-
-                $orderData['order'] = $order['order'];
-
+                // update invoice column payer_id
+                Invoice::where('id', $order['invoice_id'])->update(['payer_id' => $api_response->getResult()->getPayment()->getId()]);
                 //sending invoice email of the payment to user
                 GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
                 // GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
@@ -253,14 +255,16 @@ class SquareController extends BaseController
     // Transaction proceed
 
     // create order ,order item,invoice and update product
-    public function createOrder($data, $response, $userId, $user, $payment_type, $cartData, $cartContent = [], $shippingAddreess, $user_type, $cartItems = [])
+    public function createOrder($data, $userId, $user, $payment_type, $cartData, $cartContent = [], $shippingAddreess, $user_type, $cartItems = [])
     {
         try {
+            $ids = [];
 
-            $invoice = $this->storeInvoice($payment_type, $data, $response, $userId, $user_type, $user);
+            $invoice = $this->storeInvoice($payment_type, $data, $cartData['total_amount'], $userId, $user_type, $user);
+
             //saving order after invoice created
             $order = [];
-            // dd($cartContent, $cartData, $cartItems);
+
             $order['total_amount'] = $cartData['total_amount'];
             $order['sub_total'] = $cartData['sub_total'];
             $order[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $user->id;      //user id or guest id
@@ -273,15 +277,17 @@ class SquareController extends BaseController
 
             if ($user_type == StatusEnum::GUEST) {
 
-
+                foreach ($cartItems as $item) {
+                    # store product_id into ids variable...
+                    $ids[] = $item['product_id'];
+                }
                 //query to lock products
-//                $record = YourModel::lockForUpdate()
-//                    ->whereIn('id', [$productIds])
-//                ->get();
-
+                Product::whereIn('id', $ids)->lockForUpdate()
+                    ->get();
 
                 foreach ($cartItems as $item) {
                     $product = Product::whereId($item['product_id'])->first();
+
                     $data = [
                         'order_id' => $order->id,
                         'product_id' => $item['product_id'],
@@ -289,21 +295,24 @@ class SquareController extends BaseController
                         'qty' => $product->quantity,
                         'price' => $product->price
                     ];
+
                     // Update item in product table
-                    $check_quantity = $this->updateProduct($item['product_id'], $item['qty']);
+                    $this->updateProduct($item['product_id'], $item['qty']);
 
                     // $productInfo = $this->getAmazonInventory($item['product_id']);
                     // if ($productInfo['status']) {
                     //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
                     // }
-                    OrderItem::create($data);
+                    $orderItem = OrderItem::create($data);
                 }
             } else {
-
+                foreach ($cartContent as $key => $item) {
+                    # store product_id into ids variable...
+                    $ids[] = $item->id;
+                }
                 //query to lock products
-//                $record = YourModel::lockForUpdate()
-//                    ->whereIn('id', [$productIds])
-//                ->get();
+                Product::whereIn('id', $ids)->lockForUpdate()
+                    ->get();
 
                 foreach ($cartContent as $item) {
 
@@ -320,9 +329,9 @@ class SquareController extends BaseController
                     // if ($productInfo['status']) {
                     //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
                     // }
-                    // dd('auth',$item);
+
                     // Update item in product table
-                    $check_quantity = $this->updateProduct($item->id, $item->quantity);
+                    $this->updateProduct($item->id, $item->quantity);
 
                     OrderItem::create($data);
                 }
@@ -349,20 +358,20 @@ class SquareController extends BaseController
 
             return [
                 "order" => $order,
-                "OrderAddress" => $OrderAddress
+                "OrderAddress" => $OrderAddress,
+                'invoice_id' => $invoice->id
 
             ];
         } catch (Exception $e) {
 
-            return $e;
+            return response()->json(['error' => 'something went wrong child .' . $e]);
         }
     }
 
     //Invoice create
-    protected function storeInvoice($payment_type, $data, $response, $userId, $user_type, $user)
+    protected function storeInvoice($payment_type, $data, $total_amount, $userId, $user_type, $user)
     {
         try {
-
 
             switch ($payment_type) {
                 case StatusEnum::PAYMENTTYPEPAYPAL:
@@ -371,16 +380,16 @@ class SquareController extends BaseController
 
                     $paymentType = StatusEnum::PAYMENTTYPEPAYPAL;
 
-                    $amount = $response['AMT'];
+                    // $amount = $response['AMT'];
 
                     break;
                 case StatusEnum::PAYMENTTYPESQUARE:
                     # Square data...
-                    $payerID = $response->getResult()->getPayment()->getId();
+                    // $payerID = $response->getResult()->getPayment()->getId();
 
                     $paymentType = StatusEnum::PAYMENTTYPESQUARE;
 
-                    $amount = $response->getResult()->getPayment()->getApprovedMoney()->getAmount();
+                    // $amount = $response->getResult()->getPayment()->getApprovedMoney()->getAmount();
                     break;
                 default:
                     # code...
@@ -388,10 +397,10 @@ class SquareController extends BaseController
             }
 
             $invoice = [];
-            $invoice['payer_id'] = $payerID;
+
             $invoice['payment_type'] = $paymentType;
             $invoice[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $user->id;          //user id or guest id
-            $invoice['amount'] =  $amount;
+            $invoice['amount'] =  $total_amount;
             $invoice['status'] = StatusEnum::SUCCESS;
             $invoice = Invoice::create($invoice);
 
@@ -405,7 +414,6 @@ class SquareController extends BaseController
     public function updateProduct($product_id, $quantity)
     {
         $product = Product::whereId($product_id)->first();
-
 
         $totalQty = $product->quantity - $quantity;
         $updateProduct = $product->update(['quantity' => $totalQty]);
