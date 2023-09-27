@@ -11,7 +11,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 export default function ThankYou() {
     // const isMobile = window.innerWidth <= 768;
-
     function formatDate(dateString) {
         const options = { year: "numeric", month: "long", day: "numeric" };
         const date = new Date(dateString);
@@ -169,13 +168,16 @@ export default function ThankYou() {
                                               "..."
                                             : data?.product_name}
                                     </div>
-                                   
+
                                     <div className="product-details-Thanks">
                                         <div className="quantity">
                                             <span>Quantity:</span>
                                         </div>
                                         <div className="col-12 my-2 quantity">
-                                            {data.qty}
+                                            {isAuthenticated
+                                                ? data?.qty
+                                                : data?.qty -
+                                                  data?.product?.quantity}
                                         </div>
                                         <div className="col-12 my-2 order-no">
                                             <span>Order No:</span>
@@ -268,7 +270,12 @@ export default function ThankYou() {
                                             )}
                                         </div>
                                     </td>
-                                    <td>{data.qty}</td>
+                                    <td>
+                                        {isAuthenticated
+                                            ? data?.qty
+                                            : data?.qty -
+                                              data?.product?.quantity}
+                                    </td>
                                     <td>{data?.order_id}</td>
                                     <td>{formatDate(data.created_at)}</td>
                                     <td>
