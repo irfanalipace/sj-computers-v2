@@ -14,6 +14,7 @@ import "./CartItem.css";
 import { Link } from "react-router-dom";
 
 export const CartItem = memo(({ cartData }) => {
+    console.log("cartData in component ", cartData);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const details = useSelector((state) => state.cart.details);
     const [updatingItem, setUpdatingItem] = useState(false);
