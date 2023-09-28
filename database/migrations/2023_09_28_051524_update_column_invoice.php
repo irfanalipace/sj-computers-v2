@@ -14,7 +14,7 @@ class UpdateColumnInvoice extends Migration
     public function up()
     {
         Schema::table('invoices', function (Blueprint $table) {
-            $table->string('payer_id')->nullable();
+            $table->string('payer_id')->nullable()->change();
         });
     }
 
@@ -26,7 +26,7 @@ class UpdateColumnInvoice extends Migration
     public function down()
     {
         Schema::table('invoices', function (Blueprint $table) {
-            $table->string('payer_id');
+            $table->string('payer_id')->change();
         });
     }
 }
