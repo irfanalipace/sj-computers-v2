@@ -265,11 +265,14 @@ class SquareController extends BaseController
 
             foreach ($cart_items as $value) {
                 # code...
-                $product = Product::whereId($value['product_id'])->withoutGlobalScopes()->first();
+
+                $product_id = ($this->userType == StatusEnum::GUEST) ? $value['product_id'] : $value['id'];
+                $quantity = ($this->userType == StatusEnum::GUEST) ? $value['qty'] : $value['quantity'];
+                $product = Product::whereId($product_id)->withoutGlobalScopes()->first();
 
                 if ($product->quantity == 0) {
 
-                    (!$cart->isEmpty()) ? $cart->remove($value['product_id']) : true;
+                    (!$cart->isEmpty()) ? $cart->remove($product_id) : true;
 
                     $data[] = [
                         'status' => false,
@@ -278,10 +281,10 @@ class SquareController extends BaseController
                         'quantity' => $value['qty'],
                         'available_quantity' => $product->quantity
                     ];
-                } elseif ($product->quantity < $value['qty']) {
+                } elseif ($product->quantity < $quantity) {
 
                     if (!$cart->isEmpty()) {
-                        $cart->update($value['product_id'], [
+                        $cart->update($product_id, [
                             'quantity' => array(
                                 'relative' => false,
                                 'value' => $product->quantity
@@ -294,7 +297,7 @@ class SquareController extends BaseController
                         'status' => false,
                         'product_id' => $product->id,
                         'message' => "Quantity is greater than product quantity",
-                        'quantity' => $value['qty'],
+                        'quantity' => $quantity,
                         'available_quantity' => $product->quantity
                     ];
                 } else {
@@ -302,7 +305,7 @@ class SquareController extends BaseController
                         'status' => true,
                         'product_id' => $product->id,
                         'message' => "quantity is available.",
-                        'quantity' => $value['qty'],
+                        'quantity' => $quantity,
                         'available_quantity' => $product->quantity
                     ];
                 }
