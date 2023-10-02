@@ -42,7 +42,22 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
         validate: (values) => {
             const errors = {};
             if (!values.full_name) errors.full_name = "( Required )";
-            if (!values.email) errors.email = "( Required )";
+            if (!values.email) {
+                errors.email = "( Required )";
+            } else if (values.email) {
+                const emailRegex =
+                    /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+                const checkDotRegex = /^(?!.*@\.)/; // checks that dot(.) should not come immediately after @ in email
+
+                if (
+                    !(
+                        emailRegex.test(values.email) &&
+                        checkDotRegex.test(values.email)
+                    )
+                ) {
+                    errors.email = "( Email Format is Incorrect )";
+                }
+            }
             if (!values.address) errors.address = "( Required )";
             if (!values.phone_number) errors.phone_number = "( Required )";
             if (!values.city) errors.city = "( Required )";
