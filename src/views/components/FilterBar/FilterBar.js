@@ -488,7 +488,7 @@ const FilterBar = () => {
                 {(!!filters[category].length ||
                     !Array.isArray(filters[category])) && (
                     <li className="filter-key" key={`${category}-${index}`}>
-                        <h4 className="filter-heading">{category}</h4>
+                        <h3 className="filter-heading">{category}</h3>
                         <ul className="filter-values-list">
                             {Array.isArray(filters[category])
                                 ? renderedItems(options, category)
