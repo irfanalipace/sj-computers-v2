@@ -95,8 +95,9 @@ class SquareController extends BaseController
             $listofItems = ($this->userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
             $check_product_first = $this->checkProduct($listofItems);
             if (!$check_product_first) {
-                return response()->json(['code' => 400, "cart_error" => true, 'message' => "something went wrong."]);
+                return response()->json(['code' => 400, "cart_error" => true, 'message' => "Please try again ."]);
             }
+
             // create invoice along with order
             $orderData = [];
 
@@ -265,23 +266,20 @@ class SquareController extends BaseController
 
             foreach ($cart_items as $value) {
                 # code...
-                $product = Product::whereId($value['product_id'])->withoutGlobalScopes()->first();
+
+                $product_id = ($this->userType == StatusEnum::GUEST) ? $value['product_id'] : $value['id'];
+                $quantity = ($this->userType == StatusEnum::GUEST) ? $value['qty'] : $value['quantity'];
+                $product = Product::whereId($product_id)->withoutGlobalScopes()->first();
 
                 if ($product->quantity == 0) {
 
-                    (!$cart->isEmpty()) ? $cart->remove($value['product_id']) : true;
+                    (!$cart->isEmpty()) ? $cart->remove($product_id) : true;
 
-                    $data[] = [
-                        'status' => false,
-                        'product_id' => $product->id,
-                        'message' => "Quantity is out of stock",
-                        'quantity' => $value['qty'],
-                        'available_quantity' => $product->quantity
-                    ];
-                } elseif ($product->quantity < $value['qty']) {
+                    return false;
+                } elseif ($product->quantity < $quantity) {
 
                     if (!$cart->isEmpty()) {
-                        $cart->update($value['product_id'], [
+                        $cart->update($product_id, [
                             'quantity' => array(
                                 'relative' => false,
                                 'value' => $product->quantity
@@ -290,19 +288,13 @@ class SquareController extends BaseController
                         ]);
                     }
 
-                    $data[] = [
-                        'status' => false,
-                        'product_id' => $product->id,
-                        'message' => "Quantity is greater than product quantity",
-                        'quantity' => $value['qty'],
-                        'available_quantity' => $product->quantity
-                    ];
+                    return false;
                 } else {
                     $data[] = [
                         'status' => true,
                         'product_id' => $product->id,
                         'message' => "quantity is available.",
-                        'quantity' => $value['qty'],
+                        'quantity' => $quantity,
                         'available_quantity' => $product->quantity
                     ];
                 }
