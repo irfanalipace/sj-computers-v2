@@ -33,7 +33,7 @@
                         <h3 class="panel-title">Email</h3>
                     </div>
                     <div class="panel-body" style="padding-top:0;">
-                        <p>{{ $invoiceOrder->user->shippingAddress->email ?? $invoiceOrder->user->email}}</p>
+                        <p>{{ $invoiceOrder->user->shippingAddress->email ?? ''}}</p>
                     </div>
                     <hr style="margin:0;">
 
