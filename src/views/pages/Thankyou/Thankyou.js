@@ -270,12 +270,7 @@ export default function ThankYou() {
                                             )}
                                         </div>
                                     </td>
-                                    <td>
-                                        {isAuthenticated
-                                            ? data?.qty
-                                            : data?.qty -
-                                              data?.product?.quantity}
-                                    </td>
+                                    <td>{data?.qty}</td>
                                     <td>{data?.order_id}</td>
                                     <td>{formatDate(data.created_at)}</td>
                                     <td>
