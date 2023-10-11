@@ -49,7 +49,7 @@ Route::post('register', [AuthController::class, 'registerUser']);
 
 Route::post('login', [AuthController::class, 'login']);
 
-//Route::post('forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password');
+Route::post('forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password');
 
 Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
 
