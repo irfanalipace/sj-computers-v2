@@ -52,6 +52,16 @@
     font-size: 18px;
 }
 
+.product-type-section h1 {
+    text-align: left;
+    /* padding-left: 20px; */
+    font-weight: 600;
+    font-size: 18px;
+}
+
+
+
+
 .product-type-section img {
     max-width: 86%;
     max-height: 228px;
