@@ -101,4 +101,13 @@ class OrderController extends BaseController
         $data = Order::where('invoice_id', $request->invoice_id)->OrWhere('id', $request->order_id)->get();
         return $this->sendResponse($data);
     }
+
+    public function showOrderDetail($id)
+    {
+        $order = Order::query()->find($id);
+        $invoiceOrder = $order->load(['user.shippingAddress','guest']);
+
+        return view('vendor.voyager.orders.show_details', compact('invoiceOrder'));
+
+    }
 }

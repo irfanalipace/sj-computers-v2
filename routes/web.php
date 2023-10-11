@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\InventoryController;
+use App\Http\Controllers\Api\Order\OrderController;
 use App\Http\Controllers\MarketingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
@@ -21,7 +22,7 @@ use App\Http\Controllers\SiteMapController;
 */
 
 
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+//Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
 
 Route::get('hold-release-product',[HoldReleaseController::class,'updateRecord'])->name('hold-release-product');
 
@@ -31,6 +32,8 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('export-inventory',[InventoryController::class,'downloadInventoryFile'])->name('export-inventory');
 
 Route::get('gmarketingfeed',[MarketingController::class,'gmarketingfeed'])->name('gmarketingfeed');
+
+Route::get('order-show-detail/{id}',[OrderController::class,'showOrderDetail'])->name('order-show-detail');
 
 //Route::get('sitemap/index.xml', [SiteMapController::class, 'generateSiteMap']);
 //Route::get('sitemap_pages.xml', [SiteMapController::class, 'pageSiteMap']);
