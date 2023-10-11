@@ -174,10 +174,7 @@ export default function ThankYou() {
                                             <span>Quantity:</span>
                                         </div>
                                         <div className="col-12 my-2 quantity">
-                                            {isAuthenticated
-                                                ? data?.qty
-                                                : data?.qty -
-                                                  data?.product?.quantity}
+                                            {data?.qty}}
                                         </div>
                                         <div className="col-12 my-2 order-no">
                                             <span>Order No:</span>
