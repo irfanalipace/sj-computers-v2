@@ -174,7 +174,7 @@ export default function ThankYou() {
                                             <span>Quantity:</span>
                                         </div>
                                         <div className="col-12 my-2 quantity">
-                                            {data?.qty}}
+                                            {data?.qty}
                                         </div>
                                         <div className="col-12 my-2 order-no">
                                             <span>Order No:</span>
