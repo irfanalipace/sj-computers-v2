@@ -93,6 +93,7 @@ class SquareController extends BaseController
 
             $cartContent = Cart::session($this->userId)->getContent();
             $listofItems = ($this->userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
+            
             $check_product_first = $this->checkProduct($listofItems);
             if (!$check_product_first) {
                 return response()->json(['code' => 400, "cart_error" => true, 'message' => "Please try again ."]);
@@ -146,7 +147,7 @@ class SquareController extends BaseController
                 $result = $api_response->getResult();
                 // update invoice column payer_id
                 Invoice::where('id', $order['invoice_id'])->update(['payer_id' => $api_response->getResult()->getPayment()->getId()]);
-                //sending invoice email of the payment to user
+                //sending invoice email of the payment to user              
                 GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
                 // GenerateInvoiceJob::dispatch(array(), $api_response, $this->userId, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent);
 
@@ -272,12 +273,12 @@ class SquareController extends BaseController
                 $product = Product::whereId($product_id)->withoutGlobalScopes()->first();
 
                 if ($product->quantity == 0) {
-
+                   
                     (!$cart->isEmpty()) ? $cart->remove($product_id) : true;
 
                     return false;
                 } elseif ($product->quantity < $quantity) {
-
+                   
                     if (!$cart->isEmpty()) {
                         $cart->update($product_id, [
                             'quantity' => array(
@@ -299,7 +300,7 @@ class SquareController extends BaseController
                     ];
                 }
             }
-
+           
             return $data;
         } catch (Exception $e) {
             return false;
@@ -342,12 +343,12 @@ class SquareController extends BaseController
                 }
                 foreach ($cartItems as $item) {
                     $product = Product::whereId($item['product_id'])->first();
-
+                    
                     $data = [
                         'order_id' => $order->id,
                         'product_id' => $item['product_id'],
                         'product_name' => $product->name,
-                        'qty' => $product->quantity,
+                        'qty' => $item['qty'],
                         'price' => $product->price
                     ];
 

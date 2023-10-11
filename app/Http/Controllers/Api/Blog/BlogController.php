@@ -22,8 +22,7 @@ class BlogController extends BaseController
             ->orderBy('id', 'desc')
             ->paginate($perPage);
 
-        $records->map(function ($record) {
-
+        $records->getCollection()->transform(function ($record) {
             $record['primary_image'] = is_null($record['primary_image']) ? $record['primary_image'] : config('app.url') . '/storage/' . $record['primary_image'];
             $record['thumbnail_image'] = is_null($record['thumbnail_image']) ? $record['thumbnail_image'] : config('app.url') . '/storage/' . $record['thumbnail_image'];
             $record['secondary_image'] = is_null($record['secondary_image']) ? $record['secondary_image'] : config('app.url') . '/storage/' . $record['secondary_image'];
@@ -56,8 +55,8 @@ class BlogController extends BaseController
         try {
             $perPage = $request->per_page ?? 12;
 
-            $category = Category::where('id',$request->category_id)->with('blogs')->first();
-            $blogs= $category->blogs()->paginate($perPage);
+            $category = Category::where('id', $request->category_id)->with('blogs')->first();
+            $blogs = $category->blogs()->paginate($perPage);
 
             $blogs->map(function ($record) {
 
@@ -72,5 +71,4 @@ class BlogController extends BaseController
             return $this->sendError('error', $e->getMessage());
         }
     }
-
 }
