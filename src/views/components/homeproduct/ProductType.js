@@ -19,7 +19,7 @@ const ProductType = () => {
             <div className="row mx-0">
                 <div className="col-12 col-sm-6 col-lg-3">
                     <div className="product-type-section">
-                        <h2 className="h4-heading">Shop by Category</h2>
+                        <h1 className="h4-heading">Shop by Category</h1>
                         <div className="categories-container">
                             <ProductItem4 />
                         </div>
