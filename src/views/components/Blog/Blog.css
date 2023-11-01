@@ -45,6 +45,7 @@ li.policy-listitem {
     width: 267px;
     margin-left: 25px;
     margin-left: '33px';
+   
 }
 .widget_categories ul {
     margin-top: 13px;
@@ -600,7 +601,8 @@ div.sticky {
 }
 
 .left-dev-span-stories {
-    text-align: center;
+    text-align: left;
+    margin-left: 12px;
     padding-top: 10px;
 }
 .left-dev-span-stories span {

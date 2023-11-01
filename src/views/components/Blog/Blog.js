@@ -44,9 +44,9 @@ const Blog = () => {
 
     const [blogdteails, setBlogDetails] = useState("");
     const [blogsdetailserror, setBlogdetailsError] = useState(false);
-
+    const [isCollapsed, setCollapsed] = useState(false);
     const [blogLoading, setblogLoading] = useState(false);
-
+    const [isRecentcollapsed, setRecentCollapsed] = useState(false);
     const [blogs, setBlogs] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(3);
@@ -162,7 +162,7 @@ const Blog = () => {
 
                     firstH2Tag.insertAdjacentElement("afterend", imgTag);
                 }
-            } catch (error) {}
+            } catch (error) { }
             const wpm = 225;
             const text = `${blogdteails.content}`;
             const words = text.trim()?.split(/\s+/)?.length;
@@ -252,6 +252,32 @@ const Blog = () => {
         (a, b) => new Date(b.publish_date) - new Date(a.publish_date)
     );
 
+
+
+
+
+    const toggleCollapse = () => {
+        setCollapsed(!isCollapsed);
+    };
+    const RecentCollapse = () => {
+        setRecentCollapsed(!isRecentcollapsed);
+    };
+
+
+    // if (!isCollapsed && blogscategories.length > 0) {
+    //   RenderedCategories = (
+    //     <div className="widget widget_categories">
+    //       <h4>Categories</h4>
+    //       <ul>
+    //         {blogscategories.map((category) => (
+    //           <li key={category.id}>{category.name}</li>
+    //         ))}
+    //       </ul>
+    //     </div>
+    //   );
+    // }
+
+
     return (
         <>
             {blogsdetailserror ? (
@@ -327,15 +353,15 @@ const Blog = () => {
                                                     <span>
                                                         {blogdteails.publish_date
                                                             ? new Date(
-                                                                  blogdteails.publish_date
-                                                              ).toLocaleDateString(
-                                                                  "en-US",
-                                                                  {
-                                                                      month: "2-digit",
-                                                                      day: "2-digit",
-                                                                      year: "numeric",
-                                                                  }
-                                                              )
+                                                                blogdteails.publish_date
+                                                            ).toLocaleDateString(
+                                                                "en-US",
+                                                                {
+                                                                    month: "2-digit",
+                                                                    day: "2-digit",
+                                                                    year: "numeric",
+                                                                }
+                                                            )
                                                             : null}
                                                     </span>
                                                 </div>
@@ -452,77 +478,93 @@ const Blog = () => {
                                 <div className="row">
                                     <div className="col-md-3 top-stories-data">
                                         <div className="main-dev-card-deprt">
-                                            <div className="left-dev-span-stories">
-                                                <span>Recent Articles</span>
+                                            <div className="left-dev-span-stories" onClick={RecentCollapse}>
+                                                <span >Recent Articles</span>
+                                                <button style={{marginLeft:"84px", border:'none'}}> <i className="fa-solid fa-chevron-down"></i></button>
                                             </div>
+                                            {/* <div>
+                                           
+                                            </div> */}
+                                           
                                             <div>
-                                                <hr
-                                                    style={{
-                                                        marginBottom: "8px",
-                                                        marginTop: "6px",
-                                                        marginRight: "5px",
-                                                        marginLeft: "2px",
-                                                    }}
-                                                />
-                                            </div>
-                                            <div>
-                                                {filteredArr?.map((blog) => (
-                                                    <div key={blog.id}>
-                                                        {console.log(
-                                                            blogs,
-                                                            "response.data?.data"
-                                                        )}
-                                                        <Link
-                                                            to={`/${blog?.slug}`}
-                                                            className="text-decoration-none"
-                                                        >
-                                                            <div className="row">
-                                                                <div className="col-4">
-                                                                    <div className="them-stori-mage">
-                                                                        <img
-                                                                            src={
-                                                                                blog?.thumbnail_image
-                                                                            }
-                                                                            alt={
-                                                                                blog?.alt_thumbnail_image
-                                                                            }
-                                                                        />
+                                                <div>
+                                                    <hr
+                                                        style={{
+                                                            marginBottom: "8px",
+                                                            marginTop: "6px",
+                                                            marginRight: "5px",
+                                                            marginLeft: "2px",
+                                                        }}
+                                                    />
+                                                </div>
+                                                <div>
+                                                    {isRecentcollapsed && filteredArr?.map((blog) => (
+                                                        <div key={blog.id}>
+                                                            {console.log(
+                                                                blogs,
+                                                                "response.data?.data"
+                                                            )}
+                                                            <Link
+                                                                to={`/${blog?.slug}`}
+                                                                className="text-decoration-none"
+                                                            >
+                                                                <div className="row">
+                                                                    <div className="col-4">
+                                                                        <div className="them-stori-mage">
+                                                                            <img
+                                                                                src={
+                                                                                    blog?.thumbnail_image
+                                                                                }
+                                                                                alt={
+                                                                                    blog?.alt_thumbnail_image
+                                                                                }
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col-8">
+                                                                        <div className="dev-span-section4-dev">
+                                                                            <span className="read-more-span-text">
+                                                                                {
+                                                                                    blog?.meta_description
+                                                                                }
+                                                                            </span>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                <div className="col-8">
-                                                                    <div className="dev-span-section4-dev">
-                                                                        <span className="read-more-span-text">
-                                                                            {
-                                                                                blog?.meta_description
-                                                                            }
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </Link>
-                                                        <hr
-                                                            style={{
-                                                                marginBottom:
-                                                                    "5px",
-                                                                marginTop:
-                                                                    "4px",
-                                                                marginRight:
-                                                                    "5px",
-                                                                marginLeft:
-                                                                    "2px",
-                                                            }}
-                                                        />
-                                                    </div>
-                                                ))}
+                                                            </Link>
+                                                            <hr
+                                                                style={{
+                                                                    marginBottom:
+                                                                        "5px",
+                                                                    marginTop:
+                                                                        "4px",
+                                                                    marginRight:
+                                                                        "5px",
+                                                                    marginLeft:
+                                                                        "2px",
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
+                                        <div>
+                                            <button onClick={toggleCollapse} className="widget widget_categories" style={{ textAlign: 'left' }}> Categories <i className="fa-solid fa-chevron-down" style={{marginLeft:'120px'}}></i></button>
+                                            {isCollapsed && blogscategories.length > 0 && (
+                                                <div className="widget widget_categories">
+                                                    {/* <h4>Categories</h4> */}
+                                                    {RenderedCategories}  
+                                                </div>
+                                            )}
+                                        </div>
 
-                                        {blogscategories?.length > 0 && (
+                                        {/* {blogscategories?.length > 0 && (
                                             <div className="widget widget_categories">
                                                 <h4>Categories</h4>
                                                 {RenderedCategories}
                                             </div>
-                                        )}
+                                        )} */}
 
                                         {/* <div className="widget widget_categories">
                                             <h4>Category</h4>
