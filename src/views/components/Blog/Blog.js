@@ -480,12 +480,12 @@ const Blog = () => {
                                         <div className="main-dev-card-deprt">
                                             <div className="left-dev-span-stories" onClick={RecentCollapse}>
                                                 <span >Recent Articles</span>
-                                                <button style={{marginLeft:"84px", border:'none'}}> <i className="fa-solid fa-chevron-down"></i></button>
+                                                <button style={{ marginLeft: "90px", border: 'none' }}> <i className="fa-solid fa-chevron-down"></i></button>
                                             </div>
                                             {/* <div>
                                            
                                             </div> */}
-                                           
+
                                             <div>
                                                 <div>
                                                     <hr
@@ -550,11 +550,11 @@ const Blog = () => {
                                             </div>
                                         </div>
                                         <div>
-                                            <button onClick={toggleCollapse} className="widget widget_categories" style={{ textAlign: 'left' }}> Categories <i className="fa-solid fa-chevron-down" style={{marginLeft:'120px'}}></i></button>
+                                            <button onClick={toggleCollapse} className="widget widget_categories" style={{ textAlign: 'left' }}> Categories <i className="fa-solid fa-chevron-down" style={{ marginLeft: '120px' }}></i></button>
                                             {isCollapsed && blogscategories.length > 0 && (
                                                 <div className="widget widget_categories">
                                                     {/* <h4>Categories</h4> */}
-                                                    {RenderedCategories}  
+                                                    {RenderedCategories}
                                                 </div>
                                             )}
                                         </div>
