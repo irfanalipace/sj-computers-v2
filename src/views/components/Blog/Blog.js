@@ -436,7 +436,7 @@ const Blog = () => {
 
                             <div
                                 className="container image-cainter-dev"
-                                style={{ height: "400px" }}
+                                // style={{ height: "400px" }}
                             >
                                 <div className="row">
                                     <div className="col-12">
@@ -478,12 +478,16 @@ const Blog = () => {
                                 <div className="row">
                                     <div className="col-md-3 top-stories-data">
                                         <div className="main-dev-card-deprt">
-                                            <div className="left-dev-span-stories" onClick={RecentCollapse}>
-                                                <span >Recent Articles</span>
-                                                <button style={{ marginLeft: "90px", border: 'none' }}> <i className="fa-solid fa-chevron-down"></i></button>
+                                            <div className="left-dev-span-stories recent-bogs-view-clops" onClick={RecentCollapse} style={{display:'flex'}}>
+                                               <div>
+                                               <span >Recent Articles</span>
+                                               </div>
+                                               <div>
+                                               <button  className="recenr-articel-data"> <i className="fa-solid fa-chevron-down"></i></button>
+                                               </div>
                                             </div>
                                             {/* <div>
-                                           
+                                            <button  className="recenr-articel-data"> <i className="fa-solid fa-chevron-down"></i></button>
                                             </div> */}
 
                                             <div>
@@ -549,8 +553,17 @@ const Blog = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div>
-                                            <button onClick={toggleCollapse} className="widget widget_categories" style={{ textAlign: 'left' }}> Categories <i className="fa-solid fa-chevron-down" style={{ marginLeft: '120px' }}></i></button>
+                                        <div >
+                                            <div onClick={toggleCollapse} className="widget widget_categories categor-data-scrping">
+                                            <div>
+                                                <span>Categories</span>                    
+                                            </div>
+                                            <div>
+                                            <i className="fa-solid fa-chevron-down" ></i>                   
+                                            </div>
+                                            {/* <button onClick={toggleCollapse}  style={{ textAlign: 'left' }}> Categories <i className="fa-solid fa-chevron-down icon-data-dropdown" ></i></button> */}
+                                         
+                                            </div>
                                             {isCollapsed && blogscategories.length > 0 && (
                                                 <div className="widget widget_categories">
                                                     {/* <h4>Categories</h4> */}
