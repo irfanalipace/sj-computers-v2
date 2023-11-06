@@ -259,7 +259,7 @@
                                                 @endif
                                             @endforeach
 
-                                                <a href="{{url('order-show-detail/'. $data->id)}}" title="Show Detail" class="btn btn-sm btn-success pull-right view">
+                                                <a href="{{url('order-show-detail/'. $data->id)}}" title="Show Detail" class="btn btn-sm btn-success pull-right view" style="margin-right: 5px;">
                                                     <i class="icon voyager-file-text"></i> <span class="hidden-xs hidden-sm">Show Detail</span>
                                                 </a>
 
