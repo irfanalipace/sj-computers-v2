@@ -63,11 +63,11 @@ module.exports = {
         new CleanWebpackPlugin(), // Clean output directory before each build
         new Dotenv(),
         // new BundleAnalyzerPlugin(),
-        new CompressionPlugin({
-            algorithm: "gzip",
-            test: /\.(js|css|png|jpg|jpeg|webp)$/,
-            threshold: 10240,
-            minRatio: 0.8,
-        }),
+        // new CompressionPlugin({
+        //     algorithm: "gzip",
+        //     test: /\.(js|css|png|jpg|jpeg|webp)$/,
+        //     threshold: 10240,
+        //     minRatio: 0.8,
+        // }),
     ],
 };
