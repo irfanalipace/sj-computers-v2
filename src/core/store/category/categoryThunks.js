@@ -13,8 +13,9 @@ export const fetchCategory = () => {
             dispatch({ type: LOADING, payload: {} });
             const response = await categoryApi();
             if (response.data?.length > 0) {
-                const categories = response?.data?.filter((category) =>
-                    restrictedCategories?.includes(category?.slug)
+                const categories = response?.data?.filter(
+                    (category) =>
+                        !restrictedCategories?.includes(category?.slug)
                 );
                 dispatch({ type: FETCH_CATEGORIES, payload: categories });
             }
