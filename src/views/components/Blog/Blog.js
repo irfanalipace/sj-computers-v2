@@ -436,55 +436,36 @@ const Blog = () => {
 
                             <div
                                 className="container image-cainter-dev"
-                                // style={{ height: "400px" }}
+                            // style={{ height: "400px" }}
                             >
-                                <div className="row">
-                                    <div className="col-12">
-                                        <div className="background-image-lin-dve ">
-                                            {/* <img
-                                                                         src={primardataimage}
-                                                                         alt="all_text"
-                                                                     /> */}
-                                            {/* {blogdteails.primary_image &&
-                                                blogdteails.all_text && (
-                                                    <img
-                                                        src={
-                                                            blogdteails.primary_image
-                                                        }
-                                                        alt={
-                                                            blogdteails.all_text
-                                                        }
-                                                    />
-                                                )} */}
 
-                                            <div>
-                                                {/* <img
-                                        src={blogdteails.primary_image}
-                                        alt={blogdteails.all_text}
-                                    /> */}
-                                                <img
-                                                    src={
-                                                        blogdteails.primary_image
-                                                    }
-                                                    alt={blogdteails.all_text}
-                                                />
-                                            </div>
-                                        </div>
+                                <div className="background-image-lin-dve ">
+
+
+                                    <div>
+
+                                        <img
+                                            src={
+                                                blogdteails.primary_image
+                                            }
+                                            alt={blogdteails.all_text}
+                                        />
                                     </div>
                                 </div>
+
                             </div>
 
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3 top-stories-data">
                                         <div className="main-dev-card-deprt">
-                                            <div className="left-dev-span-stories recent-bogs-view-clops" onClick={RecentCollapse} style={{display:'flex'}}>
-                                               <div>
-                                               <span >Recent Articles</span>
-                                               </div>
-                                               <div>
-                                               <button  className="recenr-articel-data"> <i className="fa-solid fa-chevron-down"></i></button>
-                                               </div>
+                                            <div className="left-dev-span-stories recent-bogs-view-clops" onClick={RecentCollapse} style={{ display: 'flex' }}>
+                                                <div>
+                                                    <span >Recent Articles</span>
+                                                </div>
+                                                <div>
+                                                    <button className="recenr-articel-data"> <i className="fa-solid fa-chevron-down"></i></button>
+                                                </div>
                                             </div>
                                             {/* <div>
                                             <button  className="recenr-articel-data"> <i className="fa-solid fa-chevron-down"></i></button>
@@ -555,14 +536,14 @@ const Blog = () => {
                                         </div>
                                         <div >
                                             <div onClick={toggleCollapse} className="widget widget_categories categor-data-scrping">
-                                            <div className="category-data-span-blogs">
-                                                <span>Categories</span>                    
-                                            </div>
-                                            <div className="fave-category-dropdown-button-blogs-data">
-                                           <button> <i className="fa-solid fa-chevron-down" ></i></button>                  
-                                            </div>
-                                            {/* <button onClick={toggleCollapse}  style={{ textAlign: 'left' }}> Categories <i className="fa-solid fa-chevron-down icon-data-dropdown" ></i></button> */}
-                                         
+                                                <div className="category-data-span-blogs">
+                                                    <span>Categories</span>
+                                                </div>
+                                                <div className="fave-category-dropdown-button-blogs-data">
+                                                    <button> <i className="fa-solid fa-chevron-down" ></i></button>
+                                                </div>
+                                                {/* <button onClick={toggleCollapse}  style={{ textAlign: 'left' }}> Categories <i className="fa-solid fa-chevron-down icon-data-dropdown" ></i></button> */}
+
                                             </div>
                                             {isCollapsed && blogscategories.length > 0 && (
                                                 <div className="widget widget_categories">
