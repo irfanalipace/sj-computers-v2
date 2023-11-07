@@ -555,7 +555,7 @@ const Blog = () => {
                                         </div>
                                         <div >
                                             <div onClick={toggleCollapse} className="widget widget_categories categor-data-scrping">
-                                            <div>
+                                            <div className="category-data-span-blogs">
                                                 <span>Categories</span>                    
                                             </div>
                                             <div>
