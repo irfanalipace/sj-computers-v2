@@ -108,7 +108,7 @@ function UpdateStateModal({ isOpen = false, handleClose }) {
                     <div className="hrozantel-hr-location-model">
                         <h5 className="h5-model-box-loction">or</h5>
                     </div>
-                    <Dropdown>
+                    <Dropdown className="font-size-dialog-box-locations">
                         <Dropdown.Toggle
                             id="dropdown-basic"
                             className="dropdown-button-box d-flex justify-content-between align-items-center "
@@ -188,7 +188,7 @@ function UpdateStateModal({ isOpen = false, handleClose }) {
 
             {isAuthenticated && (
                 <Modal.Footer>
-                    <Button onClick={clickHandler} className="done-button">
+                    <Button onClick={clickHandler} className="done-button  ">
                         {isLoading ? <Loader /> : "Done"}
                     </Button>
                 </Modal.Footer>
