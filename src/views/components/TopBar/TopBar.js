@@ -30,11 +30,11 @@ export default function TopBar() {
             name: "Desktop",
             slug: "desktop",
         },
-        {
-            id: 4,
-            name: "Monitor",
-            slug: "monitor",
-        },
+        // {
+        //     id: 4,
+        //     name: "Monitor",
+        //     slug: "monitor",
+        // },
     ];
 
     return (

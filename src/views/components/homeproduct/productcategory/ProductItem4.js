@@ -46,13 +46,13 @@ const ProductItem4 = () => {
                 </Link>
             </Col>
             <Col xs={12} sm={6} className="px-0">
-                <Link to="/category/monitor" className="category-item">
+                <Link to="/category/gaming_desktops" className="category-item">
                     <img
                         src={images[3]}
                         alt="Image 2"
                         className="dynamic-image"
                     />
-                    <div className="category-name">Monitor</div>
+                    <div className="category-name">Gaming Desktops</div>
                 </Link>
             </Col>
         </Row>
