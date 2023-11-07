@@ -205,6 +205,14 @@ justify-content: space-between;
     font-size: 12px;
     line-height: 17px;
 }
+.fave-category-dropdown-button-blogs-data button{
+  
+        background: none;
+        border: none;
+       padding: 0px;
+
+}
+
 .policy-items-cart-sction2-dev {
     color: white;
     margin-top: 28px;

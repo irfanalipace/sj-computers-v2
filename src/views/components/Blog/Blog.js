@@ -558,8 +558,8 @@ const Blog = () => {
                                             <div className="category-data-span-blogs">
                                                 <span>Categories</span>                    
                                             </div>
-                                            <div>
-                                            <i className="fa-solid fa-chevron-down" ></i>                   
+                                            <div className="fave-category-dropdown-button-blogs-data">
+                                           <button> <i className="fa-solid fa-chevron-down" ></i></button>                  
                                             </div>
                                             {/* <button onClick={toggleCollapse}  style={{ textAlign: 'left' }}> Categories <i className="fa-solid fa-chevron-down icon-data-dropdown" ></i></button> */}
                                          
