@@ -20,18 +20,13 @@
                 </p>
                 <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Shipping
                         Phone:</strong> {{ $data['OrderAddress']['phone_number'] }}</p>
+                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Apartment</strong> {{ $data['OrderAddress']['apartment'] }}</p>
                 <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Shipping
                         Address:</strong> {{ $data['OrderAddress']['address'] }}</p>
-                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Country
-                        Address:</strong> {{ $data['OrderAddress']['country'] }}</p>
-                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>City
-                        Address:</strong> {{ $data['OrderAddress']['city'] }}</p>
-                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>State
-                        Address:</strong> {{ $data['OrderAddress']['state'] }}</p>
-                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Apartment
-                        Address:</strong> {{ $data['OrderAddress']['apartment'] }}</p>
-                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Zip Code
-                        Address:</strong> {{ $data['OrderAddress']['zip_code'] }}</p>
+                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>City </strong> {{ $data['OrderAddress']['city'] }}</p>
+                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>State</strong> {{ $data['OrderAddress']['state'] }}</p>
+                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Zip Code</strong> {{ $data['OrderAddress']['zip_code'] }}</p>
+                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Country</strong> {{ $data['OrderAddress']['country'] }}</p>
             </td>
         </tr>
         </tbody>
