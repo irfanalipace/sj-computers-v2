@@ -89,6 +89,7 @@ class OrderRepository
                     'address' => $shippingAddreess['address'],
                     'city' => $shippingAddreess['city'],
                     'state' => $shippingAddreess['state'],
+                    'apartment' => $shippingAddreess['apartment'],
                     'zip_code' => $shippingAddreess['zip_code'],
                     $user_type == StatusEnum::USER ? 'user_id' : 'guest_id' => $user->id,       //user id or guest id
                     'user_type' => $user_type,

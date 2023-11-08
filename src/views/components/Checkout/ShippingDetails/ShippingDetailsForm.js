@@ -34,7 +34,9 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
             phone_number: address?.phone_number || "",
             email: address?.email || userDetails?.email || "",
             address: address?.address || "",
-            floorAddress: address?.floorAddress || "",
+            // floorAddress: address?.floorAddress || "",
+            // suite: address?.suite || "",
+            apartment: address?.apartment || "",
             city: address?.city || "",
             state: address?.state || "Alabama",
             zip_code: address?.zip_code || "",
@@ -63,6 +65,8 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
             if (!values.city) errors.city = "( Required )";
             if (!values.state) errors.state = "( Required )";
             if (!values.zip_code) errors.zip_code = "( Required )";
+            // if (!values.suite) errors.suite = "( Required )";
+            if (!values.apartment) errors.apartment = "( Required )";
             return errors;
         },
         onSubmit: (values) => {
@@ -228,7 +232,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                     </p>
                                 )} */}
                         </div>
-                        <div className="field-section">
+                        <div className="">
                             <label htmlFor={"streetAddress"}>
                                 Address
                                 <span className="text-danger">*</span>
@@ -258,7 +262,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                 </p>
                             )} */}
                             <br></br>
-                            <input
+                            {/* <input
                                 id="floorAddress"
                                 name="floorAddress"
                                 className="input-field mt-1"
@@ -272,7 +276,59 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                 <p className="fs-6 mt-1 text-danger">
                                     {errors.floorAddress}
                                 </p>
-                            )}
+                            )} */}
+                        </div>
+                        <div className="field-section">
+                            {/* <div className="col-6">
+                                <label htmlFor={"suite"}>
+                                    Suite
+                                    <span className="text-danger">*</span>
+                                    {errors.suite && touched.suite && (
+                                        <span className="fs-6 mt-1 text-danger">
+                                            {errors?.suite}
+                                        </span>
+                                    )}
+                                </label>
+                                <input
+                                    id="suite"
+                                    name="suite"
+                                    className={
+                                        errors.suite && touched.suite
+                                            ? "input-field border-danger"
+                                            : "input-field"
+                                    }
+                                    type="text"
+                                    placeholder="Suite"
+                                    value={values?.suite}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                ></input>
+                            </div> */}
+                            {/* <div className="col-12"> */}
+                            <label htmlFor={"apartment"}>
+                                Apartment
+                                <span className="text-danger">*</span>
+                                {errors.apartment && touched.apartment && (
+                                    <span className="fs-6 mt-1 text-danger">
+                                        {errors?.apartment}
+                                    </span>
+                                )}
+                            </label>
+                            <input
+                                id="apartment"
+                                name="apartment"
+                                className={
+                                    errors.apartment && touched.apartment
+                                        ? "input-field border-danger"
+                                        : "input-field"
+                                }
+                                type="text"
+                                placeholder="Apartment"
+                                value={values?.apartment}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            ></input>
+                            {/* </div> */}
                         </div>
                         <div className="row">
                             <div className="col-4">
