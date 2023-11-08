@@ -57,7 +57,7 @@ class OrderController extends BaseController
 
             $order = UserAddress::updateOrCreate(
                 ['user_id' => auth()->user()->id],
-                ['country' => $request['country'], 'full_name' => $request['full_name'], 'phone_number' => $request['phone_number'], 'address' => $request['address'], 'city' => $request['city'], 'state' => $request['state'], 'zip_code' => $request['zip_code'], 'status' => 'Active', 'user_id' => auth()->user()->id]
+                ['country' => $request['country'], 'full_name' => $request['full_name'], 'phone_number' => $request['phone_number'], 'address' => $request['address'], 'city' => $request['city'], 'state' => $request['state'], 'apartment' => $request['apartment'], 'zip_code' => $request['zip_code'], 'status' => 'Active', 'user_id' => auth()->user()->id]
             );
 
             // else {
