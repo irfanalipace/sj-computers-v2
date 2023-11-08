@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddApartmentColumnInOrderShippingAddress extends Migration
+class AddApartmentColumnInGuestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddApartmentColumnInOrderShippingAddress extends Migration
      */
     public function up()
     {
-        Schema::table('order_shipping_addresses', function (Blueprint $table) {
+        Schema::table('guests', function (Blueprint $table) {
             $table->string('apartment')->after('state');
         });
     }
@@ -25,7 +25,7 @@ class AddApartmentColumnInOrderShippingAddress extends Migration
      */
     public function down()
     {
-        Schema::table('order_shipping_addresses', function (Blueprint $table) {
+        Schema::table('guests', function (Blueprint $table) {
             $table->dropColumn('apartment');
         });
     }
