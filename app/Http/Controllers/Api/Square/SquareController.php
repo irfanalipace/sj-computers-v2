@@ -238,6 +238,7 @@ class SquareController extends BaseController
                 $guestUser->state = $detail['state'] ?? null;
                 $guestUser->zip_code = $detail['zip_code'] ?? null;
                 $guestUser->country = $detail['country'] ?? null;
+                $guestUser->apartment = $detail['apartment'] ?? null;
                 $guestUser->save();
             }
         } else {
