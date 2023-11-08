@@ -105,7 +105,7 @@ const MobileHomeCategory = () => {
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className="swiper-slider-mobile-category">
-                    <div className="image-container-category">
+                    {/* <div className="image-container-category">
                         <Link
                             to="/category/monitor"
                             className="text-decoration-none link-text-category-mobile"
@@ -121,7 +121,7 @@ const MobileHomeCategory = () => {
                                 />
                             </div>
                         </Link>
-                    </div>
+                    </div> */}
                     <div className="image-container-category">
                         <Link
                             to="/category/gaming_desktops"

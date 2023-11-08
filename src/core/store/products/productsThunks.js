@@ -52,8 +52,6 @@ export const searchProducts = (data) => {
 };
 
 export const filterProducts = (filter, loadMore = false) => {
-    console.log("fillllll", filter);
-
     return async (dispatch) => {
         try {
             if (loadMore) dispatch({ type: SET_IS_SHOW_MORE, payload: {} });

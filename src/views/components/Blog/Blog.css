@@ -27,7 +27,14 @@
 }
 
 
-
+.category-data-span-blogs span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 144%;
+    color: #333333;
+}
 
 li.policy-listitem {
     margin-left: 30px;
@@ -40,11 +47,12 @@ li.policy-listitem {
 
 .widget_categories {
     border: 1px solid #c7c0c0;
-    padding: 15px;
+    padding: 10px;
     border-radius: 4px;
     width: 267px;
     margin-left: 25px;
     margin-left: '33px';
+   
 }
 .widget_categories ul {
     margin-top: 13px;
@@ -84,7 +92,10 @@ li.policy-listitem {
 }
 
 
-
+.recent-bogs-view-clops{
+display: flex;
+justify-content: space-between;
+}
 .policy-listitem a {
     font-family: "Inter";
     font-style: normal;
@@ -144,6 +155,10 @@ li.policy-listitem {
     color: #ffffff;
     margin-left: 5px;
 }
+.categor-data-scrping{
+    display: flex;
+    justify-content: space-between;
+}
 .cart-dev-policy-section {
     padding-top: 26px;
 }
@@ -190,6 +205,14 @@ li.policy-listitem {
     font-size: 12px;
     line-height: 17px;
 }
+.fave-category-dropdown-button-blogs-data button{
+  
+        background: none;
+        border: none;
+       padding: 0px;
+
+}
+
 .policy-items-cart-sction2-dev {
     color: white;
     margin-top: 28px;
@@ -419,18 +442,12 @@ h5 strong {
     color: white;
     width: 910px;
     max-width: 100%;
-    height: 420px;
+    /* height: 420px; */
     max-height: 100%;
     margin-bottom: 20px;
     margin-left: 120px;
 }
-.image-cainter-dev {
-    padding-left: 45px;
-    width: 100%;
-    z-index: 2;
-    position: relative;
-    margin-top: -250px;
-}
+
 .circle-dev-blog1 {
     /* position: relative; */
     width: 40px;
@@ -583,8 +600,8 @@ h5 strong {
 }
 
 .main-dev-card-deprt {
-    margin-left: 29px;
-    width: 262px;
+    margin-left: 24px;
+    width: 269px;
     /* height: 366px; */
     margin-bottom: 12px;
     background: rgba(49, 130, 67, 0.1);
@@ -600,7 +617,8 @@ div.sticky {
 }
 
 .left-dev-span-stories {
-    text-align: center;
+    text-align: left;
+    margin-left: 12px;
     padding-top: 10px;
 }
 .left-dev-span-stories span {
@@ -708,7 +726,13 @@ div.sticky {
     background-color: transparent;
     cursor: pointer;
 }
-
+.recenr-articel-data{
+    padding:9px;
+    border: none;
+}
+.icon-data-dropdown{
+    margin-left: 120px;
+}
 .button-arrow-dev i {
     width: 22px;
     height: 22px;
@@ -1067,24 +1091,69 @@ div.sticky {
         margin-top: 19px;
     }.widget_categories {
         border: 1px solid #c7c0c0;
-        padding: 15px;
+        padding: 9px;
         border-radius: 4px;
         width: 100%;
         margin-left: 0px ;
         
+    }
+    
+}
+@media screen and (min-width: 610px) {
+    .background-image-lin-dve img {
+      
+        height: 420px;
+        
+    }
+    .image-cainter-dev {
+        padding-left: 45px;
+        height: 420px;
+        width: 100%;
+        z-index: 2;
+        position: relative;
+        margin-top: -200px;
     }
 }
 @media screen and (max-width: 600px) {
     .image-cainter-dev {
         padding-left: 45px;
         width: 100%;
+        /* height: 314px; */
         z-index: 2;
         position: relative;
-        margin-top: -162px;
+        margin-top: -82px;
+    }
+    .background-image-lin-dve img {
+        font-size: 14px;
+        color: white;
+        width: 910px;
+        max-width: 100%;
+        
+        max-height: 100%;
+        margin: 25px 0;
+        margin-left: 120px;
+        min-height: 100px;
     }
     .content-data-of-the-iamges-blogs {
-        margin-top: 85px;
+        margin-top: 0px;
     }
+    .blog-dynamic-style-heading-data {
+        margin-top: 24px;
+    }
+   .blog-background-color {
+    background: #002549;
+    padding-bottom: 69px;
+    height: auto;
+}
+/* .recenr-articel-data{
+    margin-left: 200px;
+} */
+.icon-data-dropdown{
+    margin-left: 231px;
+}
+    /* .content-data-of-the-iamges-blogs {
+        margin-top: 85px;
+    } */
     .dev-left-blog-p span {
         font-size: 15px;
     }
@@ -1096,7 +1165,7 @@ div.sticky {
         margin-top: 11px;
     }
     .heading-data-title-image {
-        font-size: 21px;
+        font-size: 19px;
     }
     .div-left-blog-text-written {
         margin-top: 25px;
@@ -1114,9 +1183,9 @@ div.sticky {
         max-width: 100%;
     }
 
-    .background-image-lin-dve {
-        margin-top: 49px;
-    }
+    /* .background-image-lin-dve {
+        margin-top: 135px;
+    } */
     
     .ul-item-blog-social-icon2 {
         margin-top: 15px;
