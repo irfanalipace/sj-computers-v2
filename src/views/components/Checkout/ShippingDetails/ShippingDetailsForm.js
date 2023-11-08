@@ -306,7 +306,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                             </div> */}
                             {/* <div className="col-12"> */}
                             <label htmlFor={"apartment"}>
-                                Suit/Apartment
+                                Suite/Apartment
                                 <span className="text-danger">*</span>
                                 {errors.apartment && touched.apartment && (
                                     <span className="fs-6 mt-1 text-danger">
@@ -323,7 +323,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                         : "input-field"
                                 }
                                 type="text"
-                                placeholder="Apartment, Unit, Suit, Floor etc..."
+                                placeholder="Apartment, Unit, Suite, Floor etc..."
                                 value={values?.apartment}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
