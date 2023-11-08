@@ -232,52 +232,6 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                     </p>
                                 )} */}
                         </div>
-                        <div className="">
-                            <label htmlFor={"streetAddress"}>
-                                Address
-                                <span className="text-danger">*</span>
-                                {errors.address && touched.address && (
-                                    <span className="fs-6 mt-1 text-danger">
-                                        {errors?.address}
-                                    </span>
-                                )}
-                            </label>
-                            <input
-                                id="address"
-                                name="address"
-                                className={
-                                    errors.address && touched.address
-                                        ? "input-field border-danger"
-                                        : "input-field"
-                                }
-                                type="text"
-                                placeholder="Street address (P.O Box)"
-                                value={values?.address}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            ></input>
-                            {/* {errors.address && touched.address && (
-                                <p className="fs-6 mt-1 text-danger">
-                                    {errors.address}
-                                </p>
-                            )} */}
-                            <br></br>
-                            {/* <input
-                                id="floorAddress"
-                                name="floorAddress"
-                                className="input-field mt-1"
-                                type="text"
-                                placeholder="Unit, building, floor etc."
-                                value={values?.floorAddress}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            ></input>
-                            {errors.floorAddress && (
-                                <p className="fs-6 mt-1 text-danger">
-                                    {errors.floorAddress}
-                                </p>
-                            )} */}
-                        </div>
                         <div className="field-section">
                             {/* <div className="col-6">
                                 <label htmlFor={"suite"}>
@@ -329,6 +283,52 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                 onBlur={handleBlur}
                             ></input>
                             {/* </div> */}
+                        </div>
+                        <div className="">
+                            <label htmlFor={"streetAddress"}>
+                                Address
+                                <span className="text-danger">*</span>
+                                {errors.address && touched.address && (
+                                    <span className="fs-6 mt-1 text-danger">
+                                        {errors?.address}
+                                    </span>
+                                )}
+                            </label>
+                            <input
+                                id="address"
+                                name="address"
+                                className={
+                                    errors.address && touched.address
+                                        ? "input-field border-danger"
+                                        : "input-field"
+                                }
+                                type="text"
+                                placeholder="Street address (P.O Box)"
+                                value={values?.address}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            ></input>
+                            {/* {errors.address && touched.address && (
+                                <p className="fs-6 mt-1 text-danger">
+                                    {errors.address}
+                                </p>
+                            )} */}
+                            <br></br>
+                            {/* <input
+                                id="floorAddress"
+                                name="floorAddress"
+                                className="input-field mt-1"
+                                type="text"
+                                placeholder="Unit, building, floor etc."
+                                value={values?.floorAddress}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            ></input>
+                            {errors.floorAddress && (
+                                <p className="fs-6 mt-1 text-danger">
+                                    {errors.floorAddress}
+                                </p>
+                            )} */}
                         </div>
                         <div className="row">
                             <div className="col-4">
