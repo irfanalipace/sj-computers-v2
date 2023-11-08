@@ -20,7 +20,7 @@
                 </p>
                 <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Shipping
                         Phone:</strong> {{ $data['OrderAddress']['phone_number'] }}</p>
-                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Apartment</strong> {{ $data['OrderAddress']['apartment'] }}</p>
+                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Apartment/Suite</strong> {{ $data['OrderAddress']['apartment'] }}</p>
                 <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Shipping
                         Address:</strong> {{ $data['OrderAddress']['address'] }}</p>
                 <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>City </strong> {{ $data['OrderAddress']['city'] }}</p>
