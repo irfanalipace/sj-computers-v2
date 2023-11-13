@@ -1,0 +1,195 @@
+.nav-contact-background-color {
+    width: 100%;
+    background: #318243;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.text-aligin-contact-menu {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+
+    color: #ffffff;
+}
+
+/* .email-contact-hr-line {
+    border-left: 1px solid;
+} */
+.contact-text-home {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    /* identical to box height */
+
+    color: #ffffff;
+}
+.vertical-line-contactus {
+    height: 24px;
+    width: 2px;
+    background-color: white;
+    border: none;
+
+    margin: 5px 0;
+}
+.home-text-paragraph-contact {
+    background: #318243;
+}
+.p-tages-text-contact {
+    padding-left: 30px;
+    /* padding: 36px; */
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+.contact-text-home2 {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+
+    color: #ffffff;
+}
+.this-form-heading-contact {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    /* identical to box height, or 20px */
+
+    text-transform: capitalize;
+
+    color: #000000;
+}
+.pa-form-heading-contact {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 150%;
+    /* or 30px */
+
+    /* Primary */
+
+    color: #333333;
+}
+
+.contact-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 23px 50px;
+    gap: 10px;
+    width: 470px;
+    height: 60px;
+    background: #52ac66;
+    border-radius: 8px;
+    flex: none;
+    order: 3;
+    flex-grow: 0;
+    color: white;
+    border-color: white;
+    max-width: 100%;
+}
+.contact-field {
+    width: 470px;
+    max-width: 100%;
+    height: 60px;
+    left: 0px;
+    top: 0px;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 0px;
+}
+.text-group-input-contact {
+    padding-bottom: 10px;
+    background: #ffffff;
+    /* border: 3px solid white; */
+    border-radius: 2px;
+}
+.contact-field-commits {
+    height: 123px;
+}
+.image-cotact-container {
+    padding: 46px;
+}
+.contact-heading-text-with-image {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+    padding-bottom: 55px;
+    padding-top: -13px;
+}
+.img-fluid-contact {
+    max-width: 100%;
+    height: 435px;
+    width: 476px;
+    max-height: 100%;
+}
+.text-aligin-contact-menu:hover {
+    border: 1px solid white;
+    /* padding: 4px; */
+    margin-right: 2px;
+    margin-left: 3px;
+}
+
+.nav-item-contact {
+    border-right: 1px solid white;
+    margin-right: 6px;
+    margin-left: 6px;
+}
+.on-focus-colo-contact:focus {
+    color: white !important;
+}
+@media screen and (max-width: 1000px) {
+    .contact-text-home {
+        font-size: 18px;
+    }
+    .contact-text-home2 {
+        max-width: 100%;
+        font-size: 14px;
+        width: 460px;
+    }
+}
+/* @media screen and (max-width: 450px) {
+    .contact-container {
+        display: none !important;
+    }
+} */
+
+@media screen and (max-width: 520px) {
+    .pa-form-heading-contact {
+        font-size: 12px;
+    }
+}
+/* Custom CSS to remove the hover effect on the Link component */
+.link-no-hover:hover {
+    /* text-decoration: none; */
+    color: white;
+}
+.link-no-hover a:hover {
+    color: white;
+}
+
+.link-no-hover a:focus {
+    color: white !important;
+}
+
+@media screen and (max-width: 991px) {
+    .contact-form-space {
+        padding-top: 16px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .my-contact-menu {
+        text-align: left;
+    }
+    .nav-contact-background-color {
+        padding-left: 65px;
+    }
+    .vertical-line-contactus {
+        display: none;
+    }
+    .nav-item-contact {
+        display: none;
+    }
+    .text-aligin-contact-menu:hover {
+        display: none;
+    }
+}
