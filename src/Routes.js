@@ -337,16 +337,16 @@ const Router = () => {
                 </ProtectedRoute>
             ),
         },
-        // {
-        //     path: "/apply-jobs",
-        //     element: (
-        //         // <ProtectedRoute>
-        //             <PageWrapper>
-        //              <ApplyNow />
-        //             </PageWrapper>
-        //         // </ProtectedRoute>
-        //     ),
-        // },
+        {
+            path: "/apply-jobs",
+            element: (
+                // <ProtectedRoute>
+                <PageWrapper>
+                    <ApplyNow />
+                </PageWrapper>
+                // </ProtectedRoute>
+            ),
+        },
         {
             path: "/refund-order",
             element: (
@@ -356,7 +356,7 @@ const Router = () => {
             ),
         },
         {
-            path: "/careers",
+            path: "/careers/:id",
             element: (
                 <PageWrapper>
                     <Careers />
@@ -368,7 +368,7 @@ const Router = () => {
             path: "/apply-now",
             element: (
                 <PageWrapper>
-                   <ApplyNow />
+                    <ApplyNow />
                 </PageWrapper>
             ),
         },
