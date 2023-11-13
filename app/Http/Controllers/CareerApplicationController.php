@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCareerApplicationRequest;
+use App\Mail\CareerApplicationMail;
+use App\Mail\LoginOtpMail;
 use App\Models\CareerApplication;
 use Illuminate\Support\Facades\Mail;
 
@@ -12,18 +14,15 @@ class CareerApplicationController extends Controller
     {
         if ($request->hasFile('resume')) {
             $filename = $request->file('resume')->store('public/resume');
-            $user['resume'] = str_replace('public/', '', $filename);
+            $user['file']['resume'] = str_replace('public/', '', $filename);
         }
         if ($request->hasFile('cover_letter')) {
             $filename = $request->file('cover_letter')->store('public/cover_letter');
-            $user['cover_letter'] = str_replace('public/', '', $filename);
+            $user['file']['cover_letter'] = str_replace('public/', '', $filename);
         }
-        $careerApplication = CareerApplication::query()->create($request->all());
 
-//        Mail::send('emails.career-email', ['data' => $careerApplication], function ($m) use ($careerApplication) {
-//            $m->from(env('MAIL_FROM_ADDRESS'), config('app.name', 'APP Name'));
-//            $m->to('mahnoor@99technologies.co')->subject('New CV Submission for ' . $careerApplication->job_title . ' Position ');
-//        });
+        $careerApplication = CareerApplication::query()->create($request->all());
+        Mail::to(['99tech.ai@gmail.com', 'joe@sjcomputersmn.com'])->send(new CareerApplicationMail($careerApplication->job_title));
 
         return response()->json([
             'data' => $careerApplication,

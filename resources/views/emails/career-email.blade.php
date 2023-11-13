@@ -3,7 +3,7 @@
     <h1>Hello</h1>
 
     <p>You have just received a new Curriculum Vitae (CV) from a candidate applying for the role
-        of {{$careerApplication->job_title}}.</p>
+        of {{$jobTitle}}.</p>
 
     <p>Please see the attached CV.</p>
 
