@@ -9,7 +9,7 @@ export default function ThankYou() {
         >
             <div className="row margintopBottom">
                 <div className="col-12 my-10">
-                    <div className="d-flex justify-content-center align-items-center">
+                    <div className="container">
                         <div
                             className="d-flex justify-content-center align-items-center"
                             style={{
@@ -22,17 +22,17 @@ export default function ThankYou() {
                             <img
                                 src={tickImage}
                                 alt="Tick Image"
-                                style={{
-                                    position: "",
-                                    zIndex: 2,
-                                    marginLeft: "-3.3%",
-                                }}
+                            // style={{
+                            //     position: "",
+                            //     zIndex: 2,
+                            //     marginLeft: "-3.3%",
+                            // }}
                             />
                         </div>
                     </div>
                 </div>
                 <div className="col-12 my-2">
-                    <h3 className="mt-4">
+                    <h3 className="mt-4" style={{ textAlign: 'left', marginLeft: '100px' }}>
                         Thanks for Applying at SJ Computers
                     </h3>
                 </div>

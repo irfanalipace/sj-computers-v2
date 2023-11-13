@@ -10,44 +10,55 @@ import { Box } from "@mui/material";
 import { FileInput } from "@mantine/core";
 import { AttachFile } from "@material-ui/icons";
 import { prettifyErrorfromObjectToArray } from "../../../core/utils/helpers";
+import { CreateCareer } from "../../../core/api/careers";
+import { toast } from "react-toastify";
+import Thankyou from '../../components/ThankYou/ThankYou'
 const ApplyNow = () => {
     const params = new URLSearchParams(window.location.search);
     let jobId = params.get('jobId');
     // console.log('jobId', jobId);
     // ?customerId=
     const [fieldError, setFieldError] = useState('');
-
+    const [loadThankyou, setLoadThankyou] = useState(false)
     const validationSchema = Yup.object().shape({
-        firstName: Yup.string().required('Required'),
-        lastName: Yup.string().required('Required'),
+        first_name: Yup.string().required('Required'),
+        last_name: Yup.string().required('Required'),
         email: Yup.string().email('Invalid email address').required('Required'),
-        cv: Yup.mixed().required('CV is required'),
-        // coverLetter: Yup.mixed().required('Cover letter is required'),
+        // resume: Yup.mixed().required('CV is required'),
+        // cover_letter: Yup.mixed().required('Cover letter is required'),
     });
     const formik = useFormik({
         initialValues: {
-            firstName: '',
-            lastName: '',
+            first_name: '',
+            last_name: '',
             email: '',
-            cv: '',
-            coverLetter: '',
+            resume: '',
+            cover_letter: '',
         },
         validationSchema: validationSchema,
         onSubmit: async values => {
-            const allparams = { ...values, jobid: jobId }
+            const allparams = { ...values, career_id: jobId }
+            console.log('alla', allparams);
             try {
+                const res = await CreateCareer(allparams);
+                console.log('result: ', res);
+                if (res) {
+                    toast.success('Application Submitted Successfully');
+                    setLoadThankyou(true)
+                }
                 console.log('values', allparams);
 
             } catch (error) {
                 console.log('error', error);
-                setFieldError(error.data.errors);
+                if (error.data.errors) setFieldError(error.data.errors);
+                else toast.error(error.data.message)
             }
         },
     });
     useEffect(() => {
         formik.setErrors(prettifyErrorfromObjectToArray(fieldError) || {});
     }, [fieldError]);
-    // console.log('formik', formik.values);
+    console.log('fieldError', fieldError);
 
     return (
         <div className="contact-container">
@@ -121,107 +132,117 @@ const ApplyNow = () => {
                         </div>
                     </div>
                 </div>
-
-                <Box className="container" mt={5}>
-                    <h4 className="contact-heading-text-with-image">
-                        Application Form
-                    </h4>
-                    <form onSubmit={formik.handleSubmit} style={{ width: '100%' }} encType="multipart/form-data">
-                        <Box className="row">
-                            <Box className="col-md-3">
-                                <TextField
-                                    label="First Name"
-                                    fullWidth
-                                    // sx={{ width: '30%' }}
-                                    variant="standard"
-                                    {...formik.getFieldProps('firstName')}
-                                    error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-                                    helperText={formik.touched.firstName && formik.errors.firstName}
-                                />
+                {loadThankyou === false ? <>
+                    <Box className="container" mt={5}>
+                        <h4 className="contact-heading-text-with-image">
+                            Application Form
+                        </h4>
+                        <form onSubmit={formik.handleSubmit} style={{ width: '100%' }} encType="multipart/form-data">
+                            <Box className="row">
+                                <Box className="col-md-3">
+                                    <TextField
+                                        label="First Name"
+                                        fullWidth
+                                        required
+                                        // sx={{ width: '30%' }}
+                                        variant="standard"
+                                        {...formik.getFieldProps('first_name')}
+                                        error={formik.touched.first_name && Boolean(formik.errors.first_name)}
+                                        helperText={formik.touched.first_name && formik.errors.first_name}
+                                    />
+                                </Box>
+                                <Box className="col-md-3" >
+                                    <TextField
+                                        label="Last Name"
+                                        fullWidth
+                                        required
+                                        // sx={{ width: '30%', marginLeft: '20px' }}
+                                        variant="standard"
+                                        {...formik.getFieldProps('last_name')}
+                                        error={formik.touched.last_name && Boolean(formik.errors.last_name)}
+                                        helperText={formik.touched.last_name && formik.errors.last_name}
+                                    />
+                                </Box>
                             </Box>
-                            <Box className="col-md-3" >
-                                <TextField
-                                    label="Last Name"
-                                    fullWidth
-                                    // sx={{ width: '30%', marginLeft: '20px' }}
-                                    variant="standard"
-                                    {...formik.getFieldProps('lastName')}
-                                    error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-                                    helperText={formik.touched.lastName && formik.errors.lastName}
-                                />
-                            </Box>
-                        </Box>
-
-
-                        <Box className='row' mt={3}>
-                            <Box className="col-md-6">
-                                <TextField
-                                    // sx={{ width: '50.5%' }}
-                                    label="Email"
-                                    variant="standard"
-                                    fullWidth
-                                    {...formik.getFieldProps('email')}
-                                    error={formik.touched.email && Boolean(formik.errors.email)}
-                                    helperText={formik.touched.email && formik.errors.email}
-                                />
-                            </Box>
-                        </Box>
-                        <Box mt={4} className='row'>
-                            <Box className="col-md-3">
-                                <InputLabel>Upload CV</InputLabel>
-                                <TextField
-                                    id='cv'
-                                    required
-                                    // label='Upload CV'
-                                    variant="standard"
-                                    type="file"
-                                    value={formik.values.cv}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    error={formik.errors.cv}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <AttachFile />
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                />
-                            </Box>
-                            <Box className="col-md-3">
-                                <InputLabel>Upload Cover letter</InputLabel>
-                                <TextField
-                                    id='coverLetter'
-                                    // label='Upload Cover letter'
-                                    variant="standard"
-                                    type="file"
-                                    value={formik.values.coverLetter}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    error={formik.errors.coverLetter}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <AttachFile />
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                />
-                            </Box>
-                        </Box>
-
-                        <Box className='row' my={5}>
-                            <Box className='col-md-6' sx={{ textAlign: 'right' }}>
-                                <Button type="submit" variant="contained" sx={{ background: '#318243' }}>
-                                    Submit
-                                </Button>
-                            </Box>
-                            <Box className='col-md-6'></Box>
-                        </Box>
 
 
-                    </form>
-                </Box>
+                            <Box className='row' mt={3}>
+                                <Box className="col-md-6">
+                                    <TextField
+                                        // sx={{ width: '50.5%' }}
+                                        label="Email"
+                                        variant="standard"
+                                        required
+                                        fullWidth
+                                        {...formik.getFieldProps('email')}
+                                        error={formik.touched.email && Boolean(formik.errors.email)}
+                                        helperText={formik.touched.email && formik.errors.email}
+                                    />
+                                </Box>
+                            </Box>
+                            <Box mt={4} className='row'>
+                                <Box className="col-md-3">
+                                    <InputLabel>Upload CV</InputLabel>
+                                    <TextField
+                                        id='resume'
+                                        required
+                                        // label='Upload resume'
+                                        variant="standard"
+                                        type="file"
+                                        // value={formik.values.resume.file_name}
+                                        onChange={(e) => formik.setFieldValue('resume', e.target.files[0])}
+
+                                        error={formik.touched.resume && Boolean(formik.errors.resume)}
+                                        helperText={formik.touched.resume && formik.errors.resume}
+
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position="end">
+                                                    <AttachFile />
+                                                </InputAdornment>
+                                            ),
+                                        }}
+                                    />
+                                </Box>
+                                <Box className="col-md-3">
+                                    <InputLabel>Upload Cover letter</InputLabel>
+                                    <TextField
+                                        id='cover_letter'
+                                        required
+                                        // label='Upload Cover letter'
+                                        variant="standard"
+                                        type="file"
+                                        // value={formik.values.cover_letter}
+                                        // onChange={formik.handleChange}
+                                        onChange={(e) => formik.setFieldValue('cover_letter', e.target.files[0])}
+                                        onBlur={formik.handleBlur}
+                                        error={formik.touched.cover_letter && Boolean(formik.errors.cover_letter)}
+                                        helperText={formik.touched.cover_letter && formik.errors.cover_letter}
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position="end">
+                                                    <AttachFile />
+                                                </InputAdornment>
+                                            ),
+                                        }}
+                                    />
+                                </Box>
+                            </Box>
+
+                            <Box className='row' my={5}>
+                                <Box className='col-md-6' sx={{ textAlign: 'right' }}>
+                                    <Button type="submit" variant="contained" sx={{ background: '#318243' }}>
+                                        Submit
+                                    </Button>
+                                </Box>
+                                <Box className='col-md-6'></Box>
+                            </Box>
+
+
+                        </form>
+                    </Box>
+                </> : <Thankyou />}
+
             </div>
         </div>
     );
