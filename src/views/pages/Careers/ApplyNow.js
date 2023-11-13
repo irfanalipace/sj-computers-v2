@@ -121,7 +121,7 @@ const ApplyNow = () => {
                             <div className="col-md-12 col-lg-12 col-sm-12">
                                 <Box py={8}>
                                     <h4 className="contact-text-home">
-                                        Bussiness System Analaytic
+                                        Bussiness System Analyst
                                         {/* {user?.name} */}
                                     </h4>
                                     <h6 className="contact-text-home2">
