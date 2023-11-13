@@ -22,17 +22,17 @@ export default function ThankYou() {
                             <img
                                 src={tickImage}
                                 alt="Tick Image"
-                            // style={{
-                            //     position: "",
-                            //     zIndex: 2,
-                            //     marginLeft: "-3.3%",
-                            // }}
+                                // style={{
+                                //     position: "",
+                                //     zIndex: 2,
+                                //     marginLeft: "-3.3%",
+                                // }}
                             />
                         </div>
                     </div>
                 </div>
                 <div className="col-12 my-2">
-                    <h3 className="mt-4" style={{ textAlign: 'left', marginLeft: '100px' }}>
+                    <h3 className="mt-4" style={{ textAlign: "left" }}>
                         Thanks for Applying at SJ Computers
                     </h3>
                 </div>

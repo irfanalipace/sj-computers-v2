@@ -97,7 +97,7 @@ function CareerView() {
                                         <div className="p-tages-text-career py-sm-0 py-3">
                                             <Link
                                                 to={
-                                                    "/apply-now?jobid=" +
+                                                    "/apply-now?jobId=" +
                                                     data?.id
                                                 }
                                                 className="apply-now-btn"
@@ -156,7 +156,7 @@ function CareerView() {
                                 <div className="pt-2">
                                     <Link
                                         className="btn btn-outline-success text-decoration-none apply-now-link"
-                                        to={"/apply-now?jobid=" + data?.id}
+                                        to={"/apply-now?jobId=" + data?.id}
                                     >
                                         Apply Now
                                     </Link>
