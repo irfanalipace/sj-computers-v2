@@ -50,14 +50,15 @@ const ApplyNow = () => {
 
             } catch (error) {
                 console.log('error', error);
-                setFieldError(error.data.errors);
+                if (error.data.errors) setFieldError(error.data.errors);
+                else toast.error(error.data.message)
             }
         },
     });
     useEffect(() => {
         formik.setErrors(prettifyErrorfromObjectToArray(fieldError) || {});
     }, [fieldError]);
-    // console.log('formik', formik.values);
+    console.log('fieldError', fieldError);
 
     return (
         <div className="contact-container">
@@ -190,8 +191,10 @@ const ApplyNow = () => {
                                         type="file"
                                         // value={formik.values.resume.file_name}
                                         onChange={(e) => formik.setFieldValue('resume', e.target.files[0])}
-                                        error={formik.touched.email && Boolean(formik.errors.email)}
-                                        helperText={formik.touched.email && formik.errors.email}
+
+                                        error={formik.touched.resume && Boolean(formik.errors.resume)}
+                                        helperText={formik.touched.resume && formik.errors.resume}
+
                                         InputProps={{
                                             endAdornment: (
                                                 <InputAdornment position="end">
@@ -213,7 +216,8 @@ const ApplyNow = () => {
                                         // onChange={formik.handleChange}
                                         onChange={(e) => formik.setFieldValue('cover_letter', e.target.files[0])}
                                         onBlur={formik.handleBlur}
-                                        error={formik.errors.cover_letter}
+                                        error={formik.touched.cover_letter && Boolean(formik.errors.cover_letter)}
+                                        helperText={formik.touched.cover_letter && formik.errors.cover_letter}
                                         InputProps={{
                                             endAdornment: (
                                                 <InputAdornment position="end">

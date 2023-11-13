@@ -76,7 +76,7 @@ const Footer = () => {
                                         </li>
                                         <li>
                                             <Link
-                                                to="/careers"
+                                                to="/careers/1"
                                                 className="herf-link text-decoration-none"
                                             >
                                                 Careers
