@@ -1,10 +1,17 @@
-import { Paper } from "@mui/material";
+import { Search } from "@material-ui/icons";
+import { Box, IconButton, Paper } from "@mui/material";
 import React from "react";
-
 function Filters() {
     return <>
-        <Paper sx={{ background: 'red', }} >
-            <h1>hello</h1>
+        <Paper elevation={3} >
+            <Box p={5}>
+                <input
+                    type="text"
+                    class="search-input"
+                    placeholder="Search..."
+                    name=""
+                />
+            </Box>
         </Paper>
     </>;
 }
