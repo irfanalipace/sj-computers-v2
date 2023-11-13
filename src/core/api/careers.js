@@ -15,11 +15,26 @@ import ApiService from "@services/apiService";
 //     },
 // };
 export function getJobDetails(id) {
-    console.log("getJobDetails: ", id);
     return new Promise((resolve, reject) => {
         ApiService.get(`/career`, id)
             .then((response) => {
-                console.log("response: ", response);
+                console.print("file: jobs.js | jobs| response", response);
+                resolve(response);
+            })
+            .catch((e) => {
+                console.print("Console Log: : error jobs", e);
+                reject(e);
+            });
+        // setTimeout(() => {
+        //     resolve(dummyData);
+        // }, 2000);
+    });
+}
+
+export function getAllJobs() {
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/careers`)
+            .then((response) => {
                 console.print("file: jobs.js | jobs| response", response);
                 resolve(response);
             })

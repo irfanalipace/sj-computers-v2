@@ -357,6 +357,14 @@ const Router = () => {
             ),
         },
         {
+            path: "/careers",
+            element: (
+                <PageWrapper>
+                    <Careers />
+                </PageWrapper>
+            ),
+        },
+        {
             path: "/careers/:id",
             element: (
                 <PageWrapper>

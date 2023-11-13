@@ -53,8 +53,9 @@ export const prettifyError = (error) => {
                 (message) => `${message}<br>`
             );
 
-            prettifiedError += `<strong>${key.charAt(0).toUpperCase() + key.slice(1)
-                }:</strong> ${formattedErrors.join("")}`;
+            prettifiedError += `<strong>${
+                key.charAt(0).toUpperCase() + key.slice(1)
+            }:</strong> ${formattedErrors.join("")}`;
         } else {
             prettifiedError += `<strong>${key}:</strong> ${error[key]}<br>`;
         }
@@ -67,7 +68,7 @@ export function prettifyErrorfromObjectToArray(errors) {
         const prettified = {};
 
         for (const key in errors) {
-            const parts = key.split('.');
+            const parts = key.split(".");
             let current = prettified;
 
             for (let i = 0; i < parts.length; i++) {
@@ -90,5 +91,15 @@ export function prettifyErrorfromObjectToArray(errors) {
         return prettified;
     } catch (error) {
         return [];
+    }
+}
+
+export function convertDateToLongFormat(inputDate) {
+    try {
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        const date = new Date(inputDate);
+        return date.toLocaleDateString(undefined, options);
+    } catch (error) {
+        return "";
     }
 }
