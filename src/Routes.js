@@ -25,6 +25,7 @@ const Test = React.lazy(() => import("@pages/Test/Test"));
 const ThankYou = React.lazy(() => import("@pages/Thankyou/Thankyou"));
 const RefundOrder = React.lazy(() => import("@pages/RefundOrder/RefundOrder"));
 const Careers = React.lazy(() => import("@pages/Careers/Careers"));
+const CareerView = React.lazy(() => import("@pages/Careers/CareerView"));
 const Contact = React.lazy(() =>
     import("@components/Footer/FooterMenu/Contact")
 );
@@ -348,7 +349,7 @@ const Router = () => {
             path: "/careers",
             element: (
                 <PageWrapper>
-                    <Careers />
+                    <CareerView />
                 </PageWrapper>
             ),
         },

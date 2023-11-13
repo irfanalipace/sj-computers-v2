@@ -181,7 +181,8 @@
         text-align: left;
     }
     .nav-contact-background-color {
-        padding-left: 65px;
+        /* padding-left: 65px; */
+        display: none;
     }
     .vertical-line-contactus {
         display: none;

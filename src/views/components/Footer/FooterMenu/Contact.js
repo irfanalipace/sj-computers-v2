@@ -57,7 +57,7 @@ const Contact = () => {
         <div className="contact-container">
             <div className="contact-header">
                 <div className="my-contact-menu">
-                    <nav className="navbar navbar-expand-lg nav-contact-background-color">
+                    <nav className="navbar navbar-expand-md nav-contact-background-color">
                         <div className="container">
                             <div className="navbar-collapse">
                                 <ul className="navbar-nav me-auto">

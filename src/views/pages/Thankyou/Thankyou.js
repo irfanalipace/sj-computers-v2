@@ -65,31 +65,6 @@ export default function ThankYou() {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
-
-    const tableData = [
-        {
-            productName: "Product 1",
-            quantity: 2,
-            orderNo: "123456",
-            orderDate: "2023-05-21",
-            deliveryDetails: "Delivery Details 1",
-            paymentType: "Payment Type 1",
-            subTotal: "$100",
-            productImage: "https://m.media-amazon.com/images/I/51c4fed1l1L.jpg",
-        },
-        {
-            productName: "Product 2",
-            quantity: 1,
-            orderNo: "789012",
-            orderDate: "2023-05-22",
-            deliveryDetails: "Delivery Details 2",
-            paymentType: "Payment Type 2",
-            subTotal: "$50",
-            productImage: "",
-        },
-        // Add more data objects as needed
-    ];
-
     return (
         <div
             className="thank-you-page"
