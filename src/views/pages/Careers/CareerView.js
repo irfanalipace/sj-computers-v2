@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./Careers.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faMobile } from "@fortawesome/free-solid-svg-icons";
 import { getJobDetails } from "../../../core/api/careers";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-
+import ThankYou from "@components/ThankYou/ThankYou";
 function CareerView() {
     const [data, setData] = useState();
     const [loading, setLoading] = useState(false);
+    const { id } = useParams();
 
     const getData = async () => {
         setLoading(true);
-        const response = await getJobDetails();
-        console.log("response", response);
+        const response = await getJobDetails(id);
         setData(response.data);
         setLoading(false);
     };

@@ -1,0 +1,171 @@
+.thank-you-page {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    letter-spacing: 0.03em;
+}
+
+.thank-you-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.thank-you-table th,
+.thank-you-table td {
+    padding: 20px 10px;
+    /* border: 1px solid #000; */
+}
+
+.thank-you-page .product-name-thanks {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.product-thumbnail img {
+    width: 80px;
+    margin-right: 10px;
+}
+.thank-you-table th {
+    /* background-color: #318243; */
+    color: #318243;
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    border-bottom: 1px solid #dddddd;
+    border-top: 1px solid #dddddd;
+}
+
+.thank-you-page .product-name-thanks {
+    width: auto;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.delivery-details {
+    width: 25%;
+}
+
+.track-order-btn {
+    box-sizing: border-box;
+    height: 48px;
+    width: 165px;
+    left: 0px;
+    top: 0px;
+    border-radius: 8px;
+
+    /* position: absolute; */
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    border: 1px solid #269c40;
+    border-radius: 8px;
+}
+.shop-more-btn {
+    height: 48px;
+    width: 165px;
+    left: 0px;
+    top: 0px;
+    border-radius: 8px;
+    color: #fff;
+
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    background: #318243;
+    border-radius: 8px;
+    border: none;
+}
+.total-tax-row {
+    margin-right: 3%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-bottom: 1px solid #dddddd;
+    border-top: 1px solid #dddddd;
+}
+.bold-total {
+    margin-right: 2% !important;
+    margin-top: 2% !important;
+    margin-bottom: 2%;
+    font-weight: 900;
+    /* border-bottom: 1px solid #DDDDDD; */
+}
+
+/* border-bottom: 1px solid #DDDDDD; */
+.margintopBottom {
+    margin: 5% 0;
+}
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.oder-item-card {
+    width: 100%;
+    max-width: 300px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-image img {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.thank-you-page .product-name-thanks {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.product-details-Thanks div {
+    margin-bottom: 5px;
+}
+
+.product-details-Thanks {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product-details-Thanks > div {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: flex-start;
+}
+
+.product-details-Thanks span {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.quantity,
+.order-no,
+.order-date,
+.delivery-details,
+.payment-type,
+.sub-total {
+    flex-basis: 50%;
+}
+
+@media (max-width: 768px) {
+    .card-image img {
+        width: 50%;
+        height: auto;
+    }
+}
