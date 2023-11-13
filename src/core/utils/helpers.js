@@ -53,9 +53,8 @@ export const prettifyError = (error) => {
                 (message) => `${message}<br>`
             );
 
-            prettifiedError += `<strong>${
-                key.charAt(0).toUpperCase() + key.slice(1)
-            }:</strong> ${formattedErrors.join("")}`;
+            prettifiedError += `<strong>${key.charAt(0).toUpperCase() + key.slice(1)
+                }:</strong> ${formattedErrors.join("")}`;
         } else {
             prettifiedError += `<strong>${key}:</strong> ${error[key]}<br>`;
         }
@@ -63,3 +62,33 @@ export const prettifyError = (error) => {
 
     return prettifiedError;
 };
+export function prettifyErrorfromObjectToArray(errors) {
+    try {
+        const prettified = {};
+
+        for (const key in errors) {
+            const parts = key.split('.');
+            let current = prettified;
+
+            for (let i = 0; i < parts.length; i++) {
+                const part = parts[i];
+
+                if (i === parts.length - 1) {
+                    current[part] = errors[key];
+                } else {
+                    if (!current[part]) {
+                        if (parts[i + 1].match(/^\d+$/)) {
+                            current[part] = [];
+                        } else {
+                            current[part] = {};
+                        }
+                    }
+                    current = current[part];
+                }
+            }
+        }
+        return prettified;
+    } catch (error) {
+        return [];
+    }
+}
