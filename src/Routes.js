@@ -24,6 +24,7 @@ const Checkout = React.lazy(() => import("@pages/Checkout/Checkout"));
 const Test = React.lazy(() => import("@pages/Test/Test"));
 const ThankYou = React.lazy(() => import("@pages/Thankyou/Thankyou"));
 const RefundOrder = React.lazy(() => import("@pages/RefundOrder/RefundOrder"));
+const Careers = React.lazy(() => import("@pages/Careers/Careers"));
 const Contact = React.lazy(() =>
     import("@components/Footer/FooterMenu/Contact")
 );
@@ -233,7 +234,6 @@ const Router = () => {
             ),
         },
 
-
         {
             path: "blogs/category/:categoryslug",
             element: (
@@ -242,7 +242,6 @@ const Router = () => {
                 </PageWrapper>
             ),
         },
-
 
         {
             path: "/about_us",
@@ -342,6 +341,14 @@ const Router = () => {
             element: (
                 <PageWrapper>
                     <RefundOrder />
+                </PageWrapper>
+            ),
+        },
+        {
+            path: "/careers",
+            element: (
+                <PageWrapper>
+                    <Careers />
                 </PageWrapper>
             ),
         },

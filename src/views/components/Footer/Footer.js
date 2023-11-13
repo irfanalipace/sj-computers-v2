@@ -74,14 +74,14 @@ const Footer = () => {
                                                 Blogs
                                             </Link>
                                         </li>
-                                        {/*  <li>
-                                            <a
-                                                href="#!"
+                                        <li>
+                                            <Link
+                                                to="/careers"
                                                 className="herf-link text-decoration-none"
                                             >
-                                                Shop
-                                            </a>
-                                        </li> */}
+                                                Careers
+                                            </Link>
+                                        </li>
                                     </ul>
                                 </div>
 
