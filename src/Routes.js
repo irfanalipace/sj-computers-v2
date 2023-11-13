@@ -41,7 +41,7 @@ import NotFound from "@pages/NotFound/NotFound";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
 import CategoryBlogs from "@components/Blog/CategoryBlogs";
-import ApplyNow from "./views/pages/ApplyNow/ApplyNow";
+import ApplyNow from "./views/pages/Careers/ApplyNow";
 
 const Router = () => {
     const routes = [
@@ -337,16 +337,16 @@ const Router = () => {
                 </ProtectedRoute>
             ),
         },
-        {
-            path: "/apply-jobs",
-            element: (
-                <ProtectedRoute>
-                    <PageWrapper>
-                     <ApplyNow />
-                    </PageWrapper>
-                </ProtectedRoute>
-            ),
-        },
+        // {
+        //     path: "/apply-jobs",
+        //     element: (
+        //         // <ProtectedRoute>
+        //             <PageWrapper>
+        //              <ApplyNow />
+        //             </PageWrapper>
+        //         // </ProtectedRoute>
+        //     ),
+        // },
         {
             path: "/refund-order",
             element: (
@@ -360,6 +360,15 @@ const Router = () => {
             element: (
                 <PageWrapper>
                     <Careers />
+                </PageWrapper>
+            ),
+        },
+
+        {
+            path: "/apply-now",
+            element: (
+                <PageWrapper>
+                   <ApplyNow />
                 </PageWrapper>
             ),
         },
