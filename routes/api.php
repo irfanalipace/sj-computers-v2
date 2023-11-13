@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CareerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
@@ -72,7 +73,6 @@ Route::get('products', [ProductController::class, 'getList'])->name('products');
 Route::get('inventory-data', [ProductController::class, 'getInventoryData'])->name('inventoryData');
 
 Route::get('products-filter-list', [ProductController::class, 'getProductFilterList'])->name('getProductFilterList');
-
 
 
 Route::get('product-detail', [ProductController::class, 'getProductDetail'])->name('productDetail');
@@ -196,7 +196,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::post('order-shipping-address', [OrderController::class, 'shippingAddress'])->name('OrderShippingAddress');
 
 
-
     /*
      * update state api
      */
@@ -231,4 +230,9 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     * Download inventory Excel
     */
     Route::get('download-inventory', [InventoryController::class, 'downloadInventory'])->name('downloadInventory');
+
+    /*
+   * Careers
+   */
+    Route::get('careers', [CareerController::class, 'index'])->name('careers');
 });
