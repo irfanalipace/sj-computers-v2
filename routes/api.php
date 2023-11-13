@@ -231,14 +231,13 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     * Download inventory Excel
     */
     Route::get('download-inventory', [InventoryController::class, 'downloadInventory'])->name('downloadInventory');
-
-    /*
-   * Careers
-   */
-    Route::get('careers', [CareerController::class, 'index'])->name('careers');
-    Route::get('career/{career}', [CareerController::class, 'show'])->name('career');
 });
 
+/*
+ * Careers
+ */
+Route::get('careers', [CareerController::class, 'index'])->name('careers');
+Route::get('career/{career}', [CareerController::class, 'show'])->name('career');
 /*
 * Career Applications
 */
