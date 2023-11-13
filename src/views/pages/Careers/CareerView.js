@@ -124,7 +124,7 @@ function CareerView() {
                                         JOB REQUIREMENTS:
                                     </div>
                                     <div className="job-details-description pt-2">
-                                        {data?.requirements}
+                                        {data?.job_requirements}
                                     </div>
                                 </div>
                                 <div className="pb-4">
