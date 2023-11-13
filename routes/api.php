@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CareerApplicationController;
 use App\Http\Controllers\CareerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -235,4 +236,9 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
    * Careers
    */
     Route::get('careers', [CareerController::class, 'index'])->name('careers');
+
+    /*
+  * Career Applications
+  */
+    Route::post('store-career-applications', [CareerApplicationController::class, 'store'])->name('store-career-applications');
 });
