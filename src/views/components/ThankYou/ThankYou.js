@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 // import { productDetailsApi } from "@api/products";
 // import { Container, Row, Col, Table } from "react-bootstrap";
 
-import "./thankyou.css"; // Import the CSS file for the component
+// import "./thankyou.css";
 import circle from "../../../assets/images/green-circle.svg";
 import tickImage from "../../../assets/images/tick1.svg";
 import { useNavigate, useLocation } from "react-router-dom";

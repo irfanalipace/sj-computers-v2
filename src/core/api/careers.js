@@ -30,3 +30,25 @@ export function getJobDetails() {
         }, 2000);
     });
 }
+export function CreateCareer(CareerData) {
+    const formData = new FormData();
+    for (const key in CareerData) {
+        if (Array.isArray(CareerData[key])) {
+            CareerData[key].forEach((item, index) => {
+                formData.append(`${key}[${index}]`, item);
+            });
+        } else {
+            formData.append(key, CareerData[key]);
+        }
+    }
+    console.log('formData', formData);
+    return new Promise((resolve, reject) => {
+        ApiService.post('/store-career-applications', formData)
+            .then(response => {
+                resolve(response);
+            })
+            .catch(e => {
+                reject(e);
+            });
+    });
+}
