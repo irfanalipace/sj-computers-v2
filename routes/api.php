@@ -236,6 +236,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
    * Careers
    */
     Route::get('careers', [CareerController::class, 'index'])->name('careers');
+    Route::get('career/{career}', [CareerController::class, 'show'])->name('career');
 
     /*
   * Career Applications

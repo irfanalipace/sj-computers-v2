@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCareerRequest;
 use App\Models\Career;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,6 +17,14 @@ class CareerController extends Controller
     {
         return response()->json([
             'data' => Career::query()->get(),
+            'message' => 'Success fetching careers'
+        ]);
+    }
+
+    public function show(Career $career)
+    {
+        return response()->json([
+            'data' => $career,
             'message' => 'Success fetching careers'
         ]);
     }

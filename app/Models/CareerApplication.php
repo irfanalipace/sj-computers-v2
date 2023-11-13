@@ -23,4 +23,20 @@ class CareerApplication extends Model
     {
         return $this->belongsTo(Career::class);
     }
+
+    public function getResume($value)
+    {
+        if (!empty($value)) {
+            return url('storage/' . $value);
+        };
+        return null;
+    }
+
+    public function getCoverLetter($value)
+    {
+        if (!empty($value)) {
+            return url('storage/' . $value);
+        };
+        return null;
+    }
 }
