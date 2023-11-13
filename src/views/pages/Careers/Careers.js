@@ -135,7 +135,7 @@ function Careers() {
                                                 </div>
                                             </div>
                                             <div>
-                                                <p className="fs-6 mb-0 fw-medium">
+                                                <p className="fs-6 mb-0 fw-medium job-description">
                                                     {career?.job_description}
                                                 </p>
                                             </div>
