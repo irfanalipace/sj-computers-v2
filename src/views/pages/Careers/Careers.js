@@ -13,8 +13,12 @@ function Careers() {
     const [careers, setCareers] = useState([]);
 
     const getCareers = async () => {
-        let response = await getAllJobs();
-        setCareers(response.data);
+        try {
+            let response = await getAllJobs();
+            setCareers(response.data);
+        } catch (error) {
+            console.print("Error: " + error);
+        }
     };
 
     useEffect(() => {

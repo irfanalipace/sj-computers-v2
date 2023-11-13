@@ -71,7 +71,7 @@ const ApiService = {
                 .catch((error) => {
                     if (error?.response?.status === 401) {
                         destroyToken();
-                        window.location.reload();
+                        // window.location.reload();
                     } else if (
                         !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
                     ) {
@@ -133,7 +133,7 @@ const ApiService = {
             .catch((error, status) => {
                 if (error?.response?.status === 401) {
                     destroyToken();
-                    window.location.reload();
+                    // window.location.reload();
                 } else if (
                     !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
                 ) {
@@ -159,7 +159,7 @@ const ApiService = {
             .catch((error, status) => {
                 if (error?.response?.status === 401) {
                     destroyToken();
-                    window.location.reload();
+                    // window.location.reload();
                 } else if (
                     !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
                 ) {
