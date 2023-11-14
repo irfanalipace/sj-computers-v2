@@ -85,10 +85,10 @@ function CareerView() {
                                 <div className="row py-sm-5">
                                     <div className="col-12 col-sm-6 col-md-9">
                                         <div className="p-tages-text-career px-sm-0 px-2">
-                                            <h4 className="career-text-home">
+                                            <h4 className="career-text-home text-capitalize">
                                                 {data?.job_title}
                                             </h4>
-                                            <h6 className="career-text-home2">
+                                            <h6 className="career-text-home2 text-capitalize">
                                                 {data?.job_description}
                                             </h6>
                                         </div>

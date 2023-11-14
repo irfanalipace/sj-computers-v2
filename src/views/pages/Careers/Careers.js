@@ -108,7 +108,7 @@ function Careers() {
                                     <div className="card ">
                                         <div className="card-body">
                                             <div className="d-flex justify-content-between">
-                                                <p className="job-title mb-0 fs-5 fw-semibold">
+                                                <p className="job-title mb-0 fs-5 fw-semibold text-capitalize">
                                                     {career?.job_title}
                                                 </p>
                                                 <div className="fs-6 fw-light">
@@ -120,7 +120,7 @@ function Careers() {
                                             </div>
                                             <div className="d-flex justify-content-between py-3">
                                                 <div className="">
-                                                    <span className="text-success border-end pe-2 fs-6 fw-light">
+                                                    <span className="text-success border-end border-3 pe-2 fs-6 fw-light">
                                                         Open Position
                                                     </span>
                                                     <span className="ps-2 fs-6 fw-light">
@@ -135,8 +135,17 @@ function Careers() {
                                                 </div>
                                             </div>
                                             <div>
-                                                <p className="fs-6 mb-0 fw-medium job-description">
-                                                    {career?.job_description}
+                                                <p className="fs-6 mb-0 fw-medium job-description text-capitalize">
+                                                    {career?.job_description}{" "}
+                                                    <Link
+                                                        to={
+                                                            "/careers/" +
+                                                            career?.id
+                                                        }
+                                                        className="text-success"
+                                                    >
+                                                        Read More
+                                                    </Link>
                                                 </p>
                                             </div>
                                         </div>
