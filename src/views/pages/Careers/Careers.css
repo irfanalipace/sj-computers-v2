@@ -278,7 +278,8 @@
         text-align: left;
     }
     .card-mobile-screen-responsive-page-data-dev {
-        width: 351px;
+        width: 340px;
+        margin-left: 5px;
     }.career-mein-dev-data-descriptions{
         margin-left: 0px !important;
     }
