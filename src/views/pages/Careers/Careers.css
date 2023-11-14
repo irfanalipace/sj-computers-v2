@@ -303,7 +303,7 @@
     } .job-description {
       
         display: -webkit-box;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 5;
         -webkit-box-orient: vertical;
         overflow: hidden;
         line-height: 22px;
@@ -314,5 +314,8 @@
     /* Style your "Read More" link for mobile */
     .job-description .text-success {
         display: inline; /* Show the "Read More" link */
+    }.body-card-career-page-sj {
+     
+        padding: 22px;
     }
 }
