@@ -10,20 +10,64 @@
 
     color: #ffffff;
 }
+.open-postiton-career {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.open-postiton-career span{
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: initial;
+}
+.body-card-career-page-sj {
+    width: 100%;
+    max-width: 965px;
+}
+.career-container {
+    min-height: calc(100vh - 548px);
+}
+/* Add this to your Careers.css file or create a new CSS file */
+.loading-overlay-career-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+  }
 
+.updated-posted-career-data{
+    margin-top: 20px;
+}
+.card-mobile-screen-responsive-page-data-dev{
+    margin-top: 12px;
+    
+}
+.title-jobs-descriptions-array{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  
+}
 .job-description {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    line-height: 22px;
+    font-size: 15px;
 }
-
 /* .email-career-hr-line {
     border-left: 1px solid;
 } */
 .career-text-home {
     font-weight: 600;
-    font-size: 28px;
+    font-size: 26px;
     line-height: 34px;
     /* identical to box height */
 
@@ -233,6 +277,9 @@
     .my-career-menu {
         text-align: left;
     }
+    .card-mobile-screen-responsive-page-data-dev{
+        width: 300px;
+    }
     .nav-career-background-color {
         display: none;
     }
@@ -244,5 +291,11 @@
     }
     .text-aligin-career-menu:hover {
         display: none;
+    }.open-postiton-career{
+        text-align: left;
+    }.updated-posted-career-data{
+    text-align: left;
+    }.posted-option-updated{
+        text-align: left;
     }
 }

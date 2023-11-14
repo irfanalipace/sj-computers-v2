@@ -9,24 +9,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faMobile } from "@fortawesome/free-solid-svg-icons";
 import { getAllJobs } from "../../../core/api/careers";
 import { convertDateToLongFormat } from "@utils/helpers";
+import CircularProgress from "@mui/material/CircularProgress";
 function Careers() {
     const [careers, setCareers] = useState([]);
-
+   // const [isLoading, setIsLoading] = useState(false);
     const getCareers = async () => {
+       
         try {
             let response = await getAllJobs();
-            // setCareers(response.data);
+            setCareers(response.data);
         } catch (error) {
             console.print("Error: " + error);
-        }
+        } 
     };
 
     useEffect(() => {
+        console.log("Component rendered");
         getCareers();
     }, []);
 
     return (
         <div className="career-container">
+             
             <div className="career-header">
                 <div className="my-career-menu">
                     <nav className="navbar navbar-expand-sm nav-career-background-color">
@@ -105,9 +109,57 @@ function Careers() {
                                     to={"/careers/" + career?.id}
                                     className="text-decoration-none"
                                 >
-                                    <div className="card ">
-                                        <div className="card-body">
-                                            <div className="d-flex justify-content-between">
+                                    <div className="card card-mobile-screen-responsive-page-data-dev">
+                                        <div className="card-body body-card-career-page-sj">
+                                            <div className="row">
+                                                <div className="col-md-6 ">
+                                                    <p
+                                                        className="job-title mb-0 fs-5 fw-semibold text-capitalize title-jobs-descriptions-array"
+                                                      
+                                                    >
+                                                        {career?.job_title}
+                                                    </p>
+                                                    <div className="open-postiton-career">
+                                                        <span className="text-success border-end border-3 pe-2 fs-6 fw-light">
+                                                            Open Position
+                                                        </span>
+                                                        <span className="ps-2 fs-6 fw-light">
+                                                            Minnesota, USA
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-6 d-flex flex-column justify-content-between">
+                                                    <div className="text-end mb-3">
+                                                        <div className="fs-6 fw-light posted-option-updated">
+                                                            Posted{" "}
+                                                            {convertDateToLongFormat(
+                                                                career?.created_at
+                                                            )}
+                                                        </div>
+                                                        <div className="text-muted fs-6 fw-light updated-posted-career-data">
+                                                            Updated{" "}
+                                                            {convertDateToLongFormat(
+                                                                career?.updated_at
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p className=" mb-0 job-description text-capitalize">
+                                                    {career?.job_description}{" "}
+                                                    <Link
+                                                        to={
+                                                            "/careers/" +
+                                                            career?.id
+                                                        }
+                                                        className="text-success"
+                                                    >
+                                                        Read More
+                                                    </Link>
+                                                </p>
+                                            </div>
+                                            {/* <div className="d-flex justify-content-between">
                                                 <p className="job-title mb-0 fs-5 fw-semibold text-capitalize">
                                                     {career?.job_title}
                                                 </p>
@@ -147,7 +199,7 @@ function Careers() {
                                                         Read More
                                                     </Link>
                                                 </p>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                 </Link>
