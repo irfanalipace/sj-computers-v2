@@ -228,14 +228,14 @@ const Contact = () => {
                                         </p>
                                     )}
                                 </div>
-                                <Button
+                                <button
                                     isLoading={isLoading}
                                     onClick={handleSubmit}
                                     type="submit"
-                                    className="contact-button"
+                                    className="contact-button-contact-page"
                                 >
                                     SEND
-                                </Button>
+                                </button>
                                 {message && (
                                     <Alert variant="success" className="mt-2">
                                         Message has been sent successfully
