@@ -317,5 +317,10 @@
     }.body-card-career-page-sj {
      
         padding: 22px;
+    }.conatiner-data-view-mobile{
+      
+            width: 374px;
+            /* text-align: end; */
+    
     }
 }

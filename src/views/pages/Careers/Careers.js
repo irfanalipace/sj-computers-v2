@@ -99,7 +99,7 @@ function Careers() {
                     </div>
                 </div>
                 <div className="careers-page-listing bg-light">
-                    <div className="container-lg py-4 ">
+                    <div className="container-lg py-4 conatiner-data-view-mobile">
                         <div className="pb-3 w-75 mx-auto career-mein-dev-data-descriptions">
                             {careers?.map((career) => (
                                 <Link
