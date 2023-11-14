@@ -12,15 +12,14 @@ import { convertDateToLongFormat } from "@utils/helpers";
 import CircularProgress from "@mui/material/CircularProgress";
 function Careers() {
     const [careers, setCareers] = useState([]);
-   // const [isLoading, setIsLoading] = useState(false);
+
     const getCareers = async () => {
-       
         try {
             let response = await getAllJobs();
             setCareers(response.data);
         } catch (error) {
             console.print("Error: " + error);
-        } 
+        }
     };
 
     useEffect(() => {
@@ -30,7 +29,6 @@ function Careers() {
 
     return (
         <div className="career-container">
-             
             <div className="career-header">
                 <div className="my-career-menu">
                     <nav className="navbar navbar-expand-sm nav-career-background-color">
@@ -102,7 +100,7 @@ function Careers() {
                 </div>
                 <div className="careers-page-listing bg-light">
                     <div className="container-lg py-4 ">
-                        <div className="pb-3 w-75 mx-auto">
+                        <div className="pb-3 w-75 mx-auto career-mein-dev-data-descriptions">
                             {careers?.map((career) => (
                                 <Link
                                     key={career.id}
@@ -113,10 +111,7 @@ function Careers() {
                                         <div className="card-body body-card-career-page-sj">
                                             <div className="row">
                                                 <div className="col-md-6 ">
-                                                    <p
-                                                        className="job-title mb-0 fs-5 fw-semibold text-capitalize title-jobs-descriptions-array"
-                                                      
-                                                    >
+                                                    <p className="job-title mb-0 fs-5 fw-semibold text-capitalize title-jobs-descriptions-array">
                                                         {career?.job_title}
                                                     </p>
                                                     <div className="open-postiton-career">
