@@ -98,7 +98,9 @@ function CareerView() {
                                             <Link
                                                 to={
                                                     "/apply-now?jobId=" +
-                                                    data?.id
+                                                    data?.id +
+                                                    "&jobTitle=" +
+                                                    data?.job_title
                                                 }
                                                 className="apply-now-btn"
                                             >
@@ -156,7 +158,12 @@ function CareerView() {
                                 <div className="pt-2">
                                     <Link
                                         className="btn btn-outline-success text-decoration-none apply-now-link"
-                                        to={"/apply-now?jobId=" + data?.id}
+                                        to={
+                                            "/apply-now?jobId=" +
+                                            data?.id +
+                                            "&jobTitle=" +
+                                            data?.job_title
+                                        }
                                     >
                                         Apply Now
                                     </Link>

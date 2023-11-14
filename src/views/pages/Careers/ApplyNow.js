@@ -25,6 +25,7 @@ import Thankyou from "../../components/ThankYou/ThankYou";
 const ApplyNow = () => {
     const params = new URLSearchParams(window.location.search);
     let jobId = params.get("jobId");
+    let jobTitle = params.get("jobTitle");
     // console.log('jobId', jobId);
     // ?customerId=
     const [fieldError, setFieldError] = useState("");
@@ -50,12 +51,10 @@ const ApplyNow = () => {
             console.log("alla", allparams);
             try {
                 const res = await CreateCareer(allparams);
-                console.log("result: ", res);
                 if (res) {
                     toast.success("Application Submitted Successfully");
                     setLoadThankyou(true);
                 }
-                console.log("values", allparams);
             } catch (error) {
                 console.log("error", error);
                 if (error.data.errors) setFieldError(error.data.errors);
@@ -128,8 +127,8 @@ const ApplyNow = () => {
                         <div className="row">
                             <div className="col-md-12 col-lg-12 col-sm-12">
                                 <Box py={8}>
-                                    <h4 className="contact-text-home">
-                                        Bussiness System Analyst
+                                    <h4 className="contact-text-home text-capitalize">
+                                        {jobTitle || "Bussiness System Analyst"}
                                         {/* {user?.name} */}
                                     </h4>
                                     <h6 className="contact-text-home2">

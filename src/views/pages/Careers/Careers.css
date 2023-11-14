@@ -11,7 +11,7 @@
     color: #ffffff;
 }
 
-.job-description{
+.job-description {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -148,6 +148,9 @@
 }
 .on-focus-colo-career:focus {
     color: white !important;
+}
+.job-title:hover {
+    color: #318243;
 }
 @media screen and (max-width: 1000px) {
     .career-text-home {
