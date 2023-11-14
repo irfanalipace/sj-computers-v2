@@ -15,7 +15,7 @@ function Careers() {
     const getCareers = async () => {
         try {
             let response = await getAllJobs();
-            setCareers(response.data);
+            // setCareers(response.data);
         } catch (error) {
             console.print("Error: " + error);
         }
