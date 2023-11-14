@@ -21,8 +21,13 @@ class CareerApplicationController extends Controller
             $user['file']['cover_letter'] = str_replace('public/', '', $filename);
         }
 
+        $files = [
+            $user['file']['resume'],
+            $user['file']['cover_letter'],
+        ];
+
         $careerApplication = CareerApplication::query()->create($request->all());
-        Mail::to(['99tech.ai@gmail.com', 'joe@sjcomputersmn.com'])->send(new CareerApplicationMail($careerApplication->job_title));
+        Mail::to(['99tech.ai@gmail.com', 'joe@sjcomputersmn.com'])->send(new CareerApplicationMail($careerApplication->job_title, $files));
 
         return response()->json([
             'data' => $careerApplication,

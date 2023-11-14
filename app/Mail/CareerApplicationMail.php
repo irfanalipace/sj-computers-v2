@@ -12,15 +12,17 @@ class CareerApplicationMail extends Mailable
     use Queueable, SerializesModels;
 
     public $jobTitle;
+    public $files;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($jobTitle)
+    public function __construct($jobTitle, $files)
     {
         $this->jobTitle = $jobTitle;
+        $this->files = $files;
     }
 
     /**
@@ -30,7 +32,9 @@ class CareerApplicationMail extends Mailable
      */
     public function build()
     {
-        //        return $this->view('view.name');
-        return $this->subject('New CV Submission for ' . $this->jobTitle . ' Position ')->view('emails.career-email');
+        $email = $this->subject('New CV Submission for ' . $this->jobTitle . ' Position ')->view('emails.career-email');
+        foreach ($this->files as $file) {
+            $email->attach($file);
+        }
     }
 }
