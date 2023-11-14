@@ -38,7 +38,6 @@ const ApplyNow = () => {
         validationSchema: validationSchema,
         onSubmit: async values => {
             const allparams = { ...values, career_id: jobId }
-            console.log('alla', allparams);
             try {
                 const res = await CreateCareer(allparams);
                 console.log('result: ', res);
@@ -46,11 +45,13 @@ const ApplyNow = () => {
                     toast.success('Application Submitted Successfully');
                     setLoadThankyou(true)
                 }
-                console.log('values', allparams);
 
             } catch (error) {
-                console.log('error', error);
-                if (error.data.errors) setFieldError(error.data.errors);
+                console.log('error', error.data.errors?.career_id);
+                if (error.data.errors) {
+                    setFieldError(error.data.errors);
+                    if (error.data.errors?.career_id) toast.error('The selected career is not available')
+                }
                 else toast.error(error.data.message)
             }
         },
@@ -58,7 +59,7 @@ const ApplyNow = () => {
     useEffect(() => {
         formik.setErrors(prettifyErrorfromObjectToArray(fieldError) || {});
     }, [fieldError]);
-    console.log('fieldError', fieldError);
+    // console.log('fieldError', fieldError);
 
     return (
         <div className="contact-container">
@@ -121,7 +122,7 @@ const ApplyNow = () => {
                             <div className="col-md-12 col-lg-12 col-sm-12">
                                 <Box py={8}>
                                     <h4 className="contact-text-home">
-                                        Bussiness System Analyst
+                                        Business System Analyst
                                         {/* {user?.name} */}
                                     </h4>
                                     <h6 className="contact-text-home2">
