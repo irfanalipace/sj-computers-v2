@@ -41,8 +41,10 @@ import NotFound from "@pages/NotFound/NotFound";
 
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
-import CategoryBlogs from "@components/Blog/CategoryBlogs";
-import ApplyNow from "./views/pages/Careers/ApplyNow";
+const CategoryBlogs = React.lazy(() =>
+    import("@components/Blog/CategoryBlogs")
+);
+const ApplyNow = React.lazy(() => import("./views/pages/Careers/ApplyNow"));
 
 const Router = () => {
     const routes = [
