@@ -43,6 +43,7 @@ import Loader from "@common/LoaderComponent/LoaderComponent";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
 import CategoryBlogs from "@components/Blog/CategoryBlogs";
 import ApplyNow from "./views/pages/Careers/ApplyNow";
+import Layout from "./views/pages/PageLayout/Layout";
 
 const Router = () => {
     const routes = [
@@ -369,6 +370,14 @@ const Router = () => {
             element: (
                 <PageWrapper>
                     <CareerView />
+                </PageWrapper>
+            ),
+        },
+        {
+            path: "/layout",
+            element: (
+                <PageWrapper>
+                   <Layout />
                 </PageWrapper>
             ),
         },
