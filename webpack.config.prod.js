@@ -56,18 +56,18 @@ module.exports = {
         path: path.resolve(__dirname, "public/js"),
         publicPath: "/js/",
         filename: "[name].js",
-        chunkFilename: "[name].chunk.js", // Specify a different chunk filename
+        chunkFilename: "[name].[contenthash].js", // Specify a different chunk filename
+        clean: true,
     },
 
     plugins: [
-        new CleanWebpackPlugin(), // Clean output directory before each build
         new Dotenv(),
         // new BundleAnalyzerPlugin(),
-        // new CompressionPlugin({
-        //     algorithm: "gzip",
-        //     test: /\.(js|css|png|jpg|jpeg|webp)$/,
-        //     threshold: 10240,
-        //     minRatio: 0.8,
-        // }),
+        new CompressionPlugin({
+            algorithm: "gzip",
+            test: /\.(js|css|png|jpg|jpeg|webp)$/,
+            threshold: 10240,
+            minRatio: 0.8,
+        }),
     ],
 };
