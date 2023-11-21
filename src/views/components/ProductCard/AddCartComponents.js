@@ -43,7 +43,6 @@ const AddCartComponents = ({ product, className, quantity = 1, ...rest }) => {
         if (isAuthenticated)
             dispatch(addToCart({ cartItem }, () => navigate("/cart")));
         else {
-            console.log("cartItem: ", cartItem);
             dispatch(
                 addToLocalCart({ cartItem, cartDetails }, () =>
                     navigate("/cart")

@@ -23,7 +23,6 @@ function Careers() {
     };
 
     useEffect(() => {
-        console.log("Component rendered");
         getCareers();
     }, []);
 

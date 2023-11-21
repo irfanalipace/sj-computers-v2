@@ -54,14 +54,13 @@ const ApplyNow = () => {
                     toast.success("Application Submitted Successfully");
                     setLoadThankyou(true);
                 }
-
             } catch (error) {
-                console.log('error', error.data.errors?.career_id);
+                console.print("error", error.data.errors?.career_id);
                 if (error.data.errors) {
                     setFieldError(error.data.errors);
-                    if (error.data.errors?.career_id) toast.error('The selected career is not available')
-                }
-                else toast.error(error.data.message)
+                    if (error.data.errors?.career_id)
+                        toast.error("The selected career is not available");
+                } else toast.error(error.data.message);
             }
         },
     });

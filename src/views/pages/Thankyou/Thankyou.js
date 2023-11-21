@@ -32,7 +32,6 @@ export default function ThankYou() {
     useEffect(() => {
         const storedOrder = window.localStorage.getItem("thankyouOrderDetails");
         const order = location?.state?.order || JSON.parse(storedOrder);
-        console.log("order", order);
         if (order) {
             const orderString = JSON.stringify(order);
             window.localStorage.setItem("thankyouOrderDetails", orderString);

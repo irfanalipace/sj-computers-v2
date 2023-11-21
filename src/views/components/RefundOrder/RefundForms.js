@@ -108,7 +108,6 @@ export default function RefundForms({
                     toast.success("Refund Request Submitted Successfully");
                     resetStates();
                 } catch (error) {
-                    console.log("error", error);
                     toast.error(
                         <div
                             dangerouslySetInnerHTML={{

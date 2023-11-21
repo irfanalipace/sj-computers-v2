@@ -30,7 +30,7 @@ export function blogSlugApiblogDetails(slug) {
     return new Promise((resolve, reject) => {
         ApiService.get(`/get-blogs?slug=${slug}`)
             .then((response) => {
-                console.log(response, "update blog slug");
+                console.print(response, "update blog slug");
                 resolve(response);
             })
             .catch((e) => {
@@ -44,7 +44,7 @@ export function blogHeaderDetails(slug) {
     return new Promise((resolve, reject) => {
         ApiService.get(`/get-blogs?slug=${slug}`)
             .then((response) => {
-                console.log(response, "update blog slug");
+                console.print(response, "update blog slug");
                 resolve(response);
             })
             .catch((e) => {
@@ -54,16 +54,14 @@ export function blogHeaderDetails(slug) {
     });
 }
 
-
-
-
 ///Category Api Call
 export function getCategoryApi(category_id, page = 1, per_page = 12) {
-
     return new Promise((resolve, reject) => {
-        ApiService.get(`/category-blogs?category_id=${category_id}&page=${page}&per_page=${per_page}`)
+        ApiService.get(
+            `/category-blogs?category_id=${category_id}&page=${page}&per_page=${per_page}`
+        )
             .then((response) => {
-                console.log(response, "category the blogs");
+                console.print(response, "category the blogs");
                 resolve(response);
             })
             .catch((e) => {
@@ -72,5 +70,3 @@ export function getCategoryApi(category_id, page = 1, per_page = 12) {
             });
     });
 }
-
-

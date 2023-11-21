@@ -116,7 +116,6 @@ export default function RefundOrder() {
                 [key]: value,
             },
         });
-        console.log("key-value", key, value);
     };
 
     const fetchOrdersList = async (userType) => {
@@ -215,7 +214,6 @@ export default function RefundOrder() {
                 });
                 toast.success("OTP sent to email");
             } catch (error) {
-                console.log("error", error);
                 toast.error(error?.data?.errors?.error[0]);
             }
         } else if (selectedUserType === USER_TYPE_ENUM.SALE_PERSON) {
@@ -233,7 +231,6 @@ export default function RefundOrder() {
                 });
                 toast.success("OTP sent to email");
             } catch (error) {
-                console.log("error", error);
                 toast.error(error?.data?.message?.error[0]);
             }
         }
