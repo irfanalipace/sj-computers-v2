@@ -26,7 +26,6 @@
     justify-content: center;
 }
 
-
 .category-data-span-blogs span {
     font-family: "Inter";
     font-style: normal;
@@ -51,18 +50,17 @@ li.policy-listitem {
     border-radius: 4px;
     width: 267px;
     margin-left: 25px;
-    margin-left: '33px';
-   
+    margin-left: "33px";
 }
 .widget_categories ul {
     margin-top: 13px;
-  
+
     margin-left: -30px;
     display: block;
 }
 
-.widget_categories li{
-    list-style-type:none;
+.widget_categories li {
+    list-style-type: none;
     padding: 3px;
 }
 
@@ -72,9 +70,9 @@ li.policy-listitem {
     margin: 0 0 20px;
     cursor: pointer;
     float: left;
-  
-      font-weight: bold;
-    
+
+    font-weight: bold;
+
     width: 100%;
     position: relative;
     transition: all 400ms ease-in-out 0s;
@@ -84,17 +82,16 @@ li.policy-listitem {
     -ms-transition: all 400ms ease-in-out 0s;
 }
 
-.widget_categories a{
+.widget_categories a {
     color: #00a0d9;
 }
-.widget_categories a:hover{
+.widget_categories a:hover {
     color: black;
 }
 
-
-.recent-bogs-view-clops{
-display: flex;
-justify-content: space-between;
+.recent-bogs-view-clops {
+    display: flex;
+    justify-content: space-between;
 }
 .policy-listitem a {
     font-family: "Inter";
@@ -155,7 +152,7 @@ justify-content: space-between;
     color: #ffffff;
     margin-left: 5px;
 }
-.categor-data-scrping{
+.categor-data-scrping {
     display: flex;
     justify-content: space-between;
 }
@@ -205,12 +202,10 @@ justify-content: space-between;
     font-size: 12px;
     line-height: 17px;
 }
-.fave-category-dropdown-button-blogs-data button{
-  
-        background: none;
-        border: none;
-       padding: 0px;
-
+.fave-category-dropdown-button-blogs-data button {
+    background: none;
+    border: none;
+    padding: 0px;
 }
 
 .policy-items-cart-sction2-dev {
@@ -235,7 +230,6 @@ justify-content: space-between;
     padding-top: 20px;
     max-width: 100%;
     padding-bottom: 8px;
-   
 }
 .order-button-policy {
     padding-top: 32px;
@@ -726,11 +720,11 @@ div.sticky {
     background-color: transparent;
     cursor: pointer;
 }
-.recenr-articel-data{
-    padding:9px;
+.recenr-articel-data {
+    padding: 9px;
     border: none;
 }
-.icon-data-dropdown{
+.icon-data-dropdown {
     margin-left: 120px;
 }
 .button-arrow-dev i {
@@ -913,6 +907,50 @@ div.sticky {
     font-size: 14px;
 }
 
+#blog-content tr:first-child td p strong {
+    font-weight: bold;
+}
+
+#blog-content tr:first-child td p {
+    font-weight: bold;
+}
+
+#blog-content table colgroup col {
+    width: 50% !important;
+}
+
+#blog-content td,
+tfoot,
+th,
+thead,
+tr {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    border-color: inherit !important;
+    border-style: solid !important;
+    border-width: 0;
+    border: 1px solid !important;
+    padding-left: 6px !important;
+    /* width: 100%!important; */
+    /* height: 2px; */
+}
+
+#blog-content table {
+    caption-side: bottom;
+    border-collapse: collapse;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    width: 100% !important;
+}
+
+#blog-content td p strong {
+    font-weight: bold;
+}
+
 @media screen and (min-width: 900px) and (max-width: 1376px) {
     #blog-content {
         /* width: 389px; */
@@ -921,23 +959,17 @@ div.sticky {
     }
 }
 
-
 @media screen and (max-width: 1190px) {
-    
-.background-image-lin-dve img {
-   
-    margin-left: 0px;
+    .background-image-lin-dve img {
+        margin-left: 0px;
+    }
 }
-}
-
-
 
 @media screen and (max-width: 1003px) {
     .menuBar-policy {
         display: flex;
         overflow-x: auto;
         width: 100%;
-       
     }
 
     .policy-menu-item-list {
@@ -1015,16 +1047,12 @@ div.sticky {
     }
 }
 
-
 @media screen and (max-width: 991px) {
     .ul-item-blog-social-icon a {
         color: white;
         padding-right: 5px;
     }
-
 }
-
-
 
 @media screen and (min-width: 880px) and (max-width: 991px) {
     .top-stories-data {
@@ -1082,28 +1110,26 @@ div.sticky {
 @media screen and (max-width: 730px) {
     .main-dev-card-deprt {
         width: 100%;
-      
+
         left: 0px;
         margin-left: 0px;
         top: 0px;
         background: rgba(49, 130, 67, 0.1);
-    }.blog-dynamic-style-heading-data{
+    }
+    .blog-dynamic-style-heading-data {
         margin-top: 19px;
-    }.widget_categories {
+    }
+    .widget_categories {
         border: 1px solid #c7c0c0;
         padding: 9px;
         border-radius: 4px;
         width: 100%;
-        margin-left: 0px ;
-        
+        margin-left: 0px;
     }
-    
 }
 @media screen and (min-width: 610px) {
     .background-image-lin-dve img {
-      
         height: 420px;
-        
     }
     .image-cainter-dev {
         padding-left: 45px;
@@ -1128,7 +1154,7 @@ div.sticky {
         color: white;
         width: 910px;
         max-width: 100%;
-        
+
         max-height: 100%;
         margin: 25px 0;
         margin-left: 120px;
@@ -1140,17 +1166,17 @@ div.sticky {
     .blog-dynamic-style-heading-data {
         margin-top: 24px;
     }
-   .blog-background-color {
-    background: #002549;
-    padding-bottom: 69px;
-    height: auto;
-}
-/* .recenr-articel-data{
+    .blog-background-color {
+        background: #002549;
+        padding-bottom: 69px;
+        height: auto;
+    }
+    /* .recenr-articel-data{
     margin-left: 200px;
 } */
-.icon-data-dropdown{
-    margin-left: 231px;
-}
+    .icon-data-dropdown {
+        margin-left: 231px;
+    }
     /* .content-data-of-the-iamges-blogs {
         margin-top: 85px;
     } */
@@ -1186,7 +1212,7 @@ div.sticky {
     /* .background-image-lin-dve {
         margin-top: 135px;
     } */
-    
+
     .ul-item-blog-social-icon2 {
         margin-top: 15px;
         margin-bottom: 15px;
@@ -1229,8 +1255,8 @@ div.sticky {
     }
     .card-dev-container-mobile-space-section-age-cart {
         margin-left: 0px;
-    }.policy-header-topbar-scroll-blogs{
+    }
+    .policy-header-topbar-scroll-blogs {
         background: #002549;
     }
-    
 }
