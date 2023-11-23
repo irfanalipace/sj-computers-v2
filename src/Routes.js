@@ -41,10 +41,9 @@ import NotFound from "@pages/NotFound/NotFound";
 
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
-const CategoryBlogs = React.lazy(() =>
-    import("@components/Blog/CategoryBlogs")
-);
-const ApplyNow = React.lazy(() => import("./views/pages/Careers/ApplyNow"));
+import CategoryBlogs from "@components/Blog/CategoryBlogs";
+import ApplyNow from "./views/pages/Careers/ApplyNow";
+import Layout from "./views/pages/PageLayout/Layout";
 
 const Router = () => {
     const routes = [
@@ -378,7 +377,7 @@ const Router = () => {
             path: "/layout",
             element: (
                 <PageWrapper>
-                   <Layout />
+                  <Layout />
                 </PageWrapper>
             ),
         },
