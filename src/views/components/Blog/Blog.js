@@ -652,7 +652,7 @@ const Blog = () => {
                            <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
                              __html: blogdteails.content.substring(3000)
                            }} />
-                         }
+                        */}
                                             </div>
                                         </div>
                                         {/* <div className="image-for-meeting2-section">
