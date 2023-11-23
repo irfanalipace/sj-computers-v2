@@ -58,13 +58,13 @@ export function CreateCareer(CareerData) {
             formData.append(key, CareerData[key]);
         }
     }
-    console.log('formData', formData);
+    console.print("formData", formData);
     return new Promise((resolve, reject) => {
-        ApiService.post('/store-career-applications', formData)
-            .then(response => {
+        ApiService.post("/store-career-applications", formData)
+            .then((response) => {
                 resolve(response);
             })
-            .catch(e => {
+            .catch((e) => {
                 reject(e);
             });
     });

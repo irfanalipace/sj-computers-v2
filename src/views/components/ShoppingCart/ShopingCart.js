@@ -99,10 +99,6 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                         <div key={item.id} id={item.id}>
                                             <hr className="hrline"></hr>
                                             <div className="items">
-                                                {console.log(
-                                                    "cartData: ",
-                                                    item
-                                                )}
                                                 <CartItem cartData={item} />
                                             </div>
                                         </div>

@@ -9,7 +9,7 @@
         "prod": "npm run production",
         "production": "mix --production",
         "start": "webpack-dev-server --config webpack.config.dev",
-        "build": "webpack --config webpack.config.prod && mix --production"
+        "build": "webpack --config webpack.config.prod"
     },
     "dependencies": {
         "@babel/preset-env": "^7.21.4",

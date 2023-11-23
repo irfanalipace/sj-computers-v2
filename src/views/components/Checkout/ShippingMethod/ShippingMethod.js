@@ -22,12 +22,10 @@ const ShippingMehtod = () => {
     const dispatch = useDispatch();
 
     const handleChange = async (e) => {
-        console.log("handleChange", e);
         const cartDetails = getCartDetails();
         if (isLoading) return false;
         else {
             setIsLoading(true);
-            console.log("isAuthenticated: ", isAuthenticated);
             if (isAuthenticated) {
                 try {
                     let response = await applyShipment({

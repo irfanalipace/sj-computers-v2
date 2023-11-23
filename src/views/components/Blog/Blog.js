@@ -64,7 +64,6 @@ const Blog = () => {
             >
                 {category.name}
             </Link>
-            {console.log(category, "category data")}
         </li>
     ));
 
@@ -145,7 +144,6 @@ const Blog = () => {
 
     useEffect(() => {
         if (blogdteails?.id) {
-            console.log("@@@@ blogdteails: ", blogdteails);
             try {
                 const blogContent = document.getElementById("blog-content");
                 const h2Tags = blogContent.getElementsByTagName("h2");
@@ -485,10 +483,6 @@ const Blog = () => {
                                                 <div>
                                                     {isRecentcollapsed && filteredArr?.map((blog) => (
                                                         <div key={blog.id}>
-                                                            {console.log(
-                                                                blogs,
-                                                                "response.data?.data"
-                                                            )}
                                                             <Link
                                                                 to={`/${blog?.slug}`}
                                                                 className="text-decoration-none"
@@ -574,7 +568,7 @@ const Blog = () => {
                                     <div className="col-md-7">
                                         <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
                                             <div
-                                                id="blog-content"
+                                                id="blog-content blogs-table-content-details"
                                                 dangerouslySetInnerHTML={{
                                                     __html: blogdteails.content,
                                                 }}
@@ -658,8 +652,7 @@ const Blog = () => {
                            <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
                              __html: blogdteails.content.substring(3000)
                            }} />
-                         }
-                         {console.log(blogdteails.content,'blogs of the dta')} */}
+                        */}
                                             </div>
                                         </div>
                                         {/* <div className="image-for-meeting2-section">

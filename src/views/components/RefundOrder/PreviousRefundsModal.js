@@ -65,7 +65,6 @@ export default function PreviousRefundsModal({
                         page: value || data?.current_page,
                         user_id: userID,
                     });
-                    console.log("response", response?.data);
                     setData(response?.data);
                 } catch (error) {}
                 break;
@@ -77,7 +76,6 @@ export default function PreviousRefundsModal({
                         page: value || data?.current_page,
                         customer_id: userID,
                     });
-                    console.log("response", response?.data);
                     setData(response?.data);
                 } catch (error) {}
                 break;

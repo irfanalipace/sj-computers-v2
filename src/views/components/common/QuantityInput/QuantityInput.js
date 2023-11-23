@@ -8,7 +8,6 @@ export const QuantityInput = ({
     minQuantity = 1,
     maxQuantity = 1000,
 }) => {
-    console.log("QuantityInput: ", value);
     const [quantity, setQuantity] = useState(parseInt(value) || minQuantity);
     const [hasRendered, setHasRendered] = useState(false);
 
