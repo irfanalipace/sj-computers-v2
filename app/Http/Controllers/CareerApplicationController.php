@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCareerApplicationRequest;
 use App\Mail\CareerApplicationMail;
 use App\Mail\LoginOtpMail;
+use App\Models\Career;
 use App\Models\CareerApplication;
 use Illuminate\Support\Facades\Mail;
 
@@ -25,7 +26,9 @@ class CareerApplicationController extends Controller
             storage_path('app/' . $user['cover_letter']),
         ];
 
-        Mail::to(['99tech.ai@gmail.com', 'joe@sjcomputersmn.com'])->send(new CareerApplicationMail($careerApplication->job_title, $files));
+        $career = Career::find($request->get('career_id'));
+
+        Mail::to(['99tech.ai@gmail.com', 'joe@sjcomputersmn.com'])->send(new CareerApplicationMail($career->job_title, $files));
 
         return response()->json([
             'data' => $careerApplication,
