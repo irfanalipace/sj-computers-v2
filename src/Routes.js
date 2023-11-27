@@ -373,14 +373,14 @@ const Router = () => {
                 </PageWrapper>
             ),
         },
-        {
-            path: "/layout",
-            element: (
-                <PageWrapper>
-                  <Layout />
-                </PageWrapper>
-            ),
-        },
+        // {
+        //     path: "/layout",
+        //     element: (
+        //         <PageWrapper>
+        //           <Layout />
+        //         </PageWrapper>
+        //     ),
+        // },
 
         {
             path: "/apply-now",
