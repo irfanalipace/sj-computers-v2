@@ -180,10 +180,10 @@ li.policy-listitem {
     /* line-height: 109%; */
     color: #ffffff;
 }
-.policyset-container-dev {
+/* .policyset-container-dev {
     padding-top: 33px;
     margin-left: 120px;
-}
+} */
 .conditional-granti {
     color: white;
     font-family: "Inter";
@@ -1007,11 +1007,11 @@ tr {
     .text-dev-section-dev {
         margin-left: 0px;
     }
-    .policyset-container-dev {
+    /* .policyset-container-dev {
         padding: 62px;
         padding-top: 0px;
         margin-left: 0px;
-    }
+    } */
 
     .cart-dev-policy-section {
         padding-bottom: 12px;

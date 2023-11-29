@@ -11,8 +11,8 @@
     color: #ffffff;
 }
 .open-postiton-career {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 12px;
+    margin-bottom: 12px;
 }
 .open-postiton-career span{
     font-size: 16px;
@@ -41,7 +41,7 @@
   }
 
 .updated-posted-career-data{
-    margin-top: 20px;
+    margin-top: 12px;
 }
 .card-mobile-screen-responsive-page-data-dev{
     margin-top: 12px;
@@ -54,13 +54,9 @@
     overflow: hidden;
   
 }
-.job-description {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    line-height: 22px;
+.descriptions-paragraph-data {
     font-size: 15px;
+    line-height: 21px;
 }
 /* .email-career-hr-line {
     border-left: 1px solid;
@@ -122,6 +118,8 @@
     /* Primary */
 
     color: #333333;
+}.read-button-job-descriptions a{
+    font-size: 13px;
 }
 
 .career-button {
@@ -278,9 +276,13 @@
         text-align: left;
     }
     .card-mobile-screen-responsive-page-data-dev {
-        width: 340px;
+        /* width: 340px; */
         margin-left: 5px;
-    }.career-mein-dev-data-descriptions{
+    }
+    
+    
+    .career-mein-dev-data-descriptions {
+        width: 99% !important;
         margin-left: 0px !important;
     }
     .nav-career-background-color {
@@ -300,27 +302,21 @@
     text-align: left;
     }.posted-option-updated{
         text-align: left;
-    } .job-description {
-      
-        display: -webkit-box;
-        -webkit-line-clamp: 5;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        line-height: 22px;
-        font-size: 15px;
-       
-    }
-
-    /* Style your "Read More" link for mobile */
-    .job-description .text-success {
-        display: inline; /* Show the "Read More" link */
     }.body-card-career-page-sj {
      
         padding: 22px;
     }.conatiner-data-view-mobile{
       
-            width: 374px;
+            /* width: 374px; */
             /* text-align: end; */
     
+    }.updated-posted-career-data{
+        margin-top: 9px;
+    }.open-postiton-career {
+        margin-top: 9px;
+        margin-bottom: 9px;
+    }.descriptions-paragraph-data {
+        font-size: 13px;
+        line-height: 21px;
     }
 }

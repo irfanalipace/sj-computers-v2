@@ -568,7 +568,7 @@ const Blog = () => {
                                     <div className="col-md-7">
                                         <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
                                             <div
-                                                id="blog-content"
+                                                id="blog-content blogs-table-content-details"
                                                 dangerouslySetInnerHTML={{
                                                     __html: blogdteails.content,
                                                 }}

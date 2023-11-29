@@ -139,20 +139,29 @@ function Careers() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <p className=" mb-0 job-description text-capitalize">
-                                                    {career?.job_description}{" "}
-                                                    <Link
-                                                        to={
-                                                            "/careers/" +
-                                                            career?.id
-                                                        }
-                                                        className="text-success"
-                                                    >
-                                                        Read More
-                                                    </Link>
-                                                </p>
+                                            <div className="read-button-job-descriptions">
+                                                <span className=" mb-0 text-capitalize descriptions-paragraph-data description-text">
+                                                    {career?.job_description &&
+                                                    career.job_description
+                                                        .length > 270
+                                                        ? // Display only the first 100 characters of the job description
+                                                          `${career.job_description.substring(
+                                                              0,
+                                                              270
+                                                          )}...`
+                                                        : // If the job description is shorter than 100 characters, display the whole text
+                                                          career?.job_description}
+                                                </span>
+                                                <Link
+                                                    to={
+                                                        "/careers/" + career?.id
+                                                    }
+                                                    className="text-success "
+                                                >
+                                                    Read More
+                                                </Link>
                                             </div>
+                                            <div></div>
                                             {/* <div className="d-flex justify-content-between">
                                                 <p className="job-title mb-0 fs-5 fw-semibold text-capitalize">
                                                     {career?.job_title}
