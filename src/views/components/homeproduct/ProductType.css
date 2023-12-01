@@ -1,6 +1,9 @@
 .first-section {
     margin: 11px;
 }
+.category-name{
+    color: black;
+}
 .div-section {
     border: 1px solid black;
     border-radius: 5px;

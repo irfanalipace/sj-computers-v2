@@ -30,32 +30,34 @@ const ProductType = () => {
                 </div>
 
                 <div className="col-12 col-sm-6 col-lg-3">
-                    <div className="product-type-section">
-                        <h2 className="h4-heading">Gaming Desktop</h2>
-                        <div className="categories-container">
-                            <ProductItem1 image={categoryImg1} />
-                        </div>
-                        <Link
-                            to="/category/gaming_desktops"
-                            className="text-decoration-none"
-                        >
+                    <Link
+                        to="/category/gaming_desktops"
+                        className="text-decoration-none"
+                    >
+                        <div className="product-type-section">
+                            <h2 className="h4-heading category-name">Gaming Desktop</h2>
+                            <div className="categories-container">
+                                <ProductItem1 image={categoryImg1} />
+                            </div>
+
                             <p className="section-link">Shop Now</p>
-                        </Link>
-                    </div>
+                        </div>
+                    </Link>
                 </div>
                 <div className="col-12 col-sm-6 col-lg-3 ">
-                    <div className="product-type-section">
-                        <h2 className="h4-heading">Business Computer</h2>
-                        <div className="categories-container">
-                            <ProductItem1 image={categorybusinussweb} />
-                        </div>
-                        <Link
-                            to="/category/business_computers"
-                            className="text-decoration-none"
-                        >
+                    <Link
+                        to="/category/business_computers"
+                        className="text-decoration-none"
+                    >
+                        <div className="product-type-section">
+                            <h2 className="h4-heading category-name" >Business Computer</h2>
+                            <div className="categories-container">
+                                <ProductItem1 image={categorybusinussweb} />
+                            </div>
+
                             <p className="section-link">Shop Now</p>
-                        </Link>
-                    </div>
+                        </div>
+                    </Link>
                 </div>
                 {/* <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="product-type-section">
