@@ -279,7 +279,7 @@ export default function ThankYou() {
             </div>
             <div className="row mx-0 mb-5">
                 <div className="col-6 d-flex justify-content-start">
-                    {isAuthenticated && (
+                    {/* {isAuthenticated && (
                         <div className="col-6 d-flex justify-content-start">
                             <button
                                 className="track-order-btn"
@@ -288,7 +288,7 @@ export default function ThankYou() {
                                 Track your order
                             </button>
                         </div>
-                    )}
+                    )} */}
                 </div>
                 <div className="col-6 d-flex justify-content-end">
                     <button
