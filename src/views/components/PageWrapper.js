@@ -31,16 +31,18 @@ const PageWrapper = (props) => {
     // }, [meta]);
 
     return (
-        <Suspense fallback={<Loader />}>
-            {meta.title && (
-                <Helmet>
-                    <title>{meta.title}</title>
-                    <meta name="description" content={meta.description} />
-                </Helmet>
-            )}
-
-            {props.children}
-        </Suspense>
+        <>
+            <Helmet>
+                {meta.title && (
+                    <>
+                        <title>{meta.title}</title>
+                        <meta name="description" content={meta.description} />
+                    </>
+                )}
+                <link rel="canonical" href={location.url} />
+            </Helmet>
+            <Suspense fallback={<Loader />}>{props.children}</Suspense>
+        </>
     );
 };
 
