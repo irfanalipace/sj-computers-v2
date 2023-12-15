@@ -1,22 +1,22 @@
 import { PaymentForm, CreditCard } from "react-square-web-payments-sdk";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-    getCartItems,
-    updateLocalPropertyOfAllItems,
-} from "../../../../../core/utils/cartHelpers";
+// import {
+//     getCartItems,
+//     updateLocalPropertyOfAllItems,
+// } from "../../../../../core/utils/cartHelpers";
 import {
     CLEAR_CART,
-    UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS,
+    // UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS,
 } from "@store/cart/cartSlice";
 import { PLACING_ORDER, ORDER_PLACED } from "@store/orders/ordersSlice";
 import { sendTokenApi } from "@api/square";
-import { addListToCartApi } from "../../../../../core/api/cart";
+// import { addListToCartApi } from "../../../../../core/api/cart";
 import { clearCartLocally, getCartDetails } from "@utils/cartHelpers";
-import {
-    saveGuestUserEmail,
-    deleteGuestUserEmail,
-} from "@services/authService";
+// import {
+//     saveGuestUserEmail,
+//     deleteGuestUserEmail,
+// } from "@services/authService";
 
 import "./SquareForm.css";
 
@@ -139,15 +139,20 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
         hideModal();
         dispatch(ORDER_PLACED());
     }
-
+    console.log(
+        "import.meta.VITE_APP_SQUARE_LOCATION_ID".import.meta
+            .VITE_APP_SQUARE_LOCATION_ID
+    );
+    console.log("import.meta.VITE_APP_SQUARE_APPLICATION_ID"),
+        import.meta.VITE_APP_SQUARE_APPLICATION_ID;
     return (
         <div>
             <PaymentForm
-                applicationId={process.env.REACT_APP_SQUARE_APPLICATION_ID}
+                applicationId={import.meta.VITE_APP_SQUARE_APPLICATION_ID}
                 cardTokenizeResponseReceived={(token) => {
                     onTokenSuccess(token);
                 }}
-                locationId={import.meta.env.REACT_APP_SQUARE_LOCATION_ID}
+                locationId={import.meta.VITE_APP_SQUARE_LOCATION_ID}
                 formProps={{
                     className: "payment-form",
                 }}
