@@ -139,20 +139,14 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
         hideModal();
         dispatch(ORDER_PLACED());
     }
-    console.log(
-        "import.meta.VITE_APP_SQUARE_LOCATION_ID".import.meta
-            .VITE_APP_SQUARE_LOCATION_ID
-    );
-    console.log("import.meta.VITE_APP_SQUARE_APPLICATION_ID"),
-        import.meta.VITE_APP_SQUARE_APPLICATION_ID;
     return (
         <div>
             <PaymentForm
-                applicationId={import.meta.VITE_APP_SQUARE_APPLICATION_ID}
+                applicationId={import.meta.env.VITE_APP_SQUARE_APPLICATION_ID}
                 cardTokenizeResponseReceived={(token) => {
                     onTokenSuccess(token);
                 }}
-                locationId={import.meta.VITE_APP_SQUARE_LOCATION_ID}
+                locationId={import.meta.env.VITE_APP_SQUARE_LOCATION_ID}
                 formProps={{
                     className: "payment-form",
                 }}

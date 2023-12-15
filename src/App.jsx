@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Router from "@src/Routes";
 const TawkTo = lazy(() => import("@components/Tawk.To/Messenger"));
-import initServices from "@services/initServices";
+import services from "@services/initServices";
 import Header from "@components/Header/Header";
 const Footer = React.lazy(() => import("@components/Footer/Footer"));
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +15,7 @@ import AppWrapper from "@components/AppWrapper/AppWrapper";
 
 function App() {
     const [tawkComponent, setTawkComponent] = useState(<></>);
-    initServices.init(); //initialize services
+    services.init(); //initialize all services
 
     useEffect(() => {
         setTimeout(() => {
