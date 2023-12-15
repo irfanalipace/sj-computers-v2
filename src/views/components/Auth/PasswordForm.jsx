@@ -8,7 +8,7 @@ import Loader from "@common/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { login } from "@store/auth/authThunks";
-import { getUserEmail } from "@services/jwtService";
+import { getUserEmail } from "@services/authService";
 import { useFormValidation } from "@hooks/useFormValidation";
 
 import "@pages/Auth/auth.css";

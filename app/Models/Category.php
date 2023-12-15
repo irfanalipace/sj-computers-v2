@@ -12,7 +12,7 @@ class Category extends Model
     protected $guarded = ['id'];
 
     public function products(){
-        return $this->belongsToMany(Product::class,'category_product');
+        return $this->belongsToMany(Product::class,'category_product')->where('quantity','>',0);
     }
 
     public function blogs(){

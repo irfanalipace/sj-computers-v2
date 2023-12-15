@@ -11,6 +11,7 @@ import {
 import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./CartItem.css";
+import { Link } from "react-router-dom";
 
 export const CartItem = memo(({ cartData }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -36,6 +37,7 @@ export const CartItem = memo(({ cartData }) => {
     };
 
     const handleQuantity = (quantity) => {
+        quantity = parseInt(quantity);
         let subTotal = 0;
         let difference = quantity - cartData?.quantity;
         let price = cartData?.product?.price * difference;
@@ -55,6 +57,11 @@ export const CartItem = memo(({ cartData }) => {
             difference,
             price: itemPrice,
         };
+        if (!isAuthenticated) {
+            let productQuantity = cartData?.product?.quantity + difference;
+            let in_stock = productQuantity < 1 ? false : true;
+            cartItem.in_stock = in_stock;
+        }
         isAuthenticated
             ? dispatch(updateQuantity({ cartItem }))
             : dispatch(updateLocalQuantity({ cartItem, cartDetails }));
@@ -76,16 +83,20 @@ export const CartItem = memo(({ cartData }) => {
                     <div className="d-flex flex-column h-100 justify-content-between mx-0">
                         <div className="items-card-data">
                             <div className="col-md-10">
-                                <p>
+                                <Link
+                                    className="items-card-name"
+                                    to={"/products/" + cartData?.product?.asin}
+                                >
                                     <strong className="item-details">
                                         {cartData?.product?.name}
                                     </strong>
-                                </p>
+                                </Link>
                             </div>
                             <div className="col-md-2 price-item">
                                 <p className="my-sm-0 my-2">
                                     <strong className="">
-                                        ${cartData?.price}
+                                        $
+                                        {parseFloat(cartData?.price).toFixed(2)}
                                     </strong>
                                 </p>
                             </div>
@@ -93,9 +104,10 @@ export const CartItem = memo(({ cartData }) => {
                         <ul className="item-list mt-1 mb-2">
                             <li>
                                 <span className="item-stock">
-                                    {cartData?.product?.quantity
-                                        ? "In Stock"
-                                        : "Out of Stock"}
+                                    {cartData?.product?.quantity ==
+                                    cartData?.quantity
+                                        ? "Out of Stock"
+                                        : "In Stock"}
                                 </span>
                             </li>
                             {/* <li>Discount Available</li> */}
@@ -121,7 +133,7 @@ export const CartItem = memo(({ cartData }) => {
                         ) : (
                             <>
                                 <div
-                                    className="d-flex justify-content-between justify-content-sm-start"
+                                    className="d-flex justify-content-between justify-content-sm-start align-items-end"
                                     style={{
                                         maxWidth: "700px",
                                     }}
@@ -130,11 +142,14 @@ export const CartItem = memo(({ cartData }) => {
                                         onChange={handleQuantity}
                                         minQuantity={1}
                                         value={cartData?.quantity}
+                                        maxQuantity={
+                                            cartData?.product?.quantity
+                                        }
                                     />
 
                                     <button
                                         onClick={deleteItemFunction}
-                                        className="button-link ms-2"
+                                        className="button-link cartitem-delete-button ms-2"
                                         disabled={updatingItem}
                                     >
                                         {updatingItem ? <Loader /> : "Delete"}
@@ -152,6 +167,9 @@ export const CartItem = memo(({ cartData }) => {
                     </div>
                 </div>
             </div>
+            {cartData?.error && (
+                <p className="fs-6 mt-3 text-danger">{cartData?.error}</p>
+            )}
         </div>
     );
 });

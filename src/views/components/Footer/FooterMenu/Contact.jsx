@@ -57,14 +57,14 @@ const Contact = () => {
         <div className="contact-container">
             <div className="contact-header">
                 <div className="my-contact-menu">
-                    <nav className="navbar navbar-expand-lg nav-contact-background-color">
+                    <nav className="navbar navbar-expand-md nav-contact-background-color">
                         <div className="container">
                             <div className="navbar-collapse">
                                 <ul className="navbar-nav me-auto">
                                     <li className="nav-item ">
                                         <Link
                                             className="nav-link text-aligin-contact-menu link-no-hover on-focus-colo-contact"
-                                            to="/contact-us"
+                                            to="/contact"
                                         >
                                             <span>Contact Us</span>
                                         </Link>
@@ -228,14 +228,14 @@ const Contact = () => {
                                         </p>
                                     )}
                                 </div>
-                                <Button
+                                <button
                                     isLoading={isLoading}
                                     onClick={handleSubmit}
                                     type="submit"
-                                    className="contact-button"
+                                    className="contact-button-contact-page"
                                 >
                                     SEND
-                                </Button>
+                                </button>
                                 {message && (
                                     <Alert variant="success" className="mt-2">
                                         Message has been sent successfully

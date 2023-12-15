@@ -56,11 +56,11 @@ module.exports = {
         path: path.resolve(__dirname, "public/js"),
         publicPath: "/js/",
         filename: "[name].js",
-        chunkFilename: "[name].chunk.js", // Specify a different chunk filename
+        chunkFilename: "[name].[contenthash].js", // Specify a different chunk filename
+        clean: true,
     },
 
     plugins: [
-        new CleanWebpackPlugin(), // Clean output directory before each build
         new Dotenv(),
         // new BundleAnalyzerPlugin(),
         new CompressionPlugin({

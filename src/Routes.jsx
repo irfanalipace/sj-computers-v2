@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
 import { Navigate, useRoutes, useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+// const Home = React.lazy(() => import("@pages/Home/Home"));
 const Home = React.lazy(() => import("@pages/Home/Home"));
-// import Home from "@pages/Home/Home";
 const LoginForm = React.lazy(() => import("@pages/Auth/LoginForm"));
 const Register = React.lazy(() => import("@pages/Auth/Register"));
 const ForgetPassword = React.lazy(() =>
@@ -24,6 +24,8 @@ const Checkout = React.lazy(() => import("@pages/Checkout/Checkout"));
 const Test = React.lazy(() => import("@pages/Test/Test"));
 const ThankYou = React.lazy(() => import("@pages/Thankyou/Thankyou"));
 const RefundOrder = React.lazy(() => import("@pages/RefundOrder/RefundOrder"));
+const Careers = React.lazy(() => import("@pages/Careers/Careers"));
+const CareerView = React.lazy(() => import("@pages/Careers/CareerView"));
 const Contact = React.lazy(() =>
     import("@components/Footer/FooterMenu/Contact")
 );
@@ -35,48 +37,47 @@ const AboutPage = React.lazy(() => import("@pages/About/AboutPage"));
 const WhatWeDoPage = React.lazy(() => import("@pages/WhatWeDo/WhatWeDoPage"));
 const BlogSingle = React.lazy(() => import("@pages/Blog/BlogSingle"));
 const BlogsDetails = React.lazy(() => import("@pages/Blog/BlogsDetails"));
+import NotFound from "@pages/NotFound/NotFound";
 
-PageWrapper;
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
+const CategoryBlogs = React.lazy(() =>
+    import("@components/Blog/CategoryBlogs")
+);
+const ApplyNow = React.lazy(() => import("./views/pages/Careers/ApplyNow"));
+// import Layout from "./views/pages/PageLayout/Layout";
 
 const Router = () => {
     const routes = [
         {
             path: "/",
             element: (
-                <Suspense>
+                <Suspense fallback={<Loader />}>
                     <PageWrapper>
                         <Home />
                     </PageWrapper>
                 </Suspense>
-
-                //         <PageWrapper>
-                //      <Home />
-                //    </PageWrapper>
             ),
         },
+
         {
             path: "/login",
             element: (
                 <AuthRoute>
-                    <Suspense fallback={<Loader />}>
-                        <PageWrapper>
-                            <LoginForm />
-                        </PageWrapper>
-                    </Suspense>
+                    <PageWrapper>
+                        <LoginForm />
+                    </PageWrapper>
                 </AuthRoute>
             ),
         },
+
         {
             path: "/register",
             element: (
                 <AuthRoute>
-                    <Suspense fallback={<Loader />}>
-                        <PageWrapper>
-                            <Register />
-                        </PageWrapper>
-                    </Suspense>
+                    <PageWrapper>
+                        <Register />
+                    </PageWrapper>
                 </AuthRoute>
             ),
         },
@@ -84,11 +85,9 @@ const Router = () => {
             path: "/email-sent",
             element: (
                 <AuthRoute>
-                    <Suspense fallback={<Loader />}>
-                        <PageWrapper>
-                            <Emailsent />
-                        </PageWrapper>
-                    </Suspense>
+                    <PageWrapper>
+                        <Emailsent />
+                    </PageWrapper>
                 </AuthRoute>
             ),
         },
@@ -96,11 +95,9 @@ const Router = () => {
             path: "/forget-password",
             element: (
                 <AuthRoute>
-                    <Suspense fallback={<Loader />}>
-                        <PageWrapper>
-                            <ForgetPassword />
-                        </PageWrapper>
-                    </Suspense>
+                    <PageWrapper>
+                        <ForgetPassword />
+                    </PageWrapper>
                 </AuthRoute>
             ),
         },
@@ -108,42 +105,34 @@ const Router = () => {
             path: "/forgot_password",
             element: (
                 <AuthRoute>
-                    <Suspense fallback={<Loader />}>
-                        <PageWrapper>
-                            <ResetPassword />
-                        </PageWrapper>
-                    </Suspense>
+                    <PageWrapper>
+                        <ResetPassword />
+                    </PageWrapper>
                 </AuthRoute>
             ),
         },
         {
             path: "/products/:productId",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <PageWrapper>
-                        <Product />
-                    </PageWrapper>
-                </Suspense>
+                <PageWrapper>
+                    <Product />
+                </PageWrapper>
             ),
         },
         {
             path: "/products/search",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <PageWrapper>
-                        <ProductList />
-                    </PageWrapper>
-                </Suspense>
+                <PageWrapper>
+                    <ProductList />
+                </PageWrapper>
             ),
         },
         {
             path: "/category/:categorySlug",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <PageWrapper>
-                        <Category />
-                    </PageWrapper>
-                </Suspense>
+                <PageWrapper>
+                    <Category />
+                </PageWrapper>
             ),
         },
 
@@ -151,11 +140,9 @@ const Router = () => {
             path: "/account",
             element: (
                 <ProtectedRoute>
-                    <Suspense fallback={<Loader />}>
-                        <PageWrapper>
-                            <Account />
-                        </PageWrapper>
-                    </Suspense>
+                    <PageWrapper>
+                        <Account />
+                    </PageWrapper>
                 </ProtectedRoute>
             ),
         },
@@ -163,11 +150,9 @@ const Router = () => {
             path: "/account/profile",
             element: (
                 <ProtectedRoute>
-                    <Suspense fallback={<Loader />}>
-                        <PageWrapper>
-                            <Profile />
-                        </PageWrapper>
-                    </Suspense>
+                    <PageWrapper>
+                        <Profile />
+                    </PageWrapper>
                 </ProtectedRoute>
             ),
         },
@@ -185,11 +170,9 @@ const Router = () => {
             path: "/account/update-password",
             element: (
                 <ProtectedRoute>
-                    <Suspense fallback={<Loader />}>
-                        <PageWrapper>
-                            <Security />
-                        </PageWrapper>
-                    </Suspense>
+                    <PageWrapper>
+                        <Security />
+                    </PageWrapper>
                 </ProtectedRoute>
             ),
         },
@@ -197,134 +180,124 @@ const Router = () => {
             path: "/account/orders",
             element: (
                 <ProtectedRoute>
-                    <Suspense fallback={<Loader />}>
-                        <PageWrapper>
-                            <Order />
-                        </PageWrapper>
-                    </Suspense>
+                    <PageWrapper>
+                        <Order />
+                    </PageWrapper>
                 </ProtectedRoute>
             ),
         },
         {
             path: "/cart",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <PageWrapper>
-                        <Cart />
-                    </PageWrapper>
-                </Suspense>
+                <PageWrapper>
+                    <Cart />
+                </PageWrapper>
             ),
         },
         {
             path: "/checkout/:productId",
             element: (
                 <ProtectedRoute>
-                    <Suspense fallback={<Loader />}>
-                        <PageWrapper>
-                            <Checkout />
-                        </PageWrapper>
-                    </Suspense>
+                    <PageWrapper>
+                        <Checkout />
+                    </PageWrapper>
                 </ProtectedRoute>
             ),
         },
         {
             path: "/privacy_policy",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <PageWrapper>
-                        <Policy />
-                    </PageWrapper>
-                </Suspense>
+                <PageWrapper>
+                    <Policy />
+                </PageWrapper>
             ),
         },
 
         {
             path: "/shipping_policy",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <PageWrapper>
-                        <Policy />
-                    </PageWrapper>
-                </Suspense>
+                <PageWrapper>
+                    <Policy />
+                </PageWrapper>
             ),
         },
         {
             path: "/:blogslug",
             element: (
-                <Suspense fallback={<Loader />}>
+                <Suspense>
                     <BlogsDetails />
                 </Suspense>
             ),
         },
+
         {
             path: "/blogs",
             element: (
-                <Suspense fallback={<Loader />}>
+                <PageWrapper>
                     <BlogSingle />
-                </Suspense>
+                </PageWrapper>
+            ),
+        },
+
+        {
+            path: "blogs/category/:categoryslug",
+            element: (
+                <PageWrapper>
+                    <CategoryBlogs />
+                </PageWrapper>
             ),
         },
 
         {
             path: "/about_us",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <PageWrapper>
-                        <Policy />
-                    </PageWrapper>
-                </Suspense>
+                <PageWrapper>
+                    <Policy />
+                </PageWrapper>
             ),
         },
 
         {
             path: "/what-we-do",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <PageWrapper>
-                        <WhatWeDoPage />
-                    </PageWrapper>
-                </Suspense>
+                <PageWrapper>
+                    <Policy />
+                </PageWrapper>
             ),
         },
 
         {
             path: "/return_refund_policy",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <PageWrapper>
-                        <Policy />
-                    </PageWrapper>
-                </Suspense>
+                <PageWrapper>
+                    <Policy />
+                </PageWrapper>
             ),
         },
         {
             path: "/term_services",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <PageWrapper>
-                        <Policy />
-                    </PageWrapper>
-                </Suspense>
+                <PageWrapper>
+                    <Policy />
+                </PageWrapper>
             ),
         },
         {
             path: "/checkout",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <PageWrapper>
-                        <Checkout />
-                    </PageWrapper>
-                </Suspense>
+                // <ProtectedRoute>
+                <PageWrapper>
+                    <Checkout />
+                </PageWrapper>
+                // </ProtectedRoute>
             ),
         },
         {
-            path: "/contact-us",
+            path: "/contact",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <PageWrapper>
-                        <Contact />
-                    </PageWrapper>
-                </Suspense>
+                <PageWrapper>
+                    <Contact />
+                </PageWrapper>
             ),
         },
         {
@@ -343,20 +316,18 @@ const Router = () => {
         {
             path: "/thank-you",
             element: (
-                <ProtectedRoute>
-                    <Suspense fallback={<Loader />}>
-                        <ThankYou />
-                    </Suspense>
-                </ProtectedRoute>
+                <PageWrapper>
+                    <ThankYou />
+                </PageWrapper>
             ),
         },
 
         {
             path: "/test",
             element: (
-                <Suspense fallback={<Loader />}>
+                <PageWrapper>
                     <Test />
-                </Suspense>
+                </PageWrapper>
             ),
         },
 
@@ -364,39 +335,67 @@ const Router = () => {
             path: "/sku",
             element: (
                 <ProtectedRoute>
-                    <Suspense fallback={<Loader />}>
-                        <PageWrapper>
-                            <SkuPage />
-                        </PageWrapper>
-                    </Suspense>
+                    <PageWrapper>
+                        <SkuPage />
+                    </PageWrapper>
                 </ProtectedRoute>
+            ),
+        },
+        {
+            path: "/apply-jobs",
+            element: (
+                // <ProtectedRoute>
+                <PageWrapper>
+                    <ApplyNow />
+                </PageWrapper>
+                // </ProtectedRoute>
             ),
         },
         {
             path: "/refund-order",
             element: (
-                <Suspense fallback={<Loader />}>
-                    <PageWrapper>
-                        <RefundOrder />
-                    </PageWrapper>
-                </Suspense>
+                <PageWrapper>
+                    <RefundOrder />
+                </PageWrapper>
+            ),
+        },
+        {
+            path: "/careers",
+            element: (
+                <PageWrapper>
+                    <Careers />
+                </PageWrapper>
+            ),
+        },
+        {
+            path: "/careers/:id",
+            element: (
+                <PageWrapper>
+                    <CareerView />
+                </PageWrapper>
+            ),
+        },
+        // {
+        //     path: "/layout",
+        //     element: (
+        //         <PageWrapper>
+        //           <Layout />
+        //         </PageWrapper>
+        //     ),
+        // },
+
+        {
+            path: "/apply-now",
+            element: (
+                <PageWrapper>
+                    <ApplyNow />
+                </PageWrapper>
             ),
         },
 
         {
             path: "*",
-            element: (
-                <div>
-                    <div
-                        className="w-100 d-flex justify-content-center align-items-center flex-column"
-                        style={{ height: "500px" }}
-                    >
-                        <h1>404</h1>
-                        <h2>OOPS!</h2>
-                        <h3>Page Not Found</h3>
-                    </div>
-                </div>
-            ),
+            element: <NotFound />,
         },
     ];
 

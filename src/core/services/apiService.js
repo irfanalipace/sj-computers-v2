@@ -1,12 +1,12 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { destroyToken } from "@services/jwtService";
+import { destroyToken } from "@services/authService";
 
 /**
  * Service to call HTTP request via Axios
  */
 
-const ACCEPTED_ERROR_CODES = [400, 401, 403, 404, 422];
+const ACCEPTED_ERROR_CODES = [400, 401, 403, 404, 422, 429];
 
 const ApiService = {
     instance: null,
@@ -26,6 +26,14 @@ const ApiService = {
 
     setHeader(header, val) {
         this.instance.defaults.headers[header] = val;
+    },
+
+    /**
+     * Set the Authorization header for each request
+     */
+
+    setAuthorization(token) {
+        this.instance.defaults.headers.Authorization = "Bearer " + token;
     },
 
     /**
@@ -64,12 +72,13 @@ const ApiService = {
                 .catch((error) => {
                     if (error?.response?.status === 401) {
                         destroyToken();
-                    }
-                    if (
+                        // window.location.reload();
+                    } else if (
                         !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
                     ) {
                         toast.error("Something Went Wrong");
-                    }
+                    } else if (error?.response?.status === 429)
+                        toast.error("Too Many Requests");
                     reject(error?.response);
                 });
             if (baseURL) this.setDefaultBaseUrl();
@@ -96,12 +105,13 @@ const ApiService = {
                     console.print("error status: ", error?.response?.status);
                     if (error?.response?.status === 401) {
                         destroyToken();
-                    }
-                    if (
+                        // window.location.reload();
+                    } else if (
                         !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
                     ) {
                         toast.error("Something Went Wrong");
-                    }
+                    } else if (error?.response?.status === 429)
+                        toast.error("Too Many Requests");
                     reject(error?.response);
                 });
             if (baseURL) this.setDefaultBaseUrl();
@@ -124,10 +134,13 @@ const ApiService = {
             .catch((error, status) => {
                 if (error?.response?.status === 401) {
                     destroyToken();
-                }
-                if (ACCEPTED_ERROR_CODES.includes(error?.response?.status)) {
+                    // window.location.reload();
+                } else if (
+                    !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
+                ) {
                     toast.error("Something Went Wrong");
-                }
+                } else if (error?.response?.status === 429)
+                    toast.error("Too Many Requests");
                 reject(error?.response);
             });
     },
@@ -147,10 +160,13 @@ const ApiService = {
             .catch((error, status) => {
                 if (error?.response?.status === 401) {
                     destroyToken();
-                }
-                if (ACCEPTED_ERROR_CODES.includes(error?.response?.status)) {
+                    // window.location.reload();
+                } else if (
+                    !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
+                ) {
                     toast.error("Something Went Wrong");
-                }
+                } else if (error?.response?.status === 429)
+                    toast.error("Too Many Requests");
                 reject(error?.response);
             });
     },

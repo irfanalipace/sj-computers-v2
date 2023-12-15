@@ -11,7 +11,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 export default function ThankYou() {
     // const isMobile = window.innerWidth <= 768;
-
     function formatDate(dateString) {
         const options = { year: "numeric", month: "long", day: "numeric" };
         const date = new Date(dateString);
@@ -24,7 +23,7 @@ export default function ThankYou() {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const location = useLocation();
     const order = location.state?.order;
-    console.print(location, "haris details");
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     //   const handleButtonClick = () => {
     //     // Redirect to the specific path
     //     history.push("/specific-path");
@@ -33,7 +32,6 @@ export default function ThankYou() {
     useEffect(() => {
         const storedOrder = window.localStorage.getItem("thankyouOrderDetails");
         const order = location?.state?.order || JSON.parse(storedOrder);
-
         if (order) {
             const orderString = JSON.stringify(order);
             window.localStorage.setItem("thankyouOrderDetails", orderString);
@@ -49,7 +47,6 @@ export default function ThankYou() {
     useEffect(() => {
         //    console.print(thankOrderItems, "2nd useeffect")
         //    console.print(thankOrderDetails, "2nd useeffect for order details")
-        console.print(isMobile, "isMobile");
     }, [thankOrderItems]);
 
     const handleWindowSizeChange = () => {
@@ -67,31 +64,6 @@ export default function ThankYou() {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
-
-    const tableData = [
-        {
-            productName: "Product 1",
-            quantity: 2,
-            orderNo: "123456",
-            orderDate: "2023-05-21",
-            deliveryDetails: "Delivery Details 1",
-            paymentType: "Payment Type 1",
-            subTotal: "$100",
-            productImage: "https://m.media-amazon.com/images/I/51c4fed1l1L.jpg",
-        },
-        {
-            productName: "Product 2",
-            quantity: 1,
-            orderNo: "789012",
-            orderDate: "2023-05-22",
-            deliveryDetails: "Delivery Details 2",
-            paymentType: "Payment Type 2",
-            subTotal: "$50",
-            productImage: "",
-        },
-        // Add more data objects as needed
-    ];
-
     return (
         <div
             className="thank-you-page"
@@ -133,7 +105,7 @@ export default function ThankYou() {
                     <p>
                         Your order with tracking No{" "}
                         <span style={{ fontWeight: "900" }}>
-                            #{thankOrderDetails?.Order?.order?.id}
+                            {thankOrderDetails?.Order?.order?.id}
                         </span>{" "}
                         has been successfully confirmed. We’ll send you an email
                         notification once your order has shipped.
@@ -170,12 +142,13 @@ export default function ThankYou() {
                                               "..."
                                             : data?.product_name}
                                     </div>
+
                                     <div className="product-details-Thanks">
                                         <div className="quantity">
                                             <span>Quantity:</span>
                                         </div>
                                         <div className="col-12 my-2 quantity">
-                                            {data.qty}
+                                            {data?.qty}
                                         </div>
                                         <div className="col-12 my-2 order-no">
                                             <span>Order No:</span>
@@ -268,7 +241,7 @@ export default function ThankYou() {
                                             )}
                                         </div>
                                     </td>
-                                    <td>{data.qty}</td>
+                                    <td>{data?.qty}</td>
                                     <td>{data?.order_id}</td>
                                     <td>{formatDate(data.created_at)}</td>
                                     <td>
@@ -306,12 +279,16 @@ export default function ThankYou() {
             </div>
             <div className="row mx-0 mb-5">
                 <div className="col-6 d-flex justify-content-start">
-                    <button
-                        className="track-order-btn"
-                        onClick={() => navigate("/")}
-                    >
-                        Track your order
-                    </button>
+                    {/* {isAuthenticated && (
+                        <div className="col-6 d-flex justify-content-start">
+                            <button
+                                className="track-order-btn"
+                                onClick={() => navigate("/account/orders")}
+                            >
+                                Track your order
+                            </button>
+                        </div>
+                    )} */}
                 </div>
                 <div className="col-6 d-flex justify-content-end">
                     <button

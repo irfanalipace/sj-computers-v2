@@ -14,7 +14,6 @@ import { Slider, Typography } from "@mui/material";
 import Button from "../common/Button/Button";
 import FilterByRange from "./FilterByRange";
 const FilterBar = () => {
-
     const [filters, setFilters] = useState({});
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [filtersInArray, setFiltersInArray] = useState([]);
@@ -81,7 +80,6 @@ const FilterBar = () => {
                 key: category,
                 value: option,
             };
-
             // const isChecked = event.target.checked;
 
             // if (isChecked) {
@@ -94,7 +92,6 @@ const FilterBar = () => {
 
             if (index > -1) {
                 tempArray[index] = filter;
-
                 return tempArray;
             }
             return [...tempArray, filter];
@@ -212,22 +209,22 @@ const FilterBar = () => {
 
                     <li
                         className="filter-value"
-                        key={`${option.value}-${index}`}
+                        key={`${option.backend_value}-${index}`}
                     >
                         <label
                             className="radio-container"
-                            htmlFor={`${option.value}-${index}`}
+                            htmlFor={`${option.backend_value}-${index}`}
                         >
                             <input
-                                id={`${option.value}-${index}`}
+                                id={`${option.backend_value}-${index}`}
                                 type="radio"
                                 name={category} // Add a name attribute to group the radio buttons by category
-                                value={option.value} // Add a value attribute to specify the value of the selected radio button
+                                value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
                                 onChange={(event) =>
                                     handleFilterSelect(
                                         event,
                                         category,
-                                        option.value
+                                        option.backend_value
                                     )
                                 }
                             />
@@ -487,23 +484,19 @@ const FilterBar = () => {
 
     let renderedCategories = Object.entries(filters).map(
         ([category, options], index) => (
-            <>
+            <div key={index}>
                 {(!!filters[category].length ||
                     !Array.isArray(filters[category])) && (
                     <li className="filter-key" key={`${category}-${index}`}>
-                        <h4 className="filter-heading">{category}</h4>
+                        <h3 className="filter-heading">{category}</h3>
                         <ul className="filter-values-list">
                             {Array.isArray(filters[category])
                                 ? renderedItems(options, category)
-                                  : renderRangeSliders(category)
-                              
-                                
-                                 }
-                                 
+                                : renderRangeSliders(category)}
                         </ul>
                     </li>
                 )}
-            </>
+            </div>
         )
     );
 

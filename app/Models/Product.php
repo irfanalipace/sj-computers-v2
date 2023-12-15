@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Product extends Model
 {
@@ -11,26 +12,30 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
-    protected $appends = ['in_stock','rating'];
+    protected $appends = ['in_stock', 'rating'];
 
     public $timestamps = true;
 
     const DUMMY = "dummy";
 
-    public function brand(){
+    public function brand()
+    {
         return $this->belongsTo(Brand::class);
     }
 
-    public function categories(){
-        return $this->belongsToMany(Category::class,'category_product')->paginate(12);
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_product')->paginate(12);
     }
 
-    public function holdProducts(){
-        return $this->hasMany(HoldReleaseUser::class)->where('status','hold');
+    public function holdProducts()
+    {
+        return $this->hasMany(HoldReleaseUser::class)->where('status', 'hold');
     }
 
-    public function getInStockAttribute(){
-        if($this->quantity > 0){
+    public function getInStockAttribute()
+    {
+        if ($this->quantity > 0) {
             return true;
         }
         return false;
@@ -38,30 +43,44 @@ class Product extends Model
 
     public function getPriceAttribute($value)
     {
-        if(isset($value) && !empty($value)) {
-            return  number_format((float)$value, 2, '.', '');
+        if (isset($value) && !empty($value)) {
+            return number_format((float)$value, 2, '.', '');
         }
 
     }
 
     public function getImageAttribute($value)
     {
-        if(isset($value) && !empty($value)) {
-            return array_filter(explode(";",$value));
+        if (isset($value) && !empty($value)) {
+            return array_filter(explode(";", $value));
         }
         return [];
     }
 
     public function getDescriptionAttribute($value)
     {
-        if(isset($value) && !empty($value)) {
+        if (isset($value) && !empty($value)) {
             return json_decode($value);
         }
         return [];
 
     }
 
-    public function getRatingAttribute(){
-        return mt_rand (3*10, 5*10) / 10 ;
+    public function getRatingAttribute()
+    {
+        return mt_rand(3 * 10, 5 * 10) / 10;
+    }
+
+    /**
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('product_quantity_status', function (Builder $builder) {
+            $builder->where('quantity', '>', 0);
+            $builder->where('status', '=', 1);
+        });
     }
 }

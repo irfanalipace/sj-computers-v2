@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\InventoryController;
+use App\Http\Controllers\Api\Order\OrderController;
 use App\Http\Controllers\MarketingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
@@ -32,7 +33,13 @@ Route::get('export-inventory',[InventoryController::class,'downloadInventoryFile
 
 Route::get('gmarketingfeed',[MarketingController::class,'gmarketingfeed'])->name('gmarketingfeed');
 
-Route::get('sitemap.xml', [SiteMapController::class, 'generateSiteMap']);
+Route::get('order-show-detail/{id}',[OrderController::class,'showOrderDetail'])->name('order-show-detail');
+
+//Route::get('sitemap/index.xml', [SiteMapController::class, 'generateSiteMap']);
+//Route::get('sitemap_pages.xml', [SiteMapController::class, 'pageSiteMap']);
+//Route::get('sitemap_blogs.xml', [SiteMapController::class, 'blogsSiteMap']);
+//Route::get('sitemap_categories.xml', [SiteMapController::class, 'categoriesSiteMap']);
+//Route::get('category/{sitemap_?}.xml', [SiteMapController::class, 'categoryProductSiteMap']);
 
 Route::get('/{path?}', function () {
     return view('index');

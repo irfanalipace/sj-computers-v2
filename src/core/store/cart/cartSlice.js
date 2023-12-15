@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { objectToArray } from "@utils/cartHelpers";
 
 const initialState = {
     cart: [],
@@ -32,22 +31,15 @@ const cartSlice = createSlice({
         },
         ADD_TO_CART: (state, action) => {
             let item = { ...action.payload.cartItem };
-            let details = { ...action.payload.cartDetails };
             state.cart = [...state.cart, { ...item }];
-            if (details) {
-                state.details = { ...details };
-            }
+            state.details = { ...action.payload.cartDetails };
             state.isLoading = false;
         },
 
         ADD_LIST_TO_CART: (state, action) => {
-            let items = { ...action.payload.cartItems };
-            let details = { ...action.payload.cartDetails };
-            items = objectToArray(items);
+            let items = action.payload.cartItems;
             state.cart = [...state.cart, ...items];
-            if (details) {
-                state.details = { ...details };
-            }
+            state.details = { ...action.payload.cartDetails };
             state.isLoading = false;
         },
 
@@ -69,7 +61,6 @@ const cartSlice = createSlice({
                 total: 0,
                 sub_total: 0,
             };
-            console.print("cart: ", state.cart);
         },
         DELETE_ITEM: (state, action) => {
             let cartItem = { ...action.payload.cartItem };
@@ -87,24 +78,76 @@ const cartSlice = createSlice({
             let details = { ...action.payload.cartDetails };
             let index = state.cart.findIndex((item) => item.id === cartItem.id);
             if (index >= 0) {
-                state.cart[index] = {
-                    ...state.cart[index],
-                    quantity: cartItem.quantity,
-                    price: cartItem.price,
-                    loading: false,
-                };
+                if (cartItem?.in_stock)
+                    state.cart[index] = {
+                        ...state.cart[index],
+                        quantity: cartItem.quantity,
+                        price: cartItem.price,
+                        product: {
+                            ...state.cart[index].product,
+                            in_stock: cartItem.in_stock,
+                        },
+                        error: cartItem.error,
+                        loading: false,
+                    };
+                else
+                    state.cart[index] = {
+                        ...state.cart[index],
+                        product: {
+                            ...state.cart[index].product,
+                        },
+                        loading: false,
+                    };
                 if (details) {
                     state.details = { ...details };
                 }
             }
             state.updatingItem = false;
         },
+        SET_OUT_OF_STOCK: (state, action) => {
+            let cartItem = { ...action.payload.cartItem };
+            let index = state.cart.findIndex((item) => item.id === cartItem.id);
+            if (index >= 0) {
+                state.cart[index] = {
+                    ...state.cart[index],
+                    product: {
+                        ...state.cart[index].product,
+                        in_stock: cartItem.in_stock,
+                    },
+                    loading: false,
+                };
+            }
+            state.updatingItem = false;
+        },
+
+        UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS: (state, action) => {
+            const cartItems = state.cart.map((item) => {
+                return {
+                    ...item,
+                    notLocal: true,
+                };
+            });
+            state.cart = cartItems;
+        },
         SET_CART_DETAILS: (state, action) => {
             state.details = { ...action.payload };
+        },
+        SET_CART_ERRORS: (state, action) => {
+            state.details = action.payload.cartDetails;
+            state.cart = action.payload.cartItems;
         },
         API_ERROR: (state, action) => {
             state.apiError = { ...action.payload };
             state.isLoading = false;
+        },
+        UPDATED_QUANTITY: (state, action) => {
+            state.isLoading = false;
+            let index = state.cart.findIndex(
+                (item) => item.id === action.payload.id
+            );
+            if (index >= 0) {
+                state.cart[index] = { ...state.cart[index], loading: false };
+            }
         },
     },
 });
@@ -119,5 +162,9 @@ export const {
     DELETE_ITEM,
     UPDATE_QUANTITY,
     UPDATING,
+    UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS,
+    UPDATED_QUANTITY,
+    SET_OUT_OF_STOCK,
+    SET_CART_ERRORS,
 } = cartSlice.actions;
 export default cartSlice.reducer;

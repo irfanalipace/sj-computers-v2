@@ -6,6 +6,9 @@
 
     color: #333333;
 }
+.location-data-addres-side{
+    font-size: 14px;
+}
 /* .modal-content {
     position: relative;
     display: flex;
@@ -19,7 +22,9 @@
     border-radius: var(--bs-modal-border-radius);
     outline: 0;
 } */
-
+.font-size-dialog-box-locations button{
+font-size: 12px;
+}
 .location-header-text {
     font-weight: 500;
 
@@ -58,6 +63,7 @@
     text-decoration: none;
     background-color: var(--bs-dropdown-link-active-color) !important;
 }
+
 .button-box-locationmodel-button {
     box-sizing: border-box;
     width: 106px;
@@ -68,7 +74,7 @@
     border: 1px solid #52ac66;
     border-radius: 7px;
     margin-top: 2px;
-    font-size: 14px;
+    font-size: 12px;
     left: -12px;
     margin-left: -11px;
 }

@@ -1,32 +1,28 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./SingleBlog.css";
-import blogmeeting from "@images/blog/meetingblog-page2.png";
+import blogmeetingdesktop from "@images/blog/Refurbished-Laptops-desktop.webp";
+import blogmeetingmobile from "@images/blog/Refurbished-Laptops-mobile.webp";
 import smimage from "@images/blog/smallimage.png";
 import book from "@images/blog/blogbook.png";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-import { Link } from "react-router-dom";
-
-import imageproduct from "@images/blog/product.png";
-import imageproduct1 from "@images/blog/product1.png";
-import imageproduct2 from "@images/blog/product2.png";
-import imagepencel from "@images/blog/imagepen.png";
-import laptopimg from "@images/blog/latopimage.png";
-import bloglaptop1 from "@images/blog/bookwithlaptop.png";
-import bloglaptop2 from "@images/blog/laptopwithbook2.png";
-import productviewblog from "@images/blog/typelaptop.png";
+import { Link, useNavigate } from "react-router-dom";
 import {
     getBlogsPagesApi,
     blogSlugApiblogDetails,
 } from "../../../../core/api/blogs";
-import meetingset from "@images/blog/meeting2image.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router-dom";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+
+import "./SingleBlog.css";
+import Blog from "../Blog";
+import BlogsDetails from "../../../pages/Blog/BlogsDetails";
+import BlogPage from "../../../pages/Blog/BlogPage";
+import BlogGrid from "../BlogGrid";
+
 const SingleBlog = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [expandedBlogs, setExpandedBlogs] = useState([]);
@@ -34,10 +30,7 @@ const SingleBlog = () => {
     const [blogs, setBlogs] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(12);
-    const [prevPageUrl, setPrevPageUrl] = useState(null);
-    const [nextPageUrl, setNextPageUrl] = useState(null);
     const [pageCount, setPageCount] = useState(0);
-    const { blogslug } = useParams();
 
     const handleChange = (event) => {
         const filterValue = event.target.value;
@@ -59,16 +52,11 @@ const SingleBlog = () => {
         setIsLoading(true);
         getBlogsPagesApi(currentPage, itemsPerPage)
             .then((response) => {
-
-                if (response.data && response.data?.data.length > 0) {
+                if (response.data?.data?.length > 0) {
                     setBlogs(response.data?.data);
-                    setPrevPageUrl(response.data?.prev_page_url);
-                    setNextPageUrl(response.data?.next_page_url);
                     setPageCount(response.data?.last_page);
                 } else {
                     setBlogs([]);
-                    setPrevPageUrl(response.data?.prev_page_url);
-                    setNextPageUrl(response.data?.next_page_url);
                 }
             })
             .catch((error) => {
@@ -80,33 +68,13 @@ const SingleBlog = () => {
             });
     }, [currentPage, itemsPerPage]);
 
-    const handlePaginationClick = (pageNumber) => {
-        setCurrentPage(pageNumber - 1);
-    };
-
-    const handlePrevPage = () => {
-        setCurrentPage(currentPage - 1);
-    };
-
-    const handleNextPage = () => {
-        setCurrentPage(currentPage + 1);
-    };
-
-    //     if (isLoading) {
-    //     return <LoaderComponent />; // Render the loader component if isLoading is true
-    //   }
-
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
-
-    const totalPages = Math.ceil(blogs.length / itemsPerPage);
 
     const handlePageChange = (event, page) => {
         setCurrentPage(page);
     };
 
-    // const [blogdteails, setBlogDetails] = useState("");
     // useEffect(() => {
     //     blogSlugApiblogDetails(blogslug)
     //         .then((response) => {
@@ -118,22 +86,32 @@ const SingleBlog = () => {
     //         });
     // }, [blogslug]);
 
-    const [singleblog, setSingle] = useState("");
+    // const [singleblog, setSingle] = useState("");
 
-    useEffect(() => {
-        getBlogsPagesApi(currentPage, itemsPerPage)
-            .then((response) => {
-                if (response.data && response.data?.data.length > 0) {
-                    const singleBlog = response.data?.data[0]; // Extract the first blog from the array
-                    setSingle(singleBlog);
-                } else {
-                    setSingle(""); // No blog available
-                }
-            })
-            .catch((error) => {
-                console.error("API Error:", error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     getBlogsPagesApi(currentPage, itemsPerPage)
+    //         .then((response) => {
+    //             if (response.data && response.data?.data.length > 0) {
+    //                 const singleBlog = response.data?.data[0]; // Extract the first blog from the array
+    //                 setSingle(singleBlog);
+    //             } else {
+    //                 setSingle(""); // No blog available
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error("API Error:", error);
+    //         });
+    // }, []);
+
+    const navigate = useNavigate();
+
+    const blogslist = (blog) => {
+        navigate(`/${blog.slug}`, {
+            state: {
+                blogList: blog,
+            },
+        });
+    };
 
     return (
         <div>
@@ -152,15 +130,13 @@ const SingleBlog = () => {
                     <div className="col-md-12">
                         <div>
                             <div className="meeting-data-blog-save-dev-form">
-                                {/* <img src={blogmeeting} /> */}
-                                <img
-                                    src={
-                                        singleblog.primary_image
-                                            ? singleblog.primary_image
-                                            : blogmeeting
-                                    }
-                                    alt={blogs.all_text}
-                                />
+                                {/* <img src={blogmeeting} />
+                                <img src={blogmeetingmobile}  className="mobile-image-blogs-data"/> */}
+                                {window.innerWidth > 600 ? ( // Check if screen width is greater than 767px (desktop)
+                                    <img src={blogmeetingdesktop} />
+                                ) : (
+                                    <img src={blogmeetingmobile} />
+                                )}
                             </div>
                             <div className="mid-graph-pargarph-page-data">
                                 {/* <span>{singleblog.title}</span> */}
@@ -168,21 +144,11 @@ const SingleBlog = () => {
                             <div className="mid-graph-pargarph-page-datap-data blog-dynamic-style-heading-data1">
                                 <div
                                     className="content-image-data-paragrap"
-                                    // dangerouslySetInnerHTML={{
-                                    // __html: singleblog.content
-                                    // }}
+                                // dangerouslySetInnerHTML={{
+                                // __html: singleblog.content
+                                // }}
                                 />
-                                <span>
-                                    Did you know? SJ Computer is the first, and
-                                    only, marketer to protuct customers in third
-                                    party product liability cases Did you know?
-                                    SJ Computer is the first, and only, marketer
-                                    to protuct customers in third party product
-                                    liability cases Did you know? SJ Computer is
-                                    the first, and only, marketer to protuct
-                                    customers in third party product liability
-                                    cases{" "}
-                                </span>
+                                <span></span>
                             </div>
 
                             {/* <div>
@@ -204,21 +170,25 @@ const SingleBlog = () => {
                 </div>
             </div>
 
-            <div className="container">
-                <div className="trending-blog-filter-data">
-                    <div className="treding-blog-sets">
-                        {/* <span> Trending Blogs</span> */}
-                    </div>
-                    <div className="dev-trending-data-image">
-                        <select value={selectedFilter}>
-                            <option value="">Recent Blogs</option>
-                            <option value="trending">Trending Blog</option>
-                            <option value="az">Sorting A-Z</option>
-                            <option value="date">Sorting by Date</option>
-                        </select>
+
+            {blogs.length > 0 && (
+                <div className="container">
+                    <div className="trending-blog-filter-data">
+                        <div className="treding-blog-sets">
+                            {/* <span> Trending Blogs</span> */}
+                        </div>
+                        <div className="dev-trending-data-image">
+                            <select value={selectedFilter}>
+                                <option value="">Recent Blogs</option>
+                                <option value="trending">Trending Blog</option>
+                                <option value="az">Sorting A-Z</option>
+                                <option value="date">Sorting by Date</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
+
 
             {isLoading ? (
                 <div
@@ -228,100 +198,140 @@ const SingleBlog = () => {
                     <LoaderComponent />
                 </div>
             ) : (
-                <div className="container single-blog-pages-dev-container-all-products">
-                    <div className="row">
-                        {blogs.map((blog) => (
-                            <div className="col-md-4" key={blog.id}>
-                                <Link
-                                    to={`/${blog.slug}`}
-                                    className="text-decoration-none"
-                                >
-                                    <div className="product-card">
-                                        {/* <img src={book} alt={blog.title} /> */}
+                //         <div className="container single-blog-pages-dev-container-all-products">
+                //             <div className="row">
+                //                 {blogs.map((blog) => (
+                //                     <div
+                //                         className="col-lg-4 col-md-6 col-sm-12"
+                //                         key={blog?.id}
+                //                     >
+                //                         <div></div>
+                //                         <Link
+                //                             to={`/${blog?.slug}`}
+                //                             className="text-decoration-none"
+                //                             state={{
+                //                                 blogList: blog,
+                //                             }}
+                //                             onClick={() => blogslist(blog)}
+                //                         >
+                //                             <div className="product-card product-blogs-card">
+                //                                 {/* <img src={book} alt={blog.title} /> */}
 
-                                        <img
-                                            src={
-                                                blog.thumbnail_image
-                                                    ? blog.thumbnail_image
-                                                    : "https://via.placeholder.com/400x400"
-                                            }
-                                            alt={blog.all_text}
-                                        />
+                //                                 <img
+                //                                     src={
+                //                                         blog?.thumbnail_image
 
-                                        <div className="dev-data-span-card-dev">
-                                            <span> {blog.tags}</span>
-                                        </div>
+                //                                     }
+                //                                     alt={blog?.alt_thumbnail_image}
+                //                                 />
 
-                                        <div className="read-section-date-section">
-                                            <div>
-                                                <span>Read me</span>
-                                            </div>
-                                            <div>
-                                                <span>{blog.publish_date}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Link>
-                            </div>
-                        ))}
-                    </div>
+                //                                 <div className="dev-data-span-card-dev">
+                //                                     <span> {blog?.title}</span>
+                //                                 </div>
+                //                                 <div className="read-more-button-blogs">
+                //                                     <span>{blog?.publish_date}</span>
+                //                                 </div>
+                //                                 <div className="read-more-span-text">
+                //                                     <span>{blog?.meta_description}</span>
+                //                                 </div>
+                //                                 <div className="read-section-date-section">
+                //                                     <div style={{ paddingTop: "4px" }}>
+                //                                         <span
+                //                                             style={{
+                //                                                 fontWeight: "bold",
+                //                                             }}
+                //                                         >
+                //                                             Read Full Blog
+                //                                         </span>
+                //                                     </div>
+                //                                     {blog?.tags && blog?.tags?.length > 0 && (
+                //                                     <div style={{ display: "flex" }}>
+                //                                         {blog?.tags
+                //                                             ?.split(",")
+                //                                             ?.slice(0, 3)
+                //                                             ?.map((tag) => (
+                //                                                 <div
+                //                                                     className="span-data-blogs-lending-page"
+                //                                                     key={tag}
+                //                                                 >
+                //                                                     <span>{tag}</span>
+                //                                                 </div>
+                //                                             ))}
+                //                                     </div>
+                //                                       )}
+                //                                 </div>
 
-                    {/* <div className="pagination-blogs-page">
-            {prevPageUrl && (
-                <button onClick={handlePrevPage}>
-                    &laquo; Previous
-                </button>
-            )}
+                //                             </div>
 
-            {Array.from({ length: totalPages }, (_, index) => (
-                <button
-                    key={index}
-                    onClick={() => handlePaginationClick(index + 1)}
-                    className={
-                        currentPage === index + 1 ? "active" : ""
-                    }
-                >
-                    {index + 1}
-                </button>
-            ))}
+                //                         </Link>
+                //                     </div>
+                //                 ))}
+                //             </div>
 
-            {nextPageUrl && (
-                <button onClick={handleNextPage}>Next &raquo;</button>
-            )}
-        </div> */}
+                //             {/* <div className="pagination-blogs-page">
+                //     {prevPageUrl && (
+                //         <button onClick={handlePrevPage}>
+                //             &laquo; Previous
+                //         </button>
+                //     )}
 
-                    <div className="pagination-blogs-page">
-                        {/* <button onClick={handlePrevPage} disabled={!prevPageUrl}>
-                &laquo; Pre
-            </button>
+                //     {Array.from({ length: totalPages }, (_, index) => (
+                //         <button
+                //             key={index}
+                //             onClick={() => handlePaginationClick(index + 1)}
+                //             className={
+                //                 currentPage === index + 1 ? "active" : ""
+                //             }
+                //         >
+                //             {index + 1}
+                //         </button>
+                //     ))}
 
-            {Array.from({ length: totalPages }, (_, index) => (
-                <button
-                    key={index}
-                    onClick={() => handlePaginationClick(index + 1)}
-                    className={
-                        currentPage === index + 1 ? "active" : ""
-                    }
-                >
-                    {currentPage}
-                </button>
-            ))}
+                //     {nextPageUrl && (
+                //         <button onClick={handleNextPage}>Next &raquo;</button>
+                //     )}
+                // </div> */}
 
-            <button onClick={handleNextPage} disabled={!nextPageUrl}>
-                Nxt &raquo;
-            </button> */}
-                        <div>
-                            <Stack spacing={2}>
-                                <Pagination
-                                    count={pageCount}
-                                    page={currentPage}
-                                    onChange={handlePageChange}
-                                />
-                            </Stack>
-                        </div>
-                        {isLoading && <div className="loader">Loading...</div>}
-                    </div>
-                </div>
+                //             <div className="pagination-blogs-page">
+                //                 {/* <button onClick={handlePrevPage} disabled={!prevPageUrl}>
+                //         &laquo; Pre
+                //     </button>
+
+                //     {Array.from({ length: totalPages }, (_, index) => (
+                //         <button
+                //             key={index}
+                //             onClick={() => handlePaginationClick(index + 1)}
+                //             className={
+                //                 currentPage === index + 1 ? "active" : ""
+                //             }
+                //         >
+                //             {currentPage}
+                //         </button>
+                //     ))}
+
+                //     <button onClick={handleNextPage} disabled={!nextPageUrl}>
+                //         Nxt &raquo;
+                //     </button> */}
+                //                 <div>
+                //                     <Stack spacing={2}>
+                //                         <Pagination
+                //                             count={pageCount}
+                //                             page={currentPage}
+                //                             onChange={handlePageChange}
+                //                         />
+                //                     </Stack>
+                //                 </div>
+                //                 {isLoading && <div className="loader">Loading...</div>}
+                //             </div>
+                //         </div>
+                <BlogGrid
+                    blogs={blogs}
+                    pageCount={pageCount}
+                    currentPage={currentPage}
+                    handlePageChange={handlePageChange}
+                    isLoading={isLoading}
+                    blogslist={blogslist}
+                />
             )}
         </div>
     );

@@ -4,14 +4,13 @@ import ReviewButton from "./ReviewButton";
 // import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 
 import "./ReviewCheckout.css";
-import Discount from "../Discount/Discount";
 
 export default function ReviewCheckout({
     toggleAccordion,
     estimatedDelivery,
     handleHeight,
+    cartItems,
 }) {
-    const cartItems = useSelector((state) => state.cart.cart);
     // const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
@@ -32,7 +31,7 @@ export default function ReviewCheckout({
             <h4>
                 Estimated delivery: {estimatedDelivery ? estimatedDelivery : ""}
             </h4>
-            <p>Item Shippied from sjcomputer.us</p>
+            <p>Items Shipped from sjcomputer.us</p>
 
             <div className="row mx-0 mb-3">
                 <div className="col-12 ps-0">

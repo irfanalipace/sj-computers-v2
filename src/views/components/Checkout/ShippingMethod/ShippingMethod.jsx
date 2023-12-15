@@ -1,51 +1,67 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { setCartDetails } from "@store/cart/cartThunks";
-import { applyShipment } from "@api/checkout";
+import { applyShipment, applyShipmentForGuest } from "@api/checkout";
+import { shippingMethods } from "@utils/constants";
 import OverlayLoader from "@common/LoaderComponent/OverlayLoader";
 
 import "./ShippingMethod.css";
+import {
+    getCartDetails,
+    getTotalQuantity,
+    updateCartDetails,
+} from "../../../../core/utils/cartHelpers";
 
 const ShippingMehtod = () => {
     const [activeMethod, setActiveMethod] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const currentState = useSelector((state) => state.states.currentState);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
     const dispatch = useDispatch();
-    const shippingMethods = [
-        {
-            id: 0,
-            label: "Free Shipping (3 - 5 days)",
-            cost: 0,
-        },
-        {
-            id: 2,
-            label: "2 day shipping",
-            cost: 15,
-        },
-        {
-            id: 1,
-            label: "Next day delivery",
-            cost: 30,
-        },
-    ];
 
     const handleChange = async (e) => {
+        const cartDetails = getCartDetails();
         if (isLoading) return false;
         else {
             setIsLoading(true);
-            try {
-                let response = await applyShipment({
-                    shipment_days: e.target.value,
-                });
-                setActiveMethod(e.target.value);
-                dispatch(
-                    setCartDetails({
-                        ...response.data.details,
-                    })
-                );
-            } catch (error) {
-                console.print("error: ", error);
+            if (isAuthenticated) {
+                try {
+                    let response = await applyShipment({
+                        shipment_days: e.target.value,
+                        state_id: currentState?.id,
+                    });
+                    setActiveMethod(e.target.value);
+                    dispatch(
+                        setCartDetails({
+                            ...response.data,
+                        })
+                    );
+                } catch (error) {
+                    console.print("error: ", error);
+                }
+            } else {
+                const total_quantity = getTotalQuantity();
+                try {
+                    let response = await applyShipmentForGuest({
+                        shipment_days: e.target.value,
+                        total_amount: cartDetails.sub_total,
+                        total_quantity,
+                    });
+                    setActiveMethod(e.target.value);
+                    const updatedCartDetails = {
+                        ...cartDetails,
+                        ...response.data,
+                        total: response?.data?.estimate_amount,
+                    };
+                    updateCartDetails(updatedCartDetails);
+                    dispatch(setCartDetails(updatedCartDetails));
+                } catch (error) {
+                    console.print("error: ", error);
+                }
             }
+
             setIsLoading(false);
         }
     };

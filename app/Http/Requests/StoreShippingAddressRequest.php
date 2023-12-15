@@ -25,11 +25,12 @@ class StoreShippingAddressRequest extends FormRequest
     {
         return [
             'country'=> ['required', 'string'],
-            'full_name'=> ['required', 'string'],
+            'full_name'=> ['required', 'string','max:50'],
             'phone_number'=> ['required', 'string'],
             'address'=> ['required', 'string'],
             'city'=> ['required', 'string'],
             'state'=> ['required', 'string'],
+            'apartment' => ['required', 'string'],
             'zip_code'=> ['required', 'string'],
             'permanent_address' => ['required','boolean']
         ];

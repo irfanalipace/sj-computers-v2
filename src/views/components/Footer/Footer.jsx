@@ -6,7 +6,8 @@ import vectorimg from "@images/common/boll.png";
 import copyrightimg from "@images/common/copywrite.png";
 import img1 from "@images/footer/setting.png";
 import BackToTopButton from "./BackToTopButton";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import "./Footer.css";
 
 const Footer = () => {
@@ -28,18 +29,18 @@ const Footer = () => {
                         className="footer-copyright text-center py-3 back-to-top-hover-effct"
                         style={{ backgroundColor: "#002549" }}
                     >
-                        <h4 className="backtotop-button-footer-click-onit">
+                        <p className="backtotop-button-footer-click-onit">
                             <BackToTopButton />
-                        </h4>
+                        </p>
                     </div>
                     <footer className="page-footer font-small blue pt-4 footer-section">
                         <div className="container text-center text-md-center footer-data">
                             <div className="row">
                                 <div className="col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
                                     <ul className="list-unstyle1">
-                                        <h6 className="text-uppercase herf-link font-style-heading-footer">
+                                        <p className="text-uppercase herf-link font-style-heading-footer">
                                             Get to Know Us
-                                        </h6>
+                                        </p>
                                         <li>
                                             <Link
                                                 to="about_us"
@@ -58,7 +59,7 @@ const Footer = () => {
                                         </li> */}
                                         <li>
                                             <Link
-                                                to="/contact-us"
+                                                to="/contact"
                                                 href="#!"
                                                 className="herf-link text-decoration-none"
                                             >
@@ -73,23 +74,23 @@ const Footer = () => {
                                                 Blogs
                                             </Link>
                                         </li>
-                                        {/*  <li>
-                                            <a
-                                                href="#!"
+                                        <li>
+                                            <Link
+                                                to="/careers"
                                                 className="herf-link text-decoration-none"
                                             >
-                                                Shop
-                                            </a>
-                                        </li> */}
+                                                Careers
+                                            </Link>
+                                        </li>
                                     </ul>
                                 </div>
 
                                 <div className="col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
                                     {/* <h5 className="text-uppercase">Links</h5> */}
                                     <ul className="list-unstyle2">
-                                        <h6 className="text-uppercase herf-link font-style-heading-footer">
+                                        <p className="text-uppercase herf-link font-style-heading-footer">
                                             Connect With Us
-                                        </h6>
+                                        </p>
                                         <li>
                                             <a
                                                 href="https://www.facebook.com/sjcomputersllc"
@@ -128,9 +129,9 @@ const Footer = () => {
                                 <div className="col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
                                     {/* <h5 className="text-uppercase">Links</h5> */}
                                     <ul className="list-unstyle3">
-                                        <h6 className="text-uppercase herf-link font-style-heading-footer">
+                                        <p className="text-uppercase herf-link font-style-heading-footer">
                                             Let Us Help You
-                                        </h6>
+                                        </p>
                                         <li>
                                             <Link
                                                 to="/account"
@@ -184,9 +185,9 @@ const Footer = () => {
                                 <div className="col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
                                     {/* <h5 className="text-uppercase">Links</h5> */}
                                     <ul className="list-unstyle4">
-                                        <h6 className="text-uppercase herf-link font-style-heading-footer">
+                                        <p className="text-uppercase herf-link font-style-heading-footer">
                                             Reach Us
-                                        </h6>
+                                        </p>
                                         <div className="reach-us ">
                                             <p
                                                 className="text-uppercase herf-link  reach-us-paragraph-data-footer"
@@ -233,10 +234,9 @@ const Footer = () => {
                                     aria-haspopup="true"
                                     aria-expanded="false"
                                 >
-                                    <img
-                                        src={vectorimg}
-                                        alt=""
-                                        className="english-dropdown"
+                                    <FontAwesomeIcon
+                                        className="me-1"
+                                        icon={faGlobe}
                                     />
                                     English
                                     <img
@@ -258,11 +258,15 @@ const Footer = () => {
                             </div>
                         </div>
                         <div className="footer-copyright text-center py-3">
-                            <img
+                            {/* <img
                                 src={copyrightimg}
                                 alt=""
                                 className="copywriten footer-end-image-data"
-                            />
+                            /> */}
+                            <span className="copywriten footer-end-image-data">
+                                S.J Computers @ 2023 Tech Store. All Rights{" "}
+                                <br></br>Reserved
+                            </span>
                         </div>
                     </footer>
                 </div>

@@ -27,6 +27,7 @@ export function setShippingAddressApi({
     state,
     zip_code,
     permanent_address,
+    apartment,
 }) {
     return new Promise((resolve, reject) => {
         ApiService.post(`/order-shipping-address`, {
@@ -37,6 +38,7 @@ export function setShippingAddressApi({
             city,
             state,
             zip_code,
+            apartment,
             permanent_address,
         })
             .then((response) => {
@@ -72,14 +74,28 @@ export function placeOrderApi({ paymentMethod }) {
     });
 }
 
-export function applyShipment({ shipment_days }) {
+export function applyShipment(data) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/apply-shipment`, {
-            shipment_days,
-        })
+        ApiService.post(`/apply-shipment`, data)
             .then((response) => {
                 console.print(
                     "file: checkout.js | applyShipment| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.print("Console Log: : error checkout", e);
+                reject(e);
+            });
+    });
+}
+export function applyShipmentForGuest(data) {
+    return new Promise((resolve, reject) => {
+        ApiService.post(`/apply-shippment-guest`, data)
+            .then((response) => {
+                console.print(
+                    "file: checkout.js | applyShipmentForGuest| response",
                     response
                 );
                 resolve(response);

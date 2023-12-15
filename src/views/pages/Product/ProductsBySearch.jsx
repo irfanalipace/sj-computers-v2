@@ -8,22 +8,46 @@ import {
     searchProducts,
 } from "@store/products/productsThunks";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
+import { SET_SEARCH_STRING } from "@store/products/productsSlice";
+
 import "./ProductsBySearch.css";
 
 const ProductsList = () => {
-    const { searchString, products, isLoading, currentPage, apiError } =
-        useSelector((state) => state.products);
+    const {
+        searchString,
+        selectedCategory,
+        products,
+        isLoading,
+        currentPage,
+        apiError,
+    } = useSelector((state) => state.products);
     const dispatch = useDispatch();
 
-    const handleClick = () => {
+    const dispatchSearch = () => {
+        dispatch(
+            searchProducts({
+                name: searchString,
+                category_id: selectedCategory,
+                page: currentPage,
+                per_page: 12,
+            })
+        );
+    };
+    const handleSearch = () => {
         if (searchString) {
-            dispatch(searchProducts(searchString, currentPage));
+            dispatchSearch();
         } else dispatch(fetchProducts(currentPage, true));
     };
 
     useEffect(() => {
-        if (searchString) dispatch(searchProducts(searchString));
-    }, [searchString]);
+        if (searchString) {
+            dispatchSearch();
+        }
+    }, [searchString, selectedCategory]);
+
+    useEffect(() => {
+        return () => dispatch(SET_SEARCH_STRING(""));
+    }, []);
 
     return (
         <>
@@ -35,7 +59,7 @@ const ProductsList = () => {
                         </div>
                         <ProductsGrid
                             products={products || []}
-                            handleClick={handleClick}
+                            handleSearch={handleSearch}
                             isLoading={isLoading}
                             apiError={apiError}
                             smallBtn={true}

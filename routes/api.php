@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CareerApplicationController;
+use App\Http\Controllers\CareerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
@@ -51,7 +53,8 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::post('forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password');
 
-Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
+Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
+
 
 Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify'); // Make sure to keep this as your route name
 
@@ -71,7 +74,6 @@ Route::get('products', [ProductController::class, 'getList'])->name('products');
 Route::get('inventory-data', [ProductController::class, 'getInventoryData'])->name('inventoryData');
 
 Route::get('products-filter-list', [ProductController::class, 'getProductFilterList'])->name('getProductFilterList');
-
 
 
 Route::get('product-detail', [ProductController::class, 'getProductDetail'])->name('productDetail');
@@ -103,6 +105,8 @@ Route::get('clear-cart', [CartController::class, 'clearCart'])->name('clearCart'
 
 Route::post('add-quantity-cart', [CartController::class, 'addQtyCart'])->name('addQtyCart');
 
+Route::post('check-product-qty', [CartController::class, 'checkProduct']);
+
 /*
 *Contact-us
 */
@@ -113,12 +117,13 @@ Route::post('contact-us', [ContactUsController::class, 'contactSubmit'])->name('
  */
 Route::get('blogs', [BlogController::class, 'getList'])->name('blogs');
 Route::get('get-blogs', [BlogController::class, 'getBlog'])->name('get-blogs');
+Route::get('category-blogs', [BlogController::class, 'getCategoryProduct'])->name('category-blogs');
 
 /*
  * meta title and description
  */
 
-Route::get('meta_detail',[MetaDetailController::class,'getDetail'])->name('meta_detail');
+Route::get('meta_detail', [MetaDetailController::class, 'getDetail'])->name('meta_detail');
 
 /*
 *Place Order
@@ -131,6 +136,11 @@ Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])
 
 Route::get('system-pages/{key?}', [SystemPagesController::class, 'getPages'])->name('getPages');
 
+/*
+*Square Integration
+*/
+
+Route::POST('square-charge', [SquareController::class, 'chargeCustomer'])->name('squreCharge');
 
 /*
 * Refund order
@@ -138,6 +148,12 @@ Route::get('system-pages/{key?}', [SystemPagesController::class, 'getPages'])->n
 Route::post('customer-email-verify', [AuthController::class, 'verifyCustomerEmail'])->name('customer-email-verify');
 
 Route::post('customer-verify-otp', [AuthController::class, 'verifyOtpCustomerEmail'])->name('customer-verify-otp');
+
+/*
+ Apply shippment for guest
+*/
+Route::post('apply-shippment-guest', [CartController::class, 'applyShipmentGuest']);
+
 
 Route::group(['middleware' => 'refund'], function () {
 
@@ -181,7 +197,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::post('order-shipping-address', [OrderController::class, 'shippingAddress'])->name('OrderShippingAddress');
 
 
-
     /*
      * update state api
      */
@@ -202,11 +217,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('order-list', [OrderController::class, 'getOrders'])->name('getOrderList');
     Route::get('search-order', [OrderController::class, 'searchOrder'])->name('searchOrder');
 
-
     /*
-    *Square Integration
+    * Apply Shipment
     */
-    Route::post('square-charge', [SquareController::class, 'chargeCustomer'])->name('squreCharge');
+    Route::post('apply-shipment', [CartController::class, 'applyShipment'])->name('applyShipment');
 
     /*
      * place order
@@ -214,13 +228,17 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
 
     /*
-     * Apply Shipment
-     */
-    Route::post('apply-shipment', [CartController::class, 'applyShipment'])->name('applyShipment');
-
-
-    /*
     * Download inventory Excel
     */
     Route::get('download-inventory', [InventoryController::class, 'downloadInventory'])->name('downloadInventory');
 });
+
+/*
+ * Careers
+ */
+Route::get('careers', [CareerController::class, 'index'])->name('careers');
+Route::get('career/{career}', [CareerController::class, 'show'])->name('career');
+/*
+* Career Applications
+*/
+Route::post('store-career-applications', [CareerApplicationController::class, 'store'])->name('store-career-applications');

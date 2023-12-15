@@ -68,7 +68,7 @@
     color: #333333;
 }
 
-.contact-button {
+.contact-button-contact-page{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -181,7 +181,8 @@
         text-align: left;
     }
     .nav-contact-background-color {
-        padding-left: 65px;
+        /* padding-left: 65px; */
+        display: none;
     }
     .vertical-line-contactus {
         display: none;

@@ -5,7 +5,8 @@ import img23 from "@images/product/image23.png";
 import img20 from "@images/product/image20.png";
 import btoimg from "@images/categories/btoweb.webp";
 import laptopimg from "@images/categories/laptopweb.webp";
-import monitorimg from "@images/categories/monitorweb.webp";
+// import monitorimg from "@images/categories/monitorweb.webp";
+import monitorimg from "@images/categories/desktopweb.webp";
 import desktopimgweb from "@images/categories/desktopweb-page.webp";
 import { Link } from "react-router-dom";
 import "./ProductItem4.css";
@@ -46,13 +47,13 @@ const ProductItem4 = () => {
                 </Link>
             </Col>
             <Col xs={12} sm={6} className="px-0">
-                <Link to="/category/monitor" className="category-item">
+                <Link to="/category/gaming_desktops" className="category-item">
                     <img
                         src={images[3]}
                         alt="Image 2"
                         className="dynamic-image"
                     />
-                    <div className="category-name">Monitor</div>
+                    <div className="category-name">Gaming Desktops</div>
                 </Link>
             </Col>
         </Row>

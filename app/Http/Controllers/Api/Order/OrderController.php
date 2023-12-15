@@ -57,7 +57,7 @@ class OrderController extends BaseController
 
             $order = UserAddress::updateOrCreate(
                 ['user_id' => auth()->user()->id],
-                ['country' => $request['country'], 'full_name' => $request['full_name'], 'phone_number' => $request['phone_number'], 'address' => $request['address'], 'city' => $request['city'], 'state' => $request['state'], 'zip_code' => $request['zip_code'], 'status' => 'Active', 'user_id' => auth()->user()->id]
+                ['country' => $request['country'], 'full_name' => $request['full_name'], 'phone_number' => $request['phone_number'], 'address' => $request['address'], 'city' => $request['city'], 'state' => $request['state'], 'apartment' => $request['apartment'], 'zip_code' => $request['zip_code'], 'status' => 'Active', 'user_id' => auth()->user()->id]
             );
 
             // else {
@@ -98,7 +98,16 @@ class OrderController extends BaseController
 
     public function searchOrder(Request $request)
     {
-        $data = Order::where('invoice_id', $request->invoice_id)->get();
+        $data = Order::where('invoice_id', $request->invoice_id)->OrWhere('id', $request->order_id)->get();
         return $this->sendResponse($data);
+    }
+
+    public function showOrderDetail($id)
+    {
+        $order = Order::query()->find($id);
+        $invoiceOrder = $order->load(['user.shippingAddress','guest']);
+
+        return view('vendor.voyager.orders.show_details', compact('invoiceOrder'));
+
     }
 }

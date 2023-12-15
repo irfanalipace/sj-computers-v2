@@ -9,7 +9,8 @@ import { SET_SEARCH_STRING } from "@store/products/productsSlice";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
-import Sidebar from "@components/Sidebar/Sidebar";
+import Sidebar from "@components/Sidebar/Sidebar.js";
+import { useSearchParams } from "react-router-dom";
 const MobileScreenModal = lazy(() =>
     import("./MobileScreenModal/MobileScreenModal")
 );
@@ -24,6 +25,7 @@ const MobileSearch = () => {
     const searchString = useSelector((state) => state.products.searchString);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -42,6 +44,7 @@ const MobileSearch = () => {
 
     useEffect(() => {
         setSearch(searchString || "");
+        if (searchString) setSearchParams({ s: searchString });
     }, [searchString]);
 
     const handleButtonClick = () => {
@@ -165,7 +168,6 @@ const MobileSearch = () => {
                                 ></i> */}
                                 <FontAwesomeIcon
                                     icon={faSearch}
-                                    size="x2"
                                     className="fa-search text-grey set"
                                 />
                             </span>

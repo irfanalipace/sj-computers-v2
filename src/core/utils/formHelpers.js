@@ -55,3 +55,21 @@ export const validatePhoneNumber = (number) => {
 export const validateZipCode = (code) => {
     return /^\d{0,5}$/.test(code);
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

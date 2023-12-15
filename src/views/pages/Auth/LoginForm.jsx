@@ -43,7 +43,7 @@ const LoginForm = () => {
                         <Header />
                     </div>
 
-                    <ActiveForm />
+                    {ActiveForm[currentPage].component}
 
                     <div className="container new-data">
                         <div className="row">

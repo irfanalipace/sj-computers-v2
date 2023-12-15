@@ -24,7 +24,7 @@ import Search from "./Search";
 import BottomNavigation from "./BottomNavigation/BottomNavigation";
 // import MobileSearch from "./MobileSearch/MobileSearch";
 // import CartOverlay from "./CartOverlay";
-
+import { US } from "country-flag-icons/react/3x2";
 import "./Header.css";
 
 const Header = () => {
@@ -167,18 +167,16 @@ const Header = () => {
                                                     <div className="dropdown">
                                                         <div className="hover-effect-sets ">
                                                             <button
-                                                                className="dropdown-toggle eng-button"
+                                                                className=" eng-button"
                                                                 type="button"
                                                                 id="dropdownMenuButton"
                                                                 data-toggle="dropdown"
                                                                 aria-haspopup="false"
                                                                 aria-expanded="false"
                                                             >
-                                                                <img
-                                                                    src={
-                                                                        english
-                                                                    }
-                                                                    alt="English Flag"
+                                                                <US
+                                                                    title="United States"
+                                                                    className="eng-button-type-data"
                                                                 />{" "}
                                                                 EN
                                                             </button>

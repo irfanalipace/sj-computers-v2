@@ -81,6 +81,7 @@ const OrderPage = () => {
     const handleTabChange = (event, newValue) => {
         setOrderSearchData([]);
         setActiveTab(newValue);
+        setOrderSearch("");
     };
     const handleSearch = async () => {
         setActiveTab(2);
@@ -90,7 +91,7 @@ const OrderPage = () => {
         console.print(responseSearch, "response search");
         setOrderSearchData(responseSearch);
         setLocalLoading(false);
-        setOrderSearch("");
+        // setOrderSearch("");
         return;
     };
 
@@ -154,19 +155,19 @@ const OrderPage = () => {
         <div className="account-page order-page">
             <div className="container-xl">
                 <Breadcrumb />
-                <div className="row mx-0">
+                {/* <div className="row mx-0">
                     <div className="col-sm-4 col-md-8 col-8">
                         <h3 className="account-heading your-order-page">
                             Your Order
                         </h3>
                     </div>
                     <div className="col-sm-8 col-md-4 col-4 search-product-order-tables">
-                        {/* <p className="account-heading">Enter tracking id to search</p> */}
+                    
                         <label
                             style={{ marginBottom: 5 }}
                             htmlFor="orderSearch"
                         >
-                            Enter tracking id to search
+                            Enter order id to search
                         </label>
                         <div style={{ display: "flex", alignItems: "center" }}>
                             <input
@@ -181,7 +182,7 @@ const OrderPage = () => {
                                         : "  form-control form-control-sm  my-lg-0 search-input"
                                 }
                             />
-                            {/* <FaSearch style={{ marginRight: '5px' }} /> */}
+                           
                             <button
                                 className="searchOrderBtn btn btn-sm"
                                 type="button"
@@ -201,11 +202,11 @@ const OrderPage = () => {
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="row  mx-0 order-list-container mt-2 orderTabsSection">
                     <div className="col-12 px-0">
-                        <CustomTabs
+                        {/* <CustomTabs
                             value={activeTab}
                             onChange={handleTabChange}
                             centered
@@ -240,7 +241,7 @@ const OrderPage = () => {
                                     },
                                 }}
                             />
-                        </CustomTabs>
+                        </CustomTabs> */}
 
                         <div
                             style={{
@@ -251,7 +252,7 @@ const OrderPage = () => {
                         >
                             {activeTab !== 2 && (
                                 <>
-                                    <p className="orderType">
+                                    {/* <p className="orderType">
                                         {}{" "}
                                         {activeTab === 0 ? (
                                             <>
@@ -266,16 +267,19 @@ const OrderPage = () => {
                                             `${orderDetails?.cancel_orders?.total} cancelled order`
                                         )}{" "}
                                         place in
-                                    </p>
+                                    </p> */}
                                     <div style={{ display: "inline-flex" }}>
-                                        <Select
+                                        {/* <Select
                                             data={[
+                                                {
+                                                    value: "",
+                                                    label: "All",
+                                                },
                                                 {
                                                     value: "1 month",
                                                     label: "1 month",
                                                 },
-                                                // { value: 'option2', label: 'Option 2' },
-                                                // { value: 'option3', label: 'Option 3' },
+                                              
                                             ]}
                                             value={selectedValue}
                                             onChange={handleDropdownChange}
@@ -293,7 +297,7 @@ const OrderPage = () => {
                                                 lineHeight: "164%",
                                                 color: "#000000",
                                             }}
-                                        />
+                                        /> */}
                                         {/* <select
                         value={1}
                         //   onChange={}
@@ -309,7 +313,7 @@ const OrderPage = () => {
                             )}
                         </div>
 
-                        {renderTabContent()}
+                        {/* {renderTabContent()} */}
                     </div>
                     {/* <div
                         style={{ marginTop: "15%", marginBottom: "5%" }}

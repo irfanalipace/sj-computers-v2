@@ -31,17 +31,17 @@ export const fetchProducts = (page = 1, loadMore = false, per_page = 12) => {
     };
 };
 
-export const searchProducts = (name = "", page = 1, per_page = 12) => {
+export const searchProducts = (data) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            const response = await searchProductsApi(name, page, per_page);
-            if (page === 1) dispatch(RESET_PAGE());
+            const response = await searchProductsApi(data);
+            if (data.page === 1) dispatch(RESET_PAGE());
             dispatch({
                 type: SEARCH_PRODUCTS,
                 payload: {
                     data: [...response?.data?.data],
-                    searchString: name,
+                    searchString: data.name,
                 },
             });
         } catch (error) {
@@ -59,6 +59,7 @@ export const filterProducts = (filter, loadMore = false) => {
                 dispatch({ type: LOADING, payload: {} });
                 dispatch({ type: SET_FILTERING_PRODUCTS, payload: {} });
             }
+            // const filterdata=
             const response = await filterProductsApi(filter);
             if (filter.page === 1) dispatch(RESET_PAGE());
             if (response?.data?.data) {

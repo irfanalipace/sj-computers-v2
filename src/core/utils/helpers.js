@@ -63,3 +63,43 @@ export const prettifyError = (error) => {
 
     return prettifiedError;
 };
+export function prettifyErrorfromObjectToArray(errors) {
+    try {
+        const prettified = {};
+
+        for (const key in errors) {
+            const parts = key.split(".");
+            let current = prettified;
+
+            for (let i = 0; i < parts.length; i++) {
+                const part = parts[i];
+
+                if (i === parts.length - 1) {
+                    current[part] = errors[key];
+                } else {
+                    if (!current[part]) {
+                        if (parts[i + 1].match(/^\d+$/)) {
+                            current[part] = [];
+                        } else {
+                            current[part] = {};
+                        }
+                    }
+                    current = current[part];
+                }
+            }
+        }
+        return prettified;
+    } catch (error) {
+        return [];
+    }
+}
+
+export function convertDateToLongFormat(inputDate) {
+    try {
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        const date = new Date(inputDate);
+        return date.toLocaleDateString(undefined, options);
+    } catch (error) {
+        return "";
+    }
+}

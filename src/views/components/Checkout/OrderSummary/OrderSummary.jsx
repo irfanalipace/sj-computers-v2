@@ -14,14 +14,14 @@ function OrderSummary({
     activeAccordion,
     paymentMethod,
     shippingDetails,
-}) 
-{
+    isDisabled,
+}) {
     const dispatch = useDispatch();
     const [disabled, setDisabled] = useState(true);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
 
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    
+
     useEffect(() => {
         if (paymentMethod) setDisabled(false);
     }, [paymentMethod]);
@@ -32,7 +32,10 @@ function OrderSummary({
                 <ShippingButton
                     handleClick={handleClick}
                     id={activeAccordion}
-                />
+                    disabled={isDisabled}
+                >
+                    Review Order
+                </ShippingButton>
             );
         } else if (activeAccordion === 2) {
             return (
@@ -40,7 +43,7 @@ function OrderSummary({
                     toggleAccordion={handleClick}
                     id={activeAccordion}
                 >
-                    Review Items
+                    Proceed
                 </ReviewButton>
             );
         } else {
@@ -53,7 +56,6 @@ function OrderSummary({
             };
 
             return (
-                
                 <PaymentButton
                     clickHandler={() => false}
                     id={activeAccordion}
@@ -104,8 +106,11 @@ function OrderSummary({
                                             {shippingDetails?.shipment_info
                                                 ?.amount
                                                 ? "$" +
-                                                  shippingDetails?.shipment_info
-                                                      ?.amount
+                                                  parseFloat(
+                                                      shippingDetails
+                                                          ?.shipment_info
+                                                          ?.amount
+                                                  ).toFixed(2)
                                                 : "$0"}
                                         </span>
                                     </li>
@@ -174,11 +179,11 @@ function OrderSummary({
                                     <li>
                                         <span>Shipping & handling:</span>
                                         <span>
-                                            {shippingDetails?.shipment_info
-                                                ?.amount
+                                            {shippingDetails?.shipment_amount
                                                 ? "$" +
-                                                  shippingDetails?.shipment_info
-                                                      ?.amount
+                                                  parseFloat(
+                                                      shippingDetails?.shipment_amount
+                                                  ).toFixed(2)
                                                 : "$0"}
                                         </span>
                                     </li>

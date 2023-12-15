@@ -21,6 +21,7 @@ const productSlice = createSlice({
             state.isLoading = true;
         },
         SET_PRODUCT_LOADING: (state, action) => {
+            state.isLoading = true;
             let index = state.products.findIndex(
                 (item) => item.id === action.payload?.id
             );
@@ -40,6 +41,7 @@ const productSlice = createSlice({
                     ...state.products[index],
                     loading: false,
                 };
+                state.isLoading = false;
             }
         },
 
@@ -56,9 +58,9 @@ const productSlice = createSlice({
             state.isShowMore = false;
         },
         SEARCH_PRODUCTS: (state, action) => {
-            if (state.currentPage === 1)
-                state.products = [...action.payload.data];
-            else state.products = [...state.products, ...action.payload.data];
+            // if (state.currentPage === 1)
+            state.products = [...action.payload.data];
+            // else state.products = [...state.products, ...action.payload.data];
             state.currentPage = state.currentPage + 1;
             state.searchString = action.payload.searchString;
             state.isLoading = false;
