@@ -10,6 +10,7 @@ export default defineConfig({
     //     rollupOptions: {
     //         input: {
     //             main: "/src/main.jsx", // Assuming the 'src' folder is in the root of your project.
+    //             app: "index.html",
     //         },
     //     },
     // },
