@@ -11,6 +11,7 @@
 /public/mix-manifest.json
 .env
 /composer.lock
+/dist
 /package-lock.json
 .phpunit.result.cache
 docker-compose.override.yml
