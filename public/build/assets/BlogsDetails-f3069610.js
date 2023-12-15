@@ -1,1 +1,0 @@
-import{j as o}from"./main-c67a3fcc.js";import r from"./BlogPage-bd17477a.js";import"./Sidebar-f3bfa2ff.js";/* empty css               */import"./blogs-7508e98f.js";import"./interopRequireDefault-01ffd8a5.js";import"./react-lifecycles-compat.es-22c986ff.js";const l=()=>o.jsx("div",{children:o.jsx(r,{})});export{l as default};
