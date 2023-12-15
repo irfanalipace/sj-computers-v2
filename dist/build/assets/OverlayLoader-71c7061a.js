@@ -1,1 +1,0 @@
-import{j as r}from"./main-c67a3fcc.js";import{L as e}from"./Spinner-7dc6ec36.js";const t=({isLoading:o})=>r.jsx("div",{className:`component-overlay-loader ${o&&"active"}`,children:r.jsx(e,{})});export{t as O};

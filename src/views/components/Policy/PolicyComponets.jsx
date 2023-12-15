@@ -32,7 +32,7 @@ const PolicyComponets = () => {
     // }'
 
     const location = useLocation();
-    const pageName = location.pathname.substring(1);
+    let pageName = location.pathname.substring(1);
 
     let PageTitle;
 
@@ -48,9 +48,7 @@ const PolicyComponets = () => {
         PageTitle = "About Us";
     } else if (pageName === "what-we-do") {
         PageTitle = "What we Do";
-    }
-    
-    else {
+    } else {
         pageName = pageName;
     }
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./SkuTables.css";
 import { TextField, FormControl } from "@mui/material";
-import { getInventory, inventoryAction } from "@api/inventory.js";
+import { getInventory, inventoryAction } from "@api/inventory";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 
 export const SkuTables = ({ render, setRender }) => {
