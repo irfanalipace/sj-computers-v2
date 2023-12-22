@@ -4,10 +4,11 @@ import { toast } from "react-toastify";
 import { Modal, Button, Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchStates } from "@store/states/statesThunks";
 import img1 from "@images/bottom-arrow.png";
-import { updateState } from "@store/states/statesThunks";
+import { updateState, fetchStates } from "@store/states/statesThunks";
 import { UPDATE_STATE } from "@store/states/statesSlice";
+import { getEstimatedDelivery } from "@store/orders/ordersThunk";
+
 import Loader from "@common/Spinner/Spinner";
 
 import "./LocationModal.css";
@@ -47,6 +48,7 @@ function UpdateStateModal({ isOpen = false, handleClose }) {
             } else {
                 window.localStorage.setItem("tempState", JSON.stringify(state));
                 dispatch(UPDATE_STATE(state));
+                dispatch(getEstimatedDelivery(state?.id));
                 toast.success("State Updated Successfully");
                 handleClose();
             }
