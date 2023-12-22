@@ -12,13 +12,18 @@ import {
     getTotalQuantity,
     updateCartDetails,
 } from "../../../../core/utils/cartHelpers";
+import { IS_CHRISTMAS_HOLIDAYS } from "../../../../core/utils/constants";
 
 const ShippingMehtod = () => {
     const [activeMethod, setActiveMethod] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const currentState = useSelector((state) => state.states.currentState);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
+    const activeShippingMethod =
+        useSelector((state) => state.cart.details.activeMethod) || 0;
+    const orderEstimatedDelivery = useSelector(
+        (state) => state.orders.orderEstimatedDelivery
+    );
     const dispatch = useDispatch();
 
     const handleChange = async (e) => {
@@ -36,6 +41,7 @@ const ShippingMehtod = () => {
                     dispatch(
                         setCartDetails({
                             ...response.data,
+                            activeMethod: e.target.value,
                         })
                     );
                 } catch (error) {
@@ -54,6 +60,7 @@ const ShippingMehtod = () => {
                         ...cartDetails,
                         ...response.data,
                         total: response?.data?.estimate_amount,
+                        activeMethod: e.target.value,
                     };
                     updateCartDetails(updatedCartDetails);
                     dispatch(setCartDetails(updatedCartDetails));
@@ -73,25 +80,29 @@ const ShippingMehtod = () => {
                     {shippingMethods.map((shippingMethod) => (
                         <div
                             className={`shipping-method-input-group ${
-                                activeMethod == shippingMethod.id && "active"
+                                activeShippingMethod == shippingMethod?.id &&
+                                "active"
                             }`}
-                            key={shippingMethod.id}
+                            key={shippingMethod?.id}
                         >
                             <input
-                                id={shippingMethod.id}
+                                id={shippingMethod?.id}
                                 type="radio"
                                 onChange={handleChange}
                                 name="shippingMethod"
-                                value={shippingMethod.id}
-                                defaultChecked={
-                                    activeMethod === shippingMethod.id
+                                value={shippingMethod?.id}
+                                // defaultChecked={
+                                //     activeShippingMethod == shippingMethod?.id
+                                // }
+                                checked={
+                                    activeShippingMethod == shippingMethod?.id
                                 }
                             />
-                            <label htmlFor={shippingMethod.id}>
-                                <span>{shippingMethod.label}</span>
+                            <label htmlFor={shippingMethod?.id}>
+                                <span>{shippingMethod?.label}</span>
                                 <span>
-                                    {shippingMethod.cost
-                                        ? "$" + shippingMethod.cost
+                                    {shippingMethod?.cost
+                                        ? "$" + shippingMethod?.cost
                                         : "Free"}
                                 </span>
                             </label>
@@ -100,6 +111,41 @@ const ShippingMehtod = () => {
                 </form>
                 <OverlayLoader isLoading={isLoading} />
             </div>
+            {IS_CHRISTMAS_HOLIDAYS && (
+                <div className="card card-checkout mt-3">
+                    <div className="card-body">
+                        <div className="text-body">
+                            <p className="christmas-offer-card">
+                                <strong
+                                    className="price-items"
+                                    style={{
+                                        fontWeight: "600",
+                                    }}
+                                >
+                                    Note:
+                                </strong>
+                                Parcel{" "}
+                                <span className="text-danger">
+                                    Arrives after Christmas,{" "}
+                                </span>
+                                on
+                                <strong
+                                    style={{
+                                        fontWeight: "600",
+                                    }}
+                                >
+                                    {" "}
+                                    {
+                                        orderEstimatedDelivery
+                                            ?.free_shipment_amount?.estimate_day
+                                    }{" "}
+                                </strong>
+                                <span className="text-muted">(Tentative)</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

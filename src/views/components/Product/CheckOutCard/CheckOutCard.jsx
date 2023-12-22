@@ -11,6 +11,7 @@ import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 import "./CheckOutCard.css";
 import { Link } from "react-router-dom";
 import AddCartComponents from "@components/ProductCard/AddCartComponents";
+import { IS_CHRISTMAS_HOLIDAYS } from "../../../../core/utils/constants";
 export const CheckOutCard = ({ product }) => {
     const currentState = useSelector((state) => state.states.currentState);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -65,7 +66,7 @@ export const CheckOutCard = ({ product }) => {
             <div className="card-section-right">
                 <div className="row card-price-section-card-product">
                     <div className="col-md-12 color-text-cart">
-                        <span className="$-color">$</span>
+                        <span className="text-danger">$</span>
                         {product?.price?.toString().split(".")[0]}
                         <sup>{product?.price?.toString().split(".")[1]}</sup>
                     </div>
@@ -81,36 +82,61 @@ export const CheckOutCard = ({ product }) => {
                         </p>
                     </div>
                 </div>
-                <div className="card-dev-section-paragrap-product">
-                    <span className="dilvery-text-paragraph-card">
-                        <button className="text-decoration-none">
-                            Free delivery
-                        </button>{" "}
-                        <span style={{ fontWeight: "bold" }}>
-                            {
-                                orderEstimatedDelivery?.free_shipment_amount
-                                    ?.estimate_day
-                            }
+                {/* Below sections are rendered based on christmas holidays static boolean variable in constants, and it will be true or false based on management decision  */}
+                {IS_CHRISTMAS_HOLIDAYS ? (
+                    <div className="card-dev-section-paragrap-product">
+                        <span className="dilvery-text-paragraph-card">
+                            <button className="text-decoration-none text-danger">
+                                Arrive after Christmas
+                            </button>
+                            <span style={{ fontWeight: "bold" }}>
+                                {", "}
+                                {
+                                    orderEstimatedDelivery?.free_shipment_amount
+                                        ?.estimate_day
+                                }
+                            </span>{" "}
+                            (Tentative)
+                            <br></br>
+                            Shipped by SJ Computers
                         </span>
-                        <br></br>
-                        Shipped by SJ Computers
-                    </span>
-                </div>
-                <div className="card-dev-section-paragrap-product">
-                    <span className="dilvery-text-paragraph-card">
-                        or{" "}
-                        <button className="text-decoration-none">
-                            Fastest delivery
-                        </button>{" "}
-                        <span style={{ fontWeight: "bold" }}>
-                            {
-                                orderEstimatedDelivery["1_day_shipment_amount"]
-                                    ?.estimate_day
-                            }
-                        </span>{" "}
-                        (Tentative)
-                    </span>
-                </div>
+                    </div>
+                ) : (
+                    <>
+                        <div className="card-dev-section-paragrap-product">
+                            <span className="dilvery-text-paragraph-card">
+                                <button className="text-decoration-none">
+                                    Free delivery
+                                </button>{" "}
+                                <span style={{ fontWeight: "bold" }}>
+                                    {
+                                        orderEstimatedDelivery
+                                            ?.free_shipment_amount?.estimate_day
+                                    }
+                                </span>
+                                <br></br>
+                                Shipped by SJ Computers
+                            </span>
+                        </div>{" "}
+                        <div className="card-dev-section-paragrap-product">
+                            <span className="dilvery-text-paragraph-card">
+                                or{" "}
+                                <button className="text-decoration-none">
+                                    Fastest delivery
+                                </button>{" "}
+                                <span style={{ fontWeight: "bold" }}>
+                                    {
+                                        orderEstimatedDelivery[
+                                            "1_day_shipment_amount"
+                                        ]?.estimate_day
+                                    }
+                                </span>{" "}
+                                (Tentative)
+                            </span>
+                        </div>{" "}
+                    </>
+                )}
+
                 <div className="color-card-dev">
                     <button
                         className="select-location-btn mb-3"

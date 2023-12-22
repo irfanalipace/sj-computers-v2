@@ -15,16 +15,16 @@ export const shippingMethods = [
         label: "Free Shipping (3 - 5 days)",
         cost: 0,
     },
-    {
-        id: 2,
-        label: "2 day shipping",
-        cost: 15,
-    },
-    {
-        id: 1,
-        label: "Next day delivery",
-        cost: 30,
-    },
+    // {
+    //     id: 2,
+    //     label: "2 day shipping",
+    //     cost: 15,
+    // },
+    // {
+    //     id: 1,
+    //     label: "Next day delivery",
+    //     cost: 30,
+    // },
 ];
 
 export const dummyCategories = [
@@ -38,3 +38,5 @@ export const dummyCategories = [
     { name: "category 1", id: 6, slug: "category-1" },
     { name: "category 2", id: 7, slug: "category-2" },
 ];
+
+export const IS_CHRISTMAS_HOLIDAYS = true;

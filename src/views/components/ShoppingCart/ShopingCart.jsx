@@ -14,6 +14,7 @@ import "./ShopingCart.css";
 import { CheckoutBox } from "./CheckOut/CheckoutBox";
 import CartOverlay from "../Header/CartOverlay";
 import { validateCartItems } from "../../../core/store/cart/cartThunks";
+import { IS_CHRISTMAS_HOLIDAYS } from "../../../core/utils/constants";
 
 export const ShopingCart = ({ onFormSubmit, form }) => {
     const cartItems = useSelector((state) => state.cart.cart);
@@ -25,6 +26,9 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
     const location = useLocation();
     const error = location.state?.error;
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const orderEstimatedDelivery = useSelector(
+        (state) => state.orders.orderEstimatedDelivery
+    );
     const [showModal, setShowModal] = useState(false);
 
     const modalRef = useRef(null);
@@ -189,6 +193,44 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                         </div>
                                     </div>
                                 </div>
+                                {IS_CHRISTMAS_HOLIDAYS && (
+                                    <div className="card card-checkout mt-3 mb-sm-0 mb-2">
+                                        <div className="card-body">
+                                            <div className="text-body">
+                                                <p className="christmas-offer-card">
+                                                    <strong
+                                                        className="price-items"
+                                                        style={{
+                                                            fontWeight: "600",
+                                                        }}
+                                                    >
+                                                        Note:
+                                                    </strong>
+                                                    Parcel{" "}
+                                                    <span className="text-danger">
+                                                        Arrives after Christmas,{" "}
+                                                    </span>
+                                                    on
+                                                    <strong
+                                                        style={{
+                                                            fontWeight: "600",
+                                                        }}
+                                                    >
+                                                        {" "}
+                                                        {
+                                                            orderEstimatedDelivery
+                                                                ?.free_shipment_amount
+                                                                ?.estimate_day
+                                                        }{" "}
+                                                    </strong>
+                                                    <span className="text-muted">
+                                                        (Tentative)
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

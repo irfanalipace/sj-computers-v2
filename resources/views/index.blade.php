@@ -7,17 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href='/favicon.png' />
     <meta name="google-site-verification" content="5PS2oRiahS_ZwW7U_GAXkDd24qj8EYMyAHuHSY4D3mc" />
-  <script type="module" crossorigin src="/assets/index-eafb6d26.js"></script>
-  <link rel="stylesheet" href="/assets/index-da88b325.css">
+    <script type="module" crossorigin src="/assets/index-eafb6d26.js"></script>
+    <link rel="stylesheet" href="/assets/index-da88b325.css">
 </head>
 
 <body>
     <div id="root"></div>
-    
+
     <!-- Google Tag Manager -->
     <script defer>
         setTimeout(() => {
-            (function (w, d, s, l, i) {
+            (function(w, d, s, l, i) {
                 w[l] = w[l] || [];
                 w[l].push({
                     'gtm.start': new Date().getTime(),
