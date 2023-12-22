@@ -186,25 +186,25 @@ class CartController extends BaseController
         if (isset($request->state_id) && $request->state_id == 23) {
             $data = [
                 'free_shipment_amount' => [
-                    'estimate_day' => $today->addWeekdays(0)->format('l d-m-Y'),
+                    'estimate_day' => $today->addDay()->addWeekdays(0)->format('l d-m-Y'),
                 ],
                 '2_day_shipment_amount' => [
-                    'estimate_day' => $today->addWeekdays(0)->format('l d-m-Y'),
+                    'estimate_day' => $today->addDay()->addWeekdays(0)->format('l d-m-Y'),
                 ],
                 '1_day_shipment_amount' => [
-                    'estimate_day' => $today->addWeekdays(0)->format('l d-m-Y'),
+                    'estimate_day' => $today->addDay()->addWeekdays(0)->format('l d-m-Y'),
                 ],
             ];
         } else {
             $data = [
                 'free_shipment_amount' => [
-                    'estimate_day' => $today->addWeekdays(5)->format('l d-m-Y'),
+                    'estimate_day' => $today->addDay()->addWeekdays(5)->format('l d-m-Y'),
                 ],
                 '2_day_shipment_amount' => [
-                    'estimate_day' => $today->addWeekdays(2)->format('l d-m-Y'),
+                    'estimate_day' => $today->addDay()->addWeekdays(2)->format('l d-m-Y'),
                 ],
                 '1_day_shipment_amount' => [
-                    'estimate_day' => $today->addWeekdays(1)->format('l d-m-Y'),
+                    'estimate_day' => $today->addDay()->addWeekdays(1)->format('l d-m-Y'),
                 ],
             ];
         }
