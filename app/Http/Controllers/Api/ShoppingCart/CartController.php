@@ -61,11 +61,13 @@ class CartController extends BaseController
         }
         return response(array('success' => true, 'data' => $items, 'details' => $details, 'message' => 'cart get items success'), 200, []);
     }
+
     private function clearNonAssociateItem($id)
     {
         $cart = Cart::session($this->userId);
         return $cart->remove($id);
     }
+
     //adding item to cart
     public function addCart(AddToCartRequest $request)
     {
@@ -111,7 +113,7 @@ class CartController extends BaseController
             return response(array('success' => true, 'data' => $data, 'details' => $this->cartDetails(), 'message' => "cart item {$request->id} removed."), 200, []);
         } catch (Exception $e) {
 
-            return response(array('error' => true, 'data' => $e,  'message' => "Something went wrong."), 400, []);
+            return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
         }
     }
 
@@ -174,29 +176,34 @@ class CartController extends BaseController
 
     public function estimatedDays(EstimatedDaysRequest $request)
     {
-
+        $today = Carbon::now()->format('d-m-Y');
+        $christmas = Carbon::create('2023', '12', '25')->format('d-m-Y');
+        $todayDate = Carbon::now();
+        if ($christmas >= $today) {
+            $todayDate = Carbon::now()->addDays(8);
+        }
         if (isset($request->state_id) && $request->state_id == 23) {
             $data = [
                 'free_shipment_amount' => [
-                    'estimate_day' => Carbon::now()->addWeekdays(0)->format('l d-m-Y'),
+                    'estimate_day' => $todayDate->addWeekdays(0)->format('l d-m-Y'),
                 ],
                 '2_day_shipment_amount' => [
-                    'estimate_day' => Carbon::now()->addWeekdays(0)->format('l d-m-Y'),
+                    'estimate_day' => $todayDate->addWeekdays(0)->format('l d-m-Y'),
                 ],
                 '1_day_shipment_amount' => [
-                    'estimate_day' => Carbon::now()->addWeekdays(0)->format('l d-m-Y'),
+                    'estimate_day' => $todayDate->addWeekdays(0)->format('l d-m-Y'),
                 ],
             ];
         } else {
             $data = [
                 'free_shipment_amount' => [
-                    'estimate_day' => Carbon::now()->addWeekdays(5)->format('l d-m-Y'),
+                    'estimate_day' => $todayDate->addWeekdays(5)->format('l d-m-Y'),
                 ],
                 '2_day_shipment_amount' => [
-                    'estimate_day' => Carbon::now()->addWeekdays(2)->format('l d-m-Y'),
+                    'estimate_day' => $todayDate->addWeekdays(2)->format('l d-m-Y'),
                 ],
                 '1_day_shipment_amount' => [
-                    'estimate_day' => Carbon::now()->addWeekdays(1)->format('l d-m-Y'),
+                    'estimate_day' => $todayDate->addWeekdays(1)->format('l d-m-Y'),
                 ],
             ];
         }
@@ -261,7 +268,7 @@ class CartController extends BaseController
 
             $items = $this->getItems(true);
             $details = $this->cartDetails();
-            return response(array('success' => true, 'data' => $items, 'details' => $details,  'message' => 'Item added.', 'in_stock' => true), 200, []);
+            return response(array('success' => true, 'data' => $items, 'details' => $details, 'message' => 'Item added.', 'in_stock' => true), 200, []);
         } catch (Exception $e) {
 
             return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
@@ -370,7 +377,7 @@ class CartController extends BaseController
 
                 if ($product->quantity == 0) {
 
-                     (!$cart->isEmpty()) ? $cart->remove($value['product_id']) : true;
+                    (!$cart->isEmpty()) ? $cart->remove($value['product_id']) : true;
 
                     $data[] = [
                         'status' => false,
@@ -380,7 +387,7 @@ class CartController extends BaseController
                         'available_quantity' => $product->quantity
                     ];
                 } elseif ($product->quantity < $value['qty']) {
-                   
+
                     if (!$cart->isEmpty()) {
                         $cart->update($value['product_id'], [
                             'quantity' => array(
@@ -390,7 +397,7 @@ class CartController extends BaseController
                             'associatedModel' => $product
                         ]);
                     }
-                    
+
                     $data[] = [
                         'status' => false,
                         'product_id' => $product->id,
@@ -408,7 +415,7 @@ class CartController extends BaseController
                     ];
                 }
             }
-            
+
             return response(array('success' => true, 'data' => $data, 'message' => 'Successfully check the product of quantity.'), 200, []);
         } catch (Exception $e) {
             return response(array('error' => true, 'data' => $e->getMessage(), 'message' => "Something went wrong."), 400, []);
