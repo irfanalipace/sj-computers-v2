@@ -6,7 +6,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 //     require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = {
-    entry: "./src/Index.js",
+    entry: "./src/Index.jsx",
     mode: "production",
     module: {
         rules: [
