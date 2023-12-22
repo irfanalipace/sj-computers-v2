@@ -194,7 +194,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                     </div>
                                 </div>
                                 {IS_CHRISTMAS_HOLIDAYS && (
-                                    <div className="card card-checkout mt-3">
+                                    <div className="card card-checkout mt-3 mb-sm-0 mb-2">
                                         <div className="card-body">
                                             <div className="text-body">
                                                 <p className="christmas-offer-card">
