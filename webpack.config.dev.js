@@ -3,7 +3,7 @@ const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
 module.exports = {
-    entry: "./src/Index.js",
+    entry: "./src/Index.jsx",
     mode: "development",
     module: {
         rules: [
