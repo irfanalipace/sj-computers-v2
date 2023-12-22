@@ -7,9 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href={{ asset('favicon.png') }} />
-    <!-- <link rel='canonical' href='https://sjcomputers.us' /> -->
-    <!-- <title>Buy Perfect Gaming PC Computers, Laptops & Accessories | SJ Computers LLC</title> -->
-    <!-- <link rel="preload" src={{ asset('/js/images/mobile-banner-1.webp') }} /> -->
+    <meta name="robots" content="index, follow">
 
     @if (config('app.env') == 'production')
         <meta name="google-site-verification" content="5PS2oRiahS_ZwW7U_GAXkDd24qj8EYMyAHuHSY4D3mc" />
