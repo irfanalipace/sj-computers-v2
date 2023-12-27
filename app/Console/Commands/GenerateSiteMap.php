@@ -73,9 +73,9 @@ class GenerateSiteMap extends Command
         File::makeDirectory(dirname($publicPath), 0777, true, true);
         file_put_contents($publicPath, $xmlGeneralContent);
 
-        $generalSitemapPath =  public_path('sitemap_index.xml');
+        $generalSitemapPath = public_path('sitemap_index.xml');
         $xmlContent = file_get_contents($generalSitemapPath);
-        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+//        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($generalSitemapPath, $xmlContent);
 
         $pagesRoutes = [
@@ -102,7 +102,7 @@ class GenerateSiteMap extends Command
 
         $pageSitemapPath =  public_path('sitemap/pages.xml');
         $xmlContent = file_get_contents($pageSitemapPath);
-        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+//        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($pageSitemapPath, $xmlContent);
 
 
@@ -124,7 +124,7 @@ class GenerateSiteMap extends Command
 
         $blogSitemapPath =  public_path('sitemap/blogs.xml');
         $xmlContent = file_get_contents($blogSitemapPath);
-        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+//        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($blogSitemapPath, $xmlContent);
 
         $categoriesRoutes = [
@@ -189,7 +189,7 @@ class GenerateSiteMap extends Command
 
                     $categoryProductSitemapPath =  public_path('sitemap/category/'.$route.'.xml');
                     $xmlContent = file_get_contents($categoryProductSitemapPath);
-                    $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+//                    $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
                     file_put_contents($categoryProductSitemapPath, $xmlContent);
                 }
             }
@@ -209,7 +209,7 @@ class GenerateSiteMap extends Command
 
         $categorySitemapPath =  public_path('sitemap/categories.xml');
         $xmlContent = file_get_contents($categorySitemapPath);
-        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+//        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($categorySitemapPath, $xmlContent);
 
     }
