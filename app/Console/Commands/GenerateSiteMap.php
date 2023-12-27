@@ -69,11 +69,11 @@ class GenerateSiteMap extends Command
 
         $xmlGeneralContent = $generalSitemap->render();
 
-        $publicPath = public_path('sitemap/index.xml');
+        $publicPath = public_path('sitemap_index.xml');
         File::makeDirectory(dirname($publicPath), 0777, true, true);
         file_put_contents($publicPath, $xmlGeneralContent);
 
-        $generalSitemapPath = public_path('sitemap/index.xml');
+        $generalSitemapPath =  public_path('sitemap_index.xml');
         $xmlContent = file_get_contents($generalSitemapPath);
         $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($generalSitemapPath, $xmlContent);
@@ -100,14 +100,14 @@ class GenerateSiteMap extends Command
         file_put_contents($publicPath, $xmlPagesContent);
 
 
-        $pageSitemapPath = public_path('sitemap/pages.xml');
+        $pageSitemapPath =  public_path('sitemap/pages.xml');
         $xmlContent = file_get_contents($pageSitemapPath);
         $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($pageSitemapPath, $xmlContent);
 
 
         $blogs = Blog::select('slug')
-            ->where('status', Blog::PUBLISHED)
+            ->where('status',Blog::PUBLISHED)
             ->get();
 
         foreach ($blogs as $blog) {
@@ -122,7 +122,7 @@ class GenerateSiteMap extends Command
         file_put_contents($publicPath, $xmlBlogsContent);
 
 
-        $blogSitemapPath = public_path('sitemap/blogs.xml');
+        $blogSitemapPath =  public_path('sitemap/blogs.xml');
         $xmlContent = file_get_contents($blogSitemapPath);
         $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($blogSitemapPath, $xmlContent);
@@ -150,6 +150,7 @@ class GenerateSiteMap extends Command
             'desktop',
             'tablet',
             'monitor',
+            'not_set',
             'business_computers',
             'sff',
             'usff',
@@ -161,32 +162,32 @@ class GenerateSiteMap extends Command
 
         foreach ($categoriesRoutes as $route) {
             $route = trim($route);
-            $url = '/sitemap/category/' . $route . '.xml';
+            $url =  '/sitemap/category/' . $route.'.xml';
             $categoriesSitemap->add($url);
 
             $categoryProductSitemap = Sitemap::create();
 
             $category = Category::where('slug', $route)->first();
 
-            if (!empty($category)) {
-                $productIds = CategoryProduct::where('category_id', $category->id)->pluck('product_id');
+            if(!empty($category)) {
+                $productIds = CategoryProduct::where('category_id',$category->id)->pluck('product_id');
 
-                if (!empty($productIds)) {
-                    $productAsins = Product::whereIn('id', $productIds)
+                if(!empty($productIds)){
+                    $productAsins = Product::whereIn('id',$productIds)
                         ->pluck('asin');
 
 
-                    foreach ($productAsins as $productAsin) {
-                        $categoryProductUrl = '/products/' . $productAsin;
+                    foreach ($productAsins as $productAsin){
+                        $categoryProductUrl = '/products/'.$productAsin;
                         $categoryProductSitemap->add($categoryProductUrl);
 
                     }
                     $xmlCategoryProductContent = $categoryProductSitemap->render();
-                    $publicPath = public_path('sitemap/category/' . $route . '.xml');
+                    $publicPath = public_path('sitemap/category/'.$route.'.xml');
                     File::makeDirectory(dirname($publicPath), 0777, true, true);
                     file_put_contents($publicPath, $xmlCategoryProductContent);
 
-                    $categoryProductSitemapPath = public_path('sitemap/category/' . $route . '.xml');
+                    $categoryProductSitemapPath =  public_path('sitemap/category/'.$route.'.xml');
                     $xmlContent = file_get_contents($categoryProductSitemapPath);
                     $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
                     file_put_contents($categoryProductSitemapPath, $xmlContent);
@@ -205,10 +206,10 @@ class GenerateSiteMap extends Command
         File::makeDirectory(dirname($publicPath), 0777, true, true);
         file_put_contents($publicPath, $xmlCategoriesContent);
 
-        $categorySitemapPath = public_path('sitemap/categories.xml');
+
+        $categorySitemapPath =  public_path('sitemap/categories.xml');
         $xmlContent = file_get_contents($categorySitemapPath);
         $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
-
         file_put_contents($categorySitemapPath, $xmlContent);
 
     }
