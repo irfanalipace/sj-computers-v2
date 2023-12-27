@@ -91,8 +91,19 @@ class GenerateSiteMap extends Command
         ];
 
         foreach ($pagesRoutes as $route) {
-            $pagesSitemap->add($route); // Use the full URL with the base
+            $pagesSitemap->add($route);
+            if ($route == '/') {
+            $sitemapTags = $pagesSitemap->getTags();
+            foreach ($sitemapTags as $tag) {
+                $tag->setPriority(1);
+                $pagesSitemap->add($tag);
+            }
         }
+
+        }
+
+
+
 
         $xmlPagesContent = $pagesSitemap->render();
 
