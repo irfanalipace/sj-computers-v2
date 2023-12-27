@@ -86,7 +86,8 @@ class GenerateSiteMap extends Command
             '/term_services',
             '/return_refund_policy',
             '/privacy_policy',
-            '/refund-order'
+            '/refund-order',
+            '/blogs'
         ];
 
         foreach ($pagesRoutes as $route) {
