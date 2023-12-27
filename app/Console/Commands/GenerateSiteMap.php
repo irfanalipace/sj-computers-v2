@@ -69,11 +69,11 @@ class GenerateSiteMap extends Command
 
         $xmlGeneralContent = $generalSitemap->render();
 
-        $publicPath = public_path('sitemap/index.xml');
+        $publicPath = public_path('sitemap_index.xml');
         File::makeDirectory(dirname($publicPath), 0777, true, true);
         file_put_contents($publicPath, $xmlGeneralContent);
 
-        $generalSitemapPath =  public_path('sitemap/index.xml');
+        $generalSitemapPath =  public_path('sitemap_index.xml');
         $xmlContent = file_get_contents($generalSitemapPath);
         $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
         file_put_contents($generalSitemapPath, $xmlContent);
