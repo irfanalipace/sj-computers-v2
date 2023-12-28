@@ -43,12 +43,16 @@ class SetProductMeta extends Command
         $products = Product::all();
 
         foreach ($products as $product){
-            $metadescription = new MetaDescription();
-            $metadescription->url = config('app.url').'/products/'.$product->asin;
-            $metadescription->title = "Sjcomputers.us: ".$product->name." Electronics";
-            $metadescription->description = "Sjcomputers.us: ".$product->name." Electronics";
-            $metadescription->save();
-            echo "roe insert \n";
+
+            MetaDescription::updateOrCreate(
+                ['url' => config('app.url').'/products/'.$product->asin], // Attributes to search for existing record
+                [
+                    'title' => "Sjcomputers.us: ".$product->name." Electronics",
+                    'description' => "Sjcomputers.us: ".$product->name." Electronics",
+                    ] // Values to update or create
+            );
+
+            echo "row insert ".$product->id." \n";
         }
 
         return 0;
