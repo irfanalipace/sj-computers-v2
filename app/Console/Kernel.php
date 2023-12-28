@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
     {
          $schedule->command('amazon-product-update')->everyFifteenMinutes();
          $schedule->command('sj-products')->daily();
+         $schedule->command('products:meta')->daily();
          $schedule->command('generate:marketing-feed')->everyFiveMinutes();
          $schedule->command('generate:site-map')->everyThirtyMinutes();
     }
