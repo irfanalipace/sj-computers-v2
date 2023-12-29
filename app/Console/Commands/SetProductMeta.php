@@ -45,7 +45,7 @@ class SetProductMeta extends Command
         foreach ($products as $product){
 
             MetaDescription::updateOrCreate(
-                ['url' => config('app.url').'/products/'.$product->asin], // Attributes to search for existing record
+                ['url' => $product->url], // Attributes to search for existing record
                 [
                     'title' => "Sjcomputers.us: ".$product->name." Electronics",
                     'description' => "Sjcomputers.us: ".$product->name." Electronics",
