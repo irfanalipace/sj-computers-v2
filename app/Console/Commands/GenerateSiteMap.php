@@ -185,12 +185,12 @@ class GenerateSiteMap extends Command
                 $productIds = CategoryProduct::where('category_id',$category->id)->pluck('product_id');
 
                 if(!empty($productIds)){
-                    $productAsins = Product::whereIn('id',$productIds)
-                        ->pluck('asin');
+                    $productUrls = Product::whereIn('id',$productIds)
+                        ->pluck('url');
 
 
-                    foreach ($productAsins as $productAsin){
-                        $categoryProductUrl = '/products/'.$productAsin;
+                    foreach ($productUrls as $productUrl){
+                        $categoryProductUrl = $productUrl;
                         $categoryProductSitemap->add($categoryProductUrl);
 
                     }
