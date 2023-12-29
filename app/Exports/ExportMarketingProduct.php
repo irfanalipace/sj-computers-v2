@@ -42,14 +42,13 @@ class ExportMarketingProduct implements FromCollection, WithHeadings, ShouldAuto
             $dummyData['availability']    =   "In stock";
             $dummyData['availability_date']    =   $product->created_at->format('Y-d-m')."T".$product->created_at->format('H:m')."+0100";
             $dummyData['quantity']    =   $product->quantity;
-            $dummyData['link']    =   "https://sjcomputers.us/products/".$product->asin;
+            $dummyData['link']    =   $product->url;
             $dummyData['image_link']    =   $product->image[0] ?? '';
             $dummyData['additional_image_link']    =   implode(',', $product->image);
             $dummyData['google_product_category']    =  "Electronics > Computers > ".$this->getType($product->id);
             $dummyData['identifier_exists']    =   "no";
             $dummyData['shipping_weight']    =   "10 kg";
             $dummyData['total_quantity_price']    =   (float)$product->price * (int)$product->quantity;
-            $dummyData['url'] = $product->url;
 
             $data[] = $dummyData;
         }
@@ -81,6 +80,6 @@ class ExportMarketingProduct implements FromCollection, WithHeadings, ShouldAuto
     {
         return ["id", "title","description", "brand", "condition", "price", "sale_price",
             "availability", "availability_date", "quantity", "link", "image_link", "additional_image_link",
-            "google_product_category", "identifier_exists", "weight" ,"total_quantity_price","url"];
+            "google_product_category", "identifier_exists", "weight" ,"total_quantity_price"];
     }
 }
