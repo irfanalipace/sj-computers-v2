@@ -185,16 +185,12 @@ class GenerateSiteMap extends Command
                 $productIds = CategoryProduct::where('category_id',$category->id)->pluck('product_id');
 
                 if(!empty($productIds)){
-                    $productUrls = Product::whereIn('id',$productIds)
-                        ->pluck('url');
+                    $productAsins = Product::whereIn('id',$productIds)
+                        ->pluck('asin');
 
 
-                    foreach ($productUrls as $productUrl){
-
-                        $string = $productUrl;
-
-                        $removedString = str_replace('https://sjcomputers.us', '', $string);
-                        $categoryProductUrl = $removedString;
+                    foreach ($productAsins as $productAsin){
+                        $categoryProductUrl = '/products/'.$productAsin;
                         $categoryProductSitemap->add($categoryProductUrl);
 
                     }
