@@ -54,6 +54,7 @@ class GenerateSiteMap extends Command
         $generalSitemap = SitemapIndex::create();
         $pagesSitemap = Sitemap::create();
         $blogsSitemap = Sitemap::create();
+        $productsSitemap = Sitemap::create();
         $categoriesSitemap = SitemapIndex::create();
 
 
@@ -61,6 +62,7 @@ class GenerateSiteMap extends Command
             '/sitemap/pages.xml',
             '/sitemap/categories.xml',
             '/sitemap/blogs.xml',
+            '/sitemap/products.xml'
         ];
 
         foreach ($generalRoutes as $route) {
@@ -102,9 +104,6 @@ class GenerateSiteMap extends Command
 
         }
 
-
-
-
         $xmlPagesContent = $pagesSitemap->render();
 
         $publicPath = public_path('sitemap/pages.xml');
@@ -118,6 +117,9 @@ class GenerateSiteMap extends Command
 //        file_put_contents($pageSitemapPath, $xmlContent);
 
 
+        /*
+         * blogs sitemap
+         */
         $blogs = Blog::select('slug')
             ->where('status',Blog::PUBLISHED)
             ->get();
@@ -138,6 +140,32 @@ class GenerateSiteMap extends Command
 //        $xmlContent = file_get_contents($blogSitemapPath);
 //        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
 //        file_put_contents($blogSitemapPath, $xmlContent);
+
+        /*
+         * Products sitemap
+         */
+        $products = Product::select('url')
+            ->where('status',true)
+            ->get();
+
+        foreach ($products as $product) {
+
+            $removedString = str_replace('https://sjcomputers.us', '', $product->url);
+
+            $productsSitemap->add($removedString);
+        }
+
+        $xmlProductsContent = $productsSitemap->render();
+
+        $publicPath = public_path('sitemap/products.xml');
+        File::makeDirectory(dirname($publicPath), 0777, true, true);
+        file_put_contents($publicPath, $xmlProductsContent);
+
+
+
+        /*
+         * categories sitemap
+         */
 
         $categoriesRoutes = [
             'bto',
