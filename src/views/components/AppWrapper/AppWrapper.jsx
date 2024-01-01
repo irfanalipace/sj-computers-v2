@@ -52,10 +52,10 @@ const AppWrapper = ({ children }) => {
     }, [isAuthenticated]);
 
     useEffect(() => {
-        if (isMounted)
-            setTimeout(() => {
-                dispatch(getEstimatedDelivery(state?.id));
-            }, 3000); // giving timeout to increase initial page load speed
+        // if (isMounted)
+        setTimeout(() => {
+            dispatch(getEstimatedDelivery(state?.id));
+        }, 3000); // giving timeout to increase initial page load speed
     }, [state]);
 
     // useEffect(() => {
