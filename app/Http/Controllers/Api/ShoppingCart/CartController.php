@@ -176,35 +176,28 @@ class CartController extends BaseController
 
     public function estimatedDays(EstimatedDaysRequest $request)
     {
-        $today = Carbon::now();
-        $christmas = Carbon::create('2024', '01', '02');
-        if ($christmas > $today) {
-            $diff = $christmas->diff($today)->days;
-            $today = $today->addDays($diff);
-        }
-
         if (isset($request->state_id) && $request->state_id == 23) {
             $data = [
                 'free_shipment_amount' => [
-                    'estimate_day' => $today->addDay()->addWeekdays(0)->format('l d-m-Y'),
+                    'estimate_day' => Carbon::now()->addDay()->addWeekdays(0)->format('l d-m-Y'),
                 ],
                 '2_day_shipment_amount' => [
-                    'estimate_day' => $today->addDay()->addWeekdays(0)->format('l d-m-Y'),
+                    'estimate_day' => Carbon::now()->addDay()->addWeekdays(0)->format('l d-m-Y'),
                 ],
                 '1_day_shipment_amount' => [
-                    'estimate_day' => $today->addDay()->addWeekdays(0)->format('l d-m-Y'),
+                    'estimate_day' => Carbon::now()->addDay()->addWeekdays(0)->format('l d-m-Y'),
                 ],
             ];
         } else {
             $data = [
                 'free_shipment_amount' => [
-                    'estimate_day' => $today->addDay()->addWeekdays(5)->format('l d-m-Y'),
+                    'estimate_day' => Carbon::now()->addDay()->addWeekdays(5)->format('l d-m-Y'),
                 ],
                 '2_day_shipment_amount' => [
-                    'estimate_day' => $today->addDay()->addWeekdays(2)->format('l d-m-Y'),
+                    'estimate_day' => Carbon::now()->addDay()->addWeekdays(2)->format('l d-m-Y'),
                 ],
                 '1_day_shipment_amount' => [
-                    'estimate_day' => $today->addDay()->addWeekdays(1)->format('l d-m-Y'),
+                    'estimate_day' => Carbon::now()->addDay()->addWeekdays(1)->format('l d-m-Y'),
                 ],
             ];
         }
