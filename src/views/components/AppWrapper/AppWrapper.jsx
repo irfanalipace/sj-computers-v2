@@ -52,10 +52,12 @@ const AppWrapper = ({ children }) => {
     }, [isAuthenticated]);
 
     useEffect(() => {
-        setTimeout(() => {
-            dispatch(getEstimatedDelivery(state?.id));
-        }, 3000); // giving timeout to increase initial page load speed
-    }, []);
+        if (isMounted.current && state)
+            // fetch esimated delivery dates if component is successfully mounted and no state is selected
+            setTimeout(() => {
+                dispatch(getEstimatedDelivery(state?.id));
+            }, 3000); // giving timeout to increase initial page load speed
+    }, [state?.id]);
 
     // useEffect(() => {
     //     if (isAuthenticated && cartItems?.length > 0) {
@@ -94,6 +96,7 @@ const AppWrapper = ({ children }) => {
         if (!isAuthenticated) {
             dispatch(syncGuestUserCart(cartDetails));
         }
+        dispatch(getEstimatedDelivery(state?.id));
         isMounted.current = true;
     }, []);
 
