@@ -25,6 +25,7 @@ import { Helmet } from "react-helmet";
 // import smimage from "@images/blog/smallimage.png";
 // import primardataimage from "@images/blog/meeting.png";
 import { Loader } from "@mantine/core";
+import DOMPurify from "dompurify";
 
 const HeadereLinks = [
     { path: "/about_us", title: "About Us" },
@@ -577,7 +578,9 @@ const Blog = () => {
                                             <div
                                                 id="blog-content"
                                                 dangerouslySetInnerHTML={{
-                                                    __html: blogdteails.content,
+                                                    __html: DOMPurify.sanitize(
+                                                        blogdteails.content
+                                                    ),
                                                 }}
                                             />
 
