@@ -25,6 +25,7 @@ import { Helmet } from "react-helmet";
 import smimage from "@images/blog/smallimage.png";
 import primardataimage from "@images/blog/meeting.png";
 import { Loader } from "@mantine/core";
+import DOMPurify from "dompurify";
 
 const HeadereLinks = [
     { path: "/about_us", title: "About Us" },
@@ -160,7 +161,7 @@ const Blog = () => {
 
                     firstH2Tag.insertAdjacentElement("afterend", imgTag);
                 }
-            } catch (error) { }
+            } catch (error) {}
             const wpm = 225;
             const text = `${blogdteails.content}`;
             const words = text.trim()?.split(/\s+/)?.length;
@@ -250,17 +251,12 @@ const Blog = () => {
         (a, b) => new Date(b.publish_date) - new Date(a.publish_date)
     );
 
-
-
-
-
     const toggleCollapse = () => {
         setCollapsed(!isCollapsed);
     };
     const RecentCollapse = () => {
         setRecentCollapsed(!isRecentcollapsed);
     };
-
 
     // if (!isCollapsed && blogscategories.length > 0) {
     //   RenderedCategories = (
@@ -274,7 +270,6 @@ const Blog = () => {
     //     </div>
     //   );
     // }
-
 
     return (
         <>
@@ -351,15 +346,15 @@ const Blog = () => {
                                                     <span>
                                                         {blogdteails.publish_date
                                                             ? new Date(
-                                                                blogdteails.publish_date
-                                                            ).toLocaleDateString(
-                                                                "en-US",
-                                                                {
-                                                                    month: "2-digit",
-                                                                    day: "2-digit",
-                                                                    year: "numeric",
-                                                                }
-                                                            )
+                                                                  blogdteails.publish_date
+                                                              ).toLocaleDateString(
+                                                                  "en-US",
+                                                                  {
+                                                                      month: "2-digit",
+                                                                      day: "2-digit",
+                                                                      year: "numeric",
+                                                                  }
+                                                              )
                                                             : null}
                                                     </span>
                                                 </div>
@@ -434,35 +429,35 @@ const Blog = () => {
 
                             <div
                                 className="container image-cainter-dev"
-                            // style={{ height: "400px" }}
+                                // style={{ height: "400px" }}
                             >
-
                                 <div className="background-image-lin-dve ">
-
-
                                     <div>
-
                                         <img
-                                            src={
-                                                blogdteails.primary_image
-                                            }
+                                            src={blogdteails.primary_image}
                                             alt={blogdteails.all_text}
                                         />
                                     </div>
                                 </div>
-
                             </div>
 
                             <div className="container content-data-of-the-iamges-blogs">
                                 <div className="row">
                                     <div className="col-md-3 top-stories-data">
                                         <div className="main-dev-card-deprt">
-                                            <div className="left-dev-span-stories recent-bogs-view-clops" onClick={RecentCollapse} style={{ display: 'flex' }}>
+                                            <div
+                                                className="left-dev-span-stories recent-bogs-view-clops"
+                                                onClick={RecentCollapse}
+                                                style={{ display: "flex" }}
+                                            >
                                                 <div>
-                                                    <span >Recent Articles</span>
+                                                    <span>Recent Articles</span>
                                                 </div>
                                                 <div>
-                                                    <button className="recenr-articel-data"> <i className="fa-solid fa-chevron-down"></i></button>
+                                                    <button className="recenr-articel-data">
+                                                        {" "}
+                                                        <i className="fa-solid fa-chevron-down"></i>
+                                                    </button>
                                                 </div>
                                             </div>
                                             {/* <div>
@@ -481,70 +476,83 @@ const Blog = () => {
                                                     />
                                                 </div>
                                                 <div>
-                                                    {isRecentcollapsed && filteredArr?.map((blog) => (
-                                                        <div key={blog.id}>
-                                                            <Link
-                                                                to={`/${blog?.slug}`}
-                                                                className="text-decoration-none"
-                                                            >
-                                                                <div className="row">
-                                                                    <div className="col-4">
-                                                                        <div className="them-stori-mage">
-                                                                            <img
-                                                                                src={
-                                                                                    blog?.thumbnail_image
-                                                                                }
-                                                                                alt={
-                                                                                    blog?.alt_thumbnail_image
-                                                                                }
-                                                                            />
+                                                    {isRecentcollapsed &&
+                                                        filteredArr?.map(
+                                                            (blog) => (
+                                                                <div
+                                                                    key={
+                                                                        blog.id
+                                                                    }
+                                                                >
+                                                                    <Link
+                                                                        to={`/${blog?.slug}`}
+                                                                        className="text-decoration-none"
+                                                                    >
+                                                                        <div className="row">
+                                                                            <div className="col-4">
+                                                                                <div className="them-stori-mage">
+                                                                                    <img
+                                                                                        src={
+                                                                                            blog?.thumbnail_image
+                                                                                        }
+                                                                                        alt={
+                                                                                            blog?.alt_thumbnail_image
+                                                                                        }
+                                                                                    />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="col-8">
+                                                                                <div className="dev-span-section4-dev">
+                                                                                    <span className="read-more-span-text">
+                                                                                        {
+                                                                                            blog?.meta_description
+                                                                                        }
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div className="col-8">
-                                                                        <div className="dev-span-section4-dev">
-                                                                            <span className="read-more-span-text">
-                                                                                {
-                                                                                    blog?.meta_description
-                                                                                }
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
+                                                                    </Link>
+                                                                    <hr
+                                                                        style={{
+                                                                            marginBottom:
+                                                                                "5px",
+                                                                            marginTop:
+                                                                                "4px",
+                                                                            marginRight:
+                                                                                "5px",
+                                                                            marginLeft:
+                                                                                "2px",
+                                                                        }}
+                                                                    />
                                                                 </div>
-                                                            </Link>
-                                                            <hr
-                                                                style={{
-                                                                    marginBottom:
-                                                                        "5px",
-                                                                    marginTop:
-                                                                        "4px",
-                                                                    marginRight:
-                                                                        "5px",
-                                                                    marginLeft:
-                                                                        "2px",
-                                                                }}
-                                                            />
-                                                        </div>
-                                                    ))}
+                                                            )
+                                                        )}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div >
-                                            <div onClick={toggleCollapse} className="widget widget_categories categor-data-scrping">
+                                        <div>
+                                            <div
+                                                onClick={toggleCollapse}
+                                                className="widget widget_categories categor-data-scrping"
+                                            >
                                                 <div className="category-data-span-blogs">
                                                     <span>Categories</span>
                                                 </div>
                                                 <div className="fave-category-dropdown-button-blogs-data">
-                                                    <button> <i className="fa-solid fa-chevron-down" ></i></button>
+                                                    <button>
+                                                        {" "}
+                                                        <i className="fa-solid fa-chevron-down"></i>
+                                                    </button>
                                                 </div>
                                                 {/* <button onClick={toggleCollapse}  style={{ textAlign: 'left' }}> Categories <i className="fa-solid fa-chevron-down icon-data-dropdown" ></i></button> */}
-
                                             </div>
-                                            {isCollapsed && blogscategories.length > 0 && (
-                                                <div className="widget widget_categories">
-                                                    {/* <h4>Categories</h4> */}
-                                                    {RenderedCategories}
-                                                </div>
-                                            )}
+                                            {isCollapsed &&
+                                                blogscategories.length > 0 && (
+                                                    <div className="widget widget_categories">
+                                                        {/* <h4>Categories</h4> */}
+                                                        {RenderedCategories}
+                                                    </div>
+                                                )}
                                         </div>
 
                                         {/* {blogscategories?.length > 0 && (
@@ -570,7 +578,9 @@ const Blog = () => {
                                             <div
                                                 id="blog-content blogs-table-content-details"
                                                 dangerouslySetInnerHTML={{
-                                                    __html: blogdteails.content,
+                                                    __html: DOMPurify.sanitize(
+                                                        blogdteails.content
+                                                    ),
                                                 }}
                                             />
 

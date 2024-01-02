@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import Header from "@components/Header/Header";
 import { useNavigate } from "react-router-dom";
+import DOMPurify from "dompurify";
 
 const HeadereLinks = [
     { path: "/about_us", title: "About Us" },
@@ -48,9 +49,7 @@ const PolicyComponets = () => {
         PageTitle = "About Us";
     } else if (pageName === "what-we-do") {
         PageTitle = "What we Do";
-    }
-    
-    else {
+    } else {
         pageName = pageName;
     }
 
@@ -63,7 +62,7 @@ const PolicyComponets = () => {
                 setPageContent(responsePage);
                 console.print(pageContent, "page Content 2");
                 setPTagValue(responsePage?.data?.value);
-                setHtmlContent(responsePage?.data?.value);
+                setHtmlContent(DOMPurify.sanitize(responsePage?.data?.value));
                 console.print(pTagValue, "page Content 3");
                 setIsLoading(false);
             } catch (error) {
