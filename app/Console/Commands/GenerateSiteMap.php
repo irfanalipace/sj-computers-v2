@@ -55,7 +55,7 @@ class GenerateSiteMap extends Command
         $pagesSitemap = Sitemap::create();
         $blogsSitemap = Sitemap::create();
         $productsSitemap = Sitemap::create();
-        $categoriesSitemap = SitemapIndex::create();
+        $categoriesSitemap = Sitemap::create();
 
 
         $generalRoutes = [
@@ -202,41 +202,41 @@ class GenerateSiteMap extends Command
 
         foreach ($categoriesRoutes as $route) {
             $route = trim($route);
-            $url =  '/sitemap/category/' . $route.'.xml';
+            $url =  '/category/' . $route;
             $categoriesSitemap->add($url);
 
-            $categoryProductSitemap = Sitemap::create();
+//            $categoryProductSitemap = Sitemap::create();
 
-            $category = Category::where('slug', $route)->first();
+//            $category = Category::where('slug', $route)->first();
 
-            if(!empty($category)) {
-                $productIds = CategoryProduct::where('category_id',$category->id)->pluck('product_id');
-
-                if(!empty($productIds)){
-                    $productUrls = Product::whereIn('id',$productIds)
-                        ->pluck('url');
-
-
-                    foreach ($productUrls as $productUrl){
-
-                        $string = $productUrl;
-
-                        $removedString = str_replace('https://sjcomputers.us', '', $string);
-                        $categoryProductUrl = $removedString;
-                        $categoryProductSitemap->add($categoryProductUrl);
-
-                    }
-                    $xmlCategoryProductContent = $categoryProductSitemap->render();
-                    $publicPath = public_path('sitemap/category/'.$route.'.xml');
-                    File::makeDirectory(dirname($publicPath), 0777, true, true);
-                    file_put_contents($publicPath, $xmlCategoryProductContent);
-
-//                    $categoryProductSitemapPath =  public_path('sitemap/category/'.$route.'.xml');
-//                    $xmlContent = file_get_contents($categoryProductSitemapPath);
-//                    $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
-//                    file_put_contents($categoryProductSitemapPath, $xmlContent);
-                }
-            }
+//            if(!empty($category)) {
+//                $productIds = CategoryProduct::where('category_id',$category->id)->pluck('product_id');
+//
+//                if(!empty($productIds)){
+//                    $productUrls = Product::whereIn('id',$productIds)
+//                        ->pluck('url');
+//
+//
+//                    foreach ($productUrls as $productUrl){
+//
+//                        $string = $productUrl;
+//
+//                        $removedString = str_replace('https://sjcomputers.us', '', $string);
+//                        $categoryProductUrl = $removedString;
+//                        $categoryProductSitemap->add($categoryProductUrl);
+//
+//                    }
+//                    $xmlCategoryProductContent = $categoryProductSitemap->render();
+//                    $publicPath = public_path('sitemap/category/'.$route.'.xml');
+//                    File::makeDirectory(dirname($publicPath), 0777, true, true);
+//                    file_put_contents($publicPath, $xmlCategoryProductContent);
+//
+////                    $categoryProductSitemapPath =  public_path('sitemap/category/'.$route.'.xml');
+////                    $xmlContent = file_get_contents($categoryProductSitemapPath);
+////                    $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+////                    file_put_contents($categoryProductSitemapPath, $xmlContent);
+//                }
+//            }
 
         }
 
