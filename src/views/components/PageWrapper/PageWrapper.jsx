@@ -36,6 +36,7 @@ const PageWrapper = (props) => {
                 <Helmet>
                     <title>{meta.title}</title>
                     <meta name="description" content={meta.description} />
+                    <meta name="title" content={meta.title} />
                 </Helmet>
             )}
             <Helmet>

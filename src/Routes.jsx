@@ -112,7 +112,7 @@ const Router = () => {
             ),
         },
         {
-            path: "/products/:productId",
+            path: "/:title/dp/:productId",
             element: (
                 <PageWrapper>
                     <Product />

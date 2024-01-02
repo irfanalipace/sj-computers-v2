@@ -54,13 +54,15 @@ class GenerateSiteMap extends Command
         $generalSitemap = SitemapIndex::create();
         $pagesSitemap = Sitemap::create();
         $blogsSitemap = Sitemap::create();
-        $categoriesSitemap = SitemapIndex::create();
+        $productsSitemap = Sitemap::create();
+        $categoriesSitemap = Sitemap::create();
 
 
         $generalRoutes = [
             '/sitemap/pages.xml',
             '/sitemap/categories.xml',
             '/sitemap/blogs.xml',
+            '/sitemap/products.xml'
         ];
 
         foreach ($generalRoutes as $route) {
@@ -69,14 +71,14 @@ class GenerateSiteMap extends Command
 
         $xmlGeneralContent = $generalSitemap->render();
 
-        $publicPath = public_path('sitemap/index.xml');
+        $publicPath = public_path('sitemap_index.xml');
         File::makeDirectory(dirname($publicPath), 0777, true, true);
         file_put_contents($publicPath, $xmlGeneralContent);
 
-        $generalSitemapPath = public_path('sitemap/index.xml');
-        $xmlContent = file_get_contents($generalSitemapPath);
-        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
-        file_put_contents($generalSitemapPath, $xmlContent);
+//        $generalSitemapPath = public_path('sitemap_index.xml');
+//        $xmlContent = file_get_contents($generalSitemapPath);
+//        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+//        file_put_contents($generalSitemapPath, $xmlContent);
 
         $pagesRoutes = [
             '/',
@@ -86,11 +88,20 @@ class GenerateSiteMap extends Command
             '/term_services',
             '/return_refund_policy',
             '/privacy_policy',
-            '/refund-order'
+            '/refund-order',
+            '/blogs'
         ];
 
         foreach ($pagesRoutes as $route) {
-            $pagesSitemap->add($route); // Use the full URL with the base
+            $pagesSitemap->add($route);
+            if ($route == '/') {
+            $sitemapTags = $pagesSitemap->getTags();
+            foreach ($sitemapTags as $tag) {
+                $tag->setPriority(1);
+                $pagesSitemap->add($tag);
+            }
+        }
+
         }
 
         $xmlPagesContent = $pagesSitemap->render();
@@ -100,14 +111,17 @@ class GenerateSiteMap extends Command
         file_put_contents($publicPath, $xmlPagesContent);
 
 
-        $pageSitemapPath = public_path('sitemap/pages.xml');
-        $xmlContent = file_get_contents($pageSitemapPath);
-        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
-        file_put_contents($pageSitemapPath, $xmlContent);
+//        $pageSitemapPath =  public_path('sitemap/pages.xml');
+//        $xmlContent = file_get_contents($pageSitemapPath);
+//        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+//        file_put_contents($pageSitemapPath, $xmlContent);
 
 
+        /*
+         * blogs sitemap
+         */
         $blogs = Blog::select('slug')
-            ->where('status', Blog::PUBLISHED)
+            ->where('status',Blog::PUBLISHED)
             ->get();
 
         foreach ($blogs as $blog) {
@@ -122,10 +136,36 @@ class GenerateSiteMap extends Command
         file_put_contents($publicPath, $xmlBlogsContent);
 
 
-        $blogSitemapPath = public_path('sitemap/blogs.xml');
-        $xmlContent = file_get_contents($blogSitemapPath);
-        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
-        file_put_contents($blogSitemapPath, $xmlContent);
+//        $blogSitemapPath =  public_path('sitemap/blogs.xml');
+//        $xmlContent = file_get_contents($blogSitemapPath);
+//        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+//        file_put_contents($blogSitemapPath, $xmlContent);
+
+        /*
+         * Products sitemap
+         */
+        $products = Product::select('url')
+            ->where('status',true)
+            ->get();
+
+        foreach ($products as $product) {
+
+            $removedString = str_replace('https://sjcomputers.us', '', $product->url);
+
+            $productsSitemap->add($removedString);
+        }
+
+        $xmlProductsContent = $productsSitemap->render();
+
+        $publicPath = public_path('sitemap/products.xml');
+        File::makeDirectory(dirname($publicPath), 0777, true, true);
+        file_put_contents($publicPath, $xmlProductsContent);
+
+
+
+        /*
+         * categories sitemap
+         */
 
         $categoriesRoutes = [
             'bto',
@@ -150,6 +190,7 @@ class GenerateSiteMap extends Command
             'desktop',
             'tablet',
             'monitor',
+            'not_set',
             'business_computers',
             'sff',
             'usff',
@@ -161,37 +202,41 @@ class GenerateSiteMap extends Command
 
         foreach ($categoriesRoutes as $route) {
             $route = trim($route);
-            $url = '/sitemap/category/' . $route . '.xml';
+            $url =  '/category/' . $route;
             $categoriesSitemap->add($url);
 
-            $categoryProductSitemap = Sitemap::create();
+//            $categoryProductSitemap = Sitemap::create();
 
-            $category = Category::where('slug', $route)->first();
+//            $category = Category::where('slug', $route)->first();
 
-            if (!empty($category)) {
-                $productIds = CategoryProduct::where('category_id', $category->id)->pluck('product_id');
-
-                if (!empty($productIds)) {
-                    $productAsins = Product::whereIn('id', $productIds)
-                        ->pluck('asin');
-
-
-                    foreach ($productAsins as $productAsin) {
-                        $categoryProductUrl = '/products/' . $productAsin;
-                        $categoryProductSitemap->add($categoryProductUrl);
-
-                    }
-                    $xmlCategoryProductContent = $categoryProductSitemap->render();
-                    $publicPath = public_path('sitemap/category/' . $route . '.xml');
-                    File::makeDirectory(dirname($publicPath), 0777, true, true);
-                    file_put_contents($publicPath, $xmlCategoryProductContent);
-
-                    $categoryProductSitemapPath = public_path('sitemap/category/' . $route . '.xml');
-                    $xmlContent = file_get_contents($categoryProductSitemapPath);
-                    $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
-                    file_put_contents($categoryProductSitemapPath, $xmlContent);
-                }
-            }
+//            if(!empty($category)) {
+//                $productIds = CategoryProduct::where('category_id',$category->id)->pluck('product_id');
+//
+//                if(!empty($productIds)){
+//                    $productUrls = Product::whereIn('id',$productIds)
+//                        ->pluck('url');
+//
+//
+//                    foreach ($productUrls as $productUrl){
+//
+//                        $string = $productUrl;
+//
+//                        $removedString = str_replace('https://sjcomputers.us', '', $string);
+//                        $categoryProductUrl = $removedString;
+//                        $categoryProductSitemap->add($categoryProductUrl);
+//
+//                    }
+//                    $xmlCategoryProductContent = $categoryProductSitemap->render();
+//                    $publicPath = public_path('sitemap/category/'.$route.'.xml');
+//                    File::makeDirectory(dirname($publicPath), 0777, true, true);
+//                    file_put_contents($publicPath, $xmlCategoryProductContent);
+//
+////                    $categoryProductSitemapPath =  public_path('sitemap/category/'.$route.'.xml');
+////                    $xmlContent = file_get_contents($categoryProductSitemapPath);
+////                    $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+////                    file_put_contents($categoryProductSitemapPath, $xmlContent);
+//                }
+//            }
 
         }
 
@@ -205,11 +250,11 @@ class GenerateSiteMap extends Command
         File::makeDirectory(dirname($publicPath), 0777, true, true);
         file_put_contents($publicPath, $xmlCategoriesContent);
 
-        $categorySitemapPath = public_path('sitemap/categories.xml');
-        $xmlContent = file_get_contents($categorySitemapPath);
-        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
 
-        file_put_contents($categorySitemapPath, $xmlContent);
+//        $categorySitemapPath =  public_path('sitemap/categories.xml');
+//        $xmlContent = file_get_contents($categorySitemapPath);
+//        $xmlContent = str_replace(' xmlns:xhtml="http://www.w3.org/1999/xhtml"', '', $xmlContent);
+//        file_put_contents($categorySitemapPath, $xmlContent);
 
     }
 }

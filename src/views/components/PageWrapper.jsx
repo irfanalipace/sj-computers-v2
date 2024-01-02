@@ -37,6 +37,7 @@ const PageWrapper = (props) => {
                     <>
                         <title>{meta.title}</title>
                         <meta name="description" content={meta.description} />
+                        <meta name="title" content={meta.title} />
                     </>
                 )}
                 <link rel="canonical" href={location.url} />

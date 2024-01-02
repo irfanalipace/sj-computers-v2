@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getShippingDetails } from "@store/orders/ordersThunk";
@@ -27,7 +27,7 @@ const AppWrapper = ({ children }) => {
     const cartItems = useSelector((state) => state.cart.cart);
     const cartDetails = getCartDetails();
     const state = useSelector((state) => state.states.currentState);
-    const [isMounted, setIsMounted] = useState(false);
+    const isMounted = useRef(false);
     let timer = null;
     const timeToTimeout = 15 * 60000; // 15 minutes
     useEffect(() => {
@@ -52,11 +52,13 @@ const AppWrapper = ({ children }) => {
     }, [isAuthenticated]);
 
     useEffect(() => {
-        if (isMounted)
+        console.log("1111", isMounted.current, state);
+        if (isMounted.current && state)
+            // fetch esimated delivery dates if initial render has happened and no state is selected
             setTimeout(() => {
                 dispatch(getEstimatedDelivery(state?.id));
             }, 3000); // giving timeout to increase initial page load speed
-    }, [state]);
+    }, [state?.id]);
 
     // useEffect(() => {
     //     if (isAuthenticated && cartItems?.length > 0) {
@@ -91,11 +93,12 @@ const AppWrapper = ({ children }) => {
         timer = setTimeout(() => {
             dispatch(fetchCategory());
             dispatch(fetchBrands());
-        }, 3000); // giving timeout to increase initial page load speed
+        }, 3000); // giving timeout to increase initial page load speed by reducing requests to the server
         if (!isAuthenticated) {
             dispatch(syncGuestUserCart(cartDetails));
         }
-        setIsMounted(true);
+        dispatch(getEstimatedDelivery(state?.id));
+        isMounted.current = true;
     }, []);
 
     return <div>{children}</div>;

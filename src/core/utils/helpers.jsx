@@ -103,3 +103,18 @@ export function convertDateToLongFormat(inputDate) {
         return "";
     }
 }
+
+export function removeProtocolAndBaseUrl(url) {
+    // Use a regular expression to match the protocol and base URL
+    var match = url.match(/^https?:\/\/[^\/]+/i);
+
+    // If a match is found, remove it from the original URL
+    if (match) {
+        var baseUrl = match[0];
+        var urlWithoutProtocolAndBaseUrl = url.replace(baseUrl, "");
+        return urlWithoutProtocolAndBaseUrl;
+    }
+
+    // If no match is found, return the original URL
+    return url;
+}

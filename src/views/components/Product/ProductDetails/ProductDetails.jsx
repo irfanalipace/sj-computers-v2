@@ -1,31 +1,21 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 
 import { snakeCaseToPrettyText } from "@utils/helpers";
 
-import { DilveryBox } from "./DilveryBox/DilveryBox";
-
 import "./ProductDetail.css";
 
+let acceptedKeys = [
+    "brand",
+    "cpu_model",
+    "hard_disk",
+    "operating_system",
+    "ram_memory",
+];
+
 const ProductDetails = ({ product }) => {
-    const brands = useSelector((state) => state.brands.brands);
-    const [productBrand, setProductBrand] = useState(null);
     const [description, setDescription] = useState([]);
     const [productDetails, setProductDetails] = useState([]);
-
-    let acceptedKeys = [
-        "brand",
-        "cpu_model",
-        "hard_disk",
-        "operating_system",
-        "ram_memory",
-    ];
-    useEffect(() => {
-        let brand = brands.filter((brand) => brand?.id == product?.id);
-        setProductBrand(brand[0]);
-    }, [brands]);
 
     useEffect(() => {
         productDetailsArray();

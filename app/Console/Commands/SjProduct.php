@@ -8,12 +8,15 @@ use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\ProductInfo;
 use App\Models\SjAmazonIntegration;
+use App\Traits\ProductTrait;
 use Illuminate\Console\Command;
 use App\Models\Brand;
 use function PHPUnit\Framework\stringStartsWith;
 
 class SjProduct extends Command
 {
+
+    use ProductTrait;
 
     protected $productCount = 0;
 
@@ -106,6 +109,8 @@ class SjProduct extends Command
             $this->setProductInfo($product);
 
             $this->setProductCategory($product);
+
+            $this->setProductUrl($product->id);
 
             echo "product is added" . $key . "\n";
         }

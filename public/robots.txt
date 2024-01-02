@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /admin
 
-Sitemap: https://sjcomputers.us/sitemap/index.xml
+Sitemap: https://sjcomputers.us/sitemap_index.xml

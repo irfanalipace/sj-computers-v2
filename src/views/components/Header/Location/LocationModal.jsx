@@ -48,7 +48,7 @@ function UpdateStateModal({ isOpen = false, handleClose }) {
             } else {
                 window.localStorage.setItem("tempState", JSON.stringify(state));
                 dispatch(UPDATE_STATE(state));
-                dispatch(getEstimatedDelivery(state?.id));
+                // dispatch(getEstimatedDelivery(state?.id));
                 toast.success("State Updated Successfully");
                 handleClose();
             }

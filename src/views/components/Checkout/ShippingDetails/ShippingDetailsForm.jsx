@@ -43,7 +43,14 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
         },
         validate: (values) => {
             const errors = {};
-            if (!values.full_name) errors.full_name = "( Required )";
+            const full_name_regex = /^[A-Za-z ]+$/;
+            const full_name = values.full_name;
+            if (!full_name) {
+                errors.full_name = "( Required )";
+            } else if (!full_name_regex.test(full_name)) {
+                errors.full_name =
+                    "( Name must not contain numbers or special characters )";
+            }
             if (!values.email) {
                 errors.email = "( Required )";
             } else if (values.email) {
@@ -70,7 +77,10 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
             return errors;
         },
         onSubmit: (values) => {
-            submitShippingDetails(values);
+            submitShippingDetails({
+                ...values,
+                full_name: values.full_name.trim(),
+            });
         },
     });
     const handlePermanentAddresses = (e) => {

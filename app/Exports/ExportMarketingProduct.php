@@ -17,7 +17,7 @@ class ExportMarketingProduct implements FromCollection, WithHeadings, ShouldAuto
      */
     public function collection()
     {
-        $products =  Product::with('brand')->select("created_at","quantity","id", "name", "description", "price", "asin", "image", "brand_id")
+        $products =  Product::with('brand')->select("url","created_at","quantity","id", "name", "description", "price", "asin", "image", "brand_id")
             ->get();
 
         $data = [];
@@ -42,7 +42,7 @@ class ExportMarketingProduct implements FromCollection, WithHeadings, ShouldAuto
             $dummyData['availability']    =   "In stock";
             $dummyData['availability_date']    =   $product->created_at->format('Y-d-m')."T".$product->created_at->format('H:m')."+0100";
             $dummyData['quantity']    =   $product->quantity;
-            $dummyData['link']    =   "https://sjcomputers.us/products/".$product->asin;
+            $dummyData['link']    =   $product->url;
             $dummyData['image_link']    =   $product->image[0] ?? '';
             $dummyData['additional_image_link']    =   implode(',', $product->image);
             $dummyData['google_product_category']    =  "Electronics > Computers > ".$this->getType($product->id);
