@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getShippingDetails } from "@store/orders/ordersThunk";
@@ -27,7 +27,7 @@ const AppWrapper = ({ children }) => {
     const cartItems = useSelector((state) => state.cart.cart);
     const cartDetails = getCartDetails();
     const state = useSelector((state) => state.states.currentState);
-    const [isMounted, setIsMounted] = useState(false);
+    const isMounted = useRef(false);
     let timer = null;
     const timeToTimeout = 15 * 60000; // 15 minutes
     useEffect(() => {
@@ -52,11 +52,10 @@ const AppWrapper = ({ children }) => {
     }, [isAuthenticated]);
 
     useEffect(() => {
-        // if (isMounted)
         setTimeout(() => {
             dispatch(getEstimatedDelivery(state?.id));
         }, 3000); // giving timeout to increase initial page load speed
-    }, [state]);
+    }, []);
 
     // useEffect(() => {
     //     if (isAuthenticated && cartItems?.length > 0) {
@@ -95,7 +94,7 @@ const AppWrapper = ({ children }) => {
         if (!isAuthenticated) {
             dispatch(syncGuestUserCart(cartDetails));
         }
-        setIsMounted(true);
+        isMounted.current = true;
     }, []);
 
     return <div>{children}</div>;
