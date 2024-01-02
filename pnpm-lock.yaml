@@ -74,6 +74,9 @@ dependencies:
   css-loader:
     specifier: ^6.7.3
     version: 6.7.3(webpack@5.77.0)
+  dompurify:
+    specifier: ^3.0.6
+    version: 3.0.6
   file-loader:
     specifier: ^6.2.0
     version: 6.2.0(webpack@5.77.0)
@@ -4269,6 +4272,10 @@ packages:
     engines: {node: '>= 4'}
     dependencies:
       domelementtype: 2.3.0
+    dev: false
+
+  /dompurify@3.0.6:
+    resolution: {integrity: sha512-ilkD8YEnnGh1zJ240uJsW7AzE+2qpbOUYjacomn3AvJ6J4JhKGSZ2nh4wUIXPZrEPppaCLx5jFe8T89Rk8tQ7w==}
     dev: false
 
   /domutils@1.7.0:
