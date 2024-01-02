@@ -40,7 +40,7 @@ const ProductSlider = ({ products }) => {
             className="recommendation-slider"
         >
             {products?.map((product) => (
-                <SwiperSlide key={product.id}>
+                <SwiperSlide key={"ps-" + product.id}>
                     <div className="px-1">
                         <Product product={product} />
                     </div>

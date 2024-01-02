@@ -52,8 +52,9 @@ const AppWrapper = ({ children }) => {
     }, [isAuthenticated]);
 
     useEffect(() => {
+        console.log("1111", isMounted.current, state);
         if (isMounted.current && state)
-            // fetch esimated delivery dates if component is successfully mounted and no state is selected
+            // fetch esimated delivery dates if initial render has happened and no state is selected
             setTimeout(() => {
                 dispatch(getEstimatedDelivery(state?.id));
             }, 3000); // giving timeout to increase initial page load speed
@@ -92,7 +93,7 @@ const AppWrapper = ({ children }) => {
         timer = setTimeout(() => {
             dispatch(fetchCategory());
             dispatch(fetchBrands());
-        }, 3000); // giving timeout to increase initial page load speed
+        }, 3000); // giving timeout to increase initial page load speed by reducing requests to the server
         if (!isAuthenticated) {
             dispatch(syncGuestUserCart(cartDetails));
         }
