@@ -118,6 +118,7 @@ export const CheckOutCard = ({ product }) => {
                                 Shipped by SJ Computers
                             </span>
                         </div>{" "}
+                        {/*
                         <div className="card-dev-section-paragrap-product">
                             <span className="dilvery-text-paragraph-card">
                                 or{" "}
@@ -133,7 +134,8 @@ export const CheckOutCard = ({ product }) => {
                                 </span>{" "}
                                 (Tentative)
                             </span>
-                        </div>{" "}
+                        </div>
+                           */}
                     </>
                 )}
 
