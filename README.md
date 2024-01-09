@@ -1,36 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# About Project
 
-## About Project
+## Backend Setup
 
-To run the project run following commands
+### Installation
 
--   php artisan key:generate
--   composer install (delete composer lock if get error of version in lock file).
+1. Generate Laravel application key:
 
-[//]: # '- php artisan vendor:publish --provider="Laravel\\Fortify\FortifyServiceProvider"'
+    ```bash
+    php artisan key:generate
+    ```
 
--   php artisan migrate:fresh --seed
--   php artisan passport:install
+2. Install dependencies using Composer:
 
-[//]: # "- composer require tcg/voyager"
+    ```bash
+    composer install
+    # If you encounter version issues in the lock file, delete the composer.lock file and run again.
+    ```
 
--   php artisan voyager:install
+3. Publish Fortify assets:
 
-[//]: # "- php artisan voyager:install --with-dummy"
+    ```bash
+    # Uncomment the following line if needed
+    # php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
+    ```
 
--   php artisan voyager:admin admin@admin.com
--   php artisan db:seed --class=CategoryProductSeeder
--   php artisan db:seed --class=SystemPagesSeeder
--   php artisan serve
+4. Migrate the database and seed with data:
 
-# After Environment change
+    ```bash
+    php artisan migrate:fresh --seed
+    php artisan passport:install
+    ```
 
--   php artisan config:clear
--   php artisan config:cache
--   php artisan optimize:clear
+5. Install Voyager admin:
 
-For Frontend:
+    ```bash
+    php artisan voyager:install
+    # Optionally, with dummy data:
+    # php artisan voyager:install --with-dummy
+    ```
 
--   npm install --force
--   npm start (to start the development server)
--   npm build (creates production build)
+6. Create a Voyager admin user:
+
+    ```bash
+    php artisan voyager:admin admin@admin.com
+    ```
+
+7. Seed additional data:
+
+    ```bash
+    php artisan db:seed --class=CategoryProductSeeder
+    php artisan db:seed --class=SystemPagesSeeder
+    ```
+
+8. Start the Laravel development server:
+
+    ```bash
+    php artisan serve
+    ```
+
+9. Environment Changes
+
+    After making changes to the environment, run the following commands:
+
+    ```bash
+    php artisan config:clear
+    php artisan config:cache
+    php artisan optimize:clear
+    ```
+
+## Frontend Setup
+
+### Prerequisites
+
+Ensure you have the following tools installed:
+
+-   [Node.js](https://nodejs.org/) v18 or greater - JavaScript runtime
+-   [PNPM](https://github.com/pnpm/pnpm) v8 or greater - Fast, disk space efficient package manager
+
+### Installation
+
+1. Run Following command to install pnpm if not already installed:
+
+    ```bash
+    npm install -g pnpm
+    ```
+
+2. Install project dependencies:
+
+    ```bash
+    pnpm install --frozen-lock
+    ```
+
+3. Run Following command to start development server:
+
+    ```bash
+    pnpm run dev
+    ```
+
+4. Run Following command to create production build :
+    ```bash
+    pnpm run build
+    ```
+
+Feel free to customize the commands according to your project requirements.
