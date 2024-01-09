@@ -110,8 +110,9 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                     <div className="col-md-10 item-detail-col">
                                                         <Link
                                                             to={
-                                                                item?.product
-                                                                    ?.url
+                                                                new URL(
+                                                                    item?.product?.url
+                                                                ).pathname
                                                             }
                                                             className="text-decoration-none pb-2 d-block"
                                                         >

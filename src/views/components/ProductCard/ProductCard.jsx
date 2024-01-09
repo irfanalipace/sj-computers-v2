@@ -28,7 +28,7 @@ const Product = ({ product, inGrid }) => {
         </div> */}
 
                 <div className="dev-section-button-dev-card">
-                    <Link to={`${product?.url}`}>
+                    <Link to={`${new URL(product?.url).pathname}`}>
                         <div className="product-name product-cart-name-mobile-screen">
                             {product.name}
                         </div>
@@ -78,7 +78,10 @@ const Product = ({ product, inGrid }) => {
                     </div>
                 </div>
 
-                <Link to={`${product?.url}`} style={{ textDecoration: "none" }}>
+                <Link
+                    to={`${new URL(product?.url).pathname}`}
+                    style={{ textDecoration: "none" }}
+                >
                     <div className="d-none d-sm-block product-rating">
                         <StarRatings
                             rating={product.rating}
@@ -133,7 +136,7 @@ const Product = ({ product, inGrid }) => {
 
     return (
         <div className={` product   ${inGrid && "product-grid"}`}>
-            <Link to={`${product?.url}`}>
+            <Link to={`${new URL(product?.url).pathname}`}>
                 <div
                     className={` ${
                         inGrid ? "product-image-grid" : ""

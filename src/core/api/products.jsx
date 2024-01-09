@@ -69,6 +69,8 @@ export function searchProductsApi(data) {
 }
 
 export function filterProductsApi(filter) {
+    // debugger;
+    filter.filter = filter?.filter?.map((fil) => JSON.stringify(fil));
     return new Promise((resolve, reject) => {
         ApiService.get(`/filter-products`, "", filter)
             .then((response) => {
