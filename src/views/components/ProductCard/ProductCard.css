@@ -169,6 +169,7 @@
 .product-delivery-charges {
     font-size: 12px;
     font-weight: 500;
+    line-height: 14.52px;
     color: #6f6f6f;
 }
 
@@ -188,7 +189,8 @@
         flex-grow: 0;
         border: 1px solid rgba(82, 172, 102, 0.4);
         border-bottom: none;
-    }.div-button-card-product {
+    }
+    .div-button-card-product {
         display: flex;
         justify-content: center;
         margin-bottom: 6px;
@@ -206,7 +208,8 @@
         border-radius: 0px 0px 5px 5px;
         /* padding-right: 3px; */
         /* padding-bottom: 10px; */
-    }.item-card-add-carditems-product-card {
+    }
+    .item-card-add-carditems-product-card {
         background: #28a343;
         color: white;
         margin-top: 14px;
@@ -332,7 +335,8 @@
         color: #ffffff;
         border: none;
         margin-top: 18px;
-    }.product {
+    }
+    .product {
         display: inherit;
         flex-direction: column;
         align-items: center;
@@ -358,10 +362,10 @@
         color: #333333;
     }
     .recommendation-container .swiper-button-next:after,
-.recommendation-container .swiper-button-prev:after {
-    position: absolute;
-    top: -32px
-}
+    .recommendation-container .swiper-button-prev:after {
+        position: absolute;
+        top: -32px;
+    }
 }
 
 /* Small Tablets (landscape phones, less than 768px) */
@@ -379,7 +383,6 @@
         max-width: 100%;
     }
 }
-
 
 /* X-Large devices (large desktops, less than 1400px) */
 @media (min-width: 576px) and (max-width: 1399.98px) {

@@ -190,7 +190,7 @@ const ProductDetails = ({ product }) => {
             <div className="col-md-12 list-style-margin">
                 <ul className="product-specs">
                     {productDetails.map((item, index) => (
-                        <>
+                        <div key={item.key}>
                             {item?.value && (
                                 <li
                                     key={`${item.key}-${index}`}
@@ -208,7 +208,7 @@ const ProductDetails = ({ product }) => {
                                     </div>
                                 </li>
                             )}
-                        </>
+                        </div>
                     ))}
                     <li className="row mx-0">
                         <div className="col-md-3 col-6">
