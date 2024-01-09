@@ -10,7 +10,7 @@ import AddCartComponents from "./AddCartComponents";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 import { removeProtocolAndBaseUrl } from "../../../core/utils/helpers";
 
-const Product = ({ product, inGrid }) => {
+const Product = ({ type = "", product, inGrid }) => {
     const [show, setShow] = useState(false);
 
     const orderEstimatedDelivery = useSelector(
@@ -128,6 +128,12 @@ const Product = ({ product, inGrid }) => {
                         {/* <i className="fa fa-truck"></i>{" "} */}
                         <FontAwesomeIcon icon={faTruck} />{" "}
                         {product.deliveryCharges}
+                    </div>
+                )}
+                {type === "recommended" && (
+                    <div className="product-delivery-charges mt-2 ms-2">
+                        <FontAwesomeIcon className="me-1" icon={faTruck} /> Free
+                        Shipping
                     </div>
                 )}
             </div>

@@ -33,7 +33,10 @@ export default function Recommendation({ products }) {
                         {isLoading || !products ? (
                             <LoaderComponent />
                         ) : (
-                            <ProductSlider products={products} />
+                            <ProductSlider
+                                type="recommended"
+                                products={products}
+                            />
                         )}
                     </div>
                 </div>
