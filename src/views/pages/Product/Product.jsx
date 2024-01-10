@@ -11,6 +11,8 @@ import Recommendation from "@components/Recommendation/Recommendation";
 import NotFound from "../NotFound/NotFound";
 
 import "./Product.css";
+import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
+import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
 
 export default function Product() {
     const [isLoading, setIsLoading] = useState(true);
@@ -68,6 +70,8 @@ export default function Product() {
                         ) : (
                             <ProductComponent />
                         )}
+                        <RefurbishedSection />
+                        <ProductDescription />
                         <Recommendation products={products} />
                     </div>
                 </div>

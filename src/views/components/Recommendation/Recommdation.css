@@ -1,6 +1,7 @@
 .recommendation-container {
     background-color: white;
     padding: 40px 0;
+    padding-top: 0;  
 }
 
 .recommendation-inner {
