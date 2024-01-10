@@ -111,7 +111,10 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                         <Link
                                                             to={
                                                                 new URL(
-                                                                    item?.product?.url
+                                                                    item
+                                                                        ?.product
+                                                                        ?.url ||
+                                                                        location.href
                                                                 ).pathname
                                                             }
                                                             className="text-decoration-none pb-2 d-block"
