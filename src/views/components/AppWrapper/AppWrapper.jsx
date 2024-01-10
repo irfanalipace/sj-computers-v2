@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getShippingDetails } from "@store/orders/ordersThunk";
@@ -6,30 +6,38 @@ import { fetchBrands } from "@store/brands/brandsThunks";
 import { fetchCategory } from "@store/category/categoryThunks";
 import { CLEAR_CART } from "@store/cart/cartSlice";
 import {
-    addToLocalCart,
+    // addToLocalCart,
     syncCartItems,
-    setCartDetails,
+    // setCartDetails,
     syncGuestUserCart,
-    clearCart,
+    // clearCart,
 } from "@store/cart/cartThunks";
-import { updateState, currentState } from "@store/states/statesThunks";
 import { getEstimatedDelivery } from "@store/orders/ordersThunk";
+import { updateState, currentState } from "@store/states/statesThunks";
 import {
-    getCartItems,
+    // getCartItems,
     getCartDetails,
-    clearCartLocally,
+    // clearCartLocally,
 } from "@utils/cartHelpers";
-import { clearCartApi } from "../../../core/api/cart";
+import services from "../../../core/services/initServices";
+import { destroyToken } from "../../../core/services/authService";
+import { useNavigate } from "react-router-dom";
 
 const AppWrapper = ({ children }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const actionOn401 = () => {
+        navigate("/login");
+    };
+    services.init(actionOn401); //initialize all services
+
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const cartItems = useSelector((state) => state.cart.cart);
+    // const cartItems = useSelector((state) => state.cart.cart);
     const cartDetails = getCartDetails();
     const state = useSelector((state) => state.states.currentState);
     const isMounted = useRef(false);
     let timer = null;
-    const timeToTimeout = 15 * 60000; // 15 minutes
+    const timeoutDuration = 15 * 60000; // 15 minutes
     useEffect(() => {
         if (isAuthenticated) {
             dispatch(CLEAR_CART()); //clear store cart items because all cart items are again fetched from backend to sync with localCart
@@ -86,7 +94,7 @@ const AppWrapper = ({ children }) => {
     //             clearCartLocally(); // clear cart from local storage
     //             dispatch(CLEAR_CART()); // clear cart from redux
     //         } catch (error) {}
-    //     }, timeToTimeout);
+    //     }, timeoutDuration);
     // };
 
     useEffect(() => {
@@ -101,7 +109,7 @@ const AppWrapper = ({ children }) => {
         isMounted.current = true;
     }, []);
 
-    return <div>{children}</div>;
+    return children;
 };
 
 export default AppWrapper;

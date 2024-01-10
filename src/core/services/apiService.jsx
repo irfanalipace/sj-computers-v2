@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { destroyToken } from "@services/authService";
+import { getToken } from "./authService";
 
 /**
  * Service to call HTTP request via Axios
@@ -10,7 +11,9 @@ const ACCEPTED_ERROR_CODES = [400, 401, 403, 404, 422, 429];
 
 const ApiService = {
     instance: null,
-    init() {
+    logout: null,
+    init(logout) {
+        this.logout = logout;
         if (!this.instance) {
             this.instance = axios.create({ withCredentials: true });
             this.instance.defaults.baseURL =
@@ -33,7 +36,9 @@ const ApiService = {
      */
 
     setAuthorization(token) {
-        this.instance.defaults.headers.Authorization = "Bearer " + token;
+        this.instance.defaults.headers.Authorization = `Bearer ${
+            token || getToken()
+        }`;
     },
 
     /**
@@ -61,6 +66,7 @@ const ApiService = {
      */
 
     get(resource, slug = "", params = {}, baseURL) {
+        this.setAuthorization();
         return new Promise((resolve, reject) => {
             const url = `${resource}${slug ? `/${slug}` : ""}`;
             if (baseURL) this.setDefaultBaseUrl(baseURL);
@@ -72,7 +78,10 @@ const ApiService = {
                 .catch((error) => {
                     if (error?.response?.status === 401) {
                         destroyToken();
-                        // window.location.reload();
+                        toast.error(
+                            "User not authorized. Please login to perform this action"
+                        );
+                        typeof this.logout === "function" && this.logout();
                     } else if (
                         !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
                     ) {
@@ -92,7 +101,8 @@ const ApiService = {
      * @returns {*}
      */
 
-    post(resource, params = {}, baseURL) {
+    post(resource, params = {}, baseURL, token) {
+        this.setAuthorization(token);
         return new Promise((resolve, reject) => {
             if (baseURL) this.setDefaultBaseUrl(baseURL);
 
@@ -105,7 +115,10 @@ const ApiService = {
                     console.print("error status: ", error?.response?.status);
                     if (error?.response?.status === 401) {
                         destroyToken();
-                        // window.location.reload();
+                        toast.error(
+                            "User not authorized. Please login to perform this action"
+                        );
+                        typeof this.logout === "function" && this.logout();
                     } else if (
                         !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
                     ) {
@@ -126,6 +139,7 @@ const ApiService = {
      */
 
     put(resource, params) {
+        this.setAuthorization();
         return this.instance
             .put(`${resource}`, params)
             .then((res) => {
@@ -134,7 +148,10 @@ const ApiService = {
             .catch((error, status) => {
                 if (error?.response?.status === 401) {
                     destroyToken();
-                    // window.location.reload();
+                    toast.error(
+                        "User not authorized. Please login to perform this action"
+                    );
+                    typeof this.logout === "function" && this.logout();
                 } else if (
                     !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
                 ) {
@@ -152,6 +169,7 @@ const ApiService = {
      */
 
     delete(resource) {
+        this.setAuthorization();
         return this.instance
             .delete(resource)
             .then((res) => {
@@ -160,7 +178,10 @@ const ApiService = {
             .catch((error, status) => {
                 if (error?.response?.status === 401) {
                     destroyToken();
-                    // window.location.reload();
+                    typeof this.logout === "function" && this.logout();
+                    toast.error(
+                        "User not authorized. Please login to perform this action"
+                    );
                 } else if (
                     !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
                 ) {

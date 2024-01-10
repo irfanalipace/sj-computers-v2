@@ -29,7 +29,7 @@ function App() {
     }, []);
 
     return (
-        <AppWrapper>
+        <div>
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -44,23 +44,24 @@ function App() {
                 className={"notification-toast"}
             />
             <BrowserRouter>
-                {/* scroller set for scroll bottom to top  */}
-                <ScrollToTop />
-                <Suspense>
-                    <Header />
-                </Suspense>
-                <div className="inner-body">
-                    <Router />
-                </div>
-                <Suspense>
-                    <Footer />
-                </Suspense>
+                <AppWrapper>
+                    <ScrollToTop />
+                    <Suspense>
+                        <Header />
+                    </Suspense>
+                    <div className="inner-body">
+                        <Router />
+                    </div>
+                    <Suspense>
+                        <Footer />
+                    </Suspense>
+                </AppWrapper>
             </BrowserRouter>
             {tawkComponent}
             {/* <Suspense>
                 <TawkTo />
             </Suspense> */}
-        </AppWrapper>
+        </div>
     );
 }
 
