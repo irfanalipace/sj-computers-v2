@@ -56,6 +56,8 @@ export default function Product() {
                 <div className="col-12 col-md-3 p-0 m-0">
                     <CheckOutCard product={{ ...product }} />
                 </div>
+                <RefurbishedSection />
+                <ProductDescription product={product} />
             </div>
         );
     };
@@ -70,8 +72,6 @@ export default function Product() {
                         ) : (
                             <ProductComponent />
                         )}
-                        <RefurbishedSection />
-                        <ProductDescription />
                         <Recommendation products={products} />
                     </div>
                 </div>
