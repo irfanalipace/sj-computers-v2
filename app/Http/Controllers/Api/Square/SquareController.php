@@ -168,7 +168,7 @@ class SquareController extends BaseController
         } catch (Exception $e) {
             DB::rollBack();
             // send error to admin 
-            SendErrorMail::dispatch($this->user,$order);
+            SendErrorMail::dispatch($this->user,$orderData,$order);
             return response()->json(['code' => 400, 'message' => "something went wrong." . $e]);
         }
     }
