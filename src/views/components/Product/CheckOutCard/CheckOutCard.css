@@ -1,13 +1,15 @@
 .card-section-right {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
     padding: 20px;
     background-color: white;
-    margin-top: 50px;
     max-width: 100%;
     margin-bottom: 12px;
+    margin-left: 120px;
     position: relative;
+    border-radius: 8px;
+    border: 1px solid #d5d9d9;
 }
+
 .cart-text {
     font-weight: 400;
     font-size: 16px;
@@ -33,6 +35,41 @@
     border-color: #318243;
     padding-left: 0;
 }
+.check-box-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.check-box-container input {
+    margin-top: 4px;
+    margin-right: 10px;
+}
+.protection-plan {
+    color: #0f1111;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px; /* 142.857% */
+}
+.check-box-container label {
+    color: #007185;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+.dollar-label {
+    color: red;
+    margin-top: 4px;
+}
+.details-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 7px;
+}
+
 .color-card {
     color: #318243;
     font-size: 14px;
@@ -57,13 +94,40 @@
     bottom: 0%;
     background: #318243;
     border-radius: 20.5px;
-
+    /* display: flex;
+    justify-content: center; */
+    /* align-items: center; */
+    max-width: 100%;
+    width: 180px;
+    height: 40px;
+}
+.in-stock {
+    color: #007600;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px; /* 133.333% */
+}
+.not-in-stock {
+    color: red;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+}
+.deliver-to {
+    color: #007185;
+    font-size: 12px;
+}
+.buy-now-button {
+    color: white;
+    bottom: 0%;
+    background: #00305e;
+    border-radius: 20.5px;
     display: flex;
     justify-content: center;
     align-items: center;
     max-width: 100%;
     width: 180px;
-    height: 54px;
+    height: 40px;
 }
 .button2 {
     color: white;
@@ -78,11 +142,11 @@
     align-items: center;
 }
 .button-cart-sell {
-    margin: 15px;
-    display: flex;
-    justify-content: center;
+    margin: 15px -20px;
+    /* display: flex;
+    justify-content: center; */
     /* align-items: center; */
-    background-origin: green;
+    /* background-origin: green; */
     color: black;
     /* width: 294px; */
 }

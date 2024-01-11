@@ -64,9 +64,13 @@ export const CheckOutCard = ({ product }) => {
     return (
         <div>
             <div className="card-section-right">
+                <div>
+                    <h6 style={{ fontWeight: "700" }}>Excellent Condition</h6>
+                    <h6 style={{ fontWeight: "700" }}>(Refurbished)</h6>
+                </div>
                 <div className="row card-price-section-card-product">
                     <div className="col-md-12 color-text-cart">
-                        <span className="text-danger">$</span>
+                        <sup>$</sup>
                         {product?.price?.toString().split(".")[0]}
                         <sup>{product?.price?.toString().split(".")[1]}</sup>
                     </div>
@@ -105,8 +109,15 @@ export const CheckOutCard = ({ product }) => {
                     <>
                         <div className="card-dev-section-paragrap-product">
                             <span className="dilvery-text-paragraph-card">
-                                <button className="text-decoration-none">
-                                    Free delivery
+                                <button style={{ color: "#007185" }}>
+                                    Free Returns
+                                </button>{" "}
+                            </span>
+                        </div>{" "}
+                        <div className="card-dev-section-paragrap-product">
+                            <span className="dilvery-text-paragraph-card">
+                                <button style={{ color: "#007185" }}>
+                                    Free Delivery
                                 </button>{" "}
                                 <span style={{ fontWeight: "bold" }}>
                                     {
@@ -141,10 +152,14 @@ export const CheckOutCard = ({ product }) => {
 
                 <div className="color-card-dev">
                     <button
-                        className="select-location-btn mb-3"
+                        className="select-location-btn deliver-to mb-2"
                         onClick={handleShow}
                     >
-                        <img src={imges1} /> Deliver to
+                        <img
+                            src={imges1}
+                            style={{ width: "10.5px", height: "14px" }}
+                        />
+                        &ensp;Deliver to
                         {currentState?.name
                             ? " " + currentState?.name
                             : " Location"}
@@ -165,9 +180,12 @@ export const CheckOutCard = ({ product }) => {
                                 <div className="instock-dev-card-product-section-with-color-card">
                                     <div className="in-stock-area-lable">
                                         {product?.quantity > 0 ? (
-                                            <small> In Stock</small>
+                                            <small className="in-stock">
+                                                {" "}
+                                                In Stock
+                                            </small>
                                         ) : (
-                                            <small className="text-danger">
+                                            <small className="not-in-stock ">
                                                 {" "}
                                                 Out of Stock
                                             </small>
@@ -204,7 +222,8 @@ export const CheckOutCard = ({ product }) => {
                                 <AddCartComponents
                                     product={product}
                                     quantity={quantity}
-                                    className=" button1 button-text-button"
+                                    className="button1 button-text-button"
+                                    classNameforBuyNow="buy-now-button button-text-button"
                                     disabled={
                                         product?.quantity < 1 ? true : false
                                     }
@@ -222,9 +241,12 @@ export const CheckOutCard = ({ product }) => {
                         </>
                     )}
 
-                    <div className="row ship-card-details-card-payment-method-checkout-card">
+                    <div className="details-container">
                         <div className="col-xl-7 col-6">
-                            <span className="color-card-text-paragrap-payment">
+                            <span
+                                className="color-card-text-paragrap-payment"
+                                style={{ color: "#5F5E5E" }}
+                            >
                                 Payment
                             </span>
                         </div>
@@ -233,6 +255,7 @@ export const CheckOutCard = ({ product }) => {
                                 <Link
                                     href="#"
                                     className="text-decoration-none secure-payment-method"
+                                    style={{ color: "#007185" }}
                                 >
                                     Secure transaction
                                 </Link>
@@ -262,9 +285,12 @@ export const CheckOutCard = ({ product }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="row ship-card-details-card-payment-method-checkout-card">
+                    <div className="details-container">
                         <div className="col-xl-7 col-6">
-                            <span className="color-card-text-paragrap-payment ships-form-span-tag">
+                            <span
+                                className="color-card-text-paragrap-payment ships-form-span-tag"
+                                style={{ color: "#5F5E5E" }}
+                            >
                                 Ships Form
                             </span>
                         </div>
@@ -274,16 +300,22 @@ export const CheckOutCard = ({ product }) => {
                             </span>
                         </div>
                     </div>
-                    <div className="row ">
+                    <div className="details-container">
                         <div className="col-xl-7 col-6">
-                            <span className="color-card-text-paragrap-payment return-from-span-tag-checkout">
+                            <span
+                                className="color-card-text-paragrap-payment return-from-span-tag-checkout"
+                                style={{ color: "#5F5E5E" }}
+                            >
                                 Return
                             </span>
                         </div>
 
                         <div className="col-xl-5 col-6">
                             <div className="hover-box">
-                                <Link className="text-decoration-none secure-payment-method ">
+                                <Link
+                                    className="text-decoration-none secure-payment-method "
+                                    style={{ color: "#007185" }}
+                                >
                                     Eligible for returns<br></br>
                                     refund or <br></br>
                                     replacement wi...
@@ -325,13 +357,43 @@ export const CheckOutCard = ({ product }) => {
                 <Link
                     to={"/term_services"}
                     style={{
-                        marginTop: "12px",
-                        fontSize: "11px",
+                        color: "#007185",
+                        fontSize: "14px",
+                        fontWeight: "400",
                         textDecoration: "none",
                     }}
                 >
                     Details
                 </Link>
+                <hr></hr>
+                <div className="protection-plan">
+                    Add a Protection Plan :
+                    <div className="check-box-container">
+                        <input type="checkbox" id="protectionPlanCheckbox" />
+                        <label for="protectionPlanCheckbox">
+                            3-Year Protection for{" "}
+                        </label>
+                        <div className="dollar-label">&nbsp;$23.99</div>
+                    </div>
+                    <div className="check-box-container">
+                        <input type="checkbox" id="protectionPlanCheckbox1" />
+                        <label for="protectionPlanCheckbox1">
+                            4-Year Protection for
+                        </label>
+                        <div className="dollar-label">&nbsp;$32.99</div>
+                    </div>
+                    <div className="check-box-container">
+                        <input type="checkbox" id="protectionPlanCheckbox2" />
+                        <label for="protectionPlanCheckbox2">
+                            Tech Unlimited – Protect Eligible Past and Future
+                            Purchases with 1 Plan (Renews Monthly Until
+                            Cancelled) for
+                            <div className="dollar-label">
+                                &nbsp;$16.99/month
+                            </div>
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
     );

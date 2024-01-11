@@ -6,7 +6,13 @@ import { useSelector, useDispatch } from "react-redux";
 import Button from "@common/Button/Button";
 import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
 import "./ProductCard.css";
-const AddCartComponents = ({ product, className, quantity = 1, ...rest }) => {
+const AddCartComponents = ({
+    product,
+    className,
+    classNameforBuyNow,
+    quantity = 1,
+    ...rest
+}) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cart = useSelector((state) => state.cart.cart);
     const details = useSelector((state) => state.cart.details);
@@ -61,14 +67,25 @@ const AddCartComponents = ({ product, className, quantity = 1, ...rest }) => {
                     Item Already in Cart
                 </Button>
             ) : (
-                <Button
-                    onClick={cartClickHandler}
-                    isLoading={productAddingToCard}
-                    className={className}
-                    {...rest}
-                >
-                    Add to Cart
-                </Button>
+                <>
+                    <Button
+                        onClick={cartClickHandler}
+                        isLoading={productAddingToCard}
+                        className={className}
+                        style={{ marginBottom: "10px" }}
+                        {...rest}
+                    >
+                        Add to Cart
+                    </Button>
+                    <Button
+                        onClick={cartClickHandler}
+                        isLoading={productAddingToCard}
+                        className={classNameforBuyNow}
+                        {...rest}
+                    >
+                        Buy Now
+                    </Button>
+                </>
             )}
         </div>
     );
