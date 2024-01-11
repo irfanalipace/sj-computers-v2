@@ -19,9 +19,7 @@ class GenerateInvoiceJob implements ShouldQueue
      *
      * @return void
      */
-    private $user;
-    private $cartData;
-    private $order;
+    private $user, $cartData,$order;
     public function __construct($user, $cartData, $order)
     {
         $this->cartData = $cartData;
