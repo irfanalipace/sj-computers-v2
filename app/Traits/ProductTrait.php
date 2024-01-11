@@ -7,7 +7,7 @@ trait ProductTrait {
 
         public function setProductUrl($id){
             $product = Product::find($id);
-
+            (!$product) ?? false;
             $string = $product->name;
 
             $first_comma_pos = strpos($string, ',');
