@@ -6,6 +6,7 @@ use App\Classes\StatusEnum;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Square\CardRequest;
+use App\Jobs\Error\SendErrorMail;
 use App\Models\Guest;
 use App\Models\User;
 use Exception;
@@ -166,7 +167,9 @@ class SquareController extends BaseController
             return $this->sendResponse(['Order' => $orderData, "cart_data" => $check_product_first], StatusEnum::PAYMENTMESSAGE);
         } catch (Exception $e) {
             DB::rollBack();
-            return response()->json(['code' => 400, 'message' => "something went wrong." . $e->getMessage()]);
+            // send error to admin 
+            SendErrorMail::dispatch($this->user,$order);
+            return response()->json(['code' => 400, 'message' => "something went wrong." . $e]);
         }
     }
 
