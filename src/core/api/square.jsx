@@ -2,7 +2,7 @@ import ApiService from "@services/apiService";
 
 export function sendTokenApi(data) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/square-charge`, data)
+        ApiService.post(`/paypal`, data)
             .then((response) => {
                 console.print(
                     "file: square.js | sendTokenApi| response",
