@@ -141,7 +141,7 @@ Route::get('system-pages/{key?}', [SystemPagesController::class, 'getPages'])->n
 *Square Integration
 */
 
-//Route::POST('square-charge', [SquareController::class, 'chargeCustomer'])->name('squreCharge');
+Route::POST('square-charge', [SquareController::class, 'chargeCustomer'])->name('squreCharge');
 
 /*
 * Refund order

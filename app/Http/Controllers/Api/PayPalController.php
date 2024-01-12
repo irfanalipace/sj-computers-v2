@@ -82,8 +82,8 @@ class PayPalController extends Controller
             return redirect()->route('cancel');
         }
     }
-    public function cancel()
+    public function cancel($error = 'Payment is cancelled.')
     {
-        return "Payment is cancelled.";
+        return redirect('checkout?error=' . $error);
     }
 }
