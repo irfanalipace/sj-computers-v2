@@ -26,6 +26,7 @@ const ThankYou = React.lazy(() => import("@pages/Thankyou/Thankyou"));
 const RefundOrder = React.lazy(() => import("@pages/RefundOrder/RefundOrder"));
 const Careers = React.lazy(() => import("@pages/Careers/Careers"));
 const CareerView = React.lazy(() => import("@pages/Careers/CareerView"));
+const TrackOrder = React.lazy(() => import("@pages/TrackOrder"));
 const Contact = React.lazy(() =>
     import("@components/Footer/FooterMenu/Contact")
 );
@@ -389,6 +390,15 @@ const Router = () => {
             element: (
                 <PageWrapper>
                     <ApplyNow />
+                </PageWrapper>
+            ),
+        },
+
+        {
+            path: "/track-order",
+            element: (
+                <PageWrapper>
+                    <TrackOrder />
                 </PageWrapper>
             ),
         },
