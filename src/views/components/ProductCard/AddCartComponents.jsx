@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import Button from "@common/Button/Button";
 import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
 import "./ProductCard.css";
+import { Dialog, Drawer } from "@mui/material";
+import ProtectionPlanDrawer from "./ProtectionPlanDrawer";
 const AddCartComponents = ({
     product,
     className,
@@ -21,6 +23,7 @@ const AddCartComponents = ({
     );
     const [show, setShow] = useState(false);
     const [cartItem, setCartItem] = useState(null);
+    const [open, setOpen] = useState(false);
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -69,7 +72,8 @@ const AddCartComponents = ({
             ) : (
                 <>
                     <Button
-                        onClick={cartClickHandler}
+                        // onClick={cartClickHandler}
+                        onClick={() => setOpen(true)}
                         isLoading={productAddingToCard}
                         className={className}
                         style={{ marginBottom: "10px" }}
@@ -87,6 +91,9 @@ const AddCartComponents = ({
                     </Button>
                 </>
             )}
+            <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
+                <ProtectionPlanDrawer />
+            </Drawer>
         </div>
     );
 };

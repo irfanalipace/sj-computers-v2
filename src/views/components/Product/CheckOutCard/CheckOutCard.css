@@ -2,14 +2,24 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 20px;
     background-color: white;
-    max-width: 100%;
+    max-width: 65%;
     margin-bottom: 12px;
     margin-left: 120px;
     position: relative;
     border-radius: 8px;
     border: 1px solid #d5d9d9;
 }
-
+.btn-protection-model {
+    margin: 0px 10px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #eeeeee;
+    height: 110px;
+    border-radius: 8px;
+}
 .cart-text {
     font-weight: 400;
     font-size: 16px;
@@ -52,17 +62,22 @@
     font-weight: 700;
     line-height: 30px; /* 142.857% */
 }
+
 .check-box-container label {
-    color: #007185;
+    color: #2c8a9a;
     font-family: Inter;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
 }
+.check-box-container label:hover {
+    color: orange;
+    text-decoration: underline;
+}
 .dollar-label {
     color: red;
-    margin-top: 4px;
+    margin-top: -5px;
 }
 .details-container {
     display: flex;
@@ -114,7 +129,7 @@
     line-height: 24px;
 }
 .deliver-to {
-    color: #007185;
+    color: #2c8a9a;
     font-size: 12px;
 }
 .buy-now-button {
@@ -126,7 +141,7 @@
     justify-content: center;
     align-items: center;
     max-width: 100%;
-    width: 180px;
+    width: 190px;
     height: 40px;
 }
 .button2 {
@@ -242,6 +257,11 @@
     font-size: 11px;
     line-height: 13px;
 }
+.free-return {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 13px;
+}
 .color-card-text-paragrap-payment {
     font-family: "Inter";
     font-style: normal;
@@ -268,7 +288,8 @@
 }
 
 .secure-payment-method:hover + .hidden-box,
-.hidden-box:hover {
+.hidden-box:hover,
+.free-return:hover + .hidden-box {
     display: block; /* show the hidden box on hover */
 }
 
@@ -366,6 +387,7 @@
         justify-content: end;
         margin-right: 25px;
     }
+
     .hover-box {
         position: relative;
         display: inline-block;

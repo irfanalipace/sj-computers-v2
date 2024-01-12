@@ -12,6 +12,7 @@ import "./CheckOutCard.css";
 import { Link } from "react-router-dom";
 import AddCartComponents from "@components/ProductCard/AddCartComponents";
 import { IS_CHRISTMAS_HOLIDAYS } from "../../../../core/utils/constants";
+import ProtectionPopup from "./ProtectionPopup";
 export const CheckOutCard = ({ product }) => {
     const currentState = useSelector((state) => state.states.currentState);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -20,7 +21,9 @@ export const CheckOutCard = ({ product }) => {
     // const isLoading = useSelector((state) => state.cart.isLoading);
     const [quantity, setQuantity] = useState(1);
     const [show, setShow] = useState(false);
+    const [open, setOpen] = useState(false);
     const [cartItem, setCartItem] = useState(null);
+    const [plan, setPlan] = useState("");
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -108,16 +111,47 @@ export const CheckOutCard = ({ product }) => {
                 ) : (
                     <>
                         <div className="card-dev-section-paragrap-product">
-                            <span className="dilvery-text-paragraph-card">
-                                <button style={{ color: "#007185" }}>
-                                    Free Returns
-                                </button>{" "}
-                            </span>
+                            <div className="hover-box">
+                                <Link
+                                    href="#"
+                                    className="text-decoration-none free-return"
+                                    style={{ color: "#2c8a9a" }}
+                                >
+                                    FREE Returns
+                                </Link>
+                                <div className="hidden-box">
+                                    <span
+                                        style={{
+                                            fontSize: "12px",
+                                            fontWeight: "bold",
+                                            marginBottom: "12px",
+                                        }}
+                                    >
+                                        Return this item for free
+                                    </span>
+                                    <div style={{ marginTop: "12px" }}>
+                                        <p style={{ fontSize: "11px" }}>
+                                            This item can be returned in its
+                                            original condition for a full refund
+                                            or replacement within 30 days of
+                                            receipt .
+                                        </p>
+                                        <p
+                                            style={{
+                                                fontSize: "11px",
+                                                color: "#2c8a9a",
+                                            }}
+                                        >
+                                            Read full return policy.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>{" "}
                         <div className="card-dev-section-paragrap-product">
                             <span className="dilvery-text-paragraph-card">
-                                <button style={{ color: "#007185" }}>
-                                    Free Delivery
+                                <button style={{ color: "#2c8a9a" }}>
+                                    FREE Delivery
                                 </button>{" "}
                                 <span style={{ fontWeight: "bold" }}>
                                     {
@@ -255,7 +289,7 @@ export const CheckOutCard = ({ product }) => {
                                 <Link
                                     href="#"
                                     className="text-decoration-none secure-payment-method"
-                                    style={{ color: "#007185" }}
+                                    style={{ color: "#2c8a9a" }}
                                 >
                                     Secure transaction
                                 </Link>
@@ -314,7 +348,7 @@ export const CheckOutCard = ({ product }) => {
                             <div className="hover-box">
                                 <Link
                                     className="text-decoration-none secure-payment-method "
-                                    style={{ color: "#007185" }}
+                                    style={{ color: "#2c8a9a" }}
                                 >
                                     Eligible for returns<br></br>
                                     refund or <br></br>
@@ -357,7 +391,7 @@ export const CheckOutCard = ({ product }) => {
                 <Link
                     to={"/term_services"}
                     style={{
-                        color: "#007185",
+                        color: "#2c8a9a",
                         fontSize: "14px",
                         fontWeight: "400",
                         textDecoration: "none",
@@ -370,21 +404,39 @@ export const CheckOutCard = ({ product }) => {
                     Add a Protection Plan :
                     <div className="check-box-container">
                         <input type="checkbox" id="protectionPlanCheckbox" />
-                        <label for="protectionPlanCheckbox">
+                        <label
+                            for="protectionPlanCheckbox"
+                            onClick={() => {
+                                setOpen(true);
+                                setPlan("3 year");
+                            }}
+                        >
                             3-Year Protection for{" "}
                         </label>
                         <div className="dollar-label">&nbsp;$23.99</div>
                     </div>
                     <div className="check-box-container">
                         <input type="checkbox" id="protectionPlanCheckbox1" />
-                        <label for="protectionPlanCheckbox1">
+                        <label
+                            for="protectionPlanCheckbox1"
+                            onClick={() => {
+                                setOpen(true);
+                                setPlan("4 year");
+                            }}
+                        >
                             4-Year Protection for
                         </label>
                         <div className="dollar-label">&nbsp;$32.99</div>
                     </div>
                     <div className="check-box-container">
                         <input type="checkbox" id="protectionPlanCheckbox2" />
-                        <label for="protectionPlanCheckbox2">
+                        <label
+                            for="protectionPlanCheckbox2"
+                            onClick={() => {
+                                setOpen(true);
+                                setPlan("Unlimited");
+                            }}
+                        >
                             Tech Unlimited – Protect Eligible Past and Future
                             Purchases with 1 Plan (Renews Monthly Until
                             Cancelled) for
@@ -394,6 +446,11 @@ export const CheckOutCard = ({ product }) => {
                         </label>
                     </div>
                 </div>
+                <ProtectionPopup
+                    open={open}
+                    handleClose={() => setOpen(false)}
+                    plan={plan}
+                />
             </div>
         </div>
     );

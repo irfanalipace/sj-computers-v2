@@ -4,7 +4,75 @@
     align-items: center;
     padding: 10px;
 }
-
+.heading-protection-plan {
+    color: #0f1111;
+    font-size: 17.719px;
+    font-weight: 700;
+    line-height: 24px;
+}
+.info {
+    display: flex;
+}
+.accordion-content {
+    padding: 10px 15px;
+    margin-top: 20px;
+    transition: 400px 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+}
+.active {
+    max-height: 500px; /* Adjust as needed */
+}
+.accordion-content .title {
+    color: #565959;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: -10px;
+}
+.accordion-content h3 {
+    color: #0f1111;
+    font-family: Arial;
+    font-size: 13.891px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+}
+.accordion-content .details-of-protection {
+    color: #0f1111;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+.info img {
+    width: 20px;
+    height: 18.34px;
+    margin-right: 10px;
+}
+.info p {
+    font-size: 16px;
+    font-weight: 400;
+}
+.protc-paln-option {
+    border: 1px solid #d5d9d9;
+    padding: 10px;
+}
+.protc-paln-option div {
+    display: flex;
+}
+.protc-paln-option p {
+    font-size: 16px;
+    padding-top: 5px;
+}
+.protc-paln-option button {
+    border: none;
+    background-color: white;
+    color: #1270c4;
+    font-size: 16px;
+    /* margin-left: 35px; */
+}
+.protc-paln-option button:hover {
+    font-size: 17px;
+}
 .product-grid {
     border-bottom: 1px solid lightgray;
 }
@@ -12,7 +80,24 @@
 .products-grid-wrapper * {
     text-decoration: none;
 }
-
+.btn-grp {
+    display: flex;
+    justify-content: space-between;
+}
+.btn-grp button {
+    width: 296px;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 9px 56px;
+    border: 1px solid #1a8031;
+    color: #1a8031;
+    background-color: #fff;
+}
+.btn-grp .add-prot-btn {
+    background-color: #1a8031;
+    color: #fff;
+    font-weight: 400;
+}
 .recommendation-container .swiper-button-next:after,
 .recommendation-container .swiper-button-prev:after {
     font-size: 20px !important;
