@@ -6,6 +6,8 @@ import { SET_SHIPPING_DETAILS } from "@store/orders/ordersSlice";
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import ShippingButton from "./ShippingButton";
 import { useFormik } from "formik";
+// import GooglePlacesAutoComplete from "../../GooglePlacesAutoComplete";
+import Autocomplete from "react-google-autocomplete";
 
 function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -18,6 +20,10 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     // const [fieldErrors, setFieldErrors] = useState({});
     const [permanentAddress, setPermanentAddress] = useState(false);
     const dispatch = useDispatch();
+    console.log(
+        "google api palcaes",
+        import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY
+    );
     const {
         values,
         handleChange,
@@ -318,6 +324,15 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             ></input>
+                            <Autocomplete
+                                apiKey={
+                                    "AIzaSyA55TIM8v4ldCT172vwSkiRsv1qDlcvV1I"
+                                }
+                                onPlaceSelected={(place) => {
+                                    console.log(place);
+                                }}
+                            />
+                            ;{/* <GooglePlacesAutoComplete /> */}
                             {/* {errors.address && touched.address && (
                                 <p className="fs-6 mt-1 text-danger">
                                     {errors.address}
