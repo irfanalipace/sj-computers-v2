@@ -74,7 +74,7 @@ class ReviewRepository
                 $productReview->productMedia()->updateOrCreate(
                     ['id' => $request->media[$key]->id ?? null],
                     [
-                        'product_review_id' => $store->id,
+                        'product_review_id' => $productReview->id,
                         'media_type' => $request->media_type,
                         'file_name' => $file['file_name'],
                         'file_path' => asset('storage/' . $file['file_path']),
