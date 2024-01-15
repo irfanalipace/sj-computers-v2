@@ -121,10 +121,6 @@
     color: orange;
     text-decoration: underline;
 }
-.dollar-label {
-    color: red;
-    margin-top: -5px;
-}
 .details-container {
     display: flex;
     justify-content: flex-start;

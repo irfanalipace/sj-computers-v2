@@ -43,9 +43,9 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
                         onClick={() => handleCheckboxChange("3-Year")}
                         className="mb-4"
                     />
-                    <p className="mt-2">
+                    <p className="mt-4">
                         3-Year Proection{" "}
-                        <b style={{ color: "red" }}>&nbsp;$23.99 </b>
+                        <span style={{ color: "red" }}> $23.99</span>
                         <p
                             onClick={() => {
                                 protectionPlan === "3-Year"
@@ -127,9 +127,9 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
                         onClick={() => handleCheckboxChange("4-Year")}
                         className="mb-4"
                     />
-                    <p className="mt-2">
+                    <p className="mt-4">
                         4-Year Proection{" "}
-                        <b style={{ color: "red" }}>&nbsp;$32.99 </b>
+                        <span style={{ color: "red" }}> $32.99</span>
                         <p
                             onClick={() => {
                                 protectionPlan === "4-Year"
@@ -212,13 +212,31 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
                     <Checkbox
                         checked={planValue === "unlimited"}
                         onClick={() => handleCheckboxChange("unlimited")}
-                        className="mb-4"
+                        className="mb-5"
                     />
-                    <p className="mt-3">
+                    <p className="mt-2">
                         Tech Unlimited – Protect Eligible Past and Future
                         Purchases <br />
                         with 1 Plan (Renews Monthly Until Cancelled){" "}
-                        <p style={{ color: "red" }}>
+                        <span style={{ color: "red" }}> $16.99/month</span>
+                        <br />
+                        <p
+                            onClick={() => {
+                                protectionPlan === "techUnlimited"
+                                    ? setProtectionPlan("")
+                                    : setProtectionPlan("techUnlimited");
+                            }}
+                            style={{
+                                color: "rgb(18, 112, 196)",
+                                cursor: "pointer",
+                            }}
+                        >
+                            <KeyboardArrowDownIcon
+                                style={{ marginTop: "-2px" }}
+                            />{" "}
+                            Learn More
+                        </p>
+                        {/* <p style={{ color: "red" }}>
                             &nbsp;$16.99/month
                             <p
                                 onClick={() => {
@@ -236,7 +254,7 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
                                 />{" "}
                                 Learn More
                             </p>
-                        </p>
+                        </p> */}
                     </p>{" "}
                 </div>
                 {protectionPlan === "techUnlimited" && (

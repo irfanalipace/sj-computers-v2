@@ -447,8 +447,10 @@ export const CheckOutCard = ({ product }) => {
                             onClick={() => setOpen(true)}
                         >
                             3-Year Protection for{" "}
+                            <span style={{ color: "red" }}>
+                                &nbsp;$23.99/month
+                            </span>
                         </label>
-                        <div className="dollar-label mt-1">&nbsp;$23.99</div>
                     </div>
                     <div className="check-box-container">
                         <input
@@ -461,9 +463,11 @@ export const CheckOutCard = ({ product }) => {
                             htmlFor="protectionPlanCheckbox1"
                             onClick={() => setOpen(true)}
                         >
-                            4-Year Protection for
+                            4-Year Protection for{" "}
+                            <span style={{ color: "red" }}>
+                                &nbsp;$32.99/month
+                            </span>
                         </label>
-                        <div className="dollar-label mt-1">&nbsp;$32.99</div>
                     </div>
                     <div
                         className="check-box-container"
@@ -479,9 +483,9 @@ export const CheckOutCard = ({ product }) => {
                             Tech Unlimited – Protect Eligible Past and Future
                             Purchases with 1 Plan (Renews Monthly Until
                             Cancelled) for
-                            <div className="dollar-label mt-1">
+                            <span style={{ color: "red" }}>
                                 &nbsp;$16.99/month
-                            </div>
+                            </span>
                         </label>
                     </div>
                 </div>

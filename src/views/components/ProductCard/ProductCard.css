@@ -54,7 +54,7 @@
 }
 .protc-paln-option {
     border: 1px solid #d5d9d9;
-    padding: 10px;
+    /* padding: 4px; */
 }
 .protc-paln-option div {
     display: flex;
