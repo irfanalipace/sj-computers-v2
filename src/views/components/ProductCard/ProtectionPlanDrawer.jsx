@@ -41,22 +41,29 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
                     <Checkbox
                         checked={planValue === "3-Year"}
                         onClick={() => handleCheckboxChange("3-Year")}
+                        className="mb-4"
                     />
-                    <p className="mt-2">3-Year Proection</p>{" "}
-                    <p className="mt-2" style={{ color: "red" }}>
-                        &nbsp;$23.99
-                    </p>
+                    <p className="mt-2">
+                        3-Year Proection{" "}
+                        <b style={{ color: "red" }}>&nbsp;$23.99 </b>
+                        <p
+                            onClick={() => {
+                                protectionPlan === "3-Year"
+                                    ? setProtectionPlan("")
+                                    : setProtectionPlan("3-Year");
+                            }}
+                            style={{
+                                color: "rgb(18, 112, 196)",
+                                cursor: "pointer",
+                            }}
+                        >
+                            <KeyboardArrowDownIcon
+                                style={{ marginTop: "-2px" }}
+                            />{" "}
+                            Learn More
+                        </p>
+                    </p>{" "}
                 </div>
-                <button
-                    onClick={() => {
-                        protectionPlan === "3-Year"
-                            ? setProtectionPlan("")
-                            : setProtectionPlan("3-Year");
-                    }}
-                >
-                    <KeyboardArrowDownIcon style={{ marginTop: "-2px" }} />{" "}
-                    Learn More
-                </button>
                 {protectionPlan === "3-Year" && (
                     <div className="accordion-content">
                         <h3>3 Year Equippment Protection Plan</h3>
@@ -118,22 +125,29 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
                     <Checkbox
                         checked={planValue === "4-Year"}
                         onClick={() => handleCheckboxChange("4-Year")}
+                        className="mb-4"
                     />
-                    <p className="mt-2">4-Year Proection</p>{" "}
-                    <p className="mt-2" style={{ color: "red" }}>
-                        &nbsp;$32.99
-                    </p>
+                    <p className="mt-2">
+                        4-Year Proection{" "}
+                        <b style={{ color: "red" }}>&nbsp;$32.99 </b>
+                        <p
+                            onClick={() => {
+                                protectionPlan === "4-Year"
+                                    ? setProtectionPlan("")
+                                    : setProtectionPlan("4-Year");
+                            }}
+                            style={{
+                                color: "rgb(18, 112, 196)",
+                                cursor: "pointer",
+                            }}
+                        >
+                            <KeyboardArrowDownIcon
+                                style={{ marginTop: "-2px" }}
+                            />{" "}
+                            Learn More
+                        </p>
+                    </p>{" "}
                 </div>
-                <button
-                    onClick={() => {
-                        protectionPlan === "4-Year"
-                            ? setProtectionPlan("")
-                            : setProtectionPlan("4-Year");
-                    }}
-                >
-                    <KeyboardArrowDownIcon style={{ marginTop: "-2px" }} />{" "}
-                    Learn More
-                </button>
                 {protectionPlan === "4-Year" && (
                     <div className="accordion-content">
                         <h3>4 Year Equippment Protection Plan</h3>
@@ -198,24 +212,33 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
                     <Checkbox
                         checked={planValue === "unlimited"}
                         onClick={() => handleCheckboxChange("unlimited")}
+                        className="mb-4"
                     />
                     <p className="mt-3">
                         Tech Unlimited – Protect Eligible Past and Future
                         Purchases <br />
                         with 1 Plan (Renews Monthly Until Cancelled){" "}
-                        <p style={{ color: "red" }}>&nbsp;$16.99/month</p>
+                        <p style={{ color: "red" }}>
+                            &nbsp;$16.99/month
+                            <p
+                                onClick={() => {
+                                    protectionPlan === "techUnlimited"
+                                        ? setProtectionPlan("")
+                                        : setProtectionPlan("techUnlimited");
+                                }}
+                                style={{
+                                    color: "rgb(18, 112, 196)",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                <KeyboardArrowDownIcon
+                                    style={{ marginTop: "-2px" }}
+                                />{" "}
+                                Learn More
+                            </p>
+                        </p>
                     </p>{" "}
                 </div>
-                <button
-                    onClick={() => {
-                        protectionPlan === "techUnlimited"
-                            ? setProtectionPlan("")
-                            : setProtectionPlan("techUnlimited");
-                    }}
-                >
-                    <KeyboardArrowDownIcon style={{ marginTop: "-2px" }} />{" "}
-                    Learn More
-                </button>
                 {protectionPlan === "techUnlimited" && (
                     <div className="accordion-content">
                         <h3>Unlimited Equippment Protection Plan</h3>
