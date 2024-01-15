@@ -173,18 +173,7 @@ export default function Checkout() {
                                     {!isAuthenticated && (
                                         <div>
                                             <div>
-                                                <Discount
-                                                    handleClick={handleClick}
-                                                    activeAccordion={
-                                                        currentAccordionId
-                                                    }
-                                                    paymentMethod={
-                                                        paymentMethod
-                                                    }
-                                                    shippingDetails={
-                                                        checkoutDetails
-                                                    }
-                                                />
+                                                <Discount />
                                             </div>
                                         </div>
                                     )}

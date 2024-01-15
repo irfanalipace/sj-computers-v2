@@ -103,7 +103,7 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
                     </div>
                 </div>
 
-                {/* <div className="payment-method">
+                <div className="payment-method">
                     <input
                         type="radio"
                         id="method2"
@@ -122,7 +122,7 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
                             </div>
                         </label>
                     </div>
-                </div> */}
+                </div>
             </div>
             {!shippingDetails.address && (
                 <p className="text-danger fs-6">*Add Shipping Details First</p>
