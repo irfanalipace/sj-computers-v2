@@ -4,98 +4,130 @@ import Stack from "@mui/material/Stack";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import Check from "@mui/icons-material/Check";
-import SettingsIcon from "@mui/icons-material/Settings";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import VideoLabelIcon from "@mui/icons-material/VideoLabel";
 import StepConnector, {
     stepConnectorClasses,
 } from "@mui/material/StepConnector";
+import { stepLabelClasses } from "@mui/material";
+import { Typography } from "@mui/material";
 
-const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
+const QontoConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.alternativeLabel}`]: {
-        top: 22,
+        top: 10,
+        left: "calc(-100% + 19px)",
+        right: "calc(0% + 19px)",
     },
     [`&.${stepConnectorClasses.active}`]: {
         [`& .${stepConnectorClasses.line}`]: {
-            backgroundImage:
-                "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
+            borderColor: "#E87E24",
         },
     },
     [`&.${stepConnectorClasses.completed}`]: {
         [`& .${stepConnectorClasses.line}`]: {
-            backgroundImage:
-                "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
+            borderColor: "#E87E24",
         },
     },
     [`& .${stepConnectorClasses.line}`]: {
-        height: 3,
-        border: 0,
-        backgroundColor:
+        borderColor:
             theme.palette.mode === "dark" ? theme.palette.grey[800] : "#eaeaf0",
+        borderTopWidth: 3,
         borderRadius: 1,
     },
 }));
 
-const ColorlibStepIconRoot = styled("div")(({ theme, ownerState }) => ({
-    backgroundColor:
-        theme.palette.mode === "dark" ? theme.palette.grey[700] : "#ccc",
-    zIndex: 1,
-    color: "#fff",
-    width: 50,
-    height: 50,
+const QontoStepIconRoot = styled("div")(({ theme, ownerState }) => ({
+    color: theme.palette.mode === "dark" ? theme.palette.grey[700] : "#eaeaf0",
     display: "flex",
-    borderRadius: "50%",
-    justifyContent: "center",
+    height: 22,
     alignItems: "center",
     ...(ownerState.active && {
-        backgroundImage:
-            "linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)",
-        boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)",
+        color: "#784af4",
     }),
-    ...(ownerState.completed && {
-        backgroundImage:
-            "linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)",
-    }),
+    "& .QontoStepIcon-completedIcon": {
+        width: 12,
+        height: 12,
+        borderRadius: "50%",
+        backgroundColor: "#E87E24",
+    },
+    "& .QontoStepIcon-circle": {
+        width: 12,
+        height: 12,
+        borderRadius: "50%",
+        backgroundColor: "#DDDDDD",
+    },
 }));
 
-function ColorlibStepIcon(props) {
+function QontoStepIcon(props) {
     const { active, completed, className } = props;
 
-    const icons = {
-        1: <SettingsIcon />,
-        2: <GroupAddIcon />,
-        3: <VideoLabelIcon />,
-    };
-
     return (
-        <ColorlibStepIconRoot
-            ownerState={{ completed, active }}
-            className={className}
-        >
-            {icons[String(props.icon)]}
-        </ColorlibStepIconRoot>
+        <QontoStepIconRoot ownerState={{ active }} className={className}>
+            {completed ? (
+                <div className="QontoStepIcon-completedIcon" />
+            ) : (
+                <div className="QontoStepIcon-circle" />
+            )}
+        </QontoStepIconRoot>
     );
 }
 
 const steps = [
-    "Select campaign settings",
-    "Create an ad group",
-    "Create an ad",
+    { label: "Ordered", description: "April 11, 2023" },
+    { label: "Shipped", description: "April 18, 2023" },
+    { label: "Expected Delivery", description: "May 05, 2023" },
 ];
 
-export default function CustomizedSteppers() {
+export default function CustomizedSteppers({ step = 2 }) {
     return (
         <Stack sx={{ width: "100%" }} spacing={4}>
             <Stepper
                 alternativeLabel
-                activeStep={1}
-                connector={<ColorlibConnector />}
+                activeStep={step}
+                connector={<QontoConnector />}
+                sx={{
+                    "& .MuiStep-root:first-child .MuiStepLabel-root": {
+                        alignItems: "flex-start",
+                    },
+                    "& .MuiStep-root:second-child .MuiStepLabel-root": {
+                        alignItems: "center",
+                    },
+                    "& .MuiStep-root:last-child .MuiStepLabel-root": {
+                        alignItems: "flex-end",
+                    },
+                    "& .MuiStep-root:first-child .MuiStepLabel-labelContainer":
+                        {
+                            display: "flex",
+                        },
+                    "& .MuiStep-root:second-child .MuiStepLabel-labelContainer":
+                        {
+                            // width: "150px",
+                        },
+                    "& .MuiStep-root:last-child .MuiStepLabel-labelContainer": {
+                        // width: "150px",
+                        display: "flex",
+                        justifyContent: "end",
+                    },
+                }}
             >
                 {steps.map((label) => (
                     <Step key={label}>
-                        <StepLabel StepIconComponent={ColorlibStepIcon}>
-                            {label}
+                        <StepLabel StepIconComponent={QontoStepIcon}>
+                            <Typography
+                                fontFamily={"Inter"}
+                                fontSize={"14px"}
+                                lineHeight={"16px"}
+                                fontWeight={500}
+                            >
+                                {label.label}
+                            </Typography>
+                            <Typography
+                                sx={{ mt: 1 }}
+                                fontFamily={"Inter"}
+                                fontSize={"14px"}
+                                lineHeight={"16px"}
+                                fontWeight={400}
+                            >
+                                {label.description}
+                            </Typography>
                         </StepLabel>
                     </Step>
                 ))}
