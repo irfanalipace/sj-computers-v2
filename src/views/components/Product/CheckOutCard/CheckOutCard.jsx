@@ -155,14 +155,16 @@ export const CheckOutCard = ({ product }) => {
                                             or replacement within 30 days of
                                             receipt .
                                         </p>
-                                        <p
+                                        <Link
+                                            to={"/return_refund_policy"}
                                             style={{
+                                                marginTop: "12px",
                                                 fontSize: "11px",
                                                 color: "#2c8a9a",
                                             }}
                                         >
-                                            Read full return policy.
-                                        </p>
+                                            Read full return policy
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -411,6 +413,7 @@ export const CheckOutCard = ({ product }) => {
                                         style={{
                                             marginTop: "12px",
                                             fontSize: "11px",
+                                            color: "#2c8a9a",
                                         }}
                                     >
                                         Read full return policy
