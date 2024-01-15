@@ -182,6 +182,18 @@ export const CheckOutCard = ({ product }) => {
                                 Shipped by SJ Computers
                             </span>
                         </div>{" "}
+                        <div className="card-dev-section-paragrap-product">
+                            <span className="dilvery-text-paragraph-card">
+                                Or fastest Delivery&nbsp;
+                                <span style={{ fontWeight: "bold" }}>
+                                    Thursday, January 4.&nbsp;
+                                </span>
+                                Order within{" "}
+                                <span style={{ color: "green" }}>
+                                    1 hr 28 min.
+                                </span>
+                            </span>
+                        </div>{" "}
                         {/*
                         <div className="card-dev-section-paragrap-product">
                             <span className="dilvery-text-paragraph-card">
