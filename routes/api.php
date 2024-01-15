@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\Blog\BlogController;
 use App\Http\Controllers\Api\RefundController;
 use App\Http\Controllers\Api\Meta\MetaDetailController;
+use App\Http\Controllers\Api\Product\ReviewController;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -207,10 +208,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     /*
     * PayPal integration
-//    */
-//    Route::post('paypalwebhooks', [PaypalwebhookController::class, 'webhooks'])->name('paypalwebhooks');
-//
-//    Route::post('process-transaction', [PaypalController::class, 'processTransaction'])->name('processTransaction');
+    //    */
+    //    Route::post('paypalwebhooks', [PaypalwebhookController::class, 'webhooks'])->name('paypalwebhooks');
+    //
+    //    Route::post('process-transaction', [PaypalController::class, 'processTransaction'])->name('processTransaction');
 
     /*
      * get order-record
@@ -232,6 +233,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     * Download inventory Excel
     */
     Route::get('download-inventory', [InventoryController::class, 'downloadInventory'])->name('downloadInventory');
+
+    /* Review and Rating */
+    Route::post('store-review',[ReviewController::class,'createProductReview']);
+    Route::put('update-review/{id}',[ReviewController::class,'updateProductReview']);
 });
 
 /*
@@ -250,3 +255,5 @@ Route::post('store-career-applications', [CareerApplicationController::class, 's
 Route::post('paypal', [PayPalController::class, 'paypal'])->name('paypal');
 Route::get('success', [PaypalController::class, 'success'])->name('success');
 Route::get('cancel', [PaypalController::class, 'cancel'])->name('cancel');
+
+Route::get('get-reviews',[ReviewController::class,'getProductReview']);
