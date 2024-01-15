@@ -1,12 +1,9 @@
 import ProductSlider from "@components/Sliders/ProductSlider";
-
-import "./Recommdation.css";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "@store/products/productsThunks";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-
-import { useState } from "react";
 import { useEffect } from "react";
+import "./Recommdation.css";
 
 export default function Recommendation({ products }) {
     const dispatch = useDispatch();
@@ -26,9 +23,11 @@ export default function Recommendation({ products }) {
 
     return (
         <>
-            <div className="recommendation-container">
+            <div className="recommendation-container product-section">
                 <div className="recommendation-inner">
-                    <h3>Recommended Items</h3>
+                    <h3 className="product-section-heading">
+                        Recommended Items
+                    </h3>
                     <div className="slider-wrapper">
                         {isLoading || !products ? (
                             <LoaderComponent />
