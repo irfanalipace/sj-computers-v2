@@ -65,6 +65,24 @@ export const CheckOutCard = ({ product }) => {
         setCartItem(item);
     }, [cart]);
 
+    function handleCheckboxClick(event) {
+        const clickedCheckbox = event.target;
+        const checkboxes = document.querySelectorAll(".protectionPlanCheckbox");
+
+        checkboxes.forEach((checkbox) => {
+            if (checkbox !== clickedCheckbox) {
+                checkbox.checked = false;
+            }
+        });
+        setPlan(
+            clickedCheckbox.id === "protectionPlanCheckbox"
+                ? "3 year"
+                : clickedCheckbox.id === "protectionPlanCheckbox1"
+                ? "4 year"
+                : "Unlimited"
+        );
+    }
+
     return (
         <div>
             <div className="card-section-right">
@@ -406,49 +424,56 @@ export const CheckOutCard = ({ product }) => {
                 <div className="protection-plan">
                     Add a Protection Plan :
                     <div className="check-box-container">
-                        <input type="checkbox" id="protectionPlanCheckbox" />
+                        <input
+                            type="checkbox"
+                            className="protectionPlanCheckbox"
+                            id="protectionPlanCheckbox"
+                            onClick={handleCheckboxClick}
+                        />
                         <label
-                            for="protectionPlanCheckbox"
-                            onClick={() => {
-                                setOpen(true);
-                                setPlan("3 year");
-                            }}
+                            htmlFor="protectionPlanCheckbox"
+                            onClick={() => setOpen(true)}
                         >
                             3-Year Protection for{" "}
                         </label>
-                        <div className="dollar-label">&nbsp;$23.99</div>
+                        <div className="dollar-label mt-1">&nbsp;$23.99</div>
                     </div>
                     <div className="check-box-container">
-                        <input type="checkbox" id="protectionPlanCheckbox1" />
+                        <input
+                            type="checkbox"
+                            className="protectionPlanCheckbox"
+                            id="protectionPlanCheckbox1"
+                            onClick={handleCheckboxClick}
+                        />
                         <label
-                            for="protectionPlanCheckbox1"
-                            onClick={() => {
-                                setOpen(true);
-                                setPlan("4 year");
-                            }}
+                            htmlFor="protectionPlanCheckbox1"
+                            onClick={() => setOpen(true)}
                         >
                             4-Year Protection for
                         </label>
-                        <div className="dollar-label">&nbsp;$32.99</div>
+                        <div className="dollar-label mt-1">&nbsp;$32.99</div>
                     </div>
-                    <div className="check-box-container">
-                        <input type="checkbox" id="protectionPlanCheckbox2" />
-                        <label
-                            for="protectionPlanCheckbox2"
-                            onClick={() => {
-                                setOpen(true);
-                                setPlan("Unlimited");
-                            }}
-                        >
+                    <div
+                        className="check-box-container"
+                        onClick={() => setOpen(true)}
+                    >
+                        <input
+                            type="checkbox"
+                            className="protectionPlanCheckbox"
+                            id="protectionPlanCheckbox2"
+                            onClick={handleCheckboxClick}
+                        />
+                        <label htmlFor="protectionPlanCheckbox2">
                             Tech Unlimited – Protect Eligible Past and Future
                             Purchases with 1 Plan (Renews Monthly Until
                             Cancelled) for
-                            <div className="dollar-label">
+                            <div className="dollar-label mt-1">
                                 &nbsp;$16.99/month
                             </div>
                         </label>
                     </div>
                 </div>
+
                 <ProtectionPopup
                     open={open}
                     handleClose={() => setOpen(false)}

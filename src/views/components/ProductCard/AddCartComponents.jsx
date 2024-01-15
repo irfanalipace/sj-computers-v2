@@ -25,6 +25,7 @@ const AddCartComponents = ({
     );
     const [show, setShow] = useState(false);
     const [cartItem, setCartItem] = useState(null);
+    const [loading, setLoading] = useState(false);
     // const [open, setOpen] = useState(false);
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
@@ -65,6 +66,7 @@ const AddCartComponents = ({
         let item = cart.find((ci) => ci.id === product.id);
         setCartItem(item);
     }, [cart]);
+
     return (
         <div>
             {cartItem?.id ? (
@@ -76,7 +78,7 @@ const AddCartComponents = ({
                     <Button
                         // onClick={cartClickHandler}
                         onClick={() => setOpen(true)}
-                        isLoading={productAddingToCard}
+                        isLoading={productAddingToCard && open}
                         className={className}
                         style={{ marginBottom: "10px" }}
                         {...rest}
@@ -84,8 +86,12 @@ const AddCartComponents = ({
                         Add to Cart
                     </Button>
                     <Button
-                        onClick={cartClickHandler}
-                        isLoading={productAddingToCard}
+                        onClick={() => {
+                            if (!open) {
+                                cartClickHandler();
+                            }
+                        }}
+                        isLoading={productAddingToCard && !open}
                         className={classNameforBuyNow}
                         {...rest}
                     >
@@ -93,8 +99,14 @@ const AddCartComponents = ({
                     </Button>
                 </>
             )}
-            <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-                <ProtectionPlanDrawer handleButton={cartClickHandler} />
+            <Drawer anchor="right" open={open}>
+                <ProtectionPlanDrawer
+                    handleButton={() => {
+                        if (open) {
+                            cartClickHandler();
+                        }
+                    }}
+                />
             </Drawer>
         </div>
     );

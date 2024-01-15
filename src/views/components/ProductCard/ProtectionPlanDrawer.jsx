@@ -9,6 +9,10 @@ import StarRatings from "react-star-ratings";
 
 const ProtectionPlanDrawer = ({ handleButton }) => {
     const [protectionPlan, setProtectionPlan] = useState("");
+    const [planValue, setPlanValue] = useState("");
+    const handleCheckboxChange = (value) => {
+        setPlanValue(planValue === value ? "" : value);
+    };
 
     return (
         <div style={{ padding: "20px" }}>
@@ -34,7 +38,10 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
             </div>
             <div className="protc-paln-option">
                 <div>
-                    <Checkbox />
+                    <Checkbox
+                        checked={planValue === "3-Year"}
+                        onClick={() => handleCheckboxChange("3-Year")}
+                    />
                     <p>3-Year Proection</p>{" "}
                     <p style={{ color: "red" }}>&nbsp;$23.99</p>
                 </div>
@@ -102,7 +109,10 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
             </div>
             <div className="protc-paln-option">
                 <div>
-                    <Checkbox />
+                    <Checkbox
+                        checked={planValue === "4-Year"}
+                        onClick={() => handleCheckboxChange("4-Year")}
+                    />
                     <p>4-Year Proection</p>{" "}
                     <p style={{ color: "red" }}>&nbsp;$32.99</p>
                 </div>
@@ -173,7 +183,10 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
             </div>
             <div className="protc-paln-option">
                 <div>
-                    <Checkbox />
+                    <Checkbox
+                        checked={planValue === "unlimited"}
+                        onClick={() => handleCheckboxChange("unlimited")}
+                    />
                     <p>
                         Tech Unlimited – Protect Eligible Past and Future
                         Purchases <br />
