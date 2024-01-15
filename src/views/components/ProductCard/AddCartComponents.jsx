@@ -99,7 +99,7 @@ const AddCartComponents = ({
                     </Button>
                 </>
             )}
-            <Drawer anchor="right" open={open}>
+            <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
                 <ProtectionPlanDrawer
                     handleButton={() => {
                         if (open) {

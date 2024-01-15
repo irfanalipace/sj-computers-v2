@@ -75,6 +75,10 @@ const ProtectionPopup = ({ open, handleClose, plan, handleAddProtection }) => {
                         email at <br />
                         cs@sjcomputersmn.com.
                         <br />
+                        More info :{" "}
+                        <small style={{ color: "#1270c4" }}>
+                            3-Year Protection
+                        </small>
                     </p>
                 </div>
                 <div className="btn-protection-model">

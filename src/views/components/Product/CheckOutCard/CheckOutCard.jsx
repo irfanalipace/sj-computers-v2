@@ -76,7 +76,7 @@ export const CheckOutCard = ({ product }) => {
         });
         setPlan(
             clickedCheckbox.id === "protectionPlanCheckbox"
-                ? "3 year"
+                ? "3 year "
                 : clickedCheckbox.id === "protectionPlanCheckbox1"
                 ? "4 year"
                 : "Unlimited"

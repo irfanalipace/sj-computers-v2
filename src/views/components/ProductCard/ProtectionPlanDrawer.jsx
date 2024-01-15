@@ -42,8 +42,10 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
                         checked={planValue === "3-Year"}
                         onClick={() => handleCheckboxChange("3-Year")}
                     />
-                    <p>3-Year Proection</p>{" "}
-                    <p style={{ color: "red" }}>&nbsp;$23.99</p>
+                    <p className="mt-2">3-Year Proection</p>{" "}
+                    <p className="mt-2" style={{ color: "red" }}>
+                        &nbsp;$23.99
+                    </p>
                 </div>
                 <button
                     onClick={() => {
@@ -103,6 +105,10 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
                             via email at <br />
                             cs@sjcomputersmn.com.
                             <br />
+                            More info :{" "}
+                            <small style={{ color: "#1270c4" }}>
+                                3-Year Protection
+                            </small>
                         </p>
                     </div>
                 )}
@@ -113,8 +119,10 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
                         checked={planValue === "4-Year"}
                         onClick={() => handleCheckboxChange("4-Year")}
                     />
-                    <p>4-Year Proection</p>{" "}
-                    <p style={{ color: "red" }}>&nbsp;$32.99</p>
+                    <p className="mt-2">4-Year Proection</p>{" "}
+                    <p className="mt-2" style={{ color: "red" }}>
+                        &nbsp;$32.99
+                    </p>
                 </div>
                 <button
                     onClick={() => {
@@ -174,6 +182,10 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
                             via email at <br />
                             cs@sjcomputersmn.com.
                             <br />
+                            More info :{" "}
+                            <small style={{ color: "#1270c4" }}>
+                                4-Year Protection
+                            </small>
                         </p>
                     </div>
                 )}
@@ -187,7 +199,7 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
                         checked={planValue === "unlimited"}
                         onClick={() => handleCheckboxChange("unlimited")}
                     />
-                    <p>
+                    <p className="mt-3">
                         Tech Unlimited – Protect Eligible Past and Future
                         Purchases <br />
                         with 1 Plan (Renews Monthly Until Cancelled){" "}
@@ -252,6 +264,10 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
                             via email at <br />
                             cs@sjcomputersmn.com.
                             <br />
+                            More info :{" "}
+                            <small style={{ color: "#1270c4" }}>
+                                Tech Unlimited
+                            </small>
                         </p>
                     </div>
                 )}
