@@ -4,24 +4,31 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle,
+    IconButton,
 } from "@mui/material";
 import React from "react";
 import StarRatings from "react-star-ratings";
+import CloseIcon from "@mui/icons-material/Close";
 
-const ProtectionPopup = ({ open, handleClose, plan }) => {
+const ProtectionPopup = ({ open, handleClose, plan, handleAddProtection }) => {
     return (
         <Dialog open={open} onClose={handleClose} maxWidth={130}>
-            <DialogTitle id="alert-dialog-title">
-                {"Add to your order"}
-            </DialogTitle>
-            {/* <DialogContent> */}
+            <div className="heading-cart-popup">
+                <p>Add to your order</p>
+                <div>
+                    <IconButton onClick={handleClose}>
+                        <CloseIcon />
+                    </IconButton>
+                </div>
+            </div>
+
             <div
                 style={{
                     display: "flex",
                     justifyContent: "space-between",
                 }}
             >
-                <div className="accordion-content">
+                <div className="popup-content">
                     <h3>{plan} Equippment Protection Plan</h3>
                     <p className="title">From Asurion, LLC</p>
                     <div style={{ marginTop: "-15px" }}>
@@ -71,8 +78,10 @@ const ProtectionPopup = ({ open, handleClose, plan }) => {
                     </p>
                 </div>
                 <div className="btn-protection-model">
-                    <button>Add Protection</button>
-                    <button>No Thanks</button>
+                    <button className="add-btn" onClick={handleAddProtection}>
+                        Add Protection
+                    </button>
+                    <button onClick={handleClose}>No Thanks</button>
                 </div>
             </div>
         </Dialog>

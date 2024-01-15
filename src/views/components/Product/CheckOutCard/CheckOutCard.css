@@ -2,7 +2,6 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 20px;
     background-color: white;
-    max-width: 65%;
     margin-bottom: 12px;
     margin-left: 120px;
     position: relative;
@@ -19,6 +18,53 @@
     background-color: #eeeeee;
     height: 110px;
     border-radius: 8px;
+}
+.btn-protection-model button {
+    border: none;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: 1px solid #1a8031;
+    padding: 9px 40px;
+    background-color: #fff;
+    color: #1a8031;
+}
+.btn-protection-model .add-btn {
+    background-color: #1a8031;
+    color: #fff;
+    margin-bottom: 10px;
+}
+.popup-content {
+    padding: 30px;
+}
+.heading-cart-popup {
+    display: flex;
+    justify-content: space-between;
+    background-color: #eee;
+    padding: 10px;
+    border-bottom: 1px solid #b8b8b9;
+}
+.heading-cart-popup p {
+    color: #000;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 10px;
+}
+.popup-content .title {
+    color: #565959;
+    font-size: 14px;
+    font-weight: 400;
+}
+.popup-content .details-of-protection {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+.popup-content h3 {
+    font-size: 21px;
+    font-weight: 700;
 }
 .cart-text {
     font-weight: 400;

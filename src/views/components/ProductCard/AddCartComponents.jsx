@@ -13,6 +13,8 @@ const AddCartComponents = ({
     className,
     classNameforBuyNow,
     quantity = 1,
+    open,
+    setOpen,
     ...rest
 }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -23,7 +25,7 @@ const AddCartComponents = ({
     );
     const [show, setShow] = useState(false);
     const [cartItem, setCartItem] = useState(null);
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(false);
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -92,7 +94,7 @@ const AddCartComponents = ({
                 </>
             )}
             <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-                <ProtectionPlanDrawer />
+                <ProtectionPlanDrawer handleButton={cartClickHandler} />
             </Drawer>
         </div>
     );

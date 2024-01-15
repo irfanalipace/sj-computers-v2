@@ -22,6 +22,7 @@ export const CheckOutCard = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
     const [show, setShow] = useState(false);
     const [open, setOpen] = useState(false);
+    const [openDrawer, setOpenDrawer] = useState(false);
     const [cartItem, setCartItem] = useState(null);
     const [plan, setPlan] = useState("");
     const handleShow = () => setShow(!show);
@@ -254,6 +255,8 @@ export const CheckOutCard = ({ product }) => {
                                 </Button> */}
 
                                 <AddCartComponents
+                                    open={openDrawer}
+                                    setOpen={setOpenDrawer}
                                     product={product}
                                     quantity={quantity}
                                     className="button1 button-text-button"
@@ -450,6 +453,10 @@ export const CheckOutCard = ({ product }) => {
                     open={open}
                     handleClose={() => setOpen(false)}
                     plan={plan}
+                    handleAddProtection={() => {
+                        setOpen(false);
+                        setOpenDrawer(true);
+                    }}
                 />
             </div>
         </div>

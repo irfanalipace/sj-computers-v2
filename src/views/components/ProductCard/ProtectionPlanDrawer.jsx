@@ -7,24 +7,9 @@ import Checkbox from "@mui/material/Checkbox";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import StarRatings from "react-star-ratings";
 
-const ProtectionPlanDrawer = () => {
-    const [showThreeYearPlanDetails, setShowThreeYearPlanDetails] =
-        useState(false);
-    const [showFourYearPlanDetails, setShowFourYearPlanDetails] =
-        useState(false);
-    const [showTechUnlimitedPlanDetails, setShowTechUnlimitedPlanDetails] =
-        useState(false);
+const ProtectionPlanDrawer = ({ handleButton }) => {
+    const [protectionPlan, setProtectionPlan] = useState("");
 
-    // Function to toggle accordion content
-    const toggleAccordion = (plan) => {
-        if (plan === "threeYear") {
-            setShowThreeYearPlanDetails(!showThreeYearPlanDetails);
-        } else if (plan === "fourYear") {
-            setShowFourYearPlanDetails(!showFourYearPlanDetails);
-        } else if (plan === "techUnlimited") {
-            setShowTechUnlimitedPlanDetails(!showTechUnlimitedPlanDetails);
-        }
-    };
     return (
         <div style={{ padding: "20px" }}>
             <h1 className="heading-protection-plan mb-3">Add to your order</h1>
@@ -53,11 +38,17 @@ const ProtectionPlanDrawer = () => {
                     <p>3-Year Proection</p>{" "}
                     <p style={{ color: "red" }}>&nbsp;$23.99</p>
                 </div>
-                <button onClick={() => toggleAccordion("threeYear")}>
+                <button
+                    onClick={() => {
+                        protectionPlan === "3-Year"
+                            ? setProtectionPlan("")
+                            : setProtectionPlan("3-Year");
+                    }}
+                >
                     <KeyboardArrowDownIcon style={{ marginTop: "-2px" }} />{" "}
                     Learn More
                 </button>
-                {showThreeYearPlanDetails && (
+                {protectionPlan === "3-Year" && (
                     <div className="accordion-content">
                         <h3>3 Year Equippment Protection Plan</h3>
                         <p className="title">From Asurion, LLC</p>
@@ -115,11 +106,17 @@ const ProtectionPlanDrawer = () => {
                     <p>4-Year Proection</p>{" "}
                     <p style={{ color: "red" }}>&nbsp;$32.99</p>
                 </div>
-                <button onClick={() => toggleAccordion("fourYear")}>
+                <button
+                    onClick={() => {
+                        protectionPlan === "4-Year"
+                            ? setProtectionPlan("")
+                            : setProtectionPlan("4-Year");
+                    }}
+                >
                     <KeyboardArrowDownIcon style={{ marginTop: "-2px" }} />{" "}
                     Learn More
                 </button>
-                {showFourYearPlanDetails && (
+                {protectionPlan === "4-Year" && (
                     <div className="accordion-content">
                         <h3>4 Year Equippment Protection Plan</h3>
                         <p className="title">From Asurion, LLC</p>
@@ -184,11 +181,17 @@ const ProtectionPlanDrawer = () => {
                         <p style={{ color: "red" }}>&nbsp;$16.99/month</p>
                     </p>{" "}
                 </div>
-                <button onClick={() => toggleAccordion("techUnlimited")}>
+                <button
+                    onClick={() => {
+                        protectionPlan === "techUnlimited"
+                            ? setProtectionPlan("")
+                            : setProtectionPlan("techUnlimited");
+                    }}
+                >
                     <KeyboardArrowDownIcon style={{ marginTop: "-2px" }} />{" "}
                     Learn More
                 </button>
-                {showTechUnlimitedPlanDetails && (
+                {protectionPlan === "techUnlimited" && (
                     <div className="accordion-content">
                         <h3>Unlimited Equippment Protection Plan</h3>
                         <p className="title">From Asurion, LLC</p>
@@ -242,7 +245,7 @@ const ProtectionPlanDrawer = () => {
             </div>
             <div className="btn-grp mt-3">
                 <button className="add-prot-btn">Add Protection</button>
-                <button>No Thanks</button>
+                <button onClick={() => handleButton()}>No Thanks</button>
             </div>
         </div>
     );
