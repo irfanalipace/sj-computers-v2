@@ -1,19 +1,11 @@
-import {
-    Box,
-    Button,
-    Divider,
-    LinearProgress,
-    Stack,
-    Typography,
-} from "@mui/material";
 import React from "react";
+import { Box, Stack, Typography } from "@mui/material";
 import StarRatings from "react-star-ratings";
-import RatingWithLabel from "./RatingWithLabel";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import RatingWithLabel from "../ProductDetails/RatingWithLabel";
 
 export default function RatingDetails({ product }) {
     return (
-        <Box py={2} px={2}>
+        <Box py={0} px={2} maxWidth={"350px"}>
             <Typography fontWeight={700} fontSize={"20px"} lineHeight={"32px"}>
                 Customer reviews
             </Typography>
@@ -32,7 +24,7 @@ export default function RatingDetails({ product }) {
                     fontWeight={700}
                     fontSize={"18px"}
                     lineHeight={"24px"}
-                >{`${product?.rating} out of 5`}</Typography>
+                >{`${product?.rating || 0} out of 5`}</Typography>
             </Stack>
             <Typography
                 mt={1}
@@ -43,17 +35,11 @@ export default function RatingDetails({ product }) {
             >{`${366} globall rating`}</Typography>
 
             <Stack spacing={2}>
-                <RatingWithLabel label="5 Star" value={79} />
-                <RatingWithLabel label="4 Star" value={14} />
-                <RatingWithLabel label="3 Star" value={3} />
-                <RatingWithLabel label="2 Star" value={1} />
-                <RatingWithLabel label="1 Star" value={3} />
-            </Stack>
-            <Stack mt={2} spacing={2}>
-                <Divider sx={{ background: "#DDD", borderBottomWidth: 3 }} />
-                <Button endIcon={<ChevronRightIcon />}>
-                    See customer review
-                </Button>
+                <RatingWithLabel label="5 Star" value={79 || 0} />
+                <RatingWithLabel label="4 Star" value={14 || 0} />
+                <RatingWithLabel label="3 Star" value={3 || 0} />
+                <RatingWithLabel label="2 Star" value={1 || 0} />
+                <RatingWithLabel label="1 Star" value={3 || 0} />
             </Stack>
         </Box>
     );
