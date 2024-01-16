@@ -3,13 +3,7 @@ import React from "react";
 
 export default function ShipmentInformation() {
     return (
-        <Box
-            width={"375px"}
-            height={"280px"}
-            px={3}
-            pt={4.5}
-            border={"1px solid lightgray"}
-        >
+        <Box px={3} py={4} pt={4.5} border={"1px solid lightgray"}>
             <Typography
                 fontFamily={"Inter"}
                 fontWeight={500}

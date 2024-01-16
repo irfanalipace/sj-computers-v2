@@ -5,12 +5,11 @@ import ItemImage from "../../../assets/images/trackorder/item.png";
 export default function ItemsInShipment() {
     return (
         <Box
-            width={"375px"}
-            height={"280px"}
+            alignItems={"baseline"}
             px={3}
             pt={4.5}
             border={"1px solid lightgray"}
-            p={3}
+            py={4.5}
         >
             <Typography
                 fontFamily={"Inter"}

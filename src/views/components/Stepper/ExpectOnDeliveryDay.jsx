@@ -14,20 +14,18 @@ export default function ExpectOnDeliveryDay() {
                 What to Expect on Delivery Day
             </Typography>
 
-            <Stack direction={"row"} mt={3} spacing={2}>
+            <Stack direction={"row"} mt={3} spacing={1}>
                 <img src={HomeImage} alt="item" />
 
-                <Stack mt={2.5} spacing={0.5}>
-                    <Typography
-                        fontFamily={"Inter"}
-                        fontWeight={400}
-                        fontSize={"12px"}
-                        lineHeight={"17px"}
-                    >
-                        Lorem ipsum Lorem Ipsum is simply dummy text text ever
-                        since the 1500s, when an unknown dknfd.
-                    </Typography>
-                </Stack>
+                <Typography
+                    fontFamily={"Inter"}
+                    fontWeight={400}
+                    fontSize={"12px"}
+                    lineHeight={"17px"}
+                >
+                    Lorem ipsum Lorem Ipsum is simply dummy text text ever since
+                    the 1500s, when an unknown dknfd.
+                </Typography>
             </Stack>
         </Box>
     );

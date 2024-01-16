@@ -14,7 +14,7 @@ export default function TrackingHistory() {
                     Tracking History
                 </Typography>
                 <Typography
-                    sx={{ width: "300px", mt: 1 }}
+                    sx={{ maxWidth: "300px", mt: 1 }}
                     fontFamily={"Inter"}
                     fontWeight={400}
                     fontSize={"12px"}

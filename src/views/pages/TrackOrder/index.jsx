@@ -59,16 +59,16 @@ const TrackOrder = () => {
                     </Box>
                 </Box>
                 <CustomizedSteppers />
-                <Grid mt={5} container spacing={2}>
-                    <Grid item xs={5}>
+                <Grid mt={7} container columnSpacing={6}>
+                    <Grid item xs={12} sm={"12"} md={6} lg={5}>
                         <ShipmentInformation />
-                        <Box mt={6}>
+                        <Box mt={[4, 4, 6.6]}>
                             <ItemsInShipment />
                         </Box>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid mt={[4, 4, 0]} item xs={12} sm={12} md={6} lg={7}>
                         <TrackingHistory />
-                        <Box mt={6}>
+                        <Box mt={[4, 4, 6]}>
                             <ExpectOnDeliveryDay />
                         </Box>
                     </Grid>
