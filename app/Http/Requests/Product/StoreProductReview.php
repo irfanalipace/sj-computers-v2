@@ -29,7 +29,6 @@ class StoreProductReview extends FormRequest
             'product_id' => 'required|exists:products,id',
             'body' => 'required',
             'media_type' =>  'nullable|in:image,video',
-            'in:image,video',
             'rating' => 'required|numeric|min:1|max:5',
             'media' => 'nullable'
         ];
