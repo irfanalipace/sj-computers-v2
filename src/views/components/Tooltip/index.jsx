@@ -66,21 +66,19 @@
 // Tooltip.js
 
 import React from "react";
-import PropTypes from "prop-types";
+
 import "./index.css";
+import { Box } from "@mui/material";
 
 const Tooltip = ({ content, children }) => {
     return (
         <div className="tooltip-container">
             {children}
-            <div className="tooltip">{content}</div>
+            <Box className="tooltip" sx={{ left: { xs: "100%", md: "50%" } }}>
+                {content}
+            </Box>
         </div>
     );
-};
-
-Tooltip.propTypes = {
-    content: PropTypes.any.isRequired,
-    children: PropTypes.any.isRequired,
 };
 
 export default Tooltip;
