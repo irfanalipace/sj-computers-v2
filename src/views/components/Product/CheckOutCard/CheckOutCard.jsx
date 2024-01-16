@@ -486,7 +486,11 @@ export const CheckOutCard = ({ product }) => {
                             Tech Unlimited – Protect Eligible Past and Future
                             Purchases with 1 Plan (Renews Monthly Until
                             Cancelled) for
-                            <span style={{ color: "red" }}>
+                            <span
+                                style={{
+                                    color: "red",
+                                }}
+                            >
                                 &nbsp;$16.99/month
                             </span>
                         </label>

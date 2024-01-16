@@ -77,7 +77,7 @@ const ProtectionPopup = ({ open, handleClose, plan, handleAddProtection }) => {
                         <br />
                         More info :{" "}
                         <small style={{ color: "#1270c4" }}>
-                            3-Year Protection
+                            {plan} Protection
                         </small>
                     </p>
                 </div>

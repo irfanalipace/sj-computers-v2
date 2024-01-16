@@ -11,6 +11,7 @@ import Recommendation from "@components/Recommendation/Recommendation";
 import NotFound from "../NotFound/NotFound";
 
 import "./Product.css";
+import SimilarItems from "../../components/SimilarItems/SimilarItems";
 
 export default function Product() {
     const [isLoading, setIsLoading] = useState(true);
@@ -68,6 +69,7 @@ export default function Product() {
                         ) : (
                             <ProductComponent />
                         )}
+                        <SimilarItems products={products} />
                         <Recommendation products={products} />
                     </div>
                 </div>

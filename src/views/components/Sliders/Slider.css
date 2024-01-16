@@ -20,6 +20,10 @@ body {
     width: 97%;
     height: 100%;
 }
+.swiper-wrapper {
+    /* justify-content: space-between; */
+    /* width: 40%; */
+}
 
 .banner-slider-section .swiper-slide {
     text-align: center;
