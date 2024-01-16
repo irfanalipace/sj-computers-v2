@@ -18,14 +18,25 @@ class ReviewController extends BaseController
         $this->service = $service;
     }
 
-    public function getProductReview(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
     {
         $getProductReview = $this->service->getProductReviews($request);
         
         return $this->sendResponse($getProductReview,'Successfully feteched Product reviews.');
     }
 
-    public function createProductReview(StoreProductReview $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StoreProductReview $request)
     {
         try{
             DB::beginTransaction();
@@ -39,16 +50,43 @@ class ReviewController extends BaseController
         }
     }
 
-    /* Update product review */
-    public function updateProductReview(Request $request,$id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    { 
+        try{       
+            $getProductReview = $this->service->specificProductReview($id);
+
+            return $this->sendResponse($getProductReview,'Successfully fetched detail of product review.');
+        } catch(ModelNotFoundException $e) {
+            DB::rollBack();
+            return $this->sendError('error','Product Review not found.');
+        } catch(Exception $e) {
+        DB::rollBack();
+        return $this->sendError('error','Something went wrong ' . $e->getMessage());
+    }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
-        try{
-          
+        try{          
+            
             DB::beginTransaction();
-            $storeProductReview = $this->service->updateProductReview($request,$id);
+            $updateProductReview = $this->service->updateProductReview($request,$id);
 
             DB::commit();
-            return $this->sendResponse($storeProductReview,'Successfully product review updated.');
+            return $this->sendResponse($updateProductReview,'Successfully product review updated.');
         } catch(ModelNotFoundException $e) {
             DB::rollBack();
             return $this->sendError('error','Product Review not found.');
@@ -57,4 +95,15 @@ class ReviewController extends BaseController
             return $this->sendError('error','Something went wrong ' . $e->getMessage());
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    // public function destroy($id)
+    // {
+    //     //
+    // }
 }

@@ -235,8 +235,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('download-inventory', [InventoryController::class, 'downloadInventory'])->name('downloadInventory');
 
     /* Review and Rating */
-    Route::post('store-review',[ReviewController::class,'createProductReview']);
-    Route::put('update-review/{id}',[ReviewController::class,'updateProductReview']);
+    Route::resource('product-reviews',ReviewController::class)->only(['store','update','show']);
 });
 
 /*
@@ -259,6 +258,5 @@ Route::get('cancel', [PaypalController::class, 'cancel'])->name('cancel');
 /* 
     Get all reviews
 */
-Route::get('get-reviews',[ReviewController::class,'getProductReview']);
+Route::get('get-product-reviews',[ReviewController::class,'index']);
 Route::get('get-protection-plans',[ProductController::class,'getProtectivePlan']);
-

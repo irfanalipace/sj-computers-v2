@@ -50,4 +50,11 @@ class ReviewService
         $this->uploadMedia($update,$request);
         return $update;
     }
+
+    /* show detail of product review */
+    public function specificProductReview($id)
+    {
+        $with = ['productMedia:id,product_review_id,media_type,file_path','user:id,name'];
+        return $this->repository->show($id,$with );
+    }
 }

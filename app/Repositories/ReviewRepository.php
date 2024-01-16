@@ -49,7 +49,7 @@ class ReviewRepository
                 'product_review_id' => $productReview->id,
                 'media_type' => $request->media_type,
                 'file_name' => $file['file_name'],
-                'file_path' => asset('storage/' . $file['file_path']),
+                'file_path' => $file['file_path'],
             ]
         );
     }
@@ -57,8 +57,9 @@ class ReviewRepository
     /* Update review  */
     public function update($request,$id)
     {
-       $update = $this->productReviewModel->findOrFail($id);
-       $update->update([
+    //    $update = $this->productReviewModel->findOrFail($id);
+    dd($request);
+       $update = $this->productReviewModel->whereId($id)->update([
             'user_id' =>  $request->user_id ?? null,
             'guest_id' => $request->guest_id ?? null,
             'product_id' => $request->product_id,
@@ -68,5 +69,9 @@ class ReviewRepository
        return $update;
     }
 
-  
+    public function show($id,$with = [])
+    {
+        $query = $this->productReviewModel->query();
+        return $query->with($with)->findOrFail($id);
+    }
 }
