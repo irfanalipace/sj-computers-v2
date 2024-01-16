@@ -256,4 +256,9 @@ Route::post('paypal', [PayPalController::class, 'paypal'])->name('paypal');
 Route::get('success', [PaypalController::class, 'success'])->name('success');
 Route::get('cancel', [PaypalController::class, 'cancel'])->name('cancel');
 
+/* 
+    Get all reviews
+*/
 Route::get('get-reviews',[ReviewController::class,'getProductReview']);
+Route::get('get-protection-plans',[ProductController::class,'getProtectivePlan']);
+
