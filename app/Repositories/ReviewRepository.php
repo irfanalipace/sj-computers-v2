@@ -35,10 +35,23 @@ class ReviewRepository
                 'body' => $request->body,
                 'rating' => $request->rating
             ]
-        );
-       $this->uploadMedia($store,$request);
+        );      
        
         return $store;
+    }
+
+    /* save path of product review */
+    public function createProductMedia($file,$request,$productReview)
+    {
+        $productReview->productMedia()->updateOrCreate(
+            ['id' => $request->media->id ?? null],
+            [
+                'product_review_id' => $productReview->id,
+                'media_type' => $request->media_type,
+                'file_name' => $file['file_name'],
+                'file_path' => asset('storage/' . $file['file_path']),
+            ]
+        );
     }
 
     /* Update review  */
@@ -52,35 +65,8 @@ class ReviewRepository
             'body' => $request->body,
             'rating' => $request->rating
        ]);
-
-       $this->uploadMedia($update,$request);
        return $update;
     }
 
-    private function uploadMedia($productReview,$request)
-    {
-        $media = $request->hasFile('media') ?? '';
-        if($media) {
-            $productReviewMedia = $request->file('media');
-
-            // Ensure $productReviewMedia is always a collection
-            if (!is_array($productReviewMedia)) {
-                $productReviewMedia = [$productReviewMedia];
-            }
-            
-            foreach ($productReviewMedia as $key => $file) {
-                $directory = 'uploads/productReviews';
-                $file = uploadMediaStorage($file,$directory);
-                $productReview->productMedia()->updateOrCreate(
-                    ['id' => $request->media[$key]->id ?? null],
-                    [
-                        'product_review_id' => $productReview->id,
-                        'media_type' => $request->media_type,
-                        'file_name' => $file['file_name'],
-                        'file_path' => asset('storage/' . $file['file_path']),
-                    ]
-                );
-            }
-        }
-    }
+  
 }
