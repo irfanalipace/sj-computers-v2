@@ -26,7 +26,7 @@ class OrderController extends BaseController
             switch ($request->payment_type) {
                 case StatusEnum::PAYMENTTYPEPAYPAL:
                     # code...
-                    $url = route('processTransaction');
+                    $url = route('paypal');
                     $response = new RedirectResponse($url, 307);
                     return $response;
                     break;

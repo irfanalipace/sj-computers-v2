@@ -16,6 +16,7 @@ use App\Http\Requests\Cart\LocalStorageItemsRequest;
 use App\Http\Requests\Cart\UpdateQuantityRequest;
 use App\Models\Guest;
 use App\Models\Product;
+use App\Models\Product\ProtectivePlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use multitypetest\model\Car;
@@ -74,11 +75,14 @@ class CartController extends BaseController
 
         try {
             $product = Product::find($request->product_id);
+            $protectivePlan = ProtectivePlan::find($request->protective_plan_id);
             // Check if quantity is less than product quantity
             if ($request->qty > $product->quantity) {
-                return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of stock.'), 400, []);
-            }
-            Cart::session($this->userId)->add($product->id, $product->name, number_format((float)$product->price, 2, '.', '') ?? 0, $request->qty, array(), array(), $product);
+                throw new Exception('Product quantity is out of stock');
+            }          
+            $totalPrice = ($protectivePlan) ? $product->price + $protectivePlan->price : $product->price;
+            
+            Cart::session($this->userId)->add($product->id, $product->name, number_format((float)$totalPrice, 2, '.', '') ?? 0, $request->qty, array(), array(), $product);
 
             $items = $this->getItems(true);
 
@@ -246,15 +250,17 @@ class CartController extends BaseController
                 return $this->sendError([]);
             }
             $quantity = \Cart::session($this->userId)->getTotalQuantity();
+            $protectivePlan = ProtectivePlan::find($request->protective_plan_id);
+            
             foreach ($request->cartItems as $value) {
                 $validationQty = $quantity + $value['qty'];
                 $product = Product::find($value['product_id']);
-
+                $totalPrice = ($protectivePlan) ? $product->price + $protectivePlan->price : $product->price;
                 if ($quantity > $product->quantity) {
                     return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of range.'), 400, []);
                 } elseif ($validationQty < $product->quantity) {
                     // Check if quantity is less than product quantity
-                    Cart::session($this->userId)->add($product->id, $product->name, $product->price ?? 0, $value['qty'], array(), array(), $product);
+                    Cart::session($this->userId)->add($product->id, $product->name, number_format((float)$totalPrice, 2, '.', '') ?? 0, $value['qty'], array(), array(), $product);
                 } else {
                     return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of range.'), 400, []);
                 }

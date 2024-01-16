@@ -5,7 +5,8 @@ use App\Http\Controllers\CareerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
-use App\Http\Controllers\Api\PayPal\PaypalController;
+//use App\Http\Controllers\Api\PayPal\PaypalController;
+use App\Http\Controllers\Api\PayPalController;
 use App\Http\Controllers\Api\PayPal\PaypalwebhookController;
 use App\Http\Controllers\Api\ShoppingCart\CartController;
 use App\Http\Controllers\Api\Setting\ProfileController;
@@ -25,6 +26,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\Blog\BlogController;
 use App\Http\Controllers\Api\RefundController;
 use App\Http\Controllers\Api\Meta\MetaDetailController;
+use App\Http\Controllers\Api\Product\ReviewController;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -206,10 +208,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     /*
     * PayPal integration
-    */
-    Route::post('paypalwebhooks', [PaypalwebhookController::class, 'webhooks'])->name('paypalwebhooks');
-
-    Route::post('process-transaction', [PaypalController::class, 'processTransaction'])->name('processTransaction');
+    //    */
+    //    Route::post('paypalwebhooks', [PaypalwebhookController::class, 'webhooks'])->name('paypalwebhooks');
+    //
+    //    Route::post('process-transaction', [PaypalController::class, 'processTransaction'])->name('processTransaction');
 
     /*
      * get order-record
@@ -231,6 +233,9 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     * Download inventory Excel
     */
     Route::get('download-inventory', [InventoryController::class, 'downloadInventory'])->name('downloadInventory');
+
+    /* Review and Rating */
+    Route::resource('product-reviews',ReviewController::class)->only(['store','update','show']);
 });
 
 /*
@@ -242,3 +247,16 @@ Route::get('career/{career}', [CareerController::class, 'show'])->name('career')
 * Career Applications
 */
 Route::post('store-career-applications', [CareerApplicationController::class, 'store'])->name('store-career-applications');
+
+/*
+* Paypal Integration
+*/
+Route::post('paypal', [PayPalController::class, 'paypal'])->name('paypal');
+Route::get('success', [PaypalController::class, 'success'])->name('success');
+Route::get('cancel', [PaypalController::class, 'cancel'])->name('cancel');
+
+/* 
+    Get all reviews
+*/
+Route::get('get-product-reviews',[ReviewController::class,'index']);
+Route::get('get-protection-plans',[ProductController::class,'getProtectivePlan']);
