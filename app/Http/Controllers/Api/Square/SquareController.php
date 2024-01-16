@@ -77,7 +77,6 @@ class SquareController extends BaseController
         DB::beginTransaction();
 
         try {
-
             $idempotencyKey = uniqid();
 
             //create customer || retrieve customer if already added
@@ -167,7 +166,7 @@ class SquareController extends BaseController
             return $this->sendResponse(['Order' => $orderData, "cart_data" => $check_product_first], StatusEnum::PAYMENTMESSAGE);
         } catch (Exception $e) {
             DB::rollBack();
-            // send error to admin 
+            // send error to admin
             SendErrorMail::dispatch($this->user,$orderData,$order);
             return response()->json(['code' => 400, 'message' => "something went wrong." . $e]);
         }

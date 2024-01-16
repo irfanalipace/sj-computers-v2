@@ -14,37 +14,9 @@ use App\Http\Requests\StoreShippingAddressRequest;
 use App\Models\OrderShippingAddress;
 use App\Models\UserAddress;
 use Exception;
-use Illuminate\Http\RedirectResponse;
 
 class OrderController extends BaseController
 {
-    //
-    public function placeOrder(Request $request)
-    {
-        try {
-
-            switch ($request->payment_type) {
-                case StatusEnum::PAYMENTTYPEPAYPAL:
-                    # code...
-                    $url = route('paypal');
-                    $response = new RedirectResponse($url, 307);
-                    return $response;
-                    break;
-                case StatusEnum::PAYMENTTYPESQUARE:
-                    $url = route('squreCharge');
-                    $response = new RedirectResponse($url, 307);
-                    return $response;
-                    break;
-                default:
-                    # code...
-                    return response()->json(['code' => 400, 'msg' => "Please choose one option"]);
-                    break;
-            }
-        } catch (Exception $e) {
-            return response()->json(['status' => 400, 'msg', 'Something went wrong.' . $e]);
-        }
-    }
-
     public function getShippingAddress()
     {
         $shippingAdress = UserAddress::where('user_id', auth()->user()->id)->first();
