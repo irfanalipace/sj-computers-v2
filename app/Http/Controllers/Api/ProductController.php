@@ -8,6 +8,7 @@ use App\Http\Requests\ProductDetailAsinRequest;
 use App\Models\CategoryProduct;
 use App\Models\IpAddress;
 use App\Models\Product;
+use App\Models\Product\ProtectivePlan;
 use App\Models\ProductInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -230,6 +231,12 @@ class ProductController extends BaseController
             ->toArray();
 
         return array_merge($productInfos, $ids);
+    }
+
+    public function getProtectivePlan(Request $request)
+    {
+        $protectivePlans = ProtectivePlan::all();
+        return $this->sendResponse($protectivePlans,'Successfully fetched plans.');
     }
 
 }

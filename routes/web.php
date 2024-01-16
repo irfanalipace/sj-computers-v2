@@ -9,6 +9,8 @@ use Laravel\Fortify\Fortify;
 use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\HoldRelease\HoldReleaseController;
 use App\Http\Controllers\SiteMapController;
+use App\Http\Controllers\Api\PayPalController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +24,7 @@ use App\Http\Controllers\SiteMapController;
 */
 
 
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+Route::get('password/reset', [ForgotPasswordController::class,'showLinkRequestForm']);
 
 Route::get('hold-release-product',[HoldReleaseController::class,'updateRecord'])->name('hold-release-product');
 
@@ -45,7 +47,3 @@ Route::get('/{path?}', function () {
     return view('index');
 })->where('path', '^(?!api).*$')
     ->where('path', '^(?!storage).*$');
-
-
-
-
