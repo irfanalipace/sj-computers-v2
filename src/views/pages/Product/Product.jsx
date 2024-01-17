@@ -68,7 +68,7 @@ export default function Product() {
                         ) : (
                             <ProductComponent />
                         )}
-                        <ProductReviews />
+                        <ProductReviews reviews={products} />
                         <Recommendation products={products} />
                     </div>
                 </div>

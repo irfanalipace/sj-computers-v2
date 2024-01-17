@@ -1,11 +1,10 @@
 import React from "react";
 import RatingDetails from "@components/Product/ProductReviews/RatingDetails";
 import "./ProductReviews.css";
-import { Divider } from "@mui/material";
 import { Link } from "react-router-dom";
 import ReviewImages from "./ReviewImages";
 
-function ProductReviews() {
+function ProductReviews({ reviews }) {
     return (
         <div className="product-reviews-section product-section" id="reviews">
             <div className="product-reviews-container">
@@ -33,14 +32,16 @@ function ProductReviews() {
                         </div>
                     </div>
                     <div className="col-12 col-sm-6 col-md-8">
-                        <div className="d-flex justify-content-between">
+                        <div className="d-flex justify-content-between mb-2">
                             <h3 className="product-section-heading">
-                                Review with images
+                                Reviews with images
                             </h3>
-                            <button>View all images</button>
+                            <button className="view-all-images-btn">
+                                View all images
+                            </button>
                         </div>
 
-                        <ReviewImages />
+                        <ReviewImages reviews={reviews} />
                     </div>
                 </div>
             </div>
