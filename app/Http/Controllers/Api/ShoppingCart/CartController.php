@@ -65,7 +65,7 @@ class CartController extends BaseController
 
     private function clearNonAssociateItem($id)
     {
-        $cart = Cart::session($this->userId);
+        $cart = \Cart::session($this->userId);
         return $cart->remove($id);
     }
 
@@ -82,7 +82,9 @@ class CartController extends BaseController
             }          
             $totalPrice = ($protectivePlan) ? $product->price + $protectivePlan->price : $product->price;
             
-            Cart::session($this->userId)->add($product->id, $product->name, number_format((float)$totalPrice, 2, '.', '') ?? 0, $request->qty, array(), array(), $product);
+            $attribute = ($protectivePlan) ? $this->setProtectiveData($protectivePlan) : null;
+            
+            \Cart::session($this->userId)->add($product->id, $product->name, number_format((float)$totalPrice, 2, '.', '') ?? 0, $request->qty, $attribute, array(), $product);
 
             $items = $this->getItems(true);
 
@@ -245,24 +247,27 @@ class CartController extends BaseController
     public function storelocalStorageItems(LocalStorageItemsRequest $request)
     {
         try {
-
             if ($request->filled('carItems')) {
                 return $this->sendError([]);
             }
             $quantity = \Cart::session($this->userId)->getTotalQuantity();
             $protectivePlan = ProtectivePlan::find($request->protective_plan_id);
+           
+            $attribute =  $attribute = ($protectivePlan) ? $this->setProtectiveData($protectivePlan) : null;
             
             foreach ($request->cartItems as $value) {
                 $validationQty = $quantity + $value['qty'];
+                
                 $product = Product::find($value['product_id']);
+               
                 $totalPrice = ($protectivePlan) ? $product->price + $protectivePlan->price : $product->price;
                 if ($quantity > $product->quantity) {
-                    return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of range.'), 400, []);
+                   throw new Exception('Product quantity is out of range.');
                 } elseif ($validationQty < $product->quantity) {
                     // Check if quantity is less than product quantity
-                    Cart::session($this->userId)->add($product->id, $product->name, number_format((float)$totalPrice, 2, '.', '') ?? 0, $value['qty'], array(), array(), $product);
+                    Cart::session($this->userId)->add($product->id, $product->name, number_format((float)$totalPrice, 2, '.', '') ?? 0, $value['qty'], $attribute, array(), $product);
                 } else {
-                    return response(array('error' => true, 'data' => null, 'message' => 'Product quantity is out of range.'), 400, []);
+                    throw new Exception('Product quantity is out of range.');
                 }
             }
 
@@ -271,7 +276,7 @@ class CartController extends BaseController
             return response(array('success' => true, 'data' => $items, 'details' => $details, 'message' => 'Item added.', 'in_stock' => true), 200, []);
         } catch (Exception $e) {
 
-            return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong."), 400, []);
+            return response(array('error' => true, 'data' => $e, 'message' => "Something went wrong." . $e->getMessage()), 400, []);
         }
     }
 
@@ -420,5 +425,16 @@ class CartController extends BaseController
         } catch (Exception $e) {
             return response(array('error' => true, 'data' => $e->getMessage(), 'message' => "Something went wrong."), 400, []);
         }
+    }
+    
+    /* set protective data */
+    private function setProtectiveData($protectivePlan)
+    {
+        return [
+            'protective_name' =>  $protectivePlan->key ?? '',
+            'protective_value' => $protectivePlan->value ?? '',
+            'protective_price' => $protectivePlan->price ?? '',
+            'protective_id' => $protectivePlan->id ?? ''
+        ];
     }
 }
