@@ -13,6 +13,7 @@ import NotFound from "../NotFound/NotFound";
 import "./Product.css";
 import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
 import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
+import ProductVideo from "../../components/ProductVideo/ProductVideo";
 
 export default function Product() {
     const [isLoading, setIsLoading] = useState(true);
@@ -56,6 +57,7 @@ export default function Product() {
                 <div className="col-12 col-md-3 p-0 m-0">
                     <CheckOutCard product={{ ...product }} />
                 </div>
+                <ProductVideo />
                 <RefurbishedSection />
                 <ProductDescription product={product} />
             </div>
