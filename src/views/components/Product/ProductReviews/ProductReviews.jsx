@@ -33,10 +33,14 @@ function ProductReviews() {
                         </div>
                     </div>
                     <div className="col-12 col-sm-6 col-md-8">
-                        <h3 className="product-section-heading">
-                            Review Information
-                            <ReviewImages />
-                        </h3>
+                        <div className="d-flex justify-content-between">
+                            <h3 className="product-section-heading">
+                                Review with images
+                            </h3>
+                            <button>View all images</button>
+                        </div>
+
+                        <ReviewImages />
                     </div>
                 </div>
             </div>
