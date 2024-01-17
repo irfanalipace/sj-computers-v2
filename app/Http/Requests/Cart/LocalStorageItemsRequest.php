@@ -24,7 +24,10 @@ class LocalStorageItemsRequest extends FormRequest
     public function rules()
     {
         return [
-            'cartItems' => ['nullable']
+            'cartItems' => ['nullable'],
+            'cartItems.*.product_id' => 'required|exists:products,id',
+            'cartItems.*.qty' => 'required',
+            'cartItems.*.protective_plan_id' => 'nullable|exists:protective_plans,id',
         ];
     }
 }
