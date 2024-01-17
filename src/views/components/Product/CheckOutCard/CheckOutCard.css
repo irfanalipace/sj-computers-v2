@@ -1,9 +1,9 @@
 .card-section-right {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    padding: 15px;
     background-color: white;
     margin-bottom: 12px;
-    margin-left: 120px;
+    margin-left: 60px;
     position: relative;
     border-radius: 8px;
     border: 1px solid #d5d9d9;
@@ -94,7 +94,7 @@
 .check-box-container {
     display: flex;
     align-items: flex-start;
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
 }
 .check-box-container input {
     margin-top: 4px;
@@ -125,6 +125,7 @@
     display: flex;
     justify-content: flex-start;
     margin-bottom: 7px;
+    margin-left: 10px;
 }
 
 .color-card {
@@ -151,9 +152,6 @@
     bottom: 0%;
     background: #318243;
     border-radius: 20.5px;
-    /* display: flex;
-    justify-content: center; */
-    /* align-items: center; */
     max-width: 100%;
     width: 180px;
     height: 40px;
@@ -219,7 +217,7 @@
 }
 
 .button-cart-sell button {
-    width: 280px;
+    width: 100%;
     max-width: 90%;
     margin: 0 auto;
 }
@@ -248,24 +246,41 @@
 
 @media screen and (max-width: 780px) {
     .color-card-dev {
-        text-align: center;
+        text-align: flex-start;
     }
     .text-stock {
-        text-align: center;
+        text-align: flex-start;
         padding: 6px !important;
     }
     .color-text-cart {
         text-align: center;
     }
     .quantity-inner {
-        justify-content: center;
+        justify-content: flex-start;
     }
     .card-section-right {
         margin-top: 10px;
         box-shadow: none;
         border-right: none;
         border-left: none;
+        border-bottom: none;
         margin-left: 10px;
+        padding: 5px 0px 0px 0px;
+    }
+    .hidden-on-mobile {
+        display: none;
+    }
+    .protection-plan .check-box-container {
+        justify-content: space-around;
+    }
+    .details-container {
+        margin-left: 30px;
+    }
+}
+
+@media screen and (min-width: 780px) {
+    .hidden-on-desktop {
+        display: none;
     }
 }
 

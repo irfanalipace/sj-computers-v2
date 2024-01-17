@@ -86,17 +86,24 @@ export const CheckOutCard = ({ product }) => {
     return (
         <div>
             <div className="card-section-right">
-                <div>
+                <div className="hidden-on-mobile">
                     <h6 style={{ fontWeight: "700" }}>Excellent Condition</h6>
                     <h6 style={{ fontWeight: "700" }}>(Refurbished)</h6>
                 </div>
+                <div
+                    className="hidden-on-desktop"
+                    style={{ fontWeight: "600" }}
+                >
+                    ${product?.price?.toString().split(".")[0]}
+                </div>
                 <div className="row card-price-section-card-product">
-                    <div className="col-md-12 color-text-cart">
+                    <div className="col-md-12 color-text-cart hidden-on-mobile">
                         <sup>$</sup>
                         {product?.price?.toString().split(".")[0]}
                         <sup>{product?.price?.toString().split(".")[1]}</sup>
                     </div>
                 </div>
+
                 <div className="head">
                     <div className="">
                         <p className="cart-text">
@@ -133,7 +140,7 @@ export const CheckOutCard = ({ product }) => {
                             <div className="hover-box">
                                 <Link
                                     href="#"
-                                    className="text-decoration-none free-return"
+                                    className="text-decoration-none free-return hidden-on-mobile"
                                     style={{ color: "#2c8a9a" }}
                                 >
                                     FREE Returns
@@ -169,7 +176,7 @@ export const CheckOutCard = ({ product }) => {
                                 </div>
                             </div>
                         </div>{" "}
-                        <div className="card-dev-section-paragrap-product">
+                        <div className="card-dev-section-paragrap-product hidden-on-mobile">
                             <span className="dilvery-text-paragraph-card">
                                 <button style={{ color: "#2c8a9a" }}>
                                     FREE Delivery
@@ -184,7 +191,22 @@ export const CheckOutCard = ({ product }) => {
                                 Shipped by SJ Computers
                             </span>
                         </div>{" "}
-                        <div className="card-dev-section-paragrap-product">
+                        <div className="card-dev-section-paragrap-product hidden-on-desktop">
+                            <span className="dilvery-text-paragraph-card">
+                                <button
+                                    style={{ color: "#000", fontWeight: 400 }}
+                                >
+                                    Delivery by
+                                </button>{" "}
+                                <span style={{ fontWeight: "bold" }}>
+                                    {
+                                        orderEstimatedDelivery
+                                            ?.free_shipment_amount?.estimate_day
+                                    }
+                                </span>
+                            </span>
+                        </div>{" "}
+                        <div className="card-dev-section-paragrap-product hidden-on-mobile">
                             <span className="dilvery-text-paragraph-card">
                                 Or fastest Delivery&nbsp;
                                 <span style={{ fontWeight: "bold" }}>
@@ -287,6 +309,7 @@ export const CheckOutCard = ({ product }) => {
                                 </Button> */}
 
                                 <AddCartComponents
+                                    protectionPlan={plan}
                                     open={openDrawer}
                                     setOpen={setOpenDrawer}
                                     product={product}
@@ -311,7 +334,7 @@ export const CheckOutCard = ({ product }) => {
                     )}
 
                     <div className="details-container">
-                        <div className="col-xl-7 col-6">
+                        <div className="col-xl-7 col-5">
                             <span
                                 className="color-card-text-paragrap-payment"
                                 style={{ color: "#5F5E5E" }}
@@ -355,7 +378,7 @@ export const CheckOutCard = ({ product }) => {
                         </div>
                     </div>
                     <div className="details-container">
-                        <div className="col-xl-7 col-6">
+                        <div className="col-xl-7 col-5">
                             <span
                                 className="color-card-text-paragrap-payment ships-form-span-tag"
                                 style={{ color: "#5F5E5E" }}
@@ -370,7 +393,7 @@ export const CheckOutCard = ({ product }) => {
                         </div>
                     </div>
                     <div className="details-container">
-                        <div className="col-xl-7 col-6">
+                        <div className="col-xl-7 col-5">
                             <span
                                 className="color-card-text-paragrap-payment return-from-span-tag-checkout"
                                 style={{ color: "#5F5E5E" }}
@@ -423,7 +446,7 @@ export const CheckOutCard = ({ product }) => {
                         </div>
                     </div>
                 </div>
-                <hr></hr>
+                <hr className="hidden-on-mobile"></hr>
                 <Link
                     to={"/term_services"}
                     style={{
@@ -436,7 +459,7 @@ export const CheckOutCard = ({ product }) => {
                     Details
                 </Link>
                 <hr></hr>
-                <div className="protection-plan">
+                <div className="protection-plan hidden-on-mobile">
                     Add a Protection Plan :
                     <div className="check-box-container">
                         <input

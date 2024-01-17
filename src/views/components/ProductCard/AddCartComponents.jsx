@@ -15,6 +15,7 @@ const AddCartComponents = ({
     quantity = 1,
     open,
     setOpen,
+    protectionPlan,
     ...rest
 }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -81,7 +82,7 @@ const AddCartComponents = ({
         setPlan(matchingEnum.value);
     };
     return (
-        <div>
+        <>
             {cartItem?.id ? (
                 <Button className="add-to-card-button-mobile-product">
                     Item Already in Cart
@@ -90,15 +91,17 @@ const AddCartComponents = ({
                 <>
                     <Button
                         // onClick={cartClickHandler}
-                        onClick={() => setOpen(true)}
-                        isLoading={productAddingToCard && open}
+                        onClick={() => {
+                            protectionPlan ? cartClickHandler() : setOpen(true);
+                        }}
+                        isLoading={productAddingToCard}
                         className={className}
-                        style={{ marginBottom: "10px" }}
+                        // style={{ marginBottom: "10px" }}
                         {...rest}
                     >
                         Add to Cart
                     </Button>
-                    <Button
+                    {/* <Button
                         onClick={() => {
                             if (!open) {
                                 cartClickHandler();
@@ -109,10 +112,14 @@ const AddCartComponents = ({
                         {...rest}
                     >
                         Buy Now
-                    </Button>
+                    </Button> */}
                 </>
             )}
-            <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
+            <Drawer
+                anchor="right"
+                open={!protectionPlan && open}
+                onClose={() => setOpen(false)}
+            >
                 <ProtectionPlanDrawer
                     handleButton={() => {
                         if (open) {
@@ -127,7 +134,7 @@ const AddCartComponents = ({
                     ProtectionPlanCallBack={getPlanvalue}
                 />
             </Drawer>
-        </div>
+        </>
     );
 };
 

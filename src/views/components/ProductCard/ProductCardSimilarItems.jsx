@@ -140,38 +140,34 @@ const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
         </div>
     );
     return (
-        <div style={{ padding: "2px" }}>
-            <h3 className="similar-items-heading">
-                Similar Items with fast delivery
-            </h3>
-            <div className="product-similer-container">
-                <br />
+        <div className={` product   ${inGrid && "product-grid"}`}>
+            <Link to={`${new URL(product?.url).pathname}`}>
                 <div
-                    className={` product-similar   ${inGrid && "product-grid"}`}
+                    className={` ${
+                        inGrid ? "product-image-grid" : ""
+                    } product-image`}
                 >
-                    <Link to={`${new URL(product?.url).pathname}`}>
-                        <div
-                            className={` ${
-                                inGrid ? "product-image-grid" : ""
-                            } product-image1`}
-                        >
-                            <div className="image-wrapper0">
-                                <LazyLoadImage
-                                    width={"100%"}
-                                    height={"100%"}
-                                    src={product.image}
-                                    alt={product?.name
-                                        ?.trim()
-                                        ?.split(" ")
-                                        ?.slice(0, 9)
-                                        ?.join(" ")}
-                                />
-                            </div>
-                        </div>
-                    </Link>
-                    <ProductDetails />
+                    {/* {inGrid && (
+                <div className="product-badge">
+                    <div className="badge-text">Best Seller</div>
                 </div>
-            </div>
+            )} */}
+
+                    <div className="image-wrapper">
+                        <LazyLoadImage
+                            width={"100%"}
+                            height={"100%"}
+                            src={product.image}
+                            alt={product?.name
+                                ?.trim()
+                                ?.split(" ")
+                                ?.slice(0, 9)
+                                ?.join(" ")}
+                        />
+                    </div>
+                </div>
+            </Link>
+            <ProductDetails />
         </div>
     );
 };
