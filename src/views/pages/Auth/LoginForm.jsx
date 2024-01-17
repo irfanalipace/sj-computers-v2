@@ -10,10 +10,12 @@ import Header from "@components/Auth/Header";
 import Footer from "@components/Auth/Footer";
 
 import "@pages/Auth/auth.css";
+import { useSearchParams } from "react-router-dom";
 
 const LoginForm = () => {
     const currentPage = useSelector((state) => state.auth.currentPage);
     const dispatch = useDispatch();
+    let [searchParams, setSearchParams] = useSearchParams();
 
     const ActiveForm = {
         1: {
@@ -35,6 +37,11 @@ const LoginForm = () => {
             dispatch(RESET_PAGE());
         };
     }, []);
+
+    useEffect(() => {
+        setSearchParams({ ...searchParams, loginStage: currentPage });
+    }, [currentPage]);
+
     return (
         <div className="login-container-div">
             <div className="container form-container">
@@ -43,7 +50,7 @@ const LoginForm = () => {
                         <Header />
                     </div>
 
-                    {ActiveForm[currentPage].component}
+                    {ActiveForm[currentPage]?.component}
 
                     <div className="container new-data">
                         <div className="row">

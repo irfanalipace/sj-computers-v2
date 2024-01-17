@@ -6,8 +6,11 @@ use App\Models\Product;
 trait ProductTrait {
 
         public function setProductUrl($id){
-            $product = Product::find($id);
-
+            $product = Product::whereId($id)->where('quantity' ,'!=',0)->first();
+            if(!$product) {
+              return false;
+            }
+           
             $string = $product->name;
 
             $first_comma_pos = strpos($string, ',');

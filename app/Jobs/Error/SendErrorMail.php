@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Error;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -8,12 +8,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
-class GenerateInvoiceJob implements ShouldQueue
+class SendErrorMail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
     /**
      * Create a new job instance.
      *
@@ -34,23 +34,15 @@ class GenerateInvoiceJob implements ShouldQueue
      */
     public function handle()
     {
-
+       
         $order['orderDetail'] = $this->cartData;
         $order['userInfo'] = $this->user;
         $order['OrderAddress'] = $this->order['OrderAddress'];
         $order['order'] = $this->order['order'];
-        //Email to customer
-        $email = $this->user->email;
-        $ccEmail = 'orders@sjcomputers.us';
-        //order mail for customer
-        Mail::send('emails.order.customer-order', ['data' => $order], function ($m) use ($email) {
+          //order mail for admin
+          Mail::send('emails.order.error.error-order-admin', ['data' => $order], function ($m) {
             $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
-            $m->to($email)->subject('Order Placed.');
-        });
-        Mail::send('emails.order.order-send-to-admin', ['data' => $order], function ($m) use ($email, $ccEmail) {
-            $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
-            $m->to(config('mail.from.address'))->subject('Order Placed.');
-            $m->cc($ccEmail);
+            $m->to(config('mail.from.address'))->subject('Error in Order Placed.');
         });
     }
 }

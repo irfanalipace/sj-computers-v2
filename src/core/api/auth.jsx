@@ -82,11 +82,16 @@ export function verifyEmailApi(email) {
     });
 }
 
-export function verifyOtpApi({ otp }) {
+export function verifyOtpApi({ otp }, token) {
     return new Promise((resolve, reject) => {
-        ApiService.post("verify-otp", {
-            otp_code: otp,
-        })
+        ApiService.post(
+            "verify-otp",
+            {
+                otp_code: otp,
+            },
+            "",
+            token
+        )
             .then((response) => {
                 console.print(
                     "file: auth.module.js | verifyOtpApi| response",
