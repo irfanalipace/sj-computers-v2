@@ -68,14 +68,17 @@ const AddCartComponents = ({
         setCartItem(item);
     }, [cart]);
 
+    const PlanEnum = {
+        THREE_YEAR: { value: "1", label: "3-Year" },
+        FOUR_YEAR: { value: "2", label: "4-Year" },
+        DEFAULT: { value: "3", label: "unlimited" },
+    };
+
     const getPlanvalue = (id) => {
-        if (id === "3-Year") {
-            setPlan("1");
-        } else if (id === "4-Year") {
-            setPlan("2");
-        } else {
-            setPlan("3");
-        }
+        const matchingEnum = Object.values(PlanEnum).find(
+            (enumEntry) => enumEntry.label === id
+        );
+        setPlan(matchingEnum.value);
     };
     return (
         <div>

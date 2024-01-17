@@ -262,6 +262,10 @@
     }
     .card-section-right {
         margin-top: 10px;
+        box-shadow: none;
+        border-right: none;
+        border-left: none;
+        margin-left: 10px;
     }
 }
 
