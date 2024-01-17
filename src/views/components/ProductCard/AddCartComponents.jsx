@@ -44,7 +44,7 @@ const AddCartComponents = ({
                 ...product,
                 in_stock: quantity >= product.quantity ? false : true,
             },
-            protective_plan_id: 
+            protective_plan_id: plan ? plan : null,
         };
 
         const cartDetails = {
@@ -68,6 +68,15 @@ const AddCartComponents = ({
         setCartItem(item);
     }, [cart]);
 
+    const getPlanvalue = (id) => {
+        if (id === "3-Year") {
+            setPlan("1");
+        } else if (id === "4-Year") {
+            setPlan("2");
+        } else {
+            setPlan("3");
+        }
+    };
     return (
         <div>
             {cartItem?.id ? (
@@ -107,6 +116,12 @@ const AddCartComponents = ({
                             cartClickHandler();
                         }
                     }}
+                    handleAddingProtec={() => {
+                        if (plan) {
+                            cartClickHandler();
+                        }
+                    }}
+                    ProtectionPlanCallBack={getPlanvalue}
                 />
             </Drawer>
         </div>

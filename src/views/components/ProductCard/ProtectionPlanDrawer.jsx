@@ -7,11 +7,16 @@ import Checkbox from "@mui/material/Checkbox";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import StarRatings from "react-star-ratings";
 
-const ProtectionPlanDrawer = ({ handleButton }) => {
+const ProtectionPlanDrawer = ({
+    handleButton,
+    ProtectionPlanCallBack,
+    handleAddingProtec,
+}) => {
     const [protectionPlan, setProtectionPlan] = useState("");
     const [planValue, setPlanValue] = useState("");
     const handleCheckboxChange = (value) => {
         setPlanValue(planValue === value ? "" : value);
+        ProtectionPlanCallBack(planValue === value ? "" : value);
     };
 
     return (
@@ -314,7 +319,12 @@ const ProtectionPlanDrawer = ({ handleButton }) => {
                 )}
             </div>
             <div className="btn-grp mt-3">
-                <button className="add-prot-btn">Add Protection</button>
+                <button
+                    className="add-prot-btn"
+                    onClick={() => handleAddingProtec()}
+                >
+                    Add Protection
+                </button>
                 <button onClick={() => handleButton()}>No Thanks</button>
             </div>
         </div>
