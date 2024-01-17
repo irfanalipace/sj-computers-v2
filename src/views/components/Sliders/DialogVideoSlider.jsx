@@ -30,6 +30,14 @@ function DialogVideoSlider({products}) {
         <Grid container position={"relative"} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
             <Swiper
                 slidesPerView={2}
+                breakpoints={{
+                    200: {
+                        slidesPerView: 1,
+                    },
+                    500: {
+                        slidesPerView: 2,
+                    },
+                }}
                 spaceBetween={15}
                 style={{padding: " 10px 30px"}}
                 
