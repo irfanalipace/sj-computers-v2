@@ -38,4 +38,14 @@ return [
     'notify_url'     => '', // Change this accordingly for your application.
     'locale'         => '', // force gateway language  i.e. it_IT, es_ES, en_US ... (for express checkout only)
     'validate_ssl'   => true, // Validate SSL when creating api client.
+
+//    'client_id' => 'AXQvpHWUW9kxYwwq1N7ku4IDmr6Y2Tm9xsdcM2XaaDvTp_WRZQQyeS7jaugwSCRlSjXTwP3NHxxA-ogE',
+//    'secret' => 'EC-Yau6V5LFW-XXFq6-B_O9bfHlN2yC3AKdQLv5RqjhdSjqXVae66ppgwRKr8n1cL0pHlQc_ZolDHuyG',
+//    'settings' => array(
+//        'mode' => 'sandbox',
+//        'http.ConnectionTimeOut' => 1000,
+//        'log.LogEnabled' => true,
+//        'log.FileName' => storage_path() . '/logs/paypal.log',
+//        'log.LogLevel' => 'FINE'
+//    ),
 ];

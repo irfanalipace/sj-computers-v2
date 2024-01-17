@@ -12,6 +12,7 @@ import NotFound from "../NotFound/NotFound";
 
 import "./Product.css";
 import SimilarItems from "../../components/SimilarItems/SimilarItems";
+import ProductVideo from "../../components/ProductVideo/ProductVideo";
 
 export default function Product() {
     const [isLoading, setIsLoading] = useState(true);
@@ -55,6 +56,8 @@ export default function Product() {
                 <div className="col-12 col-md-3 p-0 m-0">
                     <CheckOutCard product={{ ...product }} />
                 </div>
+                <SimilarItems products={products} />
+                <ProductVideo />
             </div>
         );
     };
@@ -69,7 +72,6 @@ export default function Product() {
                         ) : (
                             <ProductComponent />
                         )}
-                        <SimilarItems products={products} />
                         <Recommendation products={products} />
                     </div>
                 </div>

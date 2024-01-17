@@ -9,8 +9,8 @@ const SimilarItems = ({ products }) => {
     const isLoading = useSelector((state) => state?.products.isLoading);
 
     return (
-        <div className="similar-items-container mt-5">
-            <div className="similar-items-inner">
+        <div className="recommendation-container">
+            <div className="recommendation-inner">
                 <div className="slider-wrapper">
                     {isLoading || !products ? (
                         <LoaderComponent />

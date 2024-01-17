@@ -16,6 +16,7 @@ const AddCartComponents = ({
     open,
     setOpen,
     protectionPlan,
+    checkplan,
     ...rest
 }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -26,7 +27,7 @@ const AddCartComponents = ({
     );
     const [show, setShow] = useState(false);
     const [cartItem, setCartItem] = useState(null);
-    const [plan, setPlan] = useState(false);
+    const [plan, setPlan] = useState(null);
     // const [open, setOpen] = useState(false);
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const AddCartComponents = ({
                 ...product,
                 in_stock: quantity >= product.quantity ? false : true,
             },
-            protective_plan_id: plan ? plan : null,
+            protective_plan_id: plan || checkplan,
         };
 
         const cartDetails = {

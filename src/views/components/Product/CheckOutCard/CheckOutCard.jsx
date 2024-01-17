@@ -21,6 +21,7 @@ export const CheckOutCard = ({ product }) => {
     // const isLoading = useSelector((state) => state.cart.isLoading);
     const [quantity, setQuantity] = useState(1);
     const [show, setShow] = useState(false);
+    const [protPlan, setProtPlan] = useState("");
     const [open, setOpen] = useState(false);
     const [openDrawer, setOpenDrawer] = useState(false);
     const [cartItem, setCartItem] = useState(null);
@@ -82,6 +83,19 @@ export const CheckOutCard = ({ product }) => {
                 : "Unlimited"
         );
     }
+
+    const PlanEnum = {
+        THREE_YEAR: { value: "1", label: "3-Year" },
+        FOUR_YEAR: { value: "2", label: "4-Year" },
+        DEFAULT: { value: "3", label: "unlimited" },
+    };
+
+    const getPlanvalue = (id) => {
+        const matchingEnum = Object.values(PlanEnum).find(
+            (enumEntry) => enumEntry.label === id
+        );
+        setPlan(matchingEnum.value);
+    };
 
     return (
         <div>
@@ -309,6 +323,7 @@ export const CheckOutCard = ({ product }) => {
                                 </Button> */}
 
                                 <AddCartComponents
+                                    checkplan={protPlan}
                                     protectionPlan={plan}
                                     open={openDrawer}
                                     setOpen={setOpenDrawer}
@@ -466,7 +481,10 @@ export const CheckOutCard = ({ product }) => {
                             type="checkbox"
                             className="protectionPlanCheckbox"
                             id="protectionPlanCheckbox"
-                            onClick={handleCheckboxClick}
+                            onClick={(e) => {
+                                handleCheckboxClick(e);
+                                setProtPlan("1");
+                            }}
                         />
                         <label
                             htmlFor="protectionPlanCheckbox"
@@ -483,7 +501,10 @@ export const CheckOutCard = ({ product }) => {
                             type="checkbox"
                             className="protectionPlanCheckbox"
                             id="protectionPlanCheckbox1"
-                            onClick={handleCheckboxClick}
+                            onClick={(e) => {
+                                handleCheckboxClick(e);
+                                setProtPlan("2");
+                            }}
                         />
                         <label
                             htmlFor="protectionPlanCheckbox1"
@@ -495,17 +516,20 @@ export const CheckOutCard = ({ product }) => {
                             </span>
                         </label>
                     </div>
-                    <div
-                        className="check-box-container"
-                        onClick={() => setOpen(true)}
-                    >
+                    <div className="check-box-container">
                         <input
                             type="checkbox"
                             className="protectionPlanCheckbox"
                             id="protectionPlanCheckbox2"
-                            onClick={handleCheckboxClick}
+                            onClick={(e) => {
+                                handleCheckboxClick(e);
+                                setProtPlan("3");
+                            }}
                         />
-                        <label htmlFor="protectionPlanCheckbox2">
+                        <label
+                            htmlFor="protectionPlanCheckbox2"
+                            onClick={() => setOpen(true)}
+                        >
                             Tech Unlimited – Protect Eligible Past and Future
                             Purchases with 1 Plan (Renews Monthly Until
                             Cancelled) for
