@@ -16,8 +16,8 @@ import sjLogo from "../../../assets/images/sj-logo.jpg";
 import PlayCircleOutlineSharpIcon from "@mui/icons-material/PlayCircleOutlineSharp";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
-import Recommendation from "../../components/Recommendation/Recommendation"
 import { useSelector } from "react-redux";
+import DialogVideoRecommendation from "../DialogVideoRecommendation/DialogVideoRecommendation";
 
 function VideoCard({ tumbnail, Tumbnails }) {
 
@@ -41,10 +41,10 @@ function VideoCard({ tumbnail, Tumbnails }) {
 
     const VideoDialog = ({tumbnail, Tumbnails}) => {
         return (
-            <Dialog open={open} onClose={handleClose} maxWidth="lg" fullWidth sx={{maxHeight: "none",}} >
-            <DialogContent sx={{ p: 0, position: "relative", borderRadius: "2px" }}>
+            <Dialog open={open} onClose={handleClose} maxWidth="lg" fullWidth sx={{maxHeight: "none",}}  >
+            <DialogContent sx={{ p: 0, position: "relative", borderRadius: "2px", }}>
                 <Grid container >
-                    <Grid item xs={12} md={8} container>
+                    <Grid item xs={12} md={7.5} container>
                         <Grid item xs={12}>
                             <video
                                 width={"100%"}
@@ -55,12 +55,14 @@ function VideoCard({ tumbnail, Tumbnails }) {
                         </Grid>
                         <Grid item xs={12} p={2} >
                             <Typography variant="p" lineHeight={1.3}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium rerum commodi error.</Typography>
-                            <Recommendation products={products} inVideoDialog={true} />
                         </Grid>
+                        <Grid item xs={12}>
+                            <DialogVideoRecommendation products={products} />
+                        </Grid>    
                     </Grid>
                     <Grid
                         item
-                        md={4}
+                        md={4.5}
                         sx={{ backgroundColor: "#333333", color: "white" }}
                         container
                         // px={1}
