@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
+/public/assets
 /public/js
 /public/index.html
 /public/mix-manifest.json
@@ -12,6 +13,7 @@
 /public/mix-manifest.json
 .env
 /composer.lock
+/dist
 /package-lock.json
 .phpunit.result.cache
 docker-compose.override.yml

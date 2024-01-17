@@ -85,7 +85,12 @@ export const CartItem = memo(({ cartData }) => {
                             <div className="col-md-10">
                                 <Link
                                     className="items-card-name"
-                                    to={cartData?.product?.url}
+                                    to={
+                                        new URL(
+                                            cartData?.product?.url ||
+                                                location.href
+                                        ).pathname
+                                    }
                                 >
                                     <strong className="item-details">
                                         {cartData?.product?.name}

@@ -1,6 +1,6 @@
 export const initLogService = () => {
     // Replace the global console object
-    if (process.env.REACT_APP_ENVIRONMENT === "development") {
+    if (import.meta.env.VITE_APP_ENVIRONMENT === "development") {
         // Create a custom console object
         const print = function (...args) {
             console.log(...args);

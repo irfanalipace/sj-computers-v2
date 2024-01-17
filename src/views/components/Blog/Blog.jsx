@@ -5,25 +5,25 @@ import "./Blog.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
-    getBlogsPagesApi,
+    // getBlogsPagesApi,
     blogSlugApiblogDetails,
     getBlogsHeaderPagesApi,
-    getBlogCategories,
+    // getBlogCategories,
 } from "../../../core/api/blogs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
-    faTwitter,
+    // faTwitter,
     faFacebook,
-    faYoutube,
+    // faYoutube,
     faInstagram,
     faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import NotFound from "../../pages/NotFound/NotFound";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import smimage from "@images/blog/smallimage.png";
-import primardataimage from "@images/blog/meeting.png";
+// import smimage from "@images/blog/smallimage.png";
+// import primardataimage from "@images/blog/meeting.png";
 import { Loader } from "@mantine/core";
 import DOMPurify from "dompurify";
 
@@ -576,7 +576,7 @@ const Blog = () => {
                                     <div className="col-md-7">
                                         <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
                                             <div
-                                                id="blog-content blogs-table-content-details"
+                                                id="blog-content"
                                                 dangerouslySetInnerHTML={{
                                                     __html: DOMPurify.sanitize(
                                                         blogdteails.content

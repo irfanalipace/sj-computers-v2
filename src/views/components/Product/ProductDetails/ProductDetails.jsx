@@ -18,50 +18,57 @@ const ProductDetails = ({ product }) => {
     const [productDetails, setProductDetails] = useState([]);
 
     useEffect(() => {
-        productDetailsArray();
+        const parseProductDetailsArray = () => {
+            if (!product?.description) return;
+
+            const productDescriptionArray = Object.entries(product.description)
+                .map(([key, value]) => {
+                    if (key === "bullet_point") {
+                        setDescription(value);
+                        return null;
+                    }
+
+                    let _value = "";
+                    if (Array.isArray(value)) {
+                        const firstValue = value[0];
+                        if (firstValue?.value) {
+                            let unit = firstValue.unit || "";
+                            _value = `${firstValue.value} ${unit}`;
+                        } else if (
+                            firstValue?.installed_size &&
+                            Array.isArray(firstValue.installed_size)
+                        ) {
+                            let unit = firstValue.installed_size[0]?.unit || "";
+                            _value = `${firstValue.installed_size[0]?.value} ${unit}`;
+                        } else if (
+                            firstValue?.family &&
+                            Array.isArray(firstValue.family)
+                        ) {
+                            _value = firstValue.family[0]?.value || "";
+                        } else if (
+                            firstValue?.size &&
+                            Array.isArray(firstValue.size)
+                        ) {
+                            let unit = firstValue.size[0]?.unit || "";
+                            _value = `${firstValue.size[0]?.value} ${unit}`;
+                        }
+                    }
+
+                    if (acceptedKeys.includes(key)) {
+                        return {
+                            key: snakeCaseToPrettyText(key),
+                            value: _value,
+                        };
+                    }
+
+                    return null;
+                })
+                .filter(Boolean);
+
+            setProductDetails(productDescriptionArray);
+        };
+        parseProductDetailsArray();
     }, [product?.description]);
-
-    const productDetailsArray = () => {
-        Object.entries(product?.description).forEach(([key, value]) => {
-            let _value = "";
-            if (key === "bullet_point") {
-                setDescription(value);
-                return;
-            }
-            if (Array.isArray(value)) {
-                if (value[0]?.value) {
-                    let unit = value[0]?.unit ? value[0]?.unit : "";
-                    _value = value[0]?.value + " " + unit;
-                } else if (
-                    value[0]?.installed_size &&
-                    Array.isArray(value[0]?.installed_size)
-                ) {
-                    let unit = value[0]?.installed_size[0]?.unit
-                        ? value[0]?.installed_size[0]?.unit
-                        : "";
-                    _value = value[0]?.installed_size[0]?.value + " " + unit;
-                } else if (
-                    value[0]?.family &&
-                    Array.isArray(value[0]?.family)
-                ) {
-                    _value = value[0]?.family[0]?.value;
-                } else if (value[0]?.size && Array.isArray(value[0]?.size)) {
-                    let unit = value[0]?.size[0]?.unit
-                        ? value[0]?.size[0]?.unit
-                        : "";
-                    _value = value[0]?.size[0]?.value + " " + unit;
-                }
-            }
-
-            if (acceptedKeys.includes(key)) {
-                let item = {
-                    key: snakeCaseToPrettyText(key),
-                    value: _value,
-                };
-                setProductDetails((prev) => [...prev, item]);
-            }
-        });
-    };
 
     return (
         <div className="container">
@@ -183,7 +190,7 @@ const ProductDetails = ({ product }) => {
             <div className="col-md-12 list-style-margin">
                 <ul className="product-specs">
                     {productDetails.map((item, index) => (
-                        <>
+                        <div key={item.key}>
                             {item?.value && (
                                 <li
                                     key={`${item.key}-${index}`}
@@ -201,7 +208,7 @@ const ProductDetails = ({ product }) => {
                                     </div>
                                 </li>
                             )}
-                        </>
+                        </div>
                     ))}
                     <li className="row mx-0">
                         <div className="col-md-3 col-6">

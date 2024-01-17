@@ -1,7 +1,10 @@
 {
     "private": true,
+    "version": "1.0.0",
     "scripts": {
-        "dev": "npm run development",
+        "dev": "vite",
+        "copy-html": "shx cp dist/index.html resources/views/index.blade.php",
+        "copy-assets": "copyfiles -u 1 dist/assets/* public/",
         "development": "mix",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
@@ -9,11 +12,12 @@
         "prod": "npm run production",
         "production": "mix --production",
         "start": "webpack-dev-server --config webpack.config.dev",
-        "build": "webpack --config webpack.config.prod && mix --production"
+        "build": "vite build && pnpm run copy-html && pnpm run copy-assets",
+        "preview": "vite preview"
     },
     "dependencies": {
-        "@babel/preset-env": "^7.21.4",
-        "@babel/preset-react": "^7.18.6",
+        "@babel/core": "^7.22.5",
+        "@babel/preset-react": "^7.22.5",
         "@emotion/styled": "^11.11.0",
         "@fortawesome/fontawesome-free": "^6.4.0",
         "@fortawesome/free-brands-svg-icons": "^6.4.0",
@@ -27,16 +31,15 @@
         "@mui/x-data-grid": "^6.5.0",
         "@popperjs/core": "^2.10.2",
         "@reduxjs/toolkit": "^1.9.1",
+        "@rollup/plugin-babel": "^6.0.3",
         "@tawk.to/tawk-messenger-react": "^2.0.2",
-        "axios": "^0.21",
-        "babel-loader": "^9.1.2",
+        "@vitejs/plugin-react": "^4.0.4",
+        "axios": "^1.6.2",
         "bootstrap": "^5.3.0",
-        "clean-webpack-plugin": "^4.0.0",
-        "compression-webpack-plugin": "^10.0.0",
+        "copyfiles": "^2.4.1",
         "country-flag-icons": "^1.5.7",
         "css-loader": "^6.7.3",
         "dompurify": "^3.0.6",
-        "dotenv-webpack": "^8.0.1",
         "file-loader": "^6.2.0",
         "formik": "^2.4.3",
         "laravel-mix": "^6.0.6",
@@ -49,7 +52,6 @@
         "react-lazy-load-image-component": "^1.6.0",
         "react-redux": "^8.0.5",
         "react-router-dom": "^6.4.0",
-        "react-scripts": "5.0.1",
         "react-square-web-payments-sdk": "^3.2.1",
         "react-star-ratings": "^2.3.0",
         "react-toastify": "^9.1.2",
@@ -58,15 +60,11 @@
         "style-loader": "^3.3.2",
         "swiper": "^9.2.0",
         "url-loader": "^4.1.1",
-        "webpack": "^5.77.0",
-        "webpack-cli": "^5.0.1",
-        "yup": "^1.3.2"
+        "vite": "^4.4.8",
+        "yup": "^1.3.2",
+        "shx": "^0.3.4"
     },
-    "devDependencies": {
-        "case-sensitive-paths-webpack-plugin": "^2.4.0",
-        "webpack-bundle-analyzer": "^4.9.0",
-        "webpack-dev-server": "^4.13.2"
-    },
+    "devDependencies": {},
     "browserslist": {
         "production": [
             ">0.2%",

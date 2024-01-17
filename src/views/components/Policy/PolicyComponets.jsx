@@ -33,7 +33,7 @@ const PolicyComponets = () => {
     // }'
 
     const location = useLocation();
-    const pageName = location.pathname.substring(1);
+    let pageName = location.pathname.substring(1);
 
     let PageTitle;
 
