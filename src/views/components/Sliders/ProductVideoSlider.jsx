@@ -30,8 +30,8 @@ function ProductVideoSlider({Tumbnails}) {
           clickable: true,
         }}
         navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
+          nextEl: '.swiper-btn-next',
+          prevEl: '.swiper-btn-prev',
         }}
         spaceBetween={15}
         modules={[Pagination, Navigation]}
@@ -72,8 +72,8 @@ function ProductVideoSlider({Tumbnails}) {
         </Swiper>
              {/* <div className='swiper-button-prev swiper-button-prev-video' style={{color : "black", border: "1px solid black", borderRadius: "5px", padding: "25px", fontSize: "10px"}}  ><ion-icon name="arrow-back-outline"></ion-icon></div> */}
              {/* <div className='swiper-button-next swiper-button-prev-video' style={{color : "black", border: "1px solid black", borderRadius: "5px", padding: "25px"}}  ></div> */}
-             <ArrowBackIosNewOutlinedIcon sx={{ml: 2 ,border: "1px solid black", borderRadius: "5px" , height: "35px", width: "35px", color: "black", p: 1}} className='swiper-button-prev swiper-video-button'  />
-             <ArrowForwardIosOutlinedIcon sx={{mr: 2 ,border: "1px solid black", borderRadius: "5px" , height: "35px", width: "35px", color: "black", p: 1}} className='swiper-button-next swiper-video-button'  />
+             <ArrowBackIosNewOutlinedIcon sx={{position: "absolute", top: "50%",transform: "translate(-0%, -50%)", left: 0, ml: 2 ,border: "1px solid black", borderRadius: "5px" , height: "35px", width: "35px", color: "black", p: 1}} className='swiper-btn-prev swiper-video-button'  />
+             <ArrowForwardIosOutlinedIcon sx={{position: "absolute", top: "50%",transform: "translate(-0%, -50%)", right: 0, mr: 2 ,border: "1px solid black", borderRadius: "5px" , height: "35px", width: "35px", color: "black", p: 1}} className='swiper-btn-next swiper-video-button'  />
         </Grid>
   )
 }
