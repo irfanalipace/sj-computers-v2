@@ -253,7 +253,3 @@ Route::post('paypal', [PaypalController::class, 'paypal']);
 Route::get('success', [PaypalController::class, 'success'])->name('success');
 Route::get('cancel', [PaypalController::class, 'cancel'])->name('cancel');
 
-//Route::get('paywithpaypal', [PayController::class, 'payWithPaypal'])->name('paywithpaypal');
-//Route::post('paypal', [PayController::class, 'postPaymentWithpaypal'])->name('paypal');
-//Route::get('paypal', [PayController::class, 'getPaymentStatus'])->name('status');
-
