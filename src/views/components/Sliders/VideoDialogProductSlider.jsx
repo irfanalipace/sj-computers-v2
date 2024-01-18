@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Slider.css";
-import DialogVideoProductCard from '../DialogVideoProductCard/DialogVideoProductCard';
+import VideoDialogProductCard from '../Product/ProductVideo/VideoDialogProductCard/VideoDialogProductCard';
 import { Grid } from '@mui/material';
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
@@ -14,7 +14,7 @@ import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutl
 // Install Swiper navigation plugin
 // SwiperCore.use([Navigation]);
 
-function DialogVideoSlider({products}) {
+function VideoDialogProductSlider({products}) {
 
     const [btnOpacity, setBtnOpacity] = useState(0)
 
@@ -50,7 +50,7 @@ function DialogVideoSlider({products}) {
             {products?.map((product) => (
                 <SwiperSlide key={"ps-" + product.id}>
                     <div>
-                        <DialogVideoProductCard product={product} />
+                        <VideoDialogProductCard product={product} />
                     </div>
                 </SwiperSlide>
             ))}
@@ -61,4 +61,4 @@ function DialogVideoSlider({products}) {
     );
 }
 
-export default DialogVideoSlider
+export default VideoDialogProductSlider

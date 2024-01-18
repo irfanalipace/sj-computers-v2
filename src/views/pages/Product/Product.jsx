@@ -13,7 +13,7 @@ import NotFound from "../NotFound/NotFound";
 import "./Product.css";
 import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
 import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
-import ProductVideo from "../../components/ProductVideo/ProductVideo";
+import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
 
 export default function Product() {
     const [isLoading, setIsLoading] = useState(true);

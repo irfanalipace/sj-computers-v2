@@ -1,8 +1,8 @@
 import { Grid, Typography } from '@mui/material'
 import React from 'react'
-import DialogVideoSlider from '../Sliders/DialogVideoSlider'
+import VideoDialogProductSlider from '../Sliders/VideoDialogProductSlider'
 
-function DialogVideoRecommendation({products}) {
+function RecommendationLayout2({products}) {
   return (
     <Grid container>
         <Grid item xs={12}> 
@@ -11,10 +11,10 @@ function DialogVideoRecommendation({products}) {
             </Typography>
         </Grid>
         <Grid item xs={12}>
-            <DialogVideoSlider products={products} />
+            <VideoDialogProductSlider products={products} />
         </Grid>
     </Grid>
   )
 }
 
-export default DialogVideoRecommendation
+export default RecommendationLayout2

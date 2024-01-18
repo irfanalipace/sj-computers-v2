@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./VideoCard.css"
 
 import {
     Grid,
@@ -12,12 +11,12 @@ import {
     IconButton,
 } from "@mui/material";
 
-import sjLogo from "../../../assets/images/sj-logo.jpg";
+import sjLogo from "../../../../../assets/images/sj-logo.jpg"
 import PlayCircleOutlineSharpIcon from "@mui/icons-material/PlayCircleOutlineSharp";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
 import { useSelector } from "react-redux";
-import DialogVideoRecommendation from "../DialogVideoRecommendation/DialogVideoRecommendation";
+import RecommendationLayout2 from "../../../Recommendation/RecommendationLayout2";
 
 function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
 
@@ -64,7 +63,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                             <Typography variant="p" lineHeight={1.3}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium rerum commodi error.</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <DialogVideoRecommendation products={products} />
+                            <RecommendationLayout2 products={products} />
                         </Grid>    
                     </Grid>
                     <Grid
@@ -154,8 +153,6 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
     })}
                             </Grid>
 
-
-                            {/* SIDE VIDEO END */}
                         </Grid>
                     </Grid>
                 </Grid>

@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { Grid, Typography, Box, Dialog, DialogContent, Button, DialogActions, IconButton } from "@mui/material";
-import videoTumbnail from "../../../assets/images/video-tumbnail.svg";
-import videoTumbnail2 from "../../../assets/images/video-tumbnail2.svg";
 // import videoTumbnail2 from "../../../assets/images/video-tumbnail2.svg"
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import ProductVideoSlider from "../Sliders/ProductVideoSlider";
+import ProductVideoSlider from "../../Sliders/ProductVideoSlider";
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 // import videoFront from "../../../assets/images/videoL-tumbnail.svg"
@@ -21,7 +19,7 @@ const ProductVideo = () => {
 
     
 
-    const videoData = [ {id: 1, videoTumbnail: videoTumbnail, url: url}, {id: 2, videoTumbnail: videoTumbnail2, url: url2}, {id: 3, videoTumbnail, url: url3}, {id: 4,videoTumbnail: videoTumbnail2, url: url4},   ];
+    const videoData = [ {id: 1, url: url}, {id: 2,  url: url2}, {id: 3, url: url3}, {id: 4, url: url4},   ];
     const newVideoData = videoData.map((video) => {
         const [thumbnailSrc, setThumbnailSrc] = useState(null);
 useEffect(() => {

@@ -4,7 +4,7 @@ import StarRatings from "react-star-ratings";
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-function DialogVideoProductCard({product}) {
+function VideoDialogProductCard({product}) {
 
   const twoLineTypography = {
           display: '-webkit-box',
@@ -40,4 +40,4 @@ function DialogVideoProductCard({product}) {
   )
 }
 
-export default DialogVideoProductCard
+export default VideoDialogProductCard
