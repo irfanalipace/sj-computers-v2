@@ -33,10 +33,6 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
         setOpen(true);
     };
 
-    const handleSwitchVideo = (tumbUrl) => {
-        setUrl(tumbUrl)
-        console.log(tumbUrl)
-    };
 
     const handleClose = () => {
         setOpen(false);
@@ -45,6 +41,11 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
 
     const VideoDialog = ({tumbnail, Tumbnails}) => {
         
+        const [currentVideoId, setCurrentVideoId] = useState(newVideoData[index]?.id);
+        const handleSwitchVideo = (id) => {
+            setCurrentVideoId(id);
+        };
+        const currentVideo = newVideoData.find((video) => video.id === currentVideoId);
 
         return (
             <Dialog open={open} onClose={handleClose} maxWidth="lg" fullWidth sx={{maxHeight: "none",}}  >
@@ -55,7 +56,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                             <video
                                 width={"100%"}
                                 autoPlay
-                                src={url}
+                                src={currentVideo?.url}
                                 controls
                             ></video>
                         </Grid>
@@ -99,7 +100,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                                     <Grid
                                     item
                                     xs={3}
-                                    onClick={(e) => handleSwitchVideo(videoData.url)}
+                                    onClick={(e) => handleSwitchVideo(videoData.id)}
                                     height={"60px"}
                                     position={"relative"}
                                     sx={{
@@ -108,7 +109,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                                         backgroundSize: "cover",
                                         backgroundPosition: "center",
                                         cursor: "pointer",
-                                        border: url == videoData.url ? "2px solid orange" : "",
+                                        border: currentVideo.id == videoData.id ? "2px solid orange" : "",
                                     }}
                                 >
                                     <Box
