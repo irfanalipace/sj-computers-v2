@@ -72,7 +72,7 @@ const ProductVideo = () => {
                     Videos for this product
                 </Typography>
             </Grid>
-            <Grid item lg={12} container px={4} columnGap={2} position={"relative"} >
+            <Grid item lg={12} container px={4} columnGap={2} position={"relative"} sx={{"@media (max-width: 600px)": { padding: 0 }}} >
                 <ProductVideoSlider Tumbnails={videoData} newVideoData={newVideoData}  />
             </Grid>
         </Grid>

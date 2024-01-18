@@ -15,8 +15,15 @@ import "./Slider.css";
 
 
 function ProductVideoSlider({Tumbnails, newVideoData}) {
+
+    const mobileMediaQuery = {
+        '@media (max-width: 600px)':{
+            display: "none"
+        }
+    }
+
     return (
-        <Grid item xs={12} md={12} lg={12} px={4} >
+        <Grid item xs={12} md={12} lg={12} px={4} sx={{"@media (max-width: 600px)": { padding: 0 }}} >
         <Swiper
         style={{
           '--swiper-navigation-color': '#fff',
@@ -64,8 +71,8 @@ function ProductVideoSlider({Tumbnails, newVideoData}) {
              </SwiperSlide>
              ))}
         </Swiper>
-             <ArrowBackIosNewOutlinedIcon sx={{position: "absolute", top: "50%",transform: "translate(-0%, -50%)", left: 0, ml: 2 ,border: "1px solid black", borderRadius: "5px" , height: "35px", width: "35px", color: "black", p: 1}} className='swiper-btn-prev swiper-video-button'  />
-             <ArrowForwardIosOutlinedIcon sx={{position: "absolute", top: "50%",transform: "translate(-0%, -50%)", right: 0, mr: 2 ,border: "1px solid black", borderRadius: "5px" , height: "35px", width: "35px", color: "black", p: 1}} className='swiper-btn-next swiper-video-button'  />
+             <ArrowBackIosNewOutlinedIcon sx={{...mobileMediaQuery ,position: "absolute", top: "50%",transform: "translate(-0%, -50%)", left: 0, ml: 2 ,border: "1px solid black", borderRadius: "5px" , height: "35px", width: "35px", color: "black", p: 1}} className='swiper-btn-prev swiper-video-button'  />
+             <ArrowForwardIosOutlinedIcon sx={{...mobileMediaQuery ,position: "absolute", top: "50%",transform: "translate(-0%, -50%)", right: 0, mr: 2 ,border: "1px solid black", borderRadius: "5px" , height: "35px", width: "35px", color: "black", p: 1}} className='swiper-btn-next swiper-video-button'  />
         </Grid>
   )
 }

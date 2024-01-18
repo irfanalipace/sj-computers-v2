@@ -161,7 +161,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
     }
 
     return (
-        <Grid height={"238px"} container>
+        <Grid height={"238px"} container position={"relative"}>
             {/* ///// --- DIALOG --- ///// */}
            <VideoDialog tumbnail={tumbnail} Tumbnails={Tumbnails} />
 
@@ -178,6 +178,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                     borderBottomLeftRadius: 0,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
+                    '@media (max-width: 600px)': {height: "100%", borderRadius: "10px"}
                 }}
             >
                 <Box
@@ -219,6 +220,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                     backgroundSize: "180%",
                     backgroundPosition: "0% 48%",
                     backgroundBlendMode: "color",
+                    '@media (max-width: 600px)': {display: "none"}
                 }}
                 container
                 position={"relative"}
@@ -255,25 +257,29 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                         }}
                     ></div>
                 </Box>
-                <Grid item xs={2} sx={{ zIndex: 2 }}>
+            </Grid>
+            <Grid container position={"absolute"} bottom={0} left={0} height={"30%"} p={1}>
+                <Grid item sx={{ zIndex: 2 }}>
                     <img
                         src={sjLogo}
                         // height={"40px"}
-                        width={"80%"}
+                        width={"50px"}
                         style={{
-                            borderRadius: "50px",
+                            borderRadius: "75px",
                             border: "1px solid white",
+                            marginRight: "10px"
                         }}
                         alt="Profile"
                     />
                 </Grid>
-                <Grid item xs={10} sx={{ zIndex: 2 }}>
+                <Grid item sx={{ zIndex: 2 }}>
                     <Typography
                         ml={1}
                         variant="body2"
                         fontWeight={"bolder"}
                         color={"white"}
                         textAlign={"start"}
+                        noWrap
                     >
                         SJ Computers LLC
                     </Typography>
