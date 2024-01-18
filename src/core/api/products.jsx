@@ -19,7 +19,7 @@ export function productsApi(page = 1, per_page = 12) {
 
 export function similarProducts(productName) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/search-product`, null, productName)
+        ApiService.get(`/search-product`, "", productName)
             .then((response) => {
                 resolve(response);
             })

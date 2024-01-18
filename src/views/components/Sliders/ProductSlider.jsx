@@ -1,16 +1,31 @@
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Product from "@components/ProductCard/ProductCard";
+import { fetchSimilarProducts } from "@store/products/productsThunks";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Slider.css";
+import { useDispatch } from "react-redux";
 
 // Install Swiper navigation plugin
 SwiperCore.use([Navigation]);
 
 const ProductSlider = ({ type = "", products }) => {
+    const dispatch = useDispatch();
+    const handleClick = async (pName) => {
+        try {
+            await dispatch(
+                fetchSimilarProducts({
+                    name: pName,
+                })
+            );
+            console.log("something");
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <Swiper
             slidesPerView={7}
@@ -41,7 +56,10 @@ const ProductSlider = ({ type = "", products }) => {
         >
             {products?.map((product) => (
                 <SwiperSlide key={"ps-" + product.id}>
-                    <div className="px-1">
+                    <div
+                        className="px-1"
+                        onClick={() => handleClick(product.name)}
+                    >
                         <Product type={type} product={product} />
                     </div>
                 </SwiperSlide>

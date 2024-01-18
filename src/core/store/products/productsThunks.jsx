@@ -36,9 +36,8 @@ export const fetchProducts = (page = 1, loadMore = false, per_page = 12) => {
 export const fetchSimilarProducts = (data) => {
     return async (dispatch) => {
         try {
-            dispatch({ type: SET_IS_SHOW_MORE, payload: {} });
+            // dispatch({ type: SET_IS_SHOW_MORE, payload: {} });
             const response = await similarProducts(data);
-            console.log(response?.data?.data);
             dispatch({
                 type: FETCH_SIMILAR_PRODUCTS,
                 payload: response?.data?.data,

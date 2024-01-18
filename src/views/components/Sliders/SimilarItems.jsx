@@ -9,25 +9,23 @@ import "./Slider.css";
 import { fetchSimilarProducts } from "@store/products/productsThunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 // Install Swiper navigation plugin
 SwiperCore.use([Navigation]);
 
 const SimilarItemsSlider = ({ type = "", products }) => {
     const dispatch = useDispatch();
-    const isLoading = useSelector((state) => state?.products.isLoading);
-
-    useEffect(() => {
-        getSimilarProduct();
-    }, []);
-
-    const getSimilarProduct = async () => {
-        if (!products?.length) {
-            try {
-                await dispatch(
-                    fetchSimilarProducts({ name: "ell OptiPlex 7040 SFF Comp" })
-                );
-            } catch (error) {}
+    const handleClick = async (pName) => {
+        try {
+            await dispatch(
+                fetchSimilarProducts({
+                    name: pName,
+                })
+            );
+            console.log("something");
+        } catch (error) {
+            console.log(error);
         }
     };
     return (
@@ -59,7 +57,10 @@ const SimilarItemsSlider = ({ type = "", products }) => {
         >
             {products?.map((product) => (
                 <SwiperSlide key={"ps-" + product.id}>
-                    <div className="px-1">
+                    <div
+                        className="px-1"
+                        onClick={() => handleClick(product.name)}
+                    >
                         <ProductCardSimilarItems
                             type={type}
                             product={product}

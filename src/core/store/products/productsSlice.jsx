@@ -67,10 +67,10 @@ const productSlice = createSlice({
             //         ...state.similarProducts,
             //         ...action.similarProducts,
             //     ];
-            // state.currentPage = state.currentPage + 1;
+            state.currentPage = state.currentPage + 1;
             state.isLoading = false;
-            state.isFiltering = false;
-            // state.isShowMore = false;
+            // state.isFiltering = false;
+            state.isShowMore = false;
         },
         SEARCH_PRODUCTS: (state, action) => {
             // if (state.currentPage === 1)
