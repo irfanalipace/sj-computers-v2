@@ -88,7 +88,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                                     />
                                 </IconButton>
                             </DialogActions>
-                            <Grid item xs={12} container rowGap={1} px={2} >
+                            <Grid item xs={12} container rowGap={1} px={2} mb={1} >
                                 <Grid item xs={12} mb={1}>
                                     <Typography variant="body1" >Videos for ths product</Typography>
                                 </Grid>
@@ -105,7 +105,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                                     position={"relative"}
                                     sx={{
                                         backgroundImage: `url(${videoData?.tumbnail})`,
-                                        borderRadius: "5px",
+                                        borderRadius: "2px",
                                         backgroundSize: "cover",
                                         backgroundPosition: "center",
                                         cursor: "pointer",
