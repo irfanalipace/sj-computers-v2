@@ -14,7 +14,9 @@ class AddColumnProtectivePriceOrderItem extends Migration
     public function up()
     {
         Schema::table('order_items', function (Blueprint $table) {
+            $table->foreignId('protective_plan_id')->nullable()->after('product_id')->constrained('protective_plans');
             $table->decimal('protective_price')->nullable()->after('price');
+           
         });
     }
 
@@ -26,7 +28,8 @@ class AddColumnProtectivePriceOrderItem extends Migration
     public function down()
     {
         Schema::table('order_items', function (Blueprint $table) {
-            $table->dropColumn('protective_price');
+            $table->dropColumn('protective_plan_id');
+            $table->dropColumn('protective_price');          
         });
     }
 }
