@@ -16,7 +16,7 @@ import "./Slider.css";
 // Install Swiper navigation plugin
 // import { Pagination } from 'swiper/modules';
 
-function ProductVideoSlider({Tumbnails}) {
+function ProductVideoSlider({Tumbnails, newVideoData}) {
     return (
         <Grid item xs={12} md={12} lg={12} px={4} >
         <Swiper
@@ -62,9 +62,9 @@ function ProductVideoSlider({Tumbnails}) {
             // navigation
             // className="recommendation-slider"
         >
-            {Tumbnails?.map((tumbnail, index) => (
+            {newVideoData?.map((tumbnail, index) => (
               <SwiperSlide key={index} >    
-                    <VideoCard tumbnail={tumbnail} Tumbnails={Tumbnails}  />
+                    <VideoCard tumbnail={tumbnail} Tumbnails={Tumbnails} index={index} newVideoData={newVideoData} />
              </SwiperSlide>
              ))}
             {/* <div className="slider-controler" style={{position: "relative"}}> */}

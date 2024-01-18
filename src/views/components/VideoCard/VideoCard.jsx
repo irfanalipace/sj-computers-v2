@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./VideoCard.css"
 
 import {
@@ -19,12 +19,17 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { useSelector } from "react-redux";
 import DialogVideoRecommendation from "../DialogVideoRecommendation/DialogVideoRecommendation";
 
-function VideoCard({ tumbnail, Tumbnails }) {
+function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
 
     const [open, setOpen] = useState(false);
     const [url, setUrl] = useState(tumbnail.url)
     const products = useSelector((state) => state.products.products);
 
+    const getIdUrl = (id) => {
+  const item = Tumbnails.find(item => item.id === id);
+  return item ? item.url : null;
+};
+    
     const handleDialogOpen = () => {
         setOpen(true);
     };
@@ -40,6 +45,8 @@ function VideoCard({ tumbnail, Tumbnails }) {
     };
 
     const VideoDialog = ({tumbnail, Tumbnails}) => {
+        
+
         return (
             <Dialog open={open} onClose={handleClose} maxWidth="lg" fullWidth sx={{maxHeight: "none",}}  >
             <DialogContent sx={{ p: 0, position: "relative", borderRadius: "2px", }}>
@@ -87,21 +94,22 @@ function VideoCard({ tumbnail, Tumbnails }) {
                                 </Grid>
                                 {/* ////  Side video section //// */}
                                 {/* Map Function for the side videos list */}
-                                {Tumbnails?.map((tumb, index) => (
+                                {newVideoData?.map((videoData, index) => {
+                                    return (
                                     <Grid item xs={12} container key={index}>
                                     <Grid
                                     item
                                     xs={3}
-                                    onClick={(e) => handleSwitchVideo(tumb.url)}
+                                    onClick={(e) => handleSwitchVideo(videoData.url)}
                                     height={"60px"}
                                     position={"relative"}
                                     sx={{
-                                        backgroundImage: `url(${tumb.videoTumbnail})`,
+                                        backgroundImage: `url(${videoData?.tumbnail})`,
                                         borderRadius: "5px",
                                         backgroundSize: "cover",
                                         backgroundPosition: "center",
                                         cursor: "pointer",
-                                        border: url == tumb.url ? "1px solid orange" : "",
+                                        border: url == videoData.url ? "2px solid orange" : "",
                                     }}
                                 >
                                     <Box
@@ -134,7 +142,7 @@ function VideoCard({ tumbnail, Tumbnails }) {
                                             fontSize={"small"}
                                             color={"white"}
                                         >
-                                            0:41
+                                            {/* 0:41 */} 
                                         </Typography>
                                     </Box>
                                 </Grid>
@@ -142,11 +150,9 @@ function VideoCard({ tumbnail, Tumbnails }) {
                                 <Typography variant="body2" className="side-video-txt" noWrap >Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquam dolores assumenda vero illum consequatur!</Typography>
                                 <Typography variant="body2"  className="side-video-txt" >Uploader name</Typography>
                             </Grid>
-                            </Grid >
-                            ))}
+                            </Grid >)
+    })}
                             </Grid>
-
-                            {/* Video Down Section */}
 
 
                             {/* SIDE VIDEO END */}
@@ -170,7 +176,7 @@ function VideoCard({ tumbnail, Tumbnails }) {
                 height={"70%"}
                 position={"relative"}
                 sx={{
-                    backgroundImage: `url(${tumbnail.videoTumbnail})`,
+                    backgroundImage: `url(${tumbnail?.tumbnail})`,
                     borderRadius: "10px",
                     borderBottomRightRadius: 0,
                     borderBottomLeftRadius: 0,
@@ -198,7 +204,7 @@ function VideoCard({ tumbnail, Tumbnails }) {
                 </Box>
                 <Box sx={{ position: "absolute", bottom: 0, right: 0 }}>
                     <Typography variant="body1" color={"white"} p={1}>
-                        0:41
+                        {/* 0:41 */}
                     </Typography>
                 </Box>
             </Grid>
@@ -213,7 +219,7 @@ function VideoCard({ tumbnail, Tumbnails }) {
                     borderRadius: "10px",
                     borderTopLeftRadius: 0,
                     borderTopRightRadius: 0,
-                    background: `rgb(0, 0, 0, 0.5) url(${tumbnail.videoTumbnail}) `,
+                    background: `rgb(0, 0, 0, 0.5) url(${tumbnail.tumbnail}) `,
                     backgroundSize: "180%",
                     backgroundPosition: "0% 48%",
                     backgroundBlendMode: "color",
@@ -285,3 +291,42 @@ function VideoCard({ tumbnail, Tumbnails }) {
 }
 
 export default VideoCard;
+
+// FOR CREATING VIDEO TUMBNAILS 
+
+// const [thumbnailSrc, setThumbnailSrc] = useState(null);
+// useEffect(() => {
+//     const createThumbnail = (videoSrc, callback) => {
+//       const video = document.createElement('video');
+//       video.crossOrigin = 'anonymous';
+//       video.src = videoSrc;
+
+//       video.addEventListener('loadeddata', () => {
+//         video.currentTime = 1;
+
+//         video.addEventListener(
+//           'seeked',
+//           () => {
+//             const canvas = document.createElement('canvas');
+//             canvas.width = video.videoWidth;
+//             canvas.height = video.videoHeight;
+
+//             const ctx = canvas.getContext('2d');
+//             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+//             const imageDataUrl = canvas.toDataURL();
+//             callback(imageDataUrl);
+//           },
+//           { once: true }
+//         );
+//       });
+//     };
+
+//     const videoSrc = tumb.url;
+
+//     createThumbnail(videoSrc, (thumbnail) => {
+//       console.log('Thumbnail created:', thumbnail);
+//       setThumbnailSrc(thumbnail)
+//       // Use the thumbnail data URL as needed (e.g., set it as the src of an image element)
+//     });
+//   }, []);
