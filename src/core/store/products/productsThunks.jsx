@@ -5,6 +5,7 @@ import {
     FILTER_PRODUCTS,
     SET_FILTERING_PRODUCTS,
     SET_IS_SHOW_MORE,
+    FETCH_SIMILAR_PRODUCTS,
     RESET_PAGE,
     API_ERROR,
 } from "@store/products/productsSlice";
@@ -12,6 +13,7 @@ import {
     productsApi,
     searchProductsApi,
     filterProductsApi,
+    similarProducts,
 } from "@api/products";
 
 export const fetchProducts = (page = 1, loadMore = false, per_page = 12) => {
@@ -22,6 +24,23 @@ export const fetchProducts = (page = 1, loadMore = false, per_page = 12) => {
             const response = await productsApi(page, per_page);
             dispatch({
                 type: FETCH_PRODUCTS,
+                payload: response?.data?.data,
+            });
+        } catch (error) {
+            console.print("Something went wrong in products", error);
+            dispatch({ type: API_ERROR, payload: error?.data?.errors });
+        }
+    };
+};
+
+export const fetchSimilarProducts = (data) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: SET_IS_SHOW_MORE, payload: {} });
+            const response = await similarProducts(data);
+            console.log(response?.data?.data);
+            dispatch({
+                type: FETCH_SIMILAR_PRODUCTS,
                 payload: response?.data?.data,
             });
         } catch (error) {

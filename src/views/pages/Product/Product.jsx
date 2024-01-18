@@ -19,6 +19,9 @@ export default function Product() {
     const [product, setProduct] = useState(null);
     const [productImages, setProductImages] = useState([]);
     const products = useSelector((state) => state.products.products);
+    const similarProducts = useSelector(
+        (state) => state.products.similarProducts
+    );
     const { productId } = useParams();
 
     useEffect(() => {
@@ -56,7 +59,7 @@ export default function Product() {
                 <div className="col-12 col-md-3 p-0 m-0">
                     <CheckOutCard product={{ ...product }} />
                 </div>
-                <SimilarItems products={products} />
+                <SimilarItems products={similarProducts} />
                 <ProductVideo />
             </div>
         );

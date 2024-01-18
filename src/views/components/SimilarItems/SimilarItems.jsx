@@ -11,6 +11,7 @@ const SimilarItems = ({ products }) => {
     return (
         <div className="recommendation-container">
             <div className="recommendation-inner">
+                <h3>Get Similar items fast.</h3>
                 <div className="slider-wrapper">
                     {isLoading || !products ? (
                         <LoaderComponent />

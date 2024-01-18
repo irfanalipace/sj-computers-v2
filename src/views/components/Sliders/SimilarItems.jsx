@@ -6,14 +6,32 @@ import ProductCardSimilarItems from "@components/ProductCard/ProductCardSimilarI
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Slider.css";
+import { fetchSimilarProducts } from "@store/products/productsThunks";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 // Install Swiper navigation plugin
 SwiperCore.use([Navigation]);
 
 const SimilarItemsSlider = ({ type = "", products }) => {
+    const dispatch = useDispatch();
+    const isLoading = useSelector((state) => state?.products.isLoading);
+
+    useEffect(() => {
+        getSimilarProduct();
+    }, []);
+
+    const getSimilarProduct = async () => {
+        if (!products?.length) {
+            try {
+                await dispatch(
+                    fetchSimilarProducts({ name: "ell OptiPlex 7040 SFF Comp" })
+                );
+            } catch (error) {}
+        }
+    };
     return (
         <Swiper
-            style={{ borderTop: "1px solid #BBBFBF" }}
             slidesPerView={7}
             breakpoints={{
                 // when window width is >= 320px
