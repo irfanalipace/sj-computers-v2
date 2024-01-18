@@ -77,18 +77,16 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                     >
                         <Grid item xs={12}>
                             <DialogActions>
-                                <IconButton onClick={handleClose}>
-                                    <CloseOutlinedIcon
-                                        sx={{
-                                            color: "white",
+                                <IconButton onClick={handleClose} sx={{
+                                            color: "whitesmoke",
                                             position: "absolute",
                                             top: 0,
                                             right: 0,
-                                        }}
-                                    />
+                                        }}>
+                                    <CloseOutlinedIcon/>
                                 </IconButton>
                             </DialogActions>
-                            <Grid item xs={12} container rowGap={1} px={2} mb={1} >
+                            <Grid item xs={12} container rowGap={1} px={2} my={2} >
                                 <Grid item xs={12} mb={1}>
                                     <Typography variant="body1" >Videos for ths product</Typography>
                                 </Grid>
