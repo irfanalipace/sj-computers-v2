@@ -6,11 +6,14 @@ import "./ProductCard.css";
 import Checkbox from "@mui/material/Checkbox";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import StarRatings from "react-star-ratings";
+import { IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 const ProtectionPlanDrawer = ({
     handleButton,
     ProtectionPlanCallBack,
     handleAddingProtec,
+    closeDrawer,
 }) => {
     const [protectionPlan, setProtectionPlan] = useState("");
     const [planValue, setPlanValue] = useState("");
@@ -21,7 +24,17 @@ const ProtectionPlanDrawer = ({
 
     return (
         <div style={{ padding: "20px" }}>
-            <h1 className="heading-protection-plan mb-3">Add to your order</h1>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <h1 className="heading-protection-plan mb-3">
+                    Add to your order
+                </h1>
+                <IconButton
+                    style={{ marginTop: "-10px" }}
+                    onClick={closeDrawer}
+                >
+                    <CloseIcon />
+                </IconButton>
+            </div>
             <div className="info mb-3">
                 <img src={bulletpoint1} />
                 <p>

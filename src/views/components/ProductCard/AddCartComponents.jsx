@@ -117,6 +117,7 @@ const AddCartComponents = ({
                 onClose={() => setOpen(false)}
             >
                 <ProtectionPlanDrawer
+                    closeDrawer={() => setOpen(false)}
                     handleButton={() => {
                         if (open) {
                             cartClickHandler();

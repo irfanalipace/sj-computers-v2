@@ -160,6 +160,7 @@
     width: 150px;
     margin: 10px 0;
 }
+
 .sj-banner-similar-item {
     display: flex;
 }
@@ -505,6 +506,9 @@
 
 /* Small Tablets (landscape phones, less than 768px) */
 @media (max-width: 767.98px) {
+    .css-1160xiw-MuiPaper-root-MuiDrawer-paper {
+        width: 100%;
+    }
 }
 
 /* Large Tablets (tablets, less than 992px) */
