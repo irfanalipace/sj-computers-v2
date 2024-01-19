@@ -1,35 +1,61 @@
-import { Grid, Typography } from '@mui/material'
 import React from 'react'
+import { Link } from 'react-router-dom';
+import "./ProductPageHeader.css"
 
 const ProductPageHeader = () => {
-    const itemStyle = {
-        p: 2,
-        minWidth: "11%",
-        maxWidth: "14.2%",
-        color: "#333333",
-        textAlign: "center",
-      }
-      const itemTypographystyle = {
-        // "@media (max-width: 800px)": {fontSize: "10px"},
-      ":hover": {
-          // backgroundColor: "whitesmoke",
-          color: "#E87E24",
-          cursor: "pointer",
-          textDecoration: "underLine"
-      }
 
-    }    
+  const categories = [
+    {
+        id: 1,
+        name: "Computers",
+        slug: "computers",
+    },
+    {
+        id: 2,
+        name: "Laptops",
+        slug: "laptops",
+    },
+    {
+        id: 3,
+        name: "Desktop",
+        slug: "desktop",
+    },
+    {
+        id: 4,
+        name: "Monitors",
+        slug: "Monitors",
+    },
+    {
+        id: 5,
+        name: "Computers Accessories",
+        slug: "computersaccessories",
+    },
+    {
+        id: 6,
+        name: "PC Components",
+        slug: "pccomponents",
+    },
+    {
+        id: 7,
+        name: "PC Gaming",
+        slug: "pcgaming",
+    },
+];
 
   return (
-    <Grid container columnGap={"auto"} borderBottom={"1px solid lightgray"} px={4} sx={{"@media (max-width: 800px)": {px: 0, display: "flex", overflow: "scroll" }}} >
-        <Grid item sx={itemStyle}><Typography sx={itemTypographystyle} variant='body2'>Computers</Typography></Grid>
-        <Grid item sx={itemStyle}><Typography sx={itemTypographystyle} variant='body2'>Laptops</Typography></Grid>
-        <Grid item sx={itemStyle}><Typography sx={itemTypographystyle} variant='body2'>Desktops</Typography></Grid>
-        <Grid item sx={itemStyle}><Typography sx={itemTypographystyle} variant='body2'>Monitors</Typography></Grid>
-        <Grid item sx={itemStyle}><Typography sx={itemTypographystyle} variant='body2'>Computers Accessories</Typography></Grid>
-        <Grid item sx={itemStyle}><Typography sx={itemTypographystyle} variant='body2'>PC Components</Typography></Grid>
-        <Grid item sx={itemStyle}><Typography sx={itemTypographystyle} variant='body2'>PC Gaming</Typography></Grid>
-    </Grid>
+    <div 
+      className='header-wrappar' >
+
+        {categories.map((category) => (
+
+          <Link key={category.id} to={""} style={{textDecoration: "none"}}>
+            <div className='item' > {category.name} </div>
+          </Link>
+
+        ))
+        }
+        
+    </div>
   )
 }
 
