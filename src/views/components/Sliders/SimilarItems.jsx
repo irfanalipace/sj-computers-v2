@@ -18,9 +18,11 @@ const SimilarItemsSlider = ({ type = "", products }) => {
     const dispatch = useDispatch();
     const handleClick = async (pName) => {
         try {
+            const splitName = pName.split(",", 1);
+            const nameBeforeComma = splitName[0];
             await dispatch(
                 fetchSimilarProducts({
-                    name: pName,
+                    name: nameBeforeComma,
                 })
             );
             console.log("something");

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import "./VideoCard.css"
+import React, { useState, useEffect } from "react";
 
 import {
     Grid,
@@ -12,27 +11,28 @@ import {
     IconButton,
 } from "@mui/material";
 
-import sjLogo from "../../../assets/images/sj-logo.jpg";
+import sjLogo from "../../../../../assets/images/sj-logo.jpg"
 import PlayCircleOutlineSharpIcon from "@mui/icons-material/PlayCircleOutlineSharp";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
 import { useSelector } from "react-redux";
-import DialogVideoRecommendation from "../DialogVideoRecommendation/DialogVideoRecommendation";
+import RecommendationLayout2 from "../../../Recommendation/RecommendationLayout2";
 
-function VideoCard({ tumbnail, Tumbnails }) {
+function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
 
     const [open, setOpen] = useState(false);
     const [url, setUrl] = useState(tumbnail.url)
     const products = useSelector((state) => state.products.products);
 
+    const getIdUrl = (id) => {
+  const item = Tumbnails.find(item => item.id === id);
+  return item ? item.url : null;
+};
+    
     const handleDialogOpen = () => {
         setOpen(true);
     };
 
-    const handleSwitchVideo = (tumbUrl) => {
-        setUrl(tumbUrl)
-        console.log(tumbUrl)
-    };
 
     const handleClose = () => {
         setOpen(false);
@@ -40,6 +40,13 @@ function VideoCard({ tumbnail, Tumbnails }) {
     };
 
     const VideoDialog = ({tumbnail, Tumbnails}) => {
+        
+        const [currentVideoId, setCurrentVideoId] = useState(newVideoData[index]?.id);
+        const handleSwitchVideo = (id) => {
+            setCurrentVideoId(id);
+        };
+        const currentVideo = newVideoData.find((video) => video.id === currentVideoId);
+
         return (
             <Dialog open={open} onClose={handleClose} maxWidth="lg" fullWidth sx={{maxHeight: "none",}}  >
             <DialogContent sx={{ p: 0, position: "relative", borderRadius: "2px", }}>
@@ -49,7 +56,7 @@ function VideoCard({ tumbnail, Tumbnails }) {
                             <video
                                 width={"100%"}
                                 autoPlay
-                                src={url}
+                                src={currentVideo?.url}
                                 controls
                             ></video>
                         </Grid>
@@ -57,7 +64,7 @@ function VideoCard({ tumbnail, Tumbnails }) {
                             <Typography variant="p" lineHeight={1.3}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium rerum commodi error.</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <DialogVideoRecommendation products={products} />
+                            <RecommendationLayout2 products={products} />
                         </Grid>    
                     </Grid>
                     <Grid
@@ -70,38 +77,37 @@ function VideoCard({ tumbnail, Tumbnails }) {
                     >
                         <Grid item xs={12}>
                             <DialogActions>
-                                <IconButton onClick={handleClose}>
-                                    <CloseOutlinedIcon
-                                        sx={{
-                                            color: "white",
+                                <IconButton onClick={handleClose} sx={{
+                                            color: "whitesmoke",
                                             position: "absolute",
                                             top: 0,
                                             right: 0,
-                                        }}
-                                    />
+                                        }}>
+                                    <CloseOutlinedIcon/>
                                 </IconButton>
                             </DialogActions>
-                            <Grid item xs={12} container rowGap={1} px={2} >
+                            <Grid item xs={12} container rowGap={1} px={2} my={2} >
                                 <Grid item xs={12} mb={1}>
                                     <Typography variant="body1" >Videos for ths product</Typography>
                                 </Grid>
                                 {/* ////  Side video section //// */}
                                 {/* Map Function for the side videos list */}
-                                {Tumbnails?.map((tumb, index) => (
+                                {newVideoData?.map((videoData, index) => {
+                                    return (
                                     <Grid item xs={12} container key={index}>
                                     <Grid
                                     item
                                     xs={3}
-                                    onClick={(e) => handleSwitchVideo(tumb.url)}
+                                    onClick={(e) => handleSwitchVideo(videoData.id)}
                                     height={"60px"}
                                     position={"relative"}
                                     sx={{
-                                        backgroundImage: `url(${tumb.videoTumbnail})`,
-                                        borderRadius: "5px",
+                                        backgroundImage: `url(${videoData?.tumbnail})`,
+                                        borderRadius: "2px",
                                         backgroundSize: "cover",
                                         backgroundPosition: "center",
                                         cursor: "pointer",
-                                        border: url == tumb.url ? "1px solid orange" : "",
+                                        border: currentVideo.id == videoData.id ? "2px solid orange" : "",
                                     }}
                                 >
                                     <Box
@@ -134,7 +140,7 @@ function VideoCard({ tumbnail, Tumbnails }) {
                                             fontSize={"small"}
                                             color={"white"}
                                         >
-                                            0:41
+                                            {/* 0:41 */} 
                                         </Typography>
                                     </Box>
                                 </Grid>
@@ -142,14 +148,10 @@ function VideoCard({ tumbnail, Tumbnails }) {
                                 <Typography variant="body2" className="side-video-txt" noWrap >Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquam dolores assumenda vero illum consequatur!</Typography>
                                 <Typography variant="body2"  className="side-video-txt" >Uploader name</Typography>
                             </Grid>
-                            </Grid >
-                            ))}
+                            </Grid >)
+    })}
                             </Grid>
 
-                            {/* Video Down Section */}
-
-
-                            {/* SIDE VIDEO END */}
                         </Grid>
                     </Grid>
                 </Grid>
@@ -159,7 +161,7 @@ function VideoCard({ tumbnail, Tumbnails }) {
     }
 
     return (
-        <Grid height={"238px"} container>
+        <Grid height={"238px"} container position={"relative"}>
             {/* ///// --- DIALOG --- ///// */}
            <VideoDialog tumbnail={tumbnail} Tumbnails={Tumbnails} />
 
@@ -170,12 +172,13 @@ function VideoCard({ tumbnail, Tumbnails }) {
                 height={"70%"}
                 position={"relative"}
                 sx={{
-                    backgroundImage: `url(${tumbnail.videoTumbnail})`,
+                    backgroundImage: `url(${tumbnail?.tumbnail})`,
                     borderRadius: "10px",
                     borderBottomRightRadius: 0,
                     borderBottomLeftRadius: 0,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
+                    '@media (max-width: 600px)': {height: "100%", borderRadius: "10px"}
                 }}
             >
                 <Box
@@ -198,7 +201,7 @@ function VideoCard({ tumbnail, Tumbnails }) {
                 </Box>
                 <Box sx={{ position: "absolute", bottom: 0, right: 0 }}>
                     <Typography variant="body1" color={"white"} p={1}>
-                        0:41
+                        {/* 0:41 */}
                     </Typography>
                 </Box>
             </Grid>
@@ -213,10 +216,11 @@ function VideoCard({ tumbnail, Tumbnails }) {
                     borderRadius: "10px",
                     borderTopLeftRadius: 0,
                     borderTopRightRadius: 0,
-                    background: `rgb(0, 0, 0, 0.5) url(${tumbnail.videoTumbnail}) `,
+                    background: `rgb(0, 0, 0, 0.5) url(${tumbnail.tumbnail}) `,
                     backgroundSize: "180%",
                     backgroundPosition: "0% 48%",
                     backgroundBlendMode: "color",
+                    '@media (max-width: 600px)': {display: "none"}
                 }}
                 container
                 position={"relative"}
@@ -253,25 +257,29 @@ function VideoCard({ tumbnail, Tumbnails }) {
                         }}
                     ></div>
                 </Box>
-                <Grid item lg={1.5} mr={1} sx={{ zIndex: 2 }}>
+            </Grid>
+            <Grid container position={"absolute"} bottom={0} left={0} height={"30%"} p={1}>
+                <Grid item sx={{ zIndex: 2 }}>
                     <img
                         src={sjLogo}
-                        height={"40px"}
-                        width={"40px"}
+                        // height={"40px"}
+                        width={"50px"}
                         style={{
-                            borderRadius: "50px",
+                            borderRadius: "75px",
                             border: "1px solid white",
+                            marginRight: "10px"
                         }}
-                        alt=""
+                        alt="Profile"
                     />
                 </Grid>
-                <Grid item lg={10} sx={{ zIndex: 2 }}>
+                <Grid item sx={{ zIndex: 2 }}>
                     <Typography
                         ml={1}
                         variant="body2"
                         fontWeight={"bolder"}
                         color={"white"}
                         textAlign={"start"}
+                        noWrap
                     >
                         SJ Computers LLC
                     </Typography>

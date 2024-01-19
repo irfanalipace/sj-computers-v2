@@ -12,7 +12,9 @@ import NotFound from "../NotFound/NotFound";
 
 import "./Product.css";
 import SimilarItems from "../../components/SimilarItems/SimilarItems";
-import ProductVideo from "../../components/ProductVideo/ProductVideo";
+import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
+import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
+import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
 
 export default function Product() {
     const [isLoading, setIsLoading] = useState(true);
@@ -61,6 +63,8 @@ export default function Product() {
                 </div>
                 <SimilarItems products={similarProducts} />
                 <ProductVideo />
+                <RefurbishedSection />
+                <ProductDescription product={product} />
             </div>
         );
     };
