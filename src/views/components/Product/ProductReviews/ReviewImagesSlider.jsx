@@ -6,7 +6,7 @@ import "swiper/swiper-bundle.min.css";
 import "swiper/css/navigation";
 SwiperCore.use([Navigation, Pagination]);
 
-function ReviewImages({ reviews }) {
+function ReviewImagesSlider({ reviews }) {
     return (
         <div className="review-images-section">
             <Swiper
@@ -43,4 +43,4 @@ function ReviewImages({ reviews }) {
     );
 }
 
-export default ReviewImages;
+export default ReviewImagesSlider;
