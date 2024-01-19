@@ -397,9 +397,11 @@ const Router = () => {
         {
             path: "/track-order",
             element: (
-                <PageWrapper>
-                    <TrackOrder />
-                </PageWrapper>
+                <ProtectedRoute>
+                    <PageWrapper>
+                        <TrackOrder />
+                    </PageWrapper>
+                </ProtectedRoute>
             ),
         },
 
