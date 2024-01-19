@@ -21,41 +21,41 @@ const ProductVideo = () => {
 
     const videoData = [ {id: 1, url: url}, {id: 2,  url: url2}, {id: 3, url: url3}, {id: 4, url: url4},   ];
     const newVideoData = videoData.map((video) => {
-        const [thumbnailSrc, setThumbnailSrc] = useState(null);
-useEffect(() => {
-    const createThumbnail = (videoSrc, callback) => {
-      const video = document.createElement('video');
-      video.crossOrigin = 'anonymous';
-      video.src = videoSrc;
+    const [thumbnailSrc, setThumbnailSrc] = useState(null);
+      useEffect(() => {
+        const createThumbnail = (videoSrc, callback) => {
+        const video = document.createElement('video');
+        video.crossOrigin = 'anonymous';
+        video.src = videoSrc;
 
-      video.addEventListener('loadeddata', () => {
-        video.currentTime = 1;
+        video.addEventListener('loadeddata', () => {
+          video.currentTime = 1;
 
-        video.addEventListener(
-          'seeked',
-          () => {
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
+          video.addEventListener(
+            'seeked',
+            () => {
+              const canvas = document.createElement('canvas');
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
 
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-            const imageDataUrl = canvas.toDataURL();
-            callback(imageDataUrl);
-          },
-          { once: true }
-        );
+              const imageDataUrl = canvas.toDataURL();
+              callback(imageDataUrl);
+            },
+            { once: true }
+          );
+        });
+      };
+
+      const videoSrc = video.url;
+
+      createThumbnail(videoSrc, (thumbnail) => {
+      //   console.log('Thumbnail created:', thumbnail);
+          setThumbnailSrc(thumbnail)
+        // Use the thumbnail data URL as needed (e.g., set it as the src of an image element)
       });
-    };
-
-    const videoSrc = video.url;
-
-    createThumbnail(videoSrc, (thumbnail) => {
-    //   console.log('Thumbnail created:', thumbnail);
-        setThumbnailSrc(thumbnail)
-      // Use the thumbnail data URL as needed (e.g., set it as the src of an image element)
-    });
   }, [videoData]);
   
         return {...video, tumbnail : thumbnailSrc};
@@ -72,7 +72,7 @@ useEffect(() => {
                     Videos for this product
                 </Typography>
             </Grid>
-            <Grid item lg={12} container px={4} columnGap={2} position={"relative"} >
+            <Grid item lg={12} container px={4} columnGap={2} position={"relative"} sx={{"@media (max-width: 600px)": { padding: 0 }}} >
                 <ProductVideoSlider Tumbnails={videoData} newVideoData={newVideoData}  />
             </Grid>
         </Grid>

@@ -33,10 +33,6 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
         setOpen(true);
     };
 
-    const handleSwitchVideo = (tumbUrl) => {
-        setUrl(tumbUrl)
-        console.log(tumbUrl)
-    };
 
     const handleClose = () => {
         setOpen(false);
@@ -45,6 +41,11 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
 
     const VideoDialog = ({tumbnail, Tumbnails}) => {
         
+        const [currentVideoId, setCurrentVideoId] = useState(newVideoData[index]?.id);
+        const handleSwitchVideo = (id) => {
+            setCurrentVideoId(id);
+        };
+        const currentVideo = newVideoData.find((video) => video.id === currentVideoId);
 
         return (
             <Dialog open={open} onClose={handleClose} maxWidth="lg" fullWidth sx={{maxHeight: "none",}}  >
@@ -55,7 +56,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                             <video
                                 width={"100%"}
                                 autoPlay
-                                src={url}
+                                src={currentVideo?.url}
                                 controls
                             ></video>
                         </Grid>
@@ -76,18 +77,16 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                     >
                         <Grid item xs={12}>
                             <DialogActions>
-                                <IconButton onClick={handleClose}>
-                                    <CloseOutlinedIcon
-                                        sx={{
-                                            color: "white",
+                                <IconButton onClick={handleClose} sx={{
+                                            color: "whitesmoke",
                                             position: "absolute",
                                             top: 0,
                                             right: 0,
-                                        }}
-                                    />
+                                        }}>
+                                    <CloseOutlinedIcon/>
                                 </IconButton>
                             </DialogActions>
-                            <Grid item xs={12} container rowGap={1} px={2} >
+                            <Grid item xs={12} container rowGap={1} px={2} my={2} >
                                 <Grid item xs={12} mb={1}>
                                     <Typography variant="body1" >Videos for ths product</Typography>
                                 </Grid>
@@ -99,16 +98,16 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                                     <Grid
                                     item
                                     xs={3}
-                                    onClick={(e) => handleSwitchVideo(videoData.url)}
+                                    onClick={(e) => handleSwitchVideo(videoData.id)}
                                     height={"60px"}
                                     position={"relative"}
                                     sx={{
                                         backgroundImage: `url(${videoData?.tumbnail})`,
-                                        borderRadius: "5px",
+                                        borderRadius: "2px",
                                         backgroundSize: "cover",
                                         backgroundPosition: "center",
                                         cursor: "pointer",
-                                        border: url == videoData.url ? "2px solid orange" : "",
+                                        border: currentVideo.id == videoData.id ? "2px solid orange" : "",
                                     }}
                                 >
                                     <Box
@@ -162,7 +161,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
     }
 
     return (
-        <Grid height={"238px"} container>
+        <Grid height={"238px"} container position={"relative"}>
             {/* ///// --- DIALOG --- ///// */}
            <VideoDialog tumbnail={tumbnail} Tumbnails={Tumbnails} />
 
@@ -179,6 +178,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                     borderBottomLeftRadius: 0,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
+                    '@media (max-width: 600px)': {height: "100%", borderRadius: "10px"}
                 }}
             >
                 <Box
@@ -220,6 +220,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                     backgroundSize: "180%",
                     backgroundPosition: "0% 48%",
                     backgroundBlendMode: "color",
+                    '@media (max-width: 600px)': {display: "none"}
                 }}
                 container
                 position={"relative"}
@@ -256,25 +257,29 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                         }}
                     ></div>
                 </Box>
-                <Grid item xs={2} sx={{ zIndex: 2 }}>
+            </Grid>
+            <Grid container position={"absolute"} bottom={0} left={0} height={"30%"} p={1}>
+                <Grid item sx={{ zIndex: 2 }}>
                     <img
                         src={sjLogo}
                         // height={"40px"}
-                        width={"80%"}
+                        width={"50px"}
                         style={{
-                            borderRadius: "50px",
+                            borderRadius: "75px",
                             border: "1px solid white",
+                            marginRight: "10px"
                         }}
                         alt="Profile"
                     />
                 </Grid>
-                <Grid item xs={10} sx={{ zIndex: 2 }}>
+                <Grid item sx={{ zIndex: 2 }}>
                     <Typography
                         ml={1}
                         variant="body2"
                         fontWeight={"bolder"}
                         color={"white"}
                         textAlign={"start"}
+                        noWrap
                     >
                         SJ Computers LLC
                     </Typography>
@@ -288,42 +293,3 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
 }
 
 export default VideoCard;
-
-// FOR CREATING VIDEO TUMBNAILS 
-
-// const [thumbnailSrc, setThumbnailSrc] = useState(null);
-// useEffect(() => {
-//     const createThumbnail = (videoSrc, callback) => {
-//       const video = document.createElement('video');
-//       video.crossOrigin = 'anonymous';
-//       video.src = videoSrc;
-
-//       video.addEventListener('loadeddata', () => {
-//         video.currentTime = 1;
-
-//         video.addEventListener(
-//           'seeked',
-//           () => {
-//             const canvas = document.createElement('canvas');
-//             canvas.width = video.videoWidth;
-//             canvas.height = video.videoHeight;
-
-//             const ctx = canvas.getContext('2d');
-//             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-//             const imageDataUrl = canvas.toDataURL();
-//             callback(imageDataUrl);
-//           },
-//           { once: true }
-//         );
-//       });
-//     };
-
-//     const videoSrc = tumb.url;
-
-//     createThumbnail(videoSrc, (thumbnail) => {
-//       console.log('Thumbnail created:', thumbnail);
-//       setThumbnailSrc(thumbnail)
-//       // Use the thumbnail data URL as needed (e.g., set it as the src of an image element)
-//     });
-//   }, []);
