@@ -19,6 +19,7 @@ export default function ProductRating({ product }) {
             gap={2}
         >
             <Tooltip
+                sx={{ left: { xs: "50%", md: "50%" } }}
                 content={
                     <>
                         <RatingDetails product={product} />

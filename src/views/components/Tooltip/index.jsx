@@ -70,11 +70,11 @@ import React from "react";
 import "./index.css";
 import { Box } from "@mui/material";
 
-const Tooltip = ({ content, children }) => {
+const Tooltip = ({ content, sx, children }) => {
     return (
         <div className="tooltip-container">
             {children}
-            <Box className="tooltip" sx={{ left: { xs: "100%", md: "50%" } }}>
+            <Box className="tooltip" sx={sx}>
                 {content}
             </Box>
         </div>
