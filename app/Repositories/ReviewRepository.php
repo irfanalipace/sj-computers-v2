@@ -43,6 +43,7 @@ class ReviewRepository
     /* save path of product review */
     public function createProductMedia($file,$request,$productReview)
     {
+       
         $productReview->productMedia()->updateOrCreate(
             ['id' => $request->media->id ?? null],
             [
@@ -57,9 +58,8 @@ class ReviewRepository
     /* Update review  */
     public function update($request,$id)
     {
-    //    $update = $this->productReviewModel->findOrFail($id);
-    dd($request);
-       $update = $this->productReviewModel->whereId($id)->update([
+       $update = $this->productReviewModel->findOrFail($id);
+       $update->update([
             'user_id' =>  $request->user_id ?? null,
             'guest_id' => $request->guest_id ?? null,
             'product_id' => $request->product_id,

@@ -1,6 +1,6 @@
 import { useEffect, useState, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import Autocomplete from "../../common/GooglePlaces/AutoComplete";
 import { setShippingDetails } from "@store/orders/ordersThunk";
 import { SET_SHIPPING_DETAILS } from "@store/orders/ordersSlice";
 import Loader from "@common/LoaderComponent/LoaderComponent";
@@ -14,6 +14,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     const apiError = useSelector((state) => state.orders.apiError);
     const loading = useSelector((state) => state.orders.isLoading);
     const settingAdress = useSelector((state) => state.orders.settingAdress);
+    // debugger;
 
     // const [fieldErrors, setFieldErrors] = useState({});
     const [permanentAddress, setPermanentAddress] = useState(false);
@@ -31,6 +32,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
         handleBlur,
         setErrors,
         isValid,
+        setFieldValue,
     } = useFormik({
         initialValues: {
             country: address?.country || "US",
@@ -45,6 +47,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
             state: address?.state || "Alabama",
             zip_code: address?.zip_code || "",
         },
+
         validate: (values) => {
             const errors = {};
             const full_name_regex = /^[A-Za-z ]+$/;
@@ -90,6 +93,46 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     const handlePermanentAddresses = (e) => {
         setPermanentAddress(e.target.checked);
     };
+
+    const handlePlaceChange = (place) => {
+        setFieldValue("address", place.formatted_address);
+        const stateData = place?.address_components.find((item) =>
+            item.types.includes("administrative_area_level_1")
+        );
+
+        const matchedState = states.find(
+            (item) =>
+                item.name.toLowerCase() === stateData.long_name.toLowerCase()
+        );
+
+        let city = place?.address_components.find((item) =>
+            item.types.includes("administrative_area_level_2")
+        );
+        if (!city)
+            city = place?.address_components.find((item) =>
+                item.types.includes("administrative_area_level_1")
+            );
+
+        if (matchedState) {
+            setFieldValue("state", matchedState.name);
+        }
+
+        if (city) setFieldValue("city", city.long_name);
+    };
+
+    useEffect(() => {
+        if (values.state) {
+            const matchedState = states.find(
+                (item) => item.name.toLowerCase() === values.state.toLowerCase()
+            );
+            if (matchedState?.zip_code_start) {
+                setFieldValue(
+                    "zip_code",
+                    matchedState?.zip_code_start.toString()
+                );
+            }
+        }
+    }, [values.state]);
 
     useEffect(() => {
         setErrors({ ...apiError });
@@ -308,27 +351,23 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                     </span>
                                 )}
                             </label>
-                            <input
-                                id="address"
-                                name="address"
+
+                            <Autocomplete
+                                placeholder="Street address (P.O Box)"
+                                defaultValue={values.address}
                                 className={
                                     errors.address && touched.address
                                         ? "input-field border-danger"
                                         : "input-field"
                                 }
-                                type="text"
-                                placeholder="Street address (P.O Box)"
-                                value={values?.address}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            ></input>
+                                onPlaceSelected={handlePlaceChange}
+                            />
 
-                            {/* <GooglePlacesAutoComplete /> */}
-                            {/* {errors.address && touched.address && (
+                            {errors.address && touched.address && (
                                 <p className="fs-6 mt-1 text-danger">
                                     {errors.address}
                                 </p>
-                            )} */}
+                            )}
                             <br></br>
                             {/* <input
                                 id="floorAddress"
@@ -405,7 +444,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                     >
                                         {states.map((state) => (
                                             <option
-                                                value={state?.name}
+                                                value={state.name}
                                                 key={state?.id}
                                                 className="text-capitalize"
                                             >
