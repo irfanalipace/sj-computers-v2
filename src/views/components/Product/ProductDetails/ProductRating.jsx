@@ -8,7 +8,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Link } from "react-router-dom";
 
-export default function ReviewSection({ product }) {
+export default function ProductRating({ product }) {
     return (
         <Stack direction={"row"} alignItems={"center"} gap={2}>
             <Tooltip

@@ -32,7 +32,7 @@ function ProductReviews({ reviews }) {
                         </div>
                     </div>
                     <div className="col-12 col-sm-6 col-md-8">
-                        <div className="d-flex justify-content-between mb-2">
+                        <div className="d-flex justify-content-between mb-3">
                             <h3 className="product-section-heading">
                                 Reviews with images
                             </h3>
