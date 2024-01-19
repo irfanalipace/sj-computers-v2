@@ -113,7 +113,7 @@
 .text-area-rating-review-list textarea::placeholder {
     color: #999; /* Customize the color as needed */
 
-    padding: 23px;
+    /* padding: 23px; */
 }
 .add-new-review .preview-button-review {
     margin-top: 22px;
