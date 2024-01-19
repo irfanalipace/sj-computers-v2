@@ -49,9 +49,9 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
 
         return (
             <Dialog open={open} onClose={handleClose} maxWidth="lg" fullWidth sx={{maxHeight: "none",}}  >
-            <DialogContent sx={{ p: 0, position: "relative", borderRadius: "2px", }}>
-                <Grid container >
-                    <Grid item xs={12} md={7.5} container>
+            <DialogContent sx={{ p: 0, position: "relative", borderRadius: "2px", height: "100vh" }}>
+                <Grid container height={"100%"} >
+                    <Grid item xs={12} md={7.5} container >
                         <Grid item xs={12}>
                             <video
                                 width={"100%"}
