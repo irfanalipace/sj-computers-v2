@@ -1,5 +1,6 @@
 /* @import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800"); */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 * {
     box-sizing: border-box;
@@ -53,7 +54,10 @@ span {
     font-display: swap;
     src:  url("./assets/font/Inter\(700\).ttf") format("truetype");
   }  */
-
+.MuiLinearProgress-bar1Determinate {
+    background-color: #ffa41c !important;
+    border-right: 1px solid #f5961d;
+}
 .inner-body {
     min-height: calc(100vh - 600px);
     display: flex;

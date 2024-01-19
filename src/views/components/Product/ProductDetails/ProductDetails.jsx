@@ -1,9 +1,17 @@
 import { useState, useEffect } from "react";
-import StarRatings from "react-star-ratings";
 
 import { snakeCaseToPrettyText } from "@utils/helpers";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import "./ProductDetail.css";
+import Tooltip from "../../Tooltip";
+import { Stack, Typography } from "@mui/material";
+import { Tab, Tabs } from "react-bootstrap";
+import CustomTab from "./CustomTab";
+import TabContent from "./TabContnet";
+import ReturnPolicy from "./ReturnPolicy";
+import ReviewSection from "./ReviewSection";
+import PriceWithLabel from "../../common/PriceWithLabel";
 
 let acceptedKeys = [
     "brand",
@@ -16,6 +24,7 @@ let acceptedKeys = [
 const ProductDetails = ({ product }) => {
     const [description, setDescription] = useState([]);
     const [productDetails, setProductDetails] = useState([]);
+    const [key, setKey] = useState("home");
 
     useEffect(() => {
         const parseProductDetailsArray = () => {
@@ -72,10 +81,10 @@ const ProductDetails = ({ product }) => {
 
     return (
         <div className="container">
-            <div className="">
+            <div>
                 <p className="item-title">{product?.name}</p>
             </div>
-            <div className="instock-detail ">
+            {/* <div className="instock-detail ">
                 <p className="most-demandind">
                     {product?.in_stock > 0 ? (
                         <span className="text-green">In Stock</span>
@@ -83,53 +92,42 @@ const ProductDetails = ({ product }) => {
                         <span className="text-danger">Out of stock</span>
                     )}
                 </p>
-            </div>
-            <div className="row px-0  res row-cols-sm-2 deatisl-data-set-image-view-data-details">
-                <div className="col-6 col-sm-6 col-lg-4 col-md-6  product-review">
-                    <div className="star my-2 star-alignment-gride">
-                        <StarRatings
-                            rating={product?.rating}
-                            starRatedColor="rgb(232, 126, 36)"
-                            numberOfStars={5}
-                            name="rating"
-                            isSelectable={false}
-                            starDimension={"20px"}
-                            starSpacing={"0"}
-                        />
-                    </div>
-                    <button className="selling-button">
+            </div> */}
+            <Typography
+                color={"#007185"}
+                fontWeight={400}
+                fontSize={"14px"}
+                lineHeight={"16px"}
+            >
+                Most demanding
+            </Typography>
+            <div className="row px-0 res deatisl-data-set-image-view-data-details">
+                <div className="col-12 justify-content-center justify-content-md-start  d-flex align-items-center  product-review">
+                    <ReviewSection product={product} />
+                </div>
+                {/* <div className="col-12 justify-content-center justify-content-md-start d-flex"> */}
+                {/* <button className="selling-button">
                         Top <span className="selling-color">Selling</span>
-                    </button>
-                </div>
-                <div className="col-6 col-sm-6 col-lg-4 col-md-6">
-                    <div className="mt-3">
-                        {/* <button className="product-rating">
-                            {product?.numReviews ? product.numReviews : "0"}{" "}
-                            ratings
-                        </button> */}
-                        {/* <Link className="product-info">
-                            11 answered questions
-                        </Link> */}
-                    </div>
-                    <div className="details-dev">
-                        <span className="size-text-details">
-                            Items Available
-                        </span>
-                    </div>
-                    {/* <Link className="product-info border-0">
-                            “lg 24 inch monitor”
-                        </Link> */}
-                    <div className="items-list-data-mobile-stayle">
-                        <button
-                            className="product-info border-0"
-                            style={{ backgroundColor: "white" }}
-                        >
-                            {product?.quantity > 0
-                                ? product?.quantity + " items"
-                                : "Out of stock"}
-                        </button>
-                    </div>
-                </div>
+                    </button> */}
+                {/* <Stack className="ms-4">
+                        <div className="details-dev ">
+                            <span className="size-text-details">
+                                Items Available
+                            </span>
+                        </div>
+
+                        <div className="items-list-data-mobile-stayle">
+                            <button
+                                className="product-info border-0"
+                                style={{ backgroundColor: "white" }}
+                            >
+                                {product?.quantity > 0
+                                    ? product?.quantity + " items"
+                                    : "Out of stock"}
+                            </button>
+                        </div>
+                    </Stack> */}
+                {/* </div> */}
             </div>
 
             <div className="divsection">
@@ -187,51 +185,70 @@ const ProductDetails = ({ product }) => {
             </div> */}
 
             <hr className="hr-card-details"></hr>
-            <div className="col-md-12 list-style-margin">
-                <ul className="product-specs">
-                    {productDetails.map((item, index) => (
-                        <div key={item.key}>
-                            {item?.value && (
-                                <li
-                                    key={`${item.key}-${index}`}
-                                    className="row mx-0"
-                                >
-                                    <div className="col-md-3 col-6">
-                                        <span className="item12 text-uppercase">
-                                            {item?.key}
-                                        </span>
-                                    </div>
-                                    <div className="col-md-9 col-6">
-                                        <span className="items text-capitalize">
-                                            {item?.value}
-                                        </span>
-                                    </div>
-                                </li>
-                            )}
-                        </div>
-                    ))}
-                    <li className="row mx-0">
-                        <div className="col-md-3 col-6">
-                            <span className="item12 text-capitalize">ASIN</span>
-                        </div>
-                        <div className="col-md-9 col-6">
-                            <span className="items text-capitalize">
-                                {product?.asin}
-                            </span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <PriceWithLabel price={product?.price} />
+            <Tooltip content={<ReturnPolicy />}>
+                <Typography
+                    fontWeight={400}
+                    color={"#007185"}
+                    fontSize={"14px"}
+                    lineHeight={"14px"}
+                >
+                    Free Return
+                    <ExpandMoreIcon
+                        sx={{
+                            width: "15px",
+                            height: "15px",
+                            color: "#B12704",
+                            mb: 0.5,
+                        }}
+                    />
+                </Typography>
+            </Tooltip>
+            <Typography
+                sx={{ mt: 1.8 }}
+                fontWeight={400}
+                fontSize={"13px"}
+                lineHeight={"15px"}
+            >
+                Variations:
+            </Typography>
+            <Tabs
+                style={{ border: "none" }}
+                id="controlled-tab"
+                activeKey={key}
+                onSelect={(k) => setKey(k)}
+                className="mb-3 "
+            >
+                <Tab
+                    eventKey="home"
+                    title={<CustomTab currentTab={key} eventKey="home" />}
+                >
+                    <TabContent
+                        productDetails={productDetails}
+                        product={product}
+                    />
+                </Tab>
+                <Tab
+                    eventKey="profile"
+                    title={<CustomTab currentTab={key} eventKey="profile" />}
+                >
+                    <TabContent
+                        productDetails={productDetails}
+                        product={product}
+                    />
+                </Tab>
+            </Tabs>
+
             <hr className="hr-card-details"></hr>
 
             <div className="col-md-12 items-details-description">
-                <h3 className="items-text-style">Items Description</h3>
+                <h3 className="items-text-style">About this item</h3>
 
-                <ol type="1">
+                <ul type="1">
                     {description?.map((item, index) => (
                         <li key={index}>{item.value}</li>
                     ))}
-                </ol>
+                </ul>
             </div>
         </div>
     );
