@@ -178,6 +178,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                     borderBottomLeftRadius: 0,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
+                    cursor: "pointer",
                     '@media (max-width: 600px)': {height: "100%", borderRadius: "10px"}
                 }}
             >
