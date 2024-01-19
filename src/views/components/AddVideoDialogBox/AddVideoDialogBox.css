@@ -9,15 +9,40 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .dialog-content-video-camera-sections {
+}
+
+.dialog-content-video-camera-sections {
     background: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     text-align: center;
-  }
-  
-  /* Add more styling as needed */
-  
+}
+/* AddVideoDialogBox.css */
+
+.custome-model-data-add-video-file .modal-content {
+    max-width: 700px;
+    margin: auto; /* Center the modal horizontally */
+}
+
+.custome-model-data-add-video-file .text-center {
+    border-radius: 12px;
+}
+.custome-model-data-add-video-file .modal-content {
+    width: 700px;
+}
+
+.custome-model-data-add-video-file {
+    width: 100%;
+}
+
+.upload-file-icon-data button {
+    margin-bottom: 12px;
+    padding: 9px;
+    width: 38px;
+    box-shadow: 0px 0px 0px 1px;
+    /* border: 1px solid red; */
+    border-radius: 110px;
+    background: white;
+    border: white;
+}
