@@ -19,3 +19,73 @@
     width: 100%;
     height: 190px;
 }
+
+.add-new-review {
+    padding: 40px;
+}
+.add-new-review .review-heading h5 {
+    font-size: 24px;
+}
+.add-new-review .sj-computer-tags p {
+    font-size: 16px;
+    color: #727272;
+}
+
+.add-new-review .rating-review-star {
+    display: flex;
+}
+.add-new-review .check-rating-star-review {
+    margin-left: 35px;
+    color: green;
+}
+
+.add-new-review .check-rating-star-review-name {
+    margin-left: 6px;
+    color: #007185;
+}
+.posted-policy-review {
+    color: green;
+    margin-left: 6px;
+}
+.add-new-review .text-area-rating-review-list textarea {
+    margin-top: 10px;
+    width: 935px;
+    height: 254px;
+    border-radius: 10px;
+}
+
+.text-area-rating-review-list textarea::placeholder {
+    color: #999; /* Customize the color as needed */
+
+    padding: 23px;
+}
+.add-new-review .preview-button-review {
+    margin-top: 22px;
+    display: flex;
+    justify-content: end;
+}
+
+.preview-button-review .preview-product-list-button {
+    height: 49px;
+    background: none;
+    padding: 0px;
+    margin-right: 18px;
+    border: 0px;
+    color: #007185;
+}
+.preview-button-review .camera-button-review {
+    background-color: #f2f3f6;
+    border: 1px solid #aaaaaa;
+    margin-right: 18px;
+    padding: 12px;
+    border-radius: 7px;
+}
+.preview-button-review .submit-review-button {
+    width: 132px;
+    height: 36px;
+    border-radius: 6px;
+    border: 1px solid #aaaaaa;
+    background-color: #318243;
+    color: white;
+    height: 49px;
+}
