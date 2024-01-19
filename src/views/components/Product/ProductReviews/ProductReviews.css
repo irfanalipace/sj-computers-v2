@@ -1,0 +1,21 @@
+.product-reviews-section .view-all-images-btn {
+    font-size: 14px;
+    background-color: transparent;
+    border: 0;
+}
+
+.product-reviews-section .view-all-images-btn:hover {
+    text-decoration: underline;
+    color: chocolate;
+}
+
+.product-reviews-section .swiper .all-reviews-image {
+    max-width: 100%;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.product-reviews-section .swiper button {
+    width: 100%;
+    height: 190px;
+}

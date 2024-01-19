@@ -9,7 +9,7 @@ import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
 import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
 import Recommendation from "@components/Recommendation/Recommendation";
 import NotFound from "../NotFound/NotFound";
-
+import ProductReviews from "../../components/Product/ProductReviews/ProductReviews";
 import "./Product.css";
 import SimilarItems from "../../components/SimilarItems/SimilarItems";
 import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
@@ -79,6 +79,7 @@ export default function Product() {
                         ) : (
                             <ProductComponent />
                         )}
+                        <ProductReviews reviews={products} />
                         <Recommendation products={products} />
                     </div>
                 </div>

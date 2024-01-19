@@ -17,6 +17,7 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s, visibility 0.3s;
+    padding: 15px 0;
 }
 
 .tooltip-container:hover .tooltip {

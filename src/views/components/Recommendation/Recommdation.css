@@ -1,27 +1,21 @@
 .recommendation-container {
     background-color: white;
-    padding: 40px 0;
-    padding-top: 0;  
+    margin: 40px 0;
 }
 
-.recommendation-inner {
+/* .recommendation-inner {
     border-top: 1px solid lightgray;
-}
-.recommendation-container h3 {
-    font-weight: 600;
-    font-size: 16px;
-    padding: 0 30px;
-}
+} */
 
 .recommendation-container .slider-wrapper {
-    width: 94%;
-    margin: 10px auto 50px;
+    /* width: 94%; */
+    margin: 0 auto 50px;
 }
 
 .recommendation-container h3 {
-    width: 94%;
+    /* width: 94%; */
     margin: 10px auto 50px;
-    margin-top: 30px;
+    /* margin-top: 30px; */
     margin-bottom: 50px;
 }
 

@@ -1,12 +1,13 @@
-import { Box, Divider, Stack, Typography } from "@mui/material";
+import { Box, Divider, Stack, Typography, Button } from "@mui/material";
 import React from "react";
 import Tooltip from "../../Tooltip";
 import HoverColorChange from "../../HoverColorChange";
 import StarRatings from "react-star-ratings";
-import RatingDetails from "./RatingDetails";
+import RatingDetails from "../ProductReviews/RatingDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-export default function ReviewSection({ product }) {
+export default function ProductRating({ product }) {
     return (
         <Stack
             direction={{
@@ -17,7 +18,27 @@ export default function ReviewSection({ product }) {
             alignItems={["center", "center", "start"]}
             gap={2}
         >
-            <Tooltip content={<RatingDetails product={product} />}>
+            <Tooltip
+                content={
+                    <>
+                        <RatingDetails product={product} />
+                        <Stack mt={2} spacing={2}>
+                            <Divider
+                                sx={{
+                                    background: "#DDD",
+                                    borderBottomWidth: 3,
+                                }}
+                            />
+                            <Button
+                                href="#reviews"
+                                endIcon={<ChevronRightIcon />}
+                            >
+                                See customer reviews
+                            </Button>
+                        </Stack>
+                    </>
+                }
+            >
                 <Stack direction={"row"}>
                     <Typography
                         fontSize={"14px"}
@@ -49,9 +70,7 @@ export default function ReviewSection({ product }) {
             </Tooltip>
             <Stack direction={"row"} spacing={1}>
                 <HoverColorChange hoverColor="#FFA41C" defaultColor="#007185">
-                    <a href="#rating" className="review-text">
-                        66 Ratings
-                    </a>
+                    <a className="review-text">66 Ratings</a>
                 </HoverColorChange>
                 <Divider
                     orientation="vertical"
@@ -63,9 +82,7 @@ export default function ReviewSection({ product }) {
                     flexItem
                 />
                 <HoverColorChange hoverColor="#FFA41C" defaultColor="#007185">
-                    <a href="questions" className="review-text">
-                        11 answered questions
-                    </a>
+                    <a className="review-text">11 answered questions</a>
                 </HoverColorChange>
             </Stack>
         </Stack>
