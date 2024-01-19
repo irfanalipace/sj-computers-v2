@@ -1,18 +1,20 @@
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Product from "@components/ProductCard/ProductCard";
-import { fetchSimilarProducts } from "@store/products/productsThunks";
+import ProductCardSimilarItems from "@components/ProductCard/ProductCardSimilarItems";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Slider.css";
-import { useDispatch } from "react-redux";
+import { fetchSimilarProducts } from "@store/products/productsThunks";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 // Install Swiper navigation plugin
 SwiperCore.use([Navigation]);
 
-const ProductSlider = ({ type = "", products }) => {
+const SimilarItemsSlider = ({ type = "", products }) => {
     const dispatch = useDispatch();
     const handleClick = async (pName) => {
         try {
@@ -54,7 +56,6 @@ const ProductSlider = ({ type = "", products }) => {
                 },
             }}
             navigation
-            className="recommendation-slider"
         >
             {products?.map((product) => (
                 <SwiperSlide key={"ps-" + product.id}>
@@ -62,12 +63,15 @@ const ProductSlider = ({ type = "", products }) => {
                         className="px-1"
                         onClick={() => handleClick(product.name)}
                     >
-                        <Product type={type} product={product} />
-                    </div>
+                        <ProductCardSimilarItems
+                            type={type}
+                            product={product}
+                        />
+                    </div>{" "}
                 </SwiperSlide>
             ))}
         </Swiper>
     );
 };
 
-export default ProductSlider;
+export default SimilarItemsSlider;

@@ -60,7 +60,6 @@ const Router = () => {
                 </Suspense>
             ),
         },
-
         {
             path: "/login",
             element: (
@@ -71,7 +70,6 @@ const Router = () => {
                 </AuthRoute>
             ),
         },
-
         {
             path: "/register",
             element: (
