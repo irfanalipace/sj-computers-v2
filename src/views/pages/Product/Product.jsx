@@ -15,6 +15,7 @@ import SimilarItems from "../../components/SimilarItems/SimilarItems";
 import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
 import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
 import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
+import ProductPageHeader from "../../components/ProductPageHeader/ProductPageHeader";
 
 export default function Product() {
     const [isLoading, setIsLoading] = useState(true);
@@ -73,6 +74,7 @@ export default function Product() {
         <>
             {product?.id || isLoading || !products?.length ? (
                 <div className="product-page ">
+                    <ProductPageHeader />
                     <div className="product-container container-fluid">
                         {isLoading || !products?.length ? (
                             <LoaderComponent />

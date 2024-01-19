@@ -186,7 +186,10 @@ const ProductDetails = ({ product }) => {
 
             <hr className="hr-card-details"></hr>
             <PriceWithLabel price={product?.price} />
-            <Tooltip content={<ReturnPolicy />}>
+            <Tooltip
+                sx={{ left: { xs: "100%", md: "50%" } }}
+                content={<ReturnPolicy />}
+            >
                 <Typography
                     fontWeight={400}
                     color={"#007185"}
