@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProductReviews.css";
 import img from "../../../../assets/images/product/productreview/productreview.png";
 import StarRatings from "react-star-ratings";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCamera } from "@fortawesome/free-solid-svg-icons";
+import AddVideoDialogBox from "../../AddVideoDialogBox/AddVideoDialogBox";
 
 const ProductNewReviews = () => {
+    const [dialogBoxOpen, setDialogBoxOpen] = useState(false);
+
+    const handleDialogBox = () => {
+        setDialogBoxOpen(true);
+    };
+
+    const handleCloseDialogBox = () => {
+        setDialogBoxOpen(false);
+    };
   return (
     <div>
       <div className="container add-new-review">
@@ -62,15 +72,20 @@ const ProductNewReviews = () => {
 
             <div className="preview-button-review">
               <button className="preview-product-list-button">Preview</button>{" "}
-              <button className="camera-button-review">
+              <button className="camera-button-review" onClick={handleDialogBox}>
                 {" "}
-                <FontAwesomeIcon icon={faCamera} /> Add Photos/Video
+                <FontAwesomeIcon icon={faCamera} /> Add Photos/Video 
               </button>{" "}
               <button className="submit-review-button">Submit</button>
             </div>
           </div>
         </div>
       </div>
+      {
+        dialogBoxOpen && (
+            <AddVideoDialogBox  onClose={handleCloseDialogBox}/>
+        )
+      }
     </div>
   );
 };
