@@ -19,6 +19,10 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     // const [fieldErrors, setFieldErrors] = useState({});
     const [permanentAddress, setPermanentAddress] = useState(false);
     const dispatch = useDispatch();
+    console.log(
+        "google api palcaes",
+        import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY
+    );
     const {
         values,
         handleChange,

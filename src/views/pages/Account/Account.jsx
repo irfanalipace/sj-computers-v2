@@ -16,7 +16,7 @@ const Account = () => {
             <div className="container-xl">
                 <h3 className="account-heading">Your Account </h3>
                 <div className="account-options row mx-0">
-                    {/* <Link
+                    <Link
                         to={"orders"}
                         className="account-card col-md-3 col-sm-6 col-12"
                     >
@@ -29,7 +29,7 @@ const Account = () => {
                                 <p>Track, return or cancel your order</p>
                             </div>
                         </div>
-                    </Link> */}
+                    </Link>
                     <Link
                         to={"profile"}
                         className="account-card col-md-3 col-sm-6 col-12"
