@@ -27,7 +27,12 @@ export default function Recommendation({ products }) {
     return (
         <>
             <div className="recommendation-container">
-                <div className="recommendation-inner">
+                <div
+                    className="recommendation-inner"
+                    style={{
+                        borderBottom: "1px solid lightgray",
+                    }}
+                >
                     <h3>Recommended Items</h3>
                     <div className="slider-wrapper">
                         {isLoading || !products ? (

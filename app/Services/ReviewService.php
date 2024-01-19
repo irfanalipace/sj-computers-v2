@@ -26,6 +26,7 @@ class ReviewService
 
     private function uploadMedia($productReview,$request)
     {
+       
         $media = $request->hasFile('media') ?? '';
         if($media) {
             $productReviewMedia = $request->file('media');
@@ -47,6 +48,7 @@ class ReviewService
     public function updateProductReview($request,$id)
     {
         $update = $this->repository->update($request,$id);
+
         $this->uploadMedia($update,$request);
         return $update;
     }

@@ -34,7 +34,7 @@ export function setShippingAddressApi({
             country,
             full_name,
             phone_number,
-            address: address + floorAddress,
+            address: address,
             city,
             state,
             zip_code,

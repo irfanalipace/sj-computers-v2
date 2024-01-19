@@ -58,6 +58,7 @@ class PayPalController extends Controller
         $provider->setApiCredentials(config('paypal'));
         $paypalToken = $provider->getAccessToken();
         $response = $provider->capturePaymentOrder($request->token);
+
         if(isset($response['status']) && $response['status'] == 'COMPLETED') {
 
             // Insert data into database
@@ -73,10 +74,9 @@ class PayPalController extends Controller
             $payment->method = "PayPal";
             $payment->save();
 
-            return redirect()->to('thank-you');
-
             unset($_SESSION['product_name']);
             unset($_SESSION['quantity']);
+            return redirect()->to('thank-you');
 
         } else {
             return redirect()->route('cancel');
