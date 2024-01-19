@@ -11,6 +11,7 @@ import Recommendation from "@components/Recommendation/Recommendation";
 import NotFound from "../NotFound/NotFound";
 
 import "./Product.css";
+import SimilarItems from "../../components/SimilarItems/SimilarItems";
 import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
 import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
 import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
@@ -20,6 +21,9 @@ export default function Product() {
     const [product, setProduct] = useState(null);
     const [productImages, setProductImages] = useState([]);
     const products = useSelector((state) => state.products.products);
+    const similarProducts = useSelector(
+        (state) => state.products.similarProducts
+    );
     const { productId } = useParams();
 
     useEffect(() => {
@@ -57,6 +61,7 @@ export default function Product() {
                 <div className="col-12 col-md-3 p-0 m-0">
                     <CheckOutCard product={{ ...product }} />
                 </div>
+                <SimilarItems products={similarProducts} />
                 <ProductVideo />
                 <RefurbishedSection />
                 <ProductDescription product={product} />
