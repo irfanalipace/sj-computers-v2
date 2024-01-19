@@ -22,7 +22,6 @@ const SingleSimilarItem = ({ type = "", product }) => {
                     name: nameBeforeComma,
                 })
             );
-            console.log("something");
         } catch (error) {
             console.log(error);
         }
