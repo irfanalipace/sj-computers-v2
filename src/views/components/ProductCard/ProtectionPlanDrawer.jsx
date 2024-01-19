@@ -47,6 +47,7 @@ const ProtectionPlanDrawer = ({
                         checked={planValue === "3-Year"}
                         onClick={() => handleCheckboxChange("3-Year")}
                         className="mb-4"
+                        style={{ color: "#318243" }}
                     />
                     <p className="mt-4">
                         3-Year Proection{" "}
@@ -131,6 +132,7 @@ const ProtectionPlanDrawer = ({
                         checked={planValue === "4-Year"}
                         onClick={() => handleCheckboxChange("4-Year")}
                         className="mb-4"
+                        style={{ color: "#318243" }}
                     />
                     <p className="mt-4">
                         4-Year Proection{" "}
@@ -218,6 +220,7 @@ const ProtectionPlanDrawer = ({
                         checked={planValue === "unlimited"}
                         onClick={() => handleCheckboxChange("unlimited")}
                         className="mb-5"
+                        style={{ color: "#318243" }}
                     />
                     <p className="mt-2">
                         Tech Unlimited – Protect Eligible Past and Future

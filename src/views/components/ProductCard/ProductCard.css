@@ -160,6 +160,25 @@
     width: 150px;
     margin: 10px 0;
 }
+.sj-banner-similar-item {
+    display: flex;
+}
+.sj-banner-similar-item p {
+    padding-right: 10px;
+    padding: 5px;
+    font-size: 12px;
+    background-color: #0f1111;
+    width: 50%;
+    color: white;
+}
+.sj-banner-similar-item .for-styling {
+    background-color: #fff;
+    margin-top: 2px;
+    margin-left: -17px;
+    transform: rotate(-15deg);
+    width: 20px;
+    height: 21px;
+}
 
 .product-image-grid .badge-text {
     width: 100%;
