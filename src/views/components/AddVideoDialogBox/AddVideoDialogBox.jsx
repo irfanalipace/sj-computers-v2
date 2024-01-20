@@ -1,182 +1,135 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Modal } from "react-bootstrap";
 import fileService from "../../../core/utils/fileServices";
 import "./AddVideoDialogBox.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faUpload, faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { Photo } from "@material-ui/icons";
-import productphoto from '../../../assets/images/product/image20.png'
+import productphoto from "../../../assets/images/product/image20.png";
+import CustomPhotoLibrary from "./CustomPhotoLibrary";
+
+// ... (existing code)
+
 const AddVideoDialogBox = ({ onClose }) => {
-  const [temporaryFiles, setTemporaryFiles] = useState([]);
-  const [dragging, setDragging] = useState(false);
-  const [errors, setErrors] = useState([]);
-
-  const deletingFile = (e, file) => {
-    e.stopPropagation();
-    const filteredFiles = temporaryFiles.filter((f) => f !== file);
-    setTemporaryFiles(filteredFiles);
-  };
-
-  const downloadFile = (e, file) => {
-    e.stopPropagation();
-    if (file.id) {
-      window.open(file?.file_path);
-    } else {
-      window.open(URL.createObjectURL(file));
-    }
-  };
-
-  const handleSave = () => {
-    // Implement your save logic here
-    console.log("Save logic:", temporaryFiles);
-    onClose();
-  };
-
-  const dragOver = (e) => {
-    e.preventDefault();
-    setDragging(true);
-  };
-
-  const fileDrop = (e) => {
-    e.preventDefault();
-    setDragging(false);
-    fileService.handleFileDrag(
-      e,
-      ["image/*", "video/*"],
-      callBack,
-      1024 * 1024 * 10
-    );
-  };
-
-  const onFileUpload = (e) => {
-    fileService.handleFileInputChange(
-      e,
-      ["image/*", "video/*"],
-      callBack,
-      1024 * 1024 * 10
-    );
-  };
-
-  const callBack = (validFiles, errors) => {
-    setTemporaryFiles((prev) => [...prev, ...validFiles]);
-    setErrors(errors);
-  };
-
-  useEffect(() => {
-    const handleListener = (event) => {
-      fileService.handlePaste(
-        event,
-        ["image/*", "video/*"],
-        callBack,
-        1024 * 1024 * 10
+    const [isDragging, setIsDragging] = useState(false);
+    const fileInputRef = useRef(null);
+  
+    const [images, setImages] = useState([]);
+  
+    const selectFiles = () => {
+      fileInputRef.current.click();
+    };
+  
+    const onFileSelect = (event) => {
+      const files = event.target.files;
+      if (files.length === 0) return;
+  
+      const newImages = Array.from(files).filter(
+        (file) => !images.some((img) => img.name === file.name)
       );
+  
+      setImages((prevImages) => [
+        ...prevImages,
+        ...newImages.map((file) => ({
+          name: file.name,
+          url: URL.createObjectURL(file),
+        })),
+      ]);
     };
-    document.addEventListener("paste", handleListener);
-
-    return () => {
-      document.removeEventListener("paste", handleListener);
+  
+    const deleteImage = (index) => {
+      setImages((prevImages) => prevImages.filter((_, i) => i !== index));
     };
-  }, []);
-
-  const photoLibrary = [
-    { src: {productphoto}, alt: "Photo 1" },
-    { src: {productphoto}, alt: "Photo 2" },
-    { src: {productphoto}, alt: "Photo 3" },
-    { src: {productphoto}, alt: "Photo 4" },
-    { src: {productphoto}, alt: "Photo 5" },
-  ];
-
-  return (
-    <div className="custome-model-data-add-video-file">
-      <Modal show={true} onHide={onClose} ClassName="custom-modal">
+  
+    const onDragOver = (event) => {
+      event.preventDefault();
+      setIsDragging(true);
+      event.dataTransfer.dropEffect = "copy";
+    };
+  
+    const onDragLeave = () => {
+      setIsDragging(false);
+    };
+  
+    const onDrop = (event) => {
+      event.preventDefault();
+      setIsDragging(false);
+  
+      const files = event.dataTransfer.files;
+      if (files.length > 0) {
+        onFileSelect({ target: { files } });
+      }
+    };
+  
+    const onUpload = () => {
+      // Implement your upload logic here
+      // This function should handle the upload of images in the 'images' state
+    };
+  
+    return (
+      <Modal show={true} onHide={onClose} className="custome-model-item-filter">
         <Modal.Body>
-          <label
-            style={{ width: "465px" }}
-            htmlFor="file-input"
-            onDragOver={dragOver}
-            onDrop={fileDrop}
+          <div
+            className={`drag-area-data ${isDragging ? "drag-over" : ""}`}
+            onClick={selectFiles}
+            onDragOver={onDragOver}
+            onDragLeave={onDragLeave}
+            onDrop={onDrop}
           >
+            {isDragging ? (
+              <span className="select-image-file-drop">Drop images here</span>
+            ) : (
+              <>
+              <div>
+               <span className="logout-icon-button-view-list-area">
+               <FontAwesomeIcon icon={faUpload} />
+               </span>
+              </div>
+                <div className="drop-import-section-p">
+                  <p> Drag & Drop file to import {" "}</p>
+                </div>
+                <div className="dev-droping-area-sction-files-area">
+                  <span className="select-image-file-drop" role="button" onClick={selectFiles}>
+                   <FontAwesomeIcon icon={faPaperclip} /> Choose File
+                  </span>
+                </div>
+                <div>
+                  <p className="text-muted" style={{fontSize:'12px'}}> Maxmuim file Size:1MB file, format supported: PNG or JPG{" "}</p>
+                </div>
+              </>
+            )}
             <input
-              className="custome-model-data-add-video-file"
-              id="file-input"
+            className="input-fileds-area-sections-data-powerd"
+              name="file"
               type="file"
               multiple
-              style={{ display: "none" }}
-              onChange={onFileUpload}
-              accept="image/*, video/*"
+              ref={fileInputRef}
+              onChange={onFileSelect}
             />
-            <div
-              className="text-center border p-5"
-              style={{
-                borderColor: dragging ? "blue" : "#c3c3c3",
-                borderRadius: "12px",
-              }}
-            >
-              <div className="upload-file-icon-data">
-                <button>
-                  <FontAwesomeIcon icon={faUpload} />
-                </button>
+          </div>
+  
+          <div className="container-image-drop">
+            {images.map((img, index) => (
+              <div className="list-image-container" key={index}>
+                <span className="delete-button-data" onClick={() => deleteImage(index)}>
+                  &times;
+                </span>
+                <img src={img.url} alt={img.name} />
               </div>
-              <p className="mb-3">Drag & drop file to import</p>
-              <form>
-              <input type="file" id="myFile" name="filename" />
-                 </form>
-            
-        
-
-              <p className="text-muted" style={{ fontSize: "13px" }}>
-                Maximum file size 1MB. and file format: PNG or JPG
-              </p>
-            </div>
-          </label>
-
-          <div className="photo-library">
-            {photoLibrary.map((photo, index) => (
-               
-      
-                <div key={index} className="photo-item">
-                <img src={photo.src} alt={photo.alt} />
-              </div>
-        
             ))}
           </div>
-
-          <ul className="list-group mt-3">
-            {temporaryFiles.map((file, index) => (
-              <li
-                key={index}
-                className="list-group-item d-flex justify-content-between align-items-center"
-              >
-                {/* Display thumbnail or name of the file */}
-                gsgdfg
-                <div>
-                  <button
-                    variant="danger"
-                    onClick={(e) => deletingFile(e, file)}
-                  >
-                    Delete
-                  </button>
-                  <button
-                    variant="primary"
-                    className="ms-2"
-                    onClick={(e) => downloadFile(e, file)}
-                  >
-                    Download
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-          {errors.length > 0 &&
-            errors.map((error, index) => (
-              <p key={index} className="text-danger mt-2">
-                {error}
-              </p>
-            ))}
+  
+  <div className="upload-cancel-dev">
+    <button className="cancel-button-preview">Cancel</button>  <button onClick={onUpload} className="upload-button-view-button">Upload</button>
+  </div>
+  <div>
+ 
+  </div>
+         
         </Modal.Body>
       </Modal>
-    </div>
-  );
-};
-
-export default AddVideoDialogBox;
+    );
+  };
+  
+  export default AddVideoDialogBox;
+  

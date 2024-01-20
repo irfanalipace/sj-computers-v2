@@ -1,48 +1,141 @@
-/* AddVideoDialogBox.css */
-.video-photo-overlay-dialog-box {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* semi-transparent black background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+ .card-container-view {
+    padding: 10px;
+    box-shadow: 0 0 5px wheat;
+    border-radius: 5px;
+    overflow: hidden;
 }
-
-.dialog-content-video-camera-sections {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+.card-container-view .top {
     text-align: center;
 }
-/* AddVideoDialogBox.css */
-
-.custome-model-data-add-video-file .modal-content {
-    max-width: 700px;
-    margin: auto; /* Center the modal horizontally */
+ .card-container-view p {
+    font-weight: bold;
+    color: #0086fe;
 }
-
-.custome-model-data-add-video-file .text-center {
-    border-radius: 12px;
+.custome-model-item-filter.modal .modal-content {
+   
+    width: 692px !important;
+    height: auto;
 }
-.custome-model-data-add-video-file .modal-content {
-    width: 700px;
-}
-
-.custome-model-data-add-video-file {
+ /* button {
+    outline: 0;
+    border: 0;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 400;
+    padding: 8px 13px;
     width: 100%;
+    background: #0086fe;
+} */
+.upload-button-view-button{
+    width: 78px;
+    height: 31px;
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+    margin-left: 7px;
+
+}
+.cancel-button-preview{
+    width: 78px;
+height: 31px;
+border-radius: 5px;
+border: 1px;
+
+}
+.drag-area-data {
+    padding-top: 83px;
+    height: 296px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px dotted #d5d3db;
+    color: black;
+    background: #f4f3f9;
+    align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+}
+  
+  /* Add cursor:pointer to make it clear that it's clickable */
+  .drag-area-data:hover {
+    cursor: pointer;
+  }
+  .upload-cancel-dev {
+    display: flex;
+    justify-content: end;
+    /* display: flex; */
+    /* justify-content: space-between; */
+}
+.drag-area-data .visible {
+    font-size: 18px;
+}
+.drop-import-section-p {
+    font-size: 19px;
+    margin-top: 32px;
+}
+.input-fileds-area-sections-data-powerd{
+    display: none;
+}
+.dev-droping-area-sction-files-area {
+    margin-top: 23px;
+    margin-bottom: 23px;
+}
+.drag-area-data .select-image-file-drop {
+   
+    color: black;
+    margin-left: 5px;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.4s;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.select-image-file-drop:hover {
+    opacity: 0.6;
+}
+ .container-image-drop {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+.list-image-container {
+    width: 115px;
+    margin-right: 7px;
+    height: 95px;
+    position: relative;
+    margin-bottom: 8px;
+}
+ .list-image-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+ .list-image-container span {
+    position: absolute;
+    top: -2px;
+    right: 9px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.custome-model-item-filter .card input,
+.card .drag-area .on-drop,
+.card .drag-area .dragover .visible {
+    display: none;
+}
+.delete-button-data {
+    z-index: 999;
+    color: #0086fe;
 }
 
-.upload-file-icon-data button {
-    margin-bottom: 12px;
-    padding: 9px;
-    width: 38px;
-    box-shadow: 0px 0px 0px 1px;
-    /* border: 1px solid red; */
-    border-radius: 110px;
+.logout-icon-button-view-list-area {
     background: white;
-    border: white;
+    padding: 12px;
+    border-radius: 23px;
+    color: #6b6363;
+    box-shadow: 0px 1px 1px 1px;
 }
