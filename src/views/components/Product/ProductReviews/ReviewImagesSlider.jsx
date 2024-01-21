@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 import "swiper/css/navigation";
+import ReviewsDialog from "./ProductReviewsDialog/ReviewsDialog";
 SwiperCore.use([Navigation, Pagination]);
 
 function ReviewImagesSlider({ reviews }) {
+
+    const[open, setOpen] = useState(false)
+
+    const handleOpenDialog = () => {
+        setOpen(true)
+        console.log(reviews, "reviews");
+    }
+
+    const handleClose = () => {
+        setOpen(false)
+    }
+
     return (
         <div className="review-images-section">
             <Swiper
@@ -25,10 +38,14 @@ function ReviewImagesSlider({ reviews }) {
                     },
                 }}
             >
+                {/* /// --- DIALOG --- /// */}
+                <ReviewsDialog open={open} handleOpenDialog={handleOpenDialog} handleClose={handleClose} />
                 {reviews.map((rev) => (
-                    <SwiperSlide>
+                    <SwiperSlide key={rev?.id}>
                         <div>
-                            <button className="btn btn-light p-1 d-flex align-items-center">
+                            <button 
+                            onClick={handleOpenDialog}
+                            className="btn btn-light p-1 d-flex align-items-center">
                                 <img
                                     src={rev.image[0]}
                                     alt="review-image"
