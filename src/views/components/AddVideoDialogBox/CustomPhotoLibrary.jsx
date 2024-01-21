@@ -1,49 +1,49 @@
+import { Close } from '@material-ui/icons';
 import React, { useState } from 'react';
-
-const CustomPhotoLibrary = () => {
-  const [images, setImages] = useState([]);
-
-  const handleDrop = (event) => {
-    event.preventDefault();
-    const files = event.dataTransfer.files;
-    handleFiles(files);
-  };
-
-  const handleFiles = (files) => {
-    const newImages = [...images];
-
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      // Ensure it's an image file
-      if (file.type.startsWith('image/')) {
-        newImages.push(file);
-      }
-    }
-
-    setImages(newImages);
-  };
-
-  const handleDragOver = (event) => {
-    event.preventDefault();
-  };
-
-  const handleFileInputChange = (event) => {
-    const files = event.target.files;
-    handleFiles(files);
-  };
-
-  const handleUploadClick = () => {
-    // Perform the actual upload logic here
-    // You can send the images to a server or process them as needed
-    console.log('Uploading images:', images);
-    // Clear the images after upload
-    setImages([]);
-  };
+import { Button, Modal } from "react-bootstrap";
+import './AddVideoDialogBox.css'
+const CustomPhotoLibrary = ({onClose, parentData}) => {
+    console.log(parentData,'parentData')
 
   return (
-    <div className='card'>
+    <Modal show={true}  onHide={onClose} className="custome-model-gellery-view">
+        <Modal.Header>
+            <div className='model-gellery-preview'>
+            <div>
+    <h5>  Preview Uploaded Files</h5>
+</div>
+<div>
+    <button className="backbutton-preview" onClick={onClose}><Close /></button>
+    
+</div>
+            </div>
+
+        </Modal.Header>
+    <Modal.Body>
+    <div className="preview-button-container-dialogbox">
+                    {parentData.map((img, index) => (
+                        <div className="alist-image-container-preview-modal" key={index}>
+                            <span
+                                className="delete-button-data"
+                                onClick={() => deleteImage(index)}
+                            >
+                                &times;
+                            </span>
+                            <img src={img.url} alt={img.name} />
+                        </div>
+                    ))}
+                </div>
+  
+
+<div className="upload-cancel-dev">
+<button className="cancel-button-preview" onClick={onClose}>Back</button>
+</div>
+<div>
+
+</div>
      
-    </div>
+    </Modal.Body>
+  </Modal>
   );
 };
 

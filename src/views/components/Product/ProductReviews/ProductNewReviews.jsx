@@ -5,10 +5,18 @@ import StarRatings from "react-star-ratings";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCamera } from "@fortawesome/free-solid-svg-icons";
 import AddVideoDialogBox from "../../AddVideoDialogBox/AddVideoDialogBox";
+import CustomPhotoLibrary from "../../AddVideoDialogBox/CustomPhotoLibrary";
 
 const ProductNewReviews = () => {
     const [dialogBoxOpen, setDialogBoxOpen] = useState(false);
-
+    const [previewDialogOpen, setPreveiewDialogOpen]= useState(false);
+    const [parentData, setParentData]=useState([]);
+    const handlePrveviewDialog = () =>{
+        setPreveiewDialogOpen(true)
+    }
+    const handlePrivewCloseBox = () =>{
+        setPreveiewDialogOpen(false)
+    }
     const handleDialogBox = () => {
         setDialogBoxOpen(true);
     };
@@ -16,6 +24,13 @@ const ProductNewReviews = () => {
     const handleCloseDialogBox = () => {
         setDialogBoxOpen(false);
     };
+
+
+    const callbackParent = (data) => {
+        setParentData(data)
+      
+    }
+
     return (
         <div>
             <div className="container add-new-review">
@@ -72,7 +87,7 @@ const ProductNewReviews = () => {
                         </div>
 
                         <div className="preview-button-review">
-                            <button className="preview-product-list-button">
+                            <button className="preview-product-list-button" onClick={handlePrveviewDialog}>
                                 Preview
                             </button>{" "}
                             <button
@@ -91,7 +106,11 @@ const ProductNewReviews = () => {
                 </div>
             </div>
             {dialogBoxOpen && (
-                <AddVideoDialogBox onClose={handleCloseDialogBox} />
+                <AddVideoDialogBox onClose={handleCloseDialogBox} onhandleCallback={callbackParent}/>
+            )}
+
+            {previewDialogOpen && (
+                <CustomPhotoLibrary  onClose={handlePrivewCloseBox} parentData={parentData}/>
             )}
         </div>
     );
