@@ -62,7 +62,7 @@ export default function Product() {
                 <div className="col-12 col-md-3 p-0 m-0">
                     <CheckOutCard product={{ ...product }} />
                 </div>
-                <div className="hidden-on-mobile">
+                <div className="hidden-on-tab">
                     <SimilarItems products={similarProducts} />
                 </div>
                 <ProductVideo />
