@@ -45,7 +45,16 @@ function ProductReviews({ reviews }) {
                         </div>
 
                         <ReviewImages reviews={reviews} />
-                        <h3 className="product-section-heading mb-4 mt-5">
+                        <div className="filter-wrapper mt-3 mb-0 ">
+                            <select className="form-select">
+                                <option value="top-reviews">Top Reviews</option>
+                                <option value="recent-reviews">
+                                    Recent Reviews
+                                </option>
+                            </select>
+                        </div>
+
+                        <h3 className="product-section-heading my-4">
                             Top reviews
                         </h3>
                         {reviews.map((review) => (
