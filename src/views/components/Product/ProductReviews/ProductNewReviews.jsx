@@ -11,6 +11,7 @@ const ProductNewReviews = () => {
     const [dialogBoxOpen, setDialogBoxOpen] = useState(false);
     const [previewDialogOpen, setPreveiewDialogOpen]= useState(false);
     const [parentData, setParentData]=useState([]);
+
     const handlePrveviewDialog = () =>{
         setPreveiewDialogOpen(true)
     }
@@ -30,6 +31,13 @@ const ProductNewReviews = () => {
         setParentData(data)
       
     }
+
+    const handleDeleteImage = (index) => {
+        // Implement the logic to delete the image at the specified index
+        const updatedImages = [...parentData];
+        updatedImages.splice(index, 1);
+        setParentData(updatedImages);
+    };
 
     return (
         <div>
@@ -96,7 +104,7 @@ const ProductNewReviews = () => {
                             >
                                 {" "}
                                 <FontAwesomeIcon icon={faCamera} /> Add
-                                Photos/Video
+                                Photos
                             </button>{" "}
                             <button className="submit-review-button">
                                 Submit
@@ -106,11 +114,11 @@ const ProductNewReviews = () => {
                 </div>
             </div>
             {dialogBoxOpen && (
-                <AddVideoDialogBox onClose={handleCloseDialogBox} onhandleCallback={callbackParent}/>
+                <AddVideoDialogBox onClose={handleCloseDialogBox} onhandleCallback={callbackParent} onDeleteImage={handleDeleteImage}/>
             )}
 
             {previewDialogOpen && (
-                <CustomPhotoLibrary  onClose={handlePrivewCloseBox} parentData={parentData}/>
+                <CustomPhotoLibrary  onClose={handlePrivewCloseBox} parentData={parentData}  onDeleteImage={handleDeleteImage}/>
             )}
         </div>
     );
