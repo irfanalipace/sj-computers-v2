@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { fetchSimilarProducts } from "@store/products/productsThunks";
 import SingleSimilarItem from "../SimilarItemsSingle/SingleSimilarItem";
 import Grid from "@mui/material/Grid";
+import { Typography } from "@mui/material";
 
 const SimilarItems = ({ products }) => {
     const isLoading = useSelector((state) => state?.products.isLoading);
@@ -36,14 +37,13 @@ const SimilarItems = ({ products }) => {
                 justifyContent="flex-start"
                 alignItems="center"
             >
-                <Grid lg={3}>
+                <Grid lg={3} mr={5}>
                     {products[0] ? (
                         <SingleSimilarItem product={products[0]} />
                     ) : (
                         <></>
                     )}
                 </Grid>{" "}
-                <Grid lg={1}></Grid>
                 <Grid lg={3}>
                     {products[1] ? (
                         <SingleSimilarItem product={products[1]} />
@@ -52,10 +52,29 @@ const SimilarItems = ({ products }) => {
                     )}
                 </Grid>
             </Grid>
-            <div className="recommendation-container">
+            <div
+                className="recommendation-container"
+                style={{
+                    borderTop: "1px solid lightgray",
+                }}
+            >
                 <div className="recommendation-inner">
-                    <h3>Get Similar items fast.</h3>
-                    <div className="slider-wrapper">
+                    <Typography
+                        variant="h5"
+                        fontSize={21}
+                        fontFamily={"Inter"}
+                        fontWeight={700}
+                        mt={1}
+                        ml={2}
+                        mb={5}
+                    >
+                        Get Similar items fast.
+                    </Typography>
+
+                    <div
+                        className="slider-wrapper"
+                        style={{ margin: "20px 80px" }}
+                    >
                         {isLoading || !products ? (
                             <LoaderComponent />
                         ) : (
