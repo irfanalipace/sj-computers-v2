@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { fetchSimilarProducts } from "@store/products/productsThunks";
 import SingleSimilarItem from "../SimilarItemsSingle/SingleSimilarItem";
 import Grid from "@mui/material/Grid";
+import { Typography } from "@mui/material";
 
 const SimilarItems = ({ products }) => {
     const isLoading = useSelector((state) => state?.products.isLoading);
@@ -52,9 +53,23 @@ const SimilarItems = ({ products }) => {
                     )}
                 </Grid>
             </Grid>
-            <div className="recommendation-container">
+            <div
+                className="recommendation-container"
+                style={{ borderTop: "1px solid lightgray" }}
+            >
                 <div className="recommendation-inner">
-                    <h3>Get Similar items fast.</h3>
+                    <Typography
+                        variant="h5"
+                        fontSize={21}
+                        fontFamily={"Inter"}
+                        fontWeight={700}
+                        mt={2}
+                        ml={2}
+                        mb={5}
+                    >
+                        Get Similar items fast.
+                    </Typography>
+
                     <div className="slider-wrapper">
                         {isLoading || !products ? (
                             <LoaderComponent />
