@@ -55,7 +55,9 @@ const SimilarItems = ({ products }) => {
             </Grid>
             <div
                 className="recommendation-container"
-                style={{ borderTop: "1px solid lightgray" }}
+                style={{
+                    borderTop: "1px solid lightgray",
+                }}
             >
                 <div className="recommendation-inner">
                     <Typography
@@ -70,7 +72,7 @@ const SimilarItems = ({ products }) => {
                         Get Similar items fast.
                     </Typography>
 
-                    <div className="slider-wrapper">
+                    <div className="slider-wrapper" style={{ margin: "50px" }}>
                         {isLoading || !products ? (
                             <LoaderComponent />
                         ) : (
