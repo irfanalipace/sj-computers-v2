@@ -11,7 +11,7 @@ import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 import "./CheckOutCard.css";
 import { Link } from "react-router-dom";
 import AddCartComponents from "@components/ProductCard/AddCartComponents";
-import { IS_CHRISTMAS_HOLIDAYS } from "../../../../core/utils/constants";
+import { IS_CHRISTMAS_HOLIDAYS, PlanEnum } from "@utils/constants";
 import ProtectionPopup from "./ProtectionPopup";
 export const CheckOutCard = ({ product }) => {
     const currentState = useSelector((state) => state.states.currentState);
@@ -83,12 +83,6 @@ export const CheckOutCard = ({ product }) => {
                 : "Unlimited"
         );
     }
-
-    const PlanEnum = {
-        THREE_YEAR: { value: "1", label: "3-Year" },
-        FOUR_YEAR: { value: "2", label: "4-Year" },
-        DEFAULT: { value: "3", label: "unlimited" },
-    };
 
     const getPlanvalue = (id) => {
         const matchingEnum = Object.values(PlanEnum).find(
@@ -217,18 +211,6 @@ export const CheckOutCard = ({ product }) => {
                                         orderEstimatedDelivery
                                             ?.free_shipment_amount?.estimate_day
                                     }
-                                </span>
-                            </span>
-                        </div>{" "}
-                        <div className="card-dev-section-paragrap-product hidden-on-mobile">
-                            <span className="dilvery-text-paragraph-card">
-                                Or fastest Delivery&nbsp;
-                                <span style={{ fontWeight: "bold" }}>
-                                    Thursday, January 4.&nbsp;
-                                </span>
-                                Order within{" "}
-                                <span style={{ color: "green" }}>
-                                    1 hr 28 min.
                                 </span>
                             </span>
                         </div>{" "}

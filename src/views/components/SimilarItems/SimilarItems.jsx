@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { fetchSimilarProducts } from "@store/products/productsThunks";
 import SingleSimilarItem from "../SimilarItemsSingle/SingleSimilarItem";
+import Grid from "@mui/material/Grid";
 
 const SimilarItems = ({ products }) => {
     const isLoading = useSelector((state) => state?.products.isLoading);
@@ -29,8 +30,28 @@ const SimilarItems = ({ products }) => {
 
     return (
         <>
-            <SingleSimilarItem />
-            <SingleSimilarItem />
+            <Grid
+                container
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="center"
+            >
+                <Grid lg={3}>
+                    {products[0] ? (
+                        <SingleSimilarItem product={products[0]} />
+                    ) : (
+                        <></>
+                    )}
+                </Grid>{" "}
+                <Grid lg={1}></Grid>
+                <Grid lg={3}>
+                    {products[1] ? (
+                        <SingleSimilarItem product={products[1]} />
+                    ) : (
+                        <></>
+                    )}
+                </Grid>
+            </Grid>
             <div className="recommendation-container">
                 <div className="recommendation-inner">
                     <h3>Get Similar items fast.</h3>

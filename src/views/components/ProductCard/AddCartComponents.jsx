@@ -8,6 +8,7 @@ import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
 import "./ProductCard.css";
 import { Dialog, Drawer } from "@mui/material";
 import ProtectionPlanDrawer from "./ProtectionPlanDrawer";
+import { PlanEnum } from "@utils/constants";
 const AddCartComponents = ({
     product,
     className,
@@ -70,12 +71,6 @@ const AddCartComponents = ({
         setCartItem(item);
     }, [cart]);
 
-    const PlanEnum = {
-        THREE_YEAR: { value: "1", label: "3-Year" },
-        FOUR_YEAR: { value: "2", label: "4-Year" },
-        DEFAULT: { value: "3", label: "unlimited" },
-    };
-
     const getPlanvalue = (id) => {
         const matchingEnum = Object.values(PlanEnum).find(
             (enumEntry) => enumEntry.label === id
@@ -122,6 +117,7 @@ const AddCartComponents = ({
                 onClose={() => setOpen(false)}
             >
                 <ProtectionPlanDrawer
+                    closeDrawer={() => setOpen(false)}
                     handleButton={() => {
                         if (open) {
                             cartClickHandler();

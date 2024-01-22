@@ -22,13 +22,6 @@ const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
     const ProductDetails = () => (
         <div>
             <div className="product-details">
-                {/* <div>
-            <span className="span-the-product-color-product">
-            crocs Contrary to popular
-            (205100-410)
-            </span>
-        </div> */}
-
                 <div className="dev-section-button-dev-card">
                     <Link to={`${new URL(product?.url).pathname}`}>
                         <div className="product-name product-cart-name-mobile-screen">
@@ -89,42 +82,50 @@ const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
                         />
                     </div>
                 </Link>
-                {/* {!inGrid && (
-            <>
-                <div className="product-badge">
-                    <div className="badge-text">Best Seller</div>
-                </div>
-                <div className="product-deal my-1">
-                    <div className="product-off-percentage">
-                        {product.offPercentage}% off
+                <div className="sj-banner-similar-item">
+                    <p>
+                        SJ's <span style={{ color: "#E0BC00" }}>choice</span>
+                    </p>
+                    <div className="for-styling"></div>
+                    <div className="mt-1" style={{ fontSize: "14px" }}>
+                        in
                     </div>
-                    <span>Deals</span>
                 </div>
-            </>
-        )} */}
-                <div className="d-none d-sm-block product-prices">
+                <div
+                    style={{ fontSize: "12px", marginTop: "-12px" }}
+                    className="mb-2 "
+                >
+                    Computer Monitors
+                </div>
+
+                <div className="d-none d-sm-block product-prices mb-2">
                     {product.originalPrice && (
                         <div className="product-original-price">
                             ${product.originalPrice}
                         </div>
                     )}
-                    <div className="product-new-price">
-                        <span>$</span>
-                        {product?.price?.toString().split(".")[0]}
-                        <sup>{product?.price?.toString().split(".")[1]}</sup>
-                    </div>
+                    <span>$</span>
+                    {product?.price?.toString().split(".")[0]}.
+                    {product?.price?.toString().split(".")[1]}
+                </div>
+                <div style={{ fontSize: "12px" }} className="mt-2 mb-2">
+                    Get it as soon as{" "}
+                    <span style={{ fontWeight: "bold", lineHeight: "16px" }}>
+                        {
+                            orderEstimatedDelivery?.free_shipment_amount
+                                ?.estimate_day
+                        }
+                    </span>
                 </div>
                 {product.deliveryCharges && (
                     <div className="product-delivery-charges">
-                        {/* <i className="fa fa-truck"></i>{" "} */}
                         <FontAwesomeIcon icon={faTruck} />{" "}
                         {product.deliveryCharges}
                     </div>
                 )}
                 {type === "recommended" && (
-                    <div className="product-delivery-charges mt-2 ms-2">
-                        <FontAwesomeIcon className="me-1" icon={faTruck} /> Free
-                        Shipping
+                    <div style={{ fontSize: "12px", marginTop: "5px" }}>
+                        Free shipping by SJ
                     </div>
                 )}
             </div>
@@ -138,12 +139,6 @@ const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
                         inGrid ? "product-image-grid" : ""
                     } product-image`}
                 >
-                    {/* {inGrid && (
-                <div className="product-badge">
-                    <div className="badge-text">Best Seller</div>
-                </div>
-            )} */}
-
                     <div className="image-wrapper">
                         <LazyLoadImage
                             width={"100%"}

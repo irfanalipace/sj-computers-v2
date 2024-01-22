@@ -6,11 +6,14 @@ import "./ProductCard.css";
 import Checkbox from "@mui/material/Checkbox";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import StarRatings from "react-star-ratings";
+import { IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 const ProtectionPlanDrawer = ({
     handleButton,
     ProtectionPlanCallBack,
     handleAddingProtec,
+    closeDrawer,
 }) => {
     const [protectionPlan, setProtectionPlan] = useState("");
     const [planValue, setPlanValue] = useState("");
@@ -21,7 +24,17 @@ const ProtectionPlanDrawer = ({
 
     return (
         <div style={{ padding: "20px" }}>
-            <h1 className="heading-protection-plan mb-3">Add to your order</h1>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <h1 className="heading-protection-plan mb-3">
+                    Add to your order
+                </h1>
+                <IconButton
+                    style={{ marginTop: "-10px" }}
+                    onClick={closeDrawer}
+                >
+                    <CloseIcon />
+                </IconButton>
+            </div>
             <div className="info mb-3">
                 <img src={bulletpoint1} />
                 <p>
@@ -47,6 +60,7 @@ const ProtectionPlanDrawer = ({
                         checked={planValue === "3-Year"}
                         onClick={() => handleCheckboxChange("3-Year")}
                         className="mb-4"
+                        style={{ color: "#318243" }}
                     />
                     <p className="mt-4">
                         3-Year Proection{" "}
@@ -131,6 +145,7 @@ const ProtectionPlanDrawer = ({
                         checked={planValue === "4-Year"}
                         onClick={() => handleCheckboxChange("4-Year")}
                         className="mb-4"
+                        style={{ color: "#318243" }}
                     />
                     <p className="mt-4">
                         4-Year Proection{" "}
@@ -218,6 +233,7 @@ const ProtectionPlanDrawer = ({
                         checked={planValue === "unlimited"}
                         onClick={() => handleCheckboxChange("unlimited")}
                         className="mb-5"
+                        style={{ color: "#318243" }}
                     />
                     <p className="mt-2">
                         Tech Unlimited – Protect Eligible Past and Future
