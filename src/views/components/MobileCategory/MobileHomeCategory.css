@@ -43,7 +43,7 @@
     padding: 4px;
 }
 
-.swiper .swiper-pagination {
+.banner-category-section .swiper .swiper-pagination {
     position: absolute;
     text-align: center;
     transition: 0.3s opacity;
