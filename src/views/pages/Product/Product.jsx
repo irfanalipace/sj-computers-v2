@@ -88,7 +88,7 @@ export default function Product() {
                         )}
 
                         <VisibleOnScroll>
-                            <ProductReviews reviews={products} />
+                            <ProductReviews reviews={products} productId={productId}/>
                         </VisibleOnScroll>
                         <Recommendation products={products} />
                     </div>

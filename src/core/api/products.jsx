@@ -99,3 +99,25 @@ export function filterProductsApi(filter) {
             });
     });
 }
+
+
+
+
+
+export function productPreviewApi(formData) {
+    return new Promise((resolve, reject) => {
+        ApiService.post('/product-reviews', formData)
+            .then((response) => {
+                console.log(
+                    "file: products.js | productPreviewApi | response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((error) => {
+                console.error("Console Log: error productDetail", error);
+                reject(error);
+            });
+    });
+}
+

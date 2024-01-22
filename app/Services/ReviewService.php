@@ -19,7 +19,8 @@ class ReviewService
 
     public function storeProductReview($request)
     {      
-       $store = $this->repository->store($request);  
+       $store = $this->repository->store($request); 
+       
        $this->uploadMedia($store,$request);
        return $store;
     }
@@ -42,8 +43,9 @@ class ReviewService
                 $this->repository->createProductMedia($file,$request,$productReview);               
             }
         }
+        return true;
     }
-
+  
     /* update product review */
     public function updateProductReview($request,$id)
     {
