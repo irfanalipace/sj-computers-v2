@@ -82,12 +82,14 @@ export default function Product() {
                         {isLoading || !products?.length ? (
                             <LoaderComponent />
                         ) : (
-                            <ProductComponent />
+                            <>
+                                <ProductComponent />
+                                <VisibleOnScroll>
+                                    <ProductReviews reviews={products} />
+                                </VisibleOnScroll>{" "}
+                            </>
                         )}
 
-                        <VisibleOnScroll>
-                            <ProductReviews reviews={products} />
-                        </VisibleOnScroll>
                         <Recommendation products={products} />
                     </div>
                 </div>
