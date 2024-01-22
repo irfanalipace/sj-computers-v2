@@ -13,8 +13,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 35%;
-    /* height: 160px; */
+    width: auto;
+    height: 140px;
+    object-fit: cover;
 }
 .similar-item-one-inner {
     margin-top: 10px;
