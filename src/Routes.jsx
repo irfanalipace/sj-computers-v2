@@ -42,6 +42,7 @@ import NotFound from "@pages/NotFound/NotFound";
 
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
+import ProductNewReviews from "./views/components/Product/ProductReviews/ProductNewReviews";
 const CategoryBlogs = React.lazy(() =>
     import("@components/Blog/CategoryBlogs")
 );
@@ -126,6 +127,16 @@ const Router = () => {
                 </PageWrapper>
             ),
         },
+
+        {
+            path: "/add-review",
+            element: (
+                <PageWrapper>
+                   <ProductNewReviews />
+                </PageWrapper>
+            ),
+        },
+        
         {
             path: "/category/:categorySlug",
             element: (

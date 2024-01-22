@@ -9,12 +9,13 @@ import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
 import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
 import Recommendation from "@components/Recommendation/Recommendation";
 import NotFound from "../NotFound/NotFound";
-
+import ProductReviews from "../../components/Product/ProductReviews/ProductReviews";
 import "./Product.css";
 import SimilarItems from "../../components/SimilarItems/SimilarItems";
 import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
 import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
 import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
+import ProductPageHeader from "../../components/ProductPageHeader/ProductPageHeader";
 
 export default function Product() {
     const [isLoading, setIsLoading] = useState(true);
@@ -73,12 +74,14 @@ export default function Product() {
         <>
             {product?.id || isLoading || !products?.length ? (
                 <div className="product-page ">
+                    <ProductPageHeader />
                     <div className="product-container container-fluid">
                         {isLoading || !products?.length ? (
                             <LoaderComponent />
                         ) : (
                             <ProductComponent />
                         )}
+                        <ProductReviews reviews={products} />
                         <Recommendation products={products} />
                     </div>
                 </div>
