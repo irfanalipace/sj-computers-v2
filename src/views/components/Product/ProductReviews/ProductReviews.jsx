@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import RatingDetails from "@components/Product/ProductReviews/RatingDetails";
 import "./ProductReviews.css";
 import { Link } from "react-router-dom";
 import ReviewImages from "./ReviewImagesSlider";
 import ReviewCard from "./ReviewCard";
 
+const PRODUCT_FILTER_KEY_ENUM = {
+    TOP: "top-reviews",
+    RECENT: "recent-reviews",
+};
+
+const PRODUCT_FILTER_LABEL_ENUM = {
+    "top-reviews": "Top reviews",
+    "recent-reviews": "Recent reviews",
+};
+
 function ProductReviews({ reviews }) {
+    console.log("1111 productReviews mounted");
+    const [filterBy, setFilterBy] = useState(PRODUCT_FILTER_KEY_ENUM.TOP);
+
     return (
         <div className="product-reviews-section product-section" id="reviews">
             <div className="product-reviews-container">
@@ -46,16 +59,21 @@ function ProductReviews({ reviews }) {
 
                         <ReviewImages reviews={reviews} />
                         <div className="filter-wrapper mt-3 mb-0 ">
-                            <select className="form-select">
-                                <option value="top-reviews">Top Reviews</option>
-                                <option value="recent-reviews">
+                            <select
+                                className="form-select"
+                                onChange={(e) => setFilterBy(e.target.value)}
+                            >
+                                <option value={PRODUCT_FILTER_KEY_ENUM.TOP}>
+                                    Top Reviews
+                                </option>
+                                <option value={PRODUCT_FILTER_KEY_ENUM.RECENT}>
                                     Recent Reviews
                                 </option>
                             </select>
                         </div>
 
-                        <h3 className="product-section-heading my-4">
-                            Top reviews
+                        <h3 className="product-section-heading my-4 py-1">
+                            {PRODUCT_FILTER_LABEL_ENUM[filterBy]}
                         </h3>
                         {reviews.map((review) => (
                             <div className="my-4">

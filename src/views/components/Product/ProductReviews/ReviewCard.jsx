@@ -21,7 +21,7 @@ function ReviewCard({ reviewData }) {
                 </div>
                 <p className="mb-0 ms-2 review-author ps-1">Alan</p>
             </div>
-            <div className="d-flex align-items-center my-2">
+            <div className="d-md-flex align-items-center my-2">
                 <StarRatings
                     rating={reviewData?.rating}
                     starRatedColor="rgb(232, 126, 36)"
@@ -31,7 +31,7 @@ function ReviewCard({ reviewData }) {
                     starDimension={"20px"}
                     starSpacing={"0"}
                 />
-                <p className="review-title mb-0 ms-2 ps-1">
+                <p className="review-title mt-md-0 mt-2 mb-0 ms-md-2 ps-1">
                     {reviewData?.name?.split(" ").splice(0, 6).join(" ")}
                 </p>
             </div>

@@ -16,6 +16,7 @@ import ProductDescription from "../../components/Product/ProductDescription/Prod
 import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
 import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
 import ProductPageHeader from "../../components/ProductPageHeader/ProductPageHeader";
+import VisibleOnScroll from "../../components/VisibleOnScroll";
 
 export default function Product() {
     const [isLoading, setIsLoading] = useState(true);
@@ -81,7 +82,9 @@ export default function Product() {
                         ) : (
                             <ProductComponent />
                         )}
-                        <ProductReviews reviews={products} />
+                        <VisibleOnScroll>
+                            <ProductReviews reviews={products} />
+                        </VisibleOnScroll>
                         <Recommendation products={products} />
                     </div>
                 </div>
