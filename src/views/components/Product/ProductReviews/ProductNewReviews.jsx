@@ -9,15 +9,15 @@ import CustomPhotoLibrary from "../../AddVideoDialogBox/CustomPhotoLibrary";
 
 const ProductNewReviews = () => {
     const [dialogBoxOpen, setDialogBoxOpen] = useState(false);
-    const [previewDialogOpen, setPreveiewDialogOpen]= useState(false);
-    const [parentData, setParentData]=useState([]);
+    const [previewDialogOpen, setPreveiewDialogOpen] = useState(false);
+    const [parentData, setParentData] = useState([]);
 
-    const handlePrveviewDialog = () =>{
-        setPreveiewDialogOpen(true)
-    }
-    const handlePrivewCloseBox = () =>{
-        setPreveiewDialogOpen(false)
-    }
+    const handlePrveviewDialog = () => {
+        setPreveiewDialogOpen(true);
+    };
+    const handlePrivewCloseBox = () => {
+        setPreveiewDialogOpen(false);
+    };
     const handleDialogBox = () => {
         setDialogBoxOpen(true);
     };
@@ -26,11 +26,9 @@ const ProductNewReviews = () => {
         setDialogBoxOpen(false);
     };
 
-
     const callbackParent = (data) => {
-        setParentData(data)
-      
-    }
+        setParentData(data);
+    };
 
     const handleDeleteImage = (index) => {
         // Implement the logic to delete the image at the specified index
@@ -95,7 +93,10 @@ const ProductNewReviews = () => {
                         </div>
 
                         <div className="preview-button-review">
-                            <button className="preview-product-list-button" onClick={handlePrveviewDialog}>
+                            <button
+                                className="preview-product-list-button"
+                                onClick={handlePrveviewDialog}
+                            >
                                 Preview
                             </button>{" "}
                             <button
@@ -103,8 +104,7 @@ const ProductNewReviews = () => {
                                 onClick={handleDialogBox}
                             >
                                 {" "}
-                                <FontAwesomeIcon icon={faCamera} /> Add
-                                Photos
+                                <FontAwesomeIcon icon={faCamera} /> Add Photos
                             </button>{" "}
                             <button className="submit-review-button">
                                 Submit
@@ -114,11 +114,19 @@ const ProductNewReviews = () => {
                 </div>
             </div>
             {dialogBoxOpen && (
-                <AddVideoDialogBox onClose={handleCloseDialogBox} onhandleCallback={callbackParent} onDeleteImage={handleDeleteImage}/>
+                <AddVideoDialogBox
+                    onClose={handleCloseDialogBox}
+                    onhandleCallback={callbackParent}
+                    onDeleteImage={handleDeleteImage}
+                />
             )}
 
             {previewDialogOpen && (
-                <CustomPhotoLibrary  onClose={handlePrivewCloseBox} parentData={parentData}  onDeleteImage={handleDeleteImage}/>
+                <CustomPhotoLibrary
+                    onClose={handlePrivewCloseBox}
+                    parentData={parentData}
+                    onDeleteImage={handleDeleteImage}
+                />
             )}
         </div>
     );
