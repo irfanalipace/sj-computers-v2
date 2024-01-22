@@ -5,20 +5,26 @@ import "swiper/swiper-bundle.min.css";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 import "swiper/css/navigation";
 import ReviewsDialog from "./ProductReviewsDialog/ReviewsDialog";
+import ReviewsData from "./DummyReviewsData";
+
 SwiperCore.use([Navigation, Pagination]);
 
 function ReviewImagesSlider({ reviews }) {
 
     const[open, setOpen] = useState(false)
+    const [review, setReview] = useState({})
 
-    const handleOpenDialog = () => {
+    const handleOpenDialog = (rev) => {
         setOpen(true)
+        setReview(rev)
         console.log(reviews, "reviews");
     }
 
     const handleClose = () => {
         setOpen(false)
     }
+
+    console.log(ReviewsData.reviews);
 
     return (
         <div className="review-images-section">
@@ -40,20 +46,23 @@ function ReviewImagesSlider({ reviews }) {
             >
                 {/* /// --- DIALOG --- /// */}
                 <ReviewsDialog open={open} handleOpenDialog={handleOpenDialog} handleClose={handleClose} />
-                {reviews.map((rev) => (
-                    <SwiperSlide key={rev?.id}>
-                        <div>
+                {ReviewsData?.reviews.map((rev) => (
+                    <div key={rev?.id}>
                             <button 
-                            onClick={handleOpenDialog}
+                            onClick={() => handleOpenDialog(rev)}
                             className="btn btn-light p-1 d-flex align-items-center">
-                                <img
-                                    src={rev.image[0]}
-                                    alt="review-image"
-                                    className="all-reviews-image"
-                                />
+                                {rev?.images?.map((image, index) => (
+                                    <SwiperSlide >
+                                    <img key={index}
+                                        src={image}
+                                        alt="review-image"
+                                        className="all-reviews-image"
+                                        />
+                                        </SwiperSlide>
+
+                                ))}
                             </button>
                         </div>
-                    </SwiperSlide>
                 ))}
             </Swiper>
         </div>
