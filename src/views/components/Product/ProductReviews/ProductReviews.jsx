@@ -16,7 +16,6 @@ const PRODUCT_FILTER_LABEL_ENUM = {
 };
 
 function ProductReviews({ reviews }) {
-    console.log("1111 productReviews mounted");
     const [filterBy, setFilterBy] = useState(PRODUCT_FILTER_KEY_ENUM.TOP);
 
     return (

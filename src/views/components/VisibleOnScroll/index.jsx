@@ -1,33 +1,31 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 
 const VisibleOnScroll = ({ children }) => {
-    const [hasBeenVisible, setHasBeenVisible] = useState(false);
-    const elementRef = useRef(null);
+    const ref = useRef(null);
+    const observer = useRef(null);
+    const [isVisible, setVisible] = useState(false);
 
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                const [entry] = entries;
-                if (entry.isIntersecting && !hasBeenVisible) {
-                    setHasBeenVisible(true);
-                }
-            },
-            { threshold: 0.1 }
-        ); // You can adjust the threshold as needed
-
-        const currentElement = elementRef.current;
-        if (currentElement) {
-            observer.observe(currentElement);
+        observer.current = new IntersectionObserver(([entry]) => {
+            setVisible(entry.isIntersecting);
+        });
+        if (ref.current) {
+            observer.current.observe(ref.current);
         }
-
         return () => {
-            if (currentElement) {
-                observer.unobserve(currentElement);
+            if (ref.current) {
+                observer.current.unobserve(ref.current);
             }
         };
-    }, [hasBeenVisible]);
+    }, []); // Empty array ensures that effect is only run on mount and unmount
 
-    return <div ref={elementRef}>{hasBeenVisible && children}</div>;
+    useEffect(() => {
+        if (observer.current && isVisible) {
+            observer.current.unobserve(ref.current);
+        }
+    }, [isVisible]);
+
+    return <div ref={ref}>{isVisible && <Suspense>{children}</Suspense>}</div>;
 };
 
 export default VisibleOnScroll;
