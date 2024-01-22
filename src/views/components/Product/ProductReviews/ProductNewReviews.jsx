@@ -11,6 +11,7 @@ const ProductNewReviews = () => {
     const [dialogBoxOpen, setDialogBoxOpen] = useState(false);
     const [previewDialogOpen, setPreveiewDialogOpen]= useState(false);
     const [parentData, setParentData]=useState([]);
+
     const handlePrveviewDialog = () =>{
         setPreveiewDialogOpen(true)
     }
@@ -31,16 +32,23 @@ const ProductNewReviews = () => {
       
     }
 
+    const handleDeleteImage = (index) => {
+        // Implement the logic to delete the image at the specified index
+        const updatedImages = [...parentData];
+        updatedImages.splice(index, 1);
+        setParentData(updatedImages);
+    };
+
     return (
         <div>
             <div className="container add-new-review">
                 <div className="row">
-                    <div className="col-md-3 col-sm-12">
+                    <div className="col-lg-3 col-md-3 col-sm-6 col-12">
                         <div>
                             <img src={img} alt="Product" />
                         </div>
                     </div>
-                    <div className="col-md-9 col-sm-12">
+                    <div className="col-lg-9 col-md-9 col-sm-6 col-12">
                         <div className="row">
                             <div className="col-md-11">
                                 <div className="review-heading">
@@ -96,7 +104,7 @@ const ProductNewReviews = () => {
                             >
                                 {" "}
                                 <FontAwesomeIcon icon={faCamera} /> Add
-                                Photos/Video
+                                Photos
                             </button>{" "}
                             <button className="submit-review-button">
                                 Submit
@@ -106,11 +114,11 @@ const ProductNewReviews = () => {
                 </div>
             </div>
             {dialogBoxOpen && (
-                <AddVideoDialogBox onClose={handleCloseDialogBox} onhandleCallback={callbackParent}/>
+                <AddVideoDialogBox onClose={handleCloseDialogBox} onhandleCallback={callbackParent} onDeleteImage={handleDeleteImage}/>
             )}
 
             {previewDialogOpen && (
-                <CustomPhotoLibrary  onClose={handlePrivewCloseBox} parentData={parentData}/>
+                <CustomPhotoLibrary  onClose={handlePrivewCloseBox} parentData={parentData}  onDeleteImage={handleDeleteImage}/>
             )}
         </div>
     );
