@@ -10,18 +10,17 @@ import CustomPhotoLibrary from "./CustomPhotoLibrary";
 
 // ... (existing code)
 
-const AddVideoDialogBox = ({ onClose, onhandleCallback }) => {
+const AddVideoDialogBox = ({ onClose, onhandleCallback, onDeleteImage }) => {
     const [isDragging, setIsDragging] = useState(false);
     const fileInputRef = useRef(null);
-    const [childData, setChildData]=useState();
+    const [childData, setChildData] = useState();
     const [images, setImages] = useState([]);
+    const [error, setErrors] = useState("");
 
     const handleChildButton = () => {
-        
         onhandleCallback(images);
         setChildData(images);
-    }
-   
+    };
 
     const selectFiles = () => {
         fileInputRef.current.click();
@@ -31,9 +30,39 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback }) => {
         const files = event.target.files;
         if (files.length === 0) return;
 
-        const newImages = Array.from(files).filter(
-            (file) => !images.some((img) => img.name === file.name)
-        );
+        // const newImages = Array.from(files).filter(
+
+        //     (file) => !images.some((img) => img.name === file.name)
+        // );
+
+        // const allowedTypes = ["image/png", "image/jpeg", "image/webp"];
+
+        // const newImages = Array.from(files).filter((file) => {
+        //     // Check if the file type is allowed
+        //     return allowedTypes.includes(file.type);
+        // });
+
+        const allowedTypes = ["image/png", "image/jpeg", "image/webp"];
+        const maxFileSizeMB = 1;
+        const newImages = Array.from(files).filter((file) => {
+            // Check if the file type is allowed
+            if (!allowedTypes.includes(file.type)) {
+                setErrors(
+                    "Invalid file format. Please select PNG, JPG, or WebP."
+                );
+                return false; // Exclude the file from newImages
+            }
+            const fileSizeMB = file.size / (1024 * 1024); // Convert from bytes to megabytes
+            const isFileSizeValid = fileSizeMB <= maxFileSizeMB;
+            if (!isFileSizeValid) {
+                setError(
+                    `File size exceeds the maximum limit of ${maxFileSizeMB}MB.`
+                );
+                return false;
+            }
+
+            return true;
+        });
 
         setImages((prevImages) => [
             ...prevImages,
@@ -44,7 +73,15 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback }) => {
         ]);
     };
 
+    // const deleteImage = (index) => {
+    //     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    // };
+
     const deleteImage = (index) => {
+        // Call the onDeleteImage prop with the index of the image to delete
+        onDeleteImage(index);
+
+        // Also update the local state if needed
         setImages((prevImages) => prevImages.filter((_, i) => i !== index));
     };
 
@@ -73,7 +110,6 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback }) => {
         // This function should handle the upload of images in the 'images' state
     };
 
-   
     return (
         <Modal
             show={true}
@@ -139,20 +175,26 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback }) => {
                 <div className="container-image-drop">
                     {images.map((img, index) => (
                         <div className="list-image-container" key={index}>
-                            <span
+                            <button
                                 className="delete-button-data"
                                 onClick={() => deleteImage(index)}
                             >
                                 &times;
-                            </span>
+                            </button>
                             <img src={img.url} alt={img.name} />
                         </div>
                     ))}
                 </div>
-
+                {error && (
+                    <p className="error-message-file-formated-issues">
+                        {error}
+                    </p>
+                )}
                 <div className="upload-cancel-dev">
-                    <button className="cancel-button-preview" onClick={onClose}>Cancel</button>{" "}
-                       <button
+                    <button className="cancel-button-preview" onClick={onClose}>
+                        Cancel
+                    </button>{" "}
+                    <button
                         onClick={() => {
                             onUpload();
                             handleChildButton(); // Call the function when Upload button is clicked
@@ -162,7 +204,6 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback }) => {
                         Upload
                     </button>
                 </div>
-                <div></div>
             </Modal.Body>
         </Modal>
     );

@@ -118,7 +118,7 @@
 }
 .add-new-review .text-area-rating-review-list textarea {
     margin-top: 10px;
-    width: 935px;
+    width: 100%;
     height: 254px;
     border-radius: 10px;
 }
