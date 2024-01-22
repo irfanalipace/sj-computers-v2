@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import RatingDetails from "@components/Product/ProductReviews/RatingDetails";
 import "./ProductReviews.css";
 import { Link } from "react-router-dom";
@@ -15,8 +15,15 @@ const PRODUCT_FILTER_LABEL_ENUM = {
     "recent-reviews": "Recent reviews",
 };
 
-function ProductReviews({ reviews }) {
+function ProductReviews({ reviews, onFilterChange }) {
     const [filterBy, setFilterBy] = useState(PRODUCT_FILTER_KEY_ENUM.TOP);
+    const isMounted = useRef(false);
+    useEffect(() => {
+        if (isMounted.current) {
+            onFilterChange(filterBy);
+        }
+        isMounted.current = true;
+    }, [filterBy]);
 
     return (
         <div className="product-reviews-section product-section" id="reviews">
