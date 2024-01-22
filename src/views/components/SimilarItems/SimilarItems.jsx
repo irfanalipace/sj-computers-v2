@@ -37,14 +37,13 @@ const SimilarItems = ({ products }) => {
                 justifyContent="flex-start"
                 alignItems="center"
             >
-                <Grid lg={3}>
+                <Grid lg={3} mr={5}>
                     {products[0] ? (
                         <SingleSimilarItem product={products[0]} />
                     ) : (
                         <></>
                     )}
                 </Grid>{" "}
-                <Grid lg={1}></Grid>
                 <Grid lg={3}>
                     {products[1] ? (
                         <SingleSimilarItem product={products[1]} />
@@ -65,14 +64,17 @@ const SimilarItems = ({ products }) => {
                         fontSize={21}
                         fontFamily={"Inter"}
                         fontWeight={700}
-                        mt={2}
+                        mt={1}
                         ml={2}
                         mb={5}
                     >
                         Get Similar items fast.
                     </Typography>
 
-                    <div className="slider-wrapper" style={{ margin: "50px" }}>
+                    <div
+                        className="slider-wrapper"
+                        style={{ margin: "20px 80px" }}
+                    >
                         {isLoading || !products ? (
                             <LoaderComponent />
                         ) : (

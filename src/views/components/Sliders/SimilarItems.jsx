@@ -32,7 +32,7 @@ const SimilarItemsSlider = ({ type = "", products }) => {
     };
     return (
         <Swiper
-            slidesPerView={7}
+            slidesPerView={5}
             breakpoints={{
                 // when window width is >= 320px
                 320: {
