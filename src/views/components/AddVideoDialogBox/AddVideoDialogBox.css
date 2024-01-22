@@ -141,7 +141,7 @@ border: 1px;
     padding: 12px;
     border-radius: 23px;
     color: #6b6363;
-    box-shadow: 0px 1px 1px 1px;
+    box-shadow: 1px 1px 1px 1px white;
 }
 
 
@@ -156,7 +156,7 @@ border: 1px;
 }
 
 .alist-image-container-preview-modal {
-    width: 212px;
+    width: 223px;
     margin-right: 10px;
     height: 95px;
     position: relative;
@@ -198,3 +198,4 @@ border: 1px;
 .error-message-file-formated-issues{
     font-size: 12px;
 }
+

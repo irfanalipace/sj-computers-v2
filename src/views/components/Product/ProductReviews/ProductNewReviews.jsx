@@ -43,12 +43,12 @@ const ProductNewReviews = () => {
         <div>
             <div className="container add-new-review">
                 <div className="row">
-                    <div className="col-md-3 col-sm-12">
+                    <div className="col-lg-3 col-md-3 col-sm-6 col-12">
                         <div>
                             <img src={img} alt="Product" />
                         </div>
                     </div>
-                    <div className="col-md-9 col-sm-12">
+                    <div className="col-lg-9 col-md-9 col-sm-6 col-12">
                         <div className="row">
                             <div className="col-md-11">
                                 <div className="review-heading">
