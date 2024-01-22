@@ -82,7 +82,10 @@ const ProtectionPopup = ({ open, handleClose, plan, handleAddProtection }) => {
                     </p>
                 </div>
                 <div className="btn-protection-model">
-                    <button className="add-btn" onClick={handleAddProtection}>
+                    <button
+                        className="add-btn"
+                        onClick={() => handleAddProtection(plan)}
+                    >
                         Add Protection
                     </button>
                     <button onClick={handleClose}>No Thanks</button>
