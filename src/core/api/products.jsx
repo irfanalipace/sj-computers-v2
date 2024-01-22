@@ -102,22 +102,43 @@ export function filterProductsApi(filter) {
 
 
 
+// export function productPreviewApi(formData) {
+    
+//     return new Promise((resolve, reject) => {
+//         ApiService.post(`/product-reviews`, formData)
+//             .then((response) => {
+//                 console.print(
+//                     "file: products.js | productPreviewApi| response",
+//                     response
+//                 );
+//                 resolve(response);
+//             })
+//             .catch((e) => {
+//                 console.print("Console Log: : error productPreviewApi", e);
+//                 reject(e);
+//             });
+//     });
+// }
+
+
+
+
+
 
 
 export function productPreviewApi(formData) {
     return new Promise((resolve, reject) => {
-        ApiService.post('/product-reviews', formData)
+        ApiService.post(`/product-reviews`, formData)
             .then((response) => {
                 console.log(
-                    "file: products.js | productPreviewApi | response",
+                    "file: states.js | updateStateApi| response",
                     response
                 );
                 resolve(response);
             })
-            .catch((error) => {
-                console.error("Console Log: error productDetail", error);
-                reject(error);
+            .catch((e) => {
+                console.log("Console Log: : error states", e);
+                reject(e);
             });
     });
 }
-

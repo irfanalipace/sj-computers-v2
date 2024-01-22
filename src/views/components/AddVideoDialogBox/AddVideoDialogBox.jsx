@@ -16,10 +16,13 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback, onDeleteImage }) => {
     const [childData, setChildData] = useState();
     const [images, setImages] = useState([]);
     const [error, setErrors] = useState("");
+    const [uploadedImgs , setUploadedImgs] =useState([])
+    console.log('uploadedImgs' , uploadedImgs)
 
     const handleChildButton = () => {
-        onhandleCallback(images);
+        onhandleCallback(images , uploadedImgs);
         setChildData(images);
+        
     };
 
     const selectFiles = () => {
@@ -63,6 +66,7 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback, onDeleteImage }) => {
 
             return true;
         });
+        setUploadedImgs(newImages)
 
         setImages((prevImages) => [
             ...prevImages,
@@ -199,6 +203,7 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback, onDeleteImage }) => {
                             onUpload();
                             handleChildButton(); // Call the function when Upload button is clicked
                         }}
+                 
                         className="upload-button-view-button"
                     >
                         Upload

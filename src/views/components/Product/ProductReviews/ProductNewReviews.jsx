@@ -8,22 +8,30 @@ import AddVideoDialogBox from "../../AddVideoDialogBox/AddVideoDialogBox";
 import CustomPhotoLibrary from "../../AddVideoDialogBox/CustomPhotoLibrary";
 import Rating from '@mui/material/Rating';
 import { useSelector } from "react-redux";
-import { useParams } from "react-router";
 import { getUserId } from "@services/authService";
 
 import { productPreviewApi } from "@api/products";
+import { useParams } from "react-router-dom";
 
 const ProductNewReviews = () => {
 
     const [dialogBoxOpen, setDialogBoxOpen] = useState(false);
     const [previewDialogOpen, setPreviewDialogOpen] = useState(false);
     const [parentData, setParentData] = useState([]);
+    const [imgFIles , setImgFiels] = useState([]);
+    console.log('imgFIles' , imgFIles)
+
     const userEmail = useSelector((state) => state.auth.user.email);
+    const userId = useSelector((state) => state.auth.user.id);
+    const userID = Number(userId)
+
+   
+    console.log('parentData' , parentData)
+
     const [value, setValue] = useState(2);
     const [text, setText] = useState("");
-   // const { productId } = useParams();
-    console.log(userEmail, 'dataaa')
-    const id="23";
+   const {productId}  = useParams();
+   const productID = Number(productId)
 
     const handlePreviewDialog = () => {
         setPreviewDialogOpen(true);
@@ -41,8 +49,10 @@ const ProductNewReviews = () => {
         setDialogBoxOpen(false);
     };
 
-    const callbackParent = (data) => {
+    const callbackParent = (data , imgsData) => {
+        console.log('imgdata' ,data ,imgsData  )
         setParentData(data);
+        setImgFiels(imgsData)
     };
 
     const handleDeleteImage = (index) => {
@@ -54,40 +64,32 @@ const ProductNewReviews = () => {
     const handleText = (e) => {
         setText(e.target.value)
     }
-    const handleSubmit = async () => {
-        // Prepare the form data
-        const formData = new FormData();
-        formData.append("rating", value);
-        formData.append("productID", id);
-        formData.append("email", userEmail); // Assuming email is available in the auth user object
-        formData.append("body", text); // Replace with the actual value
-
-        // Append each image to the form data
-        parentData.forEach((image, index) => {
-            formData.append(`image${index + 1}`, image);
-        });
-
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    
         try {
-            // Send the form data to your API
-            const response = await fetch(productPreviewApi, {
-                method: "POST",
-                body: formData,
+            const formData = new FormData();
+            formData.append("rating", value);
+            formData.append("product_id", 2);
+            formData.append("user_id", userID);
+            formData.append("body", text);
+            imgFIles?.forEach((file, index) => {
+                formData.append(`media[${index}]`, file);
             });
-
-            if (response.ok) {
-                // Handle success
-                console.log("Review submitted successfully!");
-            } else {
-                // Handle error
-                console.error("Error submitting review:", response.statusText);
-            }
+    
+            // Send the FormData object directly as the body
+            await productPreviewApi(formData);
+    
         } catch (error) {
             console.error("Error submitting review:", error.message);
         }
     };
+    
 
+
+    
     return (
-        <div>
+        <form onSubmit={handleSubmit}>
             <div className="container add-new-review">
                 <div className="row">
                     <div className="col-lg-3 col-md-3 col-sm-6 col-12">
@@ -113,6 +115,7 @@ const ProductNewReviews = () => {
                         <div className="rating-review-star">
                             <div>
                                 <Rating
+                                    required
                                     name="simple-controlled"
                                     value={value}
                                     onChange={(event, newValue) => {
@@ -134,6 +137,7 @@ const ProductNewReviews = () => {
                         <div className="col-md-12">
                             <div className="text-area-rating-review-list">
                                 <textarea
+                                required
                                     name="text"
                                     value={text}
                                     onChange={(e)=>handleText(e)}
@@ -155,7 +159,7 @@ const ProductNewReviews = () => {
                             >
                                 <FontAwesomeIcon icon={faCamera} /> Add Photos
                             </button>{" "}
-                            <button className="submit-review-button" onClick={handleSubmit}>
+                            <button type="submit" className="submit-review-button" >
                                 Submit
                             </button>
                         </div>
@@ -177,7 +181,7 @@ const ProductNewReviews = () => {
                     onDeleteImage={handleDeleteImage}
                 />
             )}
-        </div>
+        </form>
     );
 };
 
