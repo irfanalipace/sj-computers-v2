@@ -11,6 +11,10 @@
     width: 97%;
     height: 100%;
 }
+.swiper-wrapper {
+    /* justify-content: space-between; */
+    /* width: 40%; */
+}
 
 .banner-slider-section .swiper-slide {
     text-align: center;
@@ -64,4 +68,10 @@
     .banner-slider-section .swiper-button-next {
         right: var(--swiper-navigation-sides-offset, 10px);
     }
+}
+
+.swiper-video-button {
+    font-size: 10px;
+    height: 2rem;
+    width: 5rem;
 }

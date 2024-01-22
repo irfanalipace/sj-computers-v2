@@ -11,7 +11,8 @@ import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 import "./CheckOutCard.css";
 import { Link } from "react-router-dom";
 import AddCartComponents from "@components/ProductCard/AddCartComponents";
-import { IS_CHRISTMAS_HOLIDAYS } from "../../../../core/utils/constants";
+import { IS_CHRISTMAS_HOLIDAYS, PlanEnum } from "@utils/constants";
+import ProtectionPopup from "./ProtectionPopup";
 export const CheckOutCard = ({ product }) => {
     const currentState = useSelector((state) => state.states.currentState);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -20,7 +21,11 @@ export const CheckOutCard = ({ product }) => {
     // const isLoading = useSelector((state) => state.cart.isLoading);
     const [quantity, setQuantity] = useState(1);
     const [show, setShow] = useState(false);
+    const [protPlan, setProtPlan] = useState("");
+    const [open, setOpen] = useState(false);
+    const [openDrawer, setOpenDrawer] = useState(false);
     const [cartItem, setCartItem] = useState(null);
+    const [plan, setPlan] = useState("");
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -61,16 +66,61 @@ export const CheckOutCard = ({ product }) => {
         setCartItem(item);
     }, [cart]);
 
+    function handleCheckboxClick(event) {
+        const clickedCheckbox = event.target;
+        const checkboxes = document.querySelectorAll(".protectionPlanCheckbox");
+
+        checkboxes.forEach((checkbox) => {
+            if (checkbox !== clickedCheckbox) {
+                checkbox.checked = false;
+            }
+        });
+        setPlan(
+            clickedCheckbox.id === "protectionPlanCheckbox"
+                ? "3-Year"
+                : clickedCheckbox.id === "protectionPlanCheckbox1"
+                ? "4-Year"
+                : "unlimited"
+        );
+    }
+
+    const getPlanvalue = (id) => {
+        const matchingEnum = Object.values(PlanEnum).find(
+            (enumEntry) => enumEntry.label === id
+        );
+        setPlan(matchingEnum.value);
+    };
+
+    const handleAddProtection = (name) => {
+        const matchingEnum = Object.values(PlanEnum).find(
+            (enumEntry) => enumEntry.label === name
+        );
+        console.log(matchingEnum);
+        setProtPlan(matchingEnum?.value);
+        // handleCheckboxClick(e);
+    };
+
     return (
         <div>
             <div className="card-section-right">
+                <div className="hidden-on-mobile">
+                    <h6 style={{ fontWeight: "700" }}>Excellent Condition</h6>
+                    <h6 style={{ fontWeight: "700" }}>(Refurbished)</h6>
+                </div>
+                <div
+                    className="hidden-on-desktop"
+                    style={{ fontWeight: "600" }}
+                >
+                    ${product?.price?.toString().split(".")[0]}
+                </div>
                 <div className="row card-price-section-card-product">
-                    <div className="col-md-12 color-text-cart">
-                        <span className="text-danger">$</span>
+                    <div className="col-md-12 color-text-cart hidden-on-mobile">
+                        <sup>$</sup>
                         {product?.price?.toString().split(".")[0]}
                         <sup>{product?.price?.toString().split(".")[1]}</sup>
                     </div>
                 </div>
+
                 <div className="head">
                     <div className="">
                         <p className="cart-text">
@@ -104,9 +154,49 @@ export const CheckOutCard = ({ product }) => {
                 ) : (
                     <>
                         <div className="card-dev-section-paragrap-product">
+                            <div className="hover-box">
+                                <Link
+                                    href="#"
+                                    className="text-decoration-none free-return hidden-on-mobile"
+                                    style={{ color: "#2c8a9a" }}
+                                >
+                                    FREE Returns
+                                </Link>
+                                <div className="hidden-box">
+                                    <span
+                                        style={{
+                                            fontSize: "12px",
+                                            fontWeight: "bold",
+                                            marginBottom: "12px",
+                                        }}
+                                    >
+                                        Return this item for free
+                                    </span>
+                                    <div style={{ marginTop: "12px" }}>
+                                        <p style={{ fontSize: "11px" }}>
+                                            This item can be returned in its
+                                            original condition for a full refund
+                                            or replacement within 30 days of
+                                            receipt .
+                                        </p>
+                                        <Link
+                                            to={"/return_refund_policy"}
+                                            style={{
+                                                marginTop: "12px",
+                                                fontSize: "11px",
+                                                color: "#2c8a9a",
+                                            }}
+                                        >
+                                            Read full return policy
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>{" "}
+                        <div className="card-dev-section-paragrap-product hidden-on-mobile">
                             <span className="dilvery-text-paragraph-card">
-                                <button className="text-decoration-none">
-                                    Free delivery
+                                <button style={{ color: "#2c8a9a" }}>
+                                    FREE Delivery
                                 </button>{" "}
                                 <span style={{ fontWeight: "bold" }}>
                                     {
@@ -116,6 +206,21 @@ export const CheckOutCard = ({ product }) => {
                                 </span>
                                 <br></br>
                                 Shipped by SJ Computers
+                            </span>
+                        </div>{" "}
+                        <div className="card-dev-section-paragrap-product hidden-on-desktop">
+                            <span className="dilvery-text-paragraph-card">
+                                <button
+                                    style={{ color: "#000", fontWeight: 400 }}
+                                >
+                                    Delivery by
+                                </button>{" "}
+                                <span style={{ fontWeight: "bold" }}>
+                                    {
+                                        orderEstimatedDelivery
+                                            ?.free_shipment_amount?.estimate_day
+                                    }
+                                </span>
                             </span>
                         </div>{" "}
                         {/*
@@ -141,10 +246,14 @@ export const CheckOutCard = ({ product }) => {
 
                 <div className="color-card-dev">
                     <button
-                        className="select-location-btn mb-3"
+                        className="select-location-btn deliver-to mb-2"
                         onClick={handleShow}
                     >
-                        <img src={imges1} /> Deliver to
+                        <img
+                            src={imges1}
+                            style={{ width: "10.5px", height: "14px" }}
+                        />
+                        &ensp;Deliver to
                         {currentState?.name
                             ? " " + currentState?.name
                             : " Location"}
@@ -165,9 +274,12 @@ export const CheckOutCard = ({ product }) => {
                                 <div className="instock-dev-card-product-section-with-color-card">
                                     <div className="in-stock-area-lable">
                                         {product?.quantity > 0 ? (
-                                            <small> In Stock</small>
+                                            <small className="in-stock">
+                                                {" "}
+                                                In Stock
+                                            </small>
                                         ) : (
-                                            <small className="text-danger">
+                                            <small className="not-in-stock ">
                                                 {" "}
                                                 Out of Stock
                                             </small>
@@ -202,9 +314,14 @@ export const CheckOutCard = ({ product }) => {
                                 </Button> */}
 
                                 <AddCartComponents
+                                    checkplan={protPlan}
+                                    protectionPlan={plan}
+                                    open={openDrawer}
+                                    setOpen={setOpenDrawer}
                                     product={product}
                                     quantity={quantity}
-                                    className=" button1 button-text-button"
+                                    className="button1 button-text-button"
+                                    classNameforBuyNow="buy-now-button button-text-button"
                                     disabled={
                                         product?.quantity < 1 ? true : false
                                     }
@@ -222,9 +339,12 @@ export const CheckOutCard = ({ product }) => {
                         </>
                     )}
 
-                    <div className="row ship-card-details-card-payment-method-checkout-card">
-                        <div className="col-xl-7 col-6">
-                            <span className="color-card-text-paragrap-payment">
+                    <div className="details-container">
+                        <div className="col-xl-7 col-5">
+                            <span
+                                className="color-card-text-paragrap-payment"
+                                style={{ color: "#5F5E5E" }}
+                            >
                                 Payment
                             </span>
                         </div>
@@ -233,6 +353,7 @@ export const CheckOutCard = ({ product }) => {
                                 <Link
                                     href="#"
                                     className="text-decoration-none secure-payment-method"
+                                    style={{ color: "#2c8a9a" }}
                                 >
                                     Secure transaction
                                 </Link>
@@ -262,9 +383,12 @@ export const CheckOutCard = ({ product }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="row ship-card-details-card-payment-method-checkout-card">
-                        <div className="col-xl-7 col-6">
-                            <span className="color-card-text-paragrap-payment ships-form-span-tag">
+                    <div className="details-container">
+                        <div className="col-xl-7 col-5">
+                            <span
+                                className="color-card-text-paragrap-payment ships-form-span-tag"
+                                style={{ color: "#5F5E5E" }}
+                            >
                                 Ships Form
                             </span>
                         </div>
@@ -274,16 +398,22 @@ export const CheckOutCard = ({ product }) => {
                             </span>
                         </div>
                     </div>
-                    <div className="row ">
-                        <div className="col-xl-7 col-6">
-                            <span className="color-card-text-paragrap-payment return-from-span-tag-checkout">
+                    <div className="details-container">
+                        <div className="col-xl-7 col-5">
+                            <span
+                                className="color-card-text-paragrap-payment return-from-span-tag-checkout"
+                                style={{ color: "#5F5E5E" }}
+                            >
                                 Return
                             </span>
                         </div>
 
                         <div className="col-xl-5 col-6">
                             <div className="hover-box">
-                                <Link className="text-decoration-none secure-payment-method ">
+                                <Link
+                                    className="text-decoration-none secure-payment-method "
+                                    style={{ color: "#2c8a9a" }}
+                                >
                                     Eligible for returns<br></br>
                                     refund or <br></br>
                                     replacement wi...
@@ -312,6 +442,7 @@ export const CheckOutCard = ({ product }) => {
                                         style={{
                                             marginTop: "12px",
                                             fontSize: "11px",
+                                            color: "#2c8a9a",
                                         }}
                                     >
                                         Read full return policy
@@ -321,17 +452,110 @@ export const CheckOutCard = ({ product }) => {
                         </div>
                     </div>
                 </div>
-                <hr></hr>
+                <hr className="hidden-on-mobile"></hr>
                 <Link
                     to={"/term_services"}
                     style={{
-                        marginTop: "12px",
-                        fontSize: "11px",
+                        color: "#2c8a9a",
+                        fontSize: "14px",
+                        fontWeight: "400",
                         textDecoration: "none",
                     }}
                 >
                     Details
                 </Link>
+                <hr></hr>
+                <div className="protection-plan hidden-on-mobile">
+                    Add a Protection Plan :
+                    <div className="check-box-container">
+                        <input
+                            type="checkbox"
+                            className="protectionPlanCheckbox"
+                            id="protectionPlanCheckbox"
+                            checked={protPlan === 1}
+                            onClick={(e) => {
+                                handleCheckboxClick(e);
+                                setProtPlan(1);
+                            }}
+                        />
+                        <label
+                            // htmlFor="protectionPlanCheckbox"
+                            onClick={() => {
+                                setOpen(true);
+                                setPlan("3-Year");
+                            }}
+                        >
+                            3-Year Protection for{" "}
+                            <span style={{ color: "red" }}>
+                                &nbsp;$23.99/month
+                            </span>
+                        </label>
+                    </div>
+                    <div className="check-box-container">
+                        <input
+                            type="checkbox"
+                            className="protectionPlanCheckbox"
+                            id="protectionPlanCheckbox1"
+                            checked={protPlan === 2}
+                            onClick={(e) => {
+                                handleCheckboxClick(e);
+                                setProtPlan(2);
+                            }}
+                        />
+                        <label
+                            // htmlFor="protectionPlanCheckbox1"
+                            onClick={() => {
+                                setOpen(true);
+                                setPlan("4-Year");
+                            }}
+                        >
+                            4-Year Protection for{" "}
+                            <span style={{ color: "red" }}>
+                                &nbsp;$32.99/month
+                            </span>
+                        </label>
+                    </div>
+                    <div className="check-box-container">
+                        <input
+                            type="checkbox"
+                            className="protectionPlanCheckbox"
+                            id="protectionPlanCheckbox2"
+                            checked={protPlan === 3}
+                            onClick={(e) => {
+                                handleCheckboxClick(e);
+                                setProtPlan(3);
+                            }}
+                        />
+                        <label
+                            // htmlFor="protectionPlanCheckbox2"
+                            onClick={() => {
+                                setOpen(true);
+                                setPlan("unlimited");
+                            }}
+                        >
+                            Tech Unlimited – Protect Eligible Past and Future
+                            Purchases with 1 Plan (Renews Monthly Until
+                            Cancelled) for
+                            <span
+                                style={{
+                                    color: "red",
+                                }}
+                            >
+                                &nbsp;$16.99/month
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <ProtectionPopup
+                    open={open}
+                    handleClose={() => setOpen(false)}
+                    plan={plan}
+                    handleAddProtection={(e) => {
+                        handleAddProtection(e);
+                        setOpen(false);
+                    }}
+                />
             </div>
         </div>
     );

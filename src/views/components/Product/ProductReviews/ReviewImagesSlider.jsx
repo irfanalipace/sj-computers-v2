@@ -4,15 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 import "swiper/css/navigation";
-import btoimg from "@images/categories/btoweb.webp";
-import laptopimg from "@images/categories/laptopweb.webp";
-import monitorimg from "@images/categories/monitorweb.webp";
-import categoryImg1 from "@images/categories/desktopweb.webp";
-import categorybusinussweb from "@images/categories/businussweb.webp";
-import desktopimgweb from "@images/categories/desktopweb-page.webp";
 SwiperCore.use([Navigation, Pagination]);
 
-function ReviewImages({ reviews }) {
+function ReviewImagesSlider({ reviews }) {
     return (
         <div className="review-images-section">
             <Swiper
@@ -49,4 +43,4 @@ function ReviewImages({ reviews }) {
     );
 }
 
-export default ReviewImages;
+export default ReviewImagesSlider;

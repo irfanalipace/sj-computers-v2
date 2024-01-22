@@ -10,7 +10,7 @@ import { Tab, Tabs } from "react-bootstrap";
 import CustomTab from "./CustomTab";
 import TabContent from "./TabContnet";
 import ReturnPolicy from "./ReturnPolicy";
-import ReviewSection from "./ReviewSection";
+import ProductRating from "./ProductRating";
 import PriceWithLabel from "../../common/PriceWithLabel";
 
 let acceptedKeys = [
@@ -103,7 +103,7 @@ const ProductDetails = ({ product }) => {
             </Typography>
             <div className="row px-0 res deatisl-data-set-image-view-data-details">
                 <div className="col-12 justify-content-center justify-content-md-start d-flex align-items-center  product-review">
-                    <ReviewSection product={product} />
+                    <ProductRating product={product} />
                 </div>
                 {/* <div className="col-12 justify-content-center justify-content-md-start d-flex"> */}
                 {/* <button className="selling-button">
@@ -186,7 +186,10 @@ const ProductDetails = ({ product }) => {
 
             <hr className="hr-card-details"></hr>
             <PriceWithLabel price={product?.price} />
-            <Tooltip content={<ReturnPolicy />}>
+            <Tooltip
+                sx={{ left: { xs: "100%", md: "50%" } }}
+                content={<ReturnPolicy />}
+            >
                 <Typography
                     fontWeight={400}
                     color={"#007185"}

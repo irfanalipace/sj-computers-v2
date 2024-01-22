@@ -77,7 +77,6 @@ class SquareController extends BaseController
         DB::beginTransaction();
 
         try {
-
             $idempotencyKey = uniqid();
 
             //create customer || retrieve customer if already added
@@ -94,10 +93,10 @@ class SquareController extends BaseController
 
             $cartContent = Cart::session($this->userId)->getContent();
             $listofItems = ($this->userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
-
+            
             $check_product_first = $this->checkProduct($listofItems);
             if (!$check_product_first) {
-                return response()->json(['code' => 400, "cart_error" => true, 'message' => "Please try again ."]);
+                throw new Exception('Please try again.');
             }
 
             // create invoice along with order
@@ -125,8 +124,9 @@ class SquareController extends BaseController
 
             $order = $this->createOrder(array(), $userIdToPass, $this->user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems);
             if (!$order) {
-                return response()->json(["cart" => 'Please Try Again']);
+               throw new Exception('Please Try Again.');
             }
+            
             $orderData['order'] = $order['order'];
 
             // Get card Token
@@ -167,8 +167,8 @@ class SquareController extends BaseController
             return $this->sendResponse(['Order' => $orderData, "cart_data" => $check_product_first], StatusEnum::PAYMENTMESSAGE);
         } catch (Exception $e) {
             DB::rollBack();
-            // send error to admin 
-            SendErrorMail::dispatch($this->user,$order);
+            // send error to admin
+            SendErrorMail::dispatch($this->user,$orderData,$order);
             return response()->json(['code' => 400, 'message' => "something went wrong." . $e]);
         }
     }
@@ -280,7 +280,7 @@ class SquareController extends BaseController
 
                     (!$cart->isEmpty()) ? $cart->remove($product_id) : true;
 
-                    return false;
+                    throw new Exception('Please Try again product is out of stock.');
                 } elseif ($product->quantity < $quantity) {
 
                     if (!$cart->isEmpty()) {
@@ -293,7 +293,7 @@ class SquareController extends BaseController
                         ]);
                     }
 
-                    return false;
+                    throw new Exception('Please Try again product quantity is changed.');
                 } else {
                     $data[] = [
                         'status' => true,
@@ -315,120 +315,120 @@ class SquareController extends BaseController
     // create order ,order item,invoice and update product
     public function createOrder($data, $userId, $user, $payment_type, $cartData, $cartContent = [], $shippingAddreess, $user_type, $cartItems = [])
     {
-        try {
-            $ids = [];
+    
+        $ids = [];
 
-            $invoice = $this->storeInvoice($payment_type, $data, $cartData['total_amount'], $userId, $user_type, $user);
+        $invoice = $this->storeInvoice($payment_type, $data, $cartData['total_amount'], $userId, $user_type, $user);
 
-            //saving order after invoice created
-            $order = [];
+        //saving order after invoice created
+        $order = [];
 
-            $order['total_amount'] = $cartData['total_amount'];
-            $order['sub_total'] = $cartData['sub_total'];
-            $order[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $user->id;      //user id or guest id
-            $order['invoice_id'] = $invoice->id;
-            $order['status'] = StatusEnum::COMPLETE;
-            $order['shipment_price'] = $cartData['shipment_amount'];
-            $order['shipment_days'] = $cartData['estimate_day'];
-            $order['item_qty'] = $cartData['item_qty'];
-            $order = Order::create($order);
+        $order['total_amount'] = $cartData['total_amount'];
+        $order['sub_total'] = $cartData['sub_total'];
+        $order[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $user->id;      //user id or guest id
+        $order['invoice_id'] = $invoice->id;
+        $order['status'] = StatusEnum::COMPLETE;
+        $order['shipment_price'] = $cartData['shipment_amount'];
+        $order['shipment_days'] = $cartData['estimate_day'];
+        $order['item_qty'] = $cartData['item_qty'];
+        $order = Order::create($order);
 
-            if ($user_type == StatusEnum::GUEST) {
+        if ($user_type == StatusEnum::GUEST) {
 
-                foreach ($cartItems as $item) {
-                    # store product_id into ids variable...
-                    $ids[] = $item['product_id'];
-                }
-                //query to lock products
-                $check = Product::whereIn('id', $ids)->lockForUpdate()
-                    ->get();
-                if ($check->isEmpty()) {
-                    return false;
-                }
-                foreach ($cartItems as $item) {
-                    $product = Product::whereId($item['product_id'])->first();
-
-                    $data = [
-                        'order_id' => $order->id,
-                        'product_id' => $item['product_id'],
-                        'product_name' => $product->name,
-                        'qty' => $item['qty'],
-                        'price' => $product->price
-                    ];
-
-                    // Update item in product table
-                    $update_product = $this->updateProduct($item['product_id'], $item['qty']);
-
-                    // $productInfo = $this->getAmazonInventory($item['product_id']);
-                    // if ($productInfo['status']) {
-                    //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
-                    // }
-                    OrderItem::create($data);
-                }
-            } else {
-                foreach ($cartContent as $key => $item) {
-                    # store product_id into ids variable...
-                    $ids[] = $item->id;
-                }
-                //query to lock products
-                $check = Product::whereIn('id', $ids)->lockForUpdate()
-                    ->get();
-                if ($check->isEmpty()) {
-                    return false;
-                }
-                foreach ($cartContent as $item) {
-
-                    $data = [
-                        'order_id' => $order->id,
-                        'product_id' => $item->id,
-                        'product_name' => $item->name,
-                        'qty' => $item->quantity,
-                        'price' => $item->price
-                    ];
-
-                    // $productInfo = $this->getAmazonInventory($item->id);
-
-                    // if ($productInfo['status']) {
-                    //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
-                    // }
-
-                    // Update item in product table
-                    $update_product = $this->updateProduct($item->id, $item->quantity);
-
-                    OrderItem::create($data);
-                }
+            foreach ($cartItems as $item) {
+                # store product_id into ids variable...
+                $ids[] = $item['product_id'];
             }
+            //query to lock products
+            $check = Product::whereIn('id', $ids)->lockForUpdate()
+                ->get();
+            if ($check->isEmpty()) {
+                throw new Exception('product is not found.');
+            }
+            foreach ($cartItems as $item) {
+                $product = Product::whereId($item['product_id'])->first();
+                
+                $data = [
+                    'order_id' => $order->id,
+                    'product_id' => $item['product_id'],
+                    'product_name' => $product->name,
+                    'qty' => $item['qty'],
+                    'price' => $product->price,
+                    'protective_price' => $item['attributes']['protective_price'] ?? null,
+                    'protective_plan_id' => $item['attributes']['protective_id'] ?? null
+                ];
 
-            //saving address of order
-            $OrderAddress = OrderShippingAddress::Create(
-                [
-                    'country' => $shippingAddreess['country'],
-                    'full_name' => $shippingAddreess['full_name'],
-                    'phone_number' => $shippingAddreess['phone_number'],
-                    'email' => $shippingAddreess['email'] ?? null,
-                    'address' => $shippingAddreess['address'],
-                    'city' => $shippingAddreess['city'],
-                    'state' => $shippingAddreess['state'],
-                    'apartment' => $shippingAddreess['apartment'],
-                    'zip_code' => $shippingAddreess['zip_code'],
-                    $user_type == StatusEnum::USER ? 'user_id' : 'guest_id' => $user->id,       //user id or guest id
-                    'user_type' => $user_type,
-                    'order_id' => $order->id
-                ]
-            );
+                // Update item in product table
+                $update_product = $this->updateProduct($item['product_id'], $item['qty']);
 
-            $order = Order::find($order->id);
+                // $productInfo = $this->getAmazonInventory($item['product_id']);
+                // if ($productInfo['status']) {
+                //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
+                // }
+                OrderItem::create($data);
+            }
+        } else {
+            foreach ($cartContent as $key => $item) {
+                # store product_id into ids variable...
+                $ids[] = $item->id;
+            }
+            //query to lock products
+            $check = Product::whereIn('id', $ids)->lockForUpdate()
+                ->get();
+            if ($check->isEmpty()) {
+                throw new Exception('product is not found.');
+            }
+            foreach ($cartContent as $item) {
 
-            return [
-                "order" => $order,
-                "OrderAddress" => $OrderAddress,
-                'invoice_id' => $invoice->id
+                $data = [
+                    'order_id' => $order->id,
+                    'product_id' => $item->id,
+                    'product_name' => $item->name,
+                    'qty' => $item->quantity,
+                    'price' => $item->price,
+                    'protective_price' => $item['attributes']['protective_price'] ?? null,
+                    'protective_plan_id' => $item['attributes']['protective_id'] ?? null
+                ];
 
-            ];
-        } catch (Exception $e) {
+                // $productInfo = $this->getAmazonInventory($item->id);
 
-            return response()->json(['error' => 'something went wrong child .' . $e]);
+                // if ($productInfo['status']) {
+                //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
+                // }
+
+                // Update item in product table
+                $update_product = $this->updateProduct($item->id, $item->quantity);
+
+                OrderItem::create($data);            
+            }
         }
+
+        //saving address of order
+        $OrderAddress = OrderShippingAddress::Create(
+            [
+                'country' => $shippingAddreess['country'],
+                'full_name' => $shippingAddreess['full_name'],
+                'phone_number' => $shippingAddreess['phone_number'],
+                'email' => $shippingAddreess['email'] ?? null,
+                'address' => $shippingAddreess['address'],
+                'city' => $shippingAddreess['city'],
+                'state' => $shippingAddreess['state'],
+                'apartment' => $shippingAddreess['apartment'],
+                'zip_code' => $shippingAddreess['zip_code'],
+                ($user_type == StatusEnum::USER) ? 'user_id' : 'guest_id' => $user->id,       //user id or guest id
+                'user_type' => $user_type,
+                'order_id' => $order->id
+            ]
+        );
+
+        $order = Order::find($order->id);
+
+        return [
+            "order" => $order,
+            "OrderAddress" => $OrderAddress,
+            'invoice_id' => $invoice->id
+
+        ];
     }
 
     //Invoice create

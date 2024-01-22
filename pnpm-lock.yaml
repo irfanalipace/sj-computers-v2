@@ -104,6 +104,9 @@ dependencies:
   react-fontawesome:
     specifier: ^1.7.1
     version: 1.7.1(react@18.2.0)
+  react-google-autocomplete:
+    specifier: ^2.7.3
+    version: 2.7.3(react@18.2.0)
   react-helmet:
     specifier: ^6.1.0
     version: 6.1.0(react@18.2.0)
@@ -6924,6 +6927,16 @@ packages:
     peerDependencies:
       react: '>=0.12.0'
     dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
+    dev: false
+
+  /react-google-autocomplete@2.7.3(react@18.2.0):
+    resolution: {integrity: sha512-Nm+7/VDe7/NDWb8p/a39is7ktNqt5bNqAOoQv2Ev/XkuEvjsRk08VAPFmXUH03xKuM8IUuDrk2Lwfge44YEj6Q==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      lodash.debounce: 4.0.8
       prop-types: 15.8.1
       react: 18.2.0
     dev: false

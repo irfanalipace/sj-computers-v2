@@ -13,6 +13,9 @@
     max-width: 100%;
     border-radius: 6px;
     margin-bottom: 20px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .product-reviews-section .swiper button {
@@ -20,6 +23,72 @@
     height: 190px;
 }
 
+.product-reviews-section .filter-wrapper {
+    width: 200px;
+    font-size: 10px;
+}
+
+.product-reviews-section .filter-wrapper select {
+    font-size: 14px;
+}
+
+.product-reviews-section .review-card .review-author-image {
+    width: 50px;
+    height: 50px;
+}
+
+.product-reviews-section .review-card .review-author {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.product-reviews-section .review-card .review-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.product-reviews-section .review-card .review-location-time {
+    font-size: 16px;
+    font-weight: 400;
+    color: #565959;
+}
+
+.product-reviews-section .review-card .verified-review {
+    font-size: 14px;
+    font-weight: 700;
+    color: #e87e24;
+}
+
+.product-reviews-section .review-card .review-comment {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.product-reviews-section .review-card .review-report-btn {
+    background: white;
+    border: 0;
+    border-left: 1px solid #7a7d7d;
+    padding-left: 10px;
+    margin-left: 10px;
+    height: 15px;
+    margin-top: 10px;
+    color: #7a7d7d;
+}
+
+.product-reviews-section .review-card .helpful-count {
+    font-size: 15px;
+}
+
+.product-reviews-section .review-card .review-helpful-btn {
+    background: white;
+    border: 1px solid #d5d9d9;
+    box-shadow: 0px 2px 5px 0px #d5d9d980;
+    width: 120px;
+    height: 40px;
+    padding: 1px;
+    border-radius: 8px;
+    border: 1px;
+}
 .add-new-review {
     padding: 40px;
 }
@@ -57,7 +126,7 @@
 .text-area-rating-review-list textarea::placeholder {
     color: #999; /* Customize the color as needed */
 
-    padding: 23px;
+    /* padding: 23px; */
 }
 .add-new-review .preview-button-review {
     margin-top: 22px;

@@ -1,4 +1,4 @@
-import { Divider, Stack, Typography, Button } from "@mui/material";
+import { Box, Divider, Stack, Typography, Button } from "@mui/material";
 import React from "react";
 import Tooltip from "../../Tooltip";
 import HoverColorChange from "../../HoverColorChange";
@@ -6,12 +6,20 @@ import StarRatings from "react-star-ratings";
 import RatingDetails from "../ProductReviews/RatingDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Link } from "react-router-dom";
 
-export default function ReviewSection({ product }) {
+export default function ProductRating({ product }) {
     return (
-        <Stack direction={"row"} alignItems={"center"} gap={2}>
+        <Stack
+            direction={{
+                xs: "column",
+                lg: "row",
+            }}
+            my={[4, 1, 0.5]}
+            alignItems={["center", "center", "start"]}
+            gap={2}
+        >
             <Tooltip
+                sx={{ left: { xs: "50%", md: "50%" } }}
                 content={
                     <>
                         <RatingDetails product={product} />
@@ -34,7 +42,6 @@ export default function ReviewSection({ product }) {
             >
                 <Stack direction={"row"}>
                     <Typography
-                        className="d-none d-md-block"
                         fontSize={"14px"}
                         fontWeight={400}
                         fontFamily={"Inter"}
@@ -42,7 +49,7 @@ export default function ReviewSection({ product }) {
                     >
                         {product?.rating}
                     </Typography>
-                    <div className="star star-alignment-gride">
+                    <Box>
                         <StarRatings
                             style={{ PointerEvent: null }}
                             rating={product?.rating}
@@ -59,7 +66,7 @@ export default function ReviewSection({ product }) {
                                 height: "15px",
                             }}
                         />
-                    </div>
+                    </Box>
                 </Stack>
             </Tooltip>
             <Stack direction={"row"} spacing={1}>

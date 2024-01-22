@@ -9,6 +9,7 @@ import "./ProductCard.css";
 import AddCartComponents from "./AddCartComponents";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 import { removeProtocolAndBaseUrl } from "../../../core/utils/helpers";
+import { useParams } from "react-router-dom";
 
 const Product = ({ type = "", product, inGrid }) => {
     const [show, setShow] = useState(false);

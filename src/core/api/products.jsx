@@ -17,6 +17,19 @@ export function productsApi(page = 1, per_page = 12) {
     });
 }
 
+export function similarProducts(productName) {
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/search-product`, "", productName)
+            .then((response) => {
+                resolve(response);
+            })
+            .catch((e) => {
+                console.print("Console Log: : error products", e);
+                reject(e);
+            });
+    });
+}
+
 export function productDetailsApi(id) {
     return new Promise((resolve, reject) => {
         ApiService.get(`/product-detail?product_id=${id}`)
