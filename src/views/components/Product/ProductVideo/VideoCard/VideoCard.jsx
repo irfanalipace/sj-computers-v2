@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import {
     Grid,
@@ -18,44 +18,66 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { useSelector } from "react-redux";
 import RecommendationLayout2 from "../../../Recommendation/RecommendationLayout2";
 
-function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
+function VideoCard({ data, index, videoData }) {
+
+    const videoRef = useRef() 
 
     const [open, setOpen] = useState(false);
-    const [url, setUrl] = useState(tumbnail.url)
+    const [url, setUrl] = useState(data?.url)
     const products = useSelector((state) => state.products.products);
 
-    const getIdUrl = (id) => {
-  const item = Tumbnails.find(item => item.id === id);
-  return item ? item.url : null;
-};
-    
+    const cleanVideo = () => {
+        if (videoRef.current) {
+      // Pause the video
+      videoRef.current.pause();
+
+      // Remove the source(s)
+      videoRef.current.removeAttribute('src');
+      videoRef.current.removeAttribute('srcObject');
+
+      // Load a blank source or set the src attribute to an empty string
+      videoRef.current.load();
+
+    //   If video is also playing in PictureInPicture tab then for closing the tab .. 
+      if (document.pictureInPictureElement === videoRef.current) {
+        document.exitPictureInPicture()
+          .catch(error => {
+            console.error('Error closing PiP:', error);
+          });
+        }
+    }
+    }
+
     const handleDialogOpen = () => {
         setOpen(true);
     };
 
 
-    const handleClose = () => {
+    const handleClose = (e) => {
         setOpen(false);
+        cleanVideo()
         console.log(open);
     };
 
-    const VideoDialog = ({tumbnail, Tumbnails}) => {
+    const VideoDialog = ({data,}) => {
         
-        const [currentVideoId, setCurrentVideoId] = useState(newVideoData[index]?.id);
+        const [currentVideoId, setCurrentVideoId] = useState(videoData[index]?.id);
         const handleSwitchVideo = (id) => {
+            // cleanVideo()
             setCurrentVideoId(id);
         };
-        const currentVideo = newVideoData.find((video) => video.id === currentVideoId);
+        const currentVideo = videoData.find((video) => video?.id === currentVideoId);
 
         return (
             <Dialog open={open} onClose={handleClose} maxWidth="lg" fullWidth sx={{maxHeight: "none",}}  >
-            <DialogContent sx={{ p: 0, position: "relative", borderRadius: "2px", }}>
-                <Grid container >
+            <DialogContent sx={{ p: 0, position: "relative", borderRadius: "2px", height: "100vh" }}>
+                <Grid container height={"100%"}>
                     <Grid item xs={12} md={7.5} container>
                         <Grid item xs={12}>
                             <video
                                 width={"100%"}
                                 autoPlay
+                                ref={videoRef}
                                 src={currentVideo?.url}
                                 controls
                             ></video>
@@ -77,7 +99,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                     >
                         <Grid item xs={12}>
                             <DialogActions>
-                                <IconButton onClick={handleClose} sx={{
+                                <IconButton onClick={(e) => handleClose(e)} sx={{
                                             color: "whitesmoke",
                                             position: "absolute",
                                             top: 0,
@@ -92,22 +114,22 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                                 </Grid>
                                 {/* ////  Side video section //// */}
                                 {/* Map Function for the side videos list */}
-                                {newVideoData?.map((videoData, index) => {
+                                {videoData?.map((data, index) => {
                                     return (
                                     <Grid item xs={12} container key={index}>
                                     <Grid
                                     item
                                     xs={3}
-                                    onClick={(e) => handleSwitchVideo(videoData.id)}
+                                    onClick={(e) => handleSwitchVideo(data?.id)}
                                     height={"60px"}
                                     position={"relative"}
                                     sx={{
-                                        backgroundImage: `url(${videoData?.tumbnail})`,
+                                        backgroundImage: `url(${data?.tumbnail})`,
                                         borderRadius: "2px",
                                         backgroundSize: "cover",
                                         backgroundPosition: "center",
                                         cursor: "pointer",
-                                        border: currentVideo.id == videoData.id ? "2px solid orange" : "",
+                                        border: currentVideo?.id == data?.id ? "2px solid orange" : "",
                                     }}
                                 >
                                     <Box
@@ -163,7 +185,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
     return (
         <Grid height={"238px"} container position={"relative"}>
             {/* ///// --- DIALOG --- ///// */}
-           <VideoDialog tumbnail={tumbnail} Tumbnails={Tumbnails} />
+           <VideoDialog data={data} />
 
             <Grid
                 item
@@ -172,7 +194,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                 height={"70%"}
                 position={"relative"}
                 sx={{
-                    backgroundImage: `url(${tumbnail?.tumbnail})`,
+                    backgroundImage: `url(${data?.tumbnail})`,
                     borderRadius: "10px",
                     borderBottomRightRadius: 0,
                     borderBottomLeftRadius: 0,
@@ -216,7 +238,7 @@ function VideoCard({ tumbnail, Tumbnails, index, newVideoData }) {
                     borderRadius: "10px",
                     borderTopLeftRadius: 0,
                     borderTopRightRadius: 0,
-                    background: `rgb(0, 0, 0, 0.5) url(${tumbnail.tumbnail}) `,
+                    background: `rgb(0, 0, 0, 0.5) url(${data?.tumbnail}) `,
                     backgroundSize: "180%",
                     backgroundPosition: "0% 48%",
                     backgroundBlendMode: "color",
