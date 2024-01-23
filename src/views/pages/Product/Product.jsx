@@ -1,9 +1,5 @@
-import { useState, useEffect, lazy } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-
+import { lazy } from "react";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-import { productDetailsbyAsinApi } from "@api/products";
 import { ProductImage } from "@components/Product/ProductImage/ProductImage";
 import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
 import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
