@@ -123,21 +123,20 @@ export function filterFiles(files, allowedTypes, maxSize = 5) {
     const maxSizeInBytes = maxSize * 1024 * 1024;
     const validFiles = [];
     const errors = [];
-    Array.from(files).forEach(file => {
-      if (file?.size > maxSizeInBytes) {
-        errors.push(
-          `${file.name} exceeds the maximum allowed file size of ${maxSize}MB.`
-        );
-      } else if (!allowedTypes.includes(file?.type)) {
-        errors.push(`${file?.name} has an invalid file type.`);
-      } else {
-        validFiles.push(file);
-      }
+    Array.from(files).forEach((file) => {
+        if (file?.size > maxSizeInBytes) {
+            errors.push(
+                `${file.name} exceeds the maximum allowed file size of ${maxSize}MB.`
+            );
+        } else if (!allowedTypes.includes(file?.type)) {
+            errors.push(`${file?.name} has an invalid file type.`);
+        } else {
+            validFiles.push(file);
+        }
     });
-  
+
     return {
-      validFiles: validFiles,
-      errors: errors
+        validFiles: validFiles,
+        errors: errors,
     };
-  }
-  
+}
