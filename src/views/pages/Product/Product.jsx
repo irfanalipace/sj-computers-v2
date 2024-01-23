@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -9,19 +9,27 @@ import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
 import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
 import Recommendation from "@components/Recommendation/Recommendation";
 import NotFound from "../NotFound/NotFound";
-
+const ProductReviews = lazy(() =>
+    import("../../components/Product/ProductReviews/ProductReviews")
+);
 import "./Product.css";
+import SimilarItems from "../../components/SimilarItems/SimilarItems";
 import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
 import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
 import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
+import ProductPageHeader from "../../components/ProductPageHeader/ProductPageHeader";
+import VisibleOnScroll from "../../components/VisibleOnScroll";
 
 export default function Product() {
     const [isLoading, setIsLoading] = useState(true);
     const [product, setProduct] = useState(null);
     const [productImages, setProductImages] = useState([]);
     const products = useSelector((state) => state.products.products);
+    const similarProducts = useSelector(
+        (state) => state.products.similarProducts
+    );
     const { productId } = useParams();
-
+      
     useEffect(() => {
         getProductDetails();
     }, [productId]);
@@ -57,6 +65,9 @@ export default function Product() {
                 <div className="col-12 col-md-3 p-0 m-0">
                     <CheckOutCard product={{ ...product }} />
                 </div>
+                <div className="hidden-on-tab">
+                    <SimilarItems products={similarProducts} />
+                </div>
                 <ProductVideo />
                 <RefurbishedSection />
                 <ProductDescription product={product} />
@@ -68,12 +79,17 @@ export default function Product() {
         <>
             {product?.id || isLoading || !products?.length ? (
                 <div className="product-page ">
+                    <ProductPageHeader />
                     <div className="product-container container-fluid">
                         {isLoading || !products?.length ? (
                             <LoaderComponent />
                         ) : (
                             <ProductComponent />
                         )}
+
+                        <VisibleOnScroll>
+                            <ProductReviews reviews={products} productId={productId}/>
+                        </VisibleOnScroll>
                         <Recommendation products={products} />
                     </div>
                 </div>

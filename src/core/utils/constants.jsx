@@ -26,7 +26,11 @@ export const shippingMethods = [
     //     cost: 30,
     // },
 ];
-
+export const PlanEnum = {
+    THREE_YEAR: { value: 1, label: "3-Year" },
+    FOUR_YEAR: { value: 2, label: "4-Year" },
+    DEFAULT: { value: 3, label: "unlimited" },
+};
 export const dummyCategories = [
     { name: "ALL", id: null, slug: "" },
     { name: "1", id: 1, slug: "1" },
