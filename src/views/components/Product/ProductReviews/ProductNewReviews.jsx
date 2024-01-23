@@ -13,8 +13,9 @@ import { useNavigate } from "react-router-dom";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { productPreviewApi, productDetailsbyAsinApi } from "@api/products";
 import { useParams } from "react-router-dom";
-
+import { toast } from "react-toastify";
 import { useEffect, lazy } from "react";
+
 
 const ProductNewReviews = () => {
     const navigate = useNavigate();
@@ -127,6 +128,7 @@ const ProductNewReviews = () => {
             // Send the FormData object directly as the body
             await productPreviewApi(formData);
             navigate(`${new URL(product?.url).pathname}`);
+            toast.success("Product Review Succefull Added");
         } catch (error) {
             console.error("Error submitting review:", error.message);
         } finally {
