@@ -89,9 +89,12 @@ const ProductNewReviews = () => {
     };
 
     const callbackParent = (data, imgsData) => {
-        setParentData(data);
+        setParentData((prevImages) => [...prevImages, ...data]);
         setImgFiels(imgsData);
     };
+
+  
+
 
     const handleDeleteImage = (index) => {
         const updatedImages = [...parentData];
@@ -131,6 +134,10 @@ const ProductNewReviews = () => {
         }
     };
 
+
+
+
+    
     return (
         <form onSubmit={handleSubmit}>
             <div className="container add-new-review">
@@ -190,12 +197,14 @@ const ProductNewReviews = () => {
 
                         <div className="preview-button-review">
                             <button
+                            type="button"
                                 className="preview-product-list-button"
                                 onClick={handlePreviewDialog}
                             >
                                 Preview
                             </button>{" "}
                             <button
+                            type="button"
                                 className="camera-button-review"
                                 onClick={handleDialogBox}
                             >
