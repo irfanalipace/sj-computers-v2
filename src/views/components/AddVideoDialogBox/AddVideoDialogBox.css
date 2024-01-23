@@ -156,7 +156,7 @@ border: 1px;
 }
 
 .alist-image-container-preview-modal {
-    width: 223px;
+    width: auto;
     margin-right: 10px;
     height: 95px;
     position: relative;
