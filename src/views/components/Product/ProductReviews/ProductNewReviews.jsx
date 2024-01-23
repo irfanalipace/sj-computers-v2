@@ -17,7 +17,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, lazy } from "react";
 
 const ProductNewReviews = () => {
-    const navegate = useNavigate();
+    const navigate = useNavigate();
     const [dialogBoxOpen, setDialogBoxOpen] = useState(false);
     const [previewDialogOpen, setPreviewDialogOpen] = useState(false);
     const [parentData, setParentData] = useState([]);
@@ -27,7 +27,7 @@ const ProductNewReviews = () => {
     const userName = useSelector((state) => state.auth.user.name);
 
     const userID = Number(userId);
-    const [value, setValue] = useState(2);
+    const [value, setValue] = useState(0);
     const [text, setText] = useState("");
     const { productId } = useParams();
     const productID = Number(productId);
@@ -36,7 +36,6 @@ const ProductNewReviews = () => {
     const [product, setProduct] = useState(null);
     const [productImages, setProductImages] = useState([]);
     const products = useSelector((state) => state.products.products);
-    console.log(productImages, 'productImages')
     useEffect(() => {
         getProductDetails();
     }, [productId]);
@@ -104,6 +103,10 @@ const ProductNewReviews = () => {
         setText(e.target.value);
     };
 
+    const handleClear = () =>{
+        setValue(0);
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -120,7 +123,7 @@ const ProductNewReviews = () => {
 
             // Send the FormData object directly as the body
             await productPreviewApi(formData);
-            //  navegate(`/${new URL(product?.url).pathname}`, "OOOOO");
+            navigate(`${new URL(product?.url).pathname}`);
         } catch (error) {
             console.error("Error submitting review:", error.message);
         } finally {
@@ -166,7 +169,10 @@ const ProductNewReviews = () => {
                                 <p>Posted publicly as</p>
                             </div>
                             <div className="check-rating-star-review-name">
-                                <p>{userName} | Clear</p>
+                                <div>{userName} |</div>
+                                 <div className="data-clear-button-review">
+                                 <button type="button" onClick={handleClear}>Clear</button>
+                                 </div>
                             </div>
                         </div>
 
