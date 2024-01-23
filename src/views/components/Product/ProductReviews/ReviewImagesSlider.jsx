@@ -15,6 +15,8 @@ function ReviewImagesSlider({ reviews }) {
     const [reviewId, setReviewId] = useState({})
     const [imgIndex, setImgIndex] = useState("")
 
+    console.log(reviews, "reviews");
+
     const handleOpenDialog = (revId, index) => {
         setOpen(true)
         setReviewId(revId)

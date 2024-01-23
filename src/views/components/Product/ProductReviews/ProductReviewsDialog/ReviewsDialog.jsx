@@ -21,29 +21,29 @@ const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId , imgIndex
     console.log(selectedReview?.images.map((image) => {  console.log("image" ,image) }), "images.image");
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth={"lg"} >
-        <DialogContent sx={{width: "100%", p: 0,}} >
+    <Dialog open={open} onClose={handleClose} maxWidth={"lg"}  >
+        <DialogContent sx={{minWidth: "75vw", width: "100%", p: 0,}} >
               <Box sx={{width: "100%", backgroundColor: "whitesmoke", textAlign: "end", position: "sticky", top: 0, left: 0}}>
             <DialogActions>
                 <IconButton onClick={handleClose}><CloseOutlinedIcon /></IconButton>
             </DialogActions>
               </Box>
-          <Grid container p={2} rowGap={1} >
+          <Grid container p={2} rowGap={1} width={"100%"} >
               <Grid item xs={12}>
                 <Typography variant='body2'>
                   <AppsIcon />
                   View image gallery </Typography>
               </Grid>
-              <Grid item md={6}  maxHeight={"30rem"} minWidth={"30rem"}  sx={{backgroundColor: "black"}} display={"flex"} alignItems={"center"} >
+              <Grid item md={6}  height={"30rem"} sx={{backgroundColor: "black"}} display={"flex"} alignItems={"center"} >
               <Swiper 
-                style={{width: "100%", height: "100%"}}
+                style={{width: "100%", height: "100%", border: "5px solid yellow"}}
                 spaceBetween={1}
                 slidesPerView={1}
                 navigation
               >
                 {selectedReview?.images?.map((image, index) => (
-                  <SwiperSlide style={{maxWidth: "100%", maxHeight: "100%",display: "flex", alignItems: "center" }} >
-                 <img src={image}  width={"100%"}  alt="review image" />
+                  <SwiperSlide style={{width: "100%", height: "100%",display: "flex", alignItems: "center" , justifyContent: "center"}} >
+                 <img src={image}  style={{maxHeight: "100%",maxWidth: "100%"}} alt="review image" />
                 </SwiperSlide>
                 ))}
               </Swiper>
