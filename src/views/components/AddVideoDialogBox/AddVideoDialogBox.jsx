@@ -17,12 +17,11 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback, onDeleteImage }) => {
     // const [images, setImages] = useState([]);
     // const [error, setErrors] = useState("");
     // const [uploadedImgs , setUploadedImgs] =useState([])
-   
 
     // const handleChildButton = () => {
     //     onhandleCallback(images , uploadedImgs);
     //     setChildData(images);
-        
+
     // };
 
     // const selectFiles = () => {
@@ -114,7 +113,6 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback, onDeleteImage }) => {
     //     // This function should handle the upload of images in the 'images' state
     // };
 
-
     const [isDragging, setIsDragging] = useState(false);
     const fileInputRef = useRef(null);
     const [childData, setChildData] = useState();
@@ -138,7 +136,7 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback, onDeleteImage }) => {
         event.stopPropagation(); // Stop the event from propagating
         fileInputRef.current.click();
     };
-    
+
     const onFileSelect = (event) => {
         const files = event.target.files;
         if (files.length === 0) return;
@@ -147,13 +145,17 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback, onDeleteImage }) => {
         const maxFileSizeMB = 1;
         const newImages = Array.from(files).filter((file) => {
             if (!allowedTypes.includes(file.type)) {
-                setErrors("Invalid file format. Please select PNG, JPG, or WebP.");
+                setErrors(
+                    "Invalid file format. Please select PNG, JPG, or WebP."
+                );
                 return false;
             }
             const fileSizeMB = file.size / (1024 * 1024);
             const isFileSizeValid = fileSizeMB <= maxFileSizeMB;
             if (!isFileSizeValid) {
-                setErrors(`File size exceeds the maximum limit of ${maxFileSizeMB}MB.`);
+                setErrors(
+                    `File size exceeds the maximum limit of ${maxFileSizeMB}MB.`
+                );
                 return false;
             }
 
@@ -225,8 +227,8 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback, onDeleteImage }) => {
                         isDragging ? "drag-over" : ""
                     }`}
                     role="button"
-                    onClick={(e) => selectFiles(e)} 
-                  //  onClick={selectFiles}
+                    onClick={(e) => selectFiles(e)}
+                    //  onClick={selectFiles}
                     onDragOver={onDragOver}
                     onDragLeave={onDragLeave}
                     onDrop={onDrop}
@@ -305,7 +307,7 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback, onDeleteImage }) => {
                         disabled={images.length === 0}
                     >
                         Upload
-                        </button>
+                    </button>
                 </div>
             </Modal.Body>
         </Modal>

@@ -9,7 +9,7 @@ import CustomPhotoLibrary from "../../AddVideoDialogBox/CustomPhotoLibrary";
 import Rating from "@mui/material/Rating";
 import { useSelector } from "react-redux";
 import { getUserId } from "@services/authService";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { productPreviewApi, productDetailsbyAsinApi } from "@api/products";
 import { useParams } from "react-router-dom";
@@ -22,13 +22,10 @@ const ProductNewReviews = () => {
     const [previewDialogOpen, setPreviewDialogOpen] = useState(false);
     const [parentData, setParentData] = useState([]);
     const [imgFIles, setImgFiels] = useState([]);
-
-    console.log("imgFIles", imgFIles);
-
     const userEmail = useSelector((state) => state.auth.user.email);
     const userId = useSelector((state) => state.auth.user.id);
     const userName = useSelector((state) => state.auth.user.name);
-    console.log(userName,'userName')
+
     const userID = Number(userId);
     const [value, setValue] = useState(2);
     const [text, setText] = useState("");
@@ -39,11 +36,11 @@ const ProductNewReviews = () => {
     const [product, setProduct] = useState(null);
     const [productImages, setProductImages] = useState([]);
     const products = useSelector((state) => state.products.products);
-
+    console.log(productImages, 'productImages')
     useEffect(() => {
         getProductDetails();
     }, [productId]);
-    console.log(product?.image, "WWWWW");
+
     const getProductDetails = async () => {
         setIsLoading(true);
         try {
@@ -123,10 +120,10 @@ const ProductNewReviews = () => {
 
             // Send the FormData object directly as the body
             await productPreviewApi(formData);
-            console.log(`/${new URL(product?.url).pathname}`, "OOOOO");
+            //  navegate(`/${new URL(product?.url).pathname}`, "OOOOO");
         } catch (error) {
             console.error("Error submitting review:", error.message);
-        }finally{
+        } finally {
             setIsLoading(false);
         }
     };
@@ -137,7 +134,7 @@ const ProductNewReviews = () => {
                 <div className="row">
                     <div className="col-lg-3 col-md-3 col-sm-6 col-12">
                         <div className="review-heading-image-product">
-                            <img src={product?.image} alt="Product" />
+                            <img src={productImages} alt="Product" />
                         </div>
                     </div>
                     <div className="col-lg-9 col-md-9 col-sm-6 col-12">
