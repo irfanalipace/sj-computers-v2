@@ -12,19 +12,21 @@ SwiperCore.use([Navigation, Pagination]);
 function ReviewImagesSlider({ reviews }) {
 
     const[open, setOpen] = useState(false)
-    const [review, setReview] = useState({})
+    const [reviewId, setReviewId] = useState({})
+    const [imgIndex, setImgIndex] = useState("")
 
-    const handleOpenDialog = (rev) => {
+    const handleOpenDialog = (revId, index) => {
         setOpen(true)
-        setReview(rev)
-        console.log(reviews, "reviews");
+        setReviewId(revId)
+        setImgIndex(index)
+        // console.log(reviews, "reviews");
     }
 
     const handleClose = () => {
         setOpen(false)
     }
 
-    console.log(ReviewsData.reviews);
+    // console.log(ReviewsData.reviews);
 
     return (
         <div className="review-images-section">
@@ -45,16 +47,16 @@ function ReviewImagesSlider({ reviews }) {
                 }}
             >
                 {/* /// --- DIALOG --- /// */}
-                <ReviewsDialog open={open} handleOpenDialog={handleOpenDialog} handleClose={handleClose} review={review} />
+                <ReviewsDialog open={open} handleOpenDialog={handleOpenDialog} handleClose={handleClose} reviewId={reviewId} imgIndex={imgIndex} ReviewsData={ReviewsData} />
                 {ReviewsData?.reviews.map((rev) => (
-                    <div key={rev?.id}>
+                    <div key={rev?.reviewId}>
                             <button 
                             // onClick={() => handleOpenDialog(rev)}
                             className="btn btn-light p-1 d-flex align-items-center">
                                 {rev?.images?.map((image, index) => (
                                     <SwiperSlide >
                                     <img key={index}
-                                        onClick={() => handleOpenDialog(index)}
+                                        onClick={() => handleOpenDialog(rev?.reviewId, index)}
                                         src={image}
                                         alt="review-image"
                                         className="all-reviews-image"
