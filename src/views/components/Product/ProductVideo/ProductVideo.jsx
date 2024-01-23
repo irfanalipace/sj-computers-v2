@@ -6,64 +6,52 @@ import ProductVideoSlider from "../../Sliders/ProductVideoSlider";
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 // import videoFront from "../../../assets/images/videoL-tumbnail.svg"
+import { createThumbnail } from "../../../../core/utils/helpers";
 
 const ProductVideo = () => {
 
-    const url = "https://m.media-amazon.com/images/S/vse-vms-transcoding-artifact-us-east-1-prod/8ac39f04-a321-47cd-bb9e-bbbe4038e7d9/videopreview.jobtemplate.mp4.default.mp4"
+    const url = "https://player.vimeo.com/external/501907857.sd.mp4?s=8f346acfa87b85f1136660006b892b95a1ad550b&profile_id=164&oauth2_token_id=57447761"
     const url2 = "https://ak.picdn.net/shutterstock/videos/1093044323/preview/stock-footage-generic-d-car-crash-test-with-crashtest-dummy-car-destruction-realistic-animation-d.mp4"
     const url3 = "https://ak.picdn.net/shutterstock/videos/1099395703/preview/stock-footage-sportsman-training-in-indoor-football-hall-running-with-ball-practicing-dribbling-and-dummy-tricks.mp4"
     const url4 = "https://ak.picdn.net/shutterstock/videos/1093044315/preview/stock-footage-generic-d-car-crash-test-with-crashtest-dummy-car-destruction-realistic-animation-d.mp4"
     
 
-    // NOTE : ALL THE BOX COMPONENTS ARE (POSITION: ABSOLUTE)
+    const [videoData, setVideoData] = useState([])
 
-    
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = [
+          { id: 1, url: url },
+          { id: 2, url: url2 },
+          { id: 3, url: url3 },
+          { id: 4, url: url4 },
+        ];
 
-    const videoData = [ {id: 1, url: url}, {id: 2,  url: url2}, {id: 3, url: url3}, {id: 4, url: url4},   ];
-    const newVideoData = videoData.map((video) => {
-    const [thumbnailSrc, setThumbnailSrc] = useState(null);
-      useEffect(() => {
-        const createThumbnail = (videoSrc, callback) => {
-        const video = document.createElement('video');
-        video.crossOrigin = 'anonymous';
-        video.src = videoSrc;
+        const modifyVideoData = await Promise.all(
+          response.map(async (data) => {
+            const videoSrc = data?.url;
+            try {
+              const thumbnailSrc = await createThumbnail(videoSrc);
+              console.log(thumbnailSrc, "thumbnailSrc");
+              return { ...data, tumbnail: thumbnailSrc };
+            } catch (error) {
+              console.error('Error creating thumbnail:', error);
+              return { ...data, thumbnail: null }; // Handle the error gracefully
+            }
+          })
+        );
+        setVideoData(modifyVideoData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-        video.addEventListener('loadeddata', () => {
-          video.currentTime = 1;
+    fetchData();
+}, [url, url2, url3, url4]); 
 
-          video.addEventListener(
-            'seeked',
-            () => {
-              const canvas = document.createElement('canvas');
-              canvas.width = video.videoWidth;
-              canvas.height = video.videoHeight;
 
-              const ctx = canvas.getContext('2d');
-              ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-              const imageDataUrl = canvas.toDataURL();
-              callback(imageDataUrl);
-            },
-            { once: true }
-          );
-        });
-      };
-
-      const videoSrc = video.url;
-
-      createThumbnail(videoSrc, (thumbnail) => {
-      //   console.log('Thumbnail created:', thumbnail);
-          setThumbnailSrc(thumbnail)
-        // Use the thumbnail data URL as needed (e.g., set it as the src of an image element)
-      });
-  }, [videoData]);
-  
-        return {...video, tumbnail : thumbnailSrc};
-    })
-
-    setTimeout(() => {
-        console.log(newVideoData, "a");
-    }, 2000);
+        // console.log(videoData, "a");
     
     return (
         <Grid container p={2} borderTop={"1px solid lightgray"} rowGap={2}>
@@ -73,7 +61,7 @@ const ProductVideo = () => {
                 </Typography>
             </Grid>
             <Grid item lg={12} container px={4} columnGap={2} position={"relative"} sx={{"@media (max-width: 600px)": { padding: 0 }}} >
-                <ProductVideoSlider Tumbnails={videoData} newVideoData={newVideoData}  />
+                <ProductVideoSlider  videoData={videoData}  />
             </Grid>
         </Grid>
     );

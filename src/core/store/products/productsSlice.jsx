@@ -10,7 +10,7 @@ const initialState = {
     isFiltering: false,
     selectedCategory: null,
     apiError: false,
-    isLoading: false,
+    isLoading: true,
     currentPage: 1,
 };
 
