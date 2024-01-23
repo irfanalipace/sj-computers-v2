@@ -91,14 +91,13 @@ export const CheckOutCard = ({ product }) => {
         setPlan(matchingEnum.value);
     };
 
-    const handleAddProtection = (name) => {
-        const matchingEnum = Object.values(PlanEnum).find(
-            (enumEntry) => enumEntry.label === name
-        );
-        console.log(matchingEnum);
-        setProtPlan(matchingEnum?.value);
-        // handleCheckboxClick(e);
-    };
+    // const handleAddProtection = (name) => {
+    //     const matchingEnum = Object.values(PlanEnum).find(
+    //         (enumEntry) => enumEntry.label === name
+    //     );
+    //     console.log(matchingEnum);
+    //     setProtPlan(matchingEnum?.value);
+    // };
 
     return (
         <div>
@@ -479,7 +478,7 @@ export const CheckOutCard = ({ product }) => {
                             }}
                         />
                         <label
-                            // htmlFor="protectionPlanCheckbox"
+                            htmlFor="protectionPlanCheckbox"
                             onClick={() => {
                                 setOpen(true);
                                 setPlan("3-Year");
@@ -503,7 +502,7 @@ export const CheckOutCard = ({ product }) => {
                             }}
                         />
                         <label
-                            // htmlFor="protectionPlanCheckbox1"
+                            htmlFor="protectionPlanCheckbox1"
                             onClick={() => {
                                 setOpen(true);
                                 setPlan("4-Year");
@@ -527,7 +526,7 @@ export const CheckOutCard = ({ product }) => {
                             }}
                         />
                         <label
-                            // htmlFor="protectionPlanCheckbox2"
+                            htmlFor="protectionPlanCheckbox2"
                             onClick={() => {
                                 setOpen(true);
                                 setPlan("unlimited");
@@ -552,7 +551,8 @@ export const CheckOutCard = ({ product }) => {
                     handleClose={() => setOpen(false)}
                     plan={plan}
                     handleAddProtection={(e) => {
-                        handleAddProtection(e);
+                        // handleAddProtection(e);
+                        setOpenDrawer(true);
                         setOpen(false);
                     }}
                 />

@@ -10,7 +10,7 @@ function ReviewImagesSlider({ reviews }) {
     return (
         <div className="review-images-section">
             <Swiper
-                className="my-swiper-mobile-category"
+                className=""
                 spaceBetween={1}
                 slidesPerView={1}
                 navigation
