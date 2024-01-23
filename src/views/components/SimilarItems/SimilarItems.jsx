@@ -37,14 +37,14 @@ const SimilarItems = ({ products }) => {
                 justifyContent="flex-start"
                 alignItems="center"
             >
-                <Grid lg={3} mr={5}>
+                <Grid lg={4} mr={5}>
                     {products[0] ? (
                         <SingleSimilarItem product={products[0]} />
                     ) : (
                         <></>
                     )}
                 </Grid>{" "}
-                <Grid lg={3}>
+                <Grid lg={4}>
                     {products[1] ? (
                         <SingleSimilarItem product={products[1]} />
                     ) : (
