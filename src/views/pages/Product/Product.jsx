@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -9,13 +9,16 @@ import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
 import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
 import Recommendation from "@components/Recommendation/Recommendation";
 import NotFound from "../NotFound/NotFound";
-import ProductReviews from "../../components/Product/ProductReviews/ProductReviews";
+const ProductReviews = lazy(() =>
+    import("../../components/Product/ProductReviews/ProductReviews")
+);
 import "./Product.css";
 import SimilarItems from "../../components/SimilarItems/SimilarItems";
 import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
 import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
 import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
 import ProductPageHeader from "../../components/ProductPageHeader/ProductPageHeader";
+import VisibleOnScroll from "../../components/VisibleOnScroll";
 
 export default function Product() {
     const [isLoading, setIsLoading] = useState(true);
@@ -83,7 +86,10 @@ export default function Product() {
                         ) : (
                             <ProductComponent />
                         )}
-                        <ProductReviews reviews={products} />
+
+                        <VisibleOnScroll>
+                            <ProductReviews reviews={products} />
+                        </VisibleOnScroll>
                         <Recommendation products={products} />
                     </div>
                 </div>

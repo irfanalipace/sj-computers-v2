@@ -23,6 +23,15 @@
     height: 190px;
 }
 
+.product-reviews-section .filter-wrapper {
+    width: 200px;
+    font-size: 10px;
+}
+
+.product-reviews-section .filter-wrapper select {
+    font-size: 14px;
+}
+
 .product-reviews-section .review-card .review-author-image {
     width: 50px;
     height: 50px;
@@ -66,6 +75,10 @@
     color: #7a7d7d;
 }
 
+.product-reviews-section .review-card .helpful-count {
+    font-size: 15px;
+}
+
 .product-reviews-section .review-card .review-helpful-btn {
     background: white;
     border: 1px solid #d5d9d9;
@@ -105,7 +118,7 @@
 }
 .add-new-review .text-area-rating-review-list textarea {
     margin-top: 10px;
-    width: 935px;
+    width: 100%;
     height: 254px;
     border-radius: 10px;
 }
