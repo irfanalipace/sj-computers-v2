@@ -72,7 +72,7 @@ export default function Product() {
                 <ProductVideo />
                 <RefurbishedSection />
                 <ProductDescription product={product} />
-                <TechDetails />
+                <TechDetails product={product} />
             </div>
         );
     };
