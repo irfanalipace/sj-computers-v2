@@ -119,6 +119,7 @@ const Router = () => {
                 </PageWrapper>
             ),
         },
+
         {
             path: "/products/search",
             element: (
@@ -129,7 +130,7 @@ const Router = () => {
         },
 
         {
-            path: "/add-review",
+            path: "/add-review/:productId",
             element: (
                 <PageWrapper>
                    <ProductNewReviews />

@@ -29,7 +29,7 @@ export default function Product() {
         (state) => state.products.similarProducts
     );
     const { productId } = useParams();
-
+      
     useEffect(() => {
         getProductDetails();
     }, [productId]);
@@ -88,7 +88,7 @@ export default function Product() {
                         )}
 
                         <VisibleOnScroll>
-                            <ProductReviews reviews={products} />
+                            <ProductReviews reviews={products} productId={productId}/>
                         </VisibleOnScroll>
                         <Recommendation products={products} />
                     </div>
