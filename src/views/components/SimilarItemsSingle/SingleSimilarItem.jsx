@@ -121,6 +121,7 @@ const SingleSimilarItem = ({ type = "", product }) => {
     return (
         <div
             className="similar-item-one mt-5"
+            // className={` product   ${inGrid && "product-grid"}`}
             onClick={() => {
                 handleClick();
             }}
