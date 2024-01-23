@@ -9,7 +9,7 @@ import CustomPhotoLibrary from "../../AddVideoDialogBox/CustomPhotoLibrary";
 import Rating from "@mui/material/Rating";
 import { useSelector } from "react-redux";
 import { getUserId } from "@services/authService";
-
+import {  useNavigate } from "react-router-dom";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { productPreviewApi, productDetailsbyAsinApi } from "@api/products";
 import { useParams } from "react-router-dom";
@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, lazy } from "react";
 
 const ProductNewReviews = () => {
+    const navegate = useNavigate();
     const [dialogBoxOpen, setDialogBoxOpen] = useState(false);
     const [previewDialogOpen, setPreviewDialogOpen] = useState(false);
     const [parentData, setParentData] = useState([]);
@@ -26,13 +27,15 @@ const ProductNewReviews = () => {
 
     const userEmail = useSelector((state) => state.auth.user.email);
     const userId = useSelector((state) => state.auth.user.id);
+    const userName = useSelector((state) => state.auth.user.name);
+    console.log(userName,'userName')
     const userID = Number(userId);
     const [value, setValue] = useState(2);
     const [text, setText] = useState("");
     const { productId } = useParams();
     const productID = Number(productId);
 
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [product, setProduct] = useState(null);
     const [productImages, setProductImages] = useState([]);
     const products = useSelector((state) => state.products.products);
@@ -108,6 +111,7 @@ const ProductNewReviews = () => {
         e.preventDefault();
 
         try {
+            setIsLoading(true);
             const formData = new FormData();
             formData.append("rating", value);
             formData.append("product_id", product?.id);
@@ -119,8 +123,11 @@ const ProductNewReviews = () => {
 
             // Send the FormData object directly as the body
             await productPreviewApi(formData);
+            console.log(`/${new URL(product?.url).pathname}`, "OOOOO");
         } catch (error) {
             console.error("Error submitting review:", error.message);
+        }finally{
+            setIsLoading(false);
         }
     };
 
@@ -162,7 +169,7 @@ const ProductNewReviews = () => {
                                 <p>Posted publicly as</p>
                             </div>
                             <div className="check-rating-star-review-name">
-                                <p>John Q. Smith | Clear</p>
+                                <p>{userName} | Clear</p>
                             </div>
                         </div>
 
