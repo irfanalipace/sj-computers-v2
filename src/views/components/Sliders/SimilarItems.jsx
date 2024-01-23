@@ -32,7 +32,7 @@ const SimilarItemsSlider = ({ type = "", products }) => {
     };
     return (
         <Swiper
-            slidesPerView={7}
+            slidesPerView={5}
             breakpoints={{
                 // when window width is >= 320px
                 320: {
@@ -52,7 +52,7 @@ const SimilarItemsSlider = ({ type = "", products }) => {
                 },
 
                 1200: {
-                    slidesPerView: 7,
+                    slidesPerView: 5,
                 },
             }}
             navigation
@@ -60,7 +60,7 @@ const SimilarItemsSlider = ({ type = "", products }) => {
             {products?.map((product) => (
                 <SwiperSlide key={"ps-" + product.id}>
                     <div
-                        className="px-1"
+                        // className="px-1"
                         onClick={() => handleClick(product.name)}
                     >
                         <ProductCardSimilarItems
