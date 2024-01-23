@@ -1,13 +1,32 @@
-import { Box, Divider, Stack, Typography, Button } from "@mui/material";
-import React from "react";
-import Tooltip from "../../Tooltip";
+import {
+    Box,
+    Divider,
+    Stack,
+    Typography,
+    Button,
+    Tooltip,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
+// import Tooltip from "../../Tooltip";
 import HoverColorChange from "../../HoverColorChange";
 import StarRatings from "react-star-ratings";
 import RatingDetails from "../ProductReviews/RatingDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import "./ProductDetail.css";
 
 export default function ProductRating({ product }) {
+    const [open, setOpen] = React.useState(false);
+    const [productRewviewDetails, setProductReviewDetails] = useState([]);
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleOpen = async () => {
+        setOpen(true);
+    };
+
     return (
         <Stack
             direction={{
@@ -19,10 +38,15 @@ export default function ProductRating({ product }) {
             gap={2}
         >
             <Tooltip
-                sx={{ left: { xs: "50%", md: "50%" } }}
-                content={
+                arrow
+                // disableTouchListener
+                open={open}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                // sx={{ left: { xs: "50%", md: "50%" } }}
+                title={
                     <>
-                        <RatingDetails product={product} />
+                        <RatingDetails id={product.id} open={open} />
                         <Stack mt={2} spacing={2}>
                             <Divider
                                 sx={{
