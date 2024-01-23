@@ -29,7 +29,7 @@ export default function Product() {
         (state) => state.products.similarProducts
     );
     const { productId } = useParams();
-
+      
     useEffect(() => {
         getProductDetails();
     }, [productId]);
