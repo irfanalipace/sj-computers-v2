@@ -1,0 +1,13 @@
+.tech-details-container {
+    border-top: 1px solid lightgray;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+}
+.tech-details-heading {
+    font-size: 18px;
+    line-height: 24px; /* 133.333% */
+}
+.tech-details {
+    width: 50%;
+}

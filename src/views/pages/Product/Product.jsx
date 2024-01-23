@@ -19,6 +19,7 @@ import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedS
 import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
 import ProductPageHeader from "../../components/ProductPageHeader/ProductPageHeader";
 import VisibleOnScroll from "../../components/VisibleOnScroll";
+import TechDetails from "../../components/TechDetails/TechDetails";
 
 export default function Product() {
     const [isLoading, setIsLoading] = useState(true);
@@ -71,6 +72,7 @@ export default function Product() {
                 <ProductVideo />
                 <RefurbishedSection />
                 <ProductDescription product={product} />
+                <TechDetails />
             </div>
         );
     };
