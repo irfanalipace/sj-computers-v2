@@ -7,18 +7,18 @@ const ProductPageHeader = () => {
   const categories = [
     {
         id: 1,
-        name: "Computers",
+        name: "Business Computers",
         slug: "business_computers",
     },
     {
         id: 2,
-        name: "Laptops",
-        slug: "laptops",
+        name: "Chromebook",
+        slug: "chromebook",
     },
     {
         id: 3,
-        name: "Desktop",
-        slug: "desktop",
+        name: "Gaming Desktops",
+        slug: "gaming_desktops",
     },
     {
         id: 4,
@@ -27,18 +27,18 @@ const ProductPageHeader = () => {
     },
     {
         id: 5,
-        name: "Computers Accessories",
-        slug: "bto",
+        name: "Window 11",
+        slug: "window_11",
     },
     {
         id: 6,
-        name: "PC Components",
-        slug: "pccomponents",
+        name: "SFF",
+        slug: "sff",
     },
     {
         id: 7,
-        name: "PC Gaming",
-        slug: "gaming_desktops",
+        name: "Mini",
+        slug: "mini",
     },
 ];
 
