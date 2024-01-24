@@ -261,3 +261,4 @@ Route::get('cancel', [PaymentController::class, 'paypalCancel'])->name('cancel')
 */
 Route::get('get-product-reviews',[ReviewController::class,'index']);
 Route::get('get-protection-plans',[ProductController::class,'getProtectivePlan']);
+Route::get('get-product-details/{product_id}',[ReviewController::class,'getProductDetail']);
