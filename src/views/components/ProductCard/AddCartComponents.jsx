@@ -50,8 +50,9 @@ const AddCartComponents = ({
             },
             plan: {
                 id: plan?.value || checkplan?.value || 1,
-                price: plan?.price || checkplan?.price,
-                name: plan?.label || checkplan?.label,
+                price: plan?.price || checkplan?.price || 10,
+                label: plan?.label || checkplan?.label,
+                durationInYears: plan?.durationInYears || 0,
             },
         };
 
