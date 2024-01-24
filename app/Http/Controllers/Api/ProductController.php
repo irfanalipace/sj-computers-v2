@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Product\ProductDetailRequest;
+use App\Http\Requests\Product\ProductMediaRequest;
 use App\Http\Requests\Product\SearchProductRequest;
 use App\Http\Requests\ProductDetailAsinRequest;
 use App\Models\CategoryProduct;
@@ -10,15 +11,17 @@ use App\Models\IpAddress;
 use App\Models\Product;
 use App\Models\Product\ProtectivePlan;
 use App\Models\ProductInfo;
+use App\Models\ProductMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 class ProductController extends BaseController
 {
     public function getList(request $request)
     {
 
-        $data = Product::with('brand')->paginate(12);
+        $data = Product::with('brand', 'productMedia')->paginate(12);
         return $this->sendResponse($data);
     }
 
@@ -49,7 +52,7 @@ class ProductController extends BaseController
                 ->orWhere('sku', 'LIKE', '%' . $request->get('name') . '%')
                 ->orWhere('asin', 'LIKE', '%' . $request->get('name') . '%');
         })
-            ->with('brand')
+            ->with('brand', 'productMedia')
             ->paginate($perPageRecord);
 
         $this->saveSearch($request->ip(), $request->name);
@@ -135,7 +138,7 @@ class ProductController extends BaseController
                     ->orWhere('sku', 'LIKE', '%' . $request->get('name') . '%')
                     ->orWhere('asin', 'LIKE', '%' . $request->get('name') . '%');
             })
-                ->with('brand');
+                ->with('brand', 'productMedia');
         }
 
         /*
@@ -233,6 +236,25 @@ class ProductController extends BaseController
         return array_merge($productInfos, $ids);
     }
 
+    public function indexProductMedia()
+    {
+        try {
+            $data = ProductMedia::with('product')->get();
+            return $this->sendResponse($data, 'Product media displayed');
+        } catch (Exception $e) {
+           return $this->sendError(["Error", "Something went wrong." . $e->getMessage()], 500);
+        }
+    }
+
+    public function showProductMedia(ProductMedia $productMedia)
+    {
+        try {
+            $productMedia->load('product');
+            return $this->sendResponse($productMedia, 'Product media displayed');
+        } catch (Exception $e) {
+           return $this->sendError(["Error", "Something went wrong." . $e->getMessage()], 500);
+        }
+    }
     public function getProtectivePlan(Request $request)
     {
         $protectivePlans = ProtectivePlan::all();

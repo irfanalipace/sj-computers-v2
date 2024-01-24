@@ -90,6 +90,12 @@ Route::get('category-product', [CategoryController::class, 'getCategoryProduct']
 
 Route::get('filter-products', [ProductController::class, 'getFilterProducts'])->name('getFilterProducts');
 
+/*
+ * product media
+ */
+Route::get('product-media', [ProductController::class, 'indexProductMedia']);
+Route::get('product-media/{productMedia}', [ProductController::class, 'showProductMedia']);
+
 
 /*
 *Add to Cart
@@ -131,7 +137,7 @@ Route::get('meta_detail', [MetaDetailController::class, 'getDetail'])->name('met
 /*
 *Place Order
 */
-Route::post('place-order', [PaymentGatewayFectory::class, 'placeOrder'])->name('placeOrder')->middleware('auth:api');
+Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder')->middleware('auth:api');
 
 Route::get('success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 
@@ -228,7 +234,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     /*
      * place order
      */
-    Route::post('place-order', [\App\Fectories\PaymentGatewayFectory::class, 'placeOrder'])->name('placeOrder');
+    Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
 
     /*
     * Download inventory Excel
@@ -255,4 +261,3 @@ Route::post('store-career-applications', [CareerApplicationController::class, 's
 Route::post('paypal', [PaypalController::class, 'paypal']);
 Route::get('success', [PaypalController::class, 'success'])->name('success');
 Route::get('cancel', [PaypalController::class, 'cancel'])->name('cancel');
-
