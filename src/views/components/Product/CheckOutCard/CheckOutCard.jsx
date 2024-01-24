@@ -277,12 +277,10 @@ export const CheckOutCard = ({ product }) => {
                                     <div className="in-stock-area-lable">
                                         {product?.quantity > 0 ? (
                                             <small className="in-stock">
-                                                {" "}
                                                 In Stock
                                             </small>
                                         ) : (
                                             <small className="not-in-stock ">
-                                                {" "}
                                                 Out of Stock
                                             </small>
                                         )}
