@@ -22,7 +22,7 @@ function ProductVideoSlider({ videoData}) {
         }
     }
 
-    if(videoData.length == 0){
+    if(videoData?.length == 0){
         return <div>no videos found</div>
     }
 
