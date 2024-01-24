@@ -106,4 +106,19 @@ class ReviewController extends BaseController
     // {
     //     //
     // }
+
+    public function getProductDetail($product_id,Request $request)
+    {
+        try{
+            $productDetail = $this->service->getProductDetails($product_id,$request);
+
+            return $this->sendResponse($productDetail,'Successfully fetched product details.');
+        } catch(ModelNotFoundException $e) {
+           
+            return $this->sendError('error','Product details not found.');
+
+        } catch(Exception $e) {
+            return $this->sendError('error','Something went wrong ' . $e->getMessage());
+        }
+    }
 }

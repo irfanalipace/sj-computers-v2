@@ -1,20 +1,15 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import "./ProductCard.css";
 import AddCartComponents from "./AddCartComponents";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
-import { useParams } from "react-router-dom";
 
 const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
-    const dispatch = useDispatch();
-    const [show, setShow] = useState(false);
-
     const orderEstimatedDelivery = useSelector(
         (state) => state.orders.orderEstimatedDelivery
     );

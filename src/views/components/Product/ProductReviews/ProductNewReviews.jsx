@@ -4,7 +4,7 @@ import img from "../../../../assets/images/product/productreview/productreview.p
 import { Box, Typography } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCamera } from "@fortawesome/free-solid-svg-icons";
-import AddVideoDialogBox from "../../AddVideoDialogBox/AddVideoDialogBox";
+import AddImagesDialogBox from "../../AddVideoDialogBox/AddImagesDialogBox";
 import CustomPhotoLibrary from "../../AddVideoDialogBox/CustomPhotoLibrary";
 import Rating from "@mui/material/Rating";
 import { useSelector } from "react-redux";
@@ -13,8 +13,9 @@ import { useNavigate } from "react-router-dom";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { productPreviewApi, productDetailsbyAsinApi } from "@api/products";
 import { useParams } from "react-router-dom";
-
+import { toast } from "react-toastify";
 import { useEffect, lazy } from "react";
+import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 
 const ProductNewReviews = () => {
     const navigate = useNavigate();
@@ -89,9 +90,12 @@ const ProductNewReviews = () => {
     };
 
     const callbackParent = (data, imgsData) => {
-        setParentData(data);
+        setParentData((prevImages) => [...prevImages, ...data]);
         setImgFiels(imgsData);
     };
+
+  
+
 
     const handleDeleteImage = (index) => {
         const updatedImages = [...parentData];
@@ -124,6 +128,7 @@ const ProductNewReviews = () => {
             // Send the FormData object directly as the body
             await productPreviewApi(formData);
             navigate(`${new URL(product?.url).pathname}`);
+            toast.success("Product Review Succefull Added");
         } catch (error) {
             console.error("Error submitting review:", error.message);
         } finally {
@@ -131,10 +136,24 @@ const ProductNewReviews = () => {
         }
     };
 
+   
+    
+    const breadcrumbRoutes = [
+        {
+            label: `Product`,
+            link:new URL(product?.url || 'https://www.sjcomputers.us')?.pathname,
+        },
+        {
+            label: "Review",
+            link:  `/add-review/${product?.asin}`,
+        },
+    ];
+    
     return (
         <form onSubmit={handleSubmit}>
-            <div className="container add-new-review">
-                <div className="row">
+                 <div className="container add-new-review">
+                 <Breadcrumb routes={breadcrumbRoutes} />
+                <div className="row">  
                     <div className="col-lg-3 col-md-3 col-sm-6 col-12">
                         <div className="review-heading-image-product">
                             <img src={productImages} alt="Product" />
@@ -190,12 +209,14 @@ const ProductNewReviews = () => {
 
                         <div className="preview-button-review">
                             <button
+                            type="button"
                                 className="preview-product-list-button"
                                 onClick={handlePreviewDialog}
                             >
                                 Preview
                             </button>{" "}
                             <button
+                            type="button"
                                 className="camera-button-review"
                                 onClick={handleDialogBox}
                             >
@@ -213,7 +234,7 @@ const ProductNewReviews = () => {
                 </div>
             </div>
             {dialogBoxOpen && (
-                <AddVideoDialogBox
+                <AddImagesDialogBox
                     onClose={handleCloseDialogBox}
                     onhandleCallback={callbackParent}
                     onDeleteImage={handleDeleteImage}
