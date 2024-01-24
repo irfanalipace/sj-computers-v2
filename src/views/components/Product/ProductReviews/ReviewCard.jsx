@@ -8,7 +8,7 @@ function ReviewCard({ reviewData }) {
         <div className="review-card mb-2">
             <div className="d-flex align-items-center">
                 <div>
-                    {reviewData?.image[0] ? (
+                    {reviewData?.image?.[0] ? (
                         <div className="rounded">
                             <img
                                 className="rounded review-author-image"
@@ -23,7 +23,7 @@ function ReviewCard({ reviewData }) {
             </div>
             <div className="d-md-flex align-items-center my-2">
                 <StarRatings
-                    rating={reviewData?.rating}
+                    rating={parseFloat(reviewData?.rating)}
                     starRatedColor="rgb(232, 126, 36)"
                     numberOfStars={5}
                     name="rating"
@@ -39,7 +39,7 @@ function ReviewCard({ reviewData }) {
                 Reviewed in United States on January 27, 2021
             </p>
             <p className="verified-review">Verified Purchase</p>
-            <p className="review-comment my-0">{reviewData?.name}</p>
+            <p className="review-comment my-0">{reviewData?.body}</p>
             <p className="my-2 text-muted py-1 helpful-count">
                 2 People find this helpul
             </p>

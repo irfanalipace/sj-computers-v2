@@ -4,7 +4,14 @@ import "./ProductReviews.css";
 import { Link } from "react-router-dom";
 import ReviewImages from "./ReviewImagesSlider";
 import ReviewCard from "./ReviewCard";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
+import { productReviewsApi } from "../../../../core/api/product-review";
+import {
+    Box,
+    CircularProgress,
+    LinearProgress,
+    Pagination,
+} from "@mui/material";
 const PRODUCT_FILTER_KEY_ENUM = {
     TOP: "top-reviews",
     RECENT: "recent-reviews",
@@ -15,15 +22,41 @@ const PRODUCT_FILTER_LABEL_ENUM = {
     "recent-reviews": "Recent reviews",
 };
 
-function ProductReviews({ reviews, productId, onFilterChange }) {
+const reviewPerPage = 5;
+
+function ProductReviews({ productId, onFilterChange }) {
     const [filterBy, setFilterBy] = useState(PRODUCT_FILTER_KEY_ENUM.TOP);
+    const [reviews, setReviews] = useState([]);
+    const [reviewLoading, setReviewLoading] = useState(false);
+    const reviewRef = useRef(null);
     const isMounted = useRef(false);
+
+    const handlePageChange = (event, value) => {
+        reviewRef.current.focus();
+        getProductReviews(value, reviewPerPage);
+    };
+
+    const getProductReviews = async (page = 1, reviewPerPage) => {
+        try {
+            setReviewLoading(true);
+            const res = await productReviewsApi(page, reviewPerPage);
+            setReviews(res.data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setReviewLoading(false);
+        }
+    };
     useEffect(() => {
         if (isMounted.current) {
             onFilterChange(filterBy);
         }
         isMounted.current = true;
     }, [filterBy]);
+
+    useEffect(() => {
+        getProductReviews(1, reviewPerPage);
+    }, []);
 
     return (
         <div className="product-reviews-section product-section" id="reviews">
@@ -54,17 +87,21 @@ function ProductReviews({ reviews, productId, onFilterChange }) {
                         </div>
                     </div>
                     <div className="col-12 col-sm-6 col-md-8">
-                        <div className="d-flex justify-content-between mb-3">
+                        {/* <div className="d-flex justify-content-between mb-3">
                             <h3 className="product-section-heading">
                                 Reviews with images
                             </h3>
                             <button className="view-all-images-btn">
                                 View all images
                             </button>
-                        </div>
+                        </div> */}
 
-                        <ReviewImages reviews={reviews} />
-                        <div className="filter-wrapper mt-3 mb-0 ">
+                        {/* <ReviewImages reviews={reviews} /> */}
+                        <div
+                            tabIndex="0"
+                            ref={reviewRef}
+                            className="filter-wrapper mt-3 mb-0 "
+                        >
                             <select
                                 className="form-select"
                                 onChange={(e) => setFilterBy(e.target.value)}
@@ -81,11 +118,25 @@ function ProductReviews({ reviews, productId, onFilterChange }) {
                         <h3 className="product-section-heading my-4 py-1">
                             {PRODUCT_FILTER_LABEL_ENUM[filterBy]}
                         </h3>
-                        {reviews.map((review) => (
-                            <div className="my-4">
-                                <ReviewCard reviewData={review} />
-                            </div>
-                        ))}
+                        {reviewLoading ? (
+                            <Box sx={{ height: "100px" }}>
+                                <CircularProgress
+                                    sx={{ ml: 5 }}
+                                    disableShrink
+                                />
+                            </Box>
+                        ) : (
+                            reviews.data?.map((review) => (
+                                <div className="my-4">
+                                    <ReviewCard reviewData={review} />
+                                </div>
+                            ))
+                        )}
+
+                        <Pagination
+                            onChange={handlePageChange}
+                            count={Math.ceil(reviews.total / reviewPerPage)}
+                        />
                     </div>
                 </div>
             </div>

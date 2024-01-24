@@ -100,10 +100,8 @@ export function filterProductsApi(filter) {
     });
 }
 
-
-
 // export function productPreviewApi(formData) {
-    
+
 //     return new Promise((resolve, reject) => {
 //         ApiService.post(`/product-reviews`, formData)
 //             .then((response) => {
@@ -119,12 +117,6 @@ export function filterProductsApi(filter) {
 //             });
 //     });
 // }
-
-
-
-
-
-
 
 export function productPreviewApi(formData) {
     return new Promise((resolve, reject) => {
@@ -142,7 +134,6 @@ export function productPreviewApi(formData) {
             });
     });
 }
-
 
 export function productSpecificDetailsReview(id) {
     return new Promise((resolve, reject) => {
