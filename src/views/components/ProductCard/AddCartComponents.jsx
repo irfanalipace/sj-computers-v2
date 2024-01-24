@@ -35,15 +35,11 @@ const AddCartComponents = ({
     const navigate = useNavigate();
 
     const cartClickHandler = () => {
-        let productPrice = product.price * quantity;
         let cartQuantity = details.total_items + 1;
-        let itemProtectedPlanPrice = parseFloat(plan?.price) * quantity || 0;
-        let cartTotal =
-            parseFloat(details?.total) + productPrice + itemProtectedPlanPrice;
-        let cartSubTotal =
-            parseFloat(details?.sub_total) +
-            productPrice +
-            itemProtectedPlanPrice;
+        let itemProtectedPlanPrice = parseFloat(plan?.price) * quantity || 10;
+        let productPrice = product.price * quantity + itemProtectedPlanPrice;
+        let cartTotal = parseFloat(details?.total) + productPrice;
+        let cartSubTotal = parseFloat(details?.sub_total) + productPrice;
         const cartItem = {
             id: product.id,
             quantity,
@@ -53,9 +49,9 @@ const AddCartComponents = ({
                 in_stock: quantity >= product.quantity ? false : true,
             },
             plan: {
-                id: plan?.value || checkplan?.value,
+                id: plan?.value || checkplan?.value || 1,
                 price: plan?.price || checkplan?.price,
-                name:plan?.label || checkplan?.label
+                name: plan?.label || checkplan?.label,
             },
         };
 
