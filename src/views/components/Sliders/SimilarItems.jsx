@@ -42,18 +42,22 @@ const SimilarItemsSlider = ({ type = "", products }) => {
             }}
             navigation
         >
-            {products?.map((product) => (
-                <SwiperSlide key={"ps-" + product?.id}>
-                    <div
-                    // className="px-1"
-                    >
-                        <ProductCardSimilarItems
-                            type={type}
-                            product={product}
-                        />
-                    </div>{" "}
-                </SwiperSlide>
-            ))}
+            {products?.length > 0 ? (
+                products?.map((product) => (
+                    <SwiperSlide key={"ps-" + product?.id}>
+                        <div
+                        // className="px-1"
+                        >
+                            <ProductCardSimilarItems
+                                type={type}
+                                product={product}
+                            />
+                        </div>{" "}
+                    </SwiperSlide>
+                ))
+            ) : (
+                <>There are no similar items to this product.</>
+            )}
         </Swiper>
     );
 };
