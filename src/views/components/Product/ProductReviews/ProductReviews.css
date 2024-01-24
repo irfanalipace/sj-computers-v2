@@ -53,6 +53,7 @@
 .product-reviews-section .review-card .review-author-image {
     width: 50px;
     height: 50px;
+    border-radius: 50%;
 }
 
 .product-reviews-section .review-card .review-author {
@@ -174,7 +175,6 @@
     height: 49px;
 }
 
-
 .review-heading-image-product img {
     width: 100%;
     max-height: 270px;
@@ -185,7 +185,7 @@
     margin-left: 6px;
     color: #007185;
 }
-.data-clear-button-review button{
+.data-clear-button-review button {
     background: none;
     border: none;
     color: #007185;

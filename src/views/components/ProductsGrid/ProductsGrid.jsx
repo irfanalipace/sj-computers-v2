@@ -17,26 +17,13 @@ export default function ProductsGrid({
     smallBtn = false,
 }) {
     const isShowMore = useSelector((state) => state.products.isShowMore);
-    const dispatch = useDispatch();
-    const getSimilarProduct = async (name) => {
-        try {
-            const splitName = name.split(",", 1);
-            const nameBeforeComma = splitName[0];
-            await dispatch(fetchSimilarProducts({ name: nameBeforeComma }));
-        } catch (error) {}
-    };
+
     return (
         <div className="products-grid-wrapper">
             <div className="products-grid product-gride-card-componets-mobile-screen mb-3 ">
                 <Row className="mx-0 justify-content-left">
                     {products?.map((product) => (
-                        <Col
-                            xs={6}
-                            md={4}
-                            lg={2}
-                            key={product.id}
-                            onClick={() => getSimilarProduct(product.name)}
-                        >
+                        <Col xs={6} md={4} lg={2} key={product.id}>
                             {/* <Link to={`${new URL(product?.url || location.href).pathname}`}> */}
                             <ProductCard product={product} inGrid={true} />
 

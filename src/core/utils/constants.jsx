@@ -27,9 +27,24 @@ export const shippingMethods = [
     // },
 ];
 export const PlanEnum = {
-    THREE_YEAR: { value: 1, label: "3-Year", price: "23.99" },
-    FOUR_YEAR: { value: 2, label: "4-Year", price: "32.99" },
-    DEFAULT: { value: 3, label: "unlimited", price: "16.99" },
+    THREE_YEAR: {
+        value: 1,
+        label: "3-Year",
+        price: 23.99,
+        durationInYears: 3,
+    },
+    FOUR_YEAR: {
+        value: 2,
+        label: "4-Year",
+        price: 32.99,
+        durationInYears: 2,
+    },
+    DEFAULT: {
+        value: 3,
+        label: "unlimited",
+        price: 16.99,
+        durationInYears: 0,
+    },
 };
 export const dummyCategories = [
     { name: "ALL", id: null, slug: "" },
