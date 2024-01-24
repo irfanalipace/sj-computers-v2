@@ -120,9 +120,7 @@ const AddCartComponents = ({
                 <ProtectionPlanDrawer
                     closeDrawer={() => setOpen(false)}
                     handleButton={() => {
-                        if (open) {
-                            cartClickHandler();
-                        }
+                        setOpen(false);
                     }}
                     handleAddingProtec={() => {
                         if (plan.value) {
