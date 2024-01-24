@@ -66,7 +66,7 @@ class ReviewService
     public function getProductDetails($product_id)
     {
         $with = ['productMedia:id,product_review_id,media_type,file_path','user:id,name'];
-        $review = ProductReview::where('product_id',$product_id)->with('productMedia:id,product_review_id,media_type,file_path','user:id,name')->select('id','user_id','product_id','title','body','rating')->first();
+        $review = ProductReview::where('product_id',$product_id)->with('productMedia:id,product_review_id,media_type,file_path','user:id,name')->select('id','user_id','product_id','title','body','rating')->firstOrFail();
         $stats = ProductStatistic::where('product_id',$product_id)->select('product_id','statistics')->first();
         $details = [
             'product_detail' => $review,
