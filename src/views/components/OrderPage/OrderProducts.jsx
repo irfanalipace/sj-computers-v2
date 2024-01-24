@@ -7,7 +7,6 @@ import {
     Image,
     Button,
 } from "@mantine/core";
-import { ButtonGroup } from "@mantine/core";
 import Pagination from "@mui/material/Pagination";
 
 import "./OrderProducts.css";

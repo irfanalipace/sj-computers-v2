@@ -118,3 +118,52 @@ export function removeProtocolAndBaseUrl(url) {
     // If no match is found, return the original URL
     return url;
 }
+
+export const createThumbnail = async (videoSrc) => {
+    return new Promise((resolve, reject) => {
+        const video = document.createElement('video');
+        video.crossOrigin = 'anonymous';
+        video.src = videoSrc;
+ 
+        video.addEventListener('loadeddata', () => {
+            video.currentTime = 1;
+ 
+            video.addEventListener('seeked', () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+ 
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+ 
+                const imageDataUrl = canvas.toDataURL();
+                resolve(imageDataUrl);
+            }, { once: true });
+        });
+ 
+        video.addEventListener('error', (e) => {
+            reject(new Error(`Error loading video: ${e.message}`));
+        });
+    });
+};
+export function filterFiles(files, allowedTypes, maxSize = 5) {
+    const maxSizeInBytes = maxSize * 1024 * 1024;
+    const validFiles = [];
+    const errors = [];
+    Array.from(files).forEach((file) => {
+        if (file?.size > maxSizeInBytes) {
+            errors.push(
+                `${file.name} exceeds the maximum allowed file size of ${maxSize}MB.`
+            );
+        } else if (!allowedTypes.includes(file?.type)) {
+            errors.push(`${file?.name} has an invalid file type.`);
+        } else {
+            validFiles.push(file);
+        }
+    });
+
+    return {
+        validFiles: validFiles,
+        errors: errors,
+    };
+}

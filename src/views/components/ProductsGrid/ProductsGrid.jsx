@@ -1,5 +1,5 @@
 import { Row, Col } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoadMore from "@common/Button/LoadMore";
 import ProductCard from "@components/ProductCard/ProductCard";
 import OverlayLoader from "@common/LoaderComponent/OverlayLoader";
@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import "./ProductsGrid.css";
 
 import Button from "@common/Button/Button";
+import { fetchSimilarProducts } from "@store/products/productsThunks";
 
 export default function ProductsGrid({
     products,
@@ -16,14 +17,27 @@ export default function ProductsGrid({
     smallBtn = false,
 }) {
     const isShowMore = useSelector((state) => state.products.isShowMore);
-
+    const dispatch = useDispatch();
+    const getSimilarProduct = async (name) => {
+        try {
+            const splitName = name.split(",", 1);
+            const nameBeforeComma = splitName[0];
+            await dispatch(fetchSimilarProducts({ name: nameBeforeComma }));
+        } catch (error) {}
+    };
     return (
         <div className="products-grid-wrapper">
             <div className="products-grid product-gride-card-componets-mobile-screen mb-3 ">
                 <Row className="mx-0 justify-content-left">
                     {products?.map((product) => (
-                        <Col xs={6} md={4} lg={2} key={product.id}>
-                            {/* <Link to={`${product?.url}`}> */}
+                        <Col
+                            xs={6}
+                            md={4}
+                            lg={2}
+                            key={product.id}
+                            onClick={() => getSimilarProduct(product.name)}
+                        >
+                            {/* <Link to={`${new URL(product?.url || location.href).pathname}`}> */}
                             <ProductCard product={product} inGrid={true} />
 
                             {/* </Link> */}

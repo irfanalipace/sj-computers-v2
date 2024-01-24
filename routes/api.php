@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
 //use App\Http\Controllers\Api\PayPal\PaypalController;
 use App\Http\Controllers\Api\Payment\PayPalController;
+// use App\Http\Controllers\Api\PayPalController;
 use App\Http\Controllers\Api\PayPal\PaypalwebhookController;
 use App\Http\Controllers\Api\ShoppingCart\CartController;
 use App\Http\Controllers\Api\Setting\ProfileController;
@@ -228,7 +229,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     /*
      * place order
      */
-    Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
+    // Route::post('place-order', [\App\Fectories\PaymentGatewayFectory::class, 'placeOrder'])->name('placeOrder');
 
     /*
     * Download inventory Excel
@@ -256,8 +257,3 @@ Route::post('paypal', [PayPalController::class, 'paypal'])->name('paypal');
 Route::get('success', [PaymentController::class, 'paypalSuccess'])->name('success');
 Route::get('cancel', [PaymentController::class, 'paypalCancel'])->name('cancel');
 
-/* 
-    Get all reviews
-*/
-Route::get('get-product-reviews',[ReviewController::class,'index']);
-Route::get('get-protection-plans',[ProductController::class,'getProtectivePlan']);

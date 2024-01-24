@@ -6,10 +6,11 @@ const initialState = {
     isSearchedProducts: false,
     isShowMore: false,
     filtersArray: [],
+    similarProducts: [],
     isFiltering: false,
     selectedCategory: null,
     apiError: false,
-    isLoading: false,
+    isLoading: true,
     currentPage: 1,
 };
 
@@ -55,6 +56,20 @@ const productSlice = createSlice({
             state.currentPage = state.currentPage + 1;
             state.isLoading = false;
             state.isFiltering = false;
+            state.isShowMore = false;
+        },
+
+        FETCH_SIMILAR_PRODUCTS: (state, action) => {
+            // if (state.currentPage === 1)
+            state.similarProducts = [...action.payload];
+            // else
+            //     state.similarProducts = [
+            //         ...state.similarProducts,
+            //         ...action.similarProducts,
+            //     ];
+            state.currentPage = state.currentPage + 1;
+            state.isLoading = false;
+            // state.isFiltering = false;
             state.isShowMore = false;
         },
         SEARCH_PRODUCTS: (state, action) => {
@@ -128,6 +143,7 @@ export const {
     SET_SEARCH_STRING,
     FILTER_PRODUCTS,
     CLEAR_PRODUCTS,
+    FETCH_SIMILAR_PRODUCTS,
     CLEAR_SEARCH,
     CLEAR_ALL_PRODUCTS,
     RESET_PAGE,

@@ -5,6 +5,8 @@ import ApiService from "@services/apiService";
 const token = getToken();
 const user = getUser();
 token && ApiService.setAuthorization(token);
+const urlParams = new URLSearchParams(window.location.search);
+const loginStage = urlParams.get("loginStage");
 
 const initialState = {
     user: user ? user : null,
@@ -13,7 +15,7 @@ const initialState = {
     isLoading: false,
     isDeletingPic: false,
     accessToken: token,
-    currentPage: 1,
+    currentPage: parseInt(loginStage) || 1,
 };
 
 const authSlice = createSlice({

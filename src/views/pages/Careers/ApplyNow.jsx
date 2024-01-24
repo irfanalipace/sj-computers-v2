@@ -4,19 +4,9 @@ import { faEnvelope, faMobile } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import {
-    TextField,
-    Button,
-    Container,
-    Typography,
-    Paper,
-    Grid,
-    InputAdornment,
-    InputLabel,
-} from "@mui/material";
+import { TextField, Button, InputAdornment, InputLabel } from "@mui/material";
 import "../../components/Footer/FooterMenu/Contact.css";
 import { Box } from "@mui/material";
-import { FileInput } from "@mantine/core";
 import { AttachFile } from "@material-ui/icons";
 import { prettifyErrorfromObjectToArray } from "../../../core/utils/helpers";
 import { CreateCareer } from "../../../core/api/careers";

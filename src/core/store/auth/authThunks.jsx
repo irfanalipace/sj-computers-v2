@@ -126,9 +126,10 @@ export const verifyOtp = (credentials) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOADING, payload: {} });
-            await verifyOtpApi(credentials);
             let temp_token = getTempToken();
+            await verifyOtpApi(credentials, temp_token);
             let user = getUser();
+            ApiService.setHeader("Authorization", `$Bearer ${temp_token}`);
             dispatch({ type: VERIFY_OTP, payload: { ...user } });
             destroyTempKeys(); // destroy user password and temporary token after login success
             saveToken(temp_token); // stores temporary token in right key to be used later for calling protected apis
@@ -172,7 +173,7 @@ export const forgetPassword = (email, cb) => {
 export const alreadyLoggedIn = (token) => {
     return async (dispatch) => {
         let user = getUser();
-        ApiService.setHeader("Authorization", "Bearer " + token);
+        ApiService.setHeader("Authorization", `$Bearer ${token}`);
         dispatch(ALREADY_LOGGED_IN(user));
     };
 };

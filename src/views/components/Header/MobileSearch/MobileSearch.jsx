@@ -9,7 +9,7 @@ import { SET_SEARCH_STRING } from "@store/products/productsSlice";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
-import Sidebar from "@components/Sidebar/Sidebar.jsx";
+import Sidebar from "@components/Sidebar/Sidebar";
 import { useSearchParams } from "react-router-dom";
 const MobileScreenModal = lazy(() =>
     import("./MobileScreenModal/MobileScreenModal")

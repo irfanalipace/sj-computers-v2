@@ -1,0 +1,201 @@
+ .card-container-view {
+    padding: 10px;
+    box-shadow: 0 0 5px wheat;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.card-container-view .top {
+    text-align: center;
+}
+ .card-container-view p {
+    font-weight: bold;
+    color: #0086fe;
+}
+.custome-model-item-filter.modal .modal-content {
+   
+    width: 692px !important;
+    height: auto;
+}
+ /* button {
+    outline: 0;
+    border: 0;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 400;
+    padding: 8px 13px;
+    width: 100%;
+    background: #0086fe;
+} */
+.upload-button-view-button {
+    width: 78px;
+    height: 31px;
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+    margin-left: 7px;
+    border: 1px solid green;
+}
+.cancel-button-preview{
+    width: 78px;
+height: 31px;
+border-radius: 5px;
+border: 1px;
+
+}
+.drag-area-data {
+    padding-top: 83px;
+    height: 296px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px dotted #d5d3db;
+    color: black;
+    background: #f4f3f9;
+    align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+}
+  
+  /* Add cursor:pointer to make it clear that it's clickable */
+  .drag-area-data:hover {
+    cursor: pointer;
+  }
+  .upload-cancel-dev {
+    display: flex;
+    justify-content: end;
+    /* display: flex; */
+    /* justify-content: space-between; */
+}
+.drag-area-data .visible {
+    font-size: 18px;
+}
+.drop-import-section-p {
+    font-size: 19px;
+    margin-top: 32px;
+}
+.input-fileds-area-sections-data-powerd{
+    display: none;
+}
+.dev-droping-area-sction-files-area {
+    margin-top: 23px;
+    margin-bottom: 23px;
+}
+.drag-area-data .select-image-file-drop {
+   
+    color: black;
+    margin-left: 5px;
+    padding: 8px;
+    cursor: pointer;
+    transition: 0.4s;
+    border: 1px solid #AAAAAA;
+    border-radius: 5px;
+}
+.select-image-file-drop:hover {
+    opacity: 0.6;
+}
+ .container-image-drop {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+.list-image-container {
+    width: 115px;
+    margin-right: 7px;
+    height: 95px;
+    position: relative;
+    margin-bottom: 8px;
+}
+ .list-image-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+.list-image-container button {
+    position: absolute;
+    top: -2px;
+    right: 0px;
+    font-size: 20px;
+    cursor: pointer;
+    color: black;
+    background: none;
+    padding: 0px;
+    border: none;
+}
+.custome-model-item-filter .card input,
+.card .drag-area .on-drop,
+.card .drag-area .dragover .visible {
+    display: none;
+}
+.delete-button-data {
+    z-index: 999;
+    color: #0086fe;
+}
+
+.logout-icon-button-view-list-area {
+    background: white;
+    padding: 12px;
+    border-radius: 23px;
+    color: #6b6363;
+    box-shadow: 1px 1px 1px 1px white;
+}
+
+
+.model-gellery-preview {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* justify-content: initial; */
+}
+.custome-model-gellery-view .modal-content {
+    height: auto;
+}
+
+.alist-image-container-preview-modal {
+    width: auto;
+    margin-right: 10px;
+    height: 95px;
+    position: relative;
+    margin-bottom: 34px;
+}
+.alist-image-container-preview-modal img {
+    width: 200px;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.alist-image-container-preview-modal button {
+    position: absolute;
+    top: -2px;
+    right: 0px;
+    font-size: 20px;
+    cursor: pointer;
+    color: black;
+    background: none;
+    padding: 0px;
+    border: none;
+}
+.preview-button-container-dialogbox{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+   
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+.backbutton-preview {
+    padding: 0px;
+    border: none;
+    background: none;
+}
+.error-message-file-formated-issues{
+    font-size: 12px;
+}
+

@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Router from "@src/Routes";
 const TawkTo = lazy(() => import("@components/Tawk.To/Messenger"));
-import initServices from "@services/initServices";
+import services from "@services/initServices";
 import Header from "@components/Header/Header";
 const Footer = React.lazy(() => import("@components/Footer/Footer"));
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +15,7 @@ import AppWrapper from "@components/AppWrapper/AppWrapper";
 
 function App() {
     const [tawkComponent, setTawkComponent] = useState(<></>);
-    initServices.init(); //initialize services
+    services.init(); //initialize all services
 
     useEffect(() => {
         setTimeout(() => {
@@ -29,7 +29,7 @@ function App() {
     }, []);
 
     return (
-        <AppWrapper>
+        <div>
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -44,23 +44,24 @@ function App() {
                 className={"notification-toast"}
             />
             <BrowserRouter>
-                {/* scroller set for scroll bottom to top  */}
-                <ScrollToTop />
-                <Suspense>
-                    <Header />
-                </Suspense>
-                <div className="inner-body">
-                    <Router />
-                </div>
-                <Suspense>
-                    <Footer />
-                </Suspense>
+                <AppWrapper>
+                    <ScrollToTop />
+                    <Suspense>
+                        <Header />
+                    </Suspense>
+                    <div className="inner-body">
+                        <Router />
+                    </div>
+                    <Suspense>
+                        <Footer />
+                    </Suspense>
+                </AppWrapper>
             </BrowserRouter>
             {tawkComponent}
             {/* <Suspense>
                 <TawkTo />
             </Suspense> */}
-        </AppWrapper>
+        </div>
     );
 }
 
