@@ -1,9 +1,15 @@
 import ApiService from "@services/apiService";
 
-export function getProductReviewDetails(id) {
+export function productReviewsApi(id, page = 1, per_page = 10) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/product-reviews/${id}`)
+        ApiService.get(
+            `get-product-details/${id}?page=${page}&per_page=${per_page}`
+        )
             .then((response) => {
+                console.print(
+                    "file: products.js | products| response",
+                    response
+                );
                 resolve(response);
             })
             .catch((e) => {

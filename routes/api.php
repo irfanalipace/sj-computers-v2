@@ -90,6 +90,12 @@ Route::get('category-product', [CategoryController::class, 'getCategoryProduct']
 
 Route::get('filter-products', [ProductController::class, 'getFilterProducts'])->name('getFilterProducts');
 
+/*
+ * product media
+ */
+Route::get('product-media', [ProductController::class, 'indexProductMedia']);
+Route::get('product-media/{productMedia}', [ProductController::class, 'showProductMedia']);
+
 
 /*
 *Add to Cart
@@ -261,3 +267,5 @@ Route::get('cancel', [PaymentController::class, 'paypalCancel'])->name('cancel')
 */
 Route::get('get-product-reviews',[ReviewController::class,'index']);
 Route::get('get-protection-plans',[ProductController::class,'getProtectivePlan']);
+Route::get('get-product-details/{product_id}',[ReviewController::class,'getProductDetail']);
+
