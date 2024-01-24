@@ -136,7 +136,7 @@ const ProductNewReviews = () => {
         }
     };
 
-    console.log(product?.url, '@@@')
+   
     
     const breadcrumbRoutes = [
         {

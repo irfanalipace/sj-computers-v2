@@ -16,8 +16,10 @@ import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
 import ProductPageHeader from "../../components/ProductPageHeader/ProductPageHeader";
 import VisibleOnScroll from "../../components/VisibleOnScroll";
 import useProductData from "./useProductData";
+import Breadcrumb from "../../components/common/Breadrumb/Breadcrumb";
 
 export default function Product() {
+    
     const {
         isLoading,
         product,
@@ -28,9 +30,12 @@ export default function Product() {
     } = useProductData();
 
     const ProductComponent = () => {
+  
         return (
             <div className="row">
                 <div className="col-12 col-md-4">
+               
+
                     <ProductImage ProductImages={productImages} />
                 </div>
                 <div className="col-12 col-md-5">
@@ -59,6 +64,7 @@ export default function Product() {
                             <LoaderComponent />
                         ) : (
                             <>
+                         
                                 <ProductComponent />
                                 <VisibleOnScroll>
                                     <ProductReviews
