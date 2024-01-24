@@ -20,7 +20,6 @@ class ProductController extends BaseController
 {
     public function getList(request $request)
     {
-
         $data = Product::with('brand', 'productMedia')->paginate(12);
         return $this->sendResponse($data);
     }
@@ -40,7 +39,8 @@ class ProductController extends BaseController
 
     public function getProductDetailAsin(ProductDetailAsinRequest $request)
     {
-        $data = Product::where('asin', $request->asin)->first();
+        $data = Product::with('productMedia')
+            ->where('asin', $request->asin)->first();
         return $this->sendResponse($data);
     }
 
