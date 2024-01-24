@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogActions, Button, Grid, IconButton, Box, Ty
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import AppsIcon from '@mui/icons-material/Apps';
 import ReviewCard from '../ReviewCard';
+import "./ReviewDialog.css"
 
 // Slider Imports
 import SwiperCore, { Navigation, Pagination } from "swiper";
@@ -12,6 +13,13 @@ import "swiper/swiper-bundle.min.css";
 import "swiper/css/navigation";
 
 const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId , imgIndex = 0 , ReviewsData}) => {
+
+
+  // const handleSwitchImage = (index) => {
+  //   // console.log(index, "index");
+  //   setImgnum(index)
+  // }
+  const [imgGallery, setImgGallery] = useState(true)
 
   const getReviewById = (reviewId) => {
     const review = ReviewsData.reviews.find((r) => r.reviewId === reviewId);
@@ -29,7 +37,9 @@ const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId , imgIndex
                 <IconButton onClick={handleClose}><CloseOutlinedIcon /></IconButton>
             </DialogActions>
               </Box>
-          <Grid container p={2} rowGap={1} width={"100%"} >
+
+          { imgGallery == false ?
+           <Grid container p={2} rowGap={1} width={"100%"} >
               <Grid item xs={12}>
                 <Typography variant='body2'>
                   <AppsIcon />
@@ -59,14 +69,26 @@ const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId , imgIndex
                   <Typography py={1} variant='body2' fontSize={"small"}>Images</Typography>
                   <div style={{display: "flex"}}>
                     {selectedReview?.images?.map((image, index) => (
-                  <Box key={index} width={"59px"} height={"59px"} border={"2px solid orange"} sx={{mr: "10px" ,backgroundImage: `url(${image?.imageUrl})`, backgroundSize: "cover" }} ></Box>
+                      <Box key={index} onClick={() => handleSwitchImage(index)} width={"59px"} height={"59px"} border={"2px solid orange"} sx={{mr: "10px" ,backgroundImage: `url(${image?.imageUrl})`, backgroundSize: "cover" }} ></Box>
                     ))}
-                  {/* <Box width={"59px"} height={"59px"} sx={{mr: "10px" ,background: "url(https://images.unsplash.com/photo-1541363111435-5c1b7d867904?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZHVtbXl8ZW58MHx8MHx8fDA%3D)", backgroundSize: "cover" }} ></Box> */}
-                  {/* <Box width={"59px"} height={"59px"} sx={{mr: "10px" ,background: "url(https://images.unsplash.com/photo-1541363111435-5c1b7d867904?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZHVtbXl8ZW58MHx8MHx8fDA%3D)", backgroundSize: "cover" }} ></Box> */}
                   </div>
                 </Grid>
               </Grid>
           </Grid>
+          : 
+            // ---- image Gallery --- 
+          <div style={{minHeight: "30rem"}}>  
+          <div className='gallery-container'>  
+          {ReviewsData?.reviews?.map((data, index) => (
+            <div key={index} className='images-container'>
+            {data?.images?.map((image, i) => (
+              <div key={i} className='image-item' style={{backgroundImage: `url(${image.imageUrl})`}}></div>
+            ))}    
+            </div>
+          ))}
+          </div>
+          </div>
+           } 
         </DialogContent>
     </Dialog>
   )
