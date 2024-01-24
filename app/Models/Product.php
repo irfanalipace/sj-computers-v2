@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
@@ -28,6 +29,10 @@ class Product extends Model
         return $this->belongsToMany(Category::class, 'category_product')->paginate(12);
     }
 
+    public function productMedia()
+    {
+        return $this->hasMany(ProductMedia::class);
+    }
     public function holdProducts()
     {
         return $this->hasMany(HoldReleaseUser::class)->where('status', 'hold');
@@ -71,6 +76,10 @@ class Product extends Model
         return mt_rand(3 * 10, 5 * 10) / 10;
     }
 
+    public function productStats() :BelongsTo
+    {
+        return $this->belongsTo(ProductStatistic::class);
+    }
     /**
      * @return void
      */
