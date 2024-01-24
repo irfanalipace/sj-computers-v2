@@ -49,9 +49,6 @@ const ProductVideo = ({product}) => {
     fetchData();
   }, [product]); 
 
-  if(videoData == undefined){
-    return <div>product_media is undefined </div>
-  }
         // console.log(videoData, "a");
     
     return (

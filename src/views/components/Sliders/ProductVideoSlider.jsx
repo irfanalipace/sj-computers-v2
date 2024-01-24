@@ -22,9 +22,13 @@ function ProductVideoSlider({ videoData}) {
         }
     }
 
+    if(videoData == undefined){
+        return <div>product_media is undefined </div>
+    }
     if(videoData?.length == 0){
         return <div>no videos found</div>
     }
+    
 
     return (
         <Grid item xs={12} md={12} lg={12} px={4} sx={{"@media (max-width: 600px)": { padding: 0 }}} >
