@@ -63,11 +63,11 @@ class ReviewService
     }
     
     /* Show detials with media and statistics */
-    public function getProductDetails($request)
+    public function getProductDetails($product_id,$request)
     {
         $with = ['productMedia:id,product_review_id,media_type,file_path','user:id,name,profile_pic,avatar'];
-        $review = ProductReview::where('product_id',$request->product_id)->with($with)->select('id','user_id','product_id','title','body','rating')->paginate($request->per_page ?? 10);
-        $stats = ProductStatistic::where('product_id',$request->product_id)->select('product_id','statistics')->first();
+        $review = ProductReview::where('product_id',$product_id)->with($with)->select('id','user_id','product_id','title','body','rating')->paginate($request->per_page ?? 10);
+        $stats = ProductStatistic::where('product_id',$product_id)->select('product_id','statistics')->first();
         $details = [
             'product_detail' => $review,
             'product_stats' => $stats
