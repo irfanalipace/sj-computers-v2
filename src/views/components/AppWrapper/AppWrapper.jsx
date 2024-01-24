@@ -60,7 +60,6 @@ const AppWrapper = ({ children }) => {
     }, [isAuthenticated]);
 
     useEffect(() => {
-        console.log("1111", isMounted.current, state);
         if (isMounted.current && state)
             // fetch esimated delivery dates if initial render has happened and no state is selected
             setTimeout(() => {
