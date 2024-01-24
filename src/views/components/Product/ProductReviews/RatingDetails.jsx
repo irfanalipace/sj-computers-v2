@@ -10,7 +10,7 @@ export default function RatingDetails({ id, open }) {
     const getReview = async () => {
         setLoading(true);
         try {
-            const res = await getProductReviewDetails(1);
+            const res = await getProductReviewDetails(id);
             console.log(res);
         } catch (error) {
             console.error(error);
