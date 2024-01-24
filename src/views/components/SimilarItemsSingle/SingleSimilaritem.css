@@ -16,6 +16,7 @@
     width: auto;
     height: 140px;
     object-fit: cover;
+    max-width: 150px;
 }
 .similar-item-one-inner {
     margin-top: 10px;
