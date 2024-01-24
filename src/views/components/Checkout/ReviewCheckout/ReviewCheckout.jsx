@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import ReviewButton from "./ReviewButton";
 // import { QuantityInput } from "@common/QuantityInput/QuantityInput";
+import WarrantyBadge from "@components/ShoppingCart/CartItem/WarrantyBadge";
 
 import "./ReviewCheckout.css";
 
@@ -45,7 +46,14 @@ export default function ReviewCheckout({
                             </div>
                             <div className="item-detail">
                                 <h6>{item.product.name}</h6>
-                                <h6 className="price">${item.price}</h6>
+                                <WarrantyBadge
+                                    durationInYears={
+                                        item?.plan?.durationInYears
+                                    }
+                                />
+                                <h6 className="price">
+                                    ${item.price.toFixed(2)}
+                                </h6>
                                 <h6 className="quantity">
                                     Quantity: {item.quantity}
                                 </h6>

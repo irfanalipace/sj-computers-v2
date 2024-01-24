@@ -88,10 +88,14 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
             const cartData = cartItems?.map((item) => {
                 // map item according to the request payload format
                 total_quantity += item?.quantity;
-                return {
+                const obj = {
                     product_id: item.id,
                     qty: item.quantity,
                 };
+                if (item.plan?.id && !isAuthenticated) {
+                    obj.protection_plan_id = item.plan.id;
+                }
+                return obj;
             });
             let paymentParams = {
                 source_id: token.token,

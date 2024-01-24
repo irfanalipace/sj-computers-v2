@@ -21,7 +21,7 @@ const AddCartComponents = ({
     ...rest
 }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const cart = useSelector((state) => state.cart.cart);
+    // const cart = useSelector((state) => state.cart.cart);
     const details = useSelector((state) => state.cart.details);
     const productAddingToCard = useSelector(
         (state) => state.products.isLoading
@@ -72,10 +72,10 @@ const AddCartComponents = ({
             );
         }
     };
-    useEffect(() => {
-        let item = cart.find((ci) => ci.id === product.id);
-        setCartItem(item);
-    }, [cart]);
+    // useEffect(() => {
+    //     let item = cart.find((ci) => ci.id === product.id);
+    //     setCartItem(item);
+    // }, [cart]);
 
     const getPlanvalue = (id) => {
         const matchingEnum = Object.values(PlanEnum).find(
