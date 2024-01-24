@@ -25,7 +25,7 @@ const PRODUCT_FILTER_LABEL_ENUM = {
 
 const reviewPerPage = 5;
 
-function ProductReviews({ productId, onFilterChange }) {
+function ProductReviews({ productId, productAsin, onFilterChange }) {
     const [filterBy, setFilterBy] = useState(PRODUCT_FILTER_KEY_ENUM.TOP);
     const [reviews, setReviews] = useState([]);
     const [reviewLoading, setReviewLoading] = useState(false);
@@ -34,13 +34,13 @@ function ProductReviews({ productId, onFilterChange }) {
 
     const handlePageChange = (event, value) => {
         reviewRef.current.focus();
-        getProductReviews(value, reviewPerPage);
+        getProductReviews(productId, value, reviewPerPage);
     };
 
-    const getProductReviews = async (page = 1, reviewPerPage) => {
+    const getProductReviews = async (id, page = 1, reviewPerPage) => {
         try {
             setReviewLoading(true);
-            const res = await productReviewsApi(page, reviewPerPage);
+            const res = await productReviewsApi(id, page, reviewPerPage);
             setReviews(res.data);
         } catch (error) {
             console.error(error);
@@ -56,7 +56,7 @@ function ProductReviews({ productId, onFilterChange }) {
     }, [filterBy]);
 
     useEffect(() => {
-        getProductReviews(1, reviewPerPage);
+        getProductReviews(productId, 1, reviewPerPage);
     }, []);
 
     return (
@@ -73,7 +73,7 @@ function ProductReviews({ productId, onFilterChange }) {
                                 <p className="fs-6 mb-3">
                                     Share your thoughts with other customers
                                 </p>
-                                <Link to={`/add-review/${productId}`}>
+                                <Link to={`/add-review/${productAsin}`}>
                                     <button
                                         className="bg-white border my-1 w-100 rounded-3 shadow"
                                         style={{
@@ -98,12 +98,13 @@ function ProductReviews({ productId, onFilterChange }) {
                         </div> */}
 
                         {/* <ReviewImages reviews={reviews} /> */}
-                        {reviews?.data?.length === 0 && !reviewLoading && (
-                            <Typography fontWeight={600}>
-                                No customer reviews
-                            </Typography>
-                        )}
-                        {!!reviews?.data?.length && (
+                        {reviews?.product_detail?.length === 0 &&
+                            !reviewLoading && (
+                                <Typography fontWeight={600}>
+                                    No customer reviews
+                                </Typography>
+                            )}
+                        {!!reviews?.product_detail?.length && (
                             <>
                                 <div
                                     tabIndex="0"
@@ -144,14 +145,14 @@ function ProductReviews({ productId, onFilterChange }) {
                                 />
                             </Box>
                         ) : (
-                            reviews.data?.map((review) => (
+                            reviews.product_detail?.map((review) => (
                                 <div className="my-4">
                                     <ReviewCard reviewData={review} />
                                 </div>
                             ))
                         )}
 
-                        {!!reviews?.data?.length && (
+                        {!!reviews?.product_detail?.length && (
                             <Pagination
                                 onChange={handlePageChange}
                                 count={Math.ceil(reviews.total / reviewPerPage)}

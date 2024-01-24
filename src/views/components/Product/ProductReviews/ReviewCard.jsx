@@ -8,13 +8,11 @@ function ReviewCard({ reviewData }) {
         <div className="review-card mb-2">
             <div className="d-flex align-items-center">
                 <div>
-                    {reviewData?.image?.[0] ? (
-                        <div className="rounded">
-                            <img
-                                className="rounded review-author-image"
-                                src={reviewData?.image[0]}
-                            />
-                        </div>
+                    {reviewData?.user?.profile_pic ? (
+                        <img
+                            className="review-author-image"
+                            src={reviewData?.user?.profile_pic}
+                        />
                     ) : (
                         <FontAwesomeIcon icon={faUserCircle} className="fs-2" />
                     )}
