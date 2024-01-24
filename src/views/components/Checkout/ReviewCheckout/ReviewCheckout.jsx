@@ -52,7 +52,7 @@ export default function ReviewCheckout({
                                     }
                                 />
                                 <h6 className="price">
-                                    ${item.price.toFixed(2)}
+                                    ${parseFloat(item.price).toFixed(2)}
                                 </h6>
                                 <h6 className="quantity">
                                     Quantity: {item.quantity}
