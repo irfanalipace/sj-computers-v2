@@ -106,4 +106,15 @@ class ReviewController extends BaseController
     // {
     //     //
     // }
+
+    public function getProductDetail($product_id)
+    {
+        try{
+            $productDetail = $this->service->getProductDetails($product_id);
+
+            return $this->sendResponse($productDetail,'Successfully fetched product details.');
+        } catch(Exception $e) {
+            return $this->sendError('error','Something went wrong ' . $e->getMessage());
+        }
+    }
 }

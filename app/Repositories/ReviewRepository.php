@@ -20,7 +20,7 @@ class ReviewRepository
 
         $query = $this->productReviewModel->query();
 
-        return $query->orderBy($orderByKey, $orderByValue)
+        return $query->orderBy($orderByKey, $orderByValue)->with('productMedia')
             ->paginate($request->input('per_page', 10));
     }
 
