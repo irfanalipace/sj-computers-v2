@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import ReviewImages from "./ReviewImagesSlider";
 import ReviewCard from "./ReviewCard";
 import { useParams } from "react-router-dom";
-<<<<<<< HEAD
-=======
 import { productReviewsApi } from "../../../../core/api/product-review";
 import {
     Box,
@@ -15,7 +13,6 @@ import {
     Pagination,
     Typography,
 } from "@mui/material";
->>>>>>> 6b0720b665c7f7c4cc5098a2b2402f79f0993807
 const PRODUCT_FILTER_KEY_ENUM = {
     TOP: "top-reviews",
     RECENT: "recent-reviews",
