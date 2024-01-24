@@ -52,11 +52,11 @@ class CartController extends BaseController
             $item['price'] = number_format((float)$price, 2, '.', '');
             $items[] = $item;
         });
-
+       
         // Convert the indexed array to a // Convert the indexed array to an associative array
         $items = array_values($items);
         $details = $this->cartDetails();
-
+       
         if ($returnItems) {
             return $items;
         }

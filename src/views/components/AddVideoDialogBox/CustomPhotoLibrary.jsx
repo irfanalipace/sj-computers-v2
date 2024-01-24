@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "./AddVideoDialogBox.css";
 const CustomPhotoLibrary = ({ onClose, parentData, onDeleteImage }) => {
-    console.log(parentData, "parentData");
+  
 
     return (
         <Modal

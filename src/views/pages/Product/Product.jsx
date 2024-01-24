@@ -1,9 +1,5 @@
-import { useState, useEffect, lazy } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-
+import { lazy } from "react";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-import { productDetailsbyAsinApi } from "@api/products";
 import { ProductImage } from "@components/Product/ProductImage/ProductImage";
 import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
 import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
@@ -14,67 +10,20 @@ const ProductReviews = lazy(() =>
 );
 import "./Product.css";
 import SimilarItems from "../../components/SimilarItems/SimilarItems";
+import TechDetails from "../../components/TechDetails/TechDetails";
 import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
 import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
 import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
 import ProductPageHeader from "../../components/ProductPageHeader/ProductPageHeader";
 import VisibleOnScroll from "../../components/VisibleOnScroll";
-import TechDetails from "../../components/TechDetails/TechDetails";
-import { similarProductsApi } from "@api/products";
+import useProductData from "./useProductData";
+import useSimilarData from "./useSimilarProduct";
 
 export default function Product() {
-    const [isLoading, setIsLoading] = useState(true);
-    const [product, setProduct] = useState(null);
-    const [similarProducts, setSimilarProducts] = useState([]);
-    const [productImages, setProductImages] = useState([]);
-    const products = useSelector((state) => state.products.products);
-    const { title } = useParams();
-    const modifyTitle = title.replace(/-/g, " ");
-    console.log(modifyTitle);
+    const { isLoading, product, productImages, products, onFilterChange } =
+        useProductData();
 
-    // const similarProducts = useSelector(
-    //     (state) => state.products.similarProducts
-    // );
-    const { productId } = useParams();
-
-    useEffect(() => {
-        getProductDetails();
-        getSimilarProduct();
-    }, [productId]);
-
-    const getSimilarProduct = async () => {
-        // if (!products?.length) {
-        try {
-            const resp = await similarProductsApi({ name: modifyTitle });
-            setSimilarProducts(resp?.data?.data);
-            console.log("repsoooo", resp?.data?.data);
-        } catch (error) {
-            console.log(error);
-        }
-        // }
-    };
-
-    const getProductDetails = async () => {
-        const filteredProduct = products.filter(
-            (product) => product?.asin == productId
-        )[0];
-
-        if (filteredProduct) {
-            setProduct(filteredProduct);
-            setProductImages(filteredProduct?.image);
-        } else {
-            setIsLoading(true);
-            try {
-                const response = await productDetailsbyAsinApi(productId);
-                setProduct(response.data);
-                setProductImages(response?.data?.image);
-                setIsLoading(false);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        setIsLoading(false);
-    };
+    const { similarProducts } = useSimilarData();
 
     const ProductComponent = () => {
         return (
@@ -108,12 +57,18 @@ export default function Product() {
                         {isLoading || !products?.length ? (
                             <LoaderComponent />
                         ) : (
-                            <ProductComponent />
+                            <>
+                                <ProductComponent />
+                                <VisibleOnScroll>
+                                    <ProductReviews
+                                        reviews={products}
+                                        onFilterChange={onFilterChange}
+                                        productId={product?.asin}
+                                    />
+                                </VisibleOnScroll>{" "}
+                            </>
                         )}
 
-                        <VisibleOnScroll>
-                            <ProductReviews reviews={products} />
-                        </VisibleOnScroll>
                         <Recommendation products={products} />
                     </div>
                 </div>

@@ -9,7 +9,7 @@ import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 
 const SimilarItems = ({ products }) => {
-    const isLoading = useSelector((state) => state?.products.isLoading);
+    const isLoading = useSelector((state) => state?.products?.isLoading);
 
     return (
         <>
@@ -19,14 +19,14 @@ const SimilarItems = ({ products }) => {
                 justifyContent="flex-start"
                 alignItems="center"
             >
-                <Grid lg={3} mr={5}>
+                <Grid lg={4} mr={5}>
                     {products[0] ? (
                         <SingleSimilarItem product={products[0]} />
                     ) : (
                         <></>
                     )}
                 </Grid>{" "}
-                <Grid lg={3}>
+                <Grid lg={4}>
                     {products[1] ? (
                         <SingleSimilarItem product={products[1]} />
                     ) : (

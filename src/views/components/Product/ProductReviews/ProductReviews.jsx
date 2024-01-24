@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import RatingDetails from "@components/Product/ProductReviews/RatingDetails";
 import "./ProductReviews.css";
 import { Link } from "react-router-dom";
 import ReviewImages from "./ReviewImagesSlider";
 import ReviewCard from "./ReviewCard";
-
+import { useParams } from "react-router";
 const PRODUCT_FILTER_KEY_ENUM = {
     TOP: "top-reviews",
     RECENT: "recent-reviews",
@@ -15,8 +15,15 @@ const PRODUCT_FILTER_LABEL_ENUM = {
     "recent-reviews": "Recent reviews",
 };
 
-function ProductReviews({ reviews }) {
+function ProductReviews({ reviews, productId, onFilterChange }) {
     const [filterBy, setFilterBy] = useState(PRODUCT_FILTER_KEY_ENUM.TOP);
+    const isMounted = useRef(false);
+    useEffect(() => {
+        if (isMounted.current) {
+            onFilterChange(filterBy);
+        }
+        isMounted.current = true;
+    }, [filterBy]);
 
     return (
         <div className="product-reviews-section product-section" id="reviews">
@@ -32,7 +39,7 @@ function ProductReviews({ reviews }) {
                                 <p className="fs-6 mb-3">
                                     Share your thoughts with other customers
                                 </p>
-                                <Link to={"/add-review"}>
+                                <Link to={`/add-review/${productId}`}>
                                     <button
                                         className="bg-white border my-1 w-100 rounded-3 shadow"
                                         style={{

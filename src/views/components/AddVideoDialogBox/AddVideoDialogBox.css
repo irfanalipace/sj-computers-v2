@@ -156,14 +156,14 @@ border: 1px;
 }
 
 .alist-image-container-preview-modal {
-    width: 223px;
+    width: auto;
     margin-right: 10px;
     height: 95px;
     position: relative;
     margin-bottom: 34px;
 }
 .alist-image-container-preview-modal img {
-    width: 100%;
+    width: 200px;
     height: 100%;
     border-radius: 5px;
 }

@@ -99,3 +99,64 @@ export function filterProductsApi(filter) {
             });
     });
 }
+
+
+
+// export function productPreviewApi(formData) {
+    
+//     return new Promise((resolve, reject) => {
+//         ApiService.post(`/product-reviews`, formData)
+//             .then((response) => {
+//                 console.print(
+//                     "file: products.js | productPreviewApi| response",
+//                     response
+//                 );
+//                 resolve(response);
+//             })
+//             .catch((e) => {
+//                 console.print("Console Log: : error productPreviewApi", e);
+//                 reject(e);
+//             });
+//     });
+// }
+
+
+
+
+
+
+
+export function productPreviewApi(formData) {
+    return new Promise((resolve, reject) => {
+        ApiService.post(`/product-reviews`, formData)
+            .then((response) => {
+                console.log(
+                    "file: states.js | updateStateApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error states", e);
+                reject(e);
+            });
+    });
+}
+
+
+export function productSpecificDetailsReview(id) {
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/product-reviews?id=${id}`)
+            .then((response) => {
+                console.print(
+                    "file: products.js | productSpecificDetailsReview| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.print("Console Log: : error productSpecificDetail", e);
+                reject(e);
+            });
+    });
+}

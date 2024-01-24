@@ -37,8 +37,13 @@ const AddCartComponents = ({
     const cartClickHandler = () => {
         let productPrice = product.price * quantity;
         let cartQuantity = details.total_items + 1;
-        let cartTotal = parseFloat(details?.total) + productPrice;
-        let cartSubTotal = parseFloat(details?.sub_total) + productPrice;
+        let itemProtectedPlanPrice = parseFloat(plan?.price) * quantity || 0;
+        let cartTotal =
+            parseFloat(details?.total) + productPrice + itemProtectedPlanPrice;
+        let cartSubTotal =
+            parseFloat(details?.sub_total) +
+            productPrice +
+            itemProtectedPlanPrice;
         const cartItem = {
             id: product.id,
             quantity,
@@ -47,7 +52,11 @@ const AddCartComponents = ({
                 ...product,
                 in_stock: quantity >= product.quantity ? false : true,
             },
-            protective_plan_id: plan || checkplan,
+            plan: {
+                id: plan?.value || checkplan?.value,
+                price: plan?.price || checkplan?.price,
+                name:plan?.label || checkplan?.label
+            },
         };
 
         const cartDetails = {
@@ -75,7 +84,7 @@ const AddCartComponents = ({
         const matchingEnum = Object.values(PlanEnum).find(
             (enumEntry) => enumEntry.label === id
         );
-        setPlan(matchingEnum.value);
+        setPlan(matchingEnum);
     };
     return (
         <>
@@ -118,7 +127,7 @@ const AddCartComponents = ({
                         setOpen(false);
                     }}
                     handleAddingProtec={() => {
-                        if (plan) {
+                        if (plan.value) {
                             cartClickHandler();
                         }
                     }}
