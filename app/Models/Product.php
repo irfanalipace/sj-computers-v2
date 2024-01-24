@@ -29,6 +29,10 @@ class Product extends Model
         return $this->belongsToMany(Category::class, 'category_product')->paginate(12);
     }
 
+    public function productMedia()
+    {
+        return $this->hasMany(ProductMedia::class);
+    }
     public function holdProducts()
     {
         return $this->hasMany(HoldReleaseUser::class)->where('status', 'hold');
