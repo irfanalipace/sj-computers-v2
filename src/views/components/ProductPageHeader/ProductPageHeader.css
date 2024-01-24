@@ -13,7 +13,8 @@
 .item{
     color: black;
     height: 100%;
-    padding: 20px 45px;
+    padding: 20px 5px;
+    margin: 0px 45px;
     font-size: small;
     white-space: nowrap;
 }

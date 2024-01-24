@@ -4,7 +4,7 @@ import "./ProductReviews.css";
 import { Link } from "react-router-dom";
 import ReviewImages from "./ReviewImagesSlider";
 import ReviewCard from "./ReviewCard";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 const PRODUCT_FILTER_KEY_ENUM = {
     TOP: "top-reviews",
     RECENT: "recent-reviews",

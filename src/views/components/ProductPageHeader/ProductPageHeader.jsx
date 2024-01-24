@@ -8,7 +8,7 @@ const ProductPageHeader = () => {
     {
         id: 1,
         name: "Computers",
-        slug: "computers",
+        slug: "business_computers",
     },
     {
         id: 2,
@@ -23,12 +23,12 @@ const ProductPageHeader = () => {
     {
         id: 4,
         name: "Monitors",
-        slug: "Monitors",
+        slug: "monitor",
     },
     {
         id: 5,
         name: "Computers Accessories",
-        slug: "computersaccessories",
+        slug: "bto",
     },
     {
         id: 6,
@@ -38,7 +38,7 @@ const ProductPageHeader = () => {
     {
         id: 7,
         name: "PC Gaming",
-        slug: "pcgaming",
+        slug: "gaming_desktops",
     },
 ];
 
@@ -48,7 +48,7 @@ const ProductPageHeader = () => {
 
         {categories.map((category) => (
 
-          <Link key={category.id} to={""} style={{textDecoration: "none"}}>
+          <Link key={category.id} to={`/category/${category.slug}`} style={{textDecoration: "none"}}>
             <div className='item' > {category.name} </div>
           </Link>
 
