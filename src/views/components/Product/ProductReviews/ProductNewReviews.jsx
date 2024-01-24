@@ -15,7 +15,7 @@ import { productPreviewApi, productDetailsbyAsinApi } from "@api/products";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect, lazy } from "react";
-
+// import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 
 const ProductNewReviews = () => {
     const navigate = useNavigate();
@@ -142,8 +142,15 @@ const ProductNewReviews = () => {
     
     return (
         <form onSubmit={handleSubmit}>
-            <div className="container add-new-review">
+              
+              <div>
+              <p className="account-heading">Profile</p>
+              </div>
+                 <div className="container add-new-review">
+                 {/* <Breadcrumb /> */}
                 <div className="row">
+                    
+               
                     <div className="col-lg-3 col-md-3 col-sm-6 col-12">
                         <div className="review-heading-image-product">
                             <img src={productImages} alt="Product" />
