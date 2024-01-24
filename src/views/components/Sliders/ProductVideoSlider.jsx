@@ -14,12 +14,16 @@ import "swiper/css/navigation";
 import "./Slider.css";
 
 
-function ProductVideoSlider({Tumbnails, newVideoData}) {
+function ProductVideoSlider({ videoData}) {
 
     const mobileMediaQuery = {
         '@media (max-width: 600px)':{
             display: "none"
         }
+    }
+
+    if(videoData.length == 0){
+        return <div>no videos found</div>
     }
 
     return (
@@ -65,9 +69,9 @@ function ProductVideoSlider({Tumbnails, newVideoData}) {
                 },
             }}
         >
-            {newVideoData?.map((tumbnail, index) => (
+            {videoData?.map((data, index) => (
               <SwiperSlide key={index} >    
-                    <VideoCard tumbnail={tumbnail} Tumbnails={Tumbnails} index={index} newVideoData={newVideoData} />
+                    <VideoCard data={data} index={index} videoData={videoData} />
              </SwiperSlide>
              ))}
         </Swiper>

@@ -59,7 +59,7 @@ span {
     border-right: 1px solid #f5961d;
 }
 .inner-body {
-    min-height: calc(100vh - 600px);
+    /* min-height: calc(100vh - 600px); */
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -88,18 +88,22 @@ span {
 
 @media (max-width: 767px) {
     .inner-body {
-        min-height: calc(100vh - 800px);
+        /* min-height: calc(100vh - 800px); */
     }
 }
 
 @media (min-width: 1024px) {
     .inner-body {
-        min-height: calc(100vh - 650px);
+        /* min-height: calc(100vh - 650px); */
     }
 }
 
 @media (min-width: 1700px) {
     .inner-body {
-        min-height: calc(100vh - 550px);
+        max-width: 1800px;
+        margin: auto;
+    }
+    .inner-body > div {
+        min-height: calc(100vh - 670px);
     }
 }

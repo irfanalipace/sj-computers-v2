@@ -4,6 +4,24 @@
     border: 0;
 }
 
+/* .product-reviews-section .swiper-button-prev {
+    color: #ffffff;
+    top: var(--swiper-navigation-top-offset, 25%) !important;
+    left: var(--swiper-navigation-sides-offset, 30px);
+    z-index: 1 !important;
+}
+.product-reviews-section .swiper-button-next {
+    color: #ffffff;
+    top: var(--swiper-navigation-top-offset, 25%) !important;
+    right: var(--swiper-navigation-sides-offset, 30px);
+    z-index: 1 !important;
+}
+.product-reviews-section .swiper-button-next:after,
+.product-reviews-section .swiper-button-prev:after {
+    font-size: 35px !important;
+    color: #0c1fa670;
+} */
+
 .product-reviews-section .view-all-images-btn:hover {
     text-decoration: underline;
     color: chocolate;
