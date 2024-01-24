@@ -11,6 +11,7 @@ import {
     CircularProgress,
     LinearProgress,
     Pagination,
+    Typography,
 } from "@mui/material";
 const PRODUCT_FILTER_KEY_ENUM = {
     TOP: "top-reviews",
@@ -97,27 +98,44 @@ function ProductReviews({ productId, onFilterChange }) {
                         </div> */}
 
                         {/* <ReviewImages reviews={reviews} /> */}
-                        <div
-                            tabIndex="0"
-                            ref={reviewRef}
-                            className="filter-wrapper mt-3 mb-0 "
-                        >
-                            <select
-                                className="form-select"
-                                onChange={(e) => setFilterBy(e.target.value)}
-                            >
-                                <option value={PRODUCT_FILTER_KEY_ENUM.TOP}>
-                                    Top Reviews
-                                </option>
-                                <option value={PRODUCT_FILTER_KEY_ENUM.RECENT}>
-                                    Recent Reviews
-                                </option>
-                            </select>
-                        </div>
+                        {reviews?.data?.length === 0 && !reviewLoading && (
+                            <Typography fontWeight={600}>
+                                No customer reviews
+                            </Typography>
+                        )}
+                        {!!reviews?.data?.length && (
+                            <>
+                                <div
+                                    tabIndex="0"
+                                    ref={reviewRef}
+                                    className="filter-wrapper mt-3 mb-0 "
+                                >
+                                    <select
+                                        className="form-select"
+                                        onChange={(e) =>
+                                            setFilterBy(e.target.value)
+                                        }
+                                    >
+                                        <option
+                                            value={PRODUCT_FILTER_KEY_ENUM.TOP}
+                                        >
+                                            Top Reviews
+                                        </option>
+                                        <option
+                                            value={
+                                                PRODUCT_FILTER_KEY_ENUM.RECENT
+                                            }
+                                        >
+                                            Recent Reviews
+                                        </option>
+                                    </select>
+                                </div>
 
-                        <h3 className="product-section-heading my-4 py-1">
-                            {PRODUCT_FILTER_LABEL_ENUM[filterBy]}
-                        </h3>
+                                <h3 className="product-section-heading my-4 py-1">
+                                    {PRODUCT_FILTER_LABEL_ENUM[filterBy]}
+                                </h3>
+                            </>
+                        )}
                         {reviewLoading ? (
                             <Box sx={{ height: "100px" }}>
                                 <CircularProgress
@@ -133,10 +151,12 @@ function ProductReviews({ productId, onFilterChange }) {
                             ))
                         )}
 
-                        <Pagination
-                            onChange={handlePageChange}
-                            count={Math.ceil(reviews.total / reviewPerPage)}
-                        />
+                        {!!reviews?.data?.length && (
+                            <Pagination
+                                onChange={handlePageChange}
+                                count={Math.ceil(reviews.total / reviewPerPage)}
+                            />
+                        )}
                     </div>
                 </div>
             </div>
