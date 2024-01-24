@@ -12,7 +12,6 @@ use App\Http\Controllers\Api\PayPal\PaypalwebhookController;
 use App\Http\Controllers\Api\ShoppingCart\CartController;
 use App\Http\Controllers\Api\Setting\ProfileController;
 use App\Http\Controllers\Api\Square\SquareController;
-
 use App\Http\Controllers\Api\Auth\VerificationController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\BrandController;
@@ -257,3 +256,8 @@ Route::post('paypal', [PayPalController::class, 'paypal'])->name('paypal');
 Route::get('success', [PaymentController::class, 'paypalSuccess'])->name('success');
 Route::get('cancel', [PaymentController::class, 'paypalCancel'])->name('cancel');
 
+/* 
+    Get all reviews
+*/
+Route::get('get-product-reviews',[ReviewController::class,'index']);
+Route::get('get-protection-plans',[ProductController::class,'getProtectivePlan']);
