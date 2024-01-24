@@ -21,7 +21,7 @@ class CreateProductReviewsTable extends Migration
 
             $table->string('title')->nullable();
             $table->longText('body');
-            $table->decimal('rating');
+            $table->decimal('rating',10,1);
             $table->string('status')->default('in_active');
             $table->timestamps();
         });

@@ -40,29 +40,34 @@ class ProductStatistics extends Command
     public function handle()
     {
         ProductReview::select('product_id', 'rating')
-            ->get()
-            ->groupBy('product_id')
-            ->each(function ($reviews, $productId) {
-                $totalReviews = $reviews->count();
-                $ratingsCount = $reviews->groupBy('rating')
-                    ->mapWithKeys(function ($group, $rating) {
-                        return [$rating => $group->count()];
-                    });
+        ->get()
+        ->map(function ($review) {
+            // Round the rating to the nearest whole number
+            $review->rating = round($review->rating);
+            return $review;
+        })
+        ->groupBy('product_id')
+        ->each(function ($reviews, $productId) {
+            $totalReviews = $reviews->count();
+            $ratingsCount = $reviews->groupBy('rating')
+                ->mapWithKeys(function ($group, $rating) {
+                    return [$rating => $group->count()];
+                });
 
-                $rateStatistics = [];
-                for ($rating = 5; $rating >= 1; $rating--) {
-                    $rateStatistics[$rating] = $totalReviews > 0 ? round(($ratingsCount->get($rating, 0) / $totalReviews) * 100) . '%' : '0%';
-                }
+            $rateStatistics = [];
+            for ($rating = 5; $rating >= 1; $rating--) {
+                $rateStatistics[$rating] = $totalReviews > 0 ? round(($ratingsCount->get($rating, 0) / $totalReviews) * 100) . '%' : '0%';
+            }
 
-                $rateStatistics['overall_rate'] = $totalReviews > 0 ? round($reviews->avg('rating'), 1) : '0';
-                $statistics = [
-                    'rate' => $rateStatistics
-                ];
-                ProductStatistic::updateOrCreate(
-                    ['product_id' => $productId],
-                    ['statistics' => json_encode($statistics)]
-                );
-            });
+            $rateStatistics['overall_rate'] = $totalReviews > 0 ? round($reviews->avg('rating'), 1) : '0';
+            $statistics = [
+                'rate' => $rateStatistics
+            ];
+            ProductStatistic::updateOrCreate(
+                ['product_id' => $productId],
+                ['statistics' => json_encode($statistics)]
+            );
+        });
 
         return true;
     }
