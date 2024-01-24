@@ -5,6 +5,17 @@ import { Link } from "react-router-dom";
 import ReviewImages from "./ReviewImagesSlider";
 import ReviewCard from "./ReviewCard";
 import { useParams } from "react-router-dom";
+<<<<<<< HEAD
+=======
+import { productReviewsApi } from "../../../../core/api/product-review";
+import {
+    Box,
+    CircularProgress,
+    LinearProgress,
+    Pagination,
+    Typography,
+} from "@mui/material";
+>>>>>>> 6b0720b665c7f7c4cc5098a2b2402f79f0993807
 const PRODUCT_FILTER_KEY_ENUM = {
     TOP: "top-reviews",
     RECENT: "recent-reviews",
@@ -15,15 +26,41 @@ const PRODUCT_FILTER_LABEL_ENUM = {
     "recent-reviews": "Recent reviews",
 };
 
-function ProductReviews({ reviews, productId, onFilterChange }) {
+const reviewPerPage = 5;
+
+function ProductReviews({ productId, productAsin, onFilterChange }) {
     const [filterBy, setFilterBy] = useState(PRODUCT_FILTER_KEY_ENUM.TOP);
+    const [reviews, setReviews] = useState([]);
+    const [reviewLoading, setReviewLoading] = useState(false);
+    const reviewRef = useRef(null);
     const isMounted = useRef(false);
+
+    const handlePageChange = (event, value) => {
+        reviewRef.current.focus();
+        getProductReviews(productId, value, reviewPerPage);
+    };
+
+    const getProductReviews = async (id, page = 1, reviewPerPage) => {
+        try {
+            setReviewLoading(true);
+            const res = await productReviewsApi(id, page, reviewPerPage);
+            setReviews(res.data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setReviewLoading(false);
+        }
+    };
     useEffect(() => {
         if (isMounted.current) {
             onFilterChange(filterBy);
         }
         isMounted.current = true;
     }, [filterBy]);
+
+    useEffect(() => {
+        getProductReviews(productId, 1, reviewPerPage);
+    }, []);
 
     return (
         <div className="product-reviews-section product-section" id="reviews">
@@ -39,7 +76,7 @@ function ProductReviews({ reviews, productId, onFilterChange }) {
                                 <p className="fs-6 mb-3">
                                     Share your thoughts with other customers
                                 </p>
-                                <Link to={`/add-review/${productId}`}>
+                                <Link to={`/add-review/${productAsin}`}>
                                     <button
                                         className="bg-white border my-1 w-100 rounded-3 shadow"
                                         style={{
@@ -54,38 +91,79 @@ function ProductReviews({ reviews, productId, onFilterChange }) {
                         </div>
                     </div>
                     <div className="col-12 col-sm-6 col-md-8">
-                        <div className="d-flex justify-content-between mb-3">
+                        {/* <div className="d-flex justify-content-between mb-3">
                             <h3 className="product-section-heading">
                                 Reviews with images
                             </h3>
                             <button className="view-all-images-btn">
                                 View all images
                             </button>
-                        </div>
+                        </div> */}
 
-                        <ReviewImages reviews={reviews} />
-                        <div className="filter-wrapper mt-3 mb-0 ">
-                            <select
-                                className="form-select"
-                                onChange={(e) => setFilterBy(e.target.value)}
-                            >
-                                <option value={PRODUCT_FILTER_KEY_ENUM.TOP}>
-                                    Top Reviews
-                                </option>
-                                <option value={PRODUCT_FILTER_KEY_ENUM.RECENT}>
-                                    Recent Reviews
-                                </option>
-                            </select>
-                        </div>
+                        {/* <ReviewImages reviews={reviews} /> */}
+                        {reviews?.product_detail?.length === 0 &&
+                            !reviewLoading && (
+                                <Typography fontWeight={600}>
+                                    No customer reviews
+                                </Typography>
+                            )}
+                        {!!reviews?.product_detail?.length && (
+                            <>
+                                <div
+                                    tabIndex="0"
+                                    ref={reviewRef}
+                                    className="filter-wrapper mt-3 mb-0 "
+                                >
+                                    <select
+                                        className="form-select"
+                                        onChange={(e) =>
+                                            setFilterBy(e.target.value)
+                                        }
+                                    >
+                                        <option
+                                            value={PRODUCT_FILTER_KEY_ENUM.TOP}
+                                        >
+                                            Top Reviews
+                                        </option>
+                                        <option
+                                            value={
+                                                PRODUCT_FILTER_KEY_ENUM.RECENT
+                                            }
+                                        >
+                                            Recent Reviews
+                                        </option>
+                                    </select>
+                                </div>
 
-                        <h3 className="product-section-heading my-4 py-1">
-                            {PRODUCT_FILTER_LABEL_ENUM[filterBy]}
-                        </h3>
-                        {reviews.map((review) => (
-                            <div className="my-4">
-                                <ReviewCard reviewData={review} />
-                            </div>
-                        ))}
+                                <h3 className="product-section-heading my-4 py-1">
+                                    {PRODUCT_FILTER_LABEL_ENUM[filterBy]}
+                                </h3>
+                            </>
+                        )}
+                        {reviewLoading ? (
+                            <Box sx={{ height: "100px" }}>
+                                <CircularProgress
+                                    sx={{ ml: 5 }}
+                                    disableShrink
+                                />
+                            </Box>
+                        ) : (
+                            <>
+                                {reviews.length > 0 &&
+                                    reviews?.product_detail?.map((review) => (
+                                        <div className="my-4">
+                                            <ReviewCard reviewData={review} />
+                                        </div>
+                                    ))}
+                            </>
+                        )}
+
+                        {!!reviews?.product_detail?.length && (
+                            <Pagination
+                                onChange={handlePageChange}
+                                count={Math.ceil(reviews.total / reviewPerPage)}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

@@ -10,24 +10,21 @@ const ProductReviews = lazy(() =>
 );
 import "./Product.css";
 import SimilarItems from "../../components/SimilarItems/SimilarItems";
+import TechDetails from "../../components/TechDetails/TechDetails";
 import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
 import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
 import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
 import ProductPageHeader from "../../components/ProductPageHeader/ProductPageHeader";
 import VisibleOnScroll from "../../components/VisibleOnScroll";
 import useProductData from "./useProductData";
+import useSimilarData from "./useSimilarProduct";
 
 export default function Product() {
-    const {
-        isLoading,
-        product,
-        productImages,
-        products,
-        similarProducts,
-        onFilterChange,
-    } = useProductData();
+    const { isLoading, product, productImages, products, onFilterChange } =
+        useProductData();
 
     const ProductComponent = () => {
+        const { similarProducts } = useSimilarData();
         return (
             <div className="row">
                 <div className="col-12 col-md-4">
@@ -59,12 +56,15 @@ export default function Product() {
                             <LoaderComponent />
                         ) : (
                             <>
-                                <ProductComponent />
+                                <VisibleOnScroll>
+                                    <ProductComponent />
+                                </VisibleOnScroll>
                                 <VisibleOnScroll>
                                     <ProductReviews
                                         reviews={products}
                                         onFilterChange={onFilterChange}
-                                        productId={product?.asin}
+                                        productAsin={product?.asin}
+                                        productId={product?.id}
                                     />
                                 </VisibleOnScroll>{" "}
                             </>

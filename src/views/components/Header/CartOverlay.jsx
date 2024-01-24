@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import "./CartOverlay.css";
-import { CheckoutBox } from "../ShoppingCart/CheckOut/CheckoutBox";
+import WarrantyBadge from "@components/ShoppingCart/CartItem/WarrantyBadge";
 
 const CartOverlay = ({ isOpen, toggleSidebar }) => {
     const cartItems = useSelector((state) => state.cart.cart);
@@ -127,6 +127,12 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                                 }
                                                             </strong>
                                                         </Link>
+                                                        <WarrantyBadge
+                                                            durationInYears={
+                                                                item?.plan
+                                                                    ?.durationInYears
+                                                            }
+                                                        />
                                                         <ul className="item-list">
                                                             <li>
                                                                 <span className="item-stock">

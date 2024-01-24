@@ -1,10 +1,19 @@
-import React, {useState, useEffect} from "react";
-import { Grid, Typography, Box, Dialog, DialogContent, Button, DialogActions, IconButton } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import {
+    Grid,
+    Typography,
+    Box,
+    Dialog,
+    DialogContent,
+    Button,
+    DialogActions,
+    IconButton,
+} from "@mui/material";
 // import videoTumbnail2 from "../../../assets/images/video-tumbnail2.svg"
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import ProductVideoSlider from "../../Sliders/ProductVideoSlider";
-import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
-import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
+import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
 // import videoFront from "../../../assets/images/videoL-tumbnail.svg"
 import { createThumbnail } from "../../../../core/utils/helpers";
 
@@ -49,8 +58,6 @@ const ProductVideo = ({product}) => {
     fetchData();
   }, [product]); 
 
-        // console.log(videoData, "a");
-    
     return (
         <Grid container p={2} borderTop={"1px solid lightgray"} rowGap={2}>
             <Grid item lg={12}>
@@ -58,12 +65,19 @@ const ProductVideo = ({product}) => {
                     Videos for this product
                 </Typography>
             </Grid>
-            <Grid item lg={12} container px={4} columnGap={2} position={"relative"} sx={{"@media (max-width: 600px)": { padding: 0 }}} >
-                <ProductVideoSlider  videoData={videoData}  />
+            <Grid
+                item
+                lg={12}
+                container
+                px={4}
+                columnGap={2}
+                position={"relative"}
+                sx={{ "@media (max-width: 600px)": { padding: 0 } }}
+            >
+                <ProductVideoSlider videoData={videoData} />
             </Grid>
         </Grid>
     );
 };
 
 export default ProductVideo;
-

@@ -3,29 +3,14 @@ import "./SingleSimilaritem.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import StarRatings from "react-star-ratings";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import AddCartComponents from "../ProductCard/AddCartComponents";
-import { fetchSimilarProducts } from "@store/products/productsThunks";
 
 const SingleSimilarItem = ({ type = "", product }) => {
     const orderEstimatedDelivery = useSelector(
         (state) => state.orders.orderEstimatedDelivery
     );
-    const dispatch = useDispatch();
-    const handleClick = async () => {
-        const productName = product.name;
-        try {
-            const splitName = productName.split(",", 1);
-            const nameBeforeComma = splitName[0];
-            await dispatch(
-                fetchSimilarProducts({
-                    name: nameBeforeComma,
-                })
-            );
-        } catch (error) {
-            console.log(error);
-        }
-    };
+
     const ProductDetails = () => (
         <div>
             <div className="product-details">
@@ -119,13 +104,7 @@ const SingleSimilarItem = ({ type = "", product }) => {
         </div>
     );
     return (
-        <div
-            className="similar-item-one mt-5"
-            // className={` product   ${inGrid && "product-grid"}`}
-            onClick={() => {
-                handleClick();
-            }}
-        >
+        <div className="similar-item-one mt-5">
             <h3>Similar items with fast delivery</h3>
             <div className="similar-item-one-inner">
                 <div className="image-wrapper-similar-items">

@@ -85,7 +85,7 @@ const ProtectionPlanDrawer = ({
                 </div>
                 {protectionPlan === "3-Year" && (
                     <div className="accordion-content">
-                        <h3>3 Year Equippment Protection Plan</h3>
+                        <h3>3 Year Equippment Warranty Plan</h3>
                         <p className="title">From Asurion, LLC</p>
                         <div style={{ marginTop: "-15px" }}>
                             <StarRatings
@@ -118,7 +118,7 @@ const ProtectionPlanDrawer = ({
                             up, connectivity issues, troubleshooting and much
                             more. <br />
                             TERMS & DETAILS: More information about this
-                            protection plan is <br />
+                            warranty plan is <br />
                             available within the “Product guides and documents”
                             section. Simply <br /> click “User Guide” for more
                             info. Asurion will also email your plan <br />
@@ -133,7 +133,7 @@ const ProtectionPlanDrawer = ({
                             <br />
                             More info :{" "}
                             <small style={{ color: "#1270c4" }}>
-                                3-Year Protection
+                                3-Year Warranty
                             </small>
                         </p>
                     </div>
@@ -170,7 +170,7 @@ const ProtectionPlanDrawer = ({
                 </div>
                 {protectionPlan === "4-Year" && (
                     <div className="accordion-content">
-                        <h3>4 Year Equippment Protection Plan</h3>
+                        <h3>4 Year Equippment Warranty Plan</h3>
                         <p className="title">From Asurion, LLC</p>
                         <div style={{ marginTop: "-15px" }}>
                             <StarRatings
@@ -203,7 +203,7 @@ const ProtectionPlanDrawer = ({
                             up, connectivity issues, troubleshooting and much
                             more. <br />
                             TERMS & DETAILS: More information about this
-                            protection plan is <br />
+                            warranty plan is <br />
                             available within the “Product guides and documents”
                             section. Simply <br /> click “User Guide” for more
                             info. Asurion will also email your plan <br />
@@ -218,7 +218,7 @@ const ProtectionPlanDrawer = ({
                             <br />
                             More info :{" "}
                             <small style={{ color: "#1270c4" }}>
-                                4-Year Protection
+                                4-Year Warranty
                             </small>
                         </p>
                     </div>
@@ -280,7 +280,7 @@ const ProtectionPlanDrawer = ({
                 </div>
                 {protectionPlan === "techUnlimited" && (
                     <div className="accordion-content">
-                        <h3>Unlimited Equippment Protection Plan</h3>
+                        <h3>Unlimited Equippment Warranty Plan</h3>
                         <p className="title">From Asurion, LLC</p>
                         <div style={{ marginTop: "-15px" }}>
                             <StarRatings
@@ -313,7 +313,7 @@ const ProtectionPlanDrawer = ({
                             up, connectivity issues, troubleshooting and much
                             more. <br />
                             TERMS & DETAILS: More information about this
-                            protection plan is <br />
+                            warranty plan is <br />
                             available within the “Product guides and documents”
                             section. Simply <br /> click “User Guide” for more
                             info. Asurion will also email your plan <br />
@@ -339,7 +339,7 @@ const ProtectionPlanDrawer = ({
                     className="add-prot-btn"
                     onClick={() => handleAddingProtec()}
                 >
-                    Add Protection
+                    Add Warranty
                 </button>
                 <button onClick={() => handleButton()}>No Thanks</button>
             </div>
