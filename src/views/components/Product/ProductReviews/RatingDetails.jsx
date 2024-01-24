@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Box, CircularProgress, Stack, Typography } from "@mui/material";
 import StarRatings from "react-star-ratings";
 import RatingWithLabel from "../ProductDetails/RatingWithLabel";
-import { getProductReviewDetails } from "../../../../core/api/product-review";
+import { productReviewsApi } from "../../../../core/api/product-review";
 
 export default function RatingDetails({ id, open }) {
     const [loading, setLoading] = useState(false);
-    const [product, setProduct] = useState([]);
+    const [productDetails, setProductDetails] = useState([]);
     const getReview = async () => {
         setLoading(true);
         try {
-            const res = await getProductReviewDetails(id);
-            console.log(res);
+            const res = await productReviewsApi(id);
+            const dd = JSON.parse(res.data.product_stats.statistics);
+            const ddd = dd.rate["5"];
+            debugger;
+            setProductDetails(JSON.parse(res.data.product_stats.statistics));
         } catch (error) {
             console.error(error);
         } finally {
@@ -39,7 +42,7 @@ export default function RatingDetails({ id, open }) {
                     </Typography>
                     <Stack direction="row" alignItems="flex-start">
                         <StarRatings
-                            rating={product?.rating}
+                            rating={productDetails?.rate?.overall_rate}
                             starRatedColor="rgb(232, 126, 36)"
                             numberOfStars={5}
                             name="rating"
@@ -52,7 +55,9 @@ export default function RatingDetails({ id, open }) {
                             fontWeight={700}
                             fontSize={"18px"}
                             lineHeight={"24px"}
-                        >{`${product?.rating || 0} out of 5`}</Typography>
+                        >{`${
+                            productDetails?.rating || 0
+                        } out of 5`}</Typography>
                     </Stack>
                     <Typography
                         mt={1}
@@ -63,11 +68,26 @@ export default function RatingDetails({ id, open }) {
                     >{`${366} globall rating`}</Typography>
 
                     <Stack spacing={2}>
-                        <RatingWithLabel label="5 Star" value={79 || 0} />
-                        <RatingWithLabel label="4 Star" value={14 || 0} />
-                        <RatingWithLabel label="3 Star" value={3 || 0} />
-                        <RatingWithLabel label="2 Star" value={1 || 0} />
-                        <RatingWithLabel label="1 Star" value={3 || 0} />
+                        <RatingWithLabel
+                            label="5 Star"
+                            value={productDetails?.rate?.["5"]}
+                        />
+                        <RatingWithLabel
+                            label="4 Star"
+                            value={productDetails?.rate?.["4"]}
+                        />
+                        <RatingWithLabel
+                            label="3 Star"
+                            value={productDetails?.rate?.["3"]}
+                        />
+                        <RatingWithLabel
+                            label="2 Star"
+                            value={productDetails?.rate?.["2"]}
+                        />
+                        <RatingWithLabel
+                            label="1 Star"
+                            value={productDetails?.rate?.["1"]}
+                        />
                     </Stack>
                 </>
             )}
