@@ -59,7 +59,7 @@ function ReviewImagesSlider({ reviews }) {
                                     <SwiperSlide >
                                     <img key={index}
                                         onClick={() => handleOpenDialog(rev?.reviewId, index)}
-                                        src={image}
+                                        src={image?.imageUrl}
                                         alt="review-image"
                                         className="all-reviews-image"
                                         />
