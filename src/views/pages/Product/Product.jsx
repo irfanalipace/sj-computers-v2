@@ -63,7 +63,8 @@ export default function Product() {
                                     <ProductReviews
                                         reviews={products}
                                         onFilterChange={onFilterChange}
-                                        productId={product?.asin}
+                                        productAsin={product?.asin}
+                                        productId={product?.id}
                                     />
                                 </VisibleOnScroll>{" "}
                             </>
