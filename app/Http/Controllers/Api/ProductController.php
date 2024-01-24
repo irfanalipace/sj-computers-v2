@@ -71,10 +71,10 @@ class ProductController extends BaseController
 
         $data['processor'] = $this->queryProductInfo('processor');
         $data['ram_memory'] = $this->queryProductInfo('ram_memory');
-//        $data['operating_system'] = $this->queryProductInfo('operating_system');
+        //        $data['operating_system'] = $this->queryProductInfo('operating_system');
         $data['operating_system'] = [];
         $data['hard_disk'] = $this->queryProductInfo('hard_disk');
-//        $data['graphic'] = $this->queryProductInfo('graphic');
+        //        $data['graphic'] = $this->queryProductInfo('graphic');
         $data['graphic'] = [];
         $data['brand'] = $this->queryProductInfo('brand');
 
@@ -149,7 +149,7 @@ class ProductController extends BaseController
 
             foreach ($filters as $filter) {
 
-//                $filter = json_encode($filter, true);
+            //                $filter = json_encode($filter, true);
                 $filter = json_decode($filter, true);
 
                 $key = $filter['key'] ?? '';
@@ -203,22 +203,22 @@ class ProductController extends BaseController
     {
         $ids = [];
 
-//        $query = '';
+        //        $query = '';
 
-//        if ($unit == 'TB') {
-//            $query = ProductInfo::where(function ($query) use ($key) {
-//                $query->where('key', $key);
-//            });
-//
-//        } elseif ($unit == 'GB') {
-//            $query = ProductInfo::where('key', $key)
-//                ->Where('value', 'LIKE', '%MB%');
-//        }
-//
-//        if (!empty($query)) {
-//            $ids = $query->pluck('product_id')
-//                ->toArray();
-//        }
+        //        if ($unit == 'TB') {
+        //            $query = ProductInfo::where(function ($query) use ($key) {
+        //                $query->where('key', $key);
+        //            });
+        //
+        //        } elseif ($unit == 'GB') {
+        //            $query = ProductInfo::where('key', $key)
+        //                ->Where('value', 'LIKE', '%MB%');
+        //        }
+        //
+        //        if (!empty($query)) {
+        //            $ids = $query->pluck('product_id')
+        //                ->toArray();
+        //        }
 
         $record = DB::table('product_infos')->where('key', $key)
             ->Where('value', 'like', '%' . $unit . '%')
