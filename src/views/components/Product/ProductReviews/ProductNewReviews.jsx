@@ -15,7 +15,7 @@ import { productPreviewApi, productDetailsbyAsinApi } from "@api/products";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect, lazy } from "react";
-// import Breadcrumb from "@common/Breadrumb/Breadcrumb";
+import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 
 const ProductNewReviews = () => {
     const navigate = useNavigate();
@@ -136,21 +136,24 @@ const ProductNewReviews = () => {
         }
     };
 
-
-
-
+    console.log(product?.url, '@@@')
+    
+    const breadcrumbRoutes = [
+        {
+            label: `Product`,
+            link:new URL(product?.url || 'https://www.sjcomputers.us')?.pathname,
+        },
+        {
+            label: "Review",
+            link:  `/add-review/${product?.asin}`,
+        },
+    ];
     
     return (
         <form onSubmit={handleSubmit}>
-              
-              <div>
-              <p className="account-heading">Profile</p>
-              </div>
                  <div className="container add-new-review">
-                 {/* <Breadcrumb /> */}
-                <div className="row">
-                    
-               
+                 <Breadcrumb routes={breadcrumbRoutes} />
+                <div className="row">  
                     <div className="col-lg-3 col-md-3 col-sm-6 col-12">
                         <div className="review-heading-image-product">
                             <img src={productImages} alt="Product" />
