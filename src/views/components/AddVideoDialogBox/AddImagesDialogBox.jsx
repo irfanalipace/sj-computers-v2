@@ -131,6 +131,7 @@ const AddVideoDialogBox = ({ onClose, onhandleCallback, onDeleteImage }) => {
     //         onClose();
     //     }
     // };
+    
     const handleChildButton = () => {
         // Concatenate the new images with the existing ones
         const updatedImages = [...allImages, ...images];

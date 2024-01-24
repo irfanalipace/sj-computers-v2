@@ -4,7 +4,7 @@ import img from "../../../../assets/images/product/productreview/productreview.p
 import { Box, Typography } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCamera } from "@fortawesome/free-solid-svg-icons";
-import AddVideoDialogBox from "../../AddVideoDialogBox/AddVideoDialogBox";
+import AddImagesDialogBox from "../../AddVideoDialogBox/AddImagesDialogBox";
 import CustomPhotoLibrary from "../../AddVideoDialogBox/CustomPhotoLibrary";
 import Rating from "@mui/material/Rating";
 import { useSelector } from "react-redux";
@@ -224,7 +224,7 @@ const ProductNewReviews = () => {
                 </div>
             </div>
             {dialogBoxOpen && (
-                <AddVideoDialogBox
+                <AddImagesDialogBox
                     onClose={handleCloseDialogBox}
                     onhandleCallback={callbackParent}
                     onDeleteImage={handleDeleteImage}
