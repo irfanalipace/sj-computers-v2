@@ -36,12 +36,13 @@ class OrderController extends BaseController
                     return $response;
                     break;
                 default:
-                    # code...
-                    return response()->json(['code' => 400, 'msg' => "Please choose one option"]);
+                    # code..                  
+                    return $this->sendError('Please choose one option',400);
                     break;
             }
         } catch (Exception $e) {
-            return response()->json(['status' => 400, 'msg', 'Something went wrong.' . $e]);
+            
+            return $this->sendError('Something went wrong.'. $e,400);
         }
     }
 

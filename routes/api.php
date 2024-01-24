@@ -6,13 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
 //use App\Http\Controllers\Api\PayPal\PaypalController;
-use App\Http\Controllers\Api\PayPalController;
-use App\Http\Controllers\Api\PayController;
+use App\Http\Controllers\Api\Payment\PayPalController;
+// use App\Http\Controllers\Api\PayPalController;
 use App\Http\Controllers\Api\PayPal\PaypalwebhookController;
 use App\Http\Controllers\Api\ShoppingCart\CartController;
 use App\Http\Controllers\Api\Setting\ProfileController;
 use App\Http\Controllers\Api\Square\SquareController;
-
 use App\Http\Controllers\Api\Auth\VerificationController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\BrandController;
@@ -27,6 +26,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\Blog\BlogController;
 use App\Http\Controllers\Api\RefundController;
 use App\Http\Controllers\Api\Meta\MetaDetailController;
+use App\Http\Controllers\Api\Payment\PaymentController;
 use App\Http\Controllers\Api\Product\ReviewController;
 
 //use Illuminate\Support\Facades\Auth;
@@ -131,7 +131,7 @@ Route::get('meta_detail', [MetaDetailController::class, 'getDetail'])->name('met
 /*
 *Place Order
 */
-Route::post('place-order', [PaymentGatewayFectory::class, 'placeOrder'])->name('placeOrder')->middleware('auth:api');
+Route::post('checkout-order', [PaymentController::class, 'checkout'])->name('checkoutOrder')->middleware('auth:api');
 
 Route::get('success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 
@@ -228,7 +228,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     /*
      * place order
      */
-    Route::post('place-order', [\App\Fectories\PaymentGatewayFectory::class, 'placeOrder'])->name('placeOrder');
+    // Route::post('place-order', [\App\Fectories\PaymentGatewayFectory::class, 'placeOrder'])->name('placeOrder');
 
     /*
     * Download inventory Excel
@@ -236,7 +236,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('download-inventory', [InventoryController::class, 'downloadInventory'])->name('downloadInventory');
 
     /* Review and Rating */
-    Route::resource('product-reviews',ReviewController::class)->only(['store','update','show']);
+    Route::resource('product-reviews',ReviewController::class)->only(['index','store','update','show']);
 });
 
 /*
@@ -252,7 +252,12 @@ Route::post('store-career-applications', [CareerApplicationController::class, 's
 /*
 * Paypal Integration
 */
-Route::post('paypal', [PaypalController::class, 'paypal']);
-Route::get('success', [PaypalController::class, 'success'])->name('success');
-Route::get('cancel', [PaypalController::class, 'cancel'])->name('cancel');
+Route::post('paypal', [PayPalController::class, 'paypal'])->name('paypal');
+Route::get('success', [PaymentController::class, 'paypalSuccess'])->name('success');
+Route::get('cancel', [PaymentController::class, 'paypalCancel'])->name('cancel');
 
+/* 
+    Get all reviews
+*/
+Route::get('get-product-reviews',[ReviewController::class,'index']);
+Route::get('get-protection-plans',[ProductController::class,'getProtectivePlan']);
