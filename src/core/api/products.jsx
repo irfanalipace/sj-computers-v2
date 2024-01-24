@@ -17,14 +17,14 @@ export function productsApi(page = 1, per_page = 12) {
     });
 }
 
-export function similarProducts(productName) {
+export function similarProductsApi(name) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/search-product`, "", productName)
+        ApiService.get("/search-product", "", name)
             .then((response) => {
                 resolve(response);
             })
             .catch((e) => {
-                console.print("Console Log: : error products", e);
+                console.print("Console Log: : error productsf", e);
                 reject(e);
             });
     });

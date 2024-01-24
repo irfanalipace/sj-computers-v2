@@ -10,22 +10,20 @@ const ProductReviews = lazy(() =>
 );
 import "./Product.css";
 import SimilarItems from "../../components/SimilarItems/SimilarItems";
+import TechDetails from "../../components/TechDetails/TechDetails";
 import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
 import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
 import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
 import ProductPageHeader from "../../components/ProductPageHeader/ProductPageHeader";
 import VisibleOnScroll from "../../components/VisibleOnScroll";
 import useProductData from "./useProductData";
+import useSimilarData from "./useSimilarProduct";
 
 export default function Product() {
-    const {
-        isLoading,
-        product,
-        productImages,
-        products,
-        similarProducts,
-        onFilterChange,
-    } = useProductData();
+    const { isLoading, product, productImages, products, onFilterChange } =
+        useProductData();
+
+    const { similarProducts } = useSimilarData();
 
     const ProductComponent = () => {
         return (
@@ -45,6 +43,7 @@ export default function Product() {
                 <ProductVideo />
                 <RefurbishedSection />
                 <ProductDescription product={product} />
+                <TechDetails product={product} />
             </div>
         );
     };

@@ -25,6 +25,7 @@ export const CheckOutCard = ({ product }) => {
     const [open, setOpen] = useState(false);
     const [openDrawer, setOpenDrawer] = useState(false);
     const [cartItem, setCartItem] = useState(null);
+    const [cartItemOne, setCartItemOne] = useState();
     const [plan, setPlan] = useState("");
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
@@ -63,7 +64,9 @@ export const CheckOutCard = ({ product }) => {
 
     useEffect(() => {
         let item = cart.filter((ci) => ci.id === product.id);
+        let item2 = cart.find((ci) => ci.id === product.id);
         setCartItem(item);
+        setCartItemOne(item2);
     }, [cart]);
 
     function handleCheckboxClick(event) {
@@ -451,7 +454,7 @@ export const CheckOutCard = ({ product }) => {
                         </div>
                     </div>
                 </div>
-                <hr className="hidden-on-mobile"></hr>
+                {/* <hr className="hidden-on-mobile"></hr> */}
                 <Link
                     to={"/term_services"}
                     style={{
@@ -464,87 +467,91 @@ export const CheckOutCard = ({ product }) => {
                     Details
                 </Link>
                 <hr></hr>
-                <div className="protection-plan hidden-on-mobile">
-                    Add a Protection Plan :
-                    <div className="check-box-container">
-                        <input
-                            type="checkbox"
-                            className="protectionPlanCheckbox"
-                            id="protectionPlanCheckbox"
-                            checked={protPlan === 1}
-                            onClick={(e) => {
-                                handleCheckboxClick(e);
-                                setProtPlan(1);
-                            }}
-                        />
-                        <label
-                            htmlFor="protectionPlanCheckbox"
-                            onClick={() => {
-                                setOpen(true);
-                                setPlan("3-Year");
-                            }}
-                        >
-                            3-Year Protection for{" "}
-                            <span style={{ color: "red" }}>
-                                &nbsp;$23.99/month
-                            </span>
-                        </label>
-                    </div>
-                    <div className="check-box-container">
-                        <input
-                            type="checkbox"
-                            className="protectionPlanCheckbox"
-                            id="protectionPlanCheckbox1"
-                            checked={protPlan === 2}
-                            onClick={(e) => {
-                                handleCheckboxClick(e);
-                                setProtPlan(2);
-                            }}
-                        />
-                        <label
-                            htmlFor="protectionPlanCheckbox1"
-                            onClick={() => {
-                                setOpen(true);
-                                setPlan("4-Year");
-                            }}
-                        >
-                            4-Year Protection for{" "}
-                            <span style={{ color: "red" }}>
-                                &nbsp;$32.99/month
-                            </span>
-                        </label>
-                    </div>
-                    <div className="check-box-container">
-                        <input
-                            type="checkbox"
-                            className="protectionPlanCheckbox"
-                            id="protectionPlanCheckbox2"
-                            checked={protPlan === 3}
-                            onClick={(e) => {
-                                handleCheckboxClick(e);
-                                setProtPlan(3);
-                            }}
-                        />
-                        <label
-                            htmlFor="protectionPlanCheckbox2"
-                            onClick={() => {
-                                setOpen(true);
-                                setPlan("unlimited");
-                            }}
-                        >
-                            Tech Unlimited – Protect Eligible Past and Future
-                            Purchases with 1 Plan (Renews Monthly Until
-                            Cancelled) for
-                            <span
-                                style={{
-                                    color: "red",
+                {cartItemOne?.id ? (
+                    <></>
+                ) : (
+                    <div className="protection-plan hidden-on-mobile">
+                        Add a Protection Plan :
+                        <div className="check-box-container">
+                            <input
+                                type="checkbox"
+                                className="protectionPlanCheckbox"
+                                id="protectionPlanCheckbox"
+                                checked={protPlan === 1}
+                                onClick={(e) => {
+                                    handleCheckboxClick(e);
+                                    setProtPlan(1);
+                                }}
+                            />
+                            <label
+                                // htmlFor="protectionPlanCheckbox"
+                                onClick={() => {
+                                    setOpen(true);
+                                    setPlan("3-Year");
                                 }}
                             >
-                                &nbsp;$16.99/month
-                            </span>
-                        </label>
+                                3-Year Protection for{" "}
+                                <span style={{ color: "red" }}>
+                                    &nbsp;$23.99/month
+                                </span>
+                            </label>
+                        </div>
+                        <div className="check-box-container">
+                            <input
+                                type="checkbox"
+                                className="protectionPlanCheckbox"
+                                id="protectionPlanCheckbox1"
+                                checked={protPlan === 2}
+                                onClick={(e) => {
+                                    handleCheckboxClick(e);
+                                    setProtPlan(2);
+                                }}
+                            />
+                            <label
+                                // htmlFor="protectionPlanCheckbox1"
+                                onClick={() => {
+                                    setOpen(true);
+                                    setPlan("4-Year");
+                                }}
+                            >
+                                4-Year Protection for{" "}
+                                <span style={{ color: "red" }}>
+                                    &nbsp;$32.99/month
+                                </span>
+                            </label>
+                        </div>
+                        <div className="check-box-container">
+                            <input
+                                type="checkbox"
+                                className="protectionPlanCheckbox"
+                                id="protectionPlanCheckbox2"
+                                checked={protPlan === 3}
+                                onClick={(e) => {
+                                    handleCheckboxClick(e);
+                                    setProtPlan(3);
+                                }}
+                            />
+                            <label
+                                // htmlFor="protectionPlanCheckbox2"
+                                onClick={() => {
+                                    setOpen(true);
+                                    setPlan("unlimited");
+                                }}
+                            >
+                                Tech Unlimited – Protect Eligible Past and
+                                Future Purchases with 1 Plan (Renews Monthly
+                                Until Cancelled) for
+                                <span
+                                    style={{
+                                        color: "red",
+                                    }}
+                                >
+                                    &nbsp;$16.99/month
+                                </span>
+                            </label>
+                        </div>
                     </div>
-                </div>
+                )}
 
                 <ProtectionPopup
                     open={open}
