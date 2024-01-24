@@ -20,25 +20,45 @@ import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
 import ProductPageHeader from "../../components/ProductPageHeader/ProductPageHeader";
 import VisibleOnScroll from "../../components/VisibleOnScroll";
 import TechDetails from "../../components/TechDetails/TechDetails";
+import { similarProductsApi } from "@api/products";
 
 export default function Product() {
     const [isLoading, setIsLoading] = useState(true);
     const [product, setProduct] = useState(null);
+    const [similarProducts, setSimilarProducts] = useState([]);
     const [productImages, setProductImages] = useState([]);
     const products = useSelector((state) => state.products.products);
-    const similarProducts = useSelector(
-        (state) => state.products.similarProducts
-    );
+    const { title } = useParams();
+    const modifyTitle = title.replace(/-/g, " ");
+    console.log(modifyTitle);
+
+    // const similarProducts = useSelector(
+    //     (state) => state.products.similarProducts
+    // );
     const { productId } = useParams();
 
     useEffect(() => {
         getProductDetails();
+        getSimilarProduct();
     }, [productId]);
+
+    const getSimilarProduct = async () => {
+        // if (!products?.length) {
+        try {
+            const resp = await similarProductsApi({ name: modifyTitle });
+            setSimilarProducts(resp?.data?.data);
+            console.log("repsoooo", resp?.data?.data);
+        } catch (error) {
+            console.log(error);
+        }
+        // }
+    };
 
     const getProductDetails = async () => {
         const filteredProduct = products.filter(
             (product) => product?.asin == productId
         )[0];
+
         if (filteredProduct) {
             setProduct(filteredProduct);
             setProductImages(filteredProduct?.image);
@@ -49,7 +69,9 @@ export default function Product() {
                 setProduct(response.data);
                 setProductImages(response?.data?.image);
                 setIsLoading(false);
-            } catch (error) {}
+            } catch (error) {
+                console.log(error);
+            }
         }
         setIsLoading(false);
     };

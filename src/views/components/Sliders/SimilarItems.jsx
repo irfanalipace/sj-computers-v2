@@ -15,21 +15,6 @@ import { useParams } from "react-router-dom";
 SwiperCore.use([Navigation]);
 
 const SimilarItemsSlider = ({ type = "", products }) => {
-    const dispatch = useDispatch();
-    const handleClick = async (pName) => {
-        try {
-            const splitName = pName.split(",", 1);
-            const nameBeforeComma = splitName[0];
-            await dispatch(
-                fetchSimilarProducts({
-                    name: nameBeforeComma,
-                })
-            );
-            console.log("something");
-        } catch (error) {
-            console.log(error);
-        }
-    };
     return (
         <Swiper
             slidesPerView={5}
@@ -58,10 +43,9 @@ const SimilarItemsSlider = ({ type = "", products }) => {
             navigation
         >
             {products?.map((product) => (
-                <SwiperSlide key={"ps-" + product.id}>
+                <SwiperSlide key={"ps-" + product?.id}>
                     <div
-                        // className="px-1"
-                        onClick={() => handleClick(product.name)}
+                    // className="px-1"
                     >
                         <ProductCardSimilarItems
                             type={type}
