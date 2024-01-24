@@ -56,10 +56,12 @@ class ProductStatistics extends Command
 
             $rateStatistics = [];
             for ($rating = 5; $rating >= 1; $rating--) {
-                $rateStatistics[$rating] = $totalReviews > 0 ? round(($ratingsCount->get($rating, 0) / $totalReviews) * 100) . '%' : '0%';
+                $rateStatistics[$rating] = $totalReviews > 0 ? round(($ratingsCount->get($rating, 0) / $totalReviews) * 100) : '0';
             }
 
-            $rateStatistics['overall_rate'] = $totalReviews > 0 ? round($reviews->avg('rating'), 1) : '0';
+            $rateStatistics['overall_rating'] = $totalReviews > 0 ? round($reviews->avg('rating'), 1) : '0';
+            $rateStatistics['global_rating'] =  0;
+            $rateStatistics['total_rating'] =  $totalReviews;
             $statistics = [
                 'rate' => $rateStatistics
             ];
