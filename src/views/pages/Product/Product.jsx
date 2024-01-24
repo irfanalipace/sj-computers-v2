@@ -26,23 +26,28 @@ export default function Product() {
     const ProductComponent = () => {
         const { similarProducts } = useSimilarData();
         return (
-            <div className="row">
-                <div className="col-12 col-md-4">
-                    <ProductImage ProductImages={productImages} />
-                </div>
-                <div className="col-12 col-md-5">
-                    <ProductDetails product={product} />
-                </div>
-                <div className="col-12 col-md-3 p-0 m-0">
-                    <CheckOutCard product={{ ...product }} />
-                </div>
-                <div className="hidden-on-tab">
-                    <SimilarItems products={similarProducts} />
-                </div>
-                <ProductVideo product={product} />
-                <RefurbishedSection />
-                <ProductDescription product={product} />
-            </div>
+            <>
+                {similarProducts?.length > 0 && (
+                    <div className="row">
+                        <div className="col-12 col-md-4">
+                            <ProductImage ProductImages={productImages} />
+                        </div>
+                        <div className="col-12 col-md-5">
+                            <ProductDetails product={product} />
+                        </div>
+                        <div className="col-12 col-md-3 p-0 m-0">
+                            <CheckOutCard product={{ ...product }} />
+                        </div>
+                        <div className="hidden-on-tab">
+                            <SimilarItems products={similarProducts} />
+                        </div>
+                        <ProductVideo product={product} />
+                        <RefurbishedSection />
+                        <ProductDescription product={product} />
+                        <TechDetails product={product} />
+                    </div>
+                )}
+            </>
         );
     };
 
