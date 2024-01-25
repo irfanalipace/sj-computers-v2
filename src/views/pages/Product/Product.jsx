@@ -18,13 +18,33 @@ import CategoriesHeader from "../../components/Header/CategoriesHeader/Categorie
 import VisibleOnScroll from "../../components/VisibleOnScroll";
 import useProductData from "./useProductData";
 import useSimilarData from "./useSimilarProduct";
-import { useDispatch } from "react-redux";
+import Breadcrumb from "@common/Breadrumb/Breadcrumb";
+import { useSearchParams } from "react-router-dom";
 import { CLEAR_REVIEW } from "../../../core/store/review/reviewSlice";
+import { useDispatch } from "react-redux";
 
 export default function Product() {
     const dispatch = useDispatch();
+    const [searchParams, setSearchParams] = useSearchParams();
     const { isLoading, product, productImages, products, onFilterChange } =
         useProductData();
+
+    const redirct = (productUrl) => {
+        const url = new URL(productUrl || "https://www.sjcomputers.us");
+        url.searchParams.set("breadcrumb", "Product");
+        return url.pathname;
+    };
+
+    const breadcrumbRoutes = [
+        {
+            label: "Home",
+            link: "/",
+        },
+        {
+            label: "Product",
+            link: redirct(product?.url),
+        },
+    ];
 
     useEffect(() => {
         return () => {
@@ -38,6 +58,7 @@ export default function Product() {
             <>
                 {products?.length > 0 && (
                     <div className="row">
+                        <Breadcrumb routes={breadcrumbRoutes} />
                         <div className="col-12 col-md-4">
                             <ProductImage ProductImages={productImages} />
                         </div>
