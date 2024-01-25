@@ -163,7 +163,9 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                         {!!reviews?.product_detail?.data?.length && (
                             <Pagination
                                 onChange={handlePageChange}
-                                count={Math.ceil(reviews.total / reviewPerPage)}
+                                count={Math.ceil(
+                                    reviews.product_detail.total / reviewPerPage
+                                )}
                             />
                         )}
                     </div>
