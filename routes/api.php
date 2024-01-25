@@ -91,13 +91,6 @@ Route::get('category-product', [CategoryController::class, 'getCategoryProduct']
 Route::get('filter-products', [ProductController::class, 'getFilterProducts'])->name('getFilterProducts');
 
 /*
- * product media
- */
-Route::get('product-media', [ProductController::class, 'indexProductMedia']);
-Route::get('product-media/{productMedia}', [ProductController::class, 'showProductMedia']);
-
-
-/*
 *Add to Cart
 */
 Route::get('get-items', [CartController::class, 'getItems'])->name('getItems');
