@@ -13,7 +13,8 @@
 .item{
     color: black;
     height: 100%;
-    padding: 20px 45px;
+    padding: 20px 5px;
+    margin: 0px 15px;
     font-size: small;
     white-space: nowrap;
 }
@@ -22,4 +23,11 @@
     color: #E87E24;
     text-decoration: underline;
     cursor: pointer;
+}
+
+/*  for mobile view  */
+@media only screen and (max-width: 600px) {
+    .header-wrappar{
+        display: none;
+    }
 }

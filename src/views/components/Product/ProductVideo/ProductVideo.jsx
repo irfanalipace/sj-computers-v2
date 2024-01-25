@@ -17,52 +17,46 @@ import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutl
 // import videoFront from "../../../assets/images/videoL-tumbnail.svg"
 import { createThumbnail } from "../../../../core/utils/helpers";
 
-const ProductVideo = () => {
-    const url =
-        "https://player.vimeo.com/external/501907857.sd.mp4?s=8f346acfa87b85f1136660006b892b95a1ad550b&profile_id=164&oauth2_token_id=57447761";
-    const url2 =
-        "https://ak.picdn.net/shutterstock/videos/1093044323/preview/stock-footage-generic-d-car-crash-test-with-crashtest-dummy-car-destruction-realistic-animation-d.mp4";
-    const url3 =
-        "https://ak.picdn.net/shutterstock/videos/1099395703/preview/stock-footage-sportsman-training-in-indoor-football-hall-running-with-ball-practicing-dribbling-and-dummy-tricks.mp4";
-    const url4 =
-        "https://ak.picdn.net/shutterstock/videos/1093044315/preview/stock-footage-generic-d-car-crash-test-with-crashtest-dummy-car-destruction-realistic-animation-d.mp4";
+const ProductVideo = ({product}) => {
 
-    const [videoData, setVideoData] = useState([]);
+  const url = "https://player.vimeo.com/external/501907857.sd.mp4?s=8f346acfa87b85f1136660006b892b95a1ad550b&profile_id=164&oauth2_token_id=57447761"
+  const url2 = "https://ak.picdn.net/shutterstock/videos/1093044323/preview/stock-footage-generic-d-car-crash-test-with-crashtest-dummy-car-destruction-realistic-animation-d.mp4"
+  const url3 = "https://ak.picdn.net/shutterstock/videos/1099395703/preview/stock-footage-sportsman-training-in-indoor-football-hall-running-with-ball-practicing-dribbling-and-dummy-tricks.mp4"
+  const url4 = "https://ak.picdn.net/shutterstock/videos/1093044315/preview/stock-footage-generic-d-car-crash-test-with-crashtest-dummy-car-destruction-realistic-animation-d.mp4"
+    
+  console.log(product?.product_media, "products");
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = [
-                    { id: 1, url: url },
-                    { id: 2, url: url2 },
-                    { id: 3, url: url3 },
-                    { id: 4, url: url4 },
-                ];
+  const [videoData, setVideoData] = useState(product?.product_media)
 
-                const modifyVideoData = await Promise.all(
-                    response.map(async (data) => {
-                        const videoSrc = data?.url;
-                        try {
-                            const thumbnailSrc = await createThumbnail(
-                                videoSrc
-                            );
-                            return { ...data, tumbnail: thumbnailSrc };
-                        } catch (error) {
-                            console.error("Error creating thumbnail:", error);
-                            return { ...data, thumbnail: null }; // Handle the error gracefully
-                        }
-                    })
-                );
-                setVideoData(modifyVideoData);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (!videoData?.thumbnail_image){
+          console.log("not exist");
+        const modifyVideoData = await Promise.all(
+          videoData?.map(async (data) => {
+              const videoSrc = data?.url;
+              try {
+                const thumbnailSrc = await createThumbnail(videoSrc);
+                // console.log(thumbnailSrc, "thumbnailSrc");
+                return { ...data, thumbnail_image: thumbnailSrc };
+              } catch (error) {
+                console.error('Error creating thumbnail:', error);
+                return { ...data, thumbnail: null }; // Handle the error gracefully
+              }
+            })
+            );
+            setVideoData(modifyVideoData);
+          } else {
+            console.log("already exist");
+          }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-        fetchData();
-    }, [url, url2, url3, url4]);
-
-    // console.log(videoData, "a");
+    fetchData();
+  }, [product]); 
 
     return (
         <Grid container p={2} borderTop={"1px solid lightgray"} rowGap={2}>
