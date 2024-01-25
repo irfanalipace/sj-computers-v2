@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { ProductImage } from "@components/Product/ProductImage/ProductImage";
 import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
@@ -18,10 +18,19 @@ import CategoriesHeader from "../../components/Header/CategoriesHeader/Categorie
 import VisibleOnScroll from "../../components/VisibleOnScroll";
 import useProductData from "./useProductData";
 import useSimilarData from "./useSimilarProduct";
+import { useDispatch } from "react-redux";
+import { CLEAR_REVIEW } from "../../../core/store/review/reviewSlice";
 
 export default function Product() {
+    const dispatch = useDispatch();
     const { isLoading, product, productImages, products, onFilterChange } =
         useProductData();
+
+    useEffect(() => {
+        return () => {
+            dispatch(CLEAR_REVIEW());
+        };
+    }, []);
 
     const ProductComponent = () => {
         const { similarProducts } = useSimilarData();
