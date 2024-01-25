@@ -4,7 +4,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 import { useSelector } from "react-redux";
-import AddCartComponents from "../ProductCard/AddCartComponents";
+import AddCartComponents from "../Product/CheckOutCard/AddCartComponents";
 
 const SingleSimilarItem = ({ type = "", product }) => {
     const orderEstimatedDelivery = useSelector(

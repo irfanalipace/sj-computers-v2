@@ -197,7 +197,7 @@
     align-items: center;
 }
 .button-cart-sell {
-    margin: 15px -20px;
+    margin: 15px 0;
     /* display: flex;
     justify-content: center; */
     /* align-items: center; */
@@ -218,7 +218,7 @@
 
 .button-cart-sell button {
     width: 100%;
-    max-width: 90%;
+    /* max-width: 90%; */
     margin: 0 auto;
 }
 .button-cart-sell button:disabled {

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import bulletpoint1 from "../../../assets/images/bulletpoint1.png";
-import bulletpoint2 from "../../../assets/images/bulletpoint2.png";
-import bulletpoint3 from "../../../assets/images/bulletpoint3.png";
-import "./ProductCard.css";
+import bulletpoint1 from "../../../../assets/images/bulletpoint1.png";
+import bulletpoint2 from "../../../../assets/images/bulletpoint2.png";
+import bulletpoint3 from "../../../../assets/images/bulletpoint3.png";
+import "../../ProductCard/ProductCard.css";
 import Checkbox from "@mui/material/Checkbox";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import StarRatings from "react-star-ratings";

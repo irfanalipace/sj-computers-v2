@@ -6,10 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import "./ProductCard.css";
-import AddCartComponents from "./AddCartComponents";
+import AddCartComponents from "../Product/CheckOutCard/AddCartComponents";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
-import { removeProtocolAndBaseUrl } from "../../../core/utils/helpers";
-import { useParams } from "react-router-dom";
 
 const Product = ({ type = "", product, inGrid }) => {
     const [show, setShow] = useState(false);
