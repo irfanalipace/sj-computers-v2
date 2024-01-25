@@ -32,4 +32,9 @@ class ProductReview extends Model
     {
         return $this->hasMany(ProductReviewMedia::class);
     }
+
+    public function getTotalRatingAttribute()
+    {
+        return $this->where('product_id', $this->product_id)->count();
+    }
 }
