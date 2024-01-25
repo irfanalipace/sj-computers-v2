@@ -2,6 +2,9 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import StarRatings from "react-star-ratings";
+import { formatDateByMonthName } from "../../../../core/utils/helpers";
+import { Box, Stack, Typography } from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 function ReviewCard({ reviewData }) {
     return (
@@ -17,7 +20,9 @@ function ReviewCard({ reviewData }) {
                         <FontAwesomeIcon icon={faUserCircle} className="fs-2" />
                     )}
                 </div>
-                <p className="mb-0 ms-2 review-author ps-1">Alan</p>
+                <p className="mb-0 ms-2 review-author ps-1">
+                    {reviewData.user.name}
+                </p>
             </div>
             <div className="d-md-flex align-items-center my-2">
                 <StarRatings
@@ -34,15 +39,21 @@ function ReviewCard({ reviewData }) {
                 </p>
             </div>
             <p className="my-2 review-location-time">
-                Reviewed in United States on January 27, 2021
+                {formatDateByMonthName(reviewData?.created_at)}
             </p>
             <p className="verified-review">Verified Purchase</p>
             <p className="review-comment my-0">{reviewData?.body}</p>
             <p className="my-2 text-muted py-1 helpful-count">
                 2 People find this helpul
             </p>
-            <div className="d-flex">
+            <div className="d-flex ">
                 <button className="review-helpful-btn">Helpful</button>
+                {/* <Stack mt={0.7} direction={"row"} spacing={1}>
+                    <CheckCircleIcon sx={{ color: "#318243" }} />
+                    <Typography color={"#318243"}>
+                        Thanks for honest feedback
+                    </Typography>
+                </Stack> */}
                 <button className="review-report-btn">Report</button>
             </div>
         </div>

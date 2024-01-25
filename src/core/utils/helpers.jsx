@@ -44,6 +44,41 @@ export const formatDate = (dateString) => {
     return date.toLocaleDateString(undefined, options);
 };
 
+export function formatDateByMonthName(inputDate) {
+    const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+
+    // Create a Date object from the input date
+    const dateObject = new Date(inputDate);
+
+    // Extract the components of the date
+    const month = months[dateObject.getMonth()];
+    const day = dateObject.getDate();
+    const year = dateObject.getFullYear();
+
+    // Format the date string
+    const formattedDate = `${month} ${day}, ${year}`;
+
+    return formattedDate;
+}
+
+// Example usage
+const inputDate = "2024-01-15"; // Assuming the input date is in the format "YYYY-MM-DD"
+const formattedDate = formatDate(inputDate);
+console.log(formattedDate); // Output: "January 15, 2024"
+
 export const prettifyError = (error) => {
     let prettifiedError = "";
 
@@ -121,27 +156,31 @@ export function removeProtocolAndBaseUrl(url) {
 
 export const createThumbnail = async (videoSrc) => {
     return new Promise((resolve, reject) => {
-        const video = document.createElement('video');
-        video.crossOrigin = 'anonymous';
+        const video = document.createElement("video");
+        video.crossOrigin = "anonymous";
         video.src = videoSrc;
- 
-        video.addEventListener('loadeddata', () => {
+
+        video.addEventListener("loadeddata", () => {
             video.currentTime = 1;
- 
-            video.addEventListener('seeked', () => {
-                const canvas = document.createElement('canvas');
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
- 
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
- 
-                const imageDataUrl = canvas.toDataURL();
-                resolve(imageDataUrl);
-            }, { once: true });
+
+            video.addEventListener(
+                "seeked",
+                () => {
+                    const canvas = document.createElement("canvas");
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                    const imageDataUrl = canvas.toDataURL();
+                    resolve(imageDataUrl);
+                },
+                { once: true }
+            );
         });
- 
-        video.addEventListener('error', (e) => {
+
+        video.addEventListener("error", (e) => {
             reject(new Error(`Error loading video: ${e.message}`));
         });
     });

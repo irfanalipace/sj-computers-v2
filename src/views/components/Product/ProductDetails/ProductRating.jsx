@@ -18,7 +18,7 @@ import "./ProductDetail.css";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_REVIEW } from "../../../../core/store/review/reviewSlice";
 
-export default function ProductRating({ product }) {
+export default function ProductRating({ productRating, productID }) {
     const dispatch = useDispatch();
     const reviewState = useSelector((slice) => slice.review);
 
@@ -64,7 +64,7 @@ export default function ProductRating({ product }) {
             !productDetails?.rate &&
             !reviewState.reviews?.product_stats?.statistics
         ) {
-            getReview(product?.id);
+            getReview(productRating);
         }
     }, [open]);
 
@@ -114,12 +114,12 @@ export default function ProductRating({ product }) {
                         fontFamily={"Inter"}
                         sx={{ mr: 1, mt: 0.4 }}
                     >
-                        {product?.rating}
+                        {productRating}
                     </Typography>
                     <Box>
                         <StarRatings
                             style={{ PointerEvent: null }}
-                            rating={product?.rating}
+                            rating={productRating}
                             starRatedColor="rgb(232, 126, 36)"
                             numberOfStars={5}
                             name="rating"
@@ -138,11 +138,9 @@ export default function ProductRating({ product }) {
             </Tooltip>
             <Stack direction={"row"} spacing={1}>
                 <HoverColorChange hoverColor="#FFA41C" defaultColor="#007185">
-                    <a className="review-text">
-                        {`${productDetails?.rate?.total_rating} Ratings`}
-                    </a>
+                    <a className="review-text">{`${productRating} Ratings`}</a>
                 </HoverColorChange>
-                <Divider
+                {/* <Divider
                     orientation="vertical"
                     variant="middle"
                     sx={{
@@ -153,7 +151,7 @@ export default function ProductRating({ product }) {
                 />
                 <HoverColorChange hoverColor="#FFA41C" defaultColor="#007185">
                     <a className="review-text">11 answered questions</a>
-                </HoverColorChange>
+                </HoverColorChange> */}
             </Stack>
         </Stack>
     );
