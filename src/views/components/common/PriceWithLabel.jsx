@@ -5,9 +5,11 @@ export default function PriceWithLabel({
     price,
     label = "$",
     color = "#B12704",
+    sx,
 }) {
     return (
         <Typography
+            sx={sx}
             fontWeight={400}
             color={color}
             fontSize={"28px"}
