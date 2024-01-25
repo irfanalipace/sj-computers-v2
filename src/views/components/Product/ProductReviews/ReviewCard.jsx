@@ -5,6 +5,7 @@ import StarRatings from "react-star-ratings";
 import { formatDateByMonthName } from "../../../../core/utils/helpers";
 import { Box, Stack, Typography } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function ReviewCard({ reviewData }) {
     return (
@@ -43,6 +44,34 @@ function ReviewCard({ reviewData }) {
             </p>
             <p className="verified-review">Verified Purchase</p>
             <p className="review-comment my-0">{reviewData?.body}</p>
+
+            <Stack
+                direction={"row"}
+                width={"100%"}
+                my={2}
+                spacing={1}
+                overflowX={"auto"}
+                // height={"90px"}
+            >
+                {reviewData?.product_media?.map((item, index) => {
+                    return (
+                        <Box
+                            width={"100px"}
+                            height={"100px"}
+                            p={1}
+                            sx={{ border: "1px solid lightgray" }}
+                        >
+                            <LazyLoadImage
+                                width={"90px"}
+                                style={{ objectFit: "contain" }}
+                                height={"90px"}
+                                src={item?.file_path}
+                                alt={item?.product_review_id}
+                            />
+                        </Box>
+                    );
+                })}
+            </Stack>
             <p className="my-2 text-muted py-1 helpful-count">
                 2 People find this helpul
             </p>

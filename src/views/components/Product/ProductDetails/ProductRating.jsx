@@ -13,7 +13,10 @@ import StarRatings from "react-star-ratings";
 import RatingDetails from "../ProductReviews/RatingDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { productReviewsApi } from "../../../../core/api/product-review";
+import {
+    productRatingApi,
+    productReviewsApi,
+} from "../../../../core/api/product-review";
 import "./ProductDetail.css";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_REVIEW } from "../../../../core/store/review/reviewSlice";
@@ -25,6 +28,12 @@ export default function ProductRating({ productRating, productID }) {
     const [open, setOpen] = React.useState(false);
     const [loading, setLoading] = useState(false);
     const [productDetails, setProductDetails] = useState([]);
+    const [rating, setRating] = useState({});
+
+    const getProductRatingsData = async (id) => {
+        const res = await productRatingApi(id);
+        setRating(res?.data);
+    };
 
     const handleClose = () => {
         setOpen(false);
@@ -67,6 +76,10 @@ export default function ProductRating({ productRating, productID }) {
             getReview(productRating);
         }
     }, [open]);
+
+    useEffect(() => {
+        getProductRatingsData(productID);
+    }, []);
 
     return (
         <Stack
@@ -112,14 +125,14 @@ export default function ProductRating({ productRating, productID }) {
                         fontSize={"14px"}
                         fontWeight={400}
                         fontFamily={"Inter"}
-                        sx={{ mr: 1, mt: 0.4 }}
+                        sx={{ mr: 1, mt: 0.2 }}
                     >
-                        {productRating}
+                        {rating?.overall_rating}
                     </Typography>
                     <Box>
                         <StarRatings
                             style={{ PointerEvent: null }}
-                            rating={productRating}
+                            rating={rating?.overall_rating}
                             starRatedColor="rgb(232, 126, 36)"
                             numberOfStars={5}
                             name="rating"
@@ -136,9 +149,9 @@ export default function ProductRating({ productRating, productID }) {
                     </Box>
                 </Stack>
             </Tooltip>
-            <Stack direction={"row"} spacing={1}>
+            <Stack direction={"row"} spacing={1} mt={0.3}>
                 <HoverColorChange hoverColor="#FFA41C" defaultColor="#007185">
-                    <a className="review-text">{`${productRating} Ratings`}</a>
+                    <a className="review-text">{`${rating?.total_reviews} Ratings`}</a>
                 </HoverColorChange>
                 {/* <Divider
                     orientation="vertical"

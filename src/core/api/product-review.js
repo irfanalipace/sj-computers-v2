@@ -17,6 +17,22 @@ export function productReviewsApi(id, page = 1, per_page = 10) {
     });
 }
 
+export function productRatingApi(id) {
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/get-product-rating`, id)
+            .then(async (response) => {
+                resolve(response);
+            })
+            .catch((e) => {
+                console.print(
+                    "Console Log: : error in proudct rating api products",
+                    e
+                );
+                reject(e);
+            });
+    });
+}
+
 export function allReviewImagesApi(id) {
     return new Promise((resolve, reject) => {
         ApiService.get(`get-product-details`, id, { per_page: 100, page: 1 })

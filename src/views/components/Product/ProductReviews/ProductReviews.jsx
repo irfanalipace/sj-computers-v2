@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_REVIEW } from "../../../../core/store/review/reviewSlice";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 const PRODUCT_FILTER_KEY_ENUM = {
     TOP: "top-reviews",
     RECENT: "recent-reviews",
