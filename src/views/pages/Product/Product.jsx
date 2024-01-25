@@ -14,7 +14,7 @@ import TechDetails from "../../components/TechDetails/TechDetails";
 import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
 import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
 import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
-import ProductPageHeader from "../../components/ProductPageHeader/ProductPageHeader";
+import CategoriesHeader from "../../components/Header/CategoriesHeader/CategoriesHeader";
 import VisibleOnScroll from "../../components/VisibleOnScroll";
 import useProductData from "./useProductData";
 import useSimilarData from "./useSimilarProduct";
@@ -55,7 +55,7 @@ export default function Product() {
         <>
             {product?.id || isLoading || !products?.length ? (
                 <div className="product-page ">
-                    <ProductPageHeader />
+                    <CategoriesHeader />
                     <div className="product-container container-fluid">
                         {isLoading || !products?.length ? (
                             <LoaderComponent />

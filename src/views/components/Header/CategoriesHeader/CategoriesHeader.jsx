@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import "./ProductPageHeader.css"
+import "./CategoriesHeader.css"
 
-const ProductPageHeader = () => {
+const CategoriesHeader = () => {
 
   const categories = [
     {
@@ -59,4 +59,4 @@ const ProductPageHeader = () => {
   )
 }
 
-export default ProductPageHeader
+export default CategoriesHeader
