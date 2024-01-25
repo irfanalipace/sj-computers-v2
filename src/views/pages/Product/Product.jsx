@@ -41,7 +41,7 @@ export default function Product() {
                         <div className="hidden-on-tab">
                             <SimilarItems products={similarProducts} />
                         </div>
-                        <ProductVideo />
+                        <ProductVideo product={product} />
                         <RefurbishedSection />
                         <ProductDescription product={product} />
                         <TechDetails product={product} />
