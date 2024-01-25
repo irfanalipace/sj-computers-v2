@@ -20,8 +20,7 @@ class ProductController extends BaseController
 {
     public function getList(request $request)
     {
-
-        $data = Product::with('brand', 'productMedia')->paginate(12);
+        $data = Product::with('brand')->paginate(12);
         return $this->sendResponse($data);
     }
 
@@ -35,12 +34,14 @@ class ProductController extends BaseController
     public function getProductDetail(ProductDetailRequest $request)
     {
         $data = Product::where('id', $request->product_id)->first();
+        $data->load('productMedia');
         return $this->sendResponse($data);
     }
 
     public function getProductDetailAsin(ProductDetailAsinRequest $request)
     {
-        $data = Product::where('asin', $request->asin)->first();
+        $data = Product::with('productMedia')
+            ->where('asin', $request->asin)->first();
         return $this->sendResponse($data);
     }
 
@@ -236,25 +237,6 @@ class ProductController extends BaseController
         return array_merge($productInfos, $ids);
     }
 
-    public function indexProductMedia()
-    {
-        try {
-            $data = ProductMedia::with('product')->get();
-            return $this->sendResponse($data, 'Product media displayed');
-        } catch (Exception $e) {
-           return $this->sendError(["Error", "Something went wrong." . $e->getMessage()], 500);
-        }
-    }
-
-    public function showProductMedia(ProductMedia $productMedia)
-    {
-        try {
-            $productMedia->load('product');
-            return $this->sendResponse($productMedia, 'Product media displayed');
-        } catch (Exception $e) {
-           return $this->sendError(["Error", "Something went wrong." . $e->getMessage()], 500);
-        }
-    }
     public function getProtectivePlan(Request $request)
     {
         $protectivePlans = ProtectivePlan::all();

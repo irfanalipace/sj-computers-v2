@@ -91,13 +91,6 @@ Route::get('category-product', [CategoryController::class, 'getCategoryProduct']
 Route::get('filter-products', [ProductController::class, 'getFilterProducts'])->name('getFilterProducts');
 
 /*
- * product media
- */
-Route::get('product-media', [ProductController::class, 'indexProductMedia']);
-Route::get('product-media/{productMedia}', [ProductController::class, 'showProductMedia']);
-
-
-/*
 *Add to Cart
 */
 Route::get('get-items', [CartController::class, 'getItems'])->name('getItems');
@@ -259,8 +252,8 @@ Route::post('store-career-applications', [CareerApplicationController::class, 's
 * Paypal Integration
 */
 Route::post('paypal', [PayPalController::class, 'paypal'])->name('paypal');
-Route::get('success', [PaymentController::class, 'paypalSuccess'])->name('success');
-Route::get('cancel', [PaymentController::class, 'paypalCancel'])->name('cancel');
+Route::get('success', [PayPalController::class, 'paypalSuccess'])->name('success');
+Route::get('cancel', [PayPalController::class, 'paypalCancel'])->name('cancel');
 
 /* 
     Get all reviews

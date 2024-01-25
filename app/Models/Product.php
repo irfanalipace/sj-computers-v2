@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -71,9 +72,13 @@ class Product extends Model
 
     }
 
+    public function productReview() :HasMany
+    {
+        return $this->hasMany(ProductReview::class);
+    }
     public function getRatingAttribute()
     {
-        return mt_rand(3 * 10, 5 * 10) / 10;
+      return ProductReview::where('product_id',$this->id)->count() ?? 0;
     }
 
     public function productStats() :BelongsTo
