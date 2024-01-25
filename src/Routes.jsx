@@ -42,6 +42,8 @@ import NotFound from "@pages/NotFound/NotFound";
 
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
+
+const AddToCart = React.lazy(() => import("./views/pages/AddToCart/AddToCart"));
 const ProductNewReviews = React.lazy(() =>
     import("./views/components/Product/ProductReviews/ProductNewReviews")
 );
@@ -204,6 +206,14 @@ const Router = () => {
             element: (
                 <PageWrapper>
                     <Cart />
+                </PageWrapper>
+            ),
+        },
+        {
+            path: "/add-to-cart/:title/dp/:productId",
+            element: (
+                <PageWrapper>
+                    <AddToCart />
                 </PageWrapper>
             ),
         },

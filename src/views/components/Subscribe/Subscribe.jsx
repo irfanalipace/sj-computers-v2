@@ -2,8 +2,10 @@ import { Grid, Link } from "@mui/material";
 import React from "react";
 import letterImage from "@images/advertisement/Layer_1.png";
 import "./Subscribe.css";
+import { useSelector } from "react-redux";
 
 const Subscribe = () => {
+    const user = useSelector((state) => state?.auth?.isAuthenticated);
     return (
         <div style={{ backgroundColor: "#fff" }}>
             <Grid
@@ -78,9 +80,16 @@ const Subscribe = () => {
                 <h6 style={{ fontSize: "13px" }}>
                     See personalized recommendations
                 </h6>
-                <button className="sign-in-main">Sign in</button>
+                {user ? (
+                    <button className="sign-in-main">Sign in</button>
+                ) : (
+                    <></>
+                )}
                 <p style={{ fontSize: "12px" }} className="mt-2 mb-5">
-                    New Customer ? <Link>Start here.</Link>
+                    New Customer ?{" "}
+                    <Link href={user ? "/register" : "/login"}>
+                        Start here.
+                    </Link>
                 </p>
             </Grid>
             <hr />
