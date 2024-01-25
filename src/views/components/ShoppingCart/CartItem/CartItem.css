@@ -19,9 +19,16 @@
     line-height: 19px;
     color: #000000;
 }
-
+.add-card-price-carditem {
+    text-align: end;
+    padding-right: 12px;
+    margin-top: 15px;
+}
 .item-details {
     font-size: 11px;
+}
+.list-item-dev-ui-item{
+    margin-top: 15px;
 }
 .cart-image-mobile-size {
     display: flex;
@@ -32,6 +39,40 @@
 .cartitem-delete-button {
     height: 25px;
 }
+
+
+
+.protection-lables-warntity{
+    font-size: 10px;
+    font-weight: 500;
+}
+.protection-name-dev{
+    font-size: 10px;
+    font-weight: 500;
+    color:#318243;
+    margin-top: 1px;
+}
+.protection-lables-warntity span{
+    color: #318243;
+    margin-top: 6px;
+    font-size: 12px;
+}
+.dev-sj-computers-sections{
+    margin-left: 11px;
+}
+.protection-name-dev{
+    margin-bottom: 7px !important;
+}
+
+.protection-lables-warntity {
+    text-align: center;
+    text-align: center;
+    padding-top: 9px;
+    /* width: 123px; */
+    height: 61px;
+    background: #EAEDED;
+}
+
 @media screen and (max-width: 600px) {
     .cartItem-image {
         width: 200px;

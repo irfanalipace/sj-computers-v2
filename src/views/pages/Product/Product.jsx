@@ -22,35 +22,31 @@ import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 import { useSearchParams } from "react-router-dom";
 
 export default function Product() {
-
     const [searchParams, setSearchParams] = useSearchParams();
+
     const { isLoading, product, productImages, products, onFilterChange } =
         useProductData();
 
-   
-    
-        const redirct = (pathUrl) => {
-            const url = new URL(pathUrl || 'https://www.sjcomputers.us');
-            url.searchParams.set('breadcrumb', 'Product');
-            return window.location.pathname;
-        };
-        
-        const breadcrumbRoutes = [
-            {
-                label: 'Home',
-                link: '/',
-            },
-            {
-                label: 'Product',
-                link: redirct(product?.url),
-            },
-        ];
-        
+    const redirct = (pathUrl) => {
+        const url = new URL(pathUrl || "https://www.sjcomputers.us");
+        url.searchParams.set("breadcrumb", "Product");
+        return window.location.pathname;
+    };
+
+    const breadcrumbRoutes = [
+        {
+            label: "Home",
+            link: "/",
+        },
+        {
+            label: "Product",
+            link: redirct(product?.url),
+        },
+    ];
 
     const ProductComponent = () => {
-
-
         const { similarProducts } = useSimilarData();
+        
         return (
             <>
                 {products?.length > 0 && (
