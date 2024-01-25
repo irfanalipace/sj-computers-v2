@@ -24,7 +24,8 @@ class CardRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'source_id' => ['required'],
+            'payment_type' => 'required','in:SQUARE,PAYPAL',
+            'source_id' => 'required_if:payment_type,SQUARE',
             'shipping_address' => ['required', 'array'],
             'shipping_address.email' => 'required|email',
             'shipping_address.country' => 'required',

@@ -130,7 +130,7 @@ Route::get('meta_detail', [MetaDetailController::class, 'getDetail'])->name('met
 /*
 *Place Order
 */
-Route::post('checkout-order', [PaymentController::class, 'checkout'])->name('checkoutOrder')->middleware('auth:api');
+Route::post('checkout-order', [PaymentController::class, 'checkout'])->name('checkoutOrder');
 
 Route::get('success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 
