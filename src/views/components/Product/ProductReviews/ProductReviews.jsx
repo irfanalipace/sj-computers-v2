@@ -65,7 +65,15 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                 <div className="row">
                     <div className="col-12 col-sm-6 col-md-4">
                         <div style={{ maxWidth: "350px" }}>
-                            <RatingDetails />
+                            <RatingDetails
+                                productDetails={
+                                    reviews?.product_stats
+                                        ? JSON.parse(
+                                              reviews?.product_stats?.statistics
+                                          )
+                                        : []
+                                }
+                            />
                             <div className="py-4 my-4 border-top border-bottom">
                                 <p className="fs-6 fw-semibold mb-3">
                                     Review this product
@@ -98,13 +106,13 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                         </div> */}
 
                         {/* <ReviewImages reviews={reviews} /> */}
-                        {reviews?.product_detail?.length === 0 &&
+                        {reviews?.product_detail?.data.length === 0 &&
                             !reviewLoading && (
                                 <Typography fontWeight={600}>
                                     No customer reviews
                                 </Typography>
                             )}
-                        {!!reviews?.product_detail?.length && (
+                        {!!reviews?.product_detail?.data.length && (
                             <>
                                 <div
                                     tabIndex="0"
@@ -145,17 +153,14 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                 />
                             </Box>
                         ) : (
-                            <>
-                                {reviews.length > 0 &&
-                                    reviews?.product_detail?.map((review) => (
-                                        <div className="my-4">
-                                            <ReviewCard reviewData={review} />
-                                        </div>
-                                    ))}
-                            </>
+                            reviews.product_detail?.data?.map((review) => (
+                                <div className="my-4">
+                                    <ReviewCard reviewData={review} />
+                                </div>
+                            ))
                         )}
 
-                        {!!reviews?.product_detail?.length && (
+                        {!!reviews?.product_detail?.data?.length && (
                             <Pagination
                                 onChange={handlePageChange}
                                 count={Math.ceil(reviews.total / reviewPerPage)}
