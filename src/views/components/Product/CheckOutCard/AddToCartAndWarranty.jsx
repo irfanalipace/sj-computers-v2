@@ -10,37 +10,21 @@ import ProtectionPlanDrawer from "../ProtectionPlan/ProtectionPlanDrawer";
 import useAddToCart from "./useAddToCart";
 
 function AddToCartAndWarranty({ product }) {
-    const [protPlan, setProtPlan] = useState("");
-    const [open, setOpen] = useState(false);
-    const [openDrawer, setOpenDrawer] = useState(false);
-    const [plan, setPlan] = useState("");const [quantity, setQuantity] = useState(1);
+    const [protPlan, setProtPlan] = useState({});
+    const [plan, setOpenPlan] = useState({});
+    const [quantity, setQuantity] = useState(1);
+    const [drawerProps, setDrawerProps] = useState({});
     const productAddingToCard = useSelector(
         (state) => state.products.isLoading
     );
-    const cartClickHandler = useAddToCart(product, quantity);
+    const cartClickHandler = useAddToCart(product, quantity, plan);
 
-    function handleCheckboxClick(event, id) {
-        const clickedCheckbox = event.target.checked;
-
+    function handleCheckboxClick(_plan) {
         setProtPlan((prev) => {
-            if (prev === id) return null;
-            else return id;
+            if (prev?.value === _plan.value) return null;
+            else return _plan;
         });
-
-        setPlan(
-            clickedCheckbox.id === "protectionPlanCheckbox"
-                ? "3-Year"
-                : clickedCheckbox.id === "protectionPlanCheckbox1"
-                ? "4-Year"
-                : "unlimited"
-        );
     }
-    const getPlanvalue = (id) => {
-        const matchingEnum = Object.values(PLAN_ENUM).find(
-            (enumEntry) => enumEntry.label === id
-        );
-        setPlan(matchingEnum.value);
-    };
 
     return (
         <div>
@@ -77,7 +61,13 @@ function AddToCartAndWarranty({ product }) {
                 <button
                     // onClick={cartClickHandler}
                     onClick={() => {
-                        protPlan ? cartClickHandler() : setOpen(true);
+                        protPlan?.value
+                            ? cartClickHandler()
+                            : setDrawerProps({
+                                  open: true,
+                                  plan: plan,
+                                  redirectOnClose: true,
+                              });
                     }}
                     isLoading={productAddingToCard}
                     className={"button1 button-text-button"}
@@ -228,17 +218,16 @@ function AddToCartAndWarranty({ product }) {
                                 className="protectionPlanCheckbox"
                                 id={"warranty-" + _plan.value}
                                 name={"warranty-" + _plan.value}
-                                checked={protPlan === _plan.value}
+                                checked={protPlan?.value === _plan.value}
                                 onChange={(e) => {
-                                    handleCheckboxClick(e, _plan.value);
+                                    handleCheckboxClick(_plan);
                                     // setProtPlan(_plan.value);
                                 }}
                             />
                             <label
                                 // htmlFor="protectionPlanCheckbox"
                                 onClick={() => {
-                                    setOpen(true);
-                                    setPlan(_plan.value);
+                                    setOpenPlan(_plan);
                                 }}
                             >
                                 {_plan.label} for
@@ -251,28 +240,42 @@ function AddToCartAndWarranty({ product }) {
                 </>
             </div>
             <ProtectionPopup
-                open={open}
-                handleClose={() => setOpen(false)}
+                open={Boolean(plan?.value)}
+                handleClose={() => setOpenPlan({})}
                 plan={plan}
                 handleAddProtection={(e) => {
-                    // handleAddProtection(e);
-                    setOpenDrawer(true);
-                    setOpen(false);
+                    setDrawerProps({
+                        open: true,
+                        plan: plan,
+                        redirectOnClose: false,
+                    });
+                    setOpenPlan({});
                 }}
             />
 
-            <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
+            <Drawer
+                anchor="right"
+                open={drawerProps.open}
+                onClose={() =>
+                    setDrawerProps({
+                        open: false,
+                    })
+                }
+            >
                 <ProtectionPlanDrawer
-                    closeDrawer={() => setOpen(false)}
-                    handleButton={() => {
-                        setOpen(false);
+                    {...drawerProps}
+                    closeDrawer={() => {
+                        drawerProps.redirectOnClose && cartClickHandler();
+                        setDrawerProps({
+                            open: false,
+                        });
                     }}
-                    handleAddingProtec={() => {
-                        if (plan.value) {
-                            cartClickHandler();
+                    handleAddingProtec={(_plan) => {
+                        console.log("2222  clicked:", _plan);
+                        if (_plan.value) {
+                            cartClickHandler(_plan);
                         }
                     }}
-                    ProtectionPlanCallBack={getPlanvalue}
                 />
             </Drawer>
         </div>

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
 
-function useAddToCart(product, quantity, plan) {
+function useAddToCart(product, quantity) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     // const cart = useSelector((state) => state.cart.cart);
     const details = useSelector((state) => state.cart.details);
@@ -11,28 +11,30 @@ function useAddToCart(product, quantity, plan) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const cartClickHandler = () => {
+    const cartClickHandler = (plan) => {
         let cartQuantity = details.total_items + 1;
-        let itemProtectedPlanPrice = parseFloat(plan?.price) * quantity || 10;
-        let productPrice = product.price * quantity;
-        let cartTotal = parseFloat(details?.total) + itemProtectedPlanPrice;
+        let itemProtectedPlanPrice = parseFloat(plan?.price || 0) * quantity;
+        let productPrice = parseFloat(product.price * quantity);
+        let cartTotal =
+            parseFloat(details?.total) + productPrice + itemProtectedPlanPrice;
         let cartSubTotal =
-            parseFloat(details?.sub_total) + itemProtectedPlanPrice;
+            parseFloat(details?.sub_total) +
+            productPrice +
+            itemProtectedPlanPrice;
         const cartItem = {
             id: product.id,
             quantity,
             price: productPrice,
+            plan_price: itemProtectedPlanPrice,
             product: {
                 ...product,
                 in_stock: quantity >= product.quantity ? false : true,
             },
-            plan: {
-                id: plan?.value,
-                price: plan?.price,
-                label: plan?.label,
-                durationInYears: plan?.durationInYears,
-            },
         };
+
+        if (plan) {
+            cartItem.plan = plan;
+        }
 
         const cartDetails = {
             total_items: cartQuantity,
@@ -51,12 +53,15 @@ function useAddToCart(product, quantity, plan) {
         }
     };
 
-    const memoisedFunction = useMemo(cartClickHandler, [
-        isAuthenticated,
-        JSON.stringify(product),
-        quantity,
-        JSON.stringify(details),
-    ]);
+    const memoisedFunction = useMemo(
+        () => cartClickHandler,
+        [
+            isAuthenticated,
+            JSON.stringify(product),
+            quantity,
+            JSON.stringify(details),
+        ]
+    );
     return memoisedFunction;
 }
 

@@ -109,11 +109,14 @@ export const CartItem = memo(({ cartData }) => {
                                     </strong>
                                 </p>
                             </div>
-                            <WarrantyBadge
-                                durationInYears={
-                                    cartData?.plan?.durationInYears
-                                }
-                            />
+                            {cartData?.plan?.value && (
+                                <WarrantyBadge
+                                    durationInYears={
+                                        cartData?.plan?.durationInYears
+                                    }
+                                    planPrice={cartData?.plan_price}
+                                />
+                            )}
                         </div>
                         <ul className="item-list mt-1 mb-2">
                             <li>
