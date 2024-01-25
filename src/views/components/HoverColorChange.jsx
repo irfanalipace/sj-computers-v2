@@ -15,7 +15,6 @@ function HoverColorChange({
 
     return (
         <div
-            borderBottom={false}
             onMouseLeave={changeBackgroundLeave}
             onMouseOver={changeBackground}
         >
