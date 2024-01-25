@@ -27,10 +27,12 @@ export default function Product() {
     const { isLoading, product, productImages, products, onFilterChange } =
         useProductData();
 
-        const redirct = (productUrl) => {
-            const url = new URL(productUrl || 'https://www.sjcomputers.us');
+   
+    
+        const redirct = (pathUrl) => {
+            const url = new URL(pathUrl || 'https://www.sjcomputers.us');
             url.searchParams.set('breadcrumb', 'Product');
-            return url.pathname;
+            return window.location.pathname;
         };
         
         const breadcrumbRoutes = [
