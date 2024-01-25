@@ -28,7 +28,7 @@ const ProductNewReviews = () => {
     const userEmail = useSelector((state) => state.auth.user.email);
     const userId = useSelector((state) => state.auth.user.id);
     const userName = useSelector((state) => state.auth.user.name);
-
+    const mediaType= "images";
     const userID = Number(userId);
     const [value, setValue] = useState(0);
     const [text, setText] = useState("");
@@ -113,31 +113,68 @@ const ProductNewReviews = () => {
         setValue(0);
     };
 
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+
+    //     try {
+    //         setIsLoading(true);
+          
+    //         const formData = new FormData();
+    //         formData.append("rating", value);
+    //         formData.append("product_id", product?.id);
+    //         formData.append("user_id", userID);
+    //         formData.append("body", text);
+    //         formData.append("media_type", mediaType);
+    //         imgFIles?.forEach((file, index) => {
+    //             formData.append(`media[${index}]`, file);
+    //         });
+
+    //         // Send the FormData object directly as the body
+    //         await productPreviewApi(formData);
+    //         navigate(`${new URL(product?.url).pathname}`);
+    //         toast.success("Product Review Succefull Added");
+    //     } catch (error) {
+    //         console.error("Error submitting review:", error.message);
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
             setIsLoading(true);
-          
-            const formData = new FormData();
-            formData.append("rating", value);
-            formData.append("product_id", product?.id);
-            formData.append("user_id", userID);
-            formData.append("body", text);
-            imgFIles?.forEach((file, index) => {
-                formData.append(`media[${index}]`, file);
-            });
-
-            // Send the FormData object directly as the body
-            await productPreviewApi(formData);
+    
+            const reviewData = {
+                rating: value,
+                product_id: product?.id,
+                user_id: userID,
+                body: text,
+                media_type: "image",
+                media: imgFIles.map((file, index) => ({
+                    index,
+                    file,
+                })),
+            };
+    
+            // Send the reviewData object directly as the body
+            await productPreviewApi(reviewData);
             navigate(`${new URL(product?.url).pathname}`);
-            toast.success("Product Review Succefull Added");
+            toast.success("Product Review Successfully Added");
         } catch (error) {
             console.error("Error submitting review:", error.message);
         } finally {
             setIsLoading(false);
         }
     };
+    
+
+
+
+
+
 
     const redirct = (productUrl) => {
         const url = new URL(productUrl || "https://www.sjcomputers.us");
