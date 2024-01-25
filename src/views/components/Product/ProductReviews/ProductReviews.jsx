@@ -105,7 +105,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                             </button>
                         </div> */}
 
-                        {/* <ReviewImages reviews={reviews} /> */}
+                        <ReviewImages reviews={reviews} />
                         {reviews?.product_detail?.data.length === 0 &&
                             !reviewLoading && (
                                 <Typography fontWeight={600}>

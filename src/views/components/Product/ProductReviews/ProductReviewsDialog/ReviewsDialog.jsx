@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { Dialog, DialogContent, DialogActions, Button, Grid, IconButton, Box, Typography } from '@mui/material'
+import React, { useEffect, useState, useRef } from 'react'
+import { Dialog, DialogContent, DialogActions, Button, Grid, IconButton, Box, Typography, } from '@mui/material'
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import AppsIcon from '@mui/icons-material/Apps';
+
 import ReviewCard from '../ReviewCard';
 import "./ReviewDialog.css"
 
@@ -12,22 +13,59 @@ import "swiper/swiper-bundle.min.css";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 import "swiper/css/navigation";
 
-const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId , imgIndex = 0 , ReviewsData}) => {
+const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId = null , imgIndex , ReviewsData}) => {
 
+  const swiperRef = useRef(null);
 
-  // const handleSwitchImage = (index) => {
-  //   // console.log(index, "index");
-  //   setImgnum(index)
-  // }
-  const [imgGallery, setImgGallery] = useState(true)
+  const [imgGallery, setImgGallery] = useState(false)
+  const [selectedReview, setSelectedReview] = useState(null)
+  const [activeSlide, setActiveSlide] = useState(imgIndex)
+  const [initialSlide, setInitialSlide] = useState(imgIndex)
+  // const [selectedIndex, setSelectedIndex] = useState(null)
+  // console.log(selectedReview?.images.map((image) => {  console.log("image" ,image.imageUrl) }), "images.image");
 
-  const getReviewById = (reviewId) => {
-    const review = ReviewsData.reviews.find((r) => r.reviewId === reviewId);
-    return review || null; // Return null if reviewId is not found
+  const getReviewById = (productReviewId) => {
+    console.log("clicked on image ", productReviewId);
+    if(typeof productReviewId !== "number"){
+      console.log("reiewId empty open gallery");
+      setImgGallery(true)
+    } else {
+      setImgGallery(false)
+      // const review = ReviewsData?.data?.find((r) => r.product_review_id === productReviewId);
+      const review = ReviewsData?.data?.filter(obj => obj.review_id === productReviewId) 
+      setSelectedReview(review)
+      console.log(review, "review", productReviewId, "reviewId");
+      
+      // return review || null; // Return null if reviewId is not found
+      
+    }
+  };
+  
+  useEffect(() => {
+    getReviewById(reviewId)
+  }, [reviewId ])
+
+  const handleSwitchImage = (index) => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+        swiperRef.current.swiper.slideTo(index)
+      // setActiveSlide(swiperRef.current.swiper.activeIndex) // 0-based index
+      console.log("Slider index : ", swiperRef.current.swiper.activeIndex ,"active slide :",  activeSlide, "index :", index);
+    }
   };
 
-    const selectedReview = getReviewById(reviewId)
-    console.log(selectedReview?.images.map((image) => {  console.log("image" ,image) }), "images.image");
+  const handleSlideChange = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+    setActiveSlide(swiperRef.current.swiper.activeIndex) // 0-based index
+  }
+  }
+
+   const handleSelectImageGallery = (productReviewId, index) => {
+    setInitialSlide(index)
+    console.log("index : ", index , "initialSlide : ", initialSlide , );
+    setImgGallery(false)
+    const review = ReviewsData?.data?.filter(obj => obj.review_id === productReviewId) 
+    setSelectedReview(review)
+   }
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth={"lg"}  >
@@ -38,24 +76,38 @@ const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId , imgIndex
             </DialogActions>
               </Box>
 
-          { imgGallery == false ?
-           <Grid container p={2} rowGap={1} width={"100%"} >
+          { imgGallery == true ?
+              // ---- image Gallery --- 
+          <div style={{minHeight: "30rem"}}>  
+          <div className='gallery-container'>  
+          {ReviewsData?.data?.map((data, index) => (
+            <div key={data?.id} className='images-container'>
+              <div  onClick={() => handleSelectImageGallery(data?.product_review_id, index )} className='image-item' style={{backgroundImage: `url(${data?.file_path})`}}></div>
+            </div>
+          ))}
+          </div>
+          </div>
+           
+          : 
+            <Grid container p={2} rowGap={1} width={"100%"} >
               <Grid item xs={12}>
-                <Typography variant='body2'>
-                  <AppsIcon />
+                <Typography variant='body2' onClick={() => setImgGallery(true)} sx={{cursor: "pointer"}} >
+                <IconButton ><AppsIcon /></IconButton>
                   View image gallery </Typography>
               </Grid>
               <Grid item md={6}  height={"30rem"} sx={{backgroundColor: "black"}} display={"flex"} alignItems={"center"} >
               <Swiper 
+                ref={swiperRef}
                 style={{width: "100%", height: "100%"}}
                 spaceBetween={1}
                 slidesPerView={1}
                 navigation
-                initialSlide={imgIndex}
+                onSlideChange={handleSlideChange}
+                initialSlide={initialSlide} // initial slide takes count from 0
               >
-              {selectedReview?.images?.map((image, index) => (
+              {selectedReview?.map((data, index) => (
                 <SwiperSlide style={{width: "100%", height: "100%",display: "flex", alignItems: "center" , justifyContent: "center"}} >
-                  <img src={image?.imageUrl}  style={{maxHeight: "100%",maxWidth: "100%"}} alt="review image" />
+                  <img src={data?.file_path}  style={{maxHeight: "100%",maxWidth: "100%"}} alt="review image" />
                 </SwiperSlide>
               ))}
               </Swiper>
@@ -63,31 +115,18 @@ const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId , imgIndex
 
               <Grid item xs={6} pl={2} container>
                 <Grid item xs={12}>
-                  <ReviewCard />
+                  {/* <ReviewCard /> */}
                 </Grid>
                 <Grid item xs={12} py={1} >
                   <Typography py={1} variant='body2' fontSize={"small"}>Images</Typography>
                   <div style={{display: "flex"}}>
-                    {selectedReview?.images?.map((image, index) => (
-                      <Box key={index} onClick={() => handleSwitchImage(index)} width={"59px"} height={"59px"} border={"2px solid orange"} sx={{mr: "10px" ,backgroundImage: `url(${image?.imageUrl})`, backgroundSize: "cover" }} ></Box>
+                    {selectedReview?.map((data, index) => (
+                      <Box key={data.id}  onClick={() => handleSwitchImage(index)} width={"59px"} height={"59px"} border={activeSlide == index ? "2px solid orange" : ""} sx={{mr: "10px" ,backgroundImage: `url(${data?.file_path})`, backgroundSize: "cover" }} ></Box>
                     ))}
                   </div>
                 </Grid>
               </Grid>
           </Grid>
-          : 
-            // ---- image Gallery --- 
-          <div style={{minHeight: "30rem"}}>  
-          <div className='gallery-container'>  
-          {ReviewsData?.reviews?.map((data, index) => (
-            <div key={index} className='images-container'>
-            {data?.images?.map((image, i) => (
-              <div key={i} className='image-item' style={{backgroundImage: `url(${image.imageUrl})`}}></div>
-            ))}    
-            </div>
-          ))}
-          </div>
-          </div>
            } 
         </DialogContent>
     </Dialog>

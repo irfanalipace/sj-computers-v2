@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 import "swiper/css/navigation";
 import ReviewsDialog from "./ProductReviewsDialog/ReviewsDialog";
-import ReviewsData from "./DummyReviewsData";
+// import ReviewsData from "./DummyReviewsData";
+import { allReviewImagesApi } from "../../../../core/api/product-review";
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -14,13 +15,28 @@ function ReviewImagesSlider({ reviews }) {
     const[open, setOpen] = useState(false)
     const [reviewId, setReviewId] = useState({})
     const [imgIndex, setImgIndex] = useState("")
+    const [ReviewsData, setReviewsData] = useState([]) 
+
+    const fetchData = async () => {
+        try {
+            const response = await allReviewImagesApi(1)
+            console.log(response,  "responseAllImage");
+            setReviewsData(response)
+        } catch (error) {
+            console.log("error");
+        }
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [allReviewImagesApi])
 
     console.log(reviews, "reviews");
 
-    const handleOpenDialog = (revId, index) => {
+    const handleOpenDialog = (reviewId , imgIndex ) => {
         setOpen(true)
-        setReviewId(revId)
-        setImgIndex(index)
+        setReviewId(reviewId)
+        setImgIndex(imgIndex)
         // console.log(reviews, "reviews");
     }
 
@@ -32,6 +48,15 @@ function ReviewImagesSlider({ reviews }) {
 
     return (
         <div className="review-images-section">
+            {/* <button onClick={handleOpenDialog}>image Gallery</button> */}
+            <div className="d-flex justify-content-between mb-3" >
+                            <h3 className="product-section-heading">
+                                Reviews with images
+                            </h3>
+                            <button className="view-all-images-btn" onClick={handleOpenDialog}>
+                                View all images
+                            </button>
+                        </div>
             <Swiper
                 className=""
                 spaceBetween={1}
@@ -50,22 +75,23 @@ function ReviewImagesSlider({ reviews }) {
             >
                 {/* /// --- DIALOG --- /// */}
                 <ReviewsDialog open={open} handleOpenDialog={handleOpenDialog} handleClose={handleClose} reviewId={reviewId} imgIndex={imgIndex} ReviewsData={ReviewsData} />
-                {ReviewsData?.reviews.map((rev) => (
-                    <div key={rev?.reviewId}>
+
+                {ReviewsData?.data?.map((data, index) => (
+                    <div key={data.id}>
                             <button 
                             // onClick={() => handleOpenDialog(rev)}
                             className="btn btn-light p-1 d-flex align-items-center">
-                                {rev?.images?.map((image, index) => (
+                                {/* {rev?.images?.map((image, index) => ( */}
                                     <SwiperSlide >
-                                    <img key={index}
-                                        onClick={() => handleOpenDialog(rev?.reviewId, index)}
-                                        src={image?.imageUrl}
+                                    <img
+                                        src={data?.file_path}
+                                        onClick={() => handleOpenDialog(data?.review_id , index )}
                                         alt="review-image"
                                         className="all-reviews-image"
                                         />
                                         </SwiperSlide>
 
-                                ))}
+                                {/* ))} */}
                             </button>
                         </div>
                 ))}
