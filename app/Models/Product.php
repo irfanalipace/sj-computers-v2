@@ -78,7 +78,7 @@ class Product extends Model
     }
     public function getRatingAttribute()
     {
-      return $this->productReview->count() ?? 0;
+      return ProductReview::where('product_id',$this->id)->count() ?? 0;
     }
 
     public function productStats() :BelongsTo
