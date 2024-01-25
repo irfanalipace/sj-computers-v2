@@ -153,13 +153,14 @@ const ProductNewReviews = () => {
                 user_id: userID,
                 body: text,
                 media_type: "image",
-                media: imgFIles.map((file, index) => ({
-                    index,
-                    file,
-                })),
+                media: imgFIles,
+                // media: imgFIles.map((file, index) => ({
+                //     index,
+                //     file,
+                // })),
             };
     
-            // Send the reviewData object directly as the body
+            
             await productPreviewApi(reviewData);
             navigate(`${new URL(product?.url).pathname}`);
             toast.success("Product Review Successfully Added");
