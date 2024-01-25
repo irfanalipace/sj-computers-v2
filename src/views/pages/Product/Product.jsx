@@ -27,7 +27,7 @@ export default function Product() {
         const { similarProducts } = useSimilarData();
         return (
             <>
-                {similarProducts?.length > 0 && (
+                {products?.length > 0 && (
                     <div className="row">
                         <div className="col-12 col-md-4">
                             <ProductImage ProductImages={productImages} />
@@ -38,10 +38,15 @@ export default function Product() {
                         <div className="col-12 col-md-3 p-0 m-0">
                             <CheckOutCard product={{ ...product }} />
                         </div>
-                        <div className="hidden-on-tab">
-                            <SimilarItems products={similarProducts} />
-                        </div>
+                        {similarProducts?.length > 0 && (
+                            <VisibleOnScroll>
+                                <div className="hidden-on-tab">
+                                    <SimilarItems products={similarProducts} />
+                                </div>
+                            </VisibleOnScroll>
+                        )}
                         <ProductVideo product={product} />
+
                         <RefurbishedSection />
                         <ProductDescription product={product} />
                         <TechDetails product={product} />
@@ -61,9 +66,7 @@ export default function Product() {
                             <LoaderComponent />
                         ) : (
                             <>
-                                <VisibleOnScroll>
-                                    <ProductComponent />
-                                </VisibleOnScroll>
+                                <ProductComponent />
                                 <VisibleOnScroll>
                                     <ProductReviews
                                         reviews={products}
