@@ -17,24 +17,27 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Http\Requests\Square\CardRequest;
+use App\Models\Invoice;
+use App\Models\Product;
 
 class PaymentController extends BaseController
 {
-    private $userId, $user, $totalAmount, $subTotal, $totalQty, $userType, $estimate_days, $shipment_amount,$repository;
+    private $userId, $user, $totalAmount, $subTotal, $totalQty, $userType, $estimate_days, $shipment_amount,$repository,$cartDetails;
     public function __construct(Request $request,OrderRepository $repository)
     {
         $this->user = Auth::guard('api')->user();
         $this->repository = $repository;
 
-        $guestUser = $this->guestUser($request->shipping_address);
+        $guestUser = ($this->user) ?? $this->guestUser($request->shipping_address);
         $this->user = ($this->user) ? $this->user : $guestUser;
         $this->userType = ($this->user) ? StatusEnum::USER : StatusEnum::GUEST;
         $this->userId = ($this->user) ? $this->user->id : $guestUser->email;
             
         $this->shipment_amount = isset($request->details['shipment_amount']) ? $request->details['shipment_amount'] : 0.00;
-        $this->estimate_days = isset($request->details['estimate_days']) ? $request->details['estimate_days'] : null;
+        $this->estimate_days = isset($request->details['estimate_days']) ? $request->details['estimate_days'] : null;     
         
-        dd($this->cartDetails($request));
+        $this->cartDetails = $this->cartDetails($request);
+        
     }
     // chechout
     public function checkout(CardRequest $request)
@@ -45,13 +48,13 @@ class PaymentController extends BaseController
                 case StatusEnum::PAYMENTTYPEPAYPAL:
                     # Paypal Route ...
                     $paypal = new PaypalController;
-                    $response = $paypal->processPayment($request);
+                    $response = $paypal->processPayment($request,$this->user,$this->userType,$this->cartDetails);
                     return $this->sendResponse($response,'Successfully generated url.');
                     break;
                 case StatusEnum::PAYMENTTYPESQUARE:
-
-                    $square = new SquareController;
-                    $response = $square->processPayment($request);
+                    
+                    $square = new SquareController(new OrderRepository);
+                    $response = $square->processPayment($request,$this->user,$this->userType,$this->cartDetails);
                     break;
                 default:
                     # code..                  
@@ -59,10 +62,10 @@ class PaymentController extends BaseController
                     break;
             }
             DB::commit();
-            return $this->sendResponse($response,'Successfully created payment.');
+            return $this->sendResponse($response, StatusEnum::PAYMENTMESSAGE);
         } catch (\Exception $e) {
           DB::rollBack();
-            return $this->sendError('Something went wrong.'. $e,400);
+            return $this->sendError('Something went wrong.'. $e->getMessage(),400);
         }
     }
 
@@ -95,41 +98,4 @@ class PaymentController extends BaseController
         return $guestUser;
     }
 
-    /* success method called after paypal payment successfull */
-    public function paypalSuccess(Request $request)
-    {
-        $provider = new PayPalClient;
-        $provider->setApiCredentials(config('paypal'));
-        $paypalToken = $provider->getAccessToken();
-        $response = $provider->capturePaymentOrder($request->token);
-        if(isset($response['status']) && $response['status'] == 'COMPLETED') {
-
-            // Insert data into database
-            // $payment = new Payment();
-            // $payment->payment_id = $response['id'];
-            // $payment->product_name = session()->get('product_name') ?? 'aaa';
-            // $payment->quantity = session()->get('quantity') ?? 1;
-            // $payment->amount = $response['purchase_units'][0]['payments']['captures'][0]['amount']['value'];
-            // $payment->currency = $response['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'];
-            // $payment->payer_name = $response['payer']['name']['given_name'];
-            // $payment->payer_email = $response['payer']['email_address'];
-            // $payment->status = $response['status'];
-            // $payment->method = "PayPal";
-            // $payment->save();
-
-            return redirect()->to('thank-you');
-
-            unset($_SESSION['product_name']);
-            unset($_SESSION['quantity']);
-
-        } else {
-            return redirect()->route('cancel');
-        }
-    }
-
-    /* cancel method called when user cancel payment */
-    public function paypalCancel($error = 'Payment is cancelled.')
-    {
-        return redirect('checkout?error=' . $error);
-    }
 }

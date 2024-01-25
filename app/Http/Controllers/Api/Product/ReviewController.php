@@ -121,17 +121,4 @@ class ReviewController extends BaseController
             return $this->sendError('error','Something went wrong ' . $e->getMessage());
         }
     }
-
-    public function getProductRate($product_id)
-    {
-        try{
-            $getProductRating = $this->service->getProductRating($product_id);
-            return $this->sendResponse($getProductRating,'Successfully fetched product rating and count.');
-        } catch(ModelNotFoundException $e) {           
-            return $this->sendError('error','Product not found.');
-
-        } catch(Exception $e) {
-            return $this->sendError('error','Something went wrong ' . $e->getMessage());
-        }
-    }
 }
