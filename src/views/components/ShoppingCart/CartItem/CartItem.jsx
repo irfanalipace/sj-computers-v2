@@ -9,6 +9,7 @@ import {
     updateLocalQuantity,
 } from "@store/cart/cartThunks";
 import { QuantityInput } from "@common/QuantityInput/QuantityInput";
+import WarrantyBadge from "@components/ShoppingCart/CartItem/WarrantyBadge";
 
 import "./CartItem.css";
 import { Link } from "react-router-dom";
@@ -40,7 +41,10 @@ export const CartItem = memo(({ cartData }) => {
         quantity = parseInt(quantity);
         let subTotal = 0;
         let difference = quantity - cartData?.quantity;
-        let price = cartData?.product?.price * difference;
+        let productPriceWithWarranty =
+            parseFloat(cartData?.product?.price) +
+            parseFloat(cartData?.plan?.price);
+        let price = productPriceWithWarranty * difference;
         subTotal = parseFloat(details?.sub_total) + price;
         let cartTotal = parseFloat(details?.total) + price;
 
@@ -50,7 +54,7 @@ export const CartItem = memo(({ cartData }) => {
             sub_total: subTotal.toFixed(2),
         };
 
-        let itemPrice = cartData?.product?.price * quantity;
+        let itemPrice = productPriceWithWarranty * quantity;
         const cartItem = {
             id: cartData.id,
             quantity,
@@ -105,6 +109,11 @@ export const CartItem = memo(({ cartData }) => {
                                     </strong>
                                 </p>
                             </div>
+                            <WarrantyBadge
+                                durationInYears={
+                                    cartData?.plan?.durationInYears
+                                }
+                            />
                         </div>
                         <ul className="item-list mt-1 mb-2">
                             <li>
