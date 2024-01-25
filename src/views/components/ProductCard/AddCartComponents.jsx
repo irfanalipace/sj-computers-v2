@@ -8,7 +8,7 @@ import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
 import "./ProductCard.css";
 import { Dialog, Drawer } from "@mui/material";
 import ProtectionPlanDrawer from "./ProtectionPlanDrawer";
-import { PlanEnum } from "@utils/constants";
+import { PLAN_ENUM } from "@utils/constants";
 const AddCartComponents = ({
     product,
     className,
@@ -78,7 +78,7 @@ const AddCartComponents = ({
     // }, [cart]);
 
     const getPlanvalue = (id) => {
-        const matchingEnum = Object.values(PlanEnum).find(
+        const matchingEnum = Object.values(PLAN_ENUM).find(
             (enumEntry) => enumEntry.label === id
         );
         setPlan(matchingEnum);

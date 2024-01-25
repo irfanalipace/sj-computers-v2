@@ -41,7 +41,11 @@
 .chek {
     font-size: 12px;
 }
-
+.MuiTooltip-tooltip {
+    background-color: white !important;
+    border: 1px solid lightgray;
+    color: black !important;
+}
 .product-page .product-rating {
     border: none;
 

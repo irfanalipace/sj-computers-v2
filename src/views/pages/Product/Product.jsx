@@ -14,7 +14,7 @@ import TechDetails from "../../components/TechDetails/TechDetails";
 import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
 import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
 import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
-import ProductPageHeader from "../../components/ProductPageHeader/ProductPageHeader";
+import CategoriesHeader from "../../components/Header/CategoriesHeader/CategoriesHeader";
 import VisibleOnScroll from "../../components/VisibleOnScroll";
 import useProductData from "./useProductData";
 import useSimilarData from "./useSimilarProduct";
@@ -51,7 +51,7 @@ export default function Product() {
         const { similarProducts } = useSimilarData();
         return (
             <>
-                {similarProducts?.length > 0 && (
+                {products?.length > 0 && (
                     <div className="row">
                         <Breadcrumb routes={breadcrumbRoutes} />
                         <div className="col-12 col-md-4">
@@ -63,10 +63,15 @@ export default function Product() {
                         <div className="col-12 col-md-3 p-0 m-0">
                             <CheckOutCard product={{ ...product }} />
                         </div>
-                        <div className="hidden-on-tab">
-                            <SimilarItems products={similarProducts} />
-                        </div>
-                        <ProductVideo />
+                        {similarProducts?.length > 0 && (
+                            <VisibleOnScroll>
+                                <div className="hidden-on-tab">
+                                    <SimilarItems products={similarProducts} />
+                                </div>
+                            </VisibleOnScroll>
+                        )}
+                        <ProductVideo product={product} />
+
                         <RefurbishedSection />
                         <ProductDescription product={product} />
                         <TechDetails product={product} />
@@ -80,15 +85,13 @@ export default function Product() {
         <>
             {product?.id || isLoading || !products?.length ? (
                 <div className="product-page ">
-                    <ProductPageHeader />
+                    <CategoriesHeader />
                     <div className="product-container container-fluid">
                         {isLoading || !products?.length ? (
                             <LoaderComponent />
                         ) : (
                             <>
-                                <VisibleOnScroll>
-                                    <ProductComponent />
-                                </VisibleOnScroll>
+                                <ProductComponent />
                                 <VisibleOnScroll>
                                     <ProductReviews
                                         reviews={products}

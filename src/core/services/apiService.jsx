@@ -102,13 +102,15 @@ const ApiService = {
      * @returns {*}
      */
 
-    post(resource, params = {}, baseURL, token) {
+    post(resource, params = {}, baseURL, token, isFormData = false) {
         this.setAuthorization(token);
         return new Promise((resolve, reject) => {
             if (baseURL) this.setDefaultBaseUrl(baseURL);
-
+            const headers = isFormData
+                ? { "Content-Type": "multipart/form-data" }
+                : { "Content-Type": "application/json" };
             this.instance
-                .post(`${resource}`, params)
+                .post(`${resource}`, params, { headers })
                 .then((res) => {
                     resolve(res.data);
                 })

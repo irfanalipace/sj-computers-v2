@@ -26,22 +26,22 @@ export const shippingMethods = [
     //     cost: 30,
     // },
 ];
-export const PlanEnum = {
+export const PLAN_ENUM = {
     THREE_YEAR: {
         value: 1,
-        label: "3-Year",
+        label: "3-Year Warranty",
         price: 23.99,
         durationInYears: 3,
     },
     FOUR_YEAR: {
         value: 2,
-        label: "4-Year",
+        label: "4-Year Warranty",
         price: 32.99,
         durationInYears: 2,
     },
     DEFAULT: {
         value: 3,
-        label: "unlimited",
+        label: "Tech Unlimited – Protect Eligible Past and Future Purchases with 1 Plan (Renews Monthly Until Cancelled)",
         price: 16.99,
         durationInYears: 0,
     },

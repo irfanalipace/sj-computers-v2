@@ -1,13 +1,50 @@
-import { Box, Divider, Stack, Typography, Button } from "@mui/material";
-import React from "react";
-import Tooltip from "../../Tooltip";
+import {
+    Box,
+    Divider,
+    Stack,
+    Typography,
+    Button,
+    Tooltip,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
+// import Tooltip from "../../Tooltip";
 import HoverColorChange from "../../HoverColorChange";
 import StarRatings from "react-star-ratings";
 import RatingDetails from "../ProductReviews/RatingDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { productReviewsApi } from "../../../../core/api/product-review";
+import "./ProductDetail.css";
 
 export default function ProductRating({ product }) {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleOpen = async () => {
+        setOpen(true);
+    };
+
+    const [loading, setLoading] = useState(false);
+    const [productDetails, setProductDetails] = useState([]);
+    const getReview = async (id) => {
+        setLoading(true);
+        try {
+            const res = await productReviewsApi(id);
+            const parsedData = JSON.parse(res.data.product_stats.statistics);
+            setProductDetails(parsedData);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(() => {
+        if (open && !productDetails?.rate) getReview(product?.id);
+    }, [open]);
+
     return (
         <Stack
             direction={{
@@ -19,10 +56,17 @@ export default function ProductRating({ product }) {
             gap={2}
         >
             <Tooltip
-                sx={{ left: { xs: "50%", md: "50%" } }}
-                content={
+                arrow
+                // disableTouchListener
+                open={open}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                title={
                     <>
-                        <RatingDetails product={product} />
+                        <RatingDetails
+                            loading={loading}
+                            productDetails={productDetails}
+                        />
                         <Stack mt={2} spacing={2}>
                             <Divider
                                 sx={{
@@ -71,7 +115,9 @@ export default function ProductRating({ product }) {
             </Tooltip>
             <Stack direction={"row"} spacing={1}>
                 <HoverColorChange hoverColor="#FFA41C" defaultColor="#007185">
-                    <a className="review-text">66 Ratings</a>
+                    <a className="review-text">
+                        {`${productDetails?.rate?.total_rating} Ratings`}
+                    </a>
                 </HoverColorChange>
                 <Divider
                     orientation="vertical"

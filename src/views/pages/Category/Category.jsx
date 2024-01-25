@@ -7,6 +7,7 @@ import Loader from "@common/LoaderComponent/OverlayLoader";
 import ProductsByCategory from "./ProductsByCategory";
 
 import "./Category.css";
+import CategoriesHeader from "../../components/Header/CategoriesHeader/CategoriesHeader";
 
 function Category() {
     const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,7 @@ function Category() {
     };
     return (
         <div className="category-page">
+            <CategoriesHeader />
             <div className="category-page-inner">
                 <div>
                     <Loader isLoading={false} />
