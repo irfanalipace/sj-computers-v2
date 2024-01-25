@@ -78,24 +78,4 @@ class ReviewService
         return $details;
     }
 
-    /* Show rating and count */
-    public function getProductRating($product_id)
-    {
-        // Get all reviews for the specified product
-        $reviews = ProductReview::where('product_id', $product_id)->select('product_id', 'rating')->get();
-       
-        if($reviews->isEmpty())
-        {
-            throw New Exception('Reviews not found of this Product.');
-        }
-        // Calculate the overall rating and total reviews
-        $overallRating = $reviews->count() > 0 ? round($reviews->avg('rating'), 1) : 0;
-        $totalReviews = $reviews->count();        
-        // Create an array with the overall rating and total reviews
-        $result = [
-            'overall_rating' => $overallRating,
-            'total_reviews' => $totalReviews,
-        ];        
-        return $result;
-    }
 }
