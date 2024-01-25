@@ -13,11 +13,11 @@ import StarRatings from "react-star-ratings";
 import RatingDetails from "../ProductReviews/RatingDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { productReviewsApi } from "../../../../core/api/product-review";
 import "./ProductDetail.css";
 
 export default function ProductRating({ product }) {
     const [open, setOpen] = React.useState(false);
-    const [productRewviewDetails, setProductReviewDetails] = useState([]);
 
     const handleClose = () => {
         setOpen(false);
@@ -26,6 +26,24 @@ export default function ProductRating({ product }) {
     const handleOpen = async () => {
         setOpen(true);
     };
+
+    const [loading, setLoading] = useState(false);
+    const [productDetails, setProductDetails] = useState([]);
+    const getReview = async (id) => {
+        setLoading(true);
+        try {
+            const res = await productReviewsApi(id);
+            const parsedData = JSON.parse(res.data.product_stats.statistics);
+            setProductDetails(parsedData);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(() => {
+        if (open && !productDetails?.rate) getReview(product?.id);
+    }, [open]);
 
     return (
         <Stack
@@ -43,10 +61,12 @@ export default function ProductRating({ product }) {
                 open={open}
                 onClose={handleClose}
                 onOpen={handleOpen}
-                // sx={{ left: { xs: "50%", md: "50%" } }}
                 title={
                     <>
-                        <RatingDetails id={product.id} open={open} />
+                        <RatingDetails
+                            loading={loading}
+                            productDetails={productDetails}
+                        />
                         <Stack mt={2} spacing={2}>
                             <Divider
                                 sx={{
@@ -95,7 +115,9 @@ export default function ProductRating({ product }) {
             </Tooltip>
             <Stack direction={"row"} spacing={1}>
                 <HoverColorChange hoverColor="#FFA41C" defaultColor="#007185">
-                    <a className="review-text">66 Ratings</a>
+                    <a className="review-text">
+                        {`${productDetails?.rate?.total_rating} Ratings`}
+                    </a>
                 </HoverColorChange>
                 <Divider
                     orientation="vertical"
