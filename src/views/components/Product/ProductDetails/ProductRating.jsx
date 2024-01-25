@@ -15,9 +15,16 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { productReviewsApi } from "../../../../core/api/product-review";
 import "./ProductDetail.css";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD_REVIEW } from "../../../../core/store/review/reviewSlice";
 
 export default function ProductRating({ product }) {
+    const dispatch = useDispatch();
+    const reviewState = useSelector((slice) => slice.review);
+
     const [open, setOpen] = React.useState(false);
+    const [loading, setLoading] = useState(false);
+    const [productDetails, setProductDetails] = useState([]);
 
     const handleClose = () => {
         setOpen(false);
@@ -27,13 +34,12 @@ export default function ProductRating({ product }) {
         setOpen(true);
     };
 
-    const [loading, setLoading] = useState(false);
-    const [productDetails, setProductDetails] = useState([]);
     const getReview = async (id) => {
         setLoading(true);
         try {
             const res = await productReviewsApi(id);
             const parsedData = JSON.parse(res.data.product_stats.statistics);
+            dispatch(ADD_REVIEW(res.data));
             setProductDetails(parsedData);
         } catch (error) {
             console.error(error);
@@ -42,7 +48,24 @@ export default function ProductRating({ product }) {
         }
     };
     useEffect(() => {
-        if (open && !productDetails?.rate) getReview(product?.id);
+        if (open) {
+            const statisticsFromStore = reviewState.reviews?.product_stats
+                ?.statistics
+                ? JSON.parse(reviewState.reviews?.product_stats?.statistics)
+                : [];
+
+            if (statisticsFromStore || statisticsFromStore?.length !== 0) {
+                setProductDetails(statisticsFromStore);
+            }
+        }
+
+        if (
+            open &&
+            !productDetails?.rate &&
+            !reviewState.reviews?.product_stats?.statistics
+        ) {
+            getReview(product?.id);
+        }
     }, [open]);
 
     return (

@@ -13,6 +13,8 @@ import {
     Pagination,
     Typography,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD_REVIEW } from "../../../../core/store/review/reviewSlice";
 const PRODUCT_FILTER_KEY_ENUM = {
     TOP: "top-reviews",
     RECENT: "recent-reviews",
@@ -26,8 +28,11 @@ const PRODUCT_FILTER_LABEL_ENUM = {
 const reviewPerPage = 5;
 
 function ProductReviews({ productId, productAsin, onFilterChange }) {
+    const dispatch = useDispatch();
+    const reviewState = useSelector((slice) => slice.review);
+
     const [filterBy, setFilterBy] = useState(PRODUCT_FILTER_KEY_ENUM.TOP);
-    const [reviews, setReviews] = useState([]);
+    const [reviews, setReviews] = useState(reviewState.reviews);
     const [reviewLoading, setReviewLoading] = useState(false);
     const reviewRef = useRef(null);
     const isMounted = useRef(false);
@@ -42,6 +47,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
             setReviewLoading(true);
             const res = await productReviewsApi(id, page, reviewPerPage);
             setReviews(res.data);
+            dispatch(ADD_REVIEW(res.data));
         } catch (error) {
             console.error(error);
         } finally {
@@ -56,7 +62,9 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
     }, [filterBy]);
 
     useEffect(() => {
-        getProductReviews(productId, 1, reviewPerPage);
+        if (!reviewState.reviews?.product_detail) {
+            getProductReviews(productId, 1, reviewPerPage);
+        }
     }, []);
 
     return (
