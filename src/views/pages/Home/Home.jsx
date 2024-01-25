@@ -8,6 +8,7 @@ const ProductsHomePage = React.lazy(() => import("./ProductsHomePage"));
 
 // import SellingProducts from "@components/MobileCategory/SellingProducts/SellingProducts";
 import "./Home.css";
+import Subscribe from "../../components/Subscribe/Subscribe";
 
 const Home = () => {
     // const handleResize = () => {
@@ -15,22 +16,27 @@ const Home = () => {
     // };
     // const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     return (
-        <div className="homePage">
-            {/* <MobileHomeCategory />
+        <>
+            <div className="homePage">
+                {/* <MobileHomeCategory />
                 
                         <SellingProducts /> */}
-            <BannerCategory />
-            <Suspense>
-                <div className="products-grid-container">
-                    <h2>Products</h2>
-                    <ProductsHomePage />
-                </div>
-            </Suspense>
+                <BannerCategory />
+                <Suspense>
+                    <div className="products-grid-container">
+                        <h2>Products</h2>
+                        <ProductsHomePage />
+                    </div>
+                </Suspense>
 
-            {/* <CarouselSlider /> */}
-            {/* <ProductThreeItem /> */}
-            {/* <Recommendation /> */}
-        </div>
+                {/* <CarouselSlider /> */}
+                {/* <ProductThreeItem /> */}
+                {/* <Recommendation /> */}
+            </div>
+            <div>
+                <Subscribe />
+            </div>
+        </>
     );
 };
 

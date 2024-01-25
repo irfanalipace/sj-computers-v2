@@ -11,7 +11,7 @@ import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 import "./CheckOutCard.css";
 import { Link } from "react-router-dom";
 import AddCartComponents from "@components/ProductCard/AddCartComponents";
-import { IS_CHRISTMAS_HOLIDAYS, PlanEnum } from "@utils/constants";
+import { IS_CHRISTMAS_HOLIDAYS, PLAN_ENUM } from "@utils/constants";
 import ProtectionPopup from "./ProtectionPopup";
 export const CheckOutCard = ({ product }) => {
     const currentState = useSelector((state) => state.states.currentState);
@@ -25,6 +25,7 @@ export const CheckOutCard = ({ product }) => {
     const [open, setOpen] = useState(false);
     const [openDrawer, setOpenDrawer] = useState(false);
     const [cartItem, setCartItem] = useState(null);
+    const [cartItemOne, setCartItemOne] = useState();
     const [plan, setPlan] = useState("");
     const handleShow = () => setShow(!show);
     const dispatch = useDispatch();
@@ -63,18 +64,19 @@ export const CheckOutCard = ({ product }) => {
 
     useEffect(() => {
         let item = cart.filter((ci) => ci.id === product.id);
+        let item2 = cart.find((ci) => ci.id === product.id);
         setCartItem(item);
+        setCartItemOne(item2);
     }, [cart]);
 
-    function handleCheckboxClick(event) {
-        const clickedCheckbox = event.target;
-        const checkboxes = document.querySelectorAll(".protectionPlanCheckbox");
+    function handleCheckboxClick(event, id) {
+        const clickedCheckbox = event.target.checked;
 
-        checkboxes.forEach((checkbox) => {
-            if (checkbox !== clickedCheckbox) {
-                checkbox.checked = false;
-            }
+        setProtPlan((prev) => {
+            if (prev === id) return null;
+            else return id;
         });
+
         setPlan(
             clickedCheckbox.id === "protectionPlanCheckbox"
                 ? "3-Year"
@@ -83,16 +85,15 @@ export const CheckOutCard = ({ product }) => {
                 : "unlimited"
         );
     }
-
     const getPlanvalue = (id) => {
-        const matchingEnum = Object.values(PlanEnum).find(
+        const matchingEnum = Object.values(PLAN_ENUM).find(
             (enumEntry) => enumEntry.label === id
         );
         setPlan(matchingEnum.value);
     };
 
     // const handleAddProtection = (name) => {
-    //     const matchingEnum = Object.values(PlanEnum).find(
+    //     const matchingEnum = Object.values(PLAN_ENUM).find(
     //         (enumEntry) => enumEntry.label === name
     //     );
     //     console.log(matchingEnum);
@@ -274,12 +275,10 @@ export const CheckOutCard = ({ product }) => {
                                     <div className="in-stock-area-lable">
                                         {product?.quantity > 0 ? (
                                             <small className="in-stock">
-                                                {" "}
                                                 In Stock
                                             </small>
                                         ) : (
                                             <small className="not-in-stock ">
-                                                {" "}
                                                 Out of Stock
                                             </small>
                                         )}
@@ -451,7 +450,7 @@ export const CheckOutCard = ({ product }) => {
                         </div>
                     </div>
                 </div>
-                <hr className="hidden-on-mobile"></hr>
+                {/* <hr className="hidden-on-mobile"></hr> */}
                 <Link
                     to={"/term_services"}
                     style={{
@@ -464,87 +463,42 @@ export const CheckOutCard = ({ product }) => {
                     Details
                 </Link>
                 <hr></hr>
-                <div className="protection-plan hidden-on-mobile">
-                    Add a Protection Plan :
-                    <div className="check-box-container">
-                        <input
-                            type="checkbox"
-                            className="protectionPlanCheckbox"
-                            id="protectionPlanCheckbox"
-                            checked={protPlan === 1}
-                            onClick={(e) => {
-                                handleCheckboxClick(e);
-                                setProtPlan(1);
-                            }}
-                        />
-                        <label
-                            htmlFor="protectionPlanCheckbox"
-                            onClick={() => {
-                                setOpen(true);
-                                setPlan("3-Year");
-                            }}
-                        >
-                            3-Year Protection for{" "}
-                            <span style={{ color: "red" }}>
-                                &nbsp;$23.99/month
-                            </span>
-                        </label>
+                {cartItemOne?.id ? (
+                    <></>
+                ) : (
+                    <div className="protection-plan hidden-on-mobile">
+                        Add a Warranty Plan :
+                        <>
+                            {Object.values(PLAN_ENUM).map((_plan) => (
+                                <div className="check-box-container">
+                                    <input
+                                        type="checkbox"
+                                        className="protectionPlanCheckbox"
+                                        id={"warranty-" + _plan.value}
+                                        name={"warranty-" + _plan.value}
+                                        checked={protPlan === _plan.value}
+                                        onChange={(e) => {
+                                            handleCheckboxClick(e, _plan.value);
+                                            // setProtPlan(_plan.value);
+                                        }}
+                                    />
+                                    <label
+                                        // htmlFor="protectionPlanCheckbox"
+                                        onClick={() => {
+                                            setOpen(true);
+                                            setPlan(_plan.value);
+                                        }}
+                                    >
+                                        {_plan.label} for
+                                        <span style={{ color: "red" }}>
+                                            &nbsp;${_plan.price}/Month
+                                        </span>
+                                    </label>
+                                </div>
+                            ))}
+                        </>
                     </div>
-                    <div className="check-box-container">
-                        <input
-                            type="checkbox"
-                            className="protectionPlanCheckbox"
-                            id="protectionPlanCheckbox1"
-                            checked={protPlan === 2}
-                            onClick={(e) => {
-                                handleCheckboxClick(e);
-                                setProtPlan(2);
-                            }}
-                        />
-                        <label
-                            htmlFor="protectionPlanCheckbox1"
-                            onClick={() => {
-                                setOpen(true);
-                                setPlan("4-Year");
-                            }}
-                        >
-                            4-Year Protection for{" "}
-                            <span style={{ color: "red" }}>
-                                &nbsp;$32.99/month
-                            </span>
-                        </label>
-                    </div>
-                    <div className="check-box-container">
-                        <input
-                            type="checkbox"
-                            className="protectionPlanCheckbox"
-                            id="protectionPlanCheckbox2"
-                            checked={protPlan === 3}
-                            onClick={(e) => {
-                                handleCheckboxClick(e);
-                                setProtPlan(3);
-                            }}
-                        />
-                        <label
-                            htmlFor="protectionPlanCheckbox2"
-                            onClick={() => {
-                                setOpen(true);
-                                setPlan("unlimited");
-                            }}
-                        >
-                            Tech Unlimited – Protect Eligible Past and Future
-                            Purchases with 1 Plan (Renews Monthly Until
-                            Cancelled) for
-                            <span
-                                style={{
-                                    color: "red",
-                                }}
-                            >
-                                &nbsp;$16.99/month
-                            </span>
-                        </label>
-                    </div>
-                </div>
+                )}
 
                 <ProtectionPopup
                     open={open}

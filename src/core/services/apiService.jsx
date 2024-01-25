@@ -89,6 +89,7 @@ const ApiService = {
                     } else if (error?.response?.status === 429)
                         toast.error("Too Many Requests");
                     reject(error?.response);
+                    console.log(error?.response, "abcd ");
                 });
             if (baseURL) this.setDefaultBaseUrl();
         });

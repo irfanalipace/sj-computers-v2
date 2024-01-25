@@ -29,7 +29,7 @@ const ProtectionPopup = ({ open, handleClose, plan, handleAddProtection }) => {
                 }}
             >
                 <div className="popup-content">
-                    <h3>{plan} Equippment Protection Plan</h3>
+                    <h3>{plan} Equippment Warranty Plan</h3>
                     <p className="title">From Asurion, LLC</p>
                     <div style={{ marginTop: "-15px" }}>
                         <StarRatings
@@ -61,7 +61,7 @@ const ProtectionPopup = ({ open, handleClose, plan, handleAddProtection }) => {
                         help with set- <br />
                         up, connectivity issues, troubleshooting and much more.{" "}
                         <br />
-                        TERMS & DETAILS: More information about this protection
+                        TERMS & DETAILS: More information about this warranty
                         plan is <br />
                         available within the “Product guides and documents”
                         section. Simply <br /> click “User Guide” for more info.
@@ -77,7 +77,7 @@ const ProtectionPopup = ({ open, handleClose, plan, handleAddProtection }) => {
                         <br />
                         More info :{" "}
                         <small style={{ color: "#1270c4" }}>
-                            {plan} Protection
+                            {plan} Warranty
                         </small>
                     </p>
                 </div>
@@ -86,7 +86,7 @@ const ProtectionPopup = ({ open, handleClose, plan, handleAddProtection }) => {
                         className="add-btn"
                         onClick={() => handleAddProtection(plan)}
                     >
-                        Add Protection
+                        Add Warranty
                     </button>
                     <button onClick={handleClose}>No Thanks</button>
                 </div>

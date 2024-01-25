@@ -124,7 +124,7 @@ function VideoCard({ data, index, videoData }) {
                                     height={"60px"}
                                     position={"relative"}
                                     sx={{
-                                        backgroundImage: `url(${data?.tumbnail})`,
+                                        backgroundImage: `url(${data?.thumbnail_image})`,
                                         borderRadius: "2px",
                                         backgroundSize: "cover",
                                         backgroundPosition: "center",
@@ -167,7 +167,7 @@ function VideoCard({ data, index, videoData }) {
                                     </Box>
                                 </Grid>
                             <Grid item xs={9} p={1} color={"white"}>
-                                <Typography variant="body2" className="side-video-txt" noWrap >Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquam dolores assumenda vero illum consequatur!</Typography>
+                                <Typography variant="body2" className="side-video-txt" noWrap >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur, quis?</Typography>
                                 <Typography variant="body2"  className="side-video-txt" >Uploader name</Typography>
                             </Grid>
                             </Grid >)
@@ -194,7 +194,7 @@ function VideoCard({ data, index, videoData }) {
                 height={"70%"}
                 position={"relative"}
                 sx={{
-                    backgroundImage: `url(${data?.tumbnail})`,
+                    backgroundImage: `url(${data?.thumbnail_image})`,
                     borderRadius: "10px",
                     borderBottomRightRadius: 0,
                     borderBottomLeftRadius: 0,
@@ -238,7 +238,7 @@ function VideoCard({ data, index, videoData }) {
                     borderRadius: "10px",
                     borderTopLeftRadius: 0,
                     borderTopRightRadius: 0,
-                    background: `rgb(0, 0, 0, 0.5) url(${data?.tumbnail}) `,
+                    background: `rgb(0, 0, 0, 0.5) url(${data?.thumbnail_image}) `,
                     backgroundSize: "180%",
                     backgroundPosition: "0% 48%",
                     backgroundBlendMode: "color",
