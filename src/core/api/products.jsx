@@ -120,7 +120,7 @@ export function filterProductsApi(filter) {
 
 export function productPreviewApi(formData) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/product-reviews`, formData)
+        ApiService.post(`/product-reviews`, formData, null, null, true)
             .then((response) => {
                 console.log(
                     "file: states.js | updateStateApi| response",
