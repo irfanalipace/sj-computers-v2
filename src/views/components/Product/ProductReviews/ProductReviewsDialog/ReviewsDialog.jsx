@@ -14,7 +14,6 @@ import AppsIcon from "@mui/icons-material/Apps";
 
 import ReviewCard from "../ReviewCard";
 import "./ReviewDialog.css";
-import "../../ProductReviews/ProductReviews.css";
 
 // Slider Imports
 import SwiperCore, { Navigation, Pagination } from "swiper";
@@ -222,15 +221,17 @@ const ReviewsDialog = ({
 
                         <Grid item xs={6} pl={2} container>
                             <Grid item xs={12}>
-                                {reviews?.product_detail?.data?.map(
-                                    (review, index) => (
-                                        <div className="my-4" key={index}>
-                                            <ReviewCard reviewData={review} />
+                                {reviews?.product_detail?.data
+                                    ?.filter((review) => review.id === reviewId)
+                                    .map((filteredReview, index) => (
+                                        <div className="my-4 ms-3" key={index}>
+                                            <ReviewCard
+                                                reviewData={filteredReview}
+                                            />
                                         </div>
-                                    )
-                                )}
+                                    ))}
                             </Grid>
-                            <Grid item xs={12} py={1}>
+                            <Grid className="ms-3" item xs={12} py={1}>
                                 <Typography
                                     py={1}
                                     variant="body2"
@@ -256,6 +257,7 @@ const ReviewsDialog = ({
                                                 mr: "10px",
                                                 backgroundImage: `url(${data?.file_path})`,
                                                 backgroundSize: "cover",
+                                                backgroundPosition: "center",
                                             }}
                                         ></Box>
                                     ))}
