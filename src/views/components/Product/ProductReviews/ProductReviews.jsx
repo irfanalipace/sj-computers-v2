@@ -162,11 +162,16 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                 />
                             </Box>
                         ) : (
-                            reviews.product_detail?.data?.map((review) => (
-                                <div className="my-4">
-                                    <ReviewCard reviewData={review} />
-                                </div>
-                            ))
+                            reviews.product_detail?.data?.map(
+                                (review, index) => (
+                                    <div className="my-4">
+                                        <ReviewCard
+                                            reviewData={review}
+                                            index={index}
+                                        />
+                                    </div>
+                                )
+                            )
                         )}
 
                         {!!reviews?.product_detail?.data?.length && (
