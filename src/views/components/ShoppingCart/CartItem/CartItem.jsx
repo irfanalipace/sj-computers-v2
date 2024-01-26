@@ -137,7 +137,7 @@ export const CartItem = memo(({ cartData }) => {
                             /> */}
                         </div>
                         <div className="row">
-                            <div className="col-md-8">
+                            <div className="col-md-5">
                                 <div className="list-item-dev-ui-item">
                                 <ul className="item-list mt-1 mb-2">
                             <li>
@@ -167,9 +167,16 @@ export const CartItem = memo(({ cartData }) => {
                                     </li> */}
                                 </ul>
                                 </div>
-                               
+                            
                              
                             </div>
+                            <div className="col-md-3 px-0">
+                                 <div className="protection-button-remove-data">
+                                 <button>
+                                        Remove protection
+                                    </button>
+                                 </div>
+                               </div>
                             <div className="col-md-2">
                                  <div className="protection-lables-warntity">
                                     <p className="dev-sj-computers-sections">SJ Computer </p>
@@ -180,10 +187,10 @@ export const CartItem = memo(({ cartData }) => {
                                 </div>
                                 <div className="col-md-2">
                                   <div className="add-card-price-carditem">
-                                    <p>$32.4</p>
+                                    <p className="protections-price-carditem">$32.4</p>
                                   </div>
                                 </div>
-                        </div>
+                             </div>
                         
                        
                         {cartData.loading ? (
