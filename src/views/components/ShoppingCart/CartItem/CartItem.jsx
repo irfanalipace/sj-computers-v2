@@ -23,8 +23,14 @@ export const CartItem = memo(({ cartData }) => {
 
     const deleteItemFunction = () => {
         let cartQuantity = details?.total_items - 1;
-        let cartTotal = parseFloat(details?.total) - cartData?.price;
-        let cartSubTotal = parseFloat(details?.sub_total) - cartData?.price;
+        let cartTotal =
+            parseFloat(details?.total) -
+            cartData?.price -
+            parseFloat(cartData?.plan_price || 0);
+        let cartSubTotal =
+            parseFloat(details?.sub_total) -
+            cartData?.price -
+            parseFloat(cartData?.plan_price || 0);
 
         const cartDetails = {
             total_items: cartQuantity,
@@ -39,28 +45,43 @@ export const CartItem = memo(({ cartData }) => {
 
     const handleQuantity = (quantity) => {
         quantity = parseInt(quantity);
-        let subTotal = 0;
+        let subTotal = 0.0;
         let difference = quantity - cartData?.quantity;
-        let productPriceWithWarranty =
-            parseFloat(cartData?.product?.price) +
-            parseFloat(cartData?.plan?.price);
-        let price = productPriceWithWarranty * difference;
-        subTotal = parseFloat(details?.sub_total) + price;
-        let cartTotal = parseFloat(details?.total) + price;
-
+        const productPriceDifference =
+            parseFloat(cartData?.product?.price) * difference;
+        let productPriceWithQuantity =
+            productPriceDifference + parseFloat(cartData?.price);
+        const warrantyPriceDifference =
+            parseFloat(cartData?.plan?.price || 0) * difference;
+        let warrantyPriceWithQuantity =
+            warrantyPriceDifference + parseFloat(cartData?.plan_price || 0);
+        subTotal =
+            parseFloat(details?.sub_total) +
+            parseFloat(productPriceDifference) +
+            parseFloat(warrantyPriceDifference);
+        const cartTotal =
+            parseFloat(details?.total) +
+            parseFloat(productPriceDifference) +
+            parseFloat(warrantyPriceDifference);
         const cartDetails = {
             total_items: details?.total_items,
             total: cartTotal.toFixed(2),
             sub_total: subTotal.toFixed(2),
         };
-
-        let itemPrice = productPriceWithWarranty * quantity;
         const cartItem = {
             id: cartData.id,
             quantity,
             difference,
-            price: itemPrice,
+            price: parseFloat(productPriceWithQuantity).toFixed(2),
         };
+
+        if (cartData?.plan?.value) {
+            cartItem.plan_price = parseFloat(warrantyPriceWithQuantity).toFixed(
+                2
+            );
+        }
+
+        // debugger;
         if (!isAuthenticated) {
             let productQuantity = cartData?.product?.quantity + difference;
             let in_stock = productQuantity < 1 ? false : true;
@@ -116,7 +137,7 @@ export const CartItem = memo(({ cartData }) => {
                             /> */}
                         </div>
                         <div className="row">
-                            <div className="col-md-8">
+                            <div className="col-md-5">
                                 <div className="list-item-dev-ui-item">
                                 <ul className="item-list mt-1 mb-2">
                             <li>
@@ -146,9 +167,16 @@ export const CartItem = memo(({ cartData }) => {
                                     </li> */}
                                 </ul>
                                 </div>
-                               
+                            
                              
                             </div>
+                            <div className="col-md-3 px-0">
+                                 <div className="protection-button-remove-data">
+                                 <button>
+                                        Remove protection
+                                    </button>
+                                 </div>
+                               </div>
                             <div className="col-md-2">
                                  <div className="protection-lables-warntity">
                                     <p className="dev-sj-computers-sections">SJ Computer </p>
@@ -159,10 +187,10 @@ export const CartItem = memo(({ cartData }) => {
                                 </div>
                                 <div className="col-md-2">
                                   <div className="add-card-price-carditem">
-                                    <p>$32.4</p>
+                                    <p className="protections-price-carditem">$32.4</p>
                                   </div>
                                 </div>
-                        </div>
+                             </div>
                         
                        
                         {cartData.loading ? (
