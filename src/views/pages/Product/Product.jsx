@@ -27,10 +27,10 @@ export default function Product() {
     const dispatch = useDispatch();
 
     const [searchParams, setSearchParams] = useSearchParams();
-    console.log(searchParams, "", );
+    console.log(searchParams, "");
 
     const { isLoading, product, productImages, products, onFilterChange } =
-     useProductData();
+        useProductData();
 
     const redirct = (pathUrl) => {
         const url = new URL(pathUrl || "https://www.sjcomputers.us");
@@ -56,8 +56,9 @@ export default function Product() {
     }, []);
 
     const ProductComponent = () => {
-        const { similarProducts, featuredProducts } = useSimilarData();
-
+        const { similarProducts, featuredProducts } = useSimilarData(
+            product?.id
+        );
         return (
             <>
                 {products?.length > 0 && (
@@ -75,7 +76,10 @@ export default function Product() {
                         {similarProducts?.length > 0 && (
                             <VisibleOnScroll>
                                 <div className="hidden-on-tab">
-                                    <SimilarItems products={similarProducts} />
+                                    <SimilarItems
+                                        products={featuredProducts}
+                                        featuredProducts={similarProducts}
+                                    />
                                 </div>
                             </VisibleOnScroll>
                         )}

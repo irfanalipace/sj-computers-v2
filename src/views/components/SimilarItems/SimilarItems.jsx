@@ -8,7 +8,7 @@ import SingleSimilarItem from "../SimilarItemsSingle/SingleSimilarItem";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 
-const SimilarItems = ({ products }) => {
+const SimilarItems = ({ products, featuredProducts }) => {
     const isLoading = useSelector((state) => state?.products?.isLoading);
 
     return (
@@ -20,9 +20,9 @@ const SimilarItems = ({ products }) => {
                 alignItems="center"
             >
                 <Grid lg={4} mr={5}>
-                    {products[0] ? (
+                    {featuredProducts[0] ? (
                         <SingleSimilarItem
-                            product={products[0]}
+                            product={featuredProducts[0]}
                             heading={"Featured items you may like"}
                         />
                     ) : (
@@ -30,8 +30,8 @@ const SimilarItems = ({ products }) => {
                     )}
                 </Grid>{" "}
                 <Grid lg={4}>
-                    {products[1] ? (
-                        <SingleSimilarItem product={products[1]} />
+                    {featuredProducts[1] ? (
+                        <SingleSimilarItem product={featuredProducts[1]} />
                     ) : (
                         <></>
                     )}
