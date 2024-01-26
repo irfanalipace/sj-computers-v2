@@ -19,36 +19,63 @@ const Product = ({ type = "", product, inGrid, color = "" }) => {
         (state) => state.orders.orderEstimatedDelivery
     );
 
-    const Label = ({ bgcolor = "", text = "text", secondText = "" }) => {
+    const Label = ({ bgcolor = "", text = "text", secondText = "", color }) => {
         return (
-            <Box
-                bgcolor={bgcolor}
-                px={2}
-                py={0.5}
+            <Stack
+                position={"relative"}
                 alignItems={"center"}
-                justifyContent={"center"}
+                spacing={1.5}
+                direction={"row"}
             >
-                <Stack direction={"row"} spacing={1}>
-                    <Typography
-                        color={"white"}
-                        fontWeight={500}
-                        fontSize={"12px"}
-                        fontFamily={"Inter"}
-                    >
-                        {text}
-                    </Typography>
-                    {secondText && (
+                <Box
+                    bgcolor={bgcolor}
+                    sx={{
+                        clipPath:
+                            text === "SJ's Choice"
+                                ? "polygon(0 0, 100% 0%, 87% 100%, 0 100%);"
+                                : "",
+                    }}
+                    px={1.8}
+                    py={0.5}
+                    // width={"auto"}
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                >
+                    <Stack direction={"row"} spacing={1}>
                         <Typography
+                            color={"white"}
                             fontWeight={500}
                             fontSize={"12px"}
                             fontFamily={"Inter"}
-                            color={color}
                         >
-                            {secondText}
+                            {text}
                         </Typography>
-                    )}
-                </Stack>
-            </Box>
+                        {secondText && (
+                            <Typography
+                                fontWeight={500}
+                                fontSize={"12px"}
+                                fontFamily={"Inter"}
+                                color={color}
+                            >
+                                {secondText}
+                            </Typography>
+                        )}
+                    </Stack>
+                </Box>
+                <Typography
+                    sx={{
+                        position: text === "SJ's Choice" ? "absolute" : "",
+                        right: text === "SJ's Choice" ? "-40%" : "",
+                    }}
+                    color={"#6F6F6F"}
+                    fontWeight={500}
+                    fontSize={"12px"}
+                    lineHeight={"14px"}
+                    fontFamily="Inter"
+                >
+                    Deals
+                </Typography>
+            </Stack>
         );
     };
 
@@ -77,7 +104,7 @@ const Product = ({ type = "", product, inGrid, color = "" }) => {
 
     const ProductDetails = () => (
         <div>
-            <div className="product-details">
+            <div className="product-details ">
                 {/* <div>
             <span className="span-the-product-color-product">
             crocs Contrary to popular
@@ -85,7 +112,7 @@ const Product = ({ type = "", product, inGrid, color = "" }) => {
             </span>
         </div> */}
 
-                <div className="dev-section-button-dev-card">
+                <div className="dev-section-button-dev-card mb-2">
                     <Link to={`${new URL(product?.url).pathname}`}>
                         <div className="product-name product-cart-name-mobile-screen">
                             {product.name}
@@ -141,33 +168,35 @@ const Product = ({ type = "", product, inGrid, color = "" }) => {
                     style={{ textDecoration: "none" }}
                 >
                     <div className="d-none d-sm-block product-rating">
-                        <Stack
-                            alignItems={"center"}
-                            spacing={1}
-                            direction={"row"}
-                        >
-                            <StarRatings
-                                rating={product.rating}
-                                starRatedColor="rgb(232, 126, 36)"
-                                numberOfStars={5}
-                                name="rating"
-                                isSelectable={false}
-                                starDimension={"20px"}
-                                starSpacing={"0"}
-                            />
-
-                            <Typography
-                                fontFamily={"Inter"}
-                                sx={{ pt: 0.3 }}
-                                fontWeight={500}
-                                fontSize={"12px"}
-                                lineHeight={"17px"}
-                                color={"#007185"}
+                        <Stack mb={2} alignItems={"start"} spacing={1}>
+                            <Stack
+                                alignItems={"center"}
+                                justifyContent={"center"}
+                                spacing={1}
+                                direction={"row"}
                             >
-                                {product.total_review}
-                            </Typography>
+                                <StarRatings
+                                    rating={product.rating}
+                                    starRatedColor="rgb(232, 126, 36)"
+                                    numberOfStars={5}
+                                    name="rating"
+                                    isSelectable={false}
+                                    starDimension={"20px"}
+                                    starSpacing={"0"}
+                                />
+                                <Typography
+                                    fontFamily={"Inter"}
+                                    sx={{ pt: 0.3 }}
+                                    fontWeight={500}
+                                    fontSize={"12px"}
+                                    lineHeight={"17px"}
+                                    color={"#007185"}
+                                >
+                                    {product.total_review}
+                                </Typography>
+                            </Stack>
+                            {getRandomComponent()}
                         </Stack>
-                        {getRandomComponent()}
 
                         {/* <span className="product-num-reviews ms-2 mt-1">
                             {product.numReviews ? product.numReviews : 0}
@@ -207,7 +236,7 @@ const Product = ({ type = "", product, inGrid, color = "" }) => {
                     </div>
                 )}
                 {type === "recommended" && (
-                    <div className="product-delivery-charges mt-2 ms-2">
+                    <div className="product-delivery-charges mt-2 ms-0 ms-sm-2 mb-2 mb-sm-0">
                         <FontAwesomeIcon className="me-1" icon={faTruck} /> Free
                         Shipping
                     </div>

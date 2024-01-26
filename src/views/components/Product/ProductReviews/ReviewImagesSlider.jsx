@@ -48,15 +48,19 @@ function ReviewImagesSlider({ productId, reviews }) {
     return (
         <div className="review-images-section">
             {/* <button onClick={handleOpenDialog}>image Gallery</button> */}
-            <div className="d-flex justify-content-between mb-3">
-                <h3 className="product-section-heading">Reviews with images</h3>
-                <button
-                    className="view-all-images-btn"
-                    onClick={handleOpenDialog}
-                >
-                    View all images
-                </button>
-            </div>
+            {!!ReviewsData?.data?.length && (
+                <div className="d-flex justify-content-between mb-3">
+                    <h3 className="product-section-heading">
+                        Reviews with images
+                    </h3>
+                    <button
+                        className="view-all-images-btn"
+                        onClick={handleOpenDialog}
+                    >
+                        View all images
+                    </button>
+                </div>
+            )}
             <Swiper
                 className=""
                 spaceBetween={1}

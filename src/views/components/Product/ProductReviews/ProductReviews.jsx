@@ -122,40 +122,40 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                 </Typography>
                             )}
 
-                        <div
-                            style={{
-                                display: !!reviews?.product_detail?.data.length
-                                    ? "hidden"
-                                    : "",
-                            }}
-                        >
-                            <div
-                                id="reviewSection"
-                                tabIndex="0"
-                                ref={reviewRef}
-                                className="filter-wrapper mt-3 mb-0 "
-                            >
-                                <select
-                                    className="form-select"
-                                    onChange={(e) =>
-                                        setFilterBy(e.target.value)
-                                    }
+                        {!!reviews?.product_detail?.data.length && (
+                            <>
+                                <div
+                                    id="reviewSection"
+                                    tabIndex="0"
+                                    ref={reviewRef}
+                                    className="filter-wrapper mt-3 mb-0 "
                                 >
-                                    <option value={PRODUCT_FILTER_KEY_ENUM.TOP}>
-                                        Top Reviews
-                                    </option>
-                                    <option
-                                        value={PRODUCT_FILTER_KEY_ENUM.RECENT}
+                                    <select
+                                        className="form-select"
+                                        onChange={(e) =>
+                                            setFilterBy(e.target.value)
+                                        }
                                     >
-                                        Recent Reviews
-                                    </option>
-                                </select>
-                            </div>
+                                        <option
+                                            value={PRODUCT_FILTER_KEY_ENUM.TOP}
+                                        >
+                                            Top Reviews
+                                        </option>
+                                        <option
+                                            value={
+                                                PRODUCT_FILTER_KEY_ENUM.RECENT
+                                            }
+                                        >
+                                            Recent Reviews
+                                        </option>
+                                    </select>
+                                </div>
 
-                            <h3 className="product-section-heading my-4 py-1">
-                                {PRODUCT_FILTER_LABEL_ENUM[filterBy]}
-                            </h3>
-                        </div>
+                                <h3 className="product-section-heading my-4 py-1">
+                                    {PRODUCT_FILTER_LABEL_ENUM[filterBy]}
+                                </h3>
+                            </>
+                        )}
 
                         {reviewLoading ? (
                             <Box sx={{ height: "100px" }}>
