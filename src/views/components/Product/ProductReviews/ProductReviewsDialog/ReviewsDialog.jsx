@@ -27,7 +27,7 @@ const ReviewsDialog = ({
     handleDialogOpen,
     handleClose,
     reviewId = null,
-    imgIndex,
+    imgId,
     ReviewsData,
     reviews,
 }) => {
@@ -36,33 +36,33 @@ const ReviewsDialog = ({
     const [reviewCardId, setReviewCardId] = useState(reviewId)
     const [imgGallery, setImgGallery] = useState(false);
     const [selectedReview, setSelectedReview] = useState(null);
-    const [activeSlide, setActiveSlide] = useState(imgIndex);
-    const [initialSlide, setInitialSlide] = useState(imgIndex);
+    const [activeSlide, setActiveSlide] = useState(imgId);
+    const [initialSlide, setInitialSlide] = useState(imgId);
     // const [selectedIndex, setSelectedIndex] = useState(null)
     // console.log(selectedReview?.images.map((image) => {  console.log("image" ,image.imageUrl) }), "images.image");
 
-    const getReviewById = async (productReviewId, imgIndex) => {
+    const getReviewById = async (productReviewId, imgId) => {
         console.log("clicked on image ", productReviewId);
         if (typeof productReviewId !== "number") {
             console.log("reiewId empty open gallery");
             setImgGallery(true);
         } else {
-            // setInitialSlide(imgIndex)
+            // setInitialSlide(imgId)
             // // const review = ReviewsData?.data?.find((r) => r.product_review_id === productReviewId);
             // const review = ReviewsData?.data?.filter(obj => obj.review_id === productReviewId)
             // setSelectedReview(review)
             // console.log(review, "review", productReviewId, "reviewId");
             // setImgGallery(false)
             setReviewCardId(productReviewId)
-            setInitialSlide(imgIndex)
             const review = ReviewsData?.data?.filter(
-                (obj) => obj.review_id === productReviewId
-            );
-            setSelectedReview(review);
-            setImgGallery(false);
-            const review2 = selectedReview?.map((data, index) => data.id) ?? [];
-            const indexof = review2.indexOf(imgIndex + 1);
-            const positiveIndex = Math.abs(indexof);
+              (obj) => obj.review_id === productReviewId
+              );
+              setSelectedReview(review);
+              setImgGallery(false);
+              const review2 = selectedReview?.map((data, index) => data.id) ?? [];
+              const indexof = review2.indexOf(imgId);
+              const positiveIndex = Math.abs(indexof);
+              // setInitialSlide(positiveIndex -1)
             setTimeout(() => {
                 if (swiperRef.current && swiperRef.current.swiper) {
                     console.log("present");
@@ -75,8 +75,8 @@ const ReviewsDialog = ({
     };
 
     useEffect(() => {
-        getReviewById(reviewId, imgIndex);
-    }, [reviewId, imgIndex]);
+        getReviewById(reviewId, imgId);
+    }, [reviewId, imgId, open]);
 
     const handleSwitchImage = (index) => {
         if (swiperRef.current && swiperRef.current.swiper) {
@@ -107,7 +107,7 @@ const ReviewsDialog = ({
         );
         setSelectedReview(review);
         const review2 = selectedReview?.map((data, index) => data.id) ?? [];
-        const indexof = review2.indexOf(index + 1);
+        const indexof = review2.indexOf(id);
         const positiveIndex = Math.abs(indexof);
         setTimeout(() => {
             if (swiperRef.current && swiperRef.current.swiper) {
@@ -198,7 +198,7 @@ const ReviewsDialog = ({
                                 onActiveIndexChange={(e) => console.log(e)}
                                 // centeredSlides
                                 onSlideChange={handleSlideChange}
-                                initialSlide={initialSlide} // initial slide takes count from 0
+                                // initialSlide={initialSlide} // initial slide takes count from 0
                             >
                                 {selectedReview?.map((data, index) => (
                                     <SwiperSlide

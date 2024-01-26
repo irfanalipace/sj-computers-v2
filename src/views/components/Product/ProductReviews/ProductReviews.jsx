@@ -168,6 +168,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                         <ReviewCard
                                             reviewData={review}
                                             index={index}
+                                            productId={productId}
                                         />
                                     </div>
                                 )
