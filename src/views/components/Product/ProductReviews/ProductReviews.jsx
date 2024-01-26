@@ -130,7 +130,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                     ref={reviewRef}
                                     className="filter-wrapper mt-3 mb-0 "
                                 >
-                                    <select
+                                    {/* <select
                                         className="form-select"
                                         onChange={(e) =>
                                             setFilterBy(e.target.value)
@@ -148,7 +148,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                         >
                                             Recent Reviews
                                         </option>
-                                    </select>
+                                    </select> */}
                                 </div>
 
                                 <h3 className="product-section-heading my-4 py-1">
