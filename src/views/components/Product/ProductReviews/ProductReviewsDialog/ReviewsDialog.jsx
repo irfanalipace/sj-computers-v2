@@ -41,7 +41,7 @@ const ReviewsDialog = ({
     // const [selectedIndex, setSelectedIndex] = useState(null)
     // console.log(selectedReview?.images.map((image) => {  console.log("image" ,image.imageUrl) }), "images.image");
 
-    const getReviewById = async (productReviewId) => {
+    const getReviewById = async (productReviewId, imgIndex) => {
         console.log("clicked on image ", productReviewId);
         if (typeof productReviewId !== "number") {
             console.log("reiewId empty open gallery");
@@ -54,6 +54,7 @@ const ReviewsDialog = ({
             // console.log(review, "review", productReviewId, "reviewId");
             // setImgGallery(false)
             setReviewCardId(productReviewId)
+            setInitialSlide(imgIndex)
             const review = ReviewsData?.data?.filter(
                 (obj) => obj.review_id === productReviewId
             );
@@ -74,7 +75,7 @@ const ReviewsDialog = ({
     };
 
     useEffect(() => {
-        getReviewById(reviewId);
+        getReviewById(reviewId, imgIndex);
     }, [reviewId, imgIndex]);
 
     const handleSwitchImage = (index) => {
