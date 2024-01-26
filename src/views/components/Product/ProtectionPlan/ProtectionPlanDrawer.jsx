@@ -1,26 +1,28 @@
 import React, { useState } from "react";
-import bulletpoint1 from "../../../assets/images/bulletpoint1.png";
-import bulletpoint2 from "../../../assets/images/bulletpoint2.png";
-import bulletpoint3 from "../../../assets/images/bulletpoint3.png";
-import "./ProductCard.css";
+import bulletpoint1 from "../../../../assets/images/bulletpoint1.png";
+import bulletpoint2 from "../../../../assets/images/bulletpoint2.png";
+import bulletpoint3 from "../../../../assets/images/bulletpoint3.png";
+import "../../ProductCard/ProductCard.css";
 import Checkbox from "@mui/material/Checkbox";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import StarRatings from "react-star-ratings";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { PLAN_ENUM } from "../../../../core/utils/constants";
 
 const ProtectionPlanDrawer = ({
-    handleButton,
-    ProtectionPlanCallBack,
+    plan = {},
     handleAddingProtec,
     closeDrawer,
 }) => {
-    const [protectionPlan, setProtectionPlan] = useState("");
-    const [planValue, setPlanValue] = useState("");
-    const handleCheckboxChange = (value) => {
-        setPlanValue(planValue === value ? "" : value);
-        ProtectionPlanCallBack(planValue === value ? "" : value);
-    };
+    const [protectionPlan, setProtectionPlan] = useState(plan);
+    const [learnMore, setLearnMore] = useState(plan);
+    function handleCheckboxClick(_plan) {
+        setProtectionPlan((prev) => {
+            if (prev?.value === _plan.value) return null;
+            else return _plan;
+        });
+    }
 
     return (
         <div style={{ padding: "20px" }}>
@@ -57,8 +59,12 @@ const ProtectionPlanDrawer = ({
             <div className="protc-paln-option">
                 <div>
                     <Checkbox
-                        checked={planValue === "3-Year"}
-                        onClick={() => handleCheckboxChange("3-Year")}
+                        checked={
+                            protectionPlan.value === PLAN_ENUM.THREE_YEAR.value
+                        }
+                        onClick={() =>
+                            handleCheckboxClick(PLAN_ENUM.THREE_YEAR)
+                        }
                         className="mb-4"
                         style={{ color: "#318243" }}
                     />
@@ -67,9 +73,9 @@ const ProtectionPlanDrawer = ({
                         <span style={{ color: "red" }}> $23.99</span>
                         <p
                             onClick={() => {
-                                protectionPlan === "3-Year"
-                                    ? setProtectionPlan("")
-                                    : setProtectionPlan("3-Year");
+                                learnMore?.value === PLAN_ENUM.THREE_YEAR.value
+                                    ? setLearnMore({})
+                                    : setLearnMore(PLAN_ENUM.THREE_YEAR);
                             }}
                             style={{
                                 color: "rgb(18, 112, 196)",
@@ -78,12 +84,12 @@ const ProtectionPlanDrawer = ({
                         >
                             <KeyboardArrowDownIcon
                                 style={{ marginTop: "-2px" }}
-                            />{" "}
+                            />
                             Learn More
                         </p>
                     </p>{" "}
                 </div>
-                {protectionPlan === "3-Year" && (
+                {learnMore?.value === PLAN_ENUM.THREE_YEAR.value && (
                     <div className="accordion-content">
                         <h3>3 Year Equippment Warranty Plan</h3>
                         <p className="title">From Asurion, LLC</p>
@@ -142,8 +148,10 @@ const ProtectionPlanDrawer = ({
             <div className="protc-paln-option">
                 <div>
                     <Checkbox
-                        checked={planValue === "4-Year"}
-                        onClick={() => handleCheckboxChange("4-Year")}
+                        checked={
+                            protectionPlan.value === PLAN_ENUM.FOUR_YEAR.value
+                        }
+                        onClick={() => handleCheckboxClick(PLAN_ENUM.FOUR_YEAR)}
                         className="mb-4"
                         style={{ color: "#318243" }}
                     />
@@ -152,9 +160,9 @@ const ProtectionPlanDrawer = ({
                         <span style={{ color: "red" }}> $32.99</span>
                         <p
                             onClick={() => {
-                                protectionPlan === "4-Year"
-                                    ? setProtectionPlan("")
-                                    : setProtectionPlan("4-Year");
+                                learnMore?.value === PLAN_ENUM.FOUR_YEAR.value
+                                    ? setLearnMore({})
+                                    : setLearnMore(PLAN_ENUM.FOUR_YEAR);
                             }}
                             style={{
                                 color: "rgb(18, 112, 196)",
@@ -168,7 +176,7 @@ const ProtectionPlanDrawer = ({
                         </p>
                     </p>{" "}
                 </div>
-                {protectionPlan === "4-Year" && (
+                {learnMore?.value === PLAN_ENUM.FOUR_YEAR.value && (
                     <div className="accordion-content">
                         <h3>4 Year Equippment Warranty Plan</h3>
                         <p className="title">From Asurion, LLC</p>
@@ -230,8 +238,10 @@ const ProtectionPlanDrawer = ({
             <div className="protc-paln-option">
                 <div>
                     <Checkbox
-                        checked={planValue === "unlimited"}
-                        onClick={() => handleCheckboxChange("unlimited")}
+                        checked={
+                            protectionPlan.value === PLAN_ENUM.DEFAULT.value
+                        }
+                        onClick={() => handleCheckboxClick(PLAN_ENUM.DEFAULT)}
                         className="mb-5"
                         style={{ color: "#318243" }}
                     />
@@ -243,9 +253,9 @@ const ProtectionPlanDrawer = ({
                         <br />
                         <p
                             onClick={() => {
-                                protectionPlan === "techUnlimited"
-                                    ? setProtectionPlan("")
-                                    : setProtectionPlan("techUnlimited");
+                                learnMore?.value === PLAN_ENUM.DEFAULT.value
+                                    ? setLearnMore({})
+                                    : setLearnMore(PLAN_ENUM.DEFAULT);
                             }}
                             style={{
                                 color: "rgb(18, 112, 196)",
@@ -278,7 +288,7 @@ const ProtectionPlanDrawer = ({
                         </p> */}
                     </p>{" "}
                 </div>
-                {protectionPlan === "techUnlimited" && (
+                {learnMore.value === PLAN_ENUM.DEFAULT.value && (
                     <div className="accordion-content">
                         <h3>Unlimited Equippment Warranty Plan</h3>
                         <p className="title">From Asurion, LLC</p>
@@ -337,11 +347,11 @@ const ProtectionPlanDrawer = ({
             <div className="btn-grp mt-3">
                 <button
                     className="add-prot-btn"
-                    onClick={() => handleAddingProtec()}
+                    onClick={() => handleAddingProtec(protectionPlan)}
                 >
                     Add Warranty
                 </button>
-                <button onClick={() => handleButton()}>No Thanks</button>
+                <button onClick={() => closeDrawer()}>No Thanks</button>
             </div>
         </div>
     );

@@ -87,6 +87,7 @@ const cartSlice = createSlice({
                             ...state.cart[index].product,
                             in_stock: cartItem.in_stock,
                         },
+                        plan_price: cartItem.plan_price,
                         error: cartItem.error,
                         loading: false,
                     };
