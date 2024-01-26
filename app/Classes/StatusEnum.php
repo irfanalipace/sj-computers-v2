@@ -46,4 +46,7 @@ class StatusEnum
 
     //Environment
     public const ENV_PRODUCTION = 'production';
+
+    public const INACTIVE = "inactive";
+    public const ACTIVE = "active";
 }
