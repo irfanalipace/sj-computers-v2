@@ -78,6 +78,8 @@ Route::get('inventory-data', [ProductController::class, 'getInventoryData'])->na
 
 Route::get('products-filter-list', [ProductController::class, 'getProductFilterList'])->name('getProductFilterList');
 
+Route::get('similar-item/{product}', [ProductController::class, 'getSimilarItem'])->name('getSimilarItem');
+
 
 Route::get('product-detail', [ProductController::class, 'getProductDetail'])->name('productDetail');
 Route::get('product-detail-asin', [ProductController::class, 'getProductDetailAsin'])->name('productDetailAsin');
@@ -255,7 +257,7 @@ Route::post('paypal', [PayPalController::class, 'paypal'])->name('paypal');
 Route::get('success', [PayPalController::class, 'paypalSuccess'])->name('success');
 Route::get('cancel', [PayPalController::class, 'paypalCancel'])->name('cancel');
 
-/* 
+/*
     Get all reviews
 */
 Route::get('get-product-reviews',[ReviewController::class,'index']);
