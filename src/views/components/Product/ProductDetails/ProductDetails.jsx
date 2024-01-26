@@ -134,7 +134,7 @@ const ProductDetails = ({ product }) => {
                 {/* </div> */}
             </div>
 
-            <div className="divsection">
+            <div className="divsection s-sm-block d-none">
                 <hr className="hr-card-details"></hr>
                 <div className="cart-details-text">
                     <div className="row">
