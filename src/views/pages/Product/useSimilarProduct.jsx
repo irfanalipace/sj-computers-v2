@@ -8,6 +8,7 @@ function useSimilarData() {
     const modifyTitle = title.replace(/-/g, " ");
     const productLoading = useSelector((state) => state?.products?.isLoading);
     const [similarProducts, setSimilarProducts] = useState([]);
+    const [featuredProducts, setFeaturedProducts] = useState([])
 
     const { productId } = useParams();
 
@@ -28,6 +29,7 @@ function useSimilarData() {
 
     return {
         similarProducts,
+        featuredProducts,
     };
 }
 

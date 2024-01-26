@@ -31,7 +31,7 @@ function ReviewCard({ reviewData, index, isDialog }) {
                     )}
                 </div>
                 <p className="mb-0 ms-2 review-author ps-1">
-                    {reviewData.user.name}
+                    {reviewData.user?.name || reviewData?.author}
                 </p>
             </div>
             <div className="d-md-flex align-items-center my-2">
