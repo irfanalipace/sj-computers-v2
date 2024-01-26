@@ -1,4 +1,4 @@
-.gallery-container{
+.gallery-container {
     /* background-color: aqua; */
     display: flex;
     /* min-height: 30rem; */
@@ -8,7 +8,7 @@
     row-gap: 20px;
 }
 
-.images-container{
+.images-container {
     display: flex;
     justify-content: center;
     /* width: auto; */
@@ -18,7 +18,7 @@
     /* justify-content: space-evenly; */
 }
 
-.image-item{
+.image-item {
     height: 100%;
     margin: 10px 5px;
     width: 9vw;
