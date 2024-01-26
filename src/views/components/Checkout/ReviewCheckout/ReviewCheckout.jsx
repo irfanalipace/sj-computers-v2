@@ -52,39 +52,45 @@ export default function ReviewCheckout({
                                     }
                                 /> */}
                                 <div className="row">
-                                    <div>
-                                        
-                                        </div>
+                                    <div></div>
                                     <div className="col-md-6">
                                         <h6 className="price">
                                             ${parseFloat(item.price).toFixed(2)}
                                         </h6>
                                         <h6 className="quantity">
-                                    Quantity: {item.quantity}
-                                </h6>
+                                            Quantity: {item.quantity}
+                                        </h6>
                                     </div>
                                     <div className="col-md-3 px-0">
                                         <div className="protection-button-remove-data">
                                             {/* <button>Remove protection</button> */}
                                         </div>
                                     </div>
-                                    <div className="col-md-3">
-                                        <div className="checkout-card-protection-lables-warntity">
-                                            <p className="checkout-card-dev-sj-computers-sections">
-                                                SJ Computer{" "}
-                                            </p>
-                                            <div className="overlay-protecions-checkout-card-protection-name-dev">
-                                                <p> Protection</p>
-                                            </div>
+                                    {item?.plan?.value && (
+                                        <div className="col-md-3">
+                                            <div className="checkout-card-protection-lables-warntity">
+                                                <p className="checkout-card-dev-sj-computers-sections">
+                                                    SJ Computer{" "}
+                                                </p>
+                                                <div>
+                                                    <p className="overlay-protecions-checkout-card-protection-name-dev">
+                                                        {" "}
+                                                        Protection
+                                                    </p>
+                                                </div>
 
-                                            <div className="item-dev-scroting-protections">
-                                                <span>3 Years</span>
+                                                <span>
+                                                    {item?.plan?.durationInYears
+                                                        ? item?.plan
+                                                              ?.durationInYears +
+                                                          " years"
+                                                        : "Tech Unlimited"}
+                                                </span>
                                             </div>
                                         </div>
-                                    </div>
+                                    )}
                                 </div>
 
-                             
                                 {/* <QuantityInput
                                     value={item.quantity}
                                     onChange={setQuantity}
