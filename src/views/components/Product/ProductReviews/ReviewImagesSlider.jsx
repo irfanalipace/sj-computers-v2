@@ -13,7 +13,7 @@ SwiperCore.use([Navigation, Pagination]);
 function ReviewImagesSlider({ productId, reviews }) {
     const [open, setOpen] = useState(false);
     const [reviewId, setReviewId] = useState({});
-    const [imgIndex, setImgIndex] = useState("");
+    const [imgId, setImgId] = useState("");
     const [ReviewsData, setReviewsData] = useState([]);
 
     const fetchData = async (productId) => {
@@ -32,10 +32,10 @@ function ReviewImagesSlider({ productId, reviews }) {
 
     console.log(reviews, "reviews");
 
-    const handleOpenDialog = (reviewId, imgIndex) => {
+    const handleOpenDialog = (reviewId, imgId) => {
         setOpen(true);
         setReviewId(reviewId);
-        setImgIndex(imgIndex);
+        setImgId(imgId);
         // console.log(reviews, "reviews");
     };
 
@@ -83,7 +83,7 @@ function ReviewImagesSlider({ productId, reviews }) {
                     handleOpenDialog={handleOpenDialog}
                     handleClose={handleClose}
                     reviewId={reviewId}
-                    imgIndex={imgIndex}
+                    imgId={imgId}
                     ReviewsData={ReviewsData}
                     reviews={reviews}
                 />
@@ -95,11 +95,11 @@ function ReviewImagesSlider({ productId, reviews }) {
                             className="btn btn-light p-1 d-flex align-items-center"
                         >
                             {/* {rev?.images?.map((image, index) => ( */}
-                            <SwiperSlide>
+                            <SwiperSlide style={{backgroundColor: 'black', paddingBottom: 0, height: "180px"}}>
                                 <img
                                     src={data?.file_path}
                                     onClick={() =>
-                                        handleOpenDialog(data?.review_id, index)
+                                        handleOpenDialog(data?.review_id, data?.id)
                                     }
                                     alt="review-image"
                                     className="all-reviews-image"
