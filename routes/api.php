@@ -130,7 +130,7 @@ Route::get('meta_detail', [MetaDetailController::class, 'getDetail'])->name('met
 /*
 *Place Order
 */
-Route::post('checkout-order', [PaymentController::class, 'checkout'])->name('checkoutOrder')->middleware('auth:api');
+Route::post('checkout-order', [PaymentController::class, 'checkout'])->name('checkoutOrder');
 
 Route::get('success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 
@@ -261,5 +261,4 @@ Route::get('cancel', [PayPalController::class, 'paypalCancel'])->name('cancel');
 Route::get('get-product-reviews',[ReviewController::class,'index']);
 Route::get('get-protection-plans',[ProductController::class,'getProtectivePlan']);
 Route::get('get-product-details/{product_id}',[ReviewController::class,'getProductDetail']);
-Route::get('get-product-rating/{product_id}',[ReviewController::class,'getProductRate']);
 

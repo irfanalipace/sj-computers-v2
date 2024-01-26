@@ -60,6 +60,7 @@ class ProductStatistics extends Command
             }
 
             $rateStatistics['overall_rating'] = $totalReviews > 0 ? round($reviews->avg('rating'), 1) : '0';
+            $rateStatistics['total_rating'] =  $totalReviews ?? 0;
             $rateStatistics['global_rating'] =  0;
             $statistics = [
                 'rate' => $rateStatistics
