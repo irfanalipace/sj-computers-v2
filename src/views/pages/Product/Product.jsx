@@ -77,7 +77,8 @@ export default function Product() {
                                 </div>
                             </VisibleOnScroll>
                         )}
-                        <ProductVideo product={product} />
+                        {/* VIDEO-SECTION */}
+                        {/* <ProductVideo product={product} />  */}
 
                         <RefurbishedSection />
                         <ProductDescription product={product} />
