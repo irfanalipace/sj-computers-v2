@@ -61,7 +61,7 @@ function ReviewCard({ reviewData, index, isDialog }) {
                 >
                     <p className="review-comment my-0">{reviewData?.body}</p>
                 </Box>
-                {reviewData?.body.length > 150 && (
+                {reviewData?.body.length > 1306 && (
                     <Box>
                         {expandedReviews[index] ? (
                             <KeyboardArrowUpIcon />
@@ -76,53 +76,54 @@ function ReviewCard({ reviewData, index, isDialog }) {
             </Box>
 
             {/* for hiding images in dialog  */}
-           {   isDialog === true ?  <div></div>
-           :             
-           <>
-            <Stack
-                direction={"row"}
-                width={"100%"}
-                my={2}
-                spacing={1}
-                overflow={"auto"}
-            >
-                {reviewData?.product_media?.map((item, index) => {
-                    return (
-                        <Box
-                            width={"100px"}
-                            height={"100px"}
-                            display={"flex"}
-                            justifyContent={"center"}
-                            alignItems={"center"}
-                            p={1}
-                            sx={{ border: "1px solid lightgray" }}
-                        >
-                            <LazyLoadImage
-                                width={"90px"}
-                                style={{ objectFit: "contain" }}
-                                height={"90px"}
-                                src={item?.file_path}
-                                alt={item?.product_review_id}
-                            />
-                        </Box>
-                    );
-                })}
-            </Stack>
-            <p className="my-2 text-muted py-1 helpful-count">
-                2 People find this helpul
-            </p>
-            <div className="d-flex ">
-                <button className="review-helpful-btn">Helpful</button>
-                {/* <Stack mt={0.7} direction={"row"} spacing={1}>
+            {isDialog === true ? (
+                <div></div>
+            ) : (
+                <>
+                    <Stack
+                        direction={"row"}
+                        width={"100%"}
+                        my={2}
+                        spacing={1}
+                        overflow={"auto"}
+                    >
+                        {reviewData?.product_media?.map((item, index) => {
+                            return (
+                                <Box
+                                    width={"100px"}
+                                    height={"100px"}
+                                    display={"flex"}
+                                    justifyContent={"center"}
+                                    alignItems={"center"}
+                                    p={1}
+                                    sx={{ border: "1px solid lightgray" }}
+                                >
+                                    <LazyLoadImage
+                                        width={"90px"}
+                                        style={{ objectFit: "contain" }}
+                                        height={"90px"}
+                                        src={item?.file_path}
+                                        alt={item?.product_review_id}
+                                    />
+                                </Box>
+                            );
+                        })}
+                    </Stack>
+                    <p className="my-2 text-muted py-1 helpful-count">
+                        2 People find this helpul
+                    </p>
+                    <div className="d-flex ">
+                        <button className="review-helpful-btn">Helpful</button>
+                        {/* <Stack mt={0.7} direction={"row"} spacing={1}>
                     <CheckCircleIcon sx={{ color: "#318243" }} />
                     <Typography color={"#318243"}>
                         Thanks for honest feedback
                     </Typography>
                 </Stack> */}
-                <button className="review-report-btn">Report</button>
-            </div>
-            </>
-            }
+                        <button className="review-report-btn">Report</button>
+                    </div>
+                </>
+            )}
         </div>
     );
 }
