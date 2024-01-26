@@ -140,11 +140,11 @@ const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId = null , i
 
               <Grid item xs={6} pl={2} container>
                 <Grid item xs={12}>
-                {reviews?.product_detail?.data?.map((review, index) => (
-                                <div className="my-4" key={index}>
-                                    <ReviewCard reviewData={review} />
-                                </div>
-                            ))}
+                {reviews?.product_detail?.data?.filter(review => review.id === reviewId).map((filteredReview, index) => (
+                  <div className="my-4" key={index}>
+                    <ReviewCard reviewData={filteredReview} />
+                  </div>
+                ))}
                 </Grid>
                 <Grid item xs={12} py={1} >
                   <Typography py={1} variant='body2' fontSize={"small"}>Images</Typography>
