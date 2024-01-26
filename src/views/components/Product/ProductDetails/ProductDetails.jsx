@@ -5,7 +5,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import "./ProductDetail.css";
 import Tooltip from "../../Tooltip";
-import { Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { Tab, Tabs } from "react-bootstrap";
 import CustomTab from "./CustomTab";
 import TabContent from "./TabContnet";
@@ -103,7 +103,11 @@ const ProductDetails = ({ product }) => {
             </Typography>
             <div className="row px-0 res deatisl-data-set-image-view-data-details">
                 <div className="col-12 justify-content-center justify-content-md-start d-flex align-items-center  product-review">
-                    <ProductRating product={product} />
+                    <ProductRating
+                        rating={product.rating}
+                        totalReview={product.total_review}
+                        productID={product.id}
+                    />
                 </div>
                 {/* <div className="col-12 justify-content-center justify-content-md-start d-flex"> */}
                 {/* <button className="selling-button">
@@ -185,7 +189,7 @@ const ProductDetails = ({ product }) => {
             </div> */}
 
             <hr className="hr-card-details"></hr>
-            <PriceWithLabel price={product?.price} />
+            <PriceWithLabel sx={{ mb: 0.8 }} price={product?.price} />
             <Tooltip
                 sx={{ left: { xs: "100%", md: "50%" } }}
                 content={<ReturnPolicy />}
@@ -207,15 +211,15 @@ const ProductDetails = ({ product }) => {
                     />
                 </Typography>
             </Tooltip>
-            <Typography
+            {/* <Typography
                 sx={{ mt: 1.8 }}
                 fontWeight={400}
                 fontSize={"13px"}
                 lineHeight={"15px"}
             >
                 Variations:
-            </Typography>
-            <Tabs
+            </Typography> */}
+            {/* <Tabs
                 style={{ border: "none" }}
                 id="controlled-tab"
                 activeKey={key}
@@ -240,7 +244,10 @@ const ProductDetails = ({ product }) => {
                         product={product}
                     />
                 </Tab>
-            </Tabs>
+            </Tabs> */}
+            <Box mt={1}>
+                <TabContent productDetails={productDetails} product={product} />
+            </Box>
 
             <hr className="hr-card-details"></hr>
 

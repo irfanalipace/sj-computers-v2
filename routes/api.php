@@ -130,7 +130,7 @@ Route::get('meta_detail', [MetaDetailController::class, 'getDetail'])->name('met
 /*
 *Place Order
 */
-Route::post('checkout-order', [PaymentController::class, 'checkout'])->name('checkoutOrder')->middleware('auth:api');
+Route::post('checkout-order', [PaymentController::class, 'checkout'])->name('checkoutOrder');
 
 Route::get('success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 
@@ -252,8 +252,8 @@ Route::post('store-career-applications', [CareerApplicationController::class, 's
 * Paypal Integration
 */
 Route::post('paypal', [PayPalController::class, 'paypal'])->name('paypal');
-Route::get('success', [PaymentController::class, 'paypalSuccess'])->name('success');
-Route::get('cancel', [PaymentController::class, 'paypalCancel'])->name('cancel');
+Route::get('success', [PayPalController::class, 'paypalSuccess'])->name('success');
+Route::get('cancel', [PayPalController::class, 'paypalCancel'])->name('cancel');
 
 /* 
     Get all reviews

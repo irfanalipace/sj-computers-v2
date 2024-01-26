@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { ProductImage } from "@components/Product/ProductImage/ProductImage";
 import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
@@ -20,8 +20,11 @@ import useProductData from "./useProductData";
 import useSimilarData from "./useSimilarProduct";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 import { useSearchParams } from "react-router-dom";
+import { CLEAR_REVIEW } from "../../../core/store/review/reviewSlice";
+import { useDispatch } from "react-redux";
 
 export default function Product() {
+    const dispatch = useDispatch();
     const [searchParams, setSearchParams] = useSearchParams();
 
     const { isLoading, product, productImages, products, onFilterChange } =
@@ -43,6 +46,12 @@ export default function Product() {
             link: redirct(product?.url),
         },
     ];
+
+    useEffect(() => {
+        return () => {
+            dispatch(CLEAR_REVIEW());
+        };
+    }, []);
 
     const ProductComponent = () => {
         const { similarProducts } = useSimilarData();

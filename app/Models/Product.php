@@ -14,7 +14,7 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
-    protected $appends = ['in_stock', 'rating'];
+    protected $appends = ['in_stock', 'rating','total_review'];
 
     public $timestamps = true;
 
@@ -72,13 +72,28 @@ class Product extends Model
 
     }
 
-    public function productReview() :HasMany
+    public function productReview() : HasMany
     {
         return $this->hasMany(ProductReview::class);
     }
+
     public function getRatingAttribute()
     {
-      return $this->productReview->count() ?? 0;
+        $productStatistic = ProductStatistic::where('product_id', $this->id)->first() ?? null;
+        $productStatistic = (isset($productStatistic->statistics)) ? json_decode($productStatistic->statistics) : 0;
+    
+        // Check if $productStatistic is an object and contains the rate property
+        if (is_object($productStatistic) && property_exists($productStatistic, 'rate')) {
+            return $productStatistic->rate->overall_rating;
+        } else {
+            return 0;
+        }
+     
+    }
+
+    public function getTotalReviewAttribute()
+    {
+        return ProductReview::where('product_id',$this->id)->count() ?? 0;
     }
 
     public function productStats() :BelongsTo
