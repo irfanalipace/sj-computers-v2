@@ -62,7 +62,7 @@ function AddToCartAndWarranty({ product }) {
                     // onClick={cartClickHandler}
                     onClick={() => {
                         protPlan?.value
-                            ? cartClickHandler()
+                            ? cartClickHandler(protPlan)
                             : setDrawerProps({
                                   open: true,
                                   plan: plan,
