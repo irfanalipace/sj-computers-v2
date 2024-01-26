@@ -31,20 +31,19 @@
 
 .overlay-checkout-checkout-card-protection-lables-warntity {
     padding: 4px;
-    background: #EAEDED;
+    background: #eaeded;
     border-radius: 5px;
 }
-.checkout-card-dev-sj-computers-sections-overlay-data-view{
+.checkout-card-dev-sj-computers-sections-overlay-data-view {
     font-family: Inter;
-font-size: 10px;
-font-weight: 500;
-line-height: 12px;
-letter-spacing: 0em;
-text-align: left;
-margin-bottom: 0px;
-
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 0px;
 }
-.overlay-checkout-card-protection-name-dev-protecttions{
+.overlay-checkout-card-protection-name-dev-protecttions {
     font-family: Inter;
     font-size: 10px;
     font-weight: 500;
@@ -52,28 +51,26 @@ margin-bottom: 0px;
     letter-spacing: 0em;
     text-align: left;
     margin-bottom: 5px;
-    color:#318243;
+    color: #318243;
 }
 
-.years-data-list-prot{
+.years-data-list-prot {
     font-family: Inter;
-font-size: 12px;
-font-weight: 600;
-line-height: 15px;
-letter-spacing: 0em;
-text-align: left;
-color: 
-#318243;
-
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #318243;
 }
-.protection-button-remove-data{
+.protection-button-remove-data {
     margin-right: 4px;
 }
 .overlay-card-protections-dev-data-sidebar {
     display: flex;
     justify-content: space-between;
 }
-.overlay-card-shipping-page-card-view-details{
+.overlay-card-shipping-page-card-view-details {
     display: flex;
 }
 .buttonoverlay-condtions {
@@ -140,9 +137,6 @@ color:
     align-items: center;
     justify-content: center;
 }
-
-
-
 
 .overlay-modal-checkout-model-checkout-model-sidebar-checkout {
     background-color: #fff;
