@@ -60,7 +60,7 @@ const ProtectionPlanDrawer = ({
                 <div>
                     <Checkbox
                         checked={
-                            protectionPlan.value === PLAN_ENUM.THREE_YEAR.value
+                            protectionPlan?.value === PLAN_ENUM.THREE_YEAR.value
                         }
                         onClick={() =>
                             handleCheckboxClick(PLAN_ENUM.THREE_YEAR)
@@ -149,7 +149,7 @@ const ProtectionPlanDrawer = ({
                 <div>
                     <Checkbox
                         checked={
-                            protectionPlan.value === PLAN_ENUM.FOUR_YEAR.value
+                            protectionPlan?.value === PLAN_ENUM.FOUR_YEAR.value
                         }
                         onClick={() => handleCheckboxClick(PLAN_ENUM.FOUR_YEAR)}
                         className="mb-4"
@@ -239,7 +239,7 @@ const ProtectionPlanDrawer = ({
                 <div>
                     <Checkbox
                         checked={
-                            protectionPlan.value === PLAN_ENUM.DEFAULT.value
+                            protectionPlan?.value === PLAN_ENUM.DEFAULT.value
                         }
                         onClick={() => handleCheckboxClick(PLAN_ENUM.DEFAULT)}
                         className="mb-5"

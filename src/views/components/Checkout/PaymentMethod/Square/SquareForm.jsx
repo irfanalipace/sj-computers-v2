@@ -92,8 +92,8 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
                     product_id: item.id,
                     qty: item.quantity,
                 };
-                if (item.plan?.id && !isAuthenticated) {
-                    obj.protection_plan_id = item.plan.id;
+                if (item.plan?.value && !isAuthenticated) {
+                    obj.protection_plan_id = item.plan.value;
                 }
                 return obj;
             });
