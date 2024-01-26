@@ -292,7 +292,7 @@ const TechDetails = ({ product }) => {
                             unsellable condition due to customer tampering will
                             result in the customer being charged a higher
                             restocking fee based on the condition of the
-                            product. Amazon.com will not accept returns of any
+                            product. SJComputers.com will not accept returns of any
                             desktop or notebook computer more than 30 days after
                             you receive the shipment. New, used, and refurbished
                             products purchased from Marketplace vendors are

@@ -17,7 +17,7 @@ SwiperCore.use([Navigation]);
 const SimilarItemsSlider = ({ type = "", products }) => {
     return (
         <Swiper
-            slidesPerView={5}
+            slidesPerView={4.8}
             breakpoints={{
                 // when window width is >= 320px
                 320: {
@@ -37,7 +37,7 @@ const SimilarItemsSlider = ({ type = "", products }) => {
                 },
 
                 1200: {
-                    slidesPerView: 5,
+                    slidesPerView: 4.8,
                 },
             }}
             navigation
