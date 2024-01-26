@@ -23,14 +23,12 @@ function RefurbishedSection() {
             <Grid item lg={12} md={12} sm={12} xs={12} textAlign={"center"}>
                 <Typography variant="h5" fontWeight={"bolder"}>
                     {" "}
-                    What is SJ Computers Refurbished?{" "}
+                    What is SJ Computers? {" "}
                 </Typography>
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12}>
                 <Typography variant="body2">
-                    SJ Computers Refurbished is your destination for your
-                    refurbished desktops, laptops and accessories. All our
-                    products are backed by SJ Computers Guarantee.{" "}
+                SJ Computers is your destination for refurbished desktops, laptops and computer accessories. Since all our products are guaranteed under the SJ Computer’s Policy, Shop to your heart’s content. {" "}
                 </Typography>
             </Grid>
 
@@ -42,12 +40,11 @@ function RefurbishedSection() {
                     alt="analysis.pic"
                 />
                 <Typography variant="p" fontWeight={"bolder"} mb={2}>
-                    Quality you can afford{" "}
+                Affordable Devices {" "}
                 </Typography>
                 <Typography variant="body2">
                     {" "}
-                    All SJ Computers Products extend the lifetime of the product
-                    and reduce e-waste to a bare minimum.{" "}
+                    Since we use refurbished materials in our computers and accessories, We eliminate the need for mining. This in turn makes the products cheaper.{" "}
                 </Typography>
             </Grid>
 
@@ -59,12 +56,11 @@ function RefurbishedSection() {
                     alt="analysis.pic"
                 />
                 <Typography variant="p" fontWeight={"bolder"} mb={2}>
-                    Product you can trust{" "}
+                Trustable Products{" "}
                 </Typography>
                 <Typography variant="body2">
                     {" "}
-                    Our Customer Support is always on hand to provide you with
-                    an objective resolustio to all your claims and queries.{" "}
+                    Over the years, we have garnered a solid reputation for refurbished computers across the USA. Though our prices may be affordable, the same is not true for quality and functionality based on your needs.{" "}
                 </Typography>
             </Grid>
 
@@ -76,12 +72,10 @@ function RefurbishedSection() {
                     alt="analysis.pic"
                 />
                 <Typography variant="p" fontWeight={"bolder"} mb={2}>
-                    Purchase with impact{" "}
+                Impactful Purchase {" "}
                 </Typography>
                 <Typography variant="body2">
-                    All Products that we have up fo sale are professionally
-                    tasted and inspected. Our products are fully functional and
-                    work as they are intended to do so.{" "}
+                All our products are professionally tested top-of-the-line devices that adhere to the latest technology. The functionalities are highly sought after.{" "}
                 </Typography>
             </Grid>
 
@@ -93,28 +87,23 @@ function RefurbishedSection() {
                     alt="analysis.pic"
                 />
                 <Typography variant="p" fontWeight={"bolder"} mb={2}>
-                    Trusted coverage{" "}
+                    Warranty and Support{" "}
                 </Typography>
                 <Typography variant="body2">
                     {" "}
-                    We are the best refurbishes in the market today. Our
-                    products tackle your tasks with the features you are paying
-                    top dollar for.{" "}
+                    Our products speak for themselves. If you still feel the need for reassurance, SJ Computers gives a free one-year warranty and refund period for its users.{" "}
                 </Typography>
             </Grid>
 
             <Grid item lg={12} container rowGap={1}>
                 <Grid item lg={12} textAlign={"start"}>
                     <Typography variant="p" fontWeight={"bold"}>
-                        What Should I expect to recieve with my Refurbished
-                        purchase?{" "}
+                    What can I expect to receive with my Refurbished purchase online? {" "}
                     </Typography>
                 </Grid>
                 <Grid item lg={12} textAlign={"start"}>
                     <Typography variant="body1">
-                        SJ Computers Refurbished is your destination for
-                        refurbished desktops, laptops, and accessories. All our
-                        products are backed by SJ Computers Guarantee.{" "}
+                    The completely refurbished product with its necessary accessories. {" "}
                     </Typography>
                 </Grid>
             </Grid>
@@ -122,15 +111,12 @@ function RefurbishedSection() {
             <Grid item lg={12} container rowGap={1}>
                 <Grid item lg={12} textAlign={"start"}>
                     <Typography variant="p" fontWeight={"bold"}>
-                        In what condition can I expect my Refurbished product to
-                        be?{" "}
+                    In what condition can I expect my Refurbished product to be? {" "}
                     </Typography>
                 </Grid>
                 <Grid item lg={12} textAlign={"start"}>
                     <Typography variant="body1">
-                        SJ Computers Refurbished is your destination for
-                        refurbished desktops, laptops, and accessories. All our
-                        products are backed by SJ Computers Guarantee.{" "}
+                    The refurbished product will be in complete working condition. {" "}
                     </Typography>
                 </Grid>
             </Grid>
