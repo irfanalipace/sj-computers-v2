@@ -103,19 +103,22 @@ export const CartItem = memo(({ cartData }) => {
                             </div>
                             <div className="col-md-2 price-item">
                                 <p className="my-sm-0 my-2">
-                                    <strong className="">
+                                    <strong className="price-data-item-list-cost">
                                         $
                                         {parseFloat(cartData?.price).toFixed(2)}
                                     </strong>
                                 </p>
                             </div>
-                            <WarrantyBadge
+                            {/* <WarrantyBadge
                                 durationInYears={
                                     cartData?.plan?.durationInYears
                                 }
-                            />
+                            /> */}
                         </div>
-                        <ul className="item-list mt-1 mb-2">
+                        <div className="row">
+                            <div className="col-md-8">
+                                <div className="list-item-dev-ui-item">
+                                <ul className="item-list mt-1 mb-2">
                             <li>
                                 <span className="item-stock">
                                     {cartData?.product?.quantity ==
@@ -141,7 +144,27 @@ export const CartItem = memo(({ cartData }) => {
                                             980 PRO
                                         </span>
                                     </li> */}
-                        </ul>
+                                </ul>
+                                </div>
+                               
+                             
+                            </div>
+                            <div className="col-md-2">
+                                 <div className="protection-lables-warntity">
+                                    <p className="dev-sj-computers-sections">SJ Computer </p>
+                                      <p className="protection-name-dev">  Protection</p>
+                                   
+                                    <span>3 Years</span>
+                                 </div>
+                                </div>
+                                <div className="col-md-2">
+                                  <div className="add-card-price-carditem">
+                                    <p>$32.4</p>
+                                  </div>
+                                </div>
+                        </div>
+                        
+                       
                         {cartData.loading ? (
                             <Loader />
                         ) : (
