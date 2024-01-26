@@ -63,7 +63,7 @@ function ReviewImagesSlider({ productId, reviews }) {
             )}
             <Swiper
                 className=""
-                spaceBetween={1}
+                spaceBetween={3}
                 slidesPerView={1}
                 navigation
                 pagination={{ clickable: true }}
@@ -95,15 +95,16 @@ function ReviewImagesSlider({ productId, reviews }) {
                             className="btn btn-light p-1 d-flex align-items-center"
                         >
                             {/* {rev?.images?.map((image, index) => ( */}
-                            <SwiperSlide style={{backgroundColor: 'black', paddingBottom: 0, height: "180px"}}>
-                                <img
+                            <SwiperSlide style={{ paddingBottom: 0, height: "180px"}}>
+                                <div
                                     src={data?.file_path}
+                                    style={{backgroundImage: `url(${data?.file_path})`, backgroundSize: "cover", backgroundPosition: "center"}}
                                     onClick={() =>
                                         handleOpenDialog(data?.review_id, data?.id)
                                     }
                                     alt="review-image"
                                     className="all-reviews-image"
-                                />
+                                ></div>
                             </SwiperSlide>
 
                             {/* ))} */}
