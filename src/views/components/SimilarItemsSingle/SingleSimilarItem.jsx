@@ -6,7 +6,11 @@ import StarRatings from "react-star-ratings";
 import { useSelector } from "react-redux";
 import AddCartComponents from "../Product/CheckOutCard/AddCartComponents";
 
-const SingleSimilarItem = ({ type = "", product }) => {
+const SingleSimilarItem = ({
+    type = "",
+    product,
+    heading = "Similar items with fast delivery",
+}) => {
     const orderEstimatedDelivery = useSelector(
         (state) => state.orders.orderEstimatedDelivery
     );
@@ -121,7 +125,7 @@ const SingleSimilarItem = ({ type = "", product }) => {
     );
     return (
         <div className="similar-item-one mt-5">
-            <h3>Similar items with fast delivery</h3>
+            <h3>{heading}</h3>
             <div className="similar-item-one-inner">
                 <div className="image-wrapper-similar-items">
                     <LazyLoadImage

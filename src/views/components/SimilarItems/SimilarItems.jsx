@@ -21,7 +21,10 @@ const SimilarItems = ({ products }) => {
             >
                 <Grid lg={4} mr={5}>
                     {products[0] ? (
-                        <SingleSimilarItem product={products[0]} />
+                        <SingleSimilarItem
+                            product={products[0]}
+                            heading={"Featured items you may like"}
+                        />
                     ) : (
                         <></>
                     )}
