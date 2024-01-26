@@ -167,7 +167,7 @@
     display: flex;
 }
 .add-new-review .check-rating-star-review {
-    margin-left: 35px;
+    /* margin-left: 35px; */
     color: green;
 }
 
@@ -243,4 +243,14 @@
 
 .review.expanded {
     max-height: none;
+}
+
+@media screen and (max-width: 576px) {
+    .preview-button-review > button {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 200px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
 }

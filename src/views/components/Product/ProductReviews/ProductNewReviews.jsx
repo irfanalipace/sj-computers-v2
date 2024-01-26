@@ -40,7 +40,6 @@ const ProductNewReviews = () => {
     const products = useSelector((state) => state.products.products);
     const [LoadingOverlay, setOverlayLoader] = useState(false);
 
-   
     useEffect(() => {
         getProductDetails();
     }, [productId]);
@@ -72,7 +71,7 @@ const ProductNewReviews = () => {
             console.error("Error fetching product details:", error);
         } finally {
             setOverlayLoader(false);
-         
+
             console.log(LoadingOverlay, "kkjjkkk");
         }
     };
@@ -189,123 +188,129 @@ const ProductNewReviews = () => {
 
     return (
         <>
-       {
-        LoadingOverlay ? (
-            <LoaderComponent />
-        ) : (
-            <form onSubmit={handleSubmit}>
-            <div className="container add-new-review">
-                <Breadcrumb routes={breadcrumbRoutes} />
-                <div className="row">
-                    <div className="col-lg-3 col-md-3 col-sm-6 col-12">
-                        <div className="review-heading-image-product">
-                            <img src={productImages} alt="Product" />
-                        </div>
-                    </div>
-                    <div className="col-lg-9 col-md-9 col-sm-6 col-12">
+            {LoadingOverlay ? (
+                <LoaderComponent />
+            ) : (
+                <form onSubmit={handleSubmit}>
+                    <div className="container add-new-review">
+                        <Breadcrumb routes={breadcrumbRoutes} />
                         <div className="row">
-                            <div className="col-md-11">
-                                <div className="review-heading">
-                                    <h5>{product?.name}</h5>
-                                </div>
-                                <div className="sj-computer-tags">
-                                    <p>SJ Computers</p>
+                            <div className="col-lg-3 col-md-3 col-sm-6 col-12">
+                                <div className="review-heading-image-product">
+                                    <img src={productImages} alt="Product" />
                                 </div>
                             </div>
-                        </div>
-                        <div className="rating-review-star">
-                            <div>
-                                <Rating
-                                    required
-                                    name="simple-controlled"
-                                    value={value}
-                                    onChange={(event, newValue) => {
-                                        setValue(newValue);
-                                    }}
-                                />
-                            </div>
-                            <div className="check-rating-star-review">
-                                <FontAwesomeIcon icon={faCheck} />
-                            </div>
-                            <div className="posted-policy-review">
-                                <p>Posted publicly as</p>
-                            </div>
-                            <div className="check-rating-star-review-name">
-                                <div>{userName} |</div>
-                                <div className="data-clear-button-review">
+                            <div className="col-lg-9 col-md-9 col-sm-6 col-12">
+                                <div className="row">
+                                    <div className="col-md-11">
+                                        <div className="review-heading">
+                                            <h5>{product?.name}</h5>
+                                        </div>
+                                        <div className="sj-computer-tags">
+                                            <p>SJ Computers</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="d-sm-flex d-block">
+                                    <Rating
+                                        required
+                                        name="simple-controlled"
+                                        value={value}
+                                        onChange={(event, newValue) => {
+                                            setValue(newValue);
+                                        }}
+                                    />
+                                    <div className="d-flex align-items-center">
+                                        <div className="d-flex">
+                                            <div className="check-rating-star-review ms-sm-3">
+                                                <FontAwesomeIcon
+                                                    icon={faCheck}
+                                                />
+                                            </div>
+                                            <div className="posted-policy-review">
+                                                <p className="lh-1 mb-0">
+                                                    Posted publicly as
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="check-rating-star-review-name align-items-baseline">
+                                            <div className="lh-1">
+                                                {userName} |
+                                            </div>
+                                            <div className="data-clear-button-review lh-1">
+                                                <button
+                                                    type="button"
+                                                    onClick={handleClear}
+                                                    className="lh-1"
+                                                >
+                                                    Clear
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="col-md-12">
+                                    <div className="text-area-rating-review-list">
+                                        <textarea
+                                            required
+                                            name="text"
+                                            value={text}
+                                            onChange={(e) => handleText(e)}
+                                            placeholder="Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available."
+                                        ></textarea>
+                                    </div>
+                                </div>
+
+                                <div className="align-items-center d-flex flex-column flex-sm-row justify-content-sm-end mt-3 mt-sm-4 preview-button-review">
                                     <button
                                         type="button"
-                                        onClick={handleClear}
+                                        className="preview-product-list-button"
+                                        onClick={handlePreviewDialog}
                                     >
-                                        Clear
+                                        Preview
+                                    </button>{" "}
+                                    <button
+                                        type="button"
+                                        className="camera-button-review"
+                                        onClick={handleDialogBox}
+                                    >
+                                        <FontAwesomeIcon icon={faCamera} /> Add
+                                        Photos
+                                    </button>{" "}
+                                    <button
+                                        type="submit"
+                                        className="submit-review-button"
+                                        disabled={isLoading}
+                                    >
+                                        {isLoading ? (
+                                            <LoaderComponent />
+                                        ) : (
+                                            "Submit"
+                                        )}
                                     </button>
                                 </div>
                             </div>
                         </div>
-
-                        <div className="col-md-12">
-                            <div className="text-area-rating-review-list">
-                                <textarea
-                                    required
-                                    name="text"
-                                    value={text}
-                                    onChange={(e) => handleText(e)}
-                                    placeholder="Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available."
-                                ></textarea>
-                            </div>
-                        </div>
-
-                        <div className="preview-button-review">
-                            <button
-                                type="button"
-                                className="preview-product-list-button"
-                                onClick={handlePreviewDialog}
-                            >
-                                Preview
-                            </button>{" "}
-                            <button
-                                type="button"
-                                className="camera-button-review"
-                                onClick={handleDialogBox}
-                            >
-                                <FontAwesomeIcon icon={faCamera} /> Add
-                                Photos
-                            </button>{" "}
-                            <button
-                                type="submit"
-                                className="submit-review-button"
-                                disabled={isLoading}
-                            >
-                                {isLoading ? (
-                                    <LoaderComponent />
-                                ) : (
-                                    "Submit"
-                                )}
-                            </button>
-                        </div>
                     </div>
-                </div>
-            </div>
-            {dialogBoxOpen && (
-                <AddImagesDialogBox
-                    onClose={handleCloseDialogBox}
-                    onhandleCallback={callbackParent}
-                    onDeleteImage={handleDeleteImage}
-                />
-            )}
+                    {dialogBoxOpen && (
+                        <AddImagesDialogBox
+                            onClose={handleCloseDialogBox}
+                            onhandleCallback={callbackParent}
+                            onDeleteImage={handleDeleteImage}
+                        />
+                    )}
 
-            {previewDialogOpen && (
-                <CustomPhotoLibrary
-                    onClose={handlePreviewCloseBox}
-                    parentData={parentData}
-                    onDeleteImage={handleDeleteImage}
-                />
+                    {previewDialogOpen && (
+                        <CustomPhotoLibrary
+                            onClose={handlePreviewCloseBox}
+                            parentData={parentData}
+                            onDeleteImage={handleDeleteImage}
+                        />
+                    )}
+                </form>
             )}
-        </form>
-        )
-       }
-             
-          
         </>
     );
 };
