@@ -235,7 +235,7 @@ const ProtectionPlanDrawer = ({
             <div className="info mt-5">
                 <p>Cover all of your eligible devices:</p>
             </div>
-            <div className="protc-paln-option">
+            {/* <div className="protc-paln-option">
                 <div>
                     <Checkbox
                         checked={
@@ -267,25 +267,6 @@ const ProtectionPlanDrawer = ({
                             />{" "}
                             Learn More
                         </p>
-                        {/* <p style={{ color: "red" }}>
-                            &nbsp;$16.99/month
-                            <p
-                                onClick={() => {
-                                    protectionPlan === "techUnlimited"
-                                        ? setProtectionPlan("")
-                                        : setProtectionPlan("techUnlimited");
-                                }}
-                                style={{
-                                    color: "rgb(18, 112, 196)",
-                                    cursor: "pointer",
-                                }}
-                            >
-                                <KeyboardArrowDownIcon
-                                    style={{ marginTop: "-2px" }}
-                                />{" "}
-                                Learn More
-                            </p>
-                        </p> */}
                     </p>{" "}
                 </div>
                 {learnMore.value === PLAN_ENUM.DEFAULT.value && (
@@ -343,7 +324,7 @@ const ProtectionPlanDrawer = ({
                         </p>
                     </div>
                 )}
-            </div>
+            </div> */}
             <div className="btn-grp mt-3">
                 <button
                     className="add-prot-btn"
