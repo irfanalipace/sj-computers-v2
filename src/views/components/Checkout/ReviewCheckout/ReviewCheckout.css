@@ -132,6 +132,11 @@ input[type="number"] {
     text-align: center;
     padding-left: 13px;
 }
+.overlay-protecions-checkout-card-protection-name-dev p {
+    color: #318243;
+    margin-left: 10px;
+    margin-bottom: 6px;
+}
 .checkout-card-protection-lables-warntity span {
     font-family: Inter;
     font-size: 12px;
@@ -142,6 +147,17 @@ input[type="number"] {
     color: #318243;
 }
 
+.checkout-card-price-atam-data{
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600 !important;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-top: 14px;
+
+    
+}
 .checkout-card-protection-name-dev {
     font-family: Inter;
     font-size: 10px !important;

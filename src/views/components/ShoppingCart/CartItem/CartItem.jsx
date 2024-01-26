@@ -213,12 +213,12 @@ export const CartItem = memo(({ cartData }) => {
                             </div>
                             {cartData?.plan?.value && (
                                 <>
-                                    <div className="col-md-3 px-0">
-                                        <div className="protection-button-remove-data">
+                                    <div className="col-md-3 col-sm-6 px-0">
+                                        <div className="protection-button-remove-data add-text-remive-item">
                                             <button>Remove protection</button>
                                         </div>
                                     </div>
-                                    <div className="col-md-2">
+                                    <div className="col-lg-2 col-md-3 col-6">
                                         <div className="protection-lables-warntity text-start px-2 py-2">
                                             <p className="dev-sj-computers-sections text-start ms-0">
                                                 SJ Computer
@@ -236,7 +236,7 @@ export const CartItem = memo(({ cartData }) => {
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="col-md-2">
+                                    <div className="col-lg-2 col-md-3 col-6">
                                         <div className="add-card-price-carditem">
                                             <p className="protections-price-carditem">
                                                 ${cartData?.plan_price}
