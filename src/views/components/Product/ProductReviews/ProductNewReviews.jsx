@@ -181,7 +181,7 @@ const ProductNewReviews = () => {
             link: redirct(product?.url),
         },
         {
-            label: "Review",
+            label: "Publish Review",
             link: `/add-review/${product?.asin}`,
         },
     ];
@@ -258,7 +258,7 @@ const ProductNewReviews = () => {
                                             name="text"
                                             value={text}
                                             onChange={(e) => handleText(e)}
-                                            placeholder="Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available."
+                                            placeholder="Write comments here..."
                                         ></textarea>
                                     </div>
                                 </div>

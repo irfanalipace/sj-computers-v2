@@ -134,9 +134,11 @@ const Router = () => {
         {
             path: "/add-review/:productId",
             element: (
-                <PageWrapper>
-                    <ProductNewReviews />
-                </PageWrapper>
+                <ProtectedRoute>
+                    <PageWrapper>
+                        <ProductNewReviews />
+                    </PageWrapper>
+                </ProtectedRoute>
             ),
         },
 

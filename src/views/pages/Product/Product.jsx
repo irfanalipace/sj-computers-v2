@@ -55,7 +55,7 @@ export default function Product() {
 
     const ProductComponent = () => {
         const { similarProducts } = useSimilarData();
-        
+
         return (
             <>
                 {products?.length > 0 && (
@@ -99,14 +99,17 @@ export default function Product() {
                         ) : (
                             <>
                                 <ProductComponent />
-                                <VisibleOnScroll>
-                                    <ProductReviews
-                                        reviews={products}
-                                        onFilterChange={onFilterChange}
-                                        productAsin={product?.asin}
-                                        productId={product?.id}
-                                    />
-                                </VisibleOnScroll>{" "}
+                                <div id="reviews">
+                                    {" "}
+                                    <VisibleOnScroll>
+                                        <ProductReviews
+                                            reviews={products}
+                                            onFilterChange={onFilterChange}
+                                            productAsin={product?.asin}
+                                            productId={product?.id}
+                                        />
+                                    </VisibleOnScroll>
+                                </div>
                             </>
                         )}
 
