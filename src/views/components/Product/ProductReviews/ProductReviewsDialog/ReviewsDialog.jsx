@@ -13,7 +13,7 @@ import "swiper/swiper-bundle.min.css";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 import "swiper/css/navigation";
 
-const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId = null , imgIndex , ReviewsData}) => {
+const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId = null , imgIndex , ReviewsData, reviews}) => {
 
   const swiperRef = useRef(null);
 
@@ -24,26 +24,38 @@ const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId = null , i
   // const [selectedIndex, setSelectedIndex] = useState(null)
   // console.log(selectedReview?.images.map((image) => {  console.log("image" ,image.imageUrl) }), "images.image");
 
-  const getReviewById = (productReviewId) => {
+  const getReviewById = async (productReviewId) => {
     console.log("clicked on image ", productReviewId);
     if(typeof productReviewId !== "number"){
       console.log("reiewId empty open gallery");
       setImgGallery(true)
     } else {
-      setImgGallery(false)
-      // const review = ReviewsData?.data?.find((r) => r.product_review_id === productReviewId);
+      // setInitialSlide(imgIndex)
+      // // const review = ReviewsData?.data?.find((r) => r.product_review_id === productReviewId);
+      // const review = ReviewsData?.data?.filter(obj => obj.review_id === productReviewId) 
+      // setSelectedReview(review)
+      // console.log(review, "review", productReviewId, "reviewId");
+      // setImgGallery(false)
       const review = ReviewsData?.data?.filter(obj => obj.review_id === productReviewId) 
-      setSelectedReview(review)
-      console.log(review, "review", productReviewId, "reviewId");
-      
-      // return review || null; // Return null if reviewId is not found
-      
+      setSelectedReview(review) 
+      setImgGallery(false)
+      const review2 = selectedReview?.map((data, index) => data.id) ?? []
+      const indexof = review2.indexOf(imgIndex + 1)
+      const positiveIndex = Math.abs(indexof);
+    setTimeout(() => {
+      if (swiperRef.current && swiperRef.current.swiper) {
+        console.log("present",);
+        swiperRef.current.swiper.slideTo(positiveIndex)
+      } else {
+        console.log("not present");
+      }
+    }, 500);
     }
   };
   
   useEffect(() => {
     getReviewById(reviewId)
-  }, [reviewId ])
+  }, [reviewId, imgIndex ])
 
   const handleSwitchImage = (index) => {
     if (swiperRef.current && swiperRef.current.swiper) {
@@ -59,12 +71,21 @@ const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId = null , i
   }
   }
 
-   const handleSelectImageGallery = (productReviewId, index) => {
-    setInitialSlide(index)
-    console.log("index : ", index , "initialSlide : ", initialSlide , );
+   const handleSelectImageGallery = async (productReviewId, index) => {
     setImgGallery(false)
     const review = ReviewsData?.data?.filter(obj => obj.review_id === productReviewId) 
-    setSelectedReview(review)
+    setSelectedReview(review) 
+    const review2 = selectedReview?.map((data, index) => data.id) ?? []
+    const indexof = review2.indexOf(index + 1)
+    const positiveIndex = Math.abs(indexof);
+    setTimeout(() => {
+      if (swiperRef.current && swiperRef.current.swiper) {
+        console.log("present",);
+        swiperRef.current.swiper.slideTo(positiveIndex)
+      } else {
+        console.log("not present");
+      }
+    }, 100);
    }
 
   return (
@@ -102,11 +123,15 @@ const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId = null , i
                 spaceBetween={1}
                 slidesPerView={1}
                 navigation
+                // loop
+                // onSwiper={(swiper) => console.log(swiper)}
+                onActiveIndexChange={(e) => console.log(e)}
+                // centeredSlides
                 onSlideChange={handleSlideChange}
                 initialSlide={initialSlide} // initial slide takes count from 0
               >
               {selectedReview?.map((data, index) => (
-                <SwiperSlide style={{width: "100%", height: "100%",display: "flex", alignItems: "center" , justifyContent: "center"}} >
+                <SwiperSlide key={data.id} style={{width: "100%", height: "100%",display: "flex", alignItems: "center" , justifyContent: "center"}} >
                   <img src={data?.file_path}  style={{maxHeight: "100%",maxWidth: "100%"}} alt="review image" />
                 </SwiperSlide>
               ))}
@@ -115,7 +140,11 @@ const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId = null , i
 
               <Grid item xs={6} pl={2} container>
                 <Grid item xs={12}>
-                  {/* <ReviewCard /> */}
+                {reviews?.product_detail?.data?.map((review, index) => (
+                                <div className="my-4" key={index}>
+                                    <ReviewCard reviewData={review} />
+                                </div>
+                            ))}
                 </Grid>
                 <Grid item xs={12} py={1} >
                   <Typography py={1} variant='body2' fontSize={"small"}>Images</Typography>
@@ -134,3 +163,16 @@ const ReviewsDialog = ({open, handleDialogOpen, handleClose, reviewId = null , i
 }
 
 export default ReviewsDialog
+
+// const handleSelectImageGallery = async(productReviewId, id) => {
+//   const review = await ReviewsData?.data?.filter(obj => obj.review_id === productReviewId) 
+//   const review2 = await selectedReview?.map((data, index) => data.id) ?? []
+//   const indexof = await review2.indexOf(id)
+//   const positiveIndex = await Math.abs(indexof);
+//   console.log("index",indexof,"positive index", positiveIndex, " id", id);
+//   // console.log(review2[0]., "review2");
+//   await setInitialSlide(positiveIndex)
+//   setSelectedReview(review) 
+//   console.log("id : ", id , "initialSlide : ", initialSlide , );
+//   setImgGallery(false)
+//  }

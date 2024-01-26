@@ -10,16 +10,16 @@ import { allReviewImagesApi } from "../../../../core/api/product-review";
 
 SwiperCore.use([Navigation, Pagination]);
 
-function ReviewImagesSlider({ reviews }) {
+function ReviewImagesSlider({productId ,reviews }) {
 
     const[open, setOpen] = useState(false)
     const [reviewId, setReviewId] = useState({})
     const [imgIndex, setImgIndex] = useState("")
     const [ReviewsData, setReviewsData] = useState([]) 
 
-    const fetchData = async () => {
+    const fetchData = async (productId) => {
         try {
-            const response = await allReviewImagesApi(1)
+            const response = await allReviewImagesApi(productId)
             console.log(response,  "responseAllImage");
             setReviewsData(response)
         } catch (error) {
@@ -28,7 +28,7 @@ function ReviewImagesSlider({ reviews }) {
     }
 
     useEffect(() => {
-        fetchData()
+        fetchData(productId)
     }, [allReviewImagesApi])
 
     console.log(reviews, "reviews");
@@ -74,7 +74,7 @@ function ReviewImagesSlider({ reviews }) {
                 }}
             >
                 {/* /// --- DIALOG --- /// */}
-                <ReviewsDialog open={open} handleOpenDialog={handleOpenDialog} handleClose={handleClose} reviewId={reviewId} imgIndex={imgIndex} ReviewsData={ReviewsData} />
+                <ReviewsDialog open={open} handleOpenDialog={handleOpenDialog} handleClose={handleClose} reviewId={reviewId} imgIndex={imgIndex} ReviewsData={ReviewsData} reviews={reviews} />
 
                 {ReviewsData?.data?.map((data, index) => (
                     <div key={data.id}>
