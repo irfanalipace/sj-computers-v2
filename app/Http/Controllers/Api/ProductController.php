@@ -84,6 +84,11 @@ class ProductController extends BaseController
             ->get();
     }
 
+    public function productCount()
+    {
+        $products = Product::where('quantity', '>', 100)->get();
+        return response()->json($products);
+    }
     public function getProductFilterList()
     {
         $data = [];
