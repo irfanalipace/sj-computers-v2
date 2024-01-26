@@ -68,7 +68,7 @@ export default function ReviewCheckout({
                                  <div className="checkout-card-protection-lables-warntity">
                                     <p className="checkout-card-dev-sj-computers-sections">SJ Computer </p>
                                     <div>
-                                    <p className="checkout-card-protection-name-dev">  Protection</p>
+                                    <p className="overlay-protecions-checkout-card-protection-name-dev">  Protection</p>
                                     </div>
                                      
                                    

@@ -127,23 +127,83 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                                 }
                                                             </strong>
                                                         </Link>
-                                                        <WarrantyBadge
+                                                        {/* <WarrantyBadge
                                                             durationInYears={
                                                                 item?.plan
                                                                     ?.durationInYears
                                                             }
-                                                        />
-                                                        <ul className="item-list">
-                                                            <li>
-                                                                <span className="item-stock">
-                                                                    {item
-                                                                        ?.product
-                                                                        ?.quantity
-                                                                        ? "In Stock"
-                                                                        : "Out of Stock"}
-                                                                </span>
-                                                            </li>
-                                                        </ul>
+                                                        /> */}
+                                                        <div className="overlay-card-protections-dev-data-sidebar">
+                                                            <div>
+                                                                <ul className="item-list">
+                                                                    <li>
+                                                                        <span className="item-stock">
+                                                                            {item
+                                                                                ?.product
+                                                                                ?.quantity
+                                                                                ? "In Stock"
+                                                                                : "Out of Stock"}
+                                                                        </span>
+                                                                    </li>
+                                                                </ul>
+                                                                {item.loading ? (
+                                                                    <Loader />
+                                                                ) : (
+                                                                    <>
+                                                                        <div
+                                                                            className="d-flex"
+                                                                            style={{
+                                                                                maxWidth:
+                                                                                    "700px",
+                                                                            }}
+                                                                        >
+                                                                            <button
+                                                                                onClick={() =>
+                                                                                    deleteItemFunction(
+                                                                                        item
+                                                                                    )
+                                                                                }
+                                                                                className="button-link ps-0"
+                                                                                disabled={
+                                                                                    updatingItem
+                                                                                }
+                                                                            >
+                                                                                {updatingItem ? (
+                                                                                    <Loader />
+                                                                                ) : (
+                                                                                    "Delete"
+                                                                                )}
+                                                                            </button>
+                                                                        </div>
+                                                                    </>
+                                                                )}
+                                                            </div>
+
+                                                            <div className="overlay-card-shipping-page-card-view-details">
+                                                                <div className="overlay-card-protection-button-remove-data">
+                                                                    <button>
+                                                                        Remove
+                                                                        protection
+                                                                    </button>
+                                                                </div>
+                                                                <div className="overlay-checkout-checkout-card-protection-lables-warntity overlay-sidebar-protect-card">
+                                                                    <p className="checkout-card-dev-sj-computers-sections-overlay-data-view">
+                                                                        SJ
+                                                                        Computer{" "}
+                                                                    </p>
+                                                                    <div>
+                                                                        <p className="overlay-checkout-card-protection-name-dev-protecttions">
+                                                                            {" "}
+                                                                            Protection
+                                                                        </p>
+                                                                    </div>
+
+                                                                    <span className="years-data-list-prot">
+                                                                        3 Years
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div className="col-md-2 price-item">
                                                         <p>
@@ -156,37 +216,6 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                         </p>
                                                     </div>
                                                 </div>
-                                                {item.loading ? (
-                                                    <Loader />
-                                                ) : (
-                                                    <>
-                                                        <div
-                                                            className="d-flex"
-                                                            style={{
-                                                                maxWidth:
-                                                                    "700px",
-                                                            }}
-                                                        >
-                                                            <button
-                                                                onClick={() =>
-                                                                    deleteItemFunction(
-                                                                        item
-                                                                    )
-                                                                }
-                                                                className="button-link ps-0"
-                                                                disabled={
-                                                                    updatingItem
-                                                                }
-                                                            >
-                                                                {updatingItem ? (
-                                                                    <Loader />
-                                                                ) : (
-                                                                    "Delete"
-                                                                )}
-                                                            </button>
-                                                        </div>
-                                                    </>
-                                                )}
                                             </div>
                                         </div>
                                     </div>
