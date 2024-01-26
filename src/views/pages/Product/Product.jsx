@@ -25,10 +25,12 @@ import { useDispatch } from "react-redux";
 
 export default function Product() {
     const dispatch = useDispatch();
+
     const [searchParams, setSearchParams] = useSearchParams();
+    console.log(searchParams, "", );
 
     const { isLoading, product, productImages, products, onFilterChange } =
-        useProductData();
+     useProductData();
 
     const redirct = (pathUrl) => {
         const url = new URL(pathUrl || "https://www.sjcomputers.us");
