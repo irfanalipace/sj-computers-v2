@@ -95,10 +95,11 @@ class ProductController extends BaseController
             ->orWhereJsonContains('description->ram_memory',[['installed_size'=> ['value' => $ram_value]]])
             ->orWhereJsonContains('description->graphics_ram',[['size'=> ['value' => $graphics_ram]]])
             ->orWhereJsonContains('description->hard_disk',[['size'=> ['value' => $hard_disk]]])
+            ->where('quantity', '>', 100)
+            ->limit(10)
             ->get();
 
-            $products = $data->where('quantity', '>', 100)->take(10)->all();
-            return $this->sendResponse($products, 'All product displayed that are above 100 in quantity');
+            return $this->sendResponse($data, 'All product displayed that are above 100 in quantity');
     }
     public function getProductFilterList()
     {
