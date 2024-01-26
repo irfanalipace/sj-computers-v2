@@ -17,7 +17,7 @@ const ProductSlider = ({ type = "", products }) => {
             breakpoints={{
                 // when window width is >= 320px
                 320: {
-                    slidesPerView: 2,
+                    slidesPerView: 1,
                 },
                 // when window width is >= 480px
                 480: {
@@ -29,11 +29,11 @@ const ProductSlider = ({ type = "", products }) => {
                 },
 
                 768: {
-                    slidesPerView: 5,
+                    slidesPerView: 4,
                 },
 
                 1200: {
-                    slidesPerView: 7,
+                    slidesPerView: 6,
                 },
             }}
             navigation
