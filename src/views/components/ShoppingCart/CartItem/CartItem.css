@@ -29,15 +29,11 @@
 .item-details {
     font-size: 11px;
 }
-.protections-price-carditem{
-    font-weight: 600 
-}
+
 .list-item-dev-ui-item{
     margin-top: 15px;
 }
-.protections-price-carditem{
-    font-weight: 600;
-}
+
 .cart-image-mobile-size {
     display: flex;
     justify-content: center;
@@ -95,6 +91,18 @@
 }
 .price-data-item-list-cost{
     font-weight: 600;
+}
+
+
+.protections-price-carditem {
+    font-weight: 600;
+    font-size: 16px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: 0em;
+    /* text-align: left; */
 }
 @media screen and (max-width: 600px) {
     .cartItem-image {
