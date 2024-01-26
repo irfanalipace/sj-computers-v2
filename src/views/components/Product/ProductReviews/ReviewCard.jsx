@@ -9,7 +9,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-function ReviewCard({ reviewData, index }) {
+function ReviewCard({ reviewData, index, isDialog }) {
     const [expandedReviews, setExpandedReviews] = useState([]);
 
     const handleToggleExpand = (index) => {
@@ -75,6 +75,10 @@ function ReviewCard({ reviewData, index }) {
                 )}
             </Box>
 
+            {/* for hiding images in dialog  */}
+           {   isDialog === true ?  <div></div>
+           :             
+           <>
             <Stack
                 direction={"row"}
                 width={"100%"}
@@ -117,6 +121,8 @@ function ReviewCard({ reviewData, index }) {
                 </Stack> */}
                 <button className="review-report-btn">Report</button>
             </div>
+            </>
+            }
         </div>
     );
 }

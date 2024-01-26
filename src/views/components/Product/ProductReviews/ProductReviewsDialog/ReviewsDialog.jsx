@@ -33,6 +33,7 @@ const ReviewsDialog = ({
 }) => {
     const swiperRef = useRef(null);
 
+    const [reviewCardId, setReviewCardId] = useState(reviewId)
     const [imgGallery, setImgGallery] = useState(false);
     const [selectedReview, setSelectedReview] = useState(null);
     const [activeSlide, setActiveSlide] = useState(imgIndex);
@@ -52,6 +53,7 @@ const ReviewsDialog = ({
             // setSelectedReview(review)
             // console.log(review, "review", productReviewId, "reviewId");
             // setImgGallery(false)
+            setReviewCardId(productReviewId)
             const review = ReviewsData?.data?.filter(
                 (obj) => obj.review_id === productReviewId
             );
@@ -96,7 +98,8 @@ const ReviewsDialog = ({
         }
     };
 
-    const handleSelectImageGallery = async (productReviewId, index) => {
+    const handleSelectImageGallery = async (productReviewId, index, id ) => {
+        setReviewCardId(productReviewId)
         setImgGallery(false);
         const review = ReviewsData?.data?.filter(
             (obj) => obj.review_id === productReviewId
@@ -148,7 +151,8 @@ const ReviewsDialog = ({
                                         onClick={() =>
                                             handleSelectImageGallery(
                                                 data?.product_review_id,
-                                                index
+                                                index, 
+                                                data?.id
                                             )
                                         }
                                         className="image-item"
@@ -222,22 +226,21 @@ const ReviewsDialog = ({
                         <Grid item xs={6} pl={2} container>
                             <Grid item xs={12}>
                                 {reviews?.product_detail?.data
-                                    ?.filter((review) => review.id === reviewId)
+                                    ?.filter((review) => review.id === reviewCardId)
                                     .map((filteredReview, index) => (
                                         <div className="my-4 ms-3" key={index}>
-                                            <ReviewCard
-                                                reviewData={filteredReview}
-                                            />
+                                            <ReviewCard reviewData={filteredReview} isDialog={true} />
                                         </div>
                                     ))}
                             </Grid>
                             <Grid className="ms-3" item xs={12} py={1}>
                                 <Typography
                                     py={1}
-                                    variant="body2"
+                                    variant="body1"
                                     fontSize={"small"}
+                                    mb={1}
                                 >
-                                    Images
+                                    Images in this review
                                 </Typography>
                                 <div style={{ display: "flex" }}>
                                     {selectedReview?.map((data, index) => (
