@@ -18,7 +18,62 @@
     font-size: 14px;
     margin-top: 15px;
 }
+.overlay-sidebar-protect-card {
+    padding-right: 8px;
+}
+.overlay-card-protection-button-remove-data button {
+    background: none;
+    border: none;
+    color: #078396;
+    font-size: 10px;
+    margin-top: 10px;
+}
 
+.overlay-checkout-checkout-card-protection-lables-warntity {
+    padding: 4px;
+    background: #EAEDED;
+    border-radius: 5px;
+}
+.checkout-card-dev-sj-computers-sections-overlay-data-view{
+    font-family: Inter;
+font-size: 10px;
+font-weight: 500;
+line-height: 12px;
+letter-spacing: 0em;
+text-align: left;
+margin-bottom: 0px;
+
+}
+.overlay-checkout-card-protection-name-dev-protecttions{
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 5px;
+    color:#318243;
+}
+
+.years-data-list-prot{
+    font-family: Inter;
+font-size: 12px;
+font-weight: 600;
+line-height: 15px;
+letter-spacing: 0em;
+text-align: left;
+
+}
+.protection-button-remove-data{
+    margin-right: 4px;
+}
+.overlay-card-protections-dev-data-sidebar {
+    display: flex;
+    justify-content: space-between;
+}
+.overlay-card-shipping-page-card-view-details{
+    display: flex;
+}
 .buttonoverlay-condtions {
     display: flex;
     justify-content: space-around;
