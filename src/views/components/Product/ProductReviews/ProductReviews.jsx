@@ -114,46 +114,49 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                             </button>
                         </div> */}
 
-                        <ReviewImages reviews={reviews}  productId={productId} />
+                        <ReviewImages reviews={reviews} productId={productId} />
                         {reviews?.product_detail?.data.length === 0 &&
                             !reviewLoading && (
                                 <Typography fontWeight={600}>
                                     No customer reviews
                                 </Typography>
                             )}
-                        {!!reviews?.product_detail?.data.length && (
-                            <>
-                                <div
-                                    tabIndex="0"
-                                    ref={reviewRef}
-                                    className="filter-wrapper mt-3 mb-0 "
-                                >
-                                    <select
-                                        className="form-select"
-                                        onChange={(e) =>
-                                            setFilterBy(e.target.value)
-                                        }
-                                    >
-                                        <option
-                                            value={PRODUCT_FILTER_KEY_ENUM.TOP}
-                                        >
-                                            Top Reviews
-                                        </option>
-                                        <option
-                                            value={
-                                                PRODUCT_FILTER_KEY_ENUM.RECENT
-                                            }
-                                        >
-                                            Recent Reviews
-                                        </option>
-                                    </select>
-                                </div>
 
-                                <h3 className="product-section-heading my-4 py-1">
-                                    {PRODUCT_FILTER_LABEL_ENUM[filterBy]}
-                                </h3>
-                            </>
-                        )}
+                        <div
+                            style={{
+                                display: !!reviews?.product_detail?.data.length
+                                    ? "hidden"
+                                    : "",
+                            }}
+                        >
+                            <div
+                                id="reviewSection"
+                                tabIndex="0"
+                                ref={reviewRef}
+                                className="filter-wrapper mt-3 mb-0 "
+                            >
+                                <select
+                                    className="form-select"
+                                    onChange={(e) =>
+                                        setFilterBy(e.target.value)
+                                    }
+                                >
+                                    <option value={PRODUCT_FILTER_KEY_ENUM.TOP}>
+                                        Top Reviews
+                                    </option>
+                                    <option
+                                        value={PRODUCT_FILTER_KEY_ENUM.RECENT}
+                                    >
+                                        Recent Reviews
+                                    </option>
+                                </select>
+                            </div>
+
+                            <h3 className="product-section-heading my-4 py-1">
+                                {PRODUCT_FILTER_LABEL_ENUM[filterBy]}
+                            </h3>
+                        </div>
+
                         {reviewLoading ? (
                             <Box sx={{ height: "100px" }}>
                                 <CircularProgress
