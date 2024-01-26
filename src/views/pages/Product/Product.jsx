@@ -56,9 +56,8 @@ export default function Product() {
     }, []);
 
     const ProductComponent = () => {
-        const { similarProducts, featuredProducts } = useSimilarData(
-            product?.id
-        );
+        const { similarProducts, featuredProducts } = useSimilarData();
+
         return (
             <>
                 {products?.length > 0 && (
