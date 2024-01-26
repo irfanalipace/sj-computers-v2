@@ -142,7 +142,7 @@ export default function ProductRating({ productID, rating, totalReview }) {
             <Stack direction={"row"} spacing={1} mt={0.3}>
                 <HoverColorChange hoverColor="#FFA41C" defaultColor="#007185">
                     <a
-                        href="#reviewSection"
+                        href="#review"
                         className="review-text"
                     >{`${totalReview} Ratings`}</a>
                 </HoverColorChange>
