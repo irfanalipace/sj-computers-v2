@@ -214,7 +214,7 @@ export const CartItem = memo(({ cartData }) => {
                             {cartData?.plan?.value && (
                                 <>
                                     <div className="col-md-3 col-sm-6 px-0">
-                                        <div className="protection-button-remove-data">
+                                        <div className="protection-button-remove-data add-text-remive-item">
                                             <button>Remove protection</button>
                                         </div>
                                     </div>

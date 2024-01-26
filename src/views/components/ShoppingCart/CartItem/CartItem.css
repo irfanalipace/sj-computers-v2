@@ -83,12 +83,15 @@
     border-radius: 1px solid #eaeded;
     border-radius: 6px;
     max-width: 86px;
-    margin-top: 12px;
+    /* margin-top: 6px; */
 }
 .protection-button-remove-data {
     text-align: end;
     /* background: none; */
-    margin-top: 34px;
+    /* margin-top: 13px; */
+}
+.add-text-remive-item{
+    margin-top: 14px;
 }
 .protection-button-remove-data button {
     background: none;
