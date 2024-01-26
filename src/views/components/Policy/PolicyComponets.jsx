@@ -168,10 +168,10 @@ const PolicyComponets = () => {
                             For more information about returning to third-party sellers. For products purchased from the SJ Computers Global Store,aken Returns. 
                             </li>
                             <li>
-                            For more information about returning. For products purchased from the SJ Computers Global Store, see SJ Computers Returns. For more information on refund timing and amounts (including partial refunds and restocking fees), see Refunds. If you have returned an item to Amazon by mistake or included something not intended for Amazon in a return, see Mistaken Returns. 
+                            For more information about returning. For products purchased from the SJ Computers Global Store, see SJ Computers Returns. For more information on refund timing and amounts (including partial refunds and restocking fees), see Refunds. If you have returned an item to SJComputers by mistake or included something not intended for SJComputers in a return, see Mistaken Returns. 
                             </li>
                             <li>
-                          For products purchased from the SJ Computers Global Store, see SJ Computers Returns. For more information on refund timing and amounts (including partial refunds and restocking fees), see Refunds. If you have returned an item to Amazon by mistake or included something not intended for Amazon in a return, see Mistaken Returns. 
+                          For products purchased from the SJ Computers Global Store, see SJ Computers Returns. For more information on refund timing and amounts (including partial refunds and restocking fees), see Refunds. If you have returned an item to SJComputers by mistake or included something not intended for SJComputers in a return, see Mistaken Returns. 
                             </li>
                             </ul> */}
                                 <div className="">

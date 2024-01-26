@@ -74,12 +74,12 @@ export default function ProductRating({ productID, rating, totalReview }) {
     return (
         <Stack
             direction={{
-                xs: "column",
-                lg: "row",
+                xs: "row",
             }}
             my={[4, 1, 0.5]}
-            alignItems={["center", "center", "start"]}
+            alignItems={"start"}
             gap={2}
+            width={"100%"}
         >
             <Tooltip
                 arrow

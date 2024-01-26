@@ -41,12 +41,12 @@ export const CheckOutCard = ({ product }) => {
                     <h6 style={{ fontWeight: "700" }}>Excellent Condition</h6>
                     <h6 style={{ fontWeight: "700" }}>(Refurbished)</h6>
                 </div>
-                <div
+                {/* <div
                     className="hidden-on-desktop"
                     style={{ fontWeight: "600" }}
                 >
                     ${product?.price?.toString().split(".")[0]}
-                </div>
+                </div> */}
                 <div className="row card-price-section-card-product">
                     <div className="col-md-12 color-text-cart hidden-on-mobile">
                         <sup>$</sup>

@@ -98,7 +98,7 @@ function AddToCartAndWarranty({ product }) {
                 <div className="col-xl-5 col-6">
                     <div className="hover-box secure-transection-display">
                         <Link
-                            href="#"
+                            href=""
                             className="text-decoration-none secure-payment-method"
                             style={{ color: "#2c8a9a" }}
                         >
