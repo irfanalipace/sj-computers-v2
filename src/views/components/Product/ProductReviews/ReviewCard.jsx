@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import StarRatings from "react-star-ratings";
 import { formatDateByMonthName } from "../../../../core/utils/helpers";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-function ReviewCard({ reviewData }) {
+function ReviewCard({ reviewData, index }) {
+    const [expandedReviews, setExpandedReviews] = useState([]);
+
+    const handleToggleExpand = (index) => {
+        const newExpandedReviews = [...expandedReviews];
+        newExpandedReviews[index] = !newExpandedReviews[index];
+        setExpandedReviews(newExpandedReviews);
+    };
     return (
         <div className="review-card mb-2">
             <div className="d-flex align-items-center">
@@ -43,21 +52,44 @@ function ReviewCard({ reviewData }) {
                 {formatDateByMonthName(reviewData?.created_at)}
             </p>
             <p className="verified-review">Verified Purchase</p>
-            <p className="review-comment my-0">{reviewData?.body}</p>
+            <Box>
+                <Box
+                    key={index}
+                    className={`review ${
+                        expandedReviews[index] ? "expanded" : ""
+                    }`}
+                >
+                    <p className="review-comment my-0">{reviewData?.body}</p>
+                </Box>
+                {reviewData?.body.length > 150 && (
+                    <Box>
+                        {expandedReviews[index] ? (
+                            <KeyboardArrowUpIcon />
+                        ) : (
+                            <KeyboardArrowDownIcon />
+                        )}
+                        <Button onClick={() => handleToggleExpand(index)}>
+                            {expandedReviews[index] ? "Read Less" : "Read More"}
+                        </Button>
+                    </Box>
+                )}
+            </Box>
 
             <Stack
                 direction={"row"}
                 width={"100%"}
                 my={2}
                 spacing={1}
-                overflowX={"auto"}
-                // height={"90px"}
+                overflow={"auto"}
             >
                 {reviewData?.product_media?.map((item, index) => {
                     return (
                         <Box
                             width={"100px"}
                             height={"100px"}
+                            display={"flex"}
+                            justifyContent={"center"}
+                            alignItems={"center"}
                             p={1}
                             sx={{ border: "1px solid lightgray" }}
                         >
