@@ -117,6 +117,7 @@ input[type="number"] {
     text-align: center;
     background: #eaeded;
     padding: 1px;
+    border-radius: 7px;
 }
 .checkout-card-dev-sj-computers-sections {
     font-weight: 500 !important;

@@ -56,10 +56,16 @@
     color:#318243;
     margin-top: 1px;
 }
-.protection-lables-warntity span{
+.protection-lables-warntity span {
     color: #318243;
     margin-top: 6px;
     font-size: 12px;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: left;
 }
 .dev-sj-computers-sections{
     margin-left: 11px;
@@ -77,11 +83,13 @@
     /* width: 123px; */
     height: 47px;
     background: #EAEDED;
+    border-radius: 1px solid #EAEDED;
+    border-radius: 6px;
 }
 .protection-button-remove-data {
     text-align: end;
     /* background: none; */
-    margin-top: 18px;
+    margin-top: 13px;
 }
 .protection-button-remove-data button {
     background: none;
