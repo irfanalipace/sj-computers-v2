@@ -23,7 +23,7 @@ function ProductVideoSlider({ videoData}) {
     }
 
     if(videoData == undefined){
-        return <div>product_media is undefined </div>
+        return <div>no media found </div>
     }
     if(videoData?.length == 0){
         return <div>no videos found</div>

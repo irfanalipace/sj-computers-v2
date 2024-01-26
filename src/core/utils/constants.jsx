@@ -37,14 +37,14 @@ export const PLAN_ENUM = {
         value: 2,
         label: "4-Year Warranty",
         price: 32.99,
-        durationInYears: 2,
+        durationInYears: 4,
     },
-    DEFAULT: {
-        value: 3,
-        label: "Tech Unlimited – Protect Eligible Past and Future Purchases with 1 Plan (Renews Monthly Until Cancelled)",
-        price: 16.99,
-        durationInYears: 0,
-    },
+    // DEFAULT: {
+    //     value: 3,
+    //     label: "Tech Unlimited – Protect Eligible Past and Future Purchases with 1 Plan (Renews Monthly Until Cancelled)",
+    //     price: 16.99,
+    //     durationInYears: 0,
+    // },
 };
 export const dummyCategories = [
     { name: "ALL", id: null, slug: "" },

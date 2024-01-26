@@ -12,7 +12,7 @@ export default function TabContent({ productDetails, product }) {
                                 className="row mx-0 "
                             >
                                 <div className="col-md-3 col-6 ps-1 ">
-                                    <span className="item12  text-uppercase">
+                                    <span className="item12  ">
                                         {item?.key}
                                     </span>
                                 </div>
