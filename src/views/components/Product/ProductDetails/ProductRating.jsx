@@ -141,7 +141,10 @@ export default function ProductRating({ productID, rating, totalReview }) {
             </Tooltip>
             <Stack direction={"row"} spacing={1} mt={0.3}>
                 <HoverColorChange hoverColor="#FFA41C" defaultColor="#007185">
-                    <a className="review-text">{`${totalReview} Ratings`}</a>
+                    <a
+                        href="#reviewSection"
+                        className="review-text"
+                    >{`${totalReview} Ratings`}</a>
                 </HoverColorChange>
                 {/* <Divider
                     orientation="vertical"
