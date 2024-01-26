@@ -139,17 +139,17 @@ export const CartItem = memo(({ cartData }) => {
                         <div className="row">
                             <div className="col-md-5">
                                 <div className="list-item-dev-ui-item">
-                                <ul className="item-list mt-1 mb-2">
-                            <li>
-                                <span className="item-stock">
-                                    {cartData?.product?.quantity ==
-                                    cartData?.quantity
-                                        ? "Out of Stock"
-                                        : "In Stock"}
-                                </span>
-                            </li>
-                            {/* <li>Discount Available</li> */}
-                            {/* <li>
+                                    <ul className="item-list mt-1 mb-2">
+                                        <li>
+                                            <span className="item-stock">
+                                                {cartData?.product?.quantity ==
+                                                cartData?.quantity
+                                                    ? "Out of Stock"
+                                                    : "In Stock"}
+                                            </span>
+                                        </li>
+                                        {/* <li>Discount Available</li> */}
+                                        {/* <li>
                                         <span className="item-capacity">
                                             Capacity:
                                         </span>
@@ -165,70 +165,87 @@ export const CartItem = memo(({ cartData }) => {
                                             980 PRO
                                         </span>
                                     </li> */}
-                                </ul>
+                                    </ul>
                                 </div>
-                            
-                             
-                            </div>
-                            <div className="col-md-3 px-0">
-                                 <div className="protection-button-remove-data">
-                                 <button>
-                                        Remove protection
-                                    </button>
-                                 </div>
-                               </div>
-                            <div className="col-md-2">
-                                 <div className="protection-lables-warntity">
-                                    <p className="dev-sj-computers-sections">SJ Computer </p>
-                                      <p className="protection-name-dev">  Protection</p>
-                                   
-                                    <span>3 Years</span>
-                                 </div>
-                                </div>
-                                <div className="col-md-2">
-                                  <div className="add-card-price-carditem">
-                                    <p className="protections-price-carditem">$32.4</p>
-                                  </div>
-                                </div>
-                             </div>
-                        
-                       
-                        {cartData.loading ? (
-                            <Loader />
-                        ) : (
-                            <>
-                                <div
-                                    className="d-flex justify-content-between justify-content-sm-start align-items-end"
-                                    style={{
-                                        maxWidth: "700px",
-                                    }}
-                                >
-                                    <QuantityInput
-                                        onChange={handleQuantity}
-                                        minQuantity={1}
-                                        value={cartData?.quantity}
-                                        maxQuantity={
-                                            cartData?.product?.quantity
-                                        }
-                                    />
+                                <div style={{ height: "45px" }}>
+                                    {cartData.loading ? (
+                                        <Loader />
+                                    ) : (
+                                        <>
+                                            <div
+                                                className="d-flex justify-content-between justify-content-sm-start align-items-end"
+                                                style={{
+                                                    maxWidth: "700px",
+                                                }}
+                                            >
+                                                <QuantityInput
+                                                    onChange={handleQuantity}
+                                                    minQuantity={1}
+                                                    value={cartData?.quantity}
+                                                    maxQuantity={
+                                                        cartData?.product
+                                                            ?.quantity
+                                                    }
+                                                />
 
-                                    <button
-                                        onClick={deleteItemFunction}
-                                        className="button-link cartitem-delete-button ms-2"
-                                        disabled={updatingItem}
-                                    >
-                                        {updatingItem ? <Loader /> : "Delete"}
-                                    </button>
-                                    {/* <button className="button-link">
+                                                <button
+                                                    onClick={deleteItemFunction}
+                                                    className="button-link cartitem-delete-button ms-2"
+                                                    disabled={updatingItem}
+                                                >
+                                                    {updatingItem ? (
+                                                        <Loader />
+                                                    ) : (
+                                                        "Delete"
+                                                    )}
+                                                </button>
+                                                {/* <button className="button-link">
                                 Save for later
                             </button>
                             <button className="button-link">
                                 Compare with similer item
                             </button>
                             <button className="button-link">Share</button> */}
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
-                            </>
-                        )}
+                            </div>
+                            {cartData?.plan?.value && (
+                                <>
+                                    <div className="col-md-3 px-0">
+                                        <div className="protection-button-remove-data">
+                                            <button>Remove protection</button>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-2">
+                                        <div className="protection-lables-warntity text-start px-2 py-2">
+                                            <p className="dev-sj-computers-sections text-start ms-0">
+                                                SJ Computer
+                                            </p>
+                                            <p className="protection-name-dev text-start">
+                                                Protection
+                                            </p>
+
+                                            <span className="text-start ms-0">
+                                                {cartData?.plan?.durationInYears
+                                                    ? cartData?.plan
+                                                          ?.durationInYears +
+                                                      " years"
+                                                    : "Tech Unlimited"}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-2">
+                                        <div className="add-card-price-carditem">
+                                            <p className="protections-price-carditem">
+                                                ${cartData?.plan_price}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

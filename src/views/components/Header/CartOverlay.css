@@ -69,6 +69,7 @@
 .overlay-card-protections-dev-data-sidebar {
     display: flex;
     justify-content: space-between;
+    min-height: 40px;
 }
 .overlay-card-shipping-page-card-view-details {
     display: flex;
