@@ -52,16 +52,14 @@ export default function ReviewCheckout({
                                     }
                                 /> */}
                                 <div className="row">
-                                    <div>
-                                        
-                                        </div>
-                                    <div className="col-md-6">
+                                    <div></div>
+                                    <div className="col-md-4">
                                         <h6 className="price">
                                             ${parseFloat(item.price).toFixed(2)}
                                         </h6>
                                         <h6 className="quantity">
-                                    Quantity: {item.quantity}
-                                </h6>
+                                            Quantity: {item.quantity}
+                                        </h6>
                                     </div>
                                     <div className="col-md-3 px-0">
                                         <div className="protection-button-remove-data">
@@ -82,9 +80,15 @@ export default function ReviewCheckout({
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="col-md-2">
+                                        <div className="checkout-card-protection-lables-">
+                                            <p className="checkout-card-price-atam-data">
+                                                $234{" "}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
 
-                             
                                 {/* <QuantityInput
                                     value={item.quantity}
                                     onChange={setQuantity}

@@ -26,11 +26,13 @@
     border: none;
     color: #078396;
     font-size: 10px;
-    margin-top: 10px;
+    margin-top: 15px;
 }
-
+.overlay-card-protection-button-remove-data button:hover {
+    color: #d27d39;
+}
 .overlay-checkout-checkout-card-protection-lables-warntity {
-    padding: 4px;
+    padding: 6px;
     background: #eaeded;
     border-radius: 5px;
 }
