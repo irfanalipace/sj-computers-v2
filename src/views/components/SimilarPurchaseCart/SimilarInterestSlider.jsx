@@ -14,12 +14,15 @@ import AddCartComponents from "../Product/CheckOutCard/AddCartComponents";
 
 import StarRatings from "react-star-ratings";
 
-const SimilarPurchaseCart = ({ products }) => {
+const SimilarInterestSlider = ({ products }) => {
+    const orderEstimatedDelivery = useSelector(
+        (state) => state.orders.orderEstimatedDelivery
+    );
     const ProductDetails = ({ product }) => (
         <div className="pb-3">
             <div className="product-details">
                 <div className="dev-section-button-dev-card">
-                    <Link to={`${new URL(product?.url)?.pathname}`}>
+                    <Link to={`${new URL(product?.url).pathname}`}>
                         <div className="product-name product-cart-name-mobile-screen">
                             {product.name}
                         </div>
@@ -40,13 +43,13 @@ const SimilarPurchaseCart = ({ products }) => {
                         </div>
 
                         <div className="d-sm-none ">
-                            <span className="dilvery-system-mobile-card-product">
+                            {/* <span className="dilvery-system-mobile-card-product">
                                 Get it by{" "}
-                                {/* {
+                                {
                                     orderEstimatedDelivery?.free_shipment_amount
                                         ?.estimate_day
-                                } */}
-                            </span>
+                                }
+                            </span> */}
                             <span className="span-get-data-pagragraph-card">
                                 Free Delivery Available{" "}
                             </span>
@@ -67,6 +70,15 @@ const SimilarPurchaseCart = ({ products }) => {
                     style={{ textDecoration: "none" }}
                 >
                     <div className="d-none d-sm-block product-rating">
+                        {/* <StarRatings
+                            rating={product.rating}
+                            starRatedColor="rgb(232, 126, 36)"
+                            numberOfStars={5}
+                            name="rating"
+                            isSelectable={false}
+                            starDimension={"20px"}
+                            starSpacing={"0"}
+                        /> */}
                         <div className="d-flex align-items-center">
                             <StarRatings
                                 rating={product?.rating}
@@ -77,15 +89,28 @@ const SimilarPurchaseCart = ({ products }) => {
                                 starDimension={"20px"}
                                 starSpacing={"0"}
                             />
-                            <span
-                                className="ms-2"
-                                style={{ color: "#1270c4", fontSize: "12px" }}
-                            >
-                                ({product?.total_review})
+                            <span className="ms-2" style={{ color: "#1270c4" }}>
+                                {product?.total_review}
+                                {" Ratings"}
                             </span>
                         </div>
                     </div>
                 </Link>
+                <div className="sj-banner-similar-item">
+                    <p>
+                        SJ's <span style={{ color: "#E0BC00" }}>choice</span>
+                    </p>
+                    <div className="for-styling"></div>
+                    <div className="mt-1" style={{ fontSize: "14px" }}>
+                        in
+                    </div>
+                </div>
+                <div
+                    style={{ fontSize: "12px", marginTop: "-12px" }}
+                    className="mb-2 "
+                >
+                    Computer Monitors
+                </div>
 
                 <div className="d-none d-sm-block product-prices mb-2">
                     {product.originalPrice && (
@@ -98,12 +123,12 @@ const SimilarPurchaseCart = ({ products }) => {
                     {product?.price?.toString().split(".")[1]}
                 </div>
                 <div style={{ fontSize: "12px" }} className="mt-2 mb-2">
-                    List Price
+                    Get it as soon as{" "}
                     <span style={{ fontWeight: "bold", lineHeight: "16px" }}>
-                        {/* {
+                        {
                             orderEstimatedDelivery?.free_shipment_amount
                                 ?.estimate_day
-                        } */}
+                        }
                     </span>
                 </div>
                 {product.deliveryCharges && (
@@ -118,9 +143,9 @@ const SimilarPurchaseCart = ({ products }) => {
                     </div>
                 )} */}
             </div>
-            <button className="cart-btn">Add to Cart</button>
         </div>
     );
+
     return (
         <>
             <div
@@ -128,6 +153,7 @@ const SimilarPurchaseCart = ({ products }) => {
                 style={{
                     background: "#fff",
                     marginLeft: "10px",
+                    marginTop: "20px",
                 }}
             >
                 <div className="recommendation-inner">
@@ -141,7 +167,8 @@ const SimilarPurchaseCart = ({ products }) => {
                         ml={2}
                         mb={5}
                     >
-                        Customers who bought this item also bought.
+                        People who browsed similar items also showed
+                        interest in these
                     </Typography>
 
                     <div
@@ -152,7 +179,7 @@ const SimilarPurchaseCart = ({ products }) => {
                             <LoaderComponent />
                         ) : (
                             <Swiper
-                                slidesPerView={6}
+                                slidesPerView={5}
                                 className="my-unique-swiper"
                                 breakpoints={{
                                     // when window width is >= 320px
@@ -173,7 +200,7 @@ const SimilarPurchaseCart = ({ products }) => {
                                     },
 
                                     1200: {
-                                        slidesPerView: 6,
+                                        slidesPerView: 5,
                                     },
                                 }}
                                 navigation
@@ -244,4 +271,4 @@ const SimilarPurchaseCart = ({ products }) => {
     );
 };
 
-export default SimilarPurchaseCart;
+export default SimilarInterestSlider;

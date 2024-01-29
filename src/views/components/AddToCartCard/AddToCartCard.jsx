@@ -91,38 +91,36 @@ const AddToCartCard = ({ product }) => {
                 </Grid>
             </Grid>
             <Grid
-                item
+                container
+                direction="row"
+                justifyContent="space-evenly"
                 lg={4}
                 style={{ backgroundColor: "#fff" }}
                 pt={4}
                 pb={4}
                 mb={2}
             >
-                <Grid container justifyContent="space-around">
-                    <Grid item lg={5} mt={6}>
-                        <p style={{ fontSize: "11px" }}>
-                            <span
-                                style={{ color: "#318243", lineHeight: "16px" }}
-                            >
-                                Your Order qualifies for FREE Shipping.
-                            </span>
-                            <br />
-                            Choose this option at checkout.{" "}
-                            <Link> see details</Link>
-                        </p>
-                    </Grid>
-                    <Grid item lg={5} ml={-15}>
-                        <p className="cart-total mb-4">
-                            Cart Subtotal:&nbsp;
-                            <sup style={{ fontSize: "10px" }}>$</sup>
-                            <span style={{ fontSize: "20px" }}>{before}</span>
-                            <sup style={{ fontSize: "10px" }}>{after}</sup>
-                        </p>
-                        <button className="proceed-to-checkout mb-2">
-                            Proceed to checkout ({totalItems} item)
-                        </button>
-                        <button className="go-to-cart">Go to Cart</button>
-                    </Grid>
+                <Grid item lg={6} mt={6}>
+                    <p style={{ fontSize: "11px" }}>
+                        <span style={{ color: "#318243", lineHeight: "16px" }}>
+                            Your Order qualifies for FREE Shipping.
+                        </span>
+                        <br />
+                        Choose this option at checkout.{" "}
+                        <Link> see details</Link>
+                    </p>
+                </Grid>
+                <Grid item lg={5}>
+                    <p className="cart-total mb-4">
+                        Cart Subtotal:&nbsp;
+                        <sup style={{ fontSize: "10px" }}>$</sup>
+                        <span style={{ fontSize: "20px" }}>{before}</span>
+                        <sup style={{ fontSize: "10px" }}>{after}</sup>
+                    </p>
+                    <button className="proceed-to-checkout mb-2">
+                        Proceed to checkout ({totalItems} item)
+                    </button>
+                    <button className="go-to-cart">Go to Cart</button>
                 </Grid>
             </Grid>
         </Grid>

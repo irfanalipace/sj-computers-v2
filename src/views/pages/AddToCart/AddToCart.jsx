@@ -7,6 +7,8 @@ import useSimilarData from "../Product/useSimilarProduct";
 import SimilarItemsSlider from "../../components/Sliders/SimilarItems";
 import SimilarPurchaseCart from "../../components/SimilarPurchaseCart/SimilarPurchaseCart";
 import { Grid } from "@mui/material";
+import SimilarInterestSlider from "../../components/SimilarPurchaseCart/SimilarInterestSlider";
+import CartSideBar from "../../components/CartSidebar/CartSideBar";
 
 const AddToCart = () => {
     const { productId } = useParams();
@@ -29,13 +31,14 @@ const AddToCart = () => {
     return (
         <div style={{ backgroundColor: "#EAEDED" }}>
             <Grid container>
-                <Grid item lg={10}>
+                <Grid item lg={11}>
                     <AddToCartCard product={product} />
                     {/* <SimilarItemsSlider products={similarProducts} /> */}
                     <SimilarPurchaseCart products={featuredProducts} />
+                    <SimilarInterestSlider products={featuredProducts} />
                 </Grid>
-                <Grid item lg={2}>
-                    sdasadasd
+                <Grid item lg={1}>
+                    <CartSideBar />
                 </Grid>
             </Grid>
         </div>
