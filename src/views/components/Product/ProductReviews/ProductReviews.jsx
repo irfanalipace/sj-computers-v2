@@ -43,11 +43,19 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
         getProductReviews(productId, value, reviewPerPage);
     };
 
+    const handleUpdateReview = (id) => {
+        const res = reviews.findIndex((item) => item.id === id);
+        if (res === -1) return;
+        const tempRev = [...reviews];
+        // tempRev[res]
+    };
+
     const getProductReviews = async (id, page = 1, reviewPerPage) => {
         try {
             setReviewLoading(true);
             const res = await productReviewsApi(id, page, reviewPerPage);
             setReviews(res.data);
+            // debugger;
             dispatch(ADD_REVIEW(res.data));
         } catch (error) {
             console.error(error);
@@ -175,6 +183,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                             reviewData={review}
                                             index={index}
                                             productId={productId}
+                                            updateReveiw={handleUpdateReview}
                                         />
                                     </div>
                                 )
