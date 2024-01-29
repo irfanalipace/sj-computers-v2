@@ -121,4 +121,19 @@ class ReviewController extends BaseController
             return $this->sendError('error','Something went wrong ' . $e->getMessage());
         }
     }
+
+    public function getReviewImage($product_id)
+    {
+        try{
+            $reviewMedia = $this->service->getReviewMedia($product_id);
+
+            return $this->sendResponse($reviewMedia,'Successfully fetched product review media.');
+        } catch(ModelNotFoundException $e) {
+           
+            return $this->sendError('error','Product review not found.');
+
+        } catch(Exception $e) {
+            return $this->sendError('error','Something went wrong ' . $e->getMessage());
+        }
+    }
 }
