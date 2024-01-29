@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AddToCartCard = ({ product }) => {
     const totalCart = useSelector((state) => state?.cart?.details?.total);
@@ -25,6 +26,7 @@ const AddToCartCard = ({ product }) => {
     const totalItems = useSelector((state) => state?.cart?.cart.length);
     const totalCartString = totalCart?.toString();
     const { before, after } = splitStringAtPeriod(totalCartString);
+    const navigate = useNavigate();
     return (
         <Grid
             container
@@ -117,10 +119,18 @@ const AddToCartCard = ({ product }) => {
                         <span style={{ fontSize: "20px" }}>{before}</span>
                         <sup style={{ fontSize: "10px" }}>{after}</sup>
                     </p>
-                    <button className="proceed-to-checkout mb-2">
+                    <button
+                        className="proceed-to-checkout mb-2"
+                        onClick={() => navigate("/checkout")}
+                    >
                         Proceed to checkout ({totalItems} item)
                     </button>
-                    <button className="go-to-cart">Go to Cart</button>
+                    <button
+                        className="go-to-cart"
+                        onClick={() => navigate("/cart")}
+                    >
+                        Go to Cart
+                    </button>
                 </Grid>
             </Grid>
         </Grid>

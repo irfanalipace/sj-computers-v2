@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
+import { useParams } from "react-router-dom";
 
 function useAddToCart(product, quantity) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -9,6 +10,7 @@ function useAddToCart(product, quantity) {
     const details = useSelector((state) => state.cart.details);
     // const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
+    const params = useParams();
     const navigate = useNavigate();
 
     const cartClickHandler = (plan) => {
@@ -43,11 +45,19 @@ function useAddToCart(product, quantity) {
         };
 
         if (isAuthenticated)
-            dispatch(addToCart({ cartItem }, () => navigate("/cart")));
+            dispatch(
+                addToCart({ cartItem }, () =>
+                    navigate(
+                        `/add-to-cart/${params?.title}/dp/${params?.productId}`
+                    )
+                )
+            );
         else {
             dispatch(
                 addToLocalCart({ cartItem, cartDetails }, () =>
-                    navigate("/cart")
+                    navigate(
+                        `/add-to-cart/${params?.title}/dp/${params?.productId}`
+                    )
                 )
             );
         }
