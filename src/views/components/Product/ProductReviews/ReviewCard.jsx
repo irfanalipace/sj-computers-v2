@@ -8,15 +8,47 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import ReportDialog from "./ReportReviewDialog";
+import { reviewReportHelpfullApi } from "../../../../core/api/product-review";
 
-function ReviewCard({ reviewData, index, isDialog }) {
+function ReviewCard({ reviewData, index, isDialog, updateReveiw }) {
     const [expandedReviews, setExpandedReviews] = useState([]);
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (value) => {
+        setOpen(false);
+    };
 
     const handleToggleExpand = (index) => {
         const newExpandedReviews = [...expandedReviews];
         newExpandedReviews[index] = !newExpandedReviews[index];
         setExpandedReviews(newExpandedReviews);
     };
+
+    const handleHelpfull = async () => {
+        const allSelectedCheckboxes = Object.keys(checkedItems).filter(
+            (key) => checkedItems[key]
+        );
+        const data = {
+            product_review_id: reviewData?.id,
+            button_type: "helpful",
+            // reveiw_report: [],
+        };
+
+        try {
+            setLoading(true);
+            const res = await reviewReportHelpfullApi(data);
+            updateReveiw(reviewData.id);
+        } catch (error) {
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="review-card mb-2">
             <div className="d-flex align-items-center">
@@ -110,20 +142,35 @@ function ReviewCard({ reviewData, index, isDialog }) {
                         })}
                     </Stack>
                     <p className="my-2 text-muted py-1 helpful-count">
-                        2 People find this helpul
+                        2 People find this helpful
                     </p>
                     <div className="d-flex ">
-                        <button className="review-helpful-btn">Helpful</button>
+                        <button
+                            onClick={handleHelpfull}
+                            className="review-helpful-btn"
+                        >
+                            Helpful
+                        </button>
                         {/* <Stack mt={0.7} direction={"row"} spacing={1}>
                     <CheckCircleIcon sx={{ color: "#318243" }} />
                     <Typography color={"#318243"}>
                         Thanks for honest feedback
                     </Typography>
                 </Stack> */}
-                        <button className="review-report-btn">Report</button>
+                        <button
+                            onClick={handleHelpfull}
+                            className="review-report-btn"
+                        >
+                            Report
+                        </button>
                     </div>
                 </>
             )}
+            <ReportDialog
+                open={open}
+                onClose={handleClose}
+                id={reviewData?.id}
+            />
         </div>
     );
 }

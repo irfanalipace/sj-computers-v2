@@ -5,10 +5,10 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { useEffect } from "react";
 import "./Recommdation.css";
 
-export default function Recommendation({ products }) {
+export default function Recommendation() {
     const dispatch = useDispatch();
     const isLoading = useSelector((state) => state?.products.isLoading);
-
+    const products = useSelector((state) => state?.products.products);
     useEffect(() => {
         getProduct();
     }, [products]);

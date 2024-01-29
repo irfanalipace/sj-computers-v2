@@ -1,31 +1,62 @@
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, {
+    Suspense,
+    createContext,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
+import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 
-const VisibleOnScroll = ({ children }) => {
+const VisibilityContext = createContext();
+
+export const VisibilityProvider = ({ children }) => {
+    const [visibility, setVisibility] = useState({});
+
+    const updateVisibility = (id, isVisible) => {
+        setVisibility((prevVisibility) => ({
+            ...prevVisibility,
+            [id]: isVisible,
+        }));
+    };
+
+    return (
+        <VisibilityContext.Provider value={{ visibility, updateVisibility }}>
+            {children}
+        </VisibilityContext.Provider>
+    );
+};
+
+const VisibleOnScroll = ({ id, children }) => {
     const ref = useRef(null);
-    const observer = useRef(null);
-    const [isVisible, setVisible] = useState(false);
-
+    const { visibility, updateVisibility } = useContext(VisibilityContext);
     useEffect(() => {
-        observer.current = new IntersectionObserver(([entry]) => {
-            setVisible(entry.isIntersecting);
+        const observer = new IntersectionObserver(([entry]) => {
+            const observedId = entry.target.id;
+            if (!visibility[observedId] && entry.isIntersecting) {
+                updateVisibility(observedId, entry.isIntersecting);
+                observer.unobserve(ref.current);
+            }
         });
+
         if (ref.current) {
-            observer.current.observe(ref.current);
+            observer.observe(ref.current);
         }
+
         return () => {
             if (ref.current) {
-                observer.current.unobserve(ref.current);
+                observer.unobserve(ref.current);
             }
         };
-    }, []); // Empty array ensures that effect is only run on mount and unmount
+    }, [id, updateVisibility]);
 
-    useEffect(() => {
-        if (observer.current && isVisible) {
-            observer.current.unobserve(ref.current);
-        }
-    }, [isVisible]);
-
-    return <div ref={ref}>{isVisible && <Suspense>{children}</Suspense>}</div>;
+    return (
+        <div ref={ref} id={id}>
+            {visibility[id] && (
+                <Suspense fallback={<LoaderComponent />}>{children}</Suspense>
+            )}
+        </div>
+    );
 };
 
 export default VisibleOnScroll;

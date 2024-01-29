@@ -15,7 +15,9 @@ import ProductDescription from "../../components/Product/ProductDescription/Prod
 import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
 import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
 import CategoriesHeader from "../../components/Header/CategoriesHeader/CategoriesHeader";
-import VisibleOnScroll from "../../components/VisibleOnScroll";
+import VisibleOnScroll, {
+    VisibilityProvider,
+} from "../../components/VisibleOnScroll";
 import useProductData from "./useProductData";
 import useSimilarData from "./useSimilarProduct";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
@@ -27,10 +29,8 @@ export default function Product() {
     const dispatch = useDispatch();
 
     const [searchParams, setSearchParams] = useSearchParams();
-    console.log(searchParams, "");
 
-    const { isLoading, product, productImages, products, onFilterChange } =
-        useProductData();
+    const { isLoading, product } = useProductData();
 
     const redirct = (pathUrl) => {
         const url = new URL(pathUrl || "https://www.sjcomputers.us");
@@ -55,63 +55,43 @@ export default function Product() {
         };
     }, []);
 
-    const ProductComponent = () => {
-        const { similarProducts, featuredProducts } = useSimilarData(
-            product?.id
-        );
-        return (
-            <>
-                {products?.length > 0 && (
-                    <div className="row">
-                        <Breadcrumb routes={breadcrumbRoutes} />
-                        <div className="col-12 col-md-4">
-                            <ProductImage ProductImages={productImages} />
-                        </div>
-                        <div className="col-12 col-md-5">
-                            <ProductDetails product={product} />
-                        </div>
-                        <div className="col-12 col-md-3 p-0 m-0">
-                            <CheckOutCard product={{ ...product }} />
-                        </div>
-                        {similarProducts?.length > 0 && (
-                            <VisibleOnScroll>
-                                <div className="hidden-on-tab">
-                                    <SimilarItems
-                                        products={featuredProducts}
-                                        featuredProducts={similarProducts}
-                                    />
-                                </div>
-                            </VisibleOnScroll>
-                        )}
-                        {/* VIDEO-SECTION */}
-                        {/* <ProductVideo product={product} />  */}
-
-                        <RefurbishedSection />
-                        <ProductDescription product={product} />
-                        <TechDetails product={product} />
-                    </div>
-                )}
-            </>
-        );
-    };
-
     return (
-        <>
-            {product?.id || isLoading || !products?.length ? (
+        <VisibilityProvider>
+            {product?.id || isLoading ? (
                 <div className="product-page ">
                     <CategoriesHeader />
                     <div className="product-container container-fluid">
-                        {isLoading || !products?.length ? (
+                        <Breadcrumb routes={breadcrumbRoutes} />
+                        {isLoading ? (
                             <LoaderComponent />
                         ) : (
                             <>
-                                <ProductComponent />
+                                <ProductComponent product={product} />
+                                <VisibleOnScroll id="section1">
+                                    <div>
+                                        <SimilarItemsOfProduct
+                                            productId={product?.id}
+                                        />
+                                        <RefurbishedSection />
+                                        <ProductDescription
+                                            description={
+                                                product?.description
+                                                    ?.product_description[0]
+                                                    ?.value
+                                            }
+                                        />
+                                    </div>
+                                </VisibleOnScroll>
+                                <TechDetails product={product} />
+
+                                {/* VIDEO-SECTION */}
+                                {/* <ProductVideo product={product} />  */}
+
                                 <div id="reviews">
-                                    {" "}
-                                    <VisibleOnScroll>
+                                    <VisibleOnScroll id="section2">
                                         <ProductReviews
-                                            reviews={products}
-                                            onFilterChange={onFilterChange}
+                                            // reviews={products}
+                                            // onFilterChange={onFilterChange}
                                             productAsin={product?.asin}
                                             productId={product?.id}
                                         />
@@ -119,13 +99,53 @@ export default function Product() {
                                 </div>
                             </>
                         )}
-
-                        <Recommendation products={products} />
+                        <VisibleOnScroll id="section3">
+                            <Recommendation />
+                        </VisibleOnScroll>
                     </div>
                 </div>
             ) : (
                 <NotFound />
             )}
-        </>
+        </VisibilityProvider>
     );
 }
+
+const ProductComponent = ({ product }) => {
+    return (
+        <div className="row">
+            <div className="col-12 col-md-4">
+                <ProductImage ProductImages={product.image} />
+            </div>
+            <div className="col-12 col-md-5">
+                <ProductDetails product={product} />
+            </div>
+            <div className="col-12 col-md-3 p-0 m-0">
+                <CheckOutCard product={{ ...product }} />
+            </div>
+        </div>
+    );
+};
+
+const SimilarItemsOfProduct = ({ productId }) => {
+    const { similarProducts, featuredProducts, isLoading } =
+        useSimilarData(productId);
+    return (
+        <>
+            {isLoading ? (
+                <LoaderComponent />
+            ) : (
+                <>
+                    {similarProducts?.length > 0 && (
+                        <div className="hidden-on-tab">
+                            <SimilarItems
+                                similarProducts={similarProducts}
+                                featuredProducts={featuredProducts}
+                            />
+                        </div>
+                    )}
+                </>
+            )}
+        </>
+    );
+};

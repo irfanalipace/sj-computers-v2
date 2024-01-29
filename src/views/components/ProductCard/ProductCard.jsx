@@ -195,7 +195,7 @@ const Product = ({ type = "", product, inGrid, color = "" }) => {
                                     {product.total_review}
                                 </Typography>
                             </Stack>
-                            {getRandomComponent()}
+                            {type === "recommended" && getRandomComponent()}
                         </Stack>
 
                         {/* <span className="product-num-reviews ms-2 mt-1">

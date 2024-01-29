@@ -43,11 +43,19 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
         getProductReviews(productId, value, reviewPerPage);
     };
 
+    const handleUpdateReview = (id) => {
+        const res = reviews.findIndex((item) => item.id === id);
+        if (res === -1) return;
+        const tempRev = [...reviews];
+        // tempRev[res]
+    };
+
     const getProductReviews = async (id, page = 1, reviewPerPage) => {
         try {
             setReviewLoading(true);
             const res = await productReviewsApi(id, page, reviewPerPage);
             setReviews(res.data);
+            // debugger;
             dispatch(ADD_REVIEW(res.data));
         } catch (error) {
             console.error(error);
@@ -57,7 +65,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
     };
     useEffect(() => {
         if (isMounted.current) {
-            onFilterChange(filterBy);
+            if (typeof filterBy === "function") onFilterChange(filterBy);
         }
         isMounted.current = true;
     }, [filterBy]);
@@ -167,11 +175,15 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                         ) : (
                             reviews.product_detail?.data?.map(
                                 (review, index) => (
-                                    <div className="my-4">
+                                    <div
+                                        key={"review-" + review.id}
+                                        className="my-4"
+                                    >
                                         <ReviewCard
                                             reviewData={review}
                                             index={index}
                                             productId={productId}
+                                            updateReveiw={handleUpdateReview}
                                         />
                                     </div>
                                 )
