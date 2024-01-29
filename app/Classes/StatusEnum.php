@@ -49,4 +49,6 @@ class StatusEnum
 
     public const INACTIVE = "inactive";
     public const ACTIVE = "active";
-}
+
+    public const HELPFUL = "helpful";
+ }

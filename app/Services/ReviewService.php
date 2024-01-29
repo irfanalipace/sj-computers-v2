@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Classes\StatusEnum;
 use App\Models\ProductReview;
 use App\Models\ProductReviewReport;
 use App\Models\ProductStatistic;
@@ -93,14 +94,13 @@ class ReviewService
     {
         $buttonType = $request->button_type;
 
+        $storeReview = ($buttonType == StatusEnum::HELPFUL) ? 'this is helpful' : implode(", ", $request->review_report);
+
         $reportData = [
             'product_review_id' => $request->product_review_id,
-            'status' => $buttonType
+            'status' => $buttonType,
+            'report' => $storeReview
         ];
-
-        $storeReview = $buttonType == 'helpful' ? 'this is helpful' : implode(", ", $request->review_report);
-
-        $reportData['report'] = $storeReview;
 
         return $this->repository->storeReviewReport($reportData);
     }
