@@ -47,7 +47,7 @@ const AddToCartCard = ({ product }) => {
                     alignItems="center"
                 >
                     <Grid item mt={3}>
-                        <div className="image-container">
+                        <div className="image-containerer">
                             <LazyLoadImage
                                 width={"100%"}
                                 height={"100%"}

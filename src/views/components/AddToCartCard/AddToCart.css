@@ -26,7 +26,7 @@
     font-weight: 600;
     margin-left: 15px;
 }
-.image-container {
+.image-containerer {
     display: flex;
     justify-content: center;
     align-items: center;
