@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import "./ProductsGrid.css";
 
 import Button from "@common/Button/Button";
-import { fetchSimilarProducts } from "@store/products/productsThunks";
 
 export default function ProductsGrid({
     products,
