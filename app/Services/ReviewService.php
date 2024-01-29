@@ -78,4 +78,13 @@ class ReviewService
         return $details;
     }
 
+    public function getReviewMedia($product_id)
+    {
+        $review = ProductReview::where('product_id',$product_id)->with('productMedia:id,product_review_id,media_type,file_path')->select('id')->get();
+        if($review->isEmpty()){
+            throw new Exception('Product Review not found');
+        }
+        return $review;
+    }
+
 }
