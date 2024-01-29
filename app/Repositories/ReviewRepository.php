@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Classes\StatusEnum;
 use App\Models\ProductReview;
+use App\Models\ProductReviewReport;
 use Illuminate\Http\Request;
 
 class ReviewRepository
@@ -25,8 +26,8 @@ class ReviewRepository
     }
 
     public function store($request)
-    {       
-       
+    {
+
         $store = $this->productReviewModel->create(
             [
                 'user_id' =>  $request->user_id ?? null,
@@ -35,15 +36,15 @@ class ReviewRepository
                 'body' => $request->body,
                 'rating' => $request->rating
             ]
-        );      
-       
+        );
+
         return $store;
     }
 
     /* save path of product review */
     public function createProductMedia($file,$request,$productReview)
     {
-       
+
         $productReview->productMedia()->updateOrCreate(
             ['id' => $request->media->id ?? null],
             [
@@ -73,5 +74,31 @@ class ReviewRepository
     {
         $query = $this->productReviewModel->query();
         return $query->with($with)->findOrFail($id);
+    }
+
+    public function storeReviewReport($request)
+    {
+
+        $buttonType = $request->button_type;
+        $reportData = [
+            'product_review_id' => $request->product_review_id,
+            'status' => $buttonType
+        ];
+
+        // Assign the report field based on the button type
+        $reportData['report'] = $buttonType == 'helpful' ? 'this is helpful' : implode(", ", $request->review_report);
+
+        $savedReport = ProductReviewReport::create($reportData);
+        return $savedReport;
+    }
+
+    public function indexReviewReport()
+    {
+        return ProductReviewReport::all();
+    }
+
+    public function showReviewReport($reviewReport)
+    {
+        return $reviewReport;
     }
 }

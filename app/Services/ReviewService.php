@@ -91,17 +91,17 @@ class ReviewService
     /* Store review report */
     public function storeReviewReports($request)
     {
-        $buttonType = $request->button_type;
-        $reportData = [
-            'product_review_id' => $request->product_review_id,
-            'status' => $buttonType
-        ];
+        return $this->repository->storeReviewReport($request);
+    }
 
-        // Assign the report field based on the button type
-        $reportData['report'] = $buttonType == 'helpful' ? 'this is helpful' : implode(", ", $request->review_report);
+    public function indexReviewReports()
+    {
+        return $this->repository->indexReviewReport();
+    }
 
-        $savedReport = ProductReviewReport::create($reportData);
-        return $savedReport;
+    public function showReviewReports($reviewReport)
+    {
+        return $this->repository->showReviewReport($reviewReport);
     }
 
 }

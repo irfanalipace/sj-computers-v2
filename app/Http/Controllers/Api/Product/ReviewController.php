@@ -155,7 +155,7 @@ class ReviewController extends BaseController
     public function indexReviewReport()
     {
         try {
-            $data = ProductReviewReport::all();
+            $data = $this->service->indexReviewReports();
             return $this->sendResponse($data, 'All review reports are displayed');
         } catch (Exception $e) {
             return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());
@@ -164,7 +164,8 @@ class ReviewController extends BaseController
     public function showReviewReport(ProductReviewReport $reviewReport)
     {
         try {
-            return $reviewReport;
+            $data = $this->service->showReviewReports($reviewReport);
+            return $this->sendResponse($data, 'Review reports is displayed');
         } catch (Exception $e) {
             return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());
         }

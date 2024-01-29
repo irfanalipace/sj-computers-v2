@@ -17,7 +17,7 @@ class ProductReview extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
+
     public function guest() : BelongsTo
     {
         return $this->belongsTo(Guest::class);
@@ -36,5 +36,10 @@ class ProductReview extends Model
     public function getTotalRatingAttribute()
     {
         return $this->where('product_id', $this->product_id)->count();
+    }
+
+    public function productReviewReport(): HasMany
+    {
+        return $this->hasMany(ProductReviewReport::class);
     }
 }
