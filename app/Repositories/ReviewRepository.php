@@ -76,18 +76,8 @@ class ReviewRepository
         return $query->with($with)->findOrFail($id);
     }
 
-    public function storeReviewReport($request)
+    public function storeReviewReport($reportData)
     {
-
-        $buttonType = $request->button_type;
-        $reportData = [
-            'product_review_id' => $request->product_review_id,
-            'status' => $buttonType
-        ];
-
-        // Assign the report field based on the button type
-        $reportData['report'] = $buttonType == 'helpful' ? 'this is helpful' : implode(", ", $request->review_report);
-
         $savedReport = ProductReviewReport::create($reportData);
         return $savedReport;
     }
@@ -97,8 +87,9 @@ class ReviewRepository
         return ProductReviewReport::all();
     }
 
-    public function showReviewReport($reviewReport)
+    public function showReviewReport($id)
     {
-        return $reviewReport;
+        $data = ProductReviewReport::findOrFail($id);
+        return $data;
     }
 }

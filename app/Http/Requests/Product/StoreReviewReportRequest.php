@@ -24,7 +24,8 @@ class StoreReviewReportRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_review_id' => 'integer|required|exists:product_reviews,id'
+            'product_review_id' => 'integer|required|exists:product_reviews,id',
+            'button_type' => 'string|required'
         ];
     }
 }

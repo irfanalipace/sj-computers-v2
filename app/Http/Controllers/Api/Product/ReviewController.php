@@ -161,10 +161,10 @@ class ReviewController extends BaseController
             return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());
         }
     }
-    public function showReviewReport(ProductReviewReport $reviewReport)
+    public function showReviewReport($id)
     {
         try {
-            $data = $this->service->showReviewReports($reviewReport);
+            $data = $this->service->showReviewReports($id);
             return $this->sendResponse($data, 'Review reports is displayed');
         } catch (Exception $e) {
             return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());

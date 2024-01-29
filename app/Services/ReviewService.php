@@ -91,17 +91,29 @@ class ReviewService
     /* Store review report */
     public function storeReviewReports($request)
     {
-        return $this->repository->storeReviewReport($request);
+        $buttonType = $request->button_type;
+
+        $reportData = [
+            'product_review_id' => $request->product_review_id,
+            'status' => $buttonType
+        ];
+
+        $storeReview = $buttonType == 'helpful' ? 'this is helpful' : implode(", ", $request->review_report);
+
+        $reportData['report'] = $storeReview;
+
+        return $this->repository->storeReviewReport($reportData);
     }
+
 
     public function indexReviewReports()
     {
         return $this->repository->indexReviewReport();
     }
 
-    public function showReviewReports($reviewReport)
+    public function showReviewReports($id)
     {
-        return $this->repository->showReviewReport($reviewReport);
+        return $this->repository->showReviewReport($id);
     }
 
 }
