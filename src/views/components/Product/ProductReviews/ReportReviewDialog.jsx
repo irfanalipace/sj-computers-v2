@@ -59,7 +59,15 @@ export default function ReportDialog(props) {
             <DialogTitle>Report this review</DialogTitle>
             <FormControl sx={{ px: 3 }}>
                 <FormLabel sx={{ mb: 1.5 }} id="demo-radio-buttons-group-label">
-                    Optional: Why are you reporting this?
+                    <Typography
+                        fontSize={"13px"}
+                        fontWeight={400}
+                        fontFamily={"Inter"}
+                        lineHeight={"20px"}
+                        color={"#0F1111"}
+                    >
+                        Optional: Why are you reporting this?
+                    </Typography>
                 </FormLabel>
 
                 <FormGroup>
@@ -115,10 +123,19 @@ export default function ReportDialog(props) {
                 </FormGroup>
             </FormControl>
             <Box sx={{ px: 3, mb: 3 }}>
-                <Typography sx={{ maxWidth: "400px", mb: 2 }}>
+                <Typography
+                    fontSize={"13px"}
+                    fontWeight={400}
+                    fontFamily={"Inter"}
+                    lineHeight={"20px"}
+                    color={"#0F1111"}
+                    sx={{ maxWidth: "380px", mb: 2 }}
+                >
                     We'll check this if this reveiw meets our{" "}
-                    <span>community guidelines.</span> if doesn't, we'll remove
-                    it.
+                    <span style={{ color: "#007185" }}>
+                        community guidelines.
+                    </span>{" "}
+                    if doesn't, we'll remove it.
                 </Typography>
 
                 <Box sx={{ float: "right" }}>
@@ -142,8 +159,24 @@ export default function ReportDialog(props) {
 const CheckBoxLabel = ({ title, desc }) => {
     return (
         <Stack>
-            <Typography>{title}</Typography>
-            <Typography>{desc}</Typography>
+            <Typography
+                fontSize={"13px"}
+                fontWeight={400}
+                fontFamily={"Inter"}
+                lineHeight={"20px"}
+                color={"#0F1111"}
+            >
+                {title}
+            </Typography>
+            <Typography
+                fontSize={"13px"}
+                fontWeight={400}
+                fontFamily={"Inter"}
+                lineHeight={"20px"}
+                color={"#565959"}
+            >
+                {desc}
+            </Typography>
         </Stack>
     );
 };
