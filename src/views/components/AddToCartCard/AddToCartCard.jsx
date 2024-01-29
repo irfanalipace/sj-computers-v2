@@ -3,6 +3,7 @@ import "./AddToCart.css";
 import { useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import { Link } from "react-router-dom";
 
 const AddToCartCard = ({ product }) => {
     const totalCart = useSelector((state) => state?.cart?.details?.total);
@@ -35,7 +36,7 @@ const AddToCartCard = ({ product }) => {
         >
             <Grid
                 item
-                lg={5}
+                lg={4}
                 style={{ backgroundColor: "#fff", height: "180px" }}
                 mr={5}
                 mb={2}
@@ -60,45 +61,69 @@ const AddToCartCard = ({ product }) => {
                             />
                         </div>
                     </Grid>
-                    <Grid item fontSize={20} mr={4}>
-                        +
-                    </Grid>
+                    <Grid item fontSize={20} mr={4}></Grid>
                     <Grid item mr={4}>
-                        <div className="protection-wrapper">
+                        {/* <div className="protection-wrapper">
                             SJ Computer
                             <br />
                             <span style={{ color: "#318243" }}>Protection</span>
                             <br />
                             <br />
                             <span style={{ color: "#318243" }}>3 Year</span>
-                        </div>
+                        </div> */}
                     </Grid>
-                    <Grid item mr={1}>
-                        <CheckCircleRoundedIcon sx={{ color: "#318243" }} />
-                    </Grid>
+                    <Grid item mr={1}></Grid>
                     <Grid item sx={{ fontSize: "16px", fontWeight: 600 }}>
-                        Added to Cart
+                        <CheckCircleRoundedIcon sx={{ color: "#318243" }} />
+                        &ensp;Added to Cart{" "}
+                        <h4
+                            style={{
+                                marginTop: "8px",
+                                marginLeft: "30px",
+                                fontSize: "12px",
+                                fontWeight: 600,
+                            }}
+                        >
+                            Style:&nbsp;
+                            <span>27 ‘’ FHD FreeSync 100HZ</span>
+                        </h4>{" "}
                     </Grid>
                 </Grid>
             </Grid>
             <Grid
                 item
-                lg={2}
+                lg={4}
                 style={{ backgroundColor: "#fff" }}
                 pt={4}
                 pb={4}
                 mb={2}
             >
-                <p className="cart-total mb-4">
-                    Cart Subtotal:&nbsp;
-                    <sup style={{ fontSize: "10px" }}>$</sup>
-                    <span style={{ fontSize: "20px" }}>{before}</span>
-                    <sup style={{ fontSize: "10px" }}>{after}</sup>
-                </p>
-                <button className="proceed-to-checkout mb-2">
-                    Proceed to checkout ({totalItems} item)
-                </button>
-                <button className="go-to-cart">Go to Cart</button>
+                <Grid container justifyContent="space-around">
+                    <Grid item lg={5} mt={6}>
+                        <p style={{ fontSize: "11px" }}>
+                            <span
+                                style={{ color: "#318243", lineHeight: "16px" }}
+                            >
+                                Your Order qualifies for FREE Shipping.
+                            </span>
+                            <br />
+                            Choose this option at checkout.{" "}
+                            <Link> see details</Link>
+                        </p>
+                    </Grid>
+                    <Grid item lg={5} ml={-15}>
+                        <p className="cart-total mb-4">
+                            Cart Subtotal:&nbsp;
+                            <sup style={{ fontSize: "10px" }}>$</sup>
+                            <span style={{ fontSize: "20px" }}>{before}</span>
+                            <sup style={{ fontSize: "10px" }}>{after}</sup>
+                        </p>
+                        <button className="proceed-to-checkout mb-2">
+                            Proceed to checkout ({totalItems} item)
+                        </button>
+                        <button className="go-to-cart">Go to Cart</button>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     );

@@ -5,11 +5,14 @@ import { productDetailsbyAsinApi } from "@api/products";
 import SimilarItems from "../../components/SimilarItems/SimilarItems";
 import useSimilarData from "../Product/useSimilarProduct";
 import SimilarItemsSlider from "../../components/Sliders/SimilarItems";
+import SimilarPurchaseCart from "../../components/SimilarPurchaseCart/SimilarPurchaseCart";
+import { Grid } from "@mui/material";
 
 const AddToCart = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState();
-    const { similarProducts } = useSimilarData();
+    const { similarProducts, featuredProducts } = useSimilarData(product?.id);
+    console.log("ssimi", similarProducts);
 
     const getProductbyId = async () => {
         try {
@@ -25,8 +28,16 @@ const AddToCart = () => {
 
     return (
         <div style={{ backgroundColor: "#EAEDED" }}>
-            <AddToCartCard product={product} />
-            <SimilarItemsSlider products={similarProducts} />
+            <Grid container>
+                <Grid item lg={10}>
+                    <AddToCartCard product={product} />
+                    {/* <SimilarItemsSlider products={similarProducts} /> */}
+                    <SimilarPurchaseCart products={featuredProducts} />
+                </Grid>
+                <Grid item lg={2}>
+                    sdasadasd
+                </Grid>
+            </Grid>
         </div>
     );
 };

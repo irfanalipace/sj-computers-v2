@@ -15,31 +15,60 @@ return [
     |
     */
 
-    'paths' => ['api/*'],
+    'paths' => ['*'],
 
-    'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
 
-    'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*'],
+ 'allowed_methods' => ['*'],
 
-    'exposed_headers' => [],
 
-    /*
-   * Sets the Access-Control-Expose-Headers response header.
-   */
-    'exposed_headers' => false,
 
-    /*
-     * Sets the Access-Control-Max-Age response header.
-     */
-    'max_age' => false,
 
-    /*
-     * Sets the Access-Control-Allow-Credentials header.
-     */
-    'supports_credentials' => true,
+ 'allowed_origins' => ['*'],
+
+
+
+
+ 'allowed_origins_patterns' => [],
+
+
+
+
+ 'allowed_headers' => ['*'],
+
+
+
+
+ /*
+
+* Sets the Access-Control-Expose-Headers response header.
+
+*/
+
+ 'exposed_headers' => [],
+
+
+
+
+ /*
+
+  * Sets the Access-Control-Max-Age response header.
+
+  */
+
+ 'max_age' => false,
+
+
+
+
+ /*
+
+  * Sets the Access-Control-Allow-Credentials header.
+
+  */
+
+ 'supports_credentials' => true,
+  
 
 ];
