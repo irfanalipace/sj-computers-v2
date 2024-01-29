@@ -60,3 +60,20 @@ export function allReviewImagesApi(id) {
             });
     });
 }
+
+export function reviewReportHelpfullApi(data) {
+    return new Promise((resolve, reject) => {
+        ApiService.post("store-review-report", data)
+            .then((response) => {
+                console.print(
+                    "file: order.js | validateCartItems| response",
+                    response.data
+                );
+                resolve(response.data);
+            })
+            .catch((e) => {
+                console.print("Console Log: : error order list", e);
+                reject(e);
+            });
+    });
+}

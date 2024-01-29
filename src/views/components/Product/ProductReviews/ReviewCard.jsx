@@ -8,9 +8,19 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import ReportDialog from "./ReportReviewDialog";
 
 function ReviewCard({ reviewData, index, isDialog }) {
     const [expandedReviews, setExpandedReviews] = useState([]);
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (value) => {
+        setOpen(false);
+    };
 
     const handleToggleExpand = (index) => {
         const newExpandedReviews = [...expandedReviews];
@@ -110,7 +120,7 @@ function ReviewCard({ reviewData, index, isDialog }) {
                         })}
                     </Stack>
                     <p className="my-2 text-muted py-1 helpful-count">
-                        2 People find this helpul
+                        2 People find this helpful
                     </p>
                     <div className="d-flex ">
                         <button className="review-helpful-btn">Helpful</button>
@@ -120,10 +130,20 @@ function ReviewCard({ reviewData, index, isDialog }) {
                         Thanks for honest feedback
                     </Typography>
                 </Stack> */}
-                        <button className="review-report-btn">Report</button>
+                        <button
+                            onClick={handleClickOpen}
+                            className="review-report-btn"
+                        >
+                            Report
+                        </button>
                     </div>
                 </>
             )}
+            <ReportDialog
+                open={open}
+                onClose={handleClose}
+                id={reviewData?.id}
+            />
         </div>
     );
 }
