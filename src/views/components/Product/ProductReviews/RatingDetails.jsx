@@ -44,7 +44,7 @@ export default function RatingDetails({ productDetails, loading }) {
                         fontWeight={400}
                         fontSize={"14px"}
                         lineHeight={"20px"}
-                    >{`${2} global rating`}</Typography>
+                    >{`${productDetails?.rate?.total_rating} global rating`}</Typography>
 
                     <Stack spacing={2}>
                         <RatingWithLabel
