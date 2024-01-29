@@ -17,12 +17,12 @@ const TechDetails = ({ product }) => {
             <Grid container mt={3}>
                 <Grid lg={6}>
                     <Grid container>
-                        <Grid lg={9}>
+                        <Grid>
                             <h3 className="tech-details-heading">
                                 Technical Details
                             </h3>
                         </Grid>
-                        <Grid lg={3}>
+                        <Grid>
                             <Grid
                                 container
                                 onClick={() => {
@@ -292,12 +292,12 @@ const TechDetails = ({ product }) => {
                             unsellable condition due to customer tampering will
                             result in the customer being charged a higher
                             restocking fee based on the condition of the
-                            product. SJComputers.com will not accept returns of any
-                            desktop or notebook computer more than 30 days after
-                            you receive the shipment. New, used, and refurbished
-                            products purchased from Marketplace vendors are
-                            subject to the returns policy of the individual
-                            vendor.
+                            product. SJComputers.com will not accept returns of
+                            any desktop or notebook computer more than 30 days
+                            after you receive the shipment. New, used, and
+                            refurbished products purchased from Marketplace
+                            vendors are subject to the returns policy of the
+                            individual vendor.
                         </p>
                         <p>
                             Manufacturer’s warranty can be requested from

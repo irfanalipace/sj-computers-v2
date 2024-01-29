@@ -69,7 +69,7 @@ function AddToCartAndWarranty({ product }) {
                                   redirectOnClose: true,
                               });
                     }}
-                    isLoading={productAddingToCard}
+                    disabled={productAddingToCard}
                     className={"button1 button-text-button"}
                     // style={{ marginBottom: "10px" }}
                 >
@@ -212,7 +212,7 @@ function AddToCartAndWarranty({ product }) {
                 Add a Warranty Plan :
                 <>
                     {Object.values(PLAN_ENUM).map((_plan) => (
-                        <div className="check-box-container">
+                        <div key={_plan.value} className="check-box-container">
                             <input
                                 type="checkbox"
                                 className="protectionPlanCheckbox"
@@ -232,7 +232,8 @@ function AddToCartAndWarranty({ product }) {
                             >
                                 {_plan.label} for
                                 <span style={{ color: "red" }}>
-                                    &nbsp;${_plan.price}/Month
+                                    {" "}
+                                    ${_plan.price}/Month
                                 </span>
                             </label>
                         </div>

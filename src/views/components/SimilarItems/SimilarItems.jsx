@@ -8,7 +8,7 @@ import SingleSimilarItem from "../SimilarItemsSingle/SingleSimilarItem";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 
-const SimilarItems = ({ products, featuredProducts }) => {
+const SimilarItems = ({ similarProducts, featuredProducts }) => {
     const isLoading = useSelector((state) => state?.products?.isLoading);
 
     return (
@@ -60,12 +60,12 @@ const SimilarItems = ({ products, featuredProducts }) => {
                         className="slider-wrapper"
                         style={{ margin: "20px 80px" }}
                     >
-                        {isLoading || !products ? (
+                        {isLoading || !similarProducts ? (
                             <LoaderComponent />
                         ) : (
                             <SimilarItemsSlider
                                 type="recommended"
-                                products={products}
+                                similarProducts={similarProducts}
                             />
                         )}
                     </div>

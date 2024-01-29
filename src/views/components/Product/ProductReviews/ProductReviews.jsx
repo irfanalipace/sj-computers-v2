@@ -57,7 +57,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
     };
     useEffect(() => {
         if (isMounted.current) {
-            onFilterChange(filterBy);
+            if (typeof filterBy === "function") onFilterChange(filterBy);
         }
         isMounted.current = true;
     }, [filterBy]);
@@ -167,7 +167,10 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                         ) : (
                             reviews.product_detail?.data?.map(
                                 (review, index) => (
-                                    <div className="my-4">
+                                    <div
+                                        key={"review-" + review.id}
+                                        className="my-4"
+                                    >
                                         <ReviewCard
                                             reviewData={review}
                                             index={index}

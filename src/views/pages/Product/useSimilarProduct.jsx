@@ -1,47 +1,42 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import { similarProductsApi, featureProductsApi } from "@api/products";
 
-function useSimilarData(product_id) {
-    const { title } = useParams();
-    const modifyTitle = title.replace(/-/g, " ");
-    const productLoading = useSelector((state) => state?.products?.isLoading);
+function useSimilarData(productId) {
     const [similarProducts, setSimilarProducts] = useState([]);
     const [featuredProducts, setFeaturedProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const getSimilarProduct = async () => {
-        // if (!products?.length) {
         try {
-            const resp = await similarProductsApi(product_id);
-            setSimilarProducts(resp);
+            const resp = await similarProductsApi(productId);
+            setFeaturedProducts(resp);
         } catch (error) {
             console.log(error);
         }
-        // }
+        setIsLoading(false);
     };
 
     const getFeaturedProduct = async () => {
-        // if (!products?.length) {
         try {
-            const resp = await featureProductsApi(product_id);
-            setFeaturedProducts(resp?.data);
-            console.log("repsoooo", resp?.data);
+            const resp = await featureProductsApi(productId);
+            setSimilarProducts(resp?.data);
         } catch (error) {
             console.log(error);
         }
-        // }
+        setIsLoading(false);
     };
+
     useEffect(() => {
-        if (product_id) {
+        if (productId) {
+            setIsLoading(true);
             getSimilarProduct();
             getFeaturedProduct();
         }
-    }, [product_id]);
-
+    }, [productId]);
     return {
         similarProducts,
         featuredProducts,
+        isLoading,
     };
 }
 

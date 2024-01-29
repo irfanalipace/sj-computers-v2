@@ -6,15 +6,11 @@ import ProductCardSimilarItems from "@components/ProductCard/ProductCardSimilarI
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Slider.css";
-import { fetchSimilarProducts } from "@store/products/productsThunks";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
 
 // Install Swiper navigation plugin
 SwiperCore.use([Navigation]);
 
-const SimilarItemsSlider = ({ type = "", products }) => {
+const SimilarItemsSlider = ({ type = "", similarProducts }) => {
     return (
         <Swiper
             slidesPerView={4.8}
@@ -42,8 +38,8 @@ const SimilarItemsSlider = ({ type = "", products }) => {
             }}
             navigation
         >
-            {products?.length > 0 ? (
-                products?.map((product) => (
+            {similarProducts?.length > 0 ? (
+                similarProducts?.map((product) => (
                     <SwiperSlide key={"ps-" + product?.id}>
                         <div
                         // className="px-1"
