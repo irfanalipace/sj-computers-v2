@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import StarRatings from "react-star-ratings";
+import { formatDateByMonthName } from "../../../../core/utils/helpers";
+import { Box, Button, Stack, Typography } from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-function ReviewCard({ reviewData }) {
+function ReviewCard({ reviewData, index, isDialog }) {
+    const [expandedReviews, setExpandedReviews] = useState([]);
+
+    const handleToggleExpand = (index) => {
+        const newExpandedReviews = [...expandedReviews];
+        newExpandedReviews[index] = !newExpandedReviews[index];
+        setExpandedReviews(newExpandedReviews);
+    };
     return (
         <div className="review-card mb-2">
             <div className="d-flex align-items-center">
@@ -17,7 +30,9 @@ function ReviewCard({ reviewData }) {
                         <FontAwesomeIcon icon={faUserCircle} className="fs-2" />
                     )}
                 </div>
-                <p className="mb-0 ms-2 review-author ps-1">Alan</p>
+                <p className="mb-0 ms-2 review-author ps-1">
+                    {reviewData.user?.name || reviewData?.author}
+                </p>
             </div>
             <div className="d-md-flex align-items-center my-2">
                 <StarRatings
@@ -34,17 +49,81 @@ function ReviewCard({ reviewData }) {
                 </p>
             </div>
             <p className="my-2 review-location-time">
-                Reviewed in United States on January 27, 2021
+                {formatDateByMonthName(reviewData?.created_at)}
             </p>
             <p className="verified-review">Verified Purchase</p>
-            <p className="review-comment my-0">{reviewData?.body}</p>
-            <p className="my-2 text-muted py-1 helpful-count">
-                2 People find this helpul
-            </p>
-            <div className="d-flex">
-                <button className="review-helpful-btn">Helpful</button>
-                <button className="review-report-btn">Report</button>
-            </div>
+            <Box>
+                <Box
+                    key={index}
+                    className={`review ${
+                        expandedReviews[index] ? "expanded" : ""
+                    }`}
+                >
+                    <p className="review-comment my-0">{reviewData?.body}</p>
+                </Box>
+                {reviewData?.body.length > 1306 && (
+                    <Box>
+                        {expandedReviews[index] ? (
+                            <KeyboardArrowUpIcon />
+                        ) : (
+                            <KeyboardArrowDownIcon />
+                        )}
+                        <Button onClick={() => handleToggleExpand(index)}>
+                            {expandedReviews[index] ? "Read Less" : "Read More"}
+                        </Button>
+                    </Box>
+                )}
+            </Box>
+
+            {/* for hiding images in dialog  */}
+            {isDialog === true ? (
+                <div></div>
+            ) : (
+                <>
+                    <Stack
+                        direction={"row"}
+                        width={"100%"}
+                        my={2}
+                        spacing={1}
+                        overflow={"auto"}
+                    >
+                        {reviewData?.product_media?.map((item, index) => {
+                            return (
+                                <Box
+                                    width={"100px"}
+                                    height={"100px"}
+                                    display={"flex"}
+                                    justifyContent={"center"}
+                                    alignItems={"center"}
+                                    p={1}
+                                    sx={{ border: "1px solid lightgray" }}
+                                >
+                                    <LazyLoadImage
+                                        width={"90px"}
+                                        style={{ objectFit: "contain" }}
+                                        height={"90px"}
+                                        src={item?.file_path}
+                                        alt={item?.product_review_id}
+                                    />
+                                </Box>
+                            );
+                        })}
+                    </Stack>
+                    <p className="my-2 text-muted py-1 helpful-count">
+                        2 People find this helpul
+                    </p>
+                    <div className="d-flex ">
+                        <button className="review-helpful-btn">Helpful</button>
+                        {/* <Stack mt={0.7} direction={"row"} spacing={1}>
+                    <CheckCircleIcon sx={{ color: "#318243" }} />
+                    <Typography color={"#318243"}>
+                        Thanks for honest feedback
+                    </Typography>
+                </Stack> */}
+                        <button className="review-report-btn">Report</button>
+                    </div>
+                </>
+            )}
         </div>
     );
 }

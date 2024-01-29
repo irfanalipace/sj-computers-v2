@@ -1,26 +1,28 @@
 import React, { useState } from "react";
-import bulletpoint1 from "../../../assets/images/bulletpoint1.png";
-import bulletpoint2 from "../../../assets/images/bulletpoint2.png";
-import bulletpoint3 from "../../../assets/images/bulletpoint3.png";
-import "./ProductCard.css";
+import bulletpoint1 from "../../../../assets/images/bulletpoint1.png";
+import bulletpoint2 from "../../../../assets/images/bulletpoint2.png";
+import bulletpoint3 from "../../../../assets/images/bulletpoint3.png";
+import "../../ProductCard/ProductCard.css";
 import Checkbox from "@mui/material/Checkbox";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import StarRatings from "react-star-ratings";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { PLAN_ENUM } from "../../../../core/utils/constants";
 
 const ProtectionPlanDrawer = ({
-    handleButton,
-    ProtectionPlanCallBack,
+    plan = {},
     handleAddingProtec,
     closeDrawer,
 }) => {
-    const [protectionPlan, setProtectionPlan] = useState("");
-    const [planValue, setPlanValue] = useState("");
-    const handleCheckboxChange = (value) => {
-        setPlanValue(planValue === value ? "" : value);
-        ProtectionPlanCallBack(planValue === value ? "" : value);
-    };
+    const [protectionPlan, setProtectionPlan] = useState(plan);
+    const [learnMore, setLearnMore] = useState(plan);
+    function handleCheckboxClick(_plan) {
+        setProtectionPlan((prev) => {
+            if (prev?.value === _plan.value) return null;
+            else return _plan;
+        });
+    }
 
     return (
         <div style={{ padding: "20px" }}>
@@ -57,8 +59,12 @@ const ProtectionPlanDrawer = ({
             <div className="protc-paln-option">
                 <div>
                     <Checkbox
-                        checked={planValue === "3-Year"}
-                        onClick={() => handleCheckboxChange("3-Year")}
+                        checked={
+                            protectionPlan?.value === PLAN_ENUM.THREE_YEAR.value
+                        }
+                        onClick={() =>
+                            handleCheckboxClick(PLAN_ENUM.THREE_YEAR)
+                        }
                         className="mb-4"
                         style={{ color: "#318243" }}
                     />
@@ -67,9 +73,9 @@ const ProtectionPlanDrawer = ({
                         <span style={{ color: "red" }}> $23.99</span>
                         <p
                             onClick={() => {
-                                protectionPlan === "3-Year"
-                                    ? setProtectionPlan("")
-                                    : setProtectionPlan("3-Year");
+                                learnMore?.value === PLAN_ENUM.THREE_YEAR.value
+                                    ? setLearnMore({})
+                                    : setLearnMore(PLAN_ENUM.THREE_YEAR);
                             }}
                             style={{
                                 color: "rgb(18, 112, 196)",
@@ -78,12 +84,12 @@ const ProtectionPlanDrawer = ({
                         >
                             <KeyboardArrowDownIcon
                                 style={{ marginTop: "-2px" }}
-                            />{" "}
+                            />
                             Learn More
                         </p>
                     </p>{" "}
                 </div>
-                {protectionPlan === "3-Year" && (
+                {learnMore?.value === PLAN_ENUM.THREE_YEAR.value && (
                     <div className="accordion-content">
                         <h3>3 Year Equippment Warranty Plan</h3>
                         <p className="title">From Asurion, LLC</p>
@@ -111,8 +117,8 @@ const ProtectionPlanDrawer = ({
                             https://sjcomputers.us or by phone. Most claims
                             approved within <br />
                             minutes. If we can’t repair it, we’ll send you an
-                            Amazon.com Gift Card <br /> for the purchase price
-                            of your covered product or replace it. <br />
+                            SJComputers.com Gift Card <br /> for the purchase
+                            price of your covered product or replace it. <br />
                             EXPERT TECH HELP: Real experts are available 24/7 to
                             help with set- <br />
                             up, connectivity issues, troubleshooting and much
@@ -123,8 +129,9 @@ const ProtectionPlanDrawer = ({
                             section. Simply <br /> click “User Guide” for more
                             info. Asurion will also email your plan <br />
                             confirmation with Terms & Conditions to the address
-                            associated with <br /> your Amazon account within 24
-                            hours of purchase (if you do not see <br />
+                            associated with <br /> your SJComputers account
+                            within 24 hours of purchase (if you do not see{" "}
+                            <br />
                             this email, please check your spam folder). Contact
                             us if you cannot <br />
                             locate your plan confirmation and Terms & Conditions
@@ -142,8 +149,10 @@ const ProtectionPlanDrawer = ({
             <div className="protc-paln-option">
                 <div>
                     <Checkbox
-                        checked={planValue === "4-Year"}
-                        onClick={() => handleCheckboxChange("4-Year")}
+                        checked={
+                            protectionPlan?.value === PLAN_ENUM.FOUR_YEAR.value
+                        }
+                        onClick={() => handleCheckboxClick(PLAN_ENUM.FOUR_YEAR)}
                         className="mb-4"
                         style={{ color: "#318243" }}
                     />
@@ -152,9 +161,9 @@ const ProtectionPlanDrawer = ({
                         <span style={{ color: "red" }}> $32.99</span>
                         <p
                             onClick={() => {
-                                protectionPlan === "4-Year"
-                                    ? setProtectionPlan("")
-                                    : setProtectionPlan("4-Year");
+                                learnMore?.value === PLAN_ENUM.FOUR_YEAR.value
+                                    ? setLearnMore({})
+                                    : setLearnMore(PLAN_ENUM.FOUR_YEAR);
                             }}
                             style={{
                                 color: "rgb(18, 112, 196)",
@@ -168,7 +177,7 @@ const ProtectionPlanDrawer = ({
                         </p>
                     </p>{" "}
                 </div>
-                {protectionPlan === "4-Year" && (
+                {learnMore?.value === PLAN_ENUM.FOUR_YEAR.value && (
                     <div className="accordion-content">
                         <h3>4 Year Equippment Warranty Plan</h3>
                         <p className="title">From Asurion, LLC</p>
@@ -196,8 +205,8 @@ const ProtectionPlanDrawer = ({
                             https://sjcomputers.us or by phone. Most claims
                             approved within <br />
                             minutes. If we can’t repair it, we’ll send you an
-                            Amazon.com Gift Card <br /> for the purchase price
-                            of your covered product or replace it. <br />
+                            SJComputers.com Gift Card <br /> for the purchase
+                            price of your covered product or replace it. <br />
                             EXPERT TECH HELP: Real experts are available 24/7 to
                             help with set- <br />
                             up, connectivity issues, troubleshooting and much
@@ -208,8 +217,9 @@ const ProtectionPlanDrawer = ({
                             section. Simply <br /> click “User Guide” for more
                             info. Asurion will also email your plan <br />
                             confirmation with Terms & Conditions to the address
-                            associated with <br /> your Amazon account within 24
-                            hours of purchase (if you do not see <br />
+                            associated with <br /> your SJComputers account
+                            within 24 hours of purchase (if you do not see{" "}
+                            <br />
                             this email, please check your spam folder). Contact
                             us if you cannot <br />
                             locate your plan confirmation and Terms & Conditions
@@ -227,11 +237,13 @@ const ProtectionPlanDrawer = ({
             <div className="info mt-5">
                 <p>Cover all of your eligible devices:</p>
             </div>
-            <div className="protc-paln-option">
+            {/* <div className="protc-paln-option">
                 <div>
                     <Checkbox
-                        checked={planValue === "unlimited"}
-                        onClick={() => handleCheckboxChange("unlimited")}
+                        checked={
+                            protectionPlan?.value === PLAN_ENUM.DEFAULT.value
+                        }
+                        onClick={() => handleCheckboxClick(PLAN_ENUM.DEFAULT)}
                         className="mb-5"
                         style={{ color: "#318243" }}
                     />
@@ -243,9 +255,9 @@ const ProtectionPlanDrawer = ({
                         <br />
                         <p
                             onClick={() => {
-                                protectionPlan === "techUnlimited"
-                                    ? setProtectionPlan("")
-                                    : setProtectionPlan("techUnlimited");
+                                learnMore?.value === PLAN_ENUM.DEFAULT.value
+                                    ? setLearnMore({})
+                                    : setLearnMore(PLAN_ENUM.DEFAULT);
                             }}
                             style={{
                                 color: "rgb(18, 112, 196)",
@@ -257,28 +269,9 @@ const ProtectionPlanDrawer = ({
                             />{" "}
                             Learn More
                         </p>
-                        {/* <p style={{ color: "red" }}>
-                            &nbsp;$16.99/month
-                            <p
-                                onClick={() => {
-                                    protectionPlan === "techUnlimited"
-                                        ? setProtectionPlan("")
-                                        : setProtectionPlan("techUnlimited");
-                                }}
-                                style={{
-                                    color: "rgb(18, 112, 196)",
-                                    cursor: "pointer",
-                                }}
-                            >
-                                <KeyboardArrowDownIcon
-                                    style={{ marginTop: "-2px" }}
-                                />{" "}
-                                Learn More
-                            </p>
-                        </p> */}
                     </p>{" "}
                 </div>
-                {protectionPlan === "techUnlimited" && (
+                {learnMore.value === PLAN_ENUM.DEFAULT.value && (
                     <div className="accordion-content">
                         <h3>Unlimited Equippment Warranty Plan</h3>
                         <p className="title">From Asurion, LLC</p>
@@ -306,7 +299,7 @@ const ProtectionPlanDrawer = ({
                             https://sjcomputers.us or by phone. Most claims
                             approved within <br />
                             minutes. If we can’t repair it, we’ll send you an
-                            Amazon.com Gift Card <br /> for the purchase price
+                            SJComputers.com Gift Card <br /> for the purchase price
                             of your covered product or replace it. <br />
                             EXPERT TECH HELP: Real experts are available 24/7 to
                             help with set- <br />
@@ -318,7 +311,7 @@ const ProtectionPlanDrawer = ({
                             section. Simply <br /> click “User Guide” for more
                             info. Asurion will also email your plan <br />
                             confirmation with Terms & Conditions to the address
-                            associated with <br /> your Amazon account within 24
+                            associated with <br /> your SJComputers account within 24
                             hours of purchase (if you do not see <br />
                             this email, please check your spam folder). Contact
                             us if you cannot <br />
@@ -333,15 +326,15 @@ const ProtectionPlanDrawer = ({
                         </p>
                     </div>
                 )}
-            </div>
+            </div> */}
             <div className="btn-grp mt-3">
                 <button
                     className="add-prot-btn"
-                    onClick={() => handleAddingProtec()}
+                    onClick={() => handleAddingProtec(protectionPlan)}
                 >
                     Add Warranty
                 </button>
-                <button onClick={() => handleButton()}>No Thanks</button>
+                <button onClick={() => closeDrawer()}>No Thanks</button>
             </div>
         </div>
     );

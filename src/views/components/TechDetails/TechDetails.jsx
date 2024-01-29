@@ -251,15 +251,25 @@ const TechDetails = ({ product }) => {
                         <tr>
                             <td>Customer Reviews</td>
                             <td>
-                                <StarRatings
-                                    rating={product?.rating}
-                                    starRatedColor="rgb(232, 126, 36)"
-                                    numberOfStars={5}
-                                    name="rating"
-                                    isSelectable={false}
-                                    starDimension={"20px"}
-                                    starSpacing={"0"}
-                                />
+                                <div className="d-flex align-items-center">
+                                    <StarRatings
+                                        rating={product?.rating}
+                                        starRatedColor="rgb(232, 126, 36)"
+                                        numberOfStars={5}
+                                        name="rating"
+                                        isSelectable={false}
+                                        starDimension={"20px"}
+                                        starSpacing={"0"}
+                                    />
+                                    <span
+                                        className="ms-2"
+                                        style={{ color: "#1270c4" }}
+                                    >
+                                        {product?.total_review}
+                                        {" Ratings"}
+                                    </span>
+                                </div>
+
                                 <p className="pt-2">
                                     {product?.rating} out of 5 stars
                                 </p>
@@ -282,7 +292,7 @@ const TechDetails = ({ product }) => {
                             unsellable condition due to customer tampering will
                             result in the customer being charged a higher
                             restocking fee based on the condition of the
-                            product. Amazon.com will not accept returns of any
+                            product. SJComputers.com will not accept returns of any
                             desktop or notebook computer more than 30 days after
                             you receive the shipment. New, used, and refurbished
                             products purchased from Marketplace vendors are

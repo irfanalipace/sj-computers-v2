@@ -4,5 +4,5 @@ namespace App\Contracts;
 
 interface PaymentGateway {
     
-    public function processPayment($request);
+    public function processPayment($request,$user,$userType);
 }

@@ -13,6 +13,9 @@ import {
     Pagination,
     Typography,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD_REVIEW } from "../../../../core/store/review/reviewSlice";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 const PRODUCT_FILTER_KEY_ENUM = {
     TOP: "top-reviews",
     RECENT: "recent-reviews",
@@ -26,8 +29,11 @@ const PRODUCT_FILTER_LABEL_ENUM = {
 const reviewPerPage = 5;
 
 function ProductReviews({ productId, productAsin, onFilterChange }) {
+    const dispatch = useDispatch();
+    const reviewState = useSelector((slice) => slice.review);
+
     const [filterBy, setFilterBy] = useState(PRODUCT_FILTER_KEY_ENUM.TOP);
-    const [reviews, setReviews] = useState([]);
+    const [reviews, setReviews] = useState(reviewState.reviews);
     const [reviewLoading, setReviewLoading] = useState(false);
     const reviewRef = useRef(null);
     const isMounted = useRef(false);
@@ -42,6 +48,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
             setReviewLoading(true);
             const res = await productReviewsApi(id, page, reviewPerPage);
             setReviews(res.data);
+            dispatch(ADD_REVIEW(res.data));
         } catch (error) {
             console.error(error);
         } finally {
@@ -56,11 +63,13 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
     }, [filterBy]);
 
     useEffect(() => {
-        getProductReviews(productId, 1, reviewPerPage);
+        if (!reviewState.reviews?.product_detail) {
+            getProductReviews(productId, 1, reviewPerPage);
+        }
     }, []);
 
     return (
-        <div className="product-reviews-section product-section" id="reviews">
+        <div className="product-reviews-section product-section">
             <div className="product-reviews-container">
                 <div className="row">
                     <div className="col-12 col-sm-6 col-md-4">
@@ -105,21 +114,23 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                             </button>
                         </div> */}
 
-                        {/* <ReviewImages reviews={reviews} /> */}
+                        <ReviewImages reviews={reviews} productId={productId} />
                         {reviews?.product_detail?.data.length === 0 &&
                             !reviewLoading && (
                                 <Typography fontWeight={600}>
                                     No customer reviews
                                 </Typography>
                             )}
+
                         {!!reviews?.product_detail?.data.length && (
                             <>
                                 <div
+                                    id="reviewSection"
                                     tabIndex="0"
                                     ref={reviewRef}
                                     className="filter-wrapper mt-3 mb-0 "
                                 >
-                                    <select
+                                    {/* <select
                                         className="form-select"
                                         onChange={(e) =>
                                             setFilterBy(e.target.value)
@@ -137,7 +148,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                         >
                                             Recent Reviews
                                         </option>
-                                    </select>
+                                    </select> */}
                                 </div>
 
                                 <h3 className="product-section-heading my-4 py-1">
@@ -145,6 +156,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                 </h3>
                             </>
                         )}
+
                         {reviewLoading ? (
                             <Box sx={{ height: "100px" }}>
                                 <CircularProgress
@@ -153,17 +165,25 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                 />
                             </Box>
                         ) : (
-                            reviews.product_detail?.data?.map((review) => (
-                                <div className="my-4">
-                                    <ReviewCard reviewData={review} />
-                                </div>
-                            ))
+                            reviews.product_detail?.data?.map(
+                                (review, index) => (
+                                    <div className="my-4">
+                                        <ReviewCard
+                                            reviewData={review}
+                                            index={index}
+                                            productId={productId}
+                                        />
+                                    </div>
+                                )
+                            )
                         )}
 
                         {!!reviews?.product_detail?.data?.length && (
                             <Pagination
                                 onChange={handlePageChange}
-                                count={Math.ceil(reviews.total / reviewPerPage)}
+                                count={Math.ceil(
+                                    reviews.product_detail.total / reviewPerPage
+                                )}
                             />
                         )}
                     </div>

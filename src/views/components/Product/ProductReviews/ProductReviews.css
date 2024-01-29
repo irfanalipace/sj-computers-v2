@@ -56,6 +56,12 @@
     border-radius: 50%;
 }
 
+.review-author-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
 .product-reviews-section .review-card .review-author {
     font-size: 14px;
     font-weight: 400;
@@ -76,14 +82,42 @@
     font-size: 14px;
     font-weight: 700;
     color: #e87e24;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.verified-review {
+    font-size: 14px;
+    font-weight: 700;
+    color: #e87e24;
+    margin: 0;
+    margin-bottom: 5px;
 }
 
 .product-reviews-section .review-card .review-comment {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
+    line-height: 20px;
+}
+
+.review-comment {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
 }
 
 .product-reviews-section .review-card .review-report-btn {
+    background: white;
+    border: 0;
+    border-left: 1px solid #7a7d7d;
+    padding-left: 10px;
+    margin-left: 10px;
+    height: 15px;
+    margin-top: 10px;
+    color: #7a7d7d;
+}
+
+.review-report-btn {
     background: white;
     border: 0;
     border-left: 1px solid #7a7d7d;
@@ -108,6 +142,16 @@
     border-radius: 8px;
     border: 1px;
 }
+.review-helpful-btn {
+    background: white;
+    border: 1px solid #d5d9d9;
+    box-shadow: 0px 2px 5px 0px #d5d9d980;
+    width: 120px;
+    height: 40px;
+    padding: 1px;
+    border-radius: 8px;
+    border: 1px;
+}
 .add-new-review {
     padding: 15px;
 }
@@ -123,7 +167,7 @@
     display: flex;
 }
 .add-new-review .check-rating-star-review {
-    margin-left: 35px;
+    /* margin-left: 35px; */
     color: green;
 }
 
@@ -189,4 +233,24 @@
     background: none;
     border: none;
     color: #007185;
+}
+
+.review {
+    overflow: hidden;
+    max-height: 162px;
+    transition: max-height 0.3s ease;
+}
+
+.review.expanded {
+    max-height: none;
+}
+
+@media screen and (max-width: 576px) {
+    .preview-button-review > button {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 200px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
 }

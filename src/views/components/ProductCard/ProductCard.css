@@ -169,14 +169,14 @@
     padding: 5px;
     font-size: 12px;
     background-color: #0f1111;
-    width: 35%;
+    width: 120px;
     color: white;
 }
 .sj-banner-similar-item .for-styling {
     background-color: #fff;
     margin-top: 2px;
     margin-left: -17px;
-    transform: rotate(-15deg);
+    transform: rotate(-10deg);
     width: 20px;
     height: 22px;
 }

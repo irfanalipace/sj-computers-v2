@@ -161,4 +161,52 @@ class OrderRepository
 
         return $updateProduct;
     }
+
+     public function checkProduct($cart_items)
+    {
+        try {
+            $data = [];
+            $cart = Cart::session($this->userId);
+
+            foreach ($cart_items as $value) {
+                # code...
+
+                $product_id = ($this->userType == StatusEnum::GUEST) ? $value['product_id'] : $value['id'];
+                $quantity = ($this->userType == StatusEnum::GUEST) ? $value['qty'] : $value['quantity'];
+                $product = Product::whereId($product_id)->withoutGlobalScopes()->first();
+
+                if ($product->quantity == 0) {
+
+                    (!$cart->isEmpty()) ? $cart->remove($product_id) : true;
+
+                    throw new Exception('Please Try again product is out of stock.');
+                } elseif ($product->quantity < $quantity) {
+
+                    if (!$cart->isEmpty()) {
+                        $cart->update($product_id, [
+                            'quantity' => array(
+                                'relative' => false,
+                                'value' => $product->quantity
+                            ),
+                            'associatedModel' => $product
+                        ]);
+                    }
+
+                    throw new Exception('Please Try again product quantity is changed.');
+                } else {
+                    $data[] = [
+                        'status' => true,
+                        'product_id' => $product->id,
+                        'message' => "quantity is available.",
+                        'quantity' => $quantity,
+                        'available_quantity' => $product->quantity
+                    ];
+                }
+            }
+
+            return $data;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }

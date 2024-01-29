@@ -4,9 +4,13 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 import { useSelector } from "react-redux";
-import AddCartComponents from "../ProductCard/AddCartComponents";
+import AddCartComponents from "../Product/CheckOutCard/AddCartComponents";
 
-const SingleSimilarItem = ({ type = "", product }) => {
+const SingleSimilarItem = ({
+    type = "",
+    product,
+    heading = "Similar items with fast delivery",
+}) => {
     const orderEstimatedDelivery = useSelector(
         (state) => state.orders.orderEstimatedDelivery
     );
@@ -62,7 +66,7 @@ const SingleSimilarItem = ({ type = "", product }) => {
                     style={{ textDecoration: "none" }}
                 >
                     <div className="d-none d-sm-block product-rating">
-                        <StarRatings
+                        {/* <StarRatings
                             rating={product?.rating}
                             starRatedColor="rgb(232, 126, 36)"
                             numberOfStars={5}
@@ -70,7 +74,23 @@ const SingleSimilarItem = ({ type = "", product }) => {
                             isSelectable={false}
                             starDimension={"20px"}
                             starSpacing={"0"}
-                        />
+                        /> */}
+
+                        <div className="d-flex align-items-center">
+                            <StarRatings
+                                rating={product?.rating}
+                                starRatedColor="rgb(232, 126, 36)"
+                                numberOfStars={5}
+                                name="rating"
+                                isSelectable={false}
+                                starDimension={"20px"}
+                                starSpacing={"0"}
+                            />
+                            <span className="ms-2" style={{ color: "#1270c4" }}>
+                                {product?.total_review}
+                                {" Ratings"}
+                            </span>
+                        </div>
                     </div>
                 </Link>
                 <div className="d-none d-sm-block product-prices">
@@ -105,7 +125,7 @@ const SingleSimilarItem = ({ type = "", product }) => {
     );
     return (
         <div className="similar-item-one mt-5">
-            <h3>Similar items with fast delivery</h3>
+            <h3>{heading}</h3>
             <div className="similar-item-one-inner">
                 <div className="image-wrapper-similar-items">
                     <LazyLoadImage

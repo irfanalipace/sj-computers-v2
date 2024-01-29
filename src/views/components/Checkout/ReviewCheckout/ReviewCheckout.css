@@ -19,7 +19,7 @@
     padding: 5px 0;
     border-bottom: 1px solid lightgray;
 }
-.data-table-components{
+.data-table-components {
     display: none;
 }
 .item-card .img-wrapper img {
@@ -47,6 +47,7 @@
 
 .item-detail .price {
     color: #1270c4;
+    margin-top: 14px;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -96,7 +97,78 @@ input[type="number"] {
     color: #ffffff;
     border: 0;
 }
+.protection-button-remove-data button {
+    background: none;
+    color: #078396;
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: left;
+    padding: 0px;
+    border: 0px;
+}
+.protection-button-remove-data {
+    text-align: end;
+    margin-top: 9px;
+}
+.checkout-card-protection-lables-warntity {
+    text-align: center;
+    background: #eaeded;
+    padding: 1px;
+    border-radius: 7px;
+}
+.checkout-card-dev-sj-computers-sections {
+    font-weight: 500 !important;
+    font-family: Inter;
+    font-size: 10px !important;
+    font-weight: 500;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: left;
+    /* padding: 0px; */
+    margin-bottom: 1px;
+    text-align: center;
+    padding-left: 13px;
+}
+.overlay-protecions-checkout-card-protection-name-dev p {
+    color: #318243;
+    margin-left: 10px;
+    margin-bottom: 6px;
+}
+.checkout-card-protection-lables-warntity span {
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 15px;
+    letter-spacing: 0em;
 
+    color: #318243;
+}
+
+.checkout-card-price-atam-data{
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600 !important;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-top: 14px;
+
+    
+}
+.checkout-card-protection-name-dev {
+    font-family: Inter;
+    font-size: 10px !important;
+    font-weight: 500;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: center;
+    padding: 0px;
+    color: #318243;
+    margin-bottom: 4px;
+}
 @media screen and (max-width: 600px) {
     .item-card .img-wrapper {
         width: 200px;

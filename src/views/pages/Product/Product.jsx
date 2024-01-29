@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { ProductImage } from "@components/Product/ProductImage/ProductImage";
 import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
@@ -20,35 +20,45 @@ import useProductData from "./useProductData";
 import useSimilarData from "./useSimilarProduct";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 import { useSearchParams } from "react-router-dom";
+import { CLEAR_REVIEW } from "../../../core/store/review/reviewSlice";
+import { useDispatch } from "react-redux";
 
 export default function Product() {
+    const dispatch = useDispatch();
 
     const [searchParams, setSearchParams] = useSearchParams();
+    console.log(searchParams, "");
+
     const { isLoading, product, productImages, products, onFilterChange } =
         useProductData();
 
-        const redirct = (productUrl) => {
-            const url = new URL(productUrl || 'https://www.sjcomputers.us');
-            url.searchParams.set('breadcrumb', 'Product');
-            return url.pathname;
+    const redirct = (pathUrl) => {
+        const url = new URL(pathUrl || "https://www.sjcomputers.us");
+        url.searchParams.set("breadcrumb", "Product");
+        return window.location.pathname;
+    };
+
+    const breadcrumbRoutes = [
+        {
+            label: "Home",
+            link: "/",
+        },
+        {
+            label: "Product",
+            link: redirct(product?.url),
+        },
+    ];
+
+    useEffect(() => {
+        return () => {
+            dispatch(CLEAR_REVIEW());
         };
-        
-        const breadcrumbRoutes = [
-            {
-                label: 'Home',
-                link: '/',
-            },
-            {
-                label: 'Product',
-                link: redirct(product?.url),
-            },
-        ];
-        
+    }, []);
 
     const ProductComponent = () => {
-
-
-        const { similarProducts } = useSimilarData();
+        const { similarProducts, featuredProducts } = useSimilarData(
+            product?.id
+        );
         return (
             <>
                 {products?.length > 0 && (
@@ -66,11 +76,15 @@ export default function Product() {
                         {similarProducts?.length > 0 && (
                             <VisibleOnScroll>
                                 <div className="hidden-on-tab">
-                                    <SimilarItems products={similarProducts} />
+                                    <SimilarItems
+                                        products={featuredProducts}
+                                        featuredProducts={similarProducts}
+                                    />
                                 </div>
                             </VisibleOnScroll>
                         )}
-                        <ProductVideo product={product} />
+                        {/* VIDEO-SECTION */}
+                        {/* <ProductVideo product={product} />  */}
 
                         <RefurbishedSection />
                         <ProductDescription product={product} />
@@ -92,14 +106,17 @@ export default function Product() {
                         ) : (
                             <>
                                 <ProductComponent />
-                                <VisibleOnScroll>
-                                    <ProductReviews
-                                        reviews={products}
-                                        onFilterChange={onFilterChange}
-                                        productAsin={product?.asin}
-                                        productId={product?.id}
-                                    />
-                                </VisibleOnScroll>{" "}
+                                <div id="reviews">
+                                    {" "}
+                                    <VisibleOnScroll>
+                                        <ProductReviews
+                                            reviews={products}
+                                            onFilterChange={onFilterChange}
+                                            productAsin={product?.asin}
+                                            productId={product?.id}
+                                        />
+                                    </VisibleOnScroll>
+                                </div>
                             </>
                         )}
 

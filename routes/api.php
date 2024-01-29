@@ -78,6 +78,9 @@ Route::get('inventory-data', [ProductController::class, 'getInventoryData'])->na
 
 Route::get('products-filter-list', [ProductController::class, 'getProductFilterList'])->name('getProductFilterList');
 
+Route::get('similar-item/{product}', [ProductController::class, 'getSimilarItem'])->name('getSimilarItem');
+Route::get('product-fast-delivery/{product}', [ProductController::class, 'productCount'])->name('productCount');
+
 
 Route::get('product-detail', [ProductController::class, 'getProductDetail'])->name('productDetail');
 Route::get('product-detail-asin', [ProductController::class, 'getProductDetailAsin'])->name('productDetailAsin');
@@ -130,7 +133,7 @@ Route::get('meta_detail', [MetaDetailController::class, 'getDetail'])->name('met
 /*
 *Place Order
 */
-Route::post('checkout-order', [PaymentController::class, 'checkout'])->name('checkoutOrder')->middleware('auth:api');
+Route::post('checkout-order', [PaymentController::class, 'checkout'])->name('checkoutOrder');
 
 Route::get('success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 
@@ -255,11 +258,10 @@ Route::post('paypal', [PayPalController::class, 'paypal'])->name('paypal');
 Route::get('success', [PayPalController::class, 'paypalSuccess'])->name('success');
 Route::get('cancel', [PayPalController::class, 'paypalCancel'])->name('cancel');
 
-/* 
+/*
     Get all reviews
 */
 Route::get('get-product-reviews',[ReviewController::class,'index']);
 Route::get('get-protection-plans',[ProductController::class,'getProtectivePlan']);
 Route::get('get-product-details/{product_id}',[ReviewController::class,'getProductDetail']);
-Route::get('get-product-rating/{product_id}',[ReviewController::class,'getProductRate']);
 

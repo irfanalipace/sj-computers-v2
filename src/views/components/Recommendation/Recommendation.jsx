@@ -26,7 +26,8 @@ export default function Recommendation({ products }) {
             <div className="recommendation-container product-section">
                 <div className="recommendation-inner">
                     <h3 className="product-section-heading">
-                        Recommended Items
+                        People who browsed similar items also showed
+                        interest in these
                     </h3>
                     <div className="slider-wrapper">
                         {isLoading || !products ? (

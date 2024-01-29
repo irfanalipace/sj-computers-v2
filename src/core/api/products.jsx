@@ -17,9 +17,22 @@ export function productsApi(page = 1, per_page = 12) {
     });
 }
 
-export function similarProductsApi(name) {
+export function similarProductsApi(product_id) {
     return new Promise((resolve, reject) => {
-        ApiService.get("/search-product", "", name)
+        ApiService.get("/similar-item", product_id)
+            .then((response) => {
+                resolve(response);
+            })
+            .catch((e) => {
+                console.print("Console Log: : error productsf", e);
+                reject(e);
+            });
+    });
+}
+
+export function featureProductsApi(product_id) {
+    return new Promise((resolve, reject) => {
+        ApiService.get("/product-fast-delivery", product_id)
             .then((response) => {
                 resolve(response);
             })

@@ -105,6 +105,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                             <div className="items">
                                                 <CartItem cartData={item} />
                                             </div>
+                                            
                                         </div>
                                     ))}
                                 </div>

@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import "./ProductCard.css";
-import AddCartComponents from "./AddCartComponents";
+import AddCartComponents from "../Product/CheckOutCard/AddCartComponents";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 
 const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
@@ -66,7 +66,7 @@ const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
                     style={{ textDecoration: "none" }}
                 >
                     <div className="d-none d-sm-block product-rating">
-                        <StarRatings
+                        {/* <StarRatings
                             rating={product.rating}
                             starRatedColor="rgb(232, 126, 36)"
                             numberOfStars={5}
@@ -74,7 +74,22 @@ const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
                             isSelectable={false}
                             starDimension={"20px"}
                             starSpacing={"0"}
-                        />
+                        /> */}
+                        <div className="d-flex align-items-center">
+                            <StarRatings
+                                rating={product?.rating}
+                                starRatedColor="rgb(232, 126, 36)"
+                                numberOfStars={5}
+                                name="rating"
+                                isSelectable={false}
+                                starDimension={"20px"}
+                                starSpacing={"0"}
+                            />
+                            <span className="ms-2" style={{ color: "#1270c4" }}>
+                                {product?.total_review}
+                                {" Ratings"}
+                            </span>
+                        </div>
                     </div>
                 </Link>
                 <div className="sj-banner-similar-item">

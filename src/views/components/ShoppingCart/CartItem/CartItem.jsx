@@ -23,8 +23,14 @@ export const CartItem = memo(({ cartData }) => {
 
     const deleteItemFunction = () => {
         let cartQuantity = details?.total_items - 1;
-        let cartTotal = parseFloat(details?.total) - cartData?.price;
-        let cartSubTotal = parseFloat(details?.sub_total) - cartData?.price;
+        let cartTotal =
+            parseFloat(details?.total) -
+            cartData?.price -
+            parseFloat(cartData?.plan_price || 0);
+        let cartSubTotal =
+            parseFloat(details?.sub_total) -
+            cartData?.price -
+            parseFloat(cartData?.plan_price || 0);
 
         const cartDetails = {
             total_items: cartQuantity,
@@ -39,28 +45,43 @@ export const CartItem = memo(({ cartData }) => {
 
     const handleQuantity = (quantity) => {
         quantity = parseInt(quantity);
-        let subTotal = 0;
+        let subTotal = 0.0;
         let difference = quantity - cartData?.quantity;
-        let productPriceWithWarranty =
-            parseFloat(cartData?.product?.price) +
-            parseFloat(cartData?.plan?.price);
-        let price = productPriceWithWarranty * difference;
-        subTotal = parseFloat(details?.sub_total) + price;
-        let cartTotal = parseFloat(details?.total) + price;
-
+        const productPriceDifference =
+            parseFloat(cartData?.product?.price) * difference;
+        let productPriceWithQuantity =
+            productPriceDifference + parseFloat(cartData?.price);
+        const warrantyPriceDifference =
+            parseFloat(cartData?.plan?.price || 0) * difference;
+        let warrantyPriceWithQuantity =
+            warrantyPriceDifference + parseFloat(cartData?.plan_price || 0);
+        subTotal =
+            parseFloat(details?.sub_total) +
+            parseFloat(productPriceDifference) +
+            parseFloat(warrantyPriceDifference);
+        const cartTotal =
+            parseFloat(details?.total) +
+            parseFloat(productPriceDifference) +
+            parseFloat(warrantyPriceDifference);
         const cartDetails = {
             total_items: details?.total_items,
             total: cartTotal.toFixed(2),
             sub_total: subTotal.toFixed(2),
         };
-
-        let itemPrice = productPriceWithWarranty * quantity;
         const cartItem = {
             id: cartData.id,
             quantity,
             difference,
-            price: itemPrice,
+            price: parseFloat(productPriceWithQuantity).toFixed(2),
         };
+
+        if (cartData?.plan?.value) {
+            cartItem.plan_price = parseFloat(warrantyPriceWithQuantity).toFixed(
+                2
+            );
+        }
+
+        // debugger;
         if (!isAuthenticated) {
             let productQuantity = cartData?.product?.quantity + difference;
             let in_stock = productQuantity < 1 ? false : true;
@@ -103,29 +124,32 @@ export const CartItem = memo(({ cartData }) => {
                             </div>
                             <div className="col-md-2 price-item">
                                 <p className="my-sm-0 my-2">
-                                    <strong className="">
+                                    <strong className="price-data-item-list-cost">
                                         $
                                         {parseFloat(cartData?.price).toFixed(2)}
                                     </strong>
                                 </p>
                             </div>
-                            <WarrantyBadge
+                            {/* <WarrantyBadge
                                 durationInYears={
                                     cartData?.plan?.durationInYears
                                 }
-                            />
+                            /> */}
                         </div>
-                        <ul className="item-list mt-1 mb-2">
-                            <li>
-                                <span className="item-stock">
-                                    {cartData?.product?.quantity ==
-                                    cartData?.quantity
-                                        ? "Out of Stock"
-                                        : "In Stock"}
-                                </span>
-                            </li>
-                            {/* <li>Discount Available</li> */}
-                            {/* <li>
+                        <div className="row">
+                            <div className="col-md-5">
+                                <div className="list-item-dev-ui-item">
+                                    <ul className="item-list mt-1 mb-2">
+                                        <li>
+                                            <span className="item-stock">
+                                                {cartData?.product?.quantity ==
+                                                cartData?.quantity
+                                                    ? "Out of Stock"
+                                                    : "In Stock"}
+                                            </span>
+                                        </li>
+                                        {/* <li>Discount Available</li> */}
+                                        {/* <li>
                                         <span className="item-capacity">
                                             Capacity:
                                         </span>
@@ -141,43 +165,87 @@ export const CartItem = memo(({ cartData }) => {
                                             980 PRO
                                         </span>
                                     </li> */}
-                        </ul>
-                        {cartData.loading ? (
-                            <Loader />
-                        ) : (
-                            <>
-                                <div
-                                    className="d-flex justify-content-between justify-content-sm-start align-items-end"
-                                    style={{
-                                        maxWidth: "700px",
-                                    }}
-                                >
-                                    <QuantityInput
-                                        onChange={handleQuantity}
-                                        minQuantity={1}
-                                        value={cartData?.quantity}
-                                        maxQuantity={
-                                            cartData?.product?.quantity
-                                        }
-                                    />
+                                    </ul>
+                                </div>
+                                <div style={{ height: "45px" }}>
+                                    {cartData.loading ? (
+                                        <Loader />
+                                    ) : (
+                                        <>
+                                            <div
+                                                className="d-flex justify-content-between justify-content-sm-start align-items-end"
+                                                style={{
+                                                    maxWidth: "700px",
+                                                }}
+                                            >
+                                                <QuantityInput
+                                                    onChange={handleQuantity}
+                                                    minQuantity={1}
+                                                    value={cartData?.quantity}
+                                                    maxQuantity={
+                                                        cartData?.product
+                                                            ?.quantity
+                                                    }
+                                                />
 
-                                    <button
-                                        onClick={deleteItemFunction}
-                                        className="button-link cartitem-delete-button ms-2"
-                                        disabled={updatingItem}
-                                    >
-                                        {updatingItem ? <Loader /> : "Delete"}
-                                    </button>
-                                    {/* <button className="button-link">
+                                                <button
+                                                    onClick={deleteItemFunction}
+                                                    className="button-link cartitem-delete-button ms-2"
+                                                    disabled={updatingItem}
+                                                >
+                                                    {updatingItem ? (
+                                                        <Loader />
+                                                    ) : (
+                                                        "Delete"
+                                                    )}
+                                                </button>
+                                                {/* <button className="button-link">
                                 Save for later
                             </button>
                             <button className="button-link">
                                 Compare with similer item
                             </button>
                             <button className="button-link">Share</button> */}
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
-                            </>
-                        )}
+                            </div>
+                            {cartData?.plan?.value && (
+                                <>
+                                    <div className="col-md-3 col-sm-6 px-0">
+                                        <div className="protection-button-remove-data add-text-remive-item">
+                                            <button>Remove protection</button>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-2 col-md-3 col-6">
+                                        <div className="protection-lables-warntity text-start px-2 py-2">
+                                            <p className="dev-sj-computers-sections text-start ms-0">
+                                                SJ Computer
+                                            </p>
+                                            <p className="protection-name-dev text-start">
+                                                Protection
+                                            </p>
+
+                                            <span className="text-start ms-0">
+                                                {cartData?.plan?.durationInYears
+                                                    ? cartData?.plan
+                                                          ?.durationInYears +
+                                                      " years"
+                                                    : "Tech Unlimited"}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-2 col-md-3 col-6">
+                                        <div className="add-card-price-carditem">
+                                            <p className="protections-price-carditem">
+                                                ${cartData?.plan_price}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
