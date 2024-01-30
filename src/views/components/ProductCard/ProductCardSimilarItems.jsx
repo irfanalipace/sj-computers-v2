@@ -8,17 +8,20 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "./ProductCard.css";
 import AddCartComponents from "../Product/CheckOutCard/AddCartComponents";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
+import { generatePath } from "../../../core/utils/helpers";
 
 const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
     const orderEstimatedDelivery = useSelector(
         (state) => state.orders.orderEstimatedDelivery
     );
 
+    const productPath = generatePath(product?.url);
+
     const ProductDetails = () => (
         <div>
             <div className="product-details">
                 <div className="dev-section-button-dev-card">
-                    <Link to={`${new URL(product?.url).pathname}`}>
+                    <Link to={productPath}>
                         <div className="product-name product-cart-name-mobile-screen">
                             {product.name}
                         </div>
@@ -61,10 +64,7 @@ const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
                     </div>
                 </div>
 
-                <Link
-                    to={`${new URL(product?.url).pathname}`}
-                    style={{ textDecoration: "none" }}
-                >
+                <Link to={productPath} style={{ textDecoration: "none" }}>
                     <div className="d-none d-sm-block product-rating">
                         {/* <StarRatings
                             rating={product.rating}
@@ -143,7 +143,10 @@ const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
     );
     return (
         <div className={` product   ${inGrid && "product-grid"}`}>
-            <Link to={`${new URL(product?.url).pathname}`}>
+            <Link
+                //to={`${new URL(product?.url).pathname}`}
+                to={productPath}
+            >
                 <div
                     className={` ${
                         inGrid ? "product-image-grid" : ""

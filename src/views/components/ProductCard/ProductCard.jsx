@@ -9,7 +9,7 @@ import "./ProductCard.css";
 import AddCartComponents from "../Product/CheckOutCard/AddCartComponents";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 import { Box, Stack, Typography } from "@mui/material";
-
+import { generatePath } from "../../../core/utils/helpers";
 const Product = ({ type = "", product, inGrid, color = "" }) => {
     const [show, setShow] = useState(false);
     const randomLabel = () => {};
@@ -113,10 +113,8 @@ const Product = ({ type = "", product, inGrid, color = "" }) => {
 
                 <div className="dev-section-button-dev-card mb-2">
                     <Link
-                        to={`${
-                            new URL(product?.url || "https://sjcomputers.us")
-                                .pathname
-                        }`}
+                        // to={`${new URL(product?.url).pathname}`}
+                        to={generatePath(product?.url)}
                     >
                         <div className="product-name product-cart-name-mobile-screen">
                             {product.name}
@@ -168,10 +166,8 @@ const Product = ({ type = "", product, inGrid, color = "" }) => {
                 </div>
 
                 <Link
-                    to={`${
-                        new URL(product?.url || "https://sjcomputers.us")
-                            .pathname
-                    }`}
+                    //  to={`${new URL(product?.url).pathname}`}
+                    to={generatePath(product?.url)}
                     style={{ textDecoration: "none" }}
                 >
                     <div className="d-none d-sm-block product-rating">
@@ -255,9 +251,8 @@ const Product = ({ type = "", product, inGrid, color = "" }) => {
     return (
         <div className={` product   ${inGrid && "product-grid"}`}>
             <Link
-                to={`${
-                    new URL(product?.url || "https://sjcomputers.us").pathname
-                }`}
+                //to={`${new URL(product?.url).pathname}`}
+                to={generatePath(product?.url)}
             >
                 <div
                     className={` ${
