@@ -92,7 +92,7 @@ export default function Product() {
                                         <ProductDescription
                                             description={
                                                 product?.description
-                                                    ?.product_description[0]
+                                                    ?.product_description?.[0]
                                                     ?.value
                                             }
                                         />
