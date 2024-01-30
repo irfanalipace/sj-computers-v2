@@ -30,9 +30,6 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw }) {
     };
 
     const handleHelpfull = async () => {
-        const allSelectedCheckboxes = Object.keys(checkedItems).filter(
-            (key) => checkedItems[key]
-        );
         const data = {
             product_review_id: reviewData?.id,
             button_type: "helpful",
@@ -40,12 +37,12 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw }) {
         };
 
         try {
-            setLoading(true);
-            const res = await reviewReportHelpfullApi(data);
-            updateReveiw(reviewData.id);
+            // setLoading(true);
+            // const res = await reviewReportHelpfullApi(data);
+            // updateReveiw(reviewData.id);
         } catch (error) {
         } finally {
-            setLoading(false);
+            // setLoading(false);
         }
     };
 
@@ -158,7 +155,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw }) {
                     </Typography>
                 </Stack> */}
                         <button
-                            onClick={handleHelpfull}
+                            onClick={() => setOpen(true)}
                             className="review-report-btn"
                         >
                             Report
