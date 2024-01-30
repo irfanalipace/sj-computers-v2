@@ -172,7 +172,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                                                     {updatingItem ? (
                                                                                         <Loader />
                                                                                     ) : (
-                                                                                        "Delete"
+                                                                                        "Delete "
                                                                                     )}
                                                                                 </button>
                                                                             </div>

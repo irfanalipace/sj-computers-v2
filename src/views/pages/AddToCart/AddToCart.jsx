@@ -31,7 +31,7 @@ const AddToCart = () => {
     return (
         <div style={{ backgroundColor: "#EAEDED" }}>
             <Grid container>
-                <Grid item lg={11}>
+                <Grid item lg={11} className="hidden-on-mobile hidden-on-tab">
                     <AddToCartCard product={product} />
                     {/* <SimilarItemsSlider products={similarProducts} /> */}
                     <SimilarPurchaseCart products={featuredProducts} />
@@ -41,6 +41,9 @@ const AddToCart = () => {
                     <CartSideBar />
                 </Grid>
             </Grid>
+            <div className="hidden-on-desktop">
+                <SimilarInterestSlider products={featuredProducts} />
+            </div>
         </div>
     );
 };

@@ -107,3 +107,19 @@ span {
         min-height: calc(100vh - 670px);
     }
 }
+@media screen and (max-width: 1200px) {
+    .hidden-on-tab {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .hidden-on-desktop {
+        display: none;
+    }
+}
+@media screen and (max-width: 780px) {
+    .hidden-on-mobile {
+        display: none;
+    }
+}

@@ -13,9 +13,19 @@ const CartSideBar = () => {
     return (
         <div className="cart-side-bar-container">
             <div className="cart-side-bar-inner">
-                <h2>Subtotal</h2>
-                <usd>${totalCart}</usd>
-                <p>
+                <h2>
+                    Subtotal{" "}
+                    <span
+                        className="hidden-on-desktop"
+                        style={{ fontWeight: 600 }}
+                    >
+                        ${totalCart}
+                    </span>{" "}
+                </h2>
+                <usd className="hidden-on-mobile hidden-on-tab">
+                    ${totalCart}
+                </usd>
+                <p className="hidden-on-mobile hidden-on-tab">
                     <span style={{ color: "green" }}>
                         Your Order qualifies for FREE Shipping.
                     </span>{" "}
@@ -23,10 +33,13 @@ const CartSideBar = () => {
                     <Link>see details</Link>
                 </p>
                 <button
-                    className="cart-side-btn"
+                    className="cart-side-btn hidden-on-mobile hidden-on-tab"
                     onClick={() => navigate("/cart")}
                 >
                     Go to Cart
+                </button>
+                <button className="hidden-on-desktop proceed-cart-btn">
+                    Proceed to checkout ({cartItems?.length} item){" "}
                 </button>
             </div>
             {cartItems?.map((item) => (

@@ -34,3 +34,22 @@
     background-color: #fff;
     padding: 6px 20px;
 }
+.proceed-cart-btn {
+    outline: none;
+    border: none;
+    color: #fff;
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #28a343;
+}
+@media screen and (max-width: 1200px) {
+    .cart-side-bar-container .cart-side-bar-inner {
+        align-items: flex-start;
+    }
+    .cart-side-bar-container h2 {
+        font-size: 32px;
+        font-weight: 500;
+    }
+}
