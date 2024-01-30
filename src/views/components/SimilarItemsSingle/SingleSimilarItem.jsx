@@ -15,16 +15,14 @@ const SingleSimilarItem = ({
     const orderEstimatedDelivery = useSelector(
         (state) => state.orders.orderEstimatedDelivery
     );
-   // const productPath = generatePath(product?.url);
-
-    // console.log(productPath, "productPath");
+    const productPath = generatePath(product?.url);
 
     const ProductDetails = () => (
         <div>
             <div className="product-details">
                 <div className="dev-section-button-dev-card">
                     {/* <Link to={`${new URL(product?.url).pathname}`}> */}
-                    <Link   to={generatePath(product?.url)}>
+                    <Link to={productPath}>
                         <div className="product-name product-cart-name-mobile-screen">
                             {product?.name}
                         </div>
