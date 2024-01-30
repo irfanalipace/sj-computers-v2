@@ -12,7 +12,6 @@ import { Box, Stack, Typography } from "@mui/material";
 
 const Product = ({ type = "", product, inGrid, color = "" }) => {
     const [show, setShow] = useState(false);
-
     const randomLabel = () => {};
 
     const orderEstimatedDelivery = useSelector(
@@ -113,7 +112,12 @@ const Product = ({ type = "", product, inGrid, color = "" }) => {
         </div> */}
 
                 <div className="dev-section-button-dev-card mb-2">
-                    <Link to={`${new URL(product?.url).pathname}`}>
+                    <Link
+                        to={`${
+                            new URL(product?.url || "https://sjcomputers.us")
+                                .pathname
+                        }`}
+                    >
                         <div className="product-name product-cart-name-mobile-screen">
                             {product.name}
                         </div>
@@ -164,7 +168,10 @@ const Product = ({ type = "", product, inGrid, color = "" }) => {
                 </div>
 
                 <Link
-                    to={`${new URL(product?.url).pathname}`}
+                    to={`${
+                        new URL(product?.url || "https://sjcomputers.us")
+                            .pathname
+                    }`}
                     style={{ textDecoration: "none" }}
                 >
                     <div className="d-none d-sm-block product-rating">
@@ -247,7 +254,11 @@ const Product = ({ type = "", product, inGrid, color = "" }) => {
 
     return (
         <div className={` product   ${inGrid && "product-grid"}`}>
-            <Link to={`${new URL(product?.url).pathname}`}>
+            <Link
+                to={`${
+                    new URL(product?.url || "https://sjcomputers.us").pathname
+                }`}
+            >
                 <div
                     className={` ${
                         inGrid ? "product-image-grid" : ""

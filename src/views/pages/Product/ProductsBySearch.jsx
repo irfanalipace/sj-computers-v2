@@ -7,6 +7,7 @@ import { SET_SEARCH_STRING } from "@store/products/productsSlice";
 import { searchProductsApi } from "@api/products";
 
 import "./ProductsBySearch.css";
+import { useSearchParams } from "react-router-dom";
 
 const ProductsList = () => {
     const selectedCategory = useSelector(
@@ -14,38 +15,46 @@ const ProductsList = () => {
     );
     const searchString = useSelector((state) => state.products.searchString);
     const dispatch = useDispatch();
+    const [searchParams] = useSearchParams();
     const [isLoading, setIsLoading] = useState(false);
     const [products, setProducts] = useState([]);
     const [apiError, setApiError] = useState("");
     const [pagination, setPagination] = useState({ page: 1, per_page: 12 });
-    const tempVariables = useRef({ searchString: searchString });
+    const tempVariables = useRef({ searchString: "", selectedCategory: "" });
+
+    const _searchString = searchParams.get("s");
+    if (_searchString !== searchString) {
+        dispatch(SET_SEARCH_STRING(_searchString));
+    }
+
+    const isNewSearch = () => {
+        return (
+            searchString !== tempVariables.current.searchString ||
+            selectedCategory !== tempVariables.current.selectedCategory
+        );
+    };
+
     const handleSearch = async () => {
         if (searchString) {
-            // dispatchSearch();
             try {
                 setIsLoading(true);
                 const paginationProps = { ...pagination };
-                console.log(
-                    "1111 search string: ",
-                    searchString,
-                    tempVariables.current.searchString
-                );
-                if (searchString == tempVariables.current.searchString) {
+                if (isNewSearch()) {
                     paginationProps.page = 1;
                 }
                 const response = await searchProductsApi({
                     name: searchString,
                     category_id: selectedCategory,
-                    ...pagination,
+                    ...paginationProps,
                 });
-                if (searchString == tempVariables.current.searchString) {
-                    setProducts((prev) => [...prev, response.data.data]);
-                } else setProducts(response.data.data);
+                if (!isNewSearch()) {
+                    setProducts((prev) => [...prev, ...response.data.data]);
+                } else setProducts([...response.data.data]);
                 setPagination({
                     page: response.data.current_page + 1,
-                    per_page: prev.per_page,
+                    per_page: response.data.per_page,
                 });
-                tempVariables.current.searchString = searchString;
+                tempVariables.current = { searchString, selectedCategory };
             } catch (error) {
                 setApiError(error?.data?.message);
                 console.print("Something went wrong in products", error);
@@ -55,17 +64,17 @@ const ProductsList = () => {
     };
 
     useEffect(() => {
-        handleSearch();
-    }, [searchString, selectedCategory]);
-
-    useEffect(() => {
         return () => dispatch(SET_SEARCH_STRING(""));
     }, []);
+
+    useEffect(() => {
+        handleSearch();
+    }, [searchString, selectedCategory]);
 
     return (
         <>
             <div className="search-results container-lg">
-                {products.length > 0 ? (
+                {products?.length > 0 ? (
                     <>
                         <div className="d-flex justify-content-space-between align-items-center heading">
                             <h3>Searched Products</h3>

@@ -16,13 +16,12 @@ export default function ProductsGrid({
     smallBtn = false,
 }) {
     const isShowMore = useSelector((state) => state.products.isShowMore);
-
     return (
         <div className="products-grid-wrapper">
             <div className="products-grid product-gride-card-componets-mobile-screen mb-3 ">
                 <Row className="mx-0 justify-content-left">
-                    {products?.map((product) => (
-                        <Col xs={6} md={4} lg={2} key={product.id}>
+                    {products?.map((product, index) => (
+                        <Col xs={6} md={4} lg={2} key={"pi-" + index}>
                             {/* <Link to={`${new URL(product?.url || location.href).pathname}`}> */}
                             <ProductCard product={product} inGrid={true} />
 

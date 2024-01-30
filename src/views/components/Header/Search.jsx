@@ -53,7 +53,7 @@ function Search() {
 
     let renderedCategories = categories.map((category) => (
         <Link
-            to="#"
+            to="javascript:void(0)"
             key={category.id}
             onClick={() => handleItemClick(category)}
             className="dropdown-item ul-liste-items-all-buttons"
@@ -103,7 +103,7 @@ function Search() {
                         style={{ maxHeight: "200px", overflowY: "auto" }}
                     >
                         <Link
-                            to="#"
+                            to="javascript:void(0)"
                             onClick={() =>
                                 handleItemClick({ name: "ALL", id: null })
                             }
