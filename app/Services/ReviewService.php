@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Classes\StatusEnum;
 use App\Models\ProductReview;
+use App\Models\ProductReviewReport;
 use App\Models\ProductStatistic;
 use App\Repositories\ReviewRepository;
 use Exception;
@@ -21,15 +23,15 @@ class ReviewService
     }
 
     public function storeProductReview($request)
-    {      
-       $store = $this->repository->store($request);  
+    {
+       $store = $this->repository->store($request);
        $this->uploadMedia($store,$request);
        return $store;
     }
 
     private function uploadMedia($productReview,$request)
     {
-       
+
         $media = $request->hasFile('media') ?? '';
         if($media) {
             $productReviewMedia = $request->file('media');
@@ -38,11 +40,11 @@ class ReviewService
             if (!is_array($productReviewMedia)) {
                 $productReviewMedia = [$productReviewMedia];
             }
-            
+
             foreach ($productReviewMedia as $key => $file) {
                 $directory = 'uploads/productReviews';
                 $file = uploadMediaStorage($file,$directory);
-                $this->repository->createProductMedia($file,$request,$productReview);               
+                $this->repository->createProductMedia($file,$request,$productReview);
             }
         }
     }
@@ -62,7 +64,7 @@ class ReviewService
         $with = ['productMedia:id,product_review_id,media_type,file_path','user:id,name'];
         return $this->repository->show($id,$with );
     }
-    
+
     /* Show detials with media and statistics */
     public function getProductDetails($product_id,$request)
     {
@@ -74,7 +76,7 @@ class ReviewService
             'product_detail' => $review,
             'product_stats' => $stats
         ];
-       
+
         return $details;
     }
 
@@ -85,6 +87,33 @@ class ReviewService
             throw new Exception('Product Review not found');
         }
         return $review;
+    }
+
+    /* Store review report */
+    public function storeReviewReports($request)
+    {
+        $buttonType = $request->button_type;
+
+        $storeReview = ($buttonType == StatusEnum::HELPFUL) ? 'this is helpful' : implode(", ", $request->review_report);
+
+        $reportData = [
+            'product_review_id' => $request->product_review_id,
+            'status' => $buttonType,
+            'report' => $storeReview
+        ];
+
+        return $this->repository->storeReviewReport($reportData);
+    }
+
+
+    public function indexReviewReports()
+    {
+        return $this->repository->indexReviewReport();
+    }
+
+    public function showReviewReports($id)
+    {
+        return $this->repository->showReviewReport($id);
     }
 
 }

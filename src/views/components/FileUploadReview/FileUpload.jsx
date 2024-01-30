@@ -1,0 +1,202 @@
+import React, { useState, useRef, useEffect } from "react";
+import { Button, Modal } from "react-bootstrap";
+import fileService from "../../../core/utils/fileService"
+import "./FileUpload.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload, faPaperclip } from "@fortawesome/free-solid-svg-icons";
+import {FILE_TYPES} from "../../../../src/core/utils/constants"
+
+const allowedFiles = [
+    FILE_TYPES.png.contentType,
+    FILE_TYPES.webp.contentType,
+    FILE_TYPES.jpeg.contentType,
+    FILE_TYPES.jpg.contentType,
+];
+
+const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
+    const fileInputRef = useRef(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [images, setImages] = useState([]);
+    const [error, setErrors] = useState("");
+    const [uploadedImgs, setUploadedImgs] = useState([]);
+    const [allImages, setAllImages] = useState([]);
+
+    const handleChildButton = () => {
+        const updatedImages = [...allImages, ...images];
+        onhandleCallback(updatedImages, uploadedImgs);
+        setAllImages(updatedImages);
+        setUploadedImgs([]);
+        onClose();
+    };
+
+    const onFileSelect = (event) => {
+        const files = event.target.files || event.dataTransfer.files;
+        fileService.handleFileInputChange(
+            event,
+            allowedFiles,
+            onFileSelectCallback,
+            1
+        );
+    };
+
+    const onFileSelectCallback = (validFiles, errors) => {
+        setErrors(errors.join(", "));
+        setUploadedImgs(validFiles);
+        setImages((prevImages) => [
+            ...prevImages,
+            ...validFiles.map((file) => ({
+                name: file.name,
+                url: URL.createObjectURL(file),
+            })),
+        ]);
+    };
+
+    const deleteImage = (index) => {
+        onDeleteImage(index);
+        setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    };
+
+    const onDragOver = (event) => {
+        event.preventDefault();
+        setIsDragging(true);
+        event.dataTransfer.dropEffect = "copy";
+    };
+
+    const onDragLeave = () => {
+        setIsDragging(false);
+    };
+
+    const onDrop = (event) => {
+        event.preventDefault();
+        setIsDragging(false);
+
+        const files = event.dataTransfer.files;
+
+        if (files.length > 0) {
+            fileService.handleFileDrag(
+                event,
+                allowedFiles,
+                onFileSelectCallback,
+                1
+            );
+        }
+    };
+
+    useEffect(() => {
+        const handleListener = (event) => {
+            fileService.handlePaste(
+                event,
+                allowedFiles,
+                onFileSelectCallback,
+                1
+            );
+        };
+        document.addEventListener("paste", handleListener);
+
+        return () => {
+            document.removeEventListener("paste", handleListener);
+        };
+    }, []);
+
+    return (
+        <Modal
+            show={true}
+            onHide={onClose}
+            className="custome-model-item-filter"
+        >
+            <Modal.Body>
+                <div
+                    className={`drag-area-data ${
+                        isDragging ? "drag-over" : ""
+                    }`}
+                    role="button"
+                    onClick={() => fileInputRef.current.click()}
+                    onDragOver={onDragOver}
+                    onDragLeave={onDragLeave}
+                    onDrop={onDrop}
+                >
+                    {isDragging ? (
+                        <span className="select-image-file-drop">
+                            Drop images here
+                        </span>
+                    ) : (
+                        <>
+                            <div>
+                                <span className="logout-icon-button-view-list-area">
+                                    <FontAwesomeIcon icon={faUpload} />
+                                </span>
+                            </div>
+                            <div className="drop-import-section-p">
+                                <p> Drag & Drop file to import </p>
+                            </div>
+                            <div className="dev-droping-area-sction-files-area">
+                                <span
+                                    className="select-image-file-drop"
+                                    role="button"
+                                    onClick={() => fileInputRef.current.click()}
+                                >
+                                    <FontAwesomeIcon icon={faPaperclip} />{" "}
+                                    Choose File
+                                </span>
+                            </div>
+                            <div>
+                                <p
+                                    className="text-muted"
+                                    style={{ fontSize: "12px" }}
+                                >
+                                    {" "}
+                                    Maximum file size: 1MB, supported formats:
+                                    PNG or JPG{" "}
+                                </p>
+                            </div>
+                        </>
+                    )}
+                    <input
+                        className="input-fileds-area-sections-data-powerd"
+                        name="file"
+                        type="file"
+                        multiple
+                        ref={fileInputRef}
+                        onChange={onFileSelect}
+                    />
+                </div>
+
+                <div className="container-image-drop">
+                    {images.map((img, index) => (
+                        <div className="list-image-container" key={index}>
+                            <button
+                                className="delete-button-data"
+                                onClick={() => deleteImage(index)}
+                            >
+                                &times;
+                            </button>
+                            <img src={img.url} alt={img.name} />
+                        </div>
+                    ))}
+                </div>
+                {error && (
+                    <p
+                        className="error-message-file-formatted-issues"
+                        style={{ color: "red" }}
+                    >
+                        {error}
+                    </p>
+                )}
+                <div className="upload-cancel-dev">
+                    <button className="cancel-button-preview" onClick={onClose}>
+                        Cancel
+                    </button>{" "}
+                    <button
+                        onClick={handleChildButton}
+                        className="upload-button-view-button"
+                        disabled={images.length === 0}
+                    >
+                        Upload
+                    </button>
+                </div>
+            </Modal.Body>
+        </Modal>
+    );
+};
+
+export default FileUpload;

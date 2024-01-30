@@ -148,19 +148,3 @@ export function productPreviewApi(formData) {
     });
 }
 
-export function productSpecificDetailsReview(id) {
-    return new Promise((resolve, reject) => {
-        ApiService.get(`/product-reviews?id=${id}`)
-            .then((response) => {
-                console.print(
-                    "file: products.js | productSpecificDetailsReview| response",
-                    response
-                );
-                resolve(response);
-            })
-            .catch((e) => {
-                console.print("Console Log: : error productSpecificDetail", e);
-                reject(e);
-            });
-    });
-}

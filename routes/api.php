@@ -239,6 +239,13 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     /* Review and Rating */
     Route::resource('product-reviews',ReviewController::class)->only(['index','store','update','show']);
+
+    /*
+   * Product Review Report
+   */
+    Route::post('store-review-report', [ReviewController::class, 'storeReviewReport']);
+    Route::get('index-review-report', [ReviewController::class, 'indexReviewReport']);
+    Route::get('show-review-report/{reviewReport}', [ReviewController::class, 'showReviewReport']);
 });
 
 /*

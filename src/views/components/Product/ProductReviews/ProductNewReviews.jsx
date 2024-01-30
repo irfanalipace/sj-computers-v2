@@ -4,8 +4,8 @@ import img from "../../../../assets/images/product/productreview/productreview.p
 import { Box, Typography } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCamera } from "@fortawesome/free-solid-svg-icons";
-import AddImagesDialogBox from "../../AddVideoDialogBox/AddImagesDialogBox";
-import CustomPhotoLibrary from "../../AddVideoDialogBox/CustomPhotoLibrary";
+import FileUpload from "../../FileUploadReview/FileUpload";
+import CustomPhotoLibrary from "../../FileUploadReview/CustomPhotoLibrary";
 import Rating from "@mui/material/Rating";
 import { useSelector } from "react-redux";
 import { getUserId } from "@services/authService";
@@ -295,7 +295,7 @@ const ProductNewReviews = () => {
                         </div>
                     </div>
                     {dialogBoxOpen && (
-                        <AddImagesDialogBox
+                        <FileUpload
                             onClose={handleCloseDialogBox}
                             onhandleCallback={callbackParent}
                             onDeleteImage={handleDeleteImage}

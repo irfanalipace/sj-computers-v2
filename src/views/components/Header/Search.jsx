@@ -17,8 +17,9 @@ function Search() {
     const [selectedItem, setSelectedItem] = useState({ name: "ALL", id: null });
     const [search, setSearch] = useState("");
     const [searchParams, setSearchParams] = useSearchParams();
-    const { searchString, selectedCategory } = useSelector(
-        (state) => state.products
+    const searchString = useSelector((state) => state.products.searchString);
+    const selectedCategory = useSelector(
+        (state) => state.products.selectedCategory
     );
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -37,20 +38,12 @@ function Search() {
         e.preventDefault();
         if (search) {
             dispatch(SET_SEARCH_STRING(search));
-            navigate("/products/search");
+            navigate("/products/search?s=" + search);
         }
     };
     useEffect(() => {
         setSearch(searchString || "");
-        if (searchString) setSearchParams({ s: searchString });
     }, [searchString]);
-
-    useEffect(() => {
-        const _searchParam = searchParams.get("s");
-        if (_searchParam) {
-            dispatch(SET_SEARCH_STRING(_searchParam));
-        }
-    }, [searchParams.get("s")]);
 
     useEffect(() => {
         if (selectedCategory === null)
@@ -59,7 +52,7 @@ function Search() {
 
     let renderedCategories = categories.map((category) => (
         <Link
-            to="#"
+            to="javascript:void(0)"
             key={category.id}
             onClick={() => handleItemClick(category)}
             className="dropdown-item ul-liste-items-all-buttons"
@@ -109,7 +102,7 @@ function Search() {
                         style={{ maxHeight: "200px", overflowY: "auto" }}
                     >
                         <Link
-                            to="#"
+                            to="javascript:void(0)"
                             onClick={() =>
                                 handleItemClick({ name: "ALL", id: null })
                             }

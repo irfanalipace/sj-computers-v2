@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Product;
 
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\Product\StoreProductReview;
+use App\Http\Requests\Product\StoreReviewReportRequest;
+use App\Models\ProductReviewReport;
 use App\Services\ReviewService;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -26,7 +28,7 @@ class ReviewController extends BaseController
     public function index(Request $request)
     {
         $getProductReview = $this->service->getProductReviews($request);
-        
+
         return $this->sendResponse($getProductReview,'Successfully feteched Product reviews.');
     }
 
@@ -57,8 +59,8 @@ class ReviewController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    { 
-        try{       
+    {
+        try{
             $getProductReview = $this->service->specificProductReview($id);
 
             return $this->sendResponse($getProductReview,'Successfully fetched detail of product review.');
@@ -80,8 +82,8 @@ class ReviewController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        try{          
-            
+        try{
+
             DB::beginTransaction();
             $updateProductReview = $this->service->updateProductReview($request,$id);
 
@@ -114,7 +116,7 @@ class ReviewController extends BaseController
 
             return $this->sendResponse($productDetail,'Successfully fetched product details.');
         } catch(ModelNotFoundException $e) {
-           
+
             return $this->sendError('error','Product details not found.');
 
         } catch(Exception $e) {
@@ -129,11 +131,44 @@ class ReviewController extends BaseController
 
             return $this->sendResponse($reviewMedia,'Successfully fetched product review media.');
         } catch(ModelNotFoundException $e) {
-           
+
             return $this->sendError('error','Product review not found.');
 
         } catch(Exception $e) {
             return $this->sendError('error','Something went wrong ' . $e->getMessage());
         }
     }
+
+
+    public function storeReviewReport(StoreReviewReportRequest $request)
+    {
+        try {
+            $reviewReport = $this->service->storeReviewReports($request);
+
+            return $this->sendResponse($reviewReport, 'Product review report successfully saved');
+        } catch (Exception $e) {
+            return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());
+        }
+    }
+
+
+    public function indexReviewReport()
+    {
+        try {
+            $data = $this->service->indexReviewReports();
+            return $this->sendResponse($data, 'All review reports are displayed');
+        } catch (Exception $e) {
+            return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());
+        }
+    }
+    public function showReviewReport($id)
+    {
+        try {
+            $data = $this->service->showReviewReports($id);
+            return $this->sendResponse($data, 'Review reports is displayed');
+        } catch (Exception $e) {
+            return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());
+        }
+    }
+
 }

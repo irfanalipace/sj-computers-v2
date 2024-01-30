@@ -10,7 +10,7 @@ import {
 } from "@store/cart/cartThunks";
 import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 import WarrantyBadge from "@components/ShoppingCart/CartItem/WarrantyBadge";
-
+import { generatePath } from "../../../../core/utils/helpers";
 import "./CartItem.css";
 import { Link } from "react-router-dom";
 
@@ -110,12 +110,7 @@ export const CartItem = memo(({ cartData }) => {
                             <div className="col-md-10">
                                 <Link
                                     className="items-card-name"
-                                    to={
-                                        new URL(
-                                            cartData?.product?.url ||
-                                                location.href
-                                        ).pathname
-                                    }
+                                    to={generatePath(cartData?.product?.url)}
                                 >
                                     <strong className="item-details">
                                         {cartData?.product?.name}

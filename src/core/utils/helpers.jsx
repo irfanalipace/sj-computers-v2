@@ -206,3 +206,15 @@ export function filterFiles(files, allowedTypes, maxSize = 5) {
         errors: errors,
     };
 }
+
+
+// utils/urlHelper.js
+
+export const generatePath = (url) => {
+    if (!url) {
+      // Return the default URL when the provided URL is undefined or null
+      return '/';
+    }
+    return new URL(url).pathname;
+  };
+  

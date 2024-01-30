@@ -10,8 +10,9 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ReportDialog from "./ReportReviewDialog";
 import { reviewReportHelpfullApi } from "../../../../core/api/product-review";
+import ReviewsDialog from "./ProductReviewsDialog/ReviewsDialog";
 
-function ReviewCard({ reviewData, index, isDialog, updateReveiw }) {
+function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
     const [expandedReviews, setExpandedReviews] = useState([]);
     const [open, setOpen] = React.useState(false);
 
@@ -29,10 +30,25 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw }) {
         setExpandedReviews(newExpandedReviews);
     };
 
+    // Dialog Setup
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [reviewId, setReviewId] = useState({});
+    const [imgId, setImgId] = useState("");
+    const [imgIndex, setImgIndex] = useState(0);
+
+    const handleOpenDialog = (reviewId, imgId, index) => {
+        setDialogOpen(true);
+        setReviewId(reviewId);
+        setImgId(imgId);
+        setImgIndex(index)
+        // console.log(reviews, "reviews");
+    };
+
+    const handleDialogClose = () => {
+        setDialogOpen(false);
+    };
+    
     const handleHelpfull = async () => {
-        const allSelectedCheckboxes = Object.keys(checkedItems).filter(
-            (key) => checkedItems[key]
-        );
         const data = {
             product_review_id: reviewData?.id,
             button_type: "helpful",
@@ -40,18 +56,28 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw }) {
         };
 
         try {
-            setLoading(true);
-            const res = await reviewReportHelpfullApi(data);
-            updateReveiw(reviewData.id);
+            // setLoading(true);
+            // const res = await reviewReportHelpfullApi(data);
+            // updateReveiw(reviewData.id);
         } catch (error) {
         } finally {
-            setLoading(false);
+            // setLoading(false);
         }
     };
 
     return (
         <div className="review-card mb-2">
             <div className="d-flex align-items-center">
+            <ReviewsDialog
+                        open={dialogOpen}
+                        handleOpenDialog={handleOpenDialog}
+                        handleClose={handleDialogClose}
+                        reviewId={reviewId}
+                        imgId={imgId}
+                        imgIndex={imgIndex}
+                        ReviewsData={data}
+                        // reviews={reviews}
+                    />
                 <div>
                     {reviewData?.user?.profile_pic ? (
                         <img
@@ -68,7 +94,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw }) {
             </div>
             <div className="d-md-flex align-items-center my-2">
                 <StarRatings
-                    rating={parseFloat(reviewData?.rating)}
+                    rating={ reviewData?.rating ? parseFloat(reviewData?.rating) : 0 }
                     starRatedColor="rgb(232, 126, 36)"
                     numberOfStars={5}
                     name="rating"
@@ -93,7 +119,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw }) {
                 >
                     <p className="review-comment my-0">{reviewData?.body}</p>
                 </Box>
-                {reviewData?.body.length > 1306 && (
+                {reviewData?.body?.length > 1306 && (
                     <Box>
                         {expandedReviews[index] ? (
                             <KeyboardArrowUpIcon />
@@ -129,6 +155,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw }) {
                                     alignItems={"center"}
                                     p={1}
                                     sx={{ border: "1px solid lightgray" }}
+                                    onClick={() => handleOpenDialog(item?.product_review_id, item?.id, index)}
                                 >
                                     <LazyLoadImage
                                         width={"90px"}
@@ -158,7 +185,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw }) {
                     </Typography>
                 </Stack> */}
                         <button
-                            onClick={handleHelpfull}
+                            onClick={() => setOpen(true)}
                             className="review-report-btn"
                         >
                             Report

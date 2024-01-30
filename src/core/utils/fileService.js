@@ -1,5 +1,5 @@
 
-import { filterFiles } from '../utils/helpers';
+import { filterFiles } from './helpers';
 
 const fileService = {
 	maxSize:5,
