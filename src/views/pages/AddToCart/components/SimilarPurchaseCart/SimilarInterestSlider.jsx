@@ -43,13 +43,6 @@ const SimilarInterestSlider = ({ products }) => {
                         </div>
 
                         <div className="d-sm-none ">
-                            {/* <span className="dilvery-system-mobile-card-product">
-                                Get it by{" "}
-                                {
-                                    orderEstimatedDelivery?.free_shipment_amount
-                                        ?.estimate_day
-                                }
-                            </span> */}
                             <span className="span-get-data-pagragraph-card">
                                 Free Delivery Available{" "}
                             </span>
@@ -70,15 +63,6 @@ const SimilarInterestSlider = ({ products }) => {
                     style={{ textDecoration: "none" }}
                 >
                     <div className="d-none d-sm-block product-rating">
-                        {/* <StarRatings
-                            rating={product.rating}
-                            starRatedColor="rgb(232, 126, 36)"
-                            numberOfStars={5}
-                            name="rating"
-                            isSelectable={false}
-                            starDimension={"20px"}
-                            starSpacing={"0"}
-                        /> */}
                         <div className="d-flex align-items-center">
                             <StarRatings
                                 rating={product?.rating}
@@ -182,15 +166,12 @@ const SimilarInterestSlider = ({ products }) => {
                                 slidesPerView={5}
                                 className="my-unique-swiper"
                                 breakpoints={{
-                                    // when window width is >= 320px
                                     320: {
                                         slidesPerView: 2,
                                     },
-                                    // when window width is >= 480px
                                     480: {
                                         slidesPerView: 3,
                                     },
-                                    // when window width is >= 640px
                                     640: {
                                         slidesPerView: 4,
                                     },
@@ -208,9 +189,7 @@ const SimilarInterestSlider = ({ products }) => {
                                 {products?.length > 0 ? (
                                     products?.map((product) => (
                                         <SwiperSlide key={"ps-" + product?.id}>
-                                            <div
-                                            // className="px-1"
-                                            >
+                                            <div>
                                                 <div className={` product`}>
                                                     <Link
                                                         to={`${
