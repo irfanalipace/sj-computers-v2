@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom/dist";
 import "./CartSidebar.css";
 import { useSelector } from "react-redux";
-import CartItem from "../CartItem/CartItem";
+import CartItem from "../../../../components/CartItem/CartItem";
 import { useNavigate } from "react-router-dom";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 

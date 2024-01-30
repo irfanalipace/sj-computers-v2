@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import AddToCartCard from "../../components/AddToCartCard/AddToCartCard";
+import AddToCartCard from "./components/AddToCartCard/AddToCartCard";
 import { useParams } from "react-router-dom";
 import { productDetailsbyAsinApi } from "@api/products";
-import SimilarItems from "../../components/SimilarItems/SimilarItems";
 import useSimilarData from "../Product/useSimilarProduct";
-import SimilarItemsSlider from "../../components/Sliders/SimilarItems";
-import SimilarPurchaseCart from "../../components/SimilarPurchaseCart/SimilarPurchaseCart";
+import SimilarPurchaseCart from "./components/SimilarPurchaseCart/SimilarPurchaseCart";
 import { Grid } from "@mui/material";
-import SimilarInterestSlider from "../../components/SimilarPurchaseCart/SimilarInterestSlider";
-import CartSideBar from "../../components/CartSidebar/CartSideBar";
+import SimilarInterestSlider from "./components/SimilarPurchaseCart/SimilarInterestSlider";
+import CartSideBar from "./components/CartSidebar/CartSideBar";
 
 const AddToCart = () => {
     const { productId } = useParams();

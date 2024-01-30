@@ -5,12 +5,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
-import "../../components/Sliders/Slider.css";
+import "../../../../components/Sliders/Slider.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import AddCartComponents from "../Product/CheckOutCard/AddCartComponents";
+import AddCartComponents from "../../../../components/Product/CheckOutCard/AddCartComponents";
 
 import StarRatings from "react-star-ratings";
 
