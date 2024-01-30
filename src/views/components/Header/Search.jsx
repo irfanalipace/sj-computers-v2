@@ -43,7 +43,6 @@ function Search() {
     };
     useEffect(() => {
         setSearch(searchString || "");
-        // if (searchString) setSearchParams({ s: searchString });
     }, [searchString]);
 
     useEffect(() => {
