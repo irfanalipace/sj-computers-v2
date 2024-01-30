@@ -16,6 +16,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_REVIEW } from "../../../../core/store/review/reviewSlice";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { allReviewImagesApi } from "../../../../core/api/product-review";
+
 const PRODUCT_FILTER_KEY_ENUM = {
     TOP: "top-reviews",
     RECENT: "recent-reviews",
@@ -31,6 +33,21 @@ const reviewPerPage = 5;
 function ProductReviews({ productId, productAsin, onFilterChange }) {
     const dispatch = useDispatch();
     const reviewState = useSelector((slice) => slice.review);
+    const [ReviewsData, setReviewsData] = useState([]);
+
+    const fetchData = async (productId) => {
+        try {
+            const response = await allReviewImagesApi(productId);
+            console.log(response, "responseAllImage");
+            setReviewsData(response);
+        } catch (error) {
+            console.log("error");
+        }
+    };
+
+    useEffect(() => {
+        fetchData(productId);
+    }, [allReviewImagesApi]);
 
     const [filterBy, setFilterBy] = useState(PRODUCT_FILTER_KEY_ENUM.TOP);
     const [reviews, setReviews] = useState(reviewState.reviews);
@@ -122,7 +139,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                             </button>
                         </div> */}
 
-                        <ReviewImages reviews={reviews} productId={productId} />
+                        <ReviewImages reviews={reviews} productId={productId} ReviewsData={ReviewsData}/>
                         {reviews?.product_detail?.data.length === 0 &&
                             !reviewLoading && (
                                 <Typography fontWeight={600}>
@@ -183,6 +200,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                             reviewData={review}
                                             index={index}
                                             productId={productId}
+                                            data={ReviewsData}
                                             updateReveiw={handleUpdateReview}
                                         />
                                     </div>

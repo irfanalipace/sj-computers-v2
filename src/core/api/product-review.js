@@ -35,27 +35,33 @@ export function productRatingApi(id) {
 
 export function allReviewImagesApi(id) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`get-product-details`, id, { per_page: 100, page: 1 })
+        ApiService.get(`get-review-media/${id}`)
             .then((response) => {
                 console.print(
                     "file: products.js | allReviewImagesApi| response",
                     response
                 );
-                const images = response.data?.product_detail?.data.map(
-                    (review) => {
-                        return review.product_media.map((media) => {
-                            const mediaObj = {
-                                review_id: review.id,
-                                ...media,
-                            };
-                            return mediaObj;
-                        });
-                    }
-                );
-                resolve({ data: images.flat() });
+                resolve(response)
             })
             .catch((e) => {
                 console.print("Console Log: : error products", e);
+                reject(e);
+            });
+    });
+}
+
+export function productSpecificDetailsReview(id) {
+    return new Promise((resolve, reject) => {
+        ApiService.get(`/product-reviews`,id)
+            .then((response) => {
+                console.print(
+                    "file: products.js | productSpecificDetailsReview| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.print("Console Log: : error productSpecificDetail", e);
                 reject(e);
             });
     });
@@ -77,3 +83,4 @@ export function reviewReportHelpfullApi(data) {
             });
     });
 }
+
