@@ -3,6 +3,7 @@ import React from 'react'
 import StarRatings from "react-star-ratings";
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { generatePath } from '../../../../../core/utils/helpers';
 
 function VideoDialogProductCard({product}) {
 
@@ -14,9 +15,12 @@ function VideoDialogProductCard({product}) {
           WebkitLineClamp: 2, // Limit the number of displayed lines
           lineHeight: '1.5em', // Adjust the line height as needed
   }
-
+ // const productPath = generatePath(product?.url);
   return (
-    <Link to={`${new URL(product?.url).pathname}`} style={{textDecoration: "none", }}>
+    <Link 
+   // to={`${new URL(product?.url).pathname}`} 
+       to={generatePath(product?.url)}
+    style={{textDecoration: "none", }}>
       <Grid container border={".5px solid gray"} borderRadius={"10px"} height={"110px"} py={1} >
         <Grid item xs={4} px={1} py={1} m={"auto"}>
             <LazyLoadImage width={"90px"}  src={product?.image} alt={product?.name?.trim()?.split(" ")?.slice(0, 9)?.join(" ")} />

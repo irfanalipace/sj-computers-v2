@@ -24,6 +24,7 @@ import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 import { useSearchParams } from "react-router-dom";
 import { CLEAR_REVIEW } from "../../../core/store/review/reviewSlice";
 import { useDispatch } from "react-redux";
+import { generatePath } from "../../../core/utils/helpers";
 
 export default function Product() {
     const dispatch = useDispatch();
@@ -32,10 +33,25 @@ export default function Product() {
 
     const { isLoading, product } = useProductData();
 
-    const redirct = (pathUrl) => {
-        const url = new URL(pathUrl || "https://www.sjcomputers.us");
-        url.searchParams.set("breadcrumb", "Product");
-        return window.location.pathname;
+    // const redirct = (productPath) => {
+    //     const productPath = generatePath(productPath);
+
+    //     const url = productPath;
+    //     url.searchParams.set("breadcrumb", "Product");
+    //     return window.location.productPath;
+    // };
+
+    const redirct = (productPath) => {
+        const url = generatePath(productPath);
+        console.log("Generated URL:", url);
+
+        if (url.searchParams) {
+            url.searchParams.set("breadcrumb", "Product");
+            console.log("Modified URL:", url.toString());
+            window.location.href = url.toString();
+        } else {
+            console.error("URL does not have searchParams property.");
+        }
     };
 
     const breadcrumbRoutes = [

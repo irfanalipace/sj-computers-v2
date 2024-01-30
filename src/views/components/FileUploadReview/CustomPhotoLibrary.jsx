@@ -1,7 +1,7 @@
 import { Close } from "@material-ui/icons";
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import "./AddVideoDialogBox.css";
+import "./FileUpload.css";
 const CustomPhotoLibrary = ({ onClose, parentData, onDeleteImage }) => {
   
 

@@ -3,6 +3,49 @@ export const PAYMENT_METHODS = {
     SQUARE: "SQUARE",
 };
 
+
+export const FILE_TYPES = {
+	pdf: {
+		label: 'PDF',
+		contentType: 'application/pdf',
+	},
+	xls: { label: 'XLS', contentType: 'application/vnd.ms-excel' },
+	xlsx: {
+		label: 'XLSX',
+		contentType:
+			'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+	},
+	doc: { label: 'DOC', contentType: 'application/msword' },
+	docx: { label: 'DOCX', contentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' },
+	csv: {
+		label: 'CSV',
+		contentType: 'text/csv',
+	},
+	png: {
+		label: 'PNG',
+		contentType: 'image/png',
+	},
+	jpeg: {
+		label: 'JPEG',
+		contentType: 'image/jpeg',
+	},
+	jpg: {
+		label: 'JPG',
+		contentType: 'image/jpeg',
+	},
+	gif: {
+		label: 'GIF',
+		contentType: 'image/gif',
+	},
+	svg: {
+		label: 'SVG',
+		contentType: 'image/svg+xml',
+	},
+	webp: {
+		label: 'WebP',
+		contentType: 'image/webp',
+	},
+};
 export const STATUS_COLOR_ENUM = {
     paid: "success",
     pending: "primary",
