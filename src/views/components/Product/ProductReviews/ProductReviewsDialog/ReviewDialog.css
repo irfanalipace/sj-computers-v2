@@ -2,10 +2,13 @@
     /* background-color: aqua; */
     display: flex;
     /* min-height: 30rem; */
-    width: 100%;
+    width: 99%;
     flex-wrap: wrap;
     /* justify-content: center; */
-    row-gap: 20px;
+    row-gap: 10px;
+    margin: auto;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .images-container {
@@ -13,7 +16,8 @@
     justify-content: center;
     /* width: auto; */
     flex-wrap: wrap;
-    height: 9vw;
+    height: 8vw;
+    width: 12.5%;
     /* margin: auto; */
     /* justify-content: space-evenly; */
 }
@@ -21,6 +25,6 @@
 .image-item {
     height: 100%;
     margin: 10px 5px;
-    width: 9vw;
+    width: 100%;
     background-size: cover;
 }

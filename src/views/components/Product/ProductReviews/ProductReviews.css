@@ -245,7 +245,20 @@
     max-height: none;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 900px) {
+    .reviews-row {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .review-slider-and-slider{
+        width: 100vw;
+    }
+}
+
+@media screen and (max-width: 900px) {
     .preview-button-review > button {
         margin-top: 5px;
         margin-bottom: 5px;

@@ -22,6 +22,7 @@ import "swiper/swiper-bundle.min.css";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 import "swiper/css/navigation";
 import useSpecificReview from "./useSpecificReview";
+import ImageGallery from "./ImageGallery";
 
 const ReviewsDialog = ({
     open,
@@ -32,6 +33,7 @@ const ReviewsDialog = ({
     imgIndex,
     ReviewsData,
     reviews,
+    inReviewCard = false
 }) => {
     const swiperRef = useRef(null);
     const [selectIndex, setSelectIndex] = useState(imgIndex)
@@ -49,11 +51,11 @@ const ReviewsDialog = ({
     useEffect(() => {
       if (loading) {
         // Handle loading state
-        console.log("loading ...");
+        // console.log("loading ...");
       } else {
         // Handle success state
         setReviewsData(data);
-        console.log(data, "data of hook");
+        // console.log(data, "data of hook");
       }
     }, [data, loading, error,]);
 
@@ -90,7 +92,7 @@ const ReviewsDialog = ({
                     console.log("present");
                     swiperRef.current.swiper.slideTo(selectIndex);
                 } else {
-                    console.log("not present");
+                    // console.log("not present");
                 }
     }, [swiperRef.current?.swiper, selectIndex])
 
@@ -137,48 +139,26 @@ const ReviewsDialog = ({
 
                 {imgGallery == true ? (
                     // ---- image Gallery ---
-                    <div style={{ minHeight: "30rem" }}>
-                        <div className="gallery-container">
-                            {ReviewsData?.data?.map((data, i) => (
-                                <>
-                                {data?.product_media?.map((image, index) => (
-                                <div
-                                    key={image?.id}
-                                    className="images-container"
-                                >
-                                    <div
-                                        onClick={() =>
-                                            getReviewById(
-                                                image?.product_review_id,
-                                                image?.id,
-                                                index
-                                            )
-                                        }
-                                        className="image-item"
-                                        style={{
-                                            backgroundImage: `url(${image?.file_path})`,
-                                        }}
-                                    ></div>
-                                </div>
-                                ))}
-                                </>
-                            ))}
-                        </div>
-                    </div>
+                   <ImageGallery getReviewById={getReviewById} ReviewsData={ReviewsData} />
+
                 ) : (
+                    //  --- image-preview-section
                     <Grid container p={2} rowGap={1} width={"100%"}>
-                        <Grid item xs={12}>
+                        { inReviewCard == true ? "" : <Grid item xs={12}>
                             <Typography
                                 variant="body2"
+                                // fontWeight={"bolder"}
+                                color={"black"}
+                                fontWeight={"bolder"}
                                 onClick={() => setImgGallery(true)}
                                 sx={{ cursor: "pointer" }}
                             >
-                                <IconButton>
+                                <IconButton sx={{color: "black"}}>
                                     <AppsIcon />
                                 </IconButton>
-                                View image gallery{" "}
+                                View Image Gallery{" "}
                             </Typography>
-                        </Grid>
+                        </Grid> }
                         <Grid
                             item
                             md={6}
@@ -222,7 +202,7 @@ const ReviewsDialog = ({
                             </Swiper>
                         </Grid>
 
-                        <Grid item xs={6} pl={2} container>
+                        <Grid item xs={6} pl={2} container height={"30rem"} sx={{overflowY: "auto"}}>
                                 {/* <Grid item xs={12}>
                                     {reviews?.product_detail?.data
                                         ?.filter((review) => review.id === reviewCardId)
@@ -234,11 +214,11 @@ const ReviewsDialog = ({
                                 </Grid> */}
                             <Grid item xs={12}>
                                 
-                                        <div className="my-4 ms-3" >
-                                            <ReviewCard reviewData={reviewsData} isDialog={true} />
-                                        </div>
-                            </Grid>
-                            <Grid className="ms-3" item xs={12} py={1}>
+                                        {/* <div className="my-4 ms-3" > */}
+                                            <ReviewCard reviewData={reviewsData} isDialog={true} index={reviewId} />
+                                        {/* </div> */}
+                            {/* </Grid> */}
+                            {/* <Grid className="ms-3" item xs={12} py={1}> */}
                                 <Typography
                                     py={1}
                                     variant="body1"

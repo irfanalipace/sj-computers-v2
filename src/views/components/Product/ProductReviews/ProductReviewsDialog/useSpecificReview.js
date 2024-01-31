@@ -21,7 +21,7 @@ const useSpecificReview = (id, reviews) => {
           try {
                 const response = await productSpecificDetailsReview(id);
                 
-                console.log(response.data, "response");
+                // console.log(response.data, "response");
                 setData(response.data);
               } catch (error) {
                 setError(error);
