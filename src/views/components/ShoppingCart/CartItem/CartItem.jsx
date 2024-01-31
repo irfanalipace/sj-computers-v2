@@ -81,7 +81,6 @@ export const CartItem = memo(({ cartData }) => {
             );
         }
 
-        // debugger;
         if (!isAuthenticated) {
             let productQuantity = cartData?.product?.quantity + difference;
             let in_stock = productQuantity < 1 ? false : true;
