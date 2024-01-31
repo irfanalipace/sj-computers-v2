@@ -14,7 +14,9 @@ export default function ProductsGrid({
     isLoading,
     apiError,
     smallBtn = false,
+    searchParams,
 }) {
+    console.log("1111 search params: ", searchParams);
     const isShowMore = useSelector((state) => state.products.isShowMore);
     return (
         <div className="products-grid-wrapper">
@@ -23,7 +25,11 @@ export default function ProductsGrid({
                     {products?.map((product, index) => (
                         <Col xs={6} md={4} lg={2} key={"pi-" + index}>
                             {/* <Link to={`${new URL(product?.url || location.href).pathname}`}> */}
-                            <ProductCard product={product} inGrid={true} />
+                            <ProductCard
+                                product={product}
+                                inGrid={true}
+                                searchParams={searchParams}
+                            />
 
                             {/* </Link> */}
                         </Col>

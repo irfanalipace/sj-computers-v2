@@ -15,8 +15,7 @@ const Product = ({ type = "", product, inGrid, searchParams }) => {
         (state) => state.orders.orderEstimatedDelivery
     );
 
-    let productUrl = generatePath(product?.url);
-
+    let productUrl = generatePath(product?.url, searchParams);
     const Label = ({ bgcolor = "", text = "text", secondText = "", color }) => {
         return (
             <Stack

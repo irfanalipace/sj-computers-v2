@@ -209,20 +209,16 @@ export function filterFiles(files, allowedTypes, maxSize = 5) {
 
 // utils/urlHelper.js
 
-export const generatePath = (url) => {
+export const generatePath = (url, searchParams) => {
     if (!url) {
         // Return the default URL when the provided URL is undefined or null
         return "/";
     }
-    return new URL(url).pathname;
-};
 
-function setParamsToURL(url, obj) {
-    const params = new URLSearchParams();
-    for (const key in obj) {
-        params.append(key, obj[key]);
-    }
     const newURL = new URL(url);
-    newURL.search = params.toString();
-    return newURL.href;
-}
+    const params = new URLSearchParams();
+    for (const key in searchParams) {
+        params.append(key, searchParams[key]);
+    }
+    return newURL.pathname + "?" + params.toString();
+};

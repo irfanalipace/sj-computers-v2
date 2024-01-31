@@ -85,6 +85,10 @@ const ProductsList = () => {
                             isLoading={isLoading}
                             apiError={apiError}
                             smallBtn={true}
+                            searchParams={{
+                                redirectedFrom: "Search",
+                                redirectedFromPath: `/products/search?s=${searchString}`,
+                            }}
                         />
                     </>
                 ) : (
