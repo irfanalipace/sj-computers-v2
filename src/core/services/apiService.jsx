@@ -28,14 +28,14 @@ const ApiService = {
     // Setup request interceptor
     setupRequestInterceptor() {
         this.instance.interceptors.request.use(
-            request => {
+            (request) => {
                 const token = getToken();
                 if (token) {
                     request.headers.Authorization = `Bearer ${token}`;
                 }
                 return request;
             },
-            error => {
+            (error) => {
                 return Promise.reject(error);
             }
         );
@@ -43,13 +43,19 @@ const ApiService = {
     // Setup response interceptor
     setupResponseInterceptor() {
         this.instance.interceptors.response.use(
-            response => response,
-            error => {
+            (response) => response,
+            (error) => {
                 if (error.response && error.response.status === 401) {
-                    toast.error("User not authorized. Please login to perform this action");
+                    toast.error(
+                        "User not authorized. Please login to perform this action"
+                    );
                     destroyToken();
-                    typeof this.logout === 'function' ? this.logout() : (window.location.href = '/login');
-                } else if (!ACCEPTED_ERROR_CODES.includes(error?.response?.status)) {
+                    typeof this.logout === "function"
+                        ? this.logout()
+                        : (window.location.href = "/login");
+                } else if (
+                    !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
+                ) {
                     toast.error("Something Went Wrong");
                 } else if (error?.response?.status === 429) {
                     toast.error("Too Many Requests");
@@ -71,9 +77,11 @@ const ApiService = {
      * Set the Authorization header for each request
      */
 
-    // setAuthorization(token) {
-    //     this.instance.defaults.headers.Authorization = `Bearer ${token || getToken()}`;
-    // },
+    setAuthorization(token) {
+        this.instance.defaults.headers.Authorization = `Bearer ${
+            token || getToken()
+        }`;
+    },
 
     /**
      * Set the default Base URL of api requests
@@ -100,7 +108,7 @@ const ApiService = {
      */
 
     get(resource, slug = "", params = {}, baseURL) {
-        // this.setAuthorization();
+        this.setAuthorization();
         return new Promise((resolve, reject) => {
             const url = `${resource}${slug ? `/${slug}` : ""}`;
             if (baseURL) this.setDefaultBaseUrl(baseURL);
