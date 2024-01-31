@@ -44,7 +44,7 @@ const AddToCartCard = ({ product }) => {
         >
             <Grid
                 item
-                lg={gettingProtectionPlan?.plan?.durationInYears ? 7 : 5}
+                lg={gettingProtectionPlan?.plan?.durationInYears ? 6 : 5}
                 style={{ backgroundColor: "#fff", height: "180px" }}
                 mr={5}
                 mb={2}
