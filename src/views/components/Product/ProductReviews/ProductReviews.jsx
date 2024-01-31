@@ -96,7 +96,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
     return (
         <div className="product-reviews-section product-section">
             <div className="product-reviews-container">
-                <div className="row">
+                <div className="row reviews-row">
                     <div className="col-12 col-sm-6 col-md-4">
                         <div style={{ maxWidth: "350px" }}>
                             <RatingDetails
@@ -129,7 +129,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                             </div>
                         </div>
                     </div>
-                    <div className="col-12 col-sm-6 col-md-8">
+                    <div className="col-12 col-sm-6 col-md-8 review-slider-and-slider" >
                         {/* <div className="d-flex justify-content-between mb-3">
                             <h3 className="product-section-heading">
                                 Reviews with images

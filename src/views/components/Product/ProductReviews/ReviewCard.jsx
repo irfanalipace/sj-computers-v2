@@ -76,6 +76,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
                         imgId={imgId}
                         imgIndex={imgIndex}
                         ReviewsData={data}
+                        inReviewCard={true}
                         // reviews={reviews}
                     />
                 <div>
@@ -109,7 +110,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
             <p className="my-2 review-location-time">
                 {formatDateByMonthName(reviewData?.created_at)}
             </p>
-            <p className="verified-review">Verified Purchase</p>
+            { isDialog == true ? "" : <p className="verified-review">Verified Purchase</p>}
             <Box>
                 <Box
                     key={index}
@@ -135,7 +136,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
 
             {/* for hiding images in dialog  */}
             {isDialog === true ? (
-                <div></div>
+                ""
             ) : (
                 <>
                     <Stack
@@ -148,6 +149,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
                         {reviewData?.product_media?.map((item, index) => {
                             return (
                                 <Box
+                                    key={index}
                                     width={"100px"}
                                     height={"100px"}
                                     display={"flex"}
