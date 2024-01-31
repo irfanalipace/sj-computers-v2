@@ -25,13 +25,16 @@ import { useSearchParams } from "react-router-dom";
 import { CLEAR_REVIEW } from "../../../core/store/review/reviewSlice";
 import { useDispatch } from "react-redux";
 import { generatePath } from "../../../core/utils/helpers";
+import { useLocation } from "react-router-dom";
 
 export default function Product() {
     const dispatch = useDispatch();
+    const location = useLocation();
 
     const [searchParams] = useSearchParams();
 
     const { isLoading, product } = useProductData();
+    debugger;
 
     const breadcrumbRoutes = [
         {
@@ -43,6 +46,11 @@ export default function Product() {
             link: generatePath(product?.url),
         },
     ];
+    // useEffect(() => {
+    //     // execute on location change
+    //     dispatch(CLEAR_REVIEW());
+    //     // console.log("Location changed!", location.pathname);
+    // }, [location]);
 
     useEffect(() => {
         return () => {
@@ -53,7 +61,7 @@ export default function Product() {
     return (
         <VisibilityProvider>
             {product?.id || isLoading ? (
-                <div className="product-page ">
+                <div className="product-page">
                     <CategoriesHeader />
                     <div className="product-container container-fluid">
                         <Breadcrumb routes={breadcrumbRoutes} />

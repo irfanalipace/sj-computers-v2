@@ -24,7 +24,7 @@ export const CheckOutCard = ({ product }) => {
     useEffect(() => {
         let item = cart.find((ci) => ci.id === product.id);
         setCartItem(item);
-    }, [cart]);
+    }, [cart, product.id]);
 
     // const handleAddProtection = (name) => {
     //     const matchingEnum = Object.values(PLAN_ENUM).find(
