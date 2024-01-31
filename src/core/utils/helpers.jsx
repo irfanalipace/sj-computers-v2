@@ -74,11 +74,6 @@ export function formatDateByMonthName(inputDate) {
     return formattedDate;
 }
 
-// Example usage
-const inputDate = "2024-01-15"; // Assuming the input date is in the format "YYYY-MM-DD"
-const formattedDate = formatDate(inputDate);
-console.log(formattedDate); // Output: "January 15, 2024"
-
 export const prettifyError = (error) => {
     let prettifiedError = "";
 
