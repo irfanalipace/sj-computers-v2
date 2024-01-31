@@ -88,7 +88,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
     }, [filterBy]);
 
     useEffect(() => {
-        if (!reviewState.reviews?.product_detail) {
+        if (!reviewState.reviews?.product_review) {
             getProductReviews(productId, 1, reviewPerPage);
         }
     }, []);
@@ -140,7 +140,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                         </div> */}
 
                         <ReviewImages reviews={reviews} productId={productId} ReviewsData={ReviewsData}/>
-                        {reviews?.product_detail?.data.length === 0 &&
+                        {reviews?.product_review?.data.length === 0 &&
                             !reviewLoading && (
                                 <Typography fontWeight={600}>
                                     No customer reviews
@@ -208,11 +208,11 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                             )
                         )}
 
-                        {!!reviews?.product_detail?.data?.length && (
+                        {!!reviews?.product_review?.data?.length && (
                             <Pagination
                                 onChange={handlePageChange}
                                 count={Math.ceil(
-                                    reviews.product_detail.total / reviewPerPage
+                                    reviews?.product_review?.total / reviewPerPage
                                 )}
                             />
                         )}
