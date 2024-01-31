@@ -206,15 +206,6 @@ const ReviewsDialog = ({
                             height={"30rem"}
                             sx={{ overflowY: "auto" }}
                         >
-                            {/* <Grid item xs={12}>
-                                    {reviews?.product_detail?.data
-                                        ?.filter((review) => review.id === reviewCardId)
-                                        .map((filteredReview, index) => (
-                                            <div className="my-4 ms-3" key={index}>
-                                                <ReviewCard reviewData={filteredReview} isDialog={true} />
-                                            </div>
-                                        ))}
-                                </Grid> */}
                             <Grid item xs={12}>
                                 {/* <div className="my-4 ms-3" > */}
                                 <ReviewCard
