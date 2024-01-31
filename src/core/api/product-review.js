@@ -2,7 +2,7 @@ import ApiService from "@services/apiService";
 
 export function productReviewsApi(id, page = 1, per_page = 10) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`get-product-details`, id, { per_page, page })
+        ApiService.get(`get-product-reviews`, id, { per_page, page })
             .then(async (response) => {
                 console.print(
                     "file: products.js | products| response",
@@ -41,7 +41,7 @@ export function allReviewImagesApi(id) {
                     "file: products.js | allReviewImagesApi| response",
                     response
                 );
-                resolve(response);
+                resolve(response)
             })
             .catch((e) => {
                 console.print("Console Log: : error products", e);
@@ -52,7 +52,7 @@ export function allReviewImagesApi(id) {
 
 export function productSpecificDetailsReview(id) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/get-product-details`, id)
+        ApiService.get(`/get-specific-review`,id)
             .then((response) => {
                 console.print(
                     "file: products.js | productSpecificDetailsReview| response",
@@ -83,3 +83,4 @@ export function reviewReportHelpfullApi(data) {
             });
     });
 }
+
