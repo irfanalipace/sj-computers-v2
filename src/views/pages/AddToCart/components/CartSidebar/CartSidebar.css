@@ -1,7 +1,8 @@
 .cart-side-bar-container {
     height: 100%;
     background-color: #fff;
-    margin-left: 5px;
+    margin-left: 15px;
+    width: 220px;
 }
 .cart-side-bar-container .cart-side-bar-inner {
     border-bottom: 1px solid lightgray;
@@ -45,6 +46,9 @@
     background-color: #28a343;
 }
 @media screen and (max-width: 1200px) {
+    .cart-side-bar-container {
+        width: 95%;
+    }
     .cart-side-bar-container .cart-side-bar-inner {
         align-items: flex-start;
     }

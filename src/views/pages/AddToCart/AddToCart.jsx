@@ -8,6 +8,7 @@ import { Grid } from "@mui/material";
 import SimilarInterestSlider from "./components/SimilarPurchaseCart/SimilarInterestSlider";
 import CartSideBar from "./components/CartSidebar/CartSideBar";
 import { useSelector } from "react-redux";
+import "./AddToCart.css";
 
 const AddToCart = () => {
     const { productId } = useParams();
@@ -31,15 +32,19 @@ const AddToCart = () => {
 
     return cart.length > 0 ? (
         <div style={{ backgroundColor: "#EAEDED" }}>
-            <Grid container>
-                <Grid item lg={11} className="hidden-on-mobile hidden-on-tab">
+            <Grid container direction="row-reverse">
+                <Grid item lg={2}>
+                    <CartSideBar />
+                </Grid>
+                <Grid
+                    item
+                    lg={10}
+                    className="hidden-on-mobile hidden-on-tab cart-with-protection"
+                >
                     <AddToCartCard product={product} />
                     {/* <SimilarItemsSlider products={similarProducts} /> */}
                     <SimilarPurchaseCart products={featuredProducts} />
                     <SimilarInterestSlider products={featuredProducts} />
-                </Grid>
-                <Grid item lg={1}>
-                    <CartSideBar />
                 </Grid>
             </Grid>
             <div className="hidden-on-desktop">

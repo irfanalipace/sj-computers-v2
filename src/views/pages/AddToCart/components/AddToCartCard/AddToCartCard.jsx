@@ -5,6 +5,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const AddToCartCard = ({ product }) => {
     const totalCart = useSelector((state) => state?.cart?.details?.total);
@@ -23,10 +24,15 @@ const AddToCartCard = ({ product }) => {
         }
     }
 
-    const totalItems = useSelector((state) => state?.cart?.cart.length);
+    const totalItems = useSelector((state) => state?.cart?.cart);
     const totalCartString = totalCart?.toString();
     const { before, after } = splitStringAtPeriod(totalCartString);
     const navigate = useNavigate();
+    const { productId } = useParams();
+    const gettingProtectionPlan = totalItems?.find(
+        (item) => item?.product?.asin == productId
+    );
+    console.log("DFSDF", gettingProtectionPlan);
     return (
         <Grid
             container
@@ -38,7 +44,7 @@ const AddToCartCard = ({ product }) => {
         >
             <Grid
                 item
-                lg={4}
+                lg={gettingProtectionPlan?.plan?.durationInYears ? 7 : 5}
                 style={{ backgroundColor: "#fff", height: "180px" }}
                 mr={5}
                 mb={2}
@@ -46,10 +52,10 @@ const AddToCartCard = ({ product }) => {
                 <Grid
                     container
                     direction="row"
-                    justifyContent="center"
+                    justifyContent="space-around"
                     alignItems="center"
                 >
-                    <Grid item mt={3}>
+                    <Grid item mt={3} lg={4} pl={5}>
                         <div className="image-containerer">
                             <LazyLoadImage
                                 width={"100%"}
@@ -63,25 +69,43 @@ const AddToCartCard = ({ product }) => {
                             />
                         </div>
                     </Grid>
-                    <Grid item fontSize={20} mr={4}></Grid>
-                    <Grid item mr={4}>
-                        {/* <div className="protection-wrapper">
-                            SJ Computer
-                            <br />
-                            <span style={{ color: "#318243" }}>Protection</span>
-                            <br />
-                            <br />
-                            <span style={{ color: "#318243" }}>3 Year</span>
-                        </div> */}
-                    </Grid>
-                    <Grid item mr={1}></Grid>
-                    <Grid item sx={{ fontSize: "16px", fontWeight: 600 }}>
+                    {gettingProtectionPlan?.plan?.durationInYears ? (
+                        <>
+                            <Grid item>+</Grid>
+                            <Grid item lg={2}>
+                                <div className="protection-wrapper">
+                                    SJ Computer
+                                    <br />
+                                    <span style={{ color: "#318243" }}>
+                                        Protection
+                                    </span>
+                                    <br />
+                                    <br />
+                                    <span style={{ color: "#318243" }}>
+                                        {
+                                            gettingProtectionPlan?.plan
+                                                ?.durationInYears
+                                        }
+                                        &nbsp;Years
+                                    </span>
+                                </div>
+                            </Grid>
+                        </>
+                    ) : (
+                        <></>
+                    )}
+                    <Grid
+                        item
+                        lg={
+                            gettingProtectionPlan?.plan?.durationInYears ? 4 : 6
+                        }
+                    >
                         <CheckCircleRoundedIcon sx={{ color: "#318243" }} />
-                        &ensp;Added to Cart{" "}
+                        &ensp;<b style={{ fontWeight: 600 }}>Added to Cart</b>
                         <h4
                             style={{
                                 marginTop: "8px",
-                                marginLeft: "30px",
+                                // marginLeft: "30px",
                                 fontSize: "12px",
                                 fontWeight: 600,
                             }}
@@ -96,23 +120,30 @@ const AddToCartCard = ({ product }) => {
                 container
                 direction="row"
                 justifyContent="space-evenly"
-                lg={4}
+                lg={gettingProtectionPlan?.plan?.durationInYears ? 3 : 5}
                 style={{ backgroundColor: "#fff" }}
                 pt={4}
                 pb={4}
                 mb={2}
             >
-                <Grid item lg={6} mt={6}>
-                    <p style={{ fontSize: "11px" }}>
-                        <span style={{ color: "#318243", lineHeight: "16px" }}>
-                            Your Order qualifies for FREE Shipping.
-                        </span>
-                        <br />
-                        Choose this option at checkout.{" "}
-                        <Link> see details</Link>
-                    </p>
-                </Grid>
-                <Grid item lg={5}>
+                {!gettingProtectionPlan?.plan?.durationInYears && (
+                    <Grid item lg={6} mt={6}>
+                        <p style={{ fontSize: "11px" }}>
+                            <span
+                                style={{ color: "#318243", lineHeight: "16px" }}
+                            >
+                                Your Order qualifies for FREE Shipping.
+                            </span>
+                            <br />
+                            Choose this option at checkout.{" "}
+                            <Link> see details</Link>
+                        </p>
+                    </Grid>
+                )}
+                <Grid
+                    item
+                    lg={!gettingProtectionPlan?.plan?.durationInYears ? 5 : 10}
+                >
                     <p className="cart-total mb-4">
                         Cart Subtotal:&nbsp;
                         <sup style={{ fontSize: "10px" }}>$</sup>
@@ -123,7 +154,7 @@ const AddToCartCard = ({ product }) => {
                         className="proceed-to-checkout mb-2"
                         onClick={() => navigate("/checkout")}
                     >
-                        Proceed to checkout ({totalItems} item)
+                        Proceed to checkout ({totalItems?.length} item)
                     </button>
                     <button
                         className="go-to-cart"
