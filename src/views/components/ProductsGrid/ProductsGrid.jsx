@@ -16,7 +16,6 @@ export default function ProductsGrid({
     smallBtn = false,
     searchParams,
 }) {
-    console.log("1111 search params: ", searchParams);
     const isShowMore = useSelector((state) => state.products.isShowMore);
     return (
         <div className="products-grid-wrapper">
