@@ -507,7 +507,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                     htmlFor={"permanent_address"}
                                     className="pb-0"
                                 >
-                                    Make this my address
+                                    Use as my default address.
                                 </label>
                             </div>
                         )}
