@@ -147,7 +147,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                 </Typography>
                             )}
 
-                        {!!reviews?.product_detail?.data.length && (
+                        {!!reviews?.product_review?.data.length && (
                             <>
                                 <div
                                     id="reviewSection"
@@ -190,7 +190,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                 />
                             </Box>
                         ) : (
-                            reviews.product_detail?.data?.map(
+                            reviews?.product_review?.data?.map(
                                 (review, index) => (
                                     <div
                                         key={"review-" + review.id}
