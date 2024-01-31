@@ -132,7 +132,7 @@ const ApiService = {
      */
 
     post(resource, params = {}, baseURL, token, isFormData = false) {
-        // this.setAuthorization(token);
+        this.setAuthorization(token);
         return new Promise((resolve, reject) => {
             if (baseURL) this.setDefaultBaseUrl(baseURL);
             const headers = isFormData
@@ -158,7 +158,6 @@ const ApiService = {
      */
 
     put(resource, params) {
-        // this.setAuthorization();
         return this.instance
             .put(`${resource}`, params)
             .then((res) => {
@@ -176,7 +175,6 @@ const ApiService = {
      */
 
     delete(resource) {
-        // this.setAuthorization();
         return this.instance
             .delete(resource)
             .then((res) => {
