@@ -29,39 +29,18 @@ import { generatePath } from "../../../core/utils/helpers";
 export default function Product() {
     const dispatch = useDispatch();
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
 
     const { isLoading, product } = useProductData();
 
-    // const redirct = (productPath) => {
-    //     const productPath = generatePath(productPath);
-
-    //     const url = productPath;
-    //     url.searchParams.set("breadcrumb", "Product");
-    //     return window.location.productPath;
-    // };
-
-    const redirct = (productPath) => {
-        const url = generatePath(productPath);
-        console.log("Generated URL:", url);
-
-        if (url.searchParams) {
-            url.searchParams.set("breadcrumb", "Product");
-            console.log("Modified URL:", url.toString());
-            window.location.href = url.toString();
-        } else {
-            console.error("URL does not have searchParams property.");
-        }
-    };
-
     const breadcrumbRoutes = [
         {
-            label: "Home",
-            link: "/",
+            label: searchParams.get("redirectedFrom") || "Home",
+            link: searchParams.get("redirectedFromPath") || "/",
         },
         {
             label: "Product",
-            link: redirct(product?.url),
+            link: generatePath(product?.url),
         },
     ];
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import "./Blog.css";
+import "./BlogDetails.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
@@ -9,7 +9,7 @@ import {
     blogSlugApiblogDetails,
     getBlogsHeaderPagesApi,
     // getBlogCategories,
-} from "../../../core/api/blogs";
+} from "@api/blogs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
@@ -19,7 +19,7 @@ import {
     faInstagram,
     faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
-import NotFound from "../../pages/NotFound/NotFound";
+import NotFound from "@pages/NotFound/NotFound";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 // import smimage from "@images/blog/smallimage.png";
@@ -37,7 +37,7 @@ const HeadereLinks = [
     // { path: "/", title: "Subscribe" },
 ];
 
-const Blog = () => {
+const BlogDetails = () => {
     const location = useLocation();
     const { blogList } = location.state || {};
 
@@ -402,7 +402,7 @@ const Blog = () => {
                                                             )}
                                                             <div>
                                                                 <Link
-                                                                    to="#"
+                                                                    to="javascript:void(0)"
                                                                     onClick={(
                                                                         event
                                                                     ) =>
@@ -828,4 +828,4 @@ const Blog = () => {
     );
 };
 
-export default Blog;
+export default BlogDetails;

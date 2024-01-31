@@ -1,27 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "./SingleBlog.css";
+import "./Blogs.css";
 import blogmeetingdesktop from "@images/blog/Refurbished-Laptops-desktop.webp";
 import blogmeetingmobile from "@images/blog/Refurbished-Laptops-mobile.webp";
-import smimage from "@images/blog/smallimage.png";
-import book from "@images/blog/blogbook.png";
 
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-import { Link, useNavigate } from "react-router-dom";
-import {
-    getBlogsPagesApi,
-    blogSlugApiblogDetails,
-} from "../../../../core/api/blogs";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { getBlogsPagesApi } from "@api/blogs";
+import BlogGrid from "@components/Blog/BlogGrid";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-
-import "./SingleBlog.css";
-import Blog from "../Blog";
-import BlogsDetails from "../../../pages/Blog/BlogsDetails";
-import BlogPage from "../../../pages/Blog/BlogPage";
-import BlogGrid from "../BlogGrid";
 
 const SingleBlog = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -144,9 +130,9 @@ const SingleBlog = () => {
                             <div className="mid-graph-pargarph-page-datap-data blog-dynamic-style-heading-data1">
                                 <div
                                     className="content-image-data-paragrap"
-                                // dangerouslySetInnerHTML={{
-                                // __html: singleblog.content
-                                // }}
+                                    // dangerouslySetInnerHTML={{
+                                    // __html: singleblog.content
+                                    // }}
                                 />
                                 <span></span>
                             </div>
@@ -170,7 +156,6 @@ const SingleBlog = () => {
                 </div>
             </div>
 
-
             {blogs.length > 0 && (
                 <div className="container">
                     <div className="trending-blog-filter-data">
@@ -188,7 +173,6 @@ const SingleBlog = () => {
                     </div>
                 </div>
             )}
-
 
             {isLoading ? (
                 <div

@@ -4,10 +4,8 @@ let searchParam = params.get("s");
 const initialState = {
     products: [],
     searchString: searchParam,
-    isSearchedProducts: false,
     isShowMore: false,
     filtersArray: [],
-    similarProducts: [],
     isFiltering: false,
     selectedCategory: null,
     apiError: false,
@@ -58,15 +56,6 @@ const productSlice = createSlice({
             state.isLoading = false;
             state.isFiltering = false;
             state.isShowMore = false;
-        },
-
-        SEARCH_PRODUCTS: (state, action) => {
-            // if (state.currentPage === 1)
-            state.products = [...action.payload.data];
-            // else state.products = [...state.products, ...action.payload.data];
-            state.currentPage = state.currentPage + 1;
-            state.searchString = action.payload.searchString;
-            state.isLoading = false;
         },
 
         FILTER_PRODUCTS: (state, action) => {
@@ -127,7 +116,6 @@ export const {
     SET_SELECTED_CATEGORY,
     SET_FILTERING_PRODUCTS,
     SET_IS_SHOW_MORE,
-    SEARCH_PRODUCTS,
     SET_SEARCH_STRING,
     FILTER_PRODUCTS,
     CLEAR_PRODUCTS,

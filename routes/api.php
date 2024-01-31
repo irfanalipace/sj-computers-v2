@@ -268,7 +268,8 @@ Route::get('cancel', [PayPalController::class, 'paypalCancel'])->name('cancel');
 /*
     Get all reviews
 */
-Route::get('get-product-reviews',[ReviewController::class,'index']);
+Route::get('get-all-reviews',[ReviewController::class,'index']);
 Route::get('get-protection-plans',[ProductController::class,'getProtectivePlan']);
-Route::get('get-product-details/{product_id}',[ReviewController::class,'getProductDetail']);
+Route::get('get-product-reviews/{product_id}',[ReviewController::class,'getProductDetail']);
 Route::get('get-review-media/{product_id}',[ReviewController::class,'getReviewImage']);
+Route::get('get-specific-review/{id}',[ReviewController::class,'getSpecificReview']);

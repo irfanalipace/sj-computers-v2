@@ -4,7 +4,7 @@ import ApiService from "@services/apiService";
 
 const token = getToken();
 const user = getUser();
-token && ApiService.setAuthorization(token);
+// token && ApiService.setAuthorization(token);
 const urlParams = new URLSearchParams(window.location.search);
 const loginStage = urlParams.get("loginStage");
 

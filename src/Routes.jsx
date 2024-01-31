@@ -32,12 +32,9 @@ const Contact = React.lazy(() =>
 );
 const Policy = React.lazy(() => import("@pages/Policy/Policy"));
 const SkuPage = React.lazy(() => import("@pages/SKUTables/SkuPage"));
-const BlogPage = React.lazy(() => import("@pages/Blog/BlogPage"));
 
-const AboutPage = React.lazy(() => import("@pages/About/AboutPage"));
-const WhatWeDoPage = React.lazy(() => import("@pages/WhatWeDo/WhatWeDoPage"));
-const BlogSingle = React.lazy(() => import("@pages/Blog/BlogSingle"));
-const BlogsDetails = React.lazy(() => import("@pages/Blog/BlogsDetails"));
+const BlogList = React.lazy(() => import("@pages/Blog/BlogsList"));
+const BlogDetails = React.lazy(() => import("@pages/Blog/BlogDetails"));
 import NotFound from "@pages/NotFound/NotFound";
 
 import Loader from "@common/LoaderComponent/LoaderComponent";
@@ -47,9 +44,7 @@ const AddToCart = React.lazy(() => import("./views/pages/AddToCart/AddToCart"));
 const ProductNewReviews = React.lazy(() =>
     import("./views/components/Product/ProductReviews/ProductNewReviews")
 );
-const CategoryBlogs = React.lazy(() =>
-    import("@components/Blog/CategoryBlogs")
-);
+const CategoryBlogs = React.lazy(() => import("@pages/Blog/CategoryBlogs"));
 const ApplyNow = React.lazy(() => import("./views/pages/Careers/ApplyNow"));
 // import Layout from "./views/pages/PageLayout/Layout";
 
@@ -250,7 +245,7 @@ const Router = () => {
             path: "/:blogslug",
             element: (
                 <Suspense>
-                    <BlogsDetails />
+                    <BlogDetails />
                 </Suspense>
             ),
         },
@@ -259,7 +254,7 @@ const Router = () => {
             path: "/blogs",
             element: (
                 <PageWrapper>
-                    <BlogSingle />
+                    <BlogList />
                 </PageWrapper>
             ),
         },

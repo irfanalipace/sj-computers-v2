@@ -73,7 +73,7 @@ class ReviewService
 
         $stats = ProductStatistic::where('product_id',$product_id)->select('product_id','statistics')->first();
         $details = [
-            'product_detail' => $review,
+            'product_review' => $review,
             'product_stats' => $stats
         ];
 

@@ -20,7 +20,49 @@ const ApiService = {
                 import.meta.env.VITE_APP_API_BASE_URL;
             console.log("api url: ", import.meta.env.VITE_APP_API_BASE_URL);
             this.instance.defaults.headers["content-type"] = "application/json";
+
+            this.setupResponseInterceptor(); // Setup response interceptor
+            this.setupRequestInterceptor(); // Setup request interceptor
         }
+    },
+    // Setup request interceptor
+    setupRequestInterceptor() {
+        this.instance.interceptors.request.use(
+            (request) => {
+                const token = getToken();
+                if (token) {
+                    request.headers.Authorization = `Bearer ${token}`;
+                }
+                return request;
+            },
+            (error) => {
+                return Promise.reject(error);
+            }
+        );
+    },
+    // Setup response interceptor
+    setupResponseInterceptor() {
+        this.instance.interceptors.response.use(
+            (response) => response,
+            (error) => {
+                if (error.response && error.response.status === 401) {
+                    toast.error(
+                        "User not authorized. Please login to perform this action"
+                    );
+                    destroyToken();
+                    typeof this.logout === "function"
+                        ? this.logout()
+                        : (window.location.href = "/login");
+                } else if (
+                    !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
+                ) {
+                    toast.error("Something Went Wrong");
+                } else if (error?.response?.status === 429) {
+                    toast.error("Too Many Requests");
+                }
+                return Promise.reject(error);
+            }
+        );
     },
 
     /**
@@ -76,20 +118,7 @@ const ApiService = {
                     resolve(res.data);
                 })
                 .catch((error) => {
-                    if (error?.response?.status === 401) {
-                        destroyToken();
-                        toast.error(
-                            "User not authorized. Please login to perform this action"
-                        );
-                        typeof this.logout === "function" && this.logout();
-                    } else if (
-                        !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
-                    ) {
-                        toast.error("Something Went Wrong");
-                    } else if (error?.response?.status === 429)
-                        toast.error("Too Many Requests");
                     reject(error?.response);
-                    console.log(error?.response, "abcd ");
                 });
             if (baseURL) this.setDefaultBaseUrl();
         });
@@ -115,19 +144,6 @@ const ApiService = {
                     resolve(res.data);
                 })
                 .catch((error) => {
-                    console.print("error status: ", error?.response?.status);
-                    if (error?.response?.status === 401) {
-                        destroyToken();
-                        toast.error(
-                            "User not authorized. Please login to perform this action"
-                        );
-                        typeof this.logout === "function" && this.logout();
-                    } else if (
-                        !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
-                    ) {
-                        toast.error("Something Went Wrong");
-                    } else if (error?.response?.status === 429)
-                        toast.error("Too Many Requests");
                     reject(error?.response);
                 });
             if (baseURL) this.setDefaultBaseUrl();
@@ -142,25 +158,12 @@ const ApiService = {
      */
 
     put(resource, params) {
-        this.setAuthorization();
         return this.instance
             .put(`${resource}`, params)
             .then((res) => {
                 resolve(res.data);
             })
-            .catch((error, status) => {
-                if (error?.response?.status === 401) {
-                    destroyToken();
-                    toast.error(
-                        "User not authorized. Please login to perform this action"
-                    );
-                    typeof this.logout === "function" && this.logout();
-                } else if (
-                    !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
-                ) {
-                    toast.error("Something Went Wrong");
-                } else if (error?.response?.status === 429)
-                    toast.error("Too Many Requests");
+            .catch((error) => {
                 reject(error?.response);
             });
     },
@@ -172,25 +175,12 @@ const ApiService = {
      */
 
     delete(resource) {
-        this.setAuthorization();
         return this.instance
             .delete(resource)
             .then((res) => {
                 resolve(res.data);
             })
-            .catch((error, status) => {
-                if (error?.response?.status === 401) {
-                    destroyToken();
-                    typeof this.logout === "function" && this.logout();
-                    toast.error(
-                        "User not authorized. Please login to perform this action"
-                    );
-                } else if (
-                    !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
-                ) {
-                    toast.error("Something Went Wrong");
-                } else if (error?.response?.status === 429)
-                    toast.error("Too Many Requests");
+            .catch((error) => {
                 reject(error?.response);
             });
     },

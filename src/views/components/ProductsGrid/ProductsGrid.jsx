@@ -14,6 +14,7 @@ export default function ProductsGrid({
     isLoading,
     apiError,
     smallBtn = false,
+    searchParams,
 }) {
     const isShowMore = useSelector((state) => state.products.isShowMore);
     return (
@@ -23,7 +24,11 @@ export default function ProductsGrid({
                     {products?.map((product, index) => (
                         <Col xs={6} md={4} lg={2} key={"pi-" + index}>
                             {/* <Link to={`${new URL(product?.url || location.href).pathname}`}> */}
-                            <ProductCard product={product} inGrid={true} />
+                            <ProductCard
+                                product={product}
+                                inGrid={true}
+                                searchParams={searchParams}
+                            />
 
                             {/* </Link> */}
                         </Col>

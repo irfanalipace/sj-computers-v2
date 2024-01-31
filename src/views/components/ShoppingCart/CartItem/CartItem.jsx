@@ -91,7 +91,10 @@ export const CartItem = memo(({ cartData }) => {
             ? dispatch(updateQuantity({ cartItem }))
             : dispatch(updateLocalQuantity({ cartItem, cartDetails }));
     };
-
+    const searchParams = {
+        redirectedFrom: "Shopping Cart",
+        redirectedFromPath: `/cart`,
+    };
     return (
         <div>
             <div className="row">
@@ -110,7 +113,10 @@ export const CartItem = memo(({ cartData }) => {
                             <div className="col-md-10">
                                 <Link
                                     className="items-card-name"
-                                    to={generatePath(cartData?.product?.url)}
+                                    to={generatePath(
+                                        cartData?.product?.url,
+                                        searchParams
+                                    )}
                                 >
                                     <strong className="item-details">
                                         {cartData?.product?.name}

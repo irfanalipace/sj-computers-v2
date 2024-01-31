@@ -33,7 +33,7 @@ export default function ReportDialog(props) {
         const data = {
             product_review_id: id,
             button_type: "report",
-            reveiw_report: allSelectedCheckboxes,
+            review_report: allSelectedCheckboxes,
         };
 
         try {

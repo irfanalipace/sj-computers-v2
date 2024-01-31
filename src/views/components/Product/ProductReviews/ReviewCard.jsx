@@ -11,10 +11,15 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ReportDialog from "./ReportReviewDialog";
 import { reviewReportHelpfullApi } from "../../../../core/api/product-review";
 import ReviewsDialog from "./ProductReviewsDialog/ReviewsDialog";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
     const [expandedReviews, setExpandedReviews] = useState([]);
     const [open, setOpen] = React.useState(false);
+
+    const isAuthenticated = useSelector((slice) => slice.auth.isAuthenticated);
+    const navigate = useNavigate();
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -35,20 +40,25 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
     const [reviewId, setReviewId] = useState({});
     const [imgId, setImgId] = useState("");
     const [imgIndex, setImgIndex] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const handleOpenDialog = (reviewId, imgId, index) => {
         setDialogOpen(true);
         setReviewId(reviewId);
         setImgId(imgId);
-        setImgIndex(index)
+        setImgIndex(index);
         // console.log(reviews, "reviews");
     };
 
     const handleDialogClose = () => {
         setDialogOpen(false);
     };
-    
+
     const handleHelpfull = async () => {
+        if (!isAuthenticated) {
+            navigate("/login?loginStage=1");
+            return;
+        }
         const data = {
             product_review_id: reviewData?.id,
             button_type: "helpful",
@@ -56,19 +66,20 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
         };
 
         try {
-            // setLoading(true);
-            // const res = await reviewReportHelpfullApi(data);
-            // updateReveiw(reviewData.id);
+            setLoading(true);
+            const res = await reviewReportHelpfullApi(data);
+            updateReveiw(reviewData.id);
         } catch (error) {
         } finally {
-            // setLoading(false);
+            setLoading(false);
         }
     };
 
     return (
         <div className="review-card mb-2">
             <div className="d-flex align-items-center">
-            <ReviewsDialog
+                {open && (
+                    <ReviewsDialog
                         open={dialogOpen}
                         handleOpenDialog={handleOpenDialog}
                         handleClose={handleDialogClose}
@@ -76,8 +87,10 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
                         imgId={imgId}
                         imgIndex={imgIndex}
                         ReviewsData={data}
+                        inReviewCard={true}
                         // reviews={reviews}
                     />
+                )}
                 <div>
                     {reviewData?.user?.profile_pic ? (
                         <img
@@ -89,12 +102,14 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
                     )}
                 </div>
                 <p className="mb-0 ms-2 review-author ps-1">
-                    {reviewData.user?.name || reviewData?.author}
+                    {reviewData?.user?.name || reviewData?.author}
                 </p>
             </div>
             <div className="d-md-flex align-items-center my-2">
                 <StarRatings
-                    rating={ reviewData?.rating ? parseFloat(reviewData?.rating) : 0 }
+                    rating={
+                        reviewData?.rating ? parseFloat(reviewData?.rating) : 0
+                    }
                     starRatedColor="rgb(232, 126, 36)"
                     numberOfStars={5}
                     name="rating"
@@ -109,7 +124,11 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
             <p className="my-2 review-location-time">
                 {formatDateByMonthName(reviewData?.created_at)}
             </p>
-            <p className="verified-review">Verified Purchase</p>
+            {isDialog == true ? (
+                ""
+            ) : (
+                <p className="verified-review">Verified Purchase</p>
+            )}
             <Box>
                 <Box
                     key={index}
@@ -135,7 +154,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
 
             {/* for hiding images in dialog  */}
             {isDialog === true ? (
-                <div></div>
+                ""
             ) : (
                 <>
                     <Stack
@@ -148,6 +167,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
                         {reviewData?.product_media?.map((item, index) => {
                             return (
                                 <Box
+                                    key={index}
                                     width={"100px"}
                                     height={"100px"}
                                     display={"flex"}
@@ -155,7 +175,13 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
                                     alignItems={"center"}
                                     p={1}
                                     sx={{ border: "1px solid lightgray" }}
-                                    onClick={() => handleOpenDialog(item?.product_review_id, item?.id, index)}
+                                    onClick={() =>
+                                        handleOpenDialog(
+                                            item?.product_review_id,
+                                            item?.id,
+                                            index
+                                        )
+                                    }
                                 >
                                     <LazyLoadImage
                                         width={"90px"}
@@ -185,7 +211,13 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
                     </Typography>
                 </Stack> */}
                         <button
-                            onClick={() => setOpen(true)}
+                            onClick={() => {
+                                if (!isAuthenticated) {
+                                    navigate("/login?loginStage=1");
+                                    return;
+                                }
+                                setOpen(true);
+                            }}
                             className="review-report-btn"
                         >
                             Report

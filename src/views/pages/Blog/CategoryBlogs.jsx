@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "../Blog/SingleBlog/SingleBlog.css";
 import blogmeetingdesktop from "@images/blog/Refurbished-Laptops-desktop.webp";
 import blogmeetingmobile from "@images/blog/Refurbished-Laptops-mobile.webp";
-import smimage from "@images/blog/smallimage.png";
-import book from "@images/blog/blogbook.png";
-import { useSelector } from "react-redux";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-import { Link, useNavigate } from "react-router-dom";
-import { getBlogsPagesApi, getCategoryApi } from "../../../core/api/blogs";
-import { categoryApi } from "../../../core/api/category";
+import { useNavigate } from "react-router-dom";
+import { getCategoryApi } from "@api/blogs";
+import { categoryApi } from "@api/category";
 import { useParams } from "react-router-dom";
+import BlogGrid from "@components/Blog/BlogGrid";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-import BlogGrid from "./BlogGrid";
+import "./Blogs.css";
 
 const CategoryBlogs = () => {
     const { categoryslug } = useParams();

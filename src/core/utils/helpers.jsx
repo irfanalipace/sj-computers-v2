@@ -74,11 +74,6 @@ export function formatDateByMonthName(inputDate) {
     return formattedDate;
 }
 
-// Example usage
-const inputDate = "2024-01-15"; // Assuming the input date is in the format "YYYY-MM-DD"
-const formattedDate = formatDate(inputDate);
-console.log(formattedDate); // Output: "January 15, 2024"
-
 export const prettifyError = (error) => {
     let prettifiedError = "";
 
@@ -207,14 +202,18 @@ export function filterFiles(files, allowedTypes, maxSize = 5) {
     };
 }
 
-
 // utils/urlHelper.js
 
-export const generatePath = (url) => {
+export const generatePath = (url, searchParams) => {
     if (!url) {
-      // Return the default URL when the provided URL is undefined or null
-      return '/';
+        // Return the default URL when the provided URL is undefined or null
+        return "/";
     }
-    return new URL(url).pathname;
-  };
-  
+
+    const newURL = new URL(url);
+    const params = new URLSearchParams();
+    for (const key in searchParams) {
+        params.append(key, searchParams[key]);
+    }
+    return newURL.pathname + "?" + params.toString();
+};

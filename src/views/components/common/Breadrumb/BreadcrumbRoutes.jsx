@@ -7,5 +7,3 @@ export const breadcrumbRoutes = {
     "/account/update-address": "Shipping Address",
     //"/add-review/:productId": "Your Products",
 };
-
-

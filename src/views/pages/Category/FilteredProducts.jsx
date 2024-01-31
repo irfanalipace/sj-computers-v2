@@ -21,9 +21,12 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
         filtersArray,
     } = useSelector((state) => state.products);
 
-    const prod = useSelector((state) => state.products);
-
     const [mounted, setMounted] = useState(false);
+
+    const productParamsRef = {
+        redirectedFrom: category?.name,
+        redirectedFromPath: `/category/${category?.slug}`,
+    }
 
     const dispatch = useDispatch();
 
@@ -35,17 +38,14 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     };
 
     const init = () => {
-        // dispatch(SET_SEARCH_STRING(""));
         dispatch(SET_SELECTED_CATEGORY(null));
         dispatch(CLEAR_ALL_PRODUCTS());
-        // dispatch(filterProducts(filterObject));
         setMounted(true);
     };
 
     useEffect(() => {
         init();
         return () => {
-            // dispatch(SET_SEARCH_STRING(""));
             dispatch(CLEAR_ALL_PRODUCTS());
         };
     }, []);
@@ -74,7 +74,6 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                 dispatch(filterProducts(filterObject));
             }
         }
-        // }, [searchString, filtersArray]);
     }, [filtersArray]);
 
     useEffect(() => {
@@ -116,6 +115,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                         handleClick={handleClick}
                         isLoading={isLoading}
                         apiError={apiError}
+                        searchParams={productParamsRef}
                     />
                 </>
             ) : (
