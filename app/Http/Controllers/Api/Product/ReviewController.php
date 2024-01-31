@@ -139,6 +139,21 @@ class ReviewController extends BaseController
         }
     }
 
+    public function getSpecificReview($review_id)
+    {
+        try{       
+            $getProductReview = $this->service->specificProductReview($review_id);
+
+            return $this->sendResponse($getProductReview,'Successfully fetched detail of product review.');
+        } catch(ModelNotFoundException $e) {
+            DB::rollBack();
+            return $this->sendError('error','Product Review not found.');
+        } catch(Exception $e) {
+            DB::rollBack();
+            return $this->sendError('error','Something went wrong ' . $e->getMessage());
+        }
+    }
+
 
     public function storeReviewReport(StoreReviewReportRequest $request)
     {
