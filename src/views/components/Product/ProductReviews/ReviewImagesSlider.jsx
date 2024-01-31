@@ -5,8 +5,8 @@ import "swiper/swiper-bundle.min.css";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 import "swiper/css/navigation";
 import ReviewsDialog from "./ProductReviewsDialog/ReviewsDialog";
-import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
-import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
+import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -22,7 +22,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
         setOpen(true);
         setReviewId(reviewId);
         setImgId(imgId);
-        setImgIndex(index)
+        setImgIndex(index);
         // console.log(reviews, "reviews");
     };
 
@@ -30,33 +30,37 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
         setOpen(false);
     };
 
-    const [imagesArray, setImagesArray] = useState(false)
+    const [imagesArray, setImagesArray] = useState(false);
 
     function checkProductMediaLength(data) {
-        if(data){
-
+        if (data) {
             for (const item of data) {
                 const mediaLength = item.product_media.length;
-                console.log(`Product ID ${item.id} has ${mediaLength} media items.`);
-                if(mediaLength > 0){
-                    setImagesArray(true)
+                console.log(
+                    `Product ID ${item.id} has ${mediaLength} media items.`
+                );
+                if (mediaLength > 0) {
+                    setImagesArray(true);
                 } else {
-                    setImagesArray(false)
+                    setImagesArray(false);
                 }
             }
         }
-        }
+    }
     useEffect(() => {
         checkProductMediaLength(ReviewsData?.data);
-    }, [ReviewsData])
-    
+    }, [ReviewsData]);
+
     // console.log(ReviewsData.reviews);
 
     return (
         <>
-        {(ReviewsData?.data?.length > 0 && imagesArray )? (
-            <div className="review-images-section" style={{position: 'relative', padding: '0px 70px'}}>
-                {/* <button onClick={handleOpenDialog}>image Gallery</button> */}
+            {ReviewsData?.data?.length > 0 && imagesArray ? (
+                <div
+                    className="review-images-section"
+                    style={{ position: "relative", padding: "0px 70px" }}
+                >
+                    {/* <button onClick={handleOpenDialog}>image Gallery</button> */}
                     <div className="d-flex justify-content-between mb-3">
                         <h3 className="product-section-heading">
                             Reviews with images
@@ -68,64 +72,110 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                             View all images
                         </button>
                     </div>
-                <Swiper
-                    className=""
-                    spaceBetween={3}
-                    slidesPerView={1}
-                    navigation={{
-                        nextEl: '.swiper-btn-next',
-                        prevEl: '.swiper-btn-prev',
-                    }}
-                    pagination={{ clickable: true }}
-                    breakpoints={{
-                        // For mobile screens
+                    <Swiper
+                        className=""
+                        spaceBetween={3}
+                        slidesPerView={1}
+                        navigation={{
+                            nextEl: ".swiper-btn-next",
+                            prevEl: ".swiper-btn-prev",
+                        }}
+                        pagination={{ clickable: true }}
+                        breakpoints={{
+                            // For mobile screens
 
-                        // For larger screens
-                        700: {
-                            slidesPerView: 3,
-                        },
-                        1024: {
-                            slidesPerView: 4,
-                            // spaceBetween: 50,
-                        },
-                    }}
-                >
-                    {/* /// --- DIALOG --- /// */}
-                    <ReviewsDialog
-                        open={open}
-                        handleOpenDialog={handleOpenDialog}
-                        handleClose={handleClose}
-                        reviewId={reviewId}
-                        imgId={imgId}
-                        imgIndex={imgIndex}
-                        ReviewsData={ReviewsData}
-                        reviews={reviews}
-                    />
+                            // For larger screens
+                            700: {
+                                slidesPerView: 3,
+                            },
+                            1024: {
+                                slidesPerView: 4,
+                                // spaceBetween: 50,
+                            },
+                        }}
+                    >
+                        {/* /// --- DIALOG --- /// */}
+                        {open && (
+                            <ReviewsDialog
+                                open={open}
+                                handleClose={handleClose}
+                                reviewId={reviewId}
+                                imgId={imgId}
+                                imgIndex={imgIndex}
+                                ReviewsData={ReviewsData}
+                                reviews={reviews}
+                            />
+                        )}
 
-                    {ReviewsData?.data?.map((data, i) => (
-                        <React.Fragment key={data.id}>
+                        {ReviewsData?.data?.map((data, i) => (
+                            <React.Fragment key={data.id}>
                                 {data?.product_media?.map((image, index) => (
-                                <SwiperSlide style={{ paddingBottom: 0, height: "20vmin",}} key={image.id}>
-                                    <div
-                                        src={image?.file_path}
-                                        style={{backgroundImage: `url(${image?.file_path})`, backgroundSize: "cover", backgroundPosition: "center"}}
-                                        onClick={() =>
-                                            handleOpenDialog(image?.product_review_id, image?.id, index)
-                                        }
-                                        alt="review-image"
-                                        className="all-reviews-image"
-                                    ></div>
-                                </SwiperSlide>
-
-                                ))} 
-                        </React.Fragment>
-                    ))}
-                </Swiper>
-                <ArrowBackIosNewOutlinedIcon sx={{position: "absolute", top: "50%",transform: "translate(-0%, 0%)", left: 0, ml: 2 ,border: "1px solid black", borderRadius: "5px" , height: "35px", width: "35px", color: "black", p: 1}} className='swiper-btn-prev swiper-video-button'  />
-                <ArrowForwardIosOutlinedIcon sx={{position: "absolute", top: "50%",transform: "translate(-0%, 0%)", right: 0, mr: 2 ,border: "1px solid black", borderRadius: "5px" , height: "35px", width: "35px", color: "black", p: 1}} className='swiper-btn-next swiper-video-button'  />
-            </div>
-        ): ("")}
-       </>
+                                    <SwiperSlide
+                                        style={{
+                                            paddingBottom: 0,
+                                            height: "20vmin",
+                                        }}
+                                        key={image.id}
+                                    >
+                                        <div
+                                            src={image?.file_path}
+                                            style={{
+                                                backgroundImage: `url(${image?.file_path})`,
+                                                backgroundSize: "cover",
+                                                backgroundPosition: "center",
+                                            }}
+                                            onClick={() =>
+                                                handleOpenDialog(
+                                                    image?.product_review_id,
+                                                    image?.id,
+                                                    index
+                                                )
+                                            }
+                                            alt="review-image"
+                                            className="all-reviews-image"
+                                        ></div>
+                                    </SwiperSlide>
+                                ))}
+                            </React.Fragment>
+                        ))}
+                    </Swiper>
+                    <ArrowBackIosNewOutlinedIcon
+                        sx={{
+                            position: "absolute",
+                            top: "50%",
+                            transform: "translate(-0%, 0%)",
+                            left: 0,
+                            ml: 2,
+                            border: "1px solid black",
+                            borderRadius: "5px",
+                            height: "35px",
+                            width: "35px",
+                            color: "black",
+                            p: 1,
+                        }}
+                        className="swiper-btn-prev swiper-video-button"
+                    />
+                    <ArrowForwardIosOutlinedIcon
+                        sx={{
+                            position: "absolute",
+                            top: "50%",
+                            transform: "translate(-0%, 0%)",
+                            right: 0,
+                            mr: 2,
+                            border: "1px solid black",
+                            borderRadius: "5px",
+                            height: "35px",
+                            width: "35px",
+                            color: "black",
+                            p: 1,
+                        }}
+                        className="swiper-btn-next swiper-video-button"
+                    />
+                </div>
+            ) : (
+                ""
+            )}
+        </>
     );
 }
 

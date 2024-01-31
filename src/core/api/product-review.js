@@ -41,7 +41,7 @@ export function allReviewImagesApi(id) {
                     "file: products.js | allReviewImagesApi| response",
                     response
                 );
-                resolve(response)
+                resolve(response);
             })
             .catch((e) => {
                 console.print("Console Log: : error products", e);
@@ -52,7 +52,7 @@ export function allReviewImagesApi(id) {
 
 export function productSpecificDetailsReview(id) {
     return new Promise((resolve, reject) => {
-        ApiService.get(`/product-reviews`,id)
+        ApiService.get(`/get-product-details`, id)
             .then((response) => {
                 console.print(
                     "file: products.js | productSpecificDetailsReview| response",
@@ -83,4 +83,3 @@ export function reviewReportHelpfullApi(data) {
             });
     });
 }
-
