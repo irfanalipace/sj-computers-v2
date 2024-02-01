@@ -5,7 +5,7 @@ import Loader from "@common/Spinner/Spinner";
 import { deleteItem, deleteLocalItem } from "@store/cart/cartThunks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-
+import { generatePath } from "../../../core/utils/helpers";
 import "./CartOverlay.css";
 import WarrantyBadge from "@components/ShoppingCart/CartItem/WarrantyBadge";
 
@@ -14,7 +14,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const details = useSelector((state) => state.cart.details);
     const [updatingItem, setUpdatingItem] = useState(false);
-
+    console.log(cartItems, "pricesds");
     const dispatch = useDispatch();
 
     const deleteItemFunction = (item) => {
@@ -27,7 +27,14 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
             sub_total: cartSubTotal.toFixed(2),
             total: cartTotal.toFixed(2),
         };
+        let warrantyPriceWithQuantity =
+            warrantyPriceDifference + parseFloat(cartItems?.plan_price || 0);
 
+        if (cartData?.plan?.value) {
+            cartItem.plan_price = parseFloat(warrantyPriceWithQuantity).toFixed(
+                2
+            );
+        }
         isAuthenticated
             ? dispatch(deleteItem({ cartItem: item }))
             : dispatch(deleteLocalItem({ cartItem: item, cartDetails }));
@@ -111,12 +118,12 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                         <div className="col-md-10 item-detail-col">
                                                             <Link
                                                                 to={
-                                                                    new URL(
+                                                                    generatePath(
                                                                         item
                                                                             ?.product
-                                                                            ?.url ||
-                                                                            location.href
-                                                                    ).pathname
+                                                                            ?.url
+                                                                    ) ||
+                                                                    location.pathname
                                                                 }
                                                                 className="text-decoration-none pb-2 d-block"
                                                             >
@@ -134,86 +141,6 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                                     ?.durationInYears
                                                             }
                                                         /> */}
-                                                            <div className="overlay-card-protections-dev-data-sidebar">
-                                                                <div>
-                                                                    <ul className="item-list">
-                                                                        <li>
-                                                                            <span className="item-stock">
-                                                                                {item
-                                                                                    ?.product
-                                                                                    ?.quantity
-                                                                                    ? "In Stock"
-                                                                                    : "Out of Stock"}
-                                                                            </span>
-                                                                        </li>
-                                                                    </ul>
-                                                                    {item.loading ? (
-                                                                        <Loader />
-                                                                    ) : (
-                                                                        <>
-                                                                            <div
-                                                                                className="d-flex"
-                                                                                style={{
-                                                                                    maxWidth:
-                                                                                        "700px",
-                                                                                }}
-                                                                            >
-                                                                                <button
-                                                                                    onClick={() =>
-                                                                                        deleteItemFunction(
-                                                                                            item
-                                                                                        )
-                                                                                    }
-                                                                                    className="button-link ps-0"
-                                                                                    disabled={
-                                                                                        updatingItem
-                                                                                    }
-                                                                                >
-                                                                                    {updatingItem ? (
-                                                                                        <Loader />
-                                                                                    ) : (
-                                                                                        "Delete "
-                                                                                    )}
-                                                                                </button>
-                                                                            </div>
-                                                                        </>
-                                                                    )}
-                                                                </div>
-                                                                {item?.plan
-                                                                    ?.value && (
-                                                                    <div className="overlay-card-shipping-page-card-view-details">
-                                                                        <div className="overlay-card-protection-button-remove-data">
-                                                                            <button>
-                                                                                Remove
-                                                                                protection
-                                                                            </button>
-                                                                        </div>
-                                                                        <div className="overlay-checkout-checkout-card-protection-lables-warntity overlay-sidebar-protect-card">
-                                                                            <p className="checkout-card-dev-sj-computers-sections-overlay-data-view">
-                                                                                SJ
-                                                                                Computer{" "}
-                                                                            </p>
-                                                                            <div>
-                                                                                <p className="overlay-checkout-card-protection-name-dev-protecttions">
-                                                                                    {" "}
-                                                                                    Protection
-                                                                                </p>
-                                                                            </div>
-
-                                                                            <span className="years-data-list-prot">
-                                                                                {item
-                                                                                    ?.plan
-                                                                                    ?.durationInYears
-                                                                                    ? item
-                                                                                          ?.plan
-                                                                                          ?.durationInYears +
-                                                                                      " years"
-                                                                                    : "Tech Unlimited"}
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                )}
-                                                            </div>
                                                         </div>
                                                         <div className="col-md-2 price-item">
                                                             <p>
@@ -226,6 +153,96 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                                     )}
                                                                 </strong>
                                                             </p>
+                                                        </div>
+                                                        <div className="col-md-4 mt-3">
+                                                            <div>
+                                                                <ul className="item-list">
+                                                                    <li>
+                                                                        <span className="item-stock">
+                                                                            {item
+                                                                                ?.product
+                                                                                ?.quantity
+                                                                                ? "In Stock"
+                                                                                : "Out of Stock"}
+                                                                        </span>
+                                                                    </li>
+                                                                </ul>
+                                                                {item.loading ? (
+                                                                    <Loader />
+                                                                ) : (
+                                                                    <>
+                                                                        <div
+                                                                            className="d-flex"
+                                                                            style={{
+                                                                                maxWidth:
+                                                                                    "700px",
+                                                                            }}
+                                                                        >
+                                                                            <button
+                                                                                onClick={() =>
+                                                                                    deleteItemFunction(
+                                                                                        item
+                                                                                    )
+                                                                                }
+                                                                                className="button-link ps-0"
+                                                                                disabled={
+                                                                                    updatingItem
+                                                                                }
+                                                                            >
+                                                                                {updatingItem ? (
+                                                                                    <Loader />
+                                                                                ) : (
+                                                                                    "Delete"
+                                                                                )}
+                                                                            </button>
+                                                                        </div>
+                                                                    </>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-md-8">
+                                                        {item?.plan
+                                                                        ?.value && (
+                                                            <div className="dev-price-data-overlay-page">
+                                                                <div>
+                                                                  
+                                                                        <div className="overlay-card-shipping-page-card-view-details">
+                                                                            <div className="overlay-card-protection-button-remove-data mt-3">
+                                                                                <button>
+                                                                                    Remove
+                                                                                    Warranty
+                                                                                </button>
+                                                                            </div>
+                                                                    
+                                                                            <div className="overlay-sidebar-protect-card ">
+                                                                                <WarrantyBadge
+                                                                                    durationInYears={
+                                                                                        item
+                                                                                            ?.plan
+                                                                                            ?.durationInYears
+                                                                                            ? item
+                                                                                                  ?.plan
+                                                                                                  ?.durationInYears +
+                                                                                              " years"
+                                                                                            : "Tech Unlimited"
+                                                                                    }
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                
+                                                                </div>
+                                                                <div className="mt-3">
+                                                                    <p>
+                                                                        <strong className="new-price-data-overlay">
+                                                                            $
+                                                                            {
+                                                                                item?.plan_price
+                                                                            }
+                                                                        </strong>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                                )}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -272,7 +289,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                          
                                         </div> */}
                                         {isAuthenticated ? (
-                                            <div className="mt-2">
+                                            <div className="mt-2 add-cart-button-proccesd">
                                                 <Link
                                                     to="/cart"
                                                     className="text-decoration-none cart-text-link"

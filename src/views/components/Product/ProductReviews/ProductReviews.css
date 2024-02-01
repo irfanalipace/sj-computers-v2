@@ -244,21 +244,12 @@
 .review.expanded {
     max-height: none;
 }
-
-@media screen and (max-width: 900px) {
-    .reviews-row {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    }
-    .review-slider-and-slider{
-        width: 100vw;
-    }
+@media screen and (max-width: 800px) {
+.add-new-review .review-heading h5 {
+    font-size: 16px;
 }
-
-@media screen and (max-width: 900px) {
+}
+@media screen and (max-width: 576px) {
     .preview-button-review > button {
         margin-top: 5px;
         margin-bottom: 5px;
