@@ -65,7 +65,7 @@ const SingleSimilarItem = ({
                 </div>
 
                 <Link
-                    // to={`${new URL(product?.url).pathname}`}
+                  
                     to={productPath}
                     style={{ textDecoration: "none" }}
                 >

@@ -144,7 +144,7 @@ const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
     return (
         <div className={` product   ${inGrid && "product-grid"}`}>
             <Link
-                //to={`${new URL(product?.url).pathname}`}
+               
                 to={productPath}
             >
                 <div

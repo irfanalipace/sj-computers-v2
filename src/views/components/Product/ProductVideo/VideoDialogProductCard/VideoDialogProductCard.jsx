@@ -15,10 +15,10 @@ function VideoDialogProductCard({product}) {
           WebkitLineClamp: 2, // Limit the number of displayed lines
           lineHeight: '1.5em', // Adjust the line height as needed
   }
- // const productPath = generatePath(product?.url);
+
   return (
     <Link 
-   // to={`${new URL(product?.url).pathname}`} 
+  
        to={generatePath(product?.url)}
     style={{textDecoration: "none", }}>
       <Grid container border={".5px solid gray"} borderRadius={"10px"} height={"110px"} py={1} >

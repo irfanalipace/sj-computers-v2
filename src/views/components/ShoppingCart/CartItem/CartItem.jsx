@@ -97,7 +97,7 @@ export const CartItem = memo(({ cartData }) => {
     return (
         <div>
             <div className="row">
-                <div className="col-md-2">
+                <div className="col-md-2 ">
                     <div className="cart-image-mobile-size">
                         <img
                             src={cartData?.product?.image}
@@ -106,7 +106,7 @@ export const CartItem = memo(({ cartData }) => {
                         />
                     </div>
                 </div>
-                <div className="col-md-10">
+                <div className="col-md-10 ">
                     <div className="d-flex flex-column h-100 justify-content-between mx-0">
                         <div className="items-card-data">
                             <div className="col-md-10">
@@ -137,7 +137,7 @@ export const CartItem = memo(({ cartData }) => {
                             /> */}
                         </div>
                         <div className="row">
-                            <div className="col-md-5">
+                            <div className="col-md-6">
                                 <div className="list-item-dev-ui-item">
                                     <ul className="item-list mt-1 mb-2">
                                         <li>
@@ -148,23 +148,6 @@ export const CartItem = memo(({ cartData }) => {
                                                     : "In Stock"}
                                             </span>
                                         </li>
-                                        {/* <li>Discount Available</li> */}
-                                        {/* <li>
-                                        <span className="item-capacity">
-                                            Capacity:
-                                        </span>
-                                        <span clasName="item-capacity1">
-                                            2TB
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span className="item-capacity">
-                                            Style:
-                                        </span>
-                                        <span clasName="item-style1">
-                                            980 PRO
-                                        </span>
-                                    </li> */}
                                     </ul>
                                 </div>
                                 <div style={{ height: "45px" }}>
@@ -213,36 +196,59 @@ export const CartItem = memo(({ cartData }) => {
                             </div>
                             {cartData?.plan?.value && (
                                 <>
-                                    <div className="col-md-3 col-sm-6 px-0">
-                                        <div className="protection-button-remove-data add-text-remive-item">
-                                            <button>Remove protection</button>
+                                    <div className="col-md-6 ">
+                                        <div className="row">
+                                            <div className="col-lg-10 col-12">
+                                                <div className="dev-data-page-wantity">
+                                                    <div className="protection-button-remove-data-remove add-text-remive-item">
+                                                        <button>
+                                                            Remove Warranty
+                                                        </button>
+                                                    </div>
+                                                    <div>
+                                                        <WarrantyBadge
+                                                            durationInYears={
+                                                                cartData?.plan
+                                                                    ?.durationInYears
+                                                                    ? cartData
+                                                                          ?.plan
+                                                                          ?.durationInYears +
+                                                                      " years"
+                                                                    : "Tech Unlimited"
+                                                            }
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-2 col-12">
+                                                <div className="add-card-price-cardite">
+                                                    <p className="protections-price-carditem">
+                                                        ${cartData?.plan_price}
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-lg-2 col-md-3 col-6">
-                                        <div className="protection-lables-warntity text-start px-2 py-2">
-                                            <p className="dev-sj-computers-sections text-start ms-0">
-                                                SJ Computer
-                                            </p>
-                                            <p className="protection-name-dev text-start">
-                                                Protection
-                                            </p>
-
-                                            <span className="text-start ms-0">
-                                                {cartData?.plan?.durationInYears
+                                        {/* 
+                                        <div>
+                                        <WarrantyBadge
+                                            durationInYears={
+                                                cartData?.plan?.durationInYears
                                                     ? cartData?.plan
                                                           ?.durationInYears +
                                                       " years"
-                                                    : "Tech Unlimited"}
-                                            </span>
-                                        </div>
+                                                    : "Tech Unlimited"
+                                            }
+                                        />
+                                        </div> */}
                                     </div>
-                                    <div className="col-lg-2 col-md-3 col-6">
+
+                                    {/* <div className="col-lg-2 col-md-3 col-6">
                                         <div className="add-card-price-carditem">
                                             <p className="protections-price-carditem">
                                                 ${cartData?.plan_price}
                                             </p>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </>
                             )}
                         </div>

@@ -89,7 +89,7 @@ function Search() {
                     <button
                         type="button"
                         className="btn btn-primary dropdown-toggle all-button"
-                        style={{ fontSize: "13px" }}
+                        style={{ fontSize: "13px", border:"1px solid black" }}
                         onClick={toggleDropdown}
                         disabled={location.pathname.includes("category")}
                     >
@@ -134,6 +134,9 @@ function Search() {
                 placeholder="Search"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                style={{
+                    border: '1px solid black'
+                }}
             />
             <span className="input-group-btn">
                 <button

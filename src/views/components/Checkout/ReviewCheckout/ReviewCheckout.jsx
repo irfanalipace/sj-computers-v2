@@ -68,8 +68,8 @@ export default function ReviewCheckout({
                                     </div>
                                     {item?.plan?.value && (
                                         <div className="col-md-3">
-                                            <div className="checkout-card-protection-lables-warntity">
-                                                <p className="checkout-card-dev-sj-computers-sections">
+                                           
+                                                {/* <p className="checkout-card-dev-sj-computers-sections">
                                                     SJ Computer{" "}
                                                 </p>
                                                 <div>
@@ -85,8 +85,14 @@ export default function ReviewCheckout({
                                                               ?.durationInYears +
                                                           " years"
                                                         : "Tech Unlimited"}
-                                                </span>
-                                            </div>
+                                                </span> */}
+
+                                                <WarrantyBadge durationInYears={item?.plan?.durationInYears
+                                                        ? item?.plan
+                                                              ?.durationInYears +
+                                                          " years"
+                                                        : "Tech Unlimited"}/>
+                                           
                                         </div>
                                     )}
                                 </div>

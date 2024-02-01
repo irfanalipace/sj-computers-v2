@@ -18,6 +18,7 @@ import { useEffect, lazy } from "react";
 import Breadcrumb from "@common/Breadrumb/Breadcrumb";
 import { useSearchParams } from "react-router-dom";
 import { LoadingOverlay } from "@mantine/core";
+import { generatePath } from "../../../../core/utils/helpers";
 
 const ProductNewReviews = () => {
     const navigate = useNavigate();
@@ -160,7 +161,7 @@ const ProductNewReviews = () => {
             };
 
             await productPreviewApi(reviewData);
-            navigate(`${new URL(product?.url).pathname}`);
+            navigate(`${generatePath(product?.url)}`);
             toast.success("Product Review Successfully Added");
         } catch (error) {
             console.error("Error submitting review:", error.message);
