@@ -11,9 +11,8 @@ const ACCEPTED_ERROR_CODES = [400, 401, 403, 404, 422, 429];
 
 const ApiService = {
     instance: null,
-    logout: null,
-    init(logout) {
-        this.logout = logout;
+
+    init() {
         if (!this.instance) {
             this.instance = axios.create({ withCredentials: true });
             this.instance.defaults.baseURL =
@@ -50,9 +49,7 @@ const ApiService = {
                         "User not authorized. Please login to perform this action"
                     );
                     destroyToken();
-                    typeof this.logout === "function"
-                        ? this.logout()
-                        : (window.location.href = "/login");
+                    window.location.href = "/login";
                 } else if (
                     !ACCEPTED_ERROR_CODES.includes(error?.response?.status)
                 ) {
