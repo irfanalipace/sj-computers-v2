@@ -13,6 +13,7 @@ import { reviewReportHelpfullApi } from "../../../../core/api/product-review";
 import ReviewsDialog from "./ProductReviewsDialog/ReviewsDialog";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
     const [expandedReviews, setExpandedReviews] = useState([]);
@@ -74,6 +75,10 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
             setLoading(false);
         }
     };
+
+    if(Object.keys(reviewData).length === 0){
+        return <div><CircularProgress /></div>
+    }
 
     return (
         <div className="review-card mb-2">

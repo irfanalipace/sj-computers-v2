@@ -13,7 +13,7 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import AppsIcon from "@mui/icons-material/Apps";
 
 import ReviewCard from "../ReviewCard";
-import "./ReviewDialog.css";
+// import "./ReviewDialog.css";
 
 // Slider Imports
 import SwiperCore, { Navigation, Pagination } from "swiper";
@@ -23,6 +23,7 @@ import "swiper/swiper-bundle.min.css";
 import "swiper/css/navigation";
 import useSpecificReview from "./useSpecificReview";
 import ImageGallery from "./ImageGallery";
+import { CircularProgress } from "@mui/material";
 
 const ReviewsDialog = ({
     open,
@@ -38,7 +39,7 @@ const ReviewsDialog = ({
     const [selectIndex, setSelectIndex] = useState(imgIndex);
 
     const [reviewCardId, setReviewCardId] = useState(reviewId);
-    const [imgGallery, setImgGallery] = useState(false);
+    const [imgGallery, setImgGallery] = useState(null);
     const [selectedReview, setSelectedReview] = useState(null);
     const [activeSlide, setActiveSlide] = useState(imgId);
     const [initialSlide, setInitialSlide] = useState(imgId);
@@ -54,7 +55,9 @@ const ReviewsDialog = ({
         // console.log("clicked on image of product_review_id ", productReviewId);
         if (typeof productReviewId !== "number") {
             // console.log("reiewId empty open gallery");
-            setImgGallery(true);
+            setTimeout(() => {
+                setImgGallery(true);
+            }, 1000);
         } else {
             setReviewCardId(productReviewId);
             // setReviewsData(data)
@@ -124,7 +127,8 @@ const ReviewsDialog = ({
                         </IconButton>
                     </DialogActions>
                 </Box>
-
+            {imgGallery === null  ? <div style={{height: "30rem", }}><CircularProgress size={50} sx={{color: "orange", m: 4}} /></div> :
+            <>
                 {imgGallery == true ? (
                     // ---- image Gallery ---
                     <ImageGallery
@@ -200,7 +204,8 @@ const ReviewsDialog = ({
 
                         <Grid
                             item
-                            xs={6}
+                            md={6}
+                            xs={12}
                             pl={2}
                             container
                             height={"30rem"}
@@ -254,6 +259,8 @@ const ReviewsDialog = ({
                         </Grid>
                     </Grid>
                 )}
+              </>  
+            }
             </DialogContent>
         </Dialog>
     );

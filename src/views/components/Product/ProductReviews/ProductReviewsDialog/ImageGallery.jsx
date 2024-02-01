@@ -1,4 +1,5 @@
 import React from 'react'
+import "./ReviewDialog.css"
 
 const ImageGallery = ({getReviewById, ReviewsData}) => {
   return (
