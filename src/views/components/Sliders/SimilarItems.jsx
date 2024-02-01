@@ -64,8 +64,8 @@ const SimilarItemsSlider = ({ type = "", similarProducts }) => {
         </Swiper>
         {/* <div className="swiper-similer-btn-next"></div> */}
         {/* <div className="swiper-similer-btn-prev"></div> */}
-        <ArrowBackIosNewOutlinedIcon sx={{position: "absolute", top: "50%", left: -40,  height: "35px", width: "35px", color: "black", p: 1}} className='swiper-similer-btn-prev '  />
-        <ArrowForwardIosOutlinedIcon sx={{position: "absolute", top: "50%", right: -40,  height: "35px", width: "35px", color: "black", p: 1}} className='swiper-similer-btn-next '  />
+        <ArrowBackIosNewOutlinedIcon sx={{cursor: "pointer" ,position: "absolute", top: "50%", left: -40,  height: "35px", width: "35px", color: "black", p: 1}} className='swiper-similer-btn-prev '  />
+        <ArrowForwardIosOutlinedIcon sx={{cursor: "pointer" ,position: "absolute", top: "50%", right: -40,  height: "35px", width: "35px", color: "black", p: 1}} className='swiper-similer-btn-next '  />
         </div>
     );
 };
