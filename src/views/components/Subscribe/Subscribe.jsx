@@ -77,20 +77,22 @@ const Subscribe = () => {
                 mt={5}
                 mb={2}
             >
-                <h6 style={{ fontSize: "13px" }}>
-                    See personalized recommendations
-                </h6>
-                {user ? (
+                {!user && (
+                    <h6 style={{ fontSize: "13px" }}>
+                        See personalized recommendations
+                    </h6>
+                )}
+                {!user ? (
                     <button className="sign-in-main">Sign in</button>
                 ) : (
                     <></>
                 )}
-                <p style={{ fontSize: "12px" }} className="mt-2 mb-5">
-                    New Customer ?{" "}
-                    <Link href={user ? "/register" : "/login"}>
-                        Start here.
-                    </Link>
-                </p>
+                {!user && (
+                    <p style={{ fontSize: "12px" }} className="mt-2 mb-5">
+                        New Customer ?{" "}
+                        <Link href={!user && "/login"}>Start here.</Link>
+                    </p>
+                )}
             </Grid>
             <hr />
         </div>
