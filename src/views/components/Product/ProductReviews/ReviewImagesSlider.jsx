@@ -77,7 +77,6 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                             nextEl: ".swiper-btn-next",
                             prevEl: ".swiper-btn-prev",
                         }}
-                        pagination={{ clickable: true }}
                         breakpoints={{
                             // For mobile screens
 
@@ -85,7 +84,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                             700: {
                                 slidesPerView: 3,
                             },
-                            1024: {
+                            1200: {
                                 slidesPerView: 4,
                                 // spaceBetween: 50,
                             },
@@ -110,7 +109,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                                     <SwiperSlide
                                         style={{
                                             paddingBottom: 0,
-                                            height: "20vmin",
+                                            height: "180px",
                                         }}
                                         key={image.id}
                                     >
@@ -120,6 +119,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                                                 backgroundImage: `url(${image?.file_path})`,
                                                 backgroundSize: "cover",
                                                 backgroundPosition: "center",
+                                                cursor: "pointer"
                                             }}
                                             onClick={() =>
                                                 handleOpenDialog(
@@ -136,6 +136,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                             </React.Fragment>
                         ))}
                     </Swiper>
+                    {/* SLIDER-BUTTONS */}
                     <ArrowBackIosNewOutlinedIcon
                         sx={{
                             position: "absolute",
@@ -149,8 +150,12 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                             width: "35px",
                             color: "black",
                             p: 1,
+                            cursor: "pointer",
+                            ":hover": {
+                                backgroundColor: "whitesmoke",
+                            }
                         }}
-                        className="swiper-btn-prev swiper-video-button"
+                        className="swiper-btn-prev"
                     />
                     <ArrowForwardIosOutlinedIcon
                         sx={{
@@ -165,8 +170,13 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                             width: "35px",
                             color: "black",
                             p: 1,
+                            cursor: "pointer",
+                            ":hover": {
+                                backgroundColor: "whitesmoke",
+                            }
                         }}
-                        className="swiper-btn-next swiper-video-button"
+
+                        className="swiper-btn-next"
                     />
                 </div>
             ) : (
