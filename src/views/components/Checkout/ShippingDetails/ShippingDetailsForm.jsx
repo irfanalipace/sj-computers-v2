@@ -14,7 +14,6 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     const apiError = useSelector((state) => state.orders.apiError);
     const loading = useSelector((state) => state.orders.isLoading);
     const settingAdress = useSelector((state) => state.orders.settingAdress);
-    // debugger;
 
     // const [fieldErrors, setFieldErrors] = useState({});
     const [permanentAddress, setPermanentAddress] = useState(false);

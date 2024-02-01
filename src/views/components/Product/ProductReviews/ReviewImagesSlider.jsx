@@ -36,9 +36,6 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
         if (data) {
             for (const item of data) {
                 const mediaLength = item.product_media.length;
-                console.log(
-                    `Product ID ${item.id} has ${mediaLength} media items.`
-                );
                 if (mediaLength > 0) {
                     setImagesArray(true);
                 } else {

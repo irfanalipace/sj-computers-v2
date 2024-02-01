@@ -78,7 +78,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
     return (
         <div className="review-card mb-2">
             <div className="d-flex align-items-center">
-                {open && (
+                {dialogOpen && (
                     <ReviewsDialog
                         open={dialogOpen}
                         handleOpenDialog={handleOpenDialog}
