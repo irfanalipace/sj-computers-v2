@@ -14,6 +14,7 @@ import ReviewsDialog from "./ProductReviewsDialog/ReviewsDialog";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import { toast } from "react-toastify";
 
 function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
     const [expandedReviews, setExpandedReviews] = useState([]);
@@ -69,15 +70,24 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
         try {
             setLoading(true);
             const res = await reviewReportHelpfullApi(data);
-            updateReveiw(reviewData.id);
+            if (res?.id) {
+                updateReveiw(reviewData.id);
+            } else {
+                toast.error(res?.message || "Something went wrong");
+            }
         } catch (error) {
+            toast.error("Failed to marked this review helpfull");
         } finally {
             setLoading(false);
         }
     };
 
-    if(Object.keys(reviewData).length === 0){
-        return <div><CircularProgress /></div>
+    if (Object.keys(reviewData).length === 0) {
+        return (
+            <div>
+                <CircularProgress />
+            </div>
+        );
     }
 
     return (
@@ -203,18 +213,33 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
                         2 People find this helpful
                     </p>
                     <div className="d-flex ">
-                        <button
-                            onClick={handleHelpfull}
-                            className="review-helpful-btn"
-                        >
-                            Helpful
-                        </button>
-                        {/* <Stack mt={0.7} direction={"row"} spacing={1}>
-                    <CheckCircleIcon sx={{ color: "#318243" }} />
-                    <Typography color={"#318243"}>
-                        Thanks for honest feedback
-                    </Typography>
-                </Stack> */}
+                        {!reviewData?.helpful ? (
+                            <button
+                                onClick={handleHelpfull}
+                                className="review-helpful-btn"
+                            >
+                                {!loading ? (
+                                    "Helpful"
+                                ) : (
+                                    <CircularProgress
+                                        size={24}
+                                        color="inherit"
+                                    />
+                                )}
+                            </button>
+                        ) : (
+                            <Stack
+                                height={"34.5px"}
+                                mt={0.7}
+                                direction={"row"}
+                                spacing={1}
+                            >
+                                <CheckCircleIcon sx={{ color: "#318243" }} />
+                                <Typography color={"#318243"}>
+                                    Thanks for honest feedback
+                                </Typography>
+                            </Stack>
+                        )}
                         <button
                             onClick={() => {
                                 if (!isAuthenticated) {
