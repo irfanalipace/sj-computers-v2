@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { PAYMENT_METHODS } from "../../../../core/utils/constants";
 
 function usePaymentData() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -7,9 +6,12 @@ function usePaymentData() {
 
     const cartItems = useSelector((state) => state.cart.cart);
     const cartDetails = useSelector((state) => state.cart.details);
+    const shippingDetails = useSelector(
+        (state) => state.orders.shippingDetails
+    );
 
     let total_quantity = 0;
-    const cartData = this.cartItems?.map((item) => {
+    const cartData = cartItems?.map((item) => {
         // map item according to the request payload format
         total_quantity += item?.quantity;
         const obj = {
@@ -23,25 +25,22 @@ function usePaymentData() {
     });
 
     let paymentPayload = {
-        payment_type: this.paymentType,
         shipping_address: {
-            ...this.shippingDetails,
-            email: this.shippingDetails?.email || this.user?.email,
-            full_name: this.shippingDetails?.full_name || this.user?.name,
+            ...shippingDetails,
+            email: shippingDetails?.email || user?.email,
+            full_name: shippingDetails?.full_name || user?.name,
         },
     };
-    if (this.paymentType === PAYMENT_METHODS.SQUARE)
-        paymentPayload.source_id = this.token;
 
-    if (!this.isAuthenticated) {
+    if (!isAuthenticated) {
         paymentPayload = {
             ...paymentPayload,
             is_guest: true,
             cart_items: cartData,
             details: {
-                ...this.cartDetails,
-                shipment_amount: this.cartDetails.shipment_amount || 0,
-                estimate_days: this.cartDetails.estimate_days || 0,
+                ...cartDetails,
+                shipment_amount: cartDetails.shipment_amount || 0,
+                estimate_days: cartDetails.estimate_days || 0,
                 total_quantity,
             },
         };

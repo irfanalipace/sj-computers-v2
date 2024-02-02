@@ -1,4 +1,5 @@
 import { paymentApi } from "@api/payment";
+import { PAYMENT_METHODS } from "../utils/constants";
 
 export default class PaymentService {
     constructor(data) {
@@ -9,13 +10,14 @@ export default class PaymentService {
         paymentType,
         onPaymentApiFailure,
         onQuantityIssue,
+        paymentPayload,
         token,
         onProcessEnd,
         onPaymentApiSuccess,
     }) {
         this.paymentType = paymentType;
-        this.navigate = navigate;
         this.token = token;
+        this.paymentPayload = paymentPayload;
         this.onProcessEnd = onProcessEnd;
         this.onPaymentApiSuccess = onPaymentApiSuccess;
         this.onPaymentApiFailure = onPaymentApiFailure;
@@ -24,23 +26,27 @@ export default class PaymentService {
 
     async processPaymentApi() {
         try {
-            let response = await paymentApi(paymentParams);
-
+            this.paymentPayload.payment_type = this.paymentType;
+            if (this.paymentType === PAYMENT_METHODS.SQUARE)
+                this.paymentPayload.source_id = this.token;
+            let response = await paymentApi(this.paymentPayload);
             if (response?.status == 200) {
                 const order = response.data;
                 typeof this.onPaymentApiSuccess === "function" &&
                     this.onPaymentApiSuccess(order);
-
             } else {
                 if (response?.cart_error) {
-                    this.onQuantityIssue()
+                    typeof this.onQuantityIssue === "function" &&
+                        this.onQuantityIssue();
                 } else {
-                    onPaymentApiFailure(response?.message);
+                    typeof this.onPaymentApiFailure === "function" &&
+                        this.onPaymentApiFailure(response?.message);
                 }
             }
         } catch (error) {
             console.log("error in square api: ", error);
-            onPaymentApiFailure(error);
+            typeof this.onPaymentApiFailure === "function" &&
+                this.onPaymentApiFailure(error);
         }
         this.onProcessEnd && this.onProcessEnd();
     }

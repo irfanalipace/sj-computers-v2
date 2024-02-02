@@ -18,8 +18,11 @@ import mastercard from "@images/common/mastercard.png";
 
 import "./Checkout.css";
 import Discount from "@components/Checkout/Discount/Discount";
+import { useLocation } from "react-router-dom";
 
 export default function Checkout() {
+    const location = useLocation();
+    const { error } = location.state || {};
     const initAccordionValues = {
         1: { open: false },
         2: { open: false },
@@ -39,9 +42,6 @@ export default function Checkout() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     const loading = useSelector((state) => state.cart.isLoading);
-    const [searchParams, setSearchParams] = useSearchParams();
-    
-    const paymentError = useRef(null);
 
     const toggleAccordion = (id) => {
         openAccordion(id, !accordion[id].open);
@@ -61,16 +61,12 @@ export default function Checkout() {
 
     useEffect(() => {
         // displays error on top whenever payment fails and open shipping details form (First Accordion)
-        const error = searchParams.get("error");
         if (error) {
-            paymentError.current = error;
             toggleAccordion(3);
-            searchParams.delete("error");
-            setSearchParams(searchParams); // clear search params after displaying error
         } else {
             toggleAccordion(1);
         }
-    }, [searchParams]);
+    }, [error]);
 
     return (
         <>
@@ -103,9 +99,9 @@ export default function Checkout() {
                         </div>
                     </div>
                     <div className="checkout-page-inner">
-                        {paymentError.current && (
+                        {error && (
                             <Alert variant="danger" className="my-3">
-                                {paymentError.current}
+                                {JSON.stringify(error)}
                             </Alert>
                         )}
                         {checkoutDetails.total_items > 0 ? (

@@ -13,24 +13,6 @@ import usePaymentData from "../usePaymentData";
 export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const placingOrder = useSelector((state) => state.orders.placingOrder);
-
-    const buttonProps = {
-        css: {
-            backgroundColor: "#318243",
-            fontSize: "14px",
-            "&:hover": {
-                backgroundColor: "#2e663b",
-            },
-        },
-        isLoading: placingOrder,
-    };
-    const creditCardStyle = {
-        input: {
-            fontSize: "14px",
-        },
-    };
-
     const paymentPayload = usePaymentData();
 
     const destroyCart = (order) => {
@@ -64,12 +46,12 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
 
         const paymentService = new PaymentService({
             token,
-            paymentPayload,
             paymentType: PAYMENT_METHODS.SQUARE,
+            paymentPayload,
             onPaymentApiFailure,
             onQuantityIssue,
             onPaymentApiSuccess: destroyCart,
-            onProcessEnd: destroyCart,
+            onProcessEnd,
         });
         paymentService.processPaymentApi();
     }
@@ -91,4 +73,20 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
             </PaymentForm>
         </div>
     );
+};
+
+const buttonProps = {
+    css: {
+        backgroundColor: "#318243",
+        fontSize: "14px",
+        "&:hover": {
+            backgroundColor: "#2e663b",
+        },
+    },
+    isLoading: placingOrder,
+};
+const creditCardStyle = {
+    input: {
+        fontSize: "14px",
+    },
 };
