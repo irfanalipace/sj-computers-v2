@@ -34,7 +34,6 @@ export default function Product() {
     const [searchParams] = useSearchParams();
 
     const { isLoading, product } = useProductData();
-    debugger;
 
     const breadcrumbRoutes = [
         {
