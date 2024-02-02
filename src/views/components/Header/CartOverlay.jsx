@@ -141,7 +141,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                             }
                                                         /> */}
                                                         </div>
-                                                        <div className="col-md-2 price-item">
+                                                        <div className="col-md-2 text-end price-item">
                                                             <p>
                                                                 <strong className="">
                                                                     $
