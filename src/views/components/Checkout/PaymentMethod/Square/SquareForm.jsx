@@ -14,6 +14,23 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const paymentPayload = usePaymentData();
+    const placingOrder = useSelector((state) => state.orders.placingOrder);
+
+    const buttonProps = {
+        css: {
+            backgroundColor: "#318243",
+            fontSize: "14px",
+            "&:hover": {
+                backgroundColor: "#2e663b",
+            },
+        },
+        isLoading: placingOrder,
+    };
+    const creditCardStyle = {
+        input: {
+            fontSize: "14px",
+        },
+    };
 
     const destroyCart = (order) => {
         // deleteGuestUserEmail();
@@ -73,20 +90,4 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
             </PaymentForm>
         </div>
     );
-};
-
-const buttonProps = {
-    css: {
-        backgroundColor: "#318243",
-        fontSize: "14px",
-        "&:hover": {
-            backgroundColor: "#2e663b",
-        },
-    },
-    isLoading: placingOrder,
-};
-const creditCardStyle = {
-    input: {
-        fontSize: "14px",
-    },
 };
