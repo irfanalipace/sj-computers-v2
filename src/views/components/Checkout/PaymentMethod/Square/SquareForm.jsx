@@ -32,16 +32,16 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
         },
     };
 
-    const destroyCart = (order) => {
+    const onPaymentApiSuccess = (response) => {
         // deleteGuestUserEmail();
         clearCartLocally();
         dispatch(CLEAR_CART());
         navigate("/thank-you", {
-            state: { order },
+            state: { order: response.data },
         });
     };
 
-    const onProcessEnd = (order) => {
+    const onProcessEnd = () => {
         hideModal();
         dispatch(ORDER_PLACED());
     };
@@ -67,7 +67,7 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
             paymentPayload,
             onPaymentApiFailure,
             onQuantityIssue,
-            onPaymentApiSuccess: destroyCart,
+            onPaymentApiSuccess,
             onProcessEnd,
         });
         paymentService.processPaymentApi();

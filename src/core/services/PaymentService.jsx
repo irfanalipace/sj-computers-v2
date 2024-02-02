@@ -31,9 +31,8 @@ export default class PaymentService {
                 this.paymentPayload.source_id = this.token;
             let response = await paymentApi(this.paymentPayload);
             if (response?.status == 200) {
-                const order = response.data;
                 typeof this.onPaymentApiSuccess === "function" &&
-                    this.onPaymentApiSuccess(order);
+                    this.onPaymentApiSuccess(response);
             } else {
                 if (response?.cart_error) {
                     typeof this.onQuantityIssue === "function" &&

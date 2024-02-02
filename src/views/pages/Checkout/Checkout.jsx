@@ -34,10 +34,11 @@ export default function Checkout() {
     const [currentAccordionId, setCurrentAccordionId] = useState();
     const checkoutDetails = useSelector((state) => state.cart.details);
     const cartItems = useSelector((state) => state.cart.cart);
-
+    const [searchParams] = useSearchParams();
     const shippingAddress = useSelector(
         (state) => state.orders.shippingDetails
     );
+    const [paymentError, setPaymentError] = useState("");
 
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
@@ -60,13 +61,26 @@ export default function Checkout() {
     };
 
     useEffect(() => {
-        // displays error on top whenever payment fails and open shipping details form (First Accordion)
+        // displays error on top whenever square payment fails and open shipping details form (First Accordion)
+
         if (error) {
             toggleAccordion(3);
         } else {
             toggleAccordion(1);
         }
-    }, [error]);
+        setPaymentError(error);
+    }, [JSON.stringify(error)]);
+
+    useEffect(() => {
+        // displays error on top whenever paypal payment fails and open shipping details form (First Accordion)
+
+        if (searchParams.get("error")) {
+            toggleAccordion(3);
+        } else {
+            toggleAccordion(1);
+        }
+        setPaymentError(searchParams.get("error"));
+    }, [searchParams.get("error")]);
 
     return (
         <>
@@ -99,9 +113,9 @@ export default function Checkout() {
                         </div>
                     </div>
                     <div className="checkout-page-inner">
-                        {error && (
+                        {paymentError && (
                             <Alert variant="danger" className="my-3">
-                                {JSON.stringify(error)}
+                                {JSON.stringify(paymentError)}
                             </Alert>
                         )}
                         {checkoutDetails.total_items > 0 ? (

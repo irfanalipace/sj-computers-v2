@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { CLEAR_CART } from "@store/cart/cartSlice";
+import { ORDER_PLACED } from "@store/orders/ordersSlice";
+import { clearCartLocally } from "../../../../core/utils/cartHelpers";
 
 import { PAYMENT_METHODS } from "@utils/constants";
-import { placeOrder } from "@store/orders/ordersThunk";
 import PaymentModal from "./PaymentModal";
 import paypal from "@images/common/paypal.png";
 import visa from "@images/common/visa.png";
@@ -13,18 +15,20 @@ import "./PaymentMethod.css";
 import { useNavigate } from "react-router-dom";
 import { validateCartItems } from "../../../../core/store/cart/cartThunks";
 import PaymentService from "../../../../core/services/PaymentService";
+import usePaymentData from "./usePaymentData";
 
 export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
     const [paymentMethod, setPaymentMethod] = useState(null);
     const [openPaymentModal, setPaymentModal] = useState(false);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
     const [isLoading, setIsLoading] = useState(false);
+    const paymentPayload = usePaymentData();
+
     const shippingDetails = useSelector(
         (state) => state.orders.shippingDetails
     );
 
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
@@ -39,6 +43,26 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
         handleHeight();
     }, []);
 
+    const onPaymentApiSuccess = (response) => {
+        const url = response.data;
+        window.open(url, "_blank");
+    };
+
+    const onProcessEnd = () => {
+        setIsLoading(false);
+    };
+    const onPaymentApiFailure = (error) => {
+        // navigate("/checkout?error=" + response?.message);
+        navigate("/checkout", {
+            state: { error },
+        });
+    };
+    const onQuantityIssue = () => {
+        navigate("/cart", {
+            state: { error: true },
+        });
+    };
+
     const clickHandler = () => {
         setIsLoading(true);
         const cartData = cartItems?.map((item) => {
@@ -49,24 +73,21 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
             };
         });
         const onSuccess = () => {
-            setIsLoading(false);
             switch (paymentMethod) {
                 case PAYMENT_METHODS.PAYPAL:
                     const paymentService = new PaymentService({
-                        
-                    })
-                    // dispatch(
-                    //     placeOrder(
-                    //         {
-                    //             paymentMethod,
-                    //             shipping_address: shippingDetails,
-                    //         },
-                    //         (link) => location.replace(link)
-                    //     )
-                    // );
+                        paymentType: PAYMENT_METHODS.PAYPAL,
+                        paymentPayload,
+                        onPaymentApiFailure,
+                        onQuantityIssue,
+                        onPaymentApiSuccess,
+                        onProcessEnd,
+                    });
+                    paymentService.processPaymentApi();
                     break;
 
                 case PAYMENT_METHODS.SQUARE:
+                    setIsLoading(false);
                     setPaymentModal(true);
                     break;
 
