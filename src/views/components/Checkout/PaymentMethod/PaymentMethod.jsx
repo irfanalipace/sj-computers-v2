@@ -12,6 +12,7 @@ import PaymentButton from "./PaymentButton";
 import "./PaymentMethod.css";
 import { useNavigate } from "react-router-dom";
 import { validateCartItems } from "../../../../core/store/cart/cartThunks";
+import PaymentService from "../../../../core/services/PaymentService";
 
 export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
     const [paymentMethod, setPaymentMethod] = useState(null);
@@ -51,15 +52,18 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
             setIsLoading(false);
             switch (paymentMethod) {
                 case PAYMENT_METHODS.PAYPAL:
-                    dispatch(
-                        placeOrder(
-                            {
-                                paymentMethod,
-                                shipping_address: shippingDetails,
-                            },
-                            (link) => location.replace(link)
-                        )
-                    );
+                    const paymentService = new PaymentService({
+                        
+                    })
+                    // dispatch(
+                    //     placeOrder(
+                    //         {
+                    //             paymentMethod,
+                    //             shipping_address: shippingDetails,
+                    //         },
+                    //         (link) => location.replace(link)
+                    //     )
+                    // );
                     break;
 
                 case PAYMENT_METHODS.SQUARE:

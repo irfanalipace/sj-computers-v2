@@ -2,7 +2,7 @@ import ApiService from "@services/apiService";
 
 export function paymentApi(data) {
     return new Promise((resolve, reject) => {
-        ApiService.post(`/square-charge`, data)
+        ApiService.post(`/checkout-order`, data)
             .then((response) => {
                 console.print(
                     "file: square.js | paymentApi| response",

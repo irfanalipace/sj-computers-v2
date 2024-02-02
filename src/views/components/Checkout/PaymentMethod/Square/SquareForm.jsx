@@ -8,16 +8,13 @@ import { PAYMENT_METHODS } from "../../../../../core/utils/constants";
 
 import "./SquareForm.css";
 import { clearCartLocally } from "../../../../../core/utils/cartHelpers";
+import usePaymentData from "../usePaymentData";
 
 export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const user = useSelector((state) => state.auth.user);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
 
-    const cartItems = useSelector((state) => state.cart.cart);
-    const cartDetails = useSelector((state) => state.cart.details);
     const buttonProps = {
         css: {
             backgroundColor: "#318243",
@@ -34,32 +31,45 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
         },
     };
 
+    const paymentPayload = usePaymentData()
+
     const destroyCart = () => {
         // deleteGuestUserEmail();
         clearCartLocally();
         dispatch(CLEAR_CART());
     };
 
-    const onPaymentSuccess = () => {
+    const onPaymentSuccess = (order) => {
         hideModal();
         dispatch(ORDER_PLACED());
+                        navigate("/thank-you", {
+                            state: { order },
+                        });
     };
+        const onPaymentApiFailure = (error) => {
+            // navigate("/checkout?error=" + response?.message);
+            navigate("/checkout", {
+                state: { error },
+            });
+        };
+            const onQuantityIssue = () => {
+                navigate("/cart", {
+                    state: { error: true },
+                });
+            };
 
     async function onTokenSuccess({ token }) {
         dispatch(PLACING_ORDER());
         hideCloseBtn();
 
         const paymentService = new PaymentService({
-            cartItems,
-            shippingDetails,
-            cartDetails,
-            user,
-            isAuthenticated,
-            paymentType: PAYMENT_METHODS.SQUARE,
-            navigate,
             token,
+            paymentPayload,
+            paymentType: PAYMENT_METHODS.SQUARE,
+            onPaymentApiFailure,
+            onQuantityIssue,
             onPaymentSuccess,
-            onApiResponse: destroyCart,
+            onApiSuccess: destroyCart,
         });
         paymentService.processPaymentApi();
     }
