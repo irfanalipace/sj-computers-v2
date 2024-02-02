@@ -14,12 +14,12 @@ SwiperCore.use([Navigation]);
 
 const SimilarItemsSlider = ({ type = "", similarProducts }) => {
     return (
-        <div style={{position: "relative"}}>
+        <div style={{position: "relative"}} className="similer-slider">
         <Swiper
             slidesPerView={4.8}
             navigation={{
-                nextEl: '.swiper-similer-btn-next',
-                prevEl: '.swiper-similer-btn-prev',
+                nextEl: '.similer-slider .swiper-button-next',
+                prevEl: '.similer-slider .swiper-button-prev',
               }}
             breakpoints={{
                 // when window width is >= 320px
@@ -44,6 +44,7 @@ const SimilarItemsSlider = ({ type = "", similarProducts }) => {
                 },
             }}
             // navigation
+            className="similer-item-container"
         >
             {similarProducts?.length > 0 ? (
                 similarProducts?.map((product) => (
@@ -62,10 +63,8 @@ const SimilarItemsSlider = ({ type = "", similarProducts }) => {
                 <>There are no similar items to this product.</>
             )}
         </Swiper>
-        {/* <div className="swiper-similer-btn-next"></div> */}
-        {/* <div className="swiper-similer-btn-prev"></div> */}
-        <ArrowBackIosNewOutlinedIcon sx={{cursor: "pointer" ,position: "absolute", top: "50%", left: -40,  height: "35px", width: "35px", color: "black", p: 1}} className='swiper-similer-btn-prev '  />
-        <ArrowForwardIosOutlinedIcon sx={{cursor: "pointer" ,position: "absolute", top: "50%", right: -40,  height: "35px", width: "35px", color: "black", p: 1}} className='swiper-similer-btn-next '  />
+        <div className="swiper-button-next" style={{position: "absolute", right: -40}}></div>
+        <div className="swiper-button-prev" style={{position: "absolute", left: -40}}></div>
         </div>
     );
 };

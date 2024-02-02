@@ -75,3 +75,22 @@
     height: 2rem;
     width: 5rem;
 }
+
+.slider-button{
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 1px  lightgrey;
+    height: 35px !important;
+    width: 35px !important;
+}
+
+.slider-button:hover{
+    background-color: whitesmoke;
+}
+
+.product-slider .swiper-button-next:after{
+    font-size: 13px !important;
+}
+.product-slider .swiper-button-prev:after{
+    font-size: 13px !important;
+}
