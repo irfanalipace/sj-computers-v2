@@ -40,6 +40,7 @@ export default function Checkout() {
 
     const loading = useSelector((state) => state.cart.isLoading);
     const [searchParams, setSearchParams] = useSearchParams();
+    
     const paymentError = useRef(null);
 
     const toggleAccordion = (id) => {

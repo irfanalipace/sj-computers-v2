@@ -1,0 +1,189 @@
+<?php
+
+namespace App\Http\Controllers\Api\Product;
+
+use App\Http\Controllers\Api\BaseController;
+use App\Http\Requests\Product\StoreProductReview;
+use App\Http\Requests\Product\StoreReviewReportRequest;
+use App\Models\ProductReviewReport;
+use App\Services\ReviewService;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class ReviewController extends BaseController
+{
+    protected $service;
+    public function __construct(ReviewService $service)
+    {
+        $this->service = $service;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $getProductReview = $this->service->getProductReviews($request);
+
+        return $this->sendResponse($getProductReview,'Successfully feteched Product reviews.');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StoreProductReview $request)
+    {
+        try{
+            DB::beginTransaction();
+            $storeProductReview = $this->service->storeProductReview($request);
+
+            DB::commit();
+            return $this->sendResponse($storeProductReview,'Successfully product review created.');
+        } catch(Exception $e) {
+            DB::rollBack();
+            return $this->sendError('error','Something went wrong ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        try{
+            $getProductReview = $this->service->specificProductReview($id);
+
+            return $this->sendResponse($getProductReview,'Successfully fetched detail of product review.');
+        } catch(ModelNotFoundException $e) {
+            DB::rollBack();
+            return $this->sendError('error','Product Review not found.');
+        } catch(Exception $e) {
+        DB::rollBack();
+        return $this->sendError('error','Something went wrong ' . $e->getMessage());
+    }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        try{
+
+            DB::beginTransaction();
+            $updateProductReview = $this->service->updateProductReview($request,$id);
+
+            DB::commit();
+            return $this->sendResponse($updateProductReview,'Successfully product review updated.');
+        } catch(ModelNotFoundException $e) {
+            DB::rollBack();
+            return $this->sendError('error','Product Review not found.');
+        } catch(Exception $e) {
+            DB::rollBack();
+            return $this->sendError('error','Something went wrong ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    // public function destroy($id)
+    // {
+    //     //
+    // }
+
+    public function getProductDetail($product_id,Request $request)
+    {
+        try{
+            $productDetail = $this->service->getProductDetails($product_id,$request);
+
+            return $this->sendResponse($productDetail,'Successfully fetched product details.');
+        } catch(ModelNotFoundException $e) {
+
+            return $this->sendError('error','Product details not found.');
+
+        } catch(Exception $e) {
+            return $this->sendError('error','Something went wrong ' . $e->getMessage());
+        }
+    }
+
+    public function getReviewImage($product_id)
+    {
+        try{
+            $reviewMedia = $this->service->getReviewMedia($product_id);
+
+            return $this->sendResponse($reviewMedia,'Successfully fetched product review media.');
+        } catch(ModelNotFoundException $e) {
+
+            return $this->sendError('error','Product review not found.');
+
+        } catch(Exception $e) {
+            return $this->sendError('error','Something went wrong ' . $e->getMessage());
+        }
+    }
+
+    public function getSpecificReview($review_id)
+    {
+        try{       
+            $getProductReview = $this->service->specificProductReview($review_id);
+
+            return $this->sendResponse($getProductReview,'Successfully fetched detail of product review.');
+        } catch(ModelNotFoundException $e) {
+            DB::rollBack();
+            return $this->sendError('error','Product Review not found.');
+        } catch(Exception $e) {
+            DB::rollBack();
+            return $this->sendError('error','Something went wrong ' . $e->getMessage());
+        }
+    }
+
+
+    public function storeReviewReport(StoreReviewReportRequest $request)
+    {
+        try {
+            $reviewReport = $this->service->storeReviewReports($request);
+
+            return $this->sendResponse($reviewReport, 'Product review report successfully saved');
+        } catch (Exception $e) {
+            return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());
+        }
+    }
+
+
+    public function indexReviewReport()
+    {
+        try {
+            $data = $this->service->indexReviewReports();
+            return $this->sendResponse($data, 'All review reports are displayed');
+        } catch (Exception $e) {
+            return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());
+        }
+    }
+    public function showReviewReport($id)
+    {
+        try {
+            $data = $this->service->showReviewReports($id);
+            return $this->sendResponse($data, 'Review reports is displayed');
+        } catch (Exception $e) {
+            return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());
+        }
+    }
+
+}

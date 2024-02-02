@@ -4,9 +4,9 @@
 .custom-dropdown {
     position: relative;
     display: inline-block;
-  }
-  
-  .custom-dropdown-toggle {
+}
+
+.custom-dropdown-toggle {
     cursor: pointer;
     padding: 10px 15px;
     background-color: #f5f5f5;
@@ -16,15 +16,15 @@
     height: 62px;
     padding-top: 22px;
 }
-  .custom-dropdown-toggle:hover {
+.custom-dropdown-toggle:hover {
     background-color: #e9ecef;
-  }
-   .footer-end-image-data{
+}
+.footer-end-image-data {
     padding-bottom: 12px;
     color: white;
     font-size: 12px;
-  }
-  .custom-dropdown-menu {
+}
+.custom-dropdown-menu {
     position: absolute;
     top: 100%;
     left: 0;
@@ -36,43 +36,33 @@
     border: 1px solid #ced4da;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .custom-dropdown-item {
+}
+
+.custom-dropdown-item {
     cursor: pointer;
     padding: 5px 15px;
     font-size: 13px;
-  }
-  
-  .custom-dropdown-item:hover {
+}
+
+.custom-dropdown-item:hover {
     background-color: #f8f9fa;
-  }
-  
-  /* Additional styles for the disabled state */
-  .custom-dropdown-disabled .custom-dropdown-toggle {
+}
+
+/* Additional styles for the disabled state */
+.custom-dropdown-disabled .custom-dropdown-toggle {
     pointer-events: none;
     background-color: #e9ecef;
-  }
-  
-  /* Additional styles for the open state */
-  .custom-dropdown-open .custom-dropdown-toggle {
+}
+
+/* Additional styles for the open state */
+.custom-dropdown-open .custom-dropdown-toggle {
     background-color: #e9ecef;
-  }
-  
-  /* Additional styles for the selected item */
-  .custom-dropdown-item.selected {
+}
+
+/* Additional styles for the selected item */
+.custom-dropdown-item.selected {
     background-color: #e9ecef;
-  }
-  
-
-
-
-
-
-
-
-
-
+}
 
 .header-container {
     max-width: 1750px;
@@ -183,8 +173,8 @@
 .vector-cart {
     vertical-align: none !important;
 }
-.eng-button-type-data{
-width: 20px;
+.eng-button-type-data {
+    width: 20px;
 }
 /* 
 .ellipse{
@@ -214,7 +204,9 @@ width: 20px;
     padding-right: 5px;
     height: 62px;
 }
-.my-drop-down-data-seachbar-icon .btn.disabled, .btn:disabled, fieldset:disabled .btn {
+.my-drop-down-data-seachbar-icon .btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
     border: 1px solid #dcdcdc;
     cursor: not-allowed;
     opacity: 2.2;

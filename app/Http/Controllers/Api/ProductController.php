@@ -3,20 +3,23 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Product\ProductDetailRequest;
+use App\Http\Requests\Product\ProductMediaRequest;
 use App\Http\Requests\Product\SearchProductRequest;
 use App\Http\Requests\ProductDetailAsinRequest;
 use App\Models\CategoryProduct;
 use App\Models\IpAddress;
 use App\Models\Product;
+use App\Models\Product\ProtectivePlan;
 use App\Models\ProductInfo;
+use App\Models\ProductMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 class ProductController extends BaseController
 {
     public function getList(request $request)
     {
-
         $data = Product::with('brand')->paginate(12);
         return $this->sendResponse($data);
     }
@@ -31,12 +34,14 @@ class ProductController extends BaseController
     public function getProductDetail(ProductDetailRequest $request)
     {
         $data = Product::where('id', $request->product_id)->first();
+        $data->load('productMedia');
         return $this->sendResponse($data);
     }
 
     public function getProductDetailAsin(ProductDetailAsinRequest $request)
     {
-        $data = Product::where('asin', $request->asin)->first();
+        $data = Product::with('productMedia')
+            ->where('asin', $request->asin)->first();
         return $this->sendResponse($data);
     }
 
@@ -48,7 +53,7 @@ class ProductController extends BaseController
                 ->orWhere('sku', 'LIKE', '%' . $request->get('name') . '%')
                 ->orWhere('asin', 'LIKE', '%' . $request->get('name') . '%');
         })
-            ->with('brand')
+            ->with('brand', 'productMedia')
             ->paginate($perPageRecord);
 
         $this->saveSearch($request->ip(), $request->name);
@@ -64,16 +69,48 @@ class ProductController extends BaseController
             ]);
     }
 
+    public function getSimilarItem(Product $product)
+    {
+        $cpu_family = $product->description->cpu_model[0]->family[0]->value ?? '';
+        $ram_value = $product->description->ram_memory[0]->installed_size[0]->value ?? '';
+        $graphics_ram = $product->description->graphics_ram[0]->size[0]->value ?? '';
+        $hard_disk = $product->description->hard_disk[0]->size[0]->value ?? '';
+
+        return Product::whereJsonContains('description->cpu_model', [['family' => ['value' => $cpu_family]]])
+            ->orWhereJsonContains('description->ram_memory',[['installed_size'=> ['value' => $ram_value]]])
+            ->orWhereJsonContains('description->graphics_ram',[['size'=> ['value' => $graphics_ram]]])
+            ->orWhereJsonContains('description->hard_disk',[['size'=> ['value' => $hard_disk]]])
+            ->limit(2)
+            ->get();
+    }
+
+    public function productCount(Product $product, Request $request)
+    {
+        $cpu_family = $product->description->cpu_model[0]->family[0]->value ?? '';
+        $ram_value = $product->description->ram_memory[0]->installed_size[0]->value ?? '';
+        $graphics_ram = $product->description->graphics_ram[0]->size[0]->value ?? '';
+        $hard_disk = $product->description->hard_disk[0]->size[0]->value ?? '';
+
+        $data = Product::whereJsonContains('description->cpu_model', [['family' => ['value' => $cpu_family]]])
+            ->orWhereJsonContains('description->ram_memory',[['installed_size'=> ['value' => $ram_value]]])
+            ->orWhereJsonContains('description->graphics_ram',[['size'=> ['value' => $graphics_ram]]])
+            ->orWhereJsonContains('description->hard_disk',[['size'=> ['value' => $hard_disk]]])
+            ->where('quantity', '>', 100)
+            ->limit(10)
+            ->get();
+
+            return $this->sendResponse($data, 'All product displayed that are above 100 in quantity');
+    }
     public function getProductFilterList()
     {
         $data = [];
 
         $data['processor'] = $this->queryProductInfo('processor');
         $data['ram_memory'] = $this->queryProductInfo('ram_memory');
-//        $data['operating_system'] = $this->queryProductInfo('operating_system');
+        //        $data['operating_system'] = $this->queryProductInfo('operating_system');
         $data['operating_system'] = [];
         $data['hard_disk'] = $this->queryProductInfo('hard_disk');
-//        $data['graphic'] = $this->queryProductInfo('graphic');
+        //        $data['graphic'] = $this->queryProductInfo('graphic');
         $data['graphic'] = [];
         $data['brand'] = $this->queryProductInfo('brand');
 
@@ -134,7 +171,7 @@ class ProductController extends BaseController
                     ->orWhere('sku', 'LIKE', '%' . $request->get('name') . '%')
                     ->orWhere('asin', 'LIKE', '%' . $request->get('name') . '%');
             })
-                ->with('brand');
+                ->with('brand', 'productMedia');
         }
 
         /*
@@ -148,7 +185,7 @@ class ProductController extends BaseController
 
             foreach ($filters as $filter) {
 
-//                $filter = json_encode($filter, true);
+            //                $filter = json_encode($filter, true);
                 $filter = json_decode($filter, true);
 
                 $key = $filter['key'] ?? '';
@@ -202,22 +239,22 @@ class ProductController extends BaseController
     {
         $ids = [];
 
-//        $query = '';
+        //        $query = '';
 
-//        if ($unit == 'TB') {
-//            $query = ProductInfo::where(function ($query) use ($key) {
-//                $query->where('key', $key);
-//            });
-//
-//        } elseif ($unit == 'GB') {
-//            $query = ProductInfo::where('key', $key)
-//                ->Where('value', 'LIKE', '%MB%');
-//        }
-//
-//        if (!empty($query)) {
-//            $ids = $query->pluck('product_id')
-//                ->toArray();
-//        }
+        //        if ($unit == 'TB') {
+        //            $query = ProductInfo::where(function ($query) use ($key) {
+        //                $query->where('key', $key);
+        //            });
+        //
+        //        } elseif ($unit == 'GB') {
+        //            $query = ProductInfo::where('key', $key)
+        //                ->Where('value', 'LIKE', '%MB%');
+        //        }
+        //
+        //        if (!empty($query)) {
+        //            $ids = $query->pluck('product_id')
+        //                ->toArray();
+        //        }
 
         $record = DB::table('product_infos')->where('key', $key)
             ->Where('value', 'like', '%' . $unit . '%')
@@ -230,6 +267,12 @@ class ProductController extends BaseController
             ->toArray();
 
         return array_merge($productInfos, $ids);
+    }
+
+    public function getProtectivePlan(Request $request)
+    {
+        $protectivePlans = ProtectivePlan::all();
+        return $this->sendResponse($protectivePlans,'Successfully fetched plans.');
     }
 
 }

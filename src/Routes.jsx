@@ -26,24 +26,25 @@ const ThankYou = React.lazy(() => import("@pages/Thankyou/Thankyou"));
 const RefundOrder = React.lazy(() => import("@pages/RefundOrder/RefundOrder"));
 const Careers = React.lazy(() => import("@pages/Careers/Careers"));
 const CareerView = React.lazy(() => import("@pages/Careers/CareerView"));
+const TrackOrder = React.lazy(() => import("@pages/TrackOrder"));
 const Contact = React.lazy(() =>
     import("@components/Footer/FooterMenu/Contact")
 );
 const Policy = React.lazy(() => import("@pages/Policy/Policy"));
 const SkuPage = React.lazy(() => import("@pages/SKUTables/SkuPage"));
-const BlogPage = React.lazy(() => import("@pages/Blog/BlogPage"));
 
-const AboutPage = React.lazy(() => import("@pages/About/AboutPage"));
-const WhatWeDoPage = React.lazy(() => import("@pages/WhatWeDo/WhatWeDoPage"));
-const BlogSingle = React.lazy(() => import("@pages/Blog/BlogSingle"));
-const BlogsDetails = React.lazy(() => import("@pages/Blog/BlogsDetails"));
+const BlogList = React.lazy(() => import("@pages/Blog/BlogsList"));
+const BlogDetails = React.lazy(() => import("@pages/Blog/BlogDetails"));
 import NotFound from "@pages/NotFound/NotFound";
 
 import Loader from "@common/LoaderComponent/LoaderComponent";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
-const CategoryBlogs = React.lazy(() =>
-    import("@components/Blog/CategoryBlogs")
+
+const AddToCart = React.lazy(() => import("./views/pages/AddToCart/AddToCart"));
+const ProductNewReviews = React.lazy(() =>
+    import("./views/components/Product/ProductReviews/ProductNewReviews")
 );
+const CategoryBlogs = React.lazy(() => import("@pages/Blog/CategoryBlogs"));
 const ApplyNow = React.lazy(() => import("./views/pages/Careers/ApplyNow"));
 // import Layout from "./views/pages/PageLayout/Layout";
 
@@ -59,7 +60,6 @@ const Router = () => {
                 </Suspense>
             ),
         },
-
         {
             path: "/login",
             element: (
@@ -70,7 +70,6 @@ const Router = () => {
                 </AuthRoute>
             ),
         },
-
         {
             path: "/register",
             element: (
@@ -119,6 +118,7 @@ const Router = () => {
                 </PageWrapper>
             ),
         },
+
         {
             path: "/products/search",
             element: (
@@ -127,6 +127,18 @@ const Router = () => {
                 </PageWrapper>
             ),
         },
+
+        {
+            path: "/add-review/:productId",
+            element: (
+                <ProtectedRoute>
+                    <PageWrapper>
+                        <ProductNewReviews />
+                    </PageWrapper>
+                </ProtectedRoute>
+            ),
+        },
+
         {
             path: "/category/:categorySlug",
             element: (
@@ -195,6 +207,14 @@ const Router = () => {
             ),
         },
         {
+            path: "/add-to-cart/:title/dp/:productId",
+            element: (
+                <PageWrapper>
+                    <AddToCart />
+                </PageWrapper>
+            ),
+        },
+        {
             path: "/checkout/:productId",
             element: (
                 <ProtectedRoute>
@@ -221,11 +241,12 @@ const Router = () => {
                 </PageWrapper>
             ),
         },
+        
         {
             path: "/:blogslug",
             element: (
                 <Suspense>
-                    <BlogsDetails />
+                    <BlogDetails />
                 </Suspense>
             ),
         },
@@ -234,7 +255,7 @@ const Router = () => {
             path: "/blogs",
             element: (
                 <PageWrapper>
-                    <BlogSingle />
+                    <BlogList />
                 </PageWrapper>
             ),
         },
@@ -390,6 +411,17 @@ const Router = () => {
                 <PageWrapper>
                     <ApplyNow />
                 </PageWrapper>
+            ),
+        },
+
+        {
+            path: "/track-order",
+            element: (
+                <ProtectedRoute>
+                    <PageWrapper>
+                        <TrackOrder />
+                    </PageWrapper>
+                </ProtectedRoute>
             ),
         },
 

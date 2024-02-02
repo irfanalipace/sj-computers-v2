@@ -20,7 +20,7 @@ const ProductImageComponent = ({ ProductImages }) => {
 
     useEffect(() => {
         setImages(toArray(ProductImages));
-    }, []);
+    }, [ProductImages]);
 
     useEffect(() => {
         setSelectedImg(images[0]); // set default image as selected image

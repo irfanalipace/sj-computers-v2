@@ -1,7 +1,6 @@
 import {
     LOADING,
     FETCH_PRODUCTS,
-    SEARCH_PRODUCTS,
     FILTER_PRODUCTS,
     SET_FILTERING_PRODUCTS,
     SET_IS_SHOW_MORE,
@@ -31,25 +30,6 @@ export const fetchProducts = (page = 1, loadMore = false, per_page = 12) => {
     };
 };
 
-export const searchProducts = (data) => {
-    return async (dispatch) => {
-        try {
-            dispatch({ type: LOADING, payload: {} });
-            const response = await searchProductsApi(data);
-            if (data.page === 1) dispatch(RESET_PAGE());
-            dispatch({
-                type: SEARCH_PRODUCTS,
-                payload: {
-                    data: [...response?.data?.data],
-                    searchString: data.name,
-                },
-            });
-        } catch (error) {
-            console.print("Something went wrong in products", error);
-            dispatch({ type: API_ERROR, payload: error?.data?.errors });
-        }
-    };
-};
 
 export const filterProducts = (filter, loadMore = false) => {
     return async (dispatch) => {

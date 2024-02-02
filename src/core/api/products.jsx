@@ -17,6 +17,32 @@ export function productsApi(page = 1, per_page = 12) {
     });
 }
 
+export function similarProductsApi(product_id) {
+    return new Promise((resolve, reject) => {
+        ApiService.get("/similar-item", product_id)
+            .then((response) => {
+                resolve(response);
+            })
+            .catch((e) => {
+                console.print("Console Log: : error productsf", e);
+                reject(e);
+            });
+    });
+}
+
+export function featureProductsApi(product_id) {
+    return new Promise((resolve, reject) => {
+        ApiService.get("/product-fast-delivery", product_id)
+            .then((response) => {
+                resolve(response);
+            })
+            .catch((e) => {
+                console.print("Console Log: : error productsf", e);
+                reject(e);
+            });
+    });
+}
+
 export function productDetailsApi(id) {
     return new Promise((resolve, reject) => {
         ApiService.get(`/product-detail?product_id=${id}`)
@@ -69,7 +95,6 @@ export function searchProductsApi(data) {
 }
 
 export function filterProductsApi(filter) {
-    // debugger;
     filter.filter = filter?.filter?.map((fil) => JSON.stringify(fil));
     return new Promise((resolve, reject) => {
         ApiService.get(`/filter-products`, "", filter)
@@ -82,6 +107,41 @@ export function filterProductsApi(filter) {
             })
             .catch((e) => {
                 console.print("Console Log: : error filterProductsApi", e);
+                reject(e);
+            });
+    });
+}
+
+// export function productPreviewApi(formData) {
+
+//     return new Promise((resolve, reject) => {
+//         ApiService.post(`/product-reviews`, formData)
+//             .then((response) => {
+//                 console.print(
+//                     "file: products.js | productPreviewApi| response",
+//                     response
+//                 );
+//                 resolve(response);
+//             })
+//             .catch((e) => {
+//                 console.print("Console Log: : error productPreviewApi", e);
+//                 reject(e);
+//             });
+//     });
+// }
+
+export function productPreviewApi(formData) {
+    return new Promise((resolve, reject) => {
+        ApiService.post(`/product-reviews`, formData, null, null, true)
+            .then((response) => {
+                console.log(
+                    "file: states.js | updateStateApi| response",
+                    response
+                );
+                resolve(response);
+            })
+            .catch((e) => {
+                console.log("Console Log: : error states", e);
                 reject(e);
             });
     });

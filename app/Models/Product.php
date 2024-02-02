@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -12,7 +14,7 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
-    protected $appends = ['in_stock', 'rating'];
+    protected $appends = ['in_stock', 'rating','total_review'];
 
     public $timestamps = true;
 
@@ -28,6 +30,10 @@ class Product extends Model
         return $this->belongsToMany(Category::class, 'category_product')->paginate(12);
     }
 
+    public function productMedia()
+    {
+        return $this->hasMany(ProductMedia::class);
+    }
     public function holdProducts()
     {
         return $this->hasMany(HoldReleaseUser::class)->where('status', 'hold');
@@ -66,11 +72,34 @@ class Product extends Model
 
     }
 
-    public function getRatingAttribute()
+    public function productReview() : HasMany
     {
-        return mt_rand(3 * 10, 5 * 10) / 10;
+        return $this->hasMany(ProductReview::class);
     }
 
+    public function getRatingAttribute()
+    {
+        $productStatistic = ProductStatistic::where('product_id', $this->id)->first() ?? null;
+        $productStatistic = (isset($productStatistic->statistics)) ? json_decode($productStatistic->statistics) : 0;
+    
+        // Check if $productStatistic is an object and contains the rate property
+        if (is_object($productStatistic) && property_exists($productStatistic, 'rate')) {
+            return $productStatistic->rate->overall_rating;
+        } else {
+            return 0;
+        }
+     
+    }
+
+    public function getTotalReviewAttribute()
+    {
+        return ProductReview::where('product_id',$this->id)->count() ?? 0;
+    }
+
+    public function productStats() :BelongsTo
+    {
+        return $this->belongsTo(ProductStatistic::class);
+    }
     /**
      * @return void
      */

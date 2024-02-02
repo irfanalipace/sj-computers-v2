@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import ReviewButton from "./ReviewButton";
 // import { QuantityInput } from "@common/QuantityInput/QuantityInput";
+import WarrantyBadge from "@components/ShoppingCart/CartItem/WarrantyBadge";
 
 import "./ReviewCheckout.css";
 
@@ -45,10 +46,57 @@ export default function ReviewCheckout({
                             </div>
                             <div className="item-detail">
                                 <h6>{item.product.name}</h6>
-                                <h6 className="price">${item.price}</h6>
-                                <h6 className="quantity">
-                                    Quantity: {item.quantity}
-                                </h6>
+                                {/* <WarrantyBadge
+                                    durationInYears={
+                                        item?.plan?.durationInYears
+                                    }
+                                /> */}
+                                <div className="row">
+                                    <div></div>
+                                    <div className="col-md-6">
+                                        <h6 className="price">
+                                            ${parseFloat(item.price).toFixed(2)}
+                                        </h6>
+                                        <h6 className="quantity">
+                                            Quantity: {item.quantity}
+                                        </h6>
+                                    </div>
+                                    <div className="col-md-3 px-0">
+                                        <div className="protection-button-remove-data">
+                                            {/* <button>Remove protection</button> */}
+                                        </div>
+                                    </div>
+                                    {item?.plan?.value && (
+                                        <div className="col-md-3">
+                                           
+                                                {/* <p className="checkout-card-dev-sj-computers-sections">
+                                                    SJ Computer{" "}
+                                                </p>
+                                                <div>
+                                                    <p className="overlay-protecions-checkout-card-protection-name-dev">
+                                                        {" "}
+                                                        Protection
+                                                    </p>
+                                                </div>
+
+                                                <span>
+                                                    {item?.plan?.durationInYears
+                                                        ? item?.plan
+                                                              ?.durationInYears +
+                                                          " years"
+                                                        : "Tech Unlimited"}
+                                                </span> */}
+
+                                                <WarrantyBadge durationInYears={item?.plan?.durationInYears
+                                                        ? item?.plan
+                                                              ?.durationInYears +
+                                                          " years"
+                                                        : "Tech Unlimited"}/>
+                                           
+                                        </div>
+                                    )}
+                                </div>
+
                                 {/* <QuantityInput
                                     value={item.quantity}
                                     onChange={setQuantity}

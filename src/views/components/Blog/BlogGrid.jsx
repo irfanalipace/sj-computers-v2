@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../Blog/SingleBlog/SingleBlog.css";
+import "./Blog.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Pagination from "@mui/material/Pagination";
@@ -33,7 +33,7 @@ const BlogGrid = ({
                             >
                                 <div className="product-card product-blogs-card">
                                     <Link
-                                        to={`/${blog?.slug}`}
+                                        to={`javascript:void(0)`}
                                         className="text-decoration-none"
                                         state={{
                                             blogList: blog,
@@ -59,7 +59,7 @@ const BlogGrid = ({
                                     </Link>
                                     <div className="read-section-date-section">
                                         <Link
-                                            to={`/${blog?.slug}`}
+                                            to={"javascript:void(0)"}
                                             className="text-decoration-none"
                                             state={{
                                                 blogList: blog,

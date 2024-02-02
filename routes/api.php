@@ -5,12 +5,13 @@ use App\Http\Controllers\CareerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
-use App\Http\Controllers\Api\PayPal\PaypalController;
+//use App\Http\Controllers\Api\PayPal\PaypalController;
+use App\Http\Controllers\Api\Payment\PayPalController;
+// use App\Http\Controllers\Api\PayPalController;
 use App\Http\Controllers\Api\PayPal\PaypalwebhookController;
 use App\Http\Controllers\Api\ShoppingCart\CartController;
 use App\Http\Controllers\Api\Setting\ProfileController;
 use App\Http\Controllers\Api\Square\SquareController;
-
 use App\Http\Controllers\Api\Auth\VerificationController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\BrandController;
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\Blog\BlogController;
 use App\Http\Controllers\Api\RefundController;
 use App\Http\Controllers\Api\Meta\MetaDetailController;
+use App\Http\Controllers\Api\Payment\PaymentController;
+use App\Http\Controllers\Api\Product\ReviewController;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -75,6 +78,9 @@ Route::get('inventory-data', [ProductController::class, 'getInventoryData'])->na
 
 Route::get('products-filter-list', [ProductController::class, 'getProductFilterList'])->name('getProductFilterList');
 
+Route::get('similar-item/{product}', [ProductController::class, 'getSimilarItem'])->name('getSimilarItem');
+Route::get('product-fast-delivery/{product}', [ProductController::class, 'productCount'])->name('productCount');
+
 
 Route::get('product-detail', [ProductController::class, 'getProductDetail'])->name('productDetail');
 Route::get('product-detail-asin', [ProductController::class, 'getProductDetailAsin'])->name('productDetailAsin');
@@ -86,7 +92,6 @@ Route::get('search-product', [ProductController::class, 'searchProduct'])->name(
 Route::get('category-product', [CategoryController::class, 'getCategoryProduct'])->name('getCategoryProduct');
 
 Route::get('filter-products', [ProductController::class, 'getFilterProducts'])->name('getFilterProducts');
-
 
 /*
 *Add to Cart
@@ -128,7 +133,7 @@ Route::get('meta_detail', [MetaDetailController::class, 'getDetail'])->name('met
 /*
 *Place Order
 */
-Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder')->middleware('auth:api');
+Route::post('checkout-order', [PaymentController::class, 'checkout'])->name('checkoutOrder');
 
 Route::get('success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 
@@ -206,10 +211,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     /*
     * PayPal integration
-    */
-    Route::post('paypalwebhooks', [PaypalwebhookController::class, 'webhooks'])->name('paypalwebhooks');
-
-    Route::post('process-transaction', [PaypalController::class, 'processTransaction'])->name('processTransaction');
+    //    */
+    //    Route::post('paypalwebhooks', [PaypalwebhookController::class, 'webhooks'])->name('paypalwebhooks');
+    //
+    //    Route::post('process-transaction', [PaypalController::class, 'processTransaction'])->name('processTransaction');
 
     /*
      * get order-record
@@ -225,12 +230,22 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     /*
      * place order
      */
-    Route::post('place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
+    // Route::post('place-order', [\App\Fectories\PaymentGatewayFectory::class, 'placeOrder'])->name('placeOrder');
 
     /*
     * Download inventory Excel
     */
     Route::get('download-inventory', [InventoryController::class, 'downloadInventory'])->name('downloadInventory');
+
+    /* Review and Rating */
+    Route::resource('product-reviews',ReviewController::class)->only(['index','store','update','show']);
+
+    /*
+   * Product Review Report
+   */
+    Route::post('store-review-report', [ReviewController::class, 'storeReviewReport']);
+    Route::get('index-review-report', [ReviewController::class, 'indexReviewReport']);
+    Route::get('show-review-report/{reviewReport}', [ReviewController::class, 'showReviewReport']);
 });
 
 /*
@@ -242,3 +257,19 @@ Route::get('career/{career}', [CareerController::class, 'show'])->name('career')
 * Career Applications
 */
 Route::post('store-career-applications', [CareerApplicationController::class, 'store'])->name('store-career-applications');
+
+/*
+* Paypal Integration
+*/
+Route::post('paypal', [PayPalController::class, 'paypal'])->name('paypal');
+Route::get('success', [PayPalController::class, 'paypalSuccess'])->name('success');
+Route::get('cancel', [PayPalController::class, 'paypalCancel'])->name('cancel');
+
+/*
+    Get all reviews
+*/
+Route::get('get-all-reviews',[ReviewController::class,'index']);
+Route::get('get-protection-plans',[ProductController::class,'getProtectivePlan']);
+Route::get('get-product-reviews/{product_id}',[ReviewController::class,'getProductDetail']);
+Route::get('get-review-media/{product_id}',[ReviewController::class,'getReviewImage']);
+Route::get('get-specific-review/{id}',[ReviewController::class,'getSpecificReview']);

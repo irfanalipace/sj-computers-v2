@@ -10,25 +10,16 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "@components/Sidebar/Sidebar";
-import { useSearchParams } from "react-router-dom";
 const MobileScreenModal = lazy(() =>
     import("./MobileScreenModal/MobileScreenModal")
 );
 
 const MobileSearch = () => {
-    //search state here
-
-    const [searchValue, setSearchValue] = useState("");
-    const [showSearchBar, setShowSearchBar] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [search, setSearch] = useState("");
     const searchString = useSelector((state) => state.products.searchString);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
     const [isSideMenu, setSideMenu] = useState(false);
     const toggleSidebar = () => {
         return setSideMenu((state) => !state);
@@ -38,13 +29,11 @@ const MobileSearch = () => {
         e.preventDefault();
         if (search) {
             dispatch(SET_SEARCH_STRING(search));
-            navigate("/products/search");
+            navigate("/products/search?s=" + search);
         }
     };
-
     useEffect(() => {
         setSearch(searchString || "");
-        if (searchString) setSearchParams({ s: searchString });
     }, [searchString]);
 
     const handleButtonClick = () => {
@@ -53,19 +42,6 @@ const MobileSearch = () => {
 
     const closeModal = () => {
         setShowModal(false);
-    };
-
-    const handleInputChange = (event) => {
-        setSearchValue(event.target.value);
-    };
-
-    const handleSearchIconClick = () => {
-        setShowSearchBar(!showSearchBar);
-    };
-
-    const handleSearchBarClose = () => {
-        setShowSearchBar(false);
-        setSearchValue("");
     };
 
     return (

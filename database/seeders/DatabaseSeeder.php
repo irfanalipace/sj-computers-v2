@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product\ProtectivePlan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +23,8 @@ class DatabaseSeeder extends Seeder
             CountryStateSeeder::class,
 //            SystemPagesSeeder::class
             BlogSeeder::class,
-            CareerSeeder::class
+            CareerSeeder::class,
+            ProtectivePlanSeeder::class
         ]);
     }
 }

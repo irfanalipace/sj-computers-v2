@@ -1,5 +1,5 @@
 import { Row, Col } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoadMore from "@common/Button/LoadMore";
 import ProductCard from "@components/ProductCard/ProductCard";
 import OverlayLoader from "@common/LoaderComponent/OverlayLoader";
@@ -14,17 +14,21 @@ export default function ProductsGrid({
     isLoading,
     apiError,
     smallBtn = false,
+    searchParams,
 }) {
     const isShowMore = useSelector((state) => state.products.isShowMore);
-
     return (
         <div className="products-grid-wrapper">
             <div className="products-grid product-gride-card-componets-mobile-screen mb-3 ">
                 <Row className="mx-0 justify-content-left">
-                    {products?.map((product) => (
-                        <Col xs={6} md={4} lg={2} key={product.id}>
+                    {products?.map((product, index) => (
+                        <Col xs={6} md={4} lg={2} key={"pi-" + index}>
                             {/* <Link to={`${new URL(product?.url || location.href).pathname}`}> */}
-                            <ProductCard product={product} inGrid={true} />
+                            <ProductCard
+                                product={product}
+                                inGrid={true}
+                                searchParams={searchParams}
+                            />
 
                             {/* </Link> */}
                         </Col>
