@@ -10,14 +10,14 @@ export default class PaymentService {
         onPaymentApiFailure,
         onQuantityIssue,
         token,
-        onApiSuccess,
-        onPaymentSuccess,
+        onProcessEnd,
+        onPaymentApiSuccess,
     }) {
         this.paymentType = paymentType;
         this.navigate = navigate;
         this.token = token;
-        this.onApiSuccess = onApiSuccess;
-        this.onPaymentSuccess = onPaymentSuccess;
+        this.onProcessEnd = onProcessEnd;
+        this.onPaymentApiSuccess = onPaymentApiSuccess;
         this.onPaymentApiFailure = onPaymentApiFailure;
         this.onQuantityIssue = onQuantityIssue;
     }
@@ -28,8 +28,8 @@ export default class PaymentService {
 
             if (response?.status == 200) {
                 const order = response.data;
-                typeof this.onPaymentSuccess === "function" &&
-                    this.onPaymentSuccess(order);
+                typeof this.onPaymentApiSuccess === "function" &&
+                    this.onPaymentApiSuccess(order);
 
             } else {
                 if (response?.cart_error) {
@@ -42,6 +42,6 @@ export default class PaymentService {
             console.log("error in square api: ", error);
             onPaymentApiFailure(error);
         }
-        this.onApiSuccess && this.onApiSuccess();
+        this.onProcessEnd && this.onProcessEnd();
     }
 }

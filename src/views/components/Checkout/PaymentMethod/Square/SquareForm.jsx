@@ -31,32 +31,32 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
         },
     };
 
-    const paymentPayload = usePaymentData()
+    const paymentPayload = usePaymentData();
 
-    const destroyCart = () => {
+    const destroyCart = (order) => {
         // deleteGuestUserEmail();
         clearCartLocally();
         dispatch(CLEAR_CART());
+        navigate("/thank-you", {
+            state: { order },
+        });
     };
 
-    const onPaymentSuccess = (order) => {
+    const onProcessEnd = (order) => {
         hideModal();
         dispatch(ORDER_PLACED());
-                        navigate("/thank-you", {
-                            state: { order },
-                        });
     };
-        const onPaymentApiFailure = (error) => {
-            // navigate("/checkout?error=" + response?.message);
-            navigate("/checkout", {
-                state: { error },
-            });
-        };
-            const onQuantityIssue = () => {
-                navigate("/cart", {
-                    state: { error: true },
-                });
-            };
+    const onPaymentApiFailure = (error) => {
+        // navigate("/checkout?error=" + response?.message);
+        navigate("/checkout", {
+            state: { error },
+        });
+    };
+    const onQuantityIssue = () => {
+        navigate("/cart", {
+            state: { error: true },
+        });
+    };
 
     async function onTokenSuccess({ token }) {
         dispatch(PLACING_ORDER());
@@ -68,8 +68,8 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
             paymentType: PAYMENT_METHODS.SQUARE,
             onPaymentApiFailure,
             onQuantityIssue,
-            onPaymentSuccess,
-            onApiSuccess: destroyCart,
+            onPaymentApiSuccess: destroyCart,
+            onProcessEnd: destroyCart,
         });
         paymentService.processPaymentApi();
     }
