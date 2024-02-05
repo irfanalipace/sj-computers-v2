@@ -13,8 +13,7 @@ export default function ThankYou() {
         const date = new Date(dateString);
         return date.toLocaleDateString(undefined, options);
     }
-    const orderFromURL = searchParams.get("order");
-    console.log("orderFromURL", orderFromURL);
+    const orderFromURL = searchParams.get("orderSuccess");
     if (orderFromURL) {
         try {
             orderFromURL = JSON.parse(orderFromURL);
@@ -31,7 +30,9 @@ export default function ThankYou() {
     useEffect(() => {
         const storedOrder = window.localStorage.getItem("thankyouOrderDetails");
         const order =
-            location?.state?.order || JSON.parse(storedOrder) || orderFromURL;
+            location?.state?.order ||
+            JSON.parse(storedOrder) ||
+            orderFromURL?.order;
         if (order) {
             const orderString = JSON.stringify(order);
             window.localStorage.setItem("thankyouOrderDetails", orderString);
