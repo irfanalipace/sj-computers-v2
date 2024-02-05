@@ -162,7 +162,6 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
             <PaymentModal
                 isOpen={openPaymentModal}
                 handleClose={() => setPaymentModal(false)}
-                shippingDetails={shippingDetails}
             />
         </div>
     );

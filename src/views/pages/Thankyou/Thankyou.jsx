@@ -48,11 +48,6 @@ export default function ThankYou() {
         };
     }, []);
 
-    useEffect(() => {
-        //    console.print(thankOrderItems, "2nd useeffect")
-        //    console.print(thankOrderDetails, "2nd useeffect for order details")
-    }, [thankOrderItems]);
-
     const handleWindowSizeChange = () => {
         setIsMobile(window.innerWidth <= 768);
     };

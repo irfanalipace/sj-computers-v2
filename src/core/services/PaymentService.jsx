@@ -30,22 +30,22 @@ export default class PaymentService {
             if (this.paymentType === PAYMENT_METHODS.SQUARE)
                 this.paymentPayload.source_id = this.token;
             let response = await paymentApi(this.paymentPayload);
+            console.log("response: ", response);
             if (response?.status == 200) {
                 typeof this.onPaymentApiSuccess === "function" &&
                     this.onPaymentApiSuccess(response);
             } else {
                 if (response?.cart_error) {
                     typeof this.onQuantityIssue === "function" &&
-                        this.onQuantityIssue();
+                        this.onQuantityIssue(response?.data);
                 } else {
                     typeof this.onPaymentApiFailure === "function" &&
-                        this.onPaymentApiFailure(response?.message);
+                        this.onPaymentApiFailure(response?.data?.message);
                 }
             }
         } catch (error) {
-            console.log("error in square api: ", error);
             typeof this.onPaymentApiFailure === "function" &&
-                this.onPaymentApiFailure(error);
+                this.onPaymentApiFailure('Something went Wrong');
         }
         this.onProcessEnd && this.onProcessEnd();
     }

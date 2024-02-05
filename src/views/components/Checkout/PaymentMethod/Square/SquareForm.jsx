@@ -10,7 +10,7 @@ import "./SquareForm.css";
 import { clearCartLocally } from "../../../../../core/utils/cartHelpers";
 import usePaymentData from "../usePaymentData";
 
-export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
+export const SquareForm = ({ hideCloseBtn, hideModal }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const paymentPayload = usePaymentData();
@@ -51,7 +51,8 @@ export const SquareForm = ({ hideCloseBtn, hideModal, shippingDetails }) => {
             state: { error },
         });
     };
-    const onQuantityIssue = () => {
+    const onQuantityIssue = (response) => {
+        console.log('response: ', response);
         navigate("/cart", {
             state: { error: true },
         });
