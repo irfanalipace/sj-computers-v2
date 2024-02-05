@@ -30,3 +30,24 @@
 .dev-image-name span{
     font-size: 12px;
 }
+.slick-slide {
+  width: 170px !important;
+}
+.slick-next:before {
+  color: rebeccapurple;
+  content: '→';
+}
+.slick-prev:before, .slick-next:before {
+  margin-top: -4px !important;
+  font-family: 'slick';
+  font-size: 41px !important;
+  color: gray !important;
+  line-height: 1;
+  opacity: .75;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.slick-next {
+  right: -9px;
+}

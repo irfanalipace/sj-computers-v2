@@ -52,7 +52,7 @@
     text-align: left;
     /* padding-left: 20px; */
     font-weight: 600;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .product-type-section h1 {
@@ -79,11 +79,12 @@
 }
 
 .product-section-advertisment {
-    /* margin-left: 9px; */
-    height: 53%;
+    margin-top: 6px;
+    height: 51%;
 }
 
 .advertisement-heading {
+    margin-top: 6px;
     background-color: white;
     border: 1px solid #ddd;
     text-align: center;
@@ -123,7 +124,23 @@
     font-size: 12px;
     /* padding-left: 18px; */
 }
-
+.product-type-section-selleing-products{
+    height: auto;
+    width: 100%;
+    background-color: white;
+    margin: 8px 0;
+    padding: 30px 35px;
+  }
+  .product-type-section-selleing-products h4{
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: black;
+    font-size: 18px;
+  }
+  .product-type-section-selleing-products img {
+    width: 100%;
+    height: auto;
+}
 .section-link {
     margin-top: 30px;
     margin-bottom: 0;
