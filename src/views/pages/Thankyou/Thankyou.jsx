@@ -1,20 +1,26 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-// import { productDetailsApi } from "@api/products";
-// import { Container, Row, Col, Table } from "react-bootstrap";
 
 import "./thankyou.css"; // Import the CSS file for the component
-import circle from "../../../assets/images/green-circle.svg";
 import tickImage from "../../../assets/images/tick1.svg";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 export default function ThankYou() {
-    // const isMobile = window.innerWidth <= 768;
+    const [searchParams] = useSearchParams();
     function formatDate(dateString) {
         const options = { year: "numeric", month: "long", day: "numeric" };
         const date = new Date(dateString);
         return date.toLocaleDateString(undefined, options);
+    }
+    const orderFromURL = searchParams.get("order");
+    console.log("orderFromURL", orderFromURL);
+    if (orderFromURL) {
+        try {
+            orderFromURL = JSON.parse(orderFromURL);
+        } catch (error) {
+            console.log("error parsing order: ", error);
+        }
     }
 
     const navigate = useNavigate();
@@ -22,16 +28,10 @@ export default function ThankYou() {
     const [thankOrderItems, setThankOrderItems] = useState([]);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const location = useLocation();
-    const order = location.state?.order;
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    //   const handleButtonClick = () => {
-    //     // Redirect to the specific path
-    //     history.push("/specific-path");
-    //   };
-
     useEffect(() => {
         const storedOrder = window.localStorage.getItem("thankyouOrderDetails");
-        const order = location?.state?.order || JSON.parse(storedOrder);
+        const order =
+            location?.state?.order || JSON.parse(storedOrder) || orderFromURL;
         if (order) {
             const orderString = JSON.stringify(order);
             window.localStorage.setItem("thankyouOrderDetails", orderString);
@@ -42,6 +42,9 @@ export default function ThankYou() {
             setThankOrderItems(Order?.order?.order_item);
             console.print(thankOrderItems, "order 3");
         }
+        return () => {
+            window.localStorage.removeItem("thankyouOrderDetails");
+        };
     }, []);
 
     useEffect(() => {

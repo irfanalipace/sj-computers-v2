@@ -1,9 +1,5 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CLEAR_CART } from "@store/cart/cartSlice";
-import { ORDER_PLACED } from "@store/orders/ordersSlice";
-import { clearCartLocally } from "../../../../core/utils/cartHelpers";
-
 import { PAYMENT_METHODS } from "@utils/constants";
 import PaymentModal from "./PaymentModal";
 import paypal from "@images/common/paypal.png";
