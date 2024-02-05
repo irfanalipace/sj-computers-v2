@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Payment;
 
 use App\Classes\StatusEnum;
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Api\Payment\PaypalController;
+use App\Http\Controllers\Api\Payment\PayPalController;
 use App\Http\Controllers\Api\Square\SquareController;
 use App\Http\Controllers\Controller;
 use App\Models\Guest;
@@ -58,7 +58,7 @@ class PaymentController extends BaseController
             switch ($request->payment_type) {
                 case StatusEnum::PAYMENTTYPEPAYPAL:
                     # Paypal Route ...
-                    $paypal = new PaypalController;
+                    $paypal = new PayPalController;
                     $response = $paypal->processPayment($request,$this->user,$this->userType,$this->cartDetails);
                     return $this->sendResponse($response,'Successfully generated url.');
                     break;

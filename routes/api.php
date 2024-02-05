@@ -135,9 +135,9 @@ Route::get('meta_detail', [MetaDetailController::class, 'getDetail'])->name('met
 */
 Route::post('checkout-order', [PaymentController::class, 'checkout'])->name('checkoutOrder');
 
-Route::get('success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
 
-Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
+Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
 Route::get('system-pages/{key?}', [SystemPagesController::class, 'getPages'])->name('getPages');
 
