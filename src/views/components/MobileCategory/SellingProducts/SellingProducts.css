@@ -30,15 +30,14 @@
 .dev-image-name span{
     font-size: 12px;
 }
-.slick-slide {
-  width: 170px !important;
-}
+
 .slick-next:before {
   color: rebeccapurple;
   content: '→';
 }
 .slick-prev:before, .slick-next:before {
   margin-top: -4px !important;
+  z-index: 99 !important;
   font-family: 'slick';
   font-size: 41px !important;
   color: gray !important;
@@ -47,7 +46,35 @@
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 35px;
+height: 80px;
+top: 39px;
+left: 1320px;
+padding: 27px, 10px, 27.4px, 10.48px;
+border-radius: 0px, 3px, 3px, 0px !important;
+angle: -180 deg;
+
 }
 .slick-next {
-  right: -9px;
+  right: 0px !important;
+}
+.slick-prev, .slick-next {
+  font-size: 0;
+  z-index: 99;
+  line-height: 0;
+  /* left: 0px; */
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  -webkit-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  cursor: pointer;
+  color: transparent;
+  border: none;
+  outline: none;
+  background: transparent;
 }

@@ -23,6 +23,14 @@ import img1 from "../../../assets/images/homepageImage/upgradecomputers/image1.p
 import img2 from "../../../assets/images/homepageImage/upgradecomputers/image2.png";
 import img3 from "../../../assets/images/homepageImage/upgradecomputers/image3.png";
 import rams from "../../../assets/images/homepageImage/RamMem/rams.png";
+import sellingimg1 from "../../../assets/images/homepageImage/sellingproducts/image1.png"
+import sellingimg2 from "../../../assets/images/homepageImage/sellingproducts/image2.png"
+import sellingimg3 from "../../../assets/images/homepageImage/sellingproducts/image3.png"
+import sellingimg4 from "../../../assets/images/homepageImage/sellingproducts/image4.png"
+import sellingimg5 from "../../../assets/images/homepageImage/sellingproducts/image5.png"
+import sellingimg6 from "../../../assets/images/homepageImage/sellingproducts/image6.png"
+import sellingimg7 from "../../../assets/images/homepageImage/sellingproducts/image7.png"
+import sellingimg8 from "../../../assets/images/homepageImage/sellingproducts/image8.png"
 import SellingProducts from "../MobileCategory/SellingProducts/SellingProducts";
 import Recommendation from "../Recommendation/Recommendation";
 const categoryArray = [
@@ -150,6 +158,8 @@ const ProductType = () => {
           categoryName: "D-Link Router",
       },
   ];
+  const Sellingimages = [sellingimg1, sellingimg2, sellingimg3, sellingimg4, sellingimg5, sellingimg6, sellingimg7, sellingimg8];
+  ///const revimages = [img1, img2, img3, img4, img5, img6, img7, img8];
     return (
         <div className="product-type-container">
             <div className="row mx-0">
@@ -281,7 +291,7 @@ const ProductType = () => {
                                 <div>
                                     <h4>Best Selling Products</h4>
                                 </div>
-                             <SellingProducts />
+                             <SellingProducts images={Sellingimages}/>
                             
                             </div>
                         </Link>

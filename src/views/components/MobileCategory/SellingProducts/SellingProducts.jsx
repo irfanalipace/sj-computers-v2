@@ -1,14 +1,7 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
 
-import img1 from "../../../../assets/images/homepageImage/sellingproducts/image1.png"
-import img2 from "../../../../assets/images/homepageImage/sellingproducts/image2.png"
-import img3 from "../../../../assets/images/homepageImage/sellingproducts/image3.png"
-import img4 from "../../../../assets/images/homepageImage/sellingproducts/image4.png"
-import img5 from "../../../../assets/images/homepageImage/sellingproducts/image5.png"
-import img6 from "../../../../assets/images/homepageImage/sellingproducts/image6.png"
-import img7 from "../../../../assets/images/homepageImage/sellingproducts/image7.png"
-import img8 from "../../../../assets/images/homepageImage/sellingproducts/image8.png"
+
 import "./SellingProducts.css";
 
 // const SellingProducts = () => {
@@ -49,8 +42,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const SellingProducts = () => {
-    const images = [img1, img2, img3, img4, img5, img6, img7, img8];
+const SellingProducts = ({images}) => {
+   console.log(images,'cdsdf')
     const settings = {
       infinite: true,
       speed: 500,
