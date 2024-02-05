@@ -14,6 +14,7 @@ export default function ThankYou() {
         return date.toLocaleDateString(undefined, options);
     }
     const orderFromURL = searchParams.get("orderSuccess");
+    console.log("orderFromURL", orderFromURL);
     if (orderFromURL) {
         try {
             orderFromURL = JSON.parse(orderFromURL);
@@ -21,6 +22,7 @@ export default function ThankYou() {
             console.log("error parsing order: ", error);
         }
     }
+    console.log("orderFromURL", orderFromURL);
 
     const navigate = useNavigate();
     const [thankOrderDetails, setThankOrderDetails] = useState({});
