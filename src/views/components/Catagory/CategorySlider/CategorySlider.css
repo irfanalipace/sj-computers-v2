@@ -1,0 +1,16 @@
+.category-slider .slider-button{
+    background-color: white;
+    height: 80px !important;
+    border: 0;
+    border-radius: 0;
+    color: gray;
+    top: 30%;
+}
+
+.category-slider .swiper-button-next::after{
+    font-size: 20px !important;
+}
+
+.category-slider .swiper-button-prev::after{
+    font-size: 20px !important;
+}

@@ -23,8 +23,8 @@ const ProductType = () => {
                         <div className="categories-container">
                             <ProductItem4 />
                         </div>
-                        <Link to="/" className="text-decoration-none">
-                            <p className="section-link">Shop Now</p>
+                        <Link to="/category" className="text-decoration-none">
+                            <p className="section-link">See all</p>
                         </Link>
                     </div>
                 </div>
