@@ -144,7 +144,8 @@ class PayPalController extends Controller
             DB::commit();
             $orderDetail = [
              "order"  =>  $orderData,
-             "cart_data" => $check_product_first
+             "cart_data" => $check_product_first,
+             "sucess" => true
             ];
             
             return redirect()->to('thank-you?orderSuccess='.json_encode($orderDetail));
