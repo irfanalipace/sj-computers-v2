@@ -21,18 +21,18 @@ class OrderRepository
         if (!$guestUser) {
             $guestUser = new Guest();
             $guestUser->ip_address = request()->ip();
-            $guestUser->full_name = $detail['full_name'] ?? null;
-            $guestUser->phone_number = $detail['phone_number'] ?? null;
+            $guestUser->full_name = $data['full_name'] ?? null;
+            $guestUser->phone_number = $data['phone_number'] ?? null;
             $guestUser->email = $data['email'];
-            $guestUser->address = $detail['address'] ?? null;
-            $guestUser->city = $detail['city'] ?? null;
-            $guestUser->state = $detail['state'] ?? null;
-            $guestUser->zip_code = $detail['zip_code'] ?? null;
-            $guestUser->country = $detail['country'] ?? null;
-            $guestUser->apartment = $detail['apartment'] ?? null;
+            $guestUser->address = $data['address'] ?? null;
+            $guestUser->city = $data['city'] ?? null;
+            $guestUser->state = $data['state'] ?? null;
+            $guestUser->zip_code = $data['zip_code'] ?? null;
+            $guestUser->country = $data['country'] ?? null;
+            $guestUser->apartment = $data['apartment'] ?? null;
             $guestUser->save();
         }
-
+       
         return $guestUser;
     }
 
@@ -46,7 +46,7 @@ class OrderRepository
 
         //saving order after invoice created
         $order = [];
-
+       
         $order['total_amount'] = $cartData['total_amount'];
         $order['sub_total'] = $cartData['sub_total'];
         $order[$user_type == StatusEnum::USER ? 'user_id' : 'guest_id'] = $user->id;      //user id or guest id
@@ -159,10 +159,11 @@ class OrderRepository
     protected function storeInvoice($payment_type, $data, $total_amount, $userId, $user_type, $user)
     {
         try {
+            
             switch ($payment_type) {
                 case StatusEnum::PAYMENTTYPEPAYPAL:
                     # Paypal data...
-                    $payerID = $data['PayerID'];
+                    // $payerID = $data['PayerID'];
 
                     $paymentType = StatusEnum::PAYMENTTYPEPAYPAL;
 
@@ -192,7 +193,7 @@ class OrderRepository
 
             return $invoice;
         } catch (Exception $e) {
-            return false;
+           throw new Exception($e->getMessage());
         }
     }
 
@@ -210,11 +211,12 @@ class OrderRepository
     /*  check product quantity run time */
     public function checkProduct($cart_items,$userId,$userType)
     {        
-        
+      
         $data = [];
         // $cart = Cart::session($userId);
         foreach ($cart_items as $value) {
             # code...
+           
             $product_id = ($userType == StatusEnum::GUEST) ? $value['product_id'] : $value['id'];
             $quantity = ($userType == StatusEnum::GUEST) ? $value['qty'] : $value['quantity'];
             $product = Product::whereId($product_id)->withoutGlobalScopes()->first();

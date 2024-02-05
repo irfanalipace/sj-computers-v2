@@ -60,22 +60,22 @@ class SquareController extends BaseController
 
         try {
             $idempotencyKey = uniqid();
-
+            
             // /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
             $userIdToPass = $user->id;
             $user_type = ($userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
             $cartItems = ($userType == StatusEnum::GUEST) ? $request->cart_items : [];
-
+          
             //create customer || retrieve customer if already added
             if ($user->square_cus_id == null) {
                 $customer = $this->createCustomer($user,$user_type);
             } else {
                 $customer = $this->getCustomer($user);
             }           
-
+           
             $cartContent = \Cart::session($userIdToPass)->getContent();
-            $listofItems = ($this->userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
-            
+            $listofItems = ($userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
+           
             $check_product_first = $this->repository->checkProduct($listofItems,$userIdToPass,$userType);
             if (!$check_product_first) {
                 throw new Exception('Please try again.');
@@ -110,7 +110,7 @@ class SquareController extends BaseController
             }
             
             $orderData['order'] = $order['order'];
-
+           
             // Get card Token
             $amount_money = new Money();
             $amount_money->setAmount($cartDetails['totalAmount'] * 100);
@@ -169,9 +169,9 @@ class SquareController extends BaseController
             if ($api_response->isSuccess()) {
                 $customer_id = $api_response->getResult()->getCustomer()->getId();
                 //saving customer id in user table square_cus_id column
-
+              
                 if ($userType != StatusEnum::GUEST) {
-                    User::whereId($userId)->update(['square_cus_id' => $customer_id]);
+                    User::whereId($user->id)->update(['square_cus_id' => $customer_id]);
                 } else {
                     Guest::whereId($user->id)->update(['square_cus_id' => $customer_id]);
                 }

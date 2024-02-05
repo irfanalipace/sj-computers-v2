@@ -27,16 +27,27 @@ class PaymentController extends BaseController
     {
         $this->user = Auth::guard('api')->user();
         $this->repository = $repository;
+        if ($this->user) {
+            $this->userId = $this->user->id;
+            $this->userType = StatusEnum::USER;
+            $this->totalAmount = \Cart::session($this->userId)->getTotal();
+            $this->subTotal = \Cart::session($this->userId)->getSubTotal();
+            $this->totalQty = \Cart::session($this->userId)->getTotalQuantity();
+        } else {
 
-        $guestUser = ($this->user) ?? $this->guestUser($request->shipping_address);
-        $this->user = ($this->user) ? $this->user : $guestUser;
-        $this->userType = ($this->user) ? StatusEnum::USER : StatusEnum::GUEST;
-        $this->userId = ($this->user) ? $this->user->id : $guestUser->email;
-            
-        $this->shipment_amount = isset($request->details['shipment_amount']) ? $request->details['shipment_amount'] : 0.00;
-        $this->estimate_days = isset($request->details['estimate_days']) ? $request->details['estimate_days'] : null;     
+            $guestUser = $this->guestUser($request->shipping_address);
+            $this->user = $guestUser;
+            $this->userId = $guestUser->email;
+            $this->totalAmount = isset($request->details['total']) ? $request->details['total'] : 0.00;
+            $this->subTotal = isset($request->details['sub_total']) ? $request->details['sub_total'] : 0.00;
+            $this->totalQty = isset($request->details['total_quantity']) ? $request->details['total_quantity'] : 0.00;
+            $this->userType = StatusEnum::GUEST;
+            $this->shipment_amount = isset($request->details['shipment_amount']) ? $request->details['shipment_amount'] : 0.00;
+            $this->estimate_days = isset($request->details['estimate_days']) ? $request->details['estimate_days'] : null;  
+        }
         
         $this->cartDetails = $this->cartDetails($request);
+       
         
     }
     // chechout
@@ -71,12 +82,7 @@ class PaymentController extends BaseController
 
     /* Cart details for user and guest */
     private function cartDetails($request)
-    {        
-        $this->totalAmount = ($this->user) ? Cart::session($this->userId)->getTotal() : $request->details['total'] ;
-        $this->subTotal = ($this->user) ? Cart::session($this->userId)->getSubTotal() : $request->details['sub_total'];
-        $this->totalQty = ($this->user) ? Cart::session($this->userId)->getTotalQuantity() : $request->details['total_quantity'] ;        
-        
-      
+    {       
         return [
             'totalAmount' => $this->totalAmount ?? 0.00,
             'subTotal' =>  $this->subTotal ?? 0.00,
