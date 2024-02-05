@@ -13,7 +13,7 @@ export default function ThankYou() {
         const date = new Date(dateString);
         return date.toLocaleDateString(undefined, options);
     }
-    const orderFromURL = searchParams.get("orderSuccess");
+    let orderFromURL = searchParams.get("orderSuccess");
     console.log("orderFromURL", orderFromURL);
     if (orderFromURL) {
         try {
