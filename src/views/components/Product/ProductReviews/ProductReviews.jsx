@@ -33,13 +33,19 @@ const reviewPerPage = 5;
 function ProductReviews({ productId, productAsin, onFilterChange }) {
     const dispatch = useDispatch();
     const reviewState = useSelector((slice) => slice.review);
+    // debugger;
     const [ReviewsData, setReviewsData] = useState([]);
 
     const fetchData = async (productId) => {
+        // if (reviewState?.reviews?.product_review?.data?.length === 0) {
+        //     setReviewLoading([]);
+        //     return;
+        // }
         try {
             const response = await allReviewImagesApi(productId);
             console.log(response, "responseAllImage");
             setReviewsData(response);
+            // debugger;
         } catch (error) {
             console.log("error");
         }
@@ -47,7 +53,11 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
 
     useEffect(() => {
         fetchData(productId);
-    }, [allReviewImagesApi]);
+    }, [
+        productId,
+        productAsin,
+        reviewState?.reviews?.product_review?.data?.length,
+    ]);
 
     const [filterBy, setFilterBy] = useState(PRODUCT_FILTER_KEY_ENUM.TOP);
     const [reviews, setReviews] = useState(reviewState.reviews);
@@ -101,10 +111,8 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
     }, [filterBy]);
 
     useEffect(() => {
-        if (!reviewState.reviews?.product_review) {
-            getProductReviews(productId, 1, reviewPerPage);
-        }
-    }, []);
+        getProductReviews(productId, 1, reviewPerPage);
+    }, [productId, productAsin]);
 
     return (
         <div className="product-reviews-section product-section">
