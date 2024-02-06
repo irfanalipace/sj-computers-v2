@@ -84,8 +84,22 @@ class ReviewRepository
 
     public function indexReviewReport()
     {
-        return ProductReviewReport::all();
+        $data = ProductReviewReport::all();
+
+        // Count the records with status HELPFUL
+        $helpfulCount = $data->where('status', StatusEnum::HELPFUL)->count();
+
+        // Count the records with status REPORT
+        $reportCount = $data->where('status', StatusEnum::REPORT)->count();
+
+        // Return the counts
+        return [
+            'review_report' => $data,
+            'total_helpful' => $helpfulCount,
+            'total_report' => $reportCount
+        ];
     }
+
 
     public function showReviewReport($id)
     {
