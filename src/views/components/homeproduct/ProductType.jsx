@@ -267,7 +267,7 @@ const ProductType = () => {
                 {categoryArray.map((category, index) => (
                     <div key={index} className="col-12 col-sm-6 col-lg-3">
                         <Link
-                            to={category.link}
+                            to={'/category'}
                             className="text-decoration-none"
                         >
                             <div className="product-type-section">
@@ -287,7 +287,7 @@ const ProductType = () => {
                                         />
                                     )}
                                 </div>
-                                <p className="section-link">{category.link}</p>
+                                <p className="section-link"  to={'/category'}>{category.link}</p>
                             </div>
                         </Link>
                     </div>
@@ -401,7 +401,7 @@ const ProductType = () => {
                                                 
                                             </div>
                                             <p className="dev-sactions-price-old-new-time">
-                                                Ends in 18h:30m
+                                               Ends in 18h:30m
                                             </p>
                                         </div>
                                     </div>
@@ -456,7 +456,7 @@ const ProductType = () => {
                                         <ProductItem1 image={rams} />
                                     )}
                                 </div>
-                                <p className="section-link">{category.link}</p>
+                                <Link className="section-link" to={'/category'}>{category.link}</Link>
                             </div>
                         </Link>
                     </div>
@@ -506,7 +506,7 @@ const ProductType = () => {
                                         />
                                     )}
                                 </div>
-                                <p className="section-link">{category.link}</p>
+                                <Link className="section-link" to="/category">{category.link}</Link>
                             </div>
                         </Link>
                     </div>

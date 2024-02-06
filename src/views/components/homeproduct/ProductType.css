@@ -36,7 +36,9 @@
     margin: 8px 0;
     padding: 10px 20px;
 }
-
+.product-type-section a{
+    font-size: 12px;
+}
 .product-type-section .categories-container {
     height: 230px;
     display: flex;
