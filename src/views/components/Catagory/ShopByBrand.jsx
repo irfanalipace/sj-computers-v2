@@ -4,6 +4,7 @@ import { Typography } from '@mui/material'
 
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Link } from 'react-router-dom';
 
 // Import Swiper styles
 import "swiper/css";
@@ -44,9 +45,11 @@ const ShopByBrand = () => {
             >
                 {brandCategory.map((category, index) => (
                     <SwiperSlide key={index} style={{display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
+                    <Link to={"/category/monitors"} >    
                     <div style={{backgroundColor: "#F1F2F2", borderRadius: "100%", height:"135px", width: "135px", display: "flex", alignItems: "center", justifyContent: "center"}}>
                         <img width={"100px"} src={category.image_url} alt={category.name} />
                     </div>
+                    </Link>
                     <Typography varient="body2" fontWeight={"bolder"} p={1}>{category.category}</Typography>
                 </SwiperSlide>
                     ))}

@@ -6,6 +6,7 @@ import StarRatings from 'react-star-ratings';
 import FilterBar from "../../FilterBar/FilterBar"
 import { computerCategories } from '../DummyApi';
 import FilterBarlayout2 from './FilterbarLayout2';
+import { Link } from 'react-router-dom';
 
 const CategorySidebar = () => {
 
@@ -37,13 +38,13 @@ const CategorySidebar = () => {
     <Grid container height={"95%"} sx={{borderRight: "0.5px solid gray"}} >
 
         <Grid item ml={2}>
-            <Typography variant='body1' fontWeight={"bolder"}>Catagories</Typography>    
+            <Typography variant='body2' fontWeight={"bolder"} ml>Catagories</Typography>    
           {computerCategories?.slice(0, visibleCategory)?.map((category, index) => (
             <>
-            <Typography variant='body1'>{category.category}<IconButton size='small' onClick={() => toggleSubCategoryVisibility(index)}><KeyboardArrowDownIcon /></IconButton></Typography>
+            <Typography ml={2} variant='body2'>{category.category}<IconButton size='small' onClick={() => toggleSubCategoryVisibility(index)}><KeyboardArrowDownIcon /></IconButton></Typography>
             {isSubCategoryVisible[index] && <Box ml={3}>
-                <Typography variant='body1'>Basic Monitors</Typography>
-                <Typography variant='body1'>4K visual monitors</Typography>
+                <Typography variant='body2'>Basic Monitors</Typography>
+                <Typography variant='body2'>4K visual monitors</Typography>
             </Box>}
             </>
             ))}
@@ -55,15 +56,17 @@ const CategorySidebar = () => {
             }
             </Grid>
             
-            <Grid item ml={2}>
-            <Typography variant='body1' fontWeight={"bolder"}>Customer Review</Typography>
-            <Box ml={3}>
-            <StarRatings starDimension='20px' starSpacing='0' rating={3} starRatedColor='orange' />
+            <Grid item ml={2} my={1}>
+            <Typography variant='body2' fontWeight={"bolder"}>Customer Review</Typography>
+            <Box ml={1} py={1}>
+            <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={4} starRatedColor='orange'  />&Up</Typography>
+            <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={3} starRatedColor='orange'  />&Up</Typography>
+            <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={4.5} starRatedColor='orange'  />&Up</Typography>
             </Box>
         </Grid>
 
-        <Grid item my={3}>
-        <Typography variant='body1' fontWeight={"bolder"} ml={2}>Filters</Typography>
+        <Grid item my={0}>
+        {/* <Typography variant='body1' fontWeight={"bolder"} ml={2}>Filters</Typography> */}
         <div className='sticky-filter-bar' style={{position: "static", height: "100vh", border: "none"}}> 
           {/* <FilterBar /> */}
           <FilterBarlayout2 />
