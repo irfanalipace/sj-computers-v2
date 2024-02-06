@@ -33,6 +33,7 @@ class PayPalController extends Controller
 
     public function processPayment($request,$user,$userType,$cartDetails)
     {
+
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->createOrder([
@@ -45,7 +46,7 @@ class PayPalController extends Controller
                 [
                     "amount" => [
                         "currency_code" => "USD",
-                        "value" => 100
+                        "value" => $cartDetails['totalAmount']
                     ],
                 ],
             ],
@@ -100,7 +101,8 @@ class PayPalController extends Controller
          
          $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType);
          if (!$check_product_first) { 
-             throw new Exception('Please try again.');
+            DB::rollBack();
+             return redirect('cart?error='."Product quantity is invalid");
          }
 
          // create invoice along with order
@@ -130,10 +132,10 @@ class PayPalController extends Controller
 
             $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddress, $userType, $cartItems);
             if (!$order) {
-                throw new Exception('Please Try Again.');
+                return redirect()->route('cancel');
              }    
 
-            $orderData['order'] = $order['order'];
+            $orderData['order_detail'] = $order['order'];
             Invoice::where('id', $order['invoice_id'])->update(['payer_id' => $response['id'] ]);
             GenerateInvoiceJob::dispatch($user, $orderData, $order);
 
