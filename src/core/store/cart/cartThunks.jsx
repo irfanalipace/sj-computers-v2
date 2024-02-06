@@ -382,9 +382,7 @@ export const validateCartItems = (args) => {
                 const cartDetails = { ...response?.details };
                 let cartItems = [...response?.data];
                 cartItems = mapResponse(cartItems);
-                console.print("cartItems before: ", cartItems);
                 cartItems = setCartItemAfterError(cartItems, errors, true);
-                console.print("cartItems after: ", cartItems);
 
                 if (state.auth.isAuthenticated)
                     dispatch({
