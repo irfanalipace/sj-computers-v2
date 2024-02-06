@@ -5,8 +5,7 @@ import "swiper/swiper-bundle.min.css";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 import "swiper/css/navigation";
 import ReviewsDialog from "./ProductReviewsDialog/ReviewsDialog";
-import "./ReviewImagesSlider.css"
-
+import "./ReviewImagesSlider.css";
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -15,6 +14,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
     const [reviewId, setReviewId] = useState({});
     const [imgId, setImgId] = useState("");
     const [imgIndex, setImgIndex] = useState(0);
+    // debugger;
 
     console.log(reviews, "reviews");
 
@@ -46,7 +46,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
     }
     useEffect(() => {
         checkProductMediaLength(ReviewsData?.data);
-    }, [ReviewsData]);
+    }, [ReviewsData, productId]);
 
     // console.log(ReviewsData.reviews);
 
@@ -119,7 +119,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                                                 backgroundImage: `url(${image?.file_path})`,
                                                 backgroundSize: "cover",
                                                 backgroundPosition: "center",
-                                                cursor: "pointer"
+                                                cursor: "pointer",
                                             }}
                                             onClick={() =>
                                                 handleOpenDialog(
@@ -137,8 +137,14 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                         ))}
                     </Swiper>
                     {/* SLIDER-BUTTONS */}
-                    <div className="swiper-button-next slider-button" style={{position: "absolute", right: 0, top: "60%"}}></div>
-                    <div className="swiper-button-prev slider-button" style={{position: "absolute",  left: 0, top: "60%"}}></div>
+                    <div
+                        className="swiper-button-next slider-button"
+                        style={{ position: "absolute", right: 0, top: "60%" }}
+                    ></div>
+                    <div
+                        className="swiper-button-prev slider-button"
+                        style={{ position: "absolute", left: 0, top: "60%" }}
+                    ></div>
                 </div>
             ) : (
                 ""
