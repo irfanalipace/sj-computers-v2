@@ -37,6 +37,8 @@ import sellingimg8 from "../../../assets/images/homepageImage/sellingproducts/im
 import SellingProducts from "../MobileCategory/SellingProducts/SellingProducts";
 import Recommendation from "../Recommendation/Recommendation";
 import { fetchProducts } from "../../../core/store/products/productsThunks";
+import moment from "moment";
+
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import StarRatings from "react-star-ratings";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
@@ -67,7 +69,6 @@ const categoryArray = [
         name: "Business",
         link: "Shop Now",
     },
-    
 ];
 
 const gamingArray = [
@@ -110,6 +111,12 @@ const featured = [
 const ProductType = () => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const products = useSelector((state) => state?.products.products);
+    const currentDate = moment();
+    const oneDayAgo = moment().subtract(1, "days");
+    const duration = moment.duration(currentDate.diff(oneDayAgo));
+    const hours = duration.hours();
+    const minutes = duration.minutes();
+
     console.log(products, "fdshfhshfhs");
     useEffect(() => {
         getProduct();
@@ -160,7 +167,7 @@ const ProductType = () => {
             image: gaminimg1,
             categoryLink: "/category/desktop",
             categoryName: "Product Name",
-        }
+        },
     ];
     const featuredItems = [
         {
@@ -260,16 +267,12 @@ const ProductType = () => {
         rectangle5,
     ];
 
-   
     return (
         <div className="product-type-container">
             <div className="row mx-0">
                 {categoryArray.map((category, index) => (
                     <div key={index} className="col-12 col-sm-6 col-lg-3">
-                        <Link
-                            to={'/category'}
-                            className="text-decoration-none"
-                        >
+                        <Link to={"/category"} className="text-decoration-none">
                             <div className="product-type-section">
                                 <h2 className="h4-heading category-name">
                                     {category.name}
@@ -287,7 +290,9 @@ const ProductType = () => {
                                         />
                                     )}
                                 </div>
-                                <p className="section-link"  to={'/category'}>{category.link}</p>
+                                <p className="section-link" to={"/category"}>
+                                    {category.link}
+                                </p>
                             </div>
                         </Link>
                     </div>
@@ -394,14 +399,17 @@ const ProductType = () => {
                                                 </sup>
                                             </div>
                                             <div className="save-button-price-new-old">
-                                          
-                                            <p>Save {products[0]?.price ? parseFloat(products[0].price).toFixed(2) : 0}</p>
-
-                                            
-                                                
+                                                <p>
+                                                    Save{" "}
+                                                    {products[0]?.price
+                                                        ? parseFloat(
+                                                              products[0].price
+                                                          ).toFixed(2)
+                                                        : 0}
+                                                </p>
                                             </div>
                                             <p className="dev-sactions-price-old-new-time">
-                                               Ends in 18h:30m
+                                                Ends in {hours}h:{minutes}m
                                             </p>
                                         </div>
                                     </div>
@@ -456,7 +464,9 @@ const ProductType = () => {
                                         <ProductItem1 image={rams} />
                                     )}
                                 </div>
-                                <Link className="section-link" to={'/category'}>{category.link}</Link>
+                                <Link className="section-link" to={"/category"}>
+                                    {category.link}
+                                </Link>
                             </div>
                         </Link>
                     </div>
@@ -474,7 +484,6 @@ const ProductType = () => {
                     </Link>
                 </div>
             </div>
-           
 
             <div className="row mx-0">
                 {gamingArray.map((category, index) => (
@@ -492,28 +501,26 @@ const ProductType = () => {
                                         <ProductItem3 items={gamingItems} />
                                     ) : (
                                         <ProductItem1
-                                        image={
-                                            index === 1
-                                              ? gamingProducts1
-                                              : index === 2
-                                                ? gamingProducts2
-                                                : index === 3
-                                                  ? gamingProducts3
-                                                  : gamingProducts3 // Replace 'defaultImage' with a fallback image or handle the case accordingly
-                                          }
-                                          
-                                          
+                                            image={
+                                                index === 1
+                                                    ? gamingProducts1
+                                                    : index === 2
+                                                    ? gamingProducts2
+                                                    : index === 3
+                                                    ? gamingProducts3
+                                                    : gamingProducts3 // Replace 'defaultImage' with a fallback image or handle the case accordingly
+                                            }
                                         />
                                     )}
                                 </div>
-                                <Link className="section-link" to="/category">{category.link}</Link>
+                                <Link className="section-link" to="/category">
+                                    {category.link}
+                                </Link>
                             </div>
                         </Link>
                     </div>
                 ))}
-            
             </div>
-          
 
             <div className="row mx-0">
                 <div className="col-12 col-sm-12 col-lg-12">
