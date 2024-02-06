@@ -35,6 +35,22 @@
   color: rebeccapurple;
   content: '→';
 }
+.recommund-dev-slider-sections-opps .swiper-button-prev {
+color: black;
+background: #FFFFFF;
+}
+.recommund-dev-slider-sections-opps .swiper-button-next{
+  color: black;
+  background: #FFFFFF;
+  }
+  .recommund-dev-slider-sections-opps .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
+    content: 'prev';
+    font-size: 21px;
+}
+.recommund-dev-slider-sections-opps .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
+  content: 'next';
+  font-size: 21px;
+}
 .slick-prev:before, .slick-next:before {
   margin-top: -4px !important;
   z-index: 99 !important;
