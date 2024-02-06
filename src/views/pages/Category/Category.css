@@ -43,6 +43,13 @@
     margin-top: 0;
 }
 
+/* this class is for recommendation slider in categories.jsx */
+.product-section-heading{
+    /* color: aqua; */
+    font-size: 20px;
+    font-weight: bolder;
+}
+
 @media screen and (max-width: 585px) {
     .filter-results {
         margin-left: 0;
