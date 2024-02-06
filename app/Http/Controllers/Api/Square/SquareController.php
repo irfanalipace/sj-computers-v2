@@ -78,7 +78,8 @@ class SquareController extends BaseController
            
             $check_product_first = $this->repository->checkProduct($listofItems,$userIdToPass,$userType);
             if (!$check_product_first) {
-                throw new Exception('Product Quantity is invalid.');
+                $error = ['cartError' => 'Product quantity is invalid.'];
+                throw new Exception(json_encode($error));
             }
            
             // create invoice along with order
