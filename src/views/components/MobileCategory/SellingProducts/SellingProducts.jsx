@@ -4,40 +4,11 @@ import Carousel from "react-bootstrap/Carousel";
 
 import "./SellingProducts.css";
 
-// const SellingProducts = () => {
-//   const images = [img1, img2, img3, img4, img5, img6, img7, img8];
-
-//   const groupedImages = [];
-//   for (let i = 0; i < images.length; i += 8) {
-//     groupedImages.push(images.slice(i, i + 8));
-//   }
-
-//   return (
-//     <Carousel data-bs-theme="dark">
-//       {groupedImages.map((group, index) => (
-//         <Carousel.Item key={index}>
-//           <div className="d-flex justify-content-around">
-//             {group.map((image, subIndex) => (
-//               <img
-//                 key={subIndex}
-//                 className="d-block w-100"
-//                 src={image}
-//                 alt={`Slide ${index * 8 + subIndex + 1}`}
-//               />
-//             ))}
-//           </div>
-//           <Carousel.Caption></Carousel.Caption>
-//         </Carousel.Item>
-//       ))}
-//     </Carousel>
-//   );
-// };
-
-// export default SellingProducts;
 
 
 
-import Slider from 'react-slick';
+
+
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
