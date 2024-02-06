@@ -394,7 +394,11 @@ const ProductType = () => {
                                                 </sup>
                                             </div>
                                             <div className="save-button-price-new-old">
-                                                <p>Save $23</p>
+                                          
+                                            <p>Save {products[0]?.price ? parseFloat(products[0].price).toFixed(2) : 0}</p>
+
+                                            
+                                                
                                             </div>
                                             <p className="dev-sactions-price-old-new-time">
                                                 Ends in 18h:30m
