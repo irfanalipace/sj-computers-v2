@@ -72,11 +72,10 @@ const AllCategoriesHeader = () => {
                     {index == 0 ? "" :<span style={{margin: "0px 5px", color: "black"}}>|</span> }
                     <HtmlTooltip title={
                         <>
-                            <Typography variant='body2' p={.5} fontSize={"small"}>Sub-category-1</Typography>
-                            <Typography variant='body2' p={.5} fontSize={"small"}>Sub-category-1</Typography>
-                            <Typography variant='body2' p={.5} fontSize={"small"}>Sub-category-1</Typography>
-                            <Typography variant='body2' p={.5} fontSize={"small"}>Sub-category-1</Typography>
-                            <Typography variant='body2' p={.5} fontSize={"small"}>Sub-category-1</Typography>
+                            <Link to={"/category/desktop"} style={{textDecoration: "none", color: "black"}}><Typography variant='body2' p={.5} fontSize={"small"}>desktop</Typography></Link>
+                            <Link to={"/category/monitors"} style={{textDecoration: "none", color: "black"}}><Typography variant='body2' p={.5} fontSize={"small"}>monitors</Typography></Link>
+                            <Link to={"/category/tower"} style={{textDecoration: "none", color: "black"}}><Typography variant='body2' p={.5} fontSize={"small"}>tower</Typography></Link>
+                            <Link to={"/category/laptops"} style={{textDecoration: "none", color: "black"}}><Typography variant='body2' p={.5} fontSize={"small"}>laptops</Typography></Link>
                         </>
                     }>
                         <Link to={""} key={category.id} style={{textDecoration: "none", color: "#007185"}}>{category.name} <ExpandMoreIcon fontSize='small' /></Link>
