@@ -217,3 +217,20 @@ export const generatePath = (url, searchParams) => {
     }
     return newURL.pathname + "?" + params.toString();
 };
+
+export function extractJsonObjectFromError(inputString) {
+    const errorMessage = "Something went wrong.";
+
+    if (!inputString.startsWith(errorMessage)) {
+        return {};
+    }
+
+    const jsonString = inputString.substring(errorMessage.length).trim();
+
+    try {
+        const jsonObject = JSON.parse(jsonString);
+        return jsonObject;
+    } catch (error) {
+        return {};
+    }
+}

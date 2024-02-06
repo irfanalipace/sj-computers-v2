@@ -51,8 +51,7 @@ export const SquareForm = ({ hideCloseBtn, hideModal }) => {
             state: { error },
         });
     };
-    const onQuantityIssue = (response) => {
-        console.log('response: ', response);
+    const onQuantityIssue = () => {
         navigate("/cart", {
             state: { error: true },
         });

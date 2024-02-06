@@ -1,5 +1,6 @@
 import { paymentApi } from "@api/payment";
 import { PAYMENT_METHODS } from "../utils/constants";
+import { extractJsonObjectFromError } from "../utils/helpers";
 
 export default class PaymentService {
     constructor(data) {
@@ -35,18 +36,21 @@ export default class PaymentService {
                 typeof this.onPaymentApiSuccess === "function" &&
                     this.onPaymentApiSuccess(response);
             } else {
-                if (response?.cart_error) {
-                    typeof this.onQuantityIssue === "function" &&
-                        this.onQuantityIssue(response?.data);
-                } else {
-                    typeof this.onPaymentApiFailure === "function" &&
-                        this.onPaymentApiFailure(response?.data?.message);
-                }
+                typeof this.onPaymentApiFailure === "function" &&
+                    this.onPaymentApiFailure(response?.data?.message);
             }
         } catch (error) {
-            typeof this.onPaymentApiFailure === "function" &&
-                this.onPaymentApiFailure('Something went Wrong');
+            const errorString = error?.data?.errors;
+            const errors = extractJsonObjectFromError(errorString);
+            if (errors?.cartError) {
+                typeof this.onQuantityIssue === "function" &&
+                    this.onQuantityIssue();
+            } else
+                typeof this.onPaymentApiFailure === "function" &&
+                    this.onPaymentApiFailure(error?.data?.errors);
         }
         this.onProcessEnd && this.onProcessEnd();
     }
 }
+
+

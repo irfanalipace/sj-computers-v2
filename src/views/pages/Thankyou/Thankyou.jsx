@@ -19,6 +19,7 @@ export default function ThankYou() {
         return date.toLocaleDateString(undefined, options);
     }
     let orderFromURL = searchParams.get("orderSuccess");
+    
     if (orderFromURL) {
         try {
             orderFromURL = JSON.parse(orderFromURL);

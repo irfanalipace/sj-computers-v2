@@ -19,6 +19,7 @@ import mastercard from "@images/common/mastercard.png";
 import "./Checkout.css";
 import Discount from "@components/Checkout/Discount/Discount";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
     const location = useLocation();
@@ -28,6 +29,7 @@ export default function Checkout() {
         2: { open: false },
         3: { open: false },
     };
+    const navigate = useNavigate();
 
     const [accordion, setAccordion] = useState(initAccordionValues);
     const [paymentMethod, setPaymentMethod] = useState("");
@@ -73,13 +75,18 @@ export default function Checkout() {
 
     useEffect(() => {
         // displays error on top whenever paypal payment fails and open shipping details form (First Accordion)
-
-        if (searchParams.get("error")) {
-            toggleAccordion(3);
-        } else {
-            toggleAccordion(1);
+        const error = searchParams.get("error");
+        if (error) {
+            const errors = extractJsonObjectFromError(error);
+            if (errors.cartError) {
+                navigate("/cart", {
+                    state: { error: true },
+                });
+            } else {
+                setPaymentError(error);
+                toggleAccordion(3);
+            }
         }
-        setPaymentError(searchParams.get("error"));
     }, [searchParams.get("error")]);
 
     return (
