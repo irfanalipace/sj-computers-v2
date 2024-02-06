@@ -4,7 +4,7 @@ import { Modal } from "react-bootstrap";
 import { SquareForm } from "./Square/SquareForm";
 import "./PaymentMethod.css";
 
-const PaymentModal = ({ isOpen = false, handleClose, shippingDetails }) => {
+const PaymentModal = ({ isOpen = false, handleClose }) => {
     const [showCloseBtn, setShowCloseBtn] = useState(true);
     const hideCloseBtn = () => {
         setShowCloseBtn(false);
@@ -31,7 +31,6 @@ const PaymentModal = ({ isOpen = false, handleClose, shippingDetails }) => {
                 <SquareForm
                     hideCloseBtn={hideCloseBtn}
                     hideModal={handleClose}
-                    shippingDetails={shippingDetails}
                 />
             </Modal.Body>
         </Modal>

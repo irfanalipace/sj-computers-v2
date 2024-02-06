@@ -33,6 +33,7 @@ class PayPalController extends Controller
 
     public function processPayment($request,$user,$userType,$cartDetails)
     {
+
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->createOrder([
@@ -45,19 +46,26 @@ class PayPalController extends Controller
                 [
                     "amount" => [
                         "currency_code" => "USD",
-                        "value" => 100
-                    ]
-                ]
-            ]
+                        "value" => $cartDetails['totalAmount']
+                    ],
+                ],
+            ],
+
         ]);
+        $cartItems = (isset($request->cart_items)) ?  $request->cart_items : [];
         
         if(isset($response['id']) && $response['id']!=null) {
-            session()->put('shippping_address', $request->shipping_address);      
-            session()->put('user', $user);
-            session()->put('user_type', $userType); 
-            session()->put('cart_details', $cartDetails);         
+            $detail = [
+                "shippping_address" =>$request->shipping_address,
+                "user" => $user,
+                "user_type" => $userType,
+                "cart_details" => $cartDetails,
+                "cart_items" => $cartItems,
+            ];
+            \Cache::put("paypal_transaction_".$response['id'],$detail, 1800); // 1800 seconds = 30 minutes
+              
             // Session::put('shippping_address', $request->shipping_address);
-            (isset($request->cart_items)) ??   session()->put('cart_item', $request->cart_items);
+            
             foreach($response['links'] as $link) {
                 if($link['rel'] === 'approve') {
                     return $link['href'];
@@ -75,35 +83,40 @@ class PayPalController extends Controller
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
-        $shippingAddress = session()->get('shippping_address');      
-        $user =  session()->get('user'); 
-        $userType =  session()->get('user_type'); 
-        $cartDetails =  session()->get('cart_details');  
+
+        $getCache = \Cache::get("paypal_transaction_".$request->token);
+        $shippingAddress = $getCache['shippping_address'];      
+        $user =  $getCache['user']; 
+        $userType =  $getCache['user_type']; 
+        $cartDetails = $getCache['cart_details'];  
+        
          /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
          $userIdToPass = ($userType != StatusEnum::GUEST) ? $user->id : $user->email;
          $userType = ($userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
-         $cartItems = ($userType == StatusEnum::GUEST) ? session()->get('cart_item') : [];
+         $cartItems = ($userType == StatusEnum::GUEST) ? $getCache['cart_items'] : [];
         
-         $cartContent = Cart::session($userIdToPass)->getContent();
+         $cartContent = \Cart::session($userIdToPass)->getContent();
+       
          $listofItems = ($userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
          
          $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType);
          if (!$check_product_first) { 
-             throw new Exception('Please try again.');
+            DB::rollBack();
+             return redirect('cart?error='."Product quantity is invalid");
          }
 
          // create invoice along with order
          $orderData = [];
 
-         $orderData['total_amount'] = number_format($cartDetails['[totalAmount]'], 2, '.', '');
+         $orderData['total_amount'] = number_format($cartDetails['totalAmount'], 2, '.', '');
          $orderData['sub_total'] = number_format($cartDetails['subTotal'], 2, '.', '');
-         $orderData['item_qty'] =  $$cartDetails['totalQty'];
+         $orderData['item_qty'] =  $cartDetails['totalQty'];
 
 
          $orderData['shipment_amount'] =  0;
          $orderData['estimate_day'] =  Carbon::now()->addWeekdays(5)->format('l d-m-Y');
 
-         $cartConditions = Cart::session($userIdToPass)->getConditions('shipment_days');
+         $cartConditions = \Cart::session($userIdToPass)->getConditions('shipment_days');
 
          foreach ($cartConditions as $condition) {
              $amount = $condition->getValue(); // the value of the condition
@@ -117,26 +130,28 @@ class PayPalController extends Controller
 
         if(isset($response['status']) && $response['status'] == 'COMPLETED') {
 
-            $order = $repository->createOrder(array(), $userIdToPass, $this->user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $request->shipping_address, $userType, $cartItems);
+            $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddress, $userType, $cartItems);
             if (!$order) {
-                throw new Exception('Please Try Again.');
+                return redirect()->route('cancel');
              }    
 
-            $orderData['order'] = $order['order'];
+            $orderData['order_detail'] = $order['order'];
             Invoice::where('id', $order['invoice_id'])->update(['payer_id' => $response['id'] ]);
             GenerateInvoiceJob::dispatch($user, $orderData, $order);
 
             //clear cart after successfull payment
-            Cart::session($userIdToPass)->clear();
+            \Cart::session($userIdToPass)->clear();
             //clear cart condition
-            Cart::session($userIdToPass)->clearCartConditions();
+           \Cart::session($userIdToPass)->clearCartConditions();
             DB::commit();
-            return redirect()->to('thank-you',['Order' => $orderData, "cart_data" => $check_product_first]);
+            $orderDetail = [
+             "order"  =>  $orderData,
+             "cart_data" => $check_product_first,
+             "sucess" => true
+            ];
             
-            unset($_SESSION['shippping_address']);
-            unset($_SESSION['user']);
-            unset($_SESSION['user_type']);
-            unset($_SESSION['cart_details']);
+            return redirect()->to('thank-you?orderSuccess='.json_encode($orderDetail));
+            \Cache::forget("paypal_transaction_".$request->token);
 
         } else {
             DB::rollBack();

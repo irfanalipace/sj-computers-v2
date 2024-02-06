@@ -15,6 +15,7 @@ const Emailsent = React.lazy(() => import("@pages/Auth/EmailSent"));
 const Product = React.lazy(() => import("@pages/Product/Product"));
 const ProductList = React.lazy(() => import("@pages/Product/ProductsBySearch"));
 const Category = React.lazy(() => import("@pages/Category/Category"));
+const Categories = React.lazy(() => import("@pages/Category/Categories"))
 const Account = React.lazy(() => import("@pages/Account/Account"));
 const Profile = React.lazy(() => import("@pages/Account/Profile"));
 const Security = React.lazy(() => import("@pages/Account/Security"));
@@ -136,6 +137,15 @@ const Router = () => {
                         <ProductNewReviews />
                     </PageWrapper>
                 </ProtectedRoute>
+            ),
+        },
+
+        {
+            path: "/category",
+            element: (
+                <PageWrapper>
+                    <Categories />
+                </PageWrapper>
             ),
         },
 

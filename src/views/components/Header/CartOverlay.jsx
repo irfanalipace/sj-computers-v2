@@ -19,22 +19,21 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
 
     const deleteItemFunction = (item) => {
         let cartQuantity = details?.total_items - 1;
-        let cartTotal = parseFloat(details?.total) - item?.price;
-        let cartSubTotal = parseFloat(details?.sub_total) - item?.price;
+        let cartTotal =
+            parseFloat(details?.total) -
+            item?.price -
+            parseFloat(item?.plan_price || 0);
+        let cartSubTotal =
+            parseFloat(details?.sub_total) -
+            item?.price -
+            parseFloat(item?.plan_price || 0);
 
         const cartDetails = {
             total_items: cartQuantity,
             sub_total: cartSubTotal.toFixed(2),
             total: cartTotal.toFixed(2),
         };
-        let warrantyPriceWithQuantity =
-            warrantyPriceDifference + parseFloat(cartItems?.plan_price || 0);
 
-        if (cartData?.plan?.value) {
-            cartItem.plan_price = parseFloat(warrantyPriceWithQuantity).toFixed(
-                2
-            );
-        }
         isAuthenticated
             ? dispatch(deleteItem({ cartItem: item }))
             : dispatch(deleteLocalItem({ cartItem: item, cartDetails }));
@@ -142,7 +141,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                             }
                                                         /> */}
                                                         </div>
-                                                        <div className="col-md-2 price-item">
+                                                        <div className="col-md-2 text-end price-item">
                                                             <p>
                                                                 <strong className="">
                                                                     $
@@ -201,11 +200,10 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                             </div>
                                                         </div>
                                                         <div className="col-md-8">
-                                                        {item?.plan
-                                                                        ?.value && (
-                                                            <div className="dev-price-data-overlay-page">
-                                                                <div>
-                                                                  
+                                                            {item?.plan
+                                                                ?.value && (
+                                                                <div className="dev-price-data-overlay-page">
+                                                                    <div>
                                                                         <div className="overlay-card-shipping-page-card-view-details">
                                                                             <div className="overlay-card-protection-button-remove-data mt-3">
                                                                                 <button>
@@ -213,7 +211,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                                                     Warranty
                                                                                 </button>
                                                                             </div>
-                                                                    
+
                                                                             <div className="overlay-sidebar-protect-card ">
                                                                                 <WarrantyBadge
                                                                                     durationInYears={
@@ -229,20 +227,19 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                                                 />
                                                                             </div>
                                                                         </div>
-                                                                
+                                                                    </div>
+                                                                    <div className="mt-3">
+                                                                        <p>
+                                                                            <strong className="new-price-data-overlay">
+                                                                                $
+                                                                                {
+                                                                                    item?.plan_price
+                                                                                }
+                                                                            </strong>
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
-                                                                <div className="mt-3">
-                                                                    <p>
-                                                                        <strong className="new-price-data-overlay">
-                                                                            $
-                                                                            {
-                                                                                item?.plan_price
-                                                                            }
-                                                                        </strong>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                                )}
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>

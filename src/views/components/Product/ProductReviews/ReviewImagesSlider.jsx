@@ -5,8 +5,7 @@ import "swiper/swiper-bundle.min.css";
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 import "swiper/css/navigation";
 import ReviewsDialog from "./ProductReviewsDialog/ReviewsDialog";
-import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
-import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
+import "./ReviewImagesSlider.css";
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -15,6 +14,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
     const [reviewId, setReviewId] = useState({});
     const [imgId, setImgId] = useState("");
     const [imgIndex, setImgIndex] = useState(0);
+    // debugger;
 
     console.log(reviews, "reviews");
 
@@ -46,7 +46,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
     }
     useEffect(() => {
         checkProductMediaLength(ReviewsData?.data);
-    }, [ReviewsData]);
+    }, [ReviewsData, productId]);
 
     // console.log(ReviewsData.reviews);
 
@@ -54,7 +54,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
         <>
             {ReviewsData?.data?.length > 0 && imagesArray ? (
                 <div
-                    className="review-images-section"
+                    className="review-images-section review-images-slider"
                     style={{ position: "relative", padding: "0px 70px" }}
                 >
                     {/* <button onClick={handleOpenDialog}>image Gallery</button> */}
@@ -74,8 +74,8 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                         spaceBetween={3}
                         slidesPerView={1}
                         navigation={{
-                            nextEl: ".swiper-btn-next",
-                            prevEl: ".swiper-btn-prev",
+                            nextEl: ".review-images-slider .swiper-button-next",
+                            prevEl: ".review-images-slider .swiper-button-prev",
                         }}
                         breakpoints={{
                             // For mobile screens
@@ -119,7 +119,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                                                 backgroundImage: `url(${image?.file_path})`,
                                                 backgroundSize: "cover",
                                                 backgroundPosition: "center",
-                                                cursor: "pointer"
+                                                cursor: "pointer",
                                             }}
                                             onClick={() =>
                                                 handleOpenDialog(
@@ -137,47 +137,14 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                         ))}
                     </Swiper>
                     {/* SLIDER-BUTTONS */}
-                    <ArrowBackIosNewOutlinedIcon
-                        sx={{
-                            position: "absolute",
-                            top: "50%",
-                            transform: "translate(-0%, 0%)",
-                            left: 0,
-                            ml: 2,
-                            border: "1px solid black",
-                            borderRadius: "5px",
-                            height: "35px",
-                            width: "35px",
-                            color: "black",
-                            p: 1,
-                            cursor: "pointer",
-                            ":hover": {
-                                backgroundColor: "whitesmoke",
-                            }
-                        }}
-                        className="swiper-btn-prev"
-                    />
-                    <ArrowForwardIosOutlinedIcon
-                        sx={{
-                            position: "absolute",
-                            top: "50%",
-                            transform: "translate(-0%, 0%)",
-                            right: 0,
-                            mr: 2,
-                            border: "1px solid black",
-                            borderRadius: "5px",
-                            height: "35px",
-                            width: "35px",
-                            color: "black",
-                            p: 1,
-                            cursor: "pointer",
-                            ":hover": {
-                                backgroundColor: "whitesmoke",
-                            }
-                        }}
-
-                        className="swiper-btn-next"
-                    />
+                    <div
+                        className="swiper-button-next slider-button"
+                        style={{ position: "absolute", right: 0, top: "60%" }}
+                    ></div>
+                    <div
+                        className="swiper-button-prev slider-button"
+                        style={{ position: "absolute", left: 0, top: "60%" }}
+                    ></div>
                 </div>
             ) : (
                 ""

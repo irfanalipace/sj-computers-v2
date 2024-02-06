@@ -1,53 +1,56 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-// import { productDetailsApi } from "@api/products";
-// import { Container, Row, Col, Table } from "react-bootstrap";
 
 import "./thankyou.css"; // Import the CSS file for the component
-import circle from "../../../assets/images/green-circle.svg";
 import tickImage from "../../../assets/images/tick1.svg";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearCartLocally } from "../../../core/utils/cartHelpers";
+import { CLEAR_CART } from "@store/cart/cartSlice";
 
 export default function ThankYou() {
-    // const isMobile = window.innerWidth <= 768;
+    const [searchParams] = useSearchParams();
+    const dispatch = useDispatch();
+
     function formatDate(dateString) {
         const options = { year: "numeric", month: "long", day: "numeric" };
         const date = new Date(dateString);
         return date.toLocaleDateString(undefined, options);
     }
+    let orderFromURL = searchParams.get("orderSuccess");
+    if (orderFromURL) {
+        try {
+            orderFromURL = JSON.parse(orderFromURL);
+        } catch (error) {
+            console.log("error parsing order: ", error);
+        }
+    }
+    console.log("orderFromURL: ", orderFromURL);
 
     const navigate = useNavigate();
     const [thankOrderDetails, setThankOrderDetails] = useState({});
     const [thankOrderItems, setThankOrderItems] = useState([]);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const location = useLocation();
-    const order = location.state?.order;
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    //   const handleButtonClick = () => {
-    //     // Redirect to the specific path
-    //     history.push("/specific-path");
-    //   };
-
     useEffect(() => {
         const storedOrder = window.localStorage.getItem("thankyouOrderDetails");
-        const order = location?.state?.order || JSON.parse(storedOrder);
-        if (order) {
+        const order =
+            location?.state?.order?.Order ||
+            JSON.parse(storedOrder)?.Order ||
+            orderFromURL?.order?.order;
+        if (order?.id) {
             const orderString = JSON.stringify(order);
             window.localStorage.setItem("thankyouOrderDetails", orderString);
             setThankOrderDetails(order);
-            let Order = order?.Order;
-
-            console.print(Order?.order?.order_item, "order");
-            setThankOrderItems(Order?.order?.order_item);
-            console.print(thankOrderItems, "order 3");
+            setThankOrderItems(order?.order_item);
+            clearCartLocally();
+            dispatch(CLEAR_CART());
         }
+        return () => {
+            window.localStorage.removeItem("thankyouOrderDetails");
+        };
     }, []);
-
-    useEffect(() => {
-        //    console.print(thankOrderItems, "2nd useeffect")
-        //    console.print(thankOrderDetails, "2nd useeffect for order details")
-    }, [thankOrderItems]);
 
     const handleWindowSizeChange = () => {
         setIsMobile(window.innerWidth <= 768);
@@ -105,7 +108,7 @@ export default function ThankYou() {
                     <p>
                         Your order with tracking No{" "}
                         <span style={{ fontWeight: "900" }}>
-                            {thankOrderDetails?.Order?.order?.id}
+                            {thankOrderDetails?.id}
                         </span>{" "}
                         has been successfully confirmed. We’ll send you an email
                         notification once your order has shipped.
@@ -170,8 +173,7 @@ export default function ThankYou() {
                                         </div>
                                         <div className="col-12 my-2 delivery-details">
                                             {
-                                                thankOrderDetails?.Order
-                                                    ?.estimate_day
+                                                thankOrderDetails?.estimate_day
                                             }
                                         </div>
                                         <div className="col-12 my-2 payment-type">
@@ -245,7 +247,7 @@ export default function ThankYou() {
                                     <td>{data?.order_id}</td>
                                     <td>{formatDate(data.created_at)}</td>
                                     <td>
-                                        {thankOrderDetails?.Order?.estimate_day}
+                                        {thankOrderDetails?.estimate_day}
                                     </td>
                                     <td>{"Square"}</td>
                                     <td>${data.price}</td>
@@ -271,8 +273,8 @@ export default function ThankYou() {
                 <div className="col-6 d-flex justify-content-end">
                     <p className="bold-total">
                         $
-                        {thankOrderDetails?.Order?.total_amount
-                            ? thankOrderDetails?.Order?.total_amount
+                        {thankOrderDetails?.total_amount
+                            ? thankOrderDetails?.total_amount
                             : "N/A"}
                     </p>
                 </div>

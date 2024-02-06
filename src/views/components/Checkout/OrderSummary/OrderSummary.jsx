@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { placeOrder } from "@store/orders/ordersThunk";
+// import { placeOrder } from "@store/orders/ordersThunk";
 import ShippingButton from "@components/Checkout/ShippingDetails/ShippingButton";
 import PaymentButton from "@components/Checkout/PaymentMethod/PaymentButton";
 import ReviewButton from "@components/Checkout/ReviewCheckout/ReviewButton";
@@ -12,19 +11,14 @@ import "./OrderSummary.css";
 function OrderSummary({
     handleClick,
     activeAccordion,
-    paymentMethod,
+    // paymentMethod,
     shippingDetails,
     isDisabled,
 }) {
     const dispatch = useDispatch();
-    const [disabled, setDisabled] = useState(true);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
 
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
-    useEffect(() => {
-        if (paymentMethod) setDisabled(false);
-    }, [paymentMethod]);
 
     const Button = () => {
         if (activeAccordion === 1) {
@@ -47,13 +41,13 @@ function OrderSummary({
                 </ReviewButton>
             );
         } else {
-            const placeOrderFunc = () => {
-                dispatch(
-                    placeOrder({ paymentMethod }, (link) =>
-                        location.replace(link)
-                    )
-                );
-            };
+            // const placeOrderFunc = () => {
+            //     dispatch(
+            //         placeOrder({ paymentMethod }, (link) =>
+            //             location.replace(link)
+            //         )
+            //     );
+            // };
 
             return (
                 <PaymentButton
@@ -75,11 +69,6 @@ function OrderSummary({
                         <div className="summary-wrapper">
                             <div className="summary-btn summery-btton-order-summery">
                                 <Button />
-                                {/* <p>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,
-                    </p> */}
                             </div>
                             <div className="summary-details">
                                 <ul>

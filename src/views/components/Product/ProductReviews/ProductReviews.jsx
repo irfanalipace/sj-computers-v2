@@ -33,13 +33,19 @@ const reviewPerPage = 5;
 function ProductReviews({ productId, productAsin, onFilterChange }) {
     const dispatch = useDispatch();
     const reviewState = useSelector((slice) => slice.review);
+    // debugger;
     const [ReviewsData, setReviewsData] = useState([]);
 
     const fetchData = async (productId) => {
+        // if (reviewState?.reviews?.product_review?.data?.length === 0) {
+        //     setReviewLoading([]);
+        //     return;
+        // }
         try {
             const response = await allReviewImagesApi(productId);
             console.log(response, "responseAllImage");
             setReviewsData(response);
+            // debugger;
         } catch (error) {
             console.log("error");
         }
@@ -47,7 +53,11 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
 
     useEffect(() => {
         fetchData(productId);
-    }, [allReviewImagesApi]);
+    }, [
+        productId,
+        productAsin,
+        reviewState?.reviews?.product_review?.data?.length,
+    ]);
 
     const [filterBy, setFilterBy] = useState(PRODUCT_FILTER_KEY_ENUM.TOP);
     const [reviews, setReviews] = useState(reviewState.reviews);
@@ -61,10 +71,24 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
     };
 
     const handleUpdateReview = (id) => {
-        const res = reviews.findIndex((item) => item.id === id);
+        //TODO:: key name should be changed according to backend
+        const key = "helpful";
+        const res = reviews?.product_review?.data?.findIndex(
+            (item) => item.id === id
+        );
+
         if (res === -1) return;
-        const tempRev = [...reviews];
-        // tempRev[res]
+        let tempRev = [...reviews.product_review.data];
+        let dd = { ...tempRev[res] };
+        dd[key] = true;
+        tempRev[res] = dd;
+        setReviews((prevState) => ({
+            ...prevState,
+            product_review: {
+                ...prevState.product_review,
+                data: [...tempRev],
+            },
+        }));
     };
 
     const getProductReviews = async (id, page = 1, reviewPerPage) => {
@@ -72,7 +96,6 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
             setReviewLoading(true);
             const res = await productReviewsApi(id, page, reviewPerPage);
             setReviews(res.data);
-            // debugger;
             dispatch(ADD_REVIEW(res.data));
         } catch (error) {
             console.error(error);
@@ -88,10 +111,8 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
     }, [filterBy]);
 
     useEffect(() => {
-        if (!reviewState.reviews?.product_review) {
-            getProductReviews(productId, 1, reviewPerPage);
-        }
-    }, []);
+        getProductReviews(productId, 1, reviewPerPage);
+    }, [productId, productAsin]);
 
     return (
         <div className="product-reviews-section product-section">
@@ -129,7 +150,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                             </div>
                         </div>
                     </div>
-                    <div className="col-12 col-sm-6 col-md-8 review-slider-and-slider" >
+                    <div className="col-12 col-sm-6 col-md-8 review-slider-and-slider">
                         {/* <div className="d-flex justify-content-between mb-3">
                             <h3 className="product-section-heading">
                                 Reviews with images
@@ -139,7 +160,11 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                             </button>
                         </div> */}
 
-                        <ReviewImages reviews={reviews} productId={productId} ReviewsData={ReviewsData}/>
+                        <ReviewImages
+                            reviews={reviews}
+                            productId={productId}
+                            ReviewsData={ReviewsData}
+                        />
                         {reviews?.product_review?.data.length === 0 &&
                             !reviewLoading && (
                                 <Typography fontWeight={600}>
@@ -212,7 +237,8 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                             <Pagination
                                 onChange={handlePageChange}
                                 count={Math.ceil(
-                                    reviews?.product_review?.total / reviewPerPage
+                                    reviews?.product_review?.total /
+                                        reviewPerPage
                                 )}
                             />
                         )}

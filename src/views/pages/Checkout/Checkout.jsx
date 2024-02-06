@@ -18,8 +18,11 @@ import mastercard from "@images/common/mastercard.png";
 
 import "./Checkout.css";
 import Discount from "@components/Checkout/Discount/Discount";
+import { useLocation } from "react-router-dom";
 
 export default function Checkout() {
+    const location = useLocation();
+    const { error } = location.state || {};
     const initAccordionValues = {
         1: { open: false },
         2: { open: false },
@@ -31,17 +34,15 @@ export default function Checkout() {
     const [currentAccordionId, setCurrentAccordionId] = useState();
     const checkoutDetails = useSelector((state) => state.cart.details);
     const cartItems = useSelector((state) => state.cart.cart);
-
+    const [searchParams] = useSearchParams();
     const shippingAddress = useSelector(
         (state) => state.orders.shippingDetails
     );
+    const [paymentError, setPaymentError] = useState("");
 
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     const loading = useSelector((state) => state.cart.isLoading);
-    const [searchParams, setSearchParams] = useSearchParams();
-    
-    const paymentError = useRef(null);
 
     const toggleAccordion = (id) => {
         openAccordion(id, !accordion[id].open);
@@ -60,17 +61,26 @@ export default function Checkout() {
     };
 
     useEffect(() => {
-        // displays error on top whenever payment fails and open shipping details form (First Accordion)
-        const error = searchParams.get("error");
+        // displays error on top whenever square payment fails and open shipping details form (First Accordion)
+
         if (error) {
-            paymentError.current = error;
             toggleAccordion(3);
-            searchParams.delete("error");
-            setSearchParams(searchParams); // clear search params after displaying error
         } else {
             toggleAccordion(1);
         }
-    }, [searchParams]);
+        setPaymentError(error);
+    }, [JSON.stringify(error)]);
+
+    useEffect(() => {
+        // displays error on top whenever paypal payment fails and open shipping details form (First Accordion)
+
+        if (searchParams.get("error")) {
+            toggleAccordion(3);
+        } else {
+            toggleAccordion(1);
+        }
+        setPaymentError(searchParams.get("error"));
+    }, [searchParams.get("error")]);
 
     return (
         <>
@@ -103,9 +113,9 @@ export default function Checkout() {
                         </div>
                     </div>
                     <div className="checkout-page-inner">
-                        {paymentError.current && (
+                        {paymentError && (
                             <Alert variant="danger" className="my-3">
-                                {paymentError.current}
+                                {JSON.stringify(paymentError)}
                             </Alert>
                         )}
                         {checkoutDetails.total_items > 0 ? (
@@ -174,18 +184,7 @@ export default function Checkout() {
                                     {!isAuthenticated && (
                                         <div>
                                             <div>
-                                                <Discount
-                                                    handleClick={handleClick}
-                                                    activeAccordion={
-                                                        currentAccordionId
-                                                    }
-                                                    paymentMethod={
-                                                        paymentMethod
-                                                    }
-                                                    shippingDetails={
-                                                        checkoutDetails
-                                                    }
-                                                />
+                                                <Discount />
                                             </div>
                                         </div>
                                     )}

@@ -13,7 +13,7 @@ use Srmklive\PayPal\Services\ExpressCheckout;
 use Srmklive\PayPal\Facades\Paypal as PayPalClient;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\GenerateInvoiceJob;
-use App\Repositories\OrderRepository;
+use App\Repositories\Payment\OrderRepository;
 use Cart;
 
 use Illuminate\Support\Facades\DB;
@@ -110,15 +110,11 @@ class PaypalController extends Controller
                 Cart::session($this->userId)->clear();
                 //clear cart condition
                 Cart::session($this->userId)->clearCartConditions();
-
-                return redirect('success-transaction')->with('Order', $orderData);
+                $finalOrder = json_encode($orderData);
+                return redirect('thankyou?Order='.$finalOrder);
             } else {
 
                 return redirect('cancel-transaction?error' . 'Something went wrong while processing transaction.');
-                // return error if something went wrong.
-                //     return response()->json(
-                //                    ['status' => 400,'msg'=>'Something went wrong while processing transaction.']
-                //                );
             }
             // DB::commit();
         } catch (Exception $e) {

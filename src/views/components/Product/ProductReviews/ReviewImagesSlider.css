@@ -1,0 +1,19 @@
+.slider-button{
+    color: black;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 1px  lightgrey;
+    height: 35px !important;
+    width: 35px !important;
+}
+
+.slider-button:hover{
+    background-color: whitesmoke;
+}
+
+.review-images-slider .swiper-button-next:after{
+    font-size: 13px !important;
+}
+.review-images-slider .swiper-button-prev:after{
+    font-size: 13px !important;
+}

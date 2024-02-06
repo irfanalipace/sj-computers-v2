@@ -51,4 +51,5 @@ class StatusEnum
     public const ACTIVE = "active";
 
     public const HELPFUL = "helpful";
+    public const REPORT = "report";
  }
