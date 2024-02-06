@@ -4,14 +4,15 @@ const ProductsHomePage = React.lazy(() => import("./ProductsHomePage"));
 
 import "./Home.css";
 import Subscribe from "../../components/Subscribe/Subscribe";
+import SellingProducts from "../../components/MobileCategory/SellingProducts/SellingProducts";
 
 const Home = () => {
     return (
         <>
             <div className="homePage">
-                {/* <MobileHomeCategory />
+                {/* <MobileHomeCategory />*/}
                 
-                        <SellingProducts /> */}
+                    
                 <BannerCategory />
                 <Suspense>
                     <div className="products-grid-container">

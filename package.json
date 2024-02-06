@@ -60,6 +60,7 @@
         "reactstrap": "^9.1.9",
         "redux-thunk": "^2.4.2",
         "shx": "^0.3.4",
+        "slick-carousel": "^1.8.1",
         "style-loader": "^3.3.2",
         "swiper": "^9.2.0",
         "url-loader": "^4.1.1",
