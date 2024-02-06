@@ -148,7 +148,8 @@
     .radio-container
     input:checked
     ~ .radiomark {
-    background: #52ac66;
+    /* background: #52ac66; */
+    background: #F2A742;
 }
 
 .sticky-filter-bar .filters-list .filter-value .radiomark {
@@ -157,8 +158,10 @@
     left: 0;
     height: 13px;
     width: 13px;
-    background-color: #eee;
+    /* background-color: #eee; */
+    background-color: white;
     border-radius: 3px;
+    border: 1px solid black;
 }
 .sticky-filter-bar
     .filters-list
@@ -178,7 +181,7 @@
     top: 2px;
     width: 4px;
     height: 7px;
-    border: solid white;
+    border: solid #F2A742;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
