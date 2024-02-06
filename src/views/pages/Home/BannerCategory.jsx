@@ -33,6 +33,7 @@ const BannerCategory = () => {
                     <div>
                         <Suspense>
                             <ProductType />
+                            
                         </Suspense>
                     </div>
                 </div>
