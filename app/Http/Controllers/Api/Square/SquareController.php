@@ -78,7 +78,7 @@ class SquareController extends BaseController
            
             $check_product_first = $this->repository->checkProduct($listofItems,$userIdToPass,$userType);
             if (!$check_product_first) {
-                throw new Exception('Please try again.');
+                throw new Exception('Product Quantity is invalid.');
             }
            
             // create invoice along with order
@@ -109,7 +109,7 @@ class SquareController extends BaseController
                throw new Exception('Please Try Again.');
             }
             
-            $orderData['order'] = $order['order'];
+            $orderData ['order_detail']= $order['order'];
            
             // Get card Token
             $amount_money = new Money();

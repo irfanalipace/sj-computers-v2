@@ -224,8 +224,7 @@ class OrderRepository
             if ($product->quantity == 0) {
 
                 (!$cart->isEmpty()) ? $cart->remove($product_id) : true;
-
-                throw new Exception('Please Try again product is out of stock.');
+                return false;
             } elseif ($product->quantity < $quantity) {
 
                 if (!$cart->isEmpty()) {
@@ -237,7 +236,7 @@ class OrderRepository
                         'associatedModel' => $product
                     ]);
                 }
-                throw new Exception('Please Try again product quantity is changed.');
+                return false;
             } else {
                 $data[] = [
                     'status' => true,
