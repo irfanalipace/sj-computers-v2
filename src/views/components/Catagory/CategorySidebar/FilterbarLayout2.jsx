@@ -241,8 +241,8 @@ const FilterBarlayout2 = () => {
                     filters[category].length && (
                     <li className="filter-value">
                         <button onClick={() => handleShowMoreitems(category)}>
-                            <span className="me-2">Show More</span>
-                            <FontAwesomeIcon icon={faAngleDown} />
+                            <FontAwesomeIcon icon={faAngleDown} style={{margin: " 0px 5px", color: "black"}} />
+                            <span className="me-2" style={{color: "#52AC66", fontWeight: "unset"}}>Show More</span>
                         </button>
                     </li>
                 )}

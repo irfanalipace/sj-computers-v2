@@ -30,9 +30,9 @@ const CategorySidebar = () => {
     });
   };
 
-    const toggleFilter = () => {
-        setIsOpen((state) => !state);
-    };
+  const toggleFilter = () => {
+    setIsOpen((state) => !state);
+  };
 
   return (
     <Grid container height={"95%"} sx={{borderRight: "0.5px solid gray"}} >
@@ -49,9 +49,9 @@ const CategorySidebar = () => {
             </>
             ))}
             {(visibleCategory + 1) > computerCategories.length ? (
-              <Typography variant='body1' color={"green"}><IconButton size='small' onClick={showLess}><KeyboardArrowUpIcon  /></IconButton> See less categories</Typography>
+              <Typography variant='body1' color={"orange"}><IconButton size='small' onClick={showLess}><KeyboardArrowUpIcon  /></IconButton> See less categories</Typography>
             ) : ( 
-                <Typography variant='body1' color={"green"}><IconButton size='small' onClick={showMore}><KeyboardArrowDownIcon  /></IconButton> See More categories</Typography>
+                <Typography variant='body1' color={"#52AC66"}><IconButton size='small' onClick={showMore}><KeyboardArrowDownIcon  /></IconButton> See More categories</Typography>
             )
             }
             </Grid>

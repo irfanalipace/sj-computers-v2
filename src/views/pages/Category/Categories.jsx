@@ -6,7 +6,7 @@ import CategorySlider from '../../components/Catagory/CategorySlider/CategorySli
 import CategorySidebar from '../../components/Catagory/CategorySidebar/CategorySidebar'
 import ProductsByCategory from './ProductsByCategory'
 import "./Category.css"
-import AllCategoriesHeader from '../../components/Catagory/AllCategoriesHeader'
+import AllCategoriesHeader from '../../components/Catagory/AllCategoriesHeader/AllCategoriesHeader'
 import ShopByCategory from '../../components/Catagory/ShopByCategory'
 import ShopByBrand from '../../components/Catagory/ShopByBrand'
 import Recommendation from "../../components/Recommendation/Recommendation"
