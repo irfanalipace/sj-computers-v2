@@ -13,7 +13,7 @@ import Recommendation from "../../components/Recommendation/Recommendation"
 
 import "./Category.css"
 
-const Categories = () => {
+const CategoryProducts = () => {
   return (
     <Grid container>
 
@@ -55,4 +55,4 @@ const Categories = () => {
   )
 }
 
-export default Categories
+export default CategoryProducts
