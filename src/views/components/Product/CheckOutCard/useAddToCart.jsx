@@ -1,29 +1,26 @@
-import { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { addToCart, addToLocalCart } from "@store/cart/cartThunks";
-import { useParams } from "react-router-dom";
 
 function useAddToCart(product, quantity) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const [addItem, setAdditem] = useState(0);
-    // const cart = useSelector((state) => state.cart.cart);
     const details = useSelector((state) => state.cart.details);
-    // const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
     const params = useParams();
     const navigate = useNavigate();
 
     const cartClickHandler = (plan, addingitem, noRedirect) => {
-        let cartQuantity = details?.total_items + 1;
-        let itemProtectedPlanPrice = parseFloat(plan?.price || 0) * quantity;
-        let productPrice = parseFloat(product?.price * quantity);
-        let cartTotal =
+        const cartQuantity = details?.total_items + 1;
+        const itemProtectedPlanPrice = parseFloat(plan?.price || 0) * quantity;
+        const productPrice = parseFloat(product?.price * quantity);
+        const cartTotal =
             parseFloat(details?.total) + productPrice + itemProtectedPlanPrice;
-        let cartSubTotal =
+        const cartSubTotal =
             parseFloat(details?.sub_total) +
             productPrice +
             itemProtectedPlanPrice;
+
         const cartItem = {
             id: product?.id,
             quantity,
@@ -31,67 +28,30 @@ function useAddToCart(product, quantity) {
             plan_price: itemProtectedPlanPrice,
             product: {
                 ...product,
-                in_stock: quantity >= product?.quantity ? false : true,
+                in_stock: quantity >= product?.quantity,
             },
+            ...(plan && { plan }),
         };
-
-        if (plan) {
-            cartItem.plan = plan;
-        }
 
         const cartDetails = {
             total_items: cartQuantity,
             total: cartTotal.toFixed(2),
             sub_total: cartSubTotal.toFixed(2),
         };
-        setAdditem(addItem + 1);
-        if (noRedirect) {
-            dispatch(addToCart({ cartItem }));
-            dispatch(addToLocalCart({ cartItem, cartDetails }));
-        } else if (!addingitem) {
-            if (isAuthenticated)
-                dispatch(
-                    addToCart({ cartItem }, () =>
-                        navigate(
-                            `/add-to-cart/${params?.title}/dp/${params?.productId}`
-                        )
-                    )
-                );
-            else {
-                dispatch(
-                    addToLocalCart({ cartItem, cartDetails }, () =>
-                        navigate(
-                            `/add-to-cart/${params?.title}/dp/${params?.productId}`
-                        )
-                    )
-                );
-            }
-        } else {
-            if (isAuthenticated)
-                dispatch(
-                    addToCart({ cartItem }, () =>
-                        navigate(
-                            `/add-to-cart/${params?.title}/dp/${
-                                params?.productId
-                            }/${1}`
-                        )
-                    )
-                );
-            else {
-                dispatch(
-                    addToLocalCart({ cartItem, cartDetails }, () =>
-                        navigate(
-                            `/add-to-cart/${params?.title}/dp/${
-                                params?.productId
-                            }/${1}`
-                        )
-                    )
-                );
-            }
-        }
+
+        const redirectPath = `/add-to-cart/${params?.title}/dp/${
+            params?.productId
+        }${addingitem ? `/${1}` : ""}`;
+        isAuthenticated
+            ? dispatch(addToCart({ cartItem }, () => navigate(redirectPath)))
+            : dispatch(
+                  addToLocalCart({ cartItem, cartDetails }, () =>
+                      navigate(redirectPath)
+                  )
+              );
     };
 
-    const memoisedFunction = useMemo(
+    return useMemo(
         () => cartClickHandler,
         [
             isAuthenticated,
@@ -100,7 +60,6 @@ function useAddToCart(product, quantity) {
             JSON.stringify(details),
         ]
     );
-    return memoisedFunction;
 }
 
 export default useAddToCart;
