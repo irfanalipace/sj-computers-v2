@@ -11,26 +11,12 @@ import { useSelector } from "react-redux";
 import "./AddToCart.css";
 
 const AddToCart = () => {
-    const { productId } = useParams();
-    const [product, setProduct] = useState();
-    const { similarProducts, featuredProducts } = useSimilarData(product?.id);
-    console.log("ssimi", similarProducts);
+    const { productId, itemAdded } = useParams();
     const cart = useSelector((state) => state?.cart?.cart);
-    console.log("cart", cart);
+    const product = cart?.find((item) => item?.product?.asin == productId);
+    const { featuredProducts } = useSimilarData(product?.id);
 
-    const getProductbyId = async () => {
-        try {
-            const response = await productDetailsbyAsinApi(productId);
-            setProduct(response?.data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-    useEffect(() => {
-        getProductbyId();
-    }, []);
-
-    return cart.length > 0 ? (
+    return product ? (
         <div style={{ backgroundColor: "#EAEDED" }}>
             <Grid container direction="row-reverse">
                 <Grid item lg={2}>
@@ -41,7 +27,11 @@ const AddToCart = () => {
                     lg={10}
                     className="hidden-on-mobile hidden-on-tab cart-with-protection"
                 >
-                    <AddToCartCard product={product} />
+                    {product && !itemAdded ? (
+                        <AddToCartCard product={product} />
+                    ) : (
+                        <></>
+                    )}
                     {/* <SimilarItemsSlider products={similarProducts} /> */}
                     <SimilarPurchaseCart products={featuredProducts} />
                     <SimilarInterestSlider products={featuredProducts} />

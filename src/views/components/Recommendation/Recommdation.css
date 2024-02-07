@@ -22,6 +22,10 @@
 .recommendation-inner .product-details {
     margin-top: 35px;
 }
+.product-section-heading {
+    font-size: 16px;
+    font-weight: 600;
+}
 
 .recommendation-inner .product-image img {
     max-height: 165px;

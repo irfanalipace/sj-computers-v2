@@ -8,13 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 const AddToCartCard = ({ product }) => {
-    const totalCart = useSelector((state) => state?.cart?.details?.total);
     function splitStringAtPeriod(str) {
-        const parts = str.split(".");
-        if (parts.length > 1) {
+        const parts = str?.toString().split(".");
+        if (parts?.length > 1) {
             return {
                 before: parts[0],
-                after: parts[1],
+                after: parts[1]?.substring(0, 2) || "",
             };
         } else {
             return {
@@ -25,15 +24,17 @@ const AddToCartCard = ({ product }) => {
     }
 
     const totalItems = useSelector((state) => state?.cart?.cart);
-    const totalCartString = totalCart?.toString();
-    const { before, after } = splitStringAtPeriod(totalCartString);
     const navigate = useNavigate();
     const { productId } = useParams();
     const gettingProtectionPlan = totalItems?.find(
         (item) => item?.product?.asin == productId
     );
-    console.log("DFSDF", gettingProtectionPlan);
-    return (
+    const price = parseFloat(product?.price) || 0;
+    const planPrice = parseFloat(product?.plan_price) || 0;
+    const totalPrice = price + planPrice;
+    const { before, after } = splitStringAtPeriod(totalPrice);
+
+    return product ? (
         <Grid
             container
             direction="row"
@@ -60,8 +61,8 @@ const AddToCartCard = ({ product }) => {
                             <LazyLoadImage
                                 width={"100%"}
                                 height={"100%"}
-                                src={product?.image}
-                                alt={product?.name
+                                src={product?.product?.image}
+                                alt={product?.product?.name
                                     ?.trim()
                                     ?.split(" ")
                                     ?.slice(0, 9)
@@ -72,7 +73,7 @@ const AddToCartCard = ({ product }) => {
                     {gettingProtectionPlan?.plan?.durationInYears ? (
                         <>
                             <Grid item>+</Grid>
-                            <Grid item lg={2}>
+                            <Grid item lg={2} mr={4}>
                                 <div className="protection-wrapper">
                                     SJ Computer
                                     <br />
@@ -102,17 +103,19 @@ const AddToCartCard = ({ product }) => {
                     >
                         <CheckCircleRoundedIcon sx={{ color: "#318243" }} />
                         &ensp;<b style={{ fontWeight: 600 }}>Added to Cart</b>
-                        <h4
-                            style={{
-                                marginTop: "8px",
-                                // marginLeft: "30px",
-                                fontSize: "12px",
-                                fontWeight: 600,
-                            }}
-                        >
-                            Style:&nbsp;
-                            <span>27 ‘’ FHD FreeSync 100HZ</span>
-                        </h4>{" "}
+                        {!gettingProtectionPlan?.plan?.durationInYears && (
+                            <h4
+                                style={{
+                                    marginTop: "8px",
+                                    // marginLeft: "30px",
+                                    fontSize: "12px",
+                                    fontWeight: 600,
+                                }}
+                            >
+                                Style:&nbsp;
+                                <span>27 ‘’ FHD FreeSync 100HZ</span>
+                            </h4>
+                        )}
                     </Grid>
                 </Grid>
             </Grid>
@@ -154,7 +157,7 @@ const AddToCartCard = ({ product }) => {
                         className="proceed-to-checkout mb-2"
                         onClick={() => navigate("/checkout")}
                     >
-                        Proceed to checkout ({totalItems?.length} item)
+                        Proceed to checkout ({product?.quantity} item)
                     </button>
                     <button
                         className="go-to-cart"
@@ -165,6 +168,8 @@ const AddToCartCard = ({ product }) => {
                 </Grid>
             </Grid>
         </Grid>
+    ) : (
+        <>...Loading</>
     );
 };
 

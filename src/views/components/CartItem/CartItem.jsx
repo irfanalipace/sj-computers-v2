@@ -71,7 +71,7 @@ const CartItem = ({ item }) => {
             difference,
             price: parseFloat(productPriceWithQuantity).toFixed(2),
         };
-
+        console.log(cartItem, "rrrr");
         if (item?.plan?.value) {
             cartItem.plan_price = parseFloat(warrantyPriceWithQuantity).toFixed(
                 2
@@ -88,6 +88,10 @@ const CartItem = ({ item }) => {
             ? dispatch(updateQuantity({ cartItem }))
             : dispatch(updateLocalQuantity({ cartItem, cartDetails }));
     };
+
+    const price = parseFloat(item?.price) || 0;
+    const planPrice = parseFloat(item?.plan_price) || 0;
+    const totalPrice = price + planPrice;
 
     return (
         <div
@@ -137,15 +141,15 @@ const CartItem = ({ item }) => {
                     </Typography>
                 </div>
             </div>
-            <usd
-                style={{ color: "#000" }}
+            <div
+                style={{ color: "#000", textAlign: "center" }}
                 className="hidden-on-mobile hidden-on-tab"
             >
                 <br />
-                <br />${item?.price}
-            </usd>
+                <br />${totalPrice}
+            </div>
 
-            <Grid container justifyContent="flex-start" mt={1}>
+            <Grid container justifyContent="space-between" mt={1}>
                 <Grid item>
                     <div style={{ width: "61px" }}>
                         <QuantityInput

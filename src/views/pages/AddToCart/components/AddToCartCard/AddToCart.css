@@ -38,6 +38,7 @@
 .protection-wrapper {
     background-color: #eaeded;
     padding: 8px 19px 9px 7px;
+    width: 120px;
     font-size: 14px;
     font-weight: 500;
 }

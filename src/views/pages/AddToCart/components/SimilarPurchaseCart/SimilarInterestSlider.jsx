@@ -165,6 +165,7 @@ const SimilarInterestSlider = ({ products }) => {
                             <Swiper
                                 slidesPerView={5}
                                 className="my-unique-swiper"
+                                style={{ padding: "0 70px" }}
                                 breakpoints={{
                                     320: {
                                         slidesPerView: 2,

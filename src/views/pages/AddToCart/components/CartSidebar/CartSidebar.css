@@ -1,8 +1,10 @@
 .cart-side-bar-container {
-    height: 100%;
+    min-height: 100%;
     background-color: #fff;
-    margin-left: 15px;
-    width: 180px;
+    margin-left: 20px;
+    /* position: absolute; */
+    right: 0;
+    z-index: 0;
 }
 .cart-side-bar-container .cart-side-bar-inner {
     border-bottom: 1px solid lightgray;
@@ -39,7 +41,6 @@
     outline: none;
     border: none;
     color: #fff;
-    width: 100%;
     margin-top: 20px;
     padding: 20px;
     border-radius: 8px;
@@ -48,6 +49,7 @@
 @media screen and (max-width: 1200px) {
     .cart-side-bar-container {
         width: 95%;
+        position: relative;
     }
     .cart-side-bar-container .cart-side-bar-inner {
         align-items: flex-start;

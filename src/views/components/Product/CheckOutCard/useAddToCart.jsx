@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 
 function useAddToCart(product, quantity) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const [addItem, setAdditem] = useState(0);
     // const cart = useSelector((state) => state.cart.cart);
     const details = useSelector((state) => state.cart.details);
     // const [open, setOpen] = useState(false);
@@ -13,10 +14,10 @@ function useAddToCart(product, quantity) {
     const params = useParams();
     const navigate = useNavigate();
 
-    const cartClickHandler = (plan) => {
-        let cartQuantity = details.total_items + 1;
+    const cartClickHandler = (plan, addingitem, noRedirect) => {
+        let cartQuantity = details?.total_items + 1;
         let itemProtectedPlanPrice = parseFloat(plan?.price || 0) * quantity;
-        let productPrice = parseFloat(product.price * quantity);
+        let productPrice = parseFloat(product?.price * quantity);
         let cartTotal =
             parseFloat(details?.total) + productPrice + itemProtectedPlanPrice;
         let cartSubTotal =
@@ -24,13 +25,13 @@ function useAddToCart(product, quantity) {
             productPrice +
             itemProtectedPlanPrice;
         const cartItem = {
-            id: product.id,
+            id: product?.id,
             quantity,
             price: productPrice,
             plan_price: itemProtectedPlanPrice,
             product: {
                 ...product,
-                in_stock: quantity >= product.quantity ? false : true,
+                in_stock: quantity >= product?.quantity ? false : true,
             },
         };
 
@@ -43,23 +44,50 @@ function useAddToCart(product, quantity) {
             total: cartTotal.toFixed(2),
             sub_total: cartSubTotal.toFixed(2),
         };
-
-        if (isAuthenticated)
-            dispatch(
-                addToCart({ cartItem }, () =>
-                    navigate(
-                        `/add-to-cart/${params?.title}/dp/${params?.productId}`
+        setAdditem(addItem + 1);
+        if (noRedirect) {
+            dispatch(addToCart({ cartItem }));
+            dispatch(addToLocalCart({ cartItem, cartDetails }));
+        } else if (!addingitem) {
+            if (isAuthenticated)
+                dispatch(
+                    addToCart({ cartItem }, () =>
+                        navigate(
+                            `/add-to-cart/${params?.title}/dp/${params?.productId}`
+                        )
                     )
-                )
-            );
-        else {
-            dispatch(
-                addToLocalCart({ cartItem, cartDetails }, () =>
-                    navigate(
-                        `/add-to-cart/${params?.title}/dp/${params?.productId}`
+                );
+            else {
+                dispatch(
+                    addToLocalCart({ cartItem, cartDetails }, () =>
+                        navigate(
+                            `/add-to-cart/${params?.title}/dp/${params?.productId}`
+                        )
                     )
-                )
-            );
+                );
+            }
+        } else {
+            if (isAuthenticated)
+                dispatch(
+                    addToCart({ cartItem }, () =>
+                        navigate(
+                            `/add-to-cart/${params?.title}/dp/${
+                                params?.productId
+                            }/${1}`
+                        )
+                    )
+                );
+            else {
+                dispatch(
+                    addToLocalCart({ cartItem, cartDetails }, () =>
+                        navigate(
+                            `/add-to-cart/${params?.title}/dp/${
+                                params?.productId
+                            }/${1}`
+                        )
+                    )
+                );
+            }
         }
     };
 

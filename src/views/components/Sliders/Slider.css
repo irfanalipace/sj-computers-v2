@@ -39,6 +39,10 @@
     top: var(--swiper-navigation-top-offset, 25%) !important;
     left: var(--swiper-navigation-sides-offset, 30px);
     z-index: 1 !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
 }
 .banner-slider-section .swiper-button-next {
     color: #ffffff;
@@ -76,21 +80,21 @@
     width: 5rem;
 }
 
-.slider-button{
+.slider-button {
     border: 1px solid gray;
     border-radius: 5px;
-    box-shadow: 2px 2px 2px 1px  lightgrey;
+    box-shadow: 2px 2px 2px 1px lightgrey;
     height: 35px !important;
     width: 35px !important;
 }
 
-.slider-button:hover{
+.slider-button:hover {
     background-color: whitesmoke;
 }
 
-.product-slider .swiper-button-next:after{
+.product-slider .swiper-button-next:after {
     font-size: 13px !important;
 }
-.product-slider .swiper-button-prev:after{
+.product-slider .swiper-button-prev:after {
     font-size: 13px !important;
 }

@@ -15,6 +15,10 @@ import { CheckoutBox } from "./CheckOut/CheckoutBox";
 import CartOverlay from "../Header/CartOverlay";
 import { validateCartItems } from "../../../core/store/cart/cartThunks";
 import { IS_CHRISTMAS_HOLIDAYS } from "../../../core/utils/constants";
+import EmptyCart from "./EmptyCart";
+import SeggestedItems from "./SugestedItems/SeggestedItems";
+import Recommendation from "../Recommendation/Recommendation";
+import { featureProductsApi } from "@api/products";
 
 export const ShopingCart = ({ onFormSubmit, form }) => {
     const cartItems = useSelector((state) => state.cart.cart);
@@ -74,8 +78,36 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [showModal]);
+    const [products, setProducts] = useState([]);
+    const getFeaturedProduct = async () => {
+        try {
+            const resp = await featureProductsApi(12);
+            const selectedProducts = resp?.data;
+            setProducts(selectedProducts);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        getFeaturedProduct();
+    }, []);
 
-    return (
+    return cartItems.length === 0 ? (
+        <>
+            <EmptyCart />
+            <div style={{ paddingTop: "50px", paddingBottom: "50px" }}>
+                <div
+                    style={{
+                        padding: "10px 70px",
+                        borderTop: "1px solid #D0D0D0",
+                        borderBottom: "1px solid #D0D0D0",
+                    }}
+                >
+                    <Recommendation prod={products} />
+                </div>
+            </div>
+        </>
+    ) : (
         <>
             {isLoading ? (
                 <LoaderComponent />
@@ -84,7 +116,14 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                     <div className=" cart-mein-dev">
                         <div className="row">
                             <div className="col-md-8 col-lg-9">
-                                <div className="card cart-box">
+                                <div
+                                    className="card cart-box"
+                                    style={{
+                                        borderBottom: "none",
+                                        borderBottomRightRadius: 0,
+                                        borderBottomLeftRadius: 0,
+                                    }}
+                                >
                                     <div className="row mx-0">
                                         <div className="shop-heading">
                                             <div className="col-md-10">
@@ -108,38 +147,51 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                         </div>
                                     ))}
                                 </div>
-                                <div className="row">
-                                    <div className="cart-product-subtotal-price hide-mobile-cart-btn">
-                                        <span>
-                                            Subtotal (
-                                            {cartDetails?.total_items
-                                                ? cartDetails.total_items
+                                <div className="cart-product-subtotal-price hide-mobile-cart-btn">
+                                    <span>
+                                        Subtotal (
+                                        {cartDetails?.total_items
+                                            ? cartDetails.total_items
+                                            : 0}
+                                        &nbsp;items):
+                                        <strong className="price-with-sign">
+                                            &ensp;$
+                                            {cartDetails?.sub_total
+                                                ? parseFloat(
+                                                      cartDetails.sub_total
+                                                  ).toFixed(2)
                                                 : 0}
-                                            items):
-                                            <strong className="price-with-sign">
-                                                $
-                                                {cartDetails?.sub_total
-                                                    ? parseFloat(
-                                                          cartDetails.sub_total
-                                                      ).toFixed(2)
-                                                    : 0}
-                                            </strong>
-                                        </span>
-                                    </div>
-
-                                    <div className="add-more-items-dev">
-                                        <Link to={"/"}>
-                                            <button className="add-more-button-product  hide-mobile-cart-btn">
-                                                Add more items
-                                            </button>
-                                        </Link>
-                                    </div>
+                                        </strong>
+                                    </span>
                                 </div>
+
+                                {/* <div className="add-more-items-dev">
+                                    <Link to={"/"}>
+                                        <button className="add-more-button-product  hide-mobile-cart-btn">
+                                            Add more items
+                                        </button>
+                                    </Link>
+                                </div> */}
                             </div>
                             <div className="col-md-4 col-lg-3">
-                                <div className="card card-checkout">
+                                <div
+                                    className="card card-checkout"
+                                    style={{ borderRadius: 0 }}
+                                >
                                     <div className="card-body">
                                         <div className="checkout-container">
+                                            <p className="checkout-text">
+                                                <span
+                                                    style={{ color: "#318243" }}
+                                                >
+                                                    Your Order qualifies for
+                                                    FREE Shipping.
+                                                </span>{" "}
+                                                <br />
+                                                Choose this option at
+                                                checkout.&ensp;
+                                                <Link>see details</Link>
+                                            </p>
                                             <div className="card-body-text">
                                                 <div className="text-body">
                                                     <span className="sub-title">
@@ -147,7 +199,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                         {
                                                             cartDetails?.total_items
                                                         }
-                                                        items):{" "}
+                                                        &nbsp;items):&nbsp;
                                                         <strong
                                                             className="price-items"
                                                             style={{
@@ -162,14 +214,14 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                         </strong>
                                                     </span>
                                                     <br></br>
-                                                    {/* <label>
-                                            <input
-                                                type="checkbox"
-                                                name="myCheckbox"
-                                                className="checkbox-paragraph"
-                                            />
-                                            This is a paragraph with a checkbox.
-                                        </label> */}
+                                                    <label className="checkbox-paragraph">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="myCheckbox"
+                                                        />
+                                                        &ensp;This order
+                                                        contains an offer
+                                                    </label>
                                                 </div>
                                             </div>
 
@@ -190,6 +242,67 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                     Add more items
                                                 </button>
                                             </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    className="card card-checkout mt-3"
+                                    style={{ borderRadius: 0 }}
+                                >
+                                    <div className="card-body">
+                                        <div className="checkout-container">
+                                            <div className="card-body-text">
+                                                <div
+                                                    style={{
+                                                        fontSize: "12px",
+                                                        lineHeight: "17px",
+                                                    }}
+                                                >
+                                                    <strong
+                                                        style={{
+                                                            fontSize: "13px",
+                                                            fontWeight: 600,
+                                                        }}
+                                                    >
+                                                        Note:
+                                                    </strong>
+                                                    &nbsp;Parcel Arrives
+                                                    on&nbsp;
+                                                    <span
+                                                        style={{
+                                                            fontSize: "13px",
+                                                            fontWeight: 600,
+                                                        }}
+                                                    >
+                                                        {
+                                                            orderEstimatedDelivery
+                                                                ?.free_shipment_amount
+                                                                ?.estimate_day
+                                                        }
+                                                    </span>{" "}
+                                                    (Tentative)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    className="card card-checkout mt-3 mb-5"
+                                    style={{ borderRadius: 0 }}
+                                >
+                                    <div className="card-body">
+                                        <div className="checkout-container">
+                                            <div className="card-body-text">
+                                                <h3
+                                                    style={{
+                                                        fontSize: "16px",
+                                                        fontWeight: 600,
+                                                    }}
+                                                >
+                                                    You might also like
+                                                </h3>
+                                                <SeggestedItems num={3} />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -247,6 +360,17 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                     </div>
                 </div>
             )}
+            <div style={{ paddingTop: "50px", paddingBottom: "50px" }}>
+                <div
+                    style={{
+                        padding: "10px 70px",
+                        borderTop: "1px solid #D0D0D0",
+                        borderBottom: "1px solid #D0D0D0",
+                    }}
+                >
+                    <Recommendation prod={products} />
+                </div>
+            </div>
         </>
     );
 };
