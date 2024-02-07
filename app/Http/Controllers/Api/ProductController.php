@@ -71,17 +71,7 @@ class ProductController extends BaseController
 
     public function getSimilarItem(Product $product)
     {
-        $cpu_family = $product->description->cpu_model[0]->family[0]->value ?? '';
-        $ram_value = $product->description->ram_memory[0]->installed_size[0]->value ?? '';
-        $graphics_ram = $product->description->graphics_ram[0]->size[0]->value ?? '';
-        $hard_disk = $product->description->hard_disk[0]->size[0]->value ?? '';
-
-        return Product::whereJsonContains('description->cpu_model', [['family' => ['value' => $cpu_family]]])
-            ->orWhereJsonContains('description->ram_memory',[['installed_size'=> ['value' => $ram_value]]])
-            ->orWhereJsonContains('description->graphics_ram',[['size'=> ['value' => $graphics_ram]]])
-            ->orWhereJsonContains('description->hard_disk',[['size'=> ['value' => $hard_disk]]])
-            ->limit(2)
-            ->get();
+        return $this->getSuggestedItems($product)->take(2);
     }
 
     public function productCount(Product $product, Request $request)
@@ -273,6 +263,21 @@ class ProductController extends BaseController
     {
         $protectivePlans = ProtectivePlan::all();
         return $this->sendResponse($protectivePlans,'Successfully fetched plans.');
+    }
+
+    public function getSuggestedItems(Product $product)
+    {
+        $cpu_family = $product->description->cpu_model[0]->family[0]->value ?? '';
+        $ram_value = $product->description->ram_memory[0]->installed_size[0]->value ?? '';
+        $graphics_ram = $product->description->graphics_ram[0]->size[0]->value ?? '';
+        $hard_disk = $product->description->hard_disk[0]->size[0]->value ?? '';
+
+        return Product::whereJsonContains('description->cpu_model', [['family' => ['value' => $cpu_family]]])
+            ->orWhereJsonContains('description->ram_memory',[['installed_size'=> ['value' => $ram_value]]])
+            ->orWhereJsonContains('description->graphics_ram',[['size'=> ['value' => $graphics_ram]]])
+            ->orWhereJsonContains('description->hard_disk',[['size'=> ['value' => $hard_disk]]])
+            ->limit(5)
+            ->get();
     }
 
 }

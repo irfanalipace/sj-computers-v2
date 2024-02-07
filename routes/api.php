@@ -79,6 +79,7 @@ Route::get('inventory-data', [ProductController::class, 'getInventoryData'])->na
 Route::get('products-filter-list', [ProductController::class, 'getProductFilterList'])->name('getProductFilterList');
 
 Route::get('similar-item/{product}', [ProductController::class, 'getSimilarItem'])->name('getSimilarItem');
+Route::get('suggested-item/{product}', [ProductController::class, 'getSuggestedItems'])->name('getSuggestedItems');
 Route::get('product-fast-delivery/{product}', [ProductController::class, 'productCount'])->name('productCount');
 
 
