@@ -130,36 +130,141 @@ export const CartItem = memo(({ cartData }) => {
                                     </strong>
                                 </p>
                             </div>
-                            {/* <WarrantyBadge
-                                durationInYears={
-                                    cartData?.plan?.durationInYears
-                                }
-                            /> */}
+                            <div
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    width: "100%",
+                                    paddingLeft: "15px",
+                                }}
+                            >
+                                <div>
+                                    <div className="row list-item-dev-ui-item">
+                                        <ul className="item-list">
+                                            <li>
+                                                <span
+                                                    className="item-stock"
+                                                    style={{ fontWeight: 500 }}
+                                                >
+                                                    {cartData?.product
+                                                        ?.quantity ==
+                                                    cartData?.quantity
+                                                        ? "Out of Stock"
+                                                        : "In Stock"}
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span
+                                                    className="item-stock"
+                                                    style={{ color: "#000" }}
+                                                >
+                                                    Discount Available
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span
+                                                    className="item-stock"
+                                                    style={{ color: "#000" }}
+                                                >
+                                                    <strong
+                                                        style={{
+                                                            fontWeight: 600,
+                                                        }}
+                                                    >
+                                                        Capacity:
+                                                    </strong>{" "}
+                                                    2TB
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span
+                                                    className="item-stock"
+                                                    style={{ color: "#000" }}
+                                                >
+                                                    <strong
+                                                        style={{
+                                                            fontWeight: 600,
+                                                        }}
+                                                    >
+                                                        Style:
+                                                    </strong>{" "}
+                                                    980 PRO
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div
+                                    className="row"
+                                    style={{
+                                        width: "350px",
+                                        // border: "1px solid #000",
+                                        marginLeft: "140px",
+                                    }}
+                                >
+                                    <div className="col-md-9 mt-2">
+                                        {cartData?.plan?.value && (
+                                            <>
+                                                <div className="">
+                                                    <div className="dev-data-page-wantity">
+                                                        <div className="protection-button-remove-data-remove add-text-remive-item">
+                                                            <button>
+                                                                Remove Warranty
+                                                            </button>
+                                                        </div>
+                                                        <div>
+                                                            <WarrantyBadge
+                                                                durationInYears={
+                                                                    cartData
+                                                                        ?.plan
+                                                                        ?.durationInYears
+                                                                        ? cartData
+                                                                              ?.plan
+                                                                              ?.durationInYears +
+                                                                          " years"
+                                                                        : "Tech Unlimited"
+                                                                }
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
+                                    <div
+                                        className="col-md-3 mt-4"
+                                        // style={{ marginRight: "130px" }}
+                                    >
+                                        <p>
+                                            <strong
+                                                style={{
+                                                    fontWeight: 800,
+                                                }}
+                                            >
+                                                $
+                                                {parseFloat(
+                                                    cartData?.plan_price
+                                                ).toFixed(2)}
+                                            </strong>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-6">
-                                <div className="list-item-dev-ui-item">
-                                    <ul className="item-list mt-1 mb-2">
-                                        <li>
-                                            <span className="item-stock">
-                                                {cartData?.product?.quantity ==
-                                                cartData?.quantity
-                                                    ? "Out of Stock"
-                                                    : "In Stock"}
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div>
                                 <div style={{ height: "45px" }}>
                                     {cartData.loading ? (
                                         <Loader />
                                     ) : (
                                         <>
                                             <div
-                                                className="d-flex justify-content-between justify-content-sm-start align-items-end"
-                                                style={{
-                                                    maxWidth: "700px",
-                                                }}
+                                                // className="d-flex justify-content-between justify-content-sm-start align-items-end"
+                                                className="buttons-on-cartitem"
+                                                // style={{
+                                                //     maxWidth: "700px",
+                                                // }}
                                             >
                                                 <QuantityInput
                                                     onChange={handleQuantity}
@@ -170,16 +275,56 @@ export const CartItem = memo(({ cartData }) => {
                                                             ?.quantity
                                                     }
                                                 />
-
+                                                &emsp;
                                                 <button
                                                     onClick={deleteItemFunction}
-                                                    className="button-link cartitem-delete-button ms-2"
+                                                    className="cart-bttn"
                                                     disabled={updatingItem}
                                                 >
                                                     {updatingItem ? (
                                                         <Loader />
                                                     ) : (
                                                         "Delete"
+                                                    )}
+                                                </button>
+                                                <button
+                                                    className="cart-bttn"
+                                                    disabled={updatingItem}
+                                                >
+                                                    {updatingItem ? (
+                                                        <Loader />
+                                                    ) : (
+                                                        "Shipping"
+                                                    )}
+                                                </button>
+                                                <button
+                                                    className="cart-bttn"
+                                                    disabled={updatingItem}
+                                                >
+                                                    {updatingItem ? (
+                                                        <Loader />
+                                                    ) : (
+                                                        `Save for Later`
+                                                    )}
+                                                </button>
+                                                <button
+                                                    className="cart-bttn"
+                                                    disabled={updatingItem}
+                                                >
+                                                    {updatingItem ? (
+                                                        <Loader />
+                                                    ) : (
+                                                        "Compare with similar items"
+                                                    )}
+                                                </button>
+                                                <button
+                                                    className="cart-bttn"
+                                                    disabled={updatingItem}
+                                                >
+                                                    {updatingItem ? (
+                                                        <Loader />
+                                                    ) : (
+                                                        "Share"
                                                     )}
                                                 </button>
                                                 {/* <button className="button-link">
@@ -194,63 +339,6 @@ export const CartItem = memo(({ cartData }) => {
                                     )}
                                 </div>
                             </div>
-                            {cartData?.plan?.value && (
-                                <>
-                                    <div className="col-md-6 ">
-                                        <div className="row">
-                                            <div className="col-lg-10 col-12">
-                                                <div className="dev-data-page-wantity">
-                                                    <div className="protection-button-remove-data-remove add-text-remive-item">
-                                                        <button>
-                                                            Remove Warranty
-                                                        </button>
-                                                    </div>
-                                                    <div>
-                                                        <WarrantyBadge
-                                                            durationInYears={
-                                                                cartData?.plan
-                                                                    ?.durationInYears
-                                                                    ? cartData
-                                                                          ?.plan
-                                                                          ?.durationInYears +
-                                                                      " years"
-                                                                    : "Tech Unlimited"
-                                                            }
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-2 col-12">
-                                                <div className="add-card-price-cardite">
-                                                    <p className="protections-price-carditem">
-                                                        ${cartData?.plan_price}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {/* 
-                                        <div>
-                                        <WarrantyBadge
-                                            durationInYears={
-                                                cartData?.plan?.durationInYears
-                                                    ? cartData?.plan
-                                                          ?.durationInYears +
-                                                      " years"
-                                                    : "Tech Unlimited"
-                                            }
-                                        />
-                                        </div> */}
-                                    </div>
-
-                                    {/* <div className="col-lg-2 col-md-3 col-6">
-                                        <div className="add-card-price-carditem">
-                                            <p className="protections-price-carditem">
-                                                ${cartData?.plan_price}
-                                            </p>
-                                        </div>
-                                    </div> */}
-                                </>
-                            )}
                         </div>
                     </div>
                 </div>

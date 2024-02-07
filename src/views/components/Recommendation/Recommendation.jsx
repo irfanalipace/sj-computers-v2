@@ -5,10 +5,10 @@ import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { useEffect } from "react";
 import "./Recommdation.css";
 
-export default function Recommendation() {
+export default function Recommendation({ prod }) {
     const dispatch = useDispatch();
-    const isLoading = useSelector((state) => state?.products.isLoading);
-    const products = useSelector((state) => state?.products.products);
+    const isLoading = useSelector((state) => state?.products?.isLoading);
+    const products = useSelector((state) => state?.products?.products);
     useEffect(() => {
         getProduct();
     }, [products]);
@@ -35,7 +35,7 @@ export default function Recommendation() {
                         ) : (
                             <ProductSlider
                                 type="recommended"
-                                products={products}
+                                products={products ? products : prod}
                             />
                         )}
                     </div>

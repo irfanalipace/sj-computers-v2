@@ -7,120 +7,167 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "../../../../components/Sliders/Slider.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AddCartComponents from "../../../../components/Product/CheckOutCard/AddCartComponents";
 
 import StarRatings from "react-star-ratings";
+import useAddToCart from "../../../../components/Product/CheckOutCard/useAddToCart";
+import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 
 const SimilarPurchaseCart = ({ products }) => {
-    const ProductDetails = ({ product }) => (
-        <div className="pb-3">
-            <div className="product-details">
-                <div className="dev-section-button-dev-card">
-                    <Link to={`${new URL(product?.url)?.pathname}`}>
-                        <div className="product-name product-cart-name-mobile-screen">
-                            {product.name}
-                        </div>
+    const [addingStates, setAddingStates] = useState({});
+    const ProductDetails = ({ product }) => {
+        const cartClickHandler = useAddToCart(product, 1);
+        const isAdding = addingStates[product.id];
 
-                        <div className=" d-sm-none product-prices">
-                            {product.originalPrice && (
-                                <div className="product-original-price">
-                                    ${product.originalPrice}
-                                </div>
-                            )}
-                            <div className="product-new-price">
-                                <span>$</span>
-                                {product?.price?.toString().split(".")[0]}
-                                <sup>
-                                    {product?.price?.toString().split(".")[1]}
-                                </sup>
+        return (
+            <div className="pb-3">
+                <div className="product-details">
+                    <div className="dev-section-button-dev-card">
+                        <Link to={`${new URL(product?.url)?.pathname}`}>
+                            <div className="product-name product-cart-name-mobile-screen">
+                                {product.name}
                             </div>
-                        </div>
 
-                        <div className="d-sm-none ">
-                            <span className="dilvery-system-mobile-card-product">
-                                Get it by{" "}
-                                {/* {
+                            <div className=" d-sm-none product-prices">
+                                {product.originalPrice && (
+                                    <div className="product-original-price">
+                                        ${product.originalPrice}
+                                    </div>
+                                )}
+                                <div className="product-new-price">
+                                    <span>$</span>
+                                    {product?.price?.toString().split(".")[0]}
+                                    <sup>
+                                        {
+                                            product?.price
+                                                ?.toString()
+                                                .split(".")[1]
+                                        }
+                                    </sup>
+                                </div>
+                            </div>
+
+                            <div className="d-sm-none ">
+                                <span className="dilvery-system-mobile-card-product">
+                                    Get it by{" "}
+                                    {/* {
                                     orderEstimatedDelivery?.free_shipment_amount
                                         ?.estimate_day
                                 } */}
-                            </span>
-                            <span className="span-get-data-pagragraph-card">
-                                Free Delivery Available{" "}
-                            </span>
-                            <div></div>
+                                </span>
+                                <span className="span-get-data-pagragraph-card">
+                                    Free Delivery Available{" "}
+                                </span>
+                                <div></div>
+                            </div>
+                        </Link>
+
+                        <div className="d-sm-none div-button-card-product">
+                            <AddCartComponents
+                                product={product}
+                                className="d-sm-none add-to-card-button-mobile-product"
+                            />
+                        </div>
+                    </div>
+
+                    <Link
+                        to={`${new URL(product?.url).pathname}`}
+                        style={{ textDecoration: "none" }}
+                    >
+                        <div className="d-none d-sm-block product-rating">
+                            <div className="d-flex align-items-center">
+                                <StarRatings
+                                    rating={product?.rating}
+                                    starRatedColor="rgb(232, 126, 36)"
+                                    numberOfStars={5}
+                                    name="rating"
+                                    isSelectable={false}
+                                    starDimension={"20px"}
+                                    starSpacing={"0"}
+                                />
+                                <span
+                                    className="ms-2"
+                                    style={{
+                                        color: "#1270c4",
+                                        fontSize: "12px",
+                                    }}
+                                >
+                                    ({product?.total_review})
+                                </span>
+                            </div>
                         </div>
                     </Link>
 
-                    <div className="d-sm-none div-button-card-product">
-                        <AddCartComponents
-                            product={product}
-                            className="d-sm-none add-to-card-button-mobile-product"
-                        />
+                    <div className="d-none d-sm-block product-prices mb-2">
+                        {product.originalPrice && (
+                            <div className="product-original-price">
+                                ${product.originalPrice}
+                            </div>
+                        )}
+                        <span>$</span>
+                        {product?.price?.toString().split(".")[0]}.
+                        {product?.price?.toString().split(".")[1]}
                     </div>
-                </div>
-
-                <Link
-                    to={`${new URL(product?.url).pathname}`}
-                    style={{ textDecoration: "none" }}
-                >
-                    <div className="d-none d-sm-block product-rating">
-                        <div className="d-flex align-items-center">
-                            <StarRatings
-                                rating={product?.rating}
-                                starRatedColor="rgb(232, 126, 36)"
-                                numberOfStars={5}
-                                name="rating"
-                                isSelectable={false}
-                                starDimension={"20px"}
-                                starSpacing={"0"}
-                            />
-                            <span
-                                className="ms-2"
-                                style={{ color: "#1270c4", fontSize: "12px" }}
-                            >
-                                ({product?.total_review})
-                            </span>
-                        </div>
-                    </div>
-                </Link>
-
-                <div className="d-none d-sm-block product-prices mb-2">
-                    {product.originalPrice && (
-                        <div className="product-original-price">
-                            ${product.originalPrice}
-                        </div>
-                    )}
-                    <span>$</span>
-                    {product?.price?.toString().split(".")[0]}.
-                    {product?.price?.toString().split(".")[1]}
-                </div>
-                <div style={{ fontSize: "12px" }} className="mt-2 mb-2">
-                    List Price
-                    <span style={{ fontWeight: "bold", lineHeight: "16px" }}>
-                        {/* {
+                    <div style={{ fontSize: "12px" }} className="mt-2 mb-2">
+                        List Price:&ensp;
+                        <span style={{ textDecoration: "line-through" }}>
+                            ${product?.price}
+                        </span>
+                        <span
+                            style={{ fontWeight: "bold", lineHeight: "16px" }}
+                        >
+                            {/* {
                             orderEstimatedDelivery?.free_shipment_amount
                                 ?.estimate_day
                         } */}
-                    </span>
-                </div>
-                {product.deliveryCharges && (
-                    <div className="product-delivery-charges">
-                        <FontAwesomeIcon icon={faTruck} />{" "}
-                        {product.deliveryCharges}
+                        </span>
                     </div>
-                )}
-                {/* {type === "recommended" && (
+                    {product.deliveryCharges && (
+                        <div className="product-delivery-charges">
+                            <FontAwesomeIcon icon={faTruck} />{" "}
+                            {product.deliveryCharges}
+                        </div>
+                    )}
+                    {/* {type === "recommended" && (
                     <div style={{ fontSize: "12px", marginTop: "5px" }}>
                         Free shipping by SJ
                     </div>
                 )} */}
+                </div>
+                {isAdding ? (
+                    <p style={{ fontSize: "12px" }}>
+                        {" "}
+                        <DoneRoundedIcon
+                            sx={{ color: "green", fontSize: "20px" }}
+                        />{" "}
+                        Item Added Successfully
+                    </p>
+                ) : (
+                    <button
+                        className="cart-btn"
+                        onClick={(e) => {
+                            setAddingStates((prevState) => ({
+                                ...prevState,
+                                [product.id]: true,
+                            }));
+
+                            cartClickHandler(e, 2).then(() => {
+                                setAddingStates((prevState) => ({
+                                    ...prevState,
+                                    [product.id]: false,
+                                }));
+                            });
+                        }}
+                    >
+                        Add to Cart
+                    </button>
+                )}
             </div>
-            <button className="cart-btn">Add to Cart</button>
-        </div>
-    );
+        );
+    };
     return (
         <>
             <div
@@ -154,6 +201,7 @@ const SimilarPurchaseCart = ({ products }) => {
                             <Swiper
                                 slidesPerView={6}
                                 className="my-unique-swiper"
+                                style={{ padding: "0 70px" }}
                                 breakpoints={{
                                     // when window width is >= 320px
                                     320: {

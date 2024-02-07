@@ -3,9 +3,11 @@ import React from "react";
 import letterImage from "@images/advertisement/Layer_1.png";
 import "./Subscribe.css";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Subscribe = () => {
     const user = useSelector((state) => state?.auth?.isAuthenticated);
+    const navigate = useNavigate();
     return (
         <div style={{ backgroundColor: "#fff" }}>
             <Grid
@@ -83,14 +85,19 @@ const Subscribe = () => {
                     </h6>
                 )}
                 {!user ? (
-                    <button className="sign-in-main">Sign in</button>
+                    <button
+                        className="sign-in-main"
+                        onClick={() => navigate("/login")}
+                    >
+                        Sign in
+                    </button>
                 ) : (
                     <></>
                 )}
                 {!user && (
                     <p style={{ fontSize: "12px" }} className="mt-2 mb-5">
                         New Customer ?{" "}
-                        <Link href={!user && "/login"}>Start here.</Link>
+                        <Link href={!user && "/register"}>Start here.</Link>
                     </p>
                 )}
             </Grid>

@@ -217,6 +217,14 @@ const Router = () => {
             ),
         },
         {
+            path: "/add-to-cart/:title/dp/:productId/:itemAdded",
+            element: (
+                <PageWrapper>
+                    <AddToCart />
+                </PageWrapper>
+            ),
+        },
+        {
             path: "/add-to-cart/:title/dp/:productId",
             element: (
                 <PageWrapper>
