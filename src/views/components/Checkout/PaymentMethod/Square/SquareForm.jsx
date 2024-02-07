@@ -37,7 +37,7 @@ export const SquareForm = ({ hideCloseBtn, hideModal }) => {
         clearCartLocally();
         dispatch(CLEAR_CART());
         navigate("/thank-you", {
-            state: { order: response.data },
+            state: { order: response.data.Order },
         });
     };
 

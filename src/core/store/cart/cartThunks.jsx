@@ -367,7 +367,6 @@ export const clearCart = () => {
 };
 
 export const validateCartItems = (args) => {
-    console.print("args: ", args);
     return async (dispatch, getState) => {
         const state = getState();
         try {

@@ -199,7 +199,7 @@ export const setCartItemAfterError = (
                         ...cartItem.product,
                         quantity: errorItem?.available_quantity,
                     },
-                    error: "Selected Quantity is greater than available quantity",
+                    error: `Selected Quantity is greater than available quantity (${errorItem?.available_quantity})`,
                     quantity: errorItem?.available_quantity,
                     price: itemPrice,
                     plan_price: planPrice,

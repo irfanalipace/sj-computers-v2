@@ -22,9 +22,9 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
     const isLoading = useSelector((state) => state.cart.isLoading);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const location = useLocation();
-    const error = location.state?.error;
+    const error = location.state?.error || searchParams.get("error");
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const orderEstimatedDelivery = useSelector(
         (state) => state.orders.orderEstimatedDelivery
@@ -105,7 +105,6 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                             <div className="items">
                                                 <CartItem cartData={item} />
                                             </div>
-                                            
                                         </div>
                                     ))}
                                 </div>
