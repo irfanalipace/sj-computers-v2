@@ -26,7 +26,7 @@
 
 .product-type-container {
     margin: 0 auto 10px;
-    /* max-width: calc(100% - 47px); */
+    max-width: calc(100% - 47px);
 }
 
 .product-type-section {
@@ -54,12 +54,16 @@
 .h4-heading {
     padding-top: 6px;
 }
-
+.product-type-section h5 {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 6px;
+}
 .product-type-section h2 {
     text-align: left;
     /* padding-left: 20px; */
     font-weight: 600;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .product-type-section h1 {
@@ -89,7 +93,7 @@
     margin: 8px 0;
 }
 .advertisment-img-products-imges{
-    max-width: 28% !important;
+    max-width: 29% !important;
 }
 .product-section-advertisment {
     background: white;
@@ -148,7 +152,9 @@ color: #B12704;
     text-align: center;
     /* height: 43%; */
 }
-
+.save-button-price-new-old{
+    margin-bottom: 0px !important;
+}
 .advertisement-heading h2 {
     text-align: center;
     margin: 20px 0 30px 0;
@@ -193,7 +199,7 @@ color: #B12704;
     margin-bottom: 15px;
     font-weight: 600;
     color: black;
-    font-size: 18px;
+    font-size: 14px;
   }
   .product-type-section-selleing-products img {
     width: 100%;
@@ -217,6 +223,7 @@ color: #B12704;
         margin-right: auto;
     }
 }
+
 @media screen and (max-width: 1427px) and (min-width:1069px){
 .product-type-section h2 {
     text-align: left;
@@ -238,6 +245,8 @@ color: #B12704;
         font-weight: 600;
         font-size: 8px;
     }
+    }.save-button-price-new-old{
+        font-size: 12px;
     }
 @media screen and (max-width: 425px) {
     .product-type-section h2,
@@ -262,6 +271,14 @@ color: #B12704;
 /* tablet  */
 
 
+ 
+
+@media screen and (max-width: 768px) and (min-width: 547px) {
+    .dev-sections-products {
+      height: 217px !important;
+    }
+  }
+  
 @media screen and (min-width: 992px) and (max-width: 1250px) {
 }
 
@@ -274,12 +291,17 @@ color: #B12704;
 
     .product-type-section .container {
         height: 260px;
+    }.category-name {
+        font-size: 9px;
+        color: black;
+    }.advertisment-img-products-imges img{
+        max-height: 29%;
     }
 
     .product-type-section h2,
     .advertisement-heading h2,
     .advertisement-heading button {
-        font-size: 16px;
+        /* font-size: 16px; */
     }
     
     .product-type-container {

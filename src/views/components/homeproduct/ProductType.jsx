@@ -323,7 +323,7 @@ const ProductType = () => {
                                 </Link>
                             </div>
                         )}
-                        <div className="product-type-section">
+                        <div className="product-type-section dev-sections-products">
                             {products && products?.length > 0 && (
                                 <>
                                  <div style={{textAlign:'center'}}>
@@ -334,10 +334,10 @@ const ProductType = () => {
                                        
                                     />
                                     </div>
-
+                              
                                     <h5
                                         className=""
-                                        style={{ fontSize: "16px" }}
+                                        
                                     >
                                         {products[0].name.length > 30
                                             ? `${products[0].name.substring(
