@@ -8,6 +8,8 @@ import ProductsByCategory from "./ProductsByCategory";
 
 import "./Category.css";
 import CategoriesHeader from "../../components/Header/CategoriesHeader/CategoriesHeader";
+import CategoryVideo from "../../components/Catagory/CategoryVideo";
+import CategorySlider from "../../components/Catagory/CategorySlider/CategorySlider";
 
 function Category() {
     const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +30,15 @@ function Category() {
                         className="sidebarOverlay"
                     ></div>
                 )}
+                <div style={{display: "flex"}}>
+                    <div style={{width: "35vw", padding: "20px"}}>
+                    <CategoryVideo />
+                    </div>
+                    <div style={{width: "65vw"}}>
+                    <CategorySlider />
+                    </div>
+                </div>
+                
 
                 <div>
                     <div className={`sticky-filter-bar ${isOpen && "active"}`}>

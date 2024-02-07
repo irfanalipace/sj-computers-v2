@@ -57,11 +57,12 @@ const CategorySidebar = () => {
             </Grid>
             
             <Grid item ml={2} my={1}>
-            <Typography variant='body2' fontWeight={"bolder"}>Customer Review</Typography>
+            <Typography variant='body2' fontWeight={"bolder"}>Avg. Customer Review</Typography>
             <Box ml={1} py={1}>
-            <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={4} starRatedColor='orange'  />&Up</Typography>
-            <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={3} starRatedColor='orange'  />&Up</Typography>
-            <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={4.5} starRatedColor='orange'  />&Up</Typography>
+            <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={4} starRatedColor='orange'  />& Up</Typography>
+            <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={3} starRatedColor='orange'  />& Up</Typography>
+            <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={2} starRatedColor='orange'  />& Up</Typography>
+            <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={1} starRatedColor='orange'  />& Up</Typography>
             </Box>
         </Grid>
 
