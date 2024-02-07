@@ -1,27 +1,12 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Grid, Typography } from '@mui/material'
 import { Link } from 'react-router-dom';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import { styled } from '@mui/material/styles';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import { HtmlTooltip } from '../../HtmlTooltip/HtmlTooltip';
+import "./AllCategoriesHeader.css"
 
 const AllCategoriesHeader = () => {
-
-    const HtmlTooltip = styled(({ className, ...props }) => (
-        <Tooltip {...props} arrow classes={{ popper: className }} />
-      ))(({ theme }) => ({
-        [`& .${tooltipClasses.tooltip}`]: {
-          backgroundColor: 'white',
-          color: 'rgba(0, 0, 0, 0.87)',
-          maxWidth: 220,
-          fontSize: theme.typography.pxToRem(12),
-          border: '1px solid #dadde9',
-
-          '& .MuiTooltip-arrow': {
-            color: 'lightgray',
-          }
-        },
-      }));
 
     const categories = [
         {
@@ -61,6 +46,17 @@ const AllCategoriesHeader = () => {
         },
     ];
 
+    const [isHovered, setIsHovered] = useState(false);
+    const [hoverIndex, setHoverIndex] = useState(null)
+
+    const handleMouseEnter = (index) => {
+        setIsHovered(true);
+        setHoverIndex(index)
+      };
+    
+      const handleMouseLeave = () => {
+        setIsHovered(false);
+      };
   return (
     <div>
         <Typography variant='h4' fontWeight={"bolder"}>Categories</Typography>
@@ -72,13 +68,17 @@ const AllCategoriesHeader = () => {
                     {index == 0 ? "" :<span style={{margin: "0px 5px", color: "black"}}>|</span> }
                     <HtmlTooltip title={
                         <>
-                            <Link to={"/category/desktop"} style={{textDecoration: "none", color: "black"}}><Typography variant='body2' p={.5} fontSize={"small"}>desktop</Typography></Link>
-                            <Link to={"/category/monitors"} style={{textDecoration: "none", color: "black"}}><Typography variant='body2' p={.5} fontSize={"small"}>monitors</Typography></Link>
-                            <Link to={"/category/tower"} style={{textDecoration: "none", color: "black"}}><Typography variant='body2' p={.5} fontSize={"small"}>tower</Typography></Link>
-                            <Link to={"/category/laptops"} style={{textDecoration: "none", color: "black"}}><Typography variant='body2' p={.5} fontSize={"small"}>laptops</Typography></Link>
+                            <Link to={"/category/desktop"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>desktop</Typography></Link>
+                            <Link to={"/category/monitors"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>monitors</Typography></Link>
+                            <Link to={"/category/tower"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>tower</Typography></Link>
+                            <Link to={"/category/laptops"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>laptops</Typography></Link>
                         </>
                     }>
-                        <Link to={""} key={category.id} style={{textDecoration: "none", color: "#007185"}}>{category.name} <ExpandMoreIcon fontSize='small' /></Link>
+                        <Link to={""} key={category.id} 
+                            // onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave} 
+                            className='topbar-item'>{category.name} {isHovered && hoverIndex == index ? <ExpandLessIcon fontSize='small' /> : 
+                        <ExpandMoreIcon fontSize='small' />}
+                        </Link>
                     </HtmlTooltip>   
                     </Typography>
                 </Grid>

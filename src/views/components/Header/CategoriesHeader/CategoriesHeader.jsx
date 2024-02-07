@@ -1,6 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom';
+import { Grid, Typography} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./CategoriesHeader.css"
+import { HtmlTooltip } from '../../HtmlTooltip/HtmlTooltip';
 
 const CategoriesHeader = () => {
 
@@ -46,11 +49,25 @@ const CategoriesHeader = () => {
     <div 
       className='header-wrappar' >
 
-        {categories.map((category) => (
+        {categories.map((category, index) => (
 
-          <Link key={category.id} to={`/category/${category.slug}`} style={{textDecoration: "none"}}>
-            <div className='item' > {category.name} </div>
-          </Link>
+          // <Link key={category.id} to={`/category/${category.slug}`} style={{textDecoration: "none"}}>
+          //   <div className='item' > {category.name} </div>
+          // </Link>
+          <Grid item key={index} style={{textDecoration: "none"}}>
+                  <div className='item' >
+                    <HtmlTooltip title={
+                        <>
+                            <Link to={"/category/desktop"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>desktop</Typography></Link>
+                            <Link to={"/category/monitors"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>monitors</Typography></Link>
+                            <Link to={"/category/tower"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>tower</Typography></Link>
+                            <Link to={"/category/laptops"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>laptops</Typography></Link>
+                        </>
+                    }>
+                         {category.name}<ExpandMoreIcon fontSize='small' /> 
+                    </HtmlTooltip>
+                    </div>  
+                </Grid>
 
         ))
         }
