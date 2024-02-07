@@ -1,59 +1,14 @@
 import React from "react";
-import Carousel from "react-bootstrap/Carousel";
-
 
 import "./SellingProducts.css";
 
-
-
-
-
-
-
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-
-// Install Swiper navigation plugin
 SwiperCore.use([Navigation]);
 const SellingProducts = ({images}) => {
-  //  console.log(images,'cdsdf')
-  //   const settings = {
-  //     infinite: true,
-  //     speed: 500,
-  //     slidesToShow: 8, // Change this value according to your requirement
-  //     slidesToScroll: 1,
-  //     responsive: [
-  //       {
-  //         breakpoint: 1200,
-  //         settings: {
-  //           slidesToShow: 3,
-  //           slidesToScroll: 1,
-  //           infinite: true,
-  //         },
-  //       },
-  //       {
-  //         breakpoint: 992,
-  //         settings: {
-  //           slidesToShow: 2,
-  //           slidesToScroll: 1,
-  //         },
-  //       },
-  //       {
-  //         breakpoint: 768,
-  //         settings: {
-  //           slidesToShow: 1,
-  //           slidesToScroll: 1,
-  //         },
-  //       },
-  //     ],
-  //   };
+  
     
 
   return (

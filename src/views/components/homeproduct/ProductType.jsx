@@ -112,7 +112,7 @@ const ProductType = () => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const products = useSelector((state) => state?.products.products);
     const currentDate = moment();
-    const oneDayAgo = moment().subtract(1, "days");
+    const oneDayAgo = moment().subtract(1, 'days');
     const duration = moment.duration(currentDate.diff(oneDayAgo));
     const hours = duration.hours();
     const minutes = duration.minutes();
@@ -323,14 +323,17 @@ const ProductType = () => {
                                 </Link>
                             </div>
                         )}
-                        <div className="product-section-advertisment">
+                        <div className="product-type-section">
                             {products && products?.length > 0 && (
                                 <>
-                                    <img
-                                        className={`advertisment-img`}
+                                 <div style={{textAlign:'center'}}>
+                                 <img
+                                        className={`advertisment-img-products-imges`}
                                         src={products[0].image}
                                         alt={"addDesktop"}
+                                       
                                     />
+                                    </div>
 
                                     <h5
                                         className=""
