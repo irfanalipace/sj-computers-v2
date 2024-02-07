@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
-import fileService from "../../../core/utils/fileService"
+import FileService from "../../../core/utils/fileService";
 import "./FileUpload.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload, faPaperclip } from "@fortawesome/free-solid-svg-icons";
-import {FILE_TYPES} from "../../../../src/core/utils/constants"
+import { FILE_TYPES } from "../../../../src/core/utils/constants";
 
 const allowedFiles = [
     FILE_TYPES.png.contentType,
@@ -12,6 +12,8 @@ const allowedFiles = [
     FILE_TYPES.jpeg.contentType,
     FILE_TYPES.jpg.contentType,
 ];
+
+const maxSize = 5;
 
 const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
     const fileInputRef = useRef(null);
@@ -29,18 +31,8 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
         onClose();
     };
 
-    const onFileSelect = (event) => {
-        const files = event.target.files || event.dataTransfer.files;
-        fileService.handleFileInputChange(
-            event,
-            allowedFiles,
-            onFileSelectCallback,
-            1
-        );
-    };
-
     const onFileSelectCallback = (validFiles, errors) => {
-        setErrors(errors.join(", "));
+        setErrors(errors);
         setUploadedImgs(validFiles);
         setImages((prevImages) => [
             ...prevImages,
@@ -50,6 +42,12 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
             })),
         ]);
     };
+
+    const fileService = new FileService({
+        maxSize,
+        allowedFiles,
+        onFileInput: onFileSelectCallback,
+    });
 
     const deleteImage = (index) => {
         onDeleteImage(index);
@@ -73,23 +71,13 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
         const files = event.dataTransfer.files;
 
         if (files.length > 0) {
-            fileService.handleFileDrag(
-                event,
-                allowedFiles,
-                onFileSelectCallback,
-                1
-            );
+            fileService.handleFileDrag(event);
         }
     };
 
     useEffect(() => {
         const handleListener = (event) => {
-            fileService.handlePaste(
-                event,
-                allowedFiles,
-                onFileSelectCallback,
-                1
-            );
+            fileService.handlePaste(event);
         };
         document.addEventListener("paste", handleListener);
 
@@ -129,6 +117,14 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
                             <div className="drop-import-section-p">
                                 <p> Drag & Drop file to import </p>
                             </div>
+                            <div>
+                                <p
+                                    className="text-muted"
+                                    style={{ fontSize: "12px" }}
+                                >
+                                    Or press Ctrl + v to paste
+                                </p>
+                            </div>
                             <div className="dev-droping-area-sction-files-area">
                                 <span
                                     className="select-image-file-drop"
@@ -145,8 +141,8 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
                                     style={{ fontSize: "12px" }}
                                 >
                                     {" "}
-                                    Maximum file size: 1MB, supported formats:
-                                    PNG or JPG{" "}
+                                    Maximum file size: 5MB, supported formats:
+                                    PNG, JPG and WEBP{" "}
                                 </p>
                             </div>
                         </>
@@ -155,9 +151,10 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
                         className="input-fileds-area-sections-data-powerd"
                         name="file"
                         type="file"
+                        accept={allowedFiles.join(",")}
                         multiple
                         ref={fileInputRef}
-                        onChange={onFileSelect}
+                        onChange={fileService.handleFileInputChange}
                     />
                 </div>
 
@@ -175,11 +172,15 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
                     ))}
                 </div>
                 {error && (
-                    <p
-                        className="error-message-file-formatted-issues"
-                        style={{ color: "red" }}
-                    >
-                        {error}
+                    <p className="error-message-file-formatted-issues fs-6">
+                        {error?.map((err) => (
+                            <p
+                                className="my-1"
+                                style={{ color: "red", fontSize: "12px" }}
+                            >
+                                {err}
+                            </p>
+                        ))}
                     </p>
                 )}
                 <div className="upload-cancel-dev">

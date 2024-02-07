@@ -1,30 +1,41 @@
+import { filterFiles } from "../utils/helpers";
 
-import { filterFiles } from './helpers';
+class FileService {
+    constructor({ maxSize, allowedFiles, onFileInput }) {
+        this.maxSize = maxSize;
+        this.allowedFiles = allowedFiles;
+        this.onChange = onFileInput;
 
-const fileService = {
-	maxSize:5,
-	handleFileInputChange(event, allowedFiles, cb, maxSize=this.maxSize)  {
-		event.preventDefault();
-		const files = event.target.files
-		this.fileFilteration(files,cb, allowedFiles, maxSize);
-	},
-	handleFileDrag (event, allowedFiles, cb, maxSize=this.maxSize) {
-		event.preventDefault();
-		const files = event.dataTransfer.files;		
-		this.fileFilteration(files,cb, allowedFiles, maxSize);
-	},
-	handlePaste(event, allowedFiles, cb, maxSize=this.maxSize){
-		event.preventDefault();
-		const clipboardData = (event.clipboardData || window.clipboardData);
-		const files = Array.from(clipboardData.files);
-		this.fileFilteration(files,cb, allowedFiles, maxSize);
-	},
-	fileFilteration(files,cb, allowedFiles, maxSize) {
-		if (files?.length > 0) {
-			const { validFiles, errors } = filterFiles(files, allowedFiles, maxSize);
-			cb(validFiles, errors);
-		}
-	}
-};
+        this.handleFileInputChange = this.handleFileInputChange.bind(this);
+        this.handleFileDrag = this.handleFileDrag.bind(this);
+        this.handlePaste = this.handlePaste.bind(this);
+    }
+    fileFilteration(files) {
+        if (files?.length > 0) {
+            const { validFiles, errors } = filterFiles(
+                files,
+                this.allowedFiles,
+                this.maxSize
+            );
+            this.onChange(validFiles, errors);
+        }
+    }
+    handleFileInputChange(event) {
+        event.preventDefault();
+        const files = event.target.files;
+        this.fileFilteration(files);
+    }
+    handleFileDrag(event) {
+        event.preventDefault();
+        const files = event.dataTransfer.files;
+        this.fileFilteration(files);
+    }
+    handlePaste(event) {
+        event.preventDefault();
+        const clipboardData = event.clipboardData || window.clipboardData;
+        const files = Array.from(clipboardData.files);
+        this.fileFilteration(files);
+    }
+}
 
-export default fileService;
+export default FileService;
