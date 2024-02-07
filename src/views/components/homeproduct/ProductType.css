@@ -38,6 +38,7 @@
 }
 .product-type-section a{
     font-size: 12px;
+    text-decoration: none;
 }
 .product-type-section .categories-container {
     height: 230px;
