@@ -1,15 +1,24 @@
 import { useSelector } from "react-redux";
 
-function usePaymentData() {
+function usePaymentData(buyNow = false) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const user = useSelector((state) => state.auth.user);
 
     const cartItems = useSelector((state) => state.cart.cart);
-    const cartDetails = useSelector((state) => state.cart.details);
+    let cartDetails = useSelector((state) => state.cart.details);
     const shippingDetails = useSelector(
         (state) => state.orders.shippingDetails
     );
 
+    if (buyNow && cartItems.length > 0) {
+        const item = cartItems[0];
+        cartDetails = {
+            total: item.price,
+            sub_total: item.price,
+            total_items: 1,
+            shipment_info: { amount: 0 },
+        };
+    }
     let total_quantity = 0;
     const cartData = cartItems?.map((item) => {
         // map item according to the request payload format
