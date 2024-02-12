@@ -10,7 +10,7 @@ import AddCartComponents from "../Product/CheckOutCard/AddCartComponents";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 import { Box, Stack, Typography } from "@mui/material";
 import { generatePath } from "../../../core/utils/helpers";
-const Product = ({ type = "", product, inGrid, searchParams }) => {
+const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
     const orderEstimatedDelivery = useSelector(
         (state) => state.orders.orderEstimatedDelivery
     );
@@ -101,7 +101,7 @@ const Product = ({ type = "", product, inGrid, searchParams }) => {
 
     const ProductDetails = () => (
         <div>
-            <div className="product-details ">
+            <div className="product-details " style={{padding: "0px 10px"}}>
                 {/* <div>
             <span className="span-the-product-color-product">
             crocs Contrary to popular
@@ -247,10 +247,11 @@ const Product = ({ type = "", product, inGrid, searchParams }) => {
     );
 
     return (
-        <div className={` product ${inGrid && "product-grid"}`}>
+        <div className={` product ${inGrid && "product-grid"}`} style={{ flexDirection: productView == "list" ? "row" : ""}}>
             <Link
                 //to={`${new URL(product?.url).pathname}`}
                 to={productUrl}
+                style={{width: productView == "list" ? "20%" : "100%", }}
             >
                 <div
                     className={` ${
@@ -277,7 +278,9 @@ const Product = ({ type = "", product, inGrid, searchParams }) => {
                     </div>
                 </div>
             </Link>
-            <ProductDetails />
+            <div style={{width: productView == "list" ? "80%" : "100%"}}>
+                <ProductDetails />
+            </div>    
         </div>
     );
 };
