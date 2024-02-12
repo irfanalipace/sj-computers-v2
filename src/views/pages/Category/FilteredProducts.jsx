@@ -89,6 +89,8 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
         }
     }, [category]);
 
+    console.log(productParamsRef, "productParamsRef");
+
     return (
         <div className="filter-results">
             {products.length > 0 ? (

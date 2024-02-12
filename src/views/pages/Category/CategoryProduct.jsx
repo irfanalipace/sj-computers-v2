@@ -12,6 +12,7 @@ import ShopByBrand from '../../components/Catagory/ShopByBrand'
 import Recommendation from "../../components/Recommendation/Recommendation"
 
 import "./Category.css"
+import CategoryVideoAndSlider from '../../components/Catagory/CategoryVideoAndSlider'
 
 const CategoryProducts = () => {
   return (
@@ -22,14 +23,9 @@ const CategoryProducts = () => {
         <CategoriesHeader />
       </Grid>
 
-      {/* CategoryVideo */}
-      <Grid item md={4} p={2}>
-        <CategoryVideo />
-      </Grid>
-
-      {/* CategorySlider */}
-      <Grid item md={8} py={2}>
-        <CategorySlider />
+      {/* Video and Slider Combine */}
+      <Grid item xs={12}>
+        <CategoryVideoAndSlider />
       </Grid>
 
       <Grid item md={2} mt={2} py={2} >
