@@ -45,6 +45,7 @@ export default function Checkout() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     const loading = useSelector((state) => state.cart.isLoading);
+    const id = searchParams.get("id");
 
     const toggleAccordion = (id) => {
         openAccordion(id, !accordion[id].open);
@@ -112,7 +113,10 @@ export default function Checkout() {
                                     ) : (
                                         <h3>
                                             Guest Checkout ({" "}
-                                            {checkoutDetails.total_items} items)
+                                            {id
+                                                ? 1
+                                                : checkoutDetails.total_items}{" "}
+                                            items)
                                         </h3>
                                     )}
                                 </div>

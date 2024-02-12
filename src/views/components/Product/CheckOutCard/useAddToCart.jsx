@@ -10,7 +10,7 @@ function useAddToCart(product, quantity) {
     const params = useParams();
     const navigate = useNavigate();
 
-    const cartClickHandler = (plan, addingitem, noRedirect) => {
+    const cartClickHandler = (plan, addingitem, type) => {
         const cartQuantity = details?.total_items + 1;
         const itemProtectedPlanPrice = parseFloat(plan?.price || 0) * quantity;
         const productPrice = parseFloat(product?.price * quantity);
@@ -39,9 +39,12 @@ function useAddToCart(product, quantity) {
             sub_total: cartSubTotal.toFixed(2),
         };
 
-        const redirectPath = `/add-to-cart/${params?.title}/dp/${
-            params?.productId
-        }${addingitem ? `/${1}` : ""}`;
+        const redirectPath =
+            type?.toLowerCase() === "buynow"
+                ? `/checkout?id=${product.id}`
+                : `/add-to-cart/${params?.title}/dp/${params?.productId}${
+                      addingitem ? `/${1}` : ""
+                  }`;
         isAuthenticated
             ? dispatch(addToCart({ cartItem }, () => navigate(redirectPath)))
             : dispatch(

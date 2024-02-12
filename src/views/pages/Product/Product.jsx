@@ -49,7 +49,6 @@ export default function Product() {
         // execute on location change
         console.log(location);
         console.log(product?.id);
-        // debugger;
         // dispatch(CLEAR_REVIEW());
         // console.log("Location changed!", location.pathname);
     }, [location?.pathname]);

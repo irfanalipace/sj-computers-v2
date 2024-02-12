@@ -33,7 +33,6 @@ const reviewPerPage = 5;
 function ProductReviews({ productId, productAsin, onFilterChange }) {
     const dispatch = useDispatch();
     const reviewState = useSelector((slice) => slice.review);
-    // debugger;
     const [ReviewsData, setReviewsData] = useState([]);
 
     const fetchData = async (productId) => {
@@ -45,7 +44,6 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
             const response = await allReviewImagesApi(productId);
             console.log(response, "responseAllImage");
             setReviewsData(response);
-            // debugger;
         } catch (error) {
             console.log("error");
         }
