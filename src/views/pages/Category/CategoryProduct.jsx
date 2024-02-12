@@ -32,7 +32,7 @@ const CategoryProducts = () => {
         <CategorySlider />
       </Grid>
 
-      <Grid item md={2} mt={2} >
+      <Grid item md={2} mt={2} py={2} >
         <CategorySidebar />
       </Grid>
       

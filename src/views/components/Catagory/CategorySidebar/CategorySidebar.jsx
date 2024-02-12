@@ -35,7 +35,7 @@ const CategorySidebar = () => {
   };
 
   return (
-    <Grid container height={"95%"} sx={{borderRight: "0.5px solid gray"}} >
+    <Grid container height={"137vh"} width={"100%"} sx={{ overflowX: "hidden", overflowY: "auto", borderRight: "0.5px solid gray"}} >
 
         <Grid item ml={2}>
             <Typography variant='body2' fontWeight={"bolder"} ml>Catagories</Typography>    
