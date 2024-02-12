@@ -1,23 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProtectionPopup from "../ProtectionPlan/ProtectionPopup";
 import { useNavigate } from "react-router-dom";
 import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 import { useDispatch, useSelector } from "react-redux";
 import { PLAN_ENUM } from "@utils/constants";
-import { Drawer } from "@mui/material";
+import { CircularProgress, Drawer } from "@mui/material";
 import ProtectionPlanDrawer from "../ProtectionPlan/ProtectionPlanDrawer";
 import useAddToCart from "./useAddToCart";
 
 function AddToCartAndWarranty({ product }) {
+    const navigate = useNavigate();
     const [protPlan, setProtPlan] = useState({});
     const [plan, setOpenPlan] = useState({});
     const [quantity, setQuantity] = useState(1);
     const [drawerProps, setDrawerProps] = useState({});
+    const [loading, setLoading] = useState(false);
     const productAddingToCard = useSelector(
         (state) => state.products.isLoading
     );
-    const cartClickHandler = useAddToCart(product, quantity, plan);
+    const [type, setType] = useState("");
+    const cartClickHandler = useAddToCart(product, quantity);
+
+    useEffect(() => {
+        if (type === "buynow") {
+            cartClickHandler(product, quantity, type);
+        }
+    }, [type]);
 
     function handleCheckboxClick(_plan) {
         setProtPlan((prev) => {
@@ -76,15 +85,19 @@ function AddToCartAndWarranty({ product }) {
                     Add to Cart
                 </button>
             </div>
-            {/* <div className="button-cart-sell">
-                            <Button
-                                className="button2 button-text-button"
-                                clickHandler={cartClickHandler}
-                                isLoading={isLoading}
-                            >
-                                Buy Now
-                            </Button>
-                        </div> */}
+            <div className="button-cart-sell">
+                <button
+                    type="button"
+                    onClick={() => {
+                        setType("buynow");
+                    }}
+                    // disabled={productAddingToCard}
+                    className={"button1 button-text-button"}
+                    style={{ background: "#00305E" }}
+                >
+                    {loading ? <CircularProgress /> : "Buy Now"}
+                </button>
+            </div>
 
             <div className="details-container">
                 <div className="col-xl-7 col-5">

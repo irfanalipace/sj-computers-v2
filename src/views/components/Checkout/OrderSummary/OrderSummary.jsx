@@ -7,17 +7,17 @@ import PaymentButton from "@components/Checkout/PaymentMethod/PaymentButton";
 import ReviewButton from "@components/Checkout/ReviewCheckout/ReviewButton";
 
 import "./OrderSummary.css";
+import usePaymentData from "../PaymentMethod/usePaymentData";
 
 function OrderSummary({
     handleClick,
     activeAccordion,
     // paymentMethod,
-    shippingDetails,
     isDisabled,
 }) {
     const dispatch = useDispatch();
     const placingOrder = useSelector((state) => state.orders.placingOrder);
-
+    const paymentData = usePaymentData(true);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     const Button = () => {
@@ -75,16 +75,18 @@ function OrderSummary({
                                     <li>
                                         <span>Items:</span>
                                         <span>
-                                            ({shippingDetails?.total_items})
+                                            ({paymentData?.details?.total_items}
+                                            )
                                         </span>
                                     </li>
                                     <li>
                                         <span>Price:</span>
                                         <span>
                                             <strong>
-                                                {shippingDetails?.sub_total
+                                                {paymentData?.details?.sub_total
                                                     ? "$" +
-                                                      shippingDetails.sub_total
+                                                      paymentData.details
+                                                          .sub_total
                                                     : "$0"}
                                             </strong>
                                         </span>
@@ -92,13 +94,12 @@ function OrderSummary({
                                     <li>
                                         <span>Shipping & handling:</span>
                                         <span>
-                                            {shippingDetails?.shipment_info
-                                                ?.amount
+                                            {paymentData?.details
+                                                ?.shipment_amount
                                                 ? "$" +
                                                   parseFloat(
-                                                      shippingDetails
-                                                          ?.shipment_info
-                                                          ?.amount
+                                                      paymentData?.details
+                                                          ?.shipment_amount
                                                   ).toFixed(2)
                                                 : "$0"}
                                         </span>
@@ -123,7 +124,7 @@ function OrderSummary({
                                         </span>
                                         <span>
                                             <strong>
-                                                ${shippingDetails?.total}
+                                                ${paymentData?.details?.total}
                                             </strong>
                                         </span>
                                     </li>
@@ -151,16 +152,18 @@ function OrderSummary({
                                     <li>
                                         <span>Items:</span>
                                         <span>
-                                            ({shippingDetails?.total_items})
+                                            ({paymentData?.details?.total_items}
+                                            )
                                         </span>
                                     </li>
                                     <li>
                                         <span>Price:</span>
                                         <span>
                                             <strong>
-                                                {shippingDetails?.sub_total
+                                                {paymentData?.details?.sub_total
                                                     ? "$" +
-                                                      shippingDetails.sub_total
+                                                      paymentData.details
+                                                          .sub_total
                                                     : "$0"}
                                             </strong>
                                         </span>
@@ -168,10 +171,12 @@ function OrderSummary({
                                     <li>
                                         <span>Shipping & handling:</span>
                                         <span>
-                                            {shippingDetails?.shipment_amount
+                                            {paymentData?.details
+                                                ?.shipment_amount
                                                 ? "$" +
                                                   parseFloat(
-                                                      shippingDetails?.shipment_amount
+                                                      paymentData?.details
+                                                          ?.shipment_amount
                                                   ).toFixed(2)
                                                 : "$0"}
                                         </span>
@@ -196,7 +201,7 @@ function OrderSummary({
                                         </span>
                                         <span>
                                             <strong>
-                                                ${shippingDetails?.total}
+                                                ${paymentData?.details?.total}
                                             </strong>
                                         </span>
                                     </li>

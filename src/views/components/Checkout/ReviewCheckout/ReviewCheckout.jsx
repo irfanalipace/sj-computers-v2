@@ -5,6 +5,7 @@ import ReviewButton from "./ReviewButton";
 import WarrantyBadge from "@components/ShoppingCart/CartItem/WarrantyBadge";
 
 import "./ReviewCheckout.css";
+import { useLocation } from "react-router-dom";
 
 export default function ReviewCheckout({
     toggleAccordion,
@@ -27,6 +28,24 @@ export default function ReviewCheckout({
         "Get Discount & Benefits"
     );
 
+    const [itemsToShow, setItemsToShow] = useState([]);
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const id = query.get("id");
+
+    const items = () => {
+        if (id) {
+            const oneItem = cartItems?.find((item) => item.id === parseInt(id));
+            setItemsToShow([oneItem]);
+        } else {
+            setItemsToShow(cartItems);
+        }
+    };
+
+    useEffect(() => {
+        items();
+    }, [cartItems]);
+
     return (
         <div className="review-card">
             <h4>
@@ -36,7 +55,7 @@ export default function ReviewCheckout({
 
             <div className="row mx-0 mb-3">
                 <div className="col-12 ps-0">
-                    {cartItems.map((item) => (
+                    {itemsToShow?.map((item) => (
                         <div className="item-card" key={item?.id}>
                             <div className="img-wrapper">
                                 <img
@@ -68,8 +87,7 @@ export default function ReviewCheckout({
                                     </div>
                                     {item?.plan?.value && (
                                         <div className="col-md-3">
-                                           
-                                                {/* <p className="checkout-card-dev-sj-computers-sections">
+                                            {/* <p className="checkout-card-dev-sj-computers-sections">
                                                     SJ Computer{" "}
                                                 </p>
                                                 <div>
@@ -87,12 +105,15 @@ export default function ReviewCheckout({
                                                         : "Tech Unlimited"}
                                                 </span> */}
 
-                                                <WarrantyBadge durationInYears={item?.plan?.durationInYears
+                                            <WarrantyBadge
+                                                durationInYears={
+                                                    item?.plan?.durationInYears
                                                         ? item?.plan
                                                               ?.durationInYears +
                                                           " years"
-                                                        : "Tech Unlimited"}/>
-                                           
+                                                        : "Tech Unlimited"
+                                                }
+                                            />
                                         </div>
                                     )}
                                 </div>

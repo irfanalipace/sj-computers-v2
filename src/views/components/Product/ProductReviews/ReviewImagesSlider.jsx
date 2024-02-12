@@ -14,7 +14,6 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
     const [reviewId, setReviewId] = useState({});
     const [imgId, setImgId] = useState("");
     const [imgIndex, setImgIndex] = useState(0);
-    // debugger;
 
     console.log(reviews, "reviews");
 
