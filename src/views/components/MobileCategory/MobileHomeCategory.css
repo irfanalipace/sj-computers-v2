@@ -3,11 +3,93 @@
     width: 238px;
 
 } */
+.advertisement-heading-mobile-sections-header-dev {
+    margin-top: 6px;
+    background-color: white;
+    border: 1px solid #ddd;
+    text-align: center;
+    /* height: 43%; */
+}
+.create-account-mobile-home-page {
+    text-align: left;
+    margin: 12px 13px;
+}
+.create-account-mobile-home-page button {
+    border: none;
+    background: none;
+    color: #007185;
+}
+.advertisement-heading-mobile-sections-header-dev h2 {
+    font-family: Inter;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin: 13px 10px 10px 22px;
+}
 .swiper .image-category-mobile-silder {
     max-width: 100%;
     width: 160px !important;
     border-radius: 6px;
 }
+.advertisement-heading-mobilescetions img {
+    height: 124px;
+    width: 100%;
+}
+.product-type-section-mobile-images-dev img {
+    height: 120px;
+    width: 100%;
+}
+.product-type-section-mobile-images-dev {
+    background: white;
+    padding: 9px;
+    margin-bottom: 12px;
+}
+.save-button-price-mobile-versions-data {
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+.product-new-price-sections-rating-mobile-versions p {
+    background: #b12704;
+    color: white;
+    padding: 4px;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+.product-new-price-sections-rating-mobile-versions {
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #b12704;
+}
+.mobile-versions-products-sections-images {
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+   
+}
+.dev-sactions-price-old-new-time-mobile-versions {
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #b12704;
+    margin-top: 3px;
+}
+
 .link-text-category-mobile {
     color: black;
     font-family: "Inter";
@@ -53,4 +135,48 @@
 
 .my-swiper-mobile-category .swiper-pagination-bullet {
     display: none;
+}
+
+.product-type-section-selleing-products-mobile-versions {
+    height: auto;
+    width: 100%;
+    background-color: white;
+    margin: 8px 0;
+    padding: 12px 18px;
+}
+
+.product-type-section-selleing-products-mobile-versions h4 {
+    font-family: Inter;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+.dev-sections-heading-offer {
+    display: flex;
+   
+}
+.dev-sections-heading-offer p {
+    margin-top: 3px;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #007185;
+    margin-left: 16px;
+}
+
+
+.button-save-mobile-size {
+    height: 40px;
+    width: 90%;
+    margin: 0 auto;
+    background: #38c056;
+    border-radius: 5px 5px 0px 0px;
+    color: white;
+    border: 0;
+    font-size: 14px;
 }
