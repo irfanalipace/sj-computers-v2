@@ -32,6 +32,7 @@ const BannerCategory = () => {
                 <div className="catergory-grid-wrapper">
                     <div>
                         <Suspense>
+                            
                             <ProductType />
                             
                         </Suspense>
