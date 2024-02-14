@@ -1,8 +1,13 @@
 import image from "@images/Banner/Unionemptycart.png";
 import SeggestedItems from "./SugestedItems/SeggestedItems";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 // import Recommendation from "../Recommendation/Recommendation";
 
 const EmptyCart = () => {
+    const user = useSelector((state) => state?.auth?.isAuthenticated);
+    const navigate = useNavigate();
+
     return (
         <div className="empty-cart-container">
             <div className="empty-cart">
@@ -12,14 +17,20 @@ const EmptyCart = () => {
                     <p style={{ fontSize: "12px", color: "#007185" }}>
                         Shop today's details
                     </p>
-                    <div className="btn-grp-emp-cart">
-                        <button>Sign in to your account</button>
-                        <button>Sign up now</button>
-                    </div>
+                    {!user && (
+                        <div className="btn-grp-emp-cart">
+                            <button onClick={() => navigate("/login")}>
+                                Sign in to your account
+                            </button>
+                            <button onClick={() => navigate("/register")}>
+                                Sign up now
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
 
-            <div className="recommended-items-emptycart">
+            <div className="recommended-items-emptycart hide-on-mobile">
                 <h3>Suggested Items</h3>
                 <SeggestedItems num={4} />
             </div>

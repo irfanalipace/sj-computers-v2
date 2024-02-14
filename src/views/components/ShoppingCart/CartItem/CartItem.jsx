@@ -95,9 +95,9 @@ export const CartItem = memo(({ cartData }) => {
         redirectedFromPath: `/cart`,
     };
     return (
-        <div>
+        <div className="container-for-cart-item">
             <div className="row">
-                <div className="col-md-2 ">
+                <div className="col-4 col-md-2">
                     <div className="cart-image-mobile-size">
                         <img
                             src={cartData?.product?.image}
@@ -106,7 +106,7 @@ export const CartItem = memo(({ cartData }) => {
                         />
                     </div>
                 </div>
-                <div className="col-md-10 ">
+                <div className="col-8 col-md-10">
                     <div className="d-flex flex-column h-100 justify-content-between mx-0">
                         <div className="items-card-data">
                             <div className="col-md-10">
@@ -141,7 +141,7 @@ export const CartItem = memo(({ cartData }) => {
                                 <div>
                                     <div className="row list-item-dev-ui-item">
                                         <ul className="item-list">
-                                            <li>
+                                            <li className="hide-on-mobile">
                                                 <span
                                                     className="item-stock"
                                                     style={{ fontWeight: 500 }}
@@ -194,78 +194,74 @@ export const CartItem = memo(({ cartData }) => {
                                         </ul>
                                     </div>
                                 </div>
-
-                                <div
-                                    className="row"
-                                    style={{
-                                        width: "350px",
-                                        // border: "1px solid #000",
-                                        marginLeft: "140px",
-                                    }}
-                                >
-                                    <div className="col-md-9 mt-2">
-                                        {cartData?.plan?.value && (
-                                            <>
-                                                <div className="">
-                                                    <div className="dev-data-page-wantity">
-                                                        <div className="protection-button-remove-data-remove add-text-remive-item">
-                                                            <button>
-                                                                Remove Warranty
-                                                            </button>
-                                                        </div>
-                                                        <div>
-                                                            <WarrantyBadge
-                                                                durationInYears={
-                                                                    cartData
-                                                                        ?.plan
-                                                                        ?.durationInYears
-                                                                        ? cartData
-                                                                              ?.plan
-                                                                              ?.durationInYears +
-                                                                          " years"
-                                                                        : "Tech Unlimited"
-                                                                }
-                                                            />
+                                {cartData?.plan?.value && (
+                                    <div
+                                        className="row"
+                                        style={{
+                                            width: "350px",
+                                            // border: "1px solid #000",
+                                            marginLeft: "140px",
+                                        }}
+                                    >
+                                        <div className="col-md-9 mt-2">
+                                            {cartData?.plan?.value && (
+                                                <>
+                                                    <div className="">
+                                                        <div className="dev-data-page-wantity">
+                                                            <div className="protection-button-remove-data-remove add-text-remive-item">
+                                                                <button>
+                                                                    Remove
+                                                                    Warranty
+                                                                </button>
+                                                            </div>
+                                                            <div>
+                                                                <WarrantyBadge
+                                                                    durationInYears={
+                                                                        cartData
+                                                                            ?.plan
+                                                                            ?.durationInYears
+                                                                            ? cartData
+                                                                                  ?.plan
+                                                                                  ?.durationInYears +
+                                                                              " years"
+                                                                            : "Tech Unlimited"
+                                                                    }
+                                                                />
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </>
-                                        )}
+                                                </>
+                                            )}
+                                        </div>
+                                        <div
+                                            className="col-md-3 mt-4"
+                                            // style={{ marginRight: "130px" }}
+                                        >
+                                            <p>
+                                                <strong
+                                                    style={{
+                                                        fontWeight: 800,
+                                                    }}
+                                                >
+                                                    $
+                                                    {parseFloat(
+                                                        cartData?.plan_price
+                                                    ).toFixed(2)}
+                                                </strong>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div
-                                        className="col-md-3 mt-4"
-                                        // style={{ marginRight: "130px" }}
-                                    >
-                                        <p>
-                                            <strong
-                                                style={{
-                                                    fontWeight: 800,
-                                                }}
-                                            >
-                                                $
-                                                {parseFloat(
-                                                    cartData?.plan_price
-                                                ).toFixed(2)}
-                                            </strong>
-                                        </p>
-                                    </div>
-                                </div>
+                                )}
                             </div>
                         </div>
                         <div className="row">
                             <div>
-                                <div style={{ height: "45px" }}>
+                                <div>
                                     {cartData.loading ? (
                                         <Loader />
                                     ) : (
                                         <>
-                                            <div
-                                                // className="d-flex justify-content-between justify-content-sm-start align-items-end"
-                                                className="buttons-on-cartitem"
-                                                // style={{
-                                                //     maxWidth: "700px",
-                                                // }}
-                                            >
+                                            <div className="buttons-on-cartitem">
                                                 <QuantityInput
                                                     onChange={handleQuantity}
                                                     minQuantity={1}
@@ -318,7 +314,7 @@ export const CartItem = memo(({ cartData }) => {
                                                     )}
                                                 </button>
                                                 <button
-                                                    className="cart-bttn"
+                                                    className="cart-bttn hide-on-mobile"
                                                     disabled={updatingItem}
                                                 >
                                                     {updatingItem ? (
@@ -327,13 +323,6 @@ export const CartItem = memo(({ cartData }) => {
                                                         "Share"
                                                     )}
                                                 </button>
-                                                {/* <button className="button-link">
-                                Save for later
-                            </button>
-                            <button className="button-link">
-                                Compare with similer item
-                            </button>
-                            <button className="button-link">Share</button> */}
                                             </div>
                                         </>
                                     )}

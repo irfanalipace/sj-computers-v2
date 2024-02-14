@@ -119,6 +119,7 @@ const CartItem = ({ item }) => {
                             fontSize: "12px",
                             fontWeight: 400,
                         }}
+                        className="nameee"
                     >
                         {item?.name}
                     </Typography>
@@ -148,7 +149,12 @@ const CartItem = ({ item }) => {
                 <br />${totalPrice}
             </div>
 
-            <Grid container justifyContent="space-between" mt={1}>
+            <Grid
+                container
+                justifyContent="space-around"
+                style={{ width: "80%", margin: "0px auto" }}
+                mt={1}
+            >
                 <Grid item>
                     <div style={{ width: "61px" }}>
                         <QuantityInput

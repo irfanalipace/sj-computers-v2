@@ -1,7 +1,7 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "@store/products/productsThunks";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,8 +10,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import CategorySliderCard from './CategorySliderCard';
-import "./CategorySlider.css"
+import CategorySliderCard from "./CategorySliderCard";
+import "./CategorySlider.css";
 
 // Install Swiper navigation plugin
 SwiperCore.use([Navigation]);
@@ -32,11 +32,12 @@ const CategorySlider = () => {
         }
     };
 
-    console.log(products ,"products in category");
+    console.log(products, "products in category");
 
-  return (
-    <div style={{position: "relative"}} className="category-slider">
+    return (
+        <div style={{ position: "relative" }} className="category-slider">
             <Swiper
+                style={{ marginTop: "20px" }}
                 slidesPerView={7}
                 spaceBetween={20}
                 breakpoints={{
@@ -60,8 +61,8 @@ const CategorySlider = () => {
                     },
                 }}
                 navigation={{
-                    nextEl: '.category-slider .swiper-button-next',
-                    prevEl: '.category-slider .swiper-button-prev',
+                    nextEl: ".category-slider .swiper-button-next",
+                    prevEl: ".category-slider .swiper-button-prev",
                 }}
             >
                 {products?.map((product) => (
@@ -71,10 +72,16 @@ const CategorySlider = () => {
                 ))}
             </Swiper>
             {/* the css of these are defined in Slider.css */}
-            <div className="swiper-button-next slider-button" style={{position: "absolute", right: 0}}></div>
-            <div className="swiper-button-prev slider-button" style={{position: "absolute", left: 0}}></div>
+            <div
+                className="swiper-button-next slider-button"
+                style={{ position: "absolute", right: 0 }}
+            ></div>
+            <div
+                className="swiper-button-prev slider-button"
+                style={{ position: "absolute", left: 0 }}
+            ></div>
         </div>
-  )
-}
+    );
+};
 
-export default CategorySlider
+export default CategorySlider;

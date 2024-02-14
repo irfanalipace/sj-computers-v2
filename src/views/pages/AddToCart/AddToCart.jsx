@@ -7,6 +7,7 @@ import SimilarPurchaseCart from "./components/SimilarPurchaseCart/SimilarPurchas
 import { Grid } from "@mui/material";
 import SimilarInterestSlider from "./components/SimilarPurchaseCart/SimilarInterestSlider";
 import CartSideBar from "./components/CartSidebar/CartSideBar";
+import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { useSelector } from "react-redux";
 import "./AddToCart.css";
 
@@ -16,7 +17,11 @@ const AddToCart = () => {
     const product = cart?.find((item) => item?.product?.asin == productId);
     const { featuredProducts } = useSimilarData(product?.id);
 
-    return product ? (
+    return !product ? (
+        <div style={{ padding: "140px", textAlign: "center" }}>
+            <LoaderComponent />
+        </div>
+    ) : (
         <div style={{ backgroundColor: "#EAEDED" }}>
             <Grid container direction="row-reverse">
                 <Grid item lg={2}>
@@ -40,10 +45,6 @@ const AddToCart = () => {
             <div className="hidden-on-desktop">
                 <SimilarInterestSlider products={featuredProducts} />
             </div>
-        </div>
-    ) : (
-        <div style={{ padding: "140px", textAlign: "center" }}>
-            There are no items in the cart!!!
         </div>
     );
 };

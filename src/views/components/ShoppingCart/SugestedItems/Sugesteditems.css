@@ -1,7 +1,7 @@
 .suggested-item-container {
     display: flex;
     justify-content: flex-start;
-    margin: 25px 0px;
+    margin: 15px 0px;
 }
 .suggested-item-image {
     display: flex;
@@ -9,7 +9,7 @@
     align-items: center;
 }
 .suggested-item-image div {
-    margin-right: 22px;
+    margin-right: 12px;
     height: 88px;
     width: 100px;
 }
@@ -39,4 +39,20 @@
     background-color: #fff;
     padding: 7px;
     border-radius: 4px;
+}
+@media screen and (max-width: 768px) {
+    .hide-on-mobile {
+        display: none;
+    }
+    .item-price {
+        color: #000;
+        margin-top: 0px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .suggested-item-image {
+        background-color: #f0f8ff;
+        padding: 20px;
+        margin-right: 20px;
+    }
 }
