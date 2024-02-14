@@ -198,9 +198,9 @@
     width: 100%;
 }
 .product-image-grid.product-image img {
-    width: 85%;
-    max-width: 300px;
-    max-height: 187px;
+    width: 70%;
+    /* max-width: 300px; */
+    max-height: 170px;
 }
 
 .product-details {
@@ -327,7 +327,7 @@
     /* background-color: #1860A3; */
     padding: 6px;
     font-size: 12px;
-    padding-right: 20px;
+    padding-right: 15px;
     font-weight: 700;
     clip-path: polygon(0 0, 100% 0, 79% 100%, 0 100%);
     /* min-width: 20%; */
@@ -546,9 +546,9 @@
         padding: 0; 
     }
     .product-image-grid.product-image img {
-        width: 83%;
-        max-width: 300px;
-        /* max-height: 133px; */
+        /* width: 83%; */
+        /* max-width: 300px; */
+        max-height: 150px;
     }
     .dilvery-system-mobile-card-product {
         font-family: "Inter";

@@ -471,8 +471,8 @@ const FilterBarlayout2 = () => {
                 ) : (
                     <></>
                 )}
-
-                <div className="filter-button-category-page">
+                {/* Hide Apply Button on All */}
+                {selectedUnit[category]?.unit === "" ? "" : <div className="filter-button-category-page">
                     <Button
                         disabled={isLoading}
                         onClick={(e) => applyRange(e, category)}
@@ -480,6 +480,7 @@ const FilterBarlayout2 = () => {
                         Apply
                     </Button>
                 </div>
+                }
             </ul>
         );
     };

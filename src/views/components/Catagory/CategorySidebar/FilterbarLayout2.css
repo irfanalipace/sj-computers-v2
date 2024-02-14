@@ -217,9 +217,9 @@
     border: 1px solid lightgray;
 }
 @media screen and (max-width: 585px) {
-    .sticky-filter-bar {
+    /* .sticky-filter-bar {
         width: 0;
-    }
+    } */
     .sticky-filter-bar.active {
         width: 80%;
         top: 0;

@@ -293,7 +293,7 @@ const ProductCardLayout2 = ({ type = "", product, inGrid, searchParams, productV
     );
 
     return (
-        <div className={` product ${inGrid && "product-grid"}`} style={{ flexDirection: productView == "list" ? "row" : ""}}>
+        <div className={` product ${inGrid && "product-grid"}`} style={{ flexDirection: productView == "list" ? "row" : "", border: productView == "list" ? "none" : ""}}>
             <Link
                 //to={`${new URL(product?.url).pathname}`}
                 to={productUrl}
@@ -313,7 +313,7 @@ const ProductCardLayout2 = ({ type = "", product, inGrid, searchParams, productV
                         <div className="badge-text">Best Seller</div>
                     </div>
                 )} */}
-                    {inGrid && <div className="product-offer-label" style={{backgroundColor: "#1860A3"}}>New</div>}
+                    {inGrid && <div className="product-offer-label" style={{backgroundColor: product?.total_review > 0 ? "#52AC66" : "#1860A3", top: productView == "list" ? "-9px" : "" }}>{product?.total_review > 0 ? "Top Seller" : "New" }</div>}
 
                     <div className="image-wrapper">
                         <LazyLoadImage
