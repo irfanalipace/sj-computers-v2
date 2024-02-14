@@ -14,6 +14,7 @@ import MobileRecommand from '../../components/MobileCategory/MobileRecommand/Mob
 
 import "./Category.css"
 import CategoryVideoAndSlider from '../../components/Catagory/CategoryVideoAndSlider'
+import CategoryFilterbarMobile from '../../components/Catagory/CategoryFiterbarMobile/CategoryFilterbarMobile'
 
 const CategoryProducts = () => {
   return (
@@ -22,6 +23,11 @@ const CategoryProducts = () => {
       {/* Header */}
       <Grid item xs={12}>
         <CategoriesHeader />
+      </Grid>
+
+      {/* Filterbar For Mobile only */}
+      <Grid item xs={12} className='d-sm-none'>
+          <CategoryFilterbarMobile />
       </Grid>
 
       {/* Video and Slider Combine */}

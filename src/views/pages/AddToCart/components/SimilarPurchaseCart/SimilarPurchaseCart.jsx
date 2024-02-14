@@ -113,7 +113,7 @@ const SimilarPurchaseCart = ({ products }) => {
                         {product?.price?.toString().split(".")[0]}.
                         {product?.price?.toString().split(".")[1]}
                     </div>
-                    <div style={{ fontSize: "12px" }} className="mt-2 mb-2">
+                    <div style={{ fontSize: "12px" }} className="mt-0 mb-2">
                         List Price:&ensp;
                         <span style={{ textDecoration: "line-through" }}>
                             ${product?.price}
@@ -207,6 +207,7 @@ const SimilarPurchaseCart = ({ products }) => {
                         ) : (
                             <Swiper
                                 slidesPerView={6}
+                                spaceBetween={20}
                                 className="my-unique-swiper"
                                 style={{ padding: "0 60px" }}
                                 breakpoints={{
@@ -228,7 +229,8 @@ const SimilarPurchaseCart = ({ products }) => {
                                     },
 
                                     1200: {
-                                        slidesPerView: 6,
+                                        // slidesPerView: 6,
+                                        slidesPerView: 5,
                                     },
                                 }}
                                 navigation

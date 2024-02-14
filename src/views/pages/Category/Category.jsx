@@ -14,6 +14,7 @@ import CategorySidebar from "../../components/Catagory/CategorySidebar/CategoryS
 import CategoryParagraph from "./CategoryParagraph";
 import CategoryVideoAndSlider from "../../components/Catagory/CategoryVideoAndSlider";
 import MobileRecommand from "../../components/MobileCategory/MobileRecommand/MobileRecommand";
+import CategoryFilterbarMobile from "../../components/Catagory/CategoryFiterbarMobile/CategoryFilterbarMobile"
 
 function Category() {
     const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +25,10 @@ function Category() {
     return (
         <div className="category-page">
             <CategoriesHeader />
+
+            <div className="d-sm-none">
+                <CategoryFilterbarMobile />
+            </div>    
             <div className="category-page-inner">
                 <div>
                     <Loader isLoading={false} />
@@ -39,7 +44,7 @@ function Category() {
                 
 
                 <div>
-                    <div className={`sticky-filter-bar ${isOpen && "active"}`}>
+                    <div className={`sticky-filter-bar ${isOpen && "active"} d-none d-sm-block`}>
                         {/* <div className="d-flex justify-content-between align-items-center heading">
                             <h3>Filters</h3>
                             <button
