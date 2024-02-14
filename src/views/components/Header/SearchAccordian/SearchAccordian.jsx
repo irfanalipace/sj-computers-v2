@@ -45,7 +45,7 @@ const SearchAccordian = () => {
         <div className={classes.root}>
             <form onSubmit={handleSearch}>
                 <div className="search-hide-section-body">
-                    <SearchBar className='search-acorditions-withorder-pace-data'>
+                    <SearchBar className="search-acorditions-withorder-pace-data">
                         <Input
                             className="search-section"
                             type="text"
@@ -63,7 +63,7 @@ const SearchAccordian = () => {
                                 onClick={handleSearch}
                             ></i>
                         </span>
-                    </SearchBar >
+                    </SearchBar>
                 </div>
             </form>
             <Accordion

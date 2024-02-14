@@ -10,7 +10,13 @@ import AddCartComponents from "../../Product/CheckOutCard/AddCartComponents";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 import { Box, Stack, Typography } from "@mui/material";
 import { generatePath } from "../../../../core/utils/helpers";
-const ProductCardLayout2 = ({ type = "", product, inGrid, searchParams, productView }) => {
+const ProductCardLayout2 = ({
+    type = "",
+    product,
+    inGrid,
+    searchParams,
+    productView,
+}) => {
     const orderEstimatedDelivery = useSelector(
         (state) => state.orders.orderEstimatedDelivery
     );
@@ -101,7 +107,10 @@ const ProductCardLayout2 = ({ type = "", product, inGrid, searchParams, productV
 
     const ProductDetails = () => (
         <div>
-            <div className="product-details " style={{padding: "0px 10px"}}>
+            <div
+                className="product-details pe-2 ps-0 ps-lg-1"
+                style={{ padding: "0px 0px" }}
+            >
                 {/* <div>
             <span className="span-the-product-color-product">
             crocs Contrary to popular
@@ -109,12 +118,21 @@ const ProductCardLayout2 = ({ type = "", product, inGrid, searchParams, productV
             </span>
         </div> */}
 
-                <div className={`dev-section-button-dev-card ${ productView == "list" ? "" : "mb-2"}`}>
+                <div
+                    className={`dev-section-button-dev-card ${
+                        productView == "list" ? "" : "mb-2"
+                    }`}
+                >
                     <Link
                         // to={`${new URL(product?.url).pathname}`}
                         to={productUrl}
                     >
-                        <div className="product-name product-cart-name-mobile-screen" style={{margin: productView == "list" ? "2px 0px" : ""}}>
+                        <div
+                            className="product-name product-cart-name-mobile-screen"
+                            style={{
+                                margin: productView == "list" ? "2px 0px" : "",
+                            }}
+                        >
                             {product.name}
                         </div>
 
@@ -168,8 +186,15 @@ const ProductCardLayout2 = ({ type = "", product, inGrid, searchParams, productV
                     to={productUrl}
                     style={{ textDecoration: "none" }}
                 >
-                    <div className="product-rating" style={{margin: productView == "list" ? 0 : ""}} >
-                        <Stack mb={inGrid ? 0 : 2} alignItems={"start"} spacing={1}>
+                    <div
+                        className="product-rating"
+                        style={{ margin: productView == "list" ? 0 : "" }}
+                    >
+                        <Stack
+                            mb={inGrid ? 0 : 2}
+                            alignItems={"start"}
+                            spacing={1}
+                        >
                             <Stack
                                 alignItems={"center"}
                                 justifyContent={"center"}
@@ -219,51 +244,112 @@ const ProductCardLayout2 = ({ type = "", product, inGrid, searchParams, productV
         )} */}
                 <div className="product-prices">
                     <div>
-
                         {product.originalPrice && (
                             <div className="product-original-price">
                                 ${product.originalPrice}
                             </div>
                         )}
                         <div className="product-new-price m-1">
-                            {productView == "grid" && <span style={{textDecoration: "line-through", fontSize: "12px", paddingRight: "5px"}}>$120 </span>}
+                            {productView == "grid" && (
+                                <span
+                                    style={{
+                                        textDecoration: "line-through",
+                                        fontSize: "12px",
+                                        paddingRight: "5px",
+                                    }}
+                                >
+                                    $120{" "}
+                                </span>
+                            )}
                             <span>$</span>
                             {product?.price?.toString().split(".")[0]}
-                            <sup>{product?.price?.toString().split(".")[1]} </sup> 
-                            { productView == "list" && <span style={{fontSize: "12px", color: "#666666"}}>Was: <span style={{textDecoration: "line-through"}}>$120.00</span></span>}
+                            <sup>
+                                {product?.price?.toString().split(".")[1]}{" "}
+                            </sup>
+                            {productView == "list" && (
+                                <span
+                                    style={{
+                                        fontSize: "12px",
+                                        color: "#666666",
+                                    }}
+                                >
+                                    Was:{" "}
+                                    <span
+                                        style={{
+                                            textDecoration: "line-through",
+                                        }}
+                                    >
+                                        $120.00
+                                    </span>
+                                </span>
+                            )}
                         </div>
-                        {productView == "list" && 
+                        {productView == "list" && (
                             <div className="discount-with-coupon">
                                 <div className="discount-label">
-                                    Save <span style={{color: "#E0BC00"}}>$20.00 </span>
+                                    Save{" "}
+                                    <span style={{ color: "#E0BC00" }}>
+                                        $20.00{" "}
+                                    </span>
                                 </div>
-                                <div style={{fontSize: "12px", padding: "6px"}}> with coupon</div>
-                            </div> 
-                        }
-
+                                <div
+                                    style={{ fontSize: "12px", padding: "6px" }}
+                                >
+                                    {" "}
+                                    with coupon
+                                </div>
+                            </div>
+                        )}
                     </div>
 
-                    {productView == "list" && 
+                    {productView == "list" && (
                         <div className="list-view-details d-none d-lg-flex">
-                            <div className="extra-details-item" >
+                            <div className="extra-details-item">
                                 <div>Model</div>
-                                <div style={{fontWeight: "700", padding: "4px 0px"}}>Sonic</div>
+                                <div
+                                    style={{
+                                        fontWeight: "700",
+                                        padding: "4px 0px",
+                                    }}
+                                >
+                                    Sonic
+                                </div>
                             </div>
-                            <div className="extra-details-item" >
+                            <div className="extra-details-item">
                                 <div>Display</div>
-                                <div style={{fontWeight: "700", padding: "4px 0px"}}>32"</div>
+                                <div
+                                    style={{
+                                        fontWeight: "700",
+                                        padding: "4px 0px",
+                                    }}
+                                >
+                                    32"
+                                </div>
                             </div>
-                            <div className="extra-details-item" >
+                            <div className="extra-details-item">
                                 <div>Company</div>
-                                <div style={{fontWeight: "700", padding: "4px 0px"}}>Sonic</div>
+                                <div
+                                    style={{
+                                        fontWeight: "700",
+                                        padding: "4px 0px",
+                                    }}
+                                >
+                                    Sonic
+                                </div>
                             </div>
-                            <div className="extra-details-item" >
+                            <div className="extra-details-item">
                                 <div>Size</div>
-                                <div style={{fontWeight: "700", padding: "4px 0px"}}>Multiple</div>
+                                <div
+                                    style={{
+                                        fontWeight: "700",
+                                        padding: "4px 0px",
+                                    }}
+                                >
+                                    Multiple
+                                </div>
                             </div>
                         </div>
-                    }
-
+                    )}
                 </div>
                 {product.deliveryCharges && (
                     <div className="product-delivery-charges">
@@ -272,35 +358,67 @@ const ProductCardLayout2 = ({ type = "", product, inGrid, searchParams, productV
                         {product.deliveryCharges}
                     </div>
                 )}
-                {type === "recommended" || productView == "grid" && (
-                    <div className="product-delivery-charges mt-2 ms-0 mb-2 mb-sm-0">
-                        <FontAwesomeIcon className="me-1" icon={faTruck} /> Free
-                        Shipping
-                    </div>
-                )} 
-                {productView == "list" && 
+                {type === "recommended" ||
+                    (productView == "grid" && (
+                        <div className="product-delivery-charges mt-2 ms-0 mb-2 mb-sm-0">
+                            <FontAwesomeIcon className="me-1" icon={faTruck} />{" "}
+                            Free Shipping
+                        </div>
+                    ))}
+                {productView == "list" && (
                     <div className="delivery-details">
-                        <div style={{color: "#1270C4", margin: "3px 0px"}}>FREE delivery <span style={{color: "black", fontWeight: "500"}}>Friday, May 19</span></div>
-                        <div style={{color: "#666666", margin: "3px 0px"}}>or fastest delivery <span style={{color: "black", fontWeight: "500"}}>Monday, May 15</span></div>
-                        <div style={{color: "#666666", margin: "3px 0px"}}>order within <span style={{color: "#E87E24"}}>8 hours 58 mins</span></div>
+                        <div style={{ color: "#1270C4", margin: "3px 0px" }}>
+                            FREE delivery{" "}
+                            <span style={{ color: "black", fontWeight: "500" }}>
+                                Friday, May 19
+                            </span>
+                        </div>
+                        <div style={{ color: "#666666", margin: "3px 0px" }}>
+                            or fastest delivery{" "}
+                            <span style={{ color: "black", fontWeight: "500" }}>
+                                Monday, May 15
+                            </span>
+                        </div>
+                        <div style={{ color: "#666666", margin: "3px 0px" }}>
+                            order within{" "}
+                            <span style={{ color: "#E87E24" }}>
+                                8 hours 58 mins
+                            </span>
+                        </div>
                         {/* we will render it when pieces left less than 10 in in_stock */}
-                        {product?.quantity < 30 &&<div style={{color: "#FF0000", margin: "5px 0px", fontWeight: 500}}>Only {product?.quantity} left in stock - Order now</div>}
+                        {product?.quantity < 30 && (
+                            <div
+                                style={{
+                                    color: "#FF0000",
+                                    margin: "5px 0px",
+                                    fontWeight: 500,
+                                }}
+                            >
+                                Only {product?.quantity} left in stock - Order
+                                now
+                            </div>
+                        )}
                     </div>
-                    
-                }
+                )}
             </div>
         </div>
     );
 
     return (
-        <div className={` product ${inGrid && "product-grid"}`} style={{ flexDirection: productView == "list" ? "row" : "", border: productView == "list" ? "none" : ""}}>
+        <div
+            className={` product ${inGrid && "product-grid"}`}
+            style={{
+                flexDirection: productView == "list" ? "row" : "",
+                border: productView == "list" ? "none" : "",
+            }}
+        >
             <Link
                 //to={`${new URL(product?.url).pathname}`}
                 to={productUrl}
                 className={`${
                     productView == "list" ? "product-image-link-list-view" : ""
                 }`}
-                style={{width: productView == "grid" ? "100%" : ""}}
+                style={{ width: productView == "grid" ? "100%" : "" }}
                 // style={{width: productView == "list" ? "20%" : "100%", }}
             >
                 <div
@@ -313,7 +431,20 @@ const ProductCardLayout2 = ({ type = "", product, inGrid, searchParams, productV
                         <div className="badge-text">Best Seller</div>
                     </div>
                 )} */}
-                    {inGrid && <div className="product-offer-label" style={{backgroundColor: product?.total_review > 0 ? "#52AC66" : "#1860A3", top: productView == "list" ? "-9px" : "" }}>{product?.total_review > 0 ? "Top Seller" : "New" }</div>}
+                    {inGrid && (
+                        <div
+                            className="product-offer-label"
+                            style={{
+                                backgroundColor:
+                                    product?.total_review > 0
+                                        ? "#52AC66"
+                                        : "#1860A3",
+                                top: productView == "list" ? "-9px" : "",
+                            }}
+                        >
+                            {product?.total_review > 0 ? "Top Seller" : "New"}
+                        </div>
+                    )}
 
                     <div className="image-wrapper">
                         <LazyLoadImage
@@ -330,11 +461,13 @@ const ProductCardLayout2 = ({ type = "", product, inGrid, searchParams, productV
                     </div>
                 </div>
             </Link>
-            <div className={`${
+            <div
+                className={`${
                     productView == "list" ? "product-detail-list-view" : ""
-                }`}>
+                }`}
+            >
                 <ProductDetails />
-            </div>    
+            </div>
         </div>
     );
 };
