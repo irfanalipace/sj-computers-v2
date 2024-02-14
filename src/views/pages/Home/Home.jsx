@@ -1,12 +1,13 @@
 import React, { Suspense } from "react";
 import BannerCategory from "./BannerCategory";
 const ProductsHomePage = React.lazy(() => import("./ProductsHomePage"));
-
+import { useViewportWidth } from "@hooks/useViewportWidth";
 import "./Home.css";
 import Subscribe from "../../components/Subscribe/Subscribe";
-import SellingProducts from "../../components/MobileCategory/SellingProducts/SellingProducts";
+
 
 const Home = () => {
+    const screenWidth = useViewportWidth();
     return (
         <>
             <div className="homePage">
@@ -19,7 +20,12 @@ const Home = () => {
                         <h2>Products</h2>
                         <ProductsHomePage />
                     </div>
-                    <Subscribe />
+                    {
+                        screenWidth > 576 && (
+                            <Subscribe />
+                        )
+                    }
+                   
                 </Suspense>
             </div>
         </>

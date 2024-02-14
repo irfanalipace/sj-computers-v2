@@ -59,13 +59,32 @@ const MobileHomeCategory = () => {
     ];
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const products = useSelector((state) => state?.products.products);
-    const currentDate = moment();
-    const oneDayAgo = moment().subtract(1, "days");
-    const duration = moment.duration(currentDate.diff(oneDayAgo));
-    const hours = duration.hours();
-    const minutes = duration.minutes();
+    // const currentDate = moment();
+    // const oneDayAgo = moment().subtract(1, "days");
+    // const duration = moment.duration(currentDate.diff(oneDayAgo));
+    // const hours = duration.hours();
+    // const minutes = duration.minutes();
+    const dbDate = new Date().getTime();
 
-    console.log(products, "fdshfhshfhs");
+    const parsedDate = new Date(dbDate);
+    
+    
+    console.log( parsedDate .getDate(),parsedDate .getHours(), parsedDate .getMinutes());
+    
+    
+    //Once you get the dates, you can do the date calculate, like:
+    
+    //Get 1 day in milliseconds
+    var one_day=1000*60*60*24;
+    
+    const date1 = new Date('9/9/2020').getTime(); //JUST AN EXAMPLE
+    const date2 = new Date('10/9/2020').getTime(); //JUST AN EXAMPLE
+    
+    const diffTime = Math.abs(date2 - date1);
+    
+    const diffDays = Math.ceil(diffTime / one_day); 
+    
+   
     useEffect(() => {
         getProduct();
     }, [products]);
@@ -341,7 +360,7 @@ const MobileHomeCategory = () => {
                 <div className="product-type-section-mobile-images-dev">
                     {products && products?.length > 0 && (
                         <>
-                            <div style={{ textAlign: "center" }}>
+                        
                                 <img
                                     className={``}
                                     src={products[0].image}
@@ -420,13 +439,13 @@ const MobileHomeCategory = () => {
                                                 </p>
                                             </div>
                                             <p className="dev-sactions-price-old-new-time-mobile-versions">
-                                                Ends in {hours}h:{minutes}m
+                                            Ends in {parsedDate .getHours()}h:{parsedDate .getMinutes()}m
                                             </p>
                                         </div>
                                     </div>
                                     {/* {type === "recommended" && getRandomComponent()} */}
                                 </Stack>
-                            </div>
+                           
                         </>
                     )}
                 </div>

@@ -56,66 +56,76 @@ import rectangle2 from "../../../assets/images/flashsaleimaes/rectangle2.png";
 import rectangle3 from "../../../assets/images/flashsaleimaes/rectangle3.png";
 import rectangle4 from "../../../assets/images/flashsaleimaes/rectangle4.png";
 import rectangle5 from "../../../assets/images/flashsaleimaes/rectangle5.png";
-const categoryArray = [
-    {
-        name: "Shop by Category",
-        link: "Shop Now",
-    },
-    {
-        name: "Gaming Desktop",
-        link: "Shop Now",
-    },
-    {
-        name: "Business",
-        link: "Shop Now",
-    },
-];
 
-const gamingArray = [
-    {
-        name: "New Arrivals in Gaming Systems",
-        link: "Shop Now",
-    },
-    {
-        name: "Work Stations for Professionals",
-        link: "Shop Now",
-    },
-    {
-        name: "Latest Activity on Advance Laptops",
-        link: "Shop Now",
-    },
-    {
-        name: "Monitors",
-        link: "Shop Now",
-    },
-];
-const featured = [
-    {
-        name: "Featured Products",
-        link: "Shop Now",
-    },
-    {
-        name: "Networking",
-        link: "Shop Now",
-    },
-    {
-        name: "Upgrade Storage Space | S.J Computers",
-        link: "Shop Now",
-    },
-    {
-        name: "Rams",
-        link: "Shop Now",
-    },
-];
+
+// const gamingArray = [
+//     {
+//         name: "New Arrivals in Gaming Systems",
+//         link: "Shop Now",
+//     },
+//     {
+//         name: "Work Stations for Professionals",
+//         link: "Shop Now",
+//     },
+//     {
+//         name: "Latest Activity on Advance Laptops",
+//         link: "Shop Now",
+//     },
+//     {
+//         name: "Monitors",
+//         link: "Shop Now",
+//     },
+// ];
+// const featured = [
+//     {
+//         name: "Featured Products",
+//         link: "Shop Now",
+//     },
+//     {
+//         name: "Networking",
+//         link: "Shop Now",
+//     },
+//     {
+//         name: "Upgrade Storage Space | S.J Computers",
+//         link: "Shop Now",
+//     },
+//     {
+//         name: "Rams",
+//         link: "Shop Now",
+//     },
+// ];
 
 const ProductType = () => {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const products = useSelector((state) => state?.products.products);
-    const currentDate = moment();
-    const oneDayAgo = moment().subtract(1, "days");
-    const duration = moment.duration(currentDate.diff(oneDayAgo));
-    const hours = duration.hours();
-    const minutes = duration.minutes();
+    // const currentDate = moment();
+    // const oneDayAgo = moment().subtract(1, "days");
+    // const duration = moment.duration(currentDate.diff(oneDayAgo));
+    // const hours = duration.hours();
+    // const minutes = duration.minutes();
+
+
+const dbDate = new Date().getTime();
+
+const parsedDate = new Date(dbDate);
+
+
+
+
+
+//Once you get the dates, you can do the date calculate, like:
+
+//Get 1 day in milliseconds
+var one_day=1000*60*60*24;
+
+const date1 = new Date('9/9/2020').getTime(); //JUST AN EXAMPLE
+const date2 = new Date('10/9/2020').getTime(); //JUST AN EXAMPLE
+
+const diffTime = Math.abs(date2 - date1);
+
+const diffDays = Math.ceil(diffTime / one_day); 
+
+
 
     useEffect(() => {
         getProduct();
@@ -128,7 +138,20 @@ const ProductType = () => {
             } catch (error) {}
         }
     };
-
+    const categoryArray = [
+        {
+            name: "Shop by Category",
+            link: "Shop Now",
+        },
+        {
+            name: "Gaming Desktop",
+            link: "Shop Now",
+        },
+        {
+            name: "Business",
+            link: "Shop Now",
+        },
+    ];
     const categoryItems = [
         {
             image: btoimg,
@@ -151,123 +174,124 @@ const ProductType = () => {
             categoryName: "Gaming Desktops",
         },
     ];
-    const gamingItems = [
-        {
-            image: gaminimg3,
-            categoryLink: "/category/bto",
-            categoryName: "Product Name",
-        },
-        {
-            image: scanimages,
-            categoryLink: "/category/laptops",
-            categoryName: "Lorem Ipsum | up to 30% off",
-        },
-        {
-            image: gaminimg1,
-            categoryLink: "/category/desktop",
-            categoryName: "Product Name",
-        },
-    ];
-    const featuredItems = [
-        {
-            image: image1,
-            categoryLink: "/category/bto",
-            categoryName: "Gaming Monitors | up to 50 % off",
-        },
-        {
-            image: image2,
-            categoryLink: "/category/laptops",
-            categoryName: "Lorem Ipsum | up to 30% off",
-        },
-        {
-            image: image4,
-            categoryLink: "/category/desktop",
-            categoryName: "Product Name",
-        },
-        {
-            image: image3,
-            categoryLink: "/category/gaming_desktops",
-            categoryName: "Product Category",
-        },
-    ];
+    // const gamingItems = [
+    //     {
+    //         image: gaminimg3,
+    //         categoryLink: "/category/bto",
+    //         categoryName: "Product Name",
+    //     },
+    //     {
+    //         image: scanimages,
+    //         categoryLink: "/category/laptops",
+    //         categoryName: "Lorem Ipsum | up to 30% off",
+    //     },
+    //     {
+    //         image: gaminimg1,
+    //         categoryLink: "/category/desktop",
+    //         categoryName: "Product Name",
+    //     },
+    // ];
+    // const featuredItems = [
+    //     {
+    //         image: image1,
+    //         categoryLink: "/category/bto",
+    //         categoryName: "Gaming Monitors | up to 50 % off",
+    //     },
+    //     {
+    //         image: image2,
+    //         categoryLink: "/category/laptops",
+    //         categoryName: "Lorem Ipsum | up to 30% off",
+    //     },
+    //     {
+    //         image: image4,
+    //         categoryLink: "/category/desktop",
+    //         categoryName: "Product Name",
+    //     },
+    //     {
+    //         image: image3,
+    //         categoryLink: "/category/gaming_desktops",
+    //         categoryName: "Product Category",
+    //     },
+    // ];
 
-    const networkItems = [
-        {
-            image: linkrouter,
-            categoryLink: "/category/bto",
-            categoryName: "D-Link Router",
-        },
-        {
-            image: modem,
-            categoryLink: "/category/laptops",
-            categoryName: "D-Link Modem",
-        },
-        {
-            image: modem,
-            categoryLink: "/category/desktop",
-            categoryName: "D-Link Device",
-        },
-        {
-            image: linkrouter,
-            categoryLink: "/category/gaming_desktops",
-            categoryName: "D-Link Router",
-        },
-    ];
-    const upgradecomputers = [
-        {
-            image: img1,
-            categoryLink: "/category/bto",
-            categoryName: "D-Link Router",
-        },
-        {
-            image: img2,
-            categoryLink: "/category/laptops",
-            categoryName: "D-Link Modem",
-        },
-        {
-            image: img3,
-            categoryLink: "/category/desktop",
-            categoryName: "D-Link Device",
-        },
-        {
-            image: img1,
-            categoryLink: "/category/gaming_desktops",
-            categoryName: "D-Link Router",
-        },
-    ];
-    const Sellingimages = [
-        sellingimg1,
-        sellingimg2,
-        sellingimg3,
-        sellingimg4,
-        sellingimg5,
-        sellingimg6,
-        sellingimg7,
-        sellingimg8,
-        sellingimg1,
-        sellingimg2,
-        sellingimg3,
-        sellingimg4,
-        sellingimg5,
-        sellingimg6,
-        sellingimg7,
-        sellingimg8,
-    ];
-    const fleshimages = [
-        rectangle1,
-        rectangle2,
-        rectangle3,
-        rectangle4,
-        rectangle5,
-        rectangle1,
-        rectangle2,
-        rectangle3,
-        rectangle4,
-        rectangle5,
-    ];
+    // const networkItems = [
+    //     {
+    //         image: linkrouter,
+    //         categoryLink: "/category/bto",
+    //         categoryName: "D-Link Router",
+    //     },
+    //     {
+    //         image: modem,
+    //         categoryLink: "/category/laptops",
+    //         categoryName: "D-Link Modem",
+    //     },
+    //     {
+    //         image: modem,
+    //         categoryLink: "/category/desktop",
+    //         categoryName: "D-Link Device",
+    //     },
+    //     {
+    //         image: linkrouter,
+    //         categoryLink: "/category/gaming_desktops",
+    //         categoryName: "D-Link Router",
+    //     },
+    // ];
+    // const upgradecomputers = [
+    //     {
+    //         image: img1,
+    //         categoryLink: "/category/bto",
+    //         categoryName: "D-Link Router",
+    //     },
+    //     {
+    //         image: img2,
+    //         categoryLink: "/category/laptops",
+    //         categoryName: "D-Link Modem",
+    //     },
+    //     {
+    //         image: img3,
+    //         categoryLink: "/category/desktop",
+    //         categoryName: "D-Link Device",
+    //     },
+    //     {
+    //         image: img1,
+    //         categoryLink: "/category/gaming_desktops",
+    //         categoryName: "D-Link Router",
+    //     },
+    // ];
+    // const Sellingimages = [
+    //     sellingimg1,
+    //     sellingimg2,
+    //     sellingimg3,
+    //     sellingimg4,
+    //     sellingimg5,
+    //     sellingimg6,
+    //     sellingimg7,
+    //     sellingimg8,
+    //     sellingimg1,
+    //     sellingimg2,
+    //     sellingimg3,
+    //     sellingimg4,
+    //     sellingimg5,
+    //     sellingimg6,
+    //     sellingimg7,
+    //     sellingimg8,
+    // ];
+    // const fleshimages = [
+    //     rectangle1,
+    //     rectangle2,
+    //     rectangle3,
+    //     rectangle4,
+    //     rectangle5,
+    //     rectangle1,
+    //     rectangle2,
+    //     rectangle3,
+    //     rectangle4,
+    //     rectangle5,
+    // ];
 
     return (
-        <div className="product-type-container">
+        <div className=" ">
+             {/* <div className="product-type-container"></div> */}
             <div className="row mx-0">
                 {categoryArray.map((category, index) => (
                     <div key={index} className="col-12 col-sm-6 col-lg-3">
@@ -407,7 +431,9 @@ const ProductType = () => {
                                                 </p>
                                             </div>
                                             <p className="dev-sactions-price-old-new-time">
-                                                Ends in {hours}h:{minutes}m
+                                                Ends in {parsedDate .getHours()}h:{parsedDate .getMinutes()}m
+
+                                               
                                             </p>
                                         </div>
                                     </div>
@@ -417,7 +443,7 @@ const ProductType = () => {
                     </div>
                 </div>
             </div>
-            <div className="row mx-0">
+            {/* <div className="row mx-0">
                 {featured.map((category, index) => (
                     <div key={index} className="col-12 col-sm-6 col-lg-3">
                         <Link
@@ -469,8 +495,8 @@ const ProductType = () => {
                         </Link>
                     </div>
                 ))}
-            </div>
-            <div className="row mx-0">
+            </div> */}
+            {/* <div className="row mx-0">
                 <div className="col-12 col-sm-12 col-lg-12">
                     <Link to={""} className="text-decoration-none">
                         <div className="product-type-section-selleing-products">
@@ -481,9 +507,9 @@ const ProductType = () => {
                         </div>
                     </Link>
                 </div>
-            </div>
+            </div> */}
 
-            <div className="row mx-0">
+            {/* <div className="row mx-0">
                 {gamingArray.map((category, index) => (
                     <div key={index} className="col-12 col-sm-6 col-lg-3">
                         <Link
@@ -518,9 +544,9 @@ const ProductType = () => {
                         </Link>
                     </div>
                 ))}
-            </div>
+            </div> */}
 
-            <div className="row mx-0">
+            {/* <div className="row mx-0">
                 <div className="col-12 col-sm-12 col-lg-12">
                     <Link to={""} className="text-decoration-none">
                         <div className="product-type-section-selleing-products">
@@ -531,14 +557,14 @@ const ProductType = () => {
                         </div>
                     </Link>
                 </div>
-            </div>
-            <div className="row mx-0">
+            </div> */}
+            {/* <div className="row mx-0">
                 <div className="col-12 col-sm-12 col-lg-12">
                     <div className="product-type-section-selleing-products">
                         <Recommendation />
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };
