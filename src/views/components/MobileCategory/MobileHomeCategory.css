@@ -38,7 +38,7 @@
     width: 100%;
 }
 .product-type-section-mobile-images-dev img {
-    height: 120px;
+    height: 100%;
     width: 100%;
 }
 .product-type-section-mobile-images-dev {
@@ -77,10 +77,9 @@
     line-height: 20px;
     letter-spacing: 0em;
     text-align: left;
-   
 }
-.star-rating-dev-moble-sections{
-margin-bottom: 0px !important;
+.star-rating-dev-moble-sections {
+    margin-bottom: 0px !important;
 }
 .dev-sactions-price-old-new-time-mobile-versions {
     font-family: Inter;
@@ -158,7 +157,6 @@ margin-bottom: 0px !important;
 }
 .dev-sections-heading-offer {
     display: flex;
-   
 }
 .dev-sections-heading-offer p {
     margin-top: 3px;
@@ -171,7 +169,6 @@ margin-bottom: 0px !important;
     color: #007185;
     margin-left: 16px;
 }
-
 
 .button-save-mobile-size {
     height: 40px;

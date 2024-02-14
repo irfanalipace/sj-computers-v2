@@ -41,7 +41,6 @@ function Category() {
                 )}
 
                 <CategoryVideoAndSlider />
-                
 
                 <div>
                     <div className={`sticky-filter-bar ${isOpen && "active"} d-none d-sm-block`}>

@@ -25,13 +25,20 @@ const MobileRecommand = () => {
             <div className="reommand-products-heading">
                 <p>Recommended Products</p>
             </div>
-            {products && products.length > 0 && (
+            {products &&
+                products.length > 0 &&
                 products.slice(1, 4).map((product, index) => (
                     <div key={index} className="row">
-                        <Link to={`${product.url}`} className="recommended-product-link-mobile-home-page">
+                        <Link
+                            to={`${product.url}`}
+                            className="recommended-product-link-mobile-home-page"
+                        >
                             <div className="col-4">
                                 <div className="recommanditions-products-home-pages">
-                                    <img src={product?.image} alt={`Product ${index + 2}`} />
+                                    <img
+                                        src={product?.image}
+                                        alt={`Product ${index + 2}`}
+                                    />
                                 </div>
                             </div>
                             <div className="col-8">
@@ -39,16 +46,18 @@ const MobileRecommand = () => {
                                     <h6>
                                         {" "}
                                         {product?.name?.length > 60
-                                            ? `${product?.name.substring(0, 60)}...`
+                                            ? `${product?.name.substring(
+                                                  0,
+                                                  60
+                                              )}...`
                                             : product?.name}
                                     </h6>
                                 </div>
                                 <p>${product?.price}</p>
                             </div>
-                            </Link>
+                        </Link>
                     </div>
-                ))
-            )}
+                ))}
         </div>
     );
 };

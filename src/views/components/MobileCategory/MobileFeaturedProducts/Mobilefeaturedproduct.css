@@ -2,6 +2,7 @@
     height: 86px;
     width: 100%;
     padding: 5px;
+    object-fit: contain;
 }
 .images-dev-sections-featured-images {
     display: flex;
@@ -31,14 +32,13 @@
     text-align: left;
     /* margin-left: 22px; */
 }
-.title-data-sedctions h5{
+.title-data-sedctions h5 {
     font-family: Inter;
-font-size: 15px;
-font-weight: 600;
-line-height: 22px;
-letter-spacing: 0em;
-text-align: left;
-
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
 }
 .product-rating-sections-featured-images {
     display: flex;

@@ -42,7 +42,7 @@ const CategorySliderCard = ({ product }) => {
                         // width={"90px"}
                         // height={"100%"}
                         // width={"100%"}
-                        style={{maxHeight: "145px", maxWidth: '100%'}}
+                        style={{ maxHeight: "145px", maxWidth: "100%" }}
                         src={product?.image}
                         alt={product?.name
                             ?.trim()
@@ -60,9 +60,9 @@ const CategorySliderCard = ({ product }) => {
                     item
                     xs={12}
                     m={"auto"}
-                    py={2}
+                    py={4}
                     sx={{ color: "black" }}
-                    mt={-5}
+                    mt={-4}
                 >
                     <Typography variant={"body2"}>
                         ${product?.price}{" "}

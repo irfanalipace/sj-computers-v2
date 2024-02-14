@@ -3,6 +3,7 @@ const params = new URLSearchParams(window.location.search);
 let searchParam = params.get("s");
 const initialState = {
     products: [],
+    filtersProduct: [],
     searchString: searchParam,
     isShowMore: false,
     filtersArray: [],
@@ -60,8 +61,12 @@ const productSlice = createSlice({
 
         FILTER_PRODUCTS: (state, action) => {
             if (state.currentPage === 1)
-                state.products = [...action.payload.data];
-            else state.products = [...state.products, ...action.payload.data];
+                state.filtersProduct = [...action.payload.data];
+            else
+                state.filtersProduct = [
+                    ...state.products,
+                    ...action.payload.data,
+                ];
             state.currentPage = state.currentPage + 1;
             state.isLoading = false;
             state.isFiltering = false;
