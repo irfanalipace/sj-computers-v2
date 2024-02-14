@@ -14,3 +14,9 @@
 .category-slider .swiper-button-prev::after{
     font-size: 20px !important;
 }
+
+@media screen and (max-width: 600px) {
+    .category-slider .slider-button{
+        display: none;
+    }
+  }

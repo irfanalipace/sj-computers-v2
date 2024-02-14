@@ -5,12 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector, useDispatch } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-import "./ProductCard.css";
-import AddCartComponents from "../Product/CheckOutCard/AddCartComponents";
+import "./ProductCardLayout2.css";
+import AddCartComponents from "../../Product/CheckOutCard/AddCartComponents";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 import { Box, Stack, Typography } from "@mui/material";
-import { generatePath } from "../../../core/utils/helpers";
-const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
+import { generatePath } from "../../../../core/utils/helpers";
+const ProductCardLayout2 = ({ type = "", product, inGrid, searchParams, productView }) => {
     const orderEstimatedDelivery = useSelector(
         (state) => state.orders.orderEstimatedDelivery
     );
@@ -109,18 +109,18 @@ const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
             </span>
         </div> */}
 
-                <div className="dev-section-button-dev-card mb-2">
+                <div className={`dev-section-button-dev-card ${ productView == "list" ? "" : "mb-2"}`}>
                     <Link
                         // to={`${new URL(product?.url).pathname}`}
                         to={productUrl}
                     >
-                        <div className="product-name product-cart-name-mobile-screen">
+                        <div className="product-name product-cart-name-mobile-screen" style={{margin: productView == "list" ? "2px 0px" : ""}}>
                             {product.name}
                         </div>
 
                         {/* Mobile code here */}
 
-                        <div className=" d-sm-none product-prices">
+                        {/* <div className=" d-sm-none product-prices">
                             {product.originalPrice && (
                                 <div className="product-original-price">
                                     ${product.originalPrice}
@@ -134,23 +134,23 @@ const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
                                 </sup>
                             </div>
                             <div>
-                                {/* <span className="old-price-product-card">$3,495</span> */}
+                                <span className="old-price-product-card">$3,495</span>
                             </div>
-                        </div>
+                        </div> */}
 
                         <div className="d-sm-none ">
                             {/* <button className="off-sale-button-product-card">50% <span>{' '} off</span></button> */}
 
-                            <span className="dilvery-system-mobile-card-product">
+                            {/* <span className="dilvery-system-mobile-card-product">
                                 Get it by{" "}
                                 {
                                     orderEstimatedDelivery?.free_shipment_amount
                                         ?.estimate_day
                                 }
-                            </span>
-                            <span className="span-get-data-pagragraph-card">
+                            </span> */}
+                            {/* <span className="span-get-data-pagragraph-card">
                                 Free Delivery Available{" "}
-                            </span>
+                            </span> */}
                             <div></div>
                         </div>
                     </Link>
@@ -168,8 +168,8 @@ const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
                     to={productUrl}
                     style={{ textDecoration: "none" }}
                 >
-                    <div className="d-none d-sm-block product-rating">
-                        <Stack mb={2} alignItems={"start"} spacing={1}>
+                    <div className="product-rating" style={{margin: productView == "list" ? 0 : ""}} >
+                        <Stack mb={inGrid ? 0 : 2} alignItems={"start"} spacing={1}>
                             <Stack
                                 alignItems={"center"}
                                 justifyContent={"center"}
@@ -217,17 +217,53 @@ const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
                 </div>
             </>
         )} */}
-                <div className="d-none d-sm-block product-prices">
-                    {product.originalPrice && (
-                        <div className="product-original-price">
-                            ${product.originalPrice}
+                <div className="product-prices">
+                    <div>
+
+                        {product.originalPrice && (
+                            <div className="product-original-price">
+                                ${product.originalPrice}
+                            </div>
+                        )}
+                        <div className="product-new-price m-1">
+                            {productView == "grid" && <span style={{textDecoration: "line-through", fontSize: "12px", paddingRight: "5px"}}>$120 </span>}
+                            <span>$</span>
+                            {product?.price?.toString().split(".")[0]}
+                            <sup>{product?.price?.toString().split(".")[1]} </sup> 
+                            { productView == "list" && <span style={{fontSize: "12px", color: "#666666"}}>Was: <span style={{textDecoration: "line-through"}}>$120.00</span></span>}
                         </div>
-                    )}
-                    <div className="product-new-price">
-                        <span>$</span>
-                        {product?.price?.toString().split(".")[0]}
-                        <sup>{product?.price?.toString().split(".")[1]}</sup>
+                        {productView == "list" && 
+                            <div className="discount-with-coupon">
+                                <div className="discount-label">
+                                    Save <span style={{color: "#E0BC00"}}>$20.00 </span>
+                                </div>
+                                <div style={{fontSize: "12px", padding: "6px"}}> with coupon</div>
+                            </div> 
+                        }
+
                     </div>
+
+                    {productView == "list" && 
+                        <div className="list-view-details d-none d-lg-flex">
+                            <div className="extra-details-item" >
+                                <div>Model</div>
+                                <div style={{fontWeight: "700", padding: "4px 0px"}}>Sonic</div>
+                            </div>
+                            <div className="extra-details-item" >
+                                <div>Display</div>
+                                <div style={{fontWeight: "700", padding: "4px 0px"}}>32"</div>
+                            </div>
+                            <div className="extra-details-item" >
+                                <div>Company</div>
+                                <div style={{fontWeight: "700", padding: "4px 0px"}}>Sonic</div>
+                            </div>
+                            <div className="extra-details-item" >
+                                <div>Size</div>
+                                <div style={{fontWeight: "700", padding: "4px 0px"}}>Multiple</div>
+                            </div>
+                        </div>
+                    }
+
                 </div>
                 {product.deliveryCharges && (
                     <div className="product-delivery-charges">
@@ -236,12 +272,22 @@ const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
                         {product.deliveryCharges}
                     </div>
                 )}
-                {type === "recommended" && (
-                    <div className="product-delivery-charges mt-2 ms-0 ms-sm-2 mb-2 mb-sm-0">
+                {type === "recommended" || productView == "grid" && (
+                    <div className="product-delivery-charges mt-2 ms-0 mb-2 mb-sm-0">
                         <FontAwesomeIcon className="me-1" icon={faTruck} /> Free
                         Shipping
                     </div>
-                )}
+                )} 
+                {productView == "list" && 
+                    <div className="delivery-details">
+                        <div style={{color: "#1270C4", margin: "3px 0px"}}>FREE delivery <span style={{color: "black", fontWeight: "500"}}>Friday, May 19</span></div>
+                        <div style={{color: "#666666", margin: "3px 0px"}}>or fastest delivery <span style={{color: "black", fontWeight: "500"}}>Monday, May 15</span></div>
+                        <div style={{color: "#666666", margin: "3px 0px"}}>order within <span style={{color: "#E87E24"}}>8 hours 58 mins</span></div>
+                        {/* we will render it when pieces left less than 10 in in_stock */}
+                        {product?.quantity < 30 &&<div style={{color: "#FF0000", margin: "5px 0px", fontWeight: 500}}>Only {product?.quantity} left in stock - Order now</div>}
+                    </div>
+                    
+                }
             </div>
         </div>
     );
@@ -254,6 +300,7 @@ const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
                 className={`${
                     productView == "list" ? "product-image-link-list-view" : ""
                 }`}
+                style={{width: productView == "grid" ? "100%" : ""}}
                 // style={{width: productView == "list" ? "20%" : "100%", }}
             >
                 <div
@@ -266,10 +313,12 @@ const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
                         <div className="badge-text">Best Seller</div>
                     </div>
                 )} */}
+                    {inGrid && <div className="product-offer-label" style={{backgroundColor: "#1860A3"}}>New</div>}
 
                     <div className="image-wrapper">
                         <LazyLoadImage
                             width={"100%"}
+                            // style={{maxHeight: "80%", maxWidth: '80%'}}
                             height={"100%"}
                             src={product.image}
                             alt={product?.name
@@ -290,4 +339,4 @@ const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
     );
 };
 
-export default Product;
+export default ProductCardLayout2;

@@ -10,6 +10,7 @@ import AllCategoriesHeader from '../../components/Catagory/AllCategoriesHeader/A
 import ShopByCategory from '../../components/Catagory/ShopByCategory'
 import ShopByBrand from '../../components/Catagory/ShopByBrand'
 import Recommendation from "../../components/Recommendation/Recommendation"
+import MobileRecommand from '../../components/MobileCategory/MobileRecommand/MobileRecommand'
 
 import "./Category.css"
 import CategoryVideoAndSlider from '../../components/Catagory/CategoryVideoAndSlider'
@@ -28,7 +29,7 @@ const CategoryProducts = () => {
         <CategoryVideoAndSlider />
       </Grid>
 
-      <Grid item md={2} mt={2} py={2} >
+      <Grid item md={2} mt={2} py={2} className='d-none d-sm-block' >
         <CategorySidebar />
       </Grid>
       
@@ -36,15 +37,19 @@ const CategoryProducts = () => {
           <ProductsByCategory inCategoriesPage={true} />
       </Grid> */}
 
-      <Grid item md={10} py={2} pl={2}>
+      <Grid item xs={12} md={10} py={2}>
         <AllCategoriesHeader />
-        <Typography variant='h3' my={2} sx={{background: "linear-gradient(88.41deg, rgba(59, 108, 155, 0.85) 0.37%, #789FC5 98.64%)"}} p={4} fontWeight={"bolder"} textAlign={"center"}>All Categories</Typography>
+        <Typography variant='h3' mb={2} sx={{ml: "16px",background: "linear-gradient(88.41deg, rgba(59, 108, 155, 0.85) 0.37%, #789FC5 98.64%)", '@media (max-width: 575px)': {p: 2, fontSize: "22px", ml: 0}}} p={4} fontWeight={"bolder"} textAlign={"center"}>All Categories</Typography>
         <ShopByCategory />
         <ShopByBrand />
       </Grid>
 
-      <Grid item md={12} px={10} py={2} borderTop={"1px solid gray"}>
-          <Recommendation />
+      <Grid item xs={12} md={12} px={10} py={2} borderTop={"1px solid gray"} className='d-none d-sm-block'>
+            <Recommendation />
+      </Grid>
+
+      <Grid item xs={12} className='d-sm-none'>
+            <MobileRecommand />
       </Grid>
 
     </Grid>

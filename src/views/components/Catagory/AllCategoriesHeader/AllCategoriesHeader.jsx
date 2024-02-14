@@ -58,12 +58,12 @@ const AllCategoriesHeader = () => {
         setIsHovered(false);
       };
   return (
-    <div>
+    <div style={{marginLeft: "16px"}}>
         <Typography variant='h4' fontWeight={"bolder"}>Categories</Typography>
-        <Grid container mt={1} >
+        <div className='category-header-wrapper' >
             {categories?.map((category, index) => (
 
-                <Grid item key={category.id} style={{textDecoration: "none"}}>
+                <div className='category-item' key={category.id} style={{textDecoration: "none"}}>
                     <Typography variant='body1' fontSize={"small"} color={"#007185"} >
                     {index == 0 ? "" :<span style={{margin: "0px 5px", color: "black"}}>|</span> }
                     <HtmlTooltip title={
@@ -81,10 +81,10 @@ const AllCategoriesHeader = () => {
                         </Link>
                     </HtmlTooltip>   
                     </Typography>
-                </Grid>
+                </div >
             
             ))}
-        </Grid>
+        </div>
     </div>
   )
 }

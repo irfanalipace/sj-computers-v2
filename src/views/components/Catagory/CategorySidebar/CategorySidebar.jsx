@@ -35,7 +35,7 @@ const CategorySidebar = () => {
   };
 
   return (
-    <Grid container height={"137vh"} width={"100%"} sx={{ overflowX: "hidden", overflowY: "auto", borderRight: "0.5px solid gray"}} >
+    <Grid container width={"100%"} sx={{ overflowX: "hidden", overflowY: "auto", borderRight: "0.5px solid gray"}} >
 
         <Grid item ml={2}>
             <Typography variant='body2' fontWeight={"bolder"} ml>Catagories</Typography>    
@@ -68,7 +68,7 @@ const CategorySidebar = () => {
 
         <Grid item my={0}>
         {/* <Typography variant='body1' fontWeight={"bolder"} ml={2}>Filters</Typography> */}
-        <div className='sticky-filter-bar' style={{position: "static", height: "100vh", border: "none"}}> 
+        <div className='sticky-filter-bar' style={{position: "static", height: "", overflowY: "hidden", border: "none"}}> 
           {/* <FilterBar /> */}
           <FilterBarlayout2 />
         </div>

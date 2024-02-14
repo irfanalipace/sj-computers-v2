@@ -32,7 +32,8 @@ const CategorySliderCard = ({product}) => {
                     <LazyLoadImage
                         // width={"90px"}
                         // height={"100%"}
-                        width={"100%"}
+                        // width={"100%"}
+                        style={{maxHeight: "145px", maxWidth: '100%'}}
                         src={product?.image}
                         alt={product?.name
                             ?.trim()
