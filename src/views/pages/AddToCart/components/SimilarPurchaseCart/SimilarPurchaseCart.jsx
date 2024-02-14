@@ -15,11 +15,13 @@ import AddCartComponents from "../../../../components/Product/CheckOutCard/AddCa
 import StarRatings from "react-star-ratings";
 import useAddToCart from "../../../../components/Product/CheckOutCard/useAddToCart";
 import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
+import { useParams } from "react-router-dom";
 
 const SimilarPurchaseCart = ({ products }) => {
     const [addingStates, setAddingStates] = useState({});
     const ProductDetails = ({ product }) => {
         const cartClickHandler = useAddToCart(product, 1);
+        const params = useParams();
         const isAdding = addingStates[product.id];
 
         return (
@@ -154,7 +156,12 @@ const SimilarPurchaseCart = ({ products }) => {
                                 [product.id]: true,
                             }));
 
-                            cartClickHandler(e, 2).then(() => {
+                            cartClickHandler(
+                                e,
+                                `/add-to-cart/${params?.title}/dp/${
+                                    params?.productId
+                                }/${1}`
+                            ).then(() => {
                                 setAddingStates((prevState) => ({
                                     ...prevState,
                                     [product.id]: false,
@@ -171,7 +178,7 @@ const SimilarPurchaseCart = ({ products }) => {
     return (
         <>
             <div
-                className="recommendation-container"
+                // className="recommendation-container"
                 style={{
                     background: "#fff",
                     marginLeft: "10px",
@@ -193,7 +200,7 @@ const SimilarPurchaseCart = ({ products }) => {
 
                     <div
                         className="slider-wrapper"
-                        style={{ margin: "10px 30px" }}
+                        style={{ margin: "10px 20px" }}
                     >
                         {!products ? (
                             <LoaderComponent />
@@ -201,7 +208,7 @@ const SimilarPurchaseCart = ({ products }) => {
                             <Swiper
                                 slidesPerView={6}
                                 className="my-unique-swiper"
-                                style={{ padding: "0 70px" }}
+                                style={{ padding: "0 60px" }}
                                 breakpoints={{
                                     // when window width is >= 320px
                                     320: {
@@ -279,8 +286,7 @@ const SimilarPurchaseCart = ({ products }) => {
                                     ))
                                 ) : (
                                     <>
-                                        There are no similar items to this
-                                        product.
+                                        <LoaderComponent />
                                     </>
                                 )}
                             </Swiper>

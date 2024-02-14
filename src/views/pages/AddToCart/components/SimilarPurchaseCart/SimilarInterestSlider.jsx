@@ -133,7 +133,7 @@ const SimilarInterestSlider = ({ products }) => {
     return (
         <>
             <div
-                className="recommendation-container"
+                // className="recommendation-container"
                 style={{
                     background: "#fff",
                     marginLeft: "10px",
@@ -155,17 +155,14 @@ const SimilarInterestSlider = ({ products }) => {
                         interest in these
                     </Typography>
 
-                    <div
-                        className="slider-wrapper"
-                        style={{ margin: "10px 30px" }}
-                    >
+                    <div className="slider-wrapper">
                         {!products ? (
                             <LoaderComponent />
                         ) : (
                             <Swiper
                                 slidesPerView={5}
                                 className="my-unique-swiper"
-                                style={{ padding: "0 70px" }}
+                                style={{ padding: "0 60px" }}
                                 breakpoints={{
                                     320: {
                                         slidesPerView: 2,
@@ -238,8 +235,7 @@ const SimilarInterestSlider = ({ products }) => {
                                     ))
                                 ) : (
                                     <>
-                                        There are no similar items to this
-                                        product.
+                                        <LoaderComponent />
                                     </>
                                 )}
                             </Swiper>

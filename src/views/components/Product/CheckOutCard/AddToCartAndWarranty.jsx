@@ -8,6 +8,7 @@ import { PLAN_ENUM } from "@utils/constants";
 import { CircularProgress, Drawer } from "@mui/material";
 import ProtectionPlanDrawer from "../ProtectionPlan/ProtectionPlanDrawer";
 import useAddToCart from "./useAddToCart";
+import { useParams } from "react-router-dom";
 
 function AddToCartAndWarranty({ product }) {
     const navigate = useNavigate();
@@ -15,13 +16,15 @@ function AddToCartAndWarranty({ product }) {
     const [plan, setOpenPlan] = useState({});
     const [quantity, setQuantity] = useState(1);
     const [drawerProps, setDrawerProps] = useState({});
+    const [screenSize, setScreenSize] = useState(window.innerWidth);
     const [loading, setLoading] = useState(false);
     const productAddingToCard = useSelector(
         (state) => state.products.isLoading
     );
     const [type, setType] = useState("");
     const cartClickHandler = useAddToCart(product, quantity);
-
+    const params = useParams();
+    console.log("screen size", screenSize);
     useEffect(() => {
         if (type === "buynow") {
             cartClickHandler(product, quantity, type);
@@ -279,7 +282,11 @@ function AddToCartAndWarranty({ product }) {
                 <ProtectionPlanDrawer
                     {...drawerProps}
                     closeDrawer={() => {
-                        drawerProps.redirectOnClose && cartClickHandler();
+                        drawerProps.redirectOnClose &&
+                            cartClickHandler(
+                                null,
+                                `/add-to-cart/${params?.title}/dp/${params?.productId}`
+                            );
                         setDrawerProps({
                             open: false,
                         });
@@ -287,7 +294,12 @@ function AddToCartAndWarranty({ product }) {
                     handleAddingProtec={(_plan) => {
                         console.log("2222  clicked:", _plan);
                         if (_plan.value) {
-                            cartClickHandler(_plan);
+                            cartClickHandler(
+                                _plan,
+                                screenSize > 780
+                                    ? `/add-to-cart/${params?.title}/dp/${params?.productId}`
+                                    : "/cart"
+                            );
                         }
                     }}
                 />

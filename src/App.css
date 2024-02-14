@@ -73,6 +73,9 @@ span {
     margin-bottom: 0;
 }
 
+.swiper-button-lock {
+    display: block !important;
+}
 @media screen and (max-width: 330px) {
     body {
         width: 369px !important;
