@@ -23,6 +23,7 @@ const CategorySliderCard = ({ product }) => {
         >
             <Grid
                 container
+                className=" ms-3 ms-lg-0"
                 // border={".5px solid gray"}
                 borderRadius={"10px"}
                 height={"285px"}
@@ -62,7 +63,7 @@ const CategorySliderCard = ({ product }) => {
                     m={"auto"}
                     py={4}
                     sx={{ color: "black" }}
-                    mt={-3}
+                    mt={-4}
                 >
                     <Typography variant={"body2"}>
                         ${product?.price}{" "}
