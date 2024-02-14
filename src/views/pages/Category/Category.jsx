@@ -13,6 +13,7 @@ import CategorySlider from "../../components/Catagory/CategorySlider/CategorySli
 import CategorySidebar from "../../components/Catagory/CategorySidebar/CategorySidebar";
 import CategoryParagraph from "./CategoryParagraph";
 import CategoryVideoAndSlider from "../../components/Catagory/CategoryVideoAndSlider";
+import MobileRecommand from "../../components/MobileCategory/MobileRecommand/MobileRecommand";
 
 function Category() {
     const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +56,12 @@ function Category() {
                     <ProductsByCategory toggleFilter={toggleFilter} />
                 </div>
             </div>
+            
             <CategoryParagraph />
+
+            <div className="d-sm-none">
+                <MobileRecommand />
+            </div>
         </div>
     );
 }

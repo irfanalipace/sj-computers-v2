@@ -13,16 +13,16 @@ import "swiper/css/navigation";
 const ShopByCategory = () => {
 
   return (
-    <div style={{marginTop: "10px"}} className='shop-by-category'>
-        <Typography variant='h4' py={2} fontWeight={"bolder"}>Shop by Category</Typography>
+    <div style={{marginTop: "10px", marginLeft: "16px"}} className='shop-by-category'>
+        <Typography variant='h4' py={2} fontWeight={"bolder"} sx={{'@media (max-width: 575px)': {fontSize: "18px"}}}>Shop by Category</Typography>
         <Swiper
                 style={{margin: "20px"}}
                 slidesPerView={7.6}
                 // spaceBetween={0}
                 breakpoints={{
                     // when window width is >= 320px
-                    320: {
-                        slidesPerView: 2,
+                    220: {
+                        slidesPerView: 2.5,
                     },
                     480: {
                         slidesPerView: 3.5,
@@ -64,7 +64,7 @@ const ShopByCategory = () => {
                 breakpoints={{
                     // when window width is >= 320px
                     320: {
-                        slidesPerView: 2,
+                        slidesPerView: 2.5,
                     },
                     480: {
                         slidesPerView: 3.5,

@@ -41,11 +41,11 @@ const CategorySlider = () => {
                 spaceBetween={20}
                 breakpoints={{
                     // when window width is >= 320px
-                    320: {
-                        slidesPerView: 1,
+                    220: {
+                        slidesPerView: 2.5,
                     },
                     480: {
-                        slidesPerView: 3,
+                        slidesPerView: 2.5,
                     },
                     640: {
                         slidesPerView: 4,

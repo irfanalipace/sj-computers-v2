@@ -2,6 +2,8 @@ import { useEffect, useState, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import ViewModuleIcon from '@mui/icons-material/ViewModule';
+import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 
 import { filterProducts } from "@store/products/productsThunks";
 import {
@@ -10,6 +12,7 @@ import {
     SET_SELECTED_CATEGORY,
 } from "@store/products/productsSlice";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
+import "./FilteredProducts.css"
 
 const FilteredProducts = memo(({ category, toggleFilter }) => {
     const {
@@ -89,6 +92,17 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
         }
     }, [category]);
 
+    const [productView, setProductView] = useState("grid")
+
+    const productViewGrid = () => {
+        setProductView("grid")
+    }
+
+    const productViewList = () => {
+        setProductView("list")
+    }
+
+
     console.log(productParamsRef, "productParamsRef");
 
     return (
@@ -111,13 +125,22 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                             </button>
                         </div>
                     )}
-
+                    <div className="product-grid-heading">Best Monitors for Desktops</div>
+                    <p className="product-grid-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem.</p>
+                    <div className="product-length-container">
+                    1-{products?.length} of over 1,000 results for <span style={{color: "#52AC66", margin: "0px 5px"}}> Monitors </span>
+                    <div className="buttons">
+                        <span className="view-button" style={{backgroundColor: productView == "list" ? "#318243" : "", color: productView == "list" ? "white" : "#318243"}} onClick={productViewList}><FormatAlignLeftIcon fontSize="small" /> </span>
+                        <span className="view-button" style={{backgroundColor: productView == "grid" ? "#318243" : "", color: productView == "grid" ? "white" : "#318243"}} onClick={productViewGrid}><ViewModuleIcon fontSize="small" /> </span>
+                    </div>    
+                </div>
                     <ProductsGrid
                         products={products}
                         handleClick={handleClick}
                         isLoading={isLoading}
                         apiError={apiError}
                         searchParams={productParamsRef}
+                        productView={productView}
                     />
                 </>
             ) : (

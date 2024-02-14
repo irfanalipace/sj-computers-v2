@@ -12,8 +12,8 @@ import "swiper/css/navigation";
 
 const ShopByBrand = () => {
   return (
-    <div style={{marginTop: "10px"}} className='shop-by-Brand'>
-        <Typography variant='h4' py={2} fontWeight={"bolder"}>Shop by Brand</Typography>
+    <div style={{marginTop: "10px", marginLeft: '16px'}} className='shop-by-Brand'>
+        <Typography variant='h4' py={2} fontWeight={"bolder"} sx={{'@media (max-width: 575px)': {fontSize: "18px"}}}>Shop by Brand</Typography>
         <Swiper
                 style={{margin: "0px"}}
                 slidesPerView={7.6}
@@ -21,7 +21,7 @@ const ShopByBrand = () => {
                 breakpoints={{
                     // when window width is >= 320px
                     320: {
-                        slidesPerView: 2,
+                        slidesPerView: 2.5,
                     },
                     480: {
                         slidesPerView: 3.5,
