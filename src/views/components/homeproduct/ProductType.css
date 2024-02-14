@@ -142,9 +142,9 @@ color: #B12704;
     margin-left: 12px;
     margin-right: 12px;
 }
-.product-rating-sections-featured-images{
+.product-rating-sections-featured-images {
     display: flex;
-    /* justify-content: space-between; */
+    height: 23px;
 }
 .advertisement-heading {
     margin-top: 6px;
@@ -218,13 +218,15 @@ color: #B12704;
     color: #e87e24;
     text-decoration: underline;
 }
-@media (min-width: 1750px) {
-    .product-type-container {
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
 
+
+    @media (min-width: 1750px) {
+        .product-type-container {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    
 @media screen and (max-width: 1427px) and (min-width:1069px){
 .product-type-section h2 {
     text-align: left;
@@ -233,6 +235,22 @@ color: #B12704;
     font-size: 10px !important;
 }
 }
+@media screen and (max-width: 2560px) and (min-width:1440px){
+    .advertisment-img-products-imges {
+        max-width: 34% !important;
+    }
+    }
+    @media screen and (max-width: 1440px) and (min-width:1204px){
+        .advertisment-img-products-imges {
+            max-width: 35% !important
+        }
+        }
+        @media screen and (max-width: 1024px) and (min-width:800px){
+            .advertisment-img-products-imges {
+                max-width: 40% !important;
+            }
+            }
+       
 @media screen and (max-width: 1070px) {
     .product-type-section {
         height: auto;
@@ -249,23 +267,24 @@ color: #B12704;
     }.save-button-price-new-old{
         font-size: 12px;
     }
-@media screen and (max-width: 425px) {
-    .product-type-section h2,
-    .advertisement-heading h2,
-    .advertisement-heading button {
-        font-size: 12px;
-    }
-}
 
+    @media screen and (max-width: 768px) {
+        .catergory-grid-wrapper {
+            margin-top: -400px;
+        }
+    }
+    
 @media screen and (min-width: 768px) and (max-width: 1030px) {
     .product-type-container {
         margin-top: -370px !important;
     }
 }
 
-@media screen and (min-width: 568px) and (max-width: 767px) {
-    .product-type-container {
-        margin-top: -400px !important;
+@media screen and (max-width: 425px) {
+    .product-type-section h2,
+    .advertisement-heading h2,
+    .advertisement-heading button {
+        font-size: 12px;
     }
 }
 
@@ -323,5 +342,10 @@ color: #B12704;
 
     .product-type-container > .row > * {
         padding: 0 !important;
+    }
+}
+@media screen and (min-width: 568px) and (max-width: 767px) {
+    .product-type-container {
+        margin-top: -400px !important;
     }
 }

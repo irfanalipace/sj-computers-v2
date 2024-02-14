@@ -79,6 +79,9 @@
     text-align: left;
    
 }
+.star-rating-dev-moble-sections{
+margin-bottom: 0px !important;
+}
 .dev-sactions-price-old-new-time-mobile-versions {
     font-family: Inter;
     font-size: 12px;

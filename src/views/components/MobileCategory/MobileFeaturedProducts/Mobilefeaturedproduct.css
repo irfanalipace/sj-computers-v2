@@ -1,6 +1,7 @@
 .dynamic-image-images-mobile-data {
     height: 86px;
-    width: auto;
+    width: 100%;
+    padding: 5px;
 }
 .images-dev-sections-featured-images {
     display: flex;
@@ -43,6 +44,7 @@ text-align: left;
     display: flex;
 }
 .category-name-dev-mobile p {
+    padding-top: 2px;
     font-family: Inter;
     font-size: 12px;
     font-weight: 400;
