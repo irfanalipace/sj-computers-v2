@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const FilterByRange = (category) => {
     let renderRangeSliders = (category) => {
@@ -123,11 +123,7 @@ const FilterByRange = (category) => {
             </div>
         );
     };
-  return (
-    <div>
-        
-    </div>
-  )
-}
+    return <div></div>;
+};
 
-export default FilterByRange
+export default FilterByRange;

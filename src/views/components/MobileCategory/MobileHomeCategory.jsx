@@ -67,24 +67,25 @@ const MobileHomeCategory = () => {
     const dbDate = new Date().getTime();
 
     const parsedDate = new Date(dbDate);
-    
-    
-    console.log( parsedDate .getDate(),parsedDate .getHours(), parsedDate .getMinutes());
-    
-    
+
+    console.log(
+        parsedDate.getDate(),
+        parsedDate.getHours(),
+        parsedDate.getMinutes()
+    );
+
     //Once you get the dates, you can do the date calculate, like:
-    
+
     //Get 1 day in milliseconds
-    var one_day=1000*60*60*24;
-    
-    const date1 = new Date('9/9/2020').getTime(); //JUST AN EXAMPLE
-    const date2 = new Date('10/9/2020').getTime(); //JUST AN EXAMPLE
-    
+    var one_day = 1000 * 60 * 60 * 24;
+
+    const date1 = new Date("9/9/2020").getTime(); //JUST AN EXAMPLE
+    const date2 = new Date("10/9/2020").getTime(); //JUST AN EXAMPLE
+
     const diffTime = Math.abs(date2 - date1);
-    
-    const diffDays = Math.ceil(diffTime / one_day); 
-    
-   
+
+    const diffDays = Math.ceil(diffTime / one_day);
+
     useEffect(() => {
         getProduct();
     }, [products]);
@@ -360,92 +361,88 @@ const MobileHomeCategory = () => {
                 <div className="product-type-section-mobile-images-dev">
                     {products && products?.length > 0 && (
                         <>
-                        
-                                <img
-                                    className={``}
-                                    src={products[0].image}
-                                    alt={"addDesktop"}
-                                />
-                                <h5 className="mobile-versions-products-sections-images">
-                                    {products[0].name.length > 30
-                                        ? `${products[0].name.substring(
-                                              0,
-                                              30
-                                          )}...`
-                                        : products[0].name}
-                                </h5>
+                            <img
+                                className={``}
+                                src={products[0].image}
+                                alt={"addDesktop"}
+                            />
+                            <h5 className="mt-1 mobile-versions-products-sections-images">
+                                {products[0].name.length > 30
+                                    ? `${products[0].name}`
+                                    : products[0].name}
+                            </h5>
+                            <Stack
+                                mb={2}
+                                alignItems={"start"}
+                                spacing={1}
+                                className="star-rating-dev-moble-sections"
+                            >
                                 <Stack
-                                    mb={2}
-                                    alignItems={"start"}
+                                    alignItems={"center"}
+                                    justifyContent={"center"}
                                     spacing={1}
-                                    className="star-rating-dev-moble-sections"
+                                    direction={"row"}
                                 >
-                                    <Stack
-                                        alignItems={"center"}
-                                        justifyContent={"center"}
-                                        spacing={1}
-                                        direction={"row"}
+                                    <StarRatings
+                                        rating={products[0].rating}
+                                        starRatedColor="rgb(232, 126, 36)"
+                                        numberOfStars={5}
+                                        name="rating"
+                                        isSelectable={false}
+                                        starDimension={"20px"}
+                                        starSpacing={"0"}
+                                    />
+                                    <Typography
+                                        fontFamily={"Inter"}
+                                        sx={{ pt: 0.3, pb: 1 }}
+                                        fontWeight={500}
+                                        fontSize={"12px"}
+                                        lineHeight={"17px"}
+                                        color={"#007185"}
                                     >
-                                        <StarRatings
-                                            rating={products[0].rating}
-                                            starRatedColor="rgb(232, 126, 36)"
-                                            numberOfStars={5}
-                                            name="rating"
-                                            isSelectable={false}
-                                            starDimension={"20px"}
-                                            starSpacing={"0"}
-                                        />
-                                        <Typography
-                                            fontFamily={"Inter"}
-                                            sx={{ pt: 0.3 }}
-                                            fontWeight={500}
-                                            fontSize={"12px"}
-                                            lineHeight={"17px"}
-                                            color={"#007185"}
-                                        >
-                                            ({products[0].total_review})
-                                        </Typography>
-                                    </Stack>
-                                    <div className="product-prices">
-                                        {products.originalPrice && (
-                                            <div className="product-original-price">
-                                                ${products.originalPrice}
-                                            </div>
-                                        )}
-                                        <div className="product-rating-sections-featured-images">
-                                            <div className="product-new-price-sections-rating-mobile">
-                                                <span>$</span>
+                                        ({products[0].total_review})
+                                    </Typography>
+                                </Stack>
+                                <div className="product-prices">
+                                    {products.originalPrice && (
+                                        <div className="product-original-price">
+                                            ${products.originalPrice}
+                                        </div>
+                                    )}
+                                    <div className="product-rating-sections-featured-images">
+                                        <div className="product-new-price-sections-rating-mobile">
+                                            <span>$</span>
+                                            {
+                                                products[0]?.price
+                                                    .toString()
+                                                    .split(".")[0]
+                                            }
+                                            <sup>
                                                 {
                                                     products[0]?.price
-                                                        .toString()
-                                                        .split(".")[0]
+                                                        ?.toString()
+                                                        .split(".")[1]
                                                 }
-                                                <sup>
-                                                    {
-                                                        products[0]?.price
-                                                            ?.toString()
-                                                            .split(".")[1]
-                                                    }
-                                                </sup>
-                                            </div>
-                                            <div className="product-new-price-sections-rating-mobile-versions">
-                                                <p>
-                                                    Save{" "}
-                                                    {products[0]?.price
-                                                        ? parseFloat(
-                                                              products[0].price
-                                                          ).toFixed(2)
-                                                        : 0}
-                                                </p>
-                                            </div>
-                                            <p className="dev-sactions-price-old-new-time-mobile-versions">
-                                            Ends in {parsedDate .getHours()}h:{parsedDate .getMinutes()}m
+                                            </sup>
+                                        </div>
+                                        <div className="product-new-price-sections-rating-mobile-versions">
+                                            <p>
+                                                Save{" "}
+                                                {products[0]?.price
+                                                    ? parseFloat(
+                                                          products[0].price
+                                                      ).toFixed(2)
+                                                    : 0}
                                             </p>
                                         </div>
+                                        <p className="dev-sactions-price-old-new-time-mobile-versions">
+                                            Ends in {parsedDate.getHours()}h:
+                                            {parsedDate.getMinutes()}m
+                                        </p>
                                     </div>
-                                    {/* {type === "recommended" && getRandomComponent()} */}
-                                </Stack>
-                           
+                                </div>
+                                {/* {type === "recommended" && getRandomComponent()} */}
+                            </Stack>
                         </>
                     )}
                 </div>

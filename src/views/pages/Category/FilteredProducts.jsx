@@ -17,6 +17,7 @@ import "./FilteredProducts.css"
 const FilteredProducts = memo(({ category, toggleFilter }) => {
     const {
         products,
+        filtersProduct,
         isLoading,
         apiError,
         currentPage,
@@ -29,7 +30,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     const productParamsRef = {
         redirectedFrom: category?.name,
         redirectedFromPath: `/category/${category?.slug}`,
-    }
+    };
 
     const dispatch = useDispatch();
 
@@ -78,6 +79,17 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
             }
         }
     }, [filtersArray]);
+
+    useEffect(() => {
+        filterObject = {
+            ...filterObject,
+            page: 1,
+            name: "",
+            filter: filtersArray,
+        };
+
+        dispatch(filterProducts(filterObject));
+    }, []);
 
     useEffect(() => {
         filterObject = {
@@ -135,7 +147,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                     </div>    
                 </div>
                     <ProductsGrid
-                        products={products}
+                        products={filtersProduct}
                         handleClick={handleClick}
                         isLoading={isLoading}
                         apiError={apiError}
@@ -146,10 +158,13 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
             ) : (
                 <>
                     {isLoading || !category ? (
-                        <h3 className="heading">Waiting</h3>
+                        <h3 className="heading text-center">Waiting</h3>
                     ) : (
-                        <div className="d-flex justify-content-space-between align-items-center heading">
-                            <h3>No Products Found</h3>
+                        <div
+                            style={{ height: "137vh" }}
+                            className="d-flex justify-content-center align-items-start heading"
+                        >
+                            <h3 className="text-center">No Products Found</h3>
                             <button
                                 className="d-sm-none d-block bg-transparent border-0"
                                 onClick={toggleFilter}
