@@ -62,7 +62,7 @@ const CategorySliderCard = ({ product }) => {
                     m={"auto"}
                     py={4}
                     sx={{ color: "black" }}
-                    mt={-4}
+                    mt={-3}
                 >
                     <Typography variant={"body2"}>
                         ${product?.price}{" "}
