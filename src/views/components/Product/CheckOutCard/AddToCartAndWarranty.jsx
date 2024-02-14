@@ -16,7 +16,7 @@ function AddToCartAndWarranty({ product }) {
     const [plan, setOpenPlan] = useState({});
     const [quantity, setQuantity] = useState(1);
     const [drawerProps, setDrawerProps] = useState({});
-    const [screenSize, setScreenSize] = useState(window.innerWidth);
+    const screenSize = window.innerWidth;
     const [loading, setLoading] = useState(false);
     const productAddingToCard = useSelector(
         (state) => state.products.isLoading
