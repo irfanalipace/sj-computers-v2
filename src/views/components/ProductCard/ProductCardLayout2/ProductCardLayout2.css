@@ -212,7 +212,14 @@
 }
 
 .product-name {
-    font-size: 14px;
+    color: #333333;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 23px;
+    /* letter-spacing: -5em; */
+    text-align: left;
+    /* font-size: 14px; */
     /* color: #1270c4; */
     color: #333333;
     text-overflow: ellipsis;
@@ -295,8 +302,23 @@
     text-decoration: line-through;
     font-weight: 500;
 }
-
+.model-data-products{
+    font-family: Inter;
+font-size: 12px;
+font-weight: 600;
+line-height: 15px;
+letter-spacing: 0em;
+text-align: left;
+color: 
+#666666;
+}
 .product-new-price {
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
     font-size: 18px;
     font-weight: 500;
     /* color: #1270c4; */
@@ -333,11 +355,11 @@
     /* min-width: 20%; */
 }
 
-.discount-with-coupon{
-    margin: 2px 0px;
+.discount-with-coupon {
+    /* margin-top: 3px; */
+    margin: 5px 0px;
     display: flex;
 }
-
 .discount-label{
     background-color: black;
     color: white;

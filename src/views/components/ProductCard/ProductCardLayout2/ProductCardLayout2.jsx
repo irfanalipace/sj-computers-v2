@@ -109,7 +109,7 @@ const ProductCardLayout2 = ({
         <div>
             <div
                 className="product-details pe-2 ps-0 ps-lg-1"
-                style={{ padding: "0px 0px" }}
+                style={{ padding: "0px 0px", marginLeft: "5px" }}
             >
                 {/* <div>
             <span className="span-the-product-color-product">
@@ -305,44 +305,56 @@ const ProductCardLayout2 = ({
                     {productView == "list" && (
                         <div className="list-view-details d-none d-lg-flex">
                             <div className="extra-details-item">
-                                <div>Model</div>
+                                <div className="model-data-products">Model</div>
                                 <div
                                     style={{
                                         fontWeight: "700",
                                         padding: "4px 0px",
+                                        fontSize:"12px",
+                                        color:"#000000"
+
                                     }}
                                 >
                                     Sonic
                                 </div>
                             </div>
                             <div className="extra-details-item">
-                                <div>Display</div>
+                                <div className="model-data-products">Display</div>
                                 <div
-                                    style={{
-                                        fontWeight: "700",
-                                        padding: "4px 0px",
-                                    }}
+                                        style={{
+                                            fontWeight: "700",
+                                            padding: "4px 0px",
+                                            fontSize:"12px",
+                                            color:"#000000"
+    
+                                        }}
                                 >
                                     32"
                                 </div>
                             </div>
                             <div className="extra-details-item">
-                                <div>Company</div>
+                                <div className="model-data-products">Company</div>
                                 <div
-                                    style={{
+                                       style={{
                                         fontWeight: "700",
                                         padding: "4px 0px",
+                                        fontSize:"12px",
+                                        color:"#000000"
+
                                     }}
                                 >
                                     Sonic
                                 </div>
                             </div>
                             <div className="extra-details-item">
-                                <div>Size</div>
+                                <div className="model-data-products">Size</div>
                                 <div
-                                    style={{
+                                       style={{
                                         fontWeight: "700",
                                         padding: "4px 0px",
+                                        fontSize:"12px",
+                                        color:"#000000"
+
                                     }}
                                 >
                                     Multiple
@@ -367,19 +379,25 @@ const ProductCardLayout2 = ({
                     ))}
                 {productView == "list" && (
                     <div className="delivery-details">
-                        <div style={{ color: "#1270C4", margin: "3px 0px" }}>
+                        <div style={{ color: "#1270C4", margin: "4px 0px" }}>
                             FREE delivery{" "}
-                            <span style={{ color: "black", fontWeight: "500" }}>
+                            <span
+                                style={{
+                                    color: "black",
+                                    fontWeight: "500",
+                                    fontSize: "12px",
+                                }}
+                            >
                                 Friday, May 19
                             </span>
                         </div>
-                        <div style={{ color: "#666666", margin: "3px 0px" }}>
+                        <div style={{ color: "#666666", margin: "4px 0px" }}>
                             or fastest delivery{" "}
                             <span style={{ color: "black", fontWeight: "500" }}>
                                 Monday, May 15
                             </span>
                         </div>
-                        <div style={{ color: "#666666", margin: "3px 0px" }}>
+                        <div style={{ color: "#666666", margin: "4px 0px" }}>
                             order within{" "}
                             <span style={{ color: "#E87E24" }}>
                                 8 hours 58 mins
