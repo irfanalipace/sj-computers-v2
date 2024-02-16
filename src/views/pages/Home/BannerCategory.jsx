@@ -102,15 +102,15 @@ const BannerCategory = () => {
     const featured = [
         {
             name: "Featured Products",
-            link: "Shop Now",
+            link: "See more",
         },
         {
             name: "Networking",
-            link: "Shop Now",
+            link: "See more",
         },
         {
             name: "Upgrade Storage Space | S.J Computers",
-            link: "Shop Now",
+            link: "See more",
         },
         {
             name: "Rams",
@@ -182,7 +182,7 @@ const BannerCategory = () => {
     const gamingArray = [
         {
             name: "New Arrivals in Gaming Systems",
-            link: "Shop Now",
+            link: "See more",
         },
         {
             name: "Work Stations for Professionals",
@@ -243,30 +243,29 @@ const BannerCategory = () => {
             ) : (
                 <div className="catergory-grid-wrapper">
                     <div className="">
-                    <div className="home-page-data">
-                        <Suspense>
-                            
-                            <ProductType />
-                            <FeaturedProducts
-                                featuredItems={featuredItems}
-                                featured={featured}
-                                networkItems={networkItems}
-                                upgradecomputers={upgradecomputers}
-                                rams={rams}
-                            />
-                            {/* <SellingProducts images={Sellingimages}/> */}
-                            <SellingPro images={Sellingimages} />
-                            <GamingProductsSections
-                                gamingArray={gamingArray}
-                                items={gamingItems}
-                                gamingProducts1={gamingProducts1}
-                                gamingProducts2={gamingProducts2}
-                                gamingProducts3={gamingProducts3}
-                            />
-                            <FlashProducts images={fleshimages} />
-                            <RecommandSectionsProducts />
-                        </Suspense>
-                    </div>
+                        <div className="home-page-data">
+                            <Suspense>
+                                <ProductType />
+                                <FeaturedProducts
+                                    featuredItems={featuredItems}
+                                    featured={featured}
+                                    networkItems={networkItems}
+                                    upgradecomputers={upgradecomputers}
+                                    rams={rams}
+                                />
+                                {/* <SellingProducts images={Sellingimages}/> */}
+                                <SellingPro images={Sellingimages} />
+                                <GamingProductsSections
+                                    gamingArray={gamingArray}
+                                    items={gamingItems}
+                                    gamingProducts1={gamingProducts1}
+                                    gamingProducts2={gamingProducts2}
+                                    gamingProducts3={gamingProducts3}
+                                />
+                                <FlashProducts images={fleshimages} />
+                                <RecommandSectionsProducts />
+                            </Suspense>
+                        </div>
                     </div>
                 </div>
             )}
