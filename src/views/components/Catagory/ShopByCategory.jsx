@@ -11,6 +11,32 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 const ShopByCategory = () => {
+
+    const BreakPoints = {
+        // when window width is >= 320px
+        220: {
+            slidesPerView: 2.4,
+        },
+        480: {
+            slidesPerView: 3.5,
+        },
+        640: {
+            slidesPerView: 3.5,
+        },
+
+        900: {
+            slidesPerView: 4.5,
+        },
+
+        1200: {
+            slidesPerView: 6.5,
+        },
+
+        1400: {
+            slidesPerView: 7.5,
+        },
+    }
+
     return (
         <div
             style={{ marginTop: "10px", marginLeft: "16px" }}
@@ -28,26 +54,7 @@ const ShopByCategory = () => {
                 className="ms-0 m-lg-4"
                 slidesPerView={7.6}
                 // spaceBetween={0}
-                breakpoints={{
-                    // when window width is >= 320px
-                    220: {
-                        slidesPerView: 2.4,
-                    },
-                    480: {
-                        slidesPerView: 3.5,
-                    },
-                    640: {
-                        slidesPerView: 3.5,
-                    },
-
-                    900: {
-                        slidesPerView: 4.5,
-                    },
-
-                    1200: {
-                        slidesPerView: 6.5,
-                    },
-                }}
+                breakpoints={BreakPoints}
                 navigation={{
                     nextEl: ".shop-by-category .swiper-button-next",
                     prevEl: ".shop-by-category .swiper-button-prev",
@@ -94,26 +101,7 @@ const ShopByCategory = () => {
                 slidesPerView={7.6}
                 className="ms-0 m-lg-4"
                 // spaceBetween={0}
-                breakpoints={{
-                    // when window width is >= 320px
-                    320: {
-                        slidesPerView: 2.4,
-                    },
-                    480: {
-                        slidesPerView: 3.5,
-                    },
-                    640: {
-                        slidesPerView: 3.5,
-                    },
-
-                    900: {
-                        slidesPerView: 4.5,
-                    },
-
-                    1200: {
-                        slidesPerView: 6.5,
-                    },
-                }}
+                breakpoints={BreakPoints}
                 navigation={{
                     nextEl: ".shop-by-category .swiper-button-next",
                     prevEl: ".shop-by-category .swiper-button-prev",

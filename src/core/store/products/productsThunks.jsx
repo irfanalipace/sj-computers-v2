@@ -47,6 +47,7 @@ export const filterProducts = (filter, loadMore = false) => {
                     type: FILTER_PRODUCTS,
                     payload: {
                         data: [...response?.data?.data],
+                        total: response?.data?.total
                     },
                 });
             } else {

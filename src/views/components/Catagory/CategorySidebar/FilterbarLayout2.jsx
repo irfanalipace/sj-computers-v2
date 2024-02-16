@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { IconButton } from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import Loader from "@common/Spinner/Spinner";
 import OverlayLoader from "@common/LoaderComponent/OverlayLoader";
@@ -507,11 +508,11 @@ const FilterBarlayout2 = ({inDrawer, DataInDrawerToggler, DataInDrawer}) => {
                 {(!!filters[category].length ||
                     !Array.isArray(filters[category])) && (
                     <li className="filter-key" style={{borderBottom: inDrawer ? "1px solid #DDDDDD" : "",}}  key={`${category}-${index}`}>
-                        <h3 onClick={() => DataInDrawerToggler(index + 3)} className={`filter-heading ${inDrawer ? "alignment-container" : ""}`} style={{margin: inDrawer ? "0px" : "" ,padding: inDrawer ? "16px" : "" ,width: inDrawer ? "100vw" : ""}}>{category} {inDrawer ? <span className={`${inDrawer ? "align-to-end" : ""}`}><IconButton> <KeyboardArrowDownIcon/> </IconButton></span> : "" }</h3>
+                        <h3 onClick={() => DataInDrawerToggler(index + 3)} className={`filter-heading ${inDrawer ? "alignment-container" : ""}`} style={{margin: inDrawer ? "0px" : "" ,padding: inDrawer ? "16px" : "" ,width: inDrawer ? "100vw" : ""}}>{category} {inDrawer ? <span className={`${inDrawer ? "align-to-end" : ""}`}><IconButton>{DataInDrawer[index + 3] ? <KeyboardArrowUpIcon sx={{color: "orange"}} /> : <KeyboardArrowDownIcon />} </IconButton></span> : "" }</h3>
 
                         {(DataInDrawer[index + 3] || !inDrawer )&& (
 
-                        <ul className="filter-values-list">
+                        <ul className="filter-values-list" style={{padding: inDrawer ? '0px 20px' : ""}}>
                             {Array.isArray(filters[category])
                                 ? renderedItems(options, category)
                                 : renderRangeSliders(category)}

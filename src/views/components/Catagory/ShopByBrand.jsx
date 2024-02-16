@@ -16,7 +16,7 @@ const ShopByBrand = () => {
         <Typography variant='h4' py={2} fontWeight={"bolder"} sx={{'@media (max-width: 575px)': {fontSize: "18px"}}}>Shop by Brand</Typography>
         <Swiper
                 style={{margin: "0px"}}
-                slidesPerView={7.6}
+                slidesPerView={7.5}
                 // spaceBetween={0}
                 breakpoints={{
                     // when window width is >= 320px
@@ -36,6 +36,10 @@ const ShopByBrand = () => {
 
                     1200: {
                         slidesPerView: 6.5,
+                    },
+
+                    1400: {
+                        slidesPerView: 7.5,
                     },
                 }}
                 navigation={{
