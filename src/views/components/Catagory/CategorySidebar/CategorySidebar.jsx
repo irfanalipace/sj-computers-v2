@@ -8,7 +8,7 @@ import { computerCategories } from '../DummyApi';
 import FilterBarlayout2 from './FilterbarLayout2';
 import { Link } from 'react-router-dom';
 
-import "./categorySidebar.css"
+import "./CategorySidebar.css"
 
 const CategorySidebar = ({inDrawer}) => {
 
@@ -32,7 +32,7 @@ const CategorySidebar = ({inDrawer}) => {
     });
   };
 
-  const [DataInDrawer, setDataInDrawer] = useState(inDrawer ? {} : true) 
+  const [DataInDrawer, setDataInDrawer] = useState(inDrawer ? {} : true)
   const DataInDrawerToggler = (categoryNumber) => {
     // setDataInDrawer(!DataInDrawer)
     setDataInDrawer({
@@ -49,7 +49,7 @@ const CategorySidebar = ({inDrawer}) => {
     <Grid container width={"100%"} sx={{ overflowX: "hidden", overflowY: "none", borderRight: inDrawer == true ? "" : "0.5px solid #DDDDDD"}} >
 
         <Grid item xs={12} ml={inDrawer ? 0 : 2} borderBottom={inDrawer ? "1px solid #DDDDDD" : ""}>
-            <Typography onClick={() => DataInDrawerToggler(1)} p={inDrawer? 2 : 0} className={`${inDrawer ? "alignment-container" : ""}`} variant='body2' fontWeight={"bolder"} ml>Catagories {inDrawer ? <span className={`${inDrawer ? "align-to-end" : ""}`}><IconButton onClick={() => DataInDrawerToggler(1)}> <KeyboardArrowDownIcon/> </IconButton></span> : "" }</Typography>    
+            <Typography onClick={() => DataInDrawerToggler(1)} p={inDrawer? 2 : 0} className={`${inDrawer ? "alignment-container" : ""}`} variant='body2' fontWeight={"bolder"} ml>Catagories {inDrawer ? <span className={`${inDrawer ? "align-to-end" : ""}`}><IconButton onClick={() => DataInDrawerToggler(1)}> <KeyboardArrowDownIcon/> </IconButton></span> : "" }</Typography>
           {  (DataInDrawer[1] || !inDrawer ) && ( <>
           {computerCategories?.slice(0, visibleCategory)?.map((category, index) => (
             <>
@@ -62,14 +62,14 @@ const CategorySidebar = ({inDrawer}) => {
             ))}
             {(visibleCategory + 1) > computerCategories.length ? (
               <Typography variant='body1' color={"orange"}><IconButton size='small' onClick={showLess}><KeyboardArrowUpIcon  /></IconButton> See less categories</Typography>
-            ) : ( 
+            ) : (
                 <Typography variant='body1' color={"#52AC66"}><IconButton size='small' onClick={showMore}><KeyboardArrowDownIcon  /></IconButton> See More categories</Typography>
             )
             }
             </>
           )}
             </Grid>
-            
+
             <Grid item xs={12} ml={inDrawer ? 0 : 2} my={1} borderBottom={inDrawer ? "1px solid #DDDDDD" : ""}>
             <Typography onClick={() => DataInDrawerToggler(2)} p={inDrawer? 2 : 0} variant='body2' className={`${inDrawer ? "alignment-container" : ""}`} fontWeight={"bolder"}>Avg. Customer Review {inDrawer ? <span className={`${inDrawer ? "align-to-end" : ""}`}><IconButton> <KeyboardArrowDownIcon/> </IconButton></span> : "" }</Typography>
             {(DataInDrawer[2] || !inDrawer )&& (
@@ -84,7 +84,7 @@ const CategorySidebar = ({inDrawer}) => {
 
         <Grid item my={0}>
         {/* <Typography variant='body1' fontWeight={"bolder"} ml={2}>Filters</Typography> */}
-        <div className='layout2-filter-bar' style={{position: "static", height: "", overflowY: "hidden", border: "none"}}> 
+        <div className='layout2-filter-bar' style={{position: "static", height: "", overflowY: "hidden", border: "none"}}>
           {/* <FilterBar /> */}
           <FilterBarlayout2 inDrawer={inDrawer} DataInDrawer={DataInDrawer} DataInDrawerToggler={DataInDrawerToggler} />
         </div>
