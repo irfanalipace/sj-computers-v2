@@ -27,15 +27,15 @@ const ShopByBrand = () => {
                         slidesPerView: 3.5,
                     },
                     640: {
-                        slidesPerView: 4.5,
+                        slidesPerView: 3.5,
                     },
 
-                    768: {
+                    900: {
                         slidesPerView: 4.5,
                     },
 
                     1200: {
-                        slidesPerView: 7.5,
+                        slidesPerView: 6.5,
                     },
                 }}
                 navigation={{

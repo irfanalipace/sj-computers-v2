@@ -41,9 +41,12 @@ function Category() {
                 )}
 
                 <CategoryVideoAndSlider />
-
-                <div>
-                    <div className={`sticky-filter-bar ${isOpen && "active"} d-none d-sm-block`}>
+                
+                    {/* display flex for layout2 */}
+                <div style={{display: 'flex'}}>
+                    {/* <div className={`sticky-filter-bar ${isOpen && "active"} d-none d-sm-block`}> */}
+                    {/* for layout2 */}
+                    <div className={`item-1 layout2-filter-bar ${isOpen && "active"} d-none d-sm-block`}>
                         {/* <div className="d-flex justify-content-between align-items-center heading">
                             <h3>Filters</h3>
                             <button
@@ -56,8 +59,9 @@ function Category() {
                         {/* <FilterBar /> */}
                         <CategorySidebar />
                     </div>
-
-                    <ProductsByCategory toggleFilter={toggleFilter} />
+                    <div className="item-2">    
+                        <ProductsByCategory toggleFilter={toggleFilter} />
+                    </div>
                 </div>
             </div>
             

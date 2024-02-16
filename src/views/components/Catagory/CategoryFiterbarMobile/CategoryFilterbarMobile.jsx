@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
-import { Drawer, IconButton } from '@mui/material';
+import { Drawer, IconButton, Button } from '@mui/material';
 import CategorySidebar from '../CategorySidebar/CategorySidebar';
 
 import "./CategoryFilterbarMobile.css"
@@ -18,10 +18,12 @@ const CategoryFilterbarMobile = () => {
     <div className='filterbar-section' >
         <div onClick={toggleDrawer(true)} className='filterbar-button'> Filters <ExpandMoreIcon /></div>
         <Drawer anchor="bottom" open={open} onClose={toggleDrawer(false)}>
-        <div style={{position: "relative", padding: '20px'}}>
-          <IconButton onClick={toggleDrawer(false)} sx={{position: "absolute", top: 0, right: 0}}><CloseIcon /></IconButton>
+        <div>
+          <div style={{textAlign: "end", padding: '10px', borderBottom: '1px solid #DDDDDD'}}>
+            <Button sx={{color:"#318243"}} onClick={toggleDrawer(false)} >Close</Button>
+          </div>
           <div style={{maxHeight: "60vh"}}>
-                <CategorySidebar />
+                <CategorySidebar inDrawer={true} />
           </div>
             
         </div>
