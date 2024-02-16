@@ -141,7 +141,7 @@ const diffDays = Math.ceil(diffTime / one_day);
     const categoryArray = [
         {
             name: "Shop by Category",
-            link: "Shop Now",
+            link: "See all",
         },
         {
             name: "Gaming Desktop",
