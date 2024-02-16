@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { IconButton } from "@mui/material";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import Loader from "@common/Spinner/Spinner";
 import OverlayLoader from "@common/LoaderComponent/OverlayLoader";
@@ -10,12 +12,13 @@ import { getFilterListApi } from "@api/filters";
 import { SET_FILTERS_ARRAY } from "@store/products/productsSlice";
 
 import "./FilterbarLayout2.css";
+import "./CategorySidebar.css";
 import { Slider, Typography } from "@mui/material";
 // import Button from "../common/Button/Button";
 // import FilterByRange from "./FilterByRange";
 import Button from "../../common/Button/Button";
 
-const FilterBarlayout2 = () => {
+const FilterBarlayout2 = ({inDrawer, DataInDrawerToggler, DataInDrawer}) => {
     const [filters, setFilters] = useState({});
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [filtersInArray, setFiltersInArray] = useState([]);
@@ -352,7 +355,8 @@ const FilterBarlayout2 = () => {
                             className="me-1"
                             name={category}
                             checked={selectedUnit[category]?.unit === ""}
-                            onChange={() => handleRangeUnit(category, "")}
+                            onChange={(e) => handleRangeUnit(category, "")}
+                            onClick={(e) => handleFilterSelect(e, category, {})}  // for applying direct on All {}
                         />
                         <span className="radiomark "></span>
                         All
@@ -483,7 +487,8 @@ const FilterBarlayout2 = () => {
                     <></>
                 )}
                 {/* Hide Apply Button on All */}
-                {selectedUnit[category]?.unit === "" ? "" : <div className="filter-button-category-page">
+                {selectedUnit[category]?.unit === "" ? "" : 
+                <div className="filter-button-category-page">
                     <Button
                         disabled={isLoading}
                         onClick={(e) => applyRange(e, category)}
@@ -501,13 +506,19 @@ const FilterBarlayout2 = () => {
             <div key={index}>
                 {(!!filters[category].length ||
                     !Array.isArray(filters[category])) && (
-                    <li className="filter-key" key={`${category}-${index}`}>
-                        <h3 className="filter-heading">{category}</h3>
+                    <li className="filter-key" style={{borderBottom: inDrawer ? "1px solid #DDDDDD" : "",}}  key={`${category}-${index}`}>
+                        <h3 onClick={() => DataInDrawerToggler(index + 3)} className={`filter-heading ${inDrawer ? "alignment-container" : ""}`} style={{margin: inDrawer ? "0px" : "" ,padding: inDrawer ? "16px" : "" ,width: inDrawer ? "100vw" : ""}}>{category} {inDrawer ? <span className={`${inDrawer ? "align-to-end" : ""}`}><IconButton> <KeyboardArrowDownIcon/> </IconButton></span> : "" }</h3>
+
+                        {(DataInDrawer[index + 3] || !inDrawer )&& (
+
                         <ul className="filter-values-list">
                             {Array.isArray(filters[category])
                                 ? renderedItems(options, category)
                                 : renderRangeSliders(category)}
                         </ul>
+
+                        )}
+
                     </li>
                 )}
             </div>
@@ -520,7 +531,7 @@ const FilterBarlayout2 = () => {
                 <OverlayLoader isLoading={isLoading || loadingFilters} />
             </div>
             <div className="filters-inner">
-                <ul className="filters-list">
+                <ul className="filters-list" style={{padding: inDrawer ? "0px" : "", margin: inDrawer ? "0px" : ""}}>
                     {renderedCategories}
                     {/* <li className="filter-value">
                         <button onClick={handleShowMoreCategory}>

@@ -8,7 +8,9 @@ import { computerCategories } from '../DummyApi';
 import FilterBarlayout2 from './FilterbarLayout2';
 import { Link } from 'react-router-dom';
 
-const CategorySidebar = () => {
+import "./categorySidebar.css"
+
+const CategorySidebar = ({inDrawer}) => {
 
   const [isSubCategoryVisible, setIsSubCategoryVisible] = useState(computerCategories.map(() => false));
   const [visibleCategory, setVisibleCategory] = useState(2);
@@ -30,15 +32,25 @@ const CategorySidebar = () => {
     });
   };
 
+  const [DataInDrawer, setDataInDrawer] = useState(inDrawer ? {} : true) 
+  const DataInDrawerToggler = (categoryNumber) => {
+    // setDataInDrawer(!DataInDrawer)
+    setDataInDrawer({
+      ...DataInDrawer,
+      [categoryNumber]: !DataInDrawer[categoryNumber]
+    });
+  }
+
   const toggleFilter = () => {
     setIsOpen((state) => !state);
   };
 
   return (
-    <Grid container width={"100%"} sx={{ overflowX: "hidden", overflowY: "auto", borderRight: "0.5px solid gray"}} >
+    <Grid container width={"100%"} sx={{ overflowX: "hidden", overflowY: "none", borderRight: inDrawer == true ? "" : "0.5px solid #DDDDDD"}} >
 
-        <Grid item ml={2}>
-            <Typography variant='body2' fontWeight={"bolder"} ml>Catagories</Typography>    
+        <Grid item xs={12} ml={inDrawer ? 0 : 2} borderBottom={inDrawer ? "1px solid #DDDDDD" : ""}>
+            <Typography onClick={() => DataInDrawerToggler(1)} p={inDrawer? 2 : 0} className={`${inDrawer ? "alignment-container" : ""}`} variant='body2' fontWeight={"bolder"} ml>Catagories {inDrawer ? <span className={`${inDrawer ? "align-to-end" : ""}`}><IconButton onClick={() => DataInDrawerToggler(1)}> <KeyboardArrowDownIcon/> </IconButton></span> : "" }</Typography>    
+          {  (DataInDrawer[1] || !inDrawer ) && ( <>
           {computerCategories?.slice(0, visibleCategory)?.map((category, index) => (
             <>
             <Typography ml={2} variant='body2'>{category.category}<IconButton size='small' onClick={() => toggleSubCategoryVisibility(index)}><KeyboardArrowDownIcon /></IconButton></Typography>
@@ -54,23 +66,27 @@ const CategorySidebar = () => {
                 <Typography variant='body1' color={"#52AC66"}><IconButton size='small' onClick={showMore}><KeyboardArrowDownIcon  /></IconButton> See More categories</Typography>
             )
             }
+            </>
+          )}
             </Grid>
             
-            <Grid item ml={2} my={1}>
-            <Typography variant='body2' fontWeight={"bolder"}>Avg. Customer Review</Typography>
+            <Grid item xs={12} ml={inDrawer ? 0 : 2} my={1} borderBottom={inDrawer ? "1px solid #DDDDDD" : ""}>
+            <Typography onClick={() => DataInDrawerToggler(2)} p={inDrawer? 2 : 0} variant='body2' className={`${inDrawer ? "alignment-container" : ""}`} fontWeight={"bolder"}>Avg. Customer Review {inDrawer ? <span className={`${inDrawer ? "align-to-end" : ""}`}><IconButton> <KeyboardArrowDownIcon/> </IconButton></span> : "" }</Typography>
+            {(DataInDrawer[2] || !inDrawer )&& (
             <Box ml={1} py={1}>
             <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={4} starRatedColor='orange'  />& Up</Typography>
             <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={3} starRatedColor='orange'  />& Up</Typography>
             <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={2} starRatedColor='orange'  />& Up</Typography>
             <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={1} starRatedColor='orange'  />& Up</Typography>
-            </Box>
+            </Box> )
+            }
         </Grid>
 
         <Grid item my={0}>
         {/* <Typography variant='body1' fontWeight={"bolder"} ml={2}>Filters</Typography> */}
-        <div className='sticky-filter-bar' style={{position: "static", height: "", overflowY: "hidden", border: "none"}}> 
+        <div className='layout2-filter-bar' style={{position: "static", height: "", overflowY: "hidden", border: "none"}}> 
           {/* <FilterBar /> */}
-          <FilterBarlayout2 />
+          <FilterBarlayout2 inDrawer={inDrawer} DataInDrawer={DataInDrawer} DataInDrawerToggler={DataInDrawerToggler} />
         </div>
         </Grid>
 

@@ -9,7 +9,7 @@
 }
 
 .filter-results {
-    margin-left: 250px;
+    /* margin-left: 250px; */ /* committed for layout2 */
     padding: 0 20px;
     min-height: calc(100vh - 100px);
 }
@@ -49,6 +49,12 @@
     font-size: 20px;
     font-weight: bolder;
 }
+.item-1{
+    width: 20%;
+}
+.item-2{
+    width: 80%;
+}
 
 @media screen and (max-width: 585px) {
     .filter-results {
@@ -60,5 +66,8 @@
     }
     .category-page .products-grid {
         min-height: calc(100vh - 500px);
+    }
+    .item-2{
+        width: 100%;
     }
 }

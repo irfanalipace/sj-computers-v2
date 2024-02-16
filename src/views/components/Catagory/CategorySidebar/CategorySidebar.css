@@ -1,0 +1,11 @@
+.alignment-container{
+    position: relative;
+}
+.align-to-end{
+    /* justify-self: flex-end; */
+    position: absolute;
+    right: 0;
+    top: 0;
+    /* float: right; */
+    /* background-color: aqua; */
+}

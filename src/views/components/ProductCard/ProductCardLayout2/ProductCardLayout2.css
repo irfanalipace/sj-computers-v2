@@ -338,6 +338,7 @@ color:
 }
 .product-detail-list-view{
     width: 80%;
+    padding-left: 10px;
 }
 
 .product-offer-label{
@@ -492,7 +493,7 @@ color:
     }
     .product-new-price {
         font-size: 14px;
-        color: #e87e24;
+        /* color: #e87e24; */
     }
     .product-prices {
         display: flex;
@@ -559,7 +560,7 @@ color:
     .product {
         /* display: inherit; */
         flex-direction: column;
-        align-items: center;
+        /* align-items: center; */
         /* padding: 10px; */
     }
     .product-image-grid.product-image {
