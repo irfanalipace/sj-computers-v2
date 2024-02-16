@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadMore from "@common/Button/LoadMore";
 import ProductCard from "@components/ProductCard/ProductCard";
 import ProductCardLayout2 from "../ProductCard/ProductCardLayout2/ProductCardLayout2";
+import ProductCardLayout3 from "../ProductCard/ProductCardLayout3/ProductCardLayout3";
 import OverlayLoader from "@common/LoaderComponent/OverlayLoader";
 import { Link } from "react-router-dom";
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
@@ -38,7 +39,13 @@ export default function ProductsGrid({
                                 searchParams={searchParams}
                                 productView={productView}
                             /> */}
-                            <ProductCardLayout2
+                            {/* <ProductCardLayout2
+                                product={product}
+                                inGrid={true}
+                                searchParams={searchParams}
+                                productView={productView}
+                            /> */}
+                            <ProductCardLayout3
                                 product={product}
                                 inGrid={true}
                                 searchParams={searchParams}

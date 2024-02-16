@@ -18,6 +18,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     const {
         products,
         filtersProduct,
+        filterTotal,
         isLoading,
         apiError,
         currentPage,
@@ -140,7 +141,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                     <div className="product-grid-heading">Best Monitors for Desktops</div>
                     <p className="product-grid-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem.</p>
                     <div className="product-length-container">
-                    1-{products?.length} of over 1,000 results for <span style={{color: "#52AC66", margin: "0px 5px"}}> Monitors </span>
+                    1-{products?.length} of over {filterTotal} results for <span style={{color: "#52AC66", margin: "0px 5px"}}> Monitors </span>
                     <div className="buttons">
                         <span className="view-button" style={{backgroundColor: productView == "list" ? "#318243" : "", color: productView == "list" ? "white" : "#318243"}} onClick={productViewList}><FormatAlignLeftIcon fontSize="small" /> </span>
                         <span className="view-button" style={{backgroundColor: productView == "grid" ? "#318243" : "", color: productView == "grid" ? "white" : "#318243"}} onClick={productViewGrid}><ViewModuleIcon fontSize="small" /> </span>

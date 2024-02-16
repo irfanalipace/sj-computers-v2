@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Controller, Navigation } from "swiper";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -18,14 +18,33 @@ import progmobile3 from "@images/Banner/mobileLoaderimage/prograssivemobile3.jpg
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Slider.css";
+import "./BannerSlider.css"
 import { useViewportWidth } from "@hooks/useViewportWidth";
 
 // import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Slider = () => {
+    
+    const swiperRef = useRef(null);
+    const buttonRef = useRef("");
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (buttonRef.current && !buttonRef.current.contains(event.target)) {
+            // Clicked outside the button, so set the value to an empty string
+            setBorder('');
+          }
+        };
+    
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, []);
+
+    const [border, setBorder] = useState("")
+
     const width = useViewportWidth();
     SwiperCore.use([Navigation, Controller]);
-    const swiperRef = useRef(null);
     const banners = [
         {
             prograssive: Bannerprograssive1,
@@ -51,19 +70,26 @@ const Slider = () => {
         if (swiperRef.current) {
             swiperRef.current.slideNext();
         }
+        setBorder("next")
     };
 
     const goToPreviousSlide = () => {
         if (swiperRef.current) {
             swiperRef.current.slidePrev();
         }
+        setBorder("prev")
     };
 
     return (
         <>
             <div className="banner-slider-section">
                 <Swiper
-                    modules={[Navigation]}
+                    loop
+                    // modules={[Navigation]}
+                    navigation={{
+                        nextEl: '.banner-slider-section .swiper-button-next',
+                        prevEl: '.banner-slider-section .swiper-button-prev',
+                    }}
                     className="mySwiper"
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                     onSlideChange={() => false}
@@ -89,11 +115,13 @@ const Slider = () => {
                     ))}
                 </Swiper>
                 <div
-                    className="swiper-button-prev"
+                    ref={buttonRef}
+                    className={`swiper-button-prev swiper-button ${border == "prev" ? "swiper-button-border" : ""}`}
                     onClick={goToPreviousSlide}
                 ></div>
                 <div
-                    className="swiper-button-next"
+                    ref={buttonRef}
+                    className={`swiper-button-next swiper-button ${border == "next" ? "swiper-button-border" : ""}`}
                     onClick={goToNextSlide}
                 ></div>
             </div>

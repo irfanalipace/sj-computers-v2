@@ -58,10 +58,10 @@ const CategoriesHeader = () => {
                   <div className='item' >
                     <HtmlTooltip title={
                         <>
-                            <Link to={"/category/desktop"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>desktop</Typography></Link>
-                            <Link to={"/category/monitors"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>monitors</Typography></Link>
-                            <Link to={"/category/tower"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>tower</Typography></Link>
-                            <Link to={"/category/laptops"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>laptops</Typography></Link>
+                            <Link to={"/category/desktop"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>Desktops</Typography></Link>
+                            <Link to={"/category/monitors"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>Monitors</Typography></Link>
+                            <Link to={"/category/tower"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>Tower</Typography></Link>
+                            <Link to={"/category/laptops"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>Laptops</Typography></Link>
                         </>
                     }>
                          {category.name}<ExpandMoreIcon fontSize='small' /> 

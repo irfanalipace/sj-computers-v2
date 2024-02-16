@@ -36,7 +36,7 @@ const CategorySidebar = ({inDrawer}) => {
   const DataInDrawerToggler = (categoryNumber) => {
     // setDataInDrawer(!DataInDrawer)
     setDataInDrawer({
-      ...DataInDrawer,
+      // ...DataInDrawer,
       [categoryNumber]: !DataInDrawer[categoryNumber]
     });
   }
@@ -49,7 +49,7 @@ const CategorySidebar = ({inDrawer}) => {
     <Grid container width={"100%"} sx={{ overflowX: "hidden", overflowY: "none", borderRight: inDrawer == true ? "" : "0.5px solid #DDDDDD"}} >
 
         <Grid item xs={12} ml={inDrawer ? 0 : 2} borderBottom={inDrawer ? "1px solid #DDDDDD" : ""}>
-            <Typography onClick={() => DataInDrawerToggler(1)} p={inDrawer? 2 : 0} className={`${inDrawer ? "alignment-container" : ""}`} variant='body2' fontWeight={"bolder"} ml>Catagories {inDrawer ? <span className={`${inDrawer ? "align-to-end" : ""}`}><IconButton onClick={() => DataInDrawerToggler(1)}> <KeyboardArrowDownIcon/> </IconButton></span> : "" }</Typography>
+            <Typography onClick={() => DataInDrawerToggler(1)} p={inDrawer? 2 : 0} className={`${inDrawer ? "alignment-container" : ""}`} variant='body2' fontWeight={"bolder"} ml>Catagories {inDrawer ? <span className={`${inDrawer ? "align-to-end" : ""}`}><IconButton onClick={() => DataInDrawerToggler(1)}> {DataInDrawer[1] ? <KeyboardArrowUpIcon sx={{color: "orange"}} /> : <KeyboardArrowDownIcon />} </IconButton></span> : "" }</Typography>    
           {  (DataInDrawer[1] || !inDrawer ) && ( <>
           {computerCategories?.slice(0, visibleCategory)?.map((category, index) => (
             <>
@@ -71,7 +71,7 @@ const CategorySidebar = ({inDrawer}) => {
             </Grid>
 
             <Grid item xs={12} ml={inDrawer ? 0 : 2} my={1} borderBottom={inDrawer ? "1px solid #DDDDDD" : ""}>
-            <Typography onClick={() => DataInDrawerToggler(2)} p={inDrawer? 2 : 0} variant='body2' className={`${inDrawer ? "alignment-container" : ""}`} fontWeight={"bolder"}>Avg. Customer Review {inDrawer ? <span className={`${inDrawer ? "align-to-end" : ""}`}><IconButton> <KeyboardArrowDownIcon/> </IconButton></span> : "" }</Typography>
+            <Typography onClick={() => DataInDrawerToggler(2)} p={inDrawer? 2 : 0} variant='body2' className={`${inDrawer ? "alignment-container" : ""}`} fontWeight={"bolder"}>Avg. Customer Review {inDrawer ? <span className={`${inDrawer ? "align-to-end" : ""}`}><IconButton>{DataInDrawer[2] ? <KeyboardArrowUpIcon sx={{color: "orange"}} /> : <KeyboardArrowDownIcon />} </IconButton></span> : "" }</Typography>
             {(DataInDrawer[2] || !inDrawer )&& (
             <Box ml={1} py={1}>
             <Typography mb={.5} variant='body2' fontSize={"small"}><StarRatings starDimension='18px' starSpacing='0' rating={4} starRatedColor='orange'  />& Up</Typography>

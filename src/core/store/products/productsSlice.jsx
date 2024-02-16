@@ -12,6 +12,7 @@ const initialState = {
     apiError: false,
     isLoading: true,
     currentPage: 1,
+    filterTotal: 0,
 };
 
 const productSlice = createSlice({
@@ -60,6 +61,8 @@ const productSlice = createSlice({
         },
 
         FILTER_PRODUCTS: (state, action) => {
+            // debugger
+            state.filterTotal = action.payload.total
             if (state.currentPage === 1)
                 state.filtersProduct = [...action.payload.data];
             else
