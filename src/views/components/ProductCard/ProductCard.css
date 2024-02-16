@@ -154,7 +154,7 @@
 .product-image-grid.product-image {
     height: 190px;
     max-width: 100%;
-    background-color: #F3F9FF;
+    background-color: white !important;
     padding: 30px;
 }
 
