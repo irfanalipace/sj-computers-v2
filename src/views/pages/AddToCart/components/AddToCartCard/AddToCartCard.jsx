@@ -29,20 +29,16 @@ const AddToCartCard = ({ product }) => {
     const gettingProtectionPlan = totalItems?.find(
         (item) => item?.product?.asin == productId
     );
+    const isAuthenticated = useSelector(
+        (state) => state?.auth?.isAuthenticated
+    );
     const price = parseFloat(product?.price) || 0;
     const planPrice = parseFloat(product?.plan_price) || 0;
     const totalPrice = price + planPrice;
     const { before, after } = splitStringAtPeriod(totalPrice);
 
     return product ? (
-        <Grid
-            container
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-            // spacing={12}
-            mt={5}
-        >
+        <Grid container direction="row" justifyContent="center" mt={2}>
             <Grid
                 item
                 lg={gettingProtectionPlan?.plan?.durationInYears ? 6 : 5}
@@ -53,7 +49,7 @@ const AddToCartCard = ({ product }) => {
                 <Grid
                     container
                     direction="row"
-                    justifyContent="space-around"
+                    justifyContent="space-evenly"
                     alignItems="center"
                 >
                     <Grid item mt={3} lg={4} pl={5}>
@@ -78,7 +74,7 @@ const AddToCartCard = ({ product }) => {
                                     SJ Computer
                                     <br />
                                     <span style={{ color: "#318243" }}>
-                                        Protection
+                                        Warranty
                                     </span>
                                     <br />
                                     <br />
@@ -103,7 +99,7 @@ const AddToCartCard = ({ product }) => {
                     >
                         <CheckCircleRoundedIcon sx={{ color: "#318243" }} />
                         &ensp;<b style={{ fontWeight: 600 }}>Added to Cart</b>
-                        {!gettingProtectionPlan?.plan?.durationInYears && (
+                        {/* {!gettingProtectionPlan?.plan?.durationInYears && (
                             <h4
                                 style={{
                                     marginTop: "8px",
@@ -115,7 +111,7 @@ const AddToCartCard = ({ product }) => {
                                 Style:&nbsp;
                                 <span>27 ‘’ FHD FreeSync 100HZ</span>
                             </h4>
-                        )}
+                        )} */}
                     </Grid>
                 </Grid>
             </Grid>
@@ -125,17 +121,26 @@ const AddToCartCard = ({ product }) => {
                 justifyContent="space-evenly"
                 lg={gettingProtectionPlan?.plan?.durationInYears ? 3 : 5}
                 style={{ backgroundColor: "#fff" }}
-                pt={4}
-                pb={4}
                 mb={2}
             >
                 {!gettingProtectionPlan?.plan?.durationInYears && (
-                    <Grid item lg={6} mt={6}>
-                        <p style={{ fontSize: "11px" }}>
+                    <Grid
+                        container
+                        item
+                        justifyContent="center"
+                        alignItems="center"
+                        lg={6}
+                        mt={3}
+                    >
+                        <p
+                            style={{
+                                fontSize: "11px",
+                            }}
+                        >
                             <span
                                 style={{ color: "#318243", lineHeight: "16px" }}
                             >
-                                Your Order qualifies for FREE Shipping.
+                                Your order qualifies for FREE Shipping.
                             </span>
                             <br />
                             Choose this option at checkout.{" "}
@@ -146,8 +151,9 @@ const AddToCartCard = ({ product }) => {
                 <Grid
                     item
                     lg={!gettingProtectionPlan?.plan?.durationInYears ? 5 : 10}
+                    mb={!isAuthenticated ? 0 : 2}
                 >
-                    <p className="cart-total mb-4">
+                    <p className="cart-total mb-4 mt-4">
                         Cart Subtotal:&nbsp;
                         <sup style={{ fontSize: "10px" }}>$</sup>
                         <span style={{ fontSize: "20px" }}>{before}</span>
@@ -165,6 +171,27 @@ const AddToCartCard = ({ product }) => {
                     >
                         Go to Cart
                     </button>
+                    {!isAuthenticated && (
+                        <p
+                            style={{
+                                fontSize: gettingProtectionPlan?.plan
+                                    ?.durationInYears
+                                    ? "11px"
+                                    : "10px",
+                                marginTop: "10px",
+                                marginLeft: "14px",
+                                textAlign: "center",
+                            }}
+                        >
+                            For best experience{" "}
+                            <Link
+                                to="/login"
+                                style={{ textDecoration: "none" }}
+                            >
+                                sign in to your account
+                            </Link>
+                        </p>
+                    )}
                 </Grid>
             </Grid>
         </Grid>

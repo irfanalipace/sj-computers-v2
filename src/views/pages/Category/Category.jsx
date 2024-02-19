@@ -14,7 +14,7 @@ import CategorySidebar from "../../components/Catagory/CategorySidebar/CategoryS
 import CategoryParagraph from "./CategoryParagraph";
 import CategoryVideoAndSlider from "../../components/Catagory/CategoryVideoAndSlider";
 import MobileRecommand from "../../components/MobileCategory/MobileRecommand/MobileRecommand";
-import CategoryFilterbarMobile from "../../components/Catagory/CategoryFiterbarMobile/CategoryFilterbarMobile"
+import CategoryFilterbarMobile from "../../components/Catagory/CategoryFiterbarMobile/CategoryFilterbarMobile";
 
 function Category() {
     const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +28,7 @@ function Category() {
 
             <div className="d-sm-none">
                 <CategoryFilterbarMobile />
-            </div>    
+            </div>
             <div className="category-page-inner">
                 <div>
                     <Loader isLoading={false} />
@@ -41,12 +41,16 @@ function Category() {
                 )}
 
                 <CategoryVideoAndSlider />
-                
-                    {/* display flex for layout2 */}
-                <div style={{display: 'flex'}}>
+
+                {/* display flex for layout2 */}
+                <div style={{ display: "flex" }}>
                     {/* <div className={`sticky-filter-bar ${isOpen && "active"} d-none d-sm-block`}> */}
                     {/* for layout2 */}
-                    <div className={`item-1 layout2-filter-bar ${isOpen && "active"} d-none d-sm-block`}>
+                    <div
+                        className={`item-1 layout2-filter-bar ${
+                            isOpen && "active"
+                        } d-none d-sm-block`}
+                    >
                         {/* <div className="d-flex justify-content-between align-items-center heading">
                             <h3>Filters</h3>
                             <button
@@ -59,12 +63,12 @@ function Category() {
                         {/* <FilterBar /> */}
                         <CategorySidebar />
                     </div>
-                    <div className="item-2">    
+                    <div className="item-2">
                         <ProductsByCategory toggleFilter={toggleFilter} />
                     </div>
                 </div>
             </div>
-            
+
             <CategoryParagraph />
 
             <div className="d-sm-none">

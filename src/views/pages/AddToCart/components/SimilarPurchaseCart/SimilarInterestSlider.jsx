@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import "./SimilarPurchaseCart.css";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Navigation } from "swiper";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -13,17 +14,24 @@ import { Link } from "react-router-dom";
 import AddCartComponents from "../../../../components/Product/CheckOutCard/AddCartComponents";
 
 import StarRatings from "react-star-ratings";
+import { featureProductsApi } from "@api/products";
+
+SwiperCore.use([Navigation]);
 
 const SimilarInterestSlider = ({ products }) => {
     const orderEstimatedDelivery = useSelector(
         (state) => state.orders.orderEstimatedDelivery
     );
+
     const ProductDetails = ({ product }) => (
-        <div className="pb-3">
+        <div className="pb-3 slider-details">
             <div className="product-details">
                 <div className="dev-section-button-dev-card">
                     <Link to={`${new URL(product?.url).pathname}`}>
-                        <div className="product-name product-cart-name-mobile-screen">
+                        <div
+                            className="product-naame product-cart-name-mobile-screen"
+                            // style={{ width: "70%", margin: "0px auto" }}
+                        >
                             {product.name}
                         </div>
 
@@ -73,16 +81,19 @@ const SimilarInterestSlider = ({ products }) => {
                                 starDimension={"20px"}
                                 starSpacing={"0"}
                             />
-                            <span className="ms-2" style={{ color: "#1270c4" }}>
-                                {product?.total_review}
-                                {" Ratings"}
+                            <span
+                                className="ms-2"
+                                style={{ color: "#1270c4", fontSize: "12px" }}
+                            >
+                                ({product?.total_review})
                             </span>
                         </div>
                     </div>
                 </Link>
                 <div className="sj-banner-similar-item">
                     <p>
-                        SJ's <span style={{ color: "#E0BC00" }}>choice</span>
+                        &ensp;SJ's{" "}
+                        <span style={{ color: "#E0BC00" }}>choice</span>
                     </p>
                     <div className="for-styling"></div>
                     <div className="mt-1" style={{ fontSize: "14px" }}>
@@ -137,10 +148,11 @@ const SimilarInterestSlider = ({ products }) => {
                 style={{
                     background: "#fff",
                     marginLeft: "10px",
-                    marginTop: "10px",
+                    marginTop: "20px",
+                    marginBottom: "20px",
                 }}
             >
-                <div className="recommendation-inner">
+                <div className="product-image-class">
                     <Typography
                         variant="h5"
                         fontSize={16}
@@ -155,14 +167,18 @@ const SimilarInterestSlider = ({ products }) => {
                         interest in these
                     </Typography>
 
-                    <div className="slider-wrapper">
+                    <div
+                        className="slider-wrapper"
+                        style={{ margin: "10px 20px" }}
+                    >
                         {!products ? (
                             <LoaderComponent />
                         ) : (
                             <Swiper
                                 slidesPerView={5}
                                 className="my-unique-swiper"
-                                style={{ padding: "0 60px" }}
+                                style={{ padding: "0 30px" }}
+                                navigation
                                 breakpoints={{
                                     320: {
                                         slidesPerView: 2,
@@ -182,62 +198,46 @@ const SimilarInterestSlider = ({ products }) => {
                                         slidesPerView: 5,
                                     },
                                 }}
-                                navigation
                             >
-                                {products?.length > 0 ? (
-                                    products?.map((product) => (
-                                        <SwiperSlide key={"ps-" + product?.id}>
-                                            <div>
-                                                <div className={` product`}>
-                                                    <Link
-                                                        to={`${
-                                                            new URL(
-                                                                product?.url
-                                                            ).pathname
-                                                        }`}
+                                {products?.map((product) => (
+                                    <SwiperSlide key={"ps-" + product?.id}>
+                                        <div>
+                                            <div className={`prodduct`}>
+                                                <Link
+                                                    to={`${
+                                                        new URL(product?.url)
+                                                            .pathname
+                                                    }`}
+                                                >
+                                                    <div
+                                                        className={`product-image`}
                                                     >
-                                                        <div
-                                                            className={`product-image`}
-                                                        >
-                                                            <div className="image-wrapper">
-                                                                <LazyLoadImage
-                                                                    width={
-                                                                        "100%"
-                                                                    }
-                                                                    height={
-                                                                        "100%"
-                                                                    }
-                                                                    src={
-                                                                        product.image
-                                                                    }
-                                                                    alt={product?.name
-                                                                        ?.trim()
-                                                                        ?.split(
-                                                                            " "
-                                                                        )
-                                                                        ?.slice(
-                                                                            0,
-                                                                            9
-                                                                        )
-                                                                        ?.join(
-                                                                            " "
-                                                                        )}
-                                                                />
-                                                            </div>
+                                                        <div className="image-wrapper">
+                                                            <LazyLoadImage
+                                                                width={"100%"}
+                                                                height={"100%"}
+                                                                src={
+                                                                    product.image
+                                                                }
+                                                                alt={product?.name
+                                                                    ?.trim()
+                                                                    ?.split(" ")
+                                                                    ?.slice(
+                                                                        0,
+                                                                        9
+                                                                    )
+                                                                    ?.join(" ")}
+                                                            />
                                                         </div>
-                                                    </Link>
-                                                    <ProductDetails
-                                                        product={product}
-                                                    />
-                                                </div>
-                                            </div>{" "}
-                                        </SwiperSlide>
-                                    ))
-                                ) : (
-                                    <>
-                                        <LoaderComponent />
-                                    </>
-                                )}
+                                                    </div>
+                                                </Link>
+                                                <ProductDetails
+                                                    product={product}
+                                                />
+                                            </div>
+                                        </div>{" "}
+                                    </SwiperSlide>
+                                ))}
                             </Swiper>
                         )}
                     </div>

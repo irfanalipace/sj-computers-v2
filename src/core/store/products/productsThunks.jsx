@@ -30,7 +30,6 @@ export const fetchProducts = (page = 1, loadMore = false, per_page = 12) => {
     };
 };
 
-
 export const filterProducts = (filter, loadMore = false) => {
     return async (dispatch) => {
         try {

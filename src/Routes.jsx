@@ -15,7 +15,9 @@ const Emailsent = React.lazy(() => import("@pages/Auth/EmailSent"));
 const Product = React.lazy(() => import("@pages/Product/Product"));
 const ProductList = React.lazy(() => import("@pages/Product/ProductsBySearch"));
 const Category = React.lazy(() => import("@pages/Category/Category"));
-const CategoryProduct = React.lazy(() => import("@pages/Category/CategoryProduct"))
+const CategoryProduct = React.lazy(() =>
+    import("@pages/Category/CategoryProduct")
+);
 const Account = React.lazy(() => import("@pages/Account/Account"));
 const Profile = React.lazy(() => import("@pages/Account/Profile"));
 const Security = React.lazy(() => import("@pages/Account/Security"));
@@ -217,7 +219,7 @@ const Router = () => {
             ),
         },
         {
-            path: "/add-to-cart/:title/dp/:productId/:itemAdded",
+            path: "/cart/:title/dp/:productId/:itemAdded",
             element: (
                 <PageWrapper>
                     <AddToCart />
@@ -225,7 +227,7 @@ const Router = () => {
             ),
         },
         {
-            path: "/add-to-cart/:title/dp/:productId",
+            path: "/cart/:title/dp/:productId",
             element: (
                 <PageWrapper>
                     <AddToCart />
@@ -259,7 +261,7 @@ const Router = () => {
                 </PageWrapper>
             ),
         },
-        
+
         {
             path: "/:blogslug",
             element: (

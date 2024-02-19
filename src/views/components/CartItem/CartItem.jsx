@@ -152,11 +152,11 @@ const CartItem = ({ item }) => {
             <Grid
                 container
                 justifyContent="space-around"
-                style={{ width: "80%", margin: "0px auto" }}
-                mt={1}
+                // style={{ margin: "0px auto" }}
+                mt={2}
             >
-                <Grid item>
-                    <div style={{ width: "61px" }}>
+                <Grid item sx={{ width: "50%" }}>
+                    <div>
                         <QuantityInput
                             onChange={handleQuantity}
                             minQuantity={1}

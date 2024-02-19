@@ -2,6 +2,7 @@
     min-height: 100%;
     background-color: #fff;
     margin-left: 20px;
+    border-right: 5px solid #eee;
     /* position: absolute; */
     right: 0;
     z-index: 0;
