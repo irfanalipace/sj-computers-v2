@@ -177,24 +177,24 @@ const CategoriesHeader = () => {
 
         {categories.map((category, index) => (
 
-          // <Link key={category.id} to={`/category/${category.slug}`} style={{textDecoration: "none"}}>
-          //   <div className='item' > {category.name} </div>
-          // </Link>
-          <Grid item key={index} style={{textDecoration: "none"}}>
-                  <div className='item' >
+          <Link key={category.id} to={`/category/${category.slug}`} style={{textDecoration: "none"}}>
+            <div className='item' > {category.name} </div>
+          </Link>
+        //   <Grid item key={index} style={{textDecoration: "none"}}>
+        //           <div className='item' >
 
-                        <HtmlTooltip title={
-                            <>
-                            {category?.sub_categories?.map((subCategory, subIndex) => (
-                                <Link key={subIndex}  to={subCategory.url} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>{subCategory.name}</Typography></Link>
-                            ))}
-                        </>
-                    }>
-                         {category.name}<ExpandMoreIcon fontSize='small' /> 
-                        </HtmlTooltip>
+        //                 <HtmlTooltip title={
+        //                     <>
+        //                     {category?.sub_categories?.map((subCategory, subIndex) => (
+        //                         <Link key={subIndex}  to={subCategory.url} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>{subCategory.name}</Typography></Link>
+        //                     ))}
+        //                 </>
+        //             }>
+        //                  {category.name}<ExpandMoreIcon fontSize='small' /> 
+        //                 </HtmlTooltip>
 
-                    </div>  
-                </Grid>
+        //             </div>  
+        //         </Grid>
 
         ))
         }
