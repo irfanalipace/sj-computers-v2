@@ -26,6 +26,7 @@ const CategorySidebar = ({inDrawer}) => {
   const toggleSubCategoryVisibility = (index) => {
     // Toggle the visibility state of the specific Box at the given index
     setIsSubCategoryVisible((prevVisibility) => {
+      // const newVisibility = [];
       const newVisibility = [...prevVisibility];
       newVisibility[index] = !newVisibility[index];
       return newVisibility;
@@ -49,11 +50,11 @@ const CategorySidebar = ({inDrawer}) => {
     <Grid container width={"100%"} sx={{ overflowX: "hidden", overflowY: "none", borderRight: inDrawer == true ? "" : "0.5px solid #DDDDDD"}} >
 
         <Grid item xs={12} ml={inDrawer ? 0 : 2} borderBottom={inDrawer ? "1px solid #DDDDDD" : ""}>
-            <Typography onClick={() => DataInDrawerToggler(1)} p={inDrawer? 2 : 0} className={`${inDrawer ? "alignment-container" : ""}`} variant='body2' fontWeight={"bolder"} ml>Catagories {inDrawer ? <span className={`${inDrawer ? "align-to-end" : ""}`}><IconButton onClick={() => DataInDrawerToggler(1)}> {DataInDrawer[1] ? <KeyboardArrowUpIcon sx={{color: "orange"}} /> : <KeyboardArrowDownIcon />} </IconButton></span> : "" }</Typography>    
+            <Typography onClick={() => DataInDrawerToggler(1)} p={inDrawer? 2 : 0} className={`${inDrawer ? "alignment-container" : ""}`} variant='body2' fontWeight={"bolder"} ml>Categories {inDrawer ? <span className={`${inDrawer ? "align-to-end" : ""}`}><IconButton onClick={() => DataInDrawerToggler(1)}> {DataInDrawer[1] ? <KeyboardArrowUpIcon sx={{color: "orange"}} /> : <KeyboardArrowDownIcon />} </IconButton></span> : "" }</Typography>    
           {  (DataInDrawer[1] || !inDrawer ) && ( <>
           {computerCategories?.slice(0, visibleCategory)?.map((category, index) => (
             <>
-            <Typography ml={2} variant='body2'>{category.category}<IconButton size='small' onClick={() => toggleSubCategoryVisibility(index)}><KeyboardArrowDownIcon /></IconButton></Typography>
+            <Typography ml={2} variant='body2'>{category.category}<IconButton size='small' onClick={() => toggleSubCategoryVisibility(index)}>{isSubCategoryVisible[index] ? <KeyboardArrowUpIcon sx={{color: "orange"}} /> : <KeyboardArrowDownIcon />}</IconButton></Typography>
             {isSubCategoryVisible[index] && <Box ml={3}>
                 <Typography variant='body2'>Basic Monitors</Typography>
                 <Typography variant='body2'>4K visual monitors</Typography>
@@ -61,9 +62,9 @@ const CategorySidebar = ({inDrawer}) => {
             </>
             ))}
             {(visibleCategory + 1) > computerCategories.length ? (
-              <Typography variant='body1' color={"orange"}><IconButton size='small' onClick={showLess}><KeyboardArrowUpIcon  /></IconButton> See less categories</Typography>
+              <Typography variant='body1' sx={{cursor: 'pointer'}} onClick={showLess} color={"orange"}><IconButton size='small' onClick={showLess}><KeyboardArrowUpIcon  /></IconButton> See less categories</Typography>
             ) : (
-                <Typography variant='body1' color={"#52AC66"}><IconButton size='small' onClick={showMore}><KeyboardArrowDownIcon  /></IconButton> See More categories</Typography>
+                <Typography variant='body1' sx={{cursor: 'pointer'}} onClick={showMore} color={"#52AC66"}><IconButton size='small'><KeyboardArrowDownIcon  /></IconButton> See More categories</Typography>
             )
             }
             </>

@@ -191,6 +191,25 @@ const AllCategoriesHeader = () => {
 
                 <div className='category-item' key={category.id} style={{textDecoration: "none"}}>
                     <Typography variant='body1' fontSize={"small"} color={"#007185"} >
+                    {index == 0 ? "" :<span style={{margin: "0px 10px", color: "black"}}>|</span> }
+                        <Link to={`/category/${category.slug}`} key={category.id} 
+                            // onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave} 
+                            className='topbar-item'>{category.name} 
+                        {/* <ExpandMoreIcon fontSize='small' /> */}
+                        </Link>
+                    </Typography>
+                </div >
+            
+            ))}
+        </div>
+    </div>
+  )
+}
+
+export default AllCategoriesHeader
+
+{/* <div className='category-item' key={category.id} style={{textDecoration: "none"}}>
+                    <Typography variant='body1' fontSize={"small"} color={"#007185"} >
                     {index == 0 ? "" :<span style={{margin: "0px 5px", color: "black"}}>|</span> }
                     <HtmlTooltip title={
                         <>
@@ -206,12 +225,4 @@ const AllCategoriesHeader = () => {
                         </Link>
                     </HtmlTooltip>   
                     </Typography>
-                </div >
-            
-            ))}
-        </div>
-    </div>
-  )
-}
-
-export default AllCategoriesHeader
+                </div > */}
