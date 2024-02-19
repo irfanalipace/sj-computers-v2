@@ -69,7 +69,7 @@ const ProtectionPlanDrawer = ({
                         style={{ color: "#318243" }}
                     />
                     <p className="mt-4">
-                        3-Year Proection{" "}
+                        3-Year Warranty{" "}
                         <span style={{ color: "red" }}> $23.99</span>
                         <p
                             onClick={() => {
@@ -157,7 +157,7 @@ const ProtectionPlanDrawer = ({
                         style={{ color: "#318243" }}
                     />
                     <p className="mt-4">
-                        4-Year Proection{" "}
+                        4-Year Warranty {" "}
                         <span style={{ color: "red" }}> $32.99</span>
                         <p
                             onClick={() => {
