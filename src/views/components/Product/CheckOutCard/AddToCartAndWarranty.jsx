@@ -285,7 +285,7 @@ function AddToCartAndWarranty({ product }) {
                         drawerProps.redirectOnClose &&
                             cartClickHandler(
                                 null,
-                                `/add-to-cart/${params?.title}/dp/${params?.productId}`
+                                `/cart/${params?.title}/dp/${params?.productId}`
                             );
                         setDrawerProps({
                             open: false,
@@ -297,7 +297,7 @@ function AddToCartAndWarranty({ product }) {
                             cartClickHandler(
                                 _plan,
                                 screenSize > 780
-                                    ? `/add-to-cart/${params?.title}/dp/${params?.productId}`
+                                    ? `/cart/${params?.title}/dp/${params?.productId}`
                                     : "/cart"
                             );
                         }

@@ -9,6 +9,8 @@ import "../../../../components/Sliders/Slider.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import SwiperCore, { Navigation } from "swiper";
+
 import { Link } from "react-router-dom";
 import AddCartComponents from "../../../../components/Product/CheckOutCard/AddCartComponents";
 
@@ -17,19 +19,24 @@ import useAddToCart from "../../../../components/Product/CheckOutCard/useAddToCa
 import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 import { useParams } from "react-router-dom";
 
+SwiperCore.use([Navigation]);
+
 const SimilarPurchaseCart = ({ products }) => {
     const [addingStates, setAddingStates] = useState({});
+
     const ProductDetails = ({ product }) => {
         const cartClickHandler = useAddToCart(product, 1);
         const params = useParams();
         const isAdding = addingStates[product.id];
+        const cart = useSelector((state) => state.cart.cart);
+        const cartItem = cart.find((ci) => ci.id === product.id);
 
         return (
-            <div className="pb-3">
+            <div className="pb-3 slider-details">
                 <div className="product-details">
                     <div className="dev-section-button-dev-card">
                         <Link to={`${new URL(product?.url)?.pathname}`}>
-                            <div className="product-name product-cart-name-mobile-screen">
+                            <div className="product-naame product-cart-name-mobile-screen">
                                 {product.name}
                             </div>
 
@@ -139,38 +146,59 @@ const SimilarPurchaseCart = ({ products }) => {
                     </div>
                 )} */}
                 </div>
-                {isAdding ? (
-                    <p style={{ fontSize: "12px" }}>
-                        {" "}
-                        <DoneRoundedIcon
-                            sx={{ color: "green", fontSize: "20px" }}
-                        />{" "}
-                        Item Added Successfully
-                    </p>
-                ) : (
-                    <button
-                        className="cart-btn"
-                        onClick={(e) => {
-                            setAddingStates((prevState) => ({
-                                ...prevState,
-                                [product.id]: true,
-                            }));
+                {!cartItem?.id ? (
+                    <>
+                        {isAdding ? (
+                            <p
+                                style={{
+                                    fontSize: "12px",
+                                    marginLeft: "23px",
+                                    marginTop: "2.0rem",
+                                }}
+                            >
+                                {" "}
+                                <DoneRoundedIcon
+                                    sx={{ color: "green", fontSize: "20px" }}
+                                />{" "}
+                                Item Added Successfully
+                            </p>
+                        ) : (
+                            <button
+                                style={{ marginLeft: "23px" }}
+                                className="cart-btn"
+                                onClick={(e) => {
+                                    setAddingStates((prevState) => ({
+                                        ...prevState,
+                                        [product.id]: true,
+                                    }));
 
-                            cartClickHandler(
-                                e,
-                                `/add-to-cart/${params?.title}/dp/${
-                                    params?.productId
-                                }/${1}`
-                            ).then(() => {
-                                setAddingStates((prevState) => ({
-                                    ...prevState,
-                                    [product.id]: false,
-                                }));
-                            });
+                                    cartClickHandler(
+                                        e,
+                                        `/cart/${params?.title}/dp/${
+                                            params?.productId
+                                        }/${1}`
+                                    ).then(() => {
+                                        setAddingStates((prevState) => ({
+                                            ...prevState,
+                                            [product.id]: false,
+                                        }));
+                                    });
+                                }}
+                            >
+                                Add to Cart
+                            </button>
+                        )}
+                    </>
+                ) : (
+                    <p
+                        style={{
+                            fontSize: "12px",
+                            marginTop: "2.05rem",
+                            marginLeft: "25px",
                         }}
                     >
-                        Add to Cart
-                    </button>
+                        Item Already in cart
+                    </p>
                 )}
             </div>
         );
@@ -184,7 +212,7 @@ const SimilarPurchaseCart = ({ products }) => {
                     marginLeft: "10px",
                 }}
             >
-                <div className="recommendation-inner">
+                <div className="product-image-class">
                     <Typography
                         variant="h5"
                         fontSize={16}
@@ -207,9 +235,9 @@ const SimilarPurchaseCart = ({ products }) => {
                         ) : (
                             <Swiper
                                 slidesPerView={6}
-                                spaceBetween={20}
+                                // spaceBetween={25}
                                 className="my-unique-swiper"
-                                style={{ padding: "0 60px" }}
+                                style={{ padding: "0 40px" }}
                                 breakpoints={{
                                     // when window width is >= 320px
                                     320: {
@@ -225,19 +253,19 @@ const SimilarPurchaseCart = ({ products }) => {
                                     },
 
                                     768: {
-                                        slidesPerView: 5,
+                                        slidesPerView: 6,
                                     },
 
                                     1200: {
                                         // slidesPerView: 6,
-                                        slidesPerView: 5,
+                                        slidesPerView: 6,
                                     },
                                 }}
                                 navigation
                             >
                                 {products?.length > 0 ? (
                                     products?.map((product) => (
-                                        <SwiperSlide key={"ps-" + product?.id}>
+                                        <SwiperSlide key={"psr-" + product?.id}>
                                             <div
                                             // className="px-1"
                                             >

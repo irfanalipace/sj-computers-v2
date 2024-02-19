@@ -10,12 +10,26 @@ import CartSideBar from "./components/CartSidebar/CartSideBar";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
 import { useSelector } from "react-redux";
 import "./AddToCart.css";
+import { featureProductsApi } from "@api/products";
 
 const AddToCart = () => {
     const { productId, itemAdded } = useParams();
     const cart = useSelector((state) => state?.cart?.cart);
     const product = cart?.find((item) => item?.product?.asin == productId);
-    const { featuredProducts } = useSimilarData(product?.id);
+    // const { featuredProducts } = useSimilarData(product?.id);
+    const [featureProducts, setFeatureProduct] = useState([]);
+    const getFeaturedProduct = async () => {
+        try {
+            const resp = await featureProductsApi(12);
+            const selectedProducts = resp?.data;
+            setFeatureProduct(selectedProducts);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        getFeaturedProduct();
+    }, []);
 
     return !product ? (
         <div style={{ padding: "140px", textAlign: "center" }}>
@@ -24,12 +38,12 @@ const AddToCart = () => {
     ) : (
         <div style={{ backgroundColor: "#EAEDED" }}>
             <Grid container direction="row-reverse">
-                <Grid item lg={2}>
+                <Grid item lg={1.55}>
                     <CartSideBar />
                 </Grid>
                 <Grid
                     item
-                    lg={10}
+                    lg={10.45}
                     className="hidden-on-mobile hidden-on-tab cart-with-protection"
                 >
                     {product && !itemAdded ? (
@@ -38,12 +52,12 @@ const AddToCart = () => {
                         <></>
                     )}
                     {/* <SimilarItemsSlider products={similarProducts} /> */}
-                    <SimilarPurchaseCart products={featuredProducts} />
-                    <SimilarInterestSlider products={featuredProducts} />
+                    <SimilarPurchaseCart products={featureProducts} />
+                    <SimilarInterestSlider products={featureProducts} />
                 </Grid>
             </Grid>
             <div className="hidden-on-desktop">
-                <SimilarInterestSlider products={featuredProducts} />
+                <SimilarInterestSlider products={featureProducts} />
             </div>
         </div>
     );

@@ -7,6 +7,7 @@ import "./Sugesteditems.css";
 import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 import StarRatings from "react-star-ratings";
 import useAddToCart from "../../Product/CheckOutCard/useAddToCart";
+import { useSelector } from "react-redux";
 
 const SeggestedItems = ({ num }) => {
     const [products, setProducts] = useState([]);
@@ -26,10 +27,16 @@ const SeggestedItems = ({ num }) => {
     const ProductDetails = ({ product }) => {
         const cartClickHandler = useAddToCart(product, 1);
         const isAdding = addingStates[product.id];
+        const cart = useSelector((state) => state.cart.cart);
+        const cartItem = cart.find((ci) => ci.id === product.id);
+
         return (
-            <div>
+            <div key={product?.id}>
                 <div className="dev-section-button-dev-card">
-                    <Link style={{ color: "#007185", textDecoration: "none" }}>
+                    <Link
+                        to={`${new URL(product?.url).pathname}`}
+                        style={{ color: "#007185", textDecoration: "none" }}
+                    >
                         <div
                             className="suggested-items product-name product-cart-name-mobile-screen"
                             style={{ fontSize: "12px" }}
@@ -47,7 +54,10 @@ const SeggestedItems = ({ num }) => {
                 </div>
 
                 <div className="hide-on-mobile">
-                    <Link style={{ textDecoration: "none" }}>
+                    <Link
+                        to={`${new URL(product?.url).pathname}`}
+                        style={{ textDecoration: "none" }}
+                    >
                         {/* <div className="d-none d-sm-block product-rating"> */}
                         <StarRatings
                             rating={product?.rating}
@@ -73,43 +83,56 @@ const SeggestedItems = ({ num }) => {
                     ${product?.price?.toString().split(".")[0]}.
                     {product?.price?.toString().split(".")[1]}
                 </div>
-                {isAdding ? (
-                    <p style={{ fontSize: "12px" }}>
-                        {" "}
-                        <DoneRoundedIcon
-                            sx={{ color: "green", fontSize: "20px" }}
-                        />{" "}
-                        <span style={{ fontSize: "11px" }}>
-                            Item Added Successfully
-                        </span>
-                    </p>
-                ) : (
-                    <button
-                        className="suggested-item-btn hide-on-mobile"
-                        onClick={(e) => {
-                            setAddingStates((prevState) => ({
-                                ...prevState,
-                                [product.id]: true,
-                            }));
 
-                            cartClickHandler(e, "").then(() => {
-                                setAddingStates((prevState) => ({
-                                    ...prevState,
-                                    [product.id]: false,
-                                }));
-                            });
-                        }}
-                    >
-                        Add to cart
-                    </button>
-                )}
+                <>
+                    {isAdding ? (
+                        <p style={{ fontSize: "12px" }}>
+                            {" "}
+                            <DoneRoundedIcon
+                                sx={{ color: "green", fontSize: "20px" }}
+                            />{" "}
+                            <span style={{ fontSize: "11px" }}>
+                                Item Added Successfully
+                            </span>
+                        </p>
+                    ) : (
+                        <>
+                            {" "}
+                            {!cartItem?.id ? (
+                                <button
+                                    className="suggested-item-btn hide-on-mobile"
+                                    onClick={(e) => {
+                                        setAddingStates((prevState) => ({
+                                            ...prevState,
+                                            [product.id]: true,
+                                        }));
+
+                                        cartClickHandler(e, "").then(() => {
+                                            setAddingStates((prevState) => ({
+                                                ...prevState,
+                                                [product.id]: false,
+                                            }));
+                                        });
+                                    }}
+                                >
+                                    Add to cart
+                                </button>
+                            ) : (
+                                <p style={{ fontSize: "12px" }}>
+                                    Item Already in cart
+                                </p>
+                            )}{" "}
+                        </>
+                    )}
+                </>
             </div>
         );
     };
+
     return (
         <div>
-            {products?.map((item) => (
-                <div className="suggested-item-container">
+            {products?.map((item, index) => (
+                <div className="suggested-item-container" key={index}>
                     <div className="suggested-item-image">
                         <div>
                             <LazyLoadImage

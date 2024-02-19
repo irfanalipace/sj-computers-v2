@@ -18,7 +18,7 @@ function WarrantyBadge({ durationInYears, planPrice }) {
                     SJ Computer
                 </p>
                 <p className="protection-name-dev-protection-p text-start">
-                    Protection
+                    Warranty
                 </p>
 
                 <div className="protection-lables-warntity-durations-year ">

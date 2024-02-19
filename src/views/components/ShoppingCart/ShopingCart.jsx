@@ -185,7 +185,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                 <span
                                                     style={{ color: "#318243" }}
                                                 >
-                                                    Your Order qualifies for
+                                                    Your order qualifies for
                                                     FREE Shipping.
                                                 </span>{" "}
                                                 <br />

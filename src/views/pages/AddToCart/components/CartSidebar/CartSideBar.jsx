@@ -28,7 +28,7 @@ const CartSideBar = () => {
                 </usd>
                 <p className="hidden-on-mobile hidden-on-tab">
                     <span style={{ color: "green" }}>
-                        Your Order qualifies for FREE Shipping.
+                        Your order qualifies for FREE Shipping.
                     </span>{" "}
                     Choose this option at checkout. <br />
                     <Link>see details</Link>
@@ -39,7 +39,10 @@ const CartSideBar = () => {
                 >
                     Go to Cart
                 </button>
-                <button className="hidden-on-desktop proceed-cart-btn">
+                <button
+                    className="hidden-on-desktop proceed-cart-btn"
+                    onClick={() => navigate("/checkout")}
+                >
                     Proceed to checkout ({cartItems?.length} item){" "}
                 </button>
             </div>
