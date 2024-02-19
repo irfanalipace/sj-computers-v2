@@ -13,36 +13,162 @@ const AllCategoriesHeader = () => {
             id: 1,
             name: "Business Computers",
             slug: "business_computers",
+            sub_categories : [
+                {
+                    name: "Desktops",
+                    url: "/category/desktop",
+                },
+                {
+                    name: "Laptops",
+                    url: "/category/laptops",
+                },
+                {
+                    name: "Monitors",
+                    url: "/category/monitors",
+                },
+                {
+                    name: "Desktops",
+                    url: "/category/desktop",
+                },
+            ],
         },
         {
             id: 2,
             name: "Chromebook",
             slug: "chromebook",
+            sub_categories : [
+                {
+                    name: "Desktops",
+                    url: "/category/desktop",
+                },
+                {
+                    name: "Laptops",
+                    url: "/category/laptops",
+                },
+                {
+                    name: "Monitors",
+                    url: "/category/monitors",
+                },
+                {
+                    name: "Desktops",
+                    url: "/category/desktop",
+                },
+            ],
         },
         {
             id: 3,
             name: "Gaming Desktops",
             slug: "gaming_desktops",
+            sub_categories : [
+                {
+                    name: "Desktops",
+                    url: "/category/desktop",
+                },
+                {
+                    name: "Laptops",
+                    url: "/category/laptops",
+                },
+                {
+                    name: "Monitors",
+                    url: "/category/monitors",
+                },
+                {
+                    name: "Desktops",
+                    url: "/category/desktop",
+                },
+            ],
         },
         {
             id: 4,
             name: "Monitors",
             slug: "monitor",
+            sub_categories : [
+                {
+                    name: "Desktops",
+                    url: "/category/desktop",
+                },
+                {
+                    name: "Laptops",
+                    url: "/category/laptops",
+                },
+                {
+                    name: "Monitors",
+                    url: "/category/monitors",
+                },
+                {
+                    name: "Desktops",
+                    url: "/category/desktop",
+                },
+            ],
         },
         {
             id: 5,
             name: "Window 11",
             slug: "window_11",
+            sub_categories : [
+                {
+                    name: "Desktops",
+                    url: "/category/desktop",
+                },
+                {
+                    name: "Laptops",
+                    url: "/category/laptops",
+                },
+                {
+                    name: "Monitors",
+                    url: "/category/monitors",
+                },
+                {
+                    name: "Desktops",
+                    url: "/category/desktop",
+                },
+            ],
         },
         {
             id: 6,
             name: "SFF",
             slug: "sff",
+            sub_categories : [
+                {
+                    name: "Desktops",
+                    url: "/category/desktop",
+                },
+                {
+                    name: "Laptops",
+                    url: "/category/laptops",
+                },
+                {
+                    name: "Monitors",
+                    url: "/category/monitors",
+                },
+                {
+                    name: "Desktops",
+                    url: "/category/desktop",
+                },
+            ],
         },
         {
             id: 7,
             name: "Mini",
             slug: "mini",
+            sub_categories : [
+                {
+                    name: "Desktops",
+                    url: "/category/desktop",
+                },
+                {
+                    name: "Laptops",
+                    url: "/category/laptops",
+                },
+                {
+                    name: "Monitors",
+                    url: "/category/monitors",
+                },
+                {
+                    name: "Desktops",
+                    url: "/category/desktop",
+                },
+            ],
         },
     ];
 
@@ -68,10 +194,9 @@ const AllCategoriesHeader = () => {
                     {index == 0 ? "" :<span style={{margin: "0px 5px", color: "black"}}>|</span> }
                     <HtmlTooltip title={
                         <>
-                            <Link to={"/category/desktop"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>Desktops</Typography></Link>
-                            <Link to={"/category/monitors"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>Monitors</Typography></Link>
-                            <Link to={"/category/tower"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>Tower</Typography></Link>
-                            <Link to={"/category/laptops"} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>Laptops</Typography></Link>
+                            {category?.sub_categories?.map((subCategory, subIndex) => (
+                            <Link key={subIndex} to={subCategory.url} className='sub-category-item' ><Typography variant='body2' p={.5} fontSize={"small"}>{subCategory.name}</Typography></Link>
+                            ))}
                         </>
                     }>
                         <Link to={""} key={category.id} 
