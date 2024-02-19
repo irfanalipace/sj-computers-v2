@@ -16,10 +16,15 @@ const Home = () => {
                     
                 <BannerCategory />
                 <Suspense>
-                    <div className="products-grid-container">
-                        <h2>Products</h2>
-                        <ProductsHomePage />
-                    </div>
+                {/* {
+                        screenWidth < 576 && (
+                            <div className="products-grid-container">
+                            <h2>Products</h2>
+                            <ProductsHomePage />
+                        </div>
+                        )
+                    } */}
+                   
                     {
                         screenWidth > 576 && (
                             <Subscribe />
