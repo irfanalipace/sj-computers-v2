@@ -430,26 +430,27 @@ const ProductCardLayout2 = ({
                 className={`${
                     productView == "list" ? "product-image-link-list-view" : ""
                 }`}
-                style={{ width: productView == "grid" ? "100%" : "" }}
+                style={{ width: productView !== "list" ? "100%" : "" }}
                 // style={{width: productView == "list" ? "20%" : "100%", }}
             >
                 <div
                     className={` ${
-                        inGrid ? "product-image-grid" : ""
-                    } product-image`}
+                        inGrid ? "product-image-grid-layout2" : ""
+                    } product-image-layout2`}
                 >
                     {/* {inGrid && (
                     <div className="product-badge">
                         <div className="badge-text">Best Seller</div>
                     </div>
                 )} */}
-                    {inGrid && <div className="product-offer-label" style={{backgroundColor: product?.total_review > 0 ? "#52AC66" : "#1860A3", top: productView == "list" ? "-9px" : "" }}>{product?.total_review > 0 ? "Top Seller" : "New" }</div>}
+                    {/* {inGrid && <div className="product-offer-label" style={{backgroundColor: product?.total_review > 0 ? "#52AC66" : "#1860A3", top: productView == "list" ? "-9px" : "" }}>{product?.total_review > 0 ? "Top Seller" : "New" }</div>} */}
+                    {inGrid && <div className="product-offer-label" style={{backgroundColor: product?.total_review > 0 ? "#52AC66" : "#1860A3", top: productView == "list" ? "" : "" }}>{product?.total_review > 0 ? "Top Seller" : "New" }</div>}
 
-                    <div className="image-wrapper">
+                    <div className="image-wrapper-layout2">
                         <LazyLoadImage
-                            width={"100%"}
-                            // style={{maxHeight: "80%", maxWidth: '80%'}}
-                            height={"100%"}
+                            // width={"100%"}
+                            style={{maxHeight: "100%", maxWidth: '100%'}}
+                            // height={"100%"}
                             src={product.image}
                             alt={product?.name
                                 ?.trim()

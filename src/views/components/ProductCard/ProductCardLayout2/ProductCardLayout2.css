@@ -11,6 +11,16 @@
     /* width: 30px; */
     margin-left: 0px;
 }
+
+/* new class for layout2 */
+.product-image-layout2{
+    position: relative;
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .similar-items-heading {
     color: #0f1111;
     font-size: 14px;
@@ -132,7 +142,7 @@
 }
 .product-image {
     /* width: 150px; */
-    padding: 5px 0px 10px 0px;
+    /* padding: 5px 0px 10px 0px;
     height: 135px;
     text-align: center;
     margin-bottom: 10px;
@@ -140,7 +150,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    position: relative; */
 }
 .product-image1 {
     padding: 5px 0px 10px 0px;
@@ -151,12 +161,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.product-image-grid.product-image {
-    height: 190px;
-    max-width: 100%;
-    background-color: #F3F9FF;
-    padding: 0px;
 }
 
 .product-image-grid .product-badge {
@@ -189,18 +193,15 @@
     padding-left: 0;
 }
 
-.image-wrapper {
+.image-wrapper-layout2 {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 67%;
+    height: 75%;
 }
 .image-wrapper0 {
     width: 100%;
-}
-.product-image-grid.product-image img {
-    width: 70%;
-    /* max-width: 300px; */
-    max-height: 170px;
 }
 
 .product-details {
@@ -396,21 +397,6 @@ color:
 
 /* For Mobile Devices  */
 @media screen and (max-width: 575px) {
-    .product-image {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 61px 16px;
-        /* background: rgba(82, 172, 102, 0.4); */
-        border-radius: 5px 5px 0px 0px;
-        flex: none;
-        order: 0;
-        margin-bottom: 0;
-        flex-grow: 0;
-        /* border: 1px solid rgba(82, 172, 102, 0.4); */
-        border-bottom: none;
-    }
     .div-button-card-product {
         display: flex;
         justify-content: center;
@@ -562,16 +548,6 @@ color:
         flex-direction: column;
         /* align-items: center; */
         /* padding: 10px; */
-    }
-    .product-image-grid.product-image {
-        /* height: 0px; */
-        max-width: 100%;
-        padding: 0; 
-    }
-    .product-image-grid.product-image img {
-        /* width: 83%; */
-        /* max-width: 300px; */
-        max-height: 150px;
     }
     .dilvery-system-mobile-card-product {
         font-family: "Inter";

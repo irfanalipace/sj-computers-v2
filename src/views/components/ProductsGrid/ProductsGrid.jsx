@@ -20,7 +20,8 @@ export default function ProductsGrid({
     apiError,
     smallBtn = false,
     searchParams,
-    productView
+    productView,
+    inFilterProducts
 }) {
     const isShowMore = useSelector((state) => state.products.isShowMore);
 
@@ -31,7 +32,7 @@ export default function ProductsGrid({
                     // style={{height: "137vh", overflowX: "auto"}}
                 >
                     {products?.map((product, index) => (
-                        <Col xs={productView == "list" ? 12 : 6} md={productView == "list" ? 12 : 4} lg={productView == "list" ? 12 : 3} key={"pi-" + index}>
+                        <Col xs={productView == "list" ? 12 : 6} md={inFilterProducts ? (productView == "list" ? 12 : 4) : 3} lg={inFilterProducts ? (productView == "list" ? 12 : 3) : 2} key={"pi-" + index}>
                             {/* <Link to={`${new URL(product?.url || location.href).pathname}`}> */}
                             {/* <ProductCard
                                 product={product}
@@ -39,18 +40,18 @@ export default function ProductsGrid({
                                 searchParams={searchParams}
                                 productView={productView}
                             /> */}
-                            {/* <ProductCardLayout2
-                                product={product}
-                                inGrid={true}
-                                searchParams={searchParams}
-                                productView={productView}
-                            /> */}
-                            <ProductCardLayout3
+                            <ProductCardLayout2
                                 product={product}
                                 inGrid={true}
                                 searchParams={searchParams}
                                 productView={productView}
                             />
+                            {/* <ProductCardLayout3
+                                product={product}
+                                inGrid={true}
+                                searchParams={searchParams}
+                                productView={productView}
+                            /> */}
 
                             {/* </Link> */}
                         </Col>

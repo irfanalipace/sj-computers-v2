@@ -430,7 +430,7 @@ const ProductCardLayout3 = ({
                 className={`${
                     productView == "list" ? "product-image-link-list-view" : ""
                 }`}
-                style={{ width: productView == "grid" ? "100%" : "" , height: '180px'}}
+                style={{ width: productView !== "list" ? "100%" : "" , height: '180px'}}
                 // style={{width: productView == "list" ? "20%" : "100%", }}
             >
                 <div className="full-image">
