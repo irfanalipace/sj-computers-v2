@@ -124,14 +124,14 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
         <div className="filter-results">
             {products.length > 0 ? (
                 <>
-                    {category?.name && (
+                    {/* {category?.name && (
                         <div className="d-flex justify-content-space-between align-items-center heading">
-                            {/* <h3>
+                            <h3>
                                 Best{" "}
                                 <span className="text-capitalize">
                                     {category?.name}
                                 </span>
-                            </h3> */}
+                            </h3>
                             <button
                                 className="d-sm-none d-block bg-transparent border-0"
                                 onClick={toggleFilter}
@@ -139,15 +139,15 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                                 <FontAwesomeIcon icon={faFilter} />
                             </button>
                         </div>
-                    )}
+                    )} */}
                     <div className="product-grid-heading">Best {category?.name ? category?.name : "Monitors for Desktops"}</div>
                     {/* <p className="product-grid-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem.</p> */}
                     <div className="product-length-container">
                     {/* 1-{products?.length > filterTotal ? filterTotal : products.length } of over {filterTotal} results for <span style={{color: "#52AC66", margin: "0px 5px"}}> Monitors </span> */}
                     {filterTo ? 1 : 0}-{filterTo ? filterTo : 0} of over {filterTotal} results for <span style={{color: "#52AC66", margin: "0px 5px"}}> {category?.name ? category?.name : "Monitors"} </span>
                     <div className="buttons">
-                        <span className="view-button" onClick={productViewList}><IconButton style={{borderRadius: '3px' , padding: "3px 6px" , backgroundColor: productView == "list" ? "#318243" : "", color: productView == "list" ? "white" : "#318243"}}><FormatAlignLeftIcon fontSize="small" /> </IconButton></span>
-                        <span className="view-button" onClick={productViewGrid}><IconButton style={{borderRadius: '3px' , padding: "3px 6px" , backgroundColor: productView == "grid" ? "#318243" : "", color: productView == "grid" ? "white" : "#318243"}}><ViewModuleIcon fontSize="small" /> </IconButton></span>
+                        <span className="view-button" onClick={productViewList}><IconButton disableRipple style={{borderRadius: '3px' , padding: "3px 6px" , backgroundColor: productView == "list" ? "#318243" : "", color: productView == "list" ? "white" : "#318243"}}><FormatAlignLeftIcon fontSize="small" /> </IconButton></span>
+                        <span className="view-button" onClick={productViewGrid}><IconButton disableRipple style={{borderRadius: '3px' , padding: "3px 6px" , backgroundColor: productView == "grid" ? "#318243" : "", color: productView == "grid" ? "white" : "#318243"}}><ViewModuleIcon fontSize="small" /> </IconButton></span>
                     </div>    
                 </div>
                     {filtersProduct?.length == 0 ? <div style={{fontWeight: "500", padding: "15px"}}>Products Not Found</div> : <ProductsGrid

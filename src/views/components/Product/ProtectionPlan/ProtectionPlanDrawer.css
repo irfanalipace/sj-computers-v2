@@ -1,0 +1,9 @@
+.protection-plan-drawer{
+    width: 40vw;
+}
+
+@media screen and (max-width: 768px){
+    .protection-plan-drawer{
+        width: 100vw;
+    }
+}

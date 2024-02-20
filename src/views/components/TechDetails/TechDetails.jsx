@@ -279,30 +279,19 @@ const TechDetails = ({ product }) => {
                     <div className="additional-info-container">
                         <h1>Warranty & Support</h1>
                         <p>
-                            sjcomputer.com Return Policy: You may return any new
-                            computer purchased that is "dead on arrival,"
-                            arrives in damaged condition, or is still in
-                            unopened boxes, for a full refund within 30 days of
-                            purchase. sjcomputers.com reserves the right to test
-                            "dead on arrival" returns and impose a customer fee
-                            equal to 15 percent of the product sales price if
-                            the customer misrepresents the condition of the
-                            product. Any returned computer that is damaged
-                            through customer misuse, is missing parts, or is in
-                            unsellable condition due to customer tampering will
-                            result in the customer being charged a higher
-                            restocking fee based on the condition of the
-                            product. SJComputers.com will not accept returns of
-                            any desktop or notebook computer more than 30 days
-                            after you receive the shipment. New, used, and
-                            refurbished products purchased from Marketplace
-                            vendors are subject to the returns policy of the
-                            individual vendor.
+                            SJ Computer will provide normal one-year warranty coverage for laptops and desktops commencing on the purchase date, with a few exclusions listed on the product page. Laptop batteries, Apple goods, tablets, and all displays come with a limited 90-day warranty.  
                         </p>
                         <p>
-                            Manufacturer’s warranty can be requested from
-                            customer service. <Link>Click here </Link> to make a
-                            request to customer services.
+                            The SJ Computers Warranty includes all costs for parts and labor connected with in-house repair of damaged hardware. Accidental damage isn't covered. This warranty only covers consumers in the United States of America. Any damage resulting from the end user will invalidate the warranty.   
+                        </p>
+                        <p>
+                            We strongly advise you to keep the box and packing materials that came with the item in case you need to return it for warranty purposes. Computers delivered to SJ Computers with inadequate packing are considered possibly damaged and may limit future warranty coverage for that machine. REFURB.io does not offer compensation for unlawful third-party repairs.    
+                        </p>
+                        <p>
+                            Any parts or upgrades added by the client that were not included with the computer when purchased must be uninstalled before returning it to SJ Computers. If any illegal third-party parts are shipped back with the machine for warranty servicing, SJ Computers will not be liable for replacement or repair of them if they become lost, damaged, or malfunctioning.  
+                        </p>
+                        <p>
+                            SJ Computers assumes no responsibility for any user data on any machine returned for warranty servicing. If user data is destroyed, SJ Computers will not be held accountable in any manner. It is the user's obligation to create frequent backups of vital data. The SJ Computers Warranty will only cover machines bought for use by you and cannot be forwarded.   
                         </p>
                     </div>
                 </Grid>

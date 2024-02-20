@@ -95,16 +95,16 @@ const CategorySidebar = ({ inDrawer }) => {
                             ?.slice(0, visibleCategory)
                             ?.map((category, index) => (
                                 <>
-                                    <Typography ml={2} variant="body2">
+                                    <Typography
+                                        ml={inDrawer ? 4 : 2}
+                                        variant="body2"
+                                        sx={{ cursor: "pointer" }}
+                                        onClick={() =>
+                                            toggleSubCategoryVisibility(index)
+                                        }
+                                    >
                                         {category.category}
-                                        <IconButton
-                                            size="small"
-                                            onClick={() =>
-                                                toggleSubCategoryVisibility(
-                                                    index
-                                                )
-                                            }
-                                        >
+                                        <IconButton size="small">
                                             {isSubCategoryVisible[index] ? (
                                                 <KeyboardArrowUpIcon
                                                     sx={{ color: "orange" }}
@@ -115,13 +115,23 @@ const CategorySidebar = ({ inDrawer }) => {
                                         </IconButton>
                                     </Typography>
                                     {isSubCategoryVisible[index] && (
-                                        <Box ml={3}>
-                                            <Typography variant="body2">
-                                                Basic Monitors
-                                            </Typography>
-                                            <Typography variant="body2">
-                                                4K visual monitors
-                                            </Typography>
+                                        <Box ml={inDrawer ? 6 : 3}>
+                                            <Link className="sub-category-link">
+                                                <Typography
+                                                    variant="body2"
+                                                    py={0.3}
+                                                >
+                                                    Basic Monitors
+                                                </Typography>
+                                            </Link>
+                                            <Link className="sub-category-link">
+                                                <Typography
+                                                    variant="body2"
+                                                    py={0.3}
+                                                >
+                                                    4K visual monitors
+                                                </Typography>
+                                            </Link>
                                         </Box>
                                     )}
                                 </>
@@ -169,7 +179,7 @@ const CategorySidebar = ({ inDrawer }) => {
                     className={`${inDrawer ? "alignment-container" : ""}`}
                     fontWeight={"bolder"}
                 >
-                    Avg. Customer Review{" "}
+                    Customer Reviews{" "}
                     {inDrawer ? (
                         <span className={`${inDrawer ? "align-to-end" : ""}`}>
                             <IconButton>
@@ -187,7 +197,7 @@ const CategorySidebar = ({ inDrawer }) => {
                     )}
                 </Typography>
                 {(DataInDrawer[2] || !inDrawer) && (
-                    <Box ml={1} py={1}>
+                    <Box ml={inDrawer ? 4 : 2} py={1}>
                         <Typography mb={0.5} variant="body2" fontSize={"small"}>
                             <StarRatings
                                 starDimension="18px"

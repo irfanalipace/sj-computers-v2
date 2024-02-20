@@ -1,7 +1,17 @@
-.recommanditions-products-home-pages img {
+.recommanditions-products-home-pages {
     width: 95%;
     height: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 10px;
 }
+
+.recommanditions-products-home-pages img{
+    max-height: 100%;
+    max-width: 90%;
+}
+
 .dev-recommand {
     background: white;
     padding: 12px;

@@ -512,7 +512,7 @@ const FilterBarlayout2 = ({inDrawer, DataInDrawerToggler, DataInDrawer}) => {
 
                         {(DataInDrawer[index + 3] || !inDrawer )&& (
 
-                        <ul className="filter-values-list" style={{padding: inDrawer ? '0px 20px' : ""}}>
+                        <ul className="filter-values-list" style={{padding: inDrawer ? '0px 20px' : "" , marginLeft: inDrawer ? "16px": ""}}>
                             {Array.isArray(filters[category])
                                 ? renderedItems(options, category)
                                 : renderRangeSliders(category)}
