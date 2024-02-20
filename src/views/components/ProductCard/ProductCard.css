@@ -173,6 +173,8 @@
     background-color: #0f1111;
     width: 120px;
     color: white;
+    padding-right: 21px;
+    /* margin-left: 11px; */
 }
 .sj-banner-similar-item .for-styling {
     background-color: #fff;

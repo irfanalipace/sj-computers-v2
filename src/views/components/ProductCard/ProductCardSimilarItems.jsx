@@ -92,7 +92,7 @@ const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
                         </div>
                     </div>
                 </Link>
-                <div className="sj-banner-similar-item">
+                <div className="sj-banner-similar-item best-choice-item-products">
                     <p>
                         SJ's <span style={{ color: "#E0BC00" }}>choice</span>
                     </p>

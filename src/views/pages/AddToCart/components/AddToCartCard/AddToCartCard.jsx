@@ -143,7 +143,7 @@ const AddToCartCard = ({ product }) => {
                             <span
                                 style={{ color: "#318243", lineHeight: "16px" }}
                             >
-                                Your order qualifies for FREE Shipping.
+                                Your Order qualifies for FREE Shipping.
                             </span>
                             <br />
                             Choose this option at checkout.{" "}
