@@ -173,10 +173,11 @@
 }
 .sj-banner-similar-item p {
     padding-right: 10px;
-    padding: 5px;
+    /* padding-left: 10px; */
+    padding: 5px 10px;
     font-size: 12px;
     background-color: #0f1111;
-    width: 120px;
+    width: 100px;
     color: white;
 }
 .sj-banner-similar-item .for-styling {
