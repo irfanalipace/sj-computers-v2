@@ -146,60 +146,53 @@ const SimilarPurchaseCart = ({ products }) => {
                     </div>
                 )} */}
                 </div>
-                {!cartItem?.id ? (
-                    <>
-                        {isAdding ? (
-                            <p
-                                style={{
-                                    fontSize: "12px",
-                                    marginLeft: "23px",
-                                    marginTop: "2.0rem",
-                                }}
-                            >
-                                {" "}
-                                <DoneRoundedIcon
-                                    sx={{ color: "green", fontSize: "20px" }}
-                                />{" "}
-                                Item Added Successfully
-                            </p>
-                        ) : (
-                            <button
-                                style={{ marginLeft: "23px" }}
-                                className="cart-btn"
-                                onClick={(e) => {
-                                    setAddingStates((prevState) => ({
-                                        ...prevState,
-                                        [product.id]: true,
-                                    }));
 
-                                    cartClickHandler(
-                                        e,
-                                        `/cart/${params?.title}/dp/${
-                                            params?.productId
-                                        }/${1}`
-                                    ).then(() => {
-                                        setAddingStates((prevState) => ({
-                                            ...prevState,
-                                            [product.id]: false,
-                                        }));
-                                    });
-                                }}
-                            >
-                                Add to Cart
-                            </button>
-                        )}
-                    </>
-                ) : (
-                    <p
-                        style={{
-                            fontSize: "12px",
-                            marginTop: "2.05rem",
-                            marginLeft: "25px",
-                        }}
-                    >
-                        Item Already in cart
-                    </p>
-                )}
+                <>
+                    {isAdding ? (
+                        <p
+                            style={{
+                                fontSize: "12px",
+                                marginLeft: "23px",
+                                marginTop: "2.0rem",
+                            }}
+                        >
+                            {" "}
+                            <DoneRoundedIcon
+                                sx={{ color: "green", fontSize: "20px" }}
+                            />{" "}
+                            Item Added Successfully
+                        </p>
+                    ) : !cartItem?.id ? (
+                        <button
+                            style={{ marginLeft: "23px" }}
+                            className="cart-btn"
+                            onClick={(e) => {
+                                setAddingStates((prevState) => ({
+                                    ...prevState,
+                                    [product.id]: true,
+                                }));
+                                cartClickHandler(
+                                    null,
+                                    `/cart/${params?.title}/dp/${
+                                        params?.productId
+                                    }/${1}`
+                                );
+                            }}
+                        >
+                            Add to Cart
+                        </button>
+                    ) : (
+                        <p
+                            style={{
+                                fontSize: "12px",
+                                marginTop: "2.05rem",
+                                marginLeft: "25px",
+                            }}
+                        >
+                            Item Already in cart
+                        </p>
+                    )}
+                </>
             </div>
         );
     };

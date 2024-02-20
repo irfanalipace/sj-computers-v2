@@ -196,7 +196,7 @@ export const CartItem = memo(({ cartData }) => {
                                 </div>
                                 {cartData?.plan?.value && (
                                     <div
-                                        className="row"
+                                        className="row hidden-on-mobile"
                                         style={{
                                             width: "350px",
                                             // border: "1px solid #000",

@@ -107,12 +107,7 @@ const SeggestedItems = ({ num }) => {
                                             [product.id]: true,
                                         }));
 
-                                        cartClickHandler(e, "").then(() => {
-                                            setAddingStates((prevState) => ({
-                                                ...prevState,
-                                                [product.id]: false,
-                                            }));
-                                        });
+                                        cartClickHandler(null, "");
                                     }}
                                 >
                                     Add to cart

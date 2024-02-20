@@ -16,7 +16,13 @@ function AddToCartAndWarranty({ product }) {
     const [plan, setOpenPlan] = useState({});
     const [quantity, setQuantity] = useState(1);
     const [drawerProps, setDrawerProps] = useState({});
-    const screenSize = window.innerWidth;
+    let screenSize = window.innerWidth;
+    function updateScreenSize() {
+        screenSize = window.innerWidth;
+        console.log("Screen size updated:", screenSize);
+    }
+    window.addEventListener("resize", updateScreenSize);
+
     const [loading, setLoading] = useState(false);
     const productAddingToCard = useSelector(
         (state) => state.products.isLoading
@@ -24,7 +30,7 @@ function AddToCartAndWarranty({ product }) {
     const [type, setType] = useState("");
     const cartClickHandler = useAddToCart(product, quantity);
     const params = useParams();
-    console.log("screen size", screenSize);
+
     useEffect(() => {
         if (type === "buynow") {
             cartClickHandler(product, quantity, type);
