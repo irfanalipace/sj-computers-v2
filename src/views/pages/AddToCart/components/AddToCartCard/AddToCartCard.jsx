@@ -96,10 +96,13 @@ const AddToCartCard = ({ product }) => {
                         lg={
                             gettingProtectionPlan?.plan?.durationInYears ? 4 : 6
                         }
+                        container
+                        justifyContent="flex-sart"
+                        alignItems="center"
                     >
                         <CheckCircleRoundedIcon sx={{ color: "#318243" }} />
                         &ensp;<b style={{ fontWeight: 600 }}>Added to Cart</b>
-                        {/* {!gettingProtectionPlan?.plan?.durationInYears && (
+                        {!gettingProtectionPlan?.plan?.durationInYears && (
                             <h4
                                 style={{
                                     marginTop: "8px",
@@ -111,7 +114,7 @@ const AddToCartCard = ({ product }) => {
                                 Style:&nbsp;
                                 <span>27 ‘’ FHD FreeSync 100HZ</span>
                             </h4>
-                        )} */}
+                        )}
                     </Grid>
                 </Grid>
             </Grid>
