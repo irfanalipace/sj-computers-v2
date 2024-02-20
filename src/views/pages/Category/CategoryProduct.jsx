@@ -38,17 +38,6 @@ const CategoryProducts = () => {
                 <CategorySidebar />
             </Grid>
 
-            <Grid
-                item
-                sm={3}
-                lg={2}
-                mt={2}
-                py={2}
-                className="d-none d-sm-block"
-            >
-                <CategorySidebar />
-            </Grid>
-
             {/* <Grid item md={10}>
           <ProductsByCategory inCategoriesPage={true} />
       </Grid> */}

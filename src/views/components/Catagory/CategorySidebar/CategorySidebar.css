@@ -9,3 +9,13 @@
     /* float: right; */
     /* background-color: aqua; */
 }
+
+.sub-category-link{
+    text-decoration: none;
+    color: black;
+}
+
+.sub-category-link:hover{
+    color: orange;
+    text-decoration: underline;
+}

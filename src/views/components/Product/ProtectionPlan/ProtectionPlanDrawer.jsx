@@ -10,6 +10,8 @@ import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { PLAN_ENUM } from "../../../../core/utils/constants";
 
+import "./ProtectionPlanDrawer.css"
+
 const ProtectionPlanDrawer = ({
     plan = {},
     handleAddingProtec,
@@ -25,7 +27,7 @@ const ProtectionPlanDrawer = ({
     }
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div style={{ padding: "20px" }} className="protection-plan-drawer">
             <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <h1 className="heading-protection-plan mb-3">
                     Add to your order
@@ -40,18 +42,16 @@ const ProtectionPlanDrawer = ({
             <div className="info mb-3">
                 <img src={bulletpoint1} />
                 <p>
-                    Coverage for accidental damage including drops, spills, and
-                    broken parts, as <br />
-                    well as breakdowns (plans vary)
+                Our warranty covers accidental damage (including broken parts, drops, spills, breakdowns).
                 </p>
             </div>
             <div className="info mb-3">
                 <img src={bulletpoint2} />
-                <p>24/7 support when you need it.</p>
+                <p>Please send us detailed information about the order number, date of purchase, shipping address, and the product purchased.  </p>
             </div>
             <div className="info mb-3">
                 <img src={bulletpoint3} />
-                <p>Quick, easy, and frustration-free claims.</p>
+                <p>We would like to assess the problem you have experienced so that we can proceed with a solution accordingly.</p>
             </div>
             <div className="info">
                 <p>Cover This Product</p>

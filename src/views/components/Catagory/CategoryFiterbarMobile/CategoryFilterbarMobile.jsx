@@ -19,16 +19,13 @@ const CategoryFilterbarMobile = () => {
                 {" "}
                 Filters <ExpandMoreIcon />
             </div>
-            <Drawer anchor="bottom" open={open} onClose={toggleDrawer(false)}>
-                <div style={{ position: "relative", padding: "20px" }}>
-                    <IconButton
-                        onClick={toggleDrawer(false)}
-                        sx={{ position: "absolute", top: 0, right: 0 }}
-                    >
-                        <CloseIcon />
-                    </IconButton>
+            <Drawer className="mobile-filterbar-drawer" anchor="bottom" open={open} onClose={toggleDrawer(false)}>
+                <div>
+                    <div className="button-div">
+                        <Button sx={{color: "#318243"}} onClick={toggleDrawer(false)}>Close</Button>
+                    </div>
                     <div style={{ maxHeight: "60vh" }}>
-                        <CategorySidebar />
+                        <CategorySidebar inDrawer={true} />
                     </div>
                 </div>
             </Drawer>

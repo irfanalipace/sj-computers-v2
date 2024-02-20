@@ -10,52 +10,26 @@ const CategoryParagraph = () => {
                     fontWeight={"bolder"}
                     color={"#E87E24"}
                 >
-                    Welcome to the Office Products & Office Supplies Store at
-                    Sjcomputers.com
+                    About SJ Computers
                 </Typography>
             </Grid>
             <Grid item xs={12}>
-                Welcome to the Office Products & Office Supplies Store at
-                Sjcomputers.com
+                {/* Welcome to the Office Products & Office Supplies Store at Sjcomputers.com */}
                 <Typography variant="body2">
-                    Shoping for{" "}
+                    {/* Shoping for{" "} */}
                     <span style={{ fontWeight: "500" }}>
-                        your office products & office supplies from SJ Computers
-                        Refurbished is your destination for refurbished
-                        desktops, laptops, and accessories. All our products are
-                        backed by SJ Computers Guerentee{" "}
+                        Established in 2012, SJ Computers is born of a deep-rooted passion for technology and a commitment to sustainable practices. We are a team of dedicated professionals united by the belief that powerful computing solutions should be accessible to all.  
                     </span>
                 </Typography>
             </Grid>
             <Grid item xs={12}>
                 <Typography variant="body2">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Repellat, quo. Et, ratione nemo. Facilis rerum ullam quis
-                    repudiandae voluptatem beatae repellendus libero nihil vel.
-                    Similique sequi maxime accusamus vel, amet vitae neque,
-                    accusantium nostrum voluptatum magni eum animi tempore
-                    aliquam suscipit numquam. Aut tempora dicta eligendi, ullam
-                    exercitationem officia possimus, sed nisi accusamus tenetur
-                    dolore at minima perferendis aliquam incidunt ratione enim
-                    atque voluptates fugiat voluptate ipsa facilis. Repellendus,
-                    voluptate, doloremque, quae ipsa autem possimus quas atque
-                    quia sed similique repudiandae commodi ad incidunt.
+                    Our core mission is to give new life to used or pre-owned computers, primarily from popular brands such as Dell, HP, and Lenovo. Through a careful multi-stage refurbishment process, all laptops, desktops and accessories go thorough inspection, cleaning, and software upgrades.  
                 </Typography>
             </Grid>
             <Grid item xs={12}>
                 <Typography variant="body2">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Consequuntur tempore cupiditate corporis, iure earum
-                    inventore voluptas ratione laboriosam quibusdam quam impedit
-                    magni repellat, incidunt error distinctio! Veniam voluptatem
-                    sed deleniti excepturi, labore inventore soluta incidunt ad
-                    nesciunt neque dolor reiciendis ipsum, quo sit accusamus id
-                    iusto minima explicabo autem. Fugit deleniti nemo veritatis
-                    pariatur odio molestias asperiores perferendis
-                    exercitationem facilis itaque possimus, cumque animi unde ad
-                    omnis minima non saepe natus nihil consequuntur, quia
-                    dolorem, id doloremque. Accusantium impedit quos doloremque
-                    repellat labore{" "}
+                    Our professionals ensure optimal performance and functionality at each step of the way. By choosing SJ Computers, you gain access to all the features of the leading brands, but at a significantly reduced cost.  
                 </Typography>
             </Grid>
         </Grid>
