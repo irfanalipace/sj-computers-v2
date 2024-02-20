@@ -38,7 +38,7 @@
     -1px 0 0 white;
 }
 
-.banner-slider-section .swiper-button-border{
+.swiper-button-border{
     border: 1.5px solid #002549;
     box-shadow: 0 0 0px 1.5px white; 
     border-radius: 2px;
