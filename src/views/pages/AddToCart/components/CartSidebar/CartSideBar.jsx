@@ -27,7 +27,7 @@ const CartSideBar = () => {
                     ${totalCart}
                 </usd>
                 <p className="hidden-on-mobile hidden-on-tab">
-                    HEAD<span style={{ color: "green", lineHeight:'12px' }}>
+                    <span style={{ color: "green", lineHeight:'12px' }}>
                     Your order qualifies for FREE SHIPPING.
                     </span>{" "}
                     Choose this option at checkout. <br />
