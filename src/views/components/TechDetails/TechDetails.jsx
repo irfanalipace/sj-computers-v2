@@ -279,19 +279,49 @@ const TechDetails = ({ product }) => {
                     <div className="additional-info-container">
                         <h1>Warranty & Support</h1>
                         <p>
-                            SJ Computer will provide normal one-year warranty coverage for laptops and desktops commencing on the purchase date, with a few exclusions listed on the product page. Laptop batteries, Apple goods, tablets, and all displays come with a limited 90-day warranty.  
+                            SJ Computer offers a standard one-year warranty for
+                            both laptops and desktops, beginning from the date
+                            of purchase, subject to certain exclusions outlined
+                            on the product page. Additionally, laptop batteries,
+                            Apple products, tablets, and displays are covered by
+                            a limited 90-day warranty.
                         </p>
                         <p>
-                            The SJ Computers Warranty includes all costs for parts and labor connected with in-house repair of damaged hardware. Accidental damage isn't covered. This warranty only covers consumers in the United States of America. Any damage resulting from the end user will invalidate the warranty.   
+                            Our warranty encompasses all expenses related to
+                            parts and labor for in-house repairs of hardware
+                            damage. However, it is important to note that
+                            accidental damage is not covered. This warranty is
+                            applicable only to consumers within the United
+                            States of America, and any damage caused by the end
+                            user will void the warranty.
                         </p>
                         <p>
-                            We strongly advise you to keep the box and packing materials that came with the item in case you need to return it for warranty purposes. Computers delivered to SJ Computers with inadequate packing are considered possibly damaged and may limit future warranty coverage for that machine. REFURB.io does not offer compensation for unlawful third-party repairs.    
+                            We strongly recommend retaining the original box and
+                            packing materials for potential warranty returns.
+                            Computers returned to SJ Computers without proper
+                            packaging may be considered potentially damaged,
+                            potentially impacting future warranty coverage. SJ
+                            Computers does not provide compensation for
+                            unauthorized third-party repairs.
                         </p>
                         <p>
-                            Any parts or upgrades added by the client that were not included with the computer when purchased must be uninstalled before returning it to SJ Computers. If any illegal third-party parts are shipped back with the machine for warranty servicing, SJ Computers will not be liable for replacement or repair of them if they become lost, damaged, or malfunctioning.  
+                            Clients are advised to uninstall any additional
+                            parts or upgrades not included with the original
+                            purchase before returning the computer to SJ
+                            Computers. SJ Computers will not be responsible for
+                            the replacement or repair of any illegal third-party
+                            parts shipped with the machine for warranty service
+                            if they are lost, damaged, or malfunctioning.
                         </p>
                         <p>
-                            SJ Computers assumes no responsibility for any user data on any machine returned for warranty servicing. If user data is destroyed, SJ Computers will not be held accountable in any manner. It is the user's obligation to create frequent backups of vital data. The SJ Computers Warranty will only cover machines bought for use by you and cannot be forwarded.   
+                            It's important to note that SJ Computers assumes no
+                            responsibility for user data on machines returned
+                            for warranty servicing. In the event of data
+                            destruction, SJ Computers cannot be held
+                            accountable. Users are encouraged to regularly back
+                            up essential data. The SJ Computers Warranty
+                            exclusively applies to machines purchased for
+                            personal use and is non-transferable.
                         </p>
                     </div>
                 </Grid>

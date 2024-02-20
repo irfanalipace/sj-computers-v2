@@ -9,6 +9,7 @@ import StarRatings from "react-star-ratings";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { PLAN_ENUM } from "../../../../core/utils/constants";
+import { Link } from "react-router-dom";
 
 import "./ProtectionPlanDrawer.css"
 
@@ -42,16 +43,16 @@ const ProtectionPlanDrawer = ({
             <div className="info mb-3">
                 <img src={bulletpoint1} />
                 <p>
-                Our warranty covers accidental damage (including broken parts, drops, spills, breakdowns).
+                Full coverage for refurb-specific malfunctions.
                 </p>
             </div>
             <div className="info mb-3">
                 <img src={bulletpoint2} />
-                <p>Please send us detailed information about the order number, date of purchase, shipping address, and the product purchased.  </p>
+                <p>24/7 immediate support.</p>
             </div>
             <div className="info mb-3">
                 <img src={bulletpoint3} />
-                <p>We would like to assess the problem you have experienced so that we can proceed with a solution accordingly.</p>
+                <p>Simple, quick claim process.</p>
             </div>
             <div className="info">
                 <p>Cover This Product</p>
@@ -69,7 +70,7 @@ const ProtectionPlanDrawer = ({
                         style={{ color: "#318243" }}
                     />
                     <p className="mt-4">
-                        3-Year Warranty{" "}
+                    2-Year Extended Warranty {" "}
                         <span style={{ color: "red" }}> $23.99</span>
                         <p
                             onClick={() => {
@@ -105,44 +106,27 @@ const ProtectionPlanDrawer = ({
                             />
                         </div>
                         <p className="details-of-protection">
-                            NO ADDITIONAL COST: You pay $0 for repairs – parts,
-                            labor and <br />
-                            shipping included. <br />
-                            COVERAGE: Plan starts on the date of purchase.
-                            Malfunctions covered <br /> after the manufacturer's
-                            warranty. Power surges covered from day <br /> one.{" "}
-                            <br />
-                            EASY CLAIMS PROCESS: File a claim anytime online at{" "}
-                            <br />
-                            https://sjcomputers.us or by phone. Most claims
-                            approved within <br />
-                            minutes. If we can’t repair it, we’ll send you an
-                            SJComputers.com Gift Card <br /> for the purchase
-                            price of your covered product or replace it. <br />
-                            EXPERT TECH HELP: Real experts are available 24/7 to
-                            help with set- <br />
-                            up, connectivity issues, troubleshooting and much
-                            more. <br />
-                            TERMS & DETAILS: More information about this
-                            warranty plan is <br />
-                            available within the “Product guides and documents”
-                            section. Simply <br /> click “User Guide” for more
-                            info. Asurion will also email your plan <br />
-                            confirmation with Terms & Conditions to the address
-                            associated with <br /> your SJComputers account
-                            within 24 hours of purchase (if you do not see{" "}
-                            <br />
-                            this email, please check your spam folder). Contact
-                            us if you cannot <br />
-                            locate your plan confirmation and Terms & Conditions
-                            via email at <br />
-                            cs@sjcomputersmn.com.
-                            <br />
+                        NO ADDITIONAL COST: You pay $0 for repairs – parts, labor and shipping included.   <br />
+                        COVERAGE: Plan starts on the date of purchase. Malfunctions covered after the manufacturer's warranty. Power surges covered from day one.   <br /> 
+                        EASY CLAIMS PROCESS: File a claim anytime online at <Link>www.cs@sjcomputersmn.com</Link> or by phone at 952-452-8884. Most claims are approved within minutes.  <br />
+                        EXPERT TECH HELP: Real experts are available 24/7 to help with set-up, connectivity issues, troubleshooting and much more.  <br />
+                        TERMS & DETAILS: SJ Computers will also email your plan confirmation with Terms & Conditions to the address associated with your SJ Computers account within 24 hours of purchase (if you do not see this email, please check your spam folder). Contact us if you cannot locate your plan confirmation and Terms & Conditions via email at <Link>cs@sjcomputersmn.com</Link> <br />
                             More info :{" "}
                             <small style={{ color: "#1270c4" }}>
-                                3-Year Warranty
+                                2-Year Warranty
                             </small>
                         </p>
+                        <h6 style={{color: "#3bc4f1"}}>SJ Computers covers the following malfunctions in its products</h6>
+                        <ul>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Battery Life Issues: </span> Because the battery is not new, it may not keep a charge as well as a fresh one, resulting in shorter use durations between charges. </li>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Hard Drive Failures: </span> Refurbished machines may still have original hard drives, which may be nearing the end of their lives and hence more likely to fail.  </li>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Overheating: </span> Because of prior usage, the cooling system (fans, heat sinks) may be less effective, leading the computer to overheat more frequently.   </li>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Cosmetic flaws: </span> While not a defect, refurbished computers might display more scars or wear and tear than new models.   </li>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Keyboard or Touchpad Issues: </span>  Previous use might cause less reactive keys or touchpad difficulties.    </li>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Port malfunctions: </span>  HDMI, USB, and various other ports could have loose connections or damages from past use, resulting in connectivity difficulties.    </li>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Display Issues: </span>   Screen difficulties, including dead pixels or backlight issues, are prevalent, particularly if the display was not changed throughout the refurbishing process.    </li>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Software Stability: </span>  There may be outstanding software issues or obsolete drivers that were not entirely resolved throughout the refurbishing process.    </li>
+                        </ul>
                     </div>
                 )}
             </div>
@@ -157,7 +141,7 @@ const ProtectionPlanDrawer = ({
                         style={{ color: "#318243" }}
                     />
                     <p className="mt-4">
-                        4-Year Warranty {" "}
+                    3-Year Extended Warranty  {" "}
                         <span style={{ color: "red" }}> $32.99</span>
                         <p
                             onClick={() => {
@@ -193,44 +177,27 @@ const ProtectionPlanDrawer = ({
                             />
                         </div>
                         <p className="details-of-protection">
-                            NO ADDITIONAL COST: You pay $0 for repairs – parts,
-                            labor and <br />
-                            shipping included. <br />
-                            COVERAGE: Plan starts on the date of purchase.
-                            Malfunctions covered <br /> after the manufacturer's
-                            warranty. Power surges covered from day <br /> one.{" "}
-                            <br />
-                            EASY CLAIMS PROCESS: File a claim anytime online at{" "}
-                            <br />
-                            https://sjcomputers.us or by phone. Most claims
-                            approved within <br />
-                            minutes. If we can’t repair it, we’ll send you an
-                            SJComputers.com Gift Card <br /> for the purchase
-                            price of your covered product or replace it. <br />
-                            EXPERT TECH HELP: Real experts are available 24/7 to
-                            help with set- <br />
-                            up, connectivity issues, troubleshooting and much
-                            more. <br />
-                            TERMS & DETAILS: More information about this
-                            warranty plan is <br />
-                            available within the “Product guides and documents”
-                            section. Simply <br /> click “User Guide” for more
-                            info. Asurion will also email your plan <br />
-                            confirmation with Terms & Conditions to the address
-                            associated with <br /> your SJComputers account
-                            within 24 hours of purchase (if you do not see{" "}
-                            <br />
-                            this email, please check your spam folder). Contact
-                            us if you cannot <br />
-                            locate your plan confirmation and Terms & Conditions
-                            via email at <br />
-                            cs@sjcomputersmn.com.
-                            <br />
+                        NO ADDITIONAL COST: You pay $0 for repairs – parts, labor and shipping included.   <br />
+                        COVERAGE: Plan starts on the date of purchase. Malfunctions covered after the manufacturer's warranty. Power surges covered from day one.   <br /> 
+                        EASY CLAIMS PROCESS: File a claim anytime online at <Link>www.cs@sjcomputersmn.com</Link> or by phone at 952-452-8884. Most claims are approved within minutes.  <br />
+                        EXPERT TECH HELP: Real experts are available 24/7 to help with set-up, connectivity issues, troubleshooting and much more.  <br />
+                        TERMS & DETAILS: SJ Computers will also email your plan confirmation with Terms & Conditions to the address associated with your SJ Computers account within 24 hours of purchase (if you do not see this email, please check your spam folder). Contact us if you cannot locate your plan confirmation and Terms & Conditions via email at <Link>cs@sjcomputersmn.com</Link> <br />
                             More info :{" "}
                             <small style={{ color: "#1270c4" }}>
-                                4-Year Warranty
+                                3-Year Warranty
                             </small>
                         </p>
+                        <h6 style={{color: "#3bc4f1"}}>SJ Computers covers the following malfunctions in its products</h6>
+                        <ul>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Battery Life Issues: </span> Because the battery is not new, it may not keep a charge as well as a fresh one, resulting in shorter use durations between charges. </li>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Hard Drive Failures: </span> Refurbished machines may still have original hard drives, which may be nearing the end of their lives and hence more likely to fail.  </li>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Overheating: </span> Because of prior usage, the cooling system (fans, heat sinks) may be less effective, leading the computer to overheat more frequently.   </li>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Cosmetic flaws: </span> While not a defect, refurbished computers might display more scars or wear and tear than new models.   </li>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Keyboard or Touchpad Issues: </span>  Previous use might cause less reactive keys or touchpad difficulties.    </li>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Port malfunctions: </span>  HDMI, USB, and various other ports could have loose connections or damages from past use, resulting in connectivity difficulties.    </li>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Display Issues: </span>   Screen difficulties, including dead pixels or backlight issues, are prevalent, particularly if the display was not changed throughout the refurbishing process.    </li>
+                            <li style={{fontSize: "small", padding: "10px 2px"}}><span style={{fontWeight: 500}}>Software Stability: </span>  There may be outstanding software issues or obsolete drivers that were not entirely resolved throughout the refurbishing process.    </li>
+                        </ul>
                     </div>
                 )}
             </div>

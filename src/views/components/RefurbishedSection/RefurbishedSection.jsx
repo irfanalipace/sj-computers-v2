@@ -28,7 +28,7 @@ function RefurbishedSection() {
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12}>
                 <Typography variant="body2">
-                SJ Computers is your destination for refurbished desktops, laptops and computer accessories. Since all our products are guaranteed under the SJ Computers’ Policy, shop to your heart’s content.  
+                SJ Computers stands as your premier source for reconditioned desktops, laptops, and computers, all backed by the comprehensive SJ Computers' Policy for your peace of mind. 
                 </Typography>
             </Grid>
 
@@ -40,11 +40,11 @@ function RefurbishedSection() {
                     alt="analysis.pic"
                 />
                 <Typography variant="p" fontWeight={"bolder"} mb={2}>
-                Affordable Devices {" "}
+                Affordability Redefined  {" "}
                 </Typography>
                 <Typography variant="body2">
                     {" "}
-                    Since we use refurbished materials in our computers and accessories, we eliminate the need for mining. This in turn makes the products cheaper.  
+                    Our commitment to utilizing refurbished materials in the production of computers and accessories not only offers you cost-effective solutions but also contributes to reducing the environmental impact associated with mining. 
                 </Typography>
             </Grid>
 
@@ -56,11 +56,11 @@ function RefurbishedSection() {
                     alt="analysis.pic"
                 />
                 <Typography variant="p" fontWeight={"bolder"} mb={2}>
-                Trustable Products{" "}
+                Dependable Quality {" "}
                 </Typography>
                 <Typography variant="body2">
                     {" "}
-                    All SJ Computers’ products are refurbished with strict protocols and regulations. This ensures that you get the best of your money’s worth.  
+                    Every product from SJ Computers undergoes meticulous refurbishment, adhering to stringent protocols and regulations. This guarantees that you receive optimal value for your investment with products of the highest quality. 
                 </Typography>
             </Grid>
 
@@ -72,10 +72,10 @@ function RefurbishedSection() {
                     alt="analysis.pic"
                 />
                 <Typography variant="p" fontWeight={"bolder"} mb={2}>
-                Impactful Purchase {" "}
+                Significant Investment  {" "}
                 </Typography>
                 <Typography variant="body2">
-                    All our products are professionally tested top-of-the-line devices that adhere to the latest technology. The functionalities are highly sought after.  
+                Discover a range of professionally tested innovative devices at SJ Computers. Our commitment to incorporating the latest technology ensures that each product delivers sought-after functionalities, making your purchase impactful and rewarding. 
                 </Typography>
             </Grid>
 
@@ -87,11 +87,11 @@ function RefurbishedSection() {
                     alt="analysis.pic"
                 />
                 <Typography variant="p" fontWeight={"bolder"} mb={2}>
-                    Credible Coverage  {" "}
+                Reputable Assurance   {" "}
                 </Typography>
                 <Typography variant="body2">
                     {" "}
-                    Our products speak for themselves. If you still feel the need for reassurance, SJ Computers gives a warranty and refund period for its users.  
+                    Our products speak volumes about our commitment to quality. For added assurance, SJ Computers provides a warranty and refund period, offering users credible coverage and further reinforcing our dedication to customer satisfaction.  
                 </Typography>
             </Grid>
 
@@ -111,12 +111,12 @@ function RefurbishedSection() {
             <Grid item lg={12} container rowGap={1}>
                 <Grid item lg={12} textAlign={"start"}>
                     <Typography variant="p" fontWeight={"bold"}>
-                        In what condition can I expect my refurbished product to be?  
+                    In what condition can I expect my refurbished product to be?   
                     </Typography>
                 </Grid>
                 <Grid item lg={12} textAlign={"start"}>
                     <Typography variant="body1">
-                        The refurbished product will be in complete working condition. 
+                    The refurbished product will be in complete working condition. 
                     </Typography>
                 </Grid>
             </Grid>
