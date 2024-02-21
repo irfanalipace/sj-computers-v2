@@ -123,7 +123,7 @@ export const CartItem = memo(({ cartData }) => {
                                 </Link>
                             </div>
                             <div className="col-md-2 price-item">
-                                <p className="my-sm-0 my-2">
+                                <p className="my-sm-0 pragrapgraph-data">
                                     <strong className="price-data-item-list-cost">
                                         $
                                         {parseFloat(cartData?.price).toFixed(2)}
@@ -135,7 +135,7 @@ export const CartItem = memo(({ cartData }) => {
                                     display: "flex",
                                     justifyContent: "space-between",
                                     width: "100%",
-                                    paddingLeft: "15px",
+                                    paddingLeft: "12px",
                                 }}
                             >
                                 <div>
@@ -156,7 +156,7 @@ export const CartItem = memo(({ cartData }) => {
                                             <li>
                                                 <span
                                                     className="item-stock"
-                                                    style={{ color: "#000" }}
+                                                    style={{ color: "#000", fontWeight: 600, }}
                                                 >
                                                     Discount Available
                                                 </span>

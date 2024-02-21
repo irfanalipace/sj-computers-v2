@@ -71,7 +71,7 @@ const CartItem = ({ item }) => {
             difference,
             price: parseFloat(productPriceWithQuantity).toFixed(2),
         };
-        console.log(cartItem, "rrrr");
+       
         if (item?.plan?.value) {
             cartItem.plan_price = parseFloat(warrantyPriceWithQuantity).toFixed(
                 2
