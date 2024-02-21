@@ -33,7 +33,7 @@ function AddToCartAndWarranty({ product }) {
 
     useEffect(() => {
         if (type === "buynow") {
-            cartClickHandler(product, quantity, type);
+            cartClickHandler(protPlan, `/checkout?id=${product.id}`);
         }
     }, [type]);
 
