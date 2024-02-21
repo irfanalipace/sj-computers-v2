@@ -46,7 +46,7 @@ class PayPalController extends Controller
                 [
                     "amount" => [
                         "currency_code" => "USD",
-                        "value" => $cartDetails['totalAmount']
+                        "value" => $cartDetails['totalAmount'] * 100
                     ],
                 ],
             ],
@@ -61,6 +61,8 @@ class PayPalController extends Controller
                 "user_type" => $userType,
                 "cart_details" => $cartDetails,
                 "cart_items" => $cartItems,
+                "is_buy_now" => (isset($request->is_buy_now ) && $request->is_buy_now == true) ? true : false,
+                "cart_id" => (isset($request->cart_id )) ?? $request->cart_id
             ];
             \Cache::put("paypal_transaction_".$response['id'],$detail, 1800); // 1800 seconds = 30 minutes
               
@@ -140,7 +142,7 @@ class PayPalController extends Controller
             GenerateInvoiceJob::dispatch($user, $orderData, $order);
 
             //clear cart after successfull payment
-            \Cart::session($userIdToPass)->clear();
+            (isset($getCache['is_buy_now'] ) && $getCache['is_buy_now'] == true) ? \Cart::session($userIdToPass)->remove($getCache['cart_id']) : \Cart::session($userIdToPass)->clear();
             //clear cart condition
            \Cart::session($userIdToPass)->clearCartConditions();
             DB::commit();

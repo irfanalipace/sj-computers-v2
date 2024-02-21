@@ -135,7 +135,7 @@ class SquareController extends BaseController
                 GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
 
                 //clear cart after successfull payment
-                Cart::session($userIdToPass)->clear();
+                (isset($request->is_buy_now ) && $request->is_buy_now == true) ? \Cart::session($userIdToPass)->remove($request->cart_id): Cart::session($userIdToPass)->clear();
                 //clear cart condition
                 Cart::session($userIdToPass)->clearCartConditions();
             } else {
