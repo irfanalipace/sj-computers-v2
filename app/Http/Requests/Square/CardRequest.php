@@ -61,6 +61,8 @@ class CardRequest extends FormRequest
                 'details.total_quantity' => 'required|gt:0',
                 'details.shipment_amount' => 'required',
                 'details.estimate_days' => 'required',
+                'is_buy_now' => 'nullable|in:true,false',
+                "cart_id" => 'required_if:is_buy_now,true'
             ];
         }
 
