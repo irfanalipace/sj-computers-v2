@@ -138,10 +138,10 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
                             <div>
                                 <p
                                     className="text-muted"
-                                    style={{ fontSize: "12px" }}
+                                    style={{ fontSize: "12px", lineHeight: '1.1rem' }}
                                 >
                                     {" "}
-                                    Maximum file size: 5MB, supported formats:
+                                    Maximum file size: 5MB, Supported formats:
                                     PNG, JPG and WEBP{" "}
                                 </p>
                             </div>

@@ -62,6 +62,9 @@
     .banner-slider-section .swiper-button{
         height: 29.3rem;
     }
+    .banner-slider-section .swiper-button{
+        padding: 0px 25px;
+    }
 }
        
 @media screen and (max-width: 500px){
