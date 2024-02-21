@@ -72,6 +72,11 @@
     .banner-slider-section .swiper-button-next {
         right: var(--swiper-navigation-sides-offset, 10px);
     }
+    .banner-slider-section .swiper-button-next:after,
+    .banner-slider-section .swiper-button-prev:after {
+        font-size: 20px !important;
+        /* color: #0c1fa670; */
+    }
 }
 
 .swiper-video-button {
