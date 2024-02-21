@@ -2,6 +2,10 @@
     width: 40vw;
 }
 
+.btn-grp .drawer-bottom-btn{
+    width: 50%;
+}
+
 @media screen and (max-width: 768px){
     .protection-plan-drawer{
         width: 100vw;

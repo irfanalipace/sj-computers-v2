@@ -18,6 +18,8 @@
     1px 1px 0 white; */
     /* text-shadow: 
     2px 0 0 white; */
+    border: none;
+    box-shadow: none;
 }
 
 .banner-slider-section .swiper-button-prev{
@@ -38,7 +40,7 @@
     -1px 0 0 white;
 }
 
-.swiper-button-border{
+.banner-slider-section .swiper-button-border{
     border: 1.5px solid #002549;
     box-shadow: 0 0 0px 1.5px white; 
     border-radius: 2px;
