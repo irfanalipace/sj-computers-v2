@@ -26,7 +26,7 @@ const Footer = () => {
             {!authRoutes.includes(location.pathname) && (
                 <div className="footer">
                     <div
-                        className="footer-copyright text-center py-3 back-to-top-hover-effct"
+                        className="footer-copyright text-center back-to-top-hover-effct"
                         style={{ backgroundColor: "#002549" }}
                     >
                         <p className="backtotop-button-footer-click-onit">
