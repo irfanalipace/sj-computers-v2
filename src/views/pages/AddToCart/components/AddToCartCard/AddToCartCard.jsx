@@ -55,8 +55,9 @@ const AddToCartCard = ({ product }) => {
                     <Grid item mt={3} lg={4} pl={5}>
                         <div className="image-containerer">
                             <LazyLoadImage
-                                width={"100%"}
-                                height={"100%"}
+                                // width={"100%"}
+                                // height={"100%"}
+                                style={{maxHeight: "100%", maxWidth: "100%"}} // for preventing image from skretching
                                 src={product?.product?.image}
                                 alt={product?.product?.name
                                     ?.trim()

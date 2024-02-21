@@ -216,7 +216,7 @@ const SimilarPurchaseCart = ({ products }) => {
                         ml={2}
                         mb={5}
                     >
-                        Customers who bought this item also bought.
+                        Customers who bought this item also bought
                     </Typography>
 
                     <div
@@ -228,7 +228,7 @@ const SimilarPurchaseCart = ({ products }) => {
                         ) : (
                             <Swiper
                                 slidesPerView={6}
-                                // spaceBetween={25}
+                                spaceBetween={20}
                                 className="my-unique-swiper"
                                 style={{ padding: "0 40px" }}
                                 breakpoints={{
@@ -246,10 +246,15 @@ const SimilarPurchaseCart = ({ products }) => {
                                     },
 
                                     768: {
-                                        slidesPerView: 6,
+                                        slidesPerView: 4,
                                     },
 
                                     1200: {
+                                        // slidesPerView: 6,
+                                        slidesPerView: 5,
+                                    },
+
+                                    1400: {
                                         // slidesPerView: 6,
                                         slidesPerView: 6,
                                     },

@@ -296,12 +296,13 @@ const ProtectionPlanDrawer = ({
             </div> */}
             <div className="btn-grp mt-3">
                 <button
-                    className="add-prot-btn"
+                    className="add-prot-btn drawer-bottom-btn"
+                    style={{marginRight: "10px"}}
                     onClick={() => handleAddingProtec(protectionPlan)}
                 >
                     Add Warranty
                 </button>
-                <button onClick={() => closeDrawer()}>No Thanks</button>
+                <button className="drawer-bottom-btn" onClick={() => closeDrawer()}>No Thanks</button>
             </div>
         </div>
     );
