@@ -6,16 +6,20 @@ import { CircularProgress } from "@mui/material";
 
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+// import { Pagination } from 'swiper/modules';
+import { Pagination } from "swiper";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 import CategorySliderCard from "./CategorySliderCard";
 import "./CategorySlider.css";
 
 // Install Swiper navigation plugin
 SwiperCore.use([Navigation]);
+SwiperCore.use([Pagination]);
 
 const CategorySlider = () => {
     const dispatch = useDispatch();
@@ -46,13 +50,16 @@ const CategorySlider = () => {
                 style={{ marginTop: "20px" }}
                 slidesPerView={7}
                 spaceBetween={20}
+                pagination={{
+                    dynamicBullets: true,
+                  }}
                 breakpoints={{
                     // when window width is >= 320px
                     220: {
-                        slidesPerView: 2.5,
+                        slidesPerView: 2,
                     },
                     480: {
-                        slidesPerView: 2.5,
+                        slidesPerView: 3,
                     },
                     640: {
                         slidesPerView: 4,
