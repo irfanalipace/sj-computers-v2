@@ -240,30 +240,34 @@
     max-height: 162px;
     transition: max-height 0.3s ease;
 }
+.mob-rev-see {
+    color: #007185;
+    font-weight: 500;
+}
 
 .review.expanded {
     max-height: none;
 }
 @media screen and (max-width: 800px) {
-.add-new-review .review-heading h5 {
-    font-size: 16px;
-}
+    .add-new-review .review-heading h5 {
+        font-size: 16px;
+    }
 }
 @media screen and (max-width: 576px) {
     .add-new-review .review-heading h5 {
         font-size: 14px;
         line-height: 1.2rem;
         overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2; /* Number of lines to show */
-      -webkit-box-orient: vertical;
-      white-space: normal;
-      text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Number of lines to show */
+        -webkit-box-orient: vertical;
+        white-space: normal;
+        text-overflow: ellipsis;
     }
-    .add-new-review{
+    .add-new-review {
         padding: 0;
     }
-    .add-new-review .preview-button-review{
+    .add-new-review .preview-button-review {
         margin: 0;
     }
     .preview-button-review > button {

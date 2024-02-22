@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./TechDetails.css";
-import { Grid } from "@mui/material";
+import { Grid, useMediaQuery, useTheme } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import StarRatings from "react-star-ratings";
@@ -11,6 +11,9 @@ const TechDetails = ({ product }) => {
     const [collapseAll, setCollapseAll] = useState(true);
     const [summary, setSummary] = useState(true);
     const [other, setOther] = useState(true);
+    const theme = useTheme();
+
+    const isUpSmall = useMediaQuery(theme.breakpoints.up("md"));
     // console.log(product, "product");
     return (
         <div className="tech-details-container">
@@ -31,26 +34,32 @@ const TechDetails = ({ product }) => {
                                     setOther(!other);
                                 }}
                             >
-                                <Grid>
-                                    {collapseAll ? (
-                                        <KeyboardArrowUpIcon />
-                                    ) : (
-                                        <KeyboardArrowDownIcon />
-                                    )}
-                                </Grid>
-                                <Grid>
-                                    <p className="collapse-text mt-1">
-                                        Collapse all
-                                    </p>
-                                </Grid>
+                                {isUpSmall && (
+                                    <>
+                                        <Grid>
+                                            {collapseAll ? (
+                                                <KeyboardArrowUpIcon />
+                                            ) : (
+                                                <KeyboardArrowDownIcon />
+                                            )}
+                                        </Grid>
+                                        <Grid>
+                                            <p className="collapse-text mt-1">
+                                                Collapse all
+                                            </p>
+                                        </Grid>
+                                    </>
+                                )}
                             </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid lg={6}>
-                    <h3 className="tech-details-heading">
-                        Additional Information
-                    </h3>
+                    {isUpSmall && (
+                        <h3 className="tech-details-heading">
+                            Additional Information
+                        </h3>
+                    )}
                 </Grid>
             </Grid>
             <Grid container>
@@ -247,6 +256,11 @@ const TechDetails = ({ product }) => {
                     </>
                 </Grid>
                 <Grid lg={6} mt={4}>
+                    {!isUpSmall && (
+                        <h3 className="tech-details-heading">
+                            Additional Information
+                        </h3>
+                    )}
                     <table className="tech-details-container">
                         <tr>
                             <td>Customer Reviews</td>

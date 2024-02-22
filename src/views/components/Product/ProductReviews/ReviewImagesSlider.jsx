@@ -6,10 +6,12 @@ import "swiper/swiper-bundle.min.css";
 import "swiper/css/navigation";
 import ReviewsDialog from "./ProductReviewsDialog/ReviewsDialog";
 import "./ReviewImagesSlider.css";
+import { Co2Sharp } from "@mui/icons-material";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 SwiperCore.use([Navigation, Pagination]);
 
-function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
+function ReviewImagesSlider({ productId, reviews, ReviewsData, isMobile }) {
     const [open, setOpen] = useState(false);
     const [reviewId, setReviewId] = useState({});
     const [imgId, setImgId] = useState("");
@@ -34,7 +36,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
     function checkProductMediaLength(data) {
         if (data) {
             for (const item of data) {
-                const mediaLength = item.product_media.length;
+                const mediaLength = item?.product_media?.length;
                 if (mediaLength > 0) {
                     setImagesArray(true);
                 } else {
@@ -47,31 +49,49 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
         checkProductMediaLength(ReviewsData?.data);
     }, [ReviewsData, productId]);
 
-    // console.log(ReviewsData.reviews);
-
     return (
         <>
             {ReviewsData?.data?.length > 0 && imagesArray ? (
                 <div
                     className="review-images-section review-images-slider"
-                    style={{ position: "relative", padding: "0px 70px" }}
+                    style={{
+                        position: "relative",
+                        padding: isMobile ? "0px" : "0px 70px",
+                    }}
                 >
                     {/* <button onClick={handleOpenDialog}>image Gallery</button> */}
                     <div className="d-flex justify-content-between mb-3">
-                        <h3 className="product-section-heading">
+                        <h3
+                            className="product-section-heading"
+                            style={{ marginLeft: isMobile && "20px" }}
+                        >
                             Reviews with images
                         </h3>
                         <button
                             className="view-all-images-btn"
                             onClick={handleOpenDialog}
+                            style={{
+                                color: isMobile && "#007185",
+                                textDecoration: isMobile && "none",
+                            }}
                         >
-                            View all images
+                            {isMobile ? (
+                                <>
+                                    See all photos
+                                    <ArrowForwardIosIcon
+                                        sx={{ fontSize: "12px" }}
+                                    />
+                                </>
+                            ) : (
+                                "View all images"
+                            )}
                         </button>
                     </div>
+                    {/* {!isMobile && ( */}
                     <Swiper
                         className=""
                         spaceBetween={3}
-                        slidesPerView={1}
+                        slidesPerView={isMobile ? 2 : 1}
                         navigation={{
                             nextEl: ".review-images-slider .swiper-button-next",
                             prevEl: ".review-images-slider .swiper-button-prev",
@@ -81,7 +101,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
 
                             // For larger screens
                             700: {
-                                slidesPerView: 3,
+                                slidesPerView: 2,
                             },
                             1200: {
                                 slidesPerView: 4,
@@ -110,7 +130,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                                             paddingBottom: 0,
                                             height: "180px",
                                         }}
-                                        key={image.id}
+                                        key={image?.id}
                                     >
                                         <div
                                             src={image?.file_path}
@@ -135,15 +155,30 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData }) {
                             </React.Fragment>
                         ))}
                     </Swiper>
+                    {/* )} */}
                     {/* SLIDER-BUTTONS */}
-                    <div
-                        className="swiper-button-next slider-button"
-                        style={{ position: "absolute", right: 0, top: "60%" }}
-                    ></div>
-                    <div
-                        className="swiper-button-prev slider-button"
-                        style={{ position: "absolute", left: 0, top: "60%" }}
-                    ></div>
+                    {/* {isMobile && ( */}
+
+                    {!isMobile && (
+                        <div
+                            className="swiper-button-next slider-button"
+                            style={{
+                                position: "absolute",
+                                right: 0,
+                                top: "60%",
+                            }}
+                        ></div>
+                    )}
+                    {!isMobile && (
+                        <div
+                            className="swiper-button-prev slider-button"
+                            style={{
+                                position: "absolute",
+                                left: 0,
+                                top: "60%",
+                            }}
+                        ></div>
+                    )}
                 </div>
             ) : (
                 ""

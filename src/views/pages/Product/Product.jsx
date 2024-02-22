@@ -36,7 +36,7 @@ export default function Product() {
     const location = useLocation();
     const theme = useTheme();
 
-    const isUpSmall = useMediaQuery(theme.breakpoints.up("sm"));
+    const isUpSmall = useMediaQuery(theme.breakpoints.up("md"));
 
     const [searchParams] = useSearchParams();
 
@@ -72,7 +72,7 @@ export default function Product() {
                 <div className="product-page">
                     <CategoriesHeader />
                     <div className="product-container container-fluid">
-                        <Breadcrumb routes={breadcrumbRoutes} />
+                        {isUpSmall && <Breadcrumb routes={breadcrumbRoutes} />}
                         {isLoading ? (
                             <LoaderComponent />
                         ) : (
@@ -87,10 +87,16 @@ export default function Product() {
                                 )}
                                 <VisibleOnScroll id="section1">
                                     <div>
-                                        <SimilarItemsOfProduct
-                                            productId={product?.id}
-                                            isMobile={isUpSmall}
-                                        />
+                                        {isUpSmall ? (
+                                            <SimilarItemsOfProduct
+                                                productId={product?.id}
+                                            />
+                                        ) : (
+                                            <SimilarItemsOfProduct
+                                                productId={product?.id}
+                                                isMobile={isUpSmall}
+                                            />
+                                        )}
                                         <RefurbishedSection />
                                         <ProductDescription
                                             description={
@@ -118,9 +124,11 @@ export default function Product() {
                                 </div>
                             </>
                         )}
-                        <VisibleOnScroll id="section3">
-                            <Recommendation />
-                        </VisibleOnScroll>
+                        {isUpSmall && (
+                            <VisibleOnScroll id="section3">
+                                <Recommendation />
+                            </VisibleOnScroll>
+                        )}
                     </div>
                 </div>
             ) : (
