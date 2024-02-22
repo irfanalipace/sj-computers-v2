@@ -97,13 +97,29 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
             <EmptyCart />
             <div style={{ paddingTop: "50px", paddingBottom: "50px" }}>
                 <div
+                    className="emty-cart-bottom-section"
                     style={{
-                        padding: "10px 70px",
+                        // padding: "10px 70px",
                         borderTop: "1px solid #D0D0D0",
                         borderBottom: "1px solid #D0D0D0",
                     }}
                 >
-                    <Recommendation prod={products} />
+                    <h3
+                        className="d-block d-sm-none"
+                        style={{
+                            fontSize: "20px",
+                            fontWeight: 600,
+                            textWrap: "nowrap"
+                        }}
+                        >
+                        Recommended Products
+                    </h3>
+                    <div className="hide-on-desktop">
+                        <SeggestedItems num={3} />
+                    </div>
+                    <div className="d-none d-sm-block"> 
+                        <Recommendation prod={products} />
+                    </div>    
                 </div>
             </div>
         </>
