@@ -74,7 +74,7 @@ const ShippingMehtod = () => {
     };
     return (
         <div className="shipping-method-container">
-            <h3>Shipping Method</h3>
+            <h3 className="Shipping-Method-heading-data">Shipping Method</h3>
             <div className="shipping-method-inner">
                 <form>
                     {shippingMethods.map((shippingMethod) => (
@@ -85,6 +85,7 @@ const ShippingMehtod = () => {
                             }`}
                             key={shippingMethod?.id}
                         >
+                            
                             <input
                                 id={shippingMethod?.id}
                                 type="radio"
@@ -99,13 +100,17 @@ const ShippingMehtod = () => {
                                 }
                             />
                             <label htmlFor={shippingMethod?.id}>
-                                <span>{shippingMethod?.label}</span>
+                                <span style={{paddingTop:'15px'}}>Free
+                                    <p style={{fontSize:"10px"}}>Mon, Nov 13</p>
+                                </span>
+                            
                                 <span>
                                     {shippingMethod?.cost
                                         ? "$" + shippingMethod?.cost
                                         : "Free"}
                                 </span>
                             </label>
+                          
                         </div>
                     ))}
                 </form>

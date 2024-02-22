@@ -32,3 +32,15 @@
     cursor: pointer;
     height: 40px;
 }
+
+@media screen and (max-width:600px){
+    .shipping-method-input-group.active {
+        background: white;
+        
+    }.Shipping-Method-heading-data{
+        display: none;
+    }.shipping-method-inner{
+        margin-top: 13px;
+    }
+    
+}
