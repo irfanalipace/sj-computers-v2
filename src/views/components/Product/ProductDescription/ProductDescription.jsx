@@ -3,6 +3,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import DOMPurify from "dompurify";
 
 const ProductDescription = ({ description }) => {
+    console.log(description);
     return (
         <Grid
             container
@@ -12,18 +13,22 @@ const ProductDescription = ({ description }) => {
             pt={3}
         >
             <Grid item xs={12}>
-                <Typography variant="body1" fontWeight={"bold"}>
-                    Product Description
-                </Typography>
+                {description && (
+                    <Typography variant="body1" fontWeight={"bold"}>
+                        Product Description
+                    </Typography>
+                )}
             </Grid>
             <Grid item xs={12}>
                 {/* <Typography variant="body1" ml={3}> */}
                 <Box
                     ml={3}
-                    Plan:dangerouslySetInnerHTML={{
+                    dangerouslySetInnerHTML={{
                         __html: DOMPurify.sanitize(description),
                     }}
-                ></Box>
+                >
+                    {/* {description} */}
+                </Box>
                 {/* </Typography> */}
             </Grid>
         </Grid>
