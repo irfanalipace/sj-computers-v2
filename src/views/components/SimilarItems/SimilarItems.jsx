@@ -6,10 +6,13 @@ import "./SimilarItems.css";
 import SimilarItemsSlider from "../Sliders/SimilarItems";
 import SingleSimilarItem from "../SimilarItemsSingle/SingleSimilarItem";
 import Grid from "@mui/material/Grid";
-import { Typography } from "@mui/material";
+import { Typography, useMediaQuery, useTheme } from "@mui/material";
 
 const SimilarItems = ({ similarProducts, featuredProducts, isMobile }) => {
     const isLoading = useSelector((state) => state?.products?.isLoading);
+
+    const theme = useTheme();
+    const isUpSmall = useMediaQuery(theme.breakpoints.up("md"));
 
     return (
         <>
@@ -22,7 +25,7 @@ const SimilarItems = ({ similarProducts, featuredProducts, isMobile }) => {
                 <Grid lg={4} mr={[0, 5]} className={isMobile ? "w-100 " : ""}>
                     {featuredProducts[0] ? (
                         <SingleSimilarItem
-                            isMobile
+                            isMobile={isUpSmall ? false : true}
                             product={featuredProducts[0]}
                             heading={"Featured items you may like"}
                         />
@@ -30,10 +33,10 @@ const SimilarItems = ({ similarProducts, featuredProducts, isMobile }) => {
                         <></>
                     )}
                 </Grid>{" "}
-                <Grid lg={4} sx={{ display: !isMobile ? "none" : "" }}>
+                <Grid lg={4} sx={{ display: !isMobile ? "w-100" : "" }}>
                     {featuredProducts[1] ? (
                         <SingleSimilarItem
-                            isMobile
+                            isMobile={isUpSmall ? false : true}
                             product={featuredProducts[1]}
                         />
                     ) : (

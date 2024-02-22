@@ -11,8 +11,8 @@ import { Box, Stack, Typography } from "@mui/material";
 const SingleSimilarItem = ({
     type = "",
     product,
-    heading = "Similar items with fast delivery",
     isMobile,
+    heading = isMobile ? "" : "Similar items with fast delivery",
 }) => {
     const orderEstimatedDelivery = useSelector(
         (state) => state.orders.orderEstimatedDelivery
@@ -125,6 +125,7 @@ const SingleSimilarItem = ({
             </div>
         </div>
     );
+    console.log("dddd", isMobile);
     return (
         <div
             className="similar-item-one ms-2 ms-md-auto mt-1 mt-md-5"
@@ -187,7 +188,9 @@ const SingleSimilarItem = ({
                                 lineHeight={"20px"}
                                 color={"#007185"}
                             >
-                                {product?.name}
+                                <div className={"product-name-similar-items"}>
+                                    {product?.name}
+                                </div>
                             </Typography>
                             <Stack
                                 spacing={1}

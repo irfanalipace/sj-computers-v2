@@ -127,140 +127,154 @@ const ReviewsDialog = ({
                         </IconButton>
                     </DialogActions>
                 </Box>
-            {imgGallery === null  ? <div style={{height: "30rem", }}><CircularProgress size={50} sx={{color: "orange", m: 4}} /></div> :
-            <>
-                {imgGallery == true ? (
-                    // ---- image Gallery ---
-                    <ImageGallery
-                        getReviewById={getReviewById}
-                        ReviewsData={ReviewsData}
-                    />
+                {imgGallery === null ? (
+                    <div style={{ height: "30rem" }}>
+                        <CircularProgress
+                            size={50}
+                            sx={{ color: "orange", m: 4 }}
+                        />
+                    </div>
                 ) : (
-                    //  --- image-preview-section
-                    <Grid container p={2} rowGap={1} width={"100%"}>
-                        {inReviewCard == true ? (
-                            ""
+                    <>
+                        {imgGallery == true ? (
+                            // ---- image Gallery ---
+                            <ImageGallery
+                                getReviewById={getReviewById}
+                                ReviewsData={ReviewsData}
+                            />
                         ) : (
-                            <Grid item xs={12}>
-                                <Typography
-                                    variant="body2"
-                                    // fontWeight={"bolder"}
-                                    color={"black"}
-                                    fontWeight={"bolder"}
-                                    onClick={() => setImgGallery(true)}
-                                    sx={{ cursor: "pointer" }}
+                            //  --- image-preview-section
+                            <Grid container p={2} rowGap={1} width={"100%"}>
+                                {inReviewCard == true ? (
+                                    ""
+                                ) : (
+                                    <Grid item xs={12}>
+                                        <Typography
+                                            variant="body2"
+                                            // fontWeight={"bolder"}
+                                            color={"black"}
+                                            fontWeight={"bolder"}
+                                            onClick={() => setImgGallery(true)}
+                                            sx={{ cursor: "pointer" }}
+                                        >
+                                            <IconButton sx={{ color: "black" }}>
+                                                <AppsIcon />
+                                            </IconButton>
+                                            View Image Gallery{" "}
+                                        </Typography>
+                                    </Grid>
+                                )}
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs={12}
+                                    height={"30rem"}
+                                    sx={{ backgroundColor: "black" }}
+                                    display={"flex"}
+                                    alignItems={"center"}
                                 >
-                                    <IconButton sx={{ color: "black" }}>
-                                        <AppsIcon />
-                                    </IconButton>
-                                    View Image Gallery{" "}
-                                </Typography>
+                                    <Swiper
+                                        ref={swiperRef}
+                                        style={{
+                                            width: "100%",
+                                            height: "100%",
+                                        }}
+                                        spaceBetween={1}
+                                        slidesPerView={1}
+                                        navigation
+                                        // onActiveIndexChange={(e) => console.log(e)}
+                                        onSlideChange={handleSlideChange}
+                                        // initialSlide={initialSlide} // initial slide takes count from 0
+                                    >
+                                        {selectedReview?.[0]?.product_media?.map(
+                                            (data, index) => (
+                                                <SwiperSlide
+                                                    key={data.id}
+                                                    style={{
+                                                        width: "100%",
+                                                        height: "100%",
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        justifyContent:
+                                                            "center",
+                                                    }}
+                                                >
+                                                    <img
+                                                        src={data?.file_path}
+                                                        style={{
+                                                            maxHeight: "100%",
+                                                            maxWidth: "100%",
+                                                        }}
+                                                        alt="review image"
+                                                    />
+                                                </SwiperSlide>
+                                            )
+                                        )}
+                                    </Swiper>
+                                </Grid>
+
+                                <Grid
+                                    item
+                                    md={6}
+                                    xs={12}
+                                    pl={2}
+                                    container
+                                    height={"30rem"}
+                                    sx={{ overflowY: "auto" }}
+                                >
+                                    <Grid item xs={12}>
+                                        {/* <div className="my-4 ms-3" > */}
+                                        <ReviewCard
+                                            reviewData={data}
+                                            isDialog={true}
+                                            index={reviewId}
+                                        />
+                                        {/* </div> */}
+                                        {/* </Grid> */}
+                                        {/* <Grid className="ms-3" item xs={12} py={1}> */}
+                                        <Typography
+                                            py={1}
+                                            variant="body1"
+                                            fontSize={"small"}
+                                            mb={1}
+                                        >
+                                            Images in this review
+                                        </Typography>
+                                        <div style={{ display: "flex" }}>
+                                            {selectedReview?.[0]?.product_media?.map(
+                                                (data, index) => (
+                                                    <Box
+                                                        key={data.id}
+                                                        onClick={() =>
+                                                            handleSwitchImage(
+                                                                index
+                                                            )
+                                                        }
+                                                        width={"59px"}
+                                                        height={"59px"}
+                                                        border={
+                                                            activeSlide == index
+                                                                ? "2px solid orange"
+                                                                : ""
+                                                        }
+                                                        sx={{
+                                                            mr: "10px",
+                                                            backgroundImage: `url(${data?.file_path})`,
+                                                            backgroundSize:
+                                                                "cover",
+                                                            backgroundPosition:
+                                                                "center",
+                                                        }}
+                                                    ></Box>
+                                                )
+                                            )}
+                                        </div>
+                                    </Grid>
+                                </Grid>
                             </Grid>
                         )}
-                        <Grid
-                            item
-                            md={6}
-                            xs={12}
-                            height={"30rem"}
-                            sx={{ backgroundColor: "black" }}
-                            display={"flex"}
-                            alignItems={"center"}
-                        >
-                            <Swiper
-                                ref={swiperRef}
-                                style={{ width: "100%", height: "100%" }}
-                                spaceBetween={1}
-                                slidesPerView={1}
-                                navigation
-                                // onActiveIndexChange={(e) => console.log(e)}
-                                onSlideChange={handleSlideChange}
-                                // initialSlide={initialSlide} // initial slide takes count from 0
-                            >
-                                {selectedReview?.[0]?.product_media?.map(
-                                    (data, index) => (
-                                        <SwiperSlide
-                                            key={data.id}
-                                            style={{
-                                                width: "100%",
-                                                height: "100%",
-                                                display: "flex",
-                                                alignItems: "center",
-                                                justifyContent: "center",
-                                            }}
-                                        >
-                                            <img
-                                                src={data?.file_path}
-                                                style={{
-                                                    maxHeight: "100%",
-                                                    maxWidth: "100%",
-                                                }}
-                                                alt="review image"
-                                            />
-                                        </SwiperSlide>
-                                    )
-                                )}
-                            </Swiper>
-                        </Grid>
-
-                        <Grid
-                            item
-                            md={6}
-                            xs={12}
-                            pl={2}
-                            container
-                            height={"30rem"}
-                            sx={{ overflowY: "auto" }}
-                        >
-                            <Grid item xs={12}>
-                                {/* <div className="my-4 ms-3" > */}
-                                <ReviewCard
-                                    reviewData={data}
-                                    isDialog={true}
-                                    index={reviewId}
-                                />
-                                {/* </div> */}
-                                {/* </Grid> */}
-                                {/* <Grid className="ms-3" item xs={12} py={1}> */}
-                                <Typography
-                                    py={1}
-                                    variant="body1"
-                                    fontSize={"small"}
-                                    mb={1}
-                                >
-                                    Images in this review
-                                </Typography>
-                                <div style={{ display: "flex" }}>
-                                    {selectedReview?.[0]?.product_media?.map(
-                                        (data, index) => (
-                                            <Box
-                                                key={data.id}
-                                                onClick={() =>
-                                                    handleSwitchImage(index)
-                                                }
-                                                width={"59px"}
-                                                height={"59px"}
-                                                border={
-                                                    activeSlide == index
-                                                        ? "2px solid orange"
-                                                        : ""
-                                                }
-                                                sx={{
-                                                    mr: "10px",
-                                                    backgroundImage: `url(${data?.file_path})`,
-                                                    backgroundSize: "cover",
-                                                    backgroundPosition:
-                                                        "center",
-                                                }}
-                                            ></Box>
-                                        )
-                                    )}
-                                </div>
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                    </>
                 )}
-              </>  
-            }
             </DialogContent>
         </Dialog>
     );

@@ -30,7 +30,7 @@ const ProductImageComponent = ({ ProductImages, isMobile = false }) => {
     }, [images]);
     return (
         <div className="image-container">
-            <div className="horizontal-box">
+            <div className="horizontal-box hide-mob">
                 {images.map((image, index) => (
                     <div
                         key={index}
@@ -57,6 +57,24 @@ const ProductImageComponent = ({ ProductImages, isMobile = false }) => {
                     </div>
                 ))}
             </div>
+            <div className="horizontal-box hidden-on-tab hidden-on-desktop">
+                {images.map((image, index) => (
+                    <div
+                        key={index}
+                        onClick={() => setSelectedImg(image)}
+                        style={{
+                            borderRadius: "50%",
+                            padding: "5px",
+                            margin: "0px 3px",
+                            backgroundColor:
+                                selectedImg === image ? "#318243" : "#fff",
+                            border: "2px solid #6F6F6F",
+                        }}
+                        className="mb-3"
+                    ></div>
+                ))}
+            </div>
+
             {selectedImg && <SelectedImage image={selectedImg} />}
         </div>
     );

@@ -30,3 +30,9 @@
 .product-new-price-similar-item {
     color: #b12704;
 }
+.product-name-similar-items {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
