@@ -21,7 +21,12 @@ import "./ProductDetail.css";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_REVIEW } from "../../../../core/store/review/reviewSlice";
 
-export default function ProductRating({ productID, rating, totalReview }) {
+export default function ProductRating({
+    productID,
+    rating,
+    totalReview,
+    isUpSmall,
+}) {
     const dispatch = useDispatch();
     const reviewState = useSelector((slice) => slice.review);
 
@@ -76,10 +81,11 @@ export default function ProductRating({ productID, rating, totalReview }) {
             direction={{
                 xs: "row",
             }}
-            my={[4, 1, 0.5]}
+            my={[0, 1, 0.5]}
             alignItems={"start"}
             gap={2}
             width={"100%"}
+            sx={{ justifyContent: ["end", "start"] }}
         >
             <Tooltip
                 arrow
@@ -130,23 +136,29 @@ export default function ProductRating({ productID, rating, totalReview }) {
                             starDimension={"20px"}
                             starSpacing={"0"}
                         />
-                        <ExpandMoreIcon
-                            sx={{
-                                width: "15px",
-                                height: "15px",
-                            }}
-                        />
+                        {isUpSmall && (
+                            <ExpandMoreIcon
+                                sx={{
+                                    width: "15px",
+                                    height: "15px",
+                                }}
+                            />
+                        )}
                     </Box>
-                </Stack>
-            </Tooltip>
-            <Stack direction={"row"} spacing={1} mt={0.3}>
-                <HoverColorChange hoverColor="#FFA41C" defaultColor="#007185">
-                    <a
-                        href="#reviews"
-                        className="review-text"
-                    >{`${totalReview} Ratings`}</a>
-                </HoverColorChange>
-                {/* <Divider
+                    <Stack ml={[0.5, 1]} direction={"row"} spacing={1} mt={0.3}>
+                        <HoverColorChange
+                            hoverColor="#FFA41C"
+                            defaultColor="#007185"
+                        >
+                            <a
+                                href="#reviews"
+                                className="review-text"
+                                style={{ color: "#007185" }}
+                            >{`(${totalReview}) ${
+                                isUpSmall ? "Ratings" : ""
+                            }`}</a>
+                        </HoverColorChange>
+                        {/* <Divider
                     orientation="vertical"
                     variant="middle"
                     sx={{
@@ -158,7 +170,9 @@ export default function ProductRating({ productID, rating, totalReview }) {
                 <HoverColorChange hoverColor="#FFA41C" defaultColor="#007185">
                     <a className="review-text">11 answered questions</a>
                 </HoverColorChange> */}
-            </Stack>
+                    </Stack>
+                </Stack>
+            </Tooltip>
         </Stack>
     );
 }

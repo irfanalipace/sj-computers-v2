@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 import { useDispatch, useSelector } from "react-redux";
 import { PLAN_ENUM } from "@utils/constants";
-import { CircularProgress, Drawer } from "@mui/material";
+import { CircularProgress, Drawer, Stack } from "@mui/material";
 import ProtectionPlanDrawer from "../ProtectionPlan/ProtectionPlanDrawer";
 import useAddToCart from "./useAddToCart";
 import { useParams } from "react-router-dom";
 
-function AddToCartAndWarranty({ product }) {
+function AddToCartAndWarranty({ product, isMobile }) {
     const navigate = useNavigate();
     const [protPlan, setProtPlan] = useState({});
     const [plan, setOpenPlan] = useState({});
@@ -107,117 +107,151 @@ function AddToCartAndWarranty({ product }) {
                     {loading ? <CircularProgress /> : "Buy Now"}
                 </button>
             </div>
-
-            <div className="details-container">
-                <div className="col-xl-7 col-5">
-                    <span
-                        className="color-card-text-paragrap-payment"
-                        style={{ color: "#5F5E5E" }}
-                    >
-                        Payment
-                    </span>
-                </div>
-                <div className="col-xl-5 col-6">
-                    <div className="hover-box secure-transection-display">
-                        <Link
-                            href=""
-                            className="text-decoration-none secure-payment-method"
-                            style={{ color: "#2c8a9a" }}
+            <Stack spacing={[1.5, 1.2]}>
+                <div
+                    className="details-container"
+                    style={{ marginLeft: isMobile ? "" : "10px" }}
+                >
+                    <div className="col-xl-7 col-5 col-md-5">
+                        <span
+                            className="color-card-text-paragrap-payment"
+                            style={{ color: "#5F5E5E" }}
                         >
-                            Secure transaction
-                        </Link>
-                        <div className="hidden-box">
-                            <span
-                                style={{
-                                    fontSize: "12px",
-                                    fontWeight: "bold",
-                                    marginBottom: "12px",
-                                }}
-                            >
-                                Your transaction is Secure
-                            </span>
-                            <div style={{ marginTop: "12px" }}>
-                                <p style={{ fontSize: "11px" }}>
-                                    We work hard to protect your security and
-                                    privacy. Our payment security system
-                                    encrypts your information during
-                                    transmission. We don’t share your credit
-                                    card details with third-party sellers, and
-                                    we don’t sell your information to others
-                                </p>
-                            </div>
-                        </div>
+                            Payment
+                        </span>
                     </div>
-                </div>
-            </div>
-            <div className="details-container">
-                <div className="col-xl-7 col-5">
-                    <span
-                        className="color-card-text-paragrap-payment ships-form-span-tag"
-                        style={{ color: "#5F5E5E" }}
-                    >
-                        Ships Form
-                    </span>
-                </div>
-                <div className="col-xl-5 col-6">
-                    <span className="color-card-text-paragrap-payment sjcomputer-tag-checkout-card">
-                        Sj Computers
-                    </span>
-                </div>
-            </div>
-            <div className="details-container">
-                <div className="col-xl-7 col-5">
-                    <span
-                        className="color-card-text-paragrap-payment return-from-span-tag-checkout"
-                        style={{ color: "#5F5E5E" }}
-                    >
-                        Return
-                    </span>
-                </div>
-
-                <div className="col-xl-5 col-6">
-                    <div className="hover-box">
-                        <Link
-                            className="text-decoration-none secure-payment-method "
-                            style={{ color: "#2c8a9a" }}
-                        >
-                            Eligible for returns<br></br>
-                            refund or <br></br>
-                            replacement wi...
-                        </Link>
-                        <div className="hidden-box">
-                            <span
-                                style={{
-                                    fontSize: "12px",
-                                    fontWeight: "bold",
-                                    marginBottom: "12px",
-                                }}
-                            >
-                                Eligible for Return, Refund or Replacement
-                                within 30 days of receipt
-                            </span>
-                            <div style={{ marginTop: "12px" }}>
-                                <p style={{ fontSize: "11px" }}>
-                                    This item can be returned in its original
-                                    condition for a full refund or replacement
-                                    within 30 days of receipt. Read full return
-                                    policy
-                                </p>
-                            </div>
+                    <div className="col-xl-5 col-auto col-md-6">
+                        <div className="hover-box secure-transection-display">
                             <Link
-                                to={"/return_refund_policy"}
-                                style={{
-                                    marginTop: "12px",
-                                    fontSize: "11px",
-                                    color: "#2c8a9a",
-                                }}
+                                href=""
+                                className="text-decoration-none secure-payment-method"
+                                style={{ color: "#2c8a9a" }}
                             >
-                                Read full return policy
+                                Secure transaction
                             </Link>
+                            <div className="hidden-box">
+                                <span
+                                    style={{
+                                        fontSize: "12px",
+                                        fontWeight: "bold",
+                                        marginBottom: "12px",
+                                    }}
+                                >
+                                    Your transaction is Secure
+                                </span>
+                                <div style={{ marginTop: "12px" }}>
+                                    <p style={{ fontSize: "11px" }}>
+                                        We work hard to protect your security
+                                        and privacy. Our payment security system
+                                        encrypts your information during
+                                        transmission. We don’t share your credit
+                                        card details with third-party sellers,
+                                        and we don’t sell your information to
+                                        others
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div
+                    className="details-container"
+                    style={{ marginLeft: isMobile ? "" : "10px" }}
+                >
+                    <div className="col-xl-7 col-5">
+                        <span
+                            className="color-card-text-paragrap-payment ships-form-span-tag"
+                            style={{ color: "#5F5E5E" }}
+                        >
+                            Ships Form
+                        </span>
+                    </div>
+                    <div className="col-xl-5 col-auto col-md-6">
+                        <span className="color-card-text-paragrap-payment sjcomputer-tag-checkout-card">
+                            Sj Computers
+                        </span>
+                    </div>
+                </div>
+                <div
+                    className="details-container"
+                    style={{ marginLeft: isMobile ? "" : "10px" }}
+                >
+                    <div className="col-xl-7 col-5">
+                        <span
+                            className="color-card-text-paragrap-payment return-from-span-tag-checkout"
+                            style={{ color: "#5F5E5E" }}
+                        >
+                            Return
+                        </span>
+                    </div>
+
+                    <div className="col-xl-5 col-auto col-md-6">
+                        <div className="hover-box">
+                            <Link
+                                className="text-decoration-none secure-payment-method "
+                                style={{ color: "#2c8a9a" }}
+                            >
+                                {isMobile ? (
+                                    <div
+                                        style={{
+                                            fontSize: "12px",
+                                            lineHeight: "14px",
+                                        }}
+                                    >
+                                        <p className="mb-2">
+                                            Eligible for returns,
+                                        </p>
+                                        refund or replacement wi...
+                                    </div>
+                                ) : (
+                                    <div
+                                        style={{
+                                            fontSize: "12px",
+                                            lineHeight: "14px",
+                                        }}
+                                    >
+                                        <p className="mb-2">
+                                            Eligible for returns,
+                                        </p>
+                                        <p className="mb-2">refund or</p>
+                                        replacement wi...
+                                    </div>
+                                )}
+                            </Link>
+                            <div className="hidden-box">
+                                <span
+                                    style={{
+                                        fontSize: "12px",
+                                        fontWeight: "bold",
+                                        marginBottom: "12px",
+                                    }}
+                                >
+                                    Eligible for Return, Refund or Replacement
+                                    within 30 days of receipt
+                                </span>
+                                <div style={{ marginTop: "12px" }}>
+                                    <p style={{ fontSize: "11px" }}>
+                                        This item can be returned in its
+                                        original condition for a full refund or
+                                        replacement within 30 days of receipt.
+                                        Read full return policy
+                                    </p>
+                                </div>
+                                <Link
+                                    to={"/return_refund_policy"}
+                                    style={{
+                                        marginTop: "12px",
+                                        fontSize: "11px",
+                                        color: "#2c8a9a",
+                                    }}
+                                >
+                                    Read full return policy
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Stack>
             {/* <Link
                         to={"/term_services"}
                         style={{
@@ -229,7 +263,7 @@ function AddToCartAndWarranty({ product }) {
                     >
                         Details
                     </Link> */}
-            <hr></hr>
+            {!isMobile && <hr></hr>}
             <div className="protection-plan hidden-on-mobile">
                 Add a Warranty Plan :
                 <>

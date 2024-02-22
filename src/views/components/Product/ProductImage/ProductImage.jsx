@@ -1,6 +1,9 @@
 import { useState, useEffect, memo } from "react";
 import { toArray } from "@utils/cartHelpers";
 import "./ProductImage.css";
+import { Box, Stack } from "@mui/material";
+import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 const SelectedImage = ({ image }) => {
     return (
@@ -14,7 +17,7 @@ const SelectedImage = ({ image }) => {
     );
 };
 
-const ProductImageComponent = ({ ProductImages }) => {
+const ProductImageComponent = ({ ProductImages, isMobile = false }) => {
     const [selectedImg, setSelectedImg] = useState(null);
     const [images, setImages] = useState([]);
 
@@ -31,10 +34,26 @@ const ProductImageComponent = ({ ProductImages }) => {
                 {images.map((image, index) => (
                     <div
                         key={index}
-                        className="image-wrapper"
+                        className={isMobile ? "" : "image-wrapper"}
                         onClick={() => setSelectedImg(image)}
                     >
-                        <img src={image} alt={`Image ${index}`} />
+                        {isMobile ? (
+                            <Stack gap={2}>
+                                {selectedImg === image ? (
+                                    <FiberManualRecordIcon
+                                        fontSize="small"
+                                        sx={{ color: "#318243" }}
+                                    />
+                                ) : (
+                                    <PanoramaFishEyeIcon
+                                        fontSize="10"
+                                        sx={{ color: "#6F6F6F" }}
+                                    />
+                                )}
+                            </Stack>
+                        ) : (
+                            <img src={image} alt={`Image ${index}`} />
+                        )}
                     </div>
                 ))}
             </div>

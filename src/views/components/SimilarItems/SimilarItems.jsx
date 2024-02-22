@@ -8,7 +8,7 @@ import SingleSimilarItem from "../SimilarItemsSingle/SingleSimilarItem";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 
-const SimilarItems = ({ similarProducts, featuredProducts }) => {
+const SimilarItems = ({ similarProducts, featuredProducts, isMobile }) => {
     const isLoading = useSelector((state) => state?.products?.isLoading);
 
     return (
@@ -19,9 +19,10 @@ const SimilarItems = ({ similarProducts, featuredProducts }) => {
                 justifyContent="flex-start"
                 alignItems="center"
             >
-                <Grid lg={4} mr={5}>
+                <Grid lg={4} mr={[0, 5]} className={isMobile ? "w-100 " : ""}>
                     {featuredProducts[0] ? (
                         <SingleSimilarItem
+                            isMobile
                             product={featuredProducts[0]}
                             heading={"Featured items you may like"}
                         />
@@ -29,9 +30,12 @@ const SimilarItems = ({ similarProducts, featuredProducts }) => {
                         <></>
                     )}
                 </Grid>{" "}
-                <Grid lg={4}>
+                <Grid lg={4} sx={{ display: !isMobile ? "none" : "" }}>
                     {featuredProducts[1] ? (
-                        <SingleSimilarItem product={featuredProducts[1]} />
+                        <SingleSimilarItem
+                            isMobile
+                            product={featuredProducts[1]}
+                        />
                     ) : (
                         <></>
                     )}
@@ -40,7 +44,7 @@ const SimilarItems = ({ similarProducts, featuredProducts }) => {
             <div
                 className="recommendation-container"
                 style={{
-                    borderTop: "1px solid lightgray",
+                    borderTop: !isMobile ? "none" : "1px solid lightgray",
                 }}
             >
                 <div className="recommendation-inner">
@@ -58,12 +62,13 @@ const SimilarItems = ({ similarProducts, featuredProducts }) => {
 
                     <div
                         className="slider-wrapper"
-                        style={{ margin: "20px 80px" }}
+                        // style={{ margin: "20px 80px" }}
                     >
                         {isLoading || !similarProducts ? (
                             <LoaderComponent />
                         ) : (
                             <SimilarItemsSlider
+                                isMobile
                                 type="recommended"
                                 similarProducts={similarProducts}
                             />

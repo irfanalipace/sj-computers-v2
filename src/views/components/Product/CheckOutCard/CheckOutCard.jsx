@@ -8,7 +8,7 @@ import "./CheckOutCard.css";
 import { Link } from "react-router-dom";
 import { IS_CHRISTMAS_HOLIDAYS } from "@utils/constants";
 import AddToCartAndWarranty from "./AddToCartAndWarranty";
-export const CheckOutCard = ({ product }) => {
+export const CheckOutCard = ({ product, isMobile }) => {
     const currentState = useSelector((state) => state.states.currentState);
     const cart = useSelector((state) => state.cart.cart);
 
@@ -36,7 +36,13 @@ export const CheckOutCard = ({ product }) => {
 
     return (
         <div>
-            <div className="card-section-right">
+            <div
+                className={
+                    isMobile
+                        ? "p-2 rounded border card-section-riht"
+                        : "card-section-right"
+                }
+            >
                 <div className="hidden-on-mobile">
                     <h6 style={{ fontWeight: "700" }}>Excellent Condition</h6>
                     <h6 style={{ fontWeight: "700" }}>(Refurbished)</h6>
@@ -87,7 +93,7 @@ export const CheckOutCard = ({ product }) => {
                     </div>
                 ) : (
                     <>
-                        <div className="card-dev-section-paragrap-product">
+                        <div className=" card-dev-section-paragrap-product">
                             <div className="hover-box">
                                 <Link
                                     href="#"
@@ -127,7 +133,7 @@ export const CheckOutCard = ({ product }) => {
                                 </div>
                             </div>
                         </div>{" "}
-                        <div className="card-dev-section-paragrap-product hidden-on-mobile">
+                        <div className=" card-dev-section-paragrap-product">
                             <span className="dilvery-text-paragraph-card">
                                 <button style={{ color: "#2c8a9a" }}>
                                     FREE Delivery
@@ -187,7 +193,10 @@ export const CheckOutCard = ({ product }) => {
                             src={imges1}
                             style={{ width: "10.5px", height: "14px" }}
                         />
-                        &ensp;Deliver to
+                        &ensp;
+                        <span style={{ color: isMobile ? "#318243" : "" }}>
+                            Deliver to
+                        </span>
                         {currentState?.name
                             ? " " + currentState?.name
                             : " Location"}
@@ -203,7 +212,10 @@ export const CheckOutCard = ({ product }) => {
                             Item Already in Cart
                         </p>
                     ) : (
-                        <AddToCartAndWarranty product={product} />
+                        <AddToCartAndWarranty
+                            isMobile={isMobile}
+                            product={product}
+                        />
                     )}
                 </div>
                 {/* <hr className="hidden-on-mobile"></hr> */}

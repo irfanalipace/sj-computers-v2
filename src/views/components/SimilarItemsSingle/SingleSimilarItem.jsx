@@ -6,11 +6,13 @@ import StarRatings from "react-star-ratings";
 import { useSelector } from "react-redux";
 import AddCartComponents from "../Product/CheckOutCard/AddCartComponents";
 import { generatePath } from "../../../core/utils/helpers";
+import { Box, Stack, Typography } from "@mui/material";
 
 const SingleSimilarItem = ({
     type = "",
     product,
     heading = "Similar items with fast delivery",
+    isMobile,
 }) => {
     const orderEstimatedDelivery = useSelector(
         (state) => state.orders.orderEstimatedDelivery
@@ -19,7 +21,7 @@ const SingleSimilarItem = ({
 
     const ProductDetails = () => (
         <div>
-            <div className="product-details">
+            <div className={"product-details"}>
                 <div className="dev-section-button-dev-card">
                     {/* <Link to={`${new URL(product?.url).pathname}`}> */}
                     <Link to={productPath}>
@@ -64,12 +66,8 @@ const SingleSimilarItem = ({
                     </div>
                 </div>
 
-                <Link
-                  
-                    to={productPath}
-                    style={{ textDecoration: "none" }}
-                >
-                    <div className="d-none d-sm-block product-rating">
+                <Link to={productPath} style={{ textDecoration: "none" }}>
+                    <div className="d-non d-sm-block product-rating">
                         {/* <StarRatings
                             rating={product?.rating}
                             starRatedColor="rgb(232, 126, 36)"
@@ -128,25 +126,127 @@ const SingleSimilarItem = ({
         </div>
     );
     return (
-        <div className="similar-item-one mt-5">
-            <h3>{heading}</h3>
-            <div className="similar-item-one-inner">
-                <div className="image-wrapper-similar-items">
-                    <LazyLoadImage
-                        width={"100%"}
-                        height={"100%"}
-                        src={product?.image}
-                        alt={product?.name
-                            ?.trim()
-                            ?.split(" ")
-                            ?.slice(0, 9)
-                            ?.join(" ")}
-                    />
-                </div>
-                <div className="details">
-                    <ProductDetails />
-                </div>
-            </div>
+        <div
+            className="similar-item-one ms-2 ms-md-auto mt-1 mt-md-5"
+            style={{
+                padding: isMobile ? "5px" : "20px 20px 50px 20px",
+                border: isMobile ? "none" : "",
+                height: isMobile ? "auto" : "",
+            }}
+        >
+            {!isMobile ? (
+                <>
+                    <h3>{heading}</h3>
+                    <div className="similar-item-one-inner">
+                        <div className="image-wrapper-similar-items">
+                            <LazyLoadImage
+                                width={"100%"}
+                                height={"100%"}
+                                src={product?.image}
+                                alt={product?.name
+                                    ?.trim()
+                                    ?.split(" ")
+                                    ?.slice(0, 9)
+                                    ?.join(" ")}
+                            />
+                        </div>
+                        <div className="details">
+                            <ProductDetails />
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <Box>
+                    <Typography
+                        sx={{ mb: 2 }}
+                        fontFamily={"Arial"}
+                        fontWeight={700}
+                        fontSize={"16px"}
+                        lineHeight={"24px"}
+                        color={"#0F1111"}
+                    >
+                        {heading}
+                    </Typography>
+                    <Stack direction={"row"} alignItems={"start"}>
+                        <LazyLoadImage
+                            width={"55px"}
+                            height={"55px"}
+                            style={{ objectFit: "contain" }}
+                            src={product?.image}
+                            alt={product?.name
+                                ?.trim()
+                                ?.split(" ")
+                                ?.slice(0, 9)
+                                ?.join(" ")}
+                        />
+                        <Stack spacing={0.5}>
+                            <Typography
+                                fontFamily={"Inter"}
+                                fontWeight={400}
+                                fontSize={"14px"}
+                                lineHeight={"20px"}
+                                color={"#007185"}
+                            >
+                                {product?.name}
+                            </Typography>
+                            <Stack
+                                spacing={1}
+                                direction={"row"}
+                                alignItems={"center"}
+                            >
+                                <StarRatings
+                                    rating={product?.rating}
+                                    starRatedColor="rgb(232, 126, 36)"
+                                    numberOfStars={5}
+                                    name="rating"
+                                    isSelectable={false}
+                                    starDimension={"20px"}
+                                    starSpacing={"0"}
+                                />
+                                <Typography
+                                    fontFamily={"Inter"}
+                                    fontWeight={400}
+                                    fontSize={"14px"}
+                                    lineHeight={"20px"}
+                                    color={"#007185"}
+                                >{`(${product?.total_review})`}</Typography>
+                            </Stack>
+                            <Stack
+                                spacing={1}
+                                direction={"row"}
+                                alignItems={"center"}
+                            >
+                                <Typography
+                                    fontFamily={"Inter"}
+                                    fontWeight={400}
+                                    fontSize={"14px"}
+                                    lineHeight={"20px"}
+                                    color={"#B12704"}
+                                >{`${
+                                    product?.price?.toString().split(".")[0]
+                                }.${
+                                    product?.price?.toString().split(".")[1]
+                                }`}</Typography>
+                                <span>&</span>
+                                <Typography
+                                    fontFamily={"Inter"}
+                                    fontWeight={700}
+                                    fontSize={"13px"}
+                                    lineHeight={"20px"}
+                                    color={"#0F1111"}
+                                >{` FREE Shipping`}</Typography>
+                            </Stack>
+                        </Stack>
+                    </Stack>
+                    <Box
+                        sx={{
+                            mt: 2,
+                            border: "none",
+                            borderTop: "2px solid #CDCDCD",
+                        }}
+                    ></Box>
+                </Box>
+            )}
         </div>
     );
 };

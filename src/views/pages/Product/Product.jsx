@@ -5,6 +5,9 @@ import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
 import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
 import Recommendation from "@components/Recommendation/Recommendation";
 import NotFound from "../NotFound/NotFound";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+
 const ProductReviews = lazy(() =>
     import("../../components/Product/ProductReviews/ProductReviews")
 );
@@ -26,10 +29,14 @@ import { CLEAR_REVIEW } from "../../../core/store/review/reviewSlice";
 import { useDispatch } from "react-redux";
 import { generatePath } from "../../../core/utils/helpers";
 import { useLocation } from "react-router-dom";
+import ProductDetailsMobile from "../../components/Product/ProductDetails/ProductDetialsMobile";
 
 export default function Product() {
     const dispatch = useDispatch();
     const location = useLocation();
+    const theme = useTheme();
+
+    const isUpSmall = useMediaQuery(theme.breakpoints.up("sm"));
 
     const [searchParams] = useSearchParams();
 
@@ -70,11 +77,19 @@ export default function Product() {
                             <LoaderComponent />
                         ) : (
                             <>
-                                <ProductComponent product={product} />
+                                {isUpSmall ? (
+                                    <ProductComponent product={product} />
+                                ) : (
+                                    <ProductMobileComponent
+                                        isUpSmall={isUpSmall}
+                                        product={product}
+                                    />
+                                )}
                                 <VisibleOnScroll id="section1">
                                     <div>
                                         <SimilarItemsOfProduct
                                             productId={product?.id}
+                                            isMobile={isUpSmall}
                                         />
                                         <RefurbishedSection />
                                         <ProductDescription
@@ -118,7 +133,7 @@ export default function Product() {
 const ProductComponent = ({ product }) => {
     return (
         <div className="row">
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-md-4 ">
                 <ProductImage ProductImages={product.image} />
             </div>
             <div className="col-12 col-md-5">
@@ -131,7 +146,20 @@ const ProductComponent = ({ product }) => {
     );
 };
 
-const SimilarItemsOfProduct = ({ productId }) => {
+const ProductMobileComponent = ({ product, isUpSmall }) => {
+    return (
+        <div className="row">
+            {/* <div className="col-12 col-md-4 ">
+                <ProductImage ProductImages={product.image} />
+            </div> */}
+            <div className="col-12 col-md-5">
+                <ProductDetailsMobile isUpSmall={isUpSmall} product={product} />
+            </div>
+        </div>
+    );
+};
+
+const SimilarItemsOfProduct = ({ productId, isMobile }) => {
     const { similarProducts, featuredProducts, isLoading } =
         useSimilarData(productId);
     return (
@@ -140,13 +168,16 @@ const SimilarItemsOfProduct = ({ productId }) => {
                 <LoaderComponent />
             ) : (
                 <>
-                    {similarProducts?.length > 0 && (
-                        <div className="hidden-on-tab">
+                    {similarProducts?.length > 0 ? (
+                        <div className="hidden-on-ab">
                             <SimilarItems
+                                isMobile={isMobile}
                                 similarProducts={similarProducts}
                                 featuredProducts={featuredProducts}
                             />
                         </div>
+                    ) : (
+                        <></>
                     )}
                 </>
             )}
