@@ -271,6 +271,52 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                     )}
 
                     {!isUpSmall && (
+                        <>
+                            <h1
+                                className="pt-3 mt-3"
+                                style={{
+                                    fontSize: "16px",
+                                    fontWeight: "700",
+                                    borderTop: "1px solid lightgray",
+                                }}
+                            >
+                                Read reviews that mention
+                            </h1>
+                            <div
+                                style={{
+                                    display: "flex",
+                                    flexWrap: "wrap",
+                                }}
+                            >
+                                {[
+                                    "picture quality",
+                                    "monitor works",
+                                    "monitor and bought",
+                                    "card",
+                                    "display",
+                                    "monitors",
+                                    "office",
+                                    "video",
+                                    "install",
+                                ].map((row) => {
+                                    return (
+                                        <div
+                                            style={{
+                                                backgroundColor: "#E4F2FF",
+                                                padding: "10px",
+                                                borderBottom:
+                                                    "2px solid #969696",
+                                                margin: "10px 5px",
+                                            }}
+                                        >
+                                            <>{row}</>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </>
+                    )}
+                    {!isUpSmall && (
                         <h3 className="product-section-heading my-4 py-1">
                             {PRODUCT_FILTER_LABEL_ENUM[filterBy]}
                         </h3>
