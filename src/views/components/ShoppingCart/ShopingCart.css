@@ -376,6 +376,10 @@ head:nth-child(2) {
     margin-right: 20px;
 }
 
+.emty-cart-bottom-section{
+    padding: 10px 70px;
+}
+
 @media screen and (min-width: 750px) and (max-width: 1200px) {
     .sub-title {
         font-size: 12px;
@@ -455,6 +459,20 @@ head:nth-child(2) {
     /* .card-checkout {
         margin-top: 20px;
     } */
+}
+
+@media screen and (max-width: 575px){
+    .emty-cart-bottom-section{
+        padding: 20px;
+    }
+    .empty-cart-container .empty-cart {
+        width: 90%;
+        margin-left: 0;
+    }
+    .empty-cart .empty-cart-content{
+        margin: 20px;
+        text-align: center;
+    }
 }
 
 @media screen and (max-width: 480px) {
