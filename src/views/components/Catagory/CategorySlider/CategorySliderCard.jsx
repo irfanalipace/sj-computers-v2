@@ -23,7 +23,7 @@ const CategorySliderCard = ({ product }) => {
         >
             <Grid
                 container
-                className=" ms-3 ms-lg-0"
+                // className=" ms-3 ms-lg-0"
                 // border={".5px solid gray"}
                 borderRadius={"10px"}
                 height={"285px"}
@@ -52,7 +52,7 @@ const CategorySliderCard = ({ product }) => {
                             ?.join(" ")}
                     />
                 </Grid>
-                <Grid item xs={12} m={"auto"} py={2} sx={{ color: "black" }}>
+                <Grid item xs={12} m={"auto"} py={2} px={2} sx={{ color: "black" }}>
                     <Typography variant={"body2"} sx={twoLineTypography}>
                         {product?.name}
                     </Typography>
@@ -62,6 +62,7 @@ const CategorySliderCard = ({ product }) => {
                     xs={12}
                     m={"auto"}
                     py={4}
+                    px={2}
                     sx={{ color: "black" }}
                     mt={-3}
                 >

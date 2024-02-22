@@ -13,6 +13,10 @@
     height: 88px;
     width: 100px;
 }
+.product-cart-name-mobile-screen{
+    margin-left: -12px;
+    
+}
 .suggested-items-content span {
     /* width: 10px; */
     font-size: 12px;
@@ -51,8 +55,8 @@
         font-weight: 600;
     }
     .suggested-item-image {
-        background-color: #f0f8ff;
-        padding: 20px;
-        margin-right: 20px;
+        /* background-color: #f0f8ff; */
+        /* padding: 20px;
+        margin-right: 20px; */
     }
 }

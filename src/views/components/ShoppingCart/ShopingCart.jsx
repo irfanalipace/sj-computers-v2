@@ -140,13 +140,13 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                     </div>
                                     {cartItems?.map((item) => (
                                         <div key={item.id} id={item.id}>
-                                            <hr className="hrline hide-on-mobile"></hr>
+                                            <hr className="hrline hide-on-mobile "></hr>
                                             <div className="items">
                                                 <CartItem cartData={item} />
                                             </div>
                                         </div>
                                     ))}
-                                    <hr className="hrline hide-on-desktop"></hr>
+                                    <hr className="hrline hide-on-desktop shopping-cart-align-hr-line"></hr>
                                 </div>
                                 <div className="cart-product-subtotal-price hide-mobile-cart-btn">
                                     <span>

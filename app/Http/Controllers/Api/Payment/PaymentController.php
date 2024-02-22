@@ -30,9 +30,9 @@ class PaymentController extends BaseController
         if ($this->user) {
             $this->userId = $this->user->id;
             $this->userType = StatusEnum::USER;
-            $this->totalAmount = \Cart::session($this->userId)->getTotal();
-            $this->subTotal = \Cart::session($this->userId)->getSubTotal();
-            $this->totalQty = \Cart::session($this->userId)->getTotalQuantity();
+            $this->totalAmount = (isset($request->is_buy_now) && $request->is_buy_now == true) ?  \Cart::session($this->userId)->get($request->cart_id)->getPriceSum() : \Cart::session($this->userId)->getTotal();
+            $this->subTotal = (isset($request->is_buy_now) && $request->is_buy_now == true) ?  \Cart::session($this->userId)->get($request->cart_id)->price :\Cart::session($this->userId)->getSubTotal();
+            $this->totalQty = (isset($request->is_buy_now) && $request->is_buy_now == true) ?  \Cart::session($this->userId)->get($request->cart_id)->quantity :\Cart::session($this->userId)->getTotalQuantity();
         } else {
 
             $guestUser = $this->guestUser($request->shipping_address);
@@ -45,7 +45,7 @@ class PaymentController extends BaseController
             $this->shipment_amount = isset($request->details['shipment_amount']) ? $request->details['shipment_amount'] : 0.00;
             $this->estimate_days = isset($request->details['estimate_days']) ? $request->details['estimate_days'] : null;  
         }
-        
+       
         $this->cartDetails = $this->cartDetails($request);
        
         
