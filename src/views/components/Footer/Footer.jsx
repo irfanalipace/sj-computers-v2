@@ -36,7 +36,7 @@ const Footer = () => {
                     <footer className="page-footer font-small blue pt-4 footer-section">
                         <div className="container text-center text-md-center footer-data">
                             <div className="row">
-                                <div className="col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
+                                <div className="col-6 col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
                                     <ul className="list-unstyle1">
                                         <p className="text-uppercase herf-link font-style-heading-footer">
                                             Get to Know Us
@@ -85,7 +85,7 @@ const Footer = () => {
                                     </ul>
                                 </div>
 
-                                <div className="col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
+                                <div className="col-6 col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
                                     {/* <h5 className="text-uppercase">Links</h5> */}
                                     <ul className="list-unstyle2">
                                         <p className="text-uppercase herf-link font-style-heading-footer">
@@ -126,7 +126,7 @@ const Footer = () => {
                                     </ul>
                                 </div>
 
-                                <div className="col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
+                                <div className="col-6 col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
                                     {/* <h5 className="text-uppercase">Links</h5> */}
                                     <ul className="list-unstyle3">
                                         <p className="text-uppercase herf-link font-style-heading-footer">
@@ -144,6 +144,7 @@ const Footer = () => {
                                             <Link
                                                 to="/return_refund_policy"
                                                 className="herf-link text-decoration-none"
+                                                style={{lineHeight: "1.2rem"}}
                                             >
                                                 Return And Refund Policies
                                             </Link>
@@ -182,7 +183,7 @@ const Footer = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
+                                <div className="col-6 col-md-3 mb-md-0 mb-3 footer-text-line-font-size">
                                     {/* <h5 className="text-uppercase">Links</h5> */}
                                     <ul className="list-unstyle4">
                                         <p className="text-uppercase herf-link font-style-heading-footer">

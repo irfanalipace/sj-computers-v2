@@ -302,7 +302,7 @@ const ProductNewReviews = () => {
                                         <img src={productImages} alt="Product" />
                                     </div>
                                 </div>
-                                <div className="col-lg-9 col-md-9 col-sm-6 col-9">
+                                <div className="col-lg-9 col-md-9 col-sm-6 col-9" style={{paddingLeft: "10px"}}>
                                     <div className="row">
                                         <div className="col-md-11">
                                             <div className="review-heading">
@@ -314,10 +314,10 @@ const ProductNewReviews = () => {
                                         </div>
                                     </div>
                                     <div className="d-sm-flex d-flex">
-                                        <div style={{display: "flex", justifyContent: "center"}}>
+                                        <div style={{display: "flex", justifyContent: "start"}}>
                                         <Rating
                                             required
-                                            style={{fontSize: '18px', marginRight: '5px'}}
+                                            style={{fontSize: '16px', marginRight: '5px'}}
                                             name="simple-controlled"
                                             value={value}
                                             onChange={(event, newValue) => {
@@ -326,7 +326,7 @@ const ProductNewReviews = () => {
                                         />
                                         </div>
                                         <div>
-                                        <div className="d-flex align-items-center" style={{justifyContent: "flex-end", width: "50vw"}}>
+                                        <div className="d-flex align-items-center" style={{justifyContent: "flex-end", paddingLeft: "5px",}}>
                                             <div className="d-flex">
                                                 <div className="check-rating-star-review ms-sm-3">
                                                     <FontAwesomeIcon
@@ -341,7 +341,7 @@ const ProductNewReviews = () => {
                                             </div>
 
                                             <div className="check-rating-star-review-name align-items-baseline" style={{fontSize: "8px"}}>
-                                                <div className="lh-1">
+                                                <div className="lh-1" style={{textWrap: "nowrap"}}>
                                                     {userName} |
                                                 </div>
                                                 <div className="data-clear-button-review lh-1">

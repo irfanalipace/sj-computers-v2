@@ -10,6 +10,10 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "@components/Sidebar/Sidebar";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import vectorcart from "@images/home/vector.png";
+
 const MobileScreenModal = lazy(() =>
     import("./MobileScreenModal/MobileScreenModal")
 );
@@ -18,9 +22,14 @@ const MobileSearch = () => {
     const [showModal, setShowModal] = useState(false);
     const [search, setSearch] = useState("");
     const searchString = useSelector((state) => state.products.searchString);
+    const cartDetails = useSelector((state) => state.cart.details);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const user = useSelector((state) => state.auth.user);
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isSideMenu, setSideMenu] = useState(false);
+
     const toggleSidebar = () => {
         return setSideMenu((state) => !state);
     };
@@ -99,16 +108,7 @@ const MobileSearch = () => {
             </CollapseContainer> */}
 
             <div className="search-dev">
-                <>
-                    <Link to="/">
-                        <img
-                            src={BottomNavigationlogo}
-                            alt="Left Image"
-                            className="mobile-imagelogo"
-                        />
-                    </Link>
-                </>
-                <div className="right-content">
+                <div className="left-content">
                     <div className="search-icon-container">
                         <FontAwesomeIcon
                             icon={faBars}
@@ -119,6 +119,48 @@ const MobileSearch = () => {
                             style={{ color: "#ffffff" }}
                         />
                     </div>
+                    <>
+                        <Link to="/">
+                            <img
+                                style={{ maxHeight: "100%", maxWidth: "100%" }}
+                                src={BottomNavigationlogo}
+                                alt="Left Image"
+                                className="mobile-imagelogo"
+                            />
+                        </Link>
+                    </>
+                </div>
+                <div className="right-content">
+                    <div className="sign-in-div">
+                        {isAuthenticated == true ? <span>{user?.name}</span> : ( 
+                        <Link to={"/login"} style={{textDecoration: "none", color: "white"}}>    
+                        Sign in <NavigateNextIcon />
+                        <PermIdentityIcon fontSize="large" className="sign-in-icon" />
+                        </Link>
+                        )
+                         }
+                    </div>   
+                    <Link to={"/cart"}>
+                    <div
+                        className="dropdown dot"
+                        style={{
+                            position: "relative",
+                            display: "inline-block",
+                        }}
+                    >
+                        <img
+                            src={vectorcart}
+                            alt=""
+                            className="vector-cart"
+                            style={{
+                                display: "block",
+                            }}
+                        />
+                        <div className="total-items">
+                            {cartDetails.total_items}
+                        </div>
+                    </div>
+                    </Link>
                 </div>
             </div>
 
