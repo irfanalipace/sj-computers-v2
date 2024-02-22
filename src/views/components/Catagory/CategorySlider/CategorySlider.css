@@ -5,6 +5,12 @@
     border-radius: 0;
     color: gray;
     top: 30%;
+    box-shadow: 2px 2px 5px 0px lightgray;
+}
+
+/* for hiding pagination in arge screen */
+.category-slider .swiper-pagination{
+    display: none;
 }
 
 .category-slider .swiper-button-next::after {
@@ -15,8 +21,11 @@
     font-size: 20px !important;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 576px) {
     .category-slider .slider-button {
         display: none;
+    }
+    .category-slider .swiper-pagination{
+        display: block;
     }
 }
