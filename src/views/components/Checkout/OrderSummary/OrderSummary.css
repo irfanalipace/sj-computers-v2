@@ -6,7 +6,15 @@
 .summary-wrapper {
     padding: 10px 15px;
 }
-
+.order-summer-mobile-size-data span{
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: center;
+    
+}
 .summery-btton-order-summery button{
     font-weight: 600;
     font-size: 12px;

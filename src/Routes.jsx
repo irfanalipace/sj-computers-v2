@@ -24,6 +24,7 @@ const Security = React.lazy(() => import("@pages/Account/Security"));
 const Order = React.lazy(() => import("@pages/Account/Orders"));
 const Cart = React.lazy(() => import("@components/ShoppingCart/Cart"));
 const Checkout = React.lazy(() => import("@pages/Checkout/Checkout"));
+const MobileCheckout = React.lazy(() => import("@pages/Checkout/MobileCheckout"));
 const Test = React.lazy(() => import("@pages/Test/Test"));
 const ThankYou = React.lazy(() => import("@pages/Thankyou/Thankyou"));
 const RefundOrder = React.lazy(() => import("@pages/RefundOrder/RefundOrder"));
@@ -329,6 +330,7 @@ const Router = () => {
                 // <ProtectedRoute>
                 <PageWrapper>
                     <Checkout />
+                  {/* <MobileCheckout /> */}
                 </PageWrapper>
                 // </ProtectedRoute>
             ),

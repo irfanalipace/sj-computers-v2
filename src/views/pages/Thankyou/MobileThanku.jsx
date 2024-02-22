@@ -8,13 +8,12 @@ import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearCartLocally } from "../../../core/utils/cartHelpers";
 import { CLEAR_CART } from "@store/cart/cartSlice";
-import { useViewportWidth } from "@hooks/useViewportWidth";
-import MobileThanku from "./MobileThanku";
+import { colors } from "laravel-mix/src/Log";
 
-export default function ThankYou() {
+export default function MobileThanku() {
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
-    const screenWidth = useViewportWidth();
+
     function formatDate(dateString) {
         const options = { year: "numeric", month: "long", day: "numeric" };
         const date = new Date(dateString);
@@ -29,7 +28,7 @@ export default function ThankYou() {
             console.log("error parsing order: ", error);
         }
     }
-    console.log("orderFromURL: ", orderFromURL);
+   
 
     const navigate = useNavigate();
     const [orderDetails, setOrderDetails] = useState({});
@@ -58,7 +57,7 @@ export default function ThankYou() {
     }, []);
 
     const handleWindowSizeChange = () => {
-        setIsMobile(window.innerWidth <= 430);
+        setIsMobile(window.innerWidth <= 768);
     };
 
     useEffect(() => {
@@ -73,10 +72,70 @@ export default function ThankYou() {
         };
     }, []);
     return (
-        <>
- {isMobile === true ? (
+        <div
+            className="thank-you-page"
+            style={{ marginLeft: "10%", marginRight: "10%" }}
+        > 
+      <div className="oreder-confirm-page-data">  <span>Order Confirmed</span></div>
+   
+            <div className="row margintopBottom">
+                <div className="col-12 my-10">
+                    <div className="d-flex justify-content-center align-items-center">
+                  
+                        <div
+                            className="d-flex justify-content-center align-items-center"
+                            style={{
+                                width: "70px",
+                                height: "70px",
+                                borderRadius: "50%",
+                                backgroundColor: "#318243",
+                            }}
+                        >
+                            <img
+                                src={tickImage}
+                                alt="Tick Image"
+                                style={{
+                                    position: "",
+                                    zIndex: 2,
+                                    marginLeft: "-3.3%",
+                                }}
+                            />
+                           
+                        </div>
+                       
+                    </div>
+                  
+                </div>
+                <div className="jhon-name-user-order">
+                    <span>Hi John,</span>
+                   </div>
+                <div className="col-12 my-2">
+                <div className="oreder-confirm-page-data">  <span>Thanks for Order</span>
+                  
+                    </div>
+                </div>
+                <div className="col-12 my-20">
+                    <p className="paragrap-text-notify-order">
+                        Your order with tracking No <span style={{fontWeight:'500'}}>#124548</span>{" "}
+                        <span style={{ fontWeight: "900" }}>
+                            {orderDetails?.id}
+                        </span>{" "}
+                        has been successfully confirmed. We’ll send you an email
+                        notification once your order has shipped.
+                    </p>
+                </div>
+            </div>
+            <div></div>
+            {/* <div className="product-thumbnail">
+              <img src={productImage} alt="Product" />
+            </div> */}
+            {/* Map through the tableData array and render table rows */}
+            {/* <div class="text-truncate"></div> */}
+            {/* <div className="product-title">{data?.product_name}</div> */}
+
+            {/* {isMobile === true ? (
                 <>
-                    {/* <div className="card-container">
+                    <div className="card-container">
                         {orderDetails?.order_item?.map((data, index) => (
                             <div className="oder-item-card" key={index}>
                                 <div className="card-image">
@@ -141,66 +200,9 @@ export default function ThankYou() {
                                 </div>
                             </div>
                         ))}
-                    </div> */}
-                    <MobileThanku />
+                    </div>
                 </>
             ) : (
-        <div
-            className="thank-you-page"
-            style={{ marginLeft: "10%", marginRight: "10%" }}
-        >
-            <div className="row margintopBottom">
-                <div className="col-12 my-10">
-                    <div className="d-flex justify-content-center align-items-center">
-                        {/* <img
-          src={circle}
-          alt="Circle Image"
-          style={{ position: "", zIndex: 1 }}
-        /> */}
-                        <div
-                            className="d-flex justify-content-center align-items-center"
-                            style={{
-                                width: "70px",
-                                height: "70px",
-                                borderRadius: "50%",
-                                backgroundColor: "#318243",
-                            }}
-                        >
-                            <img
-                                src={tickImage}
-                                alt="Tick Image"
-                                style={{
-                                    position: "",
-                                    zIndex: 2,
-                                    marginLeft: "-3.3%",
-                                }}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="col-12 my-2">
-                    <h1>Thanks for Order</h1>
-                </div>
-                <div className="col-12 my-20">
-                    <p>
-                        Your order with tracking No{" "}
-                        <span style={{ fontWeight: "900" }}>
-                            {orderDetails?.id}
-                        </span>{" "}
-                        has been successfully confirmed. We’ll send you an email
-                        notification once your order has shipped.
-                    </p>
-                </div>
-            </div>
-            <div></div>
-            {/* <div className="product-thumbnail">
-              <img src={productImage} alt="Product" />
-            </div> */}
-            {/* Map through the tableData array and render table rows */}
-            {/* <div class="text-truncate"></div> */}
-            {/* <div className="product-title">{data?.product_name}</div> */}
-
-           
                 <>
                     <table className="thank-you-table">
                         <thead>
@@ -260,53 +262,119 @@ export default function ThankYou() {
                         </tbody>
                     </table>
                 </>
-          
+            )} */}
 
-            <div className="row total-tax-row mx-0">
-                <div className="col-12 d-flex justify-content-end">
-                    {/* <p >Tax ${120.6}</p> */}
-                </div>
-                <div className="col-12 d-flex justify-content-end">
-                    <p style={{ marginRight: "1%", marginTop: "2%" }}>
-                        Tax ${"N/A"}
-                    </p>
-                </div>
-                <div className="col-6 d-flex justify-content-start">
-                    <p className="bold-total">Total</p>
-                </div>
-                <div className="col-6 d-flex justify-content-end">
-                    <p className="bold-total">
-                        $
-                        {orderDetails?.total_amount
-                            ? orderDetails?.total_amount
-                            : "N/A"}
-                    </p>
-                </div>
-            </div>
-            <div className="row mx-0 mb-5">
-                <div className="col-6 d-flex justify-content-start">
-                    {/* {isAuthenticated && (
-                        <div className="col-6 d-flex justify-content-start">
-                            <button
-                                className="track-order-btn"
-                                onClick={() => navigate("/account/orders")}
-                            >
-                                Track your order
-                            </button>
-                        </div>
-                    )} */}
-                </div>
-                <div className="col-6 d-flex justify-content-end">
-                    <button
+<div className="card-container">
+              <span className="order-summery-items-card">Order Summary</span>
+                            <div className="oder-item-card">
+                                <div className="card-image">
+                              
+                                </div>
+                                <div className="card-content">
+                                
+
+                                    <div className="product-details">
+                                     
+                                     <div className="Items-thanku-view-page-thanks">
+                                     <div className="">
+                                          <span>  Item:</span>
+                                            
+                                        </div>
+                                        <div className=" ">
+                                       <span> Product Name</span>
+                                        </div>
+                                     </div>
+                                       
+                                     <div className="Items-thanku-view-page-thanks">
+                                     <div className="">
+                                          <span>  Price:</span>
+                                            
+                                        </div>
+                                        <div className=" ">
+                                       <span style={{fontWeight:'600'}}> $12.3</span>
+                                        </div>
+                                     </div>
+                                     <div className="Items-thanku-view-page-thanks">
+                                     <div className="">
+                                          <span>  Shipping Handling:</span>
+                                            
+                                        </div>
+                                        <div className=" ">
+                                       <span>$23</span>
+                                        </div>
+                                     </div>
+                                     <div className="Items-thanku-view-page-thanks">
+                                     <div className="">
+                                          <span>Total before tax:</span>
+                                            
+                                        </div>
+                                        <div className=" ">
+                                       <span> $12.3</span>
+                                        </div>
+                                     </div>
+                                     <div className="Items-thanku-view-page-thanks">
+                                     <div className="">
+                                          <span>Estimated tax to be calculated:</span>
+                                            
+                                        </div>
+                                        <div className=" ">
+                                       <span> 10</span>
+                                        </div>
+                                     </div>
+                                  <hr></hr>
+                                  <div className="Items-thanku-view-page-thanks">
+                                     <div className="">
+                                          <span style={{fontWeight:'600'}}>Order Total:</span>
+                                            
+                                        </div>
+                                        <div className=" ">
+                                       <span style={{color:'red'}}> $234</span>
+                                        </div>
+                                     </div>
+                                
+                                    </div>
+                                   
+                                </div>
+                                <div className="Items-calcurteing-items">
+                                     
+                                    
+                                     <span > How shipping costs calculates?</span>
+                                    
+                                   </div>
+                            </div>
+                         
+                    </div>
+        
+         
+          
+                    <div className="card-container">
+
+                        <div className="oder-item-card">
+                        <button
                         className="shop-more-btn"
                         onClick={() => navigate("/")}
                     >
                         Shop more
                     </button>
+                        </div>
+                   
+                     
                 </div>
+                <div className="card-container">
+
+<div className="oder-item-card">
+<button
+className="track-oder-item-card"
+onClick={() => navigate("/")}
+>
+Track Your Order
+</button>
+</div>
+
+
+</div>
             </div>
-        </div>
-          )}
-        </>
+      
     );
 }
+
