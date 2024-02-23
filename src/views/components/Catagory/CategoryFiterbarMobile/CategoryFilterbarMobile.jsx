@@ -10,7 +10,8 @@ const CategoryFilterbarMobile = () => {
     const [open, setOpen] = useState(false);
 
     const toggleDrawer = (openStatus) => (event) => {
-        setOpen(openStatus);
+        setOpen(!open);
+        console.log(open, "open");
     };
 
     return (
@@ -25,7 +26,7 @@ const CategoryFilterbarMobile = () => {
                         <Button sx={{color: "#318243"}} onClick={toggleDrawer(false)}>Close</Button>
                     </div>
                     <div style={{ maxHeight: "60vh" }}>
-                        <CategorySidebar inDrawer={true} />
+                        <CategorySidebar inDrawer={true} toggleDrawer={toggleDrawer()} />
                     </div>
                 </div>
             </Drawer>

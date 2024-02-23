@@ -41,7 +41,7 @@ import gaminimg1 from "@images/product/item3/image1.png";
 import gaminimg2 from "@images/product/item3/image2.png";
 import gaminimg3 from "@images/product/item3/image3.png";
 import rams from "../../../assets/images/homepageImage/RamMem/rams.png";
-import TouchScreenLaptop from "../../../assets/images/categories/TouchScreenLaptop.png";
+import TouchScreenLaptop from "../../../assets/images/categories/TouchScreenlaptop.png";
 // import NvidiaImg from "../../../assets/images/categories/Nvidia.png";
 import NvidiaImg from "../../../assets/images/categories/Nvidia.png";
 import NvidiaImg2 from "../../../assets/images/categories/Nvidia2.png";
@@ -83,24 +83,27 @@ const BannerCategory = () => {
     const screenWidth = useViewportWidth();
     const featuredItems = [
         {
-            image: image1,
+            image: "https://upload.wikimedia.org/wikipedia/commons/2/25/Dell_logo.png",
             categoryLink: "/category/bto",
             categoryName: "Dell",
         },
         {
-            image: image2,
+            // image: image2,
+            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/HP_logo_2012.svg/1024px-HP_logo_2012.svg.png",
             categoryLink: "/category/laptops",
             categoryName: "HP",
         },
         {
-            image: image4,
+            // image: image4,
+            image: "https://1000logos.net/wp-content/uploads/2017/03/Lenovo-Logo-2003.png",
             categoryLink: "/category/desktop",
             categoryName: "Lenovo",
         },
         {
-            image: image3,
+            // image: image3,
+            image: "https://bto.us/cdn/shop/files/BTO-logo.webp?v=1704702209&width=110",
             categoryLink: "/category/gaming_desktops",
-            categoryName: "2 in 1s Laptops",
+            categoryName: "BTO",
         },
     ];
     const featured = [
@@ -124,17 +127,20 @@ const BannerCategory = () => {
     ];
     const networkItems = [
         {
-            image: linkrouter,
+            // image: linkrouter,
+            image: "https://files.refurbed.com/ii/dell-optiplex-7050-sff-1673339333.jpg",
             categoryLink: "/category/sff",
             categoryName: "SFF",
         },
         {
-            image: modem,
+            // image: modem,
+            image: "https://www.mbcommunication.com.pk/4802-large_default/intel-nt12.jpg",
             categoryLink: "/category/mini",
             categoryName: "Mini",
         },
         {
-            image: modem,
+            // image: modem,
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNwOXf3PYGYs7LceVZxSEPVUEI1Pp8gpQaJukhqYONUw&s",
             categoryLink: "/category/tower",
             categoryName: "Tower",
         },
@@ -146,24 +152,28 @@ const BannerCategory = () => {
     ];
     const upgradecomputers = [
         {
-            image: img1,
+            // image: img1,
+            image: "https://5.imimg.com/data5/HI/PC/MY-12891264/computer-500x500.jpg",
             categoryLink: "/category/bto",
-            categoryName: "D-Link Router",
+            categoryName: "Full Size",
         },
         {
-            image: img2,
+            // image: img2,
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFLacq8lq418sCgcdCPAg98-8cZC7CEF03Ug&s",
             categoryLink: "/category/laptops",
-            categoryName: "D-Link Modem",
+            categoryName: "Compact",
         },
         {
-            image: img3,
+            // image: img3,
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu3npkk2sLCcFmZfTFKP8XKz62_DwfLLqGeIPcMzlQ2A&s",
             categoryLink: "/category/desktop",
-            categoryName: "D-Link Device",
+            categoryName: "Work Station",
         },
         {
-            image: img1,
+            // image: img1,
+            image: "https://mms.businesswire.com/media/20151020006538/en/492013/5/Dell-OptiPlex-family.jpg",
             categoryLink: "/category/gaming_desktops",
-            categoryName: "D-Link Router",
+            categoryName: "Full Size",
         },
     ];
     const Sellingimages = [
@@ -248,7 +258,7 @@ const BannerCategory = () => {
             categoryLink: "/category/desktop",
             categoryName: "Nvidia",
         },
-    ];
+    ]
     return (
         <div className="banner-category-section">
             <div className="banner-wrapper">

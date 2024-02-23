@@ -19,7 +19,7 @@ import { Slider, Typography } from "@mui/material";
 // import FilterByRange from "./FilterByRange";
 import Button from "../../common/Button/Button";
 
-const FilterBarlayout2 = ({inDrawer, DataInDrawerToggler, DataInDrawer}) => {
+const FilterBarlayout2 = ({inDrawer, DataInDrawerToggler, DataInDrawer, toggleDrawer}) => {
     const [filters, setFilters] = useState({});
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [filtersInArray, setFiltersInArray] = useState([]);
@@ -81,6 +81,9 @@ const FilterBarlayout2 = ({inDrawer, DataInDrawerToggler, DataInDrawer}) => {
     //     }));
     // };
     const handleFilterSelect = (event, category, option) => {
+        if(toggleDrawer){
+            toggleDrawer()
+        }
         setFiltersInArray((prevSelectedFilters) => {
             let filter = {
                 key: category,

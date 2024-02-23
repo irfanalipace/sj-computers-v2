@@ -166,7 +166,7 @@ const ProductType = () => {
         {
             image: twoInOneImgUpdate,
             categoryLink: "/category/2_in_1_laptops",
-            categoryName: "2 in 1s Laptops",
+            categoryName: "2 in 1 Laptops",
         },
         {
             image: AccessoriesImgUpdate,
