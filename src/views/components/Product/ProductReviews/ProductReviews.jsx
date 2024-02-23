@@ -317,7 +317,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                         </>
                     )}
                     {!isUpSmall && (
-                        <h3 className="product-section-heading my-4 py-1">
+                        <h3 className="product-section-heading mt-3 mb-3 py-1">
                             {PRODUCT_FILTER_LABEL_ENUM[filterBy]}
                         </h3>
                     )}
@@ -335,7 +335,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                     (review, index) => (
                                         <div
                                             key={"review-" + review.id}
-                                            className="my-4"
+                                            className="my-1"
                                         >
                                             {
                                                 <ReviewCard
