@@ -113,7 +113,10 @@ const SeggestedItems = ({ num }) => {
                                     Add to cart
                                 </button>
                             ) : (
-                                <p style={{ fontSize: "12px" }}>
+                                <p
+                                    style={{ fontSize: "12px" }}
+                                    className="hide-on-mobile"
+                                >
                                     Item Already in cart
                                 </p>
                             )}{" "}

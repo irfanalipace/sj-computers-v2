@@ -6,7 +6,7 @@ import StarRatings from "react-star-ratings";
 import { useSelector } from "react-redux";
 import AddCartComponents from "../Product/CheckOutCard/AddCartComponents";
 import { generatePath } from "../../../core/utils/helpers";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 const SingleSimilarItem = ({
     type = "",
@@ -18,7 +18,9 @@ const SingleSimilarItem = ({
         (state) => state.orders.orderEstimatedDelivery
     );
     const productPath = generatePath(product?.url);
+    const theme = useTheme();
 
+    const isUpSmall = useMediaQuery(theme.breakpoints.up("md"));
     const ProductDetails = () => (
         <div>
             <div className={"product-details"}>
@@ -170,8 +172,8 @@ const SingleSimilarItem = ({
                     </Typography>
                     <Stack direction={"row"} alignItems={"start"}>
                         <LazyLoadImage
-                            width={"55px"}
-                            height={"55px"}
+                            width={isUpSmall ? "55px" : "100px"}
+                            height={isUpSmall ? "55px" : "100px"}
                             style={{ objectFit: "contain" }}
                             src={product?.image}
                             alt={product?.name
