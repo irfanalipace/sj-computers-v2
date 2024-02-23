@@ -64,7 +64,7 @@ const SimilarItems = ({ similarProducts, featuredProducts, isMobile }) => {
                         ml={2}
                         mb={5}
                     >
-                        Get Similar items fast.
+                        Get Similar items fast
                     </Typography>
 
                     <div

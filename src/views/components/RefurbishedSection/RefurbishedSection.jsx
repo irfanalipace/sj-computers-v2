@@ -32,7 +32,7 @@ function RefurbishedSection() {
                     What is SJ Computers?{" "}
                 </Typography>
             </Grid>
-            <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Grid item lg={12} md={12} sm={12} xs={12} mt={!isUpSmall && -2}>
                 <Typography variant="body2" fontSize={!isUpSmall && "12px"}>
                     SJ Computers stands as your premier source for reconditioned
                     desktops, laptops, and computers, all backed by the
