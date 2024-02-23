@@ -10,7 +10,7 @@ const FlashProducts = ({images}) => {
                         <div className="product-type-section-selleing-products">
                             <div className='d-flex'>
                                 <h4>Best Selling Laptops</h4>
-                                <p style={{marginLeft: "20px", fontSize: '12px', color: '#007185'}}> See all offer</p>
+                                <p style={{marginLeft: "20px", fontSize: '12px', color: '#007185', display: "flex", alignItems: "center", justifyContent: "center"}}> See all offer</p>
                             </div>
                             <SellingProducts images={images} />
                         </div>

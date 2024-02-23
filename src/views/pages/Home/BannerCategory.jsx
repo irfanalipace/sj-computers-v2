@@ -125,22 +125,22 @@ const BannerCategory = () => {
     const networkItems = [
         {
             image: linkrouter,
-            categoryLink: "/category/bto",
+            categoryLink: "/category/sff",
             categoryName: "SFF",
         },
         {
             image: modem,
-            categoryLink: "/category/laptops",
+            categoryLink: "/category/mini",
             categoryName: "Mini",
         },
         {
             image: modem,
-            categoryLink: "/category/desktop",
+            categoryLink: "/category/tower",
             categoryName: "Tower",
         },
         {
             image: linkrouter,
-            categoryLink: "/category/gaming_desktops",
+            categoryLink: "/category/usff",
             categoryName: "USFF",
         },
     ];
