@@ -44,7 +44,7 @@ export default function TopBar({ screenWidth }) {
                 // style={{ background: screenWidth > 450 ? "" : "#00305e" }}
             >
                 <div className="topBar-inner  justify-content-start justify-content-md-center">
-                    <div className="menuBar justify-content-center justify-content-md-center justify-content-lg-start">
+                    <div className="menuBar justify-content-start justify-content-md-start justify-content-lg-start">
                         <div className="all-menu">
                             <span
                                 className="navIcon  hover-effect-sets"
