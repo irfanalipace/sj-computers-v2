@@ -347,12 +347,13 @@ export default function MobileThanku() {
         
          
           
-                    <div className="card-container">
+                    <div className="card-container"  style={{marginBottom:'40px'}}>
 
                         <div className="oder-item-card">
                         <button
                         className="shop-more-btn"
                         onClick={() => navigate("/")}
+                        
                     >
                         Shop more
                     </button>
@@ -360,7 +361,7 @@ export default function MobileThanku() {
                    
                      
                 </div>
-                <div className="card-container">
+                {/* <div className="card-container">
 
 <div className="oder-item-card">
 <button
@@ -372,7 +373,7 @@ Track Your Order
 </div>
 
 
-</div>
+</div> */}
             </div>
       
     );
