@@ -81,6 +81,7 @@ const RecommandSectionsProducts = React.lazy(() =>
 );
 const BannerCategory = () => {
     const screenWidth = useViewportWidth();
+
     const featuredItems = [
         {
             image: "https://upload.wikimedia.org/wikipedia/commons/2/25/Dell_logo.png",
