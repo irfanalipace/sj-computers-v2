@@ -1,20 +1,25 @@
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import DOMPurify from "dompurify";
 
 const ProductDescription = ({ description }) => {
-    console.log(description);
+    const theme = useTheme();
+
+    const isUpSmall = useMediaQuery(theme.breakpoints.up("md"));
     return (
         <Grid
             container
             borderTop={"1px solid lightgray"}
             rowSpacing={1}
-            p={1}
-            pt={3}
+            pt={isUpSmall && 3}
         >
             <Grid item xs={12}>
                 {description && (
-                    <Typography variant="body1" fontWeight={"bold"}>
+                    <Typography
+                        variant="body1"
+                        fontWeight={"bold"}
+                        fontSize={!isUpSmall && "14px"}
+                    >
                         Product Description
                     </Typography>
                 )}
@@ -22,13 +27,12 @@ const ProductDescription = ({ description }) => {
             <Grid item xs={12}>
                 {/* <Typography variant="body1" ml={3}> */}
                 <Box
-                    ml={3}
+                    sx={{ fontSize: !isUpSmall && "12px" }}
+                    pb={2}
                     dangerouslySetInnerHTML={{
                         __html: DOMPurify.sanitize(description),
                     }}
-                >
-                    {/* {description} */}
-                </Box>
+                ></Box>
                 {/* </Typography> */}
             </Grid>
         </Grid>

@@ -27,7 +27,11 @@ const SimilarItems = ({ similarProducts, featuredProducts, isMobile }) => {
                         <SingleSimilarItem
                             isMobile={isUpSmall ? false : true}
                             product={featuredProducts[0]}
-                            heading={"Featured items you may like"}
+                            heading={
+                                isUpSmall
+                                    ? "Featured items you may like"
+                                    : "Similar item with fast delivery"
+                            }
                         />
                     ) : (
                         <></>

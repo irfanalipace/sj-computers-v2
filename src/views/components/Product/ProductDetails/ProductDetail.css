@@ -18,7 +18,8 @@
 .item-title {
     font-weight: 400;
     font-size: 24px;
-    line-height: 29px;
+    line-height: 28px;
+    text-overflow: ellipsis;
 
     /* Color Secondary */
 
@@ -341,6 +342,11 @@
 @media screen and (max-width: 880px) {
     .item-title {
         font-size: 12px;
+        line-height: 20px;
+        overflow: hidden;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
     .res {
         text-align: center;
@@ -474,7 +480,7 @@
 }
 @media screen and (max-width: 450px) {
     .item-title {
-        line-height: 1.5;
+        line-height: 20px;
     }
 }
 
