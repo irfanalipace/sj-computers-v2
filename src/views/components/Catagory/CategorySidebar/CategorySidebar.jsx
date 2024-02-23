@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 import "./CategorySidebar.css";
 
-const CategorySidebar = ({ inDrawer }) => {
+const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
     const [isSubCategoryVisible, setIsSubCategoryVisible] = useState(
         computerCategories.map(() => false)
     );
@@ -254,6 +254,7 @@ const CategorySidebar = ({ inDrawer }) => {
                         inDrawer={inDrawer}
                         DataInDrawer={DataInDrawer}
                         DataInDrawerToggler={DataInDrawerToggler}
+                        toggleDrawer={toggleDrawer}
                     />
                 </div>
             </Grid>

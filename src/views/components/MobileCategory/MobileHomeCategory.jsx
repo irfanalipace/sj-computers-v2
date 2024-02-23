@@ -118,7 +118,7 @@ const MobileHomeCategory = () => {
         {
             image: image3,
             categoryLink: "/category/gaming_desktops",
-            categoryName: "2 in 1s Laptops",
+            categoryName: "BTO",
         },
     ];
 
