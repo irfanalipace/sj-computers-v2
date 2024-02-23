@@ -64,7 +64,8 @@
     text-align: left;
     /* padding-left: 20px; */
     font-weight: 600;
-    font-size: 14px;
+    /* font-size: 14px; */
+    font-size: 18px;
 }
 
 .product-type-section h1 {
@@ -200,7 +201,7 @@ color: #B12704;
     margin-bottom: 15px;
     font-weight: 600;
     color: black;
-    font-size: 14px;
+    font-size: 18px;
   }
   .product-type-section-selleing-products img {
     width: 100%;
