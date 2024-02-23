@@ -5,7 +5,7 @@ import Sidebar from "@components/Sidebar/Sidebar";
 
 import "./TopBar.css";
 
-export default function TopBar() {
+export default function TopBar({ screenWidth }) {
     const [isSideMenu, setSideMenu] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const location = useLocation();
@@ -39,9 +39,12 @@ export default function TopBar() {
 
     return (
         <>
-            <header className="topBar px-3">
-                <div className="topBar-inner">
-                    <div className="menuBar">
+            <header
+                className="topBar px-1 px-md-3 "
+                style={{ background: screenWidth > 450 ? "" : "#00305e" }}
+            >
+                <div className="topBar-inner  justify-content-start justify-content-md-center">
+                    <div className="menuBar justify-content-start justify-content-md-center">
                         <div className="all-menu">
                             <span
                                 className="navIcon  hover-effect-sets"
@@ -49,7 +52,7 @@ export default function TopBar() {
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="h-5 w-5"
+                                    className="h-5 w-5 pb-1"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
                                 >
@@ -59,7 +62,7 @@ export default function TopBar() {
                                         <path d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" />
                                     )}
                                 </svg>
-                                <small className="small-text-size">All</small>
+                                <small className="small-text-size ">All</small>
                             </span>
                         </div>
 

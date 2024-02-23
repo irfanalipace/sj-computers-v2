@@ -18,7 +18,7 @@ const MobileScreenModal = lazy(() =>
     import("./MobileScreenModal/MobileScreenModal")
 );
 
-const MobileSearch = () => {
+const MobileSearch = ({ screenWidth }) => {
     const [showModal, setShowModal] = useState(false);
     const [search, setSearch] = useState("");
     const searchString = useSelector((state) => state.products.searchString);
@@ -132,34 +132,44 @@ const MobileSearch = () => {
                 </div>
                 <div className="right-content">
                     <div className="sign-in-div">
-                        {isAuthenticated == true ? <span>{user?.name}</span> : ( 
-                        <Link to={"/login"} style={{textDecoration: "none", color: "white"}}>    
-                        Sign in <NavigateNextIcon />
-                        <PermIdentityIcon fontSize="large" className="sign-in-icon" />
-                        </Link>
-                        )
-                         }
-                    </div>   
-                    <Link to={"/cart"}>
-                    <div
-                        className="dropdown dot"
-                        style={{
-                            position: "relative",
-                            display: "inline-block",
-                        }}
-                    >
-                        <img
-                            src={vectorcart}
-                            alt=""
-                            className="vector-cart"
-                            style={{
-                                display: "block",
-                            }}
-                        />
-                        <div className="total-items">
-                            {cartDetails.total_items}
-                        </div>
+                        {isAuthenticated == true ? (
+                            <span>{user?.name}</span>
+                        ) : (
+                            <Link
+                                to={"/login"}
+                                style={{
+                                    textDecoration: "none",
+                                    color: "white",
+                                }}
+                            >
+                                Sign in <NavigateNextIcon />
+                                <PermIdentityIcon
+                                    fontSize="large"
+                                    className="sign-in-icon"
+                                />
+                            </Link>
+                        )}
                     </div>
+                    <Link to={"/cart"}>
+                        <div
+                            className="dropdown dot"
+                            style={{
+                                position: "relative",
+                                display: "inline-block",
+                            }}
+                        >
+                            <img
+                                src={vectorcart}
+                                alt=""
+                                className="vector-cart"
+                                style={{
+                                    display: "block",
+                                }}
+                            />
+                            <div className="total-items">
+                                {cartDetails.total_items}
+                            </div>
+                        </div>
                     </Link>
                 </div>
             </div>
@@ -195,11 +205,12 @@ const MobileSearch = () => {
             </div>
 
             <Sidebar openState={isSideMenu} toggleSidebar={toggleSidebar} />
-
-            <div className="mobile-box-model">
-                <MobileScreenModal onClick={handleButtonClick} />
-                {showModal && <ModalBox closeModal={closeModal} />}
-            </div>
+            {screenWidth > 450 && (
+                <div className="mobile-box-model">
+                    <MobileScreenModal onClick={handleButtonClick} />
+                    {showModal && <ModalBox closeModal={closeModal} />}
+                </div>
+            )}
         </div>
     );
 };
