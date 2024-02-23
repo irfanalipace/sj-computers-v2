@@ -23,7 +23,7 @@ const MobileRecommand = () => {
     return (
         <div className="dev-recommand">
             <div className="reommand-products-heading">
-                <p>Recommended Products</p>
+                <p style={{fontSize: "18px"}}>Recommended Products</p>
             </div>
             {products &&
                 products.length > 0 &&
