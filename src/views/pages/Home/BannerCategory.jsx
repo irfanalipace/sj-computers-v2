@@ -41,7 +41,7 @@ import gaminimg1 from "@images/product/item3/image1.png";
 import gaminimg2 from "@images/product/item3/image2.png";
 import gaminimg3 from "@images/product/item3/image3.png";
 import rams from "../../../assets/images/homepageImage/RamMem/rams.png";
-import TouchScreenLaptop from "../../../assets/images/categories/TouchScreenlaptop.png";
+import TouchScreenLaptop from "../../../assets/images/categories/TouchScreenLaptop.png";
 // import NvidiaImg from "../../../assets/images/categories/Nvidia.png";
 import NvidiaImg from "../../../assets/images/categories/Nvidia.png";
 import NvidiaImg2 from "../../../assets/images/categories/Nvidia2.png";
@@ -247,7 +247,7 @@ const BannerCategory = () => {
             categoryLink: "/category/desktop",
             categoryName: "Nvidia",
         },
-    ]
+    ];
     return (
         <div className="banner-category-section">
             <div className="banner-wrapper">

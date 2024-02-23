@@ -8,14 +8,14 @@ import addDesktop from "@images/categories/wellcome.webp";
 import categoryImg1 from "@images/categories/desktopweb.webp";
 import categorybusinussweb from "@images/categories/businussweb.webp";
 import btoimg from "@images/categories/btoweb.webp";
-import twoInOneLaptopImg from "@images/categories/2in1Laptop.png"
-import AccessoriesImg from "@images/categories/Accessories.png"
-import AccessoriesImgUpdate from "@images/categories/AccessoriesUpdate.png"
-import LaptopImgUpdate from "@images/categories/LaptopUpdate.png"
-import DesktopImgUpdate from "@images/categories/desktopUpdate.png"
-import twoInOneImgUpdate from "@images/categories/2in1LaptopUpdate.png"
-import GamingDesktopImg from "@images/categories/gamingDesktops.png"
-import Laptop2Img from "@images/categories/Laptop2.png"
+import twoInOneLaptopImg from "@images/categories/2in1laptop.png";
+import AccessoriesImg from "@images/categories/Accessories.png";
+import AccessoriesImgUpdate from "@images/categories/AccessoriesUpdate.png";
+import LaptopImgUpdate from "@images/categories/LaptopUpdate.png";
+import DesktopImgUpdate from "@images/categories/desktopUpdate.png";
+import twoInOneImgUpdate from "@images/categories/2in1LaptopUpdate.png";
+import GamingDesktopImg from "@images/categories/gamingDesktops.png";
+import Laptop2Img from "@images/categories/Laptop2.png";
 import laptopimg from "@images/categories/laptopweb.webp";
 import { Rating } from "@mui/material";
 import FontAwesome from "react-fontawesome";
@@ -65,7 +65,6 @@ import rectangle3 from "../../../assets/images/flashsaleimaes/rectangle3.png";
 import rectangle4 from "../../../assets/images/flashsaleimaes/rectangle4.png";
 import rectangle5 from "../../../assets/images/flashsaleimaes/rectangle5.png";
 
-
 // const gamingArray = [
 //     {
 //         name: "New Arrivals in Gaming Systems",
@@ -112,28 +111,21 @@ const ProductType = () => {
     // const hours = duration.hours();
     // const minutes = duration.minutes();
 
+    const dbDate = new Date().getTime();
 
-const dbDate = new Date().getTime();
+    const parsedDate = new Date(dbDate);
 
-const parsedDate = new Date(dbDate);
+    //Once you get the dates, you can do the date calculate, like:
 
+    //Get 1 day in milliseconds
+    var one_day = 1000 * 60 * 60 * 24;
 
+    const date1 = new Date("9/9/2020").getTime(); //JUST AN EXAMPLE
+    const date2 = new Date("10/9/2020").getTime(); //JUST AN EXAMPLE
 
+    const diffTime = Math.abs(date2 - date1);
 
-
-//Once you get the dates, you can do the date calculate, like:
-
-//Get 1 day in milliseconds
-var one_day=1000*60*60*24;
-
-const date1 = new Date('9/9/2020').getTime(); //JUST AN EXAMPLE
-const date2 = new Date('10/9/2020').getTime(); //JUST AN EXAMPLE
-
-const diffTime = Math.abs(date2 - date1);
-
-const diffDays = Math.ceil(diffTime / one_day); 
-
-
+    const diffDays = Math.ceil(diffTime / one_day);
 
     useEffect(() => {
         getProduct();
@@ -299,7 +291,7 @@ const diffDays = Math.ceil(diffTime / one_day);
 
     return (
         <div className=" ">
-             {/* <div className="product-type-container"></div> */}
+            {/* <div className="product-type-container"></div> */}
             <div className="row mx-0">
                 {categoryArray.map((category, index) => (
                     <div key={index} className="col-12 col-sm-6 col-lg-3">
@@ -339,20 +331,33 @@ const diffDays = Math.ceil(diffTime / one_day);
                                 />
                             </div>
                         ) : (
-                            <div className="advertisement-heading" style={{padding: "5px"}}>
-                                <h2 className="h2-cart" style={{marginBottom: '5px' , fontSize: "1.18rem"}}>
+                            <div
+                                className="advertisement-heading"
+                                style={{ padding: "5px" }}
+                            >
+                                <h2
+                                    className="h2-cart"
+                                    style={{
+                                        marginBottom: "5px",
+                                        fontSize: "1.18rem",
+                                    }}
+                                >
                                     Log in for the best experience
                                 </h2>
-                                <div style={{padding: "10px"}}>
-                                <Link to="/login">
-                                    <button
-                                        style={{borderRadius: "8px", backgroundColor: "#318243", color: "white"}}
-                                        type="button"
-                                        className="button-save"
-                                    >
-                                        Login Safely
-                                    </button>
-                                </Link>
+                                <div style={{ padding: "10px" }}>
+                                    <Link to="/login">
+                                        <button
+                                            style={{
+                                                borderRadius: "8px",
+                                                backgroundColor: "#318243",
+                                                color: "white",
+                                            }}
+                                            type="button"
+                                            className="button-save"
+                                        >
+                                            Login Safely
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                         )}
@@ -441,9 +446,8 @@ const diffDays = Math.ceil(diffTime / one_day);
                                                 </p>
                                             </div>
                                             <p className="dev-sactions-price-old-new-time">
-                                                Ends in {parsedDate .getHours()}h:{parsedDate .getMinutes()}m
-
-                                               
+                                                Ends in {parsedDate.getHours()}
+                                                h:{parsedDate.getMinutes()}m
                                             </p>
                                         </div>
                                     </div>

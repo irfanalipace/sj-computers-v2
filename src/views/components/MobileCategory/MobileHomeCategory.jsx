@@ -22,7 +22,7 @@ import image1 from "../../../assets/images/homepageImage/featureImages/image1.pn
 import image2 from "../../../assets/images/homepageImage/featureImages/image2.png";
 import image3 from "../../../assets/images/homepageImage/featureImages/image3.png";
 import image4 from "../../../assets/images/homepageImage/featureImages/image4.png";
-import TouchScreenLaptop from "../../../assets/images/categories/TouchScreenlaptop.png"
+import TouchScreenLaptop from "../../../assets/images/categories/TouchScreenLaptop.png";
 import wellsjcomputer from "@images/categories/welcomesjcomputer.webp";
 import ProductItem4 from "@components/homeproduct/productcategory/ProductItem4";
 import MobileFeaturedProducts from "./MobileFeaturedProducts/MobileFeaturedProducts";
@@ -124,33 +124,33 @@ const MobileHomeCategory = () => {
 
     const shopByFormFactorItems = [
         {
-            categoryName: "SFF"
+            categoryName: "SFF",
         },
         {
-            categoryName: "Mini"
+            categoryName: "Mini",
         },
         {
-            categoryName: "Tower"
+            categoryName: "Tower",
         },
         {
-            categoryName: "USFF"
+            categoryName: "USFF",
         },
-    ]
+    ];
 
     const BudgetFriendlyItems = [
         {
-            categoryName: "D-link-router"
+            categoryName: "D-link-router",
         },
         {
-            categoryName: "Mini-Desktops"
+            categoryName: "Mini-Desktops",
         },
         {
-            categoryName: "D-link-router"
+            categoryName: "D-link-router",
         },
         {
-            categoryName: "Mini-Desktops"
+            categoryName: "Mini-Desktops",
         },
-    ]
+    ];
 
     const featuredimages = [
         gamingimg1,
@@ -215,7 +215,6 @@ const MobileHomeCategory = () => {
         rectangle4,
         rectangle5,
     ];
-    
 
     return (
         <div>
