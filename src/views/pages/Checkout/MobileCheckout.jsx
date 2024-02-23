@@ -24,6 +24,7 @@ import MobileSummary from "../../components/Checkout/OrderSummary/MobileSumery";
 import MobileReviewCheckout from "../../components/Checkout/ReviewCheckout/MobileReviewCheckout";
 import ReviewButton from "../../components/Checkout/ReviewCheckout/ReviewButton";
 import ShipingModalSummery from "../../components/Checkout/OrderSummary/ShipingModalSummery";
+import { Flex } from "@mantine/core";
 
 export default function MobileCheckout() {
     const location = useLocation();
@@ -191,13 +192,13 @@ export default function MobileCheckout() {
                                         </div>
                                     </div>        
 
-                                    {!isAuthenticated && (
+                                    {/* {!isAuthenticated && (
                                         <div>
-                                            <div>
+                                            <div className="mobile-data-change-hide">
                                                 <Discount />
                                             </div>
                                         </div>
-                                    )}
+                                    )} */}
 
                                  
                                 </div>
@@ -247,12 +248,19 @@ export default function MobileCheckout() {
                                             <ShippingMethod />
                                         </div> */}
                                         <div>
-                                            <input type="radio" name="radio"  id="specifyColor"/>
-                                            <span className="shipping-data-shiping-view-mobile">Free Shipping
-                                            <p style={{ fontSize: "10px", marginLeft:'15px' }}>
+                                        <div style={{display:"flex", justifyContent:""}}>
+                                        <div style={{marginTop:"3px"}}>
+                                           <input type="radio" name="radio"  id="specifyColor"/>
+                                           </div>
+                                            <div>
+                                            <span className="shipping-data-shiping-view-mobile">Free Shipping  </span>
+                                            <p style={{ fontSize: "10px" }}>
                                                 Mon, Nov 13
                                             </p>
-                                            </span>
+                                            </div>
+                                           
+                                        </div>
+                                           
                                         </div>
                                         <div className="summery-modal-data-open-mobile">
                                             <span onClick={openModal}>order Summery</span>
@@ -261,13 +269,13 @@ export default function MobileCheckout() {
                                      
                                     </div>        
                                  
-                                    {!isAuthenticated && (
+                                    {/* {!isAuthenticated && (
                                         <div>
-                                            <div>
+                                            <div className="mobile-data-change-hide">
                                                 <Discount />
                                             </div>
                                         </div>
-                                    )}
+                                    )} */}
 
                                  
                                 </div>
@@ -336,13 +344,13 @@ export default function MobileCheckout() {
                                         </div>
                                     </div>        
 
-                                    {!isAuthenticated && (
+                                    {/* {!isAuthenticated && (
                                         <div>
-                                            <div>
+                                            <div className="mobile-data-change-hide">
                                                 <Discount />
                                             </div>
                                         </div>
-                                    )}
+                                    )} */}
 
                                  
                                 </div>
@@ -374,7 +382,7 @@ export default function MobileCheckout() {
                                     <div className="return-paragraph-policy-data">
                                    <span>
                                    You Need to add more items to your order? Continue 
-                                   shopping on<br></br> the <Link className="text-decoration-none" style={{color:"#007185", fontSize:'12px', fontWeight:'600'}}>sjcomputers.us</Link> homepage.
+                                   shopping on the <Link className="text-decoration-none" style={{color:"#007185", fontSize:'12px', fontWeight:'600'}}>sjcomputers.us</Link> homepage.
                                  
                                    </span>
                                     </div>

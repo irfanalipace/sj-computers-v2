@@ -103,7 +103,7 @@ span {
 
 @media (min-width: 1700px) {
     .inner-body {
-        max-width: 1800px;
+        /* max-width: 1800px; */
         margin: auto;
     }
     .inner-body > div {

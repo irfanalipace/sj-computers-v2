@@ -81,4 +81,7 @@ element.style {
     align-items: center;
     animation: bounce 1.5s infinite;
 }
+/* .discount-card-data-checkout{
+  display: none;
+} */
 }

@@ -81,6 +81,7 @@ const RecommandSectionsProducts = React.lazy(() =>
 );
 const BannerCategory = () => {
     const screenWidth = useViewportWidth();
+
     const featuredItems = [
         {
             image: image1,

@@ -212,8 +212,8 @@ export default function Checkout() {
                                       </div>
   
                                       {!isAuthenticated && (
-                                          <div>
-                                              <div>
+                                          <div >
+                                              <div >
                                                   <Discount />
                                               </div>
                                           </div>
