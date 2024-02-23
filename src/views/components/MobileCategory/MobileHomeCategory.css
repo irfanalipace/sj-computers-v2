@@ -110,7 +110,7 @@
     font-size: 11px;
 }
 .swiper-slider-mobile-category {
-    display: flex;
+    display: flex !important;
     background: none !important;
 }
 
