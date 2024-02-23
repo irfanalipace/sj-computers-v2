@@ -15,23 +15,34 @@ import footerlogo from "@images/header-logo.png";
 import paypal from "@images/common/paypal.png";
 import visa from "@images/common/visa.png";
 import mastercard from "@images/common/mastercard.png";
-
+import { useViewportWidth } from "@hooks/useViewportWidth";
 import "./Checkout.css";
 import Discount from "@components/Checkout/Discount/Discount";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import MobileSummary from "../../components/Checkout/OrderSummary/MobileSumery";
+import MobileReviewCheckout from "../../components/Checkout/ReviewCheckout/MobileReviewCheckout";
+import ReviewButton from "../../components/Checkout/ReviewCheckout/ReviewButton";
+import ShipingModalSummery from "../../components/Checkout/OrderSummary/ShipingModalSummery";
 
 export default function MobileCheckout() {
     const location = useLocation();
-    const { error } = location.state || {};
+    const { error } = location?.state || {};
     const initAccordionValues = {
         1: { open: false },
         2: { open: false },
         3: { open: false },
     };
     const navigate = useNavigate();
+    const [isModalOpen, setModalOpen] = useState(false);
 
+    const openModal = () => {
+      setModalOpen(true);
+    };
+  
+    const closeModal = () => {
+      setModalOpen(false);
+    };
     const [accordion, setAccordion] = useState(initAccordionValues);
     const [paymentMethod, setPaymentMethod] = useState("");
     const [currentAccordionId, setCurrentAccordionId] = useState();
@@ -90,21 +101,40 @@ export default function MobileCheckout() {
             }
         }
     }, [searchParams.get("error")]);
+    const handleWindowSizeChange = () => {
+        setIsMobile(window.innerWidth <= 430);
+    };
 
+    useEffect(() => {
+        const handleResize = () => {
+            handleWindowSizeChange();
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
+ 
     return (
         <>
+      
             {loading ? (
                 <Loader />
             ) : (
                 <div className="checkout-page">
                     <div className="checkout-header">
                         <div className="checkout-header-wrapper">
+                        
                             <div className="d-flex justify-content-between">
                                 <div className="logo-wrapper">
                                     <Link to={"/"}>
                                         <img src={footerlogo} />
                                     </Link>
                                 </div>
+                            
                                 <div className="items-number">
                                     {isAuthenticated ? (
                                         <h3>
@@ -132,6 +162,9 @@ export default function MobileCheckout() {
                         )}
                         {checkoutDetails.total_items > 0 ? (
                             <div className="row mx-o">
+                           <div style={{textAlign:'center'}} className="checkout-item-mobile-series-data">
+                           <p>Checkout (1 item)</p>
+                            </div>
                                 <div className="col-md-9 col-12">
                                     <Accordion
                                         className="shipping-details px-0 acoordeing"
@@ -149,13 +182,14 @@ export default function MobileCheckout() {
                                             shippingAddress={shippingAddress}
                                         />
                                     </Accordion>
+                                    {accordion[1].open && (
+                                    <>
                                     <div className="col-md-3 col-12">
                                     <div>
                                         <div className="shipping-method-component-wrapper" style={{marginTop:"12px", marginBottom:"12px"}}>
                                             <ShippingMethod />
                                         </div>
-                                    </div>
-                                 
+                                    </div>        
 
                                     {!isAuthenticated && (
                                         <div>
@@ -165,13 +199,7 @@ export default function MobileCheckout() {
                                         </div>
                                     )}
 
-                                    {/* <div className="shipping-method-component-wrapper">
-                                        <ShippingMethod />
-                                    </div> */}
                                  
-                                    {/* <div>
-                                    <Discount />
-                                  </div> */}
                                 </div>
                               
                                     <div className="order-summary-component-wrapper">
@@ -185,21 +213,23 @@ export default function MobileCheckout() {
                                                 !shippingAddress?.isValid
                                             }
                                         />
-                                    </div>
-                                    <div className="col-md-3 col-12">
+                                    </div></>
+                                    )}
+                                    {/* <div className="col-md-3 col-12">
                                     <div>
                                         <div className="shipping-method-button-mobile-size" style={{marginBottom:"12px", marginTop:"12px"}}>
                                            <button>Continue</button>
                                         </div>
                                     </div>
-                                    </div>
+                                    </div> */}
                                     <Accordion
                                         id={2}
                                         title="Review Items & Shipping"
                                         toggleAccordion={toggleAccordion}
                                         isOpen={accordion[2].open}
                                     >
-                                        <ReviewCheckout
+                                     
+                                        <MobileReviewCheckout
                                             estimatedDelivery={
                                                 checkoutDetails.shipment_info
                                                     ?.other_info
@@ -209,6 +239,73 @@ export default function MobileCheckout() {
                                             cartItems={cartItems}
                                         />
                                     </Accordion>
+                                    {accordion[2].open && (
+                                    <>
+                                    <div className="col-md-3 col-12">
+                                    <div style={{display:'flex', justifyContent:'space-between'}} className="border-shipping-summery-data">
+                                        {/* <div className="shipping-method-component-wrapper" style={{marginTop:"12px", marginBottom:"12px"}}>
+                                            <ShippingMethod />
+                                        </div> */}
+                                        <div>
+                                            <input type="radio" name="radio"  id="specifyColor"/>
+                                            <span className="shipping-data-shiping-view-mobile">Free Shipping
+                                            <p style={{ fontSize: "10px", marginLeft:'15px' }}>
+                                                Mon, Nov 13
+                                            </p>
+                                            </span>
+                                        </div>
+                                        <div className="summery-modal-data-open-mobile">
+                                            <span onClick={openModal}>order Summery</span>
+                                        </div>
+
+                                     
+                                    </div>        
+                                 
+                                    {!isAuthenticated && (
+                                        <div>
+                                            <div>
+                                                <Discount />
+                                            </div>
+                                        </div>
+                                    )}
+
+                                 
+                                </div>
+                           
+                                              <ShipingModalSummery isOpen={isModalOpen} onClose={closeModal}> </ShipingModalSummery>
+                                       
+                                    <div className="order-summary-component-wrapper">
+                                        <MobileSummary
+                                       
+                                            handleClick={handleClick}
+                                            activeAccordion={currentAccordionId}
+                                            paymentMethod={paymentMethod}
+                                            shippingDetails={checkoutDetails}
+                                            isDisabled={
+                                                !shippingAddress?.isValid
+                                            }
+                                        />
+                                    </div>
+                                    
+                                    <div className="col-md-3 col-12">
+                                    <div>
+                                        <div className="shipping-method-button-mobile-size" style={{marginBottom:"12px", marginTop:"12px"}}>
+                                           {/* <button >Proceed</button> */}
+                                           {isAuthenticated ? (
+                                           
+                                    <ReviewButton toggleAccordion={toggleAccordion}>
+                                        Proceed
+                                    </ReviewButton>
+                                ) : (
+                                    <ReviewButton toggleAccordion={toggleAccordion}>
+                                        Proceed
+                                    </ReviewButton>
+                                )}
+                                                            </div>
+                                    </div>
+                                    </div> 
+                                    </>
+                                    )}
                                     <Accordion
                                         id={3}
                                         title="Payment Method"
@@ -229,7 +326,40 @@ export default function MobileCheckout() {
                                             cartItems={cartItems}
                                         />
                                     </Accordion>
-                                    <div style={{marginTop:"8px"}}>
+                                    {accordion[3].open && (
+                                    <>
+                                    <div className="col-md-3 col-12">
+                                    <div>
+                                        <div className="shipping-method-component-wrapper" style={{marginTop:"12px", marginBottom:"12px"}}>
+                                            <ShippingMethod />
+                                        </div>
+                                    </div>        
+
+                                    {!isAuthenticated && (
+                                        <div>
+                                            <div>
+                                                <Discount />
+                                            </div>
+                                        </div>
+                                    )}
+
+                                 
+                                </div>
+                              
+                                    <div className="order-summary-component-wrapper">
+                                        <MobileSummary
+                                       
+                                            handleClick={handleClick}
+                                            activeAccordion={currentAccordionId}
+                                            paymentMethod={paymentMethod}
+                                            shippingDetails={checkoutDetails}
+                                            isDisabled={
+                                                !shippingAddress?.isValid
+                                            }
+                                        />
+                                    </div></>
+                                    )}
+                                    <div style={{marginTop:"8px", paddingLeft:"10px"}}>
                                     <div className="col-md-3 col-12">
                                     <div>
                                        <span>Need help? <Link className="text-decoration-none" style={{color:"#007185", fontSize:'12px', fontWeight:'600'}}>Contact Us</Link></span>

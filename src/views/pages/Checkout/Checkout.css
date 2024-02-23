@@ -9,7 +9,13 @@
     background-color: #00305e;
     padding: 15px 50px;
 }
-
+#specifyColor{
+    accent-color: 
+    #318243;
+        margin-right: 3px;
+        width: 11px;
+   
+}
 .checkout-header-wrapper {
     width: 50%;
 }
@@ -56,7 +62,16 @@
     margin-bottom: 0;
     color: white;
 }
+.checkout-item-mobile-series-data p{
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
 
+    
+}
 .checkout-page-inner {
     width: 83%;
     margin-left: 135px;
@@ -96,9 +111,10 @@
         padding: 0px;
     }
     .checkout-page-inner {
-        width: 95%;
+        /* width: 95%; */
         margin: 0px;
         padding: 0px;
+       
     }
 }
 @media screen and (max-width: 1041px) {
@@ -118,6 +134,10 @@
 @media screen and (max-width: 550px) {
     .checkout-page-inner {
         min-height: 400px;
+        /* padding: 18px; */
+    }.checkout-page-inner {
+        width: 88%;
+        /* padding: 18px; */
     }
 
     .checkout-header .logo-wrapper {
@@ -133,6 +153,30 @@
 @media screen and (max-width: 600px) {
     .checkout-header {
         display: none;
+    }.shipping-data-shiping-view-mobile{
+        font-family: Inter;
+font-size: 13px;
+font-weight: 600;
+line-height: 20px;
+letter-spacing: 0.10000000149011612px;
+text-align: left;
+
+    } .border-shipping-summery-data {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        /* padding: 10px; */
+        margin-bottom: 10px;
+        padding-top: 16px;
+        padding-left: 7px;
+        padding-right: 7px;
+    }.summery-modal-data-open-mobile span{
+        font-family: Inter;
+font-size: 12px;
+font-weight: 400;
+line-height: 15px;
+letter-spacing: 0em;
+text-align: center;
+color: #007185;
     }
 }
 
