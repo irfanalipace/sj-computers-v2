@@ -35,13 +35,29 @@
   color: rebeccapurple;
   content: '→';
 }
+
+.recommund-dev-slider-sections-opps{
+  position: relative;
+}
+
 .recommund-dev-slider-sections-opps .swiper-button-prev {
 color: black;
 background: #FFFFFF;
+padding: 40px 0px;
+position: absolute;
+top: 50%;
+translate: -50% -50%;
+box-shadow: 1px 1px 0px lightgrey;
 }
 .recommund-dev-slider-sections-opps .swiper-button-next{
   color: black;
   background: #FFFFFF;
+  padding: 40px 10px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  translate: 0% -50%;
+  box-shadow: -1px 1px 0px lightgrey;
   }
   .recommund-dev-slider-sections-opps .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
     content: 'prev';
@@ -93,4 +109,13 @@ angle: -180 deg;
   border: none;
   outline: none;
   background: transparent;
+}
+
+@media screen and (max-width: 575px) {
+  .recommund-dev-slider-sections-opps .swiper-button-prev {
+    display: none;
+  }
+  .recommund-dev-slider-sections-opps .swiper-button-next {
+    display: none;
+  }
 }

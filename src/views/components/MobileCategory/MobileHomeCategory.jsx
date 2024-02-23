@@ -22,6 +22,7 @@ import image1 from "../../../assets/images/homepageImage/featureImages/image1.pn
 import image2 from "../../../assets/images/homepageImage/featureImages/image2.png";
 import image3 from "../../../assets/images/homepageImage/featureImages/image3.png";
 import image4 from "../../../assets/images/homepageImage/featureImages/image4.png";
+import TouchScreenLaptop from "../../../assets/images/categories/TouchScreenlaptop.png"
 import wellsjcomputer from "@images/categories/welcomesjcomputer.webp";
 import ProductItem4 from "@components/homeproduct/productcategory/ProductItem4";
 import MobileFeaturedProducts from "./MobileFeaturedProducts/MobileFeaturedProducts";
@@ -100,38 +101,56 @@ const MobileHomeCategory = () => {
 
     const featuredItems = [
         {
+            image: image1,
             categoryLink: "/category/bto",
-            categoryName: "Gaming Monitors | up to 50 % off",
+            categoryName: "Dell",
         },
         {
+            image: image2,
             categoryLink: "/category/laptops",
-            categoryName: "Lorem Ipsum | up to 30% off",
+            categoryName: "HP",
         },
         {
+            image: image4,
             categoryLink: "/category/desktop",
-            categoryName: "Lorem Ipsum | up to 50% off",
+            categoryName: "Lenovo",
         },
         {
+            image: image3,
             categoryLink: "/category/gaming_desktops",
-            categoryName: "Lorem Ipsum | up to 30% off",
-        },
-        {
-            categoryLink: "/category/bto",
-            categoryName: "Gaming Monitors | up to 50 % off",
-        },
-        {
-            categoryLink: "/category/laptops",
-            categoryName: "Lorem Ipsum | up to 30% off",
-        },
-        {
-            categoryLink: "/category/desktop",
-            categoryName: "Lorem Ipsum | up to 50% off",
-        },
-        {
-            categoryLink: "/category/gaming_desktops",
-            categoryName: "Lorem Ipsum | up to 30% off",
+            categoryName: "2 in 1s Laptops",
         },
     ];
+
+    const shopByFormFactorItems = [
+        {
+            categoryName: "SFF"
+        },
+        {
+            categoryName: "Mini"
+        },
+        {
+            categoryName: "Tower"
+        },
+        {
+            categoryName: "USFF"
+        },
+    ]
+
+    const BudgetFriendlyItems = [
+        {
+            categoryName: "D-link-router"
+        },
+        {
+            categoryName: "Mini-Desktops"
+        },
+        {
+            categoryName: "D-link-router"
+        },
+        {
+            categoryName: "Mini-Desktops"
+        },
+    ]
 
     const featuredimages = [
         gamingimg1,
@@ -164,8 +183,8 @@ const MobileHomeCategory = () => {
         networkimg4,
     ];
     const ramsimages = [rams];
-    const title = ["Featured Products"];
-    const newtworktitle = ["Networking"];
+    const title = ["Shop by Brand"];
+    const newtworktitle = ["Shop by Form Factor"];
     const Sellingimages = [
         sellingimg1,
         sellingimg2,
@@ -196,6 +215,8 @@ const MobileHomeCategory = () => {
         rectangle4,
         rectangle5,
     ];
+    
+
     return (
         <div>
             <Swiper
@@ -458,7 +479,7 @@ const MobileHomeCategory = () => {
             <div style={{ marginBottom: "12px" }}>
                 <MobileFeaturedProducts
                     items={networkimages}
-                    featuredItems={featuredItems}
+                    featuredItems={shopByFormFactorItems}
                     title={newtworktitle}
                 />
             </div>
@@ -466,15 +487,15 @@ const MobileHomeCategory = () => {
             <div style={{ marginBottom: "12px" }}>
                 <MobileFeaturedProducts
                     items={networkimages2}
-                    featuredItems={featuredItems}
-                    title={newtworktitle}
+                    featuredItems={BudgetFriendlyItems}
+                    title={"Budget Friendly Desktops"}
                 />
             </div>
             <div style={{ marginBottom: "12px" }}>
                 <MobileSingleItem
-                    items={ramsimages}
+                    items={[TouchScreenLaptop]}
                     featuredItems={featuredItems}
-                    title={"Rams"}
+                    title={"Touch Screen Laptops"}
                 />
             </div>
 
@@ -486,7 +507,7 @@ const MobileHomeCategory = () => {
                 <div className="product-type-section-selleing-products-mobile-versions">
                     <div className="dev-sections-heading-offer">
                         <div>
-                            <h4>Best Selling Products</h4>
+                            <h4>Top Rating Products</h4>
                         </div>
                         <div>
                             <p> See all offer</p>
@@ -503,7 +524,7 @@ const MobileHomeCategory = () => {
                 <div className="product-type-section-selleing-products-mobile-versions">
                     <div className="dev-sections-heading-offer">
                         <div>
-                            <h4>Flash Sale on Items</h4>
+                            <h4>Best Selling Laptops</h4>
                         </div>
                         <div>
                             <p> See all offer</p>

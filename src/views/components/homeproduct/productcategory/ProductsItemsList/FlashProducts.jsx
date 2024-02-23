@@ -8,8 +8,9 @@ const FlashProducts = ({images}) => {
                 <div className="col-12 col-sm-12 col-lg-12">
                     <Link to={""} className="text-decoration-none">
                         <div className="product-type-section-selleing-products">
-                            <div>
-                                <h4>Flash Sale on Items</h4>
+                            <div className='d-flex'>
+                                <h4>Best Selling Laptops</h4>
+                                <p style={{marginLeft: "20px", fontSize: '12px', color: '#007185'}}> See all offer</p>
                             </div>
                             <SellingProducts images={images} />
                         </div>

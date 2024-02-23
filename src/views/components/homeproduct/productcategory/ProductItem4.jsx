@@ -76,7 +76,9 @@ const ProductItem4 = ({ items }) => {
       {items.map((item, index) => (
         <Col key={index} xs={12} sm={6} className="px-0">
           <Link to={item.categoryLink} className="category-item">
-            <img src={item.image} alt={`Image for ${item.categoryName}`} className="dynamic-image" />
+            <div style={{height: "100%", width: "100%", display: 'flex', alignItems: 'center', justifyContent: "center"}}>
+              <img src={item.image} alt={`Image for ${item.categoryName}`} className="dynamic-image" />
+            </div>
             <div className="category-name">{item.categoryName}</div>
           </Link>
         </Col>

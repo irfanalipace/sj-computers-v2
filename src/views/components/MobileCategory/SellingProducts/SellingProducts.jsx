@@ -34,7 +34,7 @@ const SellingProducts = ({ images }) => {
                     },
                 }}
                 navigation
-                className="recommendation-slider recommund-dev-slider-sections-opps"
+                className="hp-slider-1 recommendation-slider recommund-dev-slider-sections-opps"
             >
                 {images.map((image, index) => (
                     <SwiperSlide>
