@@ -241,6 +241,7 @@ const BannerCategory = () => {
             image: NvidiaImg,
             categoryLink: "/category/laptops",
             categoryName: "Nvidia",
+            hidden: true,
         },
         {
             image: NvidiaImg2,

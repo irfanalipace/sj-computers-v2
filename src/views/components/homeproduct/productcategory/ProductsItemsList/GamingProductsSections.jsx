@@ -1,11 +1,18 @@
-import React from 'react'
-import ProductItem1 from '../ProductItem1'
-import ProductItem3 from '../ProductItem3'
-import { Link } from 'react-router-dom'
-const GamingProductsSections = ({gamingArray, items, gamingProducts1, gamingProducts2, gamingProducts3, gpuItems}) => {
-  return (
-    <div>
-        <div className="row mx-0">
+import React from "react";
+import ProductItem1 from "../ProductItem1";
+import ProductItem3 from "../ProductItem3";
+import { Link } from "react-router-dom";
+const GamingProductsSections = ({
+    gamingArray,
+    items,
+    gamingProducts1,
+    gamingProducts2,
+    gamingProducts3,
+    gpuItems,
+}) => {
+    return (
+        <div>
+            <div className="row mx-0">
                 {gamingArray.map((category, index) => (
                     <div key={index} className="col-12 col-sm-6 col-lg-3">
                         <Link
@@ -18,7 +25,11 @@ const GamingProductsSections = ({gamingArray, items, gamingProducts1, gamingProd
                                 </h2>
                                 <div className="categories-container">
                                     {index === 0 || index === 3 ? (
-                                        <ProductItem3 items={index === 0 ? items : gpuItems} />
+                                        <ProductItem3
+                                            items={
+                                                index === 0 ? items : gpuItems
+                                            }
+                                        />
                                     ) : (
                                         <ProductItem1
                                             image={
@@ -41,8 +52,8 @@ const GamingProductsSections = ({gamingArray, items, gamingProducts1, gamingProd
                     </div>
                 ))}
             </div>
-    </div>
-  )
-}
+        </div>
+    );
+};
 
-export default GamingProductsSections
+export default GamingProductsSections;
