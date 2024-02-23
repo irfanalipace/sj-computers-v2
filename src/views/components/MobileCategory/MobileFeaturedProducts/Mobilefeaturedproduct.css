@@ -1,13 +1,26 @@
 .dynamic-image-images-mobile-data {
-    height: 86px;
-    width: 100%;
-    padding: 5px;
-    object-fit: contain;
+    height: unset !important;
+    width: unset !important;
+    /* padding: 5px; */
+    /* object-fit: contain; */
+    max-height: 100%;
+    max-width: 100%;
 }
 .images-dev-sections-featured-images {
+    width: 100%;
     display: flex;
     justify-content: center;
+    /* justify-content: space-between; */
 }
+
+.top-images{
+    width: 50%;
+}
+
+.bottom-images{
+    width: 50%;
+}
+
 .conainer-all-images-sections-data {
     text-align: end;
     background: white;
@@ -50,7 +63,7 @@
     font-weight: 400;
     line-height: 15px;
     letter-spacing: 0em;
-    text-align: left;
+    text-align: center;
     text-decoration: none;
     color: black;
     text-decoration: none;

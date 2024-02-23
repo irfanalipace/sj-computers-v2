@@ -29,7 +29,7 @@ export default function Recommendation({ prod }) {
                         People who browsed similar items also showed
                         interest in these
                     </h3>
-                    <div className="slider-wrapper">
+                    <div className="slider-wrapper" style={{padding: "0px 40px"}}>
                         {isLoading || !products ? (
                             <LoaderComponent />
                         ) : (

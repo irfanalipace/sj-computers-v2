@@ -198,7 +198,7 @@ const BannerCategory = () => {
             link: "Shop Now",
         },
         {
-            name: "Monitors",
+            name: "Shop by GPU",
             link: "Shop Now",
         },
     ];
@@ -235,17 +235,17 @@ const BannerCategory = () => {
         {
             image: gaminimg3,
             categoryLink: "/category/bto",
-            categoryName: "Core i3",
+            categoryName: "AMD",
         },
         {
             image: NvidiaImg,
             categoryLink: "/category/laptops",
-            categoryName: "Core i5",
+            categoryName: "Nvidia",
         },
         {
             image: NvidiaImg2,
             categoryLink: "/category/desktop",
-            categoryName: "Core i7",
+            categoryName: "Nvidia",
         },
     ]
     return (

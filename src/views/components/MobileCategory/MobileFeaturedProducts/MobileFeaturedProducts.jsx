@@ -24,6 +24,7 @@ const MobileFeaturedProducts = ({ items, featuredItems, title }) => {
                             <div
                                 className="images-sections-montring"
                                 key={index}
+                                style={{width: "100%"}}
                             >
                                 <Link
                                     to="/category/bto"
@@ -48,6 +49,7 @@ const MobileFeaturedProducts = ({ items, featuredItems, title }) => {
                             <div
                                 className="images-sections-montring"
                                 key={index}
+                                style={{width: "100%"}}
                             >
                                 <Link
                                     to="/category/bto"
