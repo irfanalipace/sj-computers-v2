@@ -110,7 +110,7 @@ const ReviewsDialog = ({
 
     return (
         <Dialog open={open} onClose={handleClose} maxWidth={"lg"}>
-            <DialogContent sx={{ minWidth: "75vw", width: "100%", p: 0 }}>
+            <DialogContent sx={{ minWidth: "65vw", width: "100%", p: 0, overflowY: "none" }}>
                 <Box
                     sx={{
                         width: "100%",
