@@ -45,3 +45,9 @@
 .protection-lables-warntity-durations-year {
     margin-top: 5px;
 }
+
+@media screen and (max-width:600px) {
+    .protection-lables-warntity-warranty-badge{
+        display: none;
+    }
+}
