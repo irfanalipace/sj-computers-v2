@@ -41,6 +41,11 @@
         display: none;
     }.shipping-method-inner{
         margin-top: 13px;
-    }
+    }.shipping-method-input-group :checked {
+        background-color: #318243;
+         /* Change this to your desired background color */
+      }.shipping-method-input-group input{
+        accent-color: #318243;
+      }
     
 }

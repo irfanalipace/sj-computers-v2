@@ -361,7 +361,18 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                 }
                                 onPlaceSelected={handlePlaceChange}
                             />
-
+                            <div style={{marginTop:"12px"}} className="input-lable-address">
+                            <Autocomplete
+                                placeholder="Unit, Building, floor etc."
+                                defaultValue={values.address}
+                                className={
+                                    errors.address && touched.address
+                                        ? "input-field border-danger"
+                                        : "input-field"
+                                }
+                                onPlaceSelected={handlePlaceChange}
+                            />
+                            </div>
                             {errors.address && touched.address && (
                                 <p className="fs-6 mt-1 text-danger">
                                     {errors.address}
@@ -385,7 +396,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                             )} */}
                         </div>
                         <div className="row">
-                            <div className="col-4">
+                            <div className="col-6 col-sm-4">
                                 <div className="field-section">
                                     <label htmlFor={"city"}>
                                         City
@@ -417,7 +428,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                     )} */}
                                 </div>
                             </div>
-                            <div className="col-4">
+                            <div className="col-6 col-sm-4">
                                 <div className="field-section">
                                     <label htmlFor={"state"}>
                                         State
@@ -458,7 +469,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                     )}
                                 </div>
                             </div>
-                            <div className="col-4">
+                            <div className="col-12 col-sm-4">
                                 <div className="field-section">
                                     <label htmlFor={"zip_code"}>
                                         Zip Code

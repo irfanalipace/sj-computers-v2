@@ -70,6 +70,8 @@
     border-radius: 10px;
     padding-left: 4%;
     padding-right: 4%;
+}.summary div p strong{
+    font-weight: 600;
 }
 
 .accordion-content-heading {

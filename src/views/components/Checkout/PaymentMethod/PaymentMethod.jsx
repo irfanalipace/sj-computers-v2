@@ -110,6 +110,7 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
                         name="selectedAddress"
                         value={PAYMENT_METHODS.SQUARE}
                         onChange={handleChange}
+                        
                     />
                     <div>
                         <label htmlFor="method1">

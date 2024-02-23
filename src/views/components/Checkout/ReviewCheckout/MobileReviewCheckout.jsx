@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 import ReviewButton from "./ReviewButton";
 // import { QuantityInput } from "@common/QuantityInput/QuantityInput";
 import WarrantyBadge from "@components/ShoppingCart/CartItem/WarrantyBadge";
-
+import { ArrowDownward } from "@material-ui/icons";
 import "./ReviewCheckout.css";
 import { useLocation } from "react-router-dom";
-import { useViewportWidth } from "@hooks/useViewportWidth";
-import MobileReviewCheckout from "./MobileReviewCheckout";
-export default function ReviewCheckout({
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+export default function MobileReviewCheckout({
     toggleAccordion,
     estimatedDelivery,
     handleHeight,
@@ -20,7 +20,7 @@ export default function ReviewCheckout({
         handleHeight();
     }, []);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
     const handleProceed = () => {
         // Update the heading and button text when "Proceed" is clicked
         setDiscountHeading("New Heading");
@@ -28,7 +28,7 @@ export default function ReviewCheckout({
     const [discountHeading, setDiscountHeading] = useState(
         "Get Discount & Benefits"
     );
-    const screenWidth = useViewportWidth();
+
     const [itemsToShow, setItemsToShow] = useState([]);
     const location = useLocation();
     const query = new URLSearchParams(location.search);
@@ -47,25 +47,26 @@ export default function ReviewCheckout({
         items();
     }, [cartItems]);
 
-
     return (
-        <>
-
-          <h4>
+        <div className="review-card">
+            <h4>
                 Estimated delivery: {estimatedDelivery ? estimatedDelivery : ""}
             </h4>
             <p>Items Shipped from sjcomputer.us</p>
 
             <div className="row mx-0 mb-3">
-                <div className="col-12 ps-0">
+                
                     {itemsToShow?.map((item) => (
                         <div className="item-card" key={item?.id}>
+                        <div className="col-4 ps-0">
                             <div className="img-wrapper">
                                 <img
                                     src={item.product.image}
                                     alt={item.product.name}
                                 />
                             </div>
+                            </div>
+                            <div className="col-8 ps-0">
                             <div className="item-detail">
                                 <h6>{item.product.name}</h6>
                                 {/* <WarrantyBadge
@@ -76,12 +77,15 @@ export default function ReviewCheckout({
                                 <div className="row">
                                     <div></div>
                                     <div className="col-md-6">
-                                        <h6 className="price">
+                                        <h6 className="price" style={{color:"#B12704"}}>
                                             ${parseFloat(item.price).toFixed(2)}
                                         </h6>
-                                        <h6 className="quantity">
-                                            Quantity: {item.quantity}
+                                        <div> <h6 className="quantity quantitiy-data-images">
+                                            Qty: {item.quantity} {" "}{" "} <FontAwesomeIcon icon={faAngleDown}/>
                                         </h6>
+                                   
+                                        </div>
+                                       
                                     </div>
                                     <div className="col-md-3 px-0">
                                         <div className="protection-button-remove-data">
@@ -126,9 +130,11 @@ export default function ReviewCheckout({
                                     onChange={setQuantity}
                                 /> */}
                             </div>
+                            </div>
+                        
                         </div>
                     ))}
-                </div>
+                
                 <div className="col-md-5 col-12">
                     {/* <div>
                         <h6>Choose Delivery Options:</h6>
@@ -170,22 +176,6 @@ export default function ReviewCheckout({
                     </div> */}
                 </div>
             </div>
-
-            {isAuthenticated ? (
-                <ReviewButton toggleAccordion={toggleAccordion}>
-                    Proceed
-                </ReviewButton>
-            ) : (
-                <ReviewButton toggleAccordion={toggleAccordion}>
-                    Proceed
-                </ReviewButton>
-            )}
-    
-            
-     
-       
-
-     
-        </>
+        </div>
     );
 }
