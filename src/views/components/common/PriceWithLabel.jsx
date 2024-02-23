@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 
 export default function PriceWithLabel({
@@ -7,18 +7,21 @@ export default function PriceWithLabel({
     color = "#B12704",
     sx,
 }) {
+    const theme = useTheme();
+
+    const isUpSmall = useMediaQuery(theme.breakpoints.up("md"));
     return (
         <Typography
             sx={sx}
             fontWeight={400}
             color={color}
-            fontSize={"28px"}
-            lineHeight={"33px"}
+            fontSize={isUpSmall ? "28px" : "18px"}
+            lineHeight={isUpSmall ? "33px" : "25px"}
         >
             <sup
                 style={{
                     fontWeight: 400,
-                    fontSize: "18px",
+                    fontSize: isUpSmall ? "18px" : "12px",
                     lineHeight: "15px",
                 }}
             >
@@ -28,7 +31,7 @@ export default function PriceWithLabel({
             <sup
                 style={{
                     fontWeight: 400,
-                    fontSize: "16px",
+                    fontSize: isUpSmall ? "16px" : "12px",
                     lineHeight: "15px",
                 }}
             >

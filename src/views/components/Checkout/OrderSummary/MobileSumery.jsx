@@ -5,8 +5,8 @@ import { useState } from "react";
 import ShippingButton from "@components/Checkout/ShippingDetails/ShippingButton";
 import PaymentButton from "@components/Checkout/PaymentMethod/PaymentButton";
 import ReviewButton from "@components/Checkout/ReviewCheckout/ReviewButton";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import "./OrderSummary.css";
 import usePaymentData from "../PaymentMethod/usePaymentData";
 
@@ -23,7 +23,7 @@ function MobileSummary({
     const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
     const toggleAccordion = () => {
-      setIsAccordionOpen((prev) => !prev);
+        setIsAccordionOpen((prev) => !prev);
     };
     const Button = () => {
         if (activeAccordion === 1) {
@@ -68,94 +68,116 @@ function MobileSummary({
     };
     return (
         <div>
-           
-                <div>
-                    
-                    <div className="summary-card">
-                    <div style={{display:"flex", justifyContent:'space-between', padding:'14px', fontWeight:'600', fontSize:'14px'}}  onClick={toggleAccordion}>
+            <div>
+                <div className="summary-card">
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            padding: "14px",
+                            fontWeight: "600",
+                            fontSize: "14px",
+                        }}
+                        onClick={toggleAccordion}
+                    >
                         <div className="order-summer-mobile-size-data">
                             <span>order Summery</span>
                         </div>
-                        <div >
-                            <span>    <FontAwesomeIcon icon={isAccordionOpen ? faAngleUp : faAngleDown}/> </span>
+                        <div>
+                            <span>
+                                {" "}
+                                <FontAwesomeIcon
+                                    icon={
+                                        isAccordionOpen
+                                            ? faAngleUp
+                                            : faAngleDown
+                                    }
+                                />{" "}
+                            </span>
                         </div>
-                        </div>
-                        {isAccordionOpen && (
-                            <>
-                             <div className="summary-wrapper">
-                      
-                        
-                      <div className="summary-details">
-                          <ul>
-                              <li>
-                                  <span>Items:</span>
-                                  <span>
-                                      ({paymentData?.details?.total_items}
-                                      )
-                                  </span>
-                              </li>
-                              <li>
-                                  <span>Price:</span>
-                                  <span>
-                                      <strong>
-                                          {paymentData?.details?.sub_total
-                                              ? "$" +
-                                                paymentData.details
-                                                    .sub_total
-                                              : "$0"}
-                                      </strong>
-                                  </span>
-                              </li>
-                              <li>
-                                  <span>Shipping & handling:</span>
-                                  <span>
-                                      {paymentData?.details
-                                          ?.shipment_amount
-                                          ? "$" +
-                                            parseFloat(
-                                                paymentData?.details
-                                                    ?.shipment_amount
-                                            ).toFixed(2)
-                                          : "$0"}
-                                  </span>
-                              </li>
-                              <li>
-                                  <span>Total before tax:</span>
-                                  <span>--</span>
-                              </li>
-                              <li>
-                                  <span>
-                                      Estimated tax to be calculated:
-                                  </span>
-                                  <span>--</span>
-                              </li>
-                          </ul>
-                      </div>
-                      <div className="order-total">
-                          <ul>
-                              <li>
-                                  <span>
-                                      <strong>Order Total</strong>
-                                  </span>
-                                  <span>
-                                      <strong>
-                                          ${paymentData?.details?.total}
-                                      </strong>
-                                  </span>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div className="summary-footer">
-                   
-                      <Link to={"#"} style={{color:"#007185"}}>How shipping costs calculates?</Link>
-                  </div>
-                            </>
-                       
-                        )}
                     </div>
+                    {isAccordionOpen && (
+                        <>
+                            <div className="summary-wrapper">
+                                <div className="summary-details">
+                                    <ul>
+                                        <li>
+                                            <span>Items:</span>
+                                            <span>
+                                                (
+                                                {
+                                                    paymentData?.details
+                                                        ?.total_items
+                                                }
+                                                )
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span>Price:</span>
+                                            <span>
+                                                <strong>
+                                                    {paymentData?.details
+                                                        ?.sub_total
+                                                        ? "$" +
+                                                          paymentData.details
+                                                              .sub_total
+                                                        : "$0"}
+                                                </strong>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span>Shipping & handling:</span>
+                                            <span>
+                                                {paymentData?.details
+                                                    ?.shipment_amount
+                                                    ? "$" +
+                                                      parseFloat(
+                                                          paymentData?.details
+                                                              ?.shipment_amount
+                                                      ).toFixed(2)
+                                                    : "$0"}
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span>Total before tax:</span>
+                                            <span>--</span>
+                                        </li>
+                                        <li>
+                                            <span>
+                                                Estimated tax to be calculated:
+                                            </span>
+                                            <span>--</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="order-total">
+                                    <ul>
+                                        <li>
+                                            <span>
+                                                <strong>Order Total</strong>
+                                            </span>
+                                            <span>
+                                                <strong>
+                                                    $
+                                                    {
+                                                        paymentData?.details
+                                                            ?.total
+                                                    }
+                                                </strong>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="summary-footer">
+                                <Link to={"#"} style={{ color: "#007185" }}>
+                                    How shipping costs calculates?
+                                </Link>
+                            </div>
+                        </>
+                    )}
                 </div>
-        
+            </div>
         </div>
     );
 }

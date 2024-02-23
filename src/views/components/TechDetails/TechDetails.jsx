@@ -21,7 +21,12 @@ const TechDetails = ({ product }) => {
                 <Grid lg={6}>
                     <Grid container>
                         <Grid>
-                            <h3 className="tech-details-heading">
+                            <h3
+                                className="tech-details-heading"
+                                style={{
+                                    fontSize: !isUpSmall ? "16px" : "18px",
+                                }}
+                            >
                                 Technical Details
                             </h3>
                         </Grid>
@@ -257,7 +262,10 @@ const TechDetails = ({ product }) => {
                 </Grid>
                 <Grid lg={6} mt={4}>
                     {!isUpSmall && (
-                        <h3 className="tech-details-heading">
+                        <h3
+                            className="tech-details-heading"
+                            style={{ fontSize: "16px" }}
+                        >
                             Additional Information
                         </h3>
                     )}
@@ -291,7 +299,9 @@ const TechDetails = ({ product }) => {
                         </tr>
                     </table>
                     <div className="additional-info-container">
-                        <h1>Warranty & Support</h1>
+                        <h1 style={{ fontSize: !isUpSmall && "16px" }}>
+                            Warranty & Support
+                        </h1>
                         <p>
                             SJ Computer offers a standard one-year warranty for
                             both laptops and desktops, beginning from the date

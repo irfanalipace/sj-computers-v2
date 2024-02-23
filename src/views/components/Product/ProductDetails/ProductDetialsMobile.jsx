@@ -13,6 +13,7 @@ import TabContent from "./TabContnet";
 import ReturnPolicy from "./ReturnPolicy";
 import ProductRating from "./ProductRating";
 import PriceWithLabel from "../../common/PriceWithLabel";
+import { Link } from "react-router-dom";
 
 let acceptedKeys = [
     "brand",
@@ -133,7 +134,13 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
                 }}
             ></Box>
 
-            <Stack alignItems={"center"} direction={"row"} spacing={2} my={4}>
+            <Stack
+                alignItems={"center"}
+                direction={"row"}
+                spacing={2}
+                my={2}
+                mt={3}
+            >
                 <Typography
                     color={"#333333"}
                     fontWeight={500}
@@ -145,11 +152,15 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
                 </Typography>
                 <PriceWithLabel sx={{ mb: 0.8 }} price={product?.price} />
             </Stack>
+            <div style={{ fontSize: "12px" }} className="mt-2 mb-2">
+                $20 shipping & import fees deposit to Pakistan.{" "}
+                <Link>Details</Link>
+            </div>
             <CheckOutCard isMobile={true} product={{ ...product }} />
 
             <Box
                 sx={{
-                    mt: 2,
+                    mt: 4,
                     border: "none",
                     borderTop: "2px solid #CDCDCD",
                 }}
