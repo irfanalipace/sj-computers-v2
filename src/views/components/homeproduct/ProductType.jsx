@@ -174,7 +174,7 @@ const diffDays = Math.ceil(diffTime / one_day);
         {
             image: twoInOneImgUpdate,
             categoryLink: "/category/2_in_1_laptops",
-            categoryName: "2 in 1 Laptops",
+            categoryName: "2 in 1s Laptops",
         },
         {
             image: AccessoriesImgUpdate,
