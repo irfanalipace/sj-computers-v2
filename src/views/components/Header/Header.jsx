@@ -93,7 +93,7 @@ const Header = () => {
 
     return (
         <>
-            {screenWidth <= 850 ? (
+            {screenWidth <= 450 ? (
                 <div>
                     {/* <Suspense> */}
                     <BottomNavigation />
@@ -103,7 +103,9 @@ const Header = () => {
                     </Suspense>
                     {Troubleshoot ? (
                         <Suspense>
+                            {/* <div className="d-none d-lg-block"> */}
                             <TopBar screenWidth={screenWidth} />
+                            {/* </div> */}
 
                             <div className="mobile-box-model">
                                 <MobileScreenModal

@@ -369,7 +369,7 @@ const MobileHomeCategory = () => {
                                 type="button"
                                 className="button-save-mobile-size"
                             >
-                                Login Safely
+                                Sign in Safely
                             </button>
                         </Link>
                         <div className="create-account-mobile-home-page">

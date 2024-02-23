@@ -1,5 +1,6 @@
 .topBar {
     background: #002549;
+    /* background-color: #00305e; */
 }
 
 .topBar-inner {
@@ -82,6 +83,9 @@ Link:hover {
 }
 
 @media screen and (max-width: 576px) {
+    .topBar{
+        background-color: #00305e;
+    }
     .menuBar .text-color {
         font-weight: 600;
         font-size: 13px;
