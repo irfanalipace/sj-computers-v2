@@ -8,6 +8,14 @@ import addDesktop from "@images/categories/wellcome.webp";
 import categoryImg1 from "@images/categories/desktopweb.webp";
 import categorybusinussweb from "@images/categories/businussweb.webp";
 import btoimg from "@images/categories/btoweb.webp";
+import twoInOneLaptopImg from "@images/categories/2in1Laptop.png"
+import AccessoriesImg from "@images/categories/Accessories.png"
+import AccessoriesImgUpdate from "@images/categories/AccessoriesUpdate.png"
+import LaptopImgUpdate from "@images/categories/LaptopUpdate.png"
+import DesktopImgUpdate from "@images/categories/desktopUpdate.png"
+import twoInOneImgUpdate from "@images/categories/2in1LaptopUpdate.png"
+import GamingDesktopImg from "@images/categories/gamingDesktops.png"
+import Laptop2Img from "@images/categories/Laptop2.png"
 import laptopimg from "@images/categories/laptopweb.webp";
 import { Rating } from "@mui/material";
 import FontAwesome from "react-fontawesome";
@@ -148,30 +156,30 @@ const diffDays = Math.ceil(diffTime / one_day);
             link: "Shop Now",
         },
         {
-            name: "Business",
+            name: "Business Desktops",
             link: "Shop Now",
         },
     ];
     const categoryItems = [
         {
-            image: btoimg,
-            categoryLink: "/category/bto",
-            categoryName: "BTO",
-        },
-        {
-            image: laptopimg,
+            image: LaptopImgUpdate,
             categoryLink: "/category/laptops",
             categoryName: "Laptop",
         },
         {
-            image: monitorimg,
+            image: DesktopImgUpdate,
             categoryLink: "/category/desktop",
             categoryName: "Desktop",
         },
         {
-            image: desktopimgweb,
+            image: twoInOneImgUpdate,
+            categoryLink: "/category/2_in_1_laptops",
+            categoryName: "2 in 1 Laptops",
+        },
+        {
+            image: AccessoriesImgUpdate,
             categoryLink: "/category/gaming_desktops",
-            categoryName: "Gaming Desktops",
+            categoryName: "Accessories",
         },
     ];
     // const gamingItems = [
@@ -307,7 +315,7 @@ const diffDays = Math.ceil(diffTime / one_day);
                                         <ProductItem1
                                             image={
                                                 index === 1
-                                                    ? categoryImg1
+                                                    ? GamingDesktopImg
                                                     : categorybusinussweb
                                             }
                                         />
@@ -331,19 +339,21 @@ const diffDays = Math.ceil(diffTime / one_day);
                                 />
                             </div>
                         ) : (
-                            <div className="advertisement-heading">
-                                <h2 className="h2-cart">
-                                    Sign up to get the latest <br></br>update on
-                                    sale
+                            <div className="advertisement-heading" style={{padding: "5px"}}>
+                                <h2 className="h2-cart" style={{marginBottom: '5px' , fontSize: "1.18rem"}}>
+                                    Log in for the best experience
                                 </h2>
+                                <div style={{padding: "10px"}}>
                                 <Link to="/login">
                                     <button
+                                        style={{borderRadius: "8px", backgroundColor: "#318243", color: "white"}}
                                         type="button"
                                         className="button-save"
                                     >
                                         Login Safely
                                     </button>
                                 </Link>
+                                </div>
                             </div>
                         )}
                         <div className="product-type-section dev-sections-products">

@@ -2,7 +2,7 @@ import React from 'react'
 import ProductItem1 from '../ProductItem1'
 import ProductItem3 from '../ProductItem3'
 import { Link } from 'react-router-dom'
-const GamingProductsSections = ({gamingArray, items, gamingProducts1, gamingProducts2, gamingProducts3}) => {
+const GamingProductsSections = ({gamingArray, items, gamingProducts1, gamingProducts2, gamingProducts3, gpuItems}) => {
   return (
     <div>
         <div className="row mx-0">
@@ -17,8 +17,8 @@ const GamingProductsSections = ({gamingArray, items, gamingProducts1, gamingProd
                                     {category.name}
                                 </h2>
                                 <div className="categories-container">
-                                    {index === 0 ? (
-                                        <ProductItem3 items={items} />
+                                    {index === 0 || index === 3 ? (
+                                        <ProductItem3 items={index === 0 ? items : gpuItems} />
                                     ) : (
                                         <ProductItem1
                                             image={

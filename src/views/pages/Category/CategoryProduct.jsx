@@ -34,7 +34,7 @@ const CategoryProducts = () => {
                 <CategoryVideoAndSlider />
             </Grid>
 
-            <Grid item md={2} mt={2} py={2} className="d-none d-sm-block">
+            <Grid item sm={3} md={2} mt={2} py={2} className="d-none d-sm-block">
                 <CategorySidebar />
             </Grid>
 
@@ -42,7 +42,7 @@ const CategoryProducts = () => {
           <ProductsByCategory inCategoriesPage={true} />
       </Grid> */}
 
-            <Grid item xs={12} sm={9} lg={10} py={2}>
+            <Grid item xs={12} sm={9} md={10} lg={10} py={2}>
                 <AllCategoriesHeader />
                 <Typography
                     variant="h3"

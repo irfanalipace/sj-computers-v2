@@ -3,7 +3,7 @@ import ProductItem4 from '../ProductItem4'
 import ProductItem1 from '../ProductItem1'
 
 import { Link } from 'react-router-dom';
-const FeaturedProducts = ({featuredItems, networkItems, upgradecomputers, featured, rams}) => {
+const FeaturedProducts = ({featuredItems, networkItems, upgradecomputers, featured, rams, TouchScreenLaptop}) => {
 
    
  
@@ -20,6 +20,7 @@ const FeaturedProducts = ({featuredItems, networkItems, upgradecomputers, featur
                                 <h2 className="h4-heading category-name">
                                     {category.name}
                                 </h2>
+                                <div style={{height: '25px', color: "#B12704", fontSize: "13px", fontWeight: "600"}}>{category.extra}</div>
                                 <div className="categories-container">
                                     {index === 0 ? (
                                         <ProductItem4
@@ -51,7 +52,7 @@ const FeaturedProducts = ({featuredItems, networkItems, upgradecomputers, featur
                                         />
                                     ) : (
                                         // Customize for the fourth column
-                                        <ProductItem1 image={rams} />
+                                        <ProductItem1 image={TouchScreenLaptop} />
                                     )}
                                 </div>
                                 <Link className="section-link" to={"/category"}>

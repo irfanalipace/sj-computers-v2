@@ -24,12 +24,11 @@ const Subscribe = () => {
                         Subscribe to Our Newsletter!
                     </h3>
                     <p className="text-subscribe">
-                        In publishing and graphic design, Lorem ipsum is a{" "}
-                        <br />
-                        placeholder text commonly
+                        Stay ahead of the curve with exclusive deals and the latest tech insights <br /> delivered straight to your inbox!
                     </p>
                     <input
-                        placeholder="Write a valid email address"
+                        style={{padding: "5px 10px"}}
+                        placeholder="Enter your email address here"
                         className="input-subscribe"
                     />
                     <br />

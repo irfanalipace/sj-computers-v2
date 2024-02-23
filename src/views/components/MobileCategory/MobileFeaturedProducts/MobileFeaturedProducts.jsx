@@ -3,17 +3,15 @@ import "./Mobilefeaturedproduct.css";
 import { useState } from "react";
 import gamingimg1 from "../../../../assets/images/MobileImage/HomeCategory/featured/gaming1.png";
 const MobileFeaturedProducts = ({ items, featuredItems, title }) => {
- 
     const [showMore, setShowMore] = useState(false);
 
     const handleSeeMoreClick = () => {
-      setShowMore(!showMore); // Toggle the state
+        setShowMore(!showMore); // Toggle the state
     };
-  
-    const totalItems = items.length;
-    const itemsToShow = showMore ? totalItems : 4; 
 
- 
+    const totalItems = items.length;
+    const itemsToShow = showMore ? totalItems : 4;
+
     return (
         <div>
             <div className="conainer-all-images-sections-data">
@@ -124,21 +122,22 @@ const MobileFeaturedProducts = ({ items, featuredItems, title }) => {
                                                 </p>
                                             </div>
                                         </Link>
-                                        
                                     </div>
-                                   
                                 ))}
                             </div>
                         </div>
                     </>
                 )}
-             {totalItems > itemsToShow && (
-          <div className="see-more-button-data">
-            <button onClick={handleSeeMoreClick}>
+                {totalItems > itemsToShow && (
+                    <div className="see-more-button-data">
+                        {/* <button onClick={handleSeeMoreClick}>
               {showMore ? "See less" : "See more"}
-            </button>
-          </div>
-        )}
+            </button> */}
+                        <Link style={{textDecoration: "none", color: "#007185"}} to={"/category"}>
+                            See more
+                        </Link>
+                    </div>
+                )}
             </div>
         </div>
     );

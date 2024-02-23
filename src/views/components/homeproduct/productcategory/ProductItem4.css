@@ -17,7 +17,9 @@
 }
 
 .product-item-4 img {
-    width: 100px;
+    /* width: 100px; */
+    max-width: 90%;
+    max-height: 90%;
     margin-bottom: 5px;
 }
 

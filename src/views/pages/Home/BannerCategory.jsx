@@ -41,6 +41,10 @@ import gaminimg1 from "@images/product/item3/image1.png";
 import gaminimg2 from "@images/product/item3/image2.png";
 import gaminimg3 from "@images/product/item3/image3.png";
 import rams from "../../../assets/images/homepageImage/RamMem/rams.png";
+import TouchScreenLaptop from "../../../assets/images/categories/TouchScreenlaptop.png";
+// import NvidiaImg from "../../../assets/images/categories/Nvidia.png";
+import NvidiaImg from "../../../assets/images/categories/Nvidia.png";
+import NvidiaImg2 from "../../../assets/images/categories/Nvidia2.png";
 import img3 from "../../../assets/images/homepageImage/upgradecomputers/image3.png";
 import categoryImg1 from "@images/categories/desktopweb.webp";
 import categorybusinussweb from "../../../assets/images/categories/businussweb.webp";
@@ -81,39 +85,40 @@ const BannerCategory = () => {
         {
             image: image1,
             categoryLink: "/category/bto",
-            categoryName: "Gaming Monitors | up to 50 % off",
+            categoryName: "Dell",
         },
         {
             image: image2,
             categoryLink: "/category/laptops",
-            categoryName: "Lorem Ipsum | up to 30% off",
+            categoryName: "HP",
         },
         {
             image: image4,
             categoryLink: "/category/desktop",
-            categoryName: "Product Name",
+            categoryName: "Lenovo",
         },
         {
             image: image3,
             categoryLink: "/category/gaming_desktops",
-            categoryName: "Product Category",
+            categoryName: "2 in 1s Laptops",
         },
     ];
     const featured = [
         {
-            name: "Featured Products",
+            name: "Shop by Brands",
             link: "See more",
         },
         {
-            name: "Networking",
+            name: "Shop by Form Factor",
             link: "See more",
         },
         {
-            name: "Upgrade Storage Space | S.J Computers",
+            name: "Budget Friendly Desktops",
             link: "See more",
+            extra: "Under $250",
         },
         {
-            name: "Rams",
+            name: "Touch Screen Laptops",
             link: "Shop Now",
         },
     ];
@@ -121,22 +126,22 @@ const BannerCategory = () => {
         {
             image: linkrouter,
             categoryLink: "/category/bto",
-            categoryName: "D-Link Router",
+            categoryName: "SFF",
         },
         {
             image: modem,
             categoryLink: "/category/laptops",
-            categoryName: "D-Link Modem",
+            categoryName: "Mini",
         },
         {
             image: modem,
             categoryLink: "/category/desktop",
-            categoryName: "D-Link Device",
+            categoryName: "Tower",
         },
         {
             image: linkrouter,
             categoryLink: "/category/gaming_desktops",
-            categoryName: "D-Link Router",
+            categoryName: "USFF",
         },
     ];
     const upgradecomputers = [
@@ -181,7 +186,7 @@ const BannerCategory = () => {
     ];
     const gamingArray = [
         {
-            name: "New Arrivals in Gaming Systems",
+            name: "Shop by Processor",
             link: "See more",
         },
         {
@@ -189,7 +194,7 @@ const BannerCategory = () => {
             link: "Shop Now",
         },
         {
-            name: "Latest Activity on Advance Laptops",
+            name: "Professional Laptops",
             link: "Shop Now",
         },
         {
@@ -201,17 +206,17 @@ const BannerCategory = () => {
         {
             image: gaminimg3,
             categoryLink: "/category/bto",
-            categoryName: "Product Name",
+            categoryName: "Core i3",
         },
         {
             image: scanimages,
             categoryLink: "/category/laptops",
-            categoryName: "Lorem Ipsum | up to 30% off",
+            categoryName: "Core i5",
         },
         {
             image: gaminimg1,
             categoryLink: "/category/desktop",
-            categoryName: "Product Name",
+            categoryName: "Core i7",
         },
     ];
     const fleshimages = [
@@ -226,6 +231,23 @@ const BannerCategory = () => {
         rectangle4,
         rectangle5,
     ];
+    const gpuItems = [
+        {
+            image: gaminimg3,
+            categoryLink: "/category/bto",
+            categoryName: "Core i3",
+        },
+        {
+            image: NvidiaImg,
+            categoryLink: "/category/laptops",
+            categoryName: "Core i5",
+        },
+        {
+            image: NvidiaImg2,
+            categoryLink: "/category/desktop",
+            categoryName: "Core i7",
+        },
+    ]
     return (
         <div className="banner-category-section">
             <div className="banner-wrapper">
@@ -251,13 +273,15 @@ const BannerCategory = () => {
                                     featured={featured}
                                     networkItems={networkItems}
                                     upgradecomputers={upgradecomputers}
-                                    rams={rams}
+                                    // rams={rams}
+                                    TouchScreenLaptop={TouchScreenLaptop}
                                 />
                                 {/* <SellingProducts images={Sellingimages}/> */}
                                 <SellingPro images={Sellingimages} />
                                 <GamingProductsSections
                                     gamingArray={gamingArray}
                                     items={gamingItems}
+                                    gpuItems={gpuItems}
                                     gamingProducts1={gamingProducts1}
                                     gamingProducts2={gamingProducts2}
                                     gamingProducts3={gamingProducts3}
