@@ -293,11 +293,12 @@ export default function MobileCheckout() {
                                            {/* <button >Proceed</button> */}
                                            {isAuthenticated ? (
                                            
-                                    <ReviewButton toggleAccordion={toggleAccordion}>
+                                    <ReviewButton toggleAccordion={() => handleClick(null, true, currentAccordionId)}>
                                         Proceed
+                                        
                                     </ReviewButton>
                                 ) : (
-                                    <ReviewButton toggleAccordion={toggleAccordion}>
+                                    <ReviewButton toggleAccordion={() => handleClick(null, true, currentAccordionId)}>
                                         Proceed
                                     </ReviewButton>
                                 )}
