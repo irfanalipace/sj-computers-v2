@@ -27,7 +27,7 @@ function RefurbishedSection() {
           fontSize={!isUpSmall && '16px'}
           fontWeight={'bolder'}>
           {' '}
-          What is SJ Computers?{' '}
+          About SJ Computers?{' '}
         </Typography>
       </Grid>
       <Grid
