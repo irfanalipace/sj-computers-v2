@@ -23,13 +23,13 @@ export default function Recommendation({ prod }) {
 
     return (
         <>
-            <div className="recommendation-container product-section">
+            <div className="recommendation-container product-section"  style={{padding: "0px 40px"}}>
                 <div className="recommendation-inner">
-                    <h3 className="product-section-heading">
+                    <h3 className="product-section-heading" style={{padding: '0px 12px'}}>
                         People who browsed similar items also showed
                         interest in these
                     </h3>
-                    <div className="slider-wrapper" style={{padding: "0px 40px"}}>
+                    <div className="slider-wrapper">
                         {isLoading || !products ? (
                             <LoaderComponent />
                         ) : (
