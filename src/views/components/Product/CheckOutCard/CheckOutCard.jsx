@@ -209,7 +209,7 @@ export const CheckOutCard = ({ product, isMobile }) => {
                     )}
                     {cartItem?.id ? (
                         <p className="item-card-add-text-details">
-                            Item Already in Cart
+                            Item already in cart
                         </p>
                     ) : (
                         <AddToCartAndWarranty

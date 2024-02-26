@@ -164,6 +164,11 @@ devDependencies:
     specifier: ^3.2.5
     version: 3.2.5
 
+devDependencies:
+  prettier:
+    specifier: ^3.2.5
+    version: 3.2.5
+
 packages:
 
   /@ampproject/remapping@2.2.1:
@@ -6210,6 +6215,11 @@ packages:
       source-map-js: 1.0.2
     dev: false
 
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+=======
+>>>>>>> bbfea32fd79ab9a46582fba718142fb3eaa34890
   /prettier@3.2.5:
     resolution: {integrity: sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==}
     engines: {node: '>=14'}
@@ -6221,6 +6231,10 @@ packages:
     engines: {node: '>=4'}
     dev: false
 
+<<<<<<< HEAD
+>>>>>>> Stashed changes
+=======
+>>>>>>> bbfea32fd79ab9a46582fba718142fb3eaa34890
   /process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
     dev: false
@@ -6661,6 +6675,7 @@ packages:
       object-assign: 4.1.1
       prop-types: 15.8.1
     dev: false
+    bundledDependencies: false
 
   /react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}

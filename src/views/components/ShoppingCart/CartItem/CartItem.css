@@ -63,10 +63,10 @@
     min-width: 80px;
     color: #078396;
 }
-.buttons-on-cartitem .cart-bttn:nth-child(4) {
+.buttons-on-cartitem .cart-bttn:nth-child(3) {
     min-width: 110px;
 }
-.buttons-on-cartitem .cart-bttn:nth-child(5) {
+.buttons-on-cartitem .cart-bttn:nth-child(4) {
     min-width: 185px;
 }
 
@@ -151,7 +151,6 @@
     margin-top: 5px;
 }
 
-
 @media screen and (max-width: 1151px) {
     .buttons-on-cartitem {
         flex-wrap: wrap;
@@ -160,9 +159,9 @@
         flex-basis: calc(1% - 16px);
     }
 }
-@media screen and (max-width: 768px) and (min-width:700px){
-.pragrapgraph-data{
-    margin-left: -10px;
+@media screen and (max-width: 768px) and (min-width: 700px) {
+    .pragrapgraph-data {
+        margin-left: -10px;
     }
 }
 @media screen and (max-width: 768px) {
@@ -209,32 +208,34 @@
     }
 }
 @media screen and (max-width: 430px) {
-.price-item p{
-    margin-top: 4px;
-}.card p {
-    margin-bottom: none;
-}.price-item strong {
-    font-family: Inter;
-    font-size: 20px;
-    font-weight: 600;
-    /* line-height: 24px; */
-    /* letter-spacing: 0em; */
-    text-align: left;
-    font-size: 16px;
-    font-weight: 800;
-}
-.items-card-data {
-    display: flex;
-    flex-wrap: wrap;
-    /* overflow-x: auto; */
-    padding-top: 12px;
-}
-.cart-image-mobile-size {
-    display: flex;
-    justify-content: center;
-    margin-top: 23px;
-}
-.buttons-on-cartitem {
-    margin-top: -21px;
-}
+    .price-item p {
+        margin-top: 4px;
+    }
+    .card p {
+        margin-bottom: none;
+    }
+    .price-item strong {
+        font-family: Inter;
+        font-size: 20px;
+        font-weight: 600;
+        /* line-height: 24px; */
+        /* letter-spacing: 0em; */
+        text-align: left;
+        font-size: 16px;
+        font-weight: 800;
+    }
+    .items-card-data {
+        display: flex;
+        flex-wrap: wrap;
+        /* overflow-x: auto; */
+        padding-top: 12px;
+    }
+    .cart-image-mobile-size {
+        display: flex;
+        justify-content: center;
+        margin-top: 23px;
+    }
+    .buttons-on-cartitem {
+        margin-top: -21px;
+    }
 }

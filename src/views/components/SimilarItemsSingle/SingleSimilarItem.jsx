@@ -26,8 +26,11 @@ const SingleSimilarItem = ({
             <div className={"product-details"}>
                 <div className="dev-section-button-dev-card">
                     {/* <Link to={`${new URL(product?.url).pathname}`}> */}
-                    <Link to={productPath}>
-                        <div className="product-name product-cart-name-mobile-screen">
+                    <Link
+                        to={productPath}
+                        style={{ textDecoration: "none", color: "#007185" }}
+                    >
+                        <div className="similer-items-product-name product-cart-name-mobile-screen">
                             {product?.name}
                         </div>
                         <div className=" d-sm-none product-prices">

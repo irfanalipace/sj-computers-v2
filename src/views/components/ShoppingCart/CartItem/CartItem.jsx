@@ -156,7 +156,10 @@ export const CartItem = memo(({ cartData }) => {
                                             <li>
                                                 <span
                                                     className="item-stock"
-                                                    style={{ color: "#000", fontWeight: 600, }}
+                                                    style={{
+                                                        color: "#000",
+                                                        fontWeight: 600,
+                                                    }}
                                                 >
                                                     Discount Available
                                                 </span>
@@ -290,17 +293,7 @@ export const CartItem = memo(({ cartData }) => {
                                                     {updatingItem ? (
                                                         <Loader />
                                                     ) : (
-                                                        "Shipping"
-                                                    )}
-                                                </button>
-                                                <button
-                                                    className="cart-bttn"
-                                                    disabled={updatingItem}
-                                                >
-                                                    {updatingItem ? (
-                                                        <Loader />
-                                                    ) : (
-                                                        `Save for Later`
+                                                        `Save for later`
                                                     )}
                                                 </button>
                                                 <button

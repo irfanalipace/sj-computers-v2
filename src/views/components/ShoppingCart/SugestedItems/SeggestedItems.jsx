@@ -117,7 +117,7 @@ const SeggestedItems = ({ num }) => {
                                     style={{ fontSize: "12px" }}
                                     className="hide-on-mobile"
                                 >
-                                    Item Already in cart
+                                    Item already in cart
                                 </p>
                             )}{" "}
                         </>

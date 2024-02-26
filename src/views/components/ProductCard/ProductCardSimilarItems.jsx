@@ -24,10 +24,13 @@ const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
     const ProductDetails = () => (
         <div>
             {isUpSmall && (
-                <div className="product-details">
+                <div className="similer-product-details">
                     <div className="dev-section-button-dev-card">
-                        <Link to={productPath}>
-                            <div className="product-name product-cart-name-mobile-screen">
+                        <Link
+                            to={productPath}
+                            style={{ textDecoration: "none" }}
+                        >
+                            <div className="similer-list-product-name product-cart-name-mobile-screen">
                                 {product.name}
                             </div>
 
@@ -37,7 +40,7 @@ const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
                                         ${product.originalPrice}
                                     </div>
                                 )}
-                                <div className="product-new-price">
+                                <div className="product-neww-price">
                                     <span>$</span>
                                     {product?.price?.toString().split(".")[0]}
                                     <sup>
@@ -158,9 +161,12 @@ const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
             {!isUpSmall && (
                 <div className="product-details">
                     <div className="dev-section-button-dev-card">
-                        <Link to={productPath}>
+                        <Link
+                            to={productPath}
+                            style={{ textDecoration: "none" }}
+                        >
                             <div
-                                className="product-name product-cart-name-mobile-screen"
+                                className="similer-list-product-name product-cart-name-mobile-screen"
                                 style={{ color: "#007185" }}
                             >
                                 {product.name}
@@ -211,7 +217,7 @@ const ProductCardSimilarItems = ({ type = "", product, inGrid }) => {
                         {product.originalPrice && (
                             <div>${product.originalPrice}</div>
                         )}
-                        <div className="product-new-price">
+                        <div className="product-neww-price">
                             <span
                                 style={{
                                     fontSize: "11px",
