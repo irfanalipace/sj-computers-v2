@@ -1,7 +1,7 @@
-.alignment-container{
+.alignment-container {
     position: relative;
 }
-.align-to-end{
+.align-to-end {
     /* justify-self: flex-end; */
     position: absolute;
     right: 0;
@@ -10,12 +10,12 @@
     /* background-color: aqua; */
 }
 
-.sub-category-link{
+.sub-category-link {
     text-decoration: none;
     color: black;
 }
 
-.sub-category-link:hover{
+.sub-category-link:hover {
     color: orange;
     text-decoration: underline;
 }

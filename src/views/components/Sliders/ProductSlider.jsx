@@ -12,7 +12,7 @@ SwiperCore.use([Navigation]);
 
 const ProductSlider = ({ type = "", products }) => {
     return (
-        <div style={{position: "relative"}} className="product-slider">
+        <div style={{ position: "relative" }} className="product-slider">
             <Swiper
                 slidesPerView={7}
                 breakpoints={{
@@ -38,8 +38,8 @@ const ProductSlider = ({ type = "", products }) => {
                     },
                 }}
                 navigation={{
-                    nextEl: '.product-slider .swiper-button-next',
-                    prevEl: '.product-slider .swiper-button-prev',
+                    nextEl: ".product-slider .swiper-button-next",
+                    prevEl: ".product-slider .swiper-button-prev",
                 }}
                 className="recommendation-slider"
             >
@@ -52,8 +52,14 @@ const ProductSlider = ({ type = "", products }) => {
                 ))}
             </Swiper>
             {/* the css of these are defined in Slider.css */}
-            <div className="swiper-button-next slider-button" style={{position: "absolute", right: -40}}></div>
-            <div className="swiper-button-prev slider-button" style={{position: "absolute", left: -40}}></div>
+            <div
+                className="swiper-button-next slider-button"
+                style={{ position: "absolute", right: -40 }}
+            ></div>
+            <div
+                className="swiper-button-prev slider-button"
+                style={{ position: "absolute", left: -40 }}
+            ></div>
         </div>
     );
 };

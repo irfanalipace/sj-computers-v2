@@ -38,7 +38,7 @@ export default function RefundForms({
                     totalAmount: item?.total || item?.total_amount,
                 };
                 return orderItem;
-            })
+            }),
         );
         setIsSubmitDisabled(isAnyPropertyInvalid(list));
     }, [list]);
@@ -113,10 +113,10 @@ export default function RefundForms({
                             dangerouslySetInnerHTML={{
                                 __html: prettifyError(
                                     error?.data?.errors?.error ||
-                                        error?.data?.errors
+                                        error?.data?.errors,
                                 ),
                             }}
-                        />
+                        />,
                     );
                 }
                 break;
@@ -135,10 +135,10 @@ export default function RefundForms({
                             dangerouslySetInnerHTML={{
                                 __html: prettifyError(
                                     error?.data?.message?.error ||
-                                        error?.data?.message
+                                        error?.data?.message,
                                 ),
                             }}
-                        />
+                        />,
                     );
                 }
                 break;
@@ -408,7 +408,7 @@ export default function RefundForms({
                                         handleRequestOrderListChange(
                                             index,
                                             "reasons",
-                                            e.target.value
+                                            e.target.value,
                                         )
                                     }
                                     className="form-control"
@@ -435,7 +435,7 @@ export default function RefundForms({
                                     handleRequestOrderListChange(
                                         index,
                                         "refund_type",
-                                        e.target.value
+                                        e.target.value,
                                     )
                                 }
                                 color="success"
@@ -473,15 +473,15 @@ export default function RefundForms({
                                             e.target.value > 0
                                                 ? e.target.value <=
                                                       parseFloat(
-                                                          list[index].total
+                                                          list[index].total,
                                                       ) ||
                                                   parseFloat(
-                                                      list[index].total_amount
+                                                      list[index].total_amount,
                                                   )
                                                     ? e.target.value
                                                     : list[index].total ||
                                                       list[index].total_amount
-                                                : ""
+                                                : "",
                                         );
                                     }}
                                 />

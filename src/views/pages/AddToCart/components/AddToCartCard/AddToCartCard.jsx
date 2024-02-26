@@ -27,10 +27,10 @@ const AddToCartCard = ({ product }) => {
     const navigate = useNavigate();
     const { productId } = useParams();
     const gettingProtectionPlan = totalItems?.find(
-        (item) => item?.product?.asin == productId
+        (item) => item?.product?.asin == productId,
     );
     const isAuthenticated = useSelector(
-        (state) => state?.auth?.isAuthenticated
+        (state) => state?.auth?.isAuthenticated,
     );
     const price = parseFloat(product?.price) || 0;
     const planPrice = parseFloat(product?.plan_price) || 0;
@@ -57,7 +57,7 @@ const AddToCartCard = ({ product }) => {
                             <LazyLoadImage
                                 // width={"100%"}
                                 // height={"100%"}
-                                style={{maxHeight: "100%", maxWidth: "100%"}} // for preventing image from skretching
+                                style={{ maxHeight: "100%", maxWidth: "100%" }} // for preventing image from skretching
                                 src={product?.product?.image}
                                 alt={product?.product?.name
                                     ?.trim()
@@ -144,7 +144,7 @@ const AddToCartCard = ({ product }) => {
                             <span
                                 style={{ color: "#318243", lineHeight: "16px" }}
                             >
-                                Your Order qualifies for FREE Shipping. 
+                                Your Order qualifies for FREE Shipping.
                             </span>
                             <br />
                             Choose this option at checkout.{" "}

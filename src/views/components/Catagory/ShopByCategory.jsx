@@ -11,7 +11,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 const ShopByCategory = () => {
-
     const BreakPoints = {
         // when window width is >= 320px
         220: {
@@ -35,7 +34,7 @@ const ShopByCategory = () => {
         1400: {
             slidesPerView: 7.5,
         },
-    }
+    };
 
     return (
         <div

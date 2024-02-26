@@ -9,7 +9,7 @@ export function loginApi({ email, password }) {
             .then((response) => {
                 console.print(
                     "file: auth.module.js | login| response",
-                    response
+                    response,
                 );
                 resolve(response.data);
             })
@@ -31,7 +31,7 @@ export function registerApi({ name, email, password, confirmPassword }) {
             .then((response) => {
                 console.print(
                     "file: auth.module.js | register| response",
-                    response
+                    response,
                 );
                 resolve(response.data);
             })
@@ -51,7 +51,7 @@ export function logoutApi() {
             .then((response) => {
                 console.print(
                     "file: auth.module.js | logout| response",
-                    response
+                    response,
                 );
                 resolve(response.data);
             })
@@ -71,7 +71,7 @@ export function verifyEmailApi(email) {
             .then((response) => {
                 console.print(
                     "file: auth.module.js | verifyEmailApi| response",
-                    response
+                    response,
                 );
                 resolve(response.data);
             })
@@ -90,12 +90,12 @@ export function verifyOtpApi({ otp }, token) {
                 otp_code: otp,
             },
             "",
-            token
+            token,
         )
             .then((response) => {
                 console.print(
                     "file: auth.module.js | verifyOtpApi| response",
-                    response
+                    response,
                 );
                 resolve(response.data);
             })
@@ -114,7 +114,7 @@ export function forgetPasswordApi({ email }) {
             .then((response) => {
                 console.print(
                     "file: auth.module.js | forgetPasswordApi| response",
-                    response
+                    response,
                 );
                 resolve(response.data);
             })
@@ -142,7 +142,7 @@ export function resetPasswordApi({
             .then((response) => {
                 console.print(
                     "file: auth.module.js | resetPasswordApi| response",
-                    response
+                    response,
                 );
                 resolve(response.data);
             })
@@ -160,7 +160,7 @@ export function updateProfileApi(formData) {
             .then((response) => {
                 console.print(
                     "file: auth.module.js | updateProfileApi| response",
-                    response
+                    response,
                 );
                 resolve(response.data);
             })
@@ -178,7 +178,7 @@ export function deleteProfilePicApi(data) {
             .then((response) => {
                 console.print(
                     "file: auth.module.js | deleteProfilePicApi| response",
-                    response
+                    response,
                 );
                 resolve(response.data);
             })
@@ -195,7 +195,7 @@ export function updatePasswordApi(data) {
             .then((response) => {
                 console.print(
                     "file: auth.module.js | updateProfileApi| response",
-                    response
+                    response,
                 );
                 resolve(response.data);
             })

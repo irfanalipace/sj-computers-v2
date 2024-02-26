@@ -6,7 +6,7 @@
 
     color: #333333;
 }
-.location-data-addres-side{
+.location-data-addres-side {
     font-size: 14px;
 }
 /* .modal-content {
@@ -22,8 +22,8 @@
     border-radius: var(--bs-modal-border-radius);
     outline: 0;
 } */
-.font-size-dialog-box-locations button{
-font-size: 12px;
+.font-size-dialog-box-locations button {
+    font-size: 12px;
 }
 .location-header-text {
     font-weight: 500;
@@ -234,7 +234,8 @@ font-size: 12px;
     /* font-style: normal; */
     /* font-weight: 500; */
     /* padding-bottom: 3px; */
-}.error-message-location-model2{
+}
+.error-message-location-model2 {
     padding-top: 12px;
     font-weight: 400;
     font-size: 12px;

@@ -51,8 +51,8 @@ function useAddToCart(product, quantity) {
             ? dispatch(addToCart({ cartItem }, () => navigate(redirectPath)))
             : dispatch(
                   addToLocalCart({ cartItem, cartDetails }, () =>
-                      navigate(redirectPath)
-                  )
+                      navigate(redirectPath),
+                  ),
               );
     };
 
@@ -63,7 +63,7 @@ function useAddToCart(product, quantity) {
             JSON.stringify(product),
             quantity,
             JSON.stringify(details),
-        ]
+        ],
     );
 }
 

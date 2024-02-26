@@ -24,7 +24,7 @@ function OrderTable({ deliveryDate, orderDetails, onToggleExpanded }) {
         // return;
         if (expandedOrders.includes(orderId)) {
             setExpandedOrders((prevState) =>
-                prevState.filter((id) => id !== orderId)
+                prevState.filter((id) => id !== orderId),
             );
         } else {
             setExpandedOrders((prevState) => [...prevState, orderId]);
@@ -179,7 +179,7 @@ function OrderTable({ deliveryDate, orderDetails, onToggleExpanded }) {
                                                 }}>Product Price</b></span><br/>${item?.price}</Text> */}
                                                                 </div>
                                                             </div>
-                                                        )
+                                                        ),
                                                     )}
                                                 </ul>
                                             </div>
@@ -200,10 +200,10 @@ function OrderProducts({ data, totalItems, sendToPage }) {
     const [view, setView] = useState(false);
 
     const [totalRecords, setTotalRecords] = useState(
-        totalItems?.success_orders?.total
+        totalItems?.success_orders?.total,
     );
     const [currentPage, setCurrentPage] = useState(
-        totalItems?.success_orders?.current_page
+        totalItems?.success_orders?.current_page,
     );
     const perPage = 12; // Adjust the number of items per page as needed
     // ...
@@ -244,7 +244,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
         // return;
         if (expandedOrders.includes(orderId)) {
             setExpandedOrders((prevState) =>
-                prevState.filter((id) => id !== orderId)
+                prevState.filter((id) => id !== orderId),
             );
         } else {
             setExpandedOrders((prevState) => [...prevState, orderId]);
@@ -269,7 +269,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                         variant={currentPage === i ? "filled" : "outline"}
                     >
                         {i}
-                    </Button>
+                    </Button>,
                 );
             }
             pages.push(<span key="dots">...</span>);
@@ -285,7 +285,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                     variant={currentPage === pageCount ? "filled" : "outline"}
                 >
                     {pageCount}
-                </Button>
+                </Button>,
             );
         }
         // Case 2: Less than or equal to 5 pages
@@ -303,7 +303,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                         variant={currentPage === i ? "filled" : "outline"}
                     >
                         {i}
-                    </Button>
+                    </Button>,
                 );
             }
         }

@@ -26,7 +26,7 @@ export default function ReviewCheckout({
         setDiscountHeading("New Heading");
     };
     const [discountHeading, setDiscountHeading] = useState(
-        "Get Discount & Benefits"
+        "Get Discount & Benefits",
     );
     const screenWidth = useViewportWidth();
     const [itemsToShow, setItemsToShow] = useState([]);
@@ -47,11 +47,9 @@ export default function ReviewCheckout({
         items();
     }, [cartItems]);
 
-
     return (
         <>
-
-          <h4>
+            <h4>
                 Estimated delivery: {estimatedDelivery ? estimatedDelivery : ""}
             </h4>
             <p>Items Shipped from sjcomputer.us</p>
@@ -180,12 +178,6 @@ export default function ReviewCheckout({
                     Proceed
                 </ReviewButton>
             )}
-    
-            
-     
-       
-
-     
         </>
     );
 }

@@ -21,7 +21,7 @@ const Breadcrumb = ({ routes }) => {
             path: route.link,
             name: route.label,
         }));
-     }
+    }
 
     // Render the breadcrumb trail
     return (

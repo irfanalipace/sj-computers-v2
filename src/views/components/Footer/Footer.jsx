@@ -144,7 +144,7 @@ const Footer = () => {
                                             <Link
                                                 to="/return_refund_policy"
                                                 className="herf-link text-decoration-none"
-                                                style={{lineHeight: "1.2rem"}}
+                                                style={{ lineHeight: "1.2rem" }}
                                             >
                                                 Return And Refund Policies
                                             </Link>

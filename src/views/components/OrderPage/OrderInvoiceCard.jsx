@@ -38,8 +38,8 @@ const OrderInvoiceCard = ({ data, activeTab }) => {
                         {activeTab === 0
                             ? "Order Invoice"
                             : activeTab === 1
-                            ? "Cancelled Order Invoice"
-                            : null}
+                              ? "Cancelled Order Invoice"
+                              : null}
                     </Button>
                     <p>
                         Lorem Ipsum is simply dummy text of the printing and

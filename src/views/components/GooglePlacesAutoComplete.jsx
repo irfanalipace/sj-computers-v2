@@ -16,7 +16,7 @@ export default function GooglePlacesAutoComplete() {
                 {
                     placeId: placePredictions[0].place_id,
                 },
-                (placeDetails) => savePlaceDetailsToState(placeDetails)
+                (placeDetails) => savePlaceDetailsToState(placeDetails),
             );
     }, [placePredictions]);
     return (

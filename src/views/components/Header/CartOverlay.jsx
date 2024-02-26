@@ -120,7 +120,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                                     generatePath(
                                                                         item
                                                                             ?.product
-                                                                            ?.url
+                                                                            ?.url,
                                                                     ) ||
                                                                     location.pathname
                                                                 }
@@ -146,9 +146,9 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                                 <strong className="">
                                                                     $
                                                                     {parseFloat(
-                                                                        item?.price
+                                                                        item?.price,
                                                                     ).toFixed(
-                                                                        2
+                                                                        2,
                                                                     )}
                                                                 </strong>
                                                             </p>
@@ -180,7 +180,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                                                             <button
                                                                                 onClick={() =>
                                                                                     deleteItemFunction(
-                                                                                        item
+                                                                                        item,
                                                                                     )
                                                                                 }
                                                                                 className="button-link ps-0"

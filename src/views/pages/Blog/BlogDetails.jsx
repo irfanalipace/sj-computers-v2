@@ -73,7 +73,7 @@ const BlogDetails = () => {
     const pathWithoutSlash = path.slice(1);
 
     const filteredArr = blogs?.filter(
-        (item) => item?.slug !== pathWithoutSlash
+        (item) => item?.slug !== pathWithoutSlash,
     );
 
     if (filteredArr?.length > 3) {
@@ -248,7 +248,7 @@ const BlogDetails = () => {
     }
 
     const sortedBlogs = blogs.sort(
-        (a, b) => new Date(b.publish_date) - new Date(a.publish_date)
+        (a, b) => new Date(b.publish_date) - new Date(a.publish_date),
     );
 
     const toggleCollapse = () => {
@@ -308,7 +308,7 @@ const BlogDetails = () => {
                                                                     {link.title}
                                                                 </Link>
                                                             </li>
-                                                        )
+                                                        ),
                                                     )}
                                                 </ul>
                                             </div>
@@ -346,14 +346,14 @@ const BlogDetails = () => {
                                                     <span>
                                                         {blogdteails.publish_date
                                                             ? new Date(
-                                                                  blogdteails.publish_date
+                                                                  blogdteails.publish_date,
                                                               ).toLocaleDateString(
                                                                   "en-US",
                                                                   {
                                                                       month: "2-digit",
                                                                       day: "2-digit",
                                                                       year: "numeric",
-                                                                  }
+                                                                  },
                                                               )
                                                             : null}
                                                     </span>
@@ -404,11 +404,11 @@ const BlogDetails = () => {
                                                                 <Link
                                                                     to="javascript:void(0)"
                                                                     onClick={(
-                                                                        event
+                                                                        event,
                                                                     ) =>
                                                                         handleClick(
                                                                             event,
-                                                                            category.id
+                                                                            category.id,
                                                                         )
                                                                     }
                                                                     className="text-decoration-none"
@@ -419,7 +419,7 @@ const BlogDetails = () => {
                                                                 </Link>
                                                             </div>
                                                         </React.Fragment>
-                                                    )
+                                                    ),
                                                 )}
                                             </div>
                                         </div>
@@ -525,7 +525,7 @@ const BlogDetails = () => {
                                                                         }}
                                                                     />
                                                                 </div>
-                                                            )
+                                                            ),
                                                         )}
                                                 </div>
                                             </div>
@@ -579,7 +579,7 @@ const BlogDetails = () => {
                                                 id="blog-content"
                                                 dangerouslySetInnerHTML={{
                                                     __html: DOMPurify.sanitize(
-                                                        blogdteails.content
+                                                        blogdteails.content,
                                                     ),
                                                 }}
                                             />

@@ -13,7 +13,7 @@ function useProductData() {
     const getProductDetails = async (filter) => {
         if (!productLoading) {
             const filteredProduct = products.filter(
-                (product) => product?.asin == productId
+                (product) => product?.asin == productId,
             )[0];
 
             if (filteredProduct) {

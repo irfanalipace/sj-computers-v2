@@ -54,27 +54,37 @@ const Accordion = ({
                             <h3>{title}</h3>
                         </div>
                     </div>
-                    <div style={{display:'flex', justifyContent:'space-between'}}>
                     <div
-                        className={`${
-                            summary ? "col-6 d-md-block " : "d-none"
-                        }`}
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}
                     >
-                        <div className="summary" style={{paddingLeft:'22px'}}>{summary}</div>
+                        <div
+                            className={`${
+                                summary ? "col-6 d-md-block " : "d-none"
+                            }`}
+                        >
+                            <div
+                                className="summary"
+                                style={{ paddingLeft: "22px" }}
+                            >
+                                {summary}
+                            </div>
+                        </div>
+                        <div
+                            className={`${
+                                summary ? "col-lg-2 col-1 d-md-flex" : "d-none"
+                            } d-flex justify-content-end`}
+                        >
+                            <button
+                                onClick={handleToggle}
+                                className="change-btn"
+                            >
+                                Change
+                            </button>
+                        </div>
                     </div>
-                    <div
-                        className={`${
-                            summary
-                                ? "col-lg-2 col-1 d-md-flex"
-                                : "d-none"
-                        } d-flex justify-content-end`}
-                    >
-                        <button onClick={handleToggle} className="change-btn">
-                            Change
-                        </button>
-                    </div>
-                    </div>
-                  
                 </div>
             </div>
             <div

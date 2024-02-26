@@ -48,8 +48,8 @@ const ProtectionPopup = ({ open, handleClose, plan, handleAddProtection }) => {
                         https://sjcomputers.us or by phone. Most claims approved
                         within <br />
                         minutes. If we can’t repair it, we’ll send you an
-                        SJComputers.com Gift Card <br /> for the purchase price of
-                        your covered product or replace it. <br />
+                        SJComputers.com Gift Card <br /> for the purchase price
+                        of your covered product or replace it. <br />
                         EXPERT TECH HELP: Real experts are available 24/7 to
                         help with set- <br />
                         up, connectivity issues, troubleshooting and much more.{" "}
@@ -60,8 +60,8 @@ const ProtectionPopup = ({ open, handleClose, plan, handleAddProtection }) => {
                         section. Simply <br /> click “User Guide” for more info.
                         Asurion will also email your plan <br />
                         confirmation with Terms & Conditions to the address
-                        associated with <br /> your SJComputers account within 24
-                        hours of purchase (if you do not see <br />
+                        associated with <br /> your SJComputers account within
+                        24 hours of purchase (if you do not see <br />
                         this email, please check your spam folder). Contact us
                         if you cannot <br />
                         locate your plan confirmation and Terms & Conditions via

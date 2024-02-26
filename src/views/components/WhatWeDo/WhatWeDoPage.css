@@ -1,5 +1,5 @@
-.whatwedo-page-alignment-page{
-height: 244px;
+.whatwedo-page-alignment-page {
+    height: 244px;
 }
 
 .div-container-font-alignment-whatwedo-page {
@@ -8,13 +8,13 @@ height: 244px;
     padding-top: 29px;
     margin-left: 21px;
 }
-.div-container-font-alignment-whatwedo-page span{
-    font-family: 'Inter';
+.div-container-font-alignment-whatwedo-page span {
+    font-family: "Inter";
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
     line-height: 22px;
-    color: #E0BC00;
+    color: #e0bc00;
 }
 
 .position-image-data-what-todo-page {
@@ -31,7 +31,7 @@ height: 244px;
     width: 300px;
     background-color: red;
     height: 300px;
-    background: #E7FFEC;
+    background: #e7ffec;
 }
 .blog-about-position-my-what-todo-image img {
     height: 372px;
@@ -45,20 +45,18 @@ height: 244px;
     padding: 20px 0 0 17px;
 }
 
-.hover-effect-card-button-blogs button:hover{
+.hover-effect-card-button-blogs button:hover {
     background: black;
     border: none;
 }
-.fa-decoration-span-arrow-dev-card{
-color:#E0BC00
+.fa-decoration-span-arrow-dev-card {
+    color: #e0bc00;
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width: 600px) {
     .position-image-data-what-todo-page {
-       
         right: 9px;
-       
-    }.blog-about-position-my-what-todo-image img {
-       
+    }
+    .blog-about-position-my-what-todo-image img {
         /* max-width: 100%; */
     }
 }

@@ -151,12 +151,12 @@ const ApplyNow = () => {
                                             // sx={{ width: '30%' }}
                                             variant="standard"
                                             {...formik.getFieldProps(
-                                                "first_name"
+                                                "first_name",
                                             )}
                                             error={
                                                 formik.touched.first_name &&
                                                 Boolean(
-                                                    formik.errors.first_name
+                                                    formik.errors.first_name,
                                                 )
                                             }
                                             helperText={
@@ -173,7 +173,7 @@ const ApplyNow = () => {
                                             // sx={{ width: '30%', marginLeft: '20px' }}
                                             variant="standard"
                                             {...formik.getFieldProps(
-                                                "last_name"
+                                                "last_name",
                                             )}
                                             error={
                                                 formik.touched.last_name &&
@@ -220,7 +220,7 @@ const ApplyNow = () => {
                                             onChange={(e) =>
                                                 formik.setFieldValue(
                                                     "resume",
-                                                    e.target.files[0]
+                                                    e.target.files[0],
                                                 )
                                             }
                                             error={
@@ -255,14 +255,14 @@ const ApplyNow = () => {
                                             onChange={(e) =>
                                                 formik.setFieldValue(
                                                     "cover_letter",
-                                                    e.target.files[0]
+                                                    e.target.files[0],
                                                 )
                                             }
                                             onBlur={formik.handleBlur}
                                             error={
                                                 formik.touched.cover_letter &&
                                                 Boolean(
-                                                    formik.errors.cover_letter
+                                                    formik.errors.cover_letter,
                                                 )
                                             }
                                             helperText={

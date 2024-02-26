@@ -13,11 +13,9 @@
     padding: 20px 30px 0;
 }
 
-
-@media screen and (max-width:450px) {
-    .product{
-     
-            padding: 0px;
-            padding-bottom: 11px;
-        }
+@media screen and (max-width: 450px) {
+    .product {
+        padding: 0px;
+        padding-bottom: 11px;
+    }
 }

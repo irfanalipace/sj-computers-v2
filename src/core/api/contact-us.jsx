@@ -10,7 +10,7 @@ export function contactUsApi({ subject_name, email, message }) {
             .then((response) => {
                 console.print(
                     "file: states.js | contactUsApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })

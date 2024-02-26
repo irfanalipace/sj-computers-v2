@@ -12,7 +12,7 @@ import "./CategorySidebar.css";
 
 const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
     const [isSubCategoryVisible, setIsSubCategoryVisible] = useState(
-        computerCategories.map(() => false)
+        computerCategories.map(() => false),
     );
     const [visibleCategory, setVisibleCategory] = useState(2);
 

@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "./FileUpload.css";
 const CustomPhotoLibrary = ({ onClose, parentData, onDeleteImage }) => {
-  
-
     return (
         <Modal
             show={true}

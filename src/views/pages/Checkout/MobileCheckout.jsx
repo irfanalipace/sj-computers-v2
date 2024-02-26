@@ -38,11 +38,11 @@ export default function MobileCheckout() {
     const [isModalOpen, setModalOpen] = useState(false);
 
     const openModal = () => {
-      setModalOpen(true);
+        setModalOpen(true);
     };
-  
+
     const closeModal = () => {
-      setModalOpen(false);
+        setModalOpen(false);
     };
     const [accordion, setAccordion] = useState(initAccordionValues);
     const [paymentMethod, setPaymentMethod] = useState("");
@@ -51,7 +51,7 @@ export default function MobileCheckout() {
     const cartItems = useSelector((state) => state.cart.cart);
     const [searchParams] = useSearchParams();
     const shippingAddress = useSelector(
-        (state) => state.orders.shippingDetails
+        (state) => state.orders.shippingDetails,
     );
     const [paymentError, setPaymentError] = useState("");
 
@@ -118,24 +118,21 @@ export default function MobileCheckout() {
         };
     }, []);
 
- 
     return (
         <>
-      
             {loading ? (
                 <Loader />
             ) : (
                 <div className="checkout-page">
                     <div className="checkout-header">
                         <div className="checkout-header-wrapper">
-                        
                             <div className="d-flex justify-content-between">
                                 <div className="logo-wrapper">
                                     <Link to={"/"}>
                                         <img src={footerlogo} />
                                     </Link>
                                 </div>
-                            
+
                                 <div className="items-number">
                                     {isAuthenticated ? (
                                         <h3>
@@ -163,9 +160,12 @@ export default function MobileCheckout() {
                         )}
                         {checkoutDetails.total_items > 0 ? (
                             <div className="row mx-o">
-                           <div style={{textAlign:'center'}} className="checkout-item-mobile-series-data">
-                           <p>Checkout (1 item)</p>
-                            </div>
+                                <div
+                                    style={{ textAlign: "center" }}
+                                    className="checkout-item-mobile-series-data"
+                                >
+                                    <p>Checkout (1 item)</p>
+                                </div>
                                 <div className="col-md-9 col-12">
                                     <Accordion
                                         className="shipping-details px-0 acoordeing"
@@ -184,37 +184,48 @@ export default function MobileCheckout() {
                                         />
                                     </Accordion>
                                     {accordion[1].open && (
-                                    <>
-                                    <div className="col-md-3 col-12">
-                                    <div>
-                                        <div className="shipping-method-component-wrapper" style={{marginTop:"12px", marginBottom:"12px"}}>
-                                            <ShippingMethod />
-                                        </div>
-                                    </div>        
+                                        <>
+                                            <div className="col-md-3 col-12">
+                                                <div>
+                                                    <div
+                                                        className="shipping-method-component-wrapper"
+                                                        style={{
+                                                            marginTop: "12px",
+                                                            marginBottom:
+                                                                "12px",
+                                                        }}
+                                                    >
+                                                        <ShippingMethod />
+                                                    </div>
+                                                </div>
 
-                                    {/* {!isAuthenticated && (
+                                                {/* {!isAuthenticated && (
                                         <div>
                                             <div className="mobile-data-change-hide">
                                                 <Discount />
                                             </div>
                                         </div>
                                     )} */}
+                                            </div>
 
-                                 
-                                </div>
-                              
-                                    <div className="order-summary-component-wrapper">
-                                        <MobileSummary
-                                       
-                                            handleClick={handleClick}
-                                            activeAccordion={currentAccordionId}
-                                            paymentMethod={paymentMethod}
-                                            shippingDetails={checkoutDetails}
-                                            isDisabled={
-                                                !shippingAddress?.isValid
-                                            }
-                                        />
-                                    </div></>
+                                            <div className="order-summary-component-wrapper">
+                                                <MobileSummary
+                                                    handleClick={handleClick}
+                                                    activeAccordion={
+                                                        currentAccordionId
+                                                    }
+                                                    paymentMethod={
+                                                        paymentMethod
+                                                    }
+                                                    shippingDetails={
+                                                        checkoutDetails
+                                                    }
+                                                    isDisabled={
+                                                        !shippingAddress?.isValid
+                                                    }
+                                                />
+                                            </div>
+                                        </>
                                     )}
                                     {/* <div className="col-md-3 col-12">
                                     <div>
@@ -229,7 +240,6 @@ export default function MobileCheckout() {
                                         toggleAccordion={toggleAccordion}
                                         isOpen={accordion[2].open}
                                     >
-                                     
                                         <MobileReviewCheckout
                                             estimatedDelivery={
                                                 checkoutDetails.shipment_info
@@ -241,79 +251,138 @@ export default function MobileCheckout() {
                                         />
                                     </Accordion>
                                     {accordion[2].open && (
-                                    <>
-                                    <div className="col-md-3 col-12">
-                                    <div style={{display:'flex', justifyContent:'space-between'}} className="border-shipping-summery-data">
-                                        {/* <div className="shipping-method-component-wrapper" style={{marginTop:"12px", marginBottom:"12px"}}>
+                                        <>
+                                            <div className="col-md-3 col-12">
+                                                <div
+                                                    style={{
+                                                        display: "flex",
+                                                        justifyContent:
+                                                            "space-between",
+                                                    }}
+                                                    className="border-shipping-summery-data"
+                                                >
+                                                    {/* <div className="shipping-method-component-wrapper" style={{marginTop:"12px", marginBottom:"12px"}}>
                                             <ShippingMethod />
                                         </div> */}
-                                        <div>
-                                        <div style={{display:"flex", justifyContent:""}}>
-                                        <div style={{marginTop:"3px"}}>
-                                           <input type="radio" name="radio"  id="specifyColor"/>
-                                           </div>
-                                            <div>
-                                            <span className="shipping-data-shiping-view-mobile">Free Shipping  </span>
-                                            <p style={{ fontSize: "10px" }}>
-                                                Mon, Nov 13
-                                            </p>
-                                            </div>
-                                           
-                                        </div>
-                                           
-                                        </div>
-                                        <div className="summery-modal-data-open-mobile">
-                                            <span onClick={openModal}>order Summery</span>
-                                        </div>
+                                                    <div>
+                                                        <div
+                                                            style={{
+                                                                display: "flex",
+                                                                justifyContent:
+                                                                    "",
+                                                            }}
+                                                        >
+                                                            <div
+                                                                style={{
+                                                                    marginTop:
+                                                                        "3px",
+                                                                }}
+                                                            >
+                                                                <input
+                                                                    type="radio"
+                                                                    name="radio"
+                                                                    id="specifyColor"
+                                                                />
+                                                            </div>
+                                                            <div>
+                                                                <span className="shipping-data-shiping-view-mobile">
+                                                                    Free
+                                                                    Shipping{" "}
+                                                                </span>
+                                                                <p
+                                                                    style={{
+                                                                        fontSize:
+                                                                            "10px",
+                                                                    }}
+                                                                >
+                                                                    Mon, Nov 13
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="summery-modal-data-open-mobile">
+                                                        <span
+                                                            onClick={openModal}
+                                                        >
+                                                            order Summery
+                                                        </span>
+                                                    </div>
+                                                </div>
 
-                                     
-                                    </div>        
-                                 
-                                    {/* {!isAuthenticated && (
+                                                {/* {!isAuthenticated && (
                                         <div>
                                             <div className="mobile-data-change-hide">
                                                 <Discount />
                                             </div>
                                         </div>
                                     )} */}
+                                            </div>
 
-                                 
-                                </div>
-                           
-                                              <ShipingModalSummery isOpen={isModalOpen} onClose={closeModal}> </ShipingModalSummery>
-                                       
-                                    <div className="order-summary-component-wrapper">
-                                        <MobileSummary
-                                       
-                                            handleClick={handleClick}
-                                            activeAccordion={currentAccordionId}
-                                            paymentMethod={paymentMethod}
-                                            shippingDetails={checkoutDetails}
-                                            isDisabled={
-                                                !shippingAddress?.isValid
-                                            }
-                                        />
-                                    </div>
-                                    
-                                    <div className="col-md-3 col-12">
-                                    <div>
-                                        <div className="shipping-method-button-mobile-size" style={{marginBottom:"12px", marginTop:"12px"}}>
-                                           {/* <button >Proceed</button> */}
-                                           {isAuthenticated ? (
-                                           
-                                    <ReviewButton toggleAccordion={() => handleClick(null, true, currentAccordionId)}>
-                                        Proceed
-                                        
-                                    </ReviewButton>
-                                ) : (
-                                    <ReviewButton toggleAccordion={() => handleClick(null, true, currentAccordionId)}>
-                                        Proceed
-                                    </ReviewButton>
-                                )}
-                                                            </div>
-                                    </div>
-                                    </div> 
-                                    </>
+                                            <ShipingModalSummery
+                                                isOpen={isModalOpen}
+                                                onClose={closeModal}
+                                            >
+                                                {" "}
+                                            </ShipingModalSummery>
+
+                                            <div className="order-summary-component-wrapper">
+                                                <MobileSummary
+                                                    handleClick={handleClick}
+                                                    activeAccordion={
+                                                        currentAccordionId
+                                                    }
+                                                    paymentMethod={
+                                                        paymentMethod
+                                                    }
+                                                    shippingDetails={
+                                                        checkoutDetails
+                                                    }
+                                                    isDisabled={
+                                                        !shippingAddress?.isValid
+                                                    }
+                                                />
+                                            </div>
+
+                                            <div className="col-md-3 col-12">
+                                                <div>
+                                                    <div
+                                                        className="shipping-method-button-mobile-size"
+                                                        style={{
+                                                            marginBottom:
+                                                                "12px",
+                                                            marginTop: "12px",
+                                                        }}
+                                                    >
+                                                        {/* <button >Proceed</button> */}
+                                                        {isAuthenticated ? (
+                                                            <ReviewButton
+                                                                toggleAccordion={() =>
+                                                                    handleClick(
+                                                                        null,
+                                                                        true,
+                                                                        currentAccordionId,
+                                                                    )
+                                                                }
+                                                            >
+                                                                Proceed
+                                                            </ReviewButton>
+                                                        ) : (
+                                                            <ReviewButton
+                                                                toggleAccordion={() =>
+                                                                    handleClick(
+                                                                        null,
+                                                                        true,
+                                                                        currentAccordionId,
+                                                                    )
+                                                                }
+                                                            >
+                                                                Proceed
+                                                            </ReviewButton>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </>
                                     )}
                                     <Accordion
                                         id={3}
@@ -336,60 +405,117 @@ export default function MobileCheckout() {
                                         />
                                     </Accordion>
                                     {accordion[3].open && (
-                                    <>
-                                    <div className="col-md-3 col-12">
-                                    <div>
-                                        <div className="shipping-method-component-wrapper" style={{marginTop:"12px", marginBottom:"12px"}}>
-                                            <ShippingMethod />
-                                        </div>
-                                    </div>        
+                                        <>
+                                            <div className="col-md-3 col-12">
+                                                <div>
+                                                    <div
+                                                        className="shipping-method-component-wrapper"
+                                                        style={{
+                                                            marginTop: "12px",
+                                                            marginBottom:
+                                                                "12px",
+                                                        }}
+                                                    >
+                                                        <ShippingMethod />
+                                                    </div>
+                                                </div>
 
-                                    {/* {!isAuthenticated && (
+                                                {/* {!isAuthenticated && (
                                         <div>
                                             <div className="mobile-data-change-hide">
                                                 <Discount />
                                             </div>
                                         </div>
                                     )} */}
+                                            </div>
 
-                                 
-                                </div>
-                              
-                                    <div className="order-summary-component-wrapper">
-                                        <MobileSummary
-                                       
-                                            handleClick={handleClick}
-                                            activeAccordion={currentAccordionId}
-                                            paymentMethod={paymentMethod}
-                                            shippingDetails={checkoutDetails}
-                                            isDisabled={
-                                                !shippingAddress?.isValid
-                                            }
-                                        />
-                                    </div></>
+                                            <div className="order-summary-component-wrapper">
+                                                <MobileSummary
+                                                    handleClick={handleClick}
+                                                    activeAccordion={
+                                                        currentAccordionId
+                                                    }
+                                                    paymentMethod={
+                                                        paymentMethod
+                                                    }
+                                                    shippingDetails={
+                                                        checkoutDetails
+                                                    }
+                                                    isDisabled={
+                                                        !shippingAddress?.isValid
+                                                    }
+                                                />
+                                            </div>
+                                        </>
                                     )}
-                                    <div style={{marginTop:"8px", paddingLeft:"10px"}}>
-                                    <div className="col-md-3 col-12">
-                                    <div>
-                                       <span>Need help? <Link className="text-decoration-none" style={{color:"#007185", fontSize:'12px', fontWeight:'600'}}>Contact Us</Link></span>
-                                    </div>
-                                    <div className="return-paragraph-policy-data">
-                                   <span>
-                                   You may return new, unopened merchandise in original condition within 30 days of delivery. Exceptions and restrictions apply. See 
-                                  <span>  sjcomputers.us  <Link className="text-decoration-none" style={{color:"#007185", fontSize:'12px', fontWeight:'600'}}>Returns Policy.</Link></span>
-                                   </span>
-                                    </div>
-                                    <div className="return-paragraph-policy-data">
-                                   <span>
-                                   You Need to add more items to your order? Continue 
-                                   shopping on the <Link className="text-decoration-none" style={{color:"#007185", fontSize:'12px', fontWeight:'600'}}>sjcomputers.us</Link> homepage.
-                                 
-                                   </span>
-                                    </div>
-                                    </div>
+                                    <div
+                                        style={{
+                                            marginTop: "8px",
+                                            paddingLeft: "10px",
+                                        }}
+                                    >
+                                        <div className="col-md-3 col-12">
+                                            <div>
+                                                <span>
+                                                    Need help?{" "}
+                                                    <Link
+                                                        className="text-decoration-none"
+                                                        style={{
+                                                            color: "#007185",
+                                                            fontSize: "12px",
+                                                            fontWeight: "600",
+                                                        }}
+                                                    >
+                                                        Contact Us
+                                                    </Link>
+                                                </span>
+                                            </div>
+                                            <div className="return-paragraph-policy-data">
+                                                <span>
+                                                    You may return new, unopened
+                                                    merchandise in original
+                                                    condition within 30 days of
+                                                    delivery. Exceptions and
+                                                    restrictions apply. See
+                                                    <span>
+                                                        {" "}
+                                                        sjcomputers.us{" "}
+                                                        <Link
+                                                            className="text-decoration-none"
+                                                            style={{
+                                                                color: "#007185",
+                                                                fontSize:
+                                                                    "12px",
+                                                                fontWeight:
+                                                                    "600",
+                                                            }}
+                                                        >
+                                                            Returns Policy.
+                                                        </Link>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            <div className="return-paragraph-policy-data">
+                                                <span>
+                                                    You Need to add more items
+                                                    to your order? Continue
+                                                    shopping on the{" "}
+                                                    <Link
+                                                        className="text-decoration-none"
+                                                        style={{
+                                                            color: "#007185",
+                                                            fontSize: "12px",
+                                                            fontWeight: "600",
+                                                        }}
+                                                    >
+                                                        sjcomputers.us
+                                                    </Link>{" "}
+                                                    homepage.
+                                                </span>
+                                            </div>
                                         </div>
+                                    </div>
                                 </div>
-                           
                             </div>
                         ) : (
                             <>
@@ -406,7 +532,7 @@ export default function MobileCheckout() {
 
 export const ShippingSummary = () => {
     const shippingDetails = useSelector(
-        (state) => state.orders.shippingDetails
+        (state) => state.orders.shippingDetails,
     );
 
     return (

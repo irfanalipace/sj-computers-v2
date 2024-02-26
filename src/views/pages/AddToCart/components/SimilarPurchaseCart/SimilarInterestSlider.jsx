@@ -20,7 +20,7 @@ SwiperCore.use([Navigation]);
 
 const SimilarInterestSlider = ({ products }) => {
     const orderEstimatedDelivery = useSelector(
-        (state) => state.orders.orderEstimatedDelivery
+        (state) => state.orders.orderEstimatedDelivery,
     );
 
     const ProductDetails = ({ product }) => (
@@ -224,7 +224,7 @@ const SimilarInterestSlider = ({ products }) => {
                                                                     ?.split(" ")
                                                                     ?.slice(
                                                                         0,
-                                                                        9
+                                                                        9,
                                                                     )
                                                                     ?.join(" ")}
                                                             />

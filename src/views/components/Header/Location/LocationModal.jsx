@@ -60,8 +60,8 @@ function UpdateStateModal({ isOpen = false, handleClose }) {
             states.find(
                 (state) =>
                     state.zip_code_start <= zipCode &&
-                    state.zip_code_end >= zipCode
-            )
+                    state.zip_code_end >= zipCode,
+            ),
         );
     };
 

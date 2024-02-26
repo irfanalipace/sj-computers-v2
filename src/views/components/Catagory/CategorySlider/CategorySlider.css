@@ -9,7 +9,7 @@
 }
 
 /* for hiding pagination in arge screen */
-.category-slider .swiper-pagination{
+.category-slider .swiper-pagination {
     display: none;
 }
 
@@ -25,7 +25,7 @@
     .category-slider .slider-button {
         display: none;
     }
-    .category-slider .swiper-pagination{
+    .category-slider .swiper-pagination {
         display: block;
     }
 }

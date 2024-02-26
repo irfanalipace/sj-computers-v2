@@ -97,7 +97,7 @@ const FilterByRange = (category) => {
                                 e,
                                 category,
                                 selectedUnit[category]?.unit,
-                                values
+                                values,
                             )
                         }
                         valueLabelDisplay="auto"

@@ -23,7 +23,8 @@ const ModalUserAuth = ({ closeModal, isOpen = false }) => {
     const clickHandler = async () => {
         let state = states.find(
             (state) =>
-                state.zip_code_start <= zipCode && state.zip_code_end >= zipCode
+                state.zip_code_start <= zipCode &&
+                state.zip_code_end >= zipCode,
         );
 
         if (state?.id) dispatch(updateState(state, closeModal));

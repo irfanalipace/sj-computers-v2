@@ -20,13 +20,26 @@ const CategoryFilterbarMobile = () => {
                 {" "}
                 Filters <ExpandMoreIcon />
             </div>
-            <Drawer className="mobile-filterbar-drawer" anchor="bottom" open={open} onClose={toggleDrawer(false)}>
+            <Drawer
+                className="mobile-filterbar-drawer"
+                anchor="bottom"
+                open={open}
+                onClose={toggleDrawer(false)}
+            >
                 <div>
                     <div className="button-div">
-                        <Button sx={{color: "#318243"}} onClick={toggleDrawer(false)}>Close</Button>
+                        <Button
+                            sx={{ color: "#318243" }}
+                            onClick={toggleDrawer(false)}
+                        >
+                            Close
+                        </Button>
                     </div>
                     <div style={{ maxHeight: "60vh" }}>
-                        <CategorySidebar inDrawer={true} toggleDrawer={toggleDrawer()} />
+                        <CategorySidebar
+                            inDrawer={true}
+                            toggleDrawer={toggleDrawer()}
+                        />
                     </div>
                 </div>
             </Drawer>

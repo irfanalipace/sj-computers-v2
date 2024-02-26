@@ -28,7 +28,7 @@ const FilterBar = () => {
 
     const handleShowMoreCategory = () => {
         setVisibleCategories(
-            (prevVisibleCategories) => prevVisibleCategories + 8
+            (prevVisibleCategories) => prevVisibleCategories + 8,
         );
     };
 
@@ -159,7 +159,7 @@ const FilterBar = () => {
     let renderedItems = (options, category) => {
         let optionArray = options.slice(
             0,
-            visibleEntries[category].visibleEntries
+            visibleEntries[category].visibleEntries,
         );
         return (
             <>
@@ -224,7 +224,7 @@ const FilterBar = () => {
                                     handleFilterSelect(
                                         event,
                                         category,
-                                        option.backend_value
+                                        option.backend_value,
                                     )
                                 }
                             />
@@ -449,7 +449,7 @@ const FilterBar = () => {
                                     e,
                                     category,
                                     selectedUnit[category]?.unit,
-                                    values
+                                    values,
                                 )
                             }
                             valueLabelDisplay="auto"
@@ -497,7 +497,7 @@ const FilterBar = () => {
                     </li>
                 )}
             </div>
-        )
+        ),
     );
 
     return (

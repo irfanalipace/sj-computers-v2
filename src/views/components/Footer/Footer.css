@@ -67,7 +67,7 @@ footer ul li {
     padding: 23px;
 }
 .reach-us {
-  margin-top: 12px;
+    margin-top: 12px;
 }
 .copywrite {
     width: 361px;
@@ -106,16 +106,14 @@ footer ul li {
     max-width: 17% !important;
     padding-bottom: 12px !important;
 }
-.reach-us-paragraph-data-footer{
-    
-font-family: 'Inter';
-font-style: normal;
+.reach-us-paragraph-data-footer {
+    font-family: "Inter";
+    font-style: normal;
 
-font-size: 15px;
+    font-size: 15px;
 
-display: flex;
-align-items: center;
-
+    display: flex;
+    align-items: center;
 }
 
 .language-dropdown::after {
@@ -134,52 +132,53 @@ align-items: center;
 .font-style-heading-footer {
     font-weight: bold;
     text-align: initial;
-   
 }
-
-
 
 @media screen and (max-width: 991px) {
-.font-style-heading-footer {
-  
-    font-size: 12px;
-}.list-unstyle2 {
-    text-align: initial;
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 30px;
-    align-items: center;
-    color: #ffffff;
-    list-style-type: none;
-}.list-unstyle1 {
-    text-align: initial;
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 30px;
-    align-items: center;
-    color: #ffffff;
-    list-style-type: none;
-}.list-unstyle3 {
-    text-align: initial;
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 30px;
-    align-items: center;
-    color: #ffffff;
-    list-style-type: none;
-}.reach-us-paragraph-data-footer {
-    font-family: 'Inter';
-    font-style: normal;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-}.phonenumber-footer{
-    font-family: 'Inter';
-    font-style: normal;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-}
+    .font-style-heading-footer {
+        font-size: 12px;
+    }
+    .list-unstyle2 {
+        text-align: initial;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 30px;
+        align-items: center;
+        color: #ffffff;
+        list-style-type: none;
+    }
+    .list-unstyle1 {
+        text-align: initial;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 30px;
+        align-items: center;
+        color: #ffffff;
+        list-style-type: none;
+    }
+    .list-unstyle3 {
+        text-align: initial;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 30px;
+        align-items: center;
+        color: #ffffff;
+        list-style-type: none;
+    }
+    .reach-us-paragraph-data-footer {
+        font-family: "Inter";
+        font-style: normal;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+    }
+    .phonenumber-footer {
+        font-family: "Inter";
+        font-style: normal;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+    }
 }
 @media screen and (max-width: 770px) {
     .footer-text-line-font-size {

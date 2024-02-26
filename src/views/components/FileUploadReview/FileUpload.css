@@ -133,7 +133,7 @@
     z-index: 999;
     color: #0086fe;
     /* to show close button in black background */
-    text-shadow: 1px 0 0 white; 
+    text-shadow: 1px 0 0 white;
 }
 
 .logout-icon-button-view-list-area {
@@ -203,12 +203,12 @@
     font-size: 12px;
 }
 
-@media screen and (max-width: 1000px){
+@media screen and (max-width: 1000px) {
     .custome-model-item-filter.modal .modal-content {
         width: 70vw !important;
     }
 }
-@media screen and (max-width: 575px){
+@media screen and (max-width: 575px) {
     .custome-model-item-filter.modal .modal-content {
         width: 96vw !important;
     }

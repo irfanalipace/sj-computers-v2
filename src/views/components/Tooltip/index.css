@@ -16,7 +16,9 @@
     border: 1px solid #ddd;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
+    transition:
+        opacity 0.3s,
+        visibility 0.3s;
     padding: 15px 0;
 }
 

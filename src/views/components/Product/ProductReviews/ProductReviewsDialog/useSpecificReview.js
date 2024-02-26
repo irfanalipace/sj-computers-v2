@@ -8,7 +8,7 @@ const useSpecificReview = (id, reviews) => {
 
     const fetchData = async () => {
         const propsReviewsData = reviews?.product_review?.data?.filter(
-            (review) => review.id === id
+            (review) => review.id === id,
         );
         // console.log(propsReviewsData, "props reviews data");
         if (propsReviewsData?.length > 0) {

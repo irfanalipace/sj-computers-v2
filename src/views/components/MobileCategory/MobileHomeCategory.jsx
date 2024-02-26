@@ -72,7 +72,7 @@ const MobileHomeCategory = () => {
     console.log(
         parsedDate.getDate(),
         parsedDate.getHours(),
-        parsedDate.getMinutes()
+        parsedDate.getMinutes(),
     );
 
     //Once you get the dates, you can do the date calculate, like:
@@ -450,7 +450,7 @@ const MobileHomeCategory = () => {
                                                 Save{" "}
                                                 {products[0]?.price
                                                     ? parseFloat(
-                                                          products[0].price
+                                                          products[0].price,
                                                       ).toFixed(2)
                                                     : 0}
                                             </p>

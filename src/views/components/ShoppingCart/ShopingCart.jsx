@@ -31,7 +31,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
     const error = location.state?.error || searchParams.get("error");
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const orderEstimatedDelivery = useSelector(
-        (state) => state.orders.orderEstimatedDelivery
+        (state) => state.orders.orderEstimatedDelivery,
     );
     const [showModal, setShowModal] = useState(false);
 
@@ -62,7 +62,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                 };
             });
             dispatch(
-                validateCartItems({ cart_items: cartData }) //validate if all the items in the cart are available or not
+                validateCartItems({ cart_items: cartData }), //validate if all the items in the cart are available or not
             );
         }
     }, [error, cartItems]);
@@ -109,17 +109,17 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                         style={{
                             fontSize: "20px",
                             fontWeight: 600,
-                            textWrap: "nowrap"
+                            textWrap: "nowrap",
                         }}
-                        >
+                    >
                         Recommended Products
                     </h3>
                     <div className="hide-on-desktop">
                         <SeggestedItems num={3} />
                     </div>
-                    <div className="d-none d-sm-block"> 
+                    <div className="d-none d-sm-block">
                         <Recommendation prod={products} />
-                    </div>    
+                    </div>
                 </div>
             </div>
         </>
@@ -175,7 +175,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                             &ensp;$
                                             {cartDetails?.sub_total
                                                 ? parseFloat(
-                                                      cartDetails.sub_total
+                                                      cartDetails.sub_total,
                                                   ).toFixed(2)
                                                 : 0}
                                         </strong>

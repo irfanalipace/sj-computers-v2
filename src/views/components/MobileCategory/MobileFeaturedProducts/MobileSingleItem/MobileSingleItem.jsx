@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./MobileSingleItem.css"
+import "./MobileSingleItem.css";
 const MobileSingleItem = ({ items, featuredItems, title }) => {
     return (
         <div>
@@ -19,12 +19,10 @@ const MobileSingleItem = ({ items, featuredItems, title }) => {
                                 alt="Image 1"
                                 className="dynamic-image-images-mobile-data-single-item"
                             />
-                          
                         </Link>
                     </div>
-                   
                 </div>
-             
+
                 <div className="see-more-button-data-single-item">
                     <Link to="/category">Shop Now</Link>
                 </div>

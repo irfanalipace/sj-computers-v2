@@ -10,65 +10,61 @@
     text-align: center;
     letter-spacing: 0.03em;
 }
-.oreder-confirm-page-data{
-  margin-top: 23px;
-
+.oreder-confirm-page-data {
+    margin-top: 23px;
 }
-.oreder-confirm-page-data span{
+.oreder-confirm-page-data span {
     font-family: Inter;
-font-size: 20px;
-font-weight: 500;
-line-height: 19px;
-letter-spacing: 0em;
-text-align: center;
-
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
 }
-.jhon-name-user-order{
+.jhon-name-user-order {
     margin-top: 7px;
     margin-bottom: -15px;
-}.paragrap-text-notify-order{
+}
+.paragrap-text-notify-order {
     font-family: Inter;
-font-size: 14px;
-font-weight: 400;
-line-height: 21px;
-letter-spacing: 0em;
-text-align: left;
-
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: left;
 }
-.jhon-name-user-order span{
-font-family: Inter;
-font-size: 16px;
-font-weight: 500;
-line-height: 19px;
-letter-spacing: 0em;
-text-align: left;
+.jhon-name-user-order span {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
 }
-.Items-thanku-view-page-thanks span{
+.Items-thanku-view-page-thanks span {
     font-family: Inter;
     font-size: 12px;
     font-weight: 400;
     line-height: 15px;
     letter-spacing: 0em;
     text-align: center;
-    
 }
-.Items-calcurteing-items{
+.Items-calcurteing-items {
     padding: 13px;
     /* color: transparent; */
     background: #8edd9f;
-    ;
     text-align: left;
     border-radius: 2px;
 }
-.Items-calcurteing-items span{
+.Items-calcurteing-items span {
     padding: 13px;
-font-family: Inter;
-font-size: 12px;
-font-weight: 500;
-line-height: 15px;
-color: #269c40;
-letter-spacing: 0em;
-text-align: center;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15px;
+    color: #269c40;
+    letter-spacing: 0em;
+    text-align: center;
 }
 .Items-thanku-view-page-thanks {
     display: flex;
@@ -273,8 +269,8 @@ text-align: center;
         bottom: 0%;
         border-radius: 8px;
         border: none;
-
-    }.oder-item-card{
-max-width: 100%;
+    }
+    .oder-item-card {
+        max-width: 100%;
     }
 }

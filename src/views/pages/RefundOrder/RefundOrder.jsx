@@ -83,7 +83,7 @@ export default function RefundOrder() {
             loginUser(
                 userType,
                 USERS_DATA[userType]?.id,
-                USERS_DATA[userType]?.email
+                USERS_DATA[userType]?.email,
             );
             welcomeUser(userType);
         }
@@ -95,7 +95,7 @@ export default function RefundOrder() {
             loginUser(
                 userType,
                 USERS_DATA[userType]?.id,
-                USERS_DATA[userType]?.email
+                USERS_DATA[userType]?.email,
             );
             welcomeUser(userType);
         }
@@ -405,7 +405,7 @@ export default function RefundOrder() {
                                 setUsersData(
                                     selectedUserType,
                                     "email",
-                                    e?.target?.value
+                                    e?.target?.value,
                                 );
                             }}
                             InputProps={{
@@ -475,7 +475,7 @@ export default function RefundOrder() {
                                         setUsersData(
                                             selectedUserType,
                                             "otp",
-                                            value.slice(0, 4)
+                                            value.slice(0, 4),
                                         );
                                     }
                                 }}
@@ -620,7 +620,7 @@ export default function RefundOrder() {
                                         }`}
                                         onClick={() =>
                                             setSelectedUserType(
-                                                USER_TYPE_ENUM.CUSTOMER
+                                                USER_TYPE_ENUM.CUSTOMER,
                                             )
                                         }
                                     >
@@ -635,7 +635,7 @@ export default function RefundOrder() {
                                         }`}
                                         onClick={() =>
                                             setSelectedUserType(
-                                                USER_TYPE_ENUM.SALE_PERSON
+                                                USER_TYPE_ENUM.SALE_PERSON,
                                             )
                                         }
                                     >

@@ -1,4 +1,3 @@
-
 import ApiService from "@services/apiService";
 
 export function categoryApi() {
@@ -7,7 +6,7 @@ export function categoryApi() {
             .then((response) => {
                 console.print(
                     "file: category.js | categoryApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })

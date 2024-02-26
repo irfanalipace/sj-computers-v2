@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router-dom";
 
 const ProductsList = () => {
     const selectedCategory = useSelector(
-        (state) => state.products.selectedCategory
+        (state) => state.products.selectedCategory,
     );
     const searchString = useSelector((state) => state.products.searchString);
     const dispatch = useDispatch();

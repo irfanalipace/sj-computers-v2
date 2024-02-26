@@ -22,7 +22,7 @@ const AddCartComponents = ({
     // const cart = useSelector((state) => state.cart.cart);
     const details = useSelector((state) => state.cart.details);
     const productAddingToCard = useSelector(
-        (state) => state.products.isLoading
+        (state) => state.products.isLoading,
     );
     const [show, setShow] = useState(false);
     const [cartItem, setCartItem] = useState(null);
@@ -39,7 +39,7 @@ const AddCartComponents = ({
 
     const getPlanvalue = (id) => {
         const matchingEnum = Object.values(PLAN_ENUM).find(
-            (enumEntry) => enumEntry.label === id
+            (enumEntry) => enumEntry.label === id,
         );
         setPlan(matchingEnum);
     };

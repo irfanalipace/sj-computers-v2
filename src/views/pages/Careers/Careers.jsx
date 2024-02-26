@@ -127,13 +127,13 @@ function Careers() {
                                                         <div className="fs-6 fw-light posted-option-updated">
                                                             Posted{" "}
                                                             {convertDateToLongFormat(
-                                                                career?.created_at
+                                                                career?.created_at,
                                                             )}
                                                         </div>
                                                         <div className="text-muted fs-6 fw-light updated-posted-career-data">
                                                             Updated{" "}
                                                             {convertDateToLongFormat(
-                                                                career?.updated_at
+                                                                career?.updated_at,
                                                             )}
                                                         </div>
                                                     </div>
@@ -147,7 +147,7 @@ function Careers() {
                                                         ? // Display only the first 100 characters of the job description
                                                           `${career.job_description.substring(
                                                               0,
-                                                              270
+                                                              270,
                                                           )}...`
                                                         : // If the job description is shorter than 100 characters, display the whole text
                                                           career?.job_description}

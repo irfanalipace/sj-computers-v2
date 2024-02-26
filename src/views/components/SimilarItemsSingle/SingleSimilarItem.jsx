@@ -15,7 +15,7 @@ const SingleSimilarItem = ({
     heading = isMobile ? "" : "Similar items with fast delivery",
 }) => {
     const orderEstimatedDelivery = useSelector(
-        (state) => state.orders.orderEstimatedDelivery
+        (state) => state.orders.orderEstimatedDelivery,
     );
     const productPath = generatePath(product?.url);
     const theme = useTheme();

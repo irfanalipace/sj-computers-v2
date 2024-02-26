@@ -78,14 +78,18 @@ export default function ShippingDetails({
                                         name="selectedAddress"
                                         value="address_id"
                                         // style={{color:" #318243"}}
-                                        style={{accentColor:"#318243"}}
-                                        
+                                        style={{ accentColor: "#318243" }}
+
                                         // onChange={handleChange}
                                         // defaultChecked={true}
                                     />
                                     <div>
                                         <label htmlFor="address_id">
-                                        <strong style={{fontWeight:'600'}}>{shippingAddress?.full_name}</strong>{" "}
+                                            <strong
+                                                style={{ fontWeight: "600" }}
+                                            >
+                                                {shippingAddress?.full_name}
+                                            </strong>{" "}
                                             {shippingAddress?.address}{" "}
                                             {shippingAddress?.city}{" "}
                                             {shippingAddress?.zip_code}{" "}

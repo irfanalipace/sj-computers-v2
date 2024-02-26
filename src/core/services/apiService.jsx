@@ -36,7 +36,7 @@ const ApiService = {
             },
             (error) => {
                 return Promise.reject(error);
-            }
+            },
         );
     },
     // Setup response interceptor
@@ -46,7 +46,7 @@ const ApiService = {
             (error) => {
                 if (error.response && error.response.status === 401) {
                     toast.error(
-                        "User not authorized. Please login to perform this action"
+                        "User not authorized. Please login to perform this action",
                     );
                     destroyToken();
                     window.location.href = "/login";
@@ -58,7 +58,7 @@ const ApiService = {
                     toast.error("Too Many Requests");
                 }
                 return Promise.reject(error);
-            }
+            },
         );
     },
 

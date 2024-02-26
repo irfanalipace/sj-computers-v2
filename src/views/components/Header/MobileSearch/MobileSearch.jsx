@@ -14,8 +14,8 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import vectorcart from "@images/home/vector.png";
 
-const MobileScreenModal = lazy(() =>
-    import("./MobileScreenModal/MobileScreenModal")
+const MobileScreenModal = lazy(
+    () => import("./MobileScreenModal/MobileScreenModal"),
 );
 
 const MobileSearch = ({ screenWidth }) => {

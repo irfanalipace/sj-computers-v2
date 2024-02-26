@@ -27,7 +27,7 @@ const CategoryBlogs = () => {
     // console.log(categoriesstate, 'categoriesstate');
 
     const category_id = categorylist?.find(
-        (category) => category.slug === categoryslug
+        (category) => category.slug === categoryslug,
     )?.id;
 
     useEffect(() => {

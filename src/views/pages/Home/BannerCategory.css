@@ -31,10 +31,12 @@
 
     .product-type-container .container {
         height: 260px;
-    }.category-name {
+    }
+    .category-name {
         font-size: 9px;
         color: black;
-    }.advertisment-img-products-imges img{
+    }
+    .advertisment-img-products-imges img {
         max-height: 29%;
     }
 
@@ -43,7 +45,7 @@
     .advertisement-heading button {
         /* font-size: 16px; */
     }
-    
+
     .product-type-container {
         margin: 0 30px;
     }

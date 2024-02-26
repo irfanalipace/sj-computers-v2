@@ -37,11 +37,14 @@ const CategorySlider = () => {
         }
     };
 
-    
     console.log(products, "products in category");
 
-    if(products?.length == 0){
-        return <div ><CircularProgress /></div>
+    if (products?.length == 0) {
+        return (
+            <div>
+                <CircularProgress />
+            </div>
+        );
     }
 
     return (
@@ -52,7 +55,7 @@ const CategorySlider = () => {
                 spaceBetween={20}
                 pagination={{
                     dynamicBullets: true,
-                  }}
+                }}
                 breakpoints={{
                     // when window width is >= 320px
                     220: {

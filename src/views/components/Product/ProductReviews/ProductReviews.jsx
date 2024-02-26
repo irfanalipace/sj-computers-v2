@@ -80,7 +80,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
         //TODO:: key name should be changed according to backend
         const key = "helpful";
         const res = reviews?.product_review?.data?.findIndex(
-            (item) => item.id === id
+            (item) => item.id === id,
         );
 
         if (res === -1) return;
@@ -130,7 +130,8 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                 productDetails={
                                     reviews?.product_stats
                                         ? JSON.parse(
-                                              reviews?.product_stats?.statistics
+                                              reviews?.product_stats
+                                                  ?.statistics,
                                           )
                                         : []
                                 }
@@ -246,7 +247,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                             />
                                         )}
                                     </div>
-                                )
+                                ),
                             )
                         )}
 
@@ -256,7 +257,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                     onChange={handlePageChange}
                                     count={Math.ceil(
                                         reviews?.product_review?.total /
-                                            reviewPerPage
+                                            reviewPerPage,
                                     )}
                                 />
                             )}
@@ -349,7 +350,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                                 />
                                             }
                                         </div>
-                                    )
+                                    ),
                                 )
                             )}
                             {!isUpSmall &&
@@ -358,7 +359,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                         onChange={handlePageChange}
                                         count={Math.ceil(
                                             reviews?.product_review?.total /
-                                                reviewPerPage
+                                                reviewPerPage,
                                         )}
                                     />
                                 )}
@@ -376,7 +377,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                         className="mob-rev-see"
                                         onClick={() =>
                                             navigate(
-                                                `/add-review/${productAsin}`
+                                                `/add-review/${productAsin}`,
                                             )
                                         }
                                     >

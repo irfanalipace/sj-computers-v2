@@ -25,7 +25,7 @@ const ShippingMehtod = () => {
     const activeShippingMethod =
         useSelector((state) => state.cart.details.activeMethod) || 0;
     const orderEstimatedDelivery = useSelector(
-        (state) => state.orders.orderEstimatedDelivery
+        (state) => state.orders.orderEstimatedDelivery,
     );
     const dispatch = useDispatch();
 
@@ -45,7 +45,7 @@ const ShippingMehtod = () => {
                         setCartDetails({
                             ...response.data,
                             activeMethod: e.target.value,
-                        })
+                        }),
                     );
                 } catch (error) {
                     console.print("error: ", error);
@@ -103,34 +103,39 @@ const ShippingMehtod = () => {
                             }`}
                             key={shippingMethod?.id}
                         >
-                            
                             <input
                                 id={shippingMethod?.id}
                                 type="radio"
                                 onChange={handleChange}
                                 name="shippingMethod"
                                 value={shippingMethod?.id}
-                                
                                 // defaultChecked={
                                 //     activeShippingMethod == shippingMethod?.id
                                 // }
                                 checked={
                                     activeShippingMethod == shippingMethod?.id
                                 }
-                                className={activeShippingMethod == shippingMethod?.id ? 'checked' : ''}
+                                className={
+                                    activeShippingMethod == shippingMethod?.id
+                                        ? "checked"
+                                        : ""
+                                }
                             />
                             <label htmlFor={shippingMethod?.id}>
                                 {isMobile == true ? (
-                                    <div style={{ marginTop: "22px",}}>
+                                    <div style={{ marginTop: "22px" }}>
                                         <span
                                             style={{
-                                               
-                                                fontWeight: "500", 
-                                              
+                                                fontWeight: "500",
                                             }}
                                         >
                                             Free Shipping
-                                            <p style={{ fontSize: "10px", paddingTop:'5px', }}>
+                                            <p
+                                                style={{
+                                                    fontSize: "10px",
+                                                    paddingTop: "5px",
+                                                }}
+                                            >
                                                 Mon, Nov 13
                                             </p>
                                         </span>
@@ -147,7 +152,6 @@ const ShippingMehtod = () => {
                                         : "Free"}
                                 </span>
                             </label>
-                          
                         </div>
                     ))}
                 </form>

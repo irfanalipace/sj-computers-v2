@@ -20,7 +20,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     const dispatch = useDispatch();
     console.log(
         "google api palcaes",
-        import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY
+        import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY,
     );
     const {
         values,
@@ -96,20 +96,20 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     const handlePlaceChange = (place) => {
         setFieldValue("address", place.formatted_address);
         const stateData = place?.address_components.find((item) =>
-            item.types.includes("administrative_area_level_1")
+            item.types.includes("administrative_area_level_1"),
         );
 
         const matchedState = states.find(
             (item) =>
-                item.name.toLowerCase() === stateData.long_name.toLowerCase()
+                item.name.toLowerCase() === stateData.long_name.toLowerCase(),
         );
 
         let city = place?.address_components.find((item) =>
-            item.types.includes("administrative_area_level_2")
+            item.types.includes("administrative_area_level_2"),
         );
         if (!city)
             city = place?.address_components.find((item) =>
-                item.types.includes("administrative_area_level_1")
+                item.types.includes("administrative_area_level_1"),
             );
 
         if (matchedState) {
@@ -122,12 +122,13 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     useEffect(() => {
         if (values.state) {
             const matchedState = states.find(
-                (item) => item.name.toLowerCase() === values.state.toLowerCase()
+                (item) =>
+                    item.name.toLowerCase() === values.state.toLowerCase(),
             );
             if (matchedState?.zip_code_start) {
                 setFieldValue(
                     "zip_code",
-                    matchedState?.zip_code_start.toString()
+                    matchedState?.zip_code_start.toString(),
                 );
             }
         }
@@ -361,17 +362,20 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                                 }
                                 onPlaceSelected={handlePlaceChange}
                             />
-                            <div style={{marginTop:"12px"}} className="input-lable-address">
-                            <Autocomplete
-                                placeholder="Unit, Building, floor etc."
-                                defaultValue={values.address}
-                                className={
-                                    errors.address && touched.address
-                                        ? "input-field border-danger"
-                                        : "input-field"
-                                }
-                                onPlaceSelected={handlePlaceChange}
-                            />
+                            <div
+                                style={{ marginTop: "12px" }}
+                                className="input-lable-address"
+                            >
+                                <Autocomplete
+                                    placeholder="Unit, Building, floor etc."
+                                    defaultValue={values.address}
+                                    className={
+                                        errors.address && touched.address
+                                            ? "input-field border-danger"
+                                            : "input-field"
+                                    }
+                                    onPlaceSelected={handlePlaceChange}
+                                />
                             </div>
                             {errors.address && touched.address && (
                                 <p className="fs-6 mt-1 text-danger">

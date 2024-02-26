@@ -6,7 +6,7 @@ export function paymentApi(data) {
             .then((response) => {
                 console.print(
                     "file: square.js | paymentApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })

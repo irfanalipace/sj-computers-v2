@@ -35,7 +35,7 @@ const ordersSlice = createSlice({
             console.print(
                 success_orders.data,
                 cancel_orders,
-                "just before update state"
+                "just before update state",
             );
             state.orderDetails = action.payload;
             state.successOrders = success_orders.data;

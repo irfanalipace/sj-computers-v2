@@ -6,7 +6,7 @@ export function productsApi(page = 1, per_page = 12) {
             .then((response) => {
                 console.print(
                     "file: products.js | products| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -49,7 +49,7 @@ export function productDetailsApi(id) {
             .then((response) => {
                 console.print(
                     "file: products.js | productDetail| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -66,7 +66,7 @@ export function productDetailsbyAsinApi(asin) {
             .then((response) => {
                 console.print(
                     "file: products.js | productDetailsbyAsinApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -83,7 +83,7 @@ export function searchProductsApi(data) {
             .then((response) => {
                 console.print(
                     "file: products.js | searchProductsApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -101,7 +101,7 @@ export function filterProductsApi(filter) {
             .then((response) => {
                 console.print(
                     "file: products.js | filterProductsApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -136,7 +136,7 @@ export function productPreviewApi(formData) {
             .then((response) => {
                 console.log(
                     "file: states.js | updateStateApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })

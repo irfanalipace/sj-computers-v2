@@ -29,7 +29,9 @@
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
+    transition:
+        max-height 0.3s ease,
+        opacity 0.3s ease;
 }
 
 .accordion-content.active {
@@ -70,7 +72,8 @@
     border-radius: 10px;
     padding-left: 4%;
     padding-right: 4%;
-}.summary div p strong{
+}
+.summary div p strong {
     font-weight: 600;
 }
 
@@ -87,8 +90,8 @@
     .accordion-content {
         padding: 10px 0px 0;
         padding-bottom: 10px;
-    }.accordion-header p {
-    
+    }
+    .accordion-header p {
         font-family: Inter;
         font-size: 12px;
         font-weight: 600;
@@ -98,8 +101,9 @@
         margin-bottom: 0;
         font-weight: 500;
         font-size: 12px;
-    }.accordion {
-        border-bottom: none
+    }
+    .accordion {
+        border-bottom: none;
     }
 }
 /* .accordion-content.active {

@@ -21,7 +21,7 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
     const paymentPayload = usePaymentData();
 
     const shippingDetails = useSelector(
-        (state) => state.orders.shippingDetails
+        (state) => state.orders.shippingDetails,
     );
 
     const navigate = useNavigate();
@@ -96,7 +96,7 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
             setIsLoading(false);
         };
         dispatch(
-            validateCartItems({ cart_items: cartData, onSuccess, onFailure }) //validate if all the items in the cart are available or not
+            validateCartItems({ cart_items: cartData, onSuccess, onFailure }), //validate if all the items in the cart are available or not
         );
     };
 
@@ -110,7 +110,6 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
                         name="selectedAddress"
                         value={PAYMENT_METHODS.SQUARE}
                         onChange={handleChange}
-                        
                     />
                     <div>
                         <label htmlFor="method1">

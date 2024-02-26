@@ -25,7 +25,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
 
     const [loading, setLoading] = useState(false);
     const productAddingToCard = useSelector(
-        (state) => state.products.isLoading
+        (state) => state.products.isLoading,
     );
     const [type, setType] = useState("");
     const cartClickHandler = useAddToCart(product, quantity);
@@ -325,7 +325,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
                         drawerProps.redirectOnClose &&
                             cartClickHandler(
                                 null,
-                                `/cart/${params?.title}/dp/${params?.productId}`
+                                `/cart/${params?.title}/dp/${params?.productId}`,
                             );
                         setDrawerProps({
                             open: false,
@@ -338,7 +338,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
                                 _plan,
                                 screenSize > 780
                                     ? `/cart/${params?.title}/dp/${params?.productId}`
-                                    : "/cart"
+                                    : "/cart",
                             );
                         }
                     }}

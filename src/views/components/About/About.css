@@ -1,29 +1,27 @@
-.who-we-are-blog span{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 16px;
-line-height: 19px;
+.who-we-are-blog span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
 
-color: #FFFFFF;
+    color: #ffffff;
 }
 
-.who-we-are-blog{
-   margin-top: 12px;
+.who-we-are-blog {
+    margin-top: 12px;
 }
-.blog-with-content-set-with-image span{
-
-    font-family: 'Inter';
+.blog-with-content-set-with-image span {
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 144%;
     /* or 23px */
-    
-    
-    color: #FFFFFF;
+
+    color: #ffffff;
 }
-.my-text-container-about-us-page{
+.my-text-container-about-us-page {
     padding-top: 37px;
     padding-bottom: 37px;
 }
@@ -32,73 +30,70 @@ color: #FFFFFF;
     height: 321px;
     left: 231px;
     top: 302px;
-    background: #03407A;
+    background: #03407a;
 }
 
-.div-container-font-alignment-box-cart-text span{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 600;
-font-size: 18px;
-line-height: 22px;
-/* identical to box height */
+.div-container-font-alignment-box-cart-text span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
 
-
-color: #E0BC00;
+    color: #e0bc00;
 }
 
-.div-container-font-alignment-box-cart-text{
+.div-container-font-alignment-box-cart-text {
     display: flex;
     justify-content: center;
     padding-top: 29px;
 }
 
-.dev-space-text-area-data-scrool-card span{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 144%;
-/* or 20px */
+.dev-space-text-area-data-scrool-card span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 144%;
+    /* or 20px */
 
-
-color: #FFFFFF;
+    color: #ffffff;
 }
 
-.dev-space-text-area-data-scrool-card{
-padding: 26px;
+.dev-space-text-area-data-scrool-card {
+    padding: 26px;
 }
-.dev-button-learn-more-data-card button{
+.dev-button-learn-more-data-card button {
     left: 0%;
     right: 0%;
     top: 0%;
     bottom: 0%;
-    
-    border: 1px solid #DDDDDD;
+
+    border: 1px solid #dddddd;
     border-radius: 20px;
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 144%;
-/* or 20px */
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 144%;
+    /* or 20px */
 
-
-color: #FFFFFF;
+    color: #ffffff;
 }
 
 .dev-button-learn-more-data-card button {
     margin: 0px;
-    border: 1px solid #DDDDDD;
+    border: 1px solid #dddddd;
     border-radius: 20px;
     padding: 0;
     left: 0%;
     right: 0%;
     top: 0%;
-   
+
     bottom: 0%;
-   
-    font-family: 'Inter';
+
+    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -118,7 +113,7 @@ color: #FFFFFF;
     margin-top: 45px;
 }
 
-.blog-with-content-set-with-image{
+.blog-with-content-set-with-image {
     padding-right: 192px;
 }
 
@@ -126,20 +121,18 @@ color: #FFFFFF;
     margin-bottom: 28px;
 }
 .about-us-page-after-image-data span {
-   
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 144%;
-/* or 23px */
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 144%;
+    /* or 23px */
 
+    /* Primary */
 
-/* Primary */
-
-color: #333333;
+    color: #333333;
 }
-.blog-about-position-image-data-footer{
+.blog-about-position-image-data-footer {
     height: 372px;
     margin-bottom: 29px;
     position: relative;
@@ -148,56 +141,65 @@ color: #333333;
     /* max-width: 100%;
      */
 }
-.fa-decoration-span-arrow-dev-card{
+.fa-decoration-span-arrow-dev-card {
     margin-right: 10px;
 }
-@media screen and (max-width:800px) {
+@media screen and (max-width: 800px) {
     .cart-about-ul-components-dev-section {
         padding-right: 0px;
         padding-left: 0px;
         margin-top: 45px;
-    }.div-container-font-alignment-box-cart{
+    }
+    .div-container-font-alignment-box-cart {
         margin-bottom: 16px;
-    }.div-container-font-alignment-box-cart {
+    }
+    .div-container-font-alignment-box-cart {
         width: 100%;
         /* height: 459px; */
         left: 231px;
         max-height: 100%;
         top: 302px;
-        background: #03407A;
-    }.blog-with-content-set-with-image {
+        background: #03407a;
+    }
+    .blog-with-content-set-with-image {
         padding-right: 4px;
         margin-top: 12px;
-    }.div-container-font-alignment-box-cart-text span {
-        font-family: 'Inter';
+    }
+    .div-container-font-alignment-box-cart-text span {
+        font-family: "Inter";
         font-style: normal;
         font-weight: 600;
         font-size: 13px;
         line-height: 22px;
-        color: #E0BC00;
-    }.dev-space-text-area-data-scrool-card {
+        color: #e0bc00;
+    }
+    .dev-space-text-area-data-scrool-card {
         padding: 14px;
-    }.dev-space-text-area-data-scrool-card span {
-        font-family: 'Inter';
+    }
+    .dev-space-text-area-data-scrool-card span {
+        font-family: "Inter";
         font-style: normal;
         font-weight: 400;
         font-size: 13px;
         line-height: 144%;
-        color: #FFFFFF;
-    }.image-cainter-dev {
+        color: #ffffff;
+    }
+    .image-cainter-dev {
         padding-left: 13px;
         width: 100%;
         z-index: 2;
         position: relative;
         margin-top: -164px;
-    }.blog-with-content-set-with-image span {
-        font-family: 'Inter';
+    }
+    .blog-with-content-set-with-image span {
+        font-family: "Inter";
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
         line-height: 144%;
-        color: #FFFFFF;
-    }.blog-about-position-image-data-footer {
+        color: #ffffff;
+    }
+    .blog-about-position-image-data-footer {
         height: 372px;
         margin-bottom: 29px;
         position: relative;
@@ -205,5 +207,4 @@ color: #333333;
         width: 1111px;
         max-width: 100%;
     }
-    
 }
