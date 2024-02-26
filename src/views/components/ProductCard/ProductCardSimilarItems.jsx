@@ -27,7 +27,7 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
         <div className='similer-items-product-details'>
           <div className='dev-section-button-dev-card'>
             <Link to={productPath} style={{ textDecoration: 'none' }}>
-              <div className='product-name product-cart-name-mobile-screen'>
+              <div className='product-namee product-cart-name-mobile-screen'>
                 {product.name}
               </div>
 
@@ -76,9 +76,8 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
                   starDimension={'20px'}
                   starSpacing={'0'}
                 />
-                <span className='ms-2' style={{ color: '#1270c4' }}>
-                  {product?.total_review}
-                  {' Ratings'}
+                <span className='ms-2' style={{ color: '#007185' }}>
+                  ({product?.total_review})
                 </span>
               </div>
             </div>
