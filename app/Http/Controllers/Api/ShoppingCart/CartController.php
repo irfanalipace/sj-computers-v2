@@ -13,6 +13,7 @@ use App\Http\Requests\Cart\AddToCartRequest;
 use App\Http\Requests\Cart\CheckQtyProduct;
 use App\Http\Requests\Cart\DeleteCartRequest;
 use App\Http\Requests\Cart\LocalStorageItemsRequest;
+use App\Http\Requests\Cart\RemoveProtectionRequest;
 use App\Http\Requests\Cart\UpdateQuantityRequest;
 use App\Models\Guest;
 use App\Models\Product;
@@ -436,5 +437,26 @@ class CartController extends BaseController
             'protective_price' => $protectivePlan->price ?? '',
             'protective_id' => $protectivePlan->id ?? ''
         ];
+    }
+
+    public function removeProtection(RemoveProtectionRequest $request)
+    {
+        try {
+            $cartItem = \Cart::session($this->userId)->get($request->cart_id);
+
+            if (!$cartItem) {
+                throw new Exception('Cart is not found.');
+            }
+
+            if ($cartItem->attributes->isEmpty()) {
+                throw new Exception('Protection is already removed.');
+            }
+
+            \Cart::session($this->userId)->update($request->cart_id, ['attributes' => []]);
+
+            return $this->sendResponse([], 'The protection from the cart has been successfully removed.');
+        } catch (Exception $e) {
+            return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());
+        }
     }
 }
