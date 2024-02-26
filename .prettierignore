@@ -1,0 +1,10 @@
+ package-lock.json
+ dist
+ node_modules
+ config
+ database
+ routes
+ tests
+ vendor
+ app
+ server.php
