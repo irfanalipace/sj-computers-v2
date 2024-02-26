@@ -26,7 +26,7 @@ const FeaturedProducts = ({
                                 </h2>
                                 <div
                                     style={{
-                                        height: "25px",
+                                        height: "15px",
                                         color: "#B12704",
                                         fontSize: "13px",
                                         fontWeight: "600",

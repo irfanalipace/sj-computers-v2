@@ -1,22 +1,44 @@
-import React, { Suspense } from "react";
-import BannerCategory from "./BannerCategory";
-const ProductsHomePage = React.lazy(() => import("./ProductsHomePage"));
-import { useViewportWidth } from "@hooks/useViewportWidth";
-import "./Home.css";
-import Subscribe from "../../components/Subscribe/Subscribe";
-
+import React, { Suspense } from 'react';
+import BannerCategory from './BannerCategory';
+const ProductsHomePage = React.lazy(() => import('./ProductsHomePage'));
+import { useViewportWidth } from '@hooks/useViewportWidth';
+import './Home.css';
+import Subscribe from '../../components/Subscribe/Subscribe';
+const RecommandSectionsProducts = React.lazy(
+  () =>
+    import(
+      '@components/homeproduct/productcategory/ProductsItemsList/RecommandSectionsProducts'
+    ),
+);
 
 const Home = () => {
-    const screenWidth = useViewportWidth();
-    return (
-        <>
-            <div className="homePage">
-                {/* <MobileHomeCategory />*/}
-                
-                    
-                <BannerCategory />
-                <Suspense>
-                {/* {
+  const screenWidth = useViewportWidth();
+  return (
+    <>
+      <div className='homePage'>
+        {/* <MobileHomeCategory />*/}
+
+        <BannerCategory />
+
+        {/* Recommandation Slider */}
+        <div
+          style={{ backgroundColor: 'white', paddingTop: '44px' }}
+          className='d-none d-sm-block'>
+          <div
+            style={{
+              borderTop: '1px solid #D0D0D0',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+            }}>
+            <div style={{ maxWidth: '1500px', width: '100%' }}>
+              <RecommandSectionsProducts />
+            </div>
+          </div>
+        </div>
+        <Suspense>
+          {/* {
                         screenWidth < 576 && (
                             <div className="products-grid-container">
                             <h2>Products</h2>
@@ -24,17 +46,12 @@ const Home = () => {
                         </div>
                         )
                     } */}
-                   
-                    {
-                        screenWidth > 576 && (
-                            <Subscribe />
-                        )
-                    }
-                   
-                </Suspense>
-            </div>
-        </>
-    );
+
+          {screenWidth > 576 && <Subscribe />}
+        </Suspense>
+      </div>
+    </>
+  );
 };
 
 export default Home;
