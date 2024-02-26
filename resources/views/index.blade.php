@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href='/favicon.png' />
     <meta name="google-site-verification" content="5PS2oRiahS_ZwW7U_GAXkDd24qj8EYMyAHuHSY4D3mc" />
-  <script type="module" crossorigin src="/assets/index-7a981a69.js"></script>
-  <link rel="stylesheet" href="/assets/index-59d54792.css">
+  <script type="module" crossorigin src="/assets/index-eaee2db3.js"></script>
+  <link rel="stylesheet" href="/assets/index-7107d84b.css">
 </head>
 
 <body>
