@@ -2,8 +2,8 @@ import { useEffect, useState, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
-import ViewModuleIcon from '@mui/icons-material/ViewModule';
-import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
+import ViewModuleIcon from "@mui/icons-material/ViewModule";
+import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 import { IconButton } from "@mui/material";
 
 import { filterProducts } from "@store/products/productsThunks";
@@ -13,7 +13,7 @@ import {
     SET_SELECTED_CATEGORY,
 } from "@store/products/productsSlice";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
-import "./FilteredProducts.css"
+import "./FilteredProducts.css";
 
 const FilteredProducts = memo(({ category, toggleFilter }) => {
     const {
@@ -107,16 +107,15 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
         }
     }, [category]);
 
-    const [productView, setProductView] = useState("grid")
+    const [productView, setProductView] = useState("grid");
 
     const productViewGrid = () => {
-        setProductView("grid")
-    }
+        setProductView("grid");
+    };
 
     const productViewList = () => {
-        setProductView("list")
-    }
-
+        setProductView("list");
+    };
 
     console.log(productParamsRef, "productParamsRef");
 
@@ -140,25 +139,83 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                             </button>
                         </div>
                     )} */}
-                    <div className="product-grid-heading">Best {category?.name ? category?.name : "Monitors for Desktops"}</div>
+                    <div className="product-grid-heading">
+                        Best{" "}
+                        {category?.name
+                            ? category?.name
+                            : "Monitors for Desktops"}
+                    </div>
                     {/* <p className="product-grid-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem.</p> */}
                     <div className="product-length-container">
-                    {/* 1-{products?.length > filterTotal ? filterTotal : products.length } of over {filterTotal} results for <span style={{color: "#52AC66", margin: "0px 5px"}}> Monitors </span> */}
-                    {filterTo ? 1 : 0}-{filterTo ? filterTo : 0} of over {filterTotal} results for <span style={{color: "#52AC66", margin: "0px 5px"}}> {category?.name ? category?.name : "Monitors"} </span>
-                    <div className="buttons">
-                        <span className="view-button" onClick={productViewList}><IconButton disableRipple style={{borderRadius: '3px' , padding: "3px 6px" , backgroundColor: productView == "list" ? "#318243" : "", color: productView == "list" ? "white" : "#318243"}}><FormatAlignLeftIcon fontSize="small" /> </IconButton></span>
-                        <span className="view-button" onClick={productViewGrid}><IconButton disableRipple style={{borderRadius: '3px' , padding: "3px 6px" , backgroundColor: productView == "grid" ? "#318243" : "", color: productView == "grid" ? "white" : "#318243"}}><ViewModuleIcon fontSize="small" /> </IconButton></span>
-                    </div>    
-                </div>
-                    {filtersProduct?.length == 0 ? <div style={{fontWeight: "500", padding: "15px"}}>Products Not Found</div> : <ProductsGrid
-                        products={filtersProduct}
-                        handleClick={handleClick}
-                        isLoading={isLoading}
-                        apiError={apiError}
-                        searchParams={productParamsRef}
-                        productView={productView}
-                        inFilterProducts={true}
-                    />}
+                        {/* 1-{products?.length > filterTotal ? filterTotal : products.length } of over {filterTotal} results for <span style={{color: "#52AC66", margin: "0px 5px"}}> Monitors </span> */}
+                        {filterTo ? 1 : 0}-{filterTo ? filterTo : 0} of over{" "}
+                        {filterTotal} results for{" "}
+                        <span style={{ color: "#52AC66", margin: "0px 5px" }}>
+                            {" "}
+                            {category?.name ? category?.name : "Monitors"}{" "}
+                        </span>
+                        <div className="buttons">
+                            <span
+                                className="view-button"
+                                onClick={productViewList}
+                            >
+                                <IconButton
+                                    disableRipple
+                                    style={{
+                                        borderRadius: "3px",
+                                        padding: "3px 6px",
+                                        backgroundColor:
+                                            productView == "list"
+                                                ? "#318243"
+                                                : "",
+                                        color:
+                                            productView == "list"
+                                                ? "white"
+                                                : "#318243",
+                                    }}
+                                >
+                                    <FormatAlignLeftIcon fontSize="small" />{" "}
+                                </IconButton>
+                            </span>
+                            <span
+                                className="view-button"
+                                onClick={productViewGrid}
+                            >
+                                <IconButton
+                                    disableRipple
+                                    style={{
+                                        borderRadius: "3px",
+                                        padding: "3px 6px",
+                                        backgroundColor:
+                                            productView == "grid"
+                                                ? "#318243"
+                                                : "",
+                                        color:
+                                            productView == "grid"
+                                                ? "white"
+                                                : "#318243",
+                                    }}
+                                >
+                                    <ViewModuleIcon fontSize="small" />{" "}
+                                </IconButton>
+                            </span>
+                        </div>
+                    </div>
+                    {filtersProduct?.length == 0 ? (
+                        <div style={{ fontWeight: "500", padding: "15px" }}>
+                            Products Not Found
+                        </div>
+                    ) : (
+                        <ProductsGrid
+                            products={filtersProduct}
+                            handleClick={handleClick}
+                            isLoading={isLoading}
+                            apiError={apiError}
+                            searchParams={productParamsRef}
+                            productView={productView}
+                            inFilterProducts={true}
+                        />
+                    )}
                 </>
             ) : (
                 <>

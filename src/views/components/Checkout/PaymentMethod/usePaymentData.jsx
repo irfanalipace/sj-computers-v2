@@ -12,7 +12,7 @@ function usePaymentData(buyNow = false) {
     let cartDetails = useSelector((state) => state.cart.details);
 
     const shippingDetails = useSelector(
-        (state) => state.orders.shippingDetails
+        (state) => state.orders.shippingDetails,
     );
 
     const id = searchParams.get("id");

@@ -103,7 +103,7 @@ const Security = () => {
                                             type="button"
                                             onClick={() =>
                                                 setShowOldPassword(
-                                                    !showOldPassword
+                                                    !showOldPassword,
                                                 )
                                             }
                                         >
@@ -144,7 +144,7 @@ const Security = () => {
                                             type="button"
                                             onClick={() =>
                                                 setShowNewPassword(
-                                                    !showNewPassword
+                                                    !showNewPassword,
                                                 )
                                             }
                                         >
@@ -178,7 +178,7 @@ const Security = () => {
                                             value={confirmPassword}
                                             onChange={(e) =>
                                                 setConfirmPassword(
-                                                    e.target.value
+                                                    e.target.value,
                                                 )
                                             }
                                         />
@@ -187,7 +187,7 @@ const Security = () => {
                                             type="button"
                                             onClick={() =>
                                                 setShowConfirmPassword(
-                                                    !showConfirmPassword
+                                                    !showConfirmPassword,
                                                 )
                                             }
                                         >

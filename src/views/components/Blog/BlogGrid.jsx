@@ -116,7 +116,7 @@ const BlogGrid = ({
                                                                     }
                                                                 </Link>
                                                             </div>
-                                                        )
+                                                        ),
                                                     )}
                                                 </div>
                                             )}

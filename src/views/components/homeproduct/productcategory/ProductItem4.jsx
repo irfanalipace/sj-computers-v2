@@ -62,24 +62,39 @@
 
 // export default ProductItem4;
 
-
-
-import React from "react";
-import { Row, Col } from "react-bootstrap";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import "./ProductItem4.css";
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import './ProductItem4.css';
 
 const ProductItem4 = ({ items }) => {
   return (
-    <Row className="mx-0 product-item-4" style={{height: "100%", padding: '4px'}}>
+    <Row
+      className='mx-0 product-item-4'
+      style={{ height: '100%', padding: '4px' }}>
       {items.map((item, index) => (
-        <Col key={index} xs={12} sm={6} style={{height: "50%", padding: "2px"}} className="px-0">
-          <Link to={item.categoryLink} className="category-item">
-            <div className="image-wrapper" style={{ display: 'flex', alignItems: 'center', justifyContent: "center"}}>
-              <img src={item.image} alt={`Image for ${item.categoryName}`} className="dynamic-image" />
+        <Col
+          key={index}
+          xs={12}
+          sm={6}
+          style={{ height: '50%', padding: '2px' }}
+          className='px-0'>
+          <Link to={item.categoryLink} className='category-item'>
+            <div
+              className='image-wrapper'
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <img
+                src={item.image}
+                alt={`Image for ${item.categoryName}`}
+                className='dynamic-image'
+              />
             </div>
-            <div className="category-name">{item.categoryName}</div>
+            <div className='category-name'>{item.categoryName}</div>
           </Link>
         </Col>
       ))}
@@ -93,7 +108,7 @@ ProductItem4.propTypes = {
       image: PropTypes.string.isRequired,
       categoryLink: PropTypes.string.isRequired,
       categoryName: PropTypes.string.isRequired,
-    })
+    }),
   ).isRequired,
 };
 

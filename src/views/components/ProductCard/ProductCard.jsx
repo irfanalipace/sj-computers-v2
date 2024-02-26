@@ -12,7 +12,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import { generatePath } from "../../../core/utils/helpers";
 const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
     const orderEstimatedDelivery = useSelector(
-        (state) => state.orders.orderEstimatedDelivery
+        (state) => state.orders.orderEstimatedDelivery,
     );
 
     let productUrl = generatePath(product?.url, searchParams);

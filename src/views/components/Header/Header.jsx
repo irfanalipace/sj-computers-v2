@@ -125,7 +125,7 @@ const Header = () => {
             ) : (
                 <div>
                     {!nonHeaderRoutes.includes(
-                        location.pathname.split("/")[1]
+                        location.pathname.split("/")[1],
                     ) && (
                         <>
                             <header className="navbar navbar-expand-lg header-background px-3">

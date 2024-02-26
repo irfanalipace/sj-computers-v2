@@ -80,7 +80,7 @@ export const prettifyError = (error) => {
     for (const key in error) {
         if (Array.isArray(error[key])) {
             const formattedErrors = error[key].map(
-                (message) => `${message}<br>`
+                (message) => `${message}<br>`,
             );
 
             prettifiedError += `<strong>${
@@ -171,7 +171,7 @@ export const createThumbnail = async (videoSrc) => {
                     const imageDataUrl = canvas.toDataURL();
                     resolve(imageDataUrl);
                 },
-                { once: true }
+                { once: true },
             );
         });
 
@@ -187,7 +187,7 @@ export function filterFiles(files, allowedTypes, maxSize = 5) {
     Array.from(files).forEach((file) => {
         if (file?.size > maxSizeInBytes) {
             errors.push(
-                `${file.name} exceeds the maximum allowed file size of ${maxSize}MB.`
+                `${file.name} exceeds the maximum allowed file size of ${maxSize}MB.`,
             );
         } else if (!allowedTypes.includes(file?.type)) {
             errors.push(`${file?.name} has an invalid file type.`);

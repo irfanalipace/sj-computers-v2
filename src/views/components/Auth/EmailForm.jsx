@@ -18,7 +18,7 @@ export default function EmailForm({ onFormSubmit, form }) {
                 email: { min: 5, max: 100 },
             },
         },
-        verifyEmail
+        verifyEmail,
     );
 
     const dispatch = useDispatch();

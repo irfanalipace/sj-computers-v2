@@ -25,7 +25,7 @@ const Profile = () => {
     const dispatch = useDispatch();
 
     const { user, apiError, isLoading, isDeletingPic } = useSelector(
-        (state) => state.auth
+        (state) => state.auth,
     );
 
     const handleFileChange = (event) => {
@@ -68,7 +68,7 @@ const Profile = () => {
                 setSelectedFile(null);
                 setImageUrl(null);
                 setShowDialog(false);
-            })
+            }),
         );
     };
 

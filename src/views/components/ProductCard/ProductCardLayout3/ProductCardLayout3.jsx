@@ -18,7 +18,7 @@ const ProductCardLayout3 = ({
     productView,
 }) => {
     const orderEstimatedDelivery = useSelector(
-        (state) => state.orders.orderEstimatedDelivery
+        (state) => state.orders.orderEstimatedDelivery,
     );
 
     let productUrl = generatePath(product?.url, searchParams);
@@ -310,37 +310,38 @@ const ProductCardLayout3 = ({
                                     style={{
                                         fontWeight: "700",
                                         padding: "4px 0px",
-                                        fontSize:"12px",
-                                        color:"#000000"
-
+                                        fontSize: "12px",
+                                        color: "#000000",
                                     }}
                                 >
                                     Sonic
                                 </div>
                             </div>
                             <div className="extra-details-item">
-                                <div className="model-data-products">Display</div>
+                                <div className="model-data-products">
+                                    Display
+                                </div>
                                 <div
-                                        style={{
-                                            fontWeight: "700",
-                                            padding: "4px 0px",
-                                            fontSize:"12px",
-                                            color:"#000000"
-    
-                                        }}
+                                    style={{
+                                        fontWeight: "700",
+                                        padding: "4px 0px",
+                                        fontSize: "12px",
+                                        color: "#000000",
+                                    }}
                                 >
                                     32"
                                 </div>
                             </div>
                             <div className="extra-details-item">
-                                <div className="model-data-products">Company</div>
+                                <div className="model-data-products">
+                                    Company
+                                </div>
                                 <div
-                                       style={{
+                                    style={{
                                         fontWeight: "700",
                                         padding: "4px 0px",
-                                        fontSize:"12px",
-                                        color:"#000000"
-
+                                        fontSize: "12px",
+                                        color: "#000000",
                                     }}
                                 >
                                     Sonic
@@ -349,12 +350,11 @@ const ProductCardLayout3 = ({
                             <div className="extra-details-item">
                                 <div className="model-data-products">Size</div>
                                 <div
-                                       style={{
+                                    style={{
                                         fontWeight: "700",
                                         padding: "4px 0px",
-                                        fontSize:"12px",
-                                        color:"#000000"
-
+                                        fontSize: "12px",
+                                        color: "#000000",
                                     }}
                                 >
                                     Multiple
@@ -423,37 +423,61 @@ const ProductCardLayout3 = ({
     );
 
     return (
-        <div className={` product ${inGrid && "product-grid"}`} style={{ flexDirection: productView == "list" ? "row" : "", border: productView == "list" ? "none" : ""}}>
+        <div
+            className={` product ${inGrid && "product-grid"}`}
+            style={{
+                flexDirection: productView == "list" ? "row" : "",
+                border: productView == "list" ? "none" : "",
+            }}
+        >
             <Link
                 //to={`${new URL(product?.url).pathname}`}
                 to={productUrl}
                 className={`${
                     productView == "list" ? "product-image-link-list-view" : ""
                 }`}
-                style={{ width: productView !== "list" ? "100%" : "" , height: '180px'}}
+                style={{
+                    width: productView !== "list" ? "100%" : "",
+                    height: "180px",
+                }}
                 // style={{width: productView == "list" ? "20%" : "100%", }}
             >
                 <div className="full-image">
                     <div className="upper-div">
-                        {inGrid && <div className="product-offer-label" style={{backgroundColor: product?.total_review > 0 ? "#52AC66" : "#1860A3", top: productView == "list" ? "-9px" : "" }}>{product?.total_review > 0 ? "Top Seller" : "New" }</div>}
+                        {inGrid && (
+                            <div
+                                className="product-offer-label"
+                                style={{
+                                    backgroundColor:
+                                        product?.total_review > 0
+                                            ? "#52AC66"
+                                            : "#1860A3",
+                                    top: productView == "list" ? "-9px" : "",
+                                }}
+                            >
+                                {product?.total_review > 0
+                                    ? "Top Seller"
+                                    : "New"}
+                            </div>
+                        )}
                     </div>
                     <div className="image-wrapper-2">
                         <div className="sub-image-wrapper">
-                    <LazyLoadImage
-                            // width={"100%"}
-                            style={{maxHeight: "100%", maxWidth: '100%'}}
-                            // height={"100%"}
-                            src={product.image}
-                            alt={product?.name
-                                ?.trim()
-                                ?.split(" ")
-                                ?.slice(0, 9)
-                                ?.join(" ")}
-                        />
+                            <LazyLoadImage
+                                // width={"100%"}
+                                style={{ maxHeight: "100%", maxWidth: "100%" }}
+                                // height={"100%"}
+                                src={product.image}
+                                alt={product?.name
+                                    ?.trim()
+                                    ?.split(" ")
+                                    ?.slice(0, 9)
+                                    ?.join(" ")}
+                            />
                         </div>
                     </div>
                 </div>
-            </Link>    
+            </Link>
             <div
                 className={`${
                     productView == "list" ? "product-detail-list-view" : ""
@@ -467,39 +491,41 @@ const ProductCardLayout3 = ({
 
 export default ProductCardLayout3;
 
-{/* <Link */}
-            //     //to={`${new URL(product?.url).pathname}`}
-            //     to={productUrl}
-            //     className={`${
-            //         productView == "list" ? "product-image-link-list-view" : ""
-            //     }`}
-            //     style={{ width: productView == "grid" ? "100%" : "" }}
-            //     // style={{width: productView == "list" ? "20%" : "100%", }}
-            // >
-            //     <div
-            //         className={` ${
-            //             inGrid ? "product-image-grid" : ""
-            //         } product-image`}
-            //     >
-                /* {inGrid && (
+{
+    /* <Link */
+}
+//     //to={`${new URL(product?.url).pathname}`}
+//     to={productUrl}
+//     className={`${
+//         productView == "list" ? "product-image-link-list-view" : ""
+//     }`}
+//     style={{ width: productView == "grid" ? "100%" : "" }}
+//     // style={{width: productView == "list" ? "20%" : "100%", }}
+// >
+//     <div
+//         className={` ${
+//             inGrid ? "product-image-grid" : ""
+//         } product-image`}
+//     >
+/* {inGrid && (
                     <div className="product-badge">
                         <div className="badge-text">Best Seller</div>
                     </div>
                 )} */
-            //         {inGrid && <div className="product-offer-label" style={{backgroundColor: product?.total_review > 0 ? "#52AC66" : "#1860A3", top: productView == "list" ? "-9px" : "" }}>{product?.total_review > 0 ? "Top Seller" : "New" }</div>}
+//         {inGrid && <div className="product-offer-label" style={{backgroundColor: product?.total_review > 0 ? "#52AC66" : "#1860A3", top: productView == "list" ? "-9px" : "" }}>{product?.total_review > 0 ? "Top Seller" : "New" }</div>}
 
-            //         <div className="image-wrapper">
-                        // <LazyLoadImage
-                        //     width={"100%"}
-                        //     // style={{maxHeight: "80%", maxWidth: '80%'}}
-                        //     height={"100%"}
-                        //     src={product.image}
-                        //     alt={product?.name
-                        //         ?.trim()
-                        //         ?.split(" ")
-                        //         ?.slice(0, 9)
-                        //         ?.join(" ")}
-                        // />
-            //         </div>
-            //     </div>
-            // </Link>
+//         <div className="image-wrapper">
+// <LazyLoadImage
+//     width={"100%"}
+//     // style={{maxHeight: "80%", maxWidth: '80%'}}
+//     height={"100%"}
+//     src={product.image}
+//     alt={product?.name
+//         ?.trim()
+//         ?.split(" ")
+//         ?.slice(0, 9)
+//         ?.join(" ")}
+// />
+//         </div>
+//     </div>
+// </Link>

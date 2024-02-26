@@ -30,10 +30,11 @@
     color: white;
     border: 0;
 }
-@media screen and (max-width:600px) {
-    .payment-method input{
+@media screen and (max-width: 600px) {
+    .payment-method input {
         accent-color: #318243;
-    }.payment-method label{
+    }
+    .payment-method label {
         margin-left: 0px;
     }
 }

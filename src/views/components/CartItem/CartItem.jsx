@@ -71,10 +71,10 @@ const CartItem = ({ item }) => {
             difference,
             price: parseFloat(productPriceWithQuantity).toFixed(2),
         };
-       
+
         if (item?.plan?.value) {
             cartItem.plan_price = parseFloat(warrantyPriceWithQuantity).toFixed(
-                2
+                2,
             );
         }
 

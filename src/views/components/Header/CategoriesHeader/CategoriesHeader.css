@@ -1,4 +1,4 @@
-.header-wrappar{
+.header-wrappar {
     display: flex;
     height: 50px;
     border-bottom: 1px solid lightgray;
@@ -6,22 +6,21 @@
     padding: 0 20px;
 }
 
-.sub-category-item{
+.sub-category-item {
     color: black;
     text-decoration: none;
 }
 
-.sub-category-item :hover{
+.sub-category-item :hover {
     color: orange;
     text-decoration: underline;
 }
 
-
-.header-wrappar::-webkit-scrollbar{
+.header-wrappar::-webkit-scrollbar {
     display: none;
 }
 
-.item{
+.item {
     color: black;
     height: 100%;
     padding: 20px 5px;
@@ -30,15 +29,15 @@
     white-space: nowrap;
 }
 
-.item:hover{
-    color: #E87E24;
+.item:hover {
+    color: #e87e24;
     text-decoration: underline;
     cursor: pointer;
 }
 
 /*  for mobile view  */
 @media only screen and (max-width: 600px) {
-    .header-wrappar{
+    .header-wrappar {
         display: none;
     }
 }

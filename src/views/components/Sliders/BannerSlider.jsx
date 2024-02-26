@@ -18,30 +18,32 @@ import progmobile3 from "@images/Banner/mobileLoaderimage/prograssivemobile3.jpg
 import "swiper/css";
 import "swiper/css/navigation";
 import "./Slider.css";
-import "./BannerSlider.css"
+import "./BannerSlider.css";
 import { useViewportWidth } from "@hooks/useViewportWidth";
 
 // import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Slider = () => {
-    
     const swiperRef = useRef(null);
     const buttonRef = useRef("");
     useEffect(() => {
         const handleClickOutside = (event) => {
-          if (buttonRef.current && !buttonRef.current.contains(event.target)) {
-            // Clicked outside the button, so set the value to an empty string
-            setBorder('');
-          }
+            if (
+                buttonRef.current &&
+                !buttonRef.current.contains(event.target)
+            ) {
+                // Clicked outside the button, so set the value to an empty string
+                setBorder("");
+            }
         };
-    
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-          document.removeEventListener('mousedown', handleClickOutside);
-        };
-      }, []);
 
-    const [border, setBorder] = useState("")
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    const [border, setBorder] = useState("");
 
     const width = useViewportWidth();
     SwiperCore.use([Navigation, Controller]);
@@ -70,14 +72,14 @@ const Slider = () => {
         if (swiperRef.current) {
             swiperRef.current.slideNext();
         }
-        setBorder("next")
+        setBorder("next");
     };
 
     const goToPreviousSlide = () => {
         if (swiperRef.current) {
             swiperRef.current.slidePrev();
         }
-        setBorder("prev")
+        setBorder("prev");
     };
 
     return (
@@ -87,8 +89,8 @@ const Slider = () => {
                     loop
                     // modules={[Navigation]}
                     navigation={{
-                        nextEl: '.banner-slider-section .swiper-button-next',
-                        prevEl: '.banner-slider-section .swiper-button-prev',
+                        nextEl: ".banner-slider-section .swiper-button-next",
+                        prevEl: ".banner-slider-section .swiper-button-prev",
                     }}
                     className="mySwiper"
                     onSwiper={(swiper) => (swiperRef.current = swiper)}

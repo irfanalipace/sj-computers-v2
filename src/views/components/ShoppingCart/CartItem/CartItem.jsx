@@ -77,7 +77,7 @@ export const CartItem = memo(({ cartData }) => {
 
         if (cartData?.plan?.value) {
             cartItem.plan_price = parseFloat(warrantyPriceWithQuantity).toFixed(
-                2
+                2,
             );
         }
 
@@ -114,7 +114,7 @@ export const CartItem = memo(({ cartData }) => {
                                     className="items-card-name"
                                     to={generatePath(
                                         cartData?.product?.url,
-                                        searchParams
+                                        searchParams,
                                     )}
                                 >
                                     <strong className="item-details">
@@ -248,7 +248,7 @@ export const CartItem = memo(({ cartData }) => {
                                                 >
                                                     $
                                                     {parseFloat(
-                                                        cartData?.plan_price
+                                                        cartData?.plan_price,
                                                     ).toFixed(2)}
                                                 </strong>
                                             </p>

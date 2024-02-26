@@ -52,5 +52,3 @@ export default class PaymentService {
         this.onProcessEnd && this.onProcessEnd();
     }
 }
-
-

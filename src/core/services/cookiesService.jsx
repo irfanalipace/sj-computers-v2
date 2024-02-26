@@ -27,9 +27,9 @@ const cookiesService = {
             const expirationDate = new Date();
             expirationDate.setDate(expirationDate.getDate() + 365);
             const cookie = `${encodeURIComponent(
-                "visited"
+                "visited",
             )}=${encodeURIComponent(
-                lastVisitDate
+                lastVisitDate,
             )};expires=${expirationDate.toUTCString()};path=/`;
             document.cookie = cookie;
         } catch (error) {

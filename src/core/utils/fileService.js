@@ -15,7 +15,7 @@ class FileService {
             const { validFiles, errors } = filterFiles(
                 files,
                 this.allowedFiles,
-                this.maxSize
+                this.maxSize,
             );
             this.onChange(validFiles, errors);
         }

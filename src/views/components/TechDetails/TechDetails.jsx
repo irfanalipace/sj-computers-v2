@@ -249,7 +249,7 @@ const TechDetails = ({ product }) => {
                                             formatDate(
                                                 product?.description
                                                     ?.product_site_launch_date[0]
-                                                    ?.value
+                                                    ?.value,
                                             )
                                         ) : (
                                             <></>

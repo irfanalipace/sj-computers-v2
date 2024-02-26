@@ -133,7 +133,7 @@ function MobileSummary({
                                                     ? "$" +
                                                       parseFloat(
                                                           paymentData?.details
-                                                              ?.shipment_amount
+                                                              ?.shipment_amount,
                                                       ).toFixed(2)
                                                     : "$0"}
                                             </span>

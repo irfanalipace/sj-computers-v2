@@ -15,7 +15,9 @@ function ShipingModalSummery({
     activeAccordion,
     // paymentMethod,
     isDisabled,
-    isOpen, onClose, children
+    isOpen,
+    onClose,
+    children,
 }) {
     const dispatch = useDispatch();
     const placingOrder = useSelector((state) => state.orders.placingOrder);
@@ -23,7 +25,7 @@ function ShipingModalSummery({
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
-    const toggleAccordion = ({onClose}) => {
+    const toggleAccordion = ({ onClose }) => {
         setIsAccordionOpen((prev) => !prev);
     };
     if (!isOpen) return null;
@@ -70,99 +72,78 @@ function ShipingModalSummery({
     };
     return (
         <div onClick={onClose}>
-            
             <div className="summer-mobile-modal-overlay">
-                
-      <div className="summer-mobile-modal-content">
-        <div className="order-summer-mobile-size-data">
-            <span>order Summery</span>
-        </div>
-     <hr></hr>
-           
-              
-                   
-                 
-                    
-                            <div className="summary-wrapper">
-                                <div className="summary-details details-summery-modal-view">
-                                    <ul>
-                                        <li>
-                                            <span>Items:</span>
-                                            <span>
-                                                (
-                                                {
-                                                    paymentData?.details
-                                                        ?.total_items
-                                                }
-                                                )
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span>Price:</span>
-                                            <span>
-                                                <strong>
-                                                    {paymentData?.details
-                                                        ?.sub_total
-                                                        ? "$" +
-                                                          paymentData.details
-                                                              .sub_total
-                                                        : "$0"}
-                                                </strong>
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span>Shipping & handling:</span>
-                                            <span>
-                                                {paymentData?.details
-                                                    ?.shipment_amount
-                                                    ? "$" +
-                                                      parseFloat(
-                                                          paymentData?.details
-                                                              ?.shipment_amount
-                                                      ).toFixed(2)
-                                                    : "$0"}
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span>Total before tax:</span>
-                                            <span>--</span>
-                                        </li>
-                                        <li>
-                                            <span>
-                                                Estimated tax to be calculated:
-                                            </span>
-                                            <span>--</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="order-total">
-                                    <ul>
-                                        <li>
-                                            <span>
-                                                <strong>Order Total</strong>
-                                            </span>
-                                            <span>
-                                                <strong>
-                                                    $
-                                                    {
-                                                        paymentData?.details
-                                                            ?.total
-                                                    }
-                                                </strong>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="summary-footer">
-                                <Link to={"#"} style={{ color: "#007185" }}>
-                                    How shipping costs calculates?
-                                </Link>
-                            </div>
-               </div>
+                <div className="summer-mobile-modal-content">
+                    <div className="order-summer-mobile-size-data">
+                        <span>order Summery</span>
+                    </div>
+                    <hr></hr>
+
+                    <div className="summary-wrapper">
+                        <div className="summary-details details-summery-modal-view">
+                            <ul>
+                                <li>
+                                    <span>Items:</span>
+                                    <span>
+                                        ({paymentData?.details?.total_items})
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>Price:</span>
+                                    <span>
+                                        <strong>
+                                            {paymentData?.details?.sub_total
+                                                ? "$" +
+                                                  paymentData.details.sub_total
+                                                : "$0"}
+                                        </strong>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>Shipping & handling:</span>
+                                    <span>
+                                        {paymentData?.details?.shipment_amount
+                                            ? "$" +
+                                              parseFloat(
+                                                  paymentData?.details
+                                                      ?.shipment_amount,
+                                              ).toFixed(2)
+                                            : "$0"}
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>Total before tax:</span>
+                                    <span>--</span>
+                                </li>
+                                <li>
+                                    <span>Estimated tax to be calculated:</span>
+                                    <span>--</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="order-total">
+                            <ul>
+                                <li>
+                                    <span>
+                                        <strong>Order Total</strong>
+                                    </span>
+                                    <span>
+                                        <strong>
+                                            ${paymentData?.details?.total}
+                                        </strong>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="summary-footer">
+                        <Link to={"#"} style={{ color: "#007185" }}>
+                            How shipping costs calculates?
+                        </Link>
+                    </div>
                 </div>
             </div>
-      
+        </div>
     );
 }
 

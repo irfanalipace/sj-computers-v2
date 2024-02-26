@@ -24,7 +24,7 @@ const MobileFeaturedProducts = ({ items, featuredItems, title }) => {
                             <div
                                 className="images-sections-montring"
                                 key={index}
-                                style={{width: "100%"}}
+                                style={{ width: "100%" }}
                             >
                                 <Link
                                     to="/category/bto"
@@ -49,7 +49,7 @@ const MobileFeaturedProducts = ({ items, featuredItems, title }) => {
                             <div
                                 className="images-sections-montring"
                                 key={index}
-                                style={{width: "100%"}}
+                                style={{ width: "100%" }}
                             >
                                 <Link
                                     to="/category/bto"
@@ -135,7 +135,10 @@ const MobileFeaturedProducts = ({ items, featuredItems, title }) => {
                         {/* <button onClick={handleSeeMoreClick}>
               {showMore ? "See less" : "See more"}
             </button> */}
-                        <Link style={{textDecoration: "none", color: "#007185"}} to={"/category"}>
+                        <Link
+                            style={{ textDecoration: "none", color: "#007185" }}
+                            to={"/category"}
+                        >
                             See more
                         </Link>
                     </div>

@@ -150,7 +150,7 @@
     input:checked
     ~ .radiomark {
     /* background: #52ac66; */
-    background: #F2A742;
+    background: #f2a742;
 }
 
 .layout2-filter-bar .filters-list .filter-value .radiomark {
@@ -182,7 +182,7 @@
     top: 2px;
     width: 4px;
     height: 7px;
-    border: solid #F2A742;
+    border: solid #f2a742;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
@@ -193,21 +193,21 @@
     display: none;
 }
 
-    .filter-button-category-page button {
-        color: #52ac66;
-        background: white;
-        border: 1px solid #52ac66;
-        width: 85px;
-        height: 30px;
-        font-size: 14px;
-        margin-bottom: 7px;
-        border-radius: 4px;
-        margin-bottom: 15px;
-    }
-    .filter-button-category-page button:hover{
-      background: #52ac66;
-       color: white;
-    }
+.filter-button-category-page button {
+    color: #52ac66;
+    background: white;
+    border: 1px solid #52ac66;
+    width: 85px;
+    height: 30px;
+    font-size: 14px;
+    margin-bottom: 7px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+.filter-button-category-page button:hover {
+    background: #52ac66;
+    color: white;
+}
 
 .range-slider .MuiSlider-root {
     height: 2px;

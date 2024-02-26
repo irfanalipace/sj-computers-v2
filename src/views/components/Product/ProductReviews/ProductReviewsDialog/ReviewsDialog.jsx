@@ -62,7 +62,7 @@ const ReviewsDialog = ({
             setReviewCardId(productReviewId);
             // setReviewsData(data)
             const review = ReviewsData?.data?.filter(
-                (obj) => obj.id === productReviewId
+                (obj) => obj.id === productReviewId,
             );
             //   console.log(review, "reviewData");
             setSelectedReview(review);
@@ -97,7 +97,7 @@ const ReviewsDialog = ({
                 "active slide :",
                 activeSlide,
                 "index :",
-                index
+                index,
             );
         }
     };
@@ -110,7 +110,14 @@ const ReviewsDialog = ({
 
     return (
         <Dialog open={open} onClose={handleClose} maxWidth={"lg"}>
-            <DialogContent sx={{ minWidth: "65vw", width: "100%", p: 0, overflowY: "none" }}>
+            <DialogContent
+                sx={{
+                    minWidth: "65vw",
+                    width: "100%",
+                    p: 0,
+                    overflowY: "none",
+                }}
+            >
                 <Box
                     sx={{
                         width: "100%",
@@ -208,7 +215,7 @@ const ReviewsDialog = ({
                                                         alt="review image"
                                                     />
                                                 </SwiperSlide>
-                                            )
+                                            ),
                                         )}
                                     </Swiper>
                                 </Grid>
@@ -247,7 +254,7 @@ const ReviewsDialog = ({
                                                         key={data.id}
                                                         onClick={() =>
                                                             handleSwitchImage(
-                                                                index
+                                                                index,
                                                             )
                                                         }
                                                         width={"59px"}
@@ -266,7 +273,7 @@ const ReviewsDialog = ({
                                                                 "center",
                                                         }}
                                                     ></Box>
-                                                )
+                                                ),
                                             )}
                                         </div>
                                     </Grid>

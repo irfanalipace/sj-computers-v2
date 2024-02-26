@@ -42,7 +42,7 @@ const AppWrapper = ({ children }) => {
 
             if (!window.localStorage.getItem("state")?.id) {
                 const tempState = JSON.parse(
-                    window.localStorage.getItem("tempState")
+                    window.localStorage.getItem("tempState"),
                 );
                 if (tempState?.id) {
                     // Dispatch the state from tempState and remove tempState from localStorage

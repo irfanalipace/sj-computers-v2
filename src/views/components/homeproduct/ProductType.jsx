@@ -376,7 +376,7 @@ const ProductType = () => {
                                         {products[0].name.length > 30
                                             ? `${products[0].name.substring(
                                                   0,
-                                                  30
+                                                  30,
                                               )}...`
                                             : products[0].name}
                                     </h5>
@@ -440,7 +440,7 @@ const ProductType = () => {
                                                     Save{" "}
                                                     {products[0]?.price
                                                         ? parseFloat(
-                                                              products[0].price
+                                                              products[0].price,
                                                           ).toFixed(2)
                                                         : 0}
                                                 </p>

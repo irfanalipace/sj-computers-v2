@@ -5,18 +5,18 @@ import { useSelector } from "react-redux";
 const Home = React.lazy(() => import("@pages/Home/Home"));
 const LoginForm = React.lazy(() => import("@pages/Auth/LoginForm"));
 const Register = React.lazy(() => import("@pages/Auth/Register"));
-const ForgetPassword = React.lazy(() =>
-    import("@pages/Auth/ForgetPassword/ForgetPassword")
+const ForgetPassword = React.lazy(
+    () => import("@pages/Auth/ForgetPassword/ForgetPassword"),
 );
-const ResetPassword = React.lazy(() =>
-    import("@pages/Auth/ForgetPassword/ResetPassword")
+const ResetPassword = React.lazy(
+    () => import("@pages/Auth/ForgetPassword/ResetPassword"),
 );
 const Emailsent = React.lazy(() => import("@pages/Auth/EmailSent"));
 const Product = React.lazy(() => import("@pages/Product/Product"));
 const ProductList = React.lazy(() => import("@pages/Product/ProductsBySearch"));
 const Category = React.lazy(() => import("@pages/Category/Category"));
-const CategoryProduct = React.lazy(() =>
-    import("@pages/Category/CategoryProduct")
+const CategoryProduct = React.lazy(
+    () => import("@pages/Category/CategoryProduct"),
 );
 const Account = React.lazy(() => import("@pages/Account/Account"));
 const Profile = React.lazy(() => import("@pages/Account/Profile"));
@@ -24,15 +24,17 @@ const Security = React.lazy(() => import("@pages/Account/Security"));
 const Order = React.lazy(() => import("@pages/Account/Orders"));
 const Cart = React.lazy(() => import("@components/ShoppingCart/Cart"));
 const Checkout = React.lazy(() => import("@pages/Checkout/Checkout"));
-const MobileCheckout = React.lazy(() => import("@pages/Checkout/MobileCheckout"));
+const MobileCheckout = React.lazy(
+    () => import("@pages/Checkout/MobileCheckout"),
+);
 const Test = React.lazy(() => import("@pages/Test/Test"));
 const ThankYou = React.lazy(() => import("@pages/Thankyou/Thankyou"));
 const RefundOrder = React.lazy(() => import("@pages/RefundOrder/RefundOrder"));
 const Careers = React.lazy(() => import("@pages/Careers/Careers"));
 const CareerView = React.lazy(() => import("@pages/Careers/CareerView"));
 const TrackOrder = React.lazy(() => import("@pages/TrackOrder"));
-const Contact = React.lazy(() =>
-    import("@components/Footer/FooterMenu/Contact")
+const Contact = React.lazy(
+    () => import("@components/Footer/FooterMenu/Contact"),
 );
 const Policy = React.lazy(() => import("@pages/Policy/Policy"));
 const SkuPage = React.lazy(() => import("@pages/SKUTables/SkuPage"));
@@ -45,8 +47,8 @@ import Loader from "@common/LoaderComponent/LoaderComponent";
 import PageWrapper from "@components/PageWrapper/PageWrapper";
 
 const AddToCart = React.lazy(() => import("./views/pages/AddToCart/AddToCart"));
-const ProductNewReviews = React.lazy(() =>
-    import("./views/components/Product/ProductReviews/ProductNewReviews")
+const ProductNewReviews = React.lazy(
+    () => import("./views/components/Product/ProductReviews/ProductNewReviews"),
 );
 const CategoryBlogs = React.lazy(() => import("@pages/Blog/CategoryBlogs"));
 const ApplyNow = React.lazy(() => import("./views/pages/Careers/ApplyNow"));
@@ -330,7 +332,7 @@ const Router = () => {
                 // <ProtectedRoute>
                 <PageWrapper>
                     <Checkout />
-                  {/* <MobileCheckout /> */}
+                    {/* <MobileCheckout /> */}
                 </PageWrapper>
                 // </ProtectedRoute>
             ),

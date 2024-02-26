@@ -26,7 +26,7 @@ export default ({ placeholder = "Select Location", ...rest }) => {
                 },
                 (placeDetails) => {
                     console.log(placeDetails);
-                }
+                },
             );
     }, [placePredictions]);
 

@@ -6,7 +6,7 @@ export function getShippingAddressApi() {
             .then((response) => {
                 console.print(
                     "file: checkout.js | getShippingAddressApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -44,7 +44,7 @@ export function setShippingAddressApi({
             .then((response) => {
                 console.print(
                     "file: checkout.js | setShippingAddressApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -63,7 +63,7 @@ export function placeOrderApi({ paymentMethod }) {
             .then((response) => {
                 console.print(
                     "file: checkout.js | placeOrderApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -80,7 +80,7 @@ export function applyShipment(data) {
             .then((response) => {
                 console.print(
                     "file: checkout.js | applyShipment| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -96,7 +96,7 @@ export function applyShipmentForGuest(data) {
             .then((response) => {
                 console.print(
                     "file: checkout.js | applyShipmentForGuest| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })

@@ -40,11 +40,6 @@
     border-radius: 7px;
 }
 
-
-
-
-
-
 .shipping-form label,
 .shipping-form .input-field,
 .shipping-form .input-field::placeholder {
@@ -55,7 +50,7 @@
     padding-bottom: 5px;
     padding-left: 6px;
 }
-.input-radio-button-mobile-buttob{
+.input-radio-button-mobile-buttob {
     margin-top: 4px !important;
     margin-right: 5px;
     background-color: #318243; /* Your desired color */
@@ -143,45 +138,47 @@ shipping-form .input-field::placeholder {
 
 @media (min-width: 600px) {
     .input-radio-button-mobile-buttob {
-      display: none; /* Hide the radio button on desktop screens */
+        display: none; /* Hide the radio button on desktop screens */
     }
-        .input-lable-address {
-          display: none;
-        }
-      
-  }
-  @media (max-width: 600px) {
- .shipping-form input {
-    height: 39px;
-    border: 1px solid #6F6F6F
-    ;
-    border-radius: 3px;
-}.shipping-form label, .shipping-form .input-field, .shipping-form .input-field::placeholder {
-    font-family: Inter;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 17px;
-    letter-spacing: 0em;
-    text-align: left;
-    
-}.accordion-content.active {
-    max-height: 100%;
-    opacity: 1;
-}.shipping-form select {
-    height: 39px;
-    border-radius: 3px;
-}.address label {
-  
-    font-size: 10px;
-    font-weight: 400;
-    line-height: 12px;
-    letter-spacing: 0em;
-    text-align: left;
-    font-family: Inter;
-    font-size: 10px;
-    font-weight: 500;
-    line-height: 12px;
-    letter-spacing: 0em;
-    text-align: left;
+    .input-lable-address {
+        display: none;
+    }
 }
-  }
+@media (max-width: 600px) {
+    .shipping-form input {
+        height: 39px;
+        border: 1px solid #6f6f6f;
+        border-radius: 3px;
+    }
+    .shipping-form label,
+    .shipping-form .input-field,
+    .shipping-form .input-field::placeholder {
+        font-family: Inter;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 17px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+    .accordion-content.active {
+        max-height: 100%;
+        opacity: 1;
+    }
+    .shipping-form select {
+        height: 39px;
+        border-radius: 3px;
+    }
+    .address label {
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 12px;
+        letter-spacing: 0em;
+        text-align: left;
+        font-family: Inter;
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 12px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+}

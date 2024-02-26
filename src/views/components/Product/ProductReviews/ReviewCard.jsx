@@ -194,7 +194,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
                                         handleOpenDialog(
                                             item?.product_review_id,
                                             item?.id,
-                                            index
+                                            index,
                                         )
                                     }
                                 >

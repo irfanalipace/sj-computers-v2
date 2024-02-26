@@ -24,10 +24,12 @@ const Subscribe = () => {
                         Subscribe to Our Newsletter!
                     </h3>
                     <p className="text-subscribe">
-                        Stay ahead of the curve with exclusive deals and the latest tech insights <br /> delivered straight to your inbox!
+                        Stay ahead of the curve with exclusive deals and the
+                        latest tech insights <br /> delivered straight to your
+                        inbox!
                     </p>
                     <input
-                        style={{padding: "5px 10px"}}
+                        style={{ padding: "5px 10px" }}
                         placeholder="Enter your email address here"
                         className="input-subscribe"
                     />

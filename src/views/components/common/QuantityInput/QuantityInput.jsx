@@ -50,7 +50,7 @@ export const QuantityInput = ({
                         setQuantity(
                             quantity > minQuantity
                                 ? parseInt(quantity) - 1
-                                : quantity
+                                : quantity,
                         )
                     }
                 >
@@ -87,7 +87,7 @@ export const QuantityInput = ({
                         setQuantity(
                             quantity < maxQuantity
                                 ? parseInt(quantity) + 1
-                                : quantity
+                                : quantity,
                         )
                     }
                 >

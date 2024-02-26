@@ -83,7 +83,7 @@ Link:hover {
 }
 
 @media screen and (max-width: 576px) {
-    .topBar{
+    .topBar {
         background-color: #00305e;
     }
     .menuBar .text-color {

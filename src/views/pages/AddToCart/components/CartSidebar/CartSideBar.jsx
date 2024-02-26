@@ -8,7 +8,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 const CartSideBar = () => {
     const totalCart = useSelector((state) => state?.cart?.details?.total);
     const cartItems = useSelector((state) =>
-        state?.cart?.cart?.slice().reverse()
+        state?.cart?.cart?.slice().reverse(),
     );
     const navigate = useNavigate();
     return (
@@ -27,11 +27,11 @@ const CartSideBar = () => {
                     ${totalCart}
                 </usd>
                 <p className="hidden-on-mobile hidden-on-tab">
-                    <span style={{ color: "green", lineHeight:'12px' }}>
-                    Your order qualifies for FREE SHIPPING.
+                    <span style={{ color: "green", lineHeight: "12px" }}>
+                        Your order qualifies for FREE SHIPPING.
                     </span>{" "}
                     Choose this option at checkout. <br />
-                    <Link style={{marginTop:'3px'}}>See details</Link>
+                    <Link style={{ marginTop: "3px" }}>See details</Link>
                 </p>
                 <button
                     className="cart-side-btn hidden-on-mobile hidden-on-tab"

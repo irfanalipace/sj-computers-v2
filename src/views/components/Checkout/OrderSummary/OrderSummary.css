@@ -13,28 +13,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .summer-mobile-modal-content {
+}
+
+.summer-mobile-modal-content {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
+}
+
 .summary-wrapper {
     padding: 10px 15px;
 }
-.order-summer-mobile-size-data span{
+.order-summer-mobile-size-data span {
     font-family: Inter;
     font-size: 14px;
     font-weight: 600;
     line-height: 17px;
     letter-spacing: 0em;
     text-align: center;
-    
 }
-.summery-btton-order-summery button{
+.summery-btton-order-summery button {
     font-weight: 600;
     font-size: 12px;
     width: 271px;
@@ -49,13 +48,11 @@
     align-items: center;
 }
 
-.summery-data-checkout-data h3{
+.summery-data-checkout-data h3 {
     margin-top: 7px;
     font-size: 20px;
     font-weight: bold;
 }
-
-
 
 .summary-btn {
     display: flex;

@@ -6,7 +6,7 @@ export function productReviewsApi(id, per_page = 10) {
             .then(async (response) => {
                 console.print(
                     "file: products.js | products| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -26,7 +26,7 @@ export function productRatingApi(id) {
             .catch((e) => {
                 console.print(
                     "Console Log: : error in proudct rating api products",
-                    e
+                    e,
                 );
                 reject(e);
             });
@@ -39,7 +39,7 @@ export function allReviewImagesApi(id) {
             .then((response) => {
                 console.print(
                     "file: products.js | allReviewImagesApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -56,7 +56,7 @@ export function productSpecificDetailsReview(id) {
             .then((response) => {
                 console.print(
                     "file: products.js | productSpecificDetailsReview| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -73,7 +73,7 @@ export function reviewReportHelpfullApi(data) {
             .then((response) => {
                 console.print(
                     "file: order.js | validateCartItems| response",
-                    response.data
+                    response.data,
                 );
                 resolve(response.data);
             })

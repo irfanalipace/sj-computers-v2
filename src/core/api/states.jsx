@@ -6,7 +6,7 @@ export function statesApi() {
             .then((response) => {
                 console.print(
                     "file: states.js | statesApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -23,7 +23,7 @@ export function getCurrentStateApi() {
             .then((response) => {
                 console.print(
                     "file: states.js | getCurrentStateApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -43,7 +43,7 @@ export function updateStateApi({ id, zip_code_start }) {
             .then((response) => {
                 console.print(
                     "file: states.js | updateStateApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })

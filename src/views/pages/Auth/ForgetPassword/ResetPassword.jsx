@@ -35,7 +35,7 @@ const PasswordForm = () => {
                 confirmPassword: { min: 6, max: 20 },
             },
         },
-        resetPasswordFunction
+        resetPasswordFunction,
     );
     useEffect(() => {
         setFieldErrors({ ...errors });

@@ -394,7 +394,7 @@ export const validateCartItems = (args) => {
                 else {
                     const cart = calculateGuestCartPriceAfterError(
                         state.cart.cart,
-                        errors
+                        errors,
                     );
 
                     dispatch({

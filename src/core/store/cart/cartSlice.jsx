@@ -20,7 +20,7 @@ const cartSlice = createSlice({
         },
         UPDATING: (state, action) => {
             let index = state.cart.findIndex(
-                (item) => item.id === action.payload.cartItem.id
+                (item) => item.id === action.payload.cartItem.id,
             );
             if (index >= 0) {
                 state.cart[index] = { ...state.cart[index], loading: true };
@@ -144,7 +144,7 @@ const cartSlice = createSlice({
         UPDATED_QUANTITY: (state, action) => {
             state.isLoading = false;
             let index = state.cart.findIndex(
-                (item) => item.id === action.payload.id
+                (item) => item.id === action.payload.id,
             );
             if (index >= 0) {
                 state.cart[index] = { ...state.cart[index], loading: false };

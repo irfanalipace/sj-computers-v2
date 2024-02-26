@@ -19,7 +19,7 @@ function Search() {
     const [searchParams, setSearchParams] = useSearchParams();
     const searchString = useSelector((state) => state.products.searchString);
     const selectedCategory = useSelector(
-        (state) => state.products.selectedCategory
+        (state) => state.products.selectedCategory,
     );
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -89,7 +89,7 @@ function Search() {
                     <button
                         type="button"
                         className="btn btn-primary dropdown-toggle all-button"
-                        style={{ fontSize: "13px", border:"1px solid black" }}
+                        style={{ fontSize: "13px", border: "1px solid black" }}
                         onClick={toggleDropdown}
                         disabled={location.pathname.includes("category")}
                     >
@@ -135,7 +135,7 @@ function Search() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 style={{
-                    border: '1px solid black'
+                    border: "1px solid black",
                 }}
             />
             <span className="input-group-btn">

@@ -22,7 +22,7 @@ const VerifyOTP = () => {
                 otp: { min: 4, max: 4 },
             },
         },
-        verifyOtpFunction
+        verifyOtpFunction,
     );
 
     const apiError = useSelector((state) => state.auth.apiError);
@@ -48,7 +48,7 @@ const VerifyOTP = () => {
     useEffect(() => {
         const interval = setInterval(
             () => setTimer((prevState) => prevState - 1),
-            1000
+            1000,
         );
         setEmail(getUserEmail());
         setMounted(true);

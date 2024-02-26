@@ -28,7 +28,7 @@ export default function ReportDialog(props) {
 
     const reportReview = async () => {
         const allSelectedCheckboxes = Object.keys(checkedItems).filter(
-            (key) => checkedItems[key]
+            (key) => checkedItems[key],
         );
         const data = {
             product_review_id: id,

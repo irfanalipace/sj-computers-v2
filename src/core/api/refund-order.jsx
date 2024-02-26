@@ -8,7 +8,7 @@ export function verifyEmailSjApi(param) {
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | verifyEmailSjApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -25,7 +25,7 @@ export function verifyOtpSjApi(param) {
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | verifyOtpSjApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -42,7 +42,7 @@ export function verifyEmailOTOApi(param) {
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | verifyEmailOTO| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -59,7 +59,7 @@ export function verifyOTPOTOApi(param) {
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | verifyOTPOTO| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -76,7 +76,7 @@ export function getOrdersList(param) {
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | getOrdersList| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -93,7 +93,7 @@ export function getInvoicesList(param) {
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | getInvoicesList| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -110,7 +110,7 @@ export function getPreviousRefundsListSj(params) {
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | getPreviousRefundsListSj| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -127,7 +127,7 @@ export function getPreviousRefundsListOto(params) {
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | getPreviousRefundsListOto| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -144,7 +144,7 @@ export function getOrderDetailsSJ(param) {
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | getOrderDetailsSJ| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -161,7 +161,7 @@ export function getInvoiceDetailsOTO(param) {
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | getOrderDetailsOTO| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -178,7 +178,7 @@ export function submitRefundRequestAPiSJ(params) {
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | submitRefundRequestAPiSJ| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -194,7 +194,7 @@ export function submitRefundRequestAPiOTO(params) {
             .then((response) => {
                 console.print(
                     "file: refundOrder.js | submitRefundRequestAPiOTO| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })

@@ -20,7 +20,7 @@ export default function SidebarMenu({ openState, toggleSidebar }) {
 
     const handleShowMore = () => {
         setVisibleCategories(
-            (prevVisibleCategories) => prevVisibleCategories + 8
+            (prevVisibleCategories) => prevVisibleCategories + 8,
         );
     };
 

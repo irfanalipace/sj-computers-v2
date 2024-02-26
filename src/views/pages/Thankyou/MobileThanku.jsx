@@ -28,7 +28,6 @@ export default function MobileThanku() {
             console.log("error parsing order: ", error);
         }
     }
-   
 
     const navigate = useNavigate();
     const [orderDetails, setOrderDetails] = useState({});
@@ -40,15 +39,14 @@ export default function MobileThanku() {
             location?.state?.order?.order_detail ||
             JSON.parse(storedOrder) ||
             orderFromURL?.order?.order_details;
-        console.log('orderDetails: ', order);
+        console.log("orderDetails: ", order);
         if (order?.id) {
             const orderString = JSON.stringify(order);
             window.localStorage.setItem("thankyouOrderDetails", orderString);
             setOrderDetails(order);
             clearCartLocally();
             dispatch(CLEAR_CART());
-        }
-        else {
+        } else {
             // navigate('/')
         }
         return () => {
@@ -75,13 +73,15 @@ export default function MobileThanku() {
         <div
             className="thank-you-page"
             style={{ marginLeft: "10%", marginRight: "10%" }}
-        > 
-      <div className="oreder-confirm-page-data">  <span>Order Confirmed</span></div>
-   
+        >
+            <div className="oreder-confirm-page-data">
+                {" "}
+                <span>Order Confirmed</span>
+            </div>
+
             <div className="row margintopBottom">
                 <div className="col-12 my-10">
                     <div className="d-flex justify-content-center align-items-center">
-                  
                         <div
                             className="d-flex justify-content-center align-items-center"
                             style={{
@@ -100,23 +100,22 @@ export default function MobileThanku() {
                                     marginLeft: "-3.3%",
                                 }}
                             />
-                           
                         </div>
-                       
                     </div>
-                  
                 </div>
                 <div className="jhon-name-user-order">
                     <span>Hi John,</span>
-                   </div>
+                </div>
                 <div className="col-12 my-2">
-                <div className="oreder-confirm-page-data">  <span>Thanks for Order</span>
-                  
+                    <div className="oreder-confirm-page-data">
+                        {" "}
+                        <span>Thanks for Order</span>
                     </div>
                 </div>
                 <div className="col-12 my-20">
                     <p className="paragrap-text-notify-order">
-                        Your order with tracking No <span style={{fontWeight:'500'}}>#124548</span>{" "}
+                        Your order with tracking No{" "}
+                        <span style={{ fontWeight: "500" }}>#124548</span>{" "}
                         <span style={{ fontWeight: "900" }}>
                             {orderDetails?.id}
                         </span>{" "}
@@ -264,104 +263,86 @@ export default function MobileThanku() {
                 </>
             )} */}
 
-<div className="card-container">
-              <span className="order-summery-items-card">Order Summary</span>
-                            <div className="oder-item-card">
-                                <div className="card-image">
-                              
+            <div className="card-container">
+                <span className="order-summery-items-card">Order Summary</span>
+                <div className="oder-item-card">
+                    <div className="card-image"></div>
+                    <div className="card-content">
+                        <div className="product-details">
+                            <div className="Items-thanku-view-page-thanks">
+                                <div className="">
+                                    <span> Item:</span>
                                 </div>
-                                <div className="card-content">
-                                
-
-                                    <div className="product-details">
-                                     
-                                     <div className="Items-thanku-view-page-thanks">
-                                     <div className="">
-                                          <span>  Item:</span>
-                                            
-                                        </div>
-                                        <div className=" ">
-                                       <span> Product Name</span>
-                                        </div>
-                                     </div>
-                                       
-                                     <div className="Items-thanku-view-page-thanks">
-                                     <div className="">
-                                          <span>  Price:</span>
-                                            
-                                        </div>
-                                        <div className=" ">
-                                       <span style={{fontWeight:'600'}}> $12.3</span>
-                                        </div>
-                                     </div>
-                                     <div className="Items-thanku-view-page-thanks">
-                                     <div className="">
-                                          <span>  Shipping Handling:</span>
-                                            
-                                        </div>
-                                        <div className=" ">
-                                       <span>$23</span>
-                                        </div>
-                                     </div>
-                                     <div className="Items-thanku-view-page-thanks">
-                                     <div className="">
-                                          <span>Total before tax:</span>
-                                            
-                                        </div>
-                                        <div className=" ">
-                                       <span> $12.3</span>
-                                        </div>
-                                     </div>
-                                     <div className="Items-thanku-view-page-thanks">
-                                     <div className="">
-                                          <span>Estimated tax to be calculated:</span>
-                                            
-                                        </div>
-                                        <div className=" ">
-                                       <span> 10</span>
-                                        </div>
-                                     </div>
-                                  <hr></hr>
-                                  <div className="Items-thanku-view-page-thanks">
-                                     <div className="">
-                                          <span style={{fontWeight:'600'}}>Order Total:</span>
-                                            
-                                        </div>
-                                        <div className=" ">
-                                       <span style={{color:'red'}}> $234</span>
-                                        </div>
-                                     </div>
-                                
-                                    </div>
-                                   
+                                <div className=" ">
+                                    <span> Product Name</span>
                                 </div>
-                                <div className="Items-calcurteing-items">
-                                     
-                                    
-                                     <span > How shipping costs calculates?</span>
-                                    
-                                   </div>
                             </div>
-                         
-                    </div>
-        
-         
-          
-                    <div className="card-container"  style={{marginBottom:'40px'}}>
 
-                        <div className="oder-item-card">
-                        <button
+                            <div className="Items-thanku-view-page-thanks">
+                                <div className="">
+                                    <span> Price:</span>
+                                </div>
+                                <div className=" ">
+                                    <span style={{ fontWeight: "600" }}>
+                                        {" "}
+                                        $12.3
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="Items-thanku-view-page-thanks">
+                                <div className="">
+                                    <span> Shipping Handling:</span>
+                                </div>
+                                <div className=" ">
+                                    <span>$23</span>
+                                </div>
+                            </div>
+                            <div className="Items-thanku-view-page-thanks">
+                                <div className="">
+                                    <span>Total before tax:</span>
+                                </div>
+                                <div className=" ">
+                                    <span> $12.3</span>
+                                </div>
+                            </div>
+                            <div className="Items-thanku-view-page-thanks">
+                                <div className="">
+                                    <span>Estimated tax to be calculated:</span>
+                                </div>
+                                <div className=" ">
+                                    <span> 10</span>
+                                </div>
+                            </div>
+                            <hr></hr>
+                            <div className="Items-thanku-view-page-thanks">
+                                <div className="">
+                                    <span style={{ fontWeight: "600" }}>
+                                        Order Total:
+                                    </span>
+                                </div>
+                                <div className=" ">
+                                    <span style={{ color: "red" }}> $234</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="Items-calcurteing-items">
+                        <span> How shipping costs calculates?</span>
+                    </div>
+                </div>
+            </div>
+
+            <div className="card-container" style={{ marginBottom: "40px" }}>
+                <div className="oder-item-card">
+                    <button
                         className="shop-more-btn"
                         onClick={() => navigate("/")}
-                        
                     >
                         Shop more
                     </button>
-                        </div>
-                   
-                     
                 </div>
-                {/* <div className="card-container">
+            </div>
+            {/* <div className="card-container">
 
 <div className="oder-item-card">
 <button
@@ -374,8 +355,6 @@ Track Your Order
 
 
 </div> */}
-            </div>
-      
+        </div>
     );
 }
-

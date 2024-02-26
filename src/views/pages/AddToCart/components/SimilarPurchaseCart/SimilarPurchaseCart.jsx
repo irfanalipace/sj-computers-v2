@@ -173,9 +173,7 @@ const SimilarPurchaseCart = ({ products }) => {
                                 }));
                                 cartClickHandler(
                                     null,
-                                    `/cart/${params?.title}/dp/${
-                                        params?.productId
-                                    }/${1}`
+                                    `/cart/${params?.title}/dp/${params?.productId}/${1}`,
                                 );
                             }}
                         >
@@ -271,7 +269,7 @@ const SimilarPurchaseCart = ({ products }) => {
                                                     <Link
                                                         to={`${
                                                             new URL(
-                                                                product?.url
+                                                                product?.url,
                                                             ).pathname
                                                         }`}
                                                     >
@@ -292,14 +290,14 @@ const SimilarPurchaseCart = ({ products }) => {
                                                                     alt={product?.name
                                                                         ?.trim()
                                                                         ?.split(
-                                                                            " "
+                                                                            " ",
                                                                         )
                                                                         ?.slice(
                                                                             0,
-                                                                            9
+                                                                            9,
                                                                         )
                                                                         ?.join(
-                                                                            " "
+                                                                            " ",
                                                                         )}
                                                                 />
                                                             </div>

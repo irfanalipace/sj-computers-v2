@@ -25,7 +25,7 @@ const productSlice = createSlice({
         SET_PRODUCT_LOADING: (state, action) => {
             state.isLoading = true;
             let index = state.products.findIndex(
-                (item) => item.id === action.payload?.id
+                (item) => item.id === action.payload?.id,
             );
             if (index >= 0) {
                 state.products[index] = {
@@ -36,7 +36,7 @@ const productSlice = createSlice({
         },
         SET_PRODUCT_CLEAR_LOADING: (state, action) => {
             let index = state.products.findIndex(
-                (item) => item.id === action.payload.id
+                (item) => item.id === action.payload.id,
             );
             if (index >= 0) {
                 state.products[index] = {
@@ -62,8 +62,8 @@ const productSlice = createSlice({
 
         FILTER_PRODUCTS: (state, action) => {
             // debugger
-            state.filterTotal = action.payload.total
-            state.filterTo = action.payload.to
+            state.filterTotal = action.payload.total;
+            state.filterTo = action.payload.to;
             if (state.currentPage === 1)
                 state.filtersProduct = [...action.payload.data];
             else

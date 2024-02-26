@@ -23,7 +23,7 @@ const PasswordForm = () => {
                 password: { min: 6, max: 20 },
             },
         },
-        verifyPasswordFunction
+        verifyPasswordFunction,
     );
 
     const apiError = useSelector((state) => state.auth.apiError);

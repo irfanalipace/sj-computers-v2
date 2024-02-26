@@ -12,7 +12,7 @@ export function getOrderDetailsApi(page) {
             .then((response) => {
                 console.print(
                     "file: order.js | getOrderDetailsApi| response",
-                    response.data
+                    response.data,
                 );
                 resolve(response);
             })
@@ -32,7 +32,7 @@ export function OrderSearchApi(orderId) {
             .then((response) => {
                 console.print(
                     "file: order.js | OrderSearchApi| response",
-                    response.data
+                    response.data,
                 );
                 resolve(response.data);
             })
@@ -55,7 +55,7 @@ export function OrderListhApi() {
             .then((response) => {
                 console.print(
                     "file: order.js | order-list| response",
-                    response.data
+                    response.data,
                 );
                 resolve(response.data);
             })
@@ -72,7 +72,7 @@ export function getEstimatedDaysApi(data) {
             .then((response) => {
                 console.print(
                     "file: order.js | getEstimatedDays| response",
-                    response.data
+                    response.data,
                 );
                 resolve(response.data);
             })
@@ -98,7 +98,7 @@ export function validateCartItemsApi(data) {
             .then((response) => {
                 console.print(
                     "file: order.js | validateCartItems| response",
-                    response.data
+                    response.data,
                 );
                 resolve(response.data);
             })

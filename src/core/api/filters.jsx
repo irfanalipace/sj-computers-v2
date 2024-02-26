@@ -6,7 +6,7 @@ export function getFilterListApi() {
             .then((response) => {
                 console.print(
                     "file: category.js | getFilterListApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })

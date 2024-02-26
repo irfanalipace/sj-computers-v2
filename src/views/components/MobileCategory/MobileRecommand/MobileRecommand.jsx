@@ -23,7 +23,7 @@ const MobileRecommand = () => {
     return (
         <div className="dev-recommand">
             <div className="reommand-products-heading">
-                <p style={{fontSize: "18px"}}>Recommended Products</p>
+                <p style={{ fontSize: "18px" }}>Recommended Products</p>
             </div>
             {products &&
                 products.length > 0 &&
@@ -48,7 +48,7 @@ const MobileRecommand = () => {
                                         {product?.name?.length > 60
                                             ? `${product?.name.substring(
                                                   0,
-                                                  60
+                                                  60,
                                               )}...`
                                             : product?.name}
                                     </h6>

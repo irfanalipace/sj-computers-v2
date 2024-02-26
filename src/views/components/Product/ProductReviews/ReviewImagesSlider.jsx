@@ -144,7 +144,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData, isMobile }) {
                                                 handleOpenDialog(
                                                     image?.product_review_id,
                                                     image?.id,
-                                                    index
+                                                    index,
                                                 )
                                             }
                                             alt="review-image"

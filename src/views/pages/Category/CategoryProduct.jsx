@@ -34,7 +34,14 @@ const CategoryProducts = () => {
                 <CategoryVideoAndSlider />
             </Grid>
 
-            <Grid item sm={3} md={2} mt={2} py={2} className="d-none d-sm-block">
+            <Grid
+                item
+                sm={3}
+                md={2}
+                mt={2}
+                py={2}
+                className="d-none d-sm-block"
+            >
                 <CategorySidebar />
             </Grid>
 

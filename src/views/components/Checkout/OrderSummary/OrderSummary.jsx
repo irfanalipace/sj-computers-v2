@@ -99,7 +99,7 @@ function OrderSummary({
                                                 ? "$" +
                                                   parseFloat(
                                                       paymentData?.details
-                                                          ?.shipment_amount
+                                                          ?.shipment_amount,
                                                   ).toFixed(2)
                                                 : "$0"}
                                         </span>
@@ -176,7 +176,7 @@ function OrderSummary({
                                                 ? "$" +
                                                   parseFloat(
                                                       paymentData?.details
-                                                          ?.shipment_amount
+                                                          ?.shipment_amount,
                                                   ).toFixed(2)
                                                 : "$0"}
                                         </span>

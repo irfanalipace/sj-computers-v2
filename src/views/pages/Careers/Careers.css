@@ -14,7 +14,7 @@
     margin-top: 12px;
     margin-bottom: 12px;
 }
-.open-postiton-career span{
+.open-postiton-career span {
     font-size: 16px;
     line-height: 19px;
     font-weight: initial;
@@ -27,7 +27,7 @@
     min-height: calc(100vh - 548px);
 }
 /* Add this to your Careers.css file or create a new CSS file */
-.loading-overlay-career-container{
+.loading-overlay-career-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -38,21 +38,19 @@
     align-items: center;
     background-color: rgba(255, 255, 255, 0.8);
     z-index: 1000;
-  }
+}
 
-.updated-posted-career-data{
+.updated-posted-career-data {
     margin-top: 12px;
 }
-.card-mobile-screen-responsive-page-data-dev{
+.card-mobile-screen-responsive-page-data-dev {
     margin-top: 12px;
-    
 }
-.title-jobs-descriptions-array{
+.title-jobs-descriptions-array {
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
-  
 }
 .descriptions-paragraph-data {
     font-size: 15px;
@@ -118,7 +116,8 @@
     /* Primary */
 
     color: #333333;
-}.read-button-job-descriptions a{
+}
+.read-button-job-descriptions a {
     font-size: 13px;
 }
 
@@ -279,8 +278,7 @@
         /* width: 340px; */
         margin-left: 5px;
     }
-    
-    
+
     .career-mein-dev-data-descriptions {
         width: 99% !important;
         margin-left: 0px !important;
@@ -296,26 +294,31 @@
     }
     .text-aligin-career-menu:hover {
         display: none;
-    }.open-postiton-career{
+    }
+    .open-postiton-career {
         text-align: left;
-    }.updated-posted-career-data{
-    text-align: left;
-    }.posted-option-updated{
+    }
+    .updated-posted-career-data {
         text-align: left;
-    }.body-card-career-page-sj {
-     
+    }
+    .posted-option-updated {
+        text-align: left;
+    }
+    .body-card-career-page-sj {
         padding: 22px;
-    }.conatiner-data-view-mobile{
-      
-            /* width: 374px; */
-            /* text-align: end; */
-    
-    }.updated-posted-career-data{
+    }
+    .conatiner-data-view-mobile {
+        /* width: 374px; */
+        /* text-align: end; */
+    }
+    .updated-posted-career-data {
         margin-top: 9px;
-    }.open-postiton-career {
+    }
+    .open-postiton-career {
         margin-top: 9px;
         margin-bottom: 9px;
-    }.descriptions-paragraph-data {
+    }
+    .descriptions-paragraph-data {
         font-size: 13px;
         line-height: 21px;
     }

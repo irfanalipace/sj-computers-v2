@@ -29,7 +29,7 @@ const Register = () => {
                 confirmPassword: { min: 6, max: 20 },
             },
         },
-        registerFunction
+        registerFunction,
     );
 
     const dispatch = useDispatch();

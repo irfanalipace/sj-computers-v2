@@ -19,7 +19,7 @@ export const addItemToLocalCart = ({ cartItem, cartDetails }) => {
         if (cartDetails?.total) {
             window.localStorage.setItem(
                 "cartDetails",
-                JSON.stringify(cartDetails)
+                JSON.stringify(cartDetails),
             );
         }
     }
@@ -111,13 +111,13 @@ export const updateItemLocalProperty = (cartItem) => {
 
 export const compareLocalCartWithDBCart = (array_1, array_2) => {
     const missingObjects1 = array_1?.filter(
-        (obj1) => !array_2?.some((obj2) => obj1.id === obj2.id)
+        (obj1) => !array_2?.some((obj2) => obj1.id === obj2.id),
     );
     // missingObjects1 is an array of objects that are present in array_1 but not in array_2.
 
     const missingObjects2 = array_2?.filter(
         (obj2) =>
-            !obj2.notLocal && !array_1?.some((obj1) => obj2.id === obj1.id)
+            !obj2.notLocal && !array_1?.some((obj1) => obj2.id === obj1.id),
     );
     // missingObjects2 is an array of objects that are present in array_2 but not in array_1 or local objects of array_2.
 
@@ -173,12 +173,12 @@ export const calculateGuestCartPrice = (cart) => {
 export const setCartItemAfterError = (
     cart,
     itemsWithErrors,
-    isAuthenticated
+    isAuthenticated,
 ) => {
     let tempArray = [];
     itemsWithErrors?.forEach((errorItem) => {
         let cartItem = cart?.find(
-            (_item) => _item?.id === errorItem?.product_id
+            (_item) => _item?.id === errorItem?.product_id,
         );
         if (errorItem?.status) {
             tempArray.push(cartItem);

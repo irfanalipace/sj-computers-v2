@@ -1,4 +1,3 @@
-
 import ApiService from "@services/apiService";
 
 export function getSystemPagesApi(pageName) {
@@ -13,7 +12,7 @@ export function getSystemPagesApi(pageName) {
             .then((response) => {
                 console.print(
                     "file: system-pages.js | getSystemPagesApi| response",
-                    response.data
+                    response.data,
                 );
                 resolve(response);
             })

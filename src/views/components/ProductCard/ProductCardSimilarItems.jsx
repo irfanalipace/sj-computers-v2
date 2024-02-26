@@ -21,283 +21,101 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
 
   const isUpSmall = useMediaQuery(theme.breakpoints.up('md'));
 
-<<<<<<< HEAD
   const ProductDetails = () => (
     <div>
       {isUpSmall && (
-        <div className="similer-product-details">
-          <div className="dev-section-button-dev-card">
+        <div className='similer-items-product-details'>
+          <div className='dev-section-button-dev-card'>
             <Link to={productPath} style={{ textDecoration: 'none' }}>
-              <div className="similer-list-product-name">{product.name}</div>
+              <div className='product-name product-cart-name-mobile-screen'>
+                {product.name}
+              </div>
 
-              <div className=" d-sm-none product-prices">
+              <div className=' d-sm-none product-prices'>
                 {product.originalPrice && (
-                  <div className="product-original-price">
+                  <div className='product-original-price'>
                     ${product.originalPrice}
                   </div>
                 )}
-                <div className="product-neww-price">
+                <div className='product-new-price'>
                   <span>$</span>
                   {product?.price?.toString().split('.')[0]}
                   <sup>{product?.price?.toString().split('.')[1]}</sup>
                 </div>
               </div>
-=======
-    const ProductDetails = () => (
-        <div>
-            {isUpSmall && (
-                <div className="similer-product-details">
-                    <div className="dev-section-button-dev-card">
-                        <Link
-                            to={productPath}
-                            style={{ textDecoration: "none" }}
-                        >
-                            <div className="similer-list-product-name product-cart-name-mobile-screen">
-                                {product.name}
-                            </div>
 
-                            <div className=" d-sm-none product-prices">
-                                {product.originalPrice && (
-                                    <div className="product-original-price">
-                                        ${product.originalPrice}
-                                    </div>
-                                )}
-                                <div className="product-neww-price">
-                                    <span>$</span>
-                                    {product?.price?.toString().split(".")[0]}
-                                    <sup>
-                                        {
-                                            product?.price
-                                                ?.toString()
-                                                .split(".")[1]
-                                        }
-                                    </sup>
-                                </div>
-                            </div>
->>>>>>> c0b6e12852207fdee628bd5117f1b64a93cc5bdb
-
-              <div className="d-sm-none ">
-                <span className="dilvery-system-mobile-card-product">
+              <div className='d-sm-none '>
+                <span className='dilvery-system-mobile-card-product'>
                   Get it by{' '}
                   {orderEstimatedDelivery?.free_shipment_amount?.estimate_day}
                 </span>
-                <span className="span-get-data-pagragraph-card">
+                <span className='span-get-data-pagragraph-card'>
                   Free Delivery Available{' '}
                 </span>
                 <div></div>
               </div>
             </Link>
 
-            <div className="d-sm-none div-button-card-product">
+            <div className='d-sm-none div-button-card-product'>
               <AddCartComponents
                 product={product}
-                className="d-sm-none add-to-card-button-mobile-product"
+                className='d-sm-none add-to-card-button-mobile-product'
               />
             </div>
           </div>
 
           <Link to={productPath} style={{ textDecoration: 'none' }}>
-            <div className="d-none d-sm-block product-rating">
-              {/* <StarRatings
-                            rating={product.rating}
-                            starRatedColor="rgb(232, 126, 36)"
-                            numberOfStars={5}
-                            name="rating"
-                            isSelectable={false}
-                            starDimension={"20px"}
-                            starSpacing={"0"}
-                        /> */}
-              <div className="d-flex align-items-center">
+            <div className='d-none d-sm-block product-rating'>
+              <div className='d-flex align-items-center'>
                 <StarRatings
                   rating={product?.rating}
-                  starRatedColor="rgb(232, 126, 36)"
+                  starRatedColor='rgb(232, 126, 36)'
                   numberOfStars={5}
-                  name="rating"
+                  name='rating'
                   isSelectable={false}
                   starDimension={'20px'}
                   starSpacing={'0'}
                 />
-                <span className="ms-2" style={{ color: '#1270c4' }}>
+                <span className='ms-2' style={{ color: '#1270c4' }}>
                   {product?.total_review}
                   {' Ratings'}
                 </span>
               </div>
             </div>
           </Link>
-          <div className="sj-banner-similar-item best-choice-item-products">
+          <div className='sj-banner-similar-item best-choice-item-products'>
             <p>
               &ensp;SJ's <span style={{ color: '#E0BC00' }}>choice</span>
             </p>
-            <div className="for-styling"></div>
-            <div className="mt-1" style={{ fontSize: '14px' }}>
+            <div className='for-styling'></div>
+            <div className='mt-1' style={{ fontSize: '14px' }}>
               in
             </div>
           </div>
           <div
             style={{ fontSize: '12px', marginTop: '-12px' }}
-            className="mb-2 ">
+            className='mb-2 '>
             Computer Monitors
           </div>
 
-<<<<<<< HEAD
-          <div className="d-none d-sm-block product-prices mb-2">
+          <div className='d-none d-sm-block product-prices mb-2'>
             {product.originalPrice && (
-              <div className="product-original-price">
+              <div className='product-original-price'>
                 ${product.originalPrice}
               </div>
-=======
-                    <div className="d-none d-sm-block product-prices mb-2">
-                        {product.originalPrice && (
-                            <div className="product-original-price">
-                                ${product.originalPrice}
-                            </div>
-                        )}
-                        <span>$</span>
-                        {product?.price?.toString().split(".")[0]}.
-                        {product?.price?.toString().split(".")[1]}
-                    </div>
-                    <div style={{ fontSize: "12px" }} className="mt-2 mb-2">
-                        Get it as soon as{" "}
-                        <span
-                            style={{ fontWeight: "bold", lineHeight: "16px" }}
-                        >
-                            {
-                                orderEstimatedDelivery?.free_shipment_amount
-                                    ?.estimate_day
-                            }
-                        </span>
-                    </div>
-                    {product.deliveryCharges && (
-                        <div className="product-delivery-charges">
-                            <FontAwesomeIcon icon={faTruck} />{" "}
-                            {product.deliveryCharges}
-                        </div>
-                    )}
-                    {type === "recommended" && (
-                        <div style={{ fontSize: "12px", marginTop: "5px" }}>
-                            Free shipping by SJ
-                        </div>
-                    )}
-                </div>
-            )}
-            {!isUpSmall && (
-                <div className="product-details">
-                    <div className="dev-section-button-dev-card">
-                        <Link
-                            to={productPath}
-                            style={{ textDecoration: "none" }}
-                        >
-                            <div
-                                className="similer-list-product-name product-cart-name-mobile-screen"
-                                style={{ color: "#007185" }}
-                            >
-                                {product.name}
-                            </div>
-                        </Link>
-                        <div className="d-flex align-items-center">
-                            <StarRatings
-                                rating={product?.rating}
-                                starRatedColor="rgb(232, 126, 36)"
-                                numberOfStars={5}
-                                name="rating"
-                                isSelectable={false}
-                                starDimension={"20px"}
-                                starSpacing={"0"}
-                            />
-                            <span
-                                className="ms-2"
-                                style={{ color: "#1270c4", fontSize: "12px" }}
-                            >
-                                ({product?.total_review})
-                            </span>
-                        </div>
-
-                        <div className="d-sm-none div-button-card-product">
-                            <AddCartComponents
-                                product={product}
-                                className="d-sm-none add-to-card-button-mobile-product"
-                            />
-                        </div>
-                    </div>
-                    <div className="sj-banner-similar-item best-choice-item-products mt-2">
-                        <p>
-                            &ensp; &ensp;SJ's{" "}
-                            <span style={{ color: "#E0BC00" }}>choice</span>
-                        </p>
-                        <div className="for-styling"></div>
-                        <div className="mt-1" style={{ fontSize: "14px" }}>
-                            in
-                        </div>
-                    </div>
-                    <div
-                        style={{ fontSize: "12px", marginTop: "-12px" }}
-                        className="mb-2 "
-                    >
-                        Computer Monitors
-                    </div>
-                    <div className=" d-sm-none product-prices-mobile">
-                        {product.originalPrice && (
-                            <div>${product.originalPrice}</div>
-                        )}
-                        <div className="product-neww-price">
-                            <span
-                                style={{
-                                    fontSize: "11px",
-                                }}
-                            >
-                                $
-                            </span>
-                            {product?.price?.toString().split(".")[0]}.
-                            {product?.price?.toString().split(".")[1]}
-                        </div>
-                    </div>{" "}
-                    <div className="d-none d-sm-block product-prices mb-2">
-                        {product.originalPrice && (
-                            <div className="product-original-price">
-                                ${product.originalPrice}
-                            </div>
-                        )}
-                        <span>$</span>
-                        {product?.price?.toString().split(".")[0]}.
-                        {product?.price?.toString().split(".")[1]}
-                    </div>
-                    <div style={{ fontSize: "12px" }} className="mt-2 mb-2">
-                        Get it as soon as{" "}
-                        <span
-                            style={{ fontWeight: "bold", lineHeight: "16px" }}
-                        >
-                            {
-                                orderEstimatedDelivery?.free_shipment_amount
-                                    ?.estimate_day
-                            }
-                        </span>
-                    </div>
-                    {product.deliveryCharges && (
-                        <div className="product-delivery-charges">
-                            <FontAwesomeIcon icon={faTruck} />{" "}
-                            {product.deliveryCharges}
-                        </div>
-                    )}
-                    {type === "recommended" && (
-                        <div style={{ fontSize: "12px", marginTop: "5px" }}>
-                            Free Shipping by SJ
-                        </div>
-                    )}
-                </div>
->>>>>>> c0b6e12852207fdee628bd5117f1b64a93cc5bdb
             )}
             <span>$</span>
             {product?.price?.toString().split('.')[0]}.
             {product?.price?.toString().split('.')[1]}
           </div>
-          <div style={{ fontSize: '12px' }} className="mt-2 mb-2">
+          <div style={{ fontSize: '12px' }} className='mt-2 mb-2'>
             Get it as soon as{' '}
             <span style={{ fontWeight: 'bold', lineHeight: '16px' }}>
               {orderEstimatedDelivery?.free_shipment_amount?.estimate_day}
             </span>
           </div>
           {product.deliveryCharges && (
-            <div className="product-delivery-charges">
+            <div className='product-delivery-charges'>
               <FontAwesomeIcon icon={faTruck} /> {product.deliveryCharges}
             </div>
           )}
@@ -309,56 +127,56 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
         </div>
       )}
       {!isUpSmall && (
-        <div className="product-details">
-          <div className="dev-section-button-dev-card">
+        <div className='similer-items-product-details'>
+          <div className='dev-section-button-dev-card'>
             <Link to={productPath} style={{ textDecoration: 'none' }}>
               <div
-                className="similer-list-product-name product-cart-name-mobile-screen"
+                className='product-name product-cart-name-mobile-screen'
                 style={{ color: '#007185' }}>
                 {product.name}
               </div>
             </Link>
-            <div className="d-flex align-items-center">
+            <div className='d-flex align-items-center'>
               <StarRatings
                 rating={product?.rating}
-                starRatedColor="rgb(232, 126, 36)"
+                starRatedColor='rgb(232, 126, 36)'
                 numberOfStars={5}
-                name="rating"
+                name='rating'
                 isSelectable={false}
                 starDimension={'20px'}
                 starSpacing={'0'}
               />
               <span
-                className="ms-2"
+                className='ms-2'
                 style={{ color: '#1270c4', fontSize: '12px' }}>
                 ({product?.total_review})
               </span>
             </div>
 
-            <div className="d-sm-none div-button-card-product">
+            <div className='d-sm-none div-button-card-product'>
               <AddCartComponents
                 product={product}
-                className="d-sm-none add-to-card-button-mobile-product"
+                className='d-sm-none add-to-card-button-mobile-product'
               />
             </div>
           </div>
-          <div className="sj-banner-similar-item best-choice-item-products mt-2">
+          <div className='sj-banner-similar-item best-choice-item-products mt-2'>
             <p>
               &ensp; &ensp;SJ's <span style={{ color: '#E0BC00' }}>choice</span>
             </p>
-            <div className="for-styling"></div>
-            <div className="mt-1" style={{ fontSize: '14px' }}>
+            <div className='for-styling'></div>
+            <div className='mt-1' style={{ fontSize: '14px' }}>
               in
             </div>
           </div>
           <div
             style={{ fontSize: '12px', marginTop: '-12px' }}
-            className="mb-2 ">
+            className='mb-2 '>
             Computer Monitors
           </div>
-          <div className=" d-sm-none product-prices-mobile">
+          <div className=' d-sm-none product-prices-mobile'>
             {product.originalPrice && <div>${product.originalPrice}</div>}
-            <div className="product-neww-price">
+            <div className='product-new-price'>
               <span
                 style={{
                   fontSize: '11px',
@@ -369,9 +187,9 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
               {product?.price?.toString().split('.')[1]}
             </div>
           </div>{' '}
-          <div className="d-none d-sm-block product-prices mb-2">
+          <div className='d-none d-sm-block product-prices mb-2'>
             {product.originalPrice && (
-              <div className="product-original-price">
+              <div className='product-original-price'>
                 ${product.originalPrice}
               </div>
             )}
@@ -379,14 +197,14 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
             {product?.price?.toString().split('.')[0]}.
             {product?.price?.toString().split('.')[1]}
           </div>
-          <div style={{ fontSize: '12px' }} className="mt-2 mb-2">
+          <div style={{ fontSize: '12px' }} className='mt-2 mb-2'>
             Get it as soon as{' '}
             <span style={{ fontWeight: 'bold', lineHeight: '16px' }}>
               {orderEstimatedDelivery?.free_shipment_amount?.estimate_day}
             </span>
           </div>
           {product.deliveryCharges && (
-            <div className="product-delivery-charges">
+            <div className='product-delivery-charges'>
               <FontAwesomeIcon icon={faTruck} /> {product.deliveryCharges}
             </div>
           )}
@@ -403,7 +221,7 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
     <div className={` product   ${inGrid && 'product-grid'}`}>
       <Link to={productPath}>
         <div className={` ${inGrid ? 'product-image-grid' : ''} product-image`}>
-          <div className="image-wrapper">
+          <div className='image-wrapper'>
             <LazyLoadImage
               width={'100%'}
               height={'100%'}

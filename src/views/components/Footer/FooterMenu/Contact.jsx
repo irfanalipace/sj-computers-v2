@@ -46,7 +46,7 @@ const Contact = () => {
                 message: { min: 5, max: 1000 },
             },
         },
-        postMessage
+        postMessage,
     );
 
     useEffect(() => {

@@ -5,48 +5,46 @@
     margin: 0;
     padding: 0;
     justify-content: center;
-  
 }
 li.policy-listitem {
     margin-left: 30px;
-}.policy-background-color{
+}
+.policy-background-color {
     background: #002549;
     padding-bottom: 10px;
 }
-.policy-listitem a{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 600;
-font-size: 13px;
-line-height: 18px;
+.policy-listitem a {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 18px;
 
-color: #FFFFFF;
+    color: #ffffff;
 }
-.text-color-all-text{
+.text-color-all-text {
     color: white;
 }
 .card-policy-coponents {
-  
     width: 245px;
     height: 207px;
     max-width: 100%;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 15px 15px 0px 0px;
 }
-.text-color-all-text{
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 12px;
-line-height: 144%;
-/* or 17px */
+.text-color-all-text {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 144%;
+    /* or 17px */
 
+    /* Primary */
 
-/* Primary */
-
-color: #333333;
+    color: #333333;
 }
-.text-span-policy-dev{
+.text-span-policy-dev {
     padding: 10px;
 }
 .policy-card-order-button {
@@ -54,10 +52,10 @@ color: #333333;
     border: none;
     width: 226px;
     height: 33px;
-max-width: 100%;
-    background: #38C056;
+    max-width: 100%;
+    background: #38c056;
     border-radius: 8px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
@@ -66,12 +64,12 @@ max-width: 100%;
     left: 0px !important;
 }
 .privacy-policy-text-dev {
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 700;
     font-size: 12px;
     line-height: 19px;
-    color: #FFFFFF;
+    color: #ffffff;
     margin-left: 5px;
 }
 .cart-dev-policy-section {
@@ -81,22 +79,22 @@ max-width: 100%;
 .policy-item-data li {
     line-height: 20px;
     color: white;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     /* line-height: 109%; */
-    color: #FFFFFF;
+    color: #ffffff;
 }
 .data-ul-list-itel-paragraph {
     line-height: 20px;
     color: white;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     /* line-height: 109%; */
-    color: #FFFFFF;
+    color: #ffffff;
 }
 .policyset-container-dev {
     padding-top: 33px;
@@ -104,15 +102,15 @@ max-width: 100%;
 }
 .conditional-granti {
     color: white;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 700;
     font-size: 12px;
-}    .card-policy-coponents img {
-  
+}
+.card-policy-coponents img {
     max-width: 100%;
-
-}.text-dev-section-dev{
+}
+.text-dev-section-dev {
     margin-left: -22px;
 }
 .conditional-granti-text {
@@ -123,12 +121,12 @@ max-width: 100%;
 .policy-items-cart-sction2-dev {
     color: white;
     margin-top: 28px;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     /* line-height: 12px !important; */
-    color: #FFFFFF;
+    color: #ffffff;
 }
 .line-height-dev-ul {
     line-height: 17px;
@@ -142,10 +140,10 @@ max-width: 100%;
     padding-top: 20px;
     max-width: 100%;
 }
-.order-button-policy{
+.order-button-policy {
     padding-top: 32px;
 }
-.text-dev-section-dev a{
+.text-dev-section-dev a {
     color: white;
 }
 
@@ -207,98 +205,100 @@ max-width: 100%;
     
 } */
 @media screen and (max-width: 1003px) {
-   
-.menuBar-policy {
+    .menuBar-policy {
         display: flex;
         overflow-x: auto;
         width: 100%;
         padding: 5px;
- 
-      }
-      
-      
-      .policy-menu-item-list {
+    }
+
+    .policy-menu-item-list {
         display: flex;
         flex-wrap: nowrap;
         padding: 0;
         margin: 0;
         list-style-type: none;
-      }
-      
-      .policy-listitem {
+    }
+
+    .policy-listitem {
         width: 100%;
         /* padding: 4px 21px; */
         width: 157px;
-    }li.policy-listitem {
+    }
+    li.policy-listitem {
         margin-left: 0px;
     }
-      
-      .text-decoration-none {
+
+    .text-decoration-none {
         text-decoration: none;
-      } .cart-dev-policy-section {
+    }
+    .cart-dev-policy-section {
         padding-top: 19px;
-    }.text-color-all-text {
-        font-family: 'Inter';
+    }
+    .text-color-all-text {
+        font-family: "Inter";
         font-style: normal;
         font-weight: 400;
         font-size: 12px;
         line-height: 144%;
         color: #333333;
         margin-top: 8px;
-    }.text-dev-section-dev {
+    }
+    .text-dev-section-dev {
         margin-left: 0px;
-    } .policyset-container-dev {
+    }
+    .policyset-container-dev {
         padding: 17px;
         padding-top: 0px;
         margin-left: 0px;
     }
-  
-    
+
     .cart-dev-policy-section {
-     
         padding-bottom: 12px;
-    }.card-policy-coponents {
+    }
+    .card-policy-coponents {
         width: 450px;
         max-width: 100%;
-  
-    }.order-button-policy {
+    }
+    .order-button-policy {
         padding-top: 14px;
-    }.policy-card-order-button{
-        width:372px;
-    }.text-span-policy-dev {
+    }
+    .policy-card-order-button {
+        width: 372px;
+    }
+    .text-span-policy-dev {
         padding: 22px;
     }
     .card-policy-coponents img {
         width: 450px;
         max-width: 100%;
-  
-    }.margin-text-policy-text{
+    }
+    .margin-text-policy-text {
         margin-left: 33px;
     }
-      
-      .text-color {
+
+    .text-color {
         color: #000000;
-      }
-      
-      .hover-effect-sets-topbar:hover {
+    }
+
+    .hover-effect-sets-topbar:hover {
         /* Add desired hover effect styles */
-        color: #FFFFFF;
-      }
-      
+        color: #ffffff;
+    }
 }
 
 .hover-text-color-policy-comp {
-  
     color: white !important;
 }
-@media screen and (max-width:600px) {
-    
+@media screen and (max-width: 600px) {
     .cart-dev-policy-section {
         padding-top: 14px !important;
-    }.dev-p-h-section-dev-data h1 {
+    }
+    .dev-p-h-section-dev-data h1 {
         font-size: 20px;
         margin-bottom: -18px;
-    }.policyset-container-dev {
+    }
+    .policyset-container-dev {
         padding: 17px;
         padding-top: 0px;
         margin-left: 0px;

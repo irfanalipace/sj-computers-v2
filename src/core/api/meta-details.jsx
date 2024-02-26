@@ -6,7 +6,7 @@ export function metaDetailsApi(url) {
             .then((response) => {
                 console.print(
                     "file: meta-details.js | meta-details| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })

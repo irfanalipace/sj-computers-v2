@@ -18,7 +18,7 @@ export const CheckOutCard = ({ product, isMobile }) => {
     const handleShow = () => setShow(!show);
 
     const orderEstimatedDelivery = useSelector(
-        (state) => state.orders.orderEstimatedDelivery
+        (state) => state.orders.orderEstimatedDelivery,
     );
 
     useEffect(() => {

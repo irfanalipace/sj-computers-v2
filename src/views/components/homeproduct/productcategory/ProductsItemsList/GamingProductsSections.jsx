@@ -36,10 +36,10 @@ const GamingProductsSections = ({
                                                 index === 1
                                                     ? gamingProducts1
                                                     : index === 2
-                                                    ? gamingProducts2
-                                                    : index === 3
-                                                    ? gamingProducts3
-                                                    : gamingProducts3 // Replace 'defaultImage' with a fallback image or handle the case accordingly
+                                                      ? gamingProducts2
+                                                      : index === 3
+                                                        ? gamingProducts3
+                                                        : gamingProducts3 // Replace 'defaultImage' with a fallback image or handle the case accordingly
                                             }
                                         />
                                     )}

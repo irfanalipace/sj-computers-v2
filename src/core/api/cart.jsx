@@ -6,7 +6,7 @@ export function addToCartApi(data) {
             .then((response) => {
                 console.print(
                     "file: cart.js | addToCartApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -23,7 +23,7 @@ export function addListToCartApi(data) {
             .then((response) => {
                 console.print(
                     "file: cart.js | addListToCartApi| response",
-                    response
+                    response,
                 );
                 console.print("response", response);
                 resolve(response);
@@ -43,7 +43,7 @@ export function fetchCartApi(email) {
             .then((response) => {
                 console.print(
                     "file: cart.js | fetchCartApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -62,7 +62,7 @@ export function deleteItemApi({ id }) {
             .then((response) => {
                 console.print(
                     "file: cart.js | deleteItemApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -82,7 +82,7 @@ export function updateQuantityApi({ id, difference }) {
             .then((response) => {
                 console.print(
                     "file: cart.js | updateQuantityApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -99,7 +99,7 @@ export function getDetailsApi() {
             .then((response) => {
                 console.print(
                     "file: cart.js | getDetailsApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })
@@ -116,7 +116,7 @@ export function clearCartApi() {
             .then((response) => {
                 console.print(
                     "file: cart.js | clearCartApi| response",
-                    response
+                    response,
                 );
                 resolve(response);
             })

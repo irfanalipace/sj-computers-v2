@@ -49,7 +49,7 @@ const ProductNewReviews = () => {
         setOverlayLoader(true);
         try {
             const filteredProduct = products.find(
-                (product) => product?.asin === productId
+                (product) => product?.asin === productId,
             );
 
             if (filteredProduct) {
@@ -194,7 +194,9 @@ const ProductNewReviews = () => {
             ) : (
                 <form onSubmit={handleSubmit}>
                     <div className="container add-new-review">
-                        <div className="d-none d-sm-block"><Breadcrumb routes={breadcrumbRoutes} /></div>
+                        <div className="d-none d-sm-block">
+                            <Breadcrumb routes={breadcrumbRoutes} />
+                        </div>
                         <div className="row d-none d-sm-flex">
                             <div className="col-lg-3 col-md-3 col-sm-6 col-12">
                                 <div className="review-heading-image-product">
@@ -296,13 +298,26 @@ const ProductNewReviews = () => {
                         </div>
                         {/* For Mobile */}
                         <div className="d-block d-sm-none">
-                         <div className="d-flex" style={{borderBottom: '2px solid #CDCDCD', padding: "10px", alignItems: "center"}}>
-                            <div className="col-lg-3 col-md-3 col-sm-6 col-3">
+                            <div
+                                className="d-flex"
+                                style={{
+                                    borderBottom: "2px solid #CDCDCD",
+                                    padding: "10px",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <div className="col-lg-3 col-md-3 col-sm-6 col-3">
                                     <div className="review-heading-image-product">
-                                        <img src={productImages} alt="Product" />
+                                        <img
+                                            src={productImages}
+                                            alt="Product"
+                                        />
                                     </div>
                                 </div>
-                                <div className="col-lg-9 col-md-9 col-sm-6 col-9" style={{paddingLeft: "10px"}}>
+                                <div
+                                    className="col-lg-9 col-md-9 col-sm-6 col-9"
+                                    style={{ paddingLeft: "10px" }}
+                                >
                                     <div className="row">
                                         <div className="col-md-11">
                                             <div className="review-heading">
@@ -314,99 +329,150 @@ const ProductNewReviews = () => {
                                         </div>
                                     </div>
                                     <div className="d-sm-flex d-flex">
-                                        <div style={{display: "flex", justifyContent: "start"}}>
-                                        <Rating
-                                            required
-                                            style={{fontSize: '16px', marginRight: '5px'}}
-                                            name="simple-controlled"
-                                            value={value}
-                                            onChange={(event, newValue) => {
-                                                setValue(newValue);
+                                        <div
+                                            style={{
+                                                display: "flex",
+                                                justifyContent: "start",
                                             }}
-                                        />
+                                        >
+                                            <Rating
+                                                required
+                                                style={{
+                                                    fontSize: "16px",
+                                                    marginRight: "5px",
+                                                }}
+                                                name="simple-controlled"
+                                                value={value}
+                                                onChange={(event, newValue) => {
+                                                    setValue(newValue);
+                                                }}
+                                            />
                                         </div>
                                         <div>
-                                        <div className="d-flex align-items-center" style={{justifyContent: "flex-end", paddingLeft: "5px",}}>
-                                            <div className="d-flex">
-                                                <div className="check-rating-star-review ms-sm-3">
-                                                    <FontAwesomeIcon
-                                                        icon={faCheck}
-                                                    />
-                                                </div>
-                                                <div className="posted-policy-review" style={{display: "flex", alignItems: "center"}}> 
-                                                    <p className="lh-1 mb-0" style={{fontSize: "8px"}}>
-                                                        Posted publicly as
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                            <div className="check-rating-star-review-name align-items-baseline" style={{fontSize: "8px"}}>
-                                                <div className="lh-1" style={{textWrap: "nowrap"}}>
-                                                    {userName} |
-                                                </div>
-                                                <div className="data-clear-button-review lh-1">
-                                                    <button
-                                                        type="button"
-                                                        onClick={handleClear}
-                                                        className="lh-1"
+                                            <div
+                                                className="d-flex align-items-center"
+                                                style={{
+                                                    justifyContent: "flex-end",
+                                                    paddingLeft: "5px",
+                                                }}
+                                            >
+                                                <div className="d-flex">
+                                                    <div className="check-rating-star-review ms-sm-3">
+                                                        <FontAwesomeIcon
+                                                            icon={faCheck}
+                                                        />
+                                                    </div>
+                                                    <div
+                                                        className="posted-policy-review"
+                                                        style={{
+                                                            display: "flex",
+                                                            alignItems:
+                                                                "center",
+                                                        }}
                                                     >
-                                                        Clear
-                                                    </button>
+                                                        <p
+                                                            className="lh-1 mb-0"
+                                                            style={{
+                                                                fontSize: "8px",
+                                                            }}
+                                                        >
+                                                            Posted publicly as
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    className="check-rating-star-review-name align-items-baseline"
+                                                    style={{ fontSize: "8px" }}
+                                                >
+                                                    <div
+                                                        className="lh-1"
+                                                        style={{
+                                                            textWrap: "nowrap",
+                                                        }}
+                                                    >
+                                                        {userName} |
+                                                    </div>
+                                                    <div className="data-clear-button-review lh-1">
+                                                        <button
+                                                            type="button"
+                                                            onClick={
+                                                                handleClear
+                                                            }
+                                                            className="lh-1"
+                                                        >
+                                                            Clear
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        </div>
-
                                     </div>
                                 </div>
-                                </div>
-
                             </div>
-                                <div className="col-12" style={{padding: '10px', borderBottom: "2px solid #CDCDCD"}}>
-                                    <div className="text-area-rating-review-list">
-                                        <div style={{fontWeight: 500, margin: '3px 0px'}}>Add a written review</div>
-                                        {/* <div>You mention durability, sturdiness or sleep mode</div> */}
-                                        <textarea
-                                            required
-                                            name="text"
-                                            style={{height: "10vh", borderColor: "#CDCDCD", fontSize:"14px", padding: "10px"}}
-                                            value={text}
-                                            onChange={(e) => handleText(e)}
-                                            placeholder="Write comments here..."
-                                        ></textarea>
+                            <div
+                                className="col-12"
+                                style={{
+                                    padding: "10px",
+                                    borderBottom: "2px solid #CDCDCD",
+                                }}
+                            >
+                                <div className="text-area-rating-review-list">
+                                    <div
+                                        style={{
+                                            fontWeight: 500,
+                                            margin: "3px 0px",
+                                        }}
+                                    >
+                                        Add a written review
                                     </div>
+                                    {/* <div>You mention durability, sturdiness or sleep mode</div> */}
+                                    <textarea
+                                        required
+                                        name="text"
+                                        style={{
+                                            height: "10vh",
+                                            borderColor: "#CDCDCD",
+                                            fontSize: "14px",
+                                            padding: "10px",
+                                        }}
+                                        value={text}
+                                        onChange={(e) => handleText(e)}
+                                        placeholder="Write comments here..."
+                                    ></textarea>
                                 </div>
+                            </div>
 
-                                <div className="align-items-center d-flex flex-column flex-sm-row justify-content-sm-end preview-button-review" style={{padding: "10px"}}>
-                                    <button
-                                        type="button"
-                                        className="preview-product-list-button"
-                                        onClick={handlePreviewDialog}
-                                        style={{width: '100%'}}
-                                        >
-                                        Preview
-                                    </button>{" "}
-                                    <button
-                                        type="button"
-                                        className="camera-button-review"
-                                        onClick={handleDialogBox}
-                                        style={{width: '100%'}}
-                                    >
-                                        <FontAwesomeIcon icon={faCamera} /> Add
-                                        Photos
-                                    </button>{" "}
-                                    <button
-                                        type="submit"
-                                        className="submit-review-button"
-                                        disabled={isLoading}
-                                        style={{width: '100%'}}
-                                    >
-                                        {isLoading ? (
-                                            <LoaderComponent />
-                                        ) : (
-                                            "Submit"
-                                        )}
-                                    </button>
-                                </div>
+                            <div
+                                className="align-items-center d-flex flex-column flex-sm-row justify-content-sm-end preview-button-review"
+                                style={{ padding: "10px" }}
+                            >
+                                <button
+                                    type="button"
+                                    className="preview-product-list-button"
+                                    onClick={handlePreviewDialog}
+                                    style={{ width: "100%" }}
+                                >
+                                    Preview
+                                </button>{" "}
+                                <button
+                                    type="button"
+                                    className="camera-button-review"
+                                    onClick={handleDialogBox}
+                                    style={{ width: "100%" }}
+                                >
+                                    <FontAwesomeIcon icon={faCamera} /> Add
+                                    Photos
+                                </button>{" "}
+                                <button
+                                    type="submit"
+                                    className="submit-review-button"
+                                    disabled={isLoading}
+                                    style={{ width: "100%" }}
+                                >
+                                    {isLoading ? <LoaderComponent /> : "Submit"}
+                                </button>
+                            </div>
                         </div>
                     </div>
                     {dialogBoxOpen && (

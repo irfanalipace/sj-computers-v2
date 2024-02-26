@@ -18,7 +18,7 @@ const ProductCardLayout2 = ({
     productView,
 }) => {
     const orderEstimatedDelivery = useSelector(
-        (state) => state.orders.orderEstimatedDelivery
+        (state) => state.orders.orderEstimatedDelivery,
     );
 
     let productUrl = generatePath(product?.url, searchParams);
@@ -310,37 +310,38 @@ const ProductCardLayout2 = ({
                                     style={{
                                         fontWeight: "700",
                                         padding: "4px 0px",
-                                        fontSize:"12px",
-                                        color:"#000000"
-
+                                        fontSize: "12px",
+                                        color: "#000000",
                                     }}
                                 >
                                     Sonic
                                 </div>
                             </div>
                             <div className="extra-details-item">
-                                <div className="model-data-products">Display</div>
+                                <div className="model-data-products">
+                                    Display
+                                </div>
                                 <div
-                                        style={{
-                                            fontWeight: "700",
-                                            padding: "4px 0px",
-                                            fontSize:"12px",
-                                            color:"#000000"
-    
-                                        }}
+                                    style={{
+                                        fontWeight: "700",
+                                        padding: "4px 0px",
+                                        fontSize: "12px",
+                                        color: "#000000",
+                                    }}
                                 >
                                     32"
                                 </div>
                             </div>
                             <div className="extra-details-item">
-                                <div className="model-data-products">Company</div>
+                                <div className="model-data-products">
+                                    Company
+                                </div>
                                 <div
-                                       style={{
+                                    style={{
                                         fontWeight: "700",
                                         padding: "4px 0px",
-                                        fontSize:"12px",
-                                        color:"#000000"
-
+                                        fontSize: "12px",
+                                        color: "#000000",
                                     }}
                                 >
                                     Sonic
@@ -349,12 +350,11 @@ const ProductCardLayout2 = ({
                             <div className="extra-details-item">
                                 <div className="model-data-products">Size</div>
                                 <div
-                                       style={{
+                                    style={{
                                         fontWeight: "700",
                                         padding: "4px 0px",
-                                        fontSize:"12px",
-                                        color:"#000000"
-
+                                        fontSize: "12px",
+                                        color: "#000000",
                                     }}
                                 >
                                     Multiple
@@ -423,7 +423,13 @@ const ProductCardLayout2 = ({
     );
 
     return (
-        <div className={` product ${inGrid && "product-grid"}`} style={{ flexDirection: productView == "list" ? "row" : "", border: productView == "list" ? "none" : ""}}>
+        <div
+            className={` product ${inGrid && "product-grid"}`}
+            style={{
+                flexDirection: productView == "list" ? "row" : "",
+                border: productView == "list" ? "none" : "",
+            }}
+        >
             <Link
                 //to={`${new URL(product?.url).pathname}`}
                 to={productUrl}
@@ -444,12 +450,25 @@ const ProductCardLayout2 = ({
                     </div>
                 )} */}
                     {/* {inGrid && <div className="product-offer-label" style={{backgroundColor: product?.total_review > 0 ? "#52AC66" : "#1860A3", top: productView == "list" ? "-9px" : "" }}>{product?.total_review > 0 ? "Top Seller" : "New" }</div>} */}
-                    {inGrid && <div className="product-offer-label" style={{backgroundColor: product?.total_review > 0 ? "#52AC66" : "#1860A3", top: productView == "list" ? "" : "" }}>{product?.total_review > 0 ? "Top Seller" : "New" }</div>}
+                    {inGrid && (
+                        <div
+                            className="product-offer-label"
+                            style={{
+                                backgroundColor:
+                                    product?.total_review > 0
+                                        ? "#52AC66"
+                                        : "#1860A3",
+                                top: productView == "list" ? "" : "",
+                            }}
+                        >
+                            {product?.total_review > 0 ? "Top Seller" : "New"}
+                        </div>
+                    )}
 
                     <div className="image-wrapper-layout2">
                         <LazyLoadImage
                             // width={"100%"}
-                            style={{maxHeight: "100%", maxWidth: '100%'}}
+                            style={{ maxHeight: "100%", maxWidth: "100%" }}
                             // height={"100%"}
                             src={product.image}
                             alt={product?.name
