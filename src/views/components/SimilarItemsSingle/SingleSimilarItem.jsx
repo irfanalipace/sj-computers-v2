@@ -111,7 +111,6 @@ const SingleSimilarItem = ({
       </div>
     </div>
   );
-  console.log('dddd', isMobile);
   return (
     <div
       className='similar-item-one ms-2 ms-md-auto mt-1 mt-md-5'
