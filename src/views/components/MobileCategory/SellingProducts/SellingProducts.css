@@ -1,123 +1,123 @@
 .seeling-product-p {
-    margin-top: 12px;
-    margin-bottom: 12px;
-    margin-left: 6px;
-    font-weight: bold;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  margin-left: 6px;
+  font-weight: bold;
 }
 .seeling-product-p span {
-    font-weight: bold;
-    font-size: 15px;
+  font-weight: bold;
+  font-size: 15px;
 }
 .img-dev-selling-products {
-    max-width: 100%;
-    width: 238px;
+  max-width: 100%;
+  width: 238px;
 }
 .image-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .img-dev-selling-products {
-    max-width: 100%;
+  max-width: 100%;
 }
 .dev-image-name {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 8px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 8px;
 }
 .dev-image-name span {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .slick-next:before {
-    color: rebeccapurple;
-    content: "→";
+  color: rebeccapurple;
+  content: '→';
 }
 
 .recommund-dev-slider-sections-opps {
-    position: relative;
+  position: relative;
 }
 
 .recommund-dev-slider-sections-opps .swiper-button-prev {
-    color: black;
-    background: #ffffff;
-    padding: 40px 0px;
-    position: absolute;
-    top: 50%;
-    translate: -50% -50%;
-    box-shadow: 1px 1px 0px lightgrey;
+  color: black;
+  background: #ffffff;
+  padding: 40px 0px;
+  position: absolute;
+  top: 50%;
+  translate: -50% -50%;
+  box-shadow: 1px 1px 0px lightgrey;
 }
 .recommund-dev-slider-sections-opps .swiper-button-next {
-    color: black;
-    background: #ffffff;
-    padding: 40px 10px;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    translate: 0% -50%;
-    box-shadow: -1px 1px 0px lightgrey;
+  color: black;
+  background: #ffffff;
+  padding: 40px 10px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  translate: 0% -50%;
+  box-shadow: -1px 1px 0px lightgrey;
 }
 .recommund-dev-slider-sections-opps .swiper-button-prev:after,
 .swiper-rtl .swiper-button-next:after {
-    content: "prev";
-    font-size: 21px;
+  content: 'prev';
+  font-size: 21px;
 }
 .recommund-dev-slider-sections-opps .swiper-button-next:after,
 .swiper-rtl .swiper-button-prev:after {
-    content: "next";
-    font-size: 21px;
+  content: 'next';
+  font-size: 21px;
 }
 .slick-prev:before,
 .slick-next:before {
-    margin-top: -4px !important;
-    z-index: 99 !important;
-    font-family: "slick";
-    font-size: 41px !important;
-    color: gray !important;
-    line-height: 1;
-    opacity: 0.75;
+  margin-top: -4px !important;
+  z-index: 99 !important;
+  font-family: 'slick';
+  font-size: 41px !important;
+  color: gray !important;
+  line-height: 1;
+  opacity: 0.75;
 
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    width: 35px;
-    height: 80px;
-    top: 39px;
-    left: 1320px;
-    padding: 27px, 10px, 27.4px, 10.48px;
-    border-radius: 0px, 3px, 3px, 0px !important;
-    angle: -180 deg;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 35px;
+  height: 80px;
+  top: 39px;
+  left: 1320px;
+  padding: 27px, 10px, 27.4px, 10.48px;
+  border-radius: 0px, 3px, 3px, 0px !important;
+  angle: -180 deg;
 }
 .slick-next {
-    right: 0px !important;
+  right: 0px !important;
 }
 .slick-prev,
 .slick-next {
-    font-size: 0;
-    z-index: 99;
-    line-height: 0;
-    /* left: 0px; */
-    position: absolute;
-    top: 50%;
-    display: block;
-    width: 20px;
-    height: 20px;
-    padding: 0;
-    -webkit-transform: translate(0, -50%);
-    -ms-transform: translate(0, -50%);
-    transform: translate(0, -50%);
-    cursor: pointer;
-    color: transparent;
-    border: none;
-    outline: none;
-    background: transparent;
+  font-size: 0;
+  z-index: 99;
+  line-height: 0;
+  /* left: 0px; */
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  -webkit-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  cursor: pointer;
+  color: transparent;
+  border: none;
+  outline: none;
+  background: transparent;
 }
 
 @media screen and (max-width: 575px) {
-    .recommund-dev-slider-sections-opps .swiper-button-prev {
-        display: none;
-    }
-    .recommund-dev-slider-sections-opps .swiper-button-next {
-        display: none;
-    }
+  .recommund-dev-slider-sections-opps .swiper-button-prev {
+    display: none;
+  }
+  .recommund-dev-slider-sections-opps .swiper-button-next {
+    display: none;
+  }
 }

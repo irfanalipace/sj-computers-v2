@@ -20,12 +20,14 @@ function RefurbishedSection() {
       sx={{ borderTop: '1px solid lightgray' }}
       textAlign={'center'}
       rowGap={'15px'}
-      py={3}>
+      py={3}
+    >
       <Grid item lg={12} md={12} sm={12} xs={12} textAlign={'center'}>
         <Typography
           variant='h5'
           fontSize={!isUpSmall && '16px'}
-          fontWeight={'bolder'}>
+          fontWeight={'bolder'}
+        >
           {' '}
           About SJ Computers?{' '}
         </Typography>
@@ -37,7 +39,8 @@ function RefurbishedSection() {
         sm={12}
         mb={'10px'}
         xs={12}
-        mt={!isUpSmall && -2}>
+        mt={!isUpSmall && -2}
+      >
         <Typography variant='body2' fontSize={!isUpSmall && '12px'}>
           SJ Computers stands as your premier source for reconditioned desktops,
           laptops, and computers, all backed by the comprehensive SJ Computers'
@@ -56,7 +59,8 @@ function RefurbishedSection() {
           variant='p'
           fontWeight={'bolder'}
           mb={1}
-          fontSize={!isUpSmall && '14px'}>
+          fontSize={!isUpSmall && '14px'}
+        >
           Affordability Redefined{' '}
         </Typography>
         <Typography variant='body2' fontSize={!isUpSmall && '12px'}>
@@ -79,7 +83,8 @@ function RefurbishedSection() {
           variant='p'
           fontWeight={'bolder'}
           mb={1}
-          fontSize={!isUpSmall && '14px'}>
+          fontSize={!isUpSmall && '14px'}
+        >
           Dependable Quality{' '}
         </Typography>
         <Typography variant='body2' fontSize={!isUpSmall && '12px'}>
@@ -102,7 +107,8 @@ function RefurbishedSection() {
           variant='p'
           fontWeight={'bolder'}
           mb={1}
-          fontSize={!isUpSmall && '14px'}>
+          fontSize={!isUpSmall && '14px'}
+        >
           Significant Investment{' '}
         </Typography>
         <Typography variant='body2' fontSize={!isUpSmall && '12px'}>
@@ -122,7 +128,8 @@ function RefurbishedSection() {
         px={2}
         sx={innerBox}
         pb={!isUpSmall && 2}
-        style={{ borderBottom: !isUpSmall && '2px solid #CDCDCD' }}>
+        style={{ borderBottom: !isUpSmall && '2px solid #CDCDCD' }}
+      >
         <img
           style={{ marginBottom: '15px' }}
           width={'60px'}
@@ -133,7 +140,8 @@ function RefurbishedSection() {
           variant='p'
           fontWeight={'bolder'}
           mb={1}
-          fontSize={!isUpSmall && '14px'}>
+          fontSize={!isUpSmall && '14px'}
+        >
           Reputable Assurance{' '}
         </Typography>
         <Typography variant='body2' fontSize={!isUpSmall && '12px'}>
@@ -150,7 +158,8 @@ function RefurbishedSection() {
           <Typography
             variant='p'
             fontWeight={'bold'}
-            fontSize={!isUpSmall && '14px'}>
+            fontSize={!isUpSmall && '14px'}
+          >
             What can I expect to receive with my Refurbished purchase online?
           </Typography>
         </Grid>
@@ -158,7 +167,8 @@ function RefurbishedSection() {
           <Typography
             variant='body1'
             fontSize={!isUpSmall && '12px'}
-            lineHeight={!isUpSmall && '15px'}>
+            lineHeight={!isUpSmall && '15px'}
+          >
             The completely refurbished product with its necessary accessories.
           </Typography>
         </Grid>
@@ -169,7 +179,8 @@ function RefurbishedSection() {
           <Typography
             variant='p'
             fontWeight={'bold'}
-            fontSize={!isUpSmall && '14px'}>
+            fontSize={!isUpSmall && '14px'}
+          >
             In what condition can I expect my refurbished product to be?
           </Typography>
         </Grid>
@@ -177,7 +188,8 @@ function RefurbishedSection() {
           <Typography
             variant='body1'
             fontSize={!isUpSmall && '12px'}
-            lineHeight={!isUpSmall && '15px'}>
+            lineHeight={!isUpSmall && '15px'}
+          >
             The refurbished product will be in complete working condition.
           </Typography>
         </Grid>

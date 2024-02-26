@@ -1,66 +1,66 @@
 .quantity-container p {
-    font-size: 12px;
-    font-weight: 500;
-    margin: 5px 0;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 5px 0;
 }
 
 .quantity-inner {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .quantity-button {
-    width: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    height: 25px;
-    border: 1px solid lightgray;
-    background-color: lightgray;
-    color: white;
-    padding-bottom: 3px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  height: 25px;
+  border: 1px solid lightgray;
+  background-color: lightgray;
+  color: white;
+  padding-bottom: 3px;
 }
 
 .quantity-container input {
-    border: 1px solid lightgray;
-    height: 25px;
-    width: 30px;
-    text-align: center;
-    font-size: 12px;
+  border: 1px solid lightgray;
+  height: 25px;
+  width: 30px;
+  text-align: center;
+  font-size: 12px;
 }
 .quantity-select-wrapper {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .quantity-select-wrapper::before {
-    content: "Qty:";
-    position: absolute;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 0px 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    padding-right: 5px; /* Space between adornment and select box */
+  content: 'Qty:';
+  position: absolute;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0px 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-right: 5px; /* Space between adornment and select box */
 }
 .quantity-select {
-    border-radius: 10px;
-    border: 1px solid #d5d9d9;
-    background: #eee;
-    width: 79px;
-    outline: none;
-    padding-left: 30px;
-    height: 25px;
-    font-size: 12px;
+  border-radius: 10px;
+  border: 1px solid #d5d9d9;
+  background: #eee;
+  width: 79px;
+  outline: none;
+  padding-left: 30px;
+  height: 25px;
+  font-size: 12px;
 }
 .quantity-container input::-webkit-outer-spin-button,
 .quantity-container input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-.quantity-container input[type="number"] {
-    -moz-appearance: textfield; /* Firefox */
+.quantity-container input[type='number'] {
+  -moz-appearance: textfield; /* Firefox */
 }

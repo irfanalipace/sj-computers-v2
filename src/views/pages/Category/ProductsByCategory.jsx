@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
-import FilteredProducts from "./FilteredProducts";
+import FilteredProducts from './FilteredProducts';
 
 const ProductsByCategory = ({ toggleFilter }) => {
-    const { categorySlug } = useParams();
-    const categories = useSelector((state) => state.category.categories);
-    const [category, setCategory] = useState(null);
+  const { categorySlug } = useParams();
+  const categories = useSelector(state => state.category.categories);
+  const [category, setCategory] = useState(null);
 
-    useEffect(() => {
-        const _category = categories.find((c) => c.slug === categorySlug);
-        setCategory(_category);
-    }, [categories, categorySlug]);
+  useEffect(() => {
+    const _category = categories.find(c => c.slug === categorySlug);
+    setCategory(_category);
+  }, [categories, categorySlug]);
 
-    return <FilteredProducts category={category} toggleFilter={toggleFilter} />;
+  return <FilteredProducts category={category} toggleFilter={toggleFilter} />;
 };
 
 export default ProductsByCategory;

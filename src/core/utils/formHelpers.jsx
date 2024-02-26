@@ -1,57 +1,57 @@
 export const ErrorMessages = {
-    otp_invalid: "OTP is invalid",
-    email_invalid: "Email address is invalid",
-    field_required: "{fieldName} is required",
-    field_too_short: "{fieldName} must be at least {minLength} characters long",
-    field_too_long: "{fieldName} must be at most {maxLength} characters long",
-    password_mismatch: "Password and Confirm Password fields are not same",
+  otp_invalid: 'OTP is invalid',
+  email_invalid: 'Email address is invalid',
+  field_required: '{fieldName} is required',
+  field_too_short: '{fieldName} must be at least {minLength} characters long',
+  field_too_long: '{fieldName} must be at most {maxLength} characters long',
+  password_mismatch: 'Password and Confirm Password fields are not same',
 };
 
 const FIELD_ENUMS = {
-    name: "Name",
-    email: "Email",
-    password: "Password",
-    confirmPassword: "Confirm Password",
-    message: "Message",
-    otp: "OTP",
+  name: 'Name',
+  email: 'Email',
+  password: 'Password',
+  confirmPassword: 'Confirm Password',
+  message: 'Message',
+  otp: 'OTP',
 };
 
 export function validateForm(values, { fieldLengths }) {
-    let errors = {};
-    if (values.email && !/\S+@\S+\.\S+/.test(values.email)) {
-        errors.email = ErrorMessages.email_invalid;
-    }
-    if (values.otp && !/^\d{4}$/.test(values.otp)) {
-        errors.otp = ErrorMessages.otp_invalid;
-    }
+  let errors = {};
+  if (values.email && !/\S+@\S+\.\S+/.test(values.email)) {
+    errors.email = ErrorMessages.email_invalid;
+  }
+  if (values.otp && !/^\d{4}$/.test(values.otp)) {
+    errors.otp = ErrorMessages.otp_invalid;
+  }
 
-    for (let fieldName in fieldLengths) {
-        let minLength = fieldLengths[fieldName]?.min;
-        let maxLength = fieldLengths[fieldName]?.max;
-        if (!values[fieldName]) {
-            errors[fieldName] = ErrorMessages.field_required;
-        } else if (minLength && values[fieldName].length < minLength) {
-            errors[fieldName] = ErrorMessages.field_too_short;
-        } else if (maxLength && values[fieldName].length > maxLength) {
-            errors[fieldName] = ErrorMessages.field_too_long;
-        }
-        if (errors[fieldName]) {
-            errors[fieldName] = errors[fieldName]
-                .replace("{fieldName}", FIELD_ENUMS[fieldName] || fieldName)
-                .replace("{minLength}", minLength)
-                .replace("{maxLength}", maxLength);
-        }
+  for (let fieldName in fieldLengths) {
+    let minLength = fieldLengths[fieldName]?.min;
+    let maxLength = fieldLengths[fieldName]?.max;
+    if (!values[fieldName]) {
+      errors[fieldName] = ErrorMessages.field_required;
+    } else if (minLength && values[fieldName].length < minLength) {
+      errors[fieldName] = ErrorMessages.field_too_short;
+    } else if (maxLength && values[fieldName].length > maxLength) {
+      errors[fieldName] = ErrorMessages.field_too_long;
     }
-    if (values.confirmPassword && values.password !== values.confirmPassword) {
-        errors.confirmPassword = ErrorMessages.password_mismatch;
+    if (errors[fieldName]) {
+      errors[fieldName] = errors[fieldName]
+        .replace('{fieldName}', FIELD_ENUMS[fieldName] || fieldName)
+        .replace('{minLength}', minLength)
+        .replace('{maxLength}', maxLength);
     }
-    return errors;
+  }
+  if (values.confirmPassword && values.password !== values.confirmPassword) {
+    errors.confirmPassword = ErrorMessages.password_mismatch;
+  }
+  return errors;
 }
 
-export const validatePhoneNumber = (number) => {
-    return /^\+?\d{0,3}\d{0,10}$/.test(number);
+export const validatePhoneNumber = number => {
+  return /^\+?\d{0,3}\d{0,10}$/.test(number);
 };
 
-export const validateZipCode = (code) => {
-    return /^\d{0,5}$/.test(code);
+export const validateZipCode = code => {
+  return /^\d{0,5}$/.test(code);
 };

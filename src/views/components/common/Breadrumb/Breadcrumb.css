@@ -1,32 +1,32 @@
 .breadcrumb {
-    margin: 20px 0;
-    padding: 0 20px;
-    list-style: none;
+  margin: 20px 0;
+  padding: 0 20px;
+  list-style: none;
 }
 
 .breadcrumb .breadcrumb-item {
-    display: inline-block;
-    font-weight: 400;
-    font-size: 14px;
+  display: inline-block;
+  font-weight: 400;
+  font-size: 14px;
 }
 
 .breadcrumb .breadcrumb-link {
-    text-decoration: none;
-    color: #333333;
+  text-decoration: none;
+  color: #333333;
 }
 
 .breadcrumb .breadcrumb-link:hover,
 .breadcrumb .breadcrumb-link:focus {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
-    content: "";
+  content: '';
 }
 
 .breadcrumb .breadcrumb-link.active {
-    color: #e87e24;
+  color: #e87e24;
 }
 
 .breadcrumb .breadcrumb-separator {
-    margin-left: 10px;
+  margin-left: 10px;
 }

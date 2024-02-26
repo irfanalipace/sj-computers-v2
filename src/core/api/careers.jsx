@@ -1,4 +1,4 @@
-import ApiService from "@services/apiService";
+import ApiService from '@services/apiService';
 
 // const dummyData = {
 //     data: {
@@ -15,57 +15,57 @@ import ApiService from "@services/apiService";
 //     },
 // };
 export function getJobDetails(id) {
-    return new Promise((resolve, reject) => {
-        ApiService.get(`/career`, id)
-            .then((response) => {
-                console.print("file: jobs.js | jobs| response", response);
-                resolve(response);
-            })
-            .catch((e) => {
-                console.print("Console Log: : error jobs", e);
-                reject(e);
-            });
-        // setTimeout(() => {
-        //     resolve(dummyData);
-        // }, 2000);
-    });
+  return new Promise((resolve, reject) => {
+    ApiService.get(`/career`, id)
+      .then(response => {
+        console.print('file: jobs.js | jobs| response', response);
+        resolve(response);
+      })
+      .catch(e => {
+        console.print('Console Log: : error jobs', e);
+        reject(e);
+      });
+    // setTimeout(() => {
+    //     resolve(dummyData);
+    // }, 2000);
+  });
 }
 
 export function getAllJobs() {
-    return new Promise((resolve, reject) => {
-        ApiService.get(`/careers`)
-            .then((response) => {
-                console.print("file: jobs.js | jobs| response", response);
-                resolve(response);
-            })
-            .catch((e) => {
-                console.print("Console Log: : error jobs", e);
-                reject(e);
-            });
-        // setTimeout(() => {
-        //     resolve(dummyData);
-        // }, 2000);
-    });
+  return new Promise((resolve, reject) => {
+    ApiService.get(`/careers`)
+      .then(response => {
+        console.print('file: jobs.js | jobs| response', response);
+        resolve(response);
+      })
+      .catch(e => {
+        console.print('Console Log: : error jobs', e);
+        reject(e);
+      });
+    // setTimeout(() => {
+    //     resolve(dummyData);
+    // }, 2000);
+  });
 }
 export function CreateCareer(CareerData) {
-    const formData = new FormData();
-    for (const key in CareerData) {
-        if (Array.isArray(CareerData[key])) {
-            CareerData[key].forEach((item, index) => {
-                formData.append(`${key}[${index}]`, item);
-            });
-        } else {
-            formData.append(key, CareerData[key]);
-        }
+  const formData = new FormData();
+  for (const key in CareerData) {
+    if (Array.isArray(CareerData[key])) {
+      CareerData[key].forEach((item, index) => {
+        formData.append(`${key}[${index}]`, item);
+      });
+    } else {
+      formData.append(key, CareerData[key]);
     }
-    console.print("formData", formData);
-    return new Promise((resolve, reject) => {
-        ApiService.post("/store-career-applications", formData)
-            .then((response) => {
-                resolve(response);
-            })
-            .catch((e) => {
-                reject(e);
-            });
-    });
+  }
+  console.print('formData', formData);
+  return new Promise((resolve, reject) => {
+    ApiService.post('/store-career-applications', formData)
+      .then(response => {
+        resolve(response);
+      })
+      .catch(e => {
+        reject(e);
+      });
+  });
 }

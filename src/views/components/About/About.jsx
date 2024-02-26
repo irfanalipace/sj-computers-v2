@@ -1,25 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./About.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './About.css';
 
-import meetingset from "@images/blog/meeting2image.png";
-import whoareimage from "@images/blog/whoarewe.png";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import meetingset from '@images/blog/meeting2image.png';
+import whoareimage from '@images/blog/whoarewe.png';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const HeadereLinks = [
-    { path: "/", title: "About Us" },
-    { path: "/", title: "What We Do?" },
-    { path: "/term_services", title: "Return & Refund" },
-    { path: "/term_services", title: "Shipping Policy" },
-    { path: "/term_services", title: "Terms of Services" },
-    { path: "/term_services", title: "Privacy Policy" },
-    { path: "/", title: "Subscribe" },
+  { path: '/', title: 'About Us' },
+  { path: '/', title: 'What We Do?' },
+  { path: '/term_services', title: 'Return & Refund' },
+  { path: '/term_services', title: 'Shipping Policy' },
+  { path: '/term_services', title: 'Terms of Services' },
+  { path: '/term_services', title: 'Privacy Policy' },
+  { path: '/', title: 'Subscribe' },
 ];
 
 const About = () => {
-    return (
-        <>
-            {/* <>
+  return (
+    <>
+      {/* <>
                         <div className="">
                             <div className="row">
                                 <div>
@@ -235,8 +235,8 @@ const About = () => {
                     
                        
                     </> */}
-        </>
-    );
+    </>
+  );
 };
 
 export default About;

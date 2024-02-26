@@ -1,120 +1,120 @@
 .dropdown-payment {
-    position: relative;
-    padding: 2px;
-    margin: 3px 0 0;
+  position: relative;
+  padding: 2px;
+  margin: 3px 0 0;
 }
 .login-cart-button {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    color: #ffffff;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
 }
 .login-cart-button:focus {
-    outline: none;
-    border: 1px solid white;
-    color: white;
+  outline: none;
+  border: 1px solid white;
+  color: white;
 }
 .product-section-cart {
-    background: white;
-    position: absolute;
-    z-index: 4;
-    width: 210px;
-    height: 120px;
-    padding: 2px;
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
-    text-align: center;
-    left: -60px;
-    padding: 10px;
-    border-radius: 5px;
+  background: white;
+  position: absolute;
+  z-index: 4;
+  width: 210px;
+  height: 120px;
+  padding: 2px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  text-align: center;
+  left: -60px;
+  padding: 10px;
+  border-radius: 5px;
 }
 .forgot-password {
-    text-align: center !important;
-    font-size: 21px !important;
+  text-align: center !important;
+  font-size: 21px !important;
 }
 .ul-list {
-    font-weight: 400;
-    font-size: 12px;
-    color: #333333;
-    list-style: none;
-    margin-left: -27px !important;
-    text-align: initial;
+  font-weight: 400;
+  font-size: 12px;
+  color: #333333;
+  list-style: none;
+  margin-left: -27px !important;
+  text-align: initial;
 }
 
 .ul-list li {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .your-list {
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    color: #000000;
-    margin-left: 16px;
-    text-align: left;
-    margin-top: 4px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  margin-left: 16px;
+  text-align: left;
+  margin-top: 4px;
 }
 .your-account {
-    margin-left: -109px;
+  margin-left: -109px;
 
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    color: #000000;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
 }
 .create-list {
-    font-weight: 400;
-    font-size: 12px;
+  font-weight: 400;
+  font-size: 12px;
 
-    color: #333333;
-    text-align: left;
-    margin-left: 18px;
+  color: #333333;
+  text-align: left;
+  margin-left: 18px;
 }
 
 .login-button {
-    height: 56px;
-    width: 263px;
-    margin: 4px;
+  height: 56px;
+  width: 263px;
+  margin: 4px;
 }
 .new-customer {
-    font-size: 15px !important;
-    margin-bottom: 0;
+  font-size: 15px !important;
+  margin-bottom: 0;
 }
 .dropdown-payment button {
-    background-color: #00305e;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    color: #ffffff;
-    border: none;
-    width: 100%;
-    text-align: center;
+  background-color: #00305e;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+  border: none;
+  width: 100%;
+  text-align: center;
 }
 .dropdown-paymenr button:hover {
-    background-color: #3e8e41;
+  background-color: #3e8e41;
 }
 .hr-list-head {
-    margin: 14px;
-    color: inherit;
-    border: 0;
-    border-top: 1px solid;
-    opacity: 0.25;
+  margin: 14px;
+  color: inherit;
+  border: 0;
+  border-top: 1px solid;
+  opacity: 0.25;
 }
 .my-list-hr {
-    border-left: 1px solid #eeeeee;
+  border-left: 1px solid #eeeeee;
 }
 .login-register-cart-button {
-    box-sizing: border-box;
-    width: 80% !important;
-    height: 40px;
-    left: 139px;
-    top: 22px;
-    background: radial-gradient(
-        323.37% 27804.13% at 0% 51.52%,
-        #52ac66 0%,
-        rgba(82, 172, 102, 0) 100%
-    );
-    border: 1px solid #6f6f6f;
-    border-radius: 3px;
-    margin-bottom: 10px;
+  box-sizing: border-box;
+  width: 80% !important;
+  height: 40px;
+  left: 139px;
+  top: 22px;
+  background: radial-gradient(
+    323.37% 27804.13% at 0% 51.52%,
+    #52ac66 0%,
+    rgba(82, 172, 102, 0) 100%
+  );
+  border: 1px solid #6f6f6f;
+  border-radius: 3px;
+  margin-bottom: 10px;
 }

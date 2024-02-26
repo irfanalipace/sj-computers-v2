@@ -28,7 +28,8 @@ const SingleSimilarItem = ({
           {/* <Link to={`${new URL(product?.url).pathname}`}> */}
           <Link
             to={productPath}
-            style={{ textDecoration: 'none', color: '#007185' }}>
+            style={{ textDecoration: 'none', color: '#007185' }}
+          >
             <div className='similer-items-product-name product-cart-name-mobile-screen'>
               {product?.name}
             </div>
@@ -118,7 +119,8 @@ const SingleSimilarItem = ({
         padding: isMobile ? '5px' : '20px 20px 50px 20px',
         border: isMobile ? 'none' : '',
         height: isMobile ? 'auto' : '',
-      }}>
+      }}
+    >
       {!isMobile ? (
         <>
           <h3>{heading}</h3>
@@ -144,7 +146,8 @@ const SingleSimilarItem = ({
             fontWeight={700}
             fontSize={'16px'}
             lineHeight={'24px'}
-            color={'#0F1111'}>
+            color={'#0F1111'}
+          >
             {heading}
           </Typography>
           <Stack direction={'row'} alignItems={'start'}>
@@ -161,7 +164,8 @@ const SingleSimilarItem = ({
                 fontWeight={400}
                 fontSize={'14px'}
                 lineHeight={'20px'}
-                color={'#007185'}>
+                color={'#007185'}
+              >
                 <div className={'product-name-similar-items'}>
                   {product?.name}
                 </div>
@@ -181,7 +185,8 @@ const SingleSimilarItem = ({
                   fontWeight={400}
                   fontSize={'14px'}
                   lineHeight={'20px'}
-                  color={'#007185'}>{`(${product?.total_review})`}</Typography>
+                  color={'#007185'}
+                >{`(${product?.total_review})`}</Typography>
               </Stack>
               <Stack spacing={1} direction={'row'} alignItems={'center'}>
                 <Typography
@@ -189,7 +194,8 @@ const SingleSimilarItem = ({
                   fontWeight={400}
                   fontSize={'14px'}
                   lineHeight={'20px'}
-                  color={'#B12704'}>{`${
+                  color={'#B12704'}
+                >{`${
                   product?.price?.toString().split('.')[0]
                 }.${product?.price?.toString().split('.')[1]}`}</Typography>
                 <span>&</span>
@@ -198,7 +204,8 @@ const SingleSimilarItem = ({
                   fontWeight={700}
                   fontSize={'13px'}
                   lineHeight={'20px'}
-                  color={'#0F1111'}>{` FREE Shipping`}</Typography>
+                  color={'#0F1111'}
+                >{` FREE Shipping`}</Typography>
               </Stack>
             </Stack>
           </Stack>
@@ -207,7 +214,8 @@ const SingleSimilarItem = ({
               mt: 2,
               border: 'none',
               borderTop: '2px solid #CDCDCD',
-            }}></Box>
+            }}
+          ></Box>
         </Box>
       )}
     </div>

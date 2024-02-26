@@ -1,26 +1,23 @@
-import React from "react";
+import React from 'react';
 
 function HoverColorChange({
-    children,
-    hoverColor = "#ffa41c",
-    defaultColor = "black",
+  children,
+  hoverColor = '#ffa41c',
+  defaultColor = 'black',
 }) {
-    function changeBackground(e) {
-        e.target.style.cursor = "pointer";
-        e.target.style.color = hoverColor;
-    }
-    function changeBackgroundLeave(e) {
-        e.target.style.color = defaultColor;
-    }
+  function changeBackground(e) {
+    e.target.style.cursor = 'pointer';
+    e.target.style.color = hoverColor;
+  }
+  function changeBackgroundLeave(e) {
+    e.target.style.color = defaultColor;
+  }
 
-    return (
-        <div
-            onMouseLeave={changeBackgroundLeave}
-            onMouseOver={changeBackground}
-        >
-            {children}
-        </div>
-    );
+  return (
+    <div onMouseLeave={changeBackgroundLeave} onMouseOver={changeBackground}>
+      {children}
+    </div>
+  );
 }
 
 export default HoverColorChange;

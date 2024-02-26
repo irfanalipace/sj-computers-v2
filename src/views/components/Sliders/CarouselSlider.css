@@ -1,16 +1,16 @@
 .img-slider-cursule {
-    width: 188px;
-    margin: 17px;
+  width: 188px;
+  margin: 17px;
 }
 .product-section-add {
-    width: 97%;
-    height: 240px;
-    background-color: white;
-    /* padding: 20px; */
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
-    text-align: center;
-    margin: 29px;
-    top: 2;
-    left: 2;
+  width: 97%;
+  height: 240px;
+  background-color: white;
+  /* padding: 20px; */
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  text-align: center;
+  margin: 29px;
+  top: 2;
+  left: 2;
 }

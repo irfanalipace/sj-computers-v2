@@ -1,61 +1,61 @@
 .suggested-item-container {
-    display: flex;
-    justify-content: flex-start;
-    margin: 15px 0px;
+  display: flex;
+  justify-content: flex-start;
+  margin: 15px 0px;
 }
 .suggested-item-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .suggested-item-image div {
-    margin-right: 12px;
-    height: 88px;
-    width: 100px;
+  margin-right: 12px;
+  height: 88px;
+  width: 100px;
 }
 .product-cart-name-mobile-screen {
-    margin-left: -12px;
+  margin-left: -12px;
 }
 .suggested-items-content span {
-    /* width: 10px; */
-    font-size: 12px;
-    /* padding-left: 12px; */
-    margin-top: 12px;
+  /* width: 10px; */
+  font-size: 12px;
+  /* padding-left: 12px; */
+  margin-top: 12px;
 }
 .suggested-items {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .item-price {
-    font-size: 14px;
-    color: #b12704;
-    font-weight: 600;
-    margin-top: 10px;
+  font-size: 14px;
+  color: #b12704;
+  font-weight: 600;
+  margin-top: 10px;
 }
 .suggested-item-btn {
-    border: 1px solid #318243;
-    color: #318243;
-    font-size: 10px;
-    font-weight: 500;
-    background-color: #fff;
-    padding: 7px;
-    border-radius: 4px;
+  border: 1px solid #318243;
+  color: #318243;
+  font-size: 10px;
+  font-weight: 500;
+  background-color: #fff;
+  padding: 7px;
+  border-radius: 4px;
 }
 @media screen and (max-width: 768px) {
-    .hide-on-mobile {
-        display: none;
-    }
-    .item-price {
-        color: #000;
-        margin-top: 0px;
-        font-size: 14px;
-        font-weight: 600;
-    }
-    .suggested-item-image {
-        /* background-color: #f0f8ff; */
-        /* padding: 20px;
+  .hide-on-mobile {
+    display: none;
+  }
+  .item-price {
+    color: #000;
+    margin-top: 0px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .suggested-item-image {
+    /* background-color: #f0f8ff; */
+    /* padding: 20px;
         margin-right: 20px; */
-    }
+  }
 }

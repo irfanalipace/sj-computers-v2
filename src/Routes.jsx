@@ -1,491 +1,491 @@
-import React, { Suspense } from "react";
-import { Navigate, useRoutes, useLocation, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { Suspense } from 'react';
+import { Navigate, useRoutes, useLocation, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // const Home = React.lazy(() => import("@pages/Home/Home"));
-const Home = React.lazy(() => import("@pages/Home/Home"));
-const LoginForm = React.lazy(() => import("@pages/Auth/LoginForm"));
-const Register = React.lazy(() => import("@pages/Auth/Register"));
+const Home = React.lazy(() => import('@pages/Home/Home'));
+const LoginForm = React.lazy(() => import('@pages/Auth/LoginForm'));
+const Register = React.lazy(() => import('@pages/Auth/Register'));
 const ForgetPassword = React.lazy(
-    () => import("@pages/Auth/ForgetPassword/ForgetPassword"),
+  () => import('@pages/Auth/ForgetPassword/ForgetPassword'),
 );
 const ResetPassword = React.lazy(
-    () => import("@pages/Auth/ForgetPassword/ResetPassword"),
+  () => import('@pages/Auth/ForgetPassword/ResetPassword'),
 );
-const Emailsent = React.lazy(() => import("@pages/Auth/EmailSent"));
-const Product = React.lazy(() => import("@pages/Product/Product"));
-const ProductList = React.lazy(() => import("@pages/Product/ProductsBySearch"));
-const Category = React.lazy(() => import("@pages/Category/Category"));
+const Emailsent = React.lazy(() => import('@pages/Auth/EmailSent'));
+const Product = React.lazy(() => import('@pages/Product/Product'));
+const ProductList = React.lazy(() => import('@pages/Product/ProductsBySearch'));
+const Category = React.lazy(() => import('@pages/Category/Category'));
 const CategoryProduct = React.lazy(
-    () => import("@pages/Category/CategoryProduct"),
+  () => import('@pages/Category/CategoryProduct'),
 );
-const Account = React.lazy(() => import("@pages/Account/Account"));
-const Profile = React.lazy(() => import("@pages/Account/Profile"));
-const Security = React.lazy(() => import("@pages/Account/Security"));
-const Order = React.lazy(() => import("@pages/Account/Orders"));
-const Cart = React.lazy(() => import("@components/ShoppingCart/Cart"));
-const Checkout = React.lazy(() => import("@pages/Checkout/Checkout"));
+const Account = React.lazy(() => import('@pages/Account/Account'));
+const Profile = React.lazy(() => import('@pages/Account/Profile'));
+const Security = React.lazy(() => import('@pages/Account/Security'));
+const Order = React.lazy(() => import('@pages/Account/Orders'));
+const Cart = React.lazy(() => import('@components/ShoppingCart/Cart'));
+const Checkout = React.lazy(() => import('@pages/Checkout/Checkout'));
 const MobileCheckout = React.lazy(
-    () => import("@pages/Checkout/MobileCheckout"),
+  () => import('@pages/Checkout/MobileCheckout'),
 );
-const Test = React.lazy(() => import("@pages/Test/Test"));
-const ThankYou = React.lazy(() => import("@pages/Thankyou/Thankyou"));
-const RefundOrder = React.lazy(() => import("@pages/RefundOrder/RefundOrder"));
-const Careers = React.lazy(() => import("@pages/Careers/Careers"));
-const CareerView = React.lazy(() => import("@pages/Careers/CareerView"));
-const TrackOrder = React.lazy(() => import("@pages/TrackOrder"));
+const Test = React.lazy(() => import('@pages/Test/Test'));
+const ThankYou = React.lazy(() => import('@pages/Thankyou/Thankyou'));
+const RefundOrder = React.lazy(() => import('@pages/RefundOrder/RefundOrder'));
+const Careers = React.lazy(() => import('@pages/Careers/Careers'));
+const CareerView = React.lazy(() => import('@pages/Careers/CareerView'));
+const TrackOrder = React.lazy(() => import('@pages/TrackOrder'));
 const Contact = React.lazy(
-    () => import("@components/Footer/FooterMenu/Contact"),
+  () => import('@components/Footer/FooterMenu/Contact'),
 );
-const Policy = React.lazy(() => import("@pages/Policy/Policy"));
-const SkuPage = React.lazy(() => import("@pages/SKUTables/SkuPage"));
+const Policy = React.lazy(() => import('@pages/Policy/Policy'));
+const SkuPage = React.lazy(() => import('@pages/SKUTables/SkuPage'));
 
-const BlogList = React.lazy(() => import("@pages/Blog/BlogsList"));
-const BlogDetails = React.lazy(() => import("@pages/Blog/BlogDetails"));
-import NotFound from "@pages/NotFound/NotFound";
+const BlogList = React.lazy(() => import('@pages/Blog/BlogsList'));
+const BlogDetails = React.lazy(() => import('@pages/Blog/BlogDetails'));
+import NotFound from '@pages/NotFound/NotFound';
 
-import Loader from "@common/LoaderComponent/LoaderComponent";
-import PageWrapper from "@components/PageWrapper/PageWrapper";
+import Loader from '@common/LoaderComponent/LoaderComponent';
+import PageWrapper from '@components/PageWrapper/PageWrapper';
 
-const AddToCart = React.lazy(() => import("./views/pages/AddToCart/AddToCart"));
+const AddToCart = React.lazy(() => import('./views/pages/AddToCart/AddToCart'));
 const ProductNewReviews = React.lazy(
-    () => import("./views/components/Product/ProductReviews/ProductNewReviews"),
+  () => import('./views/components/Product/ProductReviews/ProductNewReviews'),
 );
-const CategoryBlogs = React.lazy(() => import("@pages/Blog/CategoryBlogs"));
-const ApplyNow = React.lazy(() => import("./views/pages/Careers/ApplyNow"));
+const CategoryBlogs = React.lazy(() => import('@pages/Blog/CategoryBlogs'));
+const ApplyNow = React.lazy(() => import('./views/pages/Careers/ApplyNow'));
 // import Layout from "./views/pages/PageLayout/Layout";
 
 const Router = () => {
-    const routes = [
-        {
-            path: "/",
-            element: (
-                <Suspense fallback={<Loader />}>
-                    <PageWrapper>
-                        <Home />
-                    </PageWrapper>
-                </Suspense>
-            ),
-        },
-        {
-            path: "/login",
-            element: (
-                <AuthRoute>
-                    <PageWrapper>
-                        <LoginForm />
-                    </PageWrapper>
-                </AuthRoute>
-            ),
-        },
-        {
-            path: "/register",
-            element: (
-                <AuthRoute>
-                    <PageWrapper>
-                        <Register />
-                    </PageWrapper>
-                </AuthRoute>
-            ),
-        },
-        {
-            path: "/email-sent",
-            element: (
-                <AuthRoute>
-                    <PageWrapper>
-                        <Emailsent />
-                    </PageWrapper>
-                </AuthRoute>
-            ),
-        },
-        {
-            path: "/forget-password",
-            element: (
-                <AuthRoute>
-                    <PageWrapper>
-                        <ForgetPassword />
-                    </PageWrapper>
-                </AuthRoute>
-            ),
-        },
-        {
-            path: "/forgot_password",
-            element: (
-                <AuthRoute>
-                    <PageWrapper>
-                        <ResetPassword />
-                    </PageWrapper>
-                </AuthRoute>
-            ),
-        },
-        {
-            path: "/:title/dp/:productId",
-            element: (
-                <PageWrapper>
-                    <Product />
-                </PageWrapper>
-            ),
-        },
+  const routes = [
+    {
+      path: '/',
+      element: (
+        <Suspense fallback={<Loader />}>
+          <PageWrapper>
+            <Home />
+          </PageWrapper>
+        </Suspense>
+      ),
+    },
+    {
+      path: '/login',
+      element: (
+        <AuthRoute>
+          <PageWrapper>
+            <LoginForm />
+          </PageWrapper>
+        </AuthRoute>
+      ),
+    },
+    {
+      path: '/register',
+      element: (
+        <AuthRoute>
+          <PageWrapper>
+            <Register />
+          </PageWrapper>
+        </AuthRoute>
+      ),
+    },
+    {
+      path: '/email-sent',
+      element: (
+        <AuthRoute>
+          <PageWrapper>
+            <Emailsent />
+          </PageWrapper>
+        </AuthRoute>
+      ),
+    },
+    {
+      path: '/forget-password',
+      element: (
+        <AuthRoute>
+          <PageWrapper>
+            <ForgetPassword />
+          </PageWrapper>
+        </AuthRoute>
+      ),
+    },
+    {
+      path: '/forgot_password',
+      element: (
+        <AuthRoute>
+          <PageWrapper>
+            <ResetPassword />
+          </PageWrapper>
+        </AuthRoute>
+      ),
+    },
+    {
+      path: '/:title/dp/:productId',
+      element: (
+        <PageWrapper>
+          <Product />
+        </PageWrapper>
+      ),
+    },
 
-        {
-            path: "/products/search",
-            element: (
-                <PageWrapper>
-                    <ProductList />
-                </PageWrapper>
-            ),
-        },
+    {
+      path: '/products/search',
+      element: (
+        <PageWrapper>
+          <ProductList />
+        </PageWrapper>
+      ),
+    },
 
-        {
-            path: "/add-review/:productId",
-            element: (
-                <ProtectedRoute>
-                    <PageWrapper>
-                        <ProductNewReviews />
-                    </PageWrapper>
-                </ProtectedRoute>
-            ),
-        },
+    {
+      path: '/add-review/:productId',
+      element: (
+        <ProtectedRoute>
+          <PageWrapper>
+            <ProductNewReviews />
+          </PageWrapper>
+        </ProtectedRoute>
+      ),
+    },
 
-        {
-            path: "/category",
-            element: (
-                <PageWrapper>
-                    <CategoryProduct />
-                </PageWrapper>
-            ),
-        },
+    {
+      path: '/category',
+      element: (
+        <PageWrapper>
+          <CategoryProduct />
+        </PageWrapper>
+      ),
+    },
 
-        {
-            path: "/category/:categorySlug",
-            element: (
-                <PageWrapper>
-                    <Category />
-                </PageWrapper>
-            ),
-        },
+    {
+      path: '/category/:categorySlug',
+      element: (
+        <PageWrapper>
+          <Category />
+        </PageWrapper>
+      ),
+    },
 
-        {
-            path: "/account",
-            element: (
-                <ProtectedRoute>
-                    <PageWrapper>
-                        <Account />
-                    </PageWrapper>
-                </ProtectedRoute>
-            ),
-        },
-        {
-            path: "/account/profile",
-            element: (
-                <ProtectedRoute>
-                    <PageWrapper>
-                        <Profile />
-                    </PageWrapper>
-                </ProtectedRoute>
-            ),
-        },
-        {
-            path: "/account/update-address",
-            element: (
-                <ProtectedRoute>
-                    <PageWrapper>
-                        <Profile />
-                    </PageWrapper>
-                </ProtectedRoute>
-            ),
-        },
-        {
-            path: "/account/update-password",
-            element: (
-                <ProtectedRoute>
-                    <PageWrapper>
-                        <Security />
-                    </PageWrapper>
-                </ProtectedRoute>
-            ),
-        },
-        {
-            path: "/account/orders",
-            element: (
-                <ProtectedRoute>
-                    <PageWrapper>
-                        <Order />
-                    </PageWrapper>
-                </ProtectedRoute>
-            ),
-        },
-        {
-            path: "/cart",
-            element: (
-                <PageWrapper>
-                    <Cart />
-                </PageWrapper>
-            ),
-        },
-        {
-            path: "/cart/:title/dp/:productId/:itemAdded",
-            element: (
-                <PageWrapper>
-                    <AddToCart />
-                </PageWrapper>
-            ),
-        },
-        {
-            path: "/cart/:title/dp/:productId",
-            element: (
-                <PageWrapper>
-                    <AddToCart />
-                </PageWrapper>
-            ),
-        },
-        {
-            path: "/checkout/:productId",
-            element: (
-                <ProtectedRoute>
-                    <PageWrapper>
-                        <Checkout />
-                    </PageWrapper>
-                </ProtectedRoute>
-            ),
-        },
-        {
-            path: "/privacy_policy",
-            element: (
-                <PageWrapper>
-                    <Policy />
-                </PageWrapper>
-            ),
-        },
+    {
+      path: '/account',
+      element: (
+        <ProtectedRoute>
+          <PageWrapper>
+            <Account />
+          </PageWrapper>
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/account/profile',
+      element: (
+        <ProtectedRoute>
+          <PageWrapper>
+            <Profile />
+          </PageWrapper>
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/account/update-address',
+      element: (
+        <ProtectedRoute>
+          <PageWrapper>
+            <Profile />
+          </PageWrapper>
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/account/update-password',
+      element: (
+        <ProtectedRoute>
+          <PageWrapper>
+            <Security />
+          </PageWrapper>
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/account/orders',
+      element: (
+        <ProtectedRoute>
+          <PageWrapper>
+            <Order />
+          </PageWrapper>
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/cart',
+      element: (
+        <PageWrapper>
+          <Cart />
+        </PageWrapper>
+      ),
+    },
+    {
+      path: '/cart/:title/dp/:productId/:itemAdded',
+      element: (
+        <PageWrapper>
+          <AddToCart />
+        </PageWrapper>
+      ),
+    },
+    {
+      path: '/cart/:title/dp/:productId',
+      element: (
+        <PageWrapper>
+          <AddToCart />
+        </PageWrapper>
+      ),
+    },
+    {
+      path: '/checkout/:productId',
+      element: (
+        <ProtectedRoute>
+          <PageWrapper>
+            <Checkout />
+          </PageWrapper>
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/privacy_policy',
+      element: (
+        <PageWrapper>
+          <Policy />
+        </PageWrapper>
+      ),
+    },
 
-        {
-            path: "/shipping_policy",
-            element: (
-                <PageWrapper>
-                    <Policy />
-                </PageWrapper>
-            ),
-        },
+    {
+      path: '/shipping_policy',
+      element: (
+        <PageWrapper>
+          <Policy />
+        </PageWrapper>
+      ),
+    },
 
-        {
-            path: "/:blogslug",
-            element: (
-                <Suspense>
-                    <BlogDetails />
-                </Suspense>
-            ),
-        },
+    {
+      path: '/:blogslug',
+      element: (
+        <Suspense>
+          <BlogDetails />
+        </Suspense>
+      ),
+    },
 
-        {
-            path: "/blogs",
-            element: (
-                <PageWrapper>
-                    <BlogList />
-                </PageWrapper>
-            ),
-        },
+    {
+      path: '/blogs',
+      element: (
+        <PageWrapper>
+          <BlogList />
+        </PageWrapper>
+      ),
+    },
 
-        {
-            path: "blogs/category/:categoryslug",
-            element: (
-                <PageWrapper>
-                    <CategoryBlogs />
-                </PageWrapper>
-            ),
-        },
+    {
+      path: 'blogs/category/:categoryslug',
+      element: (
+        <PageWrapper>
+          <CategoryBlogs />
+        </PageWrapper>
+      ),
+    },
 
-        {
-            path: "/about_us",
-            element: (
-                <PageWrapper>
-                    <Policy />
-                </PageWrapper>
-            ),
-        },
+    {
+      path: '/about_us',
+      element: (
+        <PageWrapper>
+          <Policy />
+        </PageWrapper>
+      ),
+    },
 
-        {
-            path: "/what-we-do",
-            element: (
-                <PageWrapper>
-                    <Policy />
-                </PageWrapper>
-            ),
-        },
+    {
+      path: '/what-we-do',
+      element: (
+        <PageWrapper>
+          <Policy />
+        </PageWrapper>
+      ),
+    },
 
-        {
-            path: "/return_refund_policy",
-            element: (
-                <PageWrapper>
-                    <Policy />
-                </PageWrapper>
-            ),
-        },
-        {
-            path: "/term_services",
-            element: (
-                <PageWrapper>
-                    <Policy />
-                </PageWrapper>
-            ),
-        },
-        {
-            path: "/checkout",
-            element: (
-                // <ProtectedRoute>
-                <PageWrapper>
-                    <Checkout />
-                    {/* <MobileCheckout /> */}
-                </PageWrapper>
-                // </ProtectedRoute>
-            ),
-        },
-        {
-            path: "/contact",
-            element: (
-                <PageWrapper>
-                    <Contact />
-                </PageWrapper>
-            ),
-        },
-        {
-            path: "/success-transaction",
-            element: (
-                <div>
-                    <div
-                        className="w-100 d-flex justify-content-center align-items-center flex-column"
-                        style={{ height: "500px" }}
-                    >
-                        <h1>Transaction Successful</h1>
-                    </div>
-                </div>
-            ),
-        },
-        {
-            path: "/thank-you",
-            element: (
-                <PageWrapper>
-                    <ThankYou />
-                </PageWrapper>
-            ),
-        },
+    {
+      path: '/return_refund_policy',
+      element: (
+        <PageWrapper>
+          <Policy />
+        </PageWrapper>
+      ),
+    },
+    {
+      path: '/term_services',
+      element: (
+        <PageWrapper>
+          <Policy />
+        </PageWrapper>
+      ),
+    },
+    {
+      path: '/checkout',
+      element: (
+        // <ProtectedRoute>
+        <PageWrapper>
+          <Checkout />
+          {/* <MobileCheckout /> */}
+        </PageWrapper>
+        // </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/contact',
+      element: (
+        <PageWrapper>
+          <Contact />
+        </PageWrapper>
+      ),
+    },
+    {
+      path: '/success-transaction',
+      element: (
+        <div>
+          <div
+            className='w-100 d-flex justify-content-center align-items-center flex-column'
+            style={{ height: '500px' }}
+          >
+            <h1>Transaction Successful</h1>
+          </div>
+        </div>
+      ),
+    },
+    {
+      path: '/thank-you',
+      element: (
+        <PageWrapper>
+          <ThankYou />
+        </PageWrapper>
+      ),
+    },
 
-        {
-            path: "/test",
-            element: (
-                <PageWrapper>
-                    <Test />
-                </PageWrapper>
-            ),
-        },
+    {
+      path: '/test',
+      element: (
+        <PageWrapper>
+          <Test />
+        </PageWrapper>
+      ),
+    },
 
-        {
-            path: "/sku",
-            element: (
-                <ProtectedRoute>
-                    <PageWrapper>
-                        <SkuPage />
-                    </PageWrapper>
-                </ProtectedRoute>
-            ),
-        },
-        {
-            path: "/apply-jobs",
-            element: (
-                // <ProtectedRoute>
-                <PageWrapper>
-                    <ApplyNow />
-                </PageWrapper>
-                // </ProtectedRoute>
-            ),
-        },
-        {
-            path: "/refund-order",
-            element: (
-                <PageWrapper>
-                    <RefundOrder />
-                </PageWrapper>
-            ),
-        },
-        {
-            path: "/careers",
-            element: (
-                <PageWrapper>
-                    <Careers />
-                </PageWrapper>
-            ),
-        },
-        {
-            path: "/careers/:id",
-            element: (
-                <PageWrapper>
-                    <CareerView />
-                </PageWrapper>
-            ),
-        },
-        // {
-        //     path: "/layout",
-        //     element: (
-        //         <PageWrapper>
-        //           <Layout />
-        //         </PageWrapper>
-        //     ),
-        // },
+    {
+      path: '/sku',
+      element: (
+        <ProtectedRoute>
+          <PageWrapper>
+            <SkuPage />
+          </PageWrapper>
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/apply-jobs',
+      element: (
+        // <ProtectedRoute>
+        <PageWrapper>
+          <ApplyNow />
+        </PageWrapper>
+        // </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/refund-order',
+      element: (
+        <PageWrapper>
+          <RefundOrder />
+        </PageWrapper>
+      ),
+    },
+    {
+      path: '/careers',
+      element: (
+        <PageWrapper>
+          <Careers />
+        </PageWrapper>
+      ),
+    },
+    {
+      path: '/careers/:id',
+      element: (
+        <PageWrapper>
+          <CareerView />
+        </PageWrapper>
+      ),
+    },
+    // {
+    //     path: "/layout",
+    //     element: (
+    //         <PageWrapper>
+    //           <Layout />
+    //         </PageWrapper>
+    //     ),
+    // },
 
-        {
-            path: "/apply-now",
-            element: (
-                <PageWrapper>
-                    <ApplyNow />
-                </PageWrapper>
-            ),
-        },
+    {
+      path: '/apply-now',
+      element: (
+        <PageWrapper>
+          <ApplyNow />
+        </PageWrapper>
+      ),
+    },
 
-        {
-            path: "/track-order",
-            element: (
-                <ProtectedRoute>
-                    <PageWrapper>
-                        <TrackOrder />
-                    </PageWrapper>
-                </ProtectedRoute>
-            ),
-        },
+    {
+      path: '/track-order',
+      element: (
+        <ProtectedRoute>
+          <PageWrapper>
+            <TrackOrder />
+          </PageWrapper>
+        </ProtectedRoute>
+      ),
+    },
 
-        {
-            path: "*",
-            element: <NotFound />,
-        },
-    ];
+    {
+      path: '*',
+      element: <NotFound />,
+    },
+  ];
 
-    const router = useRoutes(routes);
+  const router = useRoutes(routes);
 
-    return router;
+  return router;
 };
 
 export default Router;
 export function ProtectedRoute({ children }) {
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    if (!isAuthenticated) {
-        const location = useLocation();
-        const redirectURL = location.pathname;
-        console.print("auth: ", redirectURL);
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  if (!isAuthenticated) {
+    const location = useLocation();
+    const redirectURL = location.pathname;
+    console.print('auth: ', redirectURL);
 
-        window.localStorage.setItem("redirectURL", redirectURL);
-    }
-    return isAuthenticated ? children : <Navigate to="/login" replace />;
+    window.localStorage.setItem('redirectURL', redirectURL);
+  }
+  return isAuthenticated ? children : <Navigate to='/login' replace />;
 }
 
 export function AuthRoute({ children }) {
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    let redirectRoute = "/";
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  let redirectRoute = '/';
 
-    if (isAuthenticated) {
-        const redirectURL = localStorage.getItem("redirectURL");
-        localStorage.removeItem("redirectURL");
-        if (redirectURL) redirectRoute = redirectURL;
-    }
+  if (isAuthenticated) {
+    const redirectURL = localStorage.getItem('redirectURL');
+    localStorage.removeItem('redirectURL');
+    if (redirectURL) redirectRoute = redirectURL;
+  }
 
-    return isAuthenticated ? (
-        <Navigate to={`${redirectRoute}?firstLogin=true`} replace />
-    ) : (
-        children
-    );
+  return isAuthenticated ? (
+    <Navigate to={`${redirectRoute}?firstLogin=true`} replace />
+  ) : (
+    children
+  );
 }

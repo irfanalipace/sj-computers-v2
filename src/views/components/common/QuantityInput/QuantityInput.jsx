@@ -1,72 +1,69 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import "./QuantityInput.css";
+import './QuantityInput.css';
 
 export const QuantityInput = ({
-    onChange,
-    value,
-    minQuantity = 1,
-    maxQuantity = 1000,
+  onChange,
+  value,
+  minQuantity = 1,
+  maxQuantity = 1000,
 }) => {
-    const [quantity, setQuantity] = useState(parseInt(value) || minQuantity);
-    const [hasRendered, setHasRendered] = useState(false);
+  const [quantity, setQuantity] = useState(parseInt(value) || minQuantity);
+  const [hasRendered, setHasRendered] = useState(false);
 
-    useEffect(() => {
-        if (hasRendered) {
-            if (typeof onChange === "function") onChange(quantity || 0);
-        } else {
-            setHasRendered(true);
-        }
-    }, [quantity]);
+  useEffect(() => {
+    if (hasRendered) {
+      if (typeof onChange === 'function') onChange(quantity || 0);
+    } else {
+      setHasRendered(true);
+    }
+  }, [quantity]);
 
-    // const handleQuantityChange = (e) => {
-    //     const newQuantity = parseInt(e.target.value);
-    //     if (newQuantity >= minQuantity && newQuantity <= maxQuantity) {
-    //         setQuantity(newQuantity);
-    //     }
-    // };
-    // const generateOptions = () => {
-    //     const options = [];
-    //     for (let i = minQuantity; i <= maxQuantity; i++) {
-    //         options.push(
-    //             <option
-    //                 style={{ justifyContent: "flex-start" }}
-    //                 key={i}
-    //                 value={i}
-    //             >
-    //                 {i}
-    //             </option>
-    //         );
-    //     }
-    //     return options;
-    // };
-    return (
-        <div className="quantity-container">
-            <p className="mb-1">Quantity</p>
-            <div className="quantity-inner">
-                <button
-                    className="quantity-button"
-                    onClick={(e) =>
-                        setQuantity(
-                            quantity > minQuantity
-                                ? parseInt(quantity) - 1
-                                : quantity,
-                        )
-                    }
-                >
-                    -
-                </button>
-                <input
-                    type="number"
-                    value={quantity}
-                    onChange={(e) =>
-                        e.target.value >= minQuantity &&
-                        e.target.value <= maxQuantity
-                            ? setQuantity(e.target.value)
-                            : quantity
-                    }
-                />
-                {/* <div className="quantity-select-wrapper">
+  // const handleQuantityChange = (e) => {
+  //     const newQuantity = parseInt(e.target.value);
+  //     if (newQuantity >= minQuantity && newQuantity <= maxQuantity) {
+  //         setQuantity(newQuantity);
+  //     }
+  // };
+  // const generateOptions = () => {
+  //     const options = [];
+  //     for (let i = minQuantity; i <= maxQuantity; i++) {
+  //         options.push(
+  //             <option
+  //                 style={{ justifyContent: "flex-start" }}
+  //                 key={i}
+  //                 value={i}
+  //             >
+  //                 {i}
+  //             </option>
+  //         );
+  //     }
+  //     return options;
+  // };
+  return (
+    <div className='quantity-container'>
+      <p className='mb-1'>Quantity</p>
+      <div className='quantity-inner'>
+        <button
+          className='quantity-button'
+          onClick={e =>
+            setQuantity(
+              quantity > minQuantity ? parseInt(quantity) - 1 : quantity,
+            )
+          }
+        >
+          -
+        </button>
+        <input
+          type='number'
+          value={quantity}
+          onChange={e =>
+            e.target.value >= minQuantity && e.target.value <= maxQuantity
+              ? setQuantity(e.target.value)
+              : quantity
+          }
+        />
+        {/* <div className="quantity-select-wrapper">
                     <select
                         value={quantity}
                         // onChange={handleQuantityChange}
@@ -81,19 +78,17 @@ export const QuantityInput = ({
                         {generateOptions()}
                     </select>
                 </div> */}
-                <button
-                    className="quantity-button"
-                    onClick={(e) =>
-                        setQuantity(
-                            quantity < maxQuantity
-                                ? parseInt(quantity) + 1
-                                : quantity,
-                        )
-                    }
-                >
-                    +
-                </button>
-            </div>
-        </div>
-    );
+        <button
+          className='quantity-button'
+          onClick={e =>
+            setQuantity(
+              quantity < maxQuantity ? parseInt(quantity) + 1 : quantity,
+            )
+          }
+        >
+          +
+        </button>
+      </div>
+    </div>
+  );
 };

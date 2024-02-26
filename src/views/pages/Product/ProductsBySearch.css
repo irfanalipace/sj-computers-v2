@@ -1,20 +1,20 @@
 .search-results {
-    padding: 0 20px;
-    min-height: calc(100vh - 100px);
+  padding: 0 20px;
+  min-height: calc(100vh - 100px);
 }
 
 .search-results .products-grid {
-    min-height: 100%;
+  min-height: 100%;
 }
 
 .search-results .heading {
-    padding: 20px 30px 0;
+  padding: 20px 30px 0;
 }
 .search-results h3 {
-    font-weight: 600;
-    font-size: 16px;
-    width: 100%;
+  font-weight: 600;
+  font-size: 16px;
+  width: 100%;
 }
 .search-results h3 span {
-    font-weight: 600;
+  font-weight: 600;
 }

@@ -1,185 +1,185 @@
 .checkout-page {
-    background-color: white;
-    width: 100%;
-    height: 100%;
+  background-color: white;
+  width: 100%;
+  height: 100%;
 }
 
 .checkout-header {
-    width: 100%;
-    background-color: #00305e;
-    padding: 15px 50px;
+  width: 100%;
+  background-color: #00305e;
+  padding: 15px 50px;
 }
 #specifyColor {
-    accent-color: #318243;
-    margin-right: 3px;
-    width: 11px;
+  accent-color: #318243;
+  margin-right: 3px;
+  width: 11px;
 }
 .checkout-header-wrapper {
-    width: 50%;
+  width: 50%;
 }
 .return-paragraph-policy-data span {
-    font-family: Inter;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 15px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #000000;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #000000;
 }
 .return-paragraph-policy-data {
-    margin-top: 12px;
+  margin-top: 12px;
 }
 .shipping-method-button-mobile-size button {
-    background: #318243;
-    color: white;
-    width: 100%;
-    height: 39px;
-    border-radius: 8px;
-    border-radius: 8px;
-    border: 1px;
+  background: #318243;
+  color: white;
+  width: 100%;
+  height: 39px;
+  border-radius: 8px;
+  border-radius: 8px;
+  border: 1px;
 }
 .checkout-header .logo-wrapper {
-    width: 180px;
-    height: 62px;
-    max-width: 90%;
+  width: 180px;
+  height: 62px;
+  max-width: 90%;
 }
 
 .checkout-header .logo-wrapper img {
-    width: 100%;
+  width: 100%;
 }
 
 .checkout-header-wrapper .items-number {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .checkout-header-wrapper .items-number h3 {
-    font-weight: 500;
-    font-size: 18px;
-    margin-bottom: 0;
-    color: white;
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 0;
+  color: white;
 }
 .checkout-item-mobile-series-data p {
-    font-family: Inter;
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 19px;
-    letter-spacing: 0em;
-    text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
 }
 .checkout-page-inner {
-    width: 83%;
-    margin-left: 135px;
-    padding-left: 33px;
-    margin-top: 31px;
-    padding: 7px 0;
-    min-height: 200px;
-    margin-bottom: 20px;
+  width: 83%;
+  margin-left: 135px;
+  padding-left: 33px;
+  margin-top: 31px;
+  padding: 7px 0;
+  min-height: 200px;
+  margin-bottom: 20px;
 }
 .checkout-page {
-    background-color: white;
+  background-color: white;
 }
 
 .checkout-page button:disabled {
-    opacity: 0.4;
+  opacity: 0.4;
 }
 
 .checkout-page .shipping-details {
-    padding: 5px !important;
+  padding: 5px !important;
 }
 .checkout-page .shipping-method-component-wrapper {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 @media screen and (max-width: 810px) {
-    .checkout-header-wrapper {
-        width: 100%;
-        padding: 0 10px;
-    }
-    .checkout-header-wrapper .items-number h3 {
-        font-size: 11px;
-    }
+  .checkout-header-wrapper {
+    width: 100%;
+    padding: 0 10px;
+  }
+  .checkout-header-wrapper .items-number h3 {
+    font-size: 11px;
+  }
 }
 
 @media screen and (max-width: 470px) {
-    .checkout-header {
-        padding: 0px;
-    }
-    .checkout-page-inner {
-        /* width: 95%; */
-        margin: 0px;
-        padding: 0px;
-    }
+  .checkout-header {
+    padding: 0px;
+  }
+  .checkout-page-inner {
+    /* width: 95%; */
+    margin: 0px;
+    padding: 0px;
+  }
 }
 @media screen and (max-width: 1041px) {
-    .checkout-page-inner {
-        margin-left: 17px;
-        margin: 20px auto;
-        padding: 7px 0;
-    }
-    .shipping-method-container h3 {
-        padding-top: 12px;
-        color: #318243;
-        margin-bottom: 18px;
-        padding-left: 3px;
-    }
+  .checkout-page-inner {
+    margin-left: 17px;
+    margin: 20px auto;
+    padding: 7px 0;
+  }
+  .shipping-method-container h3 {
+    padding-top: 12px;
+    color: #318243;
+    margin-bottom: 18px;
+    padding-left: 3px;
+  }
 }
 
 @media screen and (max-width: 550px) {
-    .checkout-page-inner {
-        min-height: 400px;
-        /* padding: 18px; */
-    }
-    .checkout-page-inner {
-        width: 88%;
-        /* padding: 18px; */
-    }
+  .checkout-page-inner {
+    min-height: 400px;
+    /* padding: 18px; */
+  }
+  .checkout-page-inner {
+    width: 88%;
+    /* padding: 18px; */
+  }
 
-    .checkout-header .logo-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  .checkout-header .logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .checkout-header .logo-wrapper {
-        width: 135px;
-    }
+  .checkout-header .logo-wrapper {
+    width: 135px;
+  }
 }
 @media screen and (max-width: 600px) {
-    .checkout-header {
-        display: none;
-    }
-    .shipping-data-shiping-view-mobile {
-        font-family: Inter;
-        font-size: 13px;
-        font-weight: 600;
-        line-height: 20px;
-        letter-spacing: 0.10000000149011612px;
-        text-align: left;
-    }
-    .border-shipping-summery-data {
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        /* padding: 10px; */
-        margin-bottom: 10px;
-        padding-top: 16px;
-        padding-left: 7px;
-        padding-right: 7px;
-    }
-    .summery-modal-data-open-mobile span {
-        font-family: Inter;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 15px;
-        letter-spacing: 0em;
-        text-align: center;
-        color: #007185;
-    }
+  .checkout-header {
+    display: none;
+  }
+  .shipping-data-shiping-view-mobile {
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.10000000149011612px;
+    text-align: left;
+  }
+  .border-shipping-summery-data {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    /* padding: 10px; */
+    margin-bottom: 10px;
+    padding-top: 16px;
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  .summery-modal-data-open-mobile span {
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #007185;
+  }
 }
 
 @media screen and (max-width: 300px) {
-    .checkout-header .logo-wrapper {
-        width: 100%;
-    }
+  .checkout-header .logo-wrapper {
+    width: 100%;
+  }
 }

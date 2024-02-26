@@ -25,12 +25,14 @@ const FeaturedProducts = ({
                     color: '#B12704',
                     fontSize: '13px',
                     fontWeight: '600',
-                  }}>
+                  }}
+                >
                   {category.extra}
                 </div>
                 <div
                   className='categories-container'
-                  style={{ marginBottom: '10px' }}>
+                  style={{ marginBottom: '10px' }}
+                >
                   {index === 0 ? (
                     <ProductItem4
                       items={[

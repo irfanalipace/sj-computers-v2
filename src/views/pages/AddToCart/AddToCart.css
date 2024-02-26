@@ -1,11 +1,11 @@
 .cart-with-protection {
-    min-width: 25%;
-    max-width: 85%;
-    width: 85%;
+  min-width: 25%;
+  max-width: 85%;
+  width: 85%;
 }
 @media screen and (max-width: 1200px) {
-    .cart-with-protection {
-        width: 100%;
-        min-width: 0%;
-    }
+  .cart-with-protection {
+    width: 100%;
+    min-width: 0%;
+  }
 }

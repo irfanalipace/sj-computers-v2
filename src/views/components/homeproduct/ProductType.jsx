@@ -1,69 +1,69 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import "./ProductType.css";
-import ProductItem1 from "@components/homeproduct/productcategory/ProductItem1";
-import ProductItem4 from "@components/homeproduct/productcategory/ProductItem4";
-import addDesktop from "@images/categories/wellcome.webp";
-import categoryImg1 from "@images/categories/desktopweb.webp";
-import categorybusinussweb from "@images/categories/businussweb.webp";
-import btoimg from "@images/categories/btoweb.webp";
-import twoInOneLaptopImg from "@images/categories/2in1laptop.png";
-import AccessoriesImg from "@images/categories/Accessories.png";
-import AccessoriesImgUpdate from "@images/categories/AccessoriesUpdate.png";
-import LaptopImgUpdate from "@images/categories/LaptopUpdate.png";
-import DesktopImgUpdate from "@images/categories/desktopUpdate.png";
-import twoInOneImgUpdate from "@images/categories/2in1LaptopUpdate.png";
-import GamingDesktopImg from "@images/categories/gamingDesktops.png";
-import Laptop2Img from "@images/categories/Laptop2.png";
-import laptopimg from "@images/categories/laptopweb.webp";
-import { Rating } from "@mui/material";
-import FontAwesome from "react-fontawesome";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import './ProductType.css';
+import ProductItem1 from '@components/homeproduct/productcategory/ProductItem1';
+import ProductItem4 from '@components/homeproduct/productcategory/ProductItem4';
+import addDesktop from '@images/categories/wellcome.webp';
+import categoryImg1 from '@images/categories/desktopweb.webp';
+import categorybusinussweb from '@images/categories/businussweb.webp';
+import btoimg from '@images/categories/btoweb.webp';
+import twoInOneLaptopImg from '@images/categories/2in1laptop.png';
+import AccessoriesImg from '@images/categories/Accessories.png';
+import AccessoriesImgUpdate from '@images/categories/AccessoriesUpdate.png';
+import LaptopImgUpdate from '@images/categories/LaptopUpdate.png';
+import DesktopImgUpdate from '@images/categories/desktopUpdate.png';
+import twoInOneImgUpdate from '@images/categories/2in1LaptopUpdate.png';
+import GamingDesktopImg from '@images/categories/gamingDesktops.png';
+import Laptop2Img from '@images/categories/Laptop2.png';
+import laptopimg from '@images/categories/laptopweb.webp';
+import { Rating } from '@mui/material';
+import FontAwesome from 'react-fontawesome';
 // import monitorimg from "@images/categories/monitorweb.webp";
-import { Stack, Typography } from "@mui/material";
-import monitorimg from "@images/categories/desktopweb.webp";
-import desktopimgweb from "@images/categories/desktopweb-page.webp";
-import wellsjcomputer from "@images/categories/welcomesjcomputer.webp";
-import image1 from "../../../assets/images/homepageImage/featureImages/image1.png";
-import image2 from "../../../assets/images/homepageImage/featureImages/image2.png";
-import image3 from "../../../assets/images/homepageImage/featureImages/image3.png";
-import image4 from "../../../assets/images/homepageImage/featureImages/image4.png";
-import linkrouter from "../../../assets/images/homepageImage/networkimags/d-link-router.png";
-import modem from "../../../assets/images/homepageImage/networkimags/d-link-modem.png";
-import img1 from "../../../assets/images/homepageImage/upgradecomputers/image1.png";
-import img2 from "../../../assets/images/homepageImage/upgradecomputers/image2.png";
-import img3 from "../../../assets/images/homepageImage/upgradecomputers/image3.png";
-import rams from "../../../assets/images/homepageImage/RamMem/rams.png";
-import sellingimg1 from "../../../assets/images/homepageImage/sellingproducts/image1.png";
-import sellingimg2 from "../../../assets/images/homepageImage/sellingproducts/image2.png";
-import sellingimg3 from "../../../assets/images/homepageImage/sellingproducts/image3.png";
-import sellingimg4 from "../../../assets/images/homepageImage/sellingproducts/image4.png";
-import sellingimg5 from "../../../assets/images/homepageImage/sellingproducts/image5.png";
-import sellingimg6 from "../../../assets/images/homepageImage/sellingproducts/image6.png";
-import sellingimg7 from "../../../assets/images/homepageImage/sellingproducts/image7.png";
-import sellingimg8 from "../../../assets/images/homepageImage/sellingproducts/image8.png";
-import SellingProducts from "../MobileCategory/SellingProducts/SellingProducts";
-import Recommendation from "../Recommendation/Recommendation";
-import { fetchProducts } from "../../../core/store/products/productsThunks";
-import moment from "moment";
+import { Stack, Typography } from '@mui/material';
+import monitorimg from '@images/categories/desktopweb.webp';
+import desktopimgweb from '@images/categories/desktopweb-page.webp';
+import wellsjcomputer from '@images/categories/welcomesjcomputer.webp';
+import image1 from '../../../assets/images/homepageImage/featureImages/image1.png';
+import image2 from '../../../assets/images/homepageImage/featureImages/image2.png';
+import image3 from '../../../assets/images/homepageImage/featureImages/image3.png';
+import image4 from '../../../assets/images/homepageImage/featureImages/image4.png';
+import linkrouter from '../../../assets/images/homepageImage/networkimags/d-link-router.png';
+import modem from '../../../assets/images/homepageImage/networkimags/d-link-modem.png';
+import img1 from '../../../assets/images/homepageImage/upgradecomputers/image1.png';
+import img2 from '../../../assets/images/homepageImage/upgradecomputers/image2.png';
+import img3 from '../../../assets/images/homepageImage/upgradecomputers/image3.png';
+import rams from '../../../assets/images/homepageImage/RamMem/rams.png';
+import sellingimg1 from '../../../assets/images/homepageImage/sellingproducts/image1.png';
+import sellingimg2 from '../../../assets/images/homepageImage/sellingproducts/image2.png';
+import sellingimg3 from '../../../assets/images/homepageImage/sellingproducts/image3.png';
+import sellingimg4 from '../../../assets/images/homepageImage/sellingproducts/image4.png';
+import sellingimg5 from '../../../assets/images/homepageImage/sellingproducts/image5.png';
+import sellingimg6 from '../../../assets/images/homepageImage/sellingproducts/image6.png';
+import sellingimg7 from '../../../assets/images/homepageImage/sellingproducts/image7.png';
+import sellingimg8 from '../../../assets/images/homepageImage/sellingproducts/image8.png';
+import SellingProducts from '../MobileCategory/SellingProducts/SellingProducts';
+import Recommendation from '../Recommendation/Recommendation';
+import { fetchProducts } from '../../../core/store/products/productsThunks';
+import moment from 'moment';
 
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import StarRatings from "react-star-ratings";
-import { faTruck } from "@fortawesome/free-solid-svg-icons";
-import ProductItem3 from "./productcategory/ProductItem3";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import gaminimg1 from "@images/product/item3/image1.png";
-import gaminimg2 from "@images/product/item3/image2.png";
-import gaminimg3 from "@images/product/item3/image3.png";
-import gamingProducts1 from "../../../assets/images/gaming-images/gameimage3.png";
-import gamingProducts2 from "../../../assets/images/gaming-images/gameimage1.png";
-import gamingProducts3 from "../../../assets/images/gaming-images/gameimage2.png";
-import scanimages from "../../../assets/images/gaming-images/scan-images.png";
-import rectangle1 from "../../../assets/images/flashsaleimaes/rectangle1.png";
-import rectangle2 from "../../../assets/images/flashsaleimaes/rectangle2.png";
-import rectangle3 from "../../../assets/images/flashsaleimaes/rectangle3.png";
-import rectangle4 from "../../../assets/images/flashsaleimaes/rectangle4.png";
-import rectangle5 from "../../../assets/images/flashsaleimaes/rectangle5.png";
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import StarRatings from 'react-star-ratings';
+import { faTruck } from '@fortawesome/free-solid-svg-icons';
+import ProductItem3 from './productcategory/ProductItem3';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import gaminimg1 from '@images/product/item3/image1.png';
+import gaminimg2 from '@images/product/item3/image2.png';
+import gaminimg3 from '@images/product/item3/image3.png';
+import gamingProducts1 from '../../../assets/images/gaming-images/gameimage3.png';
+import gamingProducts2 from '../../../assets/images/gaming-images/gameimage1.png';
+import gamingProducts3 from '../../../assets/images/gaming-images/gameimage2.png';
+import scanimages from '../../../assets/images/gaming-images/scan-images.png';
+import rectangle1 from '../../../assets/images/flashsaleimaes/rectangle1.png';
+import rectangle2 from '../../../assets/images/flashsaleimaes/rectangle2.png';
+import rectangle3 from '../../../assets/images/flashsaleimaes/rectangle3.png';
+import rectangle4 from '../../../assets/images/flashsaleimaes/rectangle4.png';
+import rectangle5 from '../../../assets/images/flashsaleimaes/rectangle5.png';
 
 // const gamingArray = [
 //     {
@@ -103,361 +103,337 @@ import rectangle5 from "../../../assets/images/flashsaleimaes/rectangle5.png";
 // ];
 
 const ProductType = () => {
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const products = useSelector((state) => state?.products.products);
-    // const currentDate = moment();
-    // const oneDayAgo = moment().subtract(1, "days");
-    // const duration = moment.duration(currentDate.diff(oneDayAgo));
-    // const hours = duration.hours();
-    // const minutes = duration.minutes();
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const products = useSelector(state => state?.products.products);
+  // const currentDate = moment();
+  // const oneDayAgo = moment().subtract(1, "days");
+  // const duration = moment.duration(currentDate.diff(oneDayAgo));
+  // const hours = duration.hours();
+  // const minutes = duration.minutes();
 
-    const dbDate = new Date().getTime();
+  const dbDate = new Date().getTime();
 
-    const parsedDate = new Date(dbDate);
+  const parsedDate = new Date(dbDate);
 
-    //Once you get the dates, you can do the date calculate, like:
+  //Once you get the dates, you can do the date calculate, like:
 
-    //Get 1 day in milliseconds
-    var one_day = 1000 * 60 * 60 * 24;
+  //Get 1 day in milliseconds
+  var one_day = 1000 * 60 * 60 * 24;
 
-    const date1 = new Date("9/9/2020").getTime(); //JUST AN EXAMPLE
-    const date2 = new Date("10/9/2020").getTime(); //JUST AN EXAMPLE
+  const date1 = new Date('9/9/2020').getTime(); //JUST AN EXAMPLE
+  const date2 = new Date('10/9/2020').getTime(); //JUST AN EXAMPLE
 
-    const diffTime = Math.abs(date2 - date1);
+  const diffTime = Math.abs(date2 - date1);
 
-    const diffDays = Math.ceil(diffTime / one_day);
+  const diffDays = Math.ceil(diffTime / one_day);
 
-    useEffect(() => {
-        getProduct();
-    }, [products]);
+  useEffect(() => {
+    getProduct();
+  }, [products]);
 
-    const getProduct = async () => {
-        if (!products?.length) {
-            try {
-                await dispatch(fetchProducts());
-            } catch (error) {}
-        }
-    };
-    const categoryArray = [
-        {
-            name: "Shop by Category",
-            link: "See all",
-        },
-        {
-            name: "Gaming Desktop",
-            link: "Shop Now",
-        },
-        {
-            name: "Business Desktops",
-            link: "Shop Now",
-        },
-    ];
-    const categoryItems = [
-        {
-            image: LaptopImgUpdate,
-            categoryLink: "/category/laptops",
-            categoryName: "Laptop",
-        },
-        {
-            image: DesktopImgUpdate,
-            categoryLink: "/category/desktop",
-            categoryName: "Desktop",
-        },
-        {
-            image: twoInOneImgUpdate,
-            categoryLink: "/category/2_in_1_laptops",
-            categoryName: "2 in 1 Laptops",
-        },
-        {
-            image: AccessoriesImgUpdate,
-            categoryLink: "/category/gaming_desktops",
-            categoryName: "Accessories",
-        },
-    ];
-    // const gamingItems = [
-    //     {
-    //         image: gaminimg3,
-    //         categoryLink: "/category/bto",
-    //         categoryName: "Product Name",
-    //     },
-    //     {
-    //         image: scanimages,
-    //         categoryLink: "/category/laptops",
-    //         categoryName: "Lorem Ipsum | up to 30% off",
-    //     },
-    //     {
-    //         image: gaminimg1,
-    //         categoryLink: "/category/desktop",
-    //         categoryName: "Product Name",
-    //     },
-    // ];
-    // const featuredItems = [
-    //     {
-    //         image: image1,
-    //         categoryLink: "/category/bto",
-    //         categoryName: "Gaming Monitors | up to 50 % off",
-    //     },
-    //     {
-    //         image: image2,
-    //         categoryLink: "/category/laptops",
-    //         categoryName: "Lorem Ipsum | up to 30% off",
-    //     },
-    //     {
-    //         image: image4,
-    //         categoryLink: "/category/desktop",
-    //         categoryName: "Product Name",
-    //     },
-    //     {
-    //         image: image3,
-    //         categoryLink: "/category/gaming_desktops",
-    //         categoryName: "Product Category",
-    //     },
-    // ];
+  const getProduct = async () => {
+    if (!products?.length) {
+      try {
+        await dispatch(fetchProducts());
+      } catch (error) {}
+    }
+  };
+  const categoryArray = [
+    {
+      name: 'Shop by Category',
+      link: 'See all',
+    },
+    {
+      name: 'Gaming Desktop',
+      link: 'Shop Now',
+    },
+    {
+      name: 'Business Desktops',
+      link: 'Shop Now',
+    },
+  ];
+  const categoryItems = [
+    {
+      image: LaptopImgUpdate,
+      categoryLink: '/category/laptops',
+      categoryName: 'Laptop',
+    },
+    {
+      image: DesktopImgUpdate,
+      categoryLink: '/category/desktop',
+      categoryName: 'Desktop',
+    },
+    {
+      image: twoInOneImgUpdate,
+      categoryLink: '/category/2_in_1_laptops',
+      categoryName: '2 in 1 Laptops',
+    },
+    {
+      image: AccessoriesImgUpdate,
+      categoryLink: '/category/gaming_desktops',
+      categoryName: 'Accessories',
+    },
+  ];
+  // const gamingItems = [
+  //     {
+  //         image: gaminimg3,
+  //         categoryLink: "/category/bto",
+  //         categoryName: "Product Name",
+  //     },
+  //     {
+  //         image: scanimages,
+  //         categoryLink: "/category/laptops",
+  //         categoryName: "Lorem Ipsum | up to 30% off",
+  //     },
+  //     {
+  //         image: gaminimg1,
+  //         categoryLink: "/category/desktop",
+  //         categoryName: "Product Name",
+  //     },
+  // ];
+  // const featuredItems = [
+  //     {
+  //         image: image1,
+  //         categoryLink: "/category/bto",
+  //         categoryName: "Gaming Monitors | up to 50 % off",
+  //     },
+  //     {
+  //         image: image2,
+  //         categoryLink: "/category/laptops",
+  //         categoryName: "Lorem Ipsum | up to 30% off",
+  //     },
+  //     {
+  //         image: image4,
+  //         categoryLink: "/category/desktop",
+  //         categoryName: "Product Name",
+  //     },
+  //     {
+  //         image: image3,
+  //         categoryLink: "/category/gaming_desktops",
+  //         categoryName: "Product Category",
+  //     },
+  // ];
 
-    // const networkItems = [
-    //     {
-    //         image: linkrouter,
-    //         categoryLink: "/category/bto",
-    //         categoryName: "D-Link Router",
-    //     },
-    //     {
-    //         image: modem,
-    //         categoryLink: "/category/laptops",
-    //         categoryName: "D-Link Modem",
-    //     },
-    //     {
-    //         image: modem,
-    //         categoryLink: "/category/desktop",
-    //         categoryName: "D-Link Device",
-    //     },
-    //     {
-    //         image: linkrouter,
-    //         categoryLink: "/category/gaming_desktops",
-    //         categoryName: "D-Link Router",
-    //     },
-    // ];
-    // const upgradecomputers = [
-    //     {
-    //         image: img1,
-    //         categoryLink: "/category/bto",
-    //         categoryName: "D-Link Router",
-    //     },
-    //     {
-    //         image: img2,
-    //         categoryLink: "/category/laptops",
-    //         categoryName: "D-Link Modem",
-    //     },
-    //     {
-    //         image: img3,
-    //         categoryLink: "/category/desktop",
-    //         categoryName: "D-Link Device",
-    //     },
-    //     {
-    //         image: img1,
-    //         categoryLink: "/category/gaming_desktops",
-    //         categoryName: "D-Link Router",
-    //     },
-    // ];
-    // const Sellingimages = [
-    //     sellingimg1,
-    //     sellingimg2,
-    //     sellingimg3,
-    //     sellingimg4,
-    //     sellingimg5,
-    //     sellingimg6,
-    //     sellingimg7,
-    //     sellingimg8,
-    //     sellingimg1,
-    //     sellingimg2,
-    //     sellingimg3,
-    //     sellingimg4,
-    //     sellingimg5,
-    //     sellingimg6,
-    //     sellingimg7,
-    //     sellingimg8,
-    // ];
-    // const fleshimages = [
-    //     rectangle1,
-    //     rectangle2,
-    //     rectangle3,
-    //     rectangle4,
-    //     rectangle5,
-    //     rectangle1,
-    //     rectangle2,
-    //     rectangle3,
-    //     rectangle4,
-    //     rectangle5,
-    // ];
+  // const networkItems = [
+  //     {
+  //         image: linkrouter,
+  //         categoryLink: "/category/bto",
+  //         categoryName: "D-Link Router",
+  //     },
+  //     {
+  //         image: modem,
+  //         categoryLink: "/category/laptops",
+  //         categoryName: "D-Link Modem",
+  //     },
+  //     {
+  //         image: modem,
+  //         categoryLink: "/category/desktop",
+  //         categoryName: "D-Link Device",
+  //     },
+  //     {
+  //         image: linkrouter,
+  //         categoryLink: "/category/gaming_desktops",
+  //         categoryName: "D-Link Router",
+  //     },
+  // ];
+  // const upgradecomputers = [
+  //     {
+  //         image: img1,
+  //         categoryLink: "/category/bto",
+  //         categoryName: "D-Link Router",
+  //     },
+  //     {
+  //         image: img2,
+  //         categoryLink: "/category/laptops",
+  //         categoryName: "D-Link Modem",
+  //     },
+  //     {
+  //         image: img3,
+  //         categoryLink: "/category/desktop",
+  //         categoryName: "D-Link Device",
+  //     },
+  //     {
+  //         image: img1,
+  //         categoryLink: "/category/gaming_desktops",
+  //         categoryName: "D-Link Router",
+  //     },
+  // ];
+  // const Sellingimages = [
+  //     sellingimg1,
+  //     sellingimg2,
+  //     sellingimg3,
+  //     sellingimg4,
+  //     sellingimg5,
+  //     sellingimg6,
+  //     sellingimg7,
+  //     sellingimg8,
+  //     sellingimg1,
+  //     sellingimg2,
+  //     sellingimg3,
+  //     sellingimg4,
+  //     sellingimg5,
+  //     sellingimg6,
+  //     sellingimg7,
+  //     sellingimg8,
+  // ];
+  // const fleshimages = [
+  //     rectangle1,
+  //     rectangle2,
+  //     rectangle3,
+  //     rectangle4,
+  //     rectangle5,
+  //     rectangle1,
+  //     rectangle2,
+  //     rectangle3,
+  //     rectangle4,
+  //     rectangle5,
+  // ];
 
-    return (
-        <div className=" ">
-            {/* <div className="product-type-container"></div> */}
-            <div className="row mx-0">
-                {categoryArray.map((category, index) => (
-                    <div key={index} className="col-12 col-sm-6 col-lg-3">
-                        <Link to={"/category"} className="text-decoration-none">
-                            <div className="product-type-section">
-                                <h2 className="h4-heading category-name">
-                                    {category.name}
-                                </h2>
-                                <div className="categories-container">
-                                    {index === 0 ? (
-                                        <ProductItem4 items={categoryItems} />
-                                    ) : (
-                                        <ProductItem1
-                                            image={
-                                                index === 1
-                                                    ? GamingDesktopImg
-                                                    : categorybusinussweb
-                                            }
-                                        />
-                                    )}
-                                </div>
-                                <p className="section-link" to={"/category"}>
-                                    {category.link}
-                                </p>
-                            </div>
-                        </Link>
-                    </div>
-                ))}
-                <div className="col-12 col-sm-6 col-lg-3">
-                    <div className="dev-sections-two-sctions">
-                        {isAuthenticated ? (
-                            <div className="advertisement-heading">
-                                <img
-                                    className={`advertisment-img`}
-                                    src={wellsjcomputer}
-                                    alt={"wellsjcomputer"}
-                                />
-                            </div>
-                        ) : (
-                            <div
-                                className="advertisement-heading"
-                                style={{ padding: "5px" }}
-                            >
-                                <h2
-                                    className="h2-cart"
-                                    style={{
-                                        marginBottom: "5px",
-                                        fontSize: "1.18rem",
-                                    }}
-                                >
-                                    Log in for the best experience
-                                </h2>
-                                <div style={{ padding: "10px" }}>
-                                    <Link to="/login">
-                                        <button
-                                            style={{
-                                                borderRadius: "8px",
-                                                backgroundColor: "#318243",
-                                                color: "white",
-                                            }}
-                                            type="button"
-                                            className="button-save"
-                                        >
-                                            Login Safely
-                                        </button>
-                                    </Link>
-                                </div>
-                            </div>
-                        )}
-                        <div className="product-type-section dev-sections-products">
-                            {products && products?.length > 0 && (
-                                <>
-                                    <div style={{ textAlign: "center" }}>
-                                        <img
-                                            className={`advertisment-img-products-imges`}
-                                            src={products[0].image}
-                                            alt={"addDesktop"}
-                                        />
-                                    </div>
-
-                                    <h5 className="">
-                                        {products[0].name.length > 30
-                                            ? `${products[0].name.substring(
-                                                  0,
-                                                  30,
-                                              )}...`
-                                            : products[0].name}
-                                    </h5>
-                                    <Stack
-                                        mb={2}
-                                        alignItems={"start"}
-                                        spacing={1}
-                                    >
-                                        <Stack
-                                            alignItems={"center"}
-                                            justifyContent={"center"}
-                                            spacing={1}
-                                            direction={"row"}
-                                        >
-                                            <StarRatings
-                                                rating={products[0].rating}
-                                                starRatedColor="rgb(232, 126, 36)"
-                                                numberOfStars={5}
-                                                name="rating"
-                                                isSelectable={false}
-                                                starDimension={"20px"}
-                                                starSpacing={"0"}
-                                            />
-                                            <Typography
-                                                fontFamily={"Inter"}
-                                                sx={{ pt: 0.3 }}
-                                                fontWeight={500}
-                                                fontSize={"12px"}
-                                                lineHeight={"17px"}
-                                                color={"#007185"}
-                                            >
-                                                {products[0].total_review}
-                                            </Typography>
-                                        </Stack>
-                                        {/* {type === "recommended" && getRandomComponent()} */}
-                                    </Stack>
-                                    <div className="d-none d-sm-block product-prices">
-                                        {products.originalPrice && (
-                                            <div className="product-original-price">
-                                                ${products.originalPrice}
-                                            </div>
-                                        )}
-                                        <div className="product-rating-sections-featured-images">
-                                            <div className="product-new-price-sections-rating">
-                                                <span>$</span>
-                                                {
-                                                    products[0]?.price
-                                                        .toString()
-                                                        .split(".")[0]
-                                                }
-                                                <sup>
-                                                    {
-                                                        products[0]?.price
-                                                            ?.toString()
-                                                            .split(".")[1]
-                                                    }
-                                                </sup>
-                                            </div>
-                                            <div className="save-button-price-new-old">
-                                                <p>
-                                                    Save{" "}
-                                                    {products[0]?.price
-                                                        ? parseFloat(
-                                                              products[0].price,
-                                                          ).toFixed(2)
-                                                        : 0}
-                                                </p>
-                                            </div>
-                                            <p className="dev-sactions-price-old-new-time">
-                                                Ends in {parsedDate.getHours()}
-                                                h:{parsedDate.getMinutes()}m
-                                            </p>
-                                        </div>
-                                    </div>
-                                </>
-                            )}
-                        </div>
-                    </div>
+  return (
+    <div className=' '>
+      {/* <div className="product-type-container"></div> */}
+      <div className='row mx-0'>
+        {categoryArray.map((category, index) => (
+          <div key={index} className='col-12 col-sm-6 col-lg-3'>
+            <Link to={'/category'} className='text-decoration-none'>
+              <div className='product-type-section'>
+                <h2 className='h4-heading category-name'>{category.name}</h2>
+                <div className='categories-container'>
+                  {index === 0 ? (
+                    <ProductItem4 items={categoryItems} />
+                  ) : (
+                    <ProductItem1
+                      image={
+                        index === 1 ? GamingDesktopImg : categorybusinussweb
+                      }
+                    />
+                  )}
                 </div>
+                <p className='section-link' to={'/category'}>
+                  {category.link}
+                </p>
+              </div>
+            </Link>
+          </div>
+        ))}
+        <div className='col-12 col-sm-6 col-lg-3'>
+          <div className='dev-sections-two-sctions'>
+            {isAuthenticated ? (
+              <div className='advertisement-heading'>
+                <img
+                  className={`advertisment-img`}
+                  src={wellsjcomputer}
+                  alt={'wellsjcomputer'}
+                />
+              </div>
+            ) : (
+              <div className='advertisement-heading' style={{ padding: '5px' }}>
+                <h2
+                  className='h2-cart'
+                  style={{
+                    marginBottom: '5px',
+                    fontSize: '1.18rem',
+                  }}
+                >
+                  Log in for the best experience
+                </h2>
+                <div style={{ padding: '10px' }}>
+                  <Link to='/login'>
+                    <button
+                      style={{
+                        borderRadius: '8px',
+                        backgroundColor: '#318243',
+                        color: 'white',
+                      }}
+                      type='button'
+                      className='button-save'
+                    >
+                      Login Safely
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            )}
+            <div className='product-type-section dev-sections-products'>
+              {products && products?.length > 0 && (
+                <>
+                  <div style={{ textAlign: 'center' }}>
+                    <img
+                      className={`advertisment-img-products-imges`}
+                      src={products[0].image}
+                      alt={'addDesktop'}
+                    />
+                  </div>
+
+                  <h5 className=''>
+                    {products[0].name.length > 30
+                      ? `${products[0].name.substring(0, 30)}...`
+                      : products[0].name}
+                  </h5>
+                  <Stack mb={2} alignItems={'start'} spacing={1}>
+                    <Stack
+                      alignItems={'center'}
+                      justifyContent={'center'}
+                      spacing={1}
+                      direction={'row'}
+                    >
+                      <StarRatings
+                        rating={products[0].rating}
+                        starRatedColor='rgb(232, 126, 36)'
+                        numberOfStars={5}
+                        name='rating'
+                        isSelectable={false}
+                        starDimension={'20px'}
+                        starSpacing={'0'}
+                      />
+                      <Typography
+                        fontFamily={'Inter'}
+                        sx={{ pt: 0.3 }}
+                        fontWeight={500}
+                        fontSize={'12px'}
+                        lineHeight={'17px'}
+                        color={'#007185'}
+                      >
+                        {products[0].total_review}
+                      </Typography>
+                    </Stack>
+                    {/* {type === "recommended" && getRandomComponent()} */}
+                  </Stack>
+                  <div className='d-none d-sm-block product-prices'>
+                    {products.originalPrice && (
+                      <div className='product-original-price'>
+                        ${products.originalPrice}
+                      </div>
+                    )}
+                    <div className='product-rating-sections-featured-images'>
+                      <div className='product-new-price-sections-rating'>
+                        <span>$</span>
+                        {products[0]?.price.toString().split('.')[0]}
+                        <sup>
+                          {products[0]?.price?.toString().split('.')[1]}
+                        </sup>
+                      </div>
+                      <div className='save-button-price-new-old'>
+                        <p>
+                          Save{' '}
+                          {products[0]?.price
+                            ? parseFloat(products[0].price).toFixed(2)
+                            : 0}
+                        </p>
+                      </div>
+                      <p className='dev-sactions-price-old-new-time'>
+                        Ends in {parsedDate.getHours()}
+                        h:{parsedDate.getMinutes()}m
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
-            {/* <div className="row mx-0">
+          </div>
+        </div>
+      </div>
+      {/* <div className="row mx-0">
                 {featured.map((category, index) => (
                     <div key={index} className="col-12 col-sm-6 col-lg-3">
                         <Link
@@ -510,7 +486,7 @@ const ProductType = () => {
                     </div>
                 ))}
             </div> */}
-            {/* <div className="row mx-0">
+      {/* <div className="row mx-0">
                 <div className="col-12 col-sm-12 col-lg-12">
                     <Link to={""} className="text-decoration-none">
                         <div className="product-type-section-selleing-products">
@@ -523,7 +499,7 @@ const ProductType = () => {
                 </div>
             </div> */}
 
-            {/* <div className="row mx-0">
+      {/* <div className="row mx-0">
                 {gamingArray.map((category, index) => (
                     <div key={index} className="col-12 col-sm-6 col-lg-3">
                         <Link
@@ -560,7 +536,7 @@ const ProductType = () => {
                 ))}
             </div> */}
 
-            {/* <div className="row mx-0">
+      {/* <div className="row mx-0">
                 <div className="col-12 col-sm-12 col-lg-12">
                     <Link to={""} className="text-decoration-none">
                         <div className="product-type-section-selleing-products">
@@ -572,15 +548,15 @@ const ProductType = () => {
                     </Link>
                 </div>
             </div> */}
-            {/* <div className="row mx-0">
+      {/* <div className="row mx-0">
                 <div className="col-12 col-sm-12 col-lg-12">
                     <div className="product-type-section-selleing-products">
                         <Recommendation />
                     </div>
                 </div>
             </div> */}
-        </div>
-    );
+    </div>
+  );
 };
 
 export default ProductType;

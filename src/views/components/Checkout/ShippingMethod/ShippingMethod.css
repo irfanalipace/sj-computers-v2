@@ -1,53 +1,53 @@
 .shipping-method-container h3 {
-    font-weight: 600;
-    font-size: 16px;
-    color: #318243;
-    margin-bottom: 18px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #318243;
+  margin-bottom: 18px;
 }
 
 .shipping-method-inner {
-    position: relative;
-    border-radius: 10px;
-    border: 1px solid #dddddd;
+  position: relative;
+  border-radius: 10px;
+  border: 1px solid #dddddd;
 }
 
 .shipping-method-input-group {
-    padding: 0 15px;
-    cursor: pointer;
-    display: flex;
+  padding: 0 15px;
+  cursor: pointer;
+  display: flex;
 }
 
 .shipping-method-input-group.active {
-    background: rgba(49, 130, 67, 0.1);
+  background: rgba(49, 130, 67, 0.1);
 }
 
 .shipping-method-input-group label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-left: 10px;
-    font-weight: 400;
-    font-size: 12px;
-    cursor: pointer;
-    height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-left: 10px;
+  font-weight: 400;
+  font-size: 12px;
+  cursor: pointer;
+  height: 40px;
 }
 
 @media screen and (max-width: 600px) {
-    .shipping-method-input-group.active {
-        background: white;
-    }
-    .Shipping-Method-heading-data {
-        display: none;
-    }
-    .shipping-method-inner {
-        margin-top: 13px;
-    }
-    .shipping-method-input-group :checked {
-        background-color: #318243;
-        /* Change this to your desired background color */
-    }
-    .shipping-method-input-group input {
-        accent-color: #318243;
-    }
+  .shipping-method-input-group.active {
+    background: white;
+  }
+  .Shipping-Method-heading-data {
+    display: none;
+  }
+  .shipping-method-inner {
+    margin-top: 13px;
+  }
+  .shipping-method-input-group :checked {
+    background-color: #318243;
+    /* Change this to your desired background color */
+  }
+  .shipping-method-input-group input {
+    accent-color: #318243;
+  }
 }
