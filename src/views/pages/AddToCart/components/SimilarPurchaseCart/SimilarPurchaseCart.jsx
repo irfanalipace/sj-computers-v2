@@ -37,7 +37,7 @@ const SimilarPurchaseCart = ({ products }) => {
                     <div className="dev-section-button-dev-card">
                         <Link to={`${new URL(product?.url)?.pathname}`}>
                             <div className="product-naame product-cart-name-mobile-screen">
-                                {product.name} 
+                                {product.name}
                             </div>
 
                             <div className=" d-sm-none product-prices">
@@ -189,7 +189,7 @@ const SimilarPurchaseCart = ({ products }) => {
                                 marginLeft: "25px",
                             }}
                         >
-                            Item Already in cart
+                            Item already in cart
                         </p>
                     )}
                 </>

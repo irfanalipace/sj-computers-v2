@@ -101,7 +101,7 @@ const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
 
     const ProductDetails = () => (
         <div>
-            <div className="product-details " style={{padding: "0px 10px"}}>
+            <div className="product-details " style={{ padding: "0px 10px" }}>
                 {/* <div>
             <span className="span-the-product-color-product">
             crocs Contrary to popular
@@ -113,6 +113,7 @@ const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
                     <Link
                         // to={`${new URL(product?.url).pathname}`}
                         to={productUrl}
+                        style={{ textDecoration: "none" }}
                     >
                         <div className="product-name product-cart-name-mobile-screen">
                             {product.name}
@@ -126,7 +127,7 @@ const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
                                     ${product.originalPrice}
                                 </div>
                             )}
-                            <div className="product-new-price">
+                            <div className="product-neww-price">
                                 <span>$</span>
                                 {product?.price?.toString().split(".")[0]}
                                 <sup>
@@ -223,7 +224,7 @@ const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
                             ${product.originalPrice}
                         </div>
                     )}
-                    <div className="product-new-price">
+                    <div className="product-neww-price">
                         <span>$</span>
                         {product?.price?.toString().split(".")[0]}
                         <sup>{product?.price?.toString().split(".")[1]}</sup>
@@ -247,7 +248,10 @@ const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
     );
 
     return (
-        <div className={` product ${inGrid && "product-grid"}`} style={{ flexDirection: productView == "list" ? "row" : ""}}>
+        <div
+            className={` product ${inGrid && "product-grid"}`}
+            style={{ flexDirection: productView == "list" ? "row" : "" }}
+        >
             <Link
                 //to={`${new URL(product?.url).pathname}`}
                 to={productUrl}
@@ -281,11 +285,13 @@ const Product = ({ type = "", product, inGrid, searchParams, productView }) => {
                     </div>
                 </div>
             </Link>
-            <div className={`${
+            <div
+                className={`${
                     productView == "list" ? "product-detail-list-view" : ""
-                }`}>
+                }`}
+            >
                 <ProductDetails />
-            </div>    
+            </div>
         </div>
     );
 };

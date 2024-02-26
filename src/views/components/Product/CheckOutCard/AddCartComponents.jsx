@@ -47,11 +47,10 @@ const AddCartComponents = ({
         <>
             {cartItem?.id ? (
                 <Button className="add-to-card-button-mobile-product">
-                    Item Already in Cart
+                    Item already in cart
                 </Button>
             ) : (
                 <>
-                   
                     {/* <Button
                         onClick={() => {
                             if (!open) {
