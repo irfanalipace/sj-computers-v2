@@ -1,12 +1,12 @@
-import React from "react";
-import LayoutPage from "../../components/LandingPage/LayoutPage";
+import React from 'react';
+import LayoutPage from '../../components/LandingPage/LayoutPage';
 
 const Layout = () => {
-    return (
-        <div>
-            <LayoutPage />
-        </div>
-    );
+  return (
+    <div>
+      <LayoutPage />
+    </div>
+  );
 };
 
 export default Layout;

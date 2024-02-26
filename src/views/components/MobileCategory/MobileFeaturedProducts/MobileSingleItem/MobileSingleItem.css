@@ -1,22 +1,22 @@
 .dynamic-image-images-mobile-data {
-    height: 86px;
-    width: 100%;
-    padding: 5px;
+  height: 86px;
+  width: 100%;
+  padding: 5px;
 }
 .see-more-button-data-single-item a {
-    font-family: Inter;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 17px;
-    letter-spacing: 0em;
-    text-align: left;
-    background: none;
-    color: #007185;
-    border: none;
-    padding-right: 26px;
-    text-decoration: none;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  background: none;
+  color: #007185;
+  border: none;
+  padding-right: 26px;
+  text-decoration: none;
 }
 .see-more-button-data-single-item {
-    text-align: center;
-    margin-top: 8px;
+  text-align: center;
+  margin-top: 8px;
 }

@@ -1,84 +1,84 @@
-import React from "react";
-import CustomizedSteppers from "../../components/Stepper/indes";
+import React from 'react';
+import CustomizedSteppers from '../../components/Stepper/indes';
 import {
-    Box,
-    Container,
-    Divider,
-    Grid,
-    Stack,
-    Typography,
-} from "@mui/material";
-import ShipmentInformation from "../../components/Stepper/ShipmentInformation";
-import TrackingHistory from "../../components/Stepper/TrackingHistory";
-import ItemsInShipment from "../../components/Stepper/ItemsInShipment";
-import ExpectOnDeliveryDay from "../../components/Stepper/ExpectOnDeliveryDay";
-import Recommendation from "../../components/Recommendation/Recommendation";
-import { useSelector } from "react-redux";
+  Box,
+  Container,
+  Divider,
+  Grid,
+  Stack,
+  Typography,
+} from '@mui/material';
+import ShipmentInformation from '../../components/Stepper/ShipmentInformation';
+import TrackingHistory from '../../components/Stepper/TrackingHistory';
+import ItemsInShipment from '../../components/Stepper/ItemsInShipment';
+import ExpectOnDeliveryDay from '../../components/Stepper/ExpectOnDeliveryDay';
+import Recommendation from '../../components/Recommendation/Recommendation';
+import { useSelector } from 'react-redux';
 const TrackOrder = () => {
-    const products = useSelector((state) => state.products.products);
+  const products = useSelector(state => state.products.products);
 
-    return (
-        <>
-            <Container sx={{ my: 4 }}>
-                <Box mt={2} mb={4}>
-                    <Typography
-                        fontWeight={400}
-                        fontSize={"28px"}
-                        fontFamily={"Inter"}
-                        lineHeight={"33px"}
-                    >
-                        Track Package
-                    </Typography>
-                    <Box mt={2}>
-                        <Stack direction={"row"} spacing={2}>
-                            <Typography
-                                fontWeight={500}
-                                fontSize={"14px"}
-                                fontFamily={"Inter"}
-                                lineHeight={"16px"}
-                            >
-                                Estimated Delivery:
-                            </Typography>
-                            <Typography
-                                fontWeight={400}
-                                fontSize={"14px"}
-                                fontFamily={"Inter"}
-                                lineHeight={"16px"}
-                            >
-                                May 8, 2023
-                            </Typography>
-                        </Stack>
-                        <Typography
-                            fontWeight={400}
-                            fontSize={"14px"}
-                            fontFamily={"Inter"}
-                            lineHeight={"33px"}
-                        >
-                            Arrived at FedEx location
-                        </Typography>
-                    </Box>
-                </Box>
-                <CustomizedSteppers />
-                <Grid mt={7} container columnSpacing={6}>
-                    <Grid item xs={12} sm={"12"} md={6} lg={5}>
-                        <ShipmentInformation />
-                        <Box mt={[4, 4, 6.6]}>
-                            <ItemsInShipment />
-                        </Box>
-                    </Grid>
-                    <Grid mt={[4, 4, 0]} item xs={12} sm={12} md={6} lg={7}>
-                        <TrackingHistory />
-                        <Box mt={[4, 4, 6]}>
-                            <ExpectOnDeliveryDay />
-                        </Box>
-                    </Grid>
-                </Grid>
-            </Container>
-            <Box>
-                <Recommendation products={products} />
+  return (
+    <>
+      <Container sx={{ my: 4 }}>
+        <Box mt={2} mb={4}>
+          <Typography
+            fontWeight={400}
+            fontSize={'28px'}
+            fontFamily={'Inter'}
+            lineHeight={'33px'}
+          >
+            Track Package
+          </Typography>
+          <Box mt={2}>
+            <Stack direction={'row'} spacing={2}>
+              <Typography
+                fontWeight={500}
+                fontSize={'14px'}
+                fontFamily={'Inter'}
+                lineHeight={'16px'}
+              >
+                Estimated Delivery:
+              </Typography>
+              <Typography
+                fontWeight={400}
+                fontSize={'14px'}
+                fontFamily={'Inter'}
+                lineHeight={'16px'}
+              >
+                May 8, 2023
+              </Typography>
+            </Stack>
+            <Typography
+              fontWeight={400}
+              fontSize={'14px'}
+              fontFamily={'Inter'}
+              lineHeight={'33px'}
+            >
+              Arrived at FedEx location
+            </Typography>
+          </Box>
+        </Box>
+        <CustomizedSteppers />
+        <Grid mt={7} container columnSpacing={6}>
+          <Grid item xs={12} sm={'12'} md={6} lg={5}>
+            <ShipmentInformation />
+            <Box mt={[4, 4, 6.6]}>
+              <ItemsInShipment />
             </Box>
-        </>
-    );
+          </Grid>
+          <Grid mt={[4, 4, 0]} item xs={12} sm={12} md={6} lg={7}>
+            <TrackingHistory />
+            <Box mt={[4, 4, 6]}>
+              <ExpectOnDeliveryDay />
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
+      <Box>
+        <Recommendation products={products} />
+      </Box>
+    </>
+  );
 };
 
 export default TrackOrder;

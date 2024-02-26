@@ -65,20 +65,20 @@
 
 // Tooltip.js
 
-import React from "react";
+import React from 'react';
 
-import "./index.css";
-import { Box } from "@mui/material";
+import './index.css';
+import { Box } from '@mui/material';
 
 const Tooltip = ({ content, sx, children }) => {
-    return (
-        <div className="tooltip-container">
-            {children}
-            <Box className="tooltip" sx={sx}>
-                {content}
-            </Box>
-        </div>
-    );
+  return (
+    <div className='tooltip-container'>
+      {children}
+      <Box className='tooltip' sx={sx}>
+        {content}
+      </Box>
+    </div>
+  );
 };
 
 export default Tooltip;

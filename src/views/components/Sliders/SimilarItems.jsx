@@ -44,7 +44,8 @@ const SimilarItemsSlider = ({ type = '', similarProducts }) => {
           },
         }}
         // navigation
-        className='similer-item-container'>
+        className='similer-item-container'
+      >
         {similarProducts?.length > 0 ? (
           similarProducts?.map(product => (
             <SwiperSlide key={'ps-' + product?.id}>
@@ -61,10 +62,12 @@ const SimilarItemsSlider = ({ type = '', similarProducts }) => {
       </Swiper>
       <div
         className='swiper-button-next'
-        style={{ position: 'absolute', right: -40 }}></div>
+        style={{ position: 'absolute', right: -40 }}
+      ></div>
       <div
         className='swiper-button-prev'
-        style={{ position: 'absolute', left: -40 }}></div>
+        style={{ position: 'absolute', left: -40 }}
+      ></div>
     </div>
   );
 };

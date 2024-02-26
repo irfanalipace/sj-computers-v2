@@ -1,58 +1,58 @@
 .ul-item-list-header {
-    list-style: none; /* This removes the default bullet point style */
-    display: flex; /* This sets the display property of the list to flex */
-    justify-content: space-between; /* This evenly spaces out the list items horizontally */
-    align-items: center; /* This centers the list items vertically */
-    background-color: #f2f2f2; /* This sets the background color of the list */
-    padding: 10px 20px; /* This adds some padding to the top and bottom of the list */
+  list-style: none; /* This removes the default bullet point style */
+  display: flex; /* This sets the display property of the list to flex */
+  justify-content: space-between; /* This evenly spaces out the list items horizontally */
+  align-items: center; /* This centers the list items vertically */
+  background-color: #f2f2f2; /* This sets the background color of the list */
+  padding: 10px 20px; /* This adds some padding to the top and bottom of the list */
 }
 
 .ul-item-list-header li {
-    margin: 0 20px;
-    margin-bottom: 8px;
-    /* margin-bottom: 3px; */
+  margin: 0 20px;
+  margin-bottom: 8px;
+  /* margin-bottom: 3px; */
 }
 .sidebar-icon-fields-bar {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 .ul-item-list-header a {
-    text-decoration: none;
-    color: #333;
-    font-size: 12px;
-    font-weight: bold;
+  text-decoration: none;
+  color: #333;
+  font-size: 12px;
+  font-weight: bold;
 }
 .bottom-navigation {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-    margin-bottom: -24px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  margin-bottom: -24px;
 }
 .fa-icon-cart {
-    font-size: 15px;
+  font-size: 15px;
 }
 .list-data-items {
-    position: relative;
+  position: relative;
 }
 
 .data-list-icon-list {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    background-color: orange;
-    border-radius: 50%;
-    font-size: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: -6px;
-    right: -13px;
-    color: white;
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: orange;
+  border-radius: 50%;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -6px;
+  right: -13px;
+  color: white;
 }
 .font-size-mobile-icon {
-    font-size: 17px !important;
+  font-size: 17px !important;
 }
 .list-view-item {
-    padding-top: 6px;
+  padding-top: 6px;
 }

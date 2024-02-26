@@ -1,72 +1,72 @@
-import React, { useState } from "react";
-import "./BottomNavigation.css";
+import React, { useState } from 'react';
+import './BottomNavigation.css';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-import { useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faHome,
-    faShoppingCart,
-    faUser,
-} from "@fortawesome/free-solid-svg-icons";
+  faHome,
+  faShoppingCart,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 function BottomNavigation() {
-    const cartDetails = useSelector((state) => state.cart.details);
-    const [isSideMenu, setSideMenu] = useState(false);
-    const toggleSidebar = () => {
-        return setSideMenu((state) => !state);
-    };
-    return (
+  const cartDetails = useSelector(state => state.cart.details);
+  const [isSideMenu, setSideMenu] = useState(false);
+  const toggleSidebar = () => {
+    return setSideMenu(state => !state);
+  };
+  return (
+    <div>
+      <div className='bottom-navigation'>
         <div>
-            <div className="bottom-navigation">
-                <div>
-                    <div className="bottom-navigation__menu">
-                        <div className="bottom-navigation__menu-items">
-                            <ul className="ul-item-list-header">
-                                <li>
-                                    <Link to="/">
-                                        {/* <i
+          <div className='bottom-navigation__menu'>
+            <div className='bottom-navigation__menu-items'>
+              <ul className='ul-item-list-header'>
+                <li>
+                  <Link to='/'>
+                    {/* <i
                                             className="fa fa-home font-size-mobile-icon"
                                             aria-hidden="true"
                                         ></i> */}
-                                        <FontAwesomeIcon
-                                            icon={faHome}
-                                            className="font-size-mobile-icon"
-                                        />
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/account">
-                                        {/* <i
+                    <FontAwesomeIcon
+                      icon={faHome}
+                      className='font-size-mobile-icon'
+                    />
+                  </Link>
+                </li>
+                <li>
+                  <Link to='/account'>
+                    {/* <i
                                             className="fa fa-user font-size-mobile-icon"
                                             aria-hidden="true"
                                         ></i> */}
-                                        <FontAwesomeIcon
-                                            icon={faUser}
-                                            className="font-size-mobile-icon"
-                                        ></FontAwesomeIcon>
-                                    </Link>
-                                </li>
+                    <FontAwesomeIcon
+                      icon={faUser}
+                      className='font-size-mobile-icon'
+                    ></FontAwesomeIcon>
+                  </Link>
+                </li>
 
-                                <li className="list-view-item list-data-items">
-                                    <span className="data-list-icon-list">
-                                        {" "}
-                                        {cartDetails.total_items}
-                                    </span>
+                <li className='list-view-item list-data-items'>
+                  <span className='data-list-icon-list'>
+                    {' '}
+                    {cartDetails.total_items}
+                  </span>
 
-                                    <Link to="/cart">
-                                        {/* <i
+                  <Link to='/cart'>
+                    {/* <i
                                             className="fa fa-shopping-cart font-size-mobile-icon"
                                             aria-hidden="true"
                                         ></i> */}
-                                        <FontAwesomeIcon
-                                            icon={faShoppingCart}
-                                            className="font-size-mobile-icon"
-                                        ></FontAwesomeIcon>
-                                    </Link>
-                                </li>
+                    <FontAwesomeIcon
+                      icon={faShoppingCart}
+                      className='font-size-mobile-icon'
+                    ></FontAwesomeIcon>
+                  </Link>
+                </li>
 
-                                {/* <span
+                {/* <span
                                 className="navIcon  hover-effect-sets sidebar-icon-fields-bar"
                                 onClick={() => {
                                     toggleSidebar();
@@ -83,13 +83,13 @@ function BottomNavigation() {
                                     )}
                                 </i>
                             </span> */}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+              </ul>
             </div>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default BottomNavigation;

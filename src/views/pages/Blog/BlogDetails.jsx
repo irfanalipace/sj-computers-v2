@@ -1,568 +1,516 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import "./BlogDetails.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import './BlogDetails.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {
-    // getBlogsPagesApi,
-    blogSlugApiblogDetails,
-    getBlogsHeaderPagesApi,
-    // getBlogCategories,
-} from "@api/blogs";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+  // getBlogsPagesApi,
+  blogSlugApiblogDetails,
+  getBlogsHeaderPagesApi,
+  // getBlogCategories,
+} from '@api/blogs';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import {
-    // faTwitter,
-    faFacebook,
-    // faYoutube,
-    faInstagram,
-    faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
-import NotFound from "@pages/NotFound/NotFound";
-import { useParams } from "react-router-dom";
-import { Helmet } from "react-helmet";
+  // faTwitter,
+  faFacebook,
+  // faYoutube,
+  faInstagram,
+  faLinkedin,
+} from '@fortawesome/free-brands-svg-icons';
+import NotFound from '@pages/NotFound/NotFound';
+import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 // import smimage from "@images/blog/smallimage.png";
 // import primardataimage from "@images/blog/meeting.png";
-import { Loader } from "@mantine/core";
-import DOMPurify from "dompurify";
+import { Loader } from '@mantine/core';
+import DOMPurify from 'dompurify';
 
 const HeadereLinks = [
-    { path: "/about_us", title: "About Us" },
-    { path: "/what-we-do", title: "What We Do?" },
-    { path: "/return_refund_policy", title: "Return & Refund" },
-    { path: "/shipping_policy", title: "Shipping Policy" },
-    { path: "/term_services", title: "Terms of Services" },
-    { path: "/privacy_policy", title: "Privacy Policy" },
-    // { path: "/", title: "Subscribe" },
+  { path: '/about_us', title: 'About Us' },
+  { path: '/what-we-do', title: 'What We Do?' },
+  { path: '/return_refund_policy', title: 'Return & Refund' },
+  { path: '/shipping_policy', title: 'Shipping Policy' },
+  { path: '/term_services', title: 'Terms of Services' },
+  { path: '/privacy_policy', title: 'Privacy Policy' },
+  // { path: "/", title: "Subscribe" },
 ];
 
 const BlogDetails = () => {
-    const location = useLocation();
-    const { blogList } = location.state || {};
+  const location = useLocation();
+  const { blogList } = location.state || {};
 
-    const { categoryslug } = useParams();
+  const { categoryslug } = useParams();
 
-    const [blogdteails, setBlogDetails] = useState("");
-    const [blogsdetailserror, setBlogdetailsError] = useState(false);
-    const [isCollapsed, setCollapsed] = useState(false);
-    const [blogLoading, setblogLoading] = useState(false);
-    const [isRecentcollapsed, setRecentCollapsed] = useState(false);
-    const [blogs, setBlogs] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(3);
-    const [prevPageUrl, setPrevPageUrl] = useState(null);
-    const [nextPageUrl, setNextPageUrl] = useState(null);
-    const { blogslug } = useParams();
+  const [blogdteails, setBlogDetails] = useState('');
+  const [blogsdetailserror, setBlogdetailsError] = useState(false);
+  const [isCollapsed, setCollapsed] = useState(false);
+  const [blogLoading, setblogLoading] = useState(false);
+  const [isRecentcollapsed, setRecentCollapsed] = useState(false);
+  const [blogs, setBlogs] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(3);
+  const [prevPageUrl, setPrevPageUrl] = useState(null);
+  const [nextPageUrl, setNextPageUrl] = useState(null);
+  const { blogslug } = useParams();
 
-    const blogscategories = useSelector((state) => state.category.categories);
+  const blogscategories = useSelector(state => state.category.categories);
 
-    let RenderedCategories = blogscategories?.map((category) => (
-        <li key={category.id}>
-            <Link
-                to={`/blogs/category/${category.slug}`}
-                className="text-decoration-none"
-            >
-                {category.name}
-            </Link>
-        </li>
-    ));
+  let RenderedCategories = blogscategories?.map(category => (
+    <li key={category.id}>
+      <Link
+        to={`/blogs/category/${category.slug}`}
+        className='text-decoration-none'
+      >
+        {category.name}
+      </Link>
+    </li>
+  ));
 
-    const path = window.location.pathname;
+  const path = window.location.pathname;
 
-    const pathWithoutSlash = path.slice(1);
+  const pathWithoutSlash = path.slice(1);
 
-    const filteredArr = blogs?.filter(
-        (item) => item?.slug !== pathWithoutSlash,
-    );
+  const filteredArr = blogs?.filter(item => item?.slug !== pathWithoutSlash);
 
-    if (filteredArr?.length > 3) {
-        filteredArr?.pop(); // Remove the last element
+  if (filteredArr?.length > 3) {
+    filteredArr?.pop(); // Remove the last element
+  }
+
+  useEffect(() => {
+    if (blogList) {
+      setBlogDetails(blogList);
+    } else {
+      setblogLoading(true);
+      blogSlugApiblogDetails(blogslug)
+        .then(response => {
+          setBlogDetails(response?.data);
+
+          setblogLoading(false);
+        })
+        .catch(error => {
+          console.error('API Error:', error);
+          setBlogdetailsError(true);
+          setblogLoading(false);
+        });
     }
 
-    useEffect(() => {
-        if (blogList) {
-            setBlogDetails(blogList);
+    ////blogs category code
+
+    getBlogsHeaderPagesApi()
+      .then(response => {
+        if (response.data?.data?.length > 0) {
+          setBlogs(response.data?.data);
+
+          setPrevPageUrl(response.data?.prev_page_url);
+          setNextPageUrl(response.data?.next_page_url);
         } else {
-            setblogLoading(true);
-            blogSlugApiblogDetails(blogslug)
-                .then((response) => {
-                    setBlogDetails(response?.data);
-
-                    setblogLoading(false);
-                })
-                .catch((error) => {
-                    console.error("API Error:", error);
-                    setBlogdetailsError(true);
-                    setblogLoading(false);
-                });
+          setBlogs([]);
+          setPrevPageUrl(response.data?.prev_page_url);
+          setNextPageUrl(response.data?.next_page_url);
         }
+      })
+      .catch(error => {
+        console.error('API Error:', error);
+      });
+  }, [blogslug]);
 
-        ////blogs category code
+  const [showMore, setShowMore] = useState(false);
 
-        getBlogsHeaderPagesApi()
-            .then((response) => {
-                if (response.data?.data?.length > 0) {
-                    setBlogs(response.data?.data);
+  const toggleContent = () => {
+    setShowMore(!showMore);
+  };
 
-                    setPrevPageUrl(response.data?.prev_page_url);
-                    setNextPageUrl(response.data?.next_page_url);
-                } else {
-                    setBlogs([]);
-                    setPrevPageUrl(response.data?.prev_page_url);
-                    setNextPageUrl(response.data?.next_page_url);
-                }
-            })
-            .catch((error) => {
-                console.error("API Error:", error);
-            });
-    }, [blogslug]);
+  const handlePaginationClick = pageNumber => {
+    setCurrentPage(pageNumber - 1);
+  };
 
-    const [showMore, setShowMore] = useState(false);
+  const handlePrevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
 
-    const toggleContent = () => {
-        setShowMore(!showMore);
-    };
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
 
-    const handlePaginationClick = (pageNumber) => {
-        setCurrentPage(pageNumber - 1);
-    };
+  const indexOfLastItem = (currentPage + 1) * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-    const handlePrevPage = () => {
-        setCurrentPage(currentPage - 1);
-    };
+  const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
 
-    const handleNextPage = () => {
-        setCurrentPage(currentPage + 1);
-    };
+  const totalPages = Math.ceil(blogs?.length / itemsPerPage);
 
-    const indexOfLastItem = (currentPage + 1) * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  useEffect(() => {
+    if (blogdteails?.id) {
+      try {
+        const blogContent = document.getElementById('blog-content');
+        const h2Tags = blogContent.getElementsByTagName('h2');
 
-    const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
+        if (
+          h2Tags?.length > 0 &&
+          blogdteails.secondary_image &&
+          blogdteails.alt_secondary_image
+        ) {
+          const firstH2Tag = h2Tags[0];
+          const imgTag = document.createElement('img');
+          imgTag.src = blogdteails.secondary_image;
+          imgTag.alt = blogdteails.alt_secondary_image;
 
-    const totalPages = Math.ceil(blogs?.length / itemsPerPage);
-
-    useEffect(() => {
-        if (blogdteails?.id) {
-            try {
-                const blogContent = document.getElementById("blog-content");
-                const h2Tags = blogContent.getElementsByTagName("h2");
-
-                if (
-                    h2Tags?.length > 0 &&
-                    blogdteails.secondary_image &&
-                    blogdteails.alt_secondary_image
-                ) {
-                    const firstH2Tag = h2Tags[0];
-                    const imgTag = document.createElement("img");
-                    imgTag.src = blogdteails.secondary_image;
-                    imgTag.alt = blogdteails.alt_secondary_image;
-
-                    firstH2Tag.insertAdjacentElement("afterend", imgTag);
-                }
-            } catch (error) {}
-            const wpm = 225;
-            const text = `${blogdteails.content}`;
-            const words = text.trim()?.split(/\s+/)?.length;
-            const time = Math.ceil(words / wpm);
-            setReadingTime(time);
+          firstH2Tag.insertAdjacentElement('afterend', imgTag);
         }
-    }, [blogdteails]);
-
-    // useEffect(() => {
-    //     const blogContent = document.getElementById("blog-content");
-    //     const h2Tags = blogContent.getElementsByTagName("h2");
-
-    //     if (h2Tags.length > 0) {
-    //         const firstH2Tag = h2Tags[0];
-    //         const imgTag = document.createElement("img");
-    //         imgTag.src = blogdteails.secondary_image
-
-    //         imgTag.alt = blogdteails.alt_secondary_image;
-
-    //         firstH2Tag.insertAdjacentElement("afterend", imgTag);
-    //     }
-    // }, [blogdteails]);
-
-    // useEffect(() => {
-    //     const blogContent = document.getElementById("blog-content");
-    //     const h2Tags = blogContent.getElementsByTagName("h2");
-
-    //     if (h2Tags.length > 0) {
-    //       const firstH2Tag = h2Tags[0];
-    //       if (blogdteails.secondary_image) {
-    //         const imgTag = document.createElement("img");
-    //         imgTag.src = blogdteails.secondary_image;
-    //         imgTag.alt = blogdteails.all_text;
-    //         firstH2Tag.insertAdjacentElement("afterend", imgTag);
-    //       } else {
-    //         const imgTags = firstH2Tag.nextElementSibling.getElementsByTagName("img");
-    //         for (let i = 0; i < imgTags.length; i++) {
-    //           imgTags[i].style.display = "none";
-    //         }
-    //       }
-    //     }
-    //   }, [blogdteails]);
-
-    const [readingTime, setReadingTime] = useState(0);
-
-    const categories = [
-        { id: 1, name: "Category 1" },
-        { id: 2, name: "Category 2" },
-        { id: 3, name: "Category 3" },
-        // Add more categories as needed
-    ];
-
-    const handleClick = (event, category_id) => {
-        event.preventDefault();
-        window.history.pushState(null, null, `#`);
-    };
-
-    // const handleClick = (event, category_id) => {
-    //     event.preventDefault();
-    //     window.history.pushState(null, null, `#${category_id}`);
-    //   };
-
-    // useEffect(() => {
-    //     getBlogCategories(categoryslug)
-    //         .then((response) => {
-    //             console.log("API Response:", response); // List of the Category Blogs Show Here
-    //             setCategoriesBlogs(response);
-    //             console.log(response, 'response aapi');
-    //         })
-    //         .catch((error) => {
-    //             console.error("API Error:", error);
-    //             if (error) {
-    //                 setBlogdetailsError(true);
-    //             }
-    //         });
-    // }, [categoryslug]);
-
-    if (blogLoading) {
-        return (
-            <div className="text-center">
-                <Loader />
-            </div>
-        );
+      } catch (error) {}
+      const wpm = 225;
+      const text = `${blogdteails.content}`;
+      const words = text.trim()?.split(/\s+/)?.length;
+      const time = Math.ceil(words / wpm);
+      setReadingTime(time);
     }
+  }, [blogdteails]);
 
-    const sortedBlogs = blogs.sort(
-        (a, b) => new Date(b.publish_date) - new Date(a.publish_date),
-    );
+  // useEffect(() => {
+  //     const blogContent = document.getElementById("blog-content");
+  //     const h2Tags = blogContent.getElementsByTagName("h2");
 
-    const toggleCollapse = () => {
-        setCollapsed(!isCollapsed);
-    };
-    const RecentCollapse = () => {
-        setRecentCollapsed(!isRecentcollapsed);
-    };
+  //     if (h2Tags.length > 0) {
+  //         const firstH2Tag = h2Tags[0];
+  //         const imgTag = document.createElement("img");
+  //         imgTag.src = blogdteails.secondary_image
 
-    // if (!isCollapsed && blogscategories.length > 0) {
-    //   RenderedCategories = (
-    //     <div className="widget widget_categories">
-    //       <h4>Categories</h4>
-    //       <ul>
-    //         {blogscategories.map((category) => (
-    //           <li key={category.id}>{category.name}</li>
-    //         ))}
-    //       </ul>
-    //     </div>
-    //   );
-    // }
+  //         imgTag.alt = blogdteails.alt_secondary_image;
 
+  //         firstH2Tag.insertAdjacentElement("afterend", imgTag);
+  //     }
+  // }, [blogdteails]);
+
+  // useEffect(() => {
+  //     const blogContent = document.getElementById("blog-content");
+  //     const h2Tags = blogContent.getElementsByTagName("h2");
+
+  //     if (h2Tags.length > 0) {
+  //       const firstH2Tag = h2Tags[0];
+  //       if (blogdteails.secondary_image) {
+  //         const imgTag = document.createElement("img");
+  //         imgTag.src = blogdteails.secondary_image;
+  //         imgTag.alt = blogdteails.all_text;
+  //         firstH2Tag.insertAdjacentElement("afterend", imgTag);
+  //       } else {
+  //         const imgTags = firstH2Tag.nextElementSibling.getElementsByTagName("img");
+  //         for (let i = 0; i < imgTags.length; i++) {
+  //           imgTags[i].style.display = "none";
+  //         }
+  //       }
+  //     }
+  //   }, [blogdteails]);
+
+  const [readingTime, setReadingTime] = useState(0);
+
+  const categories = [
+    { id: 1, name: 'Category 1' },
+    { id: 2, name: 'Category 2' },
+    { id: 3, name: 'Category 3' },
+    // Add more categories as needed
+  ];
+
+  const handleClick = (event, category_id) => {
+    event.preventDefault();
+    window.history.pushState(null, null, `#`);
+  };
+
+  // const handleClick = (event, category_id) => {
+  //     event.preventDefault();
+  //     window.history.pushState(null, null, `#${category_id}`);
+  //   };
+
+  // useEffect(() => {
+  //     getBlogCategories(categoryslug)
+  //         .then((response) => {
+  //             console.log("API Response:", response); // List of the Category Blogs Show Here
+  //             setCategoriesBlogs(response);
+  //             console.log(response, 'response aapi');
+  //         })
+  //         .catch((error) => {
+  //             console.error("API Error:", error);
+  //             if (error) {
+  //                 setBlogdetailsError(true);
+  //             }
+  //         });
+  // }, [categoryslug]);
+
+  if (blogLoading) {
     return (
-        <>
-            {blogsdetailserror ? (
-                <NotFound />
-            ) : blogList || blogdteails ? (
+      <div className='text-center'>
+        <Loader />
+      </div>
+    );
+  }
+
+  const sortedBlogs = blogs.sort(
+    (a, b) => new Date(b.publish_date) - new Date(a.publish_date),
+  );
+
+  const toggleCollapse = () => {
+    setCollapsed(!isCollapsed);
+  };
+  const RecentCollapse = () => {
+    setRecentCollapsed(!isRecentcollapsed);
+  };
+
+  // if (!isCollapsed && blogscategories.length > 0) {
+  //   RenderedCategories = (
+  //     <div className="widget widget_categories">
+  //       <h4>Categories</h4>
+  //       <ul>
+  //         {blogscategories.map((category) => (
+  //           <li key={category.id}>{category.name}</li>
+  //         ))}
+  //       </ul>
+  //     </div>
+  //   );
+  // }
+
+  return (
+    <>
+      {blogsdetailserror ? (
+        <NotFound />
+      ) : blogList || blogdteails ? (
+        <div>
+          <div>
+            <Helmet>
+              <title>{blogdteails.meta_title}</title>
+
+              <meta name='description' content={blogdteails.meta_description} />
+            </Helmet>
+            <div className=''>
+              <div className='row'>
                 <div>
-                    <div>
-                        <Helmet>
-                            <title>{blogdteails.meta_title}</title>
+                  <header className='topBar px-3 policy-header-topbar policy-header-topbar-scroll-blogs'>
+                    <div className='topBar-inner-policy'>
+                      <div className='menuBar-policy'>
+                        <ul className='text-decoration-none policy-menu-item-list'>
+                          {HeadereLinks.map((link, index) => (
+                            <li className='policy-listitem' key={index}>
+                              <Link
+                                to={link.path}
+                                className='text-decoration-none text-color hover-effect-sets-topbar hover-text-color-policy-comp'
+                              >
+                                {link.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </header>
+                </div>
+              </div>
 
-                            <meta
-                                name="description"
-                                content={blogdteails.meta_description}
-                            />
-                        </Helmet>
-                        <div className="">
-                            <div className="row">
-                                <div>
-                                    <header className="topBar px-3 policy-header-topbar policy-header-topbar-scroll-blogs">
-                                        <div className="topBar-inner-policy">
-                                            <div className="menuBar-policy">
-                                                <ul className="text-decoration-none policy-menu-item-list">
-                                                    {HeadereLinks.map(
-                                                        (link, index) => (
-                                                            <li
-                                                                className="policy-listitem"
-                                                                key={index}
-                                                            >
-                                                                <Link
-                                                                    to={
-                                                                        link.path
-                                                                    }
-                                                                    className="text-decoration-none text-color hover-effect-sets-topbar hover-text-color-policy-comp"
-                                                                >
-                                                                    {link.title}
-                                                                </Link>
-                                                            </li>
-                                                        ),
-                                                    )}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </header>
-                                </div>
+              <div className='blog-background-color'>
+                <div className='container dev-container-side'>
+                  <div className='row'>
+                    <div className='col-md-2'>
+                      <div className='div-left-blog-text'>
+                        <span>
+                          <span
+                            style={{
+                              padding: '3px',
+                              borderRadius: '5px',
+                              color: 'whit',
+                            }}
+                          >
+                            Blogs /
+                          </span>{' '}
+                          {blogslug}
+                        </span>
+                      </div>
+                      <div className='dive-reight-border'>
+                        <div className='circle-dev-blog'>
+                          <span> {readingTime} min</span>
+                        </div>
+                        <div className='date-blog-after-circle'>
+                          <span>
+                            {blogdteails.publish_date
+                              ? new Date(
+                                  blogdteails.publish_date,
+                                ).toLocaleDateString('en-US', {
+                                  month: '2-digit',
+                                  day: '2-digit',
+                                  year: 'numeric',
+                                })
+                              : null}
+                          </span>
+                        </div>
+                        <div className='ul-item-blog-social-icon'>
+                          <a href='https://www.instagram.com/sjcomputersllc/'>
+                            <FontAwesomeIcon icon={faInstagram} />
+                          </a>
+                          <a href='https://www.facebook.com/sjcomputersllc'>
+                            <FontAwesomeIcon icon={faFacebook} />
+                          </a>
+                          <a href='https://www.linkedin.com/company/sj-computers/'>
+                            <FontAwesomeIcon icon={faLinkedin} />
+                          </a>
+                          {/*<a href="https://twitter.com/example">*/}
+                          {/*    <FontAwesomeIcon*/}
+                          {/*        icon={faTwitter}*/}
+                          {/*    />*/}
+                          {/*</a>*/}
+                        </div>
+                      </div>
+                    </div>
+                    <div className='col-md-9'>
+                      <div className='dev-left-blog-p'>
+                        <h1 className='heading-data-title-image'>
+                          {blogdteails.title}
+                        </h1>
+                      </div>
+                      <div className='div-left-blog-text-written'>
+                        <span>Written by SJ Staff</span>
+                      </div>
+                      <div className='div-left-blog-text-writt'>
+                        {blogdteails.categories?.map((category, index) => (
+                          <React.Fragment key={category.id}>
+                            {index > 0 && (
+                              <div className='vertical-line-blogs'></div>
+                            )}
+                            <div>
+                              <Link
+                                to='javascript:void(0)'
+                                onClick={event =>
+                                  handleClick(event, category.id)
+                                }
+                                className='text-decoration-none'
+                              >
+                                {category.name}
+                              </Link>
                             </div>
+                          </React.Fragment>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-                            <div className="blog-background-color">
-                                <div className="container dev-container-side">
-                                    <div className="row">
-                                        <div className="col-md-2">
-                                            <div className="div-left-blog-text">
-                                                <span>
-                                                    <span
-                                                        style={{
-                                                            padding: "3px",
-                                                            borderRadius: "5px",
-                                                            color: "whit",
-                                                        }}
-                                                    >
-                                                        Blogs /
-                                                    </span>{" "}
-                                                    {blogslug}
-                                                </span>
-                                            </div>
-                                            <div className="dive-reight-border">
-                                                <div className="circle-dev-blog">
-                                                    <span>
-                                                        {" "}
-                                                        {readingTime} min
-                                                    </span>
-                                                </div>
-                                                <div className="date-blog-after-circle">
-                                                    <span>
-                                                        {blogdteails.publish_date
-                                                            ? new Date(
-                                                                  blogdteails.publish_date,
-                                                              ).toLocaleDateString(
-                                                                  "en-US",
-                                                                  {
-                                                                      month: "2-digit",
-                                                                      day: "2-digit",
-                                                                      year: "numeric",
-                                                                  },
-                                                              )
-                                                            : null}
-                                                    </span>
-                                                </div>
-                                                <div className="ul-item-blog-social-icon">
-                                                    <a href="https://www.instagram.com/sjcomputersllc/">
-                                                        <FontAwesomeIcon
-                                                            icon={faInstagram}
-                                                        />
-                                                    </a>
-                                                    <a href="https://www.facebook.com/sjcomputersllc">
-                                                        <FontAwesomeIcon
-                                                            icon={faFacebook}
-                                                        />
-                                                    </a>
-                                                    <a href="https://www.linkedin.com/company/sj-computers/">
-                                                        <FontAwesomeIcon
-                                                            icon={faLinkedin}
-                                                        />
-                                                    </a>
-                                                    {/*<a href="https://twitter.com/example">*/}
-                                                    {/*    <FontAwesomeIcon*/}
-                                                    {/*        icon={faTwitter}*/}
-                                                    {/*    />*/}
-                                                    {/*</a>*/}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-9">
-                                            <div className="dev-left-blog-p">
-                                                <h1 className="heading-data-title-image">
-                                                    {blogdteails.title}
-                                                </h1>
-                                            </div>
-                                            <div className="div-left-blog-text-written">
-                                                <span>Written by SJ Staff</span>
-                                            </div>
-                                            <div className="div-left-blog-text-writt">
-                                                {blogdteails.categories?.map(
-                                                    (category, index) => (
-                                                        <React.Fragment
-                                                            key={category.id}
-                                                        >
-                                                            {index > 0 && (
-                                                                <div className="vertical-line-blogs"></div>
-                                                            )}
-                                                            <div>
-                                                                <Link
-                                                                    to="javascript:void(0)"
-                                                                    onClick={(
-                                                                        event,
-                                                                    ) =>
-                                                                        handleClick(
-                                                                            event,
-                                                                            category.id,
-                                                                        )
-                                                                    }
-                                                                    className="text-decoration-none"
-                                                                >
-                                                                    {
-                                                                        category.name
-                                                                    }
-                                                                </Link>
-                                                            </div>
-                                                        </React.Fragment>
-                                                    ),
-                                                )}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+              <div
+                className='container image-cainter-dev'
+                // style={{ height: "400px" }}
+              >
+                <div className='background-image-lin-dve '>
+                  <div>
+                    <img
+                      src={blogdteails.primary_image}
+                      alt={blogdteails.all_text}
+                    />
+                  </div>
+                </div>
+              </div>
 
-                            <div
-                                className="container image-cainter-dev"
-                                // style={{ height: "400px" }}
-                            >
-                                <div className="background-image-lin-dve ">
-                                    <div>
-                                        <img
-                                            src={blogdteails.primary_image}
-                                            alt={blogdteails.all_text}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="container content-data-of-the-iamges-blogs">
-                                <div className="row">
-                                    <div className="col-md-3 top-stories-data">
-                                        <div className="main-dev-card-deprt">
-                                            <div
-                                                className="left-dev-span-stories recent-bogs-view-clops"
-                                                onClick={RecentCollapse}
-                                                style={{ display: "flex" }}
-                                            >
-                                                <div>
-                                                    <span>Recent Articles</span>
-                                                </div>
-                                                <div>
-                                                    <button className="recenr-articel-data">
-                                                        {" "}
-                                                        <i className="fa-solid fa-chevron-down"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            {/* <div>
+              <div className='container content-data-of-the-iamges-blogs'>
+                <div className='row'>
+                  <div className='col-md-3 top-stories-data'>
+                    <div className='main-dev-card-deprt'>
+                      <div
+                        className='left-dev-span-stories recent-bogs-view-clops'
+                        onClick={RecentCollapse}
+                        style={{ display: 'flex' }}
+                      >
+                        <div>
+                          <span>Recent Articles</span>
+                        </div>
+                        <div>
+                          <button className='recenr-articel-data'>
+                            {' '}
+                            <i className='fa-solid fa-chevron-down'></i>
+                          </button>
+                        </div>
+                      </div>
+                      {/* <div>
                                             <button  className="recenr-articel-data"> <i className="fa-solid fa-chevron-down"></i></button>
                                             </div> */}
 
-                                            <div>
-                                                <div>
-                                                    <hr
-                                                        style={{
-                                                            marginBottom: "8px",
-                                                            marginTop: "6px",
-                                                            marginRight: "5px",
-                                                            marginLeft: "2px",
-                                                        }}
-                                                    />
-                                                </div>
-                                                <div>
-                                                    {isRecentcollapsed &&
-                                                        filteredArr?.map(
-                                                            (blog) => (
-                                                                <div
-                                                                    key={
-                                                                        blog.id
-                                                                    }
-                                                                >
-                                                                    <Link
-                                                                        to={`/${blog?.slug}`}
-                                                                        className="text-decoration-none"
-                                                                    >
-                                                                        <div className="row">
-                                                                            <div className="col-4">
-                                                                                <div className="them-stori-mage">
-                                                                                    <img
-                                                                                        src={
-                                                                                            blog?.thumbnail_image
-                                                                                        }
-                                                                                        alt={
-                                                                                            blog?.alt_thumbnail_image
-                                                                                        }
-                                                                                    />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="col-8">
-                                                                                <div className="dev-span-section4-dev">
-                                                                                    <span className="read-more-span-text">
-                                                                                        {
-                                                                                            blog?.meta_description
-                                                                                        }
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </Link>
-                                                                    <hr
-                                                                        style={{
-                                                                            marginBottom:
-                                                                                "5px",
-                                                                            marginTop:
-                                                                                "4px",
-                                                                            marginRight:
-                                                                                "5px",
-                                                                            marginLeft:
-                                                                                "2px",
-                                                                        }}
-                                                                    />
-                                                                </div>
-                                                            ),
-                                                        )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div
-                                                onClick={toggleCollapse}
-                                                className="widget widget_categories categor-data-scrping"
-                                            >
-                                                <div className="category-data-span-blogs">
-                                                    <span>Categories</span>
-                                                </div>
-                                                <div className="fave-category-dropdown-button-blogs-data">
-                                                    <button>
-                                                        {" "}
-                                                        <i className="fa-solid fa-chevron-down"></i>
-                                                    </button>
-                                                </div>
-                                                {/* <button onClick={toggleCollapse}  style={{ textAlign: 'left' }}> Categories <i className="fa-solid fa-chevron-down icon-data-dropdown" ></i></button> */}
-                                            </div>
-                                            {isCollapsed &&
-                                                blogscategories.length > 0 && (
-                                                    <div className="widget widget_categories">
-                                                        {/* <h4>Categories</h4> */}
-                                                        {RenderedCategories}
-                                                    </div>
-                                                )}
-                                        </div>
+                      <div>
+                        <div>
+                          <hr
+                            style={{
+                              marginBottom: '8px',
+                              marginTop: '6px',
+                              marginRight: '5px',
+                              marginLeft: '2px',
+                            }}
+                          />
+                        </div>
+                        <div>
+                          {isRecentcollapsed &&
+                            filteredArr?.map(blog => (
+                              <div key={blog.id}>
+                                <Link
+                                  to={`/${blog?.slug}`}
+                                  className='text-decoration-none'
+                                >
+                                  <div className='row'>
+                                    <div className='col-4'>
+                                      <div className='them-stori-mage'>
+                                        <img
+                                          src={blog?.thumbnail_image}
+                                          alt={blog?.alt_thumbnail_image}
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className='col-8'>
+                                      <div className='dev-span-section4-dev'>
+                                        <span className='read-more-span-text'>
+                                          {blog?.meta_description}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </Link>
+                                <hr
+                                  style={{
+                                    marginBottom: '5px',
+                                    marginTop: '4px',
+                                    marginRight: '5px',
+                                    marginLeft: '2px',
+                                  }}
+                                />
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div
+                        onClick={toggleCollapse}
+                        className='widget widget_categories categor-data-scrping'
+                      >
+                        <div className='category-data-span-blogs'>
+                          <span>Categories</span>
+                        </div>
+                        <div className='fave-category-dropdown-button-blogs-data'>
+                          <button>
+                            {' '}
+                            <i className='fa-solid fa-chevron-down'></i>
+                          </button>
+                        </div>
+                        {/* <button onClick={toggleCollapse}  style={{ textAlign: 'left' }}> Categories <i className="fa-solid fa-chevron-down icon-data-dropdown" ></i></button> */}
+                      </div>
+                      {isCollapsed && blogscategories.length > 0 && (
+                        <div className='widget widget_categories'>
+                          {/* <h4>Categories</h4> */}
+                          {RenderedCategories}
+                        </div>
+                      )}
+                    </div>
 
-                                        {/* {blogscategories?.length > 0 && (
+                    {/* {blogscategories?.length > 0 && (
                                             <div className="widget widget_categories">
                                                 <h4>Categories</h4>
                                                 {RenderedCategories}
                                             </div>
                                         )} */}
 
-                                        {/* <div className="widget widget_categories">
+                    {/* <div className="widget widget_categories">
                                             <h4>Category</h4>
                                            
                                           
@@ -571,20 +519,18 @@ const BlogDetails = () => {
                       
                                           
                                         </div> */}
-                                    </div>
+                  </div>
 
-                                    <div className="col-md-7">
-                                        <div className="blog-dynamic-style-heading-data data-show-user-data-image-content">
-                                            <div
-                                                id="blog-content"
-                                                dangerouslySetInnerHTML={{
-                                                    __html: DOMPurify.sanitize(
-                                                        blogdteails.content,
-                                                    ),
-                                                }}
-                                            />
+                  <div className='col-md-7'>
+                    <div className='blog-dynamic-style-heading-data data-show-user-data-image-content'>
+                      <div
+                        id='blog-content'
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(blogdteails.content),
+                        }}
+                      />
 
-                                            {/* {blogdteails.content && (
+                      {/* {blogdteails.content && (
                                                                              <>
                                                                                  <div
                                                                                      dangerouslySetInnerHTML={{
@@ -627,14 +573,14 @@ const BlogDetails = () => {
                                                                              </>
                                                                          )} */}
 
-                                            {/* <div
+                      {/* <div
                                                                          className="content-image-data-paragrap"
                                                                          dangerouslySetInnerHTML={{
                                                                              __html: insertImageAfterWords(blogdteails.content),
                                                                          }}
                                                                          /> */}
 
-                                            {/* {!showMore && (
+                      {/* {!showMore && (
                                                                              <button
                                                                                  className="show-more-button"
                                                                                  onClick={toggleContent}
@@ -642,17 +588,17 @@ const BlogDetails = () => {
                                                                                  Show More
                                                                              </button>
                                                                          )} */}
-                                            <div className="background-image-lin-dve">
-                                                {/* <img
+                      <div className='background-image-lin-dve'>
+                        {/* <img
                                                                              src={meetingset}
                                                                              alt="Blog Image"
                                                                          /> */}
-                                                {/* <div className="content-image-data-paragrap"
+                        {/* <div className="content-image-data-paragrap"
                                                                          dangerouslySetInnerHTML={{
                                                                          __html: blogdteails.content.substring(3000),
                                                                          }}
                                                                      />  */}
-                                                {/* <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
+                        {/* <div className="content-image-data-paragrap" dangerouslySetInnerHTML={{
                            __html: showMore
                              ? blogdteails.content
                              : (blogdteails.content.length > 3000 ? blogdteails.content.substring(0, 3000) + "..." : blogdteails.content)
@@ -663,9 +609,9 @@ const BlogDetails = () => {
                              __html: blogdteails.content.substring(3000)
                            }} />
                         */}
-                                            </div>
-                                        </div>
-                                        {/* <div className="image-for-meeting2-section">
+                      </div>
+                    </div>
+                    {/* <div className="image-for-meeting2-section">
                                                                      <img src={meetingset} />
 
                                                                      <img
@@ -675,10 +621,10 @@ const BlogDetails = () => {
                                                                  />
 
                                                                  </div> */}
-                                        <span className="span-deve-loram-space">
-                                            {/* {blog.meta_description} */}
-                                        </span>
-                                        {/* <div className="dve-space-paragrapgh">
+                    <span className='span-deve-loram-space'>
+                      {/* {blog.meta_description} */}
+                    </span>
+                    {/* <div className="dve-space-paragrapgh">
                                                                      <div className="blog-dynamic-style-heading-data">
                                                                      <div
                                                                                  dangerouslySetInnerHTML={{
@@ -708,7 +654,7 @@ const BlogDetails = () => {
                                                                      </div>
                                                                  </div> */}
 
-                                        {/* <div className="image-for-meeting2-section">
+                    {/* <div className="image-for-meeting2-section">
                                                                      <img src={meetingset} />
 
                                                                      <img
@@ -742,12 +688,12 @@ const BlogDetails = () => {
                                                                          )}
                                                                      </div>
                                                                  </div> */}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                        {/* <div style={{ background: "rgba(49, 130, 67, 0.1)" }}>
+            {/* <div style={{ background: "rgba(49, 130, 67, 0.1)" }}>
                                                      <div className="container container-blog-data-footer">
                                                          <div className="row">
                                                              <div className="col-md-2">
@@ -819,13 +765,13 @@ const BlogDetails = () => {
                                                          </div>
                                                      </div>
                                                  </div> */}
-                    </div>
-                </div>
-            ) : (
-                <></>
-            )}
-        </>
-    );
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+    </>
+  );
 };
 
 export default BlogDetails;

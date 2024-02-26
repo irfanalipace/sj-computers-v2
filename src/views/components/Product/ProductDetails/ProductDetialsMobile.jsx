@@ -1,172 +1,159 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import { snakeCaseToPrettyText } from "@utils/helpers";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { ProductImage } from "@components/Product/ProductImage/ProductImage";
-import "./ProductDetail.css";
-import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
-import Tooltip from "../../Tooltip";
-import { Box, Divider, Stack, Typography } from "@mui/material";
-import { Tab, Tabs } from "react-bootstrap";
-import CustomTab from "./CustomTab";
-import TabContent from "./TabContnet";
-import ReturnPolicy from "./ReturnPolicy";
-import ProductRating from "./ProductRating";
-import PriceWithLabel from "../../common/PriceWithLabel";
-import { Link } from "react-router-dom";
+import { snakeCaseToPrettyText } from '@utils/helpers';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { ProductImage } from '@components/Product/ProductImage/ProductImage';
+import './ProductDetail.css';
+import { CheckOutCard } from '@components/Product/CheckOutCard/CheckOutCard';
+import Tooltip from '../../Tooltip';
+import { Box, Divider, Stack, Typography } from '@mui/material';
+import { Tab, Tabs } from 'react-bootstrap';
+import CustomTab from './CustomTab';
+import TabContent from './TabContnet';
+import ReturnPolicy from './ReturnPolicy';
+import ProductRating from './ProductRating';
+import PriceWithLabel from '../../common/PriceWithLabel';
+import { Link } from 'react-router-dom';
 
 let acceptedKeys = [
-    "brand",
-    "cpu_model",
-    "hard_disk",
-    "operating_system",
-    "ram_memory",
+  'brand',
+  'cpu_model',
+  'hard_disk',
+  'operating_system',
+  'ram_memory',
 ];
 
 const ProductDetailsMobile = ({ product, isUpSmall }) => {
-    const [description, setDescription] = useState([]);
-    const [productDetails, setProductDetails] = useState([]);
-    const [key, setKey] = useState("home");
+  const [description, setDescription] = useState([]);
+  const [productDetails, setProductDetails] = useState([]);
+  const [key, setKey] = useState('home');
 
-    useEffect(() => {
-        const parseProductDetailsArray = () => {
-            if (!product?.description) return;
+  useEffect(() => {
+    const parseProductDetailsArray = () => {
+      if (!product?.description) return;
 
-            const productDescriptionArray = Object.entries(product.description)
-                .map(([key, value]) => {
-                    if (key === "bullet_point") {
-                        setDescription(value);
-                        return null;
-                    }
+      const productDescriptionArray = Object.entries(product.description)
+        .map(([key, value]) => {
+          if (key === 'bullet_point') {
+            setDescription(value);
+            return null;
+          }
 
-                    let _value = "";
-                    if (Array.isArray(value)) {
-                        const firstValue = value[0];
-                        if (firstValue?.value) {
-                            let unit = firstValue.unit || "";
-                            _value = `${firstValue.value} ${unit}`;
-                        } else if (
-                            firstValue?.installed_size &&
-                            Array.isArray(firstValue.installed_size)
-                        ) {
-                            let unit = firstValue.installed_size[0]?.unit || "";
-                            _value = `${firstValue.installed_size[0]?.value} ${unit}`;
-                        } else if (
-                            firstValue?.family &&
-                            Array.isArray(firstValue.family)
-                        ) {
-                            _value = firstValue.family[0]?.value || "";
-                        } else if (
-                            firstValue?.size &&
-                            Array.isArray(firstValue.size)
-                        ) {
-                            let unit = firstValue.size[0]?.unit || "";
-                            _value = `${firstValue.size[0]?.value} ${unit}`;
-                        }
-                    }
+          let _value = '';
+          if (Array.isArray(value)) {
+            const firstValue = value[0];
+            if (firstValue?.value) {
+              let unit = firstValue.unit || '';
+              _value = `${firstValue.value} ${unit}`;
+            } else if (
+              firstValue?.installed_size &&
+              Array.isArray(firstValue.installed_size)
+            ) {
+              let unit = firstValue.installed_size[0]?.unit || '';
+              _value = `${firstValue.installed_size[0]?.value} ${unit}`;
+            } else if (firstValue?.family && Array.isArray(firstValue.family)) {
+              _value = firstValue.family[0]?.value || '';
+            } else if (firstValue?.size && Array.isArray(firstValue.size)) {
+              let unit = firstValue.size[0]?.unit || '';
+              _value = `${firstValue.size[0]?.value} ${unit}`;
+            }
+          }
 
-                    if (acceptedKeys.includes(key)) {
-                        return {
-                            key: snakeCaseToPrettyText(key),
-                            value: _value,
-                        };
-                    }
+          if (acceptedKeys.includes(key)) {
+            return {
+              key: snakeCaseToPrettyText(key),
+              value: _value,
+            };
+          }
 
-                    return null;
-                })
-                .filter(Boolean);
+          return null;
+        })
+        .filter(Boolean);
 
-            setProductDetails(productDescriptionArray);
-        };
-        parseProductDetailsArray();
-    }, [product?.description]);
+      setProductDetails(productDescriptionArray);
+    };
+    parseProductDetailsArray();
+  }, [product?.description]);
 
-    return (
-        <div className="container">
-            <div>
-                <p className="item-title m-0">{product?.name}</p>
-            </div>
-            <div className="col-12  justify-content-end d-flex align-items-end">
-                <ProductRating
-                    isUpSmall={isUpSmall}
-                    rating={product.rating}
-                    totalReview={product.total_review}
-                    productID={product.id}
-                />
-            </div>
-            <Box mb={2.5}>
-                <ProductImage ProductImages={product.image} isMobile={true} />
-            </Box>
-            <Box
-                sx={{
-                    position: "absolute",
-                    margin: 0,
-                    padding: 0,
-                    border: "none",
-                    left: 0,
-                    borderTop: "2px solid #CDCDCD",
-                    width: "100vw",
-                }}
-            ></Box>
-            <Box>
-                <div className="mt-5 col-md-12 items-details-description">
-                    <h3 className="items-text-style">Description</h3>
+  return (
+    <div className='container'>
+      <div>
+        <p className='item-title m-0'>{product?.name}</p>
+      </div>
+      <div className='col-12  justify-content-end d-flex align-items-end'>
+        <ProductRating
+          isUpSmall={isUpSmall}
+          rating={product.rating}
+          totalReview={product.total_review}
+          productID={product.id}
+        />
+      </div>
+      <Box mb={2.5}>
+        <ProductImage ProductImages={product.image} isMobile={true} />
+      </Box>
+      <Box
+        sx={{
+          position: 'absolute',
+          margin: 0,
+          padding: 0,
+          border: 'none',
+          left: 0,
+          borderTop: '2px solid #CDCDCD',
+          width: '100vw',
+        }}
+      ></Box>
+      <Box>
+        <div className='mt-5 col-md-12 items-details-description'>
+          <h3 className='items-text-style'>Description</h3>
 
-                    <ul className="ps-0" type="1">
-                        {description?.map((item, index) => (
-                            <li style={{ listStyle: "none" }} key={index}>
-                                {item.value}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </Box>
+          <ul className='ps-0' type='1'>
+            {description?.map((item, index) => (
+              <li style={{ listStyle: 'none' }} key={index}>
+                {item.value}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Box>
 
-            <Box
-                sx={{
-                    position: "absolute",
-                    margin: 0,
-                    padding: 0,
-                    border: "none",
-                    left: 0,
-                    borderTop: "2px solid #CDCDCD",
-                    width: "100vw",
-                }}
-            ></Box>
+      <Box
+        sx={{
+          position: 'absolute',
+          margin: 0,
+          padding: 0,
+          border: 'none',
+          left: 0,
+          borderTop: '2px solid #CDCDCD',
+          width: '100vw',
+        }}
+      ></Box>
 
-            <Stack
-                alignItems={"center"}
-                direction={"row"}
-                spacing={2}
-                my={2}
-                mt={3}
-            >
-                <Typography
-                    color={"#333333"}
-                    fontWeight={500}
-                    fontSize={"12px"}
-                    lineHeight={"14px"}
-                    fontFamily={"Inter"}
-                >
-                    Price:
-                </Typography>
-                <PriceWithLabel sx={{ mb: 0.8 }} price={product?.price} />
-            </Stack>
-            <div style={{ fontSize: "12px" }} className="mt-2 mb-2">
-                $20 shipping & import fees deposit to Pakistan.{" "}
-                <Link>Details</Link>
-            </div>
-            <CheckOutCard isMobile={true} product={{ ...product }} />
+      <Stack alignItems={'center'} direction={'row'} spacing={2} my={2} mt={3}>
+        <Typography
+          color={'#333333'}
+          fontWeight={500}
+          fontSize={'12px'}
+          lineHeight={'14px'}
+          fontFamily={'Inter'}
+        >
+          Price:
+        </Typography>
+        <PriceWithLabel sx={{ mb: 0.8 }} price={product?.price} />
+      </Stack>
+      <div style={{ fontSize: '12px' }} className='mt-2 mb-2'>
+        $20 shipping & import fees deposit to Pakistan. <Link>Details</Link>
+      </div>
+      <CheckOutCard isMobile={true} product={{ ...product }} />
 
-            <Box
-                sx={{
-                    mt: 4,
-                    border: "none",
-                    borderTop: "2px solid #CDCDCD",
-                }}
-            ></Box>
+      <Box
+        sx={{
+          mt: 4,
+          border: 'none',
+          borderTop: '2px solid #CDCDCD',
+        }}
+      ></Box>
 
-            {/* <Typography
+      {/* <Typography
                 color={"#007185"}
                 fontWeight={400}
                 fontSize={"14px"}
@@ -174,12 +161,12 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
             >
                 Most demanding
             </Typography> */}
-            {/* <div className="row px-0 res deatisl-data-set-image-view-data-details"> */}
-            {/* <div className="col-12 justify-content-center justify-content-md-start d-flex"> */}
-            {/* <button className="selling-button">
+      {/* <div className="row px-0 res deatisl-data-set-image-view-data-details"> */}
+      {/* <div className="col-12 justify-content-center justify-content-md-start d-flex"> */}
+      {/* <button className="selling-button">
                         Top <span className="selling-color">Selling</span>
                     </button> */}
-            {/* <Stack className="ms-4">
+      {/* <Stack className="ms-4">
                         <div className="details-dev ">
                             <span className="size-text-details">
                                 Items Available
@@ -197,10 +184,10 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
                             </button>
                         </div>
                     </Stack> */}
-            {/* </div> */}
-            {/* </div> */}
+      {/* </div> */}
+      {/* </div> */}
 
-            {/* <div className="divsection s-sm-block d-none">
+      {/* <div className="divsection s-sm-block d-none">
                 <hr className="hr-card-details"></hr>
                 <div className="cart-details-text">
                     <div className="row">
@@ -215,7 +202,7 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
                 </div>
             </div> */}
 
-            {/* 
+      {/* 
             <hr className="hr-card-details"></hr>
 
             <p className="more-styles">More Styles:</p>
@@ -245,8 +232,8 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
                 </div>
             </div> */}
 
-            {/* <hr className="hr-card-details"></hr> */}
-            {/* <Tooltip
+      {/* <hr className="hr-card-details"></hr> */}
+      {/* <Tooltip
                 sx={{ left: { xs: "100%", md: "50%" } }}
                 content={<ReturnPolicy />}
             >
@@ -267,7 +254,7 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
                     />
                 </Typography>
             </Tooltip> */}
-            {/* <Typography
+      {/* <Typography
                 sx={{ mt: 1.8 }}
                 fontWeight={400}
                 fontSize={"13px"}
@@ -275,7 +262,7 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
             >
                 Variations:
             </Typography> */}
-            {/* <Tabs
+      {/* <Tabs
                 style={{ border: "none" }}
                 id="controlled-tab"
                 activeKey={key}
@@ -301,13 +288,13 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
                     />
                 </Tab>
             </Tabs> */}
-            {/* <Box mt={1}>
+      {/* <Box mt={1}>
                 <TabContent productDetails={productDetails} product={product} />
             </Box> */}
 
-            {/* <hr className="hr-card-details"></hr> */}
-        </div>
-    );
+      {/* <hr className="hr-card-details"></hr> */}
+    </div>
+  );
 };
 
 export default ProductDetailsMobile;

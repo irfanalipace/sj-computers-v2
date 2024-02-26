@@ -1,40 +1,40 @@
 .payment-method {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 15px;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
 }
 
 .payment-method input {
-    margin-top: 1px;
+  margin-top: 1px;
 }
 
 .payment-method label {
-    display: flex;
+  display: flex;
 
-    font-weight: 400;
-    font-size: 14px;
-    margin-left: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 10px;
 }
 
 .payment-btn {
-    font-weight: 600;
-    font-size: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 38px;
-    width: 180px;
-    max-width: 95%;
-    background: #38c056;
-    border-radius: 8px;
-    color: white;
-    border: 0;
+  font-weight: 600;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 38px;
+  width: 180px;
+  max-width: 95%;
+  background: #38c056;
+  border-radius: 8px;
+  color: white;
+  border: 0;
 }
 @media screen and (max-width: 600px) {
-    .payment-method input {
-        accent-color: #318243;
-    }
-    .payment-method label {
-        margin-left: 0px;
-    }
+  .payment-method input {
+    accent-color: #318243;
+  }
+  .payment-method label {
+    margin-left: 0px;
+  }
 }

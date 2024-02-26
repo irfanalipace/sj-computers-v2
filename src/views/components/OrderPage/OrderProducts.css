@@ -1,30 +1,30 @@
 .order-header {
-    display: flex;
-    justify-content: space-between;
-    background-color: #e2e8f0;
-    height: 4.5rem;
-    padding: 0.5rem;
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #e2e8f0;
+  height: 4.5rem;
+  padding: 0.5rem;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
 
-    /* Primary */
+  /* Primary */
 
-    color: #333333;
+  color: #333333;
 }
 
 .order-info {
-    margin: 0.25rem;
+  margin: 0.25rem;
 }
 
 .order-label {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .order-details {
-    margin: 0.25rem;
+  margin: 0.25rem;
 }
 
 /* .order-details:hover {
@@ -33,170 +33,170 @@
   } */
 
 .order-status {
-    display: flex;
-    justify-content: space-between;
-    margin: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5rem;
 }
 
 .order-status-label {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    /* identical to box height */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
 
-    color: #000000;
+  color: #000000;
 }
 
 .track-package-button {
-    margin-right: 0.5rem;
-    height: 2.25rem;
-    width: 12rem;
-    background: #38c056;
-    color: #fff;
-    font-weight: normal;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    border: transparent;
+  margin-right: 0.5rem;
+  height: 2.25rem;
+  width: 12rem;
+  background: #38c056;
+  color: #fff;
+  font-weight: normal;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: transparent;
 }
 .view-button {
-    margin-right: 0.5rem;
-    height: 2.25rem;
-    width: 12rem;
-    background: #38c056;
-    color: #fff;
-    font-weight: normal;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    border: transparent;
+  margin-right: 0.5rem;
+  height: 2.25rem;
+  width: 12rem;
+  background: #38c056;
+  color: #fff;
+  font-weight: normal;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: transparent;
 }
 .order-table .product-Image {
-    width: 25%;
-    height: auto;
-    margin-left: 5%;
+  width: 25%;
+  height: auto;
+  margin-left: 5%;
 }
 .cancel-order {
-    margin: 14px;
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 15px;
-    color: #1270c4;
-    cursor: pointer;
+  margin: 14px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #1270c4;
+  cursor: pointer;
 }
 
 .cancel-order:hover {
-    color: #dd6500;
-    text-decoration: underline;
+  color: #dd6500;
+  text-decoration: underline;
 }
 
 .product-description {
-    margin-top: 20px;
-    padding: 0px 20px;
-    font-size: small;
-    color: #38c056;
+  margin-top: 20px;
+  padding: 0px 20px;
+  font-size: small;
+  color: #38c056;
 }
 .product-description:hover {
-    color: #dd6500;
-    text-decoration: underline;
+  color: #dd6500;
+  text-decoration: underline;
 }
 .order-details-view {
-    color: #38c056;
+  color: #38c056;
 }
 .order-details-view:hover {
-    color: #dd6500;
-    text-decoration: underline;
+  color: #dd6500;
+  text-decoration: underline;
 }
 .order-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #ccc;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
 }
 
 .order-table th,
 .order-table td {
-    border: 1px solid #ccc;
-    padding: 8px;
+  border: 1px solid #ccc;
+  padding: 8px;
 }
 
 .col-width {
-    flex: 1;
+  flex: 1;
 }
 
 .view-button {
-    width: 100%;
+  width: 100%;
 }
 
 .order-table .product-image {
-    width: 100%;
-    max-width: 20%; /* Adjust the image width as needed */
-    height: auto;
-    max-height: 200px;
-    display: block; /* Ensures proper spacing around the image */
-    margin: 0 auto; /* Centers the image horizontally */
+  width: 100%;
+  max-width: 20%; /* Adjust the image width as needed */
+  height: auto;
+  max-height: 200px;
+  display: block; /* Ensures proper spacing around the image */
+  margin: 0 auto; /* Centers the image horizontally */
 }
 
 .order-table thead th {
-    background-color: #f0f0f0;
-    text-align: center;
+  background-color: #f0f0f0;
+  text-align: center;
 }
 
 .order-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
 .order-table tbody td {
-    vertical-align: middle;
-    text-align: center;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .order-table tbody tr:last-child td {
-    border-bottom: none;
+  border-bottom: none;
 }
 .order-table th,
 .order-table td {
-    border: none;
+  border: none;
 }
 
 .form-control:hover {
-    box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 @media screen and (max-width: 600px) {
-    .product-info {
-        /* max-height: 400px; */
-        overflow-y: auto;
-    }
-    .order-table thead th {
-        font-size: 9px;
-    }
-    .order-table tbody td {
-        font-size: 9px;
-    }
-    .order-status-label {
-        font-size: 12px;
-    }
-    .search-product-order-tables {
-        width: 100%;
-        margin-left: 22px;
-    }
+  .product-info {
+    /* max-height: 400px; */
+    overflow-y: auto;
+  }
+  .order-table thead th {
+    font-size: 9px;
+  }
+  .order-table tbody td {
+    font-size: 9px;
+  }
+  .order-status-label {
+    font-size: 12px;
+  }
+  .search-product-order-tables {
+    width: 100%;
+    margin-left: 22px;
+  }
 
-    .expanded-content ul {
-        padding-left: 0;
-    }
-    .order-table .product-image {
-        max-height: 175px;
-        margin-left: 0 !important;
-        padding: 10px;
-        max-width: 100px;
-        border: none;
-    }
-    .product-description {
-        font-size: 11px;
-    }
-    .toggle-button-table-data {
-        width: 69px;
-    }
+  .expanded-content ul {
+    padding-left: 0;
+  }
+  .order-table .product-image {
+    max-height: 175px;
+    margin-left: 0 !important;
+    padding: 10px;
+    max-width: 100px;
+    border: none;
+  }
+  .product-description {
+    font-size: 11px;
+  }
+  .toggle-button-table-data {
+    width: 69px;
+  }
 }

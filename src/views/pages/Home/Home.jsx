@@ -23,7 +23,8 @@ const Home = () => {
         {/* Recommandation Slider */}
         <div
           style={{ backgroundColor: 'white', paddingTop: '44px' }}
-          className='d-none d-sm-block'>
+          className='d-none d-sm-block'
+        >
           <div
             style={{
               borderTop: '1px solid #D0D0D0',
@@ -31,7 +32,8 @@ const Home = () => {
               alignItems: 'center',
               justifyContent: 'center',
               width: '100%',
-            }}>
+            }}
+          >
             <div style={{ maxWidth: '1500px', width: '100%' }}>
               <RecommandSectionsProducts />
             </div>

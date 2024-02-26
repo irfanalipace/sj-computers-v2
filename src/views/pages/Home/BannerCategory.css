@@ -1,63 +1,63 @@
 .home-page-data {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 .home-page-data {
-    margin: 0 auto 10px;
-    max-width: calc(100% - 47px);
+  margin: 0 auto 10px;
+  max-width: calc(100% - 47px);
 }
 .product-type-container {
-    margin: 0 auto 10px;
-    max-width: calc(100% - 47px);
+  margin: 0 auto 10px;
+  max-width: calc(100% - 47px);
 }
 @media (min-width: 1750px) {
-    .product-type-container {
-        margin-left: auto;
-        margin-right: auto;
-    }
+  .product-type-container {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1030px) {
-    .product-type-container {
-        margin-top: -370px !important;
-    }
+  .product-type-container {
+    margin-top: -370px !important;
+  }
 }
 @media screen and (max-width: 1024px) {
-    .product-type-container {
-        height: auto;
-        padding-bottom: 20px;
-        padding-top: 20px;
-    }
+  .product-type-container {
+    height: auto;
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
 
-    .product-type-container .container {
-        height: 260px;
-    }
-    .category-name {
-        font-size: 9px;
-        color: black;
-    }
-    .advertisment-img-products-imges img {
-        max-height: 29%;
-    }
+  .product-type-container .container {
+    height: 260px;
+  }
+  .category-name {
+    font-size: 9px;
+    color: black;
+  }
+  .advertisment-img-products-imges img {
+    max-height: 29%;
+  }
 
-    .product-type-container h2,
-    .advertisement-heading h2,
-    .advertisement-heading button {
-        /* font-size: 16px; */
-    }
+  .product-type-container h2,
+  .advertisement-heading h2,
+  .advertisement-heading button {
+    /* font-size: 16px; */
+  }
 
-    .product-type-container {
-        margin: 0 30px;
-    }
-    .advertisement-section {
-        height: 342px;
-    }
+  .product-type-container {
+    margin: 0 30px;
+  }
+  .advertisement-section {
+    height: 342px;
+  }
 }
 @media screen and (min-width: 568px) and (max-width: 767px) {
-    .product-type-container {
-        margin-top: -400px !important;
-    }
+  .product-type-container {
+    margin-top: -400px !important;
+  }
 }
 .product-type-container > .row > * {
-    padding: 0 !important;
+  padding: 0 !important;
 }

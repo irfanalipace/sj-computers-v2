@@ -1,225 +1,225 @@
 .thank-you-page {
-    margin: 0;
-    font-family: "Inter", sans-serif;
-    font-style: normal;
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    text-align: center;
-    letter-spacing: 0.03em;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: 0.03em;
 }
 .oreder-confirm-page-data {
-    margin-top: 23px;
+  margin-top: 23px;
 }
 .oreder-confirm-page-data span {
-    font-family: Inter;
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 19px;
-    letter-spacing: 0em;
-    text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
 }
 .jhon-name-user-order {
-    margin-top: 7px;
-    margin-bottom: -15px;
+  margin-top: 7px;
+  margin-bottom: -15px;
 }
 .paragrap-text-notify-order {
-    font-family: Inter;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 21px;
-    letter-spacing: 0em;
-    text-align: left;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0em;
+  text-align: left;
 }
 .jhon-name-user-order span {
-    font-family: Inter;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 19px;
-    letter-spacing: 0em;
-    text-align: left;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
 }
 .Items-thanku-view-page-thanks span {
-    font-family: Inter;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 15px;
-    letter-spacing: 0em;
-    text-align: center;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: center;
 }
 .Items-calcurteing-items {
-    padding: 13px;
-    /* color: transparent; */
-    background: #8edd9f;
-    text-align: left;
-    border-radius: 2px;
+  padding: 13px;
+  /* color: transparent; */
+  background: #8edd9f;
+  text-align: left;
+  border-radius: 2px;
 }
 .Items-calcurteing-items span {
-    padding: 13px;
-    font-family: Inter;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 15px;
-    color: #269c40;
-    letter-spacing: 0em;
-    text-align: center;
+  padding: 13px;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  color: #269c40;
+  letter-spacing: 0em;
+  text-align: center;
 }
 .Items-thanku-view-page-thanks {
-    display: flex;
-    justify-content: space-between;
-    padding: 3px;
+  display: flex;
+  justify-content: space-between;
+  padding: 3px;
 }
 .thank-you-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
 .thank-you-table th,
 .thank-you-table td {
-    padding: 20px 10px;
-    /* border: 1px solid #000; */
+  padding: 20px 10px;
+  /* border: 1px solid #000; */
 }
 
 .thank-you-page .product-name-thanks {
-    width: 20%;
-    display: flex;
-    align-items: center;
-    column-gap: 10px;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
 }
 
 .product-thumbnail img {
-    width: 80px;
-    margin-right: 10px;
+  width: 80px;
+  margin-right: 10px;
 }
 .thank-you-table th {
-    /* background-color: #318243; */
-    color: #318243;
-    font-family: "Inter", sans-serif;
-    font-style: normal;
-    border-bottom: 1px solid #dddddd;
-    border-top: 1px solid #dddddd;
+  /* background-color: #318243; */
+  color: #318243;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  border-bottom: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
 }
 
 .thank-you-page .product-name-thanks {
-    width: auto;
-    display: flex;
-    align-items: center;
-    column-gap: 10px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
 }
 
 .delivery-details {
-    width: 25%;
+  width: 25%;
 }
 
 .track-order-btn {
-    box-sizing: border-box;
-    height: 48px;
-    width: 165px;
-    left: 0px;
-    top: 0px;
-    border-radius: 8px;
+  box-sizing: border-box;
+  height: 48px;
+  width: 165px;
+  left: 0px;
+  top: 0px;
+  border-radius: 8px;
 
-    /* position: absolute; */
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
-    border: 1px solid #269c40;
-    border-radius: 8px;
+  /* position: absolute; */
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  border: 1px solid #269c40;
+  border-radius: 8px;
 }
 .shop-more-btn {
-    height: 48px;
-    width: 165px;
-    left: 0px;
-    top: 0px;
-    border-radius: 8px;
-    color: #fff;
+  height: 48px;
+  width: 165px;
+  left: 0px;
+  top: 0px;
+  border-radius: 8px;
+  color: #fff;
 
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
-    background: #318243;
-    border-radius: 8px;
-    border: none;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  background: #318243;
+  border-radius: 8px;
+  border: none;
 }
 .total-tax-row {
-    margin-right: 3%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    border-bottom: 1px solid #dddddd;
-    border-top: 1px solid #dddddd;
+  margin-right: 3%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-bottom: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
 }
 .bold-total {
-    margin-right: 2% !important;
-    margin-top: 2% !important;
-    margin-bottom: 2%;
-    font-weight: 900;
-    /* border-bottom: 1px solid #DDDDDD; */
+  margin-right: 2% !important;
+  margin-top: 2% !important;
+  margin-bottom: 2%;
+  font-weight: 900;
+  /* border-bottom: 1px solid #DDDDDD; */
 }
 
 /* border-bottom: 1px solid #DDDDDD; */
 .margintopBottom {
-    margin: 5% 0;
+  margin: 5% 0;
 }
 .card-container {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 .order-summery-items-card {
-    padding-left: 12px;
-    font-family: Inter;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 17px;
-    letter-spacing: 0em;
-    text-align: center;
+  padding-left: 12px;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
 }
 .oder-item-card {
-    width: 100%;
-    max-width: 300px;
-    margin: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 300px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .card-image img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 .card-content {
-    padding: 10px;
+  padding: 10px;
 }
 
 .thank-you-page .product-name-thanks {
-    font-size: 16px;
-    font-weight: bold;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .product-details-Thanks div {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .product-details-Thanks {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .product-details-Thanks > div {
-    flex: 1 1 auto;
-    display: flex;
-    align-items: flex-start;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: flex-start;
 }
 
 .product-details-Thanks span {
-    font-weight: bold;
-    margin-right: 5px;
+  font-weight: bold;
+  margin-right: 5px;
 }
 
 .quantity,
@@ -228,49 +228,49 @@
 .delivery-details,
 .payment-type,
 .sub-total {
-    flex-basis: 50%;
+  flex-basis: 50%;
 }
 
 @media (max-width: 768px) {
-    .card-image img {
-        width: 50%;
-        height: auto;
-    }
+  .card-image img {
+    width: 50%;
+    height: auto;
+  }
 }
 @media (max-width: 600px) {
-    .shop-more-btn {
-        /* margin-left: 9px; */
-        /* height: 48px; */
-        width: 100%;
-        left: 0px;
-        top: 0px;
-        border-radius: 8px;
-        color: #fff;
-        left: 0%;
-        right: 0%;
-        top: 0%;
-        bottom: 0%;
-        background: #318243;
-        border-radius: 8px;
-        border: none;
-    }
-    .track-oder-item-card {
-        color: black !important;
-        padding: 12px;
-        width: 100%;
-        background: white;
-        left: 0px;
-        top: 0px;
-        border-radius: 8px;
-        color: #fff;
-        left: 0%;
-        right: 0%;
-        top: 0%;
-        bottom: 0%;
-        border-radius: 8px;
-        border: none;
-    }
-    .oder-item-card {
-        max-width: 100%;
-    }
+  .shop-more-btn {
+    /* margin-left: 9px; */
+    /* height: 48px; */
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    border-radius: 8px;
+    color: #fff;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    background: #318243;
+    border-radius: 8px;
+    border: none;
+  }
+  .track-oder-item-card {
+    color: black !important;
+    padding: 12px;
+    width: 100%;
+    background: white;
+    left: 0px;
+    top: 0px;
+    border-radius: 8px;
+    color: #fff;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    border-radius: 8px;
+    border: none;
+  }
+  .oder-item-card {
+    max-width: 100%;
+  }
 }

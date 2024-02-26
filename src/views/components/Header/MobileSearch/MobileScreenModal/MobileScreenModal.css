@@ -1,170 +1,170 @@
 .modal-mobile-screen {
-    z-index: 5;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    background-color: transparent;
-    position: absolute;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  background-color: transparent;
+  position: absolute;
 }
 
 .modal-mobile-screen-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .modal-content-mobile-screen {
-    position: fixed;
-    background-color: #fff;
-    max-width: 600px;
-    padding: 20px;
-    bottom: 4vh;
-    z-index: 3;
+  position: fixed;
+  background-color: #fff;
+  max-width: 600px;
+  padding: 20px;
+  bottom: 4vh;
+  z-index: 3;
 }
 
 .modal-content-mobile-screen-box2 {
-    position: fixed;
-    background-color: #fff;
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
-    bottom: 30px;
+  position: fixed;
+  background-color: #fff;
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  bottom: 30px;
 }
 .close-button-done {
-    color: white;
-    position: absolute;
-    top: -33px;
-    right: 15px;
-    background: none;
-    border: none;
-    color: #000;
-    font-size: 20px;
-    cursor: pointer;
-    border: none;
+  color: white;
+  position: absolute;
+  top: -33px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
 }
 .box-button-text-mobile-screen {
-    color: lightgray;
+  color: lightgray;
 }
 .box-text-dilver-location {
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
 
-    display: flex;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
 
-    color: #111111;
+  color: #111111;
 }
 .box-text-dilver-location-text-p {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 15px;
-    display: flex;
-    align-items: center;
-    color: #333333;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  color: #333333;
 }
 
 .done-dilvery-button {
-    border: none;
-    width: 359px;
-    height: 36px;
-    background: #28a343;
-    border-radius: 5px;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    color: #ffffff;
-    max-width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  border: none;
+  width: 359px;
+  height: 36px;
+  background: #28a343;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .zip-code-text-mobile-screen {
-    color: black;
+  color: black;
 }
 
 .padding-bottom-text-mobile-screen {
-    padding-bottom: 13px;
-    display: flex;
-    justify-content: center;
+  padding-bottom: 13px;
+  display: flex;
+  justify-content: center;
 }
 
 .mobile-zip-code-box-image {
-    background: white;
-    border: none;
+  background: white;
+  border: none;
 
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 15px;
-    display: flex;
-    align-items: center;
-    color: #004b94;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  color: #004b94;
 }
 .mobile-zip-code-box-image-dilvery-box {
-    border: none;
-    color: white;
-    background: #002549;
-    padding: 10px;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 24px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: #ffffff;
+  border: none;
+  color: white;
+  background: #002549;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
 }
 .color-image-dilvery-box-mobile-screen {
-    background: white;
+  background: white;
 }
 .mobile-enter-sub-button-screen {
-    margin-left: 6px;
+  margin-left: 6px;
 }
 .Apply-button-dilvery-box-auth {
-    color: white;
-    width: 97%;
-    height: 47px;
-    background: #002549;
-    /* border: none; */
-    border-radius: 8px;
-    border: none;
+  color: white;
+  width: 97%;
+  height: 47px;
+  background: #002549;
+  /* border: none; */
+  border-radius: 8px;
+  border: none;
 }
 .zip-code-auth-box {
-    color: black;
-    font-size: 13px;
+  color: black;
+  font-size: 13px;
 }
 .zip-parant {
-    margin-top: -12px;
-    text-align: left;
-    margin-left: 15px;
+  margin-top: -12px;
+  text-align: left;
+  margin-left: 15px;
 }
 .zip-code-text-fields {
-    padding-left: 10px;
-    font-size: 13px;
-    width: 97%;
-    height: 43px;
-    margin-bottom: 12px;
+  padding-left: 10px;
+  font-size: 13px;
+  width: 97%;
+  height: 43px;
+  margin-bottom: 12px;
 }
 .box-text-hr-text {
-    width: 443px;
-    padding: -7px;
-    margin-bottom: 6px;
+  width: 443px;
+  padding: -7px;
+  margin-bottom: 6px;
 
-    color: #333333;
+  color: #333333;
 
-    margin-left: 6px;
+  margin-left: 6px;
 }
 .a.done-dilvery-button.text-decoration-none {
-    padding-top: 10px;
+  padding-top: 10px;
 }
 .sidebarOverlaymobile {
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: #0000005a;
-    z-index: 3;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #0000005a;
+  z-index: 3;
 }

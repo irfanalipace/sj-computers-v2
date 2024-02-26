@@ -18,11 +18,13 @@ const PageContainer = ({ children }) => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-          }}>
+          }}
+        >
           <div
             style={{
               maxWidth: '1450px',
-            }}>
+            }}
+          >
             {children}
           </div>
         </div>

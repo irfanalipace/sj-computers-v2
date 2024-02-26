@@ -1,32 +1,32 @@
 .devsection-three-images {
-    margin-top: 20px !important;
-    /* height: 252px; */
+  margin-top: 20px !important;
+  /* height: 252px; */
 }
 
 .dev-images-dynmaic {
-    height: 80px;
+  height: 80px;
 }
 .dev-images-dynmaic p {
-    text-align: center;
+  text-align: center;
 }
 
 .dev-images-dynmaic-images-lable img {
-    margin-top: 27px;
+  margin-top: 27px;
 }
 .dev-images-dynmaic-images-lable p {
-    margin-left: 22px;
-    font-size: 10px;
-    color: black;
+  margin-left: 22px;
+  font-size: 10px;
+  color: black;
 }
 .devsection-three-images img {
-    margin-top: 27px;
+  margin-top: 27px;
 }
 .dev-images-dynmaic-dev-data p {
-    margin-left: 22px;
-    color: black;
-    font-size: 10px;
+  margin-left: 22px;
+  color: black;
+  font-size: 10px;
 }
 .devsection-three-images p {
-    color: black;
-    font-size: 10px;
+  color: black;
+  font-size: 10px;
 }

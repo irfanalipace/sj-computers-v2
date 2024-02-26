@@ -24,13 +24,15 @@ const CategorySliderCard = ({ product }) => {
     <Link
       // to={`${new URL(product?.url).pathname}`}
       to={generatePath(product?.url)}
-      style={{ textDecoration: 'none' }}>
+      style={{ textDecoration: 'none' }}
+    >
       <Grid
         container
         // className=" ms-3 ms-lg-0"
         // border={".5px solid gray"}
         borderRadius={'10px'}
-        height={'285px'}>
+        height={'285px'}
+      >
         <Grid
           item
           xs={12}
@@ -40,7 +42,8 @@ const CategorySliderCard = ({ product }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-          }}>
+          }}
+        >
           <LazyLoadImage
             // width={"90px"}
             // height={"100%"}
@@ -64,7 +67,8 @@ const CategorySliderCard = ({ product }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-          }}>
+          }}
+        >
           <StarRatings
             rating={product?.rating}
             starRatedColor='rgb(232, 126, 36)'
@@ -86,7 +90,8 @@ const CategorySliderCard = ({ product }) => {
           py={4}
           px={2}
           sx={{ color: 'black' }}
-          mt={-3}>
+          mt={-3}
+        >
           <Typography variant={'body2'}>
             {/* ${product?.price}{' '} */}
             <sup style={supStyle}>$</sup>
@@ -102,7 +107,8 @@ const CategorySliderCard = ({ product }) => {
                 fontSize: 'smaller',
                 textDecoration: 'line-through',
                 color: '#666666',
-              }}>
+              }}
+            >
               ${parseFloat(((product?.price * 2) / 1.5).toFixed(2))}
             </span>
           </Typography>

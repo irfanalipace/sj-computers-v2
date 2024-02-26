@@ -1,90 +1,84 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import { snakeCaseToPrettyText } from "@utils/helpers";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { snakeCaseToPrettyText } from '@utils/helpers';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import "./ProductDetail.css";
-import Tooltip from "../../Tooltip";
-import { Box, Stack, Typography } from "@mui/material";
-import { Tab, Tabs } from "react-bootstrap";
-import CustomTab from "./CustomTab";
-import TabContent from "./TabContnet";
-import ReturnPolicy from "./ReturnPolicy";
-import ProductRating from "./ProductRating";
-import PriceWithLabel from "../../common/PriceWithLabel";
+import './ProductDetail.css';
+import Tooltip from '../../Tooltip';
+import { Box, Stack, Typography } from '@mui/material';
+import { Tab, Tabs } from 'react-bootstrap';
+import CustomTab from './CustomTab';
+import TabContent from './TabContnet';
+import ReturnPolicy from './ReturnPolicy';
+import ProductRating from './ProductRating';
+import PriceWithLabel from '../../common/PriceWithLabel';
 
 let acceptedKeys = [
-    "brand",
-    "cpu_model",
-    "hard_disk",
-    "operating_system",
-    "ram_memory",
+  'brand',
+  'cpu_model',
+  'hard_disk',
+  'operating_system',
+  'ram_memory',
 ];
 
 const ProductDetails = ({ product }) => {
-    const [description, setDescription] = useState([]);
-    const [productDetails, setProductDetails] = useState([]);
-    const [key, setKey] = useState("home");
+  const [description, setDescription] = useState([]);
+  const [productDetails, setProductDetails] = useState([]);
+  const [key, setKey] = useState('home');
 
-    useEffect(() => {
-        const parseProductDetailsArray = () => {
-            if (!product?.description) return;
+  useEffect(() => {
+    const parseProductDetailsArray = () => {
+      if (!product?.description) return;
 
-            const productDescriptionArray = Object.entries(product.description)
-                .map(([key, value]) => {
-                    if (key === "bullet_point") {
-                        setDescription(value);
-                        return null;
-                    }
+      const productDescriptionArray = Object.entries(product.description)
+        .map(([key, value]) => {
+          if (key === 'bullet_point') {
+            setDescription(value);
+            return null;
+          }
 
-                    let _value = "";
-                    if (Array.isArray(value)) {
-                        const firstValue = value[0];
-                        if (firstValue?.value) {
-                            let unit = firstValue.unit || "";
-                            _value = `${firstValue.value} ${unit}`;
-                        } else if (
-                            firstValue?.installed_size &&
-                            Array.isArray(firstValue.installed_size)
-                        ) {
-                            let unit = firstValue.installed_size[0]?.unit || "";
-                            _value = `${firstValue.installed_size[0]?.value} ${unit}`;
-                        } else if (
-                            firstValue?.family &&
-                            Array.isArray(firstValue.family)
-                        ) {
-                            _value = firstValue.family[0]?.value || "";
-                        } else if (
-                            firstValue?.size &&
-                            Array.isArray(firstValue.size)
-                        ) {
-                            let unit = firstValue.size[0]?.unit || "";
-                            _value = `${firstValue.size[0]?.value} ${unit}`;
-                        }
-                    }
+          let _value = '';
+          if (Array.isArray(value)) {
+            const firstValue = value[0];
+            if (firstValue?.value) {
+              let unit = firstValue.unit || '';
+              _value = `${firstValue.value} ${unit}`;
+            } else if (
+              firstValue?.installed_size &&
+              Array.isArray(firstValue.installed_size)
+            ) {
+              let unit = firstValue.installed_size[0]?.unit || '';
+              _value = `${firstValue.installed_size[0]?.value} ${unit}`;
+            } else if (firstValue?.family && Array.isArray(firstValue.family)) {
+              _value = firstValue.family[0]?.value || '';
+            } else if (firstValue?.size && Array.isArray(firstValue.size)) {
+              let unit = firstValue.size[0]?.unit || '';
+              _value = `${firstValue.size[0]?.value} ${unit}`;
+            }
+          }
 
-                    if (acceptedKeys.includes(key)) {
-                        return {
-                            key: snakeCaseToPrettyText(key),
-                            value: _value,
-                        };
-                    }
+          if (acceptedKeys.includes(key)) {
+            return {
+              key: snakeCaseToPrettyText(key),
+              value: _value,
+            };
+          }
 
-                    return null;
-                })
-                .filter(Boolean);
+          return null;
+        })
+        .filter(Boolean);
 
-            setProductDetails(productDescriptionArray);
-        };
-        parseProductDetailsArray();
-    }, [product?.description]);
+      setProductDetails(productDescriptionArray);
+    };
+    parseProductDetailsArray();
+  }, [product?.description]);
 
-    return (
-        <div className="container">
-            <div>
-                <p className="item-title">{product?.name}</p>
-            </div>
-            {/* <div className="instock-detail ">
+  return (
+    <div className='container'>
+      <div>
+        <p className='item-title'>{product?.name}</p>
+      </div>
+      {/* <div className="instock-detail ">
                 <p className="most-demandind">
                     {product?.in_stock > 0 ? (
                         <span className="text-green">In Stock</span>
@@ -93,27 +87,27 @@ const ProductDetails = ({ product }) => {
                     )}
                 </p>
             </div> */}
-            <Typography
-                color={"#007185"}
-                fontWeight={400}
-                fontSize={"14px"}
-                lineHeight={"16px"}
-            >
-                Most demanding
-            </Typography>
-            <div className="row px-0 res deatisl-data-set-image-view-data-details">
-                <div className="col-12 justify-content-center justify-content-md-start d-flex align-items-center  product-review">
-                    <ProductRating
-                        rating={product.rating}
-                        totalReview={product.total_review}
-                        productID={product.id}
-                    />
-                </div>
-                {/* <div className="col-12 justify-content-center justify-content-md-start d-flex"> */}
-                {/* <button className="selling-button">
+      <Typography
+        color={'#007185'}
+        fontWeight={400}
+        fontSize={'14px'}
+        lineHeight={'16px'}
+      >
+        Most demanding
+      </Typography>
+      <div className='row px-0 res deatisl-data-set-image-view-data-details'>
+        <div className='col-12 justify-content-center justify-content-md-start d-flex align-items-center  product-review'>
+          <ProductRating
+            rating={product.rating}
+            totalReview={product.total_review}
+            productID={product.id}
+          />
+        </div>
+        {/* <div className="col-12 justify-content-center justify-content-md-start d-flex"> */}
+        {/* <button className="selling-button">
                         Top <span className="selling-color">Selling</span>
                     </button> */}
-                {/* <Stack className="ms-4">
+        {/* <Stack className="ms-4">
                         <div className="details-dev ">
                             <span className="size-text-details">
                                 Items Available
@@ -131,34 +125,32 @@ const ProductDetails = ({ product }) => {
                             </button>
                         </div>
                     </Stack> */}
-                {/* </div> */}
-            </div>
+        {/* </div> */}
+      </div>
 
-            <div className="divsection s-sm-block d-none">
-                <hr className="hr-card-details"></hr>
-                <div className="cart-details-text">
-                    <div className="row">
-                        <div className="col-md-12 color-text">
-                            <span className="$-color">$</span>
-                            {product?.price?.toString().split(".")[0]}
-                            <sup>
-                                {product?.price?.toString().split(".")[1]}
-                            </sup>
-                        </div>
-                    </div>
-                </div>
+      <div className='divsection s-sm-block d-none'>
+        <hr className='hr-card-details'></hr>
+        <div className='cart-details-text'>
+          <div className='row'>
+            <div className='col-md-12 color-text'>
+              <span className='$-color'>$</span>
+              {product?.price?.toString().split('.')[0]}
+              <sup>{product?.price?.toString().split('.')[1]}</sup>
             </div>
-            <div className="content">
-                <div className="row">
-                    <div className="col-md-12 shipping-button">
-                        {/* <p className="shipping-text">
+          </div>
+        </div>
+      </div>
+      <div className='content'>
+        <div className='row'>
+          <div className='col-md-12 shipping-button'>
+            {/* <p className="shipping-text">
                             Shipping fee to Los Angeles $10 only
                          
                         </p> */}
-                    </div>
-                </div>
-            </div>
-            {/* 
+          </div>
+        </div>
+      </div>
+      {/* 
             <hr className="hr-card-details"></hr>
 
             <p className="more-styles">More Styles:</p>
@@ -188,30 +180,30 @@ const ProductDetails = ({ product }) => {
                 </div>
             </div> */}
 
-            <hr className="hr-card-details"></hr>
-            <PriceWithLabel sx={{ mb: 0.8 }} price={product?.price} />
-            <Tooltip
-                sx={{ left: { xs: "100%", md: "50%" } }}
-                content={<ReturnPolicy />}
-            >
-                <Typography
-                    fontWeight={400}
-                    color={"#007185"}
-                    fontSize={"14px"}
-                    lineHeight={"14px"}
-                >
-                    Free Return
-                    <ExpandMoreIcon
-                        sx={{
-                            width: "15px",
-                            height: "15px",
-                            color: "#B12704",
-                            mb: 0.5,
-                        }}
-                    />
-                </Typography>
-            </Tooltip>
-            {/* <Typography
+      <hr className='hr-card-details'></hr>
+      <PriceWithLabel sx={{ mb: 0.8 }} price={product?.price} />
+      <Tooltip
+        sx={{ left: { xs: '100%', md: '50%' } }}
+        content={<ReturnPolicy />}
+      >
+        <Typography
+          fontWeight={400}
+          color={'#007185'}
+          fontSize={'14px'}
+          lineHeight={'14px'}
+        >
+          Free Return
+          <ExpandMoreIcon
+            sx={{
+              width: '15px',
+              height: '15px',
+              color: '#B12704',
+              mb: 0.5,
+            }}
+          />
+        </Typography>
+      </Tooltip>
+      {/* <Typography
                 sx={{ mt: 1.8 }}
                 fontWeight={400}
                 fontSize={"13px"}
@@ -219,7 +211,7 @@ const ProductDetails = ({ product }) => {
             >
                 Variations:
             </Typography> */}
-            {/* <Tabs
+      {/* <Tabs
                 style={{ border: "none" }}
                 id="controlled-tab"
                 activeKey={key}
@@ -245,23 +237,23 @@ const ProductDetails = ({ product }) => {
                     />
                 </Tab>
             </Tabs> */}
-            <Box mt={1}>
-                <TabContent productDetails={productDetails} product={product} />
-            </Box>
+      <Box mt={1}>
+        <TabContent productDetails={productDetails} product={product} />
+      </Box>
 
-            <hr className="hr-card-details"></hr>
+      <hr className='hr-card-details'></hr>
 
-            <div className="col-md-12 items-details-description">
-                <h3 className="items-text-style">About this item</h3>
+      <div className='col-md-12 items-details-description'>
+        <h3 className='items-text-style'>About this item</h3>
 
-                <ul type="1">
-                    {description?.map((item, index) => (
-                        <li key={index}>{item.value}</li>
-                    ))}
-                </ul>
-            </div>
-        </div>
-    );
+        <ul type='1'>
+          {description?.map((item, index) => (
+            <li key={index}>{item.value}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 };
 
 export default ProductDetails;

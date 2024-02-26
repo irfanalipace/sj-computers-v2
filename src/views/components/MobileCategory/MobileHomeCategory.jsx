@@ -240,12 +240,14 @@ const MobileHomeCategory = () => {
             slidesPerView: 3,
             spaceBetween: 50,
           },
-        }}>
+        }}
+      >
         <SwiperSlide className='swiper-slider-mobile-category'>
           <div className='image-container-category'>
             <Link
               to='./category/bto'
-              className='text-decoration-none link-text-category-mobile'>
+              className='text-decoration-none link-text-category-mobile'
+            >
               <div className='category-dev-img-section-mobile'>BTO</div>
               <div>
                 <img
@@ -260,7 +262,8 @@ const MobileHomeCategory = () => {
           <div className='image-container-category'>
             <Link
               to='./category/laptops'
-              className='text-decoration-none link-text-category-mobile'>
+              className='text-decoration-none link-text-category-mobile'
+            >
               <div className='category-dev-img-section-mobile'>Laptop</div>
               <div>
                 <img
@@ -274,7 +277,8 @@ const MobileHomeCategory = () => {
           <div className='image-container-category'>
             <Link
               to='/category/desktop'
-              className='text-decoration-none link-text-category-mobile'>
+              className='text-decoration-none link-text-category-mobile'
+            >
               <div className='category-dev-img-section-mobile'>Desktops</div>
               <div>
                 <img
@@ -307,7 +311,8 @@ const MobileHomeCategory = () => {
           <div className='image-container-category'>
             <Link
               to='/category/gaming_desktops'
-              className='text-decoration-none link-text-category-mobile'>
+              className='text-decoration-none link-text-category-mobile'
+            >
               <div className='category-dev-img-section-mobile'>
                 Gaming Desktop
               </div>
@@ -323,7 +328,8 @@ const MobileHomeCategory = () => {
           <div className='image-container-category'>
             <Link
               to='/category/business_computers'
-              className='text-decoration-none link-text-category-mobile'>
+              className='text-decoration-none link-text-category-mobile'
+            >
               <div className='category-dev-img-section-mobile'>
                 Business Computer
               </div>
@@ -376,12 +382,14 @@ const MobileHomeCategory = () => {
                 mb={2}
                 alignItems={'start'}
                 spacing={1}
-                className='star-rating-dev-moble-sections'>
+                className='star-rating-dev-moble-sections'
+              >
                 <Stack
                   alignItems={'center'}
                   justifyContent={'center'}
                   spacing={1}
-                  direction={'row'}>
+                  direction={'row'}
+                >
                   <StarRatings
                     rating={products[0].rating}
                     starRatedColor='rgb(232, 126, 36)'
@@ -397,7 +405,8 @@ const MobileHomeCategory = () => {
                     fontWeight={500}
                     fontSize={'12px'}
                     lineHeight={'17px'}
-                    color={'#007185'}>
+                    color={'#007185'}
+                  >
                     ({products[0].total_review})
                   </Typography>
                 </Stack>
