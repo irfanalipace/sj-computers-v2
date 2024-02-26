@@ -11,7 +11,7 @@ import CompactDesktopImg from '../../../assets/images/homepageImage/BudgetFrindl
 import WorkStationDesktopImg from '../../../assets/images/homepageImage/BudgetFrindlyDesktops/WorkStationDesktopImg.png';
 import FullSizeDesktopImg from '../../../assets/images/homepageImage/BudgetFrindlyDesktops/FullSizeDesktopImg.png';
 
-export const shopByCategoryHomePage = [
+export const shopByBrandHomePage = [
   {
     // image: "https://upload.wikimedia.org/wikipedia/commons/2/25/Dell_logo.png",
     image: DellLogo,

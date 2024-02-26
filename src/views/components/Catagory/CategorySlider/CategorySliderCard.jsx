@@ -6,6 +6,11 @@ import StarRatings from 'react-star-ratings';
 import { generatePath } from '../../../../core/utils/helpers';
 
 const CategorySliderCard = ({ product }) => {
+  const supStyle = {
+    position: 'relative',
+    top: '-1.3ex',
+  };
+
   const twoLineTypography = {
     display: '-webkit-box',
     WebkitBoxOrient: 'vertical',
@@ -84,14 +89,19 @@ const CategorySliderCard = ({ product }) => {
           mt={-3}>
           <Typography variant={'body2'}>
             {/* ${product?.price}{' '} */}
-            <sup style={{ paddingRight: '4px' }}>$</sup>
-            {product?.price?.toString().split('.')[0]}
-            <sup>{product?.price?.toString().split('.')[1]}</sup>
+            <sup style={supStyle}>$</sup>
+            <span style={{ padding: '2px', fontSize: '20px' }}>
+              {product?.price?.toString().split('.')[0]}
+            </span>
+            <sup style={supStyle}>
+              {product?.price?.toString().split('.')[1]}
+            </sup>
             <span
               style={{
                 marginLeft: '10px',
                 fontSize: 'smaller',
                 textDecoration: 'line-through',
+                color: '#666666',
               }}>
               ${parseFloat(((product?.price * 2) / 1.5).toFixed(2))}
             </span>

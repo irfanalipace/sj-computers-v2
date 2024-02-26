@@ -55,7 +55,7 @@ import monitorimg from '../../../assets/images/categories/desktopweb.webp';
 import desktopimgweb from '../../../assets/images/categories/desktopweb-page.webp';
 import modem from '../../../assets/images/homepageImage/networkimags/d-link-modem.png';
 import {
-  shopByCategoryHomePage,
+  shopByBrandHomePage,
   ShopByFormFactorHomePage,
   BudgetFriendlyDesktopsHomepage,
 } from './HomePageMaterial';
@@ -201,7 +201,7 @@ const BannerCategory = () => {
   const Sellingimages = [
     sellingimg1,
     sellingimg2,
-    sellingimg3,
+    sellingimg8,
     sellingimg4,
     sellingimg5,
     sellingimg6,
@@ -209,7 +209,7 @@ const BannerCategory = () => {
     sellingimg8,
     sellingimg1,
     sellingimg2,
-    sellingimg3,
+    sellingimg8,
     sellingimg4,
     sellingimg5,
     sellingimg6,
@@ -303,7 +303,7 @@ const BannerCategory = () => {
                 <ProductType />
                 <FeaturedProducts
                   // featuredItems={featuredItems}
-                  featuredItems={shopByCategoryHomePage}
+                  featuredItems={shopByBrandHomePage}
                   featured={featured}
                   // networkItems={networkItems}
                   networkItems={ShopByFormFactorHomePage}
