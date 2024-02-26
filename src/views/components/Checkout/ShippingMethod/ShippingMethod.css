@@ -32,3 +32,20 @@
     cursor: pointer;
     height: 40px;
 }
+
+@media screen and (max-width:600px){
+    .shipping-method-input-group.active {
+        background: white;
+        
+    }.Shipping-Method-heading-data{
+        display: none;
+    }.shipping-method-inner{
+        margin-top: 13px;
+    }.shipping-method-input-group :checked {
+        background-color: #318243;
+         /* Change this to your desired background color */
+      }.shipping-method-input-group input{
+        accent-color: #318243;
+      }
+    
+}

@@ -6,7 +6,8 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 18px;
+    padding: 0px 10px;
+    padding-top: 15px;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
@@ -33,8 +34,8 @@
     outline: none;
 }
 .mobile-imagelogo {
-    height: 62px !important;
-    width: 152px !important;
+    height: 34px !important;
+    width: 103px !important;
 }
 .search-hide-section {
     padding-left: 23px;
@@ -49,10 +50,10 @@
     transform-origin: top;
 }
 .search-hide-section-body {
-    padding-bottom: 7px;
+    /* padding-bottom: 7px;
     padding-left: 18px;
-    padding-right: 23px;
-    /* padding: 22px; */
+    padding-right: 23px; */
+    padding: 10px;
     background: #00305e;
 }
 .input-search-height {
@@ -67,8 +68,6 @@
     opacity: 1;
     transform: scaleY(1);
 }
-
-
 
 /* MobileSearch.css */
 
@@ -85,10 +84,27 @@
     /* Add other styles here */
 }
 
-.right-content {
+.left-content {
     display: flex;
     align-items: center;
     /* Add other styles here */
+}
+
+.right-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    /* Add other styles here */
+}
+
+.sign-in-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
 }
 
 .search-icon-container {
@@ -102,27 +118,48 @@
 
 .collapse-container {
     /* Add custom styles for the CollapseContainer */
-  }
-  
-  .search-hide-section-body {
+}
+
+.search-hide-section-body {
     /* Add custom styles for the search-hide-section-body div */
-  }
-  
-  .search-bar {
+}
+
+.search-bar {
     display: flex;
     /* Add custom styles for the SearchBar div */
-  }
-  
-  .search-section {
+}
+
+.search-section {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 16px;
     /* Add other custom styles for the input element */
-  }
-  
-  .search-icon-on-mobile-screen {
+}
+
+.search-icon-on-mobile-screen {
     /* Add custom styles for the search icon span */
-  }
-  
+}
+
+.sign-in-icon {
+    /* height: 21px !important; */
+    /* width: 28px !important; */
+    padding-bottom: 2px;
+}
+
+@media screen and (max-width: 575px) {
+    .dropdown.dot .vector-cart {
+        /* width: 28px; */
+        /* height: 21px; */
+        padding: 1px;
+    }
+    .search-hide-section-body {
+        /* padding-bottom: 7px;
+        padding-left: 18px;
+        padding-right: 23px; */
+        padding: 10px;
+        padding-bottom: 2px;
+        background: #00305e;
+    }
+}

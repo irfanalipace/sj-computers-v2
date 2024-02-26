@@ -1,0 +1,53 @@
+.protection-lables-warntity-warranty-badge {
+    text-align: center;
+    text-align: center;
+    padding-top: 4px;
+    /* width: 123px; */
+    background: #eaeded;
+    border-radius: 1px solid #eaeded;
+    border-radius: 6px;
+    /* max-width: 86px; */
+    /* margin-top: 6px; */
+}
+.dev-sj-computers-sections-dev-badge {
+    margin-left: 11px;
+    font-weight: 500;
+    font-size: 10px;
+
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+.protection-name-dev-protection-p {
+    font-size: 10px;
+    font-weight: 500;
+    color: #318243;
+
+    margin-bottom: 0px;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+.protection-lables-warntity-durations-year span {
+    color: #318243;
+    margin-top: 6px;
+
+    font-size: 12px !important;
+    font-weight: 600;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+.protection-lables-warntity-durations-year {
+    margin-top: 5px;
+}
+
+@media screen and (max-width:600px) {
+    .protection-lables-warntity-warranty-badge{
+        display: none;
+    }
+}

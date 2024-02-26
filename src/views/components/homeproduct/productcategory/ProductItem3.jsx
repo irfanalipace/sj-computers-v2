@@ -3,40 +3,46 @@ import { Container, Row, Col } from "react-bootstrap";
 import img1 from "@images/product/item3/image1.png";
 import img2 from "@images/product/item3/image2.png";
 import img3 from "@images/product/item3/image3.png";
-
-const ProductItem3 = () => {
-    const images = [img1, img2, img3];
-
+import "./ProductItem3.css";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+const ProductItem3 = ({ items }) => {
     return (
-        <Container>
-            <Row>
-                <Col xs={6} sm={6} md={6} lg={6} xl={6}>
-                    <img
-                        src={images[2]}
-                        alt="Image 2"
-                        className="dynamic-image"
-                        style={{ height: "300px" }}
-                    />
-                    <p>Product Name</p>
-                </Col>
-                <Col xs={6} sm={6} md={6} lg={6} xl={6}>
-                    <img
-                        src={images[1]}
-                        alt="Image 2"
-                        className="dynamic-image"
-                        style={{ height: "100px" }}
-                    />
-                    <p>Lorem Ipsum | up to 30% off</p>
-                    <img
-                        src={images[0]}
-                        alt="Image 2"
-                        className="dynamic-image"
-                        style={{ height: "155px" }}
-                    />
-                    <p>Product Name</p>
-                </Col>
-            </Row>
-        </Container>
+        <div className="categories-container">
+            <div className="devsection-three-images">
+                <img
+                    src={items[0].image}
+                    alt="Image 2"
+                    className="dynamic-image"
+                />
+                <p>{items[0].categoryName}</p>
+            </div>
+
+            <div>
+                {items[1]?.hidden !== true && (
+                    <div className="dev-images-dynmaic-images-lable">
+                        <img
+                            src={items[1].image}
+                            className="dynamic-image"
+                            alt="Image 2"
+                            // style={{ width: "100px", height: "100px", objectFit: 'contain' }}
+                        />
+                        <p className="productName-data-sections">
+                            {items[1].categoryName}
+                        </p>
+                    </div>
+                )}
+                {items[2]?.hidden !== true && (
+                    <div className="dev-images-dynmaic-dev-data">
+                        <img
+                            src={items[2].image}
+                            alt="Image 2"
+                            className="dynamic-image"
+                        />
+                        <p>{items[2].categoryName}</p>
+                    </div>
+                )}
+            </div>
+        </div>
     );
 };
 

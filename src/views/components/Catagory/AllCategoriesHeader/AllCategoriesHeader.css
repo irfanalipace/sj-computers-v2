@@ -1,0 +1,37 @@
+.category-header-wrapper{
+    display: flex;
+    height: 50px;
+    overflow: auto;
+}
+
+.category-header-wrapper::-webkit-scrollbar{
+    display: none;
+}
+
+.category-item{
+    height: 100%;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+.topbar-item{
+    color: #007185;
+    text-decoration: none;
+}
+
+.topbar-item:hover{
+    color: orange;
+    text-decoration: underline;
+}
+
+.sub-category-item{
+    color: black;
+    text-decoration: none;
+}
+
+.sub-category-item :hover{
+    color: orange;
+    text-decoration: underline;
+}
+

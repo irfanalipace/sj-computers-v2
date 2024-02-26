@@ -11,6 +11,17 @@
     padding: 17px 0;
 }
 
+.product-page .product-section {
+    border-top: 1px solid lightgray;
+    /* margin: 40px 0; */
+    padding-top: 30px;
+}
+
+.product-page .product-section .product-section-heading {
+    font-weight: 600;
+    font-size: 18px;
+}
+
 /* @media (max-width: 991px) {
     .product-container {
         width: 90%;

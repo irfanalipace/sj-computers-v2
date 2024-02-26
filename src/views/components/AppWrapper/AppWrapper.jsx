@@ -20,16 +20,10 @@ import {
     // clearCartLocally,
 } from "@utils/cartHelpers";
 import services from "../../../core/services/initServices";
-import { destroyToken } from "../../../core/services/authService";
-import { useNavigate } from "react-router-dom";
 
 const AppWrapper = ({ children }) => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const actionOn401 = () => {
-        navigate("/login");
-    };
-    services.init(actionOn401); //initialize all services
+    services.init(); //initialize all services
 
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     // const cartItems = useSelector((state) => state.cart.cart);
@@ -60,7 +54,6 @@ const AppWrapper = ({ children }) => {
     }, [isAuthenticated]);
 
     useEffect(() => {
-        console.log("1111", isMounted.current, state);
         if (isMounted.current && state)
             // fetch esimated delivery dates if initial render has happened and no state is selected
             setTimeout(() => {

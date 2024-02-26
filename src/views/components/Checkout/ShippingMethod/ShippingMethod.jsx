@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setCartDetails } from "@store/cart/cartThunks";
 import { applyShipment, applyShipmentForGuest } from "@api/checkout";
 import { shippingMethods } from "@utils/constants";
 import OverlayLoader from "@common/LoaderComponent/OverlayLoader";
-
+import { useViewportWidth } from "@hooks/useViewportWidth";
 import "./ShippingMethod.css";
 import {
     getCartDetails,
@@ -16,6 +16,9 @@ import { IS_CHRISTMAS_HOLIDAYS } from "../../../../core/utils/constants";
 
 const ShippingMehtod = () => {
     const [activeMethod, setActiveMethod] = useState(0);
+    const screenWidth = useViewportWidth();
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
     const [isLoading, setIsLoading] = useState(false);
     const currentState = useSelector((state) => state.states.currentState);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -72,9 +75,24 @@ const ShippingMehtod = () => {
             setIsLoading(false);
         }
     };
+    const handleWindowSizeChange = () => {
+        setIsMobile(window.innerWidth <= 600);
+    };
+
+    useEffect(() => {
+        const handleResize = () => {
+            handleWindowSizeChange();
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
     return (
         <div className="shipping-method-container">
-            <h3>Shipping Method</h3>
+            <h3 className="Shipping-Method-heading-data">Shipping Method</h3>
             <div className="shipping-method-inner">
                 <form>
                     {shippingMethods.map((shippingMethod) => (
@@ -85,27 +103,51 @@ const ShippingMehtod = () => {
                             }`}
                             key={shippingMethod?.id}
                         >
+                            
                             <input
                                 id={shippingMethod?.id}
                                 type="radio"
                                 onChange={handleChange}
                                 name="shippingMethod"
                                 value={shippingMethod?.id}
+                                
                                 // defaultChecked={
                                 //     activeShippingMethod == shippingMethod?.id
                                 // }
                                 checked={
                                     activeShippingMethod == shippingMethod?.id
                                 }
+                                className={activeShippingMethod == shippingMethod?.id ? 'checked' : ''}
                             />
                             <label htmlFor={shippingMethod?.id}>
-                                <span>{shippingMethod?.label}</span>
+                                {isMobile == true ? (
+                                    <div style={{ marginTop: "22px",}}>
+                                        <span
+                                            style={{
+                                               
+                                                fontWeight: "500", 
+                                              
+                                            }}
+                                        >
+                                            Free Shipping
+                                            <p style={{ fontSize: "10px", paddingTop:'5px', }}>
+                                                Mon, Nov 13
+                                            </p>
+                                        </span>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <span>{shippingMethod?.label}</span>
+                                    </div>
+                                )}
+
                                 <span>
                                     {shippingMethod?.cost
                                         ? "$" + shippingMethod?.cost
                                         : "Free"}
                                 </span>
                             </label>
+                          
                         </div>
                     ))}
                 </form>

@@ -55,6 +55,7 @@ export const addToCart = (data, cb) => {
             let param = {
                 product_id: data?.cartItem?.id,
                 qty: data.cartItem.quantity,
+                protective_plan_id: data?.cartItem?.plan?.value,
             };
             let response = await addToCartApi(param);
             data.cartDetails = { ...response.details };
@@ -366,7 +367,6 @@ export const clearCart = () => {
 };
 
 export const validateCartItems = (args) => {
-    console.print("args: ", args);
     return async (dispatch, getState) => {
         const state = getState();
         try {
@@ -381,9 +381,7 @@ export const validateCartItems = (args) => {
                 const cartDetails = { ...response?.details };
                 let cartItems = [...response?.data];
                 cartItems = mapResponse(cartItems);
-                console.print("cartItems before: ", cartItems);
                 cartItems = setCartItemAfterError(cartItems, errors, true);
-                console.print("cartItems after: ", cartItems);
 
                 if (state.auth.isAuthenticated)
                     dispatch({

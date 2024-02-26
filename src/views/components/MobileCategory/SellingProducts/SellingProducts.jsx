@@ -1,46 +1,58 @@
 import React from "react";
-import img1 from "@images/MobileImage/HomeCategory/item1.png";
-import img2 from "@images/MobileImage/HomeCategory/item2.png";
-import img3 from "@images/MobileImage/HomeCategory/item3.png";
-import img4 from "@images/MobileImage/HomeCategory/item4.png";
-import img5 from "@images/MobileImage/HomeCategory/item5.png";
-import img6 from "@images/MobileImage/HomeCategory/item6.png";
-import "./SellingProducts.css";
-const SellingProducts = () => {
-    return (
-        <div>
-            <div className="seeling-product-p">
-                {" "}
-                <span >Best Selling Products</span>
-            </div>
 
-            <div className="image-container">
-                <img src={img1} alt="" className="img-dev-selling-products" />
-                
-                <img src={img2} alt="" className="img-dev-selling-products" />
-              
-            </div>
-           <div className="dev-image-name">
-           <div>  <span>Gamming PC</span></div>
-            <div>  <span>Modmes</span></div>
-           </div>
-            <div className="image-container">
-                <img src={img3} alt="" className="img-dev-selling-products" />
-                <img src={img4} alt="" className="img-dev-selling-products" />
-            </div>
-            <div className="dev-image-name">
-           <div>  <span>Hard Drives</span></div>
-            <div>  <span>Components</span></div>
-           </div>
-            <div className="image-container">
-                <img src={img5} alt="" className="img-dev-selling-products" />
-                <img src={img6} alt="" className="img-dev-selling-products" />
-            </div>
-            <div className="dev-image-name">
-           <div>  <span>Keyboard</span></div>
-            <div>  <span>Monters</span></div>
-           </div>
+import "./SellingProducts.css";
+
+import SwiperCore, { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+SwiperCore.use([Navigation]);
+const SellingProducts = ({ images }) => {
+    return (
+        <>
+            <Swiper
+                slidesPerView={8}
+                breakpoints={{
+                    // when window width is >= 320px
+                    320: {
+                        slidesPerView: 2,
+                    },
+                    // when window width is >= 480px
+                    480: {
+                        slidesPerView: 2,
+                    },
+                    // when window width is >= 640px
+                    640: {
+                        slidesPerView: 4,
+                    },
+
+                    768: {
+                        slidesPerView: 4,
+                    },
+
+                    1200: {
+                        slidesPerView: 6,
+                    },
+                }}
+                navigation
+                className="hp-slider-1 recommendation-slider recommund-dev-slider-sections-opps"
+            >
+                {images.map((image, index) => (
+                    <SwiperSlide>
+                        <div className="px-1">
+                            <img src={image} alt={`Image ${index + 1}`} />
+                        </div>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+            {/* <Slider {...settings}>
+     
+      {images.map((image, index) => (
+        <div key={index} className="imagesSlider-images-dev">
+          <img src={image} alt={`Image ${index + 1}`} />
         </div>
+      ))}
+    </Slider> */}
+        </>
     );
 };
 

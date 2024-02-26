@@ -71,17 +71,21 @@ export default function ShippingDetails({
                             </h3>
                             <div className="address-list">
                                 <div className="address">
-                                    {/* <input
+                                    <input
                                         type="radio"
+                                        className="input-radio-button-mobile-buttob"
                                         id="address_id"
                                         name="selectedAddress"
                                         value="address_id"
-                                        onChange={handleChange}
-                                        defaultChecked={true}
-                                    /> */}
+                                        // style={{color:" #318243"}}
+                                        style={{accentColor:"#318243"}}
+                                        
+                                        // onChange={handleChange}
+                                        // defaultChecked={true}
+                                    />
                                     <div>
                                         <label htmlFor="address_id">
-                                            {shippingAddress?.full_name}{" "}
+                                        <strong style={{fontWeight:'600'}}>{shippingAddress?.full_name}</strong>{" "}
                                             {shippingAddress?.address}{" "}
                                             {shippingAddress?.city}{" "}
                                             {shippingAddress?.zip_code}{" "}

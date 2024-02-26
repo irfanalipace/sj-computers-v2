@@ -1,6 +1,6 @@
 .homePage {
     background: #d9d9d9;
-    min-height: 800px;
+    /* min-height: 800px; */
 }
 
 .banner-category-section {
@@ -31,7 +31,7 @@
     width: 100%;
     z-index: 2;
     position: relative;
-    margin-top: -250px;
+    margin-top: -300px;
 }
 
 .products-grid-container {
@@ -93,7 +93,7 @@
 
 @media screen and (max-width: 991px) {
     .catergory-grid-wrapper {
-        margin-top: -100px;
+        margin-top: -400px;
     }
 
     .products-grid-container {
@@ -110,3 +110,5 @@
         margin: 15px 30px 11px;
     }
 }
+
+

@@ -1,11 +1,13 @@
 /* @import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800"); */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 * {
     box-sizing: border-box;
 }
 body {
     min-height: 100vh;
+    /* background-color: #d9d9d9; */
 }
 
 body * {
@@ -53,9 +55,12 @@ span {
     font-display: swap;
     src:  url("./assets/font/Inter\(700\).ttf") format("truetype");
   }  */
-
+.MuiLinearProgress-bar1Determinate {
+    background-color: #ffa41c !important;
+    border-right: 1px solid #f5961d;
+}
 .inner-body {
-    min-height: calc(100vh - 600px);
+    /* min-height: calc(100vh - 600px); */
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -69,6 +74,9 @@ span {
     margin-bottom: 0;
 }
 
+.swiper-button-lock {
+    display: block !important;
+}
 @media screen and (max-width: 330px) {
     body {
         width: 369px !important;
@@ -84,18 +92,38 @@ span {
 
 @media (max-width: 767px) {
     .inner-body {
-        min-height: calc(100vh - 800px);
+        /* min-height: calc(100vh - 800px); */
     }
 }
 
 @media (min-width: 1024px) {
     .inner-body {
-        min-height: calc(100vh - 650px);
+        /* min-height: calc(100vh - 650px); */
     }
 }
 
 @media (min-width: 1700px) {
     .inner-body {
-        min-height: calc(100vh - 550px);
+        /* max-width: 1800px; */
+        margin: auto;
+    }
+    .inner-body > div {
+        min-height: calc(100vh - 670px);
+    }
+}
+@media screen and (max-width: 1200px) {
+    .hidden-on-tab {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .hidden-on-desktop {
+        display: none;
+    }
+}
+@media screen and (max-width: 780px) {
+    .hidden-on-mobile {
+        display: none;
     }
 }

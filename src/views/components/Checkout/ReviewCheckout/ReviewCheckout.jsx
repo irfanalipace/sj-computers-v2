@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import ReviewButton from "./ReviewButton";
 // import { QuantityInput } from "@common/QuantityInput/QuantityInput";
+import WarrantyBadge from "@components/ShoppingCart/CartItem/WarrantyBadge";
 
 import "./ReviewCheckout.css";
-
+import { useLocation } from "react-router-dom";
+import { useViewportWidth } from "@hooks/useViewportWidth";
+import MobileReviewCheckout from "./MobileReviewCheckout";
 export default function ReviewCheckout({
     toggleAccordion,
     estimatedDelivery,
@@ -17,7 +20,7 @@ export default function ReviewCheckout({
         handleHeight();
     }, []);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const handleProceed = () => {
         // Update the heading and button text when "Proceed" is clicked
         setDiscountHeading("New Heading");
@@ -25,17 +28,37 @@ export default function ReviewCheckout({
     const [discountHeading, setDiscountHeading] = useState(
         "Get Discount & Benefits"
     );
+    const screenWidth = useViewportWidth();
+    const [itemsToShow, setItemsToShow] = useState([]);
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const id = query.get("id");
+
+    const items = () => {
+        if (id) {
+            const oneItem = cartItems?.find((item) => item.id === parseInt(id));
+            setItemsToShow([oneItem]);
+        } else {
+            setItemsToShow(cartItems);
+        }
+    };
+
+    useEffect(() => {
+        items();
+    }, [cartItems]);
+
 
     return (
-        <div className="review-card">
-            <h4>
+        <>
+
+          <h4>
                 Estimated delivery: {estimatedDelivery ? estimatedDelivery : ""}
             </h4>
             <p>Items Shipped from sjcomputer.us</p>
 
             <div className="row mx-0 mb-3">
                 <div className="col-12 ps-0">
-                    {cartItems.map((item) => (
+                    {itemsToShow?.map((item) => (
                         <div className="item-card" key={item?.id}>
                             <div className="img-wrapper">
                                 <img
@@ -45,10 +68,59 @@ export default function ReviewCheckout({
                             </div>
                             <div className="item-detail">
                                 <h6>{item.product.name}</h6>
-                                <h6 className="price">${item.price}</h6>
-                                <h6 className="quantity">
-                                    Quantity: {item.quantity}
-                                </h6>
+                                {/* <WarrantyBadge
+                                    durationInYears={
+                                        item?.plan?.durationInYears
+                                    }
+                                /> */}
+                                <div className="row">
+                                    <div></div>
+                                    <div className="col-md-6">
+                                        <h6 className="price">
+                                            ${parseFloat(item.price).toFixed(2)}
+                                        </h6>
+                                        <h6 className="quantity">
+                                            Quantity: {item.quantity}
+                                        </h6>
+                                    </div>
+                                    <div className="col-md-3 px-0">
+                                        <div className="protection-button-remove-data">
+                                            {/* <button>Remove protection</button> */}
+                                        </div>
+                                    </div>
+                                    {item?.plan?.value && (
+                                        <div className="col-md-3">
+                                            {/* <p className="checkout-card-dev-sj-computers-sections">
+                                                    SJ Computer{" "}
+                                                </p>
+                                                <div>
+                                                    <p className="overlay-protecions-checkout-card-protection-name-dev">
+                                                        {" "}
+                                                        Protection
+                                                    </p>
+                                                </div>
+
+                                                <span>
+                                                    {item?.plan?.durationInYears
+                                                        ? item?.plan
+                                                              ?.durationInYears +
+                                                          " years"
+                                                        : "Tech Unlimited"}
+                                                </span> */}
+
+                                            <WarrantyBadge
+                                                durationInYears={
+                                                    item?.plan?.durationInYears
+                                                        ? item?.plan
+                                                              ?.durationInYears +
+                                                          " years"
+                                                        : "Tech Unlimited"
+                                                }
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+
                                 {/* <QuantityInput
                                     value={item.quantity}
                                     onChange={setQuantity}
@@ -108,6 +180,12 @@ export default function ReviewCheckout({
                     Proceed
                 </ReviewButton>
             )}
-        </div>
+    
+            
+     
+       
+
+     
+        </>
     );
 }

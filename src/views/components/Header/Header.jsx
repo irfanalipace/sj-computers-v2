@@ -26,12 +26,16 @@ import BottomNavigation from "./BottomNavigation/BottomNavigation";
 // import CartOverlay from "./CartOverlay";
 import { US } from "country-flag-icons/react/3x2";
 import "./Header.css";
+import { Troubleshoot } from "@mui/icons-material";
+import MobileScreenModal from "./MobileSearch/MobileScreenModal/MobileScreenModal";
+import ModalBox from "./MobileSearch/MobileScreenModal/ModalBox";
 
 const Header = () => {
     const currentState = useSelector((state) => state.states.currentState);
     const user = useSelector((state) => state.auth.user);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cartDetails = useSelector((state) => state.cart.details);
+    const [showModal, setShowModal] = useState(false);
 
     const firstLogin = useRef(null);
 
@@ -78,19 +82,39 @@ const Header = () => {
     const handleResize = () => {
         setScreenWidth(window.innerWidth);
     };
+
+    const handleButtonClick = () => {
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
     return (
         <>
-            {screenWidth <= 850 ? (
+            {screenWidth <= 450 ? (
                 <div>
                     {/* <Suspense> */}
                     <BottomNavigation />
                     {/* </Suspense> */}
                     <Suspense>
-                        <MobileSearch />
+                        <MobileSearch screenWidth={screenWidth} />
                     </Suspense>
-                    {screenWidth > 450 ? (
+                    {Troubleshoot ? (
                         <Suspense>
-                            <TopBar />
+                            {/* <div className="d-none d-lg-block"> */}
+                            <TopBar screenWidth={screenWidth} />
+                            {/* </div> */}
+
+                            <div className="mobile-box-model">
+                                <MobileScreenModal
+                                    onClick={handleButtonClick}
+                                />
+                                {showModal && (
+                                    <ModalBox closeModal={closeModal} />
+                                )}
+                            </div>
                         </Suspense>
                     ) : (
                         <></>

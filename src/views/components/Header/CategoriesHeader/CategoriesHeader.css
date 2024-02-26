@@ -1,0 +1,44 @@
+.header-wrappar{
+    display: flex;
+    height: 50px;
+    border-bottom: 1px solid lightgray;
+    overflow: auto;
+    padding: 0 20px;
+}
+
+.sub-category-item{
+    color: black;
+    text-decoration: none;
+}
+
+.sub-category-item :hover{
+    color: orange;
+    text-decoration: underline;
+}
+
+
+.header-wrappar::-webkit-scrollbar{
+    display: none;
+}
+
+.item{
+    color: black;
+    height: 100%;
+    padding: 20px 5px;
+    margin: 0px 15px;
+    font-size: small;
+    white-space: nowrap;
+}
+
+.item:hover{
+    color: #E87E24;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/*  for mobile view  */
+@media only screen and (max-width: 600px) {
+    .header-wrappar{
+        display: none;
+    }
+}

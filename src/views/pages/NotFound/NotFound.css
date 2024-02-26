@@ -1,0 +1,21 @@
+.notfound-page > div:first-child {
+    height: 70vh;
+    background: white;
+    color: #00305e;
+}
+.notfound-page-container {
+    width: 600px;
+}
+.notfound-page form {
+    width: 100% !important;
+}
+
+@media (max-width: 550px) {
+    .notfound-page-container {
+        width: 90%;
+    }
+
+    .notfound-page > div:first-child {
+        height: 50vh;
+    }
+}

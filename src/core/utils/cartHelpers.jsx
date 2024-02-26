@@ -170,30 +170,39 @@ export const calculateGuestCartPrice = (cart) => {
     return cartDetails;
 };
 
-export const setCartItemAfterError = (cart, errors, isAuthenticated) => {
+export const setCartItemAfterError = (
+    cart,
+    itemsWithErrors,
+    isAuthenticated
+) => {
     let tempArray = [];
-    errors?.forEach((item) => {
-        let cartItem = cart?.find((_item) => _item?.id === item?.product_id);
-        if (item?.status) {
+    itemsWithErrors?.forEach((errorItem) => {
+        let cartItem = cart?.find(
+            (_item) => _item?.id === errorItem?.product_id
+        );
+        if (errorItem?.status) {
             tempArray.push(cartItem);
         } else {
             if (
                 (isAuthenticated &&
-                    cartItem?.quantity === item?.available_quantity) ||
-                (cartItem?.quantity > item?.available_quantity &&
-                    item?.available_quantity > 0)
+                    cartItem?.quantity === errorItem?.available_quantity) ||
+                (cartItem?.quantity > errorItem?.available_quantity &&
+                    errorItem?.available_quantity > 0)
             ) {
                 const itemPrice =
-                    cartItem?.product.price * item?.available_quantity;
+                    cartItem?.product.price * errorItem?.available_quantity;
+                const planPrice =
+                    cartItem?.plan?.price * errorItem?.available_quantity;
                 cartItem = {
                     ...cartItem,
                     product: {
                         ...cartItem.product,
-                        quantity: item?.available_quantity,
+                        quantity: errorItem?.available_quantity,
                     },
-                    error: "Selected Quantity is greater than available quantity",
-                    quantity: item?.available_quantity,
+                    error: `Selected Quantity is greater than available quantity (${errorItem?.available_quantity})`,
+                    quantity: errorItem?.available_quantity,
                     price: itemPrice,
+                    plan_price: planPrice,
                 };
                 tempArray.push(cartItem);
             }

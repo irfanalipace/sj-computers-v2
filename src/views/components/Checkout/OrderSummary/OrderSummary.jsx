@@ -1,30 +1,24 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { placeOrder } from "@store/orders/ordersThunk";
+// import { placeOrder } from "@store/orders/ordersThunk";
 import ShippingButton from "@components/Checkout/ShippingDetails/ShippingButton";
 import PaymentButton from "@components/Checkout/PaymentMethod/PaymentButton";
 import ReviewButton from "@components/Checkout/ReviewCheckout/ReviewButton";
 
 import "./OrderSummary.css";
+import usePaymentData from "../PaymentMethod/usePaymentData";
 
 function OrderSummary({
     handleClick,
     activeAccordion,
-    paymentMethod,
-    shippingDetails,
+    // paymentMethod,
     isDisabled,
 }) {
     const dispatch = useDispatch();
-    const [disabled, setDisabled] = useState(true);
     const placingOrder = useSelector((state) => state.orders.placingOrder);
-
+    const paymentData = usePaymentData(true);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
-    useEffect(() => {
-        if (paymentMethod) setDisabled(false);
-    }, [paymentMethod]);
 
     const Button = () => {
         if (activeAccordion === 1) {
@@ -47,13 +41,13 @@ function OrderSummary({
                 </ReviewButton>
             );
         } else {
-            const placeOrderFunc = () => {
-                dispatch(
-                    placeOrder({ paymentMethod }, (link) =>
-                        location.replace(link)
-                    )
-                );
-            };
+            // const placeOrderFunc = () => {
+            //     dispatch(
+            //         placeOrder({ paymentMethod }, (link) =>
+            //             location.replace(link)
+            //         )
+            //     );
+            // };
 
             return (
                 <PaymentButton
@@ -75,27 +69,24 @@ function OrderSummary({
                         <div className="summary-wrapper">
                             <div className="summary-btn summery-btton-order-summery">
                                 <Button />
-                                {/* <p>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,
-                    </p> */}
                             </div>
                             <div className="summary-details">
                                 <ul>
                                     <li>
                                         <span>Items:</span>
                                         <span>
-                                            ({shippingDetails?.total_items})
+                                            ({paymentData?.details?.total_items}
+                                            )
                                         </span>
                                     </li>
                                     <li>
                                         <span>Price:</span>
                                         <span>
                                             <strong>
-                                                {shippingDetails?.sub_total
+                                                {paymentData?.details?.sub_total
                                                     ? "$" +
-                                                      shippingDetails.sub_total
+                                                      paymentData.details
+                                                          .sub_total
                                                     : "$0"}
                                             </strong>
                                         </span>
@@ -103,13 +94,12 @@ function OrderSummary({
                                     <li>
                                         <span>Shipping & handling:</span>
                                         <span>
-                                            {shippingDetails?.shipment_info
-                                                ?.amount
+                                            {paymentData?.details
+                                                ?.shipment_amount
                                                 ? "$" +
                                                   parseFloat(
-                                                      shippingDetails
-                                                          ?.shipment_info
-                                                          ?.amount
+                                                      paymentData?.details
+                                                          ?.shipment_amount
                                                   ).toFixed(2)
                                                 : "$0"}
                                         </span>
@@ -134,7 +124,7 @@ function OrderSummary({
                                         </span>
                                         <span>
                                             <strong>
-                                                ${shippingDetails?.total}
+                                                ${paymentData?.details?.total}
                                             </strong>
                                         </span>
                                     </li>
@@ -162,16 +152,18 @@ function OrderSummary({
                                     <li>
                                         <span>Items:</span>
                                         <span>
-                                            ({shippingDetails?.total_items})
+                                            ({paymentData?.details?.total_items}
+                                            )
                                         </span>
                                     </li>
                                     <li>
                                         <span>Price:</span>
                                         <span>
                                             <strong>
-                                                {shippingDetails?.sub_total
+                                                {paymentData?.details?.sub_total
                                                     ? "$" +
-                                                      shippingDetails.sub_total
+                                                      paymentData.details
+                                                          .sub_total
                                                     : "$0"}
                                             </strong>
                                         </span>
@@ -179,10 +171,12 @@ function OrderSummary({
                                     <li>
                                         <span>Shipping & handling:</span>
                                         <span>
-                                            {shippingDetails?.shipment_amount
+                                            {paymentData?.details
+                                                ?.shipment_amount
                                                 ? "$" +
                                                   parseFloat(
-                                                      shippingDetails?.shipment_amount
+                                                      paymentData?.details
+                                                          ?.shipment_amount
                                                   ).toFixed(2)
                                                 : "$0"}
                                         </span>
@@ -207,7 +201,7 @@ function OrderSummary({
                                         </span>
                                         <span>
                                             <strong>
-                                                ${shippingDetails?.total}
+                                                ${paymentData?.details?.total}
                                             </strong>
                                         </span>
                                     </li>

@@ -1,36 +1,39 @@
 import React, { Suspense } from "react";
 import BannerCategory from "./BannerCategory";
-// import CarouselSlider from "@components/Sliders/CarouselSlider";
-// import ProductThreeItem from "@components/homeproduct/product3category/ProductThreeItem";
-// import Recommendation from "@components/Recommendation/Recommendation";
-// import ProductsHomePage from "./ProductsHomePage";
 const ProductsHomePage = React.lazy(() => import("./ProductsHomePage"));
-
-// import SellingProducts from "@components/MobileCategory/SellingProducts/SellingProducts";
+import { useViewportWidth } from "@hooks/useViewportWidth";
 import "./Home.css";
+import Subscribe from "../../components/Subscribe/Subscribe";
+
 
 const Home = () => {
-    // const handleResize = () => {
-    //     setScreenWidth(window.innerWidth);
-    // };
-    // const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const screenWidth = useViewportWidth();
     return (
-        <div className="homePage">
-            {/* <MobileHomeCategory />
+        <>
+            <div className="homePage">
+                {/* <MobileHomeCategory />*/}
                 
-                        <SellingProducts /> */}
-            <BannerCategory />
-            <Suspense>
-                <div className="products-grid-container">
-                    <h2>Products</h2>
-                    <ProductsHomePage />
-                </div>
-            </Suspense>
-
-            {/* <CarouselSlider /> */}
-            {/* <ProductThreeItem /> */}
-            {/* <Recommendation /> */}
-        </div>
+                    
+                <BannerCategory />
+                <Suspense>
+                {/* {
+                        screenWidth < 576 && (
+                            <div className="products-grid-container">
+                            <h2>Products</h2>
+                            <ProductsHomePage />
+                        </div>
+                        )
+                    } */}
+                   
+                    {
+                        screenWidth > 576 && (
+                            <Subscribe />
+                        )
+                    }
+                   
+                </Suspense>
+            </div>
+        </>
     );
 };
 

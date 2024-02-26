@@ -15,6 +15,10 @@ import { CheckoutBox } from "./CheckOut/CheckoutBox";
 import CartOverlay from "../Header/CartOverlay";
 import { validateCartItems } from "../../../core/store/cart/cartThunks";
 import { IS_CHRISTMAS_HOLIDAYS } from "../../../core/utils/constants";
+import EmptyCart from "./EmptyCart";
+import SeggestedItems from "./SugestedItems/SeggestedItems";
+import Recommendation from "../Recommendation/Recommendation";
+import { featureProductsApi } from "@api/products";
 
 export const ShopingCart = ({ onFormSubmit, form }) => {
     const cartItems = useSelector((state) => state.cart.cart);
@@ -22,9 +26,9 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
     const isLoading = useSelector((state) => state.cart.isLoading);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const location = useLocation();
-    const error = location.state?.error;
+    const error = location.state?.error || searchParams.get("error");
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const orderEstimatedDelivery = useSelector(
         (state) => state.orders.orderEstimatedDelivery
@@ -74,8 +78,52 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [showModal]);
+    const [products, setProducts] = useState([]);
+    const getFeaturedProduct = async () => {
+        try {
+            const resp = await featureProductsApi(12);
+            const selectedProducts = resp?.data;
+            setProducts(selectedProducts);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        getFeaturedProduct();
+    }, []);
 
-    return (
+    return cartItems.length === 0 ? (
+        <>
+            <EmptyCart />
+            <div style={{ paddingTop: "50px", paddingBottom: "50px" }}>
+                <div
+                    className="emty-cart-bottom-section"
+                    style={{
+                        // padding: "10px 70px",
+                        borderTop: "1px solid #D0D0D0",
+                        borderBottom: "1px solid #D0D0D0",
+                    }}
+                >
+                    <h3
+                        className="d-block d-sm-none"
+                        style={{
+                            fontSize: "20px",
+                            fontWeight: 600,
+                            textWrap: "nowrap"
+                        }}
+                        >
+                        Recommended Products
+                    </h3>
+                    <div className="hide-on-desktop">
+                        <SeggestedItems num={3} />
+                    </div>
+                    <div className="d-none d-sm-block"> 
+                        <Recommendation prod={products} />
+                    </div>    
+                </div>
+            </div>
+        </>
+    ) : (
         <>
             {isLoading ? (
                 <LoaderComponent />
@@ -84,7 +132,14 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                     <div className=" cart-mein-dev">
                         <div className="row">
                             <div className="col-md-8 col-lg-9">
-                                <div className="card cart-box">
+                                <div
+                                    className="card cart-box"
+                                    style={{
+                                        borderBottom: "none",
+                                        borderBottomRightRadius: 0,
+                                        borderBottomLeftRadius: 0,
+                                    }}
+                                >
                                     <div className="row mx-0">
                                         <div className="shop-heading">
                                             <div className="col-md-10">
@@ -101,45 +156,59 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                     </div>
                                     {cartItems?.map((item) => (
                                         <div key={item.id} id={item.id}>
-                                            <hr className="hrline"></hr>
+                                            <hr className="hrline hide-on-mobile "></hr>
                                             <div className="items">
                                                 <CartItem cartData={item} />
                                             </div>
                                         </div>
                                     ))}
+                                    <hr className="hrline hide-on-desktop shopping-cart-align-hr-line"></hr>
                                 </div>
-                                <div className="row">
-                                    <div className="cart-product-subtotal-price hide-mobile-cart-btn">
-                                        <span>
-                                            Subtotal (
-                                            {cartDetails?.total_items
-                                                ? cartDetails.total_items
+                                <div className="cart-product-subtotal-price hide-mobile-cart-btn">
+                                    <span>
+                                        Subtotal (
+                                        {cartDetails?.total_items
+                                            ? cartDetails.total_items
+                                            : 0}
+                                        &nbsp;items):
+                                        <strong className="price-with-sign">
+                                            &ensp;$
+                                            {cartDetails?.sub_total
+                                                ? parseFloat(
+                                                      cartDetails.sub_total
+                                                  ).toFixed(2)
                                                 : 0}
-                                            items):
-                                            <strong className="price-with-sign">
-                                                $
-                                                {cartDetails?.sub_total
-                                                    ? parseFloat(
-                                                          cartDetails.sub_total
-                                                      ).toFixed(2)
-                                                    : 0}
-                                            </strong>
-                                        </span>
-                                    </div>
-
-                                    <div className="add-more-items-dev">
-                                        <Link to={"/"}>
-                                            <button className="add-more-button-product  hide-mobile-cart-btn">
-                                                Add more items
-                                            </button>
-                                        </Link>
-                                    </div>
+                                        </strong>
+                                    </span>
                                 </div>
+
+                                {/* <div className="add-more-items-dev">
+                                    <Link to={"/"}>
+                                        <button className="add-more-button-product  hide-mobile-cart-btn">
+                                            Add more items
+                                        </button>
+                                    </Link>
+                                </div> */}
                             </div>
                             <div className="col-md-4 col-lg-3">
-                                <div className="card card-checkout">
+                                <div
+                                    className="card card-checkout"
+                                    style={{ borderRadius: 0 }}
+                                >
                                     <div className="card-body">
                                         <div className="checkout-container">
+                                            <p className="checkout-text hide-on-mobile">
+                                                <span
+                                                    style={{ color: "#318243" }}
+                                                >
+                                                    Your order qualifies for
+                                                    FREE Shipping.
+                                                </span>{" "}
+                                                <br />
+                                                Choose this option at
+                                                checkout.&ensp;
+                                                <Link>see details</Link>
+                                            </p>
                                             <div className="card-body-text">
                                                 <div className="text-body">
                                                     <span className="sub-title">
@@ -147,7 +216,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                         {
                                                             cartDetails?.total_items
                                                         }
-                                                        items):{" "}
+                                                        &nbsp;items):&nbsp;
                                                         <strong
                                                             className="price-items"
                                                             style={{
@@ -162,34 +231,128 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                                                         </strong>
                                                     </span>
                                                     <br></br>
-                                                    {/* <label>
-                                            <input
-                                                type="checkbox"
-                                                name="myCheckbox"
-                                                className="checkbox-paragraph"
-                                            />
-                                            This is a paragraph with a checkbox.
-                                        </label> */}
+                                                    <label className="checkbox-paragraph hide-on-mobile">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="myCheckbox"
+                                                        />
+                                                        &ensp;This order
+                                                        contains an offer
+                                                    </label>
                                                 </div>
                                             </div>
 
                                             <div className="button-checkout-data">
-                                                {/* <Link > */}
                                                 <button
                                                     onClick={handleClick}
                                                     className="btn btn-primary checkout-button"
                                                 >
                                                     Proceed to checkout
                                                 </button>
-                                                {/* </Link> */}
                                             </div>
+                                            <hr className="hide-on-desktop" />
+                                            <div className="mob-cart hide-on-desktop">
+                                                {cartItems?.map((item) => (
+                                                    <div
+                                                        key={item.id}
+                                                        id={item.id}
+                                                    >
+                                                        <hr className="hrline hide-on-mobile"></hr>
+                                                        <div className="items">
+                                                            <CartItem
+                                                                cartData={item}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <button
+                                                className="btn btn-primary checkout-button hide-on-desktop"
+                                                style={{ width: "140px" }}
+                                                onClick={() => navigate("/")}
+                                            >
+                                                Add More items
+                                            </button>
                                         </div>
-                                        <div className="add-more-items-dev mt-3 hide-desktop-cart-btn">
+
+                                        {/* <div className="add-more-items-dev mt-3 hide-desktop-cart-btn">
                                             <Link to={"/"}>
                                                 <button className="add-more-button-product">
                                                     Add more items
                                                 </button>
                                             </Link>
+                                        </div> */}
+                                    </div>
+                                </div>
+                                <div
+                                    className="card card-checkout mt-3 hide-on-mobile"
+                                    style={{ borderRadius: 0 }}
+                                >
+                                    <div className="card-body">
+                                        <div className="checkout-container">
+                                            <div className="card-body-text">
+                                                <div
+                                                    style={{
+                                                        fontSize: "12px",
+                                                        lineHeight: "17px",
+                                                    }}
+                                                >
+                                                    <strong
+                                                        style={{
+                                                            fontSize: "13px",
+                                                            fontWeight: 600,
+                                                        }}
+                                                    >
+                                                        Note:
+                                                    </strong>
+                                                    &nbsp;Parcel Arrives
+                                                    on&nbsp;
+                                                    <span
+                                                        style={{
+                                                            fontSize: "13px",
+                                                            fontWeight: 600,
+                                                        }}
+                                                    >
+                                                        {
+                                                            orderEstimatedDelivery
+                                                                ?.free_shipment_amount
+                                                                ?.estimate_day
+                                                        }
+                                                    </span>{" "}
+                                                    (Tentative)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="mt-3 hide-on-mobile"></div>
+                                <div
+                                    className="card card-checkout  mb-5"
+                                    style={{ borderRadius: 0 }}
+                                >
+                                    <div className="card-body">
+                                        <div className="checkout-container">
+                                            <div className="card-body-text">
+                                                <h3
+                                                    className="hide-on-mobile"
+                                                    style={{
+                                                        fontSize: "16px",
+                                                        fontWeight: 600,
+                                                    }}
+                                                >
+                                                    You might also like
+                                                </h3>
+                                                <h3
+                                                    className="hide-on-desktop"
+                                                    style={{
+                                                        fontSize: "20px",
+                                                        fontWeight: 600,
+                                                    }}
+                                                >
+                                                    Recommended Products
+                                                </h3>
+                                                <SeggestedItems num={3} />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -247,6 +410,20 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                     </div>
                 </div>
             )}
+            <div
+                style={{ paddingTop: "50px", paddingBottom: "50px" }}
+                className="hide-on-mobile"
+            >
+                <div
+                    style={{
+                        padding: "10px 70px",
+                        borderTop: "1px solid #D0D0D0",
+                        borderBottom: "1px solid #D0D0D0",
+                    }}
+                >
+                    <Recommendation prod={products} />
+                </div>
+            </div>
         </>
     );
 };

@@ -1,79 +1,194 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-
+import { lazy, useEffect } from "react";
 import LoaderComponent from "@common/LoaderComponent/LoaderComponent";
-import { productDetailsbyAsinApi } from "@api/products";
 import { ProductImage } from "@components/Product/ProductImage/ProductImage";
 import ProductDetails from "@components/Product/ProductDetails/ProductDetails";
 import { CheckOutCard } from "@components/Product/CheckOutCard/CheckOutCard";
 import Recommendation from "@components/Recommendation/Recommendation";
 import NotFound from "../NotFound/NotFound";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
+const ProductReviews = lazy(() =>
+    import("../../components/Product/ProductReviews/ProductReviews")
+);
 import "./Product.css";
+import SimilarItems from "../../components/SimilarItems/SimilarItems";
+import TechDetails from "../../components/TechDetails/TechDetails";
+import ProductDescription from "../../components/Product/ProductDescription/ProductDescription";
+import RefurbishedSection from "../../components/RefurbishedSection/RefurbishedSection";
+import ProductVideo from "../../components/Product/ProductVideo/ProductVideo";
+import CategoriesHeader from "../../components/Header/CategoriesHeader/CategoriesHeader";
+import VisibleOnScroll, {
+    VisibilityProvider,
+} from "../../components/VisibleOnScroll";
+import useProductData from "./useProductData";
+import useSimilarData from "./useSimilarProduct";
+import Breadcrumb from "@common/Breadrumb/Breadcrumb";
+import { useSearchParams } from "react-router-dom";
+import { CLEAR_REVIEW } from "../../../core/store/review/reviewSlice";
+import { useDispatch } from "react-redux";
+import { generatePath } from "../../../core/utils/helpers";
+import { useLocation } from "react-router-dom";
+import ProductDetailsMobile from "../../components/Product/ProductDetails/ProductDetialsMobile";
 
 export default function Product() {
-    const [isLoading, setIsLoading] = useState(true);
-    const [product, setProduct] = useState(null);
-    const [productImages, setProductImages] = useState([]);
-    const products = useSelector((state) => state.products.products);
-    const { productId } = useParams();
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const theme = useTheme();
+
+    const isUpSmall = useMediaQuery(theme.breakpoints.up("md"));
+
+    const [searchParams] = useSearchParams();
+
+    const { isLoading, product } = useProductData();
+
+    const breadcrumbRoutes = [
+        {
+            label: searchParams.get("redirectedFrom") || "Home",
+            link: searchParams.get("redirectedFromPath") || "/",
+        },
+        {
+            label: "Product",
+            link: generatePath(product?.url),
+        },
+    ];
+    useEffect(() => {
+        // execute on location change
+        console.log(location);
+        console.log(product?.id);
+        // dispatch(CLEAR_REVIEW());
+        // console.log("Location changed!", location.pathname);
+    }, [location?.pathname]);
 
     useEffect(() => {
-        getProductDetails();
-    }, [productId]);
-
-    const getProductDetails = async () => {
-        const filteredProduct = products.filter(
-            (product) => product?.asin == productId
-        )[0];
-        if (filteredProduct) {
-            setProduct(filteredProduct);
-            setProductImages(filteredProduct?.image);
-        } else {
-            setIsLoading(true);
-            try {
-                const response = await productDetailsbyAsinApi(productId);
-                setProduct(response.data);
-                setProductImages(response?.data?.image);
-                setIsLoading(false);
-            } catch (error) {}
-        }
-        setIsLoading(false);
-    };
-
-    const ProductComponent = () => {
-        return (
-            <div className="row">
-                <div className="col-12 col-md-4">
-                    <ProductImage ProductImages={productImages} />
-                </div>
-                <div className="col-12 col-md-5">
-                    <ProductDetails product={product} />
-                </div>
-                <div className="col-12 col-md-3 p-0 m-0">
-                    <CheckOutCard product={{ ...product }} />
-                </div>
-            </div>
-        );
-    };
+        return () => {
+            dispatch(CLEAR_REVIEW());
+        };
+    }, []);
 
     return (
-        <>
-            {product?.id || isLoading || !products?.length ? (
-                <div className="product-page ">
+        <VisibilityProvider>
+            {product?.id || isLoading ? (
+                <div className="product-page">
+                    <CategoriesHeader />
                     <div className="product-container container-fluid">
-                        {isLoading || !products?.length ? (
+                        {isUpSmall && <Breadcrumb routes={breadcrumbRoutes} />}
+                        {isLoading ? (
                             <LoaderComponent />
                         ) : (
-                            <ProductComponent />
+                            <>
+                                {isUpSmall ? (
+                                    <ProductComponent product={product} />
+                                ) : (
+                                    <ProductMobileComponent
+                                        isUpSmall={isUpSmall}
+                                        product={product}
+                                    />
+                                )}
+                                <VisibleOnScroll id="section1">
+                                    <div>
+                                        {isUpSmall ? (
+                                            <SimilarItemsOfProduct
+                                                productId={product?.id}
+                                            />
+                                        ) : (
+                                            <SimilarItemsOfProduct
+                                                productId={product?.id}
+                                                isMobile={isUpSmall}
+                                            />
+                                        )}
+                                        <RefurbishedSection />
+                                        <ProductDescription
+                                            description={
+                                                product?.description
+                                                    ?.product_description?.[0]
+                                                    ?.value
+                                            }
+                                        />
+                                    </div>
+                                </VisibleOnScroll>
+                                <TechDetails product={product} />
+
+                                {/* VIDEO-SECTION */}
+                                {/* <ProductVideo product={product} />  */}
+
+                                <div id="reviews">
+                                    <VisibleOnScroll id="section2">
+                                        <ProductReviews
+                                            // reviews={products}
+                                            // onFilterChange={onFilterChange}
+                                            productAsin={product?.asin}
+                                            productId={product?.id}
+                                        />
+                                    </VisibleOnScroll>
+                                </div>
+                            </>
                         )}
-                        <Recommendation products={products} />
+                        {isUpSmall && (
+                            <VisibleOnScroll id="section3">
+                                <Recommendation />
+                            </VisibleOnScroll>
+                        )}
                     </div>
                 </div>
             ) : (
                 <NotFound />
             )}
-        </>
+        </VisibilityProvider>
     );
 }
+
+const ProductComponent = ({ product }) => {
+    return (
+        <div className="row">
+            <div className="col-12 col-md-4 ">
+                <ProductImage ProductImages={product.image} />
+            </div>
+            <div className="col-12 col-md-5">
+                <ProductDetails product={product} />
+            </div>
+            <div className="col-12 col-md-3 p-0 m-0">
+                <CheckOutCard product={{ ...product }} />
+            </div>
+        </div>
+    );
+};
+
+const ProductMobileComponent = ({ product, isUpSmall }) => {
+    return (
+        <div className="row">
+            {/* <div className="col-12 col-md-4 ">
+                <ProductImage ProductImages={product.image} />
+            </div> */}
+            <div className="col-12 col-md-5">
+                <ProductDetailsMobile isUpSmall={isUpSmall} product={product} />
+            </div>
+        </div>
+    );
+};
+
+const SimilarItemsOfProduct = ({ productId, isMobile }) => {
+    const { similarProducts, featuredProducts, isLoading } =
+        useSimilarData(productId);
+    return (
+        <>
+            {isLoading ? (
+                <LoaderComponent />
+            ) : (
+                <>
+                    {similarProducts?.length > 0 ? (
+                        <div className="hidden-on-ab">
+                            <SimilarItems
+                                isMobile={isMobile}
+                                similarProducts={similarProducts}
+                                featuredProducts={featuredProducts}
+                            />
+                        </div>
+                    ) : (
+                        <></>
+                    )}
+                </>
+            )}
+        </>
+    );
+};

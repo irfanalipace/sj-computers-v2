@@ -24,7 +24,8 @@ class CardRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'source_id' => ['required'],
+            'payment_type' => 'required','in:SQUARE,PAYPAL',
+            'source_id' => 'required_if:payment_type,SQUARE',
             'shipping_address' => ['required', 'array'],
             'shipping_address.email' => 'required|email',
             'shipping_address.country' => 'required',
@@ -60,6 +61,8 @@ class CardRequest extends FormRequest
                 'details.total_quantity' => 'required|gt:0',
                 'details.shipment_amount' => 'required',
                 'details.estimate_days' => 'required',
+                'is_buy_now' => 'nullable|in:true,false',
+                "cart_id" => 'required_if:is_buy_now,true'
             ];
         }
 

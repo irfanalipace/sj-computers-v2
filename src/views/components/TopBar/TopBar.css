@@ -1,5 +1,6 @@
 .topBar {
     background: #002549;
+    /* background-color: #00305e; */
 }
 
 .topBar-inner {
@@ -26,7 +27,7 @@
 }
 
 .menuBar .navIcon {
-    width: 55px;
+    width: 60px;
     display: flex;
     margin-right: 3rem;
     cursor: pointer;
@@ -58,6 +59,7 @@ Link:hover {
     line-height: 18px;
     color: #ffffff;
     padding-top: 5px;
+    padding-left: 5px;
 }
 
 .hover-effect-sets-topbar {
@@ -79,8 +81,17 @@ Link:hover {
     border: 1px solid white;
     margin-right: 3px;
 }
-  
+
 @media screen and (max-width: 576px) {
+    .topBar{
+        background-color: #00305e;
+    }
+    .menuBar .text-color {
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 15px;
+        color: #ffffff;
+    }
     .menuBar {
         justify-content: center;
     }

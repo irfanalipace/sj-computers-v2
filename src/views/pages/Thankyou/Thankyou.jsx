@@ -1,56 +1,64 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-// import { productDetailsApi } from "@api/products";
-// import { Container, Row, Col, Table } from "react-bootstrap";
 
 import "./thankyou.css"; // Import the CSS file for the component
-import circle from "../../../assets/images/green-circle.svg";
 import tickImage from "../../../assets/images/tick1.svg";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearCartLocally } from "../../../core/utils/cartHelpers";
+import { CLEAR_CART } from "@store/cart/cartSlice";
+import { useViewportWidth } from "@hooks/useViewportWidth";
+import MobileThanku from "./MobileThanku";
 
 export default function ThankYou() {
-    // const isMobile = window.innerWidth <= 768;
+    const [searchParams] = useSearchParams();
+    const dispatch = useDispatch();
+    const screenWidth = useViewportWidth();
     function formatDate(dateString) {
         const options = { year: "numeric", month: "long", day: "numeric" };
         const date = new Date(dateString);
         return date.toLocaleDateString(undefined, options);
     }
+    let orderFromURL = searchParams.get("orderSuccess");
+
+    if (orderFromURL) {
+        try {
+            orderFromURL = JSON.parse(orderFromURL);
+        } catch (error) {
+            console.log("error parsing order: ", error);
+        }
+    }
+    console.log("orderFromURL: ", orderFromURL);
 
     const navigate = useNavigate();
-    const [thankOrderDetails, setThankOrderDetails] = useState({});
-    const [thankOrderItems, setThankOrderItems] = useState([]);
+    const [orderDetails, setOrderDetails] = useState({});
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const location = useLocation();
-    const order = location.state?.order;
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    //   const handleButtonClick = () => {
-    //     // Redirect to the specific path
-    //     history.push("/specific-path");
-    //   };
-
     useEffect(() => {
         const storedOrder = window.localStorage.getItem("thankyouOrderDetails");
-        const order = location?.state?.order || JSON.parse(storedOrder);
-        if (order) {
+        const order =
+            location?.state?.order?.order_detail ||
+            JSON.parse(storedOrder) ||
+            orderFromURL?.order?.order_details;
+        console.log('orderDetails: ', order);
+        if (order?.id) {
             const orderString = JSON.stringify(order);
             window.localStorage.setItem("thankyouOrderDetails", orderString);
-            setThankOrderDetails(order);
-            let Order = order?.Order;
-
-            console.print(Order?.order?.order_item, "order");
-            setThankOrderItems(Order?.order?.order_item);
-            console.print(thankOrderItems, "order 3");
+            setOrderDetails(order);
+            clearCartLocally();
+            dispatch(CLEAR_CART());
         }
+        else {
+            // navigate('/')
+        }
+        return () => {
+            window.localStorage.removeItem("thankyouOrderDetails");
+        };
     }, []);
 
-    useEffect(() => {
-        //    console.print(thankOrderItems, "2nd useeffect")
-        //    console.print(thankOrderDetails, "2nd useeffect for order details")
-    }, [thankOrderItems]);
-
     const handleWindowSizeChange = () => {
-        setIsMobile(window.innerWidth <= 768);
+        setIsMobile(window.innerWidth <= 430);
     };
 
     useEffect(() => {
@@ -65,65 +73,11 @@ export default function ThankYou() {
         };
     }, []);
     return (
-        <div
-            className="thank-you-page"
-            style={{ marginLeft: "10%", marginRight: "10%" }}
-        >
-            <div className="row margintopBottom">
-                <div className="col-12 my-10">
-                    <div className="d-flex justify-content-center align-items-center">
-                        {/* <img
-          src={circle}
-          alt="Circle Image"
-          style={{ position: "", zIndex: 1 }}
-        /> */}
-                        <div
-                            className="d-flex justify-content-center align-items-center"
-                            style={{
-                                width: "70px",
-                                height: "70px",
-                                borderRadius: "50%",
-                                backgroundColor: "#318243",
-                            }}
-                        >
-                            <img
-                                src={tickImage}
-                                alt="Tick Image"
-                                style={{
-                                    position: "",
-                                    zIndex: 2,
-                                    marginLeft: "-3.3%",
-                                }}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="col-12 my-2">
-                    <h1>Thanks for Order</h1>
-                </div>
-                <div className="col-12 my-20">
-                    <p>
-                        Your order with tracking No{" "}
-                        <span style={{ fontWeight: "900" }}>
-                            {thankOrderDetails?.Order?.order?.id}
-                        </span>{" "}
-                        has been successfully confirmed. We’ll send you an email
-                        notification once your order has shipped.
-                    </p>
-                </div>
-            </div>
-            <div></div>
-            {/* <div className="product-thumbnail">
-              <img src={productImage} alt="Product" />
-            </div> */}
-            {/* Map through the tableData array and render table rows */}
-            {/* <div class="text-truncate"></div> */}
-            {/* <div className="product-title">{data?.product_name}</div> */}
-
-            {isMobile === true ? (
+        <>
+ {isMobile === true ? (
                 <>
-                    <div className="card-container">
-                        {thankOrderItems?.map((data, index) => (
+                    {/* <div className="card-container">
+                        {orderDetails?.order_item?.map((data, index) => (
                             <div className="oder-item-card" key={index}>
                                 <div className="card-image">
                                     <img
@@ -169,10 +123,7 @@ export default function ThankYou() {
                                             <span>Delivery Details:</span>
                                         </div>
                                         <div className="col-12 my-2 delivery-details">
-                                            {
-                                                thankOrderDetails?.Order
-                                                    ?.estimate_day
-                                            }
+                                            {orderDetails?.shipment_days}
                                         </div>
                                         <div className="col-12 my-2 payment-type">
                                             <span>Payment Type:</span>
@@ -190,9 +141,66 @@ export default function ThankYou() {
                                 </div>
                             </div>
                         ))}
-                    </div>
+                    </div> */}
+                    <MobileThanku />
                 </>
             ) : (
+        <div
+            className="thank-you-page"
+            style={{ marginLeft: "10%", marginRight: "10%" }}
+        >
+            <div className="row margintopBottom">
+                <div className="col-12 my-10">
+                    <div className="d-flex justify-content-center align-items-center">
+                        {/* <img
+          src={circle}
+          alt="Circle Image"
+          style={{ position: "", zIndex: 1 }}
+        /> */}
+                        <div
+                            className="d-flex justify-content-center align-items-center"
+                            style={{
+                                width: "70px",
+                                height: "70px",
+                                borderRadius: "50%",
+                                backgroundColor: "#318243",
+                            }}
+                        >
+                            <img
+                                src={tickImage}
+                                alt="Tick Image"
+                                style={{
+                                    position: "",
+                                    zIndex: 2,
+                                    marginLeft: "-3.3%",
+                                }}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="col-12 my-2">
+                    <h1>Thanks for Order</h1>
+                </div>
+                <div className="col-12 my-20">
+                    <p>
+                        Your order with tracking No{" "}
+                        <span style={{ fontWeight: "900" }}>
+                            {orderDetails?.id}
+                        </span>{" "}
+                        has been successfully confirmed. We’ll send you an email
+                        notification once your order has shipped.
+                    </p>
+                </div>
+            </div>
+            <div></div>
+            {/* <div className="product-thumbnail">
+              <img src={productImage} alt="Product" />
+            </div> */}
+            {/* Map through the tableData array and render table rows */}
+            {/* <div class="text-truncate"></div> */}
+            {/* <div className="product-title">{data?.product_name}</div> */}
+
+           
                 <>
                     <table className="thank-you-table">
                         <thead>
@@ -213,7 +221,7 @@ export default function ThankYou() {
                             </tr>
                         </thead>
                         <tbody>
-                            {thankOrderItems?.map((data, index) => (
+                            {orderDetails?.order_item?.map((data, index) => (
                                 <tr key={index}>
                                     <td>
                                         <div style={{ display: "flex" }}>
@@ -244,9 +252,7 @@ export default function ThankYou() {
                                     <td>{data?.qty}</td>
                                     <td>{data?.order_id}</td>
                                     <td>{formatDate(data.created_at)}</td>
-                                    <td>
-                                        {thankOrderDetails?.Order?.estimate_day}
-                                    </td>
+                                    <td>{orderDetails?.shipment_days}</td>
                                     <td>{"Square"}</td>
                                     <td>${data.price}</td>
                                 </tr>
@@ -254,7 +260,7 @@ export default function ThankYou() {
                         </tbody>
                     </table>
                 </>
-            )}
+          
 
             <div className="row total-tax-row mx-0">
                 <div className="col-12 d-flex justify-content-end">
@@ -271,8 +277,8 @@ export default function ThankYou() {
                 <div className="col-6 d-flex justify-content-end">
                     <p className="bold-total">
                         $
-                        {thankOrderDetails?.Order?.total_amount
-                            ? thankOrderDetails?.Order?.total_amount
+                        {orderDetails?.total_amount
+                            ? orderDetails?.total_amount
                             : "N/A"}
                     </p>
                 </div>
@@ -300,5 +306,7 @@ export default function ThankYou() {
                 </div>
             </div>
         </div>
+          )}
+        </>
     );
 }

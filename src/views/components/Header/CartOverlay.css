@@ -18,7 +18,59 @@
     font-size: 14px;
     margin-top: 15px;
 }
+.overlay-sidebar-protect-card {
+    padding-right: 8px;
+}
+.overlay-card-protection-button-remove-data button {
+    background: none;
+    border: none;
+    color: #078396;
+    font-size: 10px;
+}
+.overlay-card-protection-button-remove-data button:hover {
+    color: #d27d39;
+}
 
+.checkout-card-dev-sj-computers-sections-overlay-data-view {
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 0px;
+}
+.overlay-checkout-card-protection-name-dev-protecttions {
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #318243;
+}
+
+.years-data-list-prot {
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #318243;
+}
+.protection-button-remove-data {
+    margin-right: 4px;
+}
+.overlay-card-protections-dev-data-sidebar {
+    display: flex;
+    justify-content: space-between;
+    min-height: 40px;
+}
+.overlay-card-shipping-page-card-view-details {
+    display: flex;
+}
 .buttonoverlay-condtions {
     display: flex;
     justify-content: space-around;
@@ -83,9 +135,6 @@
     align-items: center;
     justify-content: center;
 }
-
-
-
 
 .overlay-modal-checkout-model-checkout-model-sidebar-checkout {
     background-color: #fff;
@@ -159,6 +208,34 @@
     background: transparent !important;
     border-color: #3f833f;
     color: #3f833f;
+}
+.price-of-item-data-card {
+    padding-top: 50px;
+}
+
+.add-cart-button-proccesd {
+    margin-top: 12px;
+}
+.price-item strong {
+    font-size: 16px;
+    font-weight: 800;
+}
+.dev-price-data-overlay-page {
+    display: flex;
+    justify-content: space-between;
+}
+.new-price-data-overlay {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+@media screen and (max-width: 1045px) and (min-width: 758px) {
+    .protections-price-carditem {
+        width: 300px;
+        margin-left: -33px;
+    }
 }
 @media screen and (max-width: 600px) {
     .sidebar-cart .item-details {

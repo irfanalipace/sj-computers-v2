@@ -2,11 +2,38 @@
     border-radius: 10px;
     border: 1px solid #dddddd;
 }
-
+/* styles.css */
+.summer-mobile-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .summer-mobile-modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
 .summary-wrapper {
     padding: 10px 15px;
 }
-
+.order-summer-mobile-size-data span{
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: center;
+    
+}
 .summery-btton-order-summery button{
     font-weight: 600;
     font-size: 12px;

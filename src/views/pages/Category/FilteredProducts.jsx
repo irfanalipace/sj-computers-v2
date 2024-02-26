@@ -2,6 +2,9 @@ import { useEffect, useState, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import ViewModuleIcon from '@mui/icons-material/ViewModule';
+import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
+import { IconButton } from "@mui/material";
 
 import { filterProducts } from "@store/products/productsThunks";
 import {
@@ -10,10 +13,14 @@ import {
     SET_SELECTED_CATEGORY,
 } from "@store/products/productsSlice";
 import ProductsGrid from "@components/ProductsGrid/ProductsGrid";
+import "./FilteredProducts.css"
 
 const FilteredProducts = memo(({ category, toggleFilter }) => {
     const {
         products,
+        filtersProduct,
+        filterTotal,
+        filterTo,
         isLoading,
         apiError,
         currentPage,
@@ -21,9 +28,12 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
         filtersArray,
     } = useSelector((state) => state.products);
 
-    const prod = useSelector((state) => state.products);
-
     const [mounted, setMounted] = useState(false);
+
+    const productParamsRef = {
+        redirectedFrom: category?.name,
+        redirectedFromPath: `/category/${category?.slug}`,
+    };
 
     const dispatch = useDispatch();
 
@@ -35,17 +45,14 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     };
 
     const init = () => {
-        // dispatch(SET_SEARCH_STRING(""));
         dispatch(SET_SELECTED_CATEGORY(null));
         dispatch(CLEAR_ALL_PRODUCTS());
-        // dispatch(filterProducts(filterObject));
         setMounted(true);
     };
 
     useEffect(() => {
         init();
         return () => {
-            // dispatch(SET_SEARCH_STRING(""));
             dispatch(CLEAR_ALL_PRODUCTS());
         };
     }, []);
@@ -74,8 +81,18 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                 dispatch(filterProducts(filterObject));
             }
         }
-        // }, [searchString, filtersArray]);
     }, [filtersArray]);
+
+    useEffect(() => {
+        filterObject = {
+            ...filterObject,
+            page: 1,
+            name: "",
+            filter: filtersArray,
+        };
+
+        dispatch(filterProducts(filterObject));
+    }, []);
 
     useEffect(() => {
         filterObject = {
@@ -90,11 +107,24 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
         }
     }, [category]);
 
+    const [productView, setProductView] = useState("grid")
+
+    const productViewGrid = () => {
+        setProductView("grid")
+    }
+
+    const productViewList = () => {
+        setProductView("list")
+    }
+
+
+    console.log(productParamsRef, "productParamsRef");
+
     return (
         <div className="filter-results">
             {products.length > 0 ? (
                 <>
-                    {category?.name && (
+                    {/* {category?.name && (
                         <div className="d-flex justify-content-space-between align-items-center heading">
                             <h3>
                                 Best{" "}
@@ -109,22 +139,37 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                                 <FontAwesomeIcon icon={faFilter} />
                             </button>
                         </div>
-                    )}
-
-                    <ProductsGrid
-                        products={products}
+                    )} */}
+                    <div className="product-grid-heading">Best {category?.name ? category?.name : "Monitors for Desktops"}</div>
+                    {/* <p className="product-grid-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem.</p> */}
+                    <div className="product-length-container">
+                    {/* 1-{products?.length > filterTotal ? filterTotal : products.length } of over {filterTotal} results for <span style={{color: "#52AC66", margin: "0px 5px"}}> Monitors </span> */}
+                    {filterTo ? 1 : 0}-{filterTo ? filterTo : 0} of over {filterTotal} results for <span style={{color: "#52AC66", margin: "0px 5px"}}> {category?.name ? category?.name : "Monitors"} </span>
+                    <div className="buttons">
+                        <span className="view-button" onClick={productViewList}><IconButton disableRipple style={{borderRadius: '3px' , padding: "3px 6px" , backgroundColor: productView == "list" ? "#318243" : "", color: productView == "list" ? "white" : "#318243"}}><FormatAlignLeftIcon fontSize="small" /> </IconButton></span>
+                        <span className="view-button" onClick={productViewGrid}><IconButton disableRipple style={{borderRadius: '3px' , padding: "3px 6px" , backgroundColor: productView == "grid" ? "#318243" : "", color: productView == "grid" ? "white" : "#318243"}}><ViewModuleIcon fontSize="small" /> </IconButton></span>
+                    </div>    
+                </div>
+                    {filtersProduct?.length == 0 ? <div style={{fontWeight: "500", padding: "15px"}}>Products Not Found</div> : <ProductsGrid
+                        products={filtersProduct}
                         handleClick={handleClick}
                         isLoading={isLoading}
                         apiError={apiError}
-                    />
+                        searchParams={productParamsRef}
+                        productView={productView}
+                        inFilterProducts={true}
+                    />}
                 </>
             ) : (
                 <>
                     {isLoading || !category ? (
-                        <h3 className="heading">Waiting</h3>
+                        <h3 className="heading text-center">Waiting</h3>
                     ) : (
-                        <div className="d-flex justify-content-space-between align-items-center heading">
-                            <h3>No Products Found</h3>
+                        <div
+                            style={{ height: "137vh" }}
+                            className="d-flex justify-content-center align-items-start heading"
+                        >
+                            <h3 className="text-center">No Products Found</h3>
                             <button
                                 className="d-sm-none d-block bg-transparent border-0"
                                 onClick={toggleFilter}

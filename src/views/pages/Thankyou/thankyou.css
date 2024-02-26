@@ -10,7 +10,71 @@
     text-align: center;
     letter-spacing: 0.03em;
 }
+.oreder-confirm-page-data{
+  margin-top: 23px;
 
+}
+.oreder-confirm-page-data span{
+    font-family: Inter;
+font-size: 20px;
+font-weight: 500;
+line-height: 19px;
+letter-spacing: 0em;
+text-align: center;
+
+}
+.jhon-name-user-order{
+    margin-top: 7px;
+    margin-bottom: -15px;
+}.paragrap-text-notify-order{
+    font-family: Inter;
+font-size: 14px;
+font-weight: 400;
+line-height: 21px;
+letter-spacing: 0em;
+text-align: left;
+
+}
+.jhon-name-user-order span{
+font-family: Inter;
+font-size: 16px;
+font-weight: 500;
+line-height: 19px;
+letter-spacing: 0em;
+text-align: left;
+}
+.Items-thanku-view-page-thanks span{
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: center;
+    
+}
+.Items-calcurteing-items{
+    padding: 13px;
+    /* color: transparent; */
+    background: #8edd9f;
+    ;
+    text-align: left;
+    border-radius: 2px;
+}
+.Items-calcurteing-items span{
+    padding: 13px;
+font-family: Inter;
+font-size: 12px;
+font-weight: 500;
+line-height: 15px;
+color: #269c40;
+letter-spacing: 0em;
+text-align: center;
+}
+.Items-thanku-view-page-thanks {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px;
+}
 .thank-you-table {
     width: 100%;
     border-collapse: collapse;
@@ -109,7 +173,15 @@
     display: flex;
     flex-wrap: wrap;
 }
-
+.order-summery-items-card {
+    padding-left: 12px;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: center;
+}
 .oder-item-card {
     width: 100%;
     max-width: 300px;
@@ -167,5 +239,42 @@
     .card-image img {
         width: 50%;
         height: auto;
+    }
+}
+@media (max-width: 600px) {
+    .shop-more-btn {
+        /* margin-left: 9px; */
+        /* height: 48px; */
+        width: 100%;
+        left: 0px;
+        top: 0px;
+        border-radius: 8px;
+        color: #fff;
+        left: 0%;
+        right: 0%;
+        top: 0%;
+        bottom: 0%;
+        background: #318243;
+        border-radius: 8px;
+        border: none;
+    }
+    .track-oder-item-card {
+        color: black !important;
+        padding: 12px;
+        width: 100%;
+        background: white;
+        left: 0px;
+        top: 0px;
+        border-radius: 8px;
+        color: #fff;
+        left: 0%;
+        right: 0%;
+        top: 0%;
+        bottom: 0%;
+        border-radius: 8px;
+        border: none;
+
+    }.oder-item-card{
+max-width: 100%;
     }
 }
