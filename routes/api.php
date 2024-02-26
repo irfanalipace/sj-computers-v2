@@ -94,6 +94,8 @@ Route::get('category-product', [CategoryController::class, 'getCategoryProduct']
 
 Route::get('filter-products', [ProductController::class, 'getFilterProducts'])->name('getFilterProducts');
 
+Route::get('budget-friendly-desktops',[ProductController::class,'getBudgetFriendlyDesktop'])->name('getBudgetFriendlyDesktop');
+
 /*
 *Add to Cart
 */
