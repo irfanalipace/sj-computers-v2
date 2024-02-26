@@ -280,4 +280,11 @@ class ProductController extends BaseController
             ->get();
     }
 
+    public function getBudgetFriendlyDesktop()
+    {
+        $products =  Product::where('price', '<', 250)
+                ->where('name', 'like', '%Desktop%') // This searches for 'Desktop' in the name
+                ->get();
+        return $this->sendResponse($products,'Successfully fetched budget friendly products.');
+    }
 }
