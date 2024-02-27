@@ -109,15 +109,18 @@ const ReviewsDialog = ({
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth={'lg'}>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      className='review-dialog'
+      maxWidth={'lg'}>
       <DialogContent
         sx={{
-          minWidth: '65vw',
+          //   minWidth: '65vw',
           width: '100%',
           p: 0,
           overflowY: 'none',
-        }}
-      >
+        }}>
         <Box
           sx={{
             width: '100%',
@@ -126,8 +129,7 @@ const ReviewsDialog = ({
             position: 'sticky',
             top: 0,
             left: 0,
-          }}
-        >
+          }}>
           <DialogActions>
             <IconButton onClick={handleClose}>
               <CloseOutlinedIcon />
@@ -159,8 +161,7 @@ const ReviewsDialog = ({
                       color={'black'}
                       fontWeight={'bolder'}
                       onClick={() => setImgGallery(true)}
-                      sx={{ cursor: 'pointer' }}
-                    >
+                      sx={{ cursor: 'pointer' }}>
                       <IconButton sx={{ color: 'black' }}>
                         <AppsIcon />
                       </IconButton>
@@ -175,8 +176,7 @@ const ReviewsDialog = ({
                   height={'30rem'}
                   sx={{ backgroundColor: 'black' }}
                   display={'flex'}
-                  alignItems={'center'}
-                >
+                  alignItems={'center'}>
                   <Swiper
                     ref={swiperRef}
                     style={{
@@ -199,8 +199,7 @@ const ReviewsDialog = ({
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                        }}
-                      >
+                        }}>
                         <img
                           src={data?.file_path}
                           style={{
@@ -221,8 +220,7 @@ const ReviewsDialog = ({
                   pl={2}
                   container
                   height={'30rem'}
-                  sx={{ overflowY: 'auto' }}
-                >
+                  sx={{ overflowY: 'auto' }}>
                   <Grid item xs={12}>
                     {/* <div className="my-4 ms-3" > */}
                     <ReviewCard
@@ -237,8 +235,7 @@ const ReviewsDialog = ({
                       py={1}
                       variant='body1'
                       fontSize={'small'}
-                      mb={1}
-                    >
+                      mb={1}>
                       Images in this review
                     </Typography>
                     <div style={{ display: 'flex' }}>
@@ -257,8 +254,7 @@ const ReviewsDialog = ({
                               backgroundImage: `url(${data?.file_path})`,
                               backgroundSize: 'cover',
                               backgroundPosition: 'center',
-                            }}
-                          ></Box>
+                            }}></Box>
                         ),
                       )}
                     </div>
