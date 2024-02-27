@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\PaginateRequest;
 use App\Http\Requests\Product\ProductDetailRequest;
 use App\Http\Requests\Product\ProductMediaRequest;
 use App\Http\Requests\Product\SearchProductRequest;
@@ -280,11 +281,55 @@ class ProductController extends BaseController
             ->get();
     }
 
-    public function getBudgetFriendlyDesktop()
+    public function getBudgetFriendlyDesktop(PaginateRequest $request)
     {
-        $products =  Product::where('price', '<', 250)
-                ->where('name', 'like', '%Desktop%') // This searches for 'Desktop' in the name
-                ->get();
+        $products =  Product::whereHas('categories' , function($category){
+            $category->where('slug','desktop');
+            })->where('price','>',250)            
+            ->paginate($request->per_page ?? 10);
         return $this->sendResponse($products,'Successfully fetched budget friendly products.');
+    }
+
+    public function getWorkstationsBudget(PaginateRequest $request)
+    {
+        $products =  Product::where('name', 'like', '%workstation%')->where('price','>',400)            
+            ->paginate($request->per_page ?? 10);
+        return $this->sendResponse($products,'Successfully fetched workstations systems products.');
+    }
+
+    public function getPorfessionalLaptop(PaginateRequest $request)
+    {
+        $products =  Product::whereHas('categories' , function ($query) {
+             $query->where('slug', 'laptop');
+             $query->OrWhere('slug', '2_in_1_laptops');
+            })->where('price','>',400)            
+            ->paginate($request->per_page ?? 10);
+        return $this->sendResponse($products,'Successfully fetched professional laptops products.');
+    }
+
+    public function getTouchScreenLaptop(PaginateRequest $request)
+    {
+        $products =  Product::whereHas('categories',function($category){
+            $category->where('slug','touch_screen');
+            })            
+            ->paginate($request->per_page ?? 10);
+        return $this->sendResponse($products,'Successfully fetched touch laptops products.');
+    }
+
+    public function getTopRatedProduct(PaginateRequest $request)
+    {
+        $products = Product::whereHas('productReview', function ($query) {
+                $query->where('rating', '>=', 4);
+            })
+            ->select('products.*', DB::raw('(
+                SELECT ROUND(AVG(rating), 1)
+                FROM product_reviews 
+                WHERE product_reviews.product_id = products.id
+            ) AS average_rating'))
+            ->orderByDesc('average_rating')
+            ->inRandomOrder()
+            ->paginate($request->per_page ?? 10);
+    
+        return $this->sendResponse($products, 'Successfully fetched top-rated products.');
     }
 }
