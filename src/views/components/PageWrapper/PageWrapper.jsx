@@ -2,6 +2,7 @@ import React, { useEffect, useState, Suspense } from 'react';
 import { Helmet } from 'react-helmet';
 import { metaDetailsApi } from '../../../core/api/meta-details';
 import Loader from '@common/LoaderComponent/LoaderComponent';
+import { getUserId } from '../../../core/services/authService';
 const PageWrapper = props => {
   const [meta, setMeta] = useState({ title: '', description: '' });
   const url = window.location.href;
@@ -29,6 +30,15 @@ const PageWrapper = props => {
   //     descriptionMetaTag.setAttribute('content', meta.description);
   //   }
   // }, [meta]);
+
+  useEffect(() => {
+    console.log('SJ Comput');
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'pageView',
+      userId: getUserId(),
+    });
+  });
 
   return (
     <>
