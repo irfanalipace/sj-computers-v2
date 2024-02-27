@@ -100,18 +100,18 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
 
         <div className='row  sub-title-add-overlay2'>
           <div className='col-md-4 mt-2'>
-            <div style={{marginTop:"12px"}}>
+            <div style={{ marginTop: '12px' }}>
               <img src={vetimges} />{' '}
               <span style={{ fontWeight: '500' }}>Not Added</span>
             </div>
 
-            <div className='image-data-scroll-cart mt-2' >
+            <div className='image-data-scroll-cart mt-2'>
               <img src={vectorimg} />
             </div>
           </div>
 
           <div className='col-md-6 mt-2'>
-            <div style={{marginTop:"12px"}}>
+            <div style={{ marginTop: '12px' }}>
               <span className='' style={{ fontWeight: '500' }}>
                 Cart Subtotal
               </span>
@@ -138,7 +138,7 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
               </div>
             ) : (
               <div>
-                <div style={{ display: 'flex', marginTop:'12px' }}>
+                <div style={{ display: 'flex', marginTop: '12px' }}>
                   <div>
                     <Link
                       to='/cart'
@@ -217,9 +217,9 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
           </div>
 
           <div className='col-2 mt-2'>
-            <div style={{ textAlign: 'end', }}>
+            <div style={{ textAlign: 'end' }}>
               <button
-              style={{fontSize:"30px"}}
+                style={{ fontSize: '30px' }}
                 onClick={toggleSidebar}
                 className='close-button-overlay-layer'>
                 <FontAwesomeIcon icon={faTimes} />
@@ -256,7 +256,7 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
                             <img
                               src={item?.product?.image}
                               alt=''
-                              className='cartItem-image'
+                             // className='cartItem-image'
                             />
                           </div>
                           <Link
@@ -322,7 +322,7 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
               </div>
             ) : (
               <div className='buttonoverlay-condtions'>
-                <div style={{ marginTop: '53px' }}>
+                <div style={{ marginTop: '60px' }}>
                   <p className='nomore-item-text-p'>No Added</p>
                 </div>
                 <div style={{ marginTop: '53px' }}>

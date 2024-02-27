@@ -110,8 +110,7 @@ export const CartItem = memo(({ cartData }) => {
               <div className='col-md-10'>
                 <Link
                   className='items-card-name'
-                  to={generatePath(cartData?.product?.url, searchParams)}
-                >
+                  to={generatePath(cartData?.product?.url, searchParams)}>
                   <strong className='item-details'>
                     {cartData?.product?.name}
                   </strong>
@@ -130,16 +129,14 @@ export const CartItem = memo(({ cartData }) => {
                   justifyContent: 'space-between',
                   width: '100%',
                   paddingLeft: '12px',
-                }}
-              >
+                }}>
                 <div>
                   <div className='row list-item-dev-ui-item'>
                     <ul className='item-list'>
                       <li className='hide-on-mobile'>
                         <span
                           className='item-stock'
-                          style={{ fontWeight: 500 }}
-                        >
+                          style={{ fontWeight: 500 }}>
                           {cartData?.product?.quantity == cartData?.quantity
                             ? 'Out of Stock'
                             : 'In Stock'}
@@ -151,8 +148,7 @@ export const CartItem = memo(({ cartData }) => {
                           style={{
                             color: '#000',
                             fontWeight: 600,
-                          }}
-                        >
+                          }}>
                           Discount Available
                         </span>
                       </li>
@@ -161,8 +157,7 @@ export const CartItem = memo(({ cartData }) => {
                           <strong
                             style={{
                               fontWeight: 600,
-                            }}
-                          >
+                            }}>
                             Capacity:
                           </strong>{' '}
                           2TB
@@ -173,8 +168,7 @@ export const CartItem = memo(({ cartData }) => {
                           <strong
                             style={{
                               fontWeight: 600,
-                            }}
-                          >
+                            }}>
                             Style:
                           </strong>{' '}
                           980 PRO
@@ -190,8 +184,7 @@ export const CartItem = memo(({ cartData }) => {
                       width: '350px',
                       // border: "1px solid #000",
                       marginLeft: '140px',
-                    }}
-                  >
+                    }}>
                     <div className='col-md-9 mt-2'>
                       {cartData?.plan?.value && (
                         <>
@@ -223,8 +216,7 @@ export const CartItem = memo(({ cartData }) => {
                         <strong
                           style={{
                             fontWeight: 800,
-                          }}
-                        >
+                          }}>
                           ${parseFloat(cartData?.plan_price).toFixed(2)}
                         </strong>
                       </p>
@@ -251,8 +243,7 @@ export const CartItem = memo(({ cartData }) => {
                         <button
                           onClick={deleteItemFunction}
                           className='cart-bttn'
-                          disabled={updatingItem}
-                        >
+                          disabled={updatingItem}>
                           {updatingItem ? <Loader /> : 'Delete'}
                         </button>
                         <button className='cart-bttn' disabled={updatingItem}>
@@ -267,8 +258,7 @@ export const CartItem = memo(({ cartData }) => {
                         </button>
                         <button
                           className='cart-bttn hide-on-mobile'
-                          disabled={updatingItem}
-                        >
+                          disabled={updatingItem}>
                           {updatingItem ? <Loader /> : 'Share'}
                         </button>
                       </div>
