@@ -87,8 +87,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
         <div
           className='sidebarOverlay'
           onClick={toggleSidebar}
-          style={{ overflowY: 'hidden' }}
-        ></div>
+          style={{ overflowY: 'hidden' }}></div>
       )}
       <div className={`sidebar-cart ${isOpen ? 'open' : 'closed'}`}>
         <button onClick={toggleSidebar} className='close-button'>
@@ -120,8 +119,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                   generatePath(item?.product?.url) ||
                                   location.pathname
                                 }
-                                className='text-decoration-none pb-2 d-block'
-                              >
+                                className='text-decoration-none pb-2 d-block'>
                                 <strong className='item-details'>
                                   {item?.product?.name}
                                 </strong>
@@ -159,13 +157,11 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                       className='d-flex'
                                       style={{
                                         maxWidth: '700px',
-                                      }}
-                                    >
+                                      }}>
                                       <button
                                         onClick={() => deleteItemFunction(item)}
                                         className='button-link ps-0'
-                                        disabled={updatingItem}
-                                      >
+                                        disabled={updatingItem}>
                                         {updatingItem ? <Loader /> : 'Delete'}
                                       </button>
                                     </div>
@@ -253,16 +249,14 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                         <Link
                           to='/cart'
                           className='text-decoration-none cart-text-link'
-                          onClick={toggleSidebar}
-                        >
+                          onClick={toggleSidebar}>
                           <button className='cart-overlaybutton'>Cart</button>
                         </Link>
 
                         <Link
                           to='/checkout'
                           className='text-decoration-none processed-link'
-                          onClick={toggleSidebar}
-                        >
+                          onClick={toggleSidebar}>
                           <button className='processed-button'>
                             Proceed to checkout ({details?.total_items} item)
                           </button>
@@ -273,8 +267,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                         <Link
                           to='/cart'
                           className='text-decoration-none cart-text-link'
-                          onClick={toggleSidebar}
-                        >
+                          onClick={toggleSidebar}>
                           <button className='cart-overlaybutton'>Cart</button>
                         </Link>
 
@@ -293,8 +286,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                           <div className='overlay-model-checkout-model-sidebar-checkout'>
                             <div
                               className='overlay-modal-checkout-model-checkout-model-sidebar-checkout'
-                              ref={modalRef}
-                            >
+                              ref={modalRef}>
                               <div className='modal-content-sidebar-checkout'>
                                 <form>
                                   <div className='dve-heading-data-login-checkout-sidebar-checkout'>
@@ -307,8 +299,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                     <Link
                                       className='text-decoration-none'
                                       to={'/login'}
-                                      onClick={toggleSidebar}
-                                    >
+                                      onClick={toggleSidebar}>
                                       {' '}
                                       <button>Sign in</button>
                                     </Link>
@@ -317,8 +308,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                     <p className='small-text-paragrap'>
                                       <Link
                                         to='/login'
-                                        className='text-decoration-none'
-                                      >
+                                        className='text-decoration-none'>
                                         Don't have account? <span>Sign Up</span>
                                       </Link>
                                     </p>
@@ -327,8 +317,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                     <span
                                       style={{
                                         color: 'black',
-                                      }}
-                                    >
+                                      }}>
                                       OR
                                     </span>
                                   </div>
@@ -337,8 +326,7 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                     <Link
                                       onClick={toggleSidebar}
                                       className='text-decoration-none'
-                                      to={'/checkout'}
-                                    >
+                                      to={'/checkout'}>
                                       <button> Continue as a Guest</button>
                                     </Link>
                                   </div>
