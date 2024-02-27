@@ -79,8 +79,7 @@ const CategorySlider = () => {
         navigation={{
           nextEl: '.category-slider .swiper-button-next',
           prevEl: '.category-slider .swiper-button-prev',
-        }}
-      >
+        }}>
         {products?.map(product => (
           <SwiperSlide key={'ps-' + product.id}>
             <CategorySliderCard product={product} />
@@ -90,12 +89,10 @@ const CategorySlider = () => {
       {/* the css of these are defined in Slider.css */}
       <div
         className='swiper-button-next slider-button'
-        style={{ position: 'absolute', right: 0 }}
-      ></div>
+        style={{ position: 'absolute', right: 0 }}></div>
       <div
         className='swiper-button-prev slider-button'
-        style={{ position: 'absolute', left: 0 }}
-      ></div>
+        style={{ position: 'absolute', left: 0 }}></div>
     </div>
   );
 };
