@@ -9,6 +9,8 @@ const CategorySliderCard = ({ product }) => {
   const supStyle = {
     position: 'relative',
     top: '-1.3ex',
+    fontWeight: 500,
+    fontSize: '10px',
   };
 
   const twoLineTypography = {
@@ -24,15 +26,13 @@ const CategorySliderCard = ({ product }) => {
     <Link
       // to={`${new URL(product?.url).pathname}`}
       to={generatePath(product?.url)}
-      style={{ textDecoration: 'none' }}
-    >
+      style={{ textDecoration: 'none' }}>
       <Grid
         container
         // className=" ms-3 ms-lg-0"
         // border={".5px solid gray"}
         borderRadius={'10px'}
-        height={'285px'}
-      >
+        height={'285px'}>
         <Grid
           item
           xs={12}
@@ -42,8 +42,7 @@ const CategorySliderCard = ({ product }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-          }}
-        >
+          }}>
           <LazyLoadImage
             // width={"90px"}
             // height={"100%"}
@@ -55,7 +54,9 @@ const CategorySliderCard = ({ product }) => {
         </Grid>
 
         <Grid item xs={12} m={'auto'} py={0} px={2} sx={{ color: '#007185' }}>
-          <Typography variant={'body2'} sx={twoLineTypography}>
+          <Typography
+            variant={'body2'}
+            sx={{ ...twoLineTypography, '&:hover': { color: '#E87E24' } }}>
             {product?.name}
           </Typography>
         </Grid>
@@ -67,8 +68,7 @@ const CategorySliderCard = ({ product }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-          }}
-        >
+          }}>
           <StarRatings
             rating={product?.rating}
             starRatedColor='rgb(232, 126, 36)'
@@ -90,12 +90,12 @@ const CategorySliderCard = ({ product }) => {
           py={4}
           px={2}
           sx={{ color: 'black' }}
-          mt={-3}
-        >
+          mt={-3}>
           <Typography variant={'body2'}>
             {/* ${product?.price}{' '} */}
             <sup style={supStyle}>$</sup>
-            <span style={{ padding: '2px', fontSize: '20px' }}>
+            <span
+              style={{ padding: '2px', fontSize: '20px', fontWeight: '500' }}>
               {product?.price?.toString().split('.')[0]}
             </span>
             <sup style={supStyle}>
@@ -104,11 +104,10 @@ const CategorySliderCard = ({ product }) => {
             <span
               style={{
                 marginLeft: '10px',
-                fontSize: 'smaller',
+                fontSize: '12px',
                 textDecoration: 'line-through',
                 color: '#666666',
-              }}
-            >
+              }}>
               ${parseFloat(((product?.price * 2) / 1.5).toFixed(2))}
             </span>
           </Typography>

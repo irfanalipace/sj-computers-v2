@@ -16,6 +16,15 @@
 }
 
 .sub-category-link:hover {
-  color: orange;
+  color: #e87e24;
+  text-decoration: underline;
+}
+
+.review-lines {
+  cursor: pointer;
+}
+
+.review-lines:hover {
+  color: #e87e24;
   text-decoration: underline;
 }

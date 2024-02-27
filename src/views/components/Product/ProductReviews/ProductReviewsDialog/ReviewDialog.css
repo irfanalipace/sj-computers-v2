@@ -29,8 +29,10 @@
   background-size: cover;
 }
 
-.review-dialog .muiDialog-paper {
-  width: '65vw';
+.review-dialog .MuiDialog-paper {
+  /* min-width: '65vw' !important; */
+  min-width: 65vw;
+  /* min-height: 70vh; */
 }
 
 @media screen and (max-width: 1100px) {

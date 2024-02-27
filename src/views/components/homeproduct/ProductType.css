@@ -41,7 +41,7 @@
   text-decoration: none;
 }
 .product-type-section .categories-container {
-  height: 230px;
+  height: 245px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -202,7 +202,7 @@
   height: auto;
 }
 .section-link {
-  margin-top: 25px;
+  margin-top: 15px;
   margin-bottom: 0;
   color: #007185;
 }

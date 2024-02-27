@@ -4,7 +4,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import StarRatings from 'react-star-ratings';
 import FilterBar from '../../FilterBar/FilterBar';
-import { computerCategories } from '../DummyApi';
+import { computerCategories, categoriesWithSubCategories } from '../DummyApi';
 import FilterBarlayout2 from './FilterbarLayout2';
 import { Link } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ import './CategorySidebar.css';
 
 const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
   const [isSubCategoryVisible, setIsSubCategoryVisible] = useState(
-    computerCategories.map(() => false),
+    categoriesWithSubCategories.map(() => false),
   );
   const [visibleCategory, setVisibleCategory] = useState(2);
 
@@ -68,7 +68,7 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
           variant='body2'
           fontWeight={'bolder'}
           ml>
-          Categories
+          Categories{' '}
           {inDrawer ? (
             <span className={`${inDrawer ? 'align-to-end' : ''}`}>
               <IconButton onClick={() => DataInDrawerToggler(1)}>
@@ -86,7 +86,7 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
         </Typography>
         {(DataInDrawer[1] || !inDrawer) && (
           <>
-            {computerCategories
+            {categoriesWithSubCategories
               ?.slice(0, visibleCategory)
               ?.map((category, index) => (
                 <>
@@ -98,7 +98,7 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
                     {category.category}
                     <IconButton size='small'>
                       {isSubCategoryVisible[index] ? (
-                        <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
+                        <KeyboardArrowUpIcon sx={{ color: '#e87e24' }} />
                       ) : (
                         <KeyboardArrowDownIcon />
                       )}
@@ -106,30 +106,30 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
                   </Typography>
                   {isSubCategoryVisible[index] && (
                     <Box ml={inDrawer ? 6 : 3}>
-                      <Link className='sub-category-link'>
-                        <Typography variant='body2' py={0.3}>
-                          Basic Monitors
-                        </Typography>
-                      </Link>
-                      <Link className='sub-category-link'>
-                        <Typography variant='body2' py={0.3}>
-                          4K visual monitors
-                        </Typography>
-                      </Link>
+                      {category?.sub_categories.map((subCategory, subIndex) => (
+                        <Link
+                          key={subIndex}
+                          to={subCategory.url}
+                          className='sub-category-link'>
+                          <Typography variant='body2' py={0.3}>
+                            {subCategory.name}
+                          </Typography>
+                        </Link>
+                      ))}
                     </Box>
                   )}
                 </>
               ))}
-            {visibleCategory + 1 > computerCategories.length ? (
+            {visibleCategory + 1 > categoriesWithSubCategories?.length ? (
               <Typography
                 variant='body1'
                 sx={{ cursor: 'pointer' }}
                 onClick={showLess}
-                color={'orange'}>
+                color={'#e87e24'}>
                 <IconButton size='small' onClick={showLess}>
                   <KeyboardArrowUpIcon />
                 </IconButton>{' '}
-                See less categories
+                See Less Categories
               </Typography>
             ) : (
               <Typography
@@ -140,7 +140,7 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
                 <IconButton size='small'>
                   <KeyboardArrowDownIcon />
                 </IconButton>{' '}
-                See More categories
+                See More Categories
               </Typography>
             )}
           </>
@@ -176,7 +176,11 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
         </Typography>
         {(DataInDrawer[2] || !inDrawer) && (
           <Box ml={inDrawer ? 4 : 2} py={1}>
-            <Typography mb={0.5} variant='body2' fontSize={'small'}>
+            <Typography
+              mb={0.5}
+              variant='body2'
+              fontSize={'small'}
+              className='review-lines'>
               <StarRatings
                 starDimension='18px'
                 starSpacing='0'
@@ -185,7 +189,11 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
               />
               & Up
             </Typography>
-            <Typography mb={0.5} variant='body2' fontSize={'small'}>
+            <Typography
+              mb={0.5}
+              variant='body2'
+              fontSize={'small'}
+              className='review-lines'>
               <StarRatings
                 starDimension='18px'
                 starSpacing='0'
@@ -194,7 +202,11 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
               />
               & Up
             </Typography>
-            <Typography mb={0.5} variant='body2' fontSize={'small'}>
+            <Typography
+              mb={0.5}
+              variant='body2'
+              fontSize={'small'}
+              className='review-lines'>
               <StarRatings
                 starDimension='18px'
                 starSpacing='0'
@@ -203,7 +215,11 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
               />
               & Up
             </Typography>
-            <Typography mb={0.5} variant='body2' fontSize={'small'}>
+            <Typography
+              mb={0.5}
+              variant='body2'
+              fontSize={'small'}
+              className='review-lines'>
               <StarRatings
                 starDimension='18px'
                 starSpacing='0'

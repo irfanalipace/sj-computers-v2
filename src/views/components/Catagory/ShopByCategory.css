@@ -1,0 +1,14 @@
+.shop-by-category .image-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  /* left: 0; */
+  background-color: #6a7272;
+  opacity: 0.1;
+  width: 135px;
+  height: 135px;
+  border-radius: 100%;
+  display: block;
+  left: 50%;
+  translate: -50% 0;
+}

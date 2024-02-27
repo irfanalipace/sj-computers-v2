@@ -3,8 +3,8 @@ import './ReviewDialog.css';
 
 const ImageGallery = ({ getReviewById, ReviewsData }) => {
   return (
-    <div style={{ height: '30rem' }}>
-      <div className='gallery-container'>
+    <div>
+      <div className='gallery-container' style={{ minHeight: '30rem' }}>
         {ReviewsData?.data?.map((data, i) => (
           <React.Fragment key={data.id}>
             {data?.product_media?.map((image, index) => (
@@ -16,8 +16,7 @@ const ImageGallery = ({ getReviewById, ReviewsData }) => {
                   className='image-item'
                   style={{
                     backgroundImage: `url(${image?.file_path})`,
-                  }}
-                ></div>
+                  }}></div>
               </div>
             ))}
           </React.Fragment>

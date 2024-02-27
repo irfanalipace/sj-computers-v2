@@ -21,7 +21,7 @@
 }
 
 .topbar-item:hover {
-  color: orange;
+  color: #e87e24;
   text-decoration: underline;
 }
 
@@ -31,6 +31,6 @@
 }
 
 .sub-category-item :hover {
-  color: orange;
+  color: #e87e24;
   text-decoration: underline;
 }

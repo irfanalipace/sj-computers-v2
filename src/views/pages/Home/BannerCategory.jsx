@@ -58,6 +58,7 @@ import {
   shopByBrandHomePage,
   ShopByFormFactorHomePage,
   BudgetFriendlyDesktopsHomepage,
+  featured,
 } from './HomePageMaterial';
 
 const SellingPro = React.lazy(
@@ -122,25 +123,25 @@ const BannerCategory = () => {
       categoryName: 'BTO',
     },
   ];
-  const featured = [
-    {
-      name: 'Shop by Brands',
-      link: 'See more',
-    },
-    {
-      name: 'Shop by Form Factor',
-      link: 'See more',
-    },
-    {
-      name: 'Budget Friendly Desktops',
-      link: 'See more',
-      extra: 'Under $250',
-    },
-    {
-      name: 'Touch Screen Laptops',
-      link: 'Shop Now',
-    },
-  ];
+  // const featured = [
+  //   {
+  //     name: 'Shop by Brands',
+  //     link: 'See more',
+  //   },
+  //   {
+  //     name: 'Shop by Form Factor',
+  //     link: 'See more',
+  //   },
+  //   {
+  //     name: 'Budget Friendly Desktops',
+  //     link: 'See more',
+  //     extra: 'Under $250',
+  //   },
+  //   {
+  //     name: 'Touch Screen Laptops',
+  //     link: 'Shop Now',
+  //   },
+  // ];
   const networkItems = [
     {
       // image: linkrouter,

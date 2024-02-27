@@ -90,3 +90,23 @@ export const BudgetFriendlyDesktopsHomepage = [
     categoryName: 'Full Size Desktops',
   },
 ];
+
+export const featured = [
+  {
+    name: 'Shop by Brands',
+    link: 'See more',
+  },
+  {
+    name: 'Shop by Form Factor',
+    link: 'See more',
+  },
+  {
+    name: 'Budget Friendly Desktops',
+    link: 'See more',
+    extra: 'Under $250',
+  },
+  {
+    name: 'Touch Screen Laptops',
+    link: 'Shop Now',
+  },
+];
