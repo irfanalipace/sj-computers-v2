@@ -11,12 +11,10 @@ export default function Sidebar({ openState, toggleSidebar }) {
       )}
       <div
         className='sideMenu-container'
-        style={{ left: openState ? '0' : '-350px' }}
-      >
+        style={{ left: openState ? '0' : '-350px' }}>
         <div
           className='bg-white'
-          style={{ width: openState ? '320px' : '0', height: '100%' }}
-        >
+          style={{ width: openState ? '320px' : '0', height: '100%' }}>
           {openState && (
             <Suspense fallback={<Loader />}>
               <SidebarMenu

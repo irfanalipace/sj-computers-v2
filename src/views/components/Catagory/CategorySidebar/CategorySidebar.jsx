@@ -55,23 +55,20 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
         overflowX: 'hidden',
         overflowY: 'none',
         borderRight: inDrawer == true ? '' : '0.5px solid #DDDDDD',
-      }}
-    >
+      }}>
       <Grid
         item
         xs={12}
         ml={inDrawer ? 0 : 2}
-        borderBottom={inDrawer ? '1px solid #DDDDDD' : ''}
-      >
+        borderBottom={inDrawer ? '1px solid #DDDDDD' : ''}>
         <Typography
           onClick={() => DataInDrawerToggler(1)}
           p={inDrawer ? 2 : 0}
           className={`${inDrawer ? 'alignment-container' : ''}`}
           variant='body2'
           fontWeight={'bolder'}
-          ml
-        >
-          Categories{' '}
+          ml>
+          Categories
           {inDrawer ? (
             <span className={`${inDrawer ? 'align-to-end' : ''}`}>
               <IconButton onClick={() => DataInDrawerToggler(1)}>
@@ -97,8 +94,7 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
                     ml={inDrawer ? 4 : 2}
                     variant='body2'
                     sx={{ cursor: 'pointer' }}
-                    onClick={() => toggleSubCategoryVisibility(index)}
-                  >
+                    onClick={() => toggleSubCategoryVisibility(index)}>
                     {category.category}
                     <IconButton size='small'>
                       {isSubCategoryVisible[index] ? (
@@ -129,8 +125,7 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
                 variant='body1'
                 sx={{ cursor: 'pointer' }}
                 onClick={showLess}
-                color={'orange'}
-              >
+                color={'orange'}>
                 <IconButton size='small' onClick={showLess}>
                   <KeyboardArrowUpIcon />
                 </IconButton>{' '}
@@ -141,8 +136,7 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
                 variant='body1'
                 sx={{ cursor: 'pointer' }}
                 onClick={showMore}
-                color={'#52AC66'}
-              >
+                color={'#52AC66'}>
                 <IconButton size='small'>
                   <KeyboardArrowDownIcon />
                 </IconButton>{' '}
@@ -158,15 +152,13 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
         xs={12}
         ml={inDrawer ? 0 : 2}
         my={1}
-        borderBottom={inDrawer ? '1px solid #DDDDDD' : ''}
-      >
+        borderBottom={inDrawer ? '1px solid #DDDDDD' : ''}>
         <Typography
           onClick={() => DataInDrawerToggler(2)}
           p={inDrawer ? 2 : 0}
           variant='body2'
           className={`${inDrawer ? 'alignment-container' : ''}`}
-          fontWeight={'bolder'}
-        >
+          fontWeight={'bolder'}>
           Customer Reviews{' '}
           {inDrawer ? (
             <span className={`${inDrawer ? 'align-to-end' : ''}`}>
@@ -233,8 +225,7 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
             height: '',
             overflowY: 'hidden',
             border: 'none',
-          }}
-        >
+          }}>
           {/* <FilterBar /> */}
           <FilterBarlayout2
             inDrawer={inDrawer}

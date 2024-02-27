@@ -55,8 +55,6 @@ export default function Product() {
   ];
   useEffect(() => {
     // execute on location change
-    console.log(location);
-    console.log(product?.id);
     // dispatch(CLEAR_REVIEW());
     // console.log("Location changed!", location.pathname);
   }, [location?.pathname]);
@@ -65,6 +63,20 @@ export default function Product() {
     return () => {
       dispatch(CLEAR_REVIEW());
     };
+  }, []);
+
+  useEffect(() => {
+    if (window.productViewDataLayer) return;
+    if (!product) return;
+    console.log('SJ Comput, DataLayer ');
+    window.dataLayer = window.dataLayer || [];
+    window.productViewDataLayer = true;
+    window.dataLayer.push({
+      event: 'productViewPage',
+      productName: product.name,
+      productPrice: product.productPrice,
+      productAsin: product.asin,
+    });
   }, []);
 
   return (

@@ -22,6 +22,7 @@ let acceptedKeys = [
 ];
 
 const ProductDetails = ({ product }) => {
+  console.log({ product });
   const [description, setDescription] = useState([]);
   const [productDetails, setProductDetails] = useState([]);
   const [key, setKey] = useState('home');
@@ -91,8 +92,7 @@ const ProductDetails = ({ product }) => {
         color={'#007185'}
         fontWeight={400}
         fontSize={'14px'}
-        lineHeight={'16px'}
-      >
+        lineHeight={'16px'}>
         Most demanding
       </Typography>
       <div className='row px-0 res deatisl-data-set-image-view-data-details'>
@@ -184,14 +184,12 @@ const ProductDetails = ({ product }) => {
       <PriceWithLabel sx={{ mb: 0.8 }} price={product?.price} />
       <Tooltip
         sx={{ left: { xs: '100%', md: '50%' } }}
-        content={<ReturnPolicy />}
-      >
+        content={<ReturnPolicy />}>
         <Typography
           fontWeight={400}
           color={'#007185'}
           fontSize={'14px'}
-          lineHeight={'14px'}
-        >
+          lineHeight={'14px'}>
           Free Return
           <ExpandMoreIcon
             sx={{

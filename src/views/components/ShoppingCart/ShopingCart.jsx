@@ -19,6 +19,7 @@ import EmptyCart from './EmptyCart';
 import SeggestedItems from './SugestedItems/SeggestedItems';
 import Recommendation from '../Recommendation/Recommendation';
 import { featureProductsApi } from '@api/products';
+import { getUserId } from '../../../core/services/authService';
 
 export const ShopingCart = ({ onFormSubmit, form }) => {
   const cartItems = useSelector(state => state.cart.cart);
@@ -92,6 +93,19 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
     getFeaturedProduct();
   }, []);
 
+  useEffect(() => {
+    // if (window.hasCartLayer) return;
+    console.log('SJ Comput');
+    window.dataLayer = window.dataLayer || [];
+    // window.hasCartLayer = true;
+    window.dataLayer.push({
+      event: 'cartPage',
+      userId: getUserId(),
+      itemInCart: cartDetails?.total_items,
+      productAsin: parseFloat(cartDetails?.sub_total).toFixed(2),
+    });
+  }, []);
+
   return cartItems.length === 0 ? (
     <>
       <EmptyCart />
@@ -102,16 +116,14 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
             // padding: "10px 70px",
             borderTop: '1px solid #D0D0D0',
             borderBottom: '1px solid #D0D0D0',
-          }}
-        >
+          }}>
           <h3
             className='d-block d-sm-none'
             style={{
               fontSize: '20px',
               fontWeight: 600,
               textWrap: 'nowrap',
-            }}
-          >
+            }}>
             Recommended Products
           </h3>
           <div className='hide-on-desktop'>
@@ -138,8 +150,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                     borderBottom: 'none',
                     borderBottomRightRadius: 0,
                     borderBottomLeftRadius: 0,
-                  }}
-                >
+                  }}>
                   <div className='row mx-0'>
                     <div className='shop-heading'>
                       <div className='col-md-10'>
@@ -203,8 +214,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                               className='price-items'
                               style={{
                                 fontWeight: 'bold',
-                              }}
-                            >
+                              }}>
                               ${cartDetails?.sub_total}
                             </strong>
                           </span>
@@ -219,8 +229,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                       <div className='button-checkout-data'>
                         <button
                           onClick={handleClick}
-                          className='btn btn-primary checkout-button'
-                        >
+                          className='btn btn-primary checkout-button'>
                           Proceed to checkout
                         </button>
                       </div>
@@ -238,8 +247,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                       <button
                         className='btn btn-primary checkout-button hide-on-desktop'
                         style={{ width: '140px' }}
-                        onClick={() => navigate('/')}
-                      >
+                        onClick={() => navigate('/')}>
                         Add More items
                       </button>
                     </div>
@@ -255,8 +263,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                 </div>
                 <div
                   className='card card-checkout mt-3 hide-on-mobile'
-                  style={{ borderRadius: 0 }}
-                >
+                  style={{ borderRadius: 0 }}>
                   <div className='card-body'>
                     <div className='checkout-container'>
                       <div className='card-body-text'>
@@ -264,14 +271,12 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                           style={{
                             fontSize: '12px',
                             lineHeight: '17px',
-                          }}
-                        >
+                          }}>
                           <strong
                             style={{
                               fontSize: '13px',
                               fontWeight: 600,
-                            }}
-                          >
+                            }}>
                             Note:
                           </strong>
                           &nbsp;Parcel Arrives on&nbsp;
@@ -279,8 +284,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                             style={{
                               fontSize: '13px',
                               fontWeight: 600,
-                            }}
-                          >
+                            }}>
                             {
                               orderEstimatedDelivery?.free_shipment_amount
                                 ?.estimate_day
@@ -295,8 +299,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                 <div className='mt-3 hide-on-mobile'></div>
                 <div
                   className='card card-checkout  mb-5'
-                  style={{ borderRadius: 0 }}
-                >
+                  style={{ borderRadius: 0 }}>
                   <div className='card-body'>
                     <div className='checkout-container'>
                       <div className='card-body-text'>
@@ -305,8 +308,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                           style={{
                             fontSize: '16px',
                             fontWeight: 600,
-                          }}
-                        >
+                          }}>
                           You might also like
                         </h3>
                         <h3
@@ -314,8 +316,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                           style={{
                             fontSize: '20px',
                             fontWeight: 600,
-                          }}
-                        >
+                          }}>
                           Recommended Products
                         </h3>
                         <SeggestedItems num={3} />
@@ -332,8 +333,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                             className='price-items'
                             style={{
                               fontWeight: '600',
-                            }}
-                          >
+                            }}>
                             Note:
                           </strong>
                           Parcel{' '}
@@ -344,8 +344,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                           <strong
                             style={{
                               fontWeight: '600',
-                            }}
-                          >
+                            }}>
                             {' '}
                             {
                               orderEstimatedDelivery?.free_shipment_amount
@@ -368,23 +367,20 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
         <div className='overlay-model-checkout-model'>
           <div
             className='overlay-modal-checkout-model-checkout-model'
-            ref={modalRef}
-          >
+            ref={modalRef}>
             <CheckoutBox />
           </div>
         </div>
       )}
       <div
         style={{ paddingTop: '50px', paddingBottom: '50px' }}
-        className='hide-on-mobile'
-      >
+        className='hide-on-mobile'>
         <div
           style={{
             padding: '10px 70px',
             borderTop: '1px solid #D0D0D0',
             borderBottom: '1px solid #D0D0D0',
-          }}
-        >
+          }}>
           <Recommendation prod={products} />
         </div>
       </div>
