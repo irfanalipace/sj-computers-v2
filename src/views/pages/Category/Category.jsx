@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import FilterBar from '@components/FilterBar/FilterBar';
@@ -15,6 +15,7 @@ import CategoryParagraph from './CategoryParagraph';
 import CategoryVideoAndSlider from '../../components/Catagory/CategoryVideoAndSlider';
 import MobileRecommand from '../../components/MobileCategory/MobileRecommand/MobileRecommand';
 import CategoryFilterbarMobile from '../../components/Catagory/CategoryFiterbarMobile/CategoryFilterbarMobile';
+import {getUserId} from "../../../core/services/authService";
 
 function Category() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +23,24 @@ function Category() {
   const toggleFilter = () => {
     setIsOpen(state => !state);
   };
-  return (
+
+    useEffect(() => {
+        if (window.hasDataLyer) return;
+        console.log('SJ Comput');
+        window.dataLayer = window.dataLayer || [];
+        window.hasDataLyer = true;
+        window.dataLayer.push({
+            // event: 'pageView',
+            // userId: getUserId(),
+            'event': 'pageView',
+            'productID': '12345',
+            'productName': 'Running Shoes',
+            'productPrice': '99.99'
+        });
+    });
+
+
+    return (
     <div className='category-page'>
       <CategoriesHeader />
 
