@@ -40,7 +40,7 @@ const SimilarPurchaseCart = ({ products }) => {
                 {product.name}
               </div>
 
-              <div className=' d-sm-none product-prices'>
+              <div className=' d-sm-none product-pricess'>
                 {product.originalPrice && (
                   <div className='product-original-price'>
                     ${product.originalPrice}
@@ -78,8 +78,7 @@ const SimilarPurchaseCart = ({ products }) => {
 
           <Link
             to={`${new URL(product?.url).pathname}`}
-            style={{ textDecoration: 'none' }}
-          >
+            style={{ textDecoration: 'none' }}>
             <div className='d-none d-sm-block product-rating'>
               <div className='d-flex align-items-center'>
                 <StarRatings
@@ -96,15 +95,14 @@ const SimilarPurchaseCart = ({ products }) => {
                   style={{
                     color: '#1270c4',
                     fontSize: '12px',
-                  }}
-                >
+                  }}>
                   ({product?.total_review})
                 </span>
               </div>
             </div>
           </Link>
 
-          <div className='d-none d-sm-block product-prices mb-2'>
+          <div className='d-none d-sm-block product-pricess mb-2'>
             {product.originalPrice && (
               <div className='product-original-price'>
                 ${product.originalPrice}
@@ -145,8 +143,7 @@ const SimilarPurchaseCart = ({ products }) => {
                 fontSize: '12px',
                 marginLeft: '23px',
                 marginTop: '2.0rem',
-              }}
-            >
+              }}>
               {' '}
               <DoneRoundedIcon sx={{ color: 'green', fontSize: '20px' }} /> Item
               Added Successfully
@@ -164,8 +161,7 @@ const SimilarPurchaseCart = ({ products }) => {
                   null,
                   `/cart/${params?.title}/dp/${params?.productId}/${1}`,
                 );
-              }}
-            >
+              }}>
               Add to Cart
             </button>
           ) : (
@@ -174,8 +170,7 @@ const SimilarPurchaseCart = ({ products }) => {
                 fontSize: '12px',
                 marginTop: '2.05rem',
                 marginLeft: '25px',
-              }}
-            >
+              }}>
               Item already in cart
             </p>
           )}
@@ -190,8 +185,7 @@ const SimilarPurchaseCart = ({ products }) => {
         style={{
           background: '#fff',
           marginLeft: '10px',
-        }}
-      >
+        }}>
         <div className='product-image-class'>
           <Typography
             variant='h5'
@@ -201,8 +195,7 @@ const SimilarPurchaseCart = ({ products }) => {
             pt={4}
             mt={1}
             ml={2}
-            mb={5}
-          >
+            mb={5}>
             Customers who bought this item also bought
           </Typography>
 
@@ -243,8 +236,7 @@ const SimilarPurchaseCart = ({ products }) => {
                     slidesPerView: 6,
                   },
                 }}
-                navigation
-              >
+                navigation>
                 {products?.length > 0 ? (
                   products?.map(product => (
                     <SwiperSlide key={'psr-' + product?.id}>

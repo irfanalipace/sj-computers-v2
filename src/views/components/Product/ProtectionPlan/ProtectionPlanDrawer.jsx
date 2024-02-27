@@ -70,15 +70,14 @@ const ProtectionPlanDrawer = ({
               style={{
                 color: 'rgb(18, 112, 196)',
                 cursor: 'pointer',
-              }}
-            >
+              }}>
               <KeyboardArrowDownIcon style={{ marginTop: '-2px' }} />
               Learn More
             </p>
           </p>{' '}
         </div>
         {learnMore?.value === PLAN_ENUM.THREE_YEAR.value && (
-          <div className='accordion-content'>
+          <div className='accordion-content-drawer'>
             <h3>3 Year Equippment Warranty Plan</h3>
             <p className='title'>From Asurion, LLC</p>
             <div style={{ marginTop: '-15px' }}>
@@ -120,8 +119,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>Battery Life Issues: </span>{' '}
                 Because the battery is not new, it may not keep a charge as well
                 as a fresh one, resulting in shorter use durations between
@@ -131,8 +129,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>Hard Drive Failures: </span>{' '}
                 Refurbished machines may still have original hard drives, which
                 may be nearing the end of their lives and hence more likely to
@@ -142,8 +139,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>Overheating: </span> Because
                 of prior usage, the cooling system (fans, heat sinks) may be
                 less effective, leading the computer to overheat more
@@ -153,8 +149,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>Cosmetic flaws: </span> While
                 not a defect, refurbished computers might display more scars or
                 wear and tear than new models.   
@@ -163,8 +158,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>
                   Keyboard or Touchpad Issues:{' '}
                 </span>{' '}
@@ -175,8 +169,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>Port malfunctions: </span>{' '}
                 HDMI, USB, and various other ports could have loose connections
                 or damages from past use, resulting in connectivity
@@ -186,8 +179,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>Display Issues: </span> Screen
                 difficulties, including dead pixels or backlight issues, are
                 prevalent, particularly if the display was not changed
@@ -197,8 +189,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>Software Stability: </span>{' '}
                 There may be outstanding software issues or obsolete drivers
                 that were not entirely resolved throughout the refurbishing
@@ -228,14 +219,13 @@ const ProtectionPlanDrawer = ({
               style={{
                 color: 'rgb(18, 112, 196)',
                 cursor: 'pointer',
-              }}
-            >
+              }}>
               <KeyboardArrowDownIcon style={{ marginTop: '-2px' }} /> Learn More
             </p>
           </p>{' '}
         </div>
         {learnMore?.value === PLAN_ENUM.FOUR_YEAR.value && (
-          <div className='accordion-content'>
+          <div className='accordion-content-drawer'>
             <h3>4 Year Equippment Warranty Plan</h3>
             <p className='title'>From Asurion, LLC</p>
             <div style={{ marginTop: '-15px' }}>
@@ -277,8 +267,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>Battery Life Issues: </span>{' '}
                 Because the battery is not new, it may not keep a charge as well
                 as a fresh one, resulting in shorter use durations between
@@ -288,8 +277,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>Hard Drive Failures: </span>{' '}
                 Refurbished machines may still have original hard drives, which
                 may be nearing the end of their lives and hence more likely to
@@ -299,8 +287,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>Overheating: </span> Because
                 of prior usage, the cooling system (fans, heat sinks) may be
                 less effective, leading the computer to overheat more
@@ -310,8 +297,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>Cosmetic flaws: </span> While
                 not a defect, refurbished computers might display more scars or
                 wear and tear than new models.   
@@ -320,8 +306,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>
                   Keyboard or Touchpad Issues:{' '}
                 </span>{' '}
@@ -332,8 +317,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>Port malfunctions: </span>{' '}
                 HDMI, USB, and various other ports could have loose connections
                 or damages from past use, resulting in connectivity
@@ -343,8 +327,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>Display Issues: </span> Screen
                 difficulties, including dead pixels or backlight issues, are
                 prevalent, particularly if the display was not changed
@@ -354,8 +337,7 @@ const ProtectionPlanDrawer = ({
                 style={{
                   fontSize: 'small',
                   padding: '10px 2px',
-                }}
-              >
+                }}>
                 <span style={{ fontWeight: 500 }}>Software Stability: </span>{' '}
                 There may be outstanding software issues or obsolete drivers
                 that were not entirely resolved throughout the refurbishing
@@ -462,8 +444,7 @@ const ProtectionPlanDrawer = ({
         <button
           className='add-prot-btn drawer-bottom-btn'
           style={{ marginRight: '10px' }}
-          onClick={() => handleAddingProtec(protectionPlan)}
-        >
+          onClick={() => handleAddingProtec(protectionPlan)}>
           Add Warranty
         </button>
         <button className='drawer-bottom-btn' onClick={() => closeDrawer()}>

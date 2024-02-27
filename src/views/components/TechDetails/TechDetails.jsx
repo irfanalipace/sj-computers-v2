@@ -17,16 +17,15 @@ const TechDetails = ({ product }) => {
   // console.log(product, "product");
   return (
     <div className='tech-details-container'>
-      <Grid container mt={3}>
-        <Grid lg={6}>
+      <Grid container mt={3} spacing={5}>
+        <Grid item lg={6}>
           <Grid container>
             <Grid>
               <h3
                 className='tech-details-heading'
                 style={{
                   fontSize: !isUpSmall ? '16px' : '18px',
-                }}
-              >
+                }}>
                 Technical Details
               </h3>
             </Grid>
@@ -37,8 +36,7 @@ const TechDetails = ({ product }) => {
                   setCollapseAll(!collapseAll);
                   setSummary(!summary);
                   setOther(!other);
-                }}
-              >
+                }}>
                 {isUpSmall && (
                   <>
                     <Grid>
@@ -57,14 +55,16 @@ const TechDetails = ({ product }) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid lg={6}>
+        <Grid item lg={6}>
           {isUpSmall && (
-            <h3 className='tech-details-heading'>Additional Information</h3>
+            <h3 className='tech-details-heading' style={{ fontSize: '18px' }}>
+              Additional Information
+            </h3>
           )}
         </Grid>
       </Grid>
-      <Grid container>
-        <Grid lg={6}>
+      <Grid container spacing={4}>
+        <Grid item lg={6}>
           <>
             <Grid container onClick={() => setSummary(!summary)}>
               <Grid>
@@ -223,7 +223,7 @@ const TechDetails = ({ product }) => {
             )}
           </>
         </Grid>
-        <Grid lg={6} mt={4}>
+        <Grid item lg={6} mt={4}>
           {!isUpSmall && (
             <h3 className='tech-details-heading' style={{ fontSize: '16px' }}>
               Additional Information
