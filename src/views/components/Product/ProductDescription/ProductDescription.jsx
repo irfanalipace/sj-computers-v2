@@ -11,15 +11,13 @@ const ProductDescription = ({ description }) => {
       container
       borderTop={'1px solid lightgray'}
       rowSpacing={1}
-      pt={isUpSmall && 3}
-    >
+      pt={isUpSmall && 3}>
       <Grid item xs={12}>
         {description && (
           <Typography
             variant='body1'
             fontWeight={'bold'}
-            fontSize={!isUpSmall && '14px'}
-          >
+            fontSize={!isUpSmall && '14px'}>
             Product Description
           </Typography>
         )}
@@ -27,12 +25,11 @@ const ProductDescription = ({ description }) => {
       <Grid item xs={12}>
         {/* <Typography variant="body1" ml={3}> */}
         <Box
-          sx={{ fontSize: !isUpSmall && '12px', lineHeight: '20.16px' }}
+          sx={{ fontSize: !isUpSmall ? '12px' : '14px', lineHeight: '20.16px' }}
           pb={2}
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(description),
-          }}
-        ></Box>
+          }}></Box>
         {/* </Typography> */}
       </Grid>
     </Grid>

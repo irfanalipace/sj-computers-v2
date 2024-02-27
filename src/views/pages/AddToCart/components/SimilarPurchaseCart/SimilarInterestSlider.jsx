@@ -35,7 +35,7 @@ const SimilarInterestSlider = ({ products }) => {
               {product.name}
             </div>
 
-            <div className=' d-sm-none product-prices'>
+            <div className=' d-sm-none product-pricess'>
               {product.originalPrice && (
                 <div className='product-original-price'>
                   ${product.originalPrice}
@@ -66,8 +66,7 @@ const SimilarInterestSlider = ({ products }) => {
 
         <Link
           to={`${new URL(product?.url).pathname}`}
-          style={{ textDecoration: 'none' }}
-        >
+          style={{ textDecoration: 'none' }}>
           <div className='d-none d-sm-block product-rating'>
             <div className='d-flex align-items-center'>
               <StarRatings
@@ -81,8 +80,7 @@ const SimilarInterestSlider = ({ products }) => {
               />
               <span
                 className='ms-2'
-                style={{ color: '#1270c4', fontSize: '12px' }}
-              >
+                style={{ color: '#1270c4', fontSize: '12px' }}>
                 ({product?.total_review})
               </span>
             </div>
@@ -101,7 +99,7 @@ const SimilarInterestSlider = ({ products }) => {
           Computer Monitors
         </div>
 
-        <div className='d-none d-sm-block product-prices mb-2'>
+        <div className='d-none d-sm-block product-pricess mb-2'>
           {product.originalPrice && (
             <div className='product-original-price'>
               ${product.originalPrice}
@@ -140,8 +138,7 @@ const SimilarInterestSlider = ({ products }) => {
           marginLeft: '10px',
           marginTop: '20px',
           marginBottom: '20px',
-        }}
-      >
+        }}>
         <div className='product-image-class'>
           <Typography
             variant='h5'
@@ -151,8 +148,7 @@ const SimilarInterestSlider = ({ products }) => {
             pt={4}
             mt={1}
             ml={2}
-            mb={5}
-          >
+            mb={5}>
             People who browsed similar items also showed interest in these
           </Typography>
 
@@ -183,8 +179,7 @@ const SimilarInterestSlider = ({ products }) => {
                   1200: {
                     slidesPerView: 5,
                   },
-                }}
-              >
+                }}>
                 {products?.map(product => (
                   <SwiperSlide key={'ps-' + product?.id}>
                     <div>

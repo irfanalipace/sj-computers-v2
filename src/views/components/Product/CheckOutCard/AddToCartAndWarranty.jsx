@@ -95,21 +95,18 @@ function AddToCartAndWarranty({ product, isMobile }) {
           }}
           // disabled={productAddingToCard}
           className={'button1 button-text-button'}
-          style={{ background: '#00305E' }}
-        >
+          style={{ background: '#00305E' }}>
           {loading ? <CircularProgress /> : 'Buy Now'}
         </button>
       </div>
       <Stack spacing={[1.5, 1.2]}>
         <div
           className='details-container'
-          style={{ marginLeft: isMobile ? '' : '10px' }}
-        >
+          style={{ marginLeft: isMobile ? '' : '10px' }}>
           <div className='col-xl-7 col-5 col-md-5'>
             <span
               className='color-card-text-paragrap-payment'
-              style={{ color: '#5F5E5E' }}
-            >
+              style={{ color: '#5F5E5E' }}>
               Payment
             </span>
           </div>
@@ -118,8 +115,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
               <Link
                 href=''
                 className='text-decoration-none secure-payment-method'
-                style={{ color: '#2c8a9a' }}
-              >
+                style={{ color: '#2c8a9a' }}>
                 Secure transaction
               </Link>
               <div className='hidden-box'>
@@ -128,8 +124,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
                     fontSize: '12px',
                     fontWeight: 'bold',
                     marginBottom: '12px',
-                  }}
-                >
+                  }}>
                   Your transaction is Secure
                 </span>
                 <div style={{ marginTop: '12px' }}>
@@ -147,13 +142,11 @@ function AddToCartAndWarranty({ product, isMobile }) {
         </div>
         <div
           className='details-container'
-          style={{ marginLeft: isMobile ? '' : '10px' }}
-        >
+          style={{ marginLeft: isMobile ? '' : '10px' }}>
           <div className='col-xl-7 col-5'>
             <span
               className='color-card-text-paragrap-payment ships-form-span-tag'
-              style={{ color: '#5F5E5E' }}
-            >
+              style={{ color: '#5F5E5E' }}>
               Ships Form
             </span>
           </div>
@@ -165,13 +158,11 @@ function AddToCartAndWarranty({ product, isMobile }) {
         </div>
         <div
           className='details-container'
-          style={{ marginLeft: isMobile ? '' : '10px' }}
-        >
+          style={{ marginLeft: isMobile ? '' : '10px' }}>
           <div className='col-xl-7 col-5'>
             <span
               className='color-card-text-paragrap-payment return-from-span-tag-checkout'
-              style={{ color: '#5F5E5E' }}
-            >
+              style={{ color: '#5F5E5E' }}>
               Return
             </span>
           </div>
@@ -180,15 +171,13 @@ function AddToCartAndWarranty({ product, isMobile }) {
             <div className='hover-box'>
               <Link
                 className='text-decoration-none secure-payment-method '
-                style={{ color: '#2c8a9a' }}
-              >
+                style={{ color: '#2c8a9a' }}>
                 {isMobile ? (
                   <div
                     style={{
                       fontSize: '12px',
                       lineHeight: '14px',
-                    }}
-                  >
+                    }}>
                     <p className='mb-2'>Eligible for returns,</p>
                     refund or replacement wi...
                   </div>
@@ -197,8 +186,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
                     style={{
                       fontSize: '12px',
                       lineHeight: '14px',
-                    }}
-                  >
+                    }}>
                     <p className='mb-2'>Eligible for returns,</p>
                     <p className='mb-2'>refund or</p>
                     replacement wi...
@@ -211,8 +199,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
                     fontSize: '12px',
                     fontWeight: 'bold',
                     marginBottom: '12px',
-                  }}
-                >
+                  }}>
                   Eligible for Return, Refund or Replacement within 30 days of
                   receipt
                 </span>
@@ -229,8 +216,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
                     marginTop: '12px',
                     fontSize: '11px',
                     color: '#2c8a9a',
-                  }}
-                >
+                  }}>
                   Read full return policy
                 </Link>
               </div>
@@ -270,8 +256,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
                 // htmlFor="protectionPlanCheckbox"
                 onClick={() => {
                   setOpenPlan(_plan);
-                }}
-              >
+                }}>
                 {_plan.label} for
                 <span style={{ color: 'red' }}> ${_plan.price}/Month</span>
               </label>
@@ -300,8 +285,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
           setDrawerProps({
             open: false,
           })
-        }
-      >
+        }>
         <ProtectionPlanDrawer
           {...drawerProps}
           closeDrawer={() => {
