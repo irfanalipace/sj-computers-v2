@@ -28,6 +28,7 @@ use App\Http\Controllers\Api\RefundController;
 use App\Http\Controllers\Api\Meta\MetaDetailController;
 use App\Http\Controllers\Api\Payment\PaymentController;
 use App\Http\Controllers\Api\Product\ReviewController;
+use App\Http\Controllers\Subscribe\NewsLetterController;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -79,22 +80,35 @@ Route::get('inventory-data', [ProductController::class, 'getInventoryData'])->na
 Route::get('products-filter-list', [ProductController::class, 'getProductFilterList'])->name('getProductFilterList');
 
 Route::get('similar-item/{product}', [ProductController::class, 'getSimilarItem'])->name('getSimilarItem');
+
 Route::get('suggested-item/{product}', [ProductController::class, 'getSuggestedItems'])->name('getSuggestedItems');
+
 Route::get('product-fast-delivery/{product}', [ProductController::class, 'productCount'])->name('productCount');
 
 
 Route::get('product-detail', [ProductController::class, 'getProductDetail'])->name('productDetail');
+
 Route::get('product-detail-asin', [ProductController::class, 'getProductDetailAsin'])->name('productDetailAsin');
 
 /*
  * filters
  */
 Route::get('search-product', [ProductController::class, 'searchProduct'])->name('searchProduct');
+
 Route::get('category-product', [CategoryController::class, 'getCategoryProduct'])->name('getCategoryProduct');
 
 Route::get('filter-products', [ProductController::class, 'getFilterProducts'])->name('getFilterProducts');
 
+/* Get Products by condition */
 Route::get('budget-friendly-desktops',[ProductController::class,'getBudgetFriendlyDesktop'])->name('getBudgetFriendlyDesktop');
+
+Route::get('get-workstations-budget',[ProductController::class,'getWorkstationsBudget']);
+
+Route::get('get-professional-laptops',[ProductController::class,'getPorfessionalLaptop']);
+
+Route::get('get-touch-screen-laptops',[ProductController::class,'getTouchScreenLaptop']);
+
+Route::get('get-top-rated-products',[ProductController::class,'getTopRatedProduct']);
 
 /*
 *Add to Cart
@@ -126,7 +140,9 @@ Route::post('contact-us', [ContactUsController::class, 'contactSubmit'])->name('
  * blogs
  */
 Route::get('blogs', [BlogController::class, 'getList'])->name('blogs');
+
 Route::get('get-blogs', [BlogController::class, 'getBlog'])->name('get-blogs');
+
 Route::get('category-blogs', [BlogController::class, 'getCategoryProduct'])->name('category-blogs');
 
 /*
@@ -257,6 +273,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
  * Careers
  */
 Route::get('careers', [CareerController::class, 'index'])->name('careers');
+
 Route::get('career/{career}', [CareerController::class, 'show'])->name('career');
 /*
 * Career Applications
@@ -267,14 +284,23 @@ Route::post('store-career-applications', [CareerApplicationController::class, 's
 * Paypal Integration
 */
 Route::post('paypal', [PayPalController::class, 'paypal'])->name('paypal');
+
 Route::get('success', [PayPalController::class, 'paypalSuccess'])->name('success');
+
 Route::get('cancel', [PayPalController::class, 'paypalCancel'])->name('cancel');
 
 /*
     Get all reviews
 */
 Route::get('get-all-reviews',[ReviewController::class,'index']);
+
 Route::get('get-protection-plans',[ProductController::class,'getProtectivePlan']);
+
 Route::get('get-product-reviews/{product_id}',[ReviewController::class,'getProductDetail']);
+
 Route::get('get-review-media/{product_id}',[ReviewController::class,'getReviewImage']);
+
 Route::get('get-specific-review/{id}',[ReviewController::class,'getSpecificReview']);
+
+/* Subscribe */
+Route::post('subscribe-newsletter',[NewsLetterController::class,'subscription']);
