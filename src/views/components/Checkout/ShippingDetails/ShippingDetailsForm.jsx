@@ -18,10 +18,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
   // const [fieldErrors, setFieldErrors] = useState({});
   const [permanentAddress, setPermanentAddress] = useState(false);
   const dispatch = useDispatch();
-  console.log(
-    'google api palcaes',
-    import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY,
-  );
+
   const {
     values,
     handleChange,
@@ -85,6 +82,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
       });
     },
   });
+
   const handlePermanentAddresses = e => {
     setPermanentAddress(e.target.checked);
   };
@@ -208,8 +206,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                 placeholder='Full Name'
                 value={values?.full_name}
                 onChange={handleChange}
-                onBlur={handleBlur}
-              ></input>
+                onBlur={handleBlur}></input>
               {/* {errors.full_name && (
                                 <p className="fs-6 mt-1 text-danger">
                                     {errors.full_name}
@@ -239,8 +236,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                 placeholder='Phone Number'
                 value={values?.phone_number}
                 onChange={handleChange}
-                onBlur={handleBlur}
-              ></input>
+                onBlur={handleBlur}></input>
               {/* {errors.phone_number && (
                                 <p className="fs-6 mt-1 text-danger">
                                     {errors.phone_number}
@@ -267,8 +263,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                 placeholder='Enter Email to track order'
                 value={values?.email}
                 onChange={handleChange}
-                onBlur={handleBlur}
-              ></input>
+                onBlur={handleBlur}></input>
               {/* {errors.email && touched.email && (
                                     <p className="fs-6 mt-1 text-danger">
                                         {errors.email}
@@ -323,8 +318,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                 placeholder='Apartment, Unit, Suite, Floor etc...'
                 value={values?.apartment}
                 onChange={handleChange}
-                onBlur={handleBlur}
-              ></input>
+                onBlur={handleBlur}></input>
               {/* </div> */}
             </div>
             <div className=''>
@@ -339,6 +333,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
               </label>
 
               <Autocomplete
+                onChange={handleChange}
                 placeholder='Street address (P.O Box)'
                 defaultValue={values.address}
                 className={
@@ -350,8 +345,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
               />
               <div
                 style={{ marginTop: '12px' }}
-                className='input-lable-address'
-              >
+                className='input-lable-address'>
                 <Autocomplete
                   placeholder='Unit, Building, floor etc.'
                   defaultValue={values.address}
@@ -407,8 +401,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                     placeholder='City'
                     value={values?.city}
                     onChange={handleChange}
-                    onBlur={handleBlur}
-                  ></input>
+                    onBlur={handleBlur}></input>
                   {/* {errors.city && (
                                         <p className="fs-6 mt-1 text-danger">
                                             {errors.city}
@@ -438,14 +431,12 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
                     placeholder='Select Stte'
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values?.state}
-                  >
+                    value={values?.state}>
                     {states.map(state => (
                       <option
                         value={state.name}
                         key={state?.id}
-                        className='text-capitalize'
-                      >
+                        className='text-capitalize'>
                         {state?.name}
                       </option>
                     ))}
@@ -507,8 +498,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
             <ShippingButton
               handleClick={handleSubmit}
               isLoading={loading}
-              disabled={!isValid}
-            >
+              disabled={!isValid}>
               Use this address
             </ShippingButton>
           </form>
