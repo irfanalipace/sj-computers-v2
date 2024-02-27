@@ -192,8 +192,7 @@ const AllCategoriesHeader = () => {
           <div
             className='category-item'
             key={category.id}
-            style={{ textDecoration: 'none' }}
-          >
+            style={{ textDecoration: 'none' }}>
             <Typography variant='body1' fontSize={'small'} color={'#007185'}>
               {index == 0 ? (
                 ''
@@ -202,8 +201,7 @@ const AllCategoriesHeader = () => {
                   style={{
                     margin: '0px 10px',
                     color: 'black',
-                  }}
-                >
+                  }}>
                   |
                 </span>
               )}
@@ -211,8 +209,7 @@ const AllCategoriesHeader = () => {
                 to={`/category/${category.slug}`}
                 key={category.id}
                 // onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}
-                className='topbar-item'
-              >
+                className='topbar-item'>
                 {category.name}
                 {/* <ExpandMoreIcon fontSize='small' /> */}
               </Link>

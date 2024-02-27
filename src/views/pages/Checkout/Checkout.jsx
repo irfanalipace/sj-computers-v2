@@ -21,6 +21,7 @@ import Discount from '@components/Checkout/Discount/Discount';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import MobileCheckout from './MobileCheckout';
+import { getUserId } from '../../../core/services/authService';
 
 export default function Checkout() {
   const screenWidth = useViewportWidth();
@@ -105,6 +106,20 @@ export default function Checkout() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    // if (window.hasCartLayer) return;
+    console.log('SJ Comput');
+    window.dataLayer = window.dataLayer || [];
+    // window.hasCartLayer = true;
+    window.dataLayer.push({
+      event: 'checkoutPage',
+      userId: getUserId(),
+      itemInCart: cartItems?.length,
+      // productAsin: parseFloat(cartDetails?.sub_total).toFixed(2),
+    });
+  }, []);
+
   return (
     <>
       {isMobile == true ? (
@@ -151,16 +166,14 @@ export default function Checkout() {
                         title='Enter Your Shipping Details '
                         summary={shippingAddress.address && <ShippingSummary />}
                         toggleAccordion={toggleAccordion}
-                        isOpen={accordion[1].open}
-                      >
+                        isOpen={accordion[1].open}>
                         <ShippingDetails shippingAddress={shippingAddress} />
                       </Accordion>
                       <Accordion
                         id={2}
                         title='Review Items & Shipping'
                         toggleAccordion={toggleAccordion}
-                        isOpen={accordion[2].open}
-                      >
+                        isOpen={accordion[2].open}>
                         <ReviewCheckout
                           estimatedDelivery={
                             checkoutDetails.shipment_info?.other_info
@@ -180,8 +193,7 @@ export default function Checkout() {
                           )
                         }
                         toggleAccordion={toggleAccordion}
-                        isOpen={accordion[3].open}
-                      >
+                        isOpen={accordion[3].open}>
                         <PaymentMethod
                           setPayment={setPaymentMethod}
                           cartItems={cartItems}
