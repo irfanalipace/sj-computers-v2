@@ -44,11 +44,11 @@ function AddToCartAndWarranty({ product, isMobile }) {
 
   return (
     <div>
-      <div className='text-stock'>
+      <div className='text-stock py-2'>
         <div className='instock-dev-card-product-section-with-color-card'>
           <div className='in-stock-area-lable'>
             {product?.quantity > 0 ? (
-              <small className='in-stock'>In Stock</small>
+              <small className='in-stock'>{product?.quantity} In Stock</small>
             ) : (
               <small className='not-in-stock '>Out of Stock</small>
             )}
