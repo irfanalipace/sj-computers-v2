@@ -88,6 +88,7 @@ class ProductController extends BaseController
             ->orWhereJsonContains('description->hard_disk',[['size'=> ['value' => $hard_disk]]])
             ->where('quantity', '>', 100)
             ->limit(10)
+            ->with('brand:id,name,image')
             ->get();
 
             return $this->sendResponse($data, 'All product displayed that are above 100 in quantity');
