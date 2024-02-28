@@ -257,8 +257,8 @@ export const makeDataLayerItemObject = itemArray => {
       // item_variant: 'green',
       // location_id: 'ChIJIQBpAG2ahYAR_6128GcTUEo',
       price:
-        parseInt(item?.price) ||
-        parseInt(item?.product?.price) ||
+        parseFloat(item?.price) ||
+        parseFloat(item?.product?.price) ||
         item?.cartItem?.price,
       quantity: item?.quantity || item?.cartItem?.quantity,
     };

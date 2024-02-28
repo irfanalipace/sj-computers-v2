@@ -6,6 +6,10 @@ import { SET_SHIPPING_DETAILS } from '@store/orders/ordersSlice';
 import Loader from '@common/LoaderComponent/LoaderComponent';
 import ShippingButton from './ShippingButton';
 import { useFormik } from 'formik';
+import {
+  getCartDetails,
+  getCartItems,
+} from '../../../../core/utils/cartHelpers';
 
 function ShippingDetailsForm({ address, handleHeight, hideForm }) {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -14,6 +18,9 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
   const apiError = useSelector(state => state.orders.apiError);
   const loading = useSelector(state => state.orders.isLoading);
   const settingAdress = useSelector(state => state.orders.settingAdress);
+
+  const cartItems = getCartItems();
+  const cartDetails = getCartDetails();
 
   // const [fieldErrors, setFieldErrors] = useState({});
   const [permanentAddress, setPermanentAddress] = useState(false);
@@ -137,6 +144,15 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
     if (permanentAddress) dispatch(setShippingDetails(params, hideForm));
     else {
       dispatch(SET_SHIPPING_DETAILS(params));
+      if (!window.dataLayer) {
+        window.dataLayer = window.dataLayer || [];
+      }
+      window.dataLayer.push({
+        event: 'add_shipping_info',
+        currency: 'USD',
+        value: cartDetails?.sub_total,
+        items: makeDataLayerItemObject(cartItems),
+      });
       hideForm();
     }
   };

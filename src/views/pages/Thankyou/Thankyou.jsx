@@ -48,6 +48,16 @@ export default function ThankYou() {
       setOrderDetails(order);
       clearCartLocally();
       dispatch(CLEAR_CART());
+      if (!window.dataLayer) {
+        window.dataLayer = window.dataLayer || [];
+      }
+      window.dataLayer.push({
+        event: 'purchase',
+        currency: 'USD',
+        value: data.cartItem.price,
+        transaction_id: '123',
+        items: makeDataLayerItemObject([{ ...data }]),
+      });
     } else {
       // navigate('/')
     }
@@ -146,8 +156,7 @@ export default function ThankYou() {
       ) : (
         <div
           className='thank-you-page'
-          style={{ marginLeft: '10%', marginRight: '10%' }}
-        >
+          style={{ marginLeft: '10%', marginRight: '10%' }}>
           <div className='row margintopBottom'>
             <div className='col-12 my-10'>
               <div className='d-flex justify-content-center align-items-center'>
@@ -163,8 +172,7 @@ export default function ThankYou() {
                     height: '70px',
                     borderRadius: '50%',
                     backgroundColor: '#318243',
-                  }}
-                >
+                  }}>
                   <img
                     src={tickImage}
                     alt='Tick Image'
