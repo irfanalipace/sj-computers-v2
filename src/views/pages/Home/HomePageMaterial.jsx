@@ -95,18 +95,22 @@ export const featured = [
   {
     name: 'Shop by Brands',
     link: 'See more',
+    redirectTo: '/category',
   },
   {
     name: 'Shop by Form Factor',
     link: 'See more',
+    redirectTo: '/category',
   },
   {
     name: 'Budget Friendly Desktops',
     link: 'See more',
     extra: 'Under $250',
+    redirectTo: '/budget-friendly-desktops',
   },
   {
     name: 'Touch Screen Laptops',
     link: 'Shop Now',
+    redirectTo: '/category',
   },
 ];
