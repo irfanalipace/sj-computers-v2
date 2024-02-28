@@ -454,7 +454,7 @@ class CartController extends BaseController
 
             \Cart::session($this->userId)->update($request->cart_id, ['attributes' => []]);
 
-            return $this->sendResponse([], 'The protection from the cart has been successfully removed.');
+            return $this->sendResponse(\Cart::session($this->userId)->get($request->cart_id), 'The protection from the cart has been successfully removed.');
         } catch (Exception $e) {
             return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());
         }

@@ -104,7 +104,7 @@ class ProductController extends BaseController
         //        $data['graphic'] = $this->queryProductInfo('graphic');
         $data['graphic'] = [];
         $data['brand'] = $this->queryProductInfo('brand');
-
+        
         return $this->sendResponse($data);
     }
 
@@ -132,18 +132,33 @@ class ProductController extends BaseController
 
     public function getLeastHighestValue($key, $unit)
     {
+        $conversionFactors = ['MB' => 1, 'GB' => 1024, 'TB' => 1048576]; // Conversion factors
 
-        $record = DB::table('product_infos')->where('key', $key)
-            ->Where('value', 'like', '%' . $unit . '%')
-            ->select(DB::raw('CAST(value AS UNSIGNED) AS value'))
+        $records = DB::table('product_infos')
+            ->where('key', $key)
+            ->where('value', 'LIKE', '%' . $unit . '%')
+            ->select('value')
             ->get();
 
-        return [
-            'least_' . $unit => $record->min('value'),
-            'highest_' . $unit => $record->max('value'),
-        ];
+        $values = $records->map(function ($item) use ($conversionFactors) {
+            // Extract the numeric part and unit from the value string
+            preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
+            $numericValue = $matches[1];
+            $valueUnit = strtoupper($matches[3]);
 
-    }
+            // Convert the value to MB for a uniform comparison
+            return $numericValue * $conversionFactors[$valueUnit];
+        });
+
+        // Assuming you want to find the min/max in MB and then convert to the target unit for display
+        $least = $values->min() / ($conversionFactors[$unit] ?: 1);
+        $highest = $values->max() / ($conversionFactors[$unit] ?: 1);
+
+        return [
+            'least_' . $unit => round($least, 2), // Round to 2 decimal places for cleanliness
+            'highest_' . $unit => round($highest, 2),
+        ];
+    }    
 
 
     public function getFilterProducts(SearchProductRequest $request)
