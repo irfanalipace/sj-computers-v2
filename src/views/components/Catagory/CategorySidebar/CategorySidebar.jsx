@@ -68,7 +68,7 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
           variant='body2'
           fontWeight={'bolder'}
           ml>
-          Categories{' '}
+          Categories
           {inDrawer ? (
             <span className={`${inDrawer ? 'align-to-end' : ''}`}>
               <IconButton onClick={() => DataInDrawerToggler(1)}>

@@ -44,6 +44,7 @@ import {
 } from '../../utils/cartHelpers';
 import { getGuestUserEmail } from '../../services/authService';
 import { validateCartItemsApi } from '../../api/order';
+import { makeDataLayerItemObject } from '../../utils/helpers';
 
 export const addToCart = (data, cb) => {
   return async dispatch => {
@@ -65,6 +66,16 @@ export const addToCart = (data, cb) => {
         payload: data,
       });
       toast.success('Item Added In Cart');
+      // adding add_to_cart evnet to datalayer when login user added item to cart and add to cart api is successful
+      if (!window.dataLayer) {
+        window.dataLayer = window.dataLayer || [];
+      }
+      window.dataLayer.push({
+        event: 'add_to_cart',
+        currency: 'USD',
+        value: data.cartItem.price,
+        items: makeDataLayerItemObject([{ ...data }]),
+      });
       if (typeof cb === 'function') cb();
       // addItemToLocalCart(data);
     } catch (error) {
@@ -89,6 +100,22 @@ export const deleteItem = data => {
       dispatch({
         type: DELETE_ITEM,
         payload: data,
+      });
+      console.log('api res of del item', data);
+      if (!window.dataLayer) {
+        window.dataLayer = window.dataLayer || [];
+      }
+
+      console.log(
+        'remove_from_cart',
+        data,
+        makeDataLayerItemObject([{ ...data }]),
+      );
+      window.dataLayer.push({
+        event: 'remove_from_cart',
+        currency: 'USD',
+        value: data.cartItem.price,
+        items: makeDataLayerItemObject([{ ...data }]),
       });
     } catch (error) {
       console.print('Something went wrong in carts', error);
@@ -263,11 +290,24 @@ export const syncCartItems = () => {
 };
 
 export const addToLocalCart = (data, cb) => {
+  console.log('lcoall add to cart', data);
   return async dispatch => {
     addItemToLocalCart(data);
     dispatch({
       type: ADD_TO_CART,
       payload: data,
+    });
+    // adding add_to_cart evnet to datalayer when login user added item to cart and add to cart api is successful
+    if (!window.dataLayer) {
+      window.dataLayer = window.dataLayer || [];
+    }
+
+    console.log('add_to_cart', data, makeDataLayerItemObject([{ ...data }]));
+    window.dataLayer.push({
+      event: 'add_to_cart',
+      currency: 'USD',
+      value: data.cartItem.price,
+      items: makeDataLayerItemObject([{ ...data }]),
     });
     if (typeof cb === 'function') cb();
     // toast.success("Item Added In Cart");

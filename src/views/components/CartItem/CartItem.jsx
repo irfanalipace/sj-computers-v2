@@ -96,8 +96,7 @@ const CartItem = ({ item }) => {
         borderBottom: '1px solid lightgray',
         padding: '10px',
         textAlign: 'left',
-      }}
-    >
+      }}>
       <div className='cart-item-img'>
         <div className='cart-img'>
           <LazyLoadImage
@@ -113,8 +112,7 @@ const CartItem = ({ item }) => {
               fontSize: '12px',
               fontWeight: 400,
             }}
-            className='nameee'
-          >
+            className='nameee'>
             {item?.name}
           </Typography>
           <Typography fontWeight={700} mt={1} style={{ fontSize: '14px' }}>
@@ -130,8 +128,7 @@ const CartItem = ({ item }) => {
       </div>
       <div
         style={{ color: '#000', textAlign: 'center' }}
-        className='hidden-on-mobile hidden-on-tab'
-      >
+        className='hidden-on-mobile hidden-on-tab'>
         <br />
         <br />${totalPrice}
       </div>
@@ -140,8 +137,7 @@ const CartItem = ({ item }) => {
         container
         justifyContent='space-around'
         // style={{ margin: "0px auto" }}
-        mt={2}
-      >
+        mt={2}>
         <Grid item sx={{ width: '50%' }}>
           <div>
             <QuantityInput
