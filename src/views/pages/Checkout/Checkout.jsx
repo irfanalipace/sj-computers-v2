@@ -22,6 +22,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import MobileCheckout from './MobileCheckout';
 import { getUserId } from '../../../core/services/authService';
+import { makeDataLayerItemObject } from '../../../core/utils/helpers';
 
 export default function Checkout() {
   const screenWidth = useViewportWidth();
@@ -107,18 +108,18 @@ export default function Checkout() {
     };
   }, []);
 
-  // useEffect(() => {
-  //   // if (window.hasCartLayer) return;
-  //   console.log('SJ Comput');
-  //   window.dataLayer = window.dataLayer || [];
-  //   // window.hasCartLayer = true;
-  //   window.dataLayer.push({
-  //     event: 'checkoutPage',
-  //     userId: getUserId(),
-  //     itemInCart: cartItems?.length,
-  //     // productAsin: parseFloat(cartDetails?.sub_total).toFixed(2),
-  //   });
-  // }, []);
+  useEffect(() => {
+    if (!window.dataLayer) {
+      window.dataLayer = window.dataLayer || [];
+    }
+
+    window.dataLayer.push({
+      event: 'begin_checkout',
+      currency: 'USD',
+      value: parseFloat(checkoutDetails?.sub_total),
+      items: makeDataLayerItemObject(cartItems),
+    });
+  }, []);
 
   return (
     <>
