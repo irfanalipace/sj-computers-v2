@@ -53,6 +53,14 @@ export const login = credentials => {
     try {
       dispatch({ type: LOADING, payload: {} });
       const response = await loginApi(credentials);
+      if (!window.dataLayer) {
+        window.dataLayer = window.dataLayer || [];
+      }
+
+      window.dataLayer.push({
+        event: 'login',
+        method: 'email_password',
+      });
       console.print('response: ', response);
       let { id, access_token, user, profile_pic, state } = response;
       saveUserName(user);
@@ -78,6 +86,14 @@ export const register = (credentials, cb) => {
     try {
       dispatch({ type: LOADING, payload: {} });
       await registerApi(credentials);
+      if (!window.dataLayer) {
+        window.dataLayer = window.dataLayer || [];
+      }
+
+      window.dataLayer.push({
+        event: 'sign_up',
+        method: 'email_password',
+      });
       dispatch({ type: REGISTER, payload: credentials });
       if (typeof cb === 'function') cb();
     } catch (error) {
