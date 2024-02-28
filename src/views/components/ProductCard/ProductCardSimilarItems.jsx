@@ -93,8 +93,7 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
           </div>
           <div
             style={{ fontSize: '12px', marginTop: '-12px' }}
-            className='mb-2 '
-          >
+            className='mb-2 '>
             Computer Monitors
           </div>
 
@@ -132,8 +131,7 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
             <Link to={productPath} style={{ textDecoration: 'none' }}>
               <div
                 className='product-name product-cart-name-mobile-screen'
-                style={{ color: '#007185' }}
-              >
+                style={{ color: '#007185' }}>
                 {product.name}
               </div>
             </Link>
@@ -149,8 +147,7 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
               />
               <span
                 className='ms-2'
-                style={{ color: '#1270c4', fontSize: '12px' }}
-              >
+                style={{ color: '#1270c4', fontSize: '12px' }}>
                 ({product?.total_review})
               </span>
             </div>
@@ -173,8 +170,7 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
           </div>
           <div
             style={{ fontSize: '12px', marginTop: '-12px' }}
-            className='mb-2 '
-          >
+            className='mb-2 '>
             Computer Monitors
           </div>
           <div className=' d-sm-none product-prices-mobile'>
@@ -183,8 +179,7 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
               <span
                 style={{
                   fontSize: '11px',
-                }}
-              >
+                }}>
                 $
               </span>
               {product?.price?.toString().split('.')[0]}.
@@ -227,7 +222,7 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
         <div className={` ${inGrid ? 'product-image-grid' : ''} product-image`}>
           <div className='image-wrapper'>
             <LazyLoadImage
-              width={'100%'}
+              width={'85%'}
               height={'100%'}
               src={product.image}
               alt={product?.name?.trim()?.split(' ')?.slice(0, 9)?.join(' ')}

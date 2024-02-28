@@ -45,6 +45,9 @@ import NotFound from '@pages/NotFound/NotFound';
 
 import Loader from '@common/LoaderComponent/LoaderComponent';
 import PageWrapper from '@components/PageWrapper/PageWrapper';
+const BudgetFriendlyDesktops = React.lazy(
+  () => import('./views/pages/BudgetFriendlyDesktops/BudgetFriendlyDesktops'),
+);
 
 const AddToCart = React.lazy(() => import('./views/pages/AddToCart/AddToCart'));
 const ProductNewReviews = React.lazy(
@@ -159,6 +162,15 @@ const Router = () => {
       element: (
         <PageWrapper>
           <Category />
+        </PageWrapper>
+      ),
+    },
+
+    {
+      path: '/budget-friendly-desktops',
+      element: (
+        <PageWrapper>
+          <BudgetFriendlyDesktops />
         </PageWrapper>
       ),
     },
@@ -351,8 +363,7 @@ const Router = () => {
         <div>
           <div
             className='w-100 d-flex justify-content-center align-items-center flex-column'
-            style={{ height: '500px' }}
-          >
+            style={{ height: '500px' }}>
             <h1>Transaction Successful</h1>
           </div>
         </div>
