@@ -44,8 +44,7 @@ const AddToCart = () => {
         <Grid
           item
           lg={10.45}
-          className='hidden-on-mobile hidden-on-tab cart-with-protection'
-        >
+          className='hidden-on-mobile hidden-on-tab cart-with-protection'>
           {product && !itemAdded ? <AddToCartCard product={product} /> : <></>}
           {/* <SimilarItemsSlider products={similarProducts} /> */}
           <SimilarPurchaseCart products={featureProducts} />

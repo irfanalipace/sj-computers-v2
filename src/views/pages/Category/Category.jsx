@@ -24,20 +24,20 @@ function Category() {
     setIsOpen(state => !state);
   };
 
-  useEffect(() => {
-    if (window.hasDataLyer) return;
-    console.log('SJ Comput');
-    window.dataLayer = window.dataLayer || [];
-    window.hasDataLyer = true;
-    window.dataLayer.push({
-      // event: 'pageView',
-      // userId: getUserId(),
-      event: 'pageView',
-      productID: '12345',
-      productName: 'Running Shoes',
-      productPrice: '99.99',
-    });
-  });
+  // useEffect(() => {
+  //   if (window.hasDataLyer) return;
+  //   console.log('SJ Comput');
+  //   window.dataLayer = window.dataLayer || [];
+  //   window.hasDataLyer = true;
+  //   window.dataLayer.push({
+  //     // event: 'pageView',
+  //     // userId: getUserId(),
+  //     event: 'pageView',
+  //     productID: '12345',
+  //     productName: 'Running Shoes',
+  //     productPrice: '99.99',
+  //   });
+  // });
 
   return (
     <div className='category-page'>

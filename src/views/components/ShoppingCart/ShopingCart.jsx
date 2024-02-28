@@ -20,6 +20,7 @@ import SeggestedItems from './SugestedItems/SeggestedItems';
 import Recommendation from '../Recommendation/Recommendation';
 import { featureProductsApi } from '@api/products';
 import { getUserId } from '../../../core/services/authService';
+import { makeDataLayerItemObject } from '../../../core/utils/helpers';
 
 export const ShopingCart = ({ onFormSubmit, form }) => {
   const cartItems = useSelector(state => state.cart.cart);
@@ -94,15 +95,15 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
   }, []);
 
   useEffect(() => {
-    // if (window.hasCartLayer) return;
-    console.log('SJ Comput');
-    window.dataLayer = window.dataLayer || [];
-    // window.hasCartLayer = true;
+    if (!window.dataLayer) {
+      window.dataLayer = window.dataLayer || [];
+    }
+
     window.dataLayer.push({
-      event: 'cartPage',
-      userId: getUserId(),
-      itemInCart: cartDetails?.total_items,
-      productAsin: parseFloat(cartDetails?.sub_total).toFixed(2),
+      event: 'view_cart',
+      currency: 'USD',
+      value: parseFloat(cartDetails?.sub_total).toFixed(2),
+      items: makeDataLayerItemObject(cartItems),
     });
   }, []);
 

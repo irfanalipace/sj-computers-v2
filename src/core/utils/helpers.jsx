@@ -232,3 +232,38 @@ export function extractJsonObjectFromError(inputString) {
     return {};
   }
 }
+
+export const makeDataLayerItemObject = itemArray => {
+  const shapedItemArray = itemArray.map((item, index) => {
+    const ShpaedItem = {
+      item_id: item?.id || item?.product?.id || item?.cartItem?.id,
+      item_name:
+        item?.product?.name || item?.cartItem?.product?.name || item?.name,
+      // affiliation: 'Google Merchandise Store',
+      // coupon: 'SUMMER_FUN',
+      discount: item?.discount || 0,
+      index: index,
+      item_brand:
+        item?.product?.brand?.name ||
+        item?.cartItem?.product?.brand?.name ||
+        item?.brand?.name,
+      // item_category: 'Apparel',
+      // item_category2: 'Adult',
+      // item_category3: 'Shirts',
+      // item_category4: 'Crew',
+      // item_category5: 'Short sleeve',
+      // item_list_id: 'related_products',
+      // item_list_name: 'Related Products',
+      // item_variant: 'green',
+      // location_id: 'ChIJIQBpAG2ahYAR_6128GcTUEo',
+      price:
+        parseInt(item?.price) ||
+        parseInt(item?.product?.price) ||
+        item?.cartItem?.price,
+      quantity: item?.quantity || item?.cartItem?.quantity,
+    };
+    return ShpaedItem;
+  });
+
+  return shapedItemArray;
+};

@@ -27,7 +27,10 @@ import Breadcrumb from '@common/Breadrumb/Breadcrumb';
 import { useSearchParams } from 'react-router-dom';
 import { CLEAR_REVIEW } from '../../../core/store/review/reviewSlice';
 import { useDispatch } from 'react-redux';
-import { generatePath } from '../../../core/utils/helpers';
+import {
+  generatePath,
+  makeDataLayerItemObject,
+} from '../../../core/utils/helpers';
 import { useLocation } from 'react-router-dom';
 import ProductDetailsMobile from '../../components/Product/ProductDetails/ProductDetialsMobile';
 import PageContainer from '../../components/PageContainer/PageContainer';
@@ -66,18 +69,19 @@ export default function Product() {
   }, []);
 
   useEffect(() => {
-    if (window.productViewDataLayer) return;
+    console.log('product page', product);
     if (!product) return;
-    console.log('SJ Comput, DataLayer ');
-    window.dataLayer = window.dataLayer || [];
-    window.productViewDataLayer = true;
+    if (!window.dataLayer) {
+      window.dataLayer = window.dataLayer || [];
+    }
+    console.log('view-item', makeDataLayerItemObject([{ ...product }]));
     window.dataLayer.push({
-      event: 'productViewPage',
-      productName: product.name,
-      productPrice: product.productPrice,
-      productAsin: product.asin,
+      event: 'view_item',
+      currency: 'USD',
+      value: product.productPrice,
+      items: makeDataLayerItemObject([{ ...product }]),
     });
-  }, []);
+  }, [product]);
 
   return (
     <PageContainer>

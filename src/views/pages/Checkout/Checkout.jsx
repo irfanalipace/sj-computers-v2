@@ -107,18 +107,18 @@ export default function Checkout() {
     };
   }, []);
 
-  useEffect(() => {
-    // if (window.hasCartLayer) return;
-    console.log('SJ Comput');
-    window.dataLayer = window.dataLayer || [];
-    // window.hasCartLayer = true;
-    window.dataLayer.push({
-      event: 'checkoutPage',
-      userId: getUserId(),
-      itemInCart: cartItems?.length,
-      // productAsin: parseFloat(cartDetails?.sub_total).toFixed(2),
-    });
-  }, []);
+  // useEffect(() => {
+  //   // if (window.hasCartLayer) return;
+  //   console.log('SJ Comput');
+  //   window.dataLayer = window.dataLayer || [];
+  //   // window.hasCartLayer = true;
+  //   window.dataLayer.push({
+  //     event: 'checkoutPage',
+  //     userId: getUserId(),
+  //     itemInCart: cartItems?.length,
+  //     // productAsin: parseFloat(cartDetails?.sub_total).toFixed(2),
+  //   });
+  // }, []);
 
   return (
     <>

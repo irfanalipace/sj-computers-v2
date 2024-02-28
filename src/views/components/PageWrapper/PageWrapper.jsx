@@ -31,16 +31,16 @@ const PageWrapper = props => {
   //   }
   // }, [meta]);
 
-  useEffect(() => {
-    if (window.hasDataLyer) return;
-    console.log('SJ Comput');
-    window.dataLayer = window.dataLayer || [];
-    window.hasDataLyer = true;
-    window.dataLayer.push({
-      event: 'pageView',
-      userId: getUserId(),
-    });
-  });
+  // useEffect(() => {
+  //   if (window.hasDataLyer) return;
+  //   console.log('SJ Comput');
+  //   window.dataLayer = window.dataLayer || [];
+  //   window.hasDataLyer = true;
+  //   window.dataLayer.push({
+  //     event: 'pageView',
+  //     userId: getUserId(),
+  //   });
+  // });
 
   return (
     <>
