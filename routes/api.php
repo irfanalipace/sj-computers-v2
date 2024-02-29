@@ -110,6 +110,8 @@ Route::get('get-touch-screen-laptops',[ProductController::class,'getTouchScreenL
 
 Route::get('get-top-rated-products',[ProductController::class,'getTopRatedProduct']);
 
+Route::get('get-products-category',[ProductController::class,'getProductCategory']);
+
 /*
 *Add to Cart
 */
