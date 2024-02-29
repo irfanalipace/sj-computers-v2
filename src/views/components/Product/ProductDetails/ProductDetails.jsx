@@ -22,7 +22,6 @@ let acceptedKeys = [
 ];
 
 const ProductDetails = ({ product }) => {
-  console.log({ product });
   const [description, setDescription] = useState([]);
   const [productDetails, setProductDetails] = useState([]);
   const [key, setKey] = useState('home');

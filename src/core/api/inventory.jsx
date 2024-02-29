@@ -24,7 +24,6 @@ export function inventoryAction({ action, quantity, search }) {
       search,
     })
       .then(response => {
-        console.print('resp', response);
         resolve(response);
       })
       .catch(e => {

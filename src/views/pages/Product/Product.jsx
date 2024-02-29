@@ -69,7 +69,6 @@ export default function Product() {
   }, []);
 
   useEffect(() => {
-    console.log('product page', product);
     if (!product) return;
     if (!window.dataLayer) {
       window.dataLayer = window.dataLayer || [];

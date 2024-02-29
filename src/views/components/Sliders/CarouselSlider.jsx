@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 const CarouselSlider = () => {
   const productss = useSelector(state => state.products.products) || [];
-  console.print('product@@@', productss);
 
   return (
     <Carousel>

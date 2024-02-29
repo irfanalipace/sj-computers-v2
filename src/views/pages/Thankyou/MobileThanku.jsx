@@ -39,7 +39,6 @@ export default function MobileThanku() {
       location?.state?.order?.order_detail ||
       JSON.parse(storedOrder) ||
       orderFromURL?.order?.order_details;
-    console.log('orderDetails: ', order);
     if (order?.id) {
       const orderString = JSON.stringify(order);
       window.localStorage.setItem('thankyouOrderDetails', orderString);
@@ -72,8 +71,7 @@ export default function MobileThanku() {
   return (
     <div
       className='thank-you-page'
-      style={{ marginLeft: '10%', marginRight: '10%' }}
-    >
+      style={{ marginLeft: '10%', marginRight: '10%' }}>
       <div className='oreder-confirm-page-data'>
         {' '}
         <span>Order Confirmed</span>
@@ -89,8 +87,7 @@ export default function MobileThanku() {
                 height: '70px',
                 borderRadius: '50%',
                 backgroundColor: '#318243',
-              }}
-            >
+              }}>
               <img
                 src={tickImage}
                 alt='Tick Image'

@@ -50,7 +50,6 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
     // }
     try {
       const response = await allReviewImagesApi(productId);
-      console.log(response, 'responseAllImage');
       setReviewsData(response);
     } catch (error) {
       console.log('error');
@@ -145,8 +144,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                       style={{
                         fontSize: '14px',
                         padding: '12px 0',
-                      }}
-                    >
+                      }}>
                       Write a customer review
                     </button>
                   </Link>
@@ -180,8 +178,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                   id='reviewSection'
                   tabIndex='0'
                   ref={reviewRef}
-                  className='filter-wrapper mt-3 mb-0 '
-                >
+                  className='filter-wrapper mt-3 mb-0 '>
                   {/* <select
                                         className="form-select"
                                         onChange={(e) =>
@@ -257,16 +254,14 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                   fontSize: '16px',
                   fontWeight: '700',
                   borderTop: '1px solid lightgray',
-                }}
-              >
+                }}>
                 Read reviews that mention
               </h1>
               <div
                 style={{
                   display: 'flex',
                   flexWrap: 'wrap',
-                }}
-              >
+                }}>
                 {[
                   'picture quality',
                   'monitor works',
@@ -285,8 +280,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                         padding: '10px',
                         borderBottom: '2px solid #969696',
                         margin: '10px 5px',
-                      }}
-                    >
+                      }}>
                       <>{row}</>
                     </div>
                   );
@@ -338,8 +332,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                   <hr />
                   <p
                     className='mob-rev-see'
-                    onClick={() => navigate(`/add-review/${productAsin}`)}
-                  >
+                    onClick={() => navigate(`/add-review/${productAsin}`)}>
                     Write a review{' '}
                     <ArrowForwardIosIcon sx={{ fontSize: '11px' }} />
                   </p>

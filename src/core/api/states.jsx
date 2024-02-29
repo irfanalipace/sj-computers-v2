@@ -4,7 +4,6 @@ export function statesApi() {
   return new Promise((resolve, reject) => {
     ApiService.get(`/states`)
       .then(response => {
-        console.print('file: states.js | statesApi| response', response);
         resolve(response);
       })
       .catch(e => {
@@ -18,10 +17,6 @@ export function getCurrentStateApi() {
   return new Promise((resolve, reject) => {
     ApiService.get(`/user-state`)
       .then(response => {
-        console.print(
-          'file: states.js | getCurrentStateApi| response',
-          response,
-        );
         resolve(response);
       })
       .catch(e => {

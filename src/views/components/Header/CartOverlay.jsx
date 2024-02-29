@@ -14,7 +14,6 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const details = useSelector(state => state.cart.details);
   const [updatingItem, setUpdatingItem] = useState(false);
-  console.log(cartItems, 'pricesds');
   const dispatch = useDispatch();
 
   const deleteItemFunction = item => {

@@ -11,7 +11,7 @@ import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 import './ProductsGrid.css';
 
 import Button from '@common/Button/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function ProductsGrid({
   products,
@@ -37,8 +37,7 @@ export default function ProductsGrid({
               xs={productView == 'list' ? 12 : 6}
               md={inFilterProducts ? (productView == 'list' ? 12 : 4) : 3}
               lg={inFilterProducts ? (productView == 'list' ? 12 : 3) : 2}
-              key={'pi-' + index}
-            >
+              key={'pi-' + index}>
               {/* <Link to={`${new URL(product?.url || location.href).pathname}`}> */}
               {/* <ProductCard
                                 product={product}

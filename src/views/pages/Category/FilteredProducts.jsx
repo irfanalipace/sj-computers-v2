@@ -14,8 +14,9 @@ import {
 } from '@store/products/productsSlice';
 import ProductsGrid from '@components/ProductsGrid/ProductsGrid';
 import './FilteredProducts.css';
+import { makeDataLayerItemObject } from '../../../core/utils/helpers';
 
-const FilteredProducts = memo(({ category, toggleFilter }) => {
+const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
   const {
     products,
     filtersProduct,
@@ -34,6 +35,22 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     redirectedFrom: category?.name,
     redirectedFromPath: `/category/${category?.slug}`,
   };
+
+  useEffect(() => {
+    console.print(
+      'view_item_list data layer',
+      categorySlug,
+      makeDataLayerItemObject(products),
+    );
+    if (!window.dataLayer) {
+      window.dataLayer = window.dataLayer || [];
+    }
+    window.dataLayer.push({
+      event: 'view_item_list',
+      item_list_name: categorySlug,
+      items: makeDataLayerItemObject(products),
+    });
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -117,8 +134,6 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
     setProductView('list');
   };
 
-  console.log(productParamsRef, 'productParamsRef');
-
   return (
     <div className='filter-results'>
       {products.length > 0 ? (
@@ -160,8 +175,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                     padding: '3px 6px',
                     backgroundColor: productView == 'list' ? '#318243' : '',
                     color: productView == 'list' ? 'white' : '#318243',
-                  }}
-                >
+                  }}>
                   <FormatAlignLeftIcon fontSize='small' />{' '}
                 </IconButton>
               </span>
@@ -173,8 +187,7 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
                     padding: '3px 6px',
                     backgroundColor: productView == 'grid' ? '#318243' : '',
                     color: productView == 'grid' ? 'white' : '#318243',
-                  }}
-                >
+                  }}>
                   <ViewModuleIcon fontSize='small' />{' '}
                 </IconButton>
               </span>
@@ -203,13 +216,11 @@ const FilteredProducts = memo(({ category, toggleFilter }) => {
           ) : (
             <div
               style={{ height: '137vh' }}
-              className='d-flex justify-content-center align-items-start heading'
-            >
+              className='d-flex justify-content-center align-items-start heading'>
               <h3 className='text-center'>No Products Found</h3>
               <button
                 className='d-sm-none d-block bg-transparent border-0'
-                onClick={toggleFilter}
-              >
+                onClick={toggleFilter}>
                 <FontAwesomeIcon icon={faFilter} />
               </button>
             </div>

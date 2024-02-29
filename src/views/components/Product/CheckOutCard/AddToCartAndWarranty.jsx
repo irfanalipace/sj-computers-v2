@@ -19,7 +19,6 @@ function AddToCartAndWarranty({ product, isMobile }) {
   let screenSize = window.innerWidth;
   function updateScreenSize() {
     screenSize = window.innerWidth;
-    console.log('Screen size updated:', screenSize);
   }
   window.addEventListener('resize', updateScreenSize);
 

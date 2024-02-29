@@ -88,7 +88,6 @@ const OrderPage = () => {
     // console.print(orderSearch, "input")
     setLocalLoading(true);
     const responseSearch = await OrderSearchApi(orderSearch);
-    console.print(responseSearch, 'response search');
     setOrderSearchData(responseSearch);
     setLocalLoading(false);
     // setOrderSearch("");
@@ -190,8 +189,7 @@ const OrderPage = () => {
                   display: 'flex',
                   alignItems: 'center',
                 }}
-                onClick={handleSearch}
-              >
+                onClick={handleSearch}>
                 Search
               </button>
             </div>
@@ -238,8 +236,7 @@ const OrderPage = () => {
                 display: 'flex',
                 marginTop: 40,
                 marginBottom: 40,
-              }}
-            >
+              }}>
               {activeTab !== 2 && (
                 <>
                   <p className='orderType'>
@@ -288,8 +285,7 @@ const OrderPage = () => {
                     <select
                       value={1}
                       //   onChange={}
-                      style={{ marginLeft: '5px' }}
-                    >
+                      style={{ marginLeft: '5px' }}>
                       <option value='1 Month'>Select</option>
                       <option value='Option 1'>1 Month</option>
                       <option value='Option 2'>Option 2</option>

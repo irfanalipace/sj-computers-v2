@@ -37,8 +37,6 @@ const CategorySlider = () => {
     }
   };
 
-  console.log(products, 'products in category');
-
   if (products?.length == 0) {
     return (
       <div>
