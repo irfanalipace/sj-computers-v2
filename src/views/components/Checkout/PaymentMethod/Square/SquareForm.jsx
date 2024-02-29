@@ -7,8 +7,13 @@ import PaymentService from '../../../../../core/services/PaymentService';
 import { PAYMENT_METHODS } from '../../../../../core/utils/constants';
 
 import './SquareForm.css';
-import { clearCartLocally } from '../../../../../core/utils/cartHelpers';
+import {
+  clearCartLocally,
+  getCartDetails,
+  getCartItems,
+} from '../../../../../core/utils/cartHelpers';
 import usePaymentData from '../usePaymentData';
+import { makeDataLayerItemObject } from '../../../../../core/utils/helpers';
 
 export const SquareForm = ({ hideCloseBtn, hideModal }) => {
   const dispatch = useDispatch();
@@ -58,6 +63,19 @@ export const SquareForm = ({ hideCloseBtn, hideModal }) => {
   };
 
   async function onTokenSuccess({ token }) {
+    if (!window.dataLayer) {
+      window.dataLayer = window.dataLayer || [];
+    }
+    console.log('add_payment_info', {
+      value: getCartDetails().sub_total,
+      items: makeDataLayerItemObject(getCartItems()),
+    });
+    window.dataLayer.push({
+      event: 'add_payment_info',
+      currency: 'USD',
+      value: getCartDetails().sub_total,
+      items: makeDataLayerItemObject(getCartItems()),
+    });
     dispatch(PLACING_ORDER());
     hideCloseBtn();
 
@@ -80,8 +98,7 @@ export const SquareForm = ({ hideCloseBtn, hideModal }) => {
         locationId={import.meta.env.VITE_APP_SQUARE_LOCATION_ID}
         formProps={{
           className: 'payment-form',
-        }}
-      >
+        }}>
         <CreditCard
           includeInputLabels
           buttonProps={buttonProps}
