@@ -4,7 +4,6 @@ export function productReviewsApi(id, per_page = 10) {
   return new Promise((resolve, reject) => {
     ApiService.get(`get-product-reviews`, id, { per_page })
       .then(async response => {
-        console.print('file: products.js | products| response', response);
         resolve(response);
       })
       .catch(e => {

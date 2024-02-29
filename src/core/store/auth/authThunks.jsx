@@ -56,12 +56,11 @@ export const login = credentials => {
       if (!window.dataLayer) {
         window.dataLayer = window.dataLayer || [];
       }
-
+      console.log('login data layer');
       window.dataLayer.push({
         event: 'login',
         method: 'email_password',
       });
-      console.print('response: ', response);
       let { id, access_token, user, profile_pic, state } = response;
       saveUserName(user);
       saveUserImage(profile_pic);
@@ -89,6 +88,7 @@ export const register = (credentials, cb) => {
       if (!window.dataLayer) {
         window.dataLayer = window.dataLayer || [];
       }
+      console.log('signup data layer');
 
       window.dataLayer.push({
         event: 'sign_up',

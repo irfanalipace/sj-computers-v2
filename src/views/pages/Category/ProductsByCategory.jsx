@@ -14,7 +14,13 @@ const ProductsByCategory = ({ toggleFilter }) => {
     setCategory(_category);
   }, [categories, categorySlug]);
 
-  return <FilteredProducts category={category} toggleFilter={toggleFilter} />;
+  return (
+    <FilteredProducts
+      category={category}
+      toggleFilter={toggleFilter}
+      categorySlug={categorySlug}
+    />
+  );
 };
 
 export default ProductsByCategory;

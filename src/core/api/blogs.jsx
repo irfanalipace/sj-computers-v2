@@ -30,7 +30,6 @@ export function blogSlugApiblogDetails(slug) {
   return new Promise((resolve, reject) => {
     ApiService.get(`/get-blogs?slug=${slug}`)
       .then(response => {
-        console.print(response, 'update blog slug');
         resolve(response);
       })
       .catch(e => {
@@ -44,7 +43,6 @@ export function blogHeaderDetails(slug) {
   return new Promise((resolve, reject) => {
     ApiService.get(`/get-blogs?slug=${slug}`)
       .then(response => {
-        console.print(response, 'update blog slug');
         resolve(response);
       })
       .catch(e => {

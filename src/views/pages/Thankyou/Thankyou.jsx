@@ -29,7 +29,6 @@ export default function ThankYou() {
       console.log('error parsing order: ', error);
     }
   }
-  console.log('orderFromURL: ', orderFromURL);
 
   const navigate = useNavigate();
   const [orderDetails, setOrderDetails] = useState({});
@@ -41,7 +40,6 @@ export default function ThankYou() {
       location?.state?.order?.order_detail ||
       JSON.parse(storedOrder) ||
       orderFromURL?.order?.order_details;
-    console.log('orderDetails: ', order);
     if (order?.id) {
       const orderString = JSON.stringify(order);
       window.localStorage.setItem('thankyouOrderDetails', orderString);
@@ -51,6 +49,7 @@ export default function ThankYou() {
       if (!window.dataLayer) {
         window.dataLayer = window.dataLayer || [];
       }
+      console.log('purchase data lyer');
       window.dataLayer.push({
         event: 'purchase',
         currency: 'USD',

@@ -18,7 +18,6 @@ export function getJobDetails(id) {
   return new Promise((resolve, reject) => {
     ApiService.get(`/career`, id)
       .then(response => {
-        console.print('file: jobs.js | jobs| response', response);
         resolve(response);
       })
       .catch(e => {
@@ -35,7 +34,6 @@ export function getAllJobs() {
   return new Promise((resolve, reject) => {
     ApiService.get(`/careers`)
       .then(response => {
-        console.print('file: jobs.js | jobs| response', response);
         resolve(response);
       })
       .catch(e => {
@@ -58,7 +56,6 @@ export function CreateCareer(CareerData) {
       formData.append(key, CareerData[key]);
     }
   }
-  console.print('formData', formData);
   return new Promise((resolve, reject) => {
     ApiService.post('/store-career-applications', formData)
       .then(response => {

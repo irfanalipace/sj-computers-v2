@@ -4,7 +4,6 @@ export function categoryApi() {
   return new Promise((resolve, reject) => {
     ApiService.get(`/categories`)
       .then(response => {
-        console.print('file: category.js | categoryApi| response', response);
         resolve(response);
       })
       .catch(e => {

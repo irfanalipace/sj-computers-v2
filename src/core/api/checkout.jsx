@@ -42,10 +42,6 @@ export function setShippingAddressApi({
       permanent_address,
     })
       .then(response => {
-        console.print(
-          'file: checkout.js | setShippingAddressApi| response',
-          response,
-        );
         resolve(response);
       })
       .catch(e => {
@@ -61,7 +57,6 @@ export function placeOrderApi({ paymentMethod }) {
       payment_type: paymentMethod,
     })
       .then(response => {
-        console.print('file: checkout.js | placeOrderApi| response', response);
         resolve(response);
       })
       .catch(e => {
@@ -75,7 +70,6 @@ export function applyShipment(data) {
   return new Promise((resolve, reject) => {
     ApiService.post(`/apply-shipment`, data)
       .then(response => {
-        console.print('file: checkout.js | applyShipment| response', response);
         resolve(response);
       })
       .catch(e => {

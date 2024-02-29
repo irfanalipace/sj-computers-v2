@@ -31,7 +31,6 @@ export default class PaymentService {
       if (this.paymentType === PAYMENT_METHODS.SQUARE)
         this.paymentPayload.source_id = this.token;
       let response = await paymentApi(this.paymentPayload);
-      console.log('response: ', response);
       if (response?.status == 200) {
         typeof this.onPaymentApiSuccess === 'function' &&
           this.onPaymentApiSuccess(response);

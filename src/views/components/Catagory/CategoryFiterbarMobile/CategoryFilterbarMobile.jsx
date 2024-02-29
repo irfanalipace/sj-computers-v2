@@ -11,7 +11,6 @@ const CategoryFilterbarMobile = () => {
 
   const toggleDrawer = openStatus => event => {
     setOpen(!open);
-    console.log(open, 'open');
   };
 
   return (
@@ -24,8 +23,7 @@ const CategoryFilterbarMobile = () => {
         className='mobile-filterbar-drawer'
         anchor='bottom'
         open={open}
-        onClose={toggleDrawer(false)}
-      >
+        onClose={toggleDrawer(false)}>
         <div>
           <div className='button-div'>
             <Button sx={{ color: '#318243' }} onClick={toggleDrawer(false)}>

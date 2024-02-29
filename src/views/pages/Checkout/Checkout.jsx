@@ -112,6 +112,7 @@ export default function Checkout() {
     if (!window.dataLayer) {
       window.dataLayer = window.dataLayer || [];
     }
+    console.log('begin checkout datalayer');
 
     window.dataLayer.push({
       event: 'begin_checkout',

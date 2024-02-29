@@ -53,7 +53,6 @@ export function OrderListhApi() {
 
     ApiService.get(`/order-list`, '', myParams)
       .then(response => {
-        console.print('file: order.js | order-list| response', response.data);
         resolve(response.data);
       })
       .catch(e => {

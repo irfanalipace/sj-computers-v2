@@ -8,7 +8,6 @@ export function contactUsApi({ subject_name, email, message }) {
       message,
     })
       .then(response => {
-        console.print('file: states.js | contactUsApi| response', response);
         resolve(response);
       })
       .catch(e => {

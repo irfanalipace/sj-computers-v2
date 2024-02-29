@@ -17,8 +17,6 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData, isMobile }) {
   const [imgId, setImgId] = useState('');
   const [imgIndex, setImgIndex] = useState(0);
 
-  console.log(reviews, 'reviews');
-
   const handleOpenDialog = (reviewId, imgId, index) => {
     setOpen(true);
     setReviewId(reviewId);
@@ -57,14 +55,12 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData, isMobile }) {
           style={{
             position: 'relative',
             padding: isMobile ? '0px' : '0px 70px',
-          }}
-        >
+          }}>
           {/* <button onClick={handleOpenDialog}>image Gallery</button> */}
           <div className='d-flex justify-content-between mb-3'>
             <h3
               className='product-section-heading'
-              style={{ marginLeft: isMobile && '20px' }}
-            >
+              style={{ marginLeft: isMobile && '20px' }}>
               Reviews with images
             </h3>
             <button
@@ -73,8 +69,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData, isMobile }) {
               style={{
                 color: isMobile && '#007185',
                 textDecoration: isMobile && 'none',
-              }}
-            >
+              }}>
               {isMobile ? (
                 <>
                   See all photos
@@ -105,8 +100,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData, isMobile }) {
                 slidesPerView: 4,
                 // spaceBetween: 50,
               },
-            }}
-          >
+            }}>
             {/* /// --- DIALOG --- /// */}
             {open && (
               <ReviewsDialog
@@ -128,8 +122,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData, isMobile }) {
                       paddingBottom: 0,
                       height: '180px',
                     }}
-                    key={image?.id}
-                  >
+                    key={image?.id}>
                     <div
                       src={image?.file_path}
                       style={{
@@ -146,8 +139,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData, isMobile }) {
                         )
                       }
                       alt='review-image'
-                      className='all-reviews-image'
-                    ></div>
+                      className='all-reviews-image'></div>
                   </SwiperSlide>
                 ))}
               </React.Fragment>
@@ -164,8 +156,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData, isMobile }) {
                 position: 'absolute',
                 right: 0,
                 top: '60%',
-              }}
-            ></div>
+              }}></div>
           )}
           {!isMobile && (
             <div
@@ -174,8 +165,7 @@ function ReviewImagesSlider({ productId, reviews, ReviewsData, isMobile }) {
                 position: 'absolute',
                 left: 0,
                 top: '60%',
-              }}
-            ></div>
+              }}></div>
           )}
         </div>
       ) : (

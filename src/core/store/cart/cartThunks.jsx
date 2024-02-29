@@ -66,6 +66,7 @@ export const addToCart = (data, cb) => {
         payload: data,
       });
       toast.success('Item Added In Cart');
+      console.log('add to cart login user');
       // adding add_to_cart evnet to datalayer when login user added item to cart and add to cart api is successful
       if (!window.dataLayer) {
         window.dataLayer = window.dataLayer || [];
@@ -101,7 +102,6 @@ export const deleteItem = data => {
         type: DELETE_ITEM,
         payload: data,
       });
-      console.log('api res of del item', data);
       if (!window.dataLayer) {
         window.dataLayer = window.dataLayer || [];
       }
@@ -158,7 +158,6 @@ export const getCartDetails = data => {
   return async dispatch => {
     try {
       let response = await getDetailsApi();
-      console.print('response', response);
       let data = { ...response.data };
       updateCartDetails(data);
       dispatch({
@@ -289,26 +288,30 @@ export const syncCartItems = () => {
   };
 };
 
-export const addToLocalCart = (data, cb) => {
-  console.log('lcoall add to cart', data);
+export const addToLocalCart = (data, cb, sync = false) => {
   return async dispatch => {
     addItemToLocalCart(data);
     dispatch({
       type: ADD_TO_CART,
       payload: data,
     });
-    // adding add_to_cart evnet to datalayer when login user added item to cart and add to cart api is successful
-    if (!window.dataLayer) {
-      window.dataLayer = window.dataLayer || [];
+    if (!sync) {
+      console.log('local add to cart', data);
+
+      // adding add_to_cart evnet to datalayer when login user added item to cart and add to cart api is successful
+      if (!window.dataLayer) {
+        window.dataLayer = window.dataLayer || [];
+      }
+
+      console.log('add_to_cart', data, makeDataLayerItemObject([{ ...data }]));
+      window.dataLayer.push({
+        event: 'add_to_cart',
+        currency: 'USD',
+        value: data.cartItem.price,
+        items: makeDataLayerItemObject([{ ...data }]),
+      });
     }
 
-    console.log('add_to_cart', data, makeDataLayerItemObject([{ ...data }]));
-    window.dataLayer.push({
-      event: 'add_to_cart',
-      currency: 'USD',
-      value: data.cartItem.price,
-      items: makeDataLayerItemObject([{ ...data }]),
-    });
     if (typeof cb === 'function') cb();
     // toast.success("Item Added In Cart");
   };
@@ -358,7 +361,7 @@ export const syncGuestUserCart = cartDetails => {
     let cartItems = getCartItems() || [];
     if (cartItems?.length > 0 && cartDetails?.total_items > 0) {
       cartItems.forEach(cartItem => {
-        dispatch(addToLocalCart({ cartItem })); // adds local cart items to redux store
+        dispatch(addToLocalCart({ cartItem }, '', true)); // adds local cart items to redux store
       });
       dispatch(setCartDetails(cartDetails)); // add local store details to redux store
     } else {
