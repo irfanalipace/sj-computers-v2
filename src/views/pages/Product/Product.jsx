@@ -78,7 +78,7 @@ export default function Product() {
     window.dataLayer.push({
       event: 'view_item',
       currency: 'USD',
-      value: product.productPrice,
+      value: parseFloat(product?.price),
       items: makeDataLayerItemObject([{ ...product }]),
     });
   }, [product]);
