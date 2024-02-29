@@ -375,7 +375,7 @@ class ProductController extends BaseController
             'workstation' => 'getWorkstations',
             'professional-laptop' => 'getProfessionalLaptops',
             'touch-screen' => 'getTouchScreenLaptops',
-            'top-rated' => 'getTopRatedProducts',
+            'top-rated-product' => 'getTopRatedProducts',
         ];
 
         return $methodMapping[$category] ?? null;
