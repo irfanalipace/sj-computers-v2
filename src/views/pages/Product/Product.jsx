@@ -73,7 +73,14 @@ export default function Product() {
     if (!window.dataLayer) {
       window.dataLayer = window.dataLayer || [];
     }
+    console.log('select_item', makeDataLayerItemObject([{ ...product }]));
+    window.dataLayer.push({
+      event: 'select_item',
+      items: makeDataLayerItemObject([{ ...product }]),
+    });
+
     console.log('view-item', makeDataLayerItemObject([{ ...product }]));
+    console.log('data layer', window.dataLayer);
     window.dataLayer.push({
       event: 'view_item',
       currency: 'USD',
