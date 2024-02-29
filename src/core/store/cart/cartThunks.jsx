@@ -374,6 +374,21 @@ export const deleteLocalItem = data => {
       type: DELETE_ITEM,
       payload: data,
     });
+    if (!window.dataLayer) {
+      window.dataLayer = window.dataLayer || [];
+    }
+
+    console.log(
+      'remove_from_cart',
+      data,
+      makeDataLayerItemObject([{ ...data }]),
+    );
+    window.dataLayer.push({
+      event: 'remove_from_cart',
+      currency: 'USD',
+      value: data.cartItem.price,
+      items: makeDataLayerItemObject([{ ...data }]),
+    });
   };
 };
 
