@@ -6,6 +6,7 @@ use App\Http\Requests\PaginateRequest;
 use App\Http\Requests\Product\ProductDetailRequest;
 use App\Http\Requests\Product\ProductMediaRequest;
 use App\Http\Requests\Product\SearchProductRequest;
+use App\Http\Requests\ProductCategoryRequest;
 use App\Http\Requests\ProductDetailAsinRequest;
 use App\Models\CategoryProduct;
 use App\Models\IpAddress;
@@ -348,4 +349,77 @@ class ProductController extends BaseController
     
         return $this->sendResponse($products, 'Successfully fetched top-rated products.');
     }
+
+    public function getProductCategory(ProductCategoryRequest $request)
+    {
+        try {
+            $methodName = $this->getMethodNameFromCategory($request->category);
+            
+            if (!method_exists($this, $methodName)) {
+                return $this->sendError('error', 'Select a valid category to fetch data.');
+            }
+
+            $query = $this->$methodName();
+            $products = $query->paginate($request->per_page ?? 10);
+
+            return $this->sendResponse($products, 'Successfully fetched ' . $request->category . ' data');
+        } catch (Exception $e) {
+            return $this->sendError('error', 'Something went wrong ' . $e->getMessage());
+        }
+    }
+
+    protected function getMethodNameFromCategory($category)
+    {
+        $methodMapping = [
+            'budget-friendly' => 'getBudgetFriendlyDesktops',
+            'workstation' => 'getWorkstations',
+            'professional-laptop' => 'getProfessionalLaptops',
+            'touch-screen' => 'getTouchScreenLaptops',
+            'top-rated' => 'getTopRatedProducts',
+        ];
+
+        return $methodMapping[$category] ?? null;
+    }
+
+    protected function getBudgetFriendlyDesktops()
+    {
+        return Product::whereHas('categories', function ($category) {
+            $category->where('slug', 'desktop');
+        })->where('price', '>', 250);
+    }
+
+    protected function getWorkstations()
+    {
+        return Product::where('name', 'like', '%workstation%')->where('price', '>', 400);
+    }
+
+    protected function getProfessionalLaptops()
+    {
+        return Product::whereHas('categories', function ($query) {
+            $query->where('slug', 'laptop');
+            $query->orWhere('slug', '2_in_1_laptops');
+        })->where('price', '>', 400);
+    }
+
+    protected function getTouchScreenLaptops()
+    {
+        return Product::whereHas('categories', function ($category) {
+            $category->where('slug', 'touch_screen');
+        });
+    }
+
+    protected function getTopRatedProducts()
+    {
+        return Product::whereHas('productReview', function ($query) {
+            $query->where('rating', '>=', 4);
+        })
+        ->select('products.*', DB::raw('(
+            SELECT ROUND(AVG(rating), 1)
+            FROM product_reviews 
+            WHERE product_reviews.product_id = products.id
+        ) AS average_rating'))
+        ->orderByDesc('average_rating')
+        ->inRandomOrder();
+    }
+
 }
