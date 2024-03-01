@@ -1,9 +1,7 @@
 .first-section {
   margin: 11px;
 }
-.category-name {
-  color: black;
-}
+
 .div-section {
   border: 1px solid black;
   border-radius: 5px;
@@ -29,60 +27,6 @@
   max-width: calc(100% - 47px);
 }
 
-.product-type-section {
-  height: auto;
-  width: 100%;
-  background-color: white;
-  margin: 8px 0;
-  padding: 10px 20px;
-}
-.product-type-section a {
-  font-size: 12px;
-  text-decoration: none;
-}
-.product-type-section .categories-container {
-  height: 245px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.product-type-section .categories-container-three-images {
-  height: 230px;
-  display: flex;
-  justify-content: center;
-}
-.h4-heading {
-  padding-top: 6px;
-}
-.product-type-section h5 {
-  font-size: 16px;
-  font-weight: 400;
-  margin: 6px;
-}
-.product-type-section h2 {
-  text-align: left;
-  /* padding-left: 20px; */
-  font-weight: 600;
-  /* font-size: 14px; */
-  font-size: 18px;
-}
-
-.product-type-section h1 {
-  text-align: left;
-  /* padding-left: 20px; */
-  font-weight: 600;
-  font-size: 18px;
-}
-
-.product-type-section img {
-  max-width: 86%;
-  max-height: 228px;
-}
-.product-type-section h5 {
-  font-size: 14px;
-  font-weight: 400;
-  margin: 6px;
-}
 .advertisement-section {
   height: 325px;
   display: flex;
@@ -102,7 +46,7 @@
 }
 .product-section-advertisment img {
   text-align: center;
-  max-width: 33% !important;
+  /* max-width: 33% !important; */
 }
 .product-new-price-sections-rating {
   font-family: Inter;
@@ -174,47 +118,6 @@
   width: 100%;
 }
 
-.product-type-section h3 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.product-type-section p {
-  font-weight: 400;
-  font-size: 12px;
-  /* padding-left: 18px; */
-}
-.product-type-section-selleing-products {
-  height: auto;
-  width: 100%;
-  background-color: white;
-  margin: 8px 0;
-  padding: 12px 18px;
-}
-.product-type-section-selleing-products h4 {
-  margin-bottom: 15px;
-  font-weight: 600;
-  color: black;
-  font-size: 18px;
-}
-.product-type-section-selleing-products img {
-  width: 100%;
-  height: auto;
-}
-.section-link {
-  margin-top: 15px;
-  margin-bottom: 0;
-  color: #007185;
-}
-.product-type-section-selleing-products h3 {
-  font-size: 16px;
-  font-weight: 600;
-}
-.section-link:hover {
-  color: #e87e24;
-  text-decoration: underline;
-}
-
 @media (min-width: 1750px) {
   .product-type-container {
     margin-left: auto;
@@ -227,22 +130,7 @@
     text-align: left;
     /* padding-left: 20px; */
     font-weight: 600;
-    font-size: 10px !important;
-  }
-}
-@media screen and (max-width: 2560px) and (min-width: 1440px) {
-  .advertisment-img-products-imges {
-    max-width: 34% !important;
-  }
-}
-@media screen and (max-width: 1440px) and (min-width: 1204px) {
-  .advertisment-img-products-imges {
-    max-width: 35% !important;
-  }
-}
-@media screen and (max-width: 1024px) and (min-width: 800px) {
-  .advertisment-img-products-imges {
-    max-width: 40% !important;
+    /* font-size: 10px !important; */
   }
 }
 
@@ -251,14 +139,14 @@
     height: auto;
     width: 100%;
     background-color: white;
-    margin: 8px 0;
+    /* margin: 8px 0; */
     padding: 10px 9px;
   }
   .product-type-section h2 {
     text-align: left;
     /* padding-left: 20px; */
     font-weight: 600;
-    font-size: 8px;
+    /* font-size: 8px; */
   }
 }
 .save-button-price-new-old {
@@ -281,7 +169,7 @@
   .product-type-section h2,
   .advertisement-heading h2,
   .advertisement-heading button {
-    font-size: 12px;
+    /* font-size: 12px; */
   }
 }
 
@@ -297,29 +185,6 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .product-type-section {
-    height: auto;
-    padding-bottom: 20px;
-    padding-top: 20px;
-  }
-
-  .product-type-section .container {
-    height: 260px;
-  }
-  .category-name {
-    font-size: 9px;
-    color: black;
-  }
-  .advertisment-img-products-imges img {
-    max-height: 29%;
-  }
-
-  .product-type-section h2,
-  .advertisement-heading h2,
-  .advertisement-heading button {
-    /* font-size: 16px; */
-  }
-
   .product-type-container {
     margin: 0 30px;
   }
@@ -337,10 +202,14 @@
 }
 @media screen and (max-width: 585px) {
   .product-type-section .categories-container {
-    height: auto;
+    /* height: auto; */
   }
-  .product-type-section img {
-    width: 200px;
+  .advertisement-heading {
+    border: none;
+    border-bottom: 4px solid #eaeded;
+  }
+  .advertisment-img-products-imges {
+    max-width: 100% !important;
   }
 
   .product-type-container > .row > * {

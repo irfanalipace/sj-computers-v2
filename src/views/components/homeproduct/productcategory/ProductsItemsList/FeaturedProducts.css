@@ -1,0 +1,127 @@
+.product-type-section {
+  height: auto;
+  width: 100%;
+  background-color: white;
+  margin: 8px 0;
+  padding: 10px 20px;
+}
+.product-type-section a {
+  font-size: 12px;
+  text-decoration: none;
+}
+.product-type-section .categories-container {
+  height: 245px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.product-type-section .categories-container-three-images {
+  height: 230px;
+  display: flex;
+  justify-content: center;
+}
+
+.category-name {
+  color: black;
+}
+
+.product-type-section h5 {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 6px;
+  padding: 3px 0px;
+}
+.product-type-section h2 {
+  text-align: left;
+  /* padding-left: 20px; */
+  font-weight: 600;
+  /* font-size: 14px; */
+  font-size: 18px;
+}
+
+.product-type-section h1 {
+  text-align: left;
+  /* padding-left: 20px; */
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.h4-heading {
+  padding-top: 6px;
+}
+
+.product-type-section img {
+  max-width: 86%;
+  max-height: 228px;
+}
+.product-type-section h5 {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 6px;
+}
+
+.product-type-section h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.product-type-section p {
+  font-weight: 400;
+  font-size: 12px;
+  /* padding-left: 18px; */
+}
+.product-type-section-selleing-products {
+  height: auto;
+  width: 100%;
+  background-color: white;
+  margin: 8px 0;
+  padding: 12px 18px;
+}
+.product-type-section-selleing-products h4 {
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: black;
+  font-size: 18px;
+}
+.product-type-section-selleing-products img {
+  width: 100%;
+  height: auto;
+}
+
+.product-type-section-selleing-products h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.section-link {
+  margin-top: 15px;
+  margin-bottom: 0;
+  color: #007185;
+  font-size: 14px;
+}
+.section-link:hover {
+  color: #e87e24;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 575px) {
+  .product-type-section-selleing-products,
+  .product-type-section {
+    margin: 0px;
+    margin-top: 4px;
+  }
+  .category-name {
+    font-size: 12px;
+    color: black;
+  }
+  .row {
+    --bs-gutter-x: 0rem;
+  }
+  .product-type-section img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .see-btn {
+    text-align: center;
+  }
+}
