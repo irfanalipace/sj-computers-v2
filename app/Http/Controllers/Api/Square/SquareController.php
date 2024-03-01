@@ -72,7 +72,7 @@ class SquareController extends BaseController
             } else {
                 $customer = $this->getCustomer($user);
             }           
-            
+           
             DB::beginTransaction();
          
             $cartContent = \Cart::session($userIdToPass)->getContent();
