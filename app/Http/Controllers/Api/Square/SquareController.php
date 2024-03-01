@@ -56,7 +56,7 @@ class SquareController extends BaseController
     // charge process
     public function processPayment($request,$user,$userType,$cartDetails)
     {
-        DB::beginTransaction();
+       
 
         try {
             $idempotencyKey = uniqid();
@@ -72,7 +72,9 @@ class SquareController extends BaseController
             } else {
                 $customer = $this->getCustomer($user);
             }           
-           
+            
+            DB::beginTransaction();
+         
             $cartContent = \Cart::session($userIdToPass)->getContent();
             $listofItems = ($userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
            
