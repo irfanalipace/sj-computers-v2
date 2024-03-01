@@ -27,10 +27,32 @@ export const getCartItems = () => {
   return [];
 };
 
+// export const getCartDetails = () => {
+//   let cartDetails = JSON?.parse(window.localStorage.getItem('cartDetails'));
+//   if (cartDetails) return cartDetails;
+//   else return initCartDetails;
+// };
+
 export const getCartDetails = () => {
-  let cartDetails = JSON.parse(window.localStorage.getItem('cartDetails'));
-  if (cartDetails) return cartDetails;
-  else return initCartDetails;
+  try {
+    const cartDetailsJson = window.localStorage.getItem('cartDetails');
+
+    if (cartDetailsJson !== null && cartDetailsJson !== undefined) {
+      const cartDetails = JSON.parse(cartDetailsJson);
+
+      if (typeof cartDetails === 'object' && cartDetails !== null) {
+        return cartDetails;
+      } else {
+        console.error('Parsed cart details is not an object:', cartDetails);
+      }
+    } else {
+      console.error('Cart details JSON is null or undefined.');
+    }
+  } catch (error) {
+    console.error('Error parsing cart details JSON:', error);
+  }
+
+  return initCartDetails;
 };
 
 export const setCartItems = cartItemsArray => {
@@ -49,6 +71,7 @@ export const updateCartItem = ({ cartItem, cartDetails }) => {
       ...cartItems[index],
       quantity: cartItem.quantity,
       price: cartItem.price,
+      plan: cartItem.plan,
       error: false,
     };
   }

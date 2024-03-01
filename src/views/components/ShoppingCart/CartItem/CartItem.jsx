@@ -6,8 +6,13 @@ import {
   deleteItem,
   deleteLocalItem,
   updateQuantity,
+  removeProtectionPlan,
+  removePlan,
   updateLocalQuantity,
 } from '@store/cart/cartThunks';
+
+import { removeProtectionApi } from '../../../../core/api/cart';
+
 import { QuantityInput } from '@common/QuantityInput/QuantityInput';
 import WarrantyBadge from '@components/ShoppingCart/CartItem/WarrantyBadge';
 import { generatePath } from '../../../../core/utils/helpers';
@@ -17,9 +22,11 @@ import { Link } from 'react-router-dom';
 export const CartItem = memo(({ cartData }) => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const details = useSelector(state => state.cart.details);
+  const cart_id = cartData?.id;
   const [updatingItem, setUpdatingItem] = useState(false);
-
+  const [localCartData, setLocalCartData] = useState(cartData);
   const dispatch = useDispatch();
+  const [loadingWarranty, setLoadingWarranty] = useState(false);
 
   const deleteItemFunction = () => {
     let cartQuantity = details?.total_items - 1;
@@ -92,6 +99,22 @@ export const CartItem = memo(({ cartData }) => {
     redirectedFrom: 'Shopping Cart',
     redirectedFromPath: `/cart`,
   };
+
+  const removeWarranty = async () => {
+    try {
+      setLoadingWarranty(true);
+      if (isAuthenticated) {
+        await dispatch(removeProtectionPlan({ cart_id: cartData.id }));
+      } else {
+        await dispatch(removePlan({ cart_id }));
+      }
+    } catch (error) {
+      console.error('Error removing warranty:', error);
+    } finally {
+      setLoadingWarranty(false);
+    }
+  };
+
   return (
     <div className='container-for-cart-item'>
       <div className='row'>
@@ -191,7 +214,15 @@ export const CartItem = memo(({ cartData }) => {
                           <div className=''>
                             <div className='dev-data-page-wantity'>
                               <div className='protection-button-remove-data-remove add-text-remive-item'>
-                                <button>Remove Warranty</button>
+                                <button
+                                  onClick={removeWarranty}
+                                  disabled={loadingWarranty}>
+                                  {loadingWarranty ? (
+                                    <Loader />
+                                  ) : (
+                                    'Remove Warranty'
+                                  )}
+                                </button>
                               </div>
                               <div>
                                 <WarrantyBadge
