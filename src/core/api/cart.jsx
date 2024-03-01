@@ -97,3 +97,19 @@ export function clearCartApi() {
       });
   });
 }
+
+export function removeProtectionApi({ cart_id }) {
+  return new Promise((resolve, reject) => {
+    ApiService.post(`/remove-protection`, {
+      cart_id,
+    })
+      .then(response => {
+        console.print('file: cart.js | deleteItemApi| response', response);
+        resolve(response);
+      })
+      .catch(e => {
+        console.print('Console Log: : error cart', e);
+        reject(e);
+      });
+  });
+}

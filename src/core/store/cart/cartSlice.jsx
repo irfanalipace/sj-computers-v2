@@ -62,6 +62,7 @@ const cartSlice = createSlice({
         sub_total: 0,
       };
     },
+
     DELETE_ITEM: (state, action) => {
       let cartItem = { ...action.payload.cartItem };
       let details = { ...action.payload.cartDetails };
@@ -73,6 +74,20 @@ const cartSlice = createSlice({
         }
       }
     },
+
+    removeProtectionPlanSuccess: (state, action) => {
+      const { cart_id } = action.payload;
+
+      const updatedCart = state.cart.map(item => {
+        if (item.id === cart_id) {
+          const { plan, ...updatedItem } = item;
+          return updatedItem;
+        }
+        return item;
+      });
+      state.cart = updatedCart;
+    },
+
     UPDATE_QUANTITY: (state, action) => {
       let cartItem = { ...action.payload.cartItem };
       let details = { ...action.payload.cartDetails };
@@ -160,6 +175,7 @@ export const {
   API_ERROR,
   DELETE_ITEM,
   UPDATE_QUANTITY,
+  removeProtectionPlanSuccess,
   UPDATING,
   UPDATE_LOCAL_PROPERTY_OF_ALL_ITEMS,
   UPDATED_QUANTITY,

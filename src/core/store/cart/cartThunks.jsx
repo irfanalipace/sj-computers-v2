@@ -7,6 +7,7 @@ import {
   CLEAR_CART,
   UPDATE_QUANTITY,
   UPDATING,
+  removeProtectionPlanSuccess,
   API_ERROR,
   UPDATED_QUANTITY,
   SET_OUT_OF_STOCK,
@@ -44,8 +45,7 @@ import {
 } from '../../utils/cartHelpers';
 import { getGuestUserEmail } from '../../services/authService';
 import { validateCartItemsApi } from '../../api/order';
-import { makeDataLayerItemObject } from '../../utils/helpers';
-
+import { removeProtectionApi } from '../../api/cart';
 export const addToCart = (data, cb) => {
   return async dispatch => {
     try {
@@ -58,6 +58,7 @@ export const addToCart = (data, cb) => {
         qty: data.cartItem.quantity,
         protective_plan_id: data?.cartItem?.plan?.value,
       };
+
       let response = await addToCartApi(param);
       data.cartDetails = { ...response.details };
       data.cartItem.notLocal = true; //this property identifies that this cart item is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
@@ -158,7 +159,8 @@ export const getCartDetails = data => {
   return async dispatch => {
     try {
       let response = await getDetailsApi();
-      let data = { ...response.data };
+      console.print('response', response);
+      let data = { ...response?.data };
       updateCartDetails(data);
       dispatch({
         type: SET_CART_DETAILS,
@@ -229,6 +231,7 @@ export const syncCartItems = () => {
       //         cartDetails,
       //     },
       // });
+
       if (localCartItems?.length > 0) {
         cartItems = localCartItems
           ?.filter(item => !item.notLocal)
@@ -288,7 +291,47 @@ export const syncCartItems = () => {
   };
 };
 
-export const addToLocalCart = (data, cb, sync = false) => {
+export const removePlan = ({ cart_id }) => {
+  return dispatch => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        dispatch(removeProtectionPlanSuccess({ cart_id }));
+
+        const cartItems = JSON.parse(window.localStorage.getItem('cart')) || [];
+
+        const updatedCartItems = cartItems.map(item => {
+          if (item.id === cart_id) {
+            const { plan, ...itemWithoutPlan } = item;
+            return itemWithoutPlan;
+          }
+          return item;
+        });
+
+        window.localStorage.setItem('cart', JSON.stringify(updatedCartItems));
+
+        resolve();
+      }, 1000);
+    });
+  };
+};
+
+export const removeProtectionPlan =
+  ({ cart_id }) =>
+  async dispatch => {
+    try {
+      const response = await removeProtectionApi({ cart_id });
+
+      if (response && response.status === 200) {
+        dispatch(removeProtectionPlanSuccess({ cart_id }));
+      } else {
+        toast.error('warranty cart is not found');
+      }
+    } catch (error) {
+      console.error('Error removing warranty:', error);
+    }
+  };
+
+export const addToLocalCart = (data, cb) => {
   return async dispatch => {
     addItemToLocalCart(data);
     dispatch({

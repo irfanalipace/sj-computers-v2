@@ -99,7 +99,7 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
         {/* sidebar content */}
 
         <div className='row  sub-title-add-overlay2'>
-          <div className='col-md-4 mt-2'>
+          <div className='col-md-4 mt-2' style={{ textAlign: 'center' }}>
             <div style={{ marginTop: '12px' }}>
               <img src={vetimges} />{' '}
               <span style={{ fontWeight: '500' }}>Not Added</span>
@@ -124,7 +124,9 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
                   to='/cart'
                   className='text-decoration-none cart-text-link'
                   onClick={toggleSidebar}>
-                  <button className='cart-overlaybutton'>Cart</button>
+                  <button className='cart-overlaybutton-overlay-desktop'>
+                    Cart
+                  </button>
                 </Link>
 
                 <Link
@@ -144,7 +146,9 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
                       to='/cart'
                       className='text-decoration-none cart-text-link'
                       onClick={toggleSidebar}>
-                      <button className='cart-overlaybutton'>Cart</button>
+                      <button className='cart-overlaybutton-overlay-desktop'>
+                        Cart
+                      </button>
                     </Link>
                   </div>
                   <div>
@@ -234,8 +238,8 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
               {' '}
               <img src={vetimges} />{' '}
               <span>
-                There are no couples to display at this time. Please check back
-                later.{' '}
+                There are no coupons to display at this time. Please check back
+                later..{' '}
               </span>
             </div>
           </div>
@@ -256,7 +260,7 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
                             <img
                               src={item?.product?.image}
                               alt=''
-                             // className='cartItem-image'
+                              // className='cartItem-image'
                             />
                           </div>
                           <Link
@@ -266,7 +270,7 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
                             }
                             className='text-decoration-none pb-2 d-block'>
                             <strong className='item-details clas-cart-overlay-sidebar'>
-                              {item?.product?.name.length > 50
+                              {item?.product?.name?.length > 50
                                 ? `${item?.product?.name.substring(0, 50)}...`
                                 : item?.product?.name}
                             </strong>
