@@ -33,7 +33,6 @@ class PayPalController extends Controller
 
     public function processPayment($request,$user,$userType,$cartDetails)
     {
-
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->createOrder([
@@ -46,14 +45,14 @@ class PayPalController extends Controller
                 [
                     "amount" => [
                         "currency_code" => "USD",
-                        "value" => $cartDetails['totalAmount'] * 100
+                        "value" => number_format($cartDetails['totalAmount'], 2, '.', '') * 100
                     ],
                 ],
             ],
 
         ]);
         $cartItems = (isset($request->cart_items)) ?  $request->cart_items : [];
-        
+      
         if(isset($response['id']) && $response['id']!=null) {
             $detail = [
                 "shippping_address" =>$request->shipping_address,
@@ -62,12 +61,12 @@ class PayPalController extends Controller
                 "cart_details" => $cartDetails,
                 "cart_items" => $cartItems,
                 "is_buy_now" => (isset($request->is_buy_now ) && $request->is_buy_now == true) ? true : false,
-                "cart_id" => (isset($request->cart_id )) ?? $request->cart_id
+                "cart_id" => (isset($request->cart_id )) ? $request->cart_id : null,
             ];
             \Cache::put("paypal_transaction_".$response['id'],$detail, 1800); // 1800 seconds = 30 minutes
               
             // Session::put('shippping_address', $request->shipping_address);
-            
+           
             foreach($response['links'] as $link) {
                 if($link['rel'] === 'approve') {
                     return $link['href'];
@@ -97,16 +96,16 @@ class PayPalController extends Controller
          $userType = ($userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
          $cartItems = ($userType == StatusEnum::GUEST) ? $getCache['cart_items'] : [];
         
-         $cartContent = \Cart::session($userIdToPass)->getContent();
+         $cartContent = (isset($getCache['is_buy_now'] ) && $getCache['is_buy_now'] == true) ? \Cart::session($userIdToPass)->get($getCache['cart_id']) : \Cart::session($userIdToPass)->getContent();
        
          $listofItems = ($userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
-         
-         $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType);
+        
+         $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($getCache['is_buy_now'] ) && $getCache['is_buy_now'] == true));
          if (!$check_product_first) { 
             DB::rollBack();
              return redirect('cart?error='."Product quantity is invalid");
          }
-
+        
          // create invoice along with order
          $orderData = [];
 
@@ -132,27 +131,47 @@ class PayPalController extends Controller
 
         if(isset($response['status']) && $response['status'] == 'COMPLETED') {
 
-            $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddress, $userType, $cartItems);
+            $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddress, $userType, $cartItems,(isset($getCache['is_buy_now'] ) && $getCache['is_buy_now'] == true));
             if (!$order) {
                 return redirect()->route('cancel');
              }    
 
             $orderData['order_detail'] = $order['order'];
-            Invoice::where('id', $order['invoice_id'])->update(['payer_id' => $response['id'] ]);
-            GenerateInvoiceJob::dispatch($user, $orderData, $order);
+            $orderData['payer_id'] = $response['id'];
 
-            //clear cart after successfull payment
+            $orderDetailOutput['Order_no'] = $order['order']['id'];
+            $orderDetailOutput['Order_date'] = $order['order']['created_at']->format('Y-m-d H:i:s');
+            $orderDetailOutput['Delivery_date'] = $orderData['estimate_day']; // Delivery Details
+            $orderDetailOutput['Payment_type'] = 'PayPal'; 
+            $orderDetailOutput['payer_id'] = $response['id'];
+            $orderDetailOutput['Subtotal'] = $orderData['sub_total'];
+            $orderDetailOutput['Total'] = $orderData['total_amount'];
+
+             // Iterate through each order item to get product details
+             $orderDetailOutput['Items'] = $order['order']['orderItem']->map(function ($item) {
+                return [
+                    'Product Name' => $item->product_name,
+                    'Quantity' => $item->qty,
+                    'Price' => $item->price
+                ];
+            });
+           
+            Invoice::where('id', $order['invoice_id'])->update(['payer_id' => $response['id'] ]);
+            GenerateInvoiceJob::dispatch($user, $orderData, $order);           
+           
+            // If you need to display more details, add them here accordingly
+
+             //clear cart after successfull payment
             (isset($getCache['is_buy_now'] ) && $getCache['is_buy_now'] == true) ? \Cart::session($userIdToPass)->remove($getCache['cart_id']) : \Cart::session($userIdToPass)->clear();
-            //clear cart condition
+            
+            //clear cart condition            
            \Cart::session($userIdToPass)->clearCartConditions();
             DB::commit();
-            $orderDetail = [
-             "order"  =>  $orderData,
-             "cart_data" => $check_product_first,
-             "sucess" => true
-            ];
+
+            // Convert to JSON if necessary for API response
+            $jsonResponse = json_encode($orderDetailOutput);
             
-            return redirect()->to('thank-you?orderSuccess='.json_encode($orderDetail));
+            return redirect()->to('thank-you?orderSuccess='.$jsonResponse);
             \Cache::forget("paypal_transaction_".$request->token);
 
         } else {
@@ -160,6 +179,7 @@ class PayPalController extends Controller
             return redirect()->route('cancel');
         }
     }
+
     public function paypalCancel($error = 'Payment is cancelled.')
     { 
         return redirect('checkout?error=' . $error.'&payment_type=paypal');

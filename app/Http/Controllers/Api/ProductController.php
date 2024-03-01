@@ -385,7 +385,7 @@ class ProductController extends BaseController
     {
         return Product::whereHas('categories', function ($category) {
             $category->where('slug', 'desktop');
-        })->where('price', '>', 250);
+        })->where('price', '<', 250);
     }
 
     protected function getWorkstations()

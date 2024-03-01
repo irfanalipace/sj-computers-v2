@@ -37,7 +37,7 @@ class OrderRepository
     }
 
     /* Create order */
-    public function createOrder($data, $userId, $user, $payment_type, $cartData, $cartContent = [], $shippingAddreess, $user_type, $cartItems = [])
+    public function createOrder($data, $userId, $user, $payment_type, $cartData, $cartContent = [], $shippingAddreess, $user_type, $cartItems = [],$isBuyNow = false)
     {
        
         $ids = [];
@@ -92,38 +92,60 @@ class OrderRepository
                 OrderItem::create($data);
             }
         } else {
-            foreach ($cartContent as $key => $item) {
-                # store product_id into ids variable...
-                $ids[] = $item->id;
-            }
-            //query to lock products
-            $check = Product::whereIn('id', $ids)->lockForUpdate()
-                ->get();
-            if ($check->isEmpty()) {
-                throw new Exception('product is not found.');
-            }
-            foreach ($cartContent as $item) {
-
+            if($isBuyNow){
+                $ids[] = $cartContent['id'];
+                 //query to lock products
+                 $check = Product::whereIn('id', $ids)->lockForUpdate()
+                 ->get();
+                if ($check->isEmpty()) {
+                    throw new Exception('product is not found.');
+                }
                 $data = [
                     'order_id' => $order->id,
-                    'product_id' => $item->id,
-                    'product_name' => $item->name,
-                    'qty' => $item->quantity,
-                    'price' => $item->price,
-                    'protective_price' => $item['attributes']['protective_price'] ?? null,
-                    'protective_plan_id' => $item['attributes']['protective_id'] ?? null
+                    'product_id' => $cartContent['id'],
+                    'product_name' => $cartContent['name'],
+                    'qty' => $cartContent['quantity'],
+                    'price' => $cartContent['price'],
+                    'protective_price' => $cartContent['attributes']['protective_price'] ?? null,
+                    'protective_plan_id' => $cartContent['attributes']['protective_id'] ?? null
                 ];
-
-                // $productInfo = $this->getAmazonInventory($item->id);
-
-                // if ($productInfo['status']) {
-                //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
-                // }
-
-                // Update item in product table
-               $this->updateProduct($item->id, $item->quantity);
+                $this->updateProduct($cartContent['id'], $cartContent['quantity']);
 
                 OrderItem::create($data);            
+            } else {
+                foreach ($cartContent as $key => $item) {
+                    # store product_id into ids variable...
+                    $ids[] = $item->id;
+                }
+                //query to lock products
+                $check = Product::whereIn('id', $ids)->lockForUpdate()
+                    ->get();
+                if ($check->isEmpty()) {
+                    throw new Exception('product is not found.');
+                }
+                foreach ($cartContent as $item) {
+
+                    $data = [
+                        'order_id' => $order->id,
+                        'product_id' => $item->id,
+                        'product_name' => $item->name,
+                        'qty' => $item->quantity,
+                        'price' => $item->price,
+                        'protective_price' => $item['attributes']['protective_price'] ?? null,
+                        'protective_plan_id' => $item['attributes']['protective_id'] ?? null
+                    ];
+
+                    // $productInfo = $this->getAmazonInventory($item->id);
+
+                    // if ($productInfo['status']) {
+                    //  $this->updateAmazonInventory($productInfo, $item->quantity,'',false); // uncommit it when push to server
+                    // }
+
+                    // Update item in product table
+                $this->updateProduct($item->id, $item->quantity);
+
+                    OrderItem::create($data);            
+                }
             }
         }
         
@@ -209,18 +231,17 @@ class OrderRepository
     }
 
     /*  check product quantity run time */
-    public function checkProduct($cart_items,$userId,$userType)
+    public function checkProduct($cart_items,$userId,$userType,$isBuyNow = false)
     {        
-      
+       
         $data = [];
         $cart = \Cart::session($userId);
-        foreach ($cart_items as $value) {
-            # code...
-           
-            $product_id = ($userType == StatusEnum::GUEST) ? $value['product_id'] : $value['id'];
-            $quantity = ($userType == StatusEnum::GUEST) ? $value['qty'] : $value['quantity'];
+        
+        if($isBuyNow){
+            $product_id = ($userType == StatusEnum::GUEST) ? $cart_items['product_id'] : $cart_items['id'];
+            $quantity = ($userType == StatusEnum::GUEST) ? $cart_items['qty'] : $cart_items['quantity'];
             $product = Product::whereId($product_id)->withoutGlobalScopes()->first();
-
+            
             if ($product->quantity == 0) {
 
                 (!$cart->isEmpty()) ? $cart->remove($product_id) : true;
@@ -246,8 +267,42 @@ class OrderRepository
                     'available_quantity' => $product->quantity
                 ];
             }
+        } else {
+        
+            foreach ($cart_items as $value) {
+                # code...
+                
+                $product_id = ($userType == StatusEnum::GUEST) ? $value['product_id'] : $value['id'];
+                $quantity = ($userType == StatusEnum::GUEST) ? $value['qty'] : $value['quantity'];
+                $product = Product::whereId($product_id)->withoutGlobalScopes()->first();
+                
+                if ($product->quantity == 0) {
+
+                    (!$cart->isEmpty()) ? $cart->remove($product_id) : true;
+                    return false;
+                } elseif ($product->quantity < $quantity) {
+
+                    if (!$cart->isEmpty()) {
+                        $cart->update($product_id, [
+                            'quantity' => array(
+                                'relative' => false,
+                                'value' => $product->quantity
+                            ),
+                            'associatedModel' => $product
+                        ]);
+                    }
+                    return false;
+                } else {
+                    $data[] = [
+                        'status' => true,
+                        'product_id' => $product->id,
+                        'message' => "quantity is available.",
+                        'quantity' => $quantity,
+                        'available_quantity' => $product->quantity
+                    ];
+                }
+            }
         }
-       
         return $data;
     }
 }
