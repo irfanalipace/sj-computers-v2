@@ -9,8 +9,14 @@ import FilterBarlayout2 from './FilterbarLayout2';
 import { Link } from 'react-router-dom';
 
 import './CategorySidebar.css';
+import BudgetFriendlyFilters from './BudgetFriendlyFilters';
 
-const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
+const CategorySidebar = ({
+  inDrawer,
+  toggleDrawer,
+  sidebarTitle,
+  budgetedDesktops,
+}) => {
   const [isSubCategoryVisible, setIsSubCategoryVisible] = useState(
     categoriesWithSubCategories.map(() => false),
   );
@@ -46,6 +52,7 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
   const toggleFilter = () => {
     setIsOpen(state => !state);
   };
+  const budgetFilter = 'isBudFriendlyDesktops';
 
   return (
     <Grid
@@ -153,27 +160,29 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
         ml={inDrawer ? 0 : 2}
         my={1}
         borderBottom={inDrawer ? '1px solid #DDDDDD' : ''}>
-        <Typography
-          onClick={() => DataInDrawerToggler(2)}
-          p={inDrawer ? 2 : 0}
-          variant='body2'
-          className={`${inDrawer ? 'alignment-container' : ''}`}
-          fontWeight={'bolder'}>
-          Customer Reviews{' '}
-          {inDrawer ? (
-            <span className={`${inDrawer ? 'align-to-end' : ''}`}>
-              <IconButton>
-                {DataInDrawer[2] ? (
-                  <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
-                ) : (
-                  <KeyboardArrowDownIcon />
-                )}{' '}
-              </IconButton>
-            </span>
-          ) : (
-            ''
-          )}
-        </Typography>
+        {sidebarTitle !== budgetFilter && (
+          <Typography
+            onClick={() => DataInDrawerToggler(2)}
+            p={inDrawer ? 2 : 0}
+            variant='body2'
+            className={`${inDrawer ? 'alignment-container' : ''}`}
+            fontWeight={'bolder'}>
+            Customer Reviews{' '}
+            {inDrawer ? (
+              <span className={`${inDrawer ? 'align-to-end' : ''}`}>
+                <IconButton>
+                  {DataInDrawer[2] ? (
+                    <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
+                  ) : (
+                    <KeyboardArrowDownIcon />
+                  )}{' '}
+                </IconButton>
+              </span>
+            ) : (
+              ''
+            )}
+          </Typography>
+        )}
         {(DataInDrawer[2] || !inDrawer) && (
           <Box ml={inDrawer ? 4 : 2} py={1}>
             <Typography
@@ -243,12 +252,17 @@ const CategorySidebar = ({ inDrawer, toggleDrawer }) => {
             border: 'none',
           }}>
           {/* <FilterBar /> */}
+          {/* {sidebarTitle !== budgetFilter && ( */}
           <FilterBarlayout2
             inDrawer={inDrawer}
             DataInDrawer={DataInDrawer}
             DataInDrawerToggler={DataInDrawerToggler}
             toggleDrawer={toggleDrawer}
           />
+          {/* )} */}
+          {/* {sidebarTitle === budgetFilter && (
+            <BudgetFriendlyFilters budgetedDesktops={budgetedDesktops} />
+          )} */}
         </div>
       </Grid>
     </Grid>

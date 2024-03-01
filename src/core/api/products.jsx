@@ -100,6 +100,24 @@ export function filterProductsApi(filter) {
   });
 }
 
+export function getProductsCategory(filter) {
+  filter.filter = filter?.filter?.map(fil => JSON.stringify(fil));
+  return new Promise((resolve, reject) => {
+    ApiService.get(`/get-products-category`, '', filter)
+      .then(response => {
+        console.print(
+          'file: products.js | filterProductsApi| response',
+          response,
+        );
+        resolve(response);
+      })
+      .catch(e => {
+        console.print('Console Log: : error filterProductsApi', e);
+        reject(e);
+      });
+  });
+}
+
 // export function productPreviewApi(formData) {
 
 //     return new Promise((resolve, reject) => {

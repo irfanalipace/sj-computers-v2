@@ -45,6 +45,9 @@ import NotFound from '@pages/NotFound/NotFound';
 
 import Loader from '@common/LoaderComponent/LoaderComponent';
 import PageWrapper from '@components/PageWrapper/PageWrapper';
+const TouchScreenPC = React.lazy(
+  () => import('./views/pages/TouchScreenLaptops/TouchScreenPC'),
+);
 const BudgetFriendlyDesktops = React.lazy(
   () => import('./views/pages/BudgetFriendlyDesktops/BudgetFriendlyDesktops'),
 );
@@ -171,6 +174,15 @@ const Router = () => {
       element: (
         <PageWrapper>
           <BudgetFriendlyDesktops />
+        </PageWrapper>
+      ),
+    },
+
+    {
+      path: '/touch-screen-laptops',
+      element: (
+        <PageWrapper>
+          <TouchScreenPC />
         </PageWrapper>
       ),
     },

@@ -28,8 +28,7 @@ const ProductCardLayout2 = ({
         position={'relative'}
         alignItems={'center'}
         spacing={1.5}
-        direction={'row'}
-      >
+        direction={'row'}>
         <Box
           bgcolor={bgcolor}
           sx={{
@@ -42,15 +41,13 @@ const ProductCardLayout2 = ({
           py={0.5}
           // width={"auto"}
           alignItems={'center'}
-          justifyContent={'center'}
-        >
+          justifyContent={'center'}>
           <Stack direction={'row'} spacing={1}>
             <Typography
               color={'white'}
               fontWeight={500}
               fontSize={'12px'}
-              fontFamily={'Inter'}
-            >
+              fontFamily={'Inter'}>
               {text}
             </Typography>
             {secondText && (
@@ -58,8 +55,7 @@ const ProductCardLayout2 = ({
                 fontWeight={500}
                 fontSize={'12px'}
                 fontFamily={'Inter'}
-                color={color}
-              >
+                color={color}>
                 {secondText}
               </Typography>
             )}
@@ -74,8 +70,7 @@ const ProductCardLayout2 = ({
           fontWeight={500}
           fontSize={'12px'}
           lineHeight={'14px'}
-          fontFamily='Inter'
-        >
+          fontFamily='Inter'>
           Deals
         </Typography>
       </Stack>
@@ -104,8 +99,7 @@ const ProductCardLayout2 = ({
     <div>
       <div
         className='product-details pe-2 ps-0 ps-lg-1'
-        style={{ padding: '0px 0px', marginLeft: '5px' }}
-      >
+        style={{ padding: '0px 0px', marginLeft: '5px' }}>
         {/* <div>
             <span className="span-the-product-color-product">
             crocs Contrary to popular
@@ -116,18 +110,15 @@ const ProductCardLayout2 = ({
         <div
           className={`dev-section-button-dev-card ${
             productView == 'list' ? '' : 'mb-2'
-          }`}
-        >
+          }`}>
           <Link
             // to={`${new URL(product?.url).pathname}`}
-            to={productUrl}
-          >
+            to={productUrl}>
             <div
               className='product-name product-cart-name-mobile-screen'
               style={{
                 margin: productView == 'list' ? '2px 0px' : '',
-              }}
-            >
+              }}>
               {product.name}
             </div>
 
@@ -179,19 +170,16 @@ const ProductCardLayout2 = ({
         <Link
           //  to={`${new URL(product?.url).pathname}`}
           to={productUrl}
-          style={{ textDecoration: 'none' }}
-        >
+          style={{ textDecoration: 'none' }}>
           <div
             className='product-rating'
-            style={{ margin: productView == 'list' ? 0 : '' }}
-          >
+            style={{ margin: productView == 'list' ? 0 : '' }}>
             <Stack mb={inGrid ? 0 : 2} alignItems={'start'} spacing={1}>
               <Stack
                 alignItems={'center'}
                 justifyContent={'center'}
                 spacing={1}
-                direction={'row'}
-              >
+                direction={'row'}>
                 <StarRatings
                   rating={product.rating}
                   starRatedColor='rgb(232, 126, 36)'
@@ -207,8 +195,7 @@ const ProductCardLayout2 = ({
                   fontWeight={500}
                   fontSize={'12px'}
                   lineHeight={'17px'}
-                  color={'#007185'}
-                >
+                  color={'#007185'}>
                   {product.total_review}
                 </Typography>
               </Stack>
@@ -247,8 +234,7 @@ const ProductCardLayout2 = ({
                     textDecoration: 'line-through',
                     fontSize: '12px',
                     paddingRight: '5px',
-                  }}
-                >
+                  }}>
                   $120{' '}
                 </span>
               )}
@@ -260,14 +246,12 @@ const ProductCardLayout2 = ({
                   style={{
                     fontSize: '12px',
                     color: '#666666',
-                  }}
-                >
+                  }}>
                   Was:{' '}
                   <span
                     style={{
                       textDecoration: 'line-through',
-                    }}
-                  >
+                    }}>
                     $120.00
                   </span>
                 </span>
@@ -296,8 +280,7 @@ const ProductCardLayout2 = ({
                     padding: '4px 0px',
                     fontSize: '12px',
                     color: '#000000',
-                  }}
-                >
+                  }}>
                   Sonic
                 </div>
               </div>
@@ -309,8 +292,7 @@ const ProductCardLayout2 = ({
                     padding: '4px 0px',
                     fontSize: '12px',
                     color: '#000000',
-                  }}
-                >
+                  }}>
                   32"
                 </div>
               </div>
@@ -322,8 +304,7 @@ const ProductCardLayout2 = ({
                     padding: '4px 0px',
                     fontSize: '12px',
                     color: '#000000',
-                  }}
-                >
+                  }}>
                   Sonic
                 </div>
               </div>
@@ -335,8 +316,7 @@ const ProductCardLayout2 = ({
                     padding: '4px 0px',
                     fontSize: '12px',
                     color: '#000000',
-                  }}
-                >
+                  }}>
                   Multiple
                 </div>
               </div>
@@ -364,8 +344,7 @@ const ProductCardLayout2 = ({
                   color: 'black',
                   fontWeight: '500',
                   fontSize: '12px',
-                }}
-              >
+                }}>
                 Friday, May 19
               </span>
             </div>
@@ -386,8 +365,7 @@ const ProductCardLayout2 = ({
                   color: '#FF0000',
                   margin: '5px 0px',
                   fontWeight: 500,
-                }}
-              >
+                }}>
                 Only {product?.quantity} left in stock - Order now
               </div>
             )}
@@ -403,8 +381,7 @@ const ProductCardLayout2 = ({
       style={{
         flexDirection: productView == 'list' ? 'row' : '',
         border: productView == 'list' ? 'none' : '',
-      }}
-    >
+      }}>
       <Link
         //to={`${new URL(product?.url).pathname}`}
         to={productUrl}
@@ -417,8 +394,7 @@ const ProductCardLayout2 = ({
         <div
           className={` ${
             inGrid ? 'product-image-grid-layout2' : ''
-          } product-image-layout2`}
-        >
+          } product-image-layout2`}>
           {/* {inGrid && (
                     <div className="product-badge">
                         <div className="badge-text">Best Seller</div>
@@ -432,8 +408,7 @@ const ProductCardLayout2 = ({
                 backgroundColor:
                   product?.total_review > 0 ? '#52AC66' : '#1860A3',
                 top: productView == 'list' ? '' : '',
-              }}
-            >
+              }}>
               {product?.total_review > 0 ? 'Top Seller' : 'New'}
             </div>
           )}
@@ -450,8 +425,7 @@ const ProductCardLayout2 = ({
         </div>
       </Link>
       <div
-        className={`${productView == 'list' ? 'product-detail-list-view' : ''}`}
-      >
+        className={`${productView == 'list' ? 'product-detail-list-view' : ''}`}>
         <ProductDetails />
       </div>
     </div>
