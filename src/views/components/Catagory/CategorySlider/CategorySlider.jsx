@@ -25,6 +25,7 @@ const CategorySlider = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state?.products.isLoading);
   const products = useSelector(state => state?.products.products);
+  
   useEffect(() => {
     getProduct();
   }, [products]);

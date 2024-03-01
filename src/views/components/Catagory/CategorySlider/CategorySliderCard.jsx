@@ -23,26 +23,26 @@ const CategorySliderCard = ({ product }) => {
   };
 
   return (
-    <Link
-      // to={`${new URL(product?.url).pathname}`}
-      to={generatePath(product?.url)}
-      style={{ textDecoration: 'none' }}>
+    <Grid
+      container
+      // className=" ms-3 ms-lg-0"
+      // border={".5px solid gray"}
+      borderRadius={'10px'}
+      height={'285px'}>
       <Grid
-        container
-        // className=" ms-3 ms-lg-0"
-        // border={".5px solid gray"}
-        borderRadius={'10px'}
-        height={'285px'}>
-        <Grid
-          item
-          xs={12}
-          m={'auto'}
-          height={'150px'}
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
+        item
+        xs={12}
+        m={'auto'}
+        height={'150px'}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <Link
+          // to={`${new URL(product?.url).pathname}`}
+          to={generatePath(product?.url)}
+          style={{ textDecoration: 'none' }}>
           <LazyLoadImage
             // width={"90px"}
             // height={"100%"}
@@ -51,8 +51,12 @@ const CategorySliderCard = ({ product }) => {
             src={product?.image}
             alt={product?.name?.trim()?.split(' ')?.slice(0, 9)?.join(' ')}
           />
-        </Grid>
-
+        </Link>
+      </Grid>
+      <Link
+        // to={`${new URL(product?.url).pathname}`}
+        to={generatePath(product?.url)}
+        style={{ textDecoration: 'none' }}>
         <Grid item xs={12} m={'auto'} py={0} px={2} sx={{ color: '#007185' }}>
           <Typography
             variant={'body2'}
@@ -113,8 +117,8 @@ const CategorySliderCard = ({ product }) => {
           </Typography>
           {/* <Typography variant="body2">${parseFloat((product?.price*2/1.5).toFixed(2))}</Typography> */}
         </Grid>
-      </Grid>
-    </Link>
+      </Link>
+    </Grid>
   );
 };
 
