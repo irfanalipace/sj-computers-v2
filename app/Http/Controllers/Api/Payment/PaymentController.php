@@ -54,7 +54,7 @@ class PaymentController extends BaseController
     public function checkout(CardRequest $request)
     {
         try { 
-            DB::beginTransaction();
+           
             switch ($request->payment_type) {
                 case StatusEnum::PAYMENTTYPEPAYPAL:
                     # Paypal Route ...
@@ -72,10 +72,10 @@ class PaymentController extends BaseController
                     return $this->sendError('Please choose one option .',400);
                     break;
             }
-            DB::commit();
+            
             return $this->sendResponse($response, StatusEnum::PAYMENTMESSAGE);
         } catch (\Exception $e) {
-          DB::rollBack();
+         
             return $this->sendError('Something went wrong.'. $e->getMessage(),400);
         }
     }
