@@ -2,6 +2,8 @@ import React from 'react';
 import ProductItem4 from '../ProductItem4';
 import ProductItem1 from '../ProductItem1';
 
+import './FeaturedProducts.css';
+
 import { Link } from 'react-router-dom';
 const FeaturedProducts = ({
   featuredItems,
@@ -13,7 +15,7 @@ const FeaturedProducts = ({
 }) => {
   return (
     <div>
-      <div className='row mx-0'>
+      <div className='row featured-products mx-0'>
         {featured.map((category, index) => (
           <div key={index} className='col-12 col-sm-6 col-lg-3'>
             <Link to={category.link} className='text-decoration-none'>
@@ -64,9 +66,11 @@ const FeaturedProducts = ({
                     <ProductItem1 image={TouchScreenLaptop} />
                   )}
                 </div>
-                <Link className='section-link' to={category?.redirectTo}>
-                  {category.link}
-                </Link>
+                <div className='see-btn'>
+                  <Link className='section-link' to={'/category'}>
+                    {category.link}
+                  </Link>
+                </div>
               </div>
             </Link>
           </div>

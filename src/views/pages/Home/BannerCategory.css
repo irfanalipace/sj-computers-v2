@@ -61,3 +61,13 @@
 .product-type-container > .row > * {
   padding: 0 !important;
 }
+
+@media screen and (max-width: 575px) {
+  .catergory-grid-wrapper {
+    margin: 0px;
+  }
+  .home-page-data {
+    margin: 0;
+    max-width: 100%;
+  }
+}

@@ -76,8 +76,7 @@ const ProductItem4 = ({ items }) => {
       {items.map((item, index) => (
         <Col
           key={index}
-          xs={12}
-          sm={6}
+          xs={6}
           style={{ height: '50%', padding: '2px' }}
           className='px-0'>
           <Link to={item.categoryLink} className='category-item'>

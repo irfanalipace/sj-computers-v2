@@ -1,0 +1,47 @@
+.time-product-name {
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide any overflowing text */
+  text-overflow: ellipsis; /* Show ellipsis (...) for overflowing text */
+  /* Optionally, specify width or max-width to control container size */
+}
+
+.featured-product-timing {
+  color: #b12704;
+  display: flex;
+}
+
+.featured-product-timing .original-price {
+  color: #505050;
+  font-size: 12px;
+  text-decoration: line-through;
+}
+
+.featured-product-timing .discount-price {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.featured-product-timing .save-value {
+  font-size: 12px;
+  background-color: #b12704;
+  color: white;
+  padding: 6px 4px;
+}
+
+.featured-product-timing .end-in {
+  font-size: 12px;
+}
+
+.featured-product-timing div {
+  margin: 0px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 575px) {
+  .time-product-name {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
