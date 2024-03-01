@@ -55,13 +55,11 @@ const SearchAccordian = () => {
             />
             <span
               className='input-group-text red lighten-3 search-icon-on-mobile-screen'
-              id='basic-text1'
-            >
+              id='basic-text1'>
               <i
                 className='fas fa-search text-grey set'
                 aria-hidden='true'
-                onClick={handleSearch}
-              ></i>
+                onClick={handleSearch}></i>
             </span>
           </SearchBar>
         </div>
@@ -69,14 +67,12 @@ const SearchAccordian = () => {
       <Accordion
         expanded={expanded === 'panel1'}
         onChange={handleChange('panel1')}
-        className={classes.accordian}
-      >
+        className={classes.accordian}>
         <AccordionSummary
           className={classes.accordianSummary}
           expandIcon={<ExpandMoreIcon />}
           aria-controls='panel1bh-content'
-          id='panel1bh-header'
-        >
+          id='panel1bh-header'>
           <Typography>Shop by Category</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -102,14 +98,12 @@ const SearchAccordian = () => {
       <Accordion
         expanded={expanded === 'panel2'}
         onChange={handleChange('panel2')}
-        className={classes.accordian}
-      >
+        className={classes.accordian}>
         <AccordionSummary
           className={classes.accordianSummary}
           expandIcon={<ExpandMoreIcon />}
           aria-controls='panel2bh-content'
-          id='panel2bh-header'
-        >
+          id='panel2bh-header'>
           <Typography>Price & Deals</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -128,14 +122,12 @@ const SearchAccordian = () => {
       <Accordion
         expanded={expanded === 'panel3'}
         onChange={handleChange('panel3')}
-        className={classes.accordian}
-      >
+        className={classes.accordian}>
         <AccordionSummary
           className={classes.accordianSummary}
           expandIcon={<ExpandMoreIcon />}
           aria-controls='panel3bh-content'
-          id='panel3bh-header'
-        >
+          id='panel3bh-header'>
           <Typography>Trending</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -148,14 +140,12 @@ const SearchAccordian = () => {
       <Accordion
         expanded={expanded === 'panel4'}
         onChange={handleChange('panel4')}
-        className={classes.accordian}
-      >
+        className={classes.accordian}>
         <AccordionSummary
           className={classes.accordianSummary}
           expandIcon={<ExpandMoreIcon />}
           aria-controls='panel4bh-content'
-          id='panel4bh-header'
-        >
+          id='panel4bh-header'>
           <Typography>Brands</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -168,14 +158,12 @@ const SearchAccordian = () => {
       <Accordion
         expanded={expanded === 'panel5'}
         onChange={handleChange('panel5')}
-        className={classes.accordian}
-      >
+        className={classes.accordian}>
         <AccordionSummary
           className={classes.accordianSummary}
           expandIcon={<ExpandMoreIcon />}
           aria-controls='panel5bh-content'
-          id='panel5bh-header'
-        >
+          id='panel5bh-header'>
           <Typography>Availability</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -185,14 +173,12 @@ const SearchAccordian = () => {
       <Accordion
         expanded={expanded === 'panel6'}
         onChange={handleChange('panel6')}
-        className={classes.accordian}
-      >
+        className={classes.accordian}>
         <AccordionSummary
           className={classes.accordianSummary}
           expandIcon={<ExpandMoreIcon />}
           aria-controls='panel6bh-content'
-          id='panel6bh-header'
-        >
+          id='panel6bh-header'>
           <Typography>Settings</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -202,14 +188,12 @@ const SearchAccordian = () => {
       <Accordion
         expanded={expanded === 'panel7'}
         onChange={handleChange('panel7')}
-        className={classes.accordian}
-      >
+        className={classes.accordian}>
         <AccordionSummary
           className={classes.accordianSummary}
           expandIcon={<ExpandMoreIcon />}
           aria-controls='panel7bh-content'
-          id='panel7bh-header'
-        >
+          id='panel7bh-header'>
           <Typography>Customer Service</Typography>
         </AccordionSummary>
       </Accordion>
@@ -217,8 +201,7 @@ const SearchAccordian = () => {
         <AccordionSummary
           className={classes.accordianSummary}
           expandIcon={<ExpandMoreIcon />}
-          id='panel3a-header'
-        >
+          id='panel3a-header'>
           <Typography>Sign In</Typography>
         </AccordionSummary>
       </Accordion>

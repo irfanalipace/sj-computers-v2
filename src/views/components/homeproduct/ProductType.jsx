@@ -333,8 +333,7 @@ const ProductType = () => {
                   style={{
                     marginBottom: '5px',
                     fontSize: '1.18rem',
-                  }}
-                >
+                  }}>
                   Log in for the best experience
                 </h2>
                 <div style={{ padding: '10px' }}>
@@ -346,8 +345,7 @@ const ProductType = () => {
                         color: 'white',
                       }}
                       type='button'
-                      className='button-save'
-                    >
+                      className='button-save'>
                       Login Safely
                     </button>
                   </Link>
@@ -375,8 +373,7 @@ const ProductType = () => {
                       alignItems={'center'}
                       justifyContent={'center'}
                       spacing={1}
-                      direction={'row'}
-                    >
+                      direction={'row'}>
                       <StarRatings
                         rating={products[0].rating}
                         starRatedColor='rgb(232, 126, 36)'
@@ -392,8 +389,7 @@ const ProductType = () => {
                         fontWeight={500}
                         fontSize={'12px'}
                         lineHeight={'17px'}
-                        color={'#007185'}
-                      >
+                        color={'#007185'}>
                         {products[0].total_review}
                       </Typography>
                     </Stack>

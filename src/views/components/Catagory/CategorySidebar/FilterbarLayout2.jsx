@@ -214,8 +214,7 @@ const FilterBarlayout2 = ({
           <li className='filter-value' key={`${option.backend_value}-${index}`}>
             <label
               className='radio-container'
-              htmlFor={`${option.backend_value}-${index}`}
-            >
+              htmlFor={`${option.backend_value}-${index}`}>
               <input
                 id={`${option.backend_value}-${index}`}
                 type='radio'
@@ -245,8 +244,7 @@ const FilterBarlayout2 = ({
                 style={{
                   color: '#52AC66',
                   fontWeight: 'unset',
-                }}
-              >
+                }}>
                 Show More
               </span>
             </button>
@@ -463,8 +461,7 @@ const FilterBarlayout2 = ({
             style={{
               borderBottom: inDrawer ? '1px solid #DDDDDD' : '',
             }}
-            key={`${category}-${index}`}
-          >
+            key={`${category}-${index}`}>
             <h3
               onClick={() => DataInDrawerToggler(index + 3)}
               className={`filter-heading ${inDrawer ? 'alignment-container' : ''}`}
@@ -472,8 +469,7 @@ const FilterBarlayout2 = ({
                 margin: inDrawer ? '0px' : '',
                 padding: inDrawer ? '16px' : '',
                 width: inDrawer ? '100vw' : '',
-              }}
-            >
+              }}>
               {category.replace(/_/g, ' ')}{' '}
               {inDrawer ? (
                 <span className={`${inDrawer ? 'align-to-end' : ''}`}>
@@ -496,8 +492,7 @@ const FilterBarlayout2 = ({
                 style={{
                   padding: inDrawer ? '0px 20px' : '',
                   marginLeft: inDrawer ? '16px' : '',
-                }}
-              >
+                }}>
                 {Array.isArray(filters[category])
                   ? renderedItems(options, category)
                   : renderRangeSliders(category)}
@@ -520,8 +515,7 @@ const FilterBarlayout2 = ({
           style={{
             padding: inDrawer ? '0px' : '',
             margin: inDrawer ? '0px' : '',
-          }}
-        >
+          }}>
           {renderedCategories}
           {/* <li className="filter-value">
                         <button onClick={handleShowMoreCategory}>

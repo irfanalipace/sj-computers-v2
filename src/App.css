@@ -106,9 +106,9 @@ span {
     /* max-width: 1800px; */
     margin: auto;
   }
-  .inner-body > div {
+  /* .inner-body > div {
     min-height: calc(100vh - 670px);
-  }
+  } */
 }
 @media screen and (max-width: 1200px) {
   .hidden-on-tab {

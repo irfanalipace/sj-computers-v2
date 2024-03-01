@@ -111,6 +111,6 @@ export const featured = [
   {
     name: 'Touch Screen Laptops',
     link: 'Shop Now',
-    redirectTo: '/category',
+    redirectTo: '/touch-screen-laptops',
   },
 ];
