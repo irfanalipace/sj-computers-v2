@@ -88,25 +88,53 @@ const FilterBarlayout2 = ({
       toggleDrawer();
     }
     setFiltersInArray(prevSelectedFilters => {
+      let tempArray = [...prevSelectedFilters];
+      let index = prevSelectedFilters.findIndex(filter => {
+        return filter.value === option && filter.key === category;
+      });
+      if (index !== -1) {
+        const removedArray = prevSelectedFilters.filter(
+          f => !(f.key === category && f.value === option),
+        );
+        console.print(removedArray, 'newArray removed Array');
+        return removedArray;
+      } else {
+        let filter = {
+          key: category,
+          value: option,
+        };
+        const newArray = [...tempArray, filter];
+        console.print(newArray, 'newArray else');
+        return newArray;
+      }
+    });
+  };
+
+  const handleFilterSelectRangeSlider = (event, category, option) => {
+    if (toggleDrawer) {
+      toggleDrawer();
+    }
+    setFiltersInArray(prevSelectedFilters => {
+      let tempArray = [...prevSelectedFilters];
+      let index = prevSelectedFilters.findIndex(filter => {
+        return filter.value.unit === option.unit && filter.key === category;
+      });
       let filter = {
         key: category,
         value: option,
       };
-      // const isChecked = event.target.checked;
-
-      // if (isChecked) {
-      //     return [...prevSelectedFilters, filter];
-      // }
-      let index = prevSelectedFilters.findIndex(filter => {
-        return filter.key === category;
-      });
-      let tempArray = [...prevSelectedFilters];
-
-      if (index > -1) {
-        tempArray[index] = filter;
-        return tempArray;
+      if (index !== -1) {
+        const removedArray = prevSelectedFilters.filter(
+          f => !(f.key === category && f.value.unit === option.unit),
+        );
+        const removerrayUpdate = [...removedArray, filter];
+        console.print(removerrayUpdate, 'newArray removed Array');
+        return removerrayUpdate;
+      } else {
+        const newArray = [...tempArray, filter];
+        console.print(newArray, 'newArray else');
+        return newArray;
       }
-      return [...tempArray, filter];
     });
   };
 
@@ -176,7 +204,7 @@ const FilterBarlayout2 = ({
           <label className='radio-container' htmlFor={'all-' + category}>
             <input
               id={'all-' + category}
-              type='radio'
+              type='checkbox'
               name={category} // Add a name attribute to group the radio buttons by category
               value={''} // Add a value attribute to specify the value of the selected radio button
               onChange={event => handleFilterSelect(event, category, '')}
@@ -217,7 +245,7 @@ const FilterBarlayout2 = ({
               htmlFor={`${option.backend_value}-${index}`}>
               <input
                 id={`${option.backend_value}-${index}`}
-                type='radio'
+                type='checkbox'
                 name={category} // Add a name attribute to group the radio buttons by category
                 value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
                 onChange={event =>
@@ -312,7 +340,7 @@ const FilterBarlayout2 = ({
           rangeValues[category][unit]?.max,
       };
     }
-    handleFilterSelect(e, category, value);
+    handleFilterSelectRangeSlider(e, category, value);
   };
 
   const handleRange = (event, category, unit, newValue) => {
@@ -353,7 +381,7 @@ const FilterBarlayout2 = ({
           <li className='my-2  filter-value'>
             <label className='radio-container' htmlFor={category + 'MB'}>
               <input
-                type='radio'
+                type='checkbox'
                 value='MB'
                 id={category + 'MB'}
                 className='me-1'
