@@ -46,6 +46,7 @@ import {
 import { getGuestUserEmail } from '../../services/authService';
 import { validateCartItemsApi } from '../../api/order';
 import { removeProtectionApi } from '../../api/cart';
+import { makeDataLayerItemObject } from '../../utils/helpers';
 export const addToCart = (data, cb) => {
   return async dispatch => {
     try {
@@ -60,6 +61,7 @@ export const addToCart = (data, cb) => {
       };
 
       let response = await addToCartApi(param);
+      debugger;
       data.cartDetails = { ...response.details };
       data.cartItem.notLocal = true; //this property identifies that this cart item is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
       dispatch({

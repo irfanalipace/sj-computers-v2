@@ -19,15 +19,16 @@ const LoginAndTimeProduct = () => {
 
   return (
     <div className='dev-sections-two-sctions'>
-      {isAuthenticated ? (
-        <div className='advertisement-heading'>
-          <img
-            className={`advertisment-img`}
-            src={wellsjcomputer}
-            alt={'wellsjcomputer'}
-          />
-        </div>
-      ) : (
+      {/* {isAuthenticated ? ( */}
+      {/* <div className='advertisement-heading'>
+           <img
+             className={`advertisment-img`}
+         src={wellsjcomputer}
+             alt={'wellsjcomputer'}
+           />
+         </div> */}
+      {/* ) : ( */}
+      {!isAuthenticated && (
         <div className='advertisement-heading' style={{ padding: '5px' }}>
           <div style={{ padding: screenWidth > 575 ? '10px' : '0px 10px' }}>
             <h2
@@ -84,11 +85,11 @@ const LoginAndTimeProduct = () => {
             </div>
 
             <h5 className='time-product-name'>{products[0].name}</h5>
-            <Stack mb={2} alignItems={'start'} spacing={1}>
+            <Stack mb={1} alignItems={'start'} spacing={1}>
               <Stack
                 alignItems={'center'}
                 justifyContent={'center'}
-                spacing={1}
+                // spacing={1}
                 direction={'row'}>
                 <StarRatings
                   rating={products[0].rating}
@@ -96,7 +97,7 @@ const LoginAndTimeProduct = () => {
                   numberOfStars={5}
                   name='rating'
                   isSelectable={false}
-                  starDimension={'20px'}
+                  starDimension={'18px'}
                   starSpacing={'0'}
                 />
                 <Typography

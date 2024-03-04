@@ -1,4 +1,7 @@
 .time-product-name {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Inter';
   white-space: nowrap; /* Prevent text from wrapping */
   overflow: hidden; /* Hide any overflowing text */
   text-overflow: ellipsis; /* Show ellipsis (...) for overflowing text */
@@ -23,13 +26,15 @@
 
 .featured-product-timing .save-value {
   font-size: 12px;
+  width: 100px;
   background-color: #b12704;
   color: white;
-  padding: 6px 4px;
+  /* padding: 2px 1px; */
 }
 
 .featured-product-timing .end-in {
   font-size: 12px;
+  line-height: 15px;
 }
 
 .featured-product-timing div {
