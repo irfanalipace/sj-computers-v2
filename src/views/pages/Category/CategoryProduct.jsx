@@ -1,7 +1,7 @@
 import React from 'react';
 import CategoriesHeader from '../../components/Header/CategoriesHeader/CategoriesHeader';
 import CategoryVideo from '../../components/Catagory/CategoryVideo';
-import { Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import CategorySlider from '../../components/Catagory/CategorySlider/CategorySlider';
 import CategorySidebar from '../../components/Catagory/CategorySidebar/CategorySidebar';
 import ProductsByCategory from './ProductsByCategory';
@@ -18,9 +18,10 @@ import CategoryFilterbarMobile from '../../components/Catagory/CategoryFiterbarM
 
 const CategoryProducts = () => {
   return (
-    <Grid container>
-      {/* Header */}
-      <Grid item xs={12}>
+    <Grid container padding={{padding:'23px'}}>
+   
+        {/* Header */}
+        <Grid item xs={12}>
         <CategoriesHeader />
       </Grid>
 
@@ -34,15 +35,15 @@ const CategoryProducts = () => {
         <CategoryVideoAndSlider />
       </Grid>
 
-      <Grid item sm={3} md={2} mt={2} py={2} className='d-none d-sm-block'>
+      {/* <Grid item sm={3} md={2} mt={2} py={2} className='d-none d-sm-block'>
         <CategorySidebar />
-      </Grid>
+      </Grid> */}
 
       {/* <Grid item md={10}>
           <ProductsByCategory inCategoriesPage={true} />
       </Grid> */}
-
-      <Grid item xs={12} sm={9} md={10} lg={10} py={2}>
+      {/* <Grid item xs={12} sm={9} md={10} lg={10} py={2}></Grid> */}
+      <Grid xs={12} md={12} px={0} py={1}>
         <AllCategoriesHeader />
         <Typography
           variant='h3'
@@ -55,12 +56,14 @@ const CategoryProducts = () => {
               p: 2,
               fontSize: '22px',
               ml: 0,
+              marginLeft:'0px'
             },
           }}
           p={4}
           fontWeight={'bolder'}
           textAlign={'center'}
-        >
+          
+          >
           All Categories
         </Typography>
         <ShopByCategory />
@@ -74,14 +77,14 @@ const CategoryProducts = () => {
         px={10}
         py={2}
         borderTop={'1px solid gray'}
-        className='d-none d-sm-block'
-      >
+        className='d-none d-sm-block'>
         <Recommendation />
       </Grid>
 
       <Grid item xs={12} className='d-sm-none'>
         <MobileRecommand />
       </Grid>
+   
     </Grid>
   );
 };

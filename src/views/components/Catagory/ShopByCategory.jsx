@@ -15,25 +15,25 @@ const ShopByCategory = () => {
   const BreakPoints = {
     // when window width is >= 320px
     220: {
-      slidesPerView: 2.4,
+      slidesPerView: 2,
     },
     480: {
-      slidesPerView: 3.5,
+      slidesPerView: 2,
     },
     640: {
-      slidesPerView: 3.5,
+      slidesPerView: 4,
     },
 
     900: {
-      slidesPerView: 4.5,
+      slidesPerView: 5,
     },
 
     1200: {
-      slidesPerView: 6.5,
+      slidesPerView: 7,
     },
 
     1400: {
-      slidesPerView: 7.5,
+      slidesPerView: 8,
     },
   };
 
