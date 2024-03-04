@@ -5,6 +5,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { IconButton } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import CloseIcon from '@mui/icons-material/Close';
 
 import Loader from '@common/Spinner/Spinner';
 import OverlayLoader from '@common/LoaderComponent/OverlayLoader';
@@ -138,6 +139,14 @@ const FilterBarlayout2 = ({
     });
   };
 
+  const handleClearFilter = category => {
+    setFiltersInArray(prevArray => {
+      // Filter out filters with the specified category
+      const updatedArray = prevArray.filter(filter => filter.key !== category);
+      return updatedArray;
+    });
+  };
+
   useEffect(() => {
     dispatch(SET_FILTERS_ARRAY(filtersInArray));
   }, [filtersInArray]);
@@ -145,6 +154,8 @@ const FilterBarlayout2 = ({
   useEffect(() => {
     fetchFilters();
   }, []);
+
+  console.print(filtersInArray, 'filtersInArray');
 
   const fetchFilters = async () => {
     try {
@@ -200,7 +211,7 @@ const FilterBarlayout2 = ({
     let optionArray = options.slice(0, visibleEntries[category].visibleEntries);
     return (
       <>
-        <li className='filter-value'>
+        {/* <li className='filter-value'>
           <label className='radio-container' htmlFor={'all-' + category}>
             <input
               id={'all-' + category}
@@ -209,11 +220,9 @@ const FilterBarlayout2 = ({
               value={''} // Add a value attribute to specify the value of the selected radio button
               onChange={event => handleFilterSelect(event, category, '')}
             />
-            <span className='radiomark '></span>{' '}
-            {/* Replace the checkmark with rad  iomark class */}
-            All
+            <span className='radiomark '></span> All
           </label>
-        </li>
+        </li> */}
         {optionArray.map((option, index) => (
           // <li
           //     className="filter-value"
@@ -246,6 +255,9 @@ const FilterBarlayout2 = ({
               <input
                 id={`${option.backend_value}-${index}`}
                 type='checkbox'
+                checked={filtersInArray.some(
+                  item => item.value === option.backend_value,
+                )}
                 name={category} // Add a name attribute to group the radio buttons by category
                 value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
                 onChange={event =>
@@ -361,7 +373,7 @@ const FilterBarlayout2 = ({
   let renderRangeSliders = category => {
     return (
       <ul className='filter-values-list'>
-        <li className='my-2  filter-value'>
+        {/* <li className='my-2  filter-value'>
           <label className='radio-container' htmlFor={category + 'All'}>
             <input
               type='radio'
@@ -376,7 +388,7 @@ const FilterBarlayout2 = ({
             <span className='radiomark '></span>
             All
           </label>
-        </li>
+        </li> */}
         {filters[category]?.least_MB && filters[category]?.highest_MB ? (
           <li className='my-2  filter-value'>
             <label className='radio-container' htmlFor={category + 'MB'}>
@@ -499,6 +511,15 @@ const FilterBarlayout2 = ({
                 width: inDrawer ? '100vw' : '',
               }}>
               {category.replace(/_/g, ' ')}{' '}
+              {filtersInArray?.length > 0 &&
+                filtersInArray.some(filter => filter.key === category) && (
+                  <span
+                    className='filter-clear-btn'
+                    onClick={() => handleClearFilter(category)}>
+                    <CloseIcon fontSize='14px' />
+                    clear
+                  </span>
+                )}
               {inDrawer ? (
                 <span className={`${inDrawer ? 'align-to-end' : ''}`}>
                   <IconButton>
