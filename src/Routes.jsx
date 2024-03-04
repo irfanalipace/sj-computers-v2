@@ -45,13 +45,10 @@ import NotFound from '@pages/NotFound/NotFound';
 
 import Loader from '@common/LoaderComponent/LoaderComponent';
 import PageWrapper from '@components/PageWrapper/PageWrapper';
-const TouchScreenPC = React.lazy(
-  () => import('./views/pages/TouchScreenLaptops/TouchScreenPC'),
-);
-const BudgetFriendlyDesktops = React.lazy(
-  () => import('./views/pages/BudgetFriendlyDesktops/BudgetFriendlyDesktops'),
-);
 
+const ProductCateogoryPage = React.lazy(
+  () => import('./views/pages/ProductCategoryPage/ProductCategoryPage'),
+);
 const AddToCart = React.lazy(() => import('./views/pages/AddToCart/AddToCart'));
 const ProductNewReviews = React.lazy(
   () => import('./views/components/Product/ProductReviews/ProductNewReviews'),
@@ -173,7 +170,12 @@ const Router = () => {
       path: '/budget-friendly-desktops',
       element: (
         <PageWrapper>
-          <BudgetFriendlyDesktops />
+          <ProductCateogoryPage
+            color='linear-gradient(87.71deg, #BB6BED 0%, #74011D 99.77%)'
+            heading='Budget Friendly Desktops Under $250'
+            desc='Our most popular products based on sales. Updated frequently.'
+            pathValue='budget-friendly'
+          />
         </PageWrapper>
       ),
     },
@@ -182,7 +184,12 @@ const Router = () => {
       path: '/touch-screen-laptops',
       element: (
         <PageWrapper>
-          <TouchScreenPC />
+          <ProductCateogoryPage
+            color='linear-gradient(87.71deg, #1799B0 0%, #007185 99.77%)'
+            heading='Touch Screen Laptop'
+            desc='Our most popular products based on sales. Updated frequently.'
+            pathValue='touch-screen'
+          />
         </PageWrapper>
       ),
     },
