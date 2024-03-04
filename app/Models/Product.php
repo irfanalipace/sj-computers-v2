@@ -16,7 +16,7 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
-    protected $appends = ['in_stock', 'rating','total_review'];
+    protected $appends = ['in_stock', 'rating','total_review','is_new_arrival'];
 
     public $timestamps = true;
 
@@ -83,19 +83,25 @@ class Product extends Model
     {
         $productStatistic = ProductStatistic::where('product_id', $this->id)->first() ?? null;
         $productStatistic = (isset($productStatistic->statistics)) ? json_decode($productStatistic->statistics) : 0;
-    
+
         // Check if $productStatistic is an object and contains the rate property
         if (is_object($productStatistic) && property_exists($productStatistic, 'rate')) {
             return $productStatistic->rate->overall_rating;
         } else {
             return 0;
         }
-     
+
     }
 
     public function getTotalReviewAttribute()
     {
         return ProductReview::where('product_id',$this->id)->count() ?? 0;
+    }
+
+    public function getIsNewArrivalAttribute()
+    {
+        $startDate = now()->subDays(15);
+        return $this->created_at >= $startDate;
     }
 
     public function productStats() :BelongsTo
