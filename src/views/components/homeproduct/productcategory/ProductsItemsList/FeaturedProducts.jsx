@@ -67,7 +67,7 @@ const FeaturedProducts = ({
                   )}
                 </div>
                 <div className='see-btn'>
-                  <Link className='section-link' to={'/category'}>
+                  <Link className='section-link' to={category.redirectTo}>
                     {category.link}
                   </Link>
                 </div>
