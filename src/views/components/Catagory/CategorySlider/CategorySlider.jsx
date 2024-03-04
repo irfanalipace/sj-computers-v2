@@ -25,7 +25,7 @@ const CategorySlider = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state?.products.isLoading);
   const products = useSelector(state => state?.products.products);
-  
+
   useEffect(() => {
     getProduct();
   }, [products]);
@@ -49,7 +49,7 @@ const CategorySlider = () => {
   return (
     <div style={{ position: 'relative' }} className='category-slider'>
       <Swiper
-        style={{ marginTop: '20px' }}
+        style={{ marginTop: '20px', padding: '0px 20px' }}
         slidesPerView={7}
         spaceBetween={20}
         pagination={{
