@@ -28,7 +28,9 @@ const CategorySliderCard = ({ product }) => {
       // className=" ms-3 ms-lg-0"
       // border={".5px solid gray"}
       borderRadius={'10px'}
-      height={'285px'}>
+      height={'285px'}
+      // style={{ padding: '24px' }}
+    >
       <Grid
         item
         xs={12}
@@ -53,6 +55,7 @@ const CategorySliderCard = ({ product }) => {
           />
         </Link>
       </Grid>
+
       <Link
         // to={`${new URL(product?.url).pathname}`}
         to={generatePath(product?.url)}
