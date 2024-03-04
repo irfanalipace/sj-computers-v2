@@ -143,12 +143,12 @@ class PayPalController extends Controller
             $orderDetailOutput['Order_date'] = $order['order']['created_at']->format('Y-m-d H:i:s');
             $orderDetailOutput['Delivery_date'] = $orderData['estimate_day']; // Delivery Details
             $orderDetailOutput['Payment_type'] = 'PayPal'; 
-            $orderDetailOutput['payer_id'] = $response['id'];
+            $orderDetailOutput['id'] = $response['id'];
             $orderDetailOutput['Subtotal'] = $orderData['sub_total'];
             $orderDetailOutput['Total'] = $orderData['total_amount'];
 
              // Iterate through each order item to get product details
-             $orderDetailOutput['Items'] = $order['order']['orderItem']->map(function ($item) {
+             $orderDetailOutput['order_item'] = $order['order']['orderItem']->map(function ($item) {
                 return [
                     'Product Name' => $item->product_name,
                     'Quantity' => $item->qty,
