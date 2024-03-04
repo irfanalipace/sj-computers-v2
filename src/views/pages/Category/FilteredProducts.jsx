@@ -36,7 +36,7 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
     redirectedFromPath: `/category/${category?.slug}`,
   };
 
-  useEffect(() => {
+  const viewItemDataLayer = (products, categorySlug) => {
     console.print(
       'view_item_list data layer',
       categorySlug,
@@ -50,6 +50,10 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
       item_list_name: categorySlug,
       items: makeDataLayerItemObject(products),
     });
+  };
+
+  useEffect(() => {
+    viewItemDataLayer(products, categorySlug);
   }, []);
 
   const dispatch = useDispatch();
@@ -82,7 +86,11 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
       filter: filtersArray,
     };
 
-    dispatch(filterProducts(filterObject, true));
+    dispatch(
+      filterProducts(filterObject, true, productAfterShowMore =>
+        viewItemDataLayer(productAfterShowMore, categorySlug),
+      ),
+    );
   };
 
   useEffect(() => {

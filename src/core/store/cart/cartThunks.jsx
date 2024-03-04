@@ -331,7 +331,7 @@ export const removeProtectionPlan =
     }
   };
 
-export const addToLocalCart = (data, cb) => {
+export const addToLocalCart = (data, cb, sync = false) => {
   return async dispatch => {
     addItemToLocalCart(data);
     dispatch({

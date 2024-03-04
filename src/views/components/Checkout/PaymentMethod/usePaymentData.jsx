@@ -50,11 +50,13 @@ function usePaymentData(buyNow = false) {
   };
 
   if (!isAuthenticated) {
+    console.log(cartDetails);
     paymentPayload = {
       ...paymentPayload,
       is_guest: true,
       cart_items: cartData,
       details: {
+        ...cartDetails,
         shipment_amount: cartDetails.shipment_amount || 0,
         estimate_days: cartDetails.estimate_days || 0,
         total_quantity,
@@ -66,7 +68,17 @@ function usePaymentData(buyNow = false) {
       paymentPayload.details.sub_total = buyNowItem?.price;
       paymentPayload.details.total_items = 1;
     } else {
-      paymentPayload.details = cartDetails;
+      paymentPayload = {
+        ...paymentPayload,
+        is_guest: true,
+        cart_items: cartData,
+        details: {
+          ...cartDetails,
+          shipment_amount: cartDetails.shipment_amount || 0,
+          estimate_days: cartDetails.estimate_days || 0,
+          total_quantity,
+        },
+      };
     }
   }
 

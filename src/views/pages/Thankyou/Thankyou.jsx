@@ -10,7 +10,6 @@ import { clearCartLocally } from '../../../core/utils/cartHelpers';
 import { CLEAR_CART } from '@store/cart/cartSlice';
 import { useViewportWidth } from '@hooks/useViewportWidth';
 import MobileThanku from './MobileThanku';
-
 export default function ThankYou() {
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
@@ -21,9 +20,40 @@ export default function ThankYou() {
     return date.toLocaleDateString(undefined, options);
   }
   let orderFromURL = searchParams.get('orderSuccess');
-
   if (orderFromURL) {
     try {
+      let lastClosingBracketIndex = orderFromURL.lastIndexOf('}');
+
+      // If there are any characters after the last '}', it means there's some extra content after the JSON object, remove it
+      if (lastClosingBracketIndex !== orderFromURL.length - 1) {
+        orderFromURL = orderFromURL.slice(0, lastClosingBracketIndex + 1);
+      }
+      debugger;
+
+      // Parse the fixed JSON string
+
+      // Now orderFromURL should be a valid JSON string
+      debugger;
+      orderFromURL += ']';
+      const index = orderFromURL.indexOf('}]');
+      if (index !== -1) {
+        // Insert " before "}}]"
+        orderFromURL =
+          orderFromURL.slice(0, index) + '"' + orderFromURL.slice(index);
+      }
+      // debugger;
+      //
+      const lastIndex = orderFromURL.lastIndexOf(']');
+
+      if (lastIndex !== -1) {
+        // Insert closing curly brace after the last square bracket
+        orderFromURL =
+          orderFromURL.slice(0, lastIndex + 1) +
+          '}' +
+          orderFromURL.slice(lastIndex + 1);
+      }
+      //
+      // debugger;
       orderFromURL = JSON.parse(orderFromURL);
     } catch (error) {
       console.log('error parsing order: ', error);
@@ -39,7 +69,8 @@ export default function ThankYou() {
     const order =
       location?.state?.order?.order_detail ||
       JSON.parse(storedOrder) ||
-      orderFromURL?.order?.order_details;
+      orderFromURL;
+    debugger;
     if (order?.id) {
       const orderString = JSON.stringify(order);
       window.localStorage.setItem('thankyouOrderDetails', orderString);
@@ -53,9 +84,9 @@ export default function ThankYou() {
       window.dataLayer.push({
         event: 'purchase',
         currency: 'USD',
-        value: data.cartItem.price,
+        // value: data.cartItem.price,
         transaction_id: '123',
-        items: makeDataLayerItemObject([{ ...data }]),
+        // items: makeDataLayerItemObject([{ ...data }]),
       });
     } else {
       // navigate('/')
@@ -245,7 +276,7 @@ export default function ThankYou() {
                     <td>{data?.order_id}</td>
                     <td>{formatDate(data.created_at)}</td>
                     <td>{orderDetails?.shipment_days}</td>
-                    <td>{'Square'}</td>
+                    <td>{orderDetails?.Payment_type || 'Square'}</td>
                     <td>${data.price}</td>
                   </tr>
                 ))}

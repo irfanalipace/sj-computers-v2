@@ -4,6 +4,9 @@ const ProductsHomePage = React.lazy(() => import('./ProductsHomePage'));
 import { useViewportWidth } from '@hooks/useViewportWidth';
 import './Home.css';
 import Subscribe from '../../components/Subscribe/Subscribe';
+import VisibleOnScroll, {
+  VisibilityProvider,
+} from '../../components/VisibleOnScroll';
 const RecommandSectionsProducts = React.lazy(
   () =>
     import(
@@ -14,31 +17,31 @@ const RecommandSectionsProducts = React.lazy(
 const Home = () => {
   const screenWidth = useViewportWidth();
   return (
-    <>
+    <VisibilityProvider>
       <div className='homePage'>
         {/* <MobileHomeCategory />*/}
 
         <BannerCategory />
 
         {/* Recommandation Slider */}
-        <div
-          style={{ backgroundColor: 'white', paddingTop: '44px' }}
-          className='d-none d-sm-block'
-        >
+        <VisibleOnScroll id='homePageRecommededSection'>
           <div
-            style={{
-              borderTop: '1px solid #D0D0D0',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '100%',
-            }}
-          >
-            <div style={{ maxWidth: '1500px', width: '100%' }}>
-              <RecommandSectionsProducts />
+            style={{ backgroundColor: 'white', paddingTop: '44px' }}
+            className='d-none d-sm-block'>
+            <div
+              style={{
+                borderTop: '1px solid #D0D0D0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '100%',
+              }}>
+              <div style={{ maxWidth: '1500px', width: '100%' }}>
+                <RecommandSectionsProducts />
+              </div>
             </div>
           </div>
-        </div>
+        </VisibleOnScroll>
         <Suspense>
           {/* {
                         screenWidth < 576 && (
@@ -52,7 +55,7 @@ const Home = () => {
           {screenWidth > 576 && <Subscribe />}
         </Suspense>
       </div>
-    </>
+    </VisibilityProvider>
   );
 };
 
