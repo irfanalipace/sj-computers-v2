@@ -216,6 +216,24 @@
   background-color: lightgray;
   border: 1px solid lightgray;
 }
+
+.filter-heading {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.filter-clear-btn {
+  position: absolute;
+  right: 0;
+  margin: 6px 0px;
+  color: #f2a742;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 585px) {
   /* .layout2-filter-bar {
         width: 0;
