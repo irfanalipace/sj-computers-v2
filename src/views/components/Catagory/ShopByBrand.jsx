@@ -14,14 +14,12 @@ const ShopByBrand = () => {
   return (
     <div
       style={{ marginTop: '10px', marginLeft: '16px' }}
-      className='shop-by-Brand'
-    >
+      className='shop-by-Brand'>
       <Typography
         variant='h4'
         py={2}
         fontWeight={'bolder'}
-        sx={{ '@media (max-width: 575px)': { fontSize: '18px' } }}
-      >
+        sx={{ '@media (max-width: 575px)': { fontSize: '18px' } }}>
         Shop by Brand
       </Typography>
       <Swiper
@@ -30,33 +28,32 @@ const ShopByBrand = () => {
         // spaceBetween={0}
         breakpoints={{
           // when window width is >= 320px
-          320: {
-            slidesPerView: 2.5,
+          220: {
+            slidesPerView: 2,
           },
           480: {
-            slidesPerView: 3.5,
+            slidesPerView: 2,
           },
           640: {
-            slidesPerView: 3.5,
+            slidesPerView: 4,
           },
 
           900: {
-            slidesPerView: 4.5,
+            slidesPerView: 5,
           },
 
           1200: {
-            slidesPerView: 6.5,
+            slidesPerView: 7,
           },
 
           1400: {
-            slidesPerView: 7.5,
+            slidesPerView: 8,
           },
         }}
         navigation={{
           nextEl: '.shop-by-brand .swiper-button-next',
           prevEl: '.shop-by-brand .swiper-button-prev',
-        }}
-      >
+        }}>
         {brandCategory.map((category, index) => (
           <SwiperSlide
             key={index}
@@ -65,8 +62,7 @@ const ShopByBrand = () => {
               alignItems: 'center',
               justifyContent: 'center',
               flexDirection: 'column',
-            }}
-          >
+            }}>
             <Link to={'/category/monitors'}>
               <div
                 style={{
@@ -77,8 +73,7 @@ const ShopByBrand = () => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                }}
-              >
+                }}>
                 <img
                   width={'100px'}
                   src={category.image_url}
