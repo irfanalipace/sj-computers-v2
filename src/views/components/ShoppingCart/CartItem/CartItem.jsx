@@ -18,6 +18,7 @@ import WarrantyBadge from '@components/ShoppingCart/CartItem/WarrantyBadge';
 import { generatePath } from '../../../../core/utils/helpers';
 import './CartItem.css';
 import { Link } from 'react-router-dom';
+import ShareLinkModal from './ShareLinkModal';
 
 export const CartItem = memo(({ cartData }) => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -25,6 +26,7 @@ export const CartItem = memo(({ cartData }) => {
   const cart_id = cartData?.id;
   const [updatingItem, setUpdatingItem] = useState(false);
   const [localCartData, setLocalCartData] = useState(cartData);
+  const [shareModal, setShareModal] = useState(false);
   const dispatch = useDispatch();
   const [loadingWarranty, setLoadingWarranty] = useState(false);
 
@@ -289,7 +291,8 @@ export const CartItem = memo(({ cartData }) => {
                         </button>
                         <button
                           className='cart-bttn hide-on-mobile'
-                          disabled={updatingItem}>
+                          disabled={updatingItem}
+                          onClick={() => setShareModal(true)}>
                           {updatingItem ? <Loader /> : 'Share'}
                         </button>
                       </div>
@@ -301,6 +304,13 @@ export const CartItem = memo(({ cartData }) => {
           </div>
         </div>
       </div>
+
+      <>
+        <ShareLinkModal
+          open={shareModal}
+          onClose={() => setShareModal(false)}
+        />
+      </>
       {cartData?.error && (
         <p className='fs-6 mt-3 text-danger'>{cartData?.error}</p>
       )}
