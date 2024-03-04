@@ -234,7 +234,7 @@ export function extractJsonObjectFromError(inputString) {
 }
 
 export const makeDataLayerItemObject = itemArray => {
-  const shapedItemArray = itemArray.map((item, index) => {
+  const shapedItemArray = itemArray?.map((item, index) => {
     const ShpaedItem = {
       item_id: item?.id || item?.product?.id || item?.cartItem?.id,
       item_name:

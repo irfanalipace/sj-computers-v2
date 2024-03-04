@@ -30,7 +30,7 @@ export const fetchProducts = (page = 1, loadMore = false, per_page = 12) => {
   };
 };
 
-export const filterProducts = (filter, loadMore = false) => {
+export const filterProducts = (filter, loadMore = false, cb) => {
   return async dispatch => {
     try {
       if (loadMore) dispatch({ type: SET_IS_SHOW_MORE, payload: {} });
@@ -50,6 +50,7 @@ export const filterProducts = (filter, loadMore = false) => {
             to: response?.data?.to,
           },
         });
+        if (typeof cb === 'function') cb(response?.data?.data);
       } else {
         dispatch({ type: API_ERROR, payload: {} });
       }

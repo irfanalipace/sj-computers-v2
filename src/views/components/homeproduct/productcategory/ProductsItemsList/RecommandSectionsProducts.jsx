@@ -6,7 +6,7 @@ const RecommandSectionsProducts = () => {
       <div className='row mx-0'>
         <div className='col-12 col-sm-12 col-lg-12'>
           <div className='product-type-section-selleing-products'>
-            <Recommendation />
+            <Recommendation dataLayer={true} />
           </div>
         </div>
       </div>
