@@ -181,6 +181,20 @@ const Router = () => {
     },
 
     {
+      path: '/top-rated-products',
+      element: (
+        <PageWrapper>
+          <ProductCateogoryPage
+            color='linear-gradient(88.57deg, #FB8519 1.22%, #D75A00 98.78%)'
+            heading='SJ Computers Top Rating'
+            desc='Our most popular products based on sales. Updated frequently'
+            pathValue='top-rated-product'
+          />
+        </PageWrapper>
+      ),
+    },
+
+    {
       path: '/touch-screen-laptops',
       element: (
         <PageWrapper>
