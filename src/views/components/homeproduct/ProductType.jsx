@@ -145,7 +145,7 @@ const ProductType = () => {
       link: 'See all',
     },
     {
-      name: 'Gaming Desktop',
+      name: 'Gaming Desktops',
       link: 'Shop Now',
     },
     {
@@ -157,12 +157,12 @@ const ProductType = () => {
     {
       image: LaptopImgUpdate,
       categoryLink: '/category/laptops',
-      categoryName: 'Laptop',
+      categoryName: 'Laptops',
     },
     {
       image: DesktopImgUpdate,
       categoryLink: '/category/desktop',
-      categoryName: 'Desktop',
+      categoryName: 'Desktops',
     },
     {
       image: twoInOneImgUpdate,
