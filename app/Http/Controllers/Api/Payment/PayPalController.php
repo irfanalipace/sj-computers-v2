@@ -139,20 +139,20 @@ class PayPalController extends Controller
             $orderData['order_detail'] = $order['order'];
             $orderData['payer_id'] = $response['id'];
 
-            $orderDetailOutput['Order_no'] = $order['order']['id'];
-            $orderDetailOutput['Order_date'] = $order['order']['created_at']->format('Y-m-d H:i:s');
-            $orderDetailOutput['Delivery_date'] = $orderData['estimate_day']; // Delivery Details
-            $orderDetailOutput['Payment_type'] = 'PayPal'; 
+            $orderDetailOutput['order_no'] = $order['order']['id'];
+            $orderDetailOutput['order_date'] = $order['order']['created_at']->format('Y-m-d H:i:s');
+            $orderDetailOutput['delivery_date'] = $orderData['estimate_day']; // Delivery Details
+            $orderDetailOutput['payment_type'] = 'PayPal'; 
             $orderDetailOutput['id'] = $response['id'];
-            $orderDetailOutput['Subtotal'] = $orderData['sub_total'];
-            $orderDetailOutput['Total'] = $orderData['total_amount'];
+            $orderDetailOutput['subtotal'] = $orderData['sub_total'];
+            $orderDetailOutput['total'] = $orderData['total_amount'];
 
              // Iterate through each order item to get product details
              $orderDetailOutput['order_item'] = $order['order']['orderItem']->map(function ($item) {
                 return [
-                    'Product Name' => $item->product_name,
-                    'Quantity' => $item->qty,
-                    'Price' => $item->price
+                    'product_name' => $item->product_name,
+                    'qty' => $item->qty,
+                    'price' => $item->price
                 ];
             });
            
