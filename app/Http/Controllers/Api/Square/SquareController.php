@@ -134,7 +134,7 @@ class SquareController extends BaseController
                 // update invoice column payer_id
                 Invoice::where('id', $order['invoice_id'])->update(['payer_id' => $api_response->getResult()->getPayment()->getId()]);
                 //sending invoice email of the payment to user
-                GenerateInvoiceJob::dispatch($this->user, $orderData, $order);
+                GenerateInvoiceJob::dispatch($user, $orderData, $order);
 
                 //clear cart after successfull payment
                 (isset($request->is_buy_now ) && $request->is_buy_now == true) ? \Cart::session($userIdToPass)->remove($request->cart_id): Cart::session($userIdToPass)->clear();
