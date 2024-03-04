@@ -77,13 +77,13 @@ export const PLAN_ENUM = {
     value: 1,
     label: '3-Year Warranty',
     price: 23.99,
-    durationInYears: 3,
+    durationInYears: 2,
   },
   FOUR_YEAR: {
     value: 2,
     label: '4-Year Warranty',
     price: 32.99,
-    durationInYears: 4,
+    durationInYears: 3,
   },
   // DEFAULT: {
   //     value: 3,
