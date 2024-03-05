@@ -17,25 +17,25 @@ class ProtectivePlanSeeder extends Seeder
         ProtectivePlan::insert([
             [
                 'key' => 'years',
-                'value' => '3',
+                'value' => '2',
                 'price' => '23.99',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'key' => 'years',
-                'value' => '4',
+                'value' => '3',
                 'price' => '32.99',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
-            [
-                'key' => 'unlimited',
-                'value' => '0',
-                'price' => '16.99',
-                'created_at' => now(),
-                'updated_at' => now()
-            ]
+//            [
+//                'key' => 'unlimited',
+//                'value' => '0',
+//                'price' => '16.99',
+//                'created_at' => now(),
+//                'updated_at' => now()
+//            ]
         ]);
     }
 }
