@@ -24,7 +24,7 @@ class ProductCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'category' => 'required|in:budget-friendly,workstation,professional-laptop,touch-screen,top-rated-product',
+            'category' => 'required|in:budget-friendly,workstation,professional-laptop,touch-screen,top-rated-product,best-sellers',
             'per_page' => 'nullable|gt:0',
             'filter' => 'nullable|array',
         ];
