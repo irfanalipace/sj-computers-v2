@@ -14,6 +14,7 @@ use App\Models\Product;
 use App\Models\Product\ProtectivePlan;
 use App\Models\ProductInfo;
 use App\Models\ProductMedia;
+use App\Models\ProductReview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -447,6 +448,7 @@ class ProductController extends BaseController
             'professional-laptop' => 'getProfessionalLaptops',
             'touch-screen' => 'getTouchScreenLaptops',
             'top-rated-product' => 'getTopRatedProducts',
+            'best-sellers' => 'getBestSellerProducts'
         ];
 
         return $methodMapping[$category] ?? null;
@@ -493,4 +495,16 @@ class ProductController extends BaseController
         ->inRandomOrder();
     }
 
+    protected function getBestSellerProducts()
+    {
+            // First, get the product IDs with an average rating above 4.7
+        $ratedProductIds = ProductReview::select('product_id')
+        ->groupBy('product_id')
+        ->havingRaw('AVG(rating) > 4.7')
+        ->pluck('product_id');
+        return Product::whereIn('id', $ratedProductIds)
+        ->whereHas('orderItems', function ($query) {
+            $query->whereHas('order'); 
+        });
+    }
 }
