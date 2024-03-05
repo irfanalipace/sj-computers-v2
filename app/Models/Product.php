@@ -108,6 +108,11 @@ class Product extends Model
     {
         return $this->belongsTo(ProductStatistic::class);
     }
+
+    public function productInfo() : HasMany
+    {
+        return $this->hasMany(ProductInfo::class);
+    }
     /**
      * @return void
      */

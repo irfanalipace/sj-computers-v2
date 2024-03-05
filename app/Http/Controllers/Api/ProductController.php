@@ -94,19 +94,21 @@ class ProductController extends BaseController
 
             return $this->sendResponse($data, 'All product displayed that are above 100 in quantity');
     }
-    public function getProductFilterList()
+    public function getProductFilterList(Request $request)
     {
         $data = [];
 
         $data['processor'] = $this->queryProductInfo('processor');
         $data['ram_memory'] = $this->queryProductInfo('ram_memory');
-        //        $data['operating_system'] = $this->queryProductInfo('operating_system');
-        $data['operating_system'] = [];
+        $data['operating_system'] = $this->queryProductInfo('operating_system');
+        // $data['operating_system'] = [];
         $data['hard_disk'] = $this->queryProductInfo('hard_disk');
-        //        $data['graphic'] = $this->queryProductInfo('graphic');
-        $data['graphic'] = [];
+        $data['graphic'] = $this->queryProductInfo('graphic');
+        // $data['graphic'] = [];
         $data['brand'] = $this->queryProductInfo('brand');
         
+        $data['price'] = $this->queryProductInfo('price');
+
         return $this->sendResponse($data);
     }
 
@@ -127,10 +129,20 @@ class ProductController extends BaseController
 
             return $listArr;
         }
-
+        if($key == 'price'){
+            return $this->getPrices();
+        }
         return ProductInfo::select('value')->where('key', $key)->groupby('value')->distinct()->get();
     }
 
+    protected function getPrices()
+    {
+        $product = Product::query();
+        $data['min_price'] = $product->min('price');
+        $data['max_price'] = $product->max('price');
+
+        return $data;
+    }
 
     public function getLeastHighestValue($key, $unit)
     {
@@ -217,7 +229,6 @@ class ProductController extends BaseController
                         $sql = $sql->whereIn('id', $productIds);
                     }
                 }
-
 
             }
 
@@ -360,6 +371,9 @@ class ProductController extends BaseController
             }
 
             $query = $this->$methodName();
+             // Apply dynamic filters for price and review.
+            $query = $this->applyFilters($query, $request->input('filter', []));
+
             $products = $query->paginate($request->per_page ?? 10);
 
             return $this->sendResponse($products, 'Successfully fetched ' . $request->category . ' data');
@@ -367,6 +381,63 @@ class ProductController extends BaseController
             return $this->sendError('error', 'Something went wrong ' . $e->getMessage());
         }
     }
+
+    protected function applyFilters($query, array $filters)
+    {
+        // Apply price filter
+        if (isset($filters['price'])) {
+            $priceFilter = $filters['price'];
+           
+            $query->whereBetween('price', [$priceFilter['min'], $priceFilter['max']]);          
+        }
+
+        // Apply review filter
+        if (isset($filters['review'])) {
+            $reviewFilter = $filters['review'];
+            $query->whereHas('productReview', function ($query) use ($reviewFilter) {
+                $query->whereBetween('rating', [$reviewFilter['min'], $reviewFilter['max']]);
+            });
+        }
+
+        // Apply brand filter
+        if(isset($filters['brand']) && !empty($filters['brand']['brand_name'])){
+            $brandFilter = $filters['brand']['brand_name'];
+           
+            $query->whereHas('brand', function ($query) use ($brandFilter) {
+                $query->whereIn('name', $brandFilter);
+            }); 
+        }
+
+        // Apply OS filter
+         if(isset($filters['operating_system']) && !empty($filters['operating_system']['os_name'])){
+            $operatingSystemFilter = $filters['operating_system']['os_name'];
+           
+            $query->whereHas('productInfo', function ($query) use ($operatingSystemFilter) {
+                $query->where('key','operating_system')->whereIn('value', $operatingSystemFilter);
+            }); 
+        }
+
+        // Apply Internal memory filter
+        if(isset($filters['internal_memory']) && !empty($filters['internal_memory']['internal_memory_value'])){
+            $internalMemoryFilter = $filters['internal_memory']['internal_memory_value'];
+           
+            $query->whereHas('productInfo', function ($query) use ($internalMemoryFilter) {
+                $query->where('key','hard_disk')->whereIn('value', $internalMemoryFilter);
+            }); 
+           
+        }
+
+        // Apply RAM filter
+         if(isset($filters['ram']) && !empty($filters['ram']['ram_value'])){
+            $ramFilter = $filters['ram']['ram_value'];
+           
+            $query->whereHas('productInfo', function ($query) use ($ramFilter) {
+                $query->where('key','ram_memory')->whereIn('value', $ramFilter);
+            }); 
+        }
+
+        return $query;
+}
 
     protected function getMethodNameFromCategory($category)
     {
