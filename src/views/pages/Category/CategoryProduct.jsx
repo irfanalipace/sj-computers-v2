@@ -18,10 +18,9 @@ import CategoryFilterbarMobile from '../../components/Catagory/CategoryFiterbarM
 
 const CategoryProducts = () => {
   return (
-    <Grid container padding={{padding:'23px'}}>
-   
-        {/* Header */}
-        <Grid item xs={12}>
+    <Grid container>
+      {/* Header */}
+      <Grid item xs={12}>
         <CategoriesHeader />
       </Grid>
 
@@ -49,21 +48,19 @@ const CategoryProducts = () => {
           variant='h3'
           mb={2}
           sx={{
-            ml: '16px',
+            // ml: '16px',
             background:
               'linear-gradient(88.41deg, rgba(59, 108, 155, 0.85) 0.37%, #789FC5 98.64%)',
             '@media (max-width: 575px)': {
               p: 2,
               fontSize: '22px',
               ml: 0,
-              marginLeft:'0px'
+              marginLeft: '0px',
             },
           }}
           p={4}
           fontWeight={'bolder'}
-          textAlign={'center'}
-          
-          >
+          textAlign={'center'}>
           All Categories
         </Typography>
         <ShopByCategory />
@@ -84,7 +81,6 @@ const CategoryProducts = () => {
       <Grid item xs={12} className='d-sm-none'>
         <MobileRecommand />
       </Grid>
-   
     </Grid>
   );
 };

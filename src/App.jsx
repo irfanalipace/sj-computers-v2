@@ -12,6 +12,7 @@ import './App.css';
 
 import ScrollToTop from '@components/ScrollToTop/ScrollToTop';
 import AppWrapper from '@components/AppWrapper/AppWrapper';
+import FullScreenWrapper from './views/components/FullScreenWrapper/FullScreenWrapper';
 
 function App() {
   const [tawkComponent, setTawkComponent] = useState(<></>);
@@ -49,9 +50,11 @@ function App() {
           <Suspense>
             <Header />
           </Suspense>
-          <div className='inner-body'>
-            <Router />
-          </div>
+          <FullScreenWrapper>
+            <div className='inner-body'>
+              <Router />
+            </div>
+          </FullScreenWrapper>
           <Suspense>
             <Footer />
           </Suspense>
