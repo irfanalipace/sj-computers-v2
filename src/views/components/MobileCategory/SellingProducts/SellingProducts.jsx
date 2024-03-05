@@ -40,7 +40,19 @@ const SellingProducts = ({ topRatedProduct }) => {
           <SwiperSlide>
             <div className='px-1'>
               <Link to={`/${name}/dp/${asin}`}>
-                <img src={image[0]} alt={`Image ${index + 1}`} />
+                <div
+                  style={{
+                    height: '133px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <img
+                    style={{ maxHeight: '100%', maxWidth: '90%' }}
+                    src={image[0]}
+                    alt={`Image ${index + 1}`}
+                  />
+                </div>
               </Link>
             </div>
           </SwiperSlide>

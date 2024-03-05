@@ -84,8 +84,8 @@
   font-size: 18px;
 }
 .product-type-section-selleing-products img {
-  width: 100%;
-  height: auto;
+  /* width: 100%; */
+  /* height: auto; */
 }
 
 .product-type-section-selleing-products h3 {
