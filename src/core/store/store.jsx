@@ -9,6 +9,7 @@ import cartReducer from '@store/cart/cartSlice';
 import ordersReducer from '@store/orders/ordersSlice';
 import toggleReducer from '@store/toggle/toggleSlice';
 import reviewSlice from '@store/review/reviewSlice';
+import protectionPlanSlice from '@store/protectionPlan';
 
 const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
     // Add additional reducers for other features here
     toggle: toggleReducer,
     review: reviewSlice,
+    protectionPlan: protectionPlanSlice,
   },
   middleware: [thunkMiddleware],
 });

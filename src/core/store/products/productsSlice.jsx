@@ -61,7 +61,6 @@ const productSlice = createSlice({
     },
 
     FILTER_PRODUCTS: (state, action) => {
-      // debugger
       state.filterTotal = action.payload.total;
       state.filterTo = action.payload.to;
       if (state.currentPage === 1)

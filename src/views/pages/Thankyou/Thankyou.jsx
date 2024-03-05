@@ -28,12 +28,10 @@ export default function ThankYou() {
       if (lastClosingBracketIndex !== orderFromURL.length - 1) {
         orderFromURL = orderFromURL.slice(0, lastClosingBracketIndex + 1);
       }
-      debugger;
 
       // Parse the fixed JSON string
 
       // Now orderFromURL should be a valid JSON string
-      debugger;
       orderFromURL += ']';
       const index = orderFromURL.indexOf('}]');
       if (index !== -1) {
@@ -41,8 +39,6 @@ export default function ThankYou() {
         orderFromURL =
           orderFromURL.slice(0, index) + '"' + orderFromURL.slice(index);
       }
-      // debugger;
-      //
       const lastIndex = orderFromURL.lastIndexOf(']');
 
       if (lastIndex !== -1) {
@@ -52,8 +48,6 @@ export default function ThankYou() {
           '}' +
           orderFromURL.slice(lastIndex + 1);
       }
-      //
-      // debugger;
       orderFromURL = JSON.parse(orderFromURL);
     } catch (error) {
       console.log('error parsing order: ', error);
@@ -70,7 +64,6 @@ export default function ThankYou() {
       location?.state?.order?.order_detail ||
       JSON.parse(storedOrder) ||
       orderFromURL;
-    debugger;
     if (order?.id) {
       const orderString = JSON.stringify(order);
       window.localStorage.setItem('thankyouOrderDetails', orderString);

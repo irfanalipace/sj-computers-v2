@@ -101,12 +101,10 @@ export function filterProductsApi(filter) {
 }
 
 export function getProductsCategory(filter) {
-  debugger;
   filter.filter = filter?.filter?.map(fil => JSON.stringify(fil));
   return new Promise((resolve, reject) => {
     ApiService.get(`/get-products-category`, '', filter)
       .then(response => {
-        debugger;
         console.print(
           'file: products.js | filterProductsApi| response',
           response,
@@ -114,7 +112,6 @@ export function getProductsCategory(filter) {
         resolve(response);
       })
       .catch(e => {
-        debugger;
         console.print('Console Log: : error filterProductsApi', e);
         reject(e);
       });

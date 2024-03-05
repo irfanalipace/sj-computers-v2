@@ -57,11 +57,10 @@ export const addToCart = (data, cb) => {
       let param = {
         product_id: data?.cartItem?.id,
         qty: data.cartItem.quantity,
-        protective_plan_id: data?.cartItem?.plan?.value,
+        protective_plan_id: data?.cartItem?.plan?.id,
       };
 
       let response = await addToCartApi(param);
-      debugger;
       data.cartDetails = { ...response.details };
       data.cartItem.notLocal = true; //this property identifies that this cart item is also present in database so we know that which items in our local storage are also stored in database to manage deletion of cart items
       dispatch({
