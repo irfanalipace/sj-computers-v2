@@ -95,7 +95,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
           onClick={() => {
             setType('buynow');
           }}
-          // disabled={productAddingToCard}
+          disabled={productAddingToCard}
           className={'button1 button-text-button'}
           style={{ background: '#00305E' }}>
           {loading ? <CircularProgress /> : 'Buy Now'}

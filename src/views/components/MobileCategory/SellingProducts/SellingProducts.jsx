@@ -4,6 +4,7 @@ import './SellingProducts.css';
 
 import SwiperCore, { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Link } from 'react-router-dom';
 
 SwiperCore.use([Navigation]);
 const SellingProducts = ({ topRatedProduct }) => {
@@ -34,11 +35,13 @@ const SellingProducts = ({ topRatedProduct }) => {
           },
         }}
         navigation
-        className='hp-slider-1 recommendation-slider recommund-dev-slider-sections-opps'>
-        {topRatedProduct?.map(({ image }, index) => (
+        className='hp-slider-1 px-5 recommendation-slider recommund-dev-slider-sections-opps'>
+        {topRatedProduct?.map(({ name, image, asin }, index) => (
           <SwiperSlide>
             <div className='px-1'>
-              <img src={image[0]} alt={`Image ${index + 1}`} />
+              <Link to={`/${name}/dp/${asin}`}>
+                <img src={image[0]} alt={`Image ${index + 1}`} />
+              </Link>
             </div>
           </SwiperSlide>
         ))}
