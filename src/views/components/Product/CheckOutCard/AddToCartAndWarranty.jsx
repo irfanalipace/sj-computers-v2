@@ -4,7 +4,6 @@ import ProtectionPopup from '../ProtectionPlan/ProtectionPopup';
 import { useNavigate } from 'react-router-dom';
 import { QuantityInput } from '@common/QuantityInput/QuantityInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { PLAN_ENUM } from '@utils/constants';
 import { CircularProgress, Drawer, Stack } from '@mui/material';
 import ProtectionPlanDrawer from '../ProtectionPlan/ProtectionPlanDrawer';
 import useAddToCart from './useAddToCart';
@@ -27,6 +26,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
   const [type, setType] = useState('');
   const cartClickHandler = useAddToCart(product, quantity);
   const params = useParams();
+  const protectionPlanStore = useSelector(state => state.protectionPlan);
 
   useEffect(() => {
     if (type === 'buynow') {
@@ -241,7 +241,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
       <div className='protection-plan hidden-on-mobile'>
         Add a Warranty Plan :
         <>
-          {Object.values(PLAN_ENUM).map(_plan => (
+          {protectionPlanStore?.plans?.map(_plan => (
             <div key={_plan.value} className='check-box-container'>
               <input
                 type='checkbox'
@@ -259,7 +259,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
                 onClick={() => {
                   setOpenPlan(_plan);
                 }}>
-                {_plan.label} for
+                {`${_plan.value} - Year Warranty for`}
                 <span style={{ color: 'red' }}> ${_plan.price}/Month</span>
               </label>
             </div>

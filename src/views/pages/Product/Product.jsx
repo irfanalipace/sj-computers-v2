@@ -26,7 +26,7 @@ import useSimilarData from './useSimilarProduct';
 import Breadcrumb from '@common/Breadrumb/Breadcrumb';
 import { useSearchParams } from 'react-router-dom';
 import { CLEAR_REVIEW } from '../../../core/store/review/reviewSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   generatePath,
   makeDataLayerItemObject,
@@ -34,6 +34,8 @@ import {
 import { useLocation } from 'react-router-dom';
 import ProductDetailsMobile from '../../components/Product/ProductDetails/ProductDetialsMobile';
 import PageContainer from '../../components/PageContainer/PageContainer';
+import { fetchProtectionPlan } from '../../../core/api/plan';
+import { SET_PROTECTION_PLAN } from '../../../core/store/protectionPlan';
 
 export default function Product() {
   const dispatch = useDispatch();
@@ -45,6 +47,7 @@ export default function Product() {
   const [searchParams] = useSearchParams();
 
   const { isLoading, product } = useProductData();
+  const protectionPlanStore = useSelector(state => state.protectionPlan);
 
   const breadcrumbRoutes = [
     {
@@ -63,6 +66,8 @@ export default function Product() {
   }, [location?.pathname]);
 
   useEffect(() => {
+    console.log(protectionPlanStore);
+    if (!protectionPlanStore?.plans?.length) getProtectionPlans();
     return () => {
       dispatch(CLEAR_REVIEW());
     };
@@ -88,6 +93,11 @@ export default function Product() {
       items: makeDataLayerItemObject([{ ...product }]),
     });
   }, [product]);
+
+  const getProtectionPlans = async () => {
+    const res = await fetchProtectionPlan();
+    dispatch(SET_PROTECTION_PLAN({ plans: res?.data }));
+  };
 
   return (
     <PageContainer>
