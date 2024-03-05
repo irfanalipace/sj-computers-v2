@@ -170,9 +170,11 @@ class PayPalController extends Controller
 
             // Convert to JSON if necessary for API response
             $jsonResponse = json_encode($orderDetailOutput);
+          
+            \Cache::forget("paypal_transaction_".$request->token);
             
             return redirect()->to('thank-you?orderSuccess='.$jsonResponse);
-            \Cache::forget("paypal_transaction_".$request->token);
+            
 
         } else {
             DB::rollBack();
