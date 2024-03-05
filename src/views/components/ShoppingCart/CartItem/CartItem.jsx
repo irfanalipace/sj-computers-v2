@@ -309,6 +309,7 @@ export const CartItem = memo(({ cartData }) => {
         <ShareLinkModal
           open={shareModal}
           onClose={() => setShareModal(false)}
+          itemLink={cartData}
         />
       </>
       {cartData?.error && (

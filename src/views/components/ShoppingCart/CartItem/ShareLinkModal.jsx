@@ -14,17 +14,18 @@ import facebook from '@images/facebook.png';
 import pinterest from '@images/pinterest.png';
 import mail from '@images/mail.png';
 
-const ShareLinkModal = ({ open, onClose }) => {
+const ShareLinkModal = ({ open, onClose, itemLink }) => {
   const [isCopySuccess, setIsCopySuccess] = useState(false);
+  const [value, setValue] = useState(itemLink?.product?.url);
 
   const iconsArr = [
-    { img: mail },
-    { img: pinterest },
-    { img: facebook },
-    { img: twitter },
+    { img: mail, link: 'mailto:' },
+    { img: pinterest, link: 'https://www.pinterest.com/login/' },
+    { img: facebook, link: 'https://www.facebook.com/' },
+    { img: twitter, link: 'https://twitter.com' },
   ];
 
-  const inputRef = useRef(null);
+  const inputRef = useRef(itemLink?.product?.url);
 
   const handleCopyClick = () => {
     inputRef.current.select();
@@ -35,6 +36,10 @@ const ShareLinkModal = ({ open, onClose }) => {
     setTimeout(() => {
       setIsCopySuccess(false);
     }, 2000);
+  };
+
+  const handleIconClick = iconLink => {
+    window.open(iconLink, '_blank');
   };
 
   return (
@@ -84,17 +89,18 @@ const ShareLinkModal = ({ open, onClose }) => {
                     justifyContent: 'center',
                   }}
                   p={2}
-                  m={1}>
+                  mx={1.25}
+                  onClick={() => handleIconClick(row.link)}>
                   <img src={row?.img} />
                 </Box>
               ))}
             </Grid>
           </Box>
-          <Box p={2}>
+          <Box p={3}>
             <OutlinedInput
               fullWidth
-              disabled
               inputRef={inputRef}
+              value={value}
               endAdornment={
                 <InputAdornment position='end'>
                   <button style={copyBtn} onClick={() => handleCopyClick()}>
