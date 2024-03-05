@@ -394,18 +394,16 @@ const FilterBarlayout2 = ({
             <li className='filter-value'>
               <label className='radio-container' htmlFor={`64GB`}>
                 <input
-                  id={`64GB`}
+                  id={`4GB`}
                   type='checkbox'
-                  checked={filtersInArray.some(item => item.value === '64GB')}
+                  checked={filtersInArray.some(item => item.value === '4GB')}
                   name={category} // Add a name attribute to group the radio buttons by category
                   // value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
-                  onChange={event =>
-                    handleFilterSelect(event, category, '64GB')
-                  }
+                  onChange={event => handleFilterSelect(event, category, '4GB')}
                 />
                 <span className='radiomark '></span>{' '}
                 {/* Replace the checkmark with radiomark class */}
-                {/* {option.value} */}64 GB
+                {/* {option.value} */}4 GB
               </label>
             </li>
             <li className='filter-value'>
@@ -445,7 +443,7 @@ const FilterBarlayout2 = ({
 
         {category == 'hard_disk' ? (
           <>
-            <li className='filter-value' key={`64GB`}>
+            <li className='filter-value'>
               <label className='radio-container' htmlFor={`64GB`}>
                 <input
                   id={`64GB`}
@@ -462,7 +460,7 @@ const FilterBarlayout2 = ({
                 {/* {option.value} */}64 GB
               </label>
             </li>
-            <li className='filter-value' key={`128GB`}>
+            <li className='filter-value'>
               <label className='radio-container' htmlFor={`128GB`}>
                 <input
                   id={`128GB`}
@@ -479,7 +477,7 @@ const FilterBarlayout2 = ({
                 {/* {option.value} */}128 GB
               </label>
             </li>
-            <li className='filter-value' key={`256GB`}>
+            <li className='filter-value'>
               <label className='radio-container' htmlFor={`256GB`}>
                 <input
                   id={`256GB`}
@@ -496,7 +494,7 @@ const FilterBarlayout2 = ({
                 {/* {option.value} */}256 GB
               </label>
             </li>
-            <li className='filter-value' key={`512GB`}>
+            <li className='filter-value'>
               <label className='radio-container' htmlFor={`512GB`}>
                 <input
                   id={`512GB`}
@@ -513,7 +511,7 @@ const FilterBarlayout2 = ({
                 {/* {option.value} */}512 GB
               </label>
             </li>
-            <li className='filter-value' key={`512GB`}>
+            <li className='filter-value'>
               <label className='radio-container' htmlFor={`1TB`}>
                 <input
                   id={`1TB`}
@@ -597,6 +595,57 @@ const FilterBarlayout2 = ({
     );
   };
 
+  const renderGpu = category => {
+    return (
+      <>
+        {category?.data.map((data, index) => (
+          <li key={`data + ${index}`} className='filter-value'>
+            <label className='radio-container' htmlFor={data}>
+              <input
+                id={data}
+                type='checkbox'
+                checked={filtersInArray.some(item => item.value === data)}
+                name={'gpu'} // Add a name attribute to group the radio buttons by category
+                // value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
+                onChange={event => handleFilterSelect('', category.name, data)}
+              />
+              <span className='radiomark '></span>{' '}
+              {/* Replace the checkmark with radiomark class */}
+              {/* {option.value} */}
+              {data}
+            </label>
+          </li>
+        ))}
+      </>
+    );
+  };
+
+  const renderTrending = category => {
+    return (
+      <>
+        {category?.data?.map((data, index) => (
+          <li
+            key={`data + ${index}`}
+            className='filter-value'
+            style={{ padding: '2px 0px' }}>
+            {data}
+          </li>
+        ))}
+      </>
+    );
+  };
+
+  let GpuAndTrendingData = [
+    {
+      name: 'GPU',
+      data: ['Nvidia', 'AMD'],
+    },
+    {
+      name: 'Trending',
+      data: ['Best Sellers', 'New Arrivals', 'Featured Products'],
+    },
+  ];
+
   let renderedCategories = Object.entries(filters).map(
     ([category, options], index) => (
       <div key={index}>
@@ -658,6 +707,62 @@ const FilterBarlayout2 = ({
     ),
   );
 
+  const renderCategoriesGpuAndTrending = GpuAndTrendingData?.map(
+    (category, index) => (
+      <li
+        className='filter-key'
+        style={{
+          borderBottom: inDrawer ? '1px solid #DDDDDD' : '',
+        }}>
+        <h3
+          onClick={() => DataInDrawerToggler(index + 10)}
+          className={`filter-heading ${inDrawer ? 'alignment-container' : ''}`}
+          style={{
+            margin: inDrawer ? '0px' : '',
+            padding: inDrawer ? '16px' : '',
+            width: inDrawer ? '100vw' : '',
+          }}>
+          {/* {category.replace(/_/g, ' ')}{' '} */}
+          {category.name}
+          {filtersInArray?.length > 0 &&
+            filtersInArray.some(filter => filter.key === category.name) && (
+              <span
+                className='filter-clear-btn'
+                onClick={() => handleClearFilter(category.name)}>
+                <CloseIcon fontSize='14px' />
+                clear
+              </span>
+            )}
+          {inDrawer ? (
+            <span className={`${inDrawer ? 'align-to-end' : ''}`}>
+              <IconButton>
+                {DataInDrawer[index + 10] ? (
+                  <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
+                ) : (
+                  <KeyboardArrowDownIcon />
+                )}{' '}
+              </IconButton>
+            </span>
+          ) : (
+            ''
+          )}
+        </h3>
+        {(DataInDrawer[index + 10] || !inDrawer) && (
+          <ul
+            className='filter-values-list'
+            style={{
+              padding: inDrawer ? '0px 20px' : '',
+              marginLeft: inDrawer ? '16px' : '',
+            }}>
+            {category.name === 'GPU'
+              ? renderGpu(category)
+              : renderTrending(category)}
+          </ul>
+        )}
+      </li>
+    ),
+  );
+
   return (
     <div className='position-relative h-100'>
       <div>
@@ -671,9 +776,12 @@ const FilterBarlayout2 = ({
             margin: inDrawer ? '0px' : '',
           }}>
           {renderedCategories}
+
+          {/* Below Categories is for Gpu and trnding */}
+          {renderCategoriesGpuAndTrending}
           {/* <li className="filter-value">
-                        <button onClick={handleShowMoreCategory}>
-                            <span className="me-2">Show More</span>
+          <button onClick={handleShowMoreCategory}>
+          <span className="me-2">Show More</span>
                             <FontAwesomeIcon icon={faAngleDown} />
                         </button>
                     </li> */}
