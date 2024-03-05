@@ -20,27 +20,29 @@ const SellingPro = ({ images }) => {
   }, []);
   return (
     <div>
-      <div className='row mx-0'>
-        <div className='col-12 col-sm-12 col-lg-12'>
-          <div className='product-type-section-selleing-products'>
-            <div className='d-flex'>
-              <h4>Top Rating Products</h4>
-              <Link
-                className='mt-1 text-decoration-none'
-                to='top-rated-products'
-                style={{
-                  marginLeft: '20px',
-                  fontSize: '12px',
-                  color: '#007185',
-                }}>
-                {' '}
-                See all
-              </Link>
+      {topRatedProduct?.length && (
+        <div className='row mx-0'>
+          <div className='col-12 col-sm-12 col-lg-12'>
+            <div className='product-type-section-selleing-products'>
+              <div className='d-flex'>
+                <h4>Top Rating Products</h4>
+                <Link
+                  className='mt-1 text-decoration-none'
+                  to='top-rated-products'
+                  style={{
+                    marginLeft: '20px',
+                    fontSize: '12px',
+                    color: '#007185',
+                  }}>
+                  {' '}
+                  See all
+                </Link>
+              </div>
+              <SellingProducts topRatedProduct={topRatedProduct} />
             </div>
-            <SellingProducts topRatedProduct={topRatedProduct} />
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

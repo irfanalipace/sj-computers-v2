@@ -18,8 +18,7 @@ const FlashProducts = ({ images }) => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                  }}
-                >
+                  }}>
                   {' '}
                   See all offer
                 </p>
