@@ -133,6 +133,9 @@ class ProductController extends BaseController
         if($key == 'price'){
             return $this->getPrices();
         }
+        if($key == 'brand'){
+            return $this->getBrands($key);
+        }
         return ProductInfo::select('value')->where('key', $key)->groupby('value')->distinct()->get();
     }
 
@@ -175,6 +178,18 @@ class ProductController extends BaseController
         ];
     }    
 
+    protected function getBrands($key)
+    {
+            $brands = ['HP', 'Dell', 'Lenovo', 'BTO'];
+
+            return ProductInfo::select('value')
+            ->where('key', $key)
+            ->whereIn('value', $brands)
+            ->groupBy('value')
+            ->distinct()
+            ->get();
+
+    }
 
     public function getFilterProducts(SearchProductRequest $request)
     {
