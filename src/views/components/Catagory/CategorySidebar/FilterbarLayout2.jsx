@@ -322,6 +322,16 @@ const FilterBarlayout2 = ({
     });
   };
 
+  const priceData = {
+    priceValueArray: [
+      { priceValue: 'Under $250', priceMin: '', priceMax: '' },
+      { priceValue: '$250 - $1000', priceMin: '', priceMax: '' },
+      { priceValue: '$1000 - $2000', priceMin: '', priceMax: '' },
+      { priceValue: 'Over $2000', priceMin: '', priceMax: '' },
+    ],
+    priceInputArray: [{ inputValue: 'Min' }, { inputValue: 'Max' }],
+  };
+
   let renderRangeSliders = category => {
     return (
       <ul className='filter-values-list'>
@@ -355,7 +365,40 @@ const FilterBarlayout2 = ({
         ) : (
           <></>
         )}
-        {category === 'hard_disk' ? (
+
+        {/* handle price category */}
+        {category == 'price' ? (
+          <>
+            {priceData.priceValueArray.map(item => (
+              <li
+                className='filter-value price-value'
+                style={{ padding: '2px 0px' }}>
+                {item.priceValue}
+              </li>
+            ))}
+            <li className='filter-value' style={{ padding: '2px 0px' }}>
+              <FontAwesomeIcon
+                icon={faAngleDown}
+                style={{ margin: ' 0px 5px', color: 'black' }}
+              />
+              <span style={{ color: '#52AC66' }}>Custom Price</span>
+            </li>
+
+            <li className='filter-value' style={{ padding: '2px 0px' }}>
+              {priceData.priceInputArray.map(item => (
+                <input
+                  type='text'
+                  placeholder={`$${item.inputValue}`}
+                  className='price-input'
+                />
+              ))}
+              <button className='price-go-btn'>Go</button>
+            </li>
+          </>
+        ) : (
+          <></>
+        )}
+        {category == 'hard_disk' ? (
           <>
             {[
               { label: '64 GB', value: '64GB' },
