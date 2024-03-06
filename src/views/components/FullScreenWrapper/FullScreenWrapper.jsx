@@ -10,11 +10,13 @@ const FullScreenWrapper = ({ children }) => {
     <div
       style={{
         width: '100%',
+        maxWidth: location.pathname == '/' ? '' : '1450px',
+
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#d9d9d9',
-        // backgroundColor: location.pathname === '/' ? '#d9d9d9' : '', // also we can change color by routes
+        // backgroundColor: 'white',
+        backgroundColor: location.pathname == '/' ? '#d9d9d9' : 'white',
         margin: 'auto',
       }}>
       {children}

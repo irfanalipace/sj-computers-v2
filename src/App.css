@@ -65,8 +65,8 @@ span {
   justify-content: center;
   flex-direction: column;
   overflow: hidden;
-  max-width: 1450px;
-  background-color: white;
+  /* max-width: 1450px; */
+  background-color: #d9d9d9;
 }
 .christmas-offer-card {
   font-size: 14px;
