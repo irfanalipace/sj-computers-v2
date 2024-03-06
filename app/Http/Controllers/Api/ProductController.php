@@ -180,35 +180,49 @@ class ProductController extends BaseController
     {
 
         $perPageRecord = $request->get('per_page') ?? 12;
+        
+        if(isset($request->category) && $request->category){
+            $methodName = $this->getMethodNameFromCategory($request->category);
+            
+            if (!method_exists($this, $methodName)) {
+                return $this->sendError('error', 'Select a valid category to fetch data.');
+            }
 
-        $sql = Product::query();
+            $sql = $this->$methodName();
 
-        /*
-         * for general search
-         */
-        if ($request->get('name')) {
-            $sql = Product::query()->where(function ($query) use ($request) {
-                $query->where('name', 'LIKE', '%' . $request->get('name') . '%')
-                    ->orWhere('sku', 'LIKE', '%' . $request->get('name') . '%')
-                    ->orWhere('asin', 'LIKE', '%' . $request->get('name') . '%');
-            })
-                ->with('brand', 'productMedia');
+        } else {
+
+            $sql = Product::query();
+
+            /*
+             * for general search
+             */
+            if ($request->get('name')) {
+    
+                $sql = Product::query()->where(function ($query) use ($request) {
+                    $query->where('name', 'LIKE', '%' . $request->get('name') . '%')
+                        ->orWhere('sku', 'LIKE', '%' . $request->get('name') . '%')
+                        ->orWhere('asin', 'LIKE', '%' . $request->get('name') . '%');
+                })
+                    ->with('brand', 'productMedia');
+            }
+    
         }
-
+       
         /*
          * for filters
          */
-
+       
         if (isset($request->filter) && !empty($request->filter)) {
 
 
             $filters = $request->filter;
-
+           
             foreach ($filters as $filter) {
-
+               
             //                $filter = json_encode($filter, true);
-                $filter = json_decode($filter, true);
-
+                // $filter = json_decode($filter, true);
+               
                 $key = $filter['key'] ?? '';
                 $value = $filter['value'] ?? '';
 
@@ -230,7 +244,12 @@ class ProductController extends BaseController
                         $sql = $sql->whereIn('id', $productIds);
                     }
                 }
-
+               
+                if($key == 'review'){
+                    // Apply dynamic filters for price and review.
+                    $sql = $this->applyFilters($sql, $key,$value);
+                }
+              
             }
 
         }
@@ -245,6 +264,7 @@ class ProductController extends BaseController
             $sql = $sql->whereIn('id', $productIds);
         }
 
+      
 
         $data = $sql->paginate($perPageRecord);
 
@@ -373,7 +393,7 @@ class ProductController extends BaseController
 
             $query = $this->$methodName();
              // Apply dynamic filters for price and review.
-            $query = $this->applyFilters($query, $request->input('filter', []));
+            // $query = $this->applyFilters($query, $request->input('filter', []));
 
             $products = $query->paginate($request->per_page ?? 10);
 
@@ -383,26 +403,27 @@ class ProductController extends BaseController
         }
     }
 
-    protected function applyFilters($query, array $filters)
+    protected function applyFilters($query,$key,$value)
     {
+        
         // Apply price filter
-        if (isset($filters['price'])) {
-            $priceFilter = $filters['price'];
+        if ($key == 'price' && !empty($value)) {
+            $priceFilter = $value;
            
             $query->whereBetween('price', [$priceFilter['min'], $priceFilter['max']]);          
         }
 
         // Apply review filter
-        if (isset($filters['review'])) {
-            $reviewFilter = $filters['review'];
+        if ($key == 'review' && !empty($value)) {
+            $reviewFilter = $value;
             $query->whereHas('productReview', function ($query) use ($reviewFilter) {
                 $query->whereBetween('rating', [$reviewFilter['min'], $reviewFilter['max']]);
             });
         }
 
         // Apply brand filter
-        if(isset($filters['brand']) && !empty($filters['brand']['brand_name'])){
-            $brandFilter = $filters['brand']['brand_name'];
+        if($key == 'brand'  && !empty($value)){
+            $brandFilter = $value;
            
             $query->whereHas('brand', function ($query) use ($brandFilter) {
                 $query->whereIn('name', $brandFilter);
@@ -410,8 +431,8 @@ class ProductController extends BaseController
         }
 
         // Apply OS filter
-         if(isset($filters['operating_system']) && !empty($filters['operating_system']['os_name'])){
-            $operatingSystemFilter = $filters['operating_system']['os_name'];
+         if($key == 'operating_system'  && !empty($value)){
+            $operatingSystemFilter = $value;
            
             $query->whereHas('productInfo', function ($query) use ($operatingSystemFilter) {
                 $query->where('key','operating_system')->whereIn('value', $operatingSystemFilter);
@@ -419,8 +440,8 @@ class ProductController extends BaseController
         }
 
         // Apply Internal memory filter
-        if(isset($filters['internal_memory']) && !empty($filters['internal_memory']['internal_memory_value'])){
-            $internalMemoryFilter = $filters['internal_memory']['internal_memory_value'];
+        if($key == 'internal_memory'  && !empty($value)){
+            $internalMemoryFilter = $value;
            
             $query->whereHas('productInfo', function ($query) use ($internalMemoryFilter) {
                 $query->where('key','hard_disk')->whereIn('value', $internalMemoryFilter);
@@ -429,12 +450,23 @@ class ProductController extends BaseController
         }
 
         // Apply RAM filter
-         if(isset($filters['ram']) && !empty($filters['ram']['ram_value'])){
-            $ramFilter = $filters['ram']['ram_value'];
+         if($key == 'ram'  && !empty($value)){
+            $ramFilter = $value;
            
             $query->whereHas('productInfo', function ($query) use ($ramFilter) {
                 $query->where('key','ram_memory')->whereIn('value', $ramFilter);
             }); 
+        }
+
+         // Apply RAM filter
+         if($key == 'gpu'  && !empty($value)){
+            $gpuFilters = $value;
+           
+            $query->where(function ($query) use ($gpuFilters) {
+                foreach ($gpuFilters as $filter) {
+                    $query->orWhere('name', 'like', '%'.$filter.'%');
+                }
+            });
         }
 
         return $query;
