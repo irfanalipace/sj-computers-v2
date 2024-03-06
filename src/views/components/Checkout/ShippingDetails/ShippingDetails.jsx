@@ -13,6 +13,7 @@ export default function ShippingDetails({
   toggleAccordion,
   handleHeight,
   shippingAddress,
+  heightStatus,
 }) {
   const [newAddress, setNewAddress] = useState(false);
   const [editAddress, setEditAddress] = useState(false);
@@ -34,6 +35,14 @@ export default function ShippingDetails({
     };
   }, []);
 
+  // This use Effect works when shipping Details Form closed
+  useEffect(() => {
+    if (heightStatus == false) {
+      setEditAddress(false);
+      setNewAddress(false);
+    }
+  }, [heightStatus]);
+
   useEffect(() => {
     handleHeight(); // adjust height of accordion dynamically according to shippingAddress
   }, [shippingAddress]);
@@ -46,6 +55,7 @@ export default function ShippingDetails({
     else
       return (
         <ShippingDetailsForm
+          toggleAccordion={toggleAccordion}
           address={shippingAddress}
           handleHeight={handleHeight}
           hideForm={hideForm}
@@ -89,8 +99,7 @@ export default function ShippingDetails({
                     <div className='address-container'>
                       <button
                         type='button'
-                        onClick={() => setEditAddress(true)}
-                      >
+                        onClick={() => setEditAddress(true)}>
                         Edit Address
                       </button>
                     </div>
@@ -100,8 +109,7 @@ export default function ShippingDetails({
               <div>
                 <button
                   className='new-address'
-                  onClick={() => setNewAddress(true)}
-                >
+                  onClick={() => setNewAddress(true)}>
                   <FontAwesomeIcon icon={faAdd} /> Add a new address
                 </button>
               </div>

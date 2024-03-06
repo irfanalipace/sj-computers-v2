@@ -169,7 +169,10 @@ export default function Checkout() {
                         summary={shippingAddress.address && <ShippingSummary />}
                         toggleAccordion={toggleAccordion}
                         isOpen={accordion[1].open}>
-                        <ShippingDetails shippingAddress={shippingAddress} />
+                        <ShippingDetails
+                          shippingAddress={shippingAddress}
+                          heightStatus={accordion[1].open} // check that heght is true or false
+                        />
                       </Accordion>
                       <Accordion
                         id={2}
