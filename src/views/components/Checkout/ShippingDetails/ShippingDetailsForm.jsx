@@ -11,7 +11,12 @@ import {
   getCartItems,
 } from '../../../../core/utils/cartHelpers';
 
-function ShippingDetailsForm({ address, handleHeight, hideForm }) {
+function ShippingDetailsForm({
+  address,
+  handleHeight,
+  hideForm,
+  toggleAccordion,
+}) {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const userDetails = useSelector(state => state.auth.user);
   const states = useSelector(state => state.states.states);
@@ -512,7 +517,7 @@ function ShippingDetailsForm({ address, handleHeight, hideForm }) {
             )}
 
             <ShippingButton
-              handleClick={handleSubmit}
+              handleClick={(handleSubmit, toggleAccordion)}
               isLoading={loading}
               disabled={!isValid}>
               Use this address
