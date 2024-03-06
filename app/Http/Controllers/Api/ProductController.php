@@ -239,13 +239,16 @@ class ProductController extends BaseController
 
                 if ($key == 'processor' || $key == 'brand') {
                     if (!empty($key) && !empty($value)) {
-                        $productIds = ProductInfo::where(['key' => $key, 'value' => $value])->pluck('product_id')->toArray();
 
+                        $productIds = ProductInfo::where('key' , $key)->whereIn('value' , $value)->pluck('product_id')->toArray();
+                       
                         $sql = $sql->whereIn('id', $productIds);
+                       
                     }
                 }
-               
-                if($key == 'review'){
+                
+                if($key == 'review' || $key == 'price' | $key == 'operating_system' | $key == 'gpu'){
+                    
                     // Apply dynamic filters for price and review.
                     $sql = $this->applyFilters($sql, $key,$value);
                 }
@@ -253,6 +256,7 @@ class ProductController extends BaseController
             }
 
         }
+        
 
         /*
          * for category filters
@@ -264,8 +268,7 @@ class ProductController extends BaseController
             $sql = $sql->whereIn('id', $productIds);
         }
 
-      
-
+       
         $data = $sql->paginate($perPageRecord);
 
 
@@ -275,10 +278,8 @@ class ProductController extends BaseController
     }
 
 
-    public function getProductFilterIds($key, $unit, int $min, int $max)
+    public function getProductFilterIds($key, $units, int $min, int $max)
     {
-        $ids = [];
-
         //        $query = '';
 
         //        if ($unit == 'TB') {
@@ -295,19 +296,31 @@ class ProductController extends BaseController
         //            $ids = $query->pluck('product_id')
         //                ->toArray();
         //        }
-
+        if ($min === 0 && $max === 0) {
+            // If both min and max are 0, explicitly return null as required.
+            return null;
+        }
+    
         $record = DB::table('product_infos')->where('key', $key)
-            ->Where('value', 'like', '%' . $unit . '%')
-            ->select(DB::raw('CAST(value AS UNSIGNED) AS value'), 'product_id', 'id')
-            ->get();
-
-        $productInfos = $record->where('value', '>=', $min)
-            ->where('value', '<=', $max)
-            ->pluck('product_id')
-            ->toArray();
-
-        return array_merge($productInfos, $ids);
-    }
+                    ->where(function ($query) use ($units) {
+                        foreach ($units as $unit) {
+                            $query->orWhere('value', 'like', '%' . $unit);
+                        }
+                    })
+                    ->select(DB::raw("CAST(REPLACE(REPLACE(value, 'GB', ''), 'TB', '000') AS UNSIGNED) AS value"), 'product_id')
+                    ->get();
+    
+        $productInfos = $record->filter(function ($item) use ($min, $max) {
+                            // Convert the item value based on the presence of 'TB' or 'GB' in the string.
+                            $valueInGB = strtolower(substr($item->value, -2)) === 'tb' ? ((int)$item->value * 1000) : (int)$item->value;
+                            return $valueInGB >= $min && $valueInGB <= $max;
+                        })
+                        ->pluck('product_id')
+                        ->toArray();
+    
+        return array_unique($productInfos);
+    }    
+    
 
     public function getProtectivePlan(Request $request)
     {
