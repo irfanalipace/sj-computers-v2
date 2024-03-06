@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Product\ProtectivePlan;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ProtectivePlanSeeder extends Seeder
 {
@@ -14,6 +15,15 @@ class ProtectivePlanSeeder extends Seeder
      */
     public function run()
     {
+        // Disable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        // Truncate the table
+        DB::table((new ProtectivePlan)->getTable())->truncate();
+
+        // Re-enable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         ProtectivePlan::insert([
             [
                 'key' => 'years',
