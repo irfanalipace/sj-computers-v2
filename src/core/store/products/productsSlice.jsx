@@ -6,7 +6,28 @@ const initialState = {
   filtersProduct: [],
   searchString: searchParam,
   isShowMore: false,
-  filtersArray: [],
+  filtersArray: {
+    review: {
+      min: 0,
+      max: 0,
+    },
+    price: {
+      min: 0,
+      max: 0,
+    },
+    brand: {
+      brand_name: [],
+    },
+    operating_system: {
+      os_name: [],
+    },
+    internal_memory: {
+      internal_memory_value: [],
+    },
+    ram: {
+      ram_value: [],
+    },
+  },
   isFiltering: false,
   selectedCategory: null,
   apiError: false,
@@ -78,7 +99,7 @@ const productSlice = createSlice({
       state.selectedCategory = action.payload;
     },
     SET_FILTERS_ARRAY: (state, action) => {
-      state.filtersArray = [...action.payload];
+      state.filtersArray = { ...action.payload };
     },
     SET_FILTERING_PRODUCTS: (state, action) => {
       state.isFiltering = true;

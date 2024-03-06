@@ -28,7 +28,28 @@ const FilterBarlayout2 = ({
 }) => {
   const [filters, setFilters] = useState({});
   const [selectedFilters, setSelectedFilters] = useState([]);
-  const [filtersInArray, setFiltersInArray] = useState([]);
+  const [filtersInArray, setFiltersInArray] = useState({
+    review: {
+      min: 0,
+      max: 0,
+    },
+    price: {
+      min: 0,
+      max: 0,
+    },
+    brand: {
+      brand_name: [],
+    },
+    operating_system: {
+      os_name: [],
+    },
+    internal_memory: {
+      internal_memory_value: [],
+    },
+    ram: {
+      ram_value: [],
+    },
+  });
   const [loadingFilters, setLoadingFilters] = useState(false);
   const [visibleCategories, setVisibleCategories] = useState(8);
   const [visibleEntries, setVisibleEntries] = useState({});
@@ -51,67 +72,72 @@ const FilterBarlayout2 = ({
     });
   };
 
-  // const handleCheckboxChange = (event, category, option) => {
-  //     const isChecked = event.target.checked;
-  //     setFiltersInArray((prevSelectedFilters) => {
-  //         let filter = {
-  //             key: category,
-  //             value: option,
-  //         };
-  //         const isChecked = event.target.checked;
-
-  //         if (isChecked) {
-  //             return [...prevSelectedFilters, filter];
-  //         }
-  //         let index = prevSelectedFilters.findIndex((filter) => {
-  //             return filter.value === option;
-  //         });
-
-  //         let tempArray = [...prevSelectedFilters];
-
-  //         if (index > -1) {
-  //             tempArray.splice(index, 1);
-  //         }
-  //         return tempArray;
-  //     });
-
-  //     setSelectedFilters((prevSelectedFilters) => ({
-  //         ...prevSelectedFilters,
-  //         [category]: isChecked
-  //             ? [...(prevSelectedFilters[category] || []), option]
-  //             : prevSelectedFilters[category].filter(
-  //                   (filter) => filter.value !== option
-  //               ),
-  //     }));
-  // };
   const handleFilterSelect = (event, category, option) => {
+    const arraysFilter = [
+      'ram_memory',
+      'hard_disk',
+      'brand',
+      'operating_system',
+    ];
     if (toggleDrawer) {
       toggleDrawer();
     }
-    setFiltersInArray(prevSelectedFilters => {
-      let tempArray = [...prevSelectedFilters];
-      let index = prevSelectedFilters.findIndex(filter => {
-        return filter.value === option && filter.key === category;
-      });
-      if (index !== -1) {
-        const removedArray = prevSelectedFilters.filter(
-          f => !(f.key === category && f.value === option),
-        );
-        console.print(removedArray, 'newArray removed Array');
-        return removedArray;
-      } else {
-        let filter = {
-          key: category,
-          value: option,
-        };
-        const newArray = [...tempArray, filter];
-        console.print(newArray, 'newArray else');
-        return newArray;
+    if (arraysFilter.includes(category)) {
+      let objectName = '';
+      let arrayName = '';
+      switch (category) {
+        case 'brand':
+          objectName = 'brand';
+          arrayName = 'brand_name';
+          break;
+        case 'hard_disk':
+          objectName = 'internal_memory';
+          arrayName = 'internal_memory_value';
+          break;
+        case 'ram_memory':
+          objectName = 'ram';
+          arrayName = 'ram_value';
+          break;
+        case 'operating_system':
+          objectName = 'operating_system';
+          arrayName = 'os_name';
+          break;
       }
-    });
+      const findIndex = filtersInArray[objectName][arrayName].findIndex(
+        item => item === option,
+      );
+
+      if (findIndex !== -1) {
+        const dd = filtersInArray[objectName][arrayName];
+        debugger;
+
+        const filtersArrayCopy = [...filtersInArray[objectName][arrayName]];
+        filtersArrayCopy.splice(findIndex, 1);
+
+        setFiltersInArray(prev => {
+          return {
+            ...filtersInArray,
+            [objectName]: {
+              [arrayName]: [...filtersArrayCopy],
+            },
+          };
+        });
+        return;
+      }
+      setFiltersInArray(prev => {
+        return {
+          ...filtersInArray,
+          [objectName]: {
+            [arrayName]: [...filtersInArray[objectName][arrayName], option],
+          },
+        };
+      });
+      return;
+    }
   };
 
   const handleFilterSelectRangeSlider = (event, category, option) => {
+    debugger;
     if (toggleDrawer) {
       toggleDrawer();
     }
@@ -166,27 +192,6 @@ const FilterBarlayout2 = ({
       Object.keys(data)?.forEach((key, index) => {
         let value = data[key];
         if (!Array.isArray(value)) {
-          let options = {
-            MB: {
-              min: value.least_MB,
-              max: value.highest_MB,
-            },
-            GB: {
-              min: value.least_GB,
-              max: value.highest_GB,
-            },
-            TB: {
-              min: value.least_TB,
-              max: value.highest_TB,
-            },
-          };
-          setRangeValues(prev => {
-            return {
-              ...prev,
-              [key]: { ...options },
-            };
-          });
-
           setSelectedUnit(prevState => {
             return {
               ...prevState,
@@ -211,43 +216,7 @@ const FilterBarlayout2 = ({
     let optionArray = options.slice(0, visibleEntries[category].visibleEntries);
     return (
       <>
-        {/* <li className='filter-value'>
-          <label className='radio-container' htmlFor={'all-' + category}>
-            <input
-              id={'all-' + category}
-              type='checkbox'
-              name={category} // Add a name attribute to group the radio buttons by category
-              value={''} // Add a value attribute to specify the value of the selected radio button
-              onChange={event => handleFilterSelect(event, category, '')}
-            />
-            <span className='radiomark '></span> All
-          </label>
-        </li> */}
         {optionArray.map((option, index) => (
-          // <li
-          //     className="filter-value"
-          //     key={`${option.value}-${index}`}
-          // >
-          //     <label
-          //         className="checkbox-container"
-          //         htmlFor={`${option.value}-${index}`}
-          //     >
-          //         <input
-          //             id={`${option.value}-${index}`}
-          //             type="checkbox"
-          //             onChange={(event) =>
-          //                 handleCheckboxChange(
-          //                     event,
-          //                     category,
-          //                     option.value
-          //                 )
-          //             }
-          //         />
-          //         <span className="checkmark"></span>
-          //         {option.value}
-          //     </label>
-          // </li>
-
           <li className='filter-value' key={`${option.backend_value}-${index}`}>
             <label
               className='radio-container'
@@ -255,9 +224,9 @@ const FilterBarlayout2 = ({
               <input
                 id={`${option.backend_value}-${index}`}
                 type='checkbox'
-                checked={filtersInArray.some(
-                  item => item.value === option.backend_value,
-                )}
+                // checked={filtersInArray?.some(
+                //   item => item.value === option.backend_value,
+                // )}
                 name={category} // Add a name attribute to group the radio buttons by category
                 value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
                 onChange={event =>
@@ -338,23 +307,6 @@ const FilterBarlayout2 = ({
     });
   };
 
-  const applyRange = (e, category) => {
-    let unit = selectedUnit[category]?.unit;
-    let value = {};
-    if (unit) {
-      value = {
-        unit: unit,
-        min:
-          selectedUnit[category]?.range?.min ||
-          rangeValues[category][unit]?.min,
-        max:
-          selectedUnit[category]?.range?.max ||
-          rangeValues[category][unit]?.max,
-      };
-    }
-    handleFilterSelectRangeSlider(e, category, value);
-  };
-
   const handleRange = (event, category, unit, newValue) => {
     setSelectedUnit(prev => {
       return {
@@ -373,223 +325,67 @@ const FilterBarlayout2 = ({
   let renderRangeSliders = category => {
     return (
       <ul className='filter-values-list'>
-        {/* <li className='my-2  filter-value'>
-          <label className='radio-container' htmlFor={category + 'All'}>
-            <input
-              type='radio'
-              value='MB'
-              id={category + 'All'}
-              className='me-1'
-              name={category}
-              checked={selectedUnit[category]?.unit === ''}
-              onChange={e => handleRangeUnit(category, '')}
-              onClick={e => handleFilterSelect(e, category, {})} // for applying direct on All {}
-            />
-            <span className='radiomark '></span>
-            All
-          </label>
-        </li> */}
         {category == 'ram_memory' ? (
           <>
-            <li className='filter-value'>
-              <label className='radio-container' htmlFor={`64GB`}>
-                <input
-                  id={`4GB`}
-                  type='checkbox'
-                  checked={filtersInArray.some(item => item.value === '4GB')}
-                  name={category} // Add a name attribute to group the radio buttons by category
-                  // value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
-                  onChange={event => handleFilterSelect(event, category, '4GB')}
-                />
-                <span className='radiomark '></span>{' '}
-                {/* Replace the checkmark with radiomark class */}
-                {/* {option.value} */}4 GB
-              </label>
-            </li>
-            <li className='filter-value'>
-              <label className='radio-container' htmlFor={`6GB`}>
-                <input
-                  id={`6GB`}
-                  type='checkbox'
-                  checked={filtersInArray.some(item => item.value === '6GB')}
-                  name={category} // Add a name attribute to group the radio buttons by category
-                  // value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
-                  onChange={event => handleFilterSelect(event, category, '6GB')}
-                />
-                <span className='radiomark '></span>{' '}
-                {/* Replace the checkmark with radiomark class */}
-                {/* {option.value} */}6 GB
-              </label>
-            </li>
-            <li className='filter-value'>
-              <label className='radio-container' htmlFor={`8GB`}>
-                <input
-                  id={`8GB`}
-                  type='checkbox'
-                  checked={filtersInArray.some(item => item.value === '8GB')}
-                  name={category} // Add a name attribute to group the radio buttons by category
-                  // value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
-                  onChange={event => handleFilterSelect(event, category, '8GB')}
-                />
-                <span className='radiomark '></span>{' '}
-                {/* Replace the checkmark with radiomark class */}
-                {/* {option.value} */}8 GB & Above
-              </label>
-            </li>
+            {[
+              { label: '4 GB', value: '4GB' },
+              { label: '6 GB', value: '6GB' },
+              { label: '8 GB', value: '8GB' },
+            ].map(ram => {
+              return (
+                <li className='filter-value'>
+                  <label className='radio-container' htmlFor={ram.value}>
+                    <input
+                      id={ram.value}
+                      type='checkbox'
+                      checked={filtersInArray?.ram?.ram_value.includes(
+                        ram.value,
+                      )}
+                      name={category}
+                      onChange={event =>
+                        handleFilterSelect(event, category, ram.value)
+                      }
+                    />
+                    <span className='radiomark '></span> {ram.label}
+                  </label>
+                </li>
+              );
+            })}
           </>
         ) : (
           <></>
         )}
-
-        {category == 'hard_disk' ? (
+        {category === 'hard_disk' ? (
           <>
-            <li className='filter-value'>
-              <label className='radio-container' htmlFor={`64GB`}>
-                <input
-                  id={`64GB`}
-                  type='checkbox'
-                  checked={filtersInArray.some(item => item.value === '64GB')}
-                  name={category} // Add a name attribute to group the radio buttons by category
-                  // value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
-                  onChange={event =>
-                    handleFilterSelect(event, category, '64GB')
-                  }
-                />
-                <span className='radiomark '></span>{' '}
-                {/* Replace the checkmark with radiomark class */}
-                {/* {option.value} */}64 GB
-              </label>
-            </li>
-            <li className='filter-value'>
-              <label className='radio-container' htmlFor={`128GB`}>
-                <input
-                  id={`128GB`}
-                  type='checkbox'
-                  checked={filtersInArray.some(item => item.value === '128GB')}
-                  name={category} // Add a name attribute to group the radio buttons by category
-                  // value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
-                  onChange={event =>
-                    handleFilterSelect(event, category, '128GB')
-                  }
-                />
-                <span className='radiomark '></span>{' '}
-                {/* Replace the checkmark with radiomark class */}
-                {/* {option.value} */}128 GB
-              </label>
-            </li>
-            <li className='filter-value'>
-              <label className='radio-container' htmlFor={`256GB`}>
-                <input
-                  id={`256GB`}
-                  type='checkbox'
-                  checked={filtersInArray.some(item => item.value === '256GB')}
-                  name={category} // Add a name attribute to group the radio buttons by category
-                  // value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
-                  onChange={event =>
-                    handleFilterSelect(event, category, '256GB')
-                  }
-                />
-                <span className='radiomark '></span>{' '}
-                {/* Replace the checkmark with radiomark class */}
-                {/* {option.value} */}256 GB
-              </label>
-            </li>
-            <li className='filter-value'>
-              <label className='radio-container' htmlFor={`512GB`}>
-                <input
-                  id={`512GB`}
-                  type='checkbox'
-                  checked={filtersInArray.some(item => item.value === '512GB')}
-                  name={category} // Add a name attribute to group the radio buttons by category
-                  // value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
-                  onChange={event =>
-                    handleFilterSelect(event, category, '512GB')
-                  }
-                />
-                <span className='radiomark '></span>{' '}
-                {/* Replace the checkmark with radiomark class */}
-                {/* {option.value} */}512 GB
-              </label>
-            </li>
-            <li className='filter-value'>
-              <label className='radio-container' htmlFor={`1TB`}>
-                <input
-                  id={`1TB`}
-                  type='checkbox'
-                  checked={filtersInArray.some(item => item.value === '1TB')}
-                  name={category} // Add a name attribute to group the radio buttons by category
-                  // value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
-                  onChange={event => handleFilterSelect(event, category, '1TB')}
-                />
-                <span className='radiomark '></span>{' '}
-                {/* Replace the checkmark with radiomark class */}
-                {/* {option.value} */}1 TB & Above
-              </label>
-            </li>
+            {[
+              { label: '64 GB', value: '64GB' },
+              { label: '128 GB', value: '128GB' },
+              { label: '256 GB', value: '256GB' },
+              { label: '512 GB', value: '512GB' },
+              { label: '1 TB', value: '1TB' },
+            ].map(ram => {
+              return (
+                <li key={ram.value} className='filter-value'>
+                  <label className='radio-container' htmlFor={ram.value}>
+                    <input
+                      id={ram.value}
+                      type='checkbox'
+                      checked={filtersInArray?.internal_memory?.internal_memory_value.includes(
+                        ram.value,
+                      )}
+                      name={ram.value}
+                      onChange={event => {
+                        handleFilterSelect(event, category, ram.value);
+                      }}
+                    />
+                    <span className='radiomark '></span> {ram.label}
+                  </label>
+                </li>
+              );
+            })}
           </>
         ) : (
           <></>
-        )}
-
-        {/* TB Data Commited */}
-        {/* {filters[category]?.least_TB && filters[category]?.highest_TB ? (
-          <li className='my-2 filter-value'>
-            <label className='radio-container' htmlFor={category + 'TB'}>
-              <input
-                type='radio'
-                value='TB'
-                id={category + 'TB'}
-                className='me-1'
-                name={category}
-                checked={selectedUnit[category]?.unit === 'TB'}
-                onChange={(e, values) => handleRangeUnit(category, 'TB')}
-              />
-              <span className='radiomark '></span>
-              TB
-            </label>
-          </li>
-        ) : (
-          <></>
-        )} */}
-
-        {selectedUnit[category]?.unit ? (
-          <div className='range-slider'>
-            <p style={{ fontSize: '14px', marginBottom: '0' }}>Select Range:</p>
-            <Slider
-              style={{
-                color: '#52ac66',
-                width: '150px',
-                marginLeft: '10px',
-                paddingTop: '20px',
-                padddingBottom: '20px',
-              }}
-              value={[
-                selectedUnit[category].range?.min ||
-                  rangeValues[category][selectedUnit[category]?.unit]?.min,
-                selectedUnit[category].range?.max ||
-                  rangeValues[category][selectedUnit[category]?.unit]?.max,
-              ]}
-              onChange={(e, values) =>
-                handleRange(e, category, selectedUnit[category]?.unit, values)
-              }
-              valueLabelDisplay='auto'
-              min={rangeValues[category][selectedUnit[category]?.unit]?.min}
-              max={rangeValues[category][selectedUnit[category]?.unit]?.max}
-              aria-labelledby='price-range-slider'
-            />
-          </div>
-        ) : (
-          <></>
-        )}
-        {/* Hide Apply Button on All */}
-        {selectedUnit[category]?.unit === '' ? (
-          ''
-        ) : (
-          <div className='filter-button-category-page'>
-            <Button disabled={isLoading} onClick={e => applyRange(e, category)}>
-              Apply
-            </Button>
-          </div>
         )}
       </ul>
     );
@@ -604,14 +400,11 @@ const FilterBarlayout2 = ({
               <input
                 id={data}
                 type='checkbox'
-                checked={filtersInArray.some(item => item.value === data)}
-                name={'gpu'} // Add a name attribute to group the radio buttons by category
-                // value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
+                // checked={filtersInArray?.some(item => item.value === data)}
+                name={'gpu'}
                 onChange={event => handleFilterSelect('', category.name, data)}
               />
-              <span className='radiomark '></span>{' '}
-              {/* Replace the checkmark with radiomark class */}
-              {/* {option.value} */}
+              <span className='radiomark '></span>
               {data}
             </label>
           </li>
@@ -666,7 +459,7 @@ const FilterBarlayout2 = ({
               }}>
               {category.replace(/_/g, ' ')}{' '}
               {filtersInArray?.length > 0 &&
-                filtersInArray.some(filter => filter.key === category) && (
+                filtersInArray?.some(filter => filter.key === category) && (
                   <span
                     className='filter-clear-btn'
                     onClick={() => handleClearFilter(category)}>
@@ -725,7 +518,7 @@ const FilterBarlayout2 = ({
           {/* {category.replace(/_/g, ' ')}{' '} */}
           {category.name}
           {filtersInArray?.length > 0 &&
-            filtersInArray.some(filter => filter.key === category.name) && (
+            filtersInArray?.some(filter => filter.key === category.name) && (
               <span
                 className='filter-clear-btn'
                 onClick={() => handleClearFilter(category.name)}>
