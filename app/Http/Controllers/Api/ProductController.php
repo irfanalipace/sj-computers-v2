@@ -104,7 +104,7 @@ class ProductController extends BaseController
         $data['operating_system'] = $this->queryProductInfo('operating_system');
         // $data['operating_system'] = [];
         $data['hard_disk'] = $this->queryProductInfo('hard_disk');
-        $data['graphic'] = $this->queryProductInfo('graphic');
+        // $data['graphic'] = $this->queryProductInfo('graphic');
         // $data['graphic'] = [];
         $data['brand'] = $this->queryProductInfo('brand');
         
@@ -220,8 +220,8 @@ class ProductController extends BaseController
            
             foreach ($filters as $filter) {
                
-            //                $filter = json_encode($filter, true);
-                // $filter = json_decode($filter, true);
+                // $filter = json_encode($filter, true);
+                $filter = json_decode($filter, true);
                
                 $key = $filter['key'] ?? '';
                 $value = $filter['value'] ?? '';
