@@ -235,6 +235,34 @@
   cursor: pointer;
 }
 
+.price-value {
+  cursor: pointer;
+}
+
+.price-value:hover {
+  color: orange;
+  text-decoration: underline;
+}
+
+.price-input {
+  padding: 3px 10px;
+  margin: 0px 4px;
+  width: 25%;
+  border-radius: 4px;
+  border: 1px solid #898c8c;
+  outline: none;
+}
+
+.price-go-btn {
+  width: 15%;
+  padding: 5px !important;
+  margin: 0px 6px !important;
+  border-radius: 8px;
+  border: 1px solid #c9cccc !important;
+  color: black !important;
+  box-shadow: 2px 2px 4px rgba(166, 165, 165, 0.5);
+}
+
 @media screen and (max-width: 585px) {
   /* .layout2-filter-bar {
         width: 0;
