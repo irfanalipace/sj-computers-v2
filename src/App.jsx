@@ -50,11 +50,13 @@ function App() {
           <Suspense>
             <Header />
           </Suspense>
-          <FullScreenWrapper>
-            <div className='inner-body'>
+
+          <div className='inner-body'>
+            <FullScreenWrapper>
               <Router />
-            </div>
-          </FullScreenWrapper>
+            </FullScreenWrapper>
+          </div>
+
           <Suspense>
             <Footer />
           </Suspense>

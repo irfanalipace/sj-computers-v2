@@ -34,7 +34,7 @@ const Home = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: '100%',
+                width: '100vw',
               }}>
               <div style={{ maxWidth: '1500px', width: '100%' }}>
                 <RecommandSectionsProducts />
