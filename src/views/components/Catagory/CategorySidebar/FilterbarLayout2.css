@@ -192,6 +192,9 @@
   position: absolute;
   display: none;
 }
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
+  padding: 0 !important;
+}
 
 .filter-button-category-page button {
   color: #52ac66;
