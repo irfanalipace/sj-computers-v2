@@ -64,6 +64,19 @@ const FilterBarlayout2 = ({
     if (category === 'price') {
       setActinePriceFilter('');
     }
+    if (category === 'hard_disk') {
+      setHardDiskCheckd([]);
+    }
+    if (category === 'ram_memory') {
+      setRamDiskCheckd([]);
+    }
+    if (category === 'processor') {
+      setProcessorCheckd([]);
+    }
+    if (category === 'operating_system') {
+      setOsCheckd([]);
+    }
+
     clearFilter(category);
 
     // setFiltersInArray(prevArray => {
@@ -114,6 +127,59 @@ const FilterBarlayout2 = ({
     setLoadingFilters(false);
   };
 
+  const showClear = (category, current) => {
+    const check1 =
+      filtersInArray[findIndexByKey([filtersInArray], category)]?.value?.max !==
+      -Infinity;
+    const check2 =
+      filtersInArray[findIndexByKey([filtersInArray], category)]?.value?.max >
+      0;
+    const check3 =
+      filtersInArray[findIndexByKey([filtersInArray], category)]?.value
+        ?.length > 0;
+    if ((check1 && check2) || check3) {
+      return true;
+    }
+    return false;
+  };
+
+  const isChecked = category => {
+    const check1 =
+      filtersInArray[findIndexByKey([filtersInArray], category)]?.value?.max !==
+      -Infinity;
+    const check2 =
+      filtersInArray[findIndexByKey([filtersInArray], category)]?.value?.max >
+      0;
+    const check3 =
+      filtersInArray[findIndexByKey([filtersInArray], category)]?.value
+        ?.length > 0;
+    if (check1 && check2) {
+      return true;
+    }
+    if (check3) {
+      const dd =
+        filtersInArray[
+          findIndexByKey([filtersInArray], category)
+        ]?.value.includes(current);
+      if (dd) {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  };
+
+  const handleChecked = (catg, value) => {
+    if (catg === 'processor') {
+      return processorCheckd.includes(value);
+    }
+  };
+
+  const [hardDiskCheckd, setHardDiskCheckd] = useState([]);
+  const [ramDiskCheckd, setRamDiskCheckd] = useState([]);
+  const [processorCheckd, setProcessorCheckd] = useState([]);
+  const [osCheckd, setOsCheckd] = useState([]);
+
   let renderedItems = (options, category) => {
     let optionArray = options.slice(0, visibleEntries[category].visibleEntries);
     return (
@@ -126,14 +192,44 @@ const FilterBarlayout2 = ({
               <input
                 id={`${option.backend_value}-${index}`}
                 type='checkbox'
+                checked={handleChecked(category, option.backend_value)}
                 // checked={filtersInArray?.some(
                 //   item => item.value === option.backend_value,
                 // )}
                 name={category} // Add a name attribute to group the radio buttons by category
                 value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
-                onChange={event =>
-                  handleFilterSelect(event, category, option.backend_value)
-                }
+                onChange={event => {
+                  // debugger;
+                  if (category === 'processor') {
+                    const hardDiskCheckdCopy = [...processorCheckd];
+                    if (event.target.checked) {
+                      hardDiskCheckdCopy.push(option.backend_value);
+                      setProcessorCheckd(hardDiskCheckdCopy);
+                    }
+                    if (!event.target.checked) {
+                      const finIndex = processorCheckd.findIndex(
+                        item => item === option.backend_value,
+                      );
+                      hardDiskCheckdCopy.splice(finIndex, 1);
+                      setProcessorCheckd(hardDiskCheckdCopy);
+                    }
+                  }
+                  if (category === '"operating_system"') {
+                    const hardDiskCheckdCopy = [...osCheckd];
+                    if (event.target.checked) {
+                      hardDiskCheckdCopy.push(option.backend_value);
+                      setOsCheckd(hardDiskCheckdCopy);
+                    }
+                    if (!event.target.checked) {
+                      const finIndex = osCheckd.findIndex(
+                        item => item === option.backend_value,
+                      );
+                      hardDiskCheckdCopy.splice(finIndex, 1);
+                      setOsCheckd(hardDiskCheckdCopy);
+                    }
+                  }
+                  handleFilterSelect(event, category, option.backend_value);
+                }}
               />
               <span className='radiomark '></span> {option.value}
             </label>
@@ -205,12 +301,12 @@ const FilterBarlayout2 = ({
   let renderRangeSliders = category => {
     return (
       <ul className='filter-values-list'>
-        {category == 'ram_memory' ? (
+        {category === 'ram_memory' ? (
           <>
             {[
-              { label: '4 GB', value: 4, type: 'GB' },
-              { label: '6 GB', value: 6, type: 'GB' },
-              { label: '8 GB', value: 8, type: 'GB' },
+              { id: 1, label: '4 GB', value: 4, type: 'GB' },
+              { id: 2, label: '6 GB', value: 6, type: 'GB' },
+              { id: 3, label: '8 GB', value: 8, type: 'GB' },
             ].map((ram, index) => {
               return (
                 <li key={index} className='filter-value'>
@@ -224,6 +320,29 @@ const FilterBarlayout2 = ({
                         handleFilterSelect(event, category, ram)
                       }
                     />
+                    {/* <input
+                      id={`ram${index}`}
+                      type='checkbox'
+                      // checked={ramDiskCheckd.includes(ram.id)}
+                      name={ram.value}
+                      onChange={event => {
+                        debugger;
+                        const ramCheckdCopy = [...ramDiskCheckd];
+                        if (event.target.checked) {
+                          ramCheckdCopy.push(ram.id);
+                          setRamDiskCheckd(ramCheckdCopy);
+                        }
+                        if (!event.target.checked) {
+                          const finIndex = ramDiskCheckd.findIndex(
+                            item => item === ram.id,
+                          );
+                          ramCheckdCopy.splice(finIndex, 1);
+                          setRamDiskCheckd(ramCheckdCopy);
+                        }
+                        debugger;
+                        handleFilterSelect(event, category, ram);
+                      }}
+                    /> */}
                     <span className='radiomark '></span> {ram.label}
                   </label>
                 </li>
@@ -263,6 +382,7 @@ const FilterBarlayout2 = ({
                   key={index}
                   type='text'
                   name={item.name}
+                  checked={showClear(category)}
                   placeholder={`$${item.placeholder}`}
                   className='price-input'
                   onChange={handleCustomPriceFilter}
@@ -281,23 +401,34 @@ const FilterBarlayout2 = ({
         {category == 'hard_disk' ? (
           <>
             {[
-              { label: '64 GB', value: 64, type: 'GB' },
-              { label: '128 GB', value: 128, type: 'GB' },
-              { label: '256 GB', value: 256, type: 'GB' },
-              { label: '512 GB', value: 512, type: 'GB' },
-              { label: '1 TB', value: 1, type: 'TB' },
-            ].map(ram => {
+              { id: 1, label: '64 GB', value: 64, type: 'GB' },
+              { id: 2, label: '128 GB', value: 128, type: 'GB' },
+              { id: 3, label: '256 GB', value: 256, type: 'GB' },
+              { id: 4, label: '512 GB', value: 512, type: 'GB' },
+              { id: 5, label: '1 TB', value: 1, type: 'TB' },
+            ].map((ram, index) => {
               return (
                 <li key={ram.value} className='filter-value'>
                   <label className='radio-container' htmlFor={ram.value}>
                     <input
                       id={ram.value}
                       type='checkbox'
-                      checked={filtersInArray?.internal_memory?.internal_memory_value.includes(
-                        ram.value,
-                      )}
+                      checked={hardDiskCheckd.includes(ram.id)}
                       name={ram.value}
                       onChange={event => {
+                        const hardDiskCheckdCopy = [...hardDiskCheckd];
+                        if (event.target.checked) {
+                          hardDiskCheckdCopy.push(ram.id);
+                          setHardDiskCheckd(hardDiskCheckdCopy);
+                        }
+                        if (!event.target.checked) {
+                          const finIndex = hardDiskCheckd.findIndex(
+                            item => item === ram.id,
+                          );
+                          hardDiskCheckdCopy.splice(finIndex, 1);
+                          setHardDiskCheckd(hardDiskCheckdCopy);
+                        }
+
                         handleFilterSelect(event, category, ram);
                       }}
                     />
@@ -323,9 +454,13 @@ const FilterBarlayout2 = ({
               <input
                 id={data}
                 type='checkbox'
-                // checked={filtersInArray?.some(item => item.value === data)}
+                checked={filtersInArray[
+                  findIndexByKey([filtersInArray], category.name)
+                ]?.value?.includes(data)}
                 name={'gpu'}
-                onChange={event => handleFilterSelect('', category.name, data)}
+                onChange={event =>
+                  handleFilterSelect(event, category.name, data)
+                }
               />
               <span className='radiomark '></span>
               {data}
@@ -374,11 +509,9 @@ const FilterBarlayout2 = ({
   let renderedCategories = Object.entries(filters).map(
     ([category, options], index) => {
       const dd =
-        filtersInArray[findIndexByKey([filtersInArray], category)].value.min;
-      const ff =
-        filtersInArray[findIndexByKey([filtersInArray], category)].value
-          ?.length;
-      // debugger;
+        filtersInArray[findIndexByKey([filtersInArray], category)]?.value
+          ?.max !== -Infinity;
+
       return (
         <div key={index}>
           {(!!filters[category].length ||
@@ -397,19 +530,16 @@ const FilterBarlayout2 = ({
                   padding: inDrawer ? '16px' : '',
                   width: inDrawer ? '100vw' : '',
                 }}>
-                {category.replace(/_/g, ' ')}{' '}
-                {(filtersInArray?.length > 0 &&
-                  filtersInArray[findIndexByKey([filtersInArray], category)]
-                    .value.min) ||
-                  (filtersInArray[findIndexByKey([filtersInArray], category)]
-                    .value?.length > 0 && (
-                    <span
-                      className='filter-clear-btn'
-                      onClick={() => handleClearFilter(category)}>
-                      <CloseIcon fontSize='14px' />
-                      clear d
-                    </span>
-                  ))}
+                {category.replace(/_/g, ' ')} (
+                {showClear(category) && (
+                  <span
+                    className='filter-clear-btn'
+                    onClick={() => handleClearFilter(category)}>
+                    <CloseIcon fontSize='14px' />
+                    clear
+                  </span>
+                )}
+                , )
                 {inDrawer ? (
                   <span className={`${inDrawer ? 'align-to-end' : ''}`}>
                     <IconButton>
@@ -462,15 +592,14 @@ const FilterBarlayout2 = ({
           }}>
           {/* {category.replace(/_/g, ' ')}{' '} */}
           {category.name}
-          {filtersInArray?.length > 0 &&
-            filtersInArray?.some(filter => filter.key === category.name) && (
-              <span
-                className='filter-clear-btn'
-                onClick={() => handleClearFilter(category.name)}>
-                <CloseIcon fontSize='14px' />
-                clear
-              </span>
-            )}
+          {showClear(category.name) && (
+            <span
+              className='filter-clear-btn'
+              onClick={() => handleClearFilter(category.name)}>
+              <CloseIcon fontSize='14px' />
+              clear
+            </span>
+          )}
           {inDrawer ? (
             <span className={`${inDrawer ? 'align-to-end' : ''}`}>
               <IconButton>
