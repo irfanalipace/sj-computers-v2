@@ -112,6 +112,8 @@ Route::get('get-top-rated-products',[ProductController::class,'getTopRatedProduc
 
 Route::get('get-products-category',[ProductController::class,'getProductCategory']);
 
+Route::put('feature-product', [ProductController::class, 'featureProduct']);
+
 /*
 *Add to Cart
 */

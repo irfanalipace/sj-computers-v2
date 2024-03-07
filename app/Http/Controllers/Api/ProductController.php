@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\PaginateRequest;
+use App\Http\Requests\Product\FeatureProductRequest;
 use App\Http\Requests\Product\ProductDetailRequest;
 use App\Http\Requests\Product\ProductMediaRequest;
 use App\Http\Requests\Product\SearchProductRequest;
@@ -566,5 +567,19 @@ class ProductController extends BaseController
         ->whereHas('orderItems', function ($query) {
             $query->whereHas('order'); 
         });
+    }
+
+    public function featureProduct(FeatureProductRequest $request)
+    {
+        try {
+            $product = Product::findOrFail($request->productId);
+
+            $product->is_feature = ($product->is_feature == 1) ? 0 : 1;
+            $product->save();
+
+            return $this->sendResponse($product, 'Product feature status updated successfully ');
+        } catch (Exception $e) {
+            return $this->sendError('error', 'Something went wrong ' . $e->getMessage());
+        }
     }
 }
