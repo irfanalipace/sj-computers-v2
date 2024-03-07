@@ -27,6 +27,7 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
     currentPage,
     searchString,
     filtersArray,
+    isNewApi,
   } = useSelector(state => state.products);
 
   const [mounted, setMounted] = useState(false);
@@ -79,11 +80,29 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
   }, []);
 
   const handleClick = () => {
+    let filteredData = {};
+
+    for (const key in filtersArray) {
+      const item = filtersArray[key];
+      if (Array.isArray(item.value) && item.value.length === 0) {
+        continue;
+      }
+      if (
+        typeof item.value === 'object' &&
+        (item.value.min === null ||
+          item.value.min === Infinity ||
+          (item.value.min === 0 && item.value.max === 0))
+      ) {
+        continue;
+      }
+      filteredData[key] = item;
+    }
+
     filterObject = {
       ...filterObject,
       page: currentPage,
       name: '',
-      filter: filtersArray,
+      filter: filteredData,
     };
 
     dispatch(
@@ -95,37 +114,107 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
 
   useEffect(() => {
     if (mounted) {
+      let filteredData = {};
+
+      for (const key in filtersArray) {
+        const item = filtersArray[key];
+        if (Array.isArray(item.value) && item.value.length === 0) {
+          continue;
+        }
+        if (
+          typeof item.value === 'object' &&
+          (item.value.min === null ||
+            item.value.min === Infinity ||
+            (item.value.min === 0 && item.value.max === 0))
+        ) {
+          continue;
+        }
+        filteredData[key] = item;
+      }
+      console.clear();
+      // const newData = {};
+
+      // Convert value to string
+      // for (const key in filteredData) {
+      //   const item = filteredData[key];
+      //   if (Array.isArray(item.value)) {
+      //     newData[key] = {
+      //       key: item.key,
+      //       value: item.value.join(', '), // Convert array to comma-separated string
+      //     };
+      //   }
+      // }
+      // console.log(newData);
+
+      // debugger;
+
       filterObject = {
         ...filterObject,
         page: 1,
         name: '',
         category_id: category?.id,
-        filter: filtersArray,
+        filter: filteredData,
       };
       if (filtersArray.length > 0 || searchString || category?.id) {
         dispatch(filterProducts(filterObject));
       }
     }
-  }, [filtersArray]);
+    console.log(filtersArray);
+  }, [JSON.stringify(filtersArray)]);
 
   useEffect(() => {
+    let filteredData = {};
+
+    for (const key in filtersArray) {
+      const item = filtersArray[key];
+      if (Array.isArray(item.value) && item.value.length === 0) {
+        continue;
+      }
+      if (
+        typeof item.value === 'object' &&
+        (item.value.min === null ||
+          item.value.min === Infinity ||
+          (item.value.min === 0 && item.value.max === 0))
+      ) {
+        continue;
+      }
+      filteredData[key] = item;
+    }
     filterObject = {
       ...filterObject,
       page: 1,
       name: '',
-      filter: filtersArray,
+      filter: filteredData,
     };
 
     dispatch(filterProducts(filterObject));
   }, []);
 
   useEffect(() => {
+    let filteredData = {};
+
+    for (const key in filtersArray) {
+      const item = filtersArray[key];
+      if (Array.isArray(item.value) && item.value.length === 0) {
+        continue;
+      }
+      if (
+        typeof item.value === 'object' &&
+        (item.value.min === null ||
+          item.value.min === Infinity ||
+          (item.value.min === 0 && item.value.max === 0))
+      ) {
+        continue;
+      }
+      filteredData[key] = item;
+    }
+
     filterObject = {
       ...filterObject,
       page: 1,
       name: '',
       category_id: category?.id,
-      filter: filtersArray,
+      filter: filteredData,
     };
     if (category?.id) {
       dispatch(filterProducts(filterObject));

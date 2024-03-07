@@ -22,40 +22,27 @@ import Button from '../../common/Button/Button';
 
 const FilterBarlayout2 = ({
   inDrawer,
+  clearFilter,
   DataInDrawerToggler,
   DataInDrawer,
   toggleDrawer,
+  handleFilterSelect,
+  filtersInArray,
+  filteChange,
 }) => {
   const [filters, setFilters] = useState({});
   const [selectedFilters, setSelectedFilters] = useState([]);
-  const [filtersInArray, setFiltersInArray] = useState({
-    review: {
-      min: 0,
-      max: 0,
-    },
-    price: {
-      min: 0,
-      max: 0,
-    },
-    brand: {
-      brand_name: [],
-    },
-    operating_system: {
-      os_name: [],
-    },
-    internal_memory: {
-      internal_memory_value: [],
-    },
-    ram: {
-      ram_value: [],
-    },
-  });
   const [loadingFilters, setLoadingFilters] = useState(false);
   const [visibleCategories, setVisibleCategories] = useState(8);
   const [visibleEntries, setVisibleEntries] = useState({});
   const isLoading = useSelector(state => state.products.isFiltering);
   const [selectedUnit, setSelectedUnit] = useState({});
   const [rangeValues, setRangeValues] = useState({});
+  const [activePriceFiler, setActinePriceFilter] = useState('');
+  const [customPrice, setCustomPrice] = useState({
+    priceMin: 0,
+    priceMax: 0,
+  });
 
   const dispatch = useDispatch();
 
@@ -72,116 +59,23 @@ const FilterBarlayout2 = ({
     });
   };
 
-  const handleFilterSelect = (event, category, option) => {
-    const arraysFilter = [
-      'ram_memory',
-      'hard_disk',
-      'brand',
-      'operating_system',
-    ];
-    if (toggleDrawer) {
-      toggleDrawer();
-    }
-    if (arraysFilter.includes(category)) {
-      let objectName = '';
-      let arrayName = '';
-      switch (category) {
-        case 'brand':
-          objectName = 'brand';
-          arrayName = 'brand_name';
-          break;
-        case 'hard_disk':
-          objectName = 'internal_memory';
-          arrayName = 'internal_memory_value';
-          break;
-        case 'ram_memory':
-          objectName = 'ram';
-          arrayName = 'ram_value';
-          break;
-        case 'operating_system':
-          objectName = 'operating_system';
-          arrayName = 'os_name';
-          break;
-      }
-      const findIndex = filtersInArray[objectName][arrayName].findIndex(
-        item => item === option,
-      );
-
-      if (findIndex !== -1) {
-        const dd = filtersInArray[objectName][arrayName];
-        debugger;
-
-        const filtersArrayCopy = [...filtersInArray[objectName][arrayName]];
-        filtersArrayCopy.splice(findIndex, 1);
-
-        setFiltersInArray(prev => {
-          return {
-            ...filtersInArray,
-            [objectName]: {
-              [arrayName]: [...filtersArrayCopy],
-            },
-          };
-        });
-        return;
-      }
-      setFiltersInArray(prev => {
-        return {
-          ...filtersInArray,
-          [objectName]: {
-            [arrayName]: [...filtersInArray[objectName][arrayName], option],
-          },
-        };
-      });
-      return;
-    }
-  };
-
-  const handleFilterSelectRangeSlider = (event, category, option) => {
-    debugger;
-    if (toggleDrawer) {
-      toggleDrawer();
-    }
-    setFiltersInArray(prevSelectedFilters => {
-      let tempArray = [...prevSelectedFilters];
-      let index = prevSelectedFilters.findIndex(filter => {
-        return filter.value.unit === option.unit && filter.key === category;
-      });
-      let filter = {
-        key: category,
-        value: option,
-      };
-      if (index !== -1) {
-        const removedArray = prevSelectedFilters.filter(
-          f => !(f.key === category && f.value.unit === option.unit),
-        );
-        const removerrayUpdate = [...removedArray, filter];
-        console.print(removerrayUpdate, 'newArray removed Array');
-        return removerrayUpdate;
-      } else {
-        const newArray = [...tempArray, filter];
-        console.print(newArray, 'newArray else');
-        return newArray;
-      }
-    });
-  };
-
   const handleClearFilter = category => {
-    setFiltersInArray(prevArray => {
-      // Filter out filters with the specified category
-      const updatedArray = prevArray.filter(filter => filter.key !== category);
-      return updatedArray;
-    });
-  };
+    // debugger;
+    if (category === 'price') {
+      setActinePriceFilter('');
+    }
+    clearFilter(category);
 
-  useEffect(() => {
-    dispatch(SET_FILTERS_ARRAY(filtersInArray));
-  }, [filtersInArray]);
+    // setFiltersInArray(prevArray => {
+    //   // Filter out filters with the specified category
+    //   const updatedArray = prevArray.filter(filter => filter.key !== category);
+    //   return updatedArray;
+    // });
+  };
 
   useEffect(() => {
     fetchFilters();
   }, []);
-
-  console.print(filtersInArray, 'filtersInArray');
 
   const fetchFilters = async () => {
     try {
@@ -189,6 +83,14 @@ const FilterBarlayout2 = ({
       let response = await getFilterListApi();
       let data = response?.data;
       setFilters(data ? data : {});
+      if (data?.price?.max_price > 2000) {
+        priceData.priceValueArray.push({
+          priceValue: 'Over $2000',
+          priceMin: 2000,
+          priceMax: data?.price?.max_price,
+          id: 4,
+        });
+      }
       Object.keys(data)?.forEach((key, index) => {
         let value = data[key];
         if (!Array.isArray(value)) {
@@ -233,9 +135,7 @@ const FilterBarlayout2 = ({
                   handleFilterSelect(event, category, option.backend_value)
                 }
               />
-              <span className='radiomark '></span>{' '}
-              {/* Replace the checkmark with radiomark class */}
-              {option.value}
+              <span className='radiomark '></span> {option.value}
             </label>
           </li>
         ))}
@@ -275,61 +175,31 @@ const FilterBarlayout2 = ({
   //     )
   // );
 
-  // let renderRangeSliders = (options, category) => {
-
-  //     return data.map((item, index) => (
-  //       <div>
-  //          <ul>
-
-  //          <li className="filter-value">
-  //             <label className="radio-container">
-  //                 <input type="radio" />
-  //                 <span className="radiomark">{item}</span>
-  //             </label>
-
-  //         </li>
-
-  //        </ul>
-
-  //       </div>
-  //     ));
-
-  // };
-
-  const handleRangeUnit = (category, unit) => {
-    setSelectedUnit(prevState => {
-      return {
-        ...prevState,
-        [category]: {
-          unit,
-        },
-      };
-    });
+  const handlePriceFilter = item => {
+    setActinePriceFilter(item.id);
+    filteChange(item);
   };
 
-  const handleRange = (event, category, unit, newValue) => {
-    setSelectedUnit(prev => {
+  const handleCustomPriceFilter = event => {
+    const { name, value } = event.target;
+    setCustomPrice(prev => {
       return {
         ...prev,
-        [category]: {
-          ...prev[category],
-          range: {
-            min: newValue[0],
-            max: newValue[1],
-          },
-        },
+        [name]: value,
       };
     });
   };
 
   const priceData = {
     priceValueArray: [
-      { priceValue: 'Under $250', priceMin: '', priceMax: '' },
-      { priceValue: '$250 - $1000', priceMin: '', priceMax: '' },
-      { priceValue: '$1000 - $2000', priceMin: '', priceMax: '' },
-      { priceValue: 'Over $2000', priceMin: '', priceMax: '' },
+      { id: 1, priceValue: 'Under $250', priceMin: 0, priceMax: 250 },
+      { id: 2, priceValue: '$250 - $1000', priceMin: 250, priceMax: 1000 },
+      { id: 3, priceValue: '$1000 - $2000', priceMin: 1000, priceMax: 2000 },
     ],
-    priceInputArray: [{ inputValue: 'Min' }, { inputValue: 'Max' }],
+    priceInputArray: [
+      { name: 'priceMin', placeholder: 'Min' },
+      { name: 'priceMax', placeholder: 'Max' },
+    ],
   };
 
   let renderRangeSliders = category => {
@@ -338,22 +208,20 @@ const FilterBarlayout2 = ({
         {category == 'ram_memory' ? (
           <>
             {[
-              { label: '4 GB', value: '4GB' },
-              { label: '6 GB', value: '6GB' },
-              { label: '8 GB', value: '8GB' },
-            ].map(ram => {
+              { label: '4 GB', value: 4, type: 'GB' },
+              { label: '6 GB', value: 6, type: 'GB' },
+              { label: '8 GB', value: 8, type: 'GB' },
+            ].map((ram, index) => {
               return (
-                <li className='filter-value'>
+                <li key={index} className='filter-value'>
                   <label className='radio-container' htmlFor={ram.value}>
                     <input
-                      id={ram.value}
+                      id={`ram${ram.value}`}
                       type='checkbox'
-                      checked={filtersInArray?.ram?.ram_value.includes(
-                        ram.value,
-                      )}
+                      // checked={filtersInArray[1].value}
                       name={category}
                       onChange={event =>
-                        handleFilterSelect(event, category, ram.value)
+                        handleFilterSelect(event, category, ram)
                       }
                     />
                     <span className='radiomark '></span> {ram.label}
@@ -369,10 +237,15 @@ const FilterBarlayout2 = ({
         {/* handle price category */}
         {category == 'price' ? (
           <>
-            {priceData.priceValueArray.map(item => (
+            {priceData.priceValueArray.map((item, index) => (
               <li
-                className='filter-value price-value'
-                style={{ padding: '2px 0px' }}>
+                key={index}
+                onClick={() => handlePriceFilter(item)}
+                style={{
+                  padding: '2px 0px',
+                  color: activePriceFiler === item.id ? '#f2a742' : '',
+                }}
+                className={'filter-value price-value'}>
                 {item.priceValue}
               </li>
             ))}
@@ -385,14 +258,21 @@ const FilterBarlayout2 = ({
             </li>
 
             <li className='filter-value' style={{ padding: '2px 0px' }}>
-              {priceData.priceInputArray.map(item => (
+              {priceData.priceInputArray.map((item, index) => (
                 <input
+                  key={index}
                   type='text'
-                  placeholder={`$${item.inputValue}`}
+                  name={item.name}
+                  placeholder={`$${item.placeholder}`}
                   className='price-input'
+                  onChange={handleCustomPriceFilter}
                 />
               ))}
-              <button className='price-go-btn'>Go</button>
+              <button
+                onClick={() => handlePriceFilter(customPrice)}
+                className='price-go-btn'>
+                Go
+              </button>
             </li>
           </>
         ) : (
@@ -401,11 +281,11 @@ const FilterBarlayout2 = ({
         {category == 'hard_disk' ? (
           <>
             {[
-              { label: '64 GB', value: '64GB' },
-              { label: '128 GB', value: '128GB' },
-              { label: '256 GB', value: '256GB' },
-              { label: '512 GB', value: '512GB' },
-              { label: '1 TB', value: '1TB' },
+              { label: '64 GB', value: 64, type: 'GB' },
+              { label: '128 GB', value: 128, type: 'GB' },
+              { label: '256 GB', value: 256, type: 'GB' },
+              { label: '512 GB', value: 512, type: 'GB' },
+              { label: '1 TB', value: 1, type: 'TB' },
             ].map(ram => {
               return (
                 <li key={ram.value} className='filter-value'>
@@ -418,7 +298,7 @@ const FilterBarlayout2 = ({
                       )}
                       name={ram.value}
                       onChange={event => {
-                        handleFilterSelect(event, category, ram.value);
+                        handleFilterSelect(event, category, ram);
                       }}
                     />
                     <span className='radiomark '></span> {ram.label}
@@ -473,8 +353,8 @@ const FilterBarlayout2 = ({
 
   let GpuAndTrendingData = [
     {
-      name: 'GPU',
-      data: ['Nvidia', 'AMD'],
+      name: 'gpu',
+      data: ['Nvidia', 'AMD', 'Intel HD Graphics'],
     },
     {
       name: 'Trending',
@@ -482,70 +362,92 @@ const FilterBarlayout2 = ({
     },
   ];
 
-  let renderedCategories = Object.entries(filters).map(
-    ([category, options], index) => (
-      <div key={index}>
-        {(!!filters[category].length || !Array.isArray(filters[category])) && (
-          <li
-            className='filter-key'
-            style={{
-              borderBottom: inDrawer ? '1px solid #DDDDDD' : '',
-            }}
-            key={`${category}-${index}`}>
-            <h3
-              onClick={() => DataInDrawerToggler(index + 3)}
-              className={`filter-heading ${inDrawer ? 'alignment-container' : ''}`}
-              style={{
-                margin: inDrawer ? '0px' : '',
-                padding: inDrawer ? '16px' : '',
-                width: inDrawer ? '100vw' : '',
-              }}>
-              {category.replace(/_/g, ' ')}{' '}
-              {filtersInArray?.length > 0 &&
-                filtersInArray?.some(filter => filter.key === category) && (
-                  <span
-                    className='filter-clear-btn'
-                    onClick={() => handleClearFilter(category)}>
-                    <CloseIcon fontSize='14px' />
-                    clear
-                  </span>
-                )}
-              {inDrawer ? (
-                <span className={`${inDrawer ? 'align-to-end' : ''}`}>
-                  <IconButton>
-                    {DataInDrawer[index + 3] ? (
-                      <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
-                    ) : (
-                      <KeyboardArrowDownIcon />
-                    )}{' '}
-                  </IconButton>
-                </span>
-              ) : (
-                ''
-              )}
-            </h3>
+  function findIndexByKey(arr, keyToFind) {
+    for (let i = 0; i < 8; i++) {
+      if (arr[0][i].key === keyToFind) {
+        return i;
+      }
+    }
+    return -1;
+  }
 
-            {(DataInDrawer[index + 3] || !inDrawer) && (
-              <ul
-                className='filter-values-list'
+  let renderedCategories = Object.entries(filters).map(
+    ([category, options], index) => {
+      const dd =
+        filtersInArray[findIndexByKey([filtersInArray], category)].value.min;
+      const ff =
+        filtersInArray[findIndexByKey([filtersInArray], category)].value
+          ?.length;
+      // debugger;
+      return (
+        <div key={index}>
+          {(!!filters[category].length ||
+            !Array.isArray(filters[category])) && (
+            <li
+              className='filter-key'
+              style={{
+                borderBottom: inDrawer ? '1px solid #DDDDDD' : '',
+              }}
+              key={`${category}-${index}`}>
+              <h3
+                onClick={() => DataInDrawerToggler(index + 3)}
+                className={`filter-heading ${inDrawer ? 'alignment-container' : ''}`}
                 style={{
-                  padding: inDrawer ? '0px 20px' : '',
-                  marginLeft: inDrawer ? '16px' : '',
+                  margin: inDrawer ? '0px' : '',
+                  padding: inDrawer ? '16px' : '',
+                  width: inDrawer ? '100vw' : '',
                 }}>
-                {Array.isArray(filters[category])
-                  ? renderedItems(options, category)
-                  : renderRangeSliders(category)}
-              </ul>
-            )}
-          </li>
-        )}
-      </div>
-    ),
+                {category.replace(/_/g, ' ')}{' '}
+                {(filtersInArray?.length > 0 &&
+                  filtersInArray[findIndexByKey([filtersInArray], category)]
+                    .value.min) ||
+                  (filtersInArray[findIndexByKey([filtersInArray], category)]
+                    .value?.length > 0 && (
+                    <span
+                      className='filter-clear-btn'
+                      onClick={() => handleClearFilter(category)}>
+                      <CloseIcon fontSize='14px' />
+                      clear d
+                    </span>
+                  ))}
+                {inDrawer ? (
+                  <span className={`${inDrawer ? 'align-to-end' : ''}`}>
+                    <IconButton>
+                      {DataInDrawer[index + 3] ? (
+                        <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
+                      ) : (
+                        <KeyboardArrowDownIcon />
+                      )}{' '}
+                    </IconButton>
+                  </span>
+                ) : (
+                  ''
+                )}
+              </h3>
+
+              {(DataInDrawer[index + 3] || !inDrawer) && (
+                <ul
+                  className='filter-values-list'
+                  style={{
+                    padding: inDrawer ? '0px 20px' : '',
+                    marginLeft: inDrawer ? '16px' : '',
+                  }}>
+                  {Array.isArray(filters[category])
+                    ? renderedItems(options, category)
+                    : renderRangeSliders(category)}
+                </ul>
+              )}
+            </li>
+          )}
+        </div>
+      );
+    },
   );
 
   const renderCategoriesGpuAndTrending = GpuAndTrendingData?.map(
     (category, index) => (
       <li
+        key={index}
         className='filter-key'
         style={{
           borderBottom: inDrawer ? '1px solid #DDDDDD' : '',
@@ -590,7 +492,7 @@ const FilterBarlayout2 = ({
               padding: inDrawer ? '0px 20px' : '',
               marginLeft: inDrawer ? '16px' : '',
             }}>
-            {category.name === 'GPU'
+            {category.name === 'gpu'
               ? renderGpu(category)
               : renderTrending(category)}
           </ul>

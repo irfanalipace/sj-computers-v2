@@ -41,10 +41,9 @@ const ProductSlider = ({ type = '', products }) => {
           nextEl: '.product-slider .swiper-button-next',
           prevEl: '.product-slider .swiper-button-prev',
         }}
-        className='recommendation-slider'
-      >
-        {products?.map(product => (
-          <SwiperSlide key={'ps-' + product.id}>
+        className='recommendation-slider'>
+        {products?.map((product, index) => (
+          <SwiperSlide key={index}>
             <div className='px-1'>
               <Product type={type} product={product} />
             </div>
@@ -54,12 +53,10 @@ const ProductSlider = ({ type = '', products }) => {
       {/* the css of these are defined in Slider.css */}
       <div
         className='swiper-button-next slider-button'
-        style={{ position: 'absolute', right: -40 }}
-      ></div>
+        style={{ position: 'absolute', right: -40 }}></div>
       <div
         className='swiper-button-prev slider-button'
-        style={{ position: 'absolute', left: -40 }}
-      ></div>
+        style={{ position: 'absolute', left: -40 }}></div>
     </div>
   );
 };

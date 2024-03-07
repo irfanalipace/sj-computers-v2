@@ -87,7 +87,12 @@ export function searchProductsApi(data) {
 }
 
 export function filterProductsApi(filter) {
-  filter.filter = filter?.filter?.map(fil => JSON.stringify(fil));
+  const newData = Object.keys(filter.filter).map(key => {
+    const { key: objKey, value } = filter.filter[key];
+    return { key: objKey, value };
+  });
+
+  filter.filter = newData?.map(fil => JSON.stringify(fil));
   return new Promise((resolve, reject) => {
     ApiService.get(`/filter-products`, '', filter)
       .then(response => {
