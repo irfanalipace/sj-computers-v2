@@ -13,11 +13,12 @@ import './App.css';
 import ScrollToTop from '@components/ScrollToTop/ScrollToTop';
 import AppWrapper from '@components/AppWrapper/AppWrapper';
 import FullScreenWrapper from './views/components/FullScreenWrapper/FullScreenWrapper';
+import { useViewportWidth } from '@hooks/useViewportWidth';
 
 function App() {
   const [tawkComponent, setTawkComponent] = useState(<></>);
   services.init(); //initialize all services
-
+  const screenWidth = useViewportWidth();
   useEffect(() => {
     setTimeout(() => {
       let jsx = (
@@ -51,11 +52,29 @@ function App() {
             <Header />
           </Suspense>
 
-          <div className='inner-body'>
+          {/* <div className='inner-body'>
             <FullScreenWrapper>
               <Router />
             </FullScreenWrapper>
-          </div>
+          </div> */}
+
+          {screenWidth > 576 ? (
+            <>
+              <div className='inner-body'>
+                <FullScreenWrapper>
+                  <Router />
+                </FullScreenWrapper>
+              </div>
+            </>
+          ) : (
+            <>
+              <FullScreenWrapper>
+                <div className='inner-body'>
+                  <Router />
+                </div>
+              </FullScreenWrapper>
+            </>
+          )}
 
           <Suspense>
             <Footer />

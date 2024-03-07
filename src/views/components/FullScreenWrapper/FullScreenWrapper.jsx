@@ -12,7 +12,7 @@ const FullScreenWrapper = ({ children }) => {
         width: '100%',
         maxWidth: location.pathname == '/' ? '' : '1450px',
 
-        display: 'flex',
+        // display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         // backgroundColor: 'white',
