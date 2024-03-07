@@ -188,6 +188,9 @@
     width: 200px;
     margin-left: 0px !important;
   }
+  .cart-image-mobile-size img {
+    width: 95%;
+  }
   .buttons-on-cartitem .cart-bttn {
     margin-top: 10px;
   }
@@ -233,7 +236,6 @@
   .cart-image-mobile-size {
     display: flex;
     justify-content: center;
-    margin-top: 23px;
   }
   .buttons-on-cartitem {
     margin-top: -21px;

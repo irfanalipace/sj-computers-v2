@@ -52,7 +52,7 @@ export default function MobileReviewCheckout({
       <h4>Estimated delivery: {estimatedDelivery ? estimatedDelivery : ''}</h4>
       <p>Items Shipped from sjcomputer.us</p>
 
-      <div className='row mx-0 mb-3'>
+      <div className='row mx-0'>
         {itemsToShow?.map(item => (
           <div className='item-card' key={item?.id}>
             <div className='col-4 ps-0'>
