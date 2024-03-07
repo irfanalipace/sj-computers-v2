@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProductsGrid from '@components/ProductsGrid/ProductsGrid';
 import { getProductsCategory } from '../../core/api/products';
+import { filterProducts } from '@store/products/productsThunks';
 
-const ProductCategoryGrid = ({ pathValue }) => {
+const ProductCategoryGrid = ({ pathValue, filters }) => {
   const categories = useSelector(state => state.category.categories);
   const [productsList, setProductsList] = useState([]);
   const [totalProducts, setTotalProducts] = useState(12);
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
 
   const getProducts = async total => {
     try {
@@ -36,6 +39,59 @@ const ProductCategoryGrid = ({ pathValue }) => {
     setTotalProducts(total);
     getProducts(total);
   };
+
+  function isEmptyObject(obj) {
+    return Object.keys(obj).length === 0;
+  }
+
+  useEffect(() => {
+    let filterObject = {
+      page: 1,
+      per_page: 12,
+      name: '',
+      category: pathValue,
+    };
+
+    let filteredData = {};
+
+    for (const key in filters) {
+      const item = filters[key];
+      if (Array.isArray(item.value) && item.value.length === 0) {
+        continue;
+      }
+      if (
+        typeof item.value === 'object' &&
+        (item.value.min === null ||
+          item.value.min === Infinity ||
+          (item.value.min === 0 && item.value.max === 0))
+      ) {
+        continue;
+      }
+      filteredData[key] = item;
+    }
+
+    filterObject = {
+      ...filterObject,
+      filter: filteredData,
+    };
+
+    // debugger;
+
+    if (isEmptyObject(filteredData)) {
+      dispatch(
+        filterProducts(
+          filterObject,
+          false,
+          productAfterShowMore => {
+            setProductsList(productAfterShowMore);
+          },
+          // viewItemDataLayer(productAfterShowMore, categorySlug),
+        ),
+      );
+    } else {
+      getProducts(totalProducts);
+    }
+  }, [filters]);
 
   return (
     <ProductsGrid

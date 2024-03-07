@@ -23,6 +23,8 @@ const CategorySidebar = ({
   sidebarTitle,
   budgetedDesktops,
   isNewApi,
+  pathValue,
+  upateFilters,
 }) => {
   const dispatch = useDispatch();
   const [filtersInArray, setFiltersInArray] = useState([
@@ -200,6 +202,10 @@ const CategorySidebar = ({
 
   useEffect(() => {
     dispatch(SET_FILTERS_ARRAY(filtersInArray));
+    if (typeof myProp === 'function') {
+      upateFilters(filtersInArray);
+    }
+
     dispatch(SET_FILTERS_API(isNewApi));
   }, [filtersInArray]);
 
