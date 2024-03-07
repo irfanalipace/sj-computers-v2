@@ -100,11 +100,10 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
           left: 0,
           borderTop: '2px solid #CDCDCD',
           width: '100vw',
-        }}
-      ></Box>
+        }}></Box>
       <Box>
         <div className='mt-5 col-md-12 items-details-description'>
-          <h3 className='items-text-style'>Description</h3>
+          <h3 className='items-text-style'>Description </h3>
 
           <ul className='ps-0' type='1'>
             {description?.map((item, index) => (
@@ -125,22 +124,26 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
           left: 0,
           borderTop: '2px solid #CDCDCD',
           width: '100vw',
-        }}
-      ></Box>
+        }}></Box>
 
-      <Stack alignItems={'center'} direction={'row'} spacing={2} my={2} mt={3}>
+      <Stack
+        alignItems={'center'}
+        direction={'row'}
+        spacing={2}
+        my={2}
+        mt={3}
+        sx={{ marginBottom: '0px' }}>
         <Typography
           color={'#333333'}
           fontWeight={500}
           fontSize={'12px'}
           lineHeight={'14px'}
-          fontFamily={'Inter'}
-        >
+          fontFamily={'Inter'}>
           Price:
         </Typography>
         <PriceWithLabel sx={{ mb: 0.8 }} price={product?.price} />
       </Stack>
-      <div style={{ fontSize: '12px' }} className='mt-2 mb-2'>
+      <div style={{ fontSize: '12px', lineHeight: '13px' }} className=' mb-2'>
         $20 shipping & import fees deposit to Pakistan. <Link>Details</Link>
       </div>
       <CheckOutCard isMobile={true} product={{ ...product }} />
@@ -150,8 +153,7 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
           mt: 4,
           border: 'none',
           borderTop: '2px solid #CDCDCD',
-        }}
-      ></Box>
+        }}></Box>
 
       {/* <Typography
                 color={"#007185"}
