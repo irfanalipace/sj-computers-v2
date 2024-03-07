@@ -60,9 +60,10 @@ const FilterBarlayout2 = ({
   };
 
   const handleClearFilter = category => {
-    // debugger;
     if (category === 'price') {
       setActinePriceFilter('');
+      document.getElementById(`customInput${0}`).value = '';
+      document.getElementById(`customInput${1}`).value = '';
     }
     if (category === 'hard_disk') {
       setHardDiskCheckd([]);
@@ -75,6 +76,9 @@ const FilterBarlayout2 = ({
     }
     if (category === 'operating_system') {
       setOsCheckd([]);
+    }
+    if (category === 'brand') {
+      setBrandCheckd([]);
     }
 
     clearFilter(category);
@@ -173,12 +177,21 @@ const FilterBarlayout2 = ({
     if (catg === 'processor') {
       return processorCheckd.includes(value);
     }
+    if (catg === 'operating_system') {
+      // debugger;
+      return osCheckd.includes(value);
+    }
+    if (catg === 'brand') {
+      // debugger;
+      return brandCheckd.includes(value);
+    }
   };
 
   const [hardDiskCheckd, setHardDiskCheckd] = useState([]);
   const [ramDiskCheckd, setRamDiskCheckd] = useState([]);
   const [processorCheckd, setProcessorCheckd] = useState([]);
   const [osCheckd, setOsCheckd] = useState([]);
+  const [brandCheckd, setBrandCheckd] = useState([]);
 
   let renderedItems = (options, category) => {
     let optionArray = options.slice(0, visibleEntries[category].visibleEntries);
@@ -199,7 +212,6 @@ const FilterBarlayout2 = ({
                 name={category} // Add a name attribute to group the radio buttons by category
                 value={option.backend_value} // Add a value attribute to specify the value of the selected radio button
                 onChange={event => {
-                  // debugger;
                   if (category === 'processor') {
                     const hardDiskCheckdCopy = [...processorCheckd];
                     if (event.target.checked) {
@@ -214,7 +226,7 @@ const FilterBarlayout2 = ({
                       setProcessorCheckd(hardDiskCheckdCopy);
                     }
                   }
-                  if (category === '"operating_system"') {
+                  if (category === 'operating_system') {
                     const hardDiskCheckdCopy = [...osCheckd];
                     if (event.target.checked) {
                       hardDiskCheckdCopy.push(option.backend_value);
@@ -228,6 +240,21 @@ const FilterBarlayout2 = ({
                       setOsCheckd(hardDiskCheckdCopy);
                     }
                   }
+                  if (category === 'brand') {
+                    const hardDiskCheckdCopy = [...brandCheckd];
+                    if (event.target.checked) {
+                      hardDiskCheckdCopy.push(option.backend_value);
+                      setBrandCheckd(hardDiskCheckdCopy);
+                    }
+                    if (!event.target.checked) {
+                      const finIndex = brandCheckd.findIndex(
+                        item => item === option.backend_value,
+                      );
+                      hardDiskCheckdCopy.splice(finIndex, 1);
+                      setBrandCheckd(hardDiskCheckdCopy);
+                    }
+                  }
+
                   handleFilterSelect(event, category, option.backend_value);
                 }}
               />
@@ -379,6 +406,13 @@ const FilterBarlayout2 = ({
             <li className='filter-value' style={{ padding: '2px 0px' }}>
               {priceData.priceInputArray.map((item, index) => (
                 <input
+                  id={`customInput${index}`}
+                  style={{
+                    border:
+                      activePriceFiler === item.id
+                        ? '1px solid #f2a742'
+                        : '1px solid gray',
+                  }}
                   key={index}
                   type='text'
                   name={item.name}
@@ -530,7 +564,7 @@ const FilterBarlayout2 = ({
                   padding: inDrawer ? '16px' : '',
                   width: inDrawer ? '100vw' : '',
                 }}>
-                {category.replace(/_/g, ' ')} (
+                {category.replace(/_/g, ' ')}
                 {showClear(category) && (
                   <span
                     className='filter-clear-btn'
@@ -539,7 +573,7 @@ const FilterBarlayout2 = ({
                     clear
                   </span>
                 )}
-                , )
+
                 {inDrawer ? (
                   <span className={`${inDrawer ? 'align-to-end' : ''}`}>
                     <IconButton>

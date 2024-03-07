@@ -1,23 +1,40 @@
 import { Checkbox, Stack, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import StarRatings from 'react-star-ratings';
 import './FilterbarLayout2.css';
-export default function ReviewFilter({ onChange }) {
+import CloseIcon from '@mui/icons-material/Close';
+
+export default function ReviewFilter({ onChange, clearReview }) {
   const reveiwData = [
-    { label: '4.5 & up', value: 4.5 },
-    { label: '4 & up', value: 4 },
-    { label: '3 & up', value: 3 },
-    { label: '2 & up', value: 2 },
+    { id: 1, label: '4.5 & up', value: 4.5 },
+    { id: 2, label: '4 & up', value: 4 },
+    { id: 3, label: '3 & up', value: 3 },
+    { id: 4, label: '2 & up', value: 2 },
   ];
+  const [checkedReview, setCheckedReview] = useState([]);
   return (
     <>
+      {!!checkedReview.length && (
+        <span
+          style={{ position: 'absolute', top: 0, right: 25 }}
+          className='filter-clear-btn'
+          onClick={() => {
+            clearReview();
+            setCheckedReview([]);
+          }}>
+          <CloseIcon fontSize='14px' />
+          Clear
+        </span>
+      )}
+
       {reveiwData.map((reveiw, index) => {
         return (
-          <Stack key={index} direction={'row'} spacing={1} mb={0.7} mt={1}>
+          <Stack key={index} direction={'row'} spacing={1} mt={0.5}>
             <label
               className='checkbox-container'
               htmlFor={reveiw.value.toString()}>
               <Checkbox
+                checked={checkedReview.includes(reveiw.id)}
                 id={reveiw.value.toString()}
                 style={{
                   color: ' #f2a742',
@@ -25,7 +42,20 @@ export default function ReviewFilter({ onChange }) {
                 }}
                 icon={<span style={unchecked} />}
                 checkedIcon={<span style={checked} />}
-                onChange={event => onChange(event, 'reveiw', reveiw)}
+                onChange={event => {
+                  const co = [...checkedReview];
+                  if (event.target.checked) {
+                    co.push(reveiw.id);
+                  }
+                  if (!event.target.checked) {
+                    const findIndex = checkedReview.findIndex(
+                      item => item === reveiw.id,
+                    );
+                    co.splice(findIndex, 1);
+                  }
+                  setCheckedReview(co);
+                  onChange(event, 'reveiw', reveiw);
+                }}
               />
               {/* <input
                 id={reveiw.value.toString()}
