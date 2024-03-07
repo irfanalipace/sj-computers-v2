@@ -130,7 +130,7 @@ const CartItem = ({ item }) => {
         style={{ color: '#000', textAlign: 'center' }}
         className='hidden-on-mobile hidden-on-tab'>
         <br />
-        <br />${totalPrice.toFixed(2)}
+        <br />${totalPrice?.toFixed(2)}
       </div>
 
       <Grid

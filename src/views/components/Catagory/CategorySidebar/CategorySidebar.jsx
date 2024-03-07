@@ -97,11 +97,15 @@ const CategorySidebar = ({
     if (minMaxArray.includes(categ)) {
       filtersArrayCopy[keyIndex].value.min = 0;
       filtersArrayCopy[keyIndex].value.max = 0;
+      // debugger;
+      setFiltersInArray(filtersArrayCopy);
       return;
     }
 
     if (arrayFilter.includes(categ)) {
+      // debugger;
       filtersArrayCopy[keyIndex].value = [];
+      setFiltersInArray(filtersArrayCopy);
       return;
     }
   };
@@ -119,6 +123,7 @@ const CategorySidebar = ({
 
   const handleFilterSelect = (event, category, option) => {
     // debugger;
+
     const arraysFilter = ['processor', 'brand', 'operating_system', 'gpu'];
     const keyIndex = findIndexByKey([filtersInArray], category);
     const filtersArrayCopy = JSON.parse(JSON.stringify(filtersInArray));
