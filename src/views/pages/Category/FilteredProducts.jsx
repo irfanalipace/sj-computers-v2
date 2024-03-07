@@ -113,6 +113,7 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
   };
 
   useEffect(() => {
+    console.log('not here');
     if (mounted) {
       let filteredData = {};
 
@@ -160,7 +161,7 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
       }
     }
     console.log(filtersArray);
-  }, [JSON.stringify(filtersArray)]);
+  }, [JSON.stringify(filtersArray), isNewApi]);
 
   useEffect(() => {
     let filteredData = {};

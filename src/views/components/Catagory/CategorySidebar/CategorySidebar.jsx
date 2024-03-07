@@ -228,9 +228,7 @@ const CategorySidebar = ({
   const budgetFilter = 'isBudFriendlyDesktops';
 
   const handleReviewFilter = (e, category, option) => {
-    const finIndex = reveiwFilterArray.findIndex(
-      item => item.value === option.value,
-    );
+    const finIndex = reveiwFilterArray.findIndex(item => item.id === option.id);
     if (finIndex !== -1) {
       const reveiwFilterArrayCopy = [...reveiwFilterArray];
       reveiwFilterArrayCopy.splice(finIndex, 1);
@@ -238,6 +236,10 @@ const CategorySidebar = ({
       return;
     }
     setReveiwFilterArray([...reveiwFilterArray, option]);
+  };
+
+  const clearReview = () => {
+    setReveiwFilterArray([]);
   };
 
   const handleFilterChange = item => {
@@ -421,6 +423,7 @@ const CategorySidebar = ({
       </Grid>
 
       <Grid
+        position={'relative'}
         item
         xs={12}
         ml={inDrawer ? 0 : 2.7}
@@ -451,7 +454,10 @@ const CategorySidebar = ({
         )}
         {(DataInDrawer[2] || !inDrawer) && (
           <Box ml={inDrawer ? 4 : 0} py={1}>
-            <ReviewFilter onChange={handleReviewFilter} />
+            <ReviewFilter
+              clearReview={clearReview}
+              onChange={handleReviewFilter}
+            />
           </Box>
         )}
       </Grid>
