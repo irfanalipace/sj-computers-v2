@@ -107,13 +107,18 @@ export default function MobileReviewCheckout({
                                                         : "Tech Unlimited"}
                                                 </span> */}
 
-                      <WarrantyBadge
+                    
+
+
+
+                        <WarrantyBadge
                         durationInYears={
                           item?.plan?.durationInYears
-                            ? item?.plan?.durationInYears + ' years'
-                            : 'Tech Unlimited'
+                            ? `${item.plan.durationInYears} years`
+                            : `${item?.plan?.value} ${item?.plan?.key}`
                         }
                       />
+                      
                     </div>
                   )}
                 </div>

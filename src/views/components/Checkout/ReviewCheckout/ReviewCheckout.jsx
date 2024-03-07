@@ -98,14 +98,13 @@ export default function ReviewCheckout({
                                                           " years"
                                                         : "Tech Unlimited"}
                                                 </span> */}
-
-                      <WarrantyBadge
-                        durationInYears={
-                          item?.plan?.durationInYears
-                            ? item?.plan?.durationInYears + ' years'
-                            : 'Tech Unlimited'
-                        }
-                      />
+                                <WarrantyBadge
+                                  durationInYears={
+                                    item?.plan?.durationInYears
+                                      ? `${item.plan.durationInYears} years`
+                                      : `${item?.plan?.value} ${item?.plan?.key}`
+                                  }
+                                />
                     </div>
                   )}
                 </div>

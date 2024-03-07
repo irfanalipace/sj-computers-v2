@@ -230,9 +230,8 @@ export const CartItem = memo(({ cartData }) => {
                                 <WarrantyBadge
                                   durationInYears={
                                     cartData?.plan?.durationInYears
-                                      ? cartData?.plan?.durationInYears +
-                                        ' years'
-                                      : 'Tech Unlimited'
+                                      ? `${cartData.plan.durationInYears} years`
+                                      : `${cartData?.plan?.value} ${cartData?.plan?.key}`
                                   }
                                 />
                               </div>

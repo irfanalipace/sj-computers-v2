@@ -13,8 +13,7 @@ function WarrantyBadge({ durationInYears, planPrice }) {
       <div className='protection-lables-warntity-warranty-badge text-start px-2 py-2'>
         <p
           className='dev-sj-computers-sections-dev-badge text-start ms-0'
-          style={{ marginBottom: '2px' }}
-        >
+          style={{ marginBottom: '2px' }}>
           SJ Computer
         </p>
         <p className='protection-name-dev-protection-p text-start'>Warranty</p>
@@ -25,6 +24,7 @@ function WarrantyBadge({ durationInYears, planPrice }) {
                         ? cartData?.plan?.durationInYears + " years"
                         : "Tech Unlimited"} */}
             {durationInYears}
+           
           </span>
         </div>
       </div>
