@@ -69,7 +69,7 @@ const ProtectionPlanDrawer = ({
                 direction={'row'}
                 alignItems={'start'}
                 sx={{ width: '100%' }}>
-                <Grid item xs={1}>
+                <Grid item>
                   <Checkbox
                     sx={{ pl: 0, pt: 0 }}
                     checked={protectionPlan?.id === plan.id}
@@ -99,17 +99,19 @@ const ProtectionPlanDrawer = ({
                   <Accordion elevation={0} className='palnaccord'>
                     <AccordionSummary
                       sx={{ p: 0, minHeight: '10px', m: 0, mb: 1 }}
-                      expandIcon={<KeyboardArrowDownIcon />}
                       aria-controls='panel1-content'
                       id='panel1-header'>
-                      <Typography
-                        sx={{
-                          m: 0,
-                          color: 'rgb(18, 112, 196)',
-                          cursor: 'pointer',
-                        }}>
-                        Learn More
-                      </Typography>
+                      <Grid container>
+                        <Typography
+                          sx={{
+                            m: 0,
+                            color: 'rgb(18, 112, 196)',
+                            cursor: 'pointer',
+                          }}>
+                          Learn More
+                        </Typography>
+                        <KeyboardArrowDownIcon sx={{ marginLeft: '150px' }} />
+                      </Grid>
                     </AccordionSummary>
                     <AccordionDetails>
                       {plan.value === '2' && <TWOYearsDetails />}
