@@ -6,28 +6,56 @@ const initialState = {
   filtersProduct: [],
   searchString: searchParam,
   isShowMore: false,
-  filtersArray: {
-    review: {
-      min: 0,
-      max: 0,
+  isNewApi: false,
+  filtersArray: [
+    {
+      key: 'processor',
+      value: [],
     },
-    price: {
-      min: 0,
-      max: 0,
+    {
+      key: 'ram_memory',
+      value: {
+        unit: [],
+        min: 0,
+        max: 0,
+      },
     },
-    brand: {
-      brand_name: [],
+    {
+      key: 'review',
+      value: {
+        min: 0,
+        max: 0,
+      },
     },
-    operating_system: {
-      os_name: [],
+    {
+      key: 'price',
+      value: {
+        min: 0,
+        max: 0,
+      },
     },
-    internal_memory: {
-      internal_memory_value: [],
+    {
+      key: 'brand',
+      value: [],
     },
-    ram: {
-      ram_value: [],
+    {
+      key: 'operating_system',
+      value: [],
     },
-  },
+
+    {
+      key: 'gpu',
+      value: [],
+    },
+    {
+      key: 'hard_disk',
+      value: {
+        unit: [],
+        min: 0,
+        max: 0,
+      },
+    },
+  ],
   isFiltering: false,
   selectedCategory: null,
   apiError: false,
@@ -101,6 +129,10 @@ const productSlice = createSlice({
     SET_FILTERS_ARRAY: (state, action) => {
       state.filtersArray = { ...action.payload };
     },
+    SET_FILTERS_API: (state, action) => {
+      // debugger;
+      state.isNewApi = action.payload;
+    },
     SET_FILTERING_PRODUCTS: (state, action) => {
       state.isFiltering = true;
     },
@@ -138,6 +170,7 @@ export const {
   CLEAR_LOADING,
   FETCH_PRODUCTS,
   SET_FILTERS_ARRAY,
+  SET_FILTERS_API,
   SET_SELECTED_CATEGORY,
   SET_FILTERING_PRODUCTS,
   SET_IS_SHOW_MORE,

@@ -61,8 +61,7 @@ const BlogDetails = () => {
     <li key={category.id}>
       <Link
         to={`/blogs/category/${category.slug}`}
-        className='text-decoration-none'
-      >
+        className='text-decoration-none'>
         {category.name}
       </Link>
     </li>
@@ -292,8 +291,7 @@ const BlogDetails = () => {
                             <li className='policy-listitem' key={index}>
                               <Link
                                 to={link.path}
-                                className='text-decoration-none text-color hover-effect-sets-topbar hover-text-color-policy-comp'
-                              >
+                                className='text-decoration-none text-color hover-effect-sets-topbar hover-text-color-policy-comp'>
                                 {link.title}
                               </Link>
                             </li>
@@ -316,8 +314,7 @@ const BlogDetails = () => {
                               padding: '3px',
                               borderRadius: '5px',
                               color: 'whit',
-                            }}
-                          >
+                            }}>
                             Blogs /
                           </span>{' '}
                           {blogslug}
@@ -379,8 +376,7 @@ const BlogDetails = () => {
                                 onClick={event =>
                                   handleClick(event, category.id)
                                 }
-                                className='text-decoration-none'
-                              >
+                                className='text-decoration-none'>
                                 {category.name}
                               </Link>
                             </div>
@@ -413,8 +409,7 @@ const BlogDetails = () => {
                       <div
                         className='left-dev-span-stories recent-bogs-view-clops'
                         onClick={RecentCollapse}
-                        style={{ display: 'flex' }}
-                      >
+                        style={{ display: 'flex' }}>
                         <div>
                           <span>Recent Articles</span>
                         </div>
@@ -446,8 +441,7 @@ const BlogDetails = () => {
                               <div key={blog.id}>
                                 <Link
                                   to={`/${blog?.slug}`}
-                                  className='text-decoration-none'
-                                >
+                                  className='text-decoration-none'>
                                   <div className='row'>
                                     <div className='col-4'>
                                       <div className='them-stori-mage'>
@@ -482,8 +476,7 @@ const BlogDetails = () => {
                     <div>
                       <div
                         onClick={toggleCollapse}
-                        className='widget widget_categories categor-data-scrping'
-                      >
+                        className='widget widget_categories categor-data-scrping'>
                         <div className='category-data-span-blogs'>
                           <span>Categories</span>
                         </div>

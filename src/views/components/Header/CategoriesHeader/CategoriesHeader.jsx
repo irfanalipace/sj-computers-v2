@@ -176,8 +176,7 @@ const CategoriesHeader = () => {
         <Link
           key={category.id}
           to={`/category/${category.slug}`}
-          style={{ textDecoration: 'none' }}
-        >
+          style={{ textDecoration: 'none' }}>
           <div className='item'> {category.name} </div>
         </Link>
         //   <Grid item key={index} style={{textDecoration: "none"}}>

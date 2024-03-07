@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Grid, Typography, Box, IconButton } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Grid, Typography, Box, IconButton, Stack } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import StarRatings from 'react-star-ratings';
@@ -10,13 +10,71 @@ import { Link } from 'react-router-dom';
 
 import './CategorySidebar.css';
 import BudgetFriendlyFilters from './BudgetFriendlyFilters';
+import ReviewFilter from './ReviewFilter';
+import {
+  SET_FILTERS_API,
+  SET_FILTERS_ARRAY,
+} from '../../../../core/store/products/productsSlice';
+import { useDispatch } from 'react-redux';
 
 const CategorySidebar = ({
   inDrawer,
   toggleDrawer,
   sidebarTitle,
   budgetedDesktops,
+  isNewApi,
 }) => {
+  const dispatch = useDispatch();
+  const [filtersInArray, setFiltersInArray] = useState([
+    {
+      key: 'processor',
+      value: [],
+    },
+    {
+      key: 'ram_memory',
+      value: {
+        unit: [],
+        min: 0,
+        max: 0,
+      },
+    },
+    {
+      key: 'review',
+      value: {
+        min: 0,
+        max: 0,
+      },
+    },
+    {
+      key: 'price',
+      value: {
+        min: 0,
+        max: 0,
+      },
+    },
+    {
+      key: 'brand',
+      value: [],
+    },
+    {
+      key: 'operating_system',
+      value: [],
+    },
+
+    {
+      key: 'gpu',
+      value: [],
+    },
+    {
+      key: 'hard_disk',
+      value: {
+        unit: [],
+        min: 0,
+        max: 0,
+      },
+    },
+  ]);
+  const [reveiwFilterArray, setReveiwFilterArray] = useState([]);
   const [isSubCategoryVisible, setIsSubCategoryVisible] = useState(
     categoriesWithSubCategories.map(() => false),
   );
@@ -29,6 +87,116 @@ const CategorySidebar = ({
     // setVisibleCategory((prevVisibleCategory) => prevVisibleCategory - computerCategories?.length);
     setVisibleCategory(2);
   };
+  const handleClearFilter = categ => {
+    const keyIndex = findIndexByKey([filtersInArray], categ);
+    const filtersArrayCopy = JSON.parse(JSON.stringify(filtersInArray));
+
+    const minMaxArray = ['price', 'review'];
+    const arrayFilter = ['processor', 'brand', 'operating_system', 'gpu'];
+
+    if (minMaxArray.includes(categ)) {
+      filtersArrayCopy[keyIndex].value.min = 0;
+      filtersArrayCopy[keyIndex].value.max = 0;
+      return;
+    }
+
+    if (arrayFilter.includes(categ)) {
+      filtersArrayCopy[keyIndex].value = [];
+      return;
+    }
+  };
+
+  function findIndexByKey(arr, keyToFind) {
+    for (let i = 0; i < 8; i++) {
+      if (arr[0][i].key === keyToFind) {
+        return i;
+      }
+    }
+    return -1;
+  }
+  const [hardDiskFilter, setHardDiskFilter] = useState([]);
+  const [ramFilter, setRamFilter] = useState([]);
+
+  const handleFilterSelect = (event, category, option) => {
+    // debugger;
+    const arraysFilter = ['processor', 'brand', 'operating_system', 'gpu'];
+    const keyIndex = findIndexByKey([filtersInArray], category);
+    const filtersArrayCopy = JSON.parse(JSON.stringify(filtersInArray));
+
+    const unitFilterArray = ['hard_disk', 'ram_memory'];
+
+    if (unitFilterArray.includes(category)) {
+      const arrayOjbectIndex = arr => {
+        // debugger;
+        const findIndex = arr.findIndex(item => item.value === option.value);
+        return findIndex;
+      };
+      const arrayToFilter = () => {
+        if (category === 'hard_disk') {
+          return hardDiskFilter;
+        }
+        if (category === 'ram_memory') {
+          return ramFilter;
+        }
+      };
+      const findIndex = arrayOjbectIndex(arrayToFilter());
+
+      if (event.target.checked === false) {
+        if (findIndex !== -1) {
+          const arrayToFilterCopy = [...arrayToFilter()];
+          arrayToFilterCopy.splice(findIndex, 1);
+          if (category === 'hard_disk') {
+            setHardDiskFilter(arrayToFilterCopy);
+            return;
+          }
+          if (category === 'ram_memory') {
+            setRamFilter(arrayToFilterCopy);
+            return;
+          }
+        }
+      }
+      if (category === 'hard_disk') {
+        console.log(option);
+        // debugger;
+        setHardDiskFilter([...hardDiskFilter, option]);
+        return;
+      }
+      if (category === 'ram_memory') {
+        setRamFilter([...ramFilter, option]);
+        return;
+      }
+    }
+
+    if (toggleDrawer) {
+      toggleDrawer();
+    }
+    if (arraysFilter.includes(category)) {
+      if (event.target.checked === false) {
+        const findIndex = filtersArrayCopy[keyIndex].value.findIndex(
+          item => item === option,
+        );
+
+        if (findIndex !== -1) {
+          filtersArrayCopy[keyIndex].value.splice(findIndex, 1);
+          setFiltersInArray(filtersArrayCopy);
+          console.log(filtersArrayCopy);
+          return;
+        }
+      }
+      // const dd = filtersArrayCopy[keyIndex];
+      // debugger;
+      filtersArrayCopy[keyIndex].value.push(option);
+      console.log(filtersArrayCopy);
+      setFiltersInArray(filtersArrayCopy);
+
+      return;
+    }
+  };
+
+  useEffect(() => {
+    dispatch(SET_FILTERS_ARRAY(filtersInArray));
+    dispatch(SET_FILTERS_API(isNewApi));
+  }, [filtersInArray]);
 
   const toggleSubCategoryVisibility = index => {
     // Toggle the visibility state of the specific Box at the given index
@@ -53,6 +221,99 @@ const CategorySidebar = ({
     setIsOpen(state => !state);
   };
   const budgetFilter = 'isBudFriendlyDesktops';
+
+  const handleReviewFilter = (e, category, option) => {
+    const finIndex = reveiwFilterArray.findIndex(
+      item => item.value === option.value,
+    );
+    if (finIndex !== -1) {
+      const reveiwFilterArrayCopy = [...reveiwFilterArray];
+      reveiwFilterArrayCopy.splice(finIndex, 1);
+      setReveiwFilterArray([...reveiwFilterArrayCopy]);
+      return;
+    }
+    setReveiwFilterArray([...reveiwFilterArray, option]);
+  };
+
+  const handleFilterChange = item => {
+    const keyIndex = findIndexByKey([filtersInArray], 'price');
+    const filtersArrayCopy = JSON.parse(JSON.stringify(filtersInArray));
+    filtersArrayCopy[keyIndex].value.min = item.priceMin;
+    filtersArrayCopy[keyIndex].value.max = item.priceMax;
+    setFiltersInArray(filtersArrayCopy);
+  };
+
+  useEffect(() => {
+    let minValue = Infinity;
+    let maxValue = -Infinity;
+    if (reveiwFilterArray.length) {
+      for (let obj of reveiwFilterArray) {
+        if (obj.value < minValue) {
+          minValue = obj.value;
+        }
+        if (obj.value > maxValue) {
+          maxValue = obj.value;
+        }
+      }
+    }
+    console.log(reveiwFilterArray);
+    console.log('minValue: ' + minValue + ' maxValue: ' + maxValue);
+    const keyIndex = findIndexByKey([filtersInArray], 'review');
+    const filtersArrayCopy = JSON.parse(JSON.stringify(filtersInArray));
+    filtersArrayCopy[keyIndex].value.min = minValue;
+    filtersArrayCopy[keyIndex].value.max = maxValue;
+    setFiltersInArray(filtersArrayCopy);
+  }, [reveiwFilterArray]);
+
+  useEffect(() => {
+    let minValue = Infinity;
+    let maxValue = -Infinity;
+    if (hardDiskFilter.length) {
+      for (let obj of hardDiskFilter) {
+        if (obj?.value < minValue) {
+          minValue = obj?.value;
+        }
+        if (obj?.value > maxValue) {
+          maxValue = obj?.value;
+        }
+      }
+    }
+    console.log(hardDiskFilter);
+
+    console.log('minValue: ' + minValue + ' maxValue: ' + maxValue);
+    const keyIndex = findIndexByKey([filtersInArray], 'hard_disk');
+    const filtersArrayCopy = JSON.parse(JSON.stringify(filtersInArray));
+    filtersArrayCopy[keyIndex].value.min = minValue;
+    filtersArrayCopy[keyIndex].value.max = maxValue;
+    filtersArrayCopy[keyIndex].value.unit = hardDiskFilter?.map(
+      item => item.type,
+    );
+    setFiltersInArray(filtersArrayCopy);
+  }, [hardDiskFilter]);
+
+  useEffect(() => {
+    let minValue = Infinity;
+    let maxValue = -Infinity;
+    if (ramFilter.length) {
+      for (let obj of ramFilter) {
+        if (obj.value < minValue) {
+          minValue = obj.value;
+        }
+        if (obj.value > maxValue) {
+          maxValue = obj.value;
+        }
+      }
+    }
+    console.log(ramFilter);
+    // debugger;
+    console.log('minValue: ' + minValue + ' maxValue: ' + maxValue);
+    const keyIndex = findIndexByKey([filtersInArray], 'ram_memory');
+    const filtersArrayCopy = JSON.parse(JSON.stringify(filtersInArray));
+    filtersArrayCopy[keyIndex].value.min = minValue;
+    filtersArrayCopy[keyIndex].value.max = maxValue;
+    filtersArrayCopy[keyIndex].value.unit = ramFilter?.map(item => item.type);
+    setFiltersInArray(filtersArrayCopy);
+  }, [ramFilter]);
 
   return (
     <Grid
@@ -96,7 +357,7 @@ const CategorySidebar = ({
             {categoriesWithSubCategories
               ?.slice(0, visibleCategory)
               ?.map((category, index) => (
-                <>
+                <div key={index}>
                   <Typography
                     ml={inDrawer ? 4 : 2}
                     variant='body2'
@@ -125,7 +386,7 @@ const CategorySidebar = ({
                       ))}
                     </Box>
                   )}
-                </>
+                </div>
               ))}
             {visibleCategory + 1 > categoriesWithSubCategories?.length ? (
               <Typography
@@ -157,7 +418,7 @@ const CategorySidebar = ({
       <Grid
         item
         xs={12}
-        ml={inDrawer ? 0 : 2}
+        ml={inDrawer ? 0 : 2.7}
         my={1}
         borderBottom={inDrawer ? '1px solid #DDDDDD' : ''}>
         {sidebarTitle !== budgetFilter && (
@@ -167,7 +428,7 @@ const CategorySidebar = ({
             variant='body2'
             className={`${inDrawer ? 'alignment-container' : ''}`}
             fontWeight={'bolder'}>
-            Customer Reviews{' '}
+            Customer Reviews
             {inDrawer ? (
               <span className={`${inDrawer ? 'align-to-end' : ''}`}>
                 <IconButton>
@@ -175,7 +436,7 @@ const CategorySidebar = ({
                     <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
                   ) : (
                     <KeyboardArrowDownIcon />
-                  )}{' '}
+                  )}
                 </IconButton>
               </span>
             ) : (
@@ -184,59 +445,8 @@ const CategorySidebar = ({
           </Typography>
         )}
         {(DataInDrawer[2] || !inDrawer) && (
-          <Box ml={inDrawer ? 4 : 2} py={1}>
-            <Typography
-              mb={0.5}
-              variant='body2'
-              fontSize={'small'}
-              className='review-lines'>
-              <StarRatings
-                starDimension='18px'
-                starSpacing='0'
-                rating={4}
-                starRatedColor='orange'
-              />
-              & Up
-            </Typography>
-            <Typography
-              mb={0.5}
-              variant='body2'
-              fontSize={'small'}
-              className='review-lines'>
-              <StarRatings
-                starDimension='18px'
-                starSpacing='0'
-                rating={3}
-                starRatedColor='orange'
-              />
-              & Up
-            </Typography>
-            <Typography
-              mb={0.5}
-              variant='body2'
-              fontSize={'small'}
-              className='review-lines'>
-              <StarRatings
-                starDimension='18px'
-                starSpacing='0'
-                rating={2}
-                starRatedColor='orange'
-              />
-              & Up
-            </Typography>
-            <Typography
-              mb={0.5}
-              variant='body2'
-              fontSize={'small'}
-              className='review-lines'>
-              <StarRatings
-                starDimension='18px'
-                starSpacing='0'
-                rating={1}
-                starRatedColor='orange'
-              />
-              & Up
-            </Typography>
+          <Box ml={inDrawer ? 4 : 0} py={1}>
+            <ReviewFilter onChange={handleReviewFilter} />
           </Box>
         )}
       </Grid>
@@ -254,6 +464,10 @@ const CategorySidebar = ({
           {/* <FilterBar /> */}
           {/* {sidebarTitle !== budgetFilter && ( */}
           <FilterBarlayout2
+            clearFilter={handleClearFilter}
+            filteChange={handleFilterChange}
+            handleFilterSelect={handleFilterSelect}
+            filtersInArray={filtersInArray}
             inDrawer={inDrawer}
             DataInDrawer={DataInDrawer}
             DataInDrawerToggler={DataInDrawerToggler}
