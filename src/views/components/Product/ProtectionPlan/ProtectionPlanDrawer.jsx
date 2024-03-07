@@ -102,6 +102,7 @@ const ProtectionPlanDrawer = ({
                       aria-controls='panel1-content'
                       id='panel1-header'>
                       <Grid container>
+                        <KeyboardArrowDownIcon sx={{ marginLeft: '10px' }} />
                         <Typography
                           sx={{
                             m: 0,
@@ -110,7 +111,6 @@ const ProtectionPlanDrawer = ({
                           }}>
                           Learn More
                         </Typography>
-                        <KeyboardArrowDownIcon sx={{ marginLeft: '150px' }} />
                       </Grid>
                     </AccordionSummary>
                     <AccordionDetails>
