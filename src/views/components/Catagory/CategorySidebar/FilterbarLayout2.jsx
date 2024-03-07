@@ -328,6 +328,59 @@ const FilterBarlayout2 = ({
   let renderRangeSliders = category => {
     return (
       <ul className='filter-values-list'>
+        {/* handle price category */}
+        {category == 'price' ? (
+          <>
+            {priceData.priceValueArray.map((item, index) => (
+              <li
+                key={index}
+                onClick={() => handlePriceFilter(item)}
+                style={{
+                  padding: '2px 0px',
+                  color: activePriceFiler === item.id ? '#f2a742' : '',
+                }}
+                className={'filter-value price-value'}>
+                {item.priceValue}
+              </li>
+            ))}
+            <li className='filter-value' style={{ padding: '2px 0px' }}>
+              <FontAwesomeIcon
+                icon={faAngleDown}
+                style={{ margin: ' 0px 5px', color: 'black' }}
+              />
+              <span style={{ color: '#52AC66' }}>Custom Price</span>
+            </li>
+
+            <li className='filter-value' style={{ padding: '2px 0px' }}>
+              {priceData.priceInputArray.map((item, index) => (
+                <input
+                  id={`customInput${index}`}
+                  style={{
+                    border:
+                      activePriceFiler === item.id
+                        ? '1px solid #f2a742'
+                        : '1px solid gray',
+                  }}
+                  key={index}
+                  type='text'
+                  name={item.name}
+                  checked={showClear(category)}
+                  placeholder={`$${item.placeholder}`}
+                  className='price-input'
+                  onChange={handleCustomPriceFilter}
+                />
+              ))}
+              <button
+                onClick={() => handlePriceFilter(customPrice)}
+                className='price-go-btn'>
+                Go
+              </button>
+            </li>
+          </>
+        ) : (
+          <></>
+        )}
+
         {category === 'ram_memory' ? (
           <>
             {[
