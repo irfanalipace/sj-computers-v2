@@ -181,9 +181,8 @@ const CartOverlay = ({ isOpen, toggleSidebar }) => {
                                         <WarrantyBadge
                                           durationInYears={
                                             item?.plan?.durationInYears
-                                              ? item?.plan?.durationInYears +
-                                                ' years'
-                                              : 'Tech Unlimited'
+                                              ? `${item.plan.durationInYears} years`
+                                              : `${item?.plan?.value} ${item?.plan?.key}`
                                           }
                                         />
                                       </div>
