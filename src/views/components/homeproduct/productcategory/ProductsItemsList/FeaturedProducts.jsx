@@ -18,7 +18,7 @@ const FeaturedProducts = ({
       <div className='row featured-products mx-0'>
         {featured.map((category, index) => (
           <div key={index} className='col-12 col-sm-6 col-lg-3'>
-            <Link to={category.link} className='text-decoration-none'>
+            <Link to={category.redirectTo} className='text-decoration-none'>
               <div className='product-type-section'>
                 <h2 className='h4-heading category-name'>{category.name}</h2>
                 <div
