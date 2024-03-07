@@ -42,14 +42,12 @@ const AddToCartCard = ({ product }) => {
         lg={gettingProtectionPlan?.plan?.durationInYears ? 6 : 5}
         style={{ backgroundColor: '#fff', height: '180px' }}
         mr={5}
-        mb={2}
-      >
+        mb={2}>
         <Grid
           container
           direction='row'
           justifyContent='space-evenly'
-          alignItems='center'
-        >
+          alignItems='center'>
           <Grid item mt={3} lg={4} pl={5}>
             <div className='image-containerer'>
               <LazyLoadImage
@@ -90,8 +88,7 @@ const AddToCartCard = ({ product }) => {
             lg={gettingProtectionPlan?.plan?.durationInYears ? 4 : 6}
             container
             justifyContent='flex-sart'
-            alignItems='center'
-          >
+            alignItems='center'>
             <CheckCircleRoundedIcon sx={{ color: '#318243' }} />
             &ensp;<b style={{ fontWeight: 600 }}>Added to Cart</b>
             {!gettingProtectionPlan?.plan?.durationInYears && (
@@ -101,8 +98,7 @@ const AddToCartCard = ({ product }) => {
                   // marginLeft: "30px",
                   fontSize: '12px',
                   fontWeight: 600,
-                }}
-              >
+                }}>
                 Style:&nbsp;
                 <span>27 ‘’ FHD FreeSync 100HZ</span>
               </h4>
@@ -116,8 +112,7 @@ const AddToCartCard = ({ product }) => {
         justifyContent='space-evenly'
         lg={gettingProtectionPlan?.plan?.durationInYears ? 3 : 5}
         style={{ backgroundColor: '#fff' }}
-        mb={2}
-      >
+        mb={2}>
         {!gettingProtectionPlan?.plan?.durationInYears && (
           <Grid
             container
@@ -125,13 +120,11 @@ const AddToCartCard = ({ product }) => {
             justifyContent='center'
             alignItems='center'
             lg={6}
-            mt={3}
-          >
+            mt={3}>
             <p
               style={{
                 fontSize: '11px',
-              }}
-            >
+              }}>
               <span style={{ color: '#318243', lineHeight: '16px' }}>
                 Your Order qualifies for FREE Shipping.
               </span>
@@ -143,8 +136,7 @@ const AddToCartCard = ({ product }) => {
         <Grid
           item
           lg={!gettingProtectionPlan?.plan?.durationInYears ? 5 : 10}
-          mb={!isAuthenticated ? 0 : 2}
-        >
+          mb={!isAuthenticated ? 0 : 2}>
           <p className='cart-total mb-4 mt-4'>
             Cart Subtotal:&nbsp;
             <sup style={{ fontSize: '10px' }}>$</sup>
@@ -153,8 +145,7 @@ const AddToCartCard = ({ product }) => {
           </p>
           <button
             className='proceed-to-checkout mb-2'
-            onClick={() => navigate('/checkout')}
-          >
+            onClick={() => navigate('/checkout')}>
             Proceed to checkout ({product?.quantity} item)
           </button>
           <button className='go-to-cart' onClick={() => navigate('/cart')}>
@@ -169,8 +160,7 @@ const AddToCartCard = ({ product }) => {
                 marginTop: '10px',
                 marginLeft: '14px',
                 textAlign: 'center',
-              }}
-            >
+              }}>
               For best experience{' '}
               <Link to='/login' style={{ textDecoration: 'none' }}>
                 sign in to your account
