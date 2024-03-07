@@ -1,4 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800"); */
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
@@ -68,6 +68,14 @@ span {
   /* max-width: 1450px; */
   background-color: #d9d9d9;
 }
+.inner-body-mobile-screen {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  /* max-width: 1450px; */
+  background-color: white;
+}
 .christmas-offer-card {
   font-size: 14px;
   padding: 5px 0;
@@ -126,5 +134,17 @@ span {
 @media screen and (max-width: 780px) {
   .hidden-on-mobile {
     display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .inner-body {
+    /* min-height: calc(100vh - 600px); */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    /* max-width: 1450px; */
+    background-color: white;
   }
 }

@@ -119,7 +119,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
             borderBottom: '1px solid #D0D0D0',
           }}>
           <h3
-            className='d-block d-sm-none'
+            className='d-bloc d-sm-none'
             style={{
               fontSize: '20px',
               fontWeight: 600,
