@@ -325,7 +325,7 @@ class ProductController extends BaseController
             foreach ($filters as $filter) {
                
                 // $filter = json_encode($filter, true);
-                // $filter = json_decode($filter, true);
+                $filter = json_decode($filter, true);
                
                 $key = $filter['key'] ?? '';
                 $value = $filter['value'] ?? '';

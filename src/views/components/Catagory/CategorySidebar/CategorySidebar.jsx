@@ -93,12 +93,13 @@ const CategorySidebar = ({
     const keyIndex = findIndexByKey([filtersInArray], categ);
     const filtersArrayCopy = JSON.parse(JSON.stringify(filtersInArray));
 
-    const minMaxArray = ['price', 'review'];
+    const minMaxArray = ['price', 'review', 'ram_memory', 'hard_disk'];
     const arrayFilter = ['processor', 'brand', 'operating_system', 'gpu'];
 
     if (minMaxArray.includes(categ)) {
       filtersArrayCopy[keyIndex].value.min = 0;
       filtersArrayCopy[keyIndex].value.max = 0;
+      filtersArrayCopy[keyIndex].value.unit = [];
       // debugger;
       setFiltersInArray(filtersArrayCopy);
       return;
@@ -147,6 +148,7 @@ const CategorySidebar = ({
         }
       };
       const findIndex = arrayOjbectIndex(arrayToFilter());
+      // debugger;
 
       if (event.target.checked === false) {
         if (findIndex !== -1) {
@@ -301,6 +303,9 @@ const CategorySidebar = ({
     filtersArrayCopy[keyIndex].value.unit = hardDiskFilter?.map(
       item => item.type,
     );
+    filtersArrayCopy[keyIndex].value.unit = [
+      ...new Set(filtersArrayCopy[keyIndex].value.unit),
+    ];
     setFiltersInArray(filtersArrayCopy);
   }, [hardDiskFilter]);
 
@@ -317,6 +322,7 @@ const CategorySidebar = ({
         }
       }
     }
+    // debugger;
     console.log(ramFilter);
     // debugger;
     console.log('minValue: ' + minValue + ' maxValue: ' + maxValue);
@@ -325,6 +331,9 @@ const CategorySidebar = ({
     filtersArrayCopy[keyIndex].value.min = minValue;
     filtersArrayCopy[keyIndex].value.max = maxValue;
     filtersArrayCopy[keyIndex].value.unit = ramFilter?.map(item => item.type);
+    filtersArrayCopy[keyIndex].value.unit = [
+      ...new Set(filtersArrayCopy[keyIndex].value.unit),
+    ];
     setFiltersInArray(filtersArrayCopy);
   }, [ramFilter]);
 
