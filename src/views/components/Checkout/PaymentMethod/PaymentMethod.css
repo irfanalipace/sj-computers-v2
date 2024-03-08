@@ -37,4 +37,19 @@
   .payment-method label {
     margin-left: 0px;
   }
+  .payment-mobile-version-screen {
+    display: none;
+  }
+  .paypal-mobile-screen-version {
+    display: none;
+  }
+  .debit-cart-creited-cart {
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    color: #000000;
+    text-align: left;
+  }
 }

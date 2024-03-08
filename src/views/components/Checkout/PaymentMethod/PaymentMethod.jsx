@@ -111,8 +111,10 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
           />
           <div>
             <label htmlFor='method1'>
-              <div>Debit/Credit Card</div>
-              <div className='image-wrapper' style={{ marginLeft: '30px' }}>
+              <div className='debit-cart-creited-cart'>Debit/Credit Card</div>
+              <div
+                className='image-wrapper payment-mobile-version-screen'
+                style={{ marginLeft: '30px' }}>
                 <img src={visa} /> <img src={mastercard} />
               </div>
             </label>
@@ -129,11 +131,10 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
           />
           <div>
             <label htmlFor='method2'>
-              <div>PayPal</div>
+              <div className='debit-cart-creited-cart'>PayPal</div>
               <div
-                className='image-warpper-image2'
-                style={{ marginLeft: '100px' }}
-              >
+                className='image-warpper-image2 paypal-mobile-screen-version'
+                style={{ marginLeft: '100px' }}>
                 <img src={paypal} className='' />
               </div>
             </label>
@@ -147,8 +148,7 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
         paymentMethod={paymentMethod}
         isLoading={isLoading || placingOrder}
         disabled={!paymentMethod || !shippingDetails.address || !paymentMethod}
-        clickHandler={clickHandler}
-      >
+        clickHandler={clickHandler}>
         Proceed for payment
       </PaymentButton>
 
