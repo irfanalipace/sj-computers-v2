@@ -41,19 +41,18 @@ const FilterBarlayout2 = ({
   const [rangeValues, setRangeValues] = useState({});
   const [activePriceFiler, setActinePriceFilter] = useState('');
   const [customPrice, setCustomPrice] = useState({
+    id: 10,
     priceMin: 0,
     priceMax: 0,
   });
 
-  const priceData = {
-    priceValueArray: [
-      { id: 1, priceValue: 'Under $250', priceMin: 0, priceMax: 250 },
-    ],
+  const [priceData, setPriceData] = useState({
+    priceValueArray: [],
     priceInputArray: [
-      { name: 'priceMin', placeholder: 'Min' },
-      { name: 'priceMax', placeholder: 'Max' },
+      { id: 10, name: 'priceMin', placeholder: 'Min' },
+      { id: 10, name: 'priceMax', placeholder: 'Max' },
     ],
-  };
+  });
 
   const dispatch = useDispatch();
 
@@ -101,9 +100,72 @@ const FilterBarlayout2 = ({
     // });
   };
 
+  function generateRealisticOptions(highestGb, lowestGb) {
+    const realisticOptions = [];
+    for (let i = lowestGb; i <= highestGb; i *= 2) {
+      realisticOptions.push(i);
+    }
+    return realisticOptions;
+  }
+
   useEffect(() => {
     fetchFilters();
   }, []);
+
+  function getPriceRanges(min, max) {
+    const ranges = [];
+
+    if (min < 250) {
+      ranges.push({
+        id: 1,
+        priceValue: 'under $250',
+        priceMin: min,
+        priceMax: 250,
+      });
+    }
+    if (pathValue !== 'budget-friendly') {
+      if (max > 250) {
+        ranges.push({
+          id: 2,
+          priceValue: '$250 - $1000',
+          priceMin: 250,
+          priceMax: 1000,
+        });
+      }
+
+      if (max > 1000) {
+        ranges.push({
+          id: 3,
+          priceValue: '$1000 - $2000',
+          priceMin: 1000,
+          priceMax: 2000,
+        });
+      }
+
+      if (max > 2000) {
+        ranges.push({
+          id: 4,
+          priceValue: '$2000 - $5000',
+          priceMin: 2000,
+          priceMax: 5000,
+        });
+      }
+
+      if (max > 5000) {
+        ranges.push({
+          id: 5,
+          priceValue: 'over $5000',
+          priceMin: 5000,
+          priceMax: 100000,
+        });
+      }
+    }
+
+    return ranges;
+  }
+
+  const [ramData, setRamData] = useState([{ gb: [], tb: 0 }]);
+  const [hardDistData, setHardDiskData] = useState([{ gb: [], tb: 0 }]);
 
   const fetchFilters = async () => {
     try {
@@ -112,14 +174,34 @@ const FilterBarlayout2 = ({
       let data = response?.data;
       setFilters(data ? data : {});
 
-      if (data?.price?.max_price > 2000 && pathValue !== 'budget-friendly') {
-        priceData.priceValueArray.push({
-          priceValue: 'Over $2000',
-          priceMin: 2000,
-          priceMax: data?.price?.max_price,
-          id: 4,
-        });
-      }
+      const highestGb = data.ram_memory.highest_GB;
+      const lowestGb = data.ram_memory.least_GB;
+      const realisticOptions = generateRealisticOptions(highestGb, lowestGb);
+      const ramOptions = realisticOptions.filter(option => option <= highestGb);
+      setRamData([{ gb: ramOptions, tb: data.ram_memory.least_TB }]);
+
+      const highestHardDiskGb = data.hard_disk.highest_GB;
+      // const lowestHardDiskGb = data.hard_disk.least_GB;
+      const realisticOptionsHardDisk = generateRealisticOptions(
+        highestHardDiskGb,
+        64,
+      );
+      const hardDiskOptions = realisticOptionsHardDisk.filter(
+        option => option <= highestGb,
+      );
+      setHardDiskData([{ gb: hardDiskOptions, tb: data.hard_disk.least_TB }]);
+
+      const priceShapedArray = getPriceRanges(
+        data.price.min_price,
+        data.price.max_price,
+      );
+      setPriceData(prev => {
+        return {
+          ...prev,
+          priceValueArray: priceShapedArray,
+        };
+      });
+
       Object.keys(data)?.forEach((key, index) => {
         let value = data[key];
         if (!Array.isArray(value)) {
@@ -153,47 +235,9 @@ const FilterBarlayout2 = ({
     const check3 =
       filtersInArray[findIndexByKey([filtersInArray], category)]?.value
         ?.length > 0;
+
     if ((check1 && check2) || check3) {
       return true;
-    }
-    return false;
-  };
-
-  console.log(pathValue);
-  if (pathValue !== 'budget-friendly') {
-    priceData.priceValueArray?.push(
-      { id: 2, priceValue: '$250 - $1000', priceMin: 250, priceMax: 1000 },
-      {
-        id: 3,
-        priceValue: '$1000 - $2000',
-        priceMin: 1000,
-        priceMax: 2000,
-      },
-    );
-  }
-
-  const isChecked = category => {
-    const check1 =
-      filtersInArray[findIndexByKey([filtersInArray], category)]?.value?.max !==
-      -Infinity;
-    const check2 =
-      filtersInArray[findIndexByKey([filtersInArray], category)]?.value?.max >
-      0;
-    const check3 =
-      filtersInArray[findIndexByKey([filtersInArray], category)]?.value
-        ?.length > 0;
-    if (check1 && check2) {
-      return true;
-    }
-    if (check3) {
-      const dd =
-        filtersInArray[
-          findIndexByKey([filtersInArray], category)
-        ]?.value.includes(current);
-      if (dd) {
-        return true;
-      }
-      return false;
     }
     return false;
   };
@@ -324,6 +368,7 @@ const FilterBarlayout2 = ({
   // );
 
   const handlePriceFilter = item => {
+    // debugger;
     setActinePriceFilter(item.id);
     filteChange(item);
   };
@@ -337,7 +382,8 @@ const FilterBarlayout2 = ({
       };
     });
   };
-
+  console.clear();
+  console.log(activePriceFiler);
   let renderRangeSliders = category => {
     return (
       <ul className='filter-values-list'>
@@ -396,95 +442,163 @@ const FilterBarlayout2 = ({
 
         {category === 'ram_memory' ? (
           <>
-            {[
-              { id: 1, label: '4 GB', value: 4, type: 'GB' },
-              { id: 2, label: '6 GB', value: 6, type: 'GB' },
-              { id: 3, label: '8 GB', value: 8, type: 'GB' },
-            ].map((ram, index) => {
-              return (
-                <li key={index} className='filter-value'>
-                  <label className='radio-container' htmlFor={ram.value}>
-                    <input
-                      id={`ram${ram.value}`}
-                      type='checkbox'
-                      // checked={filtersInArray[1].value}
-                      name={category}
-                      onChange={event =>
-                        handleFilterSelect(event, category, ram)
-                      }
-                    />
-                    {/* <input
-                      id={`ram${index}`}
-                      type='checkbox'
-                      // checked={ramDiskCheckd.includes(ram.id)}
-                      name={ram.value}
-                      onChange={event => {
-                        debugger;
-                        const ramCheckdCopy = [...ramDiskCheckd];
-                        if (event.target.checked) {
-                          ramCheckdCopy.push(ram.id);
-                          setRamDiskCheckd(ramCheckdCopy);
-                        }
-                        if (!event.target.checked) {
-                          const finIndex = ramDiskCheckd.findIndex(
-                            item => item === ram.id,
-                          );
-                          ramCheckdCopy.splice(finIndex, 1);
-                          setRamDiskCheckd(ramCheckdCopy);
-                        }
-                        debugger;
-                        handleFilterSelect(event, category, ram);
-                      }}
-                    /> */}
-                    <span className='radiomark '></span> {ram.label}
-                  </label>
-                </li>
-              );
+            {ramData.map((ram, index) => {
+              return ram.gb.map(item => {
+                return (
+                  <li key={index} className='filter-value'>
+                    <label className='radio-container' htmlFor={item}>
+                      <input
+                        id={item}
+                        type='checkbox'
+                        checked={ramDiskCheckd.includes(item)}
+                        // name={}
+                        onChange={event => {
+                          // debugger;
+                          const ramCheckdCopy = [...ramDiskCheckd];
+                          if (event.target.checked) {
+                            ramCheckdCopy.push(item);
+                            setRamDiskCheckd(ramCheckdCopy);
+                          }
+                          if (!event.target.checked) {
+                            const finIndex = ramDiskCheckd.findIndex(
+                              item => item === item,
+                            );
+                            ramCheckdCopy.splice(finIndex, 1);
+                            setRamDiskCheckd(ramCheckdCopy);
+                          }
+                          handleFilterSelect(event, category, {
+                            id: index + 1,
+                            label: `${item}  'GB'`,
+                            value: item,
+                            type: 'GB',
+                          });
+                        }}
+                      />
+                      <span className='radiomark '></span> {item + ' GB'}
+                    </label>
+                  </li>
+                );
+              });
             })}
+            {ramData[0]?.tb > 0 && (
+              <li className='filter-value'>
+                <label className='radio-container' htmlFor={'tb'}>
+                  <input
+                    id={'tb'}
+                    type='checkbox'
+                    checked={ramDiskCheckd.includes(ramData?.length + 2)}
+                    // name={}
+                    onChange={event => {
+                      const ramCheckdCopy = [...ramDiskCheckd];
+                      if (event.target.checked) {
+                        ramCheckdCopy.push(ramData?.length + 2);
+                        setRamDiskCheckd(ramCheckdCopy);
+                      }
+                      if (!event.target.checked) {
+                        const finIndex = ramDiskCheckd.findIndex(
+                          item => item === ramData?.length + 2,
+                        );
+                        ramCheckdCopy.splice(finIndex, 1);
+                        setRamDiskCheckd(ramCheckdCopy);
+                      }
+                      // debugger;
+                      handleFilterSelect(event, category, {
+                        id: ramData?.length + 2,
+                        label: `${item}  'TB'`,
+                        value: item,
+                        type: 'TB',
+                      });
+                    }}
+                  />
+                  <span className='radiomark '></span> {1 + ' TB & above'}
+                </label>
+              </li>
+            )}
           </>
         ) : (
           <></>
         )}
+        {/* { id: 1, label: '64 GB', value: 64, type: 'GB' }, */}
 
-        {category == 'hard_disk' ? (
+        {category === 'hard_disk' ? (
           <>
-            {[
-              { id: 1, label: '64 GB', value: 64, type: 'GB' },
-              { id: 2, label: '128 GB', value: 128, type: 'GB' },
-              { id: 3, label: '256 GB', value: 256, type: 'GB' },
-              { id: 4, label: '512 GB', value: 512, type: 'GB' },
-              { id: 5, label: '1 TB', value: 1, type: 'TB' },
-            ].map((ram, index) => {
-              return (
-                <li key={ram.value} className='filter-value'>
-                  <label className='radio-container' htmlFor={ram.value}>
-                    <input
-                      id={ram.value}
-                      type='checkbox'
-                      checked={hardDiskCheckd.includes(ram.id)}
-                      name={ram.value}
-                      onChange={event => {
-                        const hardDiskCheckdCopy = [...hardDiskCheckd];
-                        if (event.target.checked) {
-                          hardDiskCheckdCopy.push(ram.id);
-                          setHardDiskCheckd(hardDiskCheckdCopy);
-                        }
-                        if (!event.target.checked) {
-                          const finIndex = hardDiskCheckd.findIndex(
-                            item => item === ram.id,
-                          );
-                          hardDiskCheckdCopy.splice(finIndex, 1);
-                          setHardDiskCheckd(hardDiskCheckdCopy);
-                        }
+            {hardDistData.map((ram, index) => {
+              return ram.gb.map(item => {
+                return (
+                  <li key={`${item}hdkey`} className='filter-value'>
+                    <label className='radio-container' htmlFor={`${item}hd`}>
+                      <input
+                        id={`${item}hd`}
+                        type='checkbox'
+                        checked={hardDiskCheckd.includes(item)}
+                        name={`${item}hdname`}
+                        onChange={event => {
+                          const hardDiskCheckdCopy = [...hardDiskCheckd];
+                          if (event.target.checked) {
+                            hardDiskCheckdCopy.push(item);
+                            setHardDiskCheckd(hardDiskCheckdCopy);
+                          }
+                          if (!event.target.checked) {
+                            const finIndex = hardDiskCheckd.findIndex(
+                              item1 => item1 === item,
+                            );
+                            hardDiskCheckdCopy.splice(finIndex, 1);
+                            setHardDiskCheckd(hardDiskCheckdCopy);
+                          }
 
-                        handleFilterSelect(event, category, ram);
-                      }}
-                    />
-                    <span className='radiomark '></span> {ram.label}
-                  </label>
-                </li>
-              );
+                          console.log(category);
+
+                          handleFilterSelect(event, category, {
+                            id: index + 1,
+                            label: `${item}  'GB'`,
+                            value: item,
+                            type: 'GB',
+                          });
+                        }}
+                      />
+                      <span className='radiomark '></span> {item + ' GB'}
+                    </label>
+                  </li>
+                );
+              });
             })}
+            {hardDistData[0]?.tb > 0 && (
+              <li className='filter-value'>
+                <label className='radio-container' htmlFor={'tbhd'}>
+                  <input
+                    id={'tbhd'}
+                    type='checkbox'
+                    checked={hardDiskCheckd.includes(
+                      hardDistData[0]?.gb?.length + 2,
+                    )}
+                    // name={ram.value}
+                    onChange={event => {
+                      const hardDiskCheckdCopy = [...hardDiskCheckd];
+                      if (event.target.checked) {
+                        hardDiskCheckdCopy.push(hardDistData[0]?.gb.length + 2);
+                        setHardDiskCheckd(hardDiskCheckdCopy);
+                      }
+                      if (!event.target.checked) {
+                        const finIndex = hardDiskCheckd.findIndex(
+                          item => item === hardDistData[0]?.gb.length + 2,
+                        );
+                        hardDiskCheckdCopy.splice(finIndex, 1);
+                        setHardDiskCheckd(hardDiskCheckdCopy);
+                      }
+                      // debugger;
+
+                      handleFilterSelect(event, category, {
+                        id: hardDistData[0]?.gb.length + 2,
+                        label: `${1}  'TB'`,
+                        value: 1,
+                        type: 'TB',
+                      });
+                    }}
+                  />
+                  <span className='radiomark '></span> {'1 TB & Above'}
+                </label>
+              </li>
+            )}
           </>
         ) : (
           <></>
