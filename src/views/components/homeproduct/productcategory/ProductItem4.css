@@ -12,6 +12,19 @@
   margin-bottom: 10px;
 }
 
+.category-item .category-name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1; /* Limit the number of displayed lines */
+  line-height: 1.2rem; /* Adjust the line height as needed */
+  height: 14%;
+  width: 80%;
+  text-align: center;
+  /* padding: 0px 3px; */
+}
+
 .product-type-section .category-item:hover .category-name {
   color: #e87e24;
 }

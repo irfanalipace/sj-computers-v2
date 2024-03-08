@@ -79,7 +79,7 @@ const ProductItem4 = ({ items }) => {
           xs={6}
           style={{ height: '50%', padding: '2px' }}
           className='px-0'>
-          <Link to={item.categoryLink} className='category-item'>
+          <Link to={item.categoryLink || item.url} className='category-item'>
             <div
               className='image-wrapper'
               style={{
@@ -93,7 +93,9 @@ const ProductItem4 = ({ items }) => {
                 className='dynamic-image'
               />
             </div>
-            <div className='category-name'>{item.categoryName}</div>
+            <div className='category-name'>
+              {item.categoryName || item.name}
+            </div>
           </Link>
         </Col>
       ))}
