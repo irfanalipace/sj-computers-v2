@@ -16,6 +16,7 @@ use App\Models\Product\ProtectivePlan;
 use App\Models\ProductInfo;
 use App\Models\ProductMedia;
 use App\Models\ProductReview;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -99,66 +100,127 @@ class ProductController extends BaseController
     public function getProductFilterList(Request $request)
     {
         $data = [];
-
-        $data['processor'] = $this->queryProductInfo('processor');
-        $data['ram_memory'] = $this->queryProductInfo('ram_memory');
-        $data['operating_system'] = $this->queryProductInfo('operating_system');
+       
+        $category = (isset($request->category) && $request->category) ? $request->category : []; 
+        
+        $data['processor'] = $this->queryProductInfo('processor', $category);
+        $data['ram_memory'] = $this->queryProductInfo('ram_memory', $category);
+        $data['operating_system'] = $this->queryProductInfo('operating_system', $category);
         // $data['operating_system'] = [];
-        $data['hard_disk'] = $this->queryProductInfo('hard_disk');
+        $data['hard_disk'] = $this->queryProductInfo('hard_disk', $category);
         // $data['graphic'] = $this->queryProductInfo('graphic');
         // $data['graphic'] = [];
-        $data['brand'] = $this->queryProductInfo('brand');
+        $data['brand'] = $this->queryProductInfo('brand', $category);
         
-        $data['price'] = $this->queryProductInfo('price');
+        $data['price'] = $this->queryProductInfo('price', $category);
+      
+        // dd($data);
 
         return $this->sendResponse($data);
     }
 
-    public function queryProductInfo($key)
+    public function queryProductInfo($key,$category = [])
     {
+        if(!empty($category)){
+            $methodName = $this->getMethodNameFromCategory($category);
+            
+            if (!method_exists($this, $methodName)) {
+                return $this->sendError('error', 'Select a valid category to fetch data.');
+            }
+
+            $sql = $this->$methodName();
+           
+        }
+        $sql = (isset($sql) && $sql) ? $sql : [] ;
+        
         if ($key == 'ram_memory' || $key == 'hard_disk') {
             $units = ['MB', 'GB', 'TB'];
 
             $listArr = [];
 
             foreach ($units as $unit) {
-                $data = $this->getLeastHighestValue($key, $unit);
+                $data = $this->getLeastHighestValue($key, $unit,$sql);
 
                 $listArr['least_' . $unit] = $data['least_' . $unit];
                 $listArr['highest_' . $unit] = $data['highest_' . $unit];
 
             }
-
+            
             return $listArr;
+        } else if($key == 'price'){
+            return $this->getPrices($sql);
+        } else if($key == 'brand'){
+            return $this->getBrands($key,$sql);
+        } 
+        // else if($key == 'processor') {
+        //     return [
+        //         'Core i3',
+                    // 'Core i5'
+                    // 'Core i7'
+        //     ];
+        // }
+
+        if(!empty($sql)){
+            $products = $sql->whereHas('productInfo', function ($query) use ($key) {
+                $query->where('key', $key);
+            })
+            ->with(['productInfo' => function ($query) use ($key) {
+                $query->where('key', $key)->select(['product_id', 'value']);
+            }])
+            ->get()
+            ->flatMap(function ($product) {
+                return $product->productInfo;
+            })
+            ->unique('value')
+            ->values()
+            ->map(function ($productInfo) {
+                $value = $productInfo->value;
+                $backendValue = str_replace(' ', '_', strtolower($value));
+                return [
+                    'value' => $value,
+                    'backend_value' => $backendValue,
+                ];
+            });
+
+        } else{
+            $products = ProductInfo::select('value')->where('key', $key)->groupby('value')->distinct()->get();
         }
-        if($key == 'price'){
-            return $this->getPrices();
-        }
-        if($key == 'brand'){
-            return $this->getBrands($key);
-        }
-        return ProductInfo::select('value')->where('key', $key)->groupby('value')->distinct()->get();
+        return $products;
     }
 
-    protected function getPrices()
+    protected function getPrices($sql = [])
     {
-        $product = Product::query();
+        $product = (!empty($sql)) ? $sql :  Product::query();
         $data['min_price'] = $product->min('price');
         $data['max_price'] = $product->max('price');
-
+        
         return $data;
     }
 
-    public function getLeastHighestValue($key, $unit)
+    public function getLeastHighestValue($key, $unit,$sql = [])
     {
         $conversionFactors = ['MB' => 1, 'GB' => 1024, 'TB' => 1048576]; // Conversion factors
-
-        $records = DB::table('product_infos')
+        
+        if(!empty($sql)) { 
+           
+            $records = $sql->whereHas('productInfo', function ($query) use ($key, $unit) {
+                $query->where('key', $key)
+                      ->where('value', 'LIKE', '%' . $unit . '%');
+            })->with(['productInfo' => function ($query) use ($key, $unit) {
+                // Optionally, if you only need the 'value' field from 'productInfo' for the filtered products
+                $query->where('key', $key)
+                      ->where('value', 'LIKE', '%' . $unit . '%')
+                      ->select('product_id', 'value'); // Ensure to select the foreign key for proper relationship mapping
+            }])->get();
+            
+        } else{
+            $records = DB::table('product_infos')
             ->where('key', $key)
             ->where('value', 'LIKE', '%' . $unit . '%')
             ->select('value')
             ->get();
-
+        }
+        
         $values = $records->map(function ($item) use ($conversionFactors) {
             // Extract the numeric part and unit from the value string
             preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
@@ -172,29 +234,54 @@ class ProductController extends BaseController
         // Assuming you want to find the min/max in MB and then convert to the target unit for display
         $least = $values->min() / ($conversionFactors[$unit] ?: 1);
         $highest = $values->max() / ($conversionFactors[$unit] ?: 1);
-
+        
         return [
             'least_' . $unit => round($least, 2), // Round to 2 decimal places for cleanliness
             'highest_' . $unit => round($highest, 2),
         ];
     }    
 
-    protected function getBrands($key)
+    protected function getBrands($key,$sql = [])
     {
-            $brands = ['HP', 'Dell', 'Lenovo', 'BTO'];
+        $brands = ['HP', 'Dell', 'Lenovo', 'BTO'];
 
-            return ProductInfo::select('value')
+        if(!empty($sql)) {
+
+            $products = $sql->whereHas('productInfo', function ($query) use ($key, $brands) {
+                $query->where('key', $key)->whereIn('value', $brands);
+            })->get();
+            
+            $brandValues = $products->flatMap(function ($product) use ($key) {
+                return $product->productInfo->where('key', $key)->pluck('value');
+            })->map(function ($value) {
+                return strtolower($value);
+            })->unique()->values();
+
+            // Format the output, reverting to the original case for display
+            $record = $brandValues->map(function ($value) {
+                return [
+                    'value' => ucfirst($value),
+                    'backend_value' => ucfirst($value),
+                ];
+            });
+
+        } else {
+
+            $record = ProductInfo::select('value')
             ->where('key', $key)
             ->whereIn('value', $brands)
             ->groupBy('value')
             ->distinct()
             ->get();
 
+        }
+        return $record;
+
     }
 
     public function getFilterProducts(SearchProductRequest $request)
     {
-
+      
         $perPageRecord = $request->get('per_page') ?? 12;
         
         if(isset($request->category) && $request->category){
@@ -206,6 +293,7 @@ class ProductController extends BaseController
 
             $sql = $this->$methodName();
 
+            
         } else {
 
             $sql = Product::query();
@@ -231,13 +319,13 @@ class ProductController extends BaseController
        
         if (isset($request->filter) && !empty($request->filter)) {
 
-
+            
             $filters = $request->filter;
            
             foreach ($filters as $filter) {
                
                 // $filter = json_encode($filter, true);
-                $filter = json_decode($filter, true);
+                // $filter = json_decode($filter, true);
                
                 $key = $filter['key'] ?? '';
                 $value = $filter['value'] ?? '';
@@ -263,17 +351,17 @@ class ProductController extends BaseController
                     }
                 }
                 
-                if($key == 'review' || $key == 'price' | $key == 'operating_system' | $key == 'gpu'){
-                    
+                if($key == 'review' || $key == 'price' || $key == 'operating_system' || $key == 'gpu'){
+                   
                     // Apply dynamic filters for price and review.
                     $sql = $this->applyFilters($sql, $key,$value);
                 }
-              
+                
             }
 
         }
         
-
+       
         /*
          * for category filters
          */
@@ -434,7 +522,7 @@ class ProductController extends BaseController
 
     protected function applyFilters($query,$key,$value)
     {
-        
+       
         // Apply price filter
         if ($key == 'price' && !empty($value)) {
             $priceFilter = $value;
@@ -457,6 +545,7 @@ class ProductController extends BaseController
             $query->whereHas('brand', function ($query) use ($brandFilter) {
                 $query->whereIn('name', $brandFilter);
             }); 
+           
         }
 
         // Apply OS filter
@@ -509,7 +598,9 @@ class ProductController extends BaseController
             'professional-laptop' => 'getProfessionalLaptops',
             'touch-screen' => 'getTouchScreenLaptops',
             'top-rated-product' => 'getTopRatedProducts',
-            'best-sellers' => 'getBestSellerProducts'
+            'best-sellers' => 'getBestSellerProducts',
+            'new-arrival' => 'getNewArrivalProducts'
+            // 'featured-products' => 'getFeaturedProducts'
         ];
 
         return $methodMapping[$category] ?? null;
@@ -519,7 +610,7 @@ class ProductController extends BaseController
     {
         return Product::whereHas('categories', function ($category) {
             $category->where('slug', 'desktop');
-        })->where('price', '<', 250);
+        })->where('price', '<', 250)->orderBy('price', 'asc');
     }
 
     protected function getWorkstations()
@@ -558,7 +649,7 @@ class ProductController extends BaseController
 
     protected function getBestSellerProducts()
     {
-            // First, get the product IDs with an average rating above 4.7
+        // First, get the product IDs with an average rating above 4.7
         $ratedProductIds = ProductReview::select('product_id')
         ->groupBy('product_id')
         ->havingRaw('AVG(rating) > 4.7')
@@ -567,6 +658,16 @@ class ProductController extends BaseController
         ->whereHas('orderItems', function ($query) {
             $query->whereHas('order'); 
         });
+    }
+
+    protected function getNewArrivalProducts()
+    {
+        return Product::where('created_at', '>=', Carbon::now()->subDays(15));
+    }
+
+    protected function getFeaturedProducts()
+    {
+        return Product::where('is_feature',1);
     }
 
     public function featureProduct(FeatureProductRequest $request)
@@ -581,5 +682,6 @@ class ProductController extends BaseController
         } catch (Exception $e) {
             return $this->sendError('error', 'Something went wrong ' . $e->getMessage());
         }
+
     }
 }
