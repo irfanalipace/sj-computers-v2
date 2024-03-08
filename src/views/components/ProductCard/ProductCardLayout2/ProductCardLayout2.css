@@ -384,7 +384,9 @@
   font-size: 12px;
   width: fit-content;
 }
-
+.delivery-details-desktop-grid-view {
+  margin-top: 0px !important;
+}
 .delivery-details {
   font-size: 12px;
   margin-top: 10px;
