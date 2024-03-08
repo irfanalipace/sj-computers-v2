@@ -27,6 +27,7 @@ class SearchProductRequest extends FormRequest
             'filter' => ['nullable'],
             'category_id' => ['nullable'],
             'name' => ['nullable'],
+            'category' => ['nullable'],
             'per_page' => ['nullable', 'integer'],
         ];
     }
