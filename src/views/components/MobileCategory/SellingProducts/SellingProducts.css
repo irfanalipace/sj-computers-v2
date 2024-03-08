@@ -4,6 +4,19 @@
   margin-left: 6px;
   font-weight: bold;
 }
+
+.product-description .product-name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 5; /* Limit the number of displayed lines */
+  line-height: 1.2rem; /* Adjust the line height as needed */
+  font-size: 14px;
+  color: #007185;
+  margin: 10px 0px;
+}
+
 .seeling-product-p span {
   font-weight: bold;
   font-size: 15px;
@@ -45,8 +58,11 @@
   padding: 40px 0px;
   position: absolute;
   top: 50%;
-  translate: -50% -50%;
-  box-shadow: 1px 1px 0px lightgrey;
+  /* translate: -50% -50%; */
+  display: flex !important;
+  border: 0.5px solid gray;
+  border-radius: 4px;
+  box-shadow: 1px 1px 0px gray;
 }
 .recommund-dev-slider-sections-opps .swiper-button-next {
   color: black;
@@ -55,8 +71,15 @@
   position: absolute;
   top: 50%;
   right: 0;
-  translate: 0% -50%;
-  box-shadow: -1px 1px 0px lightgrey;
+  /* translate: 0% -50%; */
+  display: flex !important;
+  border: 0.5px solid gray;
+  border-radius: 4px;
+  box-shadow: -1px 1px 0px gray;
+  /* box-shadow:
+    1px 1px 2px 0 rgba(0, 0, 0, 0.5),
+    -1px -1px 2px 0 rgba(0, 0, 0, 0.5),
+    0 1px 2px 0 rgba(0, 0, 0, 0.5); */
 }
 .recommund-dev-slider-sections-opps .swiper-button-prev:after,
 .swiper-rtl .swiper-button-next:after {
@@ -115,9 +138,9 @@
 
 @media screen and (max-width: 575px) {
   .recommund-dev-slider-sections-opps .swiper-button-prev {
-    display: none;
+    display: none !important;
   }
   .recommund-dev-slider-sections-opps .swiper-button-next {
-    display: none;
+    display: none !important;
   }
 }

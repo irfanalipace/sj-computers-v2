@@ -38,7 +38,10 @@ const SellingPro = ({ images }) => {
                   See all
                 </Link>
               </div>
-              <SellingProducts topRatedProduct={topRatedProduct} />
+              <SellingProducts
+                topRatedProduct={topRatedProduct}
+                inTopRated={true}
+              />
             </div>
           </div>
         </div>
