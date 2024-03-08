@@ -241,7 +241,7 @@ const ProductCardLayout2 = ({
               <span>$</span>
               {product?.price?.toString().split('.')[0]}
               <sup>{product?.price?.toString().split('.')[1]} </sup>
-              {productView == 'list' && (
+              {/* {productView == 'list' && (
                 <span
                   style={{
                     fontSize: '12px',
@@ -255,9 +255,9 @@ const ProductCardLayout2 = ({
                     $120.00
                   </span>
                 </span>
-              )}
+              )} */}
             </div>
-            {productView == 'list' && (
+            {/* {productView == 'list' && (
               <div className='discount-with-coupon'>
                 <div className='discount-label'>
                   Save <span style={{ color: '#E0BC00' }}>$20.00 </span>
@@ -267,7 +267,7 @@ const ProductCardLayout2 = ({
                   with coupon
                 </div>
               </div>
-            )}
+            )} */}
           </div>
 
           {productView == 'list' && (
@@ -336,30 +336,30 @@ const ProductCardLayout2 = ({
             </div>
           ))}
         {productView == 'list' && (
-          <div className='delivery-details'>
-            <div style={{ color: '#1270C4', margin: '4px 0px' }}>
-              FREE delivery{' '}
-              <span
+          <div className='delivery-details delivery-details-desktop-grid-view'>
+            <div style={{ color: '#6f6f6f', margin: '4px 0px' }}>
+              <FontAwesomeIcon className='me-1' icon={faTruck} /> FREE delivery{' '}
+              {/* <span
                 style={{
                   color: 'black',
                   fontWeight: '500',
                   fontSize: '12px',
                 }}>
                 Friday, May 19
-              </span>
+              </span> */}
             </div>
-            <div style={{ color: '#666666', margin: '4px 0px' }}>
+            {/* <div style={{ color: '#666666', margin: '4px 0px' }}>
               or fastest delivery{' '}
               <span style={{ color: 'black', fontWeight: '500' }}>
                 Monday, May 15
               </span>
-            </div>
-            <div style={{ color: '#666666', margin: '4px 0px' }}>
+            </div> */}
+            {/* <div style={{ color: '#666666', margin: '4px 0px' }}>
               order within{' '}
               <span style={{ color: '#E87E24' }}>8 hours 58 mins</span>
-            </div>
+            </div> */}
             {/* we will render it when pieces left less than 10 in in_stock */}
-            {product?.quantity < 30 && (
+            {/* {product?.quantity < 30 && (
               <div
                 style={{
                   color: '#FF0000',
@@ -368,7 +368,15 @@ const ProductCardLayout2 = ({
                 }}>
                 Only {product?.quantity} left in stock - Order now
               </div>
-            )}
+            )} */}
+            <div
+              style={{
+                color: '#FF0000',
+                margin: '5px 0px',
+                fontWeight: 500,
+              }}>
+              Only {product?.quantity} left in stock - Order now
+            </div>
           </div>
         )}
       </div>
