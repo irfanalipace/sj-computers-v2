@@ -69,7 +69,8 @@ function ShippingDetailsForm({
       if (!values.email) {
         errors.email = '( Required )';
       } else if (values.email) {
-        const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
         const checkDotRegex = /^(?!.*@\.)/; // checks that dot(.) should not come immediately after @ in email
 
         if (
