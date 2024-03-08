@@ -15,6 +15,7 @@ import {
 import ProductsGrid from '@components/ProductsGrid/ProductsGrid';
 import './FilteredProducts.css';
 import { makeDataLayerItemObject } from '../../../core/utils/helpers';
+import { useParams } from 'react-router-dom';
 
 const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
   const {
@@ -64,6 +65,7 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
     per_page: 12,
     name: '',
     category_id: category?.id,
+    category: categorySlug === 'best-sellers' && categorySlug,
   };
 
   const init = () => {

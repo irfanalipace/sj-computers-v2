@@ -17,6 +17,7 @@ import MobileRecommand from '../../components/MobileCategory/MobileRecommand/Mob
 import CategoryFilterbarMobile from '../../components/Catagory/CategoryFiterbarMobile/CategoryFilterbarMobile';
 
 function Category() {
+  debugger;
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleFilter = () => {
