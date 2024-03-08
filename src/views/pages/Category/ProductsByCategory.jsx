@@ -11,7 +11,6 @@ const ProductsByCategory = ({ toggleFilter }) => {
 
   useEffect(() => {
     const _category = categories.find(c => c.slug === categorySlug);
-    // debugger
     setCategory(_category);
   }, [categories, categorySlug]);
 

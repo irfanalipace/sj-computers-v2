@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SellingProducts from '../../../MobileCategory/SellingProducts/SellingProducts';
 import { getProductsCategory } from '../../../../../core/api/products';
+import { useLocation } from 'react-router-dom';
 const FlashProducts = ({ images }) => {
   const [bestSeller, setBestSeller] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -32,7 +33,9 @@ const FlashProducts = ({ images }) => {
       {bestSeller?.length ? (
         <div className='row mx-0'>
           <div className='col-12 col-sm-12 col-lg-12'>
-            <Link to={''} className='text-decoration-none'>
+            <Link
+              to={'/category/best-sellers'}
+              className='text-decoration-none'>
               <div className='product-type-section-selleing-products'>
                 <div className='d-flex'>
                   <h4>Best Selling Laptops</h4>

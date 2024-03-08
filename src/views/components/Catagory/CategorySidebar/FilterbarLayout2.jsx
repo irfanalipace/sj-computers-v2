@@ -160,7 +160,6 @@ const FilterBarlayout2 = ({
   };
 
   console.log(pathValue);
-  debugger;
   if (pathValue !== 'budget-friendly') {
     priceData.priceValueArray?.push(
       { id: 2, priceValue: '$250 - $1000', priceMin: 250, priceMax: 1000 },

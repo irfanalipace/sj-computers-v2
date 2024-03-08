@@ -278,16 +278,16 @@ export const CartItem = memo(({ cartData }) => {
                           disabled={updatingItem}>
                           {updatingItem ? <Loader /> : 'Delete'}
                         </button>
-                        <button className='cart-bttn' disabled={updatingItem}>
+                        {/* <button className='cart-bttn' disabled={updatingItem}>
                           {updatingItem ? <Loader /> : `Save for later`}
-                        </button>
-                        <button className='cart-bttn' disabled={updatingItem}>
+                        </button> */}
+                        {/* <button className='cart-bttn' disabled={updatingItem}>
                           {updatingItem ? (
                             <Loader />
                           ) : (
                             'Compare with similar items'
                           )}
-                        </button>
+                        </button> */}
                         <button
                           className='cart-bttn hide-on-mobile'
                           disabled={updatingItem}
