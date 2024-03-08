@@ -335,7 +335,7 @@ export default function MobileCheckout() {
                   )}
                   <Accordion
                     id={3}
-                    title='Payment Method'
+                    title='Payment Method '
                     summary={
                       paymentMethod && (
                         <SelectedPaymentMethod paymentMethod={paymentMethod} />
@@ -483,7 +483,7 @@ export const SelectedPaymentMethod = ({ paymentMethod }) => {
             <div>
               <label htmlFor={PAYMENT_METHODS.PAYPAL}>
                 <div>PayPal</div>
-                <div className='image-wrapper ms-4'>
+                <div className='image-wrapper ms-4 ' >
                   <img src={paypal} />
                 </div>
               </label>
@@ -495,8 +495,8 @@ export const SelectedPaymentMethod = ({ paymentMethod }) => {
           <div className='payment-method mb-0'>
             <div>
               <label htmlFor={PAYMENT_METHODS.SQUARE}>
-                <div>Debit/Credit Card</div>
-                <div className='image-wrapper ms-4'>
+                <div className='debit-cart-creited-cart paypal-mobile-screen-version'>Debit/Credit Card </div>
+                <div className='image-wrapper ms-4 paypal-mobile-screen-version'>
                   <img src={visa} />
                   <img src={mastercard} />
                 </div>
