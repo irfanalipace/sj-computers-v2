@@ -77,7 +77,8 @@ const cartSlice = createSlice({
 
     removeProtectionPlanSuccess: (state, action) => {
       const { cart_id } = action.payload;
-
+      const planValue =
+        state.cart.find(item => item.id === cart_id)?.plan_price || 0;
       const updatedCart = state.cart.map(item => {
         if (item.id === cart_id) {
           const { plan, ...updatedItem } = item;
@@ -86,6 +87,8 @@ const cartSlice = createSlice({
         return item;
       });
       state.cart = updatedCart;
+      state.details.sub_total -= parseFloat(planValue);
+      state.details.sub_total = parseFloat(state.details.sub_total).toFixed(2);
     },
 
     UPDATE_QUANTITY: (state, action) => {
