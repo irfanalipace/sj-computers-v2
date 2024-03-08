@@ -489,6 +489,7 @@ const CategorySidebar = ({
             DataInDrawer={DataInDrawer}
             DataInDrawerToggler={DataInDrawerToggler}
             toggleDrawer={toggleDrawer}
+            pathValue={pathValue}
           />
           {/* )} */}
           {/* {sidebarTitle === budgetFilter && (

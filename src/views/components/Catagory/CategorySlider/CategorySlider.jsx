@@ -79,8 +79,8 @@ const CategorySlider = () => {
           nextEl: '.category-slider .swiper-button-next',
           prevEl: '.category-slider .swiper-button-prev',
         }}>
-        {products?.map(product => (
-          <SwiperSlide key={'ps-' + product.id}>
+        {products?.map((product, index) => (
+          <SwiperSlide key={'ps-' + index}>
             <CategorySliderCard product={product} />
           </SwiperSlide>
         ))}
