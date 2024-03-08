@@ -29,6 +29,7 @@ const FilterBarlayout2 = ({
   handleFilterSelect,
   filtersInArray,
   filteChange,
+  pathValue,
 }) => {
   const [filters, setFilters] = useState({});
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -43,6 +44,16 @@ const FilterBarlayout2 = ({
     priceMin: 0,
     priceMax: 0,
   });
+
+  const priceData = {
+    priceValueArray: [
+      { id: 1, priceValue: 'Under $250', priceMin: 0, priceMax: 250 },
+    ],
+    priceInputArray: [
+      { name: 'priceMin', placeholder: 'Min' },
+      { name: 'priceMax', placeholder: 'Max' },
+    ],
+  };
 
   const dispatch = useDispatch();
 
@@ -100,7 +111,8 @@ const FilterBarlayout2 = ({
       let response = await getFilterListApi();
       let data = response?.data;
       setFilters(data ? data : {});
-      if (data?.price?.max_price > 2000) {
+
+      if (data?.price?.max_price > 2000 && pathValue !== 'budget-friendly') {
         priceData.priceValueArray.push({
           priceValue: 'Over $2000',
           priceMin: 2000,
@@ -146,6 +158,20 @@ const FilterBarlayout2 = ({
     }
     return false;
   };
+
+  console.log(pathValue);
+  debugger;
+  if (pathValue !== 'budget-friendly') {
+    priceData.priceValueArray?.push(
+      { id: 2, priceValue: '$250 - $1000', priceMin: 250, priceMax: 1000 },
+      {
+        id: 3,
+        priceValue: '$1000 - $2000',
+        priceMin: 1000,
+        priceMax: 2000,
+      },
+    );
+  }
 
   const isChecked = category => {
     const check1 =
@@ -313,18 +339,6 @@ const FilterBarlayout2 = ({
     });
   };
 
-  const priceData = {
-    priceValueArray: [
-      { id: 1, priceValue: 'Under $250', priceMin: 0, priceMax: 250 },
-      { id: 2, priceValue: '$250 - $1000', priceMin: 250, priceMax: 1000 },
-      { id: 3, priceValue: '$1000 - $2000', priceMin: 1000, priceMax: 2000 },
-    ],
-    priceInputArray: [
-      { name: 'priceMin', placeholder: 'Min' },
-      { name: 'priceMax', placeholder: 'Max' },
-    ],
-  };
-
   let renderRangeSliders = category => {
     return (
       <ul className='filter-values-list'>
@@ -433,58 +447,6 @@ const FilterBarlayout2 = ({
           <></>
         )}
 
-        {/* handle price category */}
-        {category == 'price' ? (
-          <>
-            {priceData.priceValueArray.map((item, index) => (
-              <li
-                key={index}
-                onClick={() => handlePriceFilter(item)}
-                style={{
-                  padding: '2px 0px',
-                  color: activePriceFiler === item.id ? '#f2a742' : '',
-                }}
-                className={'filter-value price-value'}>
-                {item.priceValue}
-              </li>
-            ))}
-            <li className='filter-value' style={{ padding: '2px 0px' }}>
-              <FontAwesomeIcon
-                icon={faAngleDown}
-                style={{ margin: ' 0px 5px', color: 'black' }}
-              />
-              <span style={{ color: '#52AC66' }}>Custom Price</span>
-            </li>
-
-            <li className='filter-value' style={{ padding: '2px 0px' }}>
-              {priceData.priceInputArray.map((item, index) => (
-                <input
-                  id={`customInput${index}`}
-                  style={{
-                    border:
-                      activePriceFiler === item.id
-                        ? '1px solid #f2a742'
-                        : '1px solid gray',
-                  }}
-                  key={index}
-                  type='text'
-                  name={item.name}
-                  checked={showClear(category)}
-                  placeholder={`$${item.placeholder}`}
-                  className='price-input'
-                  onChange={handleCustomPriceFilter}
-                />
-              ))}
-              <button
-                onClick={() => handlePriceFilter(customPrice)}
-                className='price-go-btn'>
-                Go
-              </button>
-            </li>
-          </>
-        ) : (
-          <></>
-        )}
         {category == 'hard_disk' ? (
           <>
             {[
