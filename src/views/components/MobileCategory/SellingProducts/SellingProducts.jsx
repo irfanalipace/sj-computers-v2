@@ -51,10 +51,10 @@ const SellingProducts = ({ topRatedProduct, inTopRated }) => {
           </Stack>
         </Box>
         <Typography
-          sx={{
-            position: text === "SJ's Choice" ? 'absolute' : '',
-            right: text === "SJ's Choice" ? '-40%' : '',
-          }}
+          // sx={{
+          //   position: text === "SJ's Choice" ? 'absolute' : '',
+          //   right: text === "SJ's Choice" ? '-40%' : '',
+          // }}
           color={'#6F6F6F'}
           fontWeight={500}
           fontSize={'12px'}

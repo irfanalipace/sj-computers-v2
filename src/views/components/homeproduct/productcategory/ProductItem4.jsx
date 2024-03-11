@@ -79,7 +79,9 @@ const ProductItem4 = ({ items }) => {
           xs={6}
           style={{ height: '50%', padding: '2px' }}
           className='px-0'>
-          <Link to={item.categoryLink || item.url} className='category-item'>
+          <Link
+            to={item.categoryLink || item.url}
+            className='category-item-home-page'>
             <div
               className='image-wrapper'
               style={{

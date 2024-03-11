@@ -4,6 +4,11 @@
   padding: 20px 20px 50px 20px;
   height: 300px;
 }
+
+.similer-items-product-name:hover {
+  color: #e87e24;
+}
+
 .similar-item-one h3 {
   font-size: 16px;
   font-weight: 700;
