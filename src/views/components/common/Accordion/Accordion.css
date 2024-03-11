@@ -76,7 +76,9 @@
 .summary div p strong {
   font-weight: 600;
 }
-
+.accordion-header p {
+  line-height: 13px;
+}
 .accordion-content-heading {
   font-weight: 600;
   font-size: 18px;
