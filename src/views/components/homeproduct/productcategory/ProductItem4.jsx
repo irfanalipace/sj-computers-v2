@@ -69,6 +69,11 @@ import { Link } from 'react-router-dom';
 import './ProductItem4.css';
 
 const ProductItem4 = ({ items }) => {
+  const handleClickLink = event => {
+    // Prevent parent link from being clicked
+    event.stopPropagation();
+  };
+
   return (
     <Row
       className='mx-0 product-item-4'
