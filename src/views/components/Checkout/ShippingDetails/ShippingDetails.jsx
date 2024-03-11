@@ -50,7 +50,11 @@ export default function ShippingDetails({
   const ShippingFormWrapper = () => {
     if (newAddress)
       return (
-        <ShippingDetailsForm handleHeight={handleHeight} hideForm={hideForm} />
+        <ShippingDetailsForm
+          handleHeight={handleHeight}
+          hideForm={hideForm}
+          toggleAccordion={toggleAccordion}
+        />
       );
     else
       return (

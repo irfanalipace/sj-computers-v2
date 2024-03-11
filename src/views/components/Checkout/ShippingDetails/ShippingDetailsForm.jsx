@@ -23,7 +23,6 @@ function ShippingDetailsForm({
   const apiError = useSelector(state => state.orders.apiError);
   const loading = useSelector(state => state.orders.isLoading);
   const settingAdress = useSelector(state => state.orders.settingAdress);
-
   const cartItems = getCartItems();
   const cartDetails = getCartDetails();
 
@@ -146,7 +145,7 @@ function ShippingDetailsForm({
       permanent_address: permanentAddress,
       isValid,
     };
-    console.print('@@params: ', params);
+
     if (permanentAddress) dispatch(setShippingDetails(params, hideForm));
     else {
       dispatch(SET_SHIPPING_DETAILS(params));
@@ -171,6 +170,11 @@ function ShippingDetailsForm({
     handleHeight(); // adjust height of accordion dynamically according to shipping address form
   }, []);
 
+  const buttonClickHandler = e => toggleAccordion(e, true);
+
+  const handleSubmitClick = () => {
+    handleSubmit();
+  };
   return (
     <div>
       {settingAdress ? (
@@ -518,7 +522,10 @@ function ShippingDetailsForm({
             )}
 
             <ShippingButton
-              handleClick={(handleSubmit, toggleAccordion)}
+              handleClick={() => {
+                buttonClickHandler(null);
+                handleSubmitClick();
+              }}
               isLoading={loading}
               disabled={!isValid}>
               Use this address

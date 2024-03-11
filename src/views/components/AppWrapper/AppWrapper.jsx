@@ -8,7 +8,7 @@ import { CLEAR_CART } from '@store/cart/cartSlice';
 import {
   // addToLocalCart,
   syncCartItems,
-  // setCartDetails,
+   setCartDetails,
   syncGuestUserCart,
   // clearCart,
 } from '@store/cart/cartThunks';
@@ -92,9 +92,11 @@ const AppWrapper = ({ children }) => {
     timer = setTimeout(() => {
       dispatch(fetchCategory());
       dispatch(fetchBrands());
+      
     }, 3000); // giving timeout to increase initial page load speed by reducing requests to the server
     if (!isAuthenticated) {
       dispatch(syncGuestUserCart(cartDetails));
+      
     }
     dispatch(getEstimatedDelivery(state?.id));
     isMounted.current = true;

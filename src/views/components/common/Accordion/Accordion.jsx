@@ -57,7 +57,7 @@ const Accordion = ({
             }}
           >
             <div className={`${summary ? 'col-6 d-md-block ' : 'd-none'}`}>
-              <div className='summary' style={{ paddingLeft: '22px' }}>
+              <div className='summary' style={{ paddingLeft: '27px' }}>
                 {summary}
               </div>
             </div>
