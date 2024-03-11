@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreShippingAddressRequest;
+use App\Traits\FedexTrait;
 use App\Models\OrderShippingAddress;
 use App\Models\UserAddress;
 use Exception;
@@ -18,6 +19,7 @@ use Illuminate\Http\RedirectResponse;
 
 class OrderController extends BaseController
 {
+    use FedexTrait;
     //
     public function placeOrder(Request $request)
     {
@@ -110,5 +112,16 @@ class OrderController extends BaseController
 
         return view('vendor.voyager.orders.show_details', compact('invoiceOrder'));
 
+    }
+
+    public function getTrackingInfo(Request $request)
+    {
+        try{          
+            $trackingId = $request->tracking_id;
+            $shipmentDetail = $this->getTrackingInfoFedex($trackingId ?? null);
+            return $this->sendResponse($shipmentDetail,'Successfully fetched shipment details.');
+        } catch(Exception $e){
+            return $this->sendError('error',$e->getMessage());
+        }        
     }
 }

@@ -20,6 +20,22 @@ return [
     'contact_us_email' => env('CONTACT_US_EMAIL','support@sjcomputers.us'),
 
     'square_token' => env('SQUARE_TOKEN','EAAAECb1ai32160Bz6Aepr3tfyTPPA_jTpGVMgIclNbbyyUVMA0GoauqveDOpLs7'),
+
+    'fedex_app_id' => env('FEDEX_APP_ID', 'l76045209daba2479ebc736105925f6226'),
+
+    'fedex_secret_key' => env('FEDEX_SECRET_KEY', '10e6019b447b490b95458fa43c759212'),
+
+    'fedex_production_url' => env('FEDEX_PRODUCTION_URL','https://apis.fedex.com'),
+    
+    'fedex_account_number' => env('FEDEX_ACCOUNT_NUMBER','747288500'),
+
+    /* sandbox fedex */
+    'fedex_sandbox_app_id' => env('FEDEX_SANDBOX_APP_ID', 'l76045209daba2479ebc736105925f6226'),
+
+    'fedex_sandbox_secret_key' => env('FEDEX_SANDBOX_SECRET_KEY', '10e6019b447b490b95458fa43c759212'),
+    
+    'fedex_sandbox_url' => env('FEDEX_SANDBOX_URL','https://apis-sandbox.fedex.com'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
