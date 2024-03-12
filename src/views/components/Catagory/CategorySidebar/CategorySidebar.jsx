@@ -11,6 +11,7 @@ import './CategorySidebar.css';
 import ReviewFilter from './ReviewFilter';
 import { SET_FILTERS_ARRAY } from '../../../../core/store/products/productsSlice';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 const CategorySidebar = ({
   inDrawer,
@@ -22,6 +23,9 @@ const CategorySidebar = ({
   upateFilters,
 }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const brand = queryParams.get('brand');
   const [filtersInArray, setFiltersInArray] = useState([
     {
       key: 'processor',
@@ -51,7 +55,7 @@ const CategorySidebar = ({
     },
     {
       key: 'brand',
-      value: [],
+      value: [brand],
     },
     {
       key: 'operating_system',
@@ -76,6 +80,17 @@ const CategorySidebar = ({
     categoriesWithSubCategories.map(() => false),
   );
   const [visibleCategory, setVisibleCategory] = useState(2);
+
+  useEffect(() => {
+    if (brand) {
+      setFiltersInArray(prev => {
+        return {
+          ...prev,
+          brand: [brand.toUpperCase()],
+        };
+      });
+    }
+  }, []);
 
   const showMore = () => {
     setVisibleCategory(prevVisibleCategory => prevVisibleCategory + 2);
