@@ -38,8 +38,9 @@ const FlashProducts = ({ images }) => {
               className='text-decoration-none'>
               <div className='product-type-section-selleing-products'>
                 <div className='d-flex'>
-                  <h4>Best Selling Laptops</h4>
+                  <h4>Best Selling Products</h4>
                   <p
+                    className='see-more'
                     style={{
                       marginLeft: '20px',
                       fontSize: '12px',

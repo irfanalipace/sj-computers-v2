@@ -384,8 +384,40 @@ const FilterBarlayout2 = ({
     return (
       <ul className='filter-values-list'>
         {/* handle price category */}
-        {category == 'price' ? (
+        {category === 'price' ? (
           <>
+            <h3
+              onClick={() => DataInDrawerToggler(index + 3)}
+              className={`filter-heading ${inDrawer ? 'alignment-container' : ''}`}
+              style={{
+                margin: inDrawer ? '0px' : '',
+                padding: inDrawer ? '16px' : '',
+                width: inDrawer ? '100vw' : '',
+              }}>
+              {category.replace(/_/g, ' ')}
+              {showClear(category) && (
+                <span
+                  className='filter-clear-btn'
+                  onClick={() => handleClearFilter(category)}>
+                  <CloseIcon fontSize='14px' />
+                  clear
+                </span>
+              )}
+
+              {inDrawer ? (
+                <span className={`${inDrawer ? 'align-to-end' : ''}`}>
+                  <IconButton>
+                    {DataInDrawer[index + 3] ? (
+                      <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
+                    ) : (
+                      <KeyboardArrowDownIcon />
+                    )}{' '}
+                  </IconButton>
+                </span>
+              ) : (
+                ''
+              )}
+            </h3>
             {priceData.priceValueArray.map((item, index) => (
               <li
                 key={item.id}
@@ -688,8 +720,9 @@ const FilterBarlayout2 = ({
                   padding: inDrawer ? '16px' : '',
                   width: inDrawer ? '100vw' : '',
                 }}>
-                {category.replace(/_/g, ' ')}
-                {showClear(category) && (
+                {/* {category.replace(/_/g, ' ')} */}
+                {category === 'price' ? '' : category.replace(/_/g, ' ')}
+                {showClear(category) && category !== 'price' && (
                   <span
                     className='filter-clear-btn'
                     onClick={() => handleClearFilter(category)}>
@@ -720,9 +753,11 @@ const FilterBarlayout2 = ({
                     padding: inDrawer ? '0px 20px' : '',
                     marginLeft: inDrawer ? '16px' : '',
                   }}>
-                  {Array.isArray(filters[category])
+                  {/* {Array.isArray(filters[category])
                     ? renderedItems(options, category)
-                    : renderRangeSliders(category)}
+                    : renderRangeSliders(category)} */}
+                  {Array.isArray(filters[category]) &&
+                    renderedItems(options, category)}
                 </ul>
               )}
             </li>
@@ -800,6 +835,7 @@ const FilterBarlayout2 = ({
             padding: inDrawer ? '0px' : '',
             margin: inDrawer ? '0px' : '',
           }}>
+          {renderRangeSliders('price')}
           {renderedCategories}
 
           {/* Below Categories is for Gpu and trnding */}

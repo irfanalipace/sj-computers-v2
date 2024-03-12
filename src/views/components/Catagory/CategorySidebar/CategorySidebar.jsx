@@ -55,7 +55,7 @@ const CategorySidebar = ({
     },
     {
       key: 'brand',
-      value: [brand],
+      value: [],
     },
     {
       key: 'operating_system',

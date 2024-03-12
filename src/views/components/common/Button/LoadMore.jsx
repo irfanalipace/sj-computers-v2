@@ -7,9 +7,8 @@ export default function LoadMore({ handleClick, loading, error, small }) {
     <button
       onClick={handleClick}
       className={`loadMore-btn ${small && 'loadMore-btn--small'}`}
-      disabled={loading}
-    >
-      {loading ? <Loader /> : error ? 'Retry' : 'Show More'}
+      disabled={loading}>
+      {loading ? <Loader /> : error ? 'Show More' : 'Show More'}
     </button>
   );
 }
