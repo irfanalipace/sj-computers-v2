@@ -100,7 +100,11 @@ const FeaturedProducts = ({
                     <ProductItem1 image={TouchScreenLaptop} />
                   )}
                 </div>
-                <div className='see-btn'>
+                <div
+                  className='see-btn'
+                  style={{
+                    visibility: category?.seeMore === true ? 'hidden' : '',
+                  }}>
                   <Link className='section-link' to={category.redirectTo}>
                     {category.link}
                   </Link>

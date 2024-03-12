@@ -13,27 +13,23 @@ import FullSizeDesktopImg from '../../../assets/images/homepageImage/BudgetFrind
 
 export const shopByBrandHomePage = [
   {
-    // image: "https://upload.wikimedia.org/wikipedia/commons/2/25/Dell_logo.png",
     image: DellLogo,
-    categoryLink: '/category/bto',
+    categoryLink: '/category/lapotp?brand=dell',
     categoryName: 'Dell',
   },
   {
     image: HpLogo,
-    // image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/HP_logo_2012.svg/1024px-HP_logo_2012.svg.png",
-    categoryLink: '/category/laptops',
+    categoryLink: '/category/laptops?brand=hp',
     categoryName: 'HP',
   },
   {
     image: LenovoLogo,
-    // image: "https://1000logos.net/wp-content/uploads/2017/03/Lenovo-Logo-2003.png",
-    categoryLink: '/category/desktop',
+    categoryLink: '/category/laptops?brand=lenovo',
     categoryName: 'Lenovo',
   },
   {
     image: BtoLogo,
-    // image: "https://bto.us/cdn/shop/files/BTO-logo.webp?v=1704702209&width=110",
-    categoryLink: '/category/gaming_desktops',
+    categoryLink: '/category/bto',
     categoryName: 'BTO',
   },
 ];
@@ -95,6 +91,7 @@ export const featured = [
   {
     name: 'Shop by Brands',
     link: 'See more',
+    seeMore: true,
     redirectTo: '/category',
   },
   {
