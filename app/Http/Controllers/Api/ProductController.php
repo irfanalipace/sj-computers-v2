@@ -202,41 +202,68 @@ class ProductController extends BaseController
         $conversionFactors = ['MB' => 1, 'GB' => 1024, 'TB' => 1048576]; // Conversion factors
         
         if(!empty($sql)) { 
+          
+            $records = $sql->whereHas('productInfo', function ($query) use ($key) {
+                $query->where('key', $key)
+                      ->where(function($query) {
+                          $query->where('value', 'LIKE', '% MB')
+                                ->orWhere('value', 'LIKE', '% GB')
+                                ->orWhere('value', 'LIKE', '% TB');
+                      });
+            })
+            ->with(['productInfo' => function ($query) use ($key) {
+                $query->where('key', $key)
+                      ->where(function($query) {
+                          $query->where('value', 'LIKE', '% MB')
+                                ->orWhere('value', 'LIKE', '% GB')
+                                ->orWhere('value', 'LIKE', '% TB');
+                      })
+                      ->select('product_id', 'value');
+            }])
+            ->get();
            
-            $records = $sql->whereHas('productInfo', function ($query) use ($key, $unit) {
-                $query->where('key', $key)
-                      ->where('value', 'LIKE', '%' . $unit . '%');
-            })->with(['productInfo' => function ($query) use ($key, $unit) {
-                // Optionally, if you only need the 'value' field from 'productInfo' for the filtered products
-                $query->where('key', $key)
-                      ->where('value', 'LIKE', '%' . $unit . '%')
-                      ->select('product_id', 'value'); // Ensure to select the foreign key for proper relationship mapping
-            }])->get();
-            
+            $values = $records->pluck('productInfo')->flatten()->map(function ($item) use ($conversionFactors) {
+                // Extract the numeric part and unit from the value string
+                preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
+              
+                $numericValue = $matches[1];
+                $valueUnit = strtoupper($matches[3]);
+                // dd($numericValue );
+                // Convert the value to MB for a uniform comparison
+                return $numericValue * $conversionFactors[$valueUnit];
+            });
+
         } else{
+            
             $records = DB::table('product_infos')
             ->where('key', $key)
             ->where('value', 'LIKE', '%' . $unit . '%')
             ->select('value')
             ->get();
-        }
-        
-        $values = $records->map(function ($item) use ($conversionFactors) {
-            // Extract the numeric part and unit from the value string
-            preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
-            $numericValue = $matches[1];
-            $valueUnit = strtoupper($matches[3]);
 
-            // Convert the value to MB for a uniform comparison
-            return $numericValue * $conversionFactors[$valueUnit];
+            $values = $records->map(function ($item) use ($conversionFactors) {
+                // Extract the numeric part and unit from the value string
+                preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
+                
+                $numericValue = $matches[1];
+                $valueUnit = strtoupper($matches[3]);
+        
+                // Convert the value to MB for a uniform comparison
+                return $numericValue * $conversionFactors[$valueUnit];
+            });
+        }        
+        // dd($values);
+        // Convert all values to the target unit before finding min and max
+        $valuesInTargetUnit = $values->map(function ($value) use ($conversionFactors, $unit) {
+            
+            return $value / ($conversionFactors[$unit] ?: 1);
         });
 
-        // Assuming you want to find the min/max in MB and then convert to the target unit for display
-        $least = $values->min() / ($conversionFactors[$unit] ?: 1);
-        $highest = $values->max() / ($conversionFactors[$unit] ?: 1);
-        
+        $least = $valuesInTargetUnit->min();
+        $highest = $valuesInTargetUnit->max();
+
         return [
-            'least_' . $unit => round($least, 2), // Round to 2 decimal places for cleanliness
+            'least_' . $unit => round($least, 2),
             'highest_' . $unit => round($highest, 2),
         ];
     }    
