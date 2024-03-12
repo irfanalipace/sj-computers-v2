@@ -10,7 +10,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 5; /* Limit the number of displayed lines */
+  -webkit-line-clamp: 3; /* Limit the number of displayed lines */
   line-height: 1.2rem; /* Adjust the line height as needed */
   font-size: 14px;
   color: #007185;
@@ -75,7 +75,7 @@
   display: flex !important;
   border: 0.5px solid gray;
   border-radius: 4px;
-  box-shadow: -1px 1px 0px gray;
+  /* box-shadow: -1px 1px 0px gray; */
   /* box-shadow:
     1px 1px 2px 0 rgba(0, 0, 0, 0.5),
     -1px -1px 2px 0 rgba(0, 0, 0, 0.5),

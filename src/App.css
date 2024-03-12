@@ -148,3 +148,8 @@ span {
     background-color: white;
   }
 }
+
+.see-more:hover {
+  text-decoration: underline !important;
+  color: #f5961d !important;
+}

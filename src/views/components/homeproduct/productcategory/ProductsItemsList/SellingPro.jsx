@@ -27,7 +27,7 @@ const SellingPro = ({ images }) => {
               <div className='d-flex'>
                 <h4>Top Rating Products</h4>
                 <Link
-                  className='mt-1 text-decoration-none'
+                  className='mt-1 text-decoration-none see-more'
                   to='top-rated-products'
                   style={{
                     marginLeft: '20px',
