@@ -34,6 +34,16 @@
   border: 1px solid black;
   border-radius: 8px;
 }
+.accordion-content-heading{
+  
+}
+.shipping-form input::placeholder {
+  width: 56px;
+  height: 15px;
+  top: 407px;
+  left: 249px;
+  color: #333333;
+}
 
 .shipping-form select {
   height: 37px;

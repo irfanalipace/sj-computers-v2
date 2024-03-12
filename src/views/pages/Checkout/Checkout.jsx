@@ -45,7 +45,7 @@ export default function Checkout() {
   const [paymentError, setPaymentError] = useState('');
 
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  console.log(shippingAddress, 'irfanali');
+ 
   const loading = useSelector(state => state.cart.isLoading);
   const id = searchParams.get('id');
 
@@ -112,7 +112,7 @@ export default function Checkout() {
     if (!window.dataLayer) {
       window.dataLayer = window.dataLayer || [];
     }
-    console.log('begin checkout datalayer');
+
 
     window.dataLayer.push({
       event: 'begin_checkout',

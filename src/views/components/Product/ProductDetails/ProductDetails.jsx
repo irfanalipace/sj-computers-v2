@@ -25,6 +25,8 @@ const ProductDetails = ({ product }) => {
   const [description, setDescription] = useState([]);
   const [productDetails, setProductDetails] = useState([]);
   const [key, setKey] = useState('home');
+  
+
 
   useEffect(() => {
     const parseProductDetailsArray = () => {

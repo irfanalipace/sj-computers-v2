@@ -84,7 +84,7 @@ function ShippingDetailsForm({
       if (!values.state) errors.state = '( Required )';
       if (!values.zip_code) errors.zip_code = '( Required )';
       // if (!values.suite) errors.suite = "( Required )";
-      if (!values.apartment) errors.apartment = '( Required )';
+      //if (!values.apartment) errors.apartment = '( Required )';
       return errors;
     },
     onSubmit: values => {
@@ -286,7 +286,7 @@ function ShippingDetailsForm({
                     : 'input-field'
                 }
                 type='text'
-                placeholder='Enter Email to track order'
+                placeholder='Enter Your Email Address'
                 value={values?.email}
                 onChange={handleChange}
                 onBlur={handleBlur}></input>
@@ -296,57 +296,7 @@ function ShippingDetailsForm({
                                     </p>
                                 )} */}
             </div>
-            <div className='field-section'>
-              {/* <div className="col-6">
-                                <label htmlFor={"suite"}>
-                                    Suite
-                                    <span className="text-danger">*</span>
-                                    {errors.suite && touched.suite && (
-                                        <span className="fs-6 mt-1 text-danger">
-                                            {errors?.suite}
-                                        </span>
-                                    )}
-                                </label>
-                                <input
-                                    id="suite"
-                                    name="suite"
-                                    className={
-                                        errors.suite && touched.suite
-                                            ? "input-field border-danger"
-                                            : "input-field"
-                                    }
-                                    type="text"
-                                    placeholder="Suite"
-                                    value={values?.suite}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                ></input>
-                            </div> */}
-              {/* <div className="col-12"> */}
-              <label htmlFor={'apartment'}>
-                Suite/Apartment
-                <span className='text-danger'>*</span>
-                {errors.apartment && touched.apartment && (
-                  <span className='fs-6 mt-1 text-danger'>
-                    {errors?.apartment}
-                  </span>
-                )}
-              </label>
-              <input
-                id='apartment'
-                name='apartment'
-                className={
-                  errors.apartment && touched.apartment
-                    ? 'input-field border-danger'
-                    : 'input-field'
-                }
-                type='text'
-                placeholder='Apartment, Unit, Suite, Floor etc...'
-                value={values?.apartment}
-                onChange={handleChange}
-                onBlur={handleBlur}></input>
-              {/* </div> */}
-            </div>
+           
             <div className=''>
               <label htmlFor={'streetAddress'}>
                 Address
@@ -360,7 +310,7 @@ function ShippingDetailsForm({
 
               <Autocomplete
                 onChange={handleChange}
-                placeholder='Street address (P.O Box)'
+                placeholder='Street address ( P.O Box), Unit, building, floor etc.'
                 defaultValue={values.address}
                 className={
                   errors.address && touched.address
@@ -504,6 +454,57 @@ function ShippingDetailsForm({
                                     )} */}
                 </div>
               </div>
+            </div>
+            <div className='field-section'>
+              {/* <div className="col-6">
+                                <label htmlFor={"suite"}>
+                                    Suite
+                                    <span className="text-danger">*</span>
+                                    {errors.suite && touched.suite && (
+                                        <span className="fs-6 mt-1 text-danger">
+                                            {errors?.suite}
+                                        </span>
+                                    )}
+                                </label>
+                                <input
+                                    id="suite"
+                                    name="suite"
+                                    className={
+                                        errors.suite && touched.suite
+                                            ? "input-field border-danger"
+                                            : "input-field"
+                                    }
+                                    type="text"
+                                    placeholder="Suite"
+                                    value={values?.suite}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                ></input>
+                            </div> */}
+              {/* <div className="col-12"> */}
+              <label htmlFor={'apartment'}>
+                Suite/Apartment
+                <span className='text-danger'>*</span>
+                {/* {errors.apartment && touched.apartment && (
+                  <span className='fs-6 mt-1 text-danger'>
+                    {errors?.apartment}
+                  </span>
+                )} */}
+              </label>
+              <input
+                id='apartment'
+                name='apartment'
+                className={
+                  errors.apartment && touched.apartment
+                    ? 'input-field border-danger'
+                    : 'input-field'
+                }
+                type='text'
+                placeholder='Apartment, Unit, Suite, Floor etc...'
+                value={values?.apartment}
+                onChange={handleChange}
+                onBlur={handleBlur}></input>
+              {/* </div> */}
             </div>
             {isAuthenticated && (
               <div className='field-section checkbox-wrapper'>
