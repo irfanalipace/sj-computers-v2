@@ -501,8 +501,8 @@ const FilterBarlayout2 = ({
 
                       handleFilterSelect(event, category, {
                         id: ramData?.length + 2,
-                        label: `${item}  'TB'`,
-                        value: item,
+                        label: `${1}  'TB'`,
+                        value: 1,
                         type: 'TB',
                       });
                     }}
