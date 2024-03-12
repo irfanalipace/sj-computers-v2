@@ -50,7 +50,7 @@ const FilterBarlayout2 = ({
     priceValueArray: [],
     priceInputArray: [
       { id: 10, name: 'priceMin', placeholder: 'Min' },
-      { id: 10, name: 'priceMax', placeholder: 'Max' },
+      { id: 11, name: 'priceMax', placeholder: 'Max' },
     ],
   });
 
@@ -72,8 +72,8 @@ const FilterBarlayout2 = ({
   const handleClearFilter = category => {
     if (category === 'price') {
       setActinePriceFilter('');
-      document.getElementById(`customInput${0}`).value = '';
-      document.getElementById(`customInput${1}`).value = '';
+      document.getElementById(`customInput${10}`).value = '';
+      document.getElementById(`customInput${11}`).value = '';
     }
     if (category === 'hard_disk') {
       setHardDiskCheckd([]);
@@ -247,11 +247,9 @@ const FilterBarlayout2 = ({
       return processorCheckd.includes(value);
     }
     if (catg === 'operating_system') {
-      // debugger;
       return osCheckd.includes(value);
     }
     if (catg === 'brand') {
-      // debugger;
       return brandCheckd.includes(value);
     }
   };
@@ -368,7 +366,6 @@ const FilterBarlayout2 = ({
   // );
 
   const handlePriceFilter = item => {
-    // debugger;
     setActinePriceFilter(item.id);
     filteChange(item);
   };
@@ -382,7 +379,6 @@ const FilterBarlayout2 = ({
       };
     });
   };
-  console.clear();
   console.log(activePriceFiler);
   let renderRangeSliders = category => {
     return (
@@ -392,7 +388,7 @@ const FilterBarlayout2 = ({
           <>
             {priceData.priceValueArray.map((item, index) => (
               <li
-                key={index}
+                key={item.id}
                 onClick={() => handlePriceFilter(item)}
                 style={{
                   padding: '2px 0px',
@@ -413,10 +409,10 @@ const FilterBarlayout2 = ({
             <li className='filter-value' style={{ padding: '2px 0px' }}>
               {priceData.priceInputArray.map((item, index) => (
                 <input
-                  id={`customInput${index}`}
+                  id={`customInput${item.id}`}
                   style={{
                     border:
-                      activePriceFiler === item.id
+                      activePriceFiler === 10
                         ? '1px solid #f2a742'
                         : '1px solid gray',
                   }}
@@ -442,44 +438,45 @@ const FilterBarlayout2 = ({
 
         {category === 'ram_memory' ? (
           <>
-            {ramData.map((ram, index) => {
-              return ram.gb.map(item => {
-                return (
-                  <li key={index} className='filter-value'>
-                    <label className='radio-container' htmlFor={item}>
-                      <input
-                        id={item}
-                        type='checkbox'
-                        checked={ramDiskCheckd.includes(item)}
-                        // name={}
-                        onChange={event => {
-                          // debugger;
-                          const ramCheckdCopy = [...ramDiskCheckd];
-                          if (event.target.checked) {
-                            ramCheckdCopy.push(item);
-                            setRamDiskCheckd(ramCheckdCopy);
-                          }
-                          if (!event.target.checked) {
-                            const finIndex = ramDiskCheckd.findIndex(
-                              item => item === item,
-                            );
-                            ramCheckdCopy.splice(finIndex, 1);
-                            setRamDiskCheckd(ramCheckdCopy);
-                          }
-                          handleFilterSelect(event, category, {
-                            id: index + 1,
-                            label: `${item}  'GB'`,
-                            value: item,
-                            type: 'GB',
-                          });
-                        }}
-                      />
-                      <span className='radiomark '></span> {item + ' GB'}
-                    </label>
-                  </li>
-                );
-              });
+            {ramData[0].gb.map((item, index) => {
+              return (
+                <li key={`ram_memory${index}`} className='filter-value'>
+                  <label
+                    className='radio-container'
+                    htmlFor={`ram${item}ram-memory`}>
+                    <input
+                      id={`ram${item}ram-memory`}
+                      type='checkbox'
+                      checked={ramDiskCheckd.includes(item)}
+                      name={`ram${item}ram-memory`}
+                      onChange={event => {
+                        const ramCheckdCopy = [...ramDiskCheckd];
+                        if (event.target.checked) {
+                          ramCheckdCopy.push(item);
+                          setRamDiskCheckd(ramCheckdCopy);
+                        }
+                        if (!event.target.checked) {
+                          const finIndex = ramDiskCheckd.findIndex(
+                            item1 => item1 === item,
+                          );
+                          ramCheckdCopy.splice(finIndex, 1);
+                          setRamDiskCheckd(ramCheckdCopy);
+                        }
+
+                        handleFilterSelect(event, category, {
+                          id: index + 1,
+                          label: `${item}  'GB'`,
+                          value: item,
+                          type: 'GB',
+                        });
+                      }}
+                    />
+                    <span className='radiomark '></span> {item + ' GB'}
+                  </label>
+                </li>
+              );
             })}
+
             {ramData[0]?.tb > 0 && (
               <li className='filter-value'>
                 <label className='radio-container' htmlFor={'tb'}>
@@ -501,7 +498,7 @@ const FilterBarlayout2 = ({
                         ramCheckdCopy.splice(finIndex, 1);
                         setRamDiskCheckd(ramCheckdCopy);
                       }
-                      // debugger;
+
                       handleFilterSelect(event, category, {
                         id: ramData?.length + 2,
                         label: `${item}  'TB'`,
@@ -585,7 +582,6 @@ const FilterBarlayout2 = ({
                         hardDiskCheckdCopy.splice(finIndex, 1);
                         setHardDiskCheckd(hardDiskCheckdCopy);
                       }
-                      // debugger;
 
                       handleFilterSelect(event, category, {
                         id: hardDistData[0]?.gb.length + 2,
@@ -675,7 +671,7 @@ const FilterBarlayout2 = ({
           ?.max !== -Infinity;
 
       return (
-        <div key={index}>
+        <div key={category}>
           {(!!filters[category].length ||
             !Array.isArray(filters[category])) && (
             <li

@@ -28,7 +28,6 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
     currentPage,
     searchString,
     filtersArray,
-    isNewApi,
   } = useSelector(state => state.products);
 
   const [mounted, setMounted] = useState(false);
@@ -65,8 +64,11 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
     per_page: 12,
     name: '',
     category_id: category?.id,
-    category: categorySlug === 'best-sellers' && categorySlug,
+    // category: categorySlug === 'best-sellers' && categorySlug,
   };
+  if (!category?.id) {
+    filterObject.category = categorySlug;
+  }
 
   const init = () => {
     dispatch(SET_SELECTED_CATEGORY(null));
@@ -134,7 +136,7 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
         }
         filteredData[key] = item;
       }
-      console.clear();
+      // console.clear();
       // const newData = {};
 
       // Convert value to string
@@ -149,8 +151,6 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
       // }
       // console.log(newData);
 
-      // debugger;
-
       filterObject = {
         ...filterObject,
         page: 1,
@@ -163,7 +163,7 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
       }
     }
     console.log(filtersArray);
-  }, [JSON.stringify(filtersArray), isNewApi]);
+  }, [JSON.stringify(filtersArray)]);
 
   useEffect(() => {
     let filteredData = {};

@@ -193,8 +193,7 @@ export const SkuProducts = ({ reRender }) => {
                           '& td:first-of-type ': {
                             maxWidth: '400px',
                           },
-                        }}
-                      >
+                        }}>
                         <TableCell align='left' scope='row'>
                           {row.name}
                         </TableCell>
@@ -212,8 +211,7 @@ export const SkuProducts = ({ reRender }) => {
                 style={{
                   display: 'flex',
                   justifyContent: 'flex-end',
-                }}
-              >
+                }}>
                 <Pagination
                   count={pageCount}
                   page={currentPage}

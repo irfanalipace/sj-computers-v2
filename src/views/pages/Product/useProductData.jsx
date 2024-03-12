@@ -11,6 +11,7 @@ function useProductData() {
 
   const { productId } = useParams();
   const getProductDetails = async filter => {
+    // debugger;
     if (!productLoading) {
       const filteredProduct = products.filter(
         product => product?.asin == productId,

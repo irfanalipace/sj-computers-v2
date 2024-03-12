@@ -38,7 +38,6 @@ export const filterProducts = (filter, loadMore = false, cb) => {
         dispatch({ type: LOADING, payload: {} });
         dispatch({ type: SET_FILTERING_PRODUCTS, payload: {} });
       }
-      // const filterdata=
       const response = await filterProductsApi(filter);
       if (filter.page === 1) dispatch(RESET_PAGE());
       if (response?.data?.data) {

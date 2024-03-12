@@ -29,13 +29,14 @@ export default function ReviewFilter({ onChange, clearReview }) {
 
       {reveiwData.map((reveiw, index) => {
         return (
-          <Stack key={index} direction={'row'} spacing={1} mt={0.5}>
+          <Stack key={reveiw.id} direction={'row'} spacing={1} mt={0.5}>
             <label
               className='checkbox-container'
               htmlFor={reveiw.value.toString()}>
               <Checkbox
                 checked={checkedReview.includes(reveiw.id)}
-                id={reveiw.value.toString()}
+                id={`reveiw${reveiw.id}`}
+                namne={`reveiw-name${reveiw.id}`}
                 style={{
                   color: ' #f2a742',
                   padding: '0 !important',

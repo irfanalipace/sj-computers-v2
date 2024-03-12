@@ -2,19 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Grid, Typography, Box, IconButton, Stack } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import StarRatings from 'react-star-ratings';
 import FilterBar from '../../FilterBar/FilterBar';
 import { computerCategories, categoriesWithSubCategories } from '../DummyApi';
 import FilterBarlayout2 from './FilterbarLayout2';
 import { Link } from 'react-router-dom';
 
 import './CategorySidebar.css';
-import BudgetFriendlyFilters from './BudgetFriendlyFilters';
 import ReviewFilter from './ReviewFilter';
-import {
-  SET_FILTERS_API,
-  SET_FILTERS_ARRAY,
-} from '../../../../core/store/products/productsSlice';
+import { SET_FILTERS_ARRAY } from '../../../../core/store/products/productsSlice';
 import { useDispatch } from 'react-redux';
 
 const CategorySidebar = ({
@@ -100,13 +95,12 @@ const CategorySidebar = ({
       filtersArrayCopy[keyIndex].value.min = 0;
       filtersArrayCopy[keyIndex].value.max = 0;
       filtersArrayCopy[keyIndex].value.unit = [];
-      // debugger;
+
       setFiltersInArray(filtersArrayCopy);
       return;
     }
 
     if (arrayFilter.includes(categ)) {
-      // debugger;
       filtersArrayCopy[keyIndex].value = [];
       setFiltersInArray(filtersArrayCopy);
       return;
@@ -125,8 +119,6 @@ const CategorySidebar = ({
   const [ramFilter, setRamFilter] = useState([]);
 
   const handleFilterSelect = (event, category, option) => {
-    // debugger;
-
     const arraysFilter = ['processor', 'brand', 'operating_system', 'gpu'];
     const keyIndex = findIndexByKey([filtersInArray], category);
     const filtersArrayCopy = JSON.parse(JSON.stringify(filtersInArray));
@@ -135,7 +127,6 @@ const CategorySidebar = ({
 
     if (unitFilterArray.includes(category)) {
       const arrayOjbectIndex = arr => {
-        // debugger;
         const findIndex = arr.findIndex(item => item.value === option.value);
         return findIndex;
       };
@@ -148,7 +139,6 @@ const CategorySidebar = ({
         }
       };
       const findIndex = arrayOjbectIndex(arrayToFilter());
-      // debugger;
 
       if (event.target.checked === false) {
         if (findIndex !== -1) {
@@ -166,7 +156,7 @@ const CategorySidebar = ({
       }
       if (category === 'hard_disk') {
         console.log(option);
-        // debugger;
+
         setHardDiskFilter([...hardDiskFilter, option]);
         return;
       }
@@ -193,7 +183,7 @@ const CategorySidebar = ({
         }
       }
       // const dd = filtersArrayCopy[keyIndex];
-      // debugger;
+
       filtersArrayCopy[keyIndex].value.push(option);
       console.log(filtersArrayCopy);
       setFiltersInArray(filtersArrayCopy);
@@ -202,13 +192,27 @@ const CategorySidebar = ({
     }
   };
 
+  const viewItemDataLayer = (products, pathValue) => {
+    console.print(
+      'view_item_list data layer',
+      pathValue,
+      makeDataLayerItemObject(products),
+    );
+    if (!window.dataLayer) {
+      window.dataLayer = window.dataLayer || [];
+    }
+    window.dataLayer.push({
+      event: 'view_item_list',
+      item_list_name: pathValue,
+      items: makeDataLayerItemObject(products),
+    });
+  };
+
   useEffect(() => {
     dispatch(SET_FILTERS_ARRAY(filtersInArray));
-    if (typeof myProp === 'function') {
+    if (typeof myProp === 'function' || isNewApi) {
       upateFilters(filtersInArray);
     }
-
-    dispatch(SET_FILTERS_API(isNewApi));
   }, [filtersInArray]);
 
   const toggleSubCategoryVisibility = index => {
@@ -322,10 +326,8 @@ const CategorySidebar = ({
         }
       }
     }
-    // debugger;
-    console.log(ramFilter);
-    // debugger;
-    console.log('minValue: ' + minValue + ' maxValue: ' + maxValue);
+
+    console.print('minValue: ' + minValue + ' maxValue: ' + maxValue);
     const keyIndex = findIndexByKey([filtersInArray], 'ram_memory');
     const filtersArrayCopy = JSON.parse(JSON.stringify(filtersInArray));
     filtersArrayCopy[keyIndex].value.min = minValue;
@@ -444,29 +446,29 @@ const CategorySidebar = ({
         ml={inDrawer ? 0 : 2.7}
         my={1}
         borderBottom={inDrawer ? '1px solid #DDDDDD' : ''}>
-        {sidebarTitle !== budgetFilter && (
-          <Typography
-            onClick={() => DataInDrawerToggler(2)}
-            p={inDrawer ? 2 : 0}
-            variant='body2'
-            className={`${inDrawer ? 'alignment-container' : ''}`}
-            fontWeight={'bolder'}>
-            Customer Reviews
-            {inDrawer ? (
-              <span className={`${inDrawer ? 'align-to-end' : ''}`}>
-                <IconButton>
-                  {DataInDrawer[2] ? (
-                    <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
-                  ) : (
-                    <KeyboardArrowDownIcon />
-                  )}
-                </IconButton>
-              </span>
-            ) : (
-              ''
-            )}
-          </Typography>
-        )}
+        {/* {sidebarTitle !== budgetFilter && ( */}
+        <Typography
+          onClick={() => DataInDrawerToggler(2)}
+          p={inDrawer ? 2 : 0}
+          variant='body2'
+          className={`${inDrawer ? 'alignment-container' : ''}`}
+          fontWeight={'bolder'}>
+          Customer Reviews
+          {inDrawer ? (
+            <span className={`${inDrawer ? 'align-to-end' : ''}`}>
+              <IconButton>
+                {DataInDrawer[2] ? (
+                  <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
+                ) : (
+                  <KeyboardArrowDownIcon />
+                )}
+              </IconButton>
+            </span>
+          ) : (
+            ''
+          )}
+        </Typography>
+        {/* )} */}
         {(DataInDrawer[2] || !inDrawer) && (
           <Box ml={inDrawer ? 4 : 0} py={1}>
             <ReviewFilter
