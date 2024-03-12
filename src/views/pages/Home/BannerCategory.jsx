@@ -101,35 +101,31 @@ const BannerCategory = () => {
   const gamingArray = [
     {
       name: 'Shop by Processor',
-      link: 'See more',
     },
     {
       name: 'Work Stations for Professionals',
-      link: 'Shop Now',
     },
     {
       name: 'Professional Laptops',
-      link: 'Shop Now',
     },
     {
       name: 'Shop by GPU',
-      link: 'Shop Now',
     },
   ];
-  const gamingItems = [
+  const processorItems = [
     {
       image: gaminimg3,
-      categoryLink: '/category/bto',
+      categoryLink: '/category/all?processor=core_i3',
       categoryName: 'Core i3',
     },
     {
       image: scanimages,
-      categoryLink: '/category/laptops',
+      categoryLink: '/category/all?processor=core_i5',
       categoryName: 'Core i5',
     },
     {
       image: gaminimg1,
-      categoryLink: '/category/desktop',
+      categoryLink: '/category/all?processor=core_i7',
       categoryName: 'Core i7',
     },
   ];
@@ -199,7 +195,7 @@ const BannerCategory = () => {
               <div className='d-none d-sm-block'>
                 <GamingProductsSections
                   gamingArray={gamingArray}
-                  items={gamingItems}
+                  items={processorItems}
                   gpuItems={gpuItems}
                   gamingProducts1={gamingProducts1}
                   gamingProducts2={gamingProducts2}

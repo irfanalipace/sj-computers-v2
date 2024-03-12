@@ -10,6 +10,7 @@ const GamingProductsSections = ({
   gamingProducts3,
   gpuItems,
 }) => {
+  
   return (
     <div>
       <div className='row mx-0'>

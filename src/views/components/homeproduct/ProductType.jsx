@@ -141,14 +141,20 @@ const ProductType = () => {
   };
   const categoryArray = [
     {
+      id: 1,
       name: 'Shop by Category',
+      slug: '',
       link: 'See all',
     },
     {
+      id: 2,
       name: 'Gaming Desktops',
+      slug: 'gaming_desktops',
       link: 'Shop Now',
     },
     {
+      id: 3,
+      slug: 'business_computers',
       name: 'Business Desktops',
       link: 'Shop Now',
     },
@@ -295,7 +301,9 @@ const ProductType = () => {
       <div className='row mx-0'>
         {categoryArray.map((category, index) => (
           <div key={index} className='col-12 col-sm-6 col-lg-3'>
-            <Link to={'/category'} className='text-decoration-none'>
+            <Link
+              to={`/category/${category.slug}`}
+              className='text-decoration-none'>
               <div className='product-type-section'>
                 <h2 className='h4-heading category-name'>{category.name}</h2>
                 <div className='categories-container'>
