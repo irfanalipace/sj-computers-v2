@@ -6,7 +6,6 @@ const initialState = {
   filtersProduct: [],
   searchString: searchParam,
   isShowMore: false,
-  isNewApi: false,
   filtersArray: [
     {
       key: 'processor',
@@ -127,12 +126,9 @@ const productSlice = createSlice({
       state.selectedCategory = action.payload;
     },
     SET_FILTERS_ARRAY: (state, action) => {
-      state.filtersArray = { ...action.payload };
+      state.filtersArray = [...action.payload];
     },
-    SET_FILTERS_API: (state, action) => {
-      // debugger;
-      state.isNewApi = action.payload;
-    },
+
     SET_FILTERING_PRODUCTS: (state, action) => {
       state.isFiltering = true;
     },
@@ -170,7 +166,6 @@ export const {
   CLEAR_LOADING,
   FETCH_PRODUCTS,
   SET_FILTERS_ARRAY,
-  SET_FILTERS_API,
   SET_SELECTED_CATEGORY,
   SET_FILTERING_PRODUCTS,
   SET_IS_SHOW_MORE,

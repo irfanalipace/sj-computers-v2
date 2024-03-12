@@ -10,7 +10,6 @@ const ProductCategoryPage = ({ color, heading, desc, pathValue }) => {
   const upateFilters = fil => {
     setFilters(fil);
   };
-  // debugger;
   return (
     <>
       <CategoriesHeader />

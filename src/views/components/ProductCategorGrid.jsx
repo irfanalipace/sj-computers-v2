@@ -12,13 +12,14 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
 
   const dispatch = useDispatch();
 
-  const getProducts = async total => {
+  const getProducts = async (total, isFilter) => {
     try {
       setLoading(true);
       const filterObject = {
         page: 1,
         category: pathValue,
         per_page: total,
+        ...isFilter,
       };
 
       const response = await getProductsCategory(filterObject);
@@ -39,10 +40,6 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
     setTotalProducts(total);
     getProducts(total);
   };
-
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0;
-  }
 
   useEffect(() => {
     let filterObject = {
@@ -75,23 +72,16 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
       filter: filteredData,
     };
 
-    // debugger;
-
-    if (isEmptyObject(filteredData)) {
+    if (filters) {
       dispatch(
-        filterProducts(
-          filterObject,
-          false,
-          productAfterShowMore => {
-            setProductsList(productAfterShowMore);
-          },
-          // viewItemDataLayer(productAfterShowMore, categorySlug),
-        ),
+        filterProducts(filterObject, false, productAfterShowMore => {
+          setProductsList(productAfterShowMore);
+          viewItemDataLayer(productAfterShowMore, categorySlug);
+        }),
       );
-    } else {
-      getProducts(totalProducts);
     }
-  }, [filters]);
+    // }
+  }, [JSON.stringify(filters)]);
 
   return (
     <ProductsGrid

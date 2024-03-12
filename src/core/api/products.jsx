@@ -106,7 +106,6 @@ export function filterProductsApi(filter) {
 }
 
 export function getProductsCategory(filter) {
-  filter.filter = filter?.filter?.map(fil => JSON.stringify(fil));
   return new Promise((resolve, reject) => {
     ApiService.get(`/get-products-category`, '', filter)
       .then(response => {
@@ -114,6 +113,7 @@ export function getProductsCategory(filter) {
           'file: products.js | filterProductsApi| response',
           response,
         );
+
         resolve(response);
       })
       .catch(e => {
