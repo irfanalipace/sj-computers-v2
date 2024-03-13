@@ -126,6 +126,10 @@
   color: #fff;
   font-weight: 400;
 }
+.add-prot-btn:disabled {
+  background-color: lightgray;
+  border: 1px solid lightgray;
+}
 .recommendation-container .swiper-button-next:after,
 .recommendation-container .swiper-button-prev:after {
   font-size: 20px !important;

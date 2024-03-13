@@ -24,7 +24,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
   const [loading, setLoading] = useState(false);
   const productAddingToCard = useSelector(state => state.products.isLoading);
   const [type, setType] = useState('');
-  const cartClickHandler = useAddToCart(product, quantity);
+  const [cartClickHandler, addingItemToCart] = useAddToCart(product, quantity);
   const params = useParams();
   const protectionPlanStore = useSelector(state => state.protectionPlan);
 
@@ -290,6 +290,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
         }>
         <ProtectionPlanDrawer
           {...drawerProps}
+          addingItemToCart={addingItemToCart}
           closeDrawer={() => {
             drawerProps.redirectOnClose &&
               cartClickHandler(

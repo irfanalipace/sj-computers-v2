@@ -26,6 +26,7 @@ const ProtectionPlanDrawer = ({
   plan = {},
   handleAddingProtec,
   closeDrawer,
+  addingItemToCart,
 }) => {
   const [protectionPlan, setProtectionPlan] = useState(plan);
   const [learnMore, setLearnMore] = useState(plan);
@@ -221,6 +222,7 @@ const ProtectionPlanDrawer = ({
             </div> */}
       <div className='btn-grp mt-3'>
         <button
+          disabled={addingItemToCart}
           className='add-prot-btn drawer-bottom-btn'
           style={{ marginRight: '10px' }}
           onClick={() => handleAddingProtec(protectionPlan)}>

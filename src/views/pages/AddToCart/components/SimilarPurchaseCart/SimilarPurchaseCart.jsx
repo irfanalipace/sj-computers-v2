@@ -25,7 +25,7 @@ const SimilarPurchaseCart = ({ products }) => {
   const [addingStates, setAddingStates] = useState({});
 
   const ProductDetails = ({ product }) => {
-    const cartClickHandler = useAddToCart(product, 1);
+    const [cartClickHandler, addingItemToCart] = useAddToCart(product, 1);
     const params = useParams();
     const isAdding = addingStates[product.id];
     const cart = useSelector(state => state.cart.cart);
