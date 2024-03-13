@@ -19,9 +19,10 @@ export default function ProductsGrid({
   searchParams,
   productView,
   inFilterProducts,
+  maximum,
 }) {
   const isShowMore = useSelector(state => state.products.isShowMore);
-
+  console.log(maximum, products.length);
   return (
     <div className='products-grid-wrapper'>
       <div className='products-grid product-gride-card-componets-mobile-screen mb-3 '>
@@ -62,12 +63,18 @@ export default function ProductsGrid({
 
         {products.length > 11 && (
           <div className='d-flex justify-content-center'>
-            <LoadMore
-              handleClick={handleClick}
-              loading={isShowMore}
-              error={apiError}
-              small={smallBtn}
-            />
+            {products.length === maximum ? (
+              <></>
+            ) : (
+              <>
+                <LoadMore
+                  handleClick={handleClick}
+                  loading={isShowMore}
+                  error={apiError}
+                  small={smallBtn}
+                />
+              </>
+            )}
           </div>
         )}
         <OverlayLoader isLoading={isLoading} />

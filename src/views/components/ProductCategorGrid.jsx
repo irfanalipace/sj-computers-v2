@@ -8,6 +8,7 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
   const categories = useSelector(state => state.category.categories);
   const [productsList, setProductsList] = useState([]);
   const [totalProducts, setTotalProducts] = useState(12);
+  const [max, setMax] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
 
       const response = await getProductsCategory(filterObject);
       setProductsList(response?.data?.data);
+      setMax(response?.data?.total);
     } catch (err) {
       console.log(err);
     } finally {
@@ -91,6 +93,7 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
       // apiError={apiError}
       // searchParams={productParamsRef}
       // productView={productView}
+      maximum={max}
       inFilterProducts={true}
     />
   );
