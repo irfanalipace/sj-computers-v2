@@ -160,7 +160,7 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
       category_id: category?.id,
       filter: filteredData,
     };
-    if (category?.id) {
+    if (category) {
       dispatch(filterProducts(filterObject));
     }
   }, [category]);
