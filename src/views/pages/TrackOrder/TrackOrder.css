@@ -1,0 +1,8 @@
+.track-page-link {
+  text-decoration: none;
+  color: black;
+}
+
+.track-page-link :hover {
+  text-decoration: underline;
+}

@@ -62,7 +62,7 @@
   display: flex !important;
   border: 0.5px solid gray;
   border-radius: 4px;
-  box-shadow: 1px 1px 0px gray;
+  /* box-shadow: 1px 1px 0px gray; */
 }
 .recommund-dev-slider-sections-opps .swiper-button-next {
   color: black;
