@@ -77,22 +77,25 @@ class OrderController extends BaseController
 
     public function getOrders(OrderListRequest $request)
     {
-
+       
         $perPageRecord = $request->get('per_page') ?? 12;
 
         $sql = Order::query();
 
         if ($request->month) {
+            $search = $request->search ?? [];
             $from = Carbon::now()->subMonth($request->get('month'));
             $to = Carbon::now();
-            $sql = Order::whereBetween('created_at', [$from, $to]);
+            $sql = Order::whereBetween('created_at', [$from, $to])->where('tracking_id',$search);
         }
 
         $successOrder =  $sql->where('status', StatusEnum::COMPLETE)->paginate($perPageRecord);
+        $deliveredOrder = $sql->where('fedex_status',StatusEnum::DELIVERED)->paginate($perPageRecord);
         $cancelOrder = $sql->where('status', '!=', StatusEnum::COMPLETE)->paginate($perPageRecord);
 
         $data = [
             'success_orders' => $successOrder,
+            'delivered_orders' => $deliveredOrder,
             'cancel_orders' => $cancelOrder
         ];
 

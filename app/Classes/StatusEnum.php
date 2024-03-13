@@ -17,6 +17,7 @@ class StatusEnum
     public const PAYMENTTYPEPAYPAL = "PAYPAL";
     public const PAYMENTTYPESQUARE = "SQUARE";
     public const COMPLETE = "COMPLETE";
+    public const DELIVERED = "delivered";
 
     public const PAYMENTMESSAGE = "Payment Successfully completed";
 
