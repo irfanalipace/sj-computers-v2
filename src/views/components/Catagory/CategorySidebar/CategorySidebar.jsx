@@ -81,14 +81,30 @@ const CategorySidebar = ({
   );
   const [visibleCategory, setVisibleCategory] = useState(2);
 
+  const queryMatcheParmForBrand = brand => {
+    switch (brand) {
+      case 'hp':
+        return 'HP';
+      case 'dell':
+        return 'Dell';
+      case 'lenovo':
+        return 'Lenovo';
+      case 'bto':
+        return 'BTO';
+      default:
+        'Dell';
+    }
+  };
+
   useEffect(() => {
     if (brand) {
-      setFiltersInArray(prev => {
-        return {
-          ...prev,
-          brand: [brand.toUpperCase()],
-        };
-      });
+      const updatedFilters = [...filtersInArray];
+      const brandFilter = updatedFilters.find(filter => filter.key === 'brand');
+      if (brandFilter) {
+        brandFilter.value.push(queryMatcheParmForBrand(brand));
+      }
+
+      setFiltersInArray(updatedFilters);
     }
   }, []);
 
