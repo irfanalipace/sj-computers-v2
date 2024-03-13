@@ -91,7 +91,7 @@ class OrderController extends BaseController
 
         $successOrder =  $sql->where('status', StatusEnum::COMPLETE)->paginate($perPageRecord);
         $deliveredOrder = $sql->where('fedex_status',StatusEnum::DELIVERED)->paginate($perPageRecord);
-        $cancelOrder = $sql->where('status', '!=', StatusEnum::COMPLETE)->paginate($perPageRecord);
+        $cancelOrder = $sql->where('status',StatusEnum::CANCELED)->paginate($perPageRecord);
 
         $data = [
             'success_orders' => $successOrder,
