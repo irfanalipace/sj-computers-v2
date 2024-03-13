@@ -310,8 +310,8 @@ class ProductController extends BaseController
     {
       
         $perPageRecord = $request->get('per_page') ?? 12;
-        
-        if(isset($request->category) && $request->category){
+
+        if(isset($request->category) && $request->category != 'all'){
             $methodName = $this->getMethodNameFromCategory($request->category);
             
             if (!method_exists($this, $methodName)) {
