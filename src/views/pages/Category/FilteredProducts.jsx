@@ -144,6 +144,7 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
         } else {
           isPrevFilterApplied.current = true;
         }
+
         dispatch(filterProducts(filterObject));
       }
     }
@@ -157,10 +158,15 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
       ...filterObject,
       page: 1,
       name: '',
-      category_id: category?.id,
       filter: filteredData,
     };
-    if (category) {
+    if (category?.id) {
+      filterObject.category_id = category?.id;
+    } else {
+      filterObject.category = categorySlug;
+    }
+
+    if (category?.id || categorySlug) {
       dispatch(filterProducts(filterObject));
     }
   }, [category]);
