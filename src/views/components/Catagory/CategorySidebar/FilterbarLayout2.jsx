@@ -389,7 +389,7 @@ const FilterBarlayout2 = ({
         {category === 'price' ? (
           <>
             <h3
-              onClick={() => DataInDrawerToggler(index + 3)}
+              // onClick={() => DataInDrawerToggler(index + 3)}
               className={`filter-heading ${inDrawer ? 'alignment-container' : ''}`}
               style={{
                 margin: inDrawer ? '0px' : '',
@@ -405,8 +405,7 @@ const FilterBarlayout2 = ({
                   clear
                 </span>
               )}
-
-              {inDrawer ? (
+              {/* {inDrawer ? (
                 <span className={`${inDrawer ? 'align-to-end' : ''}`}>
                   <IconButton>
                     {DataInDrawer[index + 3] ? (
@@ -417,7 +416,7 @@ const FilterBarlayout2 = ({
                   </IconButton>
                 </span>
               ) : (
-                ''
+                '' */}
               )}
             </h3>
             {priceData.priceValueArray.map((item, index) => (
@@ -791,10 +790,6 @@ const FilterBarlayout2 = ({
 
   let renderedCategories = Object.entries(filters).map(
     ([category, options], index) => {
-      const dd =
-        filtersInArray[findIndexByKey([filtersInArray], category)]?.value
-          ?.max !== -Infinity;
-
       return (
         <div key={category}>
           {(!!filters[category].length ||
