@@ -338,7 +338,8 @@ const ProductCardLayout2 = ({
         {productView == 'list' && (
           <div className='delivery-details delivery-details-desktop-grid-view'>
             <div style={{ color: '#6f6f6f', margin: '4px 0px' }}>
-              <FontAwesomeIcon className='me-1' icon={faTruck} /> FREE delivery{' '}
+              <FontAwesomeIcon className='me-1' icon={faTruck} />
+              Free Shipping
               {/* <span
                 style={{
                   color: 'black',

@@ -8,17 +8,15 @@ export default function ReturnPolicy() {
         fontFamily={'Inter'}
         fontWeight={700}
         fontSize={'12px'}
-        lineHeight={'14px'}
-      >
+        lineHeight={'14px'}>
         Return this item for free
       </Typography>
       <Typography
         fontFamily={'Inter'}
         fontWeight={400}
         fontSize={'11px'}
-        lineHeight={'14px'}
-      >
-        This item can be returned in its orignal condition for a full refund or
+        lineHeight={'14px'}>
+        This item can be returned in its original condition for a full refund or
         replacment within 30 days of receipt.
       </Typography>
 

@@ -25,7 +25,7 @@ const SeggestedItems = ({ num }) => {
     getFeaturedProduct();
   }, []);
   const ProductDetails = ({ product }) => {
-    const cartClickHandler = useAddToCart(product, 1);
+    const [cartClickHandler, addingItemToCart] = useAddToCart(product, 1);
     const isAdding = addingStates[product.id];
     const cart = useSelector(state => state.cart.cart);
     const cartItem = cart.find(ci => ci.id === product.id);
@@ -35,12 +35,10 @@ const SeggestedItems = ({ num }) => {
         <div className='dev-section-button-dev-card'>
           <Link
             to={`${new URL(product?.url).pathname}`}
-            style={{ color: '#007185', textDecoration: 'none' }}
-          >
+            style={{ color: '#007185', textDecoration: 'none' }}>
             <div
               className='suggested-items product-name product-cart-name-mobile-screen'
-              style={{ fontSize: '12px' }}
-            >
+              style={{ fontSize: '12px' }}>
               {product.name}
             </div>
             <div className=' d-sm-none product-prices'>
@@ -56,8 +54,7 @@ const SeggestedItems = ({ num }) => {
         <div className='hide-on-mobile'>
           <Link
             to={`${new URL(product?.url).pathname}`}
-            style={{ textDecoration: 'none' }}
-          >
+            style={{ textDecoration: 'none' }}>
             {/* <div className="d-none d-sm-block product-rating"> */}
             <StarRatings
               rating={product?.rating}
@@ -104,8 +101,7 @@ const SeggestedItems = ({ num }) => {
                     }));
 
                     cartClickHandler(null, '');
-                  }}
-                >
+                  }}>
                   Add to cart
                 </button>
               ) : (
