@@ -1,4 +1,4 @@
-import { useEffect, useState, memo } from 'react';
+import { useEffect, useState, memo, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
@@ -84,23 +84,7 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
   }, []);
 
   const handleClick = () => {
-    let filteredData = {};
-
-    for (const key in filtersArray) {
-      const item = filtersArray[key];
-      if (Array.isArray(item.value) && item.value.length === 0) {
-        continue;
-      }
-      if (
-        typeof item.value === 'object' &&
-        (item.value.min === null ||
-          item.value.min === Infinity ||
-          (item.value.min === 0 && item.value.max === 0))
-      ) {
-        continue;
-      }
-      filteredData[key] = item;
-    }
+    let filteredData = checkIfFilterSelected(filtersArray);
 
     filterObject = {
       ...filterObject,
@@ -116,41 +100,32 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
     );
   };
 
-  useEffect(() => {
-    console.log('not here');
-    if (mounted) {
-      let filteredData = {};
+  const checkIfFilterSelected = filtersArray => {
+    let filteredData = {};
 
-      for (const key in filtersArray) {
-        const item = filtersArray[key];
-        if (Array.isArray(item.value) && item.value.length === 0) {
-          continue;
-        }
-        if (
-          typeof item.value === 'object' &&
-          (item.value.min === null ||
-            item.value.min === Infinity ||
-            (item.value.min === 0 && item.value.max === 0))
-        ) {
-          continue;
-        }
-        filteredData[key] = item;
+    for (const key in filtersArray) {
+      const item = filtersArray[key];
+      if (Array.isArray(item.value) && item.value.length === 0) {
+        continue;
       }
-      // console.clear();
-      // const newData = {};
+      if (
+        typeof item.value === 'object' &&
+        (item.value.min === null ||
+          item.value.min === Infinity ||
+          (item.value.min === 0 && item.value.max === 0))
+      ) {
+        continue;
+      }
+      filteredData[key] = item;
+    }
+    return filteredData;
+  };
 
-      // Convert value to string
-      // for (const key in filteredData) {
-      //   const item = filteredData[key];
-      //   if (Array.isArray(item.value)) {
-      //     newData[key] = {
-      //       key: item.key,
-      //       value: item.value.join(', '), // Convert array to comma-separated string
-      //     };
-      //   }
-      // }
-      // console.log(newData);
+  const isPrevFilterApplied = useRef(false);
 
+  useEffect(() => {
+    let filteredData = checkIfFilterSelected(filtersArray);
+    if (mounted) {
       filterObject = {
         ...filterObject,
         page: 1,
@@ -158,7 +133,17 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
         category_id: category?.id,
         filter: filteredData,
       };
-      if (filtersArray.length > 0 || searchString || category?.id) {
+
+      if (
+        Object.keys(filteredData).length > 0 ||
+        isPrevFilterApplied.current === true ||
+        searchString
+      ) {
+        if (Object.keys(filteredData) === 0) {
+          isPrevFilterApplied.current = false;
+        } else {
+          isPrevFilterApplied.current = true;
+        }
         dispatch(filterProducts(filterObject));
       }
     }
@@ -166,51 +151,7 @@ const FilteredProducts = memo(({ category, toggleFilter, categorySlug }) => {
   }, [JSON.stringify(filtersArray)]);
 
   useEffect(() => {
-    let filteredData = {};
-
-    for (const key in filtersArray) {
-      const item = filtersArray[key];
-      if (Array.isArray(item.value) && item.value.length === 0) {
-        continue;
-      }
-      if (
-        typeof item.value === 'object' &&
-        (item.value.min === null ||
-          item.value.min === Infinity ||
-          (item.value.min === 0 && item.value.max === 0))
-      ) {
-        continue;
-      }
-      filteredData[key] = item;
-    }
-    filterObject = {
-      ...filterObject,
-      page: 1,
-      name: '',
-      filter: filteredData,
-    };
-
-    dispatch(filterProducts(filterObject));
-  }, []);
-
-  useEffect(() => {
-    let filteredData = {};
-
-    for (const key in filtersArray) {
-      const item = filtersArray[key];
-      if (Array.isArray(item.value) && item.value.length === 0) {
-        continue;
-      }
-      if (
-        typeof item.value === 'object' &&
-        (item.value.min === null ||
-          item.value.min === Infinity ||
-          (item.value.min === 0 && item.value.max === 0))
-      ) {
-        continue;
-      }
-      filteredData[key] = item;
-    }
+    let filteredData = checkIfFilterSelected(filtersArray);
 
     filterObject = {
       ...filterObject,

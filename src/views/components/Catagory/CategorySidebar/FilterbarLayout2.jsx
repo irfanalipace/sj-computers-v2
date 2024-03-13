@@ -37,6 +37,7 @@ const FilterBarlayout2 = ({
   const [visibleCategories, setVisibleCategories] = useState(8);
   const [visibleEntries, setVisibleEntries] = useState({});
   const isLoading = useSelector(state => state.products.isFiltering);
+  const filtersArray = useSelector(state => state.products.filtersArray);
   const [selectedUnit, setSelectedUnit] = useState({});
   const [rangeValues, setRangeValues] = useState({});
   const [activePriceFiler, setActinePriceFilter] = useState('');
@@ -250,7 +251,8 @@ const FilterBarlayout2 = ({
       return osCheckd.includes(value);
     }
     if (catg === 'brand') {
-      return brandCheckd.includes(value);
+      const brandFilter = filtersArray.find(filter => filter.key === 'brand');
+      return brandCheckd.includes(value) || brandFilter.value.includes(value);
     }
   };
 
@@ -379,8 +381,8 @@ const FilterBarlayout2 = ({
       };
     });
   };
-  console.log(activePriceFiler);
-  let renderRangeSliders = category => {
+
+  let renderPrice = category => {
     return (
       <ul className='filter-values-list'>
         {/* handle price category */}
@@ -467,6 +469,97 @@ const FilterBarlayout2 = ({
         ) : (
           <></>
         )}
+      </ul>
+    );
+  };
+  console.log(activePriceFiler);
+  let renderRangeSliders = category => {
+    return (
+      <ul className='filter-values-list'>
+        {/*        
+        {category === 'price' ? (
+          <>
+            <h3
+              onClick={() => DataInDrawerToggler(index + 3)}
+              className={`filter-heading ${inDrawer ? 'alignment-container' : ''}`}
+              style={{
+                margin: inDrawer ? '0px' : '',
+                padding: inDrawer ? '16px' : '',
+                width: inDrawer ? '100vw' : '',
+              }}>
+              {category.replace(/_/g, ' ')}
+              {showClear(category) && (
+                <span
+                  className='filter-clear-btn'
+                  onClick={() => handleClearFilter(category)}>
+                  <CloseIcon fontSize='14px' />
+                  clear
+                </span>
+              )}
+
+              {inDrawer ? (
+                <span className={`${inDrawer ? 'align-to-end' : ''}`}>
+                  <IconButton>
+                    {DataInDrawer[index + 3] ? (
+                      <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
+                    ) : (
+                      <KeyboardArrowDownIcon />
+                    )}{' '}
+                  </IconButton>
+                </span>
+              ) : (
+                ''
+              )}
+            </h3>
+            {priceData.priceValueArray.map((item, index) => (
+              <li
+                key={item.id}
+                onClick={() => handlePriceFilter(item)}
+                style={{
+                  padding: '2px 0px',
+                  color: activePriceFiler === item.id ? '#f2a742' : '',
+                }}
+                className={'filter-value price-value'}>
+                {item.priceValue}
+              </li>
+            ))}
+            <li className='filter-value' style={{ padding: '2px 0px' }}>
+              <FontAwesomeIcon
+                icon={faAngleDown}
+                style={{ margin: ' 0px 5px', color: 'black' }}
+              />
+              <span style={{ color: '#52AC66' }}>Custom Price</span>
+            </li>
+
+            <li className='filter-value' style={{ padding: '2px 0px' }}>
+              {priceData.priceInputArray.map((item, index) => (
+                <input
+                  id={`customInput${item.id}`}
+                  style={{
+                    border:
+                      activePriceFiler === 10
+                        ? '1px solid #f2a742'
+                        : '1px solid gray',
+                  }}
+                  key={index}
+                  type='text'
+                  name={item.name}
+                  checked={showClear(category)}
+                  placeholder={`$${item.placeholder}`}
+                  className='price-input'
+                  onChange={handleCustomPriceFilter}
+                />
+              ))}
+              <button
+                onClick={() => handlePriceFilter(customPrice)}
+                className='price-go-btn'>
+                Go
+              </button>
+            </li>
+          </>
+        ) : (
+          <></>
+        )} */}
 
         {category === 'ram_memory' ? (
           <>
@@ -753,11 +846,11 @@ const FilterBarlayout2 = ({
                     padding: inDrawer ? '0px 20px' : '',
                     marginLeft: inDrawer ? '16px' : '',
                   }}>
-                  {/* {Array.isArray(filters[category])
+                  {Array.isArray(filters[category])
                     ? renderedItems(options, category)
-                    : renderRangeSliders(category)} */}
-                  {Array.isArray(filters[category]) &&
-                    renderedItems(options, category)}
+                    : renderRangeSliders(category)}
+                  {/* {Array.isArray(filters[category]) &&
+                    renderedItems(options, category)} */}
                 </ul>
               )}
             </li>
@@ -835,9 +928,9 @@ const FilterBarlayout2 = ({
             padding: inDrawer ? '0px' : '',
             margin: inDrawer ? '0px' : '',
           }}>
-          {renderRangeSliders('price')}
+          {/* {renderRangeSliders('price')} */}
+          {renderPrice('price')}
           {renderedCategories}
-
           {/* Below Categories is for Gpu and trnding */}
           {renderCategoriesGpuAndTrending}
           {/* <li className="filter-value">
