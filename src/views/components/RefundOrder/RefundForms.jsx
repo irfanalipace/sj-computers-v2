@@ -405,8 +405,7 @@ export default function RefundForms({
                     e.target.value,
                   )
                 }
-                color='success'
-              >
+                color='success'>
                 {REFUND_TYPES?.map((type, index) => (
                   <MenuItem key={index} value={type?.key}>
                     {type?.label}
@@ -451,8 +450,7 @@ export default function RefundForms({
       <button
         className='refund-btn btn btn-success'
         onClick={handleFormSubmit}
-        disabled={isLoading || isSubmitDisabled}
-      >
+        disabled={isLoading || isSubmitDisabled}>
         {isLoading ? <Loader /> : 'Submit'}
       </button>
       {isSubmitDisabled && (

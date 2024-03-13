@@ -10,9 +10,20 @@ import {
 import Pagination from '@mui/material/Pagination';
 
 import './OrderProducts.css';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { QuantityInput } from '../common/QuantityInput/QuantityInput';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Typography } from '@mui/material';
 
-function OrderTable({ deliveryDate, orderDetails, onToggleExpanded }) {
+function OrderTable({
+  deliveryDate,
+  orderDetails,
+  onToggleExpanded,
+  renderMoreProducts,
+}) {
   const [expandedOrders, setExpandedOrders] = useState([]);
+
   // console.print(orderDetails, 'order details 222');
   function formatDate(dateString) {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -30,151 +41,223 @@ function OrderTable({ deliveryDate, orderDetails, onToggleExpanded }) {
   };
 
   return (
-    <table className='order-table'>
-      <thead>
-        <tr>
-          {/* <th>Image</th> */}
-          <th>Order ID</th>
-          <th>Invoice ID</th>
-          <th>Order Date</th>
-          <th>Order Delivery Date</th>
-          <th>Shipment Price</th>
-          <th>Total Items</th>
-          <th>Sub Total</th>
-          <th>Total Price</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <>
-          {orderDetails?.map((order, index) => (
+    <>
+      {/* <table className='order-table'> */}
+      {/* <tbody> */}
+      <>
+        {orderDetails?.map((item, index) => (
+          <div key={index}>
+            {/* {index === 0 && ( */}
             <>
-              <tr key={order?.id}>
-                <td>{order?.id}</td>
-                <td>{order?.invoice_id}</td>
-
-                <td>{formatDate(order?.created_at)}</td>
-                <td>{order?.shipment_days}</td>
-                <td>${order?.shipment_price}</td>
-                <td>{order?.item_qty}</td>
-                <td>${order?.sub_total}</td>
-                <td>${order?.total_amount}</td>
-                <td>
-                  <button
-                    className='view-button'
-                    onClick={() => toggleExpandedcopy(order?.id)}
-                  >
-                    View
-                  </button>
-                </td>
-              </tr>
-
-              {expandedOrders.includes(order?.id) && (
+              {item?.order_item?.map((order, indexOrder) => (
                 <>
-                  <tr key={order?.id}>
-                    <td colSpan='9'>
-                      <div className='expanded-content'>
-                        {/* Render your order items here */}
-                        <ul>
-                          {order?.order_item?.map(item => (
-                            //  <li key={item.id}>{item?.product_name}</li>
-
-                            <div
-                              key={item.id}
-                              style={{
-                                display: 'flex',
-                                displayDirection: 'row',
-                                width: '100%',
-                              }}
-                            >
-                              <div
-                                style={{
-                                  display: 'inherit',
-                                  flexGrow: 1,
-                                }}
-                              >
-                                <img
-                                  // src={'https://m.media-amazon.com/images/I/51c4fed1l1L.jpg'}
-                                  src={item?.product?.image[0]}
-                                  className='product-image'
-                                  style={{
-                                    // width: '%',
-                                    height: 'auto',
-                                    marginLeft: '5%',
-                                  }}
-                                />
-                                <Text className='product-description'>
-                                  {item?.product_name}
-                                </Text>
-                                <Text
-                                  style={{
-                                    width: '20%',
-
-                                    margin: '4%',
-                                  }}
-                                  className=''
-                                >
-                                  <span>
-                                    <b
-                                      style={{
-                                        fontWeight: 900,
-                                      }}
-                                    >
-                                      Product ID
-                                    </b>
-                                  </span>
-                                  <br />
-                                  {item?.product_id}
-                                </Text>
-                                <Text
-                                  style={{
-                                    width: '20%',
-
-                                    margin: '4%',
-                                  }}
-                                  className=''
-                                >
-                                  <span>
-                                    <b
-                                      style={{
-                                        fontWeight: 900,
-                                      }}
-                                    >
-                                      Product Price
-                                    </b>
-                                  </span>
-                                  <br />${item?.price}
-                                </Text>
-                                {/* <Text  style={{
-                                                    width: '20%',
-                                                   fontWeight: 900,
-                                                    margin: '4%',
-                                                }} className=""><span><b style={{
-                                                   
-                                                   fontWeight: 900,
-                                                    
-                                                }}>Product Price</b></span><br/>${item?.price}</Text> */}
-                              </div>
-                            </div>
-                          ))}
-                        </ul>
+                  {/* {indexOrder === 0 && ( */}
+                  <div className='order-container' key={indexOrder}>
+                    <div className='order-image-container'>
+                      <div className='order-image'>
+                        <LazyLoadImage
+                          width={'100%'}
+                          height={'100%'}
+                          src={order?.product.image[0]}
+                          alt={order?.product?.name
+                            ?.trim()
+                            ?.split(' ')
+                            ?.slice(0, 9)
+                            ?.join(' ')}
+                        />
                       </div>
-                    </td>
-                  </tr>
+                      <div>
+                        <Typography
+                          style={{
+                            fontSize: '12px',
+                            fontWeight: 400,
+                          }}
+                          className='order-nameee'>
+                          {order?.product?.name}
+                        </Typography>
+                      </div>
+                    </div>
+                    <QuantityInput
+                      // onChange={() => console.log(item?.item_qty)}
+                      minQuantity={item?.item_qty}
+                      value={item?.item_qty}
+                      maxQuantity={item?.item_qty}
+                    />{' '}
+                    <button className='pending-order-button'>Pending</button>
+                    <button className='track-order-button'>
+                      Track Package
+                    </button>
+                  </div>
+                  {/* )} */}
+                </>
+              ))}
+            </>
+            {/* )} */}
+          </div>
+        ))}
+
+        {/* {renderMoreProducts &&
+          orderDetails?.map((item, index) => (
+            <div key={index}>
+              {index !== 0 && (
+                <>
+                  {item?.order_item?.map((order, indexOrder) => (
+                    <>
+                      {indexOrder !== 0 && (
+                        <div className='order-container' key={indexOrder}>
+                          <div className='order-image-container'>
+                            <div className='order-image'>
+                              <LazyLoadImage
+                                width={'100%'}
+                                height={'100%'}
+                                src={order?.product.image[0]}
+                                alt={order?.product?.name
+                                  ?.trim()
+                                  ?.split(' ')
+                                  ?.slice(0, 9)
+                                  ?.join(' ')}
+                              />
+                            </div>
+                            <div>
+                              <Typography
+                                style={{
+                                  fontSize: '12px',
+                                  fontWeight: 400,
+                                }}
+                                className='order-nameee'>
+                                {order?.product?.name}
+                              </Typography>
+                            </div>
+                          </div>
+                          <QuantityInput
+                            // onChange={() => console.log(item?.item_qty)}
+                            minQuantity={item?.item_qty}
+                            value={item?.item_qty}
+                            maxQuantity={item?.item_qty}
+                          />{' '}
+                          <button className='pending-order-button'>
+                            Pending
+                          </button>
+                          <button className='track-order-button'>
+                            Track Package
+                          </button>
+                        </div>
+                      )}
+                    </>
+                  ))}
                 </>
               )}
-            </>
-          ))}
-        </>
-      </tbody>
-    </table>
+            </div>
+          ))} */}
+        {/* {orderDetails?.map((order, index) => (
+              <>
+                <tr key={order?.id}>
+                  <td>{order?.id}</td>
+                  <td>{order?.invoice_id}</td>
+
+                  <td>{formatDate(order?.created_at)}</td>
+                  <td>{order?.shipment_days}</td>
+                  <td>${order?.shipment_price}</td>
+                  <td>{order?.item_qty}</td>
+                  <td>${order?.sub_total}</td>
+                  <td>${order?.total_amount}</td>
+                  <td>
+                    <button
+                      className='view-button'
+                      onClick={() => toggleExpandedcopy(order?.id)}>
+                      View
+                    </button>
+                  </td>
+                </tr>
+
+                {expandedOrders.includes(order?.id) && (
+                  <>
+                    <tr key={order?.id}>
+                      <td colSpan='9'>
+                        <div className='expanded-content'>
+                          <ul>
+                            {order?.order_item?.map(item => (
+                              <div
+                                key={item.id}
+                                style={{
+                                  display: 'flex',
+                                  displayDirection: 'row',
+                                  width: '100%',
+                                }}>
+                                <div
+                                  style={{
+                                    display: 'inherit',
+                                    flexGrow: 1,
+                                  }}>
+                                  <img
+                                    src={item?.product?.image[0]}
+                                    className='product-image'
+                                    style={{
+                                      height: 'auto',
+                                      marginLeft: '5%',
+                                    }}
+                                  />
+                                  <Text className='product-description'>
+                                    {item?.product_name}
+                                  </Text>
+                                  <Text
+                                    style={{
+                                      width: '20%',
+
+                                      margin: '4%',
+                                    }}
+                                    className=''>
+                                    <span>
+                                      <b
+                                        style={{
+                                          fontWeight: 900,
+                                        }}>
+                                        Product ID
+                                      </b>
+                                    </span>
+                                    <br />
+                                    {item?.product_id}
+                                  </Text>
+                                  <Text
+                                    style={{
+                                      width: '20%',
+
+                                      margin: '4%',
+                                    }}
+                                    className=''>
+                                    <span>
+                                      <b
+                                        style={{
+                                          fontWeight: 900,
+                                        }}>
+                                        Product Price
+                                      </b>
+                                    </span>
+                                    <br />${item?.price}
+                                  </Text>
+                                </div>
+                              </div>
+                            ))}
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  </>
+                )}
+              </>
+            ))} */}
+      </>
+      {/* </tbody> */}
+      {/* </table> */}
+    </>
   );
 }
 
 function OrderProducts({ data, totalItems, sendToPage }) {
   const [expandedOrders, setExpandedOrders] = useState([]);
   const [view, setView] = useState(false);
+  const userName = useSelector(state => state?.auth);
+  const [render, setRender] = useState(false);
 
   const [totalRecords, setTotalRecords] = useState(
     totalItems?.success_orders?.total,
@@ -217,13 +300,12 @@ function OrderProducts({ data, totalItems, sendToPage }) {
   }
 
   const toggleExpanded = orderId => {
-    console.print(orderId, 'order id');
-    // return;
-    if (expandedOrders.includes(orderId)) {
-      setExpandedOrders(prevState => prevState.filter(id => id !== orderId));
-    } else {
-      setExpandedOrders(prevState => [...prevState, orderId]);
-    }
+    console.log(orderId);
+    setExpandedOrders(prevOrders =>
+      prevOrders.includes(orderId)
+        ? prevOrders.filter(id => id !== orderId)
+        : [...prevOrders, orderId],
+    );
   };
 
   const renderPagination = () => {
@@ -240,8 +322,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
             }}
             key={i}
             onClick={() => goToPage(i)}
-            variant={currentPage === i ? 'filled' : 'outline'}
-          >
+            variant={currentPage === i ? 'filled' : 'outline'}>
             {i}
           </Button>,
         );
@@ -255,8 +336,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
           }}
           key={pageCount}
           onClick={() => goToPage(pageCount)}
-          variant={currentPage === pageCount ? 'filled' : 'outline'}
-        >
+          variant={currentPage === pageCount ? 'filled' : 'outline'}>
           {pageCount}
         </Button>,
       );
@@ -272,8 +352,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
             }}
             key={i}
             onClick={() => goToPage(i)}
-            variant={currentPage === i ? 'filled' : 'outline'}
-          >
+            variant={currentPage === i ? 'filled' : 'outline'}>
             {i}
           </Button>,
         );
@@ -286,180 +365,170 @@ function OrderProducts({ data, totalItems, sendToPage }) {
   return (
     <>
       {/* {data.map((product, index) => ( */}
-      <Card
-        style={{ margin: '15px 0px' }}
-        shadow='sm'
-        radius='md'
-        withBorder
-        className='p-0'
-        key={1}
-      >
-        {/* <div className="order-header">
-                <div className="order-info">
-                    <Text className="order-label">Order Placed</Text>
-                    <Text>{
-                    formatDate(product?.created_at) 
-                    }</Text>
-                </div>
-
-                <div className="order-info">
-                    <Text>Total</Text>
-                    <Text>{`$${product?.total_amount}`}</Text>
-                </div>
-
-                <div className="order-info">
-                    <Text>Ship To</Text>
-                    <Select
-                    styles={{
-                        wrapper: {
-                        border: "None",
-                        borderWidth: "0px",
-                        },
-                        input: {
-                        color: theme.colors.greenPrimary,
-                        backgroundColor: "rgb(229 231 235)",
-                        border: "none",
-                        },
-                    }}
-                    variant="default"
-                    value="John Nick"
-                    onChange={(e) => {}}
-                    data={["John Nick", "Wick John"]}
-                    />
-                    <Text
-                    className="order-details-view text-green-500 cursor-pointer"
-                    onClick={() => {
-                        console.print("I am clickable");
-                    }}
-                    >
-                John Nick
-                    </Text>
-                </div>
-
-                    <div className="order-info">
-                        <Text>Order # {product?.id}</Text>
-                        <Text
-                        className="order-details-view text-green-500 cursor-pointer"
-                        onClick={() => {
-                            console.print("I am clickable");
-                        }}
-                        >
-                        View Order Details
-                        </Text>
-                    </div>
-            </div> */}
-
-        <div className='order-details'>
-          <div className='order-status'>
-            <Text className='order-status-label' fw={700} fz='lg'>
-              {data[0]?.status} ORDERS
-              {/* {product?.status} ORDERS {product?.shipment_days111
-}
-                {product?.lateDeliveryDate} */}
-            </Text>
-            {/* <button className="track-package-button">
-                Track Package
-                </button> */}
-          </div>
-          {/* {product?.order_item.map( (orderItem, index) => {
-                return ( */}
-          <div className='product-info'>
-            {data && (
-              <OrderTable
-                orderDetails={data}
-                onToggleExpanded={toggleExpanded}
-              />
-            )}
-            <div
-              className='my-2'
-              style={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-              }}
-            >
-              {/* <Button style={{background: '#198754', marginRight: '2px'}} onClick={previousPage} disabled={currentPage === 1} className="toggle-button-table-data">
-                            Previous
-                            </Button>
-                            {renderPagination()}
-                            <Button style={{background: '#198754'}} onClick={nextPage} disabled={currentPage === pageCount} className="toggle-button-table-data">
-                            Next
-                            </Button> */}
-
-              <Pagination
-                count={pageCount}
-                page={currentPage}
-                onChange={goToPage}
-              />
+      {data.map(row => (
+        <Card
+          style={{ margin: '15px 0px' }}
+          shadow='sm'
+          radius='md'
+          withBorder
+          className='p-0'
+          key={row.id}>
+          <div className='order-details'>
+            <div className='order-header-bar'>
+              <div className='order-status'>
+                Tracking id <span>#{row.id}</span> <br />
+                <p>View Order Details</p>
+              </div>
+              <div className='order-status'>
+                Arriving <br /> {row.shipment_days}
+              </div>
+              <div className='order-status'>
+                Ship to <br /> <p>{userName?.user?.name}</p>
+              </div>
+              <div className='order-status'>
+                Total <br /> ${row.sub_total}
+              </div>
             </div>
-
-            {/* {
-                            expandedOrders.includes(order?.id) &&   (
-                                <>
-                                {expandedOrders?.map((product, index)=> {
-                                    return (
-                                        <div key={product?.product_id}style={{display: 'flex', displayDirection: 'row', width: '100%'}}>
-                                                <div style={{display: 'inherit',flexGrow: 1}}>
-                                                <img
-                                                // src={'https://m.media-amazon.com/images/I/51c4fed1l1L.jpg'}
-                                                src={product?.product?.image[0]}
-                                                className="product-image"
-                                                style={{
-                                                    // width: '%',
-                                                    height: 'auto',
-                                                    marginLeft: '5%',
-                                                }}
-                                            />
-                                                <Text className="product-description">{product?.product_name}</Text>
-                                                <Text   style={{
-                                                    width: '20%',
-                                                   
-                                                    margin: '4%',
-                                                }} className=""><span><b style={{
-                                                   
-                                                    fontWeight: 900,
-                                                     
-                                                 }}>Product ID</b></span><br/>{product?.product_id}</Text>
-                                                <Text  style={{
-                                                    width: '20%',
-                                                   fontWeight: 900,
-                                                    margin: '4%',
-                                                }} className=""><span><b style={{
-                                                   
-                                                   fontWeight: 900,
-                                                    
-                                                }}>Product Price</b></span><br/>${product?.price}</Text>
-                                            
-                                                </div>
-                                     
-                                           </div>
-                                    )
-                                     
-
-                                })}
-                                
-                                </>
-                            )
-                        } */}
+            <div className='product-info'>
+              <>
+                <>
+                  {row?.order_item?.map((order, indexOrder) => (
+                    <>
+                      {indexOrder === 0 && (
+                        <div className='order-container' key={indexOrder}>
+                          <div className='order-image-container'>
+                            <div className='order-image'>
+                              <LazyLoadImage
+                                width={'100%'}
+                                height={'100%'}
+                                src={order?.product.image[0]}
+                                alt={order?.product?.name
+                                  ?.trim()
+                                  ?.split(' ')
+                                  ?.slice(0, 9)
+                                  ?.join(' ')}
+                              />
+                            </div>
+                            <div>
+                              <Typography
+                                style={{
+                                  fontSize: '12px',
+                                  fontWeight: 400,
+                                }}
+                                className='order-nameee'>
+                                {order?.product?.name}
+                              </Typography>
+                            </div>
+                          </div>
+                          <div style={{ color: '#949494', paddingTop: '20px' }}>
+                            Qty:{' '}
+                            <span style={{ color: '#000' }}>{order?.qty}</span>
+                          </div>
+                          <button className='pending-order-button'>
+                            {row?.status}
+                          </button>
+                          {row?.status !== 'COMPLETE' ? (
+                            <button className='track-order-button'>
+                              Track Package
+                            </button>
+                          ) : (
+                            <p style={{ marginTop: '20px' }}>
+                              Price : ${order?.product?.price}
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </>
+                  ))}
+                </>
+                <>
+                  {expandedOrders.includes(row.id) &&
+                    row?.order_item?.map((order, indexOrder) => (
+                      <>
+                        {indexOrder !== 0 && (
+                          <div
+                            className='order-container'
+                            // style={{ width: '60.6%' }}
+                            key={indexOrder}>
+                            <div className='order-image-container'>
+                              <div className='order-image'>
+                                <LazyLoadImage
+                                  width={'100%'}
+                                  height={'100%'}
+                                  src={order?.product.image[0]}
+                                  alt={order?.product?.name
+                                    ?.trim()
+                                    ?.split(' ')
+                                    ?.slice(0, 9)
+                                    ?.join(' ')}
+                                />
+                              </div>
+                              <div>
+                                <Typography
+                                  style={{
+                                    fontSize: '12px',
+                                    fontWeight: 400,
+                                  }}
+                                  className='order-nameee'>
+                                  {order?.product?.name}
+                                </Typography>
+                              </div>
+                            </div>
+                            <div
+                              style={{ color: '#949494', paddingTop: '20px' }}>
+                              Qty:{' '}
+                              <span style={{ color: '#000' }}>
+                                {order?.qty}
+                              </span>
+                            </div>
+                            <p style={{ marginTop: '20px' }}>
+                              Price : ${order?.product?.price}
+                            </p>
+                          </div>
+                        )}
+                      </>
+                    ))}
+                </>
+              </>
+              {/* {data && (
+                <OrderTable
+                  orderDetails={data}
+                  onToggleExpanded={toggleExpanded}
+                  renderMoreProducts={render}
+                />
+              )} */}
+              {/* <div
+                className='my-2'
+                style={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                }}>
+                <Pagination
+                  count={pageCount}
+                  page={currentPage}
+                  onChange={goToPage}
+                />
+              </div> */}
+            </div>
+            {row?.status === 'COMPLETE' ? (
+              <div className='show-more-order-buttons'>
+                <button onClick={() => toggleExpanded(row.id)}>
+                  {expandedOrders.includes(row.id)
+                    ? 'Show less'
+                    : `${row?.order_item?.length - 1} more to show`}
+                </button>
+              </div>
+            ) : (
+              <div className='show-more-order-buttons'>
+                <button>Cancel my order</button>
+                <button onClick={() => toggleExpanded(row.id)}>
+                  {expandedOrders.includes(row.id) ? 'Show less' : 'Show more'}
+                </button>
+              </div>
+            )}
           </div>
-          {/* )
-
-
-})} */}
-
-          {/* <div style={{border: '1px solid #DDDDDD', width: '100%'}}>
-
-            </div> */}
-          <hr />
-          {/* <Text
-                className="cancel-order text-blue-400 cursor-pointer"
-                onClick={() => {
-                console.print("I am clickable");
-                }}
-            >
-                Cancel my order
-            </Text> */}
-        </div>
-      </Card>
+        </Card>
+      ))}
     </>
   );
 }

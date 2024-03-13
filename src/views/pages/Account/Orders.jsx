@@ -13,27 +13,46 @@ import { OrderSearchApi, OrderListhApi } from '../../../core/api/order';
 import OrderCard from '@components/OrderPage/OrderProducts';
 import OrderInvoiceCard from '@components/OrderPage/OrderInvoiceCard';
 import userDefault from '@images/common/user-default-avatar.png';
-import { Tabs, Tab, Box, Typography } from '@mui/material';
+
+import {
+  Tabs,
+  Tab,
+  Box,
+  Typography,
+  TextField,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import LoaderComponent from '@common/LoaderComponent/LoaderComponent';
+import SearchIcon from '@mui/icons-material/Search';
 
 // import { FaSearch } from "react-icons/fa";
 import './Account.css';
 import { Select } from '@mantine/core';
 import { Stack } from 'react-bootstrap';
+import DeliveryOrderCard from './DeliverOrderCard';
 
-const CustomTabs = styled(Tabs)({
-  '& .MuiTabs-indicator': {
-    backgroundColor: '#E87E24',
-  },
+const CustomTabs = styled(Tabs)`
+  & .MuiTabs-indicator {
+    backgroundcolor: #e87e24;
+  }
 
-  '& .MuiTab-textColorPrimary': {
-    color: '#318243',
-    '&.Mui-selected': {
-      color: '#E87E24',
-    },
-  },
-});
+  & .MuiTab-textColorPrimary {
+    color: #318243;
+    margin-right: 120px;
+
+    &.Mui-selected {
+      color: #e87e24;
+    }
+  }
+
+  @media (max-width: 480px) {
+    & .MuiTab-textColorPrimary {
+      margin-right: 20px;
+    }
+  }
+`;
 
 const OrderPage = () => {
   const [name, setName] = useState('');
@@ -57,6 +76,8 @@ const OrderPage = () => {
   };
 
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   // useEffect(() => {
   //     console.print(user, "user details");
@@ -122,17 +143,18 @@ const OrderPage = () => {
         </>
       )
     ) : activeTab === 1 ? (
-      cancelOrders.length > 0 ? (
-        // <div className="flex justify-center items-center">
-        //     <p>No cancelled orders.</p>
-        // </div>
-        <OrderCard data={cancelOrders} />
-      ) : (
-        <div className='flex justify-center items-center'>
-          <p>No cancelled orders</p>
-        </div>
-      )
-    ) : activeTab === 2 ? (
+      // cancelOrders.length > 0 ? (
+      // <div className="flex justify-center items-center">
+      //     <p>No cancelled orders.</p>
+      // </div>
+      // <OrderCard data={cancelOrders} />
+      <DeliveryOrderCard data={successOrders} />
+    ) : // ) : (
+    //   <div className='flex justify-center items-center'>
+    //     <p>No cancelled orders</p>
+    //   </div>
+    // )
+    activeTab === 2 ? (
       orderSearchData.length > 0 ? (
         localLoading === true ? (
           <LoaderComponent />
@@ -156,25 +178,38 @@ const OrderPage = () => {
         <Breadcrumb />
         <div className='row mx-0'>
           <div className='col-sm-4 col-md-8 col-8'>
-            <h3 className='account-heading your-order-page'>Your Order</h3>
+            <h3 className='account-heading your-order-page'>My Orders</h3>
           </div>
           <div className='col-sm-8 col-md-4 col-4 search-product-order-tables'>
             <label style={{ marginBottom: 5 }} htmlFor='orderSearch'>
               Enter order id to search
             </label>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <input
-                id='orderSearch'
-                name='orderSearch'
-                placeholder='Search all orders'
-                value={orderSearch}
-                onChange={e => setOrderSearch(e.target.value)}
-                className={
-                  orderSearch
-                    ? ' form-control  form-control-sm  my-lg-0 search-input green'
-                    : '  form-control form-control-sm  my-lg-0 search-input'
-                }
-              />
+              <div style={{ position: 'relative' }}>
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '8px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    color: '#318243',
+                  }}>
+                  <SearchIcon />
+                </div>
+                <input
+                  id='orderSearch'
+                  name='orderSearch'
+                  placeholder='Search all orders'
+                  value={orderSearch}
+                  onChange={e => setOrderSearch(e.target.value)}
+                  className={
+                    orderSearch
+                      ? 'form-control form-control-sm my-lg-0 search-input green'
+                      : 'form-control form-control-sm my-lg-0 search-input'
+                  }
+                  style={{ paddingLeft: '40px', border: '1px solid #318243' }}
+                />
+              </div>
 
               <button
                 className='searchOrderBtn btn btn-sm'
@@ -198,35 +233,47 @@ const OrderPage = () => {
 
         <div className='row  mx-0 order-list-container mt-2 orderTabsSection'>
           <div className='col-12 px-0'>
-            <CustomTabs value={activeTab} onChange={handleTabChange} centered>
+            <CustomTabs
+              value={activeTab}
+              onChange={handleTabChange}
+              sx={{
+                borderBottom: '1px solid #ddd',
+                width: isSmallScreen ? '100%' : '45%',
+              }}>
               <Tab
                 label='Orders'
                 sx={{
                   fontSize: {
-                    xs: '10px',
-                    md: '11px',
-                    lg: '12px',
+                    xs: '12px',
+                    md: '14px',
+                    lg: '14px',
                   },
+                  textTransform: 'none',
+                  fontFamily: 'Inter',
+                }}
+              />
+              <Tab
+                label='Delivered'
+                sx={{
+                  fontSize: {
+                    xs: '12px',
+                    md: '14px',
+                    lg: '14px',
+                  },
+                  textTransform: 'none',
+                  fontFamily: 'Inter',
                 }}
               />
               <Tab
                 label='Cancelled Orders'
                 sx={{
                   fontSize: {
-                    xs: '10px',
-                    md: '11px',
-                    lg: '12px',
+                    xs: '12px',
+                    md: '14px',
+                    lg: '14px',
                   },
-                }}
-              />
-              <Tab
-                label='Search orders'
-                sx={{
-                  fontSize: {
-                    xs: '10px',
-                    md: '11px',
-                    lg: '12px',
-                  },
+                  textTransform: 'none',
+                  fontFamily: 'Inter',
                 }}
               />
             </CustomTabs>
@@ -234,13 +281,12 @@ const OrderPage = () => {
             <div
               style={{
                 display: 'flex',
-                marginTop: 40,
+                marginTop: activeTab === 0 && 40,
                 marginBottom: 40,
               }}>
               {activeTab !== 2 && (
                 <>
                   <p className='orderType'>
-                    {}{' '}
                     {activeTab === 0 ? (
                       <>
                         {orderDetails?.success_orders?.data.length >= 0 ? (
@@ -248,14 +294,23 @@ const OrderPage = () => {
                         ) : (
                           <LoaderComponent />
                         )}
+                        <span style={{ marginRight: '12px' }}> placed in </span>
+                        <select
+                          onChange={handleDropdownChange}
+                          className='order-select'
+                          placeholder='Select an option'>
+                          <option value=''>All</option>
+                          <option value='1 month'>1 month</option>
+                        </select>
                       </>
                     ) : (
-                      `${orderDetails?.cancel_orders?.total} cancelled order`
-                    )}{' '}
-                    place in
+                      <>
+                        {/* {`${orderDetails?.cancel_orders?.total} cancelled order`} */}
+                      </>
+                    )}
                   </p>
                   <div style={{ display: 'inline-flex' }}>
-                    <Select
+                    {/* <Select
                       data={[
                         {
                           value: '',
@@ -278,19 +333,11 @@ const OrderPage = () => {
                         fontStyle: 'normal',
                         fontWeight: '400',
                         fontSize: '12px',
+                        marginTop: '-8px',
                         lineHeight: '164%',
                         color: '#000000',
                       }}
-                    />
-                    <select
-                      value={1}
-                      //   onChange={}
-                      style={{ marginLeft: '5px' }}>
-                      <option value='1 Month'>Select</option>
-                      <option value='Option 1'>1 Month</option>
-                      <option value='Option 2'>Option 2</option>
-                      <option value='Option 3'>Option 3</option>
-                    </select>
+                    /> */}
                   </div>
                 </>
               )}
@@ -298,15 +345,6 @@ const OrderPage = () => {
 
             {renderTabContent()}
           </div>
-          {/* <div
-                        style={{ marginTop: "15%", marginBottom: "5%" }}
-                        className="col-sm-12 col-md-3 col-3"
-                    >
-                        <OrderInvoiceCard
-                            activeTab={activeTab}
-                            data={orderDetails}
-                        />
-                    </div> */}
         </div>
       </div>
     </div>

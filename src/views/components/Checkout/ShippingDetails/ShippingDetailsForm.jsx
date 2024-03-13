@@ -296,7 +296,7 @@ function ShippingDetailsForm({
                                     </p>
                                 )} */}
             </div>
-           
+
             <div className=''>
               <label htmlFor={'streetAddress'}>
                 Address
