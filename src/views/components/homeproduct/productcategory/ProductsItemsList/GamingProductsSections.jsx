@@ -9,8 +9,21 @@ const GamingProductsSections = ({
   gamingProducts2,
   gamingProducts3,
   gpuItems,
+  //workstations,
+  work,
 }) => {
-  
+  const workstations = [
+    {
+      id: 1,
+      categoryLink: '/category/professional-laptop',
+    },
+    {
+      id: 2,
+      categoryLink: '/category/workstation',
+    },
+  ];
+
+
   return (
     <div>
       <div className='row mx-0'>
@@ -23,17 +36,28 @@ const GamingProductsSections = ({
                   {index === 0 || index === 3 ? (
                     <ProductItem3 items={index === 0 ? items : gpuItems} />
                   ) : (
-                    <ProductItem1
-                      image={
-                        index === 1
-                          ? gamingProducts1
-                          : index === 2
-                            ? gamingProducts2
-                            : index === 3
-                              ? gamingProducts3
-                              : gamingProducts3 // Replace 'defaultImage' with a fallback image or handle the case accordingly
-                      }
-                    />
+                    <>
+                      <Link
+                        to={
+                          index === 1
+                            ? workstations[1].categoryLink
+                            : index === 2
+                              ? workstations[0].categoryLink
+                              : ''
+                        }>
+                        <ProductItem1
+                          image={
+                            index === 1
+                              ? gamingProducts1
+                              : index === 2
+                                ? gamingProducts2
+                                : index === 3
+                                  ? gamingProducts3
+                                  : gamingProducts3 // Replace 'defaultImage' with a fallback image or handle the case accordingly
+                          }
+                        />
+                      </Link>
+                    </>
                   )}
                 </div>
                 <Link className='section-link' to='/category'>

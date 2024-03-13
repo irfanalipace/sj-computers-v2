@@ -159,6 +159,7 @@ const BannerCategory = () => {
       categoryName: 'Nvidia',
     },
   ];
+
   return (
     <div className='banner-category-section'>
       <div className='banner-wrapper'>
