@@ -485,11 +485,9 @@ const Router = () => {
     {
       path: '/track-order',
       element: (
-        <ProtectedRoute>
-          <PageWrapper>
-            <TrackOrder />
-          </PageWrapper>
-        </ProtectedRoute>
+        <PageWrapper>
+          <TrackOrder />
+        </PageWrapper>
       ),
     },
 

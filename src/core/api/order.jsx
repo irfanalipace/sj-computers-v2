@@ -104,3 +104,20 @@ export function validateCartItemsApi(data) {
       });
   });
 }
+
+const getTrackingInfo = async trackingId => {
+  try {
+    const response = await ApiService.post(`/get-tracking-info`, {
+      params: {
+        trackingId: trackingId,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    // Handle errors here
+    console.error('Error fetching tracking info:', error);
+    throw error;
+  }
+};
+
+export default getTrackingInfo;

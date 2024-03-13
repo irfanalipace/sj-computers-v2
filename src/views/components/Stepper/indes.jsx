@@ -72,8 +72,9 @@ function QontoStepIcon(props) {
 
 const steps = [
   { label: 'Ordered', description: 'April 11, 2023' },
-  { label: 'Shipped', description: 'April 18, 2023' },
-  { label: 'Expected Delivery', description: 'May 05, 2023' },
+  { label: 'In Transit', description: 'April 18, 2023' },
+  { label: 'Out for Delivery', description: 'May 05, 2023' },
+  { label: 'Deliverd', description: 'May 07, 2023' },
 ];
 
 export default function CustomizedSteppers({ step = 2 }) {
@@ -104,8 +105,7 @@ export default function CustomizedSteppers({ step = 2 }) {
             display: 'flex',
             justifyContent: 'end',
           },
-        }}
-      >
+        }}>
         {steps.map(label => (
           <Step key={label}>
             <StepLabel StepIconComponent={QontoStepIcon}>
@@ -113,8 +113,7 @@ export default function CustomizedSteppers({ step = 2 }) {
                 fontFamily={'Inter'}
                 fontSize={'14px'}
                 lineHeight={'16px'}
-                fontWeight={500}
-              >
+                fontWeight={500}>
                 {label.label}
               </Typography>
               <Typography
@@ -122,8 +121,7 @@ export default function CustomizedSteppers({ step = 2 }) {
                 fontFamily={'Inter'}
                 fontSize={'14px'}
                 lineHeight={'16px'}
-                fontWeight={400}
-              >
+                fontWeight={400}>
                 {label.description}
               </Typography>
             </StepLabel>
