@@ -53,7 +53,7 @@ class CardRequest extends FormRequest
                 'is_guest' => 'required|boolean',
                 'cart_items' => 'required|array',
                 'cart_items.*.product_id' => 'required',
-                'cart_items.*.qty' => 'required',
+                'cart_items.*.qty' => 'required|gt:0|lt:11',
                 'details' => 'required|array',
                 'details.total' => 'required|gt:0',
                 'details.sub_total' => 'required|gt:0',
