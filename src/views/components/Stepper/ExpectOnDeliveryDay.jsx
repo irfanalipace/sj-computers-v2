@@ -40,7 +40,7 @@ export default function ExpectOnDeliveryDay() {
           fontSize={'12px'}
           lineHeight={'17px'}>
           Once your Order is shipped, you'll recieve a conformation email with
-          tracking details. You can expect secure packaging and timelyy delivery
+          tracking details. You can expect secure packaging and timely delivery
           on all your products. It is important to note that some orders ma
           require a signature upon delivery so have someoe present at the time
           of delivery. Enjoy the unboxing experience and perform a quick quality

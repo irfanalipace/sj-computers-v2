@@ -267,3 +267,46 @@ export const makeDataLayerItemObject = itemArray => {
 
   return shapedItemArray;
 };
+
+export function formatingDate(dateString) {
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  const date = new Date(dateString);
+  console.print(dateString, 'dateString');
+
+  // Extracting date components
+  const year = date.getFullYear();
+  const month = months[date.getMonth()]; // Get month name from the array
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+
+  // Timezone offset
+  const timezoneOffset = date.getTimezoneOffset();
+  const timezoneOffsetHours = Math.abs(Math.floor(timezoneOffset / 60))
+    .toString()
+    .padStart(2, '0');
+  const timezoneOffsetMinutes = Math.abs(timezoneOffset % 60)
+    .toString()
+    .padStart(2, '0');
+  const timezoneSign = timezoneOffset < 0 ? '+' : '-';
+
+  // Constructing the formatted date string
+  const formattedDate = `${month} ${day}, ${year}`;
+
+  return formattedDate;
+}
