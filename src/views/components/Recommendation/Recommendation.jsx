@@ -15,7 +15,7 @@ export default function Recommendation({ prod, dataLayer }) {
     if (dataLayer && products.length) {
       viewItemDataLayer(products, 'Recommended_Product');
     }
-  }, [products]);
+  }, []);
 
   const viewItemDataLayer = (products, categorySlug) => {
     console.print(
@@ -37,6 +37,7 @@ export default function Recommendation({ prod, dataLayer }) {
   const getProduct = async () => {
     if (!products?.length) {
       try {
+        console.log('77777777777777');
         await dispatch(fetchProducts());
       } catch (error) {}
     }

@@ -9,10 +9,9 @@ const CategoryVideo = () => {
         height={'100%'}
         src='https://www.youtube.com/embed/yAoLSRbwxL8?si=klPrYjuzp98NIs8p'
         title='YouTube video player'
-        frameborder='0'
+        frameBorder='0'
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-        allowfullscreen
-      ></iframe>
+        allowFullScreen></iframe>
     </div>
   );
 };

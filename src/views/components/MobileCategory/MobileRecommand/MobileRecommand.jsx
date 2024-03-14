@@ -10,11 +10,12 @@ const MobileRecommand = () => {
 
   useEffect(() => {
     getProduct();
-  }, [products]);
+  }, []);
 
   const getProduct = async () => {
     if (!products?.length) {
       try {
+        console.log('666666666666');
         await dispatch(fetchProducts());
       } catch (error) {}
     }
@@ -31,8 +32,7 @@ const MobileRecommand = () => {
           <div key={index} className='row'>
             <Link
               to={`${product.url}`}
-              className='recommended-product-link-mobile-home-page'
-            >
+              className='recommended-product-link-mobile-home-page'>
               <div className='col-4'>
                 <div className='recommanditions-products-home-pages'>
                   <img src={product?.image} alt={`Product ${index + 2}`} />
