@@ -1,5 +1,7 @@
 # # Stage 1: Build image
 FROM  public.ecr.aws/docker/library/node:20-slim AS base
+ENV VITE_APP_URL=/ 
+ENV VITE_APP_API_BASE_URL=/api 
 COPY . /app
 WORKDIR /app
 # COPY ./etc/.env /app/.env
