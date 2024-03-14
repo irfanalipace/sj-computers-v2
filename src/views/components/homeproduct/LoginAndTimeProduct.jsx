@@ -173,7 +173,7 @@ const LoginAndTimeProduct = () => {
             ) : (
               <>
                 {products && products?.length > 0 && (
-                  <>
+                  <Link to={`/${products[0].name}/dp/${products[0].asin}`}>
                     <div style={{ textAlign: 'center' }}>
                       <img
                         className={`advertisment-img-products-imges-unautherized-user`}
@@ -229,7 +229,7 @@ const LoginAndTimeProduct = () => {
                         h:{parsedDate.getMinutes()}m
                       </div>
                     </div>
-                  </>
+                  </Link>
                 )}
               </>
             )}
