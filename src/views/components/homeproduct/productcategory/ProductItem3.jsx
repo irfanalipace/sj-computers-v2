@@ -12,7 +12,11 @@ const ProductItem3 = ({ items }) => {
     <div className='categories-container'>
       <div className='devsection-three-images'>
         <Link to={items[0].categoryLink}>
-          <img src={items[0].image} alt='Image 2' className='dynamic-image' />
+          <img
+            src={items?.[0]?.image}
+            alt='Image 2'
+            className='dynamic-image'
+          />
           <p>{items[0].categoryName}</p>
         </Link>
       </div>

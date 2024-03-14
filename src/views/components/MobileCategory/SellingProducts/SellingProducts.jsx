@@ -112,7 +112,7 @@ const SellingProducts = ({ topRatedProduct, inTopRated }) => {
         navigation
         className='hp-slider-1 px-5 recommendation-slider recommund-dev-slider-sections-opps'>
         {topRatedProduct?.map((product, index) => (
-          <SwiperSlide>
+          <SwiperSlide key={index}>
             <div className='px-1'>
               <Link
                 to={`/${product.name}/dp/${product.asin}`}

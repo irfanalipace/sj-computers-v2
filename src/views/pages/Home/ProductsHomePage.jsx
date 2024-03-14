@@ -43,6 +43,7 @@ const ProductsHomePage = () => {
 
   useEffect(() => {
     if ((!searchString || !selectedCategory) && products.length === 0) {
+      console.log('11212121212121212');
       dispatch(fetchProducts());
       return;
     }
