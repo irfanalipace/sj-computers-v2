@@ -244,7 +244,6 @@ const FilterBarlayout2 = ({
   };
 
   const handleChecked = (catg, value) => {
-    debugger;
     if (catg === 'processor') {
       const processorFilter = filtersArray.find(
         filter => filter.key === 'processor',

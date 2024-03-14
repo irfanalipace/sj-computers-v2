@@ -78,7 +78,7 @@ const FilteredProducts = memo(
 
     const init = () => {
       dispatch(SET_SELECTED_CATEGORY(null));
-      dispatch(CLEAR_ALL_PRODUCTS());
+      // dispatch(CLEAR_ALL_PRODUCTS());
       setMounted(true);
     };
 
@@ -98,7 +98,6 @@ const FilteredProducts = memo(
         name: '',
         filter: filteredData,
       };
-
       dispatch(
         filterProducts(filterObject, true, productAfterShowMore =>
           viewItemDataLayer(productAfterShowMore, categorySlug),
@@ -158,7 +157,6 @@ const FilteredProducts = memo(
 
     useEffect(() => {
       let filteredData = checkIfFilterSelected(filtersArray);
-
       filterObject = {
         ...filterObject,
         page: 1,
@@ -174,6 +172,7 @@ const FilteredProducts = memo(
       if (!categoryLoading) {
         if (category?.id || categorySlug) {
           if (brand || processor) return;
+
           dispatch(filterProducts(filterObject));
         }
       }

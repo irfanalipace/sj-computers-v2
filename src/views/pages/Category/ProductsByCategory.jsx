@@ -19,6 +19,8 @@ const ProductsByCategory = ({ toggleFilter }) => {
       }
     } catch (e) {
       setCategoryLoading(false);
+    } finally {
+      setCategoryLoading(false);
     }
   }, [categories, categorySlug]);
 

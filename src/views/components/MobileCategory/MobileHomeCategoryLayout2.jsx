@@ -91,11 +91,12 @@ const MobileHomeCategoryLayout2 = () => {
 
   useEffect(() => {
     getProduct();
-  }, [products]);
+  }, []);
 
   const getProduct = async () => {
     if (!products?.length) {
       try {
+        console.log('4444444444');
         await dispatch(fetchProducts());
       } catch (error) {}
     }

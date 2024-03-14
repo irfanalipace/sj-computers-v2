@@ -83,11 +83,12 @@ const MobileHomeCategory = () => {
 
   useEffect(() => {
     getProduct();
-  }, [products]);
+  }, []);
 
   const getProduct = async () => {
     if (!products?.length) {
       try {
+        console.log('3333333333');
         await dispatch(fetchProducts());
       } catch (error) {}
     }

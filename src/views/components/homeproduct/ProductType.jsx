@@ -130,11 +130,12 @@ const ProductType = () => {
 
   useEffect(() => {
     getProduct();
-  }, [products]);
+  }, []);
 
   const getProduct = async () => {
     if (!products?.length) {
       try {
+        console.log('2222222222222222');
         await dispatch(fetchProducts());
       } catch (error) {}
     }
@@ -177,7 +178,7 @@ const ProductType = () => {
     },
     {
       image: AccessoriesImgUpdate,
-      categoryLink: '/category/gaming_desktops',
+      categoryLink: '/category/bto',
       categoryName: 'Accessories',
     },
   ];
