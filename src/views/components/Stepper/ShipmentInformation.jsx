@@ -1,7 +1,15 @@
 import { Box, Stack, Typography } from '@mui/material';
 import React from 'react';
 
-export default function ShipmentInformation({ trackingInfo, user }) {
+export default function ShipmentInformation({
+  trackingInfo,
+  user,
+  shipmentData,
+}) {
+  const userInfo = shipmentData?.data
+    ? shipmentData?.data[0]?.user?.shipping_address
+    : {};
+
   return (
     <Box
       px={3}
@@ -31,21 +39,13 @@ export default function ShipmentInformation({ trackingInfo, user }) {
           value={
             <div style={{ lineHeight: '1.1rem' }}>
               {' '}
-              <span style={{ fontWeight: '500' }}>
-                {user?.name ? user?.name : 'Guest'}
-              </span>
-              <br /> {trackingInfo?.recipientInformation?.address?.city},{' '}
-              {trackingInfo?.recipientInformation?.address?.stateOrProvinceCode}
+              <span style={{ fontWeight: '500' }}>{userInfo?.full_name}</span>
+              <br />
               {/* <br /> New York, NY street */}
-              <br />{' '}
-              {trackingInfo?.recipientInformation?.address?.postalCode ||
-                trackingInfo?.recipientInformation?.address?.countryCode}
-              ,{trackingInfo?.recipientInformation?.address?.countryName}
-              <br />{' '}
-              {trackingInfo?.recipientInformation?.contact?.length > 0
-                ? 'Phone number' +
-                  trackingInfo?.recipientInformation?.contact[0]
-                : ''}
+              {userInfo?.city} , {userInfo?.address} , {userInfo?.apartment}
+              <br /> {userInfo?.zip_code} , {userInfo?.country}
+              <br />
+              {'Phone number: ' + userInfo?.phone_number}
             </div>
           }
         />

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
 import Stack from '@mui/material/Stack';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -9,106 +10,135 @@ import StepConnector, {
 } from '@mui/material/StepConnector';
 import { stepLabelClasses } from '@mui/material';
 import { Typography } from '@mui/material';
+import { formatingDate } from '../../../core/utils/helpers';
 
-const QontoConnector = styled(StepConnector)(({ theme }) => ({
+const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
-    top: 10,
-    left: 'calc(-100% + 19px)',
-    right: 'calc(0% + 19px)',
+    top: 12,
+    // left: -150,
+    transform: 'translate(-10%, 0px)',
   },
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      borderColor: '#E87E24',
+      backgroundColor: '#E87E24',
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      borderColor: '#E87E24',
+      backgroundColor: '#E87E24',
     },
   },
   [`& .${stepConnectorClasses.line}`]: {
-    borderColor:
+    height: 3,
+    border: 0,
+    backgroundColor:
       theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
-    borderTopWidth: 3,
     borderRadius: 1,
+    width: '120%',
   },
 }));
 
-const QontoStepIconRoot = styled('div')(({ theme, ownerState }) => ({
-  color: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#eaeaf0',
+const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
+  backgroundColor:
+    theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
+  zIndex: 1,
+  color: '#fff',
+  width: 25,
+  height: 25,
   display: 'flex',
-  height: 22,
+  borderRadius: '50%',
+  justifyContent: 'center',
   alignItems: 'center',
   ...(ownerState.active && {
-    color: '#784af4',
-  }),
-  '& .QontoStepIcon-completedIcon': {
-    width: 12,
-    height: 12,
-    borderRadius: '50%',
     backgroundColor: '#E87E24',
-  },
-  '& .QontoStepIcon-circle': {
-    width: 12,
-    height: 12,
-    borderRadius: '50%',
-    backgroundColor: '#DDDDDD',
-  },
+    boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+  }),
+  ...(ownerState.completed && {
+    backgroundColor: '#E87E24',
+  }),
 }));
 
-function QontoStepIcon(props) {
+function ColorlibStepIcon(props) {
   const { active, completed, className } = props;
 
+  const icons = {
+    // 1: <SettingsIcon />,
+    // 2: <GroupAddIcon />,
+    // 3: <VideoLabelIcon />,
+  };
+
   return (
-    <QontoStepIconRoot ownerState={{ active }} className={className}>
-      {completed ? (
-        <div className='QontoStepIcon-completedIcon' />
-      ) : (
-        <div className='QontoStepIcon-circle' />
-      )}
-    </QontoStepIconRoot>
+    <ColorlibStepIconRoot
+      ownerState={{ completed, active }}
+      className={className}>
+      {icons[String(props.icon)]}
+    </ColorlibStepIconRoot>
   );
 }
 
+ColorlibStepIcon.propTypes = {
+  /**
+   * Whether this step is active.
+   * @default false
+   */
+  active: PropTypes.bool,
+  className: PropTypes.string,
+  /**
+   * Mark the step as completed. Is passed to child components.
+   * @default false
+   */
+  completed: PropTypes.bool,
+  /**
+   * The label displayed in the step icon.
+   */
+  icon: PropTypes.node,
+};
 const steps = [
   { label: 'Ordered', description: 'April 11, 2023' },
-  { label: 'In Transit', description: 'April 18, 2023' },
+  {
+    label: 'In Transit',
+    description: '',
+  },
   { label: 'Out for Delivery', description: 'May 05, 2023' },
-  { label: 'Deliverd', description: 'May 07, 2023' },
+  { label: 'Delivered', description: 'May 07, 2023' },
 ];
+export default function CustomizedSteppers({
+  step = 2,
+  trackingInfo,
+  shipmentData,
+}) {
+  const orderedValue = shipmentData.data
+    ? shipmentData?.data[0]?.created_at
+    : '';
+  const formatedOrderedValue = formatingDate(orderedValue);
 
-export default function CustomizedSteppers({ step = 2 }) {
+  const inTransitValue = trackingInfo?.dateAndTimes?.filter(
+    obj => obj.type === 'SHIP',
+  );
+  const formatedTranstValue =
+    inTransitValue && inTransitValue.length > 0
+      ? formatingDate(inTransitValue[0]?.dateTime)
+      : null;
+  const outForDelivery = trackingInfo?.dateAndTimes?.filter(
+    obj => obj.type === 'ACTUAL_TENDER',
+  );
+  const formatedOutForDeliveryValue =
+    outForDelivery && outForDelivery.length > 0
+      ? formatingDate(outForDelivery[0]?.dateTime)
+      : null;
+
+  console.print('inTransitalue', inTransitValue);
+
   return (
     <Stack sx={{ width: '100%' }} spacing={4}>
       <Stepper
         alternativeLabel
         activeStep={step}
-        connector={<QontoConnector />}
-        sx={{
-          '& .MuiStep-root:first-child .MuiStepLabel-root': {
-            alignItems: 'flex-start',
-          },
-          '& .MuiStep-root:second-child .MuiStepLabel-root': {
-            alignItems: 'center',
-          },
-          '& .MuiStep-root:last-child .MuiStepLabel-root': {
-            alignItems: 'flex-end',
-          },
-          '& .MuiStep-root:first-child .MuiStepLabel-labelContainer': {
-            display: 'flex',
-          },
-          '& .MuiStep-root:second-child .MuiStepLabel-labelContainer': {
-            // width: "150px",
-          },
-          '& .MuiStep-root:last-child .MuiStepLabel-labelContainer': {
-            // width: "150px",
-            display: 'flex',
-            justifyContent: 'end',
-          },
-        }}>
-        {steps.map(label => (
+        // connector={<QontoConnector />}
+        connector={<ColorlibConnector />}>
+        {steps.map((label, index) => (
           <Step key={label}>
-            <StepLabel StepIconComponent={QontoStepIcon}>
+            <StepLabel StepIconComponent={ColorlibStepIcon}>
               <Typography
                 fontFamily={'Inter'}
                 fontSize={'14px'}
@@ -122,7 +152,13 @@ export default function CustomizedSteppers({ step = 2 }) {
                 fontSize={'14px'}
                 lineHeight={'16px'}
                 fontWeight={400}>
-                {label.description}
+                {index === 0
+                  ? formatedOrderedValue
+                  : index === 1
+                    ? formatedTranstValue
+                    : index === 2
+                      ? formatedOutForDeliveryValue
+                      : label.description}
               </Typography>
             </StepLabel>
           </Step>

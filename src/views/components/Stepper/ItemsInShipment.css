@@ -1,0 +1,27 @@
+.shipment-box {
+  position: relative;
+}
+.shipment-box .swiper-button-next {
+  color: black;
+  translate: 0px 10px;
+  /* background-color: aqua; */
+  /* height: 100px; */
+  /* position: absolute; */
+  /* top: 0px; */
+  /* right: 0px; */
+}
+
+.shipment-box .swiper-button-prev {
+  color: black;
+  translate: 0px 10px;
+  /* height: 100px; */
+  /* position: absolute; */
+  /* top: 0px; */
+}
+
+.shipment-box .swiper-button-next::after {
+  font-size: 20px !important;
+}
+.shipment-box .swiper-button-prev::after {
+  font-size: 20px !important;
+}

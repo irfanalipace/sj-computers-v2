@@ -23,6 +23,8 @@ import { Breadcrumb } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './TrackOrder.css';
 import getTrackingInfo from '../../../core/api/order';
+import { getOrderDetailsSJ } from '../../../core/api/refund-order';
+import { formatingDate } from '../../../core/utils/helpers';
 
 const TrackOrder = () => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -31,6 +33,7 @@ const TrackOrder = () => {
   const screenWidth = useViewportWidth();
 
   const [trackingInfo, setTrackingInfo] = useState([]);
+  const [shipmentData, setShipmentData] = useState([]);
 
   const trackingId = 775486523899;
 
@@ -47,6 +50,33 @@ const TrackOrder = () => {
       });
   }, [trackingId]);
 
+  useEffect(() => {
+    const param = {
+      user_id: user?.id,
+      order_id: [1],
+    };
+
+    // Call the getOrderDetailsSJ function
+    getOrderDetailsSJ(param)
+      .then(response => {
+        // Handle the response data
+        console.log('Order details:', response);
+        setShipmentData(response); // Assuming response is the order details
+      })
+      .catch(error => {
+        // Handle errors
+        console.error('Error fetching order details:', error);
+      });
+  }, []);
+
+  const anticipatedDelivery = trackingInfo?.dateAndTimes?.filter(
+    obj => obj.type === 'ANTICIPATED_TENDER',
+  );
+  const formatedAnticipatedDeliveryValue =
+    anticipatedDelivery && anticipatedDelivery.length > 0
+      ? formatingDate(anticipatedDelivery[0]?.dateTime)
+      : null;
+
   return (
     <>
       <Container sx={{ my: 4 }}>
@@ -61,7 +91,7 @@ const TrackOrder = () => {
                   </IconButton>
                 </Link>
 
-                <Link to={''} className='track-page-link'>
+                <Link to={'/account/orders'} className='track-page-link'>
                   <span>My Order</span>
                   <IconButton>
                     <NavigateNextIcon sx={{ fontSize: '14px' }} />
@@ -106,9 +136,9 @@ const TrackOrder = () => {
                 fontFamily={'Inter'}
                 lineHeight={'16px'}>
                 {' '}
-                {trackingInfo?.estimatedDeliveryTimeWindow?.window.length > 0
-                  ? trackingInfo?.estimatedDeliveryTimeWindow?.window[0]
-                  : 'not confirm yet'}
+                {anticipatedDelivery == null
+                  ? 'Not confirm yet'
+                  : formatedAnticipatedDeliveryValue}
               </Typography>
             </Stack>
             <Typography
@@ -120,11 +150,18 @@ const TrackOrder = () => {
             </Typography>
           </Box>
         </Box>
-        <CustomizedSteppers />
+        <CustomizedSteppers
+          shipmentData={shipmentData}
+          trackingInfo={trackingInfo}
+        />
         <Grid mt={7} container columnSpacing={0} px={4}>
           {/* 5.7 + 0.6 + 5.7 */}
           <Grid item xs={12} sm={5.7} sx={{ border: '1px solid #EEEEEE' }}>
-            <ShipmentInformation trackingInfo={trackingInfo} user={user} />
+            <ShipmentInformation
+              trackingInfo={trackingInfo}
+              shipmentData={shipmentData}
+              user={user}
+            />
           </Grid>
           {/* Empty Grid for Grid geometry  */}
           <Grid item xs={12} sm={0.6}></Grid>
@@ -134,7 +171,11 @@ const TrackOrder = () => {
             sm={5.7}
             mt={screenWidth < 575 && 6}
             sx={{ border: '1px solid #EEEEEE' }}>
-            <ItemsInShipment />
+            <ItemsInShipment
+              user={user}
+              shipmentData={shipmentData}
+              trackingInfo={trackingInfo}
+            />
           </Grid>
           <Grid
             item
