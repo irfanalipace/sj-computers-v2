@@ -376,6 +376,7 @@ const CategorySidebar = ({
       sx={{
         overflowX: 'hidden',
         overflowY: 'none',
+      
         borderRight: inDrawer == true ? '' : '0.5px solid #DDDDDD',
       }}>
       <Grid

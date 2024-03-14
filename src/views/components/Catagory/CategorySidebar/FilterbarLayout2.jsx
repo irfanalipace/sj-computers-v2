@@ -422,8 +422,9 @@ const FilterBarlayout2 = ({
                   </IconButton>
                 </span>
               ) : (
-                '' */}
-              )}
+                '' 
+              
+              )}*/}
             </h3>
             {priceData.priceValueArray.map((item, index) => (
               <li

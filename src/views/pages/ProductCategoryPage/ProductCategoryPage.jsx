@@ -16,7 +16,7 @@ const ProductCategoryPage = ({ color, heading, desc, pathValue }) => {
       <TopBanner color={color} heading={heading} desc={desc} />
       <Box>
         <Grid container>
-          <Grid item md={2} lg={2} mt={10}>
+          <Grid item md={2} lg={2} mt={{ xs: 4, md: 10 }}>
             <CategorySidebar
               isNewApi={true}
               pathValue={pathValue}
