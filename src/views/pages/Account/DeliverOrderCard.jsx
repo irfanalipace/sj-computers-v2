@@ -1,8 +1,14 @@
 import { Grid, Typography, styled } from '@mui/material';
 import { Card } from '@mantine/core';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { formatDate } from '../../../core/utils/helpers';
+import { useSelector } from 'react-redux';
 
-const DeliveryOrderCard = ({ data }) => {
+const DeliveryOrderCard = ({ data, cancelled }) => {
+  const filteredData = data?.filter(
+    orders => orders?.fedex_status === 'DELIVERED',
+  );
+  const userName = useSelector(state => state?.auth?.user?.name);
   const CardHeader = styled('span')({
     backgroundColor: '#ddd',
     display: 'flex',
@@ -83,7 +89,7 @@ const DeliveryOrderCard = ({ data }) => {
     },
   });
 
-  return (
+  return filteredData?.map(orders => (
     <Grid container>
       <Card
         style={{
@@ -98,31 +104,31 @@ const DeliveryOrderCard = ({ data }) => {
         className='p-0'>
         <CardHeader>
           <div>
-            Order Placed <br /> April 17, 2023
+            Order Placed <br /> {formatDate(orders?.created_at)}
           </div>
           <div>
-            Total <br />
-            $150.5
+            Total <br />${orders?.total_amount}
           </div>
           <div>
-            Ship To <br /> <span>John Wick</span>
+            Ship To <br /> <span>{userName}</span>
           </div>
           <div>
-            Tracking id #123456 <br /> <span>View Order Details</span>
+            Tracking id {'#' + orders?.tracking_id ? orders?.tracking_id : ''}{' '}
+            <br /> <span>View Order Details</span>
           </div>
         </CardHeader>
         <CardContent>
           <div>
-            <h3>Your Order</h3>
-            <button>Track Package</button>
+            <h3>{cancelled ? 'Cancelled' : 'Your Order'}</h3>
+            {!cancelled && <button>Track Package</button>}
           </div>
           <span>
             <div className='delivery-card-image'>
               <LazyLoadImage
                 width={'100%'}
                 height={'100%'}
-                src={data[0].order_item[0]?.product?.image[0]}
-                alt={data[0].order_item[0]?.product?.name
+                src={orders?.order_item[0]?.product?.image[0]}
+                alt={orders?.order_item[0]?.product?.name
                   ?.trim()
                   ?.split(' ')
                   ?.slice(0, 9)
@@ -135,7 +141,7 @@ const DeliveryOrderCard = ({ data }) => {
                 fontWeight: 400,
               }}
               className='delivery-card-name'>
-              {data[0].order_item[0]?.product?.name}
+              {orders?.order_item[0]?.product?.name}
             </Typography>
           </span>
         </CardContent>
@@ -163,17 +169,17 @@ const DeliveryOrderCard = ({ data }) => {
             <hr />
             <Grid container justifyContent='space-between' py={1}>
               <Grid item>Item:</Grid>
-              <Grid item>Product Name</Grid>
+              <Grid item></Grid>
             </Grid>{' '}
             <Grid container justifyContent='space-between' py={1}>
               <Grid item>Price</Grid>
               <Grid item sx={{ fontWeight: 600 }}>
-                $59..5
+                ${orders?.total_amount}
               </Grid>
             </Grid>{' '}
             <Grid container justifyContent='space-between' py={1}>
               <Grid item>Shipping & handling</Grid>
-              <Grid item>Free</Grid>
+              <Grid item>${orders?.shipment_price}</Grid>
             </Grid>
             <hr />
             <Grid container justifyContent='space-between' py={1}>
@@ -185,7 +191,7 @@ const DeliveryOrderCard = ({ data }) => {
               <Grid
                 item
                 sx={{ fontSize: '14px', color: '#DD6500', fontWeight: 600 }}>
-                $59.5
+                ${orders?.sub_total}
               </Grid>
             </Grid>
           </div>
@@ -195,7 +201,7 @@ const DeliveryOrderCard = ({ data }) => {
         </InvoiceCard>
       </Card>
     </Grid>
-  );
+  ));
 };
 
 export default DeliveryOrderCard;

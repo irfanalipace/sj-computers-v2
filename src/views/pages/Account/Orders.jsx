@@ -155,22 +155,22 @@ const OrderPage = () => {
     //   </div>
     // )
     activeTab === 2 ? (
-      orderSearchData.length > 0 ? (
-        localLoading === true ? (
-          <LoaderComponent />
-        ) : (
-          <OrderCard data={orderSearchData} />
-        )
-      ) : (
-        // <div className="flex justify-center items-center">
-        //     <p>Orders Not found.</p>
-        // </div>
-        // <OrderCard data={orderSearchData} />
-        <div className='flex justify-center items-center'>
-          <p>Orders Not found.</p>
-        </div>
-      )
-    ) : null;
+      // orderSearchData.length > 0 ? (
+      //   localLoading === true ? (
+      //     <LoaderComponent />
+      //   ) : (
+      <DeliveryOrderCard data={successOrders} cancelled={true} />
+    ) : //   )
+    // ) : (
+    // <div className="flex justify-center items-center">
+    //     <p>Orders Not found.</p>
+    // </div>
+    // <OrderCard data={orderSearchData} />
+    // <div className='flex justify-center items-center'>
+    //   <p>Orders Not found.</p>
+    // </div>
+    // )
+    null;
   };
   return (
     <div className='account-page order-page'>
@@ -238,7 +238,7 @@ const OrderPage = () => {
               onChange={handleTabChange}
               sx={{
                 borderBottom: '1px solid #ddd',
-                width: isSmallScreen ? '100%' : '45%',
+                width: isSmallScreen ? '100%' : '30%',
               }}>
               <Tab
                 label='Orders'
@@ -264,7 +264,7 @@ const OrderPage = () => {
                   fontFamily: 'Inter',
                 }}
               />
-              <Tab
+              {/* <Tab
                 label='Cancelled Orders'
                 sx={{
                   fontSize: {
@@ -275,7 +275,7 @@ const OrderPage = () => {
                   textTransform: 'none',
                   fontFamily: 'Inter',
                 }}
-              />
+              /> */}
             </CustomTabs>
 
             <div

@@ -257,7 +257,6 @@ function OrderProducts({ data, totalItems, sendToPage }) {
   const [expandedOrders, setExpandedOrders] = useState([]);
   const [view, setView] = useState(false);
   const userName = useSelector(state => state?.auth);
-  const [render, setRender] = useState(false);
 
   const [totalRecords, setTotalRecords] = useState(
     totalItems?.success_orders?.total,
@@ -380,7 +379,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                 <p>View Order Details</p>
               </div>
               <div className='order-status'>
-                Arriving <br /> {row.shipment_days}
+                {row?.fedex_status || row?.status} <br /> {row.shipment_days}
               </div>
               <div className='order-status'>
                 Ship to <br /> <p>{userName?.user?.name}</p>
@@ -427,7 +426,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                           <button className='pending-order-button'>
                             {row?.status}
                           </button>
-                          {row?.status !== 'COMPLETE' ? (
+                          {row?.fedex_status !== 'DELIVERED' ? (
                             <button className='track-order-button'>
                               Track Package
                             </button>
