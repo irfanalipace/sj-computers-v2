@@ -7,7 +7,7 @@ COPY ./ /app
 COPY ./etc/nginx.conf /etc/nginx/nginx.conf
 COPY ./etc/nginx-site.conf /etc/nginx/conf.d/default.conf
 COPY ./etc/entrypoint.sh /entrypoint.sh
-COPY ./etc/.env /app/.env
+# COPY ./etc/.env /app/.env
 
 COPY ./etc/php.ini /usr/local/etc/php/php.ini
 COPY ./etc/php-fpm.conf /usr/local/etc/php-fpm.d/dev.conf

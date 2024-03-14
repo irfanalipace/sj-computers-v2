@@ -2,7 +2,7 @@
 FROM  public.ecr.aws/docker/library/node:20-slim AS base
 COPY . /app
 WORKDIR /app
-COPY ./etc/.env /app/.env
+# COPY ./etc/.env /app/.env
 
 RUN npm install -g pnpm 
 RUN pnpm i --prod
