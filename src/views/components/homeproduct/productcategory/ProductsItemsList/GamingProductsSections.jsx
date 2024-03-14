@@ -23,7 +23,6 @@ const GamingProductsSections = ({
     },
   ];
 
-
   return (
     <div>
       <div className='row mx-0'>

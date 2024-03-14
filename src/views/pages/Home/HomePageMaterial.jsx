@@ -103,6 +103,7 @@ export const featured = [
     name: 'Budget Friendly Desktops',
     link: 'See more',
     extra: 'Under $250',
+    redirct: true,
     redirectTo: '/budget-friendly-desktops',
   },
   {
