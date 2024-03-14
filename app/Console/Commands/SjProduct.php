@@ -79,9 +79,9 @@ class SjProduct extends Command
         curl_close($curl);
 
         $products = json_decode($response, true);
-
+        
         foreach ($products as $key => $product) {
-
+            
             if(empty($product['Images'])){
                 continue ;
             }
@@ -97,11 +97,11 @@ class SjProduct extends Command
                 'brand_id' => $brand->id ?? '',
                 'quantity'  => $product['PackageQuantity'],
                 'status'  => $product['Status'] ?? 0,
-                'description'  => $product['AmazonDescription'],
+                'description'  => $this->cleanDescription($product['AmazonDescription']),
                 'amazon_id'  => $product['ID'],
                 'rank_1' => $product['Rank1'],
                 'rank_2' => $product['Rank2'],
-//                'others'  => $product['JSON'],
+            //  'others'  => $product['JSON'],
             ];
 
             $product = Product::updateOrCreate(['asin' => $product['ASIN']],$data);
@@ -116,6 +116,20 @@ class SjProduct extends Command
         }
         dd('done');
 
+    }
+    
+    // Function to clean the description
+    private function cleanDescription($description)
+    {
+        $data = json_decode($description, true); // Convert to associative array
+
+        if (isset($data['bullet_point'])) {
+            foreach ($data['bullet_point'] as &$bulletPoint) {
+                $bulletPoint['value'] = str_replace('?', '', $bulletPoint['value']);
+            }
+        }
+
+        return json_encode($data); // Convert back to JSON string
     }
 
     public function setProductInfo($product)
