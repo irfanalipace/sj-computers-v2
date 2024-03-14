@@ -95,7 +95,6 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
         style={{
           margin: '15px 0px',
           width: '55%',
-          height: '310px',
           border: '1px solid #DDDDDD',
         }}
         shadow='sm'
@@ -122,28 +121,30 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
             <h3>{cancelled ? 'Cancelled' : 'Your Order'}</h3>
             {!cancelled && <button>Track Package</button>}
           </div>
-          <span>
-            <div className='delivery-card-image'>
-              <LazyLoadImage
-                width={'100%'}
-                height={'100%'}
-                src={orders?.order_item[0]?.product?.image[0]}
-                alt={orders?.order_item[0]?.product?.name
-                  ?.trim()
-                  ?.split(' ')
-                  ?.slice(0, 9)
-                  ?.join(' ')}
-              />
-            </div>
-            <Typography
-              style={{
-                fontSize: '12px',
-                fontWeight: 400,
-              }}
-              className='delivery-card-name'>
-              {orders?.order_item[0]?.product?.name}
-            </Typography>
-          </span>
+          {orders?.order_item?.map(item => (
+            <span style={{ margin: '2rem 0px 0px 0px' }}>
+              <div className='delivery-card-image'>
+                <LazyLoadImage
+                  width={'100%'}
+                  height={'100%'}
+                  src={item?.product?.image[0]}
+                  alt={item?.product?.name
+                    ?.trim()
+                    ?.split(' ')
+                    ?.slice(0, 9)
+                    ?.join(' ')}
+                />
+              </div>
+              <Typography
+                style={{
+                  fontSize: '12px',
+                  fontWeight: 400,
+                }}
+                className='delivery-card-name'>
+                {item?.product?.name}
+              </Typography>
+            </span>
+          ))}
         </CardContent>
         <button className='cancel-my-order-btn'>Cancel my order</button>
       </Card>
@@ -152,6 +153,7 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
         style={{
           margin: '15px 0px',
           width: '25%',
+          height: '310px',
           border: '1px solid #DDDDDD',
         }}
         shadow='sm'
@@ -169,7 +171,20 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
             <hr />
             <Grid container justifyContent='space-between' py={1}>
               <Grid item>Item:</Grid>
-              <Grid item></Grid>
+              <Grid item>
+                {orders?.order_item?.map((item, index) => {
+                  if (index === 0) {
+                    const productName = item?.product?.name;
+                    const words = productName.split(' ');
+                    const truncatedName = words.slice(0, 2).join(' ');
+                    const truncatedProductName =
+                      words.length > 2 ? truncatedName + '...' : truncatedName;
+
+                    return <span>{truncatedProductName}</span>;
+                  }
+                  return null;
+                })}
+              </Grid>
             </Grid>{' '}
             <Grid container justifyContent='space-between' py={1}>
               <Grid item>Price</Grid>

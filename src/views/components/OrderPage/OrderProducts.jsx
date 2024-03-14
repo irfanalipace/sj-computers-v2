@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { QuantityInput } from '../common/QuantityInput/QuantityInput';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function OrderTable({
   deliveryDate,
@@ -39,7 +40,7 @@ function OrderTable({
       setExpandedOrders(prevState => [...prevState, orderId]);
     }
   };
-
+  const navigate = useNavigate();
   return (
     <>
       {/* <table className='order-table'> */}
@@ -376,7 +377,17 @@ function OrderProducts({ data, totalItems, sendToPage }) {
             <div className='order-header-bar'>
               <div className='order-status'>
                 Tracking id <span>#{row.id}</span> <br />
-                <p>View Order Details</p>
+                <Link
+                  to={{
+                    pathname: `/account/orders/order-details/${row?.id}`,
+                  }}
+                  style={{
+                    color: '#318243',
+                    textDecoration: 'none',
+                    fontSize: '12px',
+                  }}>
+                  View Order Details
+                </Link>
               </div>
               <div className='order-status'>
                 {row?.fedex_status || row?.status} <br /> {row.shipment_days}

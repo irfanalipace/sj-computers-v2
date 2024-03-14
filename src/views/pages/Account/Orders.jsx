@@ -32,6 +32,7 @@ import './Account.css';
 import { Select } from '@mantine/core';
 import { Stack } from 'react-bootstrap';
 import DeliveryOrderCard from './DeliverOrderCard';
+import Recommendation from '../../components/Recommendation/Recommendation';
 
 const CustomTabs = styled(Tabs)`
   & .MuiTabs-indicator {
@@ -68,7 +69,7 @@ const OrderPage = () => {
   const cancelOrders = useSelector(state => state.orders.cancelOrders);
   const successOrders = useSelector(state => state.orders.successOrders);
   const orderDetails = useSelector(state => state.orders.orderDetails);
-
+  const products = useSelector(state => state?.products?.products);
   // console.print(orderDetails.total, 'total')
 
   const handleDropdownChange = value => {
@@ -346,6 +347,15 @@ const OrderPage = () => {
             {renderTabContent()}
           </div>
         </div>
+      </div>
+      <div
+        style={{
+          marginTop: '4rem',
+          padding: '10px 70px',
+          borderTop: '1px solid #D0D0D0',
+          borderBottom: '1px solid #D0D0D0',
+        }}>
+        <Recommendation prod={products} />
       </div>
     </div>
   );

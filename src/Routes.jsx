@@ -46,6 +46,10 @@ import NotFound from '@pages/NotFound/NotFound';
 import Loader from '@common/LoaderComponent/LoaderComponent';
 import PageWrapper from '@components/PageWrapper/PageWrapper';
 
+const OrderDetails = React.lazy(
+  () => import('./views/pages/OrderDetails.jsx/OrderDetails'),
+);
+
 const ProductCateogoryPage = React.lazy(
   () => import('./views/pages/ProductCategoryPage/ProductCategoryPage'),
 );
@@ -190,6 +194,14 @@ const Router = () => {
             desc='Our most popular products based on sales. Updated frequently'
             pathValue='top-rated-product'
           />
+        </PageWrapper>
+      ),
+    },
+    {
+      path: '/account/orders/order-details/:id',
+      element: (
+        <PageWrapper>
+          <OrderDetails />
         </PageWrapper>
       ),
     },
