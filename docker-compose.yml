@@ -1,0 +1,45 @@
+services: 
+  frontend:
+    platform: linux/amd64
+    image: sj/app:latest
+    restart: always 
+    # volumes:
+    #   - ./config.json:/usr/share/nginx/html/config.json
+    ports:
+      - 8089:80
+    tty: true
+
+  backend:
+    platform: linux/amd64
+    image: sj/api:latest
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - ENVIRONMENT=development
+    # volumes:
+    #   - ./backend/storage/:/app/storage/
+    ports:
+      - 8090:80
+    tty: true
+  db:
+    image: mariadb:latest
+    restart: always
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD=pass
+      - MARIADB_DATABASE=sjdev
+      - MARIADB_USER=root
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      start_period: 1m
+      timeout: 5s
+      retries: 10
+
+
+  # aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 819942118941.dkr.ecr.us-east-1.amazonaws.com
+
