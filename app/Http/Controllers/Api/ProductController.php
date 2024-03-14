@@ -113,7 +113,9 @@ class ProductController extends BaseController
         $data['brand'] = $this->queryProductInfo('brand', $category);
         
         $data['price'] = $this->queryProductInfo('price', $category);
-      
+
+        $data['review'] = $this->queryProductInfo('review', $category);
+
         // dd($data);
 
         return $this->sendResponse($data);
@@ -151,7 +153,9 @@ class ProductController extends BaseController
             return $this->getPrices($sql);
         } else if($key == 'brand'){
             return $this->getBrands($key,$sql);
-        } 
+        } else if($key == 'review'){
+            return $this->getReviews($key,$sql);
+        }
         // else if($key == 'processor') {
         //     return [
         //         'Core i3',
@@ -305,6 +309,37 @@ class ProductController extends BaseController
         return $record;
 
     }
+
+    public function getReviews($key, $sql = [])
+    {
+        if (!empty($sql)) {
+            $minRating = PHP_INT_MAX;
+            $maxRating = PHP_INT_MIN;
+
+            foreach ($sql->get() as $product) {
+                $reviews = $product->productReview;
+
+                // If the product has reviews
+                if ($reviews->count() > 0) {
+                    $minRating = min($minRating, $reviews->min('rating'));
+                    $maxRating = max($maxRating, $reviews->max('rating'));
+                }
+            }
+        } else {
+            // If $sql is empty
+            $minRating = ProductReview::min('rating');
+            $maxRating = ProductReview::max('rating');
+        }
+
+        // Format the output
+        $record = [
+            'min_rating' => $minRating,
+            'max_rating' => $maxRating
+        ];
+
+        return $record;
+    }
+
 
     public function getFilterProducts(SearchProductRequest $request)
     {
@@ -578,7 +613,7 @@ class ProductController extends BaseController
         // Apply OS filter
          if($key == 'operating_system'  && !empty($value)){
             $operatingSystemFilter = $value;
-           
+
             $query->whereHas('productInfo', function ($query) use ($operatingSystemFilter) {
                 $query->where('key','operating_system')->whereIn('value', $operatingSystemFilter);
             }); 
