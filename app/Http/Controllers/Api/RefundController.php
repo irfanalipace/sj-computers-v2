@@ -33,7 +33,7 @@ class RefundController extends BaseController
     public function orderDetail(OrderDetailRequest $request)
     {
 
-        $order_details = Order::whereIn("id", $request->order_id)->where('user_id', $request->user_id)->select('orders.id', 'orders.total_amount', 'orders.sub_total', 'orders.shipment_price', 'orders.created_at')->get();
+        $order_details = Order::whereIn("id", $request->order_id)->where('user_id', $request->user_id)->select('orders.id','orders.user_id', 'orders.total_amount', 'orders.sub_total', 'orders.shipment_price', 'orders.created_at')->get();
         if (is_null($order_details)) {
             return $this->sendError(['error', 'Order Details is not found.']);
         }
