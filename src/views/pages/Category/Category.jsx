@@ -15,13 +15,22 @@ import CategoryParagraph from './CategoryParagraph';
 import CategoryVideoAndSlider from '../../components/Catagory/CategoryVideoAndSlider';
 import MobileRecommand from '../../components/MobileCategory/MobileRecommand/MobileRecommand';
 import CategoryFilterbarMobile from '../../components/Catagory/CategoryFiterbarMobile/CategoryFilterbarMobile';
+import { CLEAR_FILTERS_ARRAY } from '../../../core/store/products/productsSlice';
+import { useDispatch } from 'react-redux';
 
 function Category() {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleFilter = () => {
     setIsOpen(state => !state);
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(CLEAR_FILTERS_ARRAY());
+    };
+  }, []);
 
   return (
     <div className='category-page'>
