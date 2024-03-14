@@ -176,7 +176,7 @@ const FilteredProducts = memo(
           dispatch(filterProducts(filterObject));
         }
       }
-    }, [category]);
+    }, [category, categoryLoading]);
 
     const [productView, setProductView] = useState('grid');
 

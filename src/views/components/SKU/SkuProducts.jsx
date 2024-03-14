@@ -26,6 +26,7 @@ export const SkuProducts = ({ reRender }) => {
   const perPage = 12;
 
   useEffect(() => {
+    console.log('88888888888888');
     fetchProducts(null, currentPage + 1);
   }, []);
 
@@ -47,6 +48,7 @@ export const SkuProducts = ({ reRender }) => {
         setCurrentPage(response.data.current_page);
         setPageCount(response.data.last_page);
       } else {
+        console.log('9999999999999999');
         fetchProducts(null, 1);
         setIsSearchActive(false);
       }
@@ -59,7 +61,10 @@ export const SkuProducts = ({ reRender }) => {
 
   useEffect(() => {
     if (search) handleSearch();
-    else fetchProducts(null, currentPage);
+    else {
+      console.log('10101010101010');
+      fetchProducts(null, currentPage);
+    }
   }, [reRender]);
 
   const downloadProducts = async () => {
@@ -74,6 +79,7 @@ export const SkuProducts = ({ reRender }) => {
   };
 
   const fetchProducts = async (e, page) => {
+    console.log('141414141414');
     try {
       setIsLoading(true);
       let response = await productsApi(page, perPage);
