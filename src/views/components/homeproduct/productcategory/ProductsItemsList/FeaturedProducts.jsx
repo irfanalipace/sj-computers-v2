@@ -46,84 +46,86 @@ const FeaturedProducts = ({
       <div className='row featured-products mx-0'>
         {featured.map((category, index) => (
           <div key={index} className='col-12 col-sm-6 col-lg-3'>
-            <div className='product-type-section'>
-              <h2 className='h4-heading category-name'>{category.name}</h2>
-              <div
-                style={{
-                  height: '15px',
-                  color: '#B12704',
-                  fontSize: '13px',
-                  fontWeight: '600',
-                }}>
-                {category.extra}
-              </div>
-              <div
-                className='categories-container'
-                style={{ marginBottom: '10px' }}>
-                {index === 0 ? (
-                  <ProductItem4
-                    items={[
-                      featuredItems[0],
-                      featuredItems[1],
-                      featuredItems[2],
-                      featuredItems[3],
-                    ]}
-                  />
-                ) : index === 1 ? (
-                  <ProductItem4
-                    items={[
-                      networkItems[0],
-                      networkItems[1],
-                      networkItems[2],
-                      networkItems[3],
-                    ]}
-                  />
-                ) : index === 2 ? (
-                  // Customize for the third column
-                  <>
-                    {loading ? (
-                      <div>
-                        <CircularProgress style={{ color: 'black' }} />
-                      </div>
-                    ) : BudgetFreindlyImages?.length > 0 ? (
-                      <ProductItem4
-                        items={[
-                          BudgetFreindlyImages[0],
-                          BudgetFreindlyImages[1],
-                          BudgetFreindlyImages[2],
-                          BudgetFreindlyImages[3],
-                        ]}
-                      />
-                    ) : (
-                      <div>
-                        <h6 style={{ color: 'black' }}>No Proudct Found</h6>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  // Customize for the fourth column
-                  <Link
-                    to={category.redirectTo}
-                    className='text-decoration-none'
-                    // style={{
-                    //   visibility:
-                    //     category.redirct === true ? '' : category.redirectTo,
-                    // }}
-                  >
+            <Link
+              to={category.redirectTo}
+              className='text-decoration-none'
+              // style={{
+              //   visibility:
+              //     category.redirct === true ? '' : category.redirectTo,
+              // }}
+            >
+              <div className='product-type-section'>
+                <h2 className='h4-heading category-name'>{category.name}</h2>
+                <div
+                  style={{
+                    height: '15px',
+                    color: '#B12704',
+                    fontSize: '13px',
+                    fontWeight: '600',
+                  }}>
+                  {category.extra}
+                </div>
+                <div
+                  className='categories-container'
+                  style={{ marginBottom: '10px' }}>
+                  {index === 0 ? (
+                    <ProductItem4
+                      items={[
+                        featuredItems[0],
+                        featuredItems[1],
+                        featuredItems[2],
+                        featuredItems[3],
+                      ]}
+                    />
+                  ) : index === 1 ? (
+                    <ProductItem4
+                      items={[
+                        networkItems[0],
+                        networkItems[1],
+                        networkItems[2],
+                        networkItems[3],
+                      ]}
+                    />
+                  ) : index === 2 ? (
+                    // Customize for the third column
+                    <>
+                      {loading ? (
+                        <div>
+                          <CircularProgress style={{ color: 'black' }} />
+                        </div>
+                      ) : BudgetFreindlyImages?.length > 0 ? (
+                        <ProductItem4
+                          items={[
+                            BudgetFreindlyImages[0],
+                            BudgetFreindlyImages[1],
+                            BudgetFreindlyImages[2],
+                            BudgetFreindlyImages[3],
+                          ]}
+                        />
+                      ) : (
+                        <Link to={''}>
+                          <div>
+                            <h6 style={{ color: 'black' }}>No Proudct Found</h6>
+                          </div>
+                        </Link>
+                      )}
+                    </>
+                  ) : (
+                    // Customize for the fourth column
                     <ProductItem1 image={TouchScreenLaptop} />
+                  )}
+                </div>
+                <div
+                  className='see-btn'
+                  style={{
+                    visibility: category?.seeMore === true ? 'hidden' : '',
+                  }}>
+                  <Link className='section-link' to={category.redirectTo}>
+                    {category.link}
                   </Link>
-                )}
+                </div>
               </div>
-              <div
-                className='see-btn'
-                style={{
-                  visibility: category?.seeMore === true ? 'hidden' : '',
-                }}>
-                <Link className='section-link' to={category.redirectTo}>
-                  {category.link}
-                </Link>
-              </div>
-            </div>
+            </Link>
           </div>
         ))}
       </div>
