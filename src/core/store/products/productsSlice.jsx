@@ -1,60 +1,61 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 const params = new URLSearchParams(window.location.search);
 let searchParam = params.get('s');
+const filtesArrayOfObject = [
+  {
+    key: 'processor',
+    value: [],
+  },
+  {
+    key: 'ram_memory',
+    value: {
+      unit: [],
+      min: 0,
+      max: 0,
+    },
+  },
+  {
+    key: 'review',
+    value: {
+      min: 0,
+      max: 0,
+    },
+  },
+  {
+    key: 'price',
+    value: {
+      min: 0,
+      max: 0,
+    },
+  },
+  {
+    key: 'brand',
+    value: [],
+  },
+  {
+    key: 'operating_system',
+    value: [],
+  },
+
+  {
+    key: 'gpu',
+    value: [],
+  },
+  {
+    key: 'hard_disk',
+    value: {
+      unit: [],
+      min: 0,
+      max: 0,
+    },
+  },
+];
 const initialState = {
   products: [],
   filtersProduct: [],
   searchString: searchParam,
   isShowMore: false,
-  filtersArray: [
-    {
-      key: 'processor',
-      value: [],
-    },
-    {
-      key: 'ram_memory',
-      value: {
-        unit: [],
-        min: 0,
-        max: 0,
-      },
-    },
-    {
-      key: 'review',
-      value: {
-        min: 0,
-        max: 0,
-      },
-    },
-    {
-      key: 'price',
-      value: {
-        min: 0,
-        max: 0,
-      },
-    },
-    {
-      key: 'brand',
-      value: [],
-    },
-    {
-      key: 'operating_system',
-      value: [],
-    },
-
-    {
-      key: 'gpu',
-      value: [],
-    },
-    {
-      key: 'hard_disk',
-      value: {
-        unit: [],
-        min: 0,
-        max: 0,
-      },
-    },
-  ],
+  filtersArray: filtesArrayOfObject,
   isFiltering: false,
   selectedCategory: null,
   apiError: false,
@@ -128,6 +129,9 @@ const productSlice = createSlice({
     SET_FILTERS_ARRAY: (state, action) => {
       state.filtersArray = [...action.payload];
     },
+    CLEAR_FILTERS_ARRAY: (state, action) => {
+      state.filtersArray = filtesArrayOfObject;
+    },
 
     SET_FILTERING_PRODUCTS: (state, action) => {
       state.isFiltering = true;
@@ -170,6 +174,7 @@ export const {
   SET_FILTERING_PRODUCTS,
   SET_IS_SHOW_MORE,
   SET_SEARCH_STRING,
+  CLEAR_FILTERS_ARRAY,
   FILTER_PRODUCTS,
   CLEAR_PRODUCTS,
   CLEAR_SEARCH,

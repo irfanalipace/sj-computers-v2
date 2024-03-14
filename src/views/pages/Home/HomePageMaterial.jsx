@@ -14,17 +14,17 @@ import FullSizeDesktopImg from '../../../assets/images/homepageImage/BudgetFrind
 export const shopByBrandHomePage = [
   {
     image: DellLogo,
-    categoryLink: '/category/all?brand=dell',
+    categoryLink: '/category/all?brand=Dell',
     categoryName: 'Dell',
   },
   {
     image: HpLogo,
-    categoryLink: '/category/all?brand=hp',
+    categoryLink: '/category/all?brand=HP',
     categoryName: 'HP',
   },
   {
     image: LenovoLogo,
-    categoryLink: '/category/all?brand=lenovo',
+    categoryLink: '/category/all?brand=Lenovo',
     categoryName: 'Lenovo',
   },
   {

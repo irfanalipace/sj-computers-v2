@@ -26,6 +26,8 @@ const CategorySidebar = ({
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const brand = queryParams.get('brand');
+  const processor = queryParams.get('processor');
+
   const [filtersInArray, setFiltersInArray] = useState([
     {
       key: 'processor',
@@ -81,31 +83,28 @@ const CategorySidebar = ({
   );
   const [visibleCategory, setVisibleCategory] = useState(2);
 
-  const queryMatcheParmForBrand = brand => {
-    switch (brand) {
-      case 'hp':
-        return 'HP';
-      case 'dell':
-        return 'Dell';
-      case 'lenovo':
-        return 'Lenovo';
-      case 'bto':
-        return 'BTO';
-      default:
-        'Dell';
+  const applyFilterByQueryParmas = filterName => {
+    const updatedFilters = [...filtersInArray];
+    const brandFilter = updatedFilters.find(
+      filter => filter.key === filterName,
+    );
+
+    if (brand) {
+      if (brandFilter) {
+        brandFilter.value.push(brand);
+      }
     }
+    if (processor) {
+      if (brandFilter) {
+        brandFilter.value.push(processor);
+      }
+    }
+    setFiltersInArray(updatedFilters);
   };
 
   useEffect(() => {
-    if (brand) {
-      const updatedFilters = [...filtersInArray];
-      const brandFilter = updatedFilters.find(filter => filter.key === 'brand');
-      if (brandFilter) {
-        brandFilter.value.push(queryMatcheParmForBrand(brand));
-      }
-
-      setFiltersInArray(updatedFilters);
-    }
+    if (brand) applyFilterByQueryParmas('brand');
+    if (processor) applyFilterByQueryParmas('processor');
   }, []);
 
   const showMore = () => {

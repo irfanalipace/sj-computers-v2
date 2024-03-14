@@ -115,17 +115,17 @@ const BannerCategory = () => {
   const processorItems = [
     {
       image: gaminimg3,
-      categoryLink: '/category/all?processor=core_i3',
+      categoryLink: '/category/all?processor=core i3',
       categoryName: 'Core i3',
     },
     {
       image: scanimages,
-      categoryLink: '/category/all?processor=core_i5',
+      categoryLink: '/category/all?processor=core i5',
       categoryName: 'Core i5',
     },
     {
       image: gaminimg1,
-      categoryLink: '/category/all?processor=core_i7',
+      categoryLink: '/category/all?processor=core i7',
       categoryName: 'Core i7',
     },
   ];

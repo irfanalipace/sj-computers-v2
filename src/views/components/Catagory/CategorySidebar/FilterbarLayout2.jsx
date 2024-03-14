@@ -244,8 +244,15 @@ const FilterBarlayout2 = ({
   };
 
   const handleChecked = (catg, value) => {
+    debugger;
     if (catg === 'processor') {
-      return processorCheckd.includes(value);
+      const processorFilter = filtersArray.find(
+        filter => filter.key === 'processor',
+      );
+      return (
+        processorCheckd.includes(value) ||
+        processorFilter.value.includes(value.toLowerCase())
+      );
     }
     if (catg === 'operating_system') {
       return osCheckd.includes(value);
