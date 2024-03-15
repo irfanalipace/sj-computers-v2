@@ -57,6 +57,11 @@ export default function ReviewFilter({ onChange, clearReview }) {
                   setCheckedReview(co);
                   onChange(event, 'reveiw', reveiw);
                 }}
+                sx={{
+                  '& .css-zun73v': {
+                    padding: '0px !important',
+                  },
+                }}
               />
               {/* <input
                 id={reveiw.value.toString()}
