@@ -144,19 +144,19 @@ const BannerCategory = () => {
   const gpuItems = [
     {
       image: gaminimg3,
-      categoryLink: '/category/bto',
+      categoryLink: '/category/all?gpu=AMD',
       categoryName: 'AMD',
     },
     {
       image: NvidiaImg,
-      categoryLink: '/category/laptops',
+      categoryLink: '/category/all?gpu=Nvidia',
       categoryName: 'Nvidia',
-      hidden: true,
+      // hidden: true,
     },
     {
       image: NvidiaImg2,
-      categoryLink: '/category/desktop',
-      categoryName: 'Nvidia',
+      categoryLink: '/category/all?gpu=Intel HD Graphics',
+      categoryName: 'Intel HD Graphics',
     },
   ];
 
