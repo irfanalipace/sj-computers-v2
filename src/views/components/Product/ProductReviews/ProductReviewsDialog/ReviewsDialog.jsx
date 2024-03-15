@@ -188,7 +188,7 @@ const ReviewsDialog = ({
                     navigation
                     // onActiveIndexChange={(e) => console.log(e)}
                     onSlideChange={handleSlideChange}
-                    // initialSlide={initialSlide} // initial slide takes count from 0
+                    initialSlide={imgIndex} // initial slide takes count from 0
                   >
                     {selectedReview?.[0]?.product_media?.map((data, index) => (
                       <SwiperSlide
