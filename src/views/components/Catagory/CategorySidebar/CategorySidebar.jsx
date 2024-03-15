@@ -27,6 +27,7 @@ const CategorySidebar = ({
   const queryParams = new URLSearchParams(location.search);
   const brand = queryParams.get('brand');
   const processor = queryParams.get('processor');
+  const gpu = queryParams.get('gpu');
 
   const [filtersInArray, setFiltersInArray] = useState([
     {
@@ -99,12 +100,18 @@ const CategorySidebar = ({
         brandFilter.value.push(processor);
       }
     }
+    if (gpu) {
+      if (brandFilter) {
+        brandFilter.value.push(gpu);
+      }
+    }
     setFiltersInArray(updatedFilters);
   };
 
   useEffect(() => {
     if (brand) applyFilterByQueryParmas('brand');
     if (processor) applyFilterByQueryParmas('processor');
+    if (gpu) applyFilterByQueryParmas('gpu');
   }, []);
 
   const showMore = () => {
@@ -376,7 +383,7 @@ const CategorySidebar = ({
       sx={{
         overflowX: 'hidden',
         overflowY: 'none',
-      
+
         borderRight: inDrawer == true ? '' : '0.5px solid #DDDDDD',
       }}>
       <Grid
