@@ -32,7 +32,7 @@ const PRODUCT_FILTER_LABEL_ENUM = {
   'recent-reviews': 'Recent reviews',
 };
 
-const reviewPerPage = 5;
+const reviewPerPage = 10;
 
 function ProductReviews({ productId, productAsin, onFilterChange }) {
   const theme = useTheme();
@@ -72,7 +72,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
 
   const handlePageChange = (event, value) => {
     reviewRef.current.focus();
-    getProductReviews(productId, value, reviewPerPage);
+    getProductReviews(productId, reviewPerPage, value);
   };
 
   const handleUpdateReview = id => {
@@ -96,10 +96,10 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
     }));
   };
 
-  const getProductReviews = async (id, page = 1, reviewPerPage) => {
+  const getProductReviews = async (id, reviewPerPage, page = 1) => {
     try {
       setReviewLoading(true);
-      const res = await productReviewsApi(id, page, reviewPerPage);
+      const res = await productReviewsApi(id, reviewPerPage, page);
       setReviews(res.data);
       dispatch(ADD_REVIEW(res.data));
     } catch (error) {
@@ -116,7 +116,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
   }, [filterBy]);
 
   useEffect(() => {
-    getProductReviews(productId, 1, reviewPerPage);
+    getProductReviews(productId, reviewPerPage, 1);
   }, [productId, productAsin]);
 
   return (

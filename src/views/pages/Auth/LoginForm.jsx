@@ -44,7 +44,9 @@ const LoginForm = () => {
 
   return (
     <div className='login-container-div'>
-      <div className='container form-container'>
+      <div
+        className='container form-container mt-5'
+        style={{ height: 'calc(100vh - 200px)' }}>
         <div className='row'>
           <div className='header-logo'>
             <Header />
@@ -67,8 +69,7 @@ const LoginForm = () => {
               <Link
                 to='/register'
                 className='text-decoration-none'
-                style={{ color: '#333333' }}
-              >
+                style={{ color: '#333333' }}>
                 Create your SJ Computer account
               </Link>
             </div>

@@ -1,8 +1,8 @@
 import ApiService from '@services/apiService';
 
-export function productReviewsApi(id, per_page = 10) {
+export function productReviewsApi(id, per_page = 10, page) {
   return new Promise((resolve, reject) => {
-    ApiService.get(`get-product-reviews`, id, { per_page })
+    ApiService.get(`get-product-reviews/${id}?page=${page}`, { per_page })
       .then(async response => {
         resolve(response);
       })
