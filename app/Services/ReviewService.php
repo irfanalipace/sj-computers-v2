@@ -72,7 +72,7 @@ class ReviewService
         $with = ['productMedia:id,product_review_id,media_type,file_path','user:id,name,profile_pic,avatar','productReviewReport'];
         $review = ProductReview::where('product_id',$product_id)->with($with)->select('id','user_id','product_id','title','body','rating','created_at')->paginate($request->per_page ?? 10);
 
-        $getHelpfulReview = ProductReviewReport::where('product_review_id',  $review->pluck('id'))->get();
+        $getHelpfulReview = ProductReviewReport::whereIn('product_review_id',  $review->pluck('id'))->get();
 
         $helpfulCount = $getHelpfulReview->where('status', StatusEnum::HELPFUL)->count();
         $reportCount = $getHelpfulReview->where('status', StatusEnum::REPORT)->count();
