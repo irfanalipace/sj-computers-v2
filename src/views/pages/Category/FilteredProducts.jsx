@@ -209,7 +209,14 @@ const FilteredProducts = memo(
                         </div>
                     )} */}
             <div className='product-grid-heading'>
-              Best {category?.name ? category?.name : 'Monitors for Desktops'}
+              {category?.name ? (
+                <>
+                  Best{' '}
+                  {category?.name ? category?.name : 'Monitors for Desktops'}
+                </>
+              ) : (
+                <> {categorySlug.toUpperCase()} Products </>
+              )}
             </div>
             {/* <p className="product-grid-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem.</p> */}
             <div className='product-length-container'>
