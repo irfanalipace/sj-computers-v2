@@ -33,10 +33,11 @@ const FeaturedProducts = React.lazy(
 );
 import gaminimg1 from '@images/product/item3/image1.png';
 import gaminimg3 from '@images/product/item3/image3.png';
+import gaminimg2 from '@images/product/item3/image2.png';
 import TouchScreenLaptop from '../../../assets/images/categories/TouchScreenLaptop.png';
-// import NvidiaImg from "../../../assets/images/categories/Nvidia.png";
-import NvidiaImg from '../../../assets/images/categories/Nvidia.png';
-import NvidiaImg2 from '../../../assets/images/categories/Nvidia2.png';
+import gpu1 from '../../../assets/images/categories/gpu/Nvidia.png';
+import gpu2 from '../../../assets/images/categories/gpu/intel.png';
+import gpu3 from '../../../assets/images/categories/gpu/amd.png';
 import {
   shopByBrandHomePage,
   ShopByFormFactorHomePage,
@@ -118,14 +119,15 @@ const BannerCategory = () => {
       categoryLink: '/category/all?processor=core i3',
       categoryName: 'Core i3',
     },
-    {
-      image: scanimages,
-      categoryLink: '/category/all?processor=core i5',
-      categoryName: 'Core i5',
-    },
+
     {
       image: gaminimg1,
       categoryLink: '/category/all?processor=core i7',
+      categoryName: 'Core i5',
+    },
+    {
+      image: gaminimg2,
+      categoryLink: '/category/all?processor=core i5',
       categoryName: 'Core i7',
     },
   ];
@@ -143,18 +145,18 @@ const BannerCategory = () => {
   ];
   const gpuItems = [
     {
-      image: gaminimg3,
+      image: gpu3,
       categoryLink: '/category/all?gpu=AMD',
       categoryName: 'AMD',
     },
     {
-      image: NvidiaImg,
+      image: gpu1,
       categoryLink: '/category/all?gpu=Nvidia',
       categoryName: 'Nvidia',
       // hidden: true,
     },
     {
-      image: NvidiaImg2,
+      image: gpu2,
       categoryLink: '/category/all?gpu=Intel HD Graphics',
       categoryName: 'Intel HD Graphics',
     },

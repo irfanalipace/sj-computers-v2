@@ -31,7 +31,7 @@ export const categoriesWithSubCategories = [
     sub_categories: [
       { name: 'Core i7', url: '/category/core_i7' },
       { name: 'Core i5', url: '/category/core_i5' },
-      { name: 'Core i3', url: '/category/core_i3' },
+      { name: 'Core i3 ', url: '/category/core_i3' },
     ],
   },
   {
