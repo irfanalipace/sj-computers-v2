@@ -25,8 +25,10 @@ import './TrackOrder.css';
 import getTrackingInfo from '../../../core/api/order';
 import { getOrderDetailsSJ } from '../../../core/api/refund-order';
 import { formatingDate } from '../../../core/utils/helpers';
+// import { Params } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-const TrackOrder = () => {
+const TrackOrder = props => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const products = useSelector(state => state.products.products);
   const user = useSelector(state => state.auth.user);
@@ -35,10 +37,13 @@ const TrackOrder = () => {
   const [trackingInfo, setTrackingInfo] = useState([]);
   const [shipmentData, setShipmentData] = useState([]);
 
-  const trackingId = 775486523899;
+  const { id, trackingId } = useParams();
+  // console.print(id, 'orderId', trackingId);
+
+  const fedexTrackingId = trackingId === null ? 775486523899 : trackingId;
 
   useEffect(() => {
-    getTrackingInfo(trackingId)
+    getTrackingInfo(fedexTrackingId)
       .then(data => {
         console.log('Tracking info:', data);
         setTrackingInfo(data[0]?.trackResults[0]);
@@ -48,12 +53,12 @@ const TrackOrder = () => {
         // Handle errors
         console.error('Error fetching tracking info:', error);
       });
-  }, [trackingId]);
+  }, [fedexTrackingId]);
 
   useEffect(() => {
     const param = {
       user_id: user?.id,
-      order_id: [1],
+      order_id: [id],
     };
 
     // Call the getOrderDetailsSJ function

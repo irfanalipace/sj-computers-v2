@@ -521,7 +521,7 @@ const Router = () => {
     },
 
     {
-      path: '/track-order',
+      path: '/track-order/:id/:trackingId',
       element: (
         <PageWrapper>
           <TrackOrder />

@@ -198,9 +198,11 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                             {row?.status}
                           </button>
                           {row?.fedex_status !== 'DELIVERED' ? (
-                            <button className='track-order-button'>
+                            <Link
+                              to={`/track-order/${row?.id}/${row?.tracking_id}`}
+                              className='track-order-button'>
                               Track Package
-                            </button>
+                            </Link>
                           ) : (
                             <p style={{ marginTop: '20px' }}>
                               Price : ${order?.product?.price}
