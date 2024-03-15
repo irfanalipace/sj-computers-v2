@@ -122,7 +122,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
   return (
     <div className='product-reviews-section product-section'>
       <div className='product-reviews-container'>
-        <div className='row reviews-row'>
+        <div className='row reviews-row' style={{ padding: '10px' }}>
           <div className='col-12 col-sm-6 col-md-4'>
             <div style={{ maxWidth: '350px' }}>
               <RatingDetails
@@ -161,19 +161,29 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                                 View all images
                             </button>
                         </div> */}
-            {isUpSmall && (
-              <ReviewImages
-                reviews={reviews}
-                productId={productId}
-                ReviewsData={ReviewsData}
-              />
-            )}
             {reviews?.product_review?.data.length === 0 && !reviewLoading && (
               <Typography fontWeight={600}>No customer reviews</Typography>
             )}
 
             {!!reviews?.product_review?.data.length && (
               <>
+                {isUpSmall && (
+                  <>
+                    {reviewLoading ? (
+                      <Box sx={{ height: '100px' }}>
+                        {isUpSmall && (
+                          <CircularProgress sx={{ ml: 5 }} disableShrink />
+                        )}
+                      </Box>
+                    ) : (
+                      <ReviewImages
+                        reviews={reviews}
+                        productId={productId}
+                        ReviewsData={ReviewsData}
+                      />
+                    )}
+                  </>
+                )}
                 <div
                   id='reviewSection'
                   tabIndex='0'
