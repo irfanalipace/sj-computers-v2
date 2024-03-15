@@ -31,7 +31,9 @@ const GamingProductsSections = ({
             <Link to={category.link} className='text-decoration-none'>
               <div className='product-type-section'>
                 <h2 className='h4-heading category-name'>{category.name}</h2>
-                <div className='categories-container'>
+                <div
+                  className='categories-container'
+                  style={{ justifyContent: index === 3 ? 'start' : 'center' }}>
                   {index === 0 || index === 3 ? (
                     <ProductItem3 items={index === 0 ? items : gpuItems} />
                   ) : (

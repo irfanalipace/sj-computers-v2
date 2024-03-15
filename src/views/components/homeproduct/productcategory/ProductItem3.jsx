@@ -10,7 +10,7 @@ const ProductItem3 = ({ items }) => {
   // console.log(items[0].categoryLink, 'irfancategorylink');
   return (
     <div className='categories-container'>
-      <div className='devsection-three-images'>
+      <div className='devsection-three-images pe-4'>
         <Link to={items[0].categoryLink}>
           <img
             src={items?.[0]?.image}
