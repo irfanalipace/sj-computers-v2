@@ -56,16 +56,29 @@
 }
 .show-more-order-buttons {
   display: flex;
+  flex-wrap: wrap;
   margin: 15px;
+  position: relative;
   border: none;
   background-color: transparent;
 }
+
 .show-more-order-buttons button {
   margin: 5px;
   border: none;
   background-color: transparent;
   color: #1270c4;
 }
+.show-more-order-buttons button:nth-child(3) {
+  right: 0;
+  top: 0;
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  color: #318243;
+  text-decoration: underline;
+}
+
 .show-more-order-buttons button:hover {
   text-decoration: underline;
 }
@@ -277,6 +290,23 @@
   }
   .order-status {
     font-size: 12px;
+    margin: 0px;
+  }
+  .order-image-container {
+    width: 50%;
+  }
+  .order-container .order-image {
+    width: 50%;
+  }
+  .order-container {
+    padding: 2px;
+    margin-top: 5px;
+  }
+  .pending-order-button {
+    margin-top: 0px;
+    padding: 0px 10px;
+  }
+  .show-more-order-buttons {
     margin: 0px;
   }
 }

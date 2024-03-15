@@ -179,7 +179,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                                   ?.join(' ')}
                               />
                             </div>
-                            <div>
+                            <div style={{ width: isSmallScreen && '140px' }}>
                               <Typography
                                 style={{
                                   fontSize: '12px',
@@ -194,16 +194,23 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                             Qty:{' '}
                             <span style={{ color: '#000' }}>{order?.qty}</span>
                           </div>
-                          <button className='pending-order-button'>
-                            {row?.status}
-                          </button>
-                          {row?.fedex_status !== 'DELIVERED' ? (
-                            <Link
-                              to={`/track-order/${row?.id}/${row?.tracking_id}`}
-                              className='track-order-button'>
-                              Track Package
-                            </Link>
-                          ) : (
+                          {!isSmallScreen && (
+                            <button className='pending-order-button'>
+                              {row?.status}
+                            </button>
+                          )}
+                          {row?.fedex_status !== 'DELIVERED'
+                            ? !isSmallScreen && (
+                                <button className='track-order-button'>
+                                  Track Package
+                                </button>
+                              )
+                            : !isSmallScreen && (
+                                <p style={{ marginTop: '20px' }}>
+                                  Price : ${order?.product?.price}
+                                </p>
+                              )}
+                          {isSmallScreen && (
                             <p style={{ marginTop: '20px' }}>
                               Price : ${order?.product?.price}
                             </p>
@@ -218,10 +225,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                     row?.order_item?.map((order, indexOrder) => (
                       <>
                         {indexOrder !== 0 && (
-                          <div
-                            className='order-container'
-                            // style={{ width: '60.6%' }}
-                            key={indexOrder}>
+                          <div className='order-container' key={indexOrder}>
                             <div className='order-image-container'>
                               <div className='order-image'>
                                 <LazyLoadImage
@@ -235,7 +239,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                                     ?.join(' ')}
                                 />
                               </div>
-                              <div>
+                              <div style={{ width: isSmallScreen && '140px' }}>
                                 <Typography
                                   style={{
                                     fontSize: '12px',
@@ -253,9 +257,28 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                                 {order?.qty}
                               </span>
                             </div>
-                            <p style={{ marginTop: '20px' }}>
-                              Price : ${order?.product?.price}
-                            </p>
+                            {!isSmallScreen && (
+                              <button className='pending-order-button'>
+                                {row?.status}
+                              </button>
+                            )}
+                            {row?.fedex_status !== 'DELIVERED'
+                              ? !isSmallScreen && (
+                                  <button className='track-order-button'>
+                                    Track Package
+                                  </button>
+                                )
+                              : !isSmallScreen && (
+                                  <p style={{ marginTop: '20px' }}>
+                                    Price : ${order?.product?.price}
+                                  </p>
+                                )}
+                            {isSmallScreen && (
+                              <p style={{ marginTop: '20px' }}>
+                                Price : ${order?.product?.price}
+                              </p>
+                            )}
+                            {isSmallScreen && <div></div>}
                           </div>
                         )}
                       </>
@@ -275,7 +298,36 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                 />
               </div> */}
             </div>
-            {row?.status === 'COMPLETE' ? (
+            <>
+              {' '}
+              {isSmallScreen && (
+                <div className='row mt-3'>
+                  {!expandedOrders.includes(row.id) && (
+                    <div className='col-6'>
+                      <Link
+                        to={{
+                          pathname: `/account/orders/order-details/${row?.id}`,
+                        }}
+                        style={{
+                          color: '#318243',
+                          textDecoration: 'none',
+                          fontSize: '12px',
+                        }}>
+                        View Order Details
+                      </Link>
+                    </div>
+                  )}
+                  {!expandedOrders.includes(row.id) && (
+                    <div className='col-4'>
+                      <button className='pending-order-button'>
+                        {row?.fedex_status || row?.status}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </>
+            {row?.fedex_status === 'DELIVERED' ? (
               <div className='show-more-order-buttons'>
                 <button onClick={() => toggleExpanded(row.id)}>
                   {expandedOrders.includes(row.id)
@@ -289,6 +341,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                 <button onClick={() => toggleExpanded(row.id)}>
                   {expandedOrders.includes(row.id) ? 'Show less' : 'Show more'}
                 </button>
+                <button>Track Package</button>
               </div>
             )}
           </div>
