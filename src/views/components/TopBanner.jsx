@@ -8,7 +8,7 @@ const TopBanner = ({ color, heading, desc }) => {
     maxHeight: '176px',
     display: 'flex',
     alignItems: 'center',
-   
+
     justifyContent: 'center',
     '& h3': {
       color: '#FFFFFF',
@@ -25,12 +25,12 @@ const TopBanner = ({ color, heading, desc }) => {
       height: '150px', // Set height to 150px on mobile screens
       maxHeight: '150px', // Set maxHeight to 150px on mobile screens
       '& h3': {
-        fontSize: '24px',
+        fontSize: '17px',
       },
       '& p': {
-        lineHeight:'18px',
-        fontSize:'15px',
-        marginTop:'-12px'
+        lineHeight: '18px',
+        fontSize: '14px',
+        marginTop: '-12px',
       },
     },
   });
@@ -43,10 +43,10 @@ const TopBanner = ({ color, heading, desc }) => {
           direction='column'
           justifyContent='center'
           alignItems='center'>
-          <Grid item>
+          <Grid item sx={{ height: '54px' }}>
             <h3>{heading}</h3>
           </Grid>
-          <Grid item sx={{ textAlign: 'center', margin:"3px", }}> 
+          <Grid item sx={{ textAlign: 'center', margin: '3px' }}>
             <p>{desc}</p>
           </Grid>
         </Grid>

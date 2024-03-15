@@ -25,8 +25,6 @@ const ProductDetails = ({ product }) => {
   const [description, setDescription] = useState([]);
   const [productDetails, setProductDetails] = useState([]);
   const [key, setKey] = useState('home');
-  
-
 
   useEffect(() => {
     const parseProductDetailsArray = () => {
@@ -245,11 +243,15 @@ const ProductDetails = ({ product }) => {
       <div className='col-md-12 items-details-description'>
         <h3 className='items-text-style'>About this item</h3>
 
-        <ul type='1'>
-          {description?.map((item, index) => (
-            <li key={index}>{item.value}</li>
-          ))}
-        </ul>
+        {description && description.length > 0 ? (
+          <ul type='1'>
+            {description.map((item, index) => (
+              <li key={index}>{item.value}</li>
+            ))}
+          </ul>
+        ) : (
+          <p style={{ fontSize: '14px' }}>No product descriptions available.</p>
+        )}
       </div>
     </div>
   );
