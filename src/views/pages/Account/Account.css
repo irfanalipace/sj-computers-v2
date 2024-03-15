@@ -355,6 +355,11 @@
     font-size: 14px !important;
   }
 }
+@media screen and (max-width: 480px) {
+  .account-page h3 {
+    padding: 0px;
+  }
+}
 .css-1aquho2-MuiTabs-indicator {
   background-color: #e87e24 !important;
 }

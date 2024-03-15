@@ -268,3 +268,12 @@
     width: 69px;
   }
 }
+@media screen and (max-width: 480px) {
+  .search-product-order-tables {
+    margin-left: 0px;
+  }
+  .order-status {
+    font-size: 12px;
+    margin: 0px;
+  }
+}
