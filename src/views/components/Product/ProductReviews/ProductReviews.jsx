@@ -247,13 +247,28 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
               />
             )}
           </div>
-          {!isUpSmall && (
-            <ReviewImages
-              reviews={reviews}
-              productId={productId}
-              ReviewsData={ReviewsData}
-              isMobile={true}
-            />
+
+          {!!reviews?.product_review?.data.length && (
+            <>
+              {!isUpSmall && (
+                <>
+                  {reviewLoading ? (
+                    <Box sx={{ height: '100px' }}>
+                      {isUpSmall && (
+                        <CircularProgress sx={{ ml: 5 }} disableShrink />
+                      )}
+                    </Box>
+                  ) : (
+                    <ReviewImages
+                      reviews={reviews}
+                      productId={productId}
+                      ReviewsData={ReviewsData}
+                      isMobile={true}
+                    />
+                  )}
+                </>
+              )}
+            </>
           )}
 
           {!isUpSmall && (
