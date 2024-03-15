@@ -47,7 +47,7 @@ const OrderDetails = () => {
     },
   });
   const CardContent = styled('div')({
-    padding: '23px 20px',
+    padding: isSmallScreen ? '10px' : '23px 20px',
     borderBottom: '1px solid #ddd',
     '& div': {
       display: 'flex',
@@ -208,28 +208,6 @@ const OrderDetails = () => {
                       </Typography>
                     </span>
                   ))}
-                  <span>
-                    <div className='delivery-card-image'>
-                      <LazyLoadImage
-                        width={'100%'}
-                        height={'100%'}
-                        src={filteredOrder?.order_item[0]?.product?.image[0]}
-                        alt={filteredOrder?.order_item[0]?.product?.name
-                          ?.trim()
-                          ?.split(' ')
-                          ?.slice(0, 9)
-                          ?.join(' ')}
-                      />
-                    </div>
-                    <Typography
-                      style={{
-                        fontSize: '12px',
-                        fontWeight: 400,
-                      }}
-                      className='delivery-card-name'>
-                      {filteredOrder?.order_item[0]?.product?.name}
-                    </Typography>
-                  </span>
                 </>
               </CardContent>
             </Grid>
