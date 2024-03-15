@@ -257,15 +257,17 @@ const OrderPage = () => {
           </div>
         </div>
       </div>
-      <div
-        style={{
-          marginTop: '4rem',
-          padding: '10px 70px',
-          borderTop: '1px solid #D0D0D0',
-          borderBottom: '1px solid #D0D0D0',
-        }}>
-        <Recommendation prod={products} />
-      </div>
+      {!isSmallScreen && (
+        <div
+          style={{
+            marginTop: '4rem',
+            padding: '10px 70px',
+            borderTop: '1px solid #D0D0D0',
+            borderBottom: '1px solid #D0D0D0',
+          }}>
+          <Recommendation prod={products} />
+        </div>
+      )}
     </div>
   );
 };

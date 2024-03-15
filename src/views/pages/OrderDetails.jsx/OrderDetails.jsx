@@ -2,7 +2,14 @@ import React from 'react';
 import Breadcrumb from '@common/Breadrumb/Breadcrumb';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Box, Grid, Typography, styled } from '@mui/material';
+import {
+  Box,
+  Grid,
+  Typography,
+  styled,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { Card } from '@mantine/core';
 import { formatDate } from '../../../core/utils/helpers';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -15,20 +22,23 @@ const OrderDetails = () => {
   const { id } = useParams();
   const filteredOrder = orders?.find(order => id == order?.id);
   const userName = useSelector(state => state?.auth?.user?.name);
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const OrderDetailsCard = styled('div')({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   });
   const CardHeader = styled('span')({
-    backgroundColor: '#ddd',
+    backgroundColor: !isSmallScreen && '#ddd',
+    borderBottom: isSmallScreen && '1px solid #ddd',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     '& div': {
-      fontSize: '14px',
+      fontSize: isSmallScreen ? '12px' : '14px',
       lineHeight: '16.94px',
-      padding: '15px',
+      padding: isSmallScreen ? '6px 1px' : '15px',
       textAlign: 'center',
     },
     '& span': {
@@ -52,13 +62,20 @@ const OrderDetails = () => {
       width: '100%',
     },
     '& .delivery-card-image': {
-      width: '15%',
+      width: isSmallScreen ? '20%' : '15%',
     },
     '& .delivery-card-name': {
       color: '#318243',
       paddingTop: '15px',
       paddingLeft: '15px',
-      width: '100%',
+      width: isSmallScreen ? '80%' : '100%',
+      lineHeight: isSmallScreen && '1.2',
+      maxHeight: isSmallScreen && '3.4em',
+      overflow: isSmallScreen && 'hidden',
+      textOverflow: isSmallScreen && 'ellipsis',
+      display: isSmallScreen && '-webkit-box',
+      '-webkit-line-clamp': isSmallScreen && 3,
+      '-webkit-box-orient': isSmallScreen && 'vertical',
     },
   });
   const OrderSummary = styled('table')({
@@ -83,7 +100,7 @@ const OrderDetails = () => {
   });
   return (
     <>
-      <Box ml={24}>
+      <Box ml={!isSmallScreen && 24}>
         <Breadcrumb />
         <Typography fontSize={28} ml={3}>
           Order Details
@@ -93,7 +110,7 @@ const OrderDetails = () => {
         <Card
           style={{
             margin: '15px 0px',
-            width: '70%',
+            width: isSmallScreen ? '90%' : '70%',
 
             border: '1px solid #DDDDDD',
           }}
@@ -102,41 +119,73 @@ const OrderDetails = () => {
           withBorder
           className='p-0'>
           <CardHeader>
-            <div>
-              Order Placed <br /> {formatDate(filteredOrder?.created_at)}
-            </div>
-            <div>
-              Total <br />${filteredOrder?.total_amount}
-            </div>
+            {!isSmallScreen && (
+              <div>
+                Order Placed <br /> {formatDate(filteredOrder?.created_at)}
+              </div>
+            )}
+            {isSmallScreen && (
+              <div>
+                Tracking id <br />
+                {'#' + filteredOrder?.tracking_id
+                  ? filteredOrder?.tracking_id
+                  : ''}{' '}
+              </div>
+            )}
+            {isSmallScreen && (
+              <div>
+                Order Placed <br />
+                {formatDate(filteredOrder?.created_at)}
+              </div>
+            )}
+            {!isSmallScreen && (
+              <div>
+                Total <br />${filteredOrder?.total_amount}
+              </div>
+            )}
             <div>
               {' '}
               Ship To <br /> <span>{userName}</span>
             </div>
-            <div>
-              Tracking id <br />
-              {'#' + filteredOrder?.tracking_id
-                ? filteredOrder?.tracking_id
-                : ''}{' '}
-            </div>
+            {!isSmallScreen && (
+              <div>
+                Tracking id <br />
+                {'#' + filteredOrder?.tracking_id
+                  ? filteredOrder?.tracking_id
+                  : ''}{' '}
+              </div>
+            )}
+            {isSmallScreen && (
+              <div className='order-status'>
+                Total <br /> ${filteredOrder?.sub_total}
+              </div>
+            )}
           </CardHeader>
 
           <Grid container justifyContent='space-between'>
             <Grid item lg={8}>
-              <div>
-                <h3
-                  style={{
-                    paddingTop: '30px',
-                    fontSize: '16px',
-                    fontWeight: 600,
-                    paddingLeft: '20px',
-                  }}>
-                  Your Order
-                </h3>
-              </div>
+              {!isSmallScreen && (
+                <div>
+                  <h3
+                    style={{
+                      paddingTop: '30px',
+                      fontSize: '16px',
+                      fontWeight: 600,
+                      paddingLeft: '20px',
+                    }}>
+                    Your Order
+                  </h3>
+                </div>
+              )}
               <CardContent>
                 <>
                   {filteredOrder?.order_item?.map(item => (
-                    <span style={{ margin: '0px 0px 3rem 0px' }}>
+                    <span
+                      style={{
+                        margin: isSmallScreen
+                          ? '0px 0px 1rem 0px'
+                          : '0px 0px 3rem 0px',
+                      }}>
                       <div className='delivery-card-image'>
                         <LazyLoadImage
                           width={'100%'}
@@ -184,51 +233,63 @@ const OrderDetails = () => {
                 </>
               </CardContent>
             </Grid>
-            <Grid item lg={3}>
-              <OrderSummary>
-                <h3>Order Summary</h3>
-                <tr>
-                  <td>Items Subtotal:</td>
-                  <td>${filteredOrder?.total_amount}</td>
-                </tr>
-                <tr>
-                  <td>Shipping & Handling:</td>
-                  <td>${filteredOrder?.shipment_price}</td>
-                </tr>
-                <tr>
-                  <td>Total before tax:</td>
-                  <td>${0}</td>
-                </tr>
-                <tr>
-                  <td>
-                    Estimated tax to be
-                    <br /> collected
-                  </td>
-                  <td>${0}</td>
-                </tr>
-                <tr>
-                  <td style={{ fontWeight: 600 }}>Grand Total</td>
-                  <td>${filteredOrder?.sub_total}</td>
-                </tr>
-              </OrderSummary>
-            </Grid>
+            {!isSmallScreen && (
+              <Grid item lg={3}>
+                <OrderSummary>
+                  <h3>Order Summary</h3>
+                  <tr>
+                    <td>Items Subtotal:</td>
+                    <td>${filteredOrder?.total_amount}</td>
+                  </tr>
+                  <tr>
+                    <td>Shipping & Handling:</td>
+                    <td>${filteredOrder?.shipment_price}</td>
+                  </tr>
+                  <tr>
+                    <td>Total before tax:</td>
+                    <td>${0}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Estimated tax to be
+                      <br /> collected
+                    </td>
+                    <td>${0}</td>
+                  </tr>
+                  <tr>
+                    <td style={{ fontWeight: 600 }}>Grand Total</td>
+                    <td>${filteredOrder?.sub_total}</td>
+                  </tr>
+                </OrderSummary>
+              </Grid>
+            )}
           </Grid>
           <Grid p={2}>
-            <Link style={{ fontSize: '12px', textDecoration: 'none' }}>
+            <Link
+              style={{
+                fontSize: '12px',
+                textDecoration: 'none',
+                marginRight: '20px',
+              }}>
               Cancel my order
+            </Link>{' '}
+            <Link style={{ fontSize: '12px', textDecoration: 'none' }}>
+              Order invoice
             </Link>
           </Grid>
         </Card>
       </OrderDetailsCard>
-      <div
-        style={{
-          marginTop: '4rem',
-          padding: '10px 70px',
-          borderTop: '1px solid #D0D0D0',
-          borderBottom: '1px solid #D0D0D0',
-        }}>
-        <Recommendation prod={products} />
-      </div>
+      {!isSmallScreen && (
+        <div
+          style={{
+            marginTop: '4rem',
+            padding: '10px 70px',
+            borderTop: '1px solid #D0D0D0',
+            borderBottom: '1px solid #D0D0D0',
+          }}>
+          <Recommendation prod={products} />
+        </div>
+      )}
     </>
   );
 };
