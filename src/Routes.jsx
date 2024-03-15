@@ -183,6 +183,32 @@ const Router = () => {
         </PageWrapper>
       ),
     },
+    {
+      path: '/workstation',
+      element: (
+        <PageWrapper>
+          <ProductCateogoryPage
+            color='linear-gradient(88.57deg, #23DE4D 1.22%, #00861E 98.78%)'
+            heading='Work Stations for Professionals'
+            desc='Our most popular products based on sales. Updated frequently.'
+            pathValue='workstation'
+          />
+        </PageWrapper>
+      ),
+    },
+    {
+      path: '/professional-laptop',
+      element: (
+        <PageWrapper>
+          <ProductCateogoryPage
+            color='linear-gradient(88.57deg, #489CFF 1.22%, #0061A8 98.78%)'
+            heading='Professional Laptops'
+            desc='Our most popular products based on sales. Updated frequently.'
+            pathValue='professional-laptop'
+          />
+        </PageWrapper>
+      ),
+    },
 
     {
       path: '/top-rated-products',

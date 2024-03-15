@@ -15,11 +15,11 @@ const GamingProductsSections = ({
   const workstations = [
     {
       id: 1,
-      categoryLink: '/category/professional-laptop',
+      categoryLink: '/professional-laptop',
     },
     {
       id: 2,
-      categoryLink: '/category/workstation',
+      categoryLink: '/workstation',
     },
   ];
 
