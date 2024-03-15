@@ -40,8 +40,7 @@ export default function RatingDetails({ productDetails, loading }) {
               fontWeight={isUpSmall ? 300 : 700}
               fontFamily={'Inter'}
               fontSize={'18px'}
-              lineHeight={'24px'}
-            >{`${
+              lineHeight={'24px'}>{`${
               productDetails?.rate?.overall_rating || 0
             } out of 5`}</Typography>
           </Stack>
@@ -51,8 +50,7 @@ export default function RatingDetails({ productDetails, loading }) {
               mb={2}
               fontWeight={400}
               fontSize={'14px'}
-              lineHeight={'20px'}
-            >{`${
+              lineHeight={'20px'}>{`${
               productDetails?.rate?.total_rating || 0
             } global rating`}</Typography>
           )}
