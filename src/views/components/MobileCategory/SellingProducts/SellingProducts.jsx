@@ -80,7 +80,7 @@ const SellingProducts = ({ topRatedProduct, inTopRated }) => {
     const RandomComponent = componentsArray[randomIndex];
     return <RandomComponent />;
   };
-  console.print(topRatedProduct, 'topRatedProducts');
+
 
   return (
     <>
