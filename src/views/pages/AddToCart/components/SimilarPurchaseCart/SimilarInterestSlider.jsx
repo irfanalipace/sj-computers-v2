@@ -110,7 +110,7 @@ const SimilarInterestSlider = ({ products }) => {
           {product?.price?.toString().split('.')[1]}
         </div>
         <div style={{ fontSize: '12px' }} className='mt-2 mb-2'>
-          Get it as soon as{' '}
+          Get it as soon as <br className='br-line-mobile-screen' />
           <span style={{ fontWeight: 'bold', lineHeight: '16px' }}>
             {orderEstimatedDelivery?.free_shipment_amount?.estimate_day}
           </span>
@@ -152,7 +152,9 @@ const SimilarInterestSlider = ({ products }) => {
             People who browsed similar items also showed interest in these
           </Typography>
 
-          <div className='slider-wrapper' style={{ margin: '10px 20px' }}>
+          <div
+            className='slider-wrapper my-swiper-slider-mobile-changes'
+            style={{ margin: '10px 20px' }}>
             {!products ? (
               <LoaderComponent />
             ) : (
@@ -166,7 +168,7 @@ const SimilarInterestSlider = ({ products }) => {
                     slidesPerView: 2,
                   },
                   480: {
-                    slidesPerView: 3,
+                    slidesPerView: 2,
                   },
                   640: {
                     slidesPerView: 4,
