@@ -376,7 +376,9 @@ const ProductCardLayout2 = ({
                 margin: '5px 0px',
                 fontWeight: 500,
               }}>
-              Only {product?.quantity} left in stock - Order now
+              {product?.quantity <= 20 && (
+                <> Only {product?.quantity} left in stock - Order now</>
+              )}
             </div>
           </div>
         )}
