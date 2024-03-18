@@ -21,8 +21,7 @@ const AddToCart = () => {
   const [featureProducts, setFeatureProduct] = useState([]);
   const getFeaturedProduct = async () => {
     try {
-      setLoading(true);
-      const resp = await featureProductsApi(12);
+      const resp = await featureProductsApi(product.id);
       const selectedProducts = resp?.data;
       setFeatureProduct(selectedProducts);
     } catch (error) {
