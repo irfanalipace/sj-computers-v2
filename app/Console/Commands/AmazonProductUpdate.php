@@ -55,17 +55,15 @@ class AmazonProductUpdate extends Command
         return 0;
     }
 
-    public function deleteProducts($products)
-    {
+    public function deleteProducts($products){
         $skuList = $products->pluck('sku');
-
         Product::whereNotIn('sku',$skuList)->delete();
     }
 
-    public function getProductsList()
-    {
+    public function getProductsList(){
 
         $status = false;
+
 
         $curl = curl_init();
 
@@ -99,4 +97,9 @@ class AmazonProductUpdate extends Command
         ];
 
     }
+
+
+
+
+
 }
