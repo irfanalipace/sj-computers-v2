@@ -7,22 +7,17 @@ import './ProductItem3.css';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 const ProductItem3 = ({ items }) => {
-  // console.log(items[0].categoryLink, 'irfancategorylink');
   return (
     <div className='categories-container'>
       <div className='devsection-three-images pe-4'>
         <Link to={items[0].categoryLink}>
-          <img
-            src={items?.[0]?.image}
-            alt='Image 2'
-            className='dynamic-image'
-          />
+          <img src={items[0].image} alt='Image 2' className='dynamic-image' />
           <p>{items[0].categoryName}</p>
         </Link>
       </div>
 
       <div>
-        {items[1]?.hidden !== true && (
+        {items[1].hidden !== true && (
           <div className='dev-images-dynmaic-images-lable'>
             <Link to={items[1].categoryLink}>
               <img
@@ -37,7 +32,7 @@ const ProductItem3 = ({ items }) => {
             </Link>
           </div>
         )}
-        {items[2]?.hidden !== true && (
+        {items[2].hidden !== true && (
           <div className='dev-images-dynmaic-dev-data'>
             <Link to={items[2].categoryLink}>
               <img

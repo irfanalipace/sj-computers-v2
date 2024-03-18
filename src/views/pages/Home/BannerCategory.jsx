@@ -102,15 +102,19 @@ const BannerCategory = () => {
   const gamingArray = [
     {
       name: 'Shop by Processor',
+      Link: 'javascript:void(0)',
     },
     {
       name: 'Work Stations for Professionals',
+      Link: '/workstation',
     },
     {
       name: 'Professional Laptops',
+      Link: '/professional-laptop',
     },
     {
       name: 'Shop by GPU',
+      Link: 'javascript:void(0)',
     },
   ];
   const processorItems = [
@@ -122,12 +126,12 @@ const BannerCategory = () => {
 
     {
       image: gaminimg1,
-      categoryLink: '/category/all?processor=core i7',
+      categoryLink: '/category/all?processor=core i5',
       categoryName: 'Core i5',
     },
     {
       image: gaminimg2,
-      categoryLink: '/category/all?processor=core i5',
+      categoryLink: '/category/all?processor=core i7',
       categoryName: 'Core i7',
     },
   ];
