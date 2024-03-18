@@ -16,15 +16,19 @@ const AddToCart = () => {
   const { productId, itemAdded } = useParams();
   const cart = useSelector(state => state?.cart?.cart);
   const product = cart?.find(item => item?.product?.asin == productId);
+  const [isLoading, setLoading] = useState(false);
   // const { featuredProducts } = useSimilarData(product?.id);
   const [featureProducts, setFeatureProduct] = useState([]);
   const getFeaturedProduct = async () => {
     try {
+      setLoading(true);
       const resp = await featureProductsApi(12);
       const selectedProducts = resp?.data;
       setFeatureProduct(selectedProducts);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -47,7 +51,10 @@ const AddToCart = () => {
           className='hidden-on-mobile hidden-on-tab cart-with-protection'>
           {product && !itemAdded ? <AddToCartCard product={product} /> : <></>}
           {/* <SimilarItemsSlider products={similarProducts} /> */}
-          <SimilarPurchaseCart products={featureProducts} />
+          <SimilarPurchaseCart
+            products={featureProducts}
+            isLoading={isLoading}
+          />
           <SimilarInterestSlider products={featureProducts} />
         </Grid>
       </Grid>

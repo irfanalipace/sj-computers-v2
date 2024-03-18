@@ -21,8 +21,9 @@ import { useParams } from 'react-router-dom';
 
 SwiperCore.use([Navigation]);
 
-const SimilarPurchaseCart = ({ products }) => {
+const SimilarPurchaseCart = ({ products, isLoading }) => {
   const [addingStates, setAddingStates] = useState({});
+
 
   const ProductDetails = ({ product }) => {
     const [cartClickHandler, addingItemToCart] = useAddToCart(product, 1);
@@ -237,7 +238,9 @@ const SimilarPurchaseCart = ({ products }) => {
                   },
                 }}
                 navigation>
-                {products?.length > 0 ? (
+                {isLoading ? (
+                  <LoaderComponent />
+                ) : (
                   products?.map(product => (
                     <SwiperSlide key={'psr-' + product?.id}>
                       <div
@@ -265,10 +268,6 @@ const SimilarPurchaseCart = ({ products }) => {
                       </div>{' '}
                     </SwiperSlide>
                   ))
-                ) : (
-                  <>
-                    <LoaderComponent />
-                  </>
                 )}
               </Swiper>
             )}
