@@ -192,9 +192,6 @@
   position: absolute;
   display: none;
 }
-.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
-  padding: 0 !important;
-}
 
 .filter-button-category-page button {
   color: #52ac66;
@@ -264,6 +261,10 @@
   border: 1px solid #c9cccc !important;
   color: black !important;
   box-shadow: 2px 2px 4px rgba(166, 165, 165, 0.5);
+}
+
+.MuiCheckbox-root {
+  padding: 0px !important;
 }
 
 @media screen and (max-width: 585px) {

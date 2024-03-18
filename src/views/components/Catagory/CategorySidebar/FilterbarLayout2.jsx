@@ -250,7 +250,7 @@ const FilterBarlayout2 = ({
       );
       return (
         processorCheckd.includes(value) ||
-        processorFilter.value.includes(value.toLowerCase())
+        processorFilter.value.includes(value?.toLowerCase())
       );
     }
     if (catg === 'operating_system') {
