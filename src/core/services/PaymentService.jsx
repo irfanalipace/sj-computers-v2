@@ -1,5 +1,6 @@
 import { paymentApi } from '@api/payment';
 import { PAYMENT_METHODS } from '../utils/constants';
+import { toast } from 'react-toastify';
 import { extractJsonObjectFromError } from '../utils/helpers';
 
 export default class PaymentService {
@@ -40,6 +41,7 @@ export default class PaymentService {
       }
     } catch (error) {
       const errorString = error?.data?.errors;
+      toast.error(error?.data?.errors);
       const errors = extractJsonObjectFromError(errorString);
       if (errors?.cartError) {
         typeof this.onQuantityIssue === 'function' && this.onQuantityIssue();
