@@ -31,7 +31,10 @@
                             <tr>
                                 <td style="padding-bottom: 5px; padding-left: 20px; padding-right: 20px;" align="center" valign="top"
                                     class="mainTitle">
-                                    <img alt="SJ-Computers" style="width:134px" src="{{asset('js/images/header-logo-black.png')}}">
+                                    <img alt="SJ-Computers" style="width:134px" src="{{asset('logo/header-logo-black.png')}}">
+{{--                                    <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('logo/header-logo-black.png'))) }}"--}}
+{{--                                         alt="SJ-Computers">--}}
+
                                 </td>
                             </tr>
                             <tr>
