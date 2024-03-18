@@ -4,6 +4,7 @@
 /public/assets
 /public/js
 /public/index.html
+/public/config.json
 /public/mix-manifest.json
 /storage/*.key
 /storage/framework/cache/*
