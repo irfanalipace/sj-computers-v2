@@ -141,8 +141,8 @@ class ProductController extends BaseController
             $listArr = [];
 
             foreach ($units as $unit) {
-                $data = $this->getLeastHighestValue($key, $unit , $sql);
-               
+                $data = $this->getLeastHighestValue($key, $unit,$sql);
+
                 $listArr['least_' . $unit] = $data['least_' . $unit];
                 $listArr['highest_' . $unit] = $data['highest_' . $unit];
 
@@ -150,25 +150,19 @@ class ProductController extends BaseController
             
             return $listArr;
         } else if($key == 'price'){
-
             return $this->getPrices($sql);
-
         } else if($key == 'brand'){
-
             return $this->getBrands($key,$sql);
-
         } else if($key == 'review'){
-
             return $this->getReviews($key,$sql);
-
         }
-        else if($key == 'processor') {
-
-            return $this->getProcessor($sql);   
-
-        } else if($key == "operating_system") {
-            return $this->getOperatingSystem($sql); 
-        }
+        // else if($key == 'processor') {
+        //     return [
+        //         'Core i3',
+                    // 'Core i5'
+                    // 'Core i7'
+        //     ];
+        // }
 
         if(!empty($sql)){
             $products = $sql->whereHas('productInfo', function ($query) use ($key) {
@@ -211,69 +205,73 @@ class ProductController extends BaseController
     {
         $conversionFactors = ['MB' => 1, 'GB' => 1024, 'TB' => 1048576]; // Conversion factors
         
-        // if(!empty($sql)) { 
+        if(!empty($sql)) { 
           
-        //     $records = $sql->whereHas('productInfo', function ($query) use ($key) {
-        //         $query->where('key', $key)
-        //               ->where(function($query) {
-        //                   $query->where('value', 'LIKE', '% MB')
-        //                         ->orWhere('value', 'LIKE', '% GB')
-        //                         ->orWhere('value', 'LIKE', '% TB');
-        //               });
-        //     })
-        //     ->with(['productInfo' => function ($query) use ($key) {
-        //         $query->where('key', $key)
-        //               ->where(function($query) {
-        //                   $query->where('value', 'LIKE', '% MB')
-        //                         ->orWhere('value', 'LIKE', '% GB')
-        //                         ->orWhere('value', 'LIKE', '% TB');
-        //               })
-        //               ->select('product_id', 'value');
-        //     }])
-        //     ->get();
+            $records = $sql->whereHas('productInfo', function ($query) use ($key) {
+                $query->where('key', $key)
+                      ->where(function($query) {
+                          $query->where('value', 'LIKE', '% MB')
+                                ->orWhere('value', 'LIKE', '% GB')
+                                ->orWhere('value', 'LIKE', '% TB');
+                      });
+            })
+            ->with(['productInfo' => function ($query) use ($key) {
+                $query->where('key', $key)
+                      ->where(function($query) {
+                          $query->where('value', 'LIKE', '% MB')
+                                ->orWhere('value', 'LIKE', '% GB')
+                                ->orWhere('value', 'LIKE', '% TB');
+                      })
+                      ->select('product_id', 'value');
+            }])
+            ->get();
            
-        //     $values = $records->pluck('productInfo')->flatten()->map(function ($item) use ($conversionFactors) {
-        //         // Extract the numeric part and unit from the value string
-        //         preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
+            $values = $records->pluck('productInfo')->flatten()->map(function ($item) use ($conversionFactors) {
+                // Extract the numeric part and unit from the value string
+                preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
               
-        //         $numericValue = $matches[1];
-        //         $valueUnit = strtoupper($matches[3]);
-        //         // dd($numericValue );
-        //         // Convert the value to MB for a uniform comparison
-        //         return $numericValue * $conversionFactors[$valueUnit];
-        //     });
+                $numericValue = $matches[1];
+                $valueUnit = strtoupper($matches[3]);
+                // dd($numericValue );
+                // Convert the value to MB for a uniform comparison
+                return $numericValue * $conversionFactors[$valueUnit];
+            });
 
-        // } else{
-        
-
-        $records = DB::table('product_infos')
+        } else{
+            
+            $records = DB::table('product_infos')
             ->where('key', $key)
             ->where('value', 'LIKE', '%' . $unit . '%')
             ->select('value')
             ->get();
 
-        $values = $records->map(function ($item) use ($conversionFactors) {
-            // Extract the numeric part and unit from the value string
-            preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
-            $numericValue = $matches[1];
-            $valueUnit = strtoupper($matches[3]);
-
-            // Convert the value to MB for a uniform comparison
-            return $numericValue * $conversionFactors[$valueUnit];
+            $values = $records->map(function ($item) use ($conversionFactors) {
+                // Extract the numeric part and unit from the value string
+                preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
+                
+                $numericValue = $matches[1];
+                $valueUnit = strtoupper($matches[3]);
+        
+                // Convert the value to MB for a uniform comparison
+                return $numericValue * $conversionFactors[$valueUnit];
+            });
+        }        
+        // dd($values);
+        // Convert all values to the target unit before finding min and max
+        $valuesInTargetUnit = $values->map(function ($value) use ($conversionFactors, $unit) {
+            
+            return $value / ($conversionFactors[$unit] ?: 1);
         });
 
-        // Assuming you want to find the min/max in MB and then convert to the target unit for display
-        $least = $values->min() / ($conversionFactors[$unit] ?: 1);
-        $highest = $values->max() / ($conversionFactors[$unit] ?: 1);
+        $least = $valuesInTargetUnit->min();
+        $highest = $valuesInTargetUnit->max();
 
         return [
-            'least_' . $unit => round($least, 2), // Round to 2 decimal places for cleanliness
+            'least_' . $unit => round($least, 2),
             'highest_' . $unit => round($highest, 2),
         ];
-    }   
-   
+    }    
 
-    
     protected function getBrands($key,$sql = [])
     {
         $brands = ['HP', 'Dell', 'Lenovo', 'BTO'];
@@ -342,88 +340,7 @@ class ProductController extends BaseController
         return $record;
     }
 
-    private function getOperatingSystem($sql = [])
-    {
-        $operatingSytem = ['Window 7', 'Window 8', 'Window 10', 'Window 11'];
-        if( (!empty($sql))){
-            $products = $sql->whereHas('productInfo', function ($query) use ($operatingSytem) {
-                $query->where('key', 'operating_system')
-                      ->whereIn('value', $operatingSytem);
-            })
-            ->with(['productInfo' => function ($query) {
-                $query->where('key', 'operating_system');
-            }])
-            ->get();
 
-            // Initialize an array to hold our processor types, including a slot for 'others'
-            $outputOperatingSystem = array_fill_keys(array_merge($operatingSytem, ['others']), 0);
-
-            // Iterate over products to tally processor types
-            foreach ($products as $product) {
-                foreach ($product->productInfo as $info) {
-                    if (in_array($info->value, $operatingSytem)) {
-                        $outputOperatingSystem[$info->value] = 1; // Mark as found
-                    } else {
-                        $outputOperatingSystem['others'] = 1; // Anything not matching is marked as 'others'
-                    }
-                }
-            }
-
-            // Filter out the processor types that were not found
-            $outputOperatingSystem = array_keys(array_filter($outputOperatingSystem, function($found) {
-                return $found === 1;
-            }));
-            return $outputOperatingSystem;
-        } else{ 
-            return $operatingSytem;
-        }
-
-    }
-    private function getProcessor($sql = [])
-    {
-        $processorTypes = ['Core i3', 'Core i5', 'Core i7', 'apple_ci3', 'apple_ci5', 'apple_ci7'];
-        if( (!empty($sql))){
-            $products = $sql->whereHas('productInfo', function ($query) use ($processorTypes) {
-                $query->where('key', 'processor')
-                      ->whereIn('value', $processorTypes);
-            })
-            ->with(['productInfo' => function ($query) {
-                $query->where('key', 'processor');
-            }])
-            ->get();
-
-            // Initialize an array to hold our processor types, including a slot for 'others'
-            $outputProcessors = array_fill_keys(array_merge($processorTypes, ['others']), 0);
-
-            // Iterate over products to tally processor types
-            foreach ($products as $product) {
-                foreach ($product->productInfo as $info) {
-                    if (in_array($info->value, $processorTypes)) {
-                        $outputProcessors[$info->value] = 1; // Mark as found
-                    } else {
-                        $outputProcessors['others'] = 1; // Anything not matching is marked as 'others'
-                    }
-                }
-            }
-
-            // Filter out the processor types that were not found
-            $outputProcessors = array_keys(array_filter($outputProcessors, function($found) {
-                return $found === 1;
-            }));
-            return $outputProcessors;
-        } else{ 
-            return [
-                'Core i3',
-                'Core i5',
-                'Core i7',
-                'apple_ci3',
-                'apple_ci5',
-                'apple_ci7',
-                'others'
-            ];
-        }
-       
-    }
     public function getFilterProducts(SearchProductRequest $request)
     {
       
@@ -470,7 +387,7 @@ class ProductController extends BaseController
             foreach ($filters as $filter) {
                
                 // $filter = json_encode($filter, true);
-                // $filter = json_decode($filter, true);
+                $filter = json_decode($filter, true);
                
                 $key = $filter['key'] ?? '';
                 $value = $filter['value'] ?? '';
@@ -486,29 +403,7 @@ class ProductController extends BaseController
                     $sql = $sql->whereIn('id', $productIds);
                 }
 
-                if ($key == 'processor') {
-                    // Define the list of processor types (or other attributes) you want to exclude in the "others" case
-                    $excludedValues = ['Core i3', 'Core i5', 'Core i7']; // For processor scenario                  
-
-                    if ($value == "others") {
-                        // Fetch product IDs where the value is NOT in the excluded list
-                        $productIds = ProductInfo::where('key', $key)
-                                                ->whereNotIn('value', $excludedValues)
-                                                ->pluck('product_id')
-                                                ->toArray();
-                    } else {
-                        // Fetch product IDs where the value matches the specified value(s)
-                        // If $value is an array of values, it will match any of them; if it's a single value, it will match just that
-                        $productIds = ProductInfo::where('key', $key)
-                                                ->whereIn('value', (array)$value) // Ensure $value is treated as an array
-                                                ->pluck('product_id')
-                                                ->toArray();
-                    }
-                       
-                    $sql = $sql->whereIn('id', $productIds);
-                }
-
-                if ($key == 'brand') {
+                if ($key == 'processor' || $key == 'brand') {
                     if (!empty($key) && !empty($value)) {
 
                         $productIds = ProductInfo::where('key' , $key)->whereIn('value' , $value)->pluck('product_id')->toArray();
@@ -526,7 +421,8 @@ class ProductController extends BaseController
                 
             }
 
-        }        
+        }
+        
        
         /*
          * for category filters
@@ -537,8 +433,10 @@ class ProductController extends BaseController
 
             $sql = $sql->whereIn('id', $productIds);
         }
+
        
         $data = $sql->paginate($perPageRecord);
+
 
         return $this->sendResponse($data);
 
@@ -715,18 +613,10 @@ class ProductController extends BaseController
         // Apply OS filter
          if($key == 'operating_system'  && !empty($value)){
             $operatingSystemFilter = $value;
-            $excludedValues = ['Windows 7', 'Windows 8', 'Windows 10', 'Windows 11']; // For Windows version scenario
-          
-            if ($value == "others") {
-                $query->whereHas('productInfo', function ($query) use ($excludedValues) {
-                    $query->where('key','operating_system')->whereNotIn('value', $excludedValues);
-                }); 
-            } else{ 
-                $query->whereHas('productInfo', function ($query) use ($operatingSystemFilter) {
-                    $query->where('key','operating_system')->whereIn('value', $operatingSystemFilter);
-                }); 
-            }
-            
+
+            $query->whereHas('productInfo', function ($query) use ($operatingSystemFilter) {
+                $query->where('key','operating_system')->whereIn('value', $operatingSystemFilter);
+            }); 
         }
 
         // Apply Internal memory filter
