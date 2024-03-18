@@ -203,9 +203,9 @@ const CategorySidebar = ({
       }
     }
 
-    if (toggleDrawer) {
-      toggleDrawer();
-    }
+    // if (toggleDrawer) {
+    //   toggleDrawer();
+    // }
     if (arraysFilter.includes(category)) {
       if (event.target.checked === false) {
         const findIndex = filtersArrayCopy[keyIndex].value.findIndex(
@@ -490,6 +490,7 @@ const CategorySidebar = ({
           p={inDrawer ? 2 : 0}
           variant='body2'
           className={`${inDrawer ? 'alignment-container' : ''}`}
+          position={'relative'}
           fontWeight={'bolder'}>
           Customer Reviews
           {inDrawer ? (
@@ -508,7 +509,7 @@ const CategorySidebar = ({
         </Typography>
         {/* )} */}
         {(DataInDrawer[2] || !inDrawer) && (
-          <Box ml={inDrawer ? 4 : 0} py={1}>
+          <Box ml={inDrawer ? 4 : 0} pb={2}>
             <ReviewFilter
               clearReview={clearReview}
               onChange={handleReviewFilter}

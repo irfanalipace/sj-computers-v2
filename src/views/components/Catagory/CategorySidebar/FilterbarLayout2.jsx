@@ -19,6 +19,7 @@ import { Slider, Typography } from '@mui/material';
 // import Button from "../common/Button/Button";
 // import FilterByRange from "./FilterByRange";
 import Button from '../../common/Button/Button';
+import { Link } from 'react-router-dom';
 
 const FilterBarlayout2 = ({
   inDrawer,
@@ -390,12 +391,16 @@ const FilterBarlayout2 = ({
 
   let renderPrice = category => {
     return (
-      <ul className='filter-values-list'>
+      <ul
+        className='filter-values-list'
+        style={{
+          borderBottom: inDrawer ? '1px solid #DDDDDD' : '',
+        }}>
         {/* handle price category */}
         {category === 'price' ? (
           <>
             <h3
-              // onClick={() => DataInDrawerToggler(index + 3)}
+              onClick={() => DataInDrawerToggler(20)}
               className={`filter-heading ${inDrawer ? 'alignment-container' : ''}`}
               style={{
                 margin: inDrawer ? '0px' : '',
@@ -425,52 +430,67 @@ const FilterBarlayout2 = ({
                 '' 
               
               )}*/}
+              {inDrawer && (
+                <span className={`${inDrawer ? 'align-to-end' : ''}`}>
+                  <IconButton>
+                    {DataInDrawer[20] ? (
+                      <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
+                    ) : (
+                      <KeyboardArrowDownIcon />
+                    )}{' '}
+                  </IconButton>
+                </span>
+              )}
             </h3>
-            {priceData.priceValueArray.map((item, index) => (
-              <li
-                key={item.id}
-                onClick={() => handlePriceFilter(item)}
-                style={{
-                  padding: '2px 0px',
-                  color: activePriceFiler === item.id ? '#f2a742' : '',
-                }}
-                className={'filter-value price-value'}>
-                {item.priceValue}
-              </li>
-            ))}
-            <li className='filter-value' style={{ padding: '2px 0px' }}>
-              <FontAwesomeIcon
-                icon={faAngleDown}
-                style={{ margin: ' 0px 5px', color: 'black' }}
-              />
-              <span style={{ color: '#52AC66' }}>Custom Price</span>
-            </li>
+            {(DataInDrawer[20] || !inDrawer) && (
+              <ul style={{ padding: inDrawer ? '16px' : '' }}>
+                {priceData.priceValueArray.map((item, index) => (
+                  <li
+                    key={item.id}
+                    onClick={() => handlePriceFilter(item)}
+                    style={{
+                      padding: '2px 0px',
+                      color: activePriceFiler === item.id ? '#f2a742' : '',
+                    }}
+                    className={'filter-value price-value'}>
+                    {item.priceValue}
+                  </li>
+                ))}
+                <li className='filter-value' style={{ padding: '2px 0px' }}>
+                  <FontAwesomeIcon
+                    icon={faAngleDown}
+                    style={{ margin: ' 0px 5px', color: 'black' }}
+                  />
+                  <span style={{ color: '#52AC66' }}>Custom Price</span>
+                </li>
 
-            <li className='filter-value' style={{ padding: '2px 0px' }}>
-              {priceData.priceInputArray.map((item, index) => (
-                <input
-                  id={`customInput${item.id}`}
-                  style={{
-                    border:
-                      activePriceFiler === 10
-                        ? '1px solid #f2a742'
-                        : '1px solid gray',
-                  }}
-                  key={index}
-                  type='text'
-                  name={item.name}
-                  checked={showClear(category)}
-                  placeholder={`$${item.placeholder}`}
-                  className='price-input'
-                  onChange={handleCustomPriceFilter}
-                />
-              ))}
-              <button
-                onClick={() => handlePriceFilter(customPrice)}
-                className='price-go-btn'>
-                Go
-              </button>
-            </li>
+                <li className='filter-value' style={{ padding: '2px 0px' }}>
+                  {priceData.priceInputArray.map((item, index) => (
+                    <input
+                      id={`customInput${item.id}`}
+                      style={{
+                        border:
+                          activePriceFiler === 10
+                            ? '1px solid #f2a742'
+                            : '1px solid gray',
+                      }}
+                      key={index}
+                      type='text'
+                      name={item.name}
+                      checked={showClear(category)}
+                      placeholder={`$${item.placeholder}`}
+                      className='price-input'
+                      onChange={handleCustomPriceFilter}
+                    />
+                  ))}
+                  <button
+                    onClick={() => handlePriceFilter(customPrice)}
+                    className='price-go-btn'>
+                    Go
+                  </button>
+                </li>
+              </ul>
+            )}
           </>
         ) : (
           <></>
@@ -764,12 +784,16 @@ const FilterBarlayout2 = ({
     return (
       <>
         {category?.data?.map((data, index) => (
-          <li
-            key={`data + ${index}`}
-            className='filter-value'
-            style={{ padding: '2px 0px' }}>
-            {data}
-          </li>
+          <Link
+            to={data.url}
+            style={{ textDecoration: 'none', color: 'black' }}>
+            <li
+              key={`data + ${index}`}
+              className='filter-value'
+              style={{ padding: '2px 0px' }}>
+              {data.name}
+            </li>
+          </Link>
         ))}
       </>
     );
@@ -782,7 +806,11 @@ const FilterBarlayout2 = ({
     },
     {
       name: 'Trending',
-      data: ['Best Sellers', 'New Arrivals', 'Featured Products'],
+      data: [
+        { name: 'Best Sellers', url: '/category/best-sellers' },
+        // { name: 'New Arrivals', url: '' },  // comminted bcoz these pages are not maded yet
+        // { name: 'Featured Products', url: '' },
+      ],
     },
   ];
 
@@ -805,6 +833,7 @@ const FilterBarlayout2 = ({
               className='filter-key'
               style={{
                 borderBottom: inDrawer ? '1px solid #DDDDDD' : '',
+                display: category === 'price' ? 'none' : '',
               }}
               key={`${category}-${index}`}>
               <h3
@@ -817,14 +846,6 @@ const FilterBarlayout2 = ({
                 }}>
                 {/* {category.replace(/_/g, ' ')} */}
                 {category === 'price' ? '' : category.replace(/_/g, ' ')}
-                {showClear(category) && category !== 'price' && (
-                  <span
-                    className='filter-clear-btn'
-                    onClick={() => handleClearFilter(category)}>
-                    <CloseIcon fontSize='14px' />
-                    clear
-                  </span>
-                )}
 
                 {inDrawer ? (
                   <span className={`${inDrawer ? 'align-to-end' : ''}`}>
@@ -838,6 +859,14 @@ const FilterBarlayout2 = ({
                   </span>
                 ) : (
                   ''
+                )}
+                {showClear(category) && category !== 'price' && (
+                  <span
+                    className='filter-clear-btn'
+                    onClick={() => handleClearFilter(category)}>
+                    <CloseIcon fontSize='14px' />
+                    clear
+                  </span>
                 )}
               </h3>
 
@@ -900,6 +929,14 @@ const FilterBarlayout2 = ({
             </span>
           ) : (
             ''
+          )}
+          {showClear(category.name) && (
+            <span
+              className='filter-clear-btn'
+              onClick={() => handleClearFilter(category.name)}>
+              <CloseIcon fontSize='14px' />
+              clear
+            </span>
           )}
         </h3>
         {(DataInDrawer[index + 10] || !inDrawer) && (

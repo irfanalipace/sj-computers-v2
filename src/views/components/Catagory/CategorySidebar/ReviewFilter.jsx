@@ -16,7 +16,7 @@ export default function ReviewFilter({ onChange, clearReview }) {
     <>
       {!!checkedReview.length && (
         <span
-          style={{ position: 'absolute', top: 0, right: 25 }}
+          // style={{ position: 'absolute', top: 0, right: 25 }}
           className='filter-clear-btn'
           onClick={() => {
             clearReview();
