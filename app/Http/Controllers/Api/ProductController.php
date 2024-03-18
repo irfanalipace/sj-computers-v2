@@ -310,34 +310,31 @@ class ProductController extends BaseController
 
     }
 
-    public function getReviews($key, $sql = [])
+    protected function getReviews($sql)
     {
-        if (!empty($sql)) {
-            $minRating = PHP_INT_MAX;
-            $maxRating = PHP_INT_MIN;
+        $reviewData = [];
 
-            foreach ($sql->get() as $product) {
-                $reviews = $product->productReview;
+        $products = $sql->whereHas('productReview')
+            ->select('products.id',
+                DB::raw('(SELECT ROUND(AVG(rating), 1) FROM product_reviews WHERE product_reviews.product_id = products.id) AS average_rating'),
+                DB::raw('(SELECT COUNT(*) FROM product_reviews WHERE product_reviews.product_id = products.id) AS rating_count')
+            )
+            ->orderByDesc('average_rating');
 
-                // If the product has reviews
-                if ($reviews->count() > 0) {
-                    $minRating = min($minRating, $reviews->min('rating'));
-                    $maxRating = max($maxRating, $reviews->max('rating'));
-                }
-            }
-        } else {
-            // If $sql is empty
-            $minRating = ProductReview::min('rating');
-            $maxRating = ProductReview::max('rating');
-        }
 
-        // Format the output
-        $record = [
-            'min_rating' => $minRating,
-            'max_rating' => $maxRating
-        ];
+        // Count the occurrences of each average rating
+        $products->each(function ($products) use (&$reviewData) {
+            $average_rating = $products->average_rating ?? 0;
+            $rating_count = $products->rating_count ?? 0;
+            $data = [
+                'average_rating' => $average_rating,
+                'rating_count' => $rating_count,
+            ];
 
-        return $record;
+            array_push($reviewData, $data);
+        });
+
+        return $reviewData;
     }
 
 
