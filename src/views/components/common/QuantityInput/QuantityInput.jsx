@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 
 import './QuantityInput.css';
+import { useSelector } from 'react-redux';
 
 export const QuantityInput = ({
   onChange,
   value,
   minQuantity = 1,
-  maxQuantity = 1000,
+  maxQuantity: initialMaxQuantity = 1000,
 }) => {
   const [quantity, setQuantity] = useState(parseInt(value) || minQuantity);
   const [hasRendered, setHasRendered] = useState(false);
-
+  const isAuthenticated = useSelector(state => state?.auth?.isAuthenticated);
+  const [maxQuantity, setMaxQuantity] = useState(initialMaxQuantity);
   useEffect(() => {
     if (hasRendered) {
       if (typeof onChange === 'function') onChange(quantity || 0);
@@ -18,6 +20,13 @@ export const QuantityInput = ({
       setHasRendered(true);
     }
   }, [quantity]);
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setMaxQuantity(10);
+    } else {
+      setMaxQuantity(initialMaxQuantity);
+    }
+  }, [isAuthenticated, initialMaxQuantity]);
 
   // const handleQuantityChange = (e) => {
   //     const newQuantity = parseInt(e.target.value);
@@ -50,8 +59,7 @@ export const QuantityInput = ({
             setQuantity(
               quantity > minQuantity ? parseInt(quantity) - 1 : quantity,
             )
-          }
-        >
+          }>
           -
         </button>
         <input
@@ -84,11 +92,15 @@ export const QuantityInput = ({
             setQuantity(
               quantity < maxQuantity ? parseInt(quantity) + 1 : quantity,
             )
-          }
-        >
+          }>
           +
         </button>
       </div>
+      {!isAuthenticated && quantity === 10 && (
+        <p style={{ color: '#B12704', fontSize: '10px' }}>
+          Quantiy can not be greater than 10 for unAuthenticated users
+        </p>
+      )}
     </div>
   );
 };
