@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import SellingProducts from '../../../MobileCategory/SellingProducts/SellingProducts';
 import { getProductsCategory } from '../../../../../core/api/products';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const FlashProducts = ({ images }) => {
   const [bestSeller, setBestSeller] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,7 @@ const FlashProducts = ({ images }) => {
   useEffect(() => {
     getProducts();
   }, []);
-
+  // const products = useSelector(state => state?.products?.products);
   return (
     <div>
       {bestSeller?.length ? (
@@ -52,7 +53,10 @@ const FlashProducts = ({ images }) => {
                     See all offer
                   </p>
                 </div>
-                <SellingProducts topRatedProduct={bestSeller} />
+                <SellingProducts
+                  topRatedProduct={bestSeller}
+                  bestSeller={true}
+                />
               </div>
             </Link>
           </div>

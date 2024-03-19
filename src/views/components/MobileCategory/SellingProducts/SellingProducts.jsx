@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 SwiperCore.use([Navigation]);
 
-const SellingProducts = ({ topRatedProduct, inTopRated }) => {
+const SellingProducts = ({ topRatedProduct, inTopRated, bestSeller }) => {
   const Label = ({ bgcolor = '', text = 'text', secondText = '', color }) => {
     return (
       <Stack
@@ -76,11 +76,14 @@ const SellingProducts = ({ topRatedProduct, inTopRated }) => {
   const Demanding = () => <Label bgcolor='#318243' text='Demanding' />;
   const componentsArray = [Trending, BestSeller, SjChoice, OFF, Demanding];
   const getRandomComponent = () => {
-    const randomIndex = Math.floor(Math.random() * componentsArray.length);
-    const RandomComponent = componentsArray[randomIndex];
-    return <RandomComponent />;
+    if (inTopRated) {
+      const randomIndex = Math.floor(Math.random() * componentsArray.length);
+      const RandomComponent = componentsArray[randomIndex];
+      return <RandomComponent />;
+    } else {
+      return <BestSeller />;
+    }
   };
-
 
   return (
     <>
@@ -130,7 +133,7 @@ const SellingProducts = ({ topRatedProduct, inTopRated }) => {
                     alt={`Image ${index + 1}`}
                   />
                 </div>
-                {inTopRated && (
+                {(inTopRated || bestSeller) && (
                   <div className='product-description'>
                     <div className='product-name'>{product.name}</div>
                     <div>
