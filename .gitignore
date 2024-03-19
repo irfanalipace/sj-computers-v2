@@ -25,6 +25,7 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/config.json
 
 /public/sitemap/*
 
