@@ -198,6 +198,7 @@ export const brandCategory = [
     image_url:
       // 'https://upload.wikimedia.org/wikipedia/commons/2/25/Dell_logo.png',
       DellLogo,
+    categoryLink: '/category/all?brand=Dell',
   },
   {
     id: 2,
@@ -205,6 +206,7 @@ export const brandCategory = [
     image_url:
       // 'https://www.freepnglogos.com/uploads/original-samsung-logo-10.png',
       HpLogo,
+    categoryLink: '/category/all?brand=HP',
   },
   {
     id: 3,
@@ -212,6 +214,7 @@ export const brandCategory = [
     image_url:
       // 'https://www.freepnglogos.com/uploads/apple-logo-png/apple-logo-png-dallas-shootings-don-add-are-speech-zones-used-4.png',
       LenovoLogo,
+    categoryLink: '/category/all?brand=Lenovo',
   },
   {
     id: 4,
@@ -219,6 +222,7 @@ export const brandCategory = [
     image_url:
       // 'https://www.freepnglogos.com/uploads/lg-logo-png/lg-logo-logo-png-transparent-svg-vector-bie-supply-0.png',
       BtoLogo,
+    categoryLink: '/category/bto',
   },
   // More categories if added up to id 12
 ];
