@@ -508,24 +508,26 @@ class ProductController extends BaseController
 
                 if ($key == 'processor') {
                     // Define the list of processor types (or other attributes) you want to exclude in the "others" case
-                    $excludedValues = ['Core i3', 'Core i5', 'Core i7']; // For processor scenario                  
+                    $excludedValues = ['Core i3', 'Core i5', 'Core i7','apple_ci3','apple_ci5','apple_ci7']; // For processor scenario                  
 
-                    if ($value == "others") {
-                        // Fetch product IDs where the value is NOT in the excluded list
-                        $productIds = ProductInfo::where('key', $key)
-                                                ->whereNotIn('value', $excludedValues)
-                                                ->pluck('product_id')
-                                                ->toArray();
-                    } else {
-                        // Fetch product IDs where the value matches the specified value(s)
-                        // If $value is an array of values, it will match any of them; if it's a single value, it will match just that
-                        $productIds = ProductInfo::where('key', $key)
-                                                ->whereIn('value', (array)$value) // Ensure $value is treated as an array
-                                                ->pluck('product_id')
-                                                ->toArray();
-                    }
-                       
+                    // Normalize input values to match case sensitivity with excludedValues
+                    $normalizedValue = array_map('strtolower', $value);
+                    $normalizedExcludedValues = array_map('strtolower', $excludedValues);
+
+                    $productIds = ProductInfo::where('key', $key)
+                    ->when(in_array("others", $normalizedValue), function ($query) use ($normalizedExcludedValues) {
+                        // Exclude products with values in $excludedValues when "others" is selected
+                        $query->whereNotIn(DB::raw('LOWER(value)'), $normalizedExcludedValues);
+                    })
+                    ->when(!in_array("others", $normalizedValue), function ($query) use ($normalizedValue) {
+                        // Filter by the selected values, excluding "others"
+                        $query->whereIn(DB::raw('LOWER(value)'), $normalizedValue);
+                    })
+                    ->pluck('product_id')
+                    ->toArray();
+
                     $sql = $sql->whereIn('id', $productIds);
+                   
                 }
 
                 if ($key == 'brand') {
