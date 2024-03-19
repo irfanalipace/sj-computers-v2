@@ -21,8 +21,8 @@ const CategoriesHeader = () => {
           url: '/category/laptops',
         },
         {
-          name: 'Monitors',
-          url: '/category/monitors',
+          name: 'Touch Screen',
+          url: '/category/touch_screen',
         },
         {
           name: 'Desktops',
@@ -44,8 +44,8 @@ const CategoriesHeader = () => {
           url: '/category/laptops',
         },
         {
-          name: 'Monitors',
-          url: '/category/monitors',
+          name: 'Touch Screen',
+          url: '/category/touch_screen',
         },
         {
           name: 'Desktops',
@@ -67,8 +67,8 @@ const CategoriesHeader = () => {
           url: '/category/laptops',
         },
         {
-          name: 'Monitors',
-          url: '/category/monitors',
+          name: 'Touch Screen',
+          url: '/category/touch_screen',
         },
         {
           name: 'Desktops',
@@ -78,8 +78,8 @@ const CategoriesHeader = () => {
     },
     {
       id: 4,
-      name: 'Monitors',
-      slug: 'monitor',
+      name: 'Touch Screen',
+      slug: 'touch_screen',
       sub_categories: [
         {
           name: 'Desktops',
@@ -90,8 +90,8 @@ const CategoriesHeader = () => {
           url: '/category/laptops',
         },
         {
-          name: 'Monitors',
-          url: '/category/monitors',
+          name: 'Touch Screen',
+          url: '/category/touch_screen',
         },
         {
           name: 'Desktops',
@@ -101,8 +101,8 @@ const CategoriesHeader = () => {
     },
     {
       id: 5,
-      name: 'Window 11',
-      slug: 'window_11',
+      name: 'Windows 11',
+      slug: 'windows_11',
       sub_categories: [
         {
           name: 'Desktops',
@@ -113,8 +113,8 @@ const CategoriesHeader = () => {
           url: '/category/laptops',
         },
         {
-          name: 'Monitors',
-          url: '/category/monitors',
+          name: 'Touch Screen',
+          url: '/category/touch_screen',
         },
         {
           name: 'Desktops',
@@ -136,8 +136,8 @@ const CategoriesHeader = () => {
           url: '/category/laptops',
         },
         {
-          name: 'Monitors',
-          url: '/category/monitors',
+          name: 'Touch Screen',
+          url: '/category/touch_screen',
         },
         {
           name: 'Desktops',
@@ -159,8 +159,8 @@ const CategoriesHeader = () => {
           url: '/category/laptops',
         },
         {
-          name: 'Monitors',
-          url: '/category/monitors',
+          name: 'Touch Screen',
+          url: '/category/touch_screen',
         },
         {
           name: 'Desktops',

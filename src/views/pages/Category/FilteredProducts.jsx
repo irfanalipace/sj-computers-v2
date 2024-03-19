@@ -225,7 +225,7 @@ const FilteredProducts = memo(
               results for{' '}
               <span style={{ color: '#52AC66', margin: '0px 5px' }}>
                 {' '}
-                {category?.name ? category?.name : 'Monitors'}{' '}
+                {category?.name ? category?.name : `${categorySlug.toUpperCase()}`}
               </span>
               <div className='buttons'>
                 <span className='view-button' onClick={productViewList}>
