@@ -314,27 +314,33 @@ class ProductController extends BaseController
 
     protected function getReviews($sql)
     {
-        $reviewData = [];
+        if (!empty($sql)) {
+            $products = $sql->whereHas('productReview')
+                ->select('products.id',
+                    DB::raw('(SELECT ROUND(AVG(rating), 1) FROM product_reviews WHERE product_reviews.product_id = products.id) AS average_rating')
+                );
 
-        $products = $sql->whereHas('productReview')
-            ->select('products.id',
-                DB::raw('(SELECT ROUND(AVG(rating), 1) FROM product_reviews WHERE product_reviews.product_id = products.id) AS average_rating'),
-                DB::raw('(SELECT COUNT(*) FROM product_reviews WHERE product_reviews.product_id = products.id) AS rating_count')
-            )
-            ->orderByDesc('average_rating');
+            $averageRatings = $products->pluck('average_rating')->toArray();
 
+            // Retrieve the minimum and maximum average ratings
+            $minRating = empty($averageRatings) ? 0 : min($averageRatings);
+            $maxRating = empty($averageRatings) ? 0 : max($averageRatings);
 
-        // Count the occurrences of each average rating
-        $products->each(function ($products) use (&$reviewData) {
-            $average_rating = $products->average_rating ?? 0;
-            $rating_count = $products->rating_count ?? 0;
-            $data = [
-                'average_rating' => $average_rating,
-                'rating_count' => $rating_count,
+            $reviewData = [
+                'min_rating' => $minRating,
+                'max_rating' => $maxRating,
             ];
+        } else {
+            // Retrieve the minimum and maximum ratings directly from ProductReview model
+            $minMaxRatings = ProductReview::selectRaw('ROUND(MIN(rating), 1) AS min_rating')
+                ->selectRaw('ROUND(MAX(rating), 1) AS max_rating')
+                ->first();
 
-            array_push($reviewData, $data);
-        });
+            $reviewData = [
+                'min_rating' => $minMaxRatings->min_rating ?? 0,
+                'max_rating' => $minMaxRatings->max_rating ?? 0,
+            ];
+        }
 
         return $reviewData;
     }
