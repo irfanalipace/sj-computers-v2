@@ -249,6 +249,14 @@ const FilterBarlayout2 = ({
       const processorFilter = filtersArray.find(
         filter => filter.key === 'processor',
       );
+      // console.clear();
+      // console.log(
+      //   { catg },
+      //   { value },
+      //   { processorFilter },
+      //   { processorCheckd },
+      // );
+
       return (
         processorCheckd.includes(value) ||
         processorFilter.value.includes(value?.toLowerCase())
@@ -292,9 +300,12 @@ const FilterBarlayout2 = ({
                     const hardDiskCheckdCopy = [...processorCheckd];
                     if (event.target.checked) {
                       hardDiskCheckdCopy.push(option.backend_value);
+                      console.log('event checked');
+                      console.log({ hardDiskCheckdCopy });
                       setProcessorCheckd(hardDiskCheckdCopy);
                     }
                     if (!event.target.checked) {
+                      console.log('event not chedked');
                       const finIndex = processorCheckd.findIndex(
                         item => item === option.backend_value,
                       );
