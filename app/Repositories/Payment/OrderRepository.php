@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderShippingAddress;
 use App\Models\Product;
+use App\Models\UserAddress;
 use Cart;
 use Exception;
 
@@ -159,7 +160,7 @@ class OrderRepository
                 'address' => $shippingAddreess['address'],
                 'city' => $shippingAddreess['city'],
                 'state' => $shippingAddreess['state'],
-                'apartment' => $shippingAddreess['apartment'],
+                'apartment' => $shippingAddreess['apartment'] ?? null,
                 'zip_code' => $shippingAddreess['zip_code'],
                 ($user_type == StatusEnum::USER) ? 'user_id' : 'guest_id' => $user->id,       //user id or guest id
                 'user_type' => $user_type,
@@ -167,6 +168,22 @@ class OrderRepository
             ]
         );
 
+        if(isset($shippingAddreess['permanent_address']) && $shippingAddreess['permanent_address'] == true && $user_type == StatusEnum::USER){
+            UserAddress::updateOrCreate(
+                ['user_id' =>  $user->id ],
+                [
+                'country' => $shippingAddreess['country'],
+                'full_name' => $shippingAddreess['full_name'],
+                'phone_number' => $shippingAddreess['phone_number'],
+                'address' => $shippingAddreess['address'],
+                'city' => $shippingAddreess['city'],
+                'state' => $shippingAddreess['state'],
+                'apartment' => $shippingAddreess['apartment'] ?? null,
+                'zip_code' => $shippingAddreess['zip_code'],
+                'user_id' => $user->id, 
+                'status' => StatusEnum::ACTIVE,
+            ]);
+        }
         $order = Order::find($order->id);
 
         return [

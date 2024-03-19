@@ -141,8 +141,8 @@ class ProductController extends BaseController
             $listArr = [];
 
             foreach ($units as $unit) {
-                $data = $this->getLeastHighestValue($key, $unit,$sql);
-
+                $data = $this->getLeastHighestValue($key, $unit , $sql);
+               
                 $listArr['least_' . $unit] = $data['least_' . $unit];
                 $listArr['highest_' . $unit] = $data['highest_' . $unit];
 
@@ -150,19 +150,25 @@ class ProductController extends BaseController
             
             return $listArr;
         } else if($key == 'price'){
+
             return $this->getPrices($sql);
+
         } else if($key == 'brand'){
+
             return $this->getBrands($key,$sql);
+
         } else if($key == 'review'){
-            return $this->getReviews($key,$sql);
+
+            return $this->getReviews($sql);
+
         }
-        // else if($key == 'processor') {
-        //     return [
-        //         'Core i3',
-                    // 'Core i5'
-                    // 'Core i7'
-        //     ];
-        // }
+        else if($key == 'processor') {
+
+            return $this->getProcessor($sql);   
+
+        } else if($key == "operating_system") {
+            return $this->getOperatingSystem($sql); 
+        }
 
         if(!empty($sql)){
             $products = $sql->whereHas('productInfo', function ($query) use ($key) {
@@ -205,73 +211,69 @@ class ProductController extends BaseController
     {
         $conversionFactors = ['MB' => 1, 'GB' => 1024, 'TB' => 1048576]; // Conversion factors
         
-        if(!empty($sql)) { 
+        // if(!empty($sql)) { 
           
-            $records = $sql->whereHas('productInfo', function ($query) use ($key) {
-                $query->where('key', $key)
-                      ->where(function($query) {
-                          $query->where('value', 'LIKE', '% MB')
-                                ->orWhere('value', 'LIKE', '% GB')
-                                ->orWhere('value', 'LIKE', '% TB');
-                      });
-            })
-            ->with(['productInfo' => function ($query) use ($key) {
-                $query->where('key', $key)
-                      ->where(function($query) {
-                          $query->where('value', 'LIKE', '% MB')
-                                ->orWhere('value', 'LIKE', '% GB')
-                                ->orWhere('value', 'LIKE', '% TB');
-                      })
-                      ->select('product_id', 'value');
-            }])
-            ->get();
+        //     $records = $sql->whereHas('productInfo', function ($query) use ($key) {
+        //         $query->where('key', $key)
+        //               ->where(function($query) {
+        //                   $query->where('value', 'LIKE', '% MB')
+        //                         ->orWhere('value', 'LIKE', '% GB')
+        //                         ->orWhere('value', 'LIKE', '% TB');
+        //               });
+        //     })
+        //     ->with(['productInfo' => function ($query) use ($key) {
+        //         $query->where('key', $key)
+        //               ->where(function($query) {
+        //                   $query->where('value', 'LIKE', '% MB')
+        //                         ->orWhere('value', 'LIKE', '% GB')
+        //                         ->orWhere('value', 'LIKE', '% TB');
+        //               })
+        //               ->select('product_id', 'value');
+        //     }])
+        //     ->get();
            
-            $values = $records->pluck('productInfo')->flatten()->map(function ($item) use ($conversionFactors) {
-                // Extract the numeric part and unit from the value string
-                preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
+        //     $values = $records->pluck('productInfo')->flatten()->map(function ($item) use ($conversionFactors) {
+        //         // Extract the numeric part and unit from the value string
+        //         preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
               
-                $numericValue = $matches[1];
-                $valueUnit = strtoupper($matches[3]);
-                // dd($numericValue );
-                // Convert the value to MB for a uniform comparison
-                return $numericValue * $conversionFactors[$valueUnit];
-            });
+        //         $numericValue = $matches[1];
+        //         $valueUnit = strtoupper($matches[3]);
+        //         // dd($numericValue );
+        //         // Convert the value to MB for a uniform comparison
+        //         return $numericValue * $conversionFactors[$valueUnit];
+        //     });
 
-        } else{
-            
-            $records = DB::table('product_infos')
+        // } else{
+        
+
+        $records = DB::table('product_infos')
             ->where('key', $key)
             ->where('value', 'LIKE', '%' . $unit . '%')
             ->select('value')
             ->get();
 
-            $values = $records->map(function ($item) use ($conversionFactors) {
-                // Extract the numeric part and unit from the value string
-                preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
-                
-                $numericValue = $matches[1];
-                $valueUnit = strtoupper($matches[3]);
-        
-                // Convert the value to MB for a uniform comparison
-                return $numericValue * $conversionFactors[$valueUnit];
-            });
-        }        
-        // dd($values);
-        // Convert all values to the target unit before finding min and max
-        $valuesInTargetUnit = $values->map(function ($value) use ($conversionFactors, $unit) {
-            
-            return $value / ($conversionFactors[$unit] ?: 1);
+        $values = $records->map(function ($item) use ($conversionFactors) {
+            // Extract the numeric part and unit from the value string
+            preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
+            $numericValue = $matches[1];
+            $valueUnit = strtoupper($matches[3]);
+
+            // Convert the value to MB for a uniform comparison
+            return $numericValue * $conversionFactors[$valueUnit];
         });
 
-        $least = $valuesInTargetUnit->min();
-        $highest = $valuesInTargetUnit->max();
+        // Assuming you want to find the min/max in MB and then convert to the target unit for display
+        $least = $values->min() / ($conversionFactors[$unit] ?: 1);
+        $highest = $values->max() / ($conversionFactors[$unit] ?: 1);
 
         return [
-            'least_' . $unit => round($least, 2),
+            'least_' . $unit => round($least, 2), // Round to 2 decimal places for cleanliness
             'highest_' . $unit => round($highest, 2),
         ];
-    }    
+    }   
+   
 
+    
     protected function getBrands($key,$sql = [])
     {
         $brands = ['HP', 'Dell', 'Lenovo', 'BTO'];
@@ -312,32 +314,142 @@ class ProductController extends BaseController
 
     protected function getReviews($sql)
     {
-        $reviewData = [];
+        if (!empty($sql)) {
+            $products = $sql->whereHas('productReview')
+                ->select('products.id',
+                    DB::raw('(SELECT ROUND(AVG(rating), 1) FROM product_reviews WHERE product_reviews.product_id = products.id) AS average_rating')
+                );
 
-        $products = $sql->whereHas('productReview')
-            ->select('products.id',
-                DB::raw('(SELECT ROUND(AVG(rating), 1) FROM product_reviews WHERE product_reviews.product_id = products.id) AS average_rating'),
-                DB::raw('(SELECT COUNT(*) FROM product_reviews WHERE product_reviews.product_id = products.id) AS rating_count')
-            )
-            ->orderByDesc('average_rating');
+            $averageRatings = $products->pluck('average_rating')->toArray();
 
+            // Retrieve the minimum and maximum average ratings
+            $minRating = empty($averageRatings) ? 0 : min($averageRatings);
+            $maxRating = empty($averageRatings) ? 0 : max($averageRatings);
 
-        // Count the occurrences of each average rating
-        $products->each(function ($products) use (&$reviewData) {
-            $average_rating = $products->average_rating ?? 0;
-            $rating_count = $products->rating_count ?? 0;
-            $data = [
-                'average_rating' => $average_rating,
-                'rating_count' => $rating_count,
+            $reviewData = [
+                'min_rating' => $minRating,
+                'max_rating' => $maxRating,
             ];
+        } else {
+            // Retrieve the minimum and maximum ratings directly from ProductReview model
+            $minMaxRatings = ProductReview::selectRaw('ROUND(MIN(rating), 1) AS min_rating')
+                ->selectRaw('ROUND(MAX(rating), 1) AS max_rating')
+                ->first();
 
-            array_push($reviewData, $data);
-        });
+            $reviewData = [
+                'min_rating' => $minMaxRatings->min_rating ?? 0,
+                'max_rating' => $minMaxRatings->max_rating ?? 0,
+            ];
+        }
 
         return $reviewData;
     }
 
+    private function getOperatingSystem($sql = [])
+    {
+        $operatingSystem = ['Window 10','Window 10 Pro', 'Window 11','Window 11 Pro'];
+        $data = [];
+        if (!empty($sql)) {
+            $products = $sql->whereHas('productInfo', function ($query) {
+                            $query->where('key', 'operating_system');
+                        })
+                        ->with(['productInfo' => function ($query) {
+                            $query->where('key', 'operating_system');
+                        }])
+                        ->get();
+        
+            // Collect all operating systems from the products
+            $foundOperatingSystems = $products->flatMap(function ($product) {
+                return $product->productInfo->pluck('value')->unique();
+            })->all();
+        
+            // Mapping specific versions to general "Window 10" category
+            $foundOperatingSystems = collect($foundOperatingSystems)->map(function ($os) {
+                if (in_array($os, ['Windows 10 Professional', 'Windows 10 Pro', 'Windows 10 Home'])) {
+                    return 'Window 10'; // Map specific versions to "Window 10"
+                }
+                return $os;
+            })->unique()->values()->all();
+        
+            // Prepare the output
+            $output = [];
+            foreach ($foundOperatingSystems as $os) {
+                // Check if the OS is in the predefined list or should be categorized as "others"
+                if (in_array($os, $operatingSystem)) {
+                    $output[] = ['value' => $os, 'backend_value' => $os];
+                }
+            }
+        
+            // Check if there are any OS values not covered by the predefined list
+            $othersFound = count(array_diff($foundOperatingSystems, $operatingSystem)) > 0;
+            if ($othersFound) {
+                $output[] = ['value' => 'Others', 'backend_value' => 'Others']; // Add "others" to the output
+            }
+        
+            return $output;
+        } else{ 
+            $data[] = ['value' => 'Window 10','backend_value'=> 'Window 10'];
+            $data[] = ['value' => 'Window 10 Pro','backend_value'=> 'Window 10 Pro'];
+            $data[] = ['value' => 'Window 11','backend_value'=> 'Window 11'];
+            $data[] = ['value' => 'Window 11 Pro','backend_value'=> 'Window 11 Pro'];
+            return $data;
+        }
 
+    }
+    private function getProcessor($sql = [])
+    {
+        $processorTypes = ['Core i3', 'Core i5', 'Core i7', 'apple_ci3', 'apple_ci5', 'apple_ci7'];
+        $data = [];
+        if (!empty($sql)) {
+        
+        
+        $products = $sql->whereHas('productInfo', function ($query) use ($processorTypes) {
+            $query->where('key', 'processor')
+                  ->whereIn('value', $processorTypes);
+        })
+        ->with(['productInfo' => function ($query) {
+            $query->where('key', 'processor');
+        }])
+        ->get();
+        
+        $outputProcessors = [];
+        $seenProcessors = array_flip($processorTypes); // Efficiently map processor types to true
+        
+        foreach ($products as $product) {
+            foreach ($product->productInfo as $info) {
+                if (isset($seenProcessors[$info->value])) {
+                    $outputProcessors[] = [
+                        'value' => $info->value,
+                        'backend_value' => $info->value,
+                    ];
+                    unset($seenProcessors[$info->value]); // Mark processed processor
+                    break; // Exit after finding a matching processor
+                }
+            }
+        }
+        
+        // Add "others" only if no valid processor types were found
+        if (count($seenProcessors) > 0) {
+            $outputProcessors[] = [
+                'value' => 'others',
+                'backend_value' => 'others',
+            ];
+        }
+        
+        
+        return $outputProcessors;
+        } else{ 
+            $data[] = ['value' => 'Core i3','backend_value'=> 'Core i3'];
+            $data[] = ['value' => 'Core i5','backend_value'=> 'Core i5'];
+            $data[] = ['value' => 'Core i7','backend_value'=> 'Core i7'];
+            $data[] = ['value' => 'apple_ci3','backend_value'=> 'apple_ci3'];
+            $data[] = ['value' => 'apple_ci5','backend_value'=> 'apple_ci5'];
+            $data[] = ['value' => 'apple_ci7','backend_value'=> 'apple_ci7'];
+            $data[] = ['value' => 'others','backend_value'=> 'others'];
+            return $data;
+        }
+       
+    }
     public function getFilterProducts(SearchProductRequest $request)
     {
       
@@ -384,7 +496,7 @@ class ProductController extends BaseController
             foreach ($filters as $filter) {
                
                 // $filter = json_encode($filter, true);
-                $filter = json_decode($filter, true);
+                // $filter = json_decode($filter, true);
                
                 $key = $filter['key'] ?? '';
                 $value = $filter['value'] ?? '';
@@ -400,7 +512,31 @@ class ProductController extends BaseController
                     $sql = $sql->whereIn('id', $productIds);
                 }
 
-                if ($key == 'processor' || $key == 'brand') {
+                if ($key == 'processor') {
+                    // Define the list of processor types (or other attributes) you want to exclude in the "others" case
+                    $excludedValues = ['Core i3', 'Core i5', 'Core i7','apple_ci3','apple_ci5','apple_ci7']; // For processor scenario                  
+
+                    // Normalize input values to match case sensitivity with excludedValues
+                    $normalizedValue = array_map('strtolower', $value);
+                    $normalizedExcludedValues = array_map('strtolower', $excludedValues);
+
+                    $productIds = ProductInfo::where('key', $key)
+                    ->when(in_array("others", $normalizedValue), function ($query) use ($normalizedExcludedValues) {
+                        // Exclude products with values in $excludedValues when "others" is selected
+                        $query->whereNotIn(DB::raw('LOWER(value)'), $normalizedExcludedValues);
+                    })
+                    ->when(!in_array("others", $normalizedValue), function ($query) use ($normalizedValue) {
+                        // Filter by the selected values, excluding "others"
+                        $query->whereIn(DB::raw('LOWER(value)'), $normalizedValue);
+                    })
+                    ->pluck('product_id')
+                    ->toArray();
+
+                    $sql = $sql->whereIn('id', $productIds);
+                   
+                }
+
+                if ($key == 'brand') {
                     if (!empty($key) && !empty($value)) {
 
                         $productIds = ProductInfo::where('key' , $key)->whereIn('value' , $value)->pluck('product_id')->toArray();
@@ -418,8 +554,7 @@ class ProductController extends BaseController
                 
             }
 
-        }
-        
+        }        
        
         /*
          * for category filters
@@ -430,10 +565,8 @@ class ProductController extends BaseController
 
             $sql = $sql->whereIn('id', $productIds);
         }
-
        
         $data = $sql->paginate($perPageRecord);
-
 
         return $this->sendResponse($data);
 
@@ -610,10 +743,18 @@ class ProductController extends BaseController
         // Apply OS filter
          if($key == 'operating_system'  && !empty($value)){
             $operatingSystemFilter = $value;
-
-            $query->whereHas('productInfo', function ($query) use ($operatingSystemFilter) {
-                $query->where('key','operating_system')->whereIn('value', $operatingSystemFilter);
-            }); 
+            $excludedValues = ['Windows 7', 'Windows 8', 'Windows 10', 'Windows 11']; // For Windows version scenario
+          
+            if ($value == "others") {
+                $query->whereHas('productInfo', function ($query) use ($excludedValues) {
+                    $query->where('key','operating_system')->whereNotIn('value', $excludedValues);
+                }); 
+            } else{ 
+                $query->whereHas('productInfo', function ($query) use ($operatingSystemFilter) {
+                    $query->where('key','operating_system')->whereIn('value', $operatingSystemFilter);
+                }); 
+            }
+            
         }
 
         // Apply Internal memory filter
@@ -711,12 +852,12 @@ class ProductController extends BaseController
         // First, get the product IDs with an average rating above 4.7
         $ratedProductIds = ProductReview::select('product_id')
         ->groupBy('product_id')
-        ->havingRaw('AVG(rating) > 4.7')
+        ->havingRaw('AVG(rating) > 4.5')
         ->pluck('product_id');
-        return Product::whereIn('id', $ratedProductIds)
-        ->whereHas('orderItems', function ($query) {
-            $query->whereHas('order'); 
-        });
+        return Product::whereIn('id', $ratedProductIds);
+        // ->whereHas('orderItems', function ($query) {
+        //     $query->whereHas('order'); 
+        // }    );
     }
 
     protected function getNewArrivalProducts()
