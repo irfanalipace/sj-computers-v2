@@ -10,7 +10,7 @@ const FullScreenWrapper = ({ children }) => {
     <div
       style={{
         width: '100%',
-        maxWidth: location.pathname == '/' ? '' : '1450px',
+        maxWidth: location.pathname == '/' ? '' : '1500px',
 
         // display: 'flex',
         alignItems: 'center',

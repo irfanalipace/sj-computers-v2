@@ -105,7 +105,7 @@ const FeaturedProducts = ({
                       ) : (
                         <Link to={''}>
                           <div>
-                            <h6 style={{ color: 'black' }}>No Proudct Found</h6>
+                            <h6 style={{ color: 'black' }}>No Product Found</h6>
                           </div>
                         </Link>
                       )}
