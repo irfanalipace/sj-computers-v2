@@ -128,6 +128,11 @@ class SjProduct extends Command
                 $bulletPoint['value'] = str_replace('?', '', $bulletPoint['value']);
             }
         }
+        if(isset($data['product_description']))  {
+            foreach ($data['product_description'] as &$bulletPoint) {
+                $bulletPoint['value'] = str_replace('?', '', $bulletPoint['value']);
+            }
+        }
 
         return json_encode($data); // Convert back to JSON string
     }
