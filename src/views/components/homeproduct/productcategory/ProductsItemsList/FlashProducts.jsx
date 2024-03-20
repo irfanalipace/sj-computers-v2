@@ -34,13 +34,12 @@ const FlashProducts = ({ images }) => {
       {bestSeller?.length ? (
         <div className='row mx-0'>
           <div className='col-12 col-sm-12 col-lg-12'>
-          
-              <div className='product-type-section-selleing-products'>
-                <div className='d-flex'>
-                  <h4>Best Selling Products</h4>
-                  <Link
-              to={'/category/best-sellers'}
-              className='text-decoration-none'>
+            <div className='product-type-section-selleing-products'>
+              <div className='d-flex align-items-center'>
+                <h4>Best Selling Products</h4>
+                <Link
+                  to={'/category/best-sellers'}
+                  className='text-decoration-none'>
                   <p
                     className='see-more'
                     style={{
@@ -53,14 +52,10 @@ const FlashProducts = ({ images }) => {
                     }}>
                     See all offer
                   </p>
-                  </Link>
-                </div>
-                <SellingProducts
-                  topRatedProduct={bestSeller}
-                  bestSeller={true}
-                />
+                </Link>
               </div>
-           
+              <SellingProducts topRatedProduct={bestSeller} bestSeller={true} />
+            </div>
           </div>
         </div>
       ) : (
