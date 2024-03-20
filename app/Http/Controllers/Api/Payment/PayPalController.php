@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Session;
 //use Srmklive\PayPal\Services\ExpressCheckout;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Jobs\GenerateInvoiceJob;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class PayPalController extends Controller
@@ -63,7 +64,8 @@ class PayPalController extends Controller
                 "is_buy_now" => (isset($request->is_buy_now ) && $request->is_buy_now == true) ? true : false,
                 "cart_id" => (isset($request->cart_id )) ? $request->cart_id : null,
             ];
-            \Cache::put("paypal_transaction_".$response['id'],$detail, 1800); // 1800 seconds = 30 minutes
+            
+            Cache::put("paypal_transaction_".$response['id'],$detail, 1800); // 1800 seconds = 30 minutes
               
             // Session::put('shippping_address', $request->shipping_address);
            
@@ -85,8 +87,9 @@ class PayPalController extends Controller
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
 
-        $getCache = \Cache::get("paypal_transaction_".$request->token);
-        $shippingAddress = $getCache['shippping_address'];      
+        $getCache = Cache::get("paypal_transaction_".$request->token);
+        $shippingAddress = $getCache['shippping_address']; 
+             
         $user =  $getCache['user']; 
         $userType =  $getCache['user_type']; 
         $cartDetails = $getCache['cart_details'];  

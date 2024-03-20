@@ -586,7 +586,17 @@ class ProductController extends BaseController
             $sql = $sql->whereIn('id', $productIds);
         }
 
-        $data = $sql->paginate($perPageRecord);
+        $paginatedProducts = $sql->orderByDesc('is_feature')->orderBy('price', 'asc')
+        ->paginate($perPageRecord);
+
+        // Convert paginated results to a collection to apply additional sorting by 'is_new_arrival'
+        $sortedPaginatedProducts = $paginatedProducts->getCollection()->sortByDesc(function ($product) {
+         return $product->is_new_arrival; // Assuming 'is_new_arrival' returns a boolean or a value that can be ordered
+        })->values();
+
+        // Update the paginator's collection with the sorted collection
+        
+        $data = $paginatedProducts->setCollection($sortedPaginatedProducts);
 
         return $this->sendResponse($data);
 
@@ -721,12 +731,19 @@ class ProductController extends BaseController
             }
 
             $query = $this->$methodName();
-             // Apply dynamic filters for price and review.
-            // $query = $this->applyFilters($query, $request->input('filter', []));
 
-            $products = $query->paginate($request->per_page ?? 10);
+            $paginatedProducts = $query->orderByDesc('is_feature')->orderBy('price', 'asc')
+                           ->paginate($request->per_page ?? 10);
 
-            return $this->sendResponse($products, 'Successfully fetched ' . $request->category . ' data');
+            // Convert paginated results to a collection to apply additional sorting by 'is_new_arrival'
+            $sortedPaginatedProducts = $paginatedProducts->getCollection()->sortByDesc(function ($product) {
+                return $product->is_new_arrival; // Assuming 'is_new_arrival' returns a boolean or a value that can be ordered
+            })->values();
+
+            // Update the paginator's collection with the sorted collection
+            $paginatedProducts->setCollection($sortedPaginatedProducts);
+
+            return $this->sendResponse($paginatedProducts, 'Successfully fetched ' . $request->category . ' data');
         } catch (Exception $e) {
             return $this->sendError('error', 'Something went wrong ' . $e->getMessage());
         }
@@ -823,7 +840,7 @@ class ProductController extends BaseController
             });
         }
 
-        return $query;
+        return $query->orderBy('price', 'asc');
 }
 
     protected function getMethodNameFromCategory($category)
@@ -846,7 +863,7 @@ class ProductController extends BaseController
     {
         return Product::whereHas('categories', function ($category) {
             $category->where('slug', 'desktop');
-        })->where('price', '<', 250)->orderBy('price', 'asc');
+        })->where('price', '<', 250);
     }
 
     protected function getWorkstations()
