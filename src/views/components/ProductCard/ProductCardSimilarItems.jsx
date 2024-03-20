@@ -100,13 +100,14 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
             {product?.price?.toString().split('.')[1]}
           </div>
 
-          {product.deliveryCharges && (
+          {product?.deliveryCharges && (
             <div className='product-delivery-charges'>
               <FontAwesomeIcon icon={faTruck} /> {product.deliveryCharges}
             </div>
           )}
           {type === 'recommended' && (
             <div style={{ fontSize: '12px', marginTop: '5px' }}>
+              <FontAwesomeIcon icon={faTruck} style={{ color: '#6f6f6f' }} />{' '}
               Free shipping by SJ
             </div>
           )}
@@ -196,7 +197,7 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
           )}
           {type === 'recommended' && (
             <div style={{ fontSize: '12px', marginTop: '5px' }}>
-              Free Shipping by SJ
+              <FontAwesomeIcon icon={faTruck} /> Free Shipping by SJ
             </div>
           )}
         </div>
