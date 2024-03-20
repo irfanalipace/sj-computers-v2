@@ -33,6 +33,7 @@ const FilterBarlayout2 = ({
   filtersInArray,
   filteChange,
   pathValue,
+  setReviewOptions,
 }) => {
   const location = useLocation();
   const { categorySlug } = useParams();
@@ -201,6 +202,23 @@ const FilterBarlayout2 = ({
       const realisticOptions = generateRealisticOptions(highestGb, lowestGb);
       const ramOptions = realisticOptions.filter(option => option <= highestGb);
       setRamData([{ gb: ramOptions, tb: data.ram_memory.least_TB }]);
+
+      if (data.review?.min_rating && data.review?.max_rating) {
+        let newArray = [];
+        for (
+          let i = data.review?.max_rating;
+          i >= data.review?.min_rating;
+          i--
+        ) {
+          newArray.push({
+            id: parseInt(i),
+            label: `${parseInt(i)}`,
+            value: parseInt(i),
+          });
+        }
+        console.log(newArray);
+        setReviewOptions(newArray);
+      }
 
       const highestHardDiskGb = data.hard_disk.highest_GB;
       // const lowestHardDiskGb = data.hard_disk.least_GB;

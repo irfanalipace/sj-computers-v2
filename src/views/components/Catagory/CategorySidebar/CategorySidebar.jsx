@@ -28,6 +28,7 @@ const CategorySidebar = ({
   const brand = queryParams.get('brand');
   const processor = queryParams.get('processor');
   const gpu = queryParams.get('gpu');
+  const [reviewOption, setReviewOptions] = useState([]);
 
   const [filtersInArray, setFiltersInArray] = useState([
     {
@@ -511,6 +512,7 @@ const CategorySidebar = ({
         {(DataInDrawer[2] || !inDrawer) && (
           <Box ml={inDrawer ? 4 : 0} pb={2}>
             <ReviewFilter
+              reviewOption={reviewOption}
               clearReview={clearReview}
               onChange={handleReviewFilter}
             />
@@ -531,6 +533,7 @@ const CategorySidebar = ({
           {/* <FilterBar /> */}
           {/* {sidebarTitle !== budgetFilter && ( */}
           <FilterBarlayout2
+            setReviewOptions={setReviewOptions}
             clearFilter={handleClearFilter}
             filteChange={handleFilterChange}
             handleFilterSelect={handleFilterSelect}

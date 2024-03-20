@@ -75,6 +75,9 @@ const FilteredProducts = memo(
     if (!category?.id) {
       filterObject.category = categorySlug;
     }
+    if (category?.id === 1) {
+      filterObject.name = categorySlug;
+    }
 
     const init = () => {
       dispatch(SET_SELECTED_CATEGORY(null));
@@ -98,6 +101,9 @@ const FilteredProducts = memo(
         name: '',
         filter: filteredData,
       };
+      if (category?.id === 1) {
+        filterObject.name = categorySlug;
+      }
       dispatch(
         filterProducts(filterObject, true, productAfterShowMore =>
           viewItemDataLayer(productAfterShowMore, categorySlug),
@@ -138,6 +144,9 @@ const FilteredProducts = memo(
           category_id: category?.id,
           filter: filteredData,
         };
+        if (category?.id === 1) {
+          filterObject.name = categorySlug;
+        }
 
         if (
           Object.keys(filteredData).length > 0 ||
@@ -163,6 +172,9 @@ const FilteredProducts = memo(
         name: '',
         filter: filteredData,
       };
+      if (category?.id === 1) {
+        filterObject.name = categorySlug;
+      }
       if (category?.id) {
         filterObject.category_id = category?.id;
       } else {
@@ -215,7 +227,7 @@ const FilteredProducts = memo(
                   {category?.name ? category?.name : 'Monitors for Desktops'}
                 </>
               ) : (
-                <> {categorySlug.toUpperCase()} Products </>
+                <> {categorySlug?.toUpperCase()?.replace('-', ' ')} </>
               )}
             </div>
             {/* <p className="product-grid-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem.</p> */}
@@ -225,7 +237,9 @@ const FilteredProducts = memo(
               results for{' '}
               <span style={{ color: '#52AC66', margin: '0px 5px' }}>
                 {' '}
-                {category?.name ? category?.name : `${categorySlug.toUpperCase()}`}
+                {category?.name
+                  ? category?.name
+                  : `${categorySlug.toUpperCase()}`}
               </span>
               <div className='buttons'>
                 <span className='view-button' onClick={productViewList}>
