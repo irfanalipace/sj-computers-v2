@@ -95,6 +95,15 @@ function ShippingDetailsForm({
     },
   });
 
+  function isAnyValueEmptyExceptApartment(obj) {
+    for (const key in obj) {
+      if (key !== 'apartment' && obj[key] === '') {
+        return true;
+      }
+    }
+    return false;
+  }
+
   const handlePermanentAddresses = e => {
     setPermanentAddress(e.target.checked);
   };
@@ -528,7 +537,7 @@ function ShippingDetailsForm({
                 handleSubmitClick();
               }}
               isLoading={loading}
-              disabled={!isValid}>
+              disabled={!isValid || isAnyValueEmptyExceptApartment(values)}>
               Use this address
             </ShippingButton>
           </form>
