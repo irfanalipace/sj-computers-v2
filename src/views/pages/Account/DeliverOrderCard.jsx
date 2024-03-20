@@ -307,11 +307,13 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
           </>
         </CardContent>
         <button className='cancel-my-order-btn'>Cancel my order</button> |
-        <button
-          className='cancel-my-order-btn'
-          onClick={() => toggleExpanded(orders.id)}>
-          {expandedOrders.includes(orders?.id) ? 'Show less' : 'Show more'}
-        </button>
+        {isSmallScreen && (
+          <button
+            className='cancel-my-order-btn'
+            onClick={() => toggleExpanded(orders.id)}>
+            {expandedOrders.includes(orders?.id) ? 'Show less' : 'Show more'}
+          </button>
+        )}
       </Card>
       <Grid item lg={0.5}></Grid>
       {!isSmallScreen && (
