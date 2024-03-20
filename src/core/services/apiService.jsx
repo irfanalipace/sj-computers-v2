@@ -2,7 +2,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { destroyToken } from '@services/authService';
 import { getToken } from './authService';
-
+import config from './configService';
 /**
  * Service to call HTTP request via Axios
  */
@@ -15,8 +15,8 @@ const ApiService = {
   init() {
     if (!this.instance) {
       this.instance = axios.create({ withCredentials: true });
-      this.instance.defaults.baseURL = import.meta.env.VITE_APP_API_BASE_URL;
-      console.log('api url: ', import.meta.env.VITE_APP_API_BASE_URL);
+      this.instance.defaults.baseURL = config.VITE_APP_API_BASE_URL;
+      console.log('api url: ', config.VITE_APP_API_BASE_URL);
       this.instance.defaults.headers['content-type'] = 'application/json';
 
       this.setupResponseInterceptor(); // Setup response interceptor
@@ -81,7 +81,7 @@ const ApiService = {
    * Set the default Base URL of api requests
    */
 
-  setDefaultBaseUrl(url = import.meta.env.VITE_APP_API_BASE_URL) {
+  setDefaultBaseUrl(url = config.VITE_APP_API_BASE_URL) {
     this.instance.defaults.baseURL = url;
   },
 
@@ -90,7 +90,7 @@ const ApiService = {
    */
 
   setOTOBaseUrl() {
-    this.instance.defaults.baseUrl = import.meta.env.VITE_APP_OTO_BASE_URL;
+    this.instance.defaults.baseUrl = config.VITE_APP_OTO_BASE_URL;
   },
 
   /**
@@ -180,6 +180,6 @@ const ApiService = {
   },
 };
 
-ApiService.init();
+// ApiService.init();
 
 export default ApiService;

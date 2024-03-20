@@ -6,11 +6,12 @@ import SwiperCore, { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Link } from 'react-router-dom';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 
 const ShopByBrand = () => {
+
+
   return (
     <div
       style={{ marginTop: '10px', marginLeft: '16px' }}
@@ -63,7 +64,7 @@ const ShopByBrand = () => {
               justifyContent: 'center',
               flexDirection: 'column',
             }}>
-            <Link to={'/category/monitors'}>
+            <Link to={category.categoryLink}>
               <div
                 style={{
                   backgroundColor: '#F1F2F2',

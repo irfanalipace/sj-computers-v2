@@ -16,9 +16,12 @@ const ProductsByCategory = ({ toggleFilter }) => {
       if (_category) {
         setCategory(_category);
         setCategoryLoading(false);
+      } else {
+        setCategory(null);
       }
     } catch (e) {
       setCategoryLoading(false);
+      setCategory(null);
     } finally {
       setCategoryLoading(false);
     }

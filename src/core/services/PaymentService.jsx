@@ -41,7 +41,11 @@ export default class PaymentService {
       }
     } catch (error) {
       const errorString = error?.data?.errors;
-      toast.error(error?.data?.errors);
+      Object.values(error?.data?.errors).map(row => {
+        toast.error(row[0]);
+      });
+      // toast.error(Object.values(error?.data?.errors));
+      // console.log(Object.values(error?.data?.errors), 'lollol');
       const errors = extractJsonObjectFromError(errorString);
       if (errors?.cartError) {
         typeof this.onQuantityIssue === 'function' && this.onQuantityIssue();

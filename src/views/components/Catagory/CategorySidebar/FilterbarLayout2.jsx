@@ -6,6 +6,7 @@ import { IconButton } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import CloseIcon from '@mui/icons-material/Close';
+import { useLocation } from 'react-router-dom';
 
 import Loader from '@common/Spinner/Spinner';
 import OverlayLoader from '@common/LoaderComponent/OverlayLoader';
@@ -20,6 +21,7 @@ import { Slider, Typography } from '@mui/material';
 // import FilterByRange from "./FilterByRange";
 import Button from '../../common/Button/Button';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const FilterBarlayout2 = ({
   inDrawer,
@@ -31,7 +33,10 @@ const FilterBarlayout2 = ({
   filtersInArray,
   filteChange,
   pathValue,
+  setReviewOptions,
 }) => {
+  const location = useLocation();
+  const { categorySlug } = useParams();
   const [filters, setFilters] = useState({});
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [loadingFilters, setLoadingFilters] = useState(false);
@@ -69,6 +74,21 @@ const FilterBarlayout2 = ({
         prevVisibleCategories[category].visibleEntries + 8;
       return tempVariable;
     });
+  };
+
+  const getCatgeoryNameForFilterListApi = () => {
+    const names = [
+      'budget-friendly',
+      'workstation',
+      'professional-laptop',
+      'touch-screen',
+      'top-rated-product',
+      // 'best-sellers',
+      // 'new-arrival',
+    ];
+
+    if (names.includes(pathValue)) return pathValue;
+    else return 'all';
   };
 
   const handleClearFilter = category => {
@@ -172,7 +192,8 @@ const FilterBarlayout2 = ({
   const fetchFilters = async () => {
     try {
       setLoadingFilters(true);
-      let response = await getFilterListApi();
+
+      let response = await getFilterListApi(getCatgeoryNameForFilterListApi());
       let data = response?.data;
       setFilters(data ? data : {});
 
@@ -181,6 +202,23 @@ const FilterBarlayout2 = ({
       const realisticOptions = generateRealisticOptions(highestGb, lowestGb);
       const ramOptions = realisticOptions.filter(option => option <= highestGb);
       setRamData([{ gb: ramOptions, tb: data.ram_memory.least_TB }]);
+
+      if (data.review?.min_rating && data.review?.max_rating) {
+        let newArray = [];
+        for (
+          let i = data.review?.max_rating;
+          i >= data.review?.min_rating;
+          i--
+        ) {
+          newArray.push({
+            id: parseInt(i),
+            label: `${parseInt(i)}`,
+            value: parseInt(i),
+          });
+        }
+        console.log(newArray);
+        setReviewOptions(newArray);
+      }
 
       const highestHardDiskGb = data.hard_disk.highest_GB;
       // const lowestHardDiskGb = data.hard_disk.least_GB;
@@ -249,6 +287,14 @@ const FilterBarlayout2 = ({
       const processorFilter = filtersArray.find(
         filter => filter.key === 'processor',
       );
+      // console.clear();
+      // console.log(
+      //   { catg },
+      //   { value },
+      //   { processorFilter },
+      //   { processorCheckd },
+      // );
+
       return (
         processorCheckd.includes(value) ||
         processorFilter.value.includes(value?.toLowerCase())
@@ -292,9 +338,12 @@ const FilterBarlayout2 = ({
                     const hardDiskCheckdCopy = [...processorCheckd];
                     if (event.target.checked) {
                       hardDiskCheckdCopy.push(option.backend_value);
+                      console.log('event checked');
+                      console.log({ hardDiskCheckdCopy });
                       setProcessorCheckd(hardDiskCheckdCopy);
                     }
                     if (!event.target.checked) {
+                      console.log('event not chedked');
                       const finIndex = processorCheckd.findIndex(
                         item => item === option.backend_value,
                       );

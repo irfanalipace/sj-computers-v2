@@ -4,7 +4,9 @@
 /public/assets
 /public/js
 /public/index.html
+/public/config.json
 /public/mix-manifest.json
+/public/config.json
 /storage/*.key
 /storage/framework/cache/*
 /storage/framework/sessions/*
@@ -23,6 +25,7 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/config.json
 
 /public/sitemap/*
 

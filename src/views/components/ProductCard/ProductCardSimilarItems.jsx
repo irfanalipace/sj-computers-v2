@@ -87,14 +87,6 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
               &ensp;SJ's <span style={{ color: '#E0BC00' }}>choice</span>
             </p>
             <div className='for-styling'></div>
-            <div className='mt-1' style={{ fontSize: '14px' }}>
-              in
-            </div>
-          </div>
-          <div
-            style={{ fontSize: '12px', marginTop: '-12px' }}
-            className='mb-2 '>
-            Computer Monitors
           </div>
 
           <div className='d-none d-sm-block product-prices mb-2'>
@@ -104,15 +96,10 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
               </div>
             )}
             <span>$</span>
-            {product?.price?.toString().split('.')[0]}.
+            {product?.price?.toString().split('.')[0]}
             {product?.price?.toString().split('.')[1]}
           </div>
-          <div style={{ fontSize: '12px' }} className='mt-2 mb-2'>
-            Get it as soon as{' '}
-            <span style={{ fontWeight: 'bold', lineHeight: '16px' }}>
-              {orderEstimatedDelivery?.free_shipment_amount?.estimate_day}
-            </span>
-          </div>
+
           {product.deliveryCharges && (
             <div className='product-delivery-charges'>
               <FontAwesomeIcon icon={faTruck} /> {product.deliveryCharges}
@@ -170,7 +157,7 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
           </div>
           <div
             style={{ fontSize: '12px', marginTop: '-12px' }}
-            className='mb-2 '>
+            className='mb-2'>
             Computer Monitors
           </div>
           <div className=' d-sm-none product-prices-mobile'>

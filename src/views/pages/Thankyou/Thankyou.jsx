@@ -56,6 +56,7 @@ export default function ThankYou() {
 
   const navigate = useNavigate();
   const [orderDetails, setOrderDetails] = useState({});
+  console.log(orderDetails, 'orderDetails');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const location = useLocation();
   useEffect(() => {
@@ -281,9 +282,9 @@ export default function ThankYou() {
             <div className='col-12 d-flex justify-content-end'>
               {/* <p >Tax ${120.6}</p> */}
             </div>
-            <div className='col-12 d-flex justify-content-end'>
+            {/* <div className='col-12 d-flex justify-content-end'>
               <p style={{ marginRight: '1%', marginTop: '2%' }}>Tax ${'N/A'}</p>
-            </div>
+            </div> */}
             <div className='col-6 d-flex justify-content-start'>
               <p className='bold-total'>Total</p>
             </div>

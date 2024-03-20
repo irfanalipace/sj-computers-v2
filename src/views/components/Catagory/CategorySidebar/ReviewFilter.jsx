@@ -4,7 +4,7 @@ import StarRatings from 'react-star-ratings';
 import './FilterbarLayout2.css';
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function ReviewFilter({ onChange, clearReview }) {
+export default function ReviewFilter({ onChange, clearReview, reviewOption }) {
   const reveiwData = [
     { id: 1, label: '4.5 & up', value: 4.5 },
     { id: 2, label: '4 & up', value: 4 },
@@ -16,7 +16,7 @@ export default function ReviewFilter({ onChange, clearReview }) {
     <>
       {!!checkedReview.length && (
         <span
-          // style={{ position: 'absolute', top: 0, right: 25 }}
+          style={{ position: 'absolute', top: 0, right: 25 }}
           className='filter-clear-btn'
           onClick={() => {
             clearReview();
@@ -27,7 +27,7 @@ export default function ReviewFilter({ onChange, clearReview }) {
         </span>
       )}
 
-      {reveiwData.map((reveiw, index) => {
+      {reviewOption?.map((reveiw, index) => {
         return (
           <Stack key={reveiw.id} direction={'row'} spacing={1} mt={0.5}>
             <label
@@ -82,13 +82,13 @@ export default function ReviewFilter({ onChange, clearReview }) {
               rating={reveiw.value}
               starRatedColor='orange'
             />
-            <Typography
+            {/* <Typography
               mb={0.5}
               variant='body2'
               fontSize={'small'}
               className='review-lines'>
               & Up
-            </Typography>
+            </Typography> */}
           </Stack>
         );
       })}

@@ -10,6 +10,6 @@ const initServices = {
   },
 };
 
-initServices.init();
+// initServices.init();
 
 export default initServices;
