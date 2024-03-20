@@ -123,7 +123,7 @@ class ProductController extends BaseController
 
     public function queryProductInfo($key,$category = [])
     {
-        if(!empty($category)){
+        if(!empty($category) && $category != 'all'){
             $methodName = $this->getMethodNameFromCategory($category);
             
             if (!method_exists($this, $methodName)) {
@@ -396,6 +396,7 @@ class ProductController extends BaseController
         }
 
     }
+
     private function getProcessor($sql = [])
     {
         $processorTypes = ['Core i3', 'Core i5', 'Core i7', 'apple_ci3', 'apple_ci5', 'apple_ci7'];
@@ -450,6 +451,7 @@ class ProductController extends BaseController
         }
        
     }
+
     public function getFilterProducts(SearchProductRequest $request)
     {
       
@@ -496,7 +498,7 @@ class ProductController extends BaseController
             foreach ($filters as $filter) {
                
                 // $filter = json_encode($filter, true);
-                // $filter = json_decode($filter, true);
+                $filter = json_decode($filter, true);
                
                 $key = $filter['key'] ?? '';
                 $value = $filter['value'] ?? '';
@@ -560,12 +562,21 @@ class ProductController extends BaseController
          * for category filters
          */
         $categoryId = $request->get('category_id');
-        if (!empty($categoryId)) {
+        $categoryName = $request->get('name') ?? null;
+       
+        if (!empty($categoryId) && $categoryName == 'BTO'){
+            
+            $accessories = ["B0921PQRDN","B0921GT8X9","B09883YCB3","B08VKWNPMT","B08VLCRQ6X","B08WRQH82Z","B0921XRC3M","B0921XRC3M","B0B1H1DWJP","B0B2N5SJZ4"];
+
+            $sql = $sql->whereIn('asin',$accessories);
+          
+        } elseif(!empty($categoryId)) {
+           
             $productIds = CategoryProduct::where('category_id', $categoryId)->pluck('product_id')->toArray();
 
             $sql = $sql->whereIn('id', $productIds);
         }
-       
+
         $data = $sql->paginate($perPageRecord);
 
         return $this->sendResponse($data);
@@ -742,18 +753,34 @@ class ProductController extends BaseController
 
         // Apply OS filter
          if($key == 'operating_system'  && !empty($value)){
-            $operatingSystemFilter = $value;
-            $excludedValues = ['Windows 7', 'Windows 8', 'Windows 10', 'Windows 11']; // For Windows version scenario
-          
-            if ($value == "others") {
-                $query->whereHas('productInfo', function ($query) use ($excludedValues) {
-                    $query->where('key','operating_system')->whereNotIn('value', $excludedValues);
-                }); 
-            } else{ 
-                $query->whereHas('productInfo', function ($query) use ($operatingSystemFilter) {
-                    $query->where('key','operating_system')->whereIn('value', $operatingSystemFilter);
-                }); 
+            $normalizedValue  = array_map('strtolower', $value); // Normalize casing
+            // Define mappings for "window 10" to include specific versions
+            $windows10Variants = ['windows 10 professional', 'windows 10 pro', 'windows 10 home'];
+            
+            // Check and replace "window 10" with its specific versions in the filter, if selected
+            if (in_array('window 10', $normalizedValue)) {
+                // Remove "window 10" from the array
+                $key = array_search('window 10', $normalizedValue);
+                unset($normalizedValue[$key]);
+
+                // Add the specific versions for "window 10"
+                $normalizedValue = array_merge($normalizedValue, $windows10Variants);
             }
+
+            // Now, $normalizedValue contains the specific versions if "window 10" was selected
+            
+            $query->whereHas('productInfo', function ($query) use ($normalizedValue, $windows10Variants) {
+                $query->where('key', 'operating_system');
+
+                if (in_array('others', $normalizedValue)) {
+                    // Handle "others" selection
+                    $excludedValues = array_merge(['windows 7', 'windows 8', 'windows 10', 'windows 11'], $windows10Variants);
+                    $query->whereNotIn(DB::raw('LOWER(value)'), $excludedValues);
+                } else {
+                    // Directly filter using the modified $normalizedValue which includes specific "window 10" versions
+                    $query->whereIn(DB::raw('LOWER(value)'), $normalizedValue);
+                }
+            });
             
         }
 
