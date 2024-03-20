@@ -266,6 +266,7 @@ export const CartItem = memo(({ cartData }) => {
                     <>
                       <div className='buttons-on-cartitem'>
                         <QuantityInput
+                          cartPage={true}
                           onChange={handleQuantity}
                           minQuantity={1}
                           value={cartData?.quantity}
