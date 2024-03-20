@@ -573,7 +573,7 @@ class ProductController extends BaseController
         $categoryId = $request->get('category_id');
         $categoryName = $request->get('name') ?? null;
        
-        if (!empty($categoryId) && $categoryName == 'BTO'){
+        if (!empty($categoryId) && $categoryName == 'bto'){
             
             $accessories = ["B0921PQRDN","B0921GT8X9","B09883YCB3","B08VKWNPMT","B08VLCRQ6X","B08WRQH82Z","B0921XRC3M","B0921XRC3M","B0B1H1DWJP","B0B2N5SJZ4"];
 
