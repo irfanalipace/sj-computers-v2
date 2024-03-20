@@ -17,6 +17,7 @@ use App\Models\ProductInfo;
 use App\Models\ProductMedia;
 use App\Models\ProductReview;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -79,24 +80,32 @@ class ProductController extends BaseController
         return $this->getSuggestedItems($product)->take(2);
     }
 
-    public function productCount(Product $product, Request $request)
+    public function productCount($product)
     {
-        $cpu_family = $product->description->cpu_model[0]->family[0]->value ?? '';
-        $ram_value = $product->description->ram_memory[0]->installed_size[0]->value ?? '';
-        $graphics_ram = $product->description->graphics_ram[0]->size[0]->value ?? '';
-        $hard_disk = $product->description->hard_disk[0]->size[0]->value ?? '';
+        try {
+            $product = Product::findOrFail($product);
+            $cpu_family = $product->description->cpu_model[0]->family[0]->value ?? '';
+            $ram_value = $product->description->ram_memory[0]->installed_size[0]->value ?? '';
+            $graphics_ram = $product->description->graphics_ram[0]->size[0]->value ?? '';
+            $hard_disk = $product->description->hard_disk[0]->size[0]->value ?? '';
 
-        $data = Product::whereJsonContains('description->cpu_model', [['family' => ['value' => $cpu_family]]])
-            ->orWhereJsonContains('description->ram_memory',[['installed_size'=> ['value' => $ram_value]]])
-            ->orWhereJsonContains('description->graphics_ram',[['size'=> ['value' => $graphics_ram]]])
-            ->orWhereJsonContains('description->hard_disk',[['size'=> ['value' => $hard_disk]]])
-            ->where('quantity', '>', 100)
-            ->limit(10)
-            ->with('brand:id,name,image')
-            ->get();
+            $data = $product->whereJsonContains('description->cpu_model', [['family' => ['value' => $cpu_family]]])
+                ->orWhereJsonContains('description->ram_memory',[['installed_size'=> ['value' => $ram_value]]])
+                ->orWhereJsonContains('description->graphics_ram',[['size'=> ['value' => $graphics_ram]]])
+                ->orWhereJsonContains('description->hard_disk',[['size'=> ['value' => $hard_disk]]])
+                ->where('quantity', '>', 100)
+                ->limit(10)
+                ->with('brand:id,name,image')
+                ->get();
 
-            return $this->sendResponse($data, 'All product displayed that are above 100 in quantity');
+            return $this->sendResponse($data, 'All products displayed that have a quantity above 100.');
+        } catch (ModelNotFoundException $e) {
+            return $this->sendError('error', 'Product not found.');
+        } catch (\Exception $e) {
+            return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());
+        }
     }
+
     public function getProductFilterList(Request $request)
     {
         $data = [];
@@ -790,8 +799,8 @@ class ProductController extends BaseController
            
             $query->whereHas('productInfo', function ($query) use ($internalMemoryFilter) {
                 $query->where('key','hard_disk')->whereIn('value', $internalMemoryFilter);
-            }); 
-           
+            });
+
         }
 
         // Apply RAM filter
