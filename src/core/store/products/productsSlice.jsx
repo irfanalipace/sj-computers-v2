@@ -114,7 +114,11 @@ const productSlice = createSlice({
       state.filterTo = action.payload.to;
       if (state.currentPage === 1)
         state.filtersProduct = [...action.payload.data];
-      else state.filtersProduct = [...state.products, ...action.payload.data];
+      else
+        state.filtersProduct = [
+          ...state.filtersProduct,
+          ...action.payload.data,
+        ];
       state.currentPage = state.currentPage + 1;
       state.isLoading = false;
       state.isFiltering = false;
