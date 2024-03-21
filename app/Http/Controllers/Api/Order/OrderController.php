@@ -121,7 +121,8 @@ class OrderController extends BaseController
     {
         try{          
             $trackingId = $request->tracking_id;
-            $shipmentDetail = $this->getTrackingInfoFedex($trackingId ?? null);
+            $shipmentDetail = $this->trackShipment($trackingId ?? null);
+           
             return $this->sendResponse($shipmentDetail,'Successfully fetched shipment details.');
         } catch(Exception $e){
             return $this->sendError('error',$e->getMessage());
