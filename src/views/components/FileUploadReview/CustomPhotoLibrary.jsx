@@ -21,7 +21,9 @@ const CustomPhotoLibrary = ({ onClose, parentData, onDeleteImage }) => {
         <div className='preview-button-container-dialogbox'>
           {parentData.map((img, index) => (
             <div className='alist-image-container-preview-modal' key={index}>
-              <button className='delete-button-data' onClick={onDeleteImage}>
+              <button
+                className='delete-button-data'
+                onClick={() => onDeleteImage(index)}>
                 &times;
               </button>
               <img src={img.url} alt={img.name} />

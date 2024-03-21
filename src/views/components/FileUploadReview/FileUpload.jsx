@@ -25,6 +25,7 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
 
   const handleChildButton = () => {
     const updatedImages = [...allImages, ...images];
+    // debugger;
     onhandleCallback(updatedImages, uploadedImgs);
     setAllImages(updatedImages);
     setUploadedImgs([]);
@@ -33,7 +34,10 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
 
   const onFileSelectCallback = (validFiles, errors) => {
     setErrors(errors);
-    setUploadedImgs(validFiles);
+    console.log(uploadedImgs);
+    debugger;
+    setUploadedImgs([...uploadedImgs, ...validFiles]);
+    // debugger;
     setImages(prevImages => [
       ...prevImages,
       ...validFiles.map(file => ({
@@ -92,11 +96,13 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
         <div
           className={`drag-area-data ${isDragging ? 'drag-over' : ''}`}
           role='button'
-          onClick={() => fileInputRef.current.click()}
+          onClick={e => {
+            e.stopPropagation();
+            fileInputRef.current.click();
+          }}
           onDragOver={onDragOver}
           onDragLeave={onDragLeave}
-          onDrop={onDrop}
-        >
+          onDrop={onDrop}>
           {isDragging ? (
             <span className='select-image-file-drop'>Drop images here</span>
           ) : (
@@ -118,8 +124,10 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
                 <span
                   className='select-image-file-drop'
                   role='button'
-                  onClick={() => fileInputRef.current.click()}
-                >
+                  onClick={e => {
+                    e.stopPropagation();
+                    fileInputRef.current.click();
+                  }}>
                   <FontAwesomeIcon icon={faPaperclip} /> Choose File
                 </span>
               </div>
@@ -129,8 +137,7 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
                   style={{
                     fontSize: '12px',
                     lineHeight: '1.1rem',
-                  }}
-                >
+                  }}>
                   {' '}
                   Maximum file size: 5MB, Supported formats: PNG, JPG and WEBP{' '}
                 </p>
@@ -153,8 +160,7 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
             <div className='list-image-container' key={index}>
               <button
                 className='delete-button-data'
-                onClick={() => deleteImage(index)}
-              >
+                onClick={() => deleteImage(index)}>
                 &times;
               </button>
               <img src={img.url} alt={img.name} />
@@ -177,8 +183,7 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
           <button
             onClick={handleChildButton}
             className='upload-button-view-button'
-            disabled={images.length === 0}
-          >
+            disabled={images.length === 0}>
             Upload
           </button>
         </div>
