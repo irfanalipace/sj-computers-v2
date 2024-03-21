@@ -22,8 +22,7 @@ const Product = ({ type = '', product, inGrid, searchParams, productView }) => {
         position={'relative'}
         alignItems={'center'}
         spacing={1.5}
-        direction={'row'}
-      >
+        direction={'row'}>
         <Box
           bgcolor={bgcolor}
           sx={{
@@ -36,15 +35,13 @@ const Product = ({ type = '', product, inGrid, searchParams, productView }) => {
           py={0.5}
           // width={"auto"}
           alignItems={'center'}
-          justifyContent={'center'}
-        >
+          justifyContent={'center'}>
           <Stack direction={'row'} spacing={1}>
             <Typography
               color={'white'}
               fontWeight={500}
               fontSize={'12px'}
-              fontFamily={'Inter'}
-            >
+              fontFamily={'Inter'}>
               {text}
             </Typography>
             {secondText && (
@@ -52,8 +49,7 @@ const Product = ({ type = '', product, inGrid, searchParams, productView }) => {
                 fontWeight={500}
                 fontSize={'12px'}
                 fontFamily={'Inter'}
-                color={color}
-              >
+                color={color}>
                 {secondText}
               </Typography>
             )}
@@ -68,8 +64,7 @@ const Product = ({ type = '', product, inGrid, searchParams, productView }) => {
           fontWeight={500}
           fontSize={'12px'}
           lineHeight={'14px'}
-          fontFamily='Inter'
-        >
+          fontFamily='Inter'>
           Deals
         </Typography>
       </Stack>
@@ -108,8 +103,7 @@ const Product = ({ type = '', product, inGrid, searchParams, productView }) => {
           <Link
             // to={`${new URL(product?.url).pathname}`}
             to={productUrl}
-            style={{ textDecoration: 'none' }}
-          >
+            style={{ textDecoration: 'none' }}>
             <div className='product-name product-cart-name-mobile-screen'>
               {product.name}
             </div>
@@ -157,16 +151,14 @@ const Product = ({ type = '', product, inGrid, searchParams, productView }) => {
         <Link
           //  to={`${new URL(product?.url).pathname}`}
           to={productUrl}
-          style={{ textDecoration: 'none' }}
-        >
+          style={{ textDecoration: 'none' }}>
           <div className='d-none d-sm-block product-rating'>
             <Stack mb={2} alignItems={'start'} spacing={1}>
               <Stack
                 alignItems={'center'}
                 justifyContent={'center'}
                 spacing={1}
-                direction={'row'}
-              >
+                direction={'row'}>
                 <StarRatings
                   rating={product.rating}
                   starRatedColor='rgb(232, 126, 36)'
@@ -182,12 +174,11 @@ const Product = ({ type = '', product, inGrid, searchParams, productView }) => {
                   fontWeight={500}
                   fontSize={'12px'}
                   lineHeight={'17px'}
-                  color={'#007185'}
-                >
+                  color={'#007185'}>
                   {product.total_review}
                 </Typography>
               </Stack>
-              {type === 'recommended' && getRandomComponent()}
+              {/* {type === 'recommended' && getRandomComponent()} */}
             </Stack>
 
             {/* <span className="product-num-reviews ms-2 mt-1">
@@ -238,8 +229,7 @@ const Product = ({ type = '', product, inGrid, searchParams, productView }) => {
   return (
     <div
       className={` product ${inGrid && 'product-grid'}`}
-      style={{ flexDirection: productView == 'list' ? 'row' : '' }}
-    >
+      style={{ flexDirection: productView == 'list' ? 'row' : '' }}>
       <Link
         //to={`${new URL(product?.url).pathname}`}
         to={productUrl}
@@ -266,8 +256,7 @@ const Product = ({ type = '', product, inGrid, searchParams, productView }) => {
         </div>
       </Link>
       <div
-        className={`${productView == 'list' ? 'product-detail-list-view' : ''}`}
-      >
+        className={`${productView == 'list' ? 'product-detail-list-view' : ''}`}>
         <ProductDetails />
       </div>
     </div>

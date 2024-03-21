@@ -155,11 +155,16 @@ const SellingProducts = ({ topRatedProduct, inTopRated, bestSeller }) => {
                         {product.total_review}
                       </span>
                     </div>
-                    <div style={{ padding: '4px 0px' }}>
+                    {/* <div style={{ padding: '4px 0px' }}>
                       {getRandomComponent()}
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <span
+                    </div> */}
+                    <div
+                      style={{
+                        marginTop: '7px',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}>
+                      {/* <span
                         style={{
                           marginRight: '10px',
                           fontSize: '12px',
@@ -167,7 +172,7 @@ const SellingProducts = ({ topRatedProduct, inTopRated, bestSeller }) => {
                           color: '#666666',
                         }}>
                         ${parseFloat(((product?.price * 2) / 1.5).toFixed(2))}
-                      </span>
+                      </span> */}
                       <span
                         style={{
                           padding: '2px',
