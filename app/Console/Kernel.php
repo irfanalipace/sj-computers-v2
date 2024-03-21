@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
          $schedule->command('generate:marketing-feed')->everyFiveMinutes();
          $schedule->command('generate:site-map')->everyThirtyMinutes();
          $schedule->command('product-statistics')->daily();
+         $schedule->command('order-tracking-history')->everyThirtyMinutes();
     }
 
     /**
