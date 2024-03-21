@@ -228,7 +228,7 @@ const ProductCardLayout2 = ({
               </div>
             )}
             <div className='product-new-price m-1'>
-              {productView == 'grid' && (
+              {/* {productView == 'grid' && (
                 <span
                   style={{
                     textDecoration: 'line-through',
@@ -237,11 +237,11 @@ const ProductCardLayout2 = ({
                   }}>
                   ${parseFloat(((product?.price * 2) / 1.5).toFixed(0))}
                 </span>
-              )}
+              )} */}
               <span>$</span>
               {product?.price?.toString().split('.')[0]}
               <sup>{product?.price?.toString().split('.')[1]} </sup>
-              {productView == 'list' && (
+              {/* {productView == 'list' && (
                 <span
                   style={{
                     fontSize: '12px',
@@ -255,7 +255,7 @@ const ProductCardLayout2 = ({
                     {parseFloat(((product?.price * 2) / 1.5).toFixed(2))}
                   </span>
                 </span>
-              )}
+              )} */}
             </div>
             {/* {productView == 'list' && (
               <div className='discount-with-coupon'>
@@ -407,15 +407,14 @@ const ProductCardLayout2 = ({
                     </div>
                 )} */}
           {/* {inGrid && <div className="product-offer-label" style={{backgroundColor: product?.total_review > 0 ? "#52AC66" : "#1860A3", top: productView == "list" ? "-9px" : "" }}>{product?.total_review > 0 ? "Top Seller" : "New" }</div>} */}
-          {inGrid && (
+          {inGrid && product?.is_new_arrival && (
             <div
               className='product-offer-label'
               style={{
-                backgroundColor:
-                  product?.total_review > 0 ? '#52AC66' : '#1860A3',
+                backgroundColor: '#1860A3',
                 top: productView == 'list' ? '' : '',
               }}>
-              {product?.total_review > 0 ? 'Top Seller' : 'New'}
+              New
             </div>
           )}
 
