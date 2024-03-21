@@ -36,6 +36,8 @@ return [
     
     'fedex_sandbox_url' => env('FEDEX_SANDBOX_URL','https://apis-sandbox.fedex.com'),
 
+    'react_app_url' => env('REACT_APP_URL'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

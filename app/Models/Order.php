@@ -11,7 +11,7 @@ class Order extends Model
 
     protected $guarded = ['id'];
 
-    protected $with = ['orderItem','Invoice','user.shippingAddress'];
+    protected $with = ['orderItem','Invoice','user.shippingAddress','orderTrackingHistroy'];
 
     public function orderItem(){
         return $this->hasMany(OrderItem::class);
@@ -27,5 +27,10 @@ class Order extends Model
 
     public function guest(){
         return $this->belongsTo(Guest::class);
+    }
+
+    public function orderTrackingHistroy()
+    {
+        return $this->belongsTo(OrderTrackingHistory::class,'id','order_id');
     }
 }
