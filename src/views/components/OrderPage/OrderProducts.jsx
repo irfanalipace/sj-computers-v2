@@ -201,9 +201,11 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                           )}
                           {row?.fedex_status !== 'DELIVERED'
                             ? !isSmallScreen && (
-                                <button className='track-order-button'>
+                                <Link
+                                  to={`/track-order/${row?.id}/${row?.tracking_id}`}
+                                  className='track-order-button'>
                                   Track Package
-                                </button>
+                                </Link>
                               )
                             : !isSmallScreen && (
                                 <p style={{ marginTop: '20px' }}>
@@ -264,9 +266,11 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                             )}
                             {row?.fedex_status !== 'DELIVERED'
                               ? !isSmallScreen && (
-                                  <button className='track-order-button'>
+                                  <Link
+                                    to={`/track-order/${row?.id}/${row?.tracking_id}`}
+                                    className='track-order-button'>
                                     Track Package
-                                  </button>
+                                  </Link>
                                 )
                               : !isSmallScreen && (
                                   <p style={{ marginTop: '20px' }}>
@@ -341,7 +345,18 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                 <button onClick={() => toggleExpanded(row.id)}>
                   {expandedOrders.includes(row.id) ? 'Show less' : 'Show more'}
                 </button>
-                <button>Track Package</button>
+                {isSmallScreen && (
+                  <Link
+                    to={`/track-order/${row?.id}/${row?.tracking_id}`}
+                    style={{
+                      color: 'rgb(49, 130, 67)',
+                      position: 'absolute',
+                      right: 5,
+                      bottom: 5,
+                    }}>
+                    Track Package
+                  </Link>
+                )}
               </div>
             )}
           </div>
