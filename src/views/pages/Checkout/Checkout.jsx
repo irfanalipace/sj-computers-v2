@@ -22,7 +22,10 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import MobileCheckout from './MobileCheckout';
 import { getUserId } from '../../../core/services/authService';
-import { makeDataLayerItemObject } from '../../../core/utils/helpers';
+import {
+  extractJsonObjectFromError,
+  makeDataLayerItemObject,
+} from '@utils/helpers';
 
 export default function Checkout() {
   const screenWidth = useViewportWidth();
@@ -39,13 +42,14 @@ export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState('');
   const [currentAccordionId, setCurrentAccordionId] = useState();
   const checkoutDetails = useSelector(state => state.cart.details);
+  const [show, setShow] = useState(true);
   const cartItems = useSelector(state => state.cart.cart);
   const [searchParams] = useSearchParams();
   const shippingAddress = useSelector(state => state.orders.shippingDetails);
   const [paymentError, setPaymentError] = useState('');
 
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
- 
+
   const loading = useSelector(state => state.cart.isLoading);
   const id = searchParams.get('id');
 
@@ -113,7 +117,6 @@ export default function Checkout() {
       window.dataLayer = window.dataLayer || [];
     }
 
-
     window.dataLayer.push({
       event: 'begin_checkout',
       currency: 'USD',
@@ -154,8 +157,12 @@ export default function Checkout() {
                 </div>
               </div>
               <div className='checkout-page-inner'>
-                {paymentError && (
-                  <Alert variant='danger' className='my-3'>
+                {paymentError && show && (
+                  <Alert
+                    variant='danger'
+                    className='my-3'
+                    onClose={() => setShow(false)}
+                    dismissible>
                     {JSON.stringify(paymentError)}
                   </Alert>
                 )}
