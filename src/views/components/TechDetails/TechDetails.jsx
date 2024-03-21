@@ -76,18 +76,61 @@ const TechDetails = ({ product }) => {
             </Grid>
             {summary && (
               <table className='tech-details-container'>
-                <tr>
-                  <td>Standing screen display size</td>
-                  <td>27 Inches</td>
-                </tr>
-                <tr>
-                  <td>Screen Resolution</td>
-                  <td>1920x1080</td>
-                </tr>
-                <tr>
-                  <td>Max Screen Resolution</td>
-                  <td>1920 x 1080 Pixels</td>
-                </tr>
+                {product?.description?.ram_memory?.length > 0 &&
+                  product?.description?.ram_memory[0]?.installed_size?.length >
+                    0 &&
+                  product?.description?.ram_memory[0]?.technology?.length >
+                    0 && (
+                    <tr>
+                      <td>RAM</td>
+                      <td>
+                        {
+                          product?.description?.ram_memory[0]?.installed_size[0]
+                            ?.value
+                        }
+                        &nbsp;
+                        {
+                          product?.description?.ram_memory[0]?.installed_size[0]
+                            ?.unit
+                        }
+                        &nbsp;
+                        {
+                          product?.description?.ram_memory[0]?.technology[0]
+                            ?.value
+                        }
+                      </td>
+                    </tr>
+                  )}
+                {product?.description?.hard_disk?.length > 0 &&
+                  product?.description?.hard_disk[0]?.size?.length > 0 &&
+                  product?.description?.hard_disk[0]?.description?.length >
+                    0 && (
+                    <tr>
+                      <td>Hard Drive</td>
+                      <td>
+                        {product?.description?.hard_disk[0]?.size[0]?.value}
+                        &nbsp;
+                        {product?.description?.hard_disk[0]?.size[0]?.unit}
+                        &nbsp;
+                        {
+                          product?.description?.hard_disk[0]?.description[0]
+                            ?.value
+                        }
+                      </td>
+                    </tr>
+                  )}
+                {product?.description?.wireless_communication_technology
+                  ?.length > 0 && (
+                  <tr>
+                    <td>Wireless Type</td>
+                    <td>
+                      {
+                        product?.description
+                          ?.wireless_communication_technology[0]?.value
+                      }
+                    </td>
+                  </tr>
+                )}
               </table>
             )}
             <Grid container onClick={() => setOther(!other)} mt={1}>

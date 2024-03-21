@@ -235,13 +235,13 @@ const ProductCardLayout2 = ({
                     fontSize: '12px',
                     paddingRight: '5px',
                   }}>
-                  $120{' '}
+                  ${parseFloat(((product?.price * 2) / 1.5).toFixed(0))}
                 </span>
               )}
               <span>$</span>
               {product?.price?.toString().split('.')[0]}
               <sup>{product?.price?.toString().split('.')[1]} </sup>
-              {/* {productView == 'list' && (
+              {productView == 'list' && (
                 <span
                   style={{
                     fontSize: '12px',
@@ -252,10 +252,10 @@ const ProductCardLayout2 = ({
                     style={{
                       textDecoration: 'line-through',
                     }}>
-                    $120.00
+                    {parseFloat(((product?.price * 2) / 1.5).toFixed(2))}
                   </span>
                 </span>
-              )} */}
+              )}
             </div>
             {/* {productView == 'list' && (
               <div className='discount-with-coupon'>
@@ -272,54 +272,49 @@ const ProductCardLayout2 = ({
 
           {productView == 'list' && (
             <div className='list-view-details d-none d-lg-flex'>
-              <div className='extra-details-item'>
-                <div className='model-data-products'>Model</div>
-                <div
-                  style={{
-                    fontWeight: '700',
-                    padding: '4px 0px',
-                    fontSize: '12px',
-                    color: '#000000',
-                  }}>
-                  Sonic
+              {product?.description?.brand?.length > 0 && (
+                <div className='extra-details-item'>
+                  <div className='model-data-products'>Brand</div>
+                  <div
+                    style={{
+                      fontWeight: '700',
+                      padding: '4px 0px',
+                      fontSize: '12px',
+                      color: '#000000',
+                    }}>
+                    {product?.description?.brand[0]?.value}
+                  </div>
                 </div>
-              </div>
-              <div className='extra-details-item'>
-                <div className='model-data-products'>Display</div>
-                <div
-                  style={{
-                    fontWeight: '700',
-                    padding: '4px 0px',
-                    fontSize: '12px',
-                    color: '#000000',
-                  }}>
-                  32"
+              )}
+              {product?.description?.cpu_model?.length > 0 &&
+                product.description.cpu_model[0]?.manufacturer?.length > 0 && (
+                  <div className='extra-details-item'>
+                    <div className='model-data-products'>Manufacturer</div>
+                    <div
+                      style={{
+                        fontWeight: '700',
+                        padding: '4px 0px',
+                        fontSize: '12px',
+                        color: '#000000',
+                      }}>
+                      {product.description.cpu_model[0]?.manufacturer[0]?.value}
+                    </div>
+                  </div>
+                )}
+              {product?.asin && (
+                <div className='extra-details-item'>
+                  <div className='model-data-products'>ASIN</div>
+                  <div
+                    style={{
+                      fontWeight: '700',
+                      padding: '4px 0px',
+                      fontSize: '12px',
+                      color: '#000000',
+                    }}>
+                    {product?.asin}
+                  </div>
                 </div>
-              </div>
-              <div className='extra-details-item'>
-                <div className='model-data-products'>Company</div>
-                <div
-                  style={{
-                    fontWeight: '700',
-                    padding: '4px 0px',
-                    fontSize: '12px',
-                    color: '#000000',
-                  }}>
-                  Sonic
-                </div>
-              </div>
-              <div className='extra-details-item'>
-                <div className='model-data-products'>Size</div>
-                <div
-                  style={{
-                    fontWeight: '700',
-                    padding: '4px 0px',
-                    fontSize: '12px',
-                    color: '#000000',
-                  }}>
-                  Multiple
-                </div>
-              </div>
+              )}
             </div>
           )}
         </div>

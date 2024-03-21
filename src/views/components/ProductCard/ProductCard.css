@@ -187,7 +187,7 @@
   padding: 5px;
   font-size: 12px;
   background-color: #0f1111;
-  width: 120px;
+  width: 103px;
   color: white;
   padding-right: 21px;
   /* margin-left: 11px; */
@@ -197,7 +197,7 @@
   background-color: #fff;
   margin-top: 2px;
   margin-left: -12px;
-  transform: skew(0, -25deg);
+  transform: skew(0, -91deg);
   width: 20px;
   height: 22px;
 }
