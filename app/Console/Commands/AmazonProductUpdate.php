@@ -40,14 +40,15 @@ class AmazonProductUpdate extends Command
     {
 
         $products = $this->getProductsList();
-
+        
         if($products['status']){
 
             $this->deleteProducts(collect($products['response']));
 
             foreach ($products['response'] as $key => $product){
-                Product::where(['sku' => $product['sku']])
-                    ->update(['quantity' => (int)$product['quantity'] , 'price' => $product['price']]);
+                
+                Product::where(['sku' => $product['SKU']])
+                    ->update(['quantity' => (int)$product['Quantity'] , 'price' => $product['Price']]);
 
                 echo "product update ". $key."\n";
             }
@@ -68,7 +69,7 @@ class AmazonProductUpdate extends Command
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://server5.sjops.us/api/inventory/data/export/skulist/',
+            CURLOPT_URL => 'https://server5.sjops.us/api/inventory/data/export/Prod_20210218/repricer',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -97,9 +98,4 @@ class AmazonProductUpdate extends Command
         ];
 
     }
-
-
-
-
-
 }
