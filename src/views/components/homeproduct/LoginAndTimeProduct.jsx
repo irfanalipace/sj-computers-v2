@@ -102,7 +102,7 @@ const LoginAndTimeProduct = () => {
 
                       <div className='discount-price'>
                         <span>$</span>
-                        {products[0]?.price.toString().split('.')[0] - 20}
+                        {products[0]?.price.toString().split('.')[0]}
                         <sup>
                           {products[0]?.price?.toString().split('.')[1]}
                         </sup>
@@ -201,7 +201,11 @@ const LoginAndTimeProduct = () => {
                         />
                       </div>
 
-                      <h5 className='time-product-name'>{products[0].name}</h5>
+                      <h5
+                        className='time-product-name'
+                        style={{ color: 'black' }}>
+                        {products[0].name}
+                      </h5>
                       <Stack mb={1} alignItems={'start'} spacing={1}>
                         <Stack
                           alignItems={'center'}
@@ -230,23 +234,27 @@ const LoginAndTimeProduct = () => {
                         {/* {type === "recommended" && getRandomComponent()} */}
                       </Stack>
                       <div className='featured-product-timing'>
-                        <div className='original-price'>
+                        {/* <div className='original-price'>
                           ${Math.floor(products[0]?.price)}
-                        </div>
+                        </div> */}
                         <div className='discount-price'>
                           <span>$</span>
-                          {products[0]?.price.toString().split('.')[0] - 20}
+                          {products[0]?.price.toString().split('.')[0]}
                           <sup>
                             {products[0]?.price?.toString().split('.')[1]}
                           </sup>
                         </div>
-                        <div className='save-value'>
-                          <span>Save $20</span>
+                        <div className='product-delivery-charges ms-0 ms-sm-2 mb-2 mb-sm-0'>
+                          <FontAwesomeIcon className='me-1' icon={faTruck} />{' '}
+                          Free Shipping
                         </div>
-                        <div className='end-in'>
+                        {/* <div className='save-value'>
+                          <span>Save $20</span>
+                        </div> */}
+                        {/* <div className='end-in'>
                           Ends in {parsedDate.getHours()}
                           h:{parsedDate.getMinutes()}m
-                        </div>
+                        </div> */}
                       </div>
                     </Link>
                   )}
