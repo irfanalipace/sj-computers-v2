@@ -75,6 +75,7 @@ const Profile = () => {
   const handleDeleteImage = () => {
     setShowDialog(true);
   };
+  console.log(imageUrl, 'image url');
   return (
     <div className='account-page'>
       <div className='container-xl'>
@@ -108,8 +109,7 @@ const Profile = () => {
                   <div className='file-input-button-container'>
                     <label
                       htmlFor='file-input'
-                      className='change-photo-btn account-btn'
-                    >
+                      className='change-photo-btn account-btn'>
                       Change Photo
                     </label>
                     <input
@@ -123,8 +123,7 @@ const Profile = () => {
 
                   <button
                     className='mt-3 delete-image-btn account-btn'
-                    onClick={handleDeleteImage}
-                  >
+                    onClick={handleDeleteImage}>
                     <FontAwesomeIcon icon={faTrash} className='me-2' />
                     <span>Delete</span>
                   </button>
@@ -147,8 +146,7 @@ const Profile = () => {
                 {!nameEditable && (
                   <button
                     className='edit-btn'
-                    onClick={() => setNameEditable(true)}
-                  >
+                    onClick={() => setNameEditable(true)}>
                     Edit
                   </button>
                 )}
@@ -176,8 +174,7 @@ const Profile = () => {
               <Button
                 className={'account-btn update-btn'}
                 onClick={handleSubmit}
-                isLoading={isLoading}
-              >
+                isLoading={isLoading}>
                 Update
               </Button>
             </form>
@@ -189,16 +186,14 @@ const Profile = () => {
         show={showDialog}
         onHide={() => setShowDialog(false)}
         centered
-        className='confirm-dialog'
-      >
+        className='confirm-dialog'>
         <Modal.Body>
           <h3>Are You Sure you want to delete image?</h3>
           <div className='d-flex justify-content-around'>
             <Button
               className='yes-btn'
               isLoading={isDeletingPic}
-              onClick={deleteImage}
-            >
+              onClick={deleteImage}>
               Yes
             </Button>{' '}
             <Button className='no-btn' onClick={() => setShowDialog(false)}>
