@@ -1,5 +1,6 @@
 import React from 'react';
 import Autocomplete from 'react-google-autocomplete';
+import config from '../../../../core/services/configService';
 
 export default function AutoComplete({ onChange, onPlaceSelected, ...rest }) {
   return (
@@ -13,7 +14,7 @@ export default function AutoComplete({ onChange, onPlaceSelected, ...rest }) {
         types: ['address'],
         componentRestrictions: { country: 'us' },
       }}
-      apiKey={import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY}
+      apiKey={config.VITE_APP_GOOGLE_MAPS_API_KEY}
       onPlaceSelected={onPlaceSelected}
       onChange={onChange}
     />

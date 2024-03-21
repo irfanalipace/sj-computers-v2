@@ -7,6 +7,8 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import PlaceIcon from '@mui/icons-material/Place';
 import Avatar from '@mui/material/Avatar';
 import { Box, ListItemIcon, Typography } from '@mui/material';
+import config from '../../../../core/services/configService';
+
 export default ({ placeholder = 'Select Location', ...rest }) => {
   const {
     placesService,
@@ -14,7 +16,7 @@ export default ({ placeholder = 'Select Location', ...rest }) => {
     getPlacePredictions,
     isPlacePredictionsLoading,
   } = usePlacesService({
-    apiKey: import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY,
+    apiKey: config.VITE_APP_GOOGLE_MAPS_API_KEY,
   });
 
   useEffect(() => {
@@ -52,20 +54,17 @@ export default ({ placeholder = 'Select Location', ...rest }) => {
               // width: "inherit",
               bgcolor: 'background.paper',
               zIndex: 9999,
-            }}
-          >
+            }}>
             <ListItem
               divider
               dense
               disablePadding
               disableGutters
-              sx={{ py: '1px' }}
-            >
+              sx={{ py: '1px' }}>
               <ListItemIcon
                 sx={{
                   minWidth: '20px',
-                }}
-              >
+                }}>
                 <PlaceIcon
                   fontSize='14'
                   sx={{ color: 'lightgray', p: 0, m: 0 }}

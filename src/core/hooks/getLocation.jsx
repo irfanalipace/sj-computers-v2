@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import config from '../services/configService';
 
 const useLocation1 = () => {
   const [location1, setLocation1] = useState({ zipCode: '', state: '' });
@@ -8,7 +9,7 @@ const useLocation1 = () => {
   useEffect(() => {
     const loadGoogleMapsScript = () => {
       const script = document.createElement('script');
-      script.src = `http://maps.google.com/maps/api/js?key=${import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY}`;
+      script.src = `http://maps.google.com/maps/api/js?key=${config.VITE_APP_GOOGLE_MAPS_API_KEY}`;
       script.async = true;
       script.onload = () => {
         getLocation();

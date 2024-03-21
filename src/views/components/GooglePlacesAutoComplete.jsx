@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import usePlacesService from 'react-google-autocomplete/lib/usePlacesAutocompleteService';
+import config from '../../core/services/configService';
+
 export default function GooglePlacesAutoComplete() {
   const {
     placesService,
@@ -7,7 +9,7 @@ export default function GooglePlacesAutoComplete() {
     getPlacePredictions,
     isPlacePredictionsLoading,
   } = usePlacesService({
-    apiKey: import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY,
+    apiKey: config.VITE_APP_GOOGLE_MAPS_API_KEY,
   });
   useEffect(() => {
     // fetch place details for the first element in placePredictions array
