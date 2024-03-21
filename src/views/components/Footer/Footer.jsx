@@ -27,8 +27,7 @@ const Footer = () => {
         <div className='footer'>
           <div
             className='footer-copyright text-center back-to-top-hover-effct'
-            style={{ backgroundColor: '#002549' }}
-          >
+            style={{ backgroundColor: '#002549' }}>
             <p className='backtotop-button-footer-click-onit'>
               <BackToTopButton />
             </p>
@@ -44,8 +43,7 @@ const Footer = () => {
                     <li>
                       <Link
                         to='about_us'
-                        className='herf-link text-decoration-none'
-                      >
+                        className='herf-link text-decoration-none'>
                         About us
                       </Link>
                     </li>
@@ -61,24 +59,21 @@ const Footer = () => {
                       <Link
                         to='/contact'
                         href='#!'
-                        className='herf-link text-decoration-none'
-                      >
+                        className='herf-link text-decoration-none'>
                         Contact Us
                       </Link>
                     </li>
                     <li>
                       <Link
                         to={'/blogs'}
-                        className='herf-link text-decoration-none'
-                      >
+                        className='herf-link text-decoration-none'>
                         Blogs
                       </Link>
                     </li>
                     <li>
                       <Link
                         to='/careers'
-                        className='herf-link text-decoration-none'
-                      >
+                        className='herf-link text-decoration-none'>
                         Careers
                       </Link>
                     </li>
@@ -94,24 +89,21 @@ const Footer = () => {
                     <li>
                       <a
                         href='https://www.facebook.com/sjcomputersllc'
-                        className='herf-link text-decoration-none'
-                      >
+                        className='herf-link text-decoration-none'>
                         Facebook
                       </a>
                     </li>
                     <li>
                       <a
                         href='https://www.linkedin.com/company/sj-computers/'
-                        className='herf-link text-decoration-none'
-                      >
+                        className='herf-link text-decoration-none'>
                         LinkedIn
                       </a>
                     </li>
                     <li>
                       <a
                         href='https://www.instagram.com/sjcomputersllc/'
-                        className='herf-link text-decoration-none'
-                      >
+                        className='herf-link text-decoration-none'>
                         Instagram
                       </a>
                     </li>
@@ -135,8 +127,7 @@ const Footer = () => {
                     <li>
                       <Link
                         to='/account'
-                        className='herf-link text-decoration-none'
-                      >
+                        className='herf-link text-decoration-none'>
                         Your Account
                       </Link>
                     </li>
@@ -144,8 +135,7 @@ const Footer = () => {
                       <Link
                         to='/return_refund_policy'
                         className='herf-link text-decoration-none'
-                        style={{ lineHeight: '1.2rem' }}
-                      >
+                        style={{ lineHeight: '1.2rem' }}>
                         Return And Refund Policies
                       </Link>
                     </li>
@@ -160,24 +150,21 @@ const Footer = () => {
                     <li>
                       <Link
                         to='/term_services'
-                        className='herf-link text-decoration-none'
-                      >
+                        className='herf-link text-decoration-none'>
                         Terms of Services
                       </Link>
                     </li>
                     <li>
                       <Link
                         to='/privacy_policy'
-                        className='herf-link text-decoration-none'
-                      >
+                        className='herf-link text-decoration-none'>
                         Privacy Policy
                       </Link>
                     </li>
                     <li>
                       <Link
                         to='/refund-order'
-                        className='herf-link text-decoration-none'
-                      >
+                        className='herf-link text-decoration-none'>
                         Refund Order
                       </Link>
                     </li>
@@ -192,8 +179,7 @@ const Footer = () => {
                     <div className='reach-us '>
                       <p
                         className='text-uppercase herf-link  reach-us-paragraph-data-footer'
-                        style={{ lineHeight: '17px' }}
-                      >
+                        style={{ lineHeight: '17px' }}>
                         2817 Eagandale Blvd Eagan, MN 55121.
                       </p>
                       <p className='herf-link phonenumber-footer'>
@@ -202,8 +188,7 @@ const Footer = () => {
                       <p>
                         <a
                           href='mailto:cs@sjcomputersmn.com'
-                          className='herf-link text-decoration-none phonenumber-footer'
-                        >
+                          className='herf-link text-decoration-none phonenumber-footer'>
                           cs@sjcomputersmn.com
                         </a>
                       </p>
@@ -232,16 +217,14 @@ const Footer = () => {
                   id='dropdownMenuButton'
                   data-toggle='dropdown'
                   aria-haspopup='true'
-                  aria-expanded='false'
-                >
+                  aria-expanded='false'>
                   <FontAwesomeIcon className='me-1' icon={faGlobe} />
                   English
                   <img src={img1} style={{ marginLeft: '10px' }} />
                 </button>
                 <div
                   className='dropdown-menu'
-                  aria-labelledby='dropdownMenuButton'
-                >
+                  aria-labelledby='dropdownMenuButton'>
                   <a className='dropdown-item' href='#'>
                     span
                   </a>
@@ -258,7 +241,7 @@ const Footer = () => {
                                 className="copywriten footer-end-image-data"
                             /> */}
               <span className='copywriten footer-end-image-data'>
-                S.J Computers @ 2023 Tech Store. All Rights <br></br>Reserved
+                S.J Computers @ 2024 Tech Store. All Rights <br></br>Reserved
               </span>
             </div>
           </footer>
