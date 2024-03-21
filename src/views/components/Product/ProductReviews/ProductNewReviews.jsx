@@ -77,8 +77,6 @@ const ProductNewReviews = () => {
     }
   };
 
-  // console.log('parentData' , parentData)
-
   const handlePreviewDialog = () => {
     setPreviewDialogOpen(true);
   };
@@ -239,8 +237,7 @@ const ProductNewReviews = () => {
                         <button
                           type='button'
                           onClick={handleClear}
-                          className='lh-1'
-                        >
+                          className='lh-1'>
                           Clear
                         </button>
                       </div>
@@ -255,8 +252,7 @@ const ProductNewReviews = () => {
                       name='text'
                       value={text}
                       onChange={e => handleText(e)}
-                      placeholder='Write comments here...'
-                    ></textarea>
+                      placeholder='Write comments here...'></textarea>
                   </div>
                 </div>
 
@@ -264,22 +260,19 @@ const ProductNewReviews = () => {
                   <button
                     type='button'
                     className='preview-product-list-button'
-                    onClick={handlePreviewDialog}
-                  >
+                    onClick={handlePreviewDialog}>
                     Preview
                   </button>{' '}
                   <button
                     type='button'
                     className='camera-button-review'
-                    onClick={handleDialogBox}
-                  >
+                    onClick={handleDialogBox}>
                     <FontAwesomeIcon icon={faCamera} /> Add Photos
                   </button>{' '}
                   <button
                     type='submit'
                     className='submit-review-button'
-                    disabled={isLoading}
-                  >
+                    disabled={isLoading}>
                     {isLoading ? <LoaderComponent /> : 'Submit'}
                   </button>
                 </div>
@@ -293,8 +286,7 @@ const ProductNewReviews = () => {
                   borderBottom: '2px solid #CDCDCD',
                   padding: '10px',
                   alignItems: 'center',
-                }}
-              >
+                }}>
                 <div className='col-lg-3 col-md-3 col-sm-6 col-3'>
                   <div className='review-heading-image-product'>
                     <img src={productImages} alt='Product' />
@@ -302,8 +294,7 @@ const ProductNewReviews = () => {
                 </div>
                 <div
                   className='col-lg-9 col-md-9 col-sm-6 col-9'
-                  style={{ paddingLeft: '10px' }}
-                >
+                  style={{ paddingLeft: '10px' }}>
                   <div className='row'>
                     <div className='col-md-11'>
                       <div className='review-heading'>
@@ -319,8 +310,7 @@ const ProductNewReviews = () => {
                       style={{
                         display: 'flex',
                         justifyContent: 'start',
-                      }}
-                    >
+                      }}>
                       <Rating
                         required
                         style={{
@@ -340,8 +330,7 @@ const ProductNewReviews = () => {
                         style={{
                           justifyContent: 'flex-end',
                           paddingLeft: '5px',
-                        }}
-                      >
+                        }}>
                         <div className='d-flex'>
                           <div className='check-rating-star-review ms-sm-3'>
                             <FontAwesomeIcon icon={faCheck} />
@@ -351,14 +340,12 @@ const ProductNewReviews = () => {
                             style={{
                               display: 'flex',
                               alignItems: 'center',
-                            }}
-                          >
+                            }}>
                             <p
                               className='lh-1 mb-0'
                               style={{
                                 fontSize: '8px',
-                              }}
-                            >
+                              }}>
                               Posted publicly as
                             </p>
                           </div>
@@ -366,22 +353,19 @@ const ProductNewReviews = () => {
 
                         <div
                           className='check-rating-star-review-name align-items-baseline'
-                          style={{ fontSize: '8px' }}
-                        >
+                          style={{ fontSize: '8px' }}>
                           <div
                             className='lh-1'
                             style={{
                               textWrap: 'nowrap',
-                            }}
-                          >
+                            }}>
                             {userName} |
                           </div>
                           <div className='data-clear-button-review lh-1'>
                             <button
                               type='button'
                               onClick={handleClear}
-                              className='lh-1'
-                            >
+                              className='lh-1'>
                               Clear
                             </button>
                           </div>
@@ -396,15 +380,13 @@ const ProductNewReviews = () => {
                 style={{
                   padding: '10px',
                   borderBottom: '2px solid #CDCDCD',
-                }}
-              >
+                }}>
                 <div className='text-area-rating-review-list'>
                   <div
                     style={{
                       fontWeight: 500,
                       margin: '3px 0px',
-                    }}
-                  >
+                    }}>
                     Add a written review
                   </div>
                   {/* <div>You mention durability, sturdiness or sleep mode</div> */}
@@ -419,37 +401,32 @@ const ProductNewReviews = () => {
                     }}
                     value={text}
                     onChange={e => handleText(e)}
-                    placeholder='Write comments here...'
-                  ></textarea>
+                    placeholder='Write comments here...'></textarea>
                 </div>
               </div>
 
               <div
                 className='align-items-center d-flex flex-column flex-sm-row justify-content-sm-end preview-button-review'
-                style={{ padding: '10px' }}
-              >
+                style={{ padding: '10px' }}>
                 <button
                   type='button'
                   className='preview-product-list-button'
                   onClick={handlePreviewDialog}
-                  style={{ width: '100%' }}
-                >
+                  style={{ width: '100%' }}>
                   Preview
                 </button>{' '}
                 <button
                   type='button'
                   className='camera-button-review'
                   onClick={handleDialogBox}
-                  style={{ width: '100%' }}
-                >
+                  style={{ width: '100%' }}>
                   <FontAwesomeIcon icon={faCamera} /> Add Photos
                 </button>{' '}
                 <button
                   type='submit'
                   className='submit-review-button'
                   disabled={isLoading}
-                  style={{ width: '100%' }}
-                >
+                  style={{ width: '100%' }}>
                   {isLoading ? <LoaderComponent /> : 'Submit'}
                 </button>
               </div>
