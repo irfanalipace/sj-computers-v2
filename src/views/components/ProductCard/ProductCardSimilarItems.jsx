@@ -82,14 +82,14 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
               </div>
             </div>
           </Link>
-          <div className='sj-banner-similar-item best-choice-item-products'>
+          {/* <div className='sj-banner-similar-item best-choice-item-products'>
             <p>
               &ensp;SJ's <span style={{ color: '#E0BC00' }}>choice</span>
             </p>
             <div className='for-styling'></div>
-          </div>
+          </div> */}
 
-          <div className='d-none d-sm-block product-prices mb-2'>
+          <div className='mt-3 d-none d-sm-block product-prices mb-2'>
             {product.originalPrice && (
               <div className='product-original-price'>
                 ${product.originalPrice}
@@ -97,7 +97,7 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
             )}
             <span>$</span>
             {product?.price?.toString().split('.')[0]}
-            {product?.price?.toString().split('.')[1]}
+            <sup>{product?.price?.toString().split('.')[1]}</sup>
           </div>
 
           {product?.deliveryCharges && (
@@ -108,7 +108,7 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
           {type === 'recommended' && (
             <div style={{ fontSize: '12px', marginTop: '5px' }}>
               <FontAwesomeIcon icon={faTruck} style={{ color: '#6f6f6f' }} />{' '}
-              Free shipping by SJ
+              Free shipping
             </div>
           )}
         </div>

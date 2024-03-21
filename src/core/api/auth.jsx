@@ -147,7 +147,7 @@ export function resetPasswordApi({
 export function updateProfileApi(formData) {
   ApiService.setHeader('content-type', 'multipart/form-data');
   return new Promise((resolve, reject) => {
-    ApiService.post('update-profile', formData)
+    ApiService.post('update-profile', formData, '', '', true)
       .then(response => {
         console.print(
           'file: auth.module.js | updateProfileApi| response',

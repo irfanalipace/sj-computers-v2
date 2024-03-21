@@ -13,14 +13,44 @@ const TechDetails = ({ product }) => {
   const [other, setOther] = useState(true);
   const theme = useTheme();
 
+  const processorChecker =
+    product?.description?.cpu_model?.length > 0 &&
+    product?.description?.cpu_model[0]?.manufacturer?.length > 0 &&
+    product?.description?.cpu_model[0]?.manufacturer?.length > 0 &&
+    product?.description?.cpu_model[0]?.speed?.length > 0 &&
+    product?.description?.cpu_model[0]?.family?.length > 0
+      ? true
+      : false;
+
+  const ramChecker =
+    product?.description?.ram_memory?.length > 0 &&
+    product?.description?.ram_memory[0]?.installed_size?.length > 0 &&
+    product?.description?.ram_memory[0]?.technology?.length > 0
+      ? true
+      : false;
+
+  const hardDriveChecker =
+    product?.description?.hard_disk?.length > 0 &&
+    product?.description?.hard_disk[0]?.size?.length > 0 &&
+    product?.description?.hard_disk[0]?.description?.length > 0
+      ? true
+      : false;
+
+  const wirelessChecker =
+    product?.description?.wireless_communication_technology?.length > 0
+      ? true
+      : false;
+
+  const itemTypeChecker =
+    product?.description?.item_type_keyword?.length > 0 ? true : false;
   const isUpSmall = useMediaQuery(theme.breakpoints.up('md'));
-  // console.log(product, "product");
+  console.log(product, 'single product');
   return (
     <div className='tech-details-container'>
       <Grid container mt={3} spacing={5}>
         <Grid item lg={6}>
           <Grid container>
-            <Grid>
+            {/* <Grid>
               <h3
                 className='tech-details-heading'
                 style={{
@@ -28,8 +58,8 @@ const TechDetails = ({ product }) => {
                 }}>
                 Technical Details
               </h3>
-            </Grid>
-            <Grid>
+            </Grid> */}
+            {/* <Grid>
               <Grid
                 container
                 onClick={() => {
@@ -52,221 +82,319 @@ const TechDetails = ({ product }) => {
                   </>
                 )}
               </Grid>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
         <Grid item lg={6}>
-          {isUpSmall && (
+          {/* {isUpSmall && (
             <h3 className='tech-details-heading' style={{ fontSize: '18px' }}>
               Additional Information
             </h3>
-          )}
+          )} */}
         </Grid>
       </Grid>
       <Grid container spacing={4}>
         <Grid item lg={6}>
           <>
-            <Grid container onClick={() => setSummary(!summary)}>
-              <Grid>
-                {summary ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            <Grid style={{ display: 'flex' }}>
+              <Grid sx={{ width: !isUpSmall ? '250px' : '203px' }}>
+                <h3
+                  className='tech-details-heading'
+                  style={{
+                    fontSize: !isUpSmall ? '16px' : '18px',
+                  }}>
+                  Technical Details
+                </h3>
               </Grid>
-              <Grid>
-                <p className='collapse-text mt-1'>Summary</p>
+              <Grid container onClick={() => setCollapseAll(!collapseAll)}>
+                <Grid>
+                  {collapseAll ? (
+                    <KeyboardArrowUpIcon />
+                  ) : (
+                    <KeyboardArrowDownIcon />
+                  )}
+                </Grid>
+                <Grid>
+                  <p className='collapse-text mt-1'>Collapse all</p>
+                </Grid>
               </Grid>
             </Grid>
-            {summary && (
-              <table className='tech-details-container'>
-                {product?.description?.ram_memory?.length > 0 &&
-                  product?.description?.ram_memory[0]?.installed_size?.length >
-                    0 &&
-                  product?.description?.ram_memory[0]?.technology?.length >
-                    0 && (
-                    <tr>
-                      <td>RAM</td>
-                      <td>
-                        {
-                          product?.description?.ram_memory[0]?.installed_size[0]
-                            ?.value
-                        }
-                        &nbsp;
-                        {
-                          product?.description?.ram_memory[0]?.installed_size[0]
-                            ?.unit
-                        }
-                        &nbsp;
-                        {
-                          product?.description?.ram_memory[0]?.technology[0]
-                            ?.value
-                        }
-                      </td>
-                    </tr>
-                  )}
-                {product?.description?.hard_disk?.length > 0 &&
-                  product?.description?.hard_disk[0]?.size?.length > 0 &&
-                  product?.description?.hard_disk[0]?.description?.length >
-                    0 && (
-                    <tr>
-                      <td>Hard Drive</td>
-                      <td>
-                        {product?.description?.hard_disk[0]?.size[0]?.value}
-                        &nbsp;
-                        {product?.description?.hard_disk[0]?.size[0]?.unit}
-                        &nbsp;
-                        {
-                          product?.description?.hard_disk[0]?.description[0]
-                            ?.value
-                        }
-                      </td>
-                    </tr>
-                  )}
-                {product?.description?.wireless_communication_technology
-                  ?.length > 0 && (
-                  <tr>
-                    <td>Wireless Type</td>
-                    <td>
-                      {
-                        product?.description
-                          ?.wireless_communication_technology[0]?.value
-                      }
-                    </td>
-                  </tr>
+            {collapseAll && (
+              <>
+                <Grid container onClick={() => setSummary(!summary)}>
+                  <Grid>
+                    {summary ? (
+                      <KeyboardArrowUpIcon />
+                    ) : (
+                      <KeyboardArrowDownIcon />
+                    )}
+                  </Grid>
+                  <Grid>
+                    <p className='collapse-text mt-1'>Summary</p>
+                  </Grid>
+                </Grid>
+                {summary && (
+                  <table className='tech-details-container'>
+                    {processorChecker && (
+                      <tr>
+                        <td>Processor</td>
+                        <td>
+                          {product?.description?.cpu_model[0]?.speed[0]?.value +
+                            ' ' +
+                            product?.description?.cpu_model[0]?.speed[0]?.unit +
+                            ' ' +
+                            product?.description?.cpu_model[0]?.family[0]
+                              ?.value}
+                        </td>
+                      </tr>
+                    )}
+                    {ramChecker && (
+                      <tr>
+                        <td>RAM</td>
+                        <td>
+                          {product?.description?.ram_memory[0]
+                            ?.installed_size[0]?.value +
+                            ' ' +
+                            product?.description?.ram_memory[0]
+                              ?.installed_size[0]?.unit +
+                            ' ' +
+                            product?.description?.ram_memory[0]?.technology[0]
+                              ?.value}
+                        </td>
+                      </tr>
+                    )}
+                    {hardDriveChecker && (
+                      <tr>
+                        <td>Hard Drive</td>
+                        <td>
+                          {product?.description?.hard_disk[0]?.size[0]?.value +
+                            ' ' +
+                            product?.description?.hard_disk[0]?.size[0]?.unit +
+                            ' ' +
+                            product?.description?.hard_disk[0]?.description[0]
+                              ?.value}
+                        </td>
+                      </tr>
+                    )}
+                    {wirelessChecker && (
+                      <tr>
+                        <td>Wireless Type</td>
+                        <td>
+                          {
+                            product?.description
+                              ?.wireless_communication_technology[0]?.value
+                          }
+                        </td>
+                      </tr>
+                    )}
+                    {product?.description?.graphics_description?.length > 0 && (
+                      <tr>
+                        <td>Card Description</td>
+                        <td>
+                          {product?.description?.graphics_description[0]?.value}
+                        </td>
+                      </tr>
+                    )}
+                    {itemTypeChecker && (
+                      <tr>
+                        <td>Item Type</td>
+                        <td>
+                          {product?.description?.item_type_keyword[0]?.value}
+                        </td>
+                      </tr>
+                    )}
+                  </table>
                 )}
-              </table>
-            )}
-            <Grid container onClick={() => setOther(!other)} mt={1}>
-              <Grid>
-                {other ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-              </Grid>
-              <Grid>
-                <p className='collapse-text mt-1'>Other Technical Details</p>
-              </Grid>
-            </Grid>
-            {other && (
-              <table className='tech-details-container'>
-                <tr>
-                  <td>Brand</td>
-                  <td>
-                    {product?.description?.brand?.length > 0 ? (
-                      product?.description?.brand[0]?.value
+                <Grid container onClick={() => setOther(!other)} mt={1}>
+                  <Grid>
+                    {other ? (
+                      <KeyboardArrowUpIcon />
                     ) : (
-                      <></>
+                      <KeyboardArrowDownIcon />
                     )}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Series</td>
-                  <td>LG27MK400HB</td>
-                </tr>
-                <tr>
-                  <td>Item model number</td>
-                  <td>
-                    {' '}
-                    {product?.description?.model_number?.length > 0 ? (
-                      product?.description?.model_number[0]?.value
-                    ) : (
-                      <></>
+                  </Grid>
+                  <Grid>
+                    <p className='collapse-text mt-1'>
+                      Other Technical Details
+                    </p>
+                  </Grid>
+                </Grid>
+                {other && (
+                  <table className='tech-details-container'>
+                    {product?.description?.brand?.length > 0 && (
+                      <tr>
+                        <td>Brand</td>
+                        <td>{product?.description?.brand[0]?.value}</td>
+                      </tr>
                     )}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Item Weight</td>
-                  <td>
-                    {product?.description?.item_package_weight?.length > 0 ? (
-                      product?.description?.item_package_weight[0]?.value +
-                      ' ' +
-                      product?.description?.item_package_weight[0]?.unit
-                    ) : (
-                      <></>
+                    {/* {product?.description?.part_number?.length > 0 && (
+                  <tr>
+                    <td>Brand</td>
+                    <td>{product?.description?.part_number[0]?.value}</td>
+                  </tr>
+                )} */}
+                    {product?.description?.model_number?.length > 0 && (
+                      <tr>
+                        <td>Item Model Number</td>
+                        <td> {product?.description?.model_number[0]?.value}</td>
+                      </tr>
                     )}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Product Dimensions</td>
-                  <td>
+                    {product?.description?.hardware_platform?.length > 0 && (
+                      <tr>
+                        <td>Hardware Platform</td>
+                        <td>
+                          {' '}
+                          {product?.description?.hardware_platform[0]?.value}
+                        </td>
+                      </tr>
+                    )}
+                    {product?.description?.operating_system?.length > 0 && (
+                      <tr>
+                        <td>Operating System</td>
+                        <td>
+                          {' '}
+                          {product?.description?.operating_system[0]?.value}
+                        </td>
+                      </tr>
+                    )}
+                    {product?.description?.item_package_weight?.length > 0 && (
+                      <tr>
+                        <td>Item Weight</td>
+                        <td>
+                          {product?.description?.item_package_weight[0]?.value +
+                            ' ' +
+                            product?.description?.item_package_weight[0]?.unit}
+                        </td>
+                      </tr>
+                    )}
                     {product?.description?.item_package_dimensions?.length >
-                    0 ? (
-                      product?.description?.item_package_dimensions[0]?.height
-                        ?.value +
-                      ' × ' +
-                      product?.description?.item_package_dimensions[0]?.length
-                        ?.value +
-                      ' × ' +
-                      product?.description?.item_package_dimensions[0]?.width
-                        ?.value +
-                      ' ' +
-                      product?.description?.item_package_dimensions[0]?.height
-                        ?.unit
-                    ) : (
-                      <></>
+                      0 && (
+                      <tr>
+                        <td>Product Dimensions</td>
+                        <td>
+                          {product?.description?.item_package_dimensions[0]
+                            ?.height?.value +
+                            ' × ' +
+                            product?.description?.item_package_dimensions[0]
+                              ?.length?.value +
+                            ' × ' +
+                            product?.description?.item_package_dimensions[0]
+                              ?.width?.value +
+                            ' ' +
+                            product?.description?.item_package_dimensions[0]
+                              ?.height?.unit}
+                        </td>
+                      </tr>
                     )}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Item Dimensions LxWxH</td>
-                  <td>
                     {product?.description?.item_package_dimensions?.length >
-                    0 ? (
-                      product?.description?.item_package_dimensions[0]?.height
-                        ?.value +
-                      ' × ' +
-                      product?.description?.item_package_dimensions[0]?.length
-                        ?.value +
-                      ' × ' +
-                      product?.description?.item_package_dimensions[0]?.width
-                        ?.value +
-                      ' ' +
-                      product?.description?.item_package_dimensions[0]?.height
-                        ?.unit
-                    ) : (
-                      <></>
+                      0 && (
+                      <tr>
+                        <td>Item Dimensions LxWxH</td>
+                        <td>
+                          {product?.description?.item_package_dimensions[0]
+                            ?.height?.value +
+                            ' × ' +
+                            product?.description?.item_package_dimensions[0]
+                              ?.length?.value +
+                            ' × ' +
+                            product?.description?.item_package_dimensions[0]
+                              ?.width?.value +
+                            ' ' +
+                            product?.description?.item_package_dimensions[0]
+                              ?.height?.unit}
+                        </td>
+                      </tr>
                     )}
-                  </td>
-                </tr>
-                <tr>
+                    {/* <tr>
                   <td>Color</td>
                   <td>Black</td>
                 </tr>
                 <tr>
                   <td>Power Source</td>
                   <td>AC</td>
-                </tr>
-                <tr>
-                  <td>Manufacturer</td>
-                  <td>
-                    {product?.description?.manufacturer?.length > 0 ? (
-                      product?.description?.manufacturer[0]?.value
-                    ) : (
-                      <></>
+                </tr> */}
+                    {product?.description?.manufacturer?.length > 0 && (
+                      <tr>
+                        <td>Manufacturer</td>
+                        <td>{product?.description?.manufacturer[0]?.value}</td>
+                      </tr>
                     )}
-                  </td>
-                </tr>
-                <tr>
+                    {product?.description?.processor_count?.length > 0 && (
+                      <tr>
+                        <td>Number of Processor</td>
+                        <td>
+                          {product?.description?.processor_count[0]?.value}
+                        </td>
+                      </tr>
+                    )}
+                    {product?.description?.system_ram_type?.length > 0 && (
+                      <tr>
+                        <td>Computer Memory Type</td>
+                        <td>
+                          {product?.description?.system_ram_type[0]?.value}
+                        </td>
+                      </tr>
+                    )}
+                    {product?.description?.flash_memory?.length > 0 &&
+                      product?.description?.flash_memory[0]?.installed_size
+                        ?.length > 0 && (
+                        <tr>
+                          <td>Flash Memory Size</td>
+                          <td>
+                            {product?.description?.flash_memory[0]
+                              ?.installed_size[0]?.value +
+                              ' ' +
+                              product?.description?.flash_memory[0]
+                                ?.installed_size[0]?.unit}
+                          </td>
+                        </tr>
+                      )}
+                    {product?.description?.hardware_interface?.length > 0 && (
+                      <tr>
+                        <td>Hard Drive Interface</td>
+                        <td>
+                          {product?.description?.hardware_interface.map(
+                            (item, index) => (
+                              <span key={index}>{item.value + ' '}</span>
+                            ),
+                          )}
+                        </td>
+                      </tr>
+                    )}
+                    {/* <tr>
                   <td>Country of Origin</td>
                   <td>China</td>
-                </tr>
-                <tr>
+                </tr> */}
+                    {/* <tr>
                   <td>Is Discontinued By Manufacturer</td>
                   <td>No</td>
-                </tr>
-                <tr>
-                  <td>Date First Available</td>
-                  <td>
+                </tr> */}
                     {product?.description?.product_site_launch_date?.length >
-                    0 ? (
-                      formatDate(
-                        product?.description?.product_site_launch_date[0]
-                          ?.value,
-                      )
-                    ) : (
-                      <></>
+                      0 && (
+                      <tr>
+                        <td>Date First Available</td>
+                        <td>
+                          {formatDate(
+                            product?.description?.product_site_launch_date[0]
+                              ?.value,
+                          )}
+                        </td>
+                      </tr>
                     )}
-                  </td>
-                </tr>
-              </table>
+                  </table>
+                )}
+              </>
             )}
           </>
         </Grid>
-        <Grid item lg={6} mt={4}>
+        <Grid item lg={6}>
+          <Grid>
+            {isUpSmall && (
+              <h3 className='tech-details-heading' style={{ fontSize: '18px' }}>
+                Additional Information
+              </h3>
+            )}
+          </Grid>
           {!isUpSmall && (
             <h3 className='tech-details-heading' style={{ fontSize: '16px' }}>
               Additional Information

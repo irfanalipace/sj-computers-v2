@@ -100,8 +100,7 @@ const ShippingMehtod = () => {
               className={`shipping-method-input-group ${
                 activeShippingMethod == shippingMethod?.id && 'active'
               }`}
-              key={shippingMethod?.id}
-            >
+              key={shippingMethod?.id}>
               <input
                 id={shippingMethod?.id}
                 type='radio'
@@ -122,15 +121,13 @@ const ShippingMehtod = () => {
                     <span
                       style={{
                         fontWeight: '500',
-                      }}
-                    >
+                      }}>
                       Free Shipping
                       <p
                         style={{
                           fontSize: '10px',
                           paddingTop: '5px',
-                        }}
-                      >
+                        }}>
                         Mon, Nov 13
                       </p>
                     </span>
@@ -159,8 +156,7 @@ const ShippingMehtod = () => {
                   className='price-items'
                   style={{
                     fontWeight: '600',
-                  }}
-                >
+                  }}>
                   Note:
                 </strong>
                 Parcel{' '}
@@ -169,8 +165,7 @@ const ShippingMehtod = () => {
                 <strong
                   style={{
                     fontWeight: '600',
-                  }}
-                >
+                  }}>
                   {' '}
                   {
                     orderEstimatedDelivery?.free_shipment_amount?.estimate_day

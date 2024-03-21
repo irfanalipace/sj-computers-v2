@@ -11,7 +11,7 @@ RUN pnpm i --prod
 RUN pnpm run build
 
 FROM public.ecr.aws/docker/library/nginx:1.21.6-alpine as prod 
-# COPY ./dev/config/nginx-site.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx.default.conf /etc/nginx/conf.d/default.conf
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY --from=base /app/dist .

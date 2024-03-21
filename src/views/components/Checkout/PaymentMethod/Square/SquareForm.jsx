@@ -14,7 +14,7 @@ import {
 } from '../../../../../core/utils/cartHelpers';
 import usePaymentData from '../usePaymentData';
 import { makeDataLayerItemObject } from '../../../../../core/utils/helpers';
-
+import config from '../../../../../core/services/configService';
 export const SquareForm = ({ hideCloseBtn, hideModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -93,9 +93,9 @@ export const SquareForm = ({ hideCloseBtn, hideModal }) => {
   return (
     <div>
       <PaymentForm
-        applicationId={import.meta.env.VITE_APP_SQUARE_APPLICATION_ID}
+        applicationId={config.VITE_APP_SQUARE_APPLICATION_ID}
         cardTokenizeResponseReceived={onTokenSuccess}
-        locationId={import.meta.env.VITE_APP_SQUARE_LOCATION_ID}
+        locationId={config.VITE_APP_SQUARE_LOCATION_ID}
         formProps={{
           className: 'payment-form',
         }}>

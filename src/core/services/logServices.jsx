@@ -1,6 +1,7 @@
+import config from '../services/configService';
 export const initLogService = () => {
   // Replace the global console object
-  if (import.meta.env.VITE_APP_ENVIRONMENT === 'development') {
+  if (config.VITE_APP_ENVIRONMENT === 'development') {
     // Create a custom console object
     const print = function (...args) {
       console.log(...args);

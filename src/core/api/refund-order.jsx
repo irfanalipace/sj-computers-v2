@@ -1,6 +1,7 @@
 import ApiService from '@services/apiService';
+import config from '../services/configService.js';
 
-const OTOBaseURL = import.meta.env.VITE_APP_OTO_BASE_URL;
+const OTOBaseURL = config.VITE_APP_OTO_BASE_URL;
 
 export function verifyEmailSjApi(param) {
   return new Promise((resolve, reject) => {
