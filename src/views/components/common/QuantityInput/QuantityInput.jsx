@@ -2,17 +2,22 @@ import { useState, useEffect } from 'react';
 
 import './QuantityInput.css';
 import { useSelector } from 'react-redux';
-
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 export const QuantityInput = ({
   onChange,
   value,
   minQuantity = 1,
-  maxQuantity: initialMaxQuantity = 1000,
+  maxQuantity,
+  cartPage = false,
 }) => {
   const [quantity, setQuantity] = useState(parseInt(value) || minQuantity);
   const [hasRendered, setHasRendered] = useState(false);
   const isAuthenticated = useSelector(state => state?.auth?.isAuthenticated);
-  const [maxQuantity, setMaxQuantity] = useState(initialMaxQuantity);
+  const [maxQuantityLocal, setMaxQuantity] = useState(maxQuantity);
   useEffect(() => {
     if (hasRendered) {
       if (typeof onChange === 'function') onChange(quantity || 0);
@@ -21,12 +26,12 @@ export const QuantityInput = ({
     }
   }, [quantity]);
   useEffect(() => {
-    if (!isAuthenticated) {
-      setMaxQuantity(10);
+    if (maxQuantity > 30) {
+      setMaxQuantity(30);
     } else {
-      setMaxQuantity(initialMaxQuantity);
+      setMaxQuantity(maxQuantity);
     }
-  }, [isAuthenticated, initialMaxQuantity]);
+  }, [maxQuantity]);
 
   // const handleQuantityChange = (e) => {
   //     const newQuantity = parseInt(e.target.value);
@@ -49,29 +54,63 @@ export const QuantityInput = ({
   //     }
   //     return options;
   // };
+
+  const handleChange = event => {
+    setQuantity(event.target.value);
+  };
+  function createArrayUpToMax(max) {
+    var array = [];
+    for (var i = 1; i <= max; i++) {
+      array.push(i);
+    }
+    return array;
+  }
   return (
-    <div className='quantity-container'>
-      <p className='mb-1'>Quantity</p>
-      <div className='quantity-inner'>
-        <button
-          className='quantity-button'
-          onClick={e =>
-            setQuantity(
-              quantity > minQuantity ? parseInt(quantity) - 1 : quantity,
-            )
-          }>
-          -
-        </button>
-        <input
-          type='number'
+    <>
+      <FormControl
+        sx={{
+          minWidth: cartPage ? '50px' : '100%',
+        }}
+        size='small'>
+        <Select
+          sx={{
+            background: '#F0F2F2',
+            borderRadius: '7px',
+            boxShadow: '0 2px 5px rgba(15,17,17,.15)',
+            height: cartPage ? '30px' : '',
+          }}
+          labelId='demo-select-small-label'
+          id='demo-select-small'
           value={quantity}
-          onChange={e =>
-            e.target.value >= minQuantity && e.target.value <= maxQuantity
-              ? setQuantity(e.target.value)
-              : quantity
-          }
-        />
-        {/* <div className="quantity-select-wrapper">
+          onChange={handleChange}
+          renderValue={value => `${cartPage ? 'Qty' : 'Quantity'} - ${value}`}>
+          {createArrayUpToMax(maxQuantityLocal)?.map(item => {
+            return <MenuItem value={item}>{item}</MenuItem>;
+          })}
+        </Select>
+      </FormControl>
+
+      <div className='quantity-container'>
+        <div className='quantity-inner'>
+          {/* <button
+            className='quantity-button'
+            onClick={e =>
+              setQuantity(
+                quantity > minQuantity ? parseInt(quantity) - 1 : quantity,
+              )
+            }>
+            -
+          </button> */}
+          {/* <input
+            type='number'
+            value={quantity}
+            onChange={e =>
+              e.target.value >= minQuantity && e.target.value <= maxQuantity
+                ? setQuantity(e.target.value)
+                : quantity
+            }
+          /> */}
+          {/* <div className="quantity-select-wrapper">
                     <select
                         value={quantity}
                         // onChange={handleQuantityChange}
@@ -86,21 +125,17 @@ export const QuantityInput = ({
                         {generateOptions()}
                     </select>
                 </div> */}
-        <button
-          className='quantity-button'
-          onClick={e =>
-            setQuantity(
-              quantity < maxQuantity ? parseInt(quantity) + 1 : quantity,
-            )
-          }>
-          +
-        </button>
+          {/* <button
+            className='quantity-button'
+            onClick={e =>
+              setQuantity(
+                quantity < maxQuantity ? parseInt(quantity) + 1 : quantity,
+              )
+            }>
+            +
+          </button> */}
+        </div>
       </div>
-      {!isAuthenticated && quantity === 10 && (
-        <p style={{ color: '#B12704', fontSize: '10px' }}>
-          Quantiy can not be greater than 10 for unAuthenticated users
-        </p>
-      )}
-    </div>
+    </>
   );
 };

@@ -79,7 +79,7 @@ const ProtectionPlanDrawer = ({
                   />
                 </Grid>
                 <Stack spacing={0}>
-                  <Typography>
+                  <Typography sx={{ ml: 1 }}>
                     {`${plan.value}-Year Extended Warranty `}
                     <span style={{ color: 'red' }}>${plan.price}</span>
                   </Typography>
