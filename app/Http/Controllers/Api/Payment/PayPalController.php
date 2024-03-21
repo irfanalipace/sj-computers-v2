@@ -86,10 +86,10 @@ class PayPalController extends Controller
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
-
+       
         $getCache = Cache::get("paypal_transaction_".$request->token);
         $shippingAddress = $getCache['shippping_address']; 
-             
+        
         $user =  $getCache['user']; 
         $userType =  $getCache['user_type']; 
         $cartDetails = $getCache['cart_details'];  
@@ -187,7 +187,7 @@ class PayPalController extends Controller
 
     public function paypalCancel($error = 'Payment is cancelled.')
     { 
-        return redirect('checkout?error=' . $error.'&payment_type=paypal');
+        return redirect(config('app.react_app_url').'checkout?error=' . $error.'&payment_type=paypal');
        
     }
 }
