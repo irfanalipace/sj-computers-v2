@@ -25,7 +25,6 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
 
   const handleChildButton = () => {
     const updatedImages = [...allImages, ...images];
-    // debugger;
     onhandleCallback(updatedImages, uploadedImgs);
     setAllImages(updatedImages);
     setUploadedImgs([]);
@@ -35,9 +34,7 @@ const FileUpload = ({ onClose, onhandleCallback, onDeleteImage }) => {
   const onFileSelectCallback = (validFiles, errors) => {
     setErrors(errors);
     console.log(uploadedImgs);
-    debugger;
     setUploadedImgs([...uploadedImgs, ...validFiles]);
-    // debugger;
     setImages(prevImages => [
       ...prevImages,
       ...validFiles.map(file => ({
