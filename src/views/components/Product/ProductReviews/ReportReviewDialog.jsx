@@ -44,6 +44,7 @@ export default function ReportDialog(props) {
       toast.error('Failed to report review');
     } finally {
       setLoading(false);
+      handleClose();
     }
   };
 
@@ -64,8 +65,7 @@ export default function ReportDialog(props) {
             fontWeight={400}
             fontFamily={'Inter'}
             lineHeight={'20px'}
-            color={'#0F1111'}
-          >
+            color={'#0F1111'}>
             Optional: Why are you reporting this?
           </Typography>
         </FormLabel>
@@ -118,8 +118,7 @@ export default function ReportDialog(props) {
           fontFamily={'Inter'}
           lineHeight={'20px'}
           color={'#0F1111'}
-          sx={{ maxWidth: '380px', mb: 2 }}
-        >
+          sx={{ maxWidth: '380px', mb: 2 }}>
           We'll check this if this reveiw meets our{' '}
           <span style={{ color: '#007185' }}>community guidelines.</span> if
           doesn't, we'll remove it.
@@ -133,8 +132,7 @@ export default function ReportDialog(props) {
             // loading={loading}
             onClick={reportReview}
             variant='contained'
-            color='success'
-          >
+            color='success'>
             {loading ? 'Submitting' : 'Submit'}
           </Button>
         </Box>
@@ -151,8 +149,7 @@ const CheckBoxLabel = ({ title, desc }) => {
         fontWeight={400}
         fontFamily={'Inter'}
         lineHeight={'20px'}
-        color={'#0F1111'}
-      >
+        color={'#0F1111'}>
         {title}
       </Typography>
       <Typography
@@ -160,8 +157,7 @@ const CheckBoxLabel = ({ title, desc }) => {
         fontWeight={400}
         fontFamily={'Inter'}
         lineHeight={'20px'}
-        color={'#565959'}
-      >
+        color={'#565959'}>
         {desc}
       </Typography>
     </Stack>
