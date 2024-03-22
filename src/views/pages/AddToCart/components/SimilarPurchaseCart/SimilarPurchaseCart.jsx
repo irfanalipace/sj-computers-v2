@@ -112,18 +112,15 @@ const SimilarPurchaseCart = ({ products, isLoading }) => {
             {product?.price?.toString().split('.')[0]}.
             {product?.price?.toString().split('.')[1]}
           </div>
-          <div style={{ fontSize: '12px' }} className='mt-0 mb-2'>
+          {/* <div style={{ fontSize: '12px' }} className='mt-0 mb-2'>
             List Price:&ensp;
             <span style={{ textDecoration: 'line-through' }}>
               ${product?.price}
             </span>
             <span style={{ fontWeight: 'bold', lineHeight: '16px' }}>
-              {/* {
-                            orderEstimatedDelivery?.free_shipment_amount
-                                ?.estimate_day
-                        } */}
+            
             </span>
-          </div>
+          </div> */}
           {product.deliveryCharges && (
             <div className='product-delivery-charges'>
               <FontAwesomeIcon icon={faTruck} /> {product.deliveryCharges}
