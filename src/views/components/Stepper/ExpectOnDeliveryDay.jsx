@@ -39,14 +39,14 @@ export default function ExpectOnDeliveryDay() {
           fontWeight={400}
           fontSize={'12px'}
           lineHeight={'17px'}>
-          Once your Order is shipped, you'll recieve a conformation email with
+          Once your order is shipped, you'll recieve a conformation email with
           tracking details. You can expect secure packaging and timely delivery
           on all your products. It is important to note that some orders ma
           require a signature upon delivery so have someoe present at the time
           of delivery. Enjoy the unboxing experience and perform a quick quality
           check upon arrival to make sure you got everything your ordered. To
-          make things easier, our customer support team is availablefor any
-          assistance needed. Your statifaction is our priority t SJ Computers.
+          make things easier, our customer support team is available for any
+          assistance needed. Your statifaction is our priority at SJ Computers.
         </Typography>
       </Stack>
     </Box>

@@ -131,87 +131,89 @@ const SimilarInterestSlider = ({ products }) => {
 
   return (
     <>
-      <div
-        // className="recommendation-container"
-        style={{
-          background: '#fff',
-          marginLeft: '10px',
-          marginTop: '20px',
-          marginBottom: '20px',
-        }}>
-        <div className='product-image-class'>
-          <Typography
-            variant='h5'
-            fontSize={16}
-            fontFamily={'Inter'}
-            fontWeight={600}
-            pt={4}
-            mt={1}
-            ml={2}
-            mb={5}>
-            People who browsed similar items also showed interest in these
-          </Typography>
+      {products?.length > 0 && (
+        <div
+          // className="recommendation-container"
+          style={{
+            background: '#fff',
+            marginLeft: '10px',
+            marginTop: '20px',
+            marginBottom: '20px',
+          }}>
+          <div className='product-image-class'>
+            <Typography
+              variant='h5'
+              fontSize={16}
+              fontFamily={'Inter'}
+              fontWeight={600}
+              pt={4}
+              mt={1}
+              ml={2}
+              mb={5}>
+              People who browsed similar items also showed interest in these
+            </Typography>
 
-          <div
-            className='slider-wrapper my-swiper-slider-mobile-changes'
-            style={{ margin: '10px 20px' }}>
-            {!products ? (
-              <LoaderComponent />
-            ) : (
-              <Swiper
-                slidesPerView={5}
-                className='my-unique-swiper'
-                style={{ padding: '0 30px' }}
-                navigation
-                breakpoints={{
-                  320: {
-                    slidesPerView: 2,
-                  },
-                  480: {
-                    slidesPerView: 2,
-                  },
-                  640: {
-                    slidesPerView: 4,
-                  },
+            <div
+              className='slider-wrapper my-swiper-slider-mobile-changes'
+              style={{ margin: '10px 20px' }}>
+              {!products ? (
+                <LoaderComponent />
+              ) : (
+                <Swiper
+                  slidesPerView={5}
+                  className='my-unique-swiper'
+                  style={{ padding: '0 30px' }}
+                  navigation
+                  breakpoints={{
+                    320: {
+                      slidesPerView: 2,
+                    },
+                    480: {
+                      slidesPerView: 2,
+                    },
+                    640: {
+                      slidesPerView: 4,
+                    },
 
-                  768: {
-                    slidesPerView: 5,
-                  },
+                    768: {
+                      slidesPerView: 5,
+                    },
 
-                  1200: {
-                    slidesPerView: 5,
-                  },
-                }}>
-                {products?.map(product => (
-                  <SwiperSlide key={'ps-' + product?.id}>
-                    <div>
-                      <div className={`prodduct`}>
-                        <Link to={`${new URL(product?.url).pathname}`}>
-                          <div className={`product-image`}>
-                            <div className='image-wrapper'>
-                              <LazyLoadImage
-                                width={'100%'}
-                                height={'100%'}
-                                src={product.image}
-                                alt={product?.name
-                                  ?.trim()
-                                  ?.split(' ')
-                                  ?.slice(0, 9)
-                                  ?.join(' ')}
-                              />
+                    1200: {
+                      slidesPerView: 5,
+                    },
+                  }}>
+                  {products?.map(product => (
+                    <SwiperSlide key={'ps-' + product?.id}>
+                      <div>
+                        <div className={`prodduct`}>
+                          <Link to={`${new URL(product?.url).pathname}`}>
+                            <div className={`product-image`}>
+                              <div className='image-wrapper'>
+                                <LazyLoadImage
+                                  width={'100%'}
+                                  height={'100%'}
+                                  src={product.image}
+                                  alt={product?.name
+                                    ?.trim()
+                                    ?.split(' ')
+                                    ?.slice(0, 9)
+                                    ?.join(' ')}
+                                />
+                              </div>
                             </div>
-                          </div>
-                        </Link>
-                        <ProductDetails product={product} />
-                      </div>
-                    </div>{' '}
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            )}
+                          </Link>
+                          <ProductDetails product={product} />
+                        </div>
+                      </div>{' '}
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

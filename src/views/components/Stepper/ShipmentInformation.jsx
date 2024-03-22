@@ -32,7 +32,7 @@ export default function ShipmentInformation({
           value={
             <div style={{ textDecoration: 'underline' }}>
               {/* {trackingInfo?.trackingNumberInfo?.trackingNumber} */}
-              {trackingId}
+              {trackingId === 'null' ? 'N/A' : trackingId}
             </div>
           }
         />
