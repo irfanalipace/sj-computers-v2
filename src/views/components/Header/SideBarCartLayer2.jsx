@@ -113,7 +113,26 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
     return false;
   };
 
-  const [cartClickHandler, addingItemToCart] = useAddToCart();
+  const AddToCartButton = ({ product }) => {
+    const [cartClickHandler] = useAddToCart(product, 1);
+
+    return (
+      <button
+        style={{
+          color: 'white',
+          backgroundColor: '#52ac66',
+        }}
+        disabled={alreadInCart(product.id)}
+        onClick={e => {
+          cartClickHandler(
+            null,
+            `/cart/${product?.name}/dp/${product?.asin}/${product.id}`,
+          );
+        }}>
+        {alreadInCart(product.id) ? 'Already in cart' : '  Add to cart '}
+      </button>
+    );
+  };
 
   return (
     <div>
@@ -352,23 +371,24 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
                                 {/* <Link
                                   to='/cart'
                                   className='text-decoration-none'> */}
-                                <button
+                                <AddToCartButton product={item} />
+                                {/* <button
                                   style={{
                                     color: 'white',
                                     backgroundColor: '#52ac66',
                                   }}
                                   disabled={alreadInCart(item.id)}
                                   onClick={e => {
-                                    e.stopPropagation();
-                                    cartClickHandler(
-                                      null,
-                                      `/cart/${item?.name}/dp/${item?.asin}/${item.id}`,
-                                    );
+                                    handlecart(item);
+                                    // cartClickHandler(
+                                    //   null,
+                                    //   `/cart/${item?.name}/dp/${item?.asin}/${item.id}`,
+                                    // );
                                   }}>
                                   {alreadInCart(item.id)
                                     ? 'Already in cart'
                                     : '  Add to cart '}
-                                </button>
+                                </button> */}
                                 {/* </Link> */}
                               </div>
                             </div>
