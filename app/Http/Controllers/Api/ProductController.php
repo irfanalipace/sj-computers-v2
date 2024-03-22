@@ -109,9 +109,19 @@ class ProductController extends BaseController
     public function getProductFilterList(Request $request)
     {
         $data = [];
-       
-        $category = (isset($request->category) && $request->category) ? $request->category : []; 
-        
+
+        $category = (isset($request->category) && $request->category) ? $request->category : [];
+
+        if ($category == 'bto') {
+            $data['brand'] = $this->queryProductInfo('brand', $category);
+
+            $data['price'] = $this->queryProductInfo('price', $category);
+
+            $data['review'] = $this->queryProductInfo('review', $category);
+
+            return $this->sendResponse($data);
+        }
+
         $data['processor'] = $this->queryProductInfo('processor', $category);
         $data['ram_memory'] = $this->queryProductInfo('ram_memory', $category);
         $data['operating_system'] = $this->queryProductInfo('operating_system', $category);
@@ -508,7 +518,7 @@ class ProductController extends BaseController
                
                 // $filter = json_encode($filter, true);
                 $filter = json_decode($filter, true);
-               
+
                 $key = $filter['key'] ?? '';
                 $value = $filter['value'] ?? '';
 
