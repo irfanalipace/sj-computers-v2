@@ -271,7 +271,7 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
             </>
           )}
 
-          {!isUpSmall && (
+          {/* {!isUpSmall && (
             <>
               <h1
                 className='pt-3 mt-3'
@@ -312,12 +312,12 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
                 })}
               </div>
             </>
-          )}
-          {!isUpSmall && (
+          )} */}
+          {/* {!isUpSmall && (
             <h3 className='product-section-heading mt-3 mb-3 py-1'>
               {PRODUCT_FILTER_LABEL_ENUM[filterBy]}
             </h3>
-          )}
+          )} */}
           {!isUpSmall && (
             <>
               {reviewLoading ? (

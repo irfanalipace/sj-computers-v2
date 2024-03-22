@@ -21,10 +21,10 @@ const AllCategoriesHeader = () => {
           name: 'Laptops',
           url: '/category/laptops',
         },
-        {
-          name: 'Monitors',
-          url: '/category/monitors',
-        },
+        // {
+        //   name: 'Monitors',
+        //   url: '/category/monitors',
+        // },
         {
           name: 'Desktops',
           url: '/category/desktop',
@@ -44,10 +44,10 @@ const AllCategoriesHeader = () => {
           name: 'Laptops',
           url: '/category/laptops',
         },
-        {
-          name: 'Monitors',
-          url: '/category/monitors',
-        },
+        // {
+        //   name: 'Monitors',
+        //   url: '/category/monitors',
+        // },
         {
           name: 'Desktops',
           url: '/category/desktop',
@@ -67,39 +67,39 @@ const AllCategoriesHeader = () => {
           name: 'Laptops',
           url: '/category/laptops',
         },
-        {
-          name: 'Monitors',
-          url: '/category/monitors',
-        },
-        {
-          name: 'Desktops',
-          url: '/category/desktop',
-        },
-      ],
-    },
-    {
-      id: 4,
-      name: 'Monitors',
-      slug: 'monitor',
-      sub_categories: [
-        {
-          name: 'Desktops',
-          url: '/category/desktop',
-        },
-        {
-          name: 'Laptops',
-          url: '/category/laptops',
-        },
-        {
-          name: 'Monitors',
-          url: '/category/monitors',
-        },
+        // {
+        //   name: 'Monitors',
+        //   url: '/category/monitors',
+        // },
         {
           name: 'Desktops',
           url: '/category/desktop',
         },
       ],
     },
+    // {
+    //   id: 4,
+    //   name: 'Monitors',
+    //   slug: 'monitor',
+    //   sub_categories: [
+    //     {
+    //       name: 'Desktops',
+    //       url: '/category/desktop',
+    //     },
+    //     {
+    //       name: 'Laptops',
+    //       url: '/category/laptops',
+    //     },
+    //     // {
+    //     //   name: 'Monitors',
+    //     //   url: '/category/monitors',
+    //     // },
+    //     {
+    //       name: 'Desktops',
+    //       url: '/category/desktop',
+    //     },
+    //   ],
+    // },
     {
       id: 5,
       name: 'Window 11',
@@ -113,10 +113,10 @@ const AllCategoriesHeader = () => {
           name: 'Laptops',
           url: '/category/laptops',
         },
-        {
-          name: 'Monitors',
-          url: '/category/monitors',
-        },
+        // {
+        //   name: 'Monitors',
+        //   url: '/category/monitors',
+        // },
         {
           name: 'Desktops',
           url: '/category/desktop',
@@ -136,10 +136,10 @@ const AllCategoriesHeader = () => {
           name: 'Laptops',
           url: '/category/laptops',
         },
-        {
-          name: 'Monitors',
-          url: '/category/monitors',
-        },
+        // {
+        //   name: 'Monitors',
+        //   url: '/category/monitors',
+        // },
         {
           name: 'Desktops',
           url: '/category/desktop',
@@ -159,10 +159,10 @@ const AllCategoriesHeader = () => {
           name: 'Laptops',
           url: '/category/laptops',
         },
-        {
-          name: 'Monitors',
-          url: '/category/monitors',
-        },
+        // {
+        //   name: 'Monitors',
+        //   url: '/category/monitors',
+        // },
         {
           name: 'Desktops',
           url: '/category/desktop',
