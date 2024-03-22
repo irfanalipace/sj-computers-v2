@@ -50,7 +50,7 @@ const FlashProducts = ({ images }) => {
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}>
-                    See all offer
+                    See all
                   </p>
                 </Link>
               </div>

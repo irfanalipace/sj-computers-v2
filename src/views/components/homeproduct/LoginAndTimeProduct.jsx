@@ -223,7 +223,7 @@ const LoginAndTimeProduct = () => {
                       <h5
                         className='time-product-name'
                         style={{ color: 'black' }}>
-                        {discoutedProduct?.product.name}
+                        {discoutedProduct?.product?.name}
                       </h5>
                       <Stack mb={1} alignItems={'start'} spacing={1}>
                         <Stack
@@ -232,7 +232,7 @@ const LoginAndTimeProduct = () => {
                           // spacing={1}
                           direction={'row'}>
                           <StarRatings
-                            rating={discoutedProduct.product.rating}
+                            rating={discoutedProduct?.product?.rating}
                             starRatedColor='rgb(232, 126, 36)'
                             numberOfStars={5}
                             name='rating'
@@ -247,7 +247,7 @@ const LoginAndTimeProduct = () => {
                             fontSize={'12px'}
                             lineHeight={'17px'}
                             color={'#007185'}>
-                            ({discoutedProduct.product.total_review})
+                            ({discoutedProduct?.product?.total_review})
                           </Typography>
                         </Stack>
                         {/* {type === "recommended" && getRandomComponent()} */}
@@ -263,13 +263,13 @@ const LoginAndTimeProduct = () => {
                         <div className='discount-price'>
                           <span>$</span>
                           {
-                            discoutedProduct.additional_information?.discounted_price
+                            discoutedProduct?.additional_information?.discounted_price
                               .toString()
                               .split('.')[0]
                           }
                           <sup>
                             {
-                              discoutedProduct.additional_information?.discounted_price
+                              discoutedProduct?.additional_information?.discounted_price
                                 ?.toString()
                                 .split('.')[1]
                             }
@@ -282,7 +282,7 @@ const LoginAndTimeProduct = () => {
                         <div className='save-value'>
                           <span>
                             Save +{' '}
-                            {discoutedProduct.additional_information?.discount}
+                            {discoutedProduct?.additional_information?.discount}
                           </span>
                         </div>
                         {/* <div className='end-in'>
