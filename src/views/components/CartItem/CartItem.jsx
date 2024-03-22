@@ -141,6 +141,7 @@ const CartItem = ({ item }) => {
         <Grid item sx={{ width: '50%' }}>
           <div>
             <QuantityInput
+              cartPage={true}
               onChange={handleQuantity}
               minQuantity={1}
               value={item?.quantity}
@@ -148,7 +149,7 @@ const CartItem = ({ item }) => {
             />
           </div>
         </Grid>
-        <Grid item sx={{ marginTop: '13px' }}>
+        <Grid item sx={{}}>
           <IconButton onClick={deleteItemFunction}>
             <DeleteOutlineOutlinedIcon />
           </IconButton>
