@@ -941,7 +941,7 @@ class ProductController extends BaseController
 
     public function getDiscountProduct()
     {
-        $discountProduct = ProductDetail::where('summary',"discount_home_product")->first();
+        $discountProduct = ProductDetail::where('summary',"discount_home_product")->with('product')->first();
 
         if(empty($discountProduct)){
             return $this->sendError('error', 'Discount Product not found.' );
