@@ -83,7 +83,7 @@ export const QuantityInput = ({
           id='demo-select-small'
           value={quantity}
           onChange={handleChange}
-          renderValue={value => `${cartPage ? 'Qty' : 'Quantity'} - ${value}`}>
+          renderValue={value => `${cartPage ? 'Qty' : 'Quantity'}: ${value}`}>
           {createArrayUpToMax(maxQuantityLocal)?.map(item => {
             return <MenuItem value={item}>{item}</MenuItem>;
           })}
