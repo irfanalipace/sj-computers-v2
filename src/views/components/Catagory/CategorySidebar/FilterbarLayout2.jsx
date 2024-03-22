@@ -88,6 +88,7 @@ const FilterBarlayout2 = ({
     ];
 
     if (names.includes(pathValue)) return pathValue;
+    if (categorySlug?.toLowerCase() === 'bto') return 'bto';
     else return 'all';
   };
 
