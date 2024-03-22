@@ -47,11 +47,9 @@ export default function Recommendation({ prod, dataLayer }) {
     <>
       <div
         className='recommendation-container product-section'
-        style={{ padding: '0px 40px' }}>
+        style={{ padding: '0px 50px' }}>
         <div className='recommendation-inner'>
-          <h3
-            className='product-section-heading'
-            style={{ padding: '0px 12px' }}>
+          <h3 className='product-section-heading' style={{marginLeft:'-23px'}}>
             People who browsed similar items also showed interest in these
           </h3>
           <div className='slider-wrapper'>
