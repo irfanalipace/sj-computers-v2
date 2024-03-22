@@ -4,7 +4,9 @@ import { Grid, Typography } from '@mui/material';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import StarRatings from 'react-star-ratings';
 import { generatePath } from '../../../../core/utils/helpers';
+import { faTruck } from '@fortawesome/free-solid-svg-icons';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const CategorySliderCard = ({ product }) => {
   const supStyle = {
     position: 'relative',
@@ -118,6 +120,13 @@ const CategorySliderCard = ({ product }) => {
               ${parseFloat(((product?.price * 2) / 1.5).toFixed(2))}
             </span> */}
           </Typography>
+          <div style={{ fontSize: '12px', marginTop: '5px', color:"#6f6f6f" }}>
+                      <FontAwesomeIcon
+                        icon={faTruck}
+                        style={{ color: '#6f6f6f' }}
+                      />{' '}
+                      Free shipping
+                    </div>
           {/* <Typography variant="body2">${parseFloat((product?.price*2/1.5).toFixed(2))}</Typography> */}
         </Grid>
       </Link>
