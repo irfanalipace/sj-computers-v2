@@ -1,9 +1,9 @@
 import React from 'react';
 import StarRatings from 'react-star-ratings';
 import { Typography, Box, Stack } from '@mui/material';
-
+import { faTruck } from '@fortawesome/free-solid-svg-icons';
 import './SellingProducts.css';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SwiperCore, { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Link } from 'react-router-dom';
@@ -182,6 +182,13 @@ const SellingProducts = ({ topRatedProduct, inTopRated, bestSeller }) => {
                         }}>
                         ${product?.price?.toString().split('.')[0]}
                       </span>
+                    </div>
+                    <div style={{ fontSize: '12px', marginTop: '5px', color:"#6f6f6f" }}>
+                      <FontAwesomeIcon
+                        icon={faTruck}
+                        style={{ color: '#6f6f6f' }}
+                      />{' '}
+                      Free shipping
                     </div>
                   </div>
                 )}
