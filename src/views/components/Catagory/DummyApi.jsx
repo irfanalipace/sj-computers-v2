@@ -1,4 +1,5 @@
 import LaptopImg from '../../../assets/images/categories/LaptopUpdate.png';
+import BC from '../../../assets/images/categories/bc.png';
 import DesktopImg from '../../../assets/images/categories/desktopUpdate.png';
 import twoInOneLaptopImg from '../../../assets/images/categories/2in1LaptopUpdate.png';
 import AccessoriesImg from '../../../assets/images/categories/AccessoriesUpdate.png';
@@ -130,7 +131,7 @@ export const computerCategoriesSlider2 = [
     url: '/category/business_computers',
     image_url:
       // 'https://clipart-library.com/images_k/computer-png-transparent/computer-png-transparent-15.png',
-      LaptopImg,
+      BC,
   },
   {
     id: 2,
