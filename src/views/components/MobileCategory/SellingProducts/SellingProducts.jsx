@@ -183,7 +183,7 @@ const SellingProducts = ({ topRatedProduct, inTopRated, bestSeller }) => {
                         ${product?.price?.toString().split('.')[0]}
                       </span>
                     </div>
-                    <div style={{ fontSize: '12px', marginTop: '5px', color:"#6f6f6f" }}>
+                    <div style={{ fontSize: '12px', marginTop: '5px', marginBottom:'5px', color:"#6f6f6f" }}>
                       <FontAwesomeIcon
                         icon={faTruck}
                         style={{ color: '#6f6f6f' }}
