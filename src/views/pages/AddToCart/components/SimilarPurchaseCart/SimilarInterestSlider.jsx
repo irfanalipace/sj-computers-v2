@@ -86,7 +86,7 @@ const SimilarInterestSlider = ({ products }) => {
             </div>
           </div>
         </Link>
-        <div className='sj-banner-similar-item'>
+        {/* <div className='sj-banner-similar-item'>
           <p>
             &ensp;SJ's <span style={{ color: '#E0BC00' }}>choice</span>
           </p>
@@ -94,10 +94,10 @@ const SimilarInterestSlider = ({ products }) => {
           <div className='mt-1' style={{ fontSize: '14px' }}>
             in
           </div>
-        </div>
-        <div style={{ fontSize: '12px', marginTop: '-12px' }} className='mb-2 '>
+        </div> */}
+        {/* <div style={{ fontSize: '12px', marginTop: '-12px' }} className='mb-2 '>
           Computer Monitors
-        </div>
+        </div> */}
 
         <div className='d-none d-sm-block product-pricess mb-2'>
           {product.originalPrice && (
