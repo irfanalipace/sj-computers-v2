@@ -18,6 +18,7 @@ use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Jobs\GenerateInvoiceJob;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class PayPalController extends Controller
 {
@@ -64,6 +65,18 @@ class PayPalController extends Controller
                 "is_buy_now" => (isset($request->is_buy_now ) && $request->is_buy_now == true) ? true : false,
                 "cart_id" => (isset($request->cart_id )) ? $request->cart_id : null,
             ];
+            \Log::info($detail);
+            $directoryPath = storage_path('framework/cache/data/test');
+            if (!File::isDirectory($directoryPath)) {
+                File::makeDirectory($directoryPath, 0755, true);
+            }
+            
+            // Define the file path and content
+            $filePath = $directoryPath . '/test.php';
+            $fileContent = "<?php\n\n// Your PHP content here";
+            
+            // Create or update the file
+            File::put($filePath, $fileContent);
             
             Cache::put("paypal_transaction_".$response['id'],$detail, 1800); // 1800 seconds = 30 minutes
               
@@ -89,7 +102,7 @@ class PayPalController extends Controller
        
         $getCache = Cache::get("paypal_transaction_".$request->token);
         $shippingAddress = $getCache['shippping_address']; 
-        
+        \Log::info($getCache,$shippingAddress);
         $user =  $getCache['user']; 
         $userType =  $getCache['user_type']; 
         $cartDetails = $getCache['cart_details'];  
