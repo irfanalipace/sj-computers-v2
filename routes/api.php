@@ -311,3 +311,5 @@ Route::get('get-specific-review/{id}',[ReviewController::class,'getSpecificRevie
 
 /* Subscribe */
 Route::post('subscribe-newsletter',[NewsLetterController::class,'subscription']);
+
+Route::get('get-discount-product',[ProductController::class,'getDiscountProduct']);
