@@ -5,6 +5,7 @@ export default function ShipmentInformation({
   trackingInfo,
   user,
   shipmentData,
+  trackingId,
 }) {
   const userInfo = shipmentData?.data
     ? shipmentData?.data[0]?.user?.shipping_address
@@ -30,7 +31,8 @@ export default function ShipmentInformation({
           label='Tracking ID#:'
           value={
             <div style={{ textDecoration: 'underline' }}>
-              {trackingInfo?.trackingNumberInfo?.trackingNumber}
+              {/* {trackingInfo?.trackingNumberInfo?.trackingNumber} */}
+              {trackingId === 'null' ? 'N/A' : trackingId}
             </div>
           }
         />
@@ -42,7 +44,8 @@ export default function ShipmentInformation({
               <span style={{ fontWeight: '500' }}>{userInfo?.full_name}</span>
               <br />
               {/* <br /> New York, NY street */}
-              {userInfo?.city} , {userInfo?.address} , {userInfo?.apartment}
+              {userInfo?.city} , {userInfo?.address}
+              {/* ,{userInfo?.apartment} */}
               <br /> {userInfo?.zip_code} , {userInfo?.country}
               <br />
               {'Phone number: ' + userInfo?.phone_number}

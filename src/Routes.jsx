@@ -523,9 +523,11 @@ const Router = () => {
     {
       path: '/track-order/:id/:trackingId',
       element: (
-        <PageWrapper>
-          <TrackOrder />
-        </PageWrapper>
+        <ProtectedRoute>
+          <PageWrapper>
+            <TrackOrder />
+          </PageWrapper>
+        </ProtectedRoute>
       ),
     },
 

@@ -376,14 +376,16 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
       <div
         style={{ paddingTop: '50px', paddingBottom: '50px' }}
         className='hide-on-mobile'>
-        <div
-          style={{
-            padding: '10px 70px',
-            borderTop: '1px solid #D0D0D0',
-            borderBottom: '1px solid #D0D0D0',
-          }}>
-          <Recommendation prod={products} />
-        </div>
+        {products?.length > 0 && (
+          <div
+            style={{
+              padding: '10px 70px',
+              borderTop: '1px solid #D0D0D0',
+              borderBottom: '1px solid #D0D0D0',
+            }}>
+            <Recommendation prod={products} />
+          </div>
+        )}
       </div>
     </>
   );
