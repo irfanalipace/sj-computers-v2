@@ -13,6 +13,7 @@ use App\Models\CategoryProduct;
 use App\Models\IpAddress;
 use App\Models\Product;
 use App\Models\Product\ProtectivePlan;
+use App\Models\ProductDetail;
 use App\Models\ProductInfo;
 use App\Models\ProductMedia;
 use App\Models\ProductReview;
@@ -936,5 +937,16 @@ class ProductController extends BaseController
             return $this->sendError('error', 'Something went wrong ' . $e->getMessage());
         }
 
+    }
+
+    public function getDiscountProduct()
+    {
+        $discountProduct = ProductDetail::where('summary',"discount_home_product")->first();
+
+        if(empty($discountProduct)){
+            return $this->sendError('error', 'Discount Product not found.' );
+        }
+        
+        return $this->sendResponse($discountProduct,"successfully get discount product for home page.");
     }
 }
