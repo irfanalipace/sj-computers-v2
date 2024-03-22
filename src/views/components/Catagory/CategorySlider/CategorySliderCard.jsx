@@ -108,7 +108,7 @@ const CategorySliderCard = ({ product }) => {
             <sup style={supStyle}>
               {product?.price?.toString().split('.')[1]}
             </sup>
-            <span
+            {/* <span
               style={{
                 marginLeft: '10px',
                 fontSize: '12px',
@@ -116,7 +116,7 @@ const CategorySliderCard = ({ product }) => {
                 color: '#666666',
               }}>
               ${parseFloat(((product?.price * 2) / 1.5).toFixed(2))}
-            </span>
+            </span> */}
           </Typography>
           {/* <Typography variant="body2">${parseFloat((product?.price*2/1.5).toFixed(2))}</Typography> */}
         </Grid>
