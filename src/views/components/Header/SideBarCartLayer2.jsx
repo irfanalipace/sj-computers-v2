@@ -119,8 +119,8 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
     return (
       <button
         style={{
-          color: 'white',
-          backgroundColor: '#52ac66',
+          color: alreadInCart(product.id) ? 'black' : 'white',
+          backgroundColor: alreadInCart(product.id) ? '' : '#52ac66',
         }}
         disabled={alreadInCart(product.id)}
         onClick={e => {
