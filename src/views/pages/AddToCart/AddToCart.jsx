@@ -21,7 +21,7 @@ const AddToCart = () => {
   const [featureProducts, setFeatureProduct] = useState([]);
   const getFeaturedProduct = async () => {
     try {
-      const resp = await featureProductsApi(product.id);
+      const resp = await featureProductsApi(product?.id);
       const selectedProducts = resp?.data;
       setFeatureProduct(selectedProducts);
     } catch (error) {
@@ -32,7 +32,7 @@ const AddToCart = () => {
   };
   useEffect(() => {
     getFeaturedProduct();
-  }, []);
+  }, [product?.id]);
 
   return !product ? (
     <div style={{ padding: '140px', textAlign: 'center' }}>
