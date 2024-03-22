@@ -153,33 +153,33 @@ class OrderRepository
         //saving address of order
         $OrderAddress = OrderShippingAddress::Create(
             [
-                'country' => $shippingAddreess['country'],
-                'full_name' => $shippingAddreess['full_name'],
-                'phone_number' => $shippingAddreess['phone_number'],
-                'email' => $shippingAddreess['email'] ?? null,
-                'address' => $shippingAddreess['address'],
-                'city' => $shippingAddreess['city'],
-                'state' => $shippingAddreess['state'],
-                'apartment' => $shippingAddreess['apartment'] ?? null,
-                'zip_code' => $shippingAddreess['zip_code'],
+                'country' => $shippingAddreess->country,
+                'full_name' => $shippingAddreess->full_name,
+                'phone_number' => $shippingAddreess->phone_number,
+                'email' => $shippingAddreess->email ?? null,
+                'address' => $shippingAddreess->address,
+                'city' => $shippingAddreess->city,
+                'state' => $shippingAddreess->state,
+                'apartment' => $shippingAddreess->apartment ?? null,
+                'zip_code' => $shippingAddreess->zip_code,
                 ($user_type == StatusEnum::USER) ? 'user_id' : 'guest_id' => $user->id,       //user id or guest id
                 'user_type' => $user_type,
                 'order_id' => $order->id
             ]
         );
 
-        if(isset($shippingAddreess['permanent_address']) && $shippingAddreess['permanent_address'] == true && $user_type == StatusEnum::USER){
+        if(isset($shippingAddreess->permanent_address) && $shippingAddreess->permanent_address == true && $user_type == StatusEnum::USER){
             UserAddress::updateOrCreate(
                 ['user_id' =>  $user->id ],
                 [
-                'country' => $shippingAddreess['country'],
-                'full_name' => $shippingAddreess['full_name'],
-                'phone_number' => $shippingAddreess['phone_number'],
-                'address' => $shippingAddreess['address'],
-                'city' => $shippingAddreess['city'],
-                'state' => $shippingAddreess['state'],
-                'apartment' => $shippingAddreess['apartment'] ?? null,
-                'zip_code' => $shippingAddreess['zip_code'],
+                'country' => $shippingAddreess->country,
+                'full_name' => $shippingAddreess->full_name,
+                'phone_number' => $shippingAddreess->phone_number,
+                'address' => $shippingAddreess->address,
+                'city' => $shippingAddreess->city,
+                'state' => $shippingAddreess->state,
+                'apartment' => $shippingAddreess->apartment ?? null,
+                'zip_code' => $shippingAddreess->zip_code,
                 'user_id' => $user->id, 
                 'status' => StatusEnum::ACTIVE,
             ]);
