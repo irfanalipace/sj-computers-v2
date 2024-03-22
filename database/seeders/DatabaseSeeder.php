@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
 //            SystemPagesSeeder::class
             BlogSeeder::class,
             CareerSeeder::class,
-            ProtectivePlanSeeder::class
+            ProtectivePlanSeeder::class,
+            DiscountProductSeeder::class,
         ]);
     }
 }
