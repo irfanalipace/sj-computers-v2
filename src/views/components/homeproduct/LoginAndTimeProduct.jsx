@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import wellsjcomputer from '@images/categories/welcomesjcomputer.webp';
 import StarRatings from 'react-star-ratings';
 import { useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import { faTruck } from '@fortawesome/free-solid-svg-icons';
 import './LoginAndTimeProduct.css';
 import Loader from '@common/LoaderComponent/LoaderComponent';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getDiscountedProduct } from '../../../core/api/products';
 
 const LoginAndTimeProduct = () => {
   const screenWidth = useViewportWidth();
@@ -19,14 +20,31 @@ const LoginAndTimeProduct = () => {
   const [loading, setLoading] = useState(true);
   console.log(isLoading, 'isLoading');
   const dbDate = new Date().getTime();
+  const [discoutedProduct, setDiscountedProduct] = useState();
+
+  const getProducts = async total => {
+    try {
+      setLoading(true);
+
+      const response = await getDiscountedProduct();
+      let dd = response?.data;
+      dd.additional_information = JSON.parse(dd.additional_information);
+      setDiscountedProduct(dd);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   const parsedDate = new Date(dbDate);
 
   setTimeout(() => {
     setLoading(false);
   }, 2000);
-
-  console.log(products, 'single products');
 
   return (
     <div className='dev-sections-two-sctions'>
@@ -191,12 +209,13 @@ const LoginAndTimeProduct = () => {
                 </>
               ) : (
                 <>
-                  {products && products?.length > 0 && (
-                    <Link to={`/${products[0].name}/dp/${products[0].asin}`}>
+                  {discoutedProduct && (
+                    <Link
+                      to={`/${discoutedProduct?.summary}/dp/${discoutedProduct?.product?.asin}`}>
                       <div style={{ textAlign: 'center' }}>
                         <img
                           className={`advertisment-img-products-imges-unautherized-user`}
-                          src={products[0].image}
+                          src={discoutedProduct?.product?.image[0]}
                           alt={'addDesktop'}
                         />
                       </div>
@@ -204,7 +223,7 @@ const LoginAndTimeProduct = () => {
                       <h5
                         className='time-product-name'
                         style={{ color: 'black' }}>
-                        {products[0].name}
+                        {discoutedProduct?.product.name}
                       </h5>
                       <Stack mb={1} alignItems={'start'} spacing={1}>
                         <Stack
@@ -213,7 +232,7 @@ const LoginAndTimeProduct = () => {
                           // spacing={1}
                           direction={'row'}>
                           <StarRatings
-                            rating={products[0].rating}
+                            rating={discoutedProduct.product.rating}
                             starRatedColor='rgb(232, 126, 36)'
                             numberOfStars={5}
                             name='rating'
@@ -228,29 +247,44 @@ const LoginAndTimeProduct = () => {
                             fontSize={'12px'}
                             lineHeight={'17px'}
                             color={'#007185'}>
-                            ({products[0].total_review})
+                            ({discoutedProduct.product.total_review})
                           </Typography>
                         </Stack>
                         {/* {type === "recommended" && getRandomComponent()} */}
                       </Stack>
                       <div className='featured-product-timing'>
-                        {/* <div className='original-price'>
-                          ${Math.floor(products[0]?.price)}
-                        </div> */}
+                        <div className='original-price'>
+                          $
+                          {
+                            discoutedProduct?.additional_information
+                              ?.actual_price
+                          }
+                        </div>
                         <div className='discount-price'>
                           <span>$</span>
-                          {products[0]?.price.toString().split('.')[0]}
+                          {
+                            discoutedProduct.additional_information?.discounted_price
+                              .toString()
+                              .split('.')[0]
+                          }
                           <sup>
-                            {products[0]?.price?.toString().split('.')[1]}
+                            {
+                              discoutedProduct.additional_information?.discounted_price
+                                ?.toString()
+                                .split('.')[1]
+                            }
                           </sup>
                         </div>
                         <div className='product-delivery-charges ms-0 ms-sm-2 mb-2 mb-sm-0'>
                           <FontAwesomeIcon className='me-1' icon={faTruck} />{' '}
                           Free Shipping
                         </div>
-                        {/* <div className='save-value'>
-                          <span>Save $20</span>
-                        </div> */}
+                        <div className='save-value'>
+                          <span>
+                            Save +{' '}
+                            {discoutedProduct.additional_information?.discount}
+                          </span>
+                        </div>
                         {/* <div className='end-in'>
                           Ends in {parsedDate.getHours()}
                           h:{parsedDate.getMinutes()}m

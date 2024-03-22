@@ -123,6 +123,24 @@ export function getProductsCategory(filter) {
   });
 }
 
+export function getDiscountedProduct() {
+  return new Promise((resolve, reject) => {
+    ApiService.get(`/get-discount-product`)
+      .then(response => {
+        console.print(
+          'file: products.js | filterProductsApi| response',
+          response,
+        );
+
+        resolve(response);
+      })
+      .catch(e => {
+        console.print('Console Log: : error filterProductsApi', e);
+        reject(e);
+      });
+  });
+}
+
 // export function productPreviewApi(formData) {
 
 //     return new Promise((resolve, reject) => {
