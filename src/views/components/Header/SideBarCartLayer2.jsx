@@ -280,7 +280,7 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
           ) : (
             <div className='container container-products-sections-sidebar-overlay'>
               <div className='descover-data-overlay-cart'>
-                <span>Discover Best Deals</span>
+                <span>Best Selling Products</span>
               </div>
               <div>
                 <div className='container'>
