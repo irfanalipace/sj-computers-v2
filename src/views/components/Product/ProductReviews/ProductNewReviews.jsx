@@ -141,6 +141,10 @@ const ProductNewReviews = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    const matchingFiles = imgFIles.filter(imgFile => {
+      return parentData.some(parentItem => parentItem.name === imgFile.name);
+    });
+    setImgFiels(matchingFiles);
 
     try {
       setIsLoading(true);
@@ -151,7 +155,7 @@ const ProductNewReviews = () => {
         user_id: userID,
         body: text,
         media_type: 'image',
-        media: imgFIles,
+        media: matchingFiles,
         // media: imgFIles.map((file, index) => ({
         //     index,
         //     file,
