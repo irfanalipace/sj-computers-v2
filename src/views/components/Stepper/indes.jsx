@@ -96,38 +96,53 @@ ColorlibStepIcon.propTypes = {
 const steps = [
   { label: 'Ordered', description: 'April 11, 2023' },
   {
-    label: 'In Transit',
+    label: 'Picked up',
     description: '',
   },
-  { label: 'Out for Delivery', description: 'May 05, 2023' },
+  { label: 'In transit', description: 'May 05, 2023' },
   { label: 'Delivered', description: 'May 07, 2023' },
 ];
 export default function CustomizedSteppers({
-  step = 2,
+  step,
   trackingInfo,
   shipmentData,
+  trackingEventData,
 }) {
-  const orderedValue = shipmentData.data
-    ? shipmentData?.data[0]?.created_at
-    : '';
-  const formatedOrderedValue = formatingDate(orderedValue);
+  const orderedValue =
+    shipmentData.data?.length > 0 ? shipmentData?.data[0]?.created_at : '';
+  const formatedOrderedValue =
+    orderedValue === '' ? null : formatingDate(orderedValue);
 
-  const inTransitValue = trackingInfo?.dateAndTimes?.filter(
-    obj => obj.type === 'SHIP',
+  const pickedupValue = trackingEventData?.filter(
+    item => item.derivedStatus === 'Picked up',
   );
+
+  const formatedPickedupValue =
+    pickedupValue && pickedupValue.length > 0
+      ? formatingDate(pickedupValue[0]?.date)
+      : null;
+
+  // console.log(pickedupValue[0]?.date, 'pickedupValue');
+
+  const inTransitValue = trackingEventData?.filter(
+    item => item.derivedStatus === 'In transit',
+  );
+
   const formatedTranstValue =
     inTransitValue && inTransitValue.length > 0
-      ? formatingDate(inTransitValue[0]?.dateTime)
-      : null;
-  const outForDelivery = trackingInfo?.dateAndTimes?.filter(
-    obj => obj.type === 'ACTUAL_TENDER',
-  );
-  const formatedOutForDeliveryValue =
-    outForDelivery && outForDelivery.length > 0
-      ? formatingDate(outForDelivery[0]?.dateTime)
+      ? formatingDate(inTransitValue[0]?.date)
       : null;
 
-  console.print('inTransitalue', inTransitValue);
+  const deliverdValue = trackingEventData?.filter(
+    item => item.derivedStatus === 'Delivered',
+  );
+
+  const formatedDeliveredValue =
+    deliverdValue && deliverdValue.length > 0
+      ? formatingDate(deliverdValue[0]?.date)
+      : null;
+
+  console.log('inTransitalue', pickedupValue);
 
   return (
     <Stack sx={{ width: '100%' }} spacing={4}>
@@ -155,10 +170,12 @@ export default function CustomizedSteppers({
                 {index === 0
                   ? formatedOrderedValue
                   : index === 1
-                    ? formatedTranstValue
+                    ? formatedPickedupValue
                     : index === 2
-                      ? formatedOutForDeliveryValue
-                      : label.description}
+                      ? formatedTranstValue
+                      : index === 3
+                        ? formatedDeliveredValue
+                        : null}
               </Typography>
             </StepLabel>
           </Step>

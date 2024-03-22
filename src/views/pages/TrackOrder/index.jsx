@@ -36,24 +36,25 @@ const TrackOrder = props => {
 
   const [trackingInfo, setTrackingInfo] = useState([]);
   const [shipmentData, setShipmentData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const { id, trackingId } = useParams();
   // console.print(id, 'orderId', trackingId);
 
-  const fedexTrackingId = trackingId === null ? 775486523899 : trackingId;
+  // const fedexTrackingId = trackingId;
 
-  useEffect(() => {
-    getTrackingInfo(fedexTrackingId)
-      .then(data => {
-        console.log('Tracking info:', data);
-        setTrackingInfo(data[0]?.trackResults[0]);
-        // Do something with the tracking info
-      })
-      .catch(error => {
-        // Handle errors
-        console.error('Error fetching tracking info:', error);
-      });
-  }, [fedexTrackingId]);
+  // useEffect(() => {
+  //   getTrackingInfo(trackingId)
+  //     .then(data => {
+  //       console.log('Tracking info:', data);
+  //       setTrackingInfo(data[0]?.trackResults[0]);
+  //       // Do something with the tracking info
+  //     })
+  //     .catch(error => {
+  //       // Handle errors
+  //       console.error('Error fetching tracking info:', error);
+  //     });
+  // }, [trackingId]);
 
   useEffect(() => {
     const param = {
@@ -61,6 +62,7 @@ const TrackOrder = props => {
       order_id: [id],
     };
 
+    setLoading(true);
     // Call the getOrderDetailsSJ function
     getOrderDetailsSJ(param)
       .then(response => {
@@ -71,6 +73,9 @@ const TrackOrder = props => {
       .catch(error => {
         // Handle errors
         console.error('Error fetching order details:', error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -81,6 +86,34 @@ const TrackOrder = props => {
     anticipatedDelivery && anticipatedDelivery.length > 0
       ? formatingDate(anticipatedDelivery[0]?.dateTime)
       : null;
+
+  const fedexStatus =
+    shipmentData?.data?.length > 0 ? shipmentData?.data[0]?.fedex_status : null;
+
+  const trackingHistory =
+    shipmentData?.data?.length > 0
+      ? shipmentData?.data[0]?.order_tracking_histroy?.tracking_history
+      : null;
+
+  // console.log(trackingHistory, 'tracking history');
+
+  let trackingEventData;
+  try {
+    trackingEventData = trackingHistory ? JSON.parse(trackingHistory) : null;
+    console.log(trackingEventData, 'tracking eventData');
+  } catch (error) {
+    console.error('Error parsing tracking history:', error);
+    // Handle the error gracefully, maybe set eventData to some default value
+    trackingEventData = null;
+  }
+
+  // Iterate over each object and extract the date value
+  // eventData?.length > 0 &&
+  //   eventData.forEach(event => {
+  //     console.log(event.date, 'tracking date');
+  //   });
+
+  // console.log(fedexStatus, 'fedex_status');
 
   return (
     <>
@@ -141,9 +174,8 @@ const TrackOrder = props => {
                 fontFamily={'Inter'}
                 lineHeight={'16px'}>
                 {' '}
-                {anticipatedDelivery == null
-                  ? 'Not confirm yet'
-                  : formatedAnticipatedDeliveryValue}
+                {shipmentData?.data?.length > 0 &&
+                  shipmentData?.data[0]?.shipment_days}
               </Typography>
             </Stack>
             <Typography
@@ -156,8 +188,18 @@ const TrackOrder = props => {
           </Box>
         </Box>
         <CustomizedSteppers
+          step={
+            fedexStatus === 'Picked up'
+              ? 1
+              : fedexStatus === 'In transit'
+                ? 2
+                : fedexStatus === 'Delivered'
+                  ? 3
+                  : 0
+          }
           shipmentData={shipmentData}
           trackingInfo={trackingInfo}
+          trackingEventData={trackingEventData}
         />
         <Grid mt={7} container columnSpacing={0} px={4}>
           {/* 5.7 + 0.6 + 5.7 */}
@@ -166,6 +208,7 @@ const TrackOrder = props => {
               trackingInfo={trackingInfo}
               shipmentData={shipmentData}
               user={user}
+              trackingId={trackingId}
             />
           </Grid>
           {/* Empty Grid for Grid geometry  */}
@@ -180,6 +223,7 @@ const TrackOrder = props => {
               user={user}
               shipmentData={shipmentData}
               trackingInfo={trackingInfo}
+              loading={loading}
             />
           </Grid>
           <Grid

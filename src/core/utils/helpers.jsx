@@ -306,7 +306,7 @@ export function formatingDate(dateString) {
   const timezoneSign = timezoneOffset < 0 ? '+' : '-';
 
   // Constructing the formatted date string
-  const formattedDate = `${month} ${day}, ${year}`;
+  const formattedDate = `${month} ${day}, ${year} at ${hours}:${minutes}`;
 
   return formattedDate;
 }
