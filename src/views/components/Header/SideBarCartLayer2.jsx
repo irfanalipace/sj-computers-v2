@@ -1,26 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import Loader from '@common/Spinner/Spinner';
 import { deleteItem, deleteLocalItem } from '@store/cart/cartThunks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { generatePath } from '../../../core/utils/helpers';
 import './CartOverlay.css';
 import { Box, Stack, Typography } from '@mui/material';
-import WarrantyBadge from '@components/ShoppingCart/CartItem/WarrantyBadge';
-import vectorimg from '../../../assets/images/gaming-images/scan-images.png';
-import { flip } from '@popperjs/core';
 import vetimges from '../../../assets/images/setr.png';
-import { Flex } from '@mantine/core';
-import { Star } from '@material-ui/icons';
 import StarRatings from 'react-star-ratings';
-import { RateReview } from '@material-ui/icons';
+import CircularProgress from '@mui/material/CircularProgress';
+import { getProductsCategory } from '../../../core/api/products';
+import useAddToCart from '../Product/CheckOutCard/useAddToCart';
 const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
   const cartItems = useSelector(state => state.cart.cart);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const details = useSelector(state => state.cart.details);
-  const [updatingItem, setUpdatingItem] = useState(false);
+  const cart = useSelector(state => state.cart.cart);
   const dispatch = useDispatch();
 
   const deleteItemFunction = item => {
@@ -87,6 +83,38 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
   //     };
   // }, [showModal]);
 
+  const [bestSeller, setBestSeller] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const getProducts = async total => {
+    try {
+      setLoading(true);
+      const filterObject = {
+        page: 1,
+        category: 'best-sellers',
+        per_page: 6,
+      };
+
+      const response = await getProductsCategory(filterObject);
+      setBestSeller(response?.data?.data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const alreadInCart = id => {
+    const resp = cart?.findIndex(cartItem => cartItem.id === id);
+    if (resp !== -1) return true;
+    return false;
+  };
+
+  const [cartClickHandler, addingItemToCart] = useAddToCart();
+
   return (
     <div>
       {isOpen && (
@@ -99,7 +127,7 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
         {/* sidebar content */}
 
         <div className='row  sub-title-add-overlay2'>
-          <div className='col-md-4 mt-2' style={{ textAlign: 'center' }}>
+          {/* <div className='col-md-4 mt-2' style={{ textAlign: 'center' }}>
             <div style={{ marginTop: '12px' }}>
               <img src={vetimges} />{' '}
               <span style={{ fontWeight: '500' }}>Not Added</span>
@@ -108,16 +136,17 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
             <div className='image-data-scroll-cart mt-2'>
               <img src={vectorimg} />
             </div>
-          </div>
+          </div> */}
 
-          <div className='col-md-6 mt-2'>
-            <div style={{ marginTop: '12px' }}>
-              <span className='' style={{ fontWeight: '500' }}>
-                Cart Subtotal
-              </span>
-              <span className=''>( {details?.total_items} items ):</span>$
-              {details?.sub_total}
-            </div>
+          <Stack mb={2} direction={'column'} className='col-md-6 mt-2'>
+            <Stack spacing={1} direction={'row'} style={{ marginTop: '12px' }}>
+              <Typography className='' style={{ fontWeight: '500' }}>
+                Cart Subtotal:
+              </Typography>
+              <Typography
+                fontWeight={'bold'}>{`$${details?.sub_total}`}</Typography>
+              <Typography> ({details?.total_items} items) </Typography>
+            </Stack>
             {isAuthenticated ? (
               <div className='add-cart-button-proccesd-data pb-4 pt-3'>
                 <Link
@@ -218,9 +247,9 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
                 )}
               </div>
             )}
-          </div>
+          </Stack>
 
-          <div className='col-2 mt-2'>
+          <div style={{ position: 'absolute', top: 5, right: 5 }}>
             <div style={{ textAlign: 'end' }}>
               <button
                 style={{ fontSize: '30px' }}
@@ -244,101 +273,115 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
             </div>
           </div>
 
-          <div className='container container-products-sections-sidebar-overlay'>
-            <div className='descover-data-overlay-cart'>
-              <span>Discover Best Deals</span>
-            </div>
-
-            {details?.total_items > 0 ? (
-              <div className=''>
-                <div className='row'>
-                  {cartItems?.map((item, index) => (
-                    <div key={item.id} className='col-md-4'>
-                      <div id={item.id} className='items-data-overlay-side-bar'>
-                        <div className='dev-sections-products'>
-                          <div className='' style={{ textAlign: 'center' }}>
-                            <img
-                              src={item?.product?.image}
-                              alt=''
-                              // className='cartItem-image'
-                            />
-                          </div>
-                          <Link
-                            to={
-                              generatePath(item?.product?.url) ||
-                              location.pathname
-                            }
-                            className='text-decoration-none pb-2 d-block'>
-                            <strong className='item-details clas-cart-overlay-sidebar'>
-                              {item?.product?.name?.length > 50
-                                ? `${item?.product?.name.substring(0, 50)}...`
-                                : item?.product?.name}
-                            </strong>
-                          </Link>
-                          <div className='star-rating-overlay-name'>
-                            <Stack
-                              mb={2}
-                              alignItems={'start'}
-                              spacing={1}
-                              className='rating-overlay-sidebar'>
-                              <Stack
-                                alignItems={'center'}
-                                justifyContent={'center'}
-                                spacing={1}
-                                direction={'row'}>
-                                <StarRatings
-                                  rating={item?.product?.rating}
-                                  starRatedColor='rgb(232, 126, 36)'
-                                  numberOfStars={5}
-                                  name='rating'
-                                  isSelectable={false}
-                                  starDimension={'20px'}
-                                  starSpacing={'0'}
-                                />
-                                <Typography
-                                  fontFamily={'Inter'}
-                                  sx={{ pt: 0.3 }}
-                                  fontWeight={500}
-                                  fontSize={'12px'}
-                                  lineHeight={'17px'}
-                                  color={'#007185'}>
-                                  {item?.product?.total_review}
-                                </Typography>
-                              </Stack>
-                            </Stack>
-                          </div>
-                          <div className='price-data-load-overlay'>
-                            <span>${parseFloat(item?.price).toFixed(2)}</span>
-                          </div>
-                          <div className='overlay-add-cart-button-area'>
-                            <Link to='/cart' className='text-decoration-none'>
-                              <button onClick={toggleSidebar}>
-                                Add to cart
-                              </button>
-                            </Link>
+          {loading ? (
+            <Box mt={5} justifyContent={'center'} display={'flex'}>
+              <CircularProgress sx={{ color: 'black' }} />
+            </Box>
+          ) : (
+            <div className='container container-products-sections-sidebar-overlay'>
+              <div className='descover-data-overlay-cart'>
+                <span>Discover Best Deals</span>
+              </div>
+              <div>
+                <div className='container'>
+                  <div className='row'>
+                    {bestSeller?.map(item => (
+                      <>
+                        <div key={item.id} className='col-md-4'>
+                          <div
+                            id={item.id}
+                            className='items-data-overlay-side-bar'
+                            style={{
+                              background: 'white',
+                              border: '1px solid lightgray',
+                              borderRadius: '5px',
+                            }}>
+                            <div className='dev-sections-products'>
+                              <div className='' style={{ textAlign: 'center' }}>
+                                <img src={item?.image[0]} alt='' />
+                              </div>
+                              <Link
+                                to={
+                                  generatePath(item?.url) || location.pathname
+                                }
+                                className='text-decoration-none pb-2 d-block'>
+                                <strong className='item-details clas-cart-overlay-sidebar'>
+                                  {item?.name?.length > 50
+                                    ? `${item?.name.substring(0, 50)}...`
+                                    : item?.name}
+                                </strong>
+                              </Link>
+                              <div className='star-rating-overlay-name'>
+                                <Stack
+                                  mb={2}
+                                  alignItems={'start'}
+                                  spacing={1}
+                                  className='rating-overlay-sidebar'>
+                                  <Stack
+                                    alignItems={'center'}
+                                    justifyContent={'center'}
+                                    spacing={1}
+                                    direction={'row'}>
+                                    <StarRatings
+                                      rating={item?.rating}
+                                      starRatedColor='rgb(232, 126, 36)'
+                                      numberOfStars={5}
+                                      name='rating'
+                                      isSelectable={false}
+                                      starDimension={'20px'}
+                                      starSpacing={'0'}
+                                    />
+                                    <Typography
+                                      fontFamily={'Inter'}
+                                      sx={{ pt: 0.3 }}
+                                      fontWeight={500}
+                                      fontSize={'12px'}
+                                      lineHeight={'17px'}
+                                      color={'#007185'}>
+                                      {item?.total_review}
+                                    </Typography>
+                                  </Stack>
+                                </Stack>
+                              </div>
+                              <div className='price-data-load-overlay'>
+                                <span>
+                                  ${parseFloat(item?.price).toFixed(2)}
+                                </span>
+                              </div>
+                              <div className='overlay-add-cart-button-area'>
+                                {/* <Link
+                                  to='/cart'
+                                  className='text-decoration-none'> */}
+                                <button
+                                  style={{
+                                    color: 'white',
+                                    backgroundColor: '#52ac66',
+                                  }}
+                                  disabled={alreadInCart(item.id)}
+                                  onClick={e => {
+                                    e.stopPropagation();
+                                    cartClickHandler(
+                                      null,
+                                      `/cart/${item?.name}/dp/${item?.asin}/${item.id}`,
+                                    );
+                                  }}>
+                                  {alreadInCart(item.id)
+                                    ? 'Already in cart'
+                                    : '  Add to cart '}
+                                </button>
+                                {/* </Link> */}
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <hr className='hrline'></hr>
-              </div>
-            ) : (
-              <div className='buttonoverlay-condtions'>
-                <div style={{ marginTop: '60px' }}>
-                  <p className='nomore-item-text-p'>No Added</p>
-                </div>
-                <div style={{ marginTop: '53px' }}>
-                  <Link to='/' onClick={toggleSidebar}>
-                    <button className='add-more-cart-overaybutton'>
-                      Add More Items
-                    </button>
-                  </Link>
+                        {/* <hr className='hrline'></hr> */}
+                      </>
+                    ))}
+                  </div>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
