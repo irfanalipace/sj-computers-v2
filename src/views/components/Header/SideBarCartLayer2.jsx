@@ -262,7 +262,7 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
         </div>
 
         <div>
-          <div className='data-span-modal-cart-view-add-cart'>
+          {/* <div className='data-span-modal-cart-view-add-cart'>
             <div>
               {' '}
               <img src={vetimges} />{' '}
@@ -271,16 +271,16 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
                 later..{' '}
               </span>
             </div>
-          </div>
+          </div> */}
 
           {loading ? (
             <Box mt={5} justifyContent={'center'} display={'flex'}>
               <CircularProgress sx={{ color: 'black' }} />
             </Box>
           ) : (
-            <div className='container container-products-sections-sidebar-overlay'>
+            <div className='mt-3 container container-products-sections-sidebar-overlay'>
               <div className='descover-data-overlay-cart'>
-                <span>Discover Best Deals</span>
+                <span>Best Selling Products</span>
               </div>
               <div>
                 <div className='container'>
