@@ -68,6 +68,7 @@ const CategoryProducts = () => {
       </Grid>
 
       <Grid
+        style={{ paddingLeft: '0px', paddingRight: '0px' }}
         item
         xs={12}
         md={12}
