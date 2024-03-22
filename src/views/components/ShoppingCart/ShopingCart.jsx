@@ -209,14 +209,14 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                       <div className='card-body-text'>
                         <div className='text-body'>
                           <span className='sub-title'>
-                            Subtotal( {cartDetails?.total_items}
+                            Subtotal ({cartDetails?.total_items}
                             &nbsp;items):&nbsp;
                             <strong
                               className='price-items'
                               style={{
                                 fontWeight: 'bold',
                               }}>
-                              ${cartDetails?.sub_total}
+                              ${parseInt(cartDetails?.sub_total)?.toFixed(2)}
                             </strong>
                           </span>
                           <br></br>

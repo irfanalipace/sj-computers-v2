@@ -26,8 +26,7 @@ function OrderSummary({
         <ShippingButton
           handleClick={handleClick}
           id={activeAccordion}
-          disabled={isDisabled}
-        >
+          disabled={isDisabled}>
           Review Order
         </ShippingButton>
       );
@@ -51,8 +50,7 @@ function OrderSummary({
           clickHandler={() => false}
           id={activeAccordion}
           disabled={true}
-          isLoading={placingOrder}
-        >
+          isLoading={placingOrder}>
           Select Payment Method
         </PaymentButton>
       );
@@ -142,8 +140,9 @@ function OrderSummary({
                     <span>Price:</span>
                     <span>
                       <strong>
-                        {paymentData?.details?.sub_total
-                          ? '$' + paymentData.details.sub_total
+                        {parseInt(paymentData?.details?.sub_total)?.toFixed(2)
+                          ? '$' +
+                            parseInt(paymentData.details.sub_total)?.toFixed(2)
                           : '$0'}
                       </strong>
                     </span>
@@ -176,7 +175,9 @@ function OrderSummary({
                       <strong>Order Total</strong>
                     </span>
                     <span>
-                      <strong>${paymentData?.details?.total}</strong>
+                      <strong>
+                        ${parseInt(paymentData?.details?.total)?.toFixed(2)}
+                      </strong>
                     </span>
                   </li>
                 </ul>
