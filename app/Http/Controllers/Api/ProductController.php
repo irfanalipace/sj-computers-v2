@@ -770,14 +770,6 @@ class ProductController extends BaseController
             $query->whereBetween('price', [$priceFilter['min'], $priceFilter['max']]);          
         }
 
-        // Apply review filter
-        if ($key == 'review' && !empty($value)) {
-            $reviewFilter = $value;
-            $query->whereHas('productReview', function ($query) use ($reviewFilter) {
-                $query->whereBetween('rating', [$reviewFilter['min'], $reviewFilter['max']]);
-            });
-        }
-
         // Apply brand filter
         if($key == 'brand'  && !empty($value)){
             $brandFilter = $value;
@@ -851,6 +843,25 @@ class ProductController extends BaseController
             });
         }
 
+        // Apply review filter
+        if ($key == 'review' && !empty($value)) {
+            $reviewFilter = $value;
+            $query->whereHas('productStats', function ($query) use ($reviewFilter) {
+                $overallRatingPath = '$.statistics.overall_rating';
+            
+                if ($reviewFilter['min'] == $reviewFilter['max']) {
+                  // Exact match
+                  $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') = ?", [$reviewFilter['min']]);
+                } else {
+                  // Range query
+                  $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') BETWEEN ? AND ?", [
+                    $reviewFilter['min'],
+                    $reviewFilter['max']
+                  ]);
+                }
+              });
+           
+        }
         return $query->orderBy('price', 'asc');
 }
 

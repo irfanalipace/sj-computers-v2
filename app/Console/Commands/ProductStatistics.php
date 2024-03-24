@@ -84,7 +84,9 @@ class ProductStatistics extends Command
                 $rateStatistics[$rating] = $totalReviews > 0 ? round(($ratingsCount->get($rating, 0) / $totalReviews) * 100) : '0';
             }
 
-            $rateStatistics['overall_rating'] = $totalReviews > 0 ? round($reviews->avg('rating'), 1) : '0';
+             // Ensure overall_rating is calculated to a float with 1 decimal place, then format to 2 decimal places
+            $overallRating = $totalReviews > 0 ? round($reviews->avg('rating'), 1) : 0;
+            $rateStatistics['overall_rating'] = number_format($overallRating, 2);
             $rateStatistics['total_rating'] =  $totalReviews ?? 0;
             $rateStatistics['global_rating'] =  0;
             $statistics = [
