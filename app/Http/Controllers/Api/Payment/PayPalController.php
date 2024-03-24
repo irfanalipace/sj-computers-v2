@@ -6,6 +6,7 @@ use App\Classes\StatusEnum;
 use App\Http\Controllers\Controller;
 use App\Jobs\Error\SendErrorMail;
 use App\Models\Invoice;
+use App\Models\Cache as cacheData;
 use App\Models\Payment;
 use App\Repositories\Payment\OrderRepository;
 use Carbon\Carbon;
@@ -65,20 +66,11 @@ class PayPalController extends Controller
                 "is_buy_now" => (isset($request->is_buy_now ) && $request->is_buy_now == true) ? true : false,
                 "cart_id" => (isset($request->cart_id )) ? $request->cart_id : null,
             ];
-            \Log::info($detail);
-            $directoryPath = storage_path('framework/cache/data/test');
-            if (!File::isDirectory($directoryPath)) {
-                File::makeDirectory($directoryPath, 0755, true);
-            }
-            
-            // Define the file path and content
-            $filePath = $directoryPath . '/test.php';
-            $fileContent = "<?php\n\n// Your PHP content here";
-            
-            // Create or update the file
-            File::put($filePath, $fileContent);
-            
-            Cache::put("paypal_transaction_".$response['id'],$detail, 1800); // 1800 seconds = 30 minutes
+            cacheData::create([
+                'key' => 'paypal_transaction_'.$response['id'],
+                'value' => json_encode($detail,true)
+            ]);            
+            // Cache::put("paypal_transaction_".$response['id'],$detail, 1800); // 1800 seconds = 30 minutes
               
             // Session::put('shippping_address', $request->shipping_address);
            
@@ -100,23 +92,27 @@ class PayPalController extends Controller
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
        
-        $getCache = Cache::get("paypal_transaction_".$request->token);
-        $shippingAddress = $getCache['shippping_address']; 
-        \Log::info($getCache,$shippingAddress);
-        $user =  $getCache['user']; 
-        $userType =  $getCache['user_type']; 
-        $cartDetails = $getCache['cart_details'];  
+        $cache = cacheData::where('key','paypal_transaction_'.$request->token)->first();
+
+        $getCache = json_decode($cache->value);
+     
+        // $getCache = Cache::get("paypal_transaction_".$request->token);
+        $shippingAddress = $getCache->shippping_address; 
         
+        $user =  $getCache->user; 
+        $userType =  $getCache->user_type; 
+        $cartDetails = $getCache->cart_details;  
+     
          /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
          $userIdToPass = ($userType != StatusEnum::GUEST) ? $user->id : $user->email;
          $userType = ($userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
-         $cartItems = ($userType == StatusEnum::GUEST) ? $getCache['cart_items'] : [];
+         $cartItems = ($userType == StatusEnum::GUEST) ? $getCache->cart_items : [];
         
-         $cartContent = (isset($getCache['is_buy_now'] ) && $getCache['is_buy_now'] == true) ? \Cart::session($userIdToPass)->get($getCache['cart_id']) : \Cart::session($userIdToPass)->getContent();
+         $cartContent = (isset($getCache->is_buy_now ) && $getCache->is_buy_now == true) ? \Cart::session($userIdToPass)->get($getCache->cart_id) : \Cart::session($userIdToPass)->getContent();
        
          $listofItems = ($userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
         
-         $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($getCache['is_buy_now'] ) && $getCache['is_buy_now'] == true));
+         $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
          if (!$check_product_first) { 
             DB::rollBack();
              return redirect('cart?error='."Product quantity is invalid");
@@ -125,9 +121,9 @@ class PayPalController extends Controller
          // create invoice along with order
          $orderData = [];
 
-         $orderData['total_amount'] = number_format($cartDetails['totalAmount'], 2, '.', '');
-         $orderData['sub_total'] = number_format($cartDetails['subTotal'], 2, '.', '');
-         $orderData['item_qty'] =  $cartDetails['totalQty'];
+         $orderData['total_amount'] = number_format($cartDetails->totalAmount, 2, '.', '');
+         $orderData['sub_total'] = number_format($cartDetails->subTotal, 2, '.', '');
+         $orderData['item_qty'] =  $cartDetails->totalQty;
 
 
          $orderData['shipment_amount'] =  0;
@@ -147,7 +143,7 @@ class PayPalController extends Controller
 
         if(isset($response['status']) && $response['status'] == 'COMPLETED') {
 
-            $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddress, $userType, $cartItems,(isset($getCache['is_buy_now'] ) && $getCache['is_buy_now'] == true));
+            $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddress, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
             if (!$order) {
                 return redirect()->route('cancel');
              }    
@@ -178,10 +174,14 @@ class PayPalController extends Controller
             // If you need to display more details, add them here accordingly
 
              //clear cart after successfull payment
-            (isset($getCache['is_buy_now'] ) && $getCache['is_buy_now'] == true) ? \Cart::session($userIdToPass)->remove($getCache['cart_id']) : \Cart::session($userIdToPass)->clear();
+            (isset($getCache->is_buy_now ) && $getCache->is_buy_now == true) ? \Cart::session($userIdToPass)->remove($getCache['cart_id']) : \Cart::session($userIdToPass)->clear();
             
             //clear cart condition            
            \Cart::session($userIdToPass)->clearCartConditions();
+
+           /* clear cache */
+            $cache->delete();
+
             DB::commit();
 
             // Convert to JSON if necessary for API response
