@@ -138,7 +138,7 @@ const SellingProducts = ({ topRatedProduct, inTopRated, bestSeller }) => {
                     <div className='product-name'>{product.name}</div>
                     <div>
                       <StarRatings
-                        rating={parseFloat(product.rating)}
+                        rating={parseFloat(product.rating || 0)}
                         starRatedColor='rgb(232, 126, 36)'
                         numberOfStars={5}
                         name='rating'

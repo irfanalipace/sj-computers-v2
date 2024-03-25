@@ -79,7 +79,7 @@ const CategorySliderCard = ({ product }) => {
             justifyContent: 'left',
           }}>
           <StarRatings
-            rating={product?.rating}
+            rating={parseFloat(product?.rating || 0)}
             starRatedColor='rgb(232, 126, 36)'
             numberOfStars={5}
             name='rating'
@@ -120,13 +120,10 @@ const CategorySliderCard = ({ product }) => {
               ${parseFloat(((product?.price * 2) / 1.5).toFixed(2))}
             </span> */}
           </Typography>
-          <div style={{ fontSize: '12px', marginTop: '5px', color:"#6f6f6f" }}>
-                      <FontAwesomeIcon
-                        icon={faTruck}
-                        style={{ color: '#6f6f6f' }}
-                      />{' '}
-                      Free shipping
-                    </div>
+          <div style={{ fontSize: '12px', marginTop: '5px', color: '#6f6f6f' }}>
+            <FontAwesomeIcon icon={faTruck} style={{ color: '#6f6f6f' }} /> Free
+            shipping
+          </div>
           {/* <Typography variant="body2">${parseFloat((product?.price*2/1.5).toFixed(2))}</Typography> */}
         </Grid>
       </Link>

@@ -83,7 +83,7 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
       <div className='col-12  justify-content-end d-flex align-items-end'>
         <ProductRating
           isUpSmall={isUpSmall}
-          rating={product.rating}
+          rating={parseFloat(product.rating || 0)}
           totalReview={product.total_review}
           productID={product.id}
         />

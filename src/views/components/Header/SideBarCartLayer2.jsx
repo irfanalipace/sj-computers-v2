@@ -342,7 +342,7 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
                                     spacing={1}
                                     direction={'row'}>
                                     <StarRatings
-                                      rating={item?.rating}
+                                      rating={parseFloat(item?.rating || 0)}
                                       starRatedColor='rgb(232, 126, 36)'
                                       numberOfStars={5}
                                       name='rating'

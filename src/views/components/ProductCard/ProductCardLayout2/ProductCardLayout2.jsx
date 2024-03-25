@@ -181,7 +181,7 @@ const ProductCardLayout2 = ({
                 spacing={1}
                 direction={'row'}>
                 <StarRatings
-                  rating={product.rating}
+                  rating={parseFloat(product.rating || 0)}
                   starRatedColor='rgb(232, 126, 36)'
                   numberOfStars={5}
                   name='rating'

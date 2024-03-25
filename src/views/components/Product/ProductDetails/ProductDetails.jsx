@@ -97,7 +97,7 @@ const ProductDetails = ({ product }) => {
       <div className='row px-0 res deatisl-data-set-image-view-data-details'>
         <div className='col-12 justify-content-center justify-content-md-start d-flex align-items-center  product-review'>
           <ProductRating
-            rating={product.rating}
+            rating={parseFloat(product.rating || 0)}
             totalReview={product.total_review}
             productID={product.id}
           />

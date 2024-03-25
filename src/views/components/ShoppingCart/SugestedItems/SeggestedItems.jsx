@@ -57,7 +57,7 @@ const SeggestedItems = ({ num }) => {
             style={{ textDecoration: 'none' }}>
             {/* <div className="d-none d-sm-block product-rating"> */}
             <StarRatings
-              rating={product?.rating}
+              rating={parseFloat(product?.rating || 0)}
               starRatedColor='rgb(232, 126, 36)'
               numberOfStars={5}
               name='rating'

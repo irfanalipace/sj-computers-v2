@@ -378,7 +378,7 @@ const MobileHomeCategory = () => {
                   spacing={1}
                   direction={'row'}>
                   <StarRatings
-                    rating={products[0].rating}
+                    rating={parseFloat(products[0].rating || 0)}
                     starRatedColor='rgb(232, 126, 36)'
                     numberOfStars={5}
                     name='rating'

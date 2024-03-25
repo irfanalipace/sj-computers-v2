@@ -27,7 +27,7 @@ export default function RatingDetails({ productDetails, loading }) {
           </Typography>
           <Stack direction='row' alignItems='flex-start'>
             <StarRatings
-              rating={productDetails?.rate?.overall_rating}
+              rating={parseFloat(productDetails?.rate?.overall_rating || 0)}
               starRatedColor='rgb(232, 126, 36)'
               numberOfStars={5}
               name='rating'

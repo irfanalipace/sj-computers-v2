@@ -96,7 +96,9 @@ const LoginAndTimeProduct = () => {
                         // spacing={1}
                         direction={'row'}>
                         <StarRatings
-                          rating={discoutedProduct?.product?.rating}
+                          rating={parseFloat(
+                            discoutedProduct?.product?.rating || 0,
+                          )}
                           starRatedColor='rgb(232, 126, 36)'
                           numberOfStars={5}
                           name='rating'
@@ -246,7 +248,9 @@ const LoginAndTimeProduct = () => {
                           // spacing={1}
                           direction={'row'}>
                           <StarRatings
-                            rating={discoutedProduct?.product?.rating}
+                            rating={parseFloat(
+                              discoutedProduct?.product?.rating || 0,
+                            )}
                             starRatedColor='rgb(232, 126, 36)'
                             numberOfStars={5}
                             name='rating'
