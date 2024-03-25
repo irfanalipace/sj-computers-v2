@@ -145,8 +145,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
       <Box>
         <Box
           key={index}
-          className={`review ${expandedReviews[index] ? 'expanded' : ''}`}
-        >
+          className={`review ${expandedReviews[index] ? 'expanded' : ''}`}>
           <p className='review-comment my-0'>{reviewData?.body}</p>
         </Box>
         {reviewData?.body?.length > 1306 && (
@@ -173,8 +172,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
             width={'100%'}
             my={2}
             spacing={1}
-            overflow={'auto'}
-          >
+            overflow={'auto'}>
             {reviewData?.product_media?.map((item, index) => {
               return (
                 <Box
@@ -188,8 +186,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
                   sx={{ border: '1px solid lightgray' }}
                   onClick={() =>
                     handleOpenDialog(item?.product_review_id, item?.id, index)
-                  }
-                >
+                  }>
                   <LazyLoadImage
                     width={'90px'}
                     style={{ objectFit: 'contain' }}
@@ -202,7 +199,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
             })}
           </Stack>
           <p className='my-2 text-muted py-1 helpful-count'>
-            2 People find this helpful
+            {`${reviewData?.product_review_report?.length} People find this helpful`}
           </p>
           <div className='d-flex '>
             {!reviewData?.helpful ? (
@@ -229,8 +226,7 @@ function ReviewCard({ reviewData, index, isDialog, updateReveiw, data }) {
                 }
                 setOpen(true);
               }}
-              className='review-report-btn'
-            >
+              className='review-report-btn'>
               Report
             </button>
           </div>
