@@ -95,13 +95,9 @@ const AddToCartCard = ({ product }) => {
               <h4
                 style={{
                   marginTop: '8px',
-                  // marginLeft: "30px",
                   fontSize: '12px',
                   fontWeight: 600,
-                }}>
-                Style:&nbsp;
-                <span>27 ‘’ FHD FreeSync 100HZ</span>
-              </h4>
+                }}></h4>
             )}
           </Grid>
         </Grid>
@@ -113,7 +109,7 @@ const AddToCartCard = ({ product }) => {
         lg={gettingProtectionPlan?.plan?.durationInYears ? 3 : 5}
         style={{ backgroundColor: '#fff' }}
         mb={2}>
-        {!gettingProtectionPlan?.plan?.durationInYears && (
+        {/* {!gettingProtectionPlan?.plan?.durationInYears && (
           <Grid
             container
             item
@@ -132,7 +128,7 @@ const AddToCartCard = ({ product }) => {
               Choose this option at checkout. <Link> see details</Link>
             </p>
           </Grid>
-        )}
+        )} */}
         <Grid
           item
           lg={!gettingProtectionPlan?.plan?.durationInYears ? 5 : 10}
