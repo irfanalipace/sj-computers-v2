@@ -66,10 +66,11 @@ class PayPalController extends Controller
                 "is_buy_now" => (isset($request->is_buy_now ) && $request->is_buy_now == true) ? true : false,
                 "cart_id" => (isset($request->cart_id )) ? $request->cart_id : null,
             ];
-            cache::create([
+            $cache = cache::create([
                 'key' => 'paypal_transaction_'.$response['id'],
                 'value' => json_encode($detail,true)
-            ]);            
+            ]);
+            dd($cache);
             // Cache::put("paypal_transaction_".$response['id'],$detail, 1800); // 1800 seconds = 30 minutes
               
             // Session::put('shippping_address', $request->shipping_address);
@@ -92,9 +93,9 @@ class PayPalController extends Controller
         $response = $this->provide->capturePaymentOrder($request->token);
        
         $cache = cache::where('key','paypal_transaction_'.$request->token)->first();
-
+        dd($cache);
         $getCache = json_decode($cache->value);
-     
+        
         // $getCache = Cache::get("paypal_transaction_".$request->token);
         $shippingAddress = $getCache->shippping_address; 
         $shippingAddressForm['country'] = $shippingAddress->country;
