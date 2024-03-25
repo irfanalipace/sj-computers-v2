@@ -120,23 +120,22 @@ class ProductController extends BaseController
 
             $data['review'] = $this->queryProductInfo('review', $category);
 
-            return $this->sendResponse($data);
-        }
+        } else {
+            $data['processor'] = $this->queryProductInfo('processor', $category);
 
-        $data['processor'] = $this->queryProductInfo('processor', $category);
-        $data['ram_memory'] = $this->queryProductInfo('ram_memory', $category);
-        $data['operating_system'] = $this->queryProductInfo('operating_system', $category);
-        // $data['operating_system'] = [];
-        $data['hard_disk'] = $this->queryProductInfo('hard_disk', $category);
-        // $data['graphic'] = $this->queryProductInfo('graphic');
-        // $data['graphic'] = [];
-        $data['brand'] = $this->queryProductInfo('brand', $category);
-        
-        $data['price'] = $this->queryProductInfo('price', $category);
-
-        $data['review'] = $this->queryProductInfo('review', $category);
-
-        // dd($data);
+            $data['ram_memory'] = $this->queryProductInfo('ram_memory', $category);
+            
+            $data['operating_system'] = $this->queryProductInfo('operating_system', $category);
+            // $data['operating_system'] = [];
+            $data['hard_disk'] = $this->queryProductInfo('hard_disk', $category);
+            // $data['graphic'] = $this->queryProductInfo('graphic');
+            // $data['graphic'] = [];
+            $data['brand'] = $this->queryProductInfo('brand', $category);
+            
+            $data['price'] = $this->queryProductInfo('price', $category);
+    
+            $data['review'] = $this->queryProductInfo('review', $category);
+        }       
 
         return $this->sendResponse($data);
     }
