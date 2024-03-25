@@ -70,7 +70,7 @@ class PayPalController extends Controller
                 'key' => 'paypal_transaction_'.$response['id'],
                 'value' => json_encode($detail,true)
             ]);
-            dd($cache);
+          
             // Cache::put("paypal_transaction_".$response['id'],$detail, 1800); // 1800 seconds = 30 minutes
               
             // Session::put('shippping_address', $request->shipping_address);
@@ -196,10 +196,10 @@ class PayPalController extends Controller
 
             // Convert to JSON if necessary for API response
             $jsonResponse = json_encode($orderDetailOutput);
-          
+            
             // \Cache::forget("paypal_transaction_".$request->token);
             
-            return redirect()->to('thank-you?orderSuccess='.$jsonResponse);
+            return redirect()->to('thank-you?orderSuccess=true'.'&&order_no='.$orderDetailOutput['order_no']);
             
 
         } else {
