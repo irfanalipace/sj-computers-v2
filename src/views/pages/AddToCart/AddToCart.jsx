@@ -11,12 +11,15 @@ import LoaderComponent from '@common/LoaderComponent/LoaderComponent';
 import { useSelector } from 'react-redux';
 import './AddToCart.css';
 import { featureProductsApi } from '@api/products';
+import { useNavigate } from 'react-router-dom';
 
 const AddToCart = () => {
   const { productId, itemAdded } = useParams();
   const cart = useSelector(state => state?.cart?.cart);
+  const cartItems = useSelector(state => state?.cart?.cart?.slice().reverse());
   const product = cart?.find(item => item?.product?.asin == productId);
   const [isLoading, setLoading] = useState(false);
+  const navigate = useNavigate();
   // const { featuredProducts } = useSimilarData(product?.id);
   const [featureProducts, setFeatureProduct] = useState([]);
   const getFeaturedProduct = async () => {
@@ -34,6 +37,17 @@ const AddToCart = () => {
     getFeaturedProduct();
   }, [product?.id]);
 
+  useEffect(() => {
+    if (cartItems?.length > 0) {
+      console.log('redirected to new path by useEffect');
+      navigate(
+        `/cart/${cartItems[0]?.product?.name.split(' ').slice(0, 10).join(' ')}/dp/${cartItems[0]?.product?.asin}`,
+      );
+    } else {
+      navigate('/cart');
+    }
+  }, [cartItems?.length]);
+
   return !product ? (
     <div style={{ padding: '140px', textAlign: 'center' }}>
       <LoaderComponent />
@@ -42,7 +56,7 @@ const AddToCart = () => {
     <div style={{ backgroundColor: '#EAEDED' }}>
       <Grid container direction='row-reverse'>
         <Grid item lg={1.55}>
-          <CartSideBar />
+          <CartSideBar cartItems={cartItems} />
         </Grid>
         <Grid
           item
