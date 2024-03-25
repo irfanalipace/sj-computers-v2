@@ -32,8 +32,8 @@ function usePaymentData(buyNow = false) {
     // map item according to the request payload format
     total_quantity += item?.quantity;
     const obj = {
-      product_id: item.id,
-      qty: item.quantity,
+      product_id: item?.product?.id,
+      qty: item?.product?.quantity,
     };
     if (item.plan?.value && !isAuthenticated) {
       obj.protection_plan_id = item.plan.value;
@@ -46,6 +46,13 @@ function usePaymentData(buyNow = false) {
       ...shippingDetails,
       email: shippingDetails?.email || user?.email,
       full_name: shippingDetails?.full_name || user?.name,
+    },
+    cart_items: cartData,
+    details: {
+      ...cartDetails,
+      shipment_amount: cartDetails.shipment_amount || 0,
+      estimate_days: cartDetails.estimate_days || 0,
+      total_quantity,
     },
   };
 
@@ -81,6 +88,8 @@ function usePaymentData(buyNow = false) {
       };
     }
   }
+
+  console.log(paymentPayload);
 
   return paymentPayload;
 }

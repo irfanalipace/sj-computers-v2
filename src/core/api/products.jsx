@@ -141,6 +141,24 @@ export function getDiscountedProduct() {
   });
 }
 
+export function getPaypalOrderDetail(orderNo) {
+  return new Promise((resolve, reject) => {
+    ApiService.get(`/get-order/${orderNo}`)
+      .then(response => {
+        console.print(
+          'file: products.js | paypal order api | response',
+          response,
+        );
+
+        resolve(response);
+      })
+      .catch(e => {
+        console.print('Console Log: : error filterProductsApi', e);
+        reject(e);
+      });
+  });
+}
+
 // export function productPreviewApi(formData) {
 
 //     return new Promise((resolve, reject) => {

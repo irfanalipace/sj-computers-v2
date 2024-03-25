@@ -18,6 +18,7 @@ function OrderSummary({
   const dispatch = useDispatch();
   const placingOrder = useSelector(state => state.orders.placingOrder);
   const paymentData = usePaymentData(true);
+
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
   const Button = () => {
@@ -92,14 +93,14 @@ function OrderSummary({
                         : '$0'}
                     </span>
                   </li>
-                  <li>
+                  {/* <li>
                     <span>Total before tax:</span>
                     <span>--</span>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <span>Estimated tax to be calculated:</span>
                     <span>--</span>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
               <div className='order-total'>
