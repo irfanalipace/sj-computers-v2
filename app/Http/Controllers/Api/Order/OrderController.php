@@ -15,6 +15,7 @@ use App\Traits\FedexTrait;
 use App\Models\OrderShippingAddress;
 use App\Models\UserAddress;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 
 class OrderController extends BaseController
@@ -132,8 +133,10 @@ class OrderController extends BaseController
     public function getOrderByNo($orderNo)
     {
         try{   
-            $order = Order::where('id',$orderNo)->first();
+            $order = Order::where('id',$orderNo)->firstOrFail();
             return $this->sendResponse($order,'Successfully fetched Order details.');
+        }catch(ModelNotFoundException $e){
+            return $this->sendError('error',"Order is not found.");
         } catch(Exception $e){
             return $this->sendError('error',$e->getMessage());
         }  

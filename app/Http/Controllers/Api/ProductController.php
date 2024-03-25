@@ -841,20 +841,31 @@ class ProductController extends BaseController
         // Apply review filter
         if ($key == 'review' && !empty($value)) {
             $reviewFilter = $value;
-            $query->whereHas('productStats', function ($query) use ($reviewFilter) {
-                $overallRatingPath = '$.statistics.overall_rating';
-            
-                if ($reviewFilter['min'] == $reviewFilter['max']) {
-                  // Exact match
-                  $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') = ?", [$reviewFilter['min']]);
-                } else {
-                  // Range query
-                  $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') BETWEEN ? AND ?", [
-                    $reviewFilter['min'],
-                    $reviewFilter['max']
-                  ]);
-                }
-              });
+            // $query = Product::where('id', 68)
+            // ->whereHas('productStats', function ($query) use ($reviewFilter) {
+            //     $overallRatingPath = '$.statistics.overall_rating';
+                
+            //     if ($reviewFilter['min'] === $reviewFilter['max']) {
+            //         // Exact match
+            //         $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') = ?", [$reviewFilter['min']]);
+            //     } else {
+            //         // Range query
+            //         $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') BETWEEN ? AND ?", [
+            //             $reviewFilter['min'],
+            //             $reviewFilter['max']
+            //         ]);
+            //     }
+            // });
+            $query =  $query->whereHas('productStats', function ($query) use ($reviewFilter) {
+                    $overallRatingPath = '$.rate.overall_rating';
+                    
+                    // Since you are looking for a range, we use BETWEEN in this case
+                    $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') BETWEEN ? AND ?", [
+                        $reviewFilter['min'],
+                        $reviewFilter['max']
+                    ]);
+                });
+             
            
         }
         return $query->orderBy('price', 'asc');
