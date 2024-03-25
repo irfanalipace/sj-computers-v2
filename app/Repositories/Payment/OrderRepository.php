@@ -62,7 +62,7 @@ class OrderRepository
 
             foreach ($cartItems as $item) {
                 # store product_id into ids variable...
-                $ids[] = $item['product_id'];
+                $ids[] = $item->product_id;
             }
             //query to lock products
             $check = Product::whereIn('id', $ids)->lockForUpdate()
@@ -71,20 +71,20 @@ class OrderRepository
                 throw new Exception('product is not found.');
             }
             foreach ($cartItems as $item) {
-                $product = Product::whereId($item['product_id'])->first();
+                $product = Product::whereId($item->product_id)->first();
                 
                 $data = [
                     'order_id' => $order->id,
-                    'product_id' => $item['product_id'],
+                    'product_id' => $item->product_id,
                     'product_name' => $product->name,
-                    'qty' => $item['qty'],
+                    'qty' => $item->qty,
                     'price' => $product->price,
-                    'protective_price' => $item['attributes']['protective_price'] ?? null,
-                    'protective_plan_id' => $item['attributes']['protective_id'] ?? null
+                    'protective_price' => $item->attributes->protective_price ?? null,
+                    'protective_plan_id' => $item->attributes->protective_id ?? null
                 ];
 
                 // Update item in product table
-                $this->updateProduct($item['product_id'], $item['qty']);
+                $this->updateProduct($item->product_id, $item->qty);
 
                 // $productInfo = $this->getAmazonInventory($item['product_id']);
                 // if ($productInfo['status']) {
@@ -289,8 +289,8 @@ class OrderRepository
             foreach ($cart_items as $value) {
                 # code...
                 
-                $product_id = ($userType == StatusEnum::GUEST) ? $value['product_id'] : $value['id'];
-                $quantity = ($userType == StatusEnum::GUEST) ? $value['qty'] : $value['quantity'];
+                $product_id = ($userType == StatusEnum::GUEST) ? $value->product_id : $value['id'];
+                $quantity = ($userType == StatusEnum::GUEST) ? $value->qty : $value['quantity'];
                 $product = Product::whereId($product_id)->withoutGlobalScopes()->first();
                 
                 if ($product->quantity == 0) {
