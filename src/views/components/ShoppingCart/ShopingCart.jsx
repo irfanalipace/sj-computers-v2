@@ -198,14 +198,14 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                 <div className='card card-checkout' style={{ borderRadius: 0 }}>
                   <div className='card-body'>
                     <div className='checkout-container'>
-                      <p className='checkout-text hide-on-mobile'>
+                      {/* <p className='checkout-text hide-on-mobile'>
                         <span style={{ color: '#318243' }}>
                           Your order qualifies for FREE Shipping.
                         </span>{' '}
                         <br />
                         Choose this option at checkout.&ensp;
                         <Link>see details</Link>
-                      </p>
+                      </p> */}
                       <div className='card-body-text'>
                         <div className='text-body'>
                           <span className='sub-title'>

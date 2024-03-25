@@ -19,23 +19,21 @@ const CartSideBar = () => {
           </span>{' '}
         </h2>
         <usd className='hidden-on-mobile hidden-on-tab'>${totalCart}</usd>
-        <p className='hidden-on-mobile hidden-on-tab'>
+        {/* <p className='hidden-on-mobile hidden-on-tab'>
           <span style={{ color: 'green', lineHeight: '12px' }}>
             Your order qualifies for FREE SHIPPING.
           </span>{' '}
           Choose this option at checkout. <br />
           <Link style={{ marginTop: '3px' }}>See details</Link>
-        </p>
+        </p> */}
         <button
           className='cart-side-btn hidden-on-mobile hidden-on-tab'
-          onClick={() => navigate('/cart')}
-        >
+          onClick={() => navigate('/cart')}>
           Go to Cart
         </button>
         <button
           className='hidden-on-desktop proceed-cart-btn'
-          onClick={() => navigate('/checkout')}
-        >
+          onClick={() => navigate('/checkout')}>
           Proceed to checkout ({cartItems?.length} item){' '}
         </button>
       </div>
@@ -46,8 +44,7 @@ const CartSideBar = () => {
       ))}
       <div
         className='hidden-on-desktop'
-        style={{ padding: '30px', borderTop: '20px solid #EAEDED' }}
-      >
+        style={{ padding: '30px', borderTop: '20px solid #EAEDED' }}>
         <button
           style={{
             border: '1px solid #000',
@@ -57,8 +54,7 @@ const CartSideBar = () => {
             borderRadius: '15px',
             fontWeight: 500,
           }}
-          onClick={() => navigate('/')}
-        >
+          onClick={() => navigate('/')}>
           Add More Items <ArrowForwardIosIcon sx={{ fontSize: '12px' }} />
         </button>
       </div>
