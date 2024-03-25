@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Classes\StatusEnum;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -19,12 +20,14 @@ class GenerateInvoiceJob implements ShouldQueue
      *
      * @return void
      */
-    private $user, $cartData,$order;
-    public function __construct($user, $cartData, $order)
+    private $user, $cartData,$order,$paymentType,$userType;
+    public function __construct($user, $cartData, $order,$paymentType,$userType)
     {
         $this->cartData = $cartData;
         $this->user = $user;
         $this->order = $order;
+        $this->paymentType = $paymentType;
+        $this->userType = $userType;
     }
 
     /**
@@ -33,12 +36,26 @@ class GenerateInvoiceJob implements ShouldQueue
      * @return void
      */
     public function handle()
-    {
-
+    {      
+        // Now, modify the initial code to integrate this change
         $order['orderDetail'] = $this->cartData;
-        $order['userInfo'] = $this->user;
         $order['OrderAddress'] = $this->order['OrderAddress'];
         $order['order'] = $this->order['order'];
+        
+        if ($this->paymentType == StatusEnum::PAYMENTTYPEPAYPAL ) {            
+            $userInfoForPayPal = [
+                'id' => $this->user->id,
+                'name' => ($this->userType == StatusEnum::GUEST) ? $this->user->full_name : $this->user->name,
+                'email' => $this->user->email,
+                // Add more fields as required
+            ];
+            // Use the transformed userInfo for PayPal
+            $order['userInfo'] = $userInfoForPayPal;
+        } else {
+            // Assuming you want to keep the original object format for other payment types
+            $order['userInfo'] = $this->user;
+        }
+       
         //Email to customer
         $email = $this->user->email;
         $ccEmail = 'orders@sjcomputers.us';

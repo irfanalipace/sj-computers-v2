@@ -180,7 +180,7 @@ class PayPalController extends Controller
             });
            
             Invoice::where('id', $order['invoice_id'])->update(['payer_id' => $response['id'] ]);
-            GenerateInvoiceJob::dispatch($user, $orderData, $order);           
+            GenerateInvoiceJob::dispatch($user, $orderData, $order,StatusEnum::PAYMENTTYPEPAYPAL,$userType);           
            
             // If you need to display more details, add them here accordingly
 
