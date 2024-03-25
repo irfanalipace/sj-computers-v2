@@ -344,8 +344,8 @@ class ProductController extends BaseController
                 return $statistics['rate']['overall_rating'] ?? null;
             });
 
-            $minRating = $averageRatings->min() ?? 0;
-            $maxRating = $averageRatings->max() ?? 0;
+            $min_rating = $averageRatings->min() ?? 0;
+            $max_rating = $averageRatings->max() ?? 0;
         } else {
             // Retrieve the minimum and maximum ratings directly from product_statistics table
             $minMaxRatings = ProductStatistic::query()
@@ -353,11 +353,11 @@ class ProductController extends BaseController
                 ->selectRaw('ROUND(MAX(JSON_EXTRACT(statistics, "$.rate.overall_rating")), 1) AS max_rating')
                 ->first();
 
-            $minRating = $minMaxRatings->min_rating ?? 0;
-            $maxRating = $minMaxRatings->max_rating ?? 0;
+            $min_rating = $minMaxRatings->min_rating ?? 0;
+            $max_rating = $minMaxRatings->max_rating ?? 0;
         }
 
-        return compact('minRating', 'maxRating');
+        return compact('min_rating', 'max_rating');
     }
 
     private function getOperatingSystem($sql = [])
