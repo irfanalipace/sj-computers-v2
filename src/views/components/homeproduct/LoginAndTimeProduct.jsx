@@ -75,17 +75,20 @@ const LoginAndTimeProduct = () => {
               </div>
             ) : (
               <div style={{ minHeight: '303px' }}>
-                {products && products?.length > 0 && (
-                  <>
+                {discoutedProduct && (
+                  <Link
+                    to={`/${discoutedProduct?.summary}/dp/${discoutedProduct?.product?.asin}`}>
                     <div style={{ textAlign: 'center' }}>
                       <img
                         className={`advertisment-img-products-imges`}
-                        src={products[0].image}
+                        src={discoutedProduct?.product?.image}
                         alt={'addDesktop'}
                       />
                     </div>
 
-                    <h5 className='time-product-name'>{products[0].name}</h5>
+                    <h5 className='time-product-name'>
+                      {discoutedProduct?.product?.name}
+                    </h5>
                     <Stack mb={1} alignItems={'start'} spacing={1}>
                       <Stack
                         alignItems={'center'}
@@ -93,7 +96,7 @@ const LoginAndTimeProduct = () => {
                         // spacing={1}
                         direction={'row'}>
                         <StarRatings
-                          rating={products[0].rating}
+                          rating={discoutedProduct?.product?.rating}
                           starRatedColor='rgb(232, 126, 36)'
                           numberOfStars={5}
                           name='rating'
@@ -108,36 +111,47 @@ const LoginAndTimeProduct = () => {
                           fontSize={'12px'}
                           lineHeight={'17px'}
                           color={'#007185'}>
-                          ({products[0].total_review})
+                          ({discoutedProduct?.product?.total_review})
                         </Typography>
                       </Stack>
                       {/* {type === "recommended" && getRandomComponent()} */}
                     </Stack>
                     <div className='featured-product-timing mt-4'>
-                      {/* <div className='original-price'>
-                        ${Math.floor(products[0]?.price)}
-                      </div> */}
-
+                      <div className='original-price'>
+                        $
+                        {discoutedProduct?.additional_information?.actual_price}
+                      </div>
                       <div className='discount-price'>
                         <span>$</span>
-                        {products[0]?.price.toString().split('.')[0]}
+                        {
+                          discoutedProduct?.additional_information?.discounted_price
+                            .toString()
+                            .split('.')[0]
+                        }
                         <sup>
-                          {products[0]?.price?.toString().split('.')[1]}
+                          {
+                            discoutedProduct?.additional_information?.discounted_price
+                              ?.toString()
+                              .split('.')[1]
+                          }
                         </sup>
                       </div>
                       <div className='product-delivery-charges ms-0 ms-sm-2 mb-2 mb-sm-0'>
                         <FontAwesomeIcon className='me-1' icon={faTruck} /> Free
                         Shipping
                       </div>
-                      {/* <div className='save-value'>
-                        <span>Save $20</span>
-                      </div> */}
+                      <div className='save-value'>
+                        <span>
+                          Save +{' '}
+                          {discoutedProduct?.additional_information?.discount}
+                        </span>
+                      </div>
                       {/* <div className='end-in'>
                         Ends in {parsedDate.getHours()}
                         h:{parsedDate.getMinutes()}m
                       </div> */}
                     </div>
-                  </>
+                  </Link>
                 )}
               </div>
             )}
