@@ -95,8 +95,8 @@ class PayPalController extends Controller
         $cache = cache::where('key','paypal_transaction_'.$request->token)->first();
         
         $getCache = json_decode($cache->value);
-        dd($getCache);
-        // $getCache = Cache::get("paypal_transaction_".$request->token);
+
+       
         $shippingAddress = $getCache->shippping_address; 
         $shippingAddressForm['country'] = $shippingAddress->country;
         $shippingAddressForm['full_name'] = $shippingAddress->full_name;
