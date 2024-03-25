@@ -86,8 +86,7 @@ class PayPalController extends Controller
     }
 
     public function paypalSuccess(Request $request,OrderRepository $repository)
-    {
-        DB::beginTransaction();
+    {       
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
@@ -95,7 +94,7 @@ class PayPalController extends Controller
         $cache = cache::where('key','paypal_transaction_'.$request->token)->first();
 
         $getCache = json_decode($cache->value);
-       
+     
         // $getCache = Cache::get("paypal_transaction_".$request->token);
         $shippingAddress = $getCache->shippping_address; 
         $shippingAddressForm['country'] = $shippingAddress->country;
@@ -125,7 +124,6 @@ class PayPalController extends Controller
         
          $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true),StatusEnum::PAYMENTTYPEPAYPAL);
          if (!$check_product_first) { 
-            DB::rollBack();
              return redirect('cart?error='."Product quantity is invalid");
          }
         
@@ -151,7 +149,7 @@ class PayPalController extends Controller
              $orderData['shipment_amount'] =  0;
              $orderData['estimate_day'] =   Carbon::now()->addWeekdays(5)->format('l d-m-Y');
          }
-
+         DB::beginTransaction();
         if(isset($response['status']) && $response['status'] == 'COMPLETED') {
 
             $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));

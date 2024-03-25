@@ -36,7 +36,7 @@ class CardRequest extends FormRequest
             'shipping_address.state' => 'required',
             'shipping_address.apartment' => 'nullable',
             'shipping_address.zip_code' => 'required',
-            'shipping_address.permanent_address' => 'nullable|in:true,false'
+            'shipping_address.permanent_address' => 'nullable'
         ];
 
         // If the user is a guest, add email as a required field
