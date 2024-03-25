@@ -1,5 +1,6 @@
 import { Box, Stack, Typography } from '@mui/material';
 import React from 'react';
+import './ShipmentInformation.css';
 
 export default function ShipmentInformation({
   trackingInfo,
