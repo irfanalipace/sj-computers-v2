@@ -11,6 +11,8 @@ use App\Models\SjAmazonIntegration;
 use App\Traits\ProductTrait;
 use Illuminate\Console\Command;
 use App\Models\Brand;
+use Illuminate\Support\Facades\Log;
+
 use function PHPUnit\Framework\stringStartsWith;
 
 class SjProduct extends Command
@@ -58,6 +60,7 @@ class SjProduct extends Command
 
     public function getProducts()
     {
+        Log::info('Sj-Products');
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -114,6 +117,7 @@ class SjProduct extends Command
 
             echo "product is added" . $key . "\n";
         }
+        Log::info('Sj-Products-end');
         dd('done');
 
     }
