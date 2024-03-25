@@ -95,24 +95,35 @@ class PayPalController extends Controller
         $cache = cache::where('key','paypal_transaction_'.$request->token)->first();
 
         $getCache = json_decode($cache->value);
-     
+       
         // $getCache = Cache::get("paypal_transaction_".$request->token);
         $shippingAddress = $getCache->shippping_address; 
-        
+        $shippingAddressForm['country'] = $shippingAddress->country;
+        $shippingAddressForm['full_name'] = $shippingAddress->full_name;
+        $shippingAddressForm['phone_number'] = $shippingAddress->phone_number;
+        $shippingAddressForm['email'] = $shippingAddress->email ?? null;
+        $shippingAddressForm['address'] = $shippingAddress->address;
+        $shippingAddressForm['city'] = $shippingAddress->city;
+        $shippingAddressForm['state'] = $shippingAddress->state;
+        $shippingAddressForm['apartment'] = $shippingAddress->apartment ?? null;
+        $shippingAddressForm['zip_code'] = $shippingAddress->zip_code;
+        $shippingAddressForm['permanent_address'] = $shippingAddress->permanent_address ?? false;
+
         $user =  $getCache->user; 
         $userType =  $getCache->user_type; 
-        $cartDetails = $getCache->cart_details;  
+        $cartDetails = $getCache->cart_details; 
+      
      
          /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
          $userIdToPass = ($userType != StatusEnum::GUEST) ? $user->id : $user->email;
          $userType = ($userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
          $cartItems = ($userType == StatusEnum::GUEST) ? $getCache->cart_items : [];
-        
+       
          $cartContent = (isset($getCache->is_buy_now ) && $getCache->is_buy_now == true) ? \Cart::session($userIdToPass)->get($getCache->cart_id) : \Cart::session($userIdToPass)->getContent();
        
          $listofItems = ($userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
         
-         $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
+         $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true),StatusEnum::PAYMENTTYPEPAYPAL);
          if (!$check_product_first) { 
             DB::rollBack();
              return redirect('cart?error='."Product quantity is invalid");
@@ -143,7 +154,7 @@ class PayPalController extends Controller
 
         if(isset($response['status']) && $response['status'] == 'COMPLETED') {
 
-            $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddress, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
+            $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
             if (!$order) {
                 return redirect()->route('cancel');
              }    
