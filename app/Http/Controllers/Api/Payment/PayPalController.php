@@ -6,7 +6,7 @@ use App\Classes\StatusEnum;
 use App\Http\Controllers\Controller;
 use App\Jobs\Error\SendErrorMail;
 use App\Models\Invoice;
-use App\Models\Cache as cacheData;
+use App\Models\cache;
 use App\Models\Payment;
 use App\Repositories\Payment\OrderRepository;
 use Carbon\Carbon;
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Session;
 //use Srmklive\PayPal\Services\ExpressCheckout;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Jobs\GenerateInvoiceJob;
-use Illuminate\Support\Facades\Cache;
+// use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
@@ -66,7 +66,7 @@ class PayPalController extends Controller
                 "is_buy_now" => (isset($request->is_buy_now ) && $request->is_buy_now == true) ? true : false,
                 "cart_id" => (isset($request->cart_id )) ? $request->cart_id : null,
             ];
-            cacheData::create([
+            cache::create([
                 'key' => 'paypal_transaction_'.$response['id'],
                 'value' => json_encode($detail,true)
             ]);            
@@ -92,7 +92,7 @@ class PayPalController extends Controller
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
        
-        $cache = cacheData::where('key','paypal_transaction_'.$request->token)->first();
+        $cache = cache::where('key','paypal_transaction_'.$request->token)->first();
 
         $getCache = json_decode($cache->value);
      
@@ -187,7 +187,7 @@ class PayPalController extends Controller
             // Convert to JSON if necessary for API response
             $jsonResponse = json_encode($orderDetailOutput);
           
-            \Cache::forget("paypal_transaction_".$request->token);
+            // \Cache::forget("paypal_transaction_".$request->token);
             
             return redirect()->to('thank-you?orderSuccess='.$jsonResponse);
             
