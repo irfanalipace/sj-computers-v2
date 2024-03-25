@@ -147,7 +147,7 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
               />
             </div>
           </div>
-          <div className='sj-banner-similar-item best-choice-item-products mt-2'>
+          {/* <div className='sj-banner-similar-item best-choice-item-products mt-2'>
             <p>
               &ensp; &ensp;SJ's <span style={{ color: '#E0BC00' }}>choice</span>
             </p>
@@ -155,12 +155,10 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
             <div className='mt-1' style={{ fontSize: '14px' }}>
               in
             </div>
-          </div>
-          <div
-            style={{ fontSize: '12px', marginTop: '-12px' }}
-            className='mb-2'>
+          </div> */}
+          {/* <div style={{ fontSize: '12px' }} className='mb-2'>
             Computer Monitors
-          </div>
+          </div> */}
           <div className=' d-sm-none product-prices-mobile'>
             {product.originalPrice && <div>${product.originalPrice}</div>}
             <div className='product-new-price'>
@@ -196,8 +194,13 @@ const ProductCardSimilarItems = ({ type = '', product, inGrid }) => {
             </div>
           )}
           {type === 'recommended' && (
-            <div style={{ fontSize: '12px', marginTop: '5px' }}>
-              <FontAwesomeIcon icon={faTruck} /> Free Shipping by SJ
+            <div
+              className='data-free-shipping-mobile-screen'
+              style={{
+                fontSize: '12px',
+                lineHeight: '14px',
+              }}>
+              <FontAwesomeIcon icon={faTruck} /> Free Shipping 
             </div>
           )}
         </div>

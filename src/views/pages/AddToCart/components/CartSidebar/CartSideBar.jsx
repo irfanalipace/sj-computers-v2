@@ -5,9 +5,9 @@ import CartItem from '../../../../components/CartItem/CartItem';
 import { useNavigate } from 'react-router-dom';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const CartSideBar = () => {
+const CartSideBar = ({ cartItems }) => {
   const totalCart = useSelector(state => state?.cart?.details?.total);
-  const cartItems = useSelector(state => state?.cart?.cart?.slice().reverse());
+
   const navigate = useNavigate();
   return (
     <div className='cart-side-bar-container'>

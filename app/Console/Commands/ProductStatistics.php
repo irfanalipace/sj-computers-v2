@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\ProductStatistic;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class ProductStatistics extends Command
 {
@@ -43,7 +44,7 @@ class ProductStatistics extends Command
     {
        $product = Product::withoutGlobalScopes()->get();
        $requestsCount = 0; // Initialize a variable to count requests
-       
+       Log::info('product-statistics start');
        foreach ($product as $key => $value) {
         # code...
            $response = $this->curlResponse($value->asin);
@@ -60,6 +61,7 @@ class ProductStatistics extends Command
                sleep(5); 
            }  
            echo "product ". $value->id ."\n";
+           Log::info('product'. $value->id);
        }
         
         // echo $response;

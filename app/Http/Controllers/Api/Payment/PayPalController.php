@@ -66,10 +66,11 @@ class PayPalController extends Controller
                 "is_buy_now" => (isset($request->is_buy_now ) && $request->is_buy_now == true) ? true : false,
                 "cart_id" => (isset($request->cart_id )) ? $request->cart_id : null,
             ];
-            cache::create([
+            $cache = cache::create([
                 'key' => 'paypal_transaction_'.$response['id'],
                 'value' => json_encode($detail,true)
-            ]);            
+            ]);
+          
             // Cache::put("paypal_transaction_".$response['id'],$detail, 1800); // 1800 seconds = 30 minutes
               
             // Session::put('shippping_address', $request->shipping_address);
@@ -86,17 +87,16 @@ class PayPalController extends Controller
     }
 
     public function paypalSuccess(Request $request,OrderRepository $repository)
-    {
-        DB::beginTransaction();
+    {       
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
        
         $cache = cache::where('key','paypal_transaction_'.$request->token)->first();
-
+        
         $getCache = json_decode($cache->value);
+
        
-        // $getCache = Cache::get("paypal_transaction_".$request->token);
         $shippingAddress = $getCache->shippping_address; 
         $shippingAddressForm['country'] = $shippingAddress->country;
         $shippingAddressForm['full_name'] = $shippingAddress->full_name;
@@ -125,7 +125,6 @@ class PayPalController extends Controller
         
          $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true),StatusEnum::PAYMENTTYPEPAYPAL);
          if (!$check_product_first) { 
-            DB::rollBack();
              return redirect('cart?error='."Product quantity is invalid");
          }
         
@@ -151,7 +150,7 @@ class PayPalController extends Controller
              $orderData['shipment_amount'] =  0;
              $orderData['estimate_day'] =   Carbon::now()->addWeekdays(5)->format('l d-m-Y');
          }
-
+         DB::beginTransaction();
         if(isset($response['status']) && $response['status'] == 'COMPLETED') {
 
             $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
@@ -197,10 +196,10 @@ class PayPalController extends Controller
 
             // Convert to JSON if necessary for API response
             $jsonResponse = json_encode($orderDetailOutput);
-          
+            
             // \Cache::forget("paypal_transaction_".$request->token);
             
-            return redirect()->to('thank-you?orderSuccess='.$jsonResponse);
+            return redirect()->to('thank-you?orderSuccess=true'.'&&order_no='.$orderDetailOutput['order_no']);
             
 
         } else {

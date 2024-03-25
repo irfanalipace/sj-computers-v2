@@ -17,6 +17,7 @@ use App\Models\ProductDetail;
 use App\Models\ProductInfo;
 use App\Models\ProductMedia;
 use App\Models\ProductReview;
+use App\Models\ProductStatistic;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -120,22 +121,23 @@ class ProductController extends BaseController
 
             $data['review'] = $this->queryProductInfo('review', $category);
 
-        } else {
-            $data['processor'] = $this->queryProductInfo('processor', $category);
+            return $this->sendResponse($data);
+        }
 
-            $data['ram_memory'] = $this->queryProductInfo('ram_memory', $category);
-            
-            $data['operating_system'] = $this->queryProductInfo('operating_system', $category);
-            // $data['operating_system'] = [];
-            $data['hard_disk'] = $this->queryProductInfo('hard_disk', $category);
-            // $data['graphic'] = $this->queryProductInfo('graphic');
-            // $data['graphic'] = [];
-            $data['brand'] = $this->queryProductInfo('brand', $category);
-            
-            $data['price'] = $this->queryProductInfo('price', $category);
-    
-            $data['review'] = $this->queryProductInfo('review', $category);
-        }       
+        $data['processor'] = $this->queryProductInfo('processor', $category);
+        $data['ram_memory'] = $this->queryProductInfo('ram_memory', $category);
+        $data['operating_system'] = $this->queryProductInfo('operating_system', $category);
+        // $data['operating_system'] = [];
+        $data['hard_disk'] = $this->queryProductInfo('hard_disk', $category);
+        // $data['graphic'] = $this->queryProductInfo('graphic');
+        // $data['graphic'] = [];
+        $data['brand'] = $this->queryProductInfo('brand', $category);
+
+        $data['price'] = $this->queryProductInfo('price', $category);
+
+        $data['review'] = $this->queryProductInfo('review', $category);
+
+        // dd($data);
 
         return $this->sendResponse($data);
     }
@@ -334,34 +336,28 @@ class ProductController extends BaseController
     protected function getReviews($sql)
     {
         if (!empty($sql)) {
-            $products = $sql->whereHas('productReview')
-                ->select('products.id',
-                    DB::raw('(SELECT ROUND(AVG(rating), 1) FROM product_reviews WHERE product_reviews.product_id = products.id) AS average_rating')
-                );
+            $products = $sql->with('productStats')->get();
 
-            $averageRatings = $products->pluck('average_rating')->toArray();
+            // Retrieve the average ratings directly from productStats
+            $averageRatings = $products->pluck('productStats')->filter()->map(function ($productStat) {
+                $statistics = json_decode($productStat->statistics, true);
+                return $statistics['rate']['overall_rating'] ?? null;
+            });
 
-            // Retrieve the minimum and maximum average ratings
-            $minRating = empty($averageRatings) ? 0 : min($averageRatings);
-            $maxRating = empty($averageRatings) ? 0 : max($averageRatings);
-
-            $reviewData = [
-                'min_rating' => $minRating,
-                'max_rating' => $maxRating,
-            ];
+            $minRating = $averageRatings->min() ?? 0;
+            $maxRating = $averageRatings->max() ?? 0;
         } else {
-            // Retrieve the minimum and maximum ratings directly from ProductReview model
-            $minMaxRatings = ProductReview::selectRaw('ROUND(MIN(rating), 1) AS min_rating')
-                ->selectRaw('ROUND(MAX(rating), 1) AS max_rating')
+            // Retrieve the minimum and maximum ratings directly from product_statistics table
+            $minMaxRatings = ProductStatistic::query()
+                ->selectRaw('ROUND(MIN(JSON_EXTRACT(statistics, "$.rate.overall_rating")), 1) AS min_rating')
+                ->selectRaw('ROUND(MAX(JSON_EXTRACT(statistics, "$.rate.overall_rating")), 1) AS max_rating')
                 ->first();
 
-            $reviewData = [
-                'min_rating' => $minMaxRatings->min_rating ?? 0,
-                'max_rating' => $minMaxRatings->max_rating ?? 0,
-            ];
+            $minRating = $minMaxRatings->min_rating ?? 0;
+            $maxRating = $minMaxRatings->max_rating ?? 0;
         }
 
-        return $reviewData;
+        return compact('minRating', 'maxRating');
     }
 
     private function getOperatingSystem($sql = [])
@@ -765,8 +761,8 @@ class ProductController extends BaseController
         // Apply price filter
         if ($key == 'price' && !empty($value)) {
             $priceFilter = $value;
-           
-            $query->whereBetween('price', [$priceFilter['min'], $priceFilter['max']]);          
+
+            $query->whereBetween('price', [$priceFilter['min'], $priceFilter['max']]);
         }
 
         // Apply brand filter

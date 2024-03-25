@@ -150,7 +150,8 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                 )}
               </div>
               <div className='order-status'>
-                {row?.fedex_status || row?.status} <br /> {row.shipment_days}
+                {row?.fedex_status ? row?.fedex_status : 'Ordered'} <br />{' '}
+                {row.shipment_days}
               </div>
               <div className='order-status'>
                 Ship to <br /> <p>{userName?.user?.name}</p>
@@ -196,10 +197,12 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                           </div>
                           {!isSmallScreen && (
                             <button className='pending-order-button'>
-                              {row?.status}
+                              {row?.fedex_status
+                                ? row?.fedex_status
+                                : 'Ordered'}
                             </button>
                           )}
-                          {row?.fedex_status !== 'DELIVERED'
+                          {row?.fedex_status !== 'Delivered'
                             ? !isSmallScreen && (
                                 <Link
                                   to={`/track-order/${row?.id}/${row?.tracking_id}`}
@@ -261,10 +264,10 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                             </div>
                             {!isSmallScreen && (
                               <button className='pending-order-button'>
-                                {row?.status}
+                                {row?.fedex_status}
                               </button>
                             )}
-                            {row?.fedex_status !== 'DELIVERED'
+                            {row?.fedex_status !== 'Delivered'
                               ? !isSmallScreen && (
                                   <Link
                                     to={`/track-order/${row?.id}/${row?.tracking_id}`}
@@ -324,14 +327,14 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                   {!expandedOrders.includes(row.id) && (
                     <div className='col-4'>
                       <button className='pending-order-button'>
-                        {row?.fedex_status || row?.status}
+                        {row?.fedex_status ? row?.fedex_status : 'Ordered'}
                       </button>
                     </div>
                   )}
                 </div>
               )}
             </>
-            {row?.fedex_status === 'DELIVERED' ? (
+            {row?.fedex_status === 'Delivered' ? (
               <div className='show-more-order-buttons'>
                 <button onClick={() => toggleExpanded(row.id)}>
                   {expandedOrders.includes(row.id)
@@ -341,9 +344,13 @@ function OrderProducts({ data, totalItems, sendToPage }) {
               </div>
             ) : (
               <div className='show-more-order-buttons'>
-                <button>Cancel my order</button>
+                {/* <button>Cancel my order</button> */}
                 <button onClick={() => toggleExpanded(row.id)}>
-                  {expandedOrders.includes(row.id) ? 'Show less' : 'Show more'}
+                  {row?.order_item?.length > 1
+                    ? expandedOrders.includes(row.id)
+                      ? 'Show less'
+                      : 'Show more'
+                    : ''}
                 </button>
                 {isSmallScreen && (
                   <Link

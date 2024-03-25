@@ -10,6 +10,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class ProfileController extends BaseController
 {
@@ -21,6 +22,7 @@ class ProfileController extends BaseController
             if ($request->hasFile('profile_pic')) {
                 $filename = $request->file('profile_pic')->store('public/profile_pics');
                 $update['profile_pic'] = str_replace('public/', '', $filename);
+                Log::info("Profile image updated");
             }
 
             //update also name
@@ -29,6 +31,7 @@ class ProfileController extends BaseController
             auth()->user()->update($update);
             return $this->sendResponse(auth()->user()->fresh(), "user profile updated.");
         } catch (Exception $e) {
+            Log::info("Error in updating profile image");
             return $this->sendError(["msg" => ['Something went wrong.' . $e]]);
         }
     }

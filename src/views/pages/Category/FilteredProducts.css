@@ -27,9 +27,9 @@
   display: flex;
 }
 
-.view-button {
+.buttons .view-button {
   margin: 0px 1px;
-  /* background-color: #318243; */
+  background-color: white;
   padding: 2px 2px;
   display: flex;
   align-items: center;
