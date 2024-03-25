@@ -93,9 +93,10 @@ class PayPalController extends Controller
         $response = $this->provide->capturePaymentOrder($request->token);
        
         $cache = cache::where('key','paypal_transaction_'.$request->token)->first();
-        
+        if(!$cache){
+            return redirect('checkout?error=Error in Paypal PLease try again.');
+        }
         $getCache = json_decode($cache->value);
-
        
         $shippingAddress = $getCache->shippping_address; 
         $shippingAddressForm['country'] = $shippingAddress->country;
@@ -190,7 +191,7 @@ class PayPalController extends Controller
            \Cart::session($userIdToPass)->clearCartConditions();
 
            /* clear cache */
-            $cache->delete();
+            // $cache->delete();
 
             DB::commit();
 
