@@ -313,3 +313,5 @@ Route::get('get-specific-review/{id}',[ReviewController::class,'getSpecificRevie
 Route::post('subscribe-newsletter',[NewsLetterController::class,'subscription']);
 
 Route::get('get-discount-product',[ProductController::class,'getDiscountProduct']);
+
+Route::get('get-order/{order_no}',[OrderController::class,'getOrderByNo']);
