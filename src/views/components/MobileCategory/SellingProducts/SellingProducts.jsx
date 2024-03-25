@@ -138,7 +138,7 @@ const SellingProducts = ({ topRatedProduct, inTopRated, bestSeller }) => {
                     <div className='product-name'>{product.name}</div>
                     <div>
                       <StarRatings
-                        rating={product.rating}
+                        rating={parseFloat(product.rating || 0)}
                         starRatedColor='rgb(232, 126, 36)'
                         numberOfStars={5}
                         name='rating'
@@ -183,7 +183,13 @@ const SellingProducts = ({ topRatedProduct, inTopRated, bestSeller }) => {
                         ${product?.price?.toString().split('.')[0]}
                       </span>
                     </div>
-                    <div style={{ fontSize: '12px', marginTop: '5px', marginBottom:'5px', color:"#6f6f6f" }}>
+                    <div
+                      style={{
+                        fontSize: '12px',
+                        marginTop: '5px',
+                        marginBottom: '5px',
+                        color: '#6f6f6f',
+                      }}>
                       <FontAwesomeIcon
                         icon={faTruck}
                         style={{ color: '#6f6f6f' }}

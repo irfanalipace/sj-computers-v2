@@ -82,7 +82,7 @@ const SimilarPurchaseCart = ({ products, isLoading }) => {
             <div className='d-none d-sm-block product-rating'>
               <div className='d-flex align-items-center'>
                 <StarRatings
-                  rating={product?.rating}
+                  rating={parseFloat(product?.rating || 0)}
                   starRatedColor='rgb(232, 126, 36)'
                   numberOfStars={5}
                   name='rating'

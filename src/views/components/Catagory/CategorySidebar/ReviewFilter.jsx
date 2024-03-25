@@ -79,7 +79,7 @@ export default function ReviewFilter({ onChange, clearReview, reviewOption }) {
             <StarRatings
               starDimension='18px'
               starSpacing='0'
-              rating={reveiw.value}
+              rating={parseFloat(reveiw.value || 0)}
               starRatedColor='orange'
             />
             {/* <Typography

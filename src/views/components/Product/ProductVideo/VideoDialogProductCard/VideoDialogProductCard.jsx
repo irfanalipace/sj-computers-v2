@@ -22,8 +22,7 @@ function VideoDialogProductCard({ product }) {
         border={'.5px solid gray'}
         borderRadius={'10px'}
         height={'110px'}
-        py={1}
-      >
+        py={1}>
         <Grid item xs={4} px={1} py={1} m={'auto'}>
           <LazyLoadImage
             width={'90px'}
@@ -36,7 +35,7 @@ function VideoDialogProductCard({ product }) {
             {product?.name}
           </Typography>
           <StarRatings
-            rating={product.rating}
+            rating={parseFloat(product.rating || 0)}
             starRatedColor='rgb(232, 126, 36)'
             numberOfStars={5}
             name='rating'

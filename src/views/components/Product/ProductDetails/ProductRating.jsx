@@ -84,8 +84,7 @@ export default function ProductRating({
       alignItems={'start'}
       gap={2}
       width={'100%'}
-      sx={{ justifyContent: ['end', 'start'] }}
-    >
+      sx={{ justifyContent: ['end', 'start'] }}>
       <Tooltip
         arrow
         // disableTouchListener
@@ -107,21 +106,19 @@ export default function ProductRating({
               </Button>
             </Stack>
           </>
-        }
-      >
+        }>
         <Stack direction={'row'}>
           <Typography
             fontSize={'14px'}
             fontWeight={400}
             fontFamily={'Inter'}
-            sx={{ mr: 1, mt: 0.2 }}
-          >
+            sx={{ mr: 1, mt: 0.2 }}>
             {rating}
           </Typography>
           <Box>
             <StarRatings
               style={{ PointerEvent: null }}
-              rating={rating}
+              rating={parseFloat(rating || 0)}
               starRatedColor='rgb(232, 126, 36)'
               numberOfStars={5}
               name='rating'
@@ -143,8 +140,9 @@ export default function ProductRating({
               <a
                 href='#reviews'
                 className='review-text'
-                style={{ color: '#007185' }}
-              >{`(${totalReview}) ${isUpSmall ? 'Ratings' : ''}`}</a>
+                style={{
+                  color: '#007185',
+                }}>{`(${totalReview}) ${isUpSmall ? 'Ratings' : ''}`}</a>
             </HoverColorChange>
             {/* <Divider
                     orientation="vertical"
