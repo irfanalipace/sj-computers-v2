@@ -128,4 +128,14 @@ class OrderController extends BaseController
             return $this->sendError('error',$e->getMessage());
         }        
     }
+
+    public function getOrderByNo($orderNo)
+    {
+        try{   
+            $order = Order::where('id',$orderNo)->first();
+            return $this->sendResponse($order,'Successfully fetched Order details.');
+        } catch(Exception $e){
+            return $this->sendError('error',$e->getMessage());
+        }  
+    }
 }
