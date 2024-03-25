@@ -124,10 +124,10 @@ class PayPalController extends Controller
        
          $listofItems = ($userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
         
-         $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true),StatusEnum::PAYMENTTYPEPAYPAL);
-         if (!$check_product_first) { 
-             return redirect('cart?error='."Product quantity is invalid");
-         }
+        //  $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true),StatusEnum::PAYMENTTYPEPAYPAL);
+        //  if (!$check_product_first) { 
+        //      return redirect('cart?error='."Product quantity is invalid");
+        //  }
         
          // create invoice along with order
          $orderData = [];
