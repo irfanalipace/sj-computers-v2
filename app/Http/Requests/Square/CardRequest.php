@@ -34,7 +34,6 @@ class CardRequest extends FormRequest
             'shipping_address.address' => 'required',
             'shipping_address.city' => 'required',
             'shipping_address.state' => 'required',
-            'shipping_address.apartment' => 'nullable',
             'shipping_address.zip_code' => 'required',
             'shipping_address.permanent_address' => 'nullable'
         ];
@@ -49,7 +48,6 @@ class CardRequest extends FormRequest
                 'shipping_address.address' => 'required',
                 'shipping_address.city' => 'required',
                 'shipping_address.state' => 'required',
-                'shipping_address.apartment' => 'nullable',
                 'shipping_address.zip_code' => 'required',
                 'is_guest' => 'required|boolean',
                 'cart_items' => 'required|array',
