@@ -38,7 +38,7 @@ class OrderRepository
     }
 
     /* Create order */
-    public function createOrder($data, $userId, $user, $payment_type, $cartData, $cartContent = [], $shippingAddreess, $user_type, $cartItems = [],$isBuyNow = false)
+    public function createOrder($data, $userId, $user, $payment_type, $cartData, $cartContent = [], $shippingAddress, $user_type, $cartItems = [],$isBuyNow = false)
     {
        
         $ids = [];
@@ -61,8 +61,9 @@ class OrderRepository
         if ($user_type == StatusEnum::GUEST) {
 
             foreach ($cartItems as $item) {
+                $productId = ($payment_type == StatusEnum::PAYMENTTYPEPAYPAL) ? $item->product_id : $item['product_id'];
                 # store product_id into ids variable...
-                $ids[] = $item['product_id'];
+                $ids[] = $productId;
             }
             //query to lock products
             $check = Product::whereIn('id', $ids)->lockForUpdate()
@@ -71,20 +72,32 @@ class OrderRepository
                 throw new Exception('product is not found.');
             }
             foreach ($cartItems as $item) {
-                $product = Product::whereId($item['product_id'])->first();
+                
+                $productId = ($payment_type == StatusEnum::PAYMENTTYPEPAYPAL) ? $item->product_id : $item['product_id'];
+                $qty = ($payment_type == StatusEnum::PAYMENTTYPEPAYPAL) ? $item->qty : $item['qty'];
+              
+                if($payment_type == StatusEnum::PAYMENTTYPEPAYPAL){
+                    $protectivePrice = isset($item->attributes->protective_price) ? $item->attributes->protective_price : null;
+                    $protectivePlanId = isset($item->attributes->protective_id ) ? $item->attributes->protective_id : null;
+                } else{ 
+                    $protectivePrice = isset($item['attributes']['protective_price']) ? $item['attributes']['protective_price'] : null;
+                    $protectivePlanId = isset($item['attributes']['protective_id'] ) ? $item['attributes']['protective_id'] : null;
+                }
+              
+                $product = Product::whereId($productId)->first();
                 
                 $data = [
                     'order_id' => $order->id,
-                    'product_id' => $item['product_id'],
+                    'product_id' => $productId,
                     'product_name' => $product->name,
-                    'qty' => $item['qty'],
+                    'qty' => $qty,
                     'price' => $product->price,
-                    'protective_price' => $item['attributes']['protective_price'] ?? null,
-                    'protective_plan_id' => $item['attributes']['protective_id'] ?? null
+                    'protective_price' => $protectivePrice ,
+                    'protective_plan_id' => $protectivePlanId 
                 ];
-
+                    
                 // Update item in product table
-                $this->updateProduct($item['product_id'], $item['qty']);
+                $this->updateProduct($productId, $qty);
 
                 // $productInfo = $this->getAmazonInventory($item['product_id']);
                 // if ($productInfo['status']) {
@@ -149,37 +162,38 @@ class OrderRepository
                 }
             }
         }
-        
+      
         //saving address of order
         $OrderAddress = OrderShippingAddress::Create(
             [
-                'country' => $shippingAddreess->country,
-                'full_name' => $shippingAddreess->full_name,
-                'phone_number' => $shippingAddreess->phone_number,
-                'email' => $shippingAddreess->email ?? null,
-                'address' => $shippingAddreess->address,
-                'city' => $shippingAddreess->city,
-                'state' => $shippingAddreess->state,
-                'apartment' => $shippingAddreess->apartment ?? null,
-                'zip_code' => $shippingAddreess->zip_code,
+                'country' => $shippingAddress['country'],
+                'full_name' => $shippingAddress['full_name'],
+                'phone_number' => $shippingAddress['phone_number'],
+                'email' => $shippingAddress['email'] ?? null,
+                'address' => $shippingAddress['address'],
+                'city' => $shippingAddress['city'],
+                'state' => $shippingAddress['state'],
+                'apartment' => $shippingAddress['apartment'] ?? null,
+                'zip_code' => $shippingAddress['zip_code'],
                 ($user_type == StatusEnum::USER) ? 'user_id' : 'guest_id' => $user->id,       //user id or guest id
                 'user_type' => $user_type,
                 'order_id' => $order->id
             ]
         );
 
-        if(isset($shippingAddreess->permanent_address) && $shippingAddreess->permanent_address == true && $user_type == StatusEnum::USER){
+        if(isset($shippingAddress['permanent_address']) && $shippingAddress['permanent_address'] == true && $user_type == StatusEnum::USER){
+          
             UserAddress::updateOrCreate(
                 ['user_id' =>  $user->id ],
                 [
-                'country' => $shippingAddreess->country,
-                'full_name' => $shippingAddreess->full_name,
-                'phone_number' => $shippingAddreess->phone_number,
-                'address' => $shippingAddreess->address,
-                'city' => $shippingAddreess->city,
-                'state' => $shippingAddreess->state,
-                'apartment' => $shippingAddreess->apartment ?? null,
-                'zip_code' => $shippingAddreess->zip_code,
+                'country' => $shippingAddress['country'],
+                'full_name' => $shippingAddress['full_name'],
+                'phone_number' => $shippingAddress['phone_number'],
+                'address' => $shippingAddress['address'],
+                'city' => $shippingAddress['city'],
+                'state' => $shippingAddress['state'],
+                'apartment' => $shippingAddress['apartment'] ?? null,
+                'zip_code' => $shippingAddress['zip_code'],
                 'user_id' => $user->id, 
                 'status' => StatusEnum::ACTIVE,
             ]);
@@ -248,7 +262,7 @@ class OrderRepository
     }
 
     /*  check product quantity run time */
-    public function checkProduct($cart_items,$userId,$userType,$isBuyNow = false)
+    public function checkProduct($cart_items,$userId,$userType,$isBuyNow = false,$paymentType = [])
     {        
        
         $data = [];
@@ -288,11 +302,16 @@ class OrderRepository
         
             foreach ($cart_items as $value) {
                 # code...
-                
-                $product_id = ($userType == StatusEnum::GUEST) ? $value['product_id'] : $value['id'];
-                $quantity = ($userType == StatusEnum::GUEST) ? $value['qty'] : $value['quantity'];
+               
+               if($userType == StatusEnum::GUEST){
+                $productId = ($paymentType == StatusEnum::PAYMENTTYPEPAYPAL ) ? $value->product_id : $value['product_id'];
+                $qty = ($paymentType == StatusEnum::PAYMENTTYPEPAYPAL) ? $value->qty : $value['qty'];
+               }               
+              
+                $product_id = ($userType == StatusEnum::GUEST) ? $productId : $value['id'];
+                $quantity = ($userType == StatusEnum::GUEST) ? $qty : $value['quantity'];
                 $product = Product::whereId($product_id)->withoutGlobalScopes()->first();
-                
+               
                 if ($product->quantity == 0) {
 
                     (!$cart->isEmpty()) ? $cart->remove($product_id) : true;
