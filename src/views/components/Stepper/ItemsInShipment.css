@@ -4,6 +4,7 @@
 .shipment-box .swiper-button-next {
   color: black;
   translate: 0px 10px;
+  border: none;
   /* background-color: aqua; */
   /* height: 100px; */
   /* position: absolute; */
@@ -14,6 +15,7 @@
 .shipment-box .swiper-button-prev {
   color: black;
   translate: 0px 10px;
+  border: none;
   /* height: 100px; */
   /* position: absolute; */
   /* top: 0px; */
