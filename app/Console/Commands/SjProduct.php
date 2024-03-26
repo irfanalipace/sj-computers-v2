@@ -132,12 +132,18 @@ class SjProduct extends Command
                 $bulletPoint['value'] = str_replace('?', '', $bulletPoint['value']);
             }
         }
-        if(isset($data['product_description']))  {
+       
+        if (isset($data['product_description']) && is_array($data['product_description'])) {
+            Log::info('production description');
             foreach ($data['product_description'] as &$bulletPoint) {
-                $bulletPoint['value'] = str_replace('?', '', $bulletPoint['value']);
+                // Remove '?' characters from the 'value'
+                if (isset($bulletPoint['value'])) {
+                    Log::info($bulletPoint['value']);
+                    $bulletPoint['value'] = str_replace('?', '', $bulletPoint['value']);
+                }
             }
+            unset($bulletPoint); // Break the reference with the last element
         }
-
         return json_encode($data); // Convert back to JSON string
     }
 

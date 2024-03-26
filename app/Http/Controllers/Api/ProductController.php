@@ -344,8 +344,8 @@ class ProductController extends BaseController
                 return $statistics['rate']['overall_rating'] ?? null;
             });
 
-            $minRating = $averageRatings->min() ?? 0;
-            $maxRating = $averageRatings->max() ?? 0;
+            $min_rating = $averageRatings->min() ?? 0;
+            $max_rating = $averageRatings->max() ?? 0;
         } else {
             // Retrieve the minimum and maximum ratings directly from product_statistics table
             $minMaxRatings = ProductStatistic::query()
@@ -353,11 +353,11 @@ class ProductController extends BaseController
                 ->selectRaw('ROUND(MAX(JSON_EXTRACT(statistics, "$.rate.overall_rating")), 1) AS max_rating')
                 ->first();
 
-            $minRating = $minMaxRatings->min_rating ?? 0;
-            $maxRating = $minMaxRatings->max_rating ?? 0;
+            $min_rating = $minMaxRatings->min_rating ?? 0;
+            $max_rating = $minMaxRatings->max_rating ?? 0;
         }
 
-        return compact('minRating', 'maxRating');
+        return compact('min_rating', 'max_rating');
     }
 
     private function getOperatingSystem($sql = [])
@@ -841,20 +841,31 @@ class ProductController extends BaseController
         // Apply review filter
         if ($key == 'review' && !empty($value)) {
             $reviewFilter = $value;
-            $query->whereHas('productStats', function ($query) use ($reviewFilter) {
-                $overallRatingPath = '$.statistics.overall_rating';
-            
-                if ($reviewFilter['min'] == $reviewFilter['max']) {
-                  // Exact match
-                  $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') = ?", [$reviewFilter['min']]);
-                } else {
-                  // Range query
-                  $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') BETWEEN ? AND ?", [
-                    $reviewFilter['min'],
-                    $reviewFilter['max']
-                  ]);
-                }
-              });
+            // $query = Product::where('id', 68)
+            // ->whereHas('productStats', function ($query) use ($reviewFilter) {
+            //     $overallRatingPath = '$.statistics.overall_rating';
+                
+            //     if ($reviewFilter['min'] === $reviewFilter['max']) {
+            //         // Exact match
+            //         $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') = ?", [$reviewFilter['min']]);
+            //     } else {
+            //         // Range query
+            //         $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') BETWEEN ? AND ?", [
+            //             $reviewFilter['min'],
+            //             $reviewFilter['max']
+            //         ]);
+            //     }
+            // });
+            $query =  $query->whereHas('productStats', function ($query) use ($reviewFilter) {
+                    $overallRatingPath = '$.rate.overall_rating';
+                    
+                    // Since you are looking for a range, we use BETWEEN in this case
+                    $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') BETWEEN ? AND ?", [
+                        $reviewFilter['min'],
+                        $reviewFilter['max']
+                    ]);
+                });
+             
            
         }
         return $query->orderBy('price', 'asc');
