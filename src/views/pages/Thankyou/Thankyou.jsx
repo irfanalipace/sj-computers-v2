@@ -155,7 +155,7 @@ export default function ThankYou() {
                                               "..."
                                             : data?.product_name}
                                     </div>
-
+ 
                                     <div className="product-details-Thanks">
                                         <div className="quantity">
                                             <span>Quantity:</span>
@@ -239,11 +239,11 @@ export default function ThankYou() {
               <h1>Thanks for Order</h1>
             </div>
             <div className='col-12 my-20'>
-              <p>
+              <p className='track-order-paragraph-changes'>
                 Your order with tracking No{' '}
                 <span style={{ fontWeight: '900' }}>{orderDetails?.id}</span>{' '}
-                has been successfully confirmed. We’ll send you an email
-                notification once your order has shipped.
+                has been successfully confirmed. We’ll send you an <br></br>{' '}
+                email notification once your order has shipped.
               </p>
             </div>
           </div>
@@ -260,7 +260,11 @@ export default function ThankYou() {
               <thead>
                 <tr>
                   <th className='product-name-thanks'>
-                    <div className='product-title'>Product Name</div>
+                    <div
+                      className='product-title'
+                      style={{ fontWeight: '600', fontSize: '14px' }}>
+                      Product Name
+                    </div>
                   </th>
                   <th>Quantity</th>
                   <th>Order No</th>
@@ -322,8 +326,9 @@ export default function ThankYou() {
                 </div>
               </div>
               <div className='row mx-0 mb-5'>
-                <div className='col-6 d-flex justify-content-start'></div>
-                <div className='col-6 d-flex justify-content-end'>
+                <div
+                  className='col-12 d-flex '
+                  style={{ justifyContent: 'center' }}>
                   <button
                     className='shop-more-btn'
                     onClick={() => navigate('/')}>
