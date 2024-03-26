@@ -115,6 +115,7 @@ class ProductController extends BaseController
         $category = (isset($request->category) && $request->category) ? $request->category : [];
 
         if ($category == 'bto') {
+          
             $data['brand'] = $this->queryProductInfo('brand', $category);
 
             $data['price'] = $this->queryProductInfo('price', $category);
@@ -880,7 +881,8 @@ class ProductController extends BaseController
             'touch-screen' => 'getTouchScreenLaptops',
             'top-rated-product' => 'getTopRatedProducts',
             'best-sellers' => 'getBestSellerProducts',
-            'new-arrival' => 'getNewArrivalProducts'
+            'new-arrival' => 'getNewArrivalProducts',
+            'bto' => 'getBtoProducts'
             // 'featured-products' => 'getFeaturedProducts'
         ];
 
@@ -975,5 +977,13 @@ class ProductController extends BaseController
         }
         
         return $this->sendResponse($discountProduct,"successfully get discount product for home page.");
+    }
+
+    protected function getBtoProducts()
+    {
+        $accessories = ["B0921PQRDN","B0921GT8X9","B09883YCB3","B08VKWNPMT","B08VLCRQ6X","B08WRQH82Z","B0921XRC3M","B0921XRC3M","B0B1H1DWJP","B0B2N5SJZ4"];
+
+       return Product::whereIn('asin',$accessories);
+      
     }
 }

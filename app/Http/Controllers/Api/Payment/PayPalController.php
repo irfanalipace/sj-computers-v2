@@ -115,7 +115,7 @@ class PayPalController extends Controller
         $userType =  $getCache->user_type; 
         $cartDetails = $getCache->cart_details; 
       
-     
+        DB::beginTransaction();
          /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
          $userIdToPass = ($userType != StatusEnum::GUEST) ? $user->id : $user->email;
          $userType = ($userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
@@ -152,11 +152,12 @@ class PayPalController extends Controller
              $orderData['shipment_amount'] =  0;
              $orderData['estimate_day'] =   Carbon::now()->addWeekdays(5)->format('l d-m-Y');
          }
-         DB::beginTransaction();
+        
         if(isset($response['status']) && $response['status'] == 'COMPLETED') {
 
             $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
             if (!$order) {
+                dd('order not created');
                 return redirect()->route('cancel');
              }    
 
