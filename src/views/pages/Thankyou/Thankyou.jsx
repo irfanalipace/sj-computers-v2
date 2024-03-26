@@ -10,40 +10,16 @@ import { clearCartLocally } from '../../../core/utils/cartHelpers';
 import { CLEAR_CART } from '@store/cart/cartSlice';
 import { useViewportWidth } from '@hooks/useViewportWidth';
 import MobileThanku from './MobileThanku';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import { getPaypalOrderDetail } from '../../../core/api/products';
 export default function ThankYou() {
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const screenWidth = useViewportWidth();
-  const [loading, setLoading] = useState(false);
   function formatDate(dateString) {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const date = new Date(dateString);
     return date.toLocaleDateString(undefined, options);
   }
   let orderFromURL = searchParams.get('orderSuccess');
-  let orderNo = searchParams.get('order_no');
-
-  const callPaypalOrderApi = async orderNo => {
-    try {
-      setLoading(true);
-      let res = await getPaypalOrderDetail(orderNo);
-      setOrderDetails(res.data);
-    } catch (error) {
-      console.print('paypal order api error: ' + error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (orderNo) {
-      callPaypalOrderApi(orderNo);
-    }
-  }, []);
-
   if (orderFromURL) {
     try {
       let lastClosingBracketIndex = orderFromURL.lastIndexOf('}');
@@ -89,12 +65,10 @@ export default function ThankYou() {
       location?.state?.order?.order_detail ||
       JSON.parse(storedOrder) ||
       orderFromURL;
-
-    if (order?.id || orderNo) {
+    if (order?.id) {
       const orderString = JSON.stringify(order);
       window.localStorage.setItem('thankyouOrderDetails', orderString);
       setOrderDetails(order);
-
       clearCartLocally();
       dispatch(CLEAR_CART());
       if (!window.dataLayer) {
@@ -239,10 +213,10 @@ export default function ThankYou() {
               <h1>Thanks for Order</h1>
             </div>
             <div className='col-12 my-20'>
-              <p>
+              <p className='track-order-paragraph-changes'>
                 Your order with tracking No{' '}
                 <span style={{ fontWeight: '900' }}>{orderDetails?.id}</span>{' '}
-                has been successfully confirmed. We’ll send you an email
+                has been successfully confirmed. We’ll send you an<br></br> email
                 notification once your order has shipped.
               </p>
             </div>
@@ -260,7 +234,11 @@ export default function ThankYou() {
               <thead>
                 <tr>
                   <th className='product-name-thanks'>
-                    <div className='product-title'>Product Name</div>
+                    <div
+                      className='product-title'
+                      style={{ fontWeight: '600', fontSize: '14px' }}>
+                      Product Name
+                    </div>
                   </th>
                   <th>Quantity</th>
                   <th>Order No</th>
@@ -304,45 +282,34 @@ export default function ThankYou() {
             </table>
           </>
 
-          {!loading ? (
-            <>
-              <div className='row total-tax-row mx-0'>
-                <div className='col-12 d-flex justify-content-end'></div>
-
-                <div className='col-6 d-flex justify-content-start'>
-                  <p className='bold-total'>Total</p>
-                </div>
-                <div className='col-6 d-flex justify-content-end'>
-                  <p className='bold-total'>
-                    $
-                    {orderDetails?.total_amount
-                      ? orderDetails?.total_amount
-                      : 'N/A'}
-                  </p>
-                </div>
-              </div>
-              <div className='row mx-0 mb-5'>
-                <div className='col-6 d-flex justify-content-start'></div>
-                <div className='col-6 d-flex justify-content-end'>
-                  <button
-                    className='shop-more-btn'
-                    onClick={() => navigate('/')}>
-                    Shop more
-                  </button>
-                </div>
-              </div>
-            </>
-          ) : (
-            <Box
-              sx={{
-                mt: 5,
-                justifyContent: 'center',
-                display: 'flex',
-                width: '100%',
-              }}>
-              <CircularProgress sx={{ color: 'black' }} />
-            </Box>
-          )}
+          <div className='row total-tax-row mx-0'>
+            <div className='col-12 d-flex justify-content-end'>
+              {/* <p >Tax ${120.6}</p> */}
+            </div>
+            {/* <div className='col-12 d-flex justify-content-end'>
+              <p style={{ marginRight: '1%', marginTop: '2%' }}>Tax ${'N/A'}</p>
+            </div> */}
+            <div className='col-6 d-flex justify-content-start'>
+              <p className='bold-total'>Total</p>
+            </div>
+            <div className='col-6 d-flex justify-content-end'>
+              <p className='bold-total'>
+                $
+                {orderDetails?.total_amount
+                  ? orderDetails?.total_amount
+                  : 'N/A'}
+              </p>
+            </div>
+          </div>
+          <div className='row mx-0 mb-5'>
+            <div
+              className='col-12 d-flex '
+              style={{ justifyContent: 'center' }}>
+              <button className='shop-more-btn' onClick={() => navigate('/')}>
+                Shop more
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </>
