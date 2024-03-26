@@ -214,7 +214,7 @@ const FilterBarlayout2 = ({
           newArray.push({
             id: parseInt(i),
             label: `${parseInt(i)}`,
-            value: parseInt(i),
+            value: parseFloat(i),
           });
         }
         console.log(newArray);
