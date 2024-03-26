@@ -117,6 +117,7 @@ class SjProduct extends Command
 
             echo "product is added" . $key . "\n";
         }
+
         Log::info('Sj-Products-end');
         dd('done');
 
@@ -127,23 +128,33 @@ class SjProduct extends Command
     {
         $data = json_decode($description, true); // Convert to associative array
 
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            Log::error('JSON decode error: ' . json_last_error_msg());
+            // Consider the appropriate fallback or error handling here
+            return json_encode($data);
+        }
+
+        Log::info('cleanDescription Start');
          // Clean bullet points if they exist
-         if (isset($data['bullet_point'])) {
+        if (isset($data['bullet_point'])) {
             foreach ($data['bullet_point'] as &$bulletPoint) {
                 if (isset($bulletPoint['value'])) {
-                    $bulletPoint['value'] = preg_replace('/\?/', '', $bulletPoint['value']);
+                    // This regex now targets single or multiple '?' characters
+                    $bulletPoint['value'] = preg_replace('/\?+/', '', $bulletPoint['value']);
                 }
             }
         }
-    
+
         // Clean product description if it exists
         if (isset($data['product_description'])) {
             foreach ($data['product_description'] as &$descriptionPoint) {
                 if (isset($descriptionPoint['value'])) {
-                    $descriptionPoint['value'] = preg_replace('/\?/', '', $descriptionPoint['value']);
+                    // Again, targeting single or multiple '?' characters
+                    $descriptionPoint['value'] = preg_replace('/\?+/', '', $descriptionPoint['value']);
                 }
             }
         }
+
         return json_encode($data); // Convert back to JSON string
     }
 
