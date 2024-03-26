@@ -16,7 +16,7 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
   const [expandedOrders, setExpandedOrders] = useState([]);
 
   const filteredData = data?.filter(
-    orders => orders?.fedex_status === 'DELIVERED',
+    orders => orders?.fedex_status === 'Delivered',
   );
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -116,6 +116,11 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
         : [...prevOrders, orderId],
     );
   };
+
+  if (filteredData?.length === 0) {
+    return <div>No Orders found</div>;
+  }
+
   return filteredData?.map(orders => (
     <Grid container>
       <Card
@@ -170,7 +175,13 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
           {!isSmallScreen && (
             <div>
               <h3>{cancelled ? 'Cancelled' : 'Your Order'}</h3>
-              {!cancelled && <button>Track Package</button>}
+              {!cancelled && (
+                <Link
+                  to={`/track-order/${orders?.id}/${orders?.tracking_id}`}
+                  className='track-order-button'>
+                  Track Package
+                </Link>
+              )}
             </div>
           )}
           {orders?.order_item?.map((item, index) =>
@@ -204,7 +215,7 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
                     </Typography>
                     {index === 0 && isSmallScreen && (
                       <Link style={{ textDecoration: 'none' }}>
-                        Order Invoice
+                        {/* Order Invoice */}
                       </Link>
                     )}
                   </span>
@@ -221,9 +232,11 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
                         </Link>
                       </div>
                       <div className='col-6'>
-                        <button className='pending-order-button'>
+                        <Link
+                          to={`/track-order/${orders?.id}/${orders?.tracking_id}`}
+                          className='track-order-button'>
                           Track Package
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   )}
@@ -306,7 +319,7 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
               ))}
           </>
         </CardContent>
-        <button className='cancel-my-order-btn'>Cancel my order</button> |
+        {/* <button className='cancel-my-order-btn'>Cancel my order</button> | */}
         {isSmallScreen && (
           <button
             className='cancel-my-order-btn'
@@ -330,12 +343,12 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
           className='p-0'>
           <InvoiceCard>
             <div className='order-invoice-conatiner'>
-              <button>Order Invoice</button>
-              <p>
+              <button>Order Summary</button>
+              {/* <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s,
-              </p>
+              </p> */}
               <hr />
               <Grid container justifyContent='space-between' py={1}>
                 <Grid item>Item:</Grid>
@@ -344,7 +357,7 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
                     if (index === 0) {
                       const productName = item?.product?.name;
                       const words = productName.split(' ');
-                      const truncatedName = words.slice(0, 2).join(' ');
+                      const truncatedName = words.slice(0, 5).join(' ');
                       const truncatedProductName =
                         words.length > 2
                           ? truncatedName + '...'
@@ -364,7 +377,8 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
               </Grid>{' '}
               <Grid container justifyContent='space-between' py={1}>
                 <Grid item>Shipping & handling</Grid>
-                <Grid item>${orders?.shipment_price}</Grid>
+                {/* <Grid item>${orders?.shipment_price}</Grid> */}
+                <Grid item>Free</Grid>
               </Grid>
               <hr />
               <Grid container justifyContent='space-between' py={1}>
