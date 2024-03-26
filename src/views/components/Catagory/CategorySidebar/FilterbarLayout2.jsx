@@ -198,17 +198,17 @@ const FilterBarlayout2 = ({
       let data = response?.data;
       setFilters(data ? data : {});
 
-      const highestGb = data.ram_memory.highest_GB;
-      const lowestGb = data.ram_memory.least_GB;
+      const highestGb = data?.ram_memory?.highest_GB;
+      const lowestGb = data?.ram_memory?.least_GB;
       const realisticOptions = generateRealisticOptions(highestGb, lowestGb);
       const ramOptions = realisticOptions.filter(option => option <= highestGb);
-      setRamData([{ gb: ramOptions, tb: data.ram_memory.least_TB }]);
+      setRamData([{ gb: ramOptions, tb: data?.ram_memory?.least_TB }]);
 
-      if (data.review?.min_rating && data.review?.max_rating) {
+      if (data?.review?.min_rating && data?.review?.max_rating) {
         let newArray = [];
         for (
-          let i = data.review?.max_rating;
-          i >= data.review?.min_rating;
+          let i = data?.review?.max_rating;
+          i >= data?.review?.min_rating;
           i--
         ) {
           newArray.push({
@@ -221,7 +221,7 @@ const FilterBarlayout2 = ({
         setReviewOptions(newArray);
       }
 
-      const highestHardDiskGb = data.hard_disk.highest_GB;
+      const highestHardDiskGb = data?.hard_disk?.highest_GB;
       // const lowestHardDiskGb = data.hard_disk.least_GB;
       const realisticOptionsHardDisk = generateRealisticOptions(
         highestHardDiskGb,
@@ -230,11 +230,11 @@ const FilterBarlayout2 = ({
       const hardDiskOptions = realisticOptionsHardDisk.filter(
         option => option <= highestGb,
       );
-      setHardDiskData([{ gb: hardDiskOptions, tb: data.hard_disk.least_TB }]);
+      setHardDiskData([{ gb: hardDiskOptions, tb: data?.hard_disk?.least_TB }]);
 
       const priceShapedArray = getPriceRanges(
-        data.price.min_price,
-        data.price.max_price,
+        data?.price?.min_price,
+        data?.price?.max_price,
       );
       setPriceData(prev => {
         return {
@@ -317,7 +317,11 @@ const FilterBarlayout2 = ({
   const [brandCheckd, setBrandCheckd] = useState([]);
 
   let renderedItems = (options, category) => {
-    let optionArray = options.slice(0, visibleEntries[category].visibleEntries);
+    console.log(visibleEntries, category);
+    let optionArray = options.slice(
+      0,
+      visibleEntries?.[category]?.visibleEntries,
+    );
     return (
       <>
         {optionArray.map((option, index) => (
@@ -389,7 +393,7 @@ const FilterBarlayout2 = ({
           </li>
         ))}
 
-        {visibleEntries[category].visibleEntries <=
+        {visibleEntries?.[category]?.visibleEntries <=
           filters[category].length && (
           <li className='filter-value'>
             <button onClick={() => handleShowMoreitems(category)}>

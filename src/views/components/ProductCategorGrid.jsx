@@ -77,7 +77,6 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
     if (fil === false) {
       filteredData = {};
     }
-    // debugger;
 
     let filterObject = {
       per_page: 12,
