@@ -879,6 +879,7 @@ const FilterBarlayout2 = ({
 
   let renderedCategories = Object.entries(filters).map(
     ([category, options], index) => {
+      if (category == 'review') return;
       return (
         <div key={category}>
           {(!!filters[category].length ||
@@ -900,6 +901,7 @@ const FilterBarlayout2 = ({
                 }}>
                 {/* {category.replace(/_/g, ' ')} */}
                 {category === 'price' ? '' : category.replace(/_/g, ' ')}
+                {/* {category == 'review' ? '' : category.replace(/_/g, ' ')} */}
 
                 {inDrawer ? (
                   <span className={`${inDrawer ? 'align-to-end' : ''}`}>
@@ -1025,7 +1027,7 @@ const FilterBarlayout2 = ({
           {renderPrice('price')}
           {renderedCategories}
           {/* Below Categories is for Gpu and trnding */}
-          {renderCategoriesGpuAndTrending}
+          {categorySlug !== 'bto' && renderCategoriesGpuAndTrending}
           {/* <li className="filter-value">
           <button onClick={handleShowMoreCategory}>
           <span className="me-2">Show More</span>
