@@ -33,7 +33,7 @@ function usePaymentData(buyNow = false) {
     total_quantity += item?.quantity;
     const obj = {
       product_id: item?.product?.id,
-      qty: item?.product?.quantity,
+      qty: item?.quantity,
     };
     if (item.plan?.value && !isAuthenticated) {
       obj.protection_plan_id = item.plan.value;
@@ -88,8 +88,6 @@ function usePaymentData(buyNow = false) {
       };
     }
   }
-
-  console.log(paymentPayload);
 
   return paymentPayload;
 }
