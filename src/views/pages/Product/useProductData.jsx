@@ -93,7 +93,7 @@ function useProductData() {
     if (!productLoading) {
       getProductDetails();
     }
-  }, [productId, productLoading]);
+  }, [productId]);
 
   useEffect(() => {
     if (!product) return;

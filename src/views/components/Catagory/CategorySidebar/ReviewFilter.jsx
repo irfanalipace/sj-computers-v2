@@ -92,6 +92,9 @@ export default function ReviewFilter({ onChange, clearReview, reviewOption }) {
           </Stack>
         );
       })}
+      {!reviewOption?.length && (
+        <Typography sx={{ mt: 1 }}> No review</Typography>
+      )}
     </>
   );
 }
