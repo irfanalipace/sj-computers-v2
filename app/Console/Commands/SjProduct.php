@@ -127,23 +127,22 @@ class SjProduct extends Command
     {
         $data = json_decode($description, true); // Convert to associative array
 
-        if (isset($data['bullet_point'])) {
+         // Clean bullet points if they exist
+         if (isset($data['bullet_point'])) {
             foreach ($data['bullet_point'] as &$bulletPoint) {
-                $bulletPoint['value'] = str_replace('?', '', $bulletPoint['value']);
-            }
-        }
-       
-        if (isset($data['product_description']) && is_array($data['product_description'])) {
-            Log::info('production description');
-            foreach ($data['product_description'] as &$bulletPoint) {
-                // Remove '?' characters from the 'value'
                 if (isset($bulletPoint['value'])) {
-                    Log::info($bulletPoint['value']);
                     $bulletPoint['value'] = preg_replace('/\?/', '', $bulletPoint['value']);
                 }
             }
-            unset($bulletPoint); // Break the reference with the last element
-            Log::info('After cleaning: ' . json_encode($data));
+        }
+    
+        // Clean product description if it exists
+        if (isset($data['product_description'])) {
+            foreach ($data['product_description'] as &$descriptionPoint) {
+                if (isset($descriptionPoint['value'])) {
+                    $descriptionPoint['value'] = preg_replace('/\?/', '', $descriptionPoint['value']);
+                }
+            }
         }
         return json_encode($data); // Convert back to JSON string
     }
@@ -284,7 +283,7 @@ class SjProduct extends Command
          */
         if ((strpos($title, 'gaming') || strpos($title, 'alienware'))
             && !strpos($title, 'desktop') && (!$this->strStartsWith($title, 'bto'))) {
-            $this->insertProductCategory('gaming_laptops', $product->id);
+            $this->insertProductCategory('gaming_desktops', $product->id);
         }
 
         /*
@@ -294,7 +293,7 @@ class SjProduct extends Command
         */
         if ((strpos($title, 'gaming') || strpos($title, 'alienware'))
             && !strpos($title, 'laptop') && (!$this->strStartsWith($title, 'bto'))) {
-            $this->insertProductCategory('gaming_desktops', $product->id);
+            $this->insertProductCategory('gaming_laptops', $product->id);
         }
 
         /*

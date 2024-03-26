@@ -43,8 +43,9 @@ class ReviewController extends BaseController
         try{
             DB::beginTransaction();
             $storeProductReview = $this->service->storeProductReview($request);
-
+            
             DB::commit();
+            $this->service->calculateReviewStatistics();
             return $this->sendResponse($storeProductReview,'Successfully product review created.');
         } catch(Exception $e) {
             DB::rollBack();
@@ -86,8 +87,9 @@ class ReviewController extends BaseController
 
             DB::beginTransaction();
             $updateProductReview = $this->service->updateProductReview($request,$id);
-
+            
             DB::commit();
+            $this->service->calculateReviewStatistics();
             return $this->sendResponse($updateProductReview,'Successfully product review updated.');
         } catch(ModelNotFoundException $e) {
             DB::rollBack();
@@ -159,7 +161,7 @@ class ReviewController extends BaseController
     {
         try {
             $reviewReport = $this->service->storeReviewReports($request);
-
+            $this->service->calculateReviewStatistics();
             return $this->sendResponse($reviewReport, 'Product review report successfully saved');
         } catch (Exception $e) {
             return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());
