@@ -39,7 +39,6 @@ const CustomTabs = styled(Tabs)`
 const OrderPage = () => {
   const [localLoading, setLocalLoading] = useState(false);
   const [orderSearch, setOrderSearch] = useState('');
-  const [orderSearchData, setOrderSearchData] = useState([]);
   const [selectedValue, setSelectedValue] = useState('2 month');
   const [activeTab, setActiveTab] = useState(0);
 
@@ -48,6 +47,7 @@ const OrderPage = () => {
   const successOrders = useSelector(state => state.orders.successOrders);
   const orderDetails = useSelector(state => state.orders.orderDetails);
   const products = useSelector(state => state?.products?.products);
+  const [orderSearchData, setOrderSearchData] = useState(successOrders);
   // console.print(orderDetails.total, 'total')
 
   const handleDropdownChange = value => {
@@ -68,13 +68,19 @@ const OrderPage = () => {
     updatePage(1);
   }, [activeTab]);
 
+  useEffect(() => {
+    if (orderSearch === '') {
+      setOrderSearchData(successOrders);
+    }
+  }, [orderSearch, successOrders]);
+
   const handleTabChange = (event, newValue) => {
     setOrderSearchData([]);
     setActiveTab(newValue);
     setOrderSearch('');
   };
   const handleSearch = async () => {
-    setActiveTab(2);
+    // setActiveTab(2);
     // console.print(orderSearch, "input")
     setLocalLoading(true);
     const responseSearch = await OrderSearchApi(orderSearch);
@@ -83,6 +89,15 @@ const OrderPage = () => {
     // setOrderSearch("");
     return;
   };
+
+  // console.log(
+  //   orderSearchData,
+  //   'orderSearchData',
+  //   successOrders,
+  //   'success order',
+  //   activeTab,
+  //   'active Tab',
+  // );
 
   const updatePage = data => {
     dispatch(getOrderDetails(data));
@@ -93,21 +108,21 @@ const OrderPage = () => {
       return <LoaderComponent />;
     }
     return activeTab === 0 ? (
-      successOrders.length > 0 ? (
+      orderSearchData?.length > 0 ? (
         <OrderCard
-          data={successOrders}
+          data={orderSearchData}
           totalItems={orderDetails}
           sendToPage={updatePage}
         />
       ) : (
         <>
           <div className='flex justify-center items-center'>
-            <p>No success orders</p>
+            <p>No orders found</p>
           </div>
         </>
       )
     ) : activeTab === 1 ? (
-      <DeliveryOrderCard data={successOrders} />
+      <DeliveryOrderCard data={orderSearchData} />
     ) : activeTab === 2 ? (
       <DeliveryOrderCard data={successOrders} cancelled={true} />
     ) : null;
@@ -240,7 +255,7 @@ const OrderPage = () => {
                           className='order-select'
                           placeholder='Select an option'>
                           <option value=''>All</option>
-                          <option value='1 month'>1 month</option>
+                          {/* <option value='1 month'>1 month</option> */}
                         </select>
                       </>
                     ) : (
