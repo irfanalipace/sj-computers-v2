@@ -13,14 +13,16 @@ const CategoryVideoAndSlider = () => {
         </Typography>
       </Grid>
 
-      {/* CategoryVideo */}
-      <Grid item xs={12} sm={4} p={2}>
-        <CategoryVideo />
-      </Grid>
+      <Grid item container xs={12} mb={1}>
+        {/* CategoryVideo */}
+        <Grid item xs={12} sm={6} md={4} p={2}>
+          <CategoryVideo />
+        </Grid>
 
-      {/* CategorySlider */}
-      <Grid item xs={12} sm={8} py={2}>
-        <CategorySlider />
+        {/* CategorySlider */}
+        <Grid item xs={12} sm={6} md={8} py={0}>
+          <CategorySlider />
+        </Grid>
       </Grid>
     </Grid>
   );
