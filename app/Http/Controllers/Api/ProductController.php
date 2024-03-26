@@ -138,6 +138,8 @@ class ProductController extends BaseController
 
         $data['review'] = $this->queryProductInfo('review', $category);
 
+        $data['screen'] = $this->queryProductInfo('screen', $category);
+
         // dd($data);
 
         return $this->sendResponse($data);
@@ -189,7 +191,10 @@ class ProductController extends BaseController
             return $this->getProcessor($sql);   
 
         } else if($key == "operating_system") {
-            return $this->getOperatingSystem($sql); 
+            return $this->getOperatingSystem($sql);
+        }
+        else if($key == "screen") {
+            return $this->getScreenSize($sql);
         }
 
         if(!empty($sql)){
@@ -359,6 +364,41 @@ class ProductController extends BaseController
         }
 
         return compact('min_rating', 'max_rating');
+    }
+
+    protected function getScreenSize($sql) {
+        if (!empty($sql)) {
+            $screenSizes = $sql->where(function($query) {
+                $query->where('name', 'LIKE', '%inch%')
+                    ->orWhere('name', 'LIKE', '%inches%');
+            })
+                ->distinct()
+                ->pluck('name'); // Pluck the 'name' column to get the screen sizes
+        } else {
+            $screenSizes = Product::where(function($query) {
+                $query->where('name', 'LIKE', '%inch%')
+                    ->orWhere('name', 'LIKE', '%inches%');
+            })
+                ->groupBy('name')
+                ->pluck('name'); // Pluck the 'name' column to get the screen sizes
+        }
+
+        $extractedSizes = [];
+
+        foreach ($screenSizes as $size) {
+            // Use regular expression to extract screen sizes from the product names
+            preg_match_all('/\b(\d+(?:\.\d+)?)\s*(?:-|to)?\s*(?:Inch|in|")\b/i', $size, $matches);
+
+            // If screen sizes are found, add them to the result array
+            if (!empty($matches[0])) {
+                foreach ($matches[1] as $match) {
+                    $extractedSizes[] = $match . ' Inch'; // Format the size as "24 Inch", "22 Inch", etc.
+                }
+            }
+        }
+
+        // Remove duplicates and return the extracted screen sizes
+        return array_unique($extractedSizes);
     }
 
     private function getOperatingSystem($sql = [])
