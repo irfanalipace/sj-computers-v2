@@ -17,6 +17,7 @@ function OrderSummary({
 }) {
   const dispatch = useDispatch();
   const placingOrder = useSelector(state => state.orders.placingOrder);
+  const cartSlice = useSelector(state => state.cart);
   const paymentData = usePaymentData(true);
 
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -70,19 +71,19 @@ function OrderSummary({
                 <ul>
                   <li>
                     <span>Items:</span>
-                    <span>({paymentData?.details?.total_items})</span>
+                    <span>({cartSlice?.details?.total_items})</span>
                   </li>
                   <li>
                     <span>Price:</span>
                     <span>
                       <strong>
-                        {paymentData?.details?.sub_total
-                          ? '$' + paymentData.details.sub_total
+                        {cartSlice?.details?.sub_total
+                          ? '$' + cartSlice.details.sub_total
                           : '$0'}
                       </strong>
                     </span>
                   </li>
-                  <li>
+                  {/* <li>
                     <span>Shipping & handling:</span>
                     <span>
                       {paymentData?.details?.shipment_amount
@@ -92,7 +93,7 @@ function OrderSummary({
                           ).toFixed(2)
                         : '$0'}
                     </span>
-                  </li>
+                  </li> */}
                   {/* <li>
                     <span>Total before tax:</span>
                     <span>--</span>

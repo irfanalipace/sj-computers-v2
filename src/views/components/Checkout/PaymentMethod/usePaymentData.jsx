@@ -47,13 +47,13 @@ function usePaymentData(buyNow = false) {
       email: shippingDetails?.email || user?.email,
       full_name: shippingDetails?.full_name || user?.name,
     },
-    cart_items: cartData,
-    details: {
-      ...cartDetails,
-      shipment_amount: cartDetails.shipment_amount || 0,
-      estimate_days: cartDetails.estimate_days || 0,
-      total_quantity,
-    },
+    // cart_items: cartData,
+    // details: {
+    //   ...cartDetails,
+    //   shipment_amount: cartDetails.shipment_amount || 0,
+    //   estimate_days: cartDetails.estimate_days || 0,
+    //   total_quantity,
+    // },
   };
 
   if (!isAuthenticated) {

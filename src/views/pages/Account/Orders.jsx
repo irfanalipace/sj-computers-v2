@@ -122,7 +122,7 @@ const OrderPage = () => {
           </div>
           <div className='col-sm-8 col-md-4 col-4 search-product-order-tables'>
             <label style={{ marginBottom: 5 }} htmlFor='orderSearch'>
-              Enter order id to search
+              Enter tracking id to search
             </label>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <div style={{ position: 'relative' }}>
