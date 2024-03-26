@@ -139,10 +139,11 @@ class SjProduct extends Command
                 // Remove '?' characters from the 'value'
                 if (isset($bulletPoint['value'])) {
                     Log::info($bulletPoint['value']);
-                    $bulletPoint['value'] = str_replace('?', '', $bulletPoint['value']);
+                    $bulletPoint['value'] = preg_replace('/\?/', '', $bulletPoint['value']);
                 }
             }
             unset($bulletPoint); // Break the reference with the last element
+            Log::info('After cleaning: ' . json_encode($data));
         }
         return json_encode($data); // Convert back to JSON string
     }
