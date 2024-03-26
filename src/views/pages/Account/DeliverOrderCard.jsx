@@ -133,16 +133,15 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
         radius='md'
         withBorder
         className='p-0'>
+        {isSmallScreen && (
+          <div style={{ padding: '5px 10px', textAlign: 'center' }}>
+            Tracking id : {'#' + orders?.tracking_id ? orders?.tracking_id : ''}{' '}
+          </div>
+        )}
         <CardHeader>
           {!isSmallScreen && (
             <div>
               Order Placed <br /> {formatDate(orders?.created_at)}
-            </div>
-          )}
-          {isSmallScreen && (
-            <div>
-              Tracking id <br />
-              {'#' + orders?.tracking_id ? orders?.tracking_id : ''}{' '}
             </div>
           )}
           {isSmallScreen && (
