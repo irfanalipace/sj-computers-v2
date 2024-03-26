@@ -77,6 +77,7 @@ class PayPalController extends Controller
            
             foreach($response['links'] as $link) {
                 if($link['rel'] === 'approve') {
+                    sleep(3); 
                     return $link['href'];
                 }
             }
