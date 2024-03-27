@@ -12,6 +12,7 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
   const [max, setMax] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isMOunt, setIsMount] = useState(false);
+  const [firstReload, setFirstReload] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -91,7 +92,7 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
     };
     filterObject = {
       ...filterObject,
-      page: currentPage,
+      page: firstReload ? 1 : currentPage, // This for setting 1 on first reload
       name: '',
       category: pathValue,
       filter: filteredData,
@@ -108,6 +109,7 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
         // setMax(response?.data?.total);
         viewItemDataLayer(productAfterShowMore, pathValue);
       }),
+      setFirstReload(false),
     );
 
     const total = totalProducts + 8;

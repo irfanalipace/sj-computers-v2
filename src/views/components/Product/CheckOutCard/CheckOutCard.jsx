@@ -41,8 +41,7 @@ export const CheckOutCard = ({ product, isMobile }) => {
           isMobile
             ? 'p-2 rounded border card-section-riht'
             : 'card-section-right'
-        }
-      >
+        }>
         <div className='hidden-on-mobile'>
           <h6 style={{ fontWeight: '700' }}>Excellent Condition</h6>
           <h6 style={{ fontWeight: '700' }}>(Refurbished)</h6>
@@ -95,8 +94,7 @@ export const CheckOutCard = ({ product, isMobile }) => {
                 <Link
                   href='#'
                   className='text-decoration-none free-return hidden-on-mobile'
-                  style={{ color: '#2c8a9a' }}
-                >
+                  style={{ color: '#2c8a9a' }}>
                   FREE Returns
                 </Link>
                 <div className='hidden-box'>
@@ -105,8 +103,7 @@ export const CheckOutCard = ({ product, isMobile }) => {
                       fontSize: '12px',
                       fontWeight: 'bold',
                       marginBottom: '12px',
-                    }}
-                  >
+                    }}>
                     Return this item for free
                   </span>
                   <div style={{ marginTop: '12px' }}>
@@ -120,8 +117,7 @@ export const CheckOutCard = ({ product, isMobile }) => {
                         marginTop: '12px',
                         fontSize: '11px',
                         color: '#2c8a9a',
-                      }}
-                    >
+                      }}>
                       Read full return policy
                     </Link>
                   </div>
@@ -172,8 +168,7 @@ export const CheckOutCard = ({ product, isMobile }) => {
         <div className='color-card-dev'>
           <button
             className='select-location-btn deliver-to mb-2'
-            onClick={handleShow}
-          >
+            onClick={handleShow}>
             <img src={imges1} style={{ width: '10.5px', height: '14px' }} />
             &ensp;
             <span style={{ color: isMobile ? '#318243' : '' }}>Deliver to</span>

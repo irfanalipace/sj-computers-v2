@@ -1,10 +1,10 @@
-import { Grid, Link } from '@mui/material';
+import { Grid } from '@mui/material';
 import React from 'react';
 import letterImage from '@images/advertisement/Layer_1.png';
 import './Subscribe.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 const Subscribe = () => {
   const user = useSelector(state => state?.auth?.isAuthenticated);
   const navigate = useNavigate();
@@ -17,8 +17,7 @@ const Subscribe = () => {
         alignItems='center'
         spacing={10}
         mt={1}
-        pb={5}
-      >
+        pb={5}>
         <Grid item mt={5}>
           <h3 className='heading-subscribe'>Subscribe to Our Newsletter!</h3>
           <p className='text-subscribe'>
@@ -48,9 +47,10 @@ const Subscribe = () => {
                 // className="mt-3"
               >
                 &ensp;By signing up you agree to SJ Computer’s <br />
-                &ensp;<Link>Privacy Policy</Link>
+                &ensp;<Link to={'/privacy_policy'}>Privacy Policy</Link>
                 <span style={{ color: '#007185' }}></span>
-                &nbsp;and&nbsp;<Link>Terms & Condition</Link>
+                &nbsp;and&nbsp;
+                <Link to={'/term_services'}>Terms & Condition</Link>
               </label>
             </Grid>
           </Grid>
@@ -74,8 +74,7 @@ const Subscribe = () => {
         justifyContent='center'
         alignItems='center'
         mt={5}
-        mb={2}
-      >
+        mb={2}>
         {!user && (
           <h6 style={{ fontSize: '13px' }}>See personalized recommendations</h6>
         )}
