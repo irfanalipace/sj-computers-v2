@@ -20,7 +20,7 @@ export default function ReturnPolicy() {
         replacment within 30 days of receipt.
       </Typography>
 
-      <Link href='#' underline='none'>
+      <Link href={'/return_refund_policy'} underline='none'>
         Read full return policy
       </Link>
     </Stack>
