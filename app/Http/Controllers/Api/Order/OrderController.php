@@ -90,9 +90,9 @@ class OrderController extends BaseController
             $sql = Order::whereBetween('created_at', [$from, $to])->where('tracking_id',$search);
         }
 
-        $successOrder =  $sql->where('status', StatusEnum::COMPLETE)->paginate($perPageRecord);
-        $deliveredOrder = $sql->where('fedex_status',StatusEnum::DELIVERED)->paginate($perPageRecord);
-        $cancelOrder = $sql->where('status',StatusEnum::CANCELED)->paginate($perPageRecord);
+        $successOrder =  $sql->where('user_id',auth('api')->user()->id)->where('status', StatusEnum::COMPLETE)->paginate($perPageRecord);
+        $deliveredOrder = $sql->where('user_id',auth('api')->user()->id)->where('fedex_status',StatusEnum::DELIVERED)->paginate($perPageRecord);
+        $cancelOrder = $sql->where('user_id',auth('api')->user()->id)->where('status',StatusEnum::CANCELED)->paginate($perPageRecord);
 
         $data = [
             'success_orders' => $successOrder,
