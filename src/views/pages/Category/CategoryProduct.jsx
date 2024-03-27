@@ -43,7 +43,7 @@ const CategoryProducts = () => {
       </Grid> */}
       {/* <Grid item xs={12} sm={9} md={10} lg={10} py={2}></Grid> */}
       <Grid xs={12} md={12} px={0} py={1}>
-        <AllCategoriesHeader />
+        {/* <AllCategoriesHeader /> */}
         <Typography
           variant='h3'
           mb={2}
