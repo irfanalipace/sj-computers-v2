@@ -1,44 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductsGrid from '@components/ProductsGrid/ProductsGrid';
-import { getProductsCategory } from '../../core/api/products';
+// import { getProductsCategory } from '../../core/api/products';
 import { filterProducts } from '@store/products/productsThunks';
-import { TroubleshootRounded } from '@mui/icons-material';
 
 const ProductCategoryGrid = ({ pathValue, filters }) => {
   const categories = useSelector(state => state.category.categories);
-  const { filtersProduct, filtersArray, currentPage, isLoading } = useSelector(
-    state => state.products,
-  );
+  const { filtersArray, currentPage } = useSelector(state => state.products);
   const [productsList, setProductsList] = useState([]);
   const [totalProducts, setTotalProducts] = useState(12);
   const [max, setMax] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isMOunt, setIsMount] = useState(false);
 
   const dispatch = useDispatch();
 
-  const getProducts = async (total, isFilter) => {
-    try {
-      setLoading(true);
-      const filterObject = {
-        page: 1,
-        category: pathValue,
-        per_page: total,
-        ...isFilter,
-      };
+  // this is commentd because we are using fitler-product api whcih is working
+  // will remove it if everything is working
 
-      const response = await getProductsCategory(filterObject);
-      setProductsList(response?.data?.data);
-      setMax(response?.data?.total);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const getProducts = async (total, isFilter) => {
+  //   try {
+  //     setLoading(true);
+  //     const filterObject = {
+  //       page: 1,
+  //       category: pathValue,
+  //       per_page: total,
+  //       ...isFilter,
+  //     };
+
+  //     const response = await getProductsCategory(filterObject);
+  //     setProductsList(response?.data?.data);
+  //     setMax(response?.data?.total);
+  //   } catch (err) {
+  //     console.log(err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  useEffect(() => {
+    setIsMount(true);
+  }, []);
 
   useEffect(() => {
     // getProducts(totalProducts);
+
+    // dispatch(RESET_PAGE());
 
     handleClick(filters || false);
   }, [categories]);
@@ -93,6 +100,7 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
     //   filterObject.name = categorySlug;
     // }
     setLoading(true);
+    console.log(filterObject);
     dispatch(
       filterProducts(filterObject, true, productAfterShowMore => {
         setLoading(false);
@@ -160,8 +168,10 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
       ...filterObject,
       filter: filteredData,
     };
+    console.log(isMOunt);
 
-    if (!isEmpty(filteredData)) {
+    if (!isEmpty(filteredData) || isMOunt) {
+      console.log(filterObject);
       dispatch(
         filterProducts(filterObject, false, productAfterShowMore => {
           // setProductsList([...productsList, ...productAfterShowMore]);
