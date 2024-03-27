@@ -25,7 +25,7 @@ const ProductDetails = ({ product }) => {
   const [description, setDescription] = useState([]);
   const [productDetails, setProductDetails] = useState([]);
   const [key, setKey] = useState('home');
-
+  console.log(product.total_review, 'KLKLKL');
   useEffect(() => {
     const parseProductDetailsArray = () => {
       if (!product?.description) return;

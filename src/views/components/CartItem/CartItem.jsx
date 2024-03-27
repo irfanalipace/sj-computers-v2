@@ -150,7 +150,12 @@ const CartItem = ({ item }) => {
           </div>
         </Grid>
         <Grid item sx={{}}>
-          <IconButton onClick={deleteItemFunction}>
+          <IconButton onClick={deleteItemFunction}  sx={{
+    marginLeft: {
+      xs: '-140px', 
+      md: 0, 
+    },
+  }}>
             <DeleteOutlineOutlinedIcon />
           </IconButton>
         </Grid>

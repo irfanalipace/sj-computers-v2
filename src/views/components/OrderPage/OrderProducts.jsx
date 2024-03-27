@@ -206,7 +206,13 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                             ? !isSmallScreen && (
                                 <Link
                                   to={`/track-order/${row?.id}/${row?.tracking_id}`}
-                                  className='track-order-button'>
+                                  className='track-order-button'
+                                  style={{
+                                    background: row?.tracking_id ? '' : 'gray',
+                                    pointerEvents: row?.tracking_id
+                                      ? ''
+                                      : 'none',
+                                  }}>
                                   Track Package
                                 </Link>
                               )

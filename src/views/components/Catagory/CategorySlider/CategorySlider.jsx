@@ -60,10 +60,10 @@ const CategorySlider = () => {
             slidesPerView: 2,
           },
           480: {
-            slidesPerView: 3,
+            slidesPerView: 2,
           },
           640: {
-            slidesPerView: 3,
+            slidesPerView: 2,
           },
 
           768: {
@@ -74,7 +74,7 @@ const CategorySlider = () => {
           },
 
           1200: {
-            slidesPerView: 6,
+            slidesPerView: 5,
           },
         }}
         navigation={{

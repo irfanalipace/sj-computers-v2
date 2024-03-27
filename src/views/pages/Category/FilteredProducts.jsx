@@ -224,7 +224,9 @@ const FilteredProducts = memo(
               {category?.name ? (
                 <>
                   Best{' '}
-                  {category?.name ? category?.name : 'Monitors for Desktops'}
+                  {category?.name?.toLowerCase() === 'bto'
+                    ? 'Accessories'
+                    : category?.name}
                 </>
               ) : (
                 <> {categorySlug?.toUpperCase()?.replace('-', ' ')} </>

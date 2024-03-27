@@ -133,7 +133,7 @@ const FilterBarlayout2 = ({
 
   useEffect(() => {
     fetchFilters();
-  }, []);
+  }, [location?.pathname]);
 
   function getPriceRanges(min, max) {
     const ranges = [];
@@ -198,30 +198,30 @@ const FilterBarlayout2 = ({
       let data = response?.data;
       setFilters(data ? data : {});
 
-      const highestGb = data.ram_memory.highest_GB;
-      const lowestGb = data.ram_memory.least_GB;
+      const highestGb = data?.ram_memory?.highest_GB;
+      const lowestGb = data?.ram_memory?.least_GB;
       const realisticOptions = generateRealisticOptions(highestGb, lowestGb);
       const ramOptions = realisticOptions.filter(option => option <= highestGb);
-      setRamData([{ gb: ramOptions, tb: data.ram_memory.least_TB }]);
+      setRamData([{ gb: ramOptions, tb: data?.ram_memory?.least_TB }]);
 
-      if (data.review?.min_rating && data.review?.max_rating) {
+      if (data?.review?.min_rating && data?.review?.max_rating) {
         let newArray = [];
         for (
-          let i = data.review?.max_rating;
-          i >= data.review?.min_rating;
+          let i = data?.review?.max_rating;
+          i >= data?.review?.min_rating;
           i--
         ) {
           newArray.push({
             id: parseInt(i),
             label: `${parseInt(i)}`,
-            value: parseInt(i),
+            value: i,
           });
         }
         console.log(newArray);
         setReviewOptions(newArray);
       }
 
-      const highestHardDiskGb = data.hard_disk.highest_GB;
+      const highestHardDiskGb = data?.hard_disk?.highest_GB;
       // const lowestHardDiskGb = data.hard_disk.least_GB;
       const realisticOptionsHardDisk = generateRealisticOptions(
         highestHardDiskGb,
@@ -230,11 +230,11 @@ const FilterBarlayout2 = ({
       const hardDiskOptions = realisticOptionsHardDisk.filter(
         option => option <= highestGb,
       );
-      setHardDiskData([{ gb: hardDiskOptions, tb: data.hard_disk.least_TB }]);
+      setHardDiskData([{ gb: hardDiskOptions, tb: data?.hard_disk?.least_TB }]);
 
       const priceShapedArray = getPriceRanges(
-        data.price.min_price,
-        data.price.max_price,
+        data?.price?.min_price,
+        data?.price?.max_price,
       );
       setPriceData(prev => {
         return {
@@ -317,7 +317,11 @@ const FilterBarlayout2 = ({
   const [brandCheckd, setBrandCheckd] = useState([]);
 
   let renderedItems = (options, category) => {
-    let optionArray = options.slice(0, visibleEntries[category].visibleEntries);
+    console.log(visibleEntries, category);
+    let optionArray = options.slice(
+      0,
+      visibleEntries?.[category]?.visibleEntries,
+    );
     return (
       <>
         {optionArray.map((option, index) => (
@@ -389,7 +393,7 @@ const FilterBarlayout2 = ({
           </li>
         ))}
 
-        {visibleEntries[category].visibleEntries <=
+        {visibleEntries?.[category]?.visibleEntries <=
           filters[category].length && (
           <li className='filter-value'>
             <button onClick={() => handleShowMoreitems(category)}>
@@ -875,6 +879,7 @@ const FilterBarlayout2 = ({
 
   let renderedCategories = Object.entries(filters).map(
     ([category, options], index) => {
+      if (category == 'review') return;
       return (
         <div key={category}>
           {(!!filters[category].length ||
@@ -896,6 +901,7 @@ const FilterBarlayout2 = ({
                 }}>
                 {/* {category.replace(/_/g, ' ')} */}
                 {category === 'price' ? '' : category.replace(/_/g, ' ')}
+                {/* {category == 'review' ? '' : category.replace(/_/g, ' ')} */}
 
                 {inDrawer ? (
                   <span className={`${inDrawer ? 'align-to-end' : ''}`}>
@@ -1021,7 +1027,7 @@ const FilterBarlayout2 = ({
           {renderPrice('price')}
           {renderedCategories}
           {/* Below Categories is for Gpu and trnding */}
-          {renderCategoriesGpuAndTrending}
+          {categorySlug !== 'bto' && renderCategoriesGpuAndTrending}
           {/* <li className="filter-value">
           <button onClick={handleShowMoreCategory}>
           <span className="me-2">Show More</span>
