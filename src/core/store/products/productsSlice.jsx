@@ -59,7 +59,7 @@ const initialState = {
   isFiltering: false,
   selectedCategory: null,
   apiError: false,
-  isLoading: true,
+  isLoading: false,
   currentPage: 1,
   filterTotal: 0,
 };

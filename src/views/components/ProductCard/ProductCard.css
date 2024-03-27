@@ -126,7 +126,7 @@
   color: #fff;
   font-weight: 400;
 }
-.add-prot-btn:disabled {
+.btn-grp .add-prot-btn:disabled {
   background-color: lightgray;
   border: 1px solid lightgray;
 }
@@ -587,6 +587,10 @@
     position: absolute;
     top: -32px;
   }
+}
+
+.add-waranty-btn:disabled {
+  background-color: gray;
 }
 
 /* Small Tablets (landscape phones, less than 768px) */
