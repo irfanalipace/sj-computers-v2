@@ -133,7 +133,7 @@ const FilterBarlayout2 = ({
 
   useEffect(() => {
     fetchFilters();
-  }, []);
+  }, [location?.pathname]);
 
   function getPriceRanges(min, max) {
     const ranges = [];
