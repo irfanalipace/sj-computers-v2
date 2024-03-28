@@ -217,7 +217,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                                 </Link>
                               )
                             : !isSmallScreen && (
-                                <p style={{ marginTop: '20px' }}>
+                                <p style={{ padding: '20px' }}>
                                   Price : ${order?.product?.price}
                                 </p>
                               )}
@@ -270,22 +270,20 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                             </div>
                             {!isSmallScreen && (
                               <button className='pending-order-button'>
-                                {row?.fedex_status}
+                                {row?.fedex_status
+                                  ? row?.fedex_status
+                                  : 'Ordered'}
                               </button>
                             )}
-                            {row?.fedex_status !== 'Delivered'
-                              ? !isSmallScreen && (
-                                  <Link
-                                    to={`/track-order/${row?.id}/${row?.tracking_id}`}
-                                    className='track-order-button'>
-                                    Track Package
-                                  </Link>
-                                )
-                              : !isSmallScreen && (
-                                  <p style={{ marginTop: '20px' }}>
-                                    Price : ${order?.product?.price}
-                                  </p>
-                                )}
+                            {!isSmallScreen && (
+                              <div
+                                style={{
+                                  // marginTop: '20px',
+                                  padding: '20px',
+                                }}>
+                                Price : ${order?.product?.price}
+                              </div>
+                            )}
                             {isSmallScreen && (
                               <p style={{ marginTop: '20px' }}>
                                 Price : ${order?.product?.price}
