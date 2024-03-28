@@ -407,8 +407,8 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
                 </Grid>
               </Grid>
             </div>
-            <div className='order-invoice-footer'>
-              How shipping costs calculates?
+            <div className='order-invoice-footer' style={{ height: '100%' }}>
+              {/* How shipping costs calculates? */}
             </div>
           </InvoiceCard>
         </Card>
