@@ -339,21 +339,21 @@ const ProductCardLayout3 = ({
           <div className='delivery-details'>
             <div style={{ color: '#1270C4', margin: '4px 0px' }}>
               FREE delivery{' '}
-              <span
+              {/* <span
                 style={{
                   color: 'black',
                   fontWeight: '500',
                   fontSize: '12px',
                 }}>
                 Friday, May 19
-              </span>
+              </span> */}
             </div>
-            <div style={{ color: '#666666', margin: '4px 0px' }}>
+            {/* <div style={{ color: '#666666', margin: '4px 0px' }}>
               or fastest delivery{' '}
               <span style={{ color: 'black', fontWeight: '500' }}>
                 Monday, May 15
               </span>
-            </div>
+            </div> */}
             <div style={{ color: '#666666', margin: '4px 0px' }}>
               order within{' '}
               <span style={{ color: '#E87E24' }}>8 hours 58 mins</span>

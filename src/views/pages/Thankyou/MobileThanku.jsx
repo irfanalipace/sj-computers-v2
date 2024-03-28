@@ -317,7 +317,7 @@ export default function MobileThanku() {
             </div>
           </div>
           <div className='Items-calcurteing-items'>
-            <span> How shipping costs calculates?</span>
+            {/* <span> How shipping costs calculates?</span> */}
           </div>
         </div>
       </div>

@@ -154,8 +154,7 @@ export default function MobileCheckout() {
               <div className='row mx-o'>
                 <div
                   style={{ textAlign: 'center' }}
-                  className='checkout-item-mobile-series-data'
-                >
+                  className='checkout-item-mobile-series-data'>
                   <p>Checkout (1 item)</p>
                 </div>
                 <div className='col-md-9 col-12'>
@@ -165,8 +164,7 @@ export default function MobileCheckout() {
                     title='Enter Your Shipping Details '
                     summary={shippingAddress.address && <ShippingSummary />}
                     toggleAccordion={toggleAccordion}
-                    isOpen={accordion[1].open}
-                  >
+                    isOpen={accordion[1].open}>
                     <ShippingDetails shippingAddress={shippingAddress} />
                   </Accordion>
                   {accordion[1].open && (
@@ -178,8 +176,7 @@ export default function MobileCheckout() {
                             style={{
                               marginTop: '12px',
                               marginBottom: '12px',
-                            }}
-                          >
+                            }}>
                             <ShippingMethod />
                           </div>
                         </div>
@@ -215,8 +212,7 @@ export default function MobileCheckout() {
                     id={2}
                     title='Review Items & Shipping'
                     toggleAccordion={toggleAccordion}
-                    isOpen={accordion[2].open}
-                  >
+                    isOpen={accordion[2].open}>
                     <MobileReviewCheckout
                       estimatedDelivery={
                         checkoutDetails.shipment_info?.other_info
@@ -233,8 +229,7 @@ export default function MobileCheckout() {
                             display: 'flex',
                             justifyContent: 'space-between',
                           }}
-                          className='border-shipping-summery-data'
-                        >
+                          className='border-shipping-summery-data'>
                           {/* <div className="shipping-method-component-wrapper" style={{marginTop:"12px", marginBottom:"12px"}}>
                                             <ShippingMethod />
                                         </div> */}
@@ -243,13 +238,11 @@ export default function MobileCheckout() {
                               style={{
                                 display: 'flex',
                                 justifyContent: '',
-                              }}
-                            >
+                              }}>
                               <div
                                 style={{
                                   marginTop: '3px',
-                                }}
-                              >
+                                }}>
                                 <input
                                   type='radio'
                                   name='radio'
@@ -260,13 +253,13 @@ export default function MobileCheckout() {
                                 <span className='shipping-data-shiping-view-mobile'>
                                   Free Shipping{' '}
                                 </span>
-                                <p
+                                {/* <p
                                   style={{
                                     fontSize: '10px',
                                   }}
                                 >
                                   Mon, Nov 13
-                                </p>
+                                </p> */}
                               </div>
                             </div>
                           </div>
@@ -286,8 +279,7 @@ export default function MobileCheckout() {
 
                       <ShipingModalSummery
                         isOpen={isModalOpen}
-                        onClose={closeModal}
-                      >
+                        onClose={closeModal}>
                         {' '}
                       </ShipingModalSummery>
 
@@ -308,23 +300,20 @@ export default function MobileCheckout() {
                             style={{
                               marginBottom: '12px',
                               marginTop: '12px',
-                            }}
-                          >
+                            }}>
                             {/* <button >Proceed</button> */}
                             {isAuthenticated ? (
                               <ReviewButton
                                 toggleAccordion={() =>
                                   handleClick(null, true, currentAccordionId)
-                                }
-                              >
+                                }>
                                 Proceed
                               </ReviewButton>
                             ) : (
                               <ReviewButton
                                 toggleAccordion={() =>
                                   handleClick(null, true, currentAccordionId)
-                                }
-                              >
+                                }>
                                 Proceed
                               </ReviewButton>
                             )}
@@ -342,8 +331,7 @@ export default function MobileCheckout() {
                       )
                     }
                     toggleAccordion={toggleAccordion}
-                    isOpen={accordion[3].open}
-                  >
+                    isOpen={accordion[3].open}>
                     <PaymentMethod
                       setPayment={setPaymentMethod}
                       cartItems={cartItems}
@@ -358,8 +346,7 @@ export default function MobileCheckout() {
                             style={{
                               marginTop: '12px',
                               marginBottom: '12px',
-                            }}
-                          >
+                            }}>
                             <ShippingMethod />
                           </div>
                         </div>
@@ -388,8 +375,7 @@ export default function MobileCheckout() {
                     style={{
                       marginTop: '8px',
                       paddingLeft: '10px',
-                    }}
-                  >
+                    }}>
                     <div className='col-md-3 col-12'>
                       <div>
                         <span>
@@ -400,8 +386,7 @@ export default function MobileCheckout() {
                               color: '#007185',
                               fontSize: '12px',
                               fontWeight: '600',
-                            }}
-                          >
+                            }}>
                             Contact Us
                           </Link>
                         </span>
@@ -420,8 +405,7 @@ export default function MobileCheckout() {
                                 color: '#007185',
                                 fontSize: '12px',
                                 fontWeight: '600',
-                              }}
-                            >
+                              }}>
                               Returns Policy.
                             </Link>
                           </span>
@@ -437,8 +421,7 @@ export default function MobileCheckout() {
                               color: '#007185',
                               fontSize: '12px',
                               fontWeight: '600',
-                            }}
-                          >
+                            }}>
                             sjcomputers.us
                           </Link>{' '}
                           homepage.
@@ -483,7 +466,7 @@ export const SelectedPaymentMethod = ({ paymentMethod }) => {
             <div>
               <label htmlFor={PAYMENT_METHODS.PAYPAL}>
                 <div>PayPal</div>
-                <div className='image-wrapper ms-4 ' >
+                <div className='image-wrapper ms-4 '>
                   <img src={paypal} />
                 </div>
               </label>
@@ -495,7 +478,9 @@ export const SelectedPaymentMethod = ({ paymentMethod }) => {
           <div className='payment-method mb-0'>
             <div>
               <label htmlFor={PAYMENT_METHODS.SQUARE}>
-                <div className='debit-cart-creited-cart paypal-mobile-screen-version'>Debit/Credit Card </div>
+                <div className='debit-cart-creited-cart paypal-mobile-screen-version'>
+                  Debit/Credit Card{' '}
+                </div>
                 <div className='image-wrapper ms-4 paypal-mobile-screen-version'>
                   <img src={visa} />
                   <img src={mastercard} />

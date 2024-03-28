@@ -394,7 +394,7 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
               </Grid>
             </div>
             <div className='order-invoice-footer'>
-              How shipping costs calculates?
+              {/* How shipping costs calculates? */}
             </div>
           </InvoiceCard>
         </Card>

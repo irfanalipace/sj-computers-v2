@@ -126,9 +126,9 @@ function ShipingModalSummery({
             </div>
           </div>
           <div className='summary-footer'>
-            <Link to={'#'} style={{ color: '#007185' }}>
+            {/* <Link to={'#'} style={{ color: '#007185' }}>
               How shipping costs calculates?
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
