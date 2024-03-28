@@ -49,7 +49,7 @@ export const categoriesWithSubCategories = [
     id: 4,
     category: 'Professional Workstations',
     sub_categories: [
-      { name: 'precision', url: '/category/precision' },
+      { name: 'Precision', url: '/category/precision' },
       { name: 'XPS', url: '/category/xps' },
       { name: 'Miscellaneous', url: '/category/miscellaneous' },
     ],
