@@ -25,6 +25,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
   const productAddingToCard = useSelector(state => state.products.isLoading);
   const [type, setType] = useState('');
   const [cartClickHandler, addingItemToCart] = useAddToCart(product, quantity);
+
   const params = useParams();
   const protectionPlanStore = useSelector(state => state.protectionPlan);
 
@@ -82,7 +83,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
                   redirectOnClose: true,
                 });
           }}
-          disabled={productAddingToCard}
+          disabled={addingItemToCart}
           className={'button1 button-text-button'}
           // style={{ marginBottom: "10px" }}
         >
@@ -95,7 +96,7 @@ function AddToCartAndWarranty({ product, isMobile }) {
           onClick={() => {
             setType('buynow');
           }}
-          disabled={productAddingToCard}
+          disabled={addingItemToCart}
           className={'button1 button-text-button'}
           style={{ background: '#00305E' }}>
           {loading ? <CircularProgress /> : 'Buy Now'}

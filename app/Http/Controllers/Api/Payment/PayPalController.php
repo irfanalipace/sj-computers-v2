@@ -36,6 +36,7 @@ class PayPalController extends Controller
 
     public function processPayment($request,$user,$userType,$cartDetails)
     {
+       
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->createOrder([
@@ -89,6 +90,7 @@ class PayPalController extends Controller
 
     public function paypalSuccess(Request $request,OrderRepository $repository)
     {       
+        
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
@@ -125,10 +127,10 @@ class PayPalController extends Controller
        
          $listofItems = ($userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
         
-        //  $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true),StatusEnum::PAYMENTTYPEPAYPAL);
-        //  if (!$check_product_first) { 
-        //      return redirect('cart?error='."Product quantity is invalid");
-        //  }
+         $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true),StatusEnum::PAYMENTTYPEPAYPAL);
+         if (!$check_product_first) { 
+             return redirect('cart?error='."Product quantity is invalid");
+         }
         
          // create invoice along with order
          $orderData = [];
@@ -154,7 +156,7 @@ class PayPalController extends Controller
          }
         
         if(isset($response['status']) && $response['status'] == 'COMPLETED') {
-
+            
             $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
             if (!$order) {
                 dd('order not created');
@@ -206,6 +208,7 @@ class PayPalController extends Controller
             
 
         } else {
+            dd('not completed transaction');
             DB::rollBack();
             return redirect()->route('cancel');
         }
