@@ -263,8 +263,7 @@ class OrderRepository
 
     /*  check product quantity run time */
     public function checkProduct($cart_items,$userId,$userType,$isBuyNow = false,$paymentType = [])
-    {        
-       
+    {             
         $data = [];
         $cart = \Cart::session($userId);
         

@@ -94,11 +94,16 @@ class PayPalController extends Controller
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
-       
+
+        DB::beginTransaction();
+        if(isset($response['status']) && $response['status'] == 'COMPLETED') {
+            
         $cache = cache::where('key','paypal_transaction_'.$request->token)->first();
+
         if(!$cache){
             return redirect('checkout?error=Error in Paypal PLease try again.');
         }
+
         $getCache = json_decode($cache->value);
        
         $shippingAddress = $getCache->shippping_address; 
@@ -117,7 +122,7 @@ class PayPalController extends Controller
         $userType =  $getCache->user_type; 
         $cartDetails = $getCache->cart_details; 
       
-        DB::beginTransaction();
+      
          /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
          $userIdToPass = ($userType != StatusEnum::GUEST) ? $user->id : $user->email;
          $userType = ($userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
@@ -155,7 +160,7 @@ class PayPalController extends Controller
              $orderData['estimate_day'] =   Carbon::now()->addWeekdays(5)->format('l d-m-Y');
          }
         
-        if(isset($response['status']) && $response['status'] == 'COMPLETED') {
+        
             
             $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
             if (!$order) {
@@ -198,11 +203,6 @@ class PayPalController extends Controller
             // $cache->delete();
 
             DB::commit();
-
-            // Convert to JSON if necessary for API response
-            $jsonResponse = json_encode($orderDetailOutput);
-            
-            // \Cache::forget("paypal_transaction_".$request->token);
             
             return redirect()->to('thank-you?orderSuccess=true'.'&&order_no='.$orderDetailOutput['order_no']);
             
