@@ -390,21 +390,16 @@ class ProductController extends BaseController
             // If screen sizes are found, add them to the result array
             if (!empty($matches[0])) {
                 foreach ($matches[1] as $match) {
-                    $extractedSizes[] = [
-                        'value' => $match . ' Inch',
-                        'backend_value' => $match . ' Inch'
-                    ];
+                    $extractedSizes[] = $match . ' Inch'; // Format the size as "24 Inch", "22 Inch", etc.
                 }
             }
         }
 
         // Remove duplicate sizes
-        $uniqueSizes = array_unique($extractedSizes, SORT_REGULAR);
+        $uniqueSizes = array_unique($extractedSizes);
 
         // Sort the sizes in descending order
-        usort($uniqueSizes, function ($a, $b) {
-            return strcmp($b['value'], $a['backend_value']);
-        });
+        rsort($uniqueSizes);
 
         return $uniqueSizes;
     }
@@ -563,7 +558,7 @@ class ProductController extends BaseController
             foreach ($filters as $filter) {
 
                 // $filter = json_encode($filter, true);
-//                $filter = json_decode($filter, true);
+                $filter = json_decode($filter, true);
 
                 $key = $filter['key'] ?? '';
                 $value = $filter['value'] ?? '';
