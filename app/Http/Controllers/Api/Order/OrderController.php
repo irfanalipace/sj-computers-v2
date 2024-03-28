@@ -80,19 +80,31 @@ class OrderController extends BaseController
     {
        
         $perPageRecord = $request->get('per_page') ?? 12;
+        $search = $request->search ?? [];
 
-        $sql = Order::query();
-
-        if ($request->month) {
-            $search = $request->search ?? [];
+        $sql = Order::query()->where('user_id',auth('api')->user()->id);
+       
+        if ($request->month) {          
             $from = Carbon::now()->subMonth($request->get('month'));
             $to = Carbon::now();
-            $sql = Order::whereBetween('created_at', [$from, $to])->where('tracking_id',$search);
+            $sql = Order::whereBetween('created_at', [$from, $to]);
+           
         }
+        
+        if($search){        
+            $searchable = trim($request->search);
+            $search = searchWhere(['id','tracking_id'], $searchable);
 
-        $successOrder =  $sql->where('user_id',auth('api')->user()->id)->where('status', StatusEnum::COMPLETE)->paginate($perPageRecord);
-        $deliveredOrder = $sql->where('user_id',auth('api')->user()->id)->where('fedex_status',StatusEnum::DELIVERED)->paginate($perPageRecord);
-        $cancelOrder = $sql->where('user_id',auth('api')->user()->id)->where('status',StatusEnum::CANCELED)->paginate($perPageRecord);
+            $sql->where(function ($query) use ($search) {
+                foreach ($search as $condition) {
+                    $query->orWhere(...$condition);
+                }
+            });
+        }
+       
+        $successOrder =  $sql->where('status', StatusEnum::COMPLETE)->paginate($perPageRecord);
+        $deliveredOrder = $sql->where('fedex_status',StatusEnum::DELIVERED)->paginate($perPageRecord);
+        $cancelOrder = $sql->where('status',StatusEnum::CANCELED)->paginate($perPageRecord);
 
         $data = [
             'success_orders' => $successOrder,
@@ -101,6 +113,16 @@ class OrderController extends BaseController
         ];
 
         return $this->sendResponse($data);
+    }
+
+    private function searchWhere($columns, $search)
+    {
+        $where = [];
+        foreach ($columns as $column) {
+            $where[] = [$column, 'like', '%' . $search . '%'];
+        }
+    
+        return $where;
     }
 
     public function searchOrder(Request $request)
