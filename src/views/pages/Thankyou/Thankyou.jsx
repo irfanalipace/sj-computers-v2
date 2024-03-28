@@ -332,7 +332,7 @@ export default function ThankYou() {
                   <button
                     className='shop-more-btn'
                     onClick={() => navigate('/')}>
-                    Shop more
+                    Shop again
                   </button>
                 </div>
               </div>
