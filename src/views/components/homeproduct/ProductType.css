@@ -44,6 +44,7 @@
   max-width: 86%;
   /* max-height: 214px; */
   height: 214px;
+  object-fit: contain;
 }
 .advertisment-img-products-imges-unautherized-user {
   max-width: 86%;
@@ -138,7 +139,6 @@
 }
 @media screen and (max-width: 1440px) and (min-width: 1420px) {
   .advertisment-img-products-imges-unautherized-user {
-   
     height: 93px;
   }
 }
@@ -173,9 +173,6 @@
 .save-button-price-new-old {
   font-size: 12px;
 }
-
-
-
 
 @media screen and (max-width: 768px) {
   .catergory-grid-wrapper {
