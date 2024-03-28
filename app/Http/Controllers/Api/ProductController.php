@@ -390,19 +390,30 @@ class ProductController extends BaseController
             // If screen sizes are found, add them to the result array
             if (!empty($matches[0])) {
                 foreach ($matches[1] as $match) {
-                    $extractedSizes[] = $match . ' Inch'; // Format the size as "24 Inch", "22 Inch", etc.
+                    $extractedSizes[] = $match . ' Inch';
                 }
             }
         }
 
         // Remove duplicate sizes
-        $uniqueSizes = array_unique($extractedSizes);
+        $uniqueSizes = array_unique($extractedSizes, SORT_REGULAR);
 
-        // Sort the sizes in descending order
-        rsort($uniqueSizes);
+        // Sort the sizes in ascending order based on the 'value' key
+        usort($uniqueSizes, function ($a, $b) {
+            return strcmp($a, $b);
+        });
 
-        return $uniqueSizes;
+        // Format the sizes as objects with 'value' and 'backend_value' keys
+        $formattedSizes = array_map(function ($size) {
+            return [
+                'value' => $size,
+                'backend_value' => $size
+            ];
+        }, $uniqueSizes);
+
+        return $formattedSizes;
     }
+
 
 
     private function getOperatingSystem($sql = [])
@@ -823,8 +834,10 @@ class ProductController extends BaseController
         // Apply screen filter
         if ($key == 'screen' && !empty($value)) {
             $screenFilter = $value;
-            $query->whereHas('screen', function ($query) use ($screenFilter) {
-                $query->where('name', 'like', '%' . $screenFilter . '%');
+            $query->where(function($query) use ($screenFilter) {
+                foreach ($screenFilter as $value) {
+                    $query->orWhere('name', 'like', '%' . $value . '%');
+                }
             });
         }
 
