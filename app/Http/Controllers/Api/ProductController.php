@@ -834,8 +834,10 @@ class ProductController extends BaseController
         // Apply screen filter
         if ($key == 'screen' && !empty($value)) {
             $screenFilter = $value;
-            $query->whereHas('screen', function ($query) use ($screenFilter) {
-                $query->where('name', 'like', '%' . $screenFilter . '%');
+            $query->where(function($query) use ($screenFilter) {
+                foreach ($screenFilter as $value) {
+                    $query->orWhere('name', 'like', '%' . $value . '%');
+                }
             });
         }
 

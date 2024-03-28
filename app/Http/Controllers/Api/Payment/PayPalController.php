@@ -49,7 +49,7 @@ class PayPalController extends Controller
                 [
                     "amount" => [
                         "currency_code" => "USD",
-                        "value" => number_format($cartDetails['totalAmount'], 2, '.', '') * 100
+                        "value" => number_format($cartDetails['totalAmount'], 2, '.', '')
                     ],
                 ],
             ],
@@ -165,6 +165,7 @@ class PayPalController extends Controller
         $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
         if (!$order) {
             dd('order not created');
+           
             return redirect()->route('cancel');
         }    
 
