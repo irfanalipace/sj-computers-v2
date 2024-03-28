@@ -342,11 +342,13 @@ function OrderProducts({ data, totalItems, sendToPage }) {
             </>
             {row?.fedex_status === 'Delivered' ? (
               <div className='show-more-order-buttons'>
-                <button onClick={() => toggleExpanded(row.id)}>
-                  {expandedOrders.includes(row.id)
-                    ? 'Show less'
-                    : `${row?.order_item?.length - 1} more to show`}
-                </button>
+                {row?.order_item?.length > 1 && (
+                  <button onClick={() => toggleExpanded(row.id)}>
+                    {expandedOrders.includes(row.id)
+                      ? 'Show less'
+                      : `${row?.order_item?.length - 1} more to show`}
+                  </button>
+                )}
               </div>
             ) : (
               <div className='show-more-order-buttons'>

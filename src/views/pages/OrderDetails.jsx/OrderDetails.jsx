@@ -242,7 +242,7 @@ const OrderDetails = () => {
               </Grid>
             )}
           </Grid>
-          <Grid p={2}>
+          {/* <Grid p={2}>
             <Link
               style={{
                 fontSize: '12px',
@@ -254,7 +254,7 @@ const OrderDetails = () => {
             <Link style={{ fontSize: '12px', textDecoration: 'none' }}>
               Order invoice
             </Link>
-          </Grid>
+          </Grid> */}
         </Card>
       </OrderDetailsCard>
       {!isSmallScreen && (
