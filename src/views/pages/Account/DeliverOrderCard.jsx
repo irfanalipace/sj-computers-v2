@@ -166,7 +166,18 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
           {!isSmallScreen && (
             <div>
               Tracking id {'#' + orders?.tracking_id ? orders?.tracking_id : ''}{' '}
-              <br /> <span>View Order Details</span>
+              <br />{' '}
+              <Link
+                to={{
+                  pathname: `/account/orders/order-details/${orders?.id}`,
+                }}
+                style={{
+                  color: '#318243',
+                  textDecoration: 'none',
+                  fontSize: '12px',
+                }}>
+                View Order Details
+              </Link>
             </div>
           )}
         </CardHeader>
@@ -222,6 +233,9 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
                     <div className='row mt-4'>
                       <div className='col-5'>
                         <Link
+                          to={{
+                            pathname: `/account/orders/order-details/${orders?.id}`,
+                          }}
                           style={{
                             color: '#318243',
                             textDecoration: 'none',
@@ -393,7 +407,7 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
                 </Grid>
               </Grid>
             </div>
-            <div className='order-invoice-footer'>
+            <div className='order-invoice-footer' style={{ height: '100%' }}>
               {/* How shipping costs calculates? */}
             </div>
           </InvoiceCard>
