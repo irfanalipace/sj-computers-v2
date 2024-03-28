@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import wellsjcomputer from '@images/categories/welcomesjcomputer.webp';
 import StarRatings from 'react-star-ratings';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -15,11 +14,7 @@ import { getDiscountedProduct } from '../../../core/api/products';
 const LoginAndTimeProduct = () => {
   const screenWidth = useViewportWidth();
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  const products = useSelector(state => state?.products.products);
-  const isLoading = useSelector(state => state?.products.isLoading);
   const [loading, setLoading] = useState(true);
-  console.log(isLoading, 'isLoading');
-  const dbDate = new Date().getTime();
   const [discoutedProduct, setDiscountedProduct] = useState();
 
   const getProducts = async total => {
@@ -40,125 +35,106 @@ const LoginAndTimeProduct = () => {
     getProducts();
   }, []);
 
-  const parsedDate = new Date(dbDate);
-
-  setTimeout(() => {
-    setLoading(false);
-  }, 2000);
-
   return (
     <div className='dev-sections-two-sctions'>
-      {/* {isAuthenticated ? ( */}
-      {/* <div className='advertisement-heading'>
-           <img
-             className={`advertisment-img`}
-         src={wellsjcomputer}
-             alt={'wellsjcomputer'}
-           />
-         </div> */}
-      {/* ) : ( */}
-
       {isAuthenticated ? (
-        ((products && products?.length > 0) || isLoading || loading) && (
-          <div className='product-type-section dev-sections-products'>
-            {isLoading || loading ? (
-              <div
-                style={{
-                  height: '303px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <div style={{ textAlign: 'center' }}>
-                  <Loader />
-                </div>
+        <div className='product-type-section dev-sections-products'>
+          {loading ? (
+            <div
+              style={{
+                height: '303px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <div style={{ textAlign: 'center' }}>
+                <Loader />
               </div>
-            ) : (
-              <div style={{ minHeight: '303px' }}>
-                {discoutedProduct && (
-                  <Link
-                    to={`/${discoutedProduct?.summary}/dp/${discoutedProduct?.product?.asin}`}>
-                    <div style={{ textAlign: 'center' }}>
-                      <img
-                        className={`advertisment-img-products-imges`}
-                        src={discoutedProduct?.product?.image}
-                        alt={'addDesktop'}
-                      />
-                    </div>
+            </div>
+          ) : (
+            <div style={{ minHeight: '303px' }}>
+              {discoutedProduct && (
+                <Link
+                  to={`/${discoutedProduct?.summary}/dp/${discoutedProduct?.product?.asin}`}>
+                  <div style={{ textAlign: 'center' }}>
+                    <img
+                      className={`advertisment-img-products-imges`}
+                      src={discoutedProduct?.product?.image}
+                      alt={'addDesktop'}
+                    />
+                  </div>
 
-                    <h5 className='time-product-name'>
-                      {discoutedProduct?.product?.name}
-                    </h5>
-                    <Stack mb={1} alignItems={'start'} spacing={1}>
-                      <Stack
-                        alignItems={'center'}
-                        justifyContent={'center'}
-                        // spacing={1}
-                        direction={'row'}>
-                        <StarRatings
-                          rating={parseFloat(
-                            discoutedProduct?.product?.rating || 0,
-                          )}
-                          starRatedColor='rgb(232, 126, 36)'
-                          numberOfStars={5}
-                          name='rating'
-                          isSelectable={false}
-                          starDimension={'18px'}
-                          starSpacing={'0'}
-                        />
-                        <Typography
-                          fontFamily={'Inter'}
-                          sx={{ pt: 0.3 }}
-                          fontWeight={500}
-                          fontSize={'12px'}
-                          lineHeight={'17px'}
-                          color={'#007185'}>
-                          ({discoutedProduct?.product?.total_review})
-                        </Typography>
-                      </Stack>
-                      {/* {type === "recommended" && getRandomComponent()} */}
+                  <h5 className='time-product-name'>
+                    {discoutedProduct?.product?.name}
+                  </h5>
+                  <Stack mb={1} alignItems={'start'} spacing={1}>
+                    <Stack
+                      alignItems={'center'}
+                      justifyContent={'center'}
+                      // spacing={1}
+                      direction={'row'}>
+                      <StarRatings
+                        rating={parseFloat(
+                          discoutedProduct?.product?.rating || 0,
+                        )}
+                        starRatedColor='rgb(232, 126, 36)'
+                        numberOfStars={5}
+                        name='rating'
+                        isSelectable={false}
+                        starDimension={'18px'}
+                        starSpacing={'0'}
+                      />
+                      <Typography
+                        fontFamily={'Inter'}
+                        sx={{ pt: 0.3 }}
+                        fontWeight={500}
+                        fontSize={'12px'}
+                        lineHeight={'17px'}
+                        color={'#007185'}>
+                        ({discoutedProduct?.product?.total_review})
+                      </Typography>
                     </Stack>
-                    <div className='featured-product-timing mt-4'>
-                      <div className='original-price'>
-                        $
-                        {discoutedProduct?.additional_information?.actual_price}
-                      </div>
-                      <div className='discount-price'>
-                        <span>$</span>
+                    {/* {type === "recommended" && getRandomComponent()} */}
+                  </Stack>
+                  <div className='featured-product-timing mt-4'>
+                    <div className='original-price'>
+                      ${discoutedProduct?.additional_information?.actual_price}
+                    </div>
+                    <div className='discount-price'>
+                      <span>$</span>
+                      {
+                        discoutedProduct?.additional_information?.discounted_price
+                          .toString()
+                          .split('.')[0]
+                      }
+                      <sup>
                         {
                           discoutedProduct?.additional_information?.discounted_price
-                            .toString()
-                            .split('.')[0]
+                            ?.toString()
+                            .split('.')[1]
                         }
-                        <sup>
-                          {
-                            discoutedProduct?.additional_information?.discounted_price
-                              ?.toString()
-                              .split('.')[1]
-                          }
-                        </sup>
-                      </div>
-                      <div className='product-delivery-charges ms-0 ms-sm-2 mb-2 mb-sm-0'>
-                        <FontAwesomeIcon className='me-1' icon={faTruck} /> Free
-                        Shipping
-                      </div>
-                      <div className='save-value'>
-                        <span>
-                          Save +{' '}
-                          {discoutedProduct?.additional_information?.discount}
-                        </span>
-                      </div>
-                      {/* <div className='end-in'>
+                      </sup>
+                    </div>
+                    <div className='product-delivery-charges ms-0 ms-sm-2 mb-2 mb-sm-0'>
+                      <FontAwesomeIcon className='me-1' icon={faTruck} /> Free
+                      Shipping
+                    </div>
+                    <div className='save-value'>
+                      <span>
+                        Save +{' '}
+                        {discoutedProduct?.additional_information?.discount}
+                      </span>
+                    </div>
+                    {/* <div className='end-in'>
                         Ends in {parsedDate.getHours()}
                         h:{parsedDate.getMinutes()}m
                       </div> */}
-                    </div>
-                  </Link>
-                )}
-              </div>
-            )}
-          </div>
-        )
+                  </div>
+                </Link>
+              )}
+            </div>
+          )}
+        </div>
       ) : (
         <>
           <div className='advertisement-heading' style={{ padding: '5px' }}>
@@ -207,113 +183,108 @@ const LoginAndTimeProduct = () => {
             </div>
           </div>
 
-          {((products && products?.length > 0) || isLoading || loading) && (
-            <div className='product-type-section product-type-section-mobile-size'>
-              {isLoading || loading ? (
-                <>
-                  <div
-                    style={{
-                      height: '180px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    <div style={{ textAlign: 'center' }}>
-                      <Loader />
-                    </div>
+          <div className='product-type-section product-type-section-mobile-size'>
+            {loading ? (
+              <>
+                <div
+                  style={{
+                    height: '180px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <Loader />
                   </div>
-                </>
-              ) : (
-                <>
-                  {discoutedProduct && (
-                    <Link
-                      to={`/${discoutedProduct?.summary}/dp/${discoutedProduct?.product?.asin}`}>
-                      <div style={{ textAlign: 'center' }}>
-                        <img
-                          className={`advertisment-img-products-imges-unautherized-user`}
-                          src={discoutedProduct?.product?.image[0]}
-                          alt={'addDesktop'}
-                        />
-                      </div>
+                </div>
+              </>
+            ) : (
+              <>
+                {discoutedProduct && (
+                  <Link
+                    to={`/${discoutedProduct?.summary}/dp/${discoutedProduct?.product?.asin}`}>
+                    <div style={{ textAlign: 'center' }}>
+                      <img
+                        className={`advertisment-img-products-imges-unautherized-user`}
+                        src={discoutedProduct?.product?.image[0]}
+                        alt={'addDesktop'}
+                      />
+                    </div>
 
-                      <h5
-                        className='time-product-name'
-                        style={{ color: 'black' }}>
-                        {discoutedProduct?.product?.name}
-                      </h5>
-                      <Stack mb={1} alignItems={'start'} spacing={1}>
-                        <Stack
-                          alignItems={'center'}
-                          justifyContent={'center'}
-                          // spacing={1}
-                          direction={'row'}>
-                          <StarRatings
-                            rating={parseFloat(
-                              discoutedProduct?.product?.rating || 0,
-                            )}
-                            starRatedColor='rgb(232, 126, 36)'
-                            numberOfStars={5}
-                            name='rating'
-                            isSelectable={false}
-                            starDimension={'18px'}
-                            starSpacing={'0'}
-                          />
-                          <Typography
-                            fontFamily={'Inter'}
-                            sx={{ pt: 0.3 }}
-                            fontWeight={500}
-                            fontSize={'12px'}
-                            lineHeight={'17px'}
-                            color={'#007185'}>
-                            ({discoutedProduct?.product?.total_review})
-                          </Typography>
-                        </Stack>
-                        {/* {type === "recommended" && getRandomComponent()} */}
+                    <h5
+                      className='time-product-name'
+                      style={{ color: 'black' }}>
+                      {discoutedProduct?.product?.name}
+                    </h5>
+                    <Stack mb={1} alignItems={'start'} spacing={1}>
+                      <Stack
+                        alignItems={'center'}
+                        justifyContent={'center'}
+                        // spacing={1}
+                        direction={'row'}>
+                        <StarRatings
+                          rating={parseFloat(
+                            discoutedProduct?.product?.rating || 0,
+                          )}
+                          starRatedColor='rgb(232, 126, 36)'
+                          numberOfStars={5}
+                          name='rating'
+                          isSelectable={false}
+                          starDimension={'18px'}
+                          starSpacing={'0'}
+                        />
+                        <Typography
+                          fontFamily={'Inter'}
+                          sx={{ pt: 0.3 }}
+                          fontWeight={500}
+                          fontSize={'12px'}
+                          lineHeight={'17px'}
+                          color={'#007185'}>
+                          ({discoutedProduct?.product?.total_review})
+                        </Typography>
                       </Stack>
-                      <div className='featured-product-timing'>
-                        <div className='original-price'>
-                          $
-                          {
-                            discoutedProduct?.additional_information
-                              ?.actual_price
-                          }
-                        </div>
-                        <div className='discount-price'>
-                          <span>$</span>
+                      {/* {type === "recommended" && getRandomComponent()} */}
+                    </Stack>
+                    <div className='featured-product-timing'>
+                      <div className='original-price'>
+                        $
+                        {discoutedProduct?.additional_information?.actual_price}
+                      </div>
+                      <div className='discount-price'>
+                        <span>$</span>
+                        {
+                          discoutedProduct?.additional_information?.discounted_price
+                            .toString()
+                            .split('.')[0]
+                        }
+                        <sup>
                           {
                             discoutedProduct?.additional_information?.discounted_price
-                              .toString()
-                              .split('.')[0]
+                              ?.toString()
+                              .split('.')[1]
                           }
-                          <sup>
-                            {
-                              discoutedProduct?.additional_information?.discounted_price
-                                ?.toString()
-                                .split('.')[1]
-                            }
-                          </sup>
-                        </div>
-                        <div className='product-delivery-charges ms-0 ms-sm-2 mb-2 mb-sm-0'>
-                          <FontAwesomeIcon className='me-1' icon={faTruck} />{' '}
-                          Free Shipping
-                        </div>
-                        <div className='save-value'>
-                          <span>
-                            Save +{' '}
-                            {discoutedProduct?.additional_information?.discount}
-                          </span>
-                        </div>
-                        {/* <div className='end-in'>
+                        </sup>
+                      </div>
+                      <div className='product-delivery-charges ms-0 ms-sm-2 mb-2 mb-sm-0'>
+                        <FontAwesomeIcon className='me-1' icon={faTruck} /> Free
+                        Shipping
+                      </div>
+                      <div className='save-value'>
+                        <span>
+                          Save +{' '}
+                          {discoutedProduct?.additional_information?.discount}
+                        </span>
+                      </div>
+                      {/* <div className='end-in'>
                           Ends in {parsedDate.getHours()}
                           h:{parsedDate.getMinutes()}m
                         </div> */}
-                      </div>
-                    </Link>
-                  )}
-                </>
-              )}
-            </div>
-          )}
+                    </div>
+                  </Link>
+                )}
+              </>
+            )}
+          </div>
         </>
       )}
     </div>

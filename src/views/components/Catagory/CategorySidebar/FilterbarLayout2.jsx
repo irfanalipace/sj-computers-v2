@@ -138,12 +138,21 @@ const FilterBarlayout2 = ({
   function getPriceRanges(min, max) {
     const ranges = [];
 
-    if (min < 250) {
+    if (min < 250 && categorySlug?.toLowerCase() !== 'bto') {
+      debugger;
       ranges.push({
         id: 1,
-        priceValue: 'under $250',
+        priceValue: 'Under $250',
         priceMin: min,
         priceMax: 250,
+      });
+    }
+    if (min < 250 && categorySlug?.toLowerCase() === 'bto') {
+      ranges.push({
+        id: 1,
+        priceValue: `$${parseInt(min)} - $${parseInt(max)}`,
+        priceMin: min,
+        priceMax: max < 250 ? max : 250,
       });
     }
     if (pathValue !== 'budget-friendly') {

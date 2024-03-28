@@ -31,8 +31,7 @@ function MobileSummary({
         <ShippingButton
           handleClick={handleClick}
           id={activeAccordion}
-          disabled={isDisabled}
-        >
+          disabled={isDisabled}>
           Review Order
         </ShippingButton>
       );
@@ -56,8 +55,7 @@ function MobileSummary({
           clickHandler={() => false}
           id={activeAccordion}
           disabled={true}
-          isLoading={placingOrder}
-        >
+          isLoading={placingOrder}>
           Select Payment Method
         </PaymentButton>
       );
@@ -75,10 +73,9 @@ function MobileSummary({
               fontWeight: '600',
               fontSize: '14px',
             }}
-            onClick={toggleAccordion}
-          >
+            onClick={toggleAccordion}>
             <div className='order-summer-mobile-size-data'>
-              <span>order Summery</span>
+              <span>Order Summary</span>
             </div>
             <div>
               <span>
@@ -116,17 +113,17 @@ function MobileSummary({
                             parseFloat(
                               paymentData?.details?.shipment_amount,
                             ).toFixed(2)
-                          : '$0'}
+                          : 'Free'}
                       </span>
                     </li>
-                    <li>
+                    {/* <li>
                       <span>Total before tax:</span>
                       <span>--</span>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                       <span>Estimated tax to be calculated:</span>
                       <span>--</span>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
                 <div className='order-total'>
@@ -143,9 +140,9 @@ function MobileSummary({
                 </div>
               </div>
               <div className='summary-footer'>
-                <Link to={'#'} style={{ color: '#007185' }}>
+                {/* <Link to={'#'} style={{ color: '#007185' }}>
                   How shipping costs calculates?
-                </Link>
+                </Link> */}
               </div>
             </>
           )}
