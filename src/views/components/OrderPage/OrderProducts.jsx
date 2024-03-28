@@ -131,8 +131,7 @@ function OrderProducts({ data, totalItems, sendToPage }) {
           <div className='order-details'>
             <div className='order-header-bar'>
               <div className='order-status'>
-                Tracking id {isSmallScreen && <br />} <span>#{row.id}</span>{' '}
-                <br />
+                Order id {isSmallScreen && <br />} <span>#{row.id}</span> <br />
                 {isSmallScreen ? (
                   <></>
                 ) : (

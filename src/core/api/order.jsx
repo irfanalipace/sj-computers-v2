@@ -22,10 +22,10 @@ export function getOrderDetailsApi(page) {
       });
   });
 }
-export function OrderSearchApi(orderId) {
+export function OrderSearchApi(searchId) {
   return new Promise((resolve, reject) => {
     const myParams = {
-      order_id: orderId,
+      search: searchId,
     };
 
     ApiService.get(`/search-order`, '', myParams)

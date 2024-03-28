@@ -132,12 +132,12 @@ const OrderPage = () => {
       <div className='container-xl'>
         <Breadcrumb />
         <div className='row mx-0'>
-          <div className='col-sm-4 col-md-8 col-8'>
+          <div className='col-sm-4 col-md-9 col-9'>
             <h3 className='account-heading your-order-page'>My Orders</h3>
           </div>
-          <div className='col-sm-8 col-md-4 col-4 search-product-order-tables'>
+          <div className='col-sm-8 col-md-3 col-3 search-product-order-tables'>
             <label style={{ marginBottom: 5 }} htmlFor='orderSearch'>
-              Enter tracking id to search
+              Enter tracking id / order id to search
             </label>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <div style={{ position: 'relative' }}>
