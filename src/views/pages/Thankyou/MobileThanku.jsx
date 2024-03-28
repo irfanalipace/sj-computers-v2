@@ -325,7 +325,7 @@ export default function MobileThanku() {
       <div className='card-container' style={{ marginBottom: '40px' }}>
         <div className='oder-item-card'>
           <button className='shop-more-btn' onClick={() => navigate('/')}>
-            Shop more
+            Shop again
           </button>
         </div>
       </div>

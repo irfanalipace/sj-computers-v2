@@ -106,6 +106,7 @@ import LoginAndTimeProduct from './LoginAndTimeProduct';
 const ProductType = () => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const products = useSelector(state => state?.products.products);
+
   // const currentDate = moment();
   // const oneDayAgo = moment().subtract(1, "days");
   // const duration = moment.duration(currentDate.diff(oneDayAgo));
@@ -135,7 +136,6 @@ const ProductType = () => {
   const getProduct = async () => {
     if (!products?.length) {
       try {
-        console.log('2222222222222222');
         await dispatch(fetchProducts());
       } catch (error) {}
     }
@@ -182,120 +182,7 @@ const ProductType = () => {
       categoryName: 'Accessories',
     },
   ];
-  // const gamingItems = [
-  //     {
-  //         image: gaminimg3,
-  //         categoryLink: "/category/bto",
-  //         categoryName: "Product Name",
-  //     },
-  //     {
-  //         image: scanimages,
-  //         categoryLink: "/category/laptops",
-  //         categoryName: "Lorem Ipsum | up to 30% off",
-  //     },
-  //     {
-  //         image: gaminimg1,
-  //         categoryLink: "/category/desktop",
-  //         categoryName: "Product Name",
-  //     },
-  // ];
-  // const featuredItems = [
-  //     {
-  //         image: image1,
-  //         categoryLink: "/category/bto",
-  //         categoryName: "Gaming Monitors | up to 50 % off",
-  //     },
-  //     {
-  //         image: image2,
-  //         categoryLink: "/category/laptops",
-  //         categoryName: "Lorem Ipsum | up to 30% off",
-  //     },
-  //     {
-  //         image: image4,
-  //         categoryLink: "/category/desktop",
-  //         categoryName: "Product Name",
-  //     },
-  //     {
-  //         image: image3,
-  //         categoryLink: "/category/gaming_desktops",
-  //         categoryName: "Product Category",
-  //     },
-  // ];
 
-  // const networkItems = [
-  //     {
-  //         image: linkrouter,
-  //         categoryLink: "/category/bto",
-  //         categoryName: "D-Link Router",
-  //     },
-  //     {
-  //         image: modem,
-  //         categoryLink: "/category/laptops",
-  //         categoryName: "D-Link Modem",
-  //     },
-  //     {
-  //         image: modem,
-  //         categoryLink: "/category/desktop",
-  //         categoryName: "D-Link Device",
-  //     },
-  //     {
-  //         image: linkrouter,
-  //         categoryLink: "/category/gaming_desktops",
-  //         categoryName: "D-Link Router",
-  //     },
-  // ];
-  // const upgradecomputers = [
-  //     {
-  //         image: img1,
-  //         categoryLink: "/category/bto",
-  //         categoryName: "D-Link Router",
-  //     },
-  //     {
-  //         image: img2,
-  //         categoryLink: "/category/laptops",
-  //         categoryName: "D-Link Modem",
-  //     },
-  //     {
-  //         image: img3,
-  //         categoryLink: "/category/desktop",
-  //         categoryName: "D-Link Device",
-  //     },
-  //     {
-  //         image: img1,
-  //         categoryLink: "/category/gaming_desktops",
-  //         categoryName: "D-Link Router",
-  //     },
-  // ];
-  // const Sellingimages = [
-  //     sellingimg1,
-  //     sellingimg2,
-  //     sellingimg3,
-  //     sellingimg4,
-  //     sellingimg5,
-  //     sellingimg6,
-  //     sellingimg7,
-  //     sellingimg8,
-  //     sellingimg1,
-  //     sellingimg2,
-  //     sellingimg3,
-  //     sellingimg4,
-  //     sellingimg5,
-  //     sellingimg6,
-  //     sellingimg7,
-  //     sellingimg8,
-  // ];
-  // const fleshimages = [
-  //     rectangle1,
-  //     rectangle2,
-  //     rectangle3,
-  //     rectangle4,
-  //     rectangle5,
-  //     rectangle1,
-  //     rectangle2,
-  //     rectangle3,
-  //     rectangle4,
-  //     rectangle5,
-  // ];
 
   return (
     <div className=' '>

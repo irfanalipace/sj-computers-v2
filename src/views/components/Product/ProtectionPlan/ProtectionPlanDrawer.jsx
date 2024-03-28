@@ -32,11 +32,18 @@ const ProtectionPlanDrawer = ({
   const [learnMore, setLearnMore] = useState(plan);
   const protectionPlanStore = useSelector(state => state.protectionPlan);
 
+  const [loading, setLoading] = useState(addingItemToCart);
+
   function handleCheckboxClick(_plan) {
     setProtectionPlan(prev => {
       if (prev?.id === _plan.id) return null;
       else return _plan;
     });
+  }
+
+  function isEmpty(obj) {
+    if (!obj) return true;
+    return Object.keys(obj).length === 0;
   }
 
   return (
@@ -222,10 +229,13 @@ const ProtectionPlanDrawer = ({
             </div> */}
       <div className='btn-grp mt-3'>
         <button
-          disabled={addingItemToCart}
-          className='add-prot-btn drawer-bottom-btn'
+          disabled={isEmpty(protectionPlan) || addingItemToCart || loading}
+          className='add-waranty-btn add-prot-btn drawer-bottom-btn'
           style={{ marginRight: '10px' }}
-          onClick={() => handleAddingProtec(protectionPlan)}>
+          onClick={() => {
+            setLoading(true);
+            handleAddingProtec(protectionPlan);
+          }}>
           Add Warranty
         </button>
         <button className='drawer-bottom-btn' onClick={() => closeDrawer()}>

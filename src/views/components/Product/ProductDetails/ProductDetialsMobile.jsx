@@ -143,9 +143,9 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
         </Typography>
         <PriceWithLabel sx={{ mb: 0.8 }} price={product?.price} />
       </Stack>
-      <div style={{ fontSize: '12px', lineHeight: '13px' }} className=' mb-2'>
+      {/* <div style={{ fontSize: '12px', lineHeight: '13px' }} className=' mb-2'>
         $20 shipping & import fees deposit to Pakistan. <Link>Details</Link>
-      </div>
+      </div> */}
       <CheckOutCard isMobile={true} product={{ ...product }} />
 
       <Box

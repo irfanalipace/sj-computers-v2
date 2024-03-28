@@ -77,6 +77,7 @@ const CategorySliderCard = ({ product }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'left',
+             width:'131px'
           }}>
           <StarRatings
             rating={parseFloat(product?.rating || 0)}

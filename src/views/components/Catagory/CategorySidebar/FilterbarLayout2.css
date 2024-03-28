@@ -12,6 +12,7 @@
   z-index: 3;
   overflow-y: auto;
   overflow-x: hidden;
+  min-width: 240px;
 }
 
 .layout2-filter-bar .filters-list h3 {
