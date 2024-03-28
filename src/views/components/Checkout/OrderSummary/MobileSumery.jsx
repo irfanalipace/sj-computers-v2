@@ -75,7 +75,7 @@ function MobileSummary({
             }}
             onClick={toggleAccordion}>
             <div className='order-summer-mobile-size-data'>
-              <span>order Summery</span>
+              <span>Order Summary</span>
             </div>
             <div>
               <span>
@@ -140,9 +140,9 @@ function MobileSummary({
                 </div>
               </div>
               <div className='summary-footer'>
-                <Link to={'#'} style={{ color: '#007185' }}>
+                {/* <Link to={'#'} style={{ color: '#007185' }}>
                   How shipping costs calculates?
-                </Link>
+                </Link> */}
               </div>
             </>
           )}

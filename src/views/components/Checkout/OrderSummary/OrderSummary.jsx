@@ -186,7 +186,7 @@ function OrderSummary({
               </div>
             </div>
             <div className='summary-footer'>
-              <Link to={'#'}>How shipping costs calculates?</Link>
+              {/* <Link to={'#'}>How shipping costs calculates?</Link> */}
             </div>
           </div>
         </div>
