@@ -15,6 +15,8 @@ import { formatDate } from '../../../core/utils/helpers';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import Recommendation from '../../components/Recommendation/Recommendation';
+import { IconButton } from '@mui/material';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const OrderDetails = () => {
   const orders = useSelector(state => state?.orders?.successOrders);
@@ -101,7 +103,47 @@ const OrderDetails = () => {
   return (
     <>
       <Box ml={!isSmallScreen && 24}>
-        <Breadcrumb />
+        {/* <Breadcrumb /> */}
+
+        {/* Top bar Links */}
+        <Box m={2}>
+          <Link
+            to={'/account'}
+            style={{
+              textDecoration: 'none',
+              color: 'black',
+              cursor: 'pointer',
+            }}>
+            <span>Your Account</span>
+            <IconButton>
+              <NavigateNextIcon sx={{ fontSize: '14px' }} />
+            </IconButton>
+          </Link>
+
+          <Link
+            to={'/account/orders'}
+            style={{
+              textDecoration: 'none',
+              color: 'black',
+              cursor: 'pointer',
+            }}>
+            <span>Your Orders</span>
+            <IconButton>
+              <NavigateNextIcon sx={{ fontSize: '14px' }} />
+            </IconButton>
+          </Link>
+
+          <Link
+            to={''}
+            style={{
+              textDecoration: 'none',
+              color: 'black',
+              cursor: 'pointer',
+            }}>
+            <span style={{ color: '#E87E24' }}>Order Details</span>
+          </Link>
+        </Box>
+
         <Typography fontSize={28} ml={3}>
           Order Details
         </Typography>
@@ -221,19 +263,20 @@ const OrderDetails = () => {
                   </tr>
                   <tr>
                     <td>Shipping & Handling:</td>
-                    <td>${filteredOrder?.shipment_price}</td>
+                    {/* <td>${filteredOrder?.shipment_price}</td> */}
+                    <td>Free</td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <td>Total before tax:</td>
                     <td>${0}</td>
-                  </tr>
-                  <tr>
+                  </tr> */}
+                  {/* <tr>
                     <td>
                       Estimated tax to be
                       <br /> collected
                     </td>
                     <td>${0}</td>
-                  </tr>
+                  </tr> */}
                   <tr>
                     <td style={{ fontWeight: 600 }}>Grand Total</td>
                     <td>${filteredOrder?.sub_total}</td>

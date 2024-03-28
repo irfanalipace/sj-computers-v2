@@ -35,8 +35,7 @@ function ShipingModalSummery({
         <ShippingButton
           handleClick={handleClick}
           id={activeAccordion}
-          disabled={isDisabled}
-        >
+          disabled={isDisabled}>
           Review Order
         </ShippingButton>
       );
@@ -60,8 +59,7 @@ function ShipingModalSummery({
           clickHandler={() => false}
           id={activeAccordion}
           disabled={true}
-          isLoading={placingOrder}
-        >
+          isLoading={placingOrder}>
           Select Payment Method
         </PaymentButton>
       );
@@ -101,17 +99,17 @@ function ShipingModalSummery({
                         parseFloat(
                           paymentData?.details?.shipment_amount,
                         ).toFixed(2)
-                      : '$0'}
+                      : 'Free'}
                   </span>
                 </li>
-                <li>
+                {/* <li>
                   <span>Total before tax:</span>
                   <span>--</span>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <span>Estimated tax to be calculated:</span>
                   <span>--</span>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div className='order-total'>
@@ -128,9 +126,9 @@ function ShipingModalSummery({
             </div>
           </div>
           <div className='summary-footer'>
-            <Link to={'#'} style={{ color: '#007185' }}>
+            {/* <Link to={'#'} style={{ color: '#007185' }}>
               How shipping costs calculates?
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

@@ -111,7 +111,11 @@ function OrderSummary({
                       <strong>Order Total</strong>
                     </span>
                     <span>
-                      <strong>${paymentData?.details?.total}</strong>
+                      <strong>
+                        $
+                        {paymentData?.details?.total ||
+                          cartSlice?.details?.total}
+                      </strong>
                     </span>
                   </li>
                 </ul>
@@ -122,7 +126,7 @@ function OrderSummary({
                 You can track your shipment and view any applicable import fees
                 deposit before placing your order.
               </p>
-              <Link to={'#'}>How shipping costs calculates?</Link>
+              {/* <Link to={'#'}>How shipping costs calculates?</Link> */}
             </div>
           </div>
         </div>
@@ -136,15 +140,26 @@ function OrderSummary({
                 <ul>
                   <li>
                     <span>Items:</span>
-                    <span>({paymentData?.details?.total_items})</span>
+                    <span>
+                      (
+                      {paymentData?.details?.total_items ||
+                        cartSlice?.details?.total_items}
+                      )
+                    </span>
                   </li>
                   <li>
                     <span>Price:</span>
                     <span>
                       <strong>
-                        {parseInt(paymentData?.details?.sub_total)?.toFixed(2)
+                        {parseInt(
+                          paymentData?.details?.sub_total ||
+                            cartSlice?.details?.sub_total,
+                        )?.toFixed(2)
                           ? '$' +
-                            parseInt(paymentData.details.sub_total)?.toFixed(2)
+                            parseInt(
+                              paymentData.details.sub_total ||
+                                cartSlice?.details?.sub_total,
+                            )?.toFixed(2)
                           : '$0'}
                       </strong>
                     </span>
@@ -157,17 +172,17 @@ function OrderSummary({
                           parseFloat(
                             paymentData?.details?.shipment_amount,
                           ).toFixed(2)
-                        : '$0'}
+                        : 'Free'}
                     </span>
                   </li>
-                  <li>
+                  {/* <li>
                     <span>Total before tax:</span>
                     <span>--</span>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <span>Estimated tax to be calculated:</span>
                     <span>--</span>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
               <div className='order-total'>
@@ -178,7 +193,11 @@ function OrderSummary({
                     </span>
                     <span>
                       <strong>
-                        ${parseInt(paymentData?.details?.total)?.toFixed(2)}
+                        $
+                        {parseInt(
+                          paymentData?.details?.total ||
+                            cartSlice?.details?.total,
+                        )?.toFixed(2)}
                       </strong>
                     </span>
                   </li>
@@ -186,7 +205,7 @@ function OrderSummary({
               </div>
             </div>
             <div className='summary-footer'>
-              <Link to={'#'}>How shipping costs calculates?</Link>
+              {/* <Link to={'#'}>How shipping costs calculates?</Link> */}
             </div>
           </div>
         </div>

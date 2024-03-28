@@ -123,13 +123,6 @@ const ShippingMehtod = () => {
                         fontWeight: '500',
                       }}>
                       Free Shipping
-                      <p
-                        style={{
-                          fontSize: '10px',
-                          paddingTop: '5px',
-                        }}>
-                        Mon, Nov 13
-                      </p>
                     </span>
                   </div>
                 ) : (
@@ -138,9 +131,9 @@ const ShippingMehtod = () => {
                   </div>
                 )}
 
-                <span>
+                {/* <span>
                   {shippingMethod?.cost ? '$' + shippingMethod?.cost : 'Free'}
-                </span>
+                </span> */}
               </label>
             </div>
           ))}
