@@ -80,14 +80,14 @@ const OrderInvoiceCard = ({ data, activeTab }) => {
                             : "$0"} */}
               </span>
             </li>
-            <li>
+            {/* <li>
               <span>Total before tax:</span>
               <span>--</span>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <span>Estimated tax to be calculated:</span>
               <span>--</span>
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className='order-total'>

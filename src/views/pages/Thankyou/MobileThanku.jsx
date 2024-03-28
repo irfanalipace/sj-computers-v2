@@ -286,25 +286,25 @@ export default function MobileThanku() {
                   <span> Shipping Handling:</span>
                 </div>
                 <div className=' '>
-                  <span>$23</span>
+                  <span>Free</span>
                 </div>
               </div>
-              <div className='Items-thanku-view-page-thanks'>
+              {/* <div className='Items-thanku-view-page-thanks'>
                 <div className=''>
                   <span>Total before tax:</span>
                 </div>
                 <div className=' '>
                   <span> $12.3</span>
                 </div>
-              </div>
-              <div className='Items-thanku-view-page-thanks'>
+              </div> */}
+              {/* <div className='Items-thanku-view-page-thanks'>
                 <div className=''>
                   <span>Estimated tax to be calculated:</span>
                 </div>
                 <div className=' '>
                   <span> 10</span>
                 </div>
-              </div>
+              </div> */}
               <hr></hr>
               <div className='Items-thanku-view-page-thanks'>
                 <div className=''>

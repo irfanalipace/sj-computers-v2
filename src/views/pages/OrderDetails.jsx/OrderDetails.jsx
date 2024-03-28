@@ -221,19 +221,20 @@ const OrderDetails = () => {
                   </tr>
                   <tr>
                     <td>Shipping & Handling:</td>
-                    <td>${filteredOrder?.shipment_price}</td>
+                    {/* <td>${filteredOrder?.shipment_price}</td> */}
+                    <td>Free</td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <td>Total before tax:</td>
                     <td>${0}</td>
-                  </tr>
-                  <tr>
+                  </tr> */}
+                  {/* <tr>
                     <td>
                       Estimated tax to be
                       <br /> collected
                     </td>
                     <td>${0}</td>
-                  </tr>
+                  </tr> */}
                   <tr>
                     <td style={{ fontWeight: 600 }}>Grand Total</td>
                     <td>${filteredOrder?.sub_total}</td>

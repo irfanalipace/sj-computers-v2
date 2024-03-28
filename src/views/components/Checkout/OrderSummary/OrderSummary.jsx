@@ -157,17 +157,17 @@ function OrderSummary({
                           parseFloat(
                             paymentData?.details?.shipment_amount,
                           ).toFixed(2)
-                        : '$0'}
+                        : 'Free'}
                     </span>
                   </li>
-                  <li>
+                  {/* <li>
                     <span>Total before tax:</span>
                     <span>--</span>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <span>Estimated tax to be calculated:</span>
                     <span>--</span>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
               <div className='order-total'>
