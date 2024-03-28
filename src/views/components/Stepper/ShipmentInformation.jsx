@@ -1,6 +1,7 @@
 import { Box, Stack, Typography } from '@mui/material';
 import React from 'react';
 import './Shipmentinformation.css';
+import { Link } from 'react-router-dom';
 
 export default function ShipmentInformation({
   trackingInfo,
@@ -31,10 +32,17 @@ export default function ShipmentInformation({
         <Row
           label='Tracking ID#:'
           value={
-            <div style={{ textDecoration: 'underline' }}>
+            <Link
+              target='blank'
+              to={
+                trackingId === 'null'
+                  ? ''
+                  : `https://www.fedex.com/fedextrack/?trknbr=${trackingId}&trkqual=12026~787157650129~FDEG`
+              }
+              style={{ textDecoration: 'underline', color: 'black' }}>
               {/* {trackingInfo?.trackingNumberInfo?.trackingNumber} */}
               {trackingId === 'null' ? 'N/A' : trackingId}
-            </div>
+            </Link>
           }
         />
         <Row
