@@ -66,6 +66,7 @@
 }
 .summary-footer p {
   font-size: 12px;
+  line-height: 14px;
   margin-bottom: 5px;
 }
 .order-total {

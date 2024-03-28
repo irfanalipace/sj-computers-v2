@@ -220,10 +220,10 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                             </strong>
                           </span>
                           <br></br>
-                          <label className='checkbox-paragraph hide-on-mobile'>
+                          {/* <label className='checkbox-paragraph hide-on-mobile'>
                             <input type='checkbox' name='myCheckbox' />
                             &ensp;This order contains an offer
-                          </label>
+                          </label> */}
                         </div>
                       </div>
 

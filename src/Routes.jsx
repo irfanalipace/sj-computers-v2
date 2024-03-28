@@ -65,6 +65,7 @@ const Router = () => {
   const routes = [
     {
       path: '/',
+      exactPath: true,
       element: (
         <Suspense fallback={<Loader />}>
           <PageWrapper>

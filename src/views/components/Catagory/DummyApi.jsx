@@ -35,16 +35,16 @@ export const categoriesWithSubCategories = [
       { name: 'Core i3 ', url: '/category/core_i3' },
     ],
   },
-  {
-    id: 3,
-    category: 'Screens',
-    sub_categories: [
-      { name: 'Screen 17 inch', url: '/category/screen_17_inch' },
-      { name: 'Screen 15 inch', url: '/category/screen_15_inch' },
-      { name: 'Screen 14 inch', url: '/category/screen_14_inch' },
-      { name: 'Screen 13 inch', url: '/category/screen_13_inch' },
-    ],
-  },
+  // {
+  //   id: 3,
+  //   category: 'Screens',
+  //   sub_categories: [
+  //     { name: 'Screen 17 inch', url: '/category/screen_17_inch' },
+  //     { name: 'Screen 15 inch', url: '/category/screen_15_inch' },
+  //     { name: 'Screen 14 inch', url: '/category/screen_14_inch' },
+  //     { name: 'Screen 13 inch', url: '/category/screen_13_inch' },
+  //   ],
+  // },
   {
     id: 4,
     category: 'Professional Workstations',
@@ -68,7 +68,7 @@ export const computerCategories = [
   {
     id: 2,
     category: 'Desktops',
-    url: '/category/desktops',
+    url: '/category/desktop',
     image_url:
       // 'https://clipart-library.com/images_k/computer-png-transparent/computer-png-transparent-15.png',
       DesktopImg,

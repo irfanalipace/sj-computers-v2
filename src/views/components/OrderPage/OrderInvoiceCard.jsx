@@ -112,7 +112,7 @@ const OrderInvoiceCard = ({ data, activeTab }) => {
           You can track your shipment and view any applicable import fees
           deposit before placing your order.
         </p>
-        <Link to={'#'}>How shipping costs calculates?</Link>
+        {/* <Link to={'#'}>How shipping costs calculates?</Link> */}
       </div>
     </div>
   );
