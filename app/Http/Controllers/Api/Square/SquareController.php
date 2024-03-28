@@ -124,7 +124,7 @@ class SquareController extends BaseController
             $body->setCustomerId($customer);
             $body->setLocationId(env('SQUARE_LOCATION_ID'));
             $body->setReferenceId('user-' . $userIdToPass);
-            $body->setNote('Order-No '.$order['order']['id']);
+            $body->setNote('Web Order :'.$order['order']['id']);
 
             $api_response = $this->squareClient->getPaymentsApi()->createPayment($body);
             
