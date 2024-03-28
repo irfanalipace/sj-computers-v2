@@ -325,7 +325,7 @@ const ProductCardLayout2 = ({
           </div>
         )}
         {type === 'recommended' ||
-          (productView == 'grid' && (
+          (productView !== 'list' && (
             <div className='product-delivery-charges mt-2 ms-0 mb-2 mb-sm-0'>
               <FontAwesomeIcon className='me-1' icon={faTruck} /> Free Shipping
             </div>
