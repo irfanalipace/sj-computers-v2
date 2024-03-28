@@ -26,12 +26,6 @@ function Category() {
     setIsOpen(state => !state);
   };
 
-  useEffect(() => {
-    return () => {
-      dispatch(CLEAR_FILTERS_ARRAY());
-    };
-  }, []);
-
   return (
     <div className='category-page'>
       <CategoriesHeader />

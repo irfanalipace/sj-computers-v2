@@ -110,6 +110,9 @@ const FilterBarlayout2 = ({
     if (category === 'operating_system') {
       setOsCheckd([]);
     }
+    if (category === 'screen') {
+      setScreenCheckd([]);
+    }
     if (category === 'brand') {
       setBrandCheckd([]);
     }
@@ -139,7 +142,6 @@ const FilterBarlayout2 = ({
     const ranges = [];
 
     if (min < 250 && categorySlug?.toLowerCase() !== 'bto') {
-      debugger;
       ranges.push({
         id: 1,
         priceValue: 'Under $250',
@@ -293,10 +295,9 @@ const FilterBarlayout2 = ({
   };
 
   const handleChecked = (catg, value) => {
+    const processorFilter = filtersArray.find(filter => filter.key === catg);
+
     if (catg === 'processor') {
-      const processorFilter = filtersArray.find(
-        filter => filter.key === 'processor',
-      );
       // console.clear();
       // console.log(
       //   { catg },
@@ -307,11 +308,18 @@ const FilterBarlayout2 = ({
 
       return (
         processorCheckd.includes(value) ||
-        processorFilter.value.includes(value?.toLowerCase())
+        processorFilter?.value.includes(value)
       );
     }
     if (catg === 'operating_system') {
-      return osCheckd.includes(value);
+      return (
+        osCheckd?.includes(value) || processorFilter?.value.includes(value)
+      );
+    }
+    if (catg === 'screen') {
+      return (
+        screenCheckd?.includes(value) || processorFilter?.value.includes(value)
+      );
     }
     if (catg === 'brand') {
       const brandFilter = filtersArray.find(filter => filter.key === 'brand');
@@ -323,7 +331,77 @@ const FilterBarlayout2 = ({
   const [ramDiskCheckd, setRamDiskCheckd] = useState([]);
   const [processorCheckd, setProcessorCheckd] = useState([]);
   const [osCheckd, setOsCheckd] = useState([]);
+  const [screenCheckd, setScreenCheckd] = useState([]);
   const [brandCheckd, setBrandCheckd] = useState([]);
+
+  useEffect(() => {});
+
+  let renderedScreenItems = (options, category) => {
+    console.log(visibleEntries, category);
+    let optionArray = Object.entries(options).slice(
+      0,
+      visibleEntries?.[category]?.visibleEntries,
+    );
+    return (
+      <>
+        {optionArray.map((option, index) => (
+          <li className='filter-value' key={`${option}-${index}`}>
+            <label className='radio-container' htmlFor={`${option}-${index}`}>
+              <input
+                id={`${option}-${index}`}
+                type='checkbox'
+                checked={handleChecked(category, option)}
+                // checked={filtersInArray?.some(
+                //   item => item.value === option.backend_value,
+                // )}
+                name={category} // Add a name attribute to group the radio buttons by category
+                value={option} // Add a value attribute to specify the value of the selected radio button
+                onChange={event => {
+                  if (category === 'brand') {
+                    const hardDiskCheckdCopy = [...brandCheckd];
+                    if (event.target.checked) {
+                      hardDiskCheckdCopy.push(option);
+                      setBrandCheckd(hardDiskCheckdCopy);
+                    }
+                    if (!event.target.checked) {
+                      const finIndex = brandCheckd.findIndex(
+                        item => item === option,
+                      );
+                      hardDiskCheckdCopy.splice(finIndex, 1);
+                      setBrandCheckd(hardDiskCheckdCopy);
+                    }
+                  }
+
+                  handleFilterSelect(event, category, option);
+                }}
+              />
+              <span className='radiomark '></span> {option}
+            </label>
+          </li>
+        ))}
+
+        {visibleEntries?.[category]?.visibleEntries <=
+          filters[category].length && (
+          <li className='filter-value'>
+            <button onClick={() => handleShowMoreitems(category)}>
+              <FontAwesomeIcon
+                icon={faAngleDown}
+                style={{ margin: ' 0px 5px', color: 'black' }}
+              />
+              <span
+                className='me-2'
+                style={{
+                  color: '#52AC66',
+                  fontWeight: 'unset',
+                }}>
+                Show More
+              </span>
+            </button>
+          </li>
+        )}
+      </>
+    );
+  };
 
   let renderedItems = (options, category) => {
     console.log(visibleEntries, category);
@@ -377,6 +455,20 @@ const FilterBarlayout2 = ({
                       );
                       hardDiskCheckdCopy.splice(finIndex, 1);
                       setOsCheckd(hardDiskCheckdCopy);
+                    }
+                  }
+                  if (category === 'screen') {
+                    const screenCheckdCopy = [...screenCheckd];
+                    if (event.target.checked) {
+                      screenCheckdCopy.push(option.backend_value);
+                      setScreenCheckd(screenCheckdCopy);
+                    }
+                    if (!event.target.checked) {
+                      const finIndex = screenCheckd.findIndex(
+                        item => item === option.backend_value,
+                      );
+                      screenCheckdCopy.splice(finIndex, 1);
+                      setScreenCheckd(screenCheckdCopy);
                     }
                   }
                   if (category === 'brand') {
@@ -561,95 +653,12 @@ const FilterBarlayout2 = ({
       </ul>
     );
   };
-  console.log(activePriceFiler);
+
   let renderRangeSliders = category => {
+    if (category === 'screen') return;
+
     return (
       <ul className='filter-values-list'>
-        {/*        
-        {category === 'price' ? (
-          <>
-            <h3
-              onClick={() => DataInDrawerToggler(index + 3)}
-              className={`filter-heading ${inDrawer ? 'alignment-container' : ''}`}
-              style={{
-                margin: inDrawer ? '0px' : '',
-                padding: inDrawer ? '16px' : '',
-                width: inDrawer ? '100vw' : '',
-              }}>
-              {category.replace(/_/g, ' ')}
-              {showClear(category) && (
-                <span
-                  className='filter-clear-btn'
-                  onClick={() => handleClearFilter(category)}>
-                  <CloseIcon fontSize='14px' />
-                  clear
-                </span>
-              )}
-
-              {inDrawer ? (
-                <span className={`${inDrawer ? 'align-to-end' : ''}`}>
-                  <IconButton>
-                    {DataInDrawer[index + 3] ? (
-                      <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
-                    ) : (
-                      <KeyboardArrowDownIcon />
-                    )}{' '}
-                  </IconButton>
-                </span>
-              ) : (
-                ''
-              )}
-            </h3>
-            {priceData.priceValueArray.map((item, index) => (
-              <li
-                key={item.id}
-                onClick={() => handlePriceFilter(item)}
-                style={{
-                  padding: '2px 0px',
-                  color: activePriceFiler === item.id ? '#f2a742' : '',
-                }}
-                className={'filter-value price-value'}>
-                {item.priceValue}
-              </li>
-            ))}
-            <li className='filter-value' style={{ padding: '2px 0px' }}>
-              <FontAwesomeIcon
-                icon={faAngleDown}
-                style={{ margin: ' 0px 5px', color: 'black' }}
-              />
-              <span style={{ color: '#52AC66' }}>Custom Price</span>
-            </li>
-
-            <li className='filter-value' style={{ padding: '2px 0px' }}>
-              {priceData.priceInputArray.map((item, index) => (
-                <input
-                  id={`customInput${item.id}`}
-                  style={{
-                    border:
-                      activePriceFiler === 10
-                        ? '1px solid #f2a742'
-                        : '1px solid gray',
-                  }}
-                  key={index}
-                  type='text'
-                  name={item.name}
-                  checked={showClear(category)}
-                  placeholder={`$${item.placeholder}`}
-                  className='price-input'
-                  onChange={handleCustomPriceFilter}
-                />
-              ))}
-              <button
-                onClick={() => handlePriceFilter(customPrice)}
-                className='price-go-btn'>
-                Go
-              </button>
-            </li>
-          </>
-        ) : (
-          <></>
-        )} */}
-
         {category === 'ram_memory' ? (
           <>
             {ramData[0].gb.map((item, index) => {
@@ -878,7 +887,7 @@ const FilterBarlayout2 = ({
   ];
 
   function findIndexByKey(arr, keyToFind) {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 9; i++) {
       if (arr[0][i].key === keyToFind) {
         return i;
       }
@@ -889,6 +898,7 @@ const FilterBarlayout2 = ({
   let renderedCategories = Object.entries(filters).map(
     ([category, options], index) => {
       if (category == 'review') return;
+
       return (
         <div key={category}>
           {(!!filters[category].length ||
@@ -942,6 +952,8 @@ const FilterBarlayout2 = ({
                     padding: inDrawer ? '0px 20px' : '',
                     marginLeft: inDrawer ? '16px' : '',
                   }}>
+                  {/* {category === 'screen' &&
+                    renderedScreenItems(options, category)} */}
                   {Array.isArray(filters[category])
                     ? renderedItems(options, category)
                     : renderRangeSliders(category)}

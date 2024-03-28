@@ -94,11 +94,16 @@ class PayPalController extends Controller
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
-       
+
+        DB::beginTransaction();
+        if(isset($response['status']) && $response['status'] == 'COMPLETED') {
+
         $cache = cache::where('key','paypal_transaction_'.$request->token)->first();
+
         if(!$cache){
             return redirect('checkout?error=Error in Paypal PLease try again.');
         }
+
         $getCache = json_decode($cache->value);
        
         $shippingAddress = $getCache->shippping_address; 
@@ -117,7 +122,7 @@ class PayPalController extends Controller
         $userType =  $getCache->user_type; 
         $cartDetails = $getCache->cart_details; 
       
-        DB::beginTransaction();
+      
          /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
          $userIdToPass = ($userType != StatusEnum::GUEST) ? $user->id : $user->email;
          $userType = ($userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
@@ -155,35 +160,35 @@ class PayPalController extends Controller
              $orderData['estimate_day'] =   Carbon::now()->addWeekdays(5)->format('l d-m-Y');
          }
         
-        if(isset($response['status']) && $response['status'] == 'COMPLETED') {
+        
             
-            $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
-            if (!$order) {
-                dd('order not created');
-                return redirect()->route('cancel');
-             }    
+        $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
+        if (!$order) {
+            dd('order not created');
+            return redirect()->route('cancel');
+        }    
 
-            $orderData['order_detail'] = $order['order'];
-            $orderData['payer_id'] = $response['id'];
+        $orderData['order_detail'] = $order['order'];
+        $orderData['payer_id'] = $response['id'];
 
-            $orderDetailOutput['order_no'] = $order['order']['id'];
-            $orderDetailOutput['order_date'] = $order['order']['created_at']->format('Y-m-d H:i:s');
-            $orderDetailOutput['delivery_date'] = $orderData['estimate_day']; // Delivery Details
-            $orderDetailOutput['payment_type'] = 'PayPal'; 
-            $orderDetailOutput['id'] = $response['id'];
-            $orderDetailOutput['subtotal'] = $orderData['sub_total'];
-            $orderDetailOutput['total'] = $orderData['total_amount'];
+        $orderDetailOutput['order_no'] = $order['order']['id'];
+        $orderDetailOutput['order_date'] = $order['order']['created_at']->format('Y-m-d H:i:s');
+        $orderDetailOutput['delivery_date'] = $orderData['estimate_day']; // Delivery Details
+        $orderDetailOutput['payment_type'] = 'PayPal'; 
+        $orderDetailOutput['id'] = $response['id'];
+        $orderDetailOutput['subtotal'] = $orderData['sub_total'];
+        $orderDetailOutput['total'] = $orderData['total_amount'];
 
-             // Iterate through each order item to get product details
-             $orderDetailOutput['order_item'] = $order['order']['orderItem']->map(function ($item) {
-                return [
-                    'product_name' => $item->product_name,
-                    'qty' => $item->qty,
-                    'price' => $item->price
-                ];
-            });
-           
-            Invoice::where('id', $order['invoice_id'])->update(['payer_id' => $response['id'] ]);
+            // Iterate through each order item to get product details
+        $orderDetailOutput['order_item'] = $order['order']['orderItem']->map(function ($item) {
+            return [
+                'product_name' => $item->product_name,
+                'qty' => $item->qty,
+                'price' => $item->price
+            ];
+        });
+        
+        Invoice::where('id', $order['invoice_id'])->update(['payer_id' => $response['id'] ]);
             GenerateInvoiceJob::dispatch($user, $orderData, $order,StatusEnum::PAYMENTTYPEPAYPAL,$userType);           
            
             // If you need to display more details, add them here accordingly
@@ -198,11 +203,6 @@ class PayPalController extends Controller
             // $cache->delete();
 
             DB::commit();
-
-            // Convert to JSON if necessary for API response
-            $jsonResponse = json_encode($orderDetailOutput);
-            
-            // \Cache::forget("paypal_transaction_".$request->token);
             
             return redirect()->to('thank-you?orderSuccess=true'.'&&order_no='.$orderDetailOutput['order_no']);
             
