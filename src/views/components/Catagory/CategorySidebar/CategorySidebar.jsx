@@ -6,11 +6,10 @@ import FilterBar from '../../FilterBar/FilterBar';
 import { computerCategories, categoriesWithSubCategories } from '../DummyApi';
 import FilterBarlayout2 from './FilterbarLayout2';
 import { Link } from 'react-router-dom';
-
 import './CategorySidebar.css';
 import ReviewFilter from './ReviewFilter';
 import { SET_FILTERS_ARRAY } from '../../../../core/store/products/productsSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 const CategorySidebar = ({
@@ -29,7 +28,7 @@ const CategorySidebar = ({
   const processor = queryParams.get('processor');
   const gpu = queryParams.get('gpu');
   const [reviewOption, setReviewOptions] = useState([]);
-
+  const products = useSelector(state => state.products.products);
   const [filtersInArray, setFiltersInArray] = useState([
     {
       key: 'processor',
@@ -387,96 +386,100 @@ const CategorySidebar = ({
 
         borderRight: inDrawer == true ? '' : '0.5px solid #DDDDDD',
       }}>
-      <Grid
-        item
-        xs={12}
-        ml={inDrawer ? 0 : 2}
-        borderBottom={inDrawer ? '1px solid #DDDDDD' : ''}>
-        <Typography
-          onClick={() => DataInDrawerToggler(1)}
-          p={inDrawer ? 2 : 0}
-          className={`${inDrawer ? 'alignment-container' : ''}`}
-          variant='body2'
-          fontWeight={'bolder'}
-          ml>
-          Categories
-          {inDrawer ? (
-            <span className={`${inDrawer ? 'align-to-end' : ''}`}>
-              <IconButton onClick={() => DataInDrawerToggler(1)}>
-                {' '}
-                {DataInDrawer[1] ? (
-                  <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
-                ) : (
-                  <KeyboardArrowDownIcon />
-                )}{' '}
-              </IconButton>
-            </span>
-          ) : (
-            ''
-          )}
-        </Typography>
-        {(DataInDrawer[1] || !inDrawer) && (
-          <>
-            {categoriesWithSubCategories
-              ?.slice(0, visibleCategory)
-              ?.map((category, index) => (
-                <div key={index}>
-                  <Typography
-                    ml={inDrawer ? 4 : 2}
-                    variant='body2'
-                    sx={{ cursor: 'pointer' }}
-                    onClick={() => toggleSubCategoryVisibility(index)}>
-                    {category.category}
-                    <IconButton size='small'>
-                      {isSubCategoryVisible[index] ? (
-                        <KeyboardArrowUpIcon sx={{ color: '#e87e24' }} />
-                      ) : (
-                        <KeyboardArrowDownIcon />
-                      )}
-                    </IconButton>
-                  </Typography>
-                  {isSubCategoryVisible[index] && (
-                    <Box ml={inDrawer ? 6 : 3}>
-                      {category?.sub_categories.map((subCategory, subIndex) => (
-                        <Link
-                          key={subIndex}
-                          to={subCategory.url}
-                          className='sub-category-link'>
-                          <Typography variant='body2' py={0.3}>
-                            {subCategory.name}
-                          </Typography>
-                        </Link>
-                      ))}
-                    </Box>
-                  )}
-                </div>
-              ))}
-            {visibleCategory + 1 > categoriesWithSubCategories?.length ? (
-              <Typography
-                variant='body1'
-                sx={{ cursor: 'pointer' }}
-                onClick={showLess}
-                color={'#e87e24'}>
-                <IconButton size='small' onClick={showLess}>
-                  <KeyboardArrowUpIcon />
-                </IconButton>{' '}
-                See Less Categories
-              </Typography>
+      {products && products?.length > 0 && (
+        <Grid
+          item
+          xs={12}
+          ml={inDrawer ? 0 : 2}
+          borderBottom={inDrawer ? '1px solid #DDDDDD' : ''}>
+          <Typography
+            onClick={() => DataInDrawerToggler(1)}
+            p={inDrawer ? 2 : 0}
+            className={`${inDrawer ? 'alignment-container' : ''}`}
+            variant='body2'
+            fontWeight={'bolder'}
+            ml>
+            Categories
+            {inDrawer ? (
+              <span className={`${inDrawer ? 'align-to-end' : ''}`}>
+                <IconButton onClick={() => DataInDrawerToggler(1)}>
+                  {' '}
+                  {DataInDrawer[1] ? (
+                    <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
+                  ) : (
+                    <KeyboardArrowDownIcon />
+                  )}{' '}
+                </IconButton>
+              </span>
             ) : (
-              <Typography
-                variant='body1'
-                sx={{ cursor: 'pointer' }}
-                onClick={showMore}
-                color={'#52AC66'}>
-                <IconButton size='small'>
-                  <KeyboardArrowDownIcon />
-                </IconButton>{' '}
-                See More Categories
-              </Typography>
+              ''
             )}
-          </>
-        )}
-      </Grid>
+          </Typography>
+          {(DataInDrawer[1] || !inDrawer) && (
+            <>
+              {categoriesWithSubCategories
+                ?.slice(0, visibleCategory)
+                ?.map((category, index) => (
+                  <div key={index}>
+                    <Typography
+                      ml={inDrawer ? 4 : 2}
+                      variant='body2'
+                      sx={{ cursor: 'pointer' }}
+                      onClick={() => toggleSubCategoryVisibility(index)}>
+                      {category.category}
+                      <IconButton size='small'>
+                        {isSubCategoryVisible[index] ? (
+                          <KeyboardArrowUpIcon sx={{ color: '#e87e24' }} />
+                        ) : (
+                          <KeyboardArrowDownIcon />
+                        )}
+                      </IconButton>
+                    </Typography>
+                    {isSubCategoryVisible[index] && (
+                      <Box ml={inDrawer ? 6 : 3}>
+                        {category?.sub_categories.map(
+                          (subCategory, subIndex) => (
+                            <Link
+                              key={subIndex}
+                              to={subCategory.url}
+                              className='sub-category-link'>
+                              <Typography variant='body2' py={0.3}>
+                                {subCategory.name}
+                              </Typography>
+                            </Link>
+                          ),
+                        )}
+                      </Box>
+                    )}
+                  </div>
+                ))}
+              {visibleCategory + 1 > categoriesWithSubCategories?.length ? (
+                <Typography
+                  variant='body1'
+                  sx={{ cursor: 'pointer' }}
+                  onClick={showLess}
+                  color={'#e87e24'}>
+                  <IconButton size='small' onClick={showLess}>
+                    <KeyboardArrowUpIcon />
+                  </IconButton>{' '}
+                  See Less Categories
+                </Typography>
+              ) : (
+                <Typography
+                  variant='body1'
+                  sx={{ cursor: 'pointer' }}
+                  onClick={showMore}
+                  color={'#52AC66'}>
+                  <IconButton size='small'>
+                    <KeyboardArrowDownIcon />
+                  </IconButton>{' '}
+                  See More Categories
+                </Typography>
+              )}
+            </>
+          )}
+        </Grid>
+      )}
 
       <Grid
         position={'relative'}
