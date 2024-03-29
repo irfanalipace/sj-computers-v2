@@ -160,18 +160,18 @@ const OrderDetails = () => {
           radius='md'
           withBorder
           className='p-0'>
-          <CardHeader>
+          {isSmallScreen && (
+            <div
+              style={{ fontSize: '13px', padding: '5px', textAlign: 'center' }}>
+              {filteredOrder?.tracking_id
+                ? 'Tracking id :' + filteredOrder?.tracking_id
+                : ''}{' '}
+            </div>
+          )}
+          <CardHeader sx={{ px: 1 }}>
             {!isSmallScreen && (
               <div>
                 Order Placed <br /> {formatDate(filteredOrder?.created_at)}
-              </div>
-            )}
-            {isSmallScreen && (
-              <div>
-                Tracking id <br />
-                {'#' + filteredOrder?.tracking_id
-                  ? filteredOrder?.tracking_id
-                  : ''}{' '}
               </div>
             )}
             {isSmallScreen && (

@@ -122,11 +122,11 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
   }
 
   return filteredData?.map(orders => (
-    <Grid container>
+    <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
       <Card
         style={{
           margin: '15px 0px',
-          width: isSmallScreen ? '100%' : '55%',
+          width: isSmallScreen ? '100%' : '60%',
           border: '1px solid #DDDDDD',
         }}
         shadow='sm'
@@ -346,7 +346,7 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
         <Card
           style={{
             margin: '15px 0px',
-            width: '25%',
+            width: '35%',
             height: '310px',
             border: '1px solid #DDDDDD',
           }}
@@ -407,7 +407,7 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
                 </Grid>
               </Grid>
             </div>
-            <div className='order-invoice-footer' style={{ height: '100%' }}>
+            <div className='order-invoice-footer' style={{ height: '100px' }}>
               {/* How shipping costs calculates? */}
             </div>
           </InvoiceCard>

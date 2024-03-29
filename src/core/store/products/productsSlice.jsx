@@ -49,6 +49,10 @@ const filtesArrayOfObject = [
       max: 0,
     },
   },
+  {
+    key: 'screen',
+    value: [],
+  },
 ];
 const initialState = {
   products: [],

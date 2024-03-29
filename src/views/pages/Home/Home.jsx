@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import BannerCategory from './BannerCategory';
 const ProductsHomePage = React.lazy(() => import('./ProductsHomePage'));
 import { useViewportWidth } from '@hooks/useViewportWidth';
@@ -7,6 +7,8 @@ import Subscribe from '../../components/Subscribe/Subscribe';
 import VisibleOnScroll, {
   VisibilityProvider,
 } from '../../components/VisibleOnScroll';
+import { CLEAR_FILTERS_ARRAY } from '../../../core/store/products/productsSlice';
+import { useDispatch } from 'react-redux';
 const RecommandSectionsProducts = React.lazy(
   () =>
     import(
@@ -15,6 +17,10 @@ const RecommandSectionsProducts = React.lazy(
 );
 
 const Home = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(CLEAR_FILTERS_ARRAY());
+  }, []);
   const screenWidth = useViewportWidth();
   return (
     <VisibilityProvider>
