@@ -104,6 +104,7 @@ const FilteredProducts = memo(
       if (category?.id === 1) {
         filterObject.name = categorySlug;
       }
+
       dispatch(
         filterProducts(filterObject, true, productAfterShowMore =>
           viewItemDataLayer(productAfterShowMore, categorySlug),
@@ -136,6 +137,12 @@ const FilteredProducts = memo(
 
     useEffect(() => {
       let filteredData = checkIfFilterSelected(filtersArray);
+      if (
+        Object.keys(filteredData) !== 0 &&
+        isPrevFilterApplied.current === false
+      ) {
+        isPrevFilterApplied.current = true;
+      }
       if (mounted) {
         filterObject = {
           ...filterObject,
@@ -158,6 +165,7 @@ const FilteredProducts = memo(
           } else {
             isPrevFilterApplied.current = true;
           }
+          // debugger;
           dispatch(filterProducts(filterObject));
         }
       }

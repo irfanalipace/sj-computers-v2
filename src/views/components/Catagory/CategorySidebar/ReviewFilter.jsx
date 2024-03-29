@@ -1,10 +1,15 @@
 import { Checkbox, Stack, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import StarRatings from 'react-star-ratings';
 import './FilterbarLayout2.css';
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function ReviewFilter({ onChange, clearReview, reviewOption }) {
+export default function ReviewFilter({
+  onChange,
+  clearReview,
+  reviewOption,
+  storeReivew,
+}) {
   const reveiwData = [
     { id: 1, label: '4.5 & up', value: 4.5 },
     { id: 2, label: '4 & up', value: 4 },
@@ -12,6 +17,21 @@ export default function ReviewFilter({ onChange, clearReview, reviewOption }) {
     { id: 4, label: '2 & up', value: 2 },
   ];
   const [checkedReview, setCheckedReview] = useState([]);
+
+  useEffect(() => {
+    const filterToBePushed = [];
+    for (let i = storeReivew?.value.min; i <= storeReivew?.value.max; i++) {
+      const index = reviewOption.findIndex(item => item.value === i);
+
+      if (index !== -1) {
+        filterToBePushed.push(reviewOption[index].value);
+      }
+    }
+    if (filterToBePushed.length > 0) {
+      setCheckedReview([...checkedReview, ...filterToBePushed]);
+    }
+  }, [storeReivew, reviewOption]);
+
   return (
     <>
       {!!checkedReview.length && (

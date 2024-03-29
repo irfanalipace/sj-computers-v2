@@ -481,6 +481,7 @@ const CategorySidebar = ({
         {(DataInDrawer[2] || !inDrawer) && (
           <Box ml={inDrawer ? 4 : 0} pb={2}>
             <ReviewFilter
+              storeReivew={storeFilters[2]}
               reviewOption={reviewOption}
               clearReview={clearReview}
               onChange={handleReviewFilter}
