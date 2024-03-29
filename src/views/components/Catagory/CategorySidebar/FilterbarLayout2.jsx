@@ -247,6 +247,17 @@ const FilterBarlayout2 = ({
         data?.price?.min_price,
         data?.price?.max_price,
       );
+      const priceMin =
+        filtersInArray[findIndexByKey([filtersInArray], 'price')]?.value?.min;
+      const priceMax =
+        filtersInArray[findIndexByKey([filtersInArray], 'price')]?.value?.max;
+      priceShapedArray.forEach((price, index) => {
+        if (price.priceMin === priceMin && price.priceMax === priceMax) {
+          setActinePriceFilter(price.id);
+          return;
+        }
+      });
+      // debugger;
       setPriceData(prev => {
         return {
           ...prev,
@@ -291,6 +302,7 @@ const FilterBarlayout2 = ({
     if ((check1 && check2) || check3) {
       return true;
     }
+
     return false;
   };
 
@@ -632,7 +644,7 @@ const FilterBarlayout2 = ({
                       key={index}
                       type='text'
                       name={item.name}
-                      checked={showClear(category)}
+                      // checked={showClear(category)}
                       placeholder={`$${item.placeholder}`}
                       className='price-input'
                       onChange={handleCustomPriceFilter}
