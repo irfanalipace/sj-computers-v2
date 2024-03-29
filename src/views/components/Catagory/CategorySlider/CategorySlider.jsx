@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '@store/products/productsThunks';
 import { useEffect } from 'react';
-import { CircularProgress } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 
 import SwiperCore, { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -39,9 +39,9 @@ const CategorySlider = () => {
 
   if (products?.length == 0) {
     return (
-      <div>
-        <CircularProgress />
-      </div>
+      <Box display={'flex'} justifyContent={'center'}>
+        <CircularProgress sx={{ color: 'black' }} />
+      </Box>
     );
   }
 

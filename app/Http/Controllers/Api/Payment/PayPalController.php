@@ -163,8 +163,7 @@ class PayPalController extends Controller
         
             
         $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
-        if (!$order) {
-           
+        if (!$order) {           
             return redirect()->route('cancel');
         }    
 
@@ -208,7 +207,7 @@ class PayPalController extends Controller
             
 
         } else {
-            dd('not completed transaction');
+            
             DB::rollBack();
             return redirect()->route('cancel');
         }

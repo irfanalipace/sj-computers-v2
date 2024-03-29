@@ -141,12 +141,12 @@ const MobileHomeCategoryLayout2 = () => {
     },
     {
       name: 'Desktops',
-      link: 'desktops',
+      link: 'desktop',
       img_url: DesktopImgUpdate,
     },
     {
       name: '2 in 1 Laptops',
-      link: '2_in_laptops',
+      link: '2_in_1_laptops',
       img_url: twoInOneImgUpdate,
     },
     {

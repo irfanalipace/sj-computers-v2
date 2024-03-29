@@ -29,55 +29,8 @@ const CategorySidebar = ({
   const gpu = queryParams.get('gpu');
   const [reviewOption, setReviewOptions] = useState([]);
   const products = useSelector(state => state.products.products);
-  const [filtersInArray, setFiltersInArray] = useState([
-    {
-      key: 'processor',
-      value: [],
-    },
-    {
-      key: 'ram_memory',
-      value: {
-        unit: [],
-        min: 0,
-        max: 0,
-      },
-    },
-    {
-      key: 'review',
-      value: {
-        min: 0,
-        max: 0,
-      },
-    },
-    {
-      key: 'price',
-      value: {
-        min: 0,
-        max: 0,
-      },
-    },
-    {
-      key: 'brand',
-      value: [],
-    },
-    {
-      key: 'operating_system',
-      value: [],
-    },
-
-    {
-      key: 'gpu',
-      value: [],
-    },
-    {
-      key: 'hard_disk',
-      value: {
-        unit: [],
-        min: 0,
-        max: 0,
-      },
-    },
-  ]);
+  const storeFilters = useSelector(state => state.products.filtersArray);
+  const [filtersInArray, setFiltersInArray] = useState(storeFilters);
   const [reveiwFilterArray, setReveiwFilterArray] = useState([]);
   const [isSubCategoryVisible, setIsSubCategoryVisible] = useState(
     categoriesWithSubCategories.map(() => false),
@@ -126,7 +79,13 @@ const CategorySidebar = ({
     const filtersArrayCopy = JSON.parse(JSON.stringify(filtersInArray));
 
     const minMaxArray = ['price', 'review', 'ram_memory', 'hard_disk'];
-    const arrayFilter = ['processor', 'brand', 'operating_system', 'gpu'];
+    const arrayFilter = [
+      'processor',
+      'brand',
+      'operating_system',
+      'gpu',
+      'screen',
+    ];
 
     if (minMaxArray.includes(categ)) {
       filtersArrayCopy[keyIndex].value.min = 0;
@@ -145,7 +104,7 @@ const CategorySidebar = ({
   };
 
   function findIndexByKey(arr, keyToFind) {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 9; i++) {
       if (arr[0][i].key === keyToFind) {
         return i;
       }
@@ -156,8 +115,15 @@ const CategorySidebar = ({
   const [ramFilter, setRamFilter] = useState([]);
 
   const handleFilterSelect = (event, category, option) => {
-    const arraysFilter = ['processor', 'brand', 'operating_system', 'gpu'];
+    const arraysFilter = [
+      'processor',
+      'brand',
+      'operating_system',
+      'gpu',
+      'screen',
+    ];
     const keyIndex = findIndexByKey([filtersInArray], category);
+
     const filtersArrayCopy = JSON.parse(JSON.stringify(filtersInArray));
 
     const unitFilterArray = ['hard_disk', 'ram_memory'];
