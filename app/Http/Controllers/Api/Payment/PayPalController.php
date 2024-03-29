@@ -94,122 +94,121 @@ class PayPalController extends Controller
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
-
+        dd($response);
         DB::beginTransaction();
-        if(isset($response['status']) && $response['status'] == 'COMPLETED') {
+        if(isset($response['status']) && $response['status'] == 'COMPLETED') 
+        {
 
-        $cache = cache::where('key','paypal_transaction_'.$request->token)->first();
+            $cache = cache::where('key','paypal_transaction_'.$request->token)->first();
 
-        if(!$cache){
-            return redirect('checkout?error=Error in Paypal PLease try again.');
-        }
+            if(!$cache){
+                return redirect('checkout?error=Error in Paypal PLease try again.');
+            }
 
-        $getCache = json_decode($cache->value);
-       
-        $shippingAddress = $getCache->shippping_address; 
-        $shippingAddressForm['country'] = $shippingAddress->country;
-        $shippingAddressForm['full_name'] = $shippingAddress->full_name;
-        $shippingAddressForm['phone_number'] = $shippingAddress->phone_number;
-        $shippingAddressForm['email'] = $shippingAddress->email ?? null;
-        $shippingAddressForm['address'] = $shippingAddress->address;
-        $shippingAddressForm['city'] = $shippingAddress->city;
-        $shippingAddressForm['state'] = $shippingAddress->state;
-        $shippingAddressForm['apartment'] = $shippingAddress->apartment ?? null;
-        $shippingAddressForm['zip_code'] = $shippingAddress->zip_code;
-        $shippingAddressForm['permanent_address'] = $shippingAddress->permanent_address ?? false;
-
-        $user =  $getCache->user; 
-        $userType =  $getCache->user_type; 
-        $cartDetails = $getCache->cart_details; 
-      
-      
-         /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
-         $userIdToPass = ($userType != StatusEnum::GUEST) ? $user->id : $user->email;
-         $userType = ($userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
-         $cartItems = ($userType == StatusEnum::GUEST) ? $getCache->cart_items : [];
-       
-         $cartContent = (isset($getCache->is_buy_now ) && $getCache->is_buy_now == true) ? \Cart::session($userIdToPass)->get($getCache->cart_id) : \Cart::session($userIdToPass)->getContent();
-       
-         $listofItems = ($userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
+            $getCache = json_decode($cache->value);
         
-         $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true),StatusEnum::PAYMENTTYPEPAYPAL);
-         if (!$check_product_first) { 
-             return redirect('cart?error='."Product quantity is invalid");
-         }
-        
-         // create invoice along with order
-         $orderData = [];
+            $shippingAddress = $getCache->shippping_address; 
+            $shippingAddressForm['country'] = $shippingAddress->country;
+            $shippingAddressForm['full_name'] = $shippingAddress->full_name;
+            $shippingAddressForm['phone_number'] = $shippingAddress->phone_number;
+            $shippingAddressForm['email'] = $shippingAddress->email ?? null;
+            $shippingAddressForm['address'] = $shippingAddress->address;
+            $shippingAddressForm['city'] = $shippingAddress->city;
+            $shippingAddressForm['state'] = $shippingAddress->state;
+            $shippingAddressForm['apartment'] = $shippingAddress->apartment ?? null;
+            $shippingAddressForm['zip_code'] = $shippingAddress->zip_code;
+            $shippingAddressForm['permanent_address'] = $shippingAddress->permanent_address ?? false;
 
-         $orderData['total_amount'] = number_format($cartDetails->totalAmount, 2, '.', '');
-         $orderData['sub_total'] = number_format($cartDetails->subTotal, 2, '.', '');
-         $orderData['item_qty'] =  $cartDetails->totalQty;
-
-
-         $orderData['shipment_amount'] =  0;
-         $orderData['estimate_day'] =  Carbon::now()->addWeekdays(5)->format('l d-m-Y');
-
-         $cartConditions = \Cart::session($userIdToPass)->getConditions('shipment_days');
-
-         foreach ($cartConditions as $condition) {
-             $amount = $condition->getValue(); // the value of the condition
-             $orderData['shipment_amount'] = $amount;
-             $orderData['estimate_day'] =  $condition->getAttributes()['estimate_day'];
-         }
-         if ($userType == StatusEnum::GUEST) {
-             $orderData['shipment_amount'] =  0;
-             $orderData['estimate_day'] =   Carbon::now()->addWeekdays(5)->format('l d-m-Y');
-         }
+            $user =  $getCache->user; 
+            $userType =  $getCache->user_type; 
+            $cartDetails = $getCache->cart_details; 
         
         
+            /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
+            $userIdToPass = ($userType != StatusEnum::GUEST) ? $user->id : $user->email;
+            $userType = ($userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
+            $cartItems = ($userType == StatusEnum::GUEST) ? $getCache->cart_items : [];
+        
+            $cartContent = (isset($getCache->is_buy_now ) && $getCache->is_buy_now == true) ? \Cart::session($userIdToPass)->get($getCache->cart_id) : \Cart::session($userIdToPass)->getContent();
+        
+            $listofItems = ($userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
             
-        $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
-        if (!$order) {
-            dd('order not created');
-           
-            return redirect()->route('cancel');
-        }    
-
-        $orderData['order_detail'] = $order['order'];
-        $orderData['payer_id'] = $response['id'];
-
-        $orderDetailOutput['order_no'] = $order['order']['id'];
-        $orderDetailOutput['order_date'] = $order['order']['created_at']->format('Y-m-d H:i:s');
-        $orderDetailOutput['delivery_date'] = $orderData['estimate_day']; // Delivery Details
-        $orderDetailOutput['payment_type'] = 'PayPal'; 
-        $orderDetailOutput['id'] = $response['id'];
-        $orderDetailOutput['subtotal'] = $orderData['sub_total'];
-        $orderDetailOutput['total'] = $orderData['total_amount'];
-
-            // Iterate through each order item to get product details
-        $orderDetailOutput['order_item'] = $order['order']['orderItem']->map(function ($item) {
-            return [
-                'product_name' => $item->product_name,
-                'qty' => $item->qty,
-                'price' => $item->price
-            ];
-        });
-        
-        Invoice::where('id', $order['invoice_id'])->update(['payer_id' => $response['id'] ]);
-            GenerateInvoiceJob::dispatch($user, $orderData, $order,StatusEnum::PAYMENTTYPEPAYPAL,$userType);           
-           
-            // If you need to display more details, add them here accordingly
-
-             //clear cart after successfull payment
-            (isset($getCache->is_buy_now ) && $getCache->is_buy_now == true) ? \Cart::session($userIdToPass)->remove($getCache['cart_id']) : \Cart::session($userIdToPass)->clear();
+            $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true),StatusEnum::PAYMENTTYPEPAYPAL);
+            if (!$check_product_first) { 
+                return redirect('cart?error='."Product quantity is invalid");
+            }
             
-            //clear cart condition            
-           \Cart::session($userIdToPass)->clearCartConditions();
+            // create invoice along with order
+            $orderData = [];
 
-           /* clear cache */
-            // $cache->delete();
+            $orderData['total_amount'] = number_format($cartDetails->totalAmount, 2, '.', '');
+            $orderData['sub_total'] = number_format($cartDetails->subTotal, 2, '.', '');
+            $orderData['item_qty'] =  $cartDetails->totalQty;
 
-            DB::commit();
+
+            $orderData['shipment_amount'] =  0;
+            $orderData['estimate_day'] =  Carbon::now()->addWeekdays(5)->format('l d-m-Y');
+
+            $cartConditions = \Cart::session($userIdToPass)->getConditions('shipment_days');
+
+            foreach ($cartConditions as $condition) {
+                $amount = $condition->getValue(); // the value of the condition
+                $orderData['shipment_amount'] = $amount;
+                $orderData['estimate_day'] =  $condition->getAttributes()['estimate_day'];
+            }
+            if ($userType == StatusEnum::GUEST) {
+                $orderData['shipment_amount'] =  0;
+                $orderData['estimate_day'] =   Carbon::now()->addWeekdays(5)->format('l d-m-Y');
+            }
             
-            return redirect()->to('thank-you?orderSuccess=true'.'&&order_no='.$orderDetailOutput['order_no']);
             
+                
+            $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
+            if (!$order) {           
+                return redirect()->route('cancel');
+            }    
+
+            $orderData['order_detail'] = $order['order'];
+            $orderData['payer_id'] = $response['id'];
+
+            $orderDetailOutput['order_no'] = $order['order']['id'];
+            $orderDetailOutput['order_date'] = $order['order']['created_at']->format('Y-m-d H:i:s');
+            $orderDetailOutput['delivery_date'] = $orderData['estimate_day']; // Delivery Details
+            $orderDetailOutput['payment_type'] = 'PayPal'; 
+            $orderDetailOutput['id'] = $response['id'];
+            $orderDetailOutput['subtotal'] = $orderData['sub_total'];
+            $orderDetailOutput['total'] = $orderData['total_amount'];
+
+                // Iterate through each order item to get product details
+            $orderDetailOutput['order_item'] = $order['order']['orderItem']->map(function ($item) {
+                return [
+                    'product_name' => $item->product_name,
+                    'qty' => $item->qty,
+                    'price' => $item->price
+                ];
+            });
+            
+            Invoice::where('id', $order['invoice_id'])->update(['payer_id' => $response['id'] ]);
+                GenerateInvoiceJob::dispatch($user, $orderData, $order,StatusEnum::PAYMENTTYPEPAYPAL,$userType);           
+            
+                // If you need to display more details, add them here accordingly
+
+                //clear cart after successfull payment
+                (isset($getCache->is_buy_now ) && $getCache->is_buy_now == true) ? \Cart::session($userIdToPass)->remove($getCache['cart_id']) : \Cart::session($userIdToPass)->clear();
+                
+                //clear cart condition            
+            \Cart::session($userIdToPass)->clearCartConditions();
+
+            /* clear cache */
+                // $cache->delete();
+
+                DB::commit();
+                
+                return redirect()->to('thank-you?orderSuccess=true'.'&&order_no='.$orderDetailOutput['order_no']);
+                
 
         } else {
-            dd('not completed transaction');
+            
             DB::rollBack();
             return redirect()->route('cancel');
         }
