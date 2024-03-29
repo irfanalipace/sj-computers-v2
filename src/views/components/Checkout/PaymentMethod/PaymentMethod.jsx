@@ -39,6 +39,7 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
 
   const onPaymentApiSuccess = response => {
     const url = response.data;
+    console.log('paypal', response.data);
     window.open(url, '_blank');
   };
 
