@@ -22,6 +22,7 @@ class Kernel extends ConsoleKernel
          $schedule->command('generate:site-map')->everyThirtyMinutes();
          $schedule->command('product-statistics')->weekly();
          $schedule->command('order-tracking-history')->everyThirtyMinutes();
+         $schedule->command('log-clear')->daily();
     }
 
     /**
