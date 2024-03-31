@@ -208,7 +208,7 @@ class PayPalController extends Controller
                 
 
         } else {
-            
+            dd($response);
             DB::rollBack();
             return redirect()->route('cancel');
         }
