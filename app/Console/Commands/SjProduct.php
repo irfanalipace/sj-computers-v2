@@ -363,7 +363,7 @@ class SjProduct extends Command
         //     $this->insertProductCategory('xps', $product->id);
         // }
 
-        if (strpos($title, 'dell precision')){
+        if (strpos($title, 'precision')){
             $this->insertProductCategory('precision', $product->id);
         }
 
