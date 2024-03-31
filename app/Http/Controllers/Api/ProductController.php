@@ -639,7 +639,7 @@ class ProductController extends BaseController
 
             $accessories = ["B0921PQRDN", "B0921GT8X9", "B09883YCB3", "B08VKWNPMT", "B08VLCRQ6X", "B08WRQH82Z", "B0921XRC3M", "B0921XRC3M", "B0B1H1DWJP", "B0B2N5SJZ4"];
 
-            $sql = $sql->whereIn('asin', $accessories);
+            $sql = $sql->whereNotIn('asin', $accessories);
 
         } elseif (!empty($categoryId)) {
 
