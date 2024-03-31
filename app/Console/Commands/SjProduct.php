@@ -355,11 +355,21 @@ class SjProduct extends Command
         /*
        * contain dell and xps
        */
-        if (strpos($title, 'dell') && (strpos($title, 'xps'))) {
+      if (strpos($title, 'xps')) {
             $this->insertProductCategory('xps', $product->id);
         }
 
+        // if (strpos($title, 'dell') && (strpos($title, 'xps'))) {
+        //     $this->insertProductCategory('xps', $product->id);
+        // }
 
+        if (strpos($title, 'dell precision')){
+            $this->insertProductCategory('precision', $product->id);
+        }
+
+        if (strpos($title, 'miscellaneous')){
+            $this->insertProductCategory('miscellaneous', $product->id);
+        }
         /*
       * contain Dell Precision
          * doesnot start with bto
