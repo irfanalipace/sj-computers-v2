@@ -94,7 +94,7 @@ class PayPalController extends Controller
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
-        dd($response);
+       
         DB::beginTransaction();
         if(isset($response['status']) && $response['status'] == 'COMPLETED') 
         {
