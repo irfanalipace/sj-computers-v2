@@ -284,7 +284,27 @@ class SjProduct extends Command
          * start with bto
          */
         if ($this->strStartsWith($title, 'bto')) {
-            $this->insertProductCategory('bto', $product->id);
+           // Assuming $product is an object that includes the ASIN of the product
+            $productAsin = $product->asin;
+
+            $accessories = [
+                "B0921PQRDN", "B0921GT8X9", "B09883YCB3",
+                "B08VKWNPMT", "B08VLCRQ6X", "B08WRQH82Z",
+                "B0921XRC3M", 
+                "B0B1H1DWJP", "B0B2N5SJZ4"
+            ];
+
+            // Check if the product's ASIN is in the accessories array
+            if (in_array($productAsin, $accessories)) {
+               
+                // If the product's ASIN is in the accessories array, insert 'accessory' category
+                $this->insertProductCategory('accessories', $product->id);
+                
+            } else {
+                
+                // If the product's ASIN is not in the accessories array, insert 'bto' category
+                $this->insertProductCategory('bto', $product->id);
+            }
         }
 
         /*
@@ -436,71 +456,71 @@ class SjProduct extends Command
             $this->insertProductCategory('core_i7', $product->id);
         }
 
-        /*
-      * contain Desktop
-      * doesnot start with BTO
-      */
-        if (strpos($title, 'desktop') && (!$this->strStartsWith($title, 'bto'))) {
-            $this->insertProductCategory('desktop', $product->id);
-        }
+            /*
+        * contain Desktop
+        * doesnot start with BTO
+        */
+            if (strpos($title, 'desktop') && (!$this->strStartsWith($title, 'bto'))) {
+                $this->insertProductCategory('desktop', $product->id);
+            }
 
-        /*
-     * contain Tablet
-     * doesnot start with BTO
-     */
-        if (strpos($title, 'tablet') && (!$this->strStartsWith($title, 'bto'))) {
-            $this->insertProductCategory('tablets', $product->id);
-        }
+            /*
+        * contain Tablet
+        * doesnot start with BTO
+        */
+            if (strpos($title, 'tablet') && (!$this->strStartsWith($title, 'bto'))) {
+                $this->insertProductCategory('tablets', $product->id);
+            }
 
-        /*
-     * contain Monitor
-     * doesnot contain desktop ,pc, Optiplex
-     */
+            /*
+        * contain Monitor
+        * doesnot contain desktop ,pc, Optiplex
+        */
         if ( ( !strpos($title, 'desktop') && ( !strpos($title, 'pc')) && ( !strpos($title, 'optiplex') ))
             && (strpos($title, 'Monitor'))) {
             $this->insertProductCategory('monitor', $product->id);
         }
 
         /*
-    * contain business
-    */
-        if ((strpos($title, 'business'))) {
-            $this->insertProductCategory('business_computers', $product->id);
-        }
+        * contain business
+        */
+            if ((strpos($title, 'business'))) {
+                $this->insertProductCategory('business_computers', $product->id);
+            }
 
-        /*
-   * contain sff or Small Form Factor
-   */
-        if ((strpos($title, 'sff')) || strpos($title,'small form factor')) {
-            $this->insertProductCategory('sff', $product->id);
-        }
+            /*
+        * contain sff or Small Form Factor
+        */
+                if ((strpos($title, 'sff')) || strpos($title,'small form factor')) {
+                    $this->insertProductCategory('sff', $product->id);
+                }
 
-        /*
-   * contain usff or Ultra
-   */
-        if ((strpos($title, 'usff')) || strpos($title,'ultra')) {
-            $this->insertProductCategory('usff', $product->id);
-        }
+                /*
+            * contain usff or Ultra
+            */
+                if ((strpos($title, 'usff')) || strpos($title,'ultra')) {
+                    $this->insertProductCategory('usff', $product->id);
+                }
 
-        /*
-* contain Tower
-         * doesnot contain mini
-*/
-        if ((strpos($title, 'tower')) && (!strpos($title,'mini'))) {
-            $this->insertProductCategory('tower', $product->id);
-        }
+            /*
+            * contain Tower
+                    * doesnot contain mini
+            */
+            if ((strpos($title, 'tower')) && (!strpos($title,'mini'))) {
+                $this->insertProductCategory('tower', $product->id);
+            }
 
-        /*
-* contain Tiny or Micro
-*/
+            /*
+        * contain Tiny or Micro
+        */
         if ((strpos($title, 'tiny')) || (strpos($title,'micro'))) {
             $this->insertProductCategory('tiny', $product->id);
         }
 
 
-        /*
-* contain mini
-*/
+                /*
+        * contain mini
+        */
         if ((strpos($title, 'mini'))) {
             $this->insertProductCategory('mini', $product->id);
         }
@@ -553,6 +573,10 @@ class SjProduct extends Command
         $category = Category::where('slug', $slug)->first();
 
         if (empty($category)) {
+            Category::create([
+                'name' => $slug,
+                'slug' => $slug
+            ]);
             return;
         }
 
