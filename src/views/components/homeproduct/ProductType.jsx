@@ -178,11 +178,10 @@ const ProductType = () => {
     },
     {
       image: AccessoriesImgUpdate,
-      categoryLink: '/category/bto',
+      categoryLink: '/category/accessories',
       categoryName: 'Accessories',
     },
   ];
-
 
   return (
     <div className=' '>

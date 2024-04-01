@@ -31,29 +31,29 @@ const AllCategoriesHeader = () => {
         },
       ],
     },
-    {
-      id: 2,
-      name: 'Chromebook',
-      slug: 'chromebook',
-      sub_categories: [
-        {
-          name: 'Desktops',
-          url: '/category/desktop',
-        },
-        {
-          name: 'Laptops',
-          url: '/category/laptops',
-        },
-        // {
-        //   name: 'Monitors',
-        //   url: '/category/monitors',
-        // },
-        {
-          name: 'Desktops',
-          url: '/category/desktop',
-        },
-      ],
-    },
+    // {
+    //   id: 2,
+    //   name: 'Chromebook',
+    //   slug: 'chromebook',
+    //   sub_categories: [
+    //     {
+    //       name: 'Desktops',
+    //       url: '/category/desktop',
+    //     },
+    //     {
+    //       name: 'Laptops',
+    //       url: '/category/laptops',
+    //     },
+    //     // {
+    //     //   name: 'Monitors',
+    //     //   url: '/category/monitors',
+    //     // },
+    //     {
+    //       name: 'Desktops',
+    //       url: '/category/desktop',
+    //     },
+    //   ],
+    // },
     {
       id: 3,
       name: 'Gaming Desktops',
