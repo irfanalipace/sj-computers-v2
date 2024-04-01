@@ -6,6 +6,14 @@ import paypal from '@images/common/paypal.png';
 import visa from '@images/common/visa.png';
 import mastercard from '@images/common/mastercard.png';
 import PaymentButton from './PaymentButton';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button,
+} from '@mui/material';
 
 import './PaymentMethod.css';
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +27,18 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
   const placingOrder = useSelector(state => state.orders.placingOrder);
   const [isLoading, setIsLoading] = useState(false);
   const paymentPayload = usePaymentData();
+
+  const [paypalUrl, setPaypalUrl] = useState('');
+  const [paypalDialogOpen, setPaypalDialogOpen] = useState(false);
+
+  const handlePaypalDialogClose = () => {
+    setPaypalDialogOpen(false);
+  };
+
+  const handleAllowPaypal = () => {
+    window.open(paypalUrl, '_blank');
+    handlePaypalDialogClose();
+  };
 
   const shippingDetails = useSelector(state => state.orders.shippingDetails);
 
@@ -39,7 +59,16 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
 
   const onPaymentApiSuccess = response => {
     const url = response.data;
-    window.open(url, '_blank');
+
+    const newWindow = window.open(url, '_blank');
+
+    if (newWindow) {
+      // Popup was not blocked
+      newWindow.focus();
+    } else {
+      setPaypalDialogOpen(true);
+      setPaypalUrl(url);
+    }
   };
 
   const onProcessEnd = () => {
@@ -98,6 +127,32 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
     );
   };
 
+  const PaypalDialog = () => {
+    return (
+      <Dialog
+        open={paypalDialogOpen}
+        // onClose={handlePaypalDialogClose}
+        aria-labelledby='alert-dialog-title'
+        aria-describedby='alert-dialog-description'>
+        <DialogTitle id='alert-dialog-title'>
+          {'Your browser popup is blocked'}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id='alert-dialog-description'>
+            We are redirecting you to PayPal.com, but your browser's popup is
+            blocked. Click '0k' to continue.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          {/* <Button onClick={handlePaypalDialogClose}>Deny</Button> */}
+          <Button onClick={handleAllowPaypal} autoFocus>
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  };
+
   return (
     <div className='payment-card'>
       <div className='payment-methods'>
@@ -144,6 +199,7 @@ export default function PaymentMethod({ setPayment, handleHeight, cartItems }) {
       {!shippingDetails.address && (
         <p className='text-danger fs-6'>*Add Shipping Details First</p>
       )}
+      {paypalDialogOpen && <PaypalDialog />}
       <PaymentButton
         paymentMethod={paymentMethod}
         isLoading={isLoading || placingOrder}
