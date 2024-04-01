@@ -94,7 +94,7 @@ class PayPalController extends Controller
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
-        
+       
         DB::beginTransaction();
         if(isset($response['status']) && $response['status'] == 'COMPLETED') 
         {
@@ -208,7 +208,7 @@ class PayPalController extends Controller
                 
 
         } else {
-            
+            dd($response);
             DB::rollBack();
             return redirect()->route('cancel');
         }
