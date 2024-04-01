@@ -24,7 +24,6 @@ export default function ReviewFilter({
     }
 
     if (filterToBePushed.length > 0) {
-      debugger;
       const duplicatePriceArray = [...checkedReview, ...filterToBePushed];
       const dd = new Set(duplicatePriceArray);
       const dd1 = Array.from(dd);

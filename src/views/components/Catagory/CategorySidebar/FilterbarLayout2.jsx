@@ -321,7 +321,6 @@ const FilterBarlayout2 = ({
       storeFilters[findIndexByKey([storeFilters], category)]?.value?.length > 0;
 
     if (category.toLowerCase() === 'hard_disk') {
-      // debugger;
     }
     if ((check1 && check2) || check3) {
       return true;
@@ -723,7 +722,6 @@ const FilterBarlayout2 = ({
                           );
                           ramCheckdCopy.splice(finIndex, 1);
                           setRamDiskCheckd(ramCheckdCopy);
-                          // debugger;
                         }
 
                         handleFilterSelect(

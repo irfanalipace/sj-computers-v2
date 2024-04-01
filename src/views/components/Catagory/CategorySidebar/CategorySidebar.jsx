@@ -128,7 +128,6 @@ const CategorySidebar = ({
       }
     }
     dispatch(SET_FILTERS_ARRAY(updatedFilters));
-    // debugger;
   };
 
   useEffect(() => {
@@ -240,8 +239,6 @@ const CategorySidebar = ({
           });
           let res = shapedthisData.filter(it => dd.includes(it.id));
 
-          debugger;
-
           const arr = [...hardDiskFilter, ...res];
           const uniqueMap = {};
           const result = [];
@@ -293,13 +290,10 @@ const CategorySidebar = ({
       const findIndex = arrayOjbectIndex(arrayToFilter());
 
       if (event.target.checked === false) {
-        debugger;
         if (findIndex !== -1) {
           const arrayToFilterCopy = [...arrayToFilter()];
-          debugger;
 
           arrayToFilterCopy.splice(findIndex, 1);
-          debugger;
 
           if (category === 'hard_disk') {
             setHardDiskFilter(arrayToFilterCopy);
