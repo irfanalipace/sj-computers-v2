@@ -10,15 +10,10 @@ export default function ReviewFilter({
   reviewOption,
   storeReivew,
 }) {
-  const reveiwData = [
-    { id: 1, label: '4.5 & up', value: 4.5 },
-    { id: 2, label: '4 & up', value: 4 },
-    { id: 3, label: '3 & up', value: 3 },
-    { id: 4, label: '2 & up', value: 2 },
-  ];
   const [checkedReview, setCheckedReview] = useState([]);
 
   useEffect(() => {
+    if (!reviewOption.length) return;
     const filterToBePushed = [];
     for (let i = storeReivew?.value.min; i <= storeReivew?.value.max; i++) {
       const index = reviewOption.findIndex(item => item.value === i);
@@ -27,10 +22,15 @@ export default function ReviewFilter({
         filterToBePushed.push(reviewOption[index].value);
       }
     }
+
     if (filterToBePushed.length > 0) {
-      setCheckedReview([...checkedReview, ...filterToBePushed]);
+      debugger;
+      const duplicatePriceArray = [...checkedReview, ...filterToBePushed];
+      const dd = new Set(duplicatePriceArray);
+      const dd1 = Array.from(dd);
+      setCheckedReview([...dd1]);
     }
-  }, [storeReivew, reviewOption]);
+  }, [reviewOption]);
 
   return (
     <>
@@ -75,6 +75,7 @@ export default function ReviewFilter({
                     co.splice(findIndex, 1);
                   }
                   setCheckedReview(co);
+
                   onChange(event, 'reveiw', reveiw);
                 }}
                 sx={{
@@ -102,13 +103,6 @@ export default function ReviewFilter({
               rating={parseFloat(reveiw.value || 0)}
               starRatedColor='orange'
             />
-            {/* <Typography
-              mb={0.5}
-              variant='body2'
-              fontSize={'small'}
-              className='review-lines'>
-              & Up
-            </Typography> */}
           </Stack>
         );
       })}

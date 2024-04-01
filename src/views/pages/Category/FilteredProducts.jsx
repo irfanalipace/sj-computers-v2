@@ -143,32 +143,31 @@ const FilteredProducts = memo(
       ) {
         isPrevFilterApplied.current = true;
       }
-      if (mounted) {
-        filterObject = {
-          ...filterObject,
-          page: 1,
-          name: '',
-          category_id: category?.id,
-          filter: filteredData,
-        };
-        if (category?.id === 1) {
-          filterObject.name = categorySlug;
-        }
 
-        if (
-          Object.keys(filteredData).length > 0 ||
-          isPrevFilterApplied.current === true ||
-          searchString
-        ) {
-          if (Object.keys(filteredData) === 0) {
-            isPrevFilterApplied.current = false;
-          } else {
-            isPrevFilterApplied.current = true;
-          }
-          // debugger;
-          dispatch(filterProducts(filterObject));
-        }
+      filterObject = {
+        ...filterObject,
+        page: 1,
+        name: '',
+        category_id: category?.id,
+        filter: filteredData,
+      };
+      if (category?.id === 1) {
+        filterObject.name = categorySlug;
       }
+
+      if (
+        Object.keys(filteredData).length > 0 ||
+        isPrevFilterApplied.current === true ||
+        searchString
+      ) {
+        if (Object.keys(filteredData) === 0) {
+          isPrevFilterApplied.current = false;
+        } else {
+          isPrevFilterApplied.current = true;
+        }
+        dispatch(filterProducts(filterObject));
+      }
+
       console.log(filtersArray);
     }, [JSON.stringify(filtersArray)]);
 
