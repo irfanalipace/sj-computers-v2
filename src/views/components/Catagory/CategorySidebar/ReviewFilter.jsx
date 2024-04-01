@@ -1,17 +1,36 @@
 import { Checkbox, Stack, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import StarRatings from 'react-star-ratings';
 import './FilterbarLayout2.css';
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function ReviewFilter({ onChange, clearReview, reviewOption }) {
-  const reveiwData = [
-    { id: 1, label: '4.5 & up', value: 4.5 },
-    { id: 2, label: '4 & up', value: 4 },
-    { id: 3, label: '3 & up', value: 3 },
-    { id: 4, label: '2 & up', value: 2 },
-  ];
+export default function ReviewFilter({
+  onChange,
+  clearReview,
+  reviewOption,
+  storeReivew,
+}) {
   const [checkedReview, setCheckedReview] = useState([]);
+
+  useEffect(() => {
+    if (!reviewOption.length) return;
+    const filterToBePushed = [];
+    for (let i = storeReivew?.value.min; i <= storeReivew?.value.max; i++) {
+      const index = reviewOption.findIndex(item => item.value === i);
+
+      if (index !== -1) {
+        filterToBePushed.push(reviewOption[index].value);
+      }
+    }
+
+    if (filterToBePushed.length > 0) {
+      const duplicatePriceArray = [...checkedReview, ...filterToBePushed];
+      const dd = new Set(duplicatePriceArray);
+      const dd1 = Array.from(dd);
+      setCheckedReview([...dd1]);
+    }
+  }, [reviewOption]);
+
   return (
     <>
       {!!checkedReview.length && (
@@ -55,6 +74,7 @@ export default function ReviewFilter({ onChange, clearReview, reviewOption }) {
                     co.splice(findIndex, 1);
                   }
                   setCheckedReview(co);
+
                   onChange(event, 'reveiw', reveiw);
                 }}
                 sx={{
@@ -82,13 +102,6 @@ export default function ReviewFilter({ onChange, clearReview, reviewOption }) {
               rating={parseFloat(reveiw.value || 0)}
               starRatedColor='orange'
             />
-            {/* <Typography
-              mb={0.5}
-              variant='body2'
-              fontSize={'small'}
-              className='review-lines'>
-              & Up
-            </Typography> */}
           </Stack>
         );
       })}

@@ -87,7 +87,7 @@ function useProductData() {
     if (isLoadingInitial) {
       getProductDetails();
     }
-  }, [isLoadingInitial]);
+  }, []);
 
   useEffect(() => {
     if (!productLoading) {

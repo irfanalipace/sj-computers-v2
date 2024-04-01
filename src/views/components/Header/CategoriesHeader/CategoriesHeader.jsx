@@ -30,29 +30,29 @@ const CategoriesHeader = () => {
         },
       ],
     },
-    {
-      id: 2,
-      name: 'Chromebook',
-      slug: 'chromebook',
-      sub_categories: [
-        {
-          name: 'Desktops',
-          url: '/category/desktop',
-        },
-        {
-          name: 'Laptops',
-          url: '/category/laptops',
-        },
-        {
-          name: 'Touch Screen',
-          url: '/category/touch_screen',
-        },
-        {
-          name: 'Desktops',
-          url: '/category/desktop',
-        },
-      ],
-    },
+    // {
+    //   id: 2,
+    //   name: 'Chromebook',
+    //   slug: 'chromebook',
+    //   sub_categories: [
+    //     {
+    //       name: 'Desktops',
+    //       url: '/category/desktop',
+    //     },
+    //     {
+    //       name: 'Laptops',
+    //       url: '/category/laptops',
+    //     },
+    //     {
+    //       name: 'Touch Screen',
+    //       url: '/category/touch_screen',
+    //     },
+    //     {
+    //       name: 'Desktops',
+    //       url: '/category/desktop',
+    //     },
+    //   ],
+    // },
     {
       id: 3,
       name: 'Gaming Desktops',

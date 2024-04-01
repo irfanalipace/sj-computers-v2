@@ -84,7 +84,7 @@ export const computerCategories = [
   {
     id: 4,
     category: 'Acccessories',
-    url: '/category/bto',
+    url: '/category/accessories',
     image_url:
       // 'https://clipart-library.com/images_k/computer-png-transparent/computer-png-transparent-15.png',
       AccessoriesImg,
