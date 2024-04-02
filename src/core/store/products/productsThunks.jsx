@@ -12,6 +12,7 @@ import {
   searchProductsApi,
   filterProductsApi,
 } from '@api/products';
+import { CLEAR_LOADING } from './productsSlice';
 
 export const fetchProducts = (page = 1, loadMore = false, per_page = 12) => {
   return async dispatch => {
@@ -38,6 +39,7 @@ export const filterProducts = (filter, loadMore = false, cb) => {
         dispatch({ type: LOADING, payload: {} });
         dispatch({ type: SET_FILTERING_PRODUCTS, payload: {} });
       }
+      dispatch({ type: LOADING, payload: {} });
       const response = await filterProductsApi(filter);
       if (filter.page === 1) dispatch(RESET_PAGE());
       if (response?.data?.data) {
@@ -56,6 +58,9 @@ export const filterProducts = (filter, loadMore = false, cb) => {
     } catch (error) {
       console.print('Something went wrong in products', error);
       dispatch({ type: API_ERROR, payload: error?.data?.errors });
+      dispatch({ type: CLEAR_LOADING, payload: {} });
+    } finally {
+      dispatch({ type: CLEAR_LOADING, payload: {} });
     }
   };
 };

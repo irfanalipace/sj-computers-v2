@@ -232,8 +232,9 @@ const FilteredProducts = memo(
                 <>
                   Best{' '}
                   {category?.name?.toLowerCase() === 'bto'
-                    ? 'Accessories'
-                    : category?.name}
+                    ? 'BTO'
+                    : category?.name?.charAt(0).toUpperCase() +
+                      category?.name?.slice(1)}
                 </>
               ) : (
                 <> {categorySlug?.toUpperCase()?.replace('-', ' ')} </>
