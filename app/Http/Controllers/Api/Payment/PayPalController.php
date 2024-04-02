@@ -208,9 +208,9 @@ class PayPalController extends Controller
                 
 
         } else {
-            dd($response);
+           
             DB::rollBack();
-            return redirect()->route('cancel');
+            return redirect('checkout?error=Order already capture Only one order per capture allowed.');
         }
     }
 

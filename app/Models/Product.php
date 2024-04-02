@@ -129,6 +129,7 @@ class Product extends Model
         static::addGlobalScope('product_quantity_status', function (Builder $builder) {
             $builder->where('quantity', '>', 0);
             $builder->where('status', '=', 1);
+            $builder->where('price', '>', 0);
         });
     }
 }

@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Grid,
-  Typography,
-  Box,
-  IconButton,
-  Stack,
-  debounce,
-} from '@mui/material';
+import { Grid, Typography, Box, IconButton } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import FilterBar from '../../FilterBar/FilterBar';
-import { computerCategories, categoriesWithSubCategories } from '../DummyApi';
+import { categoriesWithSubCategories } from '../DummyApi';
 import FilterBarlayout2 from './FilterbarLayout2';
 import { Link } from 'react-router-dom';
 import './CategorySidebar.css';
@@ -18,12 +10,10 @@ import ReviewFilter from './ReviewFilter';
 import { SET_FILTERS_ARRAY } from '../../../../core/store/products/productsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { offset } from '@popperjs/core';
 
 const CategorySidebar = ({
   inDrawer,
   toggleDrawer,
-  sidebarTitle,
   budgetedDesktops,
   isNewApi,
   pathValue,
@@ -46,19 +36,13 @@ const CategorySidebar = ({
     },
     {
       key: 'ram_memory',
-      checked: [],
-      value: {
-        unit: [],
-        min: 0,
-        max: 0,
-      },
+
+      unit: [],
+      value: [],
     },
     {
       key: 'review',
-      value: {
-        min: 0,
-        max: 0,
-      },
+      value: [],
     },
     {
       key: 'price',
@@ -82,12 +66,9 @@ const CategorySidebar = ({
     },
     {
       key: 'hard_disk',
-      checked: [],
-      value: {
-        unit: [],
-        min: 0,
-        max: 0,
-      },
+
+      unit: [],
+      value: [],
     },
     {
       key: 'screen',
@@ -215,13 +196,6 @@ const CategorySidebar = ({
         const filtersArrayCopy = JSON.parse(JSON.stringify(storeFilters));
         const dd = filtersArrayCopy[keyIndex].checked;
 
-        const mapData = dd?.map((item, index) => {
-          return {
-            id: index + 1,
-            value: item,
-          };
-        });
-
         if (category === 'hard_disk') {
           const shapedthisData = thisData.map((item, index) => {
             return {
@@ -254,38 +228,6 @@ const CategorySidebar = ({
 
           return result;
         }
-        if (category === 'ram_memory') {
-          const shapedthisData = thisData.map((item, index) => {
-            return {
-              id: index + 1,
-              label: `${item}  'GB'`,
-              value: item,
-              type: 'GB',
-            };
-          });
-          shapedthisData.push({
-            id: thisData.length + 2,
-            label: `${1}  'TB'`,
-            value: 1,
-            type: 'TB',
-          });
-          let res = shapedthisData.filter(it => dd.includes(it.id));
-
-          const arr = [...ramFilter, ...res];
-          const uniqueMap = {};
-          const result = [];
-
-          arr.forEach(item => {
-            const value = item.value;
-
-            if (!uniqueMap[value]) {
-              uniqueMap[value] = true;
-              result.push(item);
-            }
-          });
-
-          return result;
-        }
       };
       const findIndex = arrayOjbectIndex(arrayToFilter());
 
@@ -294,14 +236,6 @@ const CategorySidebar = ({
           const arrayToFilterCopy = [...arrayToFilter()];
 
           arrayToFilterCopy.splice(findIndex, 1);
-
-          if (category === 'hard_disk') {
-            setHardDiskFilter(arrayToFilterCopy);
-          }
-
-          if (category === 'ram_memory') {
-            setRamFilter(arrayToFilterCopy);
-          }
 
           const { minValue, maxValue } = getMinMax(arrayToFilterCopy);
 
@@ -322,70 +256,6 @@ const CategorySidebar = ({
           return;
         }
       }
-      if (event.target.checked) {
-        if (category === 'hard_disk') {
-          const localUpdated = [...hardDiskFilter, option];
-          setHardDiskFilter([...localUpdated]);
-
-          const { minValue, maxValue } = getMinMax(localUpdated);
-          const keyIndex = findIndexByKey([filtersInArray], 'hard_disk');
-          const filtersArrayCopy = JSON.parse(JSON.stringify(storeFilters));
-
-          filtersArrayCopy[keyIndex].value.min = minValue;
-          filtersArrayCopy[keyIndex].value.max = maxValue;
-          filtersArrayCopy[keyIndex].checked = checkedArray;
-          filtersArrayCopy[keyIndex].value.unit = localUpdated?.map(
-            item => item.type,
-          );
-          filtersArrayCopy[keyIndex].value.unit = [
-            ...new Set(filtersArrayCopy[keyIndex].value.unit),
-          ];
-
-          dispatch(SET_FILTERS_ARRAY(filtersArrayCopy));
-
-          return;
-        }
-        if (category === 'ram_memory') {
-          const localUpdated = [...ramFilter, option];
-          setRamFilter([...localUpdated]);
-
-          const { minValue, maxValue } = getMinMax(localUpdated);
-
-          const keyIndex = findIndexByKey([filtersInArray], 'ram_memory');
-          const filtersArrayCopy = JSON.parse(JSON.stringify(storeFilters));
-
-          filtersArrayCopy[keyIndex].value.min = minValue;
-          filtersArrayCopy[keyIndex].value.max = maxValue;
-          filtersArrayCopy[keyIndex].checked = checkedArray;
-          filtersArrayCopy[keyIndex].value.unit = localUpdated?.map(
-            item => item.type,
-          );
-          filtersArrayCopy[keyIndex].value.unit = [
-            ...new Set(filtersArrayCopy[keyIndex].value.unit),
-          ];
-          dispatch(SET_FILTERS_ARRAY(filtersArrayCopy));
-          return;
-        }
-      }
-    }
-
-    if (arraysFilter.includes(category)) {
-      if (event.target.checked === false) {
-        const findIndex = filtersArrayCopy[keyIndex].value.findIndex(
-          item => item === option,
-        );
-
-        if (findIndex !== -1) {
-          filtersArrayCopy[keyIndex].value.splice(findIndex, 1);
-          dispatch(SET_FILTERS_ARRAY(filtersArrayCopy));
-          return;
-        }
-      }
-
-      filtersArrayCopy[keyIndex].value.push(option);
-      dispatch(SET_FILTERS_ARRAY(filtersArrayCopy));
-
-      return;
     }
   };
 
@@ -412,9 +282,7 @@ const CategorySidebar = ({
   }, [filtersInArray]);
 
   const toggleSubCategoryVisibility = index => {
-    // Toggle the visibility state of the specific Box at the given index
     setIsSubCategoryVisible(prevVisibility => {
-      // const newVisibility = [];
       const newVisibility = [...prevVisibility];
       newVisibility[index] = !newVisibility[index];
       return newVisibility;
@@ -423,9 +291,7 @@ const CategorySidebar = ({
 
   const [DataInDrawer, setDataInDrawer] = useState(inDrawer ? {} : true);
   const DataInDrawerToggler = categoryNumber => {
-    // setDataInDrawer(!DataInDrawer)
     setDataInDrawer({
-      // ...DataInDrawer,
       [categoryNumber]: !DataInDrawer[categoryNumber],
     });
   };
@@ -449,41 +315,6 @@ const CategorySidebar = ({
       }
     }
     return { minValue, maxValue };
-  };
-
-  const handleReviewFilter = (e, category, option) => {
-    const keyIndex = findIndexByKey([filtersInArray], 'review');
-    const filtersArrayCopy = JSON.parse(JSON.stringify(storeFilters));
-    const reveiwFilterArrayCopy = [...reveiwFilterArray];
-
-    if (!e.target.checked) {
-      const finIndex = reveiwFilterArray.findIndex(
-        item => item.id === option.id,
-      );
-      if (finIndex !== -1) {
-        reveiwFilterArrayCopy.splice(finIndex, 1);
-      }
-    }
-    if (e.target.checked) {
-      reveiwFilterArrayCopy.push(option);
-    }
-
-    setReveiwFilterArray([...reveiwFilterArrayCopy]);
-
-    const { minValue, maxValue } = getMinMax(reveiwFilterArrayCopy);
-
-    filtersArrayCopy[keyIndex].value.min = minValue;
-    filtersArrayCopy[keyIndex].value.max = maxValue;
-    dispatch(SET_FILTERS_ARRAY(filtersArrayCopy));
-  };
-
-  const clearReview = () => {
-    const keyIndex = findIndexByKey([filtersInArray], 'review');
-    const filtersArrayCopy = JSON.parse(JSON.stringify(storeFilters));
-    filtersArrayCopy[keyIndex].value.min = 0;
-    filtersArrayCopy[keyIndex].value.max = 0;
-    dispatch(SET_FILTERS_ARRAY(filtersArrayCopy));
-    setReveiwFilterArray([]);
   };
 
   const handleFilterChange = item => {
@@ -633,12 +464,7 @@ const CategorySidebar = ({
         {/* )} */}
         {(DataInDrawer[2] || !inDrawer) && (
           <Box ml={inDrawer ? 4 : 0} pb={2}>
-            <ReviewFilter
-              storeReivew={storeFilters[2]}
-              reviewOption={reviewOption}
-              clearReview={clearReview}
-              onChange={handleReviewFilter}
-            />
+            <ReviewFilter reviewOption={reviewOption} />
           </Box>
         )}
       </Grid>
@@ -657,7 +483,7 @@ const CategorySidebar = ({
           {/* {sidebarTitle !== budgetFilter && ( */}
           <FilterBarlayout2
             setReviewOptions={setReviewOptions}
-            clearFilter={handleClearFilter}
+            // clearFilter={handleClearFilter}
             filteChange={handleFilterChange}
             handleFilterSelect={handleFilterSelect}
             filtersInArray={filtersInArray}
