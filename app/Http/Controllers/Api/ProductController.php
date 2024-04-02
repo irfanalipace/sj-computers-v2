@@ -114,38 +114,40 @@ class ProductController extends BaseController
 
         $category = (isset($request->category) && $request->category) ? $request->category : [];
 
-        if ($category == 'bto') {
+        $categoryId = (isset($request->category_id) && $request->category_id) ? $request->category_id : [];
 
-            $data['brand'] = $this->queryProductInfo('brand', $category);
+        if ($categoryId == '30') {
 
-            $data['price'] = $this->queryProductInfo('price', $category);
+            $data['brand'] = $this->queryProductInfo('brand', $category,$categoryId);
 
-            $data['review'] = $this->queryProductInfo('review', $category);
+            $data['price'] = $this->queryProductInfo('price', $category,$categoryId);
 
-            return $this->sendResponse($data);
-        }
+            $data['review'] = $this->queryProductInfo('review', $category,$categoryId);
 
-        $data['processor'] = $this->queryProductInfo('processor', $category);
-        $data['ram_memory'] = $this->queryProductInfo('ram_memory', $category);
-        $data['operating_system'] = $this->queryProductInfo('operating_system', $category);
-        // $data['operating_system'] = [];
-        $data['hard_disk'] = $this->queryProductInfo('hard_disk', $category);
-        // $data['graphic'] = $this->queryProductInfo('graphic');
-        // $data['graphic'] = [];
-        $data['brand'] = $this->queryProductInfo('brand', $category);
+        } else{
 
-        $data['price'] = $this->queryProductInfo('price', $category);
+            $data['processor'] = $this->queryProductInfo('processor', $category,$categoryId);
 
-        $data['review'] = $this->queryProductInfo('review', $category);
+            $data['ram_memory'] = $this->queryProductInfo('ram_memory', $category);
 
-        $data['screen'] = $this->queryProductInfo('screen', $category);
-
-        // dd($data);
+            $data['operating_system'] = $this->queryProductInfo('operating_system', $category,$categoryId);
+            // $data['operating_system'] = [];
+            $data['hard_disk'] = $this->queryProductInfo('hard_disk', $category,$categoryId);
+            // $data['graphic'] = $this->queryProductInfo('graphic');
+            // $data['graphic'] = [];
+            $data['brand'] = $this->queryProductInfo('brand', $category,$categoryId);
+    
+            $data['price'] = $this->queryProductInfo('price', $category,$categoryId);
+    
+            $data['review'] = $this->queryProductInfo('review', $category,$categoryId);
+    
+            $data['screen'] = $this->queryProductInfo('screen', $category,$categoryId);
+        }      
 
         return $this->sendResponse($data);
     }
 
-    public function queryProductInfo($key, $category = [])
+    public function queryProductInfo($key, $category = [], $categoryId = [])
     {
         if (!empty($category) && $category != 'all') {
             $methodName = $this->getMethodNameFromCategory($category);
@@ -156,7 +158,14 @@ class ProductController extends BaseController
 
             $sql = $this->$methodName();
 
+        } 
+
+        if(!empty($categoryId)) {
+            $productIds = CategoryProduct::where('category_id', $categoryId)->pluck('product_id')->toArray();
+
+            $sql = Product::whereIn('id', $productIds);           
         }
+
         $sql = (isset($sql) && $sql) ? $sql : [];
 
         if ($key == 'ram_memory' || $key == 'hard_disk') {
@@ -350,12 +359,13 @@ class ProductController extends BaseController
             $min_rating = $averageRatings->min() ?? 0;
             $max_rating = $averageRatings->max() ?? 0;
         } else {
+           
             // Retrieve the minimum and maximum ratings directly from product_statistics table
             $minMaxRatings = ProductStatistic::query()
                 ->selectRaw('ROUND(MIN(JSON_EXTRACT(statistics, "$.rate.overall_rating")), 1) AS min_rating')
                 ->selectRaw('ROUND(MAX(JSON_EXTRACT(statistics, "$.rate.overall_rating")), 1) AS max_rating')
                 ->first();
-
+                
             $min_rating = $minMaxRatings->min_rating ?? 0;
             $max_rating = $minMaxRatings->max_rating ?? 0;
         }
