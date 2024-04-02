@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProductsGrid from '@components/ProductsGrid/ProductsGrid';
 // import { getProductsCategory } from '../../core/api/products';
 import { filterProducts } from '@store/products/productsThunks';
+import { SET_FILTERS_ARRAY } from '../../core/store/products/productsSlice';
 
 const ProductCategoryGrid = ({ pathValue, filters }) => {
   const categories = useSelector(state => state.category.categories);
@@ -171,6 +172,10 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
       filter: filteredData,
     };
     console.log(isMOunt);
+
+    if (filters) {
+      dispatch(SET_FILTERS_ARRAY(filters));
+    }
 
     if (!isEmpty(filteredData) || isMOunt) {
       console.log(filterObject);
