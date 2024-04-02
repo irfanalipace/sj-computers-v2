@@ -30,11 +30,11 @@ class CardRequest extends FormRequest
             'shipping_address.email' => 'required|email',
             'shipping_address.country' => 'required',
             'shipping_address.full_name' => 'required|max:50',
-            'shipping_address.phone_number' => 'required',
+            'shipping_address.phone_number' => 'required|regex:/^\+?[0-9]{10,15}$/',
             'shipping_address.address' => 'required',
             'shipping_address.city' => 'required',
             'shipping_address.state' => 'required',
-            'shipping_address.zip_code' => 'required',
+            'shipping_address.zip_code' => 'required|max:6',
             'shipping_address.permanent_address' => 'nullable'
         ];
 
@@ -44,11 +44,11 @@ class CardRequest extends FormRequest
                 'shipping_address.email' => 'required|email',
                 'shipping_address.country' => 'required',
                 'shipping_address.full_name' => 'required|max:50',
-                'shipping_address.phone_number' => 'required',
+                'shipping_address.phone_number' => 'required|regex:/^\+?[0-9]{10,15}$/',
                 'shipping_address.address' => 'required',
                 'shipping_address.city' => 'required',
                 'shipping_address.state' => 'required',
-                'shipping_address.zip_code' => 'required',
+                'shipping_address.zip_code' => 'required|max:6',
                 'is_guest' => 'required|boolean',
                 'cart_items' => 'required|array',
                 'cart_items.*.product_id' => 'required',
