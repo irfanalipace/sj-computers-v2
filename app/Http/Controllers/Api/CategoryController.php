@@ -11,9 +11,9 @@ class CategoryController extends BaseController
 {
     public function getList(request $request){
 
-        $data= Category::all();
+        $categories = Category::whereHas('products')->get();
 
-        return $this->sendResponse($data);
+        return $this->sendResponse($categories);
     }
 
     public function getCategoryProduct(CategoryProductRequest $request){

@@ -1,59 +1,71 @@
 import { Checkbox, Stack, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import StarRatings from 'react-star-ratings';
 import './FilterbarLayout2.css';
 import CloseIcon from '@mui/icons-material/Close';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_FILTERS_ARRAY } from '../../../../core/store/products/productsSlice';
 
-export default function ReviewFilter({
-  onChange,
-  clearReview,
-  reviewOption,
-  storeReivew,
-}) {
+export default function ReviewFilter({ reviewOption }) {
   const [checkedReview, setCheckedReview] = useState([]);
+  const dispatch = useDispatch();
+  const storeFilters = useSelector(state => state.products.filtersArray);
 
-  useEffect(() => {
-    if (!reviewOption.length) return;
-    const filterToBePushed = [];
-    for (let i = storeReivew?.value.min; i <= storeReivew?.value.max; i++) {
-      const index = reviewOption.findIndex(item => item.value === i);
+  const getIndexOfFilter = category => {
+    const indexOfFilter = storeFilters.findIndex(
+      filter => filter.key.toLowerCase() === category.toLowerCase(),
+    );
+    return indexOfFilter;
+  };
 
-      if (index !== -1) {
-        filterToBePushed.push(reviewOption[index].value);
-      }
+  const handleValueFilters = (event, categ, currentItem) => {
+    const indexOfFilter = getIndexOfFilter(categ);
+    const storeFiltersDuplicate = JSON.parse(JSON.stringify(storeFilters));
+
+    const values = storeFiltersDuplicate[indexOfFilter].value;
+    if (event.target.checked) values.push(currentItem);
+
+    if (!event.target.checked) {
+      const indexOfItemToBeRemoved = values.findIndex(
+        val => val === currentItem,
+      );
+
+      values.splice(indexOfItemToBeRemoved, 1);
     }
 
-    if (filterToBePushed.length > 0) {
-      const duplicatePriceArray = [...checkedReview, ...filterToBePushed];
-      const dd = new Set(duplicatePriceArray);
-      const dd1 = Array.from(dd);
-      setCheckedReview([...dd1]);
-    }
-  }, [reviewOption]);
+    dispatch(SET_FILTERS_ARRAY(storeFiltersDuplicate));
+  };
+
+  const clearReview = category => {
+    const storeFilterIndex = getIndexOfFilter(category);
+    const storeFiltersCopy = JSON.parse(JSON.stringify(storeFilters));
+
+    storeFiltersCopy[storeFilterIndex].value = [];
+    dispatch(SET_FILTERS_ARRAY(storeFiltersCopy));
+  };
 
   return (
     <>
-      {!!checkedReview.length && (
+      {!!storeFilters[getIndexOfFilter('review')].value.length && (
         <span
           style={{ position: 'absolute', top: 0, right: 25 }}
           className='filter-clear-btn'
-          onClick={() => {
-            clearReview();
-            setCheckedReview([]);
-          }}>
+          onClick={() => clearReview('review')}>
           <CloseIcon fontSize='14px' />
           Clear
         </span>
       )}
 
-      {reviewOption?.map((reveiw, index) => {
+      {reviewOption?.map(reveiw => {
         return (
           <Stack key={reveiw.id} direction={'row'} spacing={1} mt={0.5}>
             <label
               className='checkbox-container'
               htmlFor={reveiw.value.toString()}>
               <Checkbox
-                checked={checkedReview.includes(reveiw.id)}
+                checked={storeFilters[
+                  getIndexOfFilter('review')
+                ].value.includes(reveiw.value)}
                 id={`reveiw${reveiw.id}`}
                 namne={`reveiw-name${reveiw.id}`}
                 style={{
@@ -62,39 +74,15 @@ export default function ReviewFilter({
                 }}
                 icon={<span style={unchecked} />}
                 checkedIcon={<span style={checked} />}
-                onChange={event => {
-                  const co = [...checkedReview];
-                  if (event.target.checked) {
-                    co.push(reveiw.id);
-                  }
-                  if (!event.target.checked) {
-                    const findIndex = checkedReview.findIndex(
-                      item => item === reveiw.id,
-                    );
-                    co.splice(findIndex, 1);
-                  }
-                  setCheckedReview(co);
-
-                  onChange(event, 'reveiw', reveiw);
-                }}
+                onChange={event =>
+                  handleValueFilters(event, 'review', reveiw.value)
+                }
                 sx={{
                   '& .css-zun73v': {
                     padding: '0px !important',
                   },
                 }}
               />
-              {/* <input
-                id={reveiw.value.toString()}
-                type='checkbox'
-                style={{
-                  color: '#f2a742', // Default color
-                  padding: '0 !important',
-                  backgroundColor: ' #f2a742', // Background color when checked
-                }}
-                name={'s'}
-                onChange={event => onChange(event, 'reveiw', reveiw)}
-              /> */}
-              {/* <span className='radiomark '></span> */}
             </label>
             <StarRatings
               starDimension='18px'

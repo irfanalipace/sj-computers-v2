@@ -1,6 +1,24 @@
 .alignment-container {
   position: relative;
 }
+.palnaccord .MuiAccordionSummary-content {
+  margin: 2px;
+}
+
+.palnaccord .MuiSvgIcon-root {
+  margin-left: 0px !important;
+}
+.palnaccord .MuiButtonBase-root-MuiAccordionSummary-root.Mui-expanded {
+  min-height: 10px !important;
+  max-height: 10px !important;
+  margin: 2px !important;
+  height: 10px !important;
+  background-color: red;
+}
+.palnaccord .MuiButtonBase-root-MuiAccordionSummary-root {
+  min-height: '20px !important';
+  margin: 2px !important;
+}
 .align-to-end {
   /* justify-self: flex-end; */
   position: absolute;
