@@ -47,6 +47,7 @@ const FilterBarlayout2 = ({
   const filtersArray = useSelector(state => state.products.filtersArray);
   const [activePriceFiler, setActinePriceFilter] = useState('');
   const [customPriceError, setCustomPriceError] = useState('');
+  const [firstRender, setFirstRender] = useState(true);
 
   const [customPrice, setCustomPrice] = useState({
     id: 10,
@@ -478,8 +479,25 @@ const FilterBarlayout2 = ({
     });
   };
   useEffect(() => {
+    setFirstRender(false);
+  }, []);
+
+  const pathV = [
+    'touch-screen',
+    'top-rated-product',
+    'professional-laptop',
+    'workstation',
+    'budget-friendly',
+  ];
+
+  useEffect(() => {
     setTimeout(() => {
-      window.scrollTo({ top: 500, behavior: 'smooth' });
+      if (firstRender) return;
+      let top = 500;
+      if (pathV.includes(pathValue)) {
+        top = 300;
+      }
+      window.scrollTo({ top: top, behavior: 'smooth' });
     }, 300);
   }, [storeFilters]);
 

@@ -9,6 +9,7 @@ import './ProductsGrid.css';
 
 import Button from '@common/Button/Button';
 import { useEffect, useState } from 'react';
+import { Typography } from '@mui/material';
 
 export default function ProductsGrid({
   products,
@@ -59,6 +60,9 @@ export default function ProductsGrid({
               {/* </Link> */}
             </Col>
           ))}
+          {products.length === 0 && !isLoading && (
+            <Typography sx={{ textAlign: 'center' }}>No Product</Typography>
+          )}
         </Row>
 
         {products.length > 11 && (
