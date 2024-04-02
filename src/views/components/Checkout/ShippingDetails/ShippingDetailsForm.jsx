@@ -11,6 +11,34 @@ import {
   getCartItems,
 } from '../../../../core/utils/cartHelpers';
 
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object().shape({
+  address: Yup.string().required('Address is required'),
+  city: Yup.string().required('city is required'),
+  state: Yup.string().required('State is required'),
+  zip_code: Yup.string()
+    // .matches(/^\d{5}$/, 'Zip code must be 5 digits')
+    .required('Zip Code is required'),
+  email: Yup.string()
+    .email('Invalid email address')
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      'Invalid email',
+    )
+    .required('Email is required'),
+  full_name: Yup.string()
+    .min(3, 'Name must be at least 3 characters')
+    .matches(/^[A-Za-z ]+$/, 'Invalid name')
+    .required('Name is required'),
+  phone_number: Yup.string()
+    .matches(
+      // /^\+?1?\s?\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/,
+      /^\+?(\d{1,3})?[- ]?\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/,
+      'Invalid phone number',
+    )
+    .required('Phone number is required'),
+});
 function ShippingDetailsForm({
   address,
   handleHeight,
@@ -39,6 +67,7 @@ function ShippingDetailsForm({
     handleBlur,
     setErrors,
     isValid,
+    isSubmitting,
     setFieldValue,
   } = useFormik({
     initialValues: {
@@ -54,44 +83,7 @@ function ShippingDetailsForm({
       state: address?.state || 'Alabama',
       zip_code: address?.zip_code || '',
     },
-
-    validate: values => {
-      const errors = {};
-      const full_name_regex = /^[A-Za-z ]+$/;
-      const full_name = values.full_name;
-      if (!full_name) {
-        errors.full_name = '( Required )';
-      } else if (!full_name_regex.test(full_name)) {
-        errors.full_name =
-          '( Name must not contain numbers or special characters )';
-      }
-      if (!values.email) {
-        errors.email = '( Required )';
-      } else if (values.email) {
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-        const checkDotRegex = /^(?!.*@\.)/; // checks that dot(.) should not come immediately after @ in email
-
-        if (
-          !(emailRegex.test(values.email) && checkDotRegex.test(values.email))
-        ) {
-          errors.email = '( Email Format is Incorrect )';
-        }
-      }
-      if (!values.address) errors.address = '( Required )';
-      if (!values.phone_number) errors.phone_number = '( Required )';
-      const phoneNumberRegex = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-      if (phoneNumberRegex.test(values.phone_number)) {
-      } else {
-        errors.phone_number = 'Invalid phone number';
-      }
-      if (!values.city) errors.city = '( Required )';
-      if (!values.state) errors.state = '( Required )';
-      if (!values.zip_code) errors.zip_code = '( Required )';
-      // if (!values.suite) errors.suite = "( Required )";
-      //if (!values.apartment) errors.apartment = '( Required )';
-      return errors;
-    },
+    validationSchema: validationSchema,
 
     onSubmit: values => {
       submitShippingDetails({
@@ -101,14 +93,13 @@ function ShippingDetailsForm({
     },
   });
 
-  function isAnyValueEmptyExceptApartment(obj) {
-    for (const key in obj) {
-      if (key !== 'apartment' && obj[key] === '') {
-        return true;
-      }
-    }
-    return false;
-  }
+  const formatPhoneNumber = value => {
+    const phoneNumber = value.replace(/[^\d]/g, '');
+    if (phoneNumber.length <= 3) return phoneNumber;
+    if (phoneNumber.length <= 6)
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+  };
 
   const handlePermanentAddresses = e => {
     setPermanentAddress(e.target.checked);
@@ -180,6 +171,15 @@ function ShippingDetailsForm({
   // useEffect(() => {
   //     if (typeof cb === "function") handleHeight();
   // }, [errors]);
+
+  function isAnyValueEmptyExceptEmail(obj) {
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key) && key !== 'apartment' && obj[key] === '') {
+        return true;
+      }
+    }
+    return false;
+  }
 
   useEffect(() => {
     handleHeight(); // adjust height of accordion dynamically according to shipping address form
@@ -268,14 +268,15 @@ function ShippingDetailsForm({
               <input
                 id='phone_number'
                 name='phone_number'
+                maxLength='14'
                 className={
                   errors.email && touched.email
                     ? 'input-field border-danger'
                     : 'input-field'
                 }
                 type='text'
-                placeholder='Phone Number'
-                value={values?.phone_number}
+                placeholder='(987) 654-3210'
+                value={`${formatPhoneNumber(values?.phone_number)}`}
                 onChange={handleChange}
                 onBlur={handleBlur}></input>
               {/* {errors.phone_number && (
@@ -348,9 +349,7 @@ function ShippingDetailsForm({
                   onPlaceSelected={handlePlaceChange}
                 />
               </div>
-              {errors.address && touched.address && (
-                <p className='fs-6 mt-1 text-danger'>{errors.address}</p>
-              )}
+
               <br></br>
               {/* <input
                                 id="floorAddress"
@@ -451,6 +450,7 @@ function ShippingDetailsForm({
                   <input
                     id='zip_code'
                     name='zip_code'
+                    maxLength='5'
                     className={
                       errors.zip_code && touched.zip_code
                         ? 'input-field border-danger'
@@ -539,11 +539,19 @@ function ShippingDetailsForm({
 
             <ShippingButton
               handleClick={() => {
-                buttonClickHandler(null);
                 handleSubmitClick();
+                console.log({ values }, { errors });
+
+                if (
+                  Object.keys(errors).length === 0 &&
+                  !isAnyValueEmptyExceptEmail(values)
+                ) {
+                  buttonClickHandler(null);
+                }
+                return;
               }}
               isLoading={loading}
-              disabled={!isValid || isAnyValueEmptyExceptApartment(values)}>
+              disabled={isSubmitting}>
               Use this address
             </ShippingButton>
           </form>
