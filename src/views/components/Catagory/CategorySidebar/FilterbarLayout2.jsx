@@ -261,8 +261,6 @@ const FilterBarlayout2 = ({
         min = parseFloat(min);
         max = parseFloat(max);
 
-        debugger;
-
         if (one.includes(min) || one.includes(max)) {
           newArray.push({
             id: 1,

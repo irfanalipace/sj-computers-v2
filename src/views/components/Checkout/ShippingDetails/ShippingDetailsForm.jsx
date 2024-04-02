@@ -80,6 +80,11 @@ function ShippingDetailsForm({
       }
       if (!values.address) errors.address = '( Required )';
       if (!values.phone_number) errors.phone_number = '( Required )';
+      const phoneNumberRegex = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+      if (phoneNumberRegex.test(values.phone_number)) {
+      } else {
+        errors.phone_number = 'Invalid phone number';
+      }
       if (!values.city) errors.city = '( Required )';
       if (!values.state) errors.state = '( Required )';
       if (!values.zip_code) errors.zip_code = '( Required )';
@@ -87,6 +92,7 @@ function ShippingDetailsForm({
       //if (!values.apartment) errors.apartment = '( Required )';
       return errors;
     },
+
     onSubmit: values => {
       submitShippingDetails({
         ...values,
