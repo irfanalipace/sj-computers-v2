@@ -27,11 +27,13 @@ import { useParams } from 'react-router-dom';
 
 const FilterBarlayout2 = ({
   inDrawer,
+  isNewApi,
   DataInDrawerToggler,
   DataInDrawer,
   toggleDrawer,
   filtersInArray,
   filteChange,
+  upateFilters,
   pathValue,
   setReviewOptions,
 }) => {
@@ -126,6 +128,11 @@ const FilterBarlayout2 = ({
 
     if (['ram_memory', 'hard_disk'].includes(category)) {
       storeFiltersCopy[storeFilterIndex].unit = [];
+    }
+
+    if (typeof myProp === 'function' || isNewApi) {
+      upateFilters(storeFiltersCopy);
+      return;
     }
 
     dispatch(SET_FILTERS_ARRAY(storeFiltersCopy));
@@ -231,6 +238,11 @@ const FilterBarlayout2 = ({
       );
 
       values.splice(indexOfItemToBeRemoved, 1);
+    }
+
+    if (typeof myProp === 'function' || isNewApi) {
+      upateFilters(storeFiltersDuplicate);
+      return;
     }
 
     dispatch(SET_FILTERS_ARRAY(storeFiltersDuplicate));
@@ -650,6 +662,11 @@ const FilterBarlayout2 = ({
       }
 
       storeFiltersDuplicate[indexOfFilter].unit = getUnits(values);
+
+      if (typeof myProp === 'function' || isNewApi) {
+        upateFilters(storeFiltersDuplicate);
+        return;
+      }
 
       dispatch(SET_FILTERS_ARRAY(storeFiltersDuplicate));
     };

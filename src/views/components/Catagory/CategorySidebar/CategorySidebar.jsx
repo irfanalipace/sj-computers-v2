@@ -108,6 +108,10 @@ const CategorySidebar = ({
         brandFilter?.value?.push(gpu);
       }
     }
+    if (typeof myProp === 'function' || isNewApi) {
+      upateFilters(updatedFilters);
+      return;
+    }
     dispatch(SET_FILTERS_ARRAY(updatedFilters));
   };
 
@@ -143,12 +147,22 @@ const CategorySidebar = ({
       filtersArrayCopy[keyIndex].checked = [];
       filtersArrayCopy[keyIndex].value.unit = [];
 
+      if (typeof myProp === 'function' || isNewApi) {
+        upateFilters(filtersArrayCopy);
+        return;
+      }
+
       dispatch(SET_FILTERS_ARRAY(filtersArrayCopy));
       return;
     }
 
     if (arrayFilter.includes(categ)) {
       filtersArrayCopy[keyIndex].value = [];
+
+      if (typeof myProp === 'function' || isNewApi) {
+        upateFilters(filtersArrayCopy);
+        return;
+      }
       dispatch(SET_FILTERS_ARRAY(filtersArrayCopy));
       return;
     }
@@ -252,6 +266,11 @@ const CategorySidebar = ({
             ...new Set(filtersArrayCopy[keyIndex].value.unit),
           ];
 
+          if (typeof myProp === 'function' || isNewApi) {
+            upateFilters(filtersArrayCopy);
+            return;
+          }
+
           dispatch(SET_FILTERS_ARRAY(filtersArrayCopy));
           return;
         }
@@ -274,12 +293,6 @@ const CategorySidebar = ({
       items: makeDataLayerItemObject(products),
     });
   };
-
-  useEffect(() => {
-    if (typeof myProp === 'function' || isNewApi) {
-      upateFilters(filtersInArray);
-    }
-  }, [filtersInArray]);
 
   const toggleSubCategoryVisibility = index => {
     setIsSubCategoryVisible(prevVisibility => {
@@ -322,6 +335,11 @@ const CategorySidebar = ({
     const filtersArrayCopy = JSON.parse(JSON.stringify(storeFilters));
     filtersArrayCopy[keyIndex].value.min = item.priceMin;
     filtersArrayCopy[keyIndex].value.max = item.priceMax;
+
+    if (typeof myProp === 'function' || isNewApi) {
+      upateFilters(filtersArrayCopy);
+      return;
+    }
 
     dispatch(SET_FILTERS_ARRAY(filtersArrayCopy));
   };
@@ -464,7 +482,11 @@ const CategorySidebar = ({
         {/* )} */}
         {(DataInDrawer[2] || !inDrawer) && (
           <Box ml={inDrawer ? 4 : 0} pb={2}>
-            <ReviewFilter reviewOption={reviewOption} />
+            <ReviewFilter
+              isNewApi={isNewApi}
+              upateFilters={upateFilters}
+              reviewOption={reviewOption}
+            />
           </Box>
         )}
       </Grid>
@@ -484,6 +506,8 @@ const CategorySidebar = ({
           <FilterBarlayout2
             setReviewOptions={setReviewOptions}
             // clearFilter={handleClearFilter}
+            isNewApi={isNewApi}
+            upateFilters={upateFilters}
             filteChange={handleFilterChange}
             handleFilterSelect={handleFilterSelect}
             filtersInArray={filtersInArray}
