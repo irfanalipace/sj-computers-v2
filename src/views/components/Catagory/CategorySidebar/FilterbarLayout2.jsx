@@ -466,6 +466,11 @@ const FilterBarlayout2 = ({
       };
     });
   };
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo({ top: 500, behavior: 'smooth' });
+    }, 300);
+  }, [storeFilters]);
 
   let renderPrice = category => {
     return (
