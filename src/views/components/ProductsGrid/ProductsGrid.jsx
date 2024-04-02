@@ -22,7 +22,7 @@ export default function ProductsGrid({
   maximum,
 }) {
   const isShowMore = useSelector(state => state.products.isShowMore);
-  console.log(maximum, products.length);
+
   return (
     <div className='products-grid-wrapper'>
       <div className='products-grid product-gride-card-componets-mobile-screen mb-3 '>
