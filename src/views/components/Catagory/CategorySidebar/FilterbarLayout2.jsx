@@ -384,6 +384,7 @@ const FilterBarlayout2 = ({
       0,
       visibleEntries?.[category]?.visibleEntries,
     );
+
     return (
       <>
         {optionArray.map((option, index) => (

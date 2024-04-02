@@ -17,6 +17,7 @@ function Search() {
   const [selectedItem, setSelectedItem] = useState({ name: 'ALL', id: null });
   const [search, setSearch] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
+
   const searchString = useSelector(state => state.products.searchString);
   const selectedCategory = useSelector(
     state => state.products.selectedCategory,
@@ -30,7 +31,8 @@ function Search() {
 
   const handleItemClick = category => {
     setSelectedItem(category);
-    dispatch(SET_SELECTED_CATEGORY(category?.id));
+    dispatch(SET_SEARCH_STRING(category?.name));
+
     setDropdownOpen(false);
   };
 
@@ -41,8 +43,10 @@ function Search() {
       navigate('/products/search?s=' + search);
     }
   };
+
   useEffect(() => {
     setSearch(searchString || '');
+    
   }, [searchString]);
 
   useEffect(() => {
@@ -54,12 +58,10 @@ function Search() {
       to='javascript:void(0)'
       key={category.id}
       onClick={() => handleItemClick(category)}
-      className='dropdown-item ul-liste-items-all-buttons'
-    >
+      className='dropdown-item ul-liste-items-all-buttons'>
       <span
         className='text-decoration-none div-link-category-search'
-        style={{ fontSize: '13px' }}
-      >
+        style={{ fontSize: '13px' }}>
         {category.name}
       </span>
     </Link>
@@ -87,23 +89,19 @@ function Search() {
             className='btn btn-primary dropdown-toggle all-button'
             style={{ fontSize: '13px', border: '1px solid black' }}
             onClick={toggleDropdown}
-            disabled={location.pathname.includes('category')}
-          >
+            disabled={location.pathname.includes('category')}>
             {selectedItem.name}
           </button>
           <div
             className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}
-            style={{ maxHeight: '200px', overflowY: 'auto' }}
-          >
+            style={{ maxHeight: '200px', overflowY: 'auto' }}>
             <Link
               to='javascript:void(0)'
               onClick={() => handleItemClick({ name: 'ALL', id: null })}
-              className='dropdown-item ul-liste-items-all-buttons'
-            >
+              className='dropdown-item ul-liste-items-all-buttons'>
               <span
                 className='text-decoration-none'
-                style={{ fontSize: '13px' }}
-              >
+                style={{ fontSize: '13px' }}>
                 All Category
               </span>
             </Link>
@@ -112,7 +110,12 @@ function Search() {
         </div>
       </div>
 
-      <input type='hidden' name='search_param' value='all' id='search_param' />
+      <input
+        type='hidden'
+        name='search_param'
+        value={search}
+        id='search_param'
+      />
       <input
         type='search'
         className='form-control search-input-type'
@@ -129,8 +132,7 @@ function Search() {
         <button
           type='button'
           className='btn btn-success search-logo'
-          onClick={handleSearch}
-        >
+          onClick={handleSearch}>
           <FontAwesomeIcon
             icon={faSearch}
             size='1x'
