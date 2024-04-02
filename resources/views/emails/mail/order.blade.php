@@ -16,7 +16,7 @@
                             <tbody>
                             <tr>
                                 <td valign="top" align="center" width="100" style="background-color:#ffffff">
-                                    <img alt="SJ-Computers" style="width:134px" src="{{asset('js/images/header-logo-black.png')}}">
+                                    <img alt="SJ-Computers" style="width:134px" src="{{asset('logo/header-logo-black.png')}}">
                                 </td>
                             </tr>
                             <tr>
