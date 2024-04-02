@@ -31,6 +31,7 @@ Route::get('hold-release-product',[HoldReleaseController::class,'updateRecord'])
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
 Route::get('export-inventory',[InventoryController::class,'downloadInventoryFile'])->name('export-inventory');
 
 Route::get('gmarketingfeed',[MarketingController::class,'gmarketingfeed'])->name('gmarketingfeed');
