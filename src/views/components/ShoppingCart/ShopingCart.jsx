@@ -298,33 +298,8 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
                   </div>
                 </div>
                 <div className='mt-3 hide-on-mobile'></div>
-                <div
-                  className='card card-checkout  mb-5'
-                  style={{ borderRadius: 0 }}>
-                  <div className='card-body'>
-                    <div className='checkout-container'>
-                      <div className='card-body-text'>
-                        <h3
-                          className='hide-on-mobile'
-                          style={{
-                            fontSize: '16px',
-                            fontWeight: 600,
-                          }}>
-                          You might also like
-                        </h3>
-                        <h3
-                          className='hide-on-desktop'
-                          style={{
-                            fontSize: '20px',
-                            fontWeight: 600,
-                          }}>
-                          Recommended Products
-                        </h3>
-                        <SeggestedItems num={3} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
+                <SeggestedItems num={3} inCartPage={true} />
                 {IS_CHRISTMAS_HOLIDAYS && (
                   <div className='card card-checkout mt-3 mb-sm-0 mb-2'>
                     <div className='card-body'>

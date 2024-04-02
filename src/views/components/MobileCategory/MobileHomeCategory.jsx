@@ -97,7 +97,7 @@ const MobileHomeCategory = () => {
   const featuredItems = [
     {
       image: image1,
-      categoryLink: '/category/bto',
+      categoryLink: '/category/laptops',
       categoryName: 'Dell',
     },
     {

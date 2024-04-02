@@ -57,6 +57,7 @@ function useProductData() {
   const products = useSelector(state => state.products.products);
   const productLoading = useSelector(state => state.products.isLoading);
   const dispatch = useDispatch();
+  const ReviewState = useSelector(state => state?.review?.onStateChange);
 
   const { productId } = useParams();
 
@@ -93,7 +94,7 @@ function useProductData() {
     if (!productLoading) {
       getProductDetails();
     }
-  }, [productId]);
+  }, [productId, ReviewState]);
 
   useEffect(() => {
     if (!product) return;
