@@ -8,6 +8,7 @@ import { SET_FILTERS_ARRAY } from '../../../../core/store/products/productsSlice
 
 export default function ReviewFilter({ reviewOption, isNewApi, upateFilters }) {
   const [checkedReview, setCheckedReview] = useState([]);
+
   const dispatch = useDispatch();
   const storeFilters = useSelector(state => state.products.filtersArray);
 
