@@ -28,10 +28,7 @@ const EmptyCart = () => {
         </div>
       </div>
 
-      <div className='recommended-items-emptycart hide-on-mobile'>
-        <h3>Suggested Items</h3>
-        <SeggestedItems num={4} />
-      </div>
+      <SeggestedItems num={4} inEmptyCartPage={true} />
       {/* <p>
                 The price and availability of items at sjcomputers.us are
                 subject to change. The Cart is a temporary place to store a list
