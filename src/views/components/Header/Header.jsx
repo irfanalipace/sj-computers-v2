@@ -103,7 +103,21 @@ const Header = () => {
           <BottomNavigation />
           {/* </Suspense> */}
           <Suspense>
-            <MobileSearch screenWidth={screenWidth} />
+            <MobileSearch DeliverBtn={<Button
+                              className='dliver-set '
+                              variant='primary'
+                              onClick={handleShow}
+                              style={{
+                                background: '#00305E',
+                                border: '#00305E',
+                                fontSize: '12px',
+                                padding: '2px',
+                                textAlign: 'left',
+                              }}>
+                              <span className='deliver-text '>Deliver to </span>
+                              <br></br>
+                              {!loading && location1?.state}
+                            </Button>} screenWidth={screenWidth} />
           </Suspense>
           {Troubleshoot ? (
             <Suspense>
@@ -156,18 +170,18 @@ const Header = () => {
                               }}>
                               <span className='deliver-text '>Deliver to </span>
                               <br></br>
-                              {!loading && location1?.state}
+                              {currentState ? currentState?.name : <>{!loading && location1?.state}</>}
                             </Button>
                           </div>
                         </div>
-                        {/* {show && screenWidth > 576 && (
+                        {show  && (
                           <Suspense>
                             <LocationModal
                               isOpen={show}
                               handleClose={() => setShow(false)}
                             />
                           </Suspense>
-                        )} */}
+                        )}
                         <Search />
 
                         <div className='nav-right'>

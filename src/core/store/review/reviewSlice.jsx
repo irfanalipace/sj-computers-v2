@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   reviews: {},
+  onStateChange: false
 };
 
 const reviewSlice = createSlice({
@@ -14,7 +15,10 @@ const reviewSlice = createSlice({
     CLEAR_REVIEW: state => {
       state.reviews = {};
     },
+    REVIEW_CHANGED: state => {
+      state.onStateChange = !state.onStateChange
+    }
   },
 });
-export const { ADD_REVIEW, CLEAR_REVIEW } = reviewSlice.actions;
+export const { ADD_REVIEW, CLEAR_REVIEW, REVIEW_CHANGED } = reviewSlice.actions;
 export default reviewSlice.reducer;

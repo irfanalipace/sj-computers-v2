@@ -151,7 +151,7 @@ const MobileHomeCategoryLayout2 = () => {
     },
     {
       name: 'Accessories',
-      link: 'bto',
+      link: 'accessories',
       img_url: AccessoriesImgUpdate,
     },
     {

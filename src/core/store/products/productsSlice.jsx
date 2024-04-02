@@ -8,19 +8,12 @@ const filtesArrayOfObject = [
   },
   {
     key: 'ram_memory',
-    checked: [],
-    value: {
-      unit: [],
-      min: 0,
-      max: 0,
-    },
+    unit: [],
+    value: [],
   },
   {
     key: 'review',
-    value: {
-      min: 0,
-      max: 0,
-    },
+    value: [],
   },
   {
     key: 'price',
@@ -44,12 +37,8 @@ const filtesArrayOfObject = [
   },
   {
     key: 'hard_disk',
-    checked: [],
-    value: {
-      unit: [],
-      min: 0,
-      max: 0,
-    },
+    unit: [],
+    value: [],
   },
   {
     key: 'screen',

@@ -18,7 +18,7 @@ const MobileScreenModal = lazy(
   () => import('./MobileScreenModal/MobileScreenModal'),
 );
 
-const MobileSearch = ({ screenWidth }) => {
+const MobileSearch = ({ screenWidth, DeliverBtn }) => {
   const [showModal, setShowModal] = useState(false);
   const [search, setSearch] = useState('');
   const searchString = useSelector(state => state.products.searchString);
@@ -121,6 +121,7 @@ const MobileSearch = ({ screenWidth }) => {
           </div>
           <>
             <Link to='/'>
+               {DeliverBtn}
               <img
                 style={{ maxHeight: '100%', maxWidth: '100%' }}
                 src={BottomNavigationlogo}
@@ -168,6 +169,7 @@ const MobileSearch = ({ screenWidth }) => {
           </Link>
         </div>
       </div>
+     
 
       <div className='collapse-container'>
         <form onSubmit={handleSearch}>

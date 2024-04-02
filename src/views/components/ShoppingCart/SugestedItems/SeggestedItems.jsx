@@ -9,7 +9,7 @@ import StarRatings from 'react-star-ratings';
 import useAddToCart from '../../Product/CheckOutCard/useAddToCart';
 import { useSelector } from 'react-redux';
 
-const SeggestedItems = ({ num }) => {
+const SeggestedItems = ({ num, inCartPage, inEmptyCartPage }) => {
   const [products, setProducts] = useState([]);
   const [addingStates, setAddingStates] = useState({});
   const getFeaturedProduct = async () => {
@@ -117,26 +117,95 @@ const SeggestedItems = ({ num }) => {
   };
 
   return (
-    <div>
-      {products?.map((item, index) => (
-        <div className='suggested-item-container' key={index}>
-          <div className='suggested-item-image'>
-            <div>
-              <LazyLoadImage
-                width={'100%'}
-                height={'100%'}
-                src={item?.image}
-                alt={item?.name?.trim()?.split(' ')?.slice(0, 9)?.join(' ')}
-              />
-            </div>
-          </div>
+    <>
+      {products?.length > 0 && (
+        <>
+          {inCartPage ? (
+            <div
+              className='card card-checkout  mb-5'
+              style={{ borderRadius: 0 }}>
+              <div className='card-body'>
+                <div className='checkout-container'>
+                  <div className='card-body-text'>
+                    <h3
+                      className='hide-on-desktop'
+                      style={{
+                        fontSize: '20px',
+                        fontWeight: 600,
+                      }}>
+                      Recommended Products
+                    </h3>
 
-          <span className='suggested-items-content'>
-            <ProductDetails product={item} />
-          </span>
-        </div>
-      ))}
-    </div>
+                    <h3
+                      className='hide-on-mobile'
+                      style={{
+                        fontSize: '16px',
+                        fontWeight: 600,
+                      }}>
+                      You might also like
+                    </h3>
+
+                    <div>
+                      {products?.map((item, index) => (
+                        <div className='suggested-item-container' key={index}>
+                          <div className='suggested-item-image'>
+                            <div>
+                              <LazyLoadImage
+                                width={'100%'}
+                                height={'100%'}
+                                src={item?.image}
+                                alt={item?.name
+                                  ?.trim()
+                                  ?.split(' ')
+                                  ?.slice(0, 9)
+                                  ?.join(' ')}
+                              />
+                            </div>
+                          </div>
+
+                          <span className='suggested-items-content'>
+                            <ProductDetails product={item} />
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div
+              className={`recommended-items-emptycart ${inEmptyCartPage && 'hide-on-mobile'}`}>
+              {inEmptyCartPage && <h3>Suggested Items</h3>}
+              <div>
+                {products?.map((item, index) => (
+                  <div className='suggested-item-container' key={index}>
+                    <div className='suggested-item-image'>
+                      <div>
+                        <LazyLoadImage
+                          width={'100%'}
+                          height={'100%'}
+                          src={item?.image}
+                          alt={item?.name
+                            ?.trim()
+                            ?.split(' ')
+                            ?.slice(0, 9)
+                            ?.join(' ')}
+                        />
+                      </div>
+                    </div>
+
+                    <span className='suggested-items-content'>
+                      <ProductDetails product={item} />
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </>
+      )}
+    </>
   );
 };
 

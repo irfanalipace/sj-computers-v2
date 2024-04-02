@@ -7,7 +7,7 @@ import { faCheck, faCamera } from '@fortawesome/free-solid-svg-icons';
 import FileUpload from '../../FileUploadReview/FileUpload';
 import CustomPhotoLibrary from '../../FileUploadReview/CustomPhotoLibrary';
 import Rating from '@mui/material/Rating';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUserId } from '@services/authService';
 import { useNavigate } from 'react-router-dom';
 import LoaderComponent from '@common/LoaderComponent/LoaderComponent';
@@ -19,6 +19,7 @@ import Breadcrumb from '@common/Breadrumb/Breadcrumb';
 import { useSearchParams } from 'react-router-dom';
 import { LoadingOverlay } from '@mantine/core';
 import { generatePath } from '../../../../core/utils/helpers';
+import { REVIEW_CHANGED } from '../../../../core/store/review/reviewSlice'
 
 const ProductNewReviews = () => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ const ProductNewReviews = () => {
   const [productImages, setProductImages] = useState([]);
   const products = useSelector(state => state.products.products);
   const [LoadingOverlay, setOverlayLoader] = useState(false);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     getProductDetails();
@@ -165,6 +167,9 @@ const ProductNewReviews = () => {
       await productPreviewApi(reviewData);
       navigate(`${generatePath(product?.url)}`);
       toast.success('Product Review Successfully Added');
+      // window.location.reload();
+       dispatch(REVIEW_CHANGED());
+      
     } catch (error) {
       console.error('Error submitting review:', error.message);
     } finally {

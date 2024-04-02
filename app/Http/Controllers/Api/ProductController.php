@@ -114,38 +114,40 @@ class ProductController extends BaseController
 
         $category = (isset($request->category) && $request->category) ? $request->category : [];
 
-        if ($category == 'bto') {
+        $categoryId = (isset($request->category_id) && $request->category_id) ? $request->category_id : [];
 
-            $data['brand'] = $this->queryProductInfo('brand', $category);
+        if ($categoryId == '30') {
 
-            $data['price'] = $this->queryProductInfo('price', $category);
+            $data['brand'] = $this->queryProductInfo('brand', $category,$categoryId);
 
-            $data['review'] = $this->queryProductInfo('review', $category);
+            $data['price'] = $this->queryProductInfo('price', $category,$categoryId);
 
-            return $this->sendResponse($data);
-        }
+            $data['review'] = $this->queryProductInfo('review', $category,$categoryId);
 
-        $data['processor'] = $this->queryProductInfo('processor', $category);
-        $data['ram_memory'] = $this->queryProductInfo('ram_memory', $category);
-        $data['operating_system'] = $this->queryProductInfo('operating_system', $category);
-        // $data['operating_system'] = [];
-        $data['hard_disk'] = $this->queryProductInfo('hard_disk', $category);
-        // $data['graphic'] = $this->queryProductInfo('graphic');
-        // $data['graphic'] = [];
-        $data['brand'] = $this->queryProductInfo('brand', $category);
+        } else{
 
-        $data['price'] = $this->queryProductInfo('price', $category);
+            $data['processor'] = $this->queryProductInfo('processor', $category,$categoryId);
 
-        $data['review'] = $this->queryProductInfo('review', $category);
+            $data['ram_memory'] = $this->queryProductInfo('ram_memory', $category);
 
-        $data['screen'] = $this->queryProductInfo('screen', $category);
-
-        // dd($data);
+            $data['operating_system'] = $this->queryProductInfo('operating_system', $category,$categoryId);
+            // $data['operating_system'] = [];
+            $data['hard_disk'] = $this->queryProductInfo('hard_disk', $category,$categoryId);
+            // $data['graphic'] = $this->queryProductInfo('graphic');
+            // $data['graphic'] = [];
+            $data['brand'] = $this->queryProductInfo('brand', $category,$categoryId);
+    
+            $data['price'] = $this->queryProductInfo('price', $category,$categoryId);
+    
+            $data['review'] = $this->queryProductInfo('review', $category,$categoryId);
+    
+            $data['screen'] = $this->queryProductInfo('screen', $category,$categoryId);
+        }      
 
         return $this->sendResponse($data);
     }
 
-    public function queryProductInfo($key, $category = [])
+    public function queryProductInfo($key, $category = [], $categoryId = [])
     {
         if (!empty($category) && $category != 'all') {
             $methodName = $this->getMethodNameFromCategory($category);
@@ -156,7 +158,14 @@ class ProductController extends BaseController
 
             $sql = $this->$methodName();
 
+        } 
+
+        if(!empty($categoryId)) {
+            $productIds = CategoryProduct::where('category_id', $categoryId)->pluck('product_id')->toArray();
+
+            $sql = Product::whereIn('id', $productIds);           
         }
+
         $sql = (isset($sql) && $sql) ? $sql : [];
 
         if ($key == 'ram_memory' || $key == 'hard_disk') {
@@ -350,12 +359,13 @@ class ProductController extends BaseController
             $min_rating = $averageRatings->min() ?? 0;
             $max_rating = $averageRatings->max() ?? 0;
         } else {
+           
             // Retrieve the minimum and maximum ratings directly from product_statistics table
             $minMaxRatings = ProductStatistic::query()
                 ->selectRaw('ROUND(MIN(JSON_EXTRACT(statistics, "$.rate.overall_rating")), 1) AS min_rating')
                 ->selectRaw('ROUND(MAX(JSON_EXTRACT(statistics, "$.rate.overall_rating")), 1) AS max_rating')
                 ->first();
-
+                
             $min_rating = $minMaxRatings->min_rating ?? 0;
             $max_rating = $minMaxRatings->max_rating ?? 0;
         }
@@ -573,6 +583,7 @@ class ProductController extends BaseController
 
                 $key = $filter['key'] ?? '';
                 $value = $filter['value'] ?? '';
+                $unit = $filter['unit'] ?? '';
 
                 if (empty($key) || empty($value)) {
                     continue;
@@ -580,7 +591,7 @@ class ProductController extends BaseController
 
 
                 if ($key == 'ram_memory' || $key == 'hard_disk') {
-                    $productIds = $this->getProductFilterIds($key, $value['unit'], (int)$value['min'], (int)$value['max']);
+                    $productIds = $this->getProductFilterIds($key, $unit, (array)$value);
 
                     $sql = $sql->whereIn('id', $productIds);
                 }
@@ -666,7 +677,7 @@ class ProductController extends BaseController
     }
 
 
-    public function getProductFilterIds($key, $units, int $min, int $max)
+    public function getProductFilterIds($key, $units, array $values)
     {
         //        $query = '';
 
@@ -684,27 +695,55 @@ class ProductController extends BaseController
         //            $ids = $query->pluck('product_id')
         //                ->toArray();
         //        }
-        if ($min === 0 && $max === 0) {
-            // If both min and max are 0, explicitly return null as required.
-            return null;
-        }
+        // if ($min === 0 && $max === 0) {
+        //     // If both min and max are 0, explicitly return null as required.
+        //     return null;
+        // }
 
-        $record = DB::table('product_infos')->where('key', $key)
+        // $record = DB::table('product_infos')->where('key', $key)
+        //     ->where(function ($query) use ($units) {
+        //         foreach ($units as $unit) {
+        //             $query->orWhere('value', 'like', '%' . $unit);
+        //         }
+        //     })
+        //     ->select(DB::raw("CAST(REPLACE(REPLACE(value, 'GB', ''), 'TB', '000') AS UNSIGNED) AS value"), 'product_id')
+        //     ->get();
+
+        // $productInfos = $record->filter(function ($item) use ($min, $max) {
+        //     // Convert the item value based on the presence of 'TB' or 'GB' in the string.
+        //     $valueInGB = strtolower(substr($item->value, -2)) === 'tb' ? ((int)$item->value * 1000) : (int)$item->value;
+        //     return $valueInGB >= $min && $valueInGB <= $max;
+        // })
+        //     ->pluck('product_id')
+        //     ->toArray();
+
+        // return array_unique($productInfos);
+          // First, convert all input values to GB for uniform comparison
+        $valuesInGB = array_map(function ($value) {
+            list($number, $unit) = sscanf($value, '%d %s');
+            return strtolower($unit) === 'tb' ? $number * 1000 : $number;
+        }, $values);
+
+        $records = DB::table('product_infos')->where('key', $key)
             ->where(function ($query) use ($units) {
                 foreach ($units as $unit) {
+                    // Adjust the like statement to match the expected format (e.g., % GB or % TB)
                     $query->orWhere('value', 'like', '%' . $unit);
                 }
             })
-            ->select(DB::raw("CAST(REPLACE(REPLACE(value, 'GB', ''), 'TB', '000') AS UNSIGNED) AS value"), 'product_id')
             ->get();
 
-        $productInfos = $record->filter(function ($item) use ($min, $max) {
-            // Convert the item value based on the presence of 'TB' or 'GB' in the string.
-            $valueInGB = strtolower(substr($item->value, -2)) === 'tb' ? ((int)$item->value * 1000) : (int)$item->value;
-            return $valueInGB >= $min && $valueInGB <= $max;
+        $productInfos = $records->filter(function ($item) use ($valuesInGB) {
+            // Extract numerical value and convert to GB for comparison
+            $value = (int)preg_replace('/[^0-9]/', '', $item->value);
+            $isTB = stripos($item->value, 'TB') !== false;
+            $valueInGB = $isTB ? $value * 1000 : $value;
+
+            // Check if the $valueInGB is in the array of specified GB values
+            return in_array($valueInGB, $valuesInGB);
         })
-            ->pluck('product_id')
-            ->toArray();
+        ->pluck('product_id')
+        ->toArray();
 
         return array_unique($productInfos);
     }
@@ -908,31 +947,30 @@ class ProductController extends BaseController
         // Apply review filter
         if ($key == 'review' && !empty($value)) {
             $reviewFilter = $value;
-            // $query = Product::where('id', 68)
-            // ->whereHas('productStats', function ($query) use ($reviewFilter) {
-            //     $overallRatingPath = '$.statistics.overall_rating';
-
-            //     if ($reviewFilter['min'] === $reviewFilter['max']) {
-            //         // Exact match
-            //         $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') = ?", [$reviewFilter['min']]);
-            //     } else {
-            //         // Range query
-            //         $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') BETWEEN ? AND ?", [
-            //             $reviewFilter['min'],
-            //             $reviewFilter['max']
-            //         ]);
-            //     }
-            // });
             $query = $query->whereHas('productStats', function ($query) use ($reviewFilter) {
                 $overallRatingPath = '$.rate.overall_rating';
 
                 // Since you are looking for a range, we use BETWEEN in this case
-                $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') BETWEEN ? AND ?", [
-                    $reviewFilter['min'],
-                    $reviewFilter['max']
-                ]);
-            });
+                // $query->whereRaw("JSON_VALUE(statistics, '$overallRatingPath') BETWEEN ? AND ?", [
+                //     $reviewFilter['min'],
+                //     $reviewFilter['max']
+                // ]);
 
+                // Constructing a raw SQL condition to match any of the specified JSON values
+                $jsonConditions = collect($reviewFilter)->map(function($val) use ($overallRatingPath) {
+                    // If the value is "5.00", only match exactly "5.00"
+                    if ($val == "5.00") {
+                        return "JSON_UNQUOTE(JSON_EXTRACT(statistics, '$overallRatingPath')) = '5.00'";
+                    } else {
+                        // For other values, create a range condition
+                        $start = $val;
+                        $end = bcadd($val, '0.99', 2); // Adds 0.99 to the value, keeping 2 decimal places
+                        return "(JSON_UNQUOTE(JSON_EXTRACT(statistics, '$overallRatingPath')) >= '$start' AND JSON_UNQUOTE(JSON_EXTRACT(statistics, '$overallRatingPath')) < '$end')";
+                    }
+                })->join(' OR ');
+            
+                $query->whereRaw("(" . $jsonConditions . ")");
+                });
 
         }
         return $query->orderBy('price', 'asc');

@@ -88,8 +88,8 @@ export function searchProductsApi(data) {
 
 export function filterProductsApi(filter) {
   const newData = Object.keys(filter.filter).map(key => {
-    const { key: objKey, value } = filter.filter[key];
-    return { key: objKey, value };
+    const { key: objKey, value, unit } = filter.filter[key];
+    return { key: objKey, value, unit };
   });
 
   filter.filter = newData?.map(fil => JSON.stringify(fil));
