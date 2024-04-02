@@ -6,8 +6,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_FILTERS_ARRAY } from '../../../../core/store/products/productsSlice';
 
-export default function ReviewFilter({ reviewOption }) {
+export default function ReviewFilter({ reviewOption, isNewApi, upateFilters }) {
   const [checkedReview, setCheckedReview] = useState([]);
+
   const dispatch = useDispatch();
   const storeFilters = useSelector(state => state.products.filtersArray);
 
@@ -33,6 +34,11 @@ export default function ReviewFilter({ reviewOption }) {
       values.splice(indexOfItemToBeRemoved, 1);
     }
 
+    if (typeof myProp === 'function' || isNewApi) {
+      upateFilters(storeFiltersDuplicate);
+      return;
+    }
+
     dispatch(SET_FILTERS_ARRAY(storeFiltersDuplicate));
   };
 
@@ -41,6 +47,11 @@ export default function ReviewFilter({ reviewOption }) {
     const storeFiltersCopy = JSON.parse(JSON.stringify(storeFilters));
 
     storeFiltersCopy[storeFilterIndex].value = [];
+
+    if (typeof myProp === 'function' || isNewApi) {
+      upateFilters(storeFiltersCopy);
+      return;
+    }
     dispatch(SET_FILTERS_ARRAY(storeFiltersCopy));
   };
 
