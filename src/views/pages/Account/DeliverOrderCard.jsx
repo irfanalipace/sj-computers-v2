@@ -135,7 +135,9 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
         className='p-0'>
         {isSmallScreen && (
           <div style={{ padding: '5px 10px', textAlign: 'center' }}>
-            Tracking id : {'#' + orders?.tracking_id ? orders?.tracking_id : ''}{' '}
+            Tracking id #{'#' + orders?.tracking_id ? orders?.tracking_id : ''}{' '}
+            <br />
+            Order id #{orders?.id}
           </div>
         )}
         <CardHeader>
@@ -166,7 +168,18 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
           {!isSmallScreen && (
             <div>
               Tracking id {'#' + orders?.tracking_id ? orders?.tracking_id : ''}{' '}
-              <br />{' '}
+              <br />
+              <span
+                style={{
+                  color: 'black',
+                  fontSize: '14px',
+                  display: 'inline-block',
+                  width: '50%',
+                  textAlign: 'start',
+                }}>
+                {' '}
+                Order id #{orders?.id}{' '}
+              </span>
               <Link
                 to={{
                   pathname: `/account/orders/order-details/${orders?.id}`,
@@ -175,6 +188,9 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
                   color: '#318243',
                   textDecoration: 'none',
                   fontSize: '12px',
+                  display: 'inline-block',
+                  width: '50%',
+                  textAlign: 'end',
                 }}>
                 View Order Details
               </Link>
