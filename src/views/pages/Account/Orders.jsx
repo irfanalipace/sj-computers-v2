@@ -45,9 +45,11 @@ const OrderPage = () => {
   const isLoading = useSelector(state => state.orders.isLoading);
   const cancelOrders = useSelector(state => state.orders.cancelOrders);
   const successOrders = useSelector(state => state.orders.successOrders);
+  const deliveredOrders = useSelector(
+    state => state.orders.orderDetails?.delivered_orders,
+  );
   const orderDetails = useSelector(state => state.orders.orderDetails);
   const products = useSelector(state => state?.products?.products);
-  const [orderSearchData, setOrderSearchData] = useState(successOrders);
   // console.print(orderDetails.total, 'total')
 
   const handleDropdownChange = value => {
@@ -70,12 +72,11 @@ const OrderPage = () => {
 
   useEffect(() => {
     if (orderSearch === '') {
-      setOrderSearchData(successOrders);
+      dispatch(getOrderDetails(1, ''));
     }
-  }, [orderSearch, successOrders]);
+  }, [orderSearch]);
 
   const handleTabChange = (event, newValue) => {
-    setOrderSearchData([]);
     setActiveTab(newValue);
     setOrderSearch('');
   };
@@ -83,8 +84,7 @@ const OrderPage = () => {
     // setActiveTab(2);
     // console.print(orderSearch, "input")
     setLocalLoading(true);
-    const responseSearch = await OrderSearchApi(orderSearch);
-    setOrderSearchData(responseSearch);
+    await dispatch(getOrderDetails(1, orderSearch));
     setLocalLoading(false);
     // setOrderSearch("");
     return;
@@ -112,9 +112,9 @@ const OrderPage = () => {
       return <LoaderComponent />;
     }
     return activeTab === 0 ? (
-      orderSearchData?.length > 0 ? (
+      successOrders?.length > 0 ? (
         <OrderCard
-          data={orderSearchData}
+          data={successOrders}
           totalItems={orderDetails}
           sendToPage={updatePage}
         />
@@ -126,9 +126,9 @@ const OrderPage = () => {
         </>
       )
     ) : activeTab === 1 ? (
-      <DeliveryOrderCard data={orderSearchData} />
+      <DeliveryOrderCard data={deliveredOrders} />
     ) : activeTab === 2 ? (
-      <DeliveryOrderCard data={successOrders} cancelled={true} />
+      <DeliveryOrderCard data={deliveredOrders} cancelled={true} />
     ) : null;
   };
   return (

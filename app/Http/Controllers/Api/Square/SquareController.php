@@ -56,7 +56,6 @@ class SquareController extends BaseController
     // charge process
     public function processPayment($request,$user,$userType,$cartDetails)
     {      
-
         try {
             $idempotencyKey = uniqid();
             
@@ -74,15 +73,16 @@ class SquareController extends BaseController
           
             DB::beginTransaction();
          
-            $cartContent = \Cart::session($userIdToPass)->getContent();
+            $cartContent = (isset($request->is_buy_now ) && $request->is_buy_now == true) ? \Cart::session($userIdToPass)->get($request->cart_id) : \Cart::session($userIdToPass)->getContent();
             $listofItems = ($userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
            
-            $check_product_first = $this->repository->checkProduct($listofItems,$userIdToPass,$userType);
+            $check_product_first = $this->repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($request->is_buy_now ) && $request->is_buy_now),StatusEnum::PAYMENTTYPESQUARE);
+           
             if (!$check_product_first) {
                 $error = ['cartError' => 'Product quantity is invalid.'];
                 throw new Exception(json_encode($error));
             }
-           
+            
             // create invoice along with order
             $orderData = [];
             
@@ -106,7 +106,7 @@ class SquareController extends BaseController
                 $orderData['estimate_day'] =  $this->estimate_days ?? Carbon::now()->addWeekdays(5)->format('l d-m-Y');
             }
             
-            $order = $this->repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems);
+            $order = $this->repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems,(isset($request->is_buy_now ) && $request->is_buy_now));
             if (!$order) {
                throw new Exception('Please Try Again.');
             }
