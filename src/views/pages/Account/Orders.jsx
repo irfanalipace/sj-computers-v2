@@ -89,7 +89,11 @@ const OrderPage = () => {
     // setOrderSearch("");
     return;
   };
-
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
   // console.log(
   //   orderSearchData,
   //   'orderSearchData',
@@ -152,11 +156,16 @@ const OrderPage = () => {
                   <SearchIcon />
                 </div>
                 <input
-                  id='orderSearch'
-                  name='orderSearch'
+                  type='search'
+                  //className='form-control search-input-type'
+                  name='x'
+                  id='search'
+                  // id='orderSearch'
+                  // name='orderSearch'
                   placeholder='Search all orders'
                   value={orderSearch}
                   onChange={e => setOrderSearch(e.target.value)}
+                  onKeyPress={handleKeyPress}
                   className={
                     orderSearch
                       ? 'form-control form-control-sm my-lg-0 search-input green'
@@ -244,8 +253,8 @@ const OrderPage = () => {
                   <p className='orderType'>
                     {activeTab === 0 ? (
                       <>
-                        {orderDetails?.success_orders?.data.length >= 0 ? (
-                          `${orderDetails?.success_orders?.data.length} orders`
+                        {orderDetails?.success_orders?.data?.length >= 0 ? (
+                          `${orderDetails.success_orders.total} orders`
                         ) : (
                           <LoaderComponent />
                         )}
