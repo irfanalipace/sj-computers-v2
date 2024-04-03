@@ -136,13 +136,13 @@ class ProductController extends BaseController
             // $data['graphic'] = $this->queryProductInfo('graphic');
             // $data['graphic'] = [];
             $data['brand'] = $this->queryProductInfo('brand', $category,$categoryId);
-    
+
             $data['price'] = $this->queryProductInfo('price', $category,$categoryId);
-    
+
             $data['review'] = $this->queryProductInfo('review', $category,$categoryId);
-    
+
             $data['screen'] = $this->queryProductInfo('screen', $category,$categoryId);
-        }      
+        }
 
         return $this->sendResponse($data);
     }
@@ -158,12 +158,12 @@ class ProductController extends BaseController
 
             $sql = $this->$methodName();
 
-        } 
+        }
 
         if(!empty($categoryId)) {
             $productIds = CategoryProduct::where('category_id', $categoryId)->pluck('product_id')->toArray();
 
-            $sql = Product::whereIn('id', $productIds);           
+            $sql = Product::whereIn('id', $productIds);
         }
 
         $sql = (isset($sql) && $sql) ? $sql : [];
@@ -359,13 +359,13 @@ class ProductController extends BaseController
             $min_rating = $averageRatings->min() ?? 0;
             $max_rating = $averageRatings->max() ?? 0;
         } else {
-           
+
             // Retrieve the minimum and maximum ratings directly from product_statistics table
             $minMaxRatings = ProductStatistic::query()
                 ->selectRaw('ROUND(MIN(JSON_EXTRACT(statistics, "$.rate.overall_rating")), 1) AS min_rating')
                 ->selectRaw('ROUND(MAX(JSON_EXTRACT(statistics, "$.rate.overall_rating")), 1) AS max_rating')
                 ->first();
-                
+
             $min_rating = $minMaxRatings->min_rating ?? 0;
             $max_rating = $minMaxRatings->max_rating ?? 0;
         }
@@ -400,7 +400,10 @@ class ProductController extends BaseController
             // If screen sizes are found, add them to the result array
             if (!empty($matches[0])) {
                 foreach ($matches[1] as $match) {
-                    $extractedSizes[] = $match . ' Inch';
+                    // Check if the size is greater than or equal to 10 inches before adding it
+                    if ($match >= 8) {
+                        $extractedSizes[] = $match . ' Inch';
+                    }
                 }
             }
         }
@@ -423,8 +426,6 @@ class ProductController extends BaseController
 
         return $formattedSizes;
     }
-
-
 
     private function getOperatingSystem($sql = [])
     {
@@ -968,7 +969,7 @@ class ProductController extends BaseController
                         return "(JSON_UNQUOTE(JSON_EXTRACT(statistics, '$overallRatingPath')) >= '$start' AND JSON_UNQUOTE(JSON_EXTRACT(statistics, '$overallRatingPath')) < '$end')";
                     }
                 })->join(' OR ');
-            
+
                 $query->whereRaw("(" . $jsonConditions . ")");
                 });
 
