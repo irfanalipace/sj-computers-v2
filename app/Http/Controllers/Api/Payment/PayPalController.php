@@ -162,12 +162,12 @@ class PayPalController extends Controller
             }
             
             
-                
+              
             $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
             if (!$order) {           
                 return redirect()->route('cancel');
             }    
-
+           
             $orderData['order_detail'] = $order['order'];
             $orderData['payer_id'] = $response['id'];
 
@@ -194,7 +194,7 @@ class PayPalController extends Controller
                 // If you need to display more details, add them here accordingly
 
                 //clear cart after successfull payment
-                (isset($getCache->is_buy_now ) && $getCache->is_buy_now == true) ? \Cart::session($userIdToPass)->remove($getCache['cart_id']) : \Cart::session($userIdToPass)->clear();
+            (isset($getCache->is_buy_now ) && $getCache->is_buy_now == true) ? \Cart::session($userIdToPass)->remove($getCache->cart_id) : \Cart::session($userIdToPass)->clear();
                 
                 //clear cart condition            
             \Cart::session($userIdToPass)->clearCartConditions();
