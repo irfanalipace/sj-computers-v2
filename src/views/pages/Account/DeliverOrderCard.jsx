@@ -15,9 +15,9 @@ import { useState } from 'react';
 const DeliveryOrderCard = ({ data, cancelled }) => {
   const [expandedOrders, setExpandedOrders] = useState([]);
 
-  const filteredData = data?.filter(
-    orders => orders?.fedex_status === 'Delivered',
-  );
+  // const filteredData = data?.filter(
+  //   orders => orders?.fedex_status === 'Delivered',
+  // );
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const userName = useSelector(state => state?.auth?.user?.name);
@@ -117,11 +117,11 @@ const DeliveryOrderCard = ({ data, cancelled }) => {
     );
   };
 
-  if (filteredData?.length === 0) {
+  if (data?.data?.length === 0) {
     return <div>No Orders found</div>;
   }
 
-  return filteredData?.map(orders => (
+  return data?.data?.map(orders => (
     <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
       <Card
         style={{
