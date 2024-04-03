@@ -22,6 +22,18 @@
   text-transform: capitalize;
 }
 
+/* price */
+.css-o4b71y-MuiAccordionSummary-content.Mui-expanded {
+  margin: 0 !important;
+}
+
+.css-5u1r51-MuiButtonBase-root-MuiAccordionSummary-root.Mui-expanded {
+  min-height: unset !important;
+}
+
+/* .css-15v22id-MuiAccordionDetails-root {
+  padding: 0 !important;
+} */
 .layout2-filter-bar .filters-list .filter-value {
   font-weight: 400;
   font-size: 14px;
