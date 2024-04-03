@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, useMantineTheme, Button } from '@mantine/core';
 import Pagination from '@mui/material/Pagination';
 
@@ -22,6 +22,9 @@ function OrderProducts({ data, totalItems, sendToPage }) {
   );
   const perPage = 12; // Adjust the number of items per page as needed
   // ...
+  useEffect(() => {
+    window.scrollTo({ top: 100, behavior: 'smooth' });
+  }, [currentPage]);
 
   const pageCount = Math.ceil(totalRecords / perPage);
 
@@ -295,18 +298,6 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                     ))}
                 </>
               </>
-              {/* <div
-                className='my-2'
-                style={{
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                }}>
-                <Pagination
-                  count={pageCount}
-                  page={currentPage}
-                  onChange={goToPage}
-                />
-              </div> */}
             </div>
             <>
               {' '}
@@ -374,6 +365,14 @@ function OrderProducts({ data, totalItems, sendToPage }) {
           </div>
         </Card>
       ))}
+      <div
+        className='my-2'
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+        }}>
+        <Pagination count={pageCount} page={currentPage} onChange={goToPage} />
+      </div>
     </>
   );
 }
