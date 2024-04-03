@@ -20,7 +20,7 @@ function OrderSummary({
   const dispatch = useDispatch();
   const placingOrder = useSelector(state => state.orders.placingOrder);
   const cartSlice = useSelector(state => state.cart);
-  const paymentData = usePaymentData(true);
+  const paymentData = usePaymentData();
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');
 

@@ -19,7 +19,7 @@ function MobileSummary({
 }) {
   const dispatch = useDispatch();
   const placingOrder = useSelector(state => state.orders.placingOrder);
-  const paymentData = usePaymentData(true);
+  const paymentData = usePaymentData();
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const cartSlice = useSelector(state => state.cart);

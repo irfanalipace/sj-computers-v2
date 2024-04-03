@@ -95,8 +95,8 @@ export default function ThankYou() {
       window.localStorage.setItem('thankyouOrderDetails', orderString);
       setOrderDetails(order);
 
-      clearCartLocally();
-      dispatch(CLEAR_CART());
+      // clearCartLocally();
+      // dispatch(CLEAR_CART());
       if (!window.dataLayer) {
         window.dataLayer = window.dataLayer || [];
       }
@@ -331,7 +331,13 @@ export default function ThankYou() {
                   style={{ justifyContent: 'center' }}>
                   <button
                     className='shop-more-btn'
-                    onClick={() => navigate('/')}>
+                    onClick={() => {
+                      if (orderDetails?.guest) {
+                        window.location.pathname = '/';
+                      } else {
+                        navigate('/');
+                      }
+                    }}>
                     Shop again
                   </button>
                 </div>

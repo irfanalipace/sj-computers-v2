@@ -1,7 +1,7 @@
 import { PaymentForm, CreditCard } from 'react-square-web-payments-sdk';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { CLEAR_CART } from '@store/cart/cartSlice';
+import { DELETE_ITEM } from '@store/cart/cartSlice';
 import { PLACING_ORDER, ORDER_PLACED } from '@store/orders/ordersSlice';
 import PaymentService from '../../../../../core/services/PaymentService';
 import { PAYMENT_METHODS } from '../../../../../core/utils/constants';
@@ -15,11 +15,16 @@ import {
 import usePaymentData from '../usePaymentData';
 import { makeDataLayerItemObject } from '../../../../../core/utils/helpers';
 import config from '../../../../../core/services/configService';
+import { useSearchParams } from 'react-router-dom';
+import { CLEAR_CART } from '../../../../../core/store/cart/cartSlice';
+import { syncCartItems } from '@store/cart/cartThunks';
 export const SquareForm = ({ hideCloseBtn, hideModal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const paymentPayload = usePaymentData();
   const placingOrder = useSelector(state => state.orders.placingOrder);
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get('id');
 
   const buttonProps = {
     css: {
@@ -39,8 +44,13 @@ export const SquareForm = ({ hideCloseBtn, hideModal }) => {
 
   const onPaymentApiSuccess = response => {
     // deleteGuestUserEmail();
+    debugger;
     clearCartLocally();
     dispatch(CLEAR_CART());
+    if (!response.data.Order.order_detail?.guest) {
+      dispatch(syncCartItems()); //gets all the cart items stored in database and stores them in store and local storage similarly stores local cart items in database
+    }
+
     navigate('/thank-you', {
       state: { order: response.data.Order },
     });
