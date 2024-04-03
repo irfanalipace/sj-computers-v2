@@ -68,6 +68,7 @@ const FilterBarlayout2 = ({
 
   const dispatch = useDispatch();
   const storeFilters = useSelector(state => state.products.filtersArray);
+  const { categories } = useSelector(state => state.category);
 
   useEffect(() => {
     const priceMin =
@@ -103,13 +104,13 @@ const FilterBarlayout2 = ({
       'professional-laptop',
       'touch-screen',
       'top-rated-product',
-      // 'best-sellers',
-      // 'new-arrival',
+      'best-sellers',
+      'new-arrival',
     ];
 
     if (names.includes(pathValue)) return pathValue;
-    if (categorySlug?.toLowerCase() === 'bto') return 'bto';
-    else return 'all';
+    const dd = categories.find(categ => categ.slug === categorySlug);
+    return dd.id;
   };
 
   const handleClearFilter = category => {
@@ -163,7 +164,7 @@ const FilterBarlayout2 = ({
 
   useEffect(() => {
     fetchFilters();
-  }, [location?.pathname]);
+  }, [location?.pathname, categories]);
 
   function getPriceRanges(min, max) {
     const ranges = [];

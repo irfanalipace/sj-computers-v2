@@ -18,9 +18,24 @@ import ApiService from '@services/apiService';
 // }
 
 export function getFilterListApi(category) {
-  return new Promise((resolve, reject) => {
-    const url = `/products-filter-list?category=${category}`;
+  const names = [
+    'budget-friendly',
+    'workstation',
+    'professional-laptop',
+    'touch-screen',
+    'top-rated-product',
+    'best-sellers',
+    'new-arrival',
+  ];
 
+  let url = '';
+
+  if (names.includes(category)) {
+    url = `/products-filter-list?category=${category}`;
+  } else {
+    url = `/products-filter-list?category_id=${category}`;
+  }
+  return new Promise((resolve, reject) => {
     ApiService.get(url)
       .then(response => {
         console.print(
