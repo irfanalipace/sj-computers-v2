@@ -23,6 +23,7 @@ const FilteredProducts = memo(
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const brand = queryParams.get('brand');
+    const categoriesData = useSelector(slice => slice.category.categories);
     const processor = queryParams.get('processor');
     const {
       products,
@@ -105,6 +106,19 @@ const FilteredProducts = memo(
         filterObject.name = categorySlug;
       }
 
+      let isStop = false;
+      if (categoriesData.length === 0) return;
+      categoriesData.forEach(({ slug }) => {
+        if (slug.toLowerCase() === filterObject.category?.toLowerCase()) {
+          isStop = true;
+          return;
+        }
+      });
+
+      // debugger;
+
+      if (isStop) return;
+
       dispatch(
         filterProducts(filterObject, true, productAfterShowMore =>
           viewItemDataLayer(productAfterShowMore, categorySlug),
@@ -165,6 +179,18 @@ const FilteredProducts = memo(
         } else {
           isPrevFilterApplied.current = true;
         }
+
+        let isStop = false;
+        if (categoriesData.length === 0) return;
+        categoriesData.forEach(({ slug }) => {
+          if (slug?.toLowerCase() === filterObject?.category?.toLowerCase()) {
+            isStop = true;
+            return;
+          }
+        });
+        // debugger;
+        if (isStop) return;
+
         dispatch(filterProducts(filterObject));
       }
 
@@ -191,6 +217,18 @@ const FilteredProducts = memo(
       if (!categoryLoading) {
         if (category?.id || categorySlug) {
           if (brand || processor) return;
+
+          let isStop = false;
+          if (categoriesData.length === 0) return;
+          categoriesData.forEach(({ slug }) => {
+            if (slug?.toLowerCase() === filterObject?.category?.toLowerCase()) {
+              isStop = true;
+              return;
+            }
+          });
+          // debugger;
+
+          if (isStop) return;
 
           dispatch(filterProducts(filterObject));
         }
