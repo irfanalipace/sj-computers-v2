@@ -566,7 +566,7 @@ const FilterBarlayout2 = ({
                       Custom Price
                     </Typography>
                   </AccordionSummary>
-                  <AccordionDetails>
+                  <AccordionDetails sx={{ padding: 0 }}>
                     <li className='filter-value' style={{ padding: '2px 0px' }}>
                       {priceData.priceInputArray.map((item, index) => (
                         <input
