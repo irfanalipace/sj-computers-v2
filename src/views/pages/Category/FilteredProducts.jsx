@@ -115,8 +115,6 @@ const FilteredProducts = memo(
         }
       });
 
-      // debugger;
-
       if (isStop) return;
 
       dispatch(
@@ -188,7 +186,7 @@ const FilteredProducts = memo(
             return;
           }
         });
-        // debugger;
+
         if (isStop) return;
 
         dispatch(filterProducts(filterObject));
@@ -226,7 +224,6 @@ const FilteredProducts = memo(
               return;
             }
           });
-          // debugger;
 
           if (isStop) return;
 
