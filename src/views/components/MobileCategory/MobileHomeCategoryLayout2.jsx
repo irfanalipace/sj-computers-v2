@@ -62,6 +62,7 @@ const MobileHomeCategoryLayout2 = () => {
     categorybusinussweb,
   ];
   const products = useSelector(state => state?.products.products);
+  const isMobile = window.innerWidth <= 576;
   // const currentDate = moment();
   // const oneDayAgo = moment().subtract(1, "days");
   // const duration = moment.duration(currentDate.diff(oneDayAgo));
@@ -202,7 +203,7 @@ const MobileHomeCategoryLayout2 = () => {
       {/* Login and Time Product */}
       <div className='mobile-dev-sections-login-drop'>
         <div className='product-type-section-mobile-images-dev'>
-          <LoginAndTimeProduct />
+          {isMobile && <LoginAndTimeProduct />}
         </div>
       </div>
 

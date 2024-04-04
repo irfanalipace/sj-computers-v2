@@ -104,7 +104,9 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
   };
 
   useEffect(() => {
-    getProducts();
+    setTimeout(() => {
+      getProducts();
+    }, 200);
   }, []);
 
   const alreadInCart = id => {
