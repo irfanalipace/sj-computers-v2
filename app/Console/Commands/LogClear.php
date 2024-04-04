@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 class LogClear extends Command
 {
@@ -39,7 +40,7 @@ class LogClear extends Command
      */
     public function handle()
     {
-
+        Log::info('Log clear cron start');
         // Clear logs in storage/logs
         $logFiles = File::files(storage_path('logs'));
         foreach ($logFiles as $file) {
@@ -52,7 +53,7 @@ class LogClear extends Command
         File::delete($rootLogFiles);
 
         $this->comment('Logs have been cleared!');
-
+        Log::info('Logs have been cleared');
         return 0;
     }
 }

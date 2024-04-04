@@ -17,7 +17,7 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
-    protected $appends = ['in_stock', 'rating','total_review','is_new_arrival'];
+    protected $appends = ['in_stock', 'rating','total_review','is_new_arrival','discounted_price'];
 
     public $timestamps = true;
 
@@ -131,5 +131,15 @@ class Product extends Model
             $builder->where('status', '=', 1);
             $builder->where('price', '>', 0);
         });
+    }
+
+    public function getDiscountedPriceAttribute($value)
+    {
+        $calculatedDiscount = [];
+        if (!is_null($this->is_discount) && $this->is_discount > 0) {
+           $calculatedDiscount = round($this->price * (1 - $this->is_discount / 100), 2);
+        }
+        return $calculatedDiscount; 
+
     }
 }
