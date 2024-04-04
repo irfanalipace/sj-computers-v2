@@ -34,11 +34,11 @@ export const getShippingDetails = () => {
     }
   };
 };
-export const getOrderDetails = (page = 1) => {
+export const getOrderDetails = (page = 1, search = '') => {
   return async dispatch => {
     try {
       dispatch({ type: LOADING, payload: {} });
-      let response = await getOrderDetailsApi(page);
+      let response = await getOrderDetailsApi(page, search);
       const { success_orders, cancel_orders } = response.data;
       console.print(success_orders, 'so before dispatch ');
       console.print(cancel_orders, 'co before dispatch ');

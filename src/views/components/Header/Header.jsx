@@ -69,19 +69,19 @@ const Header = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // useEffect(() => {
-  //   ((firstLogin.current && !currentState) ||
-  //     window.localStorage.getItem('state') == null) &&
-  //     setTimeout(() => {
-  //       // setShow(true); 
-  //     }, 10000);
-  //   // setShow(true);
-  //   searchParams.delete('firstLogin');
-  //   setSearchParams(searchParams);
-  //   return () => {
-  //     clearTimeout(setTimeout); // Clean up the timeout on component unmount
-  //   };
-  // }, [firstLogin.current, currentState]);
+  useEffect(() => {
+    ((firstLogin.current && !currentState) ||
+      window.localStorage.getItem('state') == null) &&
+      // setTimeout(() => {
+        // setShow(true); 
+      // }, 10000);
+    // setShow(true);
+    searchParams.delete('firstLogin');
+    setSearchParams(searchParams);
+    // return () => {
+    //   clearTimeout(setTimeout); // Clean up the timeout on component unmount
+    // };
+  }, [firstLogin.current, currentState]);
 
   const handleResize = () => {
     setScreenWidth(window.innerWidth);

@@ -45,7 +45,7 @@ import sellingimg8 from '../../../assets/images/homepageImage/sellingproducts/im
 import SellingProducts from '../MobileCategory/SellingProducts/SellingProducts';
 import Recommendation from '../Recommendation/Recommendation';
 import { fetchProducts } from '../../../core/store/products/productsThunks';
-import moment from 'moment';
+// import moment from 'moment';
 
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import StarRatings from 'react-star-ratings';

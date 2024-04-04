@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.min.css';
 // import { LazyLoadImage } from "react-lazy-load-image-component";
 import 'swiper/css/navigation';
-import moment from 'moment';
+// import moment from 'moment';
 import { Link } from 'react-router-dom';
 SwiperCore.use([Navigation, Pagination]);
 import './MobileHomeCategory.css';
