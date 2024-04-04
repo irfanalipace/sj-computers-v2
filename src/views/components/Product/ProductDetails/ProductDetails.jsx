@@ -180,7 +180,21 @@ const ProductDetails = ({ product }) => {
             </div> */}
 
       <hr className='hr-card-details'></hr>
-      <PriceWithLabel sx={{ mb: 0.8 }} price={product?.price} />
+      {product?.discounted_price ? (
+        <>
+          <PriceWithLabel sx={{ mb: 0.8 }} price={product?.discounted_price} />
+          <div
+            style={{
+              textDecoration: 'line-through',
+              color: 'gray',
+              marginBottom: '5px',
+            }}>
+            ${product?.price}
+          </div>
+        </>
+      ) : (
+        <PriceWithLabel sx={{ mb: 0.8 }} price={product?.price} />
+      )}
       <Tooltip
         sx={{ left: { xs: '100%', md: '50%' } }}
         content={<ReturnPolicy />}>
