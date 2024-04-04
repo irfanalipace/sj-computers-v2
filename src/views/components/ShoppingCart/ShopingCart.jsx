@@ -23,7 +23,9 @@ import { getUserId } from '../../../core/services/authService';
 import { makeDataLayerItemObject } from '../../../core/utils/helpers';
 
 export const ShopingCart = ({ onFormSubmit, form }) => {
+  const storeProducts = useSelector(state => state?.products?.products);
   const cartItems = useSelector(state => state.cart.cart);
+  const product = cartItems?.length > 0 && cartItems[0];
   const cartDetails = useSelector(state => state.cart.details);
   const isLoading = useSelector(state => state.cart.isLoading);
   const dispatch = useDispatch();
@@ -83,7 +85,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
   const [products, setProducts] = useState([]);
   const getFeaturedProduct = async () => {
     try {
-      const resp = await featureProductsApi(12);
+      const resp = await featureProductsApi(product?.id);
       const selectedProducts = resp?.data;
       setProducts(selectedProducts);
     } catch (error) {
@@ -92,7 +94,7 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
   };
   useEffect(() => {
     getFeaturedProduct();
-  }, []);
+  }, [cartItems]);
 
   useEffect(() => {
     if (!window.dataLayer) {

@@ -12,6 +12,7 @@ import Loader from '@common/Spinner/Spinner';
 import './Header.css';
 import { useSearchParams } from 'react-router-dom';
 
+
 function Search() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState({ name: 'ALL', id: null });
@@ -32,8 +33,9 @@ function Search() {
   const handleItemClick = category => {
     setSelectedItem(category);
     dispatch(SET_SEARCH_STRING(category?.name));
-
+    setSearch(''); 
     setDropdownOpen(false);
+    navigate(`/products/search?s=${encodeURIComponent(category.name)}`); 
   };
 
   const handleSearch = e => {
@@ -46,7 +48,6 @@ function Search() {
 
   useEffect(() => {
     setSearch(searchString || '');
-    
   }, [searchString]);
 
   useEffect(() => {
