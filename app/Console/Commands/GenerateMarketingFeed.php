@@ -7,6 +7,7 @@ use App\Exports\ExportMarketingProduct;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GenerateMarketingFeed extends Command
@@ -46,7 +47,8 @@ class GenerateMarketingFeed extends Command
 //    }
 
     public function handle()
-    {
+    { 
+        Log::info('Marketing cron start');
         /*
          * delete old file
          */
@@ -55,5 +57,7 @@ class GenerateMarketingFeed extends Command
          * make new marketing feed file
          */
         Excel::store(new ExportMarketingProduct(), 'public/gmarketing/' . 'marketing_feed.csv');
+
+        Log::info('Marketing cron end');
     }
 }
