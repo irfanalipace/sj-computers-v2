@@ -23,7 +23,7 @@ const LoginAndTimeProduct = () => {
 
       const response = await getDiscountedProduct();
       let dd = response?.data;
-      dd.additional_information = JSON.parse(dd.additional_information);
+
       setDiscountedProduct(dd);
     } catch (err) {
       console.log(err);
@@ -54,18 +54,17 @@ const LoginAndTimeProduct = () => {
           ) : (
             <div style={{ minHeight: '303px' }}>
               {discoutedProduct && (
-                <Link
-                  to={`/${discoutedProduct?.summary}/dp/${discoutedProduct?.product?.asin}`}>
+                <Link to={discoutedProduct?.url}>
                   <div style={{ textAlign: 'center' }}>
                     <img
                       className={`advertisment-img-products-imges`}
-                      src={discoutedProduct?.product?.image}
+                      src={discoutedProduct?.image[0]}
                       alt={'addDesktop'}
                     />
                   </div>
 
                   <h5 className='time-product-name'>
-                    {discoutedProduct?.product?.name}
+                    {discoutedProduct?.name}
                   </h5>
                   <Stack mb={1} alignItems={'start'} spacing={1}>
                     <Stack
@@ -74,9 +73,7 @@ const LoginAndTimeProduct = () => {
                       // spacing={1}
                       direction={'row'}>
                       <StarRatings
-                        rating={parseFloat(
-                          discoutedProduct?.product?.rating || 0,
-                        )}
+                        rating={parseFloat(discoutedProduct?.rating || 0)}
                         starRatedColor='rgb(232, 126, 36)'
                         numberOfStars={5}
                         name='rating'
@@ -91,40 +88,39 @@ const LoginAndTimeProduct = () => {
                         fontSize={'12px'}
                         lineHeight={'17px'}
                         color={'#007185'}>
-                        ({discoutedProduct?.product?.total_review})
+                        ({discoutedProduct?.total_review})
                       </Typography>
                     </Stack>
                     {/* {type === "recommended" && getRandomComponent()} */}
                   </Stack>
-                  <div className='featured-product-timing mt-4'>
-                    <div className='original-price'>
-                      ${discoutedProduct?.additional_information?.actual_price}
-                    </div>
-                    <div className='discount-price'>
-                      <span>$</span>
-                      {
-                        discoutedProduct?.additional_information?.discounted_price
-                          .toString()
-                          .split('.')[0]
-                      }
-                      <sup>
+                  <div className='featured-product-timing pt-2'>
+                    <Stack direction={'row'} spacing={[3, 1]}>
+                      <div className='original-price'>
+                        ${discoutedProduct?.price}
+                      </div>
+                      <div className='discount-price'>
+                        <span>$</span>
                         {
-                          discoutedProduct?.additional_information?.discounted_price
-                            ?.toString()
-                            .split('.')[1]
+                          discoutedProduct?.discounted_price
+                            .toString()
+                            .split('.')[0]
                         }
-                      </sup>
-                    </div>
-                    <div className='product-delivery-charges ms-0 ms-sm-2 mb-2 mb-sm-0'>
-                      <FontAwesomeIcon className='me-1' icon={faTruck} /> Free
-                      Shipping
-                    </div>
-                    <div className='save-value'>
-                      <span>
-                        Save +{' '}
-                        {discoutedProduct?.additional_information?.discount}
-                      </span>
-                    </div>
+                        <sup>
+                          {
+                            discoutedProduct?.discounted_price
+                              ?.toString()
+                              .split('.')[1]
+                          }
+                        </sup>
+                      </div>
+                      <div className='product-delivery-charges  mb-2 mb-sm-0 mt-2 mt-sm-0'>
+                        <FontAwesomeIcon className=' me-1' icon={faTruck} />{' '}
+                        Free Shipping
+                      </div>
+                      <div className='save-value'>
+                        <span>Save + {discoutedProduct?.is_discount}</span>
+                      </div>
+                    </Stack>
                     {/* <div className='end-in'>
                         Ends in {parsedDate.getHours()}
                         h:{parsedDate.getMinutes()}m
@@ -201,12 +197,11 @@ const LoginAndTimeProduct = () => {
             ) : (
               <>
                 {discoutedProduct && (
-                  <Link
-                    to={`/${discoutedProduct?.summary}/dp/${discoutedProduct?.product?.asin}`}>
+                  <Link to={discoutedProduct?.url}>
                     <div style={{ textAlign: 'center' }}>
                       <img
                         className={`advertisment-img-products-imges-unautherized-user`}
-                        src={discoutedProduct?.product?.image[0]}
+                        src={discoutedProduct?.image[0]}
                         alt={'addDesktop'}
                       />
                     </div>
@@ -214,7 +209,7 @@ const LoginAndTimeProduct = () => {
                     <h5
                       className='time-product-name'
                       style={{ color: 'black' }}>
-                      {discoutedProduct?.product?.name}
+                      {discoutedProduct?.name}
                     </h5>
                     <Stack mb={1} alignItems={'start'} spacing={1}>
                       <Stack
@@ -223,9 +218,7 @@ const LoginAndTimeProduct = () => {
                         // spacing={1}
                         direction={'row'}>
                         <StarRatings
-                          rating={parseFloat(
-                            discoutedProduct?.product?.rating || 0,
-                          )}
+                          rating={parseFloat(discoutedProduct?.rating || 0)}
                           starRatedColor='rgb(232, 126, 36)'
                           numberOfStars={5}
                           name='rating'
@@ -240,40 +233,36 @@ const LoginAndTimeProduct = () => {
                           fontSize={'12px'}
                           lineHeight={'17px'}
                           color={'#007185'}>
-                          ({discoutedProduct?.product?.total_review})
+                          ({discoutedProduct?.total_review})
                         </Typography>
                       </Stack>
                       {/* {type === "recommended" && getRandomComponent()} */}
                     </Stack>
                     <div className='featured-product-timing'>
                       <div className='original-price'>
-                        $
-                        {discoutedProduct?.additional_information?.actual_price}
+                        ${discoutedProduct?.price}
                       </div>
                       <div className='discount-price'>
                         <span>$</span>
                         {
-                          discoutedProduct?.additional_information?.discounted_price
+                          discoutedProduct?.discounted_price
                             .toString()
                             .split('.')[0]
                         }
                         <sup>
                           {
-                            discoutedProduct?.additional_information?.discounted_price
+                            discoutedProduct?.discounted_price
                               ?.toString()
                               .split('.')[1]
                           }
                         </sup>
                       </div>
-                      <div className='product-delivery-charges ms-0 ms-sm-2 mb-2 mb-sm-0'>
+                      <div className='product-delivery-charges ms-0 ms-sm-2 mb-2 mb-sm-0 mt-2 mt-sm-0'>
                         <FontAwesomeIcon className='me-1' icon={faTruck} /> Free
                         Shipping
                       </div>
                       <div className='save-value'>
-                        <span>
-                          Save +{' '}
-                          {discoutedProduct?.additional_information?.discount}
-                        </span>
+                        <span>Save + {discoutedProduct?.is_discount}</span>
                       </div>
                       {/* <div className='end-in'>
                           Ends in {parsedDate.getHours()}

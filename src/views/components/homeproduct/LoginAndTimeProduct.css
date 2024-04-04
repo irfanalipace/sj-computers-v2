@@ -26,7 +26,9 @@
 
 .featured-product-timing .save-value {
   font-size: 12px;
-  width: 100px;
+  width: 80px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   background-color: #b12704;
   color: white;
   /* padding: 2px 1px; */
