@@ -512,12 +512,12 @@ class ProductController extends BaseController
             }
 
             // Add "others" only if no valid processor types were found
-            if (count($seenProcessors) > 0) {
-                $outputProcessors[] = [
-                    'value' => 'others',
-                    'backend_value' => 'others',
-                ];
-            }
+            // if (count($seenProcessors) > 0) {
+            //     $outputProcessors[] = [
+            //         'value' => 'others',
+            //         'backend_value' => 'others',
+            //     ];
+            // }
 
 
             return $outputProcessors;
@@ -528,7 +528,7 @@ class ProductController extends BaseController
             $data[] = ['value' => 'apple_ci3', 'backend_value' => 'apple_ci3'];
             $data[] = ['value' => 'apple_ci5', 'backend_value' => 'apple_ci5'];
             $data[] = ['value' => 'apple_ci7', 'backend_value' => 'apple_ci7'];
-            $data[] = ['value' => 'others', 'backend_value' => 'others'];
+            // $data[] = ['value' => 'others', 'backend_value' => 'others'];
             return $data;
         }
 
@@ -1075,13 +1075,16 @@ class ProductController extends BaseController
 
     public function getDiscountProduct()
     {
-        $discountProduct = ProductDetail::where('summary', "discount_home_product")->with('product')->first();
-
-        if (empty($discountProduct)) {
+        $discountedProducts = Product::whereNotNull('is_discount')
+        ->select('*', DB::raw('ROUND(price * (1 - is_discount / 100), 2) as discounted_price'))
+        ->orderByDesc('updated_at')
+        ->first();
+        
+        if (empty($discountedProducts)) {
             return $this->sendError('error', 'Discount Product not found.');
         }
 
-        return $this->sendResponse($discountProduct, "successfully get discount product for home page.");
+        return $this->sendResponse($discountedProducts, "successfully get discount product for home page.");
     }
 
     protected function getBtoProducts()
