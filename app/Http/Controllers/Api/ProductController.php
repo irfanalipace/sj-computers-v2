@@ -57,12 +57,19 @@ class ProductController extends BaseController
     {
         $perPageRecord = $request->get('per_page') ?? 12;
         $data = Product::where(function ($query) use ($request) {
+            // Basic search filter for name, SKU, or ASIN
             $query->where('name', 'LIKE', '%' . $request->get('name') . '%')
-                ->orWhere('sku', 'LIKE', '%' . $request->get('name') . '%')
-                ->orWhere('asin', 'LIKE', '%' . $request->get('name') . '%');
+                  ->orWhere('sku', 'LIKE', '%' . $request->get('name') . '%')
+                  ->orWhere('asin', 'LIKE', '%' . $request->get('name') . '%');
         })
-            ->with('brand', 'productMedia')
-            ->paginate($perPageRecord);
+        ->when($request->has('category_id'), function ($query) use ($request) {
+            // Apply category filter if category_id is provided in the request
+            return $query->whereHas('categories', function ($query) use ($request) {
+                $query->where('categories.id', $request->get('category_id'));
+            });
+        })
+        ->with('brand', 'productMedia')
+        ->paginate($perPageRecord);
 
         $this->saveSearch($request->ip(), $request->name);
         return $this->sendResponse($data);

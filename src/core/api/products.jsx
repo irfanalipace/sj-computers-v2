@@ -70,6 +70,7 @@ export function productDetailsbyAsinApi(asin) {
 }
 
 export function searchProductsApi(data) {
+  // debugger;
   return new Promise((resolve, reject) => {
     ApiService.get(`/search-product`, '', data)
       .then(response => {
