@@ -8,22 +8,39 @@ import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import StarRatings from 'react-star-ratings';
 import useAddToCart from '../../Product/CheckOutCard/useAddToCart';
 import { useSelector } from 'react-redux';
+import { productsApi } from '../../../../core/api/products';
 
 const SeggestedItems = ({ num, inCartPage, inEmptyCartPage }) => {
   const [products, setProducts] = useState([]);
   const [addingStates, setAddingStates] = useState({});
+
+  const cart = useSelector(state => state?.cart?.cart);
+  const storeProducts = useSelector(state => state?.products?.products);
+  const product =
+    cart?.length > 0 ? cart[0] : storeProducts?.length > 0 && storeProducts[0];
+
   const getFeaturedProduct = async () => {
     try {
-      const resp = await featureProductsApi(12);
+      const resp = await featureProductsApi(product?.id);
       const selectedProducts = resp?.data.slice(0, num);
       setProducts(selectedProducts);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const getAllProducts = async () => {
+    await productsApi();
+    // setProducts(responseProducts);
+  };
+
   useEffect(() => {
     getFeaturedProduct();
-  }, []);
+    if (cart?.length === 0 && storeProducts?.length === 0) {
+      getAllProducts();
+    }
+  }, [cart, storeProducts]);
+
   const ProductDetails = ({ product }) => {
     const [cartClickHandler, addingItemToCart] = useAddToCart(product, 1);
     const isAdding = addingStates[product.id];

@@ -204,25 +204,12 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                                 : 'Ordered'}
                             </button>
                           )}
-                          {row?.fedex_status !== 'Delivered'
-                            ? !isSmallScreen && (
-                                <Link
-                                  to={`/track-order/${row?.id}/${row?.tracking_id}`}
-                                  className='track-order-button'
-                                  style={{
-                                    background: row?.tracking_id ? '' : 'gray',
-                                    pointerEvents: row?.tracking_id
-                                      ? ''
-                                      : 'none',
-                                  }}>
-                                  Track Package
-                                </Link>
-                              )
-                            : !isSmallScreen && (
-                                <p style={{ padding: '20px' }}>
-                                  Price : ${order?.product?.price}
-                                </p>
-                              )}
+
+                          {!isSmallScreen && (
+                            <p style={{ padding: '20px' }}>
+                              Price : ${order?.product?.price}
+                            </p>
+                          )}
                           {isSmallScreen && (
                             <p style={{ marginTop: '20px' }}>
                               Price : ${order?.product?.price}
@@ -348,19 +335,30 @@ function OrderProducts({ data, totalItems, sendToPage }) {
                       : 'Show more'
                     : ''}
                 </button>
-                {isSmallScreen && (
-                  <Link
-                    to={`/track-order/${row?.id}/${row?.tracking_id}`}
-                    style={{
-                      color: 'rgb(49, 130, 67)',
-                      position: 'absolute',
-                      right: 5,
-                      bottom: 5,
-                    }}>
-                    Track Package
-                  </Link>
-                )}
               </div>
+            )}
+            {isSmallScreen && (
+              <Link
+                to={`/track-order/${row?.id}/${row?.tracking_id}`}
+                style={{
+                  color: 'rgb(49, 130, 67)',
+                  position: 'absolute',
+                  right: 10,
+                  bottom: 10,
+                }}>
+                Track Package
+              </Link>
+            )}
+            {!isSmallScreen && (
+              <Link
+                to={`/track-order/${row?.id}/${row?.tracking_id}`}
+                className='track-order-button'
+                style={{
+                  background: row?.tracking_id ? '' : 'gray',
+                  pointerEvents: row?.tracking_id ? '' : 'none',
+                }}>
+                Track Package
+              </Link>
             )}
           </div>
         </Card>

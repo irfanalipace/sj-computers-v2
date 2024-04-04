@@ -180,9 +180,9 @@ const FilterBarlayout2 = ({
     if (min < 250 && categorySlug?.toLowerCase() === 'bto') {
       ranges.push({
         id: 1,
-        priceValue: `$${parseInt(min)} - $${parseInt(max)}`,
+        priceValue: `$${parseInt(min)} - $${250}`,
         priceMin: min,
-        priceMax: max < 250 ? max : 250,
+        priceMax: 250,
       });
     }
     if (pathValue !== 'budget-friendly') {
@@ -335,7 +335,7 @@ const FilterBarlayout2 = ({
           });
         }
 
-        setReviewOptions(newArray);
+        setReviewOptions(newArray?.sort((a, b) => b.value - a.value));
       }
 
       const highestHardDiskGb = data?.hard_disk?.highest_GB;
