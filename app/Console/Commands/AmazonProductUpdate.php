@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Product;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class AmazonProductUpdate extends Command
 {
@@ -38,7 +39,7 @@ class AmazonProductUpdate extends Command
      */
     public function handle()
     {
-
+        Log::info('amazon - product update cron start');
         $products = $this->getProductsList();
         
         if($products['status']){
@@ -53,11 +54,13 @@ class AmazonProductUpdate extends Command
                 echo "product update ". $key."\n";
             }
         }
+        Log::info('amazon - product update cron end');
         return 0;
     }
 
     public function deleteProducts($products)
     {       
+        Log::info('update product status if sku is not found from amazon');
         $skuList = $products->pluck('SKU');
         Product::whereNotIn('sku',$skuList)->update(['status' => 0]);
     }

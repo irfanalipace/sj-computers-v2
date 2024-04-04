@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\OrderTrackingHistory as TrackingHistory;
 use App\Traits\FedexTrait;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class OrderTrackingHistroy extends Command
 {
@@ -41,6 +42,7 @@ class OrderTrackingHistroy extends Command
      */
     public function handle()
     {
+        Log::info('order - tracking cron start');
         $orders = Order::whereNotNull('tracking_id')->get();
 
         foreach ($orders as $order) {
@@ -66,7 +68,7 @@ class OrderTrackingHistroy extends Command
             }
         }
         
-       
+        Log::info('order - tracking cron end');
         return 0;
     }
 }
