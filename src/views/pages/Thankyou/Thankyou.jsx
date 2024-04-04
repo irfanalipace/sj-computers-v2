@@ -271,6 +271,7 @@ export default function ThankYou() {
                   <th>Order Date</th>
                   <th className='delivery-details'>Delivery Details</th>
                   <th>Payment Type</th>
+                  <th>Price</th>
                   <th>Sub Total</th>
                 </tr>
               </thead>
@@ -301,7 +302,12 @@ export default function ThankYou() {
                     <td>{formatDate(data.created_at)}</td>
                     <td>{orderDetails?.shipment_days}</td>
                     <td>{orderDetails?.Payment_type || 'Square'}</td>
-                    <td>${data.price}</td>
+                    <td>${data?.product?.discounted_price || data.price}</td>
+                    <td>
+                      $
+                      {data?.product?.discounted_price * data?.qty ||
+                        data.price * data?.qty}
+                    </td>
                   </tr>
                 ))}
               </tbody>

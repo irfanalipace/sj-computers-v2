@@ -33,9 +33,9 @@ function Search() {
   const handleItemClick = category => {
     setSelectedItem(category);
     dispatch(SET_SEARCH_STRING(category?.name));
-    setSearch(''); 
+    setSearch(category?.name);
     setDropdownOpen(false);
-    navigate(`/products/search?s=${encodeURIComponent(category.name)}`); 
+    navigate(`/products/search?s=${encodeURIComponent(category.name)}`);
   };
 
   const handleSearch = e => {
@@ -81,6 +81,7 @@ function Search() {
       document.removeEventListener('click', handleDocumentClick);
     };
   }, []);
+
   return (
     <form className='input-group search-inputgroup' onSubmit={handleSearch}>
       <div ref={dropdownRef} className='input-group-btn search-panel'>
@@ -90,7 +91,8 @@ function Search() {
             className='btn btn-primary dropdown-toggle all-button'
             style={{ fontSize: '13px', border: '1px solid black' }}
             onClick={toggleDropdown}
-            disabled={location.pathname.includes('category')}>
+            // disabled={location.pathname.includes('category')}
+          >
             {selectedItem.name}
           </button>
           <div

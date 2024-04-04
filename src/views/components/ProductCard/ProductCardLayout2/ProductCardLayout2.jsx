@@ -117,7 +117,7 @@ const ProductCardLayout2 = ({
             <div
               className='product-name product-cart-name-mobile-screen'
               style={{
-                margin: productView == 'list' ? '2px 0px' : '',
+                margin: productView == 'list' ? '2px 0px' : '', maxWidth:'220px'
               }}>
               {product.name}
             </div>

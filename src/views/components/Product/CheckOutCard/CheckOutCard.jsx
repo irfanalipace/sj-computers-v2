@@ -55,8 +55,28 @@ export const CheckOutCard = ({ product, isMobile }) => {
         <div className='row card-price-section-card-product'>
           <div className='col-md-12 color-text-cart hidden-on-mobile'>
             <sup>$</sup>
-            {product?.price?.toString().split('.')[0]}
-            <sup>{product?.price?.toString().split('.')[1]}</sup>
+            {product?.discounted_price ? (
+              <>
+                {' '}
+                {product?.discounted_price}{' '}
+                <span
+                  style={{
+                    color: 'gray',
+                    textDecoration: 'line-through',
+                    fontSize: '12px',
+                    marginLeft: '5px',
+                  }}>
+                  {' '}
+                  ${product?.price}
+                </span>
+              </>
+            ) : (
+              <>
+                {' '}
+                {product?.price?.toString().split('.')[0]}
+                <sup>{product?.price?.toString().split('.')[1]}</sup>
+              </>
+            )}
           </div>
         </div>
 
