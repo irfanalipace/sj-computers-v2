@@ -57,7 +57,6 @@ export const CheckOutCard = ({ product, isMobile }) => {
             <sup>$</sup>
             {product?.discounted_price ? (
               <>
-                {' '}
                 {product?.discounted_price}{' '}
                 <span
                   style={{
@@ -66,13 +65,11 @@ export const CheckOutCard = ({ product, isMobile }) => {
                     fontSize: '12px',
                     marginLeft: '5px',
                   }}>
-                  {' '}
                   ${product?.price}
                 </span>
               </>
             ) : (
               <>
-                {' '}
                 {product?.price?.toString().split('.')[0]}
                 <sup>{product?.price?.toString().split('.')[1]}</sup>
               </>

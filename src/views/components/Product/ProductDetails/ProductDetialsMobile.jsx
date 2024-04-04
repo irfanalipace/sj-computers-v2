@@ -141,7 +141,21 @@ const ProductDetailsMobile = ({ product, isUpSmall }) => {
           fontFamily={'Inter'}>
           Price:
         </Typography>
-        <PriceWithLabel sx={{ mb: 0.8 }} price={product?.price} />
+        {product?.discounted_price ? (
+          <>
+            <span style={{ color: 'red' }}>${product?.discounted_price}</span>
+            <span
+              style={{
+                fontSize: '12px',
+                color: 'gray',
+                textDecoration: 'line-through',
+              }}>
+              ${product?.price}
+            </span>
+          </>
+        ) : (
+          <PriceWithLabel sx={{ mb: 0.8 }} price={product?.price} />
+        )}
       </Stack>
       {/* <div style={{ fontSize: '12px', lineHeight: '13px' }} className=' mb-2'>
         $20 shipping & import fees deposit to Pakistan. <Link>Details</Link>

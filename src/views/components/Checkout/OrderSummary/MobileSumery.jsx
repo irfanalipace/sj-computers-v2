@@ -15,6 +15,7 @@ function MobileSummary({
   handleClick,
   activeAccordion,
   // paymentMethod,
+  shippingDetails,
   isDisabled,
 }) {
   const dispatch = useDispatch();
