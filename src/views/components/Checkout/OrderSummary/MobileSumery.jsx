@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { placeOrder } from "@store/orders/ordersThunk";
 import ShippingButton from '@components/Checkout/ShippingDetails/ShippingButton';
 import PaymentButton from '@components/Checkout/PaymentMethod/PaymentButton';
@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import './OrderSummary.css';
 import usePaymentData from '../PaymentMethod/usePaymentData';
+import { useSearchParams } from 'react-router-dom';
 
 function MobileSummary({
   handleClick,
@@ -18,9 +19,20 @@ function MobileSummary({
 }) {
   const dispatch = useDispatch();
   const placingOrder = useSelector(state => state.orders.placingOrder);
-  const paymentData = usePaymentData(true);
+  const paymentData = usePaymentData();
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+  const cartSlice = useSelector(state => state.cart);
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get('id');
+  const [buyNowItem, setBuyNowITem] = useState('');
+
+  useEffect(() => {
+    const res = cartSlice.cart.find(item => item.id === parseInt(id));
+
+    if (!res) return;
+    setBuyNowITem(res);
+  });
 
   const toggleAccordion = () => {
     setIsAccordionOpen(prev => !prev);
@@ -93,15 +105,17 @@ function MobileSummary({
                   <ul>
                     <li>
                       <span>Items:</span>
-                      <span>({paymentData?.details?.total_items})</span>
+                      <span>({id ? 1 : cartSlice?.details?.total_items})</span>
                     </li>
                     <li>
                       <span>Price:</span>
                       <span>
                         <strong>
-                          {paymentData?.details?.sub_total
-                            ? '$' + paymentData.details.sub_total
-                            : '$0'}
+                          {buyNowItem.price
+                            ? '$' + buyNowItem.price
+                            : '$0' || cartSlice?.details?.sub_total
+                              ? '$' + cartSlice.details.sub_total
+                              : '$0'}
                         </strong>
                       </span>
                     </li>
@@ -133,7 +147,12 @@ function MobileSummary({
                         <strong>Order Total</strong>
                       </span>
                       <span>
-                        <strong>${paymentData?.details?.total}</strong>
+                        <strong>
+                          $
+                          {buyNowItem?.price ||
+                            paymentData?.details?.total ||
+                            cartSlice?.details?.total}
+                        </strong>
                       </span>
                     </li>
                   </ul>

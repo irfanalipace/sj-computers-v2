@@ -15,7 +15,7 @@ function usePaymentData(buyNow = false) {
 
   const id = searchParams.get('id');
   const items = () => {
-    if (id && buyNow) {
+    if (id) {
       const oneItem = cartItems?.find(item => item.id === parseInt(id));
       setItemsToShow([oneItem]);
     } else {
@@ -47,6 +47,7 @@ function usePaymentData(buyNow = false) {
       email: shippingDetails?.email || user?.email,
       full_name: shippingDetails?.full_name || user?.name,
     },
+
     // cart_items: cartData,
     // details: {
     //   ...cartDetails,
@@ -55,6 +56,11 @@ function usePaymentData(buyNow = false) {
     //   total_quantity,
     // },
   };
+
+  if (isAuthenticated && id) {
+    paymentPayload.cart_id = id;
+    paymentPayload.is_buy_now = true;
+  }
 
   if (!isAuthenticated) {
     console.log(cartDetails);
@@ -69,7 +75,7 @@ function usePaymentData(buyNow = false) {
         total_quantity,
       },
     };
-    if (buyNow && id) {
+    if (id) {
       const buyNowItem = itemsToShow[0];
       paymentPayload.details.total = buyNowItem?.price;
       paymentPayload.details.sub_total = buyNowItem?.price;

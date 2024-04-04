@@ -16,7 +16,9 @@ const SellingPro = ({ images }) => {
     setTopRatedProduct(res?.data?.data);
   };
   useEffect(() => {
-    getTopRated();
+    setTimeout(() => {
+      getTopRated();
+    }, 100);
   }, []);
   return (
     <div>

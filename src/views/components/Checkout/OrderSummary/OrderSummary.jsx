@@ -8,6 +8,8 @@ import ReviewButton from '@components/Checkout/ReviewCheckout/ReviewButton';
 
 import './OrderSummary.css';
 import usePaymentData from '../PaymentMethod/usePaymentData';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 function OrderSummary({
   handleClick,
@@ -18,9 +20,20 @@ function OrderSummary({
   const dispatch = useDispatch();
   const placingOrder = useSelector(state => state.orders.placingOrder);
   const cartSlice = useSelector(state => state.cart);
-  const paymentData = usePaymentData(true);
+  const paymentData = usePaymentData();
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get('id');
+
+  const [buyNowItem, setBuyNowITem] = useState('');
 
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
+  useEffect(() => {
+    const res = cartSlice.cart.find(item => item.id === parseInt(id));
+
+    if (!res) return;
+    setBuyNowITem(res);
+  });
 
   const Button = () => {
     if (activeAccordion === 1) {
@@ -71,15 +84,17 @@ function OrderSummary({
                 <ul>
                   <li>
                     <span>Items:</span>
-                    <span>({cartSlice?.details?.total_items})</span>
+                    <span>({id ? 1 : cartSlice?.details?.total_items})</span>
                   </li>
                   <li>
                     <span>Price:</span>
                     <span>
                       <strong>
-                        {cartSlice?.details?.sub_total
-                          ? '$' + cartSlice.details.sub_total
-                          : '$0'}
+                        {buyNowItem.price
+                          ? '$' + buyNowItem.price
+                          : '$0' || cartSlice?.details?.sub_total
+                            ? '$' + cartSlice.details.sub_total
+                            : '$0'}
                       </strong>
                     </span>
                   </li>
@@ -113,7 +128,8 @@ function OrderSummary({
                     <span>
                       <strong>
                         $
-                        {paymentData?.details?.total ||
+                        {buyNowItem?.price ||
+                          paymentData?.details?.total ||
                           cartSlice?.details?.total}
                       </strong>
                     </span>
@@ -195,7 +211,8 @@ function OrderSummary({
                       <strong>
                         $
                         {parseInt(
-                          paymentData?.details?.total ||
+                          buyNowItem?.price ||
+                            paymentData?.details?.total ||
                             cartSlice?.details?.total,
                         )?.toFixed(2)}
                       </strong>

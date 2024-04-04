@@ -47,6 +47,7 @@ const FilterBarlayout2 = ({
   const filtersArray = useSelector(state => state.products.filtersArray);
   const [activePriceFiler, setActinePriceFilter] = useState('');
   const [customPriceError, setCustomPriceError] = useState('');
+  const [firstRender, setFirstRender] = useState(true);
 
   const [customPrice, setCustomPrice] = useState({
     id: 10,
@@ -67,6 +68,7 @@ const FilterBarlayout2 = ({
 
   const dispatch = useDispatch();
   const storeFilters = useSelector(state => state.products.filtersArray);
+  const { categories } = useSelector(state => state.category);
 
   useEffect(() => {
     const priceMin =
@@ -102,13 +104,13 @@ const FilterBarlayout2 = ({
       'professional-laptop',
       'touch-screen',
       'top-rated-product',
-      // 'best-sellers',
-      // 'new-arrival',
+      'best-sellers',
+      'new-arrival',
     ];
 
     if (names.includes(pathValue)) return pathValue;
-    if (categorySlug?.toLowerCase() === 'bto') return 'bto';
-    else return 'all';
+    const dd = categories.find(categ => categ.slug === categorySlug);
+    return dd.id;
   };
 
   const handleClearFilter = category => {
@@ -162,7 +164,7 @@ const FilterBarlayout2 = ({
 
   useEffect(() => {
     fetchFilters();
-  }, [location?.pathname]);
+  }, [location?.pathname, categories]);
 
   function getPriceRanges(min, max) {
     const ranges = [];
@@ -178,9 +180,9 @@ const FilterBarlayout2 = ({
     if (min < 250 && categorySlug?.toLowerCase() === 'bto') {
       ranges.push({
         id: 1,
-        priceValue: `$${parseInt(min)} - $${parseInt(max)}`,
+        priceValue: `$${parseInt(min)} - $${250}`,
         priceMin: min,
-        priceMax: max < 250 ? max : 250,
+        priceMax: 250,
       });
     }
     if (pathValue !== 'budget-friendly') {
@@ -333,7 +335,7 @@ const FilterBarlayout2 = ({
           });
         }
 
-        setReviewOptions(newArray);
+        setReviewOptions(newArray?.sort((a, b) => b.value - a.value));
       }
 
       const highestHardDiskGb = data?.hard_disk?.highest_GB;
@@ -478,8 +480,25 @@ const FilterBarlayout2 = ({
     });
   };
   useEffect(() => {
+    setFirstRender(false);
+  }, []);
+
+  const pathV = [
+    'touch-screen',
+    'top-rated-product',
+    'professional-laptop',
+    'workstation',
+    'budget-friendly',
+  ];
+
+  useEffect(() => {
     setTimeout(() => {
-      window.scrollTo({ top: 500, behavior: 'smooth' });
+      if (firstRender) return;
+      let top = 500;
+      if (pathV.includes(pathValue)) {
+        top = 300;
+      }
+      window.scrollTo({ top: top, behavior: 'smooth' });
     }, 300);
   }, [storeFilters]);
 
