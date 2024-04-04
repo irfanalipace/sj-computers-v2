@@ -333,7 +333,7 @@ const FilterBarlayout2 = ({
           });
         }
 
-        setReviewOptions(newArray);
+        setReviewOptions(newArray?.sort((a, b) => b.value - a.value));
       }
 
       const highestHardDiskGb = data?.hard_disk?.highest_GB;
