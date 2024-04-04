@@ -73,10 +73,10 @@ const Header = () => {
     ((firstLogin.current && !currentState) ||
       window.localStorage.getItem('state') == null) &&
       // setTimeout(() => {
-        // setShow(true); 
+      // setShow(true);
       // }, 10000);
-    // setShow(true);
-    searchParams.delete('firstLogin');
+      // setShow(true);
+      searchParams.delete('firstLogin');
     setSearchParams(searchParams);
     // return () => {
     //   clearTimeout(setTimeout); // Clean up the timeout on component unmount
@@ -103,21 +103,27 @@ const Header = () => {
           <BottomNavigation />
           {/* </Suspense> */}
           <Suspense>
-            <MobileSearch DeliverBtn={<Button
-                              className='dliver-set '
-                              variant='primary'
-                              onClick={handleShow}
-                              style={{
-                                background: '#00305E',
-                                border: '#00305E',
-                                fontSize: '12px',
-                                padding: '2px',
-                                textAlign: 'left',
-                              }}>
-                              <span className='deliver-text '>Deliver to </span>
-                              <br></br>
-                              {!loading && location1?.state}
-                            </Button>} screenWidth={screenWidth} />
+            <MobileSearch
+              DeliverBtn={
+                <Button
+                  className='dliver-set '
+                  variant='primary'
+                  onClick={handleShow}
+                  style={{
+                    background: '#00305E',
+                    border: '#00305E',
+                    fontSize: '12px',
+                    padding: '2px',
+                    margin: '0px 10px',
+                    textAlign: 'left',
+                  }}>
+                  <span className='deliver-text '>Deliver to </span>
+                  <br></br>
+                  {!loading && location1?.state}
+                </Button>
+              }
+              screenWidth={screenWidth}
+            />
           </Suspense>
           {Troubleshoot ? (
             <Suspense>
@@ -170,11 +176,15 @@ const Header = () => {
                               }}>
                               <span className='deliver-text '>Deliver to </span>
                               <br></br>
-                              {currentState ? currentState?.name : <>{!loading && location1?.state}</>}
+                              {currentState ? (
+                                currentState?.name
+                              ) : (
+                                <>{!loading && location1?.state}</>
+                              )}
                             </Button>
                           </div>
                         </div>
-                        {show  && (
+                        {show && (
                           <Suspense>
                             <LocationModal
                               isOpen={show}
