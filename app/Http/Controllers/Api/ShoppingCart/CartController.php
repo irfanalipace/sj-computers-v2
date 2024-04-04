@@ -81,7 +81,12 @@ class CartController extends BaseController
             if ($request->qty > $product->quantity) {
                 throw new Exception('Product quantity is out of stock');
             }          
-            $totalPrice = ($protectivePlan) ? $product->price + $protectivePlan->price : $product->price;
+            if(!empty($product->is_discount)){
+                $totalPrice = ($protectivePlan) ? $product->discounted_price + $protectivePlan->price : $product->discounted_price;
+            } else{ 
+                $totalPrice = ($protectivePlan) ? $product->price + $protectivePlan->price : $product->price;
+            }
+          
             
             $attribute = ($protectivePlan) ? $this->setProtectiveData($protectivePlan) : null;
             
