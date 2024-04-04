@@ -170,17 +170,6 @@ export default function MobileCheckout() {
                   {accordion[1].open && (
                     <>
                       <div className='col-md-3 col-12'>
-                        <div>
-                          <div
-                            className='shipping-method-component-wrapper'
-                            style={{
-                              marginTop: '12px',
-                              marginBottom: '12px',
-                            }}>
-                            <ShippingMethod />
-                          </div>
-                        </div>
-
                         {/* {!isAuthenticated && (
                                         <div>
                                             <div className="mobile-data-change-hide">
@@ -188,16 +177,6 @@ export default function MobileCheckout() {
                                             </div>
                                         </div>
                                     )} */}
-                      </div>
-
-                      <div className='order-summary-component-wrapper'>
-                        <MobileSummary
-                          handleClick={handleClick}
-                          activeAccordion={currentAccordionId}
-                          paymentMethod={paymentMethod}
-                          shippingDetails={checkoutDetails}
-                          isDisabled={!shippingAddress?.isValid}
-                        />
                       </div>
                     </>
                   )}
@@ -223,75 +202,11 @@ export default function MobileCheckout() {
                   </Accordion>
                   {accordion[2].open && (
                     <>
-                      <div className='col-md-3 col-12'>
-                        <div
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                          }}
-                          className='border-shipping-summery-data'>
-                          {/* <div className="shipping-method-component-wrapper" style={{marginTop:"12px", marginBottom:"12px"}}>
-                                            <ShippingMethod />
-                                        </div> */}
-                          <div>
-                            <div
-                              style={{
-                                display: 'flex',
-                                justifyContent: '',
-                              }}>
-                              <div
-                                style={{
-                                  marginTop: '3px',
-                                }}>
-                                <input
-                                  type='radio'
-                                  name='radio'
-                                  id='specifyColor'
-                                />
-                              </div>
-                              <div>
-                                <span className='shipping-data-shiping-view-mobile'>
-                                  Free Shipping{' '}
-                                </span>
-                                {/* <p
-                                  style={{
-                                    fontSize: '10px',
-                                  }}
-                                >
-                                  Mon, Nov 13
-                                </p> */}
-                              </div>
-                            </div>
-                          </div>
-                          <div className='summery-modal-data-open-mobile'>
-                            <span onClick={openModal}>order Summery</span>
-                          </div>
-                        </div>
-
-                        {/* {!isAuthenticated && (
-                                        <div>
-                                            <div className="mobile-data-change-hide">
-                                                <Discount />
-                                            </div>
-                                        </div>
-                                    )} */}
-                      </div>
-
                       <ShipingModalSummery
                         isOpen={isModalOpen}
                         onClose={closeModal}>
                         {' '}
                       </ShipingModalSummery>
-
-                      <div className='order-summary-component-wrapper'>
-                        <MobileSummary
-                          handleClick={handleClick}
-                          activeAccordion={currentAccordionId}
-                          paymentMethod={paymentMethod}
-                          shippingDetails={checkoutDetails}
-                          isDisabled={!shippingAddress?.isValid}
-                        />
-                      </div>
 
                       <div className='col-md-3 col-12'>
                         <div>
@@ -347,7 +262,7 @@ export default function MobileCheckout() {
                               marginTop: '12px',
                               marginBottom: '12px',
                             }}>
-                            <ShippingMethod />
+                            {/* <ShippingMethod /> */}
                           </div>
                         </div>
 
@@ -359,18 +274,17 @@ export default function MobileCheckout() {
                                         </div>
                                     )} */}
                       </div>
-
-                      <div className='order-summary-component-wrapper'>
-                        <MobileSummary
-                          handleClick={handleClick}
-                          activeAccordion={currentAccordionId}
-                          paymentMethod={paymentMethod}
-                          shippingDetails={checkoutDetails}
-                          isDisabled={!shippingAddress?.isValid}
-                        />
-                      </div>
                     </>
                   )}
+                  <div className='order-summary-component-wrapper'>
+                    <MobileSummary
+                      handleClick={handleClick}
+                      activeAccordion={currentAccordionId}
+                      paymentMethod={paymentMethod}
+                      shippingDetails={checkoutDetails}
+                      isDisabled={!shippingAddress?.isValid}
+                    />
+                  </div>
                   <div
                     style={{
                       marginTop: '8px',
@@ -381,6 +295,7 @@ export default function MobileCheckout() {
                         <span>
                           Need help?{' '}
                           <Link
+                            to={'/contact'}
                             className='text-decoration-none'
                             style={{
                               color: '#007185',
@@ -400,6 +315,7 @@ export default function MobileCheckout() {
                             {' '}
                             sjcomputers.us{' '}
                             <Link
+                              to={'/return_refund_policy'}
                               className='text-decoration-none'
                               style={{
                                 color: '#007185',
@@ -416,6 +332,7 @@ export default function MobileCheckout() {
                           You Need to add more items to your order? Continue
                           shopping on the{' '}
                           <Link
+                            to={'/'}
                             className='text-decoration-none'
                             style={{
                               color: '#007185',

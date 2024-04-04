@@ -101,7 +101,7 @@ export default function MobileThanku() {
           </div>
         </div>
         <div className='jhon-name-user-order'>
-          <span>Hi John,</span>
+          <span>Hi {orderDetails?.user?.name}</span>
         </div>
         <div className='col-12 my-2'>
           <div className='oreder-confirm-page-data'>
@@ -112,7 +112,6 @@ export default function MobileThanku() {
         <div className='col-12 my-20'>
           <p className='paragrap-text-notify-order'>
             Your order with tracking No{' '}
-            <span style={{ fontWeight: '500' }}>#124548</span>{' '}
             <span style={{ fontWeight: '900' }}>{orderDetails?.id}</span> has
             been successfully confirmed. We’ll send you an email notification
             once your order has shipped.
@@ -264,54 +263,70 @@ export default function MobileThanku() {
           <div className='card-image'></div>
           <div className='card-content'>
             <div className='product-details'>
-              <div className='Items-thanku-view-page-thanks'>
-                <div className=''>
-                  <span> Item:</span>
-                </div>
-                <div className=' '>
-                  <span> Product Name</span>
-                </div>
-              </div>
+              {orderDetails?.order_item?.map(item => (
+                <>
+                  <div className='Items-thanku-view-page-thanks'>
+                    <div className=''>
+                      <span> Product Name:</span>
+                    </div>
+                    <div className=' '>
+                      <span> {(item?.product?.name).substring(0, 25)}... </span>
+                    </div>
+                  </div>
 
-              <div className='Items-thanku-view-page-thanks'>
-                <div className=''>
-                  <span> Price:</span>
-                </div>
-                <div className=' '>
-                  <span style={{ fontWeight: '600' }}> $12.3</span>
-                </div>
-              </div>
-              <div className='Items-thanku-view-page-thanks'>
-                <div className=''>
-                  <span> Shipping Handling:</span>
-                </div>
-                <div className=' '>
-                  <span>Free</span>
-                </div>
-              </div>
-              {/* <div className='Items-thanku-view-page-thanks'>
-                <div className=''>
-                  <span>Total before tax:</span>
-                </div>
-                <div className=' '>
-                  <span> $12.3</span>
-                </div>
-              </div> */}
-              {/* <div className='Items-thanku-view-page-thanks'>
-                <div className=''>
-                  <span>Estimated tax to be calculated:</span>
-                </div>
-                <div className=' '>
-                  <span> 10</span>
-                </div>
-              </div> */}
-              <hr></hr>
+                  <div className='Items-thanku-view-page-thanks'>
+                    <div className=''>
+                      <span> Order No:</span>
+                    </div>
+                    <div className=' '>
+                      <span>{item?.id}</span>
+                    </div>
+                  </div>
+
+                  <div className='Items-thanku-view-page-thanks'>
+                    <div className=''>
+                      <span> Quantity:</span>
+                    </div>
+                    <div className=' '>
+                      <span>{item?.qty}</span>
+                    </div>
+                  </div>
+                  <div className='Items-thanku-view-page-thanks'>
+                    <div className=''>
+                      <span> Price:</span>
+                    </div>
+                    <div className=' '>
+                      <span style={{ fontWeight: '600' }}>
+                        {' '}
+                        ${item?.product?.discounted_price || item?.price}
+                      </span>
+                    </div>
+                  </div>
+                  <div className='Items-thanku-view-page-thanks'>
+                    <div className=''>
+                      <span> Sub Total:</span>
+                    </div>
+                    <div className=' '>
+                      <span style={{ fontWeight: '600' }}>
+                        $
+                        {item?.product?.discounted_price
+                          ? item?.qty * item?.product?.discounted_price
+                          : item?.qty * item?.price}
+                      </span>
+                    </div>
+                  </div>
+                  <hr></hr>
+                </>
+              ))}
               <div className='Items-thanku-view-page-thanks'>
                 <div className=''>
                   <span style={{ fontWeight: '600' }}>Order Total:</span>
                 </div>
                 <div className=' '>
-                  <span style={{ color: 'red' }}> $234</span>
+                  <span style={{ color: '#b12704' }}>
+                    {' '}
+                    ${orderDetails?.total_amount}
+                  </span>
                 </div>
               </div>
             </div>
