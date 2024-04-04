@@ -135,11 +135,10 @@ class Product extends Model
 
     public function getDiscountedPriceAttribute($value)
     {
-        $calculatedDiscount = [];
         if (!is_null($this->is_discount) && $this->is_discount > 0) {
            $calculatedDiscount = round($this->price * (1 - $this->is_discount / 100), 2);
         }
-        return $calculatedDiscount; 
+        return $calculatedDiscount ?? ''; 
 
     }
 }
