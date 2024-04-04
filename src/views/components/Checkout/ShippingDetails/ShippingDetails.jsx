@@ -80,7 +80,7 @@ export default function ShippingDetails({
               <h3 className='accordion-content-heading'>Your Address</h3>
               <div className='address-list'>
                 <div className='address'>
-                  <input
+                  {/* <input
                     type='radio'
                     className='input-radio-button-mobile-buttob'
                     id='address_id'
@@ -91,7 +91,7 @@ export default function ShippingDetails({
 
                     // onChange={handleChange}
                     // defaultChecked={true}
-                  />
+                  /> */}
                   <div>
                     <label htmlFor='address_id'>
                       <strong style={{ fontWeight: '600' }}>
