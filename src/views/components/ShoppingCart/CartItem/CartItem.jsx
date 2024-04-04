@@ -210,7 +210,7 @@ export const CartItem = memo(({ cartData }) => {
                       // border: "1px solid #000",
                       marginLeft: '140px',
                     }}>
-                    <div className='col-md-9 mt-2'>
+                    <div className='col-md-8 mt-2'>
                       {cartData?.plan?.value && (
                         <>
                           <div className=''>
@@ -241,10 +241,10 @@ export const CartItem = memo(({ cartData }) => {
                       )}
                     </div>
                     <div
-                      className='col-md-3 mt-4'
+                      className='col-md-4 mt-4'
                       // style={{ marginRight: "130px" }}
                     >
-                      <p>
+                      <p className='text-end'>
                         <strong
                           style={{
                             fontWeight: 800,

@@ -44,7 +44,6 @@ export const SquareForm = ({ hideCloseBtn, hideModal }) => {
 
   const onPaymentApiSuccess = response => {
     // deleteGuestUserEmail();
-    debugger;
     clearCartLocally();
     dispatch(CLEAR_CART());
     if (!response.data.Order.order_detail?.guest) {

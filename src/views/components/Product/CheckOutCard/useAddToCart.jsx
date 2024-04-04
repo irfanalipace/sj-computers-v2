@@ -19,7 +19,9 @@ function useAddToCart(product, quantity) {
 
       const cartQuantity = details?.total_items + 1;
       const itemProtectedPlanPrice = parseFloat(plan?.price || 0) * quantity;
-      const productPrice = parseFloat((product?.price || 0) * quantity);
+      const productPrice = parseFloat(
+        (product?.discounted_price || product?.price || 0) * quantity,
+      );
       const cartTotal =
         parseFloat(details?.total) + productPrice + itemProtectedPlanPrice;
       const cartSubTotal =
@@ -33,7 +35,7 @@ function useAddToCart(product, quantity) {
         product: {
           ...product,
           in_stock: quantity >= product?.quantity ? false : true,
-          price: product?.price || 0,
+          price: product?.discounted_price || product?.price || 0,
         },
         ...(plan && { plan }),
       };
