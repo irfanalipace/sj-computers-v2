@@ -12,7 +12,6 @@ import Loader from '@common/Spinner/Spinner';
 import './Header.css';
 import { useSearchParams } from 'react-router-dom';
 
-
 function Search() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState({ name: 'ALL', id: null });
@@ -32,23 +31,25 @@ function Search() {
 
   const handleItemClick = category => {
     setSelectedItem(category);
-    dispatch(SET_SEARCH_STRING(category?.name));
-    setSearch(category?.name);
+    dispatch(SET_SELECTED_CATEGORY(category?.id));
+    // debugger;
+    // setSearch(category?.name);
     setDropdownOpen(false);
-    navigate(`/products/search?s=${encodeURIComponent(category.name)}`);
+    // navigate(`/products/search?s=${encodeURIComponent(category.name)}`);
   };
 
   const handleSearch = e => {
     e.preventDefault();
     if (search) {
       dispatch(SET_SEARCH_STRING(search));
-      navigate('/products/search?s=' + search);
+      // navigate('/products/search?s=' + search);
+      navigate(`/products/search?s=${encodeURIComponent(search)}`);
     }
   };
 
-  useEffect(() => {
-    setSearch(searchString || '');
-  }, [searchString]);
+  // useEffect(() => {
+  //   setSearch(searchString || '');
+  // }, [searchString]);
 
   useEffect(() => {
     if (selectedCategory === null) setSelectedItem({ name: 'ALL', id: null });
