@@ -26,6 +26,7 @@ export function getFilterListApi(category) {
     'top-rated-product',
     'best-sellers',
     'new-arrival',
+    'all',
   ];
 
   let url = '';

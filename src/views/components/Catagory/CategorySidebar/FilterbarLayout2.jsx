@@ -110,6 +110,8 @@ const FilterBarlayout2 = ({
 
     if (names.includes(pathValue)) return pathValue;
     const dd = categories.find(categ => categ.slug === categorySlug);
+    if (!dd) return 'all';
+
     return dd.id;
   };
 
@@ -255,6 +257,7 @@ const FilterBarlayout2 = ({
       setLoadingFilters(true);
 
       let response = await getFilterListApi(getCatgeoryNameForFilterListApi());
+
       let data = response?.data;
       setFilters(data ? data : {});
 
