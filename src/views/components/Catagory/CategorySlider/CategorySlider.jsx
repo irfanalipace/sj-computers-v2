@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '@store/products/productsThunks';
+// import { fetchProducts } from '@store/products/productsThunks';
 import { useEffect } from 'react';
 import { Box, CircularProgress } from '@mui/material';
 
@@ -25,17 +25,17 @@ const CategorySlider = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state?.products.isLoading);
   const products = useSelector(state => state?.products.products);
-  useEffect(() => {
-    getProduct();
-  }, []);
+  // useEffect(() => {
+  //   getProduct();
+  // }, []);
 
-  const getProduct = async () => {
-    if (!products?.length) {
-      try {
-        await dispatch(fetchProducts());
-      } catch (error) {}
-    }
-  };
+  // const getProduct = async () => {
+  //   if (!products?.length) {
+  //     try {
+  //       await dispatch(fetchProducts());
+  //     } catch (error) {}
+  //   }
+  // };
 
   if (products?.length == 0) {
     return (
