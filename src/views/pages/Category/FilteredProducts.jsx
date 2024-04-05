@@ -23,6 +23,7 @@ const FilteredProducts = memo(
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const brand = queryParams.get('brand');
+    const gpu = queryParams.get('gpu');
     const categoriesData = useSelector(slice => slice.category.categories);
     const processor = queryParams.get('processor');
     const {
@@ -147,6 +148,13 @@ const FilteredProducts = memo(
 
     const isPrevFilterApplied = useRef(false);
 
+    function isEmpty(obj) {
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) return false;
+      }
+      return true;
+    }
+
     useEffect(() => {
       let filteredData = checkIfFilterSelected(filtersArray);
       if (
@@ -188,11 +196,12 @@ const FilteredProducts = memo(
         });
 
         if (isStop) return;
+        if (brand || processor || gpu) {
+          if (isEmpty(filterObject.filter)) return;
+        }
 
         dispatch(filterProducts(filterObject));
       }
-
-      console.log(filtersArray);
     }, [JSON.stringify(filtersArray)]);
 
     useEffect(() => {

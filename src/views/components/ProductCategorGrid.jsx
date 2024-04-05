@@ -102,7 +102,6 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
     //   filterObject.name = categorySlug;
     // }
     setLoading(true);
-    console.log(filterObject);
     dispatch(
       filterProducts(filterObject, true, productAfterShowMore => {
         setLoading(false);
@@ -178,7 +177,6 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
     }
 
     if (!isEmpty(filteredData) || isMOunt) {
-      console.log(filterObject);
       dispatch(
         filterProducts(filterObject, false, productAfterShowMore => {
           // setProductsList([...productsList, ...productAfterShowMore]);
