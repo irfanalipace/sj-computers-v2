@@ -119,7 +119,11 @@ const Header = () => {
                   }}>
                   <span className='deliver-text '>Deliver to </span>
                   <br></br>
-                  {!loading && location1?.state}
+                  {currentState?.name ? (
+                    currentState?.name
+                  ) : (
+                    <>{!loading && location1?.state}</>
+                  )}
                 </Button>
               }
               screenWidth={screenWidth}
@@ -174,9 +178,9 @@ const Header = () => {
                                 padding: '2px',
                                 textAlign: 'left',
                               }}>
-                              <span className='deliver-text '>Deliver to </span>
+                              <span className='deliver-text '>Deliver to</span>
                               <br></br>
-                              {currentState ? (
+                              {currentState?.name ? (
                                 currentState?.name
                               ) : (
                                 <>{!loading && location1?.state}</>
