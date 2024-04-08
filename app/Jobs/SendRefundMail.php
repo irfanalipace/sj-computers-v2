@@ -39,8 +39,8 @@ class SendRefundMail implements ShouldQueue
 
         $email = $this->user->email;
         $data = [
-            'refund' => $this->refund,
-            'user' => $this->user
+            'refund' => $this->refund->toArray(),
+            'user' => $this->user->toArray(),
         ];
 
         $adminEmail = 'orders@sjcomputers.us';

@@ -59,6 +59,7 @@ class GenerateInvoiceJob implements ShouldQueue
         //Email to customer
         $email = $this->user->email;
         $ccEmail = 'orders@sjcomputers.us';
+
         //order mail for customer
 
         Mail::send('emails.order.customer-order', ['data' => $order], function ($m) use ($email) {
