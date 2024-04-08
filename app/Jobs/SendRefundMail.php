@@ -42,15 +42,18 @@ class SendRefundMail implements ShouldQueue
             'refund' => $this->refund,
             'user' => $this->user
         ];
+
+        $adminEmail = 'orders@sjcomputers.us';
+
         //order mail for customer
         Mail::send('emails.refund.customer-refund-order', ['data' => $data], function ($m) use ($email) {
             $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
             $m->to($email)->subject('Refund Order.');
         });
         //order mail for admin
-        Mail::send('emails.refund.refund-send-to-admin', ['data' => $data], function ($m) use ($email) {
+        Mail::send('emails.refund.refund-send-to-admin', ['data' => $data], function ($m) use ($email, $adminEmail) {
             $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
-            $m->to(config('mail.from.address'))->subject('Redund Order.');
+            $m->to(config($adminEmail))->subject('Refund Order.');
         });
     }
 }
