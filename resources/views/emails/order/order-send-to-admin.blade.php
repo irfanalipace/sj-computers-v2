@@ -21,13 +21,18 @@
                 </p>
                 <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Shipping
                         Phone:</strong> {{ $data['OrderAddress']['phone_number'] }}</p>
-                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Apartment/Suite</strong> {{ $data['OrderAddress']['apartment'] }}</p>
+                <p style="margin: 0; margin-bottom: 10px; padding: 0;">
+                    <strong>Apartment/Suite</strong> {{ $data['OrderAddress']['apartment'] }}</p>
                 <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Shipping
                         Address:</strong> {{ $data['OrderAddress']['address'] }}</p>
-                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>City </strong> {{ $data['OrderAddress']['city'] }}</p>
-                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>State</strong> {{ $data['OrderAddress']['state'] }}</p>
-                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Zip Code</strong> {{ $data['OrderAddress']['zip_code'] }}</p>
-                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Country</strong> {{ $data['OrderAddress']['country'] }}</p>
+                <p style="margin: 0; margin-bottom: 10px; padding: 0;">
+                    <strong>City </strong> {{ $data['OrderAddress']['city'] }}</p>
+                <p style="margin: 0; margin-bottom: 10px; padding: 0;">
+                    <strong>State</strong> {{ $data['OrderAddress']['state'] }}</p>
+                <p style="margin: 0; margin-bottom: 10px; padding: 0;"><strong>Zip
+                        Code</strong> {{ $data['OrderAddress']['zip_code'] }}</p>
+                <p style="margin: 0; margin-bottom: 10px; padding: 0;">
+                    <strong>Country</strong> {{ $data['OrderAddress']['country'] }}</p>
             </td>
         </tr>
         </tbody>
@@ -54,34 +59,30 @@
         <tr style="background:#efefef">
             <th scope="col" width="30%" style="text-align:left;border:1px solid #eee">Product
             </th>
-            <th scope="col" width="15%" style="text-align:right;border:1px solid #eee">ASIN
+            {{--            <th scope="col" width="15%" style="text-align:right;border:1px solid #eee">ASIN--}}
+            <th scope="col" width="15%" style="text-align:right;border:1px solid #eee">Delivery by
             </th>
-            <th scope="col" width="15%" style="text-align:right;border:1px solid #eee">Quantity
-            </th>
+            {{--            <th scope="col" width="15%" style="text-align:right;border:1px solid #eee">Quantity--}}
+            {{--            </th>--}}
             <th scope="col" width="20%" style="text-align:right;border:1px solid #eee">Price
             </th>
         </tr>
         </thead>
         <tbody>
-        @foreach ($data['order']['orderItem'] as $item)
+        @foreach ($data['orderDetail']['order_detail']['order_item'] as $orderItem)
             <tr width="100%">
                 <td width="30%"
                     style="text-align:left;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0;word-wrap:break-word">
-                    {{ $item['product_name'] ?? 0 }}
+                    {{ $orderItem['product_name'] ?? 'null' }}
                 </td>
-                <td width="15%"
-                    style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
-                    {{ isset($item['product']['asin']) ? $item['product']['asin'] : '-' }}
-                </td>
-                <td width="15%"
-                    style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0">
-                    {{ $item['qty'] ?? 0 }}
+                <td width="30%"
+                    style="text-align:left;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:0;border-top:0;word-wrap:break-word">
+                    {{ $data['orderDetail']['order_detail']['shipment_days'] ?? 'null' }}
+
                 </td>
                 <td width="20%"
                     style="text-align:right;vertical-align:middle;border-left:1px solid #eee;border-bottom:1px solid #eee;border-right:1px solid #eee;border-top:0">
-                        <span>
-                            $ {{ number_format((float) $item['price'], 2, '.', '') }}
-                        </span>
+                        <span> ${{ number_format((float) $orderItem['price'], 2) }} </span>
                 </td>
             </tr>
         @endforeach

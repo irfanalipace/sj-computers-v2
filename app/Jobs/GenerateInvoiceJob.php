@@ -39,10 +39,10 @@ class GenerateInvoiceJob implements ShouldQueue
     {      
         // Now, modify the initial code to integrate this change
         $order['orderDetail'] = $this->cartData;
-        $order['OrderAddress'] = $this->order['OrderAddress'];
-        $order['order'] = $this->order['order'];
-        
-        if ($this->paymentType == StatusEnum::PAYMENTTYPEPAYPAL ) {            
+        $order['OrderAddress'] = $this->order['OrderAddress']->toArray();
+        $order['order'] = $this->order['order']->toArray();
+
+        if ($this->paymentType == StatusEnum::PAYMENTTYPEPAYPAL ) {
             $userInfoForPayPal = [
                 'id' => $this->user->id,
                 'name' => ($this->userType == StatusEnum::GUEST) ? $this->user->full_name : $this->user->name,
@@ -60,6 +60,7 @@ class GenerateInvoiceJob implements ShouldQueue
         $email = $this->user->email;
         $ccEmail = 'orders@sjcomputers.us';
         //order mail for customer
+
         Mail::send('emails.order.customer-order', ['data' => $order], function ($m) use ($email) {
             $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
             $m->to($email)->subject('Order Placed.');
