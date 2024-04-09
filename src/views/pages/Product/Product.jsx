@@ -156,7 +156,7 @@ export default function Product() {
               )}
               {isUpSmall && (
                 <VisibleOnScroll id='section3'>
-                  <Recommendation />
+                  <Recommendation dataLayer={true} />
                 </VisibleOnScroll>
               )}
             </div>
@@ -199,8 +199,29 @@ const ProductMobileComponent = ({ product, isUpSmall }) => {
 };
 
 const SimilarItemsOfProduct = ({ productId, isMobile }) => {
+  const viewItemDataLayer = (products, categorySlug) => {
+    console.log(
+      'view_item_list data layer',
+      'simoilar',
+
+      makeDataLayerItemObject(products),
+    );
+    if (!window.dataLayer) {
+      window.dataLayer = window.dataLayer || [];
+    }
+    window.dataLayer.push({
+      event: 'view_item_list',
+      item_list_name: 'similar_items_of_product',
+      items: makeDataLayerItemObject(products),
+    });
+  };
   const { similarProducts, featuredProducts, isLoading } =
     useSimilarData(productId);
+  useEffect(() => {
+    if (similarProducts.length) {
+      viewItemDataLayer(similarProducts, '');
+    }
+  }, [similarProducts]);
   return (
     <div>
       {isLoading ? (

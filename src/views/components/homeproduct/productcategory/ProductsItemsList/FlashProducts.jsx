@@ -4,6 +4,7 @@ import SellingProducts from '../../../MobileCategory/SellingProducts/SellingProd
 import { getProductsCategory } from '../../../../../core/api/products';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { makeDataLayerItemObject } from '../../../../../core/utils/helpers';
 const FlashProducts = ({ images }) => {
   const [bestSeller, setBestSeller] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -17,6 +18,7 @@ const FlashProducts = ({ images }) => {
       };
 
       const response = await getProductsCategory(filterObject);
+      viewItemDataLayer(response?.data?.data);
       setBestSeller(response?.data?.data);
     } catch (err) {
       console.log(err);
@@ -25,8 +27,25 @@ const FlashProducts = ({ images }) => {
     }
   };
 
+  const viewItemDataLayer = (products, categorySlug) => {
+    console.log(
+      'view_item_list data layer best sellers category',
+      makeDataLayerItemObject(products),
+    );
+    if (!window.dataLayer) {
+      window.dataLayer = window.dataLayer || [];
+    }
+    window.dataLayer.push({
+      event: 'view_item_list',
+      item_list_name: 'best-sellers',
+      items: makeDataLayerItemObject(products),
+    });
+  };
+
   useEffect(() => {
-    getProducts();
+    setTimeout(() => {
+      getProducts();
+    }, 300);
   }, []);
   // const products = useSelector(state => state?.products?.products);
   return (
@@ -36,7 +55,7 @@ const FlashProducts = ({ images }) => {
           <div className='col-12 col-sm-12 col-lg-12'>
             <div className='product-type-section-selleing-products'>
               <div className='d-flex align-items-center'>
-                <h4>Best Selling Products</h4>
+                <h4>Best Selling Products </h4>
                 <Link
                   to={'/category/best-sellers'}
                   className='text-decoration-none'>

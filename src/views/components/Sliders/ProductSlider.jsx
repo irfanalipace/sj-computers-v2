@@ -6,11 +6,13 @@ import Product from '@components/ProductCard/ProductCard';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import './Slider.css';
+import { useEffect } from 'react';
 
 // Install Swiper navigation plugin
 SwiperCore.use([Navigation]);
 
 const ProductSlider = ({ type = '', products }) => {
+  useEffect(() => {}, []);
   return (
     <div style={{ position: 'relative' }} className='product-slider'>
       <Swiper

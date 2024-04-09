@@ -109,7 +109,6 @@ export default function ThankYou() {
         transaction_id: order.id,
         items: makeDataLayerItemObject(order?.order_item || []),
       });
-      debugger;
     } else {
       // navigate('/')
     }
