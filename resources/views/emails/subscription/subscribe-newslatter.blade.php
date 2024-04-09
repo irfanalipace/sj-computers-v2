@@ -403,30 +403,30 @@
             !function () {
                 if (BOOMR = a.BOOMR || {}, BOOMR.plugins = BOOMR.plugins || {}, !BOOMR.plugins.AK) {
                     var e = "" == "true" ? 1 : 0, t = "",
-                        n = "m77ugxqxfejyezqnbe2q-f-d9ac8cdaa-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
+                        n = "y32l2haxyekygzqt2j2a-f-e3d457ca8-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
                         _ = {
                             "ak.v": "37",
                             "ak.cp": "1513051",
                             "ak.ai": parseInt("963350", 10),
                             "ak.ol": "0",
-                            "ak.cr": 110,
+                            "ak.cr": 1,
                             "ak.ipv": 4,
                             "ak.proto": "h2",
-                            "ak.rid": "2ac51607",
-                            "ak.r": 44715,
+                            "ak.rid": "37adb88",
+                            "ak.r": 45582,
                             "ak.a2": e,
                             "ak.m": "x",
                             "ak.n": "essl",
-                            "ak.bpcip": "103.255.67.0",
-                            "ak.cport": 65012,
-                            "ak.gh": "23.44.214.25",
+                            "ak.bpcip": "198.244.189.0",
+                            "ak.cport": 24717,
+                            "ak.gh": "88.221.75.95",
                             "ak.quicv": "",
                             "ak.tlsv": "tls1.3",
                             "ak.0rtt": "",
                             "ak.csrc": "-",
                             "ak.acc": "",
-                            "ak.t": "1712130357",
-                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==6ejUQcKsLKWcwDNEjIfcCm4pOONuSA1oP/e/h907eZ/+rQhsMdMGZs72F87g8j7qz2fflHnGIf2ROo53Z9g87fAVQ0v7KlJEFQGsD9+8lFKXQA0sFkLu2xTvu7dA7yUi84S3jdnHvbpaWdoLb0ECPC64Glz9JLcJrcecy4Lap8sSTxX9u4+nD2TeSAWCNlfzw7C3CGr5/A3BJhOFTcfFAOve1X6mnHIqkqZMzO7DwByxnYvYQWXKBRySnrc3Kla1TLE8LOMVMp/NIDxSOsTNCYMqWIGLdU2V5ajp/HAa5IMXfWvxZtiQVZqbd8lvuPbvgLv/axX674QApZUW3IPu+I1VF8exajWmUiWXaVgM9FVw48DQtIszkYYBWrm6boE+VJe5fivEl5mRExIOLZGULX9tmxMYrK3jkySIuK3KA1E=",
+                            "ak.t": "1712575092",
+                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==7n2Ivz//JlIVBkjbyKa9sS4sQ+ph8gg+3bCkQbp/TqZUWvguEwLCVqz6goJ08Z56xwv+3XjkeWuWGzKGz8QM/eGRhguuJ8hwrByQcyhKH+60VNv2rCm+NHoGTa4MSfqpbQdS6pioNuAkz4PHCp5YHIe0B96u9MTw3kmv3XBCKzA/ozk4FisKqZDWOTV/6x3ETRHphHMY4Fiqu3TwVl7E17ygGSY7m8HvQZ6beIYyjk6BCakG1R9p+4zczQv5jr3T1aCqn8RrEVRXbBuMjhkpF+lQICULnGwsQnv+Qpoi8/uObTadv43IUn/qwkXnGH2IGblU0vU64wMreqIVdt9KIoZovhJ93frckh/xrZLgIaF8gwJq7CB2x5z1cjW9UgzWJ3IgoxbpY6/GbgzmeHpoJ+P+C9XKfsPuUjfkS98qhZw=",
                             "ak.pv": "31",
                             "ak.dpoabenc": "",
                             "ak.tf": i
@@ -502,62 +502,105 @@
                                                                         <td valign="top">
                                                                             <div data-block-id="11" class="mceCode">
                                                                                 <title>Document</title>
-                                                                                <div
-                                                                                    style="height: 275px; width: 100%; background-color: #00305E"></div>
-                                                                                <div
-                                                                                    style="width: 75%; margin: -10rem auto 40px auto;">
-                                                                                    <div
-                                                                                        style="display: flex; justify-content: center; align-items: center; position: relative;">
-                                                                                        <img
-                                                                                            src="https://mcusercontent.com/60ac1b84badc5aac609266713/images/a587d682-de47-a377-132e-7ef22f5b1cda.png"
-                                                                                            style="position: relative; width: 100% ;height: 20%; min-height: 100px;"/>
-                                                                                        <div
-                                                                                            style="position: absolute; display: flex; justify-content: space-between; align-items: center; width: 90%; top: 40%">
-                                                                                            <img
-                                                                                                src="https://mcusercontent.com/60ac1b84badc5aac609266713/images/bb49df6c-597e-7a79-20a0-1485e15a0ed0.png"
-                                                                                                style="width: 20%"/>
-                                                                                            <p style="color: #fff; font-size: 0.8rem;">
-                                                                                                Order No: <strong>{{ $data['refund'][0]['order_id'] }}</strong>
-                                                                                            </p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div
-                                                                                        style="background-color: #fff; position: relative; display: block; margin: 0px auto; box-shadow: 2px 0px 30px 0px #00000040">
-                                                                                        <div style="padding: 2rem 2rem">
-                                                                                            <h1 style="margin: 0; font-size: 22px">
-                                                                                                Refund Processed!</h1>
-                                                                                            <h2 style="font-size: 18px; padding: 10px 0px">
-                                                                                                Hi
-                                                                                                {{ $data['user']['name'] }}</h2>
-                                                                                            <p style="font-size: 14px">
-                                                                                                We're pleased to inform
-                                                                                                you that your refund for
-                                                                                                the order <strong>#2548632</strong>
-                                                                                                has been successfully
-                                                                                                processed. Please allow
-                                                                                                3-5 days for the funds
-                                                                                                to reflect in your
-                                                                                                account.</p>
-                                                                                            <p style="font-size: 14px; margin-top: 3rem">
-                                                                                                Thank you for choosing
-                                                                                                SJ Computers!</p>
-                                                                                            <p style="margin-top: 4rem">
-                                                                                                Best Regards,</p>
-                                                                                            <p><strong>SJ Computers
-                                                                                                    Team</strong></p>
-                                                                                        </div>
-                                                                                        <div
-                                                                                            style="display: flex; justify-content: space-between ; padding: 15px 20px;  background-color: #EAEDED; font-size: 16px">
-                                                                                            <div>
-                                                                                                Need help? <span
-                                                                                                    style="color: #0a8ce9"> Support Team</span>
-                                                                                            </div>
-                                                                                            <div>
-                                                                                                <!-- <LocalPhoneIcon/> -->
-                                                                                                952-452-8884
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
+                                                                                <div style="background: linear-gradient(to bottom, #00305E 0%, #00305E 33.33%, #FFFFFF 33.33%, #FFFFFF 100%); background-color: #00305E; padding: 4rem 0px; height: 100%;">
+                                                                                    <table>
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td style="width: 15%"></td>
+                                                                                            <td>
+                                                                                                <div>
+                                                                                                    <div style="display: flex; justify-content: center; align-items: center; position: relative;">
+                                                                                                        <img src="https://mcusercontent.com/60ac1b84badc5aac609266713/images/29850291-8e3d-be1c-6eec-ac0a262e2676.png"
+                                                                                                             style="width: 100% ;height: 20%; min-height: 100px;"/>
+                                                                                                    </div>
+                                                                                                    <div style="background-color: #fff; position: relative; display: block; margin: 0px auto; box-shadow: 2px 0px 30px 0px #00000040">
+                                                                                                        <div style="padding: 2rem 2rem">
+                                                                                                            <h1 style="margin: 0; font-size: 22px">
+                                                                                                                Subscription
+                                                                                                                Confirm!</h1>
+                                                                                                            <h2 style="font-size: 18px; padding: 10px 0px">
+                                                                                                                Hi
+                                                                                                                {{ $data->name ?? 'Customer' }}</h2>
+                                                                                                            <p style="font-size: 14px">
+                                                                                                                Thank
+                                                                                                                you for
+                                                                                                                subscribing
+                                                                                                                to SJ
+                                                                                                                Computers!
+                                                                                                                You are
+                                                                                                                now part
+                                                                                                                of our
+                                                                                                                exclusive
+                                                                                                                community,
+                                                                                                                and
+                                                                                                                you'll
+                                                                                                                be the
+                                                                                                                first to
+                                                                                                                know
+                                                                                                                about
+                                                                                                                our
+                                                                                                                latest
+                                                                                                                products,
+                                                                                                                promotions,
+                                                                                                                and
+                                                                                                                special
+                                                                                                                offers.</p>
+                                                                                                            <p style="margin-top: 4rem">
+                                                                                                                Best
+                                                                                                                Regards,</p>
+                                                                                                            <p><strong>SJ
+                                                                                                                    Computers
+                                                                                                                    Team</strong>
+                                                                                                            </p>
+                                                                                                        </div>
+                                                                                                        <table cellpadding="0"
+                                                                                                               cellspacing="0"
+                                                                                                               border="0"
+                                                                                                               width="100%"
+                                                                                                               style="background-color: #EAEDED; font-size: 16px;">
+                                                                                                            <tbody>
+                                                                                                            <tr>
+                                                                                                                <td style="padding: 15px 20px;">
+                                                                                                                    <table cellpadding="0"
+                                                                                                                           cellspacing="0"
+                                                                                                                           border="0"
+                                                                                                                           align="left">
+                                                                                                                        <tbody>
+                                                                                                                        <tr>
+                                                                                                                            <td>
+                                                                                                                                Need
+                                                                                                                                help?
+                                                                                                                                <span style="color: #0a8ce9;">Support Team</span>
+                                                                                                                            </td>
+                                                                                                                        </tr>
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                                                                                                                </td>
+                                                                                                                <td style="padding: 15px 20px;">
+                                                                                                                    <table cellpadding="0"
+                                                                                                                           cellspacing="0"
+                                                                                                                           border="0"
+                                                                                                                           align="right">
+                                                                                                                        <tbody>
+                                                                                                                        <tr>
+                                                                                                                            <td>
+                                                                                                                                <!-- <LocalPhoneIcon/> -->
+                                                                                                                                952-452-8884
+                                                                                                                            </td>
+                                                                                                                        </tr>
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td style="width: 15%"></td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -569,7 +612,7 @@
                                                                                    cellpadding="0" cellspacing="0"
                                                                                    width="100%" role="presentation"
                                                                                    data-block-id="7"
-                                                                                   id="section_0cabd2d8786a35f2387005774e37517f"
+                                                                                   id="section_beb207cb00b8956f3975cc382324afd7"
                                                                                    class="mceFooterSection">
                                                                                 <tbody>
                                                                                 <tr class="mceRow">
@@ -599,11 +642,10 @@
                                                                                                                 class="mceBlockContainer"
                                                                                                                 align="center"
                                                                                                                 valign="top">
-                                                                                                                <div
-                                                                                                                    data-block-id="5"
-                                                                                                                    class="mceText"
-                                                                                                                    id="dataBlockId-5"
-                                                                                                                    style="display:inline-block;width:100%">
+                                                                                                                <div data-block-id="5"
+                                                                                                                     class="mceText"
+                                                                                                                     id="dataBlockId-5"
+                                                                                                                     style="display:inline-block;width:100%">
                                                                                                                     <p class="last-child">
                                                                                                                         <br/>
                                                                                                                     </p>
@@ -614,24 +656,22 @@
                                                                                                             <td class="mceLayoutContainer"
                                                                                                                 align="center"
                                                                                                                 valign="top">
-                                                                                                                <table
-                                                                                                                    align="center"
-                                                                                                                    border="0"
-                                                                                                                    cellpadding="0"
-                                                                                                                    cellspacing="0"
-                                                                                                                    width="100%"
-                                                                                                                    role="presentation"
-                                                                                                                    data-block-id="-2">
+                                                                                                                <table align="center"
+                                                                                                                       border="0"
+                                                                                                                       cellpadding="0"
+                                                                                                                       cellspacing="0"
+                                                                                                                       width="100%"
+                                                                                                                       role="presentation"
+                                                                                                                       data-block-id="-2">
                                                                                                                     <tbody>
                                                                                                                     <tr class="mceRow">
                                                                                                                         <td style="background-position:center;background-repeat:no-repeat;background-size:cover"
                                                                                                                             valign="top">
-                                                                                                                            <table
-                                                                                                                                border="0"
-                                                                                                                                cellpadding="0"
-                                                                                                                                cellspacing="0"
-                                                                                                                                width="100%"
-                                                                                                                                role="presentation">
+                                                                                                                            <table border="0"
+                                                                                                                                   cellpadding="0"
+                                                                                                                                   cellspacing="0"
+                                                                                                                                   width="100%"
+                                                                                                                                   role="presentation">
                                                                                                                                 <tbody>
                                                                                                                                 <tr>
                                                                                                                                     <td class="mceColumn"
@@ -639,28 +679,26 @@
                                                                                                                                         valign="top"
                                                                                                                                         colspan="12"
                                                                                                                                         width="100%">
-                                                                                                                                        <table
-                                                                                                                                            border="0"
-                                                                                                                                            cellpadding="0"
-                                                                                                                                            cellspacing="0"
-                                                                                                                                            width="100%"
-                                                                                                                                            role="presentation">
+                                                                                                                                        <table border="0"
+                                                                                                                                               cellpadding="0"
+                                                                                                                                               cellspacing="0"
+                                                                                                                                               width="100%"
+                                                                                                                                               role="presentation">
                                                                                                                                             <tbody>
                                                                                                                                             <tr>
                                                                                                                                                 <td align="center"
                                                                                                                                                     valign="top">
                                                                                                                                                     <div>
-                                                                                                                                                        <div
-                                                                                                                                                            data-block-id="6">
+                                                                                                                                                        <div data-block-id="6">
                                                                                                                                                             <a href="http://eepurl.com/iNe6JE"
                                                                                                                                                                target="_blank"
                                                                                                                                                                rel="noopener noreferrer"><img
-                                                                                                                                                                    style="max-width:100%"
-                                                                                                                                                                    width="137"
-                                                                                                                                                                    height="53"
-                                                                                                                                                                    alt="Email Marketing Powered by Mailchimp"
-                                                                                                                                                                    title="Mailchimp Email Marketing"
-                                                                                                                                                                    src="https://cdn-images.mailchimp.com/monkey_rewards/intuit-mc-rewards-1.png"/></a>
+                                                                                                                                                                        style="max-width:100%"
+                                                                                                                                                                        width="137"
+                                                                                                                                                                        height="53"
+                                                                                                                                                                        alt="Email Marketing Powered by Mailchimp"
+                                                                                                                                                                        title="Mailchimp Email Marketing"
+                                                                                                                                                                        src="https://cdn-images.mailchimp.com/monkey_rewards/intuit-mc-rewards-1.png"/></a>
                                                                                                                                                         </div>
                                                                                                                                                     </div>
                                                                                                                                                 </td>
@@ -712,6 +750,6 @@
         </tbody>
     </table>
 </center>
-<script type="text/javascript" src="/cKa7XG/HOWMo/j8gBx/BA/m3EchVX2Qf/EltsWg/bmI7EA4/7JEQ"></script>
+<script type="text/javascript" src="/ZlvJ94/4G7h/d-/4c-7/UKC1yHmZHiw/mOi9JrXDrL1E/M35adQZpAw/cX/56CH13dhY"></script>
 </body>
 </html>
