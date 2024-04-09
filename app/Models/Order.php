@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Order extends Model
 {
@@ -33,4 +34,11 @@ class Order extends Model
     {
         return $this->belongsTo(OrderTrackingHistory::class,'id','order_id');
     }
+
+    public function getShipmentDaysAttribute($value)
+    {
+        $date = Carbon::parse($value);
+        return $date->format('d/m/Y');
+    }
+
 }
