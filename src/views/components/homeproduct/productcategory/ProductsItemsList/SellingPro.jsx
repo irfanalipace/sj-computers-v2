@@ -22,9 +22,7 @@ const SellingPro = ({ images }) => {
       'view_item_list data layer top rated',
       makeDataLayerItemObject(products),
     );
-    if (!window.dataLayer) {
-      window.dataLayer = window.dataLayer || [];
-    }
+    window.dataLayer = [];
     window.dataLayer.push({
       event: 'view_item_list',
       item_list_name: 'top-rated',

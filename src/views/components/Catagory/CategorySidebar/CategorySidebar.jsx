@@ -279,14 +279,12 @@ const CategorySidebar = ({
   };
 
   const viewItemDataLayer = (products, pathValue) => {
-    console.print(
+    console.log(
       'view_item_list data layer',
       pathValue,
       makeDataLayerItemObject(products),
     );
-    if (!window.dataLayer) {
-      window.dataLayer = window.dataLayer || [];
-    }
+    window.dataLayer = [];
     window.dataLayer.push({
       event: 'view_item_list',
       item_list_name: pathValue,

@@ -155,9 +155,7 @@ function ShippingDetailsForm({
     if (permanentAddress) dispatch(setShippingDetails(params, hideForm));
     else {
       dispatch(SET_SHIPPING_DETAILS(params));
-      if (!window.dataLayer) {
-        window.dataLayer = window.dataLayer || [];
-      }
+      window.dataLayer = [];
       window.dataLayer.push({
         event: 'add_shipping_info',
         currency: 'USD',

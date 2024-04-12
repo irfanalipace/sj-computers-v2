@@ -75,9 +75,7 @@ export default function Product() {
 
   useEffect(() => {
     if (!product) return;
-    if (!window.dataLayer) {
-      window.dataLayer = window.dataLayer || [];
-    }
+    window.dataLayer = [];
     console.log('select_item', makeDataLayerItemObject([{ ...product }]));
     window.dataLayer.push({
       event: 'select_item',
@@ -86,6 +84,7 @@ export default function Product() {
 
     console.log('view-item', makeDataLayerItemObject([{ ...product }]));
     console.log('data layer', window.dataLayer);
+    window.dataLayer = [];
     window.dataLayer.push({
       event: 'view_item',
       currency: 'USD',
@@ -206,9 +205,7 @@ const SimilarItemsOfProduct = ({ productId, isMobile }) => {
 
       makeDataLayerItemObject(products),
     );
-    if (!window.dataLayer) {
-      window.dataLayer = window.dataLayer || [];
-    }
+    window.dataLayer = [];
     window.dataLayer.push({
       event: 'view_item_list',
       item_list_name: 'similar_items_of_product',

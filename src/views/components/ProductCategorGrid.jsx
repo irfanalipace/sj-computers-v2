@@ -118,14 +118,12 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
   };
 
   const viewItemDataLayer = (products, categorySlug) => {
-    console.print(
+    console.log(
       'view_item_list data layer',
       pathValue,
       makeDataLayerItemObject(products),
     );
-    if (!window.dataLayer) {
-      window.dataLayer = window.dataLayer || [];
-    }
+    window.dataLayer = [];
     window.dataLayer.push({
       event: 'view_item_list',
       item_list_name: categorySlug,
