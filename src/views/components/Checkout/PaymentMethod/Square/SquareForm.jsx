@@ -72,7 +72,7 @@ export const SquareForm = ({ hideCloseBtn, hideModal }) => {
   };
 
   async function onTokenSuccess({ token }) {
-    window.dataLayer = [];
+    window.dataLayer = window.dataLayer || [];
     console.log('add_payment_info', {
       value: getCartDetails().sub_total,
       items: makeDataLayerItemObject(getCartItems()),

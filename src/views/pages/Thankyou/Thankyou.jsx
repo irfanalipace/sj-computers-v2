@@ -98,7 +98,7 @@ export default function ThankYou() {
 
       // clearCartLocally();
       // dispatch(CLEAR_CART());
-      window.dataLayer = [];
+      window.dataLayer = window.dataLayer || [];
       console.log('purchase data lyer');
       window.dataLayer.push({
         event: 'purchase',

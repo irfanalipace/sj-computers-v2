@@ -26,7 +26,7 @@ export default function Recommendation({ prod, dataLayer }) {
       makeDataLayerItemObject(products),
     );
 
-    window.dataLayer = [];
+    window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: 'view_item_list',
       item_list_name: categorySlug,

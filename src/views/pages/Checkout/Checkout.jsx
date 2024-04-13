@@ -113,7 +113,7 @@ export default function Checkout() {
   }, []);
 
   useEffect(() => {
-    window.dataLayer = [];
+    window.dataLayer = window.dataLayer || [];
 
     window.dataLayer.push({
       event: 'begin_checkout',
