@@ -284,7 +284,9 @@ const CategorySidebar = ({
       pathValue,
       makeDataLayerItemObject(products),
     );
-    window.dataLayer = [];
+    window.dataLayer.push(function () {
+      this.reset();
+    });
     window.dataLayer.push({
       event: 'view_item_list',
       item_list_name: pathValue,

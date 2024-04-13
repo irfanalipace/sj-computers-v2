@@ -113,7 +113,9 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
       'view_item_list data layer best sellers category',
       makeDataLayerItemObject(products),
     );
-    window.dataLayer = [];
+    window.dataLayer.push(function () {
+      this.reset();
+    });
     window.dataLayer.push({
       event: 'view_item_list',
       item_list_name: 'best-sellers',

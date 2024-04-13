@@ -1,4 +1,4 @@
-import { lazy, useEffect } from 'react';
+import { lazy, useEffect, useRef } from 'react';
 import LoaderComponent from '@common/LoaderComponent/LoaderComponent';
 import { ProductImage } from '@components/Product/ProductImage/ProductImage';
 import ProductDetails from '@components/Product/ProductDetails/ProductDetails';
@@ -73,9 +73,13 @@ export default function Product() {
     };
   }, []);
 
+  const pro = useRef(null);
+
   useEffect(() => {
-    if (!product) return;
-    window.dataLayer = window.dataLayer || [];
+    if (!product || pro?.current?.id === product?.id) return;
+    window.dataLayer.push(function () {
+      this.reset();
+    });
     console.log('select_item', makeDataLayerItemObject([{ ...product }]));
     window.dataLayer.push({
       event: 'select_item',
@@ -84,13 +88,16 @@ export default function Product() {
 
     console.log('view-item', makeDataLayerItemObject([{ ...product }]));
     console.log('data layer', window.dataLayer);
-    window.dataLayer = [];
+    window.dataLayer.push(function () {
+      this.reset();
+    });
     window.dataLayer.push({
       event: 'view_item',
       currency: 'USD',
       value: parseFloat(product?.price),
       items: makeDataLayerItemObject([{ ...product }]),
     });
+    pro.current = product;
   }, [product]);
 
   const getProtectionPlans = async () => {
@@ -205,7 +212,9 @@ const SimilarItemsOfProduct = ({ productId, isMobile }) => {
 
       makeDataLayerItemObject(products),
     );
-    window.dataLayer = [];
+    window.dataLayer.push(function () {
+      this.reset();
+    });
     window.dataLayer.push({
       event: 'view_item_list',
       item_list_name: 'similar_items_of_product',
