@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Jobs\UpdateProfileEmailJob;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -18,6 +19,8 @@ class ProfileController extends BaseController
     public function updateProfile(UpdateProfileRequest $request)
     {
         try {
+            $user = auth()->user();
+
             //upload picture in database field profile_pic and also file saved in Storage app/public/uploads folder
             if ($request->hasFile('profile_pic')) {
                 $filename = $request->file('profile_pic')->store('public/profile_pics');
@@ -28,7 +31,11 @@ class ProfileController extends BaseController
             //update also name
             $update['name'] = $request->name;
 
-            auth()->user()->update($update);
+            // Update user's name in the database
+            $user->update($update);
+
+            UpdateProfileEmailJob::dispatch($user);
+
             return $this->sendResponse(auth()->user()->fresh(), "user profile updated.");
         } catch (Exception $e) {
             Log::info("Error in updating profile image");
