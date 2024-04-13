@@ -32,7 +32,7 @@ const SimilarInterestSlider = ({ products }) => {
       makeDataLayerItemObject(products),
     );
 
-    window.dataLayer = window.dataLayer || [];
+    window.dataLayer = [];
 
     window.dataLayer.push({
       event: 'view_item_list',
