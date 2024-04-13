@@ -70,7 +70,9 @@ export const addToCart = (data, cb) => {
       toast.success('Item Added In Cart');
       console.log('add to cart login user');
       // adding add_to_cart evnet to datalayer when login user added item to cart and add to cart api is successful
-      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(function () {
+        this.reset();
+      });
       window.dataLayer.push({
         event: 'add_to_cart',
         currency: 'USD',
@@ -102,7 +104,9 @@ export const deleteItem = data => {
         type: DELETE_ITEM,
         payload: data,
       });
-      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(function () {
+        this.reset();
+      });
 
       console.log(
         'remove_from_cart',
@@ -339,7 +343,9 @@ export const addToLocalCart = (data, cb, sync = false) => {
       console.log('local add to cart', data);
 
       // adding add_to_cart evnet to datalayer when login user added item to cart and add to cart api is successful
-      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(function () {
+        this.reset();
+      });
 
       console.log('add_to_cart', data, makeDataLayerItemObject([{ ...data }]));
       window.dataLayer.push({
@@ -415,7 +421,9 @@ export const deleteLocalItem = data => {
       type: DELETE_ITEM,
       payload: data,
     });
-    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(function () {
+      this.reset();
+    });
 
     console.log(
       'remove_from_cart',

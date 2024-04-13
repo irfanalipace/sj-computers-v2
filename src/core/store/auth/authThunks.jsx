@@ -53,7 +53,9 @@ export const login = credentials => {
     try {
       dispatch({ type: LOADING, payload: {} });
       const response = await loginApi(credentials);
-      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(function () {
+        this.reset();
+      });
       console.log('login data layer');
       window.dataLayer.push({
         event: 'login',
@@ -83,7 +85,9 @@ export const register = (credentials, cb) => {
     try {
       dispatch({ type: LOADING, payload: {} });
       await registerApi(credentials);
-      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(function () {
+        this.reset();
+      });
       console.log('signup data layer');
 
       window.dataLayer.push({
