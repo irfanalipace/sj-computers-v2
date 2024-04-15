@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Square\CardRequest;
 use App\Jobs\Error\SendErrorMail;
+use App\Jobs\PaymentFailedJob;
 use App\Models\Guest;
 use App\Models\User;
 use Exception;
@@ -108,6 +109,8 @@ class SquareController extends BaseController
             
             $order = $this->repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems,(isset($request->is_buy_now ) && $request->is_buy_now));
             if (!$order) {
+                $errorMessage = 'Order not found';
+                PaymentFailedJob::dispatch($order, $errorMessage);
                throw new Exception('Please Try Again.');
             }
             
@@ -142,6 +145,7 @@ class SquareController extends BaseController
                 Cart::session($userIdToPass)->clearCartConditions();
             } else {
                 DB::rollBack();
+                PaymentFailedJob::dispatch($order);
                 $errors = $api_response->getErrors();
 
                 throw new Exception($errors[0]->getDetail());

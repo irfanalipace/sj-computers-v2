@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Payment;
 use App\Classes\StatusEnum;
 use App\Http\Controllers\Controller;
 use App\Jobs\Error\SendErrorMail;
+use App\Jobs\PaymentFailedJob;
 use App\Models\Invoice;
 use App\Models\cache;
 use App\Models\Payment;
@@ -164,7 +165,9 @@ class PayPalController extends Controller
             
               
             $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
-            if (!$order) {           
+            if (!$order) {
+                $errorMessage = 'Order not found';
+                PaymentFailedJob::dispatch($order, $errorMessage);
                 return redirect()->route('cancel');
             }
 
